@@ -1,17 +1,18 @@
-import { motion } from 'motion/react';
-import { useEffect, useState, type ReactNode } from 'react';
+import { motion, useScroll, useSpring } from 'motion/react';
+import { useEffect, useState, useRef, type ReactNode } from 'react';
 import VisibilitySystemMap from '../components/VisibilitySystemMap';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
-import { ShutterWipe } from '../components/ShutterWipe';
 import { SmoothCursor } from '../components/SmoothCursor';
-import { RevealText } from '../components/RevealText';
 import { StaggeredText } from '../components/StaggeredText';
 import { ScrambleText } from '../components/ScrambleText';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
+import InternalHeader from '../components/InternalHeader';
+import InternalFooter from '../components/InternalFooter';
+import { WireframeGrid } from '../components/WireframeGrid';
 
 const ABOUT_SEO = getSeoRoute('/about')!;
 
@@ -74,33 +75,7 @@ const metrics = [
   ['TEXAS VENTURE LABS', 'Market validation and financial models'],
 ];
 
-function DarkNoise() {
-  return (
-    <div
-      className="pointer-events-none fixed inset-0 z-30 opacity-[0.055]"
-      style={{
-        backgroundImage:
-          'radial-gradient(circle at 22% 28%, rgba(241,239,232,0.24) 0 1px, transparent 1.6px), radial-gradient(circle at 70% 64%, rgba(241,239,232,0.16) 0 1px, transparent 1.7px)',
-        backgroundSize: '17px 21px, 25px 31px',
-      }}
-    />
-  );
-}
 
-function NavLink({ href, active, id, children }: { href: string; active?: boolean; id?: string; children: ReactNode }) {
-  return (
-    <a
-      href={href}
-      id={id}
-      data-cursor-text={typeof children === 'string' ? children : 'VIEW'}
-      className={`hover-target relative group overflow-visible px-3 py-1 transition-colors ${active ? 'text-[#f1efe8]' : 'text-[#f1efe8]/58 hover:text-[#f1efe8]'}`}
-    >
-      <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">{children}</span>
-      <span className={`absolute left-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>[</span>
-      <span className={`absolute right-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>]</span>
-    </a>
-  );
-}
 
 function SectionLabel({ children }: { children: ReactNode }) {
   return <h2 className="mb-9 text-[0.72rem] uppercase tracking-[0.28em] text-[#f1efe8]/46">{children}</h2>;
@@ -239,16 +214,24 @@ function ExperienceCard({ role, meta, copy, details }: { role: string; meta: str
   const [isHovered, setIsHovered] = useState(false);
   return (
     <article 
-      className="relative mb-10 last:mb-0 cursor-pointer group"
+      className="relative mb-10 last:mb-0 cursor-pointer group animate-fade-in"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.span
-        className="absolute -left-[34px] top-1 h-3.5 w-3.5 rounded-full border bg-[#080807]"
+        className="absolute -left-[34px] top-1 h-3.5 w-3.5 rounded-full border bg-[#080807] z-10"
+        initial={{ scale: 0.8, borderColor: 'rgba(241,239,232,0.3)' }}
+        whileInView={{ 
+          scale: 1, 
+          borderColor: isHovered ? '#b7c8a8' : 'rgba(241,239,232,0.6)',
+          backgroundColor: isHovered ? '#b7c8a8' : '#080807'
+        }}
+        viewport={{ once: false, margin: "-15% 0px -15% 0px" }}
         animate={{ 
-          scale: isHovered ? 1.25 : 1, 
-          borderColor: isHovered ? '#f1efe8' : 'rgba(241,239,232,0.6)',
-          backgroundColor: isHovered ? '#f1efe8' : '#080807'
+          scale: isHovered ? 1.3 : 1, 
+          borderColor: isHovered ? '#b7c8a8' : 'rgba(241,239,232,0.6)',
+          backgroundColor: isHovered ? '#b7c8a8' : '#080807',
+          boxShadow: isHovered ? '0 0 10px rgba(183,200,168,0.7)' : '0 0 0px rgba(0,0,0,0)'
         }}
         transition={{ duration: 0.25 }}
       />
@@ -275,6 +258,40 @@ function ExperienceCard({ role, meta, copy, details }: { role: string; meta: str
         ))}
       </motion.div>
     </article>
+  );
+}
+
+function ExperienceTimeline() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start center', 'end center']
+  });
+
+  const scaleY = useSpring(scrollYProgress, { damping: 25, stiffness: 200, restDelta: 0.001 });
+
+  return (
+    <div ref={containerRef} className="relative pl-7">
+      {/* Background track line */}
+      <div className="absolute left-0 top-1 bottom-1 w-px bg-[#f1efe8]/12" />
+      
+      {/* Animated progress indicator line */}
+      <motion.div 
+        className="absolute left-0 top-1 w-px bg-[#b7c8a8] origin-top"
+        style={{ scaleY, height: '98%', transformOrigin: 'top' }}
+      />
+
+      {experience.map((item) => (
+        <div key={item.role}>
+          <ExperienceCard 
+            role={item.role} 
+            meta={item.meta} 
+            copy={item.copy} 
+            details={item.details} 
+          />
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -329,48 +346,30 @@ export default function AboutPage() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <main id="top" className="min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] md:cursor-none">
-      <ShutterWipe />
-      <DarkNoise />
+    <main id="top" className="relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] md:cursor-none">
+      <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
       {!prefersReducedMotion && <div className="hidden md:block">
         <SmoothCursor />
       </div>}
       <ScrollProgress />
 
-      <header className="sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-6 md:px-8 xl:px-10">
-        <div className="grid items-start gap-5 border-b border-[#f1efe8]/12 bg-[#080807]/82 pb-5 text-[10px] uppercase tracking-[0.3em] backdrop-blur-sm md:grid-cols-[1fr_auto_1fr]">
-          <a href="/" id="about-brand-link" className="hover-target" data-cursor-text="HOME">
-            <span className="block font-medium text-[#f1efe8]">SULAYMAN BOWLES</span>
-            <span className="mt-2 block font-serif text-sm italic normal-case tracking-normal text-[#f1efe8]/54">Technical SEO · AI Product · Finance/Data</span>
-          </a>
-          <nav className="flex flex-wrap items-center gap-3 md:justify-center md:gap-6">
-            <NavLink href="/#selected-works" id="about-nav-work">WORK</NavLink>
-            <NavLink href="/method" id="about-nav-method">METHOD</NavLink>
-            <NavLink href="/about" active id="about-nav-about">ABOUT</NavLink>
-            <NavLink href="/#contact" id="about-nav-contact">CONTACT</NavLink>
-          </nav>
-          <a href="/#contact" id="about-header-contact" data-cursor-text="CONTACT" className="hover-target flex items-center gap-4 justify-self-start text-[#f1efe8]/75 transition-colors hover:text-[#f1efe8] md:justify-self-end">
-            <span className="h-7 w-7 rounded-full border border-[#f1efe8]/28 flex-shrink-0" />
-            <span>CONTACT</span>
-          </a>
-        </div>
-      </header>
+      <InternalHeader activePath="/about" tone="dark" />
 
-      <section className="mx-auto grid min-h-[calc(100vh-102px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.32fr)_minmax(0,0.68fr)] xl:px-10 xl:pt-20">
-        <ScrollReveal yOffset={18} blur={false} className="min-w-0 self-center">
+      <section className="relative z-10 mx-auto grid min-h-[calc(100vh-102px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.32fr)_minmax(0,0.68fr)] xl:px-10 xl:pt-20">
+        <div className="min-w-0 self-center">
           <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/45">ABOUT ME</div>
           <h1 className="font-serif text-[clamp(3.8rem,6.4vw,7.1rem)] italic leading-[0.92] tracking-[-0.045em]">
-            <span className="block"><RevealText text="I build systems" delay={0.1} /></span>
-            <span className="block italic"><RevealText text="for visibility." delay={0.3} /></span>
+            <span className="block">I build systems</span>
+            <span className="block italic">for visibility.</span>
           </h1>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-[#f1efe8]/62">
             <p>Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, a technical SEO audit console focused on crawl evidence, indexation, structured data, AI-search visibility, and finance/data systems.</p>
             <p>My work turns crawl data, site architecture, search signals, and market research into clearer systems for discovery, citation, conversion, and decision-making.</p>
           </div>
-        </ScrollReveal>
+        </div>
 
-        <ScrollReveal delay={0.08} yOffset={18} blur={false} className="w-full self-center">
+        <div className="w-full self-center">
           <div className="group">
             <VisibilitySystemMap className="aspect-[1000/620] w-full transition-transform duration-700 group-hover:-translate-y-1" />
             <div className="mt-4 flex flex-col gap-3 border-b border-[#f1efe8]/12 pb-4 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/44 sm:flex-row sm:items-center sm:justify-between">
@@ -378,7 +377,7 @@ export default function AboutPage() {
               <span>OUTPUT: VISIBILITY SYSTEM</span>
             </div>
           </div>
-        </ScrollReveal>
+        </div>
       </section>
 
       <section className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 lg:grid-cols-3 xl:px-10 xl:py-24">
@@ -395,18 +394,7 @@ export default function AboutPage() {
 
         <ScrollReveal yOffset={18} blur={false} delay={0.08}>
           <SectionLabel>EXPERIENCE</SectionLabel>
-          <div className="relative border-l border-[#f1efe8]/18 pl-7">
-            {experience.map((item) => (
-              <div key={item.role}>
-                <ExperienceCard 
-                  role={item.role} 
-                  meta={item.meta} 
-                  copy={item.copy} 
-                  details={item.details} 
-                />
-              </div>
-            ))}
-          </div>
+          <ExperienceTimeline />
         </ScrollReveal>
 
         <ScrollReveal yOffset={18} blur={false} delay={0.16}>
@@ -472,24 +460,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <footer className="mx-auto grid max-w-[1480px] grid-cols-1 items-start gap-8 px-4 py-8 text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/54 md:grid-cols-[1fr_auto_1fr_auto] md:px-8 xl:px-10">
-        <div>
-          <div className="text-[#f1efe8]">SULAYMAN BOWLES</div>
-          <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">Technical SEO · AI Product · Finance/Data</div>
-        </div>
-        <nav className="flex flex-wrap gap-5" id="about-footer-nav">
-          <NavLink href="/#selected-works" id="about-footer-work">WORK</NavLink>
-          <NavLink href="/method" id="about-footer-method">METHOD</NavLink>
-          <NavLink href="/about" id="about-footer-about" active>ABOUT</NavLink>
-          <NavLink href="/#contact" id="about-footer-contact">CONTACT</NavLink>
-        </nav>
-        <div className="md:text-right">
-          © 2026 SULAYMAN BOWLES
-          <br />
-          ALL RIGHTS RESERVED
-        </div>
-        <a href="#top" id="about-back-to-top" aria-label="Back to top" data-cursor-text="TOP" className="hover-target h-9 w-9 rounded-full border border-[#f1efe8]/26 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]" />
-      </footer>
+      <InternalFooter activePath="/about" tone="dark" />
     </main>
   );
 }

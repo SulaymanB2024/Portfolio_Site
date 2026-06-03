@@ -62,6 +62,7 @@ export function ScrambleText({ text, className = '', trigger = 'hover' }: Scramb
     <motion.span
       className={`inline-block ${className}`}
       onMouseEnter={() => trigger === 'hover' && scramble()}
+      aria-label={text}
     >
       {displayText}
     </motion.span>

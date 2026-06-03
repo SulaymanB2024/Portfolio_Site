@@ -45,6 +45,7 @@ export function StaggeredText({ text, className = '', delay = 0 }: StaggeredText
       whileInView="visible"
       viewport={{ once: true, margin: '-10%' }}
       style={{ perspective: 1000 }}
+      aria-label={text}
     >
       {words.map((word, index) => (
         <motion.span
@@ -53,6 +54,7 @@ export function StaggeredText({ text, className = '', delay = 0 }: StaggeredText
           className="inline-block whitespace-pre origin-bottom mr-[0.25em] mb-[0.1em]"
         >
           {word}
+          {index < words.length - 1 ? ' ' : ''}
         </motion.span>
       ))}
     </motion.h2>

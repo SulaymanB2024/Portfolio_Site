@@ -16,6 +16,10 @@ export function personSchema(): JsonLd {
     '@id': `${SITE_URL}/#person`,
     name: SITE_NAME,
     url: SITE_URL,
+    sameAs: [
+      'https://www.linkedin.com/in/sulayman-bowles/',
+      'https://github.com/SulaymanB2024',
+    ],
     affiliation: [
       {
         '@type': 'CollegeOrUniversity',
@@ -29,6 +33,9 @@ export function personSchema(): JsonLd {
     knowsAbout: [
       'Technical SEO',
       'AI search discoverability',
+      'AI search visibility',
+      'AEO',
+      'GEO',
       'Crawlability',
       'Indexation',
       'Structured data',
@@ -46,6 +53,19 @@ export function websiteSchema(): JsonLd {
     url: SITE_URL,
     inLanguage: 'en-US',
     publisher: {
+      '@id': `${SITE_URL}/#person`,
+    },
+  };
+}
+
+export function voidAgencyOrganizationSchema(): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE_URL}/#void-agency`,
+    name: 'Void Agency',
+    url: 'https://void-agency.com',
+    founder: {
       '@id': `${SITE_URL}/#person`,
     },
   };
@@ -75,8 +95,7 @@ export function serviceSchema(): JsonLd {
     name: 'Technical SEO and AI Search Visibility Audit',
     url: absoluteUrl('/method'),
     provider: {
-      '@type': 'Organization',
-      name: 'Void Agency',
+      '@id': `${SITE_URL}/#void-agency`,
     },
     areaServed: 'United States',
     serviceType: [
@@ -158,6 +177,63 @@ export function aboutJsonLd(): JsonLd {
   ]);
 }
 
+export function resumeJsonLd(): JsonLd {
+  return graphSchema([
+    personSchema(),
+    websiteSchema(),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      '@id': `${absoluteUrl('/resume')}#profile`,
+      name: 'Sulayman Bowles Resume | Technical SEO, Finance & AI',
+      url: absoluteUrl('/resume'),
+      mainEntity: {
+        '@id': `${SITE_URL}/#person`,
+      },
+      isPartOf: {
+        '@id': `${SITE_URL}/#website`,
+      },
+    },
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Resume', path: '/resume' },
+    ]),
+  ]);
+}
+
+export function aiInformationJsonLd(): JsonLd {
+  return graphSchema([
+    personSchema(),
+    websiteSchema(),
+    voidAgencyOrganizationSchema(),
+    projectSchema(),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      '@id': `${absoluteUrl('/ai-information')}#profile`,
+      name: 'AI Information for Sulayman Bowles, Void Agency, and Atlas',
+      url: absoluteUrl('/ai-information'),
+      description:
+        'Official public information about Sulayman Bowles, Void Agency, and Atlas SEO Audit Console for users, search engines, and AI search systems.',
+      mainEntity: {
+        '@id': `${SITE_URL}/#person`,
+      },
+      about: [
+        { '@id': `${SITE_URL}/#person` },
+        { '@id': `${SITE_URL}/#void-agency` },
+        { '@id': `${SITE_URL}/atlas#software` },
+      ],
+      isPartOf: {
+        '@id': `${SITE_URL}/#website`,
+      },
+    },
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'AI Information', path: '/ai-information' },
+    ]),
+  ]);
+}
+
 export function atlasJsonLd(): JsonLd {
   return graphSchema([
     projectSchema(),
@@ -170,6 +246,7 @@ export function atlasJsonLd(): JsonLd {
 
 export function methodJsonLd(): JsonLd {
   return graphSchema([
+    voidAgencyOrganizationSchema(),
     serviceSchema(),
     breadcrumbSchema([
       { name: 'Home', path: '/' },

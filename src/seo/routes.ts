@@ -1,15 +1,18 @@
 import { MARKET_THESES } from '../content/marketTheses';
+import { AI_INFORMATION_DESCRIPTION, AI_INFORMATION_STATIC_HTML, AI_INFORMATION_TITLE } from '../content/aiInformation';
 import {
   aboutJsonLd,
+  aiInformationJsonLd,
   atlasJsonLd,
   homeJsonLd,
   marketArticleJsonLd,
   marketsJsonLd,
   methodJsonLd,
+  resumeJsonLd,
   type JsonLd,
 } from './schema';
 
-export type RouteSection = 'home' | 'about' | 'project' | 'service' | 'research' | 'research-article';
+export type RouteSection = 'home' | 'about' | 'resume' | 'source-information' | 'project' | 'service' | 'research' | 'research-article';
 
 export interface SeoRoute {
   path: string;
@@ -21,10 +24,14 @@ export interface SeoRoute {
   pageType: 'website' | 'profile' | 'project' | 'service' | 'research' | 'article';
   priority: number;
   includeInSitemap: boolean;
+  lastmod?: string;
   staticSummary: string;
+  staticHtml?: string;
   image?: string;
   jsonLd?: JsonLd;
 }
+
+export const SITE_LASTMOD = '2026-06-01';
 
 const CORE_ROUTES: SeoRoute[] = [
   {
@@ -71,6 +78,48 @@ const CORE_ROUTES: SeoRoute[] = [
     staticSummary:
       'Atlas is a technical SEO audit console for crawl evidence, indexation, architecture, internal links, structured data, performance inputs, and AI-search readiness.',
     jsonLd: atlasJsonLd(),
+  },
+  {
+    path: '/resume',
+    aliases: ['/resume.html', '/cv', '/cv.html'],
+    title: 'Sulayman Bowles Resume | Technical SEO, Finance & AI',
+    description:
+      'HTML-first resume for Sulayman Bowles across technical SEO, AI search, finance research, data analysis, Atlas, and product/software execution.',
+    h1: 'Sulayman Bowles Resume',
+    section: 'resume',
+    pageType: 'profile',
+    priority: 0.8,
+    includeInSitemap: true,
+    staticSummary:
+      'Stable resume and profile page for Sulayman Bowles with links to Atlas, technical SEO work, finance research, public code, and contact paths.',
+    jsonLd: resumeJsonLd(),
+  },
+  {
+    path: '/ai-information',
+    aliases: ['/official-information', '/entity-profile', '/source-information'],
+    title: AI_INFORMATION_TITLE,
+    description: AI_INFORMATION_DESCRIPTION,
+    h1: AI_INFORMATION_TITLE,
+    section: 'source-information',
+    pageType: 'profile',
+    priority: 0.7,
+    includeInSitemap: true,
+    staticSummary:
+      'Official public information about Sulayman Bowles, Void Agency, and Atlas SEO Audit Console for users, search engines, and AI search systems.',
+    staticHtml: AI_INFORMATION_STATIC_HTML,
+    jsonLd: aiInformationJsonLd(),
+  },
+  {
+    path: '/sitemap',
+    aliases: [],
+    title: 'HTML Sitemap | Sulayman Bowles',
+    description: 'Plain HTML sitemap with direct links to every public page on sulayman-bowles.dev.',
+    h1: 'HTML Sitemap',
+    section: 'source-information',
+    pageType: 'website',
+    priority: 0.5,
+    includeInSitemap: true,
+    staticSummary: 'Plain HTML links to every public page on sulayman-bowles.dev.',
   },
   {
     path: '/method',

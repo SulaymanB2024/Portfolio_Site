@@ -3,6 +3,7 @@ import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import Lenis from 'lenis';
+import { resumeAudio } from './utils/audio';
 
 function Root() {
   useEffect(() => {
@@ -18,6 +19,14 @@ function Root() {
 
     (window as any).lenis = lenis;
 
+    const initAudio = () => {
+      resumeAudio();
+      window.removeEventListener('click', initAudio);
+      window.removeEventListener('keydown', initAudio);
+    };
+    window.addEventListener('click', initAudio);
+    window.addEventListener('keydown', initAudio);
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -27,6 +36,8 @@ function Root() {
 
     return () => {
       lenis.destroy();
+      window.removeEventListener('click', initAudio);
+      window.removeEventListener('keydown', initAudio);
     };
   }, []);
 

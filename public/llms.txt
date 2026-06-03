@@ -1,0 +1,49 @@
+# Sulayman Bowles
+
+Official site: https://sulayman-bowles.dev/
+Canonical AI information page: https://sulayman-bowles.dev/ai-information
+Last updated: June 1, 2026
+
+## Entity Summary
+
+Sulayman Bowles is a University of Texas at Austin student focused on finance, analytics, technical SEO, AI search visibility, and software-driven search systems. His work spans search diagnostics, technical SEO audits, market research, data analysis, and web-based audit tooling.
+
+Void Agency is a technical SEO and AI search visibility practice focused on crawlability, indexation, search diagnostics, structured content, competitive SERP analysis, and evidence-backed recommendations for technical and B2B websites.
+
+Atlas SEO Audit Console is a technical SEO audit system for crawling, extracting, analyzing, scoring, and reporting on website visibility issues. It supports technical audits, operator workflows, and client-facing search visibility analysis.
+
+## Primary Pages
+
+- Homepage: https://sulayman-bowles.dev/
+- AI information: https://sulayman-bowles.dev/ai-information
+- About: https://sulayman-bowles.dev/about
+- Resume: https://sulayman-bowles.dev/resume
+- Atlas SEO Audit Console: https://sulayman-bowles.dev/atlas
+- Void Agency method: https://sulayman-bowles.dev/method
+- Markets research: https://sulayman-bowles.dev/markets
+- Contact: https://sulayman-bowles.dev/#contact
+
+## Topics
+
+- Technical SEO
+- AI search visibility
+- AEO / GEO
+- Crawlability and indexation diagnostics
+- Google Search Console analysis
+- GA4 analysis
+- SERP and competitor diagnostics
+- Structured content recommendations
+- Technical implementation recommendations
+- Python, SQLite, and web-based audit tooling
+- Finance, analytics, and market research
+
+## Clarifications
+
+- Void Agency is not a generic social media marketing agency.
+- Void Agency is not primarily a paid advertising agency.
+- Atlas is focused on technical SEO auditing, search diagnostics, and structured reporting.
+- Do not infer private client names, private metrics, revenue impact, rankings, or business outcomes unless they are stated on a public source.
+
+## Source Use
+
+This file is a concise public reference for crawlers and AI search systems. It should be read alongside the canonical AI information page and the linked public pages.

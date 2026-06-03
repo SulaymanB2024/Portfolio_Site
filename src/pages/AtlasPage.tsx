@@ -4,7 +4,6 @@ import AtlasCrawlMap from '../components/AtlasCrawlMap';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
-import { ShutterWipe } from '../components/ShutterWipe';
 import { SmoothCursor } from '../components/SmoothCursor';
 import { ScrambleText } from '../components/ScrambleText';
 import { RevealText } from '../components/RevealText';
@@ -12,6 +11,10 @@ import { StaggeredText } from '../components/StaggeredText';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
+import InternalHeader from '../components/InternalHeader';
+import InternalFooter from '../components/InternalFooter';
+import { useFocusTrap } from '../hooks/useFocusTrap';
+import { WireframeGrid } from '../components/WireframeGrid';
 
 const ATLAS_SEO = getSeoRoute('/atlas')!;
 
@@ -37,11 +40,11 @@ function NavLink({ href, active, id, children }: { href: string; active?: boolea
       href={href}
       id={id}
       data-cursor-text={typeof children === 'string' ? children : 'VIEW'}
-      className={`hover-target relative group overflow-visible px-3 py-1 transition-colors ${active ? 'text-ink' : 'text-ink/58 hover:text-ink'}`}
+      className={`hover-target relative group overflow-visible px-3 py-1 transition-colors ${active ? 'text-[#f1efe8]' : 'text-[#f1efe8]/58 hover:text-[#f1efe8]'}`}
     >
       <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">{children}</span>
-      <span className={`absolute left-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} text-ink`}>[</span>
-      <span className={`absolute right-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} text-ink`}>]</span>
+      <span className={`absolute left-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} text-[#f1efe8]`}>[</span>
+      <span className={`absolute right-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} text-[#f1efe8]`}>]</span>
     </a>
   );
 }
@@ -75,7 +78,7 @@ const processSteps: ProcessStepProps[] = [
     index: '05',
     title: 'REPORT',
     icon: 'report',
-    copy: 'Generate operator-ready reports, exports, and task lists with evidence and recommended actions.',
+    copy: 'Structure operator-ready reports, preview packages, and task lists with evidence and recommended actions.',
   },
 ];
 
@@ -285,21 +288,21 @@ function AtlasProcessStep({ index, title, copy, icon }: ProcessStepProps) {
 
   return (
     <motion.article
-      className="group relative min-h-[320px] border-b border-ink/14 p-5 transition-[background-color,border-color] duration-500 hover:bg-ink/[0.025] md:border-r md:last:border-r-0 lg:border-b-0"
+      className="group relative min-h-[320px] border-b border-[#f1efe8]/14 p-5 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] md:border-r md:last:border-r-0 lg:border-b-0"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-ink/42">
+      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/42">
         <span>{index}</span>
         <span>{isFinalStep ? 'END' : '->'}</span>
       </div>
-      <div className="mb-8 text-ink/55 transition-colors duration-500 group-hover:text-ink/86">
+      <div className="mb-8 text-[#f1efe8]/55 transition-colors duration-500 group-hover:text-[#f1efe8]/86">
         <ProcessIcon type={icon} isHovered={isHovered} />
       </div>
-      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-ink">{title}</h3>
-      <p className="text-sm leading-relaxed text-ink/62">{copy}</p>
+      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-[#f1efe8]">{title}</h3>
+      <p className="text-sm leading-relaxed text-[#f1efe8]/62">{copy}</p>
     </motion.article>
   );
 }
@@ -307,22 +310,22 @@ function AtlasProcessStep({ index, title, copy, icon }: ProcessStepProps) {
 function AtlasOutputCard({ title, copy, cta, children, id, onCtaClick }: OutputCardProps) {
   return (
     <motion.article
-      className="group relative flex min-h-[420px] flex-col overflow-hidden border border-canvas/20 p-5 text-canvas transition-[border-color,background-color] duration-500 before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-canvas/45 before:transition-all before:duration-700 hover:border-canvas/40 hover:bg-canvas/[0.025] hover:before:w-full"
+      className="group relative flex min-h-[420px] flex-col overflow-hidden border border-ink/20 p-5 text-ink transition-[border-color,background-color] duration-500 before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-ink/35 before:transition-all before:duration-700 hover:border-ink/45 hover:bg-ink/[0.025] hover:before:w-full"
       whileHover={{ y: -5 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
     >
-      <div className="mb-8 flex items-start justify-between gap-4 border-b border-canvas/15 pb-5">
+      <div className="mb-8 flex items-start justify-between gap-4 border-b border-ink/15 pb-5">
         <div>
-          <h3 className="text-[10px] font-medium uppercase tracking-[0.32em] text-canvas/88">{title}</h3>
-          <p className="mt-3 text-sm leading-relaxed text-canvas/55">{copy}</p>
+          <h3 className="text-[10px] font-medium uppercase tracking-[0.32em] text-ink/88">{title}</h3>
+          <p className="mt-3 text-sm leading-relaxed text-ink/55">{copy}</p>
         </div>
-        <span className="mt-1 block h-2 w-2 rounded-full border border-canvas/50 transition-colors duration-500 group-hover:bg-canvas/70" />
+        <span className="mt-1 block h-2 w-2 rounded-full border border-ink/35 transition-colors duration-500 group-hover:bg-ink/65" />
       </div>
       <div className="flex flex-1 items-center">{children}</div>
       <button 
         id={id}
         onClick={onCtaClick}
-        className="hover-target mt-8 inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-canvas/74 text-left"
+        className="hover-target mt-8 inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-ink/74 text-left"
       >
         {cta}
         <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
@@ -342,16 +345,16 @@ function MetricTable() {
             const severityColor = 
               severity === 'CRITICAL' ? 'text-[#c2695e] border-[#c2695e]/30 bg-[#c2695e]/10' :
               severity === 'HIGH' ? 'text-[#c2695e] border-[#c2695e]/20 bg-[#c2695e]/5' :
-              'text-[#f1efe8]/60 border-[#f1efe8]/15 bg-transparent';
+              'text-ink/50 border-ink/15 bg-transparent';
 
             return (
               <tr 
                 key={label} 
                 onMouseEnter={() => setHoveredRow(index)}
                 onMouseLeave={() => setHoveredRow(null)}
-                className="border-b border-canvas/12 last:border-b-0 cursor-pointer group transition-colors duration-200 hover:bg-canvas/[0.03]"
+                className="border-b border-ink/12 last:border-b-0 cursor-pointer group transition-colors duration-200 hover:bg-ink/[0.03]"
               >
-                <td className="py-3 pr-2 text-canvas/55 group-hover:text-canvas transition-colors duration-200">
+                <td className="py-3 pr-2 text-ink/55 group-hover:text-ink transition-colors duration-200">
                   <div className="flex flex-col gap-1.5">
                     <div className="flex items-center gap-3">
                       <span className="group-hover:translate-x-1 transition-transform duration-200">{label}</span>
@@ -368,13 +371,13 @@ function MetricTable() {
                     <motion.div
                       initial={false}
                       animate={{ height: isHovered ? "auto" : 0, opacity: isHovered ? 1 : 0 }}
-                      className="overflow-hidden text-[9.5px] tracking-normal normal-case text-canvas/42 font-sans"
+                      className="overflow-hidden text-[9.5px] tracking-normal normal-case text-ink/42 font-sans"
                     >
                       {desc}
                     </motion.div>
                   </div>
                 </td>
-                <td className="py-3 text-right font-medium text-canvas/82 group-hover:text-white transition-colors duration-200 align-top">
+                <td className="py-3 text-right font-medium text-ink/82 group-hover:text-ink transition-colors duration-200 align-top">
                   {score}
                 </td>
               </tr>
@@ -414,7 +417,7 @@ function MiniGraph() {
 
   return (
     <div className="relative w-full">
-      <svg viewBox="0 0 240 150" className="w-full text-canvas" aria-hidden="true">
+      <svg viewBox="0 0 240 150" className="w-full text-ink" aria-hidden="true">
         <rect x="1" y="1" width="238" height="148" fill="none" stroke="currentColor" opacity="0.16" />
         
         {edges.map(([fromIdx, toIdx], index) => {
@@ -507,7 +510,7 @@ function MiniDonut() {
   return (
     <div className="grid w-full gap-6">
       <div className="relative h-36 w-36 mx-auto">
-        <svg viewBox="0 0 140 140" className="h-full w-full -rotate-90 text-canvas" aria-hidden="true">
+        <svg viewBox="0 0 140 140" className="h-full w-full -rotate-90 text-ink" aria-hidden="true">
           <circle cx="70" cy="70" r="43" fill="none" stroke="currentColor" strokeWidth="16" opacity="0.08" />
           {[
             ['94 270', 0, 0.78, 0],
@@ -541,13 +544,13 @@ function MiniDonut() {
         </svg>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
-          <span className="text-[7.5px] uppercase tracking-[0.16em] text-canvas/50">
+          <span className="text-[7.5px] uppercase tracking-[0.16em] text-ink/50">
             {hoveredSlice !== null ? indexationRows[hoveredSlice][0] : "TOTAL URLS"}
           </span>
-          <span className="text-[12px] font-bold text-[#E8E6E1] tracking-[0.05em] leading-tight">
+          <span className="text-[12px] font-bold text-ink tracking-[0.05em] leading-tight">
             {hoveredSlice !== null ? indexationRows[hoveredSlice][1] : "53,724"}
           </span>
-          <span className="text-[8px] text-canvas/78 mt-0.5">
+          <span className="text-[8px] text-ink/78 mt-0.5">
             {hoveredSlice !== null ? indexationRows[hoveredSlice][2] : "100%"}
           </span>
         </div>
@@ -561,11 +564,11 @@ function MiniDonut() {
               key={label} 
               onMouseEnter={() => setHoveredSlice(index)}
               onMouseLeave={() => setHoveredSlice(null)}
-              className={`grid grid-cols-[1fr_auto_auto] gap-3 text-[10px] uppercase tracking-[0.16em] cursor-pointer transition-colors duration-200 ${isHovered ? 'text-[#E8E6E1]' : 'text-canvas/58'}`}
+              className={`grid grid-cols-[1fr_auto_auto] gap-3 text-[10px] uppercase tracking-[0.16em] cursor-pointer transition-colors duration-200 ${isHovered ? 'text-ink' : 'text-ink/58'}`}
             >
               <span>{label}</span>
               <span>{count}</span>
-              <span className={isHovered ? 'text-white font-medium' : 'text-canvas/82'}>{pct}</span>
+              <span className={isHovered ? 'text-ink font-semibold' : 'text-ink/82'}>{pct}</span>
             </div>
           );
         })}
@@ -585,6 +588,8 @@ function ConsoleModal({
   title: string; 
   children: ReactNode 
 }) {
+  const modalRef = useFocusTrap(isOpen);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -608,6 +613,10 @@ function ConsoleModal({
         >
           {/* Modal Container */}
           <motion.div
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
             initial={{ y: 24, scale: 0.98, opacity: 0 }}
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: 24, scale: 0.98, opacity: 0 }}
@@ -627,7 +636,7 @@ function ConsoleModal({
             <div className="flex items-center justify-between border-b border-[#f1efe8]/12 px-6 py-4 font-mono text-[9px] uppercase tracking-[0.32em] z-10">
               <div className="flex items-center gap-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#f1efe8]/80" />
-                <span className="font-bold">{title}</span>
+                <span id="modal-title" className="font-bold">{title}</span>
               </div>
               <button 
                 id="modal-close-btn"
@@ -1076,24 +1085,24 @@ function FindingsModalContent() {
 }
 
 function ExportsModalContent() {
-  const [exporting, setExporting] = useState(false);
+  const [previewing, setPreviewing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [selectedFormat, setSelectedFormat] = useState<'PDF' | 'CSV' | 'PARQUET'>('PDF');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const startExport = () => {
-    setExporting(true);
+  const startPreview = () => {
+    setPreviewing(true);
     setProgress(0);
     setToastMessage(null);
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(interval);
-          setExporting(false);
-          setToastMessage(`SYSTEM EXPORT COMPLETED: ${selectedFormat} PACKAGE GENERATED SUCCESSFULLY`);
+          setPreviewing(false);
+          setToastMessage(`PREVIEW READY: ${selectedFormat} PACKAGE STRUCTURE SHOWN. NO FILE IS GENERATED IN THIS PUBLIC BUILD.`);
           return 100;
         }
-        return prev + Math.floor(Math.random() * 15 + 5);
+        return Math.min(prev + 12, 100);
       });
     }, 100);
   };
@@ -1103,16 +1112,16 @@ function ExportsModalContent() {
       <div className="space-y-6 max-w-xl">
         <div>
           <div className="text-[10px] text-[#f1efe8]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#f1efe8]/12 pb-2">
-            EXPORT EXCLUSION CONTROLS
+            EXPORT PREVIEW CONTROLS
           </div>
           <p className="font-sans text-[#f1efe8]/66 normal-case text-xs leading-relaxed mb-6">
-            Configure report parameters, database structures, and target layouts. Export evidence-backed technical SEO metrics.
+            Review the report structure, database sections, and target layouts. Full exports are intentionally unavailable in this public demo.
           </p>
         </div>
 
         <div>
           <div className="text-[9px] uppercase text-[#f1efe8]/45 tracking-[0.2em] mb-3">
-            SELECT DOWNLOAD FILE FORMAT:
+            SELECT PREVIEW FORMAT:
           </div>
           <div className="flex gap-4">
             {(['PDF', 'CSV', 'PARQUET'] as const).map(fmt => (
@@ -1130,7 +1139,7 @@ function ExportsModalContent() {
 
         <div className="space-y-2 text-[#f1efe8]/60">
           <div className="text-[9px] uppercase text-[#f1efe8]/45 tracking-[0.2em] mb-3">
-            MODULES INCLUDED IN PACKAGE:
+            MODULES SHOWN IN PREVIEW:
           </div>
           <div className="flex items-center gap-3">
             <span className="h-2 w-2 bg-[#f1efe8]/60" />
@@ -1148,10 +1157,10 @@ function ExportsModalContent() {
       </div>
 
       <div className="mt-8 pt-6 border-t border-[#f1efe8]/12">
-        {exporting ? (
+        {previewing ? (
           <div className="space-y-3">
             <div className="flex justify-between items-center text-[9px] text-[#f1efe8]/80">
-              <span>COMPILING EVIDENCE DATABASE MODULES...</span>
+              <span>ASSEMBLING PREVIEW STRUCTURE...</span>
               <span>{progress}%</span>
             </div>
             <div className="w-full h-1 bg-white/10 overflow-hidden relative">
@@ -1170,10 +1179,10 @@ function ExportsModalContent() {
             )}
             <button
               id="exports-trigger-btn"
-              onClick={startExport}
+              onClick={startPreview}
               className="hover-target w-full py-3 bg-[#f1efe8] text-[#080807] font-bold uppercase tracking-[0.3em] hover:bg-[#f1efe8]/90 hover:text-[#080807] transition-colors"
             >
-              [ RUN SYSTEM EXPORT & DOWNLOAD ]
+              [ PREVIEW EXPORT PACKAGE ]
             </button>
           </div>
         )}
@@ -1199,35 +1208,17 @@ export default function AtlasPage() {
   }, []);
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-canvas text-ink selection:bg-ink selection:text-canvas md:cursor-none">
-      <ShutterWipe />
-      <div className="bg-noise pointer-events-none" />
+    <main className="relative min-h-screen overflow-x-hidden bg-canvas text-ink selection:bg-ink selection:text-canvas md:cursor-none">
+      <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
       <PageTechnicalChrome tone="light" />
       {!prefersReducedMotion && <div className="hidden md:block">
         <SmoothCursor />
       </div>}
       <ScrollProgress tone="dark" />
 
-      <header className="sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-6 md:px-8 xl:px-10">
-        <div className="grid items-start gap-5 border-b border-ink/12 bg-[#f1efe8]/82 pb-5 text-[10px] uppercase tracking-[0.3em] backdrop-blur-sm md:grid-cols-[1fr_auto_1fr]">
-          <a href="/" id="atlas-brand-link" className="hover-target" data-cursor-text="HOME">
-            <span className="block font-medium text-ink">SULAYMAN BOWLES</span>
-            <span className="mt-2 block font-serif text-sm italic normal-case tracking-normal text-ink/54">Technical SEO · AI Search · Finance/Data</span>
-          </a>
-          <nav className="flex flex-wrap items-center gap-3 md:justify-center md:gap-6">
-            <NavLink href="/#selected-works" id="atlas-nav-work">WORK</NavLink>
-            <NavLink href="/method" id="atlas-nav-method">METHOD</NavLink>
-            <NavLink href="/about" id="atlas-nav-about">ABOUT</NavLink>
-            <NavLink href="/#contact" id="atlas-nav-contact">CONTACT</NavLink>
-          </nav>
-          <a href="/#contact" id="atlas-header-contact" data-cursor-text="CONTACT" className="hover-target flex items-center gap-4 justify-self-start text-ink/75 transition-colors hover:text-ink md:justify-self-end">
-            <span className="h-7 w-7 rounded-full border border-ink/28 flex-shrink-0" />
-            <span>CONTACT</span>
-          </a>
-        </div>
-      </header>
+      <InternalHeader activePath="/atlas" tone="light" />
 
-      <section className="relative mx-auto grid min-h-screen w-full max-w-[1480px] grid-cols-1 gap-12 px-4 pb-16 pt-32 md:px-8 lg:grid-cols-12 xl:px-10 lg:pb-24 lg:pt-40">
+      <section className="relative z-10 mx-auto grid min-h-screen w-full max-w-[1480px] grid-cols-1 gap-12 px-4 pb-16 pt-32 md:px-8 lg:grid-cols-12 xl:px-10 lg:pb-24 lg:pt-40">
         <ScrollReveal className="lg:col-span-4">
           <div className="mb-8 text-xs uppercase tracking-[0.36em] text-ink/48">( 02 )</div>
           <h1 
@@ -1237,7 +1228,7 @@ export default function AtlasPage() {
             <ScrambleText text="ATLAS" trigger="once" />
           </h1>
           <p className="mt-10 max-w-[25rem] font-serif text-[clamp(2rem,4vw,4.25rem)] italic leading-[0.92] tracking-[-0.025em]">
-            <RevealText text="Crawl-based evidence engine for search." delay={0.25} />
+            <RevealText text="Crawl-based evidence engine for search." delay={0.25} elementType="span" />
           </p>
           <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">
             Atlas is a technical SEO audit system that crawls, interprets, and scores websites to surface what search engines see across architecture, indexation, performance, and AI-search readiness.
@@ -1261,7 +1252,7 @@ export default function AtlasPage() {
         </ScrollReveal>
       </section>
 
-      <section className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-ink/12 px-4 py-16 md:px-8 lg:grid-cols-12 xl:px-10 xl:py-24">
+      <section className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-ink/12 px-4 py-16 md:px-8 lg:grid-cols-12 xl:px-10 xl:py-24">
         <ScrollReveal className="border-l border-ink/22 pl-6 lg:col-span-4">
           <blockquote className="max-w-[420px] font-serif text-[clamp(2rem,3.6vw,4.8rem)] italic leading-[0.95] tracking-[-0.025em]">
             I built Atlas to turn raw crawl data into structured, defensible evidence. Not just what's wrong - but why it matters.
@@ -1271,7 +1262,7 @@ export default function AtlasPage() {
           {[
             ['BEYOND BASIC CRAWLS', 'Atlas goes deeper than surface reports. It interprets signals, correlates patterns, and prioritizes issues by impact on indexation and visibility.'],
             ['AI-SEARCH AWARE', 'Atlas evaluates content and structure for AI-search discoverability: entity clarity, source signals, freshness, and retrievability.'],
-            ['BUILT FOR OPERATORS', 'Designed for SEO operators and technical teams who need reliable evidence, clear logic, and exportable outputs to drive decisions.'],
+            ['BUILT FOR OPERATORS', 'Designed for SEO operators and technical teams who need reliable evidence, clear logic, and inspectable outputs to drive decisions.'],
           ].map(([title, copy], index) => (
             <div key={title}>
               <ScrollReveal delay={index * 0.08} yOffset={18} blur={false}>
@@ -1284,7 +1275,7 @@ export default function AtlasPage() {
         </div>
       </section>
 
-      <section id="process" className="mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+      <section id="process" className="relative z-10 mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal>
           <div className="border border-ink/18">
             <div className="flex items-center justify-between border-b border-ink/18 px-5 py-5 text-[10px] uppercase tracking-[0.32em]">
@@ -1302,15 +1293,15 @@ export default function AtlasPage() {
         </ScrollReveal>
       </section>
 
-      <section className="bg-ink px-4 py-16 text-canvas md:px-10 lg:px-14 lg:py-24">
+      <section className="relative z-10 bg-canvas border-t border-ink/12 px-4 py-16 text-ink md:px-10 lg:px-14 lg:py-24">
         <div className="mx-auto max-w-[1480px]">
-          <ScrollReveal className="mb-10 flex flex-col justify-between gap-5 border-b border-canvas/18 pb-6 md:flex-row md:items-end" blur={false}>
+          <ScrollReveal className="mb-10 flex flex-col justify-between gap-5 border-b border-ink/18 pb-6 md:flex-row md:items-end" blur={false}>
             <div>
-              <div className="mb-5 h-px w-16 bg-canvas/45" />
+              <div className="mb-5 h-px w-16 bg-ink/45" />
               <h2 className="font-serif text-[clamp(3rem,7vw,8rem)] italic leading-none tracking-[-0.04em]">EVIDENCE &amp; OUTPUTS</h2>
             </div>
-            <p className="max-w-md text-sm leading-relaxed text-canvas/55">
-              Structured artifacts that make crawler observations reviewable, exportable, and defensible across technical teams.
+            <p className="max-w-md text-sm leading-relaxed text-ink/62">
+              Structured artifacts that make crawler observations reviewable, inspectable, and defensible across technical teams.
             </p>
           </ScrollReveal>
 
@@ -1328,16 +1319,16 @@ export default function AtlasPage() {
             </AtlasOutputCard>
 
             <AtlasOutputCard title="TECHNICAL FINDINGS" id="atlas-card-findings" copy="Examples with evidence and remediation." cta="VIEW DETAILS" onCtaClick={() => setActiveModal('findings')}>
-              <div className="w-full border border-canvas/18 p-4">
+              <div className="w-full border border-ink/18 p-4">
                 <div className="mb-6 flex items-start justify-between">
                   <div>
-                    <h4 className="text-xs uppercase tracking-[0.26em] text-canvas/82">Missing Canonical</h4>
-                    <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-canvas/48">312 pages</p>
+                    <h4 className="text-xs uppercase tracking-[0.26em] text-ink/82">Missing Canonical</h4>
+                    <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-ink/48">312 pages</p>
                   </div>
-                  <span className="text-xl font-serif italic text-canvas/58">7.2</span>
+                  <span className="text-xl font-serif italic text-ink/58">7.2</span>
                 </div>
-                <p className="mb-5 text-sm leading-relaxed text-canvas/58">Multiple pages missing self-referencing canonicals.</p>
-                <div className="space-y-2 border-t border-[#f1efe8]/12 pt-4 text-[10px] uppercase tracking-[0.15em] text-canvas/48">
+                <p className="mb-5 text-sm leading-relaxed text-ink/58">Multiple pages missing self-referencing canonicals.</p>
+                <div className="space-y-2 border-t border-ink/12 pt-4 text-[10px] uppercase tracking-[0.15em] text-ink/48">
                   <div>Affected URLs:</div>
                   <div>/blog/how-to-audit</div>
                   <div>/pricing/plans</div>
@@ -1346,12 +1337,12 @@ export default function AtlasPage() {
               </div>
             </AtlasOutputCard>
 
-            <AtlasOutputCard title="EXPORTS & DASHBOARDS" id="atlas-card-exports" copy="Shareable reports and operator dashboards." cta="OPEN DASHBOARD" onCtaClick={() => setActiveModal('exports')}>
-              <ul className="w-full space-y-4 text-[11px] uppercase tracking-[0.18em] text-canvas/62">
+            <AtlasOutputCard title="EXPORT PREVIEW" id="atlas-card-exports" copy="Sample report structures and operator dashboard sections." cta="OPEN PREVIEW" onCtaClick={() => setActiveModal('exports')}>
+              <ul className="w-full space-y-4 text-[11px] uppercase tracking-[0.18em] text-ink/62">
                 {['Executive Summary (PDF)', 'Technical Audit (PDF)', 'Issue Export (CSV)', 'Crawl Data (Parquet)', 'Looker Studio Dashboard'].map((item) => (
-                  <li key={item} className="flex items-center justify-between border-b border-canvas/12 pb-3">
+                  <li key={item} className="flex items-center justify-between border-b border-ink/12 pb-3">
                     <span>{item}</span>
-                    <span className="h-1.5 w-1.5 rounded-full bg-canvas/45" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-ink/45" />
                   </li>
                 ))}
               </ul>
@@ -1360,7 +1351,7 @@ export default function AtlasPage() {
         </div>
       </section>
 
-      <section id="next-steps" className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 px-4 py-16 md:px-8 lg:grid-cols-12 xl:px-10 xl:py-24">
+      <section id="next-steps" className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 px-4 py-16 md:px-8 lg:grid-cols-12 xl:px-10 xl:py-24">
         <ScrollReveal className="lg:col-span-4">
           <h2 className="max-w-[32rem] font-serif text-[clamp(3.5rem,8vw,9rem)] italic leading-[0.84] tracking-[-0.045em]">
             System intelligence you can act on.
@@ -1378,7 +1369,7 @@ export default function AtlasPage() {
               ['01', 'VIEW RELATED WORK', 'See other projects in SEO, finance, and data.'],
               ['02', 'WORK WITH ME', "Let's build systems that move the needle."],
             ].map(([index, title, copy]) => (
-              <a key={title} href={index === '01' ? '/#selected-works' : '/#contact'} data-cursor-text={index === '01' ? 'WORK' : 'CONTACT'} className="hover-target group border-b border-ink/16 py-8 md:border-r md:pr-8 md:last:border-r-0 md:last:pl-8">
+              <a key={title} href={index === '01' ? '/#selected-works' : '/#contact'} data-cursor-text={index === '01' ? 'WORK' : 'CONTACT'} className="hover-target group border-b border-ink/16 py-8 md:border-r md:border-ink/16 md:pr-8 md:last:border-r-0 md:last:pl-8">
                 <div className="mb-8 text-[10px] uppercase tracking-[0.28em] text-ink/42">{index}</div>
                 <h3 className="mb-4 text-xs uppercase tracking-[0.3em]">{title}</h3>
                 <p className="mb-7 text-sm leading-relaxed text-ink/62">{copy}</p>
@@ -1408,24 +1399,7 @@ export default function AtlasPage() {
         </ScrollReveal>
       </section>
 
-      <footer className="mx-auto grid max-w-[1480px] grid-cols-1 items-start gap-8 border-t border-ink/12 px-4 py-8 text-[10px] uppercase tracking-[0.3em] text-ink/54 md:grid-cols-[1fr_auto_1fr_auto] md:px-8 xl:px-10">
-        <div>
-          <div className="text-ink">SULAYMAN BOWLES</div>
-          <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">Technical SEO · AI Search · Finance/Data</div>
-        </div>
-        <nav className="flex flex-wrap gap-5" id="atlas-footer-nav">
-          <NavLink href="/#selected-works" id="atlas-footer-work">WORK</NavLink>
-          <NavLink href="/method" id="atlas-footer-method">METHOD</NavLink>
-          <NavLink href="/about" id="atlas-footer-about">ABOUT</NavLink>
-          <NavLink href="/#contact" id="atlas-footer-contact">CONTACT</NavLink>
-        </nav>
-        <div className="md:text-right">
-          © 2026 SULAYMAN BOWLES
-          <br />
-          ALL RIGHTS RESERVED
-        </div>
-        <a href="#top" id="atlas-back-to-top" aria-label="Back to top" data-cursor-text="TOP" className="hover-target h-9 w-9 rounded-full border border-ink/26 transition-colors hover:bg-ink hover:text-canvas" />
-      </footer>
+      <InternalFooter activePath="/atlas" tone="light" />
 
       {/* Interactive Console Modals */}
       <ConsoleModal 

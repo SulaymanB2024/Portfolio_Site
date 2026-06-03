@@ -45,8 +45,7 @@ export default function AtmosphereCore({ className = '' }: { className?: string 
         className="absolute top-[40%] left-[30%] w-[50%] h-[50%] rounded-full opacity-[0.15] mix-blend-screen pointer-events-none bg-canvas blur-[80px]"
       />
       
-      {/* Noise overlay */}
-      <div className="absolute inset-0 bg-noise opacity-[0.15] pointer-events-none" />
+
       
       {/* Vignette / dark edges */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#070707_100%)] opacity-80 pointer-events-none" />

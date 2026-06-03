@@ -8,18 +8,32 @@ import { ScrambleText } from './components/ScrambleText';
 import { ScrollReveal } from './components/ScrollReveal';
 import { ScrollProgress } from './components/ScrollProgress';
 import { MagneticButton } from './components/MagneticButton';
+import { AudioWaveToggle } from './components/AudioWaveToggle';
 import { KineticTypography } from './components/KineticTypography';
-import { ShutterWipe } from './components/ShutterWipe';
+import { ShutterWipe } from './components/pageTransitions/ShutterWipe';
+import { usePageTransitions } from './hooks/usePageTransitions';
 import { useReducedMotion } from './hooks/useReducedMotion';
-import { getSeoRoute, normalizePath } from './seo/routes';
+import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
+import { getCanonicalRoutes, getSeoRoute, normalizePath } from './seo/routes';
 import { useSEO } from './utils/seo';
+import './styles/page-transitions.css';
+import { TextMarquee } from './components/TextMarquee';
 
-const AtlasPage = lazy(() => import('./pages/AtlasPage'));
-const VoidAgencyMethodPage = lazy(() => import('./pages/VoidAgencyMethodPage'));
-const AboutPage = lazy(() => import('./pages/AboutPage'));
-const MarketsPage = lazy(() => import('./pages/MarketsPage'));
-const MarketArticlePage = lazy(() => import('./pages/MarketArticlePage'));
-const TextMarquee = lazy(() => import('./components/TextMarquee').then(m => ({ default: m.TextMarquee })));
+const loadAtlasPage = () => import('./pages/AtlasPage');
+const loadMethodPage = () => import('./pages/VoidAgencyMethodPage');
+const loadAboutPage = () => import('./pages/AboutPage');
+const loadResumePage = () => import('./pages/ResumePage');
+const loadAiInformationPage = () => import('./pages/AiInformationPage');
+const loadMarketsPage = () => import('./pages/MarketsPage');
+const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
+
+const AtlasPage = lazy(loadAtlasPage);
+const VoidAgencyMethodPage = lazy(loadMethodPage);
+const AboutPage = lazy(loadAboutPage);
+const ResumePage = lazy(loadResumePage);
+const AiInformationPage = lazy(loadAiInformationPage);
+const MarketsPage = lazy(loadMarketsPage);
+const MarketArticlePage = lazy(loadMarketArticlePage);
 const LocalTime = lazy(() => import('./components/LocalTime').then(m => ({ default: m.LocalTime })));
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
@@ -32,178 +46,179 @@ const FooterM = lazy(() => import('./components/FooterM').then(m => ({ default: 
 const CONTACT_HASH = '#contact';
 const HOME_SEO = getSeoRoute('/')!;
 
+function isDarkRoute(path: string) {
+  const route = getSeoRoute(path);
+  return route?.path === '/about' || route?.path === '/method' || route?.path === '/markets' || route?.section === 'research-article';
+}
+
+async function preloadRoute(path: string) {
+  const route = getSeoRoute(path);
+
+  if (route?.path === '/atlas') {
+    await loadAtlasPage();
+  } else if (route?.path === '/method') {
+    await loadMethodPage();
+  } else if (route?.path === '/about') {
+    await loadAboutPage();
+  } else if (route?.path === '/resume') {
+    await loadResumePage();
+  } else if (route?.path === '/ai-information') {
+    await loadAiInformationPage();
+  } else if (route?.path === '/markets') {
+    await loadMarketsPage();
+  } else if (route?.section === 'research-article') {
+    await loadMarketArticlePage();
+  }
+}
+
 function getCurrentCanonicalPath() {
   const canonicalPath = normalizePath(window.location.pathname);
   if (canonicalPath !== window.location.pathname) {
     window.history.replaceState({}, '', `${canonicalPath}${window.location.search}${window.location.hash}`);
   }
-  return canonicalPath;
-}
-
-function focusContactForm() {
-  const firstContactField = document.querySelector<HTMLInputElement>('#contact-name');
-  firstContactField?.focus({ preventScroll: true });
-}
-
-function scrollToHashTarget(hash: string) {
-  const target = document.querySelector(hash);
-  if (!target) return;
-
-  const lenis = (window as any).lenis;
-  if (lenis) {
-    lenis.scrollTo(hash, { duration: 1.2, ease: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-  } else {
-    target.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  if (hash === CONTACT_HASH) {
-    window.setTimeout(focusContactForm, 450);
-  }
+  return `${canonicalPath}${window.location.search}${window.location.hash}`;
 }
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(getCurrentCanonicalPath);
 
-  useEffect(() => {
-    const handlePopState = () => {
-      const triggerShutter = (window as any).triggerShutter;
-      if (triggerShutter) {
-        triggerShutter(true);
-        setTimeout(() => {
-          setCurrentPath(getCurrentCanonicalPath());
-          setTimeout(() => {
-            triggerShutter(false);
-          }, 300);
-        }, 800);
-      } else {
-        setCurrentPath(getCurrentCanonicalPath());
-      }
-    };
+  usePageTransitions({
+    currentPath,
+    setCurrentPath,
+    normalizePath,
+    preloadPath: preloadRoute,
+    contactHash: CONTACT_HASH,
+    hashFocusSelector: '#contact-name',
+  });
 
-    const handleLinkClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const link = target.closest('a');
-      if (
-        link &&
-        link.target !== '_blank' &&
-        !link.hasAttribute('download') &&
-        e.button === 0 && // Left click
-        !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey // No modifier keys
-      ) {
-        const href = link.getAttribute('href');
-        if (href && (href.startsWith('/') || href.startsWith(window.location.origin))) {
-          if (href.startsWith('mailto:') || (href.includes('://') && !href.startsWith(window.location.origin))) {
-            return;
-          }
-          
-          const url = new URL(href, window.location.origin);
-          const canonicalPath = normalizePath(url.pathname);
-          if (canonicalPath === normalizePath(window.location.pathname) && url.hash) {
-            e.preventDefault();
-            scrollToHashTarget(url.hash);
-            return;
-          }
-
-          e.preventDefault();
-
-          const navigateTo = () => {
-            window.history.pushState({}, '', `${canonicalPath}${url.search}${url.hash}`);
-            setCurrentPath(canonicalPath);
-          };
-
-          const triggerShutter = (window as any).triggerShutter;
-          if (triggerShutter) {
-            triggerShutter(true);
-            setTimeout(() => {
-              navigateTo();
-              setTimeout(() => {
-                triggerShutter(false);
-              }, 300);
-            }, 800);
-          } else {
-            const doc = document as any;
-            if (doc.startViewTransition) {
-              doc.startViewTransition(() => {
-                navigateTo();
-              });
-            } else {
-              navigateTo();
-            }
-          }
-        }
-      }
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    document.addEventListener('click', handleLinkClick);
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-      document.removeEventListener('click', handleLinkClick);
-    };
-  }, []);
-
-  useEffect(() => {
-    const lenis = (window as any).lenis;
-    const hash = window.location.hash;
-    if (hash) {
-      setTimeout(() => {
-        scrollToHashTarget(hash);
-      }, 100);
-      if (hash === CONTACT_HASH) {
-        setTimeout(() => scrollToHashTarget(hash), 1400);
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      if (lenis) {
-        lenis.scrollTo(0, { immediate: true });
-      }
-    }
-  }, [currentPath]);
+  useRouteBodyTheme({ currentPath, isDarkRoute });
 
   const route = getSeoRoute(currentPath);
+  let page;
+
   if (route?.path === '/atlas') {
-    return (
-      <Suspense fallback={null}>
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
         <AtlasPage />
       </Suspense>
     );
-  }
-
-  if (route?.path === '/method') {
-    return (
-      <Suspense fallback={null}>
+  } else if (route?.path === '/method') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
         <VoidAgencyMethodPage />
       </Suspense>
     );
-  }
-
-  if (route?.path === '/about') {
-    return (
-      <Suspense fallback={null}>
+  } else if (route?.path === '/about') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
         <AboutPage />
       </Suspense>
     );
-  }
-
-  if (route?.section === 'research-article') {
+  } else if (route?.path === '/resume') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <ResumePage />
+      </Suspense>
+    );
+  } else if (route?.path === '/ai-information') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <AiInformationPage />
+      </Suspense>
+    );
+  } else if (route?.path === '/sitemap') {
+    page = <SitemapPage />;
+  } else if (route?.section === 'research-article') {
     const slug = route.path.split('/').at(-1) ?? '';
-    return (
-      <Suspense fallback={null}>
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
         <MarketArticlePage slug={slug} />
       </Suspense>
     );
-  }
-
-  if (route?.path === '/markets') {
-    return (
-      <Suspense fallback={null}>
+  } else if (route?.path === '/markets') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
         <MarketsPage />
       </Suspense>
     );
+  } else {
+    page = <HomePage />;
   }
 
-  return <HomePage />;
+  return (
+    <>
+      <ShutterWipe />
+      {page}
+    </>
+  );
 }
+
+function SitemapPage() {
+  const route = getSeoRoute('/sitemap')!;
+  const routes = getCanonicalRoutes();
+
+  useSEO(route);
+
+  return (
+    <main className="relative min-h-screen bg-canvas px-4 py-10 font-sans text-ink md:px-8 xl:px-10">
+      <Suspense fallback={null}>
+        <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
+      </Suspense>
+      <div className="relative z-10 mx-auto w-full max-w-[1180px]">
+        <header className="border-b border-ink/14 pb-8">
+          <a href="/" className="text-[10px] uppercase tracking-[0.28em] text-ink/58">
+            Sulayman Bowles
+          </a>
+          <h1 className="mt-10 font-serif text-[clamp(3rem,10vw,8rem)] italic leading-[0.86] tracking-normal">
+            HTML Sitemap
+          </h1>
+          <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink/64">
+            Plain links to every public page on sulayman-bowles.dev.
+          </p>
+        </header>
+
+        <section className="py-10">
+          <h2 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/48">Pages</h2>
+          <ul className="grid gap-3">
+            {routes.map((item) => (
+              <li key={item.path}>
+                <a
+                  href={item.path}
+                  className="block border border-ink/14 px-5 py-4 transition-colors hover:bg-ink hover:text-canvas"
+                >
+                  <span className="block text-sm uppercase tracking-[0.18em]">{item.h1}</span>
+                  <span className="mt-2 block text-sm leading-relaxed opacity-65">{item.description}</span>
+                  <span className="mt-3 block text-[10px] uppercase tracking-[0.22em] opacity-45">{item.path}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </main>
+  );
+}
+
+function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
+  const dark = route ? isDarkRoute(route.path) : false;
+
+  return (
+    <main
+      className={`flex min-h-screen items-center justify-center px-6 font-sans ${
+        dark ? 'bg-[#080807] text-[#f1efe8]' : 'bg-canvas text-ink'
+      }`}
+    >
+      <div className="w-full max-w-[1480px] border-t border-current/20 pt-6">
+        <div className="text-[10px] uppercase tracking-[0.32em] opacity-45">Loading</div>
+        <h1 className="mt-6 font-serif text-[clamp(3rem,9vw,8rem)] italic leading-[0.86] tracking-normal">
+          {route?.h1 ?? HOME_SEO.h1}
+        </h1>
+      </div>
+    </main>
+  );
+}
+
+let initialLoadComplete = false;
 
 function HomePage() {
   useSEO(HOME_SEO);
@@ -261,15 +276,20 @@ function HomePage() {
     }
   };
 
-  const [counter, setCounter] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [counter, setCounter] = useState(initialLoadComplete ? 100 : 0);
+  const [isLoaded, setIsLoaded] = useState(initialLoadComplete);
 
   useEffect(() => {
+    if (initialLoadComplete) return;
+
     const interval = setInterval(() => {
       setCounter((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => setIsLoaded(true), 600);
+          setTimeout(() => {
+            initialLoadComplete = true;
+            setIsLoaded(true);
+          }, 600);
           return 100;
         }
         // Speed up the count exponentially
@@ -305,8 +325,6 @@ function HomePage() {
 
   return (
     <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas md:cursor-none" ref={containerRef}>
-      <ShutterWipe />
-      <div className="bg-noise pointer-events-none" />
       {!prefersReducedMotion && <InkTrails />}
         
         {/* Hide native cursor on desktop to use smooth cursor */}
@@ -380,12 +398,36 @@ function HomePage() {
           <span className="text-xs font-serif italic mt-2 text-canvas opacity-70">Technical SEO · AI Search · Finance/Data</span>
         </a>
         
-        <nav aria-label="Main Navigation" className="pointer-events-auto flex flex-col items-end gap-2 text-xs font-sans tracking-[0.2em] font-medium uppercase mix-blend-difference select-none">
+        <details className="pointer-events-auto md:hidden text-right text-xs font-sans tracking-[0.2em] font-medium uppercase">
+          <summary className="hover-target cursor-pointer list-none px-2 py-1">Menu +</summary>
+          <nav aria-label="Mobile Main Navigation" className="mt-3 grid gap-2 rounded border border-canvas/20 bg-ink/85 p-3 text-canvas shadow-2xl backdrop-blur">
+            <a href="#selected-works" id="mobile-nav-work" data-cursor-text="WORK" className="hover-target px-2 py-1">Work</a>
+            <a href="/atlas" id="mobile-nav-atlas" data-cursor-text="ATLAS" className="hover-target px-2 py-1">Atlas</a>
+            <a href="/markets" id="mobile-nav-markets" data-cursor-text="RESEARCH" className="hover-target px-2 py-1">Research</a>
+            <a href="/method" id="mobile-nav-method" data-cursor-text="METHOD" className="hover-target px-2 py-1">Method</a>
+            <a href="/about" id="mobile-nav-about" data-cursor-text="ABOUT" className="hover-target px-2 py-1">About</a>
+            <a href="/resume" id="mobile-nav-resume" data-cursor-text="RESUME" className="hover-target px-2 py-1">Resume</a>
+            <a href="/ai-information" id="mobile-nav-ai-information" data-cursor-text="INFO" className="hover-target px-2 py-1">AI Info</a>
+            <a href="#contact" id="mobile-nav-contact" data-cursor-text="CONTACT" className="hover-target px-2 py-1">Contact</a>
+          </nav>
+        </details>
+
+        <nav aria-label="Main Navigation" className="pointer-events-auto hidden flex-col items-end gap-2 text-xs font-sans tracking-[0.2em] font-medium uppercase mix-blend-difference select-none md:flex">
           <a href="#selected-works" id="nav-work" data-cursor-text="WORK" className="hover-target relative group overflow-visible p-2 -m-2">
             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Work</span>
             {/* Brackets that appear on hover */}
             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
+          </a>
+          <a href="/atlas" id="nav-atlas" data-cursor-text="ATLAS" className="hover-target relative group overflow-visible p-2 -m-2">
+             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Atlas</span>
+             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
+             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
+          </a>
+          <a href="/markets" id="nav-markets" data-cursor-text="RESEARCH" className="hover-target relative group overflow-visible p-2 -m-2">
+             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Research</span>
+             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
+             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
           </a>
           <a href="/method" id="nav-method" data-cursor-text="METHOD" className="hover-target relative group overflow-visible p-2 -m-2">
              <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Method</span>
@@ -397,6 +439,24 @@ function HomePage() {
              <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
              <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
           </a>
+          <a href="/resume" id="nav-resume" data-cursor-text="RESUME" className="hover-target relative group overflow-visible p-2 -m-2">
+             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Resume</span>
+             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
+             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
+          </a>
+          <a href="/ai-information" id="nav-ai-information" data-cursor-text="INFO" className="hover-target relative group overflow-visible p-2 -m-2">
+             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">AI Info</span>
+             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
+             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
+          </a>
+          <a href="#contact" id="nav-contact" data-cursor-text="CONTACT" className="hover-target relative group overflow-visible p-2 -m-2">
+             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Contact</span>
+             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
+             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
+          </a>
+          <div className="pt-4 pb-2">
+            <AudioWaveToggle />
+          </div>
         </nav>
       </motion.header>
 
@@ -492,14 +552,18 @@ function HomePage() {
              transition={{ duration: 1, delay: 2.8 }}
              className="w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-ink/20 pb-8 gap-8 md:gap-0"
            >
-             <div className="max-w-[34rem]">
-               <h1 className="font-serif text-5xl font-light leading-none tracking-normal text-ink md:text-7xl">
-                 Sulayman Bowles
-               </h1>
-               <p className="mt-5 max-w-md font-sans text-[10px] uppercase leading-relaxed tracking-[0.2em] text-ink/70 md:text-xs">
-                 Technical SEO systems, AI-search discoverability, and finance/data tools.
-               </p>
-             </div>
+	             <div className="max-w-[34rem]">
+	               <h1 className="font-serif text-5xl font-light leading-none tracking-normal text-ink md:text-7xl">
+	                 Sulayman Bowles
+	               </h1>
+	               <p className="mt-5 max-w-md font-sans text-[10px] uppercase leading-relaxed tracking-[0.2em] text-ink/70 md:text-xs">
+	                 Technical SEO systems, AI-search discoverability, and finance/data tools.
+	               </p>
+                <div className="mt-6 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.24em] text-ink/64">
+                  <a href="/atlas" id="hero-view-atlas-link" className="hover-target border-b border-ink/24 pb-2 transition-colors hover:border-ink hover:text-ink">View Atlas</a>
+                  <a href="/#contact" id="hero-start-audit-link" className="hover-target border-b border-ink/24 pb-2 transition-colors hover:border-ink hover:text-ink">Start an audit</a>
+                </div>
+	             </div>
              <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-ink/40 md:text-xs">Trace the work</span>
            </motion.div>
         </section>
@@ -544,7 +608,7 @@ function HomePage() {
         </section>
 
         {/* TEXT MARQUEE */}
-        <Suspense fallback={null}><TextMarquee /></Suspense>
+        <TextMarquee />
 
          {/* SELECTED WORKS - EDITORIAL GRID */}
         <section id="selected-works" className="w-full py-32 bg-ink text-canvas selection:bg-canvas selection:text-ink relative flex flex-col border-t border-canvas/10">
@@ -776,34 +840,445 @@ function HomePage() {
                 </ScrollReveal>
               </div>
               <div className="md:col-span-9 flex flex-col w-full text-ink">
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 md:gap-y-32 group">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 md:gap-y-32 group">
                  {[
                    { num: '01', title: 'Technical SEO Systems', desc: 'Crawl architecture, indexability, internal links, page templates, metadata, structured data, performance inputs, and issue logic. Built for diagnosis, not vague scoring.' },
                    { num: '02', title: 'AI Search Discoverability', desc: 'Answer-ready pages, entity clarity, citation surfaces, crawl permissions, structured signals, and content that helps AI systems understand who or what a site represents.' },
                    { num: '03', title: 'Finance + Data Analysis', desc: 'Valuation models, market research, operating analysis, dashboards, and decision tools built around assumptions that can be inspected and challenged.' },
                    { num: '04', title: 'Web Systems + Presentation', desc: 'React interfaces, portfolio pages, audit dashboards, visual systems, and written explanations that turn raw work into something legible.' }
                  ].map((item, i) => (
-                   <div key={item.num}>
-                     <ScrollReveal delay={i % 2 === 0 ? 0.2 : 0.4} blur={false}>
-                       <div className="flex flex-col border-t border-ink/20 pt-8 hover-target transition-opacity duration-500 hover:!opacity-100 group-hover:opacity-20" data-cursor-text="READ" style={{ perspective: 1000 }}>
-                         <span className="font-sans text-[10px] tracking-widest uppercase opacity-50 mb-6 md:mb-8">{item.num}</span>
-                         <h4 className="text-4xl md:text-4xl lg:text-5xl font-serif tracking-tighter uppercase font-light leading-none mb-6 md:mb-8">
-                           {item.title}
-                         </h4>
-                         <p className="font-sans text-[10px] uppercase tracking-widest leading-tight opacity-60">
-                           {item.desc}
-                         </p>
-                       </div>
-                     </ScrollReveal>
-                   </div>
-                 ))}
-                 </div>
-                 <div className="pt-32 w-full flex justify-start md:justify-end">
-                   <a href="#selected-works" id="discipline-view-work-link" className="hover-target text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
-                 </div>
-              </div>
-           </div>
-        </section>
+                    <div key={item.num}>
+                      <ScrollReveal delay={i % 2 === 0 ? 0.2 : 0.4} blur={false}>
+                        <motion.div 
+                          initial="initial"
+                          whileHover="hover"
+                          className="relative overflow-hidden flex flex-col border-t border-ink/20 pt-8 hover-target transition-opacity duration-500 hover:!opacity-100 group-hover:opacity-20 group/discipline min-h-[220px]" 
+                          data-cursor-text="READ" 
+                          style={{ perspective: 1000 }}
+                        >
+                          <div className="relative z-10 flex flex-col pointer-events-none w-full">
+                            <span className="font-sans text-[10px] tracking-widest uppercase opacity-50 mb-6 md:mb-8">{item.num}</span>
+                            <h4 className="text-4xl md:text-4xl lg:text-5xl font-serif tracking-tighter uppercase font-light leading-none mb-6 md:mb-8">
+                              {item.title}
+                            </h4>
+                            <p className="font-sans text-[10px] uppercase tracking-widest leading-tight opacity-60 max-w-[80%] md:max-w-[70%]">
+                              {item.desc}
+                            </p>
+                          </div>
+
+                          {/* Interactive background SVGs based on card number */}
+                          {item.num === '01' && (
+                            <svg
+                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
+                              viewBox="0 0 200 200"
+                              fill="none"
+                            >
+                              {/* Connection Paths */}
+                              <motion.path
+                                d="M 30 100 L 80 60"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { pathLength: 0.3 },
+                                  hover: { pathLength: 1, transition: { duration: 0.8, ease: "easeInOut" } }
+                                }}
+                              />
+                              <motion.path
+                                d="M 30 100 L 80 140"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { pathLength: 0.3 },
+                                  hover: { pathLength: 1, transition: { duration: 0.8, ease: "easeInOut" } }
+                                }}
+                              />
+                              <motion.path
+                                d="M 80 60 L 140 40"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { pathLength: 0.1 },
+                                  hover: { pathLength: 1, transition: { duration: 1, ease: "easeInOut", delay: 0.1 } }
+                                }}
+                              />
+                              <motion.path
+                                d="M 80 60 L 140 80"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { pathLength: 0.1 },
+                                  hover: { pathLength: 1, transition: { duration: 1, ease: "easeInOut", delay: 0.1 } }
+                                }}
+                              />
+                              <motion.path
+                                d="M 80 140 L 140 120"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { pathLength: 0.1 },
+                                  hover: { pathLength: 1, transition: { duration: 1, ease: "easeInOut", delay: 0.1 } }
+                                }}
+                              />
+                              <motion.path
+                                d="M 80 140 L 140 160"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { pathLength: 0.1 },
+                                  hover: { pathLength: 1, transition: { duration: 1, ease: "easeInOut", delay: 0.1 } }
+                                }}
+                              />
+
+                              {/* Root Node */}
+                              <motion.circle
+                                cx="30"
+                                cy="100"
+                                r="6"
+                                className="fill-canvas stroke-ink/30"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { scale: 1 },
+                                  hover: { scale: 1.25, transition: { duration: 0.4 } }
+                                }}
+                              />
+
+                              {/* Mid Nodes */}
+                              <motion.circle
+                                cx="80"
+                                cy="60"
+                                r="5"
+                                className="fill-canvas stroke-ink/30"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { scale: 1 },
+                                  hover: { scale: [1, 1.2, 1], transition: { repeat: Infinity, duration: 2, delay: 0.1 } }
+                                }}
+                              />
+                              <motion.circle
+                                cx="80"
+                                cy="140"
+                                r="5"
+                                className="fill-canvas stroke-ink/30"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { scale: 1 },
+                                  hover: { scale: [1, 1.2, 1], transition: { repeat: Infinity, duration: 2, delay: 0.3 } }
+                                }}
+                              />
+
+                              {/* Leaf Nodes */}
+                              <motion.circle
+                                cx="140"
+                                cy="40"
+                                r="4"
+                                className="fill-canvas stroke-ink/20"
+                                strokeWidth="1"
+                                variants={{
+                                  initial: { scale: 1 },
+                                  hover: { scale: [1, 1.3, 1], transition: { repeat: Infinity, duration: 1.5, delay: 0.2 } }
+                                }}
+                              />
+                              <motion.circle
+                                cx="140"
+                                cy="80"
+                                r="4"
+                                className="fill-canvas stroke-ink/20"
+                                strokeWidth="1"
+                                variants={{
+                                  initial: { scale: 1 },
+                                  hover: { scale: [1, 1.3, 1], transition: { repeat: Infinity, duration: 1.5, delay: 0.4 } }
+                                }}
+                              />
+                              <motion.circle
+                                cx="140"
+                                cy="120"
+                                r="4"
+                                className="fill-canvas stroke-ink/20"
+                                strokeWidth="1"
+                                variants={{
+                                  initial: { scale: 1 },
+                                  hover: { scale: [1, 1.3, 1], transition: { repeat: Infinity, duration: 1.5, delay: 0.6 } }
+                                }}
+                              />
+                              <motion.circle
+                                cx="140"
+                                cy="160"
+                                r="4"
+                                className="fill-canvas stroke-ink/20"
+                                strokeWidth="1"
+                                variants={{
+                                  initial: { scale: 1 },
+                                  hover: { scale: [1, 1.3, 1], transition: { repeat: Infinity, duration: 1.5, delay: 0.8 } }
+                                }}
+                              />
+                            </svg>
+                          )}
+
+                          {item.num === '02' && (
+                            <svg
+                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
+                              viewBox="0 0 200 200"
+                              fill="none"
+                            >
+                              {/* Orbital Rings with motion.g to rotate them cleanly */}
+                              <motion.g
+                                variants={{
+                                  initial: { rotate: 0 },
+                                  hover: { rotate: 360, transition: { repeat: Infinity, duration: 15, ease: "linear" } }
+                                }}
+                                style={{ transformOrigin: "100px 100px" }}
+                              >
+                                <circle
+                                  cx="100"
+                                  cy="100"
+                                  r="35"
+                                  stroke="currentColor"
+                                  strokeWidth="1"
+                                  strokeDasharray="4 4"
+                                />
+                                <circle
+                                  cx="100"
+                                  cy="65"
+                                  r="3"
+                                  className="fill-canvas stroke-ink/30"
+                                  strokeWidth="1"
+                                />
+                              </motion.g>
+
+                              <motion.g
+                                variants={{
+                                  initial: { rotate: 0 },
+                                  hover: { rotate: -360, transition: { repeat: Infinity, duration: 20, ease: "linear" } }
+                                }}
+                                style={{ transformOrigin: "100px 100px" }}
+                              >
+                                <circle
+                                  cx="100"
+                                  cy="100"
+                                  r="60"
+                                  stroke="currentColor"
+                                  strokeWidth="1"
+                                  strokeDasharray="6 3"
+                                />
+                                <circle
+                                  cx="160"
+                                  cy="100"
+                                  r="3"
+                                  className="fill-canvas stroke-ink/30"
+                                  strokeWidth="1"
+                                />
+                              </motion.g>
+
+                              <motion.g
+                                variants={{
+                                  initial: { rotate: 0 },
+                                  hover: { rotate: 180, transition: { repeat: Infinity, duration: 25, ease: "linear" } }
+                                }}
+                                style={{ transformOrigin: "100px 100px" }}
+                              >
+                                <circle
+                                  cx="100"
+                                  cy="100"
+                                  r="80"
+                                  stroke="currentColor"
+                                  strokeWidth="1"
+                                  strokeDasharray="2 6"
+                                />
+                              </motion.g>
+
+                              {/* Central Citation Node */}
+                              <motion.circle
+                                cx="100"
+                                cy="100"
+                                r="10"
+                                className="fill-canvas stroke-ink/40"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { scale: 1, opacity: 0.7 },
+                                  hover: { scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7], transition: { repeat: Infinity, duration: 2, ease: "easeInOut" } }
+                                }}
+                              />
+
+                              {/* Micro labels */}
+                              <text x="115" y="103" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[ENTITY]</text>
+                              <text x="50" y="145" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[CONTEXT]</text>
+                              <text x="85" y="50" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[REF]</text>
+                            </svg>
+                          )}
+
+                          {item.num === '03' && (
+                            <svg
+                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
+                              viewBox="0 0 200 200"
+                              fill="none"
+                            >
+                              {/* Grid Lines */}
+                              <line x1="20" y1="160" x2="180" y2="160" stroke="currentColor" strokeWidth="1" />
+                              <line x1="20" y1="30" x2="20" y2="160" stroke="currentColor" strokeWidth="1" />
+                              <line x1="20" y1="120" x2="180" y2="120" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
+                              <line x1="20" y1="80" x2="180" y2="80" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
+                              <line x1="20" y1="40" x2="180" y2="40" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
+
+                              {/* Spline Curve */}
+                              <motion.path
+                                d="M 20 150 Q 60 130 90 90 T 170 50"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                variants={{
+                                  initial: { pathLength: 0 },
+                                  hover: { pathLength: 1, transition: { duration: 1.5, ease: "easeInOut" } }
+                                }}
+                              />
+
+                              {/* Candlestick 1 */}
+                              <g className="text-ink/40">
+                                {/* Wick */}
+                                <motion.line
+                                  x1="80"
+                                  y1="70"
+                                  x2="80"
+                                  y2="130"
+                                  stroke="currentColor"
+                                  strokeWidth="1"
+                                  variants={{
+                                    initial: { scaleY: 0 },
+                                    hover: { scaleY: 1, transition: { duration: 0.8, ease: "easeOut" } }
+                                  }}
+                                  style={{ transformOrigin: "80px 100px" }}
+                                />
+                                {/* Body (filled) */}
+                                <motion.rect
+                                  x="75"
+                                  y="85"
+                                  width="10"
+                                  height="30"
+                                  className="fill-ink/10 stroke-ink/30"
+                                  strokeWidth="1"
+                                  variants={{
+                                    initial: { scaleY: 0 },
+                                    hover: { scaleY: 1, transition: { duration: 1, ease: "easeOut", delay: 0.2 } }
+                                  }}
+                                  style={{ transformOrigin: "80px 115px" }}
+                                />
+                              </g>
+
+                              {/* Candlestick 2 */}
+                              <g className="text-ink/40">
+                                {/* Wick */}
+                                <motion.line
+                                  x1="130"
+                                  y1="40"
+                                  x2="130"
+                                  y2="110"
+                                  stroke="currentColor"
+                                  strokeWidth="1"
+                                  variants={{
+                                    initial: { scaleY: 0 },
+                                    hover: { scaleY: 1, transition: { duration: 0.8, ease: "easeOut" } }
+                                  }}
+                                  style={{ transformOrigin: "130px 75px" }}
+                                />
+                                {/* Body (hollow) */}
+                                <motion.rect
+                                  x="125"
+                                  y="55"
+                                  width="10"
+                                  height="35"
+                                  className="fill-canvas stroke-ink/30"
+                                  strokeWidth="1"
+                                  variants={{
+                                    initial: { scaleY: 0 },
+                                    hover: { scaleY: 1, transition: { duration: 1, ease: "easeOut", delay: 0.2 } }
+                                  }}
+                                  style={{ transformOrigin: "130px 90px" }}
+                                />
+                              </g>
+
+                              <text x="145" y="150" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[DATA_SET]</text>
+                            </svg>
+                          )}
+
+                          {item.num === '04' && (
+                            <svg
+                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
+                              viewBox="0 0 200 200"
+                              fill="none"
+                            >
+                              {/* Browser Window mockup */}
+                              <motion.rect
+                                x="25"
+                                y="45"
+                                width="150"
+                                height="110"
+                                rx="3"
+                                stroke="currentColor"
+                                strokeWidth="1"
+                                variants={{
+                                  initial: { pathLength: 0.4 },
+                                  hover: { pathLength: 1, transition: { duration: 1, ease: "easeInOut" } }
+                                }}
+                              />
+                              {/* Title bar line */}
+                              <line x1="25" y1="58" x2="175" y2="58" stroke="currentColor" strokeWidth="0.8" />
+                              {/* Window buttons */}
+                              <circle cx="33" cy="51" r="2" stroke="currentColor" strokeWidth="0.5" />
+                              <circle cx="39" cy="51" r="2" stroke="currentColor" strokeWidth="0.5" />
+                              <circle cx="45" cy="51" r="2" stroke="currentColor" strokeWidth="0.5" />
+
+                              {/* Address bar */}
+                              <rect x="55" y="48" width="90" height="6" rx="1.5" stroke="currentColor" strokeWidth="0.5" />
+
+                              {/* Column layout guides inside window */}
+                              <motion.g
+                                variants={{
+                                  initial: { opacity: 0.2, y: 5 },
+                                  hover: { opacity: 0.6, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                                }}
+                              >
+                                {/* Grid Content Blocks */}
+                                <rect x="35" y="68" width="40" height="35" rx="1" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 2" />
+                                <rect x="80" y="68" width="40" height="55" rx="1" stroke="currentColor" strokeWidth="0.8" />
+                                <rect x="125" y="68" width="40" height="25" rx="1" stroke="currentColor" strokeWidth="0.8" />
+                                
+                                <line x1="35" y1="110" x2="75" y2="110" stroke="currentColor" strokeWidth="0.8" />
+                                <line x1="35" y1="115" x2="60" y2="115" stroke="currentColor" strokeWidth="0.8" />
+                              </motion.g>
+
+                              {/* Crop marks (corners) */}
+                              <motion.path
+                                d="M 15 45 L 15 35 L 25 35 M 15 35 L 20 40"
+                                stroke="currentColor"
+                                strokeWidth="0.5"
+                                variants={{
+                                  initial: { x: 0, y: 0 },
+                                  hover: { x: -3, y: -3, transition: { duration: 0.5, ease: "easeOut" } }
+                                }}
+                              />
+                              <motion.path
+                                d="M 185 45 L 185 35 L 175 35 M 185 35 L 180 40"
+                                stroke="currentColor"
+                                strokeWidth="0.5"
+                                variants={{
+                                  initial: { x: 0, y: 0 },
+                                  hover: { x: 3, y: -3, transition: { duration: 0.5, ease: "easeOut" } }
+                                }}
+                              />
+
+                              {/* Pixel Resolution Label */}
+                              <text x="25" y="170" className="fill-ink/30 font-sans text-[6px] tracking-widest uppercase pointer-events-none select-none">[W:1920 PX | H:1080 PX]</text>
+                            </svg>
+                          )}
+                        </motion.div>
+                      </ScrollReveal>
+                    </div>
+                  ))}
+                            </div>
+                  <div className="pt-32 w-full flex justify-start md:justify-end">
+                    <a href="#selected-works" id="discipline-view-work-link" className="hover-target text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
+                  </div>
+               </div>
+            </div>
+         </section>
 
         {/* INTERSTITIAL SECTION */}
         <section className="w-full h-[50vh] md:h-[80vh] overflow-hidden hover-target relative">
@@ -849,6 +1324,7 @@ function HomePage() {
                               required
                               id="contact-name"
                               name="name"
+                              autoComplete="name"
                               placeholder="YOUR NAME" 
                               value={name}
                               onChange={(e) => setName(e.target.value)}
@@ -859,6 +1335,7 @@ function HomePage() {
                               required
                               id="contact-email"
                               name="email"
+                              autoComplete="email"
                               placeholder="YOUR EMAIL" 
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
@@ -909,6 +1386,7 @@ function HomePage() {
                            <a href="/atlas" id="footer-link-atlas" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Atlas</a>
                            <a href="/markets" id="footer-link-markets" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Markets Research</a>
                            <a href="/method" id="footer-social-void" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Void Agency</a>
+                           <a href="/ai-information" id="footer-link-ai-information" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">AI Information</a>
                            <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Email</a>
                            <a href="#contact" id="footer-link-contact" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Contact</a>
                         </div>

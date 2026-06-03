@@ -15,7 +15,7 @@ export function KineticTypography() {
 
   return (
     <div ref={containerRef} className="w-full h-full bg-ink text-canvas overflow-hidden flex flex-col justify-center relative">
-      <div className="absolute inset-0 bg-noise opacity-30 mix-blend-overlay pointer-events-none" />
+
       
       <motion.div style={{ x: x1, willChange: 'transform', backfaceVisibility: 'hidden' }} className="flex whitespace-nowrap transform-gpu">
         <span className="text-[15vw] md:text-[10vw] font-sans font-black uppercase tracking-tighter mix-blend-difference opacity-20">

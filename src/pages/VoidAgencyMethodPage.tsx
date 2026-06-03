@@ -5,13 +5,15 @@ import VoidCrawlMap from '../components/VoidCrawlMap';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
-import { ShutterWipe } from '../components/ShutterWipe';
 import { SmoothCursor } from '../components/SmoothCursor';
 import { ScrambleText } from '../components/ScrambleText';
 import { RevealText } from '../components/RevealText';
 import { StaggeredText } from '../components/StaggeredText';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { getSeoRoute } from '../seo/routes';
+import { InternalHeader } from '../components/InternalHeader';
+import { InternalFooter } from '../components/InternalFooter';
+import { WireframeGrid } from '../components/WireframeGrid';
 
 const METHOD_SEO = getSeoRoute('/method')!;
 
@@ -33,23 +35,11 @@ type CaseStudy = {
   title: string;
   copy: string;
   visual: 'urls' | 'entity' | 'heatmap' | 'local';
-  href: string;
+  href?: string;
+  cta: string;
 };
 
-function NavLink({ href, active, id, children }: { href: string; active?: boolean; id?: string; children: ReactNode }) {
-  return (
-    <a
-      href={href}
-      id={id}
-      data-cursor-text={typeof children === 'string' ? children : 'VIEW'}
-      className={`hover-target relative group overflow-visible px-3 py-1 transition-colors ${active ? 'text-[#f1efe8]' : 'text-[#f1efe8]/58 hover:text-[#f1efe8]'}`}
-    >
-      <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">{children}</span>
-      <span className={`absolute left-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>[</span>
-      <span className={`absolute right-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>]</span>
-    </a>
-  );
-}
+
 
 const methodColumns: MethodColumn[] = [
   {
@@ -107,43 +97,33 @@ const caseStudies: CaseStudy[] = [
     title: 'Indexation Audit at Scale',
     visual: 'urls',
     href: '/atlas',
+    cta: 'VIEW CASE STUDY',
     copy: 'Mapped thousands of URLs to uncover crawl waste, duplicate templates, weak canonicals, orphaned pages, redirect chains, and pages blocked from meaningful discovery.',
   },
   {
     category: 'AI SEARCH',
     title: 'AI Visibility Benchmark',
     visual: 'entity',
-    href: '#case-studies',
+    cta: 'PREVIEW FRAMEWORK',
     copy: 'Reviewed whether a company could be clearly understood and cited by AI systems. Tested entity, clarity, answer-ready pages, schema, source structure, and crawler access.',
   },
   {
     category: 'ECOMMERCE SEO',
     title: 'Product Discovery System',
     visual: 'heatmap',
-    href: '#case-studies',
+    cta: 'PREVIEW FRAMEWORK',
     copy: 'Audited product and collection pages to find missing metadata, thin templates, weak internal links, duplicate paths, and search-intent gaps.',
   },
   {
     category: 'LOCAL SEO',
     title: 'Service-Area Visibility Audit',
     visual: 'local',
-    href: '#case-studies',
+    cta: 'PREVIEW FRAMEWORK',
     copy: 'Mapped location pages, service pages, Google Business Profile signals, crawl structure, and local entity clarity to improve discovery in high-intent searches.',
   },
 ];
 
-function DarkNoise() {
-  return (
-    <div
-      className="pointer-events-none fixed inset-0 z-30 opacity-[0.055]"
-      style={{
-        backgroundImage:
-          'radial-gradient(circle at 24% 20%, rgba(241,239,232,0.24) 0 1px, transparent 1.6px), radial-gradient(circle at 78% 70%, rgba(241,239,232,0.14) 0 1px, transparent 1.8px)',
-        backgroundSize: '17px 19px, 23px 29px',
-      }}
-    />
-  );
-}
+
 
 function ArrowLink({ children, href = '#', id }: { children: ReactNode; href?: string; id?: string }) {
   return (
@@ -571,7 +551,16 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
       <div className="my-9 self-center transition-opacity duration-500 md:opacity-75 md:group-hover:opacity-100">
         <CaseStudyVisual type={study.visual} isHovered={isHovered} />
       </div>
-      <ArrowLink id={`method-case-study-${study.title.toLowerCase().replace(/\s+/g, '-')}`} href={study.href}>VIEW CASE STUDY</ArrowLink>
+      {study.href ? (
+        <ArrowLink id={`method-case-study-${study.title.toLowerCase().replace(/\s+/g, '-')}`} href={study.href}>{study.cta}</ArrowLink>
+      ) : (
+        <span
+          id={`method-case-study-${study.title.toLowerCase().replace(/\s+/g, '-')}`}
+          className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42"
+        >
+          {study.cta}
+        </span>
+      )}
     </motion.article>
   );
 }
@@ -580,39 +569,22 @@ export default function VoidAgencyMethodPage() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <main id="top" className="min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] md:cursor-none">
-      <ShutterWipe />
-      <DarkNoise />
+    <main id="top" className="relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] md:cursor-none">
+      <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
       {!prefersReducedMotion && <div className="hidden md:block">
         <SmoothCursor />
       </div>}
       <ScrollProgress />
 
-      <header className="sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-6 md:px-8 xl:px-10">
-        <div className="grid items-start gap-5 border-b border-[#f1efe8]/12 bg-[#080807]/82 pb-5 text-[10px] uppercase tracking-[0.3em] backdrop-blur-sm md:grid-cols-[1fr_auto_1fr]">
-          <a href="/" id="method-brand-link" className="hover-target" data-cursor-text="HOME">
-            <span className="block font-medium text-[#f1efe8]">VOID AGENCY</span>
-            <span className="mt-2 block font-serif text-sm italic normal-case tracking-normal text-[#f1efe8]/54">Technical SEO · AI Search · Web Visibility</span>
-          </a>
-          <nav className="flex flex-wrap items-center gap-3 md:justify-center md:gap-6">
-            <NavLink href="/#selected-works" id="method-nav-work">WORK</NavLink>
-            <NavLink href="/method" active id="method-nav-method">METHOD</NavLink>
-            <NavLink href="/about" id="method-nav-about">ABOUT</NavLink>
-            <NavLink href="/#contact" id="method-nav-contact">CONTACT</NavLink>
-          </nav>
-          <a href="/#contact" id="method-header-contact" data-cursor-text="CONTACT" className="hover-target flex items-center gap-4 justify-self-start text-[#f1efe8]/75 transition-colors hover:text-[#f1efe8] md:justify-self-end">
-            <span className="h-7 w-7 rounded-full border border-[#f1efe8]/28" />
-            <span>CONTACT</span>
-          </a>
-        </div>
-      </header>
+      <InternalHeader activePath="/method" tone="dark" />
 
-      <section className="mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] xl:px-10 xl:pt-20">
+      <section className="relative z-10 mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] xl:px-10 xl:pt-20">
         <ScrollReveal yOffset={18} blur={false} className="min-w-0">
           <div className="mb-9 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/48">METHOD</div>
           <h1 
             style={{ viewTransitionName: 'void-title' } as CSSProperties}
+            aria-label="Void Agency."
             className="font-serif text-[clamp(5.2rem,12vw,12.4rem)] italic leading-[0.74] tracking-[-0.055em] text-[#f1efe8]"
           >
             <ScrambleText text="VOID" trigger="once" />
@@ -620,9 +592,9 @@ export default function VoidAgencyMethodPage() {
             <ScrambleText text="AGENCY." trigger="once" />
           </h1>
           <p className="mt-12 max-w-xl text-sm font-medium uppercase leading-relaxed tracking-[0.24em] text-[#f1efe8]/82">
-            <RevealText text="TECHNICAL SEO SYSTEMS FOR SEARCH," delay={0.25} />
+            <RevealText text="TECHNICAL SEO SYSTEMS FOR SEARCH," delay={0.25} elementType="span" />
             <br />
-            <RevealText text="AI VISIBILITY, AND CONVERSION." delay={0.4} />
+            <RevealText text="AI VISIBILITY, AND CONVERSION." delay={0.4} elementType="span" />
           </p>
           <p className="mt-8 max-w-[34rem] text-base leading-relaxed text-[#f1efe8]/58">
             Void Agency audits the technical layer behind search visibility: crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and AI crawler access. The goal is simple: make your site easier to find, understand, cite, and act on.
@@ -679,7 +651,7 @@ export default function VoidAgencyMethodPage() {
             A technical SEO process built for accuracy, evidence, and implementation. Void Agency turns messy site data into a clear plan that teams can act on.
           </p>
           <div className="mt-9">
-            <ArrowLink href="#how-it-works">VIEW TECH STACK</ArrowLink>
+            <span className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42">PROCESS OVERVIEW</span>
           </div>
         </ScrollReveal>
 
@@ -695,7 +667,7 @@ export default function VoidAgencyMethodPage() {
       <section id="case-studies" className="mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-12 flex flex-col justify-between gap-6 border-b border-[#f1efe8]/12 pb-8 md:flex-row md:items-end">
           <h2 className="font-serif text-[clamp(4rem,8vw,9rem)] italic leading-none tracking-[-0.045em]">VOID IN ACTION</h2>
-          <ArrowLink href="#case-studies">VIEW ALL CASE STUDIES</ArrowLink>
+          <span className="text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42">CASE STUDY INDEX</span>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -730,24 +702,7 @@ export default function VoidAgencyMethodPage() {
         </ScrollReveal>
       </section>
 
-      <footer className="mx-auto grid max-w-[1480px] grid-cols-1 items-start gap-8 border-t border-[#f1efe8]/12 px-4 py-8 text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/54 md:grid-cols-[1fr_auto_1fr_auto] md:px-8 xl:px-10">
-        <div>
-          <div className="text-[#f1efe8]">VOID AGENCY</div>
-          <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">Technical SEO · AI Search · Web Visibility</div>
-        </div>
-        <nav className="flex flex-wrap gap-5" id="method-footer-nav">
-          <NavLink href="/#selected-works" id="method-footer-work">WORK</NavLink>
-          <NavLink href="/method" id="method-footer-method" active>METHOD</NavLink>
-          <NavLink href="/about" id="method-footer-about">ABOUT</NavLink>
-          <NavLink href="/#contact" id="method-footer-contact">CONTACT</NavLink>
-        </nav>
-        <div className="md:text-right">
-          © 2026 VOID AGENCY
-          <br />
-          ALL RIGHTS RESERVED
-        </div>
-        <a href="#top" id="method-back-to-top" aria-label="Back to top" data-cursor-text="TOP" className="hover-target h-9 w-9 rounded-full border border-[#f1efe8]/26 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]" />
-      </footer>
+      <InternalFooter activePath="/method" tone="dark" />
     </main>
   );
 }

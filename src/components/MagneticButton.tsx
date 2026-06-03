@@ -5,6 +5,7 @@ interface MagneticButtonProps {
   children: ReactNode;
   className?: string;
   strength?: number;
+  key?: any;
 }
 
 export function MagneticButton({ children, className = '', strength = 0.5 }: MagneticButtonProps) {

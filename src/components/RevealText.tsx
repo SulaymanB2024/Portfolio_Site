@@ -45,6 +45,7 @@ export function RevealText({ text, delay = 0, className = '', elementType = 'div
       whileInView="visible"
       viewport={{ once: true, margin: '-50px' }}
       className={`inline-flex flex-wrap ${className}`}
+      aria-label={text}
     >
       {words.map((word, index) => (
         <motion.span
@@ -53,6 +54,7 @@ export function RevealText({ text, delay = 0, className = '', elementType = 'div
           key={index}
         >
           {word}
+          {index < words.length - 1 ? ' ' : ''}
         </motion.span>
       ))}
     </MotionComponent>

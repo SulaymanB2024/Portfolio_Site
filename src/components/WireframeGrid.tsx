@@ -5,9 +5,10 @@ interface WireframeGridProps {
   className?: string;
   cols?: number;
   rows?: number;
+  tone?: 'light' | 'dark';
 }
 
-export function WireframeGrid({ className = '', cols = 12, rows = 12 }: WireframeGridProps) {
+export function WireframeGrid({ className = '', cols = 12, rows = 12, tone = 'dark' }: WireframeGridProps) {
   const [isMobile, setIsMobile] = useState(false);
   
   const mouseX = useMotionValue(0);
@@ -40,6 +41,13 @@ export function WireframeGrid({ className = '', cols = 12, rows = 12 }: Wirefram
   const actualCols = isMobile ? Math.floor(cols / 2) : cols;
   const actualRows = isMobile ? Math.floor(rows / 2) : rows;
 
+  const isDark = tone === 'dark';
+  const gridLineClass = isDark ? 'bg-canvas/15' : 'bg-ink/5';
+  const textClass = isDark ? 'text-canvas/30' : 'text-ink/20';
+  const crosshairClass = isDark ? 'border-canvas/30' : 'border-ink/15';
+  const cornerCrosshairClass = isDark ? 'border-canvas/40' : 'border-ink/22';
+  const centerFillClass = isDark ? 'bg-canvas/40' : 'bg-ink/30';
+
   return (
     <div className={`relative w-full h-full overflow-hidden ${className}`} aria-hidden="true">
       {/* Grid Lines */}
@@ -54,19 +62,19 @@ export function WireframeGrid({ className = '', cols = 12, rows = 12 }: Wirefram
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true, margin: '-5%' }}
             transition={{ duration: 1.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="h-full w-[1px] bg-canvas/30 origin-top flex flex-col justify-between items-center py-2"
+            className={`h-full w-[1px] ${gridLineClass} origin-top flex flex-col justify-between items-center py-2`}
           >
             {i % 3 === 0 && (
               <>
                 <motion.span 
                   style={{ x: animX, y: animY }}
-                  className="text-[8px] font-sans text-canvas/40 -translate-x-1/2 rotate-90 origin-left mt-4 block"
+                  className={`text-[8px] font-sans ${textClass} -translate-x-1/2 rotate-90 origin-left mt-4 block`}
                 >
                   C.{i.toString().padStart(2, '0')}
                 </motion.span>
                 <motion.span 
                   style={{ x: animX, y: animY }}
-                  className="text-[8px] font-sans text-canvas/40 -translate-x-1/2 rotate-90 origin-left mb-8 block"
+                  className={`text-[8px] font-sans ${textClass} -translate-x-1/2 rotate-90 origin-left mb-8 block`}
                 >
                   C.{i.toString().padStart(2, '0')}
                 </motion.span>
@@ -86,19 +94,19 @@ export function WireframeGrid({ className = '', cols = 12, rows = 12 }: Wirefram
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true, margin: '-5%' }}
             transition={{ duration: 1.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full h-[1px] bg-canvas/30 origin-left flex justify-between items-center px-2"
+            className={`w-full h-[1px] ${gridLineClass} origin-left flex justify-between items-center px-2`}
           >
            {i % 3 === 0 && (
               <>
                 <motion.span 
                   style={{ x: animX, y: animY }}
-                  className="text-[8px] font-sans text-canvas/40 mt-[12px] block"
+                  className={`text-[8px] font-sans ${textClass} mt-[12px] block`}
                 >
                   R.{i.toString().padStart(2, '0')}
                 </motion.span>
                 <motion.span 
                   style={{ x: animX, y: animY }}
-                  className="text-[8px] font-sans text-canvas/40 mt-[12px] block"
+                  className={`text-[8px] font-sans ${textClass} mt-[12px] block`}
                 >
                   R.{i.toString().padStart(2, '0')}
                 </motion.span>
@@ -109,13 +117,13 @@ export function WireframeGrid({ className = '', cols = 12, rows = 12 }: Wirefram
       </div>
       
       {/* Target Crosshairs in corners */}
-      <div className="absolute top-8 left-8 w-4 h-4 border-t border-l border-canvas/50" />
-      <div className="absolute top-8 right-8 w-4 h-4 border-t border-r border-canvas/50" />
-      <div className="absolute bottom-8 left-8 w-4 h-4 border-b border-l border-canvas/50" />
-      <div className="absolute bottom-8 right-8 w-4 h-4 border-b border-r border-canvas/50" />
+      <div className={`absolute top-8 left-8 w-4 h-4 border-t border-l ${cornerCrosshairClass}`} />
+      <div className={`absolute top-8 right-8 w-4 h-4 border-t border-r ${cornerCrosshairClass}`} />
+      <div className={`absolute bottom-8 left-8 w-4 h-4 border-b border-l ${cornerCrosshairClass}`} />
+      <div className={`absolute bottom-8 right-8 w-4 h-4 border-b border-r ${cornerCrosshairClass}`} />
       
-      <div className="absolute top-1/2 left-1/2 w-6 h-6 border border-canvas/30 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center">
-         <div className="w-[1px] h-2 bg-canvas/50" />
+      <div className={`absolute top-1/2 left-1/2 w-6 h-6 border ${crosshairClass} -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center`}>
+         <div className={`w-[1px] h-2 ${centerFillClass}`} />
       </div>
     </div>
   );

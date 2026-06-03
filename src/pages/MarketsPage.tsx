@@ -9,22 +9,12 @@ import { ScrollProgress } from '../components/ScrollProgress';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { getSeoRoute } from '../seo/routes';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
-import { ShutterWipe } from '../components/ShutterWipe';
+import { InternalHeader } from '../components/InternalHeader';
+import { InternalFooter } from '../components/InternalFooter';
+import { useFocusTrap } from '../hooks/useFocusTrap';
+import { WireframeGrid } from '../components/WireframeGrid';
 
 const MARKETS_SEO = getSeoRoute('/markets')!;
-
-function DarkNoise() {
-  return (
-    <div
-      className="pointer-events-none fixed inset-0 z-30 opacity-[0.055]"
-      style={{
-        backgroundImage:
-          'radial-gradient(circle at 22% 28%, rgba(241,239,232,0.24) 0 1px, transparent 1.6px), radial-gradient(circle at 70% 64%, rgba(241,239,232,0.16) 0 1px, transparent 1.7px)',
-        backgroundSize: '17px 21px, 25px 31px',
-      }}
-    />
-  );
-}
 
 // Mini spinning Compass/Reticle Icon for Page Header
 function HeaderReticle() {
@@ -36,46 +26,6 @@ function HeaderReticle() {
       <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" strokeWidth="0.5" />
       <circle cx="12" cy="12" r="1.5" fill="currentColor" />
     </svg>
-  );
-}
-
-// 1. Navigation Link Component
-function NavLink({ href, active, id, children }: { href: string; active?: boolean; id?: string; children: ReactNode }) {
-  return (
-    <a
-      href={href}
-      id={id}
-      data-cursor-text={typeof children === 'string' ? children : 'VIEW'}
-      className={`hover-target relative group overflow-visible px-3 py-1 transition-colors ${active ? 'text-[#f1efe8]' : 'text-[#f1efe8]/58 hover:text-[#f1efe8]'}`}
-    >
-      <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">{children}</span>
-      <span className={`absolute left-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>[</span>
-      <span className={`absolute right-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>]</span>
-    </a>
-  );
-}
-
-// Page Header Component
-function PageHeader() {
-  return (
-    <header className="sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-6 md:px-8 xl:px-10">
-      <div className="grid items-start gap-5 border-b border-[#f1efe8]/12 bg-[#080807]/82 pb-5 text-[10px] uppercase tracking-[0.3em] backdrop-blur-sm md:grid-cols-[1fr_auto_1fr]">
-        <a href="/" id="markets-brand-link" className="hover-target" data-cursor-text="HOME">
-          <span className="block font-medium text-[#f1efe8]">SULAYMAN BOWLES</span>
-          <span className="mt-2 block font-serif text-sm italic normal-case tracking-normal text-[#f1efe8]/54">Technical SEO · AI Product · Finance/Data</span>
-        </a>
-        <nav className="flex flex-wrap items-center gap-3 md:justify-center md:gap-6">
-          <NavLink href="/#selected-works" id="markets-nav-work">WORK</NavLink>
-          <NavLink href="/method" id="markets-nav-method">METHOD</NavLink>
-          <NavLink href="/about" id="markets-nav-about">ABOUT</NavLink>
-          <NavLink href="/#contact" id="markets-nav-contact">CONTACT</NavLink>
-        </nav>
-        <a href="/#contact" id="markets-header-contact" data-cursor-text="CONTACT" className="hover-target flex items-center gap-4 justify-self-start text-[#f1efe8]/75 transition-colors hover:text-[#f1efe8] md:justify-self-end">
-          <span className="h-7 w-7 rounded-full border border-[#f1efe8]/28 flex-shrink-0" />
-          <span>CONTACT</span>
-        </a>
-      </div>
-    </header>
   );
 }
 
@@ -135,7 +85,7 @@ function SplitResearchVisual({ hoveredSystem, setHoveredSystem }: SplitVisualPro
           {/* LEFT SYSTEM: TRADITIONAL FINANCE */}
           <g className="transition-all duration-500" style={{ opacity: hoveredSystem === 'crypto' ? 0.25 : 1 }}>
             {/* Background system label */}
-            <text x="40" y="420" fill="rgba(241,239,232,0.03)" fontSize="48" fontFamily="serif" italic>Traditional</text>
+            <text x="40" y="420" fill="rgba(241,239,232,0.03)" fontSize="48" fontFamily="serif" fontStyle="italic">Traditional</text>
             
             {/* Filing Review (Node connection network) */}
             <g className="transition-all duration-300">
@@ -186,7 +136,7 @@ function SplitResearchVisual({ hoveredSystem, setHoveredSystem }: SplitVisualPro
           {/* RIGHT SYSTEM: CRYPTO RESEARCH */}
           <g className="transition-all duration-500" style={{ opacity: hoveredSystem === 'traditional' ? 0.25 : 1 }}>
             {/* Background system label */}
-            <text x="460" y="420" fill="rgba(241,239,232,0.03)" fontSize="48" fontFamily="serif" italic>Crypto</text>
+            <text x="460" y="420" fill="rgba(241,239,232,0.03)" fontSize="48" fontFamily="serif" fontStyle="italic">Crypto</text>
             
             {/* Token Supply Curve */}
             <g className="transition-all duration-300">
@@ -829,7 +779,7 @@ interface Artifact {
   title: string;
   summary: string;
   date: string;
-  size: string;
+  status: string;
   author: string;
   highlights: string[];
   metrics: { key: string; val: string }[];
@@ -837,8 +787,8 @@ interface Artifact {
 
 function ArtifactSection() {
   const [activeArtifact, setActiveArtifact] = useState<Artifact | null>(null);
-  const [downloading, setDownloading] = useState(false);
-  const [progress, setProgress] = useState(0);
+
+  const containerRef = useFocusTrap(!!activeArtifact);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -857,7 +807,7 @@ function ArtifactSection() {
       title: 'Appian Group (NASDAQ: APPN) Valuation Memo',
       summary: 'A 24-page deep dive reviewing workflow orchestration durability, recurring contract structures, and competitive moats in low-code platforms.',
       date: 'May 14, 2026',
-      size: '2.4 MB',
+      status: 'Preview only',
       author: 'Sulayman Bowles',
       highlights: [
         'Contract lock-in modeling showing less than 1.5% churn in core enterprise tier.',
@@ -876,7 +826,7 @@ function ArtifactSection() {
       title: 'Appian DCF & LBO Financial Spreadsheet',
       summary: 'Granular financial model containing a multi-stage Discounted Cash Flow and leveraged buyout scenario matrix built for valuation testing.',
       date: 'May 12, 2026',
-      size: '1.8 MB',
+      status: 'Available on request',
       author: 'Sulayman Bowles',
       highlights: [
         'Fully dynamic WACC calculations responding to sovereign interest rate shifts.',
@@ -895,7 +845,7 @@ function ArtifactSection() {
       title: 'Aerodrome ve(3,3) Flywheel Mechanics',
       summary: 'System architecture map detail diagraming token emission decays, fee distributions, and structural voting alignments.',
       date: 'May 16, 2026',
-      size: '780 KB',
+      status: 'Preview only',
       author: 'Sulayman Bowles',
       highlights: [
         'Vector paths of token routing from liquidity pools back to governance lockers.',
@@ -914,7 +864,7 @@ function ArtifactSection() {
       title: 'Global Liquidity & Volatility Analytics',
       summary: 'Interactive database covering sovereign balance sheets, yield curves, credit spreads, and local compression signals.',
       date: 'May 18, 2026',
-      size: '450 KB',
+      status: 'Framework preview',
       author: 'Sulayman Bowles',
       highlights: [
         'M2 money supply velocity charts across USA, EU, and China.',
@@ -933,7 +883,7 @@ function ArtifactSection() {
       title: 'Ethereum L2 Blob-Space Cost Analysis',
       summary: 'On-chain telemetry mapping transaction costs, data publication rates, and sequencer profits after the Dencun upgrade.',
       date: 'May 15, 2026',
-      size: '1.2 MB',
+      status: 'Framework preview',
       author: 'Sulayman Bowles',
       highlights: [
         'Data publishing margins across Arbitrum, Optimism, and Base.',
@@ -947,25 +897,6 @@ function ArtifactSection() {
       ]
     }
   ];
-
-  const handleDownload = (id: string) => {
-    setDownloading(true);
-    setProgress(0);
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setDownloading(false);
-            setProgress(0);
-            alert(`File "${id}" simulated download complete.`);
-          }, 300);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 80);
-  };
 
   return (
     <section className="py-12 border-b border-[#f1efe8]/14 space-y-8">
@@ -999,6 +930,10 @@ function ArtifactSection() {
             
             {/* Modal Body */}
             <motion.div 
+              ref={containerRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="artifact-modal-title"
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
@@ -1024,7 +959,7 @@ function ArtifactSection() {
                   {activeArtifact.tag}
                 </div>
                 
-                <h3 className="font-serif text-2xl lg:text-3xl text-[#f1efe8] leading-tight">
+                <h3 id="artifact-modal-title" className="font-serif text-2xl lg:text-3xl text-[#f1efe8] leading-tight">
                   {activeArtifact.title}
                 </h3>
                 
@@ -1040,8 +975,8 @@ function ArtifactSection() {
                   <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.date}</span>
                 </div>
                 <div>
-                  <span className="block text-[#f1efe8]/30">File Size</span>
-                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.size}</span>
+                  <span className="block text-[#f1efe8]/30">Artifact State</span>
+                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.status}</span>
                 </div>
                 <div>
                   <span className="block text-[#f1efe8]/30">Author</span>
@@ -1078,33 +1013,21 @@ function ArtifactSection() {
                 </div>
               </div>
 
-              {/* Action area / Download simulation */}
+              {/* Action area */}
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#f1efe8]/10">
                 <div className="font-mono text-[8px] text-[#f1efe8]/30 tracking-widest">
-                  SYS_SECURITY: SHA-256 CHECKED &amp; SIGNED
+                  PUBLIC PREVIEW: FULL FILE NOT BUNDLED
                 </div>
                 
-                <button
-                  id="artifact-download-btn"
-                  onClick={() => handleDownload(activeArtifact.id)}
-                  disabled={downloading}
+                <a
+                  id="artifact-request-btn"
+                  href={`mailto:sulayman.bowles@gmail.com?subject=${encodeURIComponent(`Research artifact request: ${activeArtifact.title}`)}`}
                   className="hover-target w-full sm:w-auto bg-[#f1efe8] text-[#080807] font-mono text-[10px] font-semibold uppercase tracking-wider px-6 py-2.5 hover:bg-[#f1efe8]/90 transition-colors disabled:opacity-50"
-                  data-cursor-text={downloading ? 'FETCHING' : 'SECURE DOWNLOAD'}
+                  data-cursor-text="REQUEST"
                 >
-                  {downloading ? `DOWNLOADING ${progress}%` : 'DOWNLOAD MEMO FILE'}
-                </button>
+                  REQUEST FULL FILE
+                </a>
               </div>
-
-              {/* simulated download progress bar */}
-              {downloading && (
-                <div className="absolute bottom-0 inset-x-0 h-1 bg-[#f1efe8]/10">
-                  <motion.div 
-                    className="h-full bg-[#b7c8a8]" 
-                    style={{ width: `${progress}%` }} 
-                    transition={{ duration: 0.1 }}
-                  />
-                </div>
-              )}
             </motion.div>
           </div>
         )}
@@ -1147,30 +1070,6 @@ function CaseUtilities() {
   );
 }
 
-// 9. Page Footer Component
-function PageFooter() {
-  return (
-    <footer className="w-full border-t border-[#f1efe8]/12 pt-8 text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/54 grid grid-cols-1 items-start gap-8 md:grid-cols-[1fr_auto_1fr_auto]">
-      <div>
-        <div className="text-[#f1efe8]">SULAYMAN BOWLES</div>
-        <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">Technical SEO · AI Product · Finance/Data</div>
-      </div>
-      <nav className="flex flex-wrap gap-5" id="markets-footer-nav">
-        <NavLink href="/#selected-works" id="markets-footer-work">WORK</NavLink>
-        <NavLink href="/method" id="markets-footer-method">METHOD</NavLink>
-        <NavLink href="/about" id="markets-footer-about">ABOUT</NavLink>
-        <NavLink href="/#contact" id="markets-footer-contact">CONTACT</NavLink>
-      </nav>
-      <div className="md:text-right">
-        © 2026 SULAYMAN BOWLES
-        <br />
-        ALL RIGHTS RESERVED
-      </div>
-      <a href="#top" id="markets-back-to-top" aria-label="Back to top" data-cursor-text="TOP" className="hover-target h-9 w-9 rounded-full border border-[#f1efe8]/28 transition-colors hover:bg-[#f1efe8] hover:text-[#080807] flex-shrink-0" />
-    </footer>
-  );
-}
-
 // Main Page Export
 export default function MarketsPage() {
   useSEO(MARKETS_SEO);
@@ -1184,16 +1083,15 @@ export default function MarketsPage() {
 
   return (
     <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased md:cursor-none">
-      <ShutterWipe />
+      <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
-      <DarkNoise />
 
       {!prefersReducedMotion && <div className="hidden md:block">
         <SmoothCursor />
       </div>}
       <ScrollProgress />
 
-      <PageHeader />
+      <InternalHeader activePath="/markets" tone="dark" />
 
       {/* 1480px Centered Container */}
       <div className="max-w-[1480px] mx-auto w-full px-4 md:px-8 xl:px-10 pt-4 pb-8 flex flex-col gap-9 relative z-10">
@@ -1228,7 +1126,7 @@ export default function MarketsPage() {
 
         <CaseUtilities />
 
-        <PageFooter />
+        <InternalFooter activePath="/markets" tone="dark" />
 
       </div>
     </main>

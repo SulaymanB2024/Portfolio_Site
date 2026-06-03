@@ -56,20 +56,7 @@ body {
   flex: 0 0 auto;
 }
 
-/* Beautiful organic noise */
-.bg-noise {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 30;
-  opacity: 0.055;
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(7, 7, 7, 0.22) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 70% 65%, rgba(7, 7, 7, 0.18) 0 1px, transparent 1.5px);
-  background-size: 13px 17px, 19px 23px;
-}
+
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -101,4 +88,88 @@ body {
     transition-duration: 0.001ms !important;
   }
 }
+
+.frosted-acrylic-light {
+  background: rgba(241, 239, 232, 0.65);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(8, 8, 7, 0.08);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.frosted-acrylic-dark {
+  background: rgba(8, 8, 7, 0.65);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(241, 239, 232, 0.08);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+@media print {
+  @page {
+    margin: 1.5cm 2cm;
+  }
+  
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+
+  header,
+  footer,
+  button,
+  .fixed,
+  .sticky,
+  div[class*="ScrollProgress"],
+  aside button {
+    display: none !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .mx-auto {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  section,
+  article,
+  .grid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  section {
+    border-color: rgba(8, 8, 7, 0.2) !important;
+  }
+
+  article {
+    border-color: rgba(8, 8, 7, 0.2) !important;
+    background-color: transparent !important;
+  }
+}
+
+/* Tactile click active feedback on all navigation options */
+a.hover-target:active {
+  transform: scale(0.95) !important;
+  opacity: 0.8 !important;
+  transition: transform 0.08s ease-out, opacity 0.08s ease-out;
+}
+a.hover-target:active span:not(.absolute) {
+  letter-spacing: 0.35em !important;
+  transition: letter-spacing 0.1s ease-out;
+}
+a.hover-target:active span.absolute {
+  transform: scale(1.45) !important;
+  opacity: 1 !important;
+  color: #b7c8a8 !important; /* accent flash */
+  transition: transform 0.08s ease-out, color 0.08s ease-out;
+}
+
 
