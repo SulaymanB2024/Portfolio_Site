@@ -1,0 +1,12 @@
+{
+  "title": "Roman toga diagram",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Roman_toga_diagram.svg",
+  "assetUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Roman_toga_diagram.svg",
+  "author": "LadyofHats",
+  "license": "Public domain",
+  "licenseNotes": "Wikimedia Commons lists the file as released into the public domain by its author, LadyofHats.",
+  "retrievedAt": "2026-06-03",
+  "localOriginal": "/art/roman-toga/roman-toga-diagram.svg",
+  "localDerivative": "/art/roman-toga/roman-toga-lines.svg",
+  "derivativeNotes": "The derivative removes the source SVG's white background rect so the diagram can render as a transparent faint line artifact."
+}

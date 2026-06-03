@@ -4,11 +4,11 @@ import { SmoothCursor } from './components/SmoothCursor';
 import { RevealText } from './components/RevealText';
 import { StaggeredText } from './components/StaggeredText';
 import { InkTrails } from './components/InkTrails';
+import { RomanTogaReveal } from './components/RomanTogaReveal';
 import { ScrambleText } from './components/ScrambleText';
 import { ScrollReveal } from './components/ScrollReveal';
 import { ScrollProgress } from './components/ScrollProgress';
 import { MagneticButton } from './components/MagneticButton';
-import { AudioWaveToggle } from './components/AudioWaveToggle';
 import { KineticTypography } from './components/KineticTypography';
 import { ShutterWipe } from './components/pageTransitions/ShutterWipe';
 import { usePageTransitions } from './hooks/usePageTransitions';
@@ -393,70 +393,57 @@ function HomePage() {
         transition={{ duration: 1, delay: 0.5 }}
         className="fixed top-0 w-full z-50 px-4 py-6 md:px-16 md:py-12 flex justify-between items-start mix-blend-difference text-canvas pointer-events-none select-none"
       >
-        <a href="/" id="nav-brand-home" className="pointer-events-auto hover-target flex flex-col items-start cursor-pointer transition-opacity hover:opacity-80 focus:outline-none focus:ring-1 focus:ring-canvas">
-          <span className="text-sm font-sans font-medium tracking-[0.2em] leading-none uppercase">Sulayman Bowles</span>
-          <span className="text-xs font-serif italic mt-2 text-canvas opacity-70">Technical SEO · AI Search · Finance/Data</span>
+        <a
+          href="/"
+          id="nav-brand-home"
+          aria-label="Home - Sulayman Bowles"
+          className="pointer-events-auto hover-target flex flex-col items-start cursor-pointer transition-opacity hover:opacity-80 focus:outline-none focus:ring-1 focus:ring-canvas"
+        >
+          <span className="text-sm font-sans font-medium tracking-[0.2em] leading-none uppercase">S. BOWLES</span>
         </a>
         
         <details className="pointer-events-auto md:hidden text-right text-xs font-sans tracking-[0.2em] font-medium uppercase">
           <summary className="hover-target cursor-pointer list-none px-2 py-1">Menu +</summary>
           <nav aria-label="Mobile Main Navigation" className="mt-3 grid gap-2 rounded border border-canvas/20 bg-ink/85 p-3 text-canvas shadow-2xl backdrop-blur">
             <a href="#selected-works" id="mobile-nav-work" data-cursor-text="WORK" className="hover-target px-2 py-1">Work</a>
+            <a href="/method" id="mobile-nav-method" data-cursor-text="METHOD" className="hover-target px-2 py-1">Method</a>
+            <a href="#contact" id="mobile-nav-contact" data-cursor-text="CONTACT" className="hover-target px-2 py-1">Contact</a>
             <a href="/atlas" id="mobile-nav-atlas" data-cursor-text="ATLAS" className="hover-target px-2 py-1">Atlas</a>
             <a href="/markets" id="mobile-nav-markets" data-cursor-text="RESEARCH" className="hover-target px-2 py-1">Research</a>
-            <a href="/method" id="mobile-nav-method" data-cursor-text="METHOD" className="hover-target px-2 py-1">Method</a>
             <a href="/about" id="mobile-nav-about" data-cursor-text="ABOUT" className="hover-target px-2 py-1">About</a>
             <a href="/resume" id="mobile-nav-resume" data-cursor-text="RESUME" className="hover-target px-2 py-1">Resume</a>
             <a href="/ai-information" id="mobile-nav-ai-information" data-cursor-text="INFO" className="hover-target px-2 py-1">AI Info</a>
-            <a href="#contact" id="mobile-nav-contact" data-cursor-text="CONTACT" className="hover-target px-2 py-1">Contact</a>
           </nav>
         </details>
 
         <nav aria-label="Main Navigation" className="pointer-events-auto hidden flex-col items-end gap-2 text-xs font-sans tracking-[0.2em] font-medium uppercase mix-blend-difference select-none md:flex">
           <a href="#selected-works" id="nav-work" data-cursor-text="WORK" className="hover-target relative group overflow-visible p-2 -m-2">
             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Work</span>
-            {/* Brackets that appear on hover */}
-            <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-            <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
-          <a href="/atlas" id="nav-atlas" data-cursor-text="ATLAS" className="hover-target relative group overflow-visible p-2 -m-2">
-             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Atlas</span>
-             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
-          <a href="/markets" id="nav-markets" data-cursor-text="RESEARCH" className="hover-target relative group overflow-visible p-2 -m-2">
-             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Research</span>
-             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
+            <span aria-hidden="true" className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
+            <span aria-hidden="true" className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
           </a>
           <a href="/method" id="nav-method" data-cursor-text="METHOD" className="hover-target relative group overflow-visible p-2 -m-2">
              <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Method</span>
-             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
-          <a href="/about" id="nav-about" data-cursor-text="ABOUT" className="hover-target relative group overflow-visible p-2 -m-2">
-             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">About</span>
-             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
-          <a href="/resume" id="nav-resume" data-cursor-text="RESUME" className="hover-target relative group overflow-visible p-2 -m-2">
-             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Resume</span>
-             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
-          <a href="/ai-information" id="nav-ai-information" data-cursor-text="INFO" className="hover-target relative group overflow-visible p-2 -m-2">
-             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">AI Info</span>
-             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
+             <span aria-hidden="true" className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
+             <span aria-hidden="true" className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
           </a>
           <a href="#contact" id="nav-contact" data-cursor-text="CONTACT" className="hover-target relative group overflow-visible p-2 -m-2">
              <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Contact</span>
-             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
+             <span aria-hidden="true" className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
+             <span aria-hidden="true" className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
           </a>
-          <div className="pt-4 pb-2">
-            <AudioWaveToggle />
-          </div>
+          <details className="relative group/index p-2 -m-2">
+            <summary className="hover-target cursor-pointer list-none transition-opacity hover:opacity-80" data-cursor-text="INDEX">
+              <span>Index +</span>
+            </summary>
+            <div className="absolute right-0 mt-3 grid min-w-[9rem] gap-2 border border-canvas/20 bg-ink/90 p-3 text-right text-canvas shadow-2xl backdrop-blur">
+              <a href="/atlas" id="nav-index-atlas" data-cursor-text="ATLAS" className="hover-target px-2 py-1 transition-opacity hover:opacity-70">Atlas</a>
+              <a href="/markets" id="nav-index-markets" data-cursor-text="RESEARCH" className="hover-target px-2 py-1 transition-opacity hover:opacity-70">Research</a>
+              <a href="/about" id="nav-index-about" data-cursor-text="ABOUT" className="hover-target px-2 py-1 transition-opacity hover:opacity-70">About</a>
+              <a href="/resume" id="nav-index-resume" data-cursor-text="RESUME" className="hover-target px-2 py-1 transition-opacity hover:opacity-70">Resume</a>
+              <a href="/ai-information" id="nav-index-ai-information" data-cursor-text="INFO" className="hover-target px-2 py-1 transition-opacity hover:opacity-70">AI Info</a>
+            </div>
+          </details>
         </nav>
       </motion.header>
 
@@ -469,79 +456,13 @@ function HomePage() {
             <FlowField className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-overlay" density={25} />
           </Suspense>}
           
-          {/* Animated SVG Title "Painted" effect */}
+          {/* Faint artifact reveal */}
           <motion.div 
             style={{ y: titleY, opacity: titleOpacity }} 
             className="w-full max-w-[1600px] mx-auto absolute top-[40%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none z-10"
           >
             {isLoaded && (
-               <svg viewBox="0 0 1000 300" className="w-[100vw] md:w-[85vw] h-auto overflow-visible" aria-hidden="true" focusable="false">
-                 <defs>
-                   {/* Create a sophisticated gradient stroke */}
-                   <linearGradient id="paint-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                     <stop offset="0%" stopColor="var(--color-ink)" />
-                     <stop offset="50%" stopColor="var(--color-ink)" stopOpacity="0.8" />
-                     <stop offset="100%" stopColor="var(--color-ink)" />
-                   </linearGradient>
-                 </defs>
-                  <motion.text
-                   x="50%"
-                   y="40%"
-                   textAnchor="middle"
-                   dominantBaseline="middle"
-                   className="font-serif italic font-light text-[140px] hover-target"
-                   data-cursor-text="SYSTEMS"
-                   fill="none"
-                   stroke="url(#paint-grad)"
-                   strokeWidth="1.5"
-                   initial={{ strokeDasharray: 2500, strokeDashoffset: 2500 }}
-                   animate={{ strokeDashoffset: 0 }}
-                   transition={{ duration: 4, ease: "easeInOut", delay: 0.5 }}
-                 >
-                   SULAYMAN
-                 </motion.text>
-                 <motion.text
-                   x="50%"
-                   y="40%"
-                   textAnchor="middle"
-                   dominantBaseline="middle"
-                   className="font-serif italic font-light text-[140px] fill-ink"
-                   initial={{ opacity: 0 }}
-                   animate={{ opacity: 1 }}
-                   transition={{ duration: 2, delay: 2.2 }}
-                 >
-                   SULAYMAN
-                 </motion.text>
-                 
-                 {/* Second Line */}
-                 <motion.text
-                   x="50%"
-                   y="85%"
-                   textAnchor="middle"
-                   dominantBaseline="middle"
-                   className="font-sans font-medium uppercase tracking-[0.4em] text-[24px]"
-                   fill="none"
-                   stroke="var(--color-ink)"
-                   strokeWidth="0.5"
-                   initial={{ strokeDasharray: 800, strokeDashoffset: 800 }}
-                   animate={{ strokeDashoffset: 0 }}
-                   transition={{ duration: 2.5, ease: "easeInOut", delay: 1 }}
-                 >
-                   BOWLES
-                 </motion.text>
-                 <motion.text
-                   x="50%"
-                   y="85%"
-                   textAnchor="middle"
-                   dominantBaseline="middle"
-                   className="font-sans font-medium uppercase tracking-[0.4em] text-[24px] fill-ink"
-                   initial={{ opacity: 0 }}
-                   animate={{ opacity: 1 }}
-                   transition={{ duration: 1.5, delay: 2.5 }}
-                 >
-                   BOWLES
-                 </motion.text>
-               </svg>
+              <RomanTogaReveal className="h-[min(34vh,260px)] min-h-[190px] w-[82vw] max-w-[520px] md:h-[min(46vh,520px)] md:min-h-[340px] md:w-[44vw] md:max-w-[620px]" />
             )}
            </motion.div>
 
@@ -557,7 +478,7 @@ function HomePage() {
 	                 Sulayman Bowles
 	               </h1>
 	               <p className="mt-5 max-w-md font-sans text-[10px] uppercase leading-relaxed tracking-[0.2em] text-ink/70 md:text-xs">
-	                 Technical SEO systems, AI-search discoverability, and finance/data tools.
+	                 Technical SEO, Atlas, and finance research.
 	               </p>
                 <div className="mt-6 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.24em] text-ink/64">
                   <a href="/atlas" id="hero-view-atlas-link" className="hover-target border-b border-ink/24 pb-2 transition-colors hover:border-ink hover:text-ink">View Atlas</a>
