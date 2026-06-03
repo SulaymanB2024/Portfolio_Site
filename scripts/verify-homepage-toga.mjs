@@ -21,12 +21,32 @@ if (!app.includes('RomanTogaReveal')) {
   failures.push('HomePage does not render RomanTogaReveal.');
 }
 
+if (!app.includes('absolute inset-0 z-[1]')) {
+  failures.push('Homepage toga layer is not a full-page inset layer.');
+}
+
+if (!app.includes('fit="cover"')) {
+  failures.push('Homepage toga layer does not use cover fit.');
+}
+
+if (app.includes('max-w-[520px]') || app.includes('md:max-w-[620px]')) {
+  failures.push('Homepage toga layer still uses centered max-width sizing.');
+}
+
 const component = existsSync('src/components/RomanTogaReveal.tsx')
   ? readFileSync('src/components/RomanTogaReveal.tsx', 'utf8')
   : '';
 
 if (!component.includes('/art/roman-toga/roman-toga-lines.svg')) {
   failures.push('RomanTogaReveal does not use the transparent toga derivative.');
+}
+
+if (!component.includes("fit?: 'contain' | 'cover'") || !component.includes("fit = 'contain'")) {
+  failures.push('RomanTogaReveal does not expose the contain/cover fit contract.');
+}
+
+if (!component.includes('data-toga-reveal-root')) {
+  failures.push('RomanTogaReveal does not expose a stable root marker for rendered page-scale checks.');
 }
 
 if (

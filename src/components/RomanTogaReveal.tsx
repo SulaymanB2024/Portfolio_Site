@@ -5,6 +5,7 @@ type RomanTogaRevealProps = {
   className?: string;
   assetHref?: string;
   disabled?: boolean;
+  fit?: 'contain' | 'cover';
   restOpacity?: number;
   revealOpacity?: number;
 };
@@ -19,10 +20,12 @@ type RevealPoint = {
 
 const DEFAULT_ASSET = '/art/roman-toga/roman-toga-lines.svg';
 
-function getContainRect(image: HTMLImageElement, width: number, height: number) {
+function getObjectFitRect(image: HTMLImageElement, width: number, height: number, fit: 'contain' | 'cover') {
   const naturalWidth = image.naturalWidth || 1;
   const naturalHeight = image.naturalHeight || 1;
-  const scale = Math.min(width / naturalWidth, height / naturalHeight);
+  const scale = fit === 'cover'
+    ? Math.max(width / naturalWidth, height / naturalHeight)
+    : Math.min(width / naturalWidth, height / naturalHeight);
   const drawWidth = naturalWidth * scale;
   const drawHeight = naturalHeight * scale;
 
@@ -38,6 +41,7 @@ export function RomanTogaReveal({
   className = '',
   assetHref = DEFAULT_ASSET,
   disabled = false,
+  fit = 'contain',
   restOpacity = 0.12,
   revealOpacity = 0.42,
 }: RomanTogaRevealProps) {
@@ -151,7 +155,7 @@ export function RomanTogaReveal({
       }
 
       if (pointsRef.current.length > 0 && image.complete) {
-        const imageRect = getContainRect(image, width, height);
+        const imageRect = getObjectFitRect(image, width, height, fit);
 
         ctx.save();
         ctx.globalAlpha = revealOpacity;
@@ -221,15 +225,23 @@ export function RomanTogaReveal({
         frameRef.current = null;
       }
     };
-  }, [assetHref, canReveal, revealOpacity]);
+  }, [assetHref, canReveal, fit, revealOpacity]);
+
+  const fitClassName = fit === 'cover' ? 'object-cover' : 'object-contain';
 
   return (
-    <div ref={containerRef} className={`relative isolate overflow-visible ${className}`} aria-hidden="true">
+    <div
+      ref={containerRef}
+      className={`relative isolate overflow-visible ${className}`}
+      data-toga-fit={fit}
+      data-toga-reveal-root="true"
+      aria-hidden="true"
+    >
       <img
         src={assetHref}
         alt=""
         draggable={false}
-        className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain"
+        className={`pointer-events-none absolute inset-0 h-full w-full select-none ${fitClassName}`}
         style={{
           opacity: restOpacity,
           filter: 'grayscale(1) contrast(1.22) brightness(0.5)',
@@ -241,7 +253,7 @@ export function RomanTogaReveal({
           src={assetHref}
           alt=""
           draggable={false}
-          className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain"
+          className={`pointer-events-none absolute inset-0 h-full w-full select-none ${fitClassName}`}
           style={{
             opacity: Math.min(revealOpacity * 0.22, 0.12),
             filter: 'grayscale(1) contrast(1.2) brightness(0.55)',

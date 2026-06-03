@@ -309,7 +309,6 @@ function HomePage() {
     }
   }, [isLoaded]);
 
-  const titleY = useTransform(scrollYProgress, [0, 0.4], [0, -150]);
   const subY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
@@ -458,11 +457,16 @@ function HomePage() {
           
           {/* Faint artifact reveal */}
           <motion.div 
-            style={{ y: titleY, opacity: titleOpacity }} 
-            className="w-full max-w-[1600px] mx-auto absolute top-[40%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none z-10"
+            style={{ opacity: titleOpacity }}
+            className="pointer-events-none absolute inset-0 z-[1]"
           >
             {isLoaded && (
-              <RomanTogaReveal className="h-[min(34vh,260px)] min-h-[190px] w-[82vw] max-w-[520px] md:h-[min(46vh,520px)] md:min-h-[340px] md:w-[44vw] md:max-w-[620px]" />
+              <RomanTogaReveal
+                fit="cover"
+                restOpacity={0.055}
+                revealOpacity={0.36}
+                className="h-full w-full"
+              />
             )}
            </motion.div>
 
@@ -471,7 +475,7 @@ function HomePage() {
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
              transition={{ duration: 1, delay: 2.8 }}
-             className="w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-ink/20 pb-8 gap-8 md:gap-0"
+             className="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-ink/20 pb-8 gap-8 md:gap-0"
            >
 	             <div className="max-w-[34rem]">
 	               <h1 className="font-serif text-5xl font-light leading-none tracking-normal text-ink md:text-7xl">
