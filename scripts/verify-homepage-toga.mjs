@@ -63,11 +63,20 @@ if (
 
 if (
   !component.includes('LARGE_FIGURE_CROP') ||
+  !component.includes('LARGE_FIGURE_FOCAL_POINT') ||
   !component.includes('getSourceRect(image, focus)') ||
   !component.includes('sourceRect.x') ||
   !component.includes('sourceRect.width')
 ) {
   failures.push('RomanTogaReveal does not crop canvas drawing to the large figure.');
+}
+
+if (!component.includes("objectPosition: 'left top'") || !component.includes("transformOrigin: 'left top'")) {
+  failures.push('RomanTogaReveal does not frame the large figure from the head/top.');
+}
+
+if (!component.includes('LARGE_FIGURE_MOBILE_TRANSFORM')) {
+  failures.push('RomanTogaReveal does not keep the large figure head visible on mobile.');
 }
 
 if (!component.includes('data-toga-focus={focus}')) {

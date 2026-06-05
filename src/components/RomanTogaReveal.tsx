@@ -32,6 +32,12 @@ const LARGE_FIGURE_CROP = {
   width: 218,
   height: SOURCE_VIEW_BOX.height,
 };
+const LARGE_FIGURE_FOCAL_POINT = {
+  x: 0,
+  y: 0,
+};
+const LARGE_FIGURE_DESKTOP_TRANSFORM = 'scale(2.55)';
+const LARGE_FIGURE_MOBILE_TRANSFORM = 'translateX(-32%) scale(2.55)';
 
 type SourceRect = {
   x: number;
@@ -61,7 +67,13 @@ function getSourceRect(image: HTMLImageElement, focus: RomanTogaFocus): SourceRe
   };
 }
 
-function getObjectFitRect(sourceRect: SourceRect, width: number, height: number, fit: 'contain' | 'cover') {
+function getObjectFitRect(
+  sourceRect: SourceRect,
+  width: number,
+  height: number,
+  fit: 'contain' | 'cover',
+  alignment = { x: 0.5, y: 0.5 },
+) {
   const scale = fit === 'cover'
     ? Math.max(width / sourceRect.width, height / sourceRect.height)
     : Math.min(width / sourceRect.width, height / sourceRect.height);
@@ -69,8 +81,8 @@ function getObjectFitRect(sourceRect: SourceRect, width: number, height: number,
   const drawHeight = sourceRect.height * scale;
 
   return {
-    x: (width - drawWidth) / 2,
-    y: (height - drawHeight) / 2,
+    x: (width - drawWidth) * alignment.x,
+    y: (height - drawHeight) * alignment.y,
     width: drawWidth,
     height: drawHeight,
   };
@@ -196,7 +208,8 @@ export function RomanTogaReveal({
 
       if (pointsRef.current.length > 0 && image.complete) {
         const sourceRect = getSourceRect(image, focus);
-        const imageRect = getObjectFitRect(sourceRect, width, height, fit);
+        const imageAlignment = focus === 'large-figure' ? LARGE_FIGURE_FOCAL_POINT : undefined;
+        const imageRect = getObjectFitRect(sourceRect, width, height, fit, imageAlignment);
 
         ctx.save();
         ctx.globalAlpha = revealOpacity;
@@ -281,9 +294,9 @@ export function RomanTogaReveal({
   const fitClassName = fit === 'cover' ? 'object-cover' : 'object-contain';
   const focusImageStyle: CSSProperties = focus === 'large-figure'
     ? {
-        objectPosition: 'left center',
-        transform: 'scale(2.55)',
-        transformOrigin: 'left center',
+        objectPosition: 'left top',
+        transform: isMobile ? LARGE_FIGURE_MOBILE_TRANSFORM : LARGE_FIGURE_DESKTOP_TRANSFORM,
+        transformOrigin: 'left top',
       }
     : {};
 
