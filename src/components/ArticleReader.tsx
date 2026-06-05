@@ -116,11 +116,11 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
 
         {/* Right scrollable panel for long-form reading */}
         <div className="relative z-10 flex-grow overflow-y-auto px-6 py-8 md:p-12 lg:p-16 select-text">
-          {/* Decorative Corner marks */}
-          <div className="pointer-events-none absolute top-4 left-4 text-[8px] text-[#f1efe8]/20 font-mono">⌜</div>
-          <div className="pointer-events-none absolute top-4 right-4 text-[8px] text-[#f1efe8]/20 font-mono">⌝</div>
-          <div className="pointer-events-none absolute bottom-4 left-4 text-[8px] text-[#f1efe8]/20 font-mono">⌞</div>
-          <div className="pointer-events-none absolute bottom-4 right-4 text-[8px] text-[#f1efe8]/20 font-mono">⌟</div>
+          {/* Decorative Corner marks (Real CSS Borders) */}
+          <div className="pointer-events-none absolute top-4 left-4 h-3 w-3 border-t border-l border-[#f1efe8]/20" />
+          <div className="pointer-events-none absolute top-4 right-4 h-3 w-3 border-t border-r border-[#f1efe8]/20" />
+          <div className="pointer-events-none absolute bottom-4 left-4 h-3 w-3 border-b border-l border-[#f1efe8]/20" />
+          <div className="pointer-events-none absolute bottom-4 right-4 h-3 w-3 border-b border-r border-[#f1efe8]/20" />
 
           <article className="max-w-2xl">
             <span className="text-[9.5px] font-medium uppercase tracking-[0.38em] text-[#b7c8a8]">{data.category}</span>
@@ -142,8 +142,11 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
                   const firstChar = paragraph.charAt(0);
                   const rest = paragraph.slice(1);
                   return (
-                    <p key={index} className="first-letter:float-left first-letter:text-4xl first-letter:font-serif first-letter:italic first-letter:mr-2.5 first-letter:leading-none first-letter:text-[#b7c8a8]">
-                      {paragraph}
+                    <p key={index}>
+                      <span className="float-left text-[3.85rem] font-serif italic mr-2.5 mt-1 leading-[0.8] text-[#b7c8a8] select-none">
+                        {firstChar}
+                      </span>
+                      {rest}
                     </p>
                   );
                 }
@@ -152,16 +155,23 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
             </div>
 
             {/* Monetarist / Quantitative Formula Box */}
-            <div className="my-10 border border-[#f1efe8]/12 bg-[#f1efe8]/[0.015] p-5 font-mono">
-              <div className="text-[8px] uppercase tracking-[0.24em] text-[#f1efe8]/45 mb-4 text-center">
+            <div className="my-10 border border-[#f1efe8]/12 bg-[#0c0c0b] p-6 relative overflow-hidden group">
+              {/* Terminal Grid Background */}
+              <div className="absolute inset-0 pointer-events-none opacity-[0.02] bg-[linear-gradient(to_right,#f1efe8_1px,transparent_1px),linear-gradient(to_bottom,#f1efe8_1px,transparent_1px)] bg-[size:10px_10px]" />
+              
+              {/* Internal corner marks */}
+              <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/20" />
+              <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/20" />
+
+              <div className="text-[8.5px] uppercase tracking-[0.24em] text-[#b7c8a8] mb-4 text-center font-mono font-medium">
                 {data.formulaLabel}
               </div>
-              <div className="flex justify-center items-center py-6 border-y border-[#f1efe8]/8 text-[#f1efe8] text-sm md:text-base overflow-x-auto">
-                <span className="select-all">{data.formula}</span>
+              <div className="flex justify-center items-center py-8 border-y border-[#f1efe8]/8 text-[#f1efe8] text-base md:text-lg overflow-x-auto font-mono select-all bg-[#080807]/30 shadow-inner">
+                <span className="px-4 text-[#f1efe8] filter drop-shadow-[0_0_8px_rgba(241,239,232,0.15)] font-semibold tracking-tight">{data.formula}</span>
               </div>
-              <div className="mt-4 flex justify-between text-[7.5px] text-[#f1efe8]/32 tracking-[0.16em]">
-                <span>SYS.REF // EQ-0{data.number}</span>
-                <span>DENOMINATOR // SECULAR</span>
+              <div className="mt-4 flex justify-between text-[7.5px] text-[#f1efe8]/34 tracking-[0.18em] font-mono">
+                <span>QUANT_ENGINE // MODEL_0{data.number}</span>
+                <span>COLLATERAL_RATIO // SECULAR_GROWTH</span>
               </div>
             </div>
 

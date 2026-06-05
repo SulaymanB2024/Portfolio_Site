@@ -22,9 +22,15 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
   }, []);
 
   return (
-    <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased md:cursor-none">
+    <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased md:cursor-none overflow-x-hidden">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
+
+      {/* Corner Registration Marks for standalone page */}
+      <div className="absolute left-4 top-4 h-4 w-4 border-l border-t border-[#f1efe8]/30 pointer-events-none z-20" />
+      <div className="absolute right-4 top-4 h-4 w-4 border-r border-t border-[#f1efe8]/30 pointer-events-none z-20" />
+      <div className="absolute left-4 bottom-4 h-4 w-4 border-l border-b border-[#f1efe8]/30 pointer-events-none z-20" />
+      <div className="absolute right-4 bottom-4 h-4 w-4 border-r border-b border-[#f1efe8]/30 pointer-events-none z-20" />
 
       {!prefersReducedMotion && (
         <div className="hidden md:block">
@@ -37,10 +43,10 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
 
       <article className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 px-4 py-16 md:px-8 lg:grid-cols-[0.32fr_0.68fr] xl:px-10 xl:py-24">
         <aside className="space-y-8 border-b border-[#f1efe8]/12 pb-10 text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/54 lg:border-b-0 lg:border-r lg:pr-8">
-          <a href="/markets" className="hover-target inline-flex text-[#b7c8a8]" data-cursor-text="BACK">
-            Back to Markets
+          <a href="/markets" className="hover-target inline-flex items-center gap-2 text-[#b7c8a8] hover:text-[#f1efe8] transition-colors" data-cursor-text="BACK">
+            <span>←</span> <span>Back to Markets</span>
           </a>
-          <dl className="grid gap-5">
+          <dl className="grid gap-5 pt-4">
             <div>
               <dt className="mb-1 text-[#f1efe8]/34">Memo</dt>
               <dd className="text-[#f1efe8]">{thesis.number}</dd>
@@ -60,7 +66,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
           </dl>
         </aside>
 
-        <div className="max-w-4xl">
+        <div className="max-w-4xl select-text">
           <p className="mb-7 text-[10px] uppercase tracking-[0.36em] text-[#b7c8a8]">{thesis.category}</p>
           <h1 className="font-serif text-[clamp(3.25rem,8vw,8.5rem)] italic leading-[0.86] tracking-[-0.045em] text-[#f1efe8]">
             {thesis.title}
@@ -84,18 +90,42 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
             </div>
           </div>
 
-          <div className="space-y-8 text-base leading-relaxed text-[#f1efe8]/72">
-            {thesis.content.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+          <div className="space-y-8 text-base leading-relaxed text-[#f1efe8]/72 font-sans">
+            {thesis.content.map((paragraph, index) => {
+              if (index === 0) {
+                const firstChar = paragraph.charAt(0);
+                const rest = paragraph.slice(1);
+                return (
+                  <p key={index}>
+                    <span className="float-left text-[3.85rem] font-serif italic mr-2.5 mt-1 leading-[0.8] text-[#b7c8a8] select-none">
+                      {firstChar}
+                    </span>
+                    {rest}
+                  </p>
+                );
+              }
+              return <p key={index}>{paragraph}</p>;
+            })}
           </div>
 
-          <div className="my-12 border border-[#f1efe8]/12 bg-[#f1efe8]/[0.015] p-6 font-mono">
-            <div className="mb-4 text-center text-[8px] uppercase tracking-[0.24em] text-[#f1efe8]/45">
+          {/* Monetarist / Quantitative Formula Box */}
+          <div className="my-12 border border-[#f1efe8]/12 bg-[#0c0c0b] p-6 relative overflow-hidden group">
+            {/* Terminal Grid Background */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.02] bg-[linear-gradient(to_right,#f1efe8_1px,transparent_1px),linear-gradient(to_bottom,#f1efe8_1px,transparent_1px)] bg-[size:10px_10px]" />
+            
+            {/* Internal corner marks */}
+            <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/20" />
+            <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/20" />
+
+            <div className="text-[8.5px] uppercase tracking-[0.24em] text-[#b7c8a8] mb-4 text-center font-mono font-medium">
               {thesis.formulaLabel}
             </div>
-            <div className="overflow-x-auto border-y border-[#f1efe8]/8 py-6 text-center text-sm text-[#f1efe8] md:text-base">
-              <span className="select-all">{thesis.formula}</span>
+            <div className="flex justify-center items-center py-8 border-y border-[#f1efe8]/8 text-[#f1efe8] text-base md:text-lg overflow-x-auto font-mono select-all bg-[#080807]/30 shadow-inner">
+              <span className="px-4 text-[#f1efe8] filter drop-shadow-[0_0_8px_rgba(241,239,232,0.15)] font-semibold tracking-tight">{thesis.formula}</span>
+            </div>
+            <div className="mt-4 flex justify-between text-[7.5px] text-[#f1efe8]/34 tracking-[0.18em] font-mono">
+              <span>QUANT_ENGINE // MODEL_0{thesis.number}</span>
+              <span>COLLATERAL_RATIO // SECULAR_GROWTH</span>
             </div>
           </div>
 

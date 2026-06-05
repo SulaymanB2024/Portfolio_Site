@@ -1,9 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { useSEO } from '../utils/seo';
-import { ScrambleText } from '../components/ScrambleText';
-import { RevealText } from '../components/RevealText';
-import { ScrollReveal } from '../components/ScrollReveal';
+
 import { SmoothCursor } from '../components/SmoothCursor';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { useReducedMotion } from '../hooks/useReducedMotion';
@@ -13,6 +11,9 @@ import { InternalHeader } from '../components/InternalHeader';
 import { InternalFooter } from '../components/InternalFooter';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import { WireframeGrid } from '../components/WireframeGrid';
+import InvestmentResearchMap from '../components/InvestmentResearchMap';
+import { MARKET_THESES } from '../content/marketTheses';
+import ArticleReader from '../components/ArticleReader';
 
 const MARKETS_SEO = getSeoRoute('/markets')!;
 
@@ -29,205 +30,10 @@ function HeaderReticle() {
   );
 }
 
-// 2. Interactive Split Research Visual
-interface SplitVisualProps {
-  hoveredSystem: 'traditional' | 'crypto' | null;
-  setHoveredSystem: (val: 'traditional' | 'crypto' | null) => void;
-}
-
-function SplitResearchVisual({ hoveredSystem, setHoveredSystem }: SplitVisualProps) {
-  return (
-    <div className="border border-[#f1efe8]/14 p-5 bg-[#080807] relative group w-full overflow-hidden select-none">
-      {/* Corner indicators */}
-      <div className="absolute top-2 left-2 text-[8px] text-[#f1efe8]/20 font-mono">⌜ RESEARCH CORE ⌝</div>
-      <div className="absolute top-2 right-2 text-[8px] text-[#f1efe8]/20 font-mono">MODEL.SYS.V2</div>
-      <div className="absolute bottom-2 left-2 text-[8px] text-[#f1efe8]/20 font-mono">⌞ CRITERIA ⌟</div>
-      <div className="absolute bottom-2 right-2 text-[8px] text-[#f1efe8]/20 font-mono">SYS_COORD_04</div>
-
-      {/* Main Interactive Container */}
-      <div className="grid grid-cols-2 w-full aspect-[16/11] bg-[#080807] relative border border-[#f1efe8]/8">
-        
-        {/* Left Interactive Zone (Traditional Finance) */}
-        <div 
-          className="absolute inset-y-0 left-0 w-1/2 z-20 cursor-pointer"
-          onMouseEnter={() => setHoveredSystem('traditional')}
-          onMouseLeave={() => setHoveredSystem(null)}
-        />
-        
-        {/* Right Interactive Zone (Crypto) */}
-        <div 
-          className="absolute inset-y-0 right-0 w-1/2 z-20 cursor-pointer"
-          onMouseEnter={() => setHoveredSystem('crypto')}
-          onMouseLeave={() => setHoveredSystem(null)}
-        />
-
-        {/* The SVG Artwork */}
-        <svg viewBox="0 0 700 480" className="absolute inset-0 w-full h-full text-[#f1efe8] pointer-events-none">
-          {/* Background Grid */}
-          <g stroke="rgba(241,239,232,0.02)" strokeWidth="0.8">
-            {Array.from({ length: 14 }).map((_, i) => (
-              <line key={`x-${i}`} x1={i * 50} y1="0" x2={i * 50} y2="480" />
-            ))}
-            {Array.from({ length: 10 }).map((_, i) => (
-              <line key={`y-${i}`} x1="0" y1={i * 48} x2="700" y2={i * 48} />
-            ))}
-          </g>
-
-          {/* Central Divider */}
-          <line x1="350" y1="20" x2="350" y2="460" stroke="rgba(241,239,232,0.12)" strokeWidth="0.8" strokeDasharray="3 6" />
-          <circle cx="350" cy="240" r="4" fill="#080807" stroke="rgba(241,239,232,0.3)" strokeWidth="1" />
-          
-          {/* Coordinate Marks along central divider */}
-          {Array.from({ length: 7 }).map((_, i) => (
-            <path key={`tick-${i}`} d={`M 347 ${60 + i * 60} L 353 ${60 + i * 60}`} stroke="rgba(241,239,232,0.24)" strokeWidth="0.8" />
-          ))}
-
-          {/* LEFT SYSTEM: TRADITIONAL FINANCE */}
-          <g className="transition-all duration-500" style={{ opacity: hoveredSystem === 'crypto' ? 0.25 : 1 }}>
-            {/* Background system label */}
-            <text x="40" y="420" fill="rgba(241,239,232,0.03)" fontSize="48" fontFamily="serif" fontStyle="italic">Traditional</text>
-            
-            {/* Filing Review (Node connection network) */}
-            <g className="transition-all duration-300">
-              <line x1="60" y1="80" x2="160" y2="80" stroke="rgba(241,239,232,0.14)" strokeWidth="0.8" />
-              <line x1="160" y1="80" x2="220" y2="140" stroke="rgba(241,239,232,0.14)" strokeWidth="0.8" />
-              <line x1="160" y1="80" x2="110" y2="150" stroke="rgba(241,239,232,0.14)" strokeWidth="0.8" />
-              <circle cx="60" cy="80" r="3" fill="#b7c8a8" />
-              <circle cx="160" cy="80" r="3" fill="#b7c8a8" />
-              <circle cx="220" cy="140" r="3.5" fill="#b7c8a8" className="animate-pulse" />
-              <circle cx="110" cy="150" r="2.5" fill="#b7c8a8" />
-              <text x="60" y="70" fill="rgba(241,239,232,0.4)" fontSize="7" fontFamily="monospace" letterSpacing="1">SEC_FILING_REVIEW // D.10K</text>
-            </g>
-
-            {/* Valuation Range (Bell curve / brackets) */}
-            <g className="transition-all duration-300">
-              <path d="M 60 260 Q 140 160 220 260" fill="none" stroke="rgba(241,239,232,0.3)" strokeWidth="1" />
-              <path d="M 100 260 Q 140 180 180 260" fill="rgba(183, 200, 168, 0.08)" stroke="rgba(183, 200, 168, 0.2)" strokeWidth="0.8" strokeDasharray="2 3" />
-              <line x1="140" y1="180" x2="140" y2="260" stroke="rgba(241,239,232,0.15)" strokeWidth="0.8" strokeDasharray="1 2" />
-              <line x1="60" y1="260" x2="220" y2="260" stroke="rgba(241,239,232,0.15)" strokeWidth="0.8" />
-              <text x="140" y="275" fill="rgba(241,239,232,0.5)" fontSize="7" fontFamily="monospace" letterSpacing="1" textAnchor="middle">VALUATION RANGE (BASE_CASE)</text>
-              <circle cx="140" cy="210" r="2" fill="#b7c8a8" />
-            </g>
-
-            {/* Catalyst Map (Vector arrows) */}
-            <g className="transition-all duration-300">
-              <path d="M 60 340 L 120 340 L 160 380" fill="none" stroke="rgba(241,239,232,0.24)" strokeWidth="0.8" />
-              <path d="M 120 340 L 150 310 L 220 310" fill="none" stroke="rgba(241,239,232,0.24)" strokeWidth="0.8" />
-              <polygon points="220,310 215,308 215,312" fill="rgba(241,239,232,0.6)" />
-              <polygon points="160,380 158,375 162,375" fill="rgba(241,239,232,0.6)" />
-              <text x="60" y="332" fill="rgba(241,239,232,0.4)" fontSize="7" fontFamily="monospace" letterSpacing="1">CATALYST MAP // STAGES</text>
-            </g>
-
-            {/* Downside Case (Stress boundary) */}
-            <g className="transition-all duration-300">
-              <line x1="40" y1="180" x2="280" y2="180" stroke="rgba(194, 105, 94, 0.25)" strokeWidth="0.8" strokeDasharray="4 4" />
-              <rect x="230" y="168" width="50" height="24" fill="#080807" stroke="rgba(194, 105, 94, 0.4)" strokeWidth="0.8" />
-              <text x="255" y="182" fill="#c2695e" fontSize="6.5" fontFamily="monospace" letterSpacing="1" textAnchor="middle">DOWNSIDE_STRESS</text>
-            </g>
-
-            {/* Visual HUD Readout */}
-            <g transform="translate(60, 20)" className="font-mono text-[8px] fill-[#b7c8a8] opacity-70">
-              <text x="0" y="10">TRAD_FIN // REGIME_01</text>
-              <text x="0" y="20">EV/EBITDA : 11.4X</text>
-              <text x="0" y="30">WACC : 8.75%</text>
-            </g>
-          </g>
-
-          {/* RIGHT SYSTEM: CRYPTO RESEARCH */}
-          <g className="transition-all duration-500" style={{ opacity: hoveredSystem === 'traditional' ? 0.25 : 1 }}>
-            {/* Background system label */}
-            <text x="460" y="420" fill="rgba(241,239,232,0.03)" fontSize="48" fontFamily="serif" fontStyle="italic">Crypto</text>
-            
-            {/* Token Supply Curve */}
-            <g className="transition-all duration-300">
-              <path d="M 380 140 Q 420 140 480 80 T 640 60" fill="none" stroke="rgba(241,239,232,0.3)" strokeWidth="1" />
-              <circle cx="480" cy="80" r="3" fill="#c2695e" className="animate-pulse" />
-              <circle cx="560" cy="70" r="2.5" fill="#f1efe8" />
-              <text x="640" y="52" fill="rgba(241,239,232,0.4)" fontSize="7" fontFamily="monospace" letterSpacing="1" textAnchor="end">TOKEN SUPPLY // EMISSIONS</text>
-            </g>
-
-            {/* Protocol Fees Bar Graph */}
-            <g className="transition-all duration-300">
-              {[
-                { x: 380, h: 40 },
-                { x: 405, h: 60 },
-                { x: 430, h: 50 },
-                { x: 455, h: 90 },
-                { x: 480, h: 110 },
-                { x: 505, h: 80 }
-              ].map((bar, i) => (
-                <rect 
-                  key={i} 
-                  x={bar.x} 
-                  y={260 - bar.h} 
-                  width="18" 
-                  height={bar.h} 
-                  fill="none" 
-                  stroke="rgba(241, 239, 232, 0.24)" 
-                  strokeWidth="0.8" 
-                />
-              ))}
-              <line x1="370" y1="260" x2="530" y2="260" stroke="rgba(241,239,232,0.15)" strokeWidth="0.8" />
-              <text x="380" y="275" fill="rgba(241,239,232,0.4)" fontSize="7" fontFamily="monospace" letterSpacing="1">PROTOCOL_FEES_DAILY</text>
-            </g>
-
-            {/* TVL & Liquidity Depth */}
-            <g className="transition-all duration-300">
-              <path d="M 500 350 C 530 350, 550 310, 590 310 S 610 380, 640 380" fill="none" stroke="rgba(183, 200, 168, 0.35)" strokeWidth="1" strokeDasharray="3 3" />
-              <circle cx="590" cy="310" r="3" fill="#b7c8a8" />
-              <text x="640" y="392" fill="rgba(241,239,232,0.4)" fontSize="7" fontFamily="monospace" letterSpacing="1" textAnchor="end">TVL &amp; LIQUIDITY DEPTH</text>
-            </g>
-
-            {/* Governance Risk (Matrix grid node) */}
-            <g className="transition-all duration-300">
-              <rect x="520" y="140" width="100" height="80" fill="none" stroke="rgba(241,239,232,0.1)" strokeWidth="0.8" />
-              <line x1="570" y1="140" x2="570" y2="220" stroke="rgba(241,239,232,0.1)" strokeWidth="0.8" />
-              <line x1="520" y1="180" x2="620" y2="180" stroke="rgba(241,239,232,0.1)" strokeWidth="0.8" />
-              <circle cx="550" cy="160" r="4" fill="#c2695e" />
-              <circle cx="590" cy="200" r="2.5" fill="#f1efe8" opacity="0.5" />
-              <text x="520" y="132" fill="rgba(241,239,232,0.4)" fontSize="7" fontFamily="monospace" letterSpacing="1">GOVERNANCE_RISK_MAP</text>
-            </g>
-
-            {/* Visual HUD Readout */}
-            <g transform="translate(640, 20)" className="font-mono text-[8px] fill-[#c2695e] opacity-70" textAnchor="end">
-              <text x="0" y="10">CRYPT_ARCH // VE_FLYHWL</text>
-              <text x="0" y="20">FEE_APR : 42.1%</text>
-              <text x="0" y="30">EMISSION_DECAY : -2.5% / WK</text>
-            </g>
-          </g>
-
-          {/* Interactive feedback banners */}
-          <g transform="translate(350, 450)" textAnchor="middle" className="font-mono text-[8px] tracking-[0.15em]">
-            {hoveredSystem === 'traditional' && (
-              <text fill="#b7c8a8" className="animate-pulse">SELECTING: TRADITIONAL PORTFOLIO MEMOS</text>
-            )}
-            {hoveredSystem === 'crypto' && (
-              <text fill="#c2695e" className="animate-pulse">SELECTING: DECENTRALIZED PROTOCOL THESES</text>
-            )}
-            {hoveredSystem === null && (
-              <text fill="rgba(241,239,232,0.2)">HOVER SYSTEM REGIONS TO QUERY PARAMETERS</text>
-            )}
-          </g>
-        </svg>
-      </div>
-
-      <div className="mt-4 flex items-center justify-between text-[8px] font-mono tracking-widest text-[#f1efe8]/40">
-        <span>GRID COORDINATES: 40.7128° N, 74.0060° W</span>
-        <span>LATENCY STREAM: ACTIVE (04ms)</span>
-      </div>
-    </div>
-  );
-}
-
 // 2. Hero Section
-interface HeroSectionProps {
-  hoveredSystem: 'traditional' | 'crypto' | null;
-  setHoveredSystem: (val: 'traditional' | 'crypto' | null) => void;
-}
-
-function HeroSection({ hoveredSystem, setHoveredSystem }: HeroSectionProps) {
+function HeroSection() {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-12 lg:gap-[72px] items-center pt-12 pb-11 border-b border-[#f1efe8]/14">
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-12 lg:gap-[72px] items-center py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 relative z-10">
       {/* Left Column: Thesis Info */}
       <div className="space-y-9">
         <div className="flex items-center justify-between text-[10px] tracking-[0.18em] text-[#f1efe8]/45 uppercase font-mono">
@@ -290,9 +96,15 @@ function HeroSection({ hoveredSystem, setHoveredSystem }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* Right Column: Hero Split Interactive visual */}
+      {/* Right Column: Interactive Research Signal Flow */}
       <div className="w-full">
-        <SplitResearchVisual hoveredSystem={hoveredSystem} setHoveredSystem={setHoveredSystem} />
+        <div className="group">
+          <InvestmentResearchMap className="aspect-[1000/620] w-full transition-transform duration-700 group-hover:-translate-y-1" />
+          <div className="mt-4 flex flex-col gap-3 border-b border-[#f1efe8]/12 pb-4 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/44 sm:flex-row sm:items-center sm:justify-between">
+            <span>SIGNAL INPUTS: MARKET DATA / FILINGS / ON-CHAIN</span>
+            <span>OUTPUT: CONVICTION-BACKED RESEARCH</span>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -324,7 +136,7 @@ function ResearchLanes() {
   ];
 
   return (
-    <section className="py-12 border-b border-[#f1efe8]/14">
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 relative z-10">
       <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono mb-8">
         RESEARCH LANES
       </div>
@@ -332,20 +144,22 @@ function ResearchLanes() {
         {lanes.map((lane) => (
           <div 
             key={lane.num} 
-            className="flex flex-col justify-between h-full p-5 border border-[#f1efe8]/10 bg-[#f1efe8]/[0.01] hover:border-[#f1efe8]/20 transition-all duration-300 relative group"
+            className="flex flex-col justify-between h-full p-6 border border-[#f1efe8]/12 bg-[#f1efe8]/[0.01] transition-all duration-500 hover:bg-[#f1efe8]/[0.025] hover:-translate-y-1 hover:border-[#f1efe8]/30 relative group overflow-hidden before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:before:w-full"
           >
-            {/* Corner Indicators */}
-            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#f1efe8]/20" />
-            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#f1efe8]/20" />
+            {/* Corner marks */}
+            <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <div className="absolute top-2 right-2 w-1.5 h-1.5 border-t border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <div className="absolute bottom-2 left-2 w-1.5 h-1.5 border-b border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
 
-            <div className="text-[14px] font-serif italic text-[#b7c8a8]/60 mb-4 group-hover:text-[#b7c8a8] transition-colors">
+            <div className="text-[14px] font-serif italic text-[#b7c8a8]/60 mb-6 group-hover:text-[#b7c8a8] transition-colors pt-2">
               {lane.num}
             </div>
             <div>
               <h4 className="text-xs uppercase tracking-[0.2em] font-mono text-[#f1efe8] mb-3">
                 {lane.title}
               </h4>
-              <p className="text-xs text-[#f1efe8]/54 leading-relaxed font-sans">
+              <p className="text-xs text-[#f1efe8]/54 leading-relaxed font-sans mb-2">
                 {lane.desc}
               </p>
             </div>
@@ -357,74 +171,103 @@ function ResearchLanes() {
 }
 
 // 4. Featured Cases Section
-function FeaturedCases() {
+function FeaturedCases({ onOpenArtifact }: { onOpenArtifact: (id: string) => void }) {
+  const cases = [
+    {
+      id: 'pdf-memo',
+      num: 'CASE 01',
+      tag: 'TRADITIONAL EQUITY',
+      asset: 'ASSET: APPIAN GROUP (NASDAQ: APPN)',
+      title: 'Mispricing of Enterprise Software Durability',
+      desc: "Thesis: Appian's low-code workflow integration establishes structural lock-in that the market is discounting due to short-term cyclical tech spend deceleration.",
+      horizon: '12-18 Months / Completed',
+      question: 'Is durable recurring revenue being mispriced as transactional?',
+      cta: 'VIEW VALUATION MEMO'
+    },
+    {
+      id: 'protocol-map',
+      num: 'CASE 02',
+      tag: 'CRYPTO PROTOCOL',
+      asset: 'PROTOCOL: AERODROME FINANCE (BASE)',
+      title: 'Dominant Liquidity Engine & ve(3,3) Flywheel',
+      desc: "Thesis: Aerodrome has successfully cornered Base liquidity. Its ve-token mechanics align trader fees and voter bribes, creating a durable fee generation loop.",
+      horizon: 'Tokenomics / In Progress',
+      question: 'Are emissions structural vs reflexive speculation?',
+      cta: 'EXPLORE FLYWHEEL MAP'
+    }
+  ];
+
   return (
-    <section className="py-12 border-b border-[#f1efe8]/14 space-y-8">
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
       <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
         FEATURED CASES
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* CASE 01: Traditional */}
-        <div className="border border-[#f1efe8]/14 p-6 bg-[#080807] relative group flex flex-col justify-between h-[340px] hover:border-[#f1efe8]/24 transition-colors">
-          <div className="absolute top-2 left-2 text-[8px] text-[#f1efe8]/20 font-mono">CASE 01</div>
-          <div className="absolute top-2 right-2 text-[8px] text-[#b7c8a8] font-mono">TRADITIONAL EQUITY</div>
+        {cases.map((c) => (
+          <div 
+            key={c.num}
+            onClick={() => onOpenArtifact(c.id)}
+            className="hover-target border border-[#f1efe8]/12 p-6 bg-[#080807] relative group flex flex-col justify-between min-h-[340px] hover:border-[#f1efe8]/30 hover:bg-[#f1efe8]/[0.015] hover:-translate-y-1 transition-all duration-500 cursor-pointer overflow-hidden before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:before:w-full"
+          >
+            {/* Corner marks */}
+            <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <div className="absolute top-2 right-2 w-1.5 h-1.5 border-t border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <div className="absolute bottom-2 left-2 w-1.5 h-1.5 border-b border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
 
-          <div className="space-y-4 pt-4">
-            <div className="text-[10px] tracking-widest text-[#f1efe8]/40 font-mono uppercase">ASSET: APPIAN GROUP (NASDAQ: APPN)</div>
-            <h3 className="font-serif text-2xl lg:text-3xl text-[#f1efe8] leading-tight">
-              Mispricing of Enterprise Software Durability
-            </h3>
-            <p className="text-xs text-[#f1efe8]/60 leading-relaxed font-sans max-w-lg">
-              Thesis: Appian's low-code workflow integration establishes structural lock-in that the market is discounting due to short-term cyclical tech spend deceleration.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 border-t border-[#f1efe8]/10 pt-4 font-mono text-[9px] text-[#f1efe8]/50 uppercase">
-            <div>
-              <span className="block text-[#f1efe8]/30">Horizon / Status</span>
-              <span className="text-xs text-[#f1efe8]/80 font-sans tracking-normal font-medium">12-18 Months / Completed</span>
+            {/* Standard Header Row */}
+            <div className="flex items-start justify-between text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42 font-mono pt-2">
+              <span>{c.num}</span>
+              <span className={c.id === 'pdf-memo' ? 'text-[#b7c8a8]' : 'text-[#c2695e]'}>{c.tag}</span>
             </div>
-            <div>
-              <span className="block text-[#f1efe8]/30">Core Question</span>
-              <span className="text-[9.5px] text-[#f1efe8]/80 tracking-tight lowercase first-letter:uppercase font-sans font-medium">Is durable recurring revenue being mispriced as transactional?</span>
+
+            <div className="space-y-4 pt-6">
+              <div className="text-[10px] tracking-widest text-[#f1efe8]/40 font-mono uppercase">{c.asset}</div>
+              <h3 className="font-serif text-2xl lg:text-3xl text-[#f1efe8] leading-tight group-hover:text-[#b7c8a8] transition-colors">
+                {c.title}
+              </h3>
+              <p className="text-xs text-[#f1efe8]/60 leading-relaxed font-sans max-w-lg">
+                {c.desc}
+              </p>
             </div>
-          </div>
-        </div>
 
-        {/* CASE 02: Crypto */}
-        <div className="border border-[#f1efe8]/14 p-6 bg-[#080807] relative group flex flex-col justify-between h-[340px] hover:border-[#f1efe8]/24 transition-colors">
-          <div className="absolute top-2 left-2 text-[8px] text-[#f1efe8]/20 font-mono">CASE 02</div>
-          <div className="absolute top-2 right-2 text-[8px] text-[#c2695e] font-mono">CRYPTO PROTOCOL</div>
-
-          <div className="space-y-4 pt-4">
-            <div className="text-[10px] tracking-widest text-[#f1efe8]/40 font-mono uppercase">PROTOCOL: AERODROME FINANCE (BASE)</div>
-            <h3 className="font-serif text-2xl lg:text-3xl text-[#f1efe8] leading-tight">
-              Dominant Liquidity Engine &amp; ve(3,3) Flywheel
-            </h3>
-            <p className="text-xs text-[#f1efe8]/60 leading-relaxed font-sans max-w-lg">
-              Thesis: Aerodrome has successfully cornered Base liquidity. Its ve-token mechanics align trader fees and voter bribes, creating a durable fee generation loop.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 border-t border-[#f1efe8]/10 pt-4 font-mono text-[9px] text-[#f1efe8]/50 uppercase">
-            <div>
-              <span className="block text-[#f1efe8]/30">Focus / Status</span>
-              <span className="text-xs text-[#f1efe8]/80 font-sans tracking-normal font-medium">Tokenomics / In Progress</span>
+            <div className="grid grid-cols-2 gap-4 border-t border-[#f1efe8]/10 pt-4 mt-6 font-mono text-[9px] text-[#f1efe8]/50 uppercase">
+              <div>
+                <span className="block text-[#f1efe8]/30">Horizon / Status</span>
+                <span className="text-[11px] text-[#f1efe8]/80 font-sans tracking-normal font-medium">{c.horizon}</span>
+              </div>
+              <div>
+                <span className="block text-[#f1efe8]/30">Core Question</span>
+                <span className="text-[9.5px] text-[#f1efe8]/80 tracking-tight lowercase first-letter:uppercase font-sans font-medium">{c.question}</span>
+              </div>
             </div>
-            <div>
-              <span className="block text-[#f1efe8]/30">Core Question</span>
-              <span className="text-[9.5px] text-[#f1efe8]/80 tracking-tight lowercase first-letter:uppercase font-sans font-medium">Are emissions structural vs reflexive speculation?</span>
+
+            <div className="mt-4 pt-3 flex items-center justify-between text-[9px] uppercase tracking-wider font-mono text-[#b7c8a8] border-t border-[#f1efe8]/5">
+              <span>{c.cta}</span>
+              <span>↗</span>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </section>
   );
 }
 
 // 5. Traditional Investment Cases Section (Detailed Folder Foldouts)
-function TraditionalCasesSection() {
+interface Artifact {
+  id: string;
+  tag: string;
+  title: string;
+  summary: string;
+  date: string;
+  status: string;
+  author: string;
+  highlights: string[];
+  metrics: { key: string; val: string }[];
+}
+
+function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: string) => void }) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
   const cases = [
@@ -465,7 +308,7 @@ function TraditionalCasesSection() {
   ];
 
   return (
-    <section className="py-12 border-b border-[#f1efe8]/14 space-y-8">
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
       <div className="space-y-2">
         <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
           TRADITIONAL INVESTMENT CASES
@@ -481,7 +324,7 @@ function TraditionalCasesSection() {
           return (
             <div 
               key={idx} 
-              className="border border-[#f1efe8]/10 bg-[#080807] transition-all duration-300"
+              className="border border-[#f1efe8]/12 bg-[#080807] transition-all duration-300 overflow-hidden relative group"
             >
               {/* Folder tab trigger */}
               <button 
@@ -507,12 +350,12 @@ function TraditionalCasesSection() {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden border-t border-[#f1efe8]/8"
+                    className="overflow-hidden border-t border-[#f1efe8]/12"
                   >
                     <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed text-[#f1efe8]/70">
                       
                       {/* Column 1: Thesis & Drivers */}
-                      <div className="space-y-4 border-r border-[#f1efe8]/6 pr-6 last:border-r-0">
+                      <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
                         <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase">Mispricing Thesis</div>
                         <p className="font-serif italic text-sm text-[#f1efe8]/90">{item.thesis}</p>
                         
@@ -527,7 +370,7 @@ function TraditionalCasesSection() {
                       </div>
 
                       {/* Column 2: Evidence */}
-                      <div className="space-y-4 border-r border-[#f1efe8]/6 pr-6 last:border-r-0">
+                      <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
                         <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase">Evidence &amp; Analysis</div>
                         <ul className="space-y-2.5 font-sans">
                           {item.evidence.map((ev, i) => (
@@ -543,17 +386,25 @@ function TraditionalCasesSection() {
                       <div className="space-y-4">
                         <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase">Research Outputs</div>
                         <div className="space-y-2">
-                          {item.outputs.map((out, i) => (
-                            <div 
-                              key={i} 
-                              className="border border-[#f1efe8]/10 px-4 py-2 flex items-center justify-between text-[10px] tracking-wider uppercase font-mono bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.03] transition-colors"
-                            >
-                              <span>{out}</span>
-                              <span className="text-[8px] opacity-40">⤓ REFERENCE</span>
-                            </div>
-                          ))}
+                          {item.outputs.map((out, i) => {
+                            let targetId = '';
+                            if (out === 'Full Memo') targetId = 'pdf-memo';
+                            else if (out === 'Valuation Model') targetId = 'valuation-model';
+
+                            return (
+                              <button 
+                                key={i} 
+                                onClick={() => targetId && onOpenArtifact(targetId)}
+                                className={`w-full border border-[#f1efe8]/12 px-4 py-2.5 flex items-center justify-between text-[10px] tracking-wider uppercase font-mono bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.03] hover:border-[#f1efe8]/30 hover:text-[#b7c8a8] transition-all duration-300 ${targetId ? 'cursor-pointer' : 'cursor-default opacity-60'}`}
+                                data-cursor-text={targetId ? 'PREVIEW' : undefined}
+                              >
+                                <span>{out}</span>
+                                <span className="text-[8px] opacity-40">{targetId ? '⤓ PREVIEW' : 'ACCESS REQUIRED'}</span>
+                              </button>
+                            );
+                          })}
                         </div>
-                        <p className="text-[9px] text-[#f1efe8]/40 font-mono">
+                        <p className="text-[9px] text-[#f1efe8]/40 font-mono pt-2">
                           SECURE REPOSITORY ACCESS CODE: AUTH.TRAD.04
                         </p>
                       </div>
@@ -571,7 +422,7 @@ function TraditionalCasesSection() {
 }
 
 // 6. Crypto Research Section
-function CryptoResearchSection() {
+function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string) => void }) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
   const cases = [
@@ -612,7 +463,7 @@ function CryptoResearchSection() {
   ];
 
   return (
-    <section className="py-12 border-b border-[#f1efe8]/14 space-y-8">
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
       <div className="space-y-2">
         <div className="text-[10px] tracking-[0.24em] uppercase text-[#c2695e] font-mono">
           CRYPTO RESEARCH
@@ -628,7 +479,7 @@ function CryptoResearchSection() {
           return (
             <div 
               key={idx} 
-              className="border border-[#f1efe8]/10 bg-[#080807] transition-all duration-300"
+              className="border border-[#f1efe8]/12 bg-[#080807] transition-all duration-300 overflow-hidden relative group"
             >
               {/* Folder tab trigger */}
               <button 
@@ -654,12 +505,12 @@ function CryptoResearchSection() {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden border-t border-[#f1efe8]/8"
+                    className="overflow-hidden border-t border-[#f1efe8]/12"
                   >
                     <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed text-[#f1efe8]/70">
                       
                       {/* Column 1: Thesis & Core Questions */}
-                      <div className="space-y-4 border-r border-[#f1efe8]/6 pr-6 last:border-r-0">
+                      <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
                         <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-mono uppercase">Thesis &amp; Economic Value</div>
                         <p className="font-serif italic text-sm text-[#f1efe8]/90">{item.thesis}</p>
                         
@@ -677,7 +528,7 @@ function CryptoResearchSection() {
                       </div>
 
                       {/* Column 2: On-Chain Evidence */}
-                      <div className="space-y-4 border-r border-[#f1efe8]/6 pr-6 last:border-r-0">
+                      <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
                         <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-mono uppercase">On-Chain Evidence</div>
                         <ul className="space-y-2.5 font-sans">
                           {item.evidence.map((ev, i) => (
@@ -693,17 +544,27 @@ function CryptoResearchSection() {
                       <div className="space-y-4">
                         <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-mono uppercase">Protocol Artifacts</div>
                         <div className="space-y-2">
-                          {item.outputs.map((out, i) => (
-                            <div 
-                              key={i} 
-                              className="border border-[#f1efe8]/10 px-4 py-2 flex items-center justify-between text-[10px] tracking-wider uppercase font-mono bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.03] transition-colors"
-                            >
-                              <span>{out}</span>
-                              <span className="text-[8px] opacity-40">⤓ TELEMETRY</span>
-                            </div>
-                          ))}
+                          {item.outputs.map((out, i) => {
+                            let targetId = '';
+                            if (out === 'Protocol Memo' || out === 'Token Economics Map') targetId = 'protocol-map';
+                            else if (out === 'On-chain Notes') targetId = 'on-chain-notes';
+                            else if (out === 'Locker Dashboard') targetId = 'market-dashboard';
+                            else if (out === 'Data Cost Model') targetId = 'valuation-model';
+
+                            return (
+                              <button 
+                                key={i} 
+                                onClick={() => targetId && onOpenArtifact(targetId)}
+                                className={`w-full border border-[#f1efe8]/12 px-4 py-2.5 flex items-center justify-between text-[10px] tracking-wider uppercase font-mono bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.03] hover:border-[#f1efe8]/30 hover:text-[#c2695e] transition-all duration-300 ${targetId ? 'cursor-pointer' : 'cursor-default opacity-60'}`}
+                                data-cursor-text={targetId ? 'PREVIEW' : undefined}
+                              >
+                                <span>{out}</span>
+                                <span className="text-[8px] opacity-40">{targetId ? '⤓ PREVIEW' : 'ACCESS REQUIRED'}</span>
+                              </button>
+                            );
+                          })}
                         </div>
-                        <p className="text-[9px] text-[#f1efe8]/40 font-mono">
+                        <p className="text-[9px] text-[#f1efe8]/40 font-mono pt-2">
                           SECURE REPOSITORY ACCESS CODE: AUTH.CRYPT.08
                         </p>
                       </div>
@@ -751,7 +612,7 @@ function ResearchProcessSection() {
   ];
 
   return (
-    <section className="py-12 border-b border-[#f1efe8]/14 space-y-8">
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
       <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
         RESEARCH METHOD
       </div>
@@ -772,22 +633,86 @@ function ResearchProcessSection() {
   );
 }
 
-// 8. Artifact Section (With highly designed functional modals)
-interface Artifact {
-  id: string;
-  tag: string;
-  title: string;
-  summary: string;
-  date: string;
-  status: string;
-  author: string;
-  highlights: string[];
-  metrics: { key: string; val: string }[];
+// 7.5 Research Theses & Memos Section
+function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) => void }) {
+  return (
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
+      <div className="space-y-2">
+        <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
+          INVESTMENT MEMOS &amp; THESES
+        </div>
+        <p className="text-xs text-[#f1efe8]/50 font-sans max-w-xl">
+          Sovereign-grade research, asset allocation models, and structural market logic.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {MARKET_THESES.map((thesis, idx) => (
+          <div 
+            key={thesis.slug}
+            className="flex flex-col justify-between h-full p-6 border border-[#f1efe8]/12 bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.025] hover:-translate-y-1 hover:border-[#f1efe8]/30 transition-all duration-500 relative group overflow-hidden before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:before:w-full"
+          >
+            {/* Corner marks */}
+            <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <div className="absolute top-2 right-2 w-1.5 h-1.5 border-t border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <div className="absolute bottom-2 left-2 w-1.5 h-1.5 border-b border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+
+            <div>
+              <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/42 font-mono pt-2 mb-4">
+                <span>MEMO 0{thesis.number}</span>
+                <span>{thesis.readTime}</span>
+              </div>
+              
+              <h3 className="font-serif italic text-2xl text-[#f1efe8] leading-tight group-hover:text-[#b7c8a8] transition-colors mb-3">
+                {thesis.title.replace('On the ', '').replace('Computational ', '')}
+              </h3>
+              
+              <p className="text-xs text-[#f1efe8]/60 leading-relaxed font-sans mb-8">
+                {thesis.subtitle}
+              </p>
+            </div>
+
+            <div className="space-y-4 pt-4 border-t border-[#f1efe8]/8">
+              <div className="flex justify-between font-mono text-[9px] uppercase">
+                <span className="text-[#f1efe8]/30">Conviction</span>
+                <span className="text-[#b7c8a8]">{thesis.conviction}</span>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <button
+                  onClick={() => onReadThesis(idx)}
+                  className="flex-1 hover-target border border-[#f1efe8]/15 px-3 py-2 text-[9px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/80 hover:text-[#b7c8a8] hover:border-[#b7c8a8] hover:bg-[#f1efe8]/5 transition-all text-center"
+                  data-cursor-text="READ"
+                >
+                  READ MEMO
+                </button>
+                <a
+                  href={`/markets/${thesis.slug}`}
+                  className="flex-1 hover-target border border-[#f1efe8]/15 px-3 py-2 text-[9px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/60 hover:text-[#f1efe8] hover:border-[#f1efe8]/30 text-center flex items-center justify-center gap-1"
+                  data-cursor-text="OPEN"
+                >
+                  <span>PAGE</span> <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
-function ArtifactSection() {
-  const [activeArtifact, setActiveArtifact] = useState<Artifact | null>(null);
-
+// 8. Artifact Section (With highly designed functional modals)
+function ArtifactSection({ 
+  activeArtifact, 
+  setActiveArtifact, 
+  artifacts 
+}: { 
+  activeArtifact: Artifact | null; 
+  setActiveArtifact: (art: Artifact | null) => void; 
+  artifacts: Artifact[];
+}) {
   const containerRef = useFocusTrap(!!activeArtifact);
 
   useEffect(() => {
@@ -798,6 +723,196 @@ function ArtifactSection() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [setActiveArtifact]);
+
+  return (
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
+      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
+        RESEARCH ARTIFACTS
+      </div>
+
+      <div className="flex flex-wrap gap-3">
+        {artifacts.map((art) => (
+          <button 
+            key={art.id}
+            id={`markets-artifact-btn-${art.id}`}
+            onClick={() => setActiveArtifact(art)}
+            className="hover-target border border-[#f1efe8]/12 px-5 py-3 text-[10px] uppercase font-mono tracking-widest text-[#f1efe8]/80 bg-[#f1efe8]/[0.01] hover:border-[#f1efe8]/24 hover:bg-[#f1efe8]/[0.03] transition-all duration-300 relative group"
+            data-cursor-text="PREVIEW"
+          >
+            {/* Corner marks */}
+            <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
+            <span>[{art.tag}]</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Styled Interactive Modals */}
+      <AnimatePresence>
+        {activeArtifact && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#080807]/80 backdrop-blur-sm">
+            {/* Backdrop Close Click */}
+            <div className="absolute inset-0" onClick={() => setActiveArtifact(null)} />
+            
+            {/* Modal Body */}
+            <motion.div 
+              ref={containerRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="artifact-modal-title"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="relative w-full max-w-2xl bg-[#080807] border border-[#f1efe8]/20 p-6 md:p-8 space-y-6 z-10 overflow-hidden shadow-2xl"
+            >
+              {/* Corner Indicators (Real CSS Borders) */}
+              <div className="absolute -left-1.5 -top-1.5 h-3.5 w-3.5 border-l border-t border-[#f1efe8]/30" />
+              <div className="absolute -right-1.5 -top-1.5 h-3.5 w-3.5 border-r border-t border-[#f1efe8]/30" />
+              <div className="absolute -left-1.5 -bottom-1.5 h-3.5 w-3.5 border-l border-b border-[#f1efe8]/30" />
+              <div className="absolute -right-1.5 -bottom-1.5 h-3.5 w-3.5 border-r border-b border-[#f1efe8]/30" />
+
+              {/* Technical telemetry string headers */}
+              <div className="absolute top-3 left-4 text-[8px] text-[#f1efe8]/20 font-mono tracking-widest">// PREVIEW_TELEMETRY_SYS</div>
+              <div className="absolute bottom-3 right-4 text-[8px] text-[#f1efe8]/20 font-mono tracking-widest">// AUTH_SYS_OK</div>
+
+              {/* Close Button */}
+              <button 
+                id="artifact-modal-close-btn"
+                onClick={() => setActiveArtifact(null)}
+                className="absolute top-4 right-4 hover-target font-mono text-[9px] uppercase tracking-widest text-[#f1efe8]/40 hover:text-[#f1efe8] transition-colors px-2 py-1 border border-[#f1efe8]/10 bg-[#080807] z-20"
+                data-cursor-text="CLOSE"
+              >
+                CLOSE [X]
+              </button>
+
+              <div className="space-y-4 pt-4">
+                <div className="text-[9px] tracking-[0.24em] text-[#b7c8a8] font-mono uppercase font-semibold">
+                  {activeArtifact.tag}
+                </div>
+                
+                <h3 id="artifact-modal-title" className="font-serif text-2xl lg:text-3xl text-[#f1efe8] leading-tight">
+                  {activeArtifact.title}
+                </h3>
+                
+                <p className="text-xs text-[#f1efe8]/70 leading-relaxed font-sans select-text">
+                  {activeArtifact.summary}
+                </p>
+              </div>
+
+              {/* Metadata Grid */}
+              <div className="grid grid-cols-3 gap-4 border-y border-[#f1efe8]/10 py-4 text-[9px] font-mono uppercase text-[#f1efe8]/50">
+                <div>
+                  <span className="block text-[#f1efe8]/30">Published</span>
+                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.date}</span>
+                </div>
+                <div>
+                  <span className="block text-[#f1efe8]/30">Artifact State</span>
+                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.status}</span>
+                </div>
+                <div>
+                  <span className="block text-[#f1efe8]/30">Author</span>
+                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.author}</span>
+                </div>
+              </div>
+
+              {/* Detail insights / Key metrics */}
+              <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 text-xs leading-relaxed">
+                {/* Highlights list */}
+                <div className="space-y-3">
+                  <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase font-semibold">Key Insights</div>
+                  <ul className="space-y-2 font-sans text-[#f1efe8]/60">
+                    {activeArtifact.highlights.map((hl, idx) => (
+                      <li key={idx} className="flex gap-2 items-start">
+                        <span className="text-[#b7c8a8] font-mono text-[9px] mt-0.5">▪</span>
+                        <span className="text-[11px]">{hl}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Quantitative statistics */}
+                <div className="space-y-3 bg-[#f1efe8]/[0.01] border border-[#f1efe8]/8 p-4">
+                  <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-mono uppercase">Metrics / Models</div>
+                  <div className="space-y-2">
+                    {activeArtifact.metrics.map((m, idx) => (
+                      <div key={idx} className="flex justify-between font-mono text-[10px] uppercase border-b border-[#f1efe8]/6 pb-1.5 last:border-b-0 last:pb-0">
+                        <span className="text-[#f1efe8]/45">{m.key}</span>
+                        <span className="text-[#f1efe8] font-medium">{m.val}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Action area */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#f1efe8]/10">
+                <div className="font-mono text-[8px] text-[#f1efe8]/30 tracking-widest">
+                  PUBLIC PREVIEW: FULL FILE NOT BUNDLED
+                </div>
+                
+                <a
+                  id="artifact-request-btn"
+                  href={`mailto:sulayman.bowles@gmail.com?subject=${encodeURIComponent(`Research artifact request: ${activeArtifact.title}`)}`}
+                  className="hover-target w-full sm:w-auto bg-[#f1efe8] text-[#080807] font-mono text-[10px] font-semibold uppercase tracking-wider px-6 py-2.5 hover:bg-[#f1efe8]/90 transition-colors disabled:opacity-50 text-center"
+                  data-cursor-text="REQUEST"
+                >
+                  REQUEST FULL FILE
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
+
+// Case/Memo Utilities Component
+function CaseUtilities() {
+  return (
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 text-[9.5px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/42 border-b border-[#f1efe8]/12 relative z-10">
+      {/* Left: Statement */}
+      <div className="flex items-center gap-3">
+        <div className="w-5 h-5 rounded-full border border-[#f1efe8]/20 flex items-center justify-center text-[8px] text-[#b7c8a8]">
+          ◈
+        </div>
+        <span>Start with the thesis. Build with conviction.</span>
+      </div>
+
+      {/* Center: Share */}
+      <div className="flex items-center gap-5">
+        <span className="text-[8px] text-[#f1efe8]/30">ARCHIVE</span>
+        <a href="/markets/network-monopolies" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 01</a>
+        <a href="/markets/computational-commodity-systems" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 02</a>
+        <a href="/markets/fiat-horizon" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 03</a>
+        <button className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="COPY" onClick={() => navigator.clipboard.writeText(window.location.href)}>COPY</button>
+      </div>
+
+      {/* Right: Export */}
+      <button 
+        onClick={() => window.print()}
+        className="flex items-center gap-2 hover:text-[#f1efe8] transition-colors border border-[#f1efe8]/12 px-3 py-1.5 hover-target bg-[#080807]"
+        data-cursor-text="EXPORT"
+      >
+        <span>EXPORT PDF</span>
+        <span className="text-[8px] opacity-60">⤓</span>
+      </button>
+    </section>
+  );
+}
+
+// Main Page Export
+export default function MarketsPage() {
+  useSEO(MARKETS_SEO);
+
+  const prefersReducedMotion = useReducedMotion();
+  const [activeArtifact, setActiveArtifact] = useState<Artifact | null>(null);
+  const [activeThesisId, setActiveThesisId] = useState<number | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   const artifacts: Artifact[] = [
@@ -898,191 +1013,13 @@ function ArtifactSection() {
     }
   ];
 
-  return (
-    <section className="py-12 border-b border-[#f1efe8]/14 space-y-8">
-      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
-        RESEARCH ARTIFACTS
-      </div>
-
-      <div className="flex flex-wrap gap-3">
-        {artifacts.map((art) => (
-          <button 
-            key={art.id}
-            id={`markets-artifact-btn-${art.id}`}
-            onClick={() => setActiveArtifact(art)}
-            className="hover-target border border-[#f1efe8]/10 px-5 py-3 text-[10px] uppercase font-mono tracking-widest text-[#f1efe8]/80 bg-[#f1efe8]/[0.01] hover:border-[#f1efe8]/24 hover:bg-[#f1efe8]/[0.03] transition-all duration-300 relative group"
-            data-cursor-text="PREVIEW"
-          >
-            {/* Corner marks */}
-            <span className="absolute top-0 left-0 text-[7px] text-[#f1efe8]/20 font-sans pointer-events-none group-hover:text-[#b7c8a8] transition-colors">⌜</span>
-            <span className="absolute bottom-0 right-0 text-[7px] text-[#f1efe8]/20 font-sans pointer-events-none group-hover:text-[#b7c8a8] transition-colors">⌟</span>
-            <span>[{art.tag}]</span>
-          </button>
-        ))}
-      </div>
-
-      {/* Styled Interactive Modals */}
-      <AnimatePresence>
-        {activeArtifact && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#080807]/80 backdrop-blur-sm">
-            {/* Backdrop Close Click */}
-            <div className="absolute inset-0" onClick={() => setActiveArtifact(null)} />
-            
-            {/* Modal Body */}
-            <motion.div 
-              ref={containerRef}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="artifact-modal-title"
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="relative w-full max-w-2xl bg-[#080807] border border-[#f1efe8]/20 p-6 md:p-8 space-y-6 z-10 overflow-hidden shadow-2xl"
-            >
-              {/* Corner Indicators */}
-              <div className="absolute top-3 left-3 text-[8px] text-[#f1efe8]/20 font-mono">⌜ PREVIEW_TELEMETRY ⌝</div>
-              <div className="absolute bottom-3 right-3 text-[8px] text-[#f1efe8]/20 font-mono">⌞ AUTH_SYS_OK ⌟</div>
-
-              {/* Close Button */}
-              <button 
-                id="artifact-modal-close-btn"
-                onClick={() => setActiveArtifact(null)}
-                className="absolute top-4 right-4 hover-target font-mono text-[9px] uppercase tracking-widest text-[#f1efe8]/40 hover:text-[#f1efe8] transition-colors px-2 py-1 border border-[#f1efe8]/10"
-                data-cursor-text="CLOSE"
-              >
-                CLOSE [X]
-              </button>
-
-              <div className="space-y-4 pt-4">
-                <div className="text-[9px] tracking-[0.24em] text-[#b7c8a8] font-mono uppercase font-semibold">
-                  {activeArtifact.tag}
-                </div>
-                
-                <h3 id="artifact-modal-title" className="font-serif text-2xl lg:text-3xl text-[#f1efe8] leading-tight">
-                  {activeArtifact.title}
-                </h3>
-                
-                <p className="text-xs text-[#f1efe8]/70 leading-relaxed font-sans select-text">
-                  {activeArtifact.summary}
-                </p>
-              </div>
-
-              {/* Metadata Grid */}
-              <div className="grid grid-cols-3 gap-4 border-y border-[#f1efe8]/10 py-4 text-[9px] font-mono uppercase text-[#f1efe8]/50">
-                <div>
-                  <span className="block text-[#f1efe8]/30">Published</span>
-                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.date}</span>
-                </div>
-                <div>
-                  <span className="block text-[#f1efe8]/30">Artifact State</span>
-                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.status}</span>
-                </div>
-                <div>
-                  <span className="block text-[#f1efe8]/30">Author</span>
-                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.author}</span>
-                </div>
-              </div>
-
-              {/* Detail insights / Key metrics */}
-              <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 text-xs leading-relaxed">
-                {/* Highlights list */}
-                <div className="space-y-3">
-                  <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase font-semibold">Key Insights</div>
-                  <ul className="space-y-2 font-sans text-[#f1efe8]/60">
-                    {activeArtifact.highlights.map((hl, idx) => (
-                      <li key={idx} className="flex gap-2 items-start">
-                        <span className="text-[#b7c8a8] font-mono text-[9px] mt-0.5">▪</span>
-                        <span className="text-[11px]">{hl}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Quantitative statistics */}
-                <div className="space-y-3 bg-[#f1efe8]/[0.01] border border-[#f1efe8]/8 p-4">
-                  <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-mono uppercase">Metrics / Models</div>
-                  <div className="space-y-2">
-                    {activeArtifact.metrics.map((m, idx) => (
-                      <div key={idx} className="flex justify-between font-mono text-[10px] uppercase border-b border-[#f1efe8]/6 pb-1.5 last:border-b-0 last:pb-0">
-                        <span className="text-[#f1efe8]/45">{m.key}</span>
-                        <span className="text-[#f1efe8] font-medium">{m.val}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Action area */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#f1efe8]/10">
-                <div className="font-mono text-[8px] text-[#f1efe8]/30 tracking-widest">
-                  PUBLIC PREVIEW: FULL FILE NOT BUNDLED
-                </div>
-                
-                <a
-                  id="artifact-request-btn"
-                  href={`mailto:sulayman.bowles@gmail.com?subject=${encodeURIComponent(`Research artifact request: ${activeArtifact.title}`)}`}
-                  className="hover-target w-full sm:w-auto bg-[#f1efe8] text-[#080807] font-mono text-[10px] font-semibold uppercase tracking-wider px-6 py-2.5 hover:bg-[#f1efe8]/90 transition-colors disabled:opacity-50"
-                  data-cursor-text="REQUEST"
-                >
-                  REQUEST FULL FILE
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-    </section>
-  );
-}
-
-// Case Utilities Component
-function CaseUtilities() {
-  return (
-    <div className="w-full border-t border-[#f1efe8]/12 mt-12 pt-6 pb-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-[9.5px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/42">
-      {/* Left: Statement */}
-      <div className="flex items-center gap-3">
-        <div className="w-5 h-5 rounded-full border border-[#f1efe8]/20 flex items-center justify-center text-[8px] text-[#b7c8a8]">
-          ◈
-        </div>
-        <span>Start with the thesis. Build with conviction.</span>
-      </div>
-
-      {/* Center: Share */}
-      <div className="flex items-center gap-5">
-        <span className="text-[8px] text-[#f1efe8]/30">ARCHIVE</span>
-        <a href="/markets/network-monopolies" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 01</a>
-        <a href="/markets/computational-commodity-systems" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 02</a>
-        <a href="/markets/fiat-horizon" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 03</a>
-        <button className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="COPY" onClick={() => navigator.clipboard.writeText(window.location.href)}>COPY</button>
-      </div>
-
-      {/* Right: Export */}
-      <button 
-        onClick={() => window.print()}
-        className="flex items-center gap-2 hover:text-[#f1efe8] transition-colors border border-[#f1efe8]/12 px-3 py-1.5 hover-target"
-        data-cursor-text="EXPORT"
-      >
-        <span>EXPORT PDF</span>
-        <span className="text-[8px] opacity-60">⤓</span>
-      </button>
-    </div>
-  );
-}
-
-// Main Page Export
-export default function MarketsPage() {
-  useSEO(MARKETS_SEO);
-
-  const [hoveredSystem, setHoveredSystem] = useState<'traditional' | 'crypto' | null>(null);
-  const prefersReducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const handleOpenArtifact = (id: string) => {
+    const art = artifacts.find(a => a.id === id);
+    if (art) setActiveArtifact(art);
+  };
 
   return (
-    <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased md:cursor-none">
+    <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased md:cursor-none overflow-x-hidden">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
 
@@ -1093,11 +1030,9 @@ export default function MarketsPage() {
 
       <InternalHeader activePath="/markets" tone="dark" />
 
-      {/* 1480px Centered Container */}
-      <div className="max-w-[1480px] mx-auto w-full px-4 md:px-8 xl:px-10 pt-4 pb-8 flex flex-col gap-9 relative z-10">
-        
-        {/* Sub-header status banner */}
-        <div className="w-full flex items-center justify-between text-[10px] tracking-[0.18em] uppercase font-mono border-b border-[#f1efe8]/8 pb-4">
+      {/* Sub-header status banner */}
+      <div className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 pt-4 pb-4 border-b border-[#f1efe8]/8 relative z-10">
+        <div className="w-full flex items-center justify-between text-[10px] tracking-[0.18em] uppercase font-mono">
           <div className="flex items-center gap-3">
             <HeaderReticle />
             <span className="text-[#f1efe8]/40">// SYSTEM: INVESTMENT & COMPASS ARCHIVE</span>
@@ -1109,26 +1044,44 @@ export default function MarketsPage() {
             </span>
           </div>
         </div>
-
-        <HeroSection hoveredSystem={hoveredSystem} setHoveredSystem={setHoveredSystem} />
-
-        <ResearchLanes />
-
-        <FeaturedCases />
-
-        <TraditionalCasesSection />
-
-        <CryptoResearchSection />
-
-        <ResearchProcessSection />
-
-        <ArtifactSection />
-
-        <CaseUtilities />
-
-        <InternalFooter activePath="/markets" tone="dark" />
-
       </div>
+
+      <HeroSection />
+
+      <ResearchLanes />
+
+      <FeaturedCases onOpenArtifact={handleOpenArtifact} />
+
+      <TraditionalCasesSection onOpenArtifact={handleOpenArtifact} />
+
+      <CryptoResearchSection onOpenArtifact={handleOpenArtifact} />
+
+      <ResearchProcessSection />
+
+      <ResearchMemosSection onReadThesis={(idx) => setActiveThesisId(idx)} />
+
+      <ArtifactSection 
+        activeArtifact={activeArtifact} 
+        setActiveArtifact={setActiveArtifact} 
+        artifacts={artifacts} 
+      />
+
+      <CaseUtilities />
+
+      <div className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 pb-8 relative z-10">
+        <InternalFooter activePath="/markets" tone="dark" />
+      </div>
+
+      {/* Slide-out long-form memo reader */}
+      <AnimatePresence>
+        {activeThesisId !== null && (
+          <ArticleReader
+            isOpen={activeThesisId !== null}
+            onClose={() => setActiveThesisId(null)}
+            thesisId={activeThesisId}
+          />
+        )}
+      </AnimatePresence>
     </main>
   );
 }
