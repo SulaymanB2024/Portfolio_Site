@@ -1,6 +1,6 @@
 export const SITE_URL = 'https://sulayman-bowles.dev';
 export const SITE_NAME = 'Sulayman Bowles';
-export const DEFAULT_OG_IMAGE = '/og-default.svg';
+export const DEFAULT_OG_IMAGE = '/og-default.png';
 export const DEFAULT_LOCALE = 'en_US';
 
 export function absoluteUrl(path = '/') {
