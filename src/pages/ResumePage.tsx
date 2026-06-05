@@ -29,8 +29,8 @@ const experience = [
       'Supporting AI product research, competitive analysis, workflow mapping, and prototype review for student-facing tools.',
   },
   {
-    role: 'SEO & Digital Marketing Analytics Intern',
-    org: 'B2B Semiconductor Company',
+    role: 'Technical SEO Analytics',
+    org: 'Private SEO Engagement',
     dates: 'May 2026 - Present',
     summary:
       'Supporting launch analytics, GA4/GSC reporting, SEO baselines, traffic analysis, keyword tracking, and prioritized site recommendations.',

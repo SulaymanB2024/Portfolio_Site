@@ -37,8 +37,8 @@ const experience = [
     details: ['AI Chat UX', 'Competitive Mapping', 'LLM Workflows']
   },
   {
-    role: 'SEO & DIGITAL MARKETING ANALYTICS INTERN',
-    meta: 'B2B Semiconductor Company · May 2026 — Present',
+    role: 'TECHNICAL SEO ANALYTICS',
+    meta: 'Private SEO engagement · May 2026 — Present',
     copy: 'Supporting website launch analytics, GA4, Google Search Console, SEO baselines, traffic analysis, keyword performance, and prioritized recommendations.',
     details: ['GA4 / GSC Analytics', 'Launch Health Audits', 'Crawl Management']
   },

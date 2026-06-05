@@ -289,17 +289,17 @@ function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: stri
       outputs: ['Full Memo', 'Valuation Model', 'Risk Table']
     },
     {
-      company: 'Sovereign Chip Supply / Semiconductor Supply Chain',
-      thesis: 'Sovereign spending subsidies will create a structural domestic CapEx cycle, insulating leader margin structures.',
+      company: 'Critical Infrastructure Supply / Industrial Supply Chain',
+      thesis: 'Public procurement and reshoring incentives can create a structural domestic CapEx cycle, insulating leader margin structures.',
       drivers: [
-        'CapEx cycle expansion supported by public funds',
-        'Leading-edge yield dominance protecting pricing power',
+        'CapEx cycle expansion supported by public funding',
+        'Specialized operating scale protecting pricing power',
         'Supplier concentration insulating critical inputs',
         'Margin preservation via pass-through contract structures'
       ],
       evidence: [
-        'Sovereign CHIPS Act funding maps & application data',
-        'ASML shipping backlogs and extreme ultraviolet (EUV) lead times',
+        'Federal funding maps and award application data',
+        'OEM backlog analysis and long-lead equipment timelines',
         'Supplier revenue dependencies and raw material flows',
         'Geopolitical risk matrix modeling export blocks'
       ],
