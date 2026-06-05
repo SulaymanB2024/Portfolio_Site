@@ -29,6 +29,14 @@ if (!app.includes('fit="cover"')) {
   failures.push('Homepage toga layer does not use cover fit.');
 }
 
+if (!app.includes('focus="large-figure"')) {
+  failures.push('Homepage toga layer does not focus exclusively on the large figure.');
+}
+
+if (!app.includes('revealOpacity={0.68}')) {
+  failures.push('Homepage toga reveal is not using the stronger brush opacity.');
+}
+
 if (app.includes('max-w-[520px]') || app.includes('md:max-w-[620px]')) {
   failures.push('Homepage toga layer still uses centered max-width sizing.');
 }
@@ -43,6 +51,31 @@ if (!component.includes('/art/roman-toga/roman-toga-lines.svg')) {
 
 if (!component.includes("fit?: 'contain' | 'cover'") || !component.includes("fit = 'contain'")) {
   failures.push('RomanTogaReveal does not expose the contain/cover fit contract.');
+}
+
+if (
+  !component.includes("type RomanTogaFocus = 'diagram' | 'large-figure'") ||
+  !component.includes('focus?: RomanTogaFocus') ||
+  !component.includes("focus = 'diagram'")
+) {
+  failures.push('RomanTogaReveal does not expose the diagram/large-figure focus contract.');
+}
+
+if (
+  !component.includes('LARGE_FIGURE_CROP') ||
+  !component.includes('getSourceRect(image, focus)') ||
+  !component.includes('sourceRect.x') ||
+  !component.includes('sourceRect.width')
+) {
+  failures.push('RomanTogaReveal does not crop canvas drawing to the large figure.');
+}
+
+if (!component.includes('data-toga-focus={focus}')) {
+  failures.push('RomanTogaReveal does not expose a stable focus marker for rendered checks.');
+}
+
+if (!component.includes('overflow-hidden')) {
+  failures.push('RomanTogaReveal root does not crop away non-focused diagram regions.');
 }
 
 if (!component.includes('data-toga-reveal-root')) {

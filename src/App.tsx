@@ -463,8 +463,9 @@ function HomePage() {
             {isLoaded && (
               <RomanTogaReveal
                 fit="cover"
-                restOpacity={0.055}
-                revealOpacity={0.36}
+                focus="large-figure"
+                restOpacity={0.05}
+                revealOpacity={0.68}
                 className="h-full w-full"
               />
             )}

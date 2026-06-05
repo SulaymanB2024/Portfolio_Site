@@ -1,11 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+
+type RomanTogaFocus = 'diagram' | 'large-figure';
 
 type RomanTogaRevealProps = {
   className?: string;
   assetHref?: string;
   disabled?: boolean;
   fit?: 'contain' | 'cover';
+  focus?: RomanTogaFocus;
   restOpacity?: number;
   revealOpacity?: number;
 };
@@ -19,15 +22,51 @@ type RevealPoint = {
 };
 
 const DEFAULT_ASSET = '/art/roman-toga/roman-toga-lines.svg';
+const SOURCE_VIEW_BOX = {
+  width: 535.474,
+  height: 555.973,
+};
+const LARGE_FIGURE_CROP = {
+  x: 0,
+  y: 0,
+  width: 218,
+  height: SOURCE_VIEW_BOX.height,
+};
 
-function getObjectFitRect(image: HTMLImageElement, width: number, height: number, fit: 'contain' | 'cover') {
+type SourceRect = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+function getSourceRect(image: HTMLImageElement, focus: RomanTogaFocus): SourceRect {
   const naturalWidth = image.naturalWidth || 1;
   const naturalHeight = image.naturalHeight || 1;
+
+  if (focus !== 'large-figure') {
+    return {
+      x: 0,
+      y: 0,
+      width: naturalWidth,
+      height: naturalHeight,
+    };
+  }
+
+  return {
+    x: naturalWidth * (LARGE_FIGURE_CROP.x / SOURCE_VIEW_BOX.width),
+    y: naturalHeight * (LARGE_FIGURE_CROP.y / SOURCE_VIEW_BOX.height),
+    width: naturalWidth * (LARGE_FIGURE_CROP.width / SOURCE_VIEW_BOX.width),
+    height: naturalHeight * (LARGE_FIGURE_CROP.height / SOURCE_VIEW_BOX.height),
+  };
+}
+
+function getObjectFitRect(sourceRect: SourceRect, width: number, height: number, fit: 'contain' | 'cover') {
   const scale = fit === 'cover'
-    ? Math.max(width / naturalWidth, height / naturalHeight)
-    : Math.min(width / naturalWidth, height / naturalHeight);
-  const drawWidth = naturalWidth * scale;
-  const drawHeight = naturalHeight * scale;
+    ? Math.max(width / sourceRect.width, height / sourceRect.height)
+    : Math.min(width / sourceRect.width, height / sourceRect.height);
+  const drawWidth = sourceRect.width * scale;
+  const drawHeight = sourceRect.height * scale;
 
   return {
     x: (width - drawWidth) / 2,
@@ -42,6 +81,7 @@ export function RomanTogaReveal({
   assetHref = DEFAULT_ASSET,
   disabled = false,
   fit = 'contain',
+  focus = 'diagram',
   restOpacity = 0.12,
   revealOpacity = 0.42,
 }: RomanTogaRevealProps) {
@@ -155,12 +195,23 @@ export function RomanTogaReveal({
       }
 
       if (pointsRef.current.length > 0 && image.complete) {
-        const imageRect = getObjectFitRect(image, width, height, fit);
+        const sourceRect = getSourceRect(image, focus);
+        const imageRect = getObjectFitRect(sourceRect, width, height, fit);
 
         ctx.save();
         ctx.globalAlpha = revealOpacity;
-        ctx.filter = 'grayscale(1) contrast(1.25) brightness(0.55)';
-        ctx.drawImage(image, imageRect.x, imageRect.y, imageRect.width, imageRect.height);
+        ctx.filter = 'grayscale(1) contrast(1.42) brightness(0.42)';
+        ctx.drawImage(
+          image,
+          sourceRect.x,
+          sourceRect.y,
+          sourceRect.width,
+          sourceRect.height,
+          imageRect.x,
+          imageRect.y,
+          imageRect.width,
+          imageRect.height,
+        );
         ctx.globalCompositeOperation = 'destination-in';
         ctx.filter = 'none';
         ctx.drawImage(maskCanvas, 0, 0, width, height);
@@ -195,7 +246,7 @@ export function RomanTogaReveal({
         y,
         age: 0,
         ttl: 920,
-        radius: Math.max(82, Math.min(rect.width, rect.height) * 0.22),
+        radius: Math.max(112, Math.min(rect.width, rect.height) * 0.28),
       });
 
       if (pointsRef.current.length > 24) {
@@ -225,15 +276,23 @@ export function RomanTogaReveal({
         frameRef.current = null;
       }
     };
-  }, [assetHref, canReveal, fit, revealOpacity]);
+  }, [assetHref, canReveal, fit, focus, revealOpacity]);
 
   const fitClassName = fit === 'cover' ? 'object-cover' : 'object-contain';
+  const focusImageStyle: CSSProperties = focus === 'large-figure'
+    ? {
+        objectPosition: 'left center',
+        transform: 'scale(2.55)',
+        transformOrigin: 'left center',
+      }
+    : {};
 
   return (
     <div
       ref={containerRef}
-      className={`relative isolate overflow-visible ${className}`}
+      className={`relative isolate overflow-hidden ${className}`}
       data-toga-fit={fit}
+      data-toga-focus={focus}
       data-toga-reveal-root="true"
       aria-hidden="true"
     >
@@ -243,6 +302,7 @@ export function RomanTogaReveal({
         draggable={false}
         className={`pointer-events-none absolute inset-0 h-full w-full select-none ${fitClassName}`}
         style={{
+          ...focusImageStyle,
           opacity: restOpacity,
           filter: 'grayscale(1) contrast(1.22) brightness(0.5)',
           mixBlendMode: 'multiply',
@@ -255,6 +315,7 @@ export function RomanTogaReveal({
           draggable={false}
           className={`pointer-events-none absolute inset-0 h-full w-full select-none ${fitClassName}`}
           style={{
+            ...focusImageStyle,
             opacity: Math.min(revealOpacity * 0.22, 0.12),
             filter: 'grayscale(1) contrast(1.2) brightness(0.55)',
             maskImage: 'radial-gradient(circle at 50% 46%, black 0%, black 28%, transparent 66%)',
