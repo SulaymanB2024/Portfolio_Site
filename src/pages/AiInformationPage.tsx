@@ -71,11 +71,11 @@ export default function AiInformationPage() {
 
       <InternalHeader activePath="/ai-information" tone="light" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 py-14 md:px-8 xl:px-10 xl:py-20">
-        <section className="grid min-h-[64vh] max-w-full items-end gap-12 pb-14 lg:grid-cols-[0.62fr_0.38fr]">
+      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 py-10 md:px-8 md:py-14 xl:px-10 xl:py-20">
+        <section className="grid min-h-0 max-w-full items-end gap-8 pb-10 md:gap-12 md:pb-14 lg:min-h-[64vh] lg:grid-cols-[0.62fr_0.38fr]">
           <div className="min-w-0">
-            <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-ink/48">Public reference</p>
-            <h1 className="max-w-5xl font-serif text-[clamp(2.45rem,10vw,10rem)] italic leading-[0.92] tracking-[-0.02em] md:leading-[0.86] md:tracking-[-0.055em]">
+            <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-ink/48 md:mb-8 md:tracking-[0.36em]">Public reference</p>
+            <h1 className="max-w-5xl font-serif text-[2.55rem] italic leading-[0.96] tracking-normal md:text-[clamp(2.45rem,10vw,10rem)] md:leading-[0.86] md:tracking-[-0.055em]">
               <span className="block sm:inline">AI Information</span>{' '}
               <span className="block sm:inline">for Sulayman</span>{' '}
               <span className="block sm:inline">Bowles, Void</span>{' '}

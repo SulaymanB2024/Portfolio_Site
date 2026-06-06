@@ -268,7 +268,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
                 <line x1="120" y1={cy} x2="880" y2={cy} stroke="rgba(241,239,232,0.12)" />
                 <line x1={cx} y1="88" x2={cx} y2="730" stroke="rgba(241,239,232,0.12)" />
                 
-                <motion.circle
+                <circle
                   cx={cx}
                   cy={cy}
                   r="304"
@@ -276,13 +276,11 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
                   stroke="rgba(241,239,232,0.26)"
                   strokeWidth="1"
                   strokeDasharray="1 18"
-                  animate={{ rotate: 360, opacity: [0.16, 0.32, 0.16] }}
-                  transition={{ rotate: { duration: 42, repeat: Infinity, ease: 'linear' }, opacity: { duration: 5, repeat: Infinity, ease: 'easeInOut' } }}
-                  style={{ transformOrigin: `${cx}px ${cy}px` }}
+                  opacity="0.24"
                 />
 
                 {/* Sweeping radar scanning beam */}
-                <motion.circle
+                <circle
                   cx={cx}
                   cy={cy}
                   r="304"
@@ -290,9 +288,6 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
                   stroke="rgba(241,239,232,0.035)"
                   strokeWidth="18"
                   strokeDasharray="120 740"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                  style={{ transformOrigin: `${cx}px ${cy}px` }}
                 />
 
                 {/* Polar scale angle ticks */}
@@ -361,18 +356,13 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
               const pos = getSecondaryPosition(node);
               const opacity = 0.24 + (node.depth % 4) * 0.09;
               return (
-                <motion.circle
+                <circle
                   key={`sec-${index}`}
                   cx={pos.x}
                   cy={pos.y}
                   r={node.size}
                   fill="#f1efe8"
-                  animate={{
-                    cx: pos.x,
-                    cy: pos.y,
-                    fillOpacity: opacity
-                  }}
-                  transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+                  fillOpacity={opacity}
                 />
               );
             })}
@@ -388,79 +378,52 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
                   onMouseEnter={() => setHoveredNode(node.label)}
                   onMouseLeave={() => setHoveredNode(null)}
                 >
-                  <motion.line
+                  <line
                     x1={viewMode === 'orbital' ? cx : pos.x}
                     y1={viewMode === 'orbital' ? cy : pos.y}
                     x2={pos.x}
                     y2={pos.y}
-                    animate={{
-                      x1: viewMode === 'orbital' ? cx : pos.x,
-                      y1: viewMode === 'orbital' ? cy : pos.y,
-                      x2: pos.x,
-                      y2: pos.y,
-                      stroke: isHovered ? "rgba(241,239,232,0.48)" : "rgba(241,239,232,0.12)",
-                      strokeWidth: isHovered ? 1.5 : 1
-                    }}
-                    transition={{ duration: 0.5 }}
+                    stroke={isHovered ? "rgba(241,239,232,0.48)" : "rgba(241,239,232,0.12)"}
+                    strokeWidth={isHovered ? 1.5 : 1}
                   />
                   
                   {/* Node outer outline */}
-                  <motion.circle
+                  <circle
                     cx={pos.x}
                     cy={pos.y}
-                    r={node.size + 10}
+                    r={node.size + (isHovered ? 12 : 10)}
                     fill="none"
-                    animate={{
-                      cx: pos.x,
-                      cy: pos.y,
-                      stroke: isHovered ? "#f1efe8" : "rgba(241,239,232,0.16)",
-                      scale: isHovered ? 1.15 : 1
-                    }}
-                    transition={{ duration: 0.5 }}
+                    stroke={isHovered ? "#f1efe8" : "rgba(241,239,232,0.16)"}
                   />
 
                   {/* Pulse ring on hover */}
                   <AnimatePresence>
                     {isHovered && (
-                      <motion.circle
+                      <circle
                         cx={pos.x}
                         cy={pos.y}
                         r={node.size + 14}
                         fill="none"
                         stroke="#f1efe8"
-                        initial={{ scale: 0.6, opacity: 1 }}
-                        animate={{ scale: 1.6, opacity: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
+                        opacity="0.48"
                       />
                     )}
                   </AnimatePresence>
 
                   {/* Node core fill */}
-                  <motion.circle
+                  <circle
                     cx={pos.x}
                     cy={pos.y}
-                    r={node.size}
-                    animate={{
-                      cx: pos.x,
-                      cy: pos.y,
-                      fill: isHovered ? "#f1efe8" : "rgba(241,239,232,0.68)",
-                      stroke: isHovered ? "#FFFFFF" : "rgba(241,239,232,0.92)",
-                      scale: isHovered ? 1.25 : 1
-                    }}
-                    transition={{ duration: 0.5 }}
+                    r={isHovered ? node.size * 1.25 : node.size}
+                    fill={isHovered ? "#f1efe8" : "rgba(241,239,232,0.68)"}
+                    stroke={isHovered ? "#FFFFFF" : "rgba(241,239,232,0.92)"}
                   />
 
                   {/* Node label text */}
-                  <motion.text
+                  <text
                     x={pos.x}
                     y={pos.y - 22}
-                    animate={{
-                      x: pos.x,
-                      y: pos.y - 22,
-                      fill: isHovered ? "#FFFFFF" : "rgba(241,239,232,0.52)",
-                    }}
-                    transition={{ duration: 0.5 }}
+                    fill={isHovered ? "#FFFFFF" : "rgba(241,239,232,0.52)"}
                     fontFamily="Inter, sans-serif"
                     fontSize="9.5"
                     letterSpacing="2"
@@ -468,7 +431,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
                     fontWeight="500"
                   >
                     {node.label}
-                  </motion.text>
+                  </text>
                 </g>
               );
             })}
@@ -477,7 +440,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
             {viewMode === 'orbital' && (
               <>
                 <circle cx={cx} cy={cy} r="58" fill="#080807" stroke="rgba(241,239,232,0.34)" strokeWidth="1" />
-                <motion.circle
+                <circle
                   cx={cx}
                   cy={cy}
                   r="47"
@@ -485,9 +448,6 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
                   stroke="rgba(241,239,232,0.22)"
                   strokeWidth="1"
                   strokeDasharray="4 12"
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-                  style={{ transformOrigin: `${cx}px ${cy}px` }}
                 />
                 <circle cx={cx} cy={cy} r="36" fill="url(#atlas-node-core)" stroke="#f1efe8" strokeWidth="1.4" />
                 <circle cx={cx} cy={cy} r="8" fill="#080807" stroke="#f1efe8" strokeWidth="1" />

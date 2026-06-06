@@ -103,21 +103,21 @@ export default function ResumePage() {
 
       <InternalHeader activePath="/resume" tone="light" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 py-14 md:px-8 xl:px-10 xl:py-20">
-        <section className="grid min-h-[72vh] items-end gap-12 pb-14 lg:grid-cols-[0.64fr_0.36fr]">
+      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 py-10 md:px-8 md:py-14 xl:px-10 xl:py-20">
+        <section className="grid min-h-0 items-end gap-8 pb-10 md:gap-12 md:pb-14 lg:min-h-[72vh] lg:grid-cols-[0.64fr_0.36fr]">
           <div>
-            <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-ink/48">Resume</p>
-            <h1 className="max-w-full font-serif text-[clamp(3.2rem,16vw,12rem)] italic leading-[0.82] tracking-[-0.04em] md:leading-[0.78] md:tracking-[-0.055em]">
+            <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-ink/48 md:mb-8 md:tracking-[0.36em]">Resume</p>
+            <h1 className="max-w-full font-serif text-[3.25rem] italic leading-[0.88] tracking-normal md:text-[clamp(3.2rem,16vw,12rem)] md:leading-[0.78] md:tracking-[-0.055em]">
               <span className="block sm:inline">Sulayman</span>{' '}
               <span className="block sm:inline">Bowles</span>{' '}
               <span className="block sm:inline">Resume</span>
             </h1>
-            <p className="mt-10 max-w-3xl [overflow-wrap:anywhere] font-serif text-[clamp(1.38rem,6vw,5rem)] italic leading-[1] tracking-normal text-ink/68 md:leading-[0.94] md:tracking-[-0.03em]">
+            <p className="mt-7 max-w-3xl [overflow-wrap:anywhere] font-serif text-[1.55rem] italic leading-[1.04] tracking-normal text-ink/68 md:mt-10 md:text-[clamp(1.38rem,6vw,5rem)] md:leading-[0.94] md:tracking-[-0.03em]">
               Technical SEO, finance research, AI search, and product/software execution.
             </p>
           </div>
 
-          <aside className="min-w-0 border-l border-ink/14 pl-6">
+          <aside className="min-w-0 border-l border-ink/14 pl-4 sm:pl-6">
             <p className="max-w-xl [overflow-wrap:anywhere] text-base leading-relaxed text-ink/62">
               McCombs School of Business student and Void Agency founder building Atlas, technical SEO audit workflows, research notes, and inspectable web interfaces.
             </p>

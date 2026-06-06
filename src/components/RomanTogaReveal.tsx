@@ -1,4 +1,4 @@
-import { type CSSProperties, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 type RomanTogaFocus = 'diagram' | 'large-figure';
@@ -36,8 +36,6 @@ const LARGE_FIGURE_FOCAL_POINT = {
   x: 0,
   y: 0,
 };
-const LARGE_FIGURE_DESKTOP_TRANSFORM = 'scale(2.55)';
-const LARGE_FIGURE_MOBILE_TRANSFORM = 'translateX(-32%) scale(2.55)';
 
 type SourceRect = {
   x: number;
@@ -88,6 +86,37 @@ function getObjectFitRect(
   };
 }
 
+function drawTogaImage(
+  ctx: CanvasRenderingContext2D,
+  image: HTMLImageElement,
+  width: number,
+  height: number,
+  fit: 'contain' | 'cover',
+  focus: RomanTogaFocus,
+  opacity: number,
+  filter: string,
+) {
+  const sourceRect = getSourceRect(image, focus);
+  const imageAlignment = focus === 'large-figure' ? LARGE_FIGURE_FOCAL_POINT : undefined;
+  const imageRect = getObjectFitRect(sourceRect, width, height, fit, imageAlignment);
+
+  ctx.save();
+  ctx.globalAlpha = opacity;
+  ctx.filter = filter;
+  ctx.drawImage(
+    image,
+    sourceRect.x,
+    sourceRect.y,
+    sourceRect.width,
+    sourceRect.height,
+    imageRect.x,
+    imageRect.y,
+    imageRect.width,
+    imageRect.height,
+  );
+  ctx.restore();
+}
+
 export function RomanTogaReveal({
   className = '',
   assetHref = DEFAULT_ASSET,
@@ -98,6 +127,7 @@ export function RomanTogaReveal({
   revealOpacity = 0.42,
 }: RomanTogaRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const baseCanvasRef = useRef<HTMLCanvasElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointsRef = useRef<RevealPoint[]>([]);
   const frameRef = useRef<number | null>(null);
@@ -138,6 +168,112 @@ export function RomanTogaReveal({
       imageRef.current = null;
     };
   }, [assetHref]);
+
+  useEffect(() => {
+    const canvas = baseCanvasRef.current;
+    const container = containerRef.current;
+    const image = imageRef.current;
+
+    if (!canvas || !container || !image) {
+      return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      return;
+    }
+
+    const staticMaskCanvas = document.createElement('canvas');
+    const staticMaskCtx = staticMaskCanvas.getContext('2d');
+    if (!staticMaskCtx) {
+      return;
+    }
+
+    let width = 0;
+    let height = 0;
+    let devicePixelRatio = 1;
+
+    const resizeCanvas = () => {
+      const rect = container.getBoundingClientRect();
+      width = Math.max(1, rect.width);
+      height = Math.max(1, rect.height);
+      devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = Math.floor(width * devicePixelRatio);
+      canvas.height = Math.floor(height * devicePixelRatio);
+      staticMaskCanvas.width = canvas.width;
+      staticMaskCanvas.height = canvas.height;
+
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+      staticMaskCtx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    };
+
+    const drawBase = () => {
+      ctx.clearRect(0, 0, width, height);
+      staticMaskCtx.clearRect(0, 0, width, height);
+
+      if (!image.complete || !image.naturalWidth) {
+        return;
+      }
+
+      drawTogaImage(
+        ctx,
+        image,
+        width,
+        height,
+        fit,
+        focus,
+        restOpacity,
+        'grayscale(1) contrast(1.22) brightness(0.5)',
+      );
+
+      if (!canReveal) {
+        drawTogaImage(
+          staticMaskCtx,
+          image,
+          width,
+          height,
+          fit,
+          focus,
+          Math.min(revealOpacity * 0.22, 0.12),
+          'grayscale(1) contrast(1.2) brightness(0.55)',
+        );
+
+        staticMaskCtx.globalCompositeOperation = 'destination-in';
+        const gradient = staticMaskCtx.createRadialGradient(
+          width * 0.5,
+          height * 0.46,
+          0,
+          width * 0.5,
+          height * 0.46,
+          Math.max(width, height) * 0.44,
+        );
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+        gradient.addColorStop(0.28, 'rgba(255, 255, 255, 1)');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        staticMaskCtx.fillStyle = gradient;
+        staticMaskCtx.fillRect(0, 0, width, height);
+        staticMaskCtx.globalCompositeOperation = 'source-over';
+
+        ctx.drawImage(staticMaskCanvas, 0, 0, width, height);
+      }
+    };
+
+    const handleResize = () => {
+      resizeCanvas();
+      drawBase();
+    };
+
+    resizeCanvas();
+    drawBase();
+    image.addEventListener('load', drawBase);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      image.removeEventListener('load', drawBase);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [assetHref, canReveal, fit, focus, restOpacity, revealOpacity]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -207,24 +343,17 @@ export function RomanTogaReveal({
       }
 
       if (pointsRef.current.length > 0 && image.complete) {
-        const sourceRect = getSourceRect(image, focus);
-        const imageAlignment = focus === 'large-figure' ? LARGE_FIGURE_FOCAL_POINT : undefined;
-        const imageRect = getObjectFitRect(sourceRect, width, height, fit, imageAlignment);
-
-        ctx.save();
-        ctx.globalAlpha = revealOpacity;
-        ctx.filter = 'grayscale(1) contrast(1.42) brightness(0.42)';
-        ctx.drawImage(
+        drawTogaImage(
+          ctx,
           image,
-          sourceRect.x,
-          sourceRect.y,
-          sourceRect.width,
-          sourceRect.height,
-          imageRect.x,
-          imageRect.y,
-          imageRect.width,
-          imageRect.height,
+          width,
+          height,
+          fit,
+          focus,
+          revealOpacity,
+          'grayscale(1) contrast(1.42) brightness(0.42)',
         );
+        ctx.save();
         ctx.globalCompositeOperation = 'destination-in';
         ctx.filter = 'none';
         ctx.drawImage(maskCanvas, 0, 0, width, height);
@@ -291,15 +420,6 @@ export function RomanTogaReveal({
     };
   }, [assetHref, canReveal, fit, focus, revealOpacity]);
 
-  const fitClassName = fit === 'cover' ? 'object-cover' : 'object-contain';
-  const focusImageStyle: CSSProperties = focus === 'large-figure'
-    ? {
-        objectPosition: 'left top',
-        transform: isMobile ? LARGE_FIGURE_MOBILE_TRANSFORM : LARGE_FIGURE_DESKTOP_TRANSFORM,
-        transformOrigin: 'left top',
-      }
-    : {};
-
   return (
     <div
       ref={containerRef}
@@ -309,37 +429,14 @@ export function RomanTogaReveal({
       data-toga-reveal-root="true"
       aria-hidden="true"
     >
-      <img
-        src={assetHref}
-        alt=""
-        draggable={false}
-        className={`pointer-events-none absolute inset-0 h-full w-full select-none ${fitClassName}`}
-        style={{
-          ...focusImageStyle,
-          opacity: restOpacity,
-          filter: 'grayscale(1) contrast(1.22) brightness(0.5)',
-          mixBlendMode: 'multiply',
-        }}
+      <canvas
+        ref={baseCanvasRef}
+        className="pointer-events-none absolute inset-0 h-full w-full mix-blend-multiply"
+        role="presentation"
       />
-      {!canReveal && (
-        <img
-          src={assetHref}
-          alt=""
-          draggable={false}
-          className={`pointer-events-none absolute inset-0 h-full w-full select-none ${fitClassName}`}
-          style={{
-            ...focusImageStyle,
-            opacity: Math.min(revealOpacity * 0.22, 0.12),
-            filter: 'grayscale(1) contrast(1.2) brightness(0.55)',
-            maskImage: 'radial-gradient(circle at 50% 46%, black 0%, black 28%, transparent 66%)',
-            WebkitMaskImage: 'radial-gradient(circle at 50% 46%, black 0%, black 28%, transparent 66%)',
-            mixBlendMode: 'multiply',
-          }}
-        />
-      )}
       <canvas
         ref={canvasRef}
-        className="pointer-events-none absolute inset-0 h-full w-full"
+        className="pointer-events-none absolute inset-0 h-full w-full mix-blend-multiply"
         role="presentation"
       />
     </div>

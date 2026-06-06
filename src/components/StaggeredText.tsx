@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface StaggeredTextProps {
   text: string;
@@ -7,6 +8,7 @@ interface StaggeredTextProps {
 }
 
 export function StaggeredText({ text, className = '', delay = 0 }: StaggeredTextProps) {
+  const prefersReducedMotion = useReducedMotion();
   const words = text.split(' ');
 
   const container = {
@@ -14,7 +16,7 @@ export function StaggeredText({ text, className = '', delay = 0 }: StaggeredText
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05,
+        staggerChildren: prefersReducedMotion ? 0 : 0.008,
         delayChildren: delay,
       },
     },
@@ -23,15 +25,13 @@ export function StaggeredText({ text, className = '', delay = 0 }: StaggeredText
   const child = {
     hidden: {
       opacity: 0,
-      y: 50,
-      rotateX: -20,
+      y: prefersReducedMotion ? 0 : 8,
     },
     visible: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
       transition: {
-        duration: 1.2,
+        duration: prefersReducedMotion ? 0.001 : 0.42,
         ease: [0.16, 1, 0.3, 1],
       },
     },
@@ -54,7 +54,6 @@ export function StaggeredText({ text, className = '', delay = 0 }: StaggeredText
           className="inline-block whitespace-pre origin-bottom mr-[0.25em] mb-[0.1em]"
         >
           {word}
-          {index < words.length - 1 ? ' ' : ''}
         </motion.span>
       ))}
     </motion.h2>

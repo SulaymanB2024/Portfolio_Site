@@ -285,3 +285,70 @@ export function marketArticleJsonLd({
     ]),
   ]);
 }
+
+export function aiVisibilityJsonLd(): JsonLd {
+  return graphSchema([
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      '@id': `${SITE_URL}/ai-visibility-benchmark#service`,
+      name: 'AI Visibility Benchmark',
+      url: absoluteUrl('/ai-visibility-benchmark'),
+      provider: {
+        '@id': `${SITE_URL}/#void-agency`,
+      },
+      description:
+        'An in-depth review of how search engines and LLM RAG systems crawl, interpret, and cite brand entities and structured data.',
+    },
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Method', path: '/method' },
+      { name: 'AI Visibility', path: '/ai-visibility-benchmark' },
+    ]),
+  ]);
+}
+
+export function productDiscoveryJsonLd(): JsonLd {
+  return graphSchema([
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      '@id': `${SITE_URL}/product-discovery-system#service`,
+      name: 'Product Discovery System',
+      url: absoluteUrl('/product-discovery-system'),
+      provider: {
+        '@id': `${SITE_URL}/#void-agency`,
+      },
+      description:
+        'Detailed methodology for auditing e-commerce templates, keyword intent mappings, internal link equity, and canonical consolidations.',
+    },
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Method', path: '/method' },
+      { name: 'Product Discovery', path: '/product-discovery-system' },
+    ]),
+  ]);
+}
+
+export function localVisibilityJsonLd(): JsonLd {
+  return graphSchema([
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      '@id': `${SITE_URL}/service-area-visibility-audit#service`,
+      name: 'Service-Area Visibility Audit',
+      url: absoluteUrl('/service-area-visibility-audit'),
+      provider: {
+        '@id': `${SITE_URL}/#void-agency`,
+      },
+      description:
+        'Analyzing territory landing page architecture, GBP signal metrics, NAP directories, and local link crawls.',
+    },
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Method', path: '/method' },
+      { name: 'Local Visibility', path: '/service-area-visibility-audit' },
+    ]),
+  ]);
+}
+

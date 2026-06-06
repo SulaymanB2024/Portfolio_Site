@@ -15,6 +15,8 @@ import InternalHeader from '../components/InternalHeader';
 import InternalFooter from '../components/InternalFooter';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import { WireframeGrid } from '../components/WireframeGrid';
+import { SourceBasisLabel } from '../components/ServiceModulePanels';
+import { getContactHref } from '../content/serviceModules';
 
 const ATLAS_SEO = getSeoRoute('/atlas')!;
 
@@ -221,13 +223,13 @@ function ProcessIcon({ type, isHovered }: { type: ProcessStepProps['icon']; isHo
   if (type === 'score') {
     return (
       <svg viewBox="0 0 72 72" className="h-14 w-14" aria-hidden="true">
-        <motion.circle 
+        <circle 
           className={common} 
           cx="36" 
           cy="36" 
-          r="24" 
+          r={isHovered ? 26 : 24} 
           strokeWidth="1.2" 
-          animate={isHovered ? { r: 26, opacity: 0.95 } : { r: 24, opacity: 0.75 }}
+          opacity={isHovered ? 0.95 : 0.75}
         />
         <motion.path 
           className={common} 
@@ -1218,22 +1220,22 @@ export default function AtlasPage() {
 
       <InternalHeader activePath="/atlas" tone="light" />
 
-      <section className="relative z-10 mx-auto grid min-h-screen w-full max-w-[1480px] grid-cols-1 gap-12 px-4 pb-16 pt-32 md:px-8 lg:grid-cols-12 xl:px-10 lg:pb-24 lg:pt-40">
+      <section className="relative z-10 mx-auto grid min-h-0 w-full max-w-[1480px] grid-cols-1 gap-9 px-4 pb-14 pt-10 md:px-8 lg:min-h-screen lg:grid-cols-12 lg:gap-12 lg:pb-24 lg:pt-40 xl:px-10">
         <ScrollReveal className="lg:col-span-4">
-          <div className="mb-8 text-xs uppercase tracking-[0.36em] text-ink/48">( 02 )</div>
+          <div className="mb-6 text-[10px] uppercase tracking-[0.28em] text-ink/48 md:mb-8 md:text-xs md:tracking-[0.36em]">( 02 )</div>
           <h1 
             style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
-            className="font-serif text-[clamp(4.6rem,10vw,10.75rem)] italic leading-[0.82] tracking-[-0.055em]"
+            className="font-serif text-[4.2rem] italic leading-[0.84] tracking-normal md:text-[clamp(4.6rem,10vw,10.75rem)] md:tracking-[-0.055em]"
           >
             <ScrambleText text="ATLAS" trigger="once" />
           </h1>
-          <p className="mt-10 max-w-[25rem] font-serif text-[clamp(2rem,4vw,4.25rem)] italic leading-[0.92] tracking-[-0.025em]">
+          <p className="mt-7 max-w-[25rem] font-serif text-[2rem] italic leading-[0.98] tracking-normal md:mt-10 md:text-[clamp(2rem,4vw,4.25rem)] md:leading-[0.92] md:tracking-[-0.025em]">
             <RevealText text="Crawl-based evidence engine for search." delay={0.25} elementType="span" />
           </p>
-          <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">
+          <p className="mt-6 max-w-[28rem] text-base leading-relaxed text-ink/62 md:mt-8">
             Atlas is a technical SEO audit system that crawls, interprets, and scores websites to surface what search engines see across architecture, indexation, performance, and AI-search readiness.
           </p>
-          <dl className="mt-12 grid max-w-[30rem] grid-cols-[0.6fr_1fr] gap-x-8 gap-y-5 border-t border-ink/20 pt-6 text-[10px] uppercase tracking-[0.24em]">
+          <dl className="mt-8 grid max-w-[30rem] grid-cols-[0.6fr_1fr] gap-x-6 gap-y-4 border-t border-ink/20 pt-5 text-[10px] uppercase tracking-[0.18em] md:mt-12 md:gap-x-8 md:gap-y-5 md:pt-6 md:tracking-[0.24em]">
             <dt className="text-ink/45">ROLE</dt>
             <dd>BUILDER / OPERATOR</dd>
             <dt className="text-ink/45">OUTPUT</dt>
@@ -1245,9 +1247,17 @@ export default function AtlasPage() {
           <div className="group">
             <AtlasCrawlMap className="aspect-[1000/820] w-full transition-transform duration-700 group-hover:-translate-y-1" />
           </div>
-          <div className="mt-4 flex items-center justify-between border-b border-ink/15 pb-4 text-[10px] uppercase tracking-[0.28em] text-ink/55">
+          <div className="mt-4 flex flex-col gap-2 border-b border-ink/15 pb-4 text-[10px] uppercase tracking-[0.18em] text-ink/55 sm:flex-row sm:items-center sm:justify-between md:tracking-[0.28em]">
             <span>SAMPLE DATASET: EXAMPLE.COM</span>
             <span>DEMO CRAWL VIEW: APR 18, 2024</span>
+          </div>
+          <div className="mt-5">
+            <SourceBasisLabel
+              tone="light"
+              label="Sanitized crawl-map and issue-priority preview"
+              status="Preview"
+              sourceBasis="Demo crawl rows, indexability states, internal link graph, and sample export structure"
+            />
           </div>
         </ScrollReveal>
       </section>
@@ -1359,7 +1369,9 @@ export default function AtlasPage() {
           <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">
             Atlas turns complexity into clarity - so teams can fix what matters and prove the impact.
           </p>
-          <a href="/#contact" aria-label="Contact Sulayman Bowles" data-cursor-text="CONTACT" className="hover-target mt-10 block h-12 w-12 rounded-full border border-ink/35 transition-colors hover:bg-ink hover:text-canvas" />
+          <a href={getContactHref('atlas')} data-cursor-text="CONTACT" className="hover-target mt-10 inline-flex border-b border-ink/28 pb-2 text-[10px] uppercase tracking-[0.28em] text-ink transition-colors hover:border-ink/70">
+            Request crawl audit -&gt;
+          </a>
         </ScrollReveal>
 
         <ScrollReveal className="lg:col-span-5" delay={0.1} blur={false}>
@@ -1369,7 +1381,7 @@ export default function AtlasPage() {
               ['01', 'VIEW RELATED WORK', 'See other projects in SEO, finance, and data.'],
               ['02', 'WORK WITH ME', "Let's build systems that move the needle."],
             ].map(([index, title, copy]) => (
-              <a key={title} href={index === '01' ? '/#selected-works' : '/#contact'} data-cursor-text={index === '01' ? 'WORK' : 'CONTACT'} className="hover-target group border-b border-ink/16 py-8 md:border-r md:border-ink/16 md:pr-8 md:last:border-r-0 md:last:pl-8">
+              <a key={title} href={index === '01' ? '/#selected-works' : getContactHref('atlas')} data-cursor-text={index === '01' ? 'WORK' : 'CONTACT'} className="hover-target group border-b border-ink/16 py-8 md:border-r md:border-ink/16 md:pr-8 md:last:border-r-0 md:last:pl-8">
                 <div className="mb-8 text-[10px] uppercase tracking-[0.28em] text-ink/42">{index}</div>
                 <h3 className="mb-4 text-xs uppercase tracking-[0.3em]">{title}</h3>
                 <p className="mb-7 text-sm leading-relaxed text-ink/62">{copy}</p>

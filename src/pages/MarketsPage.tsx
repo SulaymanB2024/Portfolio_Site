@@ -33,15 +33,15 @@ function HeaderReticle() {
 // 2. Hero Section
 function HeroSection() {
   return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-12 lg:gap-[72px] items-center py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 relative z-10">
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-10 lg:gap-[72px] items-center py-10 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 relative z-10">
       {/* Left Column: Thesis Info */}
-      <div className="space-y-9">
+      <div className="space-y-7 md:space-y-9">
         <div className="flex items-center justify-between text-[10px] tracking-[0.18em] text-[#f1efe8]/45 uppercase font-mono">
           <span>INVESTMENT RESEARCH</span>
           <span>CASE ARCHIVE</span>
         </div>
 
-        <h1 className="font-serif text-[clamp(42px,5.2vw,74px)] leading-[0.98] tracking-[-0.03em] text-[#f1efe8]">
+        <h1 className="font-serif text-[2.75rem] leading-[1] tracking-normal text-[#f1efe8] md:text-[clamp(42px,5.2vw,74px)] md:leading-[0.98] md:tracking-[-0.03em]">
           Traditional Cases,<br />
           Crypto Research,<br />
           <span className="italic font-light opacity-95 text-[#b7c8a8]/90">&amp; Market Reasoning</span>
@@ -71,7 +71,7 @@ function HeroSection() {
         </div>
 
         {/* Metadata Row */}
-        <div className="grid grid-cols-3 gap-6 border-t border-[#f1efe8]/10 pt-6">
+        <div className="grid grid-cols-1 gap-4 border-t border-[#f1efe8]/10 pt-6 sm:grid-cols-3 sm:gap-6">
           <div>
             <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-1.5 font-mono">RESEARCH TYPES</div>
             <div className="text-xs text-[#f1efe8]/80 font-mono">Equity / Crypto</div>
@@ -265,6 +265,64 @@ interface Artifact {
   author: string;
   highlights: string[];
   metrics: { key: string; val: string }[];
+}
+
+type MarketFilter = 'All' | 'Equity' | 'Crypto' | 'Model' | 'Memo' | 'In progress' | 'Completed';
+
+const marketFilters: MarketFilter[] = ['All', 'Equity', 'Crypto', 'Model', 'Memo', 'In progress', 'Completed'];
+
+function thesisMatchesFilter(thesis: (typeof MARKET_THESES)[number], filter: MarketFilter) {
+  if (filter === 'All') return true;
+  if (filter === 'Equity') return thesis.category.includes('EQUITY') || thesis.category.includes('MONETARY');
+  if (filter === 'Crypto') return thesis.category.includes('DECENTRALIZED');
+  if (filter === 'Model') return Boolean(thesis.formula);
+  if (filter === 'Memo') return true;
+  if (filter === 'Completed') return true;
+  return false;
+}
+
+function artifactMatchesFilter(artifact: Artifact, filter: MarketFilter) {
+  const haystack = `${artifact.tag} ${artifact.title} ${artifact.summary} ${artifact.status}`.toLowerCase();
+  if (filter === 'All') return true;
+  if (filter === 'Equity') return haystack.includes('appian') || haystack.includes('valuation') || haystack.includes('equity');
+  if (filter === 'Crypto') return haystack.includes('protocol') || haystack.includes('ethereum') || haystack.includes('aerodrome') || haystack.includes('on-chain');
+  if (filter === 'Model') return haystack.includes('model') || haystack.includes('dashboard') || haystack.includes('metrics');
+  if (filter === 'Memo') return haystack.includes('memo');
+  if (filter === 'In progress') return haystack.includes('framework') || haystack.includes('request');
+  return haystack.includes('preview only') || haystack.includes('available');
+}
+
+function ResearchFilterBar({ activeFilter, setActiveFilter }: { activeFilter: MarketFilter; setActiveFilter: (filter: MarketFilter) => void }) {
+  return (
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-6 border-b border-[#f1efe8]/12 relative z-10">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">FILTER ARCHIVE</div>
+          <p className="mt-2 text-xs leading-relaxed text-[#f1efe8]/45">Filter memos and artifact previews by research type and completion state.</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {marketFilters.map((filter) => {
+            const active = activeFilter === filter;
+            return (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setActiveFilter(filter)}
+                className={`hover-target border px-3 py-2 text-[9px] uppercase tracking-[0.18em] transition-colors ${
+                  active
+                    ? 'border-[#b7c8a8] bg-[#b7c8a8]/10 text-[#b7c8a8]'
+                    : 'border-[#f1efe8]/12 text-[#f1efe8]/54 hover:border-[#f1efe8]/30 hover:text-[#f1efe8]'
+                }`}
+                data-cursor-text="FILTER"
+              >
+                {filter}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: string) => void }) {
@@ -634,7 +692,11 @@ function ResearchProcessSection() {
 }
 
 // 7.5 Research Theses & Memos Section
-function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) => void }) {
+function ResearchMemosSection({ activeFilter, onReadThesis }: { activeFilter: MarketFilter; onReadThesis: (idx: number) => void }) {
+  const visibleTheses = MARKET_THESES
+    .map((thesis, idx) => ({ thesis, idx }))
+    .filter(({ thesis }) => thesisMatchesFilter(thesis, activeFilter));
+
   return (
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
       <div className="space-y-2">
@@ -647,7 +709,7 @@ function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) =>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {MARKET_THESES.map((thesis, idx) => (
+        {visibleTheses.map(({ thesis, idx }) => (
           <div 
             key={thesis.slug}
             className="flex flex-col justify-between h-full p-6 border border-[#f1efe8]/12 bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.025] hover:-translate-y-1 hover:border-[#f1efe8]/30 transition-all duration-500 relative group overflow-hidden before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:before:w-full"
@@ -699,6 +761,11 @@ function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) =>
           </div>
         ))}
       </div>
+      {visibleTheses.length === 0 && (
+        <div className="border border-[#f1efe8]/12 p-6 text-xs uppercase tracking-[0.18em] text-[#f1efe8]/45">
+          No memos match this filter. Artifact previews below may still apply.
+        </div>
+      )}
     </section>
   );
 }
@@ -747,6 +814,11 @@ function ArtifactSection({
           </button>
         ))}
       </div>
+      {artifacts.length === 0 && (
+        <div className="border border-[#f1efe8]/12 p-6 text-xs uppercase tracking-[0.18em] text-[#f1efe8]/45">
+          No artifacts match this filter. Switch filters to view preview and request-only files.
+        </div>
+      )}
 
       {/* Styled Interactive Modals */}
       <AnimatePresence>
@@ -910,6 +982,7 @@ export default function MarketsPage() {
   const prefersReducedMotion = useReducedMotion();
   const [activeArtifact, setActiveArtifact] = useState<Artifact | null>(null);
   const [activeThesisId, setActiveThesisId] = useState<number | null>(null);
+  const [activeFilter, setActiveFilter] = useState<MarketFilter>('All');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1018,6 +1091,8 @@ export default function MarketsPage() {
     if (art) setActiveArtifact(art);
   };
 
+  const visibleArtifacts = artifacts.filter((artifact) => artifactMatchesFilter(artifact, activeFilter));
+
   return (
     <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased md:cursor-none overflow-x-hidden">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
@@ -1050,6 +1125,8 @@ export default function MarketsPage() {
 
       <ResearchLanes />
 
+      <ResearchFilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+
       <FeaturedCases onOpenArtifact={handleOpenArtifact} />
 
       <TraditionalCasesSection onOpenArtifact={handleOpenArtifact} />
@@ -1058,12 +1135,12 @@ export default function MarketsPage() {
 
       <ResearchProcessSection />
 
-      <ResearchMemosSection onReadThesis={(idx) => setActiveThesisId(idx)} />
+      <ResearchMemosSection activeFilter={activeFilter} onReadThesis={(idx) => setActiveThesisId(idx)} />
 
       <ArtifactSection 
         activeArtifact={activeArtifact} 
         setActiveArtifact={setActiveArtifact} 
-        artifacts={artifacts} 
+        artifacts={visibleArtifacts} 
       />
 
       <CaseUtilities />

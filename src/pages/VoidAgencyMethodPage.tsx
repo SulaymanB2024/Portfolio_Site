@@ -14,6 +14,8 @@ import { getSeoRoute } from '../seo/routes';
 import { InternalHeader } from '../components/InternalHeader';
 import { InternalFooter } from '../components/InternalFooter';
 import { WireframeGrid } from '../components/WireframeGrid';
+import { ServiceModuleComparison } from '../components/ServiceModulePanels';
+import { SERVICE_MODULES, getContactHref } from '../content/serviceModules';
 
 const METHOD_SEO = getSeoRoute('/method')!;
 
@@ -104,21 +106,24 @@ const caseStudies: CaseStudy[] = [
     category: 'AI SEARCH',
     title: 'AI Visibility Benchmark',
     visual: 'entity',
-    cta: 'PREVIEW FRAMEWORK',
+    href: '/ai-visibility-benchmark',
+    cta: 'VIEW CASE STUDY',
     copy: 'Reviewed whether a company could be clearly understood and cited by AI systems. Tested entity, clarity, answer-ready pages, schema, source structure, and crawler access.',
   },
   {
     category: 'ECOMMERCE SEO',
     title: 'Product Discovery System',
     visual: 'heatmap',
-    cta: 'PREVIEW FRAMEWORK',
+    href: '/product-discovery-system',
+    cta: 'VIEW CASE STUDY',
     copy: 'Audited product and collection pages to find missing metadata, thin templates, weak internal links, duplicate paths, and search-intent gaps.',
   },
   {
     category: 'LOCAL SEO',
     title: 'Service-Area Visibility Audit',
     visual: 'local',
-    cta: 'PREVIEW FRAMEWORK',
+    href: '/service-area-visibility-audit',
+    cta: 'VIEW CASE STUDY',
     copy: 'Mapped location pages, service pages, Google Business Profile signals, crawl structure, and local entity clarity to improve discovery in high-intent searches.',
   },
 ];
@@ -137,7 +142,7 @@ function ArrowLink({ children, href = '#', id }: { children: ReactNode; href?: s
 function CircleAuditButton({ className = '', id }: { className?: string; id?: string }) {
   return (
     <motion.a
-      href="/#contact"
+      href={getContactHref('crawl-audit')}
       id={id}
       data-cursor-text="AUDIT"
       className={`hover-target relative grid h-28 w-28 place-items-center overflow-hidden rounded-full bg-[#f1efe8] text-center text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-[#080807] md:h-32 md:w-32 ${className}`}
@@ -579,27 +584,27 @@ export default function VoidAgencyMethodPage() {
 
       <InternalHeader activePath="/method" tone="dark" />
 
-      <section className="relative z-10 mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] xl:px-10 xl:pt-20">
+      <section className="relative z-10 mx-auto grid min-h-0 max-w-[1480px] grid-cols-1 gap-10 px-4 pb-16 pt-10 md:px-8 lg:min-h-[calc(100vh-104px)] lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:gap-12 xl:px-10 xl:pt-20">
         <ScrollReveal yOffset={18} blur={false} className="min-w-0">
-          <div className="mb-9 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/48">METHOD</div>
+          <div className="mb-6 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/48 md:mb-9 md:tracking-[0.36em]">METHOD</div>
           <h1 
             style={{ viewTransitionName: 'void-title' } as CSSProperties}
             aria-label="Void Agency."
-            className="font-serif text-[clamp(5.2rem,12vw,12.4rem)] italic leading-[0.74] tracking-[-0.055em] text-[#f1efe8]"
+            className="font-serif text-[4.45rem] italic leading-[0.78] tracking-normal text-[#f1efe8] md:text-[clamp(5.2rem,12vw,12.4rem)] md:leading-[0.74] md:tracking-[-0.055em]"
           >
             <ScrambleText text="VOID" trigger="once" />
             <br />
             <ScrambleText text="AGENCY." trigger="once" />
           </h1>
-          <p className="mt-12 max-w-xl text-sm font-medium uppercase leading-relaxed tracking-[0.24em] text-[#f1efe8]/82">
+          <p className="mt-8 max-w-xl text-sm font-medium uppercase leading-relaxed tracking-[0.18em] text-[#f1efe8]/82 md:mt-12 md:tracking-[0.24em]">
             <RevealText text="TECHNICAL SEO SYSTEMS FOR SEARCH," delay={0.25} elementType="span" />
             <br />
             <RevealText text="AI VISIBILITY, AND CONVERSION." delay={0.4} elementType="span" />
           </p>
-          <p className="mt-8 max-w-[34rem] text-base leading-relaxed text-[#f1efe8]/58">
+          <p className="mt-6 max-w-[34rem] text-base leading-relaxed text-[#f1efe8]/58 md:mt-8">
             Void Agency audits the technical layer behind search visibility: crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and AI crawler access. The goal is simple: make your site easier to find, understand, cite, and act on.
           </p>
-          <div className="mt-12 flex flex-wrap items-center gap-8">
+          <div className="mt-9 flex flex-wrap items-center gap-6 md:mt-12 md:gap-8">
             <CircleAuditButton id="method-hero-audit-btn" />
             <ArrowLink id="method-hero-cases-btn" href="#case-studies">VIEW CASE STUDIES</ArrowLink>
           </div>
@@ -643,6 +648,8 @@ export default function VoidAgencyMethodPage() {
           </div>
         </div>
       </section>
+
+      <ServiceModuleComparison modules={SERVICE_MODULES} tone="dark" />
 
       <section id="how-it-works" className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-b border-[#f1efe8]/12 px-4 py-16 md:px-8 lg:grid-cols-[0.36fr_0.64fr] xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false}>
@@ -696,7 +703,7 @@ export default function VoidAgencyMethodPage() {
             </p>
             <div className="flex flex-wrap items-center gap-7 lg:justify-end">
               <CircleAuditButton id="method-footer-audit-btn" className="h-24 w-24 md:h-28 md:w-28" />
-              <ArrowLink id="method-footer-discuss-btn" href="/#contact">DISCUSS YOUR SITE</ArrowLink>
+              <ArrowLink id="method-footer-discuss-btn" href={getContactHref('crawl-audit')}>DISCUSS YOUR SITE</ArrowLink>
             </div>
           </div>
         </ScrollReveal>

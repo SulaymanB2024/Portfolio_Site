@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { useRef, useEffect, useState, lazy, Suspense, type CSSProperties, type FormEvent } from 'react';
 import { SmoothCursor } from './components/SmoothCursor';
-import { RevealText } from './components/RevealText';
 import { StaggeredText } from './components/StaggeredText';
 import { InkTrails } from './components/InkTrails';
 import { RomanTogaReveal } from './components/RomanTogaReveal';
@@ -26,6 +25,9 @@ const loadResumePage = () => import('./pages/ResumePage');
 const loadAiInformationPage = () => import('./pages/AiInformationPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
+const loadAiVisibilityPage = () => import('./pages/AiVisibilityPage');
+const loadProductDiscoveryPage = () => import('./pages/ProductDiscoveryPage');
+const loadLocalVisibilityPage = () => import('./pages/LocalVisibilityPage');
 
 const AtlasPage = lazy(loadAtlasPage);
 const VoidAgencyMethodPage = lazy(loadMethodPage);
@@ -34,6 +36,9 @@ const ResumePage = lazy(loadResumePage);
 const AiInformationPage = lazy(loadAiInformationPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
+const AiVisibilityPage = lazy(loadAiVisibilityPage);
+const ProductDiscoveryPage = lazy(loadProductDiscoveryPage);
+const LocalVisibilityPage = lazy(loadLocalVisibilityPage);
 const LocalTime = lazy(() => import('./components/LocalTime').then(m => ({ default: m.LocalTime })));
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
@@ -45,6 +50,36 @@ const FooterM = lazy(() => import('./components/FooterM').then(m => ({ default: 
 
 const CONTACT_HASH = '#contact';
 const HOME_SEO = getSeoRoute('/')!;
+const HOME_PRELOADER_SESSION_KEY = 'portfolio-home-preloader-seen';
+
+function hasSeenHomePreloader() {
+  try {
+    return window.sessionStorage.getItem(HOME_PRELOADER_SESSION_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+function markHomePreloaderSeen() {
+  try {
+    window.sessionStorage.setItem(HOME_PRELOADER_SESSION_KEY, 'true');
+  } catch {
+    // Session storage can be unavailable in privacy-restricted contexts.
+  }
+}
+
+function getIntentLabel(intent: string) {
+  const labels: Record<string, string> = {
+    'crawl-audit': 'Crawl audit',
+    'ai-visibility': 'AI visibility benchmark',
+    'product-discovery': 'Product discovery system',
+    'local-visibility': 'Service-area visibility audit',
+    'markets-research': 'Markets research',
+    atlas: 'Atlas audit console',
+  };
+
+  return labels[intent] ?? intent.replace(/-/g, ' ');
+}
 
 function isDarkRoute(path: string) {
   const route = getSeoRoute(path);
@@ -56,6 +91,12 @@ async function preloadRoute(path: string) {
 
   if (route?.path === '/atlas') {
     await loadAtlasPage();
+  } else if (route?.path === '/ai-visibility-benchmark') {
+    await loadAiVisibilityPage();
+  } else if (route?.path === '/product-discovery-system') {
+    await loadProductDiscoveryPage();
+  } else if (route?.path === '/service-area-visibility-audit') {
+    await loadLocalVisibilityPage();
   } else if (route?.path === '/method') {
     await loadMethodPage();
   } else if (route?.path === '/about') {
@@ -100,6 +141,24 @@ export default function App() {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
         <AtlasPage />
+      </Suspense>
+    );
+  } else if (route?.path === '/ai-visibility-benchmark') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <AiVisibilityPage />
+      </Suspense>
+    );
+  } else if (route?.path === '/product-discovery-system') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <ProductDiscoveryPage />
+      </Suspense>
+    );
+  } else if (route?.path === '/service-area-visibility-audit') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <LocalVisibilityPage />
       </Suspense>
     );
   } else if (route?.path === '/method') {
@@ -230,7 +289,22 @@ function HomePage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [company, setCompany] = useState('');
+  const [problem, setProblem] = useState('');
+  const [timeline, setTimeline] = useState('');
   const [message, setMessage] = useState('');
+  const [contactIntent, setContactIntent] = useState('');
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const intent = params.get('intent');
+    if (!intent) return;
+
+    const label = getIntentLabel(intent);
+    setContactIntent(label);
+    setProblem((current) => current || label);
+    setMessage((current) => current || `Interested in: ${label}.`);
+  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -249,7 +323,7 @@ function HomePage() {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({ name, email, message })
+        body: JSON.stringify({ name, email, company, problem, timeline, intent: contactIntent, message })
       });
 
       if (response.ok) {
@@ -257,6 +331,9 @@ function HomePage() {
           setFormStatus('success');
           setName('');
           setEmail('');
+          setCompany('');
+          setProblem('');
+          setTimeline('');
           setMessage('');
           if (triggerShutter) {
             triggerShutter(false);
@@ -276,22 +353,26 @@ function HomePage() {
     }
   };
 
-  const [counter, setCounter] = useState(initialLoadComplete ? 100 : 0);
-  const [isLoaded, setIsLoaded] = useState(initialLoadComplete);
+  const shouldSkipIntro = initialLoadComplete || hasSeenHomePreloader();
+  const [counter, setCounter] = useState(shouldSkipIntro ? 100 : 0);
+  const [isLoaded, setIsLoaded] = useState(shouldSkipIntro);
 
   useEffect(() => {
+    if (isLoaded) {
+      initialLoadComplete = true;
+      return;
+    }
     if (initialLoadComplete) return;
+    if (prefersReducedMotion) {
+      initialLoadComplete = true;
+      setCounter(100);
+      setIsLoaded(true);
+      return;
+    }
 
     const interval = setInterval(() => {
       setCounter((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            initialLoadComplete = true;
-            setIsLoaded(true);
-          }, 600);
-          return 100;
-        }
+        if (prev >= 100) return 100;
         // Speed up the count exponentially
         const increment = Math.ceil((100 - prev) * 0.15);
         return prev + increment > 100 ? 100 : prev + increment;
@@ -299,7 +380,19 @@ function HomePage() {
     }, 40);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    if (initialLoadComplete || counter < 100) return;
+
+    const timeout = window.setTimeout(() => {
+      initialLoadComplete = true;
+      markHomePreloaderSeen();
+      setIsLoaded(true);
+    }, 450);
+
+    return () => window.clearTimeout(timeout);
+  }, [counter]);
 
   useEffect(() => {
     if (!isLoaded) {
@@ -310,7 +403,6 @@ function HomePage() {
   }, [isLoaded]);
 
   const subY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   // Philosophy horizontal scroll
   const philosophyRef = useRef<HTMLDivElement>(null);
@@ -448,93 +540,73 @@ function HomePage() {
 
       {/* Main Container */}
       <main className="w-full" id="top">
-        {/* HERO SECTION - Very Editorial */}
-        <section className="relative w-full h-screen flex flex-col justify-end pb-12 px-4 md:px-16 pt-32 overflow-hidden">
-          {/* Background Motion */}
-          {!prefersReducedMotion && <Suspense fallback={null}>
-            <FlowField className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-overlay" density={25} />
-          </Suspense>}
-          
-          {/* Faint artifact reveal */}
-          <motion.div 
-            style={{ opacity: titleOpacity }}
-            className="pointer-events-none absolute inset-0 z-[1]"
-          >
+        <div className="relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 z-0">
             {isLoaded && (
               <RomanTogaReveal
                 fit="cover"
                 focus="large-figure"
-                restOpacity={0.05}
+                restOpacity={0.048}
                 revealOpacity={0.68}
                 className="h-full w-full"
               />
             )}
-           </motion.div>
-
-           <motion.div 
-             style={{ y: subY }}
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-             transition={{ duration: 1, delay: 2.8 }}
-             className="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-ink/20 pb-8 gap-8 md:gap-0"
-           >
-	             <div className="max-w-[34rem]">
-	               <h1 className="font-serif text-5xl font-light leading-none tracking-normal text-ink md:text-7xl">
-	                 Sulayman Bowles
-	               </h1>
-	               <p className="mt-5 max-w-md font-sans text-[10px] uppercase leading-relaxed tracking-[0.2em] text-ink/70 md:text-xs">
-	                 Technical SEO, Atlas, and finance research.
-	               </p>
-                <div className="mt-6 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.24em] text-ink/64">
-                  <a href="/atlas" id="hero-view-atlas-link" className="hover-target border-b border-ink/24 pb-2 transition-colors hover:border-ink hover:text-ink">View Atlas</a>
-                  <a href="/#contact" id="hero-start-audit-link" className="hover-target border-b border-ink/24 pb-2 transition-colors hover:border-ink hover:text-ink">Start an audit</a>
-                </div>
-	             </div>
-             <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-ink/40 md:text-xs">Trace the work</span>
-           </motion.div>
-        </section>
-
-        {/* INTRODUCTION - High contrast split */}
-        <section className="relative w-full py-32 md:py-48 px-4 md:px-16 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
-          <div className="md:col-span-8 md:col-start-2">
-            <StaggeredText 
-               text="I build systems for search, finance, and decision-making. The common thread is evidence."
-               delay={0.1}
-               className="font-serif italic font-light text-[9vw] sm:text-[8vw] md:text-6xl lg:text-[6rem] leading-[1.05] tracking-tight mb-4 md:mb-8"
-            />
           </div>
-          <div className="md:col-span-4 md:col-start-8 flex flex-col">
-            <RevealText 
-               text="My work starts with messy surfaces: crawl data, page templates, market signals, search behavior, financial assumptions, and unfinished product logic. I turn that into structured systems people can inspect, question, and use."
-               elementType="p"
-               delay={0.4}
-               className="font-sans text-[10px] md:text-xs uppercase tracking-[0.25em] text-ink/60 leading-relax max-w-sm mt-4 md:mt-2"
-            />
-            
+
+          {/* HERO SECTION - Very Editorial */}
+          <section className="relative z-10 flex h-screen w-full flex-col justify-end overflow-hidden px-4 pb-12 pt-32 md:px-16">
+            {/* Background Motion */}
+            {!prefersReducedMotion && <Suspense fallback={null}>
+              <FlowField className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-overlay" density={25} />
+            </Suspense>}
+
             <motion.div 
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-              className="mt-16 w-full h-[1px] bg-ink/20 transform origin-left" 
-            />
-            <ScrollReveal delay={0.7} yOffset={15} className="pt-8 grid grid-cols-2 gap-8 text-[10px] uppercase font-sans tracking-widest text-ink/60">
-              <ul>
-                <li className="mb-2 text-ink line-through decoration-ink/40">Vanity metrics</li>
-                <li className="mb-2 text-ink line-through decoration-ink/40">Black-box audits</li>
-                <li className="line-through decoration-ink/40">Generic decks</li>
-              </ul>
-              <ul>
-                <li className="mb-2 text-ink">Crawl evidence</li>
-                <li className="mb-2 text-ink">Structured analysis</li>
-                <li className="text-ink">Shipped systems</li>
-              </ul>
-            </ScrollReveal>
-          </div>
-        </section>
+              style={{ y: subY }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+              transition={{ duration: 1, delay: 2.8 }}
+              className="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-ink/20 pb-8 gap-8 md:gap-0"
+            >
+              <div className="max-w-[34rem]">
+                <h1 className="font-serif text-5xl font-light leading-none tracking-normal text-ink md:text-7xl">
+                  Sulayman Bowles
+                </h1>
+                <p className="mt-5 max-w-md font-sans text-[10px] uppercase leading-relaxed tracking-[0.2em] text-ink/70 md:text-xs">
+                  Technical SEO, Atlas, and finance research.
+                </p>
+                  <div className="mt-6 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.24em] text-ink/64">
+                    <a href="/atlas" id="hero-view-atlas-link" className="hover-target border-b border-ink/24 pb-2 transition-colors hover:border-ink hover:text-ink">View Atlas</a>
+                    <a href="/?intent=crawl-audit#contact" id="hero-start-audit-link" className="hover-target border-b border-ink/24 pb-2 transition-colors hover:border-ink hover:text-ink">Start an audit</a>
+                  </div>
+              </div>
+              <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-ink/40 md:text-xs">Trace the work</span>
+            </motion.div>
+          </section>
 
-        {/* TEXT MARQUEE */}
-        <TextMarquee />
+          {/* INTRODUCTION - Evidence threshold */}
+          <section className="relative z-10 w-full overflow-hidden px-4 py-24 md:px-16 md:pb-32 md:pt-36">
+            <div className="relative z-10 mx-auto grid w-full max-w-[1800px] grid-cols-1 items-start gap-10 md:grid-cols-12 md:gap-x-16">
+              <div className="md:col-span-8 md:col-start-2">
+                <StaggeredText
+                  text="I build systems for search, finance, and decision-making."
+                  delay={0.1}
+                  className="max-w-[64rem] font-serif text-[2.25rem] font-light italic leading-[1.04] tracking-normal sm:text-[3.1rem] md:text-[4.8rem] lg:text-[5.65rem]"
+                />
+              </div>
+
+              <div className="md:col-span-9 md:col-start-2">
+                <ScrollReveal delay={0.22} yOffset={16} blur={false} className="mt-2 border-y border-ink/20 py-7 md:mt-4 md:py-10">
+                  <p className="mb-3 font-sans text-[10px] uppercase leading-none tracking-[0.34em] text-ink/48 md:mb-5">
+                    The common thread is
+                  </p>
+                  <span className="block font-serif text-[clamp(4.4rem,12.5vw,15rem)] font-light uppercase leading-[0.76] tracking-normal text-ink">
+                    Evidence
+                  </span>
+                </ScrollReveal>
+              </div>
+            </div>
+          </section>
+        </div>
 
          {/* SELECTED WORKS - EDITORIAL GRID */}
         <section id="selected-works" className="w-full py-32 bg-ink text-canvas selection:bg-canvas selection:text-ink relative flex flex-col border-t border-canvas/10">
@@ -553,7 +625,7 @@ function HomePage() {
                   <span className="opacity-60">Technical SEO Audit Console</span>
                </div>
                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT</span>
+                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
                   <span className="opacity-60"><ScrambleText text="Atlas / Void Agency" trigger="once" /></span>
                </div>
              </div>
@@ -564,7 +636,7 @@ function HomePage() {
                <div className="md:col-span-4 flex flex-col pt-12 md:pt-0 md:pr-8 lg:pr-16 relative z-10 order-2 md:order-1 mt-12 md:mt-0">
                  
                  <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start">
-                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6">( 02 )</span></ScrollReveal>
+                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6">( 01 )</span></ScrollReveal>
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
@@ -602,17 +674,17 @@ function HomePage() {
                  {!prefersReducedMotion && <Suspense fallback={null}>
                    <FlowField className="absolute inset-0 w-full h-full opacity-90 mix-blend-screen" density={80} />
                  </Suspense>}
-                 <div className="absolute left-6 bottom-6 z-20 flex items-center gap-4 text-[10px] uppercase tracking-[0.28em] text-canvas/70 transition-colors group-hover/atlas:text-canvas">
+                 <div className="absolute bottom-6 left-5 right-5 z-20 flex items-center gap-4 text-[10px] uppercase tracking-[0.22em] text-canvas/70 transition-colors group-hover/atlas:text-canvas md:left-6 md:right-auto md:tracking-[0.28em]">
                    <span className="h-8 w-8 rounded-full border border-canvas/30 transition-colors group-hover/atlas:bg-canvas group-hover/atlas:text-ink" />
-                   <span>Atlas SEO Audit Console</span>
+                   <span className="min-w-0">Atlas SEO Audit Console</span>
                    <span aria-hidden="true">↗</span>
                  </div>
                  
                  {/* Title overlapping canvas */}
-                 <ScrollReveal delay={0.2} className="absolute bottom-8 right-0 pointer-events-none z-10 -mr-4 md:-mr-16">
+                 <ScrollReveal delay={0.2} className="absolute bottom-8 right-4 pointer-events-none z-10 md:right-6">
                    <h4 
-	                      style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
-                      className="text-[12vw] md:text-[8vw] lg:text-[10vw] font-serif text-canvas leading-[0.85] font-light uppercase tracking-tighter text-right"
+		                      style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
+                      className="font-serif text-[4.6rem] font-light uppercase leading-[0.85] tracking-normal text-right text-canvas md:text-[6.5rem] md:tracking-tighter lg:text-[8rem] xl:text-[9rem]"
                    >
                      <span className="block"><ScrambleText text="AT" trigger="hover" /></span>
                      <span className="block italic"><ScrambleText text="LAS" trigger="hover" /></span>
@@ -633,7 +705,7 @@ function HomePage() {
                   <span className="opacity-60">Market + Operating Analysis</span>
                </div>
                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
+                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 02</span>
                   <span className="opacity-60">Models, Dashboards, Research</span>
                </div>
              </div>
@@ -653,8 +725,8 @@ function HomePage() {
                  </Suspense>
                  
                  {/* Title overlapping canvas */}
-                 <ScrollReveal delay={0.2} className="absolute top-8 left-4 md:left-0 pointer-events-none z-10 md:-ml-6 mix-blend-difference text-canvas select-none">
-                   <h4 className="text-[15vw] md:text-[8vw] lg:text-[10vw] font-serif leading-[0.85] font-light uppercase tracking-tighter text-left">
+                 <ScrollReveal delay={0.2} className="absolute left-4 top-8 pointer-events-none z-10 select-none text-canvas mix-blend-difference md:left-6">
+                   <h4 className="font-serif text-[4.6rem] font-light uppercase leading-[0.85] tracking-normal text-left md:text-[6.5rem] md:tracking-tighter lg:text-[8rem] xl:text-[9rem]">
                      <span className="block opacity-90"><ScrambleText text="MAR" trigger="hover" /></span>
                      <span className="block italic opacity-70"><ScrambleText text="KETS" trigger="hover" /></span>
                    </h4>
@@ -663,7 +735,7 @@ function HomePage() {
 
                <div className="md:col-span-4 flex flex-col justify-between pt-12 md:pt-0">
                  <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start items-start md:items-end md:text-right">
-                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6 block">( 01 )</span></ScrollReveal>
+                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6 block">( 02 )</span></ScrollReveal>
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
@@ -717,6 +789,9 @@ function HomePage() {
                 </ScrollReveal>
               </div>
            </a>
+
+           {/* TEXT MARQUEE */}
+           <TextMarquee />
         </section>
 
         {/* TYPOGRAPHY / PHILOSOPHY STATEMENT SECTION */}
@@ -726,7 +801,7 @@ function HomePage() {
             {/* Background huge offset typography */}
             <motion.div style={{ x: h1Transform }} className="flex whitespace-nowrap mb-8 md:mb-16 -ml-[20%]">
               <span className="text-[15vw] font-serif uppercase tracking-tighter text-outline opacity-20 pr-16 select-none">
-                EVIDENCE BEFORE
+                SIGNAL BEFORE
               </span>
             </motion.div>
             
@@ -1207,7 +1282,7 @@ function HomePage() {
          </section>
 
         {/* INTERSTITIAL SECTION */}
-        <section className="w-full h-[50vh] md:h-[80vh] overflow-hidden hover-target relative">
+        <section className="w-full h-[42vh] md:h-[52vh] overflow-hidden hover-target relative">
            {!prefersReducedMotion && <KineticTypography />}
            <div className="absolute inset-0 flex items-center justify-center mix-blend-difference pointer-events-none">
               <div className="w-[1px] h-32 bg-canvas mb-8"></div>
@@ -1215,35 +1290,40 @@ function HomePage() {
         </section>
 
         {/* FOOTER */}
-        <footer id="contact" className="w-full bg-ink text-canvas selection:bg-canvas selection:text-ink relative overflow-hidden pt-32">
+        <footer id="contact" className="w-full bg-ink text-canvas selection:bg-canvas selection:text-ink relative overflow-hidden pt-24 md:pt-32">
            <Suspense fallback={null}><FooterM /></Suspense>
 
            <div className="px-4 md:px-16 relative z-10 w-full flex flex-col">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 border-b border-canvas/20 pb-16 md:pb-32">
-                 <div className="md:col-span-8 flex flex-col items-start justify-end">
-                    <ScrollReveal blur={false}>
-                      <span className="text-canvas/50 font-sans tracking-[0.2em] text-xs uppercase mb-8 block flex items-center gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 border-b border-canvas/20 pb-16 md:pb-32">
+                 <div className="flex w-full flex-col items-start justify-end md:col-span-8">
+                    <ScrollReveal blur={false} className="w-full">
+                      <span className="mb-7 flex items-center gap-4 font-sans text-[10px] uppercase leading-relaxed tracking-[0.18em] text-canvas/50 md:mb-8 md:text-xs md:tracking-[0.2em]">
                         <span className="status-dot" /> Projects, roles, and technical audits
                       </span>
                     </ScrollReveal>
                     
-                    <ScrollReveal delay={0.1} blur={false}>
-                      <h4 className="text-[12vw] leading-[0.8] font-serif uppercase font-light tracking-tighter mb-12 hover-target cursor-none" data-cursor-text="WRITE">
+                    <ScrollReveal delay={0.1} blur={false} className="w-full">
+                      <h4 className="mb-10 font-serif text-[4rem] font-light uppercase leading-[0.84] tracking-normal hover-target md:mb-12 md:text-[12vw] md:tracking-tighter md:cursor-none" data-cursor-text="WRITE">
                          <span className="block italic opacity-90">Send</span>
                          <span className="block opacity-80">The Brief</span>
                       </h4>
                     </ScrollReveal>
                     
-                    <ScrollReveal delay={0.2} blur={false}>
+                    <ScrollReveal delay={0.2} blur={false} className="w-full">
                       {formStatus === 'success' ? (
-                        <div className="text-canvas font-sans font-light tracking-widest uppercase text-base md:text-lg py-6 border border-canvas/20 px-8 rounded bg-canvas/5 max-w-lg mt-4">
+                        <div className="mt-4 max-w-lg border border-canvas/20 bg-canvas/5 px-6 py-6 font-sans text-base font-light uppercase tracking-widest text-canvas md:px-8 md:text-lg">
                           <p className="text-[#a3e635] mb-2 font-medium">✓ Brief Received</p>
                           <p className="text-[10px] text-canvas/60 normal-case tracking-normal leading-relaxed">
                             Thank you. Your message has been sent successfully. I will review your submission and get back to you shortly.
                           </p>
                         </div>
                       ) : (
-                        <form onSubmit={handleSubmit} className="w-full max-w-xl space-y-6 mt-4">
+                        <form onSubmit={handleSubmit} className="mt-4 w-full max-w-xl space-y-6">
+                          {contactIntent && (
+                            <div className="border border-canvas/15 px-3 py-2 text-[10px] uppercase leading-relaxed tracking-[0.18em] text-canvas/60">
+                              Intent: <span className="text-canvas">{contactIntent}</span>
+                            </div>
+                          )}
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <input 
                               type="text" 
@@ -1254,7 +1334,7 @@ function HomePage() {
                               placeholder="YOUR NAME" 
                               value={name}
                               onChange={(e) => setName(e.target.value)}
-                              className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
+                              className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-[0.16em] md:tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
                             />
                             <input 
                               type="email" 
@@ -1265,9 +1345,39 @@ function HomePage() {
                               placeholder="YOUR EMAIL" 
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
-                              className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
+                              className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-[0.16em] md:tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
                             />
                           </div>
+                          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <input
+                              type="text"
+                              id="contact-company"
+                              name="company"
+                              autoComplete="organization"
+                              placeholder="WEBSITE / COMPANY"
+                              value={company}
+                              onChange={(e) => setCompany(e.target.value)}
+                              className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-[0.16em] md:tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
+                            />
+                            <input
+                              type="text"
+                              id="contact-timeline"
+                              name="timeline"
+                              placeholder="TIMELINE"
+                              value={timeline}
+                              onChange={(e) => setTimeline(e.target.value)}
+                              className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-[0.16em] md:tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
+                            />
+                          </div>
+                          <input
+                            type="text"
+                            id="contact-problem"
+                            name="problem"
+                            placeholder="PRIMARY PROBLEM"
+                            value={problem}
+                            onChange={(e) => setProblem(e.target.value)}
+                            className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-[0.16em] md:tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
+                          />
                           <textarea 
                             required
                             rows={2}
@@ -1276,7 +1386,7 @@ function HomePage() {
                             placeholder="THE BRIEF (PROJECT DETAILS, TIMELINE, AUDIT REQUEST)" 
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
-                            className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas resize-none"
+                            className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-[0.16em] md:tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas resize-none"
                           />
                           <div className="flex items-center justify-between pt-2">
                             {formStatus === 'error' && (

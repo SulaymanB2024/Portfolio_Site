@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { Mail } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
 import { AudioWaveToggle } from './AudioWaveToggle';
 
@@ -12,6 +13,9 @@ const navItems = [
   { label: 'ATLAS', href: '/atlas' },
   { label: 'MARKETS', href: '/markets' },
   { label: 'METHOD', href: '/method' },
+] as const;
+
+const indexItems = [
   { label: 'ABOUT', href: '/about' },
   { label: 'RESUME', href: '/resume' },
   { label: 'AI INFO', href: '/ai-information' },
@@ -29,12 +33,12 @@ export function InternalHeader({ activePath, tone = 'light' }: InternalHeaderPro
   const menuBorderClass = isDark ? 'border-[#f1efe8]/16' : 'border-ink/16';
 
   return (
-    <header className="sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-6 md:px-8 xl:px-10">
-      <div className={`grid gap-4 ${bgClass} px-5 py-4 rounded-2xl text-[10px] uppercase tracking-[0.3em] md:hidden`}>
+    <header className="sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 md:py-6 xl:px-10">
+      <div className={`grid gap-3 ${bgClass} px-4 py-3 rounded-lg text-[10px] uppercase tracking-[0.24em] md:hidden`}>
         <div className="flex items-center justify-between gap-4">
           <a href="/" id="header-brand-link-mobile" className="hover-target min-w-0" data-cursor-text="HOME">
             <span className={`block font-medium ${textClass}`}>SULAYMAN BOWLES</span>
-            <span className={`mt-2 block font-serif text-sm italic normal-case tracking-normal ${textMutedClass}`}>
+            <span className={`mt-1.5 block font-serif text-[13px] italic normal-case leading-tight tracking-normal ${textMutedClass}`}>
               Technical SEO · AI Search · Finance/Data
             </span>
           </a>
@@ -43,17 +47,19 @@ export function InternalHeader({ activePath, tone = 'light' }: InternalHeaderPro
             id="header-contact-link-mobile" 
             data-cursor-text="CONTACT" 
             aria-label="Contact Sulayman Bowles"
-            className={`hover-target h-8 w-8 flex-shrink-0 rounded-full border ${borderContactClass} transition-colors ${isDark ? 'hover:bg-[#f1efe8] hover:text-[#080807]' : 'hover:bg-ink hover:text-canvas'}`}
-          />
+            className={`hover-target grid h-7 w-7 flex-shrink-0 place-items-center rounded-full border ${borderContactClass} transition-colors ${isDark ? 'hover:bg-[#f1efe8] hover:text-[#080807]' : 'hover:bg-ink hover:text-canvas'}`}
+          >
+            <Mail size={13} strokeWidth={1.7} aria-hidden="true" />
+          </a>
         </div>
-        <details className={`group border-t ${menuBorderClass} pt-3`}>
+        <details className={`group border-t ${menuBorderClass} pt-2.5`}>
           <summary className={`hover-target flex cursor-pointer list-none items-center justify-between ${textMutedNavClass}`}>
             <span>MENU</span>
             <span aria-hidden="true" className="transition-transform group-open:rotate-45">+</span>
           </summary>
-          <nav className="mt-4 grid grid-cols-2 gap-3" aria-label="Mobile navigation">
+          <nav className="mt-3 grid grid-cols-2 gap-2" aria-label="Mobile navigation">
             {navItems.map((item) => {
-              const active = activePath === item.href || (item.href === '/ai-information' && activePath === '/ai-information');
+              const active = activePath === item.href;
               const cleanId = `header-mobile-nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`;
               
               return (
@@ -62,7 +68,23 @@ export function InternalHeader({ activePath, tone = 'light' }: InternalHeaderPro
                   href={item.href}
                   id={cleanId}
                   data-cursor-text={item.label}
-                  className={`hover-target border ${menuBorderClass} px-3 py-3 transition-colors ${active ? textClass : textMutedNavClass}`}
+                  className={`hover-target border ${menuBorderClass} px-3 py-2.5 transition-colors ${active ? textClass : textMutedNavClass}`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
+            {indexItems.map((item) => {
+              const active = activePath === item.href || (item.href === '/ai-information' && activePath === '/ai-information');
+              const cleanId = `header-mobile-index-${item.label.toLowerCase().replace(/\s+/g, '-')}`;
+              
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  id={cleanId}
+                  data-cursor-text={item.label}
+                  className={`hover-target border ${menuBorderClass} px-3 py-2.5 transition-colors ${active ? textClass : textMutedNavClass}`}
                 >
                   {item.label}
                 </a>
@@ -84,7 +106,7 @@ export function InternalHeader({ activePath, tone = 'light' }: InternalHeaderPro
         
         <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 md:justify-center md:gap-x-5" aria-label="Main navigation">
           {navItems.map((item) => {
-            const active = activePath === item.href || (item.href === '/ai-information' && activePath === '/ai-information');
+            const active = activePath === item.href;
             const cleanId = `header-nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`;
             
             return (
@@ -108,6 +130,27 @@ export function InternalHeader({ activePath, tone = 'light' }: InternalHeaderPro
               </MagneticButton>
             );
           })}
+          <details className="relative">
+            <summary className={`hover-target cursor-pointer list-none px-3 py-1 transition-colors ${textMutedNavClass}`} data-cursor-text="INDEX">
+              INDEX +
+            </summary>
+            <div className={`absolute left-1/2 mt-4 grid min-w-[9rem] -translate-x-1/2 gap-2 border ${menuBorderClass} ${bgClass} p-3 text-center shadow-2xl`}>
+              {indexItems.map((item) => {
+                const active = activePath === item.href || (item.href === '/ai-information' && activePath === '/ai-information');
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    id={`header-index-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+                    data-cursor-text={item.label}
+                    className={`hover-target px-2 py-1 transition-colors ${active ? textClass : textMutedNavClass}`}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
+            </div>
+          </details>
         </nav>
         
         <div className="flex items-center gap-6 justify-self-start md:justify-self-end">
@@ -119,7 +162,9 @@ export function InternalHeader({ activePath, tone = 'light' }: InternalHeaderPro
               data-cursor-text="CONTACT" 
               className={`hover-target flex items-center gap-4 ${textContactClass} transition-colors`}
             >
-              <span className={`h-7 w-7 rounded-full border ${borderContactClass} flex-shrink-0`} />
+              <span className={`grid h-7 w-7 flex-shrink-0 place-items-center rounded-full border ${borderContactClass}`}>
+                <Mail size={13} strokeWidth={1.7} aria-hidden="true" />
+              </span>
               <span>CONTACT</span>
             </a>
           </MagneticButton>

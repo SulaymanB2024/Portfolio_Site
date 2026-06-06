@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import React from 'react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface RevealTextProps {
   text: string;
@@ -9,6 +10,7 @@ interface RevealTextProps {
 }
 
 export function RevealText({ text, delay = 0, className = '', elementType = 'div' }: RevealTextProps) {
+  const prefersReducedMotion = useReducedMotion();
   // Split text into words for staggered animation
   const words = text.split(' ');
 
@@ -16,7 +18,10 @@ export function RevealText({ text, delay = 0, className = '', elementType = 'div
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: delay * i },
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.008,
+        delayChildren: prefersReducedMotion ? 0 : delay * i,
+      },
     }),
   };
 
@@ -25,13 +30,13 @@ export function RevealText({ text, delay = 0, className = '', elementType = 'div
       opacity: 1,
       y: 0,
       transition: {
-        duration: 1.2,
+        duration: prefersReducedMotion ? 0.001 : 0.38,
         ease: [0.16, 1, 0.3, 1],
       },
     },
     hidden: {
       opacity: 0,
-      y: 20,
+      y: prefersReducedMotion ? 0 : 4,
     },
   };
 
@@ -54,7 +59,6 @@ export function RevealText({ text, delay = 0, className = '', elementType = 'div
           key={index}
         >
           {word}
-          {index < words.length - 1 ? ' ' : ''}
         </motion.span>
       ))}
     </MotionComponent>

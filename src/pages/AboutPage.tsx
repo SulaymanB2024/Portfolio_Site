@@ -356,14 +356,14 @@ export default function AboutPage() {
 
       <InternalHeader activePath="/about" tone="dark" />
 
-      <section className="relative z-10 mx-auto grid min-h-[calc(100vh-102px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.32fr)_minmax(0,0.68fr)] xl:px-10 xl:pt-20">
+      <section className="relative z-10 mx-auto grid min-h-0 max-w-[1480px] grid-cols-1 gap-10 px-4 pb-16 pt-10 md:px-8 lg:min-h-[calc(100vh-102px)] lg:grid-cols-[minmax(0,0.32fr)_minmax(0,0.68fr)] lg:gap-12 xl:px-10 xl:pt-20">
         <div className="min-w-0 self-center">
-          <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/45">ABOUT ME</div>
-          <h1 className="font-serif text-[clamp(3.8rem,6.4vw,7.1rem)] italic leading-[0.92] tracking-[-0.045em]">
+          <div className="mb-6 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/45 md:mb-8 md:tracking-[0.34em]">ABOUT ME</div>
+          <h1 className="font-serif text-[3.4rem] italic leading-[0.95] tracking-normal md:text-[clamp(3.8rem,6.4vw,7.1rem)] md:leading-[0.92] md:tracking-[-0.045em]">
             <span className="block">I build systems</span>
             <span className="block italic">for visibility.</span>
           </h1>
-          <div className="mt-10 space-y-6 text-base leading-relaxed text-[#f1efe8]/62">
+          <div className="mt-7 space-y-5 text-base leading-relaxed text-[#f1efe8]/62 md:mt-10 md:space-y-6">
             <p>Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, a technical SEO audit console focused on crawl evidence, indexation, structured data, AI-search visibility, and finance/data systems.</p>
             <p>My work turns crawl data, site architecture, search signals, and market research into clearer systems for discovery, citation, conversion, and decision-making.</p>
           </div>

@@ -3,11 +3,14 @@ import { AI_INFORMATION_DESCRIPTION, AI_INFORMATION_STATIC_HTML, AI_INFORMATION_
 import {
   aboutJsonLd,
   aiInformationJsonLd,
+  aiVisibilityJsonLd,
   atlasJsonLd,
   homeJsonLd,
   marketArticleJsonLd,
   marketsJsonLd,
   methodJsonLd,
+  productDiscoveryJsonLd,
+  localVisibilityJsonLd,
   resumeJsonLd,
   type JsonLd,
 } from './schema';
@@ -153,6 +156,51 @@ const CORE_ROUTES: SeoRoute[] = [
       'Markets Research | Investment Cases, Valuation & Crypto Research',
       'A research archive for Sulayman Bowles covering traditional investment cases, crypto research, valuation logic, market systems, and finance/data reasoning.',
     ),
+  },
+  {
+    path: '/ai-visibility-benchmark',
+    aliases: ['/projects/ai-visibility-benchmark', '/method/ai-visibility-benchmark'],
+    title: 'AI Visibility Benchmark | Void Agency',
+    description:
+      'An in-depth review of how search engines and LLM RAG systems crawl, interpret, and cite brand entities and structured data.',
+    h1: 'AI Visibility Benchmark',
+    section: 'project',
+    pageType: 'project',
+    priority: 0.9,
+    includeInSitemap: true,
+    staticSummary:
+      'The AI Visibility Benchmark audits a website’s entity clarity, AI agent permissions, retrieval readiness, and citation potential across search systems.',
+    jsonLd: aiVisibilityJsonLd(),
+  },
+  {
+    path: '/product-discovery-system',
+    aliases: ['/projects/product-discovery-system', '/method/product-discovery-system'],
+    title: 'Product Discovery System | Void Agency',
+    description:
+      'Detailed methodology for auditing e-commerce templates, keyword intent mappings, internal link equity, and canonical consolidations.',
+    h1: 'Product Discovery System',
+    section: 'project',
+    pageType: 'project',
+    priority: 0.9,
+    includeInSitemap: true,
+    staticSummary:
+      'The Product Discovery System evaluates template structures, intent alignment, parameter duplications, and crawl paths across e-commerce catalogs.',
+    jsonLd: productDiscoveryJsonLd(),
+  },
+  {
+    path: '/service-area-visibility-audit',
+    aliases: ['/projects/service-area-visibility-audit', '/method/service-area-visibility-audit', '/service-area-visibility'],
+    title: 'Service-Area Visibility Audit | Void Agency',
+    description:
+      'Analyzing territory landing page architecture, GBP signal metrics, NAP directories, and local link crawls.',
+    h1: 'Service-Area Visibility Audit',
+    section: 'project',
+    pageType: 'project',
+    priority: 0.9,
+    includeInSitemap: true,
+    staticSummary:
+      'The Service-Area Visibility Audit maps territory landing page patterns, GBP local signals, and citation authority flow for local service businesses.',
+    jsonLd: localVisibilityJsonLd(),
   },
 ];
 

@@ -155,21 +155,9 @@ body {
   }
 }
 
-/* Tactile click active feedback on all navigation options */
+/* Tap feedback must not resize or re-letter interactive surfaces. */
 a.hover-target:active {
-  transform: scale(0.95) !important;
-  opacity: 0.8 !important;
-  transition: transform 0.08s ease-out, opacity 0.08s ease-out;
+  opacity: 0.72 !important;
+  transition: opacity 0.08s ease-out, color 0.08s ease-out, border-color 0.08s ease-out;
 }
-a.hover-target:active span:not(.absolute) {
-  letter-spacing: 0.35em !important;
-  transition: letter-spacing 0.1s ease-out;
-}
-a.hover-target:active span.absolute {
-  transform: scale(1.45) !important;
-  opacity: 1 !important;
-  color: #b7c8a8 !important; /* accent flash */
-  transition: transform 0.08s ease-out, color 0.08s ease-out;
-}
-
 

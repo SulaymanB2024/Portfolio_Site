@@ -1,3 +1,5 @@
+import { ArrowUp } from 'lucide-react';
+
 type InternalFooterProps = {
   activePath: string;
   tone?: 'light' | 'dark';
@@ -25,7 +27,7 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
   const hoverBgClass = isDark ? 'hover:bg-[#f1efe8] hover:text-[#080807]' : 'hover:bg-ink hover:text-canvas';
 
   return (
-    <footer className={`mx-auto grid max-w-[1480px] grid-cols-1 items-start gap-8 border-t ${borderClass} px-4 py-8 text-[10px] uppercase tracking-[0.3em] ${textMutedClass} md:grid-cols-[1fr_auto_1fr_auto] md:px-8 xl:px-10`}>
+    <footer className={`mx-auto grid max-w-[1480px] grid-cols-1 items-start gap-6 border-t ${borderClass} px-4 py-7 text-[10px] uppercase tracking-[0.24em] ${textMutedClass} md:grid-cols-[1fr_auto_1fr_auto] md:gap-8 md:px-8 md:py-8 md:tracking-[0.3em] xl:px-10`}>
       <div>
         <div className={textClass}>SULAYMAN BOWLES</div>
         <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">
@@ -33,7 +35,7 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
         </div>
       </div>
       
-      <nav className="flex flex-wrap gap-5" id="footer-nav" aria-label="Footer navigation">
+      <nav className="flex flex-wrap gap-x-4 gap-y-3 md:gap-5" id="footer-nav" aria-label="Footer navigation">
         {footerItems.map((item) => {
           const active = activePath === item.href || (item.href === '/ai-information' && activePath === '/ai-information');
           const cleanId = `footer-nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`;
@@ -49,10 +51,10 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
               <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">
                 {item.label}
               </span>
-              <span className={`absolute left-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${textClass}`}>
+              <span className={`absolute left-0 top-1 hidden transition-opacity duration-300 md:block ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${textClass}`}>
                 [
               </span>
-              <span className={`absolute right-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${textClass}`}>
+              <span className={`absolute right-0 top-1 hidden transition-opacity duration-300 md:block ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${textClass}`}>
                 ]
               </span>
             </a>
@@ -71,8 +73,10 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
         id="footer-back-to-top" 
         aria-label="Back to top" 
         data-cursor-text="TOP" 
-        className={`hover-target h-9 w-9 rounded-full border ${borderCircleClass} transition-colors ${hoverBgClass}`} 
-      />
+        className={`hover-target grid h-9 w-9 place-items-center rounded-full border ${borderCircleClass} transition-colors ${hoverBgClass}`} 
+      >
+        <ArrowUp size={14} strokeWidth={1.7} aria-hidden="true" />
+      </a>
     </footer>
   );
 }
