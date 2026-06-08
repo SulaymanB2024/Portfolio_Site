@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
-import { playClick, playSnap } from '../utils/audio';
 
 export function SmoothCursor() {
   const mouseX = useMotionValue(-100); // Start offscreen
@@ -59,16 +58,6 @@ export function SmoothCursor() {
       window.removeEventListener('mouseover', handleMouseOver);
     };
   }, [mouseX, mouseY]);
-
-  useEffect(() => {
-    if (isHovering) {
-      if (isSquare) {
-        playSnap();
-      } else {
-        playClick();
-      }
-    }
-  }, [isHovering, isSquare]);
 
   return (
     <>

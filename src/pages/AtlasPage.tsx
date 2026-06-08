@@ -325,7 +325,7 @@ function AtlasOutputCard({ title, copy, cta, children, id, onCtaClick }: OutputC
       <button 
         id={id}
         onClick={onCtaClick}
-        className="hover-target mt-8 inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-ink/74 text-left"
+        className="hover-target mt-8 inline-flex min-h-11 items-center gap-3 text-left text-[10px] uppercase tracking-[0.28em] text-ink/74"
       >
         {cta}
         <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
@@ -417,6 +417,9 @@ function MiniGraph() {
 
   return (
     <div className="relative w-full">
+      <div className="sr-only">
+        Demo internal link graph: Home at depth zero links to Blog, About, Services, Contact, Case Study A, and Landing Page. Secondary case-study pages sit at depth two.
+      </div>
       <svg viewBox="0 0 240 150" className="w-full text-ink" aria-hidden="true">
         <rect x="1" y="1" width="238" height="148" fill="none" stroke="currentColor" opacity="0.16" />
         
@@ -509,6 +512,9 @@ function MiniDonut() {
 
   return (
     <div className="grid w-full gap-6">
+      <div className="sr-only">
+        Demo indexation breakdown: Indexable 18,394 URLs, Noindex 6,372 URLs, Blocked 9,112 URLs, Other 19,846 URLs.
+      </div>
       <div className="relative h-36 w-36 mx-auto">
         <svg viewBox="0 0 140 140" className="h-full w-full -rotate-90 text-ink" aria-hidden="true">
           <circle cx="70" cy="70" r="43" fill="none" stroke="currentColor" strokeWidth="16" opacity="0.08" />
@@ -1208,7 +1214,7 @@ export default function AtlasPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-canvas text-ink selection:bg-ink selection:text-canvas md:cursor-none">
+    <main className="relative min-h-screen overflow-x-hidden bg-canvas text-ink selection:bg-ink selection:text-canvas">
       <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
       <PageTechnicalChrome tone="light" />
       {!prefersReducedMotion && <div className="hidden md:block">
@@ -1220,7 +1226,7 @@ export default function AtlasPage() {
 
       <section className="relative z-10 mx-auto grid min-h-screen w-full max-w-[1480px] grid-cols-1 gap-12 px-4 pb-16 pt-32 md:px-8 lg:grid-cols-12 xl:px-10 lg:pb-24 lg:pt-40">
         <ScrollReveal className="lg:col-span-4">
-          <div className="mb-8 text-xs uppercase tracking-[0.36em] text-ink/48">( 02 )</div>
+          <div className="mb-8 text-xs uppercase tracking-[0.36em] text-ink/48">( 01 )</div>
           <h1 
             style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
             className="font-serif text-[clamp(4.6rem,10vw,10.75rem)] italic leading-[0.82] tracking-[-0.055em]"
@@ -1302,6 +1308,9 @@ export default function AtlasPage() {
             </div>
             <p className="max-w-md text-sm leading-relaxed text-ink/62">
               Structured artifacts that make crawler observations reviewable, inspectable, and defensible across technical teams.
+            </p>
+            <p className="max-w-md text-[10px] uppercase tracking-[0.22em] text-ink/42">
+              Public page note: issue rows, indexation counts, and export previews use a demo dataset, not disclosed client data.
             </p>
           </ScrollReveal>
 

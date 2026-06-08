@@ -1,5 +1,6 @@
 import { MARKET_THESES } from '../content/marketTheses';
 import { AI_INFORMATION_DESCRIPTION, AI_INFORMATION_STATIC_HTML, AI_INFORMATION_TITLE } from '../content/aiInformation';
+import { SIMPLE_BOOK_DESCRIPTION, SIMPLE_BOOK_H1, SIMPLE_BOOK_STATIC_SUMMARY, SIMPLE_BOOK_TITLE } from '../content/simpleBook';
 import {
   aboutJsonLd,
   aiInformationJsonLd,
@@ -9,10 +10,11 @@ import {
   marketsJsonLd,
   methodJsonLd,
   resumeJsonLd,
+  simpleBookJsonLd,
   type JsonLd,
 } from './schema';
 
-export type RouteSection = 'home' | 'about' | 'resume' | 'source-information' | 'project' | 'service' | 'research' | 'research-article';
+export type RouteSection = 'home' | 'about' | 'book' | 'resume' | 'source-information' | 'project' | 'service' | 'research' | 'research-article';
 
 export interface SeoRoute {
   path: string;
@@ -37,16 +39,16 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/',
     aliases: [],
-    title: 'Sulayman Bowles | Technical SEO, AI Search, Finance/Data Systems',
+    title: 'Sulayman Bowles | Technical SEO Systems, AI Search Visibility & Finance/Data',
     description:
-      'Sulayman Bowles is a McCombs student and Void Agency founder building technical SEO systems, AI-search discoverability workflows, finance/data tools, and evidence-backed web experiences.',
+      'Sulayman Bowles builds technical SEO systems, AI-search visibility workflows, and finance/data research artifacts through Atlas and Void Agency.',
     h1: 'Sulayman Bowles',
     section: 'home',
     pageType: 'website',
     priority: 1.0,
     includeInSitemap: true,
     staticSummary:
-      'Technical SEO systems, AI-search discoverability workflows, finance/data tools, and evidence-backed web experiences built by Sulayman Bowles.',
+      'Technical SEO systems, AI-search visibility workflows, and finance/data research artifacts built by Sulayman Bowles.',
     jsonLd: homeJsonLd(),
   },
   {
@@ -63,6 +65,20 @@ const CORE_ROUTES: SeoRoute[] = [
     staticSummary:
       'Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, technical SEO systems, AI-search workflows, and finance/data tools.',
     jsonLd: aboutJsonLd(),
+  },
+  {
+    path: '/simple',
+    aliases: ['/book', '/plain', '/text'],
+    title: SIMPLE_BOOK_TITLE,
+    description: SIMPLE_BOOK_DESCRIPTION,
+    h1: SIMPLE_BOOK_H1,
+    section: 'book',
+    pageType: 'profile',
+    priority: 0.7,
+    includeInSitemap: true,
+    lastmod: '2026-06-08',
+    staticSummary: SIMPLE_BOOK_STATIC_SUMMARY,
+    jsonLd: simpleBookJsonLd(),
   },
   {
     path: '/atlas',

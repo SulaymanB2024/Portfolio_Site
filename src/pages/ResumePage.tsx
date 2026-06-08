@@ -91,7 +91,7 @@ export default function ResumePage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink antialiased selection:bg-ink selection:text-canvas md:cursor-none">
+    <main className="relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink antialiased selection:bg-ink selection:text-canvas">
       <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40 print:hidden" />
       <PageTechnicalChrome tone="light" />
       {!prefersReducedMotion && (
@@ -147,7 +147,7 @@ export default function ResumePage() {
             {[
               ['Builds', 'Atlas, SEO audit pages, React interfaces, research notes, and data workflows.'],
               ['Analyzes', 'Crawl evidence, AI-search readiness, finance assumptions, operating models, and market structure.'],
-              ['Proof', 'Public routes, sanitized crawl samples, research artifacts, and source-backed project notes.'],
+              ['Proof', 'Public routes, preview research notes, and source-backed project pages.'],
             ].map(([label, copy]) => (
               <article key={label} className="bg-ink/[0.018] p-6">
                 <h3 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/45">{label}</h3>

@@ -1,21 +1,16 @@
+import { isNavItemActive, navItemId, navLabel, primaryNav, utilityNav, type SiteNavItem } from '../content/siteNavigation';
+
 type InternalFooterProps = {
   activePath: string;
   tone?: 'light' | 'dark';
 };
 
-const footerItems = [
-  { label: 'WORK', href: '/#selected-works' },
-  { label: 'ATLAS', href: '/atlas' },
-  { label: 'MARKETS', href: '/markets' },
-  { label: 'METHOD', href: '/method' },
-  { label: 'ABOUT', href: '/about' },
-  { label: 'RESUME', href: '/resume' },
-  { label: 'AI INFORMATION', href: '/ai-information' },
-  { label: 'CONTACT', href: '/#contact' },
-] as const;
-
 export function InternalFooter({ activePath, tone = 'light' }: InternalFooterProps) {
   const isDark = tone === 'dark';
+  const footerGroups: { label: string; items: SiteNavItem[] }[] = [
+    { label: 'Primary', items: primaryNav },
+    { label: 'Source', items: utilityNav },
+  ];
 
   const textClass = isDark ? 'text-[#f1efe8]' : 'text-ink';
   const textMutedClass = isDark ? 'text-[#f1efe8]/54' : 'text-ink/54';
@@ -33,31 +28,35 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
         </div>
       </div>
       
-      <nav className="flex flex-wrap gap-5" id="footer-nav" aria-label="Footer navigation">
-        {footerItems.map((item) => {
-          const active = activePath === item.href || (item.href === '/ai-information' && activePath === '/ai-information');
-          const cleanId = `footer-nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`;
-          
-          return (
-            <a
-              key={item.href}
-              href={item.href}
-              id={cleanId}
-              data-cursor-text={item.label}
-              className={`hover-target relative group overflow-visible px-2 py-1 transition-colors ${active ? textClass : textMutedNavClass}`}
-            >
-              <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">
-                {item.label}
-              </span>
-              <span className={`absolute left-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${textClass}`}>
-                [
-              </span>
-              <span className={`absolute right-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${textClass}`}>
-                ]
-              </span>
-            </a>
-          );
-        })}
+      <nav className="grid gap-5" id="footer-nav" aria-label="Footer navigation">
+        {footerGroups.map((group) => (
+          <div key={group.label} className="flex flex-wrap gap-5">
+            {group.items.map((item) => {
+              const active = isNavItemActive(activePath, item.href);
+              const cleanId = navItemId(`footer-nav-${group.label.toLowerCase()}`, item);
+
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  id={cleanId}
+                  data-cursor-text={item.cursorText ?? navLabel(item)}
+                  className={`hover-target relative group inline-flex min-h-11 items-center overflow-visible px-2 py-1 transition-colors ${active ? textClass : textMutedNavClass}`}
+                >
+                  <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">
+                    {navLabel(item)}
+                  </span>
+                  <span className={`absolute left-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${textClass}`}>
+                    [
+                  </span>
+                  <span className={`absolute right-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${textClass}`}>
+                    ]
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        ))}
       </nav>
       
       <div className="md:text-right">
@@ -65,13 +64,13 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
         <br />
         ALL RIGHTS RESERVED
       </div>
-      
-      <a 
-        href="#top" 
-        id="footer-back-to-top" 
-        aria-label="Back to top" 
-        data-cursor-text="TOP" 
-        className={`hover-target h-9 w-9 rounded-full border ${borderCircleClass} transition-colors ${hoverBgClass}`} 
+
+      <a
+        href="#top"
+        id="footer-back-to-top"
+        aria-label="Back to top"
+        data-cursor-text="TOP"
+        className={`hover-target h-11 w-11 rounded-full border ${borderCircleClass} transition-colors ${hoverBgClass}`}
       />
     </footer>
   );

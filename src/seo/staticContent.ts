@@ -1,5 +1,7 @@
 import { AI_INFORMATION_STATIC_HTML } from '../content/aiInformation';
 import { MARKET_THESES } from '../content/marketTheses';
+import { SIMPLE_BOOK_CHAPTERS, SIMPLE_BOOK_LINKS } from '../content/simpleBook';
+import { primaryNav, utilityNav } from '../content/siteNavigation';
 import type { SeoRoute } from './routes';
 
 type LinkItem = {
@@ -10,14 +12,8 @@ type LinkItem = {
 
 const primaryLinks: LinkItem[] = [
   { label: 'Home', href: '/', description: 'Portfolio homepage and selected work.' },
-  { label: 'Atlas', href: '/atlas', description: 'Technical SEO audit console project.' },
-  { label: 'Markets', href: '/markets', description: 'Finance and market research archive.' },
-  { label: 'Method', href: '/method', description: 'Void Agency technical SEO process.' },
-  { label: 'About', href: '/about', description: 'Profile, experience, and operating principles.' },
-  { label: 'Resume', href: '/resume', description: 'HTML resume and proof links.' },
-  { label: 'AI Information', href: '/ai-information', description: 'Official entity information for search and AI systems.' },
-  { label: 'Sitemap', href: '/sitemap', description: 'Plain HTML links to public pages.' },
-  { label: 'Contact', href: '/#contact', description: 'Homepage contact form.' },
+  ...primaryNav.map(({ label, href, description }) => ({ label, href, description })),
+  ...utilityNav.map(({ label, href, description }) => ({ label, href, description })),
 ];
 
 const atlasProcess = [
@@ -119,17 +115,17 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/') {
     return articleShell(
       'Sulayman Bowles',
-      'Technical SEO systems, AI-search discoverability, and finance/data tools.',
+      'Technical SEO systems, AI-search visibility, and finance/data research.',
       `<h2>Introduction</h2>
         <p>I build systems for search, finance, and decision-making. The common thread is evidence.</p>
         <p>My work starts with messy surfaces: crawl data, page templates, market signals, search behavior, financial assumptions, and unfinished product logic. I turn that into structured systems people can inspect, question, and use.</p>
         <h2>Selected Work</h2>
         <h3><a href="/atlas">Atlas SEO Audit Console</a></h3>
         <p>A crawl-based audit system for finding indexation, architecture, performance, and AI-search readiness issues across real websites.</p>
-        <h3><a href="/markets">Markets Research</a></h3>
-        <p>A collection of finance and data work covering valuation, market research, operating models, and decision dashboards.</p>
         <h3><a href="/method">Void Agency Method</a></h3>
         <p>Void Agency is my technical SEO and AI-search consultancy, focused on crawlability, answer-readiness, structured content, and evidence-backed website audits.</p>
+        <h3><a href="/markets">Markets Research</a></h3>
+        <p>A collection of finance and data work covering valuation, market research, operating models, and decision dashboards.</p>
         <h2>Operating Method</h2>
         <p>I separate signal from presentation. First, collect the evidence. Then structure it. Then decide what it means, what risk it creates, and what should be fixed.</p>
         <ul><li>Crawl before claims</li><li>Structure before scale</li><li>Evidence before polish</li></ul>
@@ -194,7 +190,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Profile Summary</h2>
         <h3>Builds</h3><p>Atlas, SEO audit pages, React interfaces, research notes, and data workflows.</p>
         <h3>Analyzes</h3><p>Crawl evidence, AI-search readiness, finance assumptions, operating models, and market structure.</p>
-        <h3>Proof</h3><p>Public routes, sanitized crawl samples, research artifacts, and source-backed project notes.</p>
+        <h3>Proof</h3><p>Public routes, preview research notes, and source-backed project pages.</p>
         <h2>Experience</h2>
         ${resumeExperience
           .map(([role, org, dates, summary]) => `<h3>${escapeHtml(role)}</h3><p><strong>${escapeHtml(org)}</strong> - ${escapeHtml(dates)}. ${escapeHtml(summary)}</p>`)
@@ -225,6 +221,17 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${definitionCards(homeDisciplines)}
         <h2>Internal Links</h2>
         ${linkList(primaryLinks)}`,
+    );
+  }
+
+  if (route.path === '/simple') {
+    return articleShell(
+      'A Short Book About Me',
+      'I use this first-person text page to explain how technical SEO, AI-search visibility, finance/data research, Atlas, Void Agency, Markets Research, and software systems fit together.',
+      `<h2>Chapters</h2>
+        ${SIMPLE_BOOK_CHAPTERS.map((chapter) => `<h3>${escapeHtml(`${chapter.numeral}. ${chapter.title}`)}</h3>${paragraphList(chapter.body)}`).join('\n        ')}
+        <h2>Links</h2>
+        ${linkList(SIMPLE_BOOK_LINKS)}`,
     );
   }
 

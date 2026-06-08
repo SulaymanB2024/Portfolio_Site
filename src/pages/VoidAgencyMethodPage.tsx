@@ -569,7 +569,7 @@ export default function VoidAgencyMethodPage() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <main id="top" className="relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] md:cursor-none">
+    <main id="top" className="relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
       {!prefersReducedMotion && <div className="hidden md:block">
@@ -588,6 +588,7 @@ export default function VoidAgencyMethodPage() {
             className="font-serif text-[clamp(5.2rem,12vw,12.4rem)] italic leading-[0.74] tracking-[-0.055em] text-[#f1efe8]"
           >
             <ScrambleText text="VOID" trigger="once" />
+            {' '}
             <br />
             <ScrambleText text="AGENCY." trigger="once" />
           </h1>

@@ -9,12 +9,14 @@ import { ScrambleText } from './components/ScrambleText';
 import { ScrollReveal } from './components/ScrollReveal';
 import { ScrollProgress } from './components/ScrollProgress';
 import { MagneticButton } from './components/MagneticButton';
+import { InternalHeader } from './components/InternalHeader';
 import { KineticTypography } from './components/KineticTypography';
 import { ShutterWipe } from './components/pageTransitions/ShutterWipe';
 import { usePageTransitions } from './hooks/usePageTransitions';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
 import { getCanonicalRoutes, getSeoRoute, normalizePath } from './seo/routes';
+import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavigation';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
 import { TextMarquee } from './components/TextMarquee';
@@ -26,6 +28,7 @@ const loadResumePage = () => import('./pages/ResumePage');
 const loadAiInformationPage = () => import('./pages/AiInformationPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
+const loadSimplePage = () => import('./pages/SimplePage');
 
 const AtlasPage = lazy(loadAtlasPage);
 const VoidAgencyMethodPage = lazy(loadMethodPage);
@@ -34,6 +37,7 @@ const ResumePage = lazy(loadResumePage);
 const AiInformationPage = lazy(loadAiInformationPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
+const SimplePage = lazy(loadSimplePage);
 const LocalTime = lazy(() => import('./components/LocalTime').then(m => ({ default: m.LocalTime })));
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
@@ -60,6 +64,8 @@ async function preloadRoute(path: string) {
     await loadMethodPage();
   } else if (route?.path === '/about') {
     await loadAboutPage();
+  } else if (route?.path === '/simple') {
+    await loadSimplePage();
   } else if (route?.path === '/resume') {
     await loadResumePage();
   } else if (route?.path === '/ai-information') {
@@ -114,6 +120,12 @@ export default function App() {
         <AboutPage />
       </Suspense>
     );
+  } else if (route?.path === '/simple') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <SimplePage />
+      </Suspense>
+    );
   } else if (route?.path === '/resume') {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
@@ -147,7 +159,7 @@ export default function App() {
 
   return (
     <>
-      <ShutterWipe />
+      {route?.path !== '/simple' && <ShutterWipe />}
       {page}
     </>
   );
@@ -218,6 +230,14 @@ function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
   );
 }
 
+function ContactFieldLabel({ htmlFor, children }: { htmlFor: string; children: string }) {
+  return (
+    <label htmlFor={htmlFor} className="sr-only">
+      {children}
+    </label>
+  );
+}
+
 let initialLoadComplete = false;
 
 function HomePage() {
@@ -230,6 +250,11 @@ function HomePage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [websiteUrl, setWebsiteUrl] = useState('');
+  const [projectType, setProjectType] = useState('');
+  const [timeline, setTimeline] = useState('');
+  const [scope, setScope] = useState('');
+  const [brokenArea, setBrokenArea] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -249,7 +274,16 @@ function HomePage() {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({ name, email, message })
+        body: JSON.stringify({
+          name,
+          email,
+          websiteUrl,
+          projectType,
+          timeline,
+          scope,
+          brokenArea,
+          message,
+        })
       });
 
       if (response.ok) {
@@ -257,6 +291,11 @@ function HomePage() {
           setFormStatus('success');
           setName('');
           setEmail('');
+          setWebsiteUrl('');
+          setProjectType('');
+          setTimeline('');
+          setScope('');
+          setBrokenArea('');
           setMessage('');
           if (triggerShutter) {
             triggerShutter(false);
@@ -321,15 +360,19 @@ function HomePage() {
   
   const h1Transform = useTransform(philosophyScroll, [0, 1], ["0%", "-40%"]);
   const h2Transform = useTransform(philosophyScroll, [0, 1], ["0%", "40%"]);
+  const contactFieldClass = 'w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-sm font-sans tracking-normal outline-none transition-colors placeholder:text-canvas/32 text-canvas';
+  const contactSelectClass = `${contactFieldClass} appearance-none text-canvas/82`;
 
   return (
-    <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas md:cursor-none" ref={containerRef}>
+    <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas" ref={containerRef}>
       {!prefersReducedMotion && <InkTrails />}
         
         {/* Hide native cursor on desktop to use smooth cursor */}
         {!prefersReducedMotion && <div className="hidden md:block">
           <SmoothCursor />
         </div>}
+
+      <InternalHeader activePath="/" tone="light" variant="home" />
 
       {/* Grid Crosshairs */}
       <div className="fixed inset-0 pointer-events-none z-40 hidden md:block mix-blend-difference text-canvas select-none">
@@ -385,67 +428,6 @@ function HomePage() {
         )}
       </AnimatePresence>
 
-      {/* Outline Navigation */}
-      <motion.header 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="fixed top-0 w-full z-50 px-4 py-6 md:px-16 md:py-12 flex justify-between items-start mix-blend-difference text-canvas pointer-events-none select-none"
-      >
-        <a
-          href="/"
-          id="nav-brand-home"
-          aria-label="Home - Sulayman Bowles"
-          className="pointer-events-auto hover-target flex flex-col items-start cursor-pointer transition-opacity hover:opacity-80 focus:outline-none focus:ring-1 focus:ring-canvas"
-        >
-          <span className="text-sm font-sans font-medium tracking-[0.2em] leading-none uppercase">S. BOWLES</span>
-        </a>
-        
-        <details className="pointer-events-auto md:hidden text-right text-xs font-sans tracking-[0.2em] font-medium uppercase">
-          <summary className="hover-target cursor-pointer list-none px-2 py-1">Menu +</summary>
-          <nav aria-label="Mobile Main Navigation" className="mt-3 grid gap-2 rounded border border-canvas/20 bg-ink/85 p-3 text-canvas shadow-2xl backdrop-blur">
-            <a href="#selected-works" id="mobile-nav-work" data-cursor-text="WORK" className="hover-target px-2 py-1">Work</a>
-            <a href="/method" id="mobile-nav-method" data-cursor-text="METHOD" className="hover-target px-2 py-1">Method</a>
-            <a href="#contact" id="mobile-nav-contact" data-cursor-text="CONTACT" className="hover-target px-2 py-1">Contact</a>
-            <a href="/atlas" id="mobile-nav-atlas" data-cursor-text="ATLAS" className="hover-target px-2 py-1">Atlas</a>
-            <a href="/markets" id="mobile-nav-markets" data-cursor-text="RESEARCH" className="hover-target px-2 py-1">Research</a>
-            <a href="/about" id="mobile-nav-about" data-cursor-text="ABOUT" className="hover-target px-2 py-1">About</a>
-            <a href="/resume" id="mobile-nav-resume" data-cursor-text="RESUME" className="hover-target px-2 py-1">Resume</a>
-            <a href="/ai-information" id="mobile-nav-ai-information" data-cursor-text="INFO" className="hover-target px-2 py-1">AI Info</a>
-          </nav>
-        </details>
-
-        <nav aria-label="Main Navigation" className="pointer-events-auto hidden flex-col items-end gap-2 text-xs font-sans tracking-[0.2em] font-medium uppercase mix-blend-difference select-none md:flex">
-          <a href="#selected-works" id="nav-work" data-cursor-text="WORK" className="hover-target relative group overflow-visible p-2 -m-2">
-            <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Work</span>
-            <span aria-hidden="true" className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-            <span aria-hidden="true" className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
-          <a href="/method" id="nav-method" data-cursor-text="METHOD" className="hover-target relative group overflow-visible p-2 -m-2">
-             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Method</span>
-             <span aria-hidden="true" className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span aria-hidden="true" className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
-          <a href="#contact" id="nav-contact" data-cursor-text="CONTACT" className="hover-target relative group overflow-visible p-2 -m-2">
-             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Contact</span>
-             <span aria-hidden="true" className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span aria-hidden="true" className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
-          <details className="relative group/index p-2 -m-2">
-            <summary className="hover-target cursor-pointer list-none transition-opacity hover:opacity-80" data-cursor-text="INDEX">
-              <span>Index +</span>
-            </summary>
-            <div className="absolute right-0 mt-3 grid min-w-[9rem] gap-2 border border-canvas/20 bg-ink/90 p-3 text-right text-canvas shadow-2xl backdrop-blur">
-              <a href="/atlas" id="nav-index-atlas" data-cursor-text="ATLAS" className="hover-target px-2 py-1 transition-opacity hover:opacity-70">Atlas</a>
-              <a href="/markets" id="nav-index-markets" data-cursor-text="RESEARCH" className="hover-target px-2 py-1 transition-opacity hover:opacity-70">Research</a>
-              <a href="/about" id="nav-index-about" data-cursor-text="ABOUT" className="hover-target px-2 py-1 transition-opacity hover:opacity-70">About</a>
-              <a href="/resume" id="nav-index-resume" data-cursor-text="RESUME" className="hover-target px-2 py-1 transition-opacity hover:opacity-70">Resume</a>
-              <a href="/ai-information" id="nav-index-ai-information" data-cursor-text="INFO" className="hover-target px-2 py-1 transition-opacity hover:opacity-70">AI Info</a>
-            </div>
-          </details>
-        </nav>
-      </motion.header>
-
       {/* Main Container */}
       <main className="w-full" id="top">
         {/* HERO SECTION - Very Editorial */}
@@ -482,12 +464,12 @@ function HomePage() {
 	               <h1 className="font-serif text-5xl font-light leading-none tracking-normal text-ink md:text-7xl">
 	                 Sulayman Bowles
 	               </h1>
-	               <p className="mt-5 max-w-md font-sans text-[10px] uppercase leading-relaxed tracking-[0.2em] text-ink/70 md:text-xs">
-	                 Technical SEO, Atlas, and finance research.
+	               <p className="mt-5 max-w-lg font-sans text-sm leading-relaxed tracking-normal text-ink/72 md:text-base">
+	                 Technical SEO systems, AI-search visibility, and finance/data research.
 	               </p>
-                <div className="mt-6 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.24em] text-ink/64">
-                  <a href="/atlas" id="hero-view-atlas-link" className="hover-target border-b border-ink/24 pb-2 transition-colors hover:border-ink hover:text-ink">View Atlas</a>
-                  <a href="/#contact" id="hero-start-audit-link" className="hover-target border-b border-ink/24 pb-2 transition-colors hover:border-ink hover:text-ink">Start an audit</a>
+                <div className="mt-7 flex flex-wrap items-center gap-4 text-xs text-ink/70">
+                  <a href="/#contact" id="hero-start-audit-link" className="hover-target inline-flex min-h-11 items-center border border-ink bg-ink px-5 py-3 font-sans text-[10px] uppercase tracking-[0.2em] text-canvas transition-colors hover:bg-transparent hover:text-ink">Start a technical audit</a>
+                  <a href="/atlas" id="hero-view-atlas-link" className="hover-target inline-flex min-h-11 items-center border-b border-ink/24 pb-1 font-sans text-[10px] uppercase tracking-[0.2em] transition-colors hover:border-ink hover:text-ink">View Atlas</a>
                 </div>
 	             </div>
              <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-ink/40 md:text-xs">Trace the work</span>
@@ -508,7 +490,7 @@ function HomePage() {
                text="My work starts with messy surfaces: crawl data, page templates, market signals, search behavior, financial assumptions, and unfinished product logic. I turn that into structured systems people can inspect, question, and use."
                elementType="p"
                delay={0.4}
-               className="font-sans text-[10px] md:text-xs uppercase tracking-[0.25em] text-ink/60 leading-relax max-w-sm mt-4 md:mt-2"
+               className="font-sans text-sm md:text-base tracking-normal text-ink/62 leading-relaxed max-w-md mt-4 md:mt-2"
             />
             
             <motion.div 
@@ -546,15 +528,15 @@ function HomePage() {
                <span className="font-serif italic opacity-50 text-xl text-canvas/50">2024 — 2026</span>
              </ScrollReveal>
            </div>            {/* Project 01 */}
-           <div className="max-w-[1800px] mx-auto w-full px-4 md:px-16 mb-48 md:mb-64 relative pt-16">
+           <div className="order-1 max-w-[1800px] mx-auto w-full px-4 md:px-16 mb-48 md:mb-64 relative pt-16">
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">SYSTEM</span>
+                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
                   <span className="opacity-60">Technical SEO Audit Console</span>
                </div>
                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT</span>
-                  <span className="opacity-60"><ScrambleText text="Atlas / Void Agency" trigger="once" /></span>
+                  <span className="opacity-60"><ScrambleText text="Atlas SEO Audit Console" trigger="once" /></span>
                </div>
              </div>
              
@@ -564,7 +546,7 @@ function HomePage() {
                <div className="md:col-span-4 flex flex-col pt-12 md:pt-0 md:pr-8 lg:pr-16 relative z-10 order-2 md:order-1 mt-12 md:mt-0">
                  
                  <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start">
-                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6">( 02 )</span></ScrollReveal>
+                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6">( 01 )</span></ScrollReveal>
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
@@ -624,16 +606,16 @@ function HomePage() {
                
              </div>
             </div>
-                    {/* PROJECT 02 - SYSTEMS */}
-         <div className="w-full relative py-20 bg-ink" id="systems">
+                    {/* PROJECT 03 - MARKETS */}
+         <div className="order-3 w-full relative py-20 bg-ink" id="systems">
             <div className="max-w-[1800px] mx-auto w-full px-4 md:px-16 mb-48 md:mb-64 relative pt-16">
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">FINANCE</span>
+                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 03</span>
                   <span className="opacity-60">Market + Operating Analysis</span>
                </div>
                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
+                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">FINANCE</span>
                   <span className="opacity-60">Models, Dashboards, Research</span>
                </div>
              </div>
@@ -663,7 +645,7 @@ function HomePage() {
 
                <div className="md:col-span-4 flex flex-col justify-between pt-12 md:pt-0">
                  <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start items-start md:items-end md:text-right">
-                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6 block">( 01 )</span></ScrollReveal>
+                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6 block">( 03 )</span></ScrollReveal>
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
@@ -692,12 +674,12 @@ function HomePage() {
            </div>
          </div>
            
-           {/* Project 03 - Void */}
-           <a href="/method" id="work-link-void" className="w-full mt-32 md:mt-64 pt-32 pb-48 relative min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center border-t border-b border-canvas/10 my-32 hover-target bg-ink overflow-hidden group" data-cursor-text="METHOD">
+           {/* Project 02 - Void */}
+           <a href="/method" id="work-link-void" className="order-2 w-full mt-32 md:mt-64 pt-32 pb-48 relative min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center border-t border-b border-canvas/10 my-32 hover-target bg-ink overflow-hidden group" data-cursor-text="METHOD">
               {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
               <div className="relative z-10 flex flex-col items-center">
                 <ScrollReveal>
-                  <span className="text-canvas font-serif italic text-2xl md:text-4xl mb-8 opacity-30 group-hover:opacity-100 transition-opacity duration-1000">( 03 )</span>
+                  <span className="text-canvas font-serif italic text-2xl md:text-4xl mb-8 opacity-30 group-hover:opacity-100 transition-opacity duration-1000">( 02 )</span>
                 </ScrollReveal>
                 <ScrollReveal delay={0.2} blur={false}>
                   <h4 
@@ -739,7 +721,7 @@ function HomePage() {
             {/* Foreground content */}
             <div className="absolute right-0 top-1/2 -translate-y-1/2 max-w-sm md:max-w-md bg-canvas/80 backdrop-blur-md p-8 md:p-12 border border-ink/10">
                <h3 className="font-serif italic text-3xl md:text-5xl mb-8 font-light">Operating Method</h3>
-               <p className="font-sans text-xs uppercase tracking-[0.2em] text-ink/70 leading-tight mb-8">
+               <p className="font-sans text-sm tracking-normal text-ink/70 leading-relaxed mb-8">
                  I separate signal from presentation. First, collect the evidence. Then structure it. Then decide what it means, what risk it creates, and what should be fixed.
                </p>
                <ul className="space-y-4 font-sans text-[10px] uppercase tracking-widest border-t border-ink/10 pt-8 text-ink/50 group">
@@ -787,7 +769,7 @@ function HomePage() {
                             <h4 className="text-4xl md:text-4xl lg:text-5xl font-serif tracking-tighter uppercase font-light leading-none mb-6 md:mb-8">
                               {item.title}
                             </h4>
-                            <p className="font-sans text-[10px] uppercase tracking-widest leading-tight opacity-60 max-w-[80%] md:max-w-[70%]">
+                            <p className="font-sans text-sm tracking-normal leading-relaxed opacity-[0.62] max-w-[90%] md:max-w-[78%]">
                               {item.desc}
                             </p>
                           </div>
@@ -1228,7 +1210,7 @@ function HomePage() {
                     </ScrollReveal>
                     
                     <ScrollReveal delay={0.1} blur={false}>
-                      <h4 className="text-[12vw] leading-[0.8] font-serif uppercase font-light tracking-tighter mb-12 hover-target cursor-none" data-cursor-text="WRITE">
+                      <h4 className="text-[12vw] leading-[0.8] font-serif uppercase font-light tracking-tighter mb-12 hover-target" data-cursor-text="WRITE">
                          <span className="block italic opacity-90">Send</span>
                          <span className="block opacity-80">The Brief</span>
                       </h4>
@@ -1245,38 +1227,116 @@ function HomePage() {
                       ) : (
                         <form onSubmit={handleSubmit} className="w-full max-w-xl space-y-6 mt-4">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <input 
-                              type="text" 
-                              required
-                              id="contact-name"
-                              name="name"
-                              autoComplete="name"
-                              placeholder="YOUR NAME" 
-                              value={name}
-                              onChange={(e) => setName(e.target.value)}
-                              className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
-                            />
-                            <input 
-                              type="email" 
-                              required
-                              id="contact-email"
-                              name="email"
-                              autoComplete="email"
-                              placeholder="YOUR EMAIL" 
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                              className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
-                            />
+                            <div>
+                              <ContactFieldLabel htmlFor="contact-name">Your name</ContactFieldLabel>
+                              <input
+                                type="text"
+                                required
+                                id="contact-name"
+                                name="name"
+                                autoComplete="name"
+                                placeholder="Your name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className={contactFieldClass}
+                              />
+                            </div>
+                            <div>
+                              <ContactFieldLabel htmlFor="contact-email">Your email</ContactFieldLabel>
+                              <input
+                                type="email"
+                                required
+                                id="contact-email"
+                                name="email"
+                                autoComplete="email"
+                                placeholder="Your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={contactFieldClass}
+                              />
+                            </div>
                           </div>
+                          <ContactFieldLabel htmlFor="contact-website-url">Website URL</ContactFieldLabel>
+                          <input
+                            type="url"
+                            id="contact-website-url"
+                            name="websiteUrl"
+                            autoComplete="url"
+                            placeholder="Website URL"
+                            value={websiteUrl}
+                            onChange={(e) => setWebsiteUrl(e.target.value)}
+                            className={contactFieldClass}
+                          />
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                              <ContactFieldLabel htmlFor="contact-project-type">Project type</ContactFieldLabel>
+                              <select
+                                id="contact-project-type"
+                                name="projectType"
+                                value={projectType}
+                                onChange={(e) => setProjectType(e.target.value)}
+                                className={contactSelectClass}
+                              >
+                                <option value="" className="bg-ink text-canvas">Project type</option>
+                                <option value="Technical SEO audit" className="bg-ink text-canvas">Technical SEO audit</option>
+                                <option value="AI-search visibility" className="bg-ink text-canvas">AI-search visibility</option>
+                                <option value="Finance/data research" className="bg-ink text-canvas">Finance/data research</option>
+                                <option value="Web system" className="bg-ink text-canvas">Web system</option>
+                              </select>
+                            </div>
+                            <div>
+                              <ContactFieldLabel htmlFor="contact-timeline">Timeline</ContactFieldLabel>
+                              <select
+                                id="contact-timeline"
+                                name="timeline"
+                                value={timeline}
+                                onChange={(e) => setTimeline(e.target.value)}
+                                className={contactSelectClass}
+                              >
+                                <option value="" className="bg-ink text-canvas">Timeline</option>
+                                <option value="This week" className="bg-ink text-canvas">This week</option>
+                                <option value="2-4 weeks" className="bg-ink text-canvas">2-4 weeks</option>
+                                <option value="1-2 months" className="bg-ink text-canvas">1-2 months</option>
+                                <option value="Flexible" className="bg-ink text-canvas">Flexible</option>
+                              </select>
+                            </div>
+                            <div>
+                              <ContactFieldLabel htmlFor="contact-scope">Scope size</ContactFieldLabel>
+                              <select
+                                id="contact-scope"
+                                name="scope"
+                                value={scope}
+                                onChange={(e) => setScope(e.target.value)}
+                                className={contactSelectClass}
+                              >
+                                <option value="" className="bg-ink text-canvas">Scope size</option>
+                                <option value="Small audit" className="bg-ink text-canvas">Small audit</option>
+                                <option value="Full site audit" className="bg-ink text-canvas">Full site audit</option>
+                                <option value="Implementation support" className="bg-ink text-canvas">Implementation support</option>
+                                <option value="Research sprint" className="bg-ink text-canvas">Research sprint</option>
+                              </select>
+                            </div>
+                          </div>
+                          <ContactFieldLabel htmlFor="contact-broken-area">What feels broken?</ContactFieldLabel>
+                          <textarea
+                            rows={2}
+                            id="contact-broken-area"
+                            name="brokenArea"
+                            placeholder="What feels broken?"
+                            value={brokenArea}
+                            onChange={(e) => setBrokenArea(e.target.value)}
+                            className={`${contactFieldClass} resize-none`}
+                          />
+                          <ContactFieldLabel htmlFor="contact-message">Project details, goals, or audit request</ContactFieldLabel>
                           <textarea 
                             required
-                            rows={2}
+                            rows={3}
                             id="contact-message"
                             name="message"
-                            placeholder="THE BRIEF (PROJECT DETAILS, TIMELINE, AUDIT REQUEST)" 
+                            placeholder="Project details, goals, or audit request"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
-                            className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas resize-none"
+                            className={`${contactFieldClass} resize-none`}
                           />
                           <div className="flex items-center justify-between pt-2">
                             {formStatus === 'error' && (
@@ -1287,12 +1347,12 @@ function HomePage() {
                             <button 
                               type="submit" 
                               disabled={formStatus === 'submitting'}
-                              className="group flex items-center gap-6 hover-target cursor-none w-fit bg-transparent border-none outline-none text-left disabled:opacity-50"
+                              className="group flex min-h-11 w-fit items-center gap-6 hover-target bg-transparent border-none outline-none text-left disabled:opacity-50"
                             >
                               <span className="text-lg md:text-xl font-sans font-light tracking-widest uppercase pb-1 border-b-2 border-canvas/20 group-hover:border-canvas transition-colors text-canvas">
                                 {formStatus === 'submitting' ? 'SENDING...' : 'SUBMIT BRIEF'}
                               </span>
-                              <div className="w-10 h-10 rounded-full border border-canvas/20 flex items-center justify-center group-hover:bg-canvas group-hover:text-ink transition-colors text-canvas">
+                              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-canvas/20 text-canvas transition-colors group-hover:bg-canvas group-hover:text-ink">
                                 <span className="transform -rotate-45 block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">→</span>
                               </div>
                             </button>
@@ -1309,12 +1369,18 @@ function HomePage() {
                     
                     <ScrollReveal delay={0.4} blur={false}>
                         <div className="grid grid-cols-2 gap-x-12 gap-y-6 text-[10px] uppercase font-sans tracking-[0.2em] opacity-70 w-full">
-                           <a href="/atlas" id="footer-link-atlas" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Atlas</a>
-                           <a href="/markets" id="footer-link-markets" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Markets Research</a>
-                           <a href="/method" id="footer-social-void" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Void Agency</a>
-                           <a href="/ai-information" id="footer-link-ai-information" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">AI Information</a>
-                           <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Email</a>
-                           <a href="#contact" id="footer-link-contact" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Contact</a>
+                           {[...primaryNav.filter((item) => item.label !== 'Work'), ...utilityNav].map((item) => (
+                             <a
+                               key={item.href}
+                               href={item.href}
+                               id={navItemId('home-footer-link', item)}
+                               data-cursor-text={item.cursorText ?? navLabel(item)}
+                               className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1"
+                             >
+                               {navLabel(item)}
+                             </a>
+                           ))}
+                           <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">EMAIL</a>
                         </div>
                      </ScrollReveal>
                  </div>

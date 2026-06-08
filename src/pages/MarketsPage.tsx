@@ -41,14 +41,20 @@ function HeroSection() {
           <span>CASE ARCHIVE</span>
         </div>
 
-        <h1 className="font-serif text-[clamp(42px,5.2vw,74px)] leading-[0.98] tracking-[-0.03em] text-[#f1efe8]">
-          Traditional Cases,<br />
-          Crypto Research,<br />
+        <h1
+          aria-label="Traditional Cases, Crypto Research, and Market Reasoning"
+          className="font-serif text-[clamp(42px,5.2vw,74px)] leading-[0.98] tracking-[-0.03em] text-[#f1efe8]"
+        >
+          Traditional Cases,{' '}<br />
+          Crypto Research,{' '}<br />
           <span className="italic font-light opacity-95 text-[#b7c8a8]/90">&amp; Market Reasoning</span>
         </h1>
 
         <p className="font-sans text-sm text-[#f1efe8]/70 leading-relaxed max-w-lg">
           A collection of equity cases, sector theses, crypto protocol research, market structure work, and investment memos built around evidence, risk, valuation, and asymmetric opportunity.
+        </p>
+        <p className="max-w-lg border-l border-[#b7c8a8]/35 pl-4 text-[10px] uppercase tracking-[0.18em] text-[#f1efe8]/42">
+          Public page note: research cards and modeled metrics are illustrative portfolio artifacts, not investment advice.
         </p>
 
         {/* Focus Areas list */}
@@ -330,6 +336,8 @@ function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: stri
               <button 
                 id={`trad-case-btn-${idx}`}
                 onClick={() => setExpandedIndex(isExpanded ? null : idx)}
+                aria-expanded={isExpanded}
+                aria-controls={`trad-case-panel-${idx}`}
                 className="w-full flex items-center justify-between p-5 hover-target text-left font-mono uppercase text-xs tracking-wider"
                 data-cursor-text={isExpanded ? 'CLOSE' : 'OPEN'}
               >
@@ -346,6 +354,7 @@ function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: stri
               <AnimatePresence initial={false}>
                 {isExpanded && (
                   <motion.div 
+                    id={`trad-case-panel-${idx}`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -485,6 +494,8 @@ function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string
               <button 
                 id={`crypto-case-btn-${idx}`}
                 onClick={() => setExpandedIndex(isExpanded ? null : idx)}
+                aria-expanded={isExpanded}
+                aria-controls={`crypto-case-panel-${idx}`}
                 className="w-full flex items-center justify-between p-5 hover-target text-left font-mono uppercase text-xs tracking-wider"
                 data-cursor-text={isExpanded ? 'CLOSE' : 'OPEN'}
               >
@@ -501,6 +512,7 @@ function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string
               <AnimatePresence initial={false}>
                 {isExpanded && (
                   <motion.div 
+                    id={`crypto-case-panel-${idx}`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -642,7 +654,10 @@ function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) =>
           INVESTMENT MEMOS &amp; THESES
         </div>
         <p className="text-xs text-[#f1efe8]/50 font-sans max-w-xl">
-          Sovereign-grade research, asset allocation models, and structural market logic.
+          Research examples, asset allocation models, and structural market logic.
+        </p>
+        <p className="text-[10px] uppercase tracking-[0.18em] text-[#f1efe8]/38 font-sans max-w-xl">
+          Memos are sample research artifacts for method and writing review; verify assumptions and sources before relying on any thesis.
         </p>
       </div>
 
@@ -882,21 +897,21 @@ function CaseUtilities() {
       </div>
 
       {/* Center: Share */}
-      <div className="flex items-center gap-5">
+      <div className="flex flex-wrap items-center gap-3">
         <span className="text-[8px] text-[#f1efe8]/30">ARCHIVE</span>
-        <a href="/markets/network-monopolies" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 01</a>
-        <a href="/markets/computational-commodity-systems" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 02</a>
-        <a href="/markets/fiat-horizon" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 03</a>
-        <button className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="COPY" onClick={() => navigator.clipboard.writeText(window.location.href)}>COPY</button>
+        <a href="/markets/network-monopolies" className="hover-target inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-[#f1efe8]" data-cursor-text="READ">MEMO 01</a>
+        <a href="/markets/computational-commodity-systems" className="hover-target inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-[#f1efe8]" data-cursor-text="READ">MEMO 02</a>
+        <a href="/markets/fiat-horizon" className="hover-target inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-[#f1efe8]" data-cursor-text="READ">MEMO 03</a>
+        <button className="hover-target inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-[#f1efe8]" data-cursor-text="COPY" onClick={() => navigator.clipboard.writeText(window.location.href)}>COPY</button>
       </div>
 
       {/* Right: Export */}
       <button 
         onClick={() => window.print()}
-        className="flex items-center gap-2 hover:text-[#f1efe8] transition-colors border border-[#f1efe8]/12 px-3 py-1.5 hover-target bg-[#080807]"
+        className="hover-target flex min-h-11 items-center gap-2 border border-[#f1efe8]/12 bg-[#080807] px-3 py-1.5 transition-colors hover:text-[#f1efe8]"
         data-cursor-text="EXPORT"
       >
-        <span>EXPORT PDF</span>
+        <span>Print / Save PDF</span>
         <span className="text-[8px] opacity-60">⤓</span>
       </button>
     </section>
@@ -1019,7 +1034,7 @@ export default function MarketsPage() {
   };
 
   return (
-    <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased md:cursor-none overflow-x-hidden">
+    <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased overflow-x-hidden">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
 

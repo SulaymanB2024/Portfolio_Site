@@ -5,15 +5,19 @@ A Vite React portfolio and agency/research site for Sulayman Bowles. The app kee
 ## Routes
 
 - `/`
-- `/about`
 - `/atlas`
-- `/method`
+- `/simple`
 - `/markets`
+- `/method`
+- `/about`
+- `/resume`
+- `/ai-information`
+- `/sitemap`
 - `/markets/network-monopolies`
 - `/markets/computational-commodity-systems`
 - `/markets/fiat-horizon`
 
-Aliases such as `/projects/atlas`, `/void-agency`, and `/projects/markets` normalize to their canonical routes in the client router.
+Aliases such as `/projects/atlas`, `/void-agency`, `/projects/markets`, `/book`, `/plain`, `/text`, `/cv`, and `/resume.html` redirect or normalize to their canonical routes.
 
 ## Local Development
 

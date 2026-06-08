@@ -195,6 +195,11 @@ export function usePageTransitions({
 
       if (canonicalPath === currentCanonicalPath && url.hash) {
         event.preventDefault();
+        const fullPath = `${canonicalPath}${url.search}${url.hash}`;
+        if (`${window.location.pathname}${window.location.search}${window.location.hash}` !== fullPath) {
+          window.history.pushState({}, '', fullPath);
+          setCurrentPath(fullPath);
+        }
         scrollToHashTarget(url.hash, contactHash, hashFocusSelector);
         return;
       }

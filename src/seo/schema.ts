@@ -177,6 +177,32 @@ export function aboutJsonLd(): JsonLd {
   ]);
 }
 
+export function simpleBookJsonLd(): JsonLd {
+  return graphSchema([
+    personSchema(),
+    websiteSchema(),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      '@id': `${absoluteUrl('/simple')}#profile`,
+      name: 'A Short Book About Sulayman Bowles',
+      url: absoluteUrl('/simple'),
+      description:
+        'A first-person text edition of Sulayman Bowles website, covering technical SEO, AI-search visibility, Atlas, Void Agency, Markets Research, finance/data work, software systems, and current direction.',
+      mainEntity: {
+        '@id': `${SITE_URL}/#person`,
+      },
+      isPartOf: {
+        '@id': `${SITE_URL}/#website`,
+      },
+    },
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Book', path: '/simple' },
+    ]),
+  ]);
+}
+
 export function resumeJsonLd(): JsonLd {
   return graphSchema([
     personSchema(),

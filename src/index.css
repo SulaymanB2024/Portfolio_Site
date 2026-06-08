@@ -5,7 +5,11 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --color-canvas: #f1efe8;
   --color-ink: #080807;
+  --color-accent: #b7c8a8;
+  --color-risk: #c2695e;
   --color-canvas-dark: #e1dfd8;
+  --radius-panel: 0px;
+  --radius-soft: 16px;
 }
 
 @layer base {
@@ -56,6 +60,18 @@ body {
   flex: 0 0 auto;
 }
 
+#selected-works,
+#contact {
+  scroll-margin-top: 7rem;
+}
+
+@media (min-width: 768px) {
+  #selected-works,
+  #contact {
+    scroll-margin-top: 8.5rem;
+  }
+}
+
 
 
 .no-scrollbar::-webkit-scrollbar {
@@ -66,16 +82,45 @@ body {
   scrollbar-width: none;
 }
 
-@media (min-width: 768px) {
-  body, a, button, [class*="hover-target"] {
-    cursor: none !important;
-  }
+.book-prose p {
+  margin: 0 0 1.45rem;
+}
 
+.book-prose .lead {
+  margin-bottom: 3rem;
+  border-left: 1px solid color-mix(in srgb, var(--color-ink) 18%, transparent);
+  padding-left: 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: color-mix(in srgb, var(--color-ink) 58%, transparent);
+}
+
+.book-prose a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+}
+
+@media (min-width: 768px) {
   input,
   textarea,
   select {
-    cursor: text !important;
+    cursor: text;
   }
+}
+
+:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 26%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -171,5 +216,3 @@ a.hover-target:active span.absolute {
   color: #b7c8a8 !important; /* accent flash */
   transition: transform 0.08s ease-out, color 0.08s ease-out;
 }
-
-

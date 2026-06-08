@@ -51,13 +51,13 @@ const experience = [
 ];
 
 const skills = [
-  ['TECHNICAL SEO', 90, 'Screaming Frog, Crawl Budget, Canonical Mapping, Hreflang'],
-  ['AI SEARCH VISIBILITY', 87, 'LLM Index Optimization, Schema Graphs, Citation Relevance'],
-  ['AI PRODUCT STRATEGY', 83, 'Prompt Design, RAG Frameworks, UX Workflows, Prototyping'],
-  ['CRAWL & INDEXATION', 82, 'Log File Analysis, Server Headers, Render Audits, XML Sitemaps'],
-  ['DATA ANALYSIS', 76, 'GA4 APIs, GSC API, Python Scripts, SQLite Databases'],
-  ['PYTHON & AUTOMATION', 83, 'Pandas, Beautiful Soup, Playwright Scrapers, Automated Crons'],
-  ['FINANCIAL MODELING', 78, 'DCF Valuations, Unit Economics, SaaS Metrics, GTM Models'],
+  ['TECHNICAL SEO', 'Built', 'Screaming Frog, crawl budget, canonical mapping, hreflang'],
+  ['AI SEARCH VISIBILITY', 'Shipped', 'LLM retrieval checks, schema graphs, citation relevance'],
+  ['AI PRODUCT STRATEGY', 'Used in client work', 'Prompt review, RAG workflows, UX mapping, prototypes'],
+  ['CRAWL & INDEXATION', 'Built', 'Log-file analysis, server headers, render audits, XML sitemaps'],
+  ['DATA ANALYSIS', 'Shipped', 'GA4 APIs, GSC API, Python scripts, SQLite databases'],
+  ['PYTHON & AUTOMATION', 'Built', 'Pandas, Beautiful Soup, Playwright scrapers, scheduled checks'],
+  ['FINANCIAL MODELING', 'Working knowledge', 'DCF valuation, unit economics, SaaS metrics, GTM models'],
 ];
 
 const workCards = [
@@ -124,7 +124,7 @@ function SkillBars() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
     <div className="space-y-6">
-      {skills.map(([label, value, details], index) => {
+      {skills.map(([label, level, details], index) => {
         const isHovered = hoveredIndex === index;
         return (
           <div 
@@ -135,24 +135,15 @@ function SkillBars() {
           >
             <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/58 transition-colors duration-300 group-hover:text-[#f1efe8]">
               <span>{label as string}</span>
-              <span>{value as number}%</span>
+              <span>{level as string}</span>
             </div>
-            <div className="relative h-px bg-[#f1efe8]/14 transition-colors duration-300 group-hover:bg-[#f1efe8]/24">
+            <div className="relative h-px bg-[#f1efe8]/14 transition-colors duration-300 group-hover:bg-[#f1efe8]/28">
               <motion.div
-                className="absolute left-0 top-0 h-px origin-left bg-[#f1efe8]/38 group-hover:bg-[#f1efe8]/70 transition-colors duration-300"
-                style={{ width: `${value}%` }}
+                className="absolute left-0 top-0 h-px w-full origin-left bg-[#f1efe8]/52 group-hover:bg-[#b7c8a8] transition-colors duration-300"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true, margin: '-12%' }}
-                transition={{ duration: 1.1, delay: 0.08 + index * 0.06, ease: [0.16, 1, 0.3, 1] }}
-              />
-              <motion.span
-                className="absolute top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full border border-[#f1efe8]/70 bg-[#080807] group-hover:border-[#f1efe8] group-hover:scale-110 transition-[border-color,transform] duration-300"
-                style={{ left: `calc(${value}% - 5px)` }}
-                initial={{ opacity: 0, scale: 0.4 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: '-12%' }}
-                transition={{ duration: 0.7, delay: 0.42 + index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, delay: 0.08 + index * 0.05, ease: [0.16, 1, 0.3, 1] }}
               />
             </div>
             <motion.div
@@ -346,7 +337,7 @@ export default function AboutPage() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <main id="top" className="relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] md:cursor-none">
+    <main id="top" className="relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
       {!prefersReducedMotion && <div className="hidden md:block">
@@ -359,14 +350,23 @@ export default function AboutPage() {
       <section className="relative z-10 mx-auto grid min-h-[calc(100vh-102px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.32fr)_minmax(0,0.68fr)] xl:px-10 xl:pt-20">
         <div className="min-w-0 self-center">
           <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/45">ABOUT ME</div>
-          <h1 className="font-serif text-[clamp(3.8rem,6.4vw,7.1rem)] italic leading-[0.92] tracking-[-0.045em]">
-            <span className="block">I build systems</span>
+          <h1
+            aria-label="I build systems for visibility."
+            className="font-serif text-[clamp(3.8rem,6.4vw,7.1rem)] italic leading-[0.92] tracking-[-0.045em]"
+          >
+            <span className="block">I build systems </span>
             <span className="block italic">for visibility.</span>
           </h1>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-[#f1efe8]/62">
             <p>Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, a technical SEO audit console focused on crawl evidence, indexation, structured data, AI-search visibility, and finance/data systems.</p>
             <p>My work turns crawl data, site architecture, search signals, and market research into clearer systems for discovery, citation, conversion, and decision-making.</p>
           </div>
+          <a
+            href="/simple"
+            className="mt-8 inline-flex text-[10px] uppercase tracking-[0.26em] text-[#f1efe8]/58 underline decoration-[#f1efe8]/22 underline-offset-4 transition-colors hover:text-[#f1efe8]"
+          >
+            Read the book
+          </a>
         </div>
 
         <div className="w-full self-center">

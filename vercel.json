@@ -7,5 +7,14 @@
       "config": { "distDir": "dist" }
     }
   ],
-  "routes": []
+  "redirects": [
+    { "source": "/projects/atlas", "destination": "/atlas", "permanent": true },
+    { "source": "/void-agency", "destination": "/method", "permanent": true },
+    { "source": "/projects/markets", "destination": "/markets", "permanent": true },
+    { "source": "/book", "destination": "/simple", "permanent": true },
+    { "source": "/plain", "destination": "/simple", "permanent": true },
+    { "source": "/text", "destination": "/simple", "permanent": true },
+    { "source": "/cv", "destination": "/resume", "permanent": true },
+    { "source": "/resume.html", "destination": "/resume", "permanent": true }
+  ]
 }
