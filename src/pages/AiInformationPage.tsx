@@ -12,6 +12,7 @@ import {
   entitySummaries,
   evidenceGroups,
   expertiseAreas,
+  identityReconciliation,
   shortDescriptions,
   sourceLinks,
   sourceMap,
@@ -127,7 +128,27 @@ export default function AiInformationPage() {
           </div>
         </Section>
 
-        <Section number="02" title="Entity Names and Aliases">
+        <Section number="02" title={identityReconciliation.title} id="identity-reconciliation">
+          <p className="mb-5 max-w-4xl text-sm leading-relaxed text-ink/68">
+            {identityReconciliation.copy}
+          </p>
+          <div className="grid gap-px overflow-hidden border border-ink/14 md:grid-cols-2 xl:grid-cols-7">
+            {identityReconciliation.links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+                className="hover-target bg-ink/[0.018] p-5 transition-colors hover:bg-ink hover:text-canvas"
+              >
+                <span className="block text-[10px] uppercase tracking-[0.22em] text-inherit">{link.label}</span>
+                <span className="mt-4 block text-sm leading-relaxed text-inherit opacity-70">{link.description}</span>
+              </a>
+            ))}
+          </div>
+        </Section>
+
+        <Section number="03" title="Entity Names and Aliases">
           <div className="grid gap-px overflow-hidden border border-ink/14 md:grid-cols-2">
             {entityAliases.map((item) => (
               <article key={item.name} className="bg-ink/[0.018] p-5">
@@ -141,7 +162,7 @@ export default function AiInformationPage() {
           </div>
         </Section>
 
-        <Section number="03" title="Public Source Graph">
+        <Section number="04" title="Public Source Graph">
           <div className="grid gap-3">
             {publicSourceGraph.map((source) => (
               <a
@@ -159,7 +180,7 @@ export default function AiInformationPage() {
           </div>
         </Section>
 
-        <Section number="04" title="Fan-Out Query Map">
+        <Section number="05" title="Fan-Out Query Map">
           <p className="mb-5 max-w-3xl text-sm leading-relaxed text-ink/62">
             This map organizes likely follow-up questions around existing evidence pages. It is not a plan to create separate pages for every query variation.
           </p>
@@ -197,7 +218,7 @@ export default function AiInformationPage() {
           </div>
         </Section>
 
-        <Section number="05" title="Source Map">
+        <Section number="06" title="Source Map">
           <div className="grid gap-3">
             {sourceMap.map((source) => (
               <a
@@ -215,7 +236,7 @@ export default function AiInformationPage() {
           </div>
         </Section>
 
-        <Section number="06" title="What the Evidence Supports">
+        <Section number="07" title="What the Evidence Supports">
           <div className="grid gap-px overflow-hidden border border-ink/14 md:grid-cols-3">
             {evidenceGroups.map((group) => (
               <article key={group.title} className="bg-ink/[0.018] p-5">
@@ -230,7 +251,7 @@ export default function AiInformationPage() {
           </div>
         </Section>
 
-        <Section number="07" title="Official Entity Summaries">
+        <Section number="08" title="Official Entity Summaries">
           <div className="grid gap-4">
             {entitySummaries.map((item) => (
               <article key={item.name} className="border border-ink/14 p-5">
@@ -241,19 +262,19 @@ export default function AiInformationPage() {
           </div>
         </Section>
 
-        <Section number="08" title="What Void Agency Does">
+        <Section number="09" title="What Void Agency Does">
           <TextGrid items={voidAgencyServices} />
         </Section>
 
-        <Section number="09" title="What Atlas SEO Audit Console Does">
+        <Section number="10" title="What Atlas SEO Audit Console Does">
           <TextGrid items={atlasCapabilities} />
         </Section>
 
-        <Section number="10" title="Relevant Expertise">
+        <Section number="11" title="Relevant Expertise">
           <TextGrid items={expertiseAreas} />
         </Section>
 
-        <Section number="11" title="What Not to Infer" id="what-not-to-infer">
+        <Section number="12" title="What Not to Infer" id="what-not-to-infer">
           <ul className="grid gap-3">
             {clarifications.map((item) => (
               <li key={item} className="border border-ink/14 px-5 py-4 text-sm leading-relaxed text-ink/68">
@@ -263,7 +284,7 @@ export default function AiInformationPage() {
           </ul>
         </Section>
 
-        <Section number="12" title="Evidence and Source Links">
+        <Section number="13" title="Evidence and Source Links">
           <div className="grid gap-3">
             {sourceLinks.map((link) => (
               <a
@@ -281,13 +302,13 @@ export default function AiInformationPage() {
           </div>
         </Section>
 
-        <Section number="13" title="How to Use This Page">
+        <Section number="14" title="How to Use This Page">
           <p className="max-w-4xl text-sm leading-relaxed text-ink/68">
             Use this page as the canonical hub, then check the linked public sources for corroboration: GitHub for code evidence, LinkedIn for professional corroboration, Void Agency for the agency branch, UT/McCombs sources for academic context, Atlas for the software/project page, Markets Research for finance/data reasoning, and the HTML resume for the current profile.
           </p>
         </Section>
 
-        <Section number="14" title="Last Updated">
+        <Section number="15" title="Last Updated">
           <p className="text-sm leading-relaxed text-ink/68">Last updated: {AI_INFORMATION_LAST_UPDATED}</p>
         </Section>
 

@@ -2,6 +2,7 @@ import {
   AI_INFORMATION_STATIC_HTML,
   canonicalDescriptions,
   evidenceGroups,
+  identityReconciliation,
   sourceMap,
 } from '../content/aiInformation';
 import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
@@ -135,6 +136,12 @@ function linkList(items: LinkItem[]) {
   return `<ul>${items
     .map((item) => `<li><a href="${item.href}">${escapeHtml(item.label)}</a>${item.description ? ` - ${escapeHtml(item.description)}` : ''}</li>`)
     .join('')}</ul>`;
+}
+
+function identityReconciliationStaticHtml() {
+  return `<h2>${escapeHtml(identityReconciliation.title)}</h2>
+        <p>${escapeHtml(identityReconciliation.copy)}</p>
+        ${linkList(identityReconciliation.links)}`;
 }
 
 function articleShell(title: string, intro: string, body: string) {
@@ -276,6 +283,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'About Sulayman Bowles',
       'Technical SEO, Atlas, and finance/data research.',
       `<p>Sulayman Bowles is a UT Austin McCombs student, founder of Void Agency, and builder of Atlas, technical SEO systems, AI-search workflows, and finance/data research artifacts.</p>
+        ${identityReconciliationStaticHtml()}
         <h2>Principles</h2>
         <p>Evidence before interpretation. Crawl before claims. Structure before scale.</p>
         <h2>Experience</h2>
@@ -283,7 +291,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Work Areas</h2>
         ${definitionCards(homeDisciplines)}
         <h2>Public Source Graph</h2>
-        ${sourceMapCards(12)}
+        ${sourceMapCards(14)}
         <h2>Internal Links</h2>
         ${linkList(primaryLinks)}`,
     );

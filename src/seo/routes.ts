@@ -38,7 +38,7 @@ export interface SeoRoute {
   jsonLd?: JsonLd;
 }
 
-export const SITE_LASTMOD = '2026-06-17';
+export const SITE_LASTMOD = '2026-06-18';
 
 const CORE_ROUTES: SeoRoute[] = [
   {
@@ -104,7 +104,7 @@ const CORE_ROUTES: SeoRoute[] = [
   },
   {
     path: '/resume',
-    aliases: ['/resume.html', '/cv', '/cv.html'],
+    aliases: ['/resume.html', '/cv', '/cv.html', '/Sulayman_Bowles_Resume_2025.pdf'],
     title: 'Sulayman Bowles Resume | Technical SEO, Atlas & Finance/Data',
     description:
       'HTML-first canonical resume for Sulayman Bowles across UT Austin McCombs, Void Agency, Atlas, technical SEO, AI-search visibility, and finance/data research.',

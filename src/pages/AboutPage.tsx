@@ -8,7 +8,7 @@ import { SmoothCursor } from '../components/SmoothCursor';
 import { StaggeredText } from '../components/StaggeredText';
 import { ScrambleText } from '../components/ScrambleText';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import { sourceMap } from '../content/aiInformation';
+import { identityReconciliation, sourceMap } from '../content/aiInformation';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 import InternalHeader from '../components/InternalHeader';
@@ -419,6 +419,32 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section id="identity-reconciliation" className="mx-auto max-w-[1480px] border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+        <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-4xl">
+          <SectionLabel>{identityReconciliation.title}</SectionLabel>
+          <p className="text-base leading-relaxed text-[#f1efe8]/62">
+            {identityReconciliation.copy}
+          </p>
+        </ScrollReveal>
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-7">
+          {identityReconciliation.links.map((link, index) => (
+            <div key={link.href}>
+              <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
+                <a
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+                  className="hover-target block min-h-[160px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8]/[0.035]"
+                >
+                  <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-[#f1efe8]">{link.label}</h3>
+                  <p className="text-sm leading-relaxed text-[#f1efe8]/56">{link.description}</p>
+                </a>
+              </ScrollReveal>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="mx-auto max-w-[1480px] border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-3xl">
           <SectionLabel>PUBLIC SOURCE GRAPH</SectionLabel>
@@ -427,7 +453,7 @@ export default function AboutPage() {
           </p>
         </ScrollReveal>
         <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-4">
-          {sourceMap.slice(0, 12).map((source, index) => (
+          {sourceMap.slice(0, 14).map((source, index) => (
             <div key={`${source.role}-${source.href}`}>
               <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
               <a

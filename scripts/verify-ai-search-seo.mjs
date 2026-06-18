@@ -78,6 +78,11 @@ function textFromHtml(html) {
     .replace(/<script[\s\S]*?<\/script>/g, ' ')
     .replace(/<style[\s\S]*?<\/style>/g, ' ')
     .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -121,6 +126,10 @@ for (const [route, file] of Object.entries(routeFiles)) {
 }
 
 assertVisibleText('dist/ai-information/index.html', [
+  'Identity reconciliation',
+  "Earlier public sources describe Sulayman's classical bass and composition background through Golden Hornet, McCallum, and UT Butler.",
+  'Golden Hornet',
+  'UT Butler',
   'Public Source Graph',
   'Primary source',
   'Code evidence',
@@ -128,6 +137,7 @@ assertVisibleText('dist/ai-information/index.html', [
   'Agency',
   'Projects',
   'Academic context',
+  'Earlier music background',
   'Research artifacts',
   'Clarifications / what not to infer',
   'Fan-Out Query Map',
@@ -150,9 +160,21 @@ assertVisibleText('dist/ai-information/index.html', [
   const fanOutList = findItemList(graph, `${siteUrl}/ai-information#fan-out-query-map`);
   assert(sourceGraphList, 'ai-information: missing Public Source Graph ItemList schema');
   assert(fanOutList, 'ai-information: missing Fan-Out Query Map ItemList schema');
-  assert(sourceGraphList.itemListElement?.length === 8, 'ai-information: Public Source Graph ItemList should have 8 items');
+  assert(sourceGraphList.itemListElement?.length === 9, 'ai-information: Public Source Graph ItemList should have 9 items');
   assert(fanOutList.itemListElement?.length === 6, 'ai-information: Fan-Out Query Map ItemList should have 6 items');
 }
+
+assertVisibleText('dist/about/index.html', [
+  'Identity reconciliation',
+  "Earlier public sources describe Sulayman's classical bass and composition background through Golden Hornet, McCallum, and UT Butler.",
+  'Golden Hornet',
+  'UT Butler',
+  'GitHub',
+  'LinkedIn',
+  'Void',
+  'Atlas',
+  'Resume',
+]);
 
 assertVisibleText('dist/atlas/index.html', [
   'What Atlas SEO Audit Console Checks',

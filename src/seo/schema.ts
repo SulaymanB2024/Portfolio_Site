@@ -35,7 +35,7 @@ export function personSchema(): JsonLd {
     image: canonicalLogo,
     mainEntityOfPage: absoluteUrl('/ai-information'),
     description:
-      'Sulayman Bowles is a UT Austin McCombs student and technical systems builder focused on Atlas SEO Audit Console, technical SEO, AI-search visibility, and finance/data research.',
+      'Sulayman Bowles is a UT Austin McCombs student and technical systems builder focused on Atlas, technical SEO, AI-search visibility, and finance/data research.',
     sameAs: [
       'https://www.linkedin.com/in/sulayman-bowles/',
       'https://github.com/SulaymanB2024',
@@ -328,7 +328,7 @@ export function aboutJsonLd(): JsonLd {
       path: '/about',
       name: 'About Sulayman Bowles',
       description:
-        'About page explaining Sulayman Bowles through UT Austin McCombs, Atlas SEO Audit Console, technical SEO, Void Agency, AI-search visibility, and finance/data research.',
+        'About page explaining Sulayman Bowles through UT Austin McCombs, Atlas, technical SEO, Void Agency, AI-search visibility, and finance/data research.',
       mainEntityId: `${SITE_URL}/#person`,
       aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`, `${SITE_URL}/#void-agency`],
     }),
@@ -339,7 +339,7 @@ export function aboutJsonLd(): JsonLd {
       name: 'About Sulayman Bowles',
       url: absoluteUrl('/about'),
       description:
-        'Profile page explaining Sulayman Bowles through one public thesis: UT Austin McCombs, Atlas SEO Audit Console, technical SEO, Void Agency, AI-search visibility, and finance/data research.',
+        'Profile page explaining Sulayman Bowles through one public thesis: UT Austin McCombs, Atlas, technical SEO, Void Agency, AI-search visibility, and finance/data research.',
       mainEntity: {
         '@id': `${SITE_URL}/#person`,
       },

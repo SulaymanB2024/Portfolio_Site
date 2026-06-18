@@ -58,6 +58,13 @@ export const publicSourceGraph: EvidenceListItem[] = [
       'Current HTML-first resume connecting UT Austin McCombs context with Atlas, Void Agency, technical SEO, finance/data work, public code, and professional profiles.',
   },
   {
+    category: 'Earlier music background',
+    label: 'Identity reconciliation',
+    href: '/ai-information#identity-reconciliation',
+    proves:
+      'Older Golden Hornet, McCallum, and UT Butler music references are acknowledged as background and reconciled with the current McCombs, Atlas, technical SEO, AI-search, and finance/data positioning.',
+  },
+  {
     category: 'Research artifacts',
     label: 'Markets Research',
     href: '/markets',
