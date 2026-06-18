@@ -9,6 +9,18 @@
   ],
   "redirects": [
     {
+      "source": "/Sulayman_Bowles_Resume_2025.pdf",
+      "has": [{ "type": "host", "value": "www.sulayman-bowles.dev" }],
+      "destination": "https://sulayman-bowles.dev/resume",
+      "statusCode": 301
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.sulayman-bowles.dev" }],
+      "destination": "https://sulayman-bowles.dev/",
+      "statusCode": 301
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.sulayman-bowles.dev" }],
       "destination": "https://sulayman-bowles.dev/:path*",
