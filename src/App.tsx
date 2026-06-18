@@ -465,7 +465,7 @@ function HomePage() {
 	                 Sulayman Bowles
 	               </h1>
 	               <p className="mt-5 max-w-lg font-sans text-sm leading-relaxed tracking-normal text-ink/72 md:text-base">
-	                 Technical SEO systems, AI-search visibility, and finance/data research.
+		                 UT Austin McCombs student building Atlas, technical SEO systems, AI-search visibility, and finance/data research.
 	               </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4 text-xs text-ink/70">
                   <a href="/#contact" id="hero-start-audit-link" className="hover-target inline-flex min-h-11 items-center border border-ink bg-ink px-5 py-3 font-sans text-[10px] uppercase tracking-[0.2em] text-canvas transition-colors hover:bg-transparent hover:text-ink">Start a technical audit</a>
@@ -480,7 +480,7 @@ function HomePage() {
         <section className="relative w-full py-32 md:py-48 px-4 md:px-16 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
           <div className="md:col-span-8 md:col-start-2">
             <StaggeredText 
-               text="I build systems for search, finance, and decision-making. The common thread is evidence."
+	               text="I build systems for search, finance, and decision-making. The common thread is evidence."
                delay={0.1}
                className="font-serif italic font-light text-[9vw] sm:text-[8vw] md:text-6xl lg:text-[6rem] leading-[1.05] tracking-tight mb-4 md:mb-8"
             />
@@ -550,7 +550,7 @@ function HomePage() {
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
-                       A crawl-based audit system for finding indexation, architecture, performance, and AI-search readiness issues across real websites.
+	                       A crawl and evidence system for indexation, internal links, canonicals, structured data, raw/rendered HTML, and AI-search readiness.
                      </p>
                    </ScrollReveal>
                    
@@ -690,7 +690,7 @@ function HomePage() {
                   </h4>
                 </ScrollReveal>
                 <ScrollReveal delay={0.4}>
-                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">Void Agency is my technical SEO and AI-search consultancy, focused on crawlability, answer-readiness, structured content, and evidence-backed website audits.</p>
+	                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">Void Agency is the service branch of my technical SEO, crawlability, structured content, analytics, and AI-search visibility work.</p>
                 </ScrollReveal>
                 <ScrollReveal delay={0.6}>
                   <MagneticButton className="mt-16">
@@ -743,7 +743,7 @@ function HomePage() {
                 </ScrollReveal>
                 <ScrollReveal delay={0.2} blur={false}>
                   <p className="font-serif italic text-2xl md:text-3xl text-ink max-w-sm leading-snug">
-                    I work across technical SEO, AI search, finance/data analysis, and web systems.
+	                    I work across technical SEO, AI-search visibility, finance/data analysis, and web systems through one evidence-backed thesis.
                   </p>
                 </ScrollReveal>
               </div>

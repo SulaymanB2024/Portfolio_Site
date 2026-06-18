@@ -3,7 +3,10 @@ export interface MarketThesis {
   number: string;
   category: string;
   title: string;
+  seoTitle: string;
   subtitle: string;
+  seoDescription: string;
+  image: string;
   date: string;
   readTime: string;
   author: string;
@@ -22,7 +25,11 @@ export const MARKET_THESES: MarketThesis[] = [
     number: '01',
     category: 'MACRO EQUITY STRATEGY',
     title: 'On the Structural Allocation to Network Monopolies under Perpetual Debasement',
+    seoTitle: 'Network Monopolies & Debasement',
     subtitle: 'Why global scale network effects act as sovereign-grade collateral in credit expansion cycles.',
+    seoDescription:
+      'Market research memo by Sulayman Bowles on network monopolies, fiat debasement, pricing power, platform margins, and allocation logic for long-horizon investors.',
+    image: '/og-default.png',
     date: '2026.04.18',
     readTime: '09 MIN',
     author: 'SULAYMAN BOWLES',
@@ -43,7 +50,11 @@ export const MARKET_THESES: MarketThesis[] = [
     number: '02',
     category: 'DECENTRALIZED INFRASTRUCTURE',
     title: 'Computational Commodity Systems: Node Architecture & Cryptographic Resource Pricing',
+    seoTitle: 'Computational Commodity Systems',
     subtitle: 'Evaluating the emerging market for trustless, zero-knowledge verification hardware.',
+    seoDescription:
+      'Market research memo by Sulayman Bowles on decentralized compute, node architecture, zero-knowledge verification hardware, resource pricing, and protocol incentives.',
+    image: '/og-default.png',
     date: '2026.05.02',
     readTime: '11 MIN',
     author: 'SULAYMAN BOWLES',
@@ -64,7 +75,11 @@ export const MARKET_THESES: MarketThesis[] = [
     number: '03',
     category: 'MONETARY METRICS',
     title: 'Fiat Horizon: Standard Deviation Boundaries, Credit Expansion, and Hard-Money Backings',
+    seoTitle: 'Fiat Horizon & Hard-Money Backing',
     subtitle: 'A quantitative study of volatility bands surrounding fiat currency velocity and commodity reserves.',
+    seoDescription:
+      'Market research memo by Sulayman Bowles on fiat velocity, credit expansion, hard-money reserves, gold and Bitcoin backing, volatility bands, and solvency risk.',
+    image: '/og-default.png',
     date: '2026.05.15',
     readTime: '12 MIN',
     author: 'SULAYMAN BOWLES',

@@ -8,6 +8,7 @@ import { SmoothCursor } from '../components/SmoothCursor';
 import { StaggeredText } from '../components/StaggeredText';
 import { ScrambleText } from '../components/ScrambleText';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { sourceMap } from '../content/aiInformation';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 import InternalHeader from '../components/InternalHeader';
@@ -412,6 +413,33 @@ export default function AboutPage() {
             <div key={title}>
               <ScrollReveal delay={index * 0.06} yOffset={16} blur={false}>
                 <WorkCard title={title} copy={copy} icon={icon} />
+              </ScrollReveal>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1480px] border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+        <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-3xl">
+          <SectionLabel>PUBLIC SOURCE GRAPH</SectionLabel>
+          <p className="text-base leading-relaxed text-[#f1efe8]/58">
+            This site is the canonical hub. The surrounding sources are useful when they prove one part of the same thesis: technical SEO, Atlas, Void Agency, finance/data judgment, and evidence-backed web/search systems.
+          </p>
+        </ScrollReveal>
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-4">
+          {sourceMap.slice(0, 12).map((source, index) => (
+            <div key={`${source.role}-${source.href}`}>
+              <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
+              <a
+                href={source.href}
+                target={source.href.startsWith('http') ? '_blank' : undefined}
+                rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
+                className="hover-target block min-h-[240px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8]/[0.035]"
+              >
+                <p className="mb-5 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/42">{source.role}</p>
+                <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-[#f1efe8]">{source.label}</h3>
+                <p className="text-sm leading-relaxed text-[#f1efe8]/56">{source.proves}</p>
+              </a>
               </ScrollReveal>
             </div>
           ))}

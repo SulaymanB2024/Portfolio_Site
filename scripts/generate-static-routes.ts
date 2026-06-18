@@ -43,10 +43,13 @@ function buildHead(route: SeoRoute, assetTags: string) {
   const imageUrl = absoluteUrl(route.image ?? DEFAULT_OG_IMAGE);
   const ogType = route.pageType === 'article' ? 'article' : 'website';
 
+  const staticFallbackScript =
+    "document.documentElement.classList.add('js');document.addEventListener('DOMContentLoaded',function(){document.getElementById('seo-static-summary')?.remove();});";
+
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>document.documentElement.classList.add('js');</script>
+    <script>${staticFallbackScript}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="${FONT_STYLESHEET}" />

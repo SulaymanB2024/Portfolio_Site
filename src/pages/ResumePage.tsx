@@ -3,6 +3,7 @@ import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { SmoothCursor } from '../components/SmoothCursor';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { sourceMap } from '../content/aiInformation';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 import { InternalHeader } from '../components/InternalHeader';
@@ -56,6 +57,8 @@ const proofLinks = [
   { label: 'Markets research index', href: '/markets', meta: 'Research notes' },
   { label: 'Void Agency method', href: '/method', meta: 'Technical SEO process' },
   { label: 'GitHub', href: 'https://github.com/SulaymanB2024', meta: 'Public code profile' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', meta: 'Professional profile' },
+  { label: 'AI information', href: '/ai-information', meta: 'Canonical source map' },
   { label: 'Email', href: 'mailto:sulayman.bowles@gmail.com', meta: 'Direct contact' },
 ];
 
@@ -113,13 +116,13 @@ export default function ResumePage() {
               <span className="block sm:inline">Resume</span>
             </h1>
             <p className="mt-10 max-w-3xl [overflow-wrap:anywhere] font-serif text-[clamp(1.38rem,6vw,5rem)] italic leading-[1] tracking-normal text-ink/68 md:leading-[0.94] md:tracking-[-0.03em]">
-              Technical SEO, finance research, AI search, and product/software execution.
+              Technical SEO, Atlas, finance/data research, and product/software execution.
             </p>
           </div>
 
           <aside className="min-w-0 border-l border-ink/14 pl-6">
             <p className="max-w-xl [overflow-wrap:anywhere] text-base leading-relaxed text-ink/62">
-              McCombs School of Business student and Void Agency founder building Atlas, technical SEO audit workflows, research notes, and inspectable web interfaces.
+              UT Austin McCombs student and Void Agency founder building Atlas, technical SEO audit workflows, research notes, and inspectable web interfaces.
             </p>
             <div className="mt-8 grid min-w-0 gap-3 break-words text-[10px] uppercase tracking-[0.14em] [overflow-wrap:anywhere] sm:tracking-[0.22em]">
               <a href="mailto:sulayman.bowles@gmail.com" className="hover-target min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
@@ -147,7 +150,7 @@ export default function ResumePage() {
             {[
               ['Builds', 'Atlas, SEO audit pages, React interfaces, research notes, and data workflows.'],
               ['Analyzes', 'Crawl evidence, AI-search readiness, finance assumptions, operating models, and market structure.'],
-              ['Proof', 'Public routes, preview research notes, and source-backed project pages.'],
+              ['Proof', 'Static HTML pages, canonical URLs, JSON-LD, sitemap entries, public code, and source-backed project pages.'],
             ].map(([label, copy]) => (
               <article key={label} className="bg-ink/[0.018] p-6">
                 <h3 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/45">{label}</h3>
@@ -216,10 +219,30 @@ export default function ResumePage() {
               <h3 className="mb-4 text-[10px] uppercase tracking-[0.24em] text-ink/50">Ventures & System Audits</h3>
               <p className="text-sm font-semibold text-ink">Selected Milestones</p>
               <ul className="mt-3 space-y-2 text-xs leading-relaxed text-ink/68">
-                <li>• Void Agency: Built crawl audit models for high-traffic SaaS clients ($50k+ revenue May 2026)</li>
+                <li>• Void Agency: Built crawl audit models and website systems for commercial engagements ($50k+ revenue May 2026)</li>
                 <li>• Scraper Atlas: Custom Python & SQLite crawler parsing 50k+ URLs for diagnostic intelligence</li>
               </ul>
             </article>
+          </div>
+        </Section>
+
+        <Section label="06" title="Source reconciliation">
+          <div className="grid gap-3">
+            {sourceMap
+              .filter((source) => ['Primary source', 'Code evidence', 'Professional profile', 'Agency proof', 'Academic affiliation', 'Academic context', 'Project proof', 'Finance/data proof'].includes(source.role))
+              .map((source) => (
+                <a
+                  key={`${source.role}-${source.href}`}
+                  href={source.href}
+                  target={source.href.startsWith('http') ? '_blank' : undefined}
+                  rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
+                  className="hover-target grid gap-3 border border-ink/14 px-5 py-4 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[0.28fr_0.28fr_0.44fr]"
+                >
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-inherit opacity-60">{source.role}</span>
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-inherit">{source.label}</span>
+                  <span className="text-sm leading-relaxed text-inherit opacity-65">{source.proves}</span>
+                </a>
+              ))}
           </div>
         </Section>
 

@@ -2,4 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://sulayman-bowles.dev/sitemap.xml
-LLMs: https://sulayman-bowles.dev/llms.txt

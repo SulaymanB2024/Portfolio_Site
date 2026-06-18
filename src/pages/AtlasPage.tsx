@@ -5,10 +5,11 @@ import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { SmoothCursor } from '../components/SmoothCursor';
-import { ScrambleText } from '../components/ScrambleText';
 import { RevealText } from '../components/RevealText';
 import { StaggeredText } from '../components/StaggeredText';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { evidenceGroups } from '../content/aiInformation';
+import { atlasCheckItems } from '../content/evidenceLists';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 import InternalHeader from '../components/InternalHeader';
@@ -72,7 +73,7 @@ const processSteps: ProcessStepProps[] = [
     index: '04',
     title: 'SCORE',
     icon: 'score',
-    copy: 'Score issues by impact, confidence, and effort using proprietary heuristics and historical patterns.',
+    copy: 'Score issues by severity, confidence, affected URLs, implementation effort, and evidence quality using documented audit rules.',
   },
   {
     index: '05',
@@ -1229,15 +1230,16 @@ export default function AtlasPage() {
           <div className="mb-8 text-xs uppercase tracking-[0.36em] text-ink/48">( 01 )</div>
           <h1 
             style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
+            aria-label="Atlas SEO Audit Console"
             className="font-serif text-[clamp(4.6rem,10vw,10.75rem)] italic leading-[0.82] tracking-[-0.055em]"
           >
-            <ScrambleText text="ATLAS" trigger="once" />
+            Atlas
           </h1>
           <p className="mt-10 max-w-[25rem] font-serif text-[clamp(2rem,4vw,4.25rem)] italic leading-[0.92] tracking-[-0.025em]">
             <RevealText text="Crawl-based evidence engine for search." delay={0.25} elementType="span" />
           </p>
           <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">
-            Atlas is a technical SEO audit system that crawls, interprets, and scores websites to surface what search engines see across architecture, indexation, performance, and AI-search readiness.
+            Atlas SEO Audit Console is a technical SEO audit and evidence system for crawling websites, preserving raw and rendered page evidence, checking robots.txt and sitemap behavior, analyzing internal links, scoring findings, and exporting reviewable reports.
           </p>
           <dl className="mt-12 grid max-w-[30rem] grid-cols-[0.6fr_1fr] gap-x-8 gap-y-5 border-t border-ink/20 pt-6 text-[10px] uppercase tracking-[0.24em]">
             <dt className="text-ink/45">ROLE</dt>
@@ -1266,9 +1268,9 @@ export default function AtlasPage() {
         </ScrollReveal>
         <div className="grid gap-10 md:grid-cols-3 lg:col-span-8">
           {[
-            ['BEYOND BASIC CRAWLS', 'Atlas goes deeper than surface reports. It interprets signals, correlates patterns, and prioritizes issues by impact on indexation and visibility.'],
+            ['BEYOND BASIC CRAWLS', 'Atlas combines crawl records, page evidence, link relationships, directives, and issue logic so findings can be inspected instead of accepted as a black-box score.'],
             ['AI-SEARCH AWARE', 'Atlas evaluates content and structure for AI-search discoverability: entity clarity, source signals, freshness, and retrievability.'],
-            ['BUILT FOR OPERATORS', 'Designed for SEO operators and technical teams who need reliable evidence, clear logic, and inspectable outputs to drive decisions.'],
+            ['NOT A CONTENT WRITER', 'Atlas is not a generic content-writing product. It is a crawl, evidence, indexation, link graph, scoring, export, and dashboard system.'],
           ].map(([title, copy], index) => (
             <div key={title}>
               <ScrollReveal delay={index * 0.08} yOffset={18} blur={false}>
@@ -1297,6 +1299,79 @@ export default function AtlasPage() {
             </div>
           </div>
         </ScrollReveal>
+      </section>
+
+      <section className="relative z-10 mx-auto max-w-[1480px] border-t border-ink/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+        <ScrollReveal className="mb-10 grid gap-8 lg:grid-cols-[0.34fr_0.66fr]" yOffset={18} blur={false}>
+          <div>
+            <div className="mb-5 h-px w-16 bg-ink/45" />
+            <h2 className="font-serif text-[clamp(2.8rem,6.4vw,7.5rem)] italic leading-none tracking-[-0.04em]">
+              What Atlas SEO Audit Console Checks
+            </h2>
+          </div>
+          <p className="max-w-3xl self-end text-base leading-relaxed text-ink/62">
+            These are the public, evidence-facing checks Atlas is described around. Each item points to the canonical page or source that explains the check without claiming private rankings, private client outcomes, or unsupported metrics.
+          </p>
+        </ScrollReveal>
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-ink/14 md:grid-cols-2 xl:grid-cols-4">
+          {atlasCheckItems.map((item, index) => (
+            <div key={item.label}>
+              <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
+                <a
+                  href={item.href}
+                  className="hover-target block min-h-[180px] bg-ink/[0.018] p-5 transition-colors hover:bg-ink hover:text-canvas"
+                >
+                  <p className="mb-7 text-[10px] uppercase tracking-[0.24em] text-inherit opacity-40">{String(index + 1).padStart(2, '0')}</p>
+                  <h3 className="mb-4 text-xs uppercase tracking-[0.22em] text-inherit">{item.label}</h3>
+                  <p className="text-sm leading-relaxed text-inherit opacity-70">{item.proves}</p>
+                </a>
+              </ScrollReveal>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="atlas-proof" className="relative z-10 mx-auto max-w-[1480px] border-y border-ink/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+        <ScrollReveal className="mb-10 grid gap-8 lg:grid-cols-[0.36fr_0.64fr]" yOffset={18} blur={false}>
+          <div>
+            <div className="mb-5 h-px w-16 bg-ink/45" />
+            <h2 className="font-serif text-[clamp(3rem,7vw,8rem)] italic leading-none tracking-[-0.04em]">Atlas evidence model.</h2>
+          </div>
+          <p className="max-w-3xl text-base leading-relaxed text-ink/62">
+            This is the canonical software/project page for Atlas. Public screenshots and demo issue rows use example data, but the product description is specific: crawl records, source-page evidence, SQLite persistence, link graph analysis, scoring logic, exports, and dashboards.
+          </p>
+        </ScrollReveal>
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-ink/14 md:grid-cols-2 xl:grid-cols-4">
+          {evidenceGroups[0].items.map((item, index) => (
+            <div key={item}>
+              <ScrollReveal delay={index * 0.035} yOffset={14} blur={false}>
+              <article className="min-h-[150px] bg-ink/[0.018] p-5">
+                <p className="mb-8 text-[10px] uppercase tracking-[0.24em] text-ink/38">{String(index + 1).padStart(2, '0')}</p>
+                <h3 className="text-sm leading-relaxed text-ink/68">{item}</h3>
+              </article>
+              </ScrollReveal>
+            </div>
+          ))}
+        </div>
+        <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {[
+            ['GitHub profile', 'https://github.com/SulaymanB2024', 'Public code profile and related repositories.'],
+            ['SEO audit/scraper repo', 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', 'Public scraper/audit code evidence.'],
+            ['AI Information', '/ai-information', 'Canonical entity and source map.'],
+            ['Void Agency Method', '/method', 'Service/process context for technical SEO audits.'],
+          ].map(([label, href, copy]) => (
+            <a
+              key={href}
+              href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noreferrer' : undefined}
+              className="hover-target border border-ink/14 p-5 transition-colors hover:bg-ink hover:text-canvas"
+            >
+              <p className="mb-4 text-[10px] uppercase tracking-[0.22em] text-inherit opacity-60">{label}</p>
+              <p className="text-sm leading-relaxed text-inherit opacity-70">{copy}</p>
+            </a>
+          ))}
+        </div>
       </section>
 
       <section className="relative z-10 bg-canvas border-t border-ink/12 px-4 py-16 text-ink md:px-10 lg:px-14 lg:py-24">
@@ -1366,7 +1441,7 @@ export default function AtlasPage() {
             System intelligence you can act on.
           </h2>
           <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">
-            Atlas turns complexity into clarity - so teams can fix what matters and prove the impact.
+            Atlas turns complexity into inspectable evidence so operators can decide what matters, what should be fixed, and what source data supports the recommendation.
           </p>
           <a href="/#contact" aria-label="Contact Sulayman Bowles" data-cursor-text="CONTACT" className="hover-target mt-10 block h-12 w-12 rounded-full border border-ink/35 transition-colors hover:bg-ink hover:text-canvas" />
         </ScrollReveal>
@@ -1376,7 +1451,7 @@ export default function AtlasPage() {
           <div className="grid gap-0 md:grid-cols-2">
             {[
               ['01', 'VIEW RELATED WORK', 'See other projects in SEO, finance, and data.'],
-              ['02', 'WORK WITH ME', "Let's build systems that move the needle."],
+              ['02', 'WORK WITH ME', "Let's build systems with evidence that can be checked."],
             ].map(([index, title, copy]) => (
               <a key={title} href={index === '01' ? '/#selected-works' : '/#contact'} data-cursor-text={index === '01' ? 'WORK' : 'CONTACT'} className="hover-target group border-b border-ink/16 py-8 md:border-r md:border-ink/16 md:pr-8 md:last:border-r-0 md:last:pl-8">
                 <div className="mb-8 text-[10px] uppercase tracking-[0.28em] text-ink/42">{index}</div>

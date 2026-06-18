@@ -1,5 +1,10 @@
 import { MARKET_THESES } from '../content/marketTheses';
-import { AI_INFORMATION_DESCRIPTION, AI_INFORMATION_STATIC_HTML, AI_INFORMATION_TITLE } from '../content/aiInformation';
+import {
+  AI_INFORMATION_DESCRIPTION,
+  AI_INFORMATION_LASTMOD,
+  AI_INFORMATION_STATIC_HTML,
+  AI_INFORMATION_TITLE,
+} from '../content/aiInformation';
 import { SIMPLE_BOOK_DESCRIPTION, SIMPLE_BOOK_H1, SIMPLE_BOOK_STATIC_SUMMARY, SIMPLE_BOOK_TITLE } from '../content/simpleBook';
 import {
   aboutJsonLd,
@@ -33,37 +38,38 @@ export interface SeoRoute {
   jsonLd?: JsonLd;
 }
 
-export const SITE_LASTMOD = '2026-06-01';
+export const SITE_LASTMOD = '2026-06-17';
 
 const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/',
     aliases: [],
-    title: 'Sulayman Bowles | Technical SEO Systems, AI Search Visibility & Finance/Data',
+    title: 'Sulayman Bowles | UT McCombs, Atlas, SEO & Data',
     description:
-      'Sulayman Bowles builds technical SEO systems, AI-search visibility workflows, and finance/data research artifacts through Atlas and Void Agency.',
+      'Sulayman Bowles is a UT Austin McCombs student and technical systems builder focused on Atlas, technical SEO, AI-search visibility, and finance/data research.',
     h1: 'Sulayman Bowles',
     section: 'home',
     pageType: 'website',
     priority: 1.0,
     includeInSitemap: true,
     staticSummary:
-      'Technical SEO systems, AI-search visibility workflows, and finance/data research artifacts built by Sulayman Bowles.',
+      'UT Austin McCombs student and technical systems builder focused on Atlas, technical SEO, AI-search visibility, and finance/data research.',
     jsonLd: homeJsonLd(),
   },
   {
     path: '/about',
     aliases: [],
-    title: 'About Sulayman Bowles | Technical SEO, AI Product & Finance/Data',
+    title: 'About Sulayman Bowles | Atlas, Technical SEO & Finance/Data',
     description:
-      'Learn about Sulayman Bowles, a McCombs student, Void Agency founder, AI product intern, and builder of technical SEO, AI-search, and finance/data systems.',
+      'Learn about Sulayman Bowles, a UT Austin McCombs student and builder/operator connecting Atlas, technical SEO, Void Agency, AI-search visibility, and finance/data research.',
     h1: 'About Sulayman Bowles',
     section: 'about',
     pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
+    lastmod: AI_INFORMATION_LASTMOD,
     staticSummary:
-      'Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, technical SEO systems, AI-search workflows, and finance/data tools.',
+      'Sulayman Bowles is a UT Austin McCombs student and builder/operator connecting Atlas, technical SEO, Void Agency, AI-search visibility, and finance/data research.',
     jsonLd: aboutJsonLd(),
   },
   {
@@ -83,7 +89,7 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/atlas',
     aliases: ['/projects/atlas'],
-    title: 'Atlas SEO Audit Console | Crawl Evidence, Indexation & AI Search',
+    title: 'Atlas SEO Audit Console | Crawl Evidence & AI Search',
     description:
       'Atlas is a technical SEO audit console built by Sulayman Bowles for crawl evidence, indexation, internal links, canonicals, structured data, performance inputs, and AI-search readiness.',
     h1: 'Atlas SEO Audit Console',
@@ -91,6 +97,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'project',
     priority: 0.9,
     includeInSitemap: true,
+    lastmod: AI_INFORMATION_LASTMOD,
     staticSummary:
       'Atlas is a technical SEO audit console for crawl evidence, indexation, architecture, internal links, structured data, performance inputs, and AI-search readiness.',
     jsonLd: atlasJsonLd(),
@@ -98,16 +105,17 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/resume',
     aliases: ['/resume.html', '/cv', '/cv.html'],
-    title: 'Sulayman Bowles Resume | Technical SEO, Finance & AI',
+    title: 'Sulayman Bowles Resume | Technical SEO, Atlas & Finance/Data',
     description:
-      'HTML-first resume for Sulayman Bowles across technical SEO, AI search, finance research, data analysis, Atlas, and product/software execution.',
+      'HTML-first canonical resume for Sulayman Bowles across UT Austin McCombs, Void Agency, Atlas, technical SEO, AI-search visibility, and finance/data research.',
     h1: 'Sulayman Bowles Resume',
     section: 'resume',
     pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
+    lastmod: AI_INFORMATION_LASTMOD,
     staticSummary:
-      'Stable resume and profile page for Sulayman Bowles with links to Atlas, technical SEO work, finance research, public code, and contact paths.',
+      'Stable resume and profile page for Sulayman Bowles with links to Atlas, technical SEO work, finance/data research, public code, LinkedIn, and contact paths.',
     jsonLd: resumeJsonLd(),
   },
   {
@@ -120,6 +128,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'profile',
     priority: 0.7,
     includeInSitemap: true,
+    lastmod: AI_INFORMATION_LASTMOD,
     staticSummary:
       'Official public information about Sulayman Bowles, Void Agency, and Atlas SEO Audit Console for users, search engines, and AI search systems.',
     staticHtml: AI_INFORMATION_STATIC_HTML,
@@ -135,12 +144,13 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'website',
     priority: 0.5,
     includeInSitemap: true,
+    lastmod: AI_INFORMATION_LASTMOD,
     staticSummary: 'Plain HTML links to every public page on sulayman-bowles.dev.',
   },
   {
     path: '/method',
     aliases: ['/void-agency'],
-    title: 'Void Agency Method | Technical SEO & AI Search Visibility Audits',
+    title: 'Void Agency Method | Technical SEO & AI Search',
     description:
       'Void Agency audits crawl paths, indexation, architecture, structured data, performance, analytics, and AI crawler access to improve search visibility.',
     h1: 'Void Agency Method',
@@ -148,6 +158,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'service',
     priority: 0.9,
     includeInSitemap: true,
+    lastmod: AI_INFORMATION_LASTMOD,
     staticSummary:
       'Void Agency audits crawl paths, indexation, architecture, structured data, performance, analytics, and AI crawler access to improve search visibility.',
     jsonLd: methodJsonLd(),
@@ -155,7 +166,7 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/markets',
     aliases: ['/projects/markets'],
-    title: 'Markets Research | Investment Cases, Valuation & Crypto Research',
+    title: 'Markets Research | Valuation, Crypto & Data',
     description:
       'A research archive for Sulayman Bowles covering traditional investment cases, crypto research, valuation logic, market systems, and finance/data reasoning.',
     h1: 'Markets Research',
@@ -163,10 +174,11 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'research',
     priority: 0.7,
     includeInSitemap: true,
+    lastmod: AI_INFORMATION_LASTMOD,
     staticSummary:
       'Markets Research is a finance and data archive covering investment cases, valuation logic, crypto research, market systems, and decision frameworks.',
     jsonLd: marketsJsonLd(
-      'Markets Research | Investment Cases, Valuation & Crypto Research',
+      'Markets Research | Valuation, Crypto & Data',
       'A research archive for Sulayman Bowles covering traditional investment cases, crypto research, valuation logic, market systems, and finance/data reasoning.',
     ),
   },
@@ -178,19 +190,22 @@ const ARTICLE_ROUTES: SeoRoute[] = MARKET_THESES.map((thesis) => {
   return {
     path,
     aliases: [],
-    title: `${thesis.title} | Sulayman Bowles`,
-    description: thesis.subtitle,
+    title: `${thesis.seoTitle} | Sulayman Bowles`,
+    description: thesis.seoDescription,
     h1: thesis.title,
     section: 'research-article',
     pageType: 'article',
     priority: 0.6,
     includeInSitemap: true,
+    lastmod: thesis.date.replaceAll('.', '-'),
     staticSummary: thesis.content[0],
+    image: thesis.image,
     jsonLd: marketArticleJsonLd({
       title: thesis.title,
-      description: thesis.subtitle,
+      description: thesis.seoDescription,
       path,
       datePublished: thesis.date.replaceAll('.', '-'),
+      image: thesis.image,
     }),
   };
 });

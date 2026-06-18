@@ -1,4 +1,10 @@
-import { AI_INFORMATION_STATIC_HTML } from '../content/aiInformation';
+import {
+  AI_INFORMATION_STATIC_HTML,
+  canonicalDescriptions,
+  evidenceGroups,
+  sourceMap,
+} from '../content/aiInformation';
+import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
 import { MARKET_THESES } from '../content/marketTheses';
 import { SIMPLE_BOOK_CHAPTERS, SIMPLE_BOOK_LINKS } from '../content/simpleBook';
 import { primaryNav, utilityNav } from '../content/siteNavigation';
@@ -20,7 +26,7 @@ const atlasProcess = [
   ['Crawl', 'High-fidelity crawling with smart rate control, JavaScript rendering, and adaptive discovery to map the site as search engines do.'],
   ['Extract', 'Extract content, links, directives, structured data, signals, and performance artifacts from every discovered URL.'],
   ['Interpret', 'Normalize and connect signals into an understanding of architecture, intent, and indexation potential.'],
-  ['Score', 'Score issues by impact, confidence, and effort using heuristics and historical patterns.'],
+  ['Score', 'Score issues by severity, confidence, affected URLs, implementation effort, and evidence quality using documented audit rules.'],
   ['Report', 'Structure operator-ready reports, preview packages, and task lists with evidence and recommended actions.'],
 ];
 
@@ -34,9 +40,9 @@ const atlasOutputs = [
 
 const methodColumns = [
   ['Crawl', 'Map the site as search engines see it. Inspect indexable URLs, crawl depth, sitemaps, robots rules, redirects, canonicals, metadata, templates, and internal links.'],
-  ['Diagnose', 'Find the issues that affect discovery, ranking, AI retrieval, and conversion. Every finding is tied to evidence, affected URLs, severity, and likely business impact.'],
+  ['Diagnose', 'Find the issues that affect discovery, retrieval, indexation, and conversion paths. Every finding is tied to evidence, affected URLs, severity, and implementation context.'],
   ['Repair', 'Turn the audit into implementation work: fix architecture, consolidate weak pages, improve metadata, strengthen schema, clean internal links, correct crawl waste, and improve page speed.'],
-  ['Measure', 'Track what changed after implementation: indexation, search queries, rankings, page performance, crawl behavior, AI visibility, and conversion events.'],
+  ['Measure', 'Track what changed after implementation: indexation, search queries, page performance, crawl behavior, AI-search references, and conversion events where analytics access supports it.'],
 ];
 
 const methodCaseStudies = [
@@ -93,6 +99,38 @@ function definitionCards(items: string[][]) {
     .join('\n        ');
 }
 
+function objectDefinitionCards(items: Array<{ label: string; copy: string }>) {
+  return items.map((item) => `<h3>${escapeHtml(item.label)}</h3><p>${escapeHtml(item.copy)}</p>`).join('\n        ');
+}
+
+function sourceMapCards(limit?: number) {
+  return sourceMap
+    .slice(0, limit)
+    .map(
+      (item) =>
+        `<h3>${escapeHtml(item.role)}: <a href="${item.href}">${escapeHtml(item.label)}</a></h3><p>${escapeHtml(item.proves)}</p>`,
+    )
+    .join('\n        ');
+}
+
+function evidenceGroupCards() {
+  return evidenceGroups
+    .map(
+      (group) =>
+        `<h3>${escapeHtml(group.title)}</h3><ul>${group.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`,
+    )
+    .join('\n        ');
+}
+
+function evidenceLinkCards(items: Array<{ category?: string; label: string; href: string; proves: string }>) {
+  return items
+    .map((item) => {
+      const title = item.category ? `${item.category}: ${item.label}` : item.label;
+      return `<h3><a href="${item.href}">${escapeHtml(title)}</a></h3><p>${escapeHtml(item.proves)}</p>`;
+    })
+    .join('\n        ');
+}
+
 function linkList(items: LinkItem[]) {
   return `<ul>${items
     .map((item) => `<li><a href="${item.href}">${escapeHtml(item.label)}</a>${item.description ? ` - ${escapeHtml(item.description)}` : ''}</li>`)
@@ -115,8 +153,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/') {
     return articleShell(
       'Sulayman Bowles',
-      'Technical SEO systems, AI-search visibility, and finance/data research.',
+      'UT Austin McCombs, Atlas, technical SEO, AI-search visibility, and finance/data research.',
       `<h2>Introduction</h2>
+        <p>Sulayman Bowles is a UT Austin McCombs student and technical systems builder focused on Atlas, technical SEO, AI-search visibility, and finance/data research.</p>
         <p>I build systems for search, finance, and decision-making. The common thread is evidence.</p>
         <p>My work starts with messy surfaces: crawl data, page templates, market signals, search behavior, financial assumptions, and unfinished product logic. I turn that into structured systems people can inspect, question, and use.</p>
         <h2>Selected Work</h2>
@@ -131,6 +170,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <ul><li>Crawl before claims</li><li>Structure before scale</li><li>Evidence before polish</li></ul>
         <h2>Disciplines</h2>
         ${definitionCards(homeDisciplines)}
+        <h2>Canonical Descriptions</h2>
+        ${objectDefinitionCards(canonicalDescriptions)}
         <h2>Internal Links</h2>
         ${linkList(primaryLinks)}`,
     );
@@ -140,7 +181,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     return articleShell(
       'Atlas SEO Audit Console',
       'Crawl-based evidence engine for search.',
-      `<p>Atlas is a technical SEO audit system that crawls, interprets, and scores websites to surface what search engines see across architecture, indexation, performance, and AI-search readiness.</p>
+      `<p>Atlas is a technical SEO audit system that crawls, interprets, and scores websites to surface what search engines see across architecture, indexation, performance, and AI-search readiness. It is not a generic content-writing product.</p>
         <h2>Beyond Basic Crawls</h2>
         <p>Atlas goes deeper than surface reports. It interprets signals, correlates patterns, and prioritizes issues by impact on indexation and visibility.</p>
         <h2>AI-Search Aware</h2>
@@ -149,11 +190,22 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>Designed for SEO operators and technical teams who need reliable evidence, clear logic, and inspectable outputs to drive decisions.</p>
         <h2>The Atlas Process</h2>
         ${definitionCards(atlasProcess)}
+        <h2>What Atlas SEO Audit Console Checks</h2>
+        ${evidenceLinkCards(atlasCheckItems)}
         <h2>Evidence and Outputs</h2>
         <p>Structured artifacts make crawler observations reviewable, inspectable, and defensible across technical teams.</p>
         ${definitionCards(atlasOutputs)}
+        <h2>Specific Evidence Handled by Atlas</h2>
+        ${evidenceGroupCards()}
+        <h2>Source Links</h2>
+        ${linkList([
+          { label: 'GitHub profile', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
+          { label: 'SEO audit and scraper-related repository', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', description: 'Public scraper/audit code evidence.' },
+          { label: 'AI Information', href: '/ai-information', description: 'Canonical entity and source page.' },
+          { label: 'Void Agency Method', href: '/method', description: 'Service/process context.' },
+        ])}
         <h2>System Intelligence You Can Act On</h2>
-        <p>Atlas turns complexity into clarity so teams can fix what matters and prove the impact.</p>
+        <p>Atlas turns complexity into inspectable evidence so operators can decide what matters, what should be fixed, and what source data supports the recommendation.</p>
         <h2>Internal Links</h2>
         ${linkList(primaryLinks)}`,
     );
@@ -162,8 +214,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/method') {
     return articleShell(
       'Void Agency Method',
-      'Technical SEO systems for search, AI visibility, and conversion.',
-      `<p>Void Agency audits the technical layer behind search visibility: crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and AI crawler access. The goal is simple: make your site easier to find, understand, cite, and act on.</p>
+      'Technical SEO systems for search, AI-search visibility, and conversion paths.',
+      `<p>Void Agency audits the technical layer behind search visibility: crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and AI crawler access. The method connects back to Sulayman Bowles, Atlas, and evidence-backed web/search systems.</p>
         <h2>Overview</h2>
         <p>Search visibility is no longer only about ranking pages. It is about whether Google, AI systems, and customers can understand your site clearly enough to trust it.</p>
         <p>Void Agency finds the structural problems that block that understanding, then turns them into a prioritized plan your team can implement.</p>
@@ -173,10 +225,19 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>A technical SEO process built for accuracy, evidence, and implementation. Void Agency turns messy site data into a clear plan that teams can act on.</p>
         <h3>Crawl</h3><p>Custom crawlers, sitemap checks, and page extraction.</p>
         <h3>Analyze</h3><p>Indexation, architecture, links, metadata, speed, and schema.</p>
-        <h3>Prioritize</h3><p>Rank fixes by severity, effort, affected pages, and revenue risk.</p>
+        <h3>Prioritize</h3><p>Rank fixes by severity, effort, affected pages, source evidence, and implementation context.</p>
         <h3>Deliver</h3><p>Clear reports, implementation guidance, and measurable next steps.</p>
+        <h2>AI Search Visibility Audit Checklist</h2>
+        ${evidenceLinkCards(aiSearchAuditChecklist)}
         <h2>Void in Action</h2>
         ${definitionCards(methodCaseStudies)}
+        <h2>Evidence Terms Used in the Method</h2>
+        ${definitionCards([
+          ['Crawlability', 'Robots rules, sitemap coverage, response codes, redirects, page templates, and crawl-depth patterns.'],
+          ['Page Evidence', 'Raw HTML, rendered HTML, canonical URLs, metadata, internal links, structured data, and indexability directives.'],
+          ['Analytics Review', 'Google Search Console, GA4, query buckets, landing pages, search intent, and page-level recommendations where access is available.'],
+          ['Source Map', 'Personal site, GitHub, Void Agency, LinkedIn, UT/McCombs context, Atlas, Markets Research, and the HTML resume.'],
+        ])}
         <h2>Internal Links</h2>
         ${linkList(primaryLinks)}`,
     );
@@ -185,8 +246,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/resume') {
     return articleShell(
       'Sulayman Bowles Resume',
-      'Technical SEO, finance research, AI search, and product/software execution.',
-      `<p>McCombs School of Business student and Void Agency founder building Atlas, technical SEO audit workflows, research notes, and inspectable web interfaces.</p>
+      'Technical SEO, Atlas, finance/data research, and product/software execution.',
+      `<p>UT Austin McCombs student and Void Agency founder building Atlas, technical SEO audit workflows, research notes, and inspectable web interfaces.</p>
         <h2>Profile Summary</h2>
         <h3>Builds</h3><p>Atlas, SEO audit pages, React interfaces, research notes, and data workflows.</p>
         <h3>Analyzes</h3><p>Crawl evidence, AI-search readiness, finance assumptions, operating models, and market structure.</p>
@@ -203,6 +264,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'Markets research index', href: '/markets', description: 'Research notes.' },
           { label: 'Void Agency method', href: '/method', description: 'Technical SEO process.' },
           { label: 'GitHub', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
+          { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
+          { label: 'AI Information', href: '/ai-information', description: 'Canonical source map.' },
           { label: 'Email', href: 'mailto:sulayman.bowles@gmail.com', description: 'Direct contact.' },
         ])}`,
     );
@@ -211,14 +274,16 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/about') {
     return articleShell(
       'About Sulayman Bowles',
-      'Technical SEO, Atlas, and finance research.',
-      `<p>Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, technical SEO systems, AI-search workflows, and finance/data tools.</p>
+      'Technical SEO, Atlas, and finance/data research.',
+      `<p>Sulayman Bowles is a UT Austin McCombs student, founder of Void Agency, and builder of Atlas, technical SEO systems, AI-search workflows, and finance/data research artifacts.</p>
         <h2>Principles</h2>
         <p>Evidence before interpretation. Crawl before claims. Structure before scale.</p>
         <h2>Experience</h2>
         ${definitionCards(aboutExperience)}
         <h2>Work Areas</h2>
         ${definitionCards(homeDisciplines)}
+        <h2>Public Source Graph</h2>
+        ${sourceMapCards(12)}
         <h2>Internal Links</h2>
         ${linkList(primaryLinks)}`,
     );
@@ -247,6 +312,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h3>Models and Tools</h3><p>Financial spreadsheets, assumptions tables, dashboards, and analytical workflows.</p>
         <h2>Research Notes</h2>
         ${MARKET_THESES.map((thesis) => `<h3><a href="/markets/${thesis.slug}">${escapeHtml(thesis.title)}</a></h3><p>${escapeHtml(thesis.subtitle)}</p>`).join('\n        ')}
+        <h2>How This Supports the Main Thesis</h2>
+        <p>Markets Research is included because it shows finance/data judgment: assumptions, risk vectors, valuation logic, and decision frameworks. It should be read as evidence of analytical method, not as unrelated content.</p>
         <h2>Internal Links</h2>
         ${linkList(primaryLinks)}`,
     );

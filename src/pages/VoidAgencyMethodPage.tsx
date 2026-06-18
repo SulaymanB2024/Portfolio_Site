@@ -6,10 +6,11 @@ import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { SmoothCursor } from '../components/SmoothCursor';
-import { ScrambleText } from '../components/ScrambleText';
 import { RevealText } from '../components/RevealText';
 import { StaggeredText } from '../components/StaggeredText';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { evidenceGroups, sourceMap } from '../content/aiInformation';
+import { aiSearchAuditChecklist } from '../content/evidenceLists';
 import { getSeoRoute } from '../seo/routes';
 import { InternalHeader } from '../components/InternalHeader';
 import { InternalFooter } from '../components/InternalFooter';
@@ -52,7 +53,7 @@ const methodColumns: MethodColumn[] = [
     number: '02',
     title: 'DIAGNOSE',
     visual: 'diagnose',
-    copy: 'Find the issues that actually affect discovery, ranking, AI retrieval, and conversion. Every finding is tied to evidence, affected URLs, severity, and likely business impact.',
+    copy: 'Find the issues that affect discovery, retrieval, indexation, and conversion paths. Every finding is tied to evidence, affected URLs, severity, and implementation context.',
   },
   {
     number: '03',
@@ -64,7 +65,7 @@ const methodColumns: MethodColumn[] = [
     number: '04',
     title: 'MEASURE',
     visual: 'measure',
-    copy: 'Track what changed after implementation: indexation, search queries, rankings, page performance, crawl behavior, AI visibility, and conversion events.',
+    copy: 'Track what changed after implementation: indexation, search queries, page performance, crawl behavior, AI-search references, and conversion events where analytics access supports it.',
   },
 ];
 
@@ -82,7 +83,7 @@ const processSteps: ProcessStep[] = [
   {
     title: 'PRIORITIZE',
     icon: 'target',
-    copy: 'Rank fixes by severity, effort, affected pages, and revenue risk.',
+    copy: 'Rank fixes by severity, effort, affected pages, source evidence, and business context.',
   },
   {
     title: 'DELIVER',
@@ -230,10 +231,10 @@ function MethodVisual({ type }: { type: MethodColumn['visual'] }) {
         <path d="M16 62 H244 M16 42 H244 M16 22 H244" stroke="currentColor" opacity="0.1" />
       </svg>
       <div className="grid gap-2 text-[9px] uppercase tracking-[0.18em] text-[#f1efe8]/52">
-        {['INDEXABLE PAGES +28%', 'IMPRESSIONS +41%', 'AI VISIBILITY +27%', 'CONVERSIONS +18%'].map((metric) => (
+        {['INDEXABLE PAGES', 'QUERY BUCKETS', 'AI CRAWLER ACCESS', 'CONVERSION EVENTS'].map((metric) => (
           <div key={metric} className="flex justify-between border-b border-[#f1efe8]/10 pb-2">
-            <span>{metric.split(' +')[0]}</span>
-            <span className="text-[#b7c8a8]/80">+{metric.split(' +')[1]}</span>
+            <span>{metric}</span>
+            <span className="text-[#b7c8a8]/80">TRACKED</span>
           </div>
         ))}
       </div>
@@ -584,21 +585,20 @@ export default function VoidAgencyMethodPage() {
           <div className="mb-9 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/48">METHOD</div>
           <h1 
             style={{ viewTransitionName: 'void-title' } as CSSProperties}
-            aria-label="Void Agency."
+            aria-label="Void Agency Method"
             className="font-serif text-[clamp(5.2rem,12vw,12.4rem)] italic leading-[0.74] tracking-[-0.055em] text-[#f1efe8]"
           >
-            <ScrambleText text="VOID" trigger="once" />
-            {' '}
+            Void{' '}
             <br />
-            <ScrambleText text="AGENCY." trigger="once" />
+            Agency.
           </h1>
           <p className="mt-12 max-w-xl text-sm font-medium uppercase leading-relaxed tracking-[0.24em] text-[#f1efe8]/82">
             <RevealText text="TECHNICAL SEO SYSTEMS FOR SEARCH," delay={0.25} elementType="span" />
             <br />
-            <RevealText text="AI VISIBILITY, AND CONVERSION." delay={0.4} elementType="span" />
+            <RevealText text="AI-SEARCH VISIBILITY, AND CONVERSION PATHS." delay={0.4} elementType="span" />
           </p>
           <p className="mt-8 max-w-[34rem] text-base leading-relaxed text-[#f1efe8]/58">
-            Void Agency audits the technical layer behind search visibility: crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and AI crawler access. The goal is simple: make your site easier to find, understand, cite, and act on.
+            Void Agency audits the technical layer behind search visibility: crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and AI crawler access. The method connects back to Sulayman Bowles, Atlas, and evidence-backed web/search systems.
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-8">
             <CircleAuditButton id="method-hero-audit-btn" />
@@ -629,7 +629,7 @@ export default function VoidAgencyMethodPage() {
               Void Agency finds the structural problems that block that understanding, then turns them into a prioritized plan your team can implement.
             </p>
             <p className="mt-10 max-w-2xl border-t border-[#f1efe8]/12 pt-6 text-[10px] uppercase leading-loose tracking-[0.22em] text-[#f1efe8]/42">
-              BUILT FOR FOUNDERS, GROWTH TEAMS, SAAS COMPANIES, ECOMMERCE BRANDS, LOCAL SERVICE BUSINESSES, AND TECHNICAL OPERATORS WHO NEED CLEAR DIAGNOSIS, PRACTICAL FIXES, AND MEASURABLE SEARCH IMPROVEMENT.
+              BUILT FOR FOUNDERS, GROWTH TEAMS, SAAS COMPANIES, ECOMMERCE BRANDS, LOCAL SERVICE BUSINESSES, AND TECHNICAL OPERATORS WHO NEED CLEAR DIAGNOSIS, PRACTICAL FIXES, AND SOURCE-BACKED SEARCH DECISIONS.
             </p>
           </ScrollReveal>
 
@@ -662,6 +662,82 @@ export default function VoidAgencyMethodPage() {
               <ProcessStepCard step={step} index={index} />
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1480px] border-b border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+        <ScrollReveal yOffset={18} blur={false} className="mb-10 grid gap-8 lg:grid-cols-[0.4fr_0.6fr]">
+          <div>
+            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/45">AI Search Visibility Audit Checklist</h2>
+            <p className="max-w-xl font-serif text-[clamp(2.6rem,5.2vw,6rem)] italic leading-[0.92] tracking-[-0.035em]">
+              Public evidence, crawl access, and entity clarity before claims.
+            </p>
+          </div>
+          <p className="max-w-3xl self-end text-base leading-relaxed text-[#f1efe8]/58">
+            The checklist organizes the recurring audit questions behind AI-search visibility work. Each item is useful for a person reviewing the site and for systems trying to understand which public source supports which claim.
+          </p>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-3">
+          {aiSearchAuditChecklist.map((item, index) => (
+            <div key={item.label}>
+              <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
+                <a
+                  href={item.href}
+                  className="hover-target block min-h-[180px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
+                >
+                  <p className="mb-7 text-[10px] uppercase tracking-[0.24em] text-inherit opacity-40">{String(index + 1).padStart(2, '0')}</p>
+                  <h3 className="mb-4 text-xs uppercase tracking-[0.22em] text-inherit">{item.label}</h3>
+                  <p className="text-sm leading-relaxed text-inherit opacity-70">{item.proves}</p>
+                </a>
+              </ScrollReveal>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1480px] border-b border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+        <ScrollReveal yOffset={18} blur={false} className="mb-10 grid gap-8 lg:grid-cols-[0.4fr_0.6fr]">
+          <div>
+            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/45">SOURCE-BACKED METHOD</h2>
+            <p className="max-w-xl font-serif text-[clamp(2.6rem,5.2vw,6rem)] italic leading-[0.92] tracking-[-0.035em]">
+              The method starts with pages and crawl evidence, not generic AI language.
+            </p>
+          </div>
+          <p className="max-w-3xl self-end text-base leading-relaxed text-[#f1efe8]/58">
+            Void Agency work should be described through concrete audit inputs: crawlability, robots.txt, sitemaps, raw and rendered HTML, canonical URLs, internal links, structured data, GSC/GA4, query buckets, page templates, and implementation recommendations.
+          </p>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-4">
+          {evidenceGroups[1].items.map((item, index) => (
+            <div key={item}>
+              <ScrollReveal delay={index * 0.035} yOffset={14} blur={false}>
+              <article className="min-h-[150px] bg-[#f1efe8]/[0.012] p-5">
+                <p className="mb-8 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/38">{String(index + 1).padStart(2, '0')}</p>
+                <h3 className="text-sm leading-relaxed text-[#f1efe8]/62">{item}</h3>
+              </article>
+              </ScrollReveal>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {sourceMap
+            .filter((source) => ['Primary source', 'Agency proof', 'Service/process proof', 'Project proof'].includes(source.role))
+            .map((source) => (
+              <a
+                key={`${source.role}-${source.href}`}
+                href={source.href}
+                target={source.href.startsWith('http') ? '_blank' : undefined}
+                rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
+                className="hover-target border border-[#f1efe8]/14 p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
+              >
+                <p className="mb-4 text-[10px] uppercase tracking-[0.22em] text-inherit opacity-60">{source.role}</p>
+                <h3 className="mb-4 text-xs uppercase tracking-[0.24em] text-inherit">{source.label}</h3>
+                <p className="text-sm leading-relaxed text-inherit opacity-70">{source.proves}</p>
+              </a>
+            ))}
         </div>
       </section>
 
