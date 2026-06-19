@@ -169,6 +169,7 @@ assertVisibleText('dist/ai-information/index.html', [
   'Crawler and Indexation Signals',
   'Canonical host: https://sulayman-bowles.dev.',
   'The www host redirects to the apex canonical host.',
+  'Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User',
   'The old Sulayman_Bowles_Resume_2025.pdf URL redirects to /resume',
   'Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals',
 ]);
@@ -233,9 +234,25 @@ assertVisibleText('dist/method/index.html', [
 
 {
   const llmsText = read('public/llms.txt');
+  const robotsText = read('public/robots.txt');
+  const expectedAiAgents = [
+    'OAI-SearchBot',
+    'ChatGPT-User',
+    'GPTBot',
+    'ClaudeBot',
+    'Claude-SearchBot',
+    'Claude-User',
+    'PerplexityBot',
+    'Perplexity-User',
+  ];
+
   assert(llmsText.includes('Last updated: June 19, 2026'), 'llms.txt: stale last updated date');
   assert(llmsText.includes('## Crawler and Indexation Signals'), 'llms.txt: missing crawler/indexation section');
   assert(llmsText.includes('The www host redirects to the apex canonical host.'), 'llms.txt: missing www canonical redirect fact');
+  assert(
+    llmsText.includes('Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User'),
+    'llms.txt: missing explicit AI crawler allow fact',
+  );
   assert(
     llmsText.includes('The old Sulayman_Bowles_Resume_2025.pdf URL redirects to https://sulayman-bowles.dev/resume.'),
     'llms.txt: missing old PDF redirect fact',
@@ -244,6 +261,12 @@ assertVisibleText('dist/method/index.html', [
     llmsText.includes('Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals'),
     'llms.txt: missing submission claim boundary',
   );
+  assert(robotsText.includes('Sitemap: https://sulayman-bowles.dev/sitemap.xml'), 'robots.txt: missing sitemap directive');
+
+  for (const agent of expectedAiAgents) {
+    const pattern = new RegExp(`User-agent: ${agent}\\nAllow: /`);
+    assert(pattern.test(robotsText), `robots.txt: missing explicit Allow for ${agent}`);
+  }
 }
 
 {

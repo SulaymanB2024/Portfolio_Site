@@ -125,6 +125,7 @@ export const shortDescriptions = [
 export const crawlerAccessFacts = [
   'Canonical host: https://sulayman-bowles.dev. The www host redirects to the apex canonical host.',
   'Robots.txt allows public crawling and points crawlers to https://sulayman-bowles.dev/sitemap.xml.',
+  'Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User for public discovery and AI/search retrieval where those systems honor robots directives.',
   'The old Sulayman_Bowles_Resume_2025.pdf URL redirects to /resume so stale PDF results resolve to the current HTML resume.',
   'IndexNow verification is hosted at https://sulayman-bowles.dev/831c8d8efafea91f80fd661d0390f52d.txt and sitemap URLs are submitted with the old PDF URL for rediscovery.',
   'Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals; they do not prove rankings, indexing, traffic movement, or AI citations.',
