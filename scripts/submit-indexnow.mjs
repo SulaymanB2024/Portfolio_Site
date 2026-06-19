@@ -37,10 +37,22 @@ async function readHostedKey() {
 }
 
 async function readDefaultUrlList() {
-  const sitemapXml = await readTextFile(path.join('public', 'sitemap.xml'));
+  let sitemapXml;
+  try {
+    sitemapXml = await readTextFile(path.join('dist', 'sitemap.xml'));
+  } catch {
+    sitemapXml = await readTextFile(path.join('public', 'sitemap.xml'));
+  }
+
   const sitemapUrls = extractSitemapUrls(sitemapXml);
 
-  return uniqueUrls([...sitemapUrls, `${SITE_URL}/Sulayman_Bowles_Resume_2025.pdf`]);
+  return uniqueUrls([
+    ...sitemapUrls,
+    `${SITE_URL}/Sulayman_Bowles_Resume.pdf`,
+    `${SITE_URL}/resume.pdf`,
+    `${SITE_URL}/llms.txt`,
+    `${SITE_URL}/Sulayman_Bowles_Resume_2025.pdf`,
+  ]);
 }
 
 async function main() {
