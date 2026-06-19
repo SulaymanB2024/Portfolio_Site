@@ -1,4 +1,4 @@
-import { AI_INFORMATION_DESCRIPTION } from '../content/aiInformation';
+import { AI_INFORMATION_DESCRIPTION, providerDiscoveryPlan } from '../content/aiInformation';
 import {
   aiSearchAuditChecklist,
   atlasCheckItems,
@@ -242,6 +242,27 @@ function fanOutQueryItemListSchema(items: FanOutQueryMapItem[]): JsonLd {
       name: item.originalQuery,
       description: `Likely fan-out queries: ${item.likelyFanOutQueries.join('; ')}. Missing content: ${item.missingContent}. Recommended edit: ${item.recommendedEdit}`,
       url: absoluteUrl(item.href),
+    })),
+  };
+}
+
+function providerDiscoveryPlanItemListSchema(): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${absoluteUrl('/ai-information')}#provider-discovery-plan`,
+    name: 'Provider Discovery Plan',
+    url: `${absoluteUrl('/ai-information')}#provider-discovery-plan`,
+    description:
+      'A public search-provider discovery plan describing current crawl/indexation signals and next monitoring actions for Google, Bing, Brave, DuckDuckGo, ChatGPT search, Claude, and Perplexity.',
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    numberOfItems: providerDiscoveryPlan.length,
+    itemListElement: providerDiscoveryPlan.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.provider,
+      description: `Current signal: ${item.currentSignal} Next action: ${item.nextAction}`,
+      url: absoluteUrl('/ai-information'),
     })),
   };
 }
@@ -497,6 +518,7 @@ export function aiInformationJsonLd(): JsonLd {
       items: publicSourceGraph,
     }),
     fanOutQueryItemListSchema(fanOutQueryMap),
+    providerDiscoveryPlanItemListSchema(),
     {
       '@context': 'https://schema.org',
       '@type': 'ProfilePage',

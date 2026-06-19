@@ -169,19 +169,32 @@ assertVisibleText('dist/ai-information/index.html', [
   'Crawler and Indexation Signals',
   'Canonical host: https://sulayman-bowles.dev.',
   'The www host redirects to the apex canonical host.',
+  'Robots.txt explicitly allows Googlebot, Bingbot, and DuckDuckBot.',
+  'Brave Search does not publish a separate crawler user agent',
   'Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User',
   'The old Sulayman_Bowles_Resume_2025.pdf URL redirects to /resume',
   'Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals',
+  'Provider Discovery Plan',
+  'Google Search and Google AI surfaces',
+  'Bing, Microsoft Copilot, and Bing-powered search partners',
+  'Brave Search',
+  'DuckDuckGo',
+  'ChatGPT search and OpenAI retrieval',
+  'Claude search and user-requested retrieval',
+  'Perplexity search and user-requested retrieval',
 ]);
 
 {
   const graph = jsonLdGraph(read('dist/ai-information/index.html'));
   const sourceGraphList = findItemList(graph, `${siteUrl}/ai-information#public-source-graph`);
   const fanOutList = findItemList(graph, `${siteUrl}/ai-information#fan-out-query-map`);
+  const providerPlanList = findItemList(graph, `${siteUrl}/ai-information#provider-discovery-plan`);
   assert(sourceGraphList, 'ai-information: missing Public Source Graph ItemList schema');
   assert(fanOutList, 'ai-information: missing Fan-Out Query Map ItemList schema');
+  assert(providerPlanList, 'ai-information: missing Provider Discovery Plan ItemList schema');
   assert(sourceGraphList.itemListElement?.length === 9, 'ai-information: Public Source Graph ItemList should have 9 items');
   assert(fanOutList.itemListElement?.length === 6, 'ai-information: Fan-Out Query Map ItemList should have 6 items');
+  assert(providerPlanList.itemListElement?.length === 7, 'ai-information: Provider Discovery Plan ItemList should have 7 items');
 }
 
 assertVisibleText('dist/about/index.html', [
@@ -236,6 +249,9 @@ assertVisibleText('dist/method/index.html', [
   const llmsText = read('public/llms.txt');
   const robotsText = read('public/robots.txt');
   const expectedAiAgents = [
+    'Googlebot',
+    'Bingbot',
+    'DuckDuckBot',
     'OAI-SearchBot',
     'ChatGPT-User',
     'GPTBot',
@@ -249,6 +265,12 @@ assertVisibleText('dist/method/index.html', [
   assert(llmsText.includes('Last updated: June 19, 2026'), 'llms.txt: stale last updated date');
   assert(llmsText.includes('## Crawler and Indexation Signals'), 'llms.txt: missing crawler/indexation section');
   assert(llmsText.includes('The www host redirects to the apex canonical host.'), 'llms.txt: missing www canonical redirect fact');
+  assert(
+    llmsText.includes('Robots.txt explicitly allows Googlebot, Bingbot, and DuckDuckBot.'),
+    'llms.txt: missing search crawler allow fact',
+  );
+  assert(llmsText.includes('## Provider Discovery Plan'), 'llms.txt: missing provider discovery plan');
+  assert(llmsText.includes('Brave Search: the site is publicly crawlable'), 'llms.txt: missing Brave discovery plan');
   assert(
     llmsText.includes('Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User'),
     'llms.txt: missing explicit AI crawler allow fact',

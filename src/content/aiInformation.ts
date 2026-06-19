@@ -125,11 +125,64 @@ export const shortDescriptions = [
 export const crawlerAccessFacts = [
   'Canonical host: https://sulayman-bowles.dev. The www host redirects to the apex canonical host.',
   'Robots.txt allows public crawling and points crawlers to https://sulayman-bowles.dev/sitemap.xml.',
+  'Robots.txt explicitly allows Googlebot, Bingbot, and DuckDuckBot. Brave Search does not publish a separate crawler user agent, so the practical Brave requirement is that the site remains crawlable to Googlebot and public web crawlers.',
   'Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User for public discovery and AI/search retrieval where those systems honor robots directives.',
   'The old Sulayman_Bowles_Resume_2025.pdf URL redirects to /resume so stale PDF results resolve to the current HTML resume.',
   'IndexNow verification is hosted at https://sulayman-bowles.dev/831c8d8efafea91f80fd661d0390f52d.txt and sitemap URLs are submitted with the old PDF URL for rediscovery.',
   'Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals; they do not prove rankings, indexing, traffic movement, or AI citations.',
   'Machine-readable support comes from the sitemap, JSON-LD, visible static fallback HTML, /ai-information, and /llms.txt together.',
+];
+
+export const providerDiscoveryPlan = [
+  {
+    provider: 'Google Search and Google AI surfaces',
+    currentSignal:
+      'Google Search Console has the domain property, a successful sitemap for /sitemap.xml, URL Inspection recrawl requests for updated pages, and a live-test/indexing request for the old resume PDF redirect.',
+    nextAction:
+      'Monitor the Pages, Sitemaps, Performance, and URL Inspection reports over the next few days to weeks instead of repeatedly resubmitting the same URLs.',
+  },
+  {
+    provider: 'Bing, Microsoft Copilot, and Bing-powered search partners',
+    currentSignal:
+      'Bing Webmaster Tools has the sulayman-bowles.dev property, /sitemap.xml, 12 submitted priority URLs, and IndexNow notifications backed by a root-hosted IndexNow key file.',
+    nextAction:
+      'Run the IndexNow submission helper after material content, redirect, sitemap, or source-graph changes and monitor Bing Webmaster Tools IndexNow, URL Submission, Sitemaps, and AI Performance reports.',
+  },
+  {
+    provider: 'Brave Search',
+    currentSignal:
+      'The site is publicly crawlable, the apex canonical resolves, www and HTTP variants redirect, and robots.txt allows Googlebot because Brave states pages not crawlable by Googlebot will not be crawled by Brave Search.',
+    nextAction:
+      'Monitor Brave site/name queries after Google and Bing recrawl. Use Brave Search stale/not-found submission only for dead or obsolete URLs that remain visible after redirects have been crawled.',
+  },
+  {
+    provider: 'DuckDuckGo',
+    currentSignal:
+      'DuckDuckGo says it maintains DuckDuckBot and its own indexes while traditional links and images are largely sourced from Bing, so Bing Webmaster Tools, IndexNow, public crawlability, and DuckDuckBot access are the strongest practical levers.',
+    nextAction:
+      'Monitor DuckDuckGo branded and site queries after Bing processes the sitemap and URL submissions.',
+  },
+  {
+    provider: 'ChatGPT search and OpenAI retrieval',
+    currentSignal:
+      'Robots.txt explicitly allows OAI-SearchBot and ChatGPT-User, and the site exposes /ai-information, /llms.txt, sitemap, static fallback HTML, and JSON-LD source graph data.',
+    nextAction:
+      'Keep /ai-information and /llms.txt synchronized with current identity, canonical URLs, source links, and claim boundaries whenever public positioning changes.',
+  },
+  {
+    provider: 'Claude search and user-requested retrieval',
+    currentSignal:
+      'Robots.txt explicitly allows ClaudeBot, Claude-SearchBot, and Claude-User, while /ai-information states what current and historical public sources should mean.',
+    nextAction:
+      'Keep the identity reconciliation and source map stable so Claude can reconcile older music pages with the current McCombs, Atlas, technical SEO, AI-search visibility, and finance/data positioning.',
+  },
+  {
+    provider: 'Perplexity search and user-requested retrieval',
+    currentSignal:
+      'Robots.txt explicitly allows PerplexityBot and Perplexity-User, and the site exposes answer-ready summaries, source links, sitemap, and machine-readable files.',
+    nextAction:
+      'Monitor Perplexity answer citations for branded queries and keep the source graph pointed at inspectable public evidence rather than unsupported ranking or traffic claims.',
+  },
 ];
 
 export const sourceMap = [
@@ -380,6 +433,16 @@ function fanOutQueryMapHtml() {
     .join('\n        ');
 }
 
+function providerDiscoveryPlanHtml() {
+  return providerDiscoveryPlan
+    .map(
+      (item) => `<h3>${item.provider}</h3>
+        <p><strong>Current signal:</strong> ${item.currentSignal}</p>
+        <p><strong>Next action:</strong> ${item.nextAction}</p>`,
+    )
+    .join('\n        ');
+}
+
 function identityReconciliationHtml() {
   return `<h2>${identityReconciliation.title}</h2>
         <p>${identityReconciliation.copy}</p>
@@ -410,6 +473,8 @@ export const AI_INFORMATION_STATIC_HTML = `
         ${sourceMapHtml()}
         <h2>Crawler and Indexation Signals</h2>
         <ul>${listItems(crawlerAccessFacts)}</ul>
+        <h2>Provider Discovery Plan</h2>
+        ${providerDiscoveryPlanHtml()}
         <h2>What the Evidence Supports</h2>
         ${evidenceGroupHtml()}
         <h2>What Void Agency Does</h2>
