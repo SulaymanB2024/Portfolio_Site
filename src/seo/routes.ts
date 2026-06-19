@@ -38,7 +38,7 @@ export interface SeoRoute {
   jsonLd?: JsonLd;
 }
 
-export const SITE_LASTMOD = '2026-06-18';
+export const SITE_LASTMOD = '2026-06-19';
 
 const CORE_ROUTES: SeoRoute[] = [
   {

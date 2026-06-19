@@ -58,6 +58,14 @@ function findItemList(graph, id) {
   return graph.find((item) => item['@type'] === 'ItemList' && item['@id'] === id);
 }
 
+function graphUrls(items) {
+  return (Array.isArray(items) ? items : []).map((item) => item?.url).filter(Boolean);
+}
+
+function propertyValues(items) {
+  return (Array.isArray(items) ? items : []).map((item) => item?.value).filter(Boolean);
+}
+
 function absolutePath(pathname) {
   return pathname === '/' ? `${siteUrl}/` : `${siteUrl}${pathname}`;
 }
@@ -106,6 +114,12 @@ for (const [route, file] of Object.entries(routeFiles)) {
   assert(person.url === siteUrl, `${route}: Person url must be absolute canonical site URL`);
   assert(Array.isArray(person.sameAs) && person.sameAs.includes('https://github.com/SulaymanB2024'), `${route}: Person sameAs missing GitHub`);
   assert(Array.isArray(person.sameAs) && person.sameAs.includes('https://www.linkedin.com/in/sulayman-bowles/'), `${route}: Person sameAs missing LinkedIn`);
+  assert(Array.isArray(person.sameAs) && person.sameAs.includes('https://devpost.com/sulayman-bowles'), `${route}: Person sameAs missing Devpost`);
+  assert(graphUrls(person.subjectOf).includes(`${siteUrl}/ai-information`), `${route}: Person subjectOf missing AI Information`);
+  assert(graphUrls(person.subjectOf).includes('https://devpost.com/sulayman-bowles'), `${route}: Person subjectOf missing Devpost`);
+  assert(graphUrls(person.subjectOf).includes('https://www.goldenhornet.org/calendar/young-composers-concert-2022'), `${route}: Person subjectOf missing Golden Hornet historical source`);
+  assert(graphUrls(person.subjectOf).includes('https://music.utexas.edu/events/4645-university-orchestra'), `${route}: Person subjectOf missing UT Butler historical source`);
+  assert(propertyValues(person.identifier).includes('SulaymanB2024'), `${route}: Person identifier missing GitHub username`);
   assert(String(person.logo?.url ?? person.logo).startsWith(siteUrl), `${route}: Person logo must be absolute`);
 
   assert(org, `${route}: missing canonical Organization schema`);
@@ -152,6 +166,11 @@ assertVisibleText('dist/ai-information/index.html', [
   'Does Sulayman Bowles work on AI search visibility?',
   'Is Sulayman Bowles an SEO person, finance person, or software builder?',
   "What public evidence supports Sulayman Bowles's technical SEO work?",
+  'Crawler and Indexation Signals',
+  'Canonical host: https://sulayman-bowles.dev.',
+  'The www host redirects to the apex canonical host.',
+  'The old Sulayman_Bowles_Resume_2025.pdf URL redirects to /resume',
+  'Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals',
 ]);
 
 {
@@ -211,6 +230,21 @@ assertVisibleText('dist/method/index.html', [
   'sitemap freshness',
   'stale/conflicting source cleanup',
 ]);
+
+{
+  const llmsText = read('public/llms.txt');
+  assert(llmsText.includes('Last updated: June 19, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('## Crawler and Indexation Signals'), 'llms.txt: missing crawler/indexation section');
+  assert(llmsText.includes('The www host redirects to the apex canonical host.'), 'llms.txt: missing www canonical redirect fact');
+  assert(
+    llmsText.includes('The old Sulayman_Bowles_Resume_2025.pdf URL redirects to https://sulayman-bowles.dev/resume.'),
+    'llms.txt: missing old PDF redirect fact',
+  );
+  assert(
+    llmsText.includes('Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals'),
+    'llms.txt: missing submission claim boundary',
+  );
+}
 
 {
   const graph = jsonLdGraph(read('dist/method/index.html'));

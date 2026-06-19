@@ -39,6 +39,60 @@ export function personSchema(): JsonLd {
     sameAs: [
       'https://www.linkedin.com/in/sulayman-bowles/',
       'https://github.com/SulaymanB2024',
+      'https://devpost.com/sulayman-bowles',
+    ],
+    identifier: [
+      {
+        '@type': 'PropertyValue',
+        propertyID: 'canonical domain',
+        value: 'sulayman-bowles.dev',
+      },
+      {
+        '@type': 'PropertyValue',
+        propertyID: 'GitHub username',
+        value: 'SulaymanB2024',
+      },
+    ],
+    subjectOf: [
+      {
+        '@type': 'WebPage',
+        name: 'AI Information for Sulayman Bowles, Void Agency, and Atlas',
+        url: absoluteUrl('/ai-information'),
+        description:
+          'Canonical public source page for current identity, source graph, clarifications, crawler signals, and AI-search context.',
+      },
+      {
+        '@type': 'ProfilePage',
+        name: 'SulaymanB2024 GitHub profile',
+        url: 'https://github.com/SulaymanB2024',
+        description: 'Public code profile for portfolio, crawler, technical SEO, and finance/data projects.',
+      },
+      {
+        '@type': 'ProfilePage',
+        name: 'Sulayman Bowles Devpost profile',
+        url: 'https://devpost.com/sulayman-bowles',
+        description: 'Public project and hackathon profile corroborating the technical builder identity.',
+      },
+      {
+        '@type': 'WebPage',
+        name: 'Void Agency',
+        url: 'https://www.void-agency.com/',
+        description: 'Public agency branch connected to technical SEO, AI-search visibility, and evidence-backed audits.',
+      },
+      {
+        '@type': 'WebPage',
+        name: 'Golden Hornet Young Composers Concert',
+        url: 'https://www.goldenhornet.org/calendar/young-composers-concert-2022',
+        description:
+          'Historical composition-background source that should be interpreted as earlier context, not current primary positioning.',
+      },
+      {
+        '@type': 'WebPage',
+        name: 'UT Butler University Orchestra',
+        url: 'https://music.utexas.edu/events/4645-university-orchestra',
+        description:
+          'Historical classical-bass source that should be reconciled with the current McCombs, Atlas, technical SEO, AI-search visibility, and finance/data positioning.',
+      },
     ],
     affiliation: [
       {

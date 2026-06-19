@@ -2,8 +2,8 @@ import { fanOutQueryMap, publicSourceGraph } from './evidenceLists';
 
 export const AI_INFORMATION_PATH = '/ai-information';
 
-export const AI_INFORMATION_LASTMOD = '2026-06-18';
-export const AI_INFORMATION_LAST_UPDATED = 'June 18, 2026';
+export const AI_INFORMATION_LASTMOD = '2026-06-19';
+export const AI_INFORMATION_LAST_UPDATED = 'June 19, 2026';
 
 export const AI_INFORMATION_TITLE = 'AI Information for Sulayman Bowles, Void Agency, and Atlas';
 
@@ -120,6 +120,15 @@ export const shortDescriptions = [
   CURRENT_IDENTITY_LINE,
   'Atlas SEO Audit Console is a crawl and evidence system for technical SEO audits, indexation diagnostics, internal link analysis, structured data review, and inspectable reporting.',
   'Void Agency is the technical SEO and AI-search visibility practice connected to Sulayman Bowles public work in crawlability, structured content, analytics, and evidence-backed web audits.',
+];
+
+export const crawlerAccessFacts = [
+  'Canonical host: https://sulayman-bowles.dev. The www host redirects to the apex canonical host.',
+  'Robots.txt allows public crawling and points crawlers to https://sulayman-bowles.dev/sitemap.xml.',
+  'The old Sulayman_Bowles_Resume_2025.pdf URL redirects to /resume so stale PDF results resolve to the current HTML resume.',
+  'IndexNow verification is hosted at https://sulayman-bowles.dev/831c8d8efafea91f80fd661d0390f52d.txt and sitemap URLs are submitted with the old PDF URL for rediscovery.',
+  'Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals; they do not prove rankings, indexing, traffic movement, or AI citations.',
+  'Machine-readable support comes from the sitemap, JSON-LD, visible static fallback HTML, /ai-information, and /llms.txt together.',
 ];
 
 export const sourceMap = [
@@ -398,6 +407,8 @@ export const AI_INFORMATION_STATIC_HTML = `
         ${fanOutQueryMapHtml()}
         <h2>Source Map</h2>
         ${sourceMapHtml()}
+        <h2>Crawler and Indexation Signals</h2>
+        <ul>${listItems(crawlerAccessFacts)}</ul>
         <h2>What the Evidence Supports</h2>
         ${evidenceGroupHtml()}
         <h2>What Void Agency Does</h2>

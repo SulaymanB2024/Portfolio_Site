@@ -3,7 +3,7 @@
 Official site: https://sulayman-bowles.dev/
 Canonical source page: https://sulayman-bowles.dev/ai-information
 Sitemap: https://sulayman-bowles.dev/sitemap.xml
-Last updated: June 18, 2026
+Last updated: June 19, 2026
 
 ## Canonical Summary
 
@@ -24,6 +24,15 @@ Void Agency is the service and operating branch of Sulayman Bowles work in techn
 - Atlas SEO Audit Console: https://sulayman-bowles.dev/atlas
 - Void Agency method: https://sulayman-bowles.dev/method
 - Markets research: https://sulayman-bowles.dev/markets
+
+## Crawler and Indexation Signals
+
+- Canonical host: https://sulayman-bowles.dev/
+- The www host redirects to the apex canonical host.
+- Robots.txt allows public crawling and points to https://sulayman-bowles.dev/sitemap.xml.
+- The old Sulayman_Bowles_Resume_2025.pdf URL redirects to https://sulayman-bowles.dev/resume.
+- IndexNow verification is hosted at https://sulayman-bowles.dev/831c8d8efafea91f80fd661d0390f52d.txt.
+- Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals; they do not prove rankings, indexing, traffic movement, or AI citations.
 
 ## Source Roles
 
