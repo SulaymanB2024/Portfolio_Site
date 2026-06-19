@@ -651,22 +651,25 @@ function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) =>
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
       <div className="space-y-2">
         <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
-          INVESTMENT MEMOS &amp; THESES
+          RESEARCH MEMOS &amp; ARTICLES
         </div>
         <p className="text-xs text-[#f1efe8]/50 font-sans max-w-xl">
-          Research examples, asset allocation models, and structural market logic.
+          Research examples, technical SEO articles, AI-search infrastructure notes, and structural market logic.
         </p>
         <p className="text-[10px] uppercase tracking-[0.18em] text-[#f1efe8]/38 font-sans max-w-xl">
-          Memos are sample research artifacts for method and writing review; verify assumptions and sources before relying on any thesis.
+          Research pages are portfolio artifacts for method and writing review; verify assumptions and sources before relying on any thesis.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {MARKET_THESES.map((thesis, idx) => (
-          <div 
-            key={thesis.slug}
-            className="flex flex-col justify-between h-full p-6 border border-[#f1efe8]/12 bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.025] hover:-translate-y-1 hover:border-[#f1efe8]/30 transition-all duration-500 relative group overflow-hidden before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:before:w-full"
-          >
+        {MARKET_THESES.map((thesis, idx) => {
+          const primaryMetric = thesis.metrics?.[0] ?? { label: 'Conviction', value: thesis.conviction };
+
+          return (
+            <div
+              key={thesis.slug}
+              className="flex flex-col justify-between h-full p-6 border border-[#f1efe8]/12 bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.025] hover:-translate-y-1 hover:border-[#f1efe8]/30 transition-all duration-500 relative group overflow-hidden before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:before:w-full"
+            >
             {/* Corner marks */}
             <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
             <div className="absolute top-2 right-2 w-1.5 h-1.5 border-t border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
@@ -690,8 +693,8 @@ function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) =>
 
             <div className="space-y-4 pt-4 border-t border-[#f1efe8]/8">
               <div className="flex justify-between font-mono text-[9px] uppercase">
-                <span className="text-[#f1efe8]/30">Conviction</span>
-                <span className="text-[#b7c8a8]">{thesis.conviction}</span>
+                <span className="text-[#f1efe8]/30">{primaryMetric.label}</span>
+                <span className="text-[#b7c8a8]">{primaryMetric.value}</span>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
@@ -711,8 +714,9 @@ function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) =>
                 </a>
               </div>
             </div>
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
     </section>
   );

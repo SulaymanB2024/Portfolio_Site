@@ -29,6 +29,9 @@ const marketFiles = [
   'dist/markets/network-monopolies/index.html',
   'dist/markets/computational-commodity-systems/index.html',
   'dist/markets/fiat-horizon/index.html',
+  'dist/markets/ai-search-crawler-policy/index.html',
+  'dist/markets/technical-seo-public-data-infrastructure/index.html',
+  'dist/markets/canonical-identity-personal-seo/index.html',
 ];
 
 function read(file) {
@@ -209,6 +212,19 @@ assertVisibleText('dist/about/index.html', [
   'Resume',
 ]);
 
+assertVisibleText('dist/resume/index.html', [
+  'Download PDF Resume',
+]);
+assert(read('dist/resume/index.html').includes('/Sulayman_Bowles_Resume.pdf'), 'resume: missing PDF resume href');
+
+{
+  const resumePdf = path.resolve('public/Sulayman_Bowles_Resume.pdf');
+  const pdfStat = fs.statSync(resumePdf);
+  assert(pdfStat.size > 100000, 'resume PDF should be present and non-empty');
+  const signature = fs.readFileSync(resumePdf).subarray(0, 4).toString('utf8');
+  assert(signature === '%PDF', 'resume PDF should have a PDF signature');
+}
+
 assertVisibleText('dist/atlas/index.html', [
   'What Atlas SEO Audit Console Checks',
   'URL discovery',
@@ -270,6 +286,11 @@ assertVisibleText('dist/method/index.html', [
     'llms.txt: missing search crawler allow fact',
   );
   assert(llmsText.includes('## Provider Discovery Plan'), 'llms.txt: missing provider discovery plan');
+  assert(llmsText.includes('Current PDF resume: https://sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf'), 'llms.txt: missing current PDF resume link');
+  assert(llmsText.includes('## Research Articles'), 'llms.txt: missing research articles section');
+  assert(llmsText.includes('AI Search Visibility Is Crawler Policy, Not Just SEO'), 'llms.txt: missing AI search crawler policy article');
+  assert(llmsText.includes('Technical SEO as Public Data Infrastructure'), 'llms.txt: missing public data infrastructure article');
+  assert(llmsText.includes('Canonical Identity Beats More Content'), 'llms.txt: missing canonical identity article');
   assert(llmsText.includes('Brave Search: the site is publicly crawlable'), 'llms.txt: missing Brave discovery plan');
   assert(
     llmsText.includes('Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User'),
@@ -320,5 +341,30 @@ for (const file of marketFiles) {
   assert(title.replaceAll('&amp;', '&').length <= 62, `${file}: title is too long (${title.length})`);
   assert(description.length >= 145 && description.length <= 180, `${file}: description should be expanded to 145-180 chars (${description.length})`);
 }
+
+assertVisibleText('dist/markets/ai-search-crawler-policy/index.html', [
+  'AI Search Visibility Is Crawler Policy, Not Just SEO',
+  'Research Sources',
+  'OpenAI Crawlers',
+  'Anthropic crawler guidance',
+  'Perplexity Crawlers',
+  'IndexNow documentation',
+]);
+
+assertVisibleText('dist/markets/technical-seo-public-data-infrastructure/index.html', [
+  'Technical SEO as Public Data Infrastructure',
+  'Research Sources',
+  'Google structured data introduction',
+  'Google helpful content guidance',
+  'SEC EDGAR APIs',
+]);
+
+assertVisibleText('dist/markets/canonical-identity-personal-seo/index.html', [
+  'Canonical Identity Beats More Content',
+  'Research Sources',
+  'Google canonicalization guide',
+  'Google ProfilePage structured data',
+  'Schema.org Person',
+]);
 
 console.log('AI-search SEO verification passed');

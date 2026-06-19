@@ -272,6 +272,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'Void Agency method', href: '/method', description: 'Technical SEO process.' },
           { label: 'GitHub', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
           { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
+          { label: 'Download PDF Resume', href: '/Sulayman_Bowles_Resume.pdf', description: 'Current one-page PDF resume.' },
           { label: 'AI Information', href: '/ai-information', description: 'Canonical source map.' },
           { label: 'Email', href: 'mailto:sulayman.bowles@gmail.com', description: 'Direct contact.' },
         ])}`,
@@ -329,17 +330,27 @@ export function buildRouteStaticHtml(route: SeoRoute) {
 
   const thesis = MARKET_THESES.find((item) => route.path === `/markets/${item.slug}`);
   if (thesis) {
+    const metrics = thesis.metrics ?? [
+      { label: 'Conviction', value: thesis.conviction },
+      { label: 'Horizon', value: thesis.horizon },
+      { label: 'Allocation', value: thesis.allocation },
+    ];
+    const sourceLinks = thesis.sources?.length ? thesis.sources.map((source) => ({ label: source.label, href: source.href })) : [];
+
     return articleShell(
       thesis.title,
       thesis.subtitle,
       `<h2>Memo Details</h2>
-        <p>Category: ${escapeHtml(thesis.category)}. Published: ${escapeHtml(thesis.date)}. Read time: ${escapeHtml(thesis.readTime)}. Conviction: ${escapeHtml(thesis.conviction)}. Horizon: ${escapeHtml(thesis.horizon)}. Allocation: ${escapeHtml(thesis.allocation)}.</p>
+        <p>Category: ${escapeHtml(thesis.category)}. Published: ${escapeHtml(thesis.date)}. Read time: ${escapeHtml(thesis.readTime)}.</p>
+        <h2>Article Metrics</h2>
+        ${definitionCards(metrics.map((metric) => [metric.label, metric.value]))}
         <h2>Research Thesis</h2>
         ${paragraphList(thesis.content)}
         <h2>Model Frame</h2>
         <p>${escapeHtml(thesis.formulaLabel)}: ${escapeHtml(thesis.formula)}</p>
         <h2>Key Risk Vector</h2>
         <p>${escapeHtml(thesis.risks)}</p>
+        ${sourceLinks.length ? `<h2>Research Sources</h2>${linkList(sourceLinks)}` : ''}
         <h2>Internal Links</h2>
         ${linkList([
           { label: 'Markets Research', href: '/markets' },

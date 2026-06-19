@@ -11,6 +11,7 @@ import { InternalFooter } from '../components/InternalFooter';
 import { WireframeGrid } from '../components/WireframeGrid';
 
 const RESUME_SEO = getSeoRoute('/resume')!;
+const RESUME_PDF_PATH = '/Sulayman_Bowles_Resume.pdf';
 
 
 
@@ -133,6 +134,9 @@ export default function ResumePage() {
               </a>
               <a href="https://www.linkedin.com/in/sulayman-bowles/" target="_blank" rel="noreferrer" className="hover-target min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
                 LinkedIn
+              </a>
+              <a href={RESUME_PDF_PATH} className="hover-target min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
+                Download PDF Resume
               </a>
               <button 
                 onClick={() => window.print()}

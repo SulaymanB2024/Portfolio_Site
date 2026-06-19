@@ -14,6 +14,11 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
   const prefersReducedMotion = useReducedMotion();
   const thesis = getMarketThesisBySlug(slug) ?? getMarketThesisBySlug('network-monopolies')!;
   const route = getSeoRoute(`/markets/${thesis.slug}`) ?? getSeoRoute('/markets')!;
+  const metrics = thesis.metrics ?? [
+    { label: 'Conviction', value: thesis.conviction },
+    { label: 'Horizon', value: thesis.horizon },
+    { label: 'Allocation', value: thesis.allocation },
+  ];
 
   useSEO(route);
 
@@ -76,18 +81,12 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
           </p>
 
           <div className="my-12 grid gap-4 border-y border-[#f1efe8]/10 py-6 text-[10px] uppercase tracking-[0.2em] text-[#f1efe8]/54 md:grid-cols-3">
-            <div>
-              <span className="block text-[#f1efe8]/32">Conviction</span>
-              <span className="mt-2 block text-[#b7c8a8]">{thesis.conviction}</span>
-            </div>
-            <div>
-              <span className="block text-[#f1efe8]/32">Horizon</span>
-              <span className="mt-2 block text-[#f1efe8]/82">{thesis.horizon}</span>
-            </div>
-            <div>
-              <span className="block text-[#f1efe8]/32">Allocation</span>
-              <span className="mt-2 block text-[#f1efe8]/82">{thesis.allocation}</span>
-            </div>
+            {metrics.map((metric, index) => (
+              <div key={`${metric.label}-${metric.value}`}>
+                <span className="block text-[#f1efe8]/32">{metric.label}</span>
+                <span className={`mt-2 block ${index === 0 ? 'text-[#b7c8a8]' : 'text-[#f1efe8]/82'}`}>{metric.value}</span>
+              </div>
+            ))}
           </div>
 
           <div className="space-y-8 text-base leading-relaxed text-[#f1efe8]/72 font-sans">
@@ -133,6 +132,26 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
             <h2 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#c2695e]/80">Key Risk Vector</h2>
             <p className="text-sm leading-relaxed text-[#f1efe8]/58">{thesis.risks}</p>
           </section>
+
+          {thesis.sources?.length ? (
+            <section className="mt-10 border-t border-[#f1efe8]/12 pt-8">
+              <h2 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#b7c8a8]/80">Research Sources</h2>
+              <div className="grid gap-3">
+                {thesis.sources.map((source) => (
+                  <a
+                    key={source.href}
+                    href={source.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover-target grid gap-2 border border-[#f1efe8]/12 px-4 py-3 text-[10px] uppercase tracking-[0.18em] text-[#f1efe8]/60 transition-colors hover:border-[#b7c8a8]/60 hover:text-[#f1efe8] sm:grid-cols-[1fr_auto]"
+                  >
+                    <span>{source.label}</span>
+                    <span className="text-[#b7c8a8]/70">Source</span>
+                  </a>
+                ))}
+              </div>
+            </section>
+          ) : null}
         </div>
       </article>
 

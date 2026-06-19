@@ -31,6 +31,11 @@
       "destination": "/resume",
       "statusCode": 301
     },
+    {
+      "source": "/resume.pdf",
+      "destination": "/Sulayman_Bowles_Resume.pdf",
+      "statusCode": 301
+    },
     { "source": "/projects/atlas", "destination": "/atlas", "permanent": true },
     { "source": "/void-agency", "destination": "/method", "permanent": true },
     { "source": "/projects/markets", "destination": "/markets", "permanent": true },

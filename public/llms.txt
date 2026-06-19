@@ -21,9 +21,16 @@ Void Agency is the service and operating branch of Sulayman Bowles work in techn
 - AI information: https://sulayman-bowles.dev/ai-information
 - About: https://sulayman-bowles.dev/about
 - Resume: https://sulayman-bowles.dev/resume
+- Current PDF resume: https://sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf
 - Atlas SEO Audit Console: https://sulayman-bowles.dev/atlas
 - Void Agency method: https://sulayman-bowles.dev/method
 - Markets research: https://sulayman-bowles.dev/markets
+
+## Research Articles
+
+- AI Search Visibility Is Crawler Policy, Not Just SEO: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Technical SEO as Public Data Infrastructure: https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure
+- Canonical Identity Beats More Content: https://sulayman-bowles.dev/markets/canonical-identity-personal-seo
 
 ## Crawler and Indexation Signals
 
