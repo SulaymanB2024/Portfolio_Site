@@ -10,6 +10,7 @@ import { ScrollReveal } from './components/ScrollReveal';
 import { ScrollProgress } from './components/ScrollProgress';
 import { MagneticButton } from './components/MagneticButton';
 import { InternalHeader } from './components/InternalHeader';
+import { InternalFooter } from './components/InternalFooter';
 import { KineticTypography } from './components/KineticTypography';
 import { ShutterWipe } from './components/pageTransitions/ShutterWipe';
 import { usePageTransitions } from './hooks/usePageTransitions';
@@ -172,15 +173,16 @@ function SitemapPage() {
   useSEO(route);
 
   return (
-    <main className="relative min-h-screen bg-canvas px-4 py-10 font-sans text-ink md:px-8 xl:px-10">
+    <main className="site-page site-page-light relative min-h-screen bg-canvas font-sans text-ink">
       <Suspense fallback={null}>
         <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
       </Suspense>
-      <div className="relative z-10 mx-auto w-full max-w-[1180px]">
-        <header className="border-b border-ink/14 pb-8">
-          <a href="/" className="text-[10px] uppercase tracking-[0.28em] text-ink/58">
-            Sulayman Bowles
-          </a>
+      <InternalHeader activePath="/sitemap" tone="light" />
+      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 py-14 md:px-8 xl:px-10 xl:py-20">
+        <header className="grid min-h-[52vh] content-end border-b border-ink/14 pb-12">
+          <p className="text-[10px] uppercase tracking-[0.28em] text-ink/58">
+            Sulayman Bowles / Sitemap
+          </p>
           <h1 className="mt-10 font-serif text-[clamp(3rem,10vw,8rem)] italic leading-[0.86] tracking-normal">
             HTML Sitemap
           </h1>
@@ -206,6 +208,7 @@ function SitemapPage() {
             ))}
           </ul>
         </section>
+        <InternalFooter activePath="/sitemap" tone="light" />
       </div>
     </main>
   );

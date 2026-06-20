@@ -78,7 +78,7 @@ function Section({
     <section className="grid gap-8 border-t border-ink/14 py-12 lg:grid-cols-[0.3fr_0.7fr] relative z-10">
       <div>
         <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-ink/45">{label}</p>
-        <h2 className="max-w-sm font-serif text-4xl italic leading-[0.95] tracking-[-0.025em] text-ink">{title}</h2>
+        <h2 className="max-w-sm font-serif text-4xl italic leading-[0.95] tracking-normal text-ink">{title}</h2>
       </div>
       <div>{children}</div>
     </section>
@@ -95,7 +95,7 @@ export default function ResumePage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink antialiased selection:bg-ink selection:text-canvas">
+    <main className="site-page site-page-light relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink antialiased selection:bg-ink selection:text-canvas">
       <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40 print:hidden" />
       <PageTechnicalChrome tone="light" />
       {!prefersReducedMotion && (
@@ -111,12 +111,12 @@ export default function ResumePage() {
         <section className="grid min-h-[72vh] items-end gap-12 pb-14 lg:grid-cols-[0.64fr_0.36fr]">
           <div>
             <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-ink/48">Resume</p>
-            <h1 className="max-w-full font-serif text-[clamp(3.2rem,16vw,12rem)] italic leading-[0.82] tracking-[-0.04em] md:leading-[0.78] md:tracking-[-0.055em]">
+            <h1 className="max-w-full font-serif text-[clamp(3.2rem,16vw,12rem)] italic leading-[0.82] tracking-normal md:leading-[0.78] md:tracking-normal">
               <span className="block sm:inline">Sulayman</span>{' '}
               <span className="block sm:inline">Bowles</span>{' '}
               <span className="block sm:inline">Resume</span>
             </h1>
-            <p className="mt-10 max-w-3xl [overflow-wrap:anywhere] font-serif text-[clamp(1.38rem,6vw,5rem)] italic leading-[1] tracking-normal text-ink/68 md:leading-[0.94] md:tracking-[-0.03em]">
+            <p className="mt-10 max-w-3xl [overflow-wrap:anywhere] font-serif text-[clamp(1.38rem,6vw,5rem)] italic leading-[1] tracking-normal text-ink/68 md:leading-[0.94] md:tracking-normal">
               Technical SEO, Atlas, finance/data research, and product/software execution.
             </p>
           </div>

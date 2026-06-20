@@ -36,14 +36,14 @@ function HeroSection() {
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-12 lg:gap-[72px] items-center py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 relative z-10">
       {/* Left Column: Thesis Info */}
       <div className="space-y-9">
-        <div className="flex items-center justify-between text-[10px] tracking-[0.18em] text-[#f1efe8]/45 uppercase font-mono">
+        <div className="flex items-center justify-between text-[10px] tracking-[0.18em] text-[#f1efe8]/45 uppercase font-sans">
           <span>INVESTMENT RESEARCH</span>
           <span>CASE ARCHIVE</span>
         </div>
 
         <h1
           aria-label="Traditional Cases, Crypto Research, and Market Reasoning"
-          className="font-serif text-[clamp(42px,5.2vw,74px)] leading-[0.98] tracking-[-0.03em] text-[#f1efe8]"
+          className="font-serif text-[clamp(42px,5.2vw,74px)] leading-[0.98] tracking-normal text-[#f1efe8]"
         >
           Traditional Cases,{' '}<br />
           Crypto Research,{' '}<br />
@@ -59,7 +59,7 @@ function HeroSection() {
 
         {/* Focus Areas list */}
         <div className="space-y-2 border-t border-[#f1efe8]/10 pt-6">
-          <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-3 font-mono">Focus Areas</div>
+          <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-3 font-sans">Focus Areas</div>
           <div className="grid grid-cols-2 gap-y-2 gap-x-4">
             {[
               'Public equities',
@@ -68,7 +68,7 @@ function HeroSection() {
               'Token economics',
               'Market structure'
             ].map((focus, i) => (
-              <div key={focus} className="flex items-center gap-2 text-xs text-[#f1efe8]/80 font-mono">
+              <div key={focus} className="flex items-center gap-2 text-xs text-[#f1efe8]/80 font-sans">
                 <span className="text-[#b7c8a8] text-[9px]">0{i + 1}</span>
                 <span>{focus}</span>
               </div>
@@ -79,23 +79,23 @@ function HeroSection() {
         {/* Metadata Row */}
         <div className="grid grid-cols-3 gap-6 border-t border-[#f1efe8]/10 pt-6">
           <div>
-            <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-1.5 font-mono">RESEARCH TYPES</div>
-            <div className="text-xs text-[#f1efe8]/80 font-mono">Equity / Crypto</div>
+            <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-1.5 font-sans">RESEARCH TYPES</div>
+            <div className="text-xs text-[#f1efe8]/80 font-sans">Equity / Crypto</div>
           </div>
           <div>
-            <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-1.5 font-mono">COVERAGE AREAS</div>
-            <div className="text-xs text-[#f1efe8]/80 font-mono">Markets / Protocols</div>
+            <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-1.5 font-sans">COVERAGE AREAS</div>
+            <div className="text-xs text-[#f1efe8]/80 font-sans">Markets / Protocols</div>
           </div>
           <div>
-            <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-1.5 font-mono">OUTPUTS</div>
-            <div className="text-xs text-[#f1efe8]/80 font-mono">Memos / Models / Theses</div>
+            <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-1.5 font-sans">OUTPUTS</div>
+            <div className="text-xs text-[#f1efe8]/80 font-sans">Memos / Models / Theses</div>
           </div>
         </div>
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 pt-2">
           {['EQUITY RESEARCH', 'CRYPTO', 'VALUATION', 'MARKET STRUCTURE', 'TOKENOMICS'].map(tag => (
-            <span key={tag} className="text-[8px] tracking-[0.16em] uppercase font-mono px-2.5 py-1 border border-[#f1efe8]/12 text-[#f1efe8]/60 bg-[#f1efe8]/[0.02]">
+            <span key={tag} className="text-[8px] tracking-[0.16em] uppercase font-sans px-2.5 py-1 border border-[#f1efe8]/12 text-[#f1efe8]/60 bg-[#f1efe8]/[0.02]">
               [{tag}]
             </span>
           ))}
@@ -143,7 +143,7 @@ function ResearchLanes() {
 
   return (
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 relative z-10">
-      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono mb-8">
+      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-sans mb-8">
         RESEARCH LANES
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -162,7 +162,7 @@ function ResearchLanes() {
               {lane.num}
             </div>
             <div>
-              <h4 className="text-xs uppercase tracking-[0.2em] font-mono text-[#f1efe8] mb-3">
+              <h4 className="text-xs uppercase tracking-[0.2em] font-sans text-[#f1efe8] mb-3">
                 {lane.title}
               </h4>
               <p className="text-xs text-[#f1efe8]/54 leading-relaxed font-sans mb-2">
@@ -205,7 +205,7 @@ function FeaturedCases({ onOpenArtifact }: { onOpenArtifact: (id: string) => voi
 
   return (
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
-      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
+      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-sans">
         FEATURED CASES
       </div>
       
@@ -223,13 +223,13 @@ function FeaturedCases({ onOpenArtifact }: { onOpenArtifact: (id: string) => voi
             <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
 
             {/* Standard Header Row */}
-            <div className="flex items-start justify-between text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42 font-mono pt-2">
+            <div className="flex items-start justify-between text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42 font-sans pt-2">
               <span>{c.num}</span>
               <span className={c.id === 'pdf-memo' ? 'text-[#b7c8a8]' : 'text-[#c2695e]'}>{c.tag}</span>
             </div>
 
             <div className="space-y-4 pt-6">
-              <div className="text-[10px] tracking-widest text-[#f1efe8]/40 font-mono uppercase">{c.asset}</div>
+              <div className="text-[10px] tracking-normal text-[#f1efe8]/40 font-sans uppercase">{c.asset}</div>
               <h3 className="font-serif text-2xl lg:text-3xl text-[#f1efe8] leading-tight group-hover:text-[#b7c8a8] transition-colors">
                 {c.title}
               </h3>
@@ -238,18 +238,18 @@ function FeaturedCases({ onOpenArtifact }: { onOpenArtifact: (id: string) => voi
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 border-t border-[#f1efe8]/10 pt-4 mt-6 font-mono text-[9px] text-[#f1efe8]/50 uppercase">
+            <div className="grid grid-cols-2 gap-4 border-t border-[#f1efe8]/10 pt-4 mt-6 font-sans text-[9px] text-[#f1efe8]/50 uppercase">
               <div>
                 <span className="block text-[#f1efe8]/30">Horizon / Status</span>
                 <span className="text-[11px] text-[#f1efe8]/80 font-sans tracking-normal font-medium">{c.horizon}</span>
               </div>
               <div>
                 <span className="block text-[#f1efe8]/30">Core Question</span>
-                <span className="text-[9.5px] text-[#f1efe8]/80 tracking-tight lowercase first-letter:uppercase font-sans font-medium">{c.question}</span>
+                <span className="text-[9.5px] text-[#f1efe8]/80 tracking-normal lowercase first-letter:uppercase font-sans font-medium">{c.question}</span>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 flex items-center justify-between text-[9px] uppercase tracking-wider font-mono text-[#b7c8a8] border-t border-[#f1efe8]/5">
+            <div className="mt-4 pt-3 flex items-center justify-between text-[9px] uppercase tracking-normal font-sans text-[#b7c8a8] border-t border-[#f1efe8]/5">
               <span>{c.cta}</span>
               <span>↗</span>
             </div>
@@ -316,7 +316,7 @@ function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: stri
   return (
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
       <div className="space-y-2">
-        <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
+        <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-sans">
           TRADITIONAL INVESTMENT CASES
         </div>
         <p className="text-xs text-[#f1efe8]/50 font-sans max-w-xl">
@@ -338,7 +338,7 @@ function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: stri
                 onClick={() => setExpandedIndex(isExpanded ? null : idx)}
                 aria-expanded={isExpanded}
                 aria-controls={`trad-case-panel-${idx}`}
-                className="w-full flex items-center justify-between p-5 hover-target text-left font-mono uppercase text-xs tracking-wider"
+                className="w-full flex items-center justify-between p-5 hover-target text-left font-sans uppercase text-xs tracking-normal"
                 data-cursor-text={isExpanded ? 'CLOSE' : 'OPEN'}
               >
                 <div className="flex items-center gap-4">
@@ -365,11 +365,11 @@ function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: stri
                       
                       {/* Column 1: Thesis & Drivers */}
                       <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
-                        <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase">Mispricing Thesis</div>
+                        <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-sans uppercase">Mispricing Thesis</div>
                         <p className="font-serif italic text-sm text-[#f1efe8]/90">{item.thesis}</p>
                         
                         <div className="space-y-2 pt-2">
-                          <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-mono uppercase">Core Drivers</div>
+                          <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-sans uppercase">Core Drivers</div>
                           <ul className="list-disc list-inside space-y-1 text-[#f1efe8]/60 font-sans">
                             {item.drivers.map((drv, i) => (
                               <li key={i} className="pl-1 text-[11.5px]">{drv}</li>
@@ -380,11 +380,11 @@ function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: stri
 
                       {/* Column 2: Evidence */}
                       <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
-                        <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase">Evidence &amp; Analysis</div>
+                        <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-sans uppercase">Evidence &amp; Analysis</div>
                         <ul className="space-y-2.5 font-sans">
                           {item.evidence.map((ev, i) => (
                             <li key={i} className="flex gap-2 items-start">
-                              <span className="text-[#b7c8a8] font-mono text-[9px] mt-0.5">▪</span>
+                              <span className="text-[#b7c8a8] font-sans text-[9px] mt-0.5">▪</span>
                               <span className="text-[11.5px]">{ev}</span>
                             </li>
                           ))}
@@ -393,7 +393,7 @@ function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: stri
 
                       {/* Column 3: Output References */}
                       <div className="space-y-4">
-                        <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase">Research Outputs</div>
+                        <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-sans uppercase">Research Outputs</div>
                         <div className="space-y-2">
                           {item.outputs.map((out, i) => {
                             let targetId = '';
@@ -404,7 +404,7 @@ function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: stri
                               <button 
                                 key={i} 
                                 onClick={() => targetId && onOpenArtifact(targetId)}
-                                className={`w-full border border-[#f1efe8]/12 px-4 py-2.5 flex items-center justify-between text-[10px] tracking-wider uppercase font-mono bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.03] hover:border-[#f1efe8]/30 hover:text-[#b7c8a8] transition-all duration-300 ${targetId ? 'cursor-pointer' : 'cursor-default opacity-60'}`}
+                                className={`w-full border border-[#f1efe8]/12 px-4 py-2.5 flex items-center justify-between text-[10px] tracking-normal uppercase font-sans bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.03] hover:border-[#f1efe8]/30 hover:text-[#b7c8a8] transition-all duration-300 ${targetId ? 'cursor-pointer' : 'cursor-default opacity-60'}`}
                                 data-cursor-text={targetId ? 'PREVIEW' : undefined}
                               >
                                 <span>{out}</span>
@@ -413,7 +413,7 @@ function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: stri
                             );
                           })}
                         </div>
-                        <p className="text-[9px] text-[#f1efe8]/40 font-mono pt-2">
+                        <p className="text-[9px] text-[#f1efe8]/40 font-sans pt-2">
                           SECURE REPOSITORY ACCESS CODE: AUTH.TRAD.04
                         </p>
                       </div>
@@ -474,7 +474,7 @@ function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string
   return (
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
       <div className="space-y-2">
-        <div className="text-[10px] tracking-[0.24em] uppercase text-[#c2695e] font-mono">
+        <div className="text-[10px] tracking-[0.24em] uppercase text-[#c2695e] font-sans">
           CRYPTO RESEARCH
         </div>
         <p className="text-xs text-[#f1efe8]/50 font-sans max-w-xl">
@@ -496,7 +496,7 @@ function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string
                 onClick={() => setExpandedIndex(isExpanded ? null : idx)}
                 aria-expanded={isExpanded}
                 aria-controls={`crypto-case-panel-${idx}`}
-                className="w-full flex items-center justify-between p-5 hover-target text-left font-mono uppercase text-xs tracking-wider"
+                className="w-full flex items-center justify-between p-5 hover-target text-left font-sans uppercase text-xs tracking-normal"
                 data-cursor-text={isExpanded ? 'CLOSE' : 'OPEN'}
               >
                 <div className="flex items-center gap-4">
@@ -523,15 +523,15 @@ function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string
                       
                       {/* Column 1: Thesis & Core Questions */}
                       <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
-                        <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-mono uppercase">Thesis &amp; Economic Value</div>
+                        <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-sans uppercase">Thesis &amp; Economic Value</div>
                         <p className="font-serif italic text-sm text-[#f1efe8]/90">{item.thesis}</p>
                         
                         <div className="space-y-3 pt-2">
-                          <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-mono uppercase font-semibold">Core Questions</div>
+                          <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-sans uppercase font-semibold">Core Questions</div>
                           <div className="space-y-2">
                             {item.questions.map((q, i) => (
                               <div key={i} className="text-[11px] font-sans">
-                                <span className="block font-mono text-[8.5px] text-[#c2695e]/80 uppercase">{q.q}</span>
+                                <span className="block font-sans text-[8.5px] text-[#c2695e]/80 uppercase">{q.q}</span>
                                 <span className="text-[#f1efe8]/70">{q.a}</span>
                               </div>
                             ))}
@@ -541,11 +541,11 @@ function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string
 
                       {/* Column 2: On-Chain Evidence */}
                       <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
-                        <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-mono uppercase">On-Chain Evidence</div>
+                        <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-sans uppercase">On-Chain Evidence</div>
                         <ul className="space-y-2.5 font-sans">
                           {item.evidence.map((ev, i) => (
                             <li key={i} className="flex gap-2 items-start">
-                              <span className="text-[#c2695e] font-mono text-[9px] mt-0.5">▪</span>
+                              <span className="text-[#c2695e] font-sans text-[9px] mt-0.5">▪</span>
                               <span className="text-[11.5px]">{ev}</span>
                             </li>
                           ))}
@@ -554,7 +554,7 @@ function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string
 
                       {/* Column 3: Outputs */}
                       <div className="space-y-4">
-                        <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-mono uppercase">Protocol Artifacts</div>
+                        <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-sans uppercase">Protocol Artifacts</div>
                         <div className="space-y-2">
                           {item.outputs.map((out, i) => {
                             let targetId = '';
@@ -567,7 +567,7 @@ function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string
                               <button 
                                 key={i} 
                                 onClick={() => targetId && onOpenArtifact(targetId)}
-                                className={`w-full border border-[#f1efe8]/12 px-4 py-2.5 flex items-center justify-between text-[10px] tracking-wider uppercase font-mono bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.03] hover:border-[#f1efe8]/30 hover:text-[#c2695e] transition-all duration-300 ${targetId ? 'cursor-pointer' : 'cursor-default opacity-60'}`}
+                                className={`w-full border border-[#f1efe8]/12 px-4 py-2.5 flex items-center justify-between text-[10px] tracking-normal uppercase font-sans bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.03] hover:border-[#f1efe8]/30 hover:text-[#c2695e] transition-all duration-300 ${targetId ? 'cursor-pointer' : 'cursor-default opacity-60'}`}
                                 data-cursor-text={targetId ? 'PREVIEW' : undefined}
                               >
                                 <span>{out}</span>
@@ -576,7 +576,7 @@ function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string
                             );
                           })}
                         </div>
-                        <p className="text-[9px] text-[#f1efe8]/40 font-mono pt-2">
+                        <p className="text-[9px] text-[#f1efe8]/40 font-sans pt-2">
                           SECURE REPOSITORY ACCESS CODE: AUTH.CRYPT.08
                         </p>
                       </div>
@@ -625,7 +625,7 @@ function ResearchProcessSection() {
 
   return (
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
-      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
+      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-sans">
         RESEARCH METHOD
       </div>
 
@@ -636,7 +636,7 @@ function ResearchProcessSection() {
               <span className="text-sm font-serif italic text-[#b7c8a8]">{step.num}</span>
               <div className="h-[1px] bg-[#f1efe8]/10 flex-1 hidden md:block group-last:hidden" />
             </div>
-            <h4 className="text-[10px] uppercase tracking-widest font-mono text-[#f1efe8]">{step.title}</h4>
+            <h4 className="text-[10px] uppercase tracking-normal font-sans text-[#f1efe8]">{step.title}</h4>
             <p className="text-[11px] text-[#f1efe8]/50 leading-relaxed font-sans">{step.desc}</p>
           </div>
         ))}
@@ -650,7 +650,7 @@ function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) =>
   return (
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
       <div className="space-y-2">
-        <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
+        <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-sans">
           RESEARCH MEMOS &amp; ARTICLES
         </div>
         <p className="text-xs text-[#f1efe8]/50 font-sans max-w-xl">
@@ -677,7 +677,7 @@ function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) =>
             <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
 
             <div>
-              <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/42 font-mono pt-2 mb-4">
+              <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/42 font-sans pt-2 mb-4">
                 <span>MEMO 0{thesis.number}</span>
                 <span>{thesis.readTime}</span>
               </div>
@@ -692,7 +692,7 @@ function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) =>
             </div>
 
             <div className="space-y-4 pt-4 border-t border-[#f1efe8]/8">
-              <div className="flex justify-between font-mono text-[9px] uppercase">
+              <div className="flex justify-between font-sans text-[9px] uppercase">
                 <span className="text-[#f1efe8]/30">{primaryMetric.label}</span>
                 <span className="text-[#b7c8a8]">{primaryMetric.value}</span>
               </div>
@@ -700,14 +700,14 @@ function ResearchMemosSection({ onReadThesis }: { onReadThesis: (idx: number) =>
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button
                   onClick={() => onReadThesis(idx)}
-                  className="flex-1 hover-target border border-[#f1efe8]/15 px-3 py-2 text-[9px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/80 hover:text-[#b7c8a8] hover:border-[#b7c8a8] hover:bg-[#f1efe8]/5 transition-all text-center"
+                  className="flex-1 hover-target border border-[#f1efe8]/15 px-3 py-2 text-[9px] uppercase tracking-[0.2em] font-sans text-[#f1efe8]/80 hover:text-[#b7c8a8] hover:border-[#b7c8a8] hover:bg-[#f1efe8]/5 transition-all text-center"
                   data-cursor-text="READ"
                 >
                   READ MEMO
                 </button>
                 <a
                   href={`/markets/${thesis.slug}`}
-                  className="flex-1 hover-target border border-[#f1efe8]/15 px-3 py-2 text-[9px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/60 hover:text-[#f1efe8] hover:border-[#f1efe8]/30 text-center flex items-center justify-center gap-1"
+                  className="flex-1 hover-target border border-[#f1efe8]/15 px-3 py-2 text-[9px] uppercase tracking-[0.2em] font-sans text-[#f1efe8]/60 hover:text-[#f1efe8] hover:border-[#f1efe8]/30 text-center flex items-center justify-center gap-1"
                   data-cursor-text="OPEN"
                 >
                   <span>PAGE</span> <span>↗</span>
@@ -755,7 +755,7 @@ function ArtifactSection({
 
   return (
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
-      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
+      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-sans">
         RESEARCH ARTIFACTS
       </div>
 
@@ -765,7 +765,7 @@ function ArtifactSection({
             key={art.id}
             id={`markets-artifact-btn-${art.id}`}
             onClick={() => setActiveArtifact(art)}
-            className="hover-target border border-[#f1efe8]/12 px-5 py-3 text-[10px] uppercase font-mono tracking-widest text-[#f1efe8]/80 bg-[#f1efe8]/[0.01] hover:border-[#f1efe8]/24 hover:bg-[#f1efe8]/[0.03] transition-all duration-300 relative group"
+            className="hover-target border border-[#f1efe8]/12 px-5 py-3 text-[10px] uppercase font-sans tracking-normal text-[#f1efe8]/80 bg-[#f1efe8]/[0.01] hover:border-[#f1efe8]/24 hover:bg-[#f1efe8]/[0.03] transition-all duration-300 relative group"
             data-cursor-text="PREVIEW"
           >
             {/* Corner marks */}
@@ -802,21 +802,21 @@ function ArtifactSection({
               <div className="absolute -right-1.5 -bottom-1.5 h-3.5 w-3.5 border-r border-b border-[#f1efe8]/30" />
 
               {/* Technical telemetry string headers */}
-              <div className="absolute top-3 left-4 text-[8px] text-[#f1efe8]/20 font-mono tracking-widest">// PREVIEW_TELEMETRY_SYS</div>
-              <div className="absolute bottom-3 right-4 text-[8px] text-[#f1efe8]/20 font-mono tracking-widest">// AUTH_SYS_OK</div>
+              <div className="absolute top-3 left-4 text-[8px] text-[#f1efe8]/20 font-sans tracking-normal">// PREVIEW_TELEMETRY_SYS</div>
+              <div className="absolute bottom-3 right-4 text-[8px] text-[#f1efe8]/20 font-sans tracking-normal">// AUTH_SYS_OK</div>
 
               {/* Close Button */}
               <button 
                 id="artifact-modal-close-btn"
                 onClick={() => setActiveArtifact(null)}
-                className="absolute top-4 right-4 hover-target font-mono text-[9px] uppercase tracking-widest text-[#f1efe8]/40 hover:text-[#f1efe8] transition-colors px-2 py-1 border border-[#f1efe8]/10 bg-[#080807] z-20"
+                className="absolute top-4 right-4 hover-target font-sans text-[9px] uppercase tracking-normal text-[#f1efe8]/40 hover:text-[#f1efe8] transition-colors px-2 py-1 border border-[#f1efe8]/10 bg-[#080807] z-20"
                 data-cursor-text="CLOSE"
               >
                 CLOSE [X]
               </button>
 
               <div className="space-y-4 pt-4">
-                <div className="text-[9px] tracking-[0.24em] text-[#b7c8a8] font-mono uppercase font-semibold">
+                <div className="text-[9px] tracking-[0.24em] text-[#b7c8a8] font-sans uppercase font-semibold">
                   {activeArtifact.tag}
                 </div>
                 
@@ -830,7 +830,7 @@ function ArtifactSection({
               </div>
 
               {/* Metadata Grid */}
-              <div className="grid grid-cols-3 gap-4 border-y border-[#f1efe8]/10 py-4 text-[9px] font-mono uppercase text-[#f1efe8]/50">
+              <div className="grid grid-cols-3 gap-4 border-y border-[#f1efe8]/10 py-4 text-[9px] font-sans uppercase text-[#f1efe8]/50">
                 <div>
                   <span className="block text-[#f1efe8]/30">Published</span>
                   <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.date}</span>
@@ -849,11 +849,11 @@ function ArtifactSection({
               <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 text-xs leading-relaxed">
                 {/* Highlights list */}
                 <div className="space-y-3">
-                  <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase font-semibold">Key Insights</div>
+                  <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-sans uppercase font-semibold">Key Insights</div>
                   <ul className="space-y-2 font-sans text-[#f1efe8]/60">
                     {activeArtifact.highlights.map((hl, idx) => (
                       <li key={idx} className="flex gap-2 items-start">
-                        <span className="text-[#b7c8a8] font-mono text-[9px] mt-0.5">▪</span>
+                        <span className="text-[#b7c8a8] font-sans text-[9px] mt-0.5">▪</span>
                         <span className="text-[11px]">{hl}</span>
                       </li>
                     ))}
@@ -862,10 +862,10 @@ function ArtifactSection({
 
                 {/* Quantitative statistics */}
                 <div className="space-y-3 bg-[#f1efe8]/[0.01] border border-[#f1efe8]/8 p-4">
-                  <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-mono uppercase">Metrics / Models</div>
+                  <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-sans uppercase">Metrics / Models</div>
                   <div className="space-y-2">
                     {activeArtifact.metrics.map((m, idx) => (
-                      <div key={idx} className="flex justify-between font-mono text-[10px] uppercase border-b border-[#f1efe8]/6 pb-1.5 last:border-b-0 last:pb-0">
+                      <div key={idx} className="flex justify-between font-sans text-[10px] uppercase border-b border-[#f1efe8]/6 pb-1.5 last:border-b-0 last:pb-0">
                         <span className="text-[#f1efe8]/45">{m.key}</span>
                         <span className="text-[#f1efe8] font-medium">{m.val}</span>
                       </div>
@@ -876,14 +876,14 @@ function ArtifactSection({
 
               {/* Action area */}
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#f1efe8]/10">
-                <div className="font-mono text-[8px] text-[#f1efe8]/30 tracking-widest">
+                <div className="font-sans text-[8px] text-[#f1efe8]/30 tracking-normal">
                   PUBLIC PREVIEW: FULL FILE NOT BUNDLED
                 </div>
                 
                 <a
                   id="artifact-request-btn"
                   href={`mailto:sulayman.bowles@gmail.com?subject=${encodeURIComponent(`Research artifact request: ${activeArtifact.title}`)}`}
-                  className="hover-target w-full sm:w-auto bg-[#f1efe8] text-[#080807] font-mono text-[10px] font-semibold uppercase tracking-wider px-6 py-2.5 hover:bg-[#f1efe8]/90 transition-colors disabled:opacity-50 text-center"
+                  className="hover-target w-full sm:w-auto bg-[#f1efe8] text-[#080807] font-sans text-[10px] font-semibold uppercase tracking-normal px-6 py-2.5 hover:bg-[#f1efe8]/90 transition-colors disabled:opacity-50 text-center"
                   data-cursor-text="REQUEST"
                 >
                   REQUEST FULL FILE
@@ -904,7 +904,7 @@ function CaseUtilities() {
   };
 
   return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 text-[9.5px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/42 border-b border-[#f1efe8]/12 relative z-10">
+    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 text-[9.5px] uppercase tracking-[0.2em] font-sans text-[#f1efe8]/42 border-b border-[#f1efe8]/12 relative z-10">
       {/* Left: Statement */}
       <div className="flex items-center gap-3">
         <div className="w-5 h-5 rounded-full border border-[#f1efe8]/20 flex items-center justify-center text-[8px] text-[#b7c8a8]">
@@ -1051,7 +1051,7 @@ export default function MarketsPage() {
   };
 
   return (
-    <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased overflow-x-hidden">
+    <main id="top" className="site-page site-page-dark min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased overflow-x-hidden">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
 
@@ -1064,14 +1064,14 @@ export default function MarketsPage() {
 
       {/* Sub-header status banner */}
       <div className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 pt-4 pb-4 border-b border-[#f1efe8]/8 relative z-10">
-        <div className="w-full flex items-center justify-between text-[10px] tracking-[0.18em] uppercase font-mono">
+        <div className="w-full flex items-center justify-between text-[10px] tracking-[0.18em] uppercase font-sans">
           <div className="flex items-center gap-3">
             <HeaderReticle />
-            <span className="text-[#f1efe8]/40">// SYSTEM: INVESTMENT & COMPASS ARCHIVE</span>
+            <span className="text-[#f1efe8]/40">MARKETS RESEARCH</span>
           </div>
           <div className="text-right flex items-center gap-2">
-            <span className="text-[#f1efe8]/42 font-sans text-[8px]">ACTIVE TARGET:</span>
-            <span className="font-serif italic normal-case tracking-tight text-xs text-[#f1efe8] flex items-center gap-1">
+            <span className="text-[#f1efe8]/42 font-sans text-[8px]">RESEARCH QUEUE:</span>
+            <span className="font-serif italic normal-case tracking-normal text-xs text-[#f1efe8] flex items-center gap-1">
               Next: Protocol Research / Equity Memo <span className="font-sans ml-1 text-[10px]">→</span>
             </span>
           </div>

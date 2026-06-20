@@ -27,7 +27,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
   }, []);
 
   return (
-    <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased overflow-x-hidden">
+    <main id="top" className="site-page site-page-dark min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased overflow-x-hidden">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
 
@@ -73,7 +73,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
 
         <div className="max-w-4xl select-text">
           <p className="mb-7 text-[10px] uppercase tracking-[0.36em] text-[#b7c8a8]">{thesis.category}</p>
-          <h1 className="font-serif text-[clamp(3.25rem,8vw,8.5rem)] italic leading-[0.86] tracking-[-0.045em] text-[#f1efe8]">
+          <h1 className="font-serif text-[clamp(3.25rem,8vw,8.5rem)] italic leading-[0.86] tracking-normal text-[#f1efe8]">
             {thesis.title}
           </h1>
           <p className="mt-8 max-w-3xl border-l border-[#f1efe8]/24 pl-5 text-lg italic leading-relaxed text-[#f1efe8]/68">
@@ -116,13 +116,13 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
             <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/20" />
             <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/20" />
 
-            <div className="text-[8.5px] uppercase tracking-[0.24em] text-[#b7c8a8] mb-4 text-center font-mono font-medium">
+            <div className="text-[8.5px] uppercase tracking-[0.24em] text-[#b7c8a8] mb-4 text-center font-sans font-medium">
               {thesis.formulaLabel}
             </div>
-            <div className="flex justify-center items-center py-8 border-y border-[#f1efe8]/8 text-[#f1efe8] text-base md:text-lg overflow-x-auto font-mono select-all bg-[#080807]/30 shadow-inner">
-              <span className="px-4 text-[#f1efe8] filter drop-shadow-[0_0_8px_rgba(241,239,232,0.15)] font-semibold tracking-tight">{thesis.formula}</span>
+            <div className="flex justify-center items-center py-8 border-y border-[#f1efe8]/8 text-[#f1efe8] text-base md:text-lg overflow-x-auto font-sans select-all bg-[#080807]/30 shadow-inner">
+              <span className="px-4 text-[#f1efe8] filter drop-shadow-[0_0_8px_rgba(241,239,232,0.15)] font-semibold tracking-normal">{thesis.formula}</span>
             </div>
-            <div className="mt-4 flex justify-between text-[7.5px] text-[#f1efe8]/34 tracking-[0.18em] font-mono">
+            <div className="mt-4 flex justify-between text-[7.5px] text-[#f1efe8]/34 tracking-[0.18em] font-sans">
               <span>QUANT_ENGINE // MODEL_0{thesis.number}</span>
               <span>COLLATERAL_RATIO // SECULAR_GROWTH</span>
             </div>

@@ -92,11 +92,11 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
             <div className="border-t border-[#f1efe8]/12 pt-6 space-y-4">
               <div>
                 <div className="text-[8px] uppercase tracking-[0.24em] text-[#f1efe8]/42 mb-1">DATE</div>
-                <div className="text-[10px] tracking-[0.16em] font-mono text-[#f1efe8]/80">{data.date}</div>
+                <div className="text-[10px] tracking-[0.16em] font-sans text-[#f1efe8]/80">{data.date}</div>
               </div>
               <div>
                 <div className="text-[8px] uppercase tracking-[0.24em] text-[#f1efe8]/42 mb-1">READ TIME</div>
-                <div className="text-[10px] tracking-[0.16em] font-mono text-[#f1efe8]/80">{data.readTime}</div>
+                <div className="text-[10px] tracking-[0.16em] font-sans text-[#f1efe8]/80">{data.readTime}</div>
               </div>
               <div>
                 <div className="text-[8px] uppercase tracking-[0.24em] text-[#f1efe8]/42 mb-1">AUTHOR</div>
@@ -117,7 +117,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
                 </div>
                 <div className="flex justify-between border-b border-[#f1efe8]/8 pb-2">
                   <span className="text-[#f1efe8]/48">ALLOCATION</span>
-                  <span className="text-[#f1efe8]/80 font-mono">{data.allocation}</span>
+                  <span className="text-[#f1efe8]/80 font-sans">{data.allocation}</span>
                 </div>
               </div>
             </div>
@@ -131,7 +131,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
             </a>
           </div>
 
-          <div className="hidden md:block text-[8px] leading-relaxed text-[#f1efe8]/32 font-mono uppercase tracking-[0.18em] border-t border-[#f1efe8]/12 pt-6">
+          <div className="hidden md:block text-[8px] leading-relaxed text-[#f1efe8]/32 font-sans uppercase tracking-[0.18em] border-t border-[#f1efe8]/12 pt-6">
             VOID PORTFOLIO RESEARCH SYSTEM //
             <br />
             CONFIDENTIAL ACADEMIC MEMORANDUM.
@@ -187,13 +187,13 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
               <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/20" />
               <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/20" />
 
-              <div className="text-[8.5px] uppercase tracking-[0.24em] text-[#b7c8a8] mb-4 text-center font-mono font-medium">
+              <div className="text-[8.5px] uppercase tracking-[0.24em] text-[#b7c8a8] mb-4 text-center font-sans font-medium">
                 {data.formulaLabel}
               </div>
-              <div className="flex justify-center items-center py-8 border-y border-[#f1efe8]/8 text-[#f1efe8] text-base md:text-lg overflow-x-auto font-mono select-all bg-[#080807]/30 shadow-inner">
-                <span className="px-4 text-[#f1efe8] filter drop-shadow-[0_0_8px_rgba(241,239,232,0.15)] font-semibold tracking-tight">{data.formula}</span>
+              <div className="flex justify-center items-center py-8 border-y border-[#f1efe8]/8 text-[#f1efe8] text-base md:text-lg overflow-x-auto font-sans select-all bg-[#080807]/30 shadow-inner">
+                <span className="px-4 text-[#f1efe8] filter drop-shadow-[0_0_8px_rgba(241,239,232,0.15)] font-semibold tracking-normal">{data.formula}</span>
               </div>
-              <div className="mt-4 flex justify-between text-[7.5px] text-[#f1efe8]/34 tracking-[0.18em] font-mono">
+              <div className="mt-4 flex justify-between text-[7.5px] text-[#f1efe8]/34 tracking-[0.18em] font-sans">
                 <span>QUANT_ENGINE // MODEL_0{data.number}</span>
                 <span>COLLATERAL_RATIO // SECULAR_GROWTH</span>
               </div>

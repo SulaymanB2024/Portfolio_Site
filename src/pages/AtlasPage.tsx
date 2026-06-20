@@ -643,10 +643,12 @@ function ConsoleModal({
             <div className="flex items-center justify-between border-b border-[#f1efe8]/12 px-6 py-4 font-mono text-[9px] uppercase tracking-[0.32em] z-10">
               <div className="flex items-center gap-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#f1efe8]/80" />
-                <span id="modal-title" className="font-bold">{title}</span>
+                <h2 id="modal-title" className="m-0 font-mono text-[9px] font-bold uppercase leading-none tracking-[0.32em]">{title}</h2>
               </div>
               <button 
                 id="modal-close-btn"
+                type="button"
+                aria-label="Close console modal"
                 onClick={onClose} 
                 className="hover-target text-[#f1efe8]/50 transition-colors hover:text-[#f1efe8]"
               >
@@ -1215,7 +1217,7 @@ export default function AtlasPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-canvas text-ink selection:bg-ink selection:text-canvas">
+    <main className="site-page site-page-light relative min-h-screen overflow-x-hidden bg-canvas text-ink selection:bg-ink selection:text-canvas">
       <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
       <PageTechnicalChrome tone="light" />
       {!prefersReducedMotion && <div className="hidden md:block">
@@ -1231,11 +1233,11 @@ export default function AtlasPage() {
           <h1 
             style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
             aria-label="Atlas SEO Audit Console"
-            className="font-serif text-[clamp(4.6rem,10vw,10.75rem)] italic leading-[0.82] tracking-[-0.055em]"
+            className="font-serif text-[clamp(4.6rem,10vw,10.75rem)] italic leading-[0.82] tracking-normal"
           >
             Atlas
           </h1>
-          <p className="mt-10 max-w-[25rem] font-serif text-[clamp(2rem,4vw,4.25rem)] italic leading-[0.92] tracking-[-0.025em]">
+          <p className="mt-10 max-w-[25rem] font-serif text-[clamp(2rem,4vw,4.25rem)] italic leading-[0.92] tracking-normal">
             <RevealText text="Crawl-based evidence engine for search." delay={0.25} elementType="span" />
           </p>
           <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">
@@ -1262,7 +1264,7 @@ export default function AtlasPage() {
 
       <section className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-ink/12 px-4 py-16 md:px-8 lg:grid-cols-12 xl:px-10 xl:py-24">
         <ScrollReveal className="border-l border-ink/22 pl-6 lg:col-span-4">
-          <blockquote className="max-w-[420px] font-serif text-[clamp(2rem,3.6vw,4.8rem)] italic leading-[0.95] tracking-[-0.025em]">
+          <blockquote className="max-w-[420px] font-serif text-[clamp(2rem,3.6vw,4.8rem)] italic leading-[0.95] tracking-normal">
             I built Atlas to turn raw crawl data into structured, defensible evidence. Not just what's wrong - but why it matters.
           </blockquote>
         </ScrollReveal>
@@ -1305,7 +1307,7 @@ export default function AtlasPage() {
         <ScrollReveal className="mb-10 grid gap-8 lg:grid-cols-[0.34fr_0.66fr]" yOffset={18} blur={false}>
           <div>
             <div className="mb-5 h-px w-16 bg-ink/45" />
-            <h2 className="font-serif text-[clamp(2.8rem,6.4vw,7.5rem)] italic leading-none tracking-[-0.04em]">
+            <h2 className="font-serif text-[clamp(2.8rem,6.4vw,7.5rem)] italic leading-none tracking-normal">
               What Atlas SEO Audit Console Checks
             </h2>
           </div>
@@ -1335,7 +1337,7 @@ export default function AtlasPage() {
         <ScrollReveal className="mb-10 grid gap-8 lg:grid-cols-[0.36fr_0.64fr]" yOffset={18} blur={false}>
           <div>
             <div className="mb-5 h-px w-16 bg-ink/45" />
-            <h2 className="font-serif text-[clamp(3rem,7vw,8rem)] italic leading-none tracking-[-0.04em]">Atlas evidence model.</h2>
+            <h2 className="font-serif text-[clamp(3rem,7vw,8rem)] italic leading-none tracking-normal">Atlas evidence model.</h2>
           </div>
           <p className="max-w-3xl text-base leading-relaxed text-ink/62">
             This is the canonical software/project page for Atlas. Public screenshots and demo issue rows use example data, but the product description is specific: crawl records, source-page evidence, SQLite persistence, link graph analysis, scoring logic, exports, and dashboards.
@@ -1379,7 +1381,7 @@ export default function AtlasPage() {
           <ScrollReveal className="mb-10 flex flex-col justify-between gap-5 border-b border-ink/18 pb-6 md:flex-row md:items-end" blur={false}>
             <div>
               <div className="mb-5 h-px w-16 bg-ink/45" />
-              <h2 className="font-serif text-[clamp(3rem,7vw,8rem)] italic leading-none tracking-[-0.04em]">EVIDENCE &amp; OUTPUTS</h2>
+              <h2 className="font-serif text-[clamp(3rem,7vw,8rem)] italic leading-none tracking-normal">EVIDENCE &amp; OUTPUTS</h2>
             </div>
             <p className="max-w-md text-sm leading-relaxed text-ink/62">
               Structured artifacts that make crawler observations reviewable, inspectable, and defensible across technical teams.
@@ -1437,7 +1439,7 @@ export default function AtlasPage() {
 
       <section id="next-steps" className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 px-4 py-16 md:px-8 lg:grid-cols-12 xl:px-10 xl:py-24">
         <ScrollReveal className="lg:col-span-4">
-          <h2 className="max-w-[32rem] font-serif text-[clamp(3.5rem,8vw,9rem)] italic leading-[0.84] tracking-[-0.045em]">
+          <h2 className="max-w-[32rem] font-serif text-[clamp(3.5rem,8vw,9rem)] italic leading-[0.84] tracking-normal">
             System intelligence you can act on.
           </h2>
           <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">

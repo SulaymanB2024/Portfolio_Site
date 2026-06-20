@@ -546,7 +546,7 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
         <span className="h-2 w-2 rounded-full border border-[#f1efe8]/32 transition-colors duration-500 group-hover:bg-[#f1efe8]/70" />
       </div>
       <div>
-        <h3 className="max-w-sm font-serif text-4xl italic leading-none tracking-[-0.02em] text-[#f1efe8]">{study.title}</h3>
+        <h3 className="max-w-sm font-serif text-4xl italic leading-none tracking-normal text-[#f1efe8]">{study.title}</h3>
         <p className="mt-6 text-sm leading-relaxed text-[#f1efe8]/58">{study.copy}</p>
       </div>
       <div className="my-9 self-center transition-opacity duration-500 md:opacity-75 md:group-hover:opacity-100">
@@ -570,7 +570,7 @@ export default function VoidAgencyMethodPage() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <main id="top" className="relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
+    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
       {!prefersReducedMotion && <div className="hidden md:block">
@@ -586,7 +586,7 @@ export default function VoidAgencyMethodPage() {
           <h1 
             style={{ viewTransitionName: 'void-title' } as CSSProperties}
             aria-label="Void Agency Method"
-            className="font-serif text-[clamp(5.2rem,12vw,12.4rem)] italic leading-[0.74] tracking-[-0.055em] text-[#f1efe8]"
+            className="font-serif text-[clamp(5.2rem,12vw,12.4rem)] italic leading-[0.74] tracking-normal text-[#f1efe8]"
           >
             Void{' '}
             <br />
@@ -622,7 +622,7 @@ export default function VoidAgencyMethodPage() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.4fr]">
           <ScrollReveal yOffset={18} blur={false}>
             <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/42">OVERVIEW</div>
-            <p className="max-w-[44rem] font-serif text-[clamp(2.8rem,5.4vw,6.2rem)] italic leading-[0.92] tracking-[-0.035em]">
+            <p className="max-w-[44rem] font-serif text-[clamp(2.8rem,5.4vw,6.2rem)] italic leading-[0.92] tracking-normal">
               Search visibility is no longer only about ranking pages. It is about whether Google, AI systems, and customers can understand your site clearly enough to trust it.
             </p>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-[#f1efe8]/58">
@@ -669,7 +669,7 @@ export default function VoidAgencyMethodPage() {
         <ScrollReveal yOffset={18} blur={false} className="mb-10 grid gap-8 lg:grid-cols-[0.4fr_0.6fr]">
           <div>
             <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/45">AI Search Visibility Audit Checklist</h2>
-            <p className="max-w-xl font-serif text-[clamp(2.6rem,5.2vw,6rem)] italic leading-[0.92] tracking-[-0.035em]">
+            <p className="max-w-xl font-serif text-[clamp(2.6rem,5.2vw,6rem)] italic leading-[0.92] tracking-normal">
               Public evidence, crawl access, and entity clarity before claims.
             </p>
           </div>
@@ -700,7 +700,7 @@ export default function VoidAgencyMethodPage() {
         <ScrollReveal yOffset={18} blur={false} className="mb-10 grid gap-8 lg:grid-cols-[0.4fr_0.6fr]">
           <div>
             <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/45">SOURCE-BACKED METHOD</h2>
-            <p className="max-w-xl font-serif text-[clamp(2.6rem,5.2vw,6rem)] italic leading-[0.92] tracking-[-0.035em]">
+            <p className="max-w-xl font-serif text-[clamp(2.6rem,5.2vw,6rem)] italic leading-[0.92] tracking-normal">
               The method starts with pages and crawl evidence, not generic AI language.
             </p>
           </div>
@@ -743,7 +743,7 @@ export default function VoidAgencyMethodPage() {
 
       <section id="case-studies" className="mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-12 flex flex-col justify-between gap-6 border-b border-[#f1efe8]/12 pb-8 md:flex-row md:items-end">
-          <h2 className="font-serif text-[clamp(4rem,8vw,9rem)] italic leading-none tracking-[-0.045em]">VOID IN ACTION</h2>
+          <h2 className="font-serif text-[clamp(4rem,8vw,9rem)] italic leading-none tracking-normal">VOID IN ACTION</h2>
           <span className="text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42">CASE STUDY INDEX</span>
         </ScrollReveal>
 
@@ -761,7 +761,7 @@ export default function VoidAgencyMethodPage() {
       <section className="mx-auto max-w-[1480px] px-4 pb-16 md:px-8 xl:px-10 xl:pb-24">
         <ScrollReveal yOffset={18} blur={false}>
           <div className="grid grid-cols-1 gap-10 border border-[#f1efe8]/16 p-6 md:p-10 lg:grid-cols-[0.52fr_0.28fr_0.2fr] lg:items-center">
-            <h2 className="font-serif text-[clamp(3.2rem,6.4vw,7.5rem)] italic leading-[0.88] tracking-[-0.04em]">
+            <h2 className="font-serif text-[clamp(3.2rem,6.4vw,7.5rem)] italic leading-[0.88] tracking-normal">
               Make your site easier to
               <br />
               crawl, understand, cite,

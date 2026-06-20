@@ -10,7 +10,7 @@ export default function SimplePage() {
   return (
     <main
       id="top"
-      className="relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas"
+      className="site-page site-page-light site-page-book relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas"
     >
       <img
         src="/art/roman-toga/roman-toga-lines.svg"

@@ -30,18 +30,14 @@ import { WireframeGrid } from '../components/WireframeGrid';
 
 const AI_INFORMATION_SEO = getSeoRoute('/ai-information')!;
 
-
-
-
-
 function Section({ number, title, children, id }: { number: string; title: string; children: ReactNode; id?: string }) {
   return (
-    <section id={id} className="grid gap-8 border-t border-ink/14 py-12 lg:grid-cols-[0.28fr_0.72fr] relative z-10">
-      <div>
+    <section id={id} className="relative z-10 grid min-w-0 gap-8 border-t border-ink/14 py-12 lg:grid-cols-[0.28fr_0.72fr]">
+      <div className="min-w-0">
         <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-ink/45">{number}</p>
-        <h2 className="max-w-md font-serif text-4xl italic leading-[0.95] tracking-[-0.02em] text-ink">{title}</h2>
+        <h2 className="max-w-md font-serif text-4xl italic leading-[0.95] tracking-normal text-ink">{title}</h2>
       </div>
-      <div>{children}</div>
+      <div className="min-w-0">{children}</div>
     </section>
   );
 }
@@ -50,7 +46,7 @@ function TextGrid({ items }: { items: string[] }) {
   return (
     <ul className="grid gap-px overflow-hidden border border-ink/14 sm:grid-cols-2">
       {items.map((item) => (
-        <li key={item} className="bg-ink/[0.018] p-5 text-sm leading-relaxed text-ink/68">
+        <li key={item} className="bg-ink/[0.018] p-5 text-sm leading-relaxed text-ink/68 [overflow-wrap:anywhere]">
           {item}
         </li>
       ))}
@@ -68,7 +64,7 @@ export default function AiInformationPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink antialiased selection:bg-ink selection:text-canvas">
+    <main className="site-page site-page-light relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink antialiased selection:bg-ink selection:text-canvas">
       <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40 print:hidden" />
       <PageTechnicalChrome tone="light" />
       {!prefersReducedMotion && (
@@ -84,7 +80,7 @@ export default function AiInformationPage() {
         <section className="grid min-h-[64vh] max-w-full items-end gap-12 pb-14 lg:grid-cols-[0.62fr_0.38fr]">
           <div className="min-w-0">
             <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-ink/48">Public reference</p>
-            <h1 className="max-w-5xl font-serif text-[clamp(2.45rem,10vw,10rem)] italic leading-[0.92] tracking-[-0.02em] md:leading-[0.86] md:tracking-[-0.055em]">
+            <h1 className="max-w-5xl font-serif text-[clamp(2.45rem,10vw,10rem)] italic leading-[0.92] tracking-normal md:leading-[0.86] md:tracking-normal">
               <span className="block sm:inline">AI Information</span>{' '}
               <span className="block sm:inline">for Sulayman</span>{' '}
               <span className="block sm:inline">Bowles, Void</span>{' '}
@@ -186,7 +182,7 @@ export default function AiInformationPage() {
           <p className="mb-5 max-w-3xl text-sm leading-relaxed text-ink/62">
             This map organizes likely follow-up questions around existing evidence pages. It is not a plan to create separate pages for every query variation.
           </p>
-          <div className="overflow-x-auto border border-ink/14">
+          <div className="min-w-0 max-w-full overflow-x-auto border border-ink/14">
             <table className="min-w-[920px] w-full border-collapse text-left text-sm">
               <thead className="bg-ink/[0.035] text-[10px] uppercase tracking-[0.18em] text-ink/55">
                 <tr>

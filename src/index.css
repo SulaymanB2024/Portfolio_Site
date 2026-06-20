@@ -152,6 +152,95 @@ select:focus-visible {
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+.site-page {
+  --page-bg: var(--color-canvas);
+  --page-fg: var(--color-ink);
+  --page-muted: color-mix(in srgb, var(--page-fg) 62%, transparent);
+  --page-border: color-mix(in srgb, var(--page-fg) 14%, transparent);
+  --page-panel: color-mix(in srgb, var(--page-fg) 2%, transparent);
+  background-color: var(--page-bg) !important;
+  color: var(--page-fg) !important;
+  font-family: var(--font-sans);
+}
+
+.site-page-dark {
+  --page-bg: var(--color-ink);
+  --page-fg: var(--color-canvas);
+}
+
+.site-page-light {
+  --page-bg: var(--color-canvas);
+  --page-fg: var(--color-ink);
+}
+
+.site-page :where(h1) {
+  max-width: 14ch;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 3.4rem !important;
+  line-height: 0.9 !important;
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}
+
+.site-page :where(h2.font-serif, h2[class*="font-serif"], blockquote.font-serif, blockquote[class*="font-serif"]) {
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}
+
+.site-page :where(h1, h2, h3, p, a, button, span, li, dt, dd, th, td, label, summary) {
+  letter-spacing: 0 !important;
+}
+
+.site-page :where(.font-mono):not(pre):not(code) {
+  font-family: var(--font-sans) !important;
+}
+
+.site-page :where(section) {
+  border-color: var(--page-border);
+}
+
+.site-page :where(article, aside, table, th, td, a[class*="border"], button[class*="border"], div[class*="border"]) {
+  border-color: var(--page-border);
+  border-radius: var(--radius-panel);
+}
+
+.site-page :where(article, a[class*="bg-"], div[class*="bg-ink/"], div[class*="bg-[#f1efe8]"]) {
+  transition-property: background-color, border-color, color, transform, opacity;
+  transition-duration: 240ms;
+  transition-timing-function: ease;
+}
+
+.site-page :where(a.hover-target:hover, button.hover-target:hover) {
+  outline: 0;
+}
+
+.site-page-book :where(h1) {
+  max-width: 11ch;
+}
+
+.site-page [role="dialog"] h1 {
+  max-width: 100%;
+  font-size: 3rem !important;
+  line-height: 1.05 !important;
+}
+
+@media (min-width: 768px) {
+  .site-page :where(h1) {
+    font-size: 4.25rem !important;
+  }
+
+  .site-page [role="dialog"] h1 {
+    font-size: 3.75rem !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .site-page :where(h1) {
+    font-size: 4.75rem !important;
+  }
+}
+
 @media print {
   @page {
     margin: 1.5cm 2cm;
@@ -207,8 +296,7 @@ a.hover-target:active {
   transition: transform 0.08s ease-out, opacity 0.08s ease-out;
 }
 a.hover-target:active span:not(.absolute) {
-  letter-spacing: 0.35em !important;
-  transition: letter-spacing 0.1s ease-out;
+  transition: opacity 0.1s ease-out;
 }
 a.hover-target:active span.absolute {
   transform: scale(1.45) !important;

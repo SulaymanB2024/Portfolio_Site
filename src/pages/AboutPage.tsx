@@ -325,7 +325,7 @@ function MetaCard({ label, value }: { label: string; value: string }) {
         initial={false}
         animate={{ opacity: isHovered ? 1 : 0.28, y: isHovered ? 0 : 2 }}
         transition={{ duration: 0.3 }}
-        className="font-mono text-[8.5px] uppercase leading-relaxed tracking-[0.16em] text-[#f1efe8]/34 group-hover:text-[#f1efe8]/62 whitespace-pre-line"
+        className="font-sans text-[8.5px] uppercase leading-relaxed tracking-[0.16em] text-[#f1efe8]/34 group-hover:text-[#f1efe8]/62 whitespace-pre-line"
       >
         {subInfos[label]}
       </motion.div>
@@ -338,7 +338,7 @@ export default function AboutPage() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <main id="top" className="relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
+    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
       {!prefersReducedMotion && <div className="hidden md:block">
@@ -353,7 +353,7 @@ export default function AboutPage() {
           <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/45">ABOUT ME</div>
           <h1
             aria-label="I build systems for visibility."
-            className="font-serif text-[clamp(3.8rem,6.4vw,7.1rem)] italic leading-[0.92] tracking-[-0.045em]"
+            className="font-serif text-[clamp(3.8rem,6.4vw,7.1rem)] italic leading-[0.92] tracking-normal"
           >
             <span className="block">I build systems </span>
             <span className="block italic">for visibility.</span>
@@ -481,7 +481,7 @@ export default function AboutPage() {
               whileHover={{ y: -4 }}
               transition={{ duration: 0.35, ease: 'easeOut' }}
             >
-              <div className="mb-5 font-serif text-4xl italic leading-none tracking-[-0.02em] text-[#f1efe8]">{value}</div>
+              <div className="mb-5 font-serif text-4xl italic leading-none tracking-normal text-[#f1efe8]">{value}</div>
               <p className="text-[10px] uppercase leading-relaxed tracking-[0.22em] text-[#f1efe8]/48">{label}</p>
             </motion.div>
           ))}
@@ -491,7 +491,7 @@ export default function AboutPage() {
       <section className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 lg:grid-cols-[0.48fr_0.52fr] xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false}>
           <div className="mb-6 font-serif text-7xl italic leading-none text-[#f1efe8]/32">“</div>
-          <blockquote className="font-serif text-[clamp(3rem,5.8vw,7rem)] italic leading-[0.88] tracking-[-0.04em]">
+          <blockquote className="font-serif text-[clamp(3rem,5.8vw,7rem)] italic leading-[0.88] tracking-normal">
             I build systems where search,
             <br />
             data, and product judgment

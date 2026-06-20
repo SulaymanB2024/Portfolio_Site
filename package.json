@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
+    "audit:style": "node scripts/style-audit.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "verify:seo": "node scripts/verify-ai-search-seo.mjs"
   },
