@@ -735,14 +735,23 @@ function ArtifactSection({
   const containerRef = useFocusTrap(!!activeArtifact);
 
   useEffect(() => {
+    if (activeArtifact) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setActiveArtifact(null);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [setActiveArtifact]);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [activeArtifact, setActiveArtifact]);
 
   return (
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
@@ -890,6 +899,10 @@ function ArtifactSection({
 
 // Case/Memo Utilities Component
 function CaseUtilities() {
+  const copyCurrentUrl = () => {
+    void navigator.clipboard?.writeText(window.location.href).catch(() => undefined);
+  };
+
   return (
     <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 text-[9.5px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/42 border-b border-[#f1efe8]/12 relative z-10">
       {/* Left: Statement */}
@@ -906,7 +919,7 @@ function CaseUtilities() {
         <a href="/markets/network-monopolies" className="hover-target inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-[#f1efe8]" data-cursor-text="READ">MEMO 01</a>
         <a href="/markets/computational-commodity-systems" className="hover-target inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-[#f1efe8]" data-cursor-text="READ">MEMO 02</a>
         <a href="/markets/fiat-horizon" className="hover-target inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-[#f1efe8]" data-cursor-text="READ">MEMO 03</a>
-        <button className="hover-target inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-[#f1efe8]" data-cursor-text="COPY" onClick={() => navigator.clipboard.writeText(window.location.href)}>COPY</button>
+        <button className="hover-target inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-[#f1efe8]" data-cursor-text="COPY" onClick={copyCurrentUrl}>COPY</button>
       </div>
 
       {/* Right: Export */}

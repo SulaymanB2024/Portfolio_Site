@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useEffect } from 'react';
 import { getMarketThesisByIndex } from '../content/marketTheses';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 interface ArticleReaderProps {
   isOpen: boolean;
@@ -10,6 +11,9 @@ interface ArticleReaderProps {
 
 export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleReaderProps) {
   const data = getMarketThesisByIndex(thesisId);
+  const readerRef = useFocusTrap(isOpen);
+  const titleId = `memo-reader-title-${data.slug}`;
+  const subtitleId = `memo-reader-subtitle-${data.slug}`;
 
   useEffect(() => {
     if (isOpen) {
@@ -22,13 +26,26 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      exit={{ opacity: 0, transition: { duration: 0.18 } }}
       className="fixed inset-0 z-50 flex justify-end bg-black/85 backdrop-blur-sm"
     >
       {/* Click outside to close */}
@@ -36,10 +53,15 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
 
       {/* Slide Panel */}
       <motion.div
+        ref={readerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={subtitleId}
         initial={{ x: '100%' }}
         animate={{ x: 0 }}
-        exit={{ x: '100%' }}
-        transition={{ type: 'spring', damping: 25, stiffness: 120 }}
+        exit={{ x: '100%', transition: { duration: 0.24, ease: 'easeInOut' } }}
+        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 flex h-full w-full max-w-4xl flex-col border-l border-[#f1efe8]/12 bg-[#080807] text-[#f1efe8] shadow-2xl md:flex-row"
       >
         {/* Dotted grid texture background */}
@@ -58,7 +80,9 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
             <div className="flex items-center justify-between">
               <span className="text-[10px] uppercase tracking-[0.32em] text-[#f1efe8]/45">MEMO {data.number}</span>
               <button
+                id="memo-reader-close-btn"
                 onClick={onClose}
+                aria-label="Close memo reader"
                 className="hover-target text-[9px] uppercase tracking-[0.25em] text-[#f1efe8]/54 hover:text-[#f1efe8] border border-[#f1efe8]/16 px-2.5 py-1.5 transition-colors bg-[#080807]"
               >
                 [ CLOSE ]
@@ -125,11 +149,11 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
           <article className="max-w-2xl">
             <span className="text-[9.5px] font-medium uppercase tracking-[0.38em] text-[#b7c8a8]">{data.category}</span>
             
-            <h1 className="mt-4 font-serif text-3xl italic leading-[1.12] text-[#f1efe8] md:text-4xl lg:text-5xl">
+            <h1 id={titleId} className="mt-4 font-serif text-3xl italic leading-[1.12] text-[#f1efe8] md:text-4xl lg:text-5xl">
               {data.title}
             </h1>
             
-            <p className="mt-6 text-sm italic leading-relaxed text-[#f1efe8]/64 border-l-2 border-[#f1efe8]/24 pl-4">
+            <p id={subtitleId} className="mt-6 text-sm italic leading-relaxed text-[#f1efe8]/64 border-l-2 border-[#f1efe8]/24 pl-4">
               {data.subtitle}
             </p>
 

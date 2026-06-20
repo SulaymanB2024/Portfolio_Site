@@ -457,7 +457,7 @@ function HomePage() {
              style={{ y: subY }}
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-             transition={{ duration: 1, delay: 2.8 }}
+             transition={{ duration: 0.8, delay: isLoaded ? 0.2 : 0 }}
              className="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-ink/20 pb-8 gap-8 md:gap-0"
            >
 	             <div className="max-w-[34rem]">
