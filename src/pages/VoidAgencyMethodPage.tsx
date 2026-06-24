@@ -5,10 +5,8 @@ import VoidCrawlMap from '../components/VoidCrawlMap';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
-import { SmoothCursor } from '../components/SmoothCursor';
 import { RevealText } from '../components/RevealText';
 import { StaggeredText } from '../components/StaggeredText';
-import { useReducedMotion } from '../hooks/useReducedMotion';
 import { evidenceGroups, sourceMap } from '../content/aiInformation';
 import { aiSearchAuditChecklist } from '../content/evidenceLists';
 import { getSeoRoute } from '../seo/routes';
@@ -128,7 +126,7 @@ const caseStudies: CaseStudy[] = [
 
 function ArrowLink({ children, href = '#', id }: { children: ReactNode; href?: string; id?: string }) {
   return (
-    <a id={id} href={href} data-cursor-text={typeof children === 'string' ? children : 'VIEW'} className="hover-target inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/70 transition-colors hover:text-[#f1efe8]">
+    <a id={id} href={href} className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/70 transition-colors hover:text-[#f1efe8]">
       {children}
       <span aria-hidden="true">↗</span>
     </a>
@@ -140,8 +138,7 @@ function CircleAuditButton({ className = '', id }: { className?: string; id?: st
     <motion.a
       href="/#contact"
       id={id}
-      data-cursor-text="AUDIT"
-      className={`hover-target relative grid h-28 w-28 place-items-center overflow-hidden rounded-full bg-[#f1efe8] text-center text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-[#080807] md:h-32 md:w-32 ${className}`}
+      className={`relative grid h-28 w-28 place-items-center overflow-hidden rounded-full bg-[#f1efe8] text-center text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-[#080807] md:h-32 md:w-32 ${className}`}
       whileHover={{ scale: 1.045 }}
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
@@ -567,15 +564,11 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
 }
 export default function VoidAgencyMethodPage() {
   useSEO(METHOD_SEO);
-  const prefersReducedMotion = useReducedMotion();
 
   return (
     <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
-      {!prefersReducedMotion && <div className="hidden md:block">
-        <SmoothCursor />
-      </div>}
       <ScrollProgress />
 
       <InternalHeader activePath="/method" tone="dark" />
@@ -603,6 +596,8 @@ export default function VoidAgencyMethodPage() {
           <div className="mt-12 flex flex-wrap items-center gap-8">
             <CircleAuditButton id="method-hero-audit-btn" />
             <ArrowLink id="method-hero-cases-btn" href="#case-studies">VIEW CASE STUDIES</ArrowLink>
+            <ArrowLink id="method-hero-sample-crawl-btn" href="/atlas/sample-crawl">SEE SAMPLE CRAWL</ArrowLink>
+            <ArrowLink id="method-hero-void-proof-btn" href="/void-agency">VOID AGENCY PROOF</ArrowLink>
           </div>
         </ScrollReveal>
 
@@ -684,7 +679,7 @@ export default function VoidAgencyMethodPage() {
               <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
                 <a
                   href={item.href}
-                  className="hover-target block min-h-[180px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
+                  className="block min-h-[180px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
                 >
                   <p className="mb-7 text-[10px] uppercase tracking-[0.24em] text-inherit opacity-40">{String(index + 1).padStart(2, '0')}</p>
                   <h3 className="mb-4 text-xs uppercase tracking-[0.22em] text-inherit">{item.label}</h3>
@@ -731,7 +726,7 @@ export default function VoidAgencyMethodPage() {
                 href={source.href}
                 target={source.href.startsWith('http') ? '_blank' : undefined}
                 rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
-                className="hover-target border border-[#f1efe8]/14 p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
+                className="border border-[#f1efe8]/14 p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
               >
                 <p className="mb-4 text-[10px] uppercase tracking-[0.22em] text-inherit opacity-60">{source.role}</p>
                 <h3 className="mb-4 text-xs uppercase tracking-[0.24em] text-inherit">{source.label}</h3>

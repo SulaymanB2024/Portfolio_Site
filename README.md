@@ -5,19 +5,25 @@ A Vite React portfolio and agency/research site for Sulayman Bowles. The app kee
 ## Routes
 
 - `/`
+- `/work`
 - `/atlas`
+- `/atlas/sample-crawl`
 - `/simple`
 - `/markets`
 - `/method`
+- `/void-agency`
+- `/austin-technical-seo`
+- `/case-studies/technical-seo-audit`
 - `/about`
 - `/resume`
+- `/contact`
 - `/ai-information`
 - `/sitemap`
 - `/markets/network-monopolies`
 - `/markets/computational-commodity-systems`
 - `/markets/fiat-horizon`
 
-Aliases such as `/projects/atlas`, `/void-agency`, `/projects/markets`, `/book`, `/plain`, `/text`, `/cv`, and `/resume.html` redirect or normalize to their canonical routes.
+Aliases such as `/projects/atlas`, `/atlas/sample-run`, `/projects/markets`, `/audit-intake`, `/austin-seo`, `/technical-seo-case-study`, `/book`, `/plain`, `/text`, `/cv`, and `/resume.html` redirect or normalize to their canonical routes.
 
 ## Local Development
 

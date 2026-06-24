@@ -83,7 +83,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
                 id="memo-reader-close-btn"
                 onClick={onClose}
                 aria-label="Close memo reader"
-                className="hover-target text-[9px] uppercase tracking-[0.25em] text-[#f1efe8]/54 hover:text-[#f1efe8] border border-[#f1efe8]/16 px-2.5 py-1.5 transition-colors bg-[#080807]"
+                className="text-[9px] uppercase tracking-[0.25em] text-[#f1efe8]/54 hover:text-[#f1efe8] border border-[#f1efe8]/16 px-2.5 py-1.5 transition-colors bg-[#080807]"
               >
                 [ CLOSE ]
               </button>
@@ -124,8 +124,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
 
             <a
               href={`/markets/${data.slug}`}
-              className="hover-target inline-flex w-fit border border-[#f1efe8]/16 px-3 py-2 text-[9px] uppercase tracking-[0.22em] text-[#f1efe8]/62 transition-colors hover:border-[#f1efe8]/36 hover:text-[#f1efe8]"
-              data-cursor-text="OPEN"
+              className="inline-flex w-fit border border-[#f1efe8]/16 px-3 py-2 text-[9px] uppercase tracking-[0.22em] text-[#f1efe8]/62 transition-colors hover:border-[#f1efe8]/36 hover:text-[#f1efe8]"
             >
               Open canonical page
             </a>

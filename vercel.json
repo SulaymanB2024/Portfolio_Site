@@ -37,8 +37,11 @@
       "statusCode": 301
     },
     { "source": "/projects/atlas", "destination": "/atlas", "permanent": true },
-    { "source": "/void-agency", "destination": "/method", "permanent": true },
     { "source": "/projects/markets", "destination": "/markets", "permanent": true },
+    { "source": "/atlas/sample-run", "destination": "/atlas/sample-crawl", "permanent": true },
+    { "source": "/audit-intake", "destination": "/contact", "permanent": true },
+    { "source": "/austin-seo", "destination": "/austin-technical-seo", "permanent": true },
+    { "source": "/technical-seo-case-study", "destination": "/case-studies/technical-seo-audit", "permanent": true },
     { "source": "/book", "destination": "/simple", "permanent": true },
     { "source": "/plain", "destination": "/simple", "permanent": true },
     { "source": "/text", "destination": "/simple", "permanent": true },

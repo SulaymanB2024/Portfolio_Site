@@ -1,12 +1,22 @@
 import {
   AI_INFORMATION_STATIC_HTML,
-  canonicalDescriptions,
   evidenceGroups,
   identityReconciliation,
   sourceMap,
 } from '../content/aiInformation';
 import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
 import { MARKET_THESES } from '../content/marketTheses';
+import {
+  appianAssumptionRows,
+  atlasSampleFindings,
+  atlasSampleRows,
+  auditCaseStudySteps,
+  austinSeoSignals,
+  contextualProofLinks,
+  RESEARCH_ASSETS,
+  voidAgencyProofLinks,
+  workProofCards,
+} from '../content/seoExpansion';
 import { SIMPLE_BOOK_CHAPTERS, SIMPLE_BOOK_LINKS } from '../content/simpleBook';
 import { primaryNav, utilityNav } from '../content/siteNavigation';
 import type { SeoRoute } from './routes';
@@ -138,10 +148,48 @@ function linkList(items: LinkItem[]) {
     .join('')}</ul>`;
 }
 
-function identityReconciliationStaticHtml() {
-  return `<h2>${escapeHtml(identityReconciliation.title)}</h2>
+function proofLinkCards(items: Array<{ label: string; href: string; description?: string }>) {
+  return items
+    .map(
+      (item) =>
+        `<h3><a href="${item.href}">${escapeHtml(item.label)}</a></h3><p>${escapeHtml(item.description ?? '')}</p>`,
+    )
+    .join('\n        ');
+}
+
+function historicalSourceContextStaticHtml() {
+  return `<h2>Historical Source Context</h2>
         <p>${escapeHtml(identityReconciliation.copy)}</p>
+        <p><a href="/ai-information#identity-reconciliation">Read the full identity reconciliation on the AI Information page</a>.</p>
         ${linkList(identityReconciliation.links)}`;
+}
+
+function atlasSampleTableStaticHtml() {
+  return `<table>
+          <thead><tr><th>URL</th><th>Status</th><th>Indexability</th><th>Depth</th><th>Inlinks</th><th>Outlinks</th><th>Canonical</th><th>Issue</th><th>Evidence note</th></tr></thead>
+          <tbody>
+          ${atlasSampleRows
+            .map(
+              (row) =>
+                `<tr><td>${escapeHtml(row.url)}</td><td>${escapeHtml(row.status)}</td><td>${escapeHtml(row.indexability)}</td><td>${escapeHtml(row.depth)}</td><td>${escapeHtml(row.inlinks)}</td><td>${escapeHtml(row.outlinks)}</td><td>${escapeHtml(row.canonical)}</td><td>${escapeHtml(row.issue)}</td><td>${escapeHtml(row.note)}</td></tr>`,
+            )
+            .join('\n          ')}
+          </tbody>
+        </table>`;
+}
+
+function appianAssumptionTableStaticHtml() {
+  return `<table>
+          <thead><tr><th>Category</th><th>Variable</th><th>Base case</th><th>Downside case</th><th>Boundary</th></tr></thead>
+          <tbody>
+          ${appianAssumptionRows
+            .map(
+              (row) =>
+                `<tr><td>${escapeHtml(row.category)}</td><td>${escapeHtml(row.variable)}</td><td>${escapeHtml(row.baseCase)}</td><td>${escapeHtml(row.downsideCase)}</td><td>${escapeHtml(row.boundary)}</td></tr>`,
+            )
+            .join('\n          ')}
+          </tbody>
+        </table>`;
 }
 
 function articleShell(title: string, intro: string, body: string) {
@@ -177,9 +225,27 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <ul><li>Crawl before claims</li><li>Structure before scale</li><li>Evidence before polish</li></ul>
         <h2>Disciplines</h2>
         ${definitionCards(homeDisciplines)}
-        <h2>Canonical Descriptions</h2>
-        ${objectDefinitionCards(canonicalDescriptions)}
-        <h2>Internal Links</h2>
+        <h2>Contextual Proof Links</h2>
+        ${proofLinkCards(contextualProofLinks)}
+        <h2>Public Routes</h2>
+        ${linkList(primaryLinks)}`,
+    );
+  }
+
+  if (route.path === '/work') {
+    return articleShell(
+      'Selected Work',
+      'Public work surfaces across Atlas crawl evidence, technical SEO method, sanitized case-study logic, and finance/data artifacts.',
+      `<h2>Work Index</h2>
+        ${workProofCards
+          .map(
+            (item) =>
+              `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.copy)}</p><p><a href="${item.ctaHref}">${escapeHtml(item.cta)}</a></p>`,
+          )
+          .join('\n        ')}
+        <h2>Contextual Proof Links</h2>
+        ${proofLinkCards(contextualProofLinks)}
+        <h2>Public Routes</h2>
         ${linkList(primaryLinks)}`,
     );
   }
@@ -206,15 +272,37 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${evidenceGroupCards()}
         <h2>Source Links</h2>
         ${linkList([
+          { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl', description: 'Sanitized URL-level crawl evidence and CSV download.' },
           { label: 'GitHub profile', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
-          { label: 'SEO audit and scraper-related repository', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', description: 'Public scraper/audit code evidence.' },
+          { label: 'View the GitHub repo for the audit CLI', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', description: 'Public scraper/audit code evidence.' },
           { label: 'AI Information', href: '/ai-information', description: 'Canonical entity and source page.' },
-          { label: 'Void Agency Method', href: '/method', description: 'Service/process context.' },
+          { label: 'Read the technical SEO audit method', href: '/method', description: 'Service/process context.' },
+          { label: 'Request an audit', href: '/contact', description: 'Technical SEO and AI-search visibility intake.' },
         ])}
         <h2>System Intelligence You Can Act On</h2>
         <p>Atlas turns complexity into inspectable evidence so operators can decide what matters, what should be fixed, and what source data supports the recommendation.</p>
         <h2>Internal Links</h2>
         ${linkList(primaryLinks)}`,
+    );
+  }
+
+  if (route.path === '/atlas/sample-crawl') {
+    return articleShell(
+      'Atlas Sample Crawl Run',
+      'Sanitized crawl evidence showing URL status, indexability, link counts, canonical state, issue labels, and notes.',
+      `<p>This sample is sanitized/demo data. It supports the public method explanation without identifying a private client or claiming live rankings, traffic movement, revenue impact, or AI-search citations.</p>
+        <h2>Downloadable Source Table</h2>
+        ${linkList([{ label: 'Download sanitized crawl CSV', href: RESEARCH_ASSETS.atlasSampleCsv, description: 'URL-level Atlas sample data.' }])}
+        <h2>What the Sample Proves</h2>
+        <ul>${atlasSampleFindings.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        <h2>Sample Rows</h2>
+        ${atlasSampleTableStaticHtml()}
+        <h2>Contextual Links</h2>
+        ${linkList([
+          { label: 'Read the technical SEO audit method', href: '/method' },
+          { label: 'View the GitHub repo for the audit CLI', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-' },
+          { label: 'Request an audit', href: '/contact' },
+        ])}`,
     );
   }
 
@@ -245,8 +333,90 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           ['Analytics Review', 'Google Search Console, GA4, query buckets, landing pages, search intent, and page-level recommendations where access is available.'],
           ['Source Map', 'Personal site, GitHub, Void Agency, LinkedIn, UT/McCombs context, Atlas, Markets Research, and the HTML resume.'],
         ])}
-        <h2>Internal Links</h2>
-        ${linkList(primaryLinks)}`,
+        <h2>Contextual Links</h2>
+        ${linkList([
+          { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl', description: 'Sanitized crawl evidence used as a public proof artifact.' },
+          { label: 'View Void Agency proof', href: '/void-agency', description: 'Organization/source page for Void Agency.' },
+          { label: 'Request an audit', href: '/contact', description: 'Audit intake route.' },
+          ...primaryLinks,
+        ])}`,
+    );
+  }
+
+  if (route.path === '/void-agency') {
+    return articleShell(
+      'Void Agency',
+      'Organization proof page for the technical SEO and AI-search visibility service branch.',
+      `<p>Void Agency is the service branch connected to Sulayman Bowles work in technical SEO, AI-search visibility, crawlability, indexation diagnostics, structured content, analytics review, and evidence-backed web audits.</p>
+        <h2>Source-Backed Links</h2>
+        ${voidAgencyProofLinks
+          .map(
+            (link) =>
+              `<h3><a href="${link.href}">${escapeHtml(link.label)}</a></h3><p>${escapeHtml(link.role)}: ${escapeHtml(link.copy)}</p>`,
+          )
+          .join('\n        ')}
+        <h2>Route Roles</h2>
+        <p>/void-agency is the organization proof page. /method is the technical SEO audit process page.</p>
+        <h2>Contextual Links</h2>
+        ${linkList([
+          { label: 'Read the technical SEO audit method', href: '/method' },
+          { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl' },
+          { label: 'Request an audit', href: '/contact' },
+        ])}`,
+    );
+  }
+
+  if (route.path === '/contact') {
+    return articleShell(
+      'Request a Technical SEO Audit',
+      'Technical SEO, AI-search visibility, crawl evidence, indexation, internal-link, structured-data, analytics, and finance/data research intake.',
+      `<p>Use this route for technical SEO, AI-search visibility, crawl evidence, indexation, internal-link, structured-data, analytics, or finance/data research requests.</p>
+        <h2>Before You Send</h2>
+        ${proofLinkCards(contextualProofLinks.slice(0, 3))}
+        <h2>Direct Contact</h2>
+        ${linkList([
+          { label: 'Email Sulayman Bowles', href: 'mailto:sulayman.bowles@gmail.com', description: 'Direct contact path if the form is unavailable.' },
+          { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl' },
+          { label: 'Read the technical SEO audit method', href: '/method' },
+        ])}`,
+    );
+  }
+
+  if (route.path === '/austin-technical-seo') {
+    return articleShell(
+      'Austin Technical SEO',
+      'Local service-intent page for Austin technical SEO and AI-search visibility work.',
+      `<p>Austin teams can use this page to evaluate crawlability, indexation, structured data, source clarity, and implementation evidence before broader content or growth work.</p>
+        <h2>What Gets Checked</h2>
+        <ul>${austinSeoSignals.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        <h2>Claim Boundary</h2>
+        <p>This page does not claim local rankings, private traffic movement, revenue impact, or AI citations. Analytics and Search Console data are used only when access is available.</p>
+        <h2>Contextual Links</h2>
+        ${linkList([
+          { label: 'Request an audit', href: '/contact' },
+          { label: 'Read the technical SEO audit method', href: '/method' },
+          { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl' },
+          { label: 'View Void Agency proof', href: '/void-agency' },
+        ])}`,
+    );
+  }
+
+  if (route.path === '/case-studies/technical-seo-audit') {
+    return articleShell(
+      'Technical SEO Audit Case Study',
+      'A sanitized technical SEO case-study frame for turning crawl evidence into implementation work.',
+      `<p>This case study describes a public method and sample artifacts. It does not expose private client records or claim private traffic movement, rankings, revenue impact, or AI-search citation gains.</p>
+        <h2>Case Study Steps</h2>
+        ${definitionCards(auditCaseStudySteps.map((step) => [step.title, step.copy]))}
+        <h2>Evidence Chain</h2>
+        ${definitionCards([
+          ['Observed field', 'Status code, crawl depth, inlinks, outlinks, canonical state, and indexability.'],
+          ['Interpreted risk', 'Duplicate templates, weak hub copy, missing canonical targets, soft-404 risk, or crawl-depth waste.'],
+          ['Implementation action', 'Repair canonicals, strengthen internal links, consolidate pages, update templates, and document ownership.'],
+          ['Review artifact', 'Sanitized CSV, issue list, method page, source graph, and intake path for next review.'],
+        ])}
+        <h2>Contextual Links</h2>
+        ${proofLinkCards(contextualProofLinks)}`,
     );
   }
 
@@ -284,13 +454,13 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'About Sulayman Bowles',
       'Technical SEO, Atlas, and finance/data research.',
       `<p>Sulayman Bowles is a UT Austin McCombs student, founder of Void Agency, and builder of Atlas, technical SEO systems, AI-search workflows, and finance/data research artifacts.</p>
-        ${identityReconciliationStaticHtml()}
         <h2>Principles</h2>
         <p>Evidence before interpretation. Crawl before claims. Structure before scale.</p>
         <h2>Experience</h2>
         ${definitionCards(aboutExperience)}
         <h2>Work Areas</h2>
         ${definitionCards(homeDisciplines)}
+        ${historicalSourceContextStaticHtml()}
         <h2>Public Source Graph</h2>
         ${sourceMapCards(14)}
         <h2>Internal Links</h2>
@@ -311,9 +481,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
 
   if (route.path === '/markets') {
     return articleShell(
-      'Markets Research',
-      'Investment cases, valuation logic, crypto research, market systems, and finance/data reasoning.',
-      `<p>Markets Research is a finance and data archive covering traditional investment cases, crypto research, valuation logic, market systems, and decision frameworks.</p>
+      'Separate Signal from Noise',
+      'Evidence-driven research across markets, crypto, and investment strategy.',
+      `<p>Markets Research separates signal from noise through traditional investment cases, crypto research, valuation logic, market systems, and decision frameworks.</p>
         <h2>Research Lanes</h2>
         <h3>Traditional Cases</h3><p>Equity research, operating models, valuation memos, and business-quality analysis.</p>
         <h3>Crypto Protocols</h3><p>Protocol mechanics, incentive design, token economics, and decentralized infrastructure research.</p>
@@ -321,6 +491,13 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h3>Models and Tools</h3><p>Financial spreadsheets, assumptions tables, dashboards, and analytical workflows.</p>
         <h2>Research Notes</h2>
         ${MARKET_THESES.map((thesis) => `<h3><a href="/markets/${thesis.slug}">${escapeHtml(thesis.title)}</a></h3><p>${escapeHtml(thesis.subtitle)}</p>`).join('\n        ')}
+        <h2 id="appian-assumptions">Finance/Data Memo With Assumptions</h2>
+        <p>The Appian materials are educational research samples. They are not investment advice, a price target, or a live market recommendation.</p>
+        ${linkList([
+          { label: 'Read the finance/data memo with assumptions', href: RESEARCH_ASSETS.appianMemoPdf, description: 'Educational Appian research memo PDF.' },
+          { label: 'Download the Appian assumptions table', href: RESEARCH_ASSETS.appianAssumptionsCsv, description: 'CSV source table for the research assumptions.' },
+        ])}
+        ${appianAssumptionTableStaticHtml()}
         <h2>How This Supports the Main Thesis</h2>
         <p>Markets Research is included because it shows finance/data judgment: assumptions, risk vectors, valuation logic, and decision frameworks. It should be read as evidence of analytical method, not as unrelated content.</p>
         <h2>Internal Links</h2>

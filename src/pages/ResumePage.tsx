@@ -1,8 +1,6 @@
 import { useEffect, type Key, type ReactNode } from 'react';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
-import { SmoothCursor } from '../components/SmoothCursor';
-import { useReducedMotion } from '../hooks/useReducedMotion';
 import { sourceMap } from '../content/aiInformation';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
@@ -86,8 +84,6 @@ function Section({
 }
 
 export default function ResumePage() {
-  const prefersReducedMotion = useReducedMotion();
-
   useSEO(RESUME_SEO);
 
   useEffect(() => {
@@ -98,11 +94,6 @@ export default function ResumePage() {
     <main className="site-page site-page-light relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink antialiased selection:bg-ink selection:text-canvas">
       <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40 print:hidden" />
       <PageTechnicalChrome tone="light" />
-      {!prefersReducedMotion && (
-        <div className="hidden md:block">
-          <SmoothCursor />
-        </div>
-      )}
       <ScrollProgress tone="dark" />
 
       <InternalHeader activePath="/resume" tone="light" />
@@ -126,21 +117,21 @@ export default function ResumePage() {
               UT Austin McCombs student and Void Agency founder building Atlas, technical SEO audit workflows, research notes, and inspectable web interfaces.
             </p>
             <div className="mt-8 grid min-w-0 gap-3 break-words text-[10px] uppercase tracking-[0.14em] [overflow-wrap:anywhere] sm:tracking-[0.22em]">
-              <a href="mailto:sulayman.bowles@gmail.com" className="hover-target min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
+              <a href="mailto:sulayman.bowles@gmail.com" className="min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
                 sulayman.bowles@gmail.com
               </a>
-              <a href="https://github.com/SulaymanB2024" target="_blank" rel="noreferrer" className="hover-target min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
+              <a href="https://github.com/SulaymanB2024" target="_blank" rel="noreferrer" className="min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
                 GitHub
               </a>
-              <a href="https://www.linkedin.com/in/sulayman-bowles/" target="_blank" rel="noreferrer" className="hover-target min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
+              <a href="https://www.linkedin.com/in/sulayman-bowles/" target="_blank" rel="noreferrer" className="min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
                 LinkedIn
               </a>
-              <a href={RESUME_PDF_PATH} className="hover-target min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
+              <a href={RESUME_PDF_PATH} className="min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
                 Download PDF Resume
               </a>
               <button 
                 onClick={() => window.print()}
-                className="hover-target text-left min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas flex items-center justify-between font-sans text-[10px] uppercase tracking-[0.14em] sm:tracking-[0.22em] font-medium cursor-pointer"
+                className="text-left min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas flex items-center justify-between font-sans text-[10px] uppercase tracking-[0.14em] sm:tracking-[0.22em] font-medium cursor-pointer"
               >
                 <span>Print / Save PDF Resume</span>
                 <span className="text-xs">⤓</span>
@@ -200,7 +191,7 @@ export default function ResumePage() {
                 href={link.href}
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                className="hover-target grid gap-3 border border-ink/14 px-5 py-4 text-[10px] uppercase tracking-[0.22em] text-ink/68 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[1fr_auto]"
+                className="grid gap-3 border border-ink/14 px-5 py-4 text-[10px] uppercase tracking-[0.22em] text-ink/68 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[1fr_auto]"
               >
                 <span>{link.label}</span>
                 <span className="text-inherit opacity-60">{link.meta}</span>
@@ -240,7 +231,7 @@ export default function ResumePage() {
                   href={source.href}
                   target={source.href.startsWith('http') ? '_blank' : undefined}
                   rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="hover-target grid gap-3 border border-ink/14 px-5 py-4 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[0.28fr_0.28fr_0.44fr]"
+                  className="grid gap-3 border border-ink/14 px-5 py-4 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[0.28fr_0.28fr_0.44fr]"
                 >
                   <span className="text-[10px] uppercase tracking-[0.22em] text-inherit opacity-60">{source.role}</span>
                   <span className="text-[10px] uppercase tracking-[0.22em] text-inherit">{source.label}</span>

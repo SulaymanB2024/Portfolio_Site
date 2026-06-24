@@ -1,8 +1,6 @@
 import { type ReactNode, useEffect } from 'react';
 import { getMarketThesisBySlug } from '../content/marketTheses';
 import { ScrollProgress } from '../components/ScrollProgress';
-import { SmoothCursor } from '../components/SmoothCursor';
-import { useReducedMotion } from '../hooks/useReducedMotion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
@@ -11,7 +9,6 @@ import { InternalFooter } from '../components/InternalFooter';
 import { WireframeGrid } from '../components/WireframeGrid';
 
 export default function MarketArticlePage({ slug }: { slug: string }) {
-  const prefersReducedMotion = useReducedMotion();
   const thesis = getMarketThesisBySlug(slug) ?? getMarketThesisBySlug('network-monopolies')!;
   const route = getSeoRoute(`/markets/${thesis.slug}`) ?? getSeoRoute('/markets')!;
   const metrics = thesis.metrics ?? [
@@ -37,18 +34,13 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
       <div className="absolute left-4 bottom-4 h-4 w-4 border-l border-b border-[#f1efe8]/30 pointer-events-none z-20" />
       <div className="absolute right-4 bottom-4 h-4 w-4 border-r border-b border-[#f1efe8]/30 pointer-events-none z-20" />
 
-      {!prefersReducedMotion && (
-        <div className="hidden md:block">
-          <SmoothCursor />
-        </div>
-      )}
       <ScrollProgress />
 
       <InternalHeader activePath="/markets" tone="dark" />
 
       <article className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 px-4 py-16 md:px-8 lg:grid-cols-[0.32fr_0.68fr] xl:px-10 xl:py-24">
         <aside className="space-y-8 border-b border-[#f1efe8]/12 pb-10 text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/54 lg:border-b-0 lg:border-r lg:pr-8">
-          <a href="/markets" className="hover-target inline-flex items-center gap-2 text-[#b7c8a8] hover:text-[#f1efe8] transition-colors" data-cursor-text="BACK">
+          <a href="/markets" className="inline-flex items-center gap-2 text-[#b7c8a8] hover:text-[#f1efe8] transition-colors">
             <span>←</span> <span>Back to Markets</span>
           </a>
           <dl className="grid gap-5 pt-4">
@@ -143,7 +135,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
                     href={source.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="hover-target grid gap-2 border border-[#f1efe8]/12 px-4 py-3 text-[10px] uppercase tracking-[0.18em] text-[#f1efe8]/60 transition-colors hover:border-[#b7c8a8]/60 hover:text-[#f1efe8] sm:grid-cols-[1fr_auto]"
+                    className="grid gap-2 border border-[#f1efe8]/12 px-4 py-3 text-[10px] uppercase tracking-[0.18em] text-[#f1efe8]/60 transition-colors hover:border-[#b7c8a8]/60 hover:text-[#f1efe8] sm:grid-cols-[1fr_auto]"
                   >
                     <span>{source.label}</span>
                     <span className="text-[#b7c8a8]/70">Source</span>

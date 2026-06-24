@@ -5,3 +5,21 @@ coverage/
 .DS_Store
 *.log
 .env*
+
+# Local test, browser, and service artifacts
+output/
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+screenshots/
+videos/
+traces/
+downloads/
+artifacts/
+*.trace
+*.trace.zip
+*.har
+*.webm
+*.mp4
+*.zip

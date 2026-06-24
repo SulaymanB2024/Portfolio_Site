@@ -42,6 +42,7 @@ function buildHead(route: SeoRoute, assetTags: string) {
   const canonicalUrl = absoluteUrl(route.path);
   const imageUrl = absoluteUrl(route.image ?? DEFAULT_OG_IMAGE);
   const ogType = route.pageType === 'article' ? 'article' : 'website';
+  const robots = route.noindex || !route.includeInSitemap ? 'noindex,nofollow' : 'index,follow';
 
   const staticFallbackScript =
     "document.documentElement.classList.add('js');document.addEventListener('DOMContentLoaded',function(){document.getElementById('seo-static-summary')?.remove();});";
@@ -58,7 +59,7 @@ function buildHead(route: SeoRoute, assetTags: string) {
     <title>${escapeHtml(route.title)}</title>
     <meta name="description" content="${escapeHtml(route.description)}" />
     <link rel="canonical" href="${canonicalUrl}" />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content="${robots}" />
     <meta property="og:site_name" content="${escapeHtml(SITE_NAME)}" />
     <meta property="og:title" content="${escapeHtml(route.title)}" />
     <meta property="og:description" content="${escapeHtml(route.description)}" />
@@ -123,6 +124,26 @@ function buildHead(route: SeoRoute, assetTags: string) {
       }
       #seo-static-summary a {
         color: inherit;
+      }
+      #seo-static-summary table {
+        width: 100%;
+        margin: 1rem 0 2rem;
+        border-collapse: collapse;
+        font-size: 0.78rem;
+        line-height: 1.5;
+      }
+      #seo-static-summary th,
+      #seo-static-summary td {
+        border: 1px solid rgba(8, 8, 7, 0.16);
+        padding: 0.65rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      #seo-static-summary th {
+        background: rgba(8, 8, 7, 0.08);
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
       }
       .js #seo-static-summary {
         display: none;
@@ -212,7 +233,7 @@ async function main() {
   const template = await fs.readFile(templatePath, 'utf8');
   const assetTags = extractAssetTags(extractHead(template));
 
-  await Promise.all(SEO_ROUTES.filter((route) => route.includeInSitemap).map((route) => writeRouteHtml(template, assetTags, route)));
+  await Promise.all(SEO_ROUTES.filter((route) => route.includeInSitemap || route.generateStatic).map((route) => writeRouteHtml(template, assetTags, route)));
   await writeSitemap();
 }
 

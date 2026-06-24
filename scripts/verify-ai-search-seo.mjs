@@ -5,25 +5,42 @@ const siteUrl = 'https://sulayman-bowles.dev';
 
 const routeFiles = {
   home: 'dist/index.html',
+  work: 'dist/work/index.html',
   about: 'dist/about/index.html',
   atlas: 'dist/atlas/index.html',
+  atlasSampleCrawl: 'dist/atlas/sample-crawl/index.html',
   resume: 'dist/resume/index.html',
   simple: 'dist/simple/index.html',
   aiInformation: 'dist/ai-information/index.html',
+  sitemap: 'dist/sitemap/index.html',
   method: 'dist/method/index.html',
+  voidAgency: 'dist/void-agency/index.html',
+  contact: 'dist/contact/index.html',
+  austinTechnicalSeo: 'dist/austin-technical-seo/index.html',
+  technicalSeoCaseStudy: 'dist/case-studies/technical-seo-audit/index.html',
   markets: 'dist/markets/index.html',
 };
 
 const routePaths = {
   home: '/',
+  work: '/work',
   about: '/about',
   atlas: '/atlas',
+  atlasSampleCrawl: '/atlas/sample-crawl',
   resume: '/resume',
   simple: '/simple',
   aiInformation: '/ai-information',
+  sitemap: '/sitemap',
   method: '/method',
+  voidAgency: '/void-agency',
+  contact: '/contact',
+  austinTechnicalSeo: '/austin-technical-seo',
+  technicalSeoCaseStudy: '/case-studies/technical-seo-audit',
   markets: '/markets',
 };
+
+const routesWithVoidOrganization = new Set(['aiInformation', 'method', 'voidAgency']);
+const atlasSoftwareRoutes = new Set(['atlas', 'atlasSampleCrawl', 'aiInformation']);
 
 const marketFiles = [
   'dist/markets/network-monopolies/index.html',
@@ -105,11 +122,18 @@ function assertVisibleText(file, expectedItems) {
   }
 }
 
+function assertHref(file, href, label) {
+  const html = read(file);
+  assert(html.includes(`href="${href}"`), `${file}: missing href "${href}"`);
+  assert(textFromHtml(html).toLowerCase().includes(label.toLowerCase()), `${file}: missing anchor text "${label}"`);
+}
+
 for (const [route, file] of Object.entries(routeFiles)) {
   const html = read(file);
   const graph = jsonLdGraph(html);
   const person = findType(graph, 'Person', `${siteUrl}/#person`);
   const org = findType(graph, 'Organization', `${siteUrl}/#void-agency`);
+  const software = findType(graph, 'SoftwareApplication', `${siteUrl}/atlas#software`);
   const website = findType(graph, 'WebSite', `${siteUrl}/#website`);
   const webPage = findType(graph, 'WebPage', `${absolutePath(routePaths[route])}#webpage`);
 
@@ -125,10 +149,18 @@ for (const [route, file] of Object.entries(routeFiles)) {
   assert(propertyValues(person.identifier).includes('SulaymanB2024'), `${route}: Person identifier missing GitHub username`);
   assert(String(person.logo?.url ?? person.logo).startsWith(siteUrl), `${route}: Person logo must be absolute`);
 
-  assert(org, `${route}: missing canonical Organization schema`);
-  assert(org.url === 'https://www.void-agency.com/', `${route}: Organization url must be absolute Void Agency URL`);
-  assert(Array.isArray(org.sameAs) && org.sameAs.includes('https://www.void-agency.com/'), `${route}: Organization sameAs missing Void Agency`);
-  assert(String(org.logo?.url ?? org.logo).startsWith(siteUrl), `${route}: Organization logo must be absolute`);
+  if (routesWithVoidOrganization.has(route)) {
+    assert(org, `${route}: missing canonical Organization schema`);
+    assert(org.url === 'https://www.void-agency.com/', `${route}: Organization url must be absolute Void Agency URL`);
+    assert(Array.isArray(org.sameAs) && org.sameAs.includes('https://www.void-agency.com/'), `${route}: Organization sameAs missing Void Agency`);
+    assert(String(org.logo?.url ?? org.logo).startsWith(siteUrl), `${route}: Organization logo must be absolute`);
+  } else {
+    assert(!org, `${route}: Void Agency Organization schema should only appear on Void/material service source pages`);
+  }
+
+  if (atlasSoftwareRoutes.has(route)) {
+    assert(software, `${route}: missing Atlas SoftwareApplication schema`);
+  }
 
   assert(website, `${route}: missing shared WebSite schema`);
   assert(webPage, `${route}: missing canonical WebPage schema`);
@@ -137,6 +169,8 @@ for (const [route, file] of Object.entries(routeFiles)) {
 
   const title = html.match(/<title>(.*?)<\/title>/s)?.[1] ?? '';
   assert(title.replaceAll('&amp;', '&').length <= 62, `${route}: title is too long (${title.length})`);
+  const description = metaContent(html, 'name="description"') ?? '';
+  assert(description.length >= 145 && description.length <= 180, `${route}: description should be 145-180 chars (${description.length})`);
 
   const h1Count = [...html.matchAll(/<h1\b/gi)].length;
   assert(h1Count === 1, `${route}: expected exactly one static H1, found ${h1Count}`);
@@ -153,6 +187,8 @@ assertVisibleText('dist/ai-information/index.html', [
   'Professional profile',
   'Agency',
   'Projects',
+  'Work index',
+  'Contact / intake',
   'Academic context',
   'Earlier music background',
   'Research artifacts',
@@ -195,14 +231,15 @@ assertVisibleText('dist/ai-information/index.html', [
   assert(sourceGraphList, 'ai-information: missing Public Source Graph ItemList schema');
   assert(fanOutList, 'ai-information: missing Fan-Out Query Map ItemList schema');
   assert(providerPlanList, 'ai-information: missing Provider Discovery Plan ItemList schema');
-  assert(sourceGraphList.itemListElement?.length === 9, 'ai-information: Public Source Graph ItemList should have 9 items');
+  assert(sourceGraphList.itemListElement?.length === 12, 'ai-information: Public Source Graph ItemList should have 12 items');
   assert(fanOutList.itemListElement?.length === 6, 'ai-information: Fan-Out Query Map ItemList should have 6 items');
   assert(providerPlanList.itemListElement?.length === 7, 'ai-information: Provider Discovery Plan ItemList should have 7 items');
 }
 
 assertVisibleText('dist/about/index.html', [
-  'Identity reconciliation',
+  'Historical Source Context',
   "Earlier public sources describe Sulayman's classical bass and composition background through Golden Hornet, McCallum, and UT Butler.",
+  'Read the full identity reconciliation',
   'Golden Hornet',
   'UT Butler',
   'GitHub',
@@ -225,6 +262,19 @@ assert(read('dist/resume/index.html').includes('/Sulayman_Bowles_Resume.pdf'), '
   assert(signature === '%PDF', 'resume PDF should have a PDF signature');
 }
 
+{
+  const atlasSampleCsv = path.resolve('public/research/atlas-sanitized-crawl-sample.csv');
+  const appianAssumptionsCsv = path.resolve('public/research/appian-assumptions-table.csv');
+  const appianMemoPdf = path.resolve('public/research/appian-enterprise-software-durability-memo.pdf');
+  assert(fs.statSync(atlasSampleCsv).size > 500, 'Atlas sample crawl CSV should be present and non-empty');
+  assert(fs.statSync(appianAssumptionsCsv).size > 1000, 'Appian assumptions CSV should be present and non-empty');
+  assert(fs.statSync(appianMemoPdf).size > 100000, 'Appian memo PDF should be present and non-empty');
+  assert(read('public/research/atlas-sanitized-crawl-sample.csv').includes('canonical_state'), 'Atlas sample CSV should include canonical_state column');
+  assert(read('public/research/appian-assumptions-table.csv').includes('Validation Source'), 'Appian assumptions CSV should include Validation Source column');
+  const appianSignature = fs.readFileSync(appianMemoPdf).subarray(0, 4).toString('utf8');
+  assert(appianSignature === '%PDF', 'Appian memo should have a PDF signature');
+}
+
 assertVisibleText('dist/atlas/index.html', [
   'What Atlas SEO Audit Console Checks',
   'URL discovery',
@@ -240,6 +290,9 @@ assertVisibleText('dist/atlas/index.html', [
   'SQLite persistence',
   'exports/dashboards',
 ]);
+assertHref('dist/atlas/index.html', '/atlas/sample-crawl', 'See an Atlas sample crawl run');
+assertHref('dist/atlas/index.html', 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', 'View the GitHub repo for the audit CLI');
+assertHref('dist/atlas/index.html', '/contact', 'Request an audit');
 
 {
   const graph = jsonLdGraph(read('dist/atlas/index.html'));
@@ -247,6 +300,66 @@ assertVisibleText('dist/atlas/index.html', [
   assert(atlasCheckList, 'atlas: missing Atlas checks ItemList schema');
   assert(atlasCheckList.itemListElement?.length === 12, 'atlas: Atlas checks ItemList should have 12 items');
 }
+
+assertVisibleText('dist/work/index.html', [
+  'Selected Work',
+  'See an Atlas sample crawl run',
+  'Read the technical SEO audit method',
+  'View the GitHub repo for the audit CLI',
+  'Request an audit',
+  'Read the finance/data memo with assumptions',
+]);
+assertHref('dist/work/index.html', '/atlas/sample-crawl', 'See an Atlas sample crawl run');
+assertHref('dist/work/index.html', '/contact', 'Request an audit');
+assertHref('dist/work/index.html', '/markets#appian-assumptions', 'Read the finance/data memo with assumptions');
+
+assertVisibleText('dist/contact/index.html', [
+  'Request a Technical SEO Audit',
+  'Direct Contact',
+  'See an Atlas sample crawl run',
+  'Read the technical SEO audit method',
+]);
+assertHref('dist/contact/index.html', '/atlas/sample-crawl', 'See an Atlas sample crawl run');
+assertHref('dist/contact/index.html', '/method', 'Read the technical SEO audit method');
+
+assertVisibleText('dist/atlas/sample-crawl/index.html', [
+  'Atlas Sample Crawl Run',
+  'Sanitized crawl evidence',
+  'Download sanitized crawl CSV',
+  'https://example.com/resources/seo-tools',
+  'missing canonical',
+  'View the GitHub repo for the audit CLI',
+  'Request an audit',
+]);
+assertHref('dist/atlas/sample-crawl/index.html', '/research/atlas-sanitized-crawl-sample.csv', 'Download sanitized crawl CSV');
+assertHref('dist/atlas/sample-crawl/index.html', 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', 'View the GitHub repo for the audit CLI');
+
+assertVisibleText('dist/case-studies/technical-seo-audit/index.html', [
+  'Technical SEO Audit Case Study',
+  'Crawl evidence before recommendations',
+  'Separate observations from interpretation',
+  'Request an audit',
+]);
+assertHref('dist/case-studies/technical-seo-audit/index.html', '/contact', 'Request an audit');
+
+assertVisibleText('dist/austin-technical-seo/index.html', [
+  'Austin Technical SEO',
+  'AI-search visibility',
+  'This page does not claim local rankings',
+  'View Void Agency proof',
+]);
+assertHref('dist/austin-technical-seo/index.html', '/contact', 'Request an audit');
+assertHref('dist/austin-technical-seo/index.html', '/void-agency', 'View Void Agency proof');
+
+assertVisibleText('dist/void-agency/index.html', [
+  'Void Agency',
+  'Organization proof',
+  'Void Agency website',
+  'Read the technical SEO audit method',
+  'See an Atlas sample crawl run',
+]);
+assertHref('dist/void-agency/index.html', 'https://www.void-agency.com/', 'Void Agency website');
+assertHref('dist/void-agency/index.html', '/method', 'Read the technical SEO audit method');
 
 assertVisibleText('dist/method/index.html', [
   'AI Search Visibility Audit Checklist',
@@ -260,6 +373,9 @@ assertVisibleText('dist/method/index.html', [
   'sitemap freshness',
   'stale/conflicting source cleanup',
 ]);
+assertHref('dist/method/index.html', '/atlas/sample-crawl', 'See an Atlas sample crawl run');
+assertHref('dist/method/index.html', '/void-agency', 'View Void Agency proof');
+assertHref('dist/method/index.html', '/contact', 'Request an audit');
 
 {
   const llmsText = read('public/llms.txt');
@@ -278,7 +394,13 @@ assertVisibleText('dist/method/index.html', [
     'Perplexity-User',
   ];
 
-  assert(llmsText.includes('Last updated: June 19, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('Last updated: June 21, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('Selected work: https://sulayman-bowles.dev/work'), 'llms.txt: missing selected work route');
+  assert(llmsText.includes('Atlas sample crawl run: https://sulayman-bowles.dev/atlas/sample-crawl'), 'llms.txt: missing Atlas sample crawl route');
+  assert(llmsText.includes('Void Agency proof: https://sulayman-bowles.dev/void-agency'), 'llms.txt: missing Void Agency proof route');
+  assert(llmsText.includes('Audit intake/contact: https://sulayman-bowles.dev/contact'), 'llms.txt: missing contact route');
+  assert(llmsText.includes('Sanitized Atlas crawl sample CSV'), 'llms.txt: missing Atlas sample proof asset');
+  assert(llmsText.includes('Appian assumptions table CSV'), 'llms.txt: missing Appian assumptions proof asset');
   assert(llmsText.includes('## Crawler and Indexation Signals'), 'llms.txt: missing crawler/indexation section');
   assert(llmsText.includes('The www host redirects to the apex canonical host.'), 'llms.txt: missing www canonical redirect fact');
   assert(
@@ -313,11 +435,51 @@ assertVisibleText('dist/method/index.html', [
 }
 
 {
+  const sitemapText = read('dist/sitemap.xml');
+  const publicSitemapText = read('public/sitemap.xml');
+  const expectedCanonicalPaths = Object.values(routePaths);
+
+  for (const pathname of expectedCanonicalPaths) {
+    const loc = `<loc>${absolutePath(pathname)}</loc>`;
+    assert(sitemapText.includes(loc), `dist sitemap: missing ${loc}`);
+    assert(publicSitemapText.includes(loc), `public sitemap: missing ${loc}`);
+  }
+
+  assert(!sitemapText.includes('#'), 'dist sitemap should not contain hash-only URLs');
+  assert(!publicSitemapText.includes('#'), 'public sitemap should not contain hash-only URLs');
+}
+
+{
+  const vercelConfig = JSON.parse(read('vercel.json'));
+  const redirects = vercelConfig.redirects ?? [];
+  assert(!redirects.some((item) => item.source === '/void-agency'), 'vercel: /void-agency must not redirect away from canonical route');
+  assert(redirects.some((item) => item.source === '/atlas/sample-run' && item.destination === '/atlas/sample-crawl'), 'vercel: missing /atlas/sample-run redirect');
+  assert(redirects.some((item) => item.source === '/audit-intake' && item.destination === '/contact'), 'vercel: missing /audit-intake redirect');
+  assert(redirects.some((item) => item.source === '/austin-seo' && item.destination === '/austin-technical-seo'), 'vercel: missing /austin-seo redirect');
+  assert(
+    redirects.some((item) => item.source === '/technical-seo-case-study' && item.destination === '/case-studies/technical-seo-audit'),
+    'vercel: missing /technical-seo-case-study redirect',
+  );
+  assert(redirects.some((item) => item.source === '/projects/atlas' && item.destination === '/atlas'), 'vercel: missing legacy /projects/atlas redirect');
+  assert(redirects.some((item) => item.source === '/resume.html' && item.destination === '/resume'), 'vercel: missing legacy /resume.html redirect');
+}
+
+{
   const graph = jsonLdGraph(read('dist/method/index.html'));
   const methodChecklist = findItemList(graph, `${siteUrl}/method#ai-search-visibility-checklist`);
   assert(methodChecklist, 'method: missing AI Search Visibility Audit Checklist ItemList schema');
   assert(methodChecklist.itemListElement?.length === 9, 'method: audit checklist ItemList should have 9 items');
 }
+
+assertVisibleText('dist/markets/index.html', [
+  'Finance/data memo with assumptions',
+  'Read the finance/data memo with assumptions',
+  'Download the Appian assumptions table',
+  'educational research samples',
+  'Not a recommendation or price target',
+]);
+assertHref('dist/markets/index.html', '/research/appian-enterprise-software-durability-memo.pdf', 'Read the finance/data memo with assumptions');
+assertHref('dist/markets/index.html', '/research/appian-assumptions-table.csv', 'Download the Appian assumptions table');
 
 for (const file of marketFiles) {
   const html = read(file);

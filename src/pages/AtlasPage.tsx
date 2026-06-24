@@ -1,1532 +1,1018 @@
-import { motion, AnimatePresence } from 'motion/react';
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
-import AtlasCrawlMap from '../components/AtlasCrawlMap';
+import { motion, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
+import { useRef, type CSSProperties, type RefObject } from 'react';
+import { InternalFooter } from '../components/InternalFooter';
+import InternalHeader from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
-import { ScrollProgress } from '../components/ScrollProgress';
-import { ScrollReveal } from '../components/ScrollReveal';
-import { SmoothCursor } from '../components/SmoothCursor';
-import { RevealText } from '../components/RevealText';
-import { StaggeredText } from '../components/StaggeredText';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import { evidenceGroups } from '../content/aiInformation';
-import { atlasCheckItems } from '../content/evidenceLists';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
-import InternalHeader from '../components/InternalHeader';
-import InternalFooter from '../components/InternalFooter';
-import { useFocusTrap } from '../hooks/useFocusTrap';
-import { WireframeGrid } from '../components/WireframeGrid';
 
 const ATLAS_SEO = getSeoRoute('/atlas')!;
+const ATLAS_ARTWORK = '/images/atlas-coelifer.svg';
+const ATLAS_ASSETS = {
+  frameFragment: '/images/atlas/frame-fragment.png',
+  orbitNetwork: '/images/atlas/orbit-network.png',
+  orbitSphere: '/images/atlas/orbit-sphere.png',
+  celestialArc: '/images/atlas/celestial-arc.png',
+  atlasFigureGlobe: '/images/atlas/atlas-figure-globe.png',
+  atlasFigurePortrait: '/images/atlas/atlas-figure-portrait.png',
+  armillarySphere: '/images/atlas/armillary-sphere.png',
+} as const;
 
-type ProcessStepProps = {
-  index: string;
-  title: string;
-  copy: string;
-  icon: 'crawl' | 'extract' | 'interpret' | 'score' | 'report';
+const openingArtworkStyle: CSSProperties = {
+  maskImage:
+    'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.96) 50%, rgba(0,0,0,0.9) 90%, transparent 100%), linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.92) 9%, rgba(0,0,0,0.98) 84%, transparent 100%)',
+  maskComposite: 'intersect',
+  WebkitMaskImage:
+    'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.96) 50%, rgba(0,0,0,0.9) 90%, transparent 100%), linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.92) 9%, rgba(0,0,0,0.98) 84%, transparent 100%)',
+  WebkitMaskComposite: 'source-in',
 };
 
-type OutputCardProps = {
-  title: string;
-  copy: string;
-  cta: string;
-  children: ReactNode;
-  id?: string;
-  onCtaClick?: () => void;
+const suppliedPlateStyle: CSSProperties = {
+  filter: 'contrast(1.08) saturate(0.55) brightness(0.98)',
+  mixBlendMode: 'multiply',
 };
 
-function NavLink({ href, active, id, children }: { href: string; active?: boolean; id?: string; children: ReactNode }) {
-  return (
-    <a
-      href={href}
-      id={id}
-      data-cursor-text={typeof children === 'string' ? children : 'VIEW'}
-      className={`hover-target relative group overflow-visible px-3 py-1 transition-colors ${active ? 'text-[#f1efe8]' : 'text-[#f1efe8]/58 hover:text-[#f1efe8]'}`}
-    >
-      <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">{children}</span>
-      <span className={`absolute left-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} text-[#f1efe8]`}>[</span>
-      <span className={`absolute right-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} text-[#f1efe8]`}>]</span>
-    </a>
-  );
-}
+const widePlateMaskStyle: CSSProperties = {
+  maskImage:
+    'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.86) 12%, rgba(0,0,0,0.96) 76%, transparent 100%), linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.92) 86%, transparent 100%)',
+  maskComposite: 'intersect',
+  WebkitMaskImage:
+    'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.86) 12%, rgba(0,0,0,0.96) 76%, transparent 100%), linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.92) 86%, transparent 100%)',
+  WebkitMaskComposite: 'source-in',
+};
 
-const processSteps: ProcessStepProps[] = [
+const methodSteps = [
   {
-    index: '01',
-    title: 'CRAWL',
-    icon: 'crawl',
-    copy: 'High-fidelity crawling with smart rate control, JS rendering, and adaptive discovery to map the site as search engines do.',
+    id: '01',
+    title: 'Crawl',
+    body: 'Follow the site as machines encounter it: seed paths, sitemaps, rendered links, logs, and stray edges.',
   },
   {
-    index: '02',
-    title: 'EXTRACT',
-    icon: 'extract',
-    copy: 'Extract content, links, directives, structured data, signals, and performance artifacts from every discovered URL.',
+    id: '02',
+    title: 'Extract',
+    body: 'Lift text, headings, canonicals, schema, and links into a structured record that can be inspected later.',
   },
   {
-    index: '03',
-    title: 'INTERPRET',
-    icon: 'interpret',
-    copy: 'Normalize and connect signals into an understanding of architecture, intent, and indexation potential.',
+    id: '03',
+    title: 'Classify',
+    body: 'Name each surface by intent, topic, entity, template, and page role so the corpus begins to have shape.',
   },
   {
-    index: '04',
-    title: 'SCORE',
-    icon: 'score',
-    copy: 'Score issues by severity, confidence, affected URLs, implementation effort, and evidence quality using documented audit rules.',
+    id: '04',
+    title: 'Embed',
+    body: 'Turn passages and questions into comparable signals without letting similarity replace proof.',
   },
   {
-    index: '05',
-    title: 'REPORT',
-    icon: 'report',
-    copy: 'Structure operator-ready reports, preview packages, and task lists with evidence and recommended actions.',
+    id: '05',
+    title: 'Retrieve',
+    body: 'Bring back the passages that can actually support an answer, using lexical and vector search together.',
   },
+  {
+    id: '06',
+    title: 'Answer-test',
+    body: 'Test generated answers against the passages they cite, and mark where the site cannot carry the claim.',
+  },
+  {
+    id: '07',
+    title: 'Recommend fixes',
+    body: 'Translate the missing proof into specific pages, links, schema, and revisions a team can build.',
+  },
+];
+
+const evidenceCards = [
+  { label: 'Search question', value: 'austin deck builder' },
+  { label: 'Nearest proof', value: '/services/deck-building' },
+  { label: 'Visible passage', value: 'Deck construction, repair, materials, and project examples.' },
+  { label: 'Source state', value: 'confirmed_content' },
+  { label: 'Confidence', value: '0.87', kind: 'score' },
+  { label: 'Boundary note', value: 'Useful category proof, weak city-level proof' },
+  { label: 'Smallest repair', value: '/austin/deck-builder' },
+];
+
+const evidenceTrace = [
+  {
+    id: '01',
+    title: 'Ask',
+    body: 'A search question is grouped with nearby demand, service language, and the entities it implies.',
+  },
+  {
+    id: '02',
+    title: 'Locate',
+    body: 'The closest crawl-backed surface is retrieved with the passage that made it relevant.',
+  },
+  {
+    id: '03',
+    title: 'Limit',
+    body: 'The system marks what the source proves and the claim it cannot honestly support yet.',
+  },
+  {
+    id: '04',
+    title: 'Prescribe',
+    body: 'The recommendation names the smallest page, internal link, schema, or copy repair that closes the gap.',
+  },
+];
+
+const evidenceStateRows = [
+  {
+    state: 'confirmed_content',
+    meaning: 'Normal rendered content reached; findings can cite page text, links, and metadata.',
+  },
+  {
+    state: 'access_challenge',
+    meaning: 'Challenge, bot wall, or rate limit observed; treat as measurement gap, not a content defect.',
+  },
+  {
+    state: 'utility_url',
+    meaning: 'Feed, print, cart, script, or external handoff URL; keep out of client-facing action queues.',
+  },
+  {
+    state: 'http_error_page',
+    meaning: 'Status-only error surface; preserve the failure without turning it into a normal page task.',
+  },
+];
+
+const coverageRows = [
+  {
+    area: 'Deck builder intent',
+    observed: '/services/deck-building',
+    gap: 'City intent missing',
+    next: '/austin/deck-builder',
+  },
+  {
+    area: 'Patio repair proof',
+    observed: '/services/patio-repair',
+    gap: 'Thin local proof',
+    next: 'Add local examples',
+  },
+  {
+    area: 'Outdoor kitchen entity',
+    observed: '/services/outdoor-kitchens',
+    gap: 'Weak internal links',
+    next: 'Link from project pages',
+  },
+  {
+    area: 'Pergola service surface',
+    observed: '/services/pergolas',
+    gap: 'Schema incomplete',
+    next: 'Add service schema',
+  },
+  {
+    area: 'Service area lattice',
+    observed: '/locations',
+    gap: 'Proof not tied to services',
+    next: 'Connect service + city pairs',
+  },
+  {
+    area: 'Project evidence',
+    observed: '/projects',
+    gap: 'Examples not query-aligned',
+    next: 'Tag examples by service',
+  },
+];
+
+const coverageMetrics = [
+  { label: 'Pages read', value: '12,842' },
+  { label: 'Intent fields', value: '30' },
+  { label: 'Open repairs', value: '42' },
+];
+
+const coverageLadder = [
+  {
+    label: 'Inventory',
+    value: 'Every indexable page, redirect, canonical, and source path is kept traceable back to discovery.',
+  },
+  {
+    label: 'Map',
+    value: 'The crawl is arranged by service, location, entity, intent, and template purpose.',
+  },
+  {
+    label: 'Compare',
+    value: 'Observed surfaces are compared against the questions and entities the site should be able to answer.',
+  },
+  {
+    label: 'Prioritize',
+    value: 'Repairs are ranked by demand, evidence strength, implementation size, and risk of overclaiming.',
+  },
+];
+
+const terminalLines = [
+  '$ atlas audit --domain example.com --depth 3 --render',
+  'Opening crawl ledger...',
+  '13,642 URLs discovered from seed, sitemap, render links',
+  'Drawing evidence states...',
+  'confirmed_content=8,731 access_challenge=44 utility_url=318',
+  'Extracting text, headings, canonicals, internal links, schema',
+  'Binding passages to questions...',
+  '20 grounded passages per query family',
+  '42 recommendation candidates held for review',
+  'Export package sealed with source URLs, run ID, and boundaries',
 ];
 
 const issueRows = [
-  ['Blocked by robots.txt', '9.6', 'CRITICAL', 'Crawl engine blocked from accessing valuable, indexable path ranges.'],
-  ['Orphaned pages', '8.7', 'HIGH', 'Pages found in sitemap or logs but zero incoming internal crawler links.'],
-  ['Missing canonical', '7.2', 'HIGH', 'Pages lacking self-referencing canonicals, risking index dilution.'],
-  ['Soft 404', '6.4', 'MEDIUM', 'Pages returning HTTP 200 but presenting empty content or template errors.'],
-  ['Duplicate without canon.', '5.9', 'MEDIUM', 'Multiple URL paths serving identical text without canonical directives.'],
+  { issue: 'Absent city-service page', evidence: 'Query gap', impact: 'High' },
+  { issue: 'Weak supporting passage', evidence: 'Thin proof', impact: 'High' },
+  { issue: 'Competing service surfaces', evidence: 'Cluster overlap', impact: 'Medium' },
+  { issue: 'Broken internal path', evidence: 'HTTP + graph', impact: 'Medium' },
+  { issue: 'Unmarked service entity', evidence: 'DOM extract', impact: 'Medium' },
+  { issue: 'Slow rendered template', evidence: 'Render timing', impact: 'Low' },
 ];
 
-const indexationRows = [
-  ['Indexable', '18,394', '34.8%'],
-  ['Noindex', '6,372', '12.1%'],
-  ['Blocked', '9,112', '17.2%'],
-  ['Other', '19,846', '35.9%'],
+const technicalPillars = [
+  { label: 'Run state', value: 'SQLite audit store with durable run IDs and current-artifact checks' },
+  { label: 'Sources', value: 'Seed URLs, sitemaps, rendered links, logs, and operator-supplied context' },
+  { label: 'Evidence', value: 'URL, passage, status, render state, source path, and claim boundary' },
+  { label: 'Exports', value: 'JSON, CSV, markdown, and a reviewed operator package' },
+  { label: 'Review gate', value: 'Human-readable issue queue before anything becomes client-facing' },
+  { label: 'Boundary', value: 'Measurement gaps stay separate from confirmed site defects' },
 ];
 
-function ProcessIcon({ type, isHovered }: { type: ProcessStepProps['icon']; isHovered: boolean }) {
-  const common = 'stroke-current fill-none';
+const technicalFlow = [
+  { id: '01', label: 'Acquire', detail: 'Fetch, render, normalize, and persist the discovered surface.' },
+  { id: '02', label: 'Qualify', detail: 'Sort normal content from challenges, utility URLs, and failed fetches.' },
+  { id: '03', label: 'Retrieve', detail: 'Bind questions to passages, pages, confidence values, and limits.' },
+  { id: '04', label: 'Review', detail: 'Hold generated actions behind a human-readable publish gate.' },
+];
 
-  if (type === 'crawl') {
-    return (
-      <svg viewBox="0 0 72 72" className="h-14 w-14" aria-hidden="true">
-        <circle className={common} cx="36" cy="36" r="7" strokeWidth="1.2" />
-        {[12, 64, 36, 19, 54].map((x, index) => {
-          const y = [17, 24, 60, 50, 54][index];
-          return (
-            <g key={x}>
-              <motion.line 
-                className={common} 
-                x1="36" 
-                y1="36" 
-                x2={x} 
-                y2={y} 
-                strokeWidth="0.8" 
-                animate={isHovered ? { pathLength: 1, opacity: 0.8 } : { pathLength: 0.4, opacity: 0.4 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              />
-              <motion.circle 
-                className={common} 
-                cx={x} 
-                cy={y} 
-                r="3.5" 
-                strokeWidth="1" 
-                animate={isHovered ? { scale: 1.3, fill: "currentColor" } : { scale: 1, fill: "none" }}
-                transition={{ duration: 0.3 }}
-              />
-            </g>
-          );
-        })}
-      </svg>
-    );
-  }
+const gateRows = [
+  { gate: 'Provider gap', behavior: 'Reported as missing measurement, never as proof that the site failed.' },
+  { gate: 'Challenge page', behavior: 'Preserved as access evidence and suppressed from normal issue scoring.' },
+  { gate: 'Utility URL', behavior: 'Kept in the atlas inventory but excluded from recommendation queues.' },
+  { gate: 'Fixed artifact', behavior: 'Trusted only when embedded run IDs match the current reviewed run.' },
+];
 
-  if (type === 'extract') {
-    return (
-      <svg viewBox="0 0 72 72" className="h-14 w-14" aria-hidden="true">
-        <motion.rect 
-          className={common} 
-          x="13" 
-          y="14" 
-          width="46" 
-          height="44" 
-          strokeWidth="1.2" 
-          animate={isHovered ? { strokeWidth: 1.5, opacity: 1 } : { strokeWidth: 1.2, opacity: 0.8 }}
-        />
-        <motion.path 
-          className={common} 
-          d="M22 25 H50 M22 36 H42 M22 47 H33" 
-          strokeWidth="1" 
-          animate={isHovered ? { pathLength: 1, opacity: 1 } : { pathLength: 0.7, opacity: 0.6 }}
-          transition={{ duration: 0.5 }}
-        />
-        <motion.path 
-          className={common} 
-          d="M49 43 L59 53 M59 43 L49 53" 
-          strokeWidth="1" 
-          animate={isHovered ? { rotate: 45, opacity: 1 } : { rotate: 0, opacity: 0.65 }}
-          style={{ transformOrigin: "54px 48px" }}
-          transition={{ duration: 0.4 }}
-        />
-      </svg>
-    );
-  }
+const deliverableRows = [
+  { label: 'Crawl inventory', value: 'URLs, statuses, canonicals, redirects, discovery paths, and evidence states' },
+  { label: 'Retrieval evidence', value: 'Questions tied to pages, passages, confidence, and the edge of each claim' },
+  { label: 'Coverage map', value: 'The services, locations, entities, and examples the site can or cannot support' },
+  { label: 'Issue queue', value: 'Prioritized repairs with affected URLs, rationale, source proof, and review status' },
+  { label: 'Client brief', value: 'A restrained summary that separates observed facts from recommended work' },
+  { label: 'Machine exports', value: 'CSV and JSON outputs for engineering, content ops, and repeated comparisons' },
+];
 
-  if (type === 'interpret') {
-    return (
-      <svg viewBox="0 0 72 72" className="h-14 w-14" aria-hidden="true">
-        <motion.path 
-          className={common} 
-          d="M16 18 H32 C42 18 42 31 53 31 H59" 
-          strokeWidth="1.1" 
-          animate={isHovered ? { pathLength: 1, opacity: 1 } : { pathLength: 0.6, opacity: 0.6 }}
-          transition={{ duration: 0.5 }}
-        />
-        <motion.path 
-          className={common} 
-          d="M16 54 H31 C43 54 42 41 53 41 H59" 
-          strokeWidth="1.1" 
-          animate={isHovered ? { pathLength: 1, opacity: 1 } : { pathLength: 0.6, opacity: 0.6 }}
-          transition={{ duration: 0.5, delay: 0.05 }}
-        />
-        <motion.circle 
-          className={common} 
-          cx="16" 
-          cy="18" 
-          r="4" 
-          strokeWidth="1" 
-          animate={isHovered ? { scale: 1.2, strokeWidth: 1.5 } : { scale: 1, strokeWidth: 1 }}
-        />
-        <motion.circle 
-          className={common} 
-          cx="16" 
-          cy="54" 
-          r="4" 
-          strokeWidth="1" 
-          animate={isHovered ? { scale: 1.2, strokeWidth: 1.5 } : { scale: 1, strokeWidth: 1 }}
-        />
-        <motion.circle 
-          className={common} 
-          cx="59" 
-          cy="31" 
-          r="4" 
-          strokeWidth="1" 
-          animate={isHovered ? { scale: 1.2, fill: "currentColor" } : { scale: 1, fill: "none" }}
-        />
-        <motion.circle 
-          className={common} 
-          cx="59" 
-          cy="54" 
-          r="4" 
-          strokeWidth="1" 
-          animate={isHovered ? { scale: 1.2, fill: "currentColor" } : { scale: 1, fill: "none" }}
-        />
-      </svg>
-    );
-  }
+const handoffNotes = [
+  'Observed facts remain separate from derived labels, scores, and recommendations.',
+  'Skipped providers, blocked pages, and failed fetches remain measurement gaps.',
+  'Review and publish gates keep stale or unverified artifacts out of delivery.',
+];
 
-  if (type === 'score') {
-    return (
-      <svg viewBox="0 0 72 72" className="h-14 w-14" aria-hidden="true">
-        <motion.circle 
-          className={common} 
-          cx="36" 
-          cy="36" 
-          r="24" 
-          strokeWidth="1.2" 
-          animate={isHovered ? { r: 26, opacity: 0.95 } : { r: 24, opacity: 0.75 }}
-        />
-        <motion.path 
-          className={common} 
-          d="M22 36 C22 28 28 22 36 22 L36 36 L46 46" 
-          strokeWidth="1.2" 
-          animate={isHovered ? { pathLength: 1, strokeWidth: 1.5 } : { pathLength: 0.8, strokeWidth: 1.2 }}
-          transition={{ duration: 0.45 }}
-        />
-      </svg>
-    );
-  }
+const finalActions = [
+  { href: '/atlas/sample-crawl', label: 'See an Atlas sample crawl run' },
+  {
+    href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-',
+    label: 'View the audit CLI',
+    external: true,
+  },
+  { href: '/contact', label: 'Request an audit' },
+];
 
-  return (
-    <svg viewBox="0 0 72 72" className="h-14 w-14" aria-hidden="true">
-      <motion.rect 
-        className={common} 
-        x="16" 
-        y="14" 
-        width="40" 
-        height="44" 
-        strokeWidth="1.2" 
-        animate={isHovered ? { y: 12 } : { y: 14 }}
-      />
-      <motion.line 
-        className={common} 
-        x1="24" 
-        y1="23" 
-        x2="48" 
-        y2="23" 
-        strokeWidth="1.2" 
-        animate={isHovered ? { opacity: 1 } : { opacity: 0.6 }}
-      />
-      <motion.line 
-        className={common} 
-        x1="24" 
-        y1="32" 
-        x2="48" 
-        y2="32" 
-        strokeWidth="1.2" 
-        animate={isHovered ? { opacity: 1 } : { opacity: 0.6 }}
-      />
-      <motion.line 
-        className={common} 
-        x1="24" 
-        y1="41" 
-        x2="40" 
-        y2="41" 
-        strokeWidth="1.2" 
-        animate={isHovered ? { opacity: 1 } : { opacity: 0.6 }}
-      />
-    </svg>
-  );
-}
+const finalNodes = [
+  { x: '42%', y: '35%' },
+  { x: '51%', y: '28%' },
+  { x: '60%', y: '42%' },
+  { x: '68%', y: '33%' },
+  { x: '75%', y: '52%' },
+  { x: '57%', y: '62%' },
+  { x: '45%', y: '55%' },
+  { x: '82%', y: '39%' },
+];
 
-function AtlasProcessStep({ index, title, copy, icon }: ProcessStepProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const isFinalStep = index === processSteps[processSteps.length - 1]?.index;
-
-  return (
-    <motion.article
-      className="group relative min-h-[320px] border-b border-[#f1efe8]/14 p-5 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] md:border-r md:last:border-r-0 lg:border-b-0"
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.35, ease: 'easeOut' }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/42">
-        <span>{index}</span>
-        <span>{isFinalStep ? 'END' : '->'}</span>
-      </div>
-      <div className="mb-8 text-[#f1efe8]/55 transition-colors duration-500 group-hover:text-[#f1efe8]/86">
-        <ProcessIcon type={icon} isHovered={isHovered} />
-      </div>
-      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-[#f1efe8]">{title}</h3>
-      <p className="text-sm leading-relaxed text-[#f1efe8]/62">{copy}</p>
-    </motion.article>
-  );
-}
-
-function AtlasOutputCard({ title, copy, cta, children, id, onCtaClick }: OutputCardProps) {
-  return (
-    <motion.article
-      className="group relative flex min-h-[420px] flex-col overflow-hidden border border-ink/20 p-5 text-ink transition-[border-color,background-color] duration-500 before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-ink/35 before:transition-all before:duration-700 hover:border-ink/45 hover:bg-ink/[0.025] hover:before:w-full"
-      whileHover={{ y: -5 }}
-      transition={{ duration: 0.35, ease: 'easeOut' }}
-    >
-      <div className="mb-8 flex items-start justify-between gap-4 border-b border-ink/15 pb-5">
-        <div>
-          <h3 className="text-[10px] font-medium uppercase tracking-[0.32em] text-ink/88">{title}</h3>
-          <p className="mt-3 text-sm leading-relaxed text-ink/55">{copy}</p>
-        </div>
-        <span className="mt-1 block h-2 w-2 rounded-full border border-ink/35 transition-colors duration-500 group-hover:bg-ink/65" />
-      </div>
-      <div className="flex flex-1 items-center">{children}</div>
-      <button 
-        id={id}
-        onClick={onCtaClick}
-        className="hover-target mt-8 inline-flex min-h-11 items-center gap-3 text-left text-[10px] uppercase tracking-[0.28em] text-ink/74"
-      >
-        {cta}
-        <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
-      </button>
-    </motion.article>
-  );
-}
-
-function MetricTable() {
-  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
-  return (
-    <div className="w-full">
-      <table className="w-full border-collapse text-left text-[11px] uppercase tracking-[0.13em]">
-        <tbody>
-          {issueRows.map(([label, score, severity, desc], index) => {
-            const isHovered = hoveredRow === index;
-            const severityColor = 
-              severity === 'CRITICAL' ? 'text-[#c2695e] border-[#c2695e]/30 bg-[#c2695e]/10' :
-              severity === 'HIGH' ? 'text-[#c2695e] border-[#c2695e]/20 bg-[#c2695e]/5' :
-              'text-ink/50 border-ink/15 bg-transparent';
-
-            return (
-              <tr 
-                key={label} 
-                onMouseEnter={() => setHoveredRow(index)}
-                onMouseLeave={() => setHoveredRow(null)}
-                className="border-b border-ink/12 last:border-b-0 cursor-pointer group transition-colors duration-200 hover:bg-ink/[0.03]"
-              >
-                <td className="py-3 pr-2 text-ink/55 group-hover:text-ink transition-colors duration-200">
-                  <div className="flex flex-col gap-1.5">
-                    <div className="flex items-center gap-3">
-                      <span className="group-hover:translate-x-1 transition-transform duration-200">{label}</span>
-                      {isHovered && (
-                        <motion.span 
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          className={`text-[8px] px-1.5 py-0.5 border font-mono tracking-normal leading-none ${severityColor}`}
-                        >
-                          {severity}
-                        </motion.span>
-                      )}
-                    </div>
-                    <motion.div
-                      initial={false}
-                      animate={{ height: isHovered ? "auto" : 0, opacity: isHovered ? 1 : 0 }}
-                      className="overflow-hidden text-[9.5px] tracking-normal normal-case text-ink/42 font-sans"
-                    >
-                      {desc}
-                    </motion.div>
-                  </div>
-                </td>
-                <td className="py-3 text-right font-medium text-ink/82 group-hover:text-ink transition-colors duration-200 align-top">
-                  {score}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function MiniGraph() {
-  const [hoveredNode, setHoveredNode] = useState<number | null>(null);
-
-  const nodes = [
-    { x: 32, y: 42, label: "Home (Depth 0)", size: 5 },
-    { x: 74, y: 24, label: "Blog (Depth 1)", size: 3 },
-    { x: 118, y: 45, label: "About (Depth 1)", size: 3 },
-    { x: 162, y: 30, label: "Services (Depth 1)", size: 3 },
-    { x: 205, y: 58, label: "Contact (Depth 1)", size: 3 },
-    { x: 70, y: 92, label: "Case Study A (Depth 2)", size: 3 },
-    { x: 130, y: 104, label: "Case Study B (Depth 2)", size: 3 },
-    { x: 188, y: 112, label: "Landing Page (Depth 2)", size: 3 },
-  ];
-
-  const edges = [
-    [0, 1],
-    [1, 2],
-    [2, 3],
-    [3, 4],
-    [4, 5],
-    [5, 6],
-    [6, 7],
-    [0, 5],
-    [0, 7]
-  ];
-
-  return (
-    <div className="relative w-full">
-      <div className="sr-only">
-        Demo internal link graph: Home at depth zero links to Blog, About, Services, Contact, Case Study A, and Landing Page. Secondary case-study pages sit at depth two.
-      </div>
-      <svg viewBox="0 0 240 150" className="w-full text-ink" aria-hidden="true">
-        <rect x="1" y="1" width="238" height="148" fill="none" stroke="currentColor" opacity="0.16" />
-        
-        {edges.map(([fromIdx, toIdx], index) => {
-          const fromNode = nodes[fromIdx];
-          const toNode = nodes[toIdx];
-          const isActive = hoveredNode === fromIdx || hoveredNode === toIdx;
-          return (
-            <motion.line 
-              key={index} 
-              x1={fromNode.x} 
-              y1={fromNode.y} 
-              x2={toNode.x} 
-              y2={toNode.y} 
-              stroke="currentColor" 
-              animate={{ 
-                opacity: hoveredNode === null ? 0.22 : isActive ? 0.65 : 0.05,
-                strokeWidth: isActive ? 1.4 : 0.8
-              }}
-              transition={{ duration: 0.25 }}
-            />
-          );
-        })}
-
-        <motion.path 
-          d="M32 42 C90 18 118 118 188 112" 
-          fill="none" 
-          stroke="currentColor" 
-          animate={{ 
-            opacity: hoveredNode === null ? 0.18 : (hoveredNode === 0 || hoveredNode === 7) ? 0.6 : 0.04,
-            strokeWidth: (hoveredNode === 0 || hoveredNode === 7) ? 1.5 : 1
-          }}
-          transition={{ duration: 0.25 }}
-        />
-
-        {nodes.map((node, index) => {
-          const isHovered = hoveredNode === index;
-          return (
-            <g 
-              key={index}
-              className="cursor-pointer"
-              onMouseEnter={() => setHoveredNode(index)}
-              onMouseLeave={() => setHoveredNode(null)}
-            >
-              <motion.circle 
-                cx={node.x} 
-                cy={node.y} 
-                r={node.size} 
-                fill="currentColor" 
-                animate={{ 
-                  scale: isHovered ? 1.35 : 1,
-                  opacity: hoveredNode === null ? (index % 3 === 0 ? 0.72 : 0.42) : isHovered ? 0.95 : 0.16
-                }}
-                transition={{ duration: 0.25 }}
-              />
-              {isHovered && (
-                <motion.circle
-                  cx={node.x}
-                  cy={node.y}
-                  r={node.size + 4}
-                  fill="none"
-                  stroke="currentColor"
-                  initial={{ scale: 0.6, opacity: 1 }}
-                  animate={{ scale: 1.6, opacity: 0 }}
-                  transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
-                />
-              )}
-            </g>
-          );
-        })}
-
-        <g transform="translate(12, 138)" className="pointer-events-none">
-          <text 
-            fill="currentColor" 
-            opacity={hoveredNode !== null ? 0.8 : 0.32} 
-            fontFamily="Inter, sans-serif" 
-            fontSize="7" 
-            letterSpacing="1.2"
-          >
-            {hoveredNode !== null ? `INSPECTING: ${nodes[hoveredNode].label}` : "INSPECT INTERNAL LINK GRAPH"}
-          </text>
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function MiniDonut() {
-  const [hoveredSlice, setHoveredSlice] = useState<number | null>(null);
-
-  return (
-    <div className="grid w-full gap-6">
-      <div className="sr-only">
-        Demo indexation breakdown: Indexable 18,394 URLs, Noindex 6,372 URLs, Blocked 9,112 URLs, Other 19,846 URLs.
-      </div>
-      <div className="relative h-36 w-36 mx-auto">
-        <svg viewBox="0 0 140 140" className="h-full w-full -rotate-90 text-ink" aria-hidden="true">
-          <circle cx="70" cy="70" r="43" fill="none" stroke="currentColor" strokeWidth="16" opacity="0.08" />
-          {[
-            ['94 270', 0, 0.78, 0],
-            ['33 270', -100, 0.5, 1],
-            ['46 270', -140, 0.32, 2],
-            ['97 270', -191, 0.18, 3],
-          ].map(([dash, offset, opacity, sliceIndex]) => {
-            const isHovered = hoveredSlice === sliceIndex;
-            return (
-              <motion.circle
-                key={String(dash)}
-                cx="70"
-                cy="70"
-                r="43"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={isHovered ? 20 : 16}
-                strokeDasharray={String(dash)}
-                strokeDashoffset={Number(offset)}
-                opacity={isHovered ? 1 : Number(opacity)}
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-                className="cursor-pointer transition-[stroke-width,opacity] duration-200"
-                onMouseEnter={() => setHoveredSlice(Number(sliceIndex))}
-                onMouseLeave={() => setHoveredSlice(null)}
-              />
-            );
-          })}
-        </svg>
-
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
-          <span className="text-[7.5px] uppercase tracking-[0.16em] text-ink/50">
-            {hoveredSlice !== null ? indexationRows[hoveredSlice][0] : "TOTAL URLS"}
-          </span>
-          <span className="text-[12px] font-bold text-ink tracking-[0.05em] leading-tight">
-            {hoveredSlice !== null ? indexationRows[hoveredSlice][1] : "53,724"}
-          </span>
-          <span className="text-[8px] text-ink/78 mt-0.5">
-            {hoveredSlice !== null ? indexationRows[hoveredSlice][2] : "100%"}
-          </span>
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        {indexationRows.map(([label, count, pct], index) => {
-          const isHovered = hoveredSlice === index;
-          return (
-            <div 
-              key={label} 
-              onMouseEnter={() => setHoveredSlice(index)}
-              onMouseLeave={() => setHoveredSlice(null)}
-              className={`grid grid-cols-[1fr_auto_auto] gap-3 text-[10px] uppercase tracking-[0.16em] cursor-pointer transition-colors duration-200 ${isHovered ? 'text-ink' : 'text-ink/58'}`}
-            >
-              <span>{label}</span>
-              <span>{count}</span>
-              <span className={isHovered ? 'text-ink font-semibold' : 'text-ink/82'}>{pct}</span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function ConsoleModal({ 
-  isOpen, 
-  onClose, 
-  title, 
-  children 
-}: { 
-  isOpen: boolean; 
-  onClose: () => void; 
-  title: string; 
-  children: ReactNode 
-}) {
-  const modalRef = useFocusTrap(isOpen);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
-
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/82 backdrop-blur-md p-4 md:p-8 xl:p-12 font-sans"
-        >
-          {/* Modal Container */}
-          <motion.div
-            ref={modalRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            initial={{ y: 24, scale: 0.98, opacity: 0 }}
-            animate={{ y: 0, scale: 1, opacity: 1 }}
-            exit={{ y: 24, scale: 0.98, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex h-full max-h-[640px] w-full max-w-[1100px] flex-col border border-[#f1efe8]/15 bg-[#080807] text-[#f1efe8]"
-          >
-            {/* Grid Pattern Backdrop */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.035] bg-[linear-gradient(to_right,rgba(241,239,232,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(241,239,232,0.06)_1px,transparent_1px)] bg-[size:28px_28px]" />
-
-            {/* Corner Registration Marks */}
-            <div className="absolute -left-2 -top-2 h-4 w-4 border-l border-t border-[#f1efe8]/30" />
-            <div className="absolute -right-2 -top-2 h-4 w-4 border-r border-t border-[#f1efe8]/30" />
-            <div className="absolute -left-2 -bottom-2 h-4 w-4 border-l border-b border-[#f1efe8]/30" />
-            <div className="absolute -right-2 -bottom-2 h-4 w-4 border-r border-b border-[#f1efe8]/30" />
-
-            {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-[#f1efe8]/12 px-6 py-4 font-mono text-[9px] uppercase tracking-[0.32em] z-10">
-              <div className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#f1efe8]/80" />
-                <h2 id="modal-title" className="m-0 font-mono text-[9px] font-bold uppercase leading-none tracking-[0.32em]">{title}</h2>
-              </div>
-              <button 
-                id="modal-close-btn"
-                type="button"
-                aria-label="Close console modal"
-                onClick={onClose} 
-                className="hover-target text-[#f1efe8]/50 transition-colors hover:text-[#f1efe8]"
-              >
-                [ CLOSE ESC ]
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="flex-1 overflow-y-auto p-6 md:p-8 z-10">
-              {children}
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-function IssuesModalContent() {
-  const [activeTab, setActiveTab] = useState<'ALL' | 'CRITICAL' | 'HIGH' | 'MEDIUM'>('ALL');
-  const [expandedRow, setExpandedRow] = useState<string | null>(null);
-
-  const allIssues = [
-    { label: "BLOCKED BY ROBOTS.TXT", score: "9.6", severity: "CRITICAL", desc: "19,846 pages matching admin/checkout checkout templates are excluded from crawl budget.", fix: "Refactor disallow rules inside /robots.txt to support dynamic querying exclusions." },
-    { label: "HTTPS REDIRECT LOOP", score: "9.2", severity: "CRITICAL", desc: "Redirect loops on 42 core localization URLs preventing search engine indexation.", fix: "Configure absolute paths in Nginx rewrite rules and prevent HTTP-to-HTTPS circular headers." },
-    { label: "ORPHANED PAGES", score: "8.7", severity: "HIGH", desc: "8,342 nodes discovered via sitemaps have zero incoming hyperlinks in the link graph.", fix: "Map these orphans to category landing hubs and add them to internal HTML index grids." },
-    { label: "MISSING CANONICAL", score: "7.2", severity: "HIGH", desc: "312 pages missing self-referencing canonical tags, causing duplicate candidate cluster risk.", fix: "Inject native <link rel=\"canonical\"> tags dynamically using Next.js head configuration." },
-    { label: "SLOW LCP IMAGES", score: "7.8", severity: "HIGH", desc: "Hero banners lack fetchpriority=\"high\" and display layouts shift on mobile viewports.", fix: "Add fetchpriority=\"high\" attributes and define explicit width/height dimensions on images." },
-    { label: "SOFT 404 DETECTED", score: "6.4", severity: "HIGH", desc: "18 pages returning 200 OK status codes on empty templates or search result pages.", fix: "Configure fallback handlers to send true 404 HTTP headers for empty listings." },
-    { label: "DUPLICATE WITHOUT CANONICAL", score: "5.9", severity: "MEDIUM", desc: "UTM tracking parameters causing duplicated indexation of core articles.", fix: "Set parameter handling rules inside GSC or use self-referencing canonical tags on query parameters." },
-  ];
-
-  const filtered = allIssues.filter(item => activeTab === 'ALL' || item.severity === activeTab);
-
-  return (
-    <div className="flex flex-col gap-6 h-full text-[#f1efe8] font-sans">
-      <div className="flex gap-2 border-b border-[#f1efe8]/12 pb-3">
-        {(['ALL', 'CRITICAL', 'HIGH', 'MEDIUM'] as const).map(tab => (
-          <button
-            key={tab}
-            id={`issues-tab-${tab.toLowerCase()}`}
-            onClick={() => setActiveTab(tab)}
-            className={`hover-target px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] border transition-colors duration-200 ${activeTab === tab ? 'bg-[#f1efe8] text-[#080807] border-[#f1efe8]' : 'text-[#f1efe8]/50 border-[#f1efe8]/15 hover:text-[#f1efe8]'}`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
-      <div className="flex-1 overflow-y-auto space-y-3 pr-2">
-        {filtered.map(issue => {
-          const isExpanded = expandedRow === issue.label;
-          const severityColor = 
-            issue.severity === 'CRITICAL' ? 'text-[#c2695e] border-[#c2695e]/30 bg-[#c2695e]/10' :
-            issue.severity === 'HIGH' ? 'text-[#c2695e] border-[#c2695e]/20 bg-[#c2695e]/5' :
-            'text-[#f1efe8]/60 border-[#f1efe8]/15 bg-transparent';
-
-          return (
-            <div 
-              key={issue.label}
-              id={`issues-row-${issue.label.toLowerCase().replace(/\s+/g, '-')}`}
-              onClick={() => setExpandedRow(isExpanded ? null : issue.label)}
-              className="border border-[#f1efe8]/12 p-4 cursor-pointer hover:bg-white/[0.015] transition-colors group"
-            >
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] group-hover:text-[#f1efe8] transition-colors">{issue.label}</span>
-                  <span className={`font-mono text-[8px] px-1.5 py-0.5 border leading-none ${severityColor}`}>{issue.severity}</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span className="font-serif italic text-[#f1efe8]/58">SCORE: {issue.score}</span>
-                  <span className="font-mono text-[9px] text-[#f1efe8]/30 group-hover:text-[#f1efe8]/60">{isExpanded ? '[-]' : '[+]'}</span>
-                </div>
-              </div>
-
-              <motion.div
-                initial={false}
-                animate={{ height: isExpanded ? 'auto' : 0, opacity: isExpanded ? 1 : 0 }}
-                className="overflow-hidden text-xs text-[#f1efe8]/62 leading-relaxed"
-              >
-                <div className="pt-4 border-t border-[#f1efe8]/10 mt-3 space-y-3">
-                  <div>
-                    <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-[#f1efe8]/70 block mb-1">CRAWLER EVIDENCE</span>
-                    <p className="normal-case">{issue.desc}</p>
-                  </div>
-                  <div>
-                    <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-[#b7c8a8] block mb-1">REMEDIATION STEPS</span>
-                    <p className="normal-case text-[#f1efe8]/82">{issue.fix}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function GraphModalContent() {
-  const [selectedNode, setSelectedNode] = useState<string>('/');
-
-  const nodes = [
-    { id: '/', label: 'Home Page', type: 'core', depth: 0, authority: 98, inlinks: 1240, outlinks: 56, cwv: 'PASS' },
-    { id: '/blog', label: 'Blog Index', type: 'category', depth: 1, authority: 72, inlinks: 340, outlinks: 48, cwv: 'PASS' },
-    { id: '/about', label: 'About Page', type: 'article', depth: 1, authority: 65, inlinks: 120, outlinks: 12, cwv: 'PASS' },
-    { id: '/services', label: 'Services Index', type: 'category', depth: 1, authority: 70, inlinks: 290, outlinks: 32, cwv: 'FAIL' },
-    { id: '/contact', label: 'Contact Portal', type: 'article', depth: 1, authority: 55, inlinks: 95, outlinks: 8, cwv: 'PASS' },
-    { id: '/blog/seo', label: 'SEO Systems Post', type: 'article', depth: 2, authority: 58, inlinks: 45, outlinks: 6, cwv: 'PASS' },
-    { id: '/blog/render', label: 'JS Rendering Post', type: 'article', depth: 2, authority: 60, inlinks: 48, outlinks: 5, cwv: 'PASS' },
-    { id: '/pricing', label: 'Pricing Calculator', type: 'article', depth: 2, authority: 62, inlinks: 82, outlinks: 14, cwv: 'FAIL' },
-  ];
-
-  const links = [
-    { from: '/', to: '/blog' },
-    { from: '/', to: '/about' },
-    { from: '/', to: '/services' },
-    { from: '/', to: '/contact' },
-    { from: '/blog', to: '/blog/seo' },
-    { from: '/blog', to: '/blog/render' },
-    { from: '/services', to: '/pricing' },
-    { from: '/pricing', to: '/contact' },
-  ];
-
-  const nodeCoords: Record<string, { x: number; y: number }> = {
-    '/': { x: 250, y: 250 },
-    '/blog': { x: 400, y: 150 },
-    '/about': { x: 400, y: 250 },
-    '/services': { x: 400, y: 350 },
-    '/contact': { x: 550, y: 250 },
-    '/blog/seo': { x: 550, y: 90 },
-    '/blog/render': { x: 550, y: 170 },
-    '/pricing': { x: 550, y: 410 },
-  };
-
-  const activeNodeInfo = nodes.find(n => n.id === selectedNode)!;
-
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 h-full font-sans text-[#f1efe8]">
-      {/* SVG Canvas */}
-      <div className="relative border border-[#f1efe8]/12 bg-black/40 flex items-center justify-center p-4 min-h-[300px]">
-        <svg viewBox="0 0 700 480" className="w-full h-full text-[#f1efe8]" aria-hidden="true">
-          {links.map((link, idx) => {
-            const fromPos = nodeCoords[link.from];
-            const toPos = nodeCoords[link.to];
-            const isActive = selectedNode === link.from || selectedNode === link.to;
-
-            return (
-              <motion.line
-                key={idx}
-                x1={fromPos.x}
-                y1={fromPos.y}
-                x2={toPos.x}
-                y2={toPos.y}
-                stroke={isActive ? '#f1efe8' : 'rgba(241,239,232,0.12)'}
-                strokeWidth={isActive ? 2 : 1}
-                strokeDasharray={isActive ? '5 5' : undefined}
-                animate={isActive ? { strokeDashoffset: [0, -10] } : undefined}
-                transition={isActive ? { repeat: Infinity, ease: 'linear', duration: 0.8 } : undefined}
-              />
-            );
-          })}
-
-          {nodes.map(node => {
-            const pos = nodeCoords[node.id];
-            const isSelected = selectedNode === node.id;
-            
-            return (
-              <g 
-                key={node.id} 
-                className="cursor-pointer"
-                onClick={() => setSelectedNode(node.id)}
-              >
-                {isSelected && (
-                  <motion.circle
-                    cx={pos.x}
-                    cy={pos.y}
-                    r={node.type === 'core' ? 24 : 18}
-                    fill="none"
-                    stroke="#f1efe8"
-                    initial={{ scale: 0.8, opacity: 1 }}
-                    animate={{ scale: 1.5, opacity: 0 }}
-                    transition={{ repeat: Infinity, duration: 1.2, ease: 'easeOut' }}
-                  />
-                )}
-                <circle
-                  cx={pos.x}
-                  cy={pos.y}
-                  r={node.type === 'core' ? 14 : 10}
-                  fill={isSelected ? '#f1efe8' : '#080807'}
-                  stroke={isSelected ? '#f1efe8' : 'rgba(241,239,232,0.4)'}
-                  strokeWidth="1.5"
-                />
-                <text
-                  x={pos.x}
-                  y={pos.y - 18}
-                  textAnchor="middle"
-                  fontFamily="monospace"
-                  fontSize="8.5"
-                  fill={isSelected ? '#f1efe8' : 'rgba(241,239,232,0.45)'}
-                  letterSpacing="1.2"
-                >
-                  {node.id}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
-        <div className="absolute bottom-4 left-4 font-mono text-[8px] tracking-[0.2em] text-[#f1efe8]/45">
-          CLICK NODES TO TRACE INTRALINK RELATIONSHIPS
-        </div>
-      </div>
-
-      {/* Node Sidebar Info */}
-      <div className="border border-[#f1efe8]/12 p-6 bg-black/30 flex flex-col justify-between font-mono">
-        <div>
-          <div className="text-[10px] text-[#f1efe8]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#f1efe8]/12 pb-2">
-            NODE INSPECTOR
-          </div>
-          <div className="text-xs font-bold text-[#f1efe8] mb-6 uppercase tracking-[0.1em]">
-            {activeNodeInfo.label}
-          </div>
-          <div className="space-y-4 text-[9px] text-[#f1efe8]/60">
-            <div className="flex justify-between">
-              <span>PATH:</span>
-              <span className="text-[#f1efe8]">{activeNodeInfo.id}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>DEPTH LEVEL:</span>
-              <span className="text-[#f1efe8]">{activeNodeInfo.depth}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>PAGE AUTHORITY:</span>
-              <span className="text-[#f1efe8]">{activeNodeInfo.authority}/100</span>
-            </div>
-            <div className="flex justify-between">
-              <span>INCOMING LINKS:</span>
-              <span className="text-[#f1efe8]">{activeNodeInfo.inlinks}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>OUTGOING LINKS:</span>
-              <span className="text-[#f1efe8]">{activeNodeInfo.outlinks}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>CORE WEB VITALS:</span>
-              <span className={activeNodeInfo.cwv === 'PASS' ? 'text-[#b7c8a8] font-bold' : 'text-[#c2695e] font-bold'}>{activeNodeInfo.cwv}</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-[#f1efe8]/10 pt-4 mt-6 text-[8px] text-[#f1efe8]/30 leading-relaxed uppercase">
-          [PAGE FLOW: REPRESENTING INTRA-LINK PATHWAYS TRANSMITTING INTERNAL LINK EQUITY MATRIX]
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function DonutModalContent() {
-  const [selectedSlice, setSelectedSlice] = useState<number | null>(null);
-
-  const breakdowns = [
-    { label: "INDEXABLE", count: "18,394", pct: "34.8%", status: "Valid sitemap entries. Search engines can index normally.", urls: ["/", "/about", "/pricing", "/services", "/blog"] },
-    { label: "NOINDEX HEADER", count: "6,372", pct: "12.1%", status: "HTTP header X-Robots-Tag contains noindex directive.", urls: ["/api/v1/auth", "/admin/login", "/checkout/callback", "/cart/clear"] },
-    { label: "CANONICAL GAP", count: "9,112", pct: "17.2%", status: "Excluded due to duplicate cluster parameters.", urls: ["/catalog?sort=price", "/catalog?sort=rating", "/item?id=381&source=ad", "/home"] },
-    { label: "ROBOTS BLOCKED", count: "19,846", pct: "35.9%", status: "Blocked by disallow patterns in /robots.txt.", urls: ["/checkout/payment", "/admin/dashboard", "/user/profile", "/temp/cache"] },
-  ];
-
-  const activeInfo = selectedSlice !== null ? breakdowns[selectedSlice] : null;
-
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full font-sans text-[#f1efe8]">
-      {/* Visual Chart Panel */}
-      <div className="border border-[#f1efe8]/12 p-6 flex flex-col items-center justify-center bg-black/30">
-        <svg viewBox="0 0 200 200" className="w-40 h-40 -rotate-90 text-[#f1efe8] mb-6" aria-hidden="true">
-          <circle cx="100" cy="100" r="65" fill="none" stroke="currentColor" strokeWidth="22" opacity="0.06" />
-          {[
-            ['143 408', 0, 0.78, 0],
-            ['50 408', -143, 0.5, 1],
-            ['70 408', -193, 0.32, 2],
-            ['145 408', -263, 0.18, 3],
-          ].map(([dash, offset, opacity, sliceIndex]) => {
-            const isHovered = selectedSlice === sliceIndex;
-            return (
-              <motion.circle
-                key={sliceIndex}
-                cx="100"
-                cy="100"
-                r="65"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={isHovered ? 26 : 22}
-                strokeDasharray={String(dash)}
-                strokeDashoffset={Number(offset)}
-                opacity={isHovered ? 1 : Number(opacity)}
-                className="cursor-pointer transition-[stroke-width,opacity] duration-200"
-                onClick={() => setSelectedSlice(Number(sliceIndex))}
-              />
-            );
-          })}
-        </svg>
-        <div className="space-y-2 w-full">
-          {breakdowns.map((item, idx) => (
-            <div
-              key={item.label}
-              onClick={() => setSelectedSlice(idx)}
-              className={`grid grid-cols-[1fr_auto_auto] gap-4 text-[9px] uppercase tracking-[0.2em] py-2 px-3 border border-transparent cursor-pointer transition-all duration-200 ${selectedSlice === idx ? 'border-[#f1efe8]/20 bg-white/[0.03] text-[#f1efe8]' : 'text-[#f1efe8]/50 hover:text-[#f1efe8]'}`}
-            >
-              <span>{item.label}</span>
-              <span>{item.count}</span>
-              <span>{item.pct}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Analysis Details Panel */}
-      <div className="border border-[#f1efe8]/12 p-6 bg-black/30 flex flex-col justify-between font-mono">
-        {activeInfo ? (
-          <div>
-            <div className="text-[10px] text-[#f1efe8]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#f1efe8]/12 pb-2">
-              INDEXATION SEGMENT DETAILS
-            </div>
-            <div className="text-xs font-bold text-[#f1efe8] mb-2 uppercase tracking-[0.1em]">
-              {activeInfo.label}
-            </div>
-            <div className="text-[11px] text-[#f1efe8]/72 leading-relaxed mb-6 font-sans normal-case">
-              {activeInfo.status}
-            </div>
-            <div className="text-[9px] text-[#f1efe8]/70 uppercase tracking-[0.2em] mb-3">
-              SAMPLE MATCHING URLS:
-            </div>
-            <div className="space-y-1.5">
-              {activeInfo.urls.map(url => (
-                <div key={url} className="text-[9.5px] text-[#f1efe8]/54 normal-case border-b border-[#f1efe8]/8 pb-1 font-mono">
-                  {url}
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="flex h-full items-center justify-center text-center text-[#f1efe8]/32 text-[10px] uppercase tracking-[0.2em]">
-            SELECT A SEGMENT SLICE OR LIST ITEM TO AUDIT SPECIFIC EXCLUSION LISTS.
-          </div>
-        )}
-
-        <div className="border-t border-[#f1efe8]/10 pt-4 mt-6 text-[8px] text-[#f1efe8]/30 leading-relaxed uppercase">
-          [TOTAL INDEXABLE RATIO: 34.8% OPTIMAL COVERAGE LEVEL REACHED]
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function FindingsModalContent() {
-  const [activeFinding, setActiveFinding] = useState<number>(0);
-
-  const findings = [
-    {
-      title: "MISSING CANONICAL TAGS",
-      severity: "HIGH IMPACT",
-      pages: "312 PAGES EFFECTED",
-      problem: "Pages load multiple parameter variations in duplicate slots without specifying search anchor indexes.",
-      badCode: `<!-- index.html -->\n<html>\n<head>\n  <title>Blog Post Title</title>\n</head>\n<body>...`,
-      goodCode: `<!-- index.html -->\n<html>\n<head>\n  <link rel="canonical" href="https://example.com/blog/title" />\n  <title>Blog Post Title</title>\n</head>\n<body>...`
-    },
-    {
-      title: "REDIRECT CHAIN SEQUENCES",
-      severity: "CRITICAL IMPACT",
-      pages: "42 LOOPS REGISTERED",
-      problem: "HTTP redirects bounce through intermediate protocols, generating high latency spikes for crawl bots.",
-      badCode: `Request: GET /about -> HTTP 301 /about-us\nRequest: GET /about-us -> HTTP 301 /about-us/\nRequest: GET /about-us/ -> HTTP 200 OK`,
-      goodCode: `Request: GET /about -> HTTP 301 /about-us/\nRequest: GET /about-us/ -> HTTP 200 OK`
-    },
-    {
-      title: "SCHEMA DISCONNECTION",
-      severity: "MEDIUM IMPACT",
-      pages: "8 WARNING LOGS",
-      problem: "Semantic schema graphs contain disconnected parent nodes, hindering AI semantic relation audits.",
-      badCode: `<!-- JSON-LD snippet missing linking references -->\n{\n  "@context": "https://schema.org",\n  "@type": "WebSite",\n  "name": "Void Agency"\n}`,
-      goodCode: `<!-- Connected schema nodes via @id links -->\n{\n  "@context": "https://schema.org",\n  "@graph": [\n    {\n      "@type": "WebSite",\n      "@id": "https://example.com/#website",\n      "name": "Void Agency"\n    },\n    {\n      "@type": "Organization",\n      "@id": "https://example.com/#org",\n      "name": "Void Agency"\n    }\n  ]\n}`
-    }
-  ];
-
-  const current = findings[activeFinding];
-
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 h-full font-sans text-[#f1efe8]">
-      {/* Category selector */}
-      <div className="space-y-3 border-r border-[#f1efe8]/12 pr-4">
-        {findings.map((item, idx) => (
-          <div
-            key={item.title}
-            onClick={() => setActiveFinding(idx)}
-            className={`cursor-pointer p-4 border transition-all duration-200 ${activeFinding === idx ? 'border-[#f1efe8] bg-white/5 text-[#f1efe8]' : 'border-[#f1efe8]/12 text-[#f1efe8]/58 hover:bg-white/[0.015] hover:text-[#f1efe8]'}`}
-          >
-            <div className="text-[9px] uppercase tracking-[0.2em] font-mono font-bold mb-1.5">
-              {item.title}
-            </div>
-            <div className="text-[8px] uppercase tracking-[0.15em] font-mono opacity-60">
-              {item.severity}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Comparison block */}
-      <div className="flex flex-col justify-between h-full font-mono text-[9.5px]">
-        <div>
-          <div className="mb-4 text-[11px] font-bold text-[#f1efe8] uppercase tracking-[0.1em]">
-            {current.title}
-          </div>
-          <p className="text-[#f1efe8]/72 font-sans normal-case mb-6 leading-relaxed max-w-2xl text-xs">
-            {current.problem}
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <div className="text-[9px] uppercase text-[#c2695e] tracking-[0.2em] mb-2 font-bold">
-                [ INCORRECT MARKUP ]
-              </div>
-              <pre className="bg-[#0f0f0f] border border-[#c2695e]/20 p-4 overflow-x-auto text-[8.5px] leading-relaxed text-[#f1efe8]/60 font-mono select-all">
-                {current.badCode}
-              </pre>
-            </div>
-            <div>
-              <div className="text-[9px] uppercase text-[#b7c8a8] tracking-[0.2em] mb-2 font-bold">
-                [ REMEDIATED MARKUP ]
-              </div>
-              <pre className="bg-[#0f0f0f] border border-[#b7c8a8]/20 p-4 overflow-x-auto text-[8.5px] leading-relaxed text-[#f1efe8] font-mono select-all">
-                {current.goodCode}
-              </pre>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-[#f1efe8]/10 pt-4 mt-6 text-[8px] text-[#f1efe8]/30 uppercase">
-          [COMPARED USING CRAWLER DIAGNOSTIC SOURCE HEADERS AND INLINE HTML DOM TARGETS]
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ExportsModalContent() {
-  const [previewing, setPreviewing] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [selectedFormat, setSelectedFormat] = useState<'PDF' | 'CSV' | 'PARQUET'>('PDF');
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  const startPreview = () => {
-    setPreviewing(true);
-    setProgress(0);
-    setToastMessage(null);
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setPreviewing(false);
-          setToastMessage(`PREVIEW READY: ${selectedFormat} PACKAGE STRUCTURE SHOWN. NO FILE IS GENERATED IN THIS PUBLIC BUILD.`);
-          return 100;
-        }
-        return Math.min(prev + 12, 100);
-      });
-    }, 100);
-  };
-
-  return (
-    <div className="flex flex-col justify-between h-full font-mono text-[9.5px] text-[#f1efe8] tracking-[0.1em]">
-      <div className="space-y-6 max-w-xl">
-        <div>
-          <div className="text-[10px] text-[#f1efe8]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#f1efe8]/12 pb-2">
-            EXPORT PREVIEW CONTROLS
-          </div>
-          <p className="font-sans text-[#f1efe8]/66 normal-case text-xs leading-relaxed mb-6">
-            Review the report structure, database sections, and target layouts. Full exports are intentionally unavailable in this public demo.
-          </p>
-        </div>
-
-        <div>
-          <div className="text-[9px] uppercase text-[#f1efe8]/45 tracking-[0.2em] mb-3">
-            SELECT PREVIEW FORMAT:
-          </div>
-          <div className="flex gap-4">
-            {(['PDF', 'CSV', 'PARQUET'] as const).map(fmt => (
-              <button
-                key={fmt}
-                id={`exports-format-${fmt.toLowerCase()}`}
-                onClick={() => setSelectedFormat(fmt)}
-                className={`hover-target px-4 py-2 border transition-all duration-200 ${selectedFormat === fmt ? 'border-[#f1efe8] bg-[#f1efe8] text-[#080807] font-bold' : 'border-[#f1efe8]/15 text-[#f1efe8]/54 hover:border-[#f1efe8]/30 hover:text-[#f1efe8]'}`}
-              >
-                {fmt} REPORT
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-2 text-[#f1efe8]/60">
-          <div className="text-[9px] uppercase text-[#f1efe8]/45 tracking-[0.2em] mb-3">
-            MODULES SHOWN IN PREVIEW:
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="h-2 w-2 bg-[#f1efe8]/60" />
-            <span>01. COMPLETE CRAWL SYSTEM GRAPH PATHS</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="h-2 w-2 bg-[#f1efe8]/60" />
-            <span>02. SEVERITY RANKED ISSUE DIAGNOSTICS</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="h-2 w-2 bg-[#f1efe8]/60" />
-            <span>03. CORE WEB VITALS TELEMETRY LOGS</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-8 pt-6 border-t border-[#f1efe8]/12">
-        {previewing ? (
-          <div className="space-y-3">
-            <div className="flex justify-between items-center text-[9px] text-[#f1efe8]/80">
-              <span>ASSEMBLING PREVIEW STRUCTURE...</span>
-              <span>{progress}%</span>
-            </div>
-            <div className="w-full h-1 bg-white/10 overflow-hidden relative">
-              <motion.div 
-                className="absolute top-0 left-0 bottom-0 bg-[#f1efe8]" 
-                style={{ width: `${progress}%` }} 
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {toastMessage && (
-              <div className="p-3 bg-[#b7c8a8]/10 border border-[#b7c8a8]/30 text-[#b7c8a8] text-[9px]">
-                {toastMessage}
-              </div>
-            )}
-            <button
-              id="exports-trigger-btn"
-              onClick={startPreview}
-              className="hover-target w-full py-3 bg-[#f1efe8] text-[#080807] font-bold uppercase tracking-[0.3em] hover:bg-[#f1efe8]/90 hover:text-[#080807] transition-colors"
-            >
-              [ PREVIEW EXPORT PACKAGE ]
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+const gentleReveal = {
+  initial: { opacity: 0, y: 10 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.34, margin: '-8% 0px -8% 0px' },
+  transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
+} as const;
 
 export default function AtlasPage() {
   useSEO(ATLAS_SEO);
-
   const prefersReducedMotion = useReducedMotion();
-  const [activeModal, setActiveModal] = useState<'issues' | 'graph' | 'donut' | 'findings' | 'exports' | null>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const methodologyRef = useRef<HTMLElement>(null);
+  const evidenceRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+  const { scrollYProgress: methodologyProgress } = useScroll({
+    target: methodologyRef,
+    offset: ['start 0.74', 'start 0.18'],
+  });
+  const { scrollYProgress: evidenceProgress } = useScroll({
+    target: evidenceRef,
+    offset: ['start 0.98', 'start 0.42'],
+  });
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setActiveModal(null);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  const smoothHeroProgress = useSpring(heroProgress, { stiffness: 140, damping: 30, mass: 0.2 });
+  const smoothMethodologyProgress = useSpring(methodologyProgress, { stiffness: 130, damping: 30, mass: 0.2 });
+  const smoothEvidenceProgress = useSpring(evidenceProgress, { stiffness: 120, damping: 34, mass: 0.24 });
+
+  const atlasOpacity = useTransform(smoothEvidenceProgress, [0, 0.35, 0.78, 1], [0.16, 0.1, 0.015, 0]);
+  const evidencePlateOpacity = useTransform(smoothEvidenceProgress, [0, 0.45, 1], [0.04, 0.1, 0.14]);
+  const evidenceFrameOpacity = useTransform(smoothEvidenceProgress, [0, 0.5, 1], [0.03, 0.08, 0.11]);
+  const firstLineOpacity = useTransform(smoothHeroProgress, [0, 0.22, 0.52, 0.9], [1, 0.42, 0.16, 0.06]);
+  const firstLineColor = useTransform(smoothHeroProgress, [0, 0.24, 0.56, 0.9], ['rgba(8,8,7,1)', 'rgba(8,8,7,0.58)', 'rgba(8,8,7,0.22)', 'rgba(8,8,7,0.12)']);
+  const firstLineY = useTransform(smoothHeroProgress, [0, 0.7], ['0rem', '-0.92rem']);
+  const heroCopyY = useTransform(smoothHeroProgress, [0, 0.58, 1], ['0rem', '-0.18rem', '-3.25rem']);
+  const heroSpineHeight = useTransform(smoothHeroProgress, [0.22, 0.48, 0.68], ['0%', '34%', '44%']);
+  const heroSpineOpacity = useTransform(smoothHeroProgress, [0.16, 0.34, 0.5, 0.66], [0, 0.42, 0.26, 0]);
+  const methodPreviewOpacity = useTransform(smoothHeroProgress, [0.24, 0.44, 0.58, 0.7], [0, 0.58, 0.28, 0]);
+  const heroContentOpacity = useTransform(smoothHeroProgress, [0, 0.45, 0.64, 0.82], [1, 1, 0.36, 0]);
+  const methodologyContentOpacity = useTransform(smoothMethodologyProgress, [0, 0.45, 1], [0, 0.58, 1]);
+  const methodologyContentY = useTransform(smoothMethodologyProgress, [0, 1], ['2.15rem', '0rem']);
+  const methodologyLineScale = useTransform(smoothMethodologyProgress, [0.12, 0.55, 1], [0, 0.72, 1]);
 
   return (
-    <main className="site-page site-page-light relative min-h-screen overflow-x-hidden bg-canvas text-ink selection:bg-ink selection:text-canvas">
-      <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
+    <main className="relative min-h-screen bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
       <PageTechnicalChrome tone="light" />
-      {!prefersReducedMotion && <div className="hidden md:block">
-        <SmoothCursor />
-      </div>}
-      <ScrollProgress tone="dark" />
+      <InternalHeader activePath="/atlas" tone="light" variant="home" />
+      <motion.div
+        className="pointer-events-none fixed inset-0 z-[1] overflow-hidden"
+        style={openingArtworkStyle}
+        aria-hidden="true"
+      >
+        <motion.img
+          src={ATLAS_ARTWORK}
+          alt=""
+          className="absolute left-1/2 top-[54%] h-[94svh] w-[178vw] -translate-x-1/2 -translate-y-1/2 scale-[1.16] object-contain object-center md:left-auto md:right-[-28rem] md:top-[55%] md:h-[112svh] md:w-[88rem] md:translate-x-0 md:scale-100 xl:right-[-20rem] xl:w-[96rem]"
+          style={{ opacity: atlasOpacity }}
+          decoding="async"
+        />
+      </motion.div>
 
-      <InternalHeader activePath="/atlas" tone="light" />
+      <section
+        ref={heroRef}
+        id="atlas-hero"
+        className="relative overflow-visible"
+        style={{ height: '165svh' }}
+      >
+        <div className="sticky top-0 z-10 min-h-[100svh] overflow-hidden px-4 pt-32 md:px-8 md:pt-36 xl:px-10">
+          <motion.div
+            className="pointer-events-none absolute left-[calc(50%-5rem)] top-[50%] z-[3] hidden w-px origin-top bg-ink/42 md:block lg:left-[calc(50%-6.75rem)]"
+            style={prefersReducedMotion ? { height: '46%', opacity: 0.42 } : { height: heroSpineHeight, opacity: heroSpineOpacity }}
+            aria-hidden="true"
+          />
+          <motion.div
+            className="pointer-events-none absolute left-[calc(50%-5rem)] top-[50%] z-[3] hidden h-2 w-2 -translate-x-1/2 rounded-full border border-ink/42 bg-canvas md:block lg:left-[calc(50%-6.75rem)]"
+            style={prefersReducedMotion ? { opacity: 0.7 } : { opacity: methodPreviewOpacity }}
+            aria-hidden="true"
+          />
 
-      <section className="relative z-10 mx-auto grid min-h-screen w-full max-w-[1480px] grid-cols-1 gap-12 px-4 pb-16 pt-32 md:px-8 lg:grid-cols-12 xl:px-10 lg:pb-24 lg:pt-40">
-        <ScrollReveal className="lg:col-span-4">
-          <div className="mb-8 text-xs uppercase tracking-[0.36em] text-ink/48">( 01 )</div>
-          <h1 
-            style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
-            aria-label="Atlas SEO Audit Console"
-            className="font-serif text-[clamp(4.6rem,10vw,10.75rem)] italic leading-[0.82] tracking-normal"
-          >
-            Atlas
-          </h1>
-          <p className="mt-10 max-w-[25rem] font-serif text-[clamp(2rem,4vw,4.25rem)] italic leading-[0.92] tracking-normal">
-            <RevealText text="Crawl-based evidence engine for search." delay={0.25} elementType="span" />
-          </p>
-          <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">
-            Atlas SEO Audit Console is a technical SEO audit and evidence system for crawling websites, preserving raw and rendered page evidence, checking robots.txt and sitemap behavior, analyzing internal links, scoring findings, and exporting reviewable reports.
-          </p>
-          <dl className="mt-12 grid max-w-[30rem] grid-cols-[0.6fr_1fr] gap-x-8 gap-y-5 border-t border-ink/20 pt-6 text-[10px] uppercase tracking-[0.24em]">
-            <dt className="text-ink/45">ROLE</dt>
-            <dd>BUILDER / OPERATOR</dd>
-            <dt className="text-ink/45">OUTPUT</dt>
-            <dd>CRAWL DATA, ISSUE LOGIC, INSIGHTS, REPORTS</dd>
-          </dl>
-        </ScrollReveal>
-
-        <ScrollReveal className="lg:col-span-8" delay={0.1} yOffset={18} blur={false}>
-          <div className="group">
-            <AtlasCrawlMap className="aspect-[1000/820] w-full transition-transform duration-700 group-hover:-translate-y-1" />
+          <div className="relative z-10 mx-auto flex min-h-[calc(100svh-8rem)] w-full max-w-[1480px] items-end pb-16 md:items-center md:pb-0">
+            <motion.div
+              initial={prefersReducedMotion ? false : { y: 18 }}
+              animate={prefersReducedMotion ? undefined : { y: 0 }}
+              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              style={prefersReducedMotion ? undefined : { opacity: heroContentOpacity, y: heroCopyY }}
+              id="atlas-hero-copy"
+              className="w-full max-w-[22rem] md:ml-10 md:max-w-[40rem] lg:ml-14 xl:ml-12"
+            >
+              <p className="mb-7 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42 md:mb-8">
+                ATLAS ENGINE
+              </p>
+              <h1 className="font-serif text-[clamp(2.7rem,12vw,4.75rem)] font-light leading-[0.95] tracking-normal text-ink md:text-[clamp(3rem,4.8vw,4.75rem)]">
+                <motion.span
+                  className="block whitespace-nowrap"
+                  style={prefersReducedMotion ? undefined : { color: firstLineColor, opacity: firstLineOpacity, y: firstLineY }}
+                >
+                  To see the
+                </motion.span>
+                <span className="block whitespace-nowrap">
+                  <span className="inline-block">
+                    whole&nbsp;
+                  </span>
+                  <span className="inline-block">
+                    structure.
+                  </span>
+                </span>
+              </h1>
+              <p className="mt-6 max-w-[26rem] text-sm leading-relaxed tracking-normal text-ink/48 md:text-[15px]">
+                A technical audit drawn like a map: every page located, every claim traced,
+                every recommendation tied to proof.
+              </p>
+              <a
+                href="#atlas-methodology"
+                id="atlas-view-methodology-link"
+                className="mt-8 inline-block border-b border-ink/18 pb-1 font-serif text-sm italic tracking-normal text-ink/45 transition-colors hover:border-ink/45 hover:text-ink/72"
+              >
+                View methodology
+              </a>
+              <div className="mt-7 grid gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/46">
+                <a href="/atlas/sample-crawl" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
+                  See an Atlas sample crawl run
+                </a>
+                <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
+                  View the GitHub repo for the audit CLI
+                </a>
+                <a href="/contact" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
+                  Request an audit
+                </a>
+              </div>
+            </motion.div>
           </div>
-          <div className="mt-4 flex items-center justify-between border-b border-ink/15 pb-4 text-[10px] uppercase tracking-[0.28em] text-ink/55">
-            <span>SAMPLE DATASET: EXAMPLE.COM</span>
-            <span>DEMO CRAWL VIEW: APR 18, 2024</span>
-          </div>
-        </ScrollReveal>
+        </div>
+
       </section>
 
-      <section className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-ink/12 px-4 py-16 md:px-8 lg:grid-cols-12 xl:px-10 xl:py-24">
-        <ScrollReveal className="border-l border-ink/22 pl-6 lg:col-span-4">
-          <blockquote className="max-w-[420px] font-serif text-[clamp(2rem,3.6vw,4.8rem)] italic leading-[0.95] tracking-normal">
-            I built Atlas to turn raw crawl data into structured, defensible evidence. Not just what's wrong - but why it matters.
-          </blockquote>
-        </ScrollReveal>
-        <div className="grid gap-10 md:grid-cols-3 lg:col-span-8">
-          {[
-            ['BEYOND BASIC CRAWLS', 'Atlas combines crawl records, page evidence, link relationships, directives, and issue logic so findings can be inspected instead of accepted as a black-box score.'],
-            ['AI-SEARCH AWARE', 'Atlas evaluates content and structure for AI-search discoverability: entity clarity, source signals, freshness, and retrievability.'],
-            ['NOT A CONTENT WRITER', 'Atlas is not a generic content-writing product. It is a crawl, evidence, indexation, link graph, scoring, export, and dashboard system.'],
-          ].map(([title, copy], index) => (
-            <div key={title}>
-              <ScrollReveal delay={index * 0.08} yOffset={18} blur={false}>
-                <div className="mb-6 h-px w-10 bg-ink/35" />
-                <h2 className="mb-5 text-[10px] font-medium uppercase tracking-[0.32em]">{title}</h2>
-                <p className="text-sm leading-relaxed text-ink/62">{copy}</p>
-              </ScrollReveal>
+      <section
+        ref={methodologyRef}
+        id="atlas-methodology"
+        className="relative min-h-[104svh] scroll-mt-28 overflow-hidden border-t border-b border-ink/12 px-4 py-24 md:px-8 md:py-28 xl:px-10"
+      >
+        <div className="relative z-10 mx-auto grid min-h-[calc(100svh-12rem)] w-full max-w-[1480px] items-center gap-10 md:grid-cols-[minmax(10rem,0.38fr)_minmax(0,0.92fr)_minmax(16rem,0.7fr)] md:gap-12 lg:px-10">
+          <motion.div
+            style={prefersReducedMotion ? undefined : { opacity: methodologyContentOpacity, y: methodologyContentY }}
+            className="self-start md:pt-6"
+          >
+            <p className="text-[9px] font-medium uppercase tracking-[0.42em] text-ink/50">
+              ATLAS METHODOLOGY
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="relative max-w-[38rem] md:col-start-2"
+            style={prefersReducedMotion ? undefined : { opacity: methodologyContentOpacity, y: methodologyContentY }}
+          >
+            <motion.div
+              className="absolute left-[3.1rem] top-0 h-full w-px origin-top bg-ink/20 md:left-[3.5rem]"
+              style={prefersReducedMotion ? undefined : { scaleY: methodologyLineScale }}
+              aria-hidden="true"
+            />
+            <div>
+              {methodSteps.map((step) => (
+                <article
+                  key={step.id}
+                  className="relative grid min-h-[5.35rem] grid-cols-[5.8rem_minmax(0,1fr)] gap-5 border-b border-ink/10 py-4 md:grid-cols-[6.55rem_minmax(0,1fr)]"
+                >
+                  <div className="relative flex items-start gap-4">
+                    <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-ink/48">{step.id}</span>
+                    <span className="mt-1.5 h-2 w-2 rounded-full border border-ink/48 bg-canvas shadow-[0_0_0_6px_rgba(241,239,232,0.9)]" />
+                  </div>
+                  <div className="min-w-0">
+                    <h2 className="font-serif text-[clamp(1.08rem,2.1vw,1.45rem)] font-semibold leading-none tracking-normal text-ink/86">
+                      {step.title}
+                    </h2>
+                    <p className="mt-2 max-w-[25rem] text-xs leading-6 text-ink/56">
+                      {step.body}
+                    </p>
+                  </div>
+                </article>
+              ))}
             </div>
-          ))}
+          </motion.div>
         </div>
       </section>
 
-      <section id="process" className="relative z-10 mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
-        <ScrollReveal>
-          <div className="border border-ink/18">
-            <div className="flex items-center justify-between border-b border-ink/18 px-5 py-5 text-[10px] uppercase tracking-[0.32em]">
-              <h2>THE ATLAS PROCESS</h2>
-              <span className="text-ink/45">SYSTEM PATH</span>
+      <EvidenceSection
+        prefersReducedMotion={prefersReducedMotion}
+        sectionRef={evidenceRef}
+        plateOpacity={evidencePlateOpacity}
+        frameOpacity={evidenceFrameOpacity}
+      />
+      <CoverageSection prefersReducedMotion={prefersReducedMotion} />
+      <TechnicalSection prefersReducedMotion={prefersReducedMotion} />
+      <FinalAtlasSection prefersReducedMotion={prefersReducedMotion} />
+      <InternalFooter activePath="/atlas" tone="light" />
+    </main>
+  );
+}
+
+function EvidenceSection({
+  prefersReducedMotion,
+  sectionRef,
+  plateOpacity,
+  frameOpacity,
+}: {
+  prefersReducedMotion: boolean;
+  sectionRef: RefObject<HTMLElement | null>;
+  plateOpacity: MotionValue<number>;
+  frameOpacity: MotionValue<number>;
+}) {
+  return (
+    <section ref={sectionRef} id="atlas-evidence" className="relative min-h-[108svh] scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10">
+      <motion.div
+        className="pointer-events-none absolute right-[-20rem] top-8 hidden h-[52rem] w-[52rem] md:block"
+        style={{ ...widePlateMaskStyle, opacity: plateOpacity }}
+        aria-hidden="true"
+      >
+        <img
+          src={ATLAS_ASSETS.orbitNetwork}
+          alt=""
+          className="h-full w-full object-contain"
+          style={suppliedPlateStyle}
+          loading="lazy"
+          decoding="async"
+        />
+      </motion.div>
+      <div className="mx-auto grid w-full max-w-[1480px] gap-12 md:grid-cols-[minmax(13rem,0.62fr)_minmax(0,1.45fr)] md:gap-16 lg:px-10">
+        <motion.div {...(prefersReducedMotion ? {} : gentleReveal)} className="max-w-[26rem]">
+          <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
+            EVIDENCE MODEL
+          </p>
+          <h2 className="max-w-[13ch] font-serif text-[clamp(2rem,7vw,3.15rem)] font-light leading-none tracking-normal text-ink">
+            Every claim keeps its edge.
+          </h2>
+          <p className="mt-8 text-sm leading-7 text-ink/58">
+            Atlas reads a site as an evidence field. The page, passage, state, and
+            uncertainty stay visible together, so the audit can say what is proved,
+            what is inferred, and what is still absent.
+          </p>
+          <dl className="mt-8 grid max-w-[25rem] grid-cols-3 gap-3 text-[10px] uppercase tracking-[0.18em] text-ink/48">
+            <div className="border-t border-ink/14 pt-3">
+              <dt>Priority</dt>
+              <dd className="mt-1 text-ink/78">High</dd>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
-              {processSteps.map((step) => (
-                <div key={step.index} className="contents">
-                  <AtlasProcessStep {...step} />
+            <div className="border-t border-ink/14 pt-3">
+              <dt>Confidence</dt>
+              <dd className="mt-1 text-ink/78">0.87</dd>
+            </div>
+            <div className="border-t border-ink/14 pt-3">
+              <dt>State</dt>
+              <dd className="mt-1 text-ink/78">Confirmed</dd>
+            </div>
+          </dl>
+          <p className="mt-9 border-l border-ink/16 pl-5 font-serif text-base italic leading-7 text-ink/50">
+            A recommendation should feel less like a guess and more like a line
+            drawn between source and absence.
+          </p>
+        </motion.div>
+
+        <div className="relative">
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.24, margin: '-6% 0px -6% 0px' }}
+            transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1] }}
+            className="relative overflow-hidden border-y border-ink/12 bg-canvas/70 px-0 py-8"
+          >
+            <motion.div className="pointer-events-none absolute -right-12 -top-28 h-[25rem] w-[34rem]" style={{ opacity: frameOpacity }} aria-hidden="true">
+              <img
+                src={ATLAS_ASSETS.frameFragment}
+                alt=""
+                className="h-full w-full object-contain"
+                style={suppliedPlateStyle}
+                loading="lazy"
+                decoding="async"
+              />
+            </motion.div>
+            <div className="mb-7 flex items-center justify-between border-b border-ink/10 pb-4 text-[9px] uppercase tracking-[0.24em] text-ink/44">
+              <span>Proof path</span>
+              <span>sample plate</span>
+            </div>
+            <div className="absolute left-[3rem] right-[3rem] top-[7.75rem] hidden border-t border-ink/12 md:block" aria-hidden="true" />
+            <div className="relative grid gap-7 md:grid-cols-4">
+              {evidenceTrace.map((step, index) => (
+                <motion.article
+                  key={step.id}
+                  initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
+                  whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{
+                    duration: 0.44,
+                    delay: prefersReducedMotion ? 0 : index * 0.035,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="relative px-1 md:px-5"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-ink/48">{step.id}</span>
+                    <span className="h-2 w-2 rounded-full border border-ink/46 bg-canvas shadow-[0_0_0_6px_rgba(241,239,232,0.92)]" />
+                  </div>
+                  <h3 className="mt-5 text-[11px] font-semibold uppercase tracking-[0.24em] text-ink/78">{step.title}</h3>
+                  <p className="mt-3 max-w-[14rem] text-xs leading-6 text-ink/52">{step.body}</p>
+                </motion.article>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.dl
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.26, margin: '-6% 0px -6% 0px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.03 }}
+            className="mt-10 border-t border-ink/12"
+          >
+            {evidenceCards.map((card, index) => (
+              <div
+                key={card.label}
+                className="grid gap-2 border-b border-ink/10 py-4 md:grid-cols-[13rem_minmax(0,1fr)] md:items-baseline"
+              >
+                <dt className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/52">
+                  {String(index + 1).padStart(2, '0')} / {card.label}
+                </dt>
+                <dd className={card.kind === 'score' ? 'font-serif text-2xl leading-none text-ink/82' : 'text-sm leading-7 text-ink/62'}>
+                  {card.value}
+                </dd>
+              </div>
+            ))}
+          </motion.dl>
+
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.24, margin: '-6% 0px -6% 0px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+            className="mt-10 grid gap-5 border-y border-ink/12 py-6 md:grid-cols-[12rem_minmax(0,1fr)]"
+          >
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/62">
+              Evidence states
+            </p>
+            <div className="grid gap-0">
+              {evidenceStateRows.map((row) => (
+                <div key={row.state} className="grid gap-2 border-b border-ink/10 py-3 last:border-b-0 md:grid-cols-[11rem_minmax(0,1fr)]">
+                  <span className="font-mono text-[11px] text-ink/64">{row.state}</span>
+                  <p className="text-xs leading-6 text-ink/54">{row.meaning}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CoverageSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  return (
+    <section id="atlas-coverage" className="relative min-h-[112svh] scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10">
+      <div
+        className="pointer-events-none absolute -left-[18rem] top-16 h-[42rem] w-[42rem] opacity-[0.13] md:-left-[8rem] md:top-20 md:h-[54rem] md:w-[54rem]"
+        style={widePlateMaskStyle}
+        aria-hidden="true"
+      >
+        <img
+          src={ATLAS_ASSETS.orbitSphere}
+          alt=""
+          className="h-full w-full object-contain"
+          style={suppliedPlateStyle}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div className="pointer-events-none absolute -bottom-36 right-[-18rem] hidden h-[36rem] w-[36rem] opacity-[0.11] md:block" aria-hidden="true">
+        <img
+          src={ATLAS_ASSETS.armillarySphere}
+          alt=""
+          className="h-full w-full object-contain"
+          style={suppliedPlateStyle}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto grid w-full max-w-[1480px] gap-14 md:grid-cols-[minmax(14rem,0.75fr)_minmax(0,1.35fr)] md:items-start md:gap-16 lg:px-10">
+        <motion.div {...(prefersReducedMotion ? {} : gentleReveal)} className="max-w-[27rem]">
+          <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
+            COVERAGE MAP
+          </p>
+          <h2 className="font-serif text-[clamp(2.2rem,8vw,3.55rem)] font-light leading-[0.98] tracking-normal text-ink">
+            The map shows where the site goes quiet.
+          </h2>
+          <p className="mt-8 text-sm leading-7 text-ink/58">
+            The crawl is not the destination. It is the rough fieldwork that reveals
+            which services, entities, locations, examples, and proof surfaces can be
+            found, cited, and trusted.
+          </p>
+          <p className="mt-9 border-l border-ink/16 pl-5 font-serif text-base italic leading-7 text-ink/50">
+            The useful map is not the biggest one. It is the one that shows where a
+            search system runs out of evidence.
+          </p>
+          <dl className="mt-10 grid max-w-[25rem] grid-cols-3 border-y border-ink/12 text-center">
+            {coverageMetrics.map((metric) => (
+              <div key={metric.label} className="border-r border-ink/10 px-3 py-5 last:border-r-0">
+                <dt className="text-[9px] uppercase tracking-[0.2em] text-ink/42">{metric.label}</dt>
+                <dd className="mt-3 font-serif text-2xl leading-none text-ink/78">{metric.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </motion.div>
+
+        <div className="relative">
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.28, margin: '-6% 0px -6% 0px' }}
+            transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1] }}
+            className="border-t border-ink/12"
+          >
+            <div className="hidden grid-cols-[minmax(0,0.78fr)_minmax(0,0.8fr)_minmax(0,0.78fr)_minmax(0,0.72fr)] gap-4 border-b border-ink/14 py-4 text-[9px] uppercase tracking-[0.18em] text-ink/44 md:grid">
+              <span>Field</span>
+              <span>Observed</span>
+              <span>Quiet edge</span>
+              <span className="text-right">Next move</span>
+            </div>
+            {coverageRows.map((row, index) => (
+              <motion.div
+                key={row.area}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
+                whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.34 }}
+                transition={{ duration: 0.42, delay: prefersReducedMotion ? 0 : index * 0.028, ease: [0.16, 1, 0.3, 1] }}
+                className="grid gap-3 border-b border-ink/10 py-5 text-xs leading-6 text-ink/58 md:grid-cols-[minmax(0,0.78fr)_minmax(0,0.8fr)_minmax(0,0.78fr)_minmax(0,0.72fr)] md:gap-4"
+              >
+                <div>
+                  <span className="mr-3 text-[10px] uppercase tracking-[0.18em] text-ink/42">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="font-medium text-ink/76">{row.area}</span>
+                </div>
+                <div className="font-mono text-[11px] text-ink/50">
+                  <span className="mb-1 block font-sans text-[9px] uppercase tracking-[0.18em] text-ink/38 md:hidden">Observed</span>
+                  {row.observed}
+                </div>
+                <div>
+                  <span className="mb-1 block text-[9px] uppercase tracking-[0.18em] text-ink/38 md:hidden">Gap</span>
+                  {row.gap}
+                </div>
+                <div className="font-mono text-[11px] text-ink/62 md:text-right">
+                  <span className="mb-1 block font-sans text-[9px] uppercase tracking-[0.18em] text-ink/38 md:hidden">Next</span>
+                  {row.next}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.28, margin: '-6% 0px -6% 0px' }}
+            transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
+            className="mt-12 grid gap-5 border-y border-ink/12 py-7 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:items-center"
+          >
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/62">
+              Coverage ladder
+            </p>
+            <div className="grid gap-0">
+              {coverageLadder.map((step, index) => (
+                <div key={step.label} className="grid gap-3 border-b border-ink/10 py-4 last:border-b-0 md:grid-cols-[10rem_minmax(0,1fr)]">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-ink/46">
+                    {String(index + 1).padStart(2, '0')} / {step.label}
+                  </div>
+                  <p className="text-sm leading-7 text-ink/58">{step.value}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  return (
+    <section id="atlas-technical" className="relative min-h-[112svh] scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10">
+      <div className="pointer-events-none absolute left-1/2 top-4 hidden w-[112rem] max-w-none -translate-x-1/2 opacity-[0.17] md:block" aria-hidden="true">
+        <img
+          src={ATLAS_ASSETS.celestialArc}
+          alt=""
+          className="w-full object-contain"
+          style={suppliedPlateStyle}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div className="mx-auto grid w-full max-w-[1480px] gap-12 md:grid-cols-[minmax(13rem,0.62fr)_minmax(0,1.05fr)_minmax(13rem,0.78fr)] md:gap-10 lg:px-10">
+        <motion.div {...(prefersReducedMotion ? {} : gentleReveal)}>
+          <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
+            UNDER THE HOOD
+          </p>
+          <h2 className="font-serif text-[clamp(2rem,7vw,3rem)] font-light leading-none tracking-normal text-ink">
+            The machinery stays legible.
+          </h2>
+          <p className="mt-8 text-sm leading-7 text-ink/58">
+            Atlas is a crawl and evidence system first. Source discovery, rendered
+            observations, derived labels, and recommendations stay in separate lanes,
+            so a review can inspect the path instead of trusting the verdict.
+          </p>
+          <p className="mt-9 border-l border-ink/16 pl-5 font-serif text-base italic leading-7 text-ink/50">
+            The output should have the patience of an archive and the utility of an
+            engineering ticket.
+          </p>
+          <dl className="mt-10 grid gap-0 border-t border-ink/12">
+            {technicalPillars.map((pillar) => (
+              <div key={pillar.label} className="grid grid-cols-[7rem_minmax(0,1fr)] gap-4 border-b border-ink/10 py-3">
+                <dt className="text-[9px] uppercase tracking-[0.2em] text-ink/42">{pillar.label}</dt>
+                <dd className="text-xs leading-5 text-ink/62">{pillar.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <a
+            href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-9 inline-block border-b border-ink/20 pb-1 font-serif text-sm italic text-ink/58 transition-colors hover:border-ink/45 hover:text-ink"
+          >
+            View on GitHub
+          </a>
+        </motion.div>
+
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3, margin: '-6% 0px -6% 0px' }}
+          transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
+          className="relative overflow-hidden border border-ink/14 bg-[#edeae1]/72 p-5 shadow-[0_10px_34px_rgba(8,8,7,0.025)]"
+        >
+          <div className="mb-5 flex items-center justify-between border-b border-ink/10 pb-4 text-[9px] uppercase tracking-[0.22em] text-ink/44">
+            <span>Run ledger</span>
+            <span>atlas.audit</span>
+          </div>
+          <div className="mb-6 grid gap-0 border-b border-ink/10 pb-5 md:grid-cols-4">
+            {technicalFlow.map((step) => (
+              <div key={step.id} className="border-b border-ink/10 py-3 last:border-b-0 md:border-b-0 md:border-r md:px-4 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                <div className="mb-3 flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/44">
+                  <span>{step.id}</span>
+                  <span className="h-1.5 w-1.5 rounded-full border border-ink/38" />
+                </div>
+                <h3 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/72">{step.label}</h3>
+                <p className="mt-2 text-[11px] leading-5 text-ink/50">{step.detail}</p>
+              </div>
+            ))}
+          </div>
+          <pre className="overflow-x-auto whitespace-pre-wrap text-[11px] leading-6 text-ink/68">
+            {terminalLines.map((line, index) => (
+              <motion.code
+                key={line}
+                initial={prefersReducedMotion ? false : { opacity: 0 }}
+                whileInView={prefersReducedMotion ? undefined : { opacity: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.22, delay: prefersReducedMotion ? 0 : index * 0.018 }}
+                className="block font-mono"
+              >
+                {line}
+              </motion.code>
+            ))}
+          </pre>
+        </motion.div>
+
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3, margin: '-6% 0px -6% 0px' }}
+          transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
+          className="border-l border-ink/12 pl-6 md:pt-16"
+        >
+          <h3 className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/62">Review queue</h3>
+          <table className="mt-5 w-full text-left text-xs text-ink/58">
+            <thead className="border-b border-ink/14 text-[10px] uppercase tracking-[0.18em] text-ink/48">
+              <tr>
+                <th className="pb-3 font-medium">Issue</th>
+                <th className="pb-3 font-medium">Evidence</th>
+                <th className="pb-3 text-right font-medium">Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              {issueRows.map((row, index) => (
+                <motion.tr
+                  key={row.issue}
+                  initial={prefersReducedMotion ? false : { opacity: 0 }}
+                  whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ duration: 0.28, delay: prefersReducedMotion ? 0 : index * 0.018 }}
+                  className="border-b border-ink/10"
+                >
+                  <td className="py-3 pr-4">{row.issue}</td>
+                  <td className="py-3 pr-4 text-ink/44">{row.evidence}</td>
+                  <td className="py-3 text-right">{row.impact}</td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="mt-8 border-t border-ink/10 pt-5 text-xs leading-6 text-ink/48">
+            Every issue is anchored to source URLs, passages, and a repeatable run,
+            so the audit can be inspected before it is acted on.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.22, margin: '-6% 0px -6% 0px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.06 }}
+          className="border-y border-ink/12 py-6 md:col-span-3"
+        >
+          <div className="grid gap-5 md:grid-cols-[13rem_minmax(0,1fr)]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/62">
+              Fail-closed gates
+            </p>
+            <div className="grid gap-0 md:grid-cols-2 md:gap-x-10">
+              {gateRows.map((row) => (
+                <div key={row.gate} className="grid gap-2 border-b border-ink/10 py-4 md:grid-cols-[9rem_minmax(0,1fr)]">
+                  <h3 className="text-[10px] uppercase tracking-[0.2em] text-ink/48">{row.gate}</h3>
+                  <p className="text-xs leading-6 text-ink/56">{row.behavior}</p>
                 </div>
               ))}
             </div>
           </div>
-        </ScrollReveal>
-      </section>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
-      <section className="relative z-10 mx-auto max-w-[1480px] border-t border-ink/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
-        <ScrollReveal className="mb-10 grid gap-8 lg:grid-cols-[0.34fr_0.66fr]" yOffset={18} blur={false}>
-          <div>
-            <div className="mb-5 h-px w-16 bg-ink/45" />
-            <h2 className="font-serif text-[clamp(2.8rem,6.4vw,7.5rem)] italic leading-none tracking-normal">
-              What Atlas SEO Audit Console Checks
-            </h2>
-          </div>
-          <p className="max-w-3xl self-end text-base leading-relaxed text-ink/62">
-            These are the public, evidence-facing checks Atlas is described around. Each item points to the canonical page or source that explains the check without claiming private rankings, private client outcomes, or unsupported metrics.
+function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  return (
+    <section id="atlas-final" className="relative min-h-[112svh] scroll-mt-28 overflow-hidden px-4 py-28 md:px-8 md:py-36 xl:px-10">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <img
+          src={ATLAS_ASSETS.atlasFigurePortrait}
+          alt=""
+          className="absolute bottom-[-12rem] right-[-12rem] h-[92svh] w-[58rem] object-contain object-bottom opacity-[0.12] md:bottom-[-9rem] md:right-[-2rem] md:h-[112svh] md:opacity-[0.17]"
+          style={{ ...suppliedPlateStyle, ...widePlateMaskStyle }}
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          src={ATLAS_ASSETS.armillarySphere}
+          alt=""
+          className="absolute -left-[21rem] top-24 hidden h-[52rem] w-[52rem] object-contain opacity-[0.1] md:block"
+          style={suppliedPlateStyle}
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="absolute inset-0 hidden md:block">
+          {finalNodes.map((node, index) => (
+            <motion.span
+              key={`${node.x}-${node.y}`}
+              className="absolute h-2 w-2 rounded-full border border-ink/42 bg-canvas shadow-[0_0_0_7px_rgba(8,8,7,0.04)]"
+              style={{ left: node.x, top: node.y }}
+              initial={prefersReducedMotion ? false : { opacity: 0 }}
+              whileInView={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.45 }}
+              transition={{ duration: 0.36, delay: prefersReducedMotion ? 0 : index * 0.025, ease: [0.16, 1, 0.3, 1] }}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto grid min-h-[calc(100svh-14rem)] w-full max-w-[1480px] items-center gap-14 md:grid-cols-[minmax(18rem,0.82fr)_minmax(0,1fr)] lg:px-10">
+        <motion.div {...(prefersReducedMotion ? {} : gentleReveal)} className="max-w-[33rem]">
+          <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
+            ATLAS ENGINE
           </p>
-        </ScrollReveal>
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-ink/14 md:grid-cols-2 xl:grid-cols-4">
-          {atlasCheckItems.map((item, index) => (
-            <div key={item.label}>
-              <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
-                <a
-                  href={item.href}
-                  className="hover-target block min-h-[180px] bg-ink/[0.018] p-5 transition-colors hover:bg-ink hover:text-canvas"
-                >
-                  <p className="mb-7 text-[10px] uppercase tracking-[0.24em] text-inherit opacity-40">{String(index + 1).padStart(2, '0')}</p>
-                  <h3 className="mb-4 text-xs uppercase tracking-[0.22em] text-inherit">{item.label}</h3>
-                  <p className="text-sm leading-relaxed text-inherit opacity-70">{item.proves}</p>
-                </a>
-              </ScrollReveal>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="atlas-proof" className="relative z-10 mx-auto max-w-[1480px] border-y border-ink/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
-        <ScrollReveal className="mb-10 grid gap-8 lg:grid-cols-[0.36fr_0.64fr]" yOffset={18} blur={false}>
-          <div>
-            <div className="mb-5 h-px w-16 bg-ink/45" />
-            <h2 className="font-serif text-[clamp(3rem,7vw,8rem)] italic leading-none tracking-normal">Atlas evidence model.</h2>
-          </div>
-          <p className="max-w-3xl text-base leading-relaxed text-ink/62">
-            This is the canonical software/project page for Atlas. Public screenshots and demo issue rows use example data, but the product description is specific: crawl records, source-page evidence, SQLite persistence, link graph analysis, scoring logic, exports, and dashboards.
-          </p>
-        </ScrollReveal>
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-ink/14 md:grid-cols-2 xl:grid-cols-4">
-          {evidenceGroups[0].items.map((item, index) => (
-            <div key={item}>
-              <ScrollReveal delay={index * 0.035} yOffset={14} blur={false}>
-              <article className="min-h-[150px] bg-ink/[0.018] p-5">
-                <p className="mb-8 text-[10px] uppercase tracking-[0.24em] text-ink/38">{String(index + 1).padStart(2, '0')}</p>
-                <h3 className="text-sm leading-relaxed text-ink/68">{item}</h3>
-              </article>
-              </ScrollReveal>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-          {[
-            ['GitHub profile', 'https://github.com/SulaymanB2024', 'Public code profile and related repositories.'],
-            ['SEO audit/scraper repo', 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', 'Public scraper/audit code evidence.'],
-            ['AI Information', '/ai-information', 'Canonical entity and source map.'],
-            ['Void Agency Method', '/method', 'Service/process context for technical SEO audits.'],
-          ].map(([label, href, copy]) => (
-            <a
-              key={href}
-              href={href}
-              target={href.startsWith('http') ? '_blank' : undefined}
-              rel={href.startsWith('http') ? 'noreferrer' : undefined}
-              className="hover-target border border-ink/14 p-5 transition-colors hover:bg-ink hover:text-canvas"
-            >
-              <p className="mb-4 text-[10px] uppercase tracking-[0.22em] text-inherit opacity-60">{label}</p>
-              <p className="text-sm leading-relaxed text-inherit opacity-70">{copy}</p>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="relative z-10 bg-canvas border-t border-ink/12 px-4 py-16 text-ink md:px-10 lg:px-14 lg:py-24">
-        <div className="mx-auto max-w-[1480px]">
-          <ScrollReveal className="mb-10 flex flex-col justify-between gap-5 border-b border-ink/18 pb-6 md:flex-row md:items-end" blur={false}>
-            <div>
-              <div className="mb-5 h-px w-16 bg-ink/45" />
-              <h2 className="font-serif text-[clamp(3rem,7vw,8rem)] italic leading-none tracking-normal">EVIDENCE &amp; OUTPUTS</h2>
-            </div>
-            <p className="max-w-md text-sm leading-relaxed text-ink/62">
-              Structured artifacts that make crawler observations reviewable, inspectable, and defensible across technical teams.
-            </p>
-            <p className="max-w-md text-[10px] uppercase tracking-[0.22em] text-ink/42">
-              Public page note: issue rows, indexation counts, and export previews use a demo dataset, not disclosed client data.
-            </p>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-5">
-            <AtlasOutputCard title="ISSUE DETECTION" id="atlas-card-issues" copy="Prioritized technical issues with impact scoring." cta="VIEW ALL" onCtaClick={() => setActiveModal('issues')}>
-              <MetricTable />
-            </AtlasOutputCard>
-
-            <AtlasOutputCard title="INTERNAL LINK GRAPH" id="atlas-card-graph" copy="Understand flow, depth, and orphan risk." cta="EXPLORE GRAPH" onCtaClick={() => setActiveModal('graph')}>
-              <MiniGraph />
-            </AtlasOutputCard>
-
-            <AtlasOutputCard title="INDEXATION OVERVIEW" id="atlas-card-donut" copy="Crawlable vs. indexable at a glance." cta="VIEW BREAKDOWN" onCtaClick={() => setActiveModal('donut')}>
-              <MiniDonut />
-            </AtlasOutputCard>
-
-            <AtlasOutputCard title="TECHNICAL FINDINGS" id="atlas-card-findings" copy="Examples with evidence and remediation." cta="VIEW DETAILS" onCtaClick={() => setActiveModal('findings')}>
-              <div className="w-full border border-ink/18 p-4">
-                <div className="mb-6 flex items-start justify-between">
-                  <div>
-                    <h4 className="text-xs uppercase tracking-[0.26em] text-ink/82">Missing Canonical</h4>
-                    <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-ink/48">312 pages</p>
-                  </div>
-                  <span className="text-xl font-serif italic text-ink/58">7.2</span>
-                </div>
-                <p className="mb-5 text-sm leading-relaxed text-ink/58">Multiple pages missing self-referencing canonicals.</p>
-                <div className="space-y-2 border-t border-ink/12 pt-4 text-[10px] uppercase tracking-[0.15em] text-ink/48">
-                  <div>Affected URLs:</div>
-                  <div>/blog/how-to-audit</div>
-                  <div>/pricing/plans</div>
-                  <div>/resources/seo-tools</div>
-                </div>
-              </div>
-            </AtlasOutputCard>
-
-            <AtlasOutputCard title="EXPORT PREVIEW" id="atlas-card-exports" copy="Sample report structures and operator dashboard sections." cta="OPEN PREVIEW" onCtaClick={() => setActiveModal('exports')}>
-              <ul className="w-full space-y-4 text-[11px] uppercase tracking-[0.18em] text-ink/62">
-                {['Executive Summary (PDF)', 'Technical Audit (PDF)', 'Issue Export (CSV)', 'Crawl Data (Parquet)', 'Looker Studio Dashboard'].map((item) => (
-                  <li key={item} className="flex items-center justify-between border-b border-ink/12 pb-3">
-                    <span>{item}</span>
-                    <span className="h-1.5 w-1.5 rounded-full bg-ink/45" />
-                  </li>
-                ))}
-              </ul>
-            </AtlasOutputCard>
-          </div>
-        </div>
-      </section>
-
-      <section id="next-steps" className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 px-4 py-16 md:px-8 lg:grid-cols-12 xl:px-10 xl:py-24">
-        <ScrollReveal className="lg:col-span-4">
-          <h2 className="max-w-[32rem] font-serif text-[clamp(3.5rem,8vw,9rem)] italic leading-[0.84] tracking-normal">
-            System intelligence you can act on.
+          <h2 className="font-serif text-[clamp(2.8rem,12vw,4.75rem)] font-light leading-[0.95] tracking-normal text-ink">
+            A map for
+            <br />
+            actual repairs.
           </h2>
-          <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">
-            Atlas turns complexity into inspectable evidence so operators can decide what matters, what should be fixed, and what source data supports the recommendation.
+          <p className="mt-6 max-w-[24rem] text-sm leading-7 text-ink/58">
+            The final artifact should read like an annotation, not a pitch: what was
+            seen, what was missing, what to change first, and what still requires
+            judgment.
           </p>
-          <a href="/#contact" aria-label="Contact Sulayman Bowles" data-cursor-text="CONTACT" className="hover-target mt-10 block h-12 w-12 rounded-full border border-ink/35 transition-colors hover:bg-ink hover:text-canvas" />
-        </ScrollReveal>
-
-        <ScrollReveal className="lg:col-span-5" delay={0.1} blur={false}>
-          <div className="border-y border-ink/16 py-6 text-[10px] uppercase tracking-[0.32em] text-ink/48">NEXT STEPS</div>
-          <div className="grid gap-0 md:grid-cols-2">
-            {[
-              ['01', 'VIEW RELATED WORK', 'See other projects in SEO, finance, and data.'],
-              ['02', 'WORK WITH ME', "Let's build systems with evidence that can be checked."],
-            ].map(([index, title, copy]) => (
-              <a key={title} href={index === '01' ? '/#selected-works' : '/#contact'} data-cursor-text={index === '01' ? 'WORK' : 'CONTACT'} className="hover-target group border-b border-ink/16 py-8 md:border-r md:border-ink/16 md:pr-8 md:last:border-r-0 md:last:pl-8">
-                <div className="mb-8 text-[10px] uppercase tracking-[0.28em] text-ink/42">{index}</div>
-                <h3 className="mb-4 text-xs uppercase tracking-[0.3em]">{title}</h3>
-                <p className="mb-7 text-sm leading-relaxed text-ink/62">{copy}</p>
-                <span className="inline-block text-xs tracking-[0.28em] transition-transform group-hover:translate-x-1">-&gt;</span>
+          <div className="mt-9 grid gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/48">
+            {finalActions.map((action) => (
+              <a
+                key={action.href}
+                href={action.href}
+                target={action.external ? '_blank' : undefined}
+                rel={action.external ? 'noreferrer' : undefined}
+                className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72"
+              >
+                {action.label}
               </a>
             ))}
           </div>
-        </ScrollReveal>
+        </motion.div>
 
-        <ScrollReveal className="lg:col-span-3" delay={0.16} blur={false}>
-          <div className="border border-ink/18 p-5 text-[10px] uppercase tracking-[0.28em]">
-            <div className="mb-10 flex items-center justify-between border-b border-ink/14 pb-5">
-              <span className="text-ink/45">PROJECT</span>
-              <span>02 / 06</span>
-            </div>
-            <a href="/#systems" data-cursor-text="PREV" className="hover-target mb-8 grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-opacity hover:opacity-70">
-              <span className="text-ink/42">PREV</span>
-              <span>01 / FINANCE</span>
-              <span>UP</span>
-            </a>
-            <a href="/method" data-cursor-text="NEXT" className="hover-target grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-opacity hover:opacity-70">
-              <span className="text-ink/42">NEXT</span>
-              <span>03 / VOID</span>
-              <span>DOWN</span>
-            </a>
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3, margin: '-6% 0px -6% 0px' }}
+          transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
+          className="relative border-y border-ink/12 py-7 md:ml-auto md:w-full md:max-w-[43rem]"
+        >
+          <div className="mb-5 grid grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)] gap-6 text-[9px] uppercase tracking-[0.2em] text-ink/42">
+            <span>Deliverable</span>
+            <span>Contents</span>
           </div>
-        </ScrollReveal>
-      </section>
-
-      <InternalFooter activePath="/atlas" tone="light" />
-
-      {/* Interactive Console Modals */}
-      <ConsoleModal 
-        isOpen={activeModal === 'issues'} 
-        onClose={() => setActiveModal(null)} 
-        title="01 / PRIORITY ISSUE INSPECTOR"
-      >
-        <IssuesModalContent />
-      </ConsoleModal>
-
-      <ConsoleModal 
-        isOpen={activeModal === 'graph'} 
-        onClose={() => setActiveModal(null)} 
-        title="02 / INTERNAL LINK GRAPH CONSOLE"
-      >
-        <GraphModalContent />
-      </ConsoleModal>
-
-      <ConsoleModal 
-        isOpen={activeModal === 'donut'} 
-        onClose={() => setActiveModal(null)} 
-        title="03 / INDEXATION AUDIT CONSOLE"
-      >
-        <DonutModalContent />
-      </ConsoleModal>
-
-      <ConsoleModal 
-        isOpen={activeModal === 'findings'} 
-        onClose={() => setActiveModal(null)} 
-        title="04 / CODE REMEDIATION WORKSPACE"
-      >
-        <FindingsModalContent />
-      </ConsoleModal>
-
-      <ConsoleModal 
-        isOpen={activeModal === 'exports'} 
-        onClose={() => setActiveModal(null)} 
-        title="05 / DATABASE EXPORT CONTROLS"
-      >
-        <ExportsModalContent />
-      </ConsoleModal>
-    </main>
+          {deliverableRows.map((row, index) => (
+            <motion.div
+              key={row.label}
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
+              whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.34 }}
+              transition={{ duration: 0.42, delay: prefersReducedMotion ? 0 : index * 0.028, ease: [0.16, 1, 0.3, 1] }}
+              className="grid gap-4 border-t border-ink/10 py-5 text-xs leading-6 text-ink/58 md:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)] md:gap-6"
+            >
+              <div>
+                <span className="mr-4 text-[10px] uppercase tracking-[0.18em] text-ink/40">{String(index + 1).padStart(2, '0')}</span>
+                <span className="font-medium text-ink/76">{row.label}</span>
+              </div>
+              <p>{row.value}</p>
+            </motion.div>
+          ))}
+          <div className="mt-6 grid gap-3 border-t border-ink/12 pt-6 md:grid-cols-3">
+            {handoffNotes.map((note, index) => (
+              <p key={note} className="border-t border-ink/10 pt-4 text-[11px] leading-6 text-ink/50">
+                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-ink/38">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                {note}
+              </p>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 }

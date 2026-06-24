@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import { useRef, useEffect, useState, lazy, Suspense, type CSSProperties, type FormEvent } from 'react';
-import { SmoothCursor } from './components/SmoothCursor';
+import { useRef, useEffect, useState, lazy, Suspense, type CSSProperties } from 'react';
 import { RevealText } from './components/RevealText';
 import { StaggeredText } from './components/StaggeredText';
 import { InkTrails } from './components/InkTrails';
@@ -21,8 +20,10 @@ import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavig
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
 import { TextMarquee } from './components/TextMarquee';
+import { AuditIntakeForm } from './components/AuditIntakeForm';
 
 const loadAtlasPage = () => import('./pages/AtlasPage');
+const loadAtlasCelestialParallaxPage = () => import('./pages/AtlasCelestialParallaxPage');
 const loadMethodPage = () => import('./pages/VoidAgencyMethodPage');
 const loadAboutPage = () => import('./pages/AboutPage');
 const loadResumePage = () => import('./pages/ResumePage');
@@ -30,8 +31,15 @@ const loadAiInformationPage = () => import('./pages/AiInformationPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
 const loadSimplePage = () => import('./pages/SimplePage');
+const loadWorkPage = () => import('./pages/WorkPage');
+const loadContactPage = () => import('./pages/ContactPage');
+const loadAtlasSampleCrawlPage = () => import('./pages/AtlasSampleCrawlPage');
+const loadTechnicalSeoCaseStudyPage = () => import('./pages/TechnicalSeoCaseStudyPage');
+const loadAustinTechnicalSeoPage = () => import('./pages/AustinTechnicalSeoPage');
+const loadVoidAgencyPage = () => import('./pages/VoidAgencyPage');
 
 const AtlasPage = lazy(loadAtlasPage);
+const AtlasCelestialParallaxPage = lazy(loadAtlasCelestialParallaxPage);
 const VoidAgencyMethodPage = lazy(loadMethodPage);
 const AboutPage = lazy(loadAboutPage);
 const ResumePage = lazy(loadResumePage);
@@ -39,6 +47,12 @@ const AiInformationPage = lazy(loadAiInformationPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
 const SimplePage = lazy(loadSimplePage);
+const WorkPage = lazy(loadWorkPage);
+const ContactPage = lazy(loadContactPage);
+const AtlasSampleCrawlPage = lazy(loadAtlasSampleCrawlPage);
+const TechnicalSeoCaseStudyPage = lazy(loadTechnicalSeoCaseStudyPage);
+const AustinTechnicalSeoPage = lazy(loadAustinTechnicalSeoPage);
+const VoidAgencyPage = lazy(loadVoidAgencyPage);
 const LocalTime = lazy(() => import('./components/LocalTime').then(m => ({ default: m.LocalTime })));
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
@@ -53,7 +67,16 @@ const HOME_SEO = getSeoRoute('/')!;
 
 function isDarkRoute(path: string) {
   const route = getSeoRoute(path);
-  return route?.path === '/about' || route?.path === '/method' || route?.path === '/markets' || route?.section === 'research-article';
+  return (
+    route?.path === '/about' ||
+    route?.path === '/method' ||
+    route?.path === '/work' ||
+    route?.path === '/contact' ||
+    route?.path === '/void-agency' ||
+    route?.path === '/austin-technical-seo' ||
+    route?.section === 'research-article' ||
+    route?.section === 'case-study'
+  );
 }
 
 async function preloadRoute(path: string) {
@@ -61,12 +84,26 @@ async function preloadRoute(path: string) {
 
   if (route?.path === '/atlas') {
     await loadAtlasPage();
+  } else if (route?.path === '/atlas/celestial-parallax') {
+    await loadAtlasCelestialParallaxPage();
   } else if (route?.path === '/method') {
     await loadMethodPage();
   } else if (route?.path === '/about') {
     await loadAboutPage();
   } else if (route?.path === '/simple') {
     await loadSimplePage();
+  } else if (route?.path === '/work') {
+    await loadWorkPage();
+  } else if (route?.path === '/contact') {
+    await loadContactPage();
+  } else if (route?.path === '/atlas/sample-crawl') {
+    await loadAtlasSampleCrawlPage();
+  } else if (route?.path === '/case-studies/technical-seo-audit') {
+    await loadTechnicalSeoCaseStudyPage();
+  } else if (route?.path === '/austin-technical-seo') {
+    await loadAustinTechnicalSeoPage();
+  } else if (route?.path === '/void-agency') {
+    await loadVoidAgencyPage();
   } else if (route?.path === '/resume') {
     await loadResumePage();
   } else if (route?.path === '/ai-information') {
@@ -109,6 +146,12 @@ export default function App() {
         <AtlasPage />
       </Suspense>
     );
+  } else if (route?.path === '/atlas/celestial-parallax') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <AtlasCelestialParallaxPage />
+      </Suspense>
+    );
   } else if (route?.path === '/method') {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
@@ -125,6 +168,42 @@ export default function App() {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
         <SimplePage />
+      </Suspense>
+    );
+  } else if (route?.path === '/work') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <WorkPage />
+      </Suspense>
+    );
+  } else if (route?.path === '/contact') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <ContactPage />
+      </Suspense>
+    );
+  } else if (route?.path === '/atlas/sample-crawl') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <AtlasSampleCrawlPage />
+      </Suspense>
+    );
+  } else if (route?.path === '/case-studies/technical-seo-audit') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <TechnicalSeoCaseStudyPage />
+      </Suspense>
+    );
+  } else if (route?.path === '/austin-technical-seo') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <AustinTechnicalSeoPage />
+      </Suspense>
+    );
+  } else if (route?.path === '/void-agency') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <VoidAgencyPage />
       </Suspense>
     );
   } else if (route?.path === '/resume') {
@@ -233,14 +312,6 @@ function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
   );
 }
 
-function ContactFieldLabel({ htmlFor, children }: { htmlFor: string; children: string }) {
-  return (
-    <label htmlFor={htmlFor} className="sr-only">
-      {children}
-    </label>
-  );
-}
-
 let initialLoadComplete = false;
 
 function HomePage() {
@@ -248,75 +319,6 @@ function HomePage() {
   const prefersReducedMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
-
-  // Contact Form State
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [websiteUrl, setWebsiteUrl] = useState('');
-  const [projectType, setProjectType] = useState('');
-  const [timeline, setTimeline] = useState('');
-  const [scope, setScope] = useState('');
-  const [brokenArea, setBrokenArea] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!email || !message) return;
-
-    setFormStatus('submitting');
-    const triggerShutter = (window as any).triggerShutter;
-    if (triggerShutter) {
-      triggerShutter(true);
-    }
-
-    try {
-      const response = await fetch('https://formspree.io/f/xyzrppzo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          websiteUrl,
-          projectType,
-          timeline,
-          scope,
-          brokenArea,
-          message,
-        })
-      });
-
-      if (response.ok) {
-        setTimeout(() => {
-          setFormStatus('success');
-          setName('');
-          setEmail('');
-          setWebsiteUrl('');
-          setProjectType('');
-          setTimeline('');
-          setScope('');
-          setBrokenArea('');
-          setMessage('');
-          if (triggerShutter) {
-            triggerShutter(false);
-          }
-        }, 800);
-      } else {
-        setFormStatus('error');
-        if (triggerShutter) {
-          triggerShutter(false);
-        }
-      }
-    } catch (error) {
-      setFormStatus('error');
-      if (triggerShutter) {
-        triggerShutter(false);
-      }
-    }
-  };
 
   const [counter, setCounter] = useState(initialLoadComplete ? 100 : 0);
   const [isLoaded, setIsLoaded] = useState(initialLoadComplete);
@@ -363,18 +365,11 @@ function HomePage() {
   
   const h1Transform = useTransform(philosophyScroll, [0, 1], ["0%", "-40%"]);
   const h2Transform = useTransform(philosophyScroll, [0, 1], ["0%", "40%"]);
-  const contactFieldClass = 'w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-sm font-sans tracking-normal outline-none transition-colors placeholder:text-canvas/32 text-canvas';
-  const contactSelectClass = `${contactFieldClass} appearance-none text-canvas/82`;
 
   return (
     <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas" ref={containerRef}>
       {!prefersReducedMotion && <InkTrails />}
         
-        {/* Hide native cursor on desktop to use smooth cursor */}
-        {!prefersReducedMotion && <div className="hidden md:block">
-          <SmoothCursor />
-        </div>}
-
       <InternalHeader activePath="/" tone="light" variant="home" />
 
       {/* Grid Crosshairs */}
@@ -471,8 +466,8 @@ function HomePage() {
 		                 UT Austin McCombs student building Atlas, technical SEO systems, AI-search visibility, and finance/data research.
 	               </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4 text-xs text-ink/70">
-                  <a href="/#contact" id="hero-start-audit-link" className="hover-target inline-flex min-h-11 items-center border border-ink bg-ink px-5 py-3 font-sans text-[10px] uppercase tracking-[0.2em] text-canvas transition-colors hover:bg-transparent hover:text-ink">Start a technical audit</a>
-                  <a href="/atlas" id="hero-view-atlas-link" className="hover-target inline-flex min-h-11 items-center border-b border-ink/24 pb-1 font-sans text-[10px] uppercase tracking-[0.2em] transition-colors hover:border-ink hover:text-ink">View Atlas</a>
+                  <a href="/contact" id="hero-start-audit-link" className="inline-flex min-h-11 items-center border border-ink bg-ink px-5 py-3 font-sans text-[10px] uppercase tracking-[0.2em] text-canvas transition-colors hover:bg-transparent hover:text-ink">Start a technical audit</a>
+                  <a href="/atlas" id="hero-view-atlas-link" className="inline-flex min-h-11 items-center border-b border-ink/24 pb-1 font-sans text-[10px] uppercase tracking-[0.2em] transition-colors hover:border-ink hover:text-ink">View Atlas</a>
                 </div>
 	             </div>
              <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-ink/40 md:text-xs">Trace the work</span>
@@ -575,7 +570,7 @@ function HomePage() {
                </div>
 
                {/* Right Column Canvas */}
-               <a href="/atlas" id="work-link-atlas" className="md:col-span-8 block overflow-hidden hover-target relative h-[60vh] md:h-[90vh] border border-canvas/20 order-1 md:order-2 origin-right group/atlas" data-cursor-text="ATLAS">
+               <a href="/atlas" id="work-link-atlas" className="md:col-span-8 block overflow-hidden relative h-[60vh] md:h-[90vh] border border-canvas/20 order-1 md:order-2 origin-right group/atlas">
                  <div className="hidden md:block absolute left-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
                  
                  {/* Corner brackets */}
@@ -626,7 +621,7 @@ function HomePage() {
              <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-stretch pt-24 pb-48">
                
                {/* Left Column Canvas */}
-               <a href="/markets" id="work-link-markets" className="md:col-span-8 overflow-hidden hover-target relative block h-[60vh] md:h-[90vh] border border-canvas/20 origin-left group" data-cursor-text="OBSERVE">
+               <a href="/markets" id="work-link-markets" className="md:col-span-8 overflow-hidden relative block h-[60vh] md:h-[90vh] border border-canvas/20 origin-left group">
                  <div className="hidden md:block absolute right-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
                  
                  {/* Corner markers */}
@@ -678,7 +673,7 @@ function HomePage() {
          </div>
            
            {/* Project 02 - Void */}
-           <a href="/method" id="work-link-void" className="order-2 w-full mt-32 md:mt-64 pt-32 pb-48 relative min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center border-t border-b border-canvas/10 my-32 hover-target bg-ink overflow-hidden group" data-cursor-text="METHOD">
+           <a href="/method" id="work-link-void" className="order-2 w-full mt-32 md:mt-64 pt-32 pb-48 relative min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center border-t border-b border-canvas/10 my-32 bg-ink overflow-hidden group">
               {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
               <div className="relative z-10 flex flex-col items-center">
                 <ScrollReveal>
@@ -763,8 +758,7 @@ function HomePage() {
                         <motion.div 
                           initial="initial"
                           whileHover="hover"
-                          className="relative overflow-hidden flex flex-col border-t border-ink/20 pt-8 hover-target transition-opacity duration-500 hover:!opacity-100 group-hover:opacity-20 group/discipline min-h-[220px]" 
-                          data-cursor-text="READ" 
+                          className="relative overflow-hidden flex flex-col border-t border-ink/20 pt-8 transition-opacity duration-500 hover:!opacity-100 group-hover:opacity-20 group/discipline min-h-[220px]" 
                           style={{ perspective: 1000 }}
                         >
                           <div className="relative z-10 flex flex-col pointer-events-none w-full">
@@ -1185,14 +1179,14 @@ function HomePage() {
                   ))}
                             </div>
                   <div className="pt-32 w-full flex justify-start md:justify-end">
-                    <a href="#selected-works" id="discipline-view-work-link" className="hover-target text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
+                    <a href="#selected-works" id="discipline-view-work-link" className="text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
                   </div>
                </div>
             </div>
          </section>
 
         {/* INTERSTITIAL SECTION */}
-        <section className="w-full h-[50vh] md:h-[80vh] overflow-hidden hover-target relative">
+        <section className="w-full h-[50vh] md:h-[80vh] overflow-hidden relative">
            {!prefersReducedMotion && <KineticTypography />}
            <div className="absolute inset-0 flex items-center justify-center mix-blend-difference pointer-events-none">
               <div className="w-[1px] h-32 bg-canvas mb-8"></div>
@@ -1213,155 +1207,14 @@ function HomePage() {
                     </ScrollReveal>
                     
                     <ScrollReveal delay={0.1} blur={false}>
-                      <h4 className="text-[12vw] leading-[0.8] font-serif uppercase font-light tracking-tighter mb-12 hover-target" data-cursor-text="WRITE">
+                      <h4 className="text-[12vw] leading-[0.8] font-serif uppercase font-light tracking-tighter mb-12 ">
                          <span className="block italic opacity-90">Send</span>
                          <span className="block opacity-80">The Brief</span>
                       </h4>
                     </ScrollReveal>
                     
                     <ScrollReveal delay={0.2} blur={false}>
-                      {formStatus === 'success' ? (
-                        <div className="text-canvas font-sans font-light tracking-widest uppercase text-base md:text-lg py-6 border border-canvas/20 px-8 rounded bg-canvas/5 max-w-lg mt-4">
-                          <p className="text-[#a3e635] mb-2 font-medium">✓ Brief Received</p>
-                          <p className="text-[10px] text-canvas/60 normal-case tracking-normal leading-relaxed">
-                            Thank you. Your message has been sent successfully. I will review your submission and get back to you shortly.
-                          </p>
-                        </div>
-                      ) : (
-                        <form onSubmit={handleSubmit} className="w-full max-w-xl space-y-6 mt-4">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                              <ContactFieldLabel htmlFor="contact-name">Your name</ContactFieldLabel>
-                              <input
-                                type="text"
-                                required
-                                id="contact-name"
-                                name="name"
-                                autoComplete="name"
-                                placeholder="Your name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className={contactFieldClass}
-                              />
-                            </div>
-                            <div>
-                              <ContactFieldLabel htmlFor="contact-email">Your email</ContactFieldLabel>
-                              <input
-                                type="email"
-                                required
-                                id="contact-email"
-                                name="email"
-                                autoComplete="email"
-                                placeholder="Your email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className={contactFieldClass}
-                              />
-                            </div>
-                          </div>
-                          <ContactFieldLabel htmlFor="contact-website-url">Website URL</ContactFieldLabel>
-                          <input
-                            type="url"
-                            id="contact-website-url"
-                            name="websiteUrl"
-                            autoComplete="url"
-                            placeholder="Website URL"
-                            value={websiteUrl}
-                            onChange={(e) => setWebsiteUrl(e.target.value)}
-                            className={contactFieldClass}
-                          />
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div>
-                              <ContactFieldLabel htmlFor="contact-project-type">Project type</ContactFieldLabel>
-                              <select
-                                id="contact-project-type"
-                                name="projectType"
-                                value={projectType}
-                                onChange={(e) => setProjectType(e.target.value)}
-                                className={contactSelectClass}
-                              >
-                                <option value="" className="bg-ink text-canvas">Project type</option>
-                                <option value="Technical SEO audit" className="bg-ink text-canvas">Technical SEO audit</option>
-                                <option value="AI-search visibility" className="bg-ink text-canvas">AI-search visibility</option>
-                                <option value="Finance/data research" className="bg-ink text-canvas">Finance/data research</option>
-                                <option value="Web system" className="bg-ink text-canvas">Web system</option>
-                              </select>
-                            </div>
-                            <div>
-                              <ContactFieldLabel htmlFor="contact-timeline">Timeline</ContactFieldLabel>
-                              <select
-                                id="contact-timeline"
-                                name="timeline"
-                                value={timeline}
-                                onChange={(e) => setTimeline(e.target.value)}
-                                className={contactSelectClass}
-                              >
-                                <option value="" className="bg-ink text-canvas">Timeline</option>
-                                <option value="This week" className="bg-ink text-canvas">This week</option>
-                                <option value="2-4 weeks" className="bg-ink text-canvas">2-4 weeks</option>
-                                <option value="1-2 months" className="bg-ink text-canvas">1-2 months</option>
-                                <option value="Flexible" className="bg-ink text-canvas">Flexible</option>
-                              </select>
-                            </div>
-                            <div>
-                              <ContactFieldLabel htmlFor="contact-scope">Scope size</ContactFieldLabel>
-                              <select
-                                id="contact-scope"
-                                name="scope"
-                                value={scope}
-                                onChange={(e) => setScope(e.target.value)}
-                                className={contactSelectClass}
-                              >
-                                <option value="" className="bg-ink text-canvas">Scope size</option>
-                                <option value="Small audit" className="bg-ink text-canvas">Small audit</option>
-                                <option value="Full site audit" className="bg-ink text-canvas">Full site audit</option>
-                                <option value="Implementation support" className="bg-ink text-canvas">Implementation support</option>
-                                <option value="Research sprint" className="bg-ink text-canvas">Research sprint</option>
-                              </select>
-                            </div>
-                          </div>
-                          <ContactFieldLabel htmlFor="contact-broken-area">What feels broken?</ContactFieldLabel>
-                          <textarea
-                            rows={2}
-                            id="contact-broken-area"
-                            name="brokenArea"
-                            placeholder="What feels broken?"
-                            value={brokenArea}
-                            onChange={(e) => setBrokenArea(e.target.value)}
-                            className={`${contactFieldClass} resize-none`}
-                          />
-                          <ContactFieldLabel htmlFor="contact-message">Project details, goals, or audit request</ContactFieldLabel>
-                          <textarea 
-                            required
-                            rows={3}
-                            id="contact-message"
-                            name="message"
-                            placeholder="Project details, goals, or audit request"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            className={`${contactFieldClass} resize-none`}
-                          />
-                          <div className="flex items-center justify-between pt-2">
-                            {formStatus === 'error' && (
-                              <span className="text-red-400 text-[10px] font-sans tracking-widest uppercase">
-                                Submission failed. Please try again.
-                              </span>
-                            )}
-                            <button 
-                              type="submit" 
-                              disabled={formStatus === 'submitting'}
-                              className="group flex min-h-11 w-fit items-center gap-6 hover-target bg-transparent border-none outline-none text-left disabled:opacity-50"
-                            >
-                              <span className="text-lg md:text-xl font-sans font-light tracking-widest uppercase pb-1 border-b-2 border-canvas/20 group-hover:border-canvas transition-colors text-canvas">
-                                {formStatus === 'submitting' ? 'SENDING...' : 'SUBMIT BRIEF'}
-                              </span>
-                              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-canvas/20 text-canvas transition-colors group-hover:bg-canvas group-hover:text-ink">
-                                <span className="transform -rotate-45 block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">→</span>
-                              </div>
-                            </button>
-                          </div>
-                        </form>
-                      )}
+                      <AuditIntakeForm />
                     </ScrollReveal>
                  </div>
                  
@@ -1377,13 +1230,12 @@ function HomePage() {
                                key={item.href}
                                href={item.href}
                                id={navItemId('home-footer-link', item)}
-                               data-cursor-text={item.cursorText ?? navLabel(item)}
-                               className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1"
+                               className="hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1"
                              >
                                {navLabel(item)}
                              </a>
                            ))}
-                           <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">EMAIL</a>
+                           <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">EMAIL</a>
                         </div>
                      </ScrollReveal>
                  </div>
@@ -1391,7 +1243,7 @@ function HomePage() {
               
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-[10px] uppercase font-sans tracking-[0.2em] text-canvas/40 py-8 gap-4 md:gap-0">
                  <span>© 2026 Sulayman Bowles</span>
-                 <a href="#top" id="footer-back-to-top" className="hover-target hover:text-canvas transition-colors flex items-center gap-2">
+                 <a href="#top" id="footer-back-to-top" className="hover:text-canvas transition-colors flex items-center gap-2">
                     Back to top <span className="transform -rotate-90 block">→</span>
                  </a>
                  <span>Technical SEO · AI Search · Finance/Data</span>

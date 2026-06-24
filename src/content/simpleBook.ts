@@ -18,7 +18,7 @@ export const SIMPLE_BOOK_TITLE = 'A Short Book About Sulayman Bowles';
 export const SIMPLE_BOOK_H1 = 'A Short Book About Me';
 
 export const SIMPLE_BOOK_DESCRIPTION =
-  'A first-person text edition of Sulayman Bowles website, covering technical SEO, AI-search visibility, Atlas, Void Agency, Markets Research, finance/data work, software systems, and current direction.';
+  'A first-person text edition of Sulayman Bowles website covering technical SEO, AI-search visibility, Atlas, Void Agency, Markets Research, finance/data work, and software systems.';
 
 export const SIMPLE_BOOK_STATIC_SUMMARY =
   'A first-person book page by Sulayman Bowles about his work across technical SEO, AI-search visibility, finance/data research, Atlas, Void Agency, Markets Research, and software systems.';

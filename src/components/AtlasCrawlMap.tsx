@@ -206,7 +206,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
             <button
               key={mode}
               onClick={() => setViewMode(mode)}
-              className={`hover-target transition-colors py-1 relative ${viewMode === mode ? 'text-white' : 'text-canvas/42 hover:text-canvas/82'}`}
+              className={`transition-colors py-1 relative ${viewMode === mode ? 'text-white' : 'text-canvas/42 hover:text-canvas/82'}`}
             >
               [{String(idx + 1).padStart(2, '0')}. {mode}]
               {viewMode === mode && (

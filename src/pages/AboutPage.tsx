@@ -4,10 +4,8 @@ import VisibilitySystemMap from '../components/VisibilitySystemMap';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
-import { SmoothCursor } from '../components/SmoothCursor';
 import { StaggeredText } from '../components/StaggeredText';
 import { ScrambleText } from '../components/ScrambleText';
-import { useReducedMotion } from '../hooks/useReducedMotion';
 import { identityReconciliation, sourceMap } from '../content/aiInformation';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
@@ -335,15 +333,11 @@ function MetaCard({ label, value }: { label: string; value: string }) {
 
 export default function AboutPage() {
   useSEO(ABOUT_SEO);
-  const prefersReducedMotion = useReducedMotion();
 
   return (
     <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
-      {!prefersReducedMotion && <div className="hidden md:block">
-        <SmoothCursor />
-      </div>}
       <ScrollProgress />
 
       <InternalHeader activePath="/about" tone="dark" />
@@ -419,32 +413,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section id="identity-reconciliation" className="mx-auto max-w-[1480px] border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
-        <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-4xl">
-          <SectionLabel>{identityReconciliation.title}</SectionLabel>
-          <p className="text-base leading-relaxed text-[#f1efe8]/62">
-            {identityReconciliation.copy}
-          </p>
-        </ScrollReveal>
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-7">
-          {identityReconciliation.links.map((link, index) => (
-            <div key={link.href}>
-              <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
-                <a
-                  href={link.href}
-                  target={link.href.startsWith('http') ? '_blank' : undefined}
-                  rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="hover-target block min-h-[160px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8]/[0.035]"
-                >
-                  <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-[#f1efe8]">{link.label}</h3>
-                  <p className="text-sm leading-relaxed text-[#f1efe8]/56">{link.description}</p>
-                </a>
-              </ScrollReveal>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section className="mx-auto max-w-[1480px] border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-3xl">
           <SectionLabel>PUBLIC SOURCE GRAPH</SectionLabel>
@@ -460,12 +428,44 @@ export default function AboutPage() {
                 href={source.href}
                 target={source.href.startsWith('http') ? '_blank' : undefined}
                 rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
-                className="hover-target block min-h-[240px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8]/[0.035]"
+                className="block min-h-[240px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8]/[0.035]"
               >
                 <p className="mb-5 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/42">{source.role}</p>
                 <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-[#f1efe8]">{source.label}</h3>
                 <p className="text-sm leading-relaxed text-[#f1efe8]/56">{source.proves}</p>
               </a>
+              </ScrollReveal>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="identity-reconciliation" className="mx-auto max-w-[1480px] border-b border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+        <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-4xl">
+          <SectionLabel>HISTORICAL SOURCE CONTEXT</SectionLabel>
+          <p className="text-base leading-relaxed text-[#f1efe8]/62">
+            {identityReconciliation.copy}
+          </p>
+          <a
+            href="/ai-information#identity-reconciliation"
+            className="mt-6 inline-flex text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/58 underline decoration-[#f1efe8]/22 underline-offset-4 transition-colors hover:text-[#f1efe8]"
+          >
+            Read the full identity reconciliation
+          </a>
+        </ScrollReveal>
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-7">
+          {identityReconciliation.links.map((link, index) => (
+            <div key={link.href}>
+              <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
+                <a
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+                  className="block min-h-[160px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8]/[0.035]"
+                >
+                  <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-[#f1efe8]">{link.label}</h3>
+                  <p className="text-sm leading-relaxed text-[#f1efe8]/56">{link.description}</p>
+                </a>
               </ScrollReveal>
             </div>
           ))}

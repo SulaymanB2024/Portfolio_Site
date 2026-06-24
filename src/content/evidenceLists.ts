@@ -51,6 +51,27 @@ export const publicSourceGraph: EvidenceListItem[] = [
       'Canonical software/project page for Atlas as a crawl, evidence, indexation, link graph, scoring, export, and dashboard system.',
   },
   {
+    category: 'Projects',
+    label: 'Atlas sample crawl run',
+    href: '/atlas/sample-crawl',
+    proves:
+      'Sanitized/demo crawl evidence table with URL status, indexability, crawl depth, link counts, canonical state, issue labels, notes, and downloadable CSV source data.',
+  },
+  {
+    category: 'Work index',
+    label: 'Selected Work',
+    href: '/work',
+    proves:
+      'Canonical work route connecting Atlas, technical SEO method, case-study logic, public code, audit intake, and finance/data assumption artifacts.',
+  },
+  {
+    category: 'Contact / intake',
+    label: 'Audit intake',
+    href: '/contact',
+    proves:
+      'Canonical route for technical SEO, AI-search visibility, crawl evidence, analytics, and finance/data research requests.',
+  },
+  {
     category: 'Academic context',
     label: 'HTML resume',
     href: '/resume',
@@ -215,8 +236,8 @@ export const fanOutQueryMap: FanOutQueryMapItem[] = [
     ],
     bestPage: 'Atlas SEO Audit Console',
     href: '/atlas',
-    missingContent: 'If public Atlas repositories or screenshots change, add the strongest stable proof links here.',
-    recommendedEdit: 'Keep the checks list tied to crawl records, robots.txt, sitemaps, HTML evidence, link graphs, persistence, scoring, and exports.',
+    missingContent: 'Keep the sample crawl route and public code links current when Atlas artifacts change.',
+    recommendedEdit: 'Keep the checks list tied to crawl records, robots.txt, sitemaps, HTML evidence, link graphs, persistence, scoring, exports, and the sample crawl run.',
   },
   {
     originalQuery: 'What does Void Agency do?',

@@ -154,7 +154,7 @@ export function LinkPanel({
 }: ComponentPropsWithoutRef<'a'>) {
   return (
     <a
-      className={cx('hover-target block border border-current/14 p-5 text-current/68 transition-colors hover:bg-current hover:text-[var(--page-bg)]', className)}
+      className={cx('block border border-current/14 p-5 text-current/68 transition-colors hover:bg-current hover:text-[var(--page-bg)]', className)}
       {...props}
     />
   );
@@ -235,7 +235,7 @@ export function ModalShell({
 export function PrimaryCTA({ className, ...props }: ComponentPropsWithoutRef<'a'>) {
   return (
     <a
-      className={cx('hover-target inline-flex min-h-11 items-center border border-current px-5 py-3 text-[10px] uppercase tracking-[0.2em] transition-colors hover:bg-current hover:text-canvas', className)}
+      className={cx('inline-flex min-h-11 items-center border border-current px-5 py-3 text-[10px] uppercase tracking-[0.2em] transition-colors hover:bg-current hover:text-canvas', className)}
       {...props}
     />
   );
@@ -244,7 +244,7 @@ export function PrimaryCTA({ className, ...props }: ComponentPropsWithoutRef<'a'
 export function TextLink({ className, ...props }: ComponentPropsWithoutRef<'a'>) {
   return (
     <a
-      className={cx('hover-target border-b border-current/24 pb-1 transition-colors hover:border-current', className)}
+      className={cx('border-b border-current/24 pb-1 transition-colors hover:border-current', className)}
       {...props}
     />
   );

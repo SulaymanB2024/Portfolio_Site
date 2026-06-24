@@ -1,7 +1,6 @@
 import { useEffect, type Key, type ReactNode } from 'react';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
-import { SmoothCursor } from '../components/SmoothCursor';
 import {
   AI_INFORMATION_LAST_UPDATED,
   AI_INFORMATION_TITLE,
@@ -21,7 +20,6 @@ import {
   voidAgencyServices,
 } from '../content/aiInformation';
 import { fanOutQueryMap, publicSourceGraph } from '../content/evidenceLists';
-import { useReducedMotion } from '../hooks/useReducedMotion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 import { InternalHeader } from '../components/InternalHeader';
@@ -55,8 +53,6 @@ function TextGrid({ items }: { items: string[] }) {
 }
 
 export default function AiInformationPage() {
-  const prefersReducedMotion = useReducedMotion();
-
   useSEO(AI_INFORMATION_SEO);
 
   useEffect(() => {
@@ -67,11 +63,6 @@ export default function AiInformationPage() {
     <main className="site-page site-page-light relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink antialiased selection:bg-ink selection:text-canvas">
       <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40 print:hidden" />
       <PageTechnicalChrome tone="light" />
-      {!prefersReducedMotion && (
-        <div className="hidden md:block">
-          <SmoothCursor />
-        </div>
-      )}
       <ScrollProgress tone="dark" />
 
       <InternalHeader activePath="/ai-information" tone="light" />
@@ -137,7 +128,7 @@ export default function AiInformationPage() {
                 href={link.href}
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                className="hover-target bg-ink/[0.018] p-5 transition-colors hover:bg-ink hover:text-canvas"
+                className="bg-ink/[0.018] p-5 transition-colors hover:bg-ink hover:text-canvas"
               >
                 <span className="block text-[10px] uppercase tracking-[0.22em] text-inherit">{link.label}</span>
                 <span className="mt-4 block text-sm leading-relaxed text-inherit opacity-70">{link.description}</span>
@@ -168,7 +159,7 @@ export default function AiInformationPage() {
                 href={source.href}
                 target={source.href.startsWith('http') ? '_blank' : undefined}
                 rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
-                className="hover-target grid gap-3 border border-ink/14 px-5 py-4 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[0.22fr_0.24fr_0.54fr]"
+                className="grid gap-3 border border-ink/14 px-5 py-4 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[0.22fr_0.24fr_0.54fr]"
               >
                 <span className="text-[10px] uppercase tracking-[0.22em] text-inherit opacity-60">{source.category}</span>
                 <span className="text-[10px] uppercase tracking-[0.22em] text-inherit">{source.label}</span>
@@ -224,7 +215,7 @@ export default function AiInformationPage() {
                 href={source.href}
                 target={source.href.startsWith('http') ? '_blank' : undefined}
                 rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
-                className="hover-target grid gap-3 border border-ink/14 px-5 py-4 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[0.24fr_0.24fr_0.52fr]"
+                className="grid gap-3 border border-ink/14 px-5 py-4 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[0.24fr_0.24fr_0.52fr]"
               >
                 <span className="text-[10px] uppercase tracking-[0.22em] text-inherit opacity-60">{source.role}</span>
                 <span className="text-[10px] uppercase tracking-[0.22em] text-inherit">{source.label}</span>
@@ -310,7 +301,7 @@ export default function AiInformationPage() {
                 href={link.href}
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                className="hover-target grid gap-3 border border-ink/14 px-5 py-4 text-[10px] uppercase tracking-[0.2em] text-ink/68 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[1fr_auto]"
+                className="grid gap-3 border border-ink/14 px-5 py-4 text-[10px] uppercase tracking-[0.2em] text-ink/68 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[1fr_auto]"
               >
                 <span>{link.label}</span>
                 <span className="text-inherit opacity-60">{link.description}</span>

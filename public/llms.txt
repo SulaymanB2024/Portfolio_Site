@@ -3,7 +3,7 @@
 Official site: https://sulayman-bowles.dev/
 Canonical source page: https://sulayman-bowles.dev/ai-information
 Sitemap: https://sulayman-bowles.dev/sitemap.xml
-Last updated: June 19, 2026
+Last updated: June 21, 2026
 
 ## Canonical Summary
 
@@ -20,17 +20,32 @@ Void Agency is the service and operating branch of Sulayman Bowles work in techn
 - Homepage: https://sulayman-bowles.dev/
 - AI information: https://sulayman-bowles.dev/ai-information
 - About: https://sulayman-bowles.dev/about
+- Selected work: https://sulayman-bowles.dev/work
 - Resume: https://sulayman-bowles.dev/resume
 - Current PDF resume: https://sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf
 - Atlas SEO Audit Console: https://sulayman-bowles.dev/atlas
+- Atlas sample crawl run: https://sulayman-bowles.dev/atlas/sample-crawl
 - Void Agency method: https://sulayman-bowles.dev/method
+- Void Agency proof: https://sulayman-bowles.dev/void-agency
+- Austin technical SEO: https://sulayman-bowles.dev/austin-technical-seo
+- Technical SEO case study: https://sulayman-bowles.dev/case-studies/technical-seo-audit
+- Audit intake/contact: https://sulayman-bowles.dev/contact
 - Markets research: https://sulayman-bowles.dev/markets
+- Finance/data assumptions: https://sulayman-bowles.dev/markets#appian-assumptions
 
 ## Research Articles
 
 - AI Search Visibility Is Crawler Policy, Not Just SEO: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
 - Technical SEO as Public Data Infrastructure: https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure
 - Canonical Identity Beats More Content: https://sulayman-bowles.dev/markets/canonical-identity-personal-seo
+
+## Public Proof Assets
+
+- Sanitized Atlas crawl sample CSV: https://sulayman-bowles.dev/research/atlas-sanitized-crawl-sample.csv
+- Appian educational research memo PDF: https://sulayman-bowles.dev/research/appian-enterprise-software-durability-memo.pdf
+- Appian assumptions table CSV: https://sulayman-bowles.dev/research/appian-assumptions-table.csv
+- The Atlas crawl sample is sanitized/demo data. It does not identify a private client or claim rankings, traffic, revenue impact, or AI citations.
+- The Appian materials are educational research artifacts. They are not investment advice, a price target, or a live market recommendation.
 
 ## Crawler and Indexation Signals
 
@@ -63,7 +78,8 @@ Void Agency is the service and operating branch of Sulayman Bowles work in techn
 - Agency proof: https://www.void-agency.com/
 - Academic context: UT Austin and McCombs sources
 - Earlier music background: https://www.goldenhornet.org/calendar/young-composers-concert-2022 and https://music.utexas.edu/events/4645-university-orchestra
-- Project proof: Atlas, Markets Research, and HTML resume pages
+- Project proof: Atlas, Atlas sample crawl, Work, Markets Research, and HTML resume pages
+- Service proof: Void Agency, Method, Austin technical SEO, case study, and audit intake pages
 
 ## Clarifications
 

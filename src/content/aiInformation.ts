@@ -2,8 +2,8 @@ import { fanOutQueryMap, publicSourceGraph } from './evidenceLists';
 
 export const AI_INFORMATION_PATH = '/ai-information';
 
-export const AI_INFORMATION_LASTMOD = '2026-06-19';
-export const AI_INFORMATION_LAST_UPDATED = 'June 19, 2026';
+export const AI_INFORMATION_LASTMOD = '2026-06-21';
+export const AI_INFORMATION_LAST_UPDATED = 'June 21, 2026';
 
 export const AI_INFORMATION_TITLE = 'AI Information for Sulayman Bowles, Void Agency, and Atlas';
 
@@ -264,11 +264,53 @@ export const sourceMap = [
       'Canonical software/project page describing Atlas as a crawl, evidence, indexation, link graph, scoring, export, and dashboard system.',
   },
   {
+    role: 'Project proof',
+    label: 'Atlas sample crawl run',
+    href: '/atlas/sample-crawl',
+    proves:
+      'Sanitized/demo crawl evidence table with URL status, indexability, crawl depth, link counts, canonical state, issue labels, notes, and downloadable CSV source data.',
+  },
+  {
+    role: 'Work proof',
+    label: 'Selected Work',
+    href: '/work',
+    proves:
+      'Canonical work index connecting Atlas, technical SEO method, sanitized case-study logic, public code, audit intake, and finance/data assumption artifacts.',
+  },
+  {
     role: 'Service/process proof',
     label: 'Void Agency Method',
     href: '/method',
     proves:
       'Canonical service/process page tying Void Agency to crawlability, robots.txt, sitemaps, canonicals, structured data, internal links, GSC/GA4, and page diagnostics.',
+  },
+  {
+    role: 'Organization proof',
+    label: 'Void Agency',
+    href: '/void-agency',
+    proves:
+      'Canonical organization proof page for Void Agency as the service branch connected to technical SEO, AI-search visibility, crawlability, and evidence-backed audits.',
+  },
+  {
+    role: 'Service proof',
+    label: 'Austin technical SEO',
+    href: '/austin-technical-seo',
+    proves:
+      'Local service-intent page for Austin technical SEO and AI-search visibility with conservative claim boundaries and links to method, sample crawl data, and intake.',
+  },
+  {
+    role: 'Case study proof',
+    label: 'Technical SEO audit case study',
+    href: '/case-studies/technical-seo-audit',
+    proves:
+      'Sanitized case-study page explaining how crawl evidence becomes findings, implementation priorities, and review artifacts without private client claims.',
+  },
+  {
+    role: 'Contact proof',
+    label: 'Audit intake',
+    href: '/contact',
+    proves:
+      'Canonical contact and audit-intake route using the same brief form fields as the homepage contact section.',
   },
   {
     role: 'Finance/data proof',

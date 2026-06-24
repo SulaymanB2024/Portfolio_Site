@@ -19,8 +19,7 @@ export function TextMarquee() {
       ref={containerRef}
       href="/about"
       aria-label="Go to About Sulayman Bowles"
-      data-cursor-text="ABOUT ME"
-      className="relative mt-24 mb-0 flex w-full overflow-hidden whitespace-nowrap border-y border-canvas/10 bg-ink py-12 text-canvas md:mt-32 md:py-20 hover-target group perspective-1000"
+      className="relative mt-24 mb-0 flex w-full overflow-hidden whitespace-nowrap border-y border-canvas/10 bg-ink py-12 text-canvas md:mt-32 md:py-20 group perspective-1000"
     >
       <motion.div
         className="flex w-max flex-nowrap group-hover:opacity-60 group-hover:text-outline-light group-hover:text-transparent transition-all duration-700"
