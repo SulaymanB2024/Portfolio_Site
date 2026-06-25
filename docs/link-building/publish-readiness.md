@@ -4,27 +4,22 @@ Updated: 2026-06-25
 
 ## Current State
 
-The link-building authority pack is locally prepared, but it is not live on `https://sulayman-bowles.dev`.
+The link-building authority pack is published on `https://sulayman-bowles.dev`.
 
-Local pack validation passes:
+Production evidence:
 
-- `npm run linkbuilding:prepare`
-- `npm run lint`
-- `npm run build`
-- `npm run submit:indexnow -- --dry-run`
+- Published commit: `26a985871028ca5a16a81a65996c65379261e21b`
+- `npm run linkbuilding:live-check` passed at `2026-06-25T19:54:51.175Z`
+- `npm run submit:indexnow` returned HTTP `200 OK` and submitted 30 URLs
 
-Manifest export validation passes in a temporary clean clone:
+Clean publish clone validation passed:
 
 - `npm run linkbuilding:scope-check`
 - `npm run linkbuilding:prepare`
 - `npm run lint`
 - `npm run build`
 - `npm run submit:indexnow -- --dry-run`
-
-Deployment validation currently fails:
-
 - `npm run linkbuilding:live-check`
-- Reason: `/research`, `public/research/authority-assets.json`, the AI crawler source map, and the Austin benchmark files are not deployed yet. Live `llms.txt` and `sitemap.xml` also do not include the new research asset references.
 
 Publish scope validation currently fails in this checkout:
 
