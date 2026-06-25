@@ -9,7 +9,7 @@ const requiredChecks = [
       'Citation surfaces, not empty claims.',
       'Authority asset JSON',
       'LLMs text file',
-      'Research Assets | Technical SEO, AI Search & Atlas Data',
+      'Research Assets | Technical SEO, AI Search',
     ],
   },
   {

@@ -210,7 +210,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     return articleShell(
       'Research Assets',
       'Citation-ready public research assets across technical SEO, AI-search, Atlas, crawlability, identity, and finance/data work.',
-      `<p>This index gives editors, source-page owners, technical SEO writers, AI-search researchers, and profile reviewers one clean URL for public assets and source files.</p>
+      `<h2>Citation surfaces, not empty claims.</h2>
+        <p>This index gives editors, source-page owners, technical SEO writers, AI-search researchers, and profile reviewers one clean URL for public assets and source files.</p>
+        <p>The <a href="/llms.txt">LLMs text file</a> and <a href="/research/authority-assets.json">Authority asset JSON</a> provide machine-readable context for crawlers, citation review, and outreach.</p>
         <h2>Citation Targets</h2>
         ${publicResearchAssets
           .map(
