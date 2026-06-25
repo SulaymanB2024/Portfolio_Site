@@ -7,8 +7,8 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 | Priority | Prospect | Segment | Target | Asset | Next action |
 | --- | --- | --- | --- | --- | --- |
 | 1 | GitHub profile | owned-profile | https://sulayman-bowles.dev/research | Research assets and Atlas project | Monitor public profile README links |
-| 1 | Portfolio_Site repository | owned-profile | https://sulayman-bowles.dev/ | Portfolio static SEO implementation | Monitor public GitHub metadata link |
-| 1 | Thick-Scraper-VOID- repository | owned-profile | https://sulayman-bowles.dev/atlas | Atlas project | Monitor public GitHub metadata link |
+| 1 | Portfolio_Site repository | owned-profile | https://sulayman-bowles.dev/ | Portfolio static SEO implementation | Monitor public GitHub metadata and README links |
+| 1 | Thick-Scraper-VOID- repository | owned-profile | https://sulayman-bowles.dev/atlas | Atlas project | Monitor public GitHub metadata and README links |
 | 1 | LinkedIn profile | owned-profile | https://sulayman-bowles.dev/resume | Resume and source graph | Update profile manually |
 | 1 | UT Austin Student Government | existing-mention | https://sulayman-bowles.dev/ai-information | AI information source graph | Confirm mention and contact owner |
 | 1 | McCombs School of Business | academic | https://sulayman-bowles.dev/resume | Resume | Find relevant program/profile owner |
@@ -50,7 +50,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Target page: https://sulayman-bowles.dev/
 - Asset: Portfolio static SEO implementation
 - Angle: Add homepage link and concise technical SEO/source-graph description
-- Next action: Monitor public GitHub metadata link
+- Next action: Monitor public GitHub metadata and README links
 - Template: AI Crawler Policy Resource
 - Live evidence: Not yet verified in `docs/link-building/live-prospect-evidence.csv`.
 - Send status: not sent.
@@ -65,8 +65,8 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Prospect URL: https://github.com/SulaymanB2024/Thick-Scraper-VOID-
 - Target page: https://sulayman-bowles.dev/atlas
 - Asset: Atlas project
-- Angle: Point repo metadata at Atlas proof asset
-- Next action: Monitor public GitHub metadata link
+- Angle: Point repo metadata and README at Atlas proof assets
+- Next action: Monitor public GitHub metadata and README links
 - Template: Atlas Evidence Pack
 - Live evidence: Not yet verified in `docs/link-building/live-prospect-evidence.csv`.
 - Send status: not sent.
