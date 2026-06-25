@@ -6,7 +6,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 
 | Priority | Prospect | Segment | Target | Asset | Next action |
 | --- | --- | --- | --- | --- | --- |
-| 1 | GitHub profile | owned-profile | https://sulayman-bowles.dev/atlas | Atlas project | Update profile manually |
+| 1 | GitHub profile | owned-profile | https://sulayman-bowles.dev/research | Research assets and Atlas project | Monitor public profile README links |
 | 1 | Portfolio_Site repository | owned-profile | https://sulayman-bowles.dev/ | Portfolio static SEO implementation | Monitor public GitHub metadata link |
 | 1 | Thick-Scraper-VOID- repository | owned-profile | https://sulayman-bowles.dev/atlas | Atlas project | Monitor public GitHub metadata link |
 | 1 | LinkedIn profile | owned-profile | https://sulayman-bowles.dev/resume | Resume and source graph | Update profile manually |
@@ -27,14 +27,14 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 
 ## Packet 1: GitHub profile
 
-- Status: owned
+- Status: won
 - Priority: 1
 - Segment: owned-profile
 - Prospect URL: https://github.com/SulaymanB2024
-- Target page: https://sulayman-bowles.dev/atlas
-- Asset: Atlas project
-- Angle: Add canonical site and Atlas link to profile bio/sidebar
-- Next action: Update profile manually
+- Target page: https://sulayman-bowles.dev/research
+- Asset: Research assets and Atlas project
+- Angle: Add canonical research and Atlas links to profile README
+- Next action: Monitor public profile README links
 - Template: Atlas Evidence Pack
 - Live evidence: Not yet verified in `docs/link-building/live-prospect-evidence.csv`.
 - Send status: not sent.

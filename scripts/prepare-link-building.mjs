@@ -390,7 +390,10 @@ function validatePack() {
   const tracker = parseCsv(paths.tracker);
   compareColumns(tracker.columns, requiredTrackerColumns, paths.tracker);
   assert(tracker.rows.length >= 40, 'prospect tracker should keep at least 40 rows');
-  assert(tracker.rows.some((row) => row.prospect_name === 'GitHub profile' && row.status === 'owned'), 'tracker missing GitHub profile owned action');
+  assert(
+    tracker.rows.some((row) => row.prospect_name === 'GitHub profile' && ['owned', 'won'].includes(row.status)),
+    'tracker missing GitHub profile owned or won action',
+  );
   assert(tracker.rows.some((row) => row.prospect_name === 'LinkedIn profile' && row.status === 'owned'), 'tracker missing LinkedIn profile owned action');
   assert(tracker.rows.some((row) => row.target_page.includes('/markets/ai-search-crawler-policy')), 'tracker missing AI crawler policy prospects');
   assert(tracker.rows.some((row) => row.target_page.includes('/atlas/sample-crawl')), 'tracker missing Atlas sample crawl prospects');
