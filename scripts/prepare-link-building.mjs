@@ -114,6 +114,7 @@ const allowedQueueStatuses = new Set([
   'ready_after_review',
   'ready_after_publish',
   'ready_if_non_promotional',
+  'verified_done',
   'gated',
   'wait_for_benchmark',
   'membership_gated',
