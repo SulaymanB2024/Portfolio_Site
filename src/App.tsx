@@ -15,7 +15,7 @@ import { ShutterWipe } from './components/pageTransitions/ShutterWipe';
 import { usePageTransitions } from './hooks/usePageTransitions';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
-import { getCanonicalRoutes, getSeoRoute, normalizePath } from './seo/routes';
+import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
 import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavigation';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
@@ -28,6 +28,7 @@ const loadMethodPage = () => import('./pages/VoidAgencyMethodPage');
 const loadAboutPage = () => import('./pages/AboutPage');
 const loadResumePage = () => import('./pages/ResumePage');
 const loadAiInformationPage = () => import('./pages/AiInformationPage');
+const loadResearchPage = () => import('./pages/ResearchPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
 const loadSimplePage = () => import('./pages/SimplePage');
@@ -44,6 +45,7 @@ const VoidAgencyMethodPage = lazy(loadMethodPage);
 const AboutPage = lazy(loadAboutPage);
 const ResumePage = lazy(loadResumePage);
 const AiInformationPage = lazy(loadAiInformationPage);
+const ResearchPage = lazy(loadResearchPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
 const SimplePage = lazy(loadSimplePage);
@@ -66,17 +68,7 @@ const CONTACT_HASH = '#contact';
 const HOME_SEO = getSeoRoute('/')!;
 
 function isDarkRoute(path: string) {
-  const route = getSeoRoute(path);
-  return (
-    route?.path === '/about' ||
-    route?.path === '/method' ||
-    route?.path === '/work' ||
-    route?.path === '/contact' ||
-    route?.path === '/void-agency' ||
-    route?.path === '/austin-technical-seo' ||
-    route?.section === 'research-article' ||
-    route?.section === 'case-study'
-  );
+  return getRouteTone(path) === 'dark';
 }
 
 async function preloadRoute(path: string) {
@@ -108,6 +100,8 @@ async function preloadRoute(path: string) {
     await loadResumePage();
   } else if (route?.path === '/ai-information') {
     await loadAiInformationPage();
+  } else if (route?.path === '/research') {
+    await loadResearchPage();
   } else if (route?.path === '/markets') {
     await loadMarketsPage();
   } else if (route?.section === 'research-article') {
@@ -218,6 +212,12 @@ export default function App() {
         <AiInformationPage />
       </Suspense>
     );
+  } else if (route?.path === '/research') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <ResearchPage />
+      </Suspense>
+    );
   } else if (route?.path === '/sitemap') {
     page = <SitemapPage />;
   } else if (route?.section === 'research-article') {
@@ -322,6 +322,7 @@ function HomePage() {
 
   const [counter, setCounter] = useState(initialLoadComplete ? 100 : 0);
   const [isLoaded, setIsLoaded] = useState(initialLoadComplete);
+  const [homeHeaderTone, setHomeHeaderTone] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     if (initialLoadComplete) return;
@@ -353,6 +354,106 @@ function HomePage() {
     }
   }, [isLoaded]);
 
+  useEffect(() => {
+    if (!isLoaded) {
+      setHomeHeaderTone('light');
+      return;
+    }
+
+    let frameId = 0;
+    const darkBackgroundClasses = new Set(['bg-ink', 'bg-[#080807]', 'site-page-dark']);
+
+    const isDarkBackground = (background: string) => {
+      const rgbMatch = background.match(/rgba?\(([^)]+)\)/);
+      if (rgbMatch) {
+        const [r = 0, g = 0, b = 0, alpha = 1] = rgbMatch[1]
+          .split(',')
+          .map((value) => Number.parseFloat(value.trim()));
+
+        if (!alpha) {
+          return false;
+        }
+
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b < 40;
+      }
+
+      const srgbMatch = background.match(/color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/);
+      if (srgbMatch) {
+        const [, r, g, b, alpha = '1'] = srgbMatch;
+        if (Number.parseFloat(alpha) === 0) {
+          return false;
+        }
+
+        return (
+          0.2126 * Number.parseFloat(r) +
+            0.7152 * Number.parseFloat(g) +
+            0.0722 * Number.parseFloat(b) <
+          0.16
+        );
+      }
+
+      return false;
+    };
+
+    const elementNeedsDarkHeader = (element: Element) => {
+      const classNames = (element.getAttribute('class') ?? '').split(/\s+/);
+      return (
+        classNames.some((className) => darkBackgroundClasses.has(className)) ||
+        isDarkBackground(window.getComputedStyle(element).backgroundColor)
+      );
+    };
+
+    const updateHeaderTone = () => {
+      frameId = 0;
+
+      const header = document.querySelector('header');
+      const headerRect = header?.getBoundingClientRect();
+      const probeX = Math.round(window.innerWidth / 2);
+      const probeY = Math.min(
+        Math.max(Math.round((headerRect?.bottom ?? 96) + 10), 72),
+        window.innerHeight - 1,
+      );
+      const nextTone = document
+        .elementsFromPoint(probeX, probeY)
+        .some((element) => !header?.contains(element) && elementNeedsDarkHeader(element))
+        ? 'dark'
+        : 'light';
+
+      setHomeHeaderTone((currentTone) => (currentTone === nextTone ? currentTone : nextTone));
+    };
+
+    const scheduleHeaderToneUpdate = () => {
+      if (frameId) {
+        return;
+      }
+
+      frameId = window.requestAnimationFrame(updateHeaderTone);
+    };
+
+    scheduleHeaderToneUpdate();
+    const delayedChecks = [
+      window.setTimeout(scheduleHeaderToneUpdate, 80),
+      window.setTimeout(scheduleHeaderToneUpdate, 300),
+      window.setTimeout(scheduleHeaderToneUpdate, 800),
+    ];
+    window.addEventListener('scroll', scheduleHeaderToneUpdate, { passive: true });
+    window.addEventListener('resize', scheduleHeaderToneUpdate);
+    window.addEventListener('hashchange', scheduleHeaderToneUpdate);
+    window.addEventListener('popstate', scheduleHeaderToneUpdate);
+
+    return () => {
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      delayedChecks.forEach((timeoutId) => window.clearTimeout(timeoutId));
+      window.removeEventListener('scroll', scheduleHeaderToneUpdate);
+      window.removeEventListener('resize', scheduleHeaderToneUpdate);
+      window.removeEventListener('hashchange', scheduleHeaderToneUpdate);
+      window.removeEventListener('popstate', scheduleHeaderToneUpdate);
+    };
+  }, [isLoaded]);
+
   const subY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
@@ -370,7 +471,7 @@ function HomePage() {
     <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas" ref={containerRef}>
       {!prefersReducedMotion && <InkTrails />}
         
-      <InternalHeader activePath="/" tone="light" variant="home" />
+      <InternalHeader activePath="/" tone={homeHeaderTone} variant="home" />
 
       {/* Grid Crosshairs */}
       <div className="fixed inset-0 pointer-events-none z-40 hidden md:block mix-blend-difference text-canvas select-none">
@@ -589,10 +690,10 @@ function HomePage() {
                  </div>
                  
                  {/* Title overlapping canvas */}
-                 <ScrollReveal delay={0.2} className="absolute bottom-8 right-0 pointer-events-none z-10 -mr-4 md:-mr-16">
+                 <ScrollReveal delay={0.2} className="absolute bottom-8 right-4 pointer-events-none z-10 md:right-8 lg:right-10">
                    <h4 
 	                      style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
-                      className="text-[12vw] md:text-[8vw] lg:text-[10vw] font-serif text-canvas leading-[0.85] font-light uppercase tracking-tighter text-right"
+                      className="text-[12vw] md:text-[8vw] lg:text-[9vw] font-serif text-canvas leading-[0.85] font-light uppercase tracking-tighter text-right"
                    >
                      <span className="block"><ScrambleText text="AT" trigger="hover" /></span>
                      <span className="block italic"><ScrambleText text="LAS" trigger="hover" /></span>
@@ -633,8 +734,8 @@ function HomePage() {
                  </Suspense>
                  
                  {/* Title overlapping canvas */}
-                 <ScrollReveal delay={0.2} className="absolute top-8 left-4 md:left-0 pointer-events-none z-10 md:-ml-6 mix-blend-difference text-canvas select-none">
-                   <h4 className="text-[15vw] md:text-[8vw] lg:text-[10vw] font-serif leading-[0.85] font-light uppercase tracking-tighter text-left">
+                 <ScrollReveal delay={0.2} className="absolute top-8 left-4 pointer-events-none z-10 text-canvas mix-blend-difference select-none md:left-8 lg:left-10">
+                   <h4 className="text-[15vw] md:text-[8vw] lg:text-[9vw] font-serif leading-[0.85] font-light uppercase tracking-tighter text-left">
                      <span className="block opacity-90"><ScrambleText text="MAR" trigger="hover" /></span>
                      <span className="block italic opacity-70"><ScrambleText text="KETS" trigger="hover" /></span>
                    </h4>

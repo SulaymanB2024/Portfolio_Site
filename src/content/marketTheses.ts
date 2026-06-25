@@ -132,6 +132,7 @@ export const MARKET_THESES: MarketThesis[] = [
       { label: 'Google robots.txt guide', href: 'https://developers.google.com/search/docs/crawling-indexing/robots/intro' },
       { label: 'Google canonicalization guide', href: 'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls' },
       { label: 'IndexNow documentation', href: 'https://www.indexnow.org/documentation' },
+      { label: 'AI crawler policy source map', href: '/research/ai-search-crawler-policy-sources.csv' },
     ],
     content: [
       'AI search visibility now begins with a crawler policy decision. A public site is no longer dealing only with Googlebot and Bingbot. It is also deciding how to handle search-specific agents, training crawlers, and user-triggered retrieval agents from AI systems. That does not make robots.txt a growth hack. It makes robots.txt, canonical URLs, redirects, source pages, and sitemaps part of the public interface that machines use before they can evaluate the content at all.',

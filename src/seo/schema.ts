@@ -7,6 +7,7 @@ import {
   type EvidenceListItem,
   type FanOutQueryMapItem,
 } from '../content/evidenceLists';
+import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from './site';
 
 export type JsonLd = Record<string, unknown>;
@@ -769,6 +770,78 @@ export function austinTechnicalSeoJsonLd(): JsonLd {
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Austin Technical SEO', path: '/austin-technical-seo' },
+    ]),
+  ]);
+}
+
+export function researchAssetsJsonLd(): JsonLd {
+  const collectionId = `${absoluteUrl('/research')}#collection`;
+
+  return graphSchema([
+    ...canonicalEntitySchemas(),
+    websiteSchema(),
+    collectionPageSchema(
+      'Research Assets',
+      'Citation-ready technical SEO, AI-search, Atlas, crawlability, identity, and finance/data research assets from Sulayman Bowles.',
+      '/research',
+    ),
+    webPageSchema({
+      path: '/research',
+      name: 'Research Assets',
+      description:
+        'Public index of citation-ready technical SEO, AI-search, Atlas, crawlability, identity, and finance/data research assets with source-file links and claim boundaries.',
+      mainEntityId: collectionId,
+      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`],
+    }),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      '@id': `${absoluteUrl('/research')}#asset-list`,
+      name: 'Citation-Ready Research Assets',
+      url: `${absoluteUrl('/research')}#asset-list`,
+      description:
+        'Prioritized public pages and files that can be cited in technical SEO, AI-search, Atlas, crawlability, identity, and finance/data contexts.',
+      itemListOrder: 'https://schema.org/ItemListOrderAscending',
+      numberOfItems: publicResearchAssets.length,
+      itemListElement: publicResearchAssets.map((asset, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: asset.name,
+        description: asset.pitchAngle,
+        url: absoluteUrl(asset.href),
+      })),
+    },
+    ...publicDataDownloads.map((download) => ({
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      '@id': `${absoluteUrl(download.href)}#asset`,
+      name: download.label,
+      url: absoluteUrl(download.href),
+      description: download.description,
+      isAccessibleForFree: true,
+      creator: {
+        '@id': `${SITE_URL}/#person`,
+      },
+      isPartOf: {
+        '@id': collectionId,
+      },
+    })),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'DefinedTermSet',
+      '@id': `${absoluteUrl('/research')}#claim-boundaries`,
+      name: 'Research Asset Claim Boundaries',
+      description: 'Explicit limits for interpreting the research assets on sulayman-bowles.dev.',
+      hasDefinedTerm: researchClaimBoundaries.map((boundary, index) => ({
+        '@type': 'DefinedTerm',
+        '@id': `${absoluteUrl('/research')}#claim-boundary-${index + 1}`,
+        name: `Claim boundary ${index + 1}`,
+        description: boundary,
+      })),
+    },
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Research Assets', path: '/research' },
     ]),
   ]);
 }

@@ -6,6 +6,7 @@ import {
 } from '../content/aiInformation';
 import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
 import { MARKET_THESES } from '../content/marketTheses';
+import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import {
   appianAssumptionRows,
   atlasSampleFindings,
@@ -203,6 +204,27 @@ function articleShell(title: string, intro: string, body: string) {
 export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/ai-information') {
     return AI_INFORMATION_STATIC_HTML;
+  }
+
+  if (route.path === '/research') {
+    return articleShell(
+      'Research Assets',
+      'Citation-ready public research assets across technical SEO, AI-search, Atlas, crawlability, identity, and finance/data work.',
+      `<p>This index gives editors, source-page owners, technical SEO writers, AI-search researchers, and profile reviewers one clean URL for public assets and source files.</p>
+        <h2>Citation Targets</h2>
+        ${publicResearchAssets
+          .map(
+            (asset) =>
+              `<h3><a href="${asset.href}">${escapeHtml(asset.name)}</a></h3><p>Priority: P${asset.priority}. Type: ${escapeHtml(asset.type)}. Preferred anchor: ${escapeHtml(asset.preferredAnchor)}.</p><p>${escapeHtml(asset.pitchAngle)}</p>`,
+          )
+          .join('\n        ')}
+        <h2>Downloadable Public Files</h2>
+        ${linkList(publicDataDownloads)}
+        <h2>Claim Boundaries</h2>
+        <ul>${researchClaimBoundaries.map((boundary) => `<li>${escapeHtml(boundary)}</li>`).join('')}</ul>
+        <h2>Internal Links</h2>
+        ${linkList(primaryLinks)}`,
+    );
   }
 
   if (route.path === '/') {

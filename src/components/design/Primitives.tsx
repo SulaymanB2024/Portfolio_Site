@@ -180,6 +180,83 @@ export function MetricCard({
   );
 }
 
+export type DarkProofArtifactItem = {
+  label: string;
+  value: ReactNode;
+  detail?: ReactNode;
+  status?: ReactNode;
+};
+
+function CornerMarks() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 text-current/28">
+      <span className="absolute left-3 top-3 h-px w-5 bg-current" />
+      <span className="absolute left-3 top-3 h-5 w-px bg-current" />
+      <span className="absolute right-3 top-3 h-px w-5 bg-current" />
+      <span className="absolute right-3 top-3 h-5 w-px bg-current" />
+      <span className="absolute bottom-3 left-3 h-px w-5 bg-current" />
+      <span className="absolute bottom-3 left-3 h-5 w-px bg-current" />
+      <span className="absolute bottom-3 right-3 h-px w-5 bg-current" />
+      <span className="absolute bottom-3 right-3 h-5 w-px bg-current" />
+    </div>
+  );
+}
+
+export function DarkProofArtifactPanel({
+  eyebrow,
+  title,
+  summary,
+  items,
+  footer,
+  className,
+  ...props
+}: ComponentPropsWithoutRef<'aside'> & {
+  eyebrow: ReactNode;
+  title: ReactNode;
+  summary?: ReactNode;
+  items: DarkProofArtifactItem[];
+  footer?: ReactNode;
+}) {
+  return (
+    <aside
+      className={cx('relative overflow-hidden border border-current/14 bg-current/[0.018] p-5 text-current md:p-6', className)}
+      {...props}
+    >
+      <CornerMarks />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-6 top-1/2 h-px bg-current/10" />
+      <div aria-hidden="true" className="pointer-events-none absolute bottom-6 top-6 left-1/2 w-px bg-current/10" />
+      <div className="relative">
+        <header className="border-b border-current/12 pb-5">
+          <SectionEyebrow className="text-current/48">{eyebrow}</SectionEyebrow>
+          <h2 className="mt-4 font-serif text-3xl italic leading-[0.95] tracking-normal text-current md:text-4xl">
+            {title}
+          </h2>
+          {summary && <p className="mt-4 max-w-xl text-sm leading-relaxed text-current/62">{summary}</p>}
+        </header>
+
+        <div className="mt-5 grid gap-px overflow-hidden border border-current/12">
+          {items.map((item) => (
+            <article key={item.label} className="grid min-h-[112px] gap-3 bg-current/[0.018] p-4">
+              <div className="flex items-start justify-between gap-4 text-[10px] uppercase tracking-[0.22em] text-current/48">
+                <span>{item.label}</span>
+                {item.status && <span className="text-current/64">{item.status}</span>}
+              </div>
+              <div className="text-sm leading-relaxed text-current/76">{item.value}</div>
+              {item.detail && <p className="text-xs leading-relaxed text-current/52">{item.detail}</p>}
+            </article>
+          ))}
+        </div>
+
+        {footer && (
+          <footer className="mt-5 border-t border-current/12 pt-4 text-[10px] uppercase leading-relaxed tracking-[0.2em] text-current/46">
+            {footer}
+          </footer>
+        )}
+      </div>
+    </aside>
+  );
+}
+
 export function ReaderPanel({
   className,
   ...props
@@ -235,7 +312,7 @@ export function ModalShell({
 export function PrimaryCTA({ className, ...props }: ComponentPropsWithoutRef<'a'>) {
   return (
     <a
-      className={cx('inline-flex min-h-11 items-center border border-current px-5 py-3 text-[10px] uppercase tracking-[0.2em] transition-colors hover:bg-current hover:text-canvas', className)}
+      className={cx('inline-flex min-h-11 items-center border border-current px-5 py-3 text-[10px] uppercase tracking-[0.2em] transition-colors hover:bg-current hover:text-[var(--page-bg)]', className)}
       {...props}
     />
   );

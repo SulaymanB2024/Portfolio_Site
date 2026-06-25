@@ -17,6 +17,7 @@ export const primaryNav: SiteNavItem[] = [
 export const utilityNav: SiteNavItem[] = [
   { label: 'Book', href: '/simple', description: 'First-person text edition and personal monograph.' },
   { label: 'AI Information', href: '/ai-information', description: 'Entity reference for search and AI systems.' },
+  { label: 'Research', href: '/research', description: 'Citation-ready public research assets and source files.' },
   { label: 'Sitemap', href: '/sitemap', description: 'Plain HTML links to public pages.' },
 ];
 

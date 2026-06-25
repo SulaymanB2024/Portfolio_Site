@@ -51,6 +51,11 @@ async function readDefaultUrlList() {
     `${SITE_URL}/Sulayman_Bowles_Resume.pdf`,
     `${SITE_URL}/resume.pdf`,
     `${SITE_URL}/llms.txt`,
+    `${SITE_URL}/research`,
+    `${SITE_URL}/research/authority-assets.json`,
+    `${SITE_URL}/research/ai-search-crawler-policy-sources.csv`,
+    `${SITE_URL}/research/austin-crawlability-benchmark-pilot.csv`,
+    `${SITE_URL}/research/austin-crawlability-benchmark-summary.json`,
     `${SITE_URL}/Sulayman_Bowles_Resume_2025.pdf`,
   ]);
 }

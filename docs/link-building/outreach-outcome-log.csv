@@ -1,0 +1,11 @@
+prospect_name,action_type,target_page,submitted_at,submitted_by,status,linked_url,anchor_text,follow_state,verification_source,verified_at,notes
+GitHub profile,owned_profile_update,https://sulayman-bowles.dev/atlas,,,not_started,,,,,,Requires account access and approval
+Portfolio_Site repository,owned_repo_metadata_update,https://sulayman-bowles.dev/,,,not_started,,,,,,Requires GitHub account access and approval
+Thick-Scraper-VOID- repository,owned_repo_metadata_update,https://sulayman-bowles.dev/atlas/sample-crawl,,,not_started,,,,,,Requires GitHub account access and approval
+LinkedIn profile,owned_profile_update,https://sulayman-bowles.dev/resume,,,not_started,,,,,,Requires LinkedIn account access and approval
+SEOFOMO,community_submission,https://sulayman-bowles.dev/markets/ai-search-crawler-policy,,,not_started,,,,,,Requires login and moderation
+Search Engine Land,editorial_pitch,https://sulayman-bowles.dev/markets/ai-search-crawler-policy,,,not_started,,,,,,Requires approval before sending
+Search Engine Journal,editorial_pitch,https://sulayman-bowles.dev/markets/ai-search-crawler-policy,,,not_started,,,,,,Gated contributor path; source pitch only
+OpenAI developer community,community_post,https://sulayman-bowles.dev/markets/ai-search-crawler-policy,,,not_started,,,,,,Requires approved non-promotional discussion post
+Austin Business Journal,story_tip,https://sulayman-bowles.dev/austin-technical-seo,,,not_started,,,,,,Pitch only after benchmark review and deployment
+Austin Chamber,member_news_submission,https://sulayman-bowles.dev/austin-technical-seo,,,not_started,,,,,,Requires membership access

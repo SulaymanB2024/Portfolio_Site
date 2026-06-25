@@ -1,0 +1,133 @@
+{
+  "generated_at": "2026-06-25",
+  "canonical_host": "https://sulayman-bowles.dev",
+  "objective": "Public index of citation-worthy assets for technical SEO, AI-search visibility, Atlas, source-graph, and finance/data research links.",
+  "claim_boundaries": [
+    "This file does not claim rankings, indexing, traffic movement, revenue impact, AI citations, or Ahrefs Domain Rating movement.",
+    "Private client names and private outcomes are intentionally excluded.",
+    "Crawler access and machine-readable files are discovery signals, not authority or visibility guarantees.",
+    "Links should be earned editorially; paid, exchanged, automated, or low-quality placements should not be counted as campaign wins."
+  ],
+  "assets": [
+    {
+      "priority": 1,
+      "name": "Research Asset Index",
+      "url": "https://sulayman-bowles.dev/research",
+      "type": "research_hub",
+      "preferred_anchor": "technical SEO research assets",
+      "audiences": ["technical SEO", "AI search", "web developers", "student founder profiles"],
+      "pitch_angle": "Browsable index of source-backed technical SEO, AI-search, Atlas, local crawlability, identity, and finance/data proof assets.",
+      "supporting_assets": ["https://sulayman-bowles.dev/research/authority-assets.json", "https://sulayman-bowles.dev/ai-information"]
+    },
+    {
+      "priority": 1,
+      "name": "AI Search Crawler Policy",
+      "url": "https://sulayman-bowles.dev/markets/ai-search-crawler-policy",
+      "type": "research_note",
+      "preferred_anchor": "AI search crawler policy",
+      "audiences": ["technical SEO", "AI search", "web developers", "search policy writers"],
+      "pitch_angle": "Source-backed map of search, training, and user-requested retrieval crawlers with conservative visibility boundaries.",
+      "supporting_assets": ["https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv"]
+    },
+    {
+      "priority": 1,
+      "name": "Atlas Sample Crawl Run",
+      "url": "https://sulayman-bowles.dev/atlas/sample-crawl",
+      "type": "evidence_artifact",
+      "preferred_anchor": "Atlas sample crawl run",
+      "audiences": ["technical SEO", "crawlability", "open-source SEO tooling", "audit workflow writers"],
+      "pitch_angle": "Sanitized crawl evidence showing URL status, indexability, crawl depth, link counts, canonical state, issue labels, and CSV evidence.",
+      "supporting_assets": ["https://sulayman-bowles.dev/research/atlas-sanitized-crawl-sample.csv"]
+    },
+    {
+      "priority": 1,
+      "name": "Atlas SEO Audit Console",
+      "url": "https://sulayman-bowles.dev/atlas",
+      "type": "project_page",
+      "preferred_anchor": "Atlas SEO Audit Console",
+      "audiences": ["technical SEO", "software builders", "student founders", "web audit teams"],
+      "pitch_angle": "Crawl evidence system for indexation, internal links, canonicals, structured data, rendered HTML, and audit exports.",
+      "supporting_assets": ["https://github.com/SulaymanB2024/Thick-Scraper-VOID-"]
+    },
+    {
+      "priority": 2,
+      "name": "Technical SEO as Public Data Infrastructure",
+      "url": "https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure",
+      "type": "research_note",
+      "preferred_anchor": "technical SEO as public data infrastructure",
+      "audiences": ["technical SEO", "data infrastructure", "AI discovery", "structured data"],
+      "pitch_angle": "Editorial bridge between crawlability, structured data, provenance, source consistency, and machine-readable public records.",
+      "supporting_assets": []
+    },
+    {
+      "priority": 2,
+      "name": "Canonical Identity for Personal SEO",
+      "url": "https://sulayman-bowles.dev/markets/canonical-identity-personal-seo",
+      "type": "research_note",
+      "preferred_anchor": "canonical identity for personal SEO",
+      "audiences": ["personal SEO", "founder profiles", "structured data", "profile cleanup"],
+      "pitch_angle": "Reconciliation checklist for profile pages, stale PDFs, sameAs links, source pages, and external bio consistency.",
+      "supporting_assets": []
+    },
+    {
+      "priority": 2,
+      "name": "Technical SEO Audit Case Study",
+      "url": "https://sulayman-bowles.dev/case-studies/technical-seo-audit",
+      "type": "case_study",
+      "preferred_anchor": "technical SEO audit case study",
+      "audiences": ["technical SEO", "client reporting", "crawl evidence", "web teams"],
+      "pitch_angle": "Sanitized explanation of how crawl evidence becomes findings, priorities, and review artifacts without private client claims.",
+      "supporting_assets": ["https://sulayman-bowles.dev/research/atlas-sanitized-crawl-sample.csv"]
+    },
+    {
+      "priority": 3,
+      "name": "Austin Technical SEO",
+      "url": "https://sulayman-bowles.dev/austin-technical-seo",
+      "type": "local_service_page",
+      "preferred_anchor": "Austin technical SEO",
+      "audiences": ["Austin startups", "local business", "student entrepreneurship", "B2B web teams"],
+      "pitch_angle": "Local technical SEO and AI-search visibility page for crawlability, indexation, source clarity, and implementation evidence.",
+      "supporting_assets": ["https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv", "https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json"]
+    },
+    {
+      "priority": 3,
+      "name": "Austin Crawlability Benchmark Pilot",
+      "url": "https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv",
+      "type": "public_data_asset",
+      "preferred_anchor": "Austin crawlability benchmark pilot",
+      "audiences": ["Austin startups", "local business media", "technical SEO", "public web infrastructure"],
+      "pitch_angle": "Bounded public crawlability signal sample for Austin-area technology and business websites with explicit measurement-gap boundaries.",
+      "supporting_assets": ["https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json", "https://sulayman-bowles.dev/austin-technical-seo"]
+    },
+    {
+      "priority": 3,
+      "name": "AI Information Source Graph",
+      "url": "https://sulayman-bowles.dev/ai-information",
+      "type": "source_graph",
+      "preferred_anchor": "Sulayman Bowles source graph",
+      "audiences": ["profile pages", "AI retrieval", "identity reconciliation", "external bios"],
+      "pitch_angle": "Canonical public source page for current identity, source roles, project evidence, and what not to infer.",
+      "supporting_assets": ["https://sulayman-bowles.dev/llms.txt"]
+    },
+    {
+      "priority": 3,
+      "name": "Markets Research",
+      "url": "https://sulayman-bowles.dev/markets",
+      "type": "research_collection",
+      "preferred_anchor": "Markets Research",
+      "audiences": ["finance/data research", "student profiles", "markets writing", "research portfolios"],
+      "pitch_angle": "Public finance and data reasoning archive with market research notes, thesis framing, source tables, and explicit limits.",
+      "supporting_assets": ["https://sulayman-bowles.dev/research/appian-enterprise-software-durability-memo.pdf", "https://sulayman-bowles.dev/research/appian-assumptions-table.csv"]
+    },
+    {
+      "priority": 3,
+      "name": "HTML Resume",
+      "url": "https://sulayman-bowles.dev/resume",
+      "type": "profile_page",
+      "preferred_anchor": "Sulayman Bowles resume",
+      "audiences": ["academic profiles", "professional profiles", "speaker bios", "student founder profiles"],
+      "pitch_angle": "Current HTML-first resume connecting UT Austin McCombs, Atlas, Void Agency, technical SEO, finance/data work, public code, and professional profiles.",
+      "supporting_assets": ["https://sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf"]
+    }
+  ]
+}
