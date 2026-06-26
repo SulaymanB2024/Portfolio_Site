@@ -18,6 +18,7 @@ const paths = {
   audit: 'docs/link-building/completion-audit.md',
   publishManifest: 'docs/link-building/publish-manifest.json',
   publishReadiness: 'docs/link-building/publish-readiness.md',
+  githubRepoAudit: 'docs/link-building/github-owned-repo-opportunities.csv',
   assets: 'public/research/authority-assets.json',
   crawlerSources: 'public/research/ai-search-crawler-policy-sources.csv',
   austinBenchmarkTargets: 'docs/link-building/austin-benchmark-targets.csv',
@@ -106,6 +107,18 @@ const requiredOutcomeColumns = [
   'verification_source',
   'verified_at',
   'notes',
+];
+const requiredGithubRepoAuditColumns = [
+  'checked_at',
+  'repo_name',
+  'repo_url',
+  'pushed_at',
+  'public_state',
+  'fit_status',
+  'target_page',
+  'evidence',
+  'next_action',
+  'risk_boundary',
 ];
 const allowedStatuses = new Set(['owned', 'research', 'ready', 'sent', 'won', 'lost', 'blocked']);
 const allowedOutcomeStatuses = new Set(['not_started', 'drafted', 'submitted', 'accepted', 'rejected', 'published', 'verified']);
@@ -453,6 +466,16 @@ function validatePack() {
   assert(outcomeLog.rows.every((row) => row.status === 'not_started' || row.submitted_at), 'submitted outcome rows need submitted_at');
   assert(outcomeLog.rows.every((row) => row.status !== 'verified' || (row.linked_url && row.verification_source && row.verified_at)), 'verified outcome rows need linked_url, verification_source, and verified_at');
 
+  const githubRepoAudit = parseCsv(paths.githubRepoAudit);
+  compareColumns(githubRepoAudit.columns, requiredGithubRepoAuditColumns, paths.githubRepoAudit);
+  assert(githubRepoAudit.rows.length >= 12, 'GitHub repo opportunity audit should classify long-tail owned repos');
+  assert(githubRepoAudit.rows.every((row) => row.repo_url.startsWith('https://github.com/SulaymanB2024/')), 'GitHub repo audit URLs must stay on the owned account');
+  assert(githubRepoAudit.rows.every((row) => row.evidence && row.next_action && row.risk_boundary), 'GitHub repo audit rows need evidence, next action, and risk boundary');
+  assert(
+    githubRepoAudit.rows.some((row) => row.repo_name === '5-Race-the-Case-Competition' && row.fit_status === 'verified_owned_repo_metadata'),
+    'GitHub repo audit missing verified Race-the-Case metadata link',
+  );
+
   const profileUpdates = read(paths.ownedProfileUpdates);
   for (const requiredText of ['GitHub Profile', 'LinkedIn', 'Thick-Scraper-VOID- Repository', 'Claim Boundary']) {
     assert(profileUpdates.includes(requiredText), `owned profile updates missing ${requiredText}`);
@@ -469,7 +492,7 @@ function validatePack() {
   const sitemap = read(paths.sitemap);
   assert(sitemap.includes(`<loc>${SITE_URL}/research</loc>`), 'sitemap missing research asset hub');
 
-  return { authorityAssets, tracker, crawlerSources, liveEvidence, launchQueue, outcomeLog, austinBenchmark };
+  return { authorityAssets, tracker, crawlerSources, liveEvidence, launchQueue, outcomeLog, austinBenchmark, githubRepoAudit };
 }
 
 function writePackets(tracker, liveEvidence) {
@@ -534,7 +557,7 @@ ${draft.body}
   write(paths.launchDrafts, body);
 }
 
-function writeAudit({ authorityAssets, tracker, crawlerSources, liveEvidence, launchQueue, outcomeLog, austinBenchmark }) {
+function writeAudit({ authorityAssets, tracker, crawlerSources, liveEvidence, launchQueue, outcomeLog, austinBenchmark, githubRepoAudit }) {
   const doneRows = [
     ['Authority playbook', paths.playbook, 'done in repo'],
     ['Outreach templates', paths.templates, 'done in repo'],
@@ -544,6 +567,7 @@ function writeAudit({ authorityAssets, tracker, crawlerSources, liveEvidence, la
     ['Approval-gated launch queue', paths.launchQueue, 'ready/gated/research actions separated'],
     ['Generated launch drafts', paths.launchDrafts, `${launchQueue.rows.filter((row) => ['ready_after_login', 'ready_after_review', 'ready_after_publish', 'ready_if_non_promotional', 'gated'].includes(row.queue_status)).length} draft payloads`],
     ['Outreach outcome log', paths.outcomeLog, `${outcomeLog.rows.length} tracked external actions`],
+    ['GitHub owned repo opportunity audit', paths.githubRepoAudit, `${githubRepoAudit.rows.length} long-tail repos classified`],
     ['Authority asset index', paths.assets, `${authorityAssets.assets.length} assets`],
     ['Crawler policy source map', paths.crawlerSources, `${crawlerSources.rows.length} sources`],
     ['Austin crawlability benchmark', `${paths.austinBenchmarkCsv} and ${paths.austinBenchmarkSummary}`, `${austinBenchmark.rows.length} measured rows`],
@@ -617,6 +641,7 @@ function main() {
         liveEvidenceRows: pack.liveEvidence.rows.length,
         launchQueueRows: pack.launchQueue.rows.length,
         outcomeLogRows: pack.outcomeLog.rows.length,
+        githubRepoAuditRows: pack.githubRepoAudit.rows.length,
         crawlerPolicySources: pack.crawlerSources.rows.length,
         austinBenchmarkRows: pack.austinBenchmark.rows.length,
         generated: [paths.packets, paths.launchDrafts, paths.audit],
