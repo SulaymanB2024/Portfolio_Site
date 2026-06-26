@@ -9,7 +9,7 @@ Generated: 2026-06-25
 | Authority playbook | docs/link-building/authority-playbook.md | done in repo |
 | Outreach templates | docs/link-building/outreach-templates.md | done in repo |
 | Prospect tracker | docs/link-building/prospect-tracker.csv | 64 rows |
-| Live priority prospect evidence | docs/link-building/live-prospect-evidence.csv | 37 verified source checks |
+| Live priority prospect evidence | docs/link-building/live-prospect-evidence.csv | 38 verified source checks |
 | Owned profile update drafts | docs/link-building/owned-profile-updates.md | copy-ready, not applied externally |
 | Approval-gated launch queue | docs/link-building/launch-queue.csv | ready/gated/research actions separated |
 | Generated launch drafts | docs/link-building/generated-launch-drafts.md | 5 draft payloads |
@@ -20,6 +20,7 @@ Generated: 2026-06-25
 | Publish manifest | docs/link-building/publish-manifest.json | defines the link-building-only file scope |
 | Publish readiness handoff | docs/link-building/publish-readiness.md | documents current deploy/scope blockers |
 | Authority pack validator/generator | scripts/prepare-link-building.mjs and npm run linkbuilding:prepare | done in repo |
+| External placement verifier | scripts/check-link-building-external.mjs and npm run linkbuilding:external-check | checks verified public placements and reports pending blockers |
 | Publish scope verifier | scripts/check-link-building-publish-scope.mjs and npm run linkbuilding:scope-check | guards against shipping unrelated dirty files |
 | Publish export helper | scripts/export-link-building-publish.mjs and npm run linkbuilding:export-publish | exports manifest files for a clean worktree |
 | Live deployment verifier | scripts/check-link-building-live.mjs and npm run linkbuilding:live-check | ready; must pass after deployment |
@@ -40,6 +41,7 @@ Generated: 2026-06-25
 ```bash
 npm run linkbuilding:prepare
 npm run linkbuilding:scope-check
+npm run linkbuilding:external-check
 npm run linkbuilding:export-publish
 npm run lint
 npm run build

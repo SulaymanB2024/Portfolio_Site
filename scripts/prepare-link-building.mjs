@@ -24,6 +24,7 @@ const paths = {
   austinBenchmarkCsv: 'public/research/austin-crawlability-benchmark-pilot.csv',
   austinBenchmarkSummary: 'public/research/austin-crawlability-benchmark-summary.json',
   austinBenchmarkReport: 'docs/link-building/austin-crawlability-benchmark.md',
+  externalCheckScript: 'scripts/check-link-building-external.mjs',
   scopeCheckScript: 'scripts/check-link-building-publish-scope.mjs',
   exportScript: 'scripts/export-link-building-publish.mjs',
   liveCheckScript: 'scripts/check-link-building-live.mjs',
@@ -549,6 +550,7 @@ function writeAudit({ authorityAssets, tracker, crawlerSources, liveEvidence, la
     ['Publish manifest', paths.publishManifest, 'defines the link-building-only file scope'],
     ['Publish readiness handoff', paths.publishReadiness, 'documents current deploy/scope blockers'],
     ['Authority pack validator/generator', 'scripts/prepare-link-building.mjs and npm run linkbuilding:prepare', 'done in repo'],
+    ['External placement verifier', `${paths.externalCheckScript} and npm run linkbuilding:external-check`, 'checks verified public placements and reports pending blockers'],
     ['Publish scope verifier', `${paths.scopeCheckScript} and npm run linkbuilding:scope-check`, 'guards against shipping unrelated dirty files'],
     ['Publish export helper', `${paths.exportScript} and npm run linkbuilding:export-publish`, 'exports manifest files for a clean worktree'],
     ['Live deployment verifier', `${paths.liveCheckScript} and npm run linkbuilding:live-check`, 'ready; must pass after deployment'],
@@ -586,6 +588,7 @@ ${formatRows(externalRows)}
 \`\`\`bash
 npm run linkbuilding:prepare
 npm run linkbuilding:scope-check
+npm run linkbuilding:external-check
 npm run linkbuilding:export-publish
 npm run lint
 npm run build

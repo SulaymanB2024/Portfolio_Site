@@ -7,6 +7,7 @@
     "public/llms.txt",
     "public/sitemap.xml",
     "scripts/build-austin-crawlability-benchmark.mjs",
+    "scripts/check-link-building-external.mjs",
     "scripts/check-link-building-live.mjs",
     "scripts/check-link-building-publish-scope.mjs",
     "scripts/export-link-building-publish.mjs",
@@ -47,6 +48,7 @@
   "publish_gates": [
     "npm run linkbuilding:scope-check",
     "npm run linkbuilding:prepare",
+    "npm run linkbuilding:external-check",
     "npm run lint",
     "npm run build",
     "npm run submit:indexnow -- --dry-run",
