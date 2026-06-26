@@ -9,7 +9,7 @@ Generated: 2026-06-25
 | Authority playbook | docs/link-building/authority-playbook.md | done in repo |
 | Outreach templates | docs/link-building/outreach-templates.md | done in repo |
 | Prospect tracker | docs/link-building/prospect-tracker.csv | 64 rows |
-| Live priority prospect evidence | docs/link-building/live-prospect-evidence.csv | 34 verified source checks |
+| Live priority prospect evidence | docs/link-building/live-prospect-evidence.csv | 37 verified source checks |
 | Owned profile update drafts | docs/link-building/owned-profile-updates.md | copy-ready, not applied externally |
 | Approval-gated launch queue | docs/link-building/launch-queue.csv | ready/gated/research actions separated |
 | Generated launch drafts | docs/link-building/generated-launch-drafts.md | 5 draft payloads |

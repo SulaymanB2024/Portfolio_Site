@@ -36,7 +36,12 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Angle: Add canonical research and Atlas links to profile README
 - Next action: Monitor public profile README links
 - Template: Atlas Evidence Pack
-- Live evidence: Not yet verified in `docs/link-building/live-prospect-evidence.csv`.
+- Live evidence: Public GitHub profile README links to research, Atlas, and AI information source pages.
+- Source checked: https://github.com/SulaymanB2024
+- Contact/submission path: https://github.com/SulaymanB2024
+- Fit status: verified_owned_profile
+- Evidence-based next action: Monitor public profile links; sidebar bio/blog updates require GitHub user-scope auth.
+- Evidence boundary: GitHub profile links are nofollow and do not prove DR movement.
 - Send status: not sent.
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
@@ -52,7 +57,12 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Angle: Add homepage link and concise technical SEO/source-graph description
 - Next action: Monitor public GitHub metadata and README links
 - Template: AI Crawler Policy Resource
-- Live evidence: Not yet verified in `docs/link-building/live-prospect-evidence.csv`.
+- Live evidence: Public GitHub repo metadata homepage points to https://sulayman-bowles.dev/ and raw README links to canonical homepage plus research surfaces.
+- Source checked: https://github.com/SulaymanB2024/Portfolio_Site
+- Contact/submission path: https://github.com/SulaymanB2024/Portfolio_Site
+- Fit status: verified_owned_repo
+- Evidence-based next action: Monitor repository metadata and README links.
+- Evidence boundary: GitHub links are nofollow and this is not a new referring domain.
 - Send status: not sent.
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
@@ -68,7 +78,12 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Angle: Point repo metadata and README at Atlas proof assets
 - Next action: Monitor public GitHub metadata and README links
 - Template: Atlas Evidence Pack
-- Live evidence: Not yet verified in `docs/link-building/live-prospect-evidence.csv`.
+- Live evidence: Public GitHub repo metadata homepage points to https://sulayman-bowles.dev/atlas and raw README links to Atlas pages plus sample crawl assets.
+- Source checked: https://github.com/SulaymanB2024/Thick-Scraper-VOID-
+- Contact/submission path: https://github.com/SulaymanB2024/Thick-Scraper-VOID-
+- Fit status: verified_owned_repo
+- Evidence-based next action: Monitor repository metadata and README links.
+- Evidence boundary: GitHub links are nofollow and this is not a new referring domain.
 - Send status: not sent.
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
