@@ -8,12 +8,12 @@ Generated: 2026-06-25
 | --- | --- | --- |
 | Authority playbook | docs/link-building/authority-playbook.md | done in repo |
 | Outreach templates | docs/link-building/outreach-templates.md | done in repo |
-| Prospect tracker | docs/link-building/prospect-tracker.csv | 66 rows |
-| Live priority prospect evidence | docs/link-building/live-prospect-evidence.csv | 40 verified source checks |
+| Prospect tracker | docs/link-building/prospect-tracker.csv | 67 rows |
+| Live priority prospect evidence | docs/link-building/live-prospect-evidence.csv | 41 verified source checks |
 | Owned profile update drafts | docs/link-building/owned-profile-updates.md | copy-ready, not applied externally |
 | Approval-gated launch queue | docs/link-building/launch-queue.csv | ready/gated/research actions separated |
 | Generated launch drafts | docs/link-building/generated-launch-drafts.md | 5 draft payloads |
-| Outreach outcome log | docs/link-building/outreach-outcome-log.csv | 32 tracked external actions |
+| Outreach outcome log | docs/link-building/outreach-outcome-log.csv | 33 tracked external actions |
 | GitHub owned repo opportunity audit | docs/link-building/github-owned-repo-opportunities.csv | 16 long-tail repos classified |
 | Authority asset index | public/research/authority-assets.json | 13 assets |
 | Crawler policy source map | public/research/ai-search-crawler-policy-sources.csv | 10 sources |
