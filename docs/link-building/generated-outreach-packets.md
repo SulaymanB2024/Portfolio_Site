@@ -10,6 +10,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 | 1 | Portfolio_Site repository | owned-profile | https://sulayman-bowles.dev/ | Portfolio static SEO implementation | Monitor public GitHub metadata and README links |
 | 1 | Thick-Scraper-VOID- repository | owned-profile | https://sulayman-bowles.dev/atlas | Atlas project | Monitor public GitHub metadata and README links |
 | 1 | LinkedIn profile | owned-profile | https://sulayman-bowles.dev/resume | Resume and source graph | Update profile manually |
+| 1 | Legacy sulaymanbowles-hash Website-80-2 repository | existing-mention | https://sulayman-bowles.dev/ai-information | AI information source graph | Verify account ownership and update legacy repo links |
 | 1 | UT Austin Student Government | existing-mention | https://sulayman-bowles.dev/ai-information | AI information source graph | Confirm mention and contact owner |
 | 1 | McCombs School of Business | academic | https://sulayman-bowles.dev/resume | Resume | Find relevant program/profile owner |
 | 1 | Texas Venture Labs | academic | https://sulayman-bowles.dev/atlas | Atlas project | Verify eligibility and contact path |
@@ -23,7 +24,6 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 | 1 | Anthropic support/community | ai-search | https://sulayman-bowles.dev/markets/ai-search-crawler-policy | AI crawler policy | Research discussion channels |
 | 1 | Austin Chamber | local-austin | https://sulayman-bowles.dev/austin-technical-seo | Austin technical SEO | Check member/directory requirements |
 | 1 | Built In Austin | local-austin | https://sulayman-bowles.dev/austin-technical-seo | Austin technical SEO | Research contributor/company profile options |
-| 1 | Austin Business Journal | local-austin | https://sulayman-bowles.dev/austin-technical-seo | Austin benchmark | Prepare benchmark before pitch |
 
 ## Packet 1: GitHub profile
 
@@ -104,7 +104,23 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 5: UT Austin Student Government
+## Packet 5: Legacy sulaymanbowles-hash Website-80-2 repository
+
+- Status: research
+- Priority: 1
+- Segment: existing-mention
+- Prospect URL: https://github.com/sulaymanbowles-hash/Website-80-2
+- Target page: https://sulayman-bowles.dev/ai-information
+- Asset: AI information source graph
+- Angle: Reclaim old GitHub namespace and dead sulaymanbowles.com references if account or domain control exists
+- Next action: Verify account ownership and update legacy repo links
+- Template: Profile / Existing Mention Reclamation
+- Live evidence: Not yet verified in `docs/link-building/live-prospect-evidence.csv`.
+- Send status: not sent.
+- Approval note: send manually only after confirming fit, contact path, and account permission.
+- Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
+
+## Packet 6: UT Austin Student Government
 
 - Status: research
 - Priority: 1
@@ -125,7 +141,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 6: McCombs School of Business
+## Packet 7: McCombs School of Business
 
 - Status: research
 - Priority: 1
@@ -146,7 +162,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 7: Texas Venture Labs
+## Packet 8: Texas Venture Labs
 
 - Status: research
 - Priority: 1
@@ -167,7 +183,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 8: Search Engine Land
+## Packet 9: Search Engine Land
 
 - Status: research
 - Priority: 1
@@ -188,7 +204,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 9: Search Engine Journal
+## Packet 10: Search Engine Journal
 
 - Status: research
 - Priority: 1
@@ -209,7 +225,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 10: SEOFOMO
+## Packet 11: SEOFOMO
 
 - Status: research
 - Priority: 1
@@ -230,7 +246,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 11: Detailed
+## Packet 12: Detailed
 
 - Status: research
 - Priority: 1
@@ -251,7 +267,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 12: TechnicalSEO.com
+## Packet 13: TechnicalSEO.com
 
 - Status: research
 - Priority: 1
@@ -272,7 +288,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 13: OpenAI developer community
+## Packet 14: OpenAI developer community
 
 - Status: research
 - Priority: 1
@@ -293,7 +309,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 14: Perplexity docs/community
+## Packet 15: Perplexity docs/community
 
 - Status: research
 - Priority: 1
@@ -309,7 +325,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 15: Anthropic support/community
+## Packet 16: Anthropic support/community
 
 - Status: research
 - Priority: 1
@@ -325,7 +341,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 16: Austin Chamber
+## Packet 17: Austin Chamber
 
 - Status: research
 - Priority: 1
@@ -346,7 +362,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
 
-## Packet 17: Built In Austin
+## Packet 18: Built In Austin
 
 - Status: research
 - Priority: 1
@@ -363,27 +379,6 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Fit status: research_gated
 - Evidence-based next action: Keep as contributor/profile research target and verify from browser/account before outreach.
 - Evidence boundary: Do not treat as verified open submission.
-- Send status: not sent.
-- Approval note: send manually only after confirming fit, contact path, and account permission.
-- Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
-
-## Packet 18: Austin Business Journal
-
-- Status: research
-- Priority: 1
-- Segment: local-austin
-- Prospect URL: https://www.bizjournals.com/austin/
-- Target page: https://sulayman-bowles.dev/austin-technical-seo
-- Asset: Austin benchmark
-- Angle: Pitch aggregate crawlability benchmark once published
-- Next action: Prepare benchmark before pitch
-- Template: Austin Crawlability Benchmark
-- Live evidence: About page lists editorial staff and newsroom roles for Austin Business Journal.
-- Source checked: https://www.bizjournals.com/austin/about-us
-- Contact/submission path: https://www.bizjournals.com/austin/about-us
-- Fit status: ready_story_tip
-- Evidence-based next action: Pitch Austin crawlability benchmark only after benchmark exists with local data and no private shaming.
-- Evidence boundary: Do not pitch a thin service page as news.
 - Send status: not sent.
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
