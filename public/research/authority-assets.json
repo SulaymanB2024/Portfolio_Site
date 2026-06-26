@@ -20,6 +20,16 @@
       "supporting_assets": ["https://sulayman-bowles.dev/research/authority-assets.json", "https://sulayman-bowles.dev/ai-information"]
     },
     {
+      "priority": 2,
+      "name": "Project Work Index",
+      "url": "https://sulayman-bowles.dev/work",
+      "type": "project_collection",
+      "preferred_anchor": "Sulayman Bowles project work",
+      "audiences": ["project reviewers", "student profiles", "software builders", "technical portfolio readers"],
+      "pitch_angle": "Current project surface for public engineering, research, markets, and technical SEO work without implying external validation.",
+      "supporting_assets": ["https://sulayman-bowles.dev/research", "https://sulayman-bowles.dev/ai-information"]
+    },
+    {
       "priority": 1,
       "name": "AI Search Crawler Policy",
       "url": "https://sulayman-bowles.dev/markets/ai-search-crawler-policy",

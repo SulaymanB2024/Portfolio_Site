@@ -8,13 +8,13 @@ Generated: 2026-06-25
 | --- | --- | --- |
 | Authority playbook | docs/link-building/authority-playbook.md | done in repo |
 | Outreach templates | docs/link-building/outreach-templates.md | done in repo |
-| Prospect tracker | docs/link-building/prospect-tracker.csv | 62 rows |
-| Live priority prospect evidence | docs/link-building/live-prospect-evidence.csv | 32 verified source checks |
+| Prospect tracker | docs/link-building/prospect-tracker.csv | 63 rows |
+| Live priority prospect evidence | docs/link-building/live-prospect-evidence.csv | 33 verified source checks |
 | Owned profile update drafts | docs/link-building/owned-profile-updates.md | copy-ready, not applied externally |
 | Approval-gated launch queue | docs/link-building/launch-queue.csv | ready/gated/research actions separated |
 | Generated launch drafts | docs/link-building/generated-launch-drafts.md | 5 draft payloads |
-| Outreach outcome log | docs/link-building/outreach-outcome-log.csv | 28 tracked external actions |
-| Authority asset index | public/research/authority-assets.json | 12 assets |
+| Outreach outcome log | docs/link-building/outreach-outcome-log.csv | 29 tracked external actions |
+| Authority asset index | public/research/authority-assets.json | 13 assets |
 | Crawler policy source map | public/research/ai-search-crawler-policy-sources.csv | 10 sources |
 | Austin crawlability benchmark | public/research/austin-crawlability-benchmark-pilot.csv and public/research/austin-crawlability-benchmark-summary.json | 12 measured rows |
 | Publish manifest | docs/link-building/publish-manifest.json | defines the link-building-only file scope |
