@@ -43,12 +43,15 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
                 {group.items.map((item) => {
                   const active = isNavItemActive(activePath, item.href);
                   const cleanId = navItemId(`footer-nav-${group.label.toLowerCase()}`, item);
+                  const isExternal = item.href.startsWith('http');
 
                   return (
                     <a
                       key={item.href}
                       href={item.href}
                       id={cleanId}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noreferrer' : undefined}
                       aria-current={active ? 'page' : undefined}
                       title={item.description}
                       className={`site-footer-link group relative inline-flex min-h-10 items-center justify-center rounded-[6px] px-3 py-2 leading-none transition-colors duration-200 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
@@ -79,9 +82,10 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
               const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
               window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
             }}
-            className={`site-footer-return inline-flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-200 ${returnClass}`}
+            className={`site-footer-return group relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border transition-colors duration-200 ${returnClass}`}
           >
-            <ArrowUp aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={1.5} />
+            <span aria-hidden="true" className="absolute inset-x-1 bottom-1 h-0 rounded-full bg-current/10 transition-all duration-300 group-hover:h-[calc(100%-0.5rem)]" />
+            <ArrowUp aria-hidden="true" className="relative h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" strokeWidth={1.5} />
           </a>
         </div>
       </div>

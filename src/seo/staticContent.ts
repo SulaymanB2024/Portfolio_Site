@@ -6,6 +6,7 @@ import {
 } from '../content/aiInformation';
 import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
 import { MARKET_THESES } from '../content/marketTheses';
+import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import {
   appianAssumptionRows,
   atlasSampleFindings,
@@ -205,6 +206,29 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     return AI_INFORMATION_STATIC_HTML;
   }
 
+  if (route.path === '/research') {
+    return articleShell(
+      'Research Assets',
+      'Citation-ready public research assets across technical SEO, AI-search, Atlas, crawlability, identity, and finance/data work.',
+      `<h2>Citation surfaces, not empty claims.</h2>
+        <p>This index gives editors, source-page owners, technical SEO writers, AI-search researchers, and profile reviewers one clean URL for public assets and source files.</p>
+        <p>The <a href="/llms.txt">LLMs text file</a> and <a href="/research/authority-assets.json">Authority asset JSON</a> provide machine-readable context for crawlers, citation review, and outreach.</p>
+        <h2>Citation Targets</h2>
+        ${publicResearchAssets
+          .map(
+            (asset) =>
+              `<h3><a href="${asset.href}">${escapeHtml(asset.name)}</a></h3><p>Priority: P${asset.priority}. Type: ${escapeHtml(asset.type)}. Preferred anchor: ${escapeHtml(asset.preferredAnchor)}.</p><p>${escapeHtml(asset.pitchAngle)}</p>`,
+          )
+          .join('\n        ')}
+        <h2>Downloadable Public Files</h2>
+        ${linkList(publicDataDownloads)}
+        <h2>Claim Boundaries</h2>
+        <ul>${researchClaimBoundaries.map((boundary) => `<li>${escapeHtml(boundary)}</li>`).join('')}</ul>
+        <h2>Internal Links</h2>
+        ${linkList(primaryLinks)}`,
+    );
+  }
+
   if (route.path === '/') {
     return articleShell(
       'Sulayman Bowles',
@@ -331,7 +355,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           ['Crawlability', 'Robots rules, sitemap coverage, response codes, redirects, page templates, and crawl-depth patterns.'],
           ['Page Evidence', 'Raw HTML, rendered HTML, canonical URLs, metadata, internal links, structured data, and indexability directives.'],
           ['Analytics Review', 'Google Search Console, GA4, query buckets, landing pages, search intent, and page-level recommendations where access is available.'],
-          ['Source Map', 'Personal site, GitHub, Void Agency, LinkedIn, UT/McCombs context, Atlas, Markets Research, and the HTML resume.'],
+          ['Source Map', 'Personal site, sulayman-bowles.tech, GitHub, Void Agency, LinkedIn, UT/McCombs context, Atlas, Markets Research, and the HTML resume.'],
         ])}
         <h2>Contextual Links</h2>
         ${linkList([

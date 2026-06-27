@@ -45,49 +45,49 @@ const widePlateMaskStyle: CSSProperties = {
 const methodSteps = [
   {
     id: '01',
-    title: 'Crawl',
-    body: 'Follow the site as machines encounter it: seed paths, sitemaps, rendered links, logs, and stray edges.',
+    title: 'Discover',
+    body: 'Seed paths, sitemaps, rendered links, redirects, and stray edges are kept in one inspectable inventory.',
   },
   {
     id: '02',
-    title: 'Extract',
-    body: 'Lift text, headings, canonicals, schema, and links into a structured record that can be inspected later.',
+    title: 'Qualify',
+    body: 'Normal content, access challenges, utility URLs, and error surfaces are separated before scoring.',
   },
   {
     id: '03',
-    title: 'Classify',
-    body: 'Name each surface by intent, topic, entity, template, and page role so the corpus begins to have shape.',
+    title: 'Trace',
+    body: 'Questions are tied to pages, passages, confidence values, and the limit of what the source proves.',
   },
   {
     id: '04',
-    title: 'Embed',
-    body: 'Turn passages and questions into comparable signals without letting similarity replace proof.',
+    title: 'Review',
+    body: 'Repairs stay behind a human-readable gate until the run, artifact, and source claim still match.',
   },
-  {
-    id: '05',
-    title: 'Retrieve',
-    body: 'Bring back the passages that can actually support an answer, using lexical and vector search together.',
-  },
-  {
-    id: '06',
-    title: 'Answer-test',
-    body: 'Test generated answers against the passages they cite, and mark where the site cannot carry the claim.',
-  },
-  {
-    id: '07',
-    title: 'Recommend fixes',
-    body: 'Translate the missing proof into specific pages, links, schema, and revisions a team can build.',
-  },
+];
+
+const heroRunArtifacts = [
+  { label: 'Pages read', value: '12,842', note: 'seed, sitemap, rendered links' },
+  { label: 'Evidence states', value: '4', note: 'content, challenge, utility, error' },
+  { label: 'Open repairs', value: '42', note: 'review-held recommendations' },
+  { label: 'Package', value: 'Reviewed', note: 'run ID and artifact bound' },
+];
+
+const crawlLedgerRows = [
+  { field: 'Seed + sitemap', value: '13,642 URLs', state: 'inventory' },
+  { field: 'Rendered content', value: '8,731 pages', state: 'confirmed_content' },
+  { field: 'Access challenge', value: '44 pages', state: 'measurement_gap' },
+  { field: 'Utility URLs', value: '318 held', state: 'suppressed' },
+  { field: 'Client actions', value: '42 queued', state: 'review_gate' },
 ];
 
 const evidenceCards = [
   { label: 'Search question', value: 'austin deck builder' },
-  { label: 'Nearest proof', value: '/services/deck-building' },
-  { label: 'Visible passage', value: 'Deck construction, repair, materials, and project examples.' },
-  { label: 'Source state', value: 'confirmed_content' },
+  { label: 'Crawl-backed page', value: '/services/deck-building' },
+  { label: 'Supporting passage', value: 'Deck construction, repair, materials, and project examples.' },
+  { label: 'Measured state', value: 'confirmed_content' },
   { label: 'Confidence', value: '0.87', kind: 'score' },
-  { label: 'Boundary note', value: 'Useful category proof, weak city-level proof' },
-  { label: 'Smallest repair', value: '/austin/deck-builder' },
+  { label: 'Claim limit', value: 'Useful category proof, weak city-level proof' },
+  { label: 'Smallest reviewed repair', value: '/austin/deck-builder' },
 ];
 
 const evidenceTrace = [
@@ -130,6 +130,13 @@ const evidenceStateRows = [
     state: 'http_error_page',
     meaning: 'Status-only error surface; preserve the failure without turning it into a normal page task.',
   },
+];
+
+const evidenceStateChips = [
+  { state: 'confirmed_content', label: 'client-visible evidence allowed' },
+  { state: 'access_challenge', label: 'measurement gap only' },
+  { state: 'utility_url', label: 'inventory, not action queue' },
+  { state: 'http_error_page', label: 'failure preserved, not normalized' },
 ];
 
 const coverageRows = [
@@ -358,26 +365,26 @@ export default function AtlasPage() {
             aria-hidden="true"
           />
 
-          <div className="relative z-10 mx-auto flex min-h-[calc(100svh-8rem)] w-full max-w-[1480px] items-end pb-16 md:items-center md:pb-0">
+          <div className="relative z-10 mx-auto grid min-h-[calc(100svh-8rem)] w-full max-w-[1480px] items-end gap-10 pb-10 md:grid-cols-[minmax(0,0.9fr)_minmax(18rem,0.58fr)] md:items-center md:gap-14 md:pb-0 lg:px-10">
             <motion.div
               initial={prefersReducedMotion ? false : { y: 18 }}
               animate={prefersReducedMotion ? undefined : { y: 0 }}
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               style={prefersReducedMotion ? undefined : { opacity: heroContentOpacity, y: heroCopyY }}
               id="atlas-hero-copy"
-              className="w-full max-w-[22rem] md:ml-10 md:max-w-[40rem] lg:ml-14 xl:ml-12"
+              className="w-full max-w-[24rem] md:max-w-[40rem]"
             >
               <p className="mb-7 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42 md:mb-8">
                 ATLAS ENGINE
               </p>
               <h1 className="font-serif text-[clamp(2.7rem,12vw,4.75rem)] font-light leading-[0.95] tracking-normal text-ink md:text-[clamp(3rem,4.8vw,4.75rem)]">
                 <motion.span
-                  className="block whitespace-nowrap"
+                  className="block md:whitespace-nowrap"
                   style={prefersReducedMotion ? undefined : { color: firstLineColor, opacity: firstLineOpacity, y: firstLineY }}
                 >
                   To see the
                 </motion.span>
-                <span className="block whitespace-nowrap">
+                <span className="block md:whitespace-nowrap">
                   <span className="inline-block">
                     whole&nbsp;
                   </span>
@@ -391,24 +398,67 @@ export default function AtlasPage() {
                 every recommendation tied to proof.
               </p>
               <a
-                href="#atlas-methodology"
+                href="/atlas#atlas-methodology"
                 id="atlas-view-methodology-link"
                 className="mt-8 inline-block border-b border-ink/18 pb-1 font-serif text-sm italic tracking-normal text-ink/45 transition-colors hover:border-ink/45 hover:text-ink/72"
               >
                 View methodology
               </a>
-              <div className="mt-7 grid gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/46">
-                <a href="/atlas/sample-crawl" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
-                  See an Atlas sample crawl run
+              <nav className="mt-7 grid max-w-[27rem] gap-3 text-[11px] tracking-normal text-ink/52 md:text-[10px] md:uppercase md:tracking-[0.2em]" aria-label="Atlas proof links">
+                <a href="/atlas/sample-crawl" className="group grid min-h-11 w-full border-y border-ink/16 py-3 transition-colors hover:border-ink/40 hover:text-ink/78 md:w-fit md:min-h-0 md:border-b md:border-t-0 md:py-1">
+                  <span className="flex items-center justify-between gap-4 md:hidden">
+                    <span>01 / Proof artifact</span>
+                    <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">Open</span>
+                  </span>
+                  <span className="mt-1 font-serif text-sm italic normal-case tracking-normal text-ink/70 md:hidden">
+                    See an Atlas sample crawl run
+                  </span>
+                  <span className="hidden md:block">
+                    See an Atlas sample crawl run
+                  </span>
                 </a>
                 <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
-                  View the GitHub repo for the audit CLI
+                  View GitHub repo
                 </a>
                 <a href="/contact" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
                   Request an audit
                 </a>
-              </div>
+              </nav>
+              <dl className="mt-6 grid grid-cols-2 border-y border-ink/12 md:hidden">
+                {heroRunArtifacts.map((artifact) => (
+                  <div key={artifact.label} className="border-b border-ink/10 px-3 py-3 odd:border-r odd:border-ink/10">
+                    <dt className="text-[9px] uppercase tracking-[0.16em] text-ink/42">{artifact.label}</dt>
+                    <dd className="mt-2 font-serif text-xl leading-none text-ink/82">{artifact.value}</dd>
+                  </div>
+                ))}
+              </dl>
             </motion.div>
+
+            <motion.aside
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
+              style={prefersReducedMotion ? undefined : { opacity: heroContentOpacity, y: heroCopyY }}
+              className="relative z-10 hidden max-w-[30rem] border-y border-ink/12 bg-canvas/70 py-5 md:block"
+              aria-label="Atlas run artifact summary"
+            >
+              <div className="mb-4 flex items-center justify-between text-[9px] uppercase tracking-[0.22em] text-ink/44">
+                <span>Run artifact</span>
+                <span>reviewed package</span>
+              </div>
+              <dl className="grid grid-cols-2 border-t border-ink/10">
+                {heroRunArtifacts.map((artifact) => (
+                  <div key={artifact.label} className="min-h-[7.25rem] border-b border-ink/10 px-4 py-4 odd:border-r odd:border-ink/10">
+                    <dt className="text-[9px] uppercase tracking-[0.18em] text-ink/42">{artifact.label}</dt>
+                    <dd className="mt-3 font-serif text-[clamp(1.7rem,3vw,2.6rem)] leading-none text-ink/84">{artifact.value}</dd>
+                    <dd className="mt-3 text-[11px] leading-5 text-ink/48">{artifact.note}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-5 border-l border-ink/16 pl-4 text-xs leading-6 text-ink/54">
+                The public page should reveal what Atlas measured before it asks the reader to trust the method.
+              </p>
+            </motion.aside>
           </div>
         </div>
 
@@ -419,7 +469,7 @@ export default function AtlasPage() {
         id="atlas-methodology"
         className="relative min-h-[104svh] scroll-mt-28 overflow-hidden border-t border-b border-ink/12 px-4 py-24 md:px-8 md:py-28 xl:px-10"
       >
-        <div className="relative z-10 mx-auto grid min-h-[calc(100svh-12rem)] w-full max-w-[1480px] items-center gap-10 md:grid-cols-[minmax(10rem,0.38fr)_minmax(0,0.92fr)_minmax(16rem,0.7fr)] md:gap-12 lg:px-10">
+        <div className="relative z-10 mx-auto grid min-h-[calc(100svh-12rem)] w-full max-w-[1480px] items-center gap-10 md:grid-cols-[minmax(10rem,0.38fr)_minmax(0,0.84fr)_minmax(18rem,0.78fr)] md:gap-12 lg:px-10">
           <motion.div
             style={prefersReducedMotion ? undefined : { opacity: methodologyContentOpacity, y: methodologyContentY }}
             className="self-start md:pt-6"
@@ -460,6 +510,33 @@ export default function AtlasPage() {
               ))}
             </div>
           </motion.div>
+
+          <motion.aside
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.24, margin: '-6% 0px -6% 0px' }}
+            transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
+            className="border-y border-ink/12 py-5 md:col-start-3"
+          >
+            <div className="mb-5 flex items-center justify-between text-[9px] uppercase tracking-[0.22em] text-ink/44">
+              <span>Crawl ledger</span>
+              <span>sample run</span>
+            </div>
+            <div className="grid gap-0">
+              {crawlLedgerRows.map((row, index) => (
+                <div key={row.field} className="grid grid-cols-[2.4rem_minmax(0,1fr)] gap-3 border-t border-ink/10 py-3 text-xs leading-5 text-ink/58">
+                  <span className="text-[10px] uppercase tracking-[0.18em] text-ink/38">{String(index + 1).padStart(2, '0')}</span>
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <span className="font-medium text-ink/76">{row.field}</span>
+                      <span className="font-serif text-base leading-none text-ink/78">{row.value}</span>
+                    </div>
+                    <p className="mt-2 font-mono text-[11px] text-ink/46">{row.state}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.aside>
         </div>
       </section>
 
@@ -559,7 +636,15 @@ function EvidenceSection({
               <span>Proof path</span>
               <span>sample plate</span>
             </div>
-            <div className="absolute left-[3rem] right-[3rem] top-[7.75rem] hidden border-t border-ink/12 md:block" aria-hidden="true" />
+            <div className="mb-8 grid gap-2 border-b border-ink/10 pb-6 md:grid-cols-4">
+              {evidenceStateChips.map((chip) => (
+                <div key={chip.state} className="border-l border-ink/14 pl-3">
+                  <p className="font-mono text-[11px] leading-none text-ink/66">{chip.state}</p>
+                  <p className="mt-2 text-[11px] leading-5 text-ink/46">{chip.label}</p>
+                </div>
+              ))}
+            </div>
+            <div className="absolute left-[3rem] right-[3rem] top-[15.25rem] hidden border-t border-ink/12 md:block" aria-hidden="true" />
             <div className="relative grid gap-7 md:grid-cols-4">
               {evidenceTrace.map((step, index) => (
                 <motion.article
@@ -592,6 +677,14 @@ function EvidenceSection({
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.03 }}
             className="mt-10 border-t border-ink/12"
           >
+            <div className="grid gap-2 border-b border-ink/10 py-4 md:grid-cols-[13rem_minmax(0,1fr)] md:items-baseline">
+              <dt className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/52">
+                Trace
+              </dt>
+              <dd className="font-serif text-xl italic leading-none text-ink/78">
+                query to page to passage to limitation to repair
+              </dd>
+            </div>
             {evidenceCards.map((card, index) => (
               <div
                 key={card.label}

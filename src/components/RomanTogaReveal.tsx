@@ -1,4 +1,4 @@
-import { type CSSProperties, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 type RomanTogaFocus = 'diagram' | 'large-figure';
@@ -36,9 +36,6 @@ const LARGE_FIGURE_FOCAL_POINT = {
   x: 0,
   y: 0,
 };
-const LARGE_FIGURE_DESKTOP_TRANSFORM = 'scale(2.55)';
-const LARGE_FIGURE_MOBILE_TRANSFORM = 'translateX(-32%) scale(2.55)';
-
 type SourceRect = {
   x: number;
   y: number;
@@ -88,6 +85,50 @@ function getObjectFitRect(
   };
 }
 
+function drawArtworkLayer({
+  ctx,
+  image,
+  width,
+  height,
+  focus,
+  fit,
+  opacity,
+  filter,
+}: {
+  ctx: CanvasRenderingContext2D;
+  image: HTMLImageElement;
+  width: number;
+  height: number;
+  focus: RomanTogaFocus;
+  fit: 'contain' | 'cover';
+  opacity: number;
+  filter: string;
+}) {
+  if (!image.complete) {
+    return;
+  }
+
+  const sourceRect = getSourceRect(image, focus);
+  const imageAlignment = focus === 'large-figure' ? LARGE_FIGURE_FOCAL_POINT : undefined;
+  const imageRect = getObjectFitRect(sourceRect, width, height, fit, imageAlignment);
+
+  ctx.save();
+  ctx.globalAlpha = opacity;
+  ctx.filter = filter;
+  ctx.drawImage(
+    image,
+    sourceRect.x,
+    sourceRect.y,
+    sourceRect.width,
+    sourceRect.height,
+    imageRect.x,
+    imageRect.y,
+    imageRect.width,
+    imageRect.height,
+  );
+  ctx.restore();
+}
+
 export function RomanTogaReveal({
   className = '',
   assetHref = DEFAULT_ASSET,
@@ -98,6 +139,7 @@ export function RomanTogaReveal({
   revealOpacity = 0.42,
 }: RomanTogaRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const baseCanvasRef = useRef<HTMLCanvasElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointsRef = useRef<RevealPoint[]>([]);
   const frameRef = useRef<number | null>(null);
@@ -141,15 +183,17 @@ export function RomanTogaReveal({
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    const baseCanvas = baseCanvasRef.current;
     const container = containerRef.current;
     const image = imageRef.current;
 
-    if (!canvas || !container || !image || !canReveal) {
+    if (!canvas || !baseCanvas || !container || !image) {
       return;
     }
 
     const ctx = canvas.getContext('2d');
-    if (!ctx) {
+    const baseCtx = baseCanvas.getContext('2d');
+    if (!ctx || !baseCtx) {
       return;
     }
 
@@ -173,13 +217,27 @@ export function RomanTogaReveal({
 
       canvas.width = Math.floor(width * devicePixelRatio);
       canvas.height = Math.floor(height * devicePixelRatio);
+      baseCanvas.width = canvas.width;
+      baseCanvas.height = canvas.height;
       maskCanvas.width = canvas.width;
       maskCanvas.height = canvas.height;
 
       ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+      baseCtx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
       maskCtx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
       ctx.clearRect(0, 0, width, height);
+      baseCtx.clearRect(0, 0, width, height);
       maskCtx.clearRect(0, 0, width, height);
+      drawArtworkLayer({
+        ctx: baseCtx,
+        image,
+        width,
+        height,
+        focus,
+        fit,
+        opacity: restOpacity,
+        filter: 'grayscale(1) contrast(1.22) brightness(0.5)',
+      });
     };
 
     const drawFrame = (time: number) => {
@@ -207,24 +265,17 @@ export function RomanTogaReveal({
       }
 
       if (pointsRef.current.length > 0 && image.complete) {
-        const sourceRect = getSourceRect(image, focus);
-        const imageAlignment = focus === 'large-figure' ? LARGE_FIGURE_FOCAL_POINT : undefined;
-        const imageRect = getObjectFitRect(sourceRect, width, height, fit, imageAlignment);
-
-        ctx.save();
-        ctx.globalAlpha = revealOpacity;
-        ctx.filter = 'grayscale(1) contrast(1.42) brightness(0.42)';
-        ctx.drawImage(
+        drawArtworkLayer({
+          ctx,
           image,
-          sourceRect.x,
-          sourceRect.y,
-          sourceRect.width,
-          sourceRect.height,
-          imageRect.x,
-          imageRect.y,
-          imageRect.width,
-          imageRect.height,
-        );
+          width,
+          height,
+          focus,
+          fit,
+          opacity: revealOpacity,
+          filter: 'grayscale(1) contrast(1.42) brightness(0.42)',
+        });
+        ctx.save();
         ctx.globalCompositeOperation = 'destination-in';
         ctx.filter = 'none';
         ctx.drawImage(maskCanvas, 0, 0, width, height);
@@ -274,11 +325,20 @@ export function RomanTogaReveal({
       startRender();
     };
 
+    const handleImageLoad = () => {
+      resizeCanvas();
+      startRender();
+    };
+
     resizeCanvas();
-    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    image.addEventListener('load', handleImageLoad);
+    if (canReveal) {
+      window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    }
     window.addEventListener('resize', handleResize);
 
     return () => {
+      image.removeEventListener('load', handleImageLoad);
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('resize', handleResize);
       pointsRef.current = [];
@@ -289,16 +349,7 @@ export function RomanTogaReveal({
         frameRef.current = null;
       }
     };
-  }, [assetHref, canReveal, fit, focus, revealOpacity]);
-
-  const fitClassName = fit === 'cover' ? 'object-cover' : 'object-contain';
-  const focusImageStyle: CSSProperties = focus === 'large-figure'
-    ? {
-        objectPosition: 'left top',
-        transform: isMobile ? LARGE_FIGURE_MOBILE_TRANSFORM : LARGE_FIGURE_DESKTOP_TRANSFORM,
-        transformOrigin: 'left top',
-      }
-    : {};
+  }, [assetHref, canReveal, fit, focus, restOpacity, revealOpacity]);
 
   return (
     <div
@@ -309,34 +360,12 @@ export function RomanTogaReveal({
       data-toga-reveal-root="true"
       aria-hidden="true"
     >
-      <img
-        src={assetHref}
-        alt=""
-        draggable={false}
-        className={`pointer-events-none absolute inset-0 h-full w-full select-none ${fitClassName}`}
-        style={{
-          ...focusImageStyle,
-          opacity: restOpacity,
-          filter: 'grayscale(1) contrast(1.22) brightness(0.5)',
-          mixBlendMode: 'multiply',
-        }}
+      <canvas
+        ref={baseCanvasRef}
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        role="presentation"
+        style={{ mixBlendMode: 'multiply' }}
       />
-      {!canReveal && (
-        <img
-          src={assetHref}
-          alt=""
-          draggable={false}
-          className={`pointer-events-none absolute inset-0 h-full w-full select-none ${fitClassName}`}
-          style={{
-            ...focusImageStyle,
-            opacity: Math.min(revealOpacity * 0.22, 0.12),
-            filter: 'grayscale(1) contrast(1.2) brightness(0.55)',
-            maskImage: 'radial-gradient(circle at 50% 46%, black 0%, black 28%, transparent 66%)',
-            WebkitMaskImage: 'radial-gradient(circle at 50% 46%, black 0%, black 28%, transparent 66%)',
-            mixBlendMode: 'multiply',
-          }}
-        />
-      )}
       <canvas
         ref={canvasRef}
         className="pointer-events-none absolute inset-0 h-full w-full"

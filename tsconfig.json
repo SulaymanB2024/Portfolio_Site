@@ -15,6 +15,9 @@
     "moduleDetection": "force",
     "allowJs": true,
     "jsx": "react-jsx",
+    "types": [
+      "node"
+    ],
     "paths": {
       "@/*": [
         "./*"
@@ -22,5 +25,13 @@
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "output",
+    "test-results",
+    "playwright-report",
+    "blob-report"
+  ]
 }

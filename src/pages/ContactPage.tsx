@@ -10,6 +10,17 @@ import { useSEO } from '../utils/seo';
 
 const CONTACT_SEO = getSeoRoute('/contact')!;
 
+function CornerMarks() {
+  return (
+    <span aria-hidden="true" className="pointer-events-none absolute inset-0 text-current/28 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <span className="absolute left-3 top-3 h-px w-4 bg-current" />
+      <span className="absolute left-3 top-3 h-4 w-px bg-current" />
+      <span className="absolute bottom-3 right-3 h-px w-4 bg-current" />
+      <span className="absolute bottom-3 right-3 h-4 w-px bg-current" />
+    </span>
+  );
+}
+
 export default function ContactPage() {
   useSEO(CONTACT_SEO);
 
@@ -56,8 +67,9 @@ export default function ContactPage() {
               href={link.href}
               target={link.href.startsWith('http') ? '_blank' : undefined}
               rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-              className="min-h-[170px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
+              className="group relative min-h-[170px] overflow-hidden bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
             >
+              <CornerMarks />
               <h3 className="text-xs uppercase tracking-[0.22em] text-inherit">{link.label}</h3>
               <p className="mt-5 text-sm leading-relaxed text-inherit opacity-65">{link.description}</p>
             </a>

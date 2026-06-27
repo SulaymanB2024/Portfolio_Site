@@ -1,0 +1,13 @@
+sample_id,display_name,homepage_url,segment,selection_note
+bigcommerce,BigCommerce,https://www.bigcommerce.com/,commerce_platform,"Austin-founded public technology company; included as a large local web benchmark."
+wpengine,WP Engine,https://wpengine.com/,hosting_platform,"Austin-headquartered web platform company; relevant to public web infrastructure."
+ninjaone,NinjaOne,https://www.ninjaone.com/,it_software,"Austin IT software company; relevant B2B public-site sample."
+alertmedia,AlertMedia,https://www.alertmedia.com/,b2b_software,"Austin emergency communication software company; relevant B2B public-site sample."
+disco,DISCO,https://www.csdisco.com/,legal_technology,"Austin legal technology company; relevant B2B public-site sample."
+shipwell,Shipwell,https://www.shipwell.com/,logistics_software,"Austin logistics software company; relevant B2B public-site sample."
+dataworld,data.world,https://data.world/,data_platform,"Austin data platform company; relevant data/web infrastructure sample."
+kasasa,Kasasa,https://www.kasasa.com/,fintech,"Austin financial technology company; relevant public-site sample."
+zenbusiness,ZenBusiness,https://www.zenbusiness.com/,business_services,"Austin business-services company; relevant public-site sample."
+self,Self Financial,https://www.self.inc/,fintech,"Austin financial technology company; relevant public-site sample."
+workrise,Workrise,https://www.workrise.com/,workforce_platform,"Austin workforce platform company; relevant B2B public-site sample."
+everlywell,Everlywell,https://www.everlywell.com/,health_technology,"Austin health technology company; included as a local public-site sample."

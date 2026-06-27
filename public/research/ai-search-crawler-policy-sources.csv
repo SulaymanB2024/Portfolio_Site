@@ -1,0 +1,11 @@
+source_name,source_url,source_type,used_for,claim_boundary
+OpenAI crawlers,https://developers.openai.com/api/docs/bots,official_documentation,OpenAI crawler roles and user agents,Does not prove ChatGPT citation or ranking
+Anthropic crawler guidance,https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler,official_documentation,Claude crawler distinctions and blocking guidance,Does not prove Claude citation or answer inclusion
+Perplexity crawlers,https://docs.perplexity.ai/docs/resources/perplexity-crawlers,official_documentation,Perplexity crawler roles and user agents,Does not prove Perplexity citation or answer inclusion
+Google robots.txt introduction,https://developers.google.com/search/docs/crawling-indexing/robots/intro,official_documentation,robots.txt limitations and crawler access framing,Robots access is not an indexing guarantee
+Google canonicalization guide,https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls,official_documentation,canonical URL consolidation and duplicate URL handling,Canonical signals do not guarantee selected canonical
+Google link best practices,https://developers.google.com/search/docs/crawling-indexing/links-crawlable,official_documentation,crawlable links and descriptive anchor guidance,Good links do not guarantee ranking movement
+Google Search spam policies,https://developers.google.com/search/docs/essentials/spam-policies,official_documentation,link spam boundaries for outreach and campaign rules,Policy compliance does not prove authority gains
+Google AI search optimization guidance,https://developers.google.com/search/docs/fundamentals/ai-optimization-guide,official_documentation,AI search optimization as normal SEO plus accessible content,Does not guarantee AI Overview inclusion
+IndexNow documentation,https://www.indexnow.org/documentation,official_documentation,URL change notification and key-file mechanism,IndexNow submission does not guarantee crawling or indexing
+Ahrefs Domain Rating glossary,https://ahrefs.com/seo/glossary/domain-rating,third_party_metric_documentation,DR definition and backlink-profile factors,DR is proprietary and not a Google ranking metric

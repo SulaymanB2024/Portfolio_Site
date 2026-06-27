@@ -3,86 +3,114 @@ import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { WireframeGrid } from '../components/WireframeGrid';
+import {
+  DarkProofArtifactPanel,
+  LinkPanel,
+  PageFrame,
+  PageShell,
+  PrimaryCTA,
+  SectionHeader,
+  SurfaceGrid,
+  TechnicalPanel,
+  TextLink,
+} from '../components/design/Primitives';
 import { austinSeoSignals } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const AUSTIN_SEO = getSeoRoute('/austin-technical-seo')!;
+const austinArtifactItems = austinSeoSignals.slice(0, 4).map((signal, index) => ({
+  label: `Signal ${String(index + 1).padStart(2, '0')}`,
+  value: signal,
+}));
 
 export default function AustinTechnicalSeoPage() {
   useSEO(AUSTIN_SEO);
 
   return (
-    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-[#080807] font-sans text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
+    <PageShell id="top" tone="dark">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
       <ScrollProgress />
       <InternalHeader activePath="/method" tone="dark" />
 
-      <section className="relative z-10 mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] content-end px-4 pb-20 pt-16 md:px-8 xl:px-10">
-        <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/48">Austin technical SEO</p>
-        <h1 className="max-w-6xl font-serif text-[clamp(3.8rem,9vw,10rem)] italic leading-[0.84] tracking-normal">
-          Austin technical SEO and AI-search visibility.
-        </h1>
-        <p className="mt-10 max-w-3xl text-base leading-relaxed text-[#f1efe8]/62">
-          A local service page for Austin teams that need crawlability, indexation, structured data, source clarity, and technical search evidence reviewed before broader content or growth work.
-        </p>
-        <div className="mt-10 flex flex-wrap gap-6 text-[10px] uppercase tracking-[0.24em]">
-          <a href="/contact" className="border-b border-[#f1efe8]/20 pb-1 text-[#b7c8a8] transition-colors hover:border-[#f1efe8] hover:text-[#f1efe8]">
-            Request an audit
-          </a>
-          <a href="/method" className="border-b border-[#f1efe8]/20 pb-1 transition-colors hover:border-[#f1efe8]">
-            Read the technical SEO audit method
-          </a>
-          <a href="/atlas/sample-crawl" className="border-b border-[#f1efe8]/20 pb-1 transition-colors hover:border-[#f1efe8]">
-            See an Atlas sample crawl run
-          </a>
-        </div>
-      </section>
+      <PageFrame className="relative z-10">
+        <section className="grid grid-cols-1 gap-8 pb-20 pt-12 lg:min-h-[calc(100vh-104px)] lg:grid-cols-[minmax(0,0.48fr)_minmax(340px,0.52fr)] lg:gap-12 lg:pt-16 xl:pt-20">
+          <div className="self-end">
+            <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-current/48">Austin technical SEO</p>
+            <h1 className="max-w-6xl font-serif text-[clamp(3.8rem,9vw,10rem)] italic leading-[0.84] tracking-normal">
+              Austin technical SEO and AI-search visibility.
+            </h1>
+            <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/64 lg:mt-10">
+              A local service page for Austin teams that need crawlability, indexation, structured data, source clarity, and technical search evidence reviewed before broader content or growth work.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-5 lg:mt-10">
+              <PrimaryCTA href="/contact" className="text-accent hover:text-[var(--page-bg)]">
+                Request an audit
+              </PrimaryCTA>
+              <TextLink href="/method" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
+                Read the technical SEO audit method
+              </TextLink>
+              <TextLink href="/atlas/sample-crawl" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
+                See an Atlas sample crawl run
+              </TextLink>
+              <TextLink href="/research/austin-crawlability-benchmark-pilot.csv" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
+                Download the Austin crawlability pilot
+              </TextLink>
+            </div>
+          </div>
 
-      <section className="relative z-10 mx-auto max-w-[1480px] border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
-        <div className="mb-10 grid gap-8 lg:grid-cols-[0.42fr_0.58fr]">
-          <h2 className="font-serif text-[clamp(3rem,5vw,6rem)] italic leading-[0.9] tracking-normal">
-            What gets checked.
-          </h2>
-          <p className="max-w-3xl self-end text-base leading-relaxed text-[#f1efe8]/58">
+          <DarkProofArtifactPanel
+            className="self-center max-md:-mt-4 lg:ml-auto"
+            eyebrow="Local proof stack"
+            title="Evidence before local SEO claims."
+            summary="The page keeps the Austin frame tied to crawlable surfaces, source clarity, and implementation evidence."
+            items={austinArtifactItems}
+            footer="Public page review first. Analytics and Search Console only when access is available."
+          />
+        </section>
+      </PageFrame>
+
+      <section className="relative z-10 border-y border-current/12">
+        <PageFrame className="py-16 xl:py-24">
+          <SectionHeader eyebrow="Review surfaces" title="What gets checked.">
             The local frame is useful only when it is backed by crawlable pages, real source signals, and implementation detail. This page does not claim local rankings, traffic movement, or AI citations.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-3">
-          {austinSeoSignals.map((signal, index) => (
-            <article key={signal} className="min-h-[150px] bg-[#f1efe8]/[0.012] p-5">
-              <p className="mb-7 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/38">{String(index + 1).padStart(2, '0')}</p>
-              <h3 className="text-sm leading-relaxed text-[#f1efe8]/68">{signal}</h3>
-            </article>
-          ))}
-        </div>
+          </SectionHeader>
+          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+            {austinSeoSignals.map((signal, index) => (
+              <TechnicalPanel key={signal} className="min-h-[150px]">
+                <p className="mb-7 text-[10px] uppercase tracking-[0.2em] text-current/42">{String(index + 1).padStart(2, '0')}</p>
+                <h3 className="text-sm leading-relaxed text-current/72">{signal}</h3>
+              </TechnicalPanel>
+            ))}
+          </SurfaceGrid>
+        </PageFrame>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10">
-        <div className="grid gap-8 border border-[#f1efe8]/14 p-6 md:p-10 lg:grid-cols-[0.55fr_0.45fr]">
+      <PageFrame className="relative z-10 py-16">
+        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.55fr_0.45fr]">
           <div>
             <h2 className="font-serif text-[clamp(3rem,5vw,6rem)] italic leading-[0.9] tracking-normal">
               Built for evidence, not vague local SEO.
             </h2>
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-[#f1efe8]/58">
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
               The audit starts with public pages and technical signals. When analytics or Google Search Console access is available, those sources can support prioritization, but they are not invented into the public claim.
             </p>
           </div>
-          <div className="grid content-center gap-4 text-[10px] uppercase tracking-[0.22em]">
-            <a href="/void-agency" className="border border-[#f1efe8]/14 p-4 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]">
+          <div className="grid content-center gap-4 text-[10px] uppercase tracking-[0.2em]">
+            <LinkPanel href="/void-agency">
               View Void Agency proof
-            </a>
-            <a href="/case-studies/technical-seo-audit" className="border border-[#f1efe8]/14 p-4 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]">
+            </LinkPanel>
+            <LinkPanel href="/case-studies/technical-seo-audit">
               Read the technical SEO case study
-            </a>
+            </LinkPanel>
           </div>
-        </div>
-      </section>
+        </section>
+      </PageFrame>
 
-      <div className="relative z-10 mx-auto max-w-[1480px] px-4 pb-8 md:px-8 xl:px-10">
+      <PageFrame className="relative z-10 pb-8">
         <InternalFooter activePath="/method" tone="dark" />
-      </div>
-    </main>
+      </PageFrame>
+    </PageShell>
   );
 }

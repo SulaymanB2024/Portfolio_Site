@@ -10,6 +10,12 @@ import { useSEO } from '../utils/seo';
 
 const ATLAS_SAMPLE_SEO = getSeoRoute('/atlas/sample-crawl')!;
 
+function getSampleEvidenceState(row: (typeof atlasSampleRows)[number]) {
+  if (row.issue === 'none') return 'confirmed_content';
+  if (row.indexability === 'noindex' || row.canonical === 'parameterized') return 'held_for_review';
+  return 'review_candidate';
+}
+
 export default function AtlasSampleCrawlPage() {
   useSEO(ATLAS_SAMPLE_SEO);
 
@@ -75,15 +81,20 @@ export default function AtlasSampleCrawlPage() {
             </thead>
             <tbody>
               {atlasSampleRows.map((row) => (
-                <tr key={row.url} className="border-t border-ink/10">
-                  <td className="max-w-[260px] px-4 py-3 font-mono text-[11px] text-ink/70">{row.url}</td>
+                <tr key={row.url} className="group border-t border-ink/10 transition-colors duration-200 hover:bg-ink/[0.035]">
+                  <td className="max-w-[260px] px-4 py-3 font-mono text-[11px] text-ink/70 transition-colors group-hover:text-ink">{row.url}</td>
                   <td className="px-4 py-3">{row.status}</td>
                   <td className="px-4 py-3">{row.indexability}</td>
                   <td className="px-4 py-3">{row.depth}</td>
                   <td className="px-4 py-3">{row.inlinks}</td>
                   <td className="px-4 py-3">{row.outlinks}</td>
                   <td className="px-4 py-3">{row.canonical}</td>
-                  <td className="px-4 py-3">{row.issue}</td>
+                  <td className="px-4 py-3">
+                    <span className="block">{row.issue}</span>
+                    <span className="mt-1 block text-[9px] uppercase tracking-[0.16em] text-ink/38 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                      {getSampleEvidenceState(row)}
+                    </span>
+                  </td>
                   <td className="px-4 py-3 text-ink/62">{row.note}</td>
                 </tr>
               ))}

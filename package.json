@@ -10,6 +10,12 @@
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
     "audit:style": "node scripts/style-audit.mjs",
+    "benchmark:austin": "node scripts/build-austin-crawlability-benchmark.mjs",
+    "linkbuilding:external-check": "node scripts/check-link-building-external.mjs",
+    "linkbuilding:export-publish": "node scripts/export-link-building-publish.mjs",
+    "linkbuilding:live-check": "node scripts/check-link-building-live.mjs",
+    "linkbuilding:prepare": "node scripts/prepare-link-building.mjs",
+    "linkbuilding:scope-check": "node scripts/check-link-building-publish-scope.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "verify:seo": "node scripts/verify-ai-search-seo.mjs"
   },

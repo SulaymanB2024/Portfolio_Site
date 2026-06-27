@@ -189,6 +189,7 @@ export function usePageTransitions({
 
       const url = new URL(href, window.location.origin);
       if (url.origin !== window.location.origin) return;
+      if (/\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
 
       const canonicalPath = normalizePath(url.pathname);
       const currentCanonicalPath = normalizePath(window.location.pathname);

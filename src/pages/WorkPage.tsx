@@ -8,6 +8,18 @@ import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const WORK_SEO = getSeoRoute('/work')!;
+const workArtifactStrips = ['artifact / crawl', 'process / method', 'review / case', 'memo / assumptions'];
+
+function CornerMarks() {
+  return (
+    <span aria-hidden="true" className="pointer-events-none absolute inset-0 text-current/28 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <span className="absolute left-3 top-3 h-px w-4 bg-current" />
+      <span className="absolute left-3 top-3 h-4 w-px bg-current" />
+      <span className="absolute bottom-3 right-3 h-px w-4 bg-current" />
+      <span className="absolute bottom-3 right-3 h-4 w-px bg-current" />
+    </span>
+  );
+}
 
 export default function WorkPage() {
   useSEO(WORK_SEO);
@@ -31,7 +43,8 @@ export default function WorkPage() {
 
       <section className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-px overflow-hidden border-y border-[#f1efe8]/14 px-4 py-16 md:grid-cols-2 md:px-8 xl:grid-cols-4 xl:px-10">
         {workProofCards.map((item, index) => (
-          <article key={item.href} className="min-h-[330px] bg-[#f1efe8]/[0.012] p-6">
+          <article key={item.href} className="group relative min-h-[330px] overflow-hidden bg-[#f1efe8]/[0.012] p-6 pb-16 transition-colors duration-300 hover:bg-[#f1efe8]/[0.028]">
+            <CornerMarks />
             <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42">
               {String(index + 1).padStart(2, '0')} / {item.eyebrow}
             </p>
@@ -44,6 +57,10 @@ export default function WorkPage() {
               <a href={item.ctaHref} className="text-[#b7c8a8] underline decoration-[#b7c8a8]/30 underline-offset-4 transition-colors hover:text-[#f1efe8]">
                 {item.cta}
               </a>
+            </div>
+            <div className="absolute inset-x-0 bottom-0 grid grid-cols-[auto_1fr] items-center gap-3 border-t border-[#f1efe8]/10 px-6 py-3 text-[9px] uppercase tracking-[0.22em] text-[#f1efe8]/42 opacity-0 transition-[opacity,transform] duration-300 group-hover:translate-y-0 group-hover:opacity-100 md:translate-y-2">
+              <span className="font-serif text-sm italic tracking-normal text-[#f1efe8]/72">{String(index + 1).padStart(2, '0')}</span>
+              <span className="truncate">{workArtifactStrips[index] ?? 'artifact / proof'}</span>
             </div>
           </article>
         ))}
@@ -65,8 +82,9 @@ export default function WorkPage() {
               href={link.href}
               target={link.href.startsWith('http') ? '_blank' : undefined}
               rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-              className="min-h-[190px] border border-[#f1efe8]/14 p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
+              className="group relative min-h-[190px] overflow-hidden border border-[#f1efe8]/14 p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
             >
+              <CornerMarks />
               <h3 className="text-xs uppercase leading-relaxed tracking-[0.22em] text-inherit">{link.label}</h3>
               <p className="mt-5 text-sm leading-relaxed text-inherit opacity-65">{link.description}</p>
             </a>

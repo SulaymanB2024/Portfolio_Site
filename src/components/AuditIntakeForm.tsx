@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 
 type AuditIntakeFormProps = {
@@ -26,6 +27,19 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
   const [scope, setScope] = useState('');
   const [brokenArea, setBrokenArea] = useState('');
   const [message, setMessage] = useState('');
+  const progressSteps = [
+    { step: '01', label: 'Identity', complete: Boolean(name && email) },
+    { step: '02', label: 'Site', complete: Boolean(websiteUrl) },
+    { step: '03', label: 'Scope', complete: Boolean(projectType || timeline || scope) },
+    { step: '04', label: 'Message', complete: Boolean(message) },
+  ];
+  const completeStepCount = progressSteps.filter((step) => step.complete).length;
+  const statusDetail =
+    formStatus === 'submitting'
+      ? 'sealing brief'
+      : formStatus === 'error'
+        ? 'endpoint refused'
+        : `${completeStepCount}/4 fields traced`;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,6 +112,19 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className={`w-full max-w-xl space-y-6 mt-4 ${className}`}>
+      <ol className="grid grid-cols-2 gap-px overflow-hidden border border-canvas/12 text-[8px] uppercase tracking-[0.18em] text-canvas/46 md:grid-cols-4">
+        {progressSteps.map((item) => (
+          <li
+            key={item.step}
+            className={`grid min-h-14 content-between bg-canvas/[0.025] p-3 transition-colors duration-200 ${
+              item.complete ? 'text-canvas' : ''
+            }`}
+          >
+            <span className="font-serif text-sm italic tracking-normal text-canvas/72">{item.step}</span>
+            <span className="leading-none">{item.label}</span>
+          </li>
+        ))}
+      </ol>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <ContactFieldLabel htmlFor="contact-name">Your name</ContactFieldLabel>
@@ -210,12 +237,15 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
         onChange={(e) => setMessage(e.target.value)}
         className={`${contactFieldClass} resize-none`}
       />
-      <div className="flex items-center justify-between pt-2">
+      <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
         {formStatus === 'error' && (
           <span className="text-red-400 text-[10px] font-sans tracking-widest uppercase">
             Submission failed. Please try again.
           </span>
         )}
+        <span className="text-[10px] uppercase tracking-[0.2em] text-canvas/42">
+          {statusDetail}
+        </span>
         <button
           type="submit"
           disabled={formStatus === 'submitting'}
@@ -225,7 +255,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
             {formStatus === 'submitting' ? 'SENDING...' : 'SUBMIT BRIEF'}
           </span>
           <div className="flex h-11 w-11 items-center justify-center rounded-full border border-canvas/20 text-canvas transition-colors group-hover:bg-canvas group-hover:text-ink">
-            <span className="transform -rotate-45 block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">-&gt;</span>
+            <ArrowUpRight aria-hidden="true" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.5} />
           </div>
         </button>
       </div>

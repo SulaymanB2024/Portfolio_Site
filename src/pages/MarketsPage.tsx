@@ -56,12 +56,12 @@ const memoLinks = [
 
 function MarketsHero() {
   return (
-    <section className="relative min-h-[calc(100svh-88px)] overflow-hidden px-4 pb-10 pt-16 md:px-8 md:pt-24 lg:pt-[236px] xl:px-10">
+    <section className="relative min-h-[calc(100svh-88px)] overflow-hidden px-4 pb-12 pt-12 md:px-8 md:pb-14 md:pt-16 lg:pt-20 xl:px-10">
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-8 left-[25%] z-0 hidden w-[min(82vw,1360px)] select-none lg:block"
+        className="pointer-events-none absolute right-[-10vw] top-10 z-0 hidden w-[min(76vw,1160px)] select-none lg:block xl:right-[-4vw]"
         initial={{ opacity: 0, x: 22, scale: 0.985 }}
-        animate={{ opacity: 0.62, x: 0, scale: 1 }}
+        animate={{ opacity: 0.52, x: 0, scale: 1 }}
         transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
       >
         <img
@@ -74,7 +74,7 @@ function MarketsHero() {
 
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[13.5rem] z-0 opacity-38 lg:hidden"
+        className="pointer-events-none absolute inset-x-0 top-[8.5rem] z-0 opacity-38 lg:hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.26 }}
         transition={{ duration: 0.9, ease: 'easeOut' }}
@@ -87,7 +87,7 @@ function MarketsHero() {
         />
       </motion.div>
 
-      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-188px)] w-full max-w-[1480px] flex-col justify-center lg:pl-14">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-210px)] w-full max-w-[1480px] flex-col justify-center lg:min-h-[560px] lg:pl-14">
         <motion.div
           className="max-w-[560px]"
           initial={{ opacity: 0, y: 20 }}
@@ -128,7 +128,7 @@ function MarketsHero() {
           </nav>
         </motion.div>
 
-        <div className="mt-auto hidden items-center gap-5 pb-2 text-ink/62 lg:flex">
+        <div className="absolute bottom-2 hidden items-center gap-5 text-ink/62 lg:flex">
           <span className="text-sm tabular-nums">03</span>
           <span className="font-serif text-sm italic">Noise expansion</span>
         </div>
@@ -180,12 +180,15 @@ function CaseArchiveSection() {
           <a
             key={thesis.slug}
             href={`/markets/${thesis.slug}`}
-            className="grid gap-4 py-6 text-ink transition-colors duration-200 hover:bg-ink/[0.025] md:grid-cols-[72px_minmax(0,1fr)_minmax(180px,0.28fr)] md:items-center md:px-4"
+            className="group grid gap-4 py-6 text-ink transition-colors duration-200 hover:bg-ink/[0.025] md:grid-cols-[72px_minmax(0,1fr)_minmax(180px,0.28fr)] md:items-center md:px-4"
           >
             <span className="font-serif text-lg italic text-ink/44">{String(index + 1).padStart(2, '0')}</span>
             <span>
               <span className="block text-[11px] uppercase tracking-[0.24em] text-ink">{thesis.title}</span>
               <span className="mt-2 block max-w-2xl text-sm leading-relaxed text-ink/56">{thesis.subtitle}</span>
+              <span className="mt-3 block translate-y-1 text-[9px] uppercase tracking-[0.18em] text-ink/38 opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                {thesis.category} / {thesis.readTime} / source boundary visible
+              </span>
             </span>
             <span className="text-[10px] uppercase tracking-[0.22em] text-ink/46 md:text-right">
               {thesis.date}

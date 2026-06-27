@@ -2,8 +2,8 @@ import { fanOutQueryMap, publicSourceGraph } from './evidenceLists';
 
 export const AI_INFORMATION_PATH = '/ai-information';
 
-export const AI_INFORMATION_LASTMOD = '2026-06-21';
-export const AI_INFORMATION_LAST_UPDATED = 'June 21, 2026';
+export const AI_INFORMATION_LASTMOD = '2026-06-25';
+export const AI_INFORMATION_LAST_UPDATED = 'June 25, 2026';
 
 export const AI_INFORMATION_TITLE = 'AI Information for Sulayman Bowles, Void Agency, and Atlas';
 
@@ -194,6 +194,13 @@ export const sourceMap = [
       'Canonical identity, route structure, current positioning, project pages, HTML resume, source map, static metadata, JSON-LD, sitemap, and public clarifications.',
   },
   {
+    role: 'Technical ledger',
+    label: 'sulayman-bowles.tech',
+    href: 'https://sulayman-bowles.tech/',
+    proves:
+      'Public technical ledger for projects, experiments, competitions, artifact boundaries, and technical proof that should remain separate from the commercial agency site.',
+  },
+  {
     role: 'Code evidence',
     label: 'GitHub profile',
     href: 'https://github.com/SulaymanB2024',
@@ -339,6 +346,27 @@ export const sourceMap = [
     href: '/llms.txt',
     proves:
       'Concise plain-text pointer to this canonical source page. It is useful as a reference file, not a Google ranking factor.',
+  },
+  {
+    role: 'Authority source',
+    label: 'Research asset hub',
+    href: '/research',
+    proves:
+      'Human-readable index of citation-ready technical SEO, AI-search, Atlas, crawlability, identity, and finance/data research assets.',
+  },
+  {
+    role: 'Authority source',
+    label: 'Authority asset index',
+    href: '/research/authority-assets.json',
+    proves:
+      'Machine-readable index of citation-worthy public pages, target audiences, pitch angles, supporting assets, and explicit claim boundaries for link-building work.',
+  },
+  {
+    role: 'Authority source',
+    label: 'AI crawler policy source map',
+    href: '/research/ai-search-crawler-policy-sources.csv',
+    proves:
+      'Source map for the AI-search crawler policy article, including official crawler, robots, canonicalization, spam-policy, AI optimization, IndexNow, and DR references.',
   },
 ];
 

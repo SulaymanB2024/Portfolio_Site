@@ -3,7 +3,7 @@
 Official site: https://sulayman-bowles.dev/
 Canonical source page: https://sulayman-bowles.dev/ai-information
 Sitemap: https://sulayman-bowles.dev/sitemap.xml
-Last updated: June 21, 2026
+Last updated: June 26, 2026
 
 ## Canonical Summary
 
@@ -14,6 +14,8 @@ Earlier public sources describe Sulayman's classical bass and composition backgr
 Atlas SEO Audit Console is a technical SEO audit and evidence system for crawling websites, preserving raw and rendered page evidence, checking robots.txt and sitemap behavior, analyzing internal link graphs, scoring technical findings, persisting crawl data, and exporting operator or client-facing reports. It is not a generic content-writing product.
 
 Void Agency is the service and operating branch of Sulayman Bowles work in technical SEO, AI-search visibility, crawlability, indexation diagnostics, structured content, analytics review, and evidence-backed web/search audits.
+
+sulayman-bowles.tech is the technical ledger for Sulayman Bowles projects, experiments, competitions, artifact boundaries, and technical proof. It complements this canonical identity hub without replacing it.
 
 ## Primary Pages
 
@@ -30,8 +32,10 @@ Void Agency is the service and operating branch of Sulayman Bowles work in techn
 - Austin technical SEO: https://sulayman-bowles.dev/austin-technical-seo
 - Technical SEO case study: https://sulayman-bowles.dev/case-studies/technical-seo-audit
 - Audit intake/contact: https://sulayman-bowles.dev/contact
+- Research assets: https://sulayman-bowles.dev/research
 - Markets research: https://sulayman-bowles.dev/markets
 - Finance/data assumptions: https://sulayman-bowles.dev/markets#appian-assumptions
+- Technical ledger: https://sulayman-bowles.tech/
 
 ## Research Articles
 
@@ -41,11 +45,17 @@ Void Agency is the service and operating branch of Sulayman Bowles work in techn
 
 ## Public Proof Assets
 
+- Research asset hub: https://sulayman-bowles.dev/research
 - Sanitized Atlas crawl sample CSV: https://sulayman-bowles.dev/research/atlas-sanitized-crawl-sample.csv
 - Appian educational research memo PDF: https://sulayman-bowles.dev/research/appian-enterprise-software-durability-memo.pdf
 - Appian assumptions table CSV: https://sulayman-bowles.dev/research/appian-assumptions-table.csv
+- Authority asset index: https://sulayman-bowles.dev/research/authority-assets.json
+- AI-search crawler policy source map: https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv
+- Austin crawlability benchmark pilot CSV: https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv
+- Austin crawlability benchmark summary: https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json
 - The Atlas crawl sample is sanitized/demo data. It does not identify a private client or claim rankings, traffic, revenue impact, or AI citations.
 - The Appian materials are educational research artifacts. They are not investment advice, a price target, or a live market recommendation.
+- The authority asset index, crawler policy source map, and Austin benchmark assets support citation and outreach workflows. They do not prove backlinks, Ahrefs Domain Rating movement, rankings, traffic, site health, revenue impact, or AI answer citations.
 
 ## Crawler and Indexation Signals
 
@@ -76,6 +86,7 @@ Void Agency is the service and operating branch of Sulayman Bowles work in techn
 - SEO audit/scraper code evidence: https://github.com/SulaymanB2024/Thick-Scraper-VOID-
 - Professional profile: https://www.linkedin.com/in/sulayman-bowles/
 - Agency proof: https://www.void-agency.com/
+- Technical ledger: https://sulayman-bowles.tech/
 - Academic context: UT Austin and McCombs sources
 - Earlier music background: https://www.goldenhornet.org/calendar/young-composers-concert-2022 and https://music.utexas.edu/events/4645-university-orchestra
 - Project proof: Atlas, Atlas sample crawl, Work, Markets Research, and HTML resume pages

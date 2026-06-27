@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-06-25",
+  "sample_type": "Austin public-site crawlability pilot",
+  "sample_size": 12,
+  "public_csv": "https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv",
+  "methodology": [
+    "Bounded one-request public fetch of each homepage.",
+    "One public robots.txt fetch per final origin.",
+    "One sitemap fetch using the first robots.txt sitemap URL when available, otherwise /sitemap.xml.",
+    "Signals are presence/availability checks, not quality scores or SEO diagnoses."
+  ],
+  "claim_boundaries": [
+    "This pilot is not representative of all Austin companies.",
+    "Rows do not claim rankings, traffic movement, revenue impact, AI citations, or site health.",
+    "Access-limited, timed-out, or challenged fetches are measurement gaps, not negative findings.",
+    "The benchmark should be used as a public-data conversation starter before any local media pitch."
+  ],
+  "aggregate": {
+    "sample_size": 12,
+    "homepage_fetch_ok": 12,
+    "homepage_2xx_or_3xx": 12,
+    "https_final": 12,
+    "title_present": 12,
+    "meta_description_present": 12,
+    "canonical_present": 12,
+    "h1_present": 11,
+    "jsonld_present": 12,
+    "robots_request_completed": 12,
+    "robots_2xx_or_3xx": 12,
+    "robots_declared_sitemap": 10,
+    "sitemap_request_completed": 12,
+    "sitemap_2xx_or_3xx": 10,
+    "measurement_gaps": 6
+  }
+}

@@ -12,6 +12,7 @@ const routeFiles = {
   resume: 'dist/resume/index.html',
   simple: 'dist/simple/index.html',
   aiInformation: 'dist/ai-information/index.html',
+  research: 'dist/research/index.html',
   sitemap: 'dist/sitemap/index.html',
   method: 'dist/method/index.html',
   voidAgency: 'dist/void-agency/index.html',
@@ -30,6 +31,7 @@ const routePaths = {
   resume: '/resume',
   simple: '/simple',
   aiInformation: '/ai-information',
+  research: '/research',
   sitemap: '/sitemap',
   method: '/method',
   voidAgency: '/void-agency',
@@ -142,7 +144,9 @@ for (const [route, file] of Object.entries(routeFiles)) {
   assert(Array.isArray(person.sameAs) && person.sameAs.includes('https://github.com/SulaymanB2024'), `${route}: Person sameAs missing GitHub`);
   assert(Array.isArray(person.sameAs) && person.sameAs.includes('https://www.linkedin.com/in/sulayman-bowles/'), `${route}: Person sameAs missing LinkedIn`);
   assert(Array.isArray(person.sameAs) && person.sameAs.includes('https://devpost.com/sulayman-bowles'), `${route}: Person sameAs missing Devpost`);
+  assert(Array.isArray(person.sameAs) && person.sameAs.includes('https://sulayman-bowles.tech/'), `${route}: Person sameAs missing technical ledger`);
   assert(graphUrls(person.subjectOf).includes(`${siteUrl}/ai-information`), `${route}: Person subjectOf missing AI Information`);
+  assert(graphUrls(person.subjectOf).includes('https://sulayman-bowles.tech/'), `${route}: Person subjectOf missing technical ledger`);
   assert(graphUrls(person.subjectOf).includes('https://devpost.com/sulayman-bowles'), `${route}: Person subjectOf missing Devpost`);
   assert(graphUrls(person.subjectOf).includes('https://www.goldenhornet.org/calendar/young-composers-concert-2022'), `${route}: Person subjectOf missing Golden Hornet historical source`);
   assert(graphUrls(person.subjectOf).includes('https://music.utexas.edu/events/4645-university-orchestra'), `${route}: Person subjectOf missing UT Butler historical source`);
@@ -183,6 +187,8 @@ assertVisibleText('dist/ai-information/index.html', [
   'UT Butler',
   'Public Source Graph',
   'Primary source',
+  'Technical ledger',
+  'sulayman-bowles.tech',
   'Code evidence',
   'Professional profile',
   'Agency',
@@ -223,6 +229,28 @@ assertVisibleText('dist/ai-information/index.html', [
   'Perplexity search and user-requested retrieval',
 ]);
 
+assertVisibleText('dist/research/index.html', [
+  'Research Assets',
+  'Citation surfaces, not empty claims.',
+  'Citation Targets',
+  'Project Work Index',
+  'Authority asset JSON',
+  'AI-search crawler policy source map',
+  'Claim Boundaries',
+  'These assets do not claim rankings',
+]);
+assertHref('dist/research/index.html', '/research/authority-assets.json', 'Authority asset JSON');
+assertHref('dist/research/index.html', '/llms.txt', 'LLMs text file');
+assertHref('dist/research/index.html', '/work', 'Project Work Index');
+assertHref('dist/research/index.html', '/research/austin-crawlability-benchmark-pilot.csv', 'Austin crawlability benchmark pilot');
+
+{
+  const graph = jsonLdGraph(read('dist/research/index.html'));
+  const researchAssetList = findItemList(graph, `${siteUrl}/research#asset-list`);
+  assert(researchAssetList, 'research: missing Research Assets ItemList schema');
+  assert(researchAssetList.itemListElement?.length === 13, 'research: Research Assets ItemList should have 13 items');
+}
+
 {
   const graph = jsonLdGraph(read('dist/ai-information/index.html'));
   const sourceGraphList = findItemList(graph, `${siteUrl}/ai-information#public-source-graph`);
@@ -231,7 +259,7 @@ assertVisibleText('dist/ai-information/index.html', [
   assert(sourceGraphList, 'ai-information: missing Public Source Graph ItemList schema');
   assert(fanOutList, 'ai-information: missing Fan-Out Query Map ItemList schema');
   assert(providerPlanList, 'ai-information: missing Provider Discovery Plan ItemList schema');
-  assert(sourceGraphList.itemListElement?.length === 12, 'ai-information: Public Source Graph ItemList should have 12 items');
+  assert(sourceGraphList.itemListElement?.length === 13, 'ai-information: Public Source Graph ItemList should have 13 items');
   assert(fanOutList.itemListElement?.length === 6, 'ai-information: Fan-Out Query Map ItemList should have 6 items');
   assert(providerPlanList.itemListElement?.length === 7, 'ai-information: Provider Discovery Plan ItemList should have 7 items');
 }
@@ -394,10 +422,11 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     'Perplexity-User',
   ];
 
-  assert(llmsText.includes('Last updated: June 21, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('Last updated: June 26, 2026'), 'llms.txt: stale last updated date');
   assert(llmsText.includes('Selected work: https://sulayman-bowles.dev/work'), 'llms.txt: missing selected work route');
   assert(llmsText.includes('Atlas sample crawl run: https://sulayman-bowles.dev/atlas/sample-crawl'), 'llms.txt: missing Atlas sample crawl route');
   assert(llmsText.includes('Void Agency proof: https://sulayman-bowles.dev/void-agency'), 'llms.txt: missing Void Agency proof route');
+  assert(llmsText.includes('Technical ledger: https://sulayman-bowles.tech/'), 'llms.txt: missing technical ledger link');
   assert(llmsText.includes('Audit intake/contact: https://sulayman-bowles.dev/contact'), 'llms.txt: missing contact route');
   assert(llmsText.includes('Sanitized Atlas crawl sample CSV'), 'llms.txt: missing Atlas sample proof asset');
   assert(llmsText.includes('Appian assumptions table CSV'), 'llms.txt: missing Appian assumptions proof asset');

@@ -16,6 +16,7 @@ import {
   marketArticleJsonLd,
   marketsJsonLd,
   methodJsonLd,
+  researchAssetsJsonLd,
   resumeJsonLd,
   simpleBookJsonLd,
   sitemapJsonLd,
@@ -60,7 +61,10 @@ export interface SeoRoute {
   jsonLd?: JsonLd;
 }
 
-export const SITE_LASTMOD = '2026-06-21';
+export type RouteVisualMode = 'canvas-artifact' | 'dark-proof' | 'memo-reader' | 'book' | 'prototype';
+export type RouteTone = 'light' | 'dark';
+
+export const SITE_LASTMOD = '2026-06-25';
 
 const CORE_ROUTES: SeoRoute[] = [
   {
@@ -205,6 +209,22 @@ const CORE_ROUTES: SeoRoute[] = [
       'Official public information about Sulayman Bowles, Void Agency, and Atlas SEO Audit Console for users, search engines, and AI search systems.',
     staticHtml: AI_INFORMATION_STATIC_HTML,
     jsonLd: aiInformationJsonLd(),
+  },
+  {
+    path: '/research',
+    aliases: ['/research-assets', '/proof-assets'],
+    title: 'Research Assets | Technical SEO, AI Search & Atlas Data',
+    description:
+      'Citation-ready research assets from Sulayman Bowles across technical SEO, AI-search crawler policy, Atlas crawl evidence, Austin crawlability, identity, and finance/data work.',
+    h1: 'Research Assets',
+    section: 'research',
+    pageType: 'research',
+    priority: 0.8,
+    includeInSitemap: true,
+    lastmod: SITE_LASTMOD,
+    staticSummary:
+      'Citation-ready public research assets across technical SEO, AI-search crawler policy, Atlas crawl evidence, Austin crawlability, identity, and finance/data research.',
+    jsonLd: researchAssetsJsonLd(),
   },
   {
     path: '/sitemap',
@@ -365,6 +385,41 @@ export function normalizePath(path: string) {
 export function getSeoRoute(path: string) {
   const canonicalPath = normalizePath(path);
   return SEO_ROUTES.find((route) => route.path === canonicalPath);
+}
+
+export function getRouteVisualMode(path: string): RouteVisualMode {
+  const route = getSeoRoute(path);
+
+  if (route?.path === '/simple') {
+    return 'book';
+  }
+
+  if (route?.path === '/atlas/celestial-parallax') {
+    return 'prototype';
+  }
+
+  if (route?.section === 'research-article') {
+    return 'memo-reader';
+  }
+
+  if (
+    route?.section === 'about' ||
+    route?.section === 'work' ||
+    route?.section === 'contact' ||
+    route?.section === 'service' ||
+    route?.section === 'organization' ||
+    route?.section === 'local-service' ||
+    route?.section === 'case-study'
+  ) {
+    return 'dark-proof';
+  }
+
+  return 'canvas-artifact';
+}
+
+export function getRouteTone(path: string): RouteTone {
+  const mode = getRouteVisualMode(path);
+  return mode === 'dark-proof' || mode === 'memo-reader' ? 'dark' : 'light';
 }
 
 export function getCanonicalRoutes() {
