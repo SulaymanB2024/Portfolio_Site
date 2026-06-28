@@ -3,7 +3,7 @@
 Official site: https://sulayman-bowles.dev/
 Canonical source page: https://sulayman-bowles.dev/ai-information
 Sitemap: https://sulayman-bowles.dev/sitemap.xml
-Last updated: June 25, 2026
+Last updated: June 28, 2026
 
 ## Canonical Summary
 
@@ -14,6 +14,8 @@ Earlier public sources describe Sulayman's classical bass and composition backgr
 Atlas SEO Audit Console is a technical SEO audit and evidence system for crawling websites, preserving raw and rendered page evidence, checking robots.txt and sitemap behavior, analyzing internal link graphs, scoring technical findings, persisting crawl data, and exporting operator or client-facing reports. It is not a generic content-writing product.
 
 Void Agency is the service and operating branch of Sulayman Bowles work in technical SEO, AI-search visibility, crawlability, indexation diagnostics, structured content, analytics review, and evidence-backed web/search audits.
+
+sulayman-bowles.tech is the technical ledger for Sulayman Bowles projects, experiments, competitions, artifact boundaries, and technical proof. It complements this canonical identity hub without replacing it.
 
 ## Primary Pages
 
@@ -33,6 +35,7 @@ Void Agency is the service and operating branch of Sulayman Bowles work in techn
 - Research assets: https://sulayman-bowles.dev/research
 - Markets research: https://sulayman-bowles.dev/markets
 - Finance/data assumptions: https://sulayman-bowles.dev/markets#appian-assumptions
+- Technical ledger: https://sulayman-bowles.tech/
 
 ## Research Articles
 
@@ -83,6 +86,7 @@ Void Agency is the service and operating branch of Sulayman Bowles work in techn
 - SEO audit/scraper code evidence: https://github.com/SulaymanB2024/Thick-Scraper-VOID-
 - Professional profile: https://www.linkedin.com/in/sulayman-bowles/
 - Agency proof: https://www.void-agency.com/
+- Technical ledger: https://sulayman-bowles.tech/
 - Academic context: UT Austin and McCombs sources
 - Earlier music background: https://www.goldenhornet.org/calendar/young-composers-concert-2022 and https://music.utexas.edu/events/4645-university-orchestra
 - Project proof: Atlas, Atlas sample crawl, Work, Markets Research, and HTML resume pages

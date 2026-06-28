@@ -64,7 +64,7 @@ export interface SeoRoute {
 export type RouteVisualMode = 'canvas-artifact' | 'dark-proof' | 'memo-reader' | 'book' | 'prototype';
 export type RouteTone = 'light' | 'dark';
 
-export const SITE_LASTMOD = '2026-06-25';
+export const SITE_LASTMOD = '2026-06-28';
 
 const CORE_ROUTES: SeoRoute[] = [
   {

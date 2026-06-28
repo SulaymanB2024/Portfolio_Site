@@ -2,8 +2,8 @@ import { fanOutQueryMap, publicSourceGraph } from './evidenceLists';
 
 export const AI_INFORMATION_PATH = '/ai-information';
 
-export const AI_INFORMATION_LASTMOD = '2026-06-25';
-export const AI_INFORMATION_LAST_UPDATED = 'June 25, 2026';
+export const AI_INFORMATION_LASTMOD = '2026-06-28';
+export const AI_INFORMATION_LAST_UPDATED = 'June 28, 2026';
 
 export const AI_INFORMATION_TITLE = 'AI Information for Sulayman Bowles, Void Agency, and Atlas';
 
@@ -192,6 +192,13 @@ export const sourceMap = [
     href: '/',
     proves:
       'Canonical identity, route structure, current positioning, project pages, HTML resume, source map, static metadata, JSON-LD, sitemap, and public clarifications.',
+  },
+  {
+    role: 'Technical ledger',
+    label: 'sulayman-bowles.tech',
+    href: 'https://sulayman-bowles.tech/',
+    proves:
+      'Public technical ledger for projects, experiments, competitions, artifact boundaries, and technical proof that should remain separate from the commercial agency site.',
   },
   {
     role: 'Code evidence',

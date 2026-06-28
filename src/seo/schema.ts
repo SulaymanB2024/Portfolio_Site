@@ -62,6 +62,7 @@ export function personSchema({ includeVoidAgencyAffiliation = false }: { include
       'https://www.linkedin.com/in/sulayman-bowles/',
       'https://github.com/SulaymanB2024',
       'https://devpost.com/sulayman-bowles',
+      'https://sulayman-bowles.tech/',
     ],
     identifier: [
       {
@@ -100,6 +101,12 @@ export function personSchema({ includeVoidAgencyAffiliation = false }: { include
         name: 'Void Agency',
         url: 'https://www.void-agency.com/',
         description: 'Public agency branch connected to technical SEO, AI-search visibility, and evidence-backed audits.',
+      },
+      {
+        '@type': 'WebPage',
+        name: 'Sulayman Bowles Technical Ledger',
+        url: 'https://sulayman-bowles.tech/',
+        description: 'Public technical ledger for projects, experiments, artifacts, and competition proof connected to the canonical identity hub.',
       },
       {
         '@type': 'WebPage',
