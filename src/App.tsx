@@ -362,6 +362,7 @@ function HomePage() {
 
     let frameId = 0;
     const darkBackgroundClasses = new Set(['bg-ink', 'bg-[#080807]', 'site-page-dark']);
+    const toneIgnoreSelector = '[data-header-tone-ignore="true"]';
 
     const isDarkBackground = (background: string) => {
       const rgbMatch = background.match(/rgba?\(([^)]+)\)/);
@@ -413,9 +414,10 @@ function HomePage() {
         Math.max(Math.round((headerRect?.bottom ?? 96) + 10), 72),
         window.innerHeight - 1,
       );
-      const nextTone = document
+      const toneElements = document
         .elementsFromPoint(probeX, probeY)
-        .some((element) => !header?.contains(element) && elementNeedsDarkHeader(element))
+        .filter((element) => !header?.contains(element) && !element.closest(toneIgnoreSelector));
+      const nextTone = toneElements.some(elementNeedsDarkHeader)
         ? 'dark'
         : 'light';
 
@@ -497,6 +499,7 @@ function HomePage() {
         {!isLoaded && (
           <motion.div 
             className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center p-8 origin-bottom text-canvas"
+            data-header-tone-ignore="true"
             exit={{ scaleY: 0 }}
             transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
           >

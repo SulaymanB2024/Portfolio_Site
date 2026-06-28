@@ -37,7 +37,7 @@ export function ShutterWipe({
   return (
     <AnimatePresence>
       {isActive && (
-        <div className={wrapperClassName} aria-hidden="true">
+        <div className={wrapperClassName} data-header-tone-ignore="true" aria-hidden="true">
           {Array.from({ length: panels }).map((_, index) => (
             <motion.div
               key={index}
