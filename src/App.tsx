@@ -13,10 +13,13 @@ import { ShutterWipe } from './components/ShutterWipe';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { getSeoRoute, normalizePath } from './seo/routes';
 import { useSEO } from './utils/seo';
+import { MARKET_THESES } from './content/marketTheses';
 
 const AtlasPage = lazy(() => import('./pages/AtlasPage'));
 const VoidAgencyMethodPage = lazy(() => import('./pages/VoidAgencyMethodPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ResumePage = lazy(() => import('./pages/ResumePage'));
+const IntentLandingPage = lazy(() => import('./pages/IntentLandingPage'));
 const MarketsPage = lazy(() => import('./pages/MarketsPage'));
 const MarketArticlePage = lazy(() => import('./pages/MarketArticlePage'));
 const TextMarquee = lazy(() => import('./components/TextMarquee').then(m => ({ default: m.TextMarquee })));
@@ -61,23 +64,154 @@ function scrollToHashTarget(hash: string) {
   }
 }
 
+function RouteFallback({
+  tone = 'dark',
+  label,
+  title,
+}: {
+  tone?: 'dark' | 'light';
+  label: string;
+  title: string;
+}) {
+  const isDark = tone === 'dark';
+  return (
+    <main
+      aria-busy="true"
+      className={`min-h-screen ${isDark ? 'bg-[#080807] text-[#f1efe8]' : 'bg-canvas text-ink'} selection:bg-current selection:text-current`}
+    >
+      <div className="mx-auto flex min-h-screen max-w-[1480px] flex-col justify-between px-4 py-8 md:px-8 xl:px-10">
+        <div className="text-[10px] uppercase tracking-[0.3em] opacity-70">Sulayman Bowles</div>
+        <div className="max-w-4xl pb-16">
+          <div className="mb-6 text-[10px] uppercase tracking-[0.34em] opacity-55">{label}</div>
+          <h1 className="font-serif text-[clamp(3.5rem,8vw,8rem)] italic leading-[0.9] tracking-tight">{title}</h1>
+        </div>
+      </div>
+    </main>
+  );
+}
+
 export default function App() {
   const [currentPath, setCurrentPath] = useState(getCurrentCanonicalPath);
 
   useEffect(() => {
-    const handlePopState = () => {
+    const nav = navigator as any;
+    if (!nav.modelContext || typeof nav.modelContext.registerTool !== 'function') {
+      return;
+    }
+
+    const controller = new AbortController();
+
+    // 1. Search market research notes
+    nav.modelContext.registerTool({
+      name: 'search_market_theses',
+      description: 'Searches published market research notes by keyword, category, or slug.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          query: { type: 'string', description: 'The search query or slug (e.g. "network-monopolies", "Aerodrome").' }
+        },
+        required: ['query']
+      },
+      execute(input: { query: string }) {
+        const q = input.query.toLowerCase();
+        const results = MARKET_THESES.filter(t =>
+          t.title.toLowerCase().includes(q) ||
+          t.subtitle.toLowerCase().includes(q) ||
+          t.category.toLowerCase().includes(q) ||
+          t.slug.toLowerCase().includes(q) ||
+          t.content.some(c => c.toLowerCase().includes(q))
+        );
+        return results.map(r => ({
+          slug: r.slug,
+          category: r.category,
+          title: r.title,
+          subtitle: r.subtitle,
+          status: r.status,
+          horizon: r.horizon,
+          modelQuestion: r.modelQuestion,
+          contentSummary: r.content[0]
+        }));
+      },
+      annotations: { readOnlyHint: true }
+    }, { signal: controller.signal });
+
+    // 2. Inspect sample Atlas demo metrics
+    nav.modelContext.registerTool({
+      name: 'inspect_atlas_demo_metrics',
+      description: 'Returns sample Atlas demo metrics for crawl depth, indexation, links, schema, and performance.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          layer: {
+            type: 'string',
+            enum: ['HTML', 'JS', 'CANON', 'ROBOTS', 'LINKS', 'SCHEMA', 'CWV', 'ENTITY'],
+            description: 'The sample Atlas demo layer to inspect.'
+          }
+        },
+        required: ['layer']
+      },
+      execute(input: { layer: 'HTML' | 'JS' | 'CANON' | 'ROBOTS' | 'LINKS' | 'SCHEMA' | 'CWV' | 'ENTITY' }) {
+        const stats: Record<string, { value: string; desc1: string; desc2: string }> = {
+          HTML: { value: "18,394 CRAWLABLE URLS", desc1: "Sample crawl rows with status codes.", desc2: "No live network request." },
+          JS: { value: "4,204 RENDERED PAGES", desc1: "Sample render checks completed.", desc2: "Average render sample: 1.4 seconds." },
+          CANON: { value: "312 CANONICAL GAPS", desc1: "URLs missing self-referencing canonicals.", desc2: "8 canonical chains flagged." },
+          ROBOTS: { value: "9,112 ROBOTS-BLOCKED URLS", desc1: "URLs matched to robots.txt disallow rules.", desc2: "Review paths before excluding crawl access." },
+          LINKS: { value: "204,892 INTERNAL LINKS", desc1: "Max sample crawl depth: 6 hops.", desc2: "Orphan risk sample: 17.4%." },
+          SCHEMA: { value: "8 JSON-LD WARNINGS", desc1: "Schema blocks need review.", desc2: "3 entity-reference warnings." },
+          CWV: { value: "84% SAMPLE PASS", desc1: "Largest Contentful Paint avg: 1.8s.", desc2: "Interaction to Next Paint: 110ms." },
+          ENTITY: { value: "4,821 ENTITY MENTIONS", desc1: "Entity names detected in page text.", desc2: "External references found in source copy." }
+        };
+        return stats[input.layer] || { error: 'Unknown layer.' };
+      },
+      annotations: { readOnlyHint: true }
+    }, { signal: controller.signal });
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+  useEffect(() => {
+    const executeTransition = (navigateCallback: () => void) => {
       const triggerShutter = (window as any).triggerShutter;
+      const doc = document as any;
+
       if (triggerShutter) {
+        // Step 1: Cover screen with shutter
         triggerShutter(true);
+
+        // Step 2: Swap content after it is covered (800ms match)
         setTimeout(() => {
-          setCurrentPath(getCurrentCanonicalPath());
-          setTimeout(() => {
+          if (doc.startViewTransition) {
+            const transition = doc.startViewTransition(() => {
+              navigateCallback();
+            });
+
+            // Step 3: Slide shutter away to reveal new content as the transition runs
+            transition.ready.then(() => {
+              triggerShutter(false);
+            }).catch(() => {
+              triggerShutter(false);
+            });
+          } else {
+            navigateCallback();
             triggerShutter(false);
-          }, 300);
+          }
         }, 800);
       } else {
-        setCurrentPath(getCurrentCanonicalPath());
+        // Fallback if shutter not loaded
+        if (doc.startViewTransition) {
+          doc.startViewTransition(navigateCallback);
+        } else {
+          navigateCallback();
+        }
       }
+    };
+
+    const handlePopState = () => {
+      executeTransition(() => {
+        setCurrentPath(getCurrentCanonicalPath());
+      });
     };
 
     const handleLinkClick = (e: MouseEvent) => {
@@ -95,7 +229,7 @@ export default function App() {
           if (href.startsWith('mailto:') || (href.includes('://') && !href.startsWith(window.location.origin))) {
             return;
           }
-          
+
           const url = new URL(href, window.location.origin);
           const canonicalPath = normalizePath(url.pathname);
           if (canonicalPath === normalizePath(window.location.pathname) && url.hash) {
@@ -106,30 +240,10 @@ export default function App() {
 
           e.preventDefault();
 
-          const navigateTo = () => {
+          executeTransition(() => {
             window.history.pushState({}, '', `${canonicalPath}${url.search}${url.hash}`);
             setCurrentPath(canonicalPath);
-          };
-
-          const triggerShutter = (window as any).triggerShutter;
-          if (triggerShutter) {
-            triggerShutter(true);
-            setTimeout(() => {
-              navigateTo();
-              setTimeout(() => {
-                triggerShutter(false);
-              }, 300);
-            }, 800);
-          } else {
-            const doc = document as any;
-            if (doc.startViewTransition) {
-              doc.startViewTransition(() => {
-                navigateTo();
-              });
-            } else {
-              navigateTo();
-            }
-          }
+          });
         }
       }
     };
@@ -160,49 +274,94 @@ export default function App() {
     }
   }, [currentPath]);
 
+  // Sync body styles with active route theme to prevent white/dark flashes during transition loading state
+  useEffect(() => {
+    const isDark =
+      currentPath === '/about' ||
+      currentPath === '/method' ||
+      currentPath.startsWith('/method/') ||
+      currentPath === '/markets' ||
+      currentPath.startsWith('/markets/');
+    if (isDark) {
+      document.body.style.backgroundColor = '#080807';
+      document.body.style.color = '#f1efe8';
+    } else {
+      document.body.style.backgroundColor = '#f1efe8';
+      document.body.style.color = '#080807';
+    }
+  }, [currentPath]);
+
   const route = getSeoRoute(currentPath);
-  if (route?.path === '/atlas') {
-    return (
-      <Suspense fallback={null}>
-        <AtlasPage />
-      </Suspense>
-    );
-  }
 
-  if (route?.path === '/method') {
-    return (
-      <Suspense fallback={null}>
-        <VoidAgencyMethodPage />
-      </Suspense>
-    );
-  }
+  const renderContent = () => {
+    if (route?.path === '/atlas') {
+      return (
+        <Suspense fallback={<RouteFallback tone="light" label="ATLAS" title="Technical SEO audit console." />}>
+          <AtlasPage />
+        </Suspense>
+      );
+    }
 
-  if (route?.path === '/about') {
-    return (
-      <Suspense fallback={null}>
-        <AboutPage />
-      </Suspense>
-    );
-  }
+    if (route?.path === '/method') {
+      return (
+        <Suspense fallback={<RouteFallback label="METHOD" title="VOID AGENCY." />}>
+          <VoidAgencyMethodPage />
+        </Suspense>
+      );
+    }
 
-  if (route?.section === 'research-article') {
-    const slug = route.path.split('/').at(-1) ?? '';
-    return (
-      <Suspense fallback={null}>
-        <MarketArticlePage slug={slug} />
-      </Suspense>
-    );
-  }
+    if (route?.path === '/about') {
+      return (
+        <Suspense fallback={<RouteFallback label="ABOUT" title="I build tools from messy inputs." />}>
+          <AboutPage />
+        </Suspense>
+      );
+    }
 
-  if (route?.path === '/markets') {
-    return (
-      <Suspense fallback={null}>
-        <MarketsPage />
-      </Suspense>
-    );
-  }
+    if (route?.path === '/resume') {
+      return (
+        <Suspense fallback={<RouteFallback tone="light" label="RESUME" title="Resume and profile." />}>
+          <ResumePage />
+        </Suspense>
+      );
+    }
 
-  return <HomePage />;
+    if (route?.section === 'intent') {
+      const tone = route.path.startsWith('/atlas') || route.path === '/resume' ? 'light' : 'dark';
+      return (
+        <Suspense fallback={<RouteFallback tone={tone} label={route.h1} title={route.h1} />}>
+          <IntentLandingPage path={route.path} />
+        </Suspense>
+      );
+    }
+
+    if (route?.section === 'research-article') {
+      const slug = route.path.split('/').at(-1) ?? '';
+      const thesis = MARKET_THESES.find((item) => item.slug === slug);
+      return (
+        <Suspense fallback={<RouteFallback label="MARKETS ARCHIVE" title={thesis?.title ?? route.title} />}>
+          <MarketArticlePage slug={slug} />
+        </Suspense>
+      );
+    }
+
+    if (route?.path === '/markets') {
+      return (
+        <Suspense fallback={<RouteFallback label="MARKETS" title="Traditional Cases, Crypto Research, & Market Reasoning." />}>
+          <MarketsPage />
+        </Suspense>
+      );
+    }
+
+    return <HomePage />;
+  };
+
+  return (
+    <>
+      <ShutterWipe />
+      {renderContent()}
+    </>
+  );
 }
 
 function HomePage() {
@@ -227,18 +386,18 @@ function HomePage() {
       triggerShutter(true);
     }
 
-    try {
-      const response = await fetch('https://formspree.io/f/xyzrppzo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({ name, email, message })
-      });
+    const promise = (async () => {
+      try {
+        const response = await fetch('https://formspree.io/f/xyzrppzo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ name, email, message })
+        });
 
-      if (response.ok) {
-        setTimeout(() => {
+        if (response.ok) {
           setFormStatus('success');
           setName('');
           setEmail('');
@@ -246,23 +405,31 @@ function HomePage() {
           if (triggerShutter) {
             triggerShutter(false);
           }
-        }, 800);
-      } else {
+          return 'Successfully submitted brief to Sulayman Bowles.';
+        } else {
+          setFormStatus('error');
+          if (triggerShutter) {
+            triggerShutter(false);
+          }
+          throw new Error('Form submission failed.');
+        }
+      } catch (error) {
         setFormStatus('error');
         if (triggerShutter) {
           triggerShutter(false);
         }
+        throw error;
       }
-    } catch (error) {
-      setFormStatus('error');
-      if (triggerShutter) {
-        triggerShutter(false);
-      }
+    })();
+
+    const event = e as any;
+    if (event.agentInvoked && typeof event.respondWith === 'function') {
+      event.respondWith(promise);
     }
   };
 
-  const [counter, setCounter] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [counter, setCounter] = useState(100);
+  const [isLoaded, setIsLoaded] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -299,35 +466,34 @@ function HomePage() {
     target: philosophyRef,
     offset: ["start end", "end start"]
   });
-  
+
   const h1Transform = useTransform(philosophyScroll, [0, 1], ["0%", "-40%"]);
   const h2Transform = useTransform(philosophyScroll, [0, 1], ["0%", "40%"]);
 
   return (
     <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas md:cursor-none" ref={containerRef}>
-      <ShutterWipe />
       <div className="bg-noise pointer-events-none" />
       {!prefersReducedMotion && <InkTrails />}
-        
-        {/* Hide native cursor on desktop to use smooth cursor */}
-        {!prefersReducedMotion && <div className="hidden md:block">
-          <SmoothCursor />
-        </div>}
+
+      {/* Hide native cursor on desktop to use smooth cursor */}
+      {!prefersReducedMotion && <div className="hidden md:block">
+        <SmoothCursor />
+      </div>}
 
       {/* Grid Crosshairs */}
       <div className="fixed inset-0 pointer-events-none z-40 hidden md:block mix-blend-difference text-canvas select-none">
         {/* Top Left */}
         <div className="absolute top-12 left-16 w-4 h-[1px] bg-canvas opacity-30" />
         <div className="absolute top-8 left-12 w-[1px] h-4 bg-canvas opacity-30" />
-        
+
         {/* Top Right */}
         <div className="absolute top-12 right-16 w-4 h-[1px] bg-canvas opacity-30" />
         <div className="absolute top-8 right-12 w-[1px] h-4 bg-canvas opacity-30" />
-        
+
         {/* Bottom Left */}
         <div className="absolute bottom-12 left-16 w-4 h-[1px] bg-canvas opacity-30" />
         <div className="absolute bottom-8 left-12 w-[1px] h-4 bg-canvas opacity-30" />
-        
+
         {/* Bottom Right */}
         <div className="absolute bottom-12 right-16 w-4 h-[1px] bg-canvas opacity-30" />
         <div className="absolute bottom-8 right-12 w-[1px] h-4 bg-canvas opacity-30" />
@@ -336,21 +502,21 @@ function HomePage() {
       {/* Intro Preloader Mask */}
       <AnimatePresence>
         {!isLoaded && (
-          <motion.div 
+          <motion.div
             className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center p-8 origin-bottom text-canvas"
             exit={{ scaleY: 0 }}
             transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
           >
             <div className="w-full flex justify-between absolute pt-8 px-8 md:px-16 normal-case font-sans uppercase tracking-[0.2em] text-xs opacity-50 justify-self-start self-start top-0">
-               <span>Building Evidence</span>
-               <span>{counter}%</span>
+              <span>Opening portfolio</span>
+              <span>{counter}%</span>
             </div>
-            
+
             <motion.div
-               animate={{ opacity: 1 }}
-               exit={{ opacity: 0 }}
-               transition={{ duration: 0.4 }}
-               className="font-serif text-6xl md:text-9xl font-light tracking-tighter flex items-baseline"
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="font-serif text-6xl md:text-9xl font-light tracking-tighter flex items-baseline"
             >
               <span className="italic">{counter}</span>
               <span className="text-xl md:text-2xl ml-2 font-sans tracking-widest">%</span>
@@ -358,7 +524,7 @@ function HomePage() {
 
             {/* Progress bar */}
             <div className="absolute bottom-16 left-8 right-8 md:left-16 md:right-16 h-[1px] bg-canvas/20">
-              <motion.div 
+              <motion.div
                 className="h-full bg-canvas"
                 style={{ width: `${counter}%` }}
                 transition={{ duration: 0.1 }}
@@ -369,7 +535,7 @@ function HomePage() {
       </AnimatePresence>
 
       {/* Outline Navigation */}
-      <motion.header 
+      <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
         transition={{ duration: 1, delay: 0.5 }}
@@ -377,26 +543,25 @@ function HomePage() {
       >
         <a href="/" id="nav-brand-home" className="pointer-events-auto hover-target flex flex-col items-start cursor-pointer transition-opacity hover:opacity-80 focus:outline-none focus:ring-1 focus:ring-canvas">
           <span className="text-sm font-sans font-medium tracking-[0.2em] leading-none uppercase">Sulayman Bowles</span>
-          <span className="text-xs font-serif italic mt-2 text-canvas opacity-70">Technical SEO · AI Search · Finance/Data</span>
+          <span className="text-xs font-serif italic mt-2 text-canvas opacity-70">Technical SEO, Atlas, and finance research.</span>
         </a>
-        
-        <nav aria-label="Main Navigation" className="pointer-events-auto flex flex-col items-end gap-2 text-xs font-sans tracking-[0.2em] font-medium uppercase mix-blend-difference select-none">
-          <a href="#selected-works" id="nav-work" data-cursor-text="WORK" className="hover-target relative group overflow-visible p-2 -m-2">
-            <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Work</span>
-            {/* Brackets that appear on hover */}
-            <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-            <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
-          <a href="/method" id="nav-method" data-cursor-text="METHOD" className="hover-target relative group overflow-visible p-2 -m-2">
-             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">Method</span>
-             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
-          <a href="/about" id="nav-about" data-cursor-text="ABOUT" className="hover-target relative group overflow-visible p-2 -m-2">
-             <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">About</span>
-             <span className="absolute left-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">[</span>
-             <span className="absolute right-0 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">]</span>
-          </a>
+
+        <nav aria-label="Main navigation" className="pointer-events-auto flex max-w-[18rem] flex-wrap justify-end gap-x-3 gap-y-1 text-[10px] font-sans font-medium uppercase tracking-[0.18em] mix-blend-difference select-none md:max-w-none md:flex-col md:items-end md:gap-2 md:text-xs md:tracking-[0.2em]">
+          {[
+            ['Work', '#selected-works', 'WORK'],
+            ['Atlas', '/atlas', 'ATLAS'],
+            ['Research', '/markets', 'RESEARCH'],
+            ['Method', '/method', 'METHOD'],
+            ['About', '/about', 'ABOUT'],
+            ['Resume', '/resume', 'RESUME'],
+            ['Contact', '#contact', 'CONTACT'],
+          ].map(([label, href, cursor]) => (
+            <a key={href} href={href} id={`nav-${label.toLowerCase()}`} data-cursor-text={cursor} className="hover-target relative group overflow-visible px-2 py-1">
+              <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">{label}</span>
+              <span className="absolute left-0 top-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100">[</span>
+              <span className="absolute right-0 top-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100">]</span>
+            </a>
+          ))}
         </nav>
       </motion.header>
 
@@ -408,125 +573,139 @@ function HomePage() {
           {!prefersReducedMotion && <Suspense fallback={null}>
             <FlowField className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-overlay" density={25} />
           </Suspense>}
-          
+
           {/* Animated SVG Title "Painted" effect */}
-          <motion.div 
-            style={{ y: titleY, opacity: titleOpacity }} 
-            className="w-full max-w-[1600px] mx-auto absolute top-[40%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none z-10"
+          <motion.div
+            style={{ y: titleY, opacity: titleOpacity }}
+            className="w-full max-w-[1600px] mx-auto absolute top-[40%] md:top-[36%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none z-10"
           >
             {isLoaded && (
-               <svg viewBox="0 0 1000 300" className="w-[100vw] md:w-[85vw] h-auto overflow-visible" aria-hidden="true" focusable="false">
-                 <defs>
-                   {/* Create a sophisticated gradient stroke */}
-                   <linearGradient id="paint-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                     <stop offset="0%" stopColor="var(--color-ink)" />
-                     <stop offset="50%" stopColor="var(--color-ink)" stopOpacity="0.8" />
-                     <stop offset="100%" stopColor="var(--color-ink)" />
-                   </linearGradient>
-                 </defs>
-                  <motion.text
-                   x="50%"
-                   y="40%"
-                   textAnchor="middle"
-                   dominantBaseline="middle"
-                   className="font-serif italic font-light text-[140px] hover-target"
-                   data-cursor-text="SYSTEMS"
-                   fill="none"
-                   stroke="url(#paint-grad)"
-                   strokeWidth="1.5"
-                   initial={{ strokeDasharray: 2500, strokeDashoffset: 2500 }}
-                   animate={{ strokeDashoffset: 0 }}
-                   transition={{ duration: 4, ease: "easeInOut", delay: 0.5 }}
-                 >
-                   SULAYMAN
-                 </motion.text>
-                 <motion.text
-                   x="50%"
-                   y="40%"
-                   textAnchor="middle"
-                   dominantBaseline="middle"
-                   className="font-serif italic font-light text-[140px] fill-ink"
-                   initial={{ opacity: 0 }}
-                   animate={{ opacity: 1 }}
-                   transition={{ duration: 2, delay: 2.2 }}
-                 >
-                   SULAYMAN
-                 </motion.text>
-                 
-                 {/* Second Line */}
-                 <motion.text
-                   x="50%"
-                   y="85%"
-                   textAnchor="middle"
-                   dominantBaseline="middle"
-                   className="font-sans font-medium uppercase tracking-[0.4em] text-[24px]"
-                   fill="none"
-                   stroke="var(--color-ink)"
-                   strokeWidth="0.5"
-                   initial={{ strokeDasharray: 800, strokeDashoffset: 800 }}
-                   animate={{ strokeDashoffset: 0 }}
-                   transition={{ duration: 2.5, ease: "easeInOut", delay: 1 }}
-                 >
-                   BOWLES
-                 </motion.text>
-                 <motion.text
-                   x="50%"
-                   y="85%"
-                   textAnchor="middle"
-                   dominantBaseline="middle"
-                   className="font-sans font-medium uppercase tracking-[0.4em] text-[24px] fill-ink"
-                   initial={{ opacity: 0 }}
-                   animate={{ opacity: 1 }}
-                   transition={{ duration: 1.5, delay: 2.5 }}
-                 >
-                   BOWLES
-                 </motion.text>
-               </svg>
-            )}
-           </motion.div>
+              <svg viewBox="0 0 1000 300" className="w-[100vw] md:w-[78vw] h-auto overflow-visible" aria-hidden="true" focusable="false">
+                <defs>
+                  {/* Create a sophisticated gradient stroke */}
+                  <linearGradient id="paint-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="var(--color-ink)" />
+                    <stop offset="50%" stopColor="var(--color-ink)" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="var(--color-ink)" />
+                  </linearGradient>
+                </defs>
+                <motion.text
+                  x="50%"
+                  y="40%"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  className="font-serif italic font-light text-[140px] hover-target"
+                  data-cursor-text="WORK"
+                  fill="none"
+                  stroke="url(#paint-grad)"
+                  strokeWidth="1.5"
+                  initial={{ strokeDasharray: 2500, strokeDashoffset: 2500 }}
+                  animate={{ strokeDashoffset: 0 }}
+                  transition={{ duration: 4, ease: "easeInOut", delay: 0.5 }}
+                >
+                  SULAYMAN
+                </motion.text>
+                <motion.text
+                  x="50%"
+                  y="40%"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  className="font-serif italic font-light text-[140px] fill-ink"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 2, delay: 2.2 }}
+                >
+                  SULAYMAN
+                </motion.text>
 
-           <motion.div 
-             style={{ y: subY }}
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-             transition={{ duration: 1, delay: 2.8 }}
-             className="w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-ink/20 pb-8 gap-8 md:gap-0"
-           >
-             <div className="max-w-[34rem]">
-               <h1 className="font-serif text-5xl font-light leading-none tracking-normal text-ink md:text-7xl">
-                 Sulayman Bowles
-               </h1>
-               <p className="mt-5 max-w-md font-sans text-[10px] uppercase leading-relaxed tracking-[0.2em] text-ink/70 md:text-xs">
-                 Technical SEO systems, AI-search discoverability, and finance/data tools.
-               </p>
-             </div>
-             <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-ink/40 md:text-xs">Trace the work</span>
-           </motion.div>
+                {/* Second Line */}
+                <motion.text
+                  x="50%"
+                  y="85%"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  className="font-sans font-medium uppercase tracking-[0.4em] text-[24px]"
+                  fill="none"
+                  stroke="var(--color-ink)"
+                  strokeWidth="0.5"
+                  initial={{ strokeDasharray: 800, strokeDashoffset: 800 }}
+                  animate={{ strokeDashoffset: 0 }}
+                  transition={{ duration: 2.5, ease: "easeInOut", delay: 1 }}
+                >
+                  BOWLES
+                </motion.text>
+                <motion.text
+                  x="50%"
+                  y="85%"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  className="font-sans font-medium uppercase tracking-[0.4em] text-[24px] fill-ink"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1.5, delay: 2.5 }}
+                >
+                  BOWLES
+                </motion.text>
+              </svg>
+            )}
+          </motion.div>
+
+          <motion.div
+            style={{ y: subY }}
+            className="w-full border-b border-ink/20 pb-8"
+          >
+            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end md:gap-0">
+              <div className="max-w-[42rem] md:max-w-[50rem]">
+                <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-light leading-snug tracking-tight text-ink text-balance">
+                  Sulayman Bowles builds technical SEO systems, AI-search readiness workflows, finance and data analysis, and product software.
+                </h1>
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/58">
+                  Building crawl evidence systems, AI-search readiness workflows, and finance/data analysis.
+                </p>
+              </div>
+              <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-ink/40 md:text-xs">Trace the work</span>
+            </div>
+
+            <div className="mt-6 flex flex-col justify-between gap-4 border-t border-ink/12 pt-5 md:flex-row md:items-center">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.26em] text-ink/62">Atlas SEO Audit Console</p>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/58">
+                  Crawler access, indexation, internal links, schema, and search evidence.
+                </p>
+              </div>
+              <nav aria-label="Primary actions" className="flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.24em] text-ink/62">
+                <a href="/atlas" className="hover-target border-b border-ink/24 pb-1 transition-colors hover:text-ink hover:border-ink" data-cursor-text="ATLAS">View Atlas</a>
+                <a href="/markets" className="hover-target border-b border-ink/24 pb-1 transition-colors hover:text-ink hover:border-ink" data-cursor-text="RESEARCH">View Research</a>
+                <a href="/resume" className="hover-target border-b border-ink/24 pb-1 transition-colors hover:text-ink hover:border-ink" data-cursor-text="RESUME">View Resume</a>
+                <a href="#contact" className="hover-target border-b border-ink/24 pb-1 transition-colors hover:text-ink hover:border-ink" data-cursor-text="CONTACT">Contact</a>
+              </nav>
+            </div>
+          </motion.div>
         </section>
 
         {/* INTRODUCTION - High contrast split */}
         <section className="relative w-full py-32 md:py-48 px-4 md:px-16 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
           <div className="md:col-span-8 md:col-start-2">
-            <StaggeredText 
-               text="I build systems for search, finance, and decision-making. The common thread is evidence."
-               delay={0.1}
-               className="font-serif italic font-light text-[9vw] sm:text-[8vw] md:text-6xl lg:text-[6rem] leading-[1.05] tracking-tight mb-4 md:mb-8"
+            <StaggeredText
+              text="I build from messy records: crawls, search data, filings, assumptions, and unfinished product logic."
+              delay={0.1}
+              className="font-serif italic font-light text-[9vw] sm:text-[8vw] md:text-6xl lg:text-[6rem] leading-[1.05] tracking-tight mb-4 md:mb-8"
             />
           </div>
           <div className="md:col-span-4 md:col-start-8 flex flex-col">
-            <RevealText 
-               text="My work starts with messy surfaces: crawl data, page templates, market signals, search behavior, financial assumptions, and unfinished product logic. I turn that into structured systems people can inspect, question, and use."
-               elementType="p"
-               delay={0.4}
-               className="font-sans text-[10px] md:text-xs uppercase tracking-[0.25em] text-ink/60 leading-relax max-w-sm mt-4 md:mt-2"
+            <RevealText
+              text="The work becomes audit dashboards, issue exports, research notes, and pages that can be checked instead of guessed at."
+              elementType="p"
+              delay={0.4}
+              className="font-sans text-[10px] md:text-xs uppercase tracking-[0.25em] text-ink/60 leading-relax max-w-sm mt-4 md:mt-2"
             />
-            
-            <motion.div 
+
+            <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true, margin: '-10%' }}
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-              className="mt-16 w-full h-[1px] bg-ink/20 transform origin-left" 
+              className="mt-16 w-full h-[1px] bg-ink/20 transform origin-left"
             />
             <ScrollReveal delay={0.7} yOffset={15} className="pt-8 grid grid-cols-2 gap-8 text-[10px] uppercase font-sans tracking-widest text-ink/60">
               <ul>
@@ -535,9 +714,9 @@ function HomePage() {
                 <li className="line-through decoration-ink/40">Generic decks</li>
               </ul>
               <ul>
-                <li className="mb-2 text-ink">Crawl evidence</li>
-                <li className="mb-2 text-ink">Structured analysis</li>
-                <li className="text-ink">Shipped systems</li>
+                <li className="mb-2 text-ink">Crawl exports</li>
+                <li className="mb-2 text-ink">Ranked issues</li>
+                <li className="text-ink">Working tools</li>
               </ul>
             </ScrollReveal>
           </div>
@@ -546,145 +725,147 @@ function HomePage() {
         {/* TEXT MARQUEE */}
         <Suspense fallback={null}><TextMarquee /></Suspense>
 
-         {/* SELECTED WORKS - EDITORIAL GRID */}
+        {/* SELECTED WORKS - EDITORIAL GRID */}
         <section id="selected-works" className="w-full py-32 bg-ink text-canvas selection:bg-canvas selection:text-ink relative flex flex-col border-t border-canvas/10">
-           <div className="px-4 md:px-16 flex items-center justify-between mb-24 md:mb-48 pt-16 max-w-[1800px] mx-auto w-full">
-             <ScrollReveal blur={false}>
-               <h3 className="font-sans tracking-[0.3em] text-xs md:text-sm uppercase font-medium text-canvas/50">Selected Work</h3>
-             </ScrollReveal>
-             <ScrollReveal blur={false} delay={0.2}>
-               <span className="font-serif italic opacity-50 text-xl text-canvas/50">2024 — 2026</span>
-             </ScrollReveal>
-           </div>            {/* Project 01 */}
-           <div className="max-w-[1800px] mx-auto w-full px-4 md:px-16 mb-48 md:mb-64 relative pt-16">
-             <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
-               <div className="flex flex-col gap-1 text-[10px]">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">SYSTEM</span>
-                  <span className="opacity-60">Technical SEO Audit Console</span>
-               </div>
-               <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT</span>
-                  <span className="opacity-60"><ScrambleText text="Atlas / Void Agency" trigger="once" /></span>
-               </div>
-             </div>
-             
-             <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-stretch pt-24">
-               
-               {/* Left Column Text */}
-               <div className="md:col-span-4 flex flex-col pt-12 md:pt-0 md:pr-8 lg:pr-16 relative z-10 order-2 md:order-1 mt-12 md:mt-0">
-                 
-                 <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start">
-                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6">( 02 )</span></ScrollReveal>
-                   
-                   <ScrollReveal delay={0.2} blur={false}>
-                     <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
-                       A crawl-based audit system for finding indexation, architecture, performance, and AI-search readiness issues across real websites.
-                     </p>
-                   </ScrollReveal>
-                   
-                   <div className="flex-grow"></div>
-                   
-                   <ScrollReveal delay={0.6}>
-                     <div className="flex flex-col border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:max-w-xs">
-                       <div className="flex justify-between">
-                         <span className="opacity-50">Role</span>
-                         <span className="text-canvas">Builder / Operator</span>
-                       </div>
-                       <div className="flex justify-between">
-                         <span className="opacity-50">Output</span>
-                         <span className="text-canvas">Crawl Data, Issue Logic, Reports</span>
-                       </div>
-                     </div>
-                   </ScrollReveal>
-                 </div>
-               </div>
-
-               {/* Right Column Canvas */}
-               <a href="/atlas" id="work-link-atlas" className="md:col-span-8 block overflow-hidden hover-target relative h-[60vh] md:h-[90vh] border border-canvas/20 order-1 md:order-2 origin-right group/atlas" data-cursor-text="ATLAS">
-                 <div className="hidden md:block absolute left-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
-                 
-                 {/* Corner brackets */}
-                 <div className="absolute top-4 left-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌜</div>
-                 <div className="absolute top-4 right-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌝</div>
-                 <div className="absolute bottom-4 left-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌞</div>
-                 <div className="absolute bottom-4 right-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌟</div>
-
-                 {!prefersReducedMotion && <Suspense fallback={null}>
-                   <FlowField className="absolute inset-0 w-full h-full opacity-90 mix-blend-screen" density={80} />
-                 </Suspense>}
-                 <div className="absolute left-6 bottom-6 z-20 flex items-center gap-4 text-[10px] uppercase tracking-[0.28em] text-canvas/70 transition-colors group-hover/atlas:text-canvas">
-                   <span className="h-8 w-8 rounded-full border border-canvas/30 transition-colors group-hover/atlas:bg-canvas group-hover/atlas:text-ink" />
-                   <span>Atlas SEO Audit Console</span>
-                   <span aria-hidden="true">↗</span>
-                 </div>
-                 
-                 {/* Title overlapping canvas */}
-                 <ScrollReveal delay={0.2} className="absolute bottom-8 right-0 pointer-events-none z-10 -mr-4 md:-mr-16">
-                   <h4 
-	                      style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
-                      className="text-[12vw] md:text-[8vw] lg:text-[10vw] font-serif text-canvas leading-[0.85] font-light uppercase tracking-tighter text-right"
-                   >
-                     <span className="block"><ScrambleText text="AT" trigger="hover" /></span>
-                     <span className="block italic"><ScrambleText text="LAS" trigger="hover" /></span>
-                   </h4>
-                 </ScrollReveal>
-                 
-                 {/* VIEW Button */}
-               </a>
-               
-             </div>
+          <div className="px-4 md:px-16 flex items-center justify-between mb-24 md:mb-48 pt-16 max-w-[1800px] mx-auto w-full">
+            <ScrollReveal blur={false}>
+              <h3 className="font-sans tracking-[0.3em] text-xs md:text-sm uppercase font-medium text-canvas/50">Selected Work</h3>
+            </ScrollReveal>
+            <ScrollReveal blur={false} delay={0.2}>
+              <span className="font-serif italic opacity-50 text-xl text-canvas/50">2024 — 2026</span>
+            </ScrollReveal>
+          </div>            {/* Project 01 */}
+          <div className="max-w-[1800px] mx-auto w-full px-4 md:px-16 mb-48 md:mb-64 relative pt-16">
+            <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
+              <div className="flex flex-col gap-1 text-[10px]">
+                <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">SYSTEM</span>
+                <span className="text-canvas/60">Technical SEO Audit Console</span>
+              </div>
+              <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
+                <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT</span>
+                <span className="text-canvas/60"><ScrambleText text="Atlas / Void Agency" trigger="once" /></span>
+              </div>
             </div>
-                    {/* PROJECT 02 - SYSTEMS */}
-         <div className="w-full relative py-20 bg-ink" id="systems">
+
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-stretch pt-24">
+
+              {/* Left Column Text */}
+              <div className="md:col-span-4 flex flex-col pt-12 md:pt-0 md:pr-8 lg:pr-16 relative z-10 order-2 md:order-1 mt-12 md:mt-0">
+
+                <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start">
+                  <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6">( 02 )</span></ScrollReveal>
+
+                  <ScrollReveal delay={0.2} blur={false}>
+                    <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
+                      A crawl-based audit console for indexation, architecture, internal links, canonicals, structured data, performance inputs, and crawler access checks.
+                    </p>
+                  </ScrollReveal>
+
+                  <div className="flex-grow"></div>
+
+                  <ScrollReveal delay={0.6}>
+                    <div className="flex flex-col border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:max-w-xs">
+                      <div className="flex justify-between">
+                        <span className="opacity-50">Role</span>
+                        <span className="text-canvas">Builder / Operator</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="opacity-50">Output</span>
+                        <span className="text-canvas">Crawl Data, Issue Logic, Reports</span>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                </div>
+              </div>
+
+              {/* Right Column Canvas */}
+              <a href="/atlas" id="work-link-atlas" className="md:col-span-8 block overflow-hidden hover-target relative h-[60vh] md:h-[90vh] border border-canvas/20 order-1 md:order-2 origin-right group/atlas" data-cursor-text="ATLAS">
+                <div className="hidden md:block absolute left-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
+
+                {/* Corner brackets */}
+                <div className="absolute top-4 left-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌜</div>
+                <div className="absolute top-4 right-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌝</div>
+                <div className="absolute bottom-4 left-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌞</div>
+                <div className="absolute bottom-4 right-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌟</div>
+
+                {!prefersReducedMotion && <Suspense fallback={null}>
+                  <FlowField className="absolute inset-0 w-full h-full opacity-90 mix-blend-screen" density={80} />
+                </Suspense>}
+                <div className="absolute left-6 bottom-6 z-20 flex items-center gap-4 text-[10px] uppercase tracking-[0.28em] text-canvas/70 transition-colors group-hover/atlas:text-canvas">
+                  <span className="h-8 w-8 rounded-full border border-canvas/30 transition-colors group-hover/atlas:bg-canvas group-hover/atlas:text-ink" />
+                  <span>Atlas SEO Audit Console</span>
+                  <span aria-hidden="true">↗</span>
+                </div>
+
+                {/* Title overlapping canvas */}
+                <ScrollReveal delay={0.2} className="absolute bottom-8 right-4 md:right-8 lg:right-12 pointer-events-none z-10">
+                  <h4
+                    style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
+                    className="text-[12vw] md:text-[8vw] lg:text-[10vw] font-serif text-canvas leading-[0.85] font-light uppercase tracking-tighter text-right"
+                  >
+                    <span className="block"><ScrambleText text="AT" trigger="hover" /></span>
+                    {' '}
+                    <span className="block italic"><ScrambleText text="LAS" trigger="hover" /></span>
+                  </h4>
+                </ScrollReveal>
+
+                {/* VIEW Button */}
+              </a>
+
+            </div>
+          </div>
+          {/* PROJECT 02 - SYSTEMS */}
+          <div className="w-full relative py-20 bg-ink" id="systems">
             <div className="max-w-[1800px] mx-auto w-full px-4 md:px-16 mb-48 md:mb-64 relative pt-16">
-             <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
-               <div className="flex flex-col gap-1 text-[10px]">
+              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
+                <div className="flex flex-col gap-1 text-[10px]">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">FINANCE</span>
-                  <span className="opacity-60">Market + Operating Analysis</span>
-               </div>
-               <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
+                  <span className="text-canvas/60">Market + Operating Analysis</span>
+                </div>
+                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
-                  <span className="opacity-60">Models, Dashboards, Research</span>
-               </div>
-             </div>
-             
-             <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-stretch pt-24 pb-48">
-               
-               {/* Left Column Canvas */}
-               <a href="/markets" id="work-link-markets" className="md:col-span-8 overflow-hidden hover-target relative block h-[60vh] md:h-[90vh] border border-canvas/20 origin-left group" data-cursor-text="OBSERVE">
-                 <div className="hidden md:block absolute right-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
-                 
-                 {/* Corner markers */}
-                 <div className="absolute top-0 left-0 w-6 h-6 border-t border-l border-canvas/50 pointer-events-none z-10 m-4" />
-                 <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-canvas/50 pointer-events-none z-10 m-4" />
+                  <span className="text-canvas/60">Models, Dashboards, Research</span>
+                </div>
+              </div>
 
-                 <Suspense fallback={null}>
-                   <CandlestickChart className="absolute inset-0 w-full h-full transform transition-transform duration-[2000ms] group-hover:scale-105" />
-                 </Suspense>
-                 
-                 {/* Title overlapping canvas */}
-                 <ScrollReveal delay={0.2} className="absolute top-8 left-4 md:left-0 pointer-events-none z-10 md:-ml-6 mix-blend-difference text-canvas select-none">
-                   <h4 className="text-[15vw] md:text-[8vw] lg:text-[10vw] font-serif leading-[0.85] font-light uppercase tracking-tighter text-left">
-                     <span className="block opacity-90"><ScrambleText text="MAR" trigger="hover" /></span>
-                     <span className="block italic opacity-70"><ScrambleText text="KETS" trigger="hover" /></span>
-                   </h4>
-                 </ScrollReveal>
-               </a>
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-stretch pt-24 pb-48">
 
-               <div className="md:col-span-4 flex flex-col justify-between pt-12 md:pt-0">
-                 <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start items-start md:items-end md:text-right">
-                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6 block">( 01 )</span></ScrollReveal>
-                   
-                   <ScrollReveal delay={0.2} blur={false}>
-                     <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
+                {/* Left Column Canvas */}
+                <a href="/markets" id="work-link-markets" className="md:col-span-8 overflow-hidden hover-target relative block h-[60vh] md:h-[90vh] border border-canvas/20 origin-left group" data-cursor-text="OBSERVE">
+                  <div className="hidden md:block absolute right-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
+
+                  {/* Corner markers */}
+                  <div className="absolute top-0 left-0 w-6 h-6 border-t border-l border-canvas/50 pointer-events-none z-10 m-4" />
+                  <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-canvas/50 pointer-events-none z-10 m-4" />
+
+                  <Suspense fallback={null}>
+                    <CandlestickChart className="absolute inset-0 w-full h-full transform transition-transform duration-[2000ms] group-hover:scale-105" />
+                  </Suspense>
+
+                  {/* Title overlapping canvas */}
+                  <ScrollReveal delay={0.2} className="absolute top-8 left-4 md:left-8 lg:left-12 pointer-events-none z-10 mix-blend-difference text-canvas select-none">
+	                    <h4 className="text-[15vw] md:text-[8vw] lg:text-[10vw] font-serif leading-[0.85] font-light uppercase tracking-tighter text-left">
+	                      <span className="block opacity-90"><ScrambleText text="MAR" trigger="hover" /></span>
+                      {' '}
+	                      <span className="block italic opacity-70"><ScrambleText text="KETS" trigger="hover" /></span>
+	                    </h4>
+                  </ScrollReveal>
+                </a>
+
+                <div className="md:col-span-4 flex flex-col justify-between pt-12 md:pt-0">
+                  <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start items-start md:items-end md:text-right">
+                    <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6 block">( 01 )</span></ScrollReveal>
+
+                    <ScrollReveal delay={0.2} blur={false}>
+                      <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
                         A collection of finance and data work covering valuation, market research, operating models, and decision dashboards.
-                     </p>
-                   </ScrollReveal>
-                   
-                   <div className="flex-grow"></div>
-                   
-                   <ScrollReveal delay={0.4} className="w-full">
-                     <div className="flex flex-col md:items-end border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:ml-auto md:max-w-xs">
+                      </p>
+                    </ScrollReveal>
+
+                    <div className="flex-grow"></div>
+
+                    <ScrollReveal delay={0.4} className="w-full">
+                      <div className="flex flex-col md:items-end border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:ml-auto md:max-w-xs">
                         <div className="flex justify-between w-full">
                           <span className="text-left opacity-50">Focus</span>
                           <span className="text-right text-canvas">Finance + Data</span>
@@ -693,237 +874,243 @@ function HomePage() {
                           <span className="text-left opacity-50">Tools</span>
                           <span className="text-right text-canvas">Excel, Python, R, SQL</span>
                         </div>
-                     </div>
-                   </ScrollReveal>
-                 </div>
-               </div>
-               
-             </div>
-           </div>
-         </div>
-           
-           {/* Project 03 - Void */}
-           <a href="/method" id="work-link-void" className="w-full mt-32 md:mt-64 pt-32 pb-48 relative min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center border-t border-b border-canvas/10 my-32 hover-target bg-ink overflow-hidden group" data-cursor-text="METHOD">
-              {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
-              <div className="relative z-10 flex flex-col items-center">
-                <ScrollReveal>
-                  <span className="text-canvas font-serif italic text-2xl md:text-4xl mb-8 opacity-30 group-hover:opacity-100 transition-opacity duration-1000">( 03 )</span>
-                </ScrollReveal>
-                <ScrollReveal delay={0.2} blur={false}>
-                  <h4 
-	                    style={{ viewTransitionName: 'void-title' } as CSSProperties}
-                    className="text-[20vw] leading-none font-serif tracking-tighter uppercase text-canvas pb-8 opacity-90 transition-opacity duration-1000"
-                  >
-                    <ScrambleText text="VOID" trigger="hover" />
-                  </h4>
-                </ScrollReveal>
-                <ScrollReveal delay={0.4}>
-                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">Void Agency is my technical SEO and AI-search consultancy, focused on crawlability, answer-readiness, structured content, and evidence-backed website audits.</p>
-                </ScrollReveal>
-                <ScrollReveal delay={0.6}>
-                  <MagneticButton className="mt-16">
-                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Void Agency Technical SEO Method</span>
-                  </MagneticButton>
-                </ScrollReveal>
+                      </div>
+                    </ScrollReveal>
+                  </div>
+                </div>
+
               </div>
-           </a>
+            </div>
+          </div>
+
+          {/* Project 03 - Void */}
+          <a href="/method" id="work-link-void" className="w-full mt-32 md:mt-64 pt-32 pb-48 relative min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center border-t border-b border-canvas/10 my-32 hover-target bg-ink overflow-hidden group" data-cursor-text="METHOD">
+            {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
+            <div className="relative z-10 flex flex-col items-center">
+              <ScrollReveal>
+                <span className="text-canvas font-serif italic text-2xl md:text-4xl mb-8 opacity-30 group-hover:opacity-100 transition-opacity duration-1000">( 03 )</span>
+              </ScrollReveal>
+              <ScrollReveal delay={0.2} blur={false}>
+                <h4
+                  style={{ viewTransitionName: 'void-title' } as CSSProperties}
+                  className="text-[20vw] leading-none font-serif tracking-tighter uppercase text-canvas pb-8 opacity-90 transition-opacity duration-1000"
+                >
+                  <ScrambleText text="VOID" trigger="hover" />
+                </h4>
+              </ScrollReveal>
+              <ScrollReveal delay={0.4}>
+                <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">Void Agency is my technical SEO consultancy for crawl paths, indexation, internal links, schema, analytics, page templates, and AI crawler access checks.</p>
+              </ScrollReveal>
+              <ScrollReveal delay={0.6}>
+                <MagneticButton className="mt-16">
+                  <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Void Agency Technical SEO Method</span>
+                </MagneticButton>
+              </ScrollReveal>
+            </div>
+          </a>
         </section>
 
         {/* TYPOGRAPHY / PHILOSOPHY STATEMENT SECTION */}
         <section ref={philosophyRef} id="expertise" className="py-48 px-4 md:px-16 flex flex-col justify-center relative bg-canvas text-ink overflow-hidden border-t border-ink/10 h-screen">
           <div className="max-w-[1800px] mx-auto w-full relative h-[60vh] flex flex-col justify-center">
-            
+
             {/* Background huge offset typography */}
             <motion.div style={{ x: h1Transform }} className="flex whitespace-nowrap mb-8 md:mb-16 -ml-[20%]">
-              <span className="text-[15vw] font-serif uppercase tracking-tighter text-outline opacity-20 pr-16 select-none">
-                EVIDENCE BEFORE
-              </span>
+              <span aria-hidden="true" className="text-[15vw] font-serif uppercase tracking-tighter text-outline opacity-20 pr-16 select-none before:content-['EVIDENCE_BEFORE']" />
             </motion.div>
-            
+
             <motion.div style={{ x: h2Transform }} className="flex whitespace-nowrap -ml-[40%]">
-               <span className="text-[15vw] font-serif uppercase tracking-tighter opacity-10 pr-16 select-none leading-none">
-                 INTERPRETATION
-               </span>
+              <span aria-hidden="true" className="text-[15vw] font-serif uppercase tracking-tighter opacity-10 pr-16 select-none leading-none before:content-['INTERPRETATION']" />
             </motion.div>
-            
+
             {/* Foreground content */}
             <div className="absolute right-0 top-1/2 -translate-y-1/2 max-w-sm md:max-w-md bg-canvas/80 backdrop-blur-md p-8 md:p-12 border border-ink/10">
-               <h3 className="font-serif italic text-3xl md:text-5xl mb-8 font-light">Operating Method</h3>
-               <p className="font-sans text-xs uppercase tracking-[0.2em] text-ink/70 leading-tight mb-8">
-                 I separate signal from presentation. First, collect the evidence. Then structure it. Then decide what it means, what risk it creates, and what should be fixed.
-               </p>
-               <ul className="space-y-4 font-sans text-[10px] uppercase tracking-widest border-t border-ink/10 pt-8 text-ink/50 group">
-                 <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>01</span><span className="text-ink">Crawl before claims</span></li>
-                 <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>02</span><span className="text-ink">Structure before scale</span></li>
-                 <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>03</span><span className="text-ink">Evidence before polish</span></li>
-               </ul>
+              <h3 className="font-serif italic text-3xl md:text-5xl mb-8 font-light">Operating Method</h3>
+              <p className="font-sans text-xs uppercase tracking-[0.2em] text-ink/70 leading-tight mb-8">
+                I separate what the data shows from what the deck says. First, collect the crawl, model, or page record. Then decide what broke, what matters, and what should be fixed.
+              </p>
+              <ul className="space-y-4 font-sans text-[10px] uppercase tracking-widest border-t border-ink/10 pt-8 text-ink/70 group">
+                <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>01</span><span className="text-ink">Crawl before claims</span></li>
+                <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>02</span><span className="text-ink">Patterns before polish</span></li>
+                <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>03</span><span className="text-ink">Proof before decks</span></li>
+              </ul>
             </div>
-            
+
           </div>
         </section>
 
         {/* EXPERTISE SECTION */}
         <section className="py-32 md:py-48 px-4 md:px-16 bg-canvas text-ink border-t border-ink/10 relative">
-           <div className="max-w-[1800px] mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
-              <div className="md:col-span-3 sticky top-32">
-                <ScrollReveal blur={false}>
-                  <h3 className="font-sans text-xs uppercase tracking-[0.3em] mb-16 text-ink/50">Disciplines</h3>
-                </ScrollReveal>
-                <ScrollReveal delay={0.2} blur={false}>
-                  <p className="font-serif italic text-2xl md:text-3xl text-ink max-w-sm leading-snug">
-                    I work across technical SEO, AI search, finance/data analysis, and web systems.
-                  </p>
-                </ScrollReveal>
+          <div className="max-w-[1800px] mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+            <div className="md:col-span-3 sticky top-32">
+              <ScrollReveal blur={false}>
+                <h3 className="font-sans text-xs uppercase tracking-[0.3em] mb-16 text-ink/50">Disciplines</h3>
+              </ScrollReveal>
+              <ScrollReveal delay={0.2} blur={false}>
+                <p className="font-serif italic text-2xl md:text-3xl text-ink max-w-sm leading-snug">
+                  I build crawl audits, finance models, research notes, and web interfaces that make the work easier to inspect.
+                </p>
+              </ScrollReveal>
+            </div>
+            <div className="md:col-span-9 flex flex-col w-full text-ink">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 md:gap-y-32 group">
+                {[
+                  { num: '01', title: 'Technical SEO Audits', desc: 'Crawl architecture, indexability, internal links, page templates, metadata, structured data, performance inputs, and issue logic. Built for diagnosis, not vague scoring.' },
+                  { num: '02', title: 'Crawler Access + Source Clarity', desc: 'Robots rules, entity pages, source text, schema, citation surfaces, and internal links that make key pages easier to crawl, quote, and verify.' },
+                  { num: '03', title: 'Finance + Data Analysis', desc: 'Valuation models, market research, operating analysis, dashboards, and decision tools built around assumptions that can be inspected and challenged.' },
+                  { num: '04', title: 'Web Interfaces + Reports', desc: 'React interfaces, portfolio pages, audit dashboards, visual explainers, and written notes that turn raw work into something legible.' }
+                ].map((item, i) => (
+                  <div key={item.num}>
+                    <ScrollReveal delay={i % 2 === 0 ? 0.2 : 0.4} blur={false}>
+                      <div className="flex flex-col border-t border-ink/20 pt-8 hover-target transition-opacity duration-500 hover:!opacity-100 group-hover:opacity-20" data-cursor-text="READ" style={{ perspective: 1000 }}>
+                        <span className="font-sans text-[10px] tracking-widest uppercase opacity-50 mb-6 md:mb-8">{item.num}</span>
+                        <h4 className="text-4xl md:text-4xl lg:text-5xl font-serif tracking-tighter uppercase font-light leading-none mb-6 md:mb-8">
+                          {item.title}
+                        </h4>
+                        <p className="font-sans text-[10px] uppercase tracking-widest leading-tight opacity-60">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </ScrollReveal>
+                  </div>
+                ))}
               </div>
-              <div className="md:col-span-9 flex flex-col w-full text-ink">
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 md:gap-y-32 group">
-                 {[
-                   { num: '01', title: 'Technical SEO Systems', desc: 'Crawl architecture, indexability, internal links, page templates, metadata, structured data, performance inputs, and issue logic. Built for diagnosis, not vague scoring.' },
-                   { num: '02', title: 'AI Search Discoverability', desc: 'Answer-ready pages, entity clarity, citation surfaces, crawl permissions, structured signals, and content that helps AI systems understand who or what a site represents.' },
-                   { num: '03', title: 'Finance + Data Analysis', desc: 'Valuation models, market research, operating analysis, dashboards, and decision tools built around assumptions that can be inspected and challenged.' },
-                   { num: '04', title: 'Web Systems + Presentation', desc: 'React interfaces, portfolio pages, audit dashboards, visual systems, and written explanations that turn raw work into something legible.' }
-                 ].map((item, i) => (
-                   <div key={item.num}>
-                     <ScrollReveal delay={i % 2 === 0 ? 0.2 : 0.4} blur={false}>
-                       <div className="flex flex-col border-t border-ink/20 pt-8 hover-target transition-opacity duration-500 hover:!opacity-100 group-hover:opacity-20" data-cursor-text="READ" style={{ perspective: 1000 }}>
-                         <span className="font-sans text-[10px] tracking-widest uppercase opacity-50 mb-6 md:mb-8">{item.num}</span>
-                         <h4 className="text-4xl md:text-4xl lg:text-5xl font-serif tracking-tighter uppercase font-light leading-none mb-6 md:mb-8">
-                           {item.title}
-                         </h4>
-                         <p className="font-sans text-[10px] uppercase tracking-widest leading-tight opacity-60">
-                           {item.desc}
-                         </p>
-                       </div>
-                     </ScrollReveal>
-                   </div>
-                 ))}
-                 </div>
-                 <div className="pt-32 w-full flex justify-start md:justify-end">
-                   <a href="#selected-works" id="discipline-view-work-link" className="hover-target text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
-                 </div>
+              <div className="pt-32 w-full flex justify-start md:justify-end">
+                <a href="#selected-works" id="discipline-view-work-link" className="hover-target text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
               </div>
-           </div>
+            </div>
+          </div>
         </section>
 
         {/* INTERSTITIAL SECTION */}
         <section className="w-full h-[50vh] md:h-[80vh] overflow-hidden hover-target relative">
-           {!prefersReducedMotion && <KineticTypography />}
-           <div className="absolute inset-0 flex items-center justify-center mix-blend-difference pointer-events-none">
-              <div className="w-[1px] h-32 bg-canvas mb-8"></div>
-           </div>
+          {!prefersReducedMotion && <KineticTypography />}
+          <div className="absolute inset-0 flex items-center justify-center mix-blend-difference pointer-events-none">
+            <div className="w-[1px] h-32 bg-canvas mb-8"></div>
+          </div>
         </section>
 
         {/* FOOTER */}
         <footer id="contact" className="w-full bg-ink text-canvas selection:bg-canvas selection:text-ink relative overflow-hidden pt-32">
-           <Suspense fallback={null}><FooterM /></Suspense>
+          <Suspense fallback={null}><FooterM /></Suspense>
 
-           <div className="px-4 md:px-16 relative z-10 w-full flex flex-col">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 border-b border-canvas/20 pb-16 md:pb-32">
-                 <div className="md:col-span-8 flex flex-col items-start justify-end">
-                    <ScrollReveal blur={false}>
-                      <span className="text-canvas/50 font-sans tracking-[0.2em] text-xs uppercase mb-8 block flex items-center gap-4">
-                        <span className="status-dot" /> Projects, roles, and technical audits
-                      </span>
-                    </ScrollReveal>
-                    
-                    <ScrollReveal delay={0.1} blur={false}>
-                      <h4 className="text-[12vw] leading-[0.8] font-serif uppercase font-light tracking-tighter mb-12 hover-target cursor-none" data-cursor-text="WRITE">
-                         <span className="block italic opacity-90">Send</span>
-                         <span className="block opacity-80">The Brief</span>
-                      </h4>
-                    </ScrollReveal>
-                    
-                    <ScrollReveal delay={0.2} blur={false}>
-                      {formStatus === 'success' ? (
-                        <div className="text-canvas font-sans font-light tracking-widest uppercase text-base md:text-lg py-6 border border-canvas/20 px-8 rounded bg-canvas/5 max-w-lg mt-4">
-                          <p className="text-[#a3e635] mb-2 font-medium">✓ Brief Received</p>
-                          <p className="text-[10px] text-canvas/60 normal-case tracking-normal leading-relaxed">
-                            Thank you. Your message has been sent successfully. I will review your submission and get back to you shortly.
-                          </p>
-                        </div>
-                      ) : (
-                        <form onSubmit={handleSubmit} className="w-full max-w-xl space-y-6 mt-4">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <input 
-                              type="text" 
-                              required
-                              id="contact-name"
-                              name="name"
-                              placeholder="YOUR NAME" 
-                              value={name}
-                              onChange={(e) => setName(e.target.value)}
-                              className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
-                            />
-                            <input 
-                              type="email" 
-                              required
-                              id="contact-email"
-                              name="email"
-                              placeholder="YOUR EMAIL" 
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                              className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
-                            />
+          <div className="px-4 md:px-16 relative z-10 w-full flex flex-col">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 border-b border-canvas/20 pb-16 md:pb-32">
+              <div className="md:col-span-8 flex flex-col items-start justify-end">
+                <ScrollReveal blur={false}>
+                  <span className="text-canvas/50 font-sans tracking-[0.2em] text-xs uppercase mb-8 block flex items-center gap-4">
+                    <span className="status-dot" /> Projects, roles, and technical audits
+                  </span>
+                </ScrollReveal>
+
+                <ScrollReveal delay={0.1} blur={false}>
+	                  <h4 className="text-[12vw] leading-[0.8] font-serif uppercase font-light tracking-tighter mb-12 hover-target cursor-none" data-cursor-text="WRITE">
+	                    <span className="block italic opacity-90">Send</span>
+                    {' '}
+	                    <span className="block opacity-80">The Brief</span>
+	                  </h4>
+                </ScrollReveal>
+
+                <ScrollReveal delay={0.2} blur={false}>
+                  {formStatus === 'success' ? (
+                    <div className="text-canvas font-sans font-light tracking-widest uppercase text-base md:text-lg py-6 border border-canvas/20 px-8 rounded bg-canvas/5 max-w-lg mt-4">
+                      <p className="text-[#a3e635] mb-2 font-medium">✓ Brief Received</p>
+                      <p className="text-[10px] text-canvas/60 normal-case tracking-normal leading-relaxed">
+                        Received. I will read the note and respond with the next useful step.
+                      </p>
+                    </div>
+                  ) : (
+                    <form
+                      onSubmit={handleSubmit}
+                      className="w-full max-w-xl space-y-6 mt-4"
+                      toolname="submit_project_brief"
+                      tooldescription="Sends a contact form message to Sulayman Bowles. Include name, email, and the project or audit request."
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input
+                          type="text"
+                          required
+                          id="contact-name"
+                          name="name"
+                          placeholder="YOUR NAME"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
+                          toolparamdescription="Your full name or organization name."
+                        />
+                        <input
+                          type="email"
+                          required
+                          id="contact-email"
+                          name="email"
+                          placeholder="YOUR EMAIL"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas"
+                          toolparamdescription="Your contact email address."
+                        />
+                      </div>
+                      <textarea
+                        required
+                        rows={2}
+                        id="contact-message"
+                        name="message"
+                        placeholder="THE BRIEF (PROJECT DETAILS, TIMELINE, AUDIT REQUEST)"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas resize-none"
+                        toolparamdescription="The details of your inquiry, audit request, timeline, or scope."
+                      />
+                      <div className="flex items-center justify-between pt-2">
+                        {formStatus === 'error' && (
+                          <span className="text-red-400 text-[10px] font-sans tracking-widest uppercase">
+                            Submission failed. Please try again.
+                          </span>
+                        )}
+                        <button
+                          type="submit"
+                          disabled={formStatus === 'submitting'}
+                          className="group flex items-center gap-6 hover-target cursor-none w-fit bg-transparent border-none outline-none text-left disabled:opacity-50"
+                        >
+                          <span className="text-lg md:text-xl font-sans font-light tracking-widest uppercase pb-1 border-b-2 border-canvas/20 group-hover:border-canvas transition-colors text-canvas">
+                            {formStatus === 'submitting' ? 'SENDING...' : 'SUBMIT BRIEF'}
+                          </span>
+                          <div className="w-10 h-10 rounded-full border border-canvas/20 flex items-center justify-center group-hover:bg-canvas group-hover:text-ink transition-colors text-canvas">
+                            <span className="transform -rotate-45 block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">→</span>
                           </div>
-                          <textarea 
-                            required
-                            rows={2}
-                            id="contact-message"
-                            name="message"
-                            placeholder="THE BRIEF (PROJECT DETAILS, TIMELINE, AUDIT REQUEST)" 
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            className="w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-xs font-sans tracking-widest uppercase outline-none transition-colors placeholder:text-canvas/30 text-canvas resize-none"
-                          />
-                          <div className="flex items-center justify-between pt-2">
-                            {formStatus === 'error' && (
-                              <span className="text-red-400 text-[10px] font-sans tracking-widest uppercase">
-                                Submission failed. Please try again.
-                              </span>
-                            )}
-                            <button 
-                              type="submit" 
-                              disabled={formStatus === 'submitting'}
-                              className="group flex items-center gap-6 hover-target cursor-none w-fit bg-transparent border-none outline-none text-left disabled:opacity-50"
-                            >
-                              <span className="text-lg md:text-xl font-sans font-light tracking-widest uppercase pb-1 border-b-2 border-canvas/20 group-hover:border-canvas transition-colors text-canvas">
-                                {formStatus === 'submitting' ? 'SENDING...' : 'SUBMIT BRIEF'}
-                              </span>
-                              <div className="w-10 h-10 rounded-full border border-canvas/20 flex items-center justify-center group-hover:bg-canvas group-hover:text-ink transition-colors text-canvas">
-                                <span className="transform -rotate-45 block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">→</span>
-                              </div>
-                            </button>
-                          </div>
-                        </form>
-                      )}
-                    </ScrollReveal>
-                 </div>
-                 
-                 <div className="md:col-span-4 flex flex-col justify-end items-start md:items-end w-full space-y-16">
-                    <ScrollReveal delay={0.3} yOffset={10} blur={false}>
-                      <Suspense fallback={null}><LocalTime /></Suspense>
-                    </ScrollReveal>
-                    
-                    <ScrollReveal delay={0.4} blur={false}>
-                        <div className="grid grid-cols-2 gap-x-12 gap-y-6 text-[10px] uppercase font-sans tracking-[0.2em] opacity-70 w-full">
-                           <a href="/atlas" id="footer-link-atlas" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Atlas</a>
-                           <a href="/markets" id="footer-link-markets" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Markets Research</a>
-                           <a href="/method" id="footer-social-void" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Void Agency</a>
-                           <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Email</a>
-                           <a href="#contact" id="footer-link-contact" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Contact</a>
-                        </div>
-                     </ScrollReveal>
-                 </div>
+                        </button>
+                      </div>
+                    </form>
+                  )}
+                </ScrollReveal>
               </div>
-              
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-[10px] uppercase font-sans tracking-[0.2em] text-canvas/40 py-8 gap-4 md:gap-0">
-                 <span>© 2026 Sulayman Bowles</span>
-                 <a href="#top" id="footer-back-to-top" className="hover-target hover:text-canvas transition-colors flex items-center gap-2">
-                    Back to top <span className="transform -rotate-90 block">→</span>
-                 </a>
-                 <span>Technical SEO · AI Search · Finance/Data</span>
+
+              <div className="md:col-span-4 flex flex-col justify-end items-start md:items-end w-full space-y-16">
+                <ScrollReveal delay={0.3} yOffset={10} blur={false}>
+                  <Suspense fallback={null}><LocalTime /></Suspense>
+                </ScrollReveal>
+
+                <ScrollReveal delay={0.4} blur={false}>
+                  <div className="grid grid-cols-2 gap-x-12 gap-y-6 text-[10px] uppercase font-sans tracking-[0.2em] opacity-70 w-full">
+                    <a href="/atlas" id="footer-link-atlas" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Atlas</a>
+                    <a href="/markets" id="footer-link-markets" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Markets Research</a>
+                    <a href="/method" id="footer-social-void" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Void Agency</a>
+                    <a href="/resume" id="footer-link-resume" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Resume</a>
+                    <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Email</a>
+                    <a href="#contact" id="footer-link-contact" className="hover-target hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">Contact</a>
+                  </div>
+                </ScrollReveal>
               </div>
-           </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-[10px] uppercase font-sans tracking-[0.2em] text-canvas/60 py-8 gap-4 md:gap-0">
+              <span>© 2026 Sulayman Bowles</span>
+              <a href="#top" id="footer-back-to-top" className="hover-target hover:text-canvas transition-colors flex items-center gap-2">
+                Back to top <span className="transform -rotate-90 block">→</span>
+              </a>
+              <span>Technical SEO, Atlas, and finance research.</span>
+            </div>
+          </div>
         </footer>
       </main>
     </div>

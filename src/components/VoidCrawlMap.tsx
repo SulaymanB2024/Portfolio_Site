@@ -52,7 +52,7 @@ const callouts = [
 export function VoidCrawlMap({ className = '' }: VoidCrawlMapProps) {
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      <svg viewBox="0 0 900 700" className="h-full w-full" role="img" aria-label="Void Agency crawl intelligence map">
+      <svg viewBox="0 0 900 700" className="h-full w-full" role="img" aria-label="Diagram of crawl paths, page groups, and issue clusters">
         <defs>
           <radialGradient id="void-core-glow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#F1EFE8" stopOpacity="0.95" />
@@ -183,6 +183,7 @@ export function VoidCrawlMap({ className = '' }: VoidCrawlMapProps) {
               <text fill="rgba(241,239,232,0.82)" fontFamily="Inter, sans-serif" fontSize="10" letterSpacing="3.2" textAnchor={label.anchor}>
                 {label.title}
               </text>
+              {' '}
               {label.rows.map((row, index) => (
                 <text
                   key={row}
@@ -194,6 +195,7 @@ export function VoidCrawlMap({ className = '' }: VoidCrawlMapProps) {
                   textAnchor={label.anchor}
                 >
                   {row}
+                  {index < label.rows.length - 1 ? ' ' : ''}
                 </text>
               ))}
             </g>

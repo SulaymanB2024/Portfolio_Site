@@ -1,10 +1,9 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import AtlasCrawlMap from '../components/AtlasCrawlMap';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
-import { ShutterWipe } from '../components/ShutterWipe';
 import { SmoothCursor } from '../components/SmoothCursor';
 import { ScrambleText } from '../components/ScrambleText';
 import { RevealText } from '../components/RevealText';
@@ -51,37 +50,37 @@ const processSteps: ProcessStepProps[] = [
     index: '01',
     title: 'CRAWL',
     icon: 'crawl',
-    copy: 'High-fidelity crawling with smart rate control, JS rendering, and adaptive discovery to map the site as search engines do.',
+    copy: 'Crawl the site with rate limits, robots handling, sitemap discovery, optional JS rendering, and normalized URLs.',
   },
   {
     index: '02',
     title: 'EXTRACT',
     icon: 'extract',
-    copy: 'Extract content, links, directives, structured data, signals, and performance artifacts from every discovered URL.',
+    copy: 'Store content, links, headers, canonicals, robots directives, structured data, status codes, and performance inputs by URL.',
   },
   {
     index: '03',
     title: 'INTERPRET',
     icon: 'interpret',
-    copy: 'Normalize and connect signals into an understanding of architecture, intent, and indexation potential.',
+    copy: 'Group records by template, crawl depth, canonical cluster, indexation state, and internal-link pattern.',
   },
   {
     index: '04',
     title: 'SCORE',
     icon: 'score',
-    copy: 'Score issues by impact, confidence, and effort using proprietary heuristics and historical patterns.',
+    copy: 'Rank issues by severity, confidence, affected URLs, and likely effort.',
   },
   {
     index: '05',
     title: 'REPORT',
     icon: 'report',
-    copy: 'Generate operator-ready reports, exports, and task lists with evidence and recommended actions.',
+    copy: 'Export URL lists, issue notes, screenshots, charts, and prioritized fixes.',
   },
 ];
 
 const issueRows = [
-  ['Blocked by robots.txt', '9.6', 'CRITICAL', 'Crawl engine blocked from accessing valuable, indexable path ranges.'],
-  ['Orphaned pages', '8.7', 'HIGH', 'Pages found in sitemap or logs but zero incoming internal crawler links.'],
+  ['Blocked by robots.txt', '9.6', 'CRITICAL', 'Robots rules block access to valuable indexable path ranges.'],
+  ['Orphaned pages', '8.7', 'HIGH', 'Pages found in sitemap or logs with zero incoming internal links in the crawl.'],
   ['Missing canonical', '7.2', 'HIGH', 'Pages lacking self-referencing canonicals, risking index dilution.'],
   ['Soft 404', '6.4', 'MEDIUM', 'Pages returning HTTP 200 but presenting empty content or template errors.'],
   ['Duplicate without canon.', '5.9', 'MEDIUM', 'Multiple URL paths serving identical text without canonical directives.'],
@@ -224,6 +223,7 @@ function ProcessIcon({ type, isHovered }: { type: ProcessStepProps['icon']; isHo
           cy="36" 
           r="24" 
           strokeWidth="1.2" 
+          initial={{ r: 24, opacity: 0.75 }}
           animate={isHovered ? { r: 26, opacity: 0.95 } : { r: 24, opacity: 0.75 }}
         />
         <motion.path 
@@ -285,7 +285,7 @@ function AtlasProcessStep({ index, title, copy, icon }: ProcessStepProps) {
 
   return (
     <motion.article
-      className="group relative min-h-[320px] border-b border-ink/14 p-5 transition-[background-color,border-color] duration-500 hover:bg-ink/[0.025] md:border-r md:last:border-r-0 lg:border-b-0"
+      className="group relative min-h-[320px] bg-canvas p-5 transition-[background-color,border-color] duration-500 hover:bg-ink/[0.025] h-full"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
       onMouseEnter={() => setIsHovered(true)}
@@ -585,16 +585,53 @@ function ConsoleModal({
   title: string; 
   children: ReactNode 
 }) {
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previousFocusRef = useRef<Element | null>(null);
+
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
+    if (!isOpen) {
       document.body.style.overflow = '';
+      return;
     }
+
+    previousFocusRef.current = document.activeElement;
+    document.body.style.overflow = 'hidden';
+    window.setTimeout(() => closeButtonRef.current?.focus(), 0);
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable || focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+      if (previousFocusRef.current instanceof HTMLElement) {
+        previousFocusRef.current.focus();
+      }
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
@@ -605,9 +642,18 @@ function ConsoleModal({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/82 backdrop-blur-md p-4 md:p-8 xl:p-12 font-sans"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              onClose();
+            }
+          }}
         >
           {/* Modal Container */}
           <motion.div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="atlas-console-modal-title"
             initial={{ y: 24, scale: 0.98, opacity: 0 }}
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: 24, scale: 0.98, opacity: 0 }}
@@ -627,10 +673,11 @@ function ConsoleModal({
             <div className="flex items-center justify-between border-b border-[#f1efe8]/12 px-6 py-4 font-mono text-[9px] uppercase tracking-[0.32em] z-10">
               <div className="flex items-center gap-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#f1efe8]/80" />
-                <span className="font-bold">{title}</span>
+                <span id="atlas-console-modal-title" className="font-bold">{title}</span>
               </div>
               <button 
                 id="modal-close-btn"
+                ref={closeButtonRef}
                 onClick={onClose} 
                 className="hover-target text-[#f1efe8]/50 transition-colors hover:text-[#f1efe8]"
               >
@@ -654,13 +701,13 @@ function IssuesModalContent() {
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
 
   const allIssues = [
-    { label: "BLOCKED BY ROBOTS.TXT", score: "9.6", severity: "CRITICAL", desc: "19,846 pages matching admin/checkout checkout templates are excluded from crawl budget.", fix: "Refactor disallow rules inside /robots.txt to support dynamic querying exclusions." },
+    { label: "BLOCKED BY ROBOTS.TXT", score: "9.6", severity: "CRITICAL", desc: "19,846 admin and checkout URLs are blocked by robots rules.", fix: "Review robots directives and block only paths that should stay out of the crawl." },
     { label: "HTTPS REDIRECT LOOP", score: "9.2", severity: "CRITICAL", desc: "Redirect loops on 42 core localization URLs preventing search engine indexation.", fix: "Configure absolute paths in Nginx rewrite rules and prevent HTTP-to-HTTPS circular headers." },
-    { label: "ORPHANED PAGES", score: "8.7", severity: "HIGH", desc: "8,342 nodes discovered via sitemaps have zero incoming hyperlinks in the link graph.", fix: "Map these orphans to category landing hubs and add them to internal HTML index grids." },
+    { label: "ORPHANED PAGES", score: "8.7", severity: "HIGH", desc: "8,342 sitemap URLs have zero incoming HTML links in the crawl graph.", fix: "Map these orphan URLs to category hubs and add crawlable internal links." },
     { label: "MISSING CANONICAL", score: "7.2", severity: "HIGH", desc: "312 pages missing self-referencing canonical tags, causing duplicate candidate cluster risk.", fix: "Inject native <link rel=\"canonical\"> tags dynamically using Next.js head configuration." },
     { label: "SLOW LCP IMAGES", score: "7.8", severity: "HIGH", desc: "Hero banners lack fetchpriority=\"high\" and display layouts shift on mobile viewports.", fix: "Add fetchpriority=\"high\" attributes and define explicit width/height dimensions on images." },
     { label: "SOFT 404 DETECTED", score: "6.4", severity: "HIGH", desc: "18 pages returning 200 OK status codes on empty templates or search result pages.", fix: "Configure fallback handlers to send true 404 HTTP headers for empty listings." },
-    { label: "DUPLICATE WITHOUT CANONICAL", score: "5.9", severity: "MEDIUM", desc: "UTM tracking parameters causing duplicated indexation of core articles.", fix: "Set parameter handling rules inside GSC or use self-referencing canonical tags on query parameters." },
+    { label: "DUPLICATE WITHOUT CANONICAL", score: "5.9", severity: "MEDIUM", desc: "UTM tracking parameters create duplicate versions of core articles.", fix: "Consolidate parameter URLs with canonical tags, routing rules, or faceted-navigation controls." },
   ];
 
   const filtered = allIssues.filter(item => activeTab === 'ALL' || item.severity === activeTab);
@@ -840,7 +887,7 @@ function GraphModalContent() {
           })}
         </svg>
         <div className="absolute bottom-4 left-4 font-mono text-[8px] tracking-[0.2em] text-[#f1efe8]/45">
-          CLICK NODES TO TRACE INTRALINK RELATIONSHIPS
+          Click nodes to inspect internal links
         </div>
       </div>
 
@@ -863,7 +910,7 @@ function GraphModalContent() {
               <span className="text-[#f1efe8]">{activeNodeInfo.depth}</span>
             </div>
             <div className="flex justify-between">
-              <span>PAGE AUTHORITY:</span>
+              <span>INTERNAL LINK SCORE:</span>
               <span className="text-[#f1efe8]">{activeNodeInfo.authority}/100</span>
             </div>
             <div className="flex justify-between">
@@ -882,7 +929,7 @@ function GraphModalContent() {
         </div>
 
         <div className="border-t border-[#f1efe8]/10 pt-4 mt-6 text-[8px] text-[#f1efe8]/30 leading-relaxed uppercase">
-          [PAGE FLOW: REPRESENTING INTRA-LINK PATHWAYS TRANSMITTING INTERNAL LINK EQUITY MATRIX]
+          [Internal link paths in the sample graph]
         </div>
       </div>
     </div>
@@ -978,7 +1025,7 @@ function DonutModalContent() {
         )}
 
         <div className="border-t border-[#f1efe8]/10 pt-4 mt-6 text-[8px] text-[#f1efe8]/30 leading-relaxed uppercase">
-          [TOTAL INDEXABLE RATIO: 34.8% OPTIMAL COVERAGE LEVEL REACHED]
+          [Sample indexation split for this demo crawl]
         </div>
       </div>
     </div>
@@ -992,8 +1039,8 @@ function FindingsModalContent() {
     {
       title: "MISSING CANONICAL TAGS",
       severity: "HIGH IMPACT",
-      pages: "312 PAGES EFFECTED",
-      problem: "Pages load multiple parameter variations in duplicate slots without specifying search anchor indexes.",
+      pages: "312 PAGES AFFECTED",
+      problem: "Duplicate URL variants load without a clear canonical target.",
       badCode: `<!-- index.html -->\n<html>\n<head>\n  <title>Blog Post Title</title>\n</head>\n<body>...`,
       goodCode: `<!-- index.html -->\n<html>\n<head>\n  <link rel="canonical" href="https://example.com/blog/title" />\n  <title>Blog Post Title</title>\n</head>\n<body>...`
     },
@@ -1001,7 +1048,7 @@ function FindingsModalContent() {
       title: "REDIRECT CHAIN SEQUENCES",
       severity: "CRITICAL IMPACT",
       pages: "42 LOOPS REGISTERED",
-      problem: "HTTP redirects bounce through intermediate protocols, generating high latency spikes for crawl bots.",
+      problem: "Requests pass through unnecessary redirect hops before reaching the final URL.",
       badCode: `Request: GET /about -> HTTP 301 /about-us\nRequest: GET /about-us -> HTTP 301 /about-us/\nRequest: GET /about-us/ -> HTTP 200 OK`,
       goodCode: `Request: GET /about -> HTTP 301 /about-us/\nRequest: GET /about-us/ -> HTTP 200 OK`
     },
@@ -1009,7 +1056,7 @@ function FindingsModalContent() {
       title: "SCHEMA DISCONNECTION",
       severity: "MEDIUM IMPACT",
       pages: "8 WARNING LOGS",
-      problem: "Semantic schema graphs contain disconnected parent nodes, hindering AI semantic relation audits.",
+      problem: "JSON-LD nodes lack shared @id references, so Organization, WebSite, and WebPage entities do not connect cleanly.",
       badCode: `<!-- JSON-LD snippet missing linking references -->\n{\n  "@context": "https://schema.org",\n  "@type": "WebSite",\n  "name": "Void Agency"\n}`,
       goodCode: `<!-- Connected schema nodes via @id links -->\n{\n  "@context": "https://schema.org",\n  "@graph": [\n    {\n      "@type": "WebSite",\n      "@id": "https://example.com/#website",\n      "name": "Void Agency"\n    },\n    {\n      "@type": "Organization",\n      "@id": "https://example.com/#org",\n      "name": "Void Agency"\n    }\n  ]\n}`
     }
@@ -1068,7 +1115,7 @@ function FindingsModalContent() {
         </div>
 
         <div className="border-t border-[#f1efe8]/10 pt-4 mt-6 text-[8px] text-[#f1efe8]/30 uppercase">
-          [COMPARED USING CRAWLER DIAGNOSTIC SOURCE HEADERS AND INLINE HTML DOM TARGETS]
+        [Compared against HTTP headers and page HTML]
         </div>
       </div>
     </div>
@@ -1076,107 +1123,58 @@ function FindingsModalContent() {
 }
 
 function ExportsModalContent() {
-  const [exporting, setExporting] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [selectedFormat, setSelectedFormat] = useState<'PDF' | 'CSV' | 'PARQUET'>('PDF');
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  const startExport = () => {
-    setExporting(true);
-    setProgress(0);
-    setToastMessage(null);
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setExporting(false);
-          setToastMessage(`SYSTEM EXPORT COMPLETED: ${selectedFormat} PACKAGE GENERATED SUCCESSFULLY`);
-          return 100;
-        }
-        return prev + Math.floor(Math.random() * 15 + 5);
-      });
-    }, 100);
-  };
-
   return (
     <div className="flex flex-col justify-between h-full font-mono text-[9.5px] text-[#f1efe8] tracking-[0.1em]">
       <div className="space-y-6 max-w-xl">
         <div>
           <div className="text-[10px] text-[#f1efe8]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#f1efe8]/12 pb-2">
-            EXPORT EXCLUSION CONTROLS
+            SANITIZED EXPORT SAMPLE
           </div>
           <p className="font-sans text-[#f1efe8]/66 normal-case text-xs leading-relaxed mb-6">
-            Configure report parameters, database structures, and target layouts. Export evidence-backed technical SEO metrics.
+            This download is a real static CSV with sanitized crawl rows, indexability states, canonical notes, and evidence notes. PDF and Parquet packages are not exposed here until real files exist.
           </p>
         </div>
 
         <div>
           <div className="text-[9px] uppercase text-[#f1efe8]/45 tracking-[0.2em] mb-3">
-            SELECT DOWNLOAD FILE FORMAT:
+            AVAILABLE FILE:
           </div>
-          <div className="flex gap-4">
-            {(['PDF', 'CSV', 'PARQUET'] as const).map(fmt => (
-              <button
-                key={fmt}
-                id={`exports-format-${fmt.toLowerCase()}`}
-                onClick={() => setSelectedFormat(fmt)}
-                className={`hover-target px-4 py-2 border transition-all duration-200 ${selectedFormat === fmt ? 'border-[#f1efe8] bg-[#f1efe8] text-[#080807] font-bold' : 'border-[#f1efe8]/15 text-[#f1efe8]/54 hover:border-[#f1efe8]/30 hover:text-[#f1efe8]'}`}
-              >
-                {fmt} REPORT
-              </button>
-            ))}
+          <div className="flex flex-wrap gap-4">
+            <span className="border border-[#f1efe8] bg-[#f1efe8] px-4 py-2 font-bold text-[#080807]">CSV SAMPLE</span>
+            <span className="border border-[#f1efe8]/15 px-4 py-2 text-[#f1efe8]/38">PDF COMING SOON</span>
+            <span className="border border-[#f1efe8]/15 px-4 py-2 text-[#f1efe8]/38">PARQUET COMING SOON</span>
           </div>
         </div>
 
         <div className="space-y-2 text-[#f1efe8]/60">
           <div className="text-[9px] uppercase text-[#f1efe8]/45 tracking-[0.2em] mb-3">
-            MODULES INCLUDED IN PACKAGE:
+            SECTIONS INCLUDED IN PACKAGE:
           </div>
           <div className="flex items-center gap-3">
             <span className="h-2 w-2 bg-[#f1efe8]/60" />
-            <span>01. COMPLETE CRAWL SYSTEM GRAPH PATHS</span>
+            <span>01. CRAWL SUMMARY + LINK GRAPH</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="h-2 w-2 bg-[#f1efe8]/60" />
-            <span>02. SEVERITY RANKED ISSUE DIAGNOSTICS</span>
+            <span>02. SEVERITY-RANKED ISSUE LIST</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="h-2 w-2 bg-[#f1efe8]/60" />
-            <span>03. CORE WEB VITALS TELEMETRY LOGS</span>
+            <span>03. CORE WEB VITALS INPUTS</span>
           </div>
         </div>
       </div>
 
       <div className="mt-8 pt-6 border-t border-[#f1efe8]/12">
-        {exporting ? (
-          <div className="space-y-3">
-            <div className="flex justify-between items-center text-[9px] text-[#f1efe8]/80">
-              <span>COMPILING EVIDENCE DATABASE MODULES...</span>
-              <span>{progress}%</span>
-            </div>
-            <div className="w-full h-1 bg-white/10 overflow-hidden relative">
-              <motion.div 
-                className="absolute top-0 left-0 bottom-0 bg-[#f1efe8]" 
-                style={{ width: `${progress}%` }} 
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {toastMessage && (
-              <div className="p-3 bg-[#b7c8a8]/10 border border-[#b7c8a8]/30 text-[#b7c8a8] text-[9px]">
-                {toastMessage}
-              </div>
-            )}
-            <button
-              id="exports-trigger-btn"
-              onClick={startExport}
-              className="hover-target w-full py-3 bg-[#f1efe8] text-[#080807] font-bold uppercase tracking-[0.3em] hover:bg-[#f1efe8]/90 hover:text-[#080807] transition-colors"
-            >
-              [ RUN SYSTEM EXPORT & DOWNLOAD ]
-            </button>
-          </div>
-        )}
+        <a
+          id="exports-trigger-btn"
+          href="/research/atlas-sanitized-crawl-sample.csv"
+          download
+          className="hover-target block w-full py-3 bg-[#f1efe8] text-center text-[#080807] font-bold uppercase tracking-[0.3em] hover:bg-[#f1efe8]/90 hover:text-[#080807] transition-colors"
+          data-cursor-text="DOWNLOAD"
+        >
+          [ DOWNLOAD SANITIZED CSV ]
+        </a>
       </div>
     </div>
   );
@@ -1200,7 +1198,6 @@ export default function AtlasPage() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-canvas text-ink selection:bg-ink selection:text-canvas md:cursor-none">
-      <ShutterWipe />
       <div className="bg-noise pointer-events-none" />
       <PageTechnicalChrome tone="light" />
       {!prefersReducedMotion && <div className="hidden md:block">
@@ -1209,18 +1206,21 @@ export default function AtlasPage() {
       <ScrollProgress tone="dark" />
 
       <header className="sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-6 md:px-8 xl:px-10">
-        <div className="grid items-start gap-5 border-b border-ink/12 bg-[#f1efe8]/82 pb-5 text-[10px] uppercase tracking-[0.3em] backdrop-blur-sm md:grid-cols-[1fr_auto_1fr]">
-          <a href="/" id="atlas-brand-link" className="hover-target" data-cursor-text="HOME">
+        <div className="grid items-start gap-5 border-b border-ink/12 bg-[#f1efe8]/82 pb-5 text-[10px] uppercase tracking-[0.3em] backdrop-blur-sm grid-cols-2 md:grid-cols-[1fr_auto_1fr]">
+          <a href="/" id="atlas-brand-link" className="hover-target col-span-1 order-1" data-cursor-text="HOME">
             <span className="block font-medium text-ink">SULAYMAN BOWLES</span>
-            <span className="mt-2 block font-serif text-sm italic normal-case tracking-normal text-ink/54">Technical SEO · AI Search · Finance/Data</span>
+            <span className="mt-2 block font-serif text-sm italic normal-case tracking-normal text-ink/70">Technical SEO, Atlas, and finance research.</span>
           </a>
-          <nav className="flex flex-wrap items-center gap-3 md:justify-center md:gap-6">
+          <nav className="col-span-2 order-3 md:col-span-1 md:order-2 flex flex-wrap items-center gap-3 justify-center md:justify-center md:gap-5 mt-2 md:mt-0">
             <NavLink href="/#selected-works" id="atlas-nav-work">WORK</NavLink>
+            <NavLink href="/atlas" active id="atlas-nav-atlas">ATLAS</NavLink>
+            <NavLink href="/markets" id="atlas-nav-research">RESEARCH</NavLink>
             <NavLink href="/method" id="atlas-nav-method">METHOD</NavLink>
             <NavLink href="/about" id="atlas-nav-about">ABOUT</NavLink>
+            <NavLink href="/resume" id="atlas-nav-resume">RESUME</NavLink>
             <NavLink href="/#contact" id="atlas-nav-contact">CONTACT</NavLink>
           </nav>
-          <a href="/#contact" id="atlas-header-contact" data-cursor-text="CONTACT" className="hover-target flex items-center gap-4 justify-self-start text-ink/75 transition-colors hover:text-ink md:justify-self-end">
+          <a href="/#contact" id="atlas-header-contact" data-cursor-text="CONTACT" className="hover-target flex items-center gap-4 col-span-1 order-2 justify-self-end text-ink/75 transition-colors hover:text-ink md:col-span-1 md:order-3 md:justify-self-end">
             <span className="h-7 w-7 rounded-full border border-ink/28 flex-shrink-0" />
             <span>CONTACT</span>
           </a>
@@ -1229,7 +1229,7 @@ export default function AtlasPage() {
 
       <section className="relative mx-auto grid min-h-screen w-full max-w-[1480px] grid-cols-1 gap-12 px-4 pb-16 pt-32 md:px-8 lg:grid-cols-12 xl:px-10 lg:pb-24 lg:pt-40">
         <ScrollReveal className="lg:col-span-4">
-          <div className="mb-8 text-xs uppercase tracking-[0.36em] text-ink/48">( 02 )</div>
+          <div className="mb-8 text-xs uppercase tracking-[0.36em] text-ink/70">( 02 )</div>
           <h1 
             style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
             className="font-serif text-[clamp(4.6rem,10vw,10.75rem)] italic leading-[0.82] tracking-[-0.055em]"
@@ -1237,24 +1237,27 @@ export default function AtlasPage() {
             <ScrambleText text="ATLAS" trigger="once" />
           </h1>
           <p className="mt-10 max-w-[25rem] font-serif text-[clamp(2rem,4vw,4.25rem)] italic leading-[0.92] tracking-[-0.025em]">
-            <RevealText text="Crawl-based evidence engine for search." delay={0.25} />
+            <RevealText elementType="span" text="Technical SEO audit console." delay={0.25} />
           </p>
           <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">
-            Atlas is a technical SEO audit system that crawls, interprets, and scores websites to surface what search engines see across architecture, indexation, performance, and AI-search readiness.
+            Atlas crawls a site, stores URL-level records, and ranks problems across crawler access, indexability, canonicalization, internal links, rendering, schema, performance, and AI crawler / LLM search readiness.
           </p>
           <dl className="mt-12 grid max-w-[30rem] grid-cols-[0.6fr_1fr] gap-x-8 gap-y-5 border-t border-ink/20 pt-6 text-[10px] uppercase tracking-[0.24em]">
-            <dt className="text-ink/45">ROLE</dt>
+            <dt className="text-ink/70">ROLE</dt>
             <dd>BUILDER / OPERATOR</dd>
-            <dt className="text-ink/45">OUTPUT</dt>
-            <dd>CRAWL DATA, ISSUE LOGIC, INSIGHTS, REPORTS</dd>
+            <dt className="text-ink/70">OUTPUT</dt>
+            <dd>URL TABLES, ISSUE LOGIC, EXPORTS, REPORTS</dd>
           </dl>
+          <a href="/atlas/technical-seo-audit-console" className="hover-target mt-8 inline-flex border-b border-ink/24 pb-2 text-[10px] uppercase tracking-[0.26em] text-ink/62 transition-colors hover:border-ink hover:text-ink" data-cursor-text="CONSOLE">
+            Technical SEO audit console page
+          </a>
         </ScrollReveal>
 
         <ScrollReveal className="lg:col-span-8" delay={0.1} yOffset={18} blur={false}>
           <div className="group">
             <AtlasCrawlMap className="aspect-[1000/820] w-full transition-transform duration-700 group-hover:-translate-y-1" />
           </div>
-          <div className="mt-4 flex items-center justify-between border-b border-ink/15 pb-4 text-[10px] uppercase tracking-[0.28em] text-ink/55">
+          <div className="mt-4 flex items-center justify-between border-b border-ink/15 pb-4 text-[10px] uppercase tracking-[0.28em] text-ink/70">
             <span>SAMPLE DATASET: EXAMPLE.COM</span>
             <span>DEMO CRAWL VIEW: APR 18, 2024</span>
           </div>
@@ -1264,14 +1267,14 @@ export default function AtlasPage() {
       <section className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-ink/12 px-4 py-16 md:px-8 lg:grid-cols-12 xl:px-10 xl:py-24">
         <ScrollReveal className="border-l border-ink/22 pl-6 lg:col-span-4">
           <blockquote className="max-w-[420px] font-serif text-[clamp(2rem,3.6vw,4.8rem)] italic leading-[0.95] tracking-[-0.025em]">
-            I built Atlas to turn raw crawl data into structured, defensible evidence. Not just what's wrong - but why it matters.
+            Atlas starts with the crawl record. Every finding should point back to a URL, header, directive, template, link, or render difference.
           </blockquote>
         </ScrollReveal>
         <div className="grid gap-10 md:grid-cols-3 lg:col-span-8">
           {[
-            ['BEYOND BASIC CRAWLS', 'Atlas goes deeper than surface reports. It interprets signals, correlates patterns, and prioritizes issues by impact on indexation and visibility.'],
-            ['AI-SEARCH AWARE', 'Atlas evaluates content and structure for AI-search discoverability: entity clarity, source signals, freshness, and retrievability.'],
-            ['BUILT FOR OPERATORS', 'Designed for SEO operators and technical teams who need reliable evidence, clear logic, and exportable outputs to drive decisions.'],
+            ['CRAWLER ACCESS + INDEXABILITY', 'Atlas checks robots rules, response codes, noindex directives, sitemap exposure, and rendered/source differences so pages can be evaluated as crawlable or blocked.'],
+            ['CANONICALS + INTERNAL LINKS', 'Atlas groups URL records by canonical target, crawl depth, template, incoming links, outgoing links, and orphan risk.'],
+            ['AI CRAWLER / LLM READINESS', 'Atlas checks source text, schema, entity pages, citation surfaces, and internal context so important pages are easier to crawl, quote, and review.'],
           ].map(([title, copy], index) => (
             <div key={title}>
               <ScrollReveal delay={index * 0.08} yOffset={18} blur={false}>
@@ -1284,16 +1287,40 @@ export default function AtlasPage() {
         </div>
       </section>
 
+      <section className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-b border-ink/12 px-4 py-16 md:px-8 lg:grid-cols-[0.34fr_0.66fr] xl:px-10 xl:py-24">
+        <ScrollReveal>
+          <p className="mb-5 text-[10px] uppercase tracking-[0.32em] text-ink/48">Case-study frame</p>
+          <h2 className="max-w-xl font-serif text-[clamp(3rem,6vw,7rem)] italic leading-[0.88] tracking-[-0.04em]">
+            What Atlas catches, and what evidence it leaves behind.
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal delay={0.08} yOffset={18} blur={false}>
+          <div className="grid gap-px overflow-hidden border border-ink/14 md:grid-cols-2">
+            {[
+              ['Crawler access failures', 'Robots blocks, noindex directives, blocked resources, render-only content, and URLs excluded before search engines or AI crawlers can inspect them.'],
+              ['Indexability and canonical gaps', 'Duplicate candidates, missing self-canonicals, conflicting canonical targets, soft 404s, redirect chains, and sitemap/index mismatch.'],
+              ['Internal-link and architecture risk', 'Deep pages, orphan candidates, weak hub links, thin anchor context, and templates that hide important URLs from crawl paths.'],
+              ['Evidence output', 'URL tables, issue rows, affected examples, source/render notes, link graph context, export files, and owner-ready fix notes.'],
+            ].map(([title, copy]) => (
+              <article key={title} className="bg-ink/[0.018] p-5">
+                <h3 className="mb-5 text-[10px] uppercase tracking-[0.26em] text-ink">{title}</h3>
+                <p className="text-sm leading-relaxed text-ink/62">{copy}</p>
+              </article>
+            ))}
+          </div>
+        </ScrollReveal>
+      </section>
+
       <section id="process" className="mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal>
           <div className="border border-ink/18">
             <div className="flex items-center justify-between border-b border-ink/18 px-5 py-5 text-[10px] uppercase tracking-[0.32em]">
               <h2>THE ATLAS PROCESS</h2>
-              <span className="text-ink/45">SYSTEM PATH</span>
+              <span className="text-ink/70">AUDIT PATH</span>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-px bg-ink/14">
               {processSteps.map((step) => (
-                <div key={step.index} className="contents">
+                <div key={step.index} className="h-full">
                   <AtlasProcessStep {...step} />
                 </div>
               ))}
@@ -1310,16 +1337,16 @@ export default function AtlasPage() {
               <h2 className="font-serif text-[clamp(3rem,7vw,8rem)] italic leading-none tracking-[-0.04em]">EVIDENCE &amp; OUTPUTS</h2>
             </div>
             <p className="max-w-md text-sm leading-relaxed text-canvas/55">
-              Structured artifacts that make crawler observations reviewable, exportable, and defensible across technical teams.
+              URL tables, issue logs, link graphs, indexation breakdowns, exports, and reports a technical team can check.
             </p>
           </ScrollReveal>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-5">
-            <AtlasOutputCard title="ISSUE DETECTION" id="atlas-card-issues" copy="Prioritized technical issues with impact scoring." cta="VIEW ALL" onCtaClick={() => setActiveModal('issues')}>
+            <AtlasOutputCard title="ISSUE DETECTION" id="atlas-card-issues" copy="Ranked technical issues with affected URLs and severity." cta="VIEW ALL" onCtaClick={() => setActiveModal('issues')}>
               <MetricTable />
             </AtlasOutputCard>
 
-            <AtlasOutputCard title="INTERNAL LINK GRAPH" id="atlas-card-graph" copy="Understand flow, depth, and orphan risk." cta="EXPLORE GRAPH" onCtaClick={() => setActiveModal('graph')}>
+            <AtlasOutputCard title="INTERNAL LINK GRAPH" id="atlas-card-graph" copy="See crawl depth, inlinks, outlinks, and orphan risk." cta="EXPLORE GRAPH" onCtaClick={() => setActiveModal('graph')}>
               <MiniGraph />
             </AtlasOutputCard>
 
@@ -1327,17 +1354,17 @@ export default function AtlasPage() {
               <MiniDonut />
             </AtlasOutputCard>
 
-            <AtlasOutputCard title="TECHNICAL FINDINGS" id="atlas-card-findings" copy="Examples with evidence and remediation." cta="VIEW DETAILS" onCtaClick={() => setActiveModal('findings')}>
+            <AtlasOutputCard title="TECHNICAL FINDINGS" id="atlas-card-findings" copy="Examples with source records and fix notes." cta="VIEW DETAILS" onCtaClick={() => setActiveModal('findings')}>
               <div className="w-full border border-canvas/18 p-4">
                 <div className="mb-6 flex items-start justify-between">
                   <div>
                     <h4 className="text-xs uppercase tracking-[0.26em] text-canvas/82">Missing Canonical</h4>
-                    <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-canvas/48">312 pages</p>
+                    <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-canvas/60">312 pages</p>
                   </div>
                   <span className="text-xl font-serif italic text-canvas/58">7.2</span>
                 </div>
                 <p className="mb-5 text-sm leading-relaxed text-canvas/58">Multiple pages missing self-referencing canonicals.</p>
-                <div className="space-y-2 border-t border-[#f1efe8]/12 pt-4 text-[10px] uppercase tracking-[0.15em] text-canvas/48">
+                <div className="space-y-2 border-t border-[#f1efe8]/12 pt-4 text-[10px] uppercase tracking-[0.15em] text-canvas/60">
                   <div>Affected URLs:</div>
                   <div>/blog/how-to-audit</div>
                   <div>/pricing/plans</div>
@@ -1346,9 +1373,9 @@ export default function AtlasPage() {
               </div>
             </AtlasOutputCard>
 
-            <AtlasOutputCard title="EXPORTS & DASHBOARDS" id="atlas-card-exports" copy="Shareable reports and operator dashboards." cta="OPEN DASHBOARD" onCtaClick={() => setActiveModal('exports')}>
+            <AtlasOutputCard title="EXPORT SAMPLE" id="atlas-card-exports" copy="One sanitized CSV is available; PDF, Parquet, and dashboard packages stay labeled as coming soon." cta="VIEW EXPORT SAMPLE" onCtaClick={() => setActiveModal('exports')}>
               <ul className="w-full space-y-4 text-[11px] uppercase tracking-[0.18em] text-canvas/62">
-                {['Executive Summary (PDF)', 'Technical Audit (PDF)', 'Issue Export (CSV)', 'Crawl Data (Parquet)', 'Looker Studio Dashboard'].map((item) => (
+                {['Sanitized Crawl Sample (CSV)', 'Executive Summary (PDF coming soon)', 'Technical Audit (PDF coming soon)', 'Crawl Data (Parquet coming soon)', 'Operator Dashboard (coming soon)'].map((item) => (
                   <li key={item} className="flex items-center justify-between border-b border-canvas/12 pb-3">
                     <span>{item}</span>
                     <span className="h-1.5 w-1.5 rounded-full bg-canvas/45" />
@@ -1363,10 +1390,10 @@ export default function AtlasPage() {
       <section id="next-steps" className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 px-4 py-16 md:px-8 lg:grid-cols-12 xl:px-10 xl:py-24">
         <ScrollReveal className="lg:col-span-4">
           <h2 className="max-w-[32rem] font-serif text-[clamp(3.5rem,8vw,9rem)] italic leading-[0.84] tracking-[-0.045em]">
-            System intelligence you can act on.
+            Crawl records your team can act on.
           </h2>
           <p className="mt-8 max-w-[28rem] text-base leading-relaxed text-ink/62">
-            Atlas turns complexity into clarity - so teams can fix what matters and prove the impact.
+            Atlas groups affected URLs, shows why an issue matters, and exports the records needed to fix it.
           </p>
           <a href="/#contact" aria-label="Contact Sulayman Bowles" data-cursor-text="CONTACT" className="hover-target mt-10 block h-12 w-12 rounded-full border border-ink/35 transition-colors hover:bg-ink hover:text-canvas" />
         </ScrollReveal>
@@ -1376,10 +1403,10 @@ export default function AtlasPage() {
           <div className="grid gap-0 md:grid-cols-2">
             {[
               ['01', 'VIEW RELATED WORK', 'See other projects in SEO, finance, and data.'],
-              ['02', 'WORK WITH ME', "Let's build systems that move the needle."],
+              ['02', 'WORK WITH ME', 'Use Atlas on a real site.'],
             ].map(([index, title, copy]) => (
-              <a key={title} href={index === '01' ? '/#selected-works' : '/#contact'} data-cursor-text={index === '01' ? 'WORK' : 'CONTACT'} className="hover-target group border-b border-ink/16 py-8 md:border-r md:pr-8 md:last:border-r-0 md:last:pl-8">
-                <div className="mb-8 text-[10px] uppercase tracking-[0.28em] text-ink/42">{index}</div>
+              <a key={title} href={index === '01' ? '/#selected-works' : '/#contact'} data-cursor-text={index === '01' ? 'WORK' : 'CONTACT'} className="hover-target group border-b border-ink/16 py-8 last:border-b-0 md:border-b-0 md:border-r md:pr-8 md:last:border-r-0 md:last:pl-8">
+                <div className="mb-8 text-[10px] uppercase tracking-[0.28em] text-ink/70">{index}</div>
                 <h3 className="mb-4 text-xs uppercase tracking-[0.3em]">{title}</h3>
                 <p className="mb-7 text-sm leading-relaxed text-ink/62">{copy}</p>
                 <span className="inline-block text-xs tracking-[0.28em] transition-transform group-hover:translate-x-1">-&gt;</span>
@@ -1391,16 +1418,16 @@ export default function AtlasPage() {
         <ScrollReveal className="lg:col-span-3" delay={0.16} blur={false}>
           <div className="border border-ink/18 p-5 text-[10px] uppercase tracking-[0.28em]">
             <div className="mb-10 flex items-center justify-between border-b border-ink/14 pb-5">
-              <span className="text-ink/45">PROJECT</span>
+              <span className="text-ink/70">PROJECT</span>
               <span>02 / 06</span>
             </div>
             <a href="/#systems" data-cursor-text="PREV" className="hover-target mb-8 grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-opacity hover:opacity-70">
-              <span className="text-ink/42">PREV</span>
+              <span className="text-ink/70">PREV</span>
               <span>01 / FINANCE</span>
               <span>UP</span>
             </a>
             <a href="/method" data-cursor-text="NEXT" className="hover-target grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-opacity hover:opacity-70">
-              <span className="text-ink/42">NEXT</span>
+              <span className="text-ink/70">NEXT</span>
               <span>03 / VOID</span>
               <span>DOWN</span>
             </a>
@@ -1408,15 +1435,18 @@ export default function AtlasPage() {
         </ScrollReveal>
       </section>
 
-      <footer className="mx-auto grid max-w-[1480px] grid-cols-1 items-start gap-8 border-t border-ink/12 px-4 py-8 text-[10px] uppercase tracking-[0.3em] text-ink/54 md:grid-cols-[1fr_auto_1fr_auto] md:px-8 xl:px-10">
+      <footer className="mx-auto grid max-w-[1480px] grid-cols-1 items-start gap-8 border-t border-ink/12 px-4 py-8 text-[10px] uppercase tracking-[0.3em] text-ink/70 md:grid-cols-[1fr_auto_1fr_auto] md:px-8 xl:px-10">
         <div>
           <div className="text-ink">SULAYMAN BOWLES</div>
-          <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">Technical SEO · AI Search · Finance/Data</div>
+          <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">Technical SEO, Atlas, and finance research.</div>
         </div>
         <nav className="flex flex-wrap gap-5" id="atlas-footer-nav">
           <NavLink href="/#selected-works" id="atlas-footer-work">WORK</NavLink>
+          <NavLink href="/atlas" active id="atlas-footer-atlas">ATLAS</NavLink>
+          <NavLink href="/markets" id="atlas-footer-research">RESEARCH</NavLink>
           <NavLink href="/method" id="atlas-footer-method">METHOD</NavLink>
           <NavLink href="/about" id="atlas-footer-about">ABOUT</NavLink>
+          <NavLink href="/resume" id="atlas-footer-resume">RESUME</NavLink>
           <NavLink href="/#contact" id="atlas-footer-contact">CONTACT</NavLink>
         </nav>
         <div className="md:text-right">

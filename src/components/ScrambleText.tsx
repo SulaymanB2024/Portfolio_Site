@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'motion/react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface ScrambleTextProps {
   text: string;
@@ -13,20 +14,10 @@ export function ScrambleText({ text, className = '', trigger = 'hover' }: Scramb
   const [displayText, setDisplayText] = useState(text);
   const [isAnimating, setIsAnimating] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
-  useEffect(() => {
-    if (trigger === 'always') {
-      const interval = setInterval(() => {
-        scramble();
-      }, 3000);
-      return () => clearInterval(interval);
-    } else if (trigger === 'once' && !hasAnimated) {
-      scramble();
-    }
-  }, [trigger, hasAnimated]);
-
-  const scramble = () => {
-    if (isAnimating) return;
+  const scramble = useCallback(() => {
+    if (prefersReducedMotion || isAnimating) return;
     setIsAnimating(true);
     setHasAnimated(true);
 
@@ -56,14 +47,36 @@ export function ScrambleText({ text, className = '', trigger = 'hover' }: Scramb
     };
     
     animate();
-  };
+  }, [isAnimating, prefersReducedMotion, text]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setDisplayText(text);
+      setIsAnimating(false);
+      return;
+    }
+
+    if (trigger === 'always') {
+      const interval = setInterval(() => {
+        scramble();
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+
+    if (trigger === 'once' && !hasAnimated) {
+      scramble();
+    }
+  }, [hasAnimated, prefersReducedMotion, scramble, text, trigger]);
 
   return (
     <motion.span
-      className={`inline-block ${className}`}
+      className={`scramble-text relative inline-block ${className}`}
+      aria-label={text}
+      data-scramble-text={displayText}
+      data-scrambling={isAnimating && !prefersReducedMotion ? 'true' : 'false'}
       onMouseEnter={() => trigger === 'hover' && scramble()}
     >
-      {displayText}
+      <span className="scramble-text__semantic">{text}</span>
     </motion.span>
   );
 }

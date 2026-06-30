@@ -5,7 +5,6 @@ import VoidCrawlMap from '../components/VoidCrawlMap';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
-import { ShutterWipe } from '../components/ShutterWipe';
 import { SmoothCursor } from '../components/SmoothCursor';
 import { ScrambleText } from '../components/ScrambleText';
 import { RevealText } from '../components/RevealText';
@@ -56,25 +55,25 @@ const methodColumns: MethodColumn[] = [
     number: '01',
     title: 'CRAWL',
     visual: 'crawl',
-    copy: 'Map the site as search engines see it. Inspect indexable URLs, crawl depth, sitemaps, robots rules, redirects, canonicals, metadata, templates, and internal links.',
+    copy: 'Build a crawl map: indexable URLs, crawl depth, sitemaps, robots rules, redirects, canonicals, metadata, templates, and internal links.',
   },
   {
     number: '02',
     title: 'DIAGNOSE',
     visual: 'diagnose',
-    copy: 'Find the issues that actually affect discovery, ranking, AI retrieval, and conversion. Every finding is tied to evidence, affected URLs, severity, and likely business impact.',
+    copy: 'Separate cosmetic warnings from problems that affect crawl access, indexation, rankings, and conversion paths. Every finding is tied to records, affected URLs, severity, and likely business impact.',
   },
   {
     number: '03',
     title: 'REPAIR',
     visual: 'repair',
-    copy: 'Turn the audit into implementation work: fix architecture, consolidate weak pages, improve metadata, strengthen schema, clean internal links, correct crawl waste, and improve page speed.',
+    copy: 'Turn the audit into implementation work: fix architecture, consolidate weak pages, rewrite metadata, strengthen schema, clean internal links, reduce crawl waste, and improve page speed.',
   },
   {
     number: '04',
     title: 'MEASURE',
     visual: 'measure',
-    copy: 'Track what changed after implementation: indexation, search queries, rankings, page performance, crawl behavior, AI visibility, and conversion events.',
+    copy: 'Track what changed after implementation: indexation, search queries, rankings, page performance, crawl behavior, AI crawler access checks, and conversion events.',
   },
 ];
 
@@ -97,7 +96,7 @@ const processSteps: ProcessStep[] = [
   {
     title: 'DELIVER',
     icon: 'report',
-    copy: 'Clear reports, implementation guidance, and measurable next steps.',
+    copy: 'Reports, implementation notes, exports, and a fix order.',
   },
 ];
 
@@ -106,29 +105,29 @@ const caseStudies: CaseStudy[] = [
     category: 'TECHNICAL SEO',
     title: 'Indexation Audit at Scale',
     visual: 'urls',
-    href: '/atlas',
-    copy: 'Mapped thousands of URLs to uncover crawl waste, duplicate templates, weak canonicals, orphaned pages, redirect chains, and pages blocked from meaningful discovery.',
+    href: '/method/indexation-audit',
+    copy: 'Mapped thousands of URLs to uncover crawl waste, duplicate templates, weak canonicals, orphaned pages, redirect chains, and pages blocked from crawler access or internal links.',
   },
   {
-    category: 'AI SEARCH',
-    title: 'AI Visibility Benchmark',
+    category: 'CRAWLER ACCESS',
+    title: 'AI Crawler Access Review',
     visual: 'entity',
-    href: '#case-studies',
-    copy: 'Reviewed whether a company could be clearly understood and cited by AI systems. Tested entity, clarity, answer-ready pages, schema, source structure, and crawler access.',
+    href: '/method/ai-crawler-access-audit',
+    copy: 'Checked whether crawlers and AI answer systems could access and parse the company’s core facts: brand, product, category, founder, proof pages, schema, and source text.',
   },
   {
     category: 'ECOMMERCE SEO',
-    title: 'Product Discovery System',
+    title: 'Product Discovery Audit',
     visual: 'heatmap',
-    href: '#case-studies',
+    href: '/method/internal-link-audit',
     copy: 'Audited product and collection pages to find missing metadata, thin templates, weak internal links, duplicate paths, and search-intent gaps.',
   },
   {
     category: 'LOCAL SEO',
-    title: 'Service-Area Visibility Audit',
+    title: 'Service-Area Search Audit',
     visual: 'local',
-    href: '#case-studies',
-    copy: 'Mapped location pages, service pages, Google Business Profile signals, crawl structure, and local entity clarity to improve discovery in high-intent searches.',
+    href: '/method/technical-seo-audit',
+    copy: 'Audited whether service and location pages matched Google Business Profile data, reviews, NAP details, internal links, and city-level search intent.',
   },
 ];
 
@@ -250,10 +249,15 @@ function MethodVisual({ type }: { type: MethodColumn['visual'] }) {
         <path d="M16 62 H244 M16 42 H244 M16 22 H244" stroke="currentColor" opacity="0.1" />
       </svg>
       <div className="grid gap-2 text-[9px] uppercase tracking-[0.18em] text-[#f1efe8]/52">
-        {['INDEXABLE PAGES +28%', 'IMPRESSIONS +41%', 'AI VISIBILITY +27%', 'CONVERSIONS +18%'].map((metric) => (
-          <div key={metric} className="flex justify-between border-b border-[#f1efe8]/10 pb-2">
-            <span>{metric.split(' +')[0]}</span>
-            <span className="text-[#b7c8a8]/80">+{metric.split(' +')[1]}</span>
+        {[
+          ['INDEXATION ISSUES', 'FOUND'],
+          ['QUERY GAPS', 'REVIEWED'],
+          ['AI CRAWLER ACCESS', 'CHECKED'],
+          ['CONVERSION EVENTS', 'MAPPED'],
+        ].map(([label, value]) => (
+          <div key={label} className="flex justify-between border-b border-[#f1efe8]/10 pb-2">
+            <span>{label}</span>
+            <span className="text-[#b7c8a8]/80">{value}</span>
           </div>
         ))}
       </div>
@@ -264,11 +268,11 @@ function MethodVisual({ type }: { type: MethodColumn['visual'] }) {
 function MethodColumnView({ item }: { item: MethodColumn }) {
   return (
     <motion.article
-      className="group border-[#f1efe8]/12 py-8 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] md:border-r md:px-6 md:last:border-r-0"
+      className="group bg-[#080807] py-8 px-6 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] h-full"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
     >
-      <div className="mb-10 flex items-start justify-between text-[10px] uppercase tracking-[0.32em] text-[#f1efe8]/38">
+      <div className="mb-10 flex items-start justify-between text-[10px] uppercase tracking-[0.32em] text-[#f1efe8]/60">
         <span className="font-serif text-3xl italic tracking-normal text-[#f1efe8]/64 transition-colors duration-500 group-hover:text-[#f1efe8]">{item.number}</span>
         <span>METHOD</span>
       </div>
@@ -403,13 +407,13 @@ function ProcessStepCard({ step, index }: { step: ProcessStep; index: number }) 
   const [isHovered, setIsHovered] = useState(false);
   return (
     <motion.div
-      className="group relative border-[#f1efe8]/12 p-6 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] md:border-r md:last:border-r-0"
+      className="group relative bg-[#080807] p-6 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] h-full"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/38">
+      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/60">
         <span>{String(index + 1).padStart(2, '0')}</span>
         <span>{index < 3 ? '→' : 'END'}</span>
       </div>
@@ -552,6 +556,9 @@ function CaseStudyVisual({ type, isHovered }: { type: CaseStudy['visual']; isHov
 
 function CaseStudyCard({ study }: { study: CaseStudy }) {
   const [isHovered, setIsHovered] = useState(false);
+  const hasRealCaseRoute = study.href !== '#case-studies';
+  const ctaId = `method-case-study-${study.title.toLowerCase().replace(/\s+/g, '-')}`;
+
   return (
     <motion.article
       className="group relative grid min-h-[560px] grid-rows-[auto_auto_1fr_auto] overflow-hidden border border-[#f1efe8]/12 p-6 transition-[border-color,background-color] duration-500 before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:border-[#f1efe8]/32 hover:bg-[#f1efe8]/[0.025] hover:before:w-full"
@@ -571,7 +578,13 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
       <div className="my-9 self-center transition-opacity duration-500 md:opacity-75 md:group-hover:opacity-100">
         <CaseStudyVisual type={study.visual} isHovered={isHovered} />
       </div>
-      <ArrowLink id={`method-case-study-${study.title.toLowerCase().replace(/\s+/g, '-')}`} href={study.href}>VIEW CASE STUDY</ArrowLink>
+      {hasRealCaseRoute ? (
+        <ArrowLink id={ctaId} href={study.href}>VIEW EXAMPLE FRAMEWORK</ArrowLink>
+      ) : (
+        <span id={ctaId} className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/45">
+          FULL CASE STUDY COMING SOON
+        </span>
+      )}
     </motion.article>
   );
 }
@@ -581,7 +594,6 @@ export default function VoidAgencyMethodPage() {
 
   return (
     <main id="top" className="min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] md:cursor-none">
-      <ShutterWipe />
       <DarkNoise />
       <PageTechnicalChrome tone="dark" />
       {!prefersReducedMotion && <div className="hidden md:block">
@@ -590,18 +602,18 @@ export default function VoidAgencyMethodPage() {
       <ScrollProgress />
 
       <header className="sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-6 md:px-8 xl:px-10">
-        <div className="grid items-start gap-5 border-b border-[#f1efe8]/12 bg-[#080807]/82 pb-5 text-[10px] uppercase tracking-[0.3em] backdrop-blur-sm md:grid-cols-[1fr_auto_1fr]">
-          <a href="/" id="method-brand-link" className="hover-target" data-cursor-text="HOME">
+        <div className="grid items-start gap-5 border-b border-[#f1efe8]/12 bg-[#080807]/82 pb-5 text-[10px] uppercase tracking-[0.3em] backdrop-blur-sm grid-cols-2 md:grid-cols-[1fr_auto_1fr]">
+          <a href="/" id="method-brand-link" className="hover-target col-span-1 order-1" data-cursor-text="HOME">
             <span className="block font-medium text-[#f1efe8]">VOID AGENCY</span>
-            <span className="mt-2 block font-serif text-sm italic normal-case tracking-normal text-[#f1efe8]/54">Technical SEO · AI Search · Web Visibility</span>
+            <span className="mt-2 block font-serif text-sm italic normal-case tracking-normal text-[#f1efe8]/54">Technical SEO audits for crawl, indexation, content, and conversion.</span>
           </a>
-          <nav className="flex flex-wrap items-center gap-3 md:justify-center md:gap-6">
+          <nav className="col-span-2 order-3 md:col-span-1 md:order-2 flex flex-wrap items-center gap-3 justify-center md:justify-center md:gap-6 mt-2 md:mt-0">
             <NavLink href="/#selected-works" id="method-nav-work">WORK</NavLink>
             <NavLink href="/method" active id="method-nav-method">METHOD</NavLink>
             <NavLink href="/about" id="method-nav-about">ABOUT</NavLink>
             <NavLink href="/#contact" id="method-nav-contact">CONTACT</NavLink>
           </nav>
-          <a href="/#contact" id="method-header-contact" data-cursor-text="CONTACT" className="hover-target flex items-center gap-4 justify-self-start text-[#f1efe8]/75 transition-colors hover:text-[#f1efe8] md:justify-self-end">
+          <a href="/#contact" id="method-header-contact" data-cursor-text="CONTACT" className="hover-target flex items-center gap-4 col-span-1 order-2 justify-self-end text-[#f1efe8]/75 transition-colors hover:text-[#f1efe8] md:col-span-1 md:order-3 md:justify-self-end">
             <span className="h-7 w-7 rounded-full border border-[#f1efe8]/28" />
             <span>CONTACT</span>
           </a>
@@ -610,22 +622,23 @@ export default function VoidAgencyMethodPage() {
 
       <section className="mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] xl:px-10 xl:pt-20">
         <ScrollReveal yOffset={18} blur={false} className="min-w-0">
-          <div className="mb-9 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/48">METHOD</div>
+          <div className="mb-9 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/60">METHOD</div>
           <h1 
             style={{ viewTransitionName: 'void-title' } as CSSProperties}
             className="font-serif text-[clamp(5.2rem,12vw,12.4rem)] italic leading-[0.74] tracking-[-0.055em] text-[#f1efe8]"
           >
             <ScrambleText text="VOID" trigger="once" />
             <br />
+            {' '}
             <ScrambleText text="AGENCY." trigger="once" />
           </h1>
-          <p className="mt-12 max-w-xl text-sm font-medium uppercase leading-relaxed tracking-[0.24em] text-[#f1efe8]/82">
-            <RevealText text="TECHNICAL SEO SYSTEMS FOR SEARCH," delay={0.25} />
+          <p className="mt-12 max-w-xl text-sm font-medium uppercase leading-relaxed tracking-[0.24em] text-[#f1efe8]/60">
+            <RevealText elementType="span" text="TECHNICAL SEO AUDITS FOR CRAWL," delay={0.25} />
             <br />
-            <RevealText text="AI VISIBILITY, AND CONVERSION." delay={0.4} />
+            <RevealText elementType="span" text="INDEXATION, SCHEMA, AND CONVERSION." delay={0.4} />
           </p>
           <p className="mt-8 max-w-[34rem] text-base leading-relaxed text-[#f1efe8]/58">
-            Void Agency audits the technical layer behind search visibility: crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and AI crawler access. The goal is simple: make your site easier to find, understand, cite, and act on.
+            Void Agency audits crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and AI crawler access. Findings are tied to affected URLs, templates, queries, and next actions.
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-8">
             <CircleAuditButton id="method-hero-audit-btn" />
@@ -636,7 +649,7 @@ export default function VoidAgencyMethodPage() {
         <ScrollReveal delay={0.08} yOffset={18} blur={false} className="w-full self-center">
           <div className="group">
             <VoidCrawlMap className="aspect-[900/700] w-full transition-transform duration-700 group-hover:-translate-y-1" />
-            <div className="mt-4 grid grid-cols-2 border-y border-[#f1efe8]/12 text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/46 md:grid-cols-4">
+            <div className="mt-4 grid grid-cols-2 border-y border-[#f1efe8]/12 text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/60 md:grid-cols-4">
               {['CRAWL PATHS', 'INDEXATION', 'AI ACCESS', 'CONVERSION'].map((item) => (
                 <span key={item} className="border-b border-[#f1efe8]/10 px-3 py-3 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">{item}</span>
               ))}
@@ -648,22 +661,22 @@ export default function VoidAgencyMethodPage() {
       <section id="overview" className="mx-auto max-w-[1480px] border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.4fr]">
           <ScrollReveal yOffset={18} blur={false}>
-            <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/42">OVERVIEW</div>
+            <h2 className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/60">OVERVIEW</h2>
             <p className="max-w-[44rem] font-serif text-[clamp(2.8rem,5.4vw,6.2rem)] italic leading-[0.92] tracking-[-0.035em]">
-              Search visibility is no longer only about ranking pages. It is about whether Google, AI systems, and customers can understand your site clearly enough to trust it.
+              Search work starts with access and structure: which URLs are crawlable, indexable, internally linked, canonicalized, fast enough, and clear about the business they represent.
             </p>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-[#f1efe8]/58">
-              Void Agency finds the structural problems that block that understanding, then turns them into a prioritized plan your team can implement.
+              Void Agency finds the technical blockers, then turns them into a fix list tied to affected pages and expected effort.
             </p>
             <p className="mt-10 max-w-2xl border-t border-[#f1efe8]/12 pt-6 text-[10px] uppercase leading-loose tracking-[0.22em] text-[#f1efe8]/42">
-              BUILT FOR FOUNDERS, GROWTH TEAMS, SAAS COMPANIES, ECOMMERCE BRANDS, LOCAL SERVICE BUSINESSES, AND TECHNICAL OPERATORS WHO NEED CLEAR DIAGNOSIS, PRACTICAL FIXES, AND MEASURABLE SEARCH IMPROVEMENT.
+              BUILT FOR TEAMS THAT NEED A TECHNICAL SEARCH AUDIT THEY CAN HAND TO ENGINEERING, CONTENT, OR MARKETING WITHOUT TRANSLATING IT FIRST.
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 border-y border-[#f1efe8]/12 md:grid-cols-2 xl:grid-cols-4 xl:border-y-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-px bg-[#f1efe8]/12 border border-[#f1efe8]/12">
             {methodColumns.map((item, index) => (
-              <div key={item.number}>
-                <ScrollReveal delay={index * 0.06} yOffset={16} blur={false}>
+              <div key={item.number} className="h-full">
+                <ScrollReveal delay={index * 0.06} yOffset={16} blur={false} className="h-full">
                   <MethodColumnView item={item} />
                 </ScrollReveal>
               </div>
@@ -674,18 +687,18 @@ export default function VoidAgencyMethodPage() {
 
       <section id="how-it-works" className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-b border-[#f1efe8]/12 px-4 py-16 md:px-8 lg:grid-cols-[0.36fr_0.64fr] xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false}>
-          <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/45">HOW IT WORKS</h2>
+          <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/60">HOW IT WORKS</h2>
           <p className="max-w-md text-base leading-relaxed text-[#f1efe8]/58">
-            A technical SEO process built for accuracy, evidence, and implementation. Void Agency turns messy site data into a clear plan that teams can act on.
+            The process starts with crawl data and ends with a fix order: what broke, where it broke, why it matters, and who should handle it.
           </p>
           <div className="mt-9">
-            <ArrowLink href="#how-it-works">VIEW TECH STACK</ArrowLink>
+            <ArrowLink href="#how-it-works">PREVIEW AUDIT FRAMEWORK</ArrowLink>
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 border border-[#f1efe8]/12 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-px bg-[#f1efe8]/12 border border-[#f1efe8]/12">
           {processSteps.map((step, index) => (
-            <div key={step.title}>
+            <div key={step.title} className="h-full">
               <ProcessStepCard step={step} index={index} />
             </div>
           ))}
@@ -695,7 +708,7 @@ export default function VoidAgencyMethodPage() {
       <section id="case-studies" className="mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-12 flex flex-col justify-between gap-6 border-b border-[#f1efe8]/12 pb-8 md:flex-row md:items-end">
           <h2 className="font-serif text-[clamp(4rem,8vw,9rem)] italic leading-none tracking-[-0.045em]">VOID IN ACTION</h2>
-          <ArrowLink href="#case-studies">VIEW ALL CASE STUDIES</ArrowLink>
+          <ArrowLink href="#case-studies">PREVIEW CASE FRAMEWORKS</ArrowLink>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -715,12 +728,12 @@ export default function VoidAgencyMethodPage() {
             <h2 className="font-serif text-[clamp(3.2rem,6.4vw,7.5rem)] italic leading-[0.88] tracking-[-0.04em]">
               Make your site easier to
               <br />
-              crawl, understand, cite,
+              crawl, parse, measure,
               <br />
               and convert.
             </h2>
             <p className="max-w-md text-base leading-relaxed text-[#f1efe8]/58">
-              Void Agency finds the technical problems holding back search visibility and turns them into a clear, prioritized action plan.
+              Void Agency finds the technical problems blocking crawl access, indexation, internal links, schema, performance, and conversion paths.
             </p>
             <div className="flex flex-wrap items-center gap-7 lg:justify-end">
               <CircleAuditButton id="method-footer-audit-btn" className="h-24 w-24 md:h-28 md:w-28" />
@@ -733,7 +746,7 @@ export default function VoidAgencyMethodPage() {
       <footer className="mx-auto grid max-w-[1480px] grid-cols-1 items-start gap-8 border-t border-[#f1efe8]/12 px-4 py-8 text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/54 md:grid-cols-[1fr_auto_1fr_auto] md:px-8 xl:px-10">
         <div>
           <div className="text-[#f1efe8]">VOID AGENCY</div>
-          <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">Technical SEO · AI Search · Web Visibility</div>
+          <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">Technical SEO audits for crawl, indexation, content, and conversion.</div>
         </div>
         <nav className="flex flex-wrap gap-5" id="method-footer-nav">
           <NavLink href="/#selected-works" id="method-footer-work">WORK</NavLink>

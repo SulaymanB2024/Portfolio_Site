@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import React from 'react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface RevealTextProps {
   text: string;
@@ -9,14 +10,17 @@ interface RevealTextProps {
 }
 
 export function RevealText({ text, delay = 0, className = '', elementType = 'div' }: RevealTextProps) {
-  // Split text into words for staggered animation
-  const words = text.split(' ');
+  const prefersReducedMotion = useReducedMotion();
+  const words = text.match(/\S+/g) ?? [];
 
   const container = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: delay * i },
+      transition: { 
+        staggerChildren: 0.025, 
+        delayChildren: delay * i 
+      },
     }),
   };
 
@@ -25,17 +29,26 @@ export function RevealText({ text, delay = 0, className = '', elementType = 'div
       opacity: 1,
       y: 0,
       transition: {
-        duration: 1.2,
-        ease: [0.16, 1, 0.3, 1],
+        duration: 0.75,
+        ease: [0.25, 1, 0.5, 1],
       },
     },
     hidden: {
-      opacity: 0,
-      y: 20,
+      opacity: 1,
+      y: 12,
     },
   };
 
   const MotionComponent = motion[elementType as keyof typeof motion] || motion.div;
+
+  if (prefersReducedMotion || words.length === 0) {
+    return (
+      // @ts-ignore dynamic tag
+      <MotionComponent className={className}>
+        {text}
+      </MotionComponent>
+    );
+  }
 
   return (
     // @ts-ignore dynamic tag
@@ -47,13 +60,15 @@ export function RevealText({ text, delay = 0, className = '', elementType = 'div
       className={`inline-flex flex-wrap ${className}`}
     >
       {words.map((word, index) => (
-        <motion.span
-          variants={child}
-          style={{ marginRight: '0.25em', display: 'inline-block' }}
-          key={index}
-        >
-          {word}
-        </motion.span>
+        <React.Fragment key={`${word}-${index}`}>
+          <motion.span
+            variants={child}
+            style={{ marginRight: index === words.length - 1 ? 0 : '0.25em', display: 'inline-block' }}
+          >
+            {word}
+          </motion.span>
+          {index < words.length - 1 ? ' ' : null}
+        </React.Fragment>
       ))}
     </MotionComponent>
   );

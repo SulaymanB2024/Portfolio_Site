@@ -14,6 +14,7 @@ export function SmoothCursor() {
   
   const [isHovering, setIsHovering] = useState(false);
   const [isSquare, setIsSquare] = useState(false);
+  const [isInput, setIsInput] = useState(false);
   const [cursorLabel, setCursorLabel] = useState('View');
 
   // We can't interpolate width/height based on state directly via useTransform,
@@ -40,6 +41,13 @@ export function SmoothCursor() {
       const labelTarget = target.closest('[data-cursor-text]') as HTMLElement | null;
       const label = labelTarget?.dataset.cursorText || 'View';
       const isSocialOrSquare = target.closest('[data-cursor-square="true"]') || target.classList.contains('social-link');
+      
+      const isInputField = target.tagName.toLowerCase() === 'input' ||
+        target.tagName.toLowerCase() === 'textarea' ||
+        target.tagName.toLowerCase() === 'select' ||
+        target.closest('input') ||
+        target.closest('textarea') ||
+        target.closest('select');
 
       if (isInteractive) {
         setIsHovering(true);
@@ -49,6 +57,7 @@ export function SmoothCursor() {
       
       setCursorLabel(label);
       setIsSquare(!!isSocialOrSquare);
+      setIsInput(!!isInputField);
     };
 
     window.addEventListener('mousemove', updateMousePosition);
@@ -61,14 +70,14 @@ export function SmoothCursor() {
   }, [mouseX, mouseY]);
 
   useEffect(() => {
-    if (isHovering) {
+    if (isHovering && !isInput) {
       if (isSquare) {
         playSnap();
       } else {
         playClick();
       }
     }
-  }, [isHovering, isSquare]);
+  }, [isHovering, isSquare, isInput]);
 
   return (
     <>
@@ -81,8 +90,8 @@ export function SmoothCursor() {
           willChange: 'transform'
         }}
         animate={{
-          scale: isHovering ? 0 : 1,
-          opacity: 1
+          scale: isInput ? 0 : isHovering ? 0 : 1,
+          opacity: isInput ? 0 : 1
         }}
         transition={{ type: 'tween', ease: 'backOut', duration: 0.15 }}
       />
@@ -101,7 +110,8 @@ export function SmoothCursor() {
           width: isSquare ? 120 : cursorLabel !== 'View' ? 92 : 48,
           height: isSquare ? 30 : cursorLabel !== 'View' ? 34 : 48,
           borderRadius: isSquare ? '0%' : cursorLabel !== 'View' ? '999px' : '50%',
-          scale: isHovering && !isSquare ? 1.5 : 1,
+          scale: isInput ? 0 : isHovering && !isSquare ? 1.5 : 1,
+          opacity: isInput ? 0 : 1,
           backgroundColor: isHovering || isSquare ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)',
           border: isHovering || isSquare ? 'none' : '1px solid rgba(255, 255, 255, 0.5)',
         }}
@@ -109,7 +119,7 @@ export function SmoothCursor() {
       >
         <motion.span 
           initial={{ opacity: 0 }}
-          animate={{ opacity: isHovering && !isSquare ? 1 : 0 }}
+          animate={{ opacity: isHovering && !isSquare && !isInput ? 1 : 0 }}
           className="text-[8px] font-sans tracking-widest uppercase text-black font-medium absolute mix-blend-normal"
         >
           {cursorLabel}

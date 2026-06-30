@@ -53,7 +53,7 @@ function buildHead(route: SeoRoute, assetTags: string) {
     <title>${escapeHtml(route.title)}</title>
     <meta name="description" content="${escapeHtml(route.description)}" />
     <link rel="canonical" href="${canonicalUrl}" />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content="${route.noindex ? 'noindex,nofollow' : 'index,follow'}" />
     <meta property="og:site_name" content="${escapeHtml(SITE_NAME)}" />
     <meta property="og:title" content="${escapeHtml(route.title)}" />
     <meta property="og:description" content="${escapeHtml(route.description)}" />
@@ -110,10 +110,13 @@ function buildHead(route: SeoRoute, assetTags: string) {
 function buildFallback(route: SeoRoute) {
   const navLinks = [
     ['Home', '/'],
-    ['About', '/about'],
+    ['Work', '/#selected-works'],
     ['Atlas', '/atlas'],
+    ['Research', '/markets'],
     ['Method', '/method'],
-    ['Markets', '/markets'],
+    ['About', '/about'],
+    ['Resume', '/resume'],
+    ['Contact', '/#contact'],
   ];
 
   return `<section id="seo-static-summary" aria-label="Static route summary">
@@ -164,7 +167,7 @@ async function main() {
   const template = await fs.readFile(templatePath, 'utf8');
   const assetTags = extractAssetTags(extractHead(template));
 
-  await Promise.all(SEO_ROUTES.filter((route) => route.includeInSitemap).map((route) => writeRouteHtml(template, assetTags, route)));
+  await Promise.all(SEO_ROUTES.map((route) => writeRouteHtml(template, assetTags, route)));
   await writeSitemap();
 }
 

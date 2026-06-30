@@ -228,7 +228,7 @@ export default function CandlestickChart({ className = '' }: { className?: strin
 
   return (
     <div className={`w-full h-full relative group ${className}`}>
-        <canvas ref={canvasRef} className="w-full h-full block mix-blend-screen pointer-events-auto" role="img" aria-label="Interactive candlestick chart showing real-time simulated market data and trading indicators" />
+        <canvas ref={canvasRef} className="w-full h-full block mix-blend-screen pointer-events-auto" role="img" aria-label="Illustrative interactive candlestick chart for market-research presentation" />
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_40%,#080807_120%)] mix-blend-multiply opacity-80"></div>
         <div 
           ref={tooltipRef} 

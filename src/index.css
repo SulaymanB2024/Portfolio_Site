@@ -9,6 +9,7 @@
 }
 
 @layer base {
+
   html,
   body,
   #root {
@@ -47,6 +48,19 @@ body {
   text-wrap: balance;
 }
 
+.scramble-text[data-scrambling="true"] .scramble-text__semantic {
+  opacity: 0;
+}
+
+.scramble-text[data-scrambling="true"]::after {
+  content: attr(data-scramble-text) / "";
+  position: absolute;
+  inset: 0;
+  color: currentColor;
+  white-space: pre;
+  pointer-events: none;
+}
+
 .status-dot {
   width: 0.5rem;
   height: 0.5rem;
@@ -74,13 +88,18 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
 @media (min-width: 768px) {
-  body, a, button, [class*="hover-target"] {
+
+  body,
+  a,
+  button,
+  [class*="hover-target"] {
     cursor: none !important;
   }
 
@@ -92,6 +111,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -102,3 +122,31 @@ body {
   }
 }
 
+/* Custom View Transitions for cinematic page loading */
+::view-transition-old(root) {
+  animation: 200ms cubic-bezier(0.4, 0, 1, 1) both vt-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 550ms cubic-bezier(0.16, 1, 0.3, 1) both vt-fade-in;
+}
+
+@keyframes vt-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

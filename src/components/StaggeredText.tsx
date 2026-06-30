@@ -1,4 +1,6 @@
 import { motion } from 'motion/react';
+import React from 'react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface StaggeredTextProps {
   text: string;
@@ -7,10 +9,11 @@ interface StaggeredTextProps {
 }
 
 export function StaggeredText({ text, className = '', delay = 0 }: StaggeredTextProps) {
-  const words = text.split(' ');
+  const prefersReducedMotion = useReducedMotion();
+  const words = text.match(/\S+/g) ?? [];
 
   const container = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
@@ -22,7 +25,7 @@ export function StaggeredText({ text, className = '', delay = 0 }: StaggeredText
 
   const child = {
     hidden: {
-      opacity: 0,
+      opacity: 1,
       y: 50,
       rotateX: -20,
     },
@@ -40,21 +43,25 @@ export function StaggeredText({ text, className = '', delay = 0 }: StaggeredText
   return (
     <motion.h2
       className={`flex flex-wrap m-0 p-0 ${className}`}
-      variants={container}
-      initial="hidden"
-      whileInView="visible"
+      variants={prefersReducedMotion ? undefined : container}
+      initial={prefersReducedMotion ? false : 'hidden'}
+      whileInView={prefersReducedMotion ? undefined : 'visible'}
       viewport={{ once: true, margin: '-10%' }}
       style={{ perspective: 1000 }}
     >
-      {words.map((word, index) => (
-        <motion.span
-          key={index}
-          variants={child}
-          className="inline-block whitespace-pre origin-bottom mr-[0.25em] mb-[0.1em]"
-        >
-          {word}
-        </motion.span>
-      ))}
+      {prefersReducedMotion || words.length === 0
+        ? text
+        : words.map((word, index) => (
+          <React.Fragment key={`${word}-${index}`}>
+            <motion.span
+              variants={child}
+              className="inline-block whitespace-pre origin-bottom mr-[0.25em] mb-[0.1em]"
+            >
+              {word}
+            </motion.span>
+            {index < words.length - 1 ? ' ' : null}
+          </React.Fragment>
+        ))}
     </motion.h2>
   );
 }

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "builds": [
     {
@@ -7,5 +8,32 @@
       "config": { "distDir": "dist" }
     }
   ],
-  "routes": []
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.sulayman-bowles.dev" }],
+      "destination": "https://sulayman-bowles.dev/:path*",
+      "permanent": true
+    },
+    { "source": "/projects/atlas", "destination": "/atlas", "permanent": true },
+    { "source": "/projects/markets", "destination": "/markets", "permanent": true },
+    { "source": "/void-agency", "destination": "/method", "permanent": true },
+    { "source": "/services", "destination": "/method/technical-seo-audit", "permanent": true },
+    { "source": "/technical-seo", "destination": "/method/technical-seo-audit", "permanent": true },
+    { "source": "/technical-seo-audit", "destination": "/method/technical-seo-audit", "permanent": true },
+    { "source": "/ai-crawler-access", "destination": "/method/ai-crawler-access-audit", "permanent": true },
+    { "source": "/indexation-audit", "destination": "/method/indexation-audit", "permanent": true },
+    { "source": "/internal-link-audit", "destination": "/method/internal-link-audit", "permanent": true },
+    { "source": "/finance-research", "destination": "/markets/valuation-research", "permanent": true },
+    { "source": "/valuation-research", "destination": "/markets/valuation-research", "permanent": true },
+    { "source": "/crypto-research", "destination": "/markets/crypto-market-structure", "permanent": true },
+    { "source": "/resume.html", "destination": "/resume", "permanent": true },
+    { "source": "/cv", "destination": "/resume", "permanent": true },
+    { "source": "/cv.html", "destination": "/resume", "permanent": true },
+    { "source": "/resume.pdf", "destination": "/resume", "permanent": true },
+    { "source": "/Sulayman_Bowles_Resume.pdf", "destination": "/resume", "permanent": true },
+    { "source": "/Sulayman-Bowles-Resume.pdf", "destination": "/resume", "permanent": true },
+    { "source": "/Sulayman_Bowles_Resume_2025.pdf", "destination": "/resume", "permanent": true },
+    { "source": "/assets/Sulayman_Bowles_Resume.pdf", "destination": "/resume", "permanent": true }
+  ]
 }

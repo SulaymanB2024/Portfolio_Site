@@ -6,14 +6,21 @@ A Vite React portfolio and agency/research site for Sulayman Bowles. The app kee
 
 - `/`
 - `/about`
+- `/resume`
 - `/atlas`
+- `/atlas/technical-seo-audit-console`
 - `/method`
+- `/method/technical-seo-audit`
+- `/method/ai-crawler-access-audit`
+- `/method/indexation-audit`
+- `/method/internal-link-audit`
 - `/markets`
-- `/markets/network-monopolies`
-- `/markets/computational-commodity-systems`
-- `/markets/fiat-horizon`
+- `/markets/valuation-research`
+- `/markets/crypto-market-structure`
 
-Aliases such as `/projects/atlas`, `/void-agency`, and `/projects/markets` normalize to their canonical routes in the client router.
+Thin market notes remain accessible but are noindexed and kept out of the sitemap until they have enough source depth, assumptions, tables, and charts to stand as research pages.
+
+Aliases such as `/projects/atlas`, `/void-agency`, `/projects/markets`, legacy service paths, and old resume PDF URLs redirect to their canonical routes through `vercel.json`.
 
 ## Local Development
 
@@ -31,4 +38,4 @@ npm run lint
 npm run build
 ```
 
-`npm run build` runs `vite build` and then `scripts/generate-static-routes.ts`, which writes canonical route HTML into `dist/`.
+`npm run build` runs `vite build` and then `scripts/generate-static-routes.ts`, which writes route-specific HTML into `dist/`, including noindex HTML for intentionally excluded notes.

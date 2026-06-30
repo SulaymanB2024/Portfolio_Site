@@ -4,7 +4,6 @@ import VisibilitySystemMap from '../components/VisibilitySystemMap';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
-import { ShutterWipe } from '../components/ShutterWipe';
 import { SmoothCursor } from '../components/SmoothCursor';
 import { RevealText } from '../components/RevealText';
 import { StaggeredText } from '../components/StaggeredText';
@@ -16,29 +15,29 @@ import { useSEO } from '../utils/seo';
 const ABOUT_SEO = getSeoRoute('/about')!;
 
 const principles = [
-  ['EVIDENCE FIRST', 'Decisions should be driven by data, not assumptions.'],
-  ['SYSTEMS OVER CHECKLISTS', 'I build durable systems that compound over time.'],
-  ['SEARCH IS STRUCTURE', 'Visibility depends on whether a site can be crawled, understood, and trusted.'],
-  ['IMPACT > ACTIVITY', 'The goal is measurable movement, not more output.'],
+  ['KEEP THE RAW RECORD', 'Preserve the crawl, query, source, or model so the recommendation can be checked later.'],
+  ['NO BLACK-BOX AUDITS', 'Every issue should tie back to a URL, template, query, screenshot, log, or model assumption.'],
+  ['SEARCH NEEDS STRUCTURE', 'Pages need crawl paths, clean canonicals, readable templates, and enough context to be cited.'],
+  ['FIX THE BOTTLENECK', 'A report is useful when it names the constraint and the next change.'],
 ];
 
 const experience = [
   {
     role: 'FOUNDER',
     meta: 'VOID Agency · Dec 2025 — Present',
-    copy: 'Built an SEO and web systems agency generating $50K+ in collected revenue through technical SEO audits, website builds, local search strategy, and AI-search visibility work.',
-    details: ['Technical Audits', 'Next.js & Astro', 'LLM Search Visibility']
+    copy: 'Built Void Agency around technical SEO audits, website builds, local search work, and crawler-access checks. $50K+ in collected client revenue as of May 2026.',
+    details: ['Technical Audits', 'Next.js & Astro', 'Crawler Access Checks']
   },
   {
     role: 'AI PRODUCT MANAGER INTERN',
     meta: 'Chegg · Office of the Chief Product Officer · May 2026 — Aug 2026',
-    copy: 'Working on AI product strategy, research, competitive analysis, user workflows, prototype review, and AI-enabled student experiences.',
-    details: ['AI Chat UX', 'Competitive Mapping', 'LLM Workflows']
+    copy: 'Supporting AI product research, competitive analysis, workflow mapping, and prototype review for student-facing tools.',
+    details: ['AI Chat UX', 'Competitive Mapping', 'Prototype Review']
   },
   {
     role: 'SEO & DIGITAL MARKETING ANALYTICS INTERN',
     meta: 'B2B Semiconductor Company · May 2026 — Present',
-    copy: 'Supporting website launch analytics, GA4, Google Search Console, SEO baselines, traffic analysis, keyword performance, and prioritized recommendations.',
+    copy: 'Supporting launch analytics, GA4/GSC reporting, SEO baselines, traffic analysis, keyword tracking, and prioritized site recommendations.',
     details: ['GA4 / GSC Analytics', 'Launch Health Audits', 'Crawl Management']
   },
   {
@@ -51,25 +50,25 @@ const experience = [
 
 const skills = [
   ['TECHNICAL SEO', 90, 'Screaming Frog, Crawl Budget, Canonical Mapping, Hreflang'],
-  ['AI SEARCH VISIBILITY', 87, 'LLM Index Optimization, Schema Graphs, Citation Relevance'],
-  ['AI PRODUCT STRATEGY', 83, 'Prompt Design, RAG Frameworks, UX Workflows, Prototyping'],
+  ['CRAWLER ACCESS CHECKS', 87, 'Robots Rules, Entity Pages, JSON-LD, Citation Checks'],
+  ['AI PRODUCT RESEARCH', 83, 'Prompt Testing, RAG Evaluation, UX Flows, Prototype Review'],
   ['CRAWL & INDEXATION', 82, 'Log File Analysis, Server Headers, Render Audits, XML Sitemaps'],
   ['DATA ANALYSIS', 76, 'GA4 APIs, GSC API, Python Scripts, SQLite Databases'],
-  ['PYTHON & AUTOMATION', 83, 'Pandas, Beautiful Soup, Playwright Scrapers, Automated Crons'],
+  ['PYTHON & AUTOMATION', 83, 'Pandas, Beautiful Soup, Playwright, Scheduled Jobs'],
   ['FINANCIAL MODELING', 78, 'DCF Valuations, Unit Economics, SaaS Metrics, GTM Models'],
 ];
 
 const workCards = [
-  ['TECHNICAL SEO\nSYSTEMS', 'Crawlability, indexation, metadata, links, and performance.', 'sitemap'],
-  ['AI SEARCH\nVISIBILITY', 'Make brands easier to retrieve, cite, and trust.', 'search'],
-  ['AI PRODUCT\nSTRATEGY', 'Research, workflows, prototypes, and student AI experiences.', 'cube'],
-  ['FINANCE & SEARCH\nANALYTICS', 'Market models, GA4/GSC analysis, and decision-ready recommendations.', 'bars'],
+  ['CRAWL +\nINDEXATION', 'Crawl paths, canonicals, metadata, internal links, templates, and performance.', 'sitemap'],
+  ['CRAWLER ACCESS\nCHECKS', 'Robots rules, source text, schema, entity pages, and citation surfaces.', 'search'],
+  ['AI PRODUCT\nRESEARCH', 'User flows, competitive maps, prompt tests, RAG notes, and prototype review.', 'cube'],
+  ['FINANCE +\nSEARCH DATA', 'Market models, GA4/GSC analysis, operating assumptions, and clear next steps.', 'bars'],
 ];
 
 const metrics = [
-  ['$50K+', 'Collected revenue through VOID Agency'],
+  ['$50K+', 'Collected client revenue through VOID Agency, self-reported as of May 2026'],
   ['SCRAPER ATLAS', 'Python + SQLite audit console'],
-  ['CHEGG', 'AI product strategy'],
+  ['CHEGG', 'AI product research internship, May-Aug 2026'],
   ['GA4 + GSC', 'Search analytics and launch tracking'],
   ['TEXAS VENTURE LABS', 'Market validation and financial models'],
 ];
@@ -103,7 +102,7 @@ function NavLink({ href, active, id, children }: { href: string; active?: boolea
 }
 
 function SectionLabel({ children }: { children: ReactNode }) {
-  return <h2 className="mb-9 text-[0.72rem] uppercase tracking-[0.28em] text-[#f1efe8]/46">{children}</h2>;
+  return <h2 className="mb-9 text-[0.72rem] uppercase tracking-[0.28em] text-[#f1efe8]/60">{children}</h2>;
 }
 
 // Custom icons using clean editorial SVGs
@@ -188,7 +187,7 @@ function SkillBars() {
                 marginTop: isHovered ? 8 : 0
               }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="overflow-hidden text-[9px] uppercase tracking-[0.16em] text-[#f1efe8]/45 font-sans"
+              className="overflow-hidden text-[9px] uppercase tracking-[0.16em] text-[#f1efe8]/60 font-sans"
             >
               {details as string}
             </motion.div>
@@ -253,7 +252,7 @@ function ExperienceCard({ role, meta, copy, details }: { role: string; meta: str
         transition={{ duration: 0.25 }}
       />
       <h3 className="mb-2 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8] transition-colors group-hover:text-white">{role}</h3>
-      <div className="mb-4 text-[10px] uppercase leading-relaxed tracking-[0.18em] text-[#f1efe8]/44">{meta}</div>
+      <div className="mb-4 text-[10px] uppercase leading-relaxed tracking-[0.18em] text-[#f1efe8]/60">{meta}</div>
       <p className="text-sm leading-relaxed text-[#f1efe8]/58 transition-colors group-hover:text-[#f1efe8]/82">{copy}</p>
       <motion.div 
         initial={false}
@@ -291,7 +290,7 @@ function MetaCard({ label, value }: { label: string; value: string }) {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative overflow-hidden border-b border-[#f1efe8]/12 py-8 px-6 md:border-b-0 md:border-r last:border-r-0 cursor-pointer transition-all duration-500 hover:bg-[#f1efe8]/[0.015] group"
+      className="relative overflow-hidden bg-[#080807] py-8 px-6 cursor-pointer transition-all duration-500 hover:bg-[#f1efe8]/[0.015] group h-full"
     >
       <div className="absolute top-0 left-0 h-[2px] w-0 bg-[#f1efe8]/54 transition-all duration-500 group-hover:w-full" />
       <div className="absolute bottom-0 right-0 h-0 w-[1px] bg-[#f1efe8]/22 transition-all duration-500 group-hover:h-full" />
@@ -330,7 +329,6 @@ export default function AboutPage() {
 
   return (
     <main id="top" className="min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] md:cursor-none">
-      <ShutterWipe />
       <DarkNoise />
       <PageTechnicalChrome tone="dark" />
       {!prefersReducedMotion && <div className="hidden md:block">
@@ -339,18 +337,18 @@ export default function AboutPage() {
       <ScrollProgress />
 
       <header className="sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-6 md:px-8 xl:px-10">
-        <div className="grid items-start gap-5 border-b border-[#f1efe8]/12 bg-[#080807]/82 pb-5 text-[10px] uppercase tracking-[0.3em] backdrop-blur-sm md:grid-cols-[1fr_auto_1fr]">
-          <a href="/" id="about-brand-link" className="hover-target" data-cursor-text="HOME">
+        <div className="grid items-start gap-5 border-b border-[#f1efe8]/12 bg-[#080807]/82 pb-5 text-[10px] uppercase tracking-[0.3em] backdrop-blur-sm grid-cols-2 md:grid-cols-[1fr_auto_1fr]">
+          <a href="/" id="about-brand-link" className="hover-target col-span-1 order-1" data-cursor-text="HOME">
             <span className="block font-medium text-[#f1efe8]">SULAYMAN BOWLES</span>
-            <span className="mt-2 block font-serif text-sm italic normal-case tracking-normal text-[#f1efe8]/54">Technical SEO · AI Product · Finance/Data</span>
+            <span className="mt-2 block font-serif text-sm italic normal-case tracking-normal text-[#f1efe8]/54">Technical SEO, Atlas, and finance research.</span>
           </a>
-          <nav className="flex flex-wrap items-center gap-3 md:justify-center md:gap-6">
+          <nav className="col-span-2 order-3 md:col-span-1 md:order-2 flex flex-wrap items-center gap-3 justify-center md:justify-center md:gap-6 mt-2 md:mt-0">
             <NavLink href="/#selected-works" id="about-nav-work">WORK</NavLink>
             <NavLink href="/method" id="about-nav-method">METHOD</NavLink>
             <NavLink href="/about" active id="about-nav-about">ABOUT</NavLink>
             <NavLink href="/#contact" id="about-nav-contact">CONTACT</NavLink>
           </nav>
-          <a href="/#contact" id="about-header-contact" data-cursor-text="CONTACT" className="hover-target flex items-center gap-4 justify-self-start text-[#f1efe8]/75 transition-colors hover:text-[#f1efe8] md:justify-self-end">
+          <a href="/#contact" id="about-header-contact" data-cursor-text="CONTACT" className="hover-target flex items-center gap-4 col-span-1 order-2 justify-self-end text-[#f1efe8]/75 transition-colors hover:text-[#f1efe8] md:col-span-1 md:order-3 md:justify-self-end">
             <span className="h-7 w-7 rounded-full border border-[#f1efe8]/28 flex-shrink-0" />
             <span>CONTACT</span>
           </a>
@@ -359,23 +357,24 @@ export default function AboutPage() {
 
       <section className="mx-auto grid min-h-[calc(100vh-102px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.32fr)_minmax(0,0.68fr)] xl:px-10 xl:pt-20">
         <ScrollReveal yOffset={18} blur={false} className="min-w-0 self-center">
-          <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/45">ABOUT ME</div>
+          <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/60">ABOUT ME</div>
           <h1 className="font-serif text-[clamp(3.8rem,6.4vw,7.1rem)] italic leading-[0.92] tracking-[-0.045em]">
-            <span className="block"><RevealText text="I build systems" delay={0.1} /></span>
-            <span className="block italic"><RevealText text="for visibility." delay={0.3} /></span>
+            <span className="block"><RevealText text="I build tools" delay={0.1} /></span>
+            {' '}
+            <span className="block italic"><RevealText text="from messy inputs." delay={0.3} /></span>
           </h1>
-          <div className="mt-10 space-y-6 text-base leading-relaxed text-[#f1efe8]/62">
-            <p>Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, a technical SEO audit console focused on crawl evidence, indexation, structured data, AI-search visibility, and finance/data systems.</p>
-            <p>My work turns crawl data, site architecture, search signals, and market research into clearer systems for discovery, citation, conversion, and decision-making.</p>
+          <div className="mt-10 space-y-4 text-base leading-relaxed text-[#f1efe8]/62">
+            <p className="font-serif text-xl text-[#f1efe8]">Sulayman Bowles</p>
+            <p>Technical SEO, Atlas, and finance research built from crawl records, search data, filings, and operating assumptions.</p>
           </div>
         </ScrollReveal>
 
         <ScrollReveal delay={0.08} yOffset={18} blur={false} className="w-full self-center">
           <div className="group">
             <VisibilitySystemMap className="aspect-[1000/620] w-full transition-transform duration-700 group-hover:-translate-y-1" />
-            <div className="mt-4 flex flex-col gap-3 border-b border-[#f1efe8]/12 pb-4 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/44 sm:flex-row sm:items-center sm:justify-between">
-              <span>SIGNAL INPUTS: CRAWL / ENTITY / MARKET</span>
-              <span>OUTPUT: VISIBILITY SYSTEM</span>
+            <div className="mt-4 flex flex-col gap-3 border-b border-[#f1efe8]/12 pb-4 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/60 sm:flex-row sm:items-center sm:justify-between">
+              <span>INPUTS: CRAWL DATA / ENTITY FACTS / MARKET NOTES</span>
+              <span>OUTPUT: AUDIT, MODEL, OR BACKLOG</span>
             </div>
           </div>
         </ScrollReveal>
@@ -431,16 +430,16 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-[1480px] px-4 pb-16 md:px-8 xl:px-10 xl:pb-24">
-        <div className="grid grid-cols-1 border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-5">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-px bg-[#f1efe8]/12 border border-[#f1efe8]/12">
           {metrics.map(([value, label]) => (
             <motion.div
               key={value}
-              className="group border-b border-[#f1efe8]/12 p-6 transition-colors duration-500 last:border-b-0 hover:bg-[#f1efe8]/[0.025] md:border-r md:last:border-r-0 xl:border-b-0"
+              className="group bg-[#080807] p-6 transition-colors duration-500 hover:bg-[#f1efe8]/[0.025] h-full"
               whileHover={{ y: -4 }}
               transition={{ duration: 0.35, ease: 'easeOut' }}
             >
               <div className="mb-5 font-serif text-4xl italic leading-none tracking-[-0.02em] text-[#f1efe8]">{value}</div>
-              <p className="text-[10px] uppercase leading-relaxed tracking-[0.22em] text-[#f1efe8]/48">{label}</p>
+              <p className="text-[10px] uppercase leading-relaxed tracking-[0.22em] text-[#f1efe8]/60">{label}</p>
             </motion.div>
           ))}
         </div>
@@ -450,21 +449,21 @@ export default function AboutPage() {
         <ScrollReveal yOffset={18} blur={false}>
           <div className="mb-6 font-serif text-7xl italic leading-none text-[#f1efe8]/32">“</div>
           <blockquote className="font-serif text-[clamp(3rem,5.8vw,7rem)] italic leading-[0.88] tracking-[-0.04em]">
-            I build systems where search,
+            Good work leaves a trail:
             <br />
-            data, and product judgment
+            the data, the assumption,
             <br />
-            turn into visibility.
+            and the decision it changed.
           </blockquote>
         </ScrollReveal>
-        <div className="grid grid-cols-1 border-[#f1efe8]/12 md:grid-cols-3 md:border-l">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#f1efe8]/12 border border-[#f1efe8]/12">
           {[
             ['LOCATION', 'Austin, Texas'],
             ['EDUCATION', 'UT Austin · McCombs\nSchool of Business'],
-            ['AVAILABILITY', 'Open for select projects, partnerships, and technical SEO / AI-search work.'],
+            ['AVAILABILITY', 'Open for select technical SEO audits, crawler access checks, and focused web/data projects.'],
           ].map(([label, value], index) => (
-            <div key={label}>
-              <ScrollReveal delay={index * 0.06} yOffset={16} blur={false}>
+            <div key={label} className="h-full">
+              <ScrollReveal delay={index * 0.06} yOffset={16} blur={false} className="h-full">
                 <MetaCard label={label} value={value} />
               </ScrollReveal>
             </div>
@@ -475,7 +474,7 @@ export default function AboutPage() {
       <footer className="mx-auto grid max-w-[1480px] grid-cols-1 items-start gap-8 px-4 py-8 text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/54 md:grid-cols-[1fr_auto_1fr_auto] md:px-8 xl:px-10">
         <div>
           <div className="text-[#f1efe8]">SULAYMAN BOWLES</div>
-          <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">Technical SEO · AI Product · Finance/Data</div>
+          <div className="mt-2 font-serif text-sm italic normal-case tracking-normal">Technical SEO, Atlas, and finance research.</div>
         </div>
         <nav className="flex flex-wrap gap-5" id="about-footer-nav">
           <NavLink href="/#selected-works" id="about-footer-work">WORK</NavLink>

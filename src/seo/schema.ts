@@ -16,24 +16,49 @@ export function personSchema(): JsonLd {
     '@id': `${SITE_URL}/#person`,
     name: SITE_NAME,
     url: SITE_URL,
+    sameAs: [
+      'https://www.linkedin.com/in/sulayman-bowles/',
+      'https://github.com/SulaymanB2024',
+      'https://bento.me/sulayman-bowles',
+      SITE_URL,
+    ],
+    mainEntityOfPage: {
+      '@id': absoluteUrl('/about'),
+    },
     affiliation: [
       {
         '@type': 'CollegeOrUniversity',
         name: 'The University of Texas at Austin',
       },
       {
-        '@type': 'Organization',
-        name: 'Void Agency',
+        '@id': `${SITE_URL}/#void-agency`,
       },
     ],
+    worksFor: {
+      '@id': `${SITE_URL}/#void-agency`,
+    },
     knowsAbout: [
       'Technical SEO',
-      'AI search discoverability',
+      'AI crawler access',
       'Crawlability',
       'Indexation',
       'Structured data',
       'Finance and data analysis',
     ],
+  };
+}
+
+export function organizationSchema(): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE_URL}/#void-agency`,
+    name: 'Void Agency',
+    url: absoluteUrl('/method'),
+    founder: {
+      '@id': `${SITE_URL}/#person`,
+    },
+    sameAs: [absoluteUrl('/method')],
   };
 }
 
@@ -51,6 +76,10 @@ export function websiteSchema(): JsonLd {
   };
 }
 
+function entityGraph(): JsonLd[] {
+  return [personSchema(), organizationSchema(), websiteSchema()];
+}
+
 export function projectSchema(): JsonLd {
   return {
     '@context': 'https://schema.org',
@@ -63,7 +92,7 @@ export function projectSchema(): JsonLd {
       '@id': `${SITE_URL}/#person`,
     },
     description:
-      'A technical SEO audit console for crawl evidence, indexation, architecture, internal links, structured data, performance inputs, and AI-search readiness.',
+      'A technical SEO audit console for crawl records, indexation, architecture, internal links, structured data, performance inputs, exports, and crawler access checks.',
   };
 }
 
@@ -72,19 +101,62 @@ export function serviceSchema(): JsonLd {
     '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': `${SITE_URL}/method#service`,
-    name: 'Technical SEO and AI Search Visibility Audit',
+    name: 'Technical SEO and AI Crawler Access Audit',
     url: absoluteUrl('/method'),
     provider: {
-      '@type': 'Organization',
-      name: 'Void Agency',
+      '@id': `${SITE_URL}/#void-agency`,
     },
     areaServed: 'United States',
     serviceType: [
       'Technical SEO Audit',
-      'AI Search Visibility Audit',
+      'AI Crawler Access Audit',
       'Crawlability Audit',
       'Structured Data Audit',
     ],
+  };
+}
+
+export function webPageSchema({
+  name,
+  description,
+  path,
+  about,
+}: {
+  name: string;
+  description: string;
+  path: string;
+  about?: JsonLd;
+}): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(path)}#webpage`,
+    name,
+    url: absoluteUrl(path),
+    description,
+    isPartOf: {
+      '@id': `${SITE_URL}/#website`,
+    },
+    author: {
+      '@id': `${SITE_URL}/#person`,
+    },
+    ...(about ? { about } : {}),
+  };
+}
+
+export function profilePageSchema(): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    '@id': `${absoluteUrl('/resume')}#profile`,
+    name: 'Sulayman Bowles Resume | Technical SEO, Finance & AI',
+    url: absoluteUrl('/resume'),
+    mainEntity: {
+      '@id': `${SITE_URL}/#person`,
+    },
+    isPartOf: {
+      '@id': `${SITE_URL}/#website`,
+    },
   };
 }
 
@@ -145,12 +217,12 @@ export function breadcrumbSchema(items: Array<{ name: string; path: string }>): 
 }
 
 export function homeJsonLd(): JsonLd {
-  return graphSchema([personSchema(), websiteSchema()]);
+  return graphSchema(entityGraph());
 }
 
 export function aboutJsonLd(): JsonLd {
   return graphSchema([
-    personSchema(),
+    ...entityGraph(),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'About', path: '/about' },
@@ -158,8 +230,20 @@ export function aboutJsonLd(): JsonLd {
   ]);
 }
 
+export function resumeJsonLd(): JsonLd {
+  return graphSchema([
+    ...entityGraph(),
+    profilePageSchema(),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Resume', path: '/resume' },
+    ]),
+  ]);
+}
+
 export function atlasJsonLd(): JsonLd {
   return graphSchema([
+    ...entityGraph(),
     projectSchema(),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -170,6 +254,7 @@ export function atlasJsonLd(): JsonLd {
 
 export function methodJsonLd(): JsonLd {
   return graphSchema([
+    ...entityGraph(),
     serviceSchema(),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -180,10 +265,46 @@ export function methodJsonLd(): JsonLd {
 
 export function marketsJsonLd(title: string, description: string, path = '/markets'): JsonLd {
   return graphSchema([
+    ...entityGraph(),
     collectionPageSchema(title, description, path),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Markets', path },
+    ]),
+  ]);
+}
+
+export function intentPageJsonLd({
+  title,
+  description,
+  path,
+  parentName,
+  parentPath,
+  kind,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  parentName: string;
+  parentPath: string;
+  kind: 'project' | 'service' | 'research';
+}): JsonLd {
+  const about =
+    kind === 'project'
+      ? { '@id': `${SITE_URL}/atlas#software` }
+      : kind === 'service'
+        ? { '@id': `${SITE_URL}/method#service` }
+        : { '@id': `${absoluteUrl('/markets')}#collection` };
+
+  return graphSchema([
+    ...entityGraph(),
+    ...(kind === 'project' ? [projectSchema()] : []),
+    ...(kind === 'service' ? [serviceSchema()] : []),
+    webPageSchema({ name: title, description, path, about }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: parentName, path: parentPath },
+      { name: title, path },
     ]),
   ]);
 }
@@ -200,6 +321,7 @@ export function marketArticleJsonLd({
   datePublished: string;
 }): JsonLd {
   return graphSchema([
+    ...entityGraph(),
     articleSchema({ title, description, path, datePublished }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },

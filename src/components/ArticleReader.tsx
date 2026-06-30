@@ -81,19 +81,19 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
             </div>
 
             <div className="border-t border-[#f1efe8]/12 pt-6">
-              <div className="text-[9px] uppercase tracking-[0.24em] text-[#f1efe8]/45 mb-4">THESIS INDICATORS</div>
+              <div className="text-[9px] uppercase tracking-[0.24em] text-[#f1efe8]/45 mb-4">RESEARCH SNAPSHOT</div>
               <div className="space-y-3.5 text-[9.5px] uppercase tracking-[0.18em]">
                 <div className="flex justify-between border-b border-[#f1efe8]/8 pb-2">
-                  <span className="text-[#f1efe8]/48">CONVICTION</span>
-                  <span className="text-[#b7c8a8] font-semibold">{data.conviction}</span>
+                  <span className="text-[#f1efe8]/48">STATUS</span>
+                  <span className="text-[#b7c8a8] font-semibold">{data.status}</span>
                 </div>
                 <div className="flex justify-between border-b border-[#f1efe8]/8 pb-2">
                   <span className="text-[#f1efe8]/48">HORIZON</span>
                   <span className="text-[#f1efe8]/80">{data.horizon}</span>
                 </div>
                 <div className="flex justify-between border-b border-[#f1efe8]/8 pb-2">
-                  <span className="text-[#f1efe8]/48">ALLOCATION</span>
-                  <span className="text-[#f1efe8]/80 font-mono">{data.allocation}</span>
+                  <span className="text-[#f1efe8]/48">QUESTION</span>
+                  <span className="max-w-[11rem] text-right text-[#f1efe8]/80 font-mono normal-case leading-snug tracking-normal">{data.modelQuestion}</span>
                 </div>
               </div>
             </div>
@@ -103,14 +103,14 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
               className="hover-target inline-flex w-fit border border-[#f1efe8]/16 px-3 py-2 text-[9px] uppercase tracking-[0.22em] text-[#f1efe8]/62 transition-colors hover:border-[#f1efe8]/36 hover:text-[#f1efe8]"
               data-cursor-text="OPEN"
             >
-              Open canonical page
+              Read full note
             </a>
           </div>
 
           <div className="hidden md:block text-[8px] leading-relaxed text-[#f1efe8]/32 font-mono uppercase tracking-[0.18em] border-t border-[#f1efe8]/12 pt-6">
-            VOID PORTFOLIO RESEARCH SYSTEM //
+            MARKET RESEARCH ARCHIVE //
             <br />
-            CONFIDENTIAL ACADEMIC MEMORANDUM.
+            PUBLIC WRITING SAMPLE.
           </div>
         </div>
 
@@ -160,14 +160,14 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
                 <span className="select-all">{data.formula}</span>
               </div>
               <div className="mt-4 flex justify-between text-[7.5px] text-[#f1efe8]/32 tracking-[0.16em]">
-                <span>SYS.REF // EQ-0{data.number}</span>
-                <span>DENOMINATOR // SECULAR</span>
+                <span>Conceptual model</span>
+                <span>Needs source validation</span>
               </div>
             </div>
 
             {/* Bottom Risk Segment */}
             <div className="mt-12 border-t border-[#f1efe8]/12 pt-8">
-              <h4 className="text-[10px] uppercase tracking-[0.28em] text-[#c2695e]/80 mb-3">KEY RISK VECTOR</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.28em] text-[#c2695e]/80 mb-3">WHAT COULD BREAK</h4>
               <p className="text-xs leading-relaxed text-[#f1efe8]/52">
                 {data.risks}
               </p>

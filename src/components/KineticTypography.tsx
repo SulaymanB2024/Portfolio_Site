@@ -19,19 +19,19 @@ export function KineticTypography() {
       
       <motion.div style={{ x: x1, willChange: 'transform', backfaceVisibility: 'hidden' }} className="flex whitespace-nowrap transform-gpu">
         <span className="text-[15vw] md:text-[10vw] font-sans font-black uppercase tracking-tighter mix-blend-difference opacity-20">
-          CRAWL SIGNAL CRAWL SIGNAL CRAWL SIGNAL
+          CRAWL MAP FIX CRAWL MAP FIX
         </span>
       </motion.div>
       
       <motion.div style={{ x: x2, willChange: 'transform', backfaceVisibility: 'hidden' }} className="flex whitespace-nowrap -mt-[5vw] transform-gpu">
         <span className="text-[15vw] md:text-[10vw] font-serif italic uppercase tracking-tighter text-outline-light opacity-50">
-          STRUCTURE EVIDENCE STRUCTURE EVIDENCE STRUCTURE EVIDENCE
+          READ FILES BUILD REPORTS READ FILES BUILD REPORTS
         </span>
       </motion.div>
       
       <motion.div style={{ x: x3, willChange: 'transform', backfaceVisibility: 'hidden' }} className="flex whitespace-nowrap -mt-[5vw] transform-gpu">
         <span className="text-[15vw] md:text-[10vw] font-sans font-black uppercase tracking-tighter mix-blend-difference opacity-20">
-          MODEL DECIDE SHIP MODEL DECIDE SHIP
+          MODEL TEST SHIP MODEL TEST SHIP
         </span>
       </motion.div>
     </div>

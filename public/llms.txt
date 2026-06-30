@@ -1,0 +1,38 @@
+# Sulayman Bowles - Portfolio & Void Agency
+
+Sulayman Bowles
+Technical SEO, Atlas, and finance research.
+
+## Navigation
+
+- [Home Page](/) - Personal portfolio main landing page.
+- [About Sulayman](/about) - Professional background, skills, and experience details.
+- [Resume](/resume) - HTML-first resume for technical SEO, finance research, AI search, and product/software execution.
+- [Atlas SEO Audit Console](/atlas) - Audit console for crawl records, indexation, internal links, canonicals, schema, exports, and reports.
+- [Technical SEO Audit Console](/atlas/technical-seo-audit-console) - Search landing page for the Atlas audit console.
+- [Markets Research](/markets) - Structured research index with thesis, mechanism, evidence status, assumptions, counterarguments, and open questions.
+- [Void Agency Method](/method) - Technical SEO audits for crawl, indexation, content, and conversion.
+
+## Core Disciplines
+
+- **[Technical SEO Audits](/method/technical-seo-audit)**: Crawl paths, indexability, canonicals, internal links, templates, metadata, structured data, and performance inputs.
+- **[AI Crawler Access Audits](/method/ai-crawler-access-audit)**: Robots rules, crawler access, entity pages, schema, citation surfaces, and source text checks.
+- **[Indexation Audits](/method/indexation-audit)**: Sitemap cleanup, canonical URLs, old URL redirects, noindex decisions, and Search Console validation.
+- **[Internal Link Audits](/method/internal-link-audit)**: Crawl depth, inlinks, orphan candidates, anchor text, and hub-page support.
+- **[Finance Research](/markets/valuation-research)**: Valuation models, market research, operating assumptions, dashboards, and research notes.
+- **[Crypto Market Structure](/markets/crypto-market-structure)**: Token incentives, protocol fees, liquidity, emissions, governance, and risk frameworks.
+- **[Web Interfaces & Reports](/atlas)**: React/Vite pages, audit dashboards, portfolio pages, exports, and report design.
+
+## Key Projects & Case Studies
+
+- **[Atlas SEO Audit Console](/atlas)**: A crawl-based audit console for indexation, architecture, internal links, canonicals, structured data, performance inputs, and crawler access checks.
+- **[Markets Research](/markets)**: Finance and market-structure notes built as structured artifacts. Thin notes are labeled by status and depth, with TODO/source-needed evidence fields where proof is missing.
+- **[Network Monopolies](/markets/network-monopolies)**: Platform-power memo covering network effects, switching costs, pricing power, regulation, and AI distribution risk.
+- **[Computational Commodity Systems](/markets/computational-commodity-systems)**: Compute and AI infrastructure note covering utilization, energy, provider margins, and commodity pressure.
+- **[Fiat Horizon](/markets/fiat-horizon)**: Money, debt, currency trust, real-rate, and hard-asset horizon note.
+- **[Void Agency Method](/method)**: Technical SEO audits for crawlability, indexation, internal links, schema, analytics, and AI crawler access checks.
+
+## Contact
+
+- **[Email](mailto:sulayman.bowles@gmail.com)**: sulayman.bowles@gmail.com
+- **[Contact Page](/#contact)**: Contact form available on the main page for projects, roles, and technical audits.

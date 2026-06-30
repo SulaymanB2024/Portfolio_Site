@@ -9,6 +9,10 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://sulayman-bowles.dev/resume</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://sulayman-bowles.dev/atlas</loc>
     <priority>0.9</priority>
   </url>
@@ -21,15 +25,43 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sulayman-bowles.dev/atlas/technical-seo-audit-console</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/method/technical-seo-audit</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/method/ai-crawler-access-audit</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/method/indexation-audit</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/method/internal-link-audit</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/markets/valuation-research</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/markets/crypto-market-structure</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sulayman-bowles.dev/markets/network-monopolies</loc>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/markets/computational-commodity-systems</loc>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/markets/fiat-horizon</loc>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
 </urlset>

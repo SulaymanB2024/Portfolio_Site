@@ -71,33 +71,33 @@ const crossLinks = [
 ];
 
 const nodeStats: Record<string, { value: string; desc1: string; desc2: string }> = {
-  HTML: { value: "18,394 INDEXABLE URLS", desc1: "0 critical format syntax errors.", desc2: "Crawl rate: Adaptive 12 req/sec." },
-  JS: { value: "4,204 PAGES RENDERED", desc1: "JavaScript bundle size audit complete.", desc2: "Avg script execution: 1.4 seconds." },
-  CANON: { value: "7.2% ISSUES DETECTED", desc1: "312 URLs missing self-references.", desc2: "8 canonical chains resolved." },
-  ROBOTS: { value: "9,112 URLS EXCLUDED", desc1: "Blocked by robots.txt directive match.", desc2: "0 duplicate search budget loss." },
-  LINKS: { value: "204,892 PATHS MAPPED", desc1: "Max crawl depth: 6 hops.", desc2: "Orphan risk threshold: 17.4% low." },
-  SCHEMA: { value: "98.4% GRAPH VALIDITY", desc1: "JSON-LD schema nodes verified.", desc2: "3 semantic entity warning logs." },
-  CWV: { value: "84% PERFORMANCE PASS", desc1: "Largest Contentful Paint avg: 1.8s.", desc2: "Interaction to Next Paint: 110ms." },
-  ENTITY: { value: "4,821 SEMANTIC NODES", desc1: "Entity graph vectors resolved.", desc2: "Citations linked to Wikipedia entities." }
+  HTML: { value: "18,394 CRAWLABLE URLS", desc1: "Sample crawl rows with status codes.", desc2: "No live network request." },
+  JS: { value: "4,204 RENDERED PAGES", desc1: "Sample render checks completed.", desc2: "Average render sample: 1.4 seconds." },
+  CANON: { value: "312 CANONICAL GAPS", desc1: "URLs missing self-references.", desc2: "8 canonical chains flagged." },
+  ROBOTS: { value: "9,112 ROBOTS-BLOCKED URLS", desc1: "URLs matched to robots.txt disallow rules.", desc2: "Review paths before excluding crawl access." },
+  LINKS: { value: "204,892 INTERNAL LINKS", desc1: "Max sample crawl depth: 6 hops.", desc2: "Orphan risk sample: 17.4%." },
+  SCHEMA: { value: "8 JSON-LD WARNINGS", desc1: "Schema blocks need review.", desc2: "3 entity-reference warnings." },
+  CWV: { value: "84% SAMPLE PASS", desc1: "Largest Contentful Paint avg: 1.8s.", desc2: "Interaction to Next Paint: 110ms." },
+  ENTITY: { value: "4,821 ENTITY MENTIONS", desc1: "Entity names detected in page text.", desc2: "External references found in source copy." }
 };
 
 const mockLogTemplates = [
-  "CRAWL: GET {url} [200 OK] {ms}ms",
-  "HTML PARSER: Discovered {count} links on {url}",
-  "JS RENDERER: Compiled bundles on {url} in {ms}ms",
-  "VALIDATOR: Verified JSON-LD schema graph on {url}",
-  "PERFORMANCE: LCP score {lcp}s measured on {url}",
-  "ROBOTS: Blocked crawl match on {url} via Robots.txt",
-  "CANONICAL: Resolved self-referencing link on {url}",
+  "DEMO: GET {url} [200 OK] {ms}ms",
+  "HTML: Found {count} internal links on {url}",
+  "RENDER: Sample render completed on {url} in {ms}ms",
+  "SCHEMA: JSON-LD block found on {url}",
+  "PERFORMANCE: LCP sample {lcp}s on {url}",
+  "ROBOTS: URL matched robots.txt disallow pattern",
+  "CANONICAL: Self-referencing canonical found on {url}",
 ];
 
 const mockUrls = [
   "/",
-  "/blog/seo-systems",
+  "/blog/crawl-audit",
   "/about",
   "/atlas/dashboard",
   "/pricing",
-  "/services/ai-integration",
+  "/services/crawler-access",
   "/resources/crawl-budget",
   "/blog/hreflang-audit",
   "/case-study/chegg-strategy",
@@ -108,12 +108,12 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('orbital');
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [logs, setLogs] = useState<string[]>([
-    "INITIALIZING CRAWL LOGS...",
-    "CONNECTING TO DOMAIN ENGINE...",
-    "RESOLVED TARGET IP: 104.21.36.192"
+    "LOADING SAMPLE CRAWL LOG...",
+    "SAMPLE HOST: example.com",
+    "NO LIVE NETWORK REQUEST"
   ]);
 
-  // Live log simulation
+  // Rotates sample crawl-log rows for the visual demo.
   useEffect(() => {
     const interval = setInterval(() => {
       const template = mockLogTemplates[Math.floor(Math.random() * mockLogTemplates.length)];
@@ -206,7 +206,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
             <button
               key={mode}
               onClick={() => setViewMode(mode)}
-              className={`hover-target transition-colors py-1 relative ${viewMode === mode ? 'text-white' : 'text-canvas/42 hover:text-canvas/82'}`}
+              className={`hover-target transition-colors py-1 relative ${viewMode === mode ? 'text-white' : 'text-canvas/60 hover:text-canvas/82'}`}
             >
               [{String(idx + 1).padStart(2, '0')}. {mode}]
               {viewMode === mode && (
@@ -367,6 +367,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
                   cy={pos.y}
                   r={node.size}
                   fill="#f1efe8"
+                  initial={{ cx: pos.x, cy: pos.y }}
                   animate={{
                     cx: pos.x,
                     cy: pos.y,
@@ -393,6 +394,12 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
                     y1={viewMode === 'orbital' ? cy : pos.y}
                     x2={pos.x}
                     y2={pos.y}
+                    initial={{
+                      x1: viewMode === 'orbital' ? cx : pos.x,
+                      y1: viewMode === 'orbital' ? cy : pos.y,
+                      x2: pos.x,
+                      y2: pos.y
+                    }}
                     animate={{
                       x1: viewMode === 'orbital' ? cx : pos.x,
                       y1: viewMode === 'orbital' ? cy : pos.y,
@@ -410,6 +417,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
                     cy={pos.y}
                     r={node.size + 10}
                     fill="none"
+                    initial={{ cx: pos.x, cy: pos.y }}
                     animate={{
                       cx: pos.x,
                       cy: pos.y,
@@ -441,6 +449,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
                     cx={pos.x}
                     cy={pos.y}
                     r={node.size}
+                    initial={{ cx: pos.x, cy: pos.y }}
                     animate={{
                       cx: pos.x,
                       cy: pos.y,
@@ -499,9 +508,9 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
 
         {/* Floating details overlay on top-left */}
         <div className="absolute left-6 top-6 font-mono text-[9px] uppercase tracking-[0.25em] text-canvas/50 pointer-events-none select-none">
-          <div className="text-canvas text-xs tracking-[0.2em] mb-1 font-sans font-bold">CRAWL RADAR SCAN</div>
+          <div className="text-canvas text-xs tracking-[0.2em] mb-1 font-sans font-bold">CRAWL MAP</div>
           <div>TARGET: example.com</div>
-          <div>URLS INDEXED: 52,846</div>
+          <div>URLS DISCOVERED: 52,846</div>
           <div>CRAWL DEPTH LIMIT: 6</div>
         </div>
 
@@ -524,7 +533,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
             </div>
           ) : (
             <div className="text-[9.5px] text-canvas/32 leading-relaxed">
-              HOVER NODE TO ENGAGE LOG ANALYSES AND READ TELEMETRY STATISTICS.
+              Hover a node to view sample crawl stats.
             </div>
           )}
         </div>
@@ -532,7 +541,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
         {/* Diagnostics Log Console on bottom-left */}
         <div className="absolute left-6 bottom-6 w-80 bg-black/82 border border-canvas/14 p-4 font-mono z-10">
           <div className="text-[9px] uppercase tracking-[0.25em] text-canvas/42 mb-2 border-b border-canvas/12 pb-1.5 flex items-center justify-between">
-            <span>LIVE TELEMETRY STREAM</span>
+            <span>SAMPLE CRAWL LOG</span>
             <span className="h-1.5 w-1.5 rounded-full bg-[#b7c8a8] animate-ping" />
           </div>
           <div className="space-y-1.5 min-h-[90px] flex flex-col justify-end text-[8.5px] text-canvas/68">

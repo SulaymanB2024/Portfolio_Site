@@ -28,13 +28,13 @@ const retrievalPoints = Array.from({ length: 34 }, (_, index) => {
   };
 });
 
-const visibilityDots = Array.from({ length: 108 }, (_, index) => ({
+const accessDots = Array.from({ length: 108 }, (_, index) => ({
   x: 655 + (index % 12) * 18,
   y: 188 + Math.floor(index / 12) * 22,
   opacity: 0.12 + (index % 7) * 0.055,
 }));
 
-const clarityRays = Array.from({ length: 9 }, (_, index) => {
+const fixRays = Array.from({ length: 9 }, (_, index) => {
   const y = 198 + index * 34;
   return {
     fromX: 814,
@@ -47,33 +47,33 @@ const clarityRays = Array.from({ length: 9 }, (_, index) => {
 });
 
 const topLabels = [
-  { lines: ['MESSY WEB', 'SIGNALS'], x: 58 },
-  { lines: ['STRUCTURED', 'CRAWL EVIDENCE'], x: 252 },
-  { lines: ['AI RETRIEVAL', 'LAYER'], x: 462 },
-  { lines: ['SEARCH', 'VISIBILITY'], x: 658 },
-  { lines: ['BUSINESS', 'CLARITY'], x: 846 },
+  { lines: ['RAW SITE', 'DATA'], x: 58 },
+  { lines: ['CRAWL', 'TABLES'], x: 252 },
+  { lines: ['CRAWLER', 'CHECKS'], x: 462 },
+  { lines: ['SEARCH', 'ACCESS'], x: 658 },
+  { lines: ['PRIORITY', 'FIXES'], x: 846 },
 ];
 
 const colDescriptions = [
   {
-    title: "MESSY WEB SIGNALS",
-    desc: "Raw unstructured inputs from crawlers, JS rendering, redirects, response codes, and sitemaps."
+    title: "RAW SITE DATA",
+    desc: "Raw crawler output: rendered HTML, redirects, status codes, canonicals, links, and sitemaps."
   },
   {
-    title: "STRUCTURED CRAWL EVIDENCE",
-    desc: "Normalized crawl tables in SQLite databases. Validating canonicals, robots.txt directives, and link flows."
+    title: "CRAWL TABLES",
+    desc: "SQLite crawl tables for canonicals, robots directives, internal links, templates, and status chains."
   },
   {
-    title: "AI RETRIEVAL LAYER",
-    desc: "Analyzing indexing probability, schema graphs, context relevance, and LLM search retrievability metrics."
+    title: "CRAWLER CHECKS",
+    desc: "Checking robots rules, source text, entity pages, schema, and citation surfaces."
   },
   {
-    title: "SEARCH VISIBILITY",
-    desc: "Aligning search signals and technical health to ensure content is fully crawlable, indexed, and cited."
+    title: "SEARCH ACCESS",
+    desc: "Finding gaps that block crawling, indexing, internal discovery, or clean citation."
   },
   {
-    title: "BUSINESS CLARITY",
-    desc: "Translating crawl diagnostics and indexing data into prioritized backlogs, conversions, and growth."
+    title: "PRIORITY FIXES",
+    desc: "Turning findings into a ranked fix list, owner notes, and a report a team can use."
   }
 ];
 
@@ -82,19 +82,19 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
 
   return (
     <div className={`relative overflow-hidden border border-[#f1efe8]/15 bg-[#080807] ${className}`}>
-      <svg viewBox="0 0 1000 620" className="h-full w-full" role="img" aria-label="Visibility system map showing messy web signals transformed into business clarity">
+      <svg viewBox="0 0 1000 620" className="h-full w-full" role="img" aria-label="Diagram showing raw crawl data grouped into checks and prioritized fixes">
         <defs>
-          <pattern id="visibility-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+          <pattern id="audit-grid" width="32" height="32" patternUnits="userSpaceOnUse">
             <path d="M32 0 H0 V32" fill="none" stroke="rgba(241,239,232,0.045)" />
           </pattern>
-          <filter id="visibility-glow" x="-60%" y="-60%" width="220%" height="220%">
+          <filter id="audit-glow" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="4" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
-          <radialGradient id="visibility-core" cx="50%" cy="50%" r="50%">
+          <radialGradient id="audit-core" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#f1efe8" stopOpacity="0.88" />
             <stop offset="38%" stopColor="#f1efe8" stopOpacity="0.16" />
             <stop offset="100%" stopColor="#080807" stopOpacity="0.12" />
@@ -102,7 +102,7 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
         </defs>
 
         <rect width="1000" height="620" fill="#080807" />
-        <rect width="1000" height="620" fill="url(#visibility-grid)" />
+        <rect width="1000" height="620" fill="url(#audit-grid)" />
         
         {/* Highlighted active column backdrop glow */}
         <AnimatePresence>
@@ -150,7 +150,7 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
           ))}
         </g>
 
-        {/* MESSY SIGNALS: Column 0 */}
+        {/* RAW SITE DATA: Column 0 */}
         <motion.g
           animate={{ opacity: hoveredCol === null || hoveredCol === 0 ? 1 : 0.22 }}
           transition={{ duration: 0.3 }}
@@ -181,7 +181,7 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
           ))}
         </motion.g>
 
-        {/* STRUCTURED EVIDENCE: Column 1 */}
+        {/* CRAWL TABLES: Column 1 */}
         <motion.g
           animate={{ opacity: hoveredCol === null || hoveredCol === 1 ? 1 : 0.22 }}
           transition={{ duration: 0.3 }}
@@ -212,7 +212,7 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
           </g>
         </motion.g>
 
-        {/* AI RETRIEVAL LAYER: Column 2 */}
+        {/* CRAWLER CHECKS: Column 2 */}
         <motion.g
           animate={{ opacity: hoveredCol === null || hoveredCol === 2 ? 1 : 0.22 }}
           transition={{ duration: 0.3 }}
@@ -238,13 +238,13 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
               r="58"
               fill="none"
               stroke="rgba(241,239,232,0.5)"
-              filter="url(#visibility-glow)"
+              filter="url(#audit-glow)"
               animate={{ opacity: [0.45, 0.88, 0.45] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             />
             <motion.circle 
               r="36" 
-              fill="url(#visibility-core)" 
+              fill="url(#audit-core)" 
               stroke="rgba(241,239,232,0.65)"
               animate={hoveredCol === 2 ? { scale: 1.05 } : { scale: 1 }}
               transition={{ duration: 0.3 }}
@@ -265,12 +265,12 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
           ))}
         </motion.g>
 
-        {/* SEARCH VISIBILITY: Column 3 */}
+        {/* SEARCH ACCESS: Column 3 */}
         <motion.g
           animate={{ opacity: hoveredCol === null || hoveredCol === 3 ? 1 : 0.22 }}
           transition={{ duration: 0.3 }}
         >
-          {visibilityDots.map((dot, index) => (
+          {accessDots.map((dot, index) => (
             <motion.circle 
               key={index} 
               cx={dot.x} 
@@ -284,12 +284,12 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
           ))}
         </motion.g>
 
-        {/* BUSINESS CLARITY: Column 4 */}
+        {/* PRIORITY FIXES: Column 4 */}
         <motion.g
           animate={{ opacity: hoveredCol === null || hoveredCol === 4 ? 1 : 0.22 }}
           transition={{ duration: 0.3 }}
         >
-          {clarityRays.map((ray, index) => (
+          {fixRays.map((ray, index) => (
             <motion.path
               key={index}
               d={`M ${ray.fromX} ${ray.fromY - 20} C ${ray.controlX} ${ray.controlY - 20}, ${ray.controlX} ${ray.toY - 20}, ${ray.toX} ${ray.toY - 20}`}
@@ -308,12 +308,12 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
             r="8" 
             fill="#f1efe8" 
             opacity="0.82" 
-            filter="url(#visibility-glow)" 
+            filter="url(#audit-glow)" 
             animate={hoveredCol === 4 ? { scale: [1, 1.25, 1], opacity: 1 } : {}}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
           <circle cx="918" cy="290" r="25" fill="none" stroke="rgba(241,239,232,0.18)" />
-          <text x="888" y="336" fontFamily="Inter, sans-serif" fontSize="8.5" letterSpacing="2.5" fill="rgba(241,239,232,0.5)">CLEAR SIGNAL</text>
+          <text x="888" y="336" fontFamily="Inter, sans-serif" fontSize="8.5" letterSpacing="2.5" fill="rgba(241,239,232,0.5)">FIX LIST</text>
         </motion.g>
 
         {/* Sleek bottom description bar */}
@@ -338,7 +338,7 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
             letterSpacing="2.8" 
             fontWeight="bold"
           >
-            {hoveredCol !== null ? colDescriptions[hoveredCol].title : "TECHNICAL VISIBILITY MAP"}
+            {hoveredCol !== null ? colDescriptions[hoveredCol].title : "AUDIT PIPELINE MAP"}
           </text>
           
           <text 
@@ -349,7 +349,7 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
             fontSize="8.5" 
             letterSpacing="1.2"
           >
-            {hoveredCol !== null ? colDescriptions[hoveredCol].desc : "Hover over columns above to trace technical search signals to business growth."}
+            {hoveredCol !== null ? colDescriptions[hoveredCol].desc : "Hover over each column to follow the path from crawl data to ranked fixes."}
           </text>
         </g>
 

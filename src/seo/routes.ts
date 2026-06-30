@@ -1,15 +1,18 @@
 import { MARKET_THESES } from '../content/marketTheses';
+import { INTENT_PAGES } from '../content/intentPages';
 import {
   aboutJsonLd,
   atlasJsonLd,
   homeJsonLd,
+  intentPageJsonLd,
   marketArticleJsonLd,
   marketsJsonLd,
   methodJsonLd,
+  resumeJsonLd,
   type JsonLd,
 } from './schema';
 
-export type RouteSection = 'home' | 'about' | 'project' | 'service' | 'research' | 'research-article';
+export type RouteSection = 'home' | 'about' | 'resume' | 'project' | 'service' | 'research' | 'research-article' | 'intent';
 
 export interface SeoRoute {
   path: string;
@@ -21,6 +24,7 @@ export interface SeoRoute {
   pageType: 'website' | 'profile' | 'project' | 'service' | 'research' | 'article';
   priority: number;
   includeInSitemap: boolean;
+  noindex?: boolean;
   staticSummary: string;
   image?: string;
   jsonLd?: JsonLd;
@@ -30,82 +34,124 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/',
     aliases: [],
-    title: 'Sulayman Bowles | Technical SEO, AI Search, Finance/Data Systems',
+    title: 'Sulayman Bowles | Technical SEO, Atlas & Finance Research',
     description:
-      'Sulayman Bowles is a McCombs student and Void Agency founder building technical SEO systems, AI-search discoverability workflows, finance/data tools, and evidence-backed web experiences.',
+      'Sulayman Bowles builds technical SEO systems, AI-search readiness workflows, finance and data analysis, and product software.',
     h1: 'Sulayman Bowles',
     section: 'home',
     pageType: 'website',
     priority: 1.0,
     includeInSitemap: true,
     staticSummary:
-      'Technical SEO systems, AI-search discoverability workflows, finance/data tools, and evidence-backed web experiences built by Sulayman Bowles.',
+      'Technical SEO, Atlas, finance research, and web interfaces built from crawl records, search data, filings, and operating assumptions.',
     jsonLd: homeJsonLd(),
   },
   {
     path: '/about',
     aliases: [],
-    title: 'About Sulayman Bowles | Technical SEO, AI Product & Finance/Data',
+    title: 'About Sulayman Bowles | Technical SEO, Atlas & Finance Research',
     description:
-      'Learn about Sulayman Bowles, a McCombs student, Void Agency founder, AI product intern, and builder of technical SEO, AI-search, and finance/data systems.',
+      'Learn about Sulayman Bowles, a McCombs student, Void Agency founder, AI product intern, and builder of Atlas, SEO audit tools, finance research notes, and web interfaces.',
     h1: 'About Sulayman Bowles',
     section: 'about',
     pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
     staticSummary:
-      'Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, technical SEO systems, AI-search workflows, and finance/data tools.',
+      'Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, technical SEO audit tools, finance research notes, and web interfaces.',
     jsonLd: aboutJsonLd(),
+  },
+  {
+    path: '/resume',
+    aliases: ['/resume.html', '/cv', '/cv.html'],
+    title: 'Sulayman Bowles Resume | Technical SEO, Finance & AI',
+    description:
+      'HTML-first resume for Sulayman Bowles across technical SEO, AI search, finance research, data analysis, Atlas, and product/software execution.',
+    h1: 'Sulayman Bowles Resume',
+    section: 'resume',
+    pageType: 'profile',
+    priority: 0.8,
+    includeInSitemap: true,
+    staticSummary:
+      'Stable resume and profile page for Sulayman Bowles with links to Atlas, technical SEO work, finance research, public code, and contact paths.',
+    jsonLd: resumeJsonLd(),
   },
   {
     path: '/atlas',
     aliases: ['/projects/atlas'],
-    title: 'Atlas SEO Audit Console | Crawl Evidence, Indexation & AI Search',
+    title: 'Atlas SEO Audit Console | Crawl Records, Indexation & Technical SEO',
     description:
-      'Atlas is a technical SEO audit console built by Sulayman Bowles for crawl evidence, indexation, internal links, canonicals, structured data, performance inputs, and AI-search readiness.',
+      'Atlas is a technical SEO audit console for crawl records, indexation, internal links, canonicals, structured data, performance inputs, exports, and AI crawler access checks.',
     h1: 'Atlas SEO Audit Console',
     section: 'project',
     pageType: 'project',
     priority: 0.9,
     includeInSitemap: true,
     staticSummary:
-      'Atlas is a technical SEO audit console for crawl evidence, indexation, architecture, internal links, structured data, performance inputs, and AI-search readiness.',
+      'Atlas crawls sites, stores URL-level records, and ranks issues across indexation, architecture, links, schema, performance, exports, and crawler access.',
     jsonLd: atlasJsonLd(),
   },
   {
     path: '/method',
     aliases: ['/void-agency'],
-    title: 'Void Agency Method | Technical SEO & AI Search Visibility Audits',
+    title: 'Void Agency Method | Technical SEO Audits & Crawler Access Checks',
     description:
-      'Void Agency audits crawl paths, indexation, architecture, structured data, performance, analytics, and AI crawler access to improve search visibility.',
+      'Void Agency audits crawl paths, indexation, internal links, templates, structured data, performance, analytics, conversion paths, and AI crawler access.',
     h1: 'Void Agency Method',
     section: 'service',
     pageType: 'service',
     priority: 0.9,
     includeInSitemap: true,
     staticSummary:
-      'Void Agency audits crawl paths, indexation, architecture, structured data, performance, analytics, and AI crawler access to improve search visibility.',
+      'Void Agency turns crawl records, URL groups, search data, analytics, and technical findings into ranked implementation work.',
     jsonLd: methodJsonLd(),
   },
   {
     path: '/markets',
     aliases: ['/projects/markets'],
-    title: 'Markets Research | Investment Cases, Valuation & Crypto Research',
+    title: 'Markets Research | Finance, Data & Market Structure',
     description:
-      'A research archive for Sulayman Bowles covering traditional investment cases, crypto research, valuation logic, market systems, and finance/data reasoning.',
+      'Research index for finance, data analysis, platform power, AI compute infrastructure, money, debt, currency trust, mechanisms, assumptions, and evidence ledgers.',
     h1: 'Markets Research',
     section: 'research',
     pageType: 'research',
     priority: 0.7,
     includeInSitemap: true,
     staticSummary:
-      'Markets Research is a finance and data archive covering investment cases, valuation logic, crypto research, market systems, and decision frameworks.',
+      'Markets Research collects structured market notes with thesis, mechanism, evidence status, assumptions, counterarguments, implications, and open questions.',
     jsonLd: marketsJsonLd(
-      'Markets Research | Investment Cases, Valuation & Crypto Research',
-      'A research archive for Sulayman Bowles covering traditional investment cases, crypto research, valuation logic, market systems, and finance/data reasoning.',
+      'Markets Research | Finance, Data & Market Structure',
+      'Research index for finance, data analysis, platform power, AI compute infrastructure, money, debt, currency trust, mechanisms, assumptions, and evidence ledgers.',
     ),
   },
 ];
+
+const INTENT_ROUTES: SeoRoute[] = INTENT_PAGES.map((page) => {
+  const parentName = page.parent === 'atlas' ? 'Atlas' : page.parent === 'method' ? 'Method' : 'Markets';
+  const parentPath = page.parent === 'atlas' ? '/atlas' : page.parent === 'method' ? '/method' : '/markets';
+  const kind = page.parent === 'atlas' ? 'project' : page.parent === 'method' ? 'service' : 'research';
+
+  return {
+    path: page.path,
+    aliases: [],
+    title: `${page.title} | Sulayman Bowles`,
+    description: page.deck,
+    h1: page.title,
+    section: 'intent',
+    pageType: kind,
+    priority: page.parent === 'markets' ? 0.7 : 0.8,
+    includeInSitemap: true,
+    staticSummary: page.summary,
+    jsonLd: intentPageJsonLd({
+      title: page.title,
+      description: page.deck,
+      path: page.path,
+      parentName,
+      parentPath,
+      kind,
+    }),
+  };
+});
 
 const ARTICLE_ROUTES: SeoRoute[] = MARKET_THESES.map((thesis) => {
   const path = `/markets/${thesis.slug}`;
@@ -114,13 +160,13 @@ const ARTICLE_ROUTES: SeoRoute[] = MARKET_THESES.map((thesis) => {
     path,
     aliases: [],
     title: `${thesis.title} | Sulayman Bowles`,
-    description: thesis.subtitle,
+    description: thesis.thesis,
     h1: thesis.title,
     section: 'research-article',
     pageType: 'article',
-    priority: 0.6,
+    priority: 0.5,
     includeInSitemap: true,
-    staticSummary: thesis.content[0],
+    staticSummary: thesis.thesis,
     jsonLd: marketArticleJsonLd({
       title: thesis.title,
       description: thesis.subtitle,
@@ -130,7 +176,7 @@ const ARTICLE_ROUTES: SeoRoute[] = MARKET_THESES.map((thesis) => {
   };
 });
 
-export const SEO_ROUTES: SeoRoute[] = [...CORE_ROUTES, ...ARTICLE_ROUTES];
+export const SEO_ROUTES: SeoRoute[] = [...CORE_ROUTES, ...INTENT_ROUTES, ...ARTICLE_ROUTES];
 
 export function normalizeInputPath(path: string) {
   const pathname = path.split(/[?#]/)[0] || '/';
