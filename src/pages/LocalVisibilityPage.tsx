@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useState, useMemo, type CSSProperties, type ReactNode } from 'react';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
@@ -146,21 +146,21 @@ function LVProcessStep({ index, title, copy, icon }: ProcessStepProps) {
 
   return (
     <motion.article
-      className="group relative min-h-[320px] border-b border-[#f1efe8]/14 p-5 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] md:border-r md:last:border-r-0 lg:border-b-0"
+      className="group relative min-h-[320px] border-b border-ink/12 p-5 transition-[background-color,border-color] duration-500 hover:bg-ink/[0.02] md:border-r md:last:border-r-0 lg:border-b-0"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/42">
+      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-ink/42">
         <span>{index}</span>
         <span>{isFinalStep ? 'END' : '->'}</span>
       </div>
-      <div className="mb-8 text-[#f1efe8]/55 transition-colors duration-500 group-hover:text-[#f1efe8]/86">
+      <div className="mb-8 text-ink/55 transition-colors duration-500 group-hover:text-ink/86">
         <ProcessIcon type={icon} isHovered={isHovered} />
       </div>
-      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-[#f1efe8]">{title}</h3>
-      <p className="text-sm leading-relaxed text-[#f1efe8]/62">{copy}</p>
+      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-ink">{title}</h3>
+      <p className="text-sm leading-relaxed text-ink/62">{copy}</p>
     </motion.article>
   );
 }
@@ -194,21 +194,83 @@ function LVOutputCard({ title, copy, cta, children, id, onCtaClick }: OutputCard
 
 function LocalCitiesConsole() {
   const [activeCity, setActiveCity] = useState('Austin, TX');
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const cities = ['Austin, TX', 'Dallas, TX', 'Houston, TX', 'San Antonio, TX', 'Denver, CO'];
 
+  const cityRanks: Record<string, number[]> = {
+    'Austin, TX': [1, 1, 2, 1, 3, 2, 4, 3, 7],
+    'Dallas, TX': [2, 3, 4, 1, 2, 3, 5, 8, 12],
+    'Houston, TX': [1, 2, 1, 3, 5, 2, 4, 6, 9],
+    'San Antonio, TX': [4, 6, 8, 3, 5, 7, 9, 12, 16],
+    'Denver, CO': [3, 4, 5, 2, 3, 6, 5, 7, 11]
+  };
+
+  const activeRanks = cityRanks[activeCity] || cityRanks['Austin, TX'];
+
+  const gridData = useMemo(() => {
+    return activeRanks.map((rank, i) => {
+      const row = Math.floor(i / 3) - 1; // -1, 0, 1
+      const col = (i % 3) - 1; // -1, 0, 1
+      const dirX = col === 0 ? '' : col > 0 ? 'E' : 'W';
+      const dirY = row === 0 ? '' : row > 0 ? 'S' : 'N';
+      const displacement = `${Math.abs(row || col) * 1.5}mi ${dirY}${dirX}`.trim() || 'Center HQ';
+      
+      let statusColor = 'bg-[#b7c8a8] text-[#080807]'; // #1-3 (optimal)
+      if (rank > 3 && rank <= 8) statusColor = 'bg-[#f1efe8]/30 text-ink'; // #4-8 (warning)
+      if (rank > 8) statusColor = 'bg-[#c2695e]/80 text-white'; // #9+ (critical)
+
+      return {
+        rank,
+        displacement,
+        statusColor,
+        competitor: rank === 1 ? 'Void Agency' : rank <= 3 ? 'Local SEO Pros' : 'Legacy Directory Corp'
+      };
+    });
+  }, [activeRanks]);
+
   return (
-    <div className="w-full gap-3 text-[10px] uppercase tracking-[0.18em] text-ink/60">
-      {cities.map((city) => (
-        <div 
-          key={city}
-          onClick={() => setActiveCity(city)}
-          className={`flex items-center justify-between border-b border-ink/10 pb-2 mb-2 cursor-pointer transition-colors ${activeCity === city ? 'text-ink font-bold' : ''}`}
-        >
-          <span>{city}</span>
-          <span className={`h-1.5 w-1.5 rounded-full ${activeCity === city ? 'bg-[#b7c8a8]' : 'bg-ink/20'}`} />
+    <div className="w-full space-y-4">
+      <div className="flex flex-wrap gap-1 border-b border-ink/10 pb-2">
+        {cities.map((city) => (
+          <button
+            key={city}
+            onClick={() => setActiveCity(city)}
+            className={`px-2 py-1 text-[8px] font-mono tracking-wider transition-colors cursor-pointer ${activeCity === city ? 'bg-ink text-canvas font-bold' : 'text-ink/60 hover:text-ink'}`}
+          >
+            {city.split(',')[0]}
+          </button>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-[auto_1fr] gap-4 items-center">
+        <div className="grid grid-cols-3 gap-1.5 p-1 bg-ink/5 border border-ink/10">
+          {gridData.map((cell, idx) => (
+            <motion.div
+              key={idx}
+              className={`w-7 h-7 flex items-center justify-center rounded-full text-[9px] font-bold font-mono cursor-pointer ${cell.statusColor}`}
+              whileHover={{ scale: 1.15 }}
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              {cell.rank}
+            </motion.div>
+          ))}
         </div>
-      ))}
+
+        <div className="font-mono text-[8px] text-ink/70 leading-relaxed min-h-[50px] flex flex-col justify-center border-l border-ink/10 pl-3">
+          {hoveredIndex !== null ? (
+            <>
+              <div className="font-bold text-ink">// GRID NODE {hoveredIndex + 1}</div>
+              <div>Dist: {gridData[hoveredIndex].displacement}</div>
+              <div className="truncate">Pos #1: {gridData[hoveredIndex].competitor}</div>
+              <div className="text-[#c2695e]">Rank: {gridData[hoveredIndex].rank}</div>
+            </>
+          ) : (
+            <div className="opacity-50">HOVER GEO-GRID NODES FOR PROXIMITY TELEMETRY</div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -216,7 +278,7 @@ function LocalCitiesConsole() {
 function CrawlTreeVisual() {
   return (
     <div className="relative w-full">
-      <svg viewBox="0 0 240 84" className="h-20 w-full text-ink" aria-hidden="true">
+      <svg viewBox="0 0 240 84" className="w-full h-auto aspect-[240/84] text-ink" aria-hidden="true">
         <g fill="none" stroke="currentColor" opacity="0.28">
           <rect x="82" y="8" width="76" height="18" />
           <rect x="18" y="58" width="58" height="18" />
@@ -267,7 +329,7 @@ function ConsoleModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/82 backdrop-blur-md p-4 md:p-8 xl:p-12 font-sans"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#080807]/15 backdrop-blur-sm p-4 md:p-8 xl:p-12 font-sans"
         >
           <motion.div
             ref={modalRef}
@@ -278,24 +340,24 @@ function ConsoleModal({
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: 24, scale: 0.98, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex h-full max-h-[640px] w-full max-w-[1100px] flex-col border border-[#f1efe8]/15 bg-[#080807] text-[#f1efe8]"
+            className="relative flex h-full max-h-[640px] w-full max-w-[1100px] flex-col border border-[#080807]/15 bg-[#f1efe8] text-[#080807]"
           >
-            <div className="absolute inset-0 pointer-events-none opacity-[0.035] bg-[linear-gradient(to_right,rgba(241,239,232,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(241,239,232,0.06)_1px,transparent_1px)] bg-[size:28px_28px]" />
+            <div className="absolute inset-0 pointer-events-none opacity-[0.035] bg-[linear-gradient(to_right,rgba(8,8,7,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(8,8,7,0.06)_1px,transparent_1px)] bg-[size:28px_28px]" />
 
-            <div className="absolute -left-2 -top-2 h-4 w-4 border-l border-t border-[#f1efe8]/30" />
-            <div className="absolute -right-2 -top-2 h-4 w-4 border-r border-t border-[#f1efe8]/30" />
-            <div className="absolute -left-2 -bottom-2 h-4 w-4 border-l border-b border-[#f1efe8]/30" />
-            <div className="absolute -right-2 -bottom-2 h-4 w-4 border-r border-b border-[#f1efe8]/30" />
+            <div className="absolute -left-2 -top-2 h-4 w-4 border-l border-t border-[#080807]/30" />
+            <div className="absolute -right-2 -top-2 h-4 w-4 border-r border-t border-[#080807]/30" />
+            <div className="absolute -left-2 -bottom-2 h-4 w-4 border-l border-b border-[#080807]/30" />
+            <div className="absolute -right-2 -bottom-2 h-4 w-4 border-r border-b border-[#080807]/30" />
 
-            <div className="flex items-center justify-between border-b border-[#f1efe8]/12 px-6 py-4 font-mono text-[9px] uppercase tracking-[0.32em] z-10">
+            <div className="flex items-center justify-between border-b border-[#080807]/12 px-6 py-4 font-mono text-[9px] uppercase tracking-[0.32em] z-10">
               <div className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#f1efe8]/80" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#080807]/80" />
                 <span id="modal-title" className="font-bold">{title}</span>
               </div>
               <button 
                 id="modal-close-btn"
                 onClick={onClose} 
-                className="hover-target text-[#f1efe8]/50 transition-colors hover:text-[#f1efe8] cursor-pointer"
+                className="hover-target text-[#080807]/50 transition-colors hover:text-[#080807] cursor-pointer"
               >
                 [ CLOSE ESC ]
               </button>
@@ -325,36 +387,36 @@ function LocalMonitorModalContent() {
   const current = locationData[activeTab] || locationData['Austin, TX'];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 text-[#f1efe8] h-full font-sans">
-      <div className="space-y-2 border-r border-[#f1efe8]/12 pr-4">
-        <h4 className="font-mono text-[9px] uppercase tracking-widest text-[#f1efe8]/40 mb-4 font-bold">TERRITORY LOCATIONS</h4>
+    <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 text-[#080807] h-full font-sans">
+      <div className="space-y-2 border-r border-[#080807]/12 pr-4">
+        <h4 className="font-mono text-[9px] uppercase tracking-widest text-[#080807]/40 mb-4 font-bold">TERRITORY LOCATIONS</h4>
         {Object.keys(locationData).map((city) => (
           <button 
             key={city}
             onClick={() => setActiveTab(city)}
-            className={`w-full text-left px-3 py-2 text-xs uppercase tracking-wider font-mono border transition-all duration-200 cursor-pointer ${activeTab === city ? 'bg-[#f1efe8] text-[#080807] border-[#f1efe8]' : 'text-[#f1efe8]/60 border-[#f1efe8]/12 hover:text-[#f1efe8]'}`}
+            className={`w-full text-left px-3 py-2 text-xs uppercase tracking-wider font-mono border transition-all duration-200 cursor-pointer ${activeTab === city ? 'bg-[#080807] text-[#f1efe8] border-[#080807]' : 'text-[#080807]/60 border-[#080807]/12 hover:text-[#080807]'}`}
           >
             {city}
           </button>
         ))}
       </div>
-      <div className="border border-[#f1efe8]/12 p-5 font-mono text-xs space-y-4">
-        <h5 className="font-serif text-lg italic text-[#f1efe8]/90 pb-3 border-b border-[#f1efe8]/10">{activeTab} Local Diagnostics</h5>
+      <div className="border border-[#080807]/12 p-5 font-mono text-xs space-y-4 bg-[#080807]/[0.01]">
+        <h5 className="font-serif text-lg italic text-[#080807]/90 pb-3 border-b border-[#080807]/10">{activeTab} Local Diagnostics</h5>
         <div className="grid grid-cols-2 gap-4">
-          <div className="border border-[#f1efe8]/10 p-3">
-            <span className="text-[#f1efe8]/40 text-[9px] uppercase tracking-wider block">GBP Signals Quality</span>
-            <span className="text-xl font-bold text-[#b7c8a8] mt-1 block">{current.gbpScore}</span>
+          <div className="border border-[#080807]/10 p-3">
+            <span className="text-[#080807]/40 text-[9px] uppercase tracking-wider block">GBP Signals Quality</span>
+            <span className="text-xl font-bold text-[#3d5c2e] mt-1 block">{current.gbpScore}</span>
           </div>
-          <div className="border border-[#f1efe8]/10 p-3">
-            <span className="text-[#f1efe8]/40 text-[9px] uppercase tracking-wider block">Local Citation Count</span>
+          <div className="border border-[#080807]/10 p-3">
+            <span className="text-[#080807]/40 text-[9px] uppercase tracking-wider block">Local Citation Count</span>
             <span className="text-xl font-bold mt-1 block">{current.citations}</span>
           </div>
-          <div className="border border-[#f1efe8]/10 p-3">
-            <span className="text-[#f1efe8]/40 text-[9px] uppercase tracking-wider block">NAP Consistency</span>
-            <span className="text-xl font-bold text-[#b7c8a8] mt-1 block">{current.napConsistency}</span>
+          <div className="border border-[#080807]/10 p-3">
+            <span className="text-[#080807]/40 text-[9px] uppercase tracking-wider block">NAP Consistency</span>
+            <span className="text-xl font-bold text-[#3d5c2e] mt-1 block">{current.napConsistency}</span>
           </div>
-          <div className="border border-[#f1efe8]/10 p-3">
-            <span className="text-[#f1efe8]/40 text-[9px] uppercase tracking-wider block">Google Reviews</span>
+          <div className="border border-[#080807]/10 p-3">
+            <span className="text-[#080807]/40 text-[9px] uppercase tracking-wider block">Google Reviews</span>
             <span className="text-xl font-bold mt-1 block">{current.reviewsCount}</span>
           </div>
         </div>
@@ -373,11 +435,11 @@ function LocalHierarchyModalContent() {
   ];
 
   return (
-    <div className="space-y-6 text-[#f1efe8] font-sans">
-      <div className="border border-[#f1efe8]/12">
+    <div className="space-y-6 text-[#080807] font-sans">
+      <div className="border border-[#080807]/12">
         <table className="w-full border-collapse text-left text-[10px] uppercase tracking-[0.16em]">
           <thead>
-            <tr className="border-b border-[#f1efe8]/15 text-[#f1efe8]/40">
+            <tr className="border-b border-[#080807]/15 text-[#080807]/40">
               <th className="p-3">Page Node</th>
               <th className="p-3">Crawl Depth</th>
               <th className="p-3">Inlinks count</th>
@@ -386,17 +448,134 @@ function LocalHierarchyModalContent() {
           </thead>
           <tbody>
             {treeNodes.map((node) => (
-              <tr key={node.page} className="border-b border-[#f1efe8]/10 last:border-0 hover:bg-white/[0.01]">
+              <tr key={node.page} className="border-b border-[#080807]/10 last:border-0 hover:bg-[#080807]/[0.01]">
                 <td className="p-3 font-mono font-bold">{node.page}</td>
                 <td className="p-3 font-mono">{node.depth}</td>
                 <td className="p-3 font-mono">{node.links}</td>
-                <td className="p-3 normal-case text-[#f1efe8]/60">{node.role}</td>
+                <td className="p-3 normal-case text-ink/60">{node.role}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <CrawlTreeVisual />
+    </div>
+  );
+}
+
+function NapVerifierModalContent() {
+  const [selectedBranch, setSelectedBranch] = useState<'austin' | 'dallas' | 'denver'>('austin');
+
+  const branches = {
+    austin: {
+      name: 'Void Agency Austin',
+      address: '701 Congress Ave, Austin, TX 78701',
+      phone: '512-555-0199',
+      directories: [
+        { platform: 'Google Maps', name: 'Void Agency Austin', address: '701 Congress Ave, Austin, TX 78701', phone: '512-555-0199', status: 'MATCH' },
+        { platform: 'Apple Maps', name: 'Void Agency Austin', address: '701 Congress Ave, Austin, TX 78701', phone: '512-555-0199', status: 'MATCH' },
+        { platform: 'Yelp Listings', name: 'Void Agency (Austin)', address: '701 Congress Ave., Austin, TX 78701', phone: '512-555-0199', status: 'DISCREPANCY' }
+      ]
+    },
+    dallas: {
+      name: 'Void Agency Dallas',
+      address: '2200 Ross Ave, Dallas, TX 75201',
+      phone: '214-555-0211',
+      directories: [
+        { platform: 'Google Maps', name: 'Void Agency Dallas', address: '2200 Ross Ave, Dallas, TX 75201', phone: '214-555-0211', status: 'MATCH' },
+        { platform: 'Apple Maps', name: 'Void Agency (Dallas HQ)', address: '2200 Ross Avenue, Dallas, TX 75201', phone: '214-555-0211', status: 'DISCREPANCY' },
+        { platform: 'Yelp Listings', name: 'Void Agency Dallas', address: '2200 Ross Ave, Dallas, TX 75201', phone: '214-555-0211', status: 'MATCH' }
+      ]
+    },
+    denver: {
+      name: 'Void Agency Denver',
+      address: '1700 Lincoln St, Denver, CO 80203',
+      phone: '303-555-0314',
+      directories: [
+        { platform: 'Google Maps', name: 'Void Agency Denver', address: '1700 Lincoln St, Denver, CO 80203', phone: '303-555-0314', status: 'MATCH' },
+        { platform: 'Apple Maps', name: 'Void Agency Denver', address: '1700 Lincoln Street, Denver, CO 80203', phone: '303-555-0314', status: 'DISCREPANCY' },
+        { platform: 'Yelp Listings', name: 'Void Agency Denver Node', address: '1700 Lincoln St, Denver, CO 80203', phone: '303-555-0314', status: 'DISCREPANCY' }
+      ]
+    }
+  };
+
+  const current = branches[selectedBranch];
+
+  const handleCopySchema = () => {
+    const schema = `{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "${current.name}",
+  "telephone": "${current.phone}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "${current.address.split(',')[0]}",
+    "addressLocality": "${current.address.split(',')[1].trim()}",
+    "addressRegion": "${current.address.split(',')[2].trim().split(' ')[0]}",
+    "postalCode": "${current.address.split(',')[2].trim().split(' ')[1]}",
+    "addressCountry": "US"
+  }
+}`;
+    navigator.clipboard.writeText(schema);
+  };
+
+  return (
+    <div className="space-y-6 text-[#080807] font-sans">
+      <div className="flex gap-2 border-b border-[#080807]/10 pb-3">
+        {(['austin', 'dallas', 'denver'] as const).map((b) => (
+          <button
+            key={b}
+            onClick={() => setSelectedBranch(b)}
+            className={`border px-3 py-1.5 text-[8.5px] uppercase tracking-wider font-mono cursor-pointer transition-colors ${selectedBranch === b ? 'border-[#b7c8a8] text-[#3d5c2e] bg-[#b7c8a8]/15 font-bold' : 'border-[#080807]/12 text-[#080807]/50 hover:text-[#080807]'}`}
+          >
+            {b} Branch
+          </button>
+        ))}
+      </div>
+
+      <div className="space-y-4">
+        <div className="text-[8.5px] uppercase tracking-widest text-[#080807]/40 font-mono">// DIRECTORY SYNC STATS</div>
+        <div className="border border-[#080807]/12 overflow-x-auto">
+          <table className="w-full border-collapse text-left text-[9px] uppercase tracking-wider font-mono">
+            <thead>
+              <tr className="border-b border-[#080807]/15 text-[#080807]/40">
+                <th className="p-3">Platform</th>
+                <th className="p-3">Name</th>
+                <th className="p-3">Address</th>
+                <th className="p-3">Phone</th>
+                <th className="p-3">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {current.directories.map((dir, idx) => (
+                <tr key={idx} className="border-b border-[#080807]/10 last:border-0 hover:bg-[#080807]/[0.01]">
+                  <td className="p-3 font-bold">{dir.platform}</td>
+                  <td className={dir.name !== current.name ? 'p-3 text-[#c2695e]' : 'p-3 opacity-80'}>{dir.name}</td>
+                  <td className={dir.address !== current.address ? 'p-3 text-[#c2695e]' : 'p-3 opacity-80'}>{dir.address}</td>
+                  <td className={dir.phone !== current.phone ? 'p-3 text-[#c2695e]' : 'p-3 opacity-80'}>{dir.phone}</td>
+                  <td className="p-3">
+                    <span className={`px-1.5 py-0.5 border text-[7.5px] leading-none ${dir.status === 'MATCH' ? 'text-[#3d5c2e] border-[#b7c8a8]/40 bg-[#b7c8a8]/15 font-semibold' : 'text-[#c2695e] border-[#c2695e]/30 bg-[#c2695e]/8 font-semibold'}`}>
+                      {dir.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#080807]/10">
+          <div className="text-[7.5px] text-[#080807]/40 tracking-widest font-mono">
+            URI SCHEMA SYNC TARGET: SCHEMA.LOCALBUSINESS.{selectedBranch.toUpperCase()}
+          </div>
+          <button
+            onClick={handleCopySchema}
+            className="hover-target w-full sm:w-auto bg-[#080807] text-[#f1efe8] font-mono text-[9px] font-semibold uppercase tracking-wider px-5 py-2 hover:bg-[#080807]/90 transition-colors cursor-pointer"
+          >
+            COPY SYNC SCHEMA
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -457,7 +636,7 @@ export default function LocalVisibilityPage() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.08} yOffset={18} blur={false} className="w-full self-center">
-          <div className="group relative border border-ink/12 p-8 bg-ink/[0.015]">
+          <div className="group relative border border-ink/12 p-4 md:p-8 bg-ink/[0.015]">
             <CrawlTreeVisual />
             <div className="mt-4 grid grid-cols-3 border-t border-ink/12 text-[9px] uppercase tracking-[0.22em] text-ink/46 pt-4">
               <span>LOCATION GRAPH</span>
@@ -483,7 +662,7 @@ export default function LocalVisibilityPage() {
 
           <div className="grid grid-cols-1 border-y border-ink/12 md:grid-cols-2 xl:grid-cols-5 xl:border-y-0">
             {processSteps.map((step) => (
-              <div key={step.title} className="text-[#f1efe8] bg-ink">
+              <div key={step.title} className="text-ink bg-ink/[0.015]">
                 <LVProcessStep {...step} />
               </div>
             ))}
@@ -631,47 +810,13 @@ export default function LocalVisibilityPage() {
       </ConsoleModal>
 
       <ConsoleModal isOpen={activeModal === 'nap'} onClose={() => setActiveModal(null)} title="03 / NAP CITATION VERIFIER">
-        <div className="space-y-4 text-[#f1efe8] font-sans">
-          <p className="text-sm text-[#f1efe8]/60 leading-relaxed">Verification audit of business Name, Address, and Phone data alignment across directories.</p>
-          <div className="border border-[#f1efe8]/12 font-mono text-xs">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b border-[#f1efe8]/12 text-[#f1efe8]/40">
-                  <th className="p-3">Platform</th>
-                  <th className="p-3">Name</th>
-                  <th className="p-3">Phone</th>
-                  <th className="p-3">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-[#f1efe8]/8">
-                  <td className="p-3">Google Maps</td>
-                  <td className="p-3">Void Agency Austin</td>
-                  <td className="p-3">512-555-0199</td>
-                  <td className="p-3 text-[#b7c8a8]">MATCH</td>
-                </tr>
-                <tr className="border-b border-[#f1efe8]/8">
-                  <td className="p-3">Apple Maps</td>
-                  <td className="p-3">Void Agency Austin</td>
-                  <td className="p-3">512-555-0199</td>
-                  <td className="p-3 text-[#b7c8a8]">MATCH</td>
-                </tr>
-                <tr>
-                  <td className="p-3">Yelp</td>
-                  <td className="p-3">Void Agency (Austin)</td>
-                  <td className="p-3">512-555-0199</td>
-                  <td className="p-3 text-[#c2695e]">NAME MISMATCH</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <NapVerifierModalContent />
       </ConsoleModal>
 
       <ConsoleModal isOpen={activeModal === 'schema'} onClose={() => setActiveModal(null)} title="04 / LOCAL BUSINESS SCHEMA VALIDATOR">
-        <div className="space-y-4 text-[#f1efe8] font-sans">
-          <p className="text-sm text-[#f1efe8]/60 leading-relaxed">Verify LocalBusiness JSON-LD markup schema block syntax.</p>
-          <pre className="bg-white/[0.02] border border-[#f1efe8]/10 p-4 font-mono text-[10px] text-[#b7c8a8] overflow-x-auto whitespace-pre-wrap select-all">
+        <div className="space-y-4 text-[#080807] font-sans">
+          <p className="text-sm text-ink/60 leading-relaxed">Verify LocalBusiness JSON-LD markup schema block syntax.</p>
+          <pre className="bg-[#080807]/[0.02] border border-[#080807]/10 p-4 font-mono text-[10px] text-[#3d5c2e] overflow-x-auto whitespace-pre-wrap select-all">
 {`{
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -693,12 +838,12 @@ export default function LocalVisibilityPage() {
       </ConsoleModal>
 
       <ConsoleModal isOpen={activeModal === 'insights'} onClose={() => setActiveModal(null)} title="05 / GBP IMPRESSIONS CONVERSION REPORT">
-        <div className="space-y-4 text-[#f1efe8] font-sans">
-          <p className="text-sm text-[#f1efe8]/60 leading-relaxed">Calculated customer direction conversion rates pre and post GBP territory audit.</p>
-          <div className="border border-[#f1efe8]/12 p-4 font-mono text-xs space-y-2 text-[#f1efe8]/80">
+        <div className="space-y-4 text-[#080807] font-sans">
+          <p className="text-sm text-ink/60 leading-relaxed">Calculated customer direction conversion rates pre and post GBP territory audit.</p>
+          <div className="border border-[#080807]/12 p-4 font-mono text-xs space-y-2 text-ink/80">
             <div>Pre-Audit Direction Conversions: 1,240 clicks / month</div>
             <div>Post-Audit Direction Conversions: 1,587 clicks / month</div>
-            <div className="text-[#b7c8a8] font-bold">Impressions Delta: +27.9% growth</div>
+            <div className="text-[#3d5c2e] font-bold">Impressions Delta: +27.9% growth</div>
           </div>
         </div>
       </ConsoleModal>

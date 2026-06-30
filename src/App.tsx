@@ -51,7 +51,6 @@ const FooterM = lazy(() => import('./components/FooterM').then(m => ({ default: 
 const CONTACT_HASH = '#contact';
 const HOME_SEO = getSeoRoute('/')!;
 const HOME_PRELOADER_SESSION_KEY = 'portfolio-home-preloader-seen';
-const BRIEF_FIELDS = ['DOMAIN', 'PRIMARY ISSUE', 'TIMELINE', 'SYSTEM', 'OUTPUT'];
 
 function hasSeenHomePreloader() {
   try {
@@ -275,56 +274,6 @@ function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
         </h1>
       </div>
     </main>
-  );
-}
-
-function LivingBriefBackground({ reducedMotion }: { reducedMotion: boolean }) {
-  return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-      <motion.div
-        className="absolute left-[8%] top-16 h-[70rem] w-[54rem] max-w-[115vw] origin-top-left -rotate-[4deg] border border-canvas/[0.055] bg-canvas/[0.018]"
-        initial={false}
-        animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <div className="absolute inset-8 border border-canvas/[0.035]" />
-        <div className="absolute left-8 top-8 h-8 w-8 border-l border-t border-canvas/[0.08]" />
-        <div className="absolute right-8 top-8 h-8 w-8 border-r border-t border-canvas/[0.08]" />
-        <div className="absolute bottom-8 left-8 h-8 w-8 border-b border-l border-canvas/[0.08]" />
-        <div className="absolute bottom-8 right-8 h-8 w-8 border-b border-r border-canvas/[0.08]" />
-        <div className="absolute left-14 right-14 top-24 flex items-center justify-between border-b border-canvas/[0.07] pb-5 text-[9px] uppercase tracking-[0.34em] text-canvas/[0.16]">
-          <span>PROJECT BRIEF</span>
-          <span>INTAKE / 01</span>
-        </div>
-        <div className="absolute left-14 right-14 top-44 grid gap-10">
-          {BRIEF_FIELDS.map((field, index) => (
-            <div key={field} className="grid gap-4">
-              <div className="flex items-center gap-5 text-[8px] uppercase tracking-[0.32em] text-canvas/[0.15]">
-                <span className="w-24">{field}</span>
-                <span className="h-px flex-1 bg-canvas/[0.07]" />
-              </div>
-              <div className="h-px bg-canvas/[0.045]" />
-              {index === 1 && <div className="h-px w-2/3 bg-canvas/[0.035]" />}
-            </div>
-          ))}
-        </div>
-        <div className="absolute bottom-20 left-14 right-14 grid grid-cols-3 gap-5">
-          {['SOURCE', 'REVIEW', 'REPORT'].map((label) => (
-            <div key={label} className="border-t border-canvas/[0.05] pt-3 text-[7px] uppercase tracking-[0.3em] text-canvas/[0.13]">
-              {label}
-            </div>
-          ))}
-        </div>
-      </motion.div>
-
-      {!reducedMotion && (
-        <motion.div
-          className="absolute left-0 right-0 top-[26%] h-px bg-gradient-to-r from-transparent via-[#b7c8a8]/20 to-transparent"
-          animate={{ y: [0, 420, 0], opacity: [0, 0.55, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      )}
-    </div>
   );
 }
 
@@ -863,12 +812,12 @@ function HomePage() {
             </motion.div>
             
             {/* Foreground content */}
-            <div className="absolute right-0 top-1/2 max-w-sm -translate-y-1/2 border-l border-ink/18 bg-canvas/35 py-2 pl-8 pr-2 backdrop-blur-[2px] md:max-w-md md:pl-12">
-               <h3 className="mb-8 font-serif text-3xl font-light italic md:text-5xl">Operating Method</h3>
-               <p className="mb-8 font-sans text-xs uppercase leading-tight tracking-[0.2em] text-ink/68">
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 max-w-sm md:max-w-md bg-canvas/80 backdrop-blur-md p-8 md:p-12 border border-ink/10">
+               <h3 className="font-serif italic text-3xl md:text-5xl mb-8 font-light">Operating Method</h3>
+               <p className="font-sans text-xs uppercase tracking-[0.2em] text-ink/70 leading-tight mb-8">
                  I separate signal from presentation. First, collect the evidence. Then structure it. Then decide what it means, what risk it creates, and what should be fixed.
                </p>
-               <ul className="group space-y-4 border-t border-ink/10 pt-8 font-sans text-[10px] uppercase tracking-widest text-ink/48">
+               <ul className="space-y-4 font-sans text-[10px] uppercase tracking-widest border-t border-ink/10 pt-8 text-ink/50 group">
                  <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>01</span><span className="text-ink">Crawl before claims</span></li>
                  <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>02</span><span className="text-ink">Structure before scale</span></li>
                  <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>03</span><span className="text-ink">Evidence before polish</span></li>
@@ -904,7 +853,7 @@ function HomePage() {
                         <motion.div 
                           initial="initial"
                           whileHover="hover"
-                          className="relative flex min-h-[220px] flex-col overflow-hidden border-t border-ink/14 pt-8 transition-opacity duration-500 hover-target hover:!opacity-100 group-hover:opacity-28 group/discipline" 
+                          className="relative overflow-hidden flex flex-col border-t border-ink/20 pt-8 hover-target transition-opacity duration-500 hover:!opacity-100 group-hover:opacity-20 group/discipline min-h-[220px]" 
                           data-cursor-text="READ" 
                           style={{ perspective: 1000 }}
                         >
@@ -921,7 +870,7 @@ function HomePage() {
                           {/* Interactive background SVGs based on card number */}
                           {item.num === '01' && (
                             <svg
-                              className="absolute bottom-0 right-0 z-0 hidden h-44 w-44 pointer-events-none text-ink/[0.07] transition-colors duration-500 group-hover/discipline:text-ink/[0.18] md:block"
+                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
                               viewBox="0 0 200 200"
                               fill="none"
                             >
@@ -1068,7 +1017,7 @@ function HomePage() {
 
                           {item.num === '02' && (
                             <svg
-                              className="absolute bottom-0 right-0 z-0 hidden h-44 w-44 pointer-events-none text-ink/[0.07] transition-colors duration-500 group-hover/discipline:text-ink/[0.18] md:block"
+                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
                               viewBox="0 0 200 200"
                               fill="none"
                             >
@@ -1160,7 +1109,7 @@ function HomePage() {
 
                           {item.num === '03' && (
                             <svg
-                              className="absolute bottom-0 right-0 z-0 hidden h-44 w-44 pointer-events-none text-ink/[0.07] transition-colors duration-500 group-hover/discipline:text-ink/[0.18] md:block"
+                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
                               viewBox="0 0 200 200"
                               fill="none"
                             >
@@ -1252,7 +1201,7 @@ function HomePage() {
 
                           {item.num === '04' && (
                             <svg
-                              className="absolute bottom-0 right-0 z-0 hidden h-44 w-44 pointer-events-none text-ink/[0.07] transition-colors duration-500 group-hover/discipline:text-ink/[0.18] md:block"
+                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
                               viewBox="0 0 200 200"
                               fill="none"
                             >
@@ -1343,7 +1292,6 @@ function HomePage() {
         {/* FOOTER */}
         <footer id="contact" className="w-full bg-ink text-canvas selection:bg-canvas selection:text-ink relative overflow-hidden pt-24 md:pt-32">
            <Suspense fallback={null}><FooterM /></Suspense>
-           <LivingBriefBackground reducedMotion={prefersReducedMotion} />
 
            <div className="px-4 md:px-16 relative z-10 w-full flex flex-col">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 border-b border-canvas/20 pb-16 md:pb-32">

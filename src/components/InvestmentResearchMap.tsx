@@ -11,7 +11,7 @@ const marketSignals = Array.from({ length: 48 }, (_, i) => {
   const y = 128 + ((i * 53) % 360);
   const size = 1.6 + (i % 5) * 0.5;
   const isSquare = i % 7 === 0;
-  const isCrypto = i % 3 === 0; // alternating accent colors
+  const isCrypto = i % 3 === 0;
   return { x, y, size, isSquare, isCrypto };
 });
 
@@ -113,11 +113,6 @@ export default function InvestmentResearchMap({ className = '' }: InvestmentRese
             <stop offset="38%" stopColor="#f1efe8" stopOpacity="0.16" />
             <stop offset="100%" stopColor="#080807" stopOpacity="0.12" />
           </radialGradient>
-          {/* Subtle green glow for traditional data accents */}
-          <radialGradient id="research-green-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#b7c8a8" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#080807" stopOpacity="0" />
-          </radialGradient>
         </defs>
 
         {/* Base layer */}
@@ -189,14 +184,14 @@ export default function InvestmentResearchMap({ className = '' }: InvestmentRese
                   width={sig.size}
                   height={sig.size}
                   fill="none"
-                  stroke={sig.isCrypto ? 'rgba(194,105,94,0.45)' : 'rgba(183,200,168,0.45)'}
+                  stroke={sig.isCrypto ? 'rgba(194,105,94,0.32)' : 'rgba(241,239,232,0.38)'}
                 />
               ) : (
                 <circle
                   cx={sig.x}
                   cy={sig.y}
                   r={sig.size / 2}
-                  fill={sig.isCrypto ? 'rgba(194,105,94,0.38)' : 'rgba(241,239,232,0.36)'}
+                  fill={sig.isCrypto ? 'rgba(194,105,94,0.26)' : 'rgba(241,239,232,0.36)'}
                 />
               )}
               {i % 8 === 0 && (
@@ -251,10 +246,10 @@ export default function InvestmentResearchMap({ className = '' }: InvestmentRese
                   cx="0"
                   cy="0"
                   r="2"
-                  fill={i % 4 === 0 ? 'rgba(183,200,168,0.6)' : 'rgba(241,239,232,0.42)'}
+                  fill={i % 4 === 0 ? 'rgba(241,239,232,0.52)' : 'rgba(241,239,232,0.38)'}
                   animate={
                     hoveredCol === 1
-                      ? { scale: 1.3, fill: i % 4 === 0 ? '#b7c8a8' : '#f1efe8' }
+                      ? { scale: 1.3, fill: '#f1efe8' }
                       : { scale: 1 }
                   }
                   transition={{ duration: 0.3, delay: i * 0.02 }}
@@ -384,7 +379,7 @@ export default function InvestmentResearchMap({ className = '' }: InvestmentRese
               cx={pt.x}
               cy={pt.y}
               r={1.6 + (i % 3) * 0.5}
-              fill={i % 5 === 0 ? 'rgba(183,200,168,0.55)' : 'rgba(241,239,232,0.34)'}
+              fill={i % 5 === 0 ? 'rgba(241,239,232,0.5)' : 'rgba(241,239,232,0.34)'}
               animate={hoveredCol === 2 ? { scale: 1.2, fillOpacity: 0.8 } : { scale: 1 }}
               transition={{ duration: 0.3 }}
             />
@@ -444,7 +439,7 @@ export default function InvestmentResearchMap({ className = '' }: InvestmentRese
                   cell.isDanger
                     ? 'rgba(194,105,94,0.35)'
                     : cell.isHighlight
-                      ? 'rgba(183,200,168,0.2)'
+                      ? 'rgba(241,239,232,0.18)'
                       : `rgba(241,239,232,${cell.intensity})`
                 }
                 stroke="rgba(241,239,232,0.06)"
@@ -455,7 +450,7 @@ export default function InvestmentResearchMap({ className = '' }: InvestmentRese
                         fill: cell.isDanger
                           ? 'rgba(194,105,94,0.55)'
                           : cell.isHighlight
-                            ? 'rgba(183,200,168,0.35)'
+                            ? 'rgba(241,239,232,0.28)'
                             : `rgba(241,239,232,${cell.intensity + 0.04})`,
                       }
                     : {}
@@ -641,11 +636,11 @@ export default function InvestmentResearchMap({ className = '' }: InvestmentRese
 
         {/* Invisible Vertical Hover Zones */}
         <g opacity="0">
-          <rect x="24" y="24" width="176" height="484" fill="red" pointerEvents="all" onMouseEnter={() => setHoveredCol(0)} onMouseLeave={() => setHoveredCol(null)} />
-          <rect x="200" y="24" width="200" height="484" fill="green" pointerEvents="all" onMouseEnter={() => setHoveredCol(1)} onMouseLeave={() => setHoveredCol(null)} />
-          <rect x="400" y="24" width="220" height="484" fill="blue" pointerEvents="all" onMouseEnter={() => setHoveredCol(2)} onMouseLeave={() => setHoveredCol(null)} />
-          <rect x="620" y="24" width="190" height="484" fill="yellow" pointerEvents="all" onMouseEnter={() => setHoveredCol(3)} onMouseLeave={() => setHoveredCol(null)} />
-          <rect x="810" y="24" width="166" height="484" fill="purple" pointerEvents="all" onMouseEnter={() => setHoveredCol(4)} onMouseLeave={() => setHoveredCol(null)} />
+          <rect x="24" y="24" width="176" height="484" fill="currentColor" pointerEvents="all" onMouseEnter={() => setHoveredCol(0)} onMouseLeave={() => setHoveredCol(null)} />
+          <rect x="200" y="24" width="200" height="484" fill="currentColor" pointerEvents="all" onMouseEnter={() => setHoveredCol(1)} onMouseLeave={() => setHoveredCol(null)} />
+          <rect x="400" y="24" width="220" height="484" fill="currentColor" pointerEvents="all" onMouseEnter={() => setHoveredCol(2)} onMouseLeave={() => setHoveredCol(null)} />
+          <rect x="620" y="24" width="190" height="484" fill="currentColor" pointerEvents="all" onMouseEnter={() => setHoveredCol(3)} onMouseLeave={() => setHoveredCol(null)} />
+          <rect x="810" y="24" width="166" height="484" fill="currentColor" pointerEvents="all" onMouseEnter={() => setHoveredCol(4)} onMouseLeave={() => setHoveredCol(null)} />
         </g>
       </svg>
     </div>

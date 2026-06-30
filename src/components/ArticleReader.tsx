@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useEffect } from 'react';
 import { getMarketThesisByIndex } from '../content/marketTheses';
+import { NetworkMonopoliesVisual, ComputationalCommodityVisual, FiatHorizonVisual } from './ThesisVisuals';
 
 interface ArticleReaderProps {
   isOpen: boolean;
@@ -10,6 +11,19 @@ interface ArticleReaderProps {
 
 export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleReaderProps) {
   const data = getMarketThesisByIndex(thesisId);
+
+  const renderVisual = () => {
+    switch (data.slug) {
+      case 'network-monopolies':
+        return <NetworkMonopoliesVisual />;
+      case 'computational-commodity-systems':
+        return <ComputationalCommodityVisual />;
+      case 'fiat-horizon':
+        return <FiatHorizonVisual />;
+      default:
+        return null;
+    }
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -85,7 +99,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
               <div className="space-y-3.5 text-[9.5px] uppercase tracking-[0.18em]">
                 <div className="flex justify-between border-b border-[#f1efe8]/8 pb-2">
                   <span className="text-[#f1efe8]/48">CONVICTION</span>
-                  <span className="text-[#b7c8a8] font-semibold">{data.conviction}</span>
+                  <span className="text-[#f1efe8] font-semibold">{data.conviction}</span>
                 </div>
                 <div className="flex justify-between border-b border-[#f1efe8]/8 pb-2">
                   <span className="text-[#f1efe8]/48">HORIZON</span>
@@ -123,7 +137,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
           <div className="pointer-events-none absolute bottom-4 right-4 h-3 w-3 border-b border-r border-[#f1efe8]/20" />
 
           <article className="max-w-2xl">
-            <span className="text-[9.5px] font-medium uppercase tracking-[0.38em] text-[#b7c8a8]">{data.category}</span>
+            <span className="text-[9.5px] font-medium uppercase tracking-[0.38em] text-[#f1efe8]">{data.category}</span>
             
             <h1 className="mt-4 font-serif text-3xl italic leading-[1.12] text-[#f1efe8] md:text-4xl lg:text-5xl">
               {data.title}
@@ -143,7 +157,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
                   const rest = paragraph.slice(1);
                   return (
                     <p key={index}>
-                      <span className="float-left text-[3.85rem] font-serif italic mr-2.5 mt-1 leading-[0.8] text-[#b7c8a8] select-none">
+                      <span className="float-left text-[3.85rem] font-serif italic mr-2.5 mt-1 leading-[0.8] text-[#f1efe8] select-none">
                         {firstChar}
                       </span>
                       {rest}
@@ -163,7 +177,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
               <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/20" />
               <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/20" />
 
-              <div className="text-[8.5px] uppercase tracking-[0.24em] text-[#b7c8a8] mb-4 text-center font-mono font-medium">
+              <div className="text-[8.5px] uppercase tracking-[0.24em] text-[#f1efe8] mb-4 text-center font-mono font-medium">
                 {data.formulaLabel}
               </div>
               <div className="flex justify-center items-center py-8 border-y border-[#f1efe8]/8 text-[#f1efe8] text-base md:text-lg overflow-x-auto font-mono select-all bg-[#080807]/30 shadow-inner">
@@ -181,6 +195,24 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
               <p className="text-xs leading-relaxed text-[#f1efe8]/52">
                 {data.risks}
               </p>
+            </div>
+
+            {/* Academic Appendix: Model Simulator */}
+            <div className="mt-12 border-t border-[#f1efe8]/12 pt-8">
+              <details className="group cursor-pointer">
+                <summary className="hover-target flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-[#f1efe8] select-none list-none">
+                  <span>APPENDIX A: ACTIVE THESIS MODEL SIMULATOR</span>
+                  <span className="font-mono text-[9px] text-[#f1efe8]/40 transition-transform duration-300 group-open:rotate-180">[+]</span>
+                </summary>
+                <div className="mt-6 space-y-4">
+                  <p className="font-serif italic text-sm leading-relaxed text-[#f1efe8]/64 normal-case">
+                    This interactive simulator models the capital-sink and network expansion dynamics described in the thesis. Adjust the input coefficients below to observe the clearing price and solvency outcomes.
+                  </p>
+                  <div className="pt-2 select-none cursor-default">
+                    {renderVisual()}
+                  </div>
+                </div>
+              </details>
             </div>
           </article>
         </div>

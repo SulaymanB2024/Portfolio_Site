@@ -1,7 +1,6 @@
-import { motion, AnimatePresence } from 'motion/react';
-import { useEffect, useState } from 'react';
-import { useSEO } from '../utils/seo';
-
+import { AnimatePresence, motion } from 'motion/react';
+import { ArrowUpRight, BookOpen } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 import { SmoothCursor } from '../components/SmoothCursor';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { useReducedMotion } from '../hooks/useReducedMotion';
@@ -12,311 +11,336 @@ import { InternalFooter } from '../components/InternalFooter';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import { WireframeGrid } from '../components/WireframeGrid';
 import InvestmentResearchMap from '../components/InvestmentResearchMap';
+import CandlestickChart from '../components/CandlestickChart';
 import { MARKET_THESES } from '../content/marketTheses';
 import ArticleReader from '../components/ArticleReader';
+import { useSEO } from '../utils/seo';
+import { ScrollReveal } from '../components/ScrollReveal';
 
 const MARKETS_SEO = getSeoRoute('/markets')!;
 
-// Mini spinning Compass/Reticle Icon for Page Header
-function HeaderReticle() {
+type SurfaceId = 'market-brief' | 'equity-memo' | 'crypto-map' | 'model-workbook';
+
+type Surface = {
+  id: SurfaceId;
+  number: string;
+  label: string;
+  title: string;
+  summary: string;
+  status: string;
+  output: string;
+  sourceBasis: string[];
+  metrics: { label: string; value: string }[];
+};
+
+const tickerTape = [
+  ['SPX', '5,428.11', '+0.42', [28, 31, 29, 36, 39, 44, 42, 47, 51]],
+  ['NDX', '19,102.44', '+0.61', [36, 34, 39, 46, 44, 51, 55, 53, 60]],
+  ['BTC', '68,420', '+1.28', [30, 35, 33, 39, 47, 45, 51, 58, 62]],
+  ['ETH', '3,720', '+0.84', [24, 28, 31, 29, 38, 41, 40, 45, 49]],
+  ['DXY', '104.18', '-0.17', [62, 60, 57, 59, 54, 51, 53, 48, 46]],
+  ['10Y', '4.28%', '+0.03', [44, 42, 46, 48, 45, 49, 51, 50, 53]],
+] as const;
+
+const researchSurfaces: Surface[] = [
+  {
+    id: 'market-brief',
+    number: '01',
+    label: 'General financial report',
+    title: 'Monthly Market Brief',
+    summary: 'A top-down reporting artifact for macro regime, risk appetite, equity leadership, crypto liquidity, and allocation notes.',
+    status: 'Framework mock',
+    output: 'Brief / PDF / web note',
+    sourceBasis: ['Rates and inflation series', 'Index breadth tape', 'Dollar and liquidity checks', 'Cross-asset risk notes'],
+    metrics: [
+      { label: 'Cadence', value: 'Monthly' },
+      { label: 'Coverage', value: 'Macro / equities / crypto' },
+      { label: 'Authority', value: 'Preview data' },
+    ],
+  },
+  {
+    id: 'equity-memo',
+    number: '02',
+    label: 'Equity research',
+    title: 'Equity Memo Surface',
+    summary: 'Company research framed as artifact: filing notes, comparable valuation, unit economics, scenario range, and thesis breakpoints.',
+    status: 'Research draft',
+    output: 'Memo / model',
+    sourceBasis: ['10-K and 10-Q notes', 'Comparable company table', 'Revenue and margin bridge', 'Bear/base/upside range'],
+    metrics: [
+      { label: 'Lens', value: 'Quality / valuation' },
+      { label: 'Evidence', value: 'Filings' },
+      { label: 'Authority', value: 'Draft surface' },
+    ],
+  },
+  {
+    id: 'crypto-map',
+    number: '03',
+    label: 'Crypto research',
+    title: 'Protocol Map Surface',
+    summary: 'Protocol research for liquidity, incentives, revenue capture, fee pressure, TVL durability, and token-demand structure.',
+    status: 'Visual draft',
+    output: 'Protocol map / notes',
+    sourceBasis: ['Stablecoin supply', 'Protocol revenue', 'TVL retention', 'Exchange flow proxy'],
+    metrics: [
+      { label: 'Lens', value: 'Liquidity structure' },
+      { label: 'Evidence', value: 'On-chain data' },
+      { label: 'Authority', value: 'Mock feed' },
+    ],
+  },
+  {
+    id: 'model-workbook',
+    number: '04',
+    label: 'Models and tools',
+    title: 'Model Workbook Surface',
+    summary: 'Financial models, screeners, valuation bridges, dashboard notes, and source-backed assumptions in a quieter archive form.',
+    status: 'Request only',
+    output: 'Workbook / dashboard',
+    sourceBasis: ['Assumption log', 'Scenario table', 'Sensitivity ranges', 'Export notes'],
+    metrics: [
+      { label: 'Format', value: 'Workbook' },
+      { label: 'State', value: 'Private preview' },
+      { label: 'Authority', value: 'Request only' },
+    ],
+  },
+];
+
+const archiveRows = [
+  ['001', 'Monthly Market Brief', 'Macro / equities / crypto', 'Preview report', 'market-brief'],
+  ['002', 'Enterprise Software Durability', 'Equity memo', 'Research draft', 'equity-memo'],
+  ['003', 'Base Liquidity Flywheel', 'Crypto protocol', 'Visual draft', 'crypto-map'],
+  ['004', 'Valuation Assumption Ledger', 'Model workbook', 'Request only', 'model-workbook'],
+] as const;
+
+const reportChecks = [
+  ['Liquidity', 'Dollar, rates, stablecoin impulse', 'Monitor'],
+  ['Evidence', 'Filings, peers, protocol revenue', 'Normalize'],
+  ['Risk', 'Volatility, thesis breaks, event tape', 'Flag'],
+  ['Output', 'Brief, memo, model, protocol map', 'Publish'],
+] as const;
+
+const deskRows = [
+  ['Macro regime', 'FRED series / Treasury curve / credit spreads', 'Monthly brief', 'Framework mock'],
+  ['Equity quality', '10-K notes / peer strip / margin bridge', 'Memo surface', 'Research draft'],
+  ['Crypto liquidity', 'Stablecoins / TVL / protocol fees', 'Protocol map', 'Visual draft'],
+  ['Risk register', 'Volatility tape / scenario table / breakpoints', 'Risk appendix', 'Preview only'],
+] as const;
+
+const evidenceFlowRows = [
+  ['01', 'Market data', 'Price tape, macro series, filings, and on-chain observations enter as raw inputs.'],
+  ['02', 'Evidence layer', 'Inputs are normalized into comparable tables, source notes, and assumption logs.'],
+  ['03', 'Analysis core', 'The thesis is tested against valuation range, liquidity context, and breakpoints.'],
+  ['04', 'Risk mapping', 'Tail risk, regime shifts, protocol fragility, and event exposure are separated from narrative.'],
+  ['05', 'Research output', 'Briefs, memos, models, and protocol maps leave with preview state clearly labeled.'],
+] as const;
+
+const pathFromValues = (values: readonly number[], width = 128, height = 38) => {
+  const max = Math.max(...values);
+  const min = Math.min(...values);
+  const range = Math.max(max - min, 1);
+
+  return values
+    .map((value, index) => {
+      const x = (index / Math.max(values.length - 1, 1)) * width;
+      const y = height - ((value - min) / range) * height;
+      return `${index === 0 ? 'M' : 'L'} ${x.toFixed(2)} ${y.toFixed(2)}`;
+    })
+    .join(' ');
+};
+
+function Sparkline({ values, isDown = false }: { values: readonly number[]; isDown?: boolean }) {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" className="text-[#f1efe8]/40 animate-spin-slow" aria-hidden="true">
-      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 3" />
-      <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" strokeWidth="0.5" />
-      <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" strokeWidth="0.5" />
-      <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" strokeWidth="0.5" />
-      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+    <svg viewBox="0 0 128 40" className="h-10 w-28 text-current" aria-hidden="true">
+      <path d="M0 38H128" stroke="currentColor" strokeOpacity="0.12" />
+      <path
+        d={pathFromValues(values)}
+        fill="none"
+        stroke={isDown ? '#c2695e' : 'currentColor'}
+        strokeWidth="1.2"
+        vectorEffect="non-scaling-stroke"
+        opacity="0.78"
+      />
     </svg>
   );
 }
 
-// 2. Hero Section
-function HeroSection() {
+function HeroSection({ onOpen }: { onOpen: (surface: SurfaceId) => void }) {
   return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-10 lg:gap-[72px] items-center py-10 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 relative z-10">
-      {/* Left Column: Thesis Info */}
-      <div className="space-y-7 md:space-y-9">
-        <div className="flex items-center justify-between text-[10px] tracking-[0.18em] text-[#f1efe8]/45 uppercase font-mono">
-          <span>INVESTMENT RESEARCH</span>
-          <span>CASE ARCHIVE</span>
+    <section className="relative z-10 bg-ink px-4 py-8 text-canvas md:px-8 md:py-12 xl:px-10">
+      <div className="mx-auto max-w-[1480px] border-b border-canvas/12 pb-8 md:pb-10">
+        <div className="grid gap-7 lg:grid-cols-12 lg:items-center">
+          <div className="space-y-7 lg:col-span-6">
+            <div className="flex items-center justify-between border-b border-canvas/12 pb-4 text-[10px] uppercase tracking-[0.24em] text-canvas/42">
+              <span>Markets</span>
+              <span>Research desk</span>
+            </div>
+
+            <ScrollReveal blur={false}>
+              <h1 className="max-w-[11ch] font-serif text-[clamp(4rem,7.4vw,8rem)] font-light uppercase leading-[0.78] tracking-normal">
+                Markets
+                <span className="block italic text-canvas/62">observed.</span>
+              </h1>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.08} blur={false}>
+              <p className="max-w-xl font-serif text-[clamp(1.9rem,3vw,3.75rem)] italic leading-tight text-canvas/86">
+                Financial evidence, arranged before narrative.
+              </p>
+            </ScrollReveal>
+
+            <p className="max-w-lg text-sm leading-relaxed text-canvas/54">
+              A reporting surface for macro context, equity memos, crypto protocol notes, and model workbooks. Every preview state is labeled before it looks authoritative.
+            </p>
+          </div>
+
+          <div className="space-y-4 lg:col-span-6">
+          <button
+            type="button"
+            onClick={() => onOpen('market-brief')}
+            className="hover-target group relative grid min-h-[430px] w-full overflow-hidden border border-canvas/16 bg-[#050504] text-left md:min-h-[560px] xl:min-h-[620px]"
+            data-cursor-text="BRIEF"
+          >
+            <CandlestickChart className="absolute inset-0 opacity-78 transition-transform duration-[1600ms] group-hover:scale-[1.025]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,7,0.06),rgba(8,8,7,0.64)_88%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink via-ink/54 to-transparent" />
+            <div className="absolute left-4 top-4 h-6 w-6 border-l border-t border-canvas/45" />
+            <div className="absolute bottom-4 right-4 h-6 w-6 border-b border-r border-canvas/45" />
+            <div className="absolute left-5 right-5 top-5 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-canvas/42">
+              <span>Candlestick surface</span>
+              <span>Simulated tape</span>
+            </div>
+            <div className="absolute bottom-5 left-5 max-w-xl md:bottom-7 md:left-7">
+              <p className="text-[10px] uppercase tracking-[0.24em] text-canvas/42">Primary artifact</p>
+              <p className="mt-4 font-serif text-4xl italic leading-none text-canvas md:text-6xl xl:text-7xl">Market brief surface</p>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-canvas/58">
+                Market structure context for the report. Values are placeholders, not live quotes.
+              </p>
+            </div>
+            <div className="absolute right-5 top-20 hidden w-48 border-l border-canvas/14 pl-5 text-[10px] uppercase tracking-[0.22em] text-canvas/42 xl:block">
+              {reportChecks.map(([label, source, state]) => (
+                <div key={label} className="border-b border-canvas/10 py-4 last:border-b-0">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-canvas/70">{label}</span>
+                    <span>{state}</span>
+                  </div>
+                  <p className="mt-3 normal-case leading-relaxed tracking-normal text-canvas/46">{source}</p>
+                </div>
+              ))}
+            </div>
+          </button>
+          </div>
         </div>
 
-        <h1 className="font-serif text-[2.75rem] leading-[1] tracking-normal text-[#f1efe8] md:text-[clamp(42px,5.2vw,74px)] md:leading-[0.98] md:tracking-[-0.03em]">
-          Traditional Cases,<br />
-          Crypto Research,<br />
-          <span className="italic font-light opacity-95 text-[#b7c8a8]/90">&amp; Market Reasoning</span>
-        </h1>
+        <div className="mt-6 grid gap-px border border-canvas/12 bg-canvas/10 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ['Coverage', 'Macro / equity / crypto / risk'],
+            ['Inputs', 'Market data / filings / on-chain / macro'],
+            ['Outputs', 'Reports / memos / models / maps'],
+            ['State', 'Mock surfaces visibly labeled'],
+          ].map(([label, value]) => (
+            <div key={label} className="bg-ink p-4">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-canvas/38">{label}</p>
+              <p className="mt-3 text-sm leading-relaxed text-canvas/72">{value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-        <p className="font-sans text-sm text-[#f1efe8]/70 leading-relaxed max-w-lg">
-          A collection of equity cases, sector theses, crypto protocol research, market structure work, and investment memos built around evidence, risk, valuation, and asymmetric opportunity.
-        </p>
+function ReportMiniature() {
+  return (
+    <div className="relative overflow-hidden border border-ink/18 bg-canvas p-5">
+      <div className="mb-6 flex items-center justify-between border-b border-ink/14 pb-5 text-[10px] uppercase tracking-[0.28em] text-ink/42">
+        <span>Monthly market brief</span>
+        <span>Preview packet</span>
+      </div>
 
-        {/* Focus Areas list */}
-        <div className="space-y-2 border-t border-[#f1efe8]/10 pt-6">
-          <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-3 font-mono">Focus Areas</div>
-          <div className="grid grid-cols-2 gap-y-2 gap-x-4">
-            {[
-              'Public equities',
-              'Private markets',
-              'Crypto protocols',
-              'Token economics',
-              'Market structure'
-            ].map((focus, i) => (
-              <div key={focus} className="flex items-center gap-2 text-xs text-[#f1efe8]/80 font-mono">
-                <span className="text-[#b7c8a8] text-[9px]">0{i + 1}</span>
-                <span>{focus}</span>
+      <div className="grid gap-6 md:grid-cols-[0.54fr_0.46fr]">
+        <div>
+          <p className="font-serif text-4xl italic leading-none md:text-5xl">Signal before narrative.</p>
+          <p className="mt-5 max-w-md text-sm leading-relaxed text-ink/58">
+            Regime read, evidence basis, source checks, and report state in one controlled surface.
+          </p>
+          <div className="mt-7 border-t border-ink/12">
+            {reportChecks.map(([label, source, state], index) => (
+              <div key={label} className="grid grid-cols-[2.5rem_1fr_5.5rem] gap-4 border-b border-ink/10 py-3.5">
+                <span className="font-serif text-2xl italic text-ink/35">0{index + 1}</span>
+                <span>
+                  <span className="block text-[10px] uppercase tracking-[0.24em] text-ink/42">{label}</span>
+                  <span className="mt-2 block text-sm leading-relaxed text-ink/62">{source}</span>
+                </span>
+                <span className="self-start text-right text-[10px] uppercase tracking-[0.2em] text-ink/42">{state}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Metadata Row */}
-        <div className="grid grid-cols-1 gap-4 border-t border-[#f1efe8]/10 pt-6 sm:grid-cols-3 sm:gap-6">
-          <div>
-            <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-1.5 font-mono">RESEARCH TYPES</div>
-            <div className="text-xs text-[#f1efe8]/80 font-mono">Equity / Crypto</div>
-          </div>
-          <div>
-            <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-1.5 font-mono">COVERAGE AREAS</div>
-            <div className="text-xs text-[#f1efe8]/80 font-mono">Markets / Protocols</div>
-          </div>
-          <div>
-            <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/42 uppercase mb-1.5 font-mono">OUTPUTS</div>
-            <div className="text-xs text-[#f1efe8]/80 font-mono">Memos / Models / Theses</div>
-          </div>
-        </div>
+        <div className="grid content-between gap-5">
+          <svg viewBox="0 0 360 260" className="h-full min-h-[260px] w-full text-ink" aria-hidden="true">
+            <rect x="0.5" y="0.5" width="359" height="259" fill="none" stroke="currentColor" opacity="0.16" />
+            {[56, 104, 152, 200].map((y) => (
+              <path key={y} d={`M24 ${y}H336`} stroke="currentColor" strokeOpacity="0.08" strokeDasharray="2 8" />
+            ))}
+            {[26, 42, 34, 66, 72, 92, 86, 118, 141, 132, 162, 184, 176].map((value, index) => {
+              const x = 28 + index * 24;
+              const y = 226 - value;
+              const isFilled = index % 3 === 0;
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 pt-2">
-          {['EQUITY RESEARCH', 'CRYPTO', 'VALUATION', 'MARKET STRUCTURE', 'TOKENOMICS'].map(tag => (
-            <span key={tag} className="text-[8px] tracking-[0.16em] uppercase font-mono px-2.5 py-1 border border-[#f1efe8]/12 text-[#f1efe8]/60 bg-[#f1efe8]/[0.02]">
-              [{tag}]
-            </span>
-          ))}
-        </div>
-      </div>
+              return (
+                <g key={`${value}-${index}`}>
+                  <line x1={x + 4} x2={x + 4} y1={y - 22} y2={y + 32} stroke="currentColor" strokeOpacity="0.28" />
+                  <rect x={x} y={y} width="8" height={28} fill={isFilled ? 'currentColor' : 'none'} stroke="currentColor" opacity={0.42 + index * 0.028} />
+                </g>
+              );
+            })}
+            <text x="24" y="32" fill="currentColor" opacity="0.46" fontSize="9" letterSpacing="2.4" fontFamily="Inter, sans-serif">
+              REGIME TRACE / PLACEHOLDER
+            </text>
+          </svg>
 
-      {/* Right Column: Interactive Research Signal Flow */}
-      <div className="w-full">
-        <div className="group">
-          <InvestmentResearchMap className="aspect-[1000/620] w-full transition-transform duration-700 group-hover:-translate-y-1" />
-          <div className="mt-4 flex flex-col gap-3 border-b border-[#f1efe8]/12 pb-4 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/44 sm:flex-row sm:items-center sm:justify-between">
-            <span>SIGNAL INPUTS: MARKET DATA / FILINGS / ON-CHAIN</span>
-            <span>OUTPUT: CONVICTION-BACKED RESEARCH</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// 3. Research Lanes / Categories Band
-function ResearchLanes() {
-  const lanes = [
-    {
-      num: '01',
-      title: 'Traditional Cases',
-      desc: 'Public equity and private-market style memos focused on business quality, valuation, catalysts, and risk.'
-    },
-    {
-      num: '02',
-      title: 'Crypto Protocols',
-      desc: 'Research on protocols, token economics, governance, liquidity, adoption, and market structure.'
-    },
-    {
-      num: '03',
-      title: 'Market & Macro',
-      desc: 'Work connecting price behavior, liquidity regimes, rates, credit, risk appetite, and capital flows.'
-    },
-    {
-      num: '04',
-      title: 'Models & Tools',
-      desc: 'Financial models, valuation frameworks, dashboards, screeners, and analytical tooling.'
-    }
-  ];
-
-  return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 relative z-10">
-      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono mb-8">
-        RESEARCH LANES
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {lanes.map((lane) => (
-          <div 
-            key={lane.num} 
-            className="flex flex-col justify-between h-full p-6 border border-[#f1efe8]/12 bg-[#f1efe8]/[0.01] transition-all duration-500 hover:bg-[#f1efe8]/[0.025] hover:-translate-y-1 hover:border-[#f1efe8]/30 relative group overflow-hidden before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:before:w-full"
-          >
-            {/* Corner marks */}
-            <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <div className="absolute top-2 right-2 w-1.5 h-1.5 border-t border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <div className="absolute bottom-2 left-2 w-1.5 h-1.5 border-b border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-
-            <div className="text-[14px] font-serif italic text-[#b7c8a8]/60 mb-6 group-hover:text-[#b7c8a8] transition-colors pt-2">
-              {lane.num}
-            </div>
-            <div>
-              <h4 className="text-xs uppercase tracking-[0.2em] font-mono text-[#f1efe8] mb-3">
-                {lane.title}
-              </h4>
-              <p className="text-xs text-[#f1efe8]/54 leading-relaxed font-sans mb-2">
-                {lane.desc}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// 4. Featured Cases Section
-function FeaturedCases({ onOpenArtifact }: { onOpenArtifact: (id: string) => void }) {
-  const cases = [
-    {
-      id: 'pdf-memo',
-      num: 'CASE 01',
-      tag: 'TRADITIONAL EQUITY',
-      asset: 'ASSET: APPIAN GROUP (NASDAQ: APPN)',
-      title: 'Mispricing of Enterprise Software Durability',
-      desc: "Thesis: Appian's low-code workflow integration establishes structural lock-in that the market is discounting due to short-term cyclical tech spend deceleration.",
-      horizon: '12-18 Months / Completed',
-      question: 'Is durable recurring revenue being mispriced as transactional?',
-      cta: 'VIEW VALUATION MEMO'
-    },
-    {
-      id: 'protocol-map',
-      num: 'CASE 02',
-      tag: 'CRYPTO PROTOCOL',
-      asset: 'PROTOCOL: AERODROME FINANCE (BASE)',
-      title: 'Dominant Liquidity Engine & ve(3,3) Flywheel',
-      desc: "Thesis: Aerodrome has successfully cornered Base liquidity. Its ve-token mechanics align trader fees and voter bribes, creating a durable fee generation loop.",
-      horizon: 'Tokenomics / In Progress',
-      question: 'Are emissions structural vs reflexive speculation?',
-      cta: 'EXPLORE FLYWHEEL MAP'
-    }
-  ];
-
-  return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
-      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
-        FEATURED CASES
-      </div>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {cases.map((c) => (
-          <div 
-            key={c.num}
-            onClick={() => onOpenArtifact(c.id)}
-            className="hover-target border border-[#f1efe8]/12 p-6 bg-[#080807] relative group flex flex-col justify-between min-h-[340px] hover:border-[#f1efe8]/30 hover:bg-[#f1efe8]/[0.015] hover:-translate-y-1 transition-all duration-500 cursor-pointer overflow-hidden before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:before:w-full"
-          >
-            {/* Corner marks */}
-            <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <div className="absolute top-2 right-2 w-1.5 h-1.5 border-t border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <div className="absolute bottom-2 left-2 w-1.5 h-1.5 border-b border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-
-            {/* Standard Header Row */}
-            <div className="flex items-start justify-between text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42 font-mono pt-2">
-              <span>{c.num}</span>
-              <span className={c.id === 'pdf-memo' ? 'text-[#b7c8a8]' : 'text-[#c2695e]'}>{c.tag}</span>
-            </div>
-
-            <div className="space-y-4 pt-6">
-              <div className="text-[10px] tracking-widest text-[#f1efe8]/40 font-mono uppercase">{c.asset}</div>
-              <h3 className="font-serif text-2xl lg:text-3xl text-[#f1efe8] leading-tight group-hover:text-[#b7c8a8] transition-colors">
-                {c.title}
-              </h3>
-              <p className="text-xs text-[#f1efe8]/60 leading-relaxed font-sans max-w-lg">
-                {c.desc}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 border-t border-[#f1efe8]/10 pt-4 mt-6 font-mono text-[9px] text-[#f1efe8]/50 uppercase">
-              <div>
-                <span className="block text-[#f1efe8]/30">Horizon / Status</span>
-                <span className="text-[11px] text-[#f1efe8]/80 font-sans tracking-normal font-medium">{c.horizon}</span>
+          <div className="grid grid-cols-2 gap-px bg-ink/12 text-[10px] uppercase tracking-[0.2em] text-ink/48">
+            {[
+              ['Report state', 'Framework mock'],
+              ['Authority', 'Preview data'],
+              ['Output', 'PDF / web brief'],
+              ['Next layer', 'Models'],
+            ].map(([label, value]) => (
+              <div key={label} className="bg-canvas p-4">
+                <p>{label}</p>
+                <p className="mt-3 text-ink/72">{value}</p>
               </div>
-              <div>
-                <span className="block text-[#f1efe8]/30">Core Question</span>
-                <span className="text-[9.5px] text-[#f1efe8]/80 tracking-tight lowercase first-letter:uppercase font-sans font-medium">{c.question}</span>
-              </div>
-            </div>
-
-            <div className="mt-4 pt-3 flex items-center justify-between text-[9px] uppercase tracking-wider font-mono text-[#b7c8a8] border-t border-[#f1efe8]/5">
-              <span>{c.cta}</span>
-              <span>↗</span>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
 
-// 5. Traditional Investment Cases Section (Detailed Folder Foldouts)
-interface Artifact {
-  id: string;
-  tag: string;
-  title: string;
-  summary: string;
-  date: string;
-  status: string;
-  author: string;
-  highlights: string[];
-  metrics: { key: string; val: string }[];
-}
-
-type MarketFilter = 'All' | 'Equity' | 'Crypto' | 'Model' | 'Memo' | 'In progress' | 'Completed';
-
-const marketFilters: MarketFilter[] = ['All', 'Equity', 'Crypto', 'Model', 'Memo', 'In progress', 'Completed'];
-
-function thesisMatchesFilter(thesis: (typeof MARKET_THESES)[number], filter: MarketFilter) {
-  if (filter === 'All') return true;
-  if (filter === 'Equity') return thesis.category.includes('EQUITY') || thesis.category.includes('MONETARY');
-  if (filter === 'Crypto') return thesis.category.includes('DECENTRALIZED');
-  if (filter === 'Model') return Boolean(thesis.formula);
-  if (filter === 'Memo') return true;
-  if (filter === 'Completed') return true;
-  return false;
-}
-
-function artifactMatchesFilter(artifact: Artifact, filter: MarketFilter) {
-  const haystack = `${artifact.tag} ${artifact.title} ${artifact.summary} ${artifact.status}`.toLowerCase();
-  if (filter === 'All') return true;
-  if (filter === 'Equity') return haystack.includes('appian') || haystack.includes('valuation') || haystack.includes('equity');
-  if (filter === 'Crypto') return haystack.includes('protocol') || haystack.includes('ethereum') || haystack.includes('aerodrome') || haystack.includes('on-chain');
-  if (filter === 'Model') return haystack.includes('model') || haystack.includes('dashboard') || haystack.includes('metrics');
-  if (filter === 'Memo') return haystack.includes('memo');
-  if (filter === 'In progress') return haystack.includes('framework') || haystack.includes('request');
-  return haystack.includes('preview only') || haystack.includes('available');
-}
-
-function ResearchFilterBar({ activeFilter, setActiveFilter }: { activeFilter: MarketFilter; setActiveFilter: (filter: MarketFilter) => void }) {
+function TickerTape() {
   return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-6 border-b border-[#f1efe8]/12 relative z-10">
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">FILTER ARCHIVE</div>
-          <p className="mt-2 text-xs leading-relaxed text-[#f1efe8]/45">Filter memos and artifact previews by research type and completion state.</p>
+    <section className="relative z-10 bg-ink px-4 text-canvas md:px-8 xl:px-10">
+      <div className="mx-auto max-w-[1480px] border-b border-canvas/12 py-5">
+        <div className="mb-4 flex items-center justify-between text-[10px] uppercase tracking-[0.24em] text-canvas/38">
+          <span>Ticker tape</span>
+          <span>Mock data / visual reference</span>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {marketFilters.map((filter) => {
-            const active = activeFilter === filter;
+        <div className="flex overflow-x-auto border-y border-canvas/10">
+          {tickerTape.map(([label, value, change, values]) => {
+            const isDown = change.startsWith('-');
             return (
-              <button
-                key={filter}
-                type="button"
-                onClick={() => setActiveFilter(filter)}
-                className={`hover-target border px-3 py-2 text-[9px] uppercase tracking-[0.18em] transition-colors ${
-                  active
-                    ? 'border-[#b7c8a8] bg-[#b7c8a8]/10 text-[#b7c8a8]'
-                    : 'border-[#f1efe8]/12 text-[#f1efe8]/54 hover:border-[#f1efe8]/30 hover:text-[#f1efe8]'
-                }`}
-                data-cursor-text="FILTER"
-              >
-                {filter}
-              </button>
+              <div key={label} className="min-w-[14rem] border-r border-canvas/10 px-4 py-4 last:border-r-0">
+                <div className="mb-4 flex items-start justify-between gap-4 text-[10px] uppercase tracking-[0.24em] text-canvas/42">
+                  <span>{label}</span>
+                  <span className={isDown ? 'text-[#c2695e]' : 'text-canvas/62'}>{change}</span>
+                </div>
+                <div className="flex items-end justify-between gap-4">
+                  <span className="font-serif text-2xl italic leading-none text-canvas">{value}</span>
+                  <Sparkline values={values} isDown={isDown} />
+                </div>
+              </div>
             );
           })}
         </div>
@@ -325,831 +349,394 @@ function ResearchFilterBar({ activeFilter, setActiveFilter }: { activeFilter: Ma
   );
 }
 
-function TraditionalCasesSection({ onOpenArtifact }: { onOpenArtifact: (id: string) => void }) {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
-
-  const cases = [
-    {
-      company: 'Appian Group / Enterprise Software',
-      thesis: 'Low-code system orchestration has high lock-in with a market discounting duration risk.',
-      drivers: [
-        'Revenue durability through high customer retention',
-        'Margin expansion as implementation partner mix normalizes',
-        'Multiple rerating from oversold SaaS multiples',
-        'Optimal capital allocation focusing on organic R&D'
-      ],
-      evidence: [
-        '10-K & 10-Q filing analysis showing cohort stickiness',
-        'Comparable company tables (peer valuation ranges)',
-        'Unit economics (CAC recovery under 18 months)',
-        'Management transcripts on partner program transition'
-      ],
-      outputs: ['Full Memo', 'Valuation Model', 'Risk Table']
-    },
-    {
-      company: 'Critical Infrastructure Supply / Industrial Supply Chain',
-      thesis: 'Public procurement and reshoring incentives can create a structural domestic CapEx cycle, insulating leader margin structures.',
-      drivers: [
-        'CapEx cycle expansion supported by public funding',
-        'Specialized operating scale protecting pricing power',
-        'Supplier concentration insulating critical inputs',
-        'Margin preservation via pass-through contract structures'
-      ],
-      evidence: [
-        'Federal funding maps and award application data',
-        'OEM backlog analysis and long-lead equipment timelines',
-        'Supplier revenue dependencies and raw material flows',
-        'Geopolitical risk matrix modeling export blocks'
-      ],
-      outputs: ['Sector Briefing', 'Valuation Model', 'Supply Chain Map']
-    }
-  ];
-
+function DeskModules() {
   return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
-      <div className="space-y-2">
-        <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
-          TRADITIONAL INVESTMENT CASES
+    <section className="relative z-10 bg-canvas px-4 py-14 text-ink md:px-8 md:py-20 xl:px-10">
+      <div className="mx-auto max-w-[1480px]">
+        <div className="grid gap-8 border-b border-ink/14 pb-8 lg:grid-cols-12">
+          <ScrollReveal className="lg:col-span-4" blur={false}>
+            <h2 className="font-serif text-[clamp(3.25rem,6vw,6.75rem)] italic leading-[0.82] tracking-normal">
+              Research desk.
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal className="max-w-2xl text-sm leading-relaxed text-ink/68 lg:col-span-5 lg:col-start-8 lg:self-end" delay={0.08} blur={false}>
+            <p>
+              Calm modules for separating conditions, evidence, and output state. The structure is financial, but the hierarchy remains editorial.
+            </p>
+          </ScrollReveal>
         </div>
-        <p className="text-xs text-[#f1efe8]/50 font-sans max-w-xl">
-          Equity research, business analysis, valuation work, and market-facing investment reasoning.
-        </p>
-      </div>
 
-      <div className="space-y-4">
-        {cases.map((item, idx) => {
-          const isExpanded = expandedIndex === idx;
-          return (
-            <div 
-              key={idx} 
-              className="border border-[#f1efe8]/12 bg-[#080807] transition-all duration-300 overflow-hidden relative group"
-            >
-              {/* Folder tab trigger */}
-              <button 
-                id={`trad-case-btn-${idx}`}
-                onClick={() => setExpandedIndex(isExpanded ? null : idx)}
-                className="w-full flex items-center justify-between p-5 hover-target text-left font-mono uppercase text-xs tracking-wider"
-                data-cursor-text={isExpanded ? 'CLOSE' : 'OPEN'}
-              >
-                <div className="flex items-center gap-4">
-                  <span className="text-[#b7c8a8] font-semibold">0{idx + 1}</span>
-                  <span className="text-[#f1efe8]">{item.company}</span>
-                </div>
-                <div className="flex items-center gap-3 text-[10px] text-[#f1efe8]/40">
-                  <span>{isExpanded ? 'COLLAPSE [-]' : 'EXPAND CASE [+]'}</span>
-                </div>
-              </button>
-
-              {/* Collapsible folder contents */}
-              <AnimatePresence initial={false}>
-                {isExpanded && (
-                  <motion.div 
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden border-t border-[#f1efe8]/12"
-                  >
-                    <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed text-[#f1efe8]/70">
-                      
-                      {/* Column 1: Thesis & Drivers */}
-                      <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
-                        <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase">Mispricing Thesis</div>
-                        <p className="font-serif italic text-sm text-[#f1efe8]/90">{item.thesis}</p>
-                        
-                        <div className="space-y-2 pt-2">
-                          <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-mono uppercase">Core Drivers</div>
-                          <ul className="list-disc list-inside space-y-1 text-[#f1efe8]/60 font-sans">
-                            {item.drivers.map((drv, i) => (
-                              <li key={i} className="pl-1 text-[11.5px]">{drv}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-
-                      {/* Column 2: Evidence */}
-                      <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
-                        <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase">Evidence &amp; Analysis</div>
-                        <ul className="space-y-2.5 font-sans">
-                          {item.evidence.map((ev, i) => (
-                            <li key={i} className="flex gap-2 items-start">
-                              <span className="text-[#b7c8a8] font-mono text-[9px] mt-0.5">▪</span>
-                              <span className="text-[11.5px]">{ev}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Column 3: Output References */}
-                      <div className="space-y-4">
-                        <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase">Research Outputs</div>
-                        <div className="space-y-2">
-                          {item.outputs.map((out, i) => {
-                            let targetId = '';
-                            if (out === 'Full Memo') targetId = 'pdf-memo';
-                            else if (out === 'Valuation Model') targetId = 'valuation-model';
-
-                            return (
-                              <button 
-                                key={i} 
-                                onClick={() => targetId && onOpenArtifact(targetId)}
-                                className={`w-full border border-[#f1efe8]/12 px-4 py-2.5 flex items-center justify-between text-[10px] tracking-wider uppercase font-mono bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.03] hover:border-[#f1efe8]/30 hover:text-[#b7c8a8] transition-all duration-300 ${targetId ? 'cursor-pointer' : 'cursor-default opacity-60'}`}
-                                data-cursor-text={targetId ? 'PREVIEW' : undefined}
-                              >
-                                <span>{out}</span>
-                                <span className="text-[8px] opacity-40">{targetId ? '⤓ PREVIEW' : 'ACCESS REQUIRED'}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                        <p className="text-[9px] text-[#f1efe8]/40 font-mono pt-2">
-                          SECURE REPOSITORY ACCESS CODE: AUTH.TRAD.04
-                        </p>
-                      </div>
-
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-// 6. Crypto Research Section
-function CryptoResearchSection({ onOpenArtifact }: { onOpenArtifact: (id: string) => void }) {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
-
-  const cases = [
-    {
-      protocol: 'Aerodrome Finance / Base Liquidity Engine',
-      thesis: 'VE(3,3) token incentives align fees and voter bribes, creating a permanent liquidity moat.',
-      questions: [
-        { q: 'What creates value?', a: 'DEX swap volumes generating trading fees and protocol votes.' },
-        { q: 'Who captures value?', a: 'veAERO locker votes capturing 100% of fees and ecosystem bribes.' },
-        { q: 'Is token demand structural?', a: 'Structural from protocols buying to vote-direct emissions; reflexive from yield buyers.' },
-        { q: 'Where can the thesis break?', a: 'High inflation decay outpacing swap fees; sudden migration of Base activity to L3s.' }
-      ],
-      evidence: [
-        'Weekly protocol fee & bribe efficiency telemetry',
-        'TVL retention metrics relative to competitor emissions',
-        'Token locker distributions and lock duration trends',
-        'Governance voter concentration indexes'
-      ],
-      outputs: ['Protocol Memo', 'Token Economics Map', 'Locker Dashboard']
-    },
-    {
-      protocol: 'Ethereum L2 Blob-Space / Scaling Economics',
-      thesis: 'EIP-4844 decreases L2 costs, boosting sequencer margin profiles before fee competition compresses them.',
-      questions: [
-        { q: 'What creates value?', a: 'Sequencer gas margins (L2 user fees minus L1 data publication costs).' },
-        { q: 'Who captures value?', a: 'L2 rollup treasuries and protocol token structures.' },
-        { q: 'Is token demand structural?', a: 'Fee-based and sequencer stake requirements.' },
-        { q: 'Where can the thesis break?', a: 'Blob-space supply glut causing fee race to bottom; rapid L2 fragmentation.' }
-      ],
-      evidence: [
-        'Blob gas price and transaction density on L1',
-        'Sequencer profit margins pre and post EIP-4844',
-        'L2 active addresses and user retention data',
-        'Rollup code bases and fee allocation metrics'
-      ],
-      outputs: ['On-chain Notes', 'Data Cost Model']
-    }
-  ];
-
-  return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
-      <div className="space-y-2">
-        <div className="text-[10px] tracking-[0.24em] uppercase text-[#c2695e] font-mono">
-          CRYPTO RESEARCH
-        </div>
-        <p className="text-xs text-[#f1efe8]/50 font-sans max-w-xl">
-          Protocol design, token economics, on-chain dynamics, and structural liquidity evaluations.
-        </p>
-      </div>
-
-      <div className="space-y-4">
-        {cases.map((item, idx) => {
-          const isExpanded = expandedIndex === idx;
-          return (
-            <div 
-              key={idx} 
-              className="border border-[#f1efe8]/12 bg-[#080807] transition-all duration-300 overflow-hidden relative group"
-            >
-              {/* Folder tab trigger */}
-              <button 
-                id={`crypto-case-btn-${idx}`}
-                onClick={() => setExpandedIndex(isExpanded ? null : idx)}
-                className="w-full flex items-center justify-between p-5 hover-target text-left font-mono uppercase text-xs tracking-wider"
-                data-cursor-text={isExpanded ? 'CLOSE' : 'OPEN'}
-              >
-                <div className="flex items-center gap-4">
-                  <span className="text-[#c2695e] font-semibold">0{idx + 1}</span>
-                  <span className="text-[#f1efe8]">{item.protocol}</span>
-                </div>
-                <div className="flex items-center gap-3 text-[10px] text-[#f1efe8]/40">
-                  <span>{isExpanded ? 'COLLAPSE [-]' : 'EXPAND CASE [+]'}</span>
-                </div>
-              </button>
-
-              {/* Collapsible folder contents */}
-              <AnimatePresence initial={false}>
-                {isExpanded && (
-                  <motion.div 
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden border-t border-[#f1efe8]/12"
-                  >
-                    <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed text-[#f1efe8]/70">
-                      
-                      {/* Column 1: Thesis & Core Questions */}
-                      <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
-                        <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-mono uppercase">Thesis &amp; Economic Value</div>
-                        <p className="font-serif italic text-sm text-[#f1efe8]/90">{item.thesis}</p>
-                        
-                        <div className="space-y-3 pt-2">
-                          <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-mono uppercase font-semibold">Core Questions</div>
-                          <div className="space-y-2">
-                            {item.questions.map((q, i) => (
-                              <div key={i} className="text-[11px] font-sans">
-                                <span className="block font-mono text-[8.5px] text-[#c2695e]/80 uppercase">{q.q}</span>
-                                <span className="text-[#f1efe8]/70">{q.a}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Column 2: On-Chain Evidence */}
-                      <div className="space-y-4 border-r border-[#f1efe8]/12 pr-6 last:border-r-0">
-                        <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-mono uppercase">On-Chain Evidence</div>
-                        <ul className="space-y-2.5 font-sans">
-                          {item.evidence.map((ev, i) => (
-                            <li key={i} className="flex gap-2 items-start">
-                              <span className="text-[#c2695e] font-mono text-[9px] mt-0.5">▪</span>
-                              <span className="text-[11.5px]">{ev}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Column 3: Outputs */}
-                      <div className="space-y-4">
-                        <div className="text-[9px] tracking-[0.18em] text-[#c2695e] font-mono uppercase">Protocol Artifacts</div>
-                        <div className="space-y-2">
-                          {item.outputs.map((out, i) => {
-                            let targetId = '';
-                            if (out === 'Protocol Memo' || out === 'Token Economics Map') targetId = 'protocol-map';
-                            else if (out === 'On-chain Notes') targetId = 'on-chain-notes';
-                            else if (out === 'Locker Dashboard') targetId = 'market-dashboard';
-                            else if (out === 'Data Cost Model') targetId = 'valuation-model';
-
-                            return (
-                              <button 
-                                key={i} 
-                                onClick={() => targetId && onOpenArtifact(targetId)}
-                                className={`w-full border border-[#f1efe8]/12 px-4 py-2.5 flex items-center justify-between text-[10px] tracking-wider uppercase font-mono bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.03] hover:border-[#f1efe8]/30 hover:text-[#c2695e] transition-all duration-300 ${targetId ? 'cursor-pointer' : 'cursor-default opacity-60'}`}
-                                data-cursor-text={targetId ? 'PREVIEW' : undefined}
-                              >
-                                <span>{out}</span>
-                                <span className="text-[8px] opacity-40">{targetId ? '⤓ PREVIEW' : 'ACCESS REQUIRED'}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                        <p className="text-[9px] text-[#f1efe8]/40 font-mono pt-2">
-                          SECURE REPOSITORY ACCESS CODE: AUTH.CRYPT.08
-                        </p>
-                      </div>
-
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-// 7. Research Process Section
-function ResearchProcessSection() {
-  const steps = [
-    {
-      num: '01',
-      title: 'Frame the Question',
-      desc: 'Isolate the core investment query. Determine what measurable variables would prove the thesis wrong.'
-    },
-    {
-      num: '02',
-      title: 'Build the Base Case',
-      desc: 'Understand business fundamentals, protocol mechanics, market constraints, and competitive maps.'
-    },
-    {
-      num: '03',
-      title: 'Test the Mispricing',
-      desc: 'Contrast consensus expectations against bottom-up modeling, on-chain flows, and pricing power.'
-    },
-    {
-      num: '04',
-      title: 'Map the Risk',
-      desc: 'Quantify systemic break-points: tail risks, regulatory friction, liquidity gaps, and key person risks.'
-    },
-    {
-      num: '05',
-      title: 'Produce the Output',
-      desc: 'Translate analysis into actionable items: memos, spreadsheets, code-bases, or decision-ready frameworks.'
-    }
-  ];
-
-  return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
-      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
-        RESEARCH METHOD
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-        {steps.map((step) => (
-          <div key={step.num} className="space-y-3 relative group">
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-serif italic text-[#b7c8a8]">{step.num}</span>
-              <div className="h-[1px] bg-[#f1efe8]/10 flex-1 hidden md:block group-last:hidden" />
-            </div>
-            <h4 className="text-[10px] uppercase tracking-widest font-mono text-[#f1efe8]">{step.title}</h4>
-            <p className="text-[11px] text-[#f1efe8]/50 leading-relaxed font-sans">{step.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// 7.5 Research Theses & Memos Section
-function ResearchMemosSection({ activeFilter, onReadThesis }: { activeFilter: MarketFilter; onReadThesis: (idx: number) => void }) {
-  const visibleTheses = MARKET_THESES
-    .map((thesis, idx) => ({ thesis, idx }))
-    .filter(({ thesis }) => thesisMatchesFilter(thesis, activeFilter));
-
-  return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
-      <div className="space-y-2">
-        <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
-          INVESTMENT MEMOS &amp; THESES
-        </div>
-        <p className="text-xs text-[#f1efe8]/50 font-sans max-w-xl">
-          Sovereign-grade research, asset allocation models, and structural market logic.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {visibleTheses.map(({ thesis, idx }) => (
-          <div 
-            key={thesis.slug}
-            className="flex flex-col justify-between h-full p-6 border border-[#f1efe8]/12 bg-[#f1efe8]/[0.01] hover:bg-[#f1efe8]/[0.025] hover:-translate-y-1 hover:border-[#f1efe8]/30 transition-all duration-500 relative group overflow-hidden before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:before:w-full"
-          >
-            {/* Corner marks */}
-            <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <div className="absolute top-2 right-2 w-1.5 h-1.5 border-t border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <div className="absolute bottom-2 left-2 w-1.5 h-1.5 border-b border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-
-            <div>
-              <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/42 font-mono pt-2 mb-4">
-                <span>MEMO 0{thesis.number}</span>
-                <span>{thesis.readTime}</span>
-              </div>
-              
-              <h3 className="font-serif italic text-2xl text-[#f1efe8] leading-tight group-hover:text-[#b7c8a8] transition-colors mb-3">
-                {thesis.title.replace('On the ', '').replace('Computational ', '')}
-              </h3>
-              
-              <p className="text-xs text-[#f1efe8]/60 leading-relaxed font-sans mb-8">
-                {thesis.subtitle}
-              </p>
-            </div>
-
-            <div className="space-y-4 pt-4 border-t border-[#f1efe8]/8">
-              <div className="flex justify-between font-mono text-[9px] uppercase">
-                <span className="text-[#f1efe8]/30">Conviction</span>
-                <span className="text-[#b7c8a8]">{thesis.conviction}</span>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <button
-                  onClick={() => onReadThesis(idx)}
-                  className="flex-1 hover-target border border-[#f1efe8]/15 px-3 py-2 text-[9px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/80 hover:text-[#b7c8a8] hover:border-[#b7c8a8] hover:bg-[#f1efe8]/5 transition-all text-center"
-                  data-cursor-text="READ"
-                >
-                  READ MEMO
-                </button>
-                <a
-                  href={`/markets/${thesis.slug}`}
-                  className="flex-1 hover-target border border-[#f1efe8]/15 px-3 py-2 text-[9px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/60 hover:text-[#f1efe8] hover:border-[#f1efe8]/30 text-center flex items-center justify-center gap-1"
-                  data-cursor-text="OPEN"
-                >
-                  <span>PAGE</span> <span>↗</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      {visibleTheses.length === 0 && (
-        <div className="border border-[#f1efe8]/12 p-6 text-xs uppercase tracking-[0.18em] text-[#f1efe8]/45">
-          No memos match this filter. Artifact previews below may still apply.
-        </div>
-      )}
-    </section>
-  );
-}
-
-// 8. Artifact Section (With highly designed functional modals)
-function ArtifactSection({ 
-  activeArtifact, 
-  setActiveArtifact, 
-  artifacts 
-}: { 
-  activeArtifact: Artifact | null; 
-  setActiveArtifact: (art: Artifact | null) => void; 
-  artifacts: Artifact[];
-}) {
-  const containerRef = useFocusTrap(!!activeArtifact);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setActiveArtifact(null);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [setActiveArtifact]);
-
-  return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-16 md:py-20 lg:py-24 border-b border-[#f1efe8]/12 space-y-8 relative z-10">
-      <div className="text-[10px] tracking-[0.24em] uppercase text-[#b7c8a8] font-mono">
-        RESEARCH ARTIFACTS
-      </div>
-
-      <div className="flex flex-wrap gap-3">
-        {artifacts.map((art) => (
-          <button 
-            key={art.id}
-            id={`markets-artifact-btn-${art.id}`}
-            onClick={() => setActiveArtifact(art)}
-            className="hover-target border border-[#f1efe8]/12 px-5 py-3 text-[10px] uppercase font-mono tracking-widest text-[#f1efe8]/80 bg-[#f1efe8]/[0.01] hover:border-[#f1efe8]/24 hover:bg-[#f1efe8]/[0.03] transition-all duration-300 relative group"
-            data-cursor-text="PREVIEW"
-          >
-            {/* Corner marks */}
-            <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/15 group-hover:border-[#b7c8a8] transition-colors" />
-            <span>[{art.tag}]</span>
-          </button>
-        ))}
-      </div>
-      {artifacts.length === 0 && (
-        <div className="border border-[#f1efe8]/12 p-6 text-xs uppercase tracking-[0.18em] text-[#f1efe8]/45">
-          No artifacts match this filter. Switch filters to view preview and request-only files.
-        </div>
-      )}
-
-      {/* Styled Interactive Modals */}
-      <AnimatePresence>
-        {activeArtifact && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#080807]/80 backdrop-blur-sm">
-            {/* Backdrop Close Click */}
-            <div className="absolute inset-0" onClick={() => setActiveArtifact(null)} />
-            
-            {/* Modal Body */}
-            <motion.div 
-              ref={containerRef}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="artifact-modal-title"
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="relative w-full max-w-2xl bg-[#080807] border border-[#f1efe8]/20 p-6 md:p-8 space-y-6 z-10 overflow-hidden shadow-2xl"
-            >
-              {/* Corner Indicators (Real CSS Borders) */}
-              <div className="absolute -left-1.5 -top-1.5 h-3.5 w-3.5 border-l border-t border-[#f1efe8]/30" />
-              <div className="absolute -right-1.5 -top-1.5 h-3.5 w-3.5 border-r border-t border-[#f1efe8]/30" />
-              <div className="absolute -left-1.5 -bottom-1.5 h-3.5 w-3.5 border-l border-b border-[#f1efe8]/30" />
-              <div className="absolute -right-1.5 -bottom-1.5 h-3.5 w-3.5 border-r border-b border-[#f1efe8]/30" />
-
-              {/* Technical telemetry string headers */}
-              <div className="absolute top-3 left-4 text-[8px] text-[#f1efe8]/20 font-mono tracking-widest">// PREVIEW_TELEMETRY_SYS</div>
-              <div className="absolute bottom-3 right-4 text-[8px] text-[#f1efe8]/20 font-mono tracking-widest">// AUTH_SYS_OK</div>
-
-              {/* Close Button */}
-              <button 
-                id="artifact-modal-close-btn"
-                onClick={() => setActiveArtifact(null)}
-                className="absolute top-4 right-4 hover-target font-mono text-[9px] uppercase tracking-widest text-[#f1efe8]/40 hover:text-[#f1efe8] transition-colors px-2 py-1 border border-[#f1efe8]/10 bg-[#080807] z-20"
-                data-cursor-text="CLOSE"
-              >
-                CLOSE [X]
-              </button>
-
-              <div className="space-y-4 pt-4">
-                <div className="text-[9px] tracking-[0.24em] text-[#b7c8a8] font-mono uppercase font-semibold">
-                  {activeArtifact.tag}
-                </div>
-                
-                <h3 id="artifact-modal-title" className="font-serif text-2xl lg:text-3xl text-[#f1efe8] leading-tight">
-                  {activeArtifact.title}
-                </h3>
-                
-                <p className="text-xs text-[#f1efe8]/70 leading-relaxed font-sans select-text">
-                  {activeArtifact.summary}
-                </p>
-              </div>
-
-              {/* Metadata Grid */}
-              <div className="grid grid-cols-3 gap-4 border-y border-[#f1efe8]/10 py-4 text-[9px] font-mono uppercase text-[#f1efe8]/50">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[0.48fr_0.52fr]">
+          <div className="border-y border-ink/16">
+            {deskRows.map(([title, basis, output, state], index) => (
+              <article key={title} className="grid gap-5 border-b border-ink/12 py-[1.375rem] last:border-b-0 md:grid-cols-[4rem_1fr]">
+                <p className="font-serif text-3xl italic text-ink/35">0{index + 1}</p>
                 <div>
-                  <span className="block text-[#f1efe8]/30">Published</span>
-                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.date}</span>
-                </div>
-                <div>
-                  <span className="block text-[#f1efe8]/30">Artifact State</span>
-                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.status}</span>
-                </div>
-                <div>
-                  <span className="block text-[#f1efe8]/30">Author</span>
-                  <span className="text-[10px] text-[#f1efe8]/80 font-sans tracking-normal">{activeArtifact.author}</span>
-                </div>
-              </div>
-
-              {/* Detail insights / Key metrics */}
-              <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 text-xs leading-relaxed">
-                {/* Highlights list */}
-                <div className="space-y-3">
-                  <div className="text-[9px] tracking-[0.18em] text-[#b7c8a8] font-mono uppercase font-semibold">Key Insights</div>
-                  <ul className="space-y-2 font-sans text-[#f1efe8]/60">
-                    {activeArtifact.highlights.map((hl, idx) => (
-                      <li key={idx} className="flex gap-2 items-start">
-                        <span className="text-[#b7c8a8] font-mono text-[9px] mt-0.5">▪</span>
-                        <span className="text-[11px]">{hl}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Quantitative statistics */}
-                <div className="space-y-3 bg-[#f1efe8]/[0.01] border border-[#f1efe8]/8 p-4">
-                  <div className="text-[9px] tracking-[0.18em] text-[#f1efe8]/40 font-mono uppercase">Metrics / Models</div>
-                  <div className="space-y-2">
-                    {activeArtifact.metrics.map((m, idx) => (
-                      <div key={idx} className="flex justify-between font-mono text-[10px] uppercase border-b border-[#f1efe8]/6 pb-1.5 last:border-b-0 last:pb-0">
-                        <span className="text-[#f1efe8]/45">{m.key}</span>
-                        <span className="text-[#f1efe8] font-medium">{m.val}</span>
-                      </div>
-                    ))}
+                  <div className="flex flex-col gap-3 border-b border-ink/10 pb-4 sm:flex-row sm:items-start sm:justify-between">
+                    <h3 className="font-serif text-3xl italic leading-none md:text-4xl">{title}</h3>
+                    <span className="text-[10px] uppercase tracking-[0.22em] text-ink/42">{state}</span>
+                  </div>
+                  <div className="mt-5 grid gap-4 text-sm leading-relaxed text-ink/62 sm:grid-cols-[1fr_0.54fr]">
+                    <p>{basis}</p>
+                    <p className="border-l border-ink/12 pl-4 text-[10px] uppercase leading-relaxed tracking-[0.2em] text-ink/48">{output}</p>
                   </div>
                 </div>
-              </div>
-
-              {/* Action area */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#f1efe8]/10">
-                <div className="font-mono text-[8px] text-[#f1efe8]/30 tracking-widest">
-                  PUBLIC PREVIEW: FULL FILE NOT BUNDLED
-                </div>
-                
-                <a
-                  id="artifact-request-btn"
-                  href={`mailto:sulayman.bowles@gmail.com?subject=${encodeURIComponent(`Research artifact request: ${activeArtifact.title}`)}`}
-                  className="hover-target w-full sm:w-auto bg-[#f1efe8] text-[#080807] font-mono text-[10px] font-semibold uppercase tracking-wider px-6 py-2.5 hover:bg-[#f1efe8]/90 transition-colors disabled:opacity-50 text-center"
-                  data-cursor-text="REQUEST"
-                >
-                  REQUEST FULL FILE
-                </a>
-              </div>
-            </motion.div>
+              </article>
+            ))}
           </div>
-        )}
-      </AnimatePresence>
-    </section>
-  );
-}
-
-// Case/Memo Utilities Component
-function CaseUtilities() {
-  return (
-    <section className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 text-[9.5px] uppercase tracking-[0.2em] font-mono text-[#f1efe8]/42 border-b border-[#f1efe8]/12 relative z-10">
-      {/* Left: Statement */}
-      <div className="flex items-center gap-3">
-        <div className="w-5 h-5 rounded-full border border-[#f1efe8]/20 flex items-center justify-center text-[8px] text-[#b7c8a8]">
-          ◈
+          <ReportMiniature />
         </div>
-        <span>Start with the thesis. Build with conviction.</span>
       </div>
-
-      {/* Center: Share */}
-      <div className="flex items-center gap-5">
-        <span className="text-[8px] text-[#f1efe8]/30">ARCHIVE</span>
-        <a href="/markets/network-monopolies" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 01</a>
-        <a href="/markets/computational-commodity-systems" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 02</a>
-        <a href="/markets/fiat-horizon" className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="READ">MEMO 03</a>
-        <button className="hover:text-[#f1efe8] transition-colors hover-target" data-cursor-text="COPY" onClick={() => navigator.clipboard.writeText(window.location.href)}>COPY</button>
-      </div>
-
-      {/* Right: Export */}
-      <button 
-        onClick={() => window.print()}
-        className="flex items-center gap-2 hover:text-[#f1efe8] transition-colors border border-[#f1efe8]/12 px-3 py-1.5 hover-target bg-[#080807]"
-        data-cursor-text="EXPORT"
-      >
-        <span>EXPORT PDF</span>
-        <span className="text-[8px] opacity-60">⤓</span>
-      </button>
     </section>
   );
 }
 
-// Main Page Export
-export default function MarketsPage() {
-  useSEO(MARKETS_SEO);
+function SurfaceProofStrip({ surface }: { surface: Surface }) {
+  return (
+    <div className="mt-5 grid border-t border-canvas/10 pt-4 text-[10px] uppercase tracking-[0.18em] text-canvas/46 sm:grid-cols-3">
+      {surface.sourceBasis.slice(0, 3).map((basis) => (
+        <span key={basis} className="border-b border-canvas/8 py-2 pr-4 sm:border-b-0 sm:border-r sm:last:border-r-0">
+          {basis}
+        </span>
+      ))}
+    </div>
+  );
+}
 
-  const prefersReducedMotion = useReducedMotion();
-  const [activeArtifact, setActiveArtifact] = useState<Artifact | null>(null);
-  const [activeThesisId, setActiveThesisId] = useState<number | null>(null);
-  const [activeFilter, setActiveFilter] = useState<MarketFilter>('All');
+function SurfaceGlyph({ surfaceId }: { surfaceId: SurfaceId }) {
+  const label = {
+    'market-brief': 'Brief packet',
+    'equity-memo': 'Memo stack',
+    'crypto-map': 'Protocol map',
+    'model-workbook': 'Workbook',
+  }[surfaceId];
+
+  return (
+    <span className="hidden min-h-28 border border-canvas/12 p-3 text-canvas/48 md:block">
+      <svg viewBox="0 0 160 96" className="h-24 w-full" aria-hidden="true">
+        <rect x="0.5" y="0.5" width="159" height="95" fill="none" stroke="currentColor" opacity="0.28" />
+        {surfaceId === 'market-brief' && (
+          <>
+            {[20, 42, 64, 86, 108, 130].map((x, index) => (
+              <g key={x}>
+                <line x1={x} x2={x} y1={24 + (index % 2) * 4} y2={74 - (index % 3) * 5} stroke="currentColor" opacity="0.26" />
+                <rect x={x - 4} y={42 - index * 2} width="8" height={20 + (index % 2) * 9} fill={index % 2 ? 'currentColor' : 'none'} stroke="currentColor" opacity="0.46" />
+              </g>
+            ))}
+            <path d="M14 76H146" stroke="currentColor" opacity="0.14" />
+          </>
+        )}
+        {surfaceId === 'equity-memo' && (
+          <>
+            {[18, 30, 42, 60].map((y) => (
+              <path key={y} d={`M20 ${y}H112`} stroke="currentColor" opacity={y === 18 ? 0.46 : 0.22} />
+            ))}
+            <rect x="20" y="66" width="96" height="12" fill="none" stroke="currentColor" opacity="0.24" />
+            <path d="M124 18V78M136 30V78" stroke="currentColor" opacity="0.18" />
+          </>
+        )}
+        {surfaceId === 'crypto-map' && (
+          <>
+            {[
+              [38, 28],
+              [78, 48],
+              [124, 24],
+              [116, 72],
+              [42, 70],
+            ].map(([cx, cy], index, nodes) => (
+              <g key={`${cx}-${cy}`}>
+                {index > 0 && <path d={`M${nodes[index - 1][0]} ${nodes[index - 1][1]}L${cx} ${cy}`} stroke="currentColor" opacity="0.18" />}
+                <circle cx={cx} cy={cy} r={index === 1 ? 8 : 5} fill={index === 1 ? 'currentColor' : 'none'} stroke="currentColor" opacity={index === 1 ? 0.42 : 0.3} />
+              </g>
+            ))}
+          </>
+        )}
+        {surfaceId === 'model-workbook' && (
+          <>
+            {[18, 36, 54, 72].map((y) => (
+              <path key={y} d={`M16 ${y}H144`} stroke="currentColor" opacity="0.16" />
+            ))}
+            {[44, 76, 108].map((x) => (
+              <path key={x} d={`M${x} 14V82`} stroke="currentColor" opacity="0.16" />
+            ))}
+            <rect x="76" y="36" width="32" height="18" fill="currentColor" opacity="0.16" />
+            <rect x="108" y="54" width="36" height="18" fill="currentColor" opacity="0.22" />
+          </>
+        )}
+      </svg>
+      <span className="mt-2 block border-t border-canvas/10 pt-3 text-[10px] uppercase tracking-[0.22em] text-canvas/42">
+        {label}
+      </span>
+    </span>
+  );
+}
+
+function ResearchSurfaces({ onOpen }: { onOpen: (surface: SurfaceId) => void }) {
+  return (
+    <section className="relative z-10 bg-ink px-4 py-14 text-canvas md:px-8 md:py-20 xl:px-10">
+      <div className="mx-auto grid max-w-[1480px] gap-12 lg:grid-cols-[0.34fr_0.66fr]">
+        <div className="border-t border-canvas/14 pt-8">
+          <p className="text-[10px] uppercase tracking-[0.28em] text-canvas/42">Research surfaces</p>
+          <h2 className="mt-8 font-serif text-[clamp(3.5rem,6vw,6.75rem)] italic leading-[0.8]">
+            Research artifacts.
+          </h2>
+          <p className="mt-8 max-w-md text-sm leading-relaxed text-canvas/58">
+            Each surface names the output, the source basis, and the proof state. The desk stays sparse so the evidence language can carry trust.
+          </p>
+        </div>
+
+        <div className="border-y border-canvas/14">
+          {researchSurfaces.map((surface) => (
+            <button
+              key={surface.id}
+              type="button"
+              onClick={() => onOpen(surface.id)}
+              className="hover-target group grid w-full gap-5 border-b border-canvas/10 py-6 text-left outline-none transition-colors hover:bg-canvas/[0.015] focus-visible:bg-canvas/[0.025] focus-visible:ring-1 focus-visible:ring-canvas/20 last:border-b-0 md:grid-cols-[3.25rem_minmax(0,1fr)_11rem_2rem] xl:grid-cols-[3.5rem_minmax(0,1fr)_12rem_2rem]"
+              data-cursor-text="OPEN"
+            >
+              <span className="font-serif text-3xl italic text-canvas/36">{surface.number}</span>
+              <span>
+                <span className="flex flex-col gap-2 text-[10px] uppercase tracking-[0.22em] text-canvas/42 md:flex-row md:items-start md:justify-between">
+                  <span>{surface.label}</span>
+                  <span className="md:text-right">{surface.status} / {surface.output}</span>
+                </span>
+                <span className="mt-4 block font-serif text-4xl leading-none text-canvas md:text-5xl">{surface.title}</span>
+                <span className="mt-4 block max-w-2xl text-sm leading-relaxed text-canvas/54">{surface.summary}</span>
+                <SurfaceProofStrip surface={surface} />
+              </span>
+              <SurfaceGlyph surfaceId={surface.id} />
+              <span className="justify-self-start text-canvas/46 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 md:justify-self-end">
+                <ArrowUpRight size={15} strokeWidth={1.4} />
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function EvidenceMap() {
+  return (
+    <section className="relative z-10 bg-ink px-4 pb-16 text-canvas md:px-8 md:pb-20 xl:px-10">
+      <div className="mx-auto max-w-[1480px] border-t border-canvas/14 pt-10">
+        <div className="mb-7 grid gap-8 lg:grid-cols-[0.34fr_0.66fr]">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-canvas/42">Financial evidence engine</p>
+            <h2 className="mt-5 font-serif text-[clamp(3rem,5.4vw,6.25rem)] italic leading-[0.82]">
+              Source to thesis.
+            </h2>
+          </div>
+          <div className="grid gap-5 text-sm leading-relaxed text-canvas/56 lg:self-end">
+            <p className="max-w-2xl">
+              The market page should not imply live authority. This map is the visual contract: inputs become normalized evidence, evidence becomes analysis, and output remains labeled by proof state.
+            </p>
+            <div className="grid gap-px border border-canvas/10 bg-canvas/10 text-[10px] uppercase tracking-[0.2em] text-canvas/42 sm:grid-cols-4">
+              {['Market data', 'Filings', 'On-chain', 'Risk mapping'].map((item) => (
+                <span key={item} className="bg-ink p-3">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="hidden md:block">
+          <InvestmentResearchMap className="aspect-[1000/620] w-full" />
+        </div>
+        <div className="grid border-y border-canvas/14 md:hidden">
+          {evidenceFlowRows.map(([number, title, description]) => (
+            <div key={title} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-canvas/10 py-5 last:border-b-0">
+              <span className="font-serif text-2xl italic text-canvas/36">{number}</span>
+              <span>
+                <span className="block text-[10px] uppercase tracking-[0.24em] text-canvas/56">{title}</span>
+                <span className="mt-3 block text-sm leading-relaxed text-canvas/58">{description}</span>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ArchiveSection({ onOpen, onReadThesis }: { onOpen: (surface: SurfaceId) => void; onReadThesis: (idx: number) => void }) {
+  return (
+    <section className="relative z-10 bg-canvas px-4 py-16 text-ink md:px-8 md:py-24 xl:px-10">
+      <div className="mx-auto grid max-w-[1480px] gap-12 lg:grid-cols-[0.34fr_0.66fr]">
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.28em] text-ink/42">Archive</p>
+          <h2 className="mt-8 font-serif text-[clamp(3.8rem,7vw,8rem)] italic leading-[0.82]">
+            Reports with memory.
+          </h2>
+        </div>
+        <div>
+          <div className="border-y border-ink/14">
+            {archiveRows.map(([number, title, scope, state, target]) => (
+              <button
+                key={number}
+                type="button"
+                onClick={() => onOpen(target)}
+                className="hover-target grid w-full gap-4 border-b border-ink/10 py-6 text-left last:border-b-0 md:grid-cols-[4rem_1fr_12rem_10rem_3rem]"
+                data-cursor-text="OPEN"
+              >
+                <span className="font-serif text-2xl italic text-ink/36">{number}</span>
+                <span className="font-serif text-3xl leading-none">{title}</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-ink/42">{scope}</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-ink/42">{state}</span>
+                <ArrowUpRight size={14} strokeWidth={1.4} />
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-10 border border-ink/14">
+            <div className="flex items-center justify-between border-b border-ink/12 px-5 py-4 text-[10px] uppercase tracking-[0.26em] text-ink/42">
+              <span>Long-form thesis index</span>
+              <BookOpen size={14} strokeWidth={1.5} />
+            </div>
+            {MARKET_THESES.map((thesis, idx) => (
+              <article key={thesis.slug} className="grid gap-5 border-b border-ink/10 p-5 last:border-b-0 md:grid-cols-[4rem_1fr_13rem]">
+                <p className="font-serif text-2xl italic text-ink/36">{thesis.number}</p>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-ink/42">{thesis.category} / {thesis.horizon}</p>
+                  <h3 className="mt-3 font-serif text-3xl leading-none md:text-4xl">{thesis.title}</h3>
+                </div>
+                <div className="flex items-end gap-4 text-[10px] uppercase tracking-[0.22em] md:justify-end">
+                  <button type="button" onClick={() => onReadThesis(idx)} className="hover-target border-b border-ink/22 pb-2 hover:border-ink" data-cursor-text="READ">
+                    Read memo
+                  </button>
+                  <a href={`/markets/${thesis.slug}`} className="hover-target border-b border-ink/22 pb-2 hover:border-ink" data-cursor-text="PAGE">
+                    Page
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SurfaceModal({
+  surface,
+  onClose,
+}: {
+  surface: Surface | null;
+  onClose: () => void;
+}) {
+  const ref = useFocusTrap(surface !== null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const artifacts: Artifact[] = [
-    {
-      id: 'pdf-memo',
-      tag: 'PDF MEMO',
-      title: 'Appian Group (NASDAQ: APPN) Valuation Memo',
-      summary: 'A 24-page deep dive reviewing workflow orchestration durability, recurring contract structures, and competitive moats in low-code platforms.',
-      date: 'May 14, 2026',
-      status: 'Preview only',
-      author: 'Sulayman Bowles',
-      highlights: [
-        'Contract lock-in modeling showing less than 1.5% churn in core enterprise tier.',
-        'Gross margins expansion profile from 73.1% to 76.5% over three years.',
-        'Downside sensitivity analysis assuming a 15% discount to consensus market rate.'
-      ],
-      metrics: [
-        { key: 'Target Multiple', val: '14.0x EV/Sales' },
-        { key: 'Upside Potential', val: '+45%' },
-        { key: 'Margin of Safety', val: '28%' }
-      ]
-    },
-    {
-      id: 'valuation-model',
-      tag: 'VALUATION MODEL',
-      title: 'Appian DCF & LBO Financial Spreadsheet',
-      summary: 'Granular financial model containing a multi-stage Discounted Cash Flow and leveraged buyout scenario matrix built for valuation testing.',
-      date: 'May 12, 2026',
-      status: 'Available on request',
-      author: 'Sulayman Bowles',
-      highlights: [
-        'Fully dynamic WACC calculations responding to sovereign interest rate shifts.',
-        'Downside scenario toggle mapping revenue contraction vs capital allocation.',
-        'Comparable metrics engine polling historical enterprise tech exits.'
-      ],
-      metrics: [
-        { key: 'Base Case IRR', val: '19.4%' },
-        { key: 'Bear Case IRR', val: '7.8%' },
-        { key: 'WACC Estimate', val: '8.25%' }
-      ]
-    },
-    {
-      id: 'protocol-map',
-      tag: 'PROTOCOL MAP',
-      title: 'Aerodrome ve(3,3) Flywheel Mechanics',
-      summary: 'System architecture map detail diagraming token emission decays, fee distributions, and structural voting alignments.',
-      date: 'May 16, 2026',
-      status: 'Preview only',
-      author: 'Sulayman Bowles',
-      highlights: [
-        'Vector paths of token routing from liquidity pools back to governance lockers.',
-        'Bribe efficiency ratios mapping costs per dollar of voter incentives.',
-        'Inflation schedule calculations including decay parameters.'
-      ],
-      metrics: [
-        { key: 'Fee Capture Rate', val: '100%' },
-        { key: 'Emissions Decay', val: '-1.8% / wk' },
-        { key: 'Avg Lock Duration', val: '3.6 Yrs' }
-      ]
-    },
-    {
-      id: 'market-dashboard',
-      tag: 'MARKET DASHBOARD',
-      title: 'Global Liquidity & Volatility Analytics',
-      summary: 'Interactive database covering sovereign balance sheets, yield curves, credit spreads, and local compression signals.',
-      date: 'May 18, 2026',
-      status: 'Framework preview',
-      author: 'Sulayman Bowles',
-      highlights: [
-        'M2 money supply velocity charts across USA, EU, and China.',
-        'Credit volatility indices relative to historical regime averages.',
-        'Local range boundary indicators for currency swap bands.'
-      ],
-      metrics: [
-        { key: 'M2 Growth (Global)', val: '+2.4%' },
-        { key: 'Credit Volatility', val: 'Low (14.2)' },
-        { key: 'Regime Classification', val: 'Compression' }
-      ]
-    },
-    {
-      id: 'on-chain-notes',
-      tag: 'ON-CHAIN NOTES',
-      title: 'Ethereum L2 Blob-Space Cost Analysis',
-      summary: 'On-chain telemetry mapping transaction costs, data publication rates, and sequencer profits after the Dencun upgrade.',
-      date: 'May 15, 2026',
-      status: 'Framework preview',
-      author: 'Sulayman Bowles',
-      highlights: [
-        'Data publishing margins across Arbitrum, Optimism, and Base.',
-        'Blob gas limit density analysis (capacity vs usage).',
-        'Sequencer fee extraction models under competitive rollup scenarios.'
-      ],
-      metrics: [
-        { key: 'Avg Blob Gas Cost', val: '< 0.01 Gwei' },
-        { key: 'Sequencer Profit Margin', val: '64.2%' },
-        { key: 'Total Rollup TVL', val: '$14.2B' }
-      ]
-    }
-  ];
-
-  const handleOpenArtifact = (id: string) => {
-    const art = artifacts.find(a => a.id === id);
-    if (art) setActiveArtifact(art);
-  };
-
-  const visibleArtifacts = artifacts.filter((artifact) => artifactMatchesFilter(artifact, activeFilter));
+    if (!surface) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [surface, onClose]);
 
   return (
-    <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased md:cursor-none overflow-x-hidden">
-      <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
+    <AnimatePresence>
+      {surface && (
+        <motion.div
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-ink/84 px-4 py-8 text-canvas backdrop-blur-xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="surface-title"
+        >
+          <motion.div
+            ref={ref}
+            className="relative grid max-h-[88vh] w-full max-w-6xl overflow-auto border border-canvas/18 bg-ink shadow-2xl md:grid-cols-[1fr_0.42fr]"
+            initial={{ y: 24, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 24, opacity: 0 }}
+            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <button
+              type="button"
+              onClick={onClose}
+              className="hover-target absolute right-4 top-4 z-10 text-[10px] uppercase tracking-[0.28em] text-canvas/58 hover:text-canvas"
+              data-cursor-text="CLOSE"
+            >
+              Close
+            </button>
+            <div className="p-6 md:p-10">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-canvas/42">{surface.label} / {surface.status}</p>
+              <h3 id="surface-title" className="mt-8 max-w-3xl font-serif text-5xl leading-[0.92] md:text-7xl">
+                {surface.title}
+              </h3>
+              <p className="mt-8 max-w-2xl text-base leading-relaxed text-canvas/62">{surface.summary}</p>
+              <div className="mt-10 border-t border-canvas/12 pt-6">
+                <p className="mb-5 text-[10px] uppercase tracking-[0.26em] text-canvas/42">Source basis</p>
+                <ul className="grid gap-4 text-sm leading-relaxed text-canvas/62">
+                  {surface.sourceBasis.map((item) => (
+                    <li key={item} className="border-b border-canvas/8 pb-3">- {item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <aside className="border-t border-canvas/14 p-6 md:border-l md:border-t-0 md:p-8">
+              <div className="mb-8 border border-canvas/12 p-5">
+                <p className="text-[10px] uppercase tracking-[0.24em] text-canvas/38">Artifact state</p>
+                <p className="mt-5 font-serif text-4xl italic leading-none">{surface.output}</p>
+                <p className="mt-5 text-sm leading-relaxed text-canvas/54">Preview surface. Not a live-data claim.</p>
+              </div>
+              <div className="grid gap-5">
+                {surface.metrics.map((metric) => (
+                  <div key={metric.label} className="border-t border-canvas/12 pt-4">
+                    <p className="text-[10px] uppercase tracking-[0.24em] text-canvas/38">{metric.label}</p>
+                    <p className="mt-2 font-serif text-3xl italic leading-none">{metric.value}</p>
+                  </div>
+                ))}
+              </div>
+            </aside>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export function MarketsPage() {
+  useSEO(MARKETS_SEO);
+  const prefersReducedMotion = useReducedMotion();
+  const [activeSurfaceId, setActiveSurfaceId] = useState<SurfaceId | null>(null);
+  const [activeThesisId, setActiveThesisId] = useState<number | null>(null);
+
+  const activeSurface = useMemo(
+    () => researchSurfaces.find((surface) => surface.id === activeSurfaceId) ?? null,
+    [activeSurfaceId],
+  );
+
+  return (
+    <main id="top" className="relative min-h-screen overflow-x-hidden bg-ink font-sans text-canvas antialiased selection:bg-canvas selection:text-ink md:cursor-none">
+      <WireframeGrid tone="dark" className="pointer-events-none fixed inset-0 z-0 opacity-[0.08]" />
       <PageTechnicalChrome tone="dark" />
 
-      {!prefersReducedMotion && <div className="hidden md:block">
-        <SmoothCursor />
-      </div>}
+      {!prefersReducedMotion && (
+        <div className="hidden md:block">
+          <SmoothCursor />
+        </div>
+      )}
       <ScrollProgress />
 
       <InternalHeader activePath="/markets" tone="dark" />
+      <HeroSection onOpen={setActiveSurfaceId} />
+      <TickerTape />
+      <DeskModules />
+      <ResearchSurfaces onOpen={setActiveSurfaceId} />
+      <EvidenceMap />
+      <ArchiveSection onOpen={setActiveSurfaceId} onReadThesis={(idx) => setActiveThesisId(idx)} />
 
-      {/* Sub-header status banner */}
-      <div className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 pt-4 pb-4 border-b border-[#f1efe8]/8 relative z-10">
-        <div className="w-full flex items-center justify-between text-[10px] tracking-[0.18em] uppercase font-mono">
-          <div className="flex items-center gap-3">
-            <HeaderReticle />
-            <span className="text-[#f1efe8]/40">// SYSTEM: INVESTMENT & COMPASS ARCHIVE</span>
-          </div>
-          <div className="text-right flex items-center gap-2">
-            <span className="text-[#f1efe8]/42 font-sans text-[8px]">ACTIVE TARGET:</span>
-            <span className="font-serif italic normal-case tracking-tight text-xs text-[#f1efe8] flex items-center gap-1">
-              Next: Protocol Research / Equity Memo <span className="font-sans ml-1 text-[10px]">→</span>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <HeroSection />
-
-      <ResearchLanes />
-
-      <ResearchFilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-
-      <FeaturedCases onOpenArtifact={handleOpenArtifact} />
-
-      <TraditionalCasesSection onOpenArtifact={handleOpenArtifact} />
-
-      <CryptoResearchSection onOpenArtifact={handleOpenArtifact} />
-
-      <ResearchProcessSection />
-
-      <ResearchMemosSection activeFilter={activeFilter} onReadThesis={(idx) => setActiveThesisId(idx)} />
-
-      <ArtifactSection 
-        activeArtifact={activeArtifact} 
-        setActiveArtifact={setActiveArtifact} 
-        artifacts={visibleArtifacts} 
-      />
-
-      <CaseUtilities />
-
-      <div className="mx-auto max-w-[1480px] w-full px-4 md:px-8 xl:px-10 pb-8 relative z-10">
+      <div className="relative z-10 mx-auto w-full max-w-[1480px] bg-ink px-4 pb-8 md:px-8 xl:px-10">
         <InternalFooter activePath="/markets" tone="dark" />
       </div>
 
-      {/* Slide-out long-form memo reader */}
+      <SurfaceModal surface={activeSurface} onClose={() => setActiveSurfaceId(null)} />
+
       <AnimatePresence>
         {activeThesisId !== null && (
           <ArticleReader
@@ -1162,3 +749,5 @@ export default function MarketsPage() {
     </main>
   );
 }
+
+export default MarketsPage;

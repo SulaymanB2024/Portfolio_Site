@@ -9,6 +9,7 @@ import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { InternalHeader } from '../components/InternalHeader';
 import { InternalFooter } from '../components/InternalFooter';
 import { WireframeGrid } from '../components/WireframeGrid';
+import { NetworkMonopoliesVisual, ComputationalCommodityVisual, FiatHorizonVisual } from '../components/ThesisVisuals';
 
 export default function MarketArticlePage({ slug }: { slug: string }) {
   const prefersReducedMotion = useReducedMotion();
@@ -20,6 +21,19 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const renderVisual = () => {
+    switch (thesis.slug) {
+      case 'network-monopolies':
+        return <NetworkMonopoliesVisual />;
+      case 'computational-commodity-systems':
+        return <ComputationalCommodityVisual />;
+      case 'fiat-horizon':
+        return <FiatHorizonVisual />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <main id="top" className="min-h-screen w-full bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807] font-sans relative antialiased md:cursor-none overflow-x-hidden">
@@ -43,7 +57,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
 
       <article className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-8 px-4 py-10 md:px-8 md:py-16 lg:grid-cols-[0.32fr_0.68fr] lg:gap-12 xl:px-10 xl:py-24">
         <aside className="space-y-6 border-b border-[#f1efe8]/12 pb-7 text-[10px] uppercase tracking-[0.18em] text-[#f1efe8]/54 md:tracking-[0.22em] lg:sticky lg:top-28 lg:self-start lg:border-b-0 lg:border-r lg:pb-10 lg:pr-8">
-          <a href="/markets" className="hover-target inline-flex items-center gap-2 text-[#b7c8a8] hover:text-[#f1efe8] transition-colors" data-cursor-text="BACK">
+          <a href="/markets" className="hover-target inline-flex items-center gap-2 text-[#f1efe8] hover:text-[#f1efe8] transition-colors" data-cursor-text="BACK">
             <span>←</span> <span>Back to Markets</span>
           </a>
           <dl className="grid gap-5 pt-4">
@@ -69,7 +83,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
             </div>
           </dl>
           <nav className="border-t border-[#f1efe8]/12 pt-5" aria-label="Article index">
-            <div className="mb-4 text-[#b7c8a8]">Mini Index</div>
+            <div className="mb-4 text-[#f1efe8]">Mini Index</div>
             <div className="grid gap-3">
               {[
                 ['Thesis', '#thesis'],
@@ -87,7 +101,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
         </aside>
 
         <div className="max-w-4xl select-text">
-          <p className="mb-7 text-[10px] uppercase tracking-[0.36em] text-[#b7c8a8]">{thesis.category}</p>
+          <p className="mb-7 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]">{thesis.category}</p>
           <h1 className="font-serif text-[3rem] italic leading-[0.9] tracking-normal text-[#f1efe8] md:text-[clamp(3.25rem,8vw,8.5rem)] md:leading-[0.86] md:tracking-[-0.045em]">
             {thesis.title}
           </h1>
@@ -98,7 +112,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
           <div className="my-12 grid gap-4 border-y border-[#f1efe8]/10 py-6 text-[10px] uppercase tracking-[0.2em] text-[#f1efe8]/54 md:grid-cols-3">
             <div>
               <span className="block text-[#f1efe8]/32">Conviction</span>
-              <span className="mt-2 block text-[#b7c8a8]">{thesis.conviction}</span>
+              <span className="mt-2 block text-[#f1efe8]">{thesis.conviction}</span>
             </div>
             <div>
               <span className="block text-[#f1efe8]/32">Horizon</span>
@@ -117,7 +131,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
                 const rest = paragraph.slice(1);
                 return (
                   <p key={index}>
-                    <span className="float-left text-[3.85rem] font-serif italic mr-2.5 mt-1 leading-[0.8] text-[#b7c8a8] select-none">
+                    <span className="float-left text-[3.85rem] font-serif italic mr-2.5 mt-1 leading-[0.8] text-[#f1efe8] select-none">
                       {firstChar}
                     </span>
                     {rest}
@@ -130,7 +144,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
 
           {/* Monetarist / Quantitative Formula Box */}
           <section id="assumptions" className="my-12 scroll-mt-32 border-y border-[#f1efe8]/10 py-6">
-            <h2 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#b7c8a8]">Assumptions</h2>
+            <h2 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]">Assumptions</h2>
             <div className="grid gap-4 text-[10px] uppercase tracking-[0.18em] text-[#f1efe8]/54 md:grid-cols-3">
               <div>
                 <span className="block text-[#f1efe8]/32">Horizon</span>
@@ -155,7 +169,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
             <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[#f1efe8]/20" />
             <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-[#f1efe8]/20" />
 
-            <div className="text-[8.5px] uppercase tracking-[0.24em] text-[#b7c8a8] mb-4 text-center font-mono font-medium">
+            <div className="text-[8.5px] uppercase tracking-[0.24em] text-[#f1efe8] mb-4 text-center font-mono font-medium">
               {thesis.formulaLabel}
             </div>
             <div className="flex justify-center items-center py-8 border-y border-[#f1efe8]/8 text-[#f1efe8] text-base md:text-lg overflow-x-auto font-mono select-all bg-[#080807]/30 shadow-inner">
@@ -172,8 +186,26 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
             <p className="text-sm leading-relaxed text-[#f1efe8]/58">{thesis.risks}</p>
           </section>
 
+          {/* Academic Appendix: Model Simulator */}
+          <div className="my-12 scroll-mt-32 border-t border-[#f1efe8]/12 pt-8">
+            <details className="group cursor-pointer">
+              <summary className="hover-target flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-[#f1efe8] select-none list-none">
+                <span>APPENDIX A: ACTIVE THESIS MODEL SIMULATOR</span>
+                <span className="font-mono text-[9px] text-[#f1efe8]/40 transition-transform duration-300 group-open:rotate-180">[+]</span>
+              </summary>
+              <div className="mt-6 space-y-4">
+                <p className="font-serif italic text-sm leading-relaxed text-[#f1efe8]/64 normal-case">
+                  This interactive simulator models the capital-sink and network expansion dynamics described in the thesis. Adjust the input coefficients below to observe the clearing price and solvency outcomes.
+                </p>
+                <div className="pt-2 select-none cursor-default">
+                  {renderVisual()}
+                </div>
+              </div>
+            </details>
+          </div>
+
           <section id="status" className="mt-10 scroll-mt-32 border-t border-[#f1efe8]/12 pt-8">
-            <h2 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#b7c8a8]">Status</h2>
+            <h2 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]">Status</h2>
             <p className="text-sm leading-relaxed text-[#f1efe8]/58">
               Completed public research note. The formula and allocation figures are model assumptions for review, not investment advice.
             </p>

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useState, useMemo, type CSSProperties, type ReactNode } from 'react';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
@@ -147,21 +147,21 @@ function PDProcessStep({ index, title, copy, icon }: ProcessStepProps) {
 
   return (
     <motion.article
-      className="group relative min-h-[320px] border-b border-[#f1efe8]/14 p-5 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] md:border-r md:last:border-r-0 lg:border-b-0"
+      className="group relative min-h-[320px] border-b border-ink/12 p-5 transition-[background-color,border-color] duration-500 hover:bg-ink/[0.02] md:border-r md:last:border-r-0 lg:border-b-0"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/42">
+      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-ink/42">
         <span>{index}</span>
         <span>{isFinalStep ? 'END' : '->'}</span>
       </div>
-      <div className="mb-8 text-[#f1efe8]/55 transition-colors duration-500 group-hover:text-[#f1efe8]/86">
+      <div className="mb-8 text-ink/55 transition-colors duration-500 group-hover:text-ink/86">
         <ProcessIcon type={icon} isHovered={isHovered} />
       </div>
-      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-[#f1efe8]">{title}</h3>
-      <p className="text-sm leading-relaxed text-[#f1efe8]/62">{copy}</p>
+      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-ink">{title}</h3>
+      <p className="text-sm leading-relaxed text-ink/62">{copy}</p>
     </motion.article>
   );
 }
@@ -195,29 +195,53 @@ function PDOutputCard({ title, copy, cta, children, id, onCtaClick }: OutputCard
 
 function DiscoveryHeatmapGrid() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number>(2);
 
-  const tiles = Array.from({ length: 30 }, (_, index) => {
-    const isCritical = index % 7 === 0;
-    const isWarning = index % 5 === 1;
-    const path = index % 2 === 0 ? `/collections/outerwear-p${index}` : `/products/running-shoe-${index}`;
-    return { index, isCritical, isWarning, path };
-  });
+  const tiles = useMemo(() => {
+    return Array.from({ length: 30 }, (_, index) => {
+      const isCritical = index % 7 === 0;
+      const isWarning = index % 5 === 1;
+      const status = isCritical ? 'CRITICAL' : isWarning ? 'WARNING' : 'OPTIMAL';
+      const path = index % 2 === 0 ? `/collections/outerwear-p${index}` : `/products/running-shoe-${index}`;
+      const lcp = isCritical ? '3.4s' : isWarning ? '2.1s' : '1.1s';
+      return { index, isCritical, isWarning, status, path, lcp };
+    });
+  }, []);
+
+  const activeIndex = hoveredIndex !== null ? hoveredIndex : selectedIndex;
+  const currentTile = tiles[activeIndex];
 
   return (
-    <div className="grid w-full gap-4">
-      <div className="grid grid-cols-6 gap-2">
+    <div className="grid w-full gap-3 font-mono text-[9px] uppercase tracking-wider">
+      <div className="grid grid-cols-6 gap-1.5 p-1 bg-ink/5 border border-ink/10">
         {tiles.map((tile) => (
           <motion.div 
             key={tile.index}
             onMouseEnter={() => setHoveredIndex(tile.index)}
             onMouseLeave={() => setHoveredIndex(null)}
-            className={`aspect-square border border-ink/12 cursor-pointer ${tile.isCritical ? 'bg-[#c2695e]/60' : tile.isWarning ? 'bg-ink/20' : 'bg-[#b7c8a8]/60'}`}
+            onClick={() => setSelectedIndex(tile.index)}
+            className={`aspect-square border border-ink/12 cursor-pointer transition-all ${
+              tile.isCritical ? 'bg-[#c2695e]/60' : tile.isWarning ? 'bg-ink/20' : 'bg-[#b7c8a8]/60'
+            } ${selectedIndex === tile.index ? 'ring-1 ring-ink scale-110' : ''}`}
             animate={{ scale: hoveredIndex === tile.index ? 1.15 : 1 }}
           />
         ))}
       </div>
-      <div className="text-[9px] uppercase tracking-widest text-ink/50 min-h-[12px] text-center">
-        {hoveredIndex !== null ? tiles[hoveredIndex].path : 'HOVER GRID CELLS'}
+      <div className="border-t border-ink/10 pt-2 space-y-1 text-ink/70">
+        <div className="flex justify-between">
+          <span className="opacity-50">URL:</span>
+          <span className="text-ink font-semibold truncate max-w-[140px] xs:max-w-[200px] sm:max-w-[320px] md:max-w-none lg:max-w-[140px] xl:max-w-[200px] lowercase select-all">{currentTile.path}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="opacity-50">LCP:</span>
+          <span className={currentTile.isCritical ? 'text-[#c2695e] font-bold' : 'text-ink'}>{currentTile.lcp}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="opacity-50">STATUS:</span>
+          <span className={currentTile.isCritical ? 'text-[#c2695e]' : currentTile.isWarning ? 'text-ink' : 'text-[#3d5c2e] font-bold'}>
+            {currentTile.status}
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -279,7 +303,7 @@ function ConsoleModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/82 backdrop-blur-md p-4 md:p-8 xl:p-12 font-sans"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#080807]/15 backdrop-blur-sm p-4 md:p-8 xl:p-12 font-sans"
         >
           <motion.div
             ref={modalRef}
@@ -290,24 +314,24 @@ function ConsoleModal({
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: 24, scale: 0.98, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex h-full max-h-[640px] w-full max-w-[1100px] flex-col border border-[#f1efe8]/15 bg-[#080807] text-[#f1efe8]"
+            className="relative flex h-full max-h-[640px] w-full max-w-[1100px] flex-col border border-[#080807]/15 bg-[#f1efe8] text-[#080807]"
           >
-            <div className="absolute inset-0 pointer-events-none opacity-[0.035] bg-[linear-gradient(to_right,rgba(241,239,232,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(241,239,232,0.06)_1px,transparent_1px)] bg-[size:28px_28px]" />
+            <div className="absolute inset-0 pointer-events-none opacity-[0.035] bg-[linear-gradient(to_right,rgba(8,8,7,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(8,8,7,0.06)_1px,transparent_1px)] bg-[size:28px_28px]" />
 
-            <div className="absolute -left-2 -top-2 h-4 w-4 border-l border-t border-[#f1efe8]/30" />
-            <div className="absolute -right-2 -top-2 h-4 w-4 border-r border-t border-[#f1efe8]/30" />
-            <div className="absolute -left-2 -bottom-2 h-4 w-4 border-l border-b border-[#f1efe8]/30" />
-            <div className="absolute -right-2 -bottom-2 h-4 w-4 border-r border-b border-[#f1efe8]/30" />
+            <div className="absolute -left-2 -top-2 h-4 w-4 border-l border-t border-[#080807]/30" />
+            <div className="absolute -right-2 -top-2 h-4 w-4 border-r border-t border-[#080807]/30" />
+            <div className="absolute -left-2 -bottom-2 h-4 w-4 border-l border-b border-[#080807]/30" />
+            <div className="absolute -right-2 -bottom-2 h-4 w-4 border-r border-b border-[#080807]/30" />
 
-            <div className="flex items-center justify-between border-b border-[#f1efe8]/12 px-6 py-4 font-mono text-[9px] uppercase tracking-[0.32em] z-10">
+            <div className="flex items-center justify-between border-b border-[#080807]/12 px-6 py-4 font-mono text-[9px] uppercase tracking-[0.32em] z-10">
               <div className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#f1efe8]/80" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#080807]/80" />
                 <span id="modal-title" className="font-bold">{title}</span>
               </div>
               <button 
                 id="modal-close-btn"
                 onClick={onClose} 
-                className="hover-target text-[#f1efe8]/50 transition-colors hover:text-[#f1efe8] cursor-pointer"
+                className="hover-target text-[#080807]/50 transition-colors hover:text-[#080807] cursor-pointer"
               >
                 [ CLOSE ESC ]
               </button>
@@ -335,41 +359,41 @@ function HeatmapModalContent() {
   const current = mockDiagnostics[selectedCell % mockDiagnostics.length];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 text-[#f1efe8] font-sans h-full">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 text-[#080807] font-sans h-full">
       <div className="space-y-4">
-        <h4 className="font-mono text-[10px] uppercase tracking-widest text-[#f1efe8]/40 mb-4 font-bold">DISCOVERY MATRIX GRID EXPLORER</h4>
+        <h4 className="font-mono text-[10px] uppercase tracking-widest text-[#080807]/40 mb-4 font-bold">DISCOVERY MATRIX GRID EXPLORER</h4>
         <div className="grid grid-cols-10 gap-3">
           {Array.from({ length: 30 }).map((_, index) => {
             const isSel = selectedCell === index;
-            const status = index % 3 === 0 ? 'bg-[#c2695e]/60' : index % 3 === 2 ? 'bg-[#f1efe8]/20' : 'bg-[#b7c8a8]/60';
+            const status = index % 3 === 0 ? 'bg-[#c2695e]/60' : index % 3 === 2 ? 'bg-[#080807]/15' : 'bg-[#b7c8a8]/60';
             return (
               <button 
                 key={index} 
                 onClick={() => setSelectedCell(index)}
-                className={`aspect-square border border-[#f1efe8]/12 cursor-pointer transition-all ${status} ${isSel ? 'ring-2 ring-white scale-110' : ''}`}
+                className={`aspect-square border border-[#080807]/12 cursor-pointer transition-all ${status} ${isSel ? 'ring-2 ring-[#080807] scale-110' : ''}`}
               />
             );
           })}
         </div>
-        <div className="bg-white/[0.015] border border-[#f1efe8]/12 p-5 font-mono text-xs mt-6">
-          <div className="flex justify-between border-b border-[#f1efe8]/10 pb-2 mb-3">
-            <span className="text-[#f1efe8]/40">URL PATH</span>
-            <span className="text-[#f1efe8]/90">{current.path}</span>
+        <div className="bg-[#080807]/[0.015] border border-[#080807]/12 p-5 font-mono text-xs mt-6">
+          <div className="flex justify-between border-b border-[#080807]/10 pb-2 mb-3">
+            <span className="text-[#080807]/40">URL PATH</span>
+            <span className="text-[#080807]/90">{current.path}</span>
           </div>
           <div className="flex justify-between pb-2">
-            <span className="text-[#f1efe8]/40">AUDIT SCORE</span>
-            <span className={current.status === 'CRITICAL' ? 'text-[#c2695e]' : current.status === 'WARNING' ? 'text-white' : 'text-[#b7c8a8]'}>
+            <span className="text-[#080807]/40">AUDIT SCORE</span>
+            <span className={current.status === 'CRITICAL' ? 'text-[#c2695e] font-bold' : current.status === 'WARNING' ? 'text-[#080807] font-bold' : 'text-[#3d5c2e] font-bold'}>
               {current.status}
             </span>
           </div>
         </div>
       </div>
-      <div className="border-l border-[#f1efe8]/12 pl-6 space-y-4">
-        <h5 className="font-mono text-[9px] uppercase tracking-widest text-[#f1efe8]/40 font-bold">TEMPLATE ISSUES</h5>
+      <div className="border-l border-[#080807]/12 pl-6 space-y-4">
+        <h5 className="font-mono text-[9px] uppercase tracking-widest text-[#080807]/40 font-bold">TEMPLATE ISSUES</h5>
         <ul className="space-y-3">
           {current.issues.map((issue, idx) => (
             <li key={idx} className="text-xs leading-relaxed flex items-start gap-3">
-              <span className={`h-1.5 w-1.5 rounded-full mt-1.5 ${current.status === 'CRITICAL' ? 'bg-[#c2695e]' : current.status === 'WARNING' ? 'bg-[#f1efe8]/50' : 'bg-[#b7c8a8]'}`} />
+              <span className={`h-1.5 w-1.5 rounded-full mt-1.5 ${current.status === 'CRITICAL' ? 'bg-[#c2695e]' : current.status === 'WARNING' ? 'bg-[#080807]/50' : 'bg-[#3d5c2e]'}`} />
               <span>{issue}</span>
             </li>
           ))}
@@ -388,11 +412,11 @@ function IntentModalContent() {
   ];
 
   return (
-    <div className="space-y-6 text-[#f1efe8] font-sans">
-      <div className="border border-[#f1efe8]/12">
+    <div className="space-y-6 text-[#080807] font-sans">
+      <div className="border border-[#080807]/12">
         <table className="w-full border-collapse text-left text-[10px] uppercase tracking-[0.16em]">
           <thead>
-            <tr className="border-b border-[#f1efe8]/15 text-[#f1efe8]/40">
+            <tr className="border-b border-[#080807]/15 text-[#080807]/40">
               <th className="p-3">Search Term</th>
               <th className="p-3">Monthly Vol</th>
               <th className="p-3">Current Rank</th>
@@ -402,16 +426,123 @@ function IntentModalContent() {
           </thead>
           <tbody>
             {tableData.map((row) => (
-              <tr key={row.keyword} className="border-b border-[#f1efe8]/10 last:border-0 hover:bg-white/[0.01]">
+              <tr key={row.keyword} className="border-b border-[#080807]/10 last:border-0 hover:bg-[#080807]/[0.015]">
                 <td className="p-3 font-bold">{row.keyword}</td>
                 <td className="p-3 font-mono">{row.vol}</td>
                 <td className="p-3 font-mono">{row.rank}</td>
-                <td className="p-3 font-mono text-[#f1efe8]/60">{row.page}</td>
-                <td className="p-3 normal-case text-[#b7c8a8]">{row.target}</td>
+                <td className="p-3 font-mono text-[#080807]/60">{row.page}</td>
+                <td className="p-3 normal-case text-[#3d5c2e] font-medium">{row.target}</td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+    </div>
+  );
+}
+
+function DeduplicationRulesConfigContent() {
+  const [serverType, setServerType] = useState<'nginx' | 'apache' | 'vercel'>('nginx');
+  const [removeUtm, setRemoveUtm] = useState(true);
+  const [removeSort, setRemoveSort] = useState(true);
+  const [slashRedirect, setSlashRedirect] = useState(false);
+
+  const generatedConfig = useMemo(() => {
+    if (serverType === 'nginx') {
+      let rules = `# Nginx Redirection Rules\n`;
+      if (removeUtm) {
+        rules += `if ($args ~* "(.*)utm_(.*)") {\n  rewrite ^(.*)$ $uri? permanent;\n}\n`;
+      }
+      if (removeSort) {
+        rules += `if ($args ~* "(.*)sort=(.*)") {\n  rewrite ^(.*)$ $uri? permanent;\n}\n`;
+      }
+      if (slashRedirect) {
+        rules += `rewrite ^/(.*)/$ /$1 permanent;\n`;
+      }
+      return rules;
+    }
+    if (serverType === 'apache') {
+      let rules = `RewriteEngine On\n# Apache Redirects\n`;
+      if (removeUtm) {
+        rules += `RewriteCond %{QUERY_STRING} (.*)utm_(.*)\nRewriteRule ^(.*)$ /$1? [R=301,L]\n`;
+      }
+      if (removeSort) {
+        rules += `RewriteCond %{QUERY_STRING} (.*)sort=(.*)\nRewriteRule ^(.*)$ /$1? [R=301,L]\n`;
+      }
+      if (slashRedirect) {
+        rules += `RewriteRule ^(.*)/$ /$1 [R=301,L]\n`;
+      }
+      return rules;
+    }
+    // vercel
+    let redirects: any[] = [];
+    if (removeUtm) {
+      redirects.push({ source: '/(.*)\\?.*utm_.*', destination: '/$1', permanent: true });
+    }
+    if (removeSort) {
+      redirects.push({ source: '/(.*)\\?.*sort=.*', destination: '/$1', permanent: true });
+    }
+    if (slashRedirect) {
+      redirects.push({ source: '/:path+/', destination: '/:path', permanent: true });
+    }
+    return JSON.stringify({ redirects }, null, 2);
+  }, [serverType, removeUtm, removeSort, slashRedirect]);
+
+  return (
+    <div className="space-y-5 text-[#080807] font-sans">
+      <div className="flex gap-2 border-b border-[#080807]/10 pb-3">
+        {(['nginx', 'apache', 'vercel'] as const).map((type) => (
+          <button
+            key={type}
+            onClick={() => setServerType(type)}
+            className={`border px-3 py-1.5 text-[8.5px] uppercase tracking-wider font-mono cursor-pointer transition-colors ${serverType === type ? 'border-[#3d5c2e] text-[#3d5c2e] bg-[#3d5c2e]/10 font-bold' : 'border-[#080807]/12 text-[#080807]/50 hover:text-[#080807]'}`}
+          >
+            {type} config
+          </button>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-6">
+        <div className="space-y-3 font-mono text-[9px] uppercase tracking-wider">
+          <div className="text-[8.5px] text-[#080807]/40 mb-1">// CONFIG TOGGLES</div>
+          
+          <label className="flex items-center gap-3 border border-[#080807]/10 p-2.5 bg-[#080807]/[0.025] hover:bg-[#080807]/[0.05] cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={removeUtm}
+              onChange={(e) => setRemoveUtm(e.target.checked)}
+              className="accent-[#3d5c2e]"
+            />
+            <span>Remove UTM query</span>
+          </label>
+
+          <label className="flex items-center gap-3 border border-[#080807]/10 p-2.5 bg-[#080807]/[0.025] hover:bg-[#080807]/[0.05] cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={removeSort}
+              onChange={(e) => setRemoveSort(e.target.checked)}
+              className="accent-[#3d5c2e]"
+            />
+            <span>Remove Sort parameters</span>
+          </label>
+
+          <label className="flex items-center gap-3 border border-[#080807]/10 p-2.5 bg-[#080807]/[0.025] hover:bg-[#080807]/[0.05] cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={slashRedirect}
+              onChange={(e) => setSlashRedirect(e.target.checked)}
+              className="accent-[#3d5c2e]"
+            />
+            <span>Strip trailing slash</span>
+          </label>
+        </div>
+
+        <div className="space-y-2">
+          <div className="text-[8.5px] text-[#080807]/40 font-mono">// GENERATED CONFIG PAYLOAD</div>
+          <pre className="bg-[#080807]/[0.02] border border-[#080807]/10 p-4 font-mono text-[9.5px] text-[#3d5c2e] overflow-x-auto whitespace-pre select-all h-40">
+            {generatedConfig}
+          </pre>
+        </div>
       </div>
     </div>
   );
@@ -473,7 +604,7 @@ export default function ProductDiscoveryPage() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.08} yOffset={18} blur={false} className="w-full self-center">
-          <div className="group relative border border-ink/12 p-8 bg-ink/[0.015]">
+          <div className="group relative border border-ink/12 p-4 md:p-8 bg-ink/[0.015]">
             <DiscoveryHeatmapGrid />
             <div className="mt-4 grid grid-cols-3 border-t border-ink/12 text-[9px] uppercase tracking-[0.22em] text-ink/46 pt-4">
               <span>CATALOG MATRIX</span>
@@ -499,7 +630,7 @@ export default function ProductDiscoveryPage() {
 
           <div className="grid grid-cols-1 border-y border-ink/12 md:grid-cols-2 xl:grid-cols-5 xl:border-y-0">
             {processSteps.map((step) => (
-              <div key={step.title} className="text-[#f1efe8] bg-ink">
+              <div key={step.title} className="text-ink bg-ink/[0.015]">
                 <PDProcessStep {...step} />
               </div>
             ))}
@@ -638,46 +769,47 @@ Redirect 301 /products/shoes /collections/shoes`}
       </ConsoleModal>
 
       <ConsoleModal isOpen={activeModal === 'budget'} onClose={() => setActiveModal(null)} title="03 / CRAWL BUDGET &amp; DUPLICATE INSPECT">
-        <div className="space-y-4 text-[#f1efe8] font-sans">
-          <p className="text-sm text-[#f1efe8]/60 leading-relaxed">Verification of standard rules cleanups preventing crawl budget loss from infinite parameters.</p>
-          <div className="border border-[#f1efe8]/12 p-4 font-mono text-xs space-y-2">
-            <div>UTM Tracking Query Filters &rarr; CONSOLIDATED TO CANONICAL (PASS)</div>
-            <div>Pagination (e.g. ?p=2) &rarr; REL-NEXT Directives set (PASS)</div>
-            <div>Sort queries (e.g. ?sort=price) &rarr; Self-referencing Canonical (PASS)</div>
-            <div>Trailing slash inconsistencies &rarr; Forced HTTP Redirects (WARNING: 23 pages pending)</div>
+        <div className="space-y-4 text-[#080807] font-sans">
+          <p className="text-sm text-[#080807]/60 leading-relaxed">Verification of standard rules cleanups preventing crawl budget loss from infinite parameters.</p>
+          <div className="border border-[#080807]/12 p-4 font-mono text-xs space-y-2.5 bg-[#080807]/[0.01]">
+            <div className="flex justify-between items-center border-b border-[#080807]/6 pb-1.5">
+              <span className="opacity-70">UTM Tracking Query Filters &rarr; CONSOLIDATED</span>
+              <span className="text-[#3d5c2e] font-bold">PASS</span>
+            </div>
+            <div className="flex justify-between items-center border-b border-[#080807]/6 pb-1.5">
+              <span className="opacity-70">Pagination (e.g. ?p=2) &rarr; REL-NEXT DIRECTIVES</span>
+              <span className="text-[#3d5c2e] font-bold">PASS</span>
+            </div>
+            <div className="flex justify-between items-center border-b border-[#080807]/6 pb-1.5">
+              <span className="opacity-70">Sort queries (e.g. ?sort=price) &rarr; CANONICALS SET</span>
+              <span className="text-[#3d5c2e] font-bold">PASS</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="opacity-70">Trailing slash inconsistencies &rarr; REDIRECTS</span>
+              <span className="text-[#c2695e] font-bold">WARNING (23 PENDING)</span>
+            </div>
           </div>
         </div>
       </ConsoleModal>
 
       <ConsoleModal isOpen={activeModal === 'diagnostics'} onClose={() => setActiveModal(null)} title="04 / Core Web Vitals Metrics">
-        <div className="space-y-4 text-[#f1efe8] font-sans">
-          <p className="text-sm text-[#f1efe8]/60 leading-relaxed">Diagnostic audit scores for e-commerce template files.</p>
+        <div className="space-y-4 text-[#080807] font-sans">
+          <p className="text-sm text-[#080807]/60 leading-relaxed">Diagnostic audit scores for e-commerce template files.</p>
           <div className="grid grid-cols-2 gap-4">
-            <div className="border border-[#f1efe8]/12 p-4">
-              <div className="text-[10px] text-[#f1efe8]/50 uppercase tracking-widest">Largest Contentful Paint</div>
-              <div className="text-2xl font-serif italic text-[#b7c8a8] mt-2">1.4s (PASS)</div>
+            <div className="border border-[#080807]/12 p-4 bg-[#080807]/[0.01]">
+              <div className="text-[10px] text-[#080807]/50 uppercase tracking-widest font-bold">Largest Contentful Paint</div>
+              <div className="text-2xl font-serif italic text-[#3d5c2e] mt-2 font-bold">1.4s (PASS)</div>
             </div>
-            <div className="border border-[#f1efe8]/12 p-4">
-              <div className="text-[10px] text-[#f1efe8]/50 uppercase tracking-widest">Cumulative Layout Shift</div>
-              <div className="text-2xl font-serif italic text-[#b7c8a8] mt-2">0.02 (PASS)</div>
+            <div className="border border-[#080807]/12 p-4 bg-[#080807]/[0.01]">
+              <div className="text-[10px] text-[#080807]/50 uppercase tracking-widest font-bold">Cumulative Layout Shift</div>
+              <div className="text-2xl font-serif italic text-[#3d5c2e] mt-2 font-bold">0.02 (PASS)</div>
             </div>
           </div>
         </div>
       </ConsoleModal>
 
       <ConsoleModal isOpen={activeModal === 'rules'} onClose={() => setActiveModal(null)} title="05 / DEDUPLICATION RULES CONFIG">
-        <div className="space-y-4 text-[#f1efe8] font-sans">
-          <p className="text-sm text-[#f1efe8]/60 leading-relaxed">Sample server configurations implemented to deduplicate collection filters.</p>
-          <pre className="bg-white/[0.02] border border-[#f1efe8]/10 p-4 font-mono text-[10px] text-[#b7c8a8] overflow-x-auto whitespace-pre-wrap select-all">
-{`# Nginx Rule config
-if ($args ~* "sort=") {
-    rewrite ^(.*)$ $uri? permanent;
-}
-if ($args ~* "color=") {
-    rewrite ^(.*)$ $uri? permanent;
-}`}
-          </pre>
-        </div>
+        <DeduplicationRulesConfigContent />
       </ConsoleModal>
     </main>
   );

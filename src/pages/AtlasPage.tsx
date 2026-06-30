@@ -290,21 +290,21 @@ function AtlasProcessStep({ index, title, copy, icon }: ProcessStepProps) {
 
   return (
     <motion.article
-      className="group relative min-h-[320px] border-b border-[#f1efe8]/14 p-5 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] md:border-r md:last:border-r-0 lg:border-b-0"
+      className="group relative min-h-[320px] border-b border-ink/12 p-5 transition-[background-color,border-color] duration-500 hover:bg-ink/[0.02] md:border-r md:last:border-r-0 lg:border-b-0"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/42">
+      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-ink/42">
         <span>{index}</span>
         <span>{isFinalStep ? 'END' : '->'}</span>
       </div>
-      <div className="mb-8 text-[#f1efe8]/55 transition-colors duration-500 group-hover:text-[#f1efe8]/86">
+      <div className="mb-8 text-ink/55 transition-colors duration-500 group-hover:text-ink/86">
         <ProcessIcon type={icon} isHovered={isHovered} />
       </div>
-      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-[#f1efe8]">{title}</h3>
-      <p className="text-sm leading-relaxed text-[#f1efe8]/62">{copy}</p>
+      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-ink">{title}</h3>
+      <p className="text-sm leading-relaxed text-ink/62">{copy}</p>
     </motion.article>
   );
 }
@@ -611,7 +611,7 @@ function ConsoleModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/82 backdrop-blur-md p-4 md:p-8 xl:p-12 font-sans"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#080807]/15 backdrop-blur-sm p-4 md:p-8 xl:p-12 font-sans"
         >
           {/* Modal Container */}
           <motion.div
@@ -623,27 +623,27 @@ function ConsoleModal({
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: 24, scale: 0.98, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex h-full max-h-[640px] w-full max-w-[1100px] flex-col border border-[#f1efe8]/15 bg-[#080807] text-[#f1efe8]"
+            className="relative flex h-full max-h-[640px] w-full max-w-[1100px] flex-col border border-[#080807]/15 bg-[#f1efe8] text-[#080807]"
           >
             {/* Grid Pattern Backdrop */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.035] bg-[linear-gradient(to_right,rgba(241,239,232,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(241,239,232,0.06)_1px,transparent_1px)] bg-[size:28px_28px]" />
+            <div className="absolute inset-0 pointer-events-none opacity-[0.035] bg-[linear-gradient(to_right,rgba(8,8,7,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(8,8,7,0.06)_1px,transparent_1px)] bg-[size:28px_28px]" />
 
             {/* Corner Registration Marks */}
-            <div className="absolute -left-2 -top-2 h-4 w-4 border-l border-t border-[#f1efe8]/30" />
-            <div className="absolute -right-2 -top-2 h-4 w-4 border-r border-t border-[#f1efe8]/30" />
-            <div className="absolute -left-2 -bottom-2 h-4 w-4 border-l border-b border-[#f1efe8]/30" />
-            <div className="absolute -right-2 -bottom-2 h-4 w-4 border-r border-b border-[#f1efe8]/30" />
+            <div className="absolute -left-2 -top-2 h-4 w-4 border-l border-t border-[#080807]/30" />
+            <div className="absolute -right-2 -top-2 h-4 w-4 border-r border-t border-[#080807]/30" />
+            <div className="absolute -left-2 -bottom-2 h-4 w-4 border-l border-b border-[#080807]/30" />
+            <div className="absolute -right-2 -bottom-2 h-4 w-4 border-r border-b border-[#080807]/30" />
 
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-[#f1efe8]/12 px-6 py-4 font-mono text-[9px] uppercase tracking-[0.32em] z-10">
+            <div className="flex items-center justify-between border-b border-[#080807]/12 px-6 py-4 font-mono text-[9px] uppercase tracking-[0.32em] z-10">
               <div className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#f1efe8]/80" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#080807]/80" />
                 <span id="modal-title" className="font-bold">{title}</span>
               </div>
               <button 
                 id="modal-close-btn"
                 onClick={onClose} 
-                className="hover-target text-[#f1efe8]/50 transition-colors hover:text-[#f1efe8]"
+                className="hover-target text-[#080807]/50 transition-colors hover:text-[#080807] cursor-pointer"
               >
                 [ CLOSE ESC ]
               </button>
@@ -677,14 +677,14 @@ function IssuesModalContent() {
   const filtered = allIssues.filter(item => activeTab === 'ALL' || item.severity === activeTab);
 
   return (
-    <div className="flex flex-col gap-6 h-full text-[#f1efe8] font-sans">
-      <div className="flex gap-2 border-b border-[#f1efe8]/12 pb-3">
+    <div className="flex flex-col gap-6 h-full text-[#080807] font-sans">
+      <div className="flex gap-2 border-b border-[#080807]/12 pb-3">
         {(['ALL', 'CRITICAL', 'HIGH', 'MEDIUM'] as const).map(tab => (
           <button
             key={tab}
             id={`issues-tab-${tab.toLowerCase()}`}
             onClick={() => setActiveTab(tab)}
-            className={`hover-target px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] border transition-colors duration-200 ${activeTab === tab ? 'bg-[#f1efe8] text-[#080807] border-[#f1efe8]' : 'text-[#f1efe8]/50 border-[#f1efe8]/15 hover:text-[#f1efe8]'}`}
+            className={`hover-target px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] border transition-colors duration-200 ${activeTab === tab ? 'bg-[#080807] text-[#f1efe8] border-[#080807]' : 'text-[#080807]/50 border-[#080807]/15 hover:text-[#080807]'}`}
           >
             {tab}
           </button>
@@ -697,39 +697,39 @@ function IssuesModalContent() {
           const severityColor = 
             issue.severity === 'CRITICAL' ? 'text-[#c2695e] border-[#c2695e]/30 bg-[#c2695e]/10' :
             issue.severity === 'HIGH' ? 'text-[#c2695e] border-[#c2695e]/20 bg-[#c2695e]/5' :
-            'text-[#f1efe8]/60 border-[#f1efe8]/15 bg-transparent';
+            'text-[#080807]/60 border-[#080807]/15 bg-transparent';
 
           return (
             <div 
               key={issue.label}
               id={`issues-row-${issue.label.toLowerCase().replace(/\s+/g, '-')}`}
               onClick={() => setExpandedRow(isExpanded ? null : issue.label)}
-              className="border border-[#f1efe8]/12 p-4 cursor-pointer hover:bg-white/[0.015] transition-colors group"
+              className="border border-[#080807]/12 p-4 cursor-pointer hover:bg-[#080807]/[0.015] transition-colors group"
             >
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] group-hover:text-[#f1efe8] transition-colors">{issue.label}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] group-hover:text-[#080807] transition-colors">{issue.label}</span>
                   <span className={`font-mono text-[8px] px-1.5 py-0.5 border leading-none ${severityColor}`}>{issue.severity}</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="font-serif italic text-[#f1efe8]/58">SCORE: {issue.score}</span>
-                  <span className="font-mono text-[9px] text-[#f1efe8]/30 group-hover:text-[#f1efe8]/60">{isExpanded ? '[-]' : '[+]'}</span>
+                  <span className="font-serif italic text-[#080807]/58">SCORE: {issue.score}</span>
+                  <span className="font-mono text-[9px] text-[#080807]/30 group-hover:text-[#080807]/60">{isExpanded ? '[-]' : '[+]'}</span>
                 </div>
               </div>
 
               <motion.div
                 initial={false}
                 animate={{ height: isExpanded ? 'auto' : 0, opacity: isExpanded ? 1 : 0 }}
-                className="overflow-hidden text-xs text-[#f1efe8]/62 leading-relaxed"
+                className="overflow-hidden text-xs text-[#080807]/62 leading-relaxed"
               >
-                <div className="pt-4 border-t border-[#f1efe8]/10 mt-3 space-y-3">
+                <div className="pt-4 border-t border-[#080807]/10 mt-3 space-y-3">
                   <div>
-                    <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-[#f1efe8]/70 block mb-1">CRAWLER EVIDENCE</span>
+                    <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-[#080807]/70 block mb-1">CRAWLER EVIDENCE</span>
                     <p className="normal-case">{issue.desc}</p>
                   </div>
                   <div>
-                    <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-[#b7c8a8] block mb-1">REMEDIATION STEPS</span>
-                    <p className="normal-case text-[#f1efe8]/82">{issue.fix}</p>
+                    <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-[#3d5c2e] block mb-1 font-bold">REMEDIATION STEPS</span>
+                    <p className="normal-case text-[#080807]/82">{issue.fix}</p>
                   </div>
                 </div>
               </motion.div>
@@ -780,10 +780,10 @@ function GraphModalContent() {
   const activeNodeInfo = nodes.find(n => n.id === selectedNode)!;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 h-full font-sans text-[#f1efe8]">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 h-full font-sans text-[#080807]">
       {/* SVG Canvas */}
-      <div className="relative border border-[#f1efe8]/12 bg-black/40 flex items-center justify-center p-4 min-h-[300px]">
-        <svg viewBox="0 0 700 480" className="w-full h-full text-[#f1efe8]" aria-hidden="true">
+      <div className="relative border border-[#080807]/12 bg-[#080807]/[0.015] flex items-center justify-center p-4 min-h-[300px]">
+        <svg viewBox="0 0 700 480" className="w-full h-full text-[#080807]" aria-hidden="true">
           {links.map((link, idx) => {
             const fromPos = nodeCoords[link.from];
             const toPos = nodeCoords[link.to];
@@ -796,7 +796,7 @@ function GraphModalContent() {
                 y1={fromPos.y}
                 x2={toPos.x}
                 y2={toPos.y}
-                stroke={isActive ? '#f1efe8' : 'rgba(241,239,232,0.12)'}
+                stroke={isActive ? '#080807' : 'rgba(8,8,7,0.12)'}
                 strokeWidth={isActive ? 2 : 1}
                 strokeDasharray={isActive ? '5 5' : undefined}
                 animate={isActive ? { strokeDashoffset: [0, -10] } : undefined}
@@ -821,7 +821,7 @@ function GraphModalContent() {
                     cy={pos.y}
                     r={node.type === 'core' ? 24 : 18}
                     fill="none"
-                    stroke="#f1efe8"
+                    stroke="#080807"
                     initial={{ scale: 0.8, opacity: 1 }}
                     animate={{ scale: 1.5, opacity: 0 }}
                     transition={{ repeat: Infinity, duration: 1.2, ease: 'easeOut' }}
@@ -831,8 +831,8 @@ function GraphModalContent() {
                   cx={pos.x}
                   cy={pos.y}
                   r={node.type === 'core' ? 14 : 10}
-                  fill={isSelected ? '#f1efe8' : '#080807'}
-                  stroke={isSelected ? '#f1efe8' : 'rgba(241,239,232,0.4)'}
+                  fill={isSelected ? '#080807' : '#f1efe8'}
+                  stroke={isSelected ? '#080807' : 'rgba(8,8,7,0.4)'}
                   strokeWidth="1.5"
                 />
                 <text
@@ -841,7 +841,7 @@ function GraphModalContent() {
                   textAnchor="middle"
                   fontFamily="monospace"
                   fontSize="8.5"
-                  fill={isSelected ? '#f1efe8' : 'rgba(241,239,232,0.45)'}
+                  fill={isSelected ? '#080807' : 'rgba(8,8,7,0.45)'}
                   letterSpacing="1.2"
                 >
                   {node.id}
@@ -850,49 +850,49 @@ function GraphModalContent() {
             );
           })}
         </svg>
-        <div className="absolute bottom-4 left-4 font-mono text-[8px] tracking-[0.2em] text-[#f1efe8]/45">
+        <div className="absolute bottom-4 left-4 font-mono text-[8px] tracking-[0.2em] text-[#080807]/45">
           CLICK NODES TO TRACE INTRALINK RELATIONSHIPS
         </div>
       </div>
 
       {/* Node Sidebar Info */}
-      <div className="border border-[#f1efe8]/12 p-6 bg-black/30 flex flex-col justify-between font-mono">
+      <div className="border border-[#080807]/12 p-6 bg-[#080807]/[0.015] flex flex-col justify-between font-mono">
         <div>
-          <div className="text-[10px] text-[#f1efe8]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#f1efe8]/12 pb-2">
+          <div className="text-[10px] text-[#080807]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#080807]/12 pb-2">
             NODE INSPECTOR
           </div>
-          <div className="text-xs font-bold text-[#f1efe8] mb-6 uppercase tracking-[0.1em]">
+          <div className="text-xs font-bold text-[#080807] mb-6 uppercase tracking-[0.1em]">
             {activeNodeInfo.label}
           </div>
-          <div className="space-y-4 text-[9px] text-[#f1efe8]/60">
+          <div className="space-y-4 text-[9px] text-[#080807]/60">
             <div className="flex justify-between">
               <span>PATH:</span>
-              <span className="text-[#f1efe8]">{activeNodeInfo.id}</span>
+              <span className="text-[#080807]">{activeNodeInfo.id}</span>
             </div>
             <div className="flex justify-between">
               <span>DEPTH LEVEL:</span>
-              <span className="text-[#f1efe8]">{activeNodeInfo.depth}</span>
+              <span className="text-[#080807]">{activeNodeInfo.depth}</span>
             </div>
             <div className="flex justify-between">
               <span>PAGE AUTHORITY:</span>
-              <span className="text-[#f1efe8]">{activeNodeInfo.authority}/100</span>
+              <span className="text-[#080807]">{activeNodeInfo.authority}/100</span>
             </div>
             <div className="flex justify-between">
               <span>INCOMING LINKS:</span>
-              <span className="text-[#f1efe8]">{activeNodeInfo.inlinks}</span>
+              <span className="text-[#080807]">{activeNodeInfo.inlinks}</span>
             </div>
             <div className="flex justify-between">
               <span>OUTGOING LINKS:</span>
-              <span className="text-[#f1efe8]">{activeNodeInfo.outlinks}</span>
+              <span className="text-[#080807]">{activeNodeInfo.outlinks}</span>
             </div>
             <div className="flex justify-between">
               <span>CORE WEB VITALS:</span>
-              <span className={activeNodeInfo.cwv === 'PASS' ? 'text-[#b7c8a8] font-bold' : 'text-[#c2695e] font-bold'}>{activeNodeInfo.cwv}</span>
+              <span className={activeNodeInfo.cwv === 'PASS' ? 'text-[#3d5c2e] font-bold' : 'text-[#c2695e] font-bold'}>{activeNodeInfo.cwv}</span>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-[#f1efe8]/10 pt-4 mt-6 text-[8px] text-[#f1efe8]/30 leading-relaxed uppercase">
+        <div className="border-t border-[#080807]/10 pt-4 mt-6 text-[8px] text-[#080807]/30 leading-relaxed uppercase">
           [PAGE FLOW: REPRESENTING INTRA-LINK PATHWAYS TRANSMITTING INTERNAL LINK EQUITY MATRIX]
         </div>
       </div>
@@ -913,10 +913,10 @@ function DonutModalContent() {
   const activeInfo = selectedSlice !== null ? breakdowns[selectedSlice] : null;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full font-sans text-[#f1efe8]">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full font-sans text-[#080807]">
       {/* Visual Chart Panel */}
-      <div className="border border-[#f1efe8]/12 p-6 flex flex-col items-center justify-center bg-black/30">
-        <svg viewBox="0 0 200 200" className="w-40 h-40 -rotate-90 text-[#f1efe8] mb-6" aria-hidden="true">
+      <div className="border border-[#080807]/12 p-6 flex flex-col items-center justify-center bg-[#080807]/[0.015]">
+        <svg viewBox="0 0 200 200" className="w-40 h-40 -rotate-90 text-[#080807] mb-6" aria-hidden="true">
           <circle cx="100" cy="100" r="65" fill="none" stroke="currentColor" strokeWidth="22" opacity="0.06" />
           {[
             ['143 408', 0, 0.78, 0],
@@ -948,7 +948,7 @@ function DonutModalContent() {
             <div
               key={item.label}
               onClick={() => setSelectedSlice(idx)}
-              className={`grid grid-cols-[1fr_auto_auto] gap-4 text-[9px] uppercase tracking-[0.2em] py-2 px-3 border border-transparent cursor-pointer transition-all duration-200 ${selectedSlice === idx ? 'border-[#f1efe8]/20 bg-white/[0.03] text-[#f1efe8]' : 'text-[#f1efe8]/50 hover:text-[#f1efe8]'}`}
+              className={`grid grid-cols-[1fr_auto_auto] gap-4 text-[9px] uppercase tracking-[0.2em] py-2 px-3 border border-transparent cursor-pointer transition-all duration-200 ${selectedSlice === idx ? 'border-[#080807]/20 bg-[#080807]/[0.03] text-[#080807]' : 'text-[#080807]/50 hover:text-[#080807]'}`}
             >
               <span>{item.label}</span>
               <span>{item.count}</span>
@@ -959,36 +959,36 @@ function DonutModalContent() {
       </div>
 
       {/* Analysis Details Panel */}
-      <div className="border border-[#f1efe8]/12 p-6 bg-black/30 flex flex-col justify-between font-mono">
+      <div className="border border-[#080807]/12 p-6 bg-[#080807]/[0.015] flex flex-col justify-between font-mono">
         {activeInfo ? (
           <div>
-            <div className="text-[10px] text-[#f1efe8]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#f1efe8]/12 pb-2">
+            <div className="text-[10px] text-[#080807]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#080807]/12 pb-2">
               INDEXATION SEGMENT DETAILS
             </div>
-            <div className="text-xs font-bold text-[#f1efe8] mb-2 uppercase tracking-[0.1em]">
+            <div className="text-xs font-bold text-[#080807] mb-2 uppercase tracking-[0.1em]">
               {activeInfo.label}
             </div>
-            <div className="text-[11px] text-[#f1efe8]/72 leading-relaxed mb-6 font-sans normal-case">
+            <div className="text-[11px] text-[#080807]/72 leading-relaxed mb-6 font-sans normal-case">
               {activeInfo.status}
             </div>
-            <div className="text-[9px] text-[#f1efe8]/70 uppercase tracking-[0.2em] mb-3">
+            <div className="text-[9px] text-[#080807]/70 uppercase tracking-[0.2em] mb-3">
               SAMPLE MATCHING URLS:
             </div>
             <div className="space-y-1.5">
               {activeInfo.urls.map(url => (
-                <div key={url} className="text-[9.5px] text-[#f1efe8]/54 normal-case border-b border-[#f1efe8]/8 pb-1 font-mono">
+                <div key={url} className="text-[9.5px] text-[#080807]/54 normal-case border-b border-[#080807]/8 pb-1 font-mono">
                   {url}
                 </div>
               ))}
             </div>
           </div>
         ) : (
-          <div className="flex h-full items-center justify-center text-center text-[#f1efe8]/32 text-[10px] uppercase tracking-[0.2em]">
+          <div className="flex h-full items-center justify-center text-center text-[#080807]/32 text-[10px] uppercase tracking-[0.2em]">
             SELECT A SEGMENT SLICE OR LIST ITEM TO AUDIT SPECIFIC EXCLUSION LISTS.
           </div>
         )}
 
-        <div className="border-t border-[#f1efe8]/10 pt-4 mt-6 text-[8px] text-[#f1efe8]/30 leading-relaxed uppercase">
+        <div className="border-t border-[#080807]/10 pt-4 mt-6 text-[8px] text-[#080807]/30 leading-relaxed uppercase">
           [TOTAL INDEXABLE RATIO: 34.8% OPTIMAL COVERAGE LEVEL REACHED]
         </div>
       </div>
@@ -1029,14 +1029,14 @@ function FindingsModalContent() {
   const current = findings[activeFinding];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 h-full font-sans text-[#f1efe8]">
+    <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 h-full font-sans text-[#080807]">
       {/* Category selector */}
-      <div className="space-y-3 border-r border-[#f1efe8]/12 pr-4">
+      <div className="space-y-3 border-r border-[#080807]/12 pr-4">
         {findings.map((item, idx) => (
           <div
             key={item.title}
             onClick={() => setActiveFinding(idx)}
-            className={`cursor-pointer p-4 border transition-all duration-200 ${activeFinding === idx ? 'border-[#f1efe8] bg-white/5 text-[#f1efe8]' : 'border-[#f1efe8]/12 text-[#f1efe8]/58 hover:bg-white/[0.015] hover:text-[#f1efe8]'}`}
+            className={`cursor-pointer p-4 border transition-all duration-200 ${activeFinding === idx ? 'border-[#080807] bg-[#080807]/5 text-[#080807]' : 'border-[#080807]/12 text-[#080807]/58 hover:bg-[#080807]/[0.015] hover:text-[#080807]'}`}
           >
             <div className="text-[9px] uppercase tracking-[0.2em] font-mono font-bold mb-1.5">
               {item.title}
@@ -1051,10 +1051,10 @@ function FindingsModalContent() {
       {/* Comparison block */}
       <div className="flex flex-col justify-between h-full font-mono text-[9.5px]">
         <div>
-          <div className="mb-4 text-[11px] font-bold text-[#f1efe8] uppercase tracking-[0.1em]">
+          <div className="mb-4 text-[11px] font-bold text-[#080807] uppercase tracking-[0.1em]">
             {current.title}
           </div>
-          <p className="text-[#f1efe8]/72 font-sans normal-case mb-6 leading-relaxed max-w-2xl text-xs">
+          <p className="text-[#080807]/72 font-sans normal-case mb-6 leading-relaxed max-w-2xl text-xs">
             {current.problem}
           </p>
 
@@ -1063,22 +1063,22 @@ function FindingsModalContent() {
               <div className="text-[9px] uppercase text-[#c2695e] tracking-[0.2em] mb-2 font-bold">
                 [ INCORRECT MARKUP ]
               </div>
-              <pre className="bg-[#0f0f0f] border border-[#c2695e]/20 p-4 overflow-x-auto text-[8.5px] leading-relaxed text-[#f1efe8]/60 font-mono select-all">
+              <pre className="bg-[#080807]/[0.02] border border-[#c2695e]/25 p-4 overflow-x-auto text-[8.5px] leading-relaxed text-[#c2695e] font-mono select-all">
                 {current.badCode}
               </pre>
             </div>
             <div>
-              <div className="text-[9px] uppercase text-[#b7c8a8] tracking-[0.2em] mb-2 font-bold">
+              <div className="text-[9px] uppercase text-[#3d5c2e] tracking-[0.2em] mb-2 font-bold">
                 [ REMEDIATED MARKUP ]
               </div>
-              <pre className="bg-[#0f0f0f] border border-[#b7c8a8]/20 p-4 overflow-x-auto text-[8.5px] leading-relaxed text-[#f1efe8] font-mono select-all">
+              <pre className="bg-[#080807]/[0.02] border border-[#3d5c2e]/25 p-4 overflow-x-auto text-[8.5px] leading-relaxed text-[#3d5c2e] font-mono select-all">
                 {current.goodCode}
               </pre>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-[#f1efe8]/10 pt-4 mt-6 text-[8px] text-[#f1efe8]/30 uppercase">
+        <div className="border-t border-[#080807]/10 pt-4 mt-6 text-[8px] text-[#080807]/30 uppercase">
           [COMPARED USING CRAWLER DIAGNOSTIC SOURCE HEADERS AND INLINE HTML DOM TARGETS]
         </div>
       </div>
@@ -1110,19 +1110,19 @@ function ExportsModalContent() {
   };
 
   return (
-    <div className="flex flex-col justify-between h-full font-mono text-[9.5px] text-[#f1efe8] tracking-[0.1em]">
+    <div className="flex flex-col justify-between h-full font-mono text-[9.5px] text-[#080807] tracking-[0.1em]">
       <div className="space-y-6 max-w-xl">
         <div>
-          <div className="text-[10px] text-[#f1efe8]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#f1efe8]/12 pb-2">
+          <div className="text-[10px] text-[#080807]/45 uppercase tracking-[0.3em] mb-4 border-b border-[#080807]/12 pb-2">
             EXPORT PREVIEW CONTROLS
           </div>
-          <p className="font-sans text-[#f1efe8]/66 normal-case text-xs leading-relaxed mb-6">
+          <p className="font-sans text-[#080807]/66 normal-case text-xs leading-relaxed mb-6">
             Review the report structure, database sections, and target layouts. Full exports are intentionally unavailable in this public demo.
           </p>
         </div>
 
         <div>
-          <div className="text-[9px] uppercase text-[#f1efe8]/45 tracking-[0.2em] mb-3">
+          <div className="text-[9px] uppercase text-[#080807]/45 tracking-[0.2em] mb-3">
             SELECT PREVIEW FORMAT:
           </div>
           <div className="flex gap-4">
@@ -1131,7 +1131,7 @@ function ExportsModalContent() {
                 key={fmt}
                 id={`exports-format-${fmt.toLowerCase()}`}
                 onClick={() => setSelectedFormat(fmt)}
-                className={`hover-target px-4 py-2 border transition-all duration-200 ${selectedFormat === fmt ? 'border-[#f1efe8] bg-[#f1efe8] text-[#080807] font-bold' : 'border-[#f1efe8]/15 text-[#f1efe8]/54 hover:border-[#f1efe8]/30 hover:text-[#f1efe8]'}`}
+                className={`hover-target px-4 py-2 border transition-all duration-200 cursor-pointer ${selectedFormat === fmt ? 'border-[#080807] bg-[#080807] text-[#f1efe8] font-bold' : 'border-[#080807]/15 text-[#080807]/54 hover:border-[#080807]/30 hover:text-[#080807]'}`}
               >
                 {fmt} REPORT
               </button>
@@ -1139,35 +1139,35 @@ function ExportsModalContent() {
           </div>
         </div>
 
-        <div className="space-y-2 text-[#f1efe8]/60">
-          <div className="text-[9px] uppercase text-[#f1efe8]/45 tracking-[0.2em] mb-3">
+        <div className="space-y-2 text-[#080807]/60">
+          <div className="text-[9px] uppercase text-[#080807]/45 tracking-[0.2em] mb-3">
             MODULES SHOWN IN PREVIEW:
           </div>
           <div className="flex items-center gap-3">
-            <span className="h-2 w-2 bg-[#f1efe8]/60" />
+            <span className="h-2 w-2 bg-[#080807]/60" />
             <span>01. COMPLETE CRAWL SYSTEM GRAPH PATHS</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="h-2 w-2 bg-[#f1efe8]/60" />
+            <span className="h-2 w-2 bg-[#080807]/60" />
             <span>02. SEVERITY RANKED ISSUE DIAGNOSTICS</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="h-2 w-2 bg-[#f1efe8]/60" />
+            <span className="h-2 w-2 bg-[#080807]/60" />
             <span>03. CORE WEB VITALS TELEMETRY LOGS</span>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-[#f1efe8]/12">
+      <div className="mt-8 pt-6 border-t border-[#080807]/12">
         {previewing ? (
           <div className="space-y-3">
-            <div className="flex justify-between items-center text-[9px] text-[#f1efe8]/80">
+            <div className="flex justify-between items-center text-[9px] text-[#080807]/80">
               <span>ASSEMBLING PREVIEW STRUCTURE...</span>
               <span>{progress}%</span>
             </div>
-            <div className="w-full h-1 bg-white/10 overflow-hidden relative">
+            <div className="w-full h-1 bg-[#080807]/10 overflow-hidden relative">
               <motion.div 
-                className="absolute top-0 left-0 bottom-0 bg-[#f1efe8]" 
+                className="absolute top-0 left-0 bottom-0 bg-[#080807]" 
                 style={{ width: `${progress}%` }} 
               />
             </div>
@@ -1175,14 +1175,14 @@ function ExportsModalContent() {
         ) : (
           <div className="space-y-4">
             {toastMessage && (
-              <div className="p-3 bg-[#b7c8a8]/10 border border-[#b7c8a8]/30 text-[#b7c8a8] text-[9px]">
+              <div className="p-3 bg-[#3d5c2e]/10 border border-[#3d5c2e]/30 text-[#3d5c2e] font-semibold text-[9px]">
                 {toastMessage}
               </div>
             )}
             <button
               id="exports-trigger-btn"
               onClick={startPreview}
-              className="hover-target w-full py-3 bg-[#f1efe8] text-[#080807] font-bold uppercase tracking-[0.3em] hover:bg-[#f1efe8]/90 hover:text-[#080807] transition-colors"
+              className="hover-target w-full py-3 bg-[#080807] text-[#f1efe8] font-bold uppercase tracking-[0.3em] hover:bg-[#080807]/90 hover:text-[#f1efe8] transition-colors cursor-pointer"
             >
               [ PREVIEW EXPORT PACKAGE ]
             </button>

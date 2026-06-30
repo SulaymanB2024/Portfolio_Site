@@ -1,6 +1,4 @@
-import type { ReactNode } from 'react';
 import { Mail } from 'lucide-react';
-import { MagneticButton } from './MagneticButton';
 import { AudioWaveToggle } from './AudioWaveToggle';
 
 type InternalHeaderProps = {
@@ -8,166 +6,119 @@ type InternalHeaderProps = {
   tone?: 'light' | 'dark';
 };
 
-const navItems = [
-  { label: 'WORK', href: '/#selected-works' },
-  { label: 'ATLAS', href: '/atlas' },
-  { label: 'MARKETS', href: '/markets' },
-  { label: 'METHOD', href: '/method' },
+const primaryItems = [
+  { label: 'Work', href: '/#selected-works' },
+  { label: 'Method', href: '/method' },
+  { label: 'Contact', href: '/#contact' },
 ] as const;
 
 const indexItems = [
-  { label: 'ABOUT', href: '/about' },
-  { label: 'RESUME', href: '/resume' },
-  { label: 'AI INFO', href: '/ai-information' },
+  { label: 'Atlas', href: '/atlas' },
+  { label: 'Markets', href: '/markets' },
+  { label: 'About', href: '/about' },
+  { label: 'Resume', href: '/resume' },
+  { label: 'AI Info', href: '/ai-information' },
 ] as const;
+
+function itemIsActive(activePath: string, href: string) {
+  return activePath === href || activePath === href.split('#')[0];
+}
 
 export function InternalHeader({ activePath, tone = 'light' }: InternalHeaderProps) {
   const isDark = tone === 'dark';
-  
+
   const textClass = isDark ? 'text-[#f1efe8]' : 'text-ink';
-  const textMutedClass = isDark ? 'text-[#f1efe8]/54' : 'text-ink/54';
-  const textMutedNavClass = isDark ? 'text-[#f1efe8]/58 hover:text-[#f1efe8]' : 'text-ink/58 hover:text-ink';
-  const bgClass = isDark ? 'frosted-acrylic-dark' : 'frosted-acrylic-light';
-  const borderContactClass = isDark ? 'border-[#f1efe8]/28' : 'border-ink/28';
-  const textContactClass = isDark ? 'text-[#f1efe8]/75 hover:text-[#f1efe8]' : 'text-ink/75 hover:text-ink';
-  const menuBorderClass = isDark ? 'border-[#f1efe8]/16' : 'border-ink/16';
+  const mutedClass = isDark ? 'text-[#f1efe8]/56 hover:text-[#f1efe8]' : 'text-ink/56 hover:text-ink';
+  const borderClass = isDark ? 'border-[#f1efe8]/12' : 'border-ink/12';
+  const panelClass = isDark ? 'bg-[#080807]/88 text-[#f1efe8]' : 'bg-canvas/90 text-ink';
+  const iconHoverClass = isDark ? 'hover:bg-[#f1efe8] hover:text-[#080807]' : 'hover:bg-ink hover:text-canvas';
 
   return (
-    <header className="sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 md:py-6 xl:px-10">
-      <div className={`grid gap-3 ${bgClass} px-4 py-3 rounded-lg text-[10px] uppercase tracking-[0.24em] md:hidden`}>
-        <div className="flex items-center justify-between gap-4">
-          <a href="/" id="header-brand-link-mobile" className="hover-target min-w-0" data-cursor-text="HOME">
-            <span className={`block font-medium ${textClass}`}>SULAYMAN BOWLES</span>
-            <span className={`mt-1.5 block font-serif text-[13px] italic normal-case leading-tight tracking-normal ${textMutedClass}`}>
-              Technical SEO · AI Search · Finance/Data
-            </span>
-          </a>
-          <a 
-            href="/#contact" 
-            id="header-contact-link-mobile" 
-            data-cursor-text="CONTACT" 
-            aria-label="Contact Sulayman Bowles"
-            className={`hover-target grid h-7 w-7 flex-shrink-0 place-items-center rounded-full border ${borderContactClass} transition-colors ${isDark ? 'hover:bg-[#f1efe8] hover:text-[#080807]' : 'hover:bg-ink hover:text-canvas'}`}
-          >
-            <Mail size={13} strokeWidth={1.7} aria-hidden="true" />
-          </a>
-        </div>
-        <details className={`group border-t ${menuBorderClass} pt-2.5`}>
-          <summary className={`hover-target flex cursor-pointer list-none items-center justify-between ${textMutedNavClass}`}>
-            <span>MENU</span>
-            <span aria-hidden="true" className="transition-transform group-open:rotate-45">+</span>
+    <header className={`sticky top-0 z-50 w-full border-b ${borderClass} ${panelClass} backdrop-blur-xl`}>
+      <div className="mx-auto flex w-full max-w-[1480px] items-start justify-between gap-4 px-4 py-4 text-[11px] uppercase tracking-normal md:px-8 xl:px-10">
+        <a
+          href="/"
+          id="header-brand-link"
+          className={`hover-target pt-1 font-medium leading-none ${textClass}`}
+          data-cursor-text="HOME"
+          aria-label="Home - Sulayman Bowles"
+        >
+          S. BOWLES
+        </a>
+
+        <details className="group text-right md:hidden">
+          <summary className={`hover-target cursor-pointer list-none px-1 py-1 ${mutedClass}`} data-cursor-text="MENU">
+            Menu +
           </summary>
-          <nav className="mt-3 grid grid-cols-2 gap-2" aria-label="Mobile navigation">
-            {navItems.map((item) => {
-              const active = activePath === item.href;
-              const cleanId = `header-mobile-nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`;
-              
+          <nav className={`mt-4 grid min-w-[11rem] gap-2 border ${borderClass} ${panelClass} p-3 shadow-2xl`} aria-label="Mobile navigation">
+            {[...primaryItems, ...indexItems].map((item) => {
+              const active = itemIsActive(activePath, item.href);
               return (
                 <a
                   key={item.href}
                   href={item.href}
-                  id={cleanId}
-                  data-cursor-text={item.label}
-                  className={`hover-target border ${menuBorderClass} px-3 py-2.5 transition-colors ${active ? textClass : textMutedNavClass}`}
+                  id={`header-mobile-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+                  data-cursor-text={item.label.toUpperCase()}
+                  className={`hover-target px-2 py-1.5 text-right transition-colors ${active ? textClass : mutedClass}`}
                 >
-                  {item.label}
-                </a>
-              );
-            })}
-            {indexItems.map((item) => {
-              const active = activePath === item.href || (item.href === '/ai-information' && activePath === '/ai-information');
-              const cleanId = `header-mobile-index-${item.label.toLowerCase().replace(/\s+/g, '-')}`;
-              
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  id={cleanId}
-                  data-cursor-text={item.label}
-                  className={`hover-target border ${menuBorderClass} px-3 py-2.5 transition-colors ${active ? textClass : textMutedNavClass}`}
-                >
-                  {item.label}
+                  {active ? `[${item.label}]` : item.label}
                 </a>
               );
             })}
           </nav>
         </details>
-      </div>
 
-      <div className={`hidden items-center gap-5 ${bgClass} px-6 py-4 rounded-2xl text-[10px] uppercase tracking-[0.3em] md:grid md:grid-cols-[1fr_auto_1fr]`}>
-        <MagneticButton strength={0.12} className="justify-self-start">
-          <a href="/" id="header-brand-link" className="hover-target" data-cursor-text="HOME">
-            <span className={`block font-medium ${textClass}`}>SULAYMAN BOWLES</span>
-            <span className={`mt-2 block font-serif text-sm italic normal-case tracking-normal ${textMutedClass}`}>
-              Technical SEO · AI Search · Finance/Data
-            </span>
-          </a>
-        </MagneticButton>
-        
-        <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 md:justify-center md:gap-x-5" aria-label="Main navigation">
-          {navItems.map((item) => {
-            const active = activePath === item.href;
-            const cleanId = `header-nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`;
-            
-            return (
-              <MagneticButton key={item.href} strength={0.25}>
+        <div className="hidden items-start gap-7 md:flex">
+          <nav className="flex items-center gap-5" aria-label="Primary navigation">
+            {primaryItems.map((item) => {
+              const active = itemIsActive(activePath, item.href);
+              return (
                 <a
+                  key={item.href}
                   href={item.href}
-                  id={cleanId}
-                  data-cursor-text={item.label}
-                  className={`hover-target relative group overflow-visible px-3 py-1 transition-colors ${active ? textClass : textMutedNavClass}`}
+                  id={`header-primary-${item.label.toLowerCase()}`}
+                  data-cursor-text={item.label.toUpperCase()}
+                  className={`hover-target transition-colors ${active ? textClass : mutedClass}`}
                 >
-                  <span className="block transition-transform duration-500 will-change-transform group-hover:px-2">
-                    {item.label}
-                  </span>
-                  <span className={`absolute left-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${textClass}`}>
-                    [
-                  </span>
-                  <span className={`absolute right-0 top-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${textClass}`}>
-                    ]
-                  </span>
+                  {active ? `[${item.label}]` : item.label}
                 </a>
-              </MagneticButton>
-            );
-          })}
-          <details className="relative">
-            <summary className={`hover-target cursor-pointer list-none px-3 py-1 transition-colors ${textMutedNavClass}`} data-cursor-text="INDEX">
-              INDEX +
-            </summary>
-            <div className={`absolute left-1/2 mt-4 grid min-w-[9rem] -translate-x-1/2 gap-2 border ${menuBorderClass} ${bgClass} p-3 text-center shadow-2xl`}>
-              {indexItems.map((item) => {
-                const active = activePath === item.href || (item.href === '/ai-information' && activePath === '/ai-information');
-                return (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    id={`header-index-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
-                    data-cursor-text={item.label}
-                    className={`hover-target px-2 py-1 transition-colors ${active ? textClass : textMutedNavClass}`}
-                  >
-                    {item.label}
-                  </a>
-                );
-              })}
-            </div>
-          </details>
-        </nav>
-        
-        <div className="flex items-center gap-6 justify-self-start md:justify-self-end">
-          <AudioWaveToggle />
-          <MagneticButton strength={0.2}>
-            <a 
-              href="/#contact" 
-              id="header-contact-link" 
-              data-cursor-text="CONTACT" 
-              className={`hover-target flex items-center gap-4 ${textContactClass} transition-colors`}
+              );
+            })}
+            <details className="relative">
+              <summary className={`hover-target cursor-pointer list-none transition-colors ${mutedClass}`} data-cursor-text="INDEX">
+                Index +
+              </summary>
+              <div className={`absolute right-0 mt-4 grid min-w-[10rem] gap-2 border ${borderClass} ${panelClass} p-3 text-right shadow-2xl`}>
+                {indexItems.map((item) => {
+                  const active = itemIsActive(activePath, item.href);
+                  return (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      id={`header-index-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+                      data-cursor-text={item.label.toUpperCase()}
+                      className={`hover-target px-2 py-1 transition-colors ${active ? textClass : mutedClass}`}
+                    >
+                      {active ? `[${item.label}]` : item.label}
+                    </a>
+                  );
+                })}
+              </div>
+            </details>
+          </nav>
+
+          <div className={`flex items-center gap-4 ${mutedClass}`}>
+            <AudioWaveToggle />
+            <a
+              href="/#contact"
+              id="header-contact-icon"
+              data-cursor-text="CONTACT"
+              aria-label="Contact Sulayman Bowles"
+              className={`hover-target grid h-8 w-8 place-items-center rounded-full border ${borderClass} transition-colors ${iconHoverClass}`}
             >
-              <span className={`grid h-7 w-7 flex-shrink-0 place-items-center rounded-full border ${borderContactClass}`}>
-                <Mail size={13} strokeWidth={1.7} aria-hidden="true" />
-              </span>
-              <span>CONTACT</span>
+              <Mail size={13} strokeWidth={1.7} aria-hidden="true" />
             </a>
-          </MagneticButton>
+          </div>
         </div>
       </div>
     </header>
