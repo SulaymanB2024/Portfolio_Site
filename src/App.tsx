@@ -67,6 +67,67 @@ const FooterM = lazy(() => import('./components/FooterM').then(m => ({ default: 
 const CONTACT_HASH = '#contact';
 const HOME_SEO = getSeoRoute('/')!;
 
+const workHighlights = [
+  {
+    label: 'Atlas',
+    copy: 'Built a crawl system for indexation, internal links, schema, and audit reports.',
+    href: '/atlas',
+  },
+  {
+    label: 'Void Agency',
+    copy: 'Founded a technical SEO and web systems practice with $50K+ collected revenue.',
+    href: '/void-agency',
+  },
+  {
+    label: 'Chegg AI PM',
+    copy: 'AI Product Manager intern in the Office of the Chief Product Officer.',
+    href: '/resume',
+  },
+  {
+    label: 'SEO Analytics',
+    copy: 'GA4 and Google Search Console work across launch baselines, query tracking, and prioritized recommendations.',
+    href: '/method',
+  },
+  {
+    label: 'Texas Venture Labs',
+    copy: 'Student Associate work on market validation, customer discovery, unit economics, and financial models.',
+    href: '/resume',
+  },
+  {
+    label: 'Public Work',
+    copy: 'GitHub projects, research notes, sample data, and current profile links are collected here.',
+    href: '/research',
+  },
+];
+
+const homeDisciplineItems = [
+  {
+    num: '01',
+    title: 'Technical SEO Systems',
+    desc: 'Crawl architecture, indexability, internal links, page templates, metadata, structured data, performance inputs, and issue logic. Built for diagnosis, not vague scoring.',
+  },
+  {
+    num: '02',
+    title: 'Search Visibility',
+    desc: 'Crawler access, entity clarity, structured data, and pages that explain the work without forcing a reader to guess.',
+  },
+  {
+    num: '03',
+    title: 'Atlas / Crawl Evidence',
+    desc: 'URL discovery, raw and rendered HTML, canonical state, internal-link maps, structured-data checks, and report-ready audit notes.',
+  },
+  {
+    num: '04',
+    title: 'Markets Research',
+    desc: 'Finance research, valuation assumptions, market structure, operating analysis, dashboards, and decision tools built around inspectable assumptions.',
+  },
+  {
+    num: '05',
+    title: 'Product + Web Systems',
+    desc: 'React interfaces, portfolio pages, audit dashboards, product research, and written explanations that make the work easier to inspect.',
+  },
+];
+
 function isDarkRoute(path: string) {
   return getRouteTone(path) === 'dark';
 }
@@ -334,14 +395,14 @@ function HomePage() {
           setTimeout(() => {
             initialLoadComplete = true;
             setIsLoaded(true);
-          }, 600);
+          }, 120);
           return 100;
         }
-        // Speed up the count exponentially
-        const increment = Math.ceil((100 - prev) * 0.15);
+        // Keep the preloader brief so it never reads as a footer-like dark band.
+        const increment = Math.ceil((100 - prev) * 0.28);
         return prev + increment > 100 ? 100 : prev + increment;
       });
-    }, 40);
+    }, 24);
 
     return () => clearInterval(interval);
   }, []);
@@ -498,10 +559,10 @@ function HomePage() {
       <AnimatePresence>
         {!isLoaded && (
           <motion.div 
-            className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center p-8 origin-bottom text-canvas"
+            className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center p-8 text-canvas"
             data-header-tone-ignore="true"
-            exit={{ scaleY: 0 }}
-            transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.33, 1, 0.68, 1] }}
           >
             <div className="w-full flex justify-between absolute pt-8 px-8 md:px-16 normal-case font-sans uppercase tracking-[0.2em] text-xs opacity-50 justify-self-start self-start top-0">
                <span>Building Evidence</span>
@@ -539,7 +600,7 @@ function HomePage() {
             <FlowField className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-overlay" density={25} />
           </Suspense>}
           
-          {/* Faint artifact reveal */}
+          {/* Faint sample reveal */}
           <motion.div 
             style={{ opacity: titleOpacity }}
             className="pointer-events-none absolute inset-0 z-[1]"
@@ -567,22 +628,48 @@ function HomePage() {
 	                 Sulayman Bowles
 	               </h1>
 	               <p className="mt-5 max-w-lg font-sans text-sm leading-relaxed tracking-normal text-ink/72 md:text-base">
-		                 UT Austin McCombs student building Atlas, technical SEO systems, AI-search visibility, and finance/data research.
+		                 I am a UT Austin McCombs student building Atlas and running Void Agency. Most of my work sits where technical SEO, product, and research meet: crawl the site, find what blocks discovery, and turn the mess into fixes people can ship.
 	               </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4 text-xs text-ink/70">
-                  <a href="/contact" id="hero-start-audit-link" className="inline-flex min-h-11 items-center border border-ink bg-ink px-5 py-3 font-sans text-[10px] uppercase tracking-[0.2em] text-canvas transition-colors hover:bg-transparent hover:text-ink">Start a technical audit</a>
-                  <a href="/atlas" id="hero-view-atlas-link" className="inline-flex min-h-11 items-center border-b border-ink/24 pb-1 font-sans text-[10px] uppercase tracking-[0.2em] transition-colors hover:border-ink hover:text-ink">View Atlas</a>
+                  <a href="/atlas" id="hero-view-atlas-link" className="inline-flex min-h-11 items-center border border-ink/28 bg-ink/[0.035] px-5 py-3 font-sans text-[10px] uppercase tracking-[0.2em] text-ink transition-colors hover:border-ink hover:bg-ink hover:text-canvas">View Atlas</a>
+                  <a href="/contact" id="hero-start-audit-link" className="inline-flex min-h-11 items-center border-b border-ink/24 pb-1 font-sans text-[10px] uppercase tracking-[0.2em] transition-colors hover:border-ink hover:text-ink">Request an audit</a>
+                  <a href="/resume" id="hero-view-resume-link" className="inline-flex min-h-11 items-center border-b border-ink/24 pb-1 font-sans text-[10px] uppercase tracking-[0.2em] transition-colors hover:border-ink hover:text-ink">View resume</a>
                 </div>
 	             </div>
              <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-ink/40 md:text-xs">Trace the work</span>
            </motion.div>
         </section>
 
+        {/* PROOF SNAPSHOT */}
+        <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-16 text-ink md:px-16 md:py-24">
+          <div className="mx-auto grid w-full max-w-[1800px] gap-10 lg:grid-cols-[0.34fr_0.66fr]">
+            <div>
+	              <p className="mb-5 text-[10px] uppercase tracking-[0.3em] text-ink/48">Work in 30 seconds</p>
+              <h2 className="max-w-md font-serif text-4xl italic leading-[0.95] tracking-normal md:text-6xl">
+                Start with the inputs.
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 gap-px overflow-hidden border border-ink/14 bg-ink/14 sm:grid-cols-2 xl:grid-cols-3">
+              {workHighlights.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="group min-h-[190px] bg-canvas p-5 transition-colors hover:bg-ink hover:text-canvas"
+                >
+                  <span className="block text-[10px] uppercase tracking-[0.24em] text-inherit opacity-50">{item.label}</span>
+                  <span className="mt-8 block text-sm leading-relaxed text-inherit opacity-68 transition-opacity group-hover:opacity-82">{item.copy}</span>
+	                  <span className="mt-6 inline-flex text-[9px] uppercase tracking-[0.22em] text-inherit opacity-45">Open</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* INTRODUCTION - High contrast split */}
         <section className="relative w-full py-32 md:py-48 px-4 md:px-16 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
           <div className="md:col-span-8 md:col-start-2">
             <StaggeredText 
-	               text="I build systems for search, finance, and decision-making. The common thread is evidence."
+	               text="I build systems for search, finance, and decision-making. The common thread is source material."
                delay={0.1}
                className="font-serif italic font-light text-5xl sm:text-6xl md:text-6xl lg:text-[6rem] leading-[1.05] tracking-normal mb-4 md:mb-8"
             />
@@ -609,7 +696,7 @@ function HomePage() {
                 <li className="line-through decoration-ink/40">Generic decks</li>
               </ul>
               <ul>
-                <li className="mb-2 text-ink">Crawl evidence</li>
+                <li className="mb-2 text-ink">Crawl data</li>
                 <li className="mb-2 text-ink">Structured analysis</li>
                 <li className="text-ink">Shipped systems</li>
               </ul>
@@ -652,7 +739,7 @@ function HomePage() {
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
-	                       A crawl and evidence system for indexation, internal links, canonicals, structured data, raw/rendered HTML, and AI-search readiness.
+		                       A crawl system for indexation, internal links, canonicals, structured data, and raw/rendered HTML.
                      </p>
                    </ScrollReveal>
                    
@@ -751,7 +838,7 @@ function HomePage() {
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
-                        A collection of finance and data work covering valuation, market research, operating models, and decision dashboards.
+                        Markets research covering valuation, market structure, operating models, and decision dashboards with visible assumptions.
                      </p>
                    </ScrollReveal>
                    
@@ -761,7 +848,7 @@ function HomePage() {
                      <div className="flex flex-col md:items-end border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:ml-auto md:max-w-xs">
                         <div className="flex justify-between w-full">
                           <span className="text-left opacity-50">Focus</span>
-                          <span className="text-right text-canvas">Finance + Data</span>
+                          <span className="text-right text-canvas">Markets Research</span>
                         </div>
                         <div className="flex justify-between w-full">
                           <span className="text-left opacity-50">Tools</span>
@@ -792,7 +879,7 @@ function HomePage() {
                   </h4>
                 </ScrollReveal>
                 <ScrollReveal delay={0.4}>
-	                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">Void Agency is the service branch of my technical SEO, crawlability, structured content, analytics, and AI-search visibility work.</p>
+	                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">Void Agency is the service branch of my technical SEO, crawlability, structured content, analytics, and search visibility work.</p>
                 </ScrollReveal>
                 <ScrollReveal delay={0.6}>
                   <MagneticButton className="mt-16">
@@ -824,7 +911,7 @@ function HomePage() {
             <div className="absolute right-0 top-1/2 -translate-y-1/2 max-w-sm md:max-w-md bg-canvas/80 backdrop-blur-md p-8 md:p-12 border border-ink/10">
                <h3 className="font-serif italic text-3xl md:text-5xl mb-8 font-light">Operating Method</h3>
                <p className="font-sans text-sm tracking-normal text-ink/70 leading-relaxed mb-8">
-                 I separate signal from presentation. First, collect the evidence. Then structure it. Then decide what it means, what risk it creates, and what should be fixed.
+                 I separate signal from presentation. First, collect the source material. Then structure it. Then decide what it means, what risk it creates, and what should be fixed.
                </p>
                <ul className="space-y-4 font-sans text-[10px] uppercase tracking-widest border-t border-ink/10 pt-8 text-ink/50 group">
                  <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>01</span><span className="text-ink">Crawl before claims</span></li>
@@ -845,18 +932,13 @@ function HomePage() {
                 </ScrollReveal>
                 <ScrollReveal delay={0.2} blur={false}>
                   <p className="font-serif italic text-2xl md:text-3xl text-ink max-w-sm leading-snug">
-	                    I work across technical SEO, AI-search visibility, finance/data analysis, and web systems through one evidence-backed thesis.
+		                    I work across technical SEO systems, Atlas crawl audits, markets research, and product/web systems with the same habit: inspect the inputs before trusting the answer.
                   </p>
                 </ScrollReveal>
               </div>
               <div className="md:col-span-9 flex flex-col w-full text-ink">
 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 md:gap-y-32 group">
-                 {[
-                   { num: '01', title: 'Technical SEO Systems', desc: 'Crawl architecture, indexability, internal links, page templates, metadata, structured data, performance inputs, and issue logic. Built for diagnosis, not vague scoring.' },
-                   { num: '02', title: 'AI Search Discoverability', desc: 'Answer-ready pages, entity clarity, citation surfaces, crawl permissions, structured signals, and content that helps AI systems understand who or what a site represents.' },
-                   { num: '03', title: 'Finance + Data Analysis', desc: 'Valuation models, market research, operating analysis, dashboards, and decision tools built around assumptions that can be inspected and challenged.' },
-                   { num: '04', title: 'Web Systems + Presentation', desc: 'React interfaces, portfolio pages, audit dashboards, visual systems, and written explanations that turn raw work into something legible.' }
-                 ].map((item, i) => (
+                 {homeDisciplineItems.map((item, i) => (
                     <div key={item.num}>
                       <ScrollReveal delay={i % 2 === 0 ? 0.2 : 0.4} blur={false}>
                         <motion.div 
@@ -1298,7 +1380,7 @@ function HomePage() {
         </section>
 
         {/* FOOTER */}
-        <footer id="contact" className="w-full bg-ink text-canvas selection:bg-canvas selection:text-ink relative overflow-hidden pt-32">
+        <footer id="contact" className="relative w-full overflow-hidden bg-ink pt-32 text-canvas selection:bg-canvas selection:text-ink before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-24 before:bg-gradient-to-b before:from-canvas/10 before:to-transparent">
            <Suspense fallback={null}><FooterM /></Suspense>
 
            <div className="px-4 md:px-16 relative z-10 w-full flex flex-col">
@@ -1306,7 +1388,7 @@ function HomePage() {
                  <div className="md:col-span-8 flex flex-col items-start justify-end">
                     <ScrollReveal blur={false}>
                       <span className="text-canvas/50 font-sans tracking-[0.2em] text-xs uppercase mb-8 block flex items-center gap-4">
-                        <span className="status-dot" /> Projects, roles, and technical audits
+                        <span className="status-dot" /> Projects, roles, and technical work
                       </span>
                     </ScrollReveal>
                     
@@ -1350,7 +1432,7 @@ function HomePage() {
                  <a href="#top" id="footer-back-to-top" className="hover:text-canvas transition-colors flex items-center gap-2">
                     Back to top <span className="transform -rotate-90 block">→</span>
                  </a>
-                 <span>Technical SEO · AI Search · Finance/Data</span>
+                 <span>Technical SEO · Search Systems · Finance Research</span>
               </div>
            </div>
         </footer>

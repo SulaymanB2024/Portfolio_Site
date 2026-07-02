@@ -188,7 +188,7 @@ assertVisibleText('dist/ai-information/index.html', [
   "Earlier public sources describe Sulayman's classical bass and composition background through Golden Hornet, McCallum, and UT Butler.",
   'Golden Hornet',
   'UT Butler',
-  'Public Source Graph',
+  'Public Source List',
   'Primary source',
   'Technical ledger',
   'sulayman-bowles.tech',
@@ -200,9 +200,9 @@ assertVisibleText('dist/ai-information/index.html', [
   'Contact / intake',
   'Academic context',
   'Earlier music background',
-  'Research artifacts',
+  'Research files',
   'Clarifications / what not to infer',
-  'Fan-Out Query Map',
+  'Likely Search Questions',
   'Original query',
   'Likely fan-out queries',
   'Best page to satisfy them',
@@ -211,7 +211,7 @@ assertVisibleText('dist/ai-information/index.html', [
   'Who is Sulayman Bowles?',
   'What is Atlas SEO Audit Console?',
   'What does Void Agency do?',
-  'Does Sulayman Bowles work on AI search visibility?',
+  'Does Sulayman Bowles work on search visibility?',
   'Is Sulayman Bowles an SEO person, finance person, or software builder?',
   "What public evidence supports Sulayman Bowles's technical SEO work?",
   'Crawler and Indexation Signals',
@@ -234,16 +234,16 @@ assertVisibleText('dist/ai-information/index.html', [
 
 assertVisibleText('dist/research/index.html', [
   'Research Assets',
-  'Citation surfaces, not empty claims.',
-  'Citation Targets',
+  'Research notes and source files.',
+  'Public References',
   'Project Work Index',
   'Authority asset JSON',
-  'AI-search crawler policy source map',
-  'Claim Boundaries',
+  'Crawler policy sources',
+  'Limits',
   'These assets do not claim rankings',
 ]);
 assertHref('dist/research/index.html', '/research/authority-assets.json', 'Authority asset JSON');
-assertHref('dist/research/index.html', '/llms.txt', 'LLMs text file');
+assertHref('dist/research/index.html', '/llms.txt', 'llms.txt reference file');
 assertHref('dist/research/index.html', '/work', 'Project Work Index');
 assertHref('dist/research/index.html', '/research/austin-crawlability-benchmark-pilot.csv', 'Austin crawlability benchmark pilot');
 
@@ -259,11 +259,11 @@ assertHref('dist/research/index.html', '/research/austin-crawlability-benchmark-
   const sourceGraphList = findItemList(graph, `${siteUrl}/ai-information#public-source-graph`);
   const fanOutList = findItemList(graph, `${siteUrl}/ai-information#fan-out-query-map`);
   const providerPlanList = findItemList(graph, `${siteUrl}/ai-information#provider-discovery-plan`);
-  assert(sourceGraphList, 'ai-information: missing Public Source Graph ItemList schema');
-  assert(fanOutList, 'ai-information: missing Fan-Out Query Map ItemList schema');
+  assert(sourceGraphList, 'ai-information: missing Public Source List ItemList schema');
+  assert(fanOutList, 'ai-information: missing Likely Search Questions ItemList schema');
   assert(providerPlanList, 'ai-information: missing Provider Discovery Plan ItemList schema');
-  assert(sourceGraphList.itemListElement?.length === 13, 'ai-information: Public Source Graph ItemList should have 13 items');
-  assert(fanOutList.itemListElement?.length === 6, 'ai-information: Fan-Out Query Map ItemList should have 6 items');
+  assert(sourceGraphList.itemListElement?.length === 13, 'ai-information: Public Source List ItemList should have 13 items');
+  assert(fanOutList.itemListElement?.length === 6, 'ai-information: Likely Search Questions ItemList should have 6 items');
   assert(providerPlanList.itemListElement?.length === 7, 'ai-information: Provider Discovery Plan ItemList should have 7 items');
 }
 
@@ -338,15 +338,19 @@ assertVisibleText('dist/work/index.html', [
   'Read the technical SEO audit method',
   'View the GitHub repo for the audit CLI',
   'Request an audit',
-  'Read the finance/data memo with assumptions',
+  'Read the markets research memo with assumptions',
 ]);
 assertHref('dist/work/index.html', '/atlas/sample-crawl', 'See an Atlas sample crawl run');
 assertHref('dist/work/index.html', '/contact', 'Request an audit');
-assertHref('dist/work/index.html', '/markets#appian-assumptions', 'Read the finance/data memo with assumptions');
+assertHref('dist/work/index.html', '/markets#appian-assumptions', 'Read the markets research memo with assumptions');
 
 assertVisibleText('dist/contact/index.html', [
   'Request a Technical SEO Audit',
   'Direct Contact',
+  'Project Types',
+  'Typical Output',
+  'Best Fit',
+  'Not a Fit',
   'See an Atlas sample crawl run',
   'Read the technical SEO audit method',
 ]);
@@ -355,7 +359,7 @@ assertHref('dist/contact/index.html', '/method', 'Read the technical SEO audit m
 
 assertVisibleText('dist/atlas/sample-crawl/index.html', [
   'Atlas Sample Crawl Run',
-  'Sanitized crawl evidence',
+  'Sanitized crawl data',
   'Download sanitized crawl CSV',
   'https://example.com/resources/seo-tools',
   'missing canonical',
@@ -367,7 +371,7 @@ assertHref('dist/atlas/sample-crawl/index.html', 'https://github.com/SulaymanB20
 
 assertVisibleText('dist/case-studies/technical-seo-audit/index.html', [
   'Technical SEO Audit Case Study',
-  'Crawl evidence before recommendations',
+  'Crawl data before recommendations',
   'Separate observations from interpretation',
   'Request an audit',
 ]);
@@ -375,16 +379,16 @@ assertHref('dist/case-studies/technical-seo-audit/index.html', '/contact', 'Requ
 
 assertVisibleText('dist/austin-technical-seo/index.html', [
   'Austin Technical SEO',
-  'AI-search visibility',
+  'search visibility',
   'This page does not claim local rankings',
-  'View Void Agency proof',
+  'View Void Agency',
 ]);
 assertHref('dist/austin-technical-seo/index.html', '/contact', 'Request an audit');
-assertHref('dist/austin-technical-seo/index.html', '/void-agency', 'View Void Agency proof');
+assertHref('dist/austin-technical-seo/index.html', '/void-agency', 'View Void Agency');
 
 assertVisibleText('dist/void-agency/index.html', [
   'Void Agency',
-  'Organization proof',
+  'Service practice',
   'Void Agency website',
   'Read the technical SEO audit method',
   'See an Atlas sample crawl run',
@@ -393,19 +397,19 @@ assertHref('dist/void-agency/index.html', 'https://www.void-agency.com/', 'Void 
 assertHref('dist/void-agency/index.html', '/method', 'Read the technical SEO audit method');
 
 assertVisibleText('dist/method/index.html', [
-  'AI Search Visibility Audit Checklist',
+  'Search Visibility Audit Checklist',
   'crawlability',
   'indexability',
   'internal links',
   'structured data',
   'source-page clarity',
   'entity consistency',
-  'public proof',
+  'public work',
   'sitemap freshness',
   'stale/conflicting source cleanup',
 ]);
 assertHref('dist/method/index.html', '/atlas/sample-crawl', 'See an Atlas sample crawl run');
-assertHref('dist/method/index.html', '/void-agency', 'View Void Agency proof');
+assertHref('dist/method/index.html', '/void-agency', 'View Void Agency');
 assertHref('dist/method/index.html', '/contact', 'Request an audit');
 
 {
@@ -428,11 +432,11 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
   assert(llmsText.includes('Last updated: July 1, 2026'), 'llms.txt: stale last updated date');
   assert(llmsText.includes('Selected work: https://sulayman-bowles.dev/work'), 'llms.txt: missing selected work route');
   assert(llmsText.includes('Atlas sample crawl run: https://sulayman-bowles.dev/atlas/sample-crawl'), 'llms.txt: missing Atlas sample crawl route');
-  assert(llmsText.includes('Void Agency proof: https://sulayman-bowles.dev/void-agency'), 'llms.txt: missing Void Agency proof route');
+  assert(llmsText.includes('Void Agency: https://sulayman-bowles.dev/void-agency'), 'llms.txt: missing Void Agency route');
   assert(llmsText.includes('Technical ledger: https://sulayman-bowles.tech/'), 'llms.txt: missing technical ledger link');
   assert(llmsText.includes('Audit intake/contact: https://sulayman-bowles.dev/contact'), 'llms.txt: missing contact route');
-  assert(llmsText.includes('Sanitized Atlas crawl sample CSV'), 'llms.txt: missing Atlas sample proof asset');
-  assert(llmsText.includes('Appian assumptions table CSV'), 'llms.txt: missing Appian assumptions proof asset');
+  assert(llmsText.includes('Sanitized Atlas crawl sample CSV'), 'llms.txt: missing Atlas sample file');
+  assert(llmsText.includes('Appian assumptions table CSV'), 'llms.txt: missing Appian assumptions file');
   assert(llmsText.includes('## Crawler and Indexation Signals'), 'llms.txt: missing crawler/indexation section');
   assert(llmsText.includes('The www host redirects to the apex canonical host.'), 'llms.txt: missing www canonical redirect fact');
   assert(
@@ -442,7 +446,7 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
   assert(llmsText.includes('## Provider Discovery Plan'), 'llms.txt: missing provider discovery plan');
   assert(llmsText.includes('Current PDF resume: https://sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf'), 'llms.txt: missing current PDF resume link');
   assert(llmsText.includes('## Research Articles'), 'llms.txt: missing research articles section');
-  assert(llmsText.includes('AI Search Visibility Is Crawler Policy, Not Just SEO'), 'llms.txt: missing AI search crawler policy article');
+  assert(llmsText.includes('Crawler Policy Comes Before Visibility'), 'llms.txt: missing crawler policy article');
   assert(llmsText.includes('Technical SEO as Public Data Infrastructure'), 'llms.txt: missing public data infrastructure article');
   assert(llmsText.includes('Canonical Identity Beats More Content'), 'llms.txt: missing canonical identity article');
   assert(llmsText.includes('Brave Search: the site is publicly crawlable'), 'llms.txt: missing Brave discovery plan');
@@ -502,24 +506,23 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
   assert(redirects.some((item) => item.source === '/entity-profile' && item.destination === '/ai-information'), 'vercel: missing /entity-profile redirect');
   assert(redirects.some((item) => item.source === '/source-information' && item.destination === '/ai-information'), 'vercel: missing /source-information redirect');
   assert(redirects.some((item) => item.source === '/research-assets' && item.destination === '/research'), 'vercel: missing /research-assets redirect');
-  assert(redirects.some((item) => item.source === '/proof-assets' && item.destination === '/research'), 'vercel: missing /proof-assets redirect');
 }
 
 {
   const graph = jsonLdGraph(read('dist/method/index.html'));
-  const methodChecklist = findItemList(graph, `${siteUrl}/method#ai-search-visibility-checklist`);
-  assert(methodChecklist, 'method: missing AI Search Visibility Audit Checklist ItemList schema');
+  const methodChecklist = findItemList(graph, `${siteUrl}/method#search-visibility-checklist`);
+  assert(methodChecklist, 'method: missing Search Visibility Audit Checklist ItemList schema');
   assert(methodChecklist.itemListElement?.length === 9, 'method: audit checklist ItemList should have 9 items');
 }
 
 assertVisibleText('dist/markets/index.html', [
-  'Finance/data memo with assumptions',
-  'Read the finance/data memo with assumptions',
+  'Markets Research Memo With Assumptions',
+  'Read the markets research memo with assumptions',
   'Download the Appian assumptions table',
   'educational research samples',
   'Not a recommendation or price target',
 ]);
-assertHref('dist/markets/index.html', '/research/appian-enterprise-software-durability-memo.pdf', 'Read the finance/data memo with assumptions');
+assertHref('dist/markets/index.html', '/research/appian-enterprise-software-durability-memo.pdf', 'Read the markets research memo with assumptions');
 assertHref('dist/markets/index.html', '/research/appian-assumptions-table.csv', 'Download the Appian assumptions table');
 
 for (const file of marketFiles) {
@@ -552,7 +555,7 @@ for (const file of archivedMarketFiles) {
 }
 
 assertVisibleText('dist/markets/ai-search-crawler-policy/index.html', [
-  'AI Search Visibility Is Crawler Policy, Not Just SEO',
+  'Crawler Policy Comes Before Visibility',
   'Research Sources',
   'OpenAI Crawlers',
   'Anthropic crawler guidance',
@@ -576,4 +579,4 @@ assertVisibleText('dist/markets/canonical-identity-personal-seo/index.html', [
   'Schema.org Person',
 ]);
 
-console.log('AI-search SEO verification passed');
+console.log('SEO verification passed');

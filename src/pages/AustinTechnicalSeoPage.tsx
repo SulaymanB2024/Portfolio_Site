@@ -39,10 +39,10 @@ export default function AustinTechnicalSeoPage() {
           <div className="self-end">
             <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-current/48">Austin technical SEO</p>
             <h1 className="max-w-6xl font-serif text-[3.8rem] md:text-[6.5rem] xl:text-[9rem] italic leading-[0.84] tracking-normal">
-              Austin technical SEO and AI-search visibility.
+              Austin technical SEO and search visibility.
             </h1>
             <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/64 lg:mt-10">
-              A local service page for Austin teams that need crawlability, indexation, structured data, source clarity, and technical search evidence reviewed before broader content or growth work.
+              A local service page for Austin teams that need crawlability, indexation, structured data, page clarity, and technical search issues reviewed before broader content or growth work.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-5 lg:mt-10">
               <PrimaryCTA href="/contact" className="text-accent hover:text-[var(--page-bg)]">
@@ -62,9 +62,9 @@ export default function AustinTechnicalSeoPage() {
 
           <DarkProofArtifactPanel
             className="self-center max-md:-mt-4 lg:ml-auto"
-            eyebrow="Local proof stack"
-            title="Evidence before local SEO claims."
-            summary="The page keeps the Austin frame tied to crawlable surfaces, source clarity, and implementation evidence."
+            eyebrow="Local audit stack"
+            title="Site checks before local SEO claims."
+            summary="The page keeps the Austin frame tied to crawlable pages, clear services, and implementation evidence."
             items={austinArtifactItems}
             footer="Public page review first. Analytics and Search Console only when access is available."
           />
@@ -91,15 +91,15 @@ export default function AustinTechnicalSeoPage() {
         <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.55fr_0.45fr]">
           <div>
             <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
-              Built for evidence, not vague local SEO.
+              Built for technical review, not vague local SEO.
             </h2>
             <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
-              The audit starts with public pages and technical signals. When analytics or Google Search Console access is available, those sources can support prioritization, but they are not invented into the public claim.
+              The audit starts with public pages and technical signals. When analytics or Google Search Console access is available, those sources can support prioritization, but they are not guessed from the outside.
             </p>
           </div>
           <div className="grid content-center gap-4 text-[10px] uppercase tracking-[0.2em]">
             <LinkPanel href="/void-agency">
-              View Void Agency proof
+              View Void Agency
             </LinkPanel>
             <LinkPanel href="/case-studies/technical-seo-audit">
               Read the technical SEO case study

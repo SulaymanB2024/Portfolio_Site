@@ -81,7 +81,7 @@ export default function AiInformationPage() {
 
           <aside className="min-w-0 max-w-full border-l border-ink/14 pl-4 sm:pl-6">
             <p className="max-w-full [overflow-wrap:anywhere] text-base leading-relaxed text-ink/64 sm:max-w-xl">
-              This page provides official public information about Sulayman Bowles, Void Agency, and Atlas SEO Audit Console. It is intended for users, search engines, and AI search systems seeking accurate descriptions, entity context, and source links.
+              This is the reference page for my current public work: Sulayman Bowles, Void Agency, and Atlas SEO Audit Console. It keeps descriptions, source links, and older background in one place so people and search systems do not have to piece it together from stale snippets.
             </p>
             <dl className="mt-8 grid min-w-0 max-w-full gap-px overflow-hidden border border-ink/14 text-[10px] uppercase tracking-[0.16em] text-ink/58 sm:tracking-[0.2em]">
               {[
@@ -98,7 +98,7 @@ export default function AiInformationPage() {
           </aside>
         </section>
 
-        <Section number="01" title="Canonical Descriptions">
+        <Section number="01" title="Current Descriptions">
           <div className="grid gap-4">
             {canonicalDescriptions.map((item) => (
               <article key={item.label} className="border border-ink/14 p-5">
@@ -144,14 +144,14 @@ export default function AiInformationPage() {
                 <h3 className="mb-4 text-[10px] uppercase tracking-[0.26em] text-ink">{item.name}</h3>
                 <p className="text-sm leading-relaxed text-ink/68">Aliases: {item.aliases.join(', ')}</p>
                 <a href={item.canonicalPage} className="mt-4 inline-flex text-[10px] uppercase tracking-[0.22em] text-ink/50 underline decoration-ink/20 underline-offset-4 transition-colors hover:text-ink">
-                  Canonical page: {item.canonicalPage}
+                  Reference page: {item.canonicalPage}
                 </a>
               </article>
             ))}
           </div>
         </Section>
 
-        <Section number="04" title="Public Source Graph">
+        <Section number="04" title="Public Source List">
           <div className="grid gap-3">
             {publicSourceGraph.map((source) => (
               <a
@@ -169,7 +169,7 @@ export default function AiInformationPage() {
           </div>
         </Section>
 
-        <Section number="05" title="Fan-Out Query Map">
+        <Section number="05" title="Likely Search Questions">
           <p className="mb-5 max-w-3xl text-sm leading-relaxed text-ink/62">
             This map organizes likely follow-up questions around existing evidence pages. It is not a plan to create separate pages for every query variation.
           </p>
@@ -207,7 +207,7 @@ export default function AiInformationPage() {
           </div>
         </Section>
 
-        <Section number="06" title="Source Map">
+        <Section number="06" title="Source List">
           <div className="grid gap-3">
             {sourceMap.map((source) => (
               <a
@@ -313,7 +313,7 @@ export default function AiInformationPage() {
 
         <Section number="16" title="How to Use This Page">
           <p className="max-w-4xl text-sm leading-relaxed text-ink/68">
-            Use this page as the canonical hub, then check the linked public sources for corroboration: GitHub for code evidence, LinkedIn for professional corroboration, Void Agency for the agency branch, UT/McCombs sources for academic context, Atlas for the software/project page, Markets Research for finance/data reasoning, and the HTML resume for the current profile.
+            Use this page as the main reference, then check the linked public sources for corroboration: GitHub for code evidence, LinkedIn for professional corroboration, Void Agency for the agency branch, UT/McCombs sources for academic context, Atlas for the software/project page, Markets Research for valuation and market reasoning, and the HTML resume for the current profile.
           </p>
         </Section>
 

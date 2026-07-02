@@ -105,10 +105,10 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
             </div>
 
             <div className="border-t border-canvas/12 pt-6">
-              <div className="text-[9px] uppercase tracking-[0.24em] text-canvas/45 mb-4">THESIS INDICATORS</div>
+              <div className="text-[9px] uppercase tracking-[0.24em] text-canvas/45 mb-4">RESEARCH INDICATORS</div>
               <div className="space-y-3.5 text-[9.5px] uppercase tracking-[0.18em]">
                 <div className="flex justify-between border-b border-canvas/8 pb-2">
-                  <span className="text-canvas/48">CONVICTION</span>
+                  <span className="text-canvas/48">CONFIDENCE</span>
                   <span className="text-accent font-semibold">{data.conviction}</span>
                 </div>
                 <div className="flex justify-between border-b border-canvas/8 pb-2">
@@ -116,7 +116,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
                   <span className="text-canvas/80">{data.horizon}</span>
                 </div>
                 <div className="flex justify-between border-b border-canvas/8 pb-2">
-                  <span className="text-canvas/48">ALLOCATION</span>
+                  <span className="text-canvas/48">SAMPLE WEIGHT</span>
                   <span className="text-canvas/80 font-sans">{data.allocation}</span>
                 </div>
               </div>

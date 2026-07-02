@@ -19,7 +19,7 @@ const experience = [
     org: 'VOID Agency',
     dates: 'Dec 2025 - Present',
     summary:
-      'Built Void Agency around technical SEO audits, website builds, local search work, and crawler-access checks. Public proof focuses on shipped work, source-backed methods, and client-safe boundaries.',
+      'Built Void Agency around technical SEO audits, website builds, local search work, and crawler-access checks. Public examples stay limited to shipped work, methods, and client-safe boundaries.',
   },
   {
     role: 'AI Product Manager Intern',
@@ -46,18 +46,18 @@ const experience = [
 
 const skillGroups = [
   ['Technical SEO', 'Crawler access, indexability, canonicals, internal links, schema, templates, performance inputs.'],
-  ['AI Search / Product', 'AI product research, competitive mapping, workflow analysis, prompt and prototype review.'],
-  ['Finance / Data', 'Valuation research, operating analysis, GA4/GSC reporting, market notes, assumptions tables.'],
-  ['Software Execution', 'React/Vite interfaces, Python scripts, audit dashboards, structured reports, source-backed artifacts.'],
+  ['AI Product', 'AI product research, competitive mapping, workflow analysis, prompt and prototype review.'],
+  ['Markets Research', 'Valuation research, operating analysis, GA4/GSC reporting, market notes, assumptions tables.'],
+  ['Software Execution', 'React/Vite interfaces, Python scripts, audit dashboards, structured reports, and research files.'],
 ];
 
-const proofLinks = [
+const supportingLinks = [
   { label: 'Atlas technical SEO console', href: '/atlas', meta: 'Product case study' },
   { label: 'Markets research index', href: '/markets', meta: 'Research notes' },
   { label: 'Void Agency method', href: '/method', meta: 'Technical SEO process' },
   { label: 'GitHub', href: 'https://github.com/SulaymanB2024', meta: 'Public code profile' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', meta: 'Professional profile' },
-  { label: 'AI information', href: '/ai-information', meta: 'Canonical source map' },
+  { label: 'AI information', href: '/ai-information', meta: 'Reference page' },
   { label: 'Email', href: 'mailto:sulayman.bowles@gmail.com', meta: 'Direct contact' },
 ];
 
@@ -108,13 +108,13 @@ export default function ResumePage() {
               <span className="block sm:inline">Resume</span>
             </h1>
             <p className="mt-10 max-w-3xl [overflow-wrap:anywhere] font-serif text-[1.38rem] md:text-[3rem] xl:text-[4.75rem] italic leading-[1] tracking-normal text-ink/68 md:leading-[0.94] md:tracking-normal">
-              Technical SEO, Atlas, finance/data research, and product/software execution.
+              Technical SEO, Atlas, finance research, and product/software execution.
             </p>
           </div>
 
           <aside className="min-w-0 border-l border-ink/14 pl-6">
             <p className="max-w-xl [overflow-wrap:anywhere] text-base leading-relaxed text-ink/62">
-              UT Austin McCombs student and Void Agency founder building Atlas, technical SEO audit workflows, research notes, and inspectable web interfaces.
+              UT Austin McCombs student, Void Agency founder, and builder of Atlas. I work across technical SEO, crawl analysis, web tools, product research, and markets notes.
             </p>
             <div className="mt-8 grid min-w-0 gap-3 break-words text-[10px] uppercase tracking-[0.14em] [overflow-wrap:anywhere] sm:tracking-[0.22em]">
               <a href="mailto:sulayman.bowles@gmail.com" className="min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
@@ -144,8 +144,8 @@ export default function ResumePage() {
           <div className="grid gap-px overflow-hidden border border-ink/14 md:grid-cols-3">
             {[
               ['Builds', 'Atlas, SEO audit pages, React interfaces, research notes, and data workflows.'],
-              ['Analyzes', 'Crawl evidence, AI-search readiness, finance assumptions, operating models, and market structure.'],
-              ['Proof', 'Static HTML pages, canonical URLs, JSON-LD, sitemap entries, public code, and source-backed project pages.'],
+              ['Analyzes', 'Crawl data, search visibility, finance assumptions, operating models, and market structure.'],
+              ['Shows', 'Public pages, code samples, audit notes, research files, and structured pages that explain how the work was done.'],
             ].map(([label, copy]) => (
               <article key={label} className="bg-ink/[0.018] p-6">
                 <h3 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/45">{label}</h3>
@@ -183,9 +183,9 @@ export default function ResumePage() {
           </div>
         </Section>
 
-        <Section label="04" title="Proof and entry paths">
+        <Section label="04" title="Supporting links">
           <div className="grid gap-3">
-            {proofLinks.map((link) => (
+            {supportingLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -214,17 +214,17 @@ export default function ResumePage() {
               <h3 className="mb-4 text-[10px] uppercase tracking-[0.24em] text-ink/50">Ventures & System Audits</h3>
               <p className="text-sm font-semibold text-ink">Selected Milestones</p>
               <ul className="mt-3 space-y-2 text-xs leading-relaxed text-ink/68">
-                <li>• Void Agency: Built crawl audit models and website systems for commercial engagements with public proof kept to shipped work, methods, and client-safe boundaries</li>
+                <li>• Void Agency: Built crawl audit models and website systems for commercial engagements with public examples kept to shipped work, methods, and client-safe boundaries</li>
                 <li>• Scraper Atlas: Custom Python & SQLite crawler parsing 50k+ URLs for diagnostic intelligence</li>
               </ul>
             </article>
           </div>
         </Section>
 
-        <Section label="06" title="Source reconciliation">
+        <Section label="06" title="Supporting links">
           <div className="grid gap-3">
             {sourceMap
-              .filter((source) => ['Primary source', 'Code evidence', 'Professional profile', 'Agency proof', 'Academic affiliation', 'Academic context', 'Project proof', 'Finance/data proof'].includes(source.role))
+              .filter((source) => ['Primary source', 'Code evidence', 'Professional profile', 'Agency record', 'Academic affiliation', 'Academic context', 'Project page', 'Markets research'].includes(source.role))
               .map((source) => (
                 <a
                   key={`${source.role}-${source.href}`}

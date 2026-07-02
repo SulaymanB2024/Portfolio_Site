@@ -82,7 +82,7 @@ const colDescriptions = [
   },
   {
     title: 'INVESTMENT OUTPUT',
-    desc: 'Decision-ready memos, valuation models, protocol maps, and actionable frameworks built from evidence and conviction.',
+    desc: 'Decision-ready memos, valuation models, protocol maps, and actionable frameworks built from evidence and assumptions.',
   },
 ];
 
@@ -552,7 +552,7 @@ export default function InvestmentResearchMap({ className = '' }: InvestmentRese
             fill="rgba(241,239,232,0.4)"
             textAnchor="middle"
           >
-            CONVICTION
+            RESEARCH FRAME
           </text>
 
           {/* Output type labels */}
@@ -635,7 +635,7 @@ export default function InvestmentResearchMap({ className = '' }: InvestmentRese
           >
             {hoveredCol !== null
               ? colDescriptions[hoveredCol].desc
-              : 'Hover over columns above to trace investment research from raw data to conviction-backed output.'}
+              : 'Hover over columns above to trace investment research from raw data to assumption-backed output.'}
           </text>
         </g>
 

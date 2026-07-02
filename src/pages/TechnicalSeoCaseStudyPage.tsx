@@ -17,14 +17,14 @@ import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const CASE_STUDY_SEO = getSeoRoute('/case-studies/technical-seo-audit')!;
-const evidenceChain = [
+const reviewChain = [
   ['Observed field', 'Status code, crawl depth, inlinks, outlinks, canonical state, and indexability.'],
   ['Interpreted risk', 'Duplicate templates, weak hub copy, missing canonical targets, soft-404 risk, or crawl-depth waste.'],
   ['Implementation action', 'Repair canonicals, strengthen internal links, consolidate pages, update templates, and document ownership.'],
-  ['Review artifact', 'Sanitized CSV, issue list, method page, source graph, and intake path for next review.'],
+  ['Review package', 'Sanitized CSV, issue list, method page, source notes, and intake path for next review.'],
 ];
 
-const evidenceArtifactItems = evidenceChain.map(([label, value], index) => ({
+const reviewPanelItems = reviewChain.map(([label, value], index) => ({
   label,
   value,
   status: String(index + 1).padStart(2, '0'),
@@ -49,23 +49,23 @@ export default function TechnicalSeoCaseStudyPage() {
                 Technical SEO audit case study.
               </h1>
               <p className="mt-10 max-w-3xl text-base leading-relaxed text-current/64">
-                A public, source-backed case-study frame for turning crawl evidence into implementation work without exposing private client records or claiming unverified search outcomes.
+                A public case-study frame for turning crawl data into implementation work without exposing private client records or claiming unverified search outcomes.
               </p>
             </div>
 
             <DarkProofArtifactPanel
               className="self-center lg:ml-auto"
-              eyebrow="Evidence chain"
-              title="From crawl field to review artifact."
-              summary="The useful audit path is observable field, interpreted risk, implementation action, and review artifact. Each step stays tied to the crawl table."
-              items={evidenceArtifactItems}
-              footer="Sanitized public frame. No private traffic, ranking, revenue, or citation claims."
+              eyebrow="Review path"
+              title="From crawl field to review package."
+              summary="The useful audit path is observable field, interpreted risk, implementation action, and review package. Each step stays tied to the crawl table."
+              items={reviewPanelItems}
+              footer="Sanitized public frame. No private traffic, ranking, revenue, or answer-placement claims."
             />
           </header>
 
           <section className="border-b border-current/12 py-16">
             <SectionHeader eyebrow="Sanitized process" title="What this case study shows.">
-              The case study is a method frame, not a private client outcome report. It keeps observed crawl evidence separate from interpreted risk and implementation advice.
+              The case study is a method frame, not a private client outcome report. It keeps observed crawl data separate from interpreted risk and implementation advice.
             </SectionHeader>
             <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
               {auditCaseStudySteps.map((step, index) => (

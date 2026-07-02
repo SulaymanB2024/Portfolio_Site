@@ -45,7 +45,7 @@ export default function SimplePage() {
                 I keep this page quiet because some work is easier to understand as a sequence of paragraphs.
               </p>
               <p className="mt-5 text-[10px] uppercase leading-relaxed tracking-[0.24em] text-ink/44">
-                Technical SEO / AI search / finance research / software systems
+                Technical SEO / search visibility / finance research / software systems
               </p>
             </aside>
           </section>

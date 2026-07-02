@@ -31,20 +31,20 @@ export function TextMarquee() {
           Technical SEO <span className="font-sans normal-case text-base md:text-2xl opacity-30 ml-16 md:ml-32">—</span>
         </span>
         <span className="text-[4rem] md:text-[6rem] xl:text-[8rem] font-serif italic font-light uppercase tracking-normal shrink-0 flex items-center pr-16 md:pr-32">
-          AI Search <span className="font-sans normal-case text-base md:text-2xl opacity-30 ml-16 md:ml-32">—</span>
+          Search Systems <span className="font-sans normal-case text-base md:text-2xl opacity-30 ml-16 md:ml-32">—</span>
         </span>
         <span className="text-[4rem] md:text-[6rem] xl:text-[8rem] font-serif italic font-light uppercase tracking-normal shrink-0 flex items-center pr-16 md:pr-32">
-          Finance/Data <span className="font-sans normal-case text-base md:text-2xl opacity-30 ml-16 md:ml-32">—</span>
+          Finance Research <span className="font-sans normal-case text-base md:text-2xl opacity-30 ml-16 md:ml-32">—</span>
         </span>
         {/* Duplicate for seamless looping */}
         <span className="text-[4rem] md:text-[6rem] xl:text-[8rem] font-serif italic font-light uppercase tracking-normal shrink-0 flex items-center pr-16 md:pr-32">
           Technical SEO <span className="font-sans normal-case text-base md:text-2xl opacity-30 ml-16 md:ml-32">—</span>
         </span>
         <span className="text-[4rem] md:text-[6rem] xl:text-[8rem] font-serif italic font-light uppercase tracking-normal shrink-0 flex items-center pr-16 md:pr-32">
-          AI Search <span className="font-sans normal-case text-base md:text-2xl opacity-30 ml-16 md:ml-32">—</span>
+          Search Systems <span className="font-sans normal-case text-base md:text-2xl opacity-30 ml-16 md:ml-32">—</span>
         </span>
         <span className="text-[4rem] md:text-[6rem] xl:text-[8rem] font-serif italic font-light uppercase tracking-normal shrink-0 flex items-center pr-16 md:pr-32">
-          Finance/Data <span className="font-sans normal-case text-base md:text-2xl opacity-30 ml-16 md:ml-32">—</span>
+          Finance Research <span className="font-sans normal-case text-base md:text-2xl opacity-30 ml-16 md:ml-32">—</span>
         </span>
       </motion.div>
       <span className="pointer-events-none absolute right-4 top-4 z-10 flex items-center gap-3 border border-canvas/20 bg-ink/70 px-4 py-2 text-[10px] uppercase tracking-[0.28em] text-canvas/0 opacity-0 backdrop-blur-sm transition-all duration-500 group-hover:text-canvas/80 group-hover:opacity-100 md:right-16 md:top-8">

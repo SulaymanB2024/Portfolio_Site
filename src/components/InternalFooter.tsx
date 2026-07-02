@@ -33,7 +33,7 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
               SULAYMAN BOWLES
             </span>
             <span className={`site-footer-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
-              Technical SEO · AI Search · Finance/Data
+              Technical SEO · Search Systems · Finance Research
             </span>
           </a>
 

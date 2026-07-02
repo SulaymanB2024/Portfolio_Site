@@ -259,7 +259,7 @@ function buildSummary(rows) {
       'One sitemap fetch using the first robots.txt sitemap URL when available, otherwise /sitemap.xml.',
       'Signals are presence/availability checks, not quality scores or SEO diagnoses.',
     ],
-    claim_boundaries: [
+    limits: [
       'This pilot is not representative of all Austin companies.',
       'Rows do not claim rankings, traffic movement, revenue impact, AI citations, or site health.',
       'Access-limited, timed-out, or challenged fetches are measurement gaps, not negative findings.',
@@ -283,16 +283,16 @@ function buildReport(summary, rows) {
 
 Generated: ${RUN_DATE}
 
-This pilot measures a bounded public sample of Austin-area technology and business websites. It is intended to create a source-backed local conversation around crawlability, source clarity, and machine-readable public pages.
+This pilot measures a bounded public sample of Austin-area technology and business websites. It is intended to create a local conversation around crawlability, source clarity, and public page structure.
 
 ## Public Assets
 
 - CSV: \`public/research/austin-crawlability-benchmark-pilot.csv\`
 - Summary JSON: \`public/research/austin-crawlability-benchmark-summary.json\`
 
-## Claim Boundaries
+## Limits
 
-${summary.claim_boundaries.map((item) => `- ${item}`).join('\n')}
+${summary.limits.map((item) => `- ${item}`).join('\n')}
 
 ## Methodology
 

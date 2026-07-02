@@ -61,15 +61,15 @@ const methodSteps = [
   {
     id: '04',
     title: 'Review',
-    body: 'Repairs stay behind a human-readable gate until the run, artifact, and source claim still match.',
+    body: 'Repairs stay behind a human-readable gate until the run, file, and source claim still match.',
   },
 ];
 
-const heroRunArtifacts = [
+const heroRunStats = [
   { label: 'Sample pages read', value: '12,842', note: 'sanitized seed, sitemap, rendered links' },
   { label: 'Sample evidence states', value: '4', note: 'content, challenge, utility, error' },
   { label: 'Sample repairs', value: '42', note: 'demo recommendations held for review' },
-  { label: 'Sample package', value: 'Reviewed', note: 'illustrative run ID and artifact bound' },
+  { label: 'Sample package', value: 'Reviewed', note: 'illustrative run ID and review bound' },
 ];
 
 const crawlLedgerRows = [
@@ -86,7 +86,7 @@ const evidenceCards = [
   { label: 'Supporting passage', value: 'Deck construction, repair, materials, and project examples.' },
   { label: 'Measured state', value: 'confirmed_content' },
   { label: 'Confidence', value: '0.87', kind: 'score' },
-  { label: 'Claim limit', value: 'Useful category proof, weak city-level proof' },
+  { label: 'Claim limit', value: 'Useful category signal, weak city-level support' },
   { label: 'Smallest reviewed repair', value: '/austin/deck-builder' },
 ];
 
@@ -104,7 +104,7 @@ const evidenceTrace = [
   {
     id: '03',
     title: 'Limit',
-    body: 'The system marks what the source proves and the claim it cannot honestly support yet.',
+    body: 'The system marks what the source supports and the claim it cannot honestly support yet.',
   },
   {
     id: '04',
@@ -147,9 +147,9 @@ const coverageRows = [
     next: '/austin/deck-builder',
   },
   {
-    area: 'Patio repair proof',
+    area: 'Patio repair support',
     observed: '/services/patio-repair',
-    gap: 'Thin local proof',
+    gap: 'Thin local support',
     next: 'Add local examples',
   },
   {
@@ -167,7 +167,7 @@ const coverageRows = [
   {
     area: 'Service area lattice',
     observed: '/locations',
-    gap: 'Proof not tied to services',
+    gap: 'Support not tied to services',
     next: 'Connect service + city pairs',
   },
   {
@@ -219,7 +219,7 @@ const terminalLines = [
 
 const issueRows = [
   { issue: 'Absent city-service page', evidence: 'Query gap', impact: 'High' },
-  { issue: 'Weak supporting passage', evidence: 'Thin proof', impact: 'High' },
+  { issue: 'Weak supporting passage', evidence: 'Thin support', impact: 'High' },
   { issue: 'Competing service surfaces', evidence: 'Cluster overlap', impact: 'Medium' },
   { issue: 'Broken internal path', evidence: 'HTTP + graph', impact: 'Medium' },
   { issue: 'Unmarked service entity', evidence: 'DOM extract', impact: 'Medium' },
@@ -227,7 +227,7 @@ const issueRows = [
 ];
 
 const technicalPillars = [
-  { label: 'Run state', value: 'SQLite audit store with durable run IDs and current-artifact checks' },
+  { label: 'Run state', value: 'SQLite audit store with durable run IDs and current-output checks' },
   { label: 'Sources', value: 'Seed URLs, sitemaps, rendered links, logs, and operator-supplied context' },
   { label: 'Evidence', value: 'URL, passage, status, render state, source path, and claim boundary' },
   { label: 'Exports', value: 'JSON, CSV, markdown, and a reviewed operator package' },
@@ -243,17 +243,17 @@ const technicalFlow = [
 ];
 
 const gateRows = [
-  { gate: 'Provider gap', behavior: 'Reported as missing measurement, never as proof that the site failed.' },
+  { gate: 'Provider gap', behavior: 'Reported as missing measurement, never as confirmation that the site failed.' },
   { gate: 'Challenge page', behavior: 'Preserved as access evidence and suppressed from normal issue scoring.' },
   { gate: 'Utility URL', behavior: 'Kept in the atlas inventory but excluded from recommendation queues.' },
-  { gate: 'Fixed artifact', behavior: 'Trusted only when embedded run IDs match the current reviewed run.' },
+  { gate: 'Fixed output', behavior: 'Trusted only when embedded run IDs match the current reviewed run.' },
 ];
 
 const deliverableRows = [
   { label: 'Crawl inventory', value: 'URLs, statuses, canonicals, redirects, discovery paths, and evidence states' },
   { label: 'Retrieval evidence', value: 'Questions tied to pages, passages, confidence, and the edge of each claim' },
   { label: 'Coverage map', value: 'The services, locations, entities, and examples the site can or cannot support' },
-  { label: 'Issue queue', value: 'Prioritized repairs with affected URLs, rationale, source proof, and review status' },
+  { label: 'Issue queue', value: 'Prioritized repairs with affected URLs, rationale, source notes, and review status' },
   { label: 'Client brief', value: 'A restrained summary that separates observed facts from recommended work' },
   { label: 'Machine exports', value: 'CSV and JSON outputs for engineering, content ops, and repeated comparisons' },
 ];
@@ -261,7 +261,7 @@ const deliverableRows = [
 const handoffNotes = [
   'Observed facts remain separate from derived labels, scores, and recommendations.',
   'Skipped providers, blocked pages, and failed fetches remain measurement gaps.',
-  'Review and publish gates keep stale or unverified artifacts out of delivery.',
+  'Review and publish gates keep stale or unverified packages out of delivery.',
 ];
 
 const finalActions = [
@@ -396,7 +396,7 @@ export default function AtlasPage() {
               </h1>
               <p className="mt-6 max-w-[26rem] text-sm leading-relaxed tracking-normal text-ink/48 md:text-[15px]">
                 A technical audit drawn like a map: every page located, every claim traced,
-                every recommendation tied to proof.
+                every recommendation tied to source data.
               </p>
               <a
                 href="/atlas#atlas-methodology"
@@ -405,10 +405,10 @@ export default function AtlasPage() {
               >
                 View methodology
               </a>
-              <nav className="mt-7 grid max-w-[27rem] gap-3 text-[11px] tracking-normal text-ink/52 md:text-[10px] md:uppercase md:tracking-[0.2em]" aria-label="Atlas proof links">
+              <nav className="mt-7 grid max-w-[27rem] gap-3 text-[11px] tracking-normal text-ink/52 md:text-[10px] md:uppercase md:tracking-[0.2em]" aria-label="Atlas sample links">
                 <a href="/atlas/sample-crawl" className="group grid min-h-11 w-full border-y border-ink/16 py-3 transition-colors hover:border-ink/40 hover:text-ink/78 md:w-fit md:min-h-0 md:border-b md:border-t-0 md:py-1">
                   <span className="flex items-center justify-between gap-4 md:hidden">
-                    <span>01 / Proof artifact</span>
+                    <span>01 / Review package</span>
                     <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">Open</span>
                   </span>
                   <span className="mt-1 font-serif text-sm italic normal-case tracking-normal text-ink/70 md:hidden">
@@ -426,10 +426,10 @@ export default function AtlasPage() {
                 </a>
               </nav>
               <dl className="mt-6 grid grid-cols-2 border-y border-ink/12 md:hidden">
-                {heroRunArtifacts.map((artifact) => (
-                  <div key={artifact.label} className="border-b border-ink/10 px-3 py-3 odd:border-r odd:border-ink/10">
-                    <dt className="text-[9px] uppercase tracking-[0.16em] text-ink/42">{artifact.label}</dt>
-                    <dd className="mt-2 font-serif text-xl leading-none text-ink/82">{artifact.value}</dd>
+                {heroRunStats.map((stat) => (
+                  <div key={stat.label} className="border-b border-ink/10 px-3 py-3 odd:border-r odd:border-ink/10">
+                    <dt className="text-[9px] uppercase tracking-[0.16em] text-ink/42">{stat.label}</dt>
+                    <dd className="mt-2 font-serif text-xl leading-none text-ink/82">{stat.value}</dd>
                   </div>
                 ))}
               </dl>
@@ -441,18 +441,18 @@ export default function AtlasPage() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
               style={prefersReducedMotion ? undefined : { opacity: heroContentOpacity, y: heroCopyY }}
               className="relative z-10 hidden max-w-[30rem] border-y border-ink/12 bg-canvas/70 py-5 md:block"
-              aria-label="Atlas run artifact summary"
+              aria-label="Atlas sample run summary"
             >
               <div className="mb-4 flex items-center justify-between text-[9px] uppercase tracking-[0.22em] text-ink/44">
-                <span>Sample run artifact</span>
+                <span>Sample run package</span>
                 <span>sanitized demo package</span>
               </div>
               <dl className="grid grid-cols-2 border-t border-ink/10">
-                {heroRunArtifacts.map((artifact) => (
-                  <div key={artifact.label} className="min-h-[7.25rem] border-b border-ink/10 px-4 py-4 odd:border-r odd:border-ink/10">
-                    <dt className="text-[9px] uppercase tracking-[0.18em] text-ink/42">{artifact.label}</dt>
-                    <dd className="mt-3 font-serif text-[1.7rem] md:text-[2.2rem] xl:text-[2.6rem] leading-none text-ink/84">{artifact.value}</dd>
-                    <dd className="mt-3 text-[11px] leading-5 text-ink/48">{artifact.note}</dd>
+                {heroRunStats.map((stat) => (
+                  <div key={stat.label} className="min-h-[7.25rem] border-b border-ink/10 px-4 py-4 odd:border-r odd:border-ink/10">
+                    <dt className="text-[9px] uppercase tracking-[0.18em] text-ink/42">{stat.label}</dt>
+                    <dd className="mt-3 font-serif text-[1.7rem] md:text-[2.2rem] xl:text-[2.6rem] leading-none text-ink/84">{stat.value}</dd>
+                    <dd className="mt-3 text-[11px] leading-5 text-ink/48">{stat.note}</dd>
                   </div>
                 ))}
               </dl>
@@ -634,7 +634,7 @@ function EvidenceSection({
               />
             </motion.div>
             <div className="mb-7 flex items-center justify-between border-b border-ink/10 pb-4 text-[9px] uppercase tracking-[0.24em] text-ink/44">
-              <span>Proof path</span>
+              <span>Review path</span>
               <span>sample plate</span>
             </div>
             <div className="mb-8 grid gap-2 border-b border-ink/10 pb-6 md:grid-cols-4">
@@ -764,7 +764,7 @@ function CoverageSection({ prefersReducedMotion }: { prefersReducedMotion: boole
           </h2>
           <p className="mt-8 text-sm leading-7 text-ink/58">
             The crawl is not the destination. It is the rough fieldwork that reveals
-            which services, entities, locations, examples, and proof surfaces can be
+            which services, entities, locations, examples, and supporting pages can be
             found, cited, and trusted.
           </p>
           <p className="mt-9 border-l border-ink/16 pl-5 font-serif text-base italic leading-7 text-ink/50">
@@ -1049,7 +1049,7 @@ function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boo
             actual repairs.
           </h2>
           <p className="mt-6 max-w-[24rem] text-sm leading-7 text-ink/58">
-            The final artifact should read like an annotation, not a pitch: what was
+            The final package should read like an annotation, not a pitch: what was
             seen, what was missing, what to change first, and what still requires
             judgment.
           </p>

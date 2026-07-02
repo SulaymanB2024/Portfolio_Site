@@ -49,7 +49,7 @@ const clarityRays = Array.from({ length: 9 }, (_, index) => {
 const topLabels = [
   { lines: ['MESSY WEB', 'SIGNALS'], x: 58 },
   { lines: ['STRUCTURED', 'CRAWL EVIDENCE'], x: 252 },
-  { lines: ['AI RETRIEVAL', 'LAYER'], x: 462 },
+  { lines: ['RETRIEVAL', 'LAYER'], x: 462 },
   { lines: ['SEARCH', 'VISIBILITY'], x: 658 },
   { lines: ['BUSINESS', 'CLARITY'], x: 846 },
 ];
@@ -64,12 +64,12 @@ const colDescriptions = [
     desc: "Normalized crawl tables in SQLite databases. Validating canonicals, robots.txt directives, and link flows."
   },
   {
-    title: "AI RETRIEVAL LAYER",
-    desc: "Analyzing indexing probability, schema graphs, context relevance, and LLM search retrievability metrics."
+    title: "RETRIEVAL LAYER",
+    desc: "Analyzing indexing probability, schema, context relevance, and source retrieval signals."
   },
   {
     title: "SEARCH VISIBILITY",
-    desc: "Aligning search signals and technical health to ensure content is fully crawlable, indexed, and cited."
+    desc: "Aligning search signals and technical health so content is crawlable, indexed, and easy to reference."
   },
   {
     title: "BUSINESS CLARITY",

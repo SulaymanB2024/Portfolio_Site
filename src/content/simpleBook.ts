@@ -18,10 +18,10 @@ export const SIMPLE_BOOK_TITLE = 'A Short Book About Sulayman Bowles';
 export const SIMPLE_BOOK_H1 = 'A Short Book About Me';
 
 export const SIMPLE_BOOK_DESCRIPTION =
-  'A first-person text edition of Sulayman Bowles website covering technical SEO, AI-search visibility, Atlas, Void Agency, Markets Research, finance/data work, and software systems.';
+  'A first-person text edition of Sulayman Bowles website covering technical SEO, Atlas, Void Agency, Markets Research, finance research, and software systems.';
 
 export const SIMPLE_BOOK_STATIC_SUMMARY =
-  'A first-person book page by Sulayman Bowles about his work across technical SEO, AI-search visibility, finance/data research, Atlas, Void Agency, Markets Research, and software systems.';
+  'A first-person book page by Sulayman Bowles about his work across technical SEO, finance research, Atlas, Void Agency, Markets Research, and software systems.';
 
 export const SIMPLE_BOOK_LINKS: SimpleBookLink[] = [
   {
@@ -42,7 +42,7 @@ export const SIMPLE_BOOK_LINKS: SimpleBookLink[] = [
   {
     label: 'Markets Research',
     href: '/markets',
-    description: 'The finance and data research archive.',
+    description: 'The markets research archive.',
   },
   {
     label: 'Resume',
@@ -63,7 +63,7 @@ export const SIMPLE_BOOK_CHAPTERS: SimpleBookChapter[] = [
     title: 'Where I am starting',
     eyebrow: 'Context',
     body: [
-      'I am a McCombs student at UT Austin building across technical SEO, AI-search visibility, finance research, and software. That can look scattered from the outside, but the work keeps returning to one problem: messy information has to become usable before it can become valuable.',
+      'I am a McCombs student at UT Austin building across technical SEO, finance research, and software. That can look scattered from the outside, but the work keeps returning to one problem: messy information has to become usable before it can become valuable.',
       'I am drawn to work where the first useful act is not a pitch. It is reading the source text, checking the raw and rendered HTML, looking at crawl records, opening the assumptions, and asking what the evidence actually supports.',
       'I trust work more when I can see the assumptions. That is true in a crawl audit, a valuation memo, a search visibility plan, or a small software system. If I cannot inspect the input, the method, and the output, I do not trust the conclusion enough.',
     ],
@@ -76,7 +76,7 @@ export const SIMPLE_BOOK_CHAPTERS: SimpleBookChapter[] = [
     body: [
       'I am building a body of work around visibility, judgment, and repeatable systems. Technical SEO gives me concrete evidence: robots rules, canonicals, internal links, sitemap coverage, response codes, schema, page templates, and raw crawl exports.',
       'I use software to make work repeatable, inspectable, and faster. A good audit should not depend on memory or charisma. It should leave behind records that another operator can open, question, and use.',
-      'Void Agency is the commercial frame. Atlas is the technical proof. Markets Research is where I practice judgment under uncertainty. Together they give me one coherent direction instead of three unrelated interests.',
+      'Void Agency is the commercial frame. Atlas is the technical product. Markets Research is where I practice judgment under uncertainty. Together they give me one coherent direction instead of three unrelated interests.',
     ],
   },
   {
@@ -86,7 +86,7 @@ export const SIMPLE_BOOK_CHAPTERS: SimpleBookChapter[] = [
     eyebrow: 'Method',
     body: [
       'I usually start by separating surface from structure. In search work, the surface is the page copy or the dashboard score. The structure is the crawl path, indexation state, canonical logic, internal link graph, source text, rendered HTML, and query evidence.',
-      'A technical audit without page-level proof is not useful enough. I want affected URLs, source observations, the reason the issue matters, and the operating decision it should create. Otherwise the audit becomes a list of opinions.',
+      'A technical audit without page-level support is not useful enough. I want affected URLs, source observations, the reason the issue matters, and the operating decision it should create. Otherwise the audit becomes a list of opinions.',
       'I try to keep claims close to the evidence. GA4 and GSC data, crawl records, query buckets, valuation assumptions, research memos, and dashboard views all become more useful when the reader can trace how I got from observation to recommendation.',
     ],
   },
@@ -94,10 +94,10 @@ export const SIMPLE_BOOK_CHAPTERS: SimpleBookChapter[] = [
     id: 'atlas',
     numeral: 'IV',
     title: 'Atlas',
-    eyebrow: 'Technical proof',
+    eyebrow: 'Technical product',
     body: [
       'I built Atlas because I wanted technical SEO work to feel less like a black-box report and more like an evidence console. I care about what a crawler can actually discover, what it can render, what the page declares, and what the site architecture implies.',
-      'I think of Atlas as a way to make page-level proof easier to collect and easier to review. The useful questions are specific: which URLs are blocked, duplicated, orphaned, canonicalized away, missing structured data, thin in the rendered view, or disconnected from important internal paths?',
+      'I think of Atlas as a way to make page-level evidence easier to collect and easier to review. The useful questions are specific: which URLs are blocked, duplicated, orphaned, canonicalized away, missing structured data, thin in the rendered view, or disconnected from important internal paths?',
       'I do not want Atlas to be a decorative dashboard. I want it to make crawl evidence legible enough that a founder, marketer, engineer, or analyst can see the same issue and understand why it changes the next decision.',
     ],
     links: [
@@ -114,7 +114,7 @@ export const SIMPLE_BOOK_CHAPTERS: SimpleBookChapter[] = [
     title: 'Void Agency',
     eyebrow: 'Commercial frame',
     body: [
-      'I use Void Agency as the commercial frame for technical SEO, AI-search visibility, and site systems work. It gives the research and tooling a client-facing test: can this make a site easier to crawl, understand, cite, and act on?',
+      'I use Void Agency as the commercial frame for technical SEO and site systems work. It gives the research and tooling a client-facing test: can this make a site easier to crawl, understand, and act on?',
       'I care about the practical layer. Robots rules, internal links, canonicals, schema, templates, performance inputs, and analytics evidence only matter when they change how a business allocates time, budget, or engineering attention.',
       'I am not trying to make generic agency copy. I am trying to build a clear operating method: crawl the site, diagnose the evidence, prioritize the fixes, measure the change, and keep the claims tied to what can be inspected.',
     ],
@@ -140,7 +140,7 @@ export const SIMPLE_BOOK_CHAPTERS: SimpleBookChapter[] = [
       {
         label: 'Open Markets Research',
         href: '/markets',
-        description: 'Read the finance and data research archive.',
+        description: 'Read the markets research archive.',
       },
     ],
   },
@@ -159,11 +159,11 @@ export const SIMPLE_BOOK_CHAPTERS: SimpleBookChapter[] = [
     id: 'work-record',
     numeral: 'VIII',
     title: 'Work record',
-    eyebrow: 'Proof',
+    eyebrow: 'Record',
     body: [
-      'I want my work record to be readable without overexplaining it. UT Austin and McCombs give me the academic frame. Void Agency gives me operating pressure. Atlas gives me a technical artifact. Markets Research gives me a place to show how I reason through uncertainty.',
-      'I have worked around SEO audits, website systems, local search, AI-search visibility, product research, analytics, market validation, financial models, and public-facing interfaces. The overlap is not accidental. I keep looking for the point where evidence becomes an operating decision.',
-      'I am more interested in proof than polish. A public route, a crawl sample, a research memo, an assumptions table, or a working interface tells me more than a dense paragraph of positioning.',
+      'I want my work record to be readable without overexplaining it. UT Austin and McCombs give me the academic frame. Void Agency gives me operating pressure. Atlas gives me a technical product. Markets Research gives me a place to show how I reason through uncertainty.',
+      'I have worked around SEO audits, website systems, local search, product research, analytics, market validation, financial models, and public-facing interfaces. The overlap is not accidental. I keep looking for the point where evidence becomes an operating decision.',
+      'I am more interested in working examples than polish. A public route, a crawl sample, a research memo, an assumptions table, or a working interface tells me more than a dense paragraph of positioning.',
     ],
     links: [
       {
@@ -179,7 +179,7 @@ export const SIMPLE_BOOK_CHAPTERS: SimpleBookChapter[] = [
     title: 'What I am looking for',
     eyebrow: 'Fit',
     body: [
-      'I am looking for work where evidence and commercial judgment both matter. I am interested in technical SEO systems, AI-search visibility, product research, finance/data analysis, and software that makes expert work easier to inspect.',
+      'I am looking for work where evidence and commercial judgment both matter. I am interested in technical SEO systems, product research, finance research, and software that makes expert work easier to inspect.',
       'I fit best around problems with source material: crawled pages, search queries, analytics exports, market data, customer evidence, valuation assumptions, or unfinished workflows. I like turning those inputs into a clear decision path.',
       'I am less interested in vague strategy and more interested in the operating layer. What is blocked, what is misunderstood, what is mispriced, what is unmeasured, and what should change next?',
     ],
@@ -190,8 +190,8 @@ export const SIMPLE_BOOK_CHAPTERS: SimpleBookChapter[] = [
     title: 'Contact and links',
     eyebrow: 'Entry points',
     body: [
-      'I keep the designed site as the front door because it shows the visual system and the public proof. I keep this page quieter because some context is easier to read without motion, cards, or presentation pressure.',
-      'I am easiest to evaluate through the work itself: Atlas for technical proof, Void Agency for the commercial method, Markets Research for judgment under uncertainty, and the resume for the compact record.',
+      'I keep the designed site as the front door because it shows the visual system and the public record. I keep this page quieter because some context is easier to read without motion, cards, or presentation pressure.',
+      'I am easiest to evaluate through the work itself: Atlas for technical systems, Void Agency for the commercial method, Markets Research for judgment under uncertainty, and the resume for the compact record.',
       'If the overlap is useful, I prefer a direct note with the problem, the source material, and the decision you are trying to make.',
     ],
     links: SIMPLE_BOOK_LINKS,

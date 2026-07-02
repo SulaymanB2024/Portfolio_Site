@@ -8,13 +8,15 @@ import { InternalHeader } from '../components/InternalHeader';
 import { InternalFooter } from '../components/InternalFooter';
 import { WireframeGrid } from '../components/WireframeGrid';
 
+const EDUCATIONAL_MARKETS_BOUNDARY = 'Educational research sample, not an investment recommendation.';
+
 export default function MarketArticlePage({ slug }: { slug: string }) {
   const thesis = getMarketThesisBySlug(slug) ?? getMarketThesisBySlug('network-monopolies')!;
   const route = getSeoRoute(`/markets/${thesis.slug}`) ?? getSeoRoute('/markets')!;
   const metrics = thesis.metrics ?? [
-    { label: 'Conviction', value: thesis.conviction },
+    { label: 'Research confidence', value: thesis.conviction },
     { label: 'Horizon', value: thesis.horizon },
-    { label: 'Allocation', value: thesis.allocation },
+    { label: 'Sample portfolio weight', value: thesis.allocation },
   ];
 
   useSEO(route);
@@ -76,6 +78,9 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
               {thesis.claimBoundary}
             </p>
           ) : null}
+          <p className="mt-4 max-w-3xl border border-canvas/12 px-4 py-3 text-xs uppercase leading-6 tracking-[0.16em] text-canvas/54">
+            {EDUCATIONAL_MARKETS_BOUNDARY}
+          </p>
 
           <div className="my-12 grid gap-4 border-y border-canvas/10 py-6 text-[10px] uppercase tracking-[0.2em] text-canvas/54 md:grid-cols-3">
             {metrics.map((metric, index) => (

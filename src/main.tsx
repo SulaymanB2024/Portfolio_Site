@@ -4,6 +4,8 @@ import App from './App.tsx';
 import './index.css';
 import Lenis from 'lenis';
 
+document.documentElement.classList.add('js');
+
 function Root() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

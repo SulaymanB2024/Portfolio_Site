@@ -8,6 +8,12 @@ type AuditIntakeFormProps = {
 const contactFieldClass =
   'w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-sm font-sans tracking-normal outline-none transition-colors placeholder:text-canvas/32 text-canvas';
 const contactSelectClass = `${contactFieldClass} appearance-none text-canvas/82`;
+const sensitiveSubmissionPattern =
+  /(-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{20,}|ghp_[0-9A-Za-z]{20,}|sk-[0-9A-Za-z_-]{20,}|xox[baprs]-[0-9A-Za-z-]{20,}|(?:api[_-]?key|access[_-]?token|password|private[_-]?key|client[_-]?secret)\s*[:=])/i;
+
+function hasSensitiveSubmissionText(values: string[]) {
+  return values.some((value) => sensitiveSubmissionPattern.test(value));
+}
 
 function ContactFieldLabel({ htmlFor, children }: { htmlFor: string; children: string }) {
   return (
@@ -27,6 +33,8 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
   const [scope, setScope] = useState('');
   const [brokenArea, setBrokenArea] = useState('');
   const [message, setMessage] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [validationMessage, setValidationMessage] = useState('');
   const progressSteps = [
     { step: '01', label: 'Identity', complete: Boolean(name && email) },
     { step: '02', label: 'Site', complete: Boolean(websiteUrl) },
@@ -38,12 +46,38 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
     formStatus === 'submitting'
       ? 'sealing brief'
       : formStatus === 'error'
-        ? 'endpoint refused'
+        ? validationMessage || 'endpoint refused'
         : `${completeStepCount}/4 fields traced`;
+
+  const resetForm = () => {
+    setName('');
+    setEmail('');
+    setWebsiteUrl('');
+    setProjectType('');
+    setTimeline('');
+    setScope('');
+    setBrokenArea('');
+    setMessage('');
+    setHoneypot('');
+    setValidationMessage('');
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setValidationMessage('');
     if (!email || !message) return;
+
+    if (honeypot.trim()) {
+      setFormStatus('success');
+      resetForm();
+      return;
+    }
+
+    if (hasSensitiveSubmissionText([name, email, websiteUrl, projectType, timeline, scope, brokenArea, message])) {
+      setValidationMessage('remove secrets');
+      setFormStatus('error');
+      return;
+    }
 
     setFormStatus('submitting');
     const triggerShutter = (window as Window & { triggerShutter?: (covered: boolean) => void }).triggerShutter;
@@ -73,25 +107,20 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
       if (response.ok) {
         setTimeout(() => {
           setFormStatus('success');
-          setName('');
-          setEmail('');
-          setWebsiteUrl('');
-          setProjectType('');
-          setTimeline('');
-          setScope('');
-          setBrokenArea('');
-          setMessage('');
+          resetForm();
           if (triggerShutter) {
             triggerShutter(false);
           }
         }, 800);
       } else {
+        setValidationMessage('endpoint refused');
         setFormStatus('error');
         if (triggerShutter) {
           triggerShutter(false);
         }
       }
     } catch {
+      setValidationMessage('submission failed');
       setFormStatus('error');
       if (triggerShutter) {
         triggerShutter(false);
@@ -112,6 +141,17 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className={`w-full max-w-xl space-y-6 mt-4 ${className}`}>
+      <div aria-hidden="true" className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
+        <label htmlFor="contact-company-url">Company URL</label>
+        <input
+          id="contact-company-url"
+          name="_gotcha"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
+      </div>
       <ol className="grid grid-cols-2 gap-px overflow-hidden border border-canvas/12 text-[8px] uppercase tracking-[0.18em] text-canvas/46 md:grid-cols-4">
         {progressSteps.map((item) => (
           <li
@@ -135,6 +175,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
             name="name"
             autoComplete="name"
             placeholder="Your name"
+            maxLength={120}
             value={name}
             onChange={(e) => setName(e.target.value)}
             className={contactFieldClass}
@@ -149,6 +190,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
             name="email"
             autoComplete="email"
             placeholder="Your email"
+            maxLength={160}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={contactFieldClass}
@@ -162,6 +204,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
         name="websiteUrl"
         autoComplete="url"
         placeholder="Website URL"
+        maxLength={240}
         value={websiteUrl}
         onChange={(e) => setWebsiteUrl(e.target.value)}
         className={contactFieldClass}
@@ -178,8 +221,8 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
           >
             <option value="" className="bg-ink text-canvas">Project type</option>
             <option value="Technical SEO audit" className="bg-ink text-canvas">Technical SEO audit</option>
-            <option value="AI-search visibility" className="bg-ink text-canvas">AI-search visibility</option>
-            <option value="Finance/data research" className="bg-ink text-canvas">Finance/data research</option>
+            <option value="Search visibility" className="bg-ink text-canvas">Search visibility</option>
+            <option value="Markets research" className="bg-ink text-canvas">Markets research</option>
             <option value="Web system" className="bg-ink text-canvas">Web system</option>
           </select>
         </div>
@@ -222,6 +265,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
         id="contact-broken-area"
         name="brokenArea"
         placeholder="What feels broken?"
+        maxLength={500}
         value={brokenArea}
         onChange={(e) => setBrokenArea(e.target.value)}
         className={`${contactFieldClass} resize-none`}
@@ -233,6 +277,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
         id="contact-message"
         name="message"
         placeholder="Project details, goals, or audit request"
+        maxLength={2000}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         className={`${contactFieldClass} resize-none`}
@@ -240,7 +285,9 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
       <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
         {formStatus === 'error' && (
           <span className="text-red-400 text-[10px] font-sans tracking-widest uppercase">
-            Submission failed. Please try again.
+            {validationMessage === 'remove secrets'
+              ? 'Remove credentials, keys, tokens, or passwords before sending.'
+              : 'Submission failed. Please try again.'}
           </span>
         )}
         <span className="text-[10px] uppercase tracking-[0.2em] text-canvas/42">

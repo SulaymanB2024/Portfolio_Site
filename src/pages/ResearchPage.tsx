@@ -35,16 +35,16 @@ export default function ResearchPage() {
       <PageFrame className="relative z-10">
         <PageHero
           eyebrow="Research assets"
-          title="Citation surfaces, not empty claims."
-          intro={
-            <p>
-              A public index of technical SEO, AI-search, Atlas, crawlability, identity, and finance/data artifacts. Each item is meant to be inspectable before it is cited, pitched, or used in outreach.
-            </p>
-          }
+            title="Research notes and source files."
+            intro={
+              <p>
+                A public index of technical SEO notes, Atlas samples, crawlability research, profile context, and markets research files. Each item is meant to be opened and checked directly.
+              </p>
+            }
           aside={
             <div className="grid gap-5 text-sm leading-relaxed">
               <p>
-                The hub gives editors, profile owners, technical SEO writers, and AI-search researchers one clean URL for source-backed assets instead of a loose set of raw files.
+                The hub gives editors, collaborators, technical SEO writers, and profile reviewers one clean place to find the relevant pages and files.
               </p>
               <div className="grid grid-cols-3 gap-px border border-current/14 text-center">
                 <Metric label="Assets" value={publicResearchAssets.length} />
@@ -57,7 +57,7 @@ export default function ResearchPage() {
 
         <div className="flex flex-wrap items-center gap-5 border-b border-current/12 py-8">
           <PrimaryCTA href="/contact" id="research-contact-link">
-            Discuss an audit
+            Discuss a project
           </PrimaryCTA>
           <TextLink
             href="/research/authority-assets.json"
@@ -67,15 +67,15 @@ export default function ResearchPage() {
             Authority asset JSON
           </TextLink>
           <TextLink href="/llms.txt" id="research-llms-link" className="text-[10px] uppercase tracking-[0.2em] text-current/62 hover:text-current">
-            LLMs text file
+            llms.txt reference file
           </TextLink>
         </div>
       </PageFrame>
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Citation targets" title="Assets worth linking to.">
-            These are the best public targets for earned links, profile updates, source citations, newsletter submissions, and editorial conversations. Priority reflects campaign usefulness, not proof of authority.
+          <SectionHeader eyebrow="Public references" title="Pages worth reading.">
+            These are the public pages and files most useful for profile updates, references, newsletter submissions, and editorial conversations. Priority reflects usefulness, not authority.
           </SectionHeader>
 
           <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
@@ -112,8 +112,8 @@ export default function ResearchPage() {
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Public files" title="Downloadable proof.">
-            These files support the public pages above. They are useful for citation, review, and outreach because the source rows can be inspected directly.
+          <SectionHeader eyebrow="Public files" title="Downloadable files.">
+            These files support the public pages above. They are useful because the rows can be inspected directly.
           </SectionHeader>
 
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
@@ -130,7 +130,7 @@ export default function ResearchPage() {
       <PageFrame className="relative z-10 py-16 xl:py-24">
         <section className="grid gap-10 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.42fr_0.58fr]">
           <div>
-            <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-current/48">Claim boundaries</p>
+            <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-current/48">Limits</p>
             <h2 className="font-serif text-[3rem] md:text-[5rem] xl:text-[6.75rem] italic leading-[0.9] tracking-normal">
               Evidence stays separate from outcomes.
             </h2>

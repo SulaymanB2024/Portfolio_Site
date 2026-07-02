@@ -8,7 +8,7 @@ import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const WORK_SEO = getSeoRoute('/work')!;
-const workArtifactStrips = ['artifact / crawl', 'process / method', 'review / case', 'memo / assumptions'];
+const workArtifactStrips = ['crawl sample', 'audit method', 'case note', 'research memo'];
 
 function CornerMarks() {
   return (
@@ -34,10 +34,10 @@ export default function WorkPage() {
       <section className="relative z-10 mx-auto grid min-h-[62vh] max-w-[1480px] content-end px-4 pb-16 pt-20 md:px-8 xl:px-10">
         <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/45">Selected work</p>
         <h1 className="max-w-5xl font-serif text-[4rem] md:text-[7.5rem] xl:text-[10rem] italic leading-[0.82] tracking-normal">
-          Work built from evidence.
+          Work I can point to.
         </h1>
         <p className="mt-10 max-w-2xl text-base leading-relaxed text-canvas/62">
-          A compact index of public work surfaces: Atlas crawl evidence, technical SEO method, sanitized case-study logic, and finance/data artifacts with visible assumptions.
+          A short index of the systems, audits, case studies, and research notes behind my current work: Atlas, Void Agency, technical SEO, and markets research.
         </p>
       </section>
 
@@ -60,7 +60,7 @@ export default function WorkPage() {
             </div>
             <div className="absolute inset-x-0 bottom-0 grid grid-cols-[auto_1fr] items-center gap-3 border-t border-canvas/10 px-6 py-3 text-[9px] uppercase tracking-[0.22em] text-canvas/42 opacity-0 transition-[opacity,transform] duration-300 group-hover:translate-y-0 group-hover:opacity-100 md:translate-y-2">
               <span className="font-serif text-sm italic tracking-normal text-canvas/72">{String(index + 1).padStart(2, '0')}</span>
-              <span className="truncate">{workArtifactStrips[index] ?? 'artifact / proof'}</span>
+              <span className="truncate">{workArtifactStrips[index] ?? 'work note'}</span>
             </div>
           </article>
         ))}
@@ -69,10 +69,10 @@ export default function WorkPage() {
       <section className="relative z-10 mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.38fr_0.62fr]">
           <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
-            Contextual proof paths.
+            Supporting paths.
           </h2>
           <p className="max-w-3xl self-end text-base leading-relaxed text-canvas/58">
-            These links are written as human-readable next steps, not source-map filler. They point from project copy to sample data, method, code, intake, and finance assumptions.
+            These links point from each project to the sample data, method notes, code, intake route, and markets research assumptions behind it.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-5">

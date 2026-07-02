@@ -17,25 +17,25 @@ export default function VoidAgencyPage() {
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
       <ScrollProgress />
-      <InternalHeader activePath="/method" tone="dark" />
+      <InternalHeader activePath="/void-agency" tone="dark" />
 
       <section className="relative z-10 mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[0.44fr_0.56fr] xl:px-10 xl:pt-20">
         <div className="self-end">
-          <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-canvas/48">Organization proof</p>
+          <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-canvas/48">Service practice</p>
           <h1 className="font-serif text-[5rem] md:text-[8.5rem] xl:text-[12rem] italic leading-[0.72] tracking-normal">
             Void Agency.
           </h1>
           <p className="mt-10 max-w-2xl text-base leading-relaxed text-canvas/62">
-            Void Agency is the service branch connected to Sulayman Bowles work in technical SEO, AI-search visibility, crawlability, indexation diagnostics, structured content, analytics review, and evidence-backed web audits.
+            Void Agency is the service branch connected to my technical SEO work: crawlability, indexation diagnostics, structured content, analytics review, and practical web audits.
           </p>
         </div>
 
         <div className="self-center border border-canvas/14 p-6 md:p-10">
-          <h2 className="font-serif text-4xl italic leading-none tracking-normal">What this page proves.</h2>
+          <h2 className="font-serif text-4xl italic leading-none tracking-normal">What this page clarifies.</h2>
           <div className="mt-8 grid gap-5">
             {[
               'The personal site distinguishes Void Agency as an organization/service branch, not a separate unrelated identity.',
-              'The technical method lives on /method, while this page carries the organization proof and cross-links.',
+              'The technical method lives on /method, while this page explains how the agency connects to the rest of the work.',
               'The page points to the external agency domain, public sample crawl data, and intake route without inventing private client outcomes.',
             ].map((item) => (
               <p key={item} className="border-l border-canvas/14 pl-4 text-sm leading-relaxed text-canvas/60">
@@ -49,10 +49,10 @@ export default function VoidAgencyPage() {
       <section className="relative z-10 mx-auto max-w-[1480px] border-y border-canvas/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.38fr_0.62fr]">
           <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
-            Source-backed links.
+            Supporting links.
           </h2>
           <p className="max-w-3xl self-end text-base leading-relaxed text-canvas/58">
-            The organization page stays useful by pointing to inspectable public sources: the agency domain, method page, sample audit artifact, and direct intake.
+            The organization page stays useful by pointing to the agency domain, method page, sample audit run, and direct intake.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-px overflow-hidden border border-canvas/14 md:grid-cols-2 xl:grid-cols-4">
@@ -79,7 +79,7 @@ export default function VoidAgencyPage() {
           </h2>
           <div className="self-center">
             <p className="max-w-xl text-base leading-relaxed text-canvas/58">
-              /void-agency is the organization proof page. /method is the technical SEO audit process page. Keeping those roles separate gives users and crawlers cleaner intent.
+              /void-agency explains the service practice. /method explains the technical SEO audit process. Keeping those roles separate makes the site easier to navigate.
             </p>
             <a href="/method" className="mt-8 inline-flex text-[10px] uppercase tracking-[0.24em] text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:text-canvas">
               Read the technical SEO audit method
@@ -89,7 +89,7 @@ export default function VoidAgencyPage() {
       </section>
 
       <div className="relative z-10 mx-auto max-w-[1480px] px-4 pb-8 md:px-8 xl:px-10">
-        <InternalFooter activePath="/method" tone="dark" />
+        <InternalFooter activePath="/void-agency" tone="dark" />
       </div>
     </main>
   );

@@ -16,7 +16,7 @@ import { WireframeGrid } from '../components/WireframeGrid';
 const ABOUT_SEO = getSeoRoute('/about')!;
 
 const principles = [
-  ['EVIDENCE FIRST', 'Decisions should be driven by data, not assumptions.'],
+  ['CHECK THE INPUTS', 'Decisions should come from the material, not from a polished summary.'],
   ['SYSTEMS OVER CHECKLISTS', 'I build durable systems that compound over time.'],
   ['SEARCH IS STRUCTURE', 'Visibility depends on whether a site can be crawled, understood, and trusted.'],
   ['IMPACT > ACTIVITY', 'The goal is measurable movement, not more output.'],
@@ -26,14 +26,14 @@ const experience = [
   {
     role: 'FOUNDER',
     meta: 'VOID Agency · Dec 2025 — Present',
-    copy: 'Built an SEO and web systems practice around technical audits, website builds, local search strategy, and AI-search visibility work. Public pages describe the work without turning private revenue records into proof claims.',
-    details: ['Technical Audits', 'Next.js & Astro', 'LLM Search Visibility']
+    copy: 'Built an SEO and web systems practice around technical audits, website builds, local search strategy, and search visibility work, with $50K+ collected revenue.',
+    details: ['Technical Audits', 'Next.js & Astro', 'Search Visibility']
   },
   {
     role: 'AI PRODUCT MANAGER INTERN',
     meta: 'Chegg · Office of the Chief Product Officer · May 2026 — Aug 2026',
     copy: 'Working on AI product strategy, research, competitive analysis, user workflows, prototype review, and AI-enabled student experiences.',
-    details: ['AI Chat UX', 'Competitive Mapping', 'LLM Workflows']
+    details: ['Chat UX', 'Competitive Mapping', 'Research Workflows']
   },
   {
     role: 'TECHNICAL SEO ANALYTICS',
@@ -51,7 +51,7 @@ const experience = [
 
 const skills = [
   ['TECHNICAL SEO', 'Built', 'Screaming Frog, crawl budget, canonical mapping, hreflang'],
-  ['AI SEARCH VISIBILITY', 'Shipped', 'LLM retrieval checks, schema graphs, citation relevance'],
+  ['SEARCH VISIBILITY', 'Shipped', 'crawler access, structured data, entity clarity, answer-ready pages'],
   ['AI PRODUCT STRATEGY', 'Used in client work', 'Prompt review, RAG workflows, UX mapping, prototypes'],
   ['CRAWL & INDEXATION', 'Built', 'Log-file analysis, server headers, render audits, XML sitemaps'],
   ['DATA ANALYSIS', 'Shipped', 'GA4 APIs, GSC API, Python scripts, SQLite databases'],
@@ -61,9 +61,9 @@ const skills = [
 
 const workCards = [
   ['TECHNICAL SEO\nSYSTEMS', 'Crawlability, indexation, metadata, links, and performance.', 'sitemap'],
-  ['AI SEARCH\nVISIBILITY', 'Make brands easier to retrieve, cite, and trust.', 'search'],
+  ['SEARCH\nVISIBILITY', 'Make brands easier to crawl, understand, and trust.', 'search'],
   ['AI PRODUCT\nSTRATEGY', 'Research, workflows, prototypes, and student AI experiences.', 'cube'],
-  ['FINANCE & SEARCH\nANALYTICS', 'Market models, GA4/GSC analysis, and decision-ready recommendations.', 'bars'],
+  ['MARKETS & SEARCH\nANALYTICS', 'Market models, GA4/GSC analysis, and decision-ready recommendations.', 'bars'],
 ];
 
 const metrics = [
@@ -353,15 +353,23 @@ export default function AboutPage() {
             <span className="block italic">for visibility.</span>
           </h1>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-canvas/62">
-            <p>Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, a technical SEO audit console focused on crawl evidence, indexation, structured data, AI-search visibility, and finance/data systems.</p>
-            <p>My work turns crawl data, site architecture, search signals, and market research into clearer systems for discovery, citation, conversion, and decision-making.</p>
+            <p>I study business at UT Austin and spend most of my working time building practical systems: Atlas for technical SEO audits, Void Agency for client work, and research notes for markets and search problems I want to understand better.</p>
+            <p>I like messy inputs: crawl exports, broken templates, search data, financial assumptions, and half-finished product logic. The work is making those inputs clear enough that someone can decide what to fix, ignore, or build next.</p>
           </div>
-          <a
-            href="/simple"
-            className="mt-8 inline-flex text-[10px] uppercase tracking-[0.26em] text-canvas/58 underline decoration-canvas/22 underline-offset-4 transition-colors hover:text-canvas"
-          >
-            Read the book
-          </a>
+          <div className="mt-8 flex flex-wrap gap-4 text-[10px] uppercase tracking-[0.26em] text-canvas/58">
+            <a
+              href="/simple"
+              className="underline decoration-canvas/22 underline-offset-4 transition-colors hover:text-canvas"
+            >
+              Read the book
+            </a>
+            <a
+              href="/void-agency"
+              className="underline decoration-canvas/22 underline-offset-4 transition-colors hover:text-canvas"
+            >
+              Void Agency technical SEO practice
+            </a>
+          </div>
         </div>
 
         <div className="w-full self-center">
@@ -415,9 +423,9 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-[1480px] border-y border-canvas/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-3xl">
-          <SectionLabel>PUBLIC SOURCE GRAPH</SectionLabel>
+          <SectionLabel>SUPPORTING LINKS</SectionLabel>
           <p className="text-base leading-relaxed text-canvas/58">
-            This site is the canonical hub. The surrounding sources are useful when they prove one part of the same thesis: technical SEO, Atlas, Void Agency, finance/data judgment, and evidence-backed web/search systems.
+            This site is the main explanation of the work. The links below are the supporting record: code, profiles, Atlas, Void Agency, markets research, and the current resume.
           </p>
         </ScrollReveal>
         <div className="grid grid-cols-1 gap-px overflow-hidden border border-canvas/14 md:grid-cols-2 xl:grid-cols-4">
@@ -503,7 +511,7 @@ export default function AboutPage() {
           {[
             ['LOCATION', 'Austin, Texas'],
             ['EDUCATION', 'UT Austin · McCombs\nSchool of Business'],
-            ['AVAILABILITY', 'Open for select projects, partnerships, and technical SEO / AI-search work.'],
+            ['AVAILABILITY', 'Open for select projects, partnerships, and technical SEO work.'],
           ].map(([label, value], index) => (
             <div key={label}>
               <ScrollReveal delay={index * 0.06} yOffset={16} blur={false}>

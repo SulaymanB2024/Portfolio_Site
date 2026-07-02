@@ -11,7 +11,8 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   const activeItem = primaryNav.find((item) => isNavItemActive(activePath, item.href));
   const [routeNote, setRouteNote] = useState<string | null>(null);
   const isDark = tone === 'dark';
-  const displayedRouteNote = routeNote ?? activeItem?.description ?? 'Index of work, systems, and proof surfaces.';
+  const showRouteNote = variant !== 'home';
+  const displayedRouteNote = routeNote ?? activeItem?.description ?? 'Index of work, systems, and supporting links.';
   
   const textClass = isDark ? 'text-canvas' : 'text-ink';
   const textMutedClass = isDark ? 'text-canvas/58' : 'text-ink/56';
@@ -32,7 +33,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
           <a href="/" id="header-brand-link-mobile" className="min-w-0">
             <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
             <span className={`site-header-tagline mt-2 block truncate font-serif text-sm italic normal-case leading-none tracking-normal ${textMutedClass}`}>
-              Technical SEO · AI Search · Finance/Data
+              Technical SEO · Search Systems · Finance Research
             </span>
           </a>
         </div>
@@ -68,7 +69,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
         <a href="/" id="header-brand-link" className="block min-w-0 justify-self-start transition-opacity duration-200 hover:opacity-72">
           <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
           <span className={`site-header-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
-            Technical SEO · AI Search · Finance/Data
+            Technical SEO · Search Systems · Finance Research
           </span>
         </a>
         
@@ -98,11 +99,13 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
             );
           })}
         </nav>
-        <div className={`hidden border-t pt-2 text-[9px] uppercase leading-relaxed tracking-[0.2em] ${noteBorderClass} ${textMutedClass} md:block lg:col-span-2`}>
-          <span className={textClass}>Route note</span>
-          <span className="px-2 opacity-38">/</span>
-          <span>{displayedRouteNote}</span>
-        </div>
+        {showRouteNote && (
+          <div className={`hidden border-t pt-2 text-[9px] uppercase leading-relaxed tracking-[0.2em] ${noteBorderClass} ${textMutedClass} md:block lg:col-span-2`}>
+            <span className={textClass}>Route note</span>
+            <span className="px-2 opacity-38">/</span>
+            <span>{displayedRouteNote}</span>
+          </div>
+        )}
       </div>
     </header>
   );

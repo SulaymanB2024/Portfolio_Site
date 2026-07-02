@@ -9,7 +9,7 @@
     "One sitemap fetch using the first robots.txt sitemap URL when available, otherwise /sitemap.xml.",
     "Signals are presence/availability checks, not quality scores or SEO diagnoses."
   ],
-  "claim_boundaries": [
+  "limits": [
     "This pilot is not representative of all Austin companies.",
     "Rows do not claim rankings, traffic movement, revenue impact, AI citations, or site health.",
     "Access-limited, timed-out, or challenged fetches are measurement gaps, not negative findings.",

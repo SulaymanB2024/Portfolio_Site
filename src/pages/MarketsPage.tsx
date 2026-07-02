@@ -15,19 +15,19 @@ const COIN_ART = '/images/markets/noise-expansion-coin-alpha.png';
 const heroLinks = [
   { label: 'Browse public notes', href: '#case-archive' },
   { label: 'View market research types', href: '#research-types' },
-  { label: 'Open educational artifacts', href: '#investment-memos' },
+  { label: 'Open educational memos', href: '#investment-memos' },
 ];
 
 const researchTypes = [
   {
     index: '01',
     title: 'Business quality',
-    copy: 'Operating logic, assumptions, downside cases, and source-backed business research.',
+    copy: 'Operating logic, assumptions, downside cases, and business research tied to sources.',
   },
   {
     index: '02',
     title: 'Search infrastructure',
-    copy: 'AI crawler policy, source graphs, crawlability, and public data hygiene.',
+    copy: 'Crawler policy, canonical URLs, public pages, and the cleanup work that makes a site easier to read.',
   },
   {
     index: '03',
@@ -37,13 +37,13 @@ const researchTypes = [
   {
     index: '04',
     title: 'Models and memos',
-    copy: 'Assumption tables, decision frameworks, source notes, and reviewable research artifacts.',
+    copy: 'Assumption tables, decision frameworks, source notes, and research memos.',
   },
 ];
 
 const memoLinks = [
   {
-    label: 'Appian educational memo',
+    label: 'Read the markets research memo with assumptions',
     href: RESEARCH_ASSETS.appianMemoPdf,
     meta: 'PDF research sample',
   },
@@ -105,7 +105,7 @@ function MarketsHero() {
           </h1>
 
           <p className="mt-8 max-w-[385px] text-[15px] leading-relaxed text-ink/62 md:text-base">
-            Source-bounded research notes across search infrastructure, public data, and finance/data assumptions.
+            Research notes across search infrastructure, public data, and markets assumptions.
           </p>
 
           <a
@@ -148,7 +148,7 @@ function ResearchTypesSection() {
           </h2>
         </div>
         <p className="max-w-md text-sm leading-relaxed text-ink/58">
-          Each lane is built to keep evidence, assumptions, and risk boundaries readable before any conclusion is trusted.
+          Each lane keeps the assumptions, sources, and downside cases visible before a conclusion is trusted.
         </p>
       </div>
 
@@ -171,7 +171,7 @@ function CaseArchiveSection() {
       <div className="mb-8 border-t border-ink/12 pt-6">
         <p className="mb-3 text-[10px] uppercase tracking-[0.28em] text-ink/48">Case archive</p>
         <h2 className="font-serif text-[2.5rem] md:text-[4rem] xl:text-[5.25rem] italic leading-[0.9] text-ink">
-          Notes with source boundaries.
+          Notes with sources and limits.
         </h2>
       </div>
 
@@ -187,7 +187,7 @@ function CaseArchiveSection() {
               <span className="block text-[11px] uppercase tracking-[0.24em] text-ink">{thesis.title}</span>
               <span className="mt-2 block max-w-2xl text-sm leading-relaxed text-ink/56">{thesis.subtitle}</span>
               <span className="mt-3 block translate-y-1 text-[9px] uppercase tracking-[0.18em] text-ink/38 opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-y-0 group-hover:opacity-100">
-                {thesis.category} / {thesis.readTime} / source boundary visible
+                {thesis.category} / {thesis.readTime} / sources and limits visible
               </span>
             </span>
             <span className="text-[10px] uppercase tracking-[0.22em] text-ink/46 md:text-right">
@@ -207,12 +207,15 @@ function InvestmentMemosSection() {
         <div>
           <p className="mb-3 text-[10px] uppercase tracking-[0.28em] text-ink/48">Investment memos</p>
           <h2 className="font-serif text-[2.5rem] md:text-[4rem] xl:text-[5.25rem] italic leading-[0.9] text-ink">
-            Artifacts, not advice.
+            Memos, not advice.
           </h2>
         </div>
         <div className="space-y-6">
           <p className="max-w-2xl text-sm leading-relaxed text-ink/60">
             Public materials are educational research samples. They show how assumptions are structured, challenged, and sourced without becoming live recommendations or price targets.
+          </p>
+          <p className="max-w-2xl border-l border-risk/35 pl-4 text-xs uppercase leading-6 tracking-[0.16em] text-ink/52">
+            Educational research sample, not an investment recommendation. Not a recommendation or price target.
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
             {memoLinks.map((memo) => (

@@ -51,7 +51,7 @@ const methodColumns: MethodColumn[] = [
     number: '02',
     title: 'DIAGNOSE',
     visual: 'diagnose',
-    copy: 'Find the issues that affect discovery, retrieval, indexation, and conversion paths. Every finding is tied to evidence, affected URLs, severity, and implementation context.',
+    copy: 'Find the issues that affect discovery, indexation, and conversion paths. Every finding is tied to affected URLs, severity, and implementation context.',
   },
   {
     number: '03',
@@ -63,7 +63,7 @@ const methodColumns: MethodColumn[] = [
     number: '04',
     title: 'MEASURE',
     visual: 'measure',
-    copy: 'Track what changed after implementation: indexation, search queries, page performance, crawl behavior, AI-search references, and conversion events where analytics access supports it.',
+    copy: 'Track what changed after implementation: indexation, search queries, page performance, crawl behavior, and conversion events where analytics access supports it.',
   },
 ];
 
@@ -90,34 +90,34 @@ const processSteps: ProcessStep[] = [
   },
 ];
 
-const caseStudies: CaseStudy[] = [
+const methodExamples: CaseStudy[] = [
   {
     category: 'TECHNICAL SEO',
     title: 'Indexation Audit at Scale',
     visual: 'urls',
     href: '/atlas',
-    cta: 'VIEW CASE STUDY',
+    cta: 'OPEN ATLAS PAGE',
     copy: 'Mapped thousands of URLs to uncover crawl waste, duplicate templates, weak canonicals, orphaned pages, redirect chains, and pages blocked from meaningful discovery.',
   },
   {
-    category: 'AI SEARCH',
-    title: 'AI Visibility Benchmark',
+    category: 'SEARCH VISIBILITY',
+    title: 'Public Page Clarity Review',
     visual: 'entity',
-    cta: 'PREVIEW FRAMEWORK',
-    copy: 'Reviewed whether a company could be clearly understood and cited by AI systems. Tested entity, clarity, answer-ready pages, schema, source structure, and crawler access.',
+    cta: 'FRAMEWORK PREVIEW',
+    copy: 'Reviewed whether a company could be understood clearly from its public pages. Tested entity clarity, page structure, schema, source material, and crawler access.',
   },
   {
     category: 'ECOMMERCE SEO',
     title: 'Product Discovery System',
     visual: 'heatmap',
-    cta: 'PREVIEW FRAMEWORK',
+    cta: 'FRAMEWORK PREVIEW',
     copy: 'Audited product and collection pages to find missing metadata, thin templates, weak internal links, duplicate paths, and search-intent gaps.',
   },
   {
     category: 'LOCAL SEO',
     title: 'Service-Area Visibility Audit',
     visual: 'local',
-    cta: 'PREVIEW FRAMEWORK',
+    cta: 'FRAMEWORK PREVIEW',
     copy: 'Mapped location pages, service pages, Google Business Profile signals, crawl structure, and local entity clarity to improve discovery in high-intent searches.',
   },
 ];
@@ -588,16 +588,16 @@ export default function VoidAgencyMethodPage() {
           <p className="mt-12 max-w-xl text-sm font-medium uppercase leading-relaxed tracking-[0.24em] text-canvas/82">
             <RevealText text="TECHNICAL SEO SYSTEMS FOR SEARCH," delay={0.25} elementType="span" />
             <br />
-            <RevealText text="AI-SEARCH VISIBILITY, AND CONVERSION PATHS." delay={0.4} elementType="span" />
+            <RevealText text="SEARCH VISIBILITY, AND CONVERSION PATHS." delay={0.4} elementType="span" />
           </p>
           <p className="mt-8 max-w-[34rem] text-base leading-relaxed text-canvas/58">
-            Void Agency audits the technical layer behind search visibility: crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and AI crawler access. The method connects back to Sulayman Bowles, Atlas, and evidence-backed web/search systems.
+            Void Agency audits the technical layer behind search visibility: crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and crawler access. The method connects back to Sulayman Bowles, Atlas, and practical web/search systems.
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-8">
             <CircleAuditButton id="method-hero-audit-btn" />
-            <ArrowLink id="method-hero-cases-btn" href="#case-studies">VIEW CASE STUDIES</ArrowLink>
+            <ArrowLink id="method-hero-cases-btn" href="#case-studies">VIEW METHOD EXAMPLES</ArrowLink>
             <ArrowLink id="method-hero-sample-crawl-btn" href="/atlas/sample-crawl">SEE SAMPLE CRAWL</ArrowLink>
-            <ArrowLink id="method-hero-void-proof-btn" href="/void-agency">VOID AGENCY PROOF</ArrowLink>
+            <ArrowLink id="method-hero-void-agency-btn" href="/void-agency">VOID AGENCY</ArrowLink>
           </div>
         </ScrollReveal>
 
@@ -605,7 +605,7 @@ export default function VoidAgencyMethodPage() {
           <div className="group">
             <VoidCrawlMap className="aspect-[900/700] w-full transition-transform duration-700 group-hover:-translate-y-1" />
             <div className="mt-4 grid grid-cols-2 border-y border-canvas/12 text-[10px] uppercase tracking-[0.22em] text-canvas/46 md:grid-cols-4">
-              {['CRAWL PATHS', 'INDEXATION', 'AI ACCESS', 'CONVERSION'].map((item) => (
+              {['CRAWL PATHS', 'INDEXATION', 'CRAWLER ACCESS', 'CONVERSION'].map((item) => (
                 <span key={item} className="border-b border-canvas/10 px-3 py-3 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">{item}</span>
               ))}
             </div>
@@ -618,13 +618,13 @@ export default function VoidAgencyMethodPage() {
           <ScrollReveal yOffset={18} blur={false}>
             <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/42">OVERVIEW</div>
             <p className="max-w-[44rem] font-serif text-[2.8rem] md:text-[4.4rem] xl:text-[6rem] italic leading-[0.92] tracking-normal">
-              Search visibility is no longer only about ranking pages. It is about whether Google, AI systems, and customers can understand your site clearly enough to trust it.
+              Search visibility is no longer only about ranking pages. It is about whether search engines, referral systems, and customers can understand your site clearly enough to trust it.
             </p>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-canvas/58">
               Void Agency finds the structural problems that block that understanding, then turns them into a prioritized plan your team can implement.
             </p>
             <p className="mt-10 max-w-2xl border-t border-canvas/12 pt-6 text-[10px] uppercase leading-loose tracking-[0.22em] text-canvas/42">
-              BUILT FOR FOUNDERS, GROWTH TEAMS, SAAS COMPANIES, ECOMMERCE BRANDS, LOCAL SERVICE BUSINESSES, AND TECHNICAL OPERATORS WHO NEED CLEAR DIAGNOSIS, PRACTICAL FIXES, AND SOURCE-BACKED SEARCH DECISIONS.
+              BUILT FOR FOUNDERS, GROWTH TEAMS, SAAS COMPANIES, ECOMMERCE BRANDS, LOCAL SERVICE BUSINESSES, AND TECHNICAL OPERATORS WHO NEED CLEAR DIAGNOSIS, PRACTICAL FIXES, AND SEARCH DECISIONS THEY CAN DEFEND.
             </p>
           </ScrollReveal>
 
@@ -663,13 +663,13 @@ export default function VoidAgencyMethodPage() {
       <section className="mx-auto max-w-[1480px] border-b border-canvas/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-10 grid gap-8 lg:grid-cols-[0.4fr_0.6fr]">
           <div>
-            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-canvas/45">AI Search Visibility Audit Checklist</h2>
+            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-canvas/45">Search Visibility Audit Checklist</h2>
             <p className="max-w-xl font-serif text-[2.6rem] md:text-[4.2rem] xl:text-[5.75rem] italic leading-[0.92] tracking-normal">
-              Public evidence, crawl access, and entity clarity before claims.
+              Crawl access, entity clarity, and page structure before claims.
             </p>
           </div>
           <p className="max-w-3xl self-end text-base leading-relaxed text-canvas/58">
-            The checklist organizes the recurring audit questions behind AI-search visibility work. Each item is useful for a person reviewing the site and for systems trying to understand which public source supports which claim.
+            The checklist organizes the recurring audit questions behind search visibility work. Each item helps show what the site says, what crawlers can reach, and where the next fix belongs.
           </p>
         </ScrollReveal>
 
@@ -694,9 +694,9 @@ export default function VoidAgencyMethodPage() {
       <section className="mx-auto max-w-[1480px] border-b border-canvas/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-10 grid gap-8 lg:grid-cols-[0.4fr_0.6fr]">
           <div>
-            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-canvas/45">SOURCE-BACKED METHOD</h2>
+            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-canvas/45">METHOD FROM SITE DATA</h2>
             <p className="max-w-xl font-serif text-[2.6rem] md:text-[4.2rem] xl:text-[5.75rem] italic leading-[0.92] tracking-normal">
-              The method starts with pages and crawl evidence, not generic AI language.
+              The method starts with pages and crawl data, not generic AI language.
             </p>
           </div>
           <p className="max-w-3xl self-end text-base leading-relaxed text-canvas/58">
@@ -719,7 +719,7 @@ export default function VoidAgencyMethodPage() {
 
         <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
           {sourceMap
-            .filter((source) => ['Primary source', 'Agency proof', 'Service/process proof', 'Project proof'].includes(source.role))
+            .filter((source) => ['Primary source', 'Agency record', 'Service/process', 'Project page'].includes(source.role))
             .map((source) => (
               <a
                 key={`${source.role}-${source.href}`}
@@ -739,11 +739,11 @@ export default function VoidAgencyMethodPage() {
       <section id="case-studies" className="mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-12 flex flex-col justify-between gap-6 border-b border-canvas/12 pb-8 md:flex-row md:items-end">
           <h2 className="font-serif text-[4rem] md:text-[6.25rem] xl:text-[8.5rem] italic leading-none tracking-normal">VOID IN ACTION</h2>
-          <span className="text-[10px] uppercase tracking-[0.28em] text-canvas/42">CASE STUDY INDEX</span>
+          <span className="text-[10px] uppercase tracking-[0.28em] text-canvas/42">METHOD EXAMPLE INDEX</span>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {caseStudies.map((study, index) => (
+          {methodExamples.map((study, index) => (
             <div key={study.title}>
               <ScrollReveal delay={index * 0.07} yOffset={18} blur={false}>
                 <CaseStudyCard study={study} />
@@ -759,7 +759,7 @@ export default function VoidAgencyMethodPage() {
             <h2 className="font-serif text-[3.2rem] md:text-[5rem] xl:text-[7rem] italic leading-[0.88] tracking-normal">
               Make your site easier to
               <br />
-              crawl, understand, cite,
+              crawl, understand, trust,
               <br />
               and convert.
             </h2>
