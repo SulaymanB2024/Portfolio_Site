@@ -66,10 +66,10 @@ const methodSteps = [
 ];
 
 const heroRunArtifacts = [
-  { label: 'Pages read', value: '12,842', note: 'seed, sitemap, rendered links' },
-  { label: 'Evidence states', value: '4', note: 'content, challenge, utility, error' },
-  { label: 'Open repairs', value: '42', note: 'review-held recommendations' },
-  { label: 'Package', value: 'Reviewed', note: 'run ID and artifact bound' },
+  { label: 'Sample pages read', value: '12,842', note: 'sanitized seed, sitemap, rendered links' },
+  { label: 'Sample evidence states', value: '4', note: 'content, challenge, utility, error' },
+  { label: 'Sample repairs', value: '42', note: 'demo recommendations held for review' },
+  { label: 'Sample package', value: 'Reviewed', note: 'illustrative run ID and artifact bound' },
 ];
 
 const crawlLedgerRows = [
@@ -179,9 +179,9 @@ const coverageRows = [
 ];
 
 const coverageMetrics = [
-  { label: 'Pages read', value: '12,842' },
+  { label: 'Sample pages', value: '12,842' },
   { label: 'Intent fields', value: '30' },
-  { label: 'Open repairs', value: '42' },
+  { label: 'Sample repairs', value: '42' },
 ];
 
 const coverageLadder = [
@@ -204,6 +204,7 @@ const coverageLadder = [
 ];
 
 const terminalLines = [
+  '# sample output only; not a private client run',
   '$ atlas audit --domain example.com --depth 3 --render',
   'Opening crawl ledger...',
   '13,642 URLs discovered from seed, sitemap, render links',
@@ -377,7 +378,7 @@ export default function AtlasPage() {
               <p className="mb-7 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42 md:mb-8">
                 ATLAS ENGINE
               </p>
-              <h1 className="font-serif text-[clamp(2.7rem,12vw,4.75rem)] font-light leading-[0.95] tracking-normal text-ink md:text-[clamp(3rem,4.8vw,4.75rem)]">
+              <h1 className="font-serif text-[2.7rem] font-light leading-[0.95] tracking-normal text-ink md:text-[3.75rem] xl:text-[4.75rem]">
                 <motion.span
                   className="block md:whitespace-nowrap"
                   style={prefersReducedMotion ? undefined : { color: firstLineColor, opacity: firstLineOpacity, y: firstLineY }}
@@ -443,20 +444,20 @@ export default function AtlasPage() {
               aria-label="Atlas run artifact summary"
             >
               <div className="mb-4 flex items-center justify-between text-[9px] uppercase tracking-[0.22em] text-ink/44">
-                <span>Run artifact</span>
-                <span>reviewed package</span>
+                <span>Sample run artifact</span>
+                <span>sanitized demo package</span>
               </div>
               <dl className="grid grid-cols-2 border-t border-ink/10">
                 {heroRunArtifacts.map((artifact) => (
                   <div key={artifact.label} className="min-h-[7.25rem] border-b border-ink/10 px-4 py-4 odd:border-r odd:border-ink/10">
                     <dt className="text-[9px] uppercase tracking-[0.18em] text-ink/42">{artifact.label}</dt>
-                    <dd className="mt-3 font-serif text-[clamp(1.7rem,3vw,2.6rem)] leading-none text-ink/84">{artifact.value}</dd>
+                    <dd className="mt-3 font-serif text-[1.7rem] md:text-[2.2rem] xl:text-[2.6rem] leading-none text-ink/84">{artifact.value}</dd>
                     <dd className="mt-3 text-[11px] leading-5 text-ink/48">{artifact.note}</dd>
                   </div>
                 ))}
               </dl>
               <p className="mt-5 border-l border-ink/16 pl-4 text-xs leading-6 text-ink/54">
-                The public page should reveal what Atlas measured before it asks the reader to trust the method.
+                The public page shows a sanitized sample run so the method is inspectable without implying private client results.
               </p>
             </motion.aside>
           </div>
@@ -496,10 +497,10 @@ export default function AtlasPage() {
                 >
                   <div className="relative flex items-start gap-4">
                     <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-ink/48">{step.id}</span>
-                    <span className="mt-1.5 h-2 w-2 rounded-full border border-ink/48 bg-canvas shadow-[0_0_0_6px_rgba(241,239,232,0.9)]" />
+                    <span className="mt-1.5 h-2 w-2 rounded-full border border-ink/48 bg-canvas shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-canvas)_90%,transparent)]" />
                   </div>
                   <div className="min-w-0">
-                    <h2 className="font-serif text-[clamp(1.08rem,2.1vw,1.45rem)] font-semibold leading-none tracking-normal text-ink/86">
+                    <h2 className="font-serif text-[1.08rem] md:text-[1.28rem] xl:text-[1.45rem] font-semibold leading-none tracking-normal text-ink/86">
                       {step.title}
                     </h2>
                     <p className="mt-2 max-w-[25rem] text-xs leading-6 text-ink/56">
@@ -586,7 +587,7 @@ function EvidenceSection({
           <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
             EVIDENCE MODEL
           </p>
-          <h2 className="max-w-[13ch] font-serif text-[clamp(2rem,7vw,3.15rem)] font-light leading-none tracking-normal text-ink">
+          <h2 className="max-w-[13ch] font-serif text-[2rem] md:text-[2.65rem] xl:text-[3.15rem] font-light leading-none tracking-normal text-ink">
             Every claim keeps its edge.
           </h2>
           <p className="mt-8 text-sm leading-7 text-ink/58">
@@ -661,7 +662,7 @@ function EvidenceSection({
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-[10px] uppercase tracking-[0.2em] text-ink/48">{step.id}</span>
-                    <span className="h-2 w-2 rounded-full border border-ink/46 bg-canvas shadow-[0_0_0_6px_rgba(241,239,232,0.92)]" />
+                    <span className="h-2 w-2 rounded-full border border-ink/46 bg-canvas shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-canvas)_92%,transparent)]" />
                   </div>
                   <h3 className="mt-5 text-[11px] font-semibold uppercase tracking-[0.24em] text-ink/78">{step.title}</h3>
                   <p className="mt-3 max-w-[14rem] text-xs leading-6 text-ink/52">{step.body}</p>
@@ -758,7 +759,7 @@ function CoverageSection({ prefersReducedMotion }: { prefersReducedMotion: boole
           <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
             COVERAGE MAP
           </p>
-          <h2 className="font-serif text-[clamp(2.2rem,8vw,3.55rem)] font-light leading-[0.98] tracking-normal text-ink">
+          <h2 className="font-serif text-[2.2rem] md:text-[3rem] xl:text-[3.55rem] font-light leading-[0.98] tracking-normal text-ink">
             The map shows where the site goes quiet.
           </h2>
           <p className="mt-8 text-sm leading-7 text-ink/58">
@@ -868,7 +869,7 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
           <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
             UNDER THE HOOD
           </p>
-          <h2 className="font-serif text-[clamp(2rem,7vw,3rem)] font-light leading-none tracking-normal text-ink">
+          <h2 className="font-serif text-[2rem] md:text-[2.6rem] xl:text-[3rem] font-light leading-none tracking-normal text-ink">
             The machinery stays legible.
           </h2>
           <p className="mt-8 text-sm leading-7 text-ink/58">
@@ -903,7 +904,7 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
           whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3, margin: '-6% 0px -6% 0px' }}
           transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
-          className="relative overflow-hidden border border-ink/14 bg-[#edeae1]/72 p-5 shadow-[0_10px_34px_rgba(8,8,7,0.025)]"
+          className="relative overflow-hidden border border-ink/14 bg-canvas-dark/72 p-5 shadow-[0_10px_34px_color-mix(in_srgb,var(--color-ink)_2.5%,transparent)]"
         >
           <div className="mb-5 flex items-center justify-between border-b border-ink/10 pb-4 text-[9px] uppercase tracking-[0.22em] text-ink/44">
             <span>Run ledger</span>
@@ -1026,7 +1027,7 @@ function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boo
           {finalNodes.map((node, index) => (
             <motion.span
               key={`${node.x}-${node.y}`}
-              className="absolute h-2 w-2 rounded-full border border-ink/42 bg-canvas shadow-[0_0_0_7px_rgba(8,8,7,0.04)]"
+              className="absolute h-2 w-2 rounded-full border border-ink/42 bg-canvas shadow-[0_0_0_7px_color-mix(in_srgb,var(--color-ink)_4%,transparent)]"
               style={{ left: node.x, top: node.y }}
               initial={prefersReducedMotion ? false : { opacity: 0 }}
               whileInView={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
@@ -1042,7 +1043,7 @@ function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boo
           <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
             ATLAS ENGINE
           </p>
-          <h2 className="font-serif text-[clamp(2.8rem,12vw,4.75rem)] font-light leading-[0.95] tracking-normal text-ink">
+          <h2 className="font-serif text-[2.8rem] md:text-[3.75rem] xl:text-[4.75rem] font-light leading-[0.95] tracking-normal text-ink">
             A map for
             <br />
             actual repairs.

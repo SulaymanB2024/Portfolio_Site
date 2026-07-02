@@ -71,7 +71,7 @@ export default function AiInformationPage() {
         <section className="grid min-h-[64vh] max-w-full items-end gap-12 pb-14 lg:grid-cols-[0.62fr_0.38fr]">
           <div className="min-w-0">
             <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-ink/48">Public reference</p>
-            <h1 className="max-w-5xl font-serif text-[clamp(2.45rem,10vw,10rem)] italic leading-[0.92] tracking-normal md:leading-[0.86] md:tracking-normal">
+            <h1 className="max-w-5xl font-serif text-[2.45rem] md:text-[6rem] xl:text-[9rem] italic leading-[0.92] tracking-normal md:leading-[0.86] md:tracking-normal">
               <span className="block sm:inline">AI Information</span>{' '}
               <span className="block sm:inline">for Sulayman</span>{' '}
               <span className="block sm:inline">Bowles, Void</span>{' '}

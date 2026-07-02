@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { InternalFooter } from '../components/InternalFooter';
 import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
-import { MARKET_THESES } from '../content/marketTheses';
+import { PUBLIC_MARKET_THESES } from '../content/marketTheses';
 import { RESEARCH_ASSETS } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
@@ -13,26 +13,26 @@ const MARKETS_SEO = getSeoRoute('/markets')!;
 const COIN_ART = '/images/markets/noise-expansion-coin-alpha.png';
 
 const heroLinks = [
-  { label: 'Browse case archive', href: '#case-archive' },
+  { label: 'Browse public notes', href: '#case-archive' },
   { label: 'View market research types', href: '#research-types' },
-  { label: 'Access investment memos', href: '#investment-memos' },
+  { label: 'Open educational artifacts', href: '#investment-memos' },
 ];
 
 const researchTypes = [
   {
     index: '01',
-    title: 'Traditional cases',
-    copy: 'Equity research, business quality, valuation logic, catalysts, and downside cases.',
+    title: 'Business quality',
+    copy: 'Operating logic, assumptions, downside cases, and source-backed business research.',
   },
   {
     index: '02',
-    title: 'Crypto protocols',
-    copy: 'Protocol mechanics, token incentives, liquidity structure, governance, and adoption risk.',
+    title: 'Search infrastructure',
+    copy: 'AI crawler policy, source graphs, crawlability, and public data hygiene.',
   },
   {
     index: '03',
     title: 'Market systems',
-    copy: 'Rates, liquidity regimes, volatility, credit stress, commodities, and capital flows.',
+    copy: 'Rates, liquidity regimes, volatility, credit stress, commodities, and capital flows with visible boundaries.',
   },
   {
     index: '04',
@@ -98,14 +98,14 @@ function MarketsHero() {
             Markets Research
           </p>
 
-          <h1 className="font-serif text-[clamp(4.2rem,4.65vw,5rem)] italic leading-[0.9] text-ink text-balance">
+          <h1 className="font-serif text-[4.2rem] md:text-[4.6rem] xl:text-[5rem] italic leading-[0.9] text-ink text-balance">
             Separate signal
             <br />
             from noise.
           </h1>
 
           <p className="mt-8 max-w-[385px] text-[15px] leading-relaxed text-ink/62 md:text-base">
-            Evidence-driven research across markets, crypto, and investment strategy.
+            Source-bounded research notes across search infrastructure, public data, and finance/data assumptions.
           </p>
 
           <a
@@ -143,7 +143,7 @@ function ResearchTypesSection() {
       <div className="mb-10 flex flex-col gap-3 border-t border-ink/12 pt-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="mb-3 text-[10px] uppercase tracking-[0.28em] text-ink/48">Research types</p>
-          <h2 className="font-serif text-[clamp(2.5rem,4.8vw,5.4rem)] italic leading-[0.9] text-ink">
+          <h2 className="font-serif text-[2.5rem] md:text-[4rem] xl:text-[5.25rem] italic leading-[0.9] text-ink">
             Four ways into the work.
           </h2>
         </div>
@@ -154,7 +154,7 @@ function ResearchTypesSection() {
 
       <div className="grid gap-px border border-ink/12 bg-ink/12 md:grid-cols-2 lg:grid-cols-4">
         {researchTypes.map((type) => (
-          <article key={type.index} className="min-h-[245px] bg-[#f3f1eb] p-6 transition-colors duration-200 hover:bg-[#ebe8df]">
+          <article key={type.index} className="min-h-[245px] bg-canvas p-6 transition-colors duration-200 hover:bg-canvas-dark">
             <span className="font-serif text-lg italic text-ink/42">{type.index}</span>
             <h3 className="mt-12 text-[11px] uppercase tracking-[0.24em] text-ink">{type.title}</h3>
             <p className="mt-4 text-sm leading-relaxed text-ink/58">{type.copy}</p>
@@ -170,13 +170,13 @@ function CaseArchiveSection() {
     <section id="case-archive" className="mx-auto w-full max-w-[1480px] px-4 py-16 md:px-8 md:py-24 xl:px-10">
       <div className="mb-8 border-t border-ink/12 pt-6">
         <p className="mb-3 text-[10px] uppercase tracking-[0.28em] text-ink/48">Case archive</p>
-        <h2 className="font-serif text-[clamp(2.5rem,4.8vw,5.4rem)] italic leading-[0.9] text-ink">
+        <h2 className="font-serif text-[2.5rem] md:text-[4rem] xl:text-[5.25rem] italic leading-[0.9] text-ink">
           Notes with source boundaries.
         </h2>
       </div>
 
       <div className="divide-y divide-ink/12 border-y border-ink/12">
-        {MARKET_THESES.map((thesis, index) => (
+        {PUBLIC_MARKET_THESES.map((thesis, index) => (
           <a
             key={thesis.slug}
             href={`/markets/${thesis.slug}`}
@@ -206,7 +206,7 @@ function InvestmentMemosSection() {
       <div className="grid gap-10 border-y border-ink/12 py-10 lg:grid-cols-[0.78fr_1fr] lg:items-start">
         <div>
           <p className="mb-3 text-[10px] uppercase tracking-[0.28em] text-ink/48">Investment memos</p>
-          <h2 className="font-serif text-[clamp(2.5rem,4.8vw,5.4rem)] italic leading-[0.9] text-ink">
+          <h2 className="font-serif text-[2.5rem] md:text-[4rem] xl:text-[5.25rem] italic leading-[0.9] text-ink">
             Artifacts, not advice.
           </h2>
         </div>
@@ -240,7 +240,7 @@ export default function MarketsPage() {
   }, []);
 
   return (
-    <main id="top" className="min-h-screen overflow-x-hidden bg-[#f3f1eb] font-sans text-ink selection:bg-ink selection:text-canvas">
+    <main id="top" className="min-h-screen overflow-x-hidden bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
       <PageTechnicalChrome tone="light" />
       <InternalHeader activePath="/markets" tone="light" />
       <MarketsHero />

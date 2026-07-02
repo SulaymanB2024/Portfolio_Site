@@ -38,7 +38,7 @@ export default function AustinTechnicalSeoPage() {
         <section className="grid grid-cols-1 gap-8 pb-20 pt-12 lg:min-h-[calc(100vh-104px)] lg:grid-cols-[minmax(0,0.48fr)_minmax(340px,0.52fr)] lg:gap-12 lg:pt-16 xl:pt-20">
           <div className="self-end">
             <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-current/48">Austin technical SEO</p>
-            <h1 className="max-w-6xl font-serif text-[clamp(3.8rem,9vw,10rem)] italic leading-[0.84] tracking-normal">
+            <h1 className="max-w-6xl font-serif text-[3.8rem] md:text-[6.5rem] xl:text-[9rem] italic leading-[0.84] tracking-normal">
               Austin technical SEO and AI-search visibility.
             </h1>
             <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/64 lg:mt-10">
@@ -90,7 +90,7 @@ export default function AustinTechnicalSeoPage() {
       <PageFrame className="relative z-10 py-16">
         <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.55fr_0.45fr]">
           <div>
-            <h2 className="font-serif text-[clamp(3rem,5vw,6rem)] italic leading-[0.9] tracking-normal">
+            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
               Built for evidence, not vague local SEO.
             </h2>
             <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">

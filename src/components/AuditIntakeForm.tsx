@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import ArrowUpRight from 'lucide-react/dist/esm/icons/arrow-up-right.js';
 import { useState, type FormEvent } from 'react';
 
 type AuditIntakeFormProps = {
@@ -102,7 +102,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
   if (formStatus === 'success') {
     return (
       <div className={`text-canvas font-sans font-light tracking-widest uppercase text-base md:text-lg py-6 border border-canvas/20 px-8 rounded bg-canvas/5 max-w-lg mt-4 ${className}`}>
-        <p className="text-[#a3e635] mb-2 font-medium">Brief Received</p>
+        <p className="mb-2 font-medium text-accent">Brief Received</p>
         <p className="text-[10px] text-canvas/60 normal-case tracking-normal leading-relaxed">
           Thank you. Your message has been sent successfully. I will review your submission and get back to you shortly.
         </p>

@@ -262,7 +262,7 @@ function SitemapPage() {
           <p className="text-[10px] uppercase tracking-[0.28em] text-ink/58">
             Sulayman Bowles / Sitemap
           </p>
-          <h1 className="mt-10 font-serif text-[clamp(3rem,10vw,8rem)] italic leading-[0.86] tracking-normal">
+          <h1 className="mt-10 font-serif text-[3.5rem] md:text-[5.5rem] xl:text-[8rem] italic leading-[0.86] tracking-normal">
             HTML Sitemap
           </h1>
           <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink/64">
@@ -299,12 +299,12 @@ function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
   return (
     <main
       className={`flex min-h-screen items-center justify-center px-6 font-sans ${
-        dark ? 'bg-[#080807] text-[#f1efe8]' : 'bg-canvas text-ink'
+        dark ? 'bg-ink text-canvas' : 'bg-canvas text-ink'
       }`}
     >
       <div className="w-full max-w-[1480px] border-t border-current/20 pt-6">
         <div className="text-[10px] uppercase tracking-[0.32em] opacity-45">Loading</div>
-        <h1 className="mt-6 font-serif text-[clamp(3rem,9vw,8rem)] italic leading-[0.86] tracking-normal">
+        <h1 className="mt-6 font-serif text-[3.4rem] md:text-[5.75rem] xl:text-[8rem] italic leading-[0.86] tracking-normal">
           {route?.h1 ?? HOME_SEO.h1}
         </h1>
       </div>
@@ -361,7 +361,7 @@ function HomePage() {
     }
 
     let frameId = 0;
-    const darkBackgroundClasses = new Set(['bg-ink', 'bg-[#080807]', 'site-page-dark']);
+    const darkBackgroundClasses = new Set(['bg-ink', 'site-page-dark']);
     const toneIgnoreSelector = '[data-header-tone-ignore="true"]';
 
     const isDarkBackground = (background: string) => {
@@ -512,7 +512,7 @@ function HomePage() {
                animate={{ opacity: 1 }}
                exit={{ opacity: 0 }}
                transition={{ duration: 0.4 }}
-               className="font-serif text-6xl md:text-9xl font-light tracking-tighter flex items-baseline"
+               className="font-serif text-6xl md:text-9xl font-light tracking-normal flex items-baseline"
             >
               <span className="italic">{counter}</span>
               <span className="text-xl md:text-2xl ml-2 font-sans tracking-widest">%</span>
@@ -584,7 +584,7 @@ function HomePage() {
             <StaggeredText 
 	               text="I build systems for search, finance, and decision-making. The common thread is evidence."
                delay={0.1}
-               className="font-serif italic font-light text-[9vw] sm:text-[8vw] md:text-6xl lg:text-[6rem] leading-[1.05] tracking-tight mb-4 md:mb-8"
+               className="font-serif italic font-light text-5xl sm:text-6xl md:text-6xl lg:text-[6rem] leading-[1.05] tracking-normal mb-4 md:mb-8"
             />
           </div>
           <div className="md:col-span-4 md:col-start-8 flex flex-col">
@@ -696,7 +696,7 @@ function HomePage() {
                  <ScrollReveal delay={0.2} className="absolute bottom-8 right-4 pointer-events-none z-10 md:right-8 lg:right-10">
                    <h4 
 	                      style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
-                      className="text-[12vw] md:text-[8vw] lg:text-[9vw] font-serif text-canvas leading-[0.85] font-light uppercase tracking-tighter text-right"
+                      className="text-[4rem] md:text-[6rem] lg:text-[7rem] font-serif text-canvas leading-[0.85] font-light uppercase tracking-normal text-right"
                    >
                      <span className="block"><ScrambleText text="AT" trigger="hover" /></span>
                      <span className="block italic"><ScrambleText text="LAS" trigger="hover" /></span>
@@ -738,7 +738,7 @@ function HomePage() {
                  
                  {/* Title overlapping canvas */}
                  <ScrollReveal delay={0.2} className="absolute top-8 left-4 pointer-events-none z-10 text-canvas mix-blend-difference select-none md:left-8 lg:left-10">
-                   <h4 className="text-[15vw] md:text-[8vw] lg:text-[9vw] font-serif leading-[0.85] font-light uppercase tracking-tighter text-left">
+                   <h4 className="text-[4.5rem] md:text-[6rem] lg:text-[7rem] font-serif leading-[0.85] font-light uppercase tracking-normal text-left">
                      <span className="block opacity-90"><ScrambleText text="MAR" trigger="hover" /></span>
                      <span className="block italic opacity-70"><ScrambleText text="KETS" trigger="hover" /></span>
                    </h4>
@@ -786,7 +786,7 @@ function HomePage() {
                 <ScrollReveal delay={0.2} blur={false}>
                   <h4 
 	                    style={{ viewTransitionName: 'void-title' } as CSSProperties}
-                    className="text-[20vw] leading-none font-serif tracking-tighter uppercase text-canvas pb-8 opacity-90 transition-opacity duration-1000"
+                    className="text-[5rem] md:text-[8rem] lg:text-[10rem] leading-none font-serif tracking-normal uppercase text-canvas pb-8 opacity-90 transition-opacity duration-1000"
                   >
                     <ScrambleText text="VOID" trigger="hover" />
                   </h4>
@@ -809,13 +809,13 @@ function HomePage() {
             
             {/* Background huge offset typography */}
             <motion.div style={{ x: h1Transform }} className="flex whitespace-nowrap mb-8 md:mb-16 -ml-[20%]">
-              <span className="text-[15vw] font-serif uppercase tracking-tighter text-outline opacity-20 pr-16 select-none">
+              <span className="text-[4.5rem] md:text-[7rem] xl:text-[9rem] font-serif uppercase tracking-normal text-outline opacity-20 pr-16 select-none">
                 EVIDENCE BEFORE
               </span>
             </motion.div>
             
             <motion.div style={{ x: h2Transform }} className="flex whitespace-nowrap -ml-[40%]">
-               <span className="text-[15vw] font-serif uppercase tracking-tighter opacity-10 pr-16 select-none leading-none">
+               <span className="text-[4.5rem] md:text-[7rem] xl:text-[9rem] font-serif uppercase tracking-normal opacity-10 pr-16 select-none leading-none">
                  INTERPRETATION
                </span>
             </motion.div>
@@ -867,7 +867,7 @@ function HomePage() {
                         >
                           <div className="relative z-10 flex flex-col pointer-events-none w-full">
                             <span className="font-sans text-[10px] tracking-widest uppercase opacity-50 mb-6 md:mb-8">{item.num}</span>
-                            <h4 className="text-4xl md:text-4xl lg:text-5xl font-serif tracking-tighter uppercase font-light leading-none mb-6 md:mb-8">
+                            <h4 className="text-4xl md:text-4xl lg:text-5xl font-serif tracking-normal uppercase font-light leading-none mb-6 md:mb-8">
                               {item.title}
                             </h4>
                             <p className="font-sans text-sm tracking-normal leading-relaxed opacity-[0.62] max-w-[90%] md:max-w-[78%]">
@@ -1311,7 +1311,7 @@ function HomePage() {
                     </ScrollReveal>
                     
                     <ScrollReveal delay={0.1} blur={false}>
-                      <h4 className="text-[12vw] leading-[0.8] font-serif uppercase font-light tracking-tighter mb-12 ">
+                      <h4 className="mb-12 font-serif text-[4rem] font-light uppercase leading-[0.8] tracking-normal md:text-[6rem] lg:text-[7rem]">
                          <span className="block italic opacity-90">Send</span>
                          <span className="block opacity-80">The Brief</span>
                       </h4>

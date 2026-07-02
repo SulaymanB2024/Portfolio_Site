@@ -19,82 +19,111 @@ export interface MarketThesis {
   content: string[];
   metrics?: Array<{ label: string; value: string }>;
   sources?: Array<{ label: string; href: string }>;
+  indexable?: boolean;
+  claimBoundary?: string;
 }
 
 export const MARKET_THESES: MarketThesis[] = [
   {
     slug: 'network-monopolies',
     number: '01',
-    category: 'MACRO EQUITY STRATEGY',
-    title: 'On the Structural Allocation to Network Monopolies under Perpetual Debasement',
-    seoTitle: 'Network Monopolies & Debasement',
-    subtitle: 'Why global scale network effects act as sovereign-grade collateral in credit expansion cycles.',
+    category: 'ARCHIVED RESEARCH FRAME',
+    title: 'Archived Network Effects Memo',
+    seoTitle: 'Archived Network Effects Memo',
+    subtitle: 'A retained methodology example for separating system assumptions from public proof.',
     seoDescription:
-      'Market research memo by Sulayman Bowles on network monopolies, fiat debasement, pricing power, platform margins, and allocation logic for long-horizon investors.',
+      'Archived, noindexed methodology note by Sulayman Bowles retained for context. It is not investment advice, allocation guidance, or a current recommendation.',
     image: '/og-default.png',
     date: '2026.04.18',
     readTime: '09 MIN',
     author: 'SULAYMAN BOWLES',
-    conviction: '9.4 / 10',
-    horizon: '7 - 10 YEARS',
-    allocation: '40.0%',
-    risks: 'Antitrust regulation, hardware supply chain choke points, margin compression.',
-    formula: 'V(N) \\propto N \\cdot \\log(N) \\cdot R_{debase}',
-    formulaLabel: 'Liquidity Adjusted Network Value Multiplier',
+    conviction: 'ARCHIVE',
+    horizon: 'HISTORICAL',
+    allocation: 'NOT ADVICE',
+    risks:
+      'Archived material may include old framing. It should not be treated as a current recommendation, forecast, price target, or allocation model.',
+    formula: 'research frame = assumption + evidence required + claim boundary',
+    formulaLabel: 'Archived Method Frame',
+    indexable: false,
+    metrics: [
+      { label: 'Status', value: 'ARCHIVE' },
+      { label: 'Use', value: 'EDUCATIONAL' },
+      { label: 'Boundary', value: 'NOT ADVICE' },
+    ],
+    claimBoundary:
+      'Archived strategy note retained for context. It is not investment advice, allocation guidance, a price target, or a current recommendation.',
     content: [
-      'Modern asset allocation models fail to account for the systemic debasement of fiat denominators. When central bank balance sheets expand at a secular compound annual rate of 8% to 12%, nominal valuations become a vector of monetary dilution rather than organic growth. In this regime, traditional discounted cash flow (DCF) models collapse under unstable discount rates.',
-      'To preserve purchasing power, capital must settle in assets with high pricing power and low capital expenditure requirements. Global network monopolies represent the ultimate sink for excess liquidity. Because their margins are protected by high switching costs and near-zero marginal distribution costs, they can absorb monetary expansion and pass inflation directly to consumers.',
-      'Our allocation strategy prioritizes platforms that function as private tax collectors on global digital transactions. As long as money supply velocity remains suppressed and aggregate credit expansion continues, these digital estates will compound value at a rate that outpaces currency debasement by an average of 450 basis points annually.',
+      'This archived note is retained only to preserve research-history context. It now functions as a methodology example: name a system-level assumption, identify the public evidence needed to support it, and keep unsupported forecast language out of current public claims.',
+      'The useful signal is the discipline behind the draft, not any old allocation, return, or macro conclusion. Current public research should be read through the newer AI-search, public-data, and canonical-identity articles.',
+      'The route is excluded from the sitemap and marked noindex,nofollow so it does not compete with the current source graph or appear as a current recommendation.',
     ],
   },
   {
     slug: 'computational-commodity-systems',
     number: '02',
-    category: 'DECENTRALIZED INFRASTRUCTURE',
-    title: 'Computational Commodity Systems: Node Architecture & Cryptographic Resource Pricing',
-    seoTitle: 'Computational Commodity Systems',
-    subtitle: 'Evaluating the emerging market for trustless, zero-knowledge verification hardware.',
+    category: 'ARCHIVED RESEARCH FRAME',
+    title: 'Archived Compute Infrastructure Memo',
+    seoTitle: 'Archived Compute Infrastructure Memo',
+    subtitle: 'A retained methodology example for technical-infrastructure assumptions and evidence limits.',
     seoDescription:
-      'Market research memo by Sulayman Bowles on decentralized compute, node architecture, zero-knowledge verification hardware, resource pricing, and protocol incentives.',
+      'Archived, noindexed methodology note by Sulayman Bowles retained for context. It is not investment advice, token guidance, or a current recommendation.',
     image: '/og-default.png',
     date: '2026.05.02',
     readTime: '11 MIN',
     author: 'SULAYMAN BOWLES',
-    conviction: '8.6 / 10',
-    horizon: '5 - 8 YEARS',
-    allocation: '25.0%',
-    risks: 'Smart contract vulnerability, hardware supply shocks, network incentive dilution.',
-    formula: 'P_{compute} = \\frac{\\mu_{demand}}{\\sigma_{capacity}} \\cdot \\Theta_{incentive}',
-    formulaLabel: 'Algorithmic Resource Pricing Equilibrium',
+    conviction: 'ARCHIVE',
+    horizon: 'HISTORICAL',
+    allocation: 'NOT ADVICE',
+    risks:
+      'Archived material may include old framing. It should not be treated as current protocol diligence, token guidance, or infrastructure-market advice.',
+    formula: 'infrastructure claim = capacity signal + demand evidence + operational risk',
+    formulaLabel: 'Archived Method Frame',
+    indexable: false,
+    metrics: [
+      { label: 'Status', value: 'ARCHIVE' },
+      { label: 'Use', value: 'EDUCATIONAL' },
+      { label: 'Boundary', value: 'NOT ADVICE' },
+    ],
+    claimBoundary:
+      'Archived strategy note retained for context. It is not investment advice, allocation guidance, a price target, or a current recommendation.',
     content: [
-      'The centralization of computing power in hyperscale data centers poses a structural threat to sovereign privacy and system redundancy. Decentralized physical infrastructure networks (DePIN) offer a viable alternative by coordinating globally distributed compute hardware via trustless smart contracts.',
-      'We view raw compute capacity (GPU cycles, zero-knowledge proof generation, and machine learning model training) as the defining commodity of the next half-century. By tokenizing compute supply, decentralized markets align global incentives, lowering barrier to entry for developers and reducing overall infrastructure overhead by 60% compared to legacy cloud providers.',
-      'Our investment framework focuses on protocol coordination layers. By standardizing verification mechanisms and establishing algorithmic market clearing prices, these systems turn volatile hardware supplies into reliable, institutional-grade compute assets.',
+      'This archived note is retained as a research-process artifact, not as a live market view. The current standard is to separate technical infrastructure observations from unsupported claims about market size, protocol durability, or future token economics.',
+      'A useful compute-infrastructure memo needs visible evidence for capacity, demand, verification costs, reliability, security assumptions, and operational bottlenecks. Without those inputs, the public page should describe the question being studied rather than imply a current conclusion.',
+      'The route is excluded from the sitemap and marked noindex,nofollow so it remains available as private-context history without becoming part of the current public research surface.',
     ],
   },
   {
     slug: 'fiat-horizon',
     number: '03',
-    category: 'MONETARY METRICS',
-    title: 'Fiat Horizon: Standard Deviation Boundaries, Credit Expansion, and Hard-Money Backings',
-    seoTitle: 'Fiat Horizon & Hard-Money Backing',
-    subtitle: 'A quantitative study of volatility bands surrounding fiat currency velocity and commodity reserves.',
+    category: 'ARCHIVED RESEARCH FRAME',
+    title: 'Archived Monetary Assumptions Memo',
+    seoTitle: 'Archived Monetary Assumptions Memo',
+    subtitle: 'A retained methodology example for macro assumptions, source limits, and public claim boundaries.',
     seoDescription:
-      'Market research memo by Sulayman Bowles on fiat velocity, credit expansion, hard-money reserves, gold and Bitcoin backing, volatility bands, and solvency risk.',
+      'Archived, noindexed methodology note by Sulayman Bowles retained for context. It is not investment advice, macro guidance, or a current recommendation.',
     image: '/og-default.png',
     date: '2026.05.15',
     readTime: '12 MIN',
     author: 'SULAYMAN BOWLES',
-    conviction: '9.8 / 10',
-    horizon: '10+ YEARS',
-    allocation: '35.0%',
-    risks: 'Central bank digital currency overrides, custody confiscation, short-term liquidity squeezes.',
-    formula: 'B_{backing} = \\sum (Res_{gold} + Net_{bitcoin}) \\div M_{2}',
-    formulaLabel: 'Sovereign Solvency Hard-Backing Ratio',
+    conviction: 'ARCHIVE',
+    horizon: 'HISTORICAL',
+    allocation: 'NOT ADVICE',
+    risks:
+      'Archived material may include old framing. It should not be treated as current macro research, portfolio guidance, or asset recommendation.',
+    formula: 'macro note = source data + assumption table + uncertainty boundary',
+    formulaLabel: 'Archived Method Frame',
+    indexable: false,
+    metrics: [
+      { label: 'Status', value: 'ARCHIVE' },
+      { label: 'Use', value: 'EDUCATIONAL' },
+      { label: 'Boundary', value: 'NOT ADVICE' },
+    ],
+    claimBoundary:
+      'Archived strategy note retained for context. It is not investment advice, allocation guidance, a price target, or a current recommendation.',
     content: [
-      'The current international monetary architecture operates on a confidence model that is increasingly detached from physical constraints. When sovereign debt to GDP ratios exceed 120%, the mathematical paths to solvency narrow to two options: outright default or financial repression via negative real interest rates.',
-      'We track the standard deviation boundaries of fiat currency velocity. As velocity drops toward its historical lower bounds, the marginal utility of additional debt creation declines, leading to currency debasement. In this environment, hard assets - specifically physical gold and decentralized digital assets like Bitcoin - serve as the absolute counterweight to credit expansion.',
-      'Our metric models show that holding gold and Bitcoin provides an asymmetric protection profile. They carry no counterparty risk, cannot be arbitrarily inflated by committee decree, and behave as highly liquid sovereign-grade collateral when credit confidence shifts.',
+      'This archived note is retained as a reminder that macro writing needs stricter evidence boundaries than ordinary commentary. Public pages should distinguish measured data, inferred relationships, scenario analysis, and unsupported recommendations.',
+      'A useful monetary-assumptions memo needs source tables, defined windows, clear units, and uncertainty language. When those pieces are missing, the safer public artifact is a methodology note rather than a live claim about assets, solvency, or portfolio construction.',
+      'The route is excluded from the sitemap and marked noindex,nofollow so it remains available as context without becoming part of the current public research surface.',
     ],
   },
   {
@@ -226,6 +255,8 @@ export const MARKET_THESES: MarketThesis[] = [
     ],
   },
 ];
+
+export const PUBLIC_MARKET_THESES = MARKET_THESES.filter((thesis) => thesis.indexable !== false);
 
 export function getMarketThesisBySlug(slug: string) {
   return MARKET_THESES.find((thesis) => thesis.slug === slug);

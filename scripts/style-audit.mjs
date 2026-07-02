@@ -3,11 +3,11 @@ import { join } from 'node:path';
 
 const ROOTS = ['src/App.tsx', 'src/pages', 'src/components'];
 const PATTERNS = [
-  ['hard-coded hex utilities', /\b(?:bg|text|border)-\[#/g],
-  ['negative or tight tracking utilities', /\btracking-(?:\[-|tight|tighter)/g],
-  ['viewport-scaled text utilities', /\btext-\[(?:clamp\([^,\]]+,[^,\]]*vw|[^\]]*vw[^\]]*)\]/g],
-  ['large radius utilities', /\brounded-(?:2xl|3xl|full)\b/g],
-  ['terminal font utilities', /\bfont-mono\b/g],
+  ['hard-coded color utilities', /\b(?:bg|text|border|decoration|shadow|drop-shadow)-\[[^\]]*(?:#|rgba\()/g, 0],
+  ['negative or tight tracking utilities', /\btracking-(?:\[-|tight|tighter)/g, 0],
+  ['viewport-scaled text utilities', /\btext-\[(?:clamp\([^,\]]+,[^,\]]*vw|[^\]]*vw[^\]]*)\]/g, 0],
+  ['large radius utilities', /\brounded-(?:2xl|3xl|full)\b/g, 26],
+  ['terminal font utilities', /\bfont-mono\b/g, 17],
 ];
 
 function walk(path) {
@@ -21,7 +21,7 @@ function walk(path) {
 }
 
 const files = ROOTS.flatMap(walk).filter((file) => /\.(tsx|ts|css)$/.test(file));
-const report = PATTERNS.map(([label, pattern]) => {
+const report = PATTERNS.map(([label, pattern, maxAllowed]) => {
   let count = 0;
   const examples = [];
 
@@ -35,16 +35,20 @@ const report = PATTERNS.map(([label, pattern]) => {
     }
   }
 
-  return { label, count, examples };
+  return { label, count, examples, maxAllowed };
 });
 
 console.log('Homepage-led style drift audit');
 for (const item of report) {
-  console.log(`- ${item.label}: ${item.count}`);
+  const status = item.count <= item.maxAllowed ? 'ok' : `over budget ${item.maxAllowed}`;
+  console.log(`- ${item.label}: ${item.count} (${status})`);
   if (item.examples.length) console.log(`  examples: ${item.examples.join(', ')}`);
 }
 
-const risky = report.filter((item) => item.label !== 'terminal font utilities' && item.count > 0);
-if (risky.length) {
-  console.log('\nNote: this audit is informational. Use it to shrink route-specific drift over time.');
+const failures = report.filter((item) => item.count > item.maxAllowed);
+if (failures.length) {
+  console.error('\nStyle drift budget exceeded. Keep new work on theme tokens, fixed breakpoint typography, and shared primitives.');
+  process.exitCode = 1;
+} else {
+  console.log('\nStyle drift budgets passed. Large radius and terminal-font counts remain capped because several are intentional circular marks or code/evidence panels.');
 }

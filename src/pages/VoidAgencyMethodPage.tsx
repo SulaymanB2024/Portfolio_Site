@@ -126,7 +126,7 @@ const caseStudies: CaseStudy[] = [
 
 function ArrowLink({ children, href = '#', id }: { children: ReactNode; href?: string; id?: string }) {
   return (
-    <a id={id} href={href} className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/70 transition-colors hover:text-[#f1efe8]">
+    <a id={id} href={href} className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-canvas/70 transition-colors hover:text-canvas">
       {children}
       <span aria-hidden="true">↗</span>
     </a>
@@ -138,13 +138,13 @@ function CircleAuditButton({ className = '', id }: { className?: string; id?: st
     <motion.a
       href="/#contact"
       id={id}
-      className={`relative grid h-28 w-28 place-items-center overflow-hidden rounded-full bg-[#f1efe8] text-center text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-[#080807] md:h-32 md:w-32 ${className}`}
+      className={`relative grid h-28 w-28 place-items-center overflow-hidden rounded-full bg-canvas text-center text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-ink md:h-32 md:w-32 ${className}`}
       whileHover={{ scale: 1.045 }}
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
     >
       <motion.span
-        className="absolute inset-2 rounded-full border border-[#080807]/14"
+        className="absolute inset-2 rounded-full border border-ink/14"
         animate={{ rotate: 360 }}
         transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
       />
@@ -160,7 +160,7 @@ function CircleAuditButton({ className = '', id }: { className?: string; id?: st
 function MethodVisual({ type }: { type: MethodColumn['visual'] }) {
   if (type === 'crawl') {
     return (
-      <svg viewBox="0 0 260 132" className="h-32 w-full text-[#f1efe8]" aria-hidden="true">
+      <svg viewBox="0 0 260 132" className="h-32 w-full text-canvas" aria-hidden="true">
         <g fill="none" stroke="currentColor" strokeWidth="1" opacity="0.48">
           <rect x="96" y="10" width="68" height="24" />
           <rect x="20" y="82" width="58" height="24" />
@@ -201,7 +201,7 @@ function MethodVisual({ type }: { type: MethodColumn['visual'] }) {
 
   if (type === 'repair') {
     return (
-      <svg viewBox="0 0 260 132" className="h-32 w-full text-[#f1efe8]" aria-hidden="true">
+      <svg viewBox="0 0 260 132" className="h-32 w-full text-canvas" aria-hidden="true">
         <g fill="none" stroke="currentColor" strokeWidth="1" opacity="0.28">
           <path d="M20 28 L64 18 L88 50 L48 70 L94 100 L22 112" />
           <path d="M20 96 L70 72 L105 110" />
@@ -222,16 +222,16 @@ function MethodVisual({ type }: { type: MethodColumn['visual'] }) {
 
   return (
     <div className="grid gap-4">
-      <svg viewBox="0 0 260 82" className="h-20 w-full text-[#f1efe8]" aria-hidden="true">
+      <svg viewBox="0 0 260 82" className="h-20 w-full text-canvas" aria-hidden="true">
         <rect x="1" y="1" width="258" height="80" fill="none" stroke="currentColor" opacity="0.18" />
         <path d="M16 62 C52 54 54 31 86 38 S134 66 169 42 S214 20 244 23" fill="none" stroke="#B7C8A8" strokeWidth="1.4" />
         <path d="M16 62 H244 M16 42 H244 M16 22 H244" stroke="currentColor" opacity="0.1" />
       </svg>
-      <div className="grid gap-2 text-[9px] uppercase tracking-[0.18em] text-[#f1efe8]/52">
+      <div className="grid gap-2 text-[9px] uppercase tracking-[0.18em] text-canvas/52">
         {['INDEXABLE PAGES', 'QUERY BUCKETS', 'AI CRAWLER ACCESS', 'CONVERSION EVENTS'].map((metric) => (
-          <div key={metric} className="flex justify-between border-b border-[#f1efe8]/10 pb-2">
+          <div key={metric} className="flex justify-between border-b border-canvas/10 pb-2">
             <span>{metric}</span>
-            <span className="text-[#b7c8a8]/80">TRACKED</span>
+            <span className="text-accent/80">TRACKED</span>
           </div>
         ))}
       </div>
@@ -242,16 +242,16 @@ function MethodVisual({ type }: { type: MethodColumn['visual'] }) {
 function MethodColumnView({ item }: { item: MethodColumn }) {
   return (
     <motion.article
-      className="group border-[#f1efe8]/12 py-8 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] md:border-r md:px-6 md:last:border-r-0"
+      className="group border-canvas/12 py-8 transition-[background-color,border-color] duration-500 hover:bg-canvas/[0.025] md:border-r md:px-6 md:last:border-r-0"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
     >
-      <div className="mb-10 flex items-start justify-between text-[10px] uppercase tracking-[0.32em] text-[#f1efe8]/38">
-        <span className="font-serif text-3xl italic tracking-normal text-[#f1efe8]/64 transition-colors duration-500 group-hover:text-[#f1efe8]">{item.number}</span>
+      <div className="mb-10 flex items-start justify-between text-[10px] uppercase tracking-[0.32em] text-canvas/38">
+        <span className="font-serif text-3xl italic tracking-normal text-canvas/64 transition-colors duration-500 group-hover:text-canvas">{item.number}</span>
         <span>METHOD</span>
       </div>
-      <h3 className="mb-6 text-xs font-medium uppercase tracking-[0.38em] text-[#f1efe8]">{item.title}</h3>
-      <p className="mb-8 text-sm leading-relaxed text-[#f1efe8]/58">{item.copy}</p>
+      <h3 className="mb-6 text-xs font-medium uppercase tracking-[0.38em] text-canvas">{item.title}</h3>
+      <p className="mb-8 text-sm leading-relaxed text-canvas/58">{item.copy}</p>
       <div className="transition-opacity duration-500 group-hover:opacity-100 md:opacity-75">
         <MethodVisual type={item.visual} />
       </div>
@@ -381,21 +381,21 @@ function ProcessStepCard({ step, index }: { step: ProcessStep; index: number }) 
   const [isHovered, setIsHovered] = useState(false);
   return (
     <motion.div
-      className="group relative border-[#f1efe8]/12 p-6 transition-[background-color,border-color] duration-500 hover:bg-[#f1efe8]/[0.025] md:border-r md:last:border-r-0"
+      className="group relative border-canvas/12 p-6 transition-[background-color,border-color] duration-500 hover:bg-canvas/[0.025] md:border-r md:last:border-r-0"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-[#f1efe8]/38">
+      <div className="mb-12 flex items-start justify-between text-[10px] uppercase tracking-[0.3em] text-canvas/38">
         <span>{String(index + 1).padStart(2, '0')}</span>
         <span>{index < 3 ? '→' : 'END'}</span>
       </div>
-      <div className="mb-8 text-[#f1efe8]/58 transition-colors duration-500 group-hover:text-[#f1efe8]/82">
+      <div className="mb-8 text-canvas/58 transition-colors duration-500 group-hover:text-canvas/82">
         <ProcessIcon type={step.icon} isHovered={isHovered} />
       </div>
-      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-[#f1efe8]">{step.title}</h3>
-      <p className="text-sm leading-relaxed text-[#f1efe8]/55">{step.copy}</p>
+      <h3 className="mb-4 text-xs uppercase tracking-[0.34em] text-canvas">{step.title}</h3>
+      <p className="text-sm leading-relaxed text-canvas/55">{step.copy}</p>
     </motion.div>
   );
 }
@@ -405,25 +405,25 @@ function CaseStudyVisual({ type, isHovered }: { type: CaseStudy['visual']; isHov
     const rows = ['/blog/', '/category/', '/product/', '/old/', '/tag/', '/search/', '/page/2/'];
     return (
       <div className="grid gap-4">
-        <div className="border border-[#f1efe8]/12 p-4">
-          <div className="mb-3 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/75">example.com</div>
-          <div className="grid gap-2 text-[10px] uppercase tracking-[0.16em] text-[#f1efe8]/46">
+        <div className="border border-canvas/12 p-4">
+          <div className="mb-3 text-[10px] uppercase tracking-[0.24em] text-canvas/75">example.com</div>
+          <div className="grid gap-2 text-[10px] uppercase tracking-[0.16em] text-canvas/46">
             {rows.map((row, index) => (
               <div key={row} className="flex items-center gap-3">
                 <motion.span 
                   animate={isHovered ? { scale: [1, 1.4, 1] } : { scale: 1 }}
                   transition={{ repeat: isHovered ? Infinity : 0, duration: 1.5, delay: index * 0.12 }}
-                  className={`h-1.5 w-1.5 rounded-full ${index % 4 === 0 ? 'bg-[#b7c8a8]/70' : index % 4 === 1 ? 'bg-[#f1efe8]/38' : index % 4 === 2 ? 'bg-[#c2695e]/55' : 'bg-[#f1efe8]/18'}`} 
+                  className={`h-1.5 w-1.5 rounded-full ${index % 4 === 0 ? 'bg-accent/70' : index % 4 === 1 ? 'bg-canvas/38' : index % 4 === 2 ? 'bg-risk/55' : 'bg-canvas/18'}`}
                 />
                 <span>{row}</span>
               </div>
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-2 text-[9px] uppercase tracking-[0.16em] text-[#f1efe8]/45">
+        <div className="grid grid-cols-2 gap-2 text-[9px] uppercase tracking-[0.16em] text-canvas/45">
           {['Indexable', 'Non-indexable', 'Duplicate', 'Redirect'].map((item, index) => (
             <span key={item} className="flex items-center gap-2">
-              <span className={`h-1.5 w-1.5 rounded-full ${index === 0 ? 'bg-[#b7c8a8]/70' : index === 2 ? 'bg-[#c2695e]/55' : 'bg-[#f1efe8]/30'}`} />
+              <span className={`h-1.5 w-1.5 rounded-full ${index === 0 ? 'bg-accent/70' : index === 2 ? 'bg-risk/55' : 'bg-canvas/30'}`} />
               {item}
             </span>
           ))}
@@ -442,7 +442,7 @@ function CaseStudyVisual({ type, isHovered }: { type: CaseStudy['visual']; isHov
       ['Problem', 116, 105],
     ];
     return (
-      <svg viewBox="0 0 230 178" className="h-44 w-full text-[#f1efe8]" aria-hidden="true">
+      <svg viewBox="0 0 230 178" className="h-44 w-full text-canvas" aria-hidden="true">
         <g stroke="currentColor" opacity="0.18">
           <motion.path 
             d="M116 38 L48 83 L73 138 L116 105 L158 140 L176 82 Z M48 83 L116 105 L176 82 M73 138 L158 140" 
@@ -475,7 +475,7 @@ function CaseStudyVisual({ type, isHovered }: { type: CaseStudy['visual']; isHov
       <div className="grid grid-cols-2 gap-5">
         {['COLLECTION PAGES', 'PRODUCT PAGES'].map((title, groupIndex) => (
           <div key={title}>
-            <div className="mb-3 text-[9px] uppercase tracking-[0.18em] text-[#f1efe8]/48">{title}</div>
+            <div className="mb-3 text-[9px] uppercase tracking-[0.18em] text-canvas/48">{title}</div>
             <div className="grid grid-cols-5 gap-1.5">
               {Array.from({ length: 30 }, (_, index) => {
                 const green = (index + groupIndex) % 4 === 0;
@@ -485,7 +485,7 @@ function CaseStudyVisual({ type, isHovered }: { type: CaseStudy['visual']; isHov
                     key={index} 
                     animate={isHovered ? { scale: [1, 1.25, 1], opacity: [0.8, 1, 0.8] } : { scale: 1, opacity: 1 }}
                     transition={{ repeat: isHovered ? Infinity : 0, duration: 1.6, delay: (index * 0.04) % 1.2 }}
-                    className={`aspect-square ${red ? 'bg-[#c2695e]/45' : green ? 'bg-[#b7c8a8]/55' : 'bg-[#f1efe8]/13'}`} 
+                    className={`aspect-square ${red ? 'bg-risk/45' : green ? 'bg-accent/55' : 'bg-canvas/13'}`}
                   />
                 );
               })}
@@ -498,20 +498,20 @@ function CaseStudyVisual({ type, isHovered }: { type: CaseStudy['visual']; isHov
 
   return (
     <div className="grid gap-5">
-      <div className="grid gap-2 text-[10px] uppercase tracking-[0.18em] text-[#f1efe8]/52">
+      <div className="grid gap-2 text-[10px] uppercase tracking-[0.18em] text-canvas/52">
         {['Austin, TX', 'Dallas, TX', 'Houston, TX', 'San Antonio, TX', 'Denver, CO'].map((city, index) => (
           <motion.div 
             key={city} 
             animate={isHovered ? { x: 4 } : { x: 0 }}
             transition={{ duration: 0.3, delay: index * 0.05 }}
-            className="flex items-center justify-between border-b border-[#f1efe8]/10 pb-2"
+            className="flex items-center justify-between border-b border-canvas/10 pb-2"
           >
             <span>{city}</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-[#b7c8a8]/55" />
+            <span className="h-1.5 w-1.5 rounded-full bg-accent/55" />
           </motion.div>
         ))}
       </div>
-      <svg viewBox="0 0 240 84" className="h-20 w-full text-[#f1efe8]" aria-hidden="true">
+      <svg viewBox="0 0 240 84" className="h-20 w-full text-canvas" aria-hidden="true">
         <g fill="none" stroke="currentColor" opacity="0.28">
           <motion.rect x="82" y="8" width="76" height="18" animate={isHovered ? { strokeWidth: 1.5, opacity: 0.6 } : { strokeWidth: 1, opacity: 0.28 }} />
           <motion.rect x="18" y="58" width="58" height="18" animate={isHovered ? { strokeWidth: 1.5, opacity: 0.6 } : { strokeWidth: 1, opacity: 0.28 }} />
@@ -532,19 +532,19 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <motion.article
-      className="group relative grid min-h-[560px] grid-rows-[auto_auto_1fr_auto] overflow-hidden border border-[#f1efe8]/12 p-6 transition-[border-color,background-color] duration-500 before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-[#f1efe8]/45 before:transition-all before:duration-700 hover:border-[#f1efe8]/32 hover:bg-[#f1efe8]/[0.025] hover:before:w-full"
+      className="group relative grid min-h-[560px] grid-rows-[auto_auto_1fr_auto] overflow-hidden border border-canvas/12 p-6 transition-[border-color,background-color] duration-500 before:absolute before:left-0 before:top-0 before:h-px before:w-0 before:bg-canvas/45 before:transition-all before:duration-700 hover:border-canvas/32 hover:bg-canvas/[0.025] hover:before:w-full"
       whileHover={{ y: -5 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="mb-8 flex items-start justify-between text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42">
+      <div className="mb-8 flex items-start justify-between text-[10px] uppercase tracking-[0.28em] text-canvas/42">
         <span>{study.category}</span>
-        <span className="h-2 w-2 rounded-full border border-[#f1efe8]/32 transition-colors duration-500 group-hover:bg-[#f1efe8]/70" />
+        <span className="h-2 w-2 rounded-full border border-canvas/32 transition-colors duration-500 group-hover:bg-canvas/70" />
       </div>
       <div>
-        <h3 className="max-w-sm font-serif text-4xl italic leading-none tracking-normal text-[#f1efe8]">{study.title}</h3>
-        <p className="mt-6 text-sm leading-relaxed text-[#f1efe8]/58">{study.copy}</p>
+        <h3 className="max-w-sm font-serif text-4xl italic leading-none tracking-normal text-canvas">{study.title}</h3>
+        <p className="mt-6 text-sm leading-relaxed text-canvas/58">{study.copy}</p>
       </div>
       <div className="my-9 self-center transition-opacity duration-500 md:opacity-75 md:group-hover:opacity-100">
         <CaseStudyVisual type={study.visual} isHovered={isHovered} />
@@ -554,7 +554,7 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
       ) : (
         <span
           id={`method-case-study-${study.title.toLowerCase().replace(/\s+/g, '-')}`}
-          className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42"
+          className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-canvas/42"
         >
           {study.cta}
         </span>
@@ -566,7 +566,7 @@ export default function VoidAgencyMethodPage() {
   useSEO(METHOD_SEO);
 
   return (
-    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
+    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-ink text-canvas selection:bg-canvas selection:text-ink">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
       <ScrollProgress />
@@ -575,22 +575,22 @@ export default function VoidAgencyMethodPage() {
 
       <section className="relative z-10 mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] xl:px-10 xl:pt-20">
         <ScrollReveal yOffset={18} blur={false} className="min-w-0">
-          <div className="mb-9 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/48">METHOD</div>
+          <div className="mb-9 text-[10px] uppercase tracking-[0.36em] text-canvas/48">METHOD</div>
           <h1 
             style={{ viewTransitionName: 'void-title' } as CSSProperties}
             aria-label="Void Agency Method"
-            className="font-serif text-[clamp(5.2rem,12vw,12.4rem)] italic leading-[0.74] tracking-normal text-[#f1efe8]"
+            className="font-serif text-[5.2rem] md:text-[8rem] xl:text-[12rem] italic leading-[0.74] tracking-normal text-canvas"
           >
             Void{' '}
             <br />
             Agency.
           </h1>
-          <p className="mt-12 max-w-xl text-sm font-medium uppercase leading-relaxed tracking-[0.24em] text-[#f1efe8]/82">
+          <p className="mt-12 max-w-xl text-sm font-medium uppercase leading-relaxed tracking-[0.24em] text-canvas/82">
             <RevealText text="TECHNICAL SEO SYSTEMS FOR SEARCH," delay={0.25} elementType="span" />
             <br />
             <RevealText text="AI-SEARCH VISIBILITY, AND CONVERSION PATHS." delay={0.4} elementType="span" />
           </p>
-          <p className="mt-8 max-w-[34rem] text-base leading-relaxed text-[#f1efe8]/58">
+          <p className="mt-8 max-w-[34rem] text-base leading-relaxed text-canvas/58">
             Void Agency audits the technical layer behind search visibility: crawl paths, indexation, site architecture, internal links, structured data, performance, analytics, and AI crawler access. The method connects back to Sulayman Bowles, Atlas, and evidence-backed web/search systems.
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-8">
@@ -604,31 +604,31 @@ export default function VoidAgencyMethodPage() {
         <ScrollReveal delay={0.08} yOffset={18} blur={false} className="w-full self-center">
           <div className="group">
             <VoidCrawlMap className="aspect-[900/700] w-full transition-transform duration-700 group-hover:-translate-y-1" />
-            <div className="mt-4 grid grid-cols-2 border-y border-[#f1efe8]/12 text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/46 md:grid-cols-4">
+            <div className="mt-4 grid grid-cols-2 border-y border-canvas/12 text-[10px] uppercase tracking-[0.22em] text-canvas/46 md:grid-cols-4">
               {['CRAWL PATHS', 'INDEXATION', 'AI ACCESS', 'CONVERSION'].map((item) => (
-                <span key={item} className="border-b border-[#f1efe8]/10 px-3 py-3 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">{item}</span>
+                <span key={item} className="border-b border-canvas/10 px-3 py-3 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">{item}</span>
               ))}
             </div>
           </div>
         </ScrollReveal>
       </section>
 
-      <section id="overview" className="mx-auto max-w-[1480px] border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+      <section id="overview" className="mx-auto max-w-[1480px] border-y border-canvas/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.4fr]">
           <ScrollReveal yOffset={18} blur={false}>
-            <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/42">OVERVIEW</div>
-            <p className="max-w-[44rem] font-serif text-[clamp(2.8rem,5.4vw,6.2rem)] italic leading-[0.92] tracking-normal">
+            <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/42">OVERVIEW</div>
+            <p className="max-w-[44rem] font-serif text-[2.8rem] md:text-[4.4rem] xl:text-[6rem] italic leading-[0.92] tracking-normal">
               Search visibility is no longer only about ranking pages. It is about whether Google, AI systems, and customers can understand your site clearly enough to trust it.
             </p>
-            <p className="mt-8 max-w-xl text-base leading-relaxed text-[#f1efe8]/58">
+            <p className="mt-8 max-w-xl text-base leading-relaxed text-canvas/58">
               Void Agency finds the structural problems that block that understanding, then turns them into a prioritized plan your team can implement.
             </p>
-            <p className="mt-10 max-w-2xl border-t border-[#f1efe8]/12 pt-6 text-[10px] uppercase leading-loose tracking-[0.22em] text-[#f1efe8]/42">
+            <p className="mt-10 max-w-2xl border-t border-canvas/12 pt-6 text-[10px] uppercase leading-loose tracking-[0.22em] text-canvas/42">
               BUILT FOR FOUNDERS, GROWTH TEAMS, SAAS COMPANIES, ECOMMERCE BRANDS, LOCAL SERVICE BUSINESSES, AND TECHNICAL OPERATORS WHO NEED CLEAR DIAGNOSIS, PRACTICAL FIXES, AND SOURCE-BACKED SEARCH DECISIONS.
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 border-y border-[#f1efe8]/12 md:grid-cols-2 xl:grid-cols-4 xl:border-y-0">
+          <div className="grid grid-cols-1 border-y border-canvas/12 md:grid-cols-2 xl:grid-cols-4 xl:border-y-0">
             {methodColumns.map((item, index) => (
               <div key={item.number}>
                 <ScrollReveal delay={index * 0.06} yOffset={16} blur={false}>
@@ -640,18 +640,18 @@ export default function VoidAgencyMethodPage() {
         </div>
       </section>
 
-      <section id="how-it-works" className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-b border-[#f1efe8]/12 px-4 py-16 md:px-8 lg:grid-cols-[0.36fr_0.64fr] xl:px-10 xl:py-24">
+      <section id="how-it-works" className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-b border-canvas/12 px-4 py-16 md:px-8 lg:grid-cols-[0.36fr_0.64fr] xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false}>
-          <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/45">HOW IT WORKS</h2>
-          <p className="max-w-md text-base leading-relaxed text-[#f1efe8]/58">
+          <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-canvas/45">HOW IT WORKS</h2>
+          <p className="max-w-md text-base leading-relaxed text-canvas/58">
             A technical SEO process built for accuracy, evidence, and implementation. Void Agency turns messy site data into a clear plan that teams can act on.
           </p>
           <div className="mt-9">
-            <span className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42">PROCESS OVERVIEW</span>
+            <span className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-canvas/42">PROCESS OVERVIEW</span>
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 border border-[#f1efe8]/12 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 border border-canvas/12 md:grid-cols-2 xl:grid-cols-4">
           {processSteps.map((step, index) => (
             <div key={step.title}>
               <ProcessStepCard step={step} index={index} />
@@ -660,26 +660,26 @@ export default function VoidAgencyMethodPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1480px] border-b border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+      <section className="mx-auto max-w-[1480px] border-b border-canvas/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-10 grid gap-8 lg:grid-cols-[0.4fr_0.6fr]">
           <div>
-            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/45">AI Search Visibility Audit Checklist</h2>
-            <p className="max-w-xl font-serif text-[clamp(2.6rem,5.2vw,6rem)] italic leading-[0.92] tracking-normal">
+            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-canvas/45">AI Search Visibility Audit Checklist</h2>
+            <p className="max-w-xl font-serif text-[2.6rem] md:text-[4.2rem] xl:text-[5.75rem] italic leading-[0.92] tracking-normal">
               Public evidence, crawl access, and entity clarity before claims.
             </p>
           </div>
-          <p className="max-w-3xl self-end text-base leading-relaxed text-[#f1efe8]/58">
+          <p className="max-w-3xl self-end text-base leading-relaxed text-canvas/58">
             The checklist organizes the recurring audit questions behind AI-search visibility work. Each item is useful for a person reviewing the site and for systems trying to understand which public source supports which claim.
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-canvas/14 md:grid-cols-3">
           {aiSearchAuditChecklist.map((item, index) => (
             <div key={item.label}>
               <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
                 <a
                   href={item.href}
-                  className="block min-h-[180px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
+                  className="block min-h-[180px] bg-canvas/[0.012] p-5 transition-colors hover:bg-canvas hover:text-ink"
                 >
                   <p className="mb-7 text-[10px] uppercase tracking-[0.24em] text-inherit opacity-40">{String(index + 1).padStart(2, '0')}</p>
                   <h3 className="mb-4 text-xs uppercase tracking-[0.22em] text-inherit">{item.label}</h3>
@@ -691,26 +691,26 @@ export default function VoidAgencyMethodPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1480px] border-b border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+      <section className="mx-auto max-w-[1480px] border-b border-canvas/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-10 grid gap-8 lg:grid-cols-[0.4fr_0.6fr]">
           <div>
-            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-[#f1efe8]/45">SOURCE-BACKED METHOD</h2>
-            <p className="max-w-xl font-serif text-[clamp(2.6rem,5.2vw,6rem)] italic leading-[0.92] tracking-normal">
+            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-canvas/45">SOURCE-BACKED METHOD</h2>
+            <p className="max-w-xl font-serif text-[2.6rem] md:text-[4.2rem] xl:text-[5.75rem] italic leading-[0.92] tracking-normal">
               The method starts with pages and crawl evidence, not generic AI language.
             </p>
           </div>
-          <p className="max-w-3xl self-end text-base leading-relaxed text-[#f1efe8]/58">
+          <p className="max-w-3xl self-end text-base leading-relaxed text-canvas/58">
             Void Agency work should be described through concrete audit inputs: crawlability, robots.txt, sitemaps, raw and rendered HTML, canonical URLs, internal links, structured data, GSC/GA4, query buckets, page templates, and implementation recommendations.
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-canvas/14 md:grid-cols-2 xl:grid-cols-4">
           {evidenceGroups[1].items.map((item, index) => (
             <div key={item}>
               <ScrollReveal delay={index * 0.035} yOffset={14} blur={false}>
-              <article className="min-h-[150px] bg-[#f1efe8]/[0.012] p-5">
-                <p className="mb-8 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/38">{String(index + 1).padStart(2, '0')}</p>
-                <h3 className="text-sm leading-relaxed text-[#f1efe8]/62">{item}</h3>
+              <article className="min-h-[150px] bg-canvas/[0.012] p-5">
+                <p className="mb-8 text-[10px] uppercase tracking-[0.24em] text-canvas/38">{String(index + 1).padStart(2, '0')}</p>
+                <h3 className="text-sm leading-relaxed text-canvas/62">{item}</h3>
               </article>
               </ScrollReveal>
             </div>
@@ -726,7 +726,7 @@ export default function VoidAgencyMethodPage() {
                 href={source.href}
                 target={source.href.startsWith('http') ? '_blank' : undefined}
                 rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
-                className="border border-[#f1efe8]/14 p-5 transition-colors hover:bg-[#f1efe8] hover:text-[#080807]"
+                className="border border-canvas/14 p-5 transition-colors hover:bg-canvas hover:text-ink"
               >
                 <p className="mb-4 text-[10px] uppercase tracking-[0.22em] text-inherit opacity-60">{source.role}</p>
                 <h3 className="mb-4 text-xs uppercase tracking-[0.24em] text-inherit">{source.label}</h3>
@@ -737,9 +737,9 @@ export default function VoidAgencyMethodPage() {
       </section>
 
       <section id="case-studies" className="mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
-        <ScrollReveal yOffset={18} blur={false} className="mb-12 flex flex-col justify-between gap-6 border-b border-[#f1efe8]/12 pb-8 md:flex-row md:items-end">
-          <h2 className="font-serif text-[clamp(4rem,8vw,9rem)] italic leading-none tracking-normal">VOID IN ACTION</h2>
-          <span className="text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42">CASE STUDY INDEX</span>
+        <ScrollReveal yOffset={18} blur={false} className="mb-12 flex flex-col justify-between gap-6 border-b border-canvas/12 pb-8 md:flex-row md:items-end">
+          <h2 className="font-serif text-[4rem] md:text-[6.25rem] xl:text-[8.5rem] italic leading-none tracking-normal">VOID IN ACTION</h2>
+          <span className="text-[10px] uppercase tracking-[0.28em] text-canvas/42">CASE STUDY INDEX</span>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -755,15 +755,15 @@ export default function VoidAgencyMethodPage() {
 
       <section className="mx-auto max-w-[1480px] px-4 pb-16 md:px-8 xl:px-10 xl:pb-24">
         <ScrollReveal yOffset={18} blur={false}>
-          <div className="grid grid-cols-1 gap-10 border border-[#f1efe8]/16 p-6 md:p-10 lg:grid-cols-[0.52fr_0.28fr_0.2fr] lg:items-center">
-            <h2 className="font-serif text-[clamp(3.2rem,6.4vw,7.5rem)] italic leading-[0.88] tracking-normal">
+          <div className="grid grid-cols-1 gap-10 border border-canvas/16 p-6 md:p-10 lg:grid-cols-[0.52fr_0.28fr_0.2fr] lg:items-center">
+            <h2 className="font-serif text-[3.2rem] md:text-[5rem] xl:text-[7rem] italic leading-[0.88] tracking-normal">
               Make your site easier to
               <br />
               crawl, understand, cite,
               <br />
               and convert.
             </h2>
-            <p className="max-w-md text-base leading-relaxed text-[#f1efe8]/58">
+            <p className="max-w-md text-base leading-relaxed text-canvas/58">
               Void Agency finds the technical problems holding back search visibility and turns them into a clear, prioritized action plan.
             </p>
             <div className="flex flex-wrap items-center gap-7 lg:justify-end">

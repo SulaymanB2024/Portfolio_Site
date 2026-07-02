@@ -13,14 +13,14 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   const isDark = tone === 'dark';
   const displayedRouteNote = routeNote ?? activeItem?.description ?? 'Index of work, systems, and proof surfaces.';
   
-  const textClass = isDark ? 'text-[#f1efe8]' : 'text-ink';
-  const textMutedClass = isDark ? 'text-[#f1efe8]/58' : 'text-ink/56';
-  const textMutedNavClass = isDark ? 'text-[#f1efe8]/56 hover:text-[#f1efe8]' : 'text-ink/54 hover:text-ink';
-  const activeRuleClass = isDark ? 'bg-[#f1efe8]' : 'bg-ink';
-  const hoverSurfaceClass = isDark ? 'hover:bg-[#f1efe8]/7' : 'hover:bg-ink/[0.035]';
+  const textClass = isDark ? 'text-canvas' : 'text-ink';
+  const textMutedClass = isDark ? 'text-canvas/58' : 'text-ink/56';
+  const textMutedNavClass = isDark ? 'text-canvas/56 hover:text-canvas' : 'text-ink/54 hover:text-ink';
+  const activeRuleClass = isDark ? 'bg-canvas' : 'bg-ink';
+  const hoverSurfaceClass = isDark ? 'hover:bg-canvas/7' : 'hover:bg-ink/[0.035]';
   const bgClass = isDark ? 'frosted-acrylic-dark' : 'frosted-acrylic-light';
-  const menuBorderClass = isDark ? 'border-[#f1efe8]/16' : 'border-ink/16';
-  const noteBorderClass = isDark ? 'border-[#f1efe8]/12' : 'border-ink/12';
+  const menuBorderClass = isDark ? 'border-canvas/16' : 'border-ink/16';
+  const noteBorderClass = isDark ? 'border-canvas/12' : 'border-ink/12';
   const shellClass = variant === 'home'
     ? 'fixed top-0 left-0 right-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 xl:px-10'
     : 'sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 xl:px-10';
@@ -30,15 +30,15 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
       <div className={`site-header grid gap-3 ${bgClass} rounded-[8px] px-4 py-3 text-[10px] uppercase md:hidden`}>
         <div className="flex min-h-10 items-center justify-between gap-4">
           <a href="/" id="header-brand-link-mobile" className="min-w-0">
-            <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none ${textClass}`}>SULAYMAN BOWLES</span>
-            <span className={`site-header-tagline mt-2 block truncate font-serif text-sm italic normal-case leading-none ${textMutedClass}`}>
+            <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
+            <span className={`site-header-tagline mt-2 block truncate font-serif text-sm italic normal-case leading-none tracking-normal ${textMutedClass}`}>
               Technical SEO · AI Search · Finance/Data
             </span>
           </a>
         </div>
         <details className={`group border-t ${menuBorderClass} pt-2`}>
           <summary className={`flex min-h-11 cursor-pointer list-none items-center justify-between ${textMutedNavClass}`}>
-            <span className="site-header-menu-label">INDEX</span>
+            <span className="site-header-menu-label tracking-[0.24em]">INDEX</span>
             <span aria-hidden="true" className="text-sm leading-none transition-transform group-open:rotate-45">+</span>
           </summary>
           <nav className="mt-3 grid grid-cols-2 gap-2" aria-label="Mobile navigation">
@@ -54,7 +54,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
                   aria-current={active ? 'page' : undefined}
                   title={item.description}
                   style={{ transitionDelay: `${index * 26}ms` }}
-                  className={`site-header-link flex min-h-10 translate-y-1 items-center rounded-[6px] border ${menuBorderClass} px-3 py-2 opacity-[0.82] transition-[background-color,color,opacity,transform] duration-200 group-open:translate-y-0 group-open:opacity-100 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
+                  className={`site-header-link flex min-h-10 translate-y-1 items-center rounded-[6px] border px-3 py-2 tracking-[0.24em] opacity-[0.82] transition-[background-color,color,opacity,transform] duration-200 group-open:translate-y-0 group-open:opacity-100 ${menuBorderClass} ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
                 >
                   {navLabel(item)}
                 </a>
@@ -66,8 +66,8 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
 
       <div className={`site-header hidden items-center gap-3 ${bgClass} rounded-[8px] px-5 py-3 text-[10px] uppercase md:grid md:grid-cols-1 lg:grid-cols-[minmax(245px,0.78fr)_minmax(0,1.32fr)] lg:px-6`}>
         <a href="/" id="header-brand-link" className="block min-w-0 justify-self-start transition-opacity duration-200 hover:opacity-72">
-          <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none ${textClass}`}>SULAYMAN BOWLES</span>
-          <span className={`site-header-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none ${textMutedClass}`}>
+          <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
+          <span className={`site-header-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
             Technical SEO · AI Search · Finance/Data
           </span>
         </a>
@@ -88,7 +88,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
                 onMouseEnter={() => setRouteNote(item.description ?? item.label)}
                 onBlur={() => setRouteNote(null)}
                 onMouseLeave={() => setRouteNote(null)}
-                className={`site-header-link group relative inline-flex min-h-10 items-center justify-center rounded-[6px] px-3 py-2 leading-none transition-colors duration-200 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
+                className={`site-header-link group relative inline-flex min-h-10 items-center justify-center rounded-[6px] px-3 py-2 leading-none tracking-[0.24em] transition-colors duration-200 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
               >
                 <span className="block whitespace-nowrap">
                   {navLabel(item)}

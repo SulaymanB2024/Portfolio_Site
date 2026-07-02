@@ -64,7 +64,7 @@ export interface SeoRoute {
 export type RouteVisualMode = 'canvas-artifact' | 'dark-proof' | 'memo-reader' | 'book' | 'prototype';
 export type RouteTone = 'light' | 'dark';
 
-export const SITE_LASTMOD = '2026-06-25';
+export const SITE_LASTMOD = '2026-07-01';
 
 const CORE_ROUTES: SeoRoute[] = [
   {
@@ -326,7 +326,7 @@ const CORE_ROUTES: SeoRoute[] = [
     aliases: ['/projects/markets'],
     title: 'Markets Research | Separate Signal from Noise',
     description:
-      'Markets research by Sulayman Bowles across market signals, crypto protocol notes, valuation logic, source tables, assumptions, and investment strategy artifacts.',
+      'Source-bounded research notes from Sulayman Bowles across AI-search infrastructure, public data hygiene, finance/data assumptions, source tables, and educational artifacts.',
     h1: 'Separate Signal from Noise',
     section: 'research',
     pageType: 'research',
@@ -334,16 +334,17 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'Markets Research separates signal from noise through evidence-driven research across markets, crypto, investment cases, and decision frameworks.',
+      'Markets Research separates signal from noise through source-bounded notes across AI-search infrastructure, public data hygiene, finance/data assumptions, and educational artifacts.',
     jsonLd: marketsJsonLd(
       'Markets Research | Separate Signal from Noise',
-      'Markets research by Sulayman Bowles across market signals, crypto protocol notes, valuation logic, source tables, assumptions, and investment strategy artifacts.',
+      'Source-bounded research notes from Sulayman Bowles across AI-search infrastructure, public data hygiene, finance/data assumptions, source tables, and educational artifacts.',
     ),
   },
 ];
 
 const ARTICLE_ROUTES: SeoRoute[] = MARKET_THESES.map((thesis) => {
   const path = `/markets/${thesis.slug}`;
+  const isIndexable = thesis.indexable !== false;
 
   return {
     path,
@@ -353,8 +354,10 @@ const ARTICLE_ROUTES: SeoRoute[] = MARKET_THESES.map((thesis) => {
     h1: thesis.title,
     section: 'research-article',
     pageType: 'article',
-    priority: 0.6,
-    includeInSitemap: true,
+    priority: isIndexable ? 0.6 : 0.2,
+    includeInSitemap: isIndexable,
+    generateStatic: !isIndexable,
+    noindex: !isIndexable,
     lastmod: thesis.date.replaceAll('.', '-'),
     staticSummary: thesis.content[0],
     image: thesis.image,

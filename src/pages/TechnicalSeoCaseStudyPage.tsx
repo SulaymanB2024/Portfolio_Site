@@ -45,7 +45,7 @@ export default function TechnicalSeoCaseStudyPage() {
           <header className="grid grid-cols-1 gap-12 border-b border-current/12 pb-14 lg:min-h-[calc(100vh-104px)] lg:grid-cols-[minmax(0,0.48fr)_minmax(340px,0.52fr)]">
             <div className="self-end">
               <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-current/48">Case study / sanitized</p>
-              <h1 className="max-w-6xl font-serif text-[clamp(3.7rem,9vw,10rem)] italic leading-[0.84] tracking-normal">
+              <h1 className="max-w-6xl font-serif text-[3.7rem] md:text-[6.5rem] xl:text-[9rem] italic leading-[0.84] tracking-normal">
                 Technical SEO audit case study.
               </h1>
               <p className="mt-10 max-w-3xl text-base leading-relaxed text-current/64">

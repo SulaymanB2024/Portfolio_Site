@@ -26,7 +26,7 @@ const experience = [
   {
     role: 'FOUNDER',
     meta: 'VOID Agency · Dec 2025 — Present',
-    copy: 'Built an SEO and web systems agency generating $50K+ in collected revenue through technical SEO audits, website builds, local search strategy, and AI-search visibility work.',
+    copy: 'Built an SEO and web systems practice around technical audits, website builds, local search strategy, and AI-search visibility work. Public pages describe the work without turning private revenue records into proof claims.',
     details: ['Technical Audits', 'Next.js & Astro', 'LLM Search Visibility']
   },
   {
@@ -67,7 +67,7 @@ const workCards = [
 ];
 
 const metrics = [
-  ['$50K+', 'Collected revenue through VOID Agency'],
+  ['VOID AGENCY', 'Technical SEO and web systems practice'],
   ['SCRAPER ATLAS', 'Python + SQLite audit console'],
   ['CHEGG', 'AI product strategy'],
   ['GA4 + GSC', 'Search analytics and launch tracking'],
@@ -77,7 +77,7 @@ const metrics = [
 
 
 function SectionLabel({ children }: { children: ReactNode }) {
-  return <h2 className="mb-9 text-[0.72rem] uppercase tracking-[0.28em] text-[#f1efe8]/46">{children}</h2>;
+  return <h2 className="mb-9 text-[0.72rem] uppercase tracking-[0.28em] text-canvas/46">{children}</h2>;
 }
 
 // Custom icons using clean editorial SVGs
@@ -132,13 +132,13 @@ function SkillBars() {
             onMouseLeave={() => setHoveredIndex(null)}
             className="group cursor-pointer"
           >
-            <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[#f1efe8]/58 transition-colors duration-300 group-hover:text-[#f1efe8]">
+            <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-canvas/58 transition-colors duration-300 group-hover:text-canvas">
               <span>{label as string}</span>
               <span>{level as string}</span>
             </div>
-            <div className="relative h-px bg-[#f1efe8]/14 transition-colors duration-300 group-hover:bg-[#f1efe8]/28">
+            <div className="relative h-px bg-canvas/14 transition-colors duration-300 group-hover:bg-canvas/28">
               <motion.div
-                className="absolute left-0 top-0 h-px w-full origin-left bg-[#f1efe8]/52 group-hover:bg-[#b7c8a8] transition-colors duration-300"
+                className="absolute left-0 top-0 h-px w-full origin-left bg-canvas/52 group-hover:bg-accent transition-colors duration-300"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true, margin: '-12%' }}
@@ -153,7 +153,7 @@ function SkillBars() {
                 marginTop: isHovered ? 8 : 0
               }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="overflow-hidden text-[9px] uppercase tracking-[0.16em] text-[#f1efe8]/45 font-sans"
+              className="overflow-hidden text-[9px] uppercase tracking-[0.16em] text-canvas/45 font-sans"
             >
               {details as string}
             </motion.div>
@@ -168,15 +168,15 @@ function WorkCard({ title, copy, icon }: { title: string; copy: string; icon: st
   const [isHovered, setIsHovered] = useState(false);
   return (
     <article 
-      className="group min-h-[300px] border border-[#f1efe8]/12 p-6 transition-[border-color,background-color,transform] duration-500 hover:-translate-y-1 hover:border-[#f1efe8]/34 hover:bg-[#f1efe8]/[0.025]"
+      className="group min-h-[300px] border border-canvas/12 p-6 transition-[border-color,background-color,transform] duration-500 hover:-translate-y-1 hover:border-canvas/34 hover:bg-canvas/[0.025]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="mb-12 text-[#f1efe8]/58 transition-colors group-hover:text-[#f1efe8]/82">
+      <div className="mb-12 text-canvas/58 transition-colors group-hover:text-canvas/82">
         <WorkIcon type={icon} isHovered={isHovered} />
       </div>
       <h3 className="mb-6 whitespace-pre-line text-xs uppercase leading-relaxed tracking-[0.3em]">{title}</h3>
-      <p className="max-w-xs text-sm leading-relaxed text-[#f1efe8]/58">{copy}</p>
+      <p className="max-w-xs text-sm leading-relaxed text-canvas/58">{copy}</p>
     </article>
   );
 }
@@ -185,16 +185,16 @@ function PrincipleCard({ title, copy }: { title: string; copy: string }) {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div 
-      className="group grid grid-cols-[34px_1fr] gap-4 border-b border-[#f1efe8]/10 pb-7 last:border-b-0 cursor-pointer"
+      className="group grid grid-cols-[34px_1fr] gap-4 border-b border-canvas/10 pb-7 last:border-b-0 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <span className="mt-2 h-px bg-[#f1efe8]/42 transition-all duration-500 group-hover:w-8 group-hover:bg-[#f1efe8]/75" />
+      <span className="mt-2 h-px bg-canvas/42 transition-all duration-500 group-hover:w-8 group-hover:bg-canvas/75" />
       <div>
-        <h3 className="mb-3 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8] transition-colors group-hover:text-white">
+        <h3 className="mb-3 text-[10px] uppercase tracking-[0.24em] text-canvas transition-colors group-hover:text-white">
           {isHovered ? <ScrambleText text={title} /> : title}
         </h3>
-        <p className="text-sm leading-relaxed text-[#f1efe8]/56 transition-colors group-hover:text-[#f1efe8]/82">{copy}</p>
+        <p className="text-sm leading-relaxed text-canvas/56 transition-colors group-hover:text-canvas/82">{copy}</p>
       </div>
     </div>
   );
@@ -209,7 +209,7 @@ function ExperienceCard({ role, meta, copy, details }: { role: string; meta: str
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.span
-        className="absolute -left-[34px] top-1 h-3.5 w-3.5 rounded-full border bg-[#080807] z-10"
+        className="absolute -left-[34px] top-1 h-3.5 w-3.5 rounded-full border bg-ink z-10"
         initial={{ scale: 0.8, borderColor: 'rgba(241,239,232,0.3)' }}
         whileInView={{ 
           scale: 1, 
@@ -225,9 +225,9 @@ function ExperienceCard({ role, meta, copy, details }: { role: string; meta: str
         }}
         transition={{ duration: 0.25 }}
       />
-      <h3 className="mb-2 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8] transition-colors group-hover:text-white">{role}</h3>
-      <div className="mb-4 text-[10px] uppercase leading-relaxed tracking-[0.18em] text-[#f1efe8]/44">{meta}</div>
-      <p className="text-sm leading-relaxed text-[#f1efe8]/58 transition-colors group-hover:text-[#f1efe8]/82">{copy}</p>
+      <h3 className="mb-2 text-[10px] uppercase tracking-[0.24em] text-canvas transition-colors group-hover:text-white">{role}</h3>
+      <div className="mb-4 text-[10px] uppercase leading-relaxed tracking-[0.18em] text-canvas/44">{meta}</div>
+      <p className="text-sm leading-relaxed text-canvas/58 transition-colors group-hover:text-canvas/82">{copy}</p>
       <motion.div 
         initial={false}
         animate={{ 
@@ -241,7 +241,7 @@ function ExperienceCard({ role, meta, copy, details }: { role: string; meta: str
         {details.map((tag) => (
           <span 
             key={tag} 
-            className="border border-[#f1efe8]/14 px-2 py-0.5 text-[8px] uppercase tracking-[0.18em] text-[#f1efe8]/54"
+            className="border border-canvas/14 px-2 py-0.5 text-[8px] uppercase tracking-[0.18em] text-canvas/54"
           >
             {tag}
           </span>
@@ -263,11 +263,11 @@ function ExperienceTimeline() {
   return (
     <div ref={containerRef} className="relative pl-7">
       {/* Background track line */}
-      <div className="absolute left-0 top-1 bottom-1 w-px bg-[#f1efe8]/12" />
+      <div className="absolute left-0 top-1 bottom-1 w-px bg-canvas/12" />
       
       {/* Animated progress indicator line */}
       <motion.div 
-        className="absolute left-0 top-1 w-px bg-[#b7c8a8] origin-top"
+        className="absolute left-0 top-1 w-px bg-accent origin-top"
         style={{ scaleY, height: '98%', transformOrigin: 'top' }}
       />
 
@@ -298,24 +298,24 @@ function MetaCard({ label, value }: { label: string; value: string }) {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative overflow-hidden border-b border-[#f1efe8]/12 py-8 px-6 md:border-b-0 md:border-r last:border-r-0 cursor-pointer transition-all duration-500 hover:bg-[#f1efe8]/[0.015] group"
+      className="relative overflow-hidden border-b border-canvas/12 py-8 px-6 md:border-b-0 md:border-r last:border-r-0 cursor-pointer transition-all duration-500 hover:bg-canvas/[0.015] group"
     >
-      <div className="absolute top-0 left-0 h-[2px] w-0 bg-[#f1efe8]/54 transition-all duration-500 group-hover:w-full" />
-      <div className="absolute bottom-0 right-0 h-0 w-[1px] bg-[#f1efe8]/22 transition-all duration-500 group-hover:h-full" />
+      <div className="absolute top-0 left-0 h-[2px] w-0 bg-canvas/54 transition-all duration-500 group-hover:w-full" />
+      <div className="absolute bottom-0 right-0 h-0 w-[1px] bg-canvas/22 transition-all duration-500 group-hover:h-full" />
 
       <div className="mb-6 flex items-center justify-between">
-        <h3 className="text-[10px] uppercase tracking-[0.26em] text-[#f1efe8]/42 transition-colors duration-300 group-hover:text-[#f1efe8]/90">
+        <h3 className="text-[10px] uppercase tracking-[0.26em] text-canvas/42 transition-colors duration-300 group-hover:text-canvas/90">
           {isHovered ? <ScrambleText text={label} /> : label}
         </h3>
         {label === 'AVAILABILITY' && (
           <span className="relative flex h-1.5 w-1.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#b7c8a8] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#b7c8a8]"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent"></span>
           </span>
         )}
       </div>
 
-      <p className="whitespace-pre-line text-sm leading-relaxed text-[#f1efe8]/66 transition-colors duration-300 group-hover:text-[#f1efe8]/90 mb-5 min-h-[3.2rem]">
+      <p className="whitespace-pre-line text-sm leading-relaxed text-canvas/66 transition-colors duration-300 group-hover:text-canvas/90 mb-5 min-h-[3.2rem]">
         {value}
       </p>
 
@@ -323,7 +323,7 @@ function MetaCard({ label, value }: { label: string; value: string }) {
         initial={false}
         animate={{ opacity: isHovered ? 1 : 0.28, y: isHovered ? 0 : 2 }}
         transition={{ duration: 0.3 }}
-        className="font-sans text-[8.5px] uppercase leading-relaxed tracking-[0.16em] text-[#f1efe8]/34 group-hover:text-[#f1efe8]/62 whitespace-pre-line"
+        className="font-sans text-[8.5px] uppercase leading-relaxed tracking-[0.16em] text-canvas/34 group-hover:text-canvas/62 whitespace-pre-line"
       >
         {subInfos[label]}
       </motion.div>
@@ -335,7 +335,7 @@ export default function AboutPage() {
   useSEO(ABOUT_SEO);
 
   return (
-    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-[#080807] text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
+    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-ink text-canvas selection:bg-canvas selection:text-ink">
       <WireframeGrid tone="dark" className="absolute inset-0 z-0 pointer-events-none opacity-20" />
       <PageTechnicalChrome tone="dark" />
       <ScrollProgress />
@@ -344,21 +344,21 @@ export default function AboutPage() {
 
       <section className="relative z-10 mx-auto grid min-h-[calc(100vh-102px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.32fr)_minmax(0,0.68fr)] xl:px-10 xl:pt-20">
         <div className="min-w-0 self-center">
-          <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/45">ABOUT ME</div>
+          <div className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/45">ABOUT ME</div>
           <h1
             aria-label="I build systems for visibility."
-            className="font-serif text-[clamp(3.8rem,6.4vw,7.1rem)] italic leading-[0.92] tracking-normal"
+            className="font-serif text-[3.8rem] md:text-[5.6rem] xl:text-[7rem] italic leading-[0.92] tracking-normal"
           >
             <span className="block">I build systems </span>
             <span className="block italic">for visibility.</span>
           </h1>
-          <div className="mt-10 space-y-6 text-base leading-relaxed text-[#f1efe8]/62">
+          <div className="mt-10 space-y-6 text-base leading-relaxed text-canvas/62">
             <p>Sulayman Bowles is a McCombs School of Business student at UT Austin, founder of Void Agency, and builder of Atlas, a technical SEO audit console focused on crawl evidence, indexation, structured data, AI-search visibility, and finance/data systems.</p>
             <p>My work turns crawl data, site architecture, search signals, and market research into clearer systems for discovery, citation, conversion, and decision-making.</p>
           </div>
           <a
             href="/simple"
-            className="mt-8 inline-flex text-[10px] uppercase tracking-[0.26em] text-[#f1efe8]/58 underline decoration-[#f1efe8]/22 underline-offset-4 transition-colors hover:text-[#f1efe8]"
+            className="mt-8 inline-flex text-[10px] uppercase tracking-[0.26em] text-canvas/58 underline decoration-canvas/22 underline-offset-4 transition-colors hover:text-canvas"
           >
             Read the book
           </a>
@@ -367,7 +367,7 @@ export default function AboutPage() {
         <div className="w-full self-center">
           <div className="group">
             <VisibilitySystemMap className="aspect-[1000/620] w-full transition-transform duration-700 group-hover:-translate-y-1" />
-            <div className="mt-4 flex flex-col gap-3 border-b border-[#f1efe8]/12 pb-4 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/44 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-4 flex flex-col gap-3 border-b border-canvas/12 pb-4 text-[10px] uppercase tracking-[0.24em] text-canvas/44 sm:flex-row sm:items-center sm:justify-between">
               <span>SIGNAL INPUTS: CRAWL / ENTITY / MARKET</span>
               <span>OUTPUT: VISIBILITY SYSTEM</span>
             </div>
@@ -375,7 +375,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 lg:grid-cols-3 xl:px-10 xl:py-24">
+      <section className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-canvas/12 px-4 py-16 md:px-8 lg:grid-cols-3 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false}>
           <SectionLabel>PRINCIPLES</SectionLabel>
           <div className="space-y-9">
@@ -413,14 +413,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1480px] border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+      <section className="mx-auto max-w-[1480px] border-y border-canvas/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-3xl">
           <SectionLabel>PUBLIC SOURCE GRAPH</SectionLabel>
-          <p className="text-base leading-relaxed text-[#f1efe8]/58">
+          <p className="text-base leading-relaxed text-canvas/58">
             This site is the canonical hub. The surrounding sources are useful when they prove one part of the same thesis: technical SEO, Atlas, Void Agency, finance/data judgment, and evidence-backed web/search systems.
           </p>
         </ScrollReveal>
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-canvas/14 md:grid-cols-2 xl:grid-cols-4">
           {sourceMap.slice(0, 14).map((source, index) => (
             <div key={`${source.role}-${source.href}`}>
               <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
@@ -428,11 +428,11 @@ export default function AboutPage() {
                 href={source.href}
                 target={source.href.startsWith('http') ? '_blank' : undefined}
                 rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
-                className="block min-h-[240px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8]/[0.035]"
+                className="block min-h-[240px] bg-canvas/[0.012] p-5 transition-colors hover:bg-canvas/[0.035]"
               >
-                <p className="mb-5 text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/42">{source.role}</p>
-                <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-[#f1efe8]">{source.label}</h3>
-                <p className="text-sm leading-relaxed text-[#f1efe8]/56">{source.proves}</p>
+                <p className="mb-5 text-[10px] uppercase tracking-[0.24em] text-canvas/42">{source.role}</p>
+                <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-canvas">{source.label}</h3>
+                <p className="text-sm leading-relaxed text-canvas/56">{source.proves}</p>
               </a>
               </ScrollReveal>
             </div>
@@ -440,20 +440,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section id="identity-reconciliation" className="mx-auto max-w-[1480px] border-b border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+      <section id="identity-reconciliation" className="mx-auto max-w-[1480px] border-b border-canvas/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-4xl">
           <SectionLabel>HISTORICAL SOURCE CONTEXT</SectionLabel>
-          <p className="text-base leading-relaxed text-[#f1efe8]/62">
+          <p className="text-base leading-relaxed text-canvas/62">
             {identityReconciliation.copy}
           </p>
           <a
             href="/ai-information#identity-reconciliation"
-            className="mt-6 inline-flex text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/58 underline decoration-[#f1efe8]/22 underline-offset-4 transition-colors hover:text-[#f1efe8]"
+            className="mt-6 inline-flex text-[10px] uppercase tracking-[0.24em] text-canvas/58 underline decoration-canvas/22 underline-offset-4 transition-colors hover:text-canvas"
           >
             Read the full identity reconciliation
           </a>
         </ScrollReveal>
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-7">
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-canvas/14 md:grid-cols-2 xl:grid-cols-7">
           {identityReconciliation.links.map((link, index) => (
             <div key={link.href}>
               <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
@@ -461,10 +461,10 @@ export default function AboutPage() {
                   href={link.href}
                   target={link.href.startsWith('http') ? '_blank' : undefined}
                   rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="block min-h-[160px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8]/[0.035]"
+                  className="block min-h-[160px] bg-canvas/[0.012] p-5 transition-colors hover:bg-canvas/[0.035]"
                 >
-                  <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-[#f1efe8]">{link.label}</h3>
-                  <p className="text-sm leading-relaxed text-[#f1efe8]/56">{link.description}</p>
+                  <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-canvas">{link.label}</h3>
+                  <p className="text-sm leading-relaxed text-canvas/56">{link.description}</p>
                 </a>
               </ScrollReveal>
             </div>
@@ -473,25 +473,25 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-[1480px] px-4 pb-16 md:px-8 xl:px-10 xl:pb-24">
-        <div className="grid grid-cols-1 border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-5">
+        <div className="grid grid-cols-1 border border-canvas/14 md:grid-cols-2 xl:grid-cols-5">
           {metrics.map(([value, label]) => (
             <motion.div
               key={value}
-              className="group border-b border-[#f1efe8]/12 p-6 transition-colors duration-500 last:border-b-0 hover:bg-[#f1efe8]/[0.025] md:border-r md:last:border-r-0 xl:border-b-0"
+              className="group border-b border-canvas/12 p-6 transition-colors duration-500 last:border-b-0 hover:bg-canvas/[0.025] md:border-r md:last:border-r-0 xl:border-b-0"
               whileHover={{ y: -4 }}
               transition={{ duration: 0.35, ease: 'easeOut' }}
             >
-              <div className="mb-5 font-serif text-4xl italic leading-none tracking-normal text-[#f1efe8]">{value}</div>
-              <p className="text-[10px] uppercase leading-relaxed tracking-[0.22em] text-[#f1efe8]/48">{label}</p>
+              <div className="mb-5 font-serif text-4xl italic leading-none tracking-normal text-canvas">{value}</div>
+              <p className="text-[10px] uppercase leading-relaxed tracking-[0.22em] text-canvas/48">{label}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 lg:grid-cols-[0.48fr_0.52fr] xl:px-10 xl:py-24">
+      <section className="mx-auto grid max-w-[1480px] grid-cols-1 gap-12 border-y border-canvas/12 px-4 py-16 md:px-8 lg:grid-cols-[0.48fr_0.52fr] xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false}>
-          <div className="mb-6 font-serif text-7xl italic leading-none text-[#f1efe8]/32">“</div>
-          <blockquote className="font-serif text-[clamp(3rem,5.8vw,7rem)] italic leading-[0.88] tracking-normal">
+          <div className="mb-6 font-serif text-7xl italic leading-none text-canvas/32">“</div>
+          <blockquote className="font-serif text-[3rem] md:text-[5rem] xl:text-[6.75rem] italic leading-[0.88] tracking-normal">
             I build systems where search,
             <br />
             data, and product judgment
@@ -499,7 +499,7 @@ export default function AboutPage() {
             turn into visibility.
           </blockquote>
         </ScrollReveal>
-        <div className="grid grid-cols-1 border-[#f1efe8]/12 md:grid-cols-3 md:border-l">
+        <div className="grid grid-cols-1 border-canvas/12 md:grid-cols-3 md:border-l">
           {[
             ['LOCATION', 'Austin, Texas'],
             ['EDUCATION', 'UT Austin · McCombs\nSchool of Business'],

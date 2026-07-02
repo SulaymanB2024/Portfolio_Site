@@ -45,12 +45,15 @@ const routesWithVoidOrganization = new Set(['aiInformation', 'method', 'voidAgen
 const atlasSoftwareRoutes = new Set(['atlas', 'atlasSampleCrawl', 'aiInformation']);
 
 const marketFiles = [
-  'dist/markets/network-monopolies/index.html',
-  'dist/markets/computational-commodity-systems/index.html',
-  'dist/markets/fiat-horizon/index.html',
   'dist/markets/ai-search-crawler-policy/index.html',
   'dist/markets/technical-seo-public-data-infrastructure/index.html',
   'dist/markets/canonical-identity-personal-seo/index.html',
+];
+
+const archivedMarketFiles = [
+  'dist/markets/network-monopolies/index.html',
+  'dist/markets/computational-commodity-systems/index.html',
+  'dist/markets/fiat-horizon/index.html',
 ];
 
 function read(file) {
@@ -422,7 +425,7 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     'Perplexity-User',
   ];
 
-  assert(llmsText.includes('Last updated: June 26, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('Last updated: July 1, 2026'), 'llms.txt: stale last updated date');
   assert(llmsText.includes('Selected work: https://sulayman-bowles.dev/work'), 'llms.txt: missing selected work route');
   assert(llmsText.includes('Atlas sample crawl run: https://sulayman-bowles.dev/atlas/sample-crawl'), 'llms.txt: missing Atlas sample crawl route');
   assert(llmsText.includes('Void Agency proof: https://sulayman-bowles.dev/void-agency'), 'llms.txt: missing Void Agency proof route');
@@ -485,6 +488,7 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
   assert(vercelConfig.trailingSlash === false, 'vercel: trailingSlash must redirect slash duplicate URLs');
   assert(!redirects.some((item) => item.source === '/void-agency'), 'vercel: /void-agency must not redirect away from canonical route');
   assert(redirects.some((item) => item.source === '/atlas/sample-run' && item.destination === '/atlas/sample-crawl'), 'vercel: missing /atlas/sample-run redirect');
+  assert(redirects.some((item) => item.source === '/atlas-animation' && item.destination === '/atlas/celestial-parallax'), 'vercel: missing /atlas-animation redirect');
   assert(redirects.some((item) => item.source === '/audit-intake' && item.destination === '/contact'), 'vercel: missing /audit-intake redirect');
   assert(redirects.some((item) => item.source === '/austin-seo' && item.destination === '/austin-technical-seo'), 'vercel: missing /austin-seo redirect');
   assert(
@@ -492,7 +496,13 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     'vercel: missing /technical-seo-case-study redirect',
   );
   assert(redirects.some((item) => item.source === '/projects/atlas' && item.destination === '/atlas'), 'vercel: missing legacy /projects/atlas redirect');
+  assert(redirects.some((item) => item.source === '/cv.html' && item.destination === '/resume'), 'vercel: missing legacy /cv.html redirect');
   assert(redirects.some((item) => item.source === '/resume.html' && item.destination === '/resume'), 'vercel: missing legacy /resume.html redirect');
+  assert(redirects.some((item) => item.source === '/official-information' && item.destination === '/ai-information'), 'vercel: missing /official-information redirect');
+  assert(redirects.some((item) => item.source === '/entity-profile' && item.destination === '/ai-information'), 'vercel: missing /entity-profile redirect');
+  assert(redirects.some((item) => item.source === '/source-information' && item.destination === '/ai-information'), 'vercel: missing /source-information redirect');
+  assert(redirects.some((item) => item.source === '/research-assets' && item.destination === '/research'), 'vercel: missing /research-assets redirect');
+  assert(redirects.some((item) => item.source === '/proof-assets' && item.destination === '/research'), 'vercel: missing /proof-assets redirect');
 }
 
 {
@@ -533,6 +543,12 @@ for (const file of marketFiles) {
   assert(ogImage === (article.image?.url ?? article.image), `${file}: Article image must match OG/Twitter image`);
   assert(title.replaceAll('&amp;', '&').length <= 62, `${file}: title is too long (${title.length})`);
   assert(description.length >= 145 && description.length <= 180, `${file}: description should be expanded to 145-180 chars (${description.length})`);
+}
+
+for (const file of archivedMarketFiles) {
+  const html = read(file);
+  const robots = metaContent(html, 'name="robots"');
+  assert(robots === 'noindex,nofollow', `${file}: archived market note should be statically generated with noindex,nofollow`);
 }
 
 assertVisibleText('dist/markets/ai-search-crawler-policy/index.html', [

@@ -1,4 +1,4 @@
-import { ArrowUp } from 'lucide-react';
+import ArrowUp from 'lucide-react/dist/esm/icons/arrow-up.js';
 import { isNavItemActive, navItemId, navLabel, primaryNav, utilityNav, type SiteNavItem } from '../content/siteNavigation';
 
 type InternalFooterProps = {
@@ -13,15 +13,15 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
     { label: 'Source', items: utilityNav },
   ];
 
-  const textClass = isDark ? 'text-[#f1efe8]' : 'text-ink';
-  const textMutedClass = isDark ? 'text-[#f1efe8]/58' : 'text-ink/56';
-  const textMutedNavClass = isDark ? 'text-[#f1efe8]/56 hover:text-[#f1efe8]' : 'text-ink/54 hover:text-ink';
-  const activeRuleClass = isDark ? 'bg-[#f1efe8]' : 'bg-ink';
-  const hoverSurfaceClass = isDark ? 'hover:bg-[#f1efe8]/7' : 'hover:bg-ink/[0.035]';
+  const textClass = isDark ? 'text-canvas' : 'text-ink';
+  const textMutedClass = isDark ? 'text-canvas/58' : 'text-ink/56';
+  const textMutedNavClass = isDark ? 'text-canvas/56 hover:text-canvas' : 'text-ink/54 hover:text-ink';
+  const activeRuleClass = isDark ? 'bg-canvas' : 'bg-ink';
+  const hoverSurfaceClass = isDark ? 'hover:bg-canvas/7' : 'hover:bg-ink/[0.035]';
   const bgClass = isDark ? 'frosted-acrylic-dark' : 'frosted-acrylic-light';
-  const dividerClass = isDark ? 'border-[#f1efe8]/16' : 'border-ink/16';
+  const dividerClass = isDark ? 'border-canvas/16' : 'border-ink/16';
   const returnClass = isDark
-    ? 'border-[#f1efe8]/24 text-[#f1efe8]/56 hover:border-[#f1efe8]/44 hover:bg-[#f1efe8]/7 hover:text-[#f1efe8]'
+    ? 'border-canvas/24 text-canvas/56 hover:border-canvas/44 hover:bg-canvas/7 hover:text-canvas'
     : 'border-ink/24 text-ink/54 hover:border-ink/44 hover:bg-ink/[0.035] hover:text-ink';
 
   return (
@@ -29,10 +29,10 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
       <div className={`site-footer grid gap-4 rounded-[8px] ${bgClass} px-4 py-4 md:px-6`}>
         <div className="grid gap-5 lg:grid-cols-[minmax(245px,0.58fr)_minmax(0,1.78fr)_minmax(230px,0.56fr)_auto] lg:items-start lg:gap-4">
           <a href="/" id="footer-brand-link" className="block min-w-0 transition-opacity duration-200 hover:opacity-72">
-            <span className={`site-footer-brand block truncate text-[11px] font-semibold leading-none ${textClass}`}>
+            <span className={`site-footer-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>
               SULAYMAN BOWLES
             </span>
-            <span className={`site-footer-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none ${textMutedClass}`}>
+            <span className={`site-footer-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
               Technical SEO · AI Search · Finance/Data
             </span>
           </a>
@@ -54,7 +54,7 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
                       rel={isExternal ? 'noreferrer' : undefined}
                       aria-current={active ? 'page' : undefined}
                       title={item.description}
-                      className={`site-footer-link group relative inline-flex min-h-10 items-center justify-center rounded-[6px] px-3 py-2 leading-none transition-colors duration-200 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
+                      className={`site-footer-link group relative inline-flex min-h-10 items-center justify-center rounded-[6px] px-3 py-2 leading-none tracking-[0.24em] transition-colors duration-200 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
                     >
                       <span className="block whitespace-nowrap">
                         {navLabel(item)}
@@ -67,7 +67,7 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
             ))}
           </nav>
 
-          <div className="site-footer-meta self-center whitespace-nowrap leading-[1.8] lg:self-start lg:text-right">
+          <div className="site-footer-meta self-center whitespace-nowrap leading-[1.8] tracking-[0.24em] lg:self-start lg:text-right">
             © 2026 SULAYMAN BOWLES
             <br />
             ALL RIGHTS RESERVED

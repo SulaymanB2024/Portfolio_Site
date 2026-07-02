@@ -132,7 +132,7 @@ export function GeometricPattern() {
   return (
     <div className="w-full h-full absolute inset-0 overflow-hidden bg-ink pointer-events-none z-0">
       <canvas ref={canvasRef} className="w-full h-full block" role="presentation" aria-hidden="true" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#070707_100%)] opacity-60" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--color-ink)_100%)] opacity-60" />
     </div>
   );
 }

@@ -75,18 +75,34 @@ function buildHead(route: SeoRoute, assetTags: string) {
       #seo-static-summary {
         box-sizing: border-box;
         min-height: 100vh;
-        padding: clamp(2rem, 6vw, 6rem);
-        background: #f1efe8;
-        color: #080807;
-        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        padding: 2rem;
+        background: var(--color-canvas, #f1efe8);
+        color: var(--color-ink, #080807);
+        font-family: var(--font-sans, Inter, ui-sans-serif, system-ui, sans-serif);
       }
       #seo-static-summary h1 {
         max-width: 70rem;
         margin: 0 0 1rem;
-        font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
-        font-size: clamp(3rem, 10vw, 8rem);
+        font-family: var(--font-serif, "Cormorant Garamond", ui-serif, Georgia, serif);
+        font-size: 3rem;
         font-weight: 300;
         line-height: 0.9;
+      }
+      @media (min-width: 768px) {
+        #seo-static-summary {
+          padding: 4rem;
+        }
+        #seo-static-summary h1 {
+          font-size: 5.5rem;
+        }
+      }
+      @media (min-width: 1200px) {
+        #seo-static-summary {
+          padding: 6rem;
+        }
+        #seo-static-summary h1 {
+          font-size: 8rem;
+        }
       }
       #seo-static-summary p {
         max-width: 42rem;

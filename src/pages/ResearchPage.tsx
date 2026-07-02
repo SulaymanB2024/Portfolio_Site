@@ -131,7 +131,7 @@ export default function ResearchPage() {
         <section className="grid gap-10 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.42fr_0.58fr]">
           <div>
             <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-current/48">Claim boundaries</p>
-            <h2 className="font-serif text-[clamp(3rem,6vw,7rem)] italic leading-[0.9] tracking-normal">
+            <h2 className="font-serif text-[3rem] md:text-[5rem] xl:text-[6.75rem] italic leading-[0.9] tracking-normal">
               Evidence stays separate from outcomes.
             </h2>
           </div>

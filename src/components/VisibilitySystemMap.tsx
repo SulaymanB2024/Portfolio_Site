@@ -81,7 +81,7 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
   const [hoveredCol, setHoveredCol] = useState<number | null>(null);
 
   return (
-    <div className={`relative overflow-hidden border border-[#f1efe8]/15 bg-[#080807] ${className}`}>
+    <div className={`relative overflow-hidden border border-canvas/15 bg-ink ${className}`}>
       <svg viewBox="0 0 1000 620" className="h-full w-full" role="img" aria-label="Visibility system map showing messy web signals transformed into business clarity">
         <defs>
           <pattern id="visibility-grid" width="32" height="32" patternUnits="userSpaceOnUse">

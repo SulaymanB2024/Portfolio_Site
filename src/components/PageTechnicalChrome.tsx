@@ -3,7 +3,7 @@ type PageTechnicalChromeProps = {
 };
 
 export function PageTechnicalChrome({ tone = 'dark' }: PageTechnicalChromeProps) {
-  const markClass = tone === 'dark' ? 'bg-[#f1efe8]/24' : 'bg-ink/24';
+  const markClass = tone === 'dark' ? 'bg-canvas/24' : 'bg-ink/24';
 
   return (
     <div className="pointer-events-none fixed inset-0 z-40 hidden select-none lg:block">

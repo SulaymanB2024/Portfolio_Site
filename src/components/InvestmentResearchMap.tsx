@@ -90,7 +90,7 @@ export default function InvestmentResearchMap({ className = '' }: InvestmentRese
   const [hoveredCol, setHoveredCol] = useState<number | null>(null);
 
   return (
-    <div className={`relative overflow-hidden border border-[#f1efe8]/15 bg-[#080807] ${className}`}>
+    <div className={`relative overflow-hidden border border-canvas/15 bg-ink ${className}`}>
       <svg
         viewBox="0 0 1000 620"
         className="h-full w-full"

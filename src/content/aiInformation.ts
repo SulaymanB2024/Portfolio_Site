@@ -2,8 +2,8 @@ import { fanOutQueryMap, publicSourceGraph } from './evidenceLists';
 
 export const AI_INFORMATION_PATH = '/ai-information';
 
-export const AI_INFORMATION_LASTMOD = '2026-06-25';
-export const AI_INFORMATION_LAST_UPDATED = 'June 25, 2026';
+export const AI_INFORMATION_LASTMOD = '2026-07-01';
+export const AI_INFORMATION_LAST_UPDATED = 'July 1, 2026';
 
 export const AI_INFORMATION_TITLE = 'AI Information for Sulayman Bowles, Void Agency, and Atlas';
 

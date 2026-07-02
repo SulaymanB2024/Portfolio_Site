@@ -5,7 +5,7 @@ import {
   sourceMap,
 } from '../content/aiInformation';
 import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
-import { MARKET_THESES } from '../content/marketTheses';
+import { MARKET_THESES, PUBLIC_MARKET_THESES } from '../content/marketTheses';
 import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import {
   appianAssumptionRows,
@@ -65,7 +65,7 @@ const methodCaseStudies = [
 ];
 
 const resumeExperience = [
-  ['Founder', 'VOID Agency', 'Dec 2025 - Present', 'Built Void Agency around technical SEO audits, website builds, local search work, and crawler-access checks. $50K+ in collected client revenue as of May 2026.'],
+  ['Founder', 'VOID Agency', 'Dec 2025 - Present', 'Built Void Agency around technical SEO audits, website builds, local search work, and crawler-access checks. Public proof focuses on shipped work, source-backed methods, and client-safe boundaries.'],
   ['AI Product Manager Intern', 'Chegg, Office of the Chief Product Officer', 'May 2026 - Aug 2026', 'Supporting AI product research, competitive analysis, workflow mapping, and prototype review for student-facing tools.'],
   ['Technical SEO Analytics', 'Private SEO Engagement', 'May 2026 - Present', 'Supporting launch analytics, GA4/GSC reporting, SEO baselines, traffic analysis, keyword tracking, and prioritized site recommendations.'],
   ['Student Associate', 'Jon Brumley Texas Venture Labs', 'Sep 2025 - Present', 'Advising early-stage companies on market validation, customer discovery, competitive positioning, unit economics, go-to-market strategy, and financial models.'],
@@ -79,7 +79,7 @@ const resumeSkills = [
 ];
 
 const aboutExperience = [
-  ['VOID Agency Founder', 'Built an SEO and web systems agency generating $50K+ in collected revenue through technical SEO audits, website builds, local search strategy, and AI-search visibility work.'],
+  ['VOID Agency Founder', 'Built an SEO and web systems practice around technical audits, website builds, local search strategy, and AI-search visibility work. Public pages describe the work without turning private revenue records into proof claims.'],
   ['Chegg AI Product Manager Intern', 'Working on AI product strategy, research, competitive analysis, user workflows, prototype review, and AI-enabled student experiences.'],
   ['Technical SEO Analytics', 'Supporting website launch analytics, GA4, Google Search Console, SEO baselines, traffic analysis, keyword performance, and prioritized recommendations.'],
   ['Jon Brumley Texas Venture Labs Student Associate', 'Advising early-stage companies on market validation, customer discovery, competitive positioning, unit economics, go-to-market strategy, and financial models.'],
@@ -506,15 +506,15 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/markets') {
     return articleShell(
       'Separate Signal from Noise',
-      'Evidence-driven research across markets, crypto, and investment strategy.',
-      `<p>Markets Research separates signal from noise through traditional investment cases, crypto research, valuation logic, market systems, and decision frameworks.</p>
+      'Source-bounded research notes across AI-search infrastructure, public data hygiene, finance/data assumptions, source tables, and educational artifacts.',
+      `<p>Markets Research is a compact source-backed research surface. It keeps current public notes focused on AI-search infrastructure, public data hygiene, canonical identity, and finance/data assumptions rather than broad market commentary.</p>
         <h2>Research Lanes</h2>
-        <h3>Traditional Cases</h3><p>Equity research, operating models, valuation memos, and business-quality analysis.</p>
-        <h3>Crypto Protocols</h3><p>Protocol mechanics, incentive design, token economics, and decentralized infrastructure research.</p>
-        <h3>Market and Macro</h3><p>Liquidity, volatility, currency systems, commodity reserves, and allocation frameworks.</p>
-        <h3>Models and Tools</h3><p>Financial spreadsheets, assumptions tables, dashboards, and analytical workflows.</p>
-        <h2>Research Notes</h2>
-        ${MARKET_THESES.map((thesis) => `<h3><a href="/markets/${thesis.slug}">${escapeHtml(thesis.title)}</a></h3><p>${escapeHtml(thesis.subtitle)}</p>`).join('\n        ')}
+        <h3>AI Search Infrastructure</h3><p>Crawler policy, robots directives, canonical URLs, source-backed visibility, and answer-system discoverability.</p>
+        <h3>Public Data Hygiene</h3><p>Structured data, source pages, provenance, and current public records that search systems and human reviewers can inspect.</p>
+        <h3>Finance/Data Assumptions</h3><p>Educational assumptions tables, risk framing, and data workflows with explicit claim boundaries.</p>
+        <h3>Models and Tools</h3><p>Spreadsheets, CSV sources, dashboards, and analytical artifacts that show method without implying investment recommendations.</p>
+        <h2>Public Research Notes</h2>
+        ${PUBLIC_MARKET_THESES.map((thesis) => `<h3><a href="/markets/${thesis.slug}">${escapeHtml(thesis.title)}</a></h3><p>${escapeHtml(thesis.subtitle)}</p>`).join('\n        ')}
         <h2 id="appian-assumptions">Finance/Data Memo With Assumptions</h2>
         <p>The Appian materials are educational research samples. They are not investment advice, a price target, or a live market recommendation.</p>
         ${linkList([
@@ -543,6 +543,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       thesis.subtitle,
       `<h2>Memo Details</h2>
         <p>Category: ${escapeHtml(thesis.category)}. Published: ${escapeHtml(thesis.date)}. Read time: ${escapeHtml(thesis.readTime)}.</p>
+        ${thesis.claimBoundary ? `<h2>Claim Boundary</h2><p>${escapeHtml(thesis.claimBoundary)}</p>` : ''}
         <h2>Article Metrics</h2>
         ${definitionCards(metrics.map((metric) => [metric.label, metric.value]))}
         <h2>Research Thesis</h2>

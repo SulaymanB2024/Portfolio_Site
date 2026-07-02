@@ -19,7 +19,7 @@ const experience = [
     org: 'VOID Agency',
     dates: 'Dec 2025 - Present',
     summary:
-      'Built Void Agency around technical SEO audits, website builds, local search work, and crawler-access checks. $50K+ in collected client revenue as of May 2026.',
+      'Built Void Agency around technical SEO audits, website builds, local search work, and crawler-access checks. Public proof focuses on shipped work, source-backed methods, and client-safe boundaries.',
   },
   {
     role: 'AI Product Manager Intern',
@@ -102,12 +102,12 @@ export default function ResumePage() {
         <section className="grid min-h-[72vh] items-end gap-12 pb-14 lg:grid-cols-[0.64fr_0.36fr]">
           <div>
             <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-ink/48">Resume</p>
-            <h1 className="max-w-full font-serif text-[clamp(3.2rem,16vw,12rem)] italic leading-[0.82] tracking-normal md:leading-[0.78] md:tracking-normal">
+            <h1 className="max-w-full font-serif text-[3.2rem] md:text-[7rem] xl:text-[11rem] italic leading-[0.82] tracking-normal md:leading-[0.78] md:tracking-normal">
               <span className="block sm:inline">Sulayman</span>{' '}
               <span className="block sm:inline">Bowles</span>{' '}
               <span className="block sm:inline">Resume</span>
             </h1>
-            <p className="mt-10 max-w-3xl [overflow-wrap:anywhere] font-serif text-[clamp(1.38rem,6vw,5rem)] italic leading-[1] tracking-normal text-ink/68 md:leading-[0.94] md:tracking-normal">
+            <p className="mt-10 max-w-3xl [overflow-wrap:anywhere] font-serif text-[1.38rem] md:text-[3rem] xl:text-[4.75rem] italic leading-[1] tracking-normal text-ink/68 md:leading-[0.94] md:tracking-normal">
               Technical SEO, Atlas, finance/data research, and product/software execution.
             </p>
           </div>
@@ -214,7 +214,7 @@ export default function ResumePage() {
               <h3 className="mb-4 text-[10px] uppercase tracking-[0.24em] text-ink/50">Ventures & System Audits</h3>
               <p className="text-sm font-semibold text-ink">Selected Milestones</p>
               <ul className="mt-3 space-y-2 text-xs leading-relaxed text-ink/68">
-                <li>• Void Agency: Built crawl audit models and website systems for commercial engagements ($50k+ revenue May 2026)</li>
+                <li>• Void Agency: Built crawl audit models and website systems for commercial engagements with public proof kept to shipped work, methods, and client-safe boundaries</li>
                 <li>• Scraper Atlas: Custom Python & SQLite crawler parsing 50k+ URLs for diagnostic intelligence</li>
               </ul>
             </article>

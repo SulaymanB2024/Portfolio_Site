@@ -29,7 +29,7 @@ export default function AtlasSampleCrawlPage() {
       <section className="relative z-10 mx-auto grid min-h-[66vh] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-16 pt-20 md:px-8 lg:grid-cols-[0.46fr_0.54fr] xl:px-10">
         <div className="self-end">
           <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-ink/48">Atlas sample crawl</p>
-          <h1 className="font-serif text-[clamp(3.5rem,8vw,8.8rem)] italic leading-[0.84] tracking-normal">
+          <h1 className="font-serif text-[3.5rem] md:text-[6rem] xl:text-[8rem] italic leading-[0.84] tracking-normal">
             Sanitized crawl evidence.
           </h1>
           <p className="mt-10 max-w-2xl text-base leading-relaxed text-ink/64">
@@ -55,7 +55,7 @@ export default function AtlasSampleCrawlPage() {
 
       <section className="relative z-10 mx-auto max-w-[1480px] border-y border-ink/12 px-4 py-16 md:px-8 xl:px-10">
         <div className="mb-9 grid gap-8 lg:grid-cols-[0.38fr_0.62fr]">
-          <h2 className="font-serif text-[clamp(2.8rem,5vw,6rem)] italic leading-[0.92] tracking-normal">
+          <h2 className="font-serif text-[2.8rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.92] tracking-normal">
             What the sample proves.
           </h2>
           <div className="grid gap-3">

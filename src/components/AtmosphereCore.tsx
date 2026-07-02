@@ -48,7 +48,7 @@ export default function AtmosphereCore({ className = '' }: { className?: string 
 
       
       {/* Vignette / dark edges */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#070707_100%)] opacity-80 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-ink)_100%)] opacity-80 pointer-events-none" />
     </div>
   );
 }

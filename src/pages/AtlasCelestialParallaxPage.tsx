@@ -1,4 +1,4 @@
-import { ArrowDown } from 'lucide-react';
+import ArrowDown from 'lucide-react/dist/esm/icons/arrow-down.js';
 import { motion, useScroll, useTransform, type MotionValue } from 'motion/react';
 import { useRef, type CSSProperties } from 'react';
 import InternalHeader from '../components/InternalHeader';
@@ -121,7 +121,7 @@ export default function AtlasCelestialParallaxPage() {
             <div className="absolute inset-x-0 bottom-0 h-px bg-ink/8" />
           </div>
 
-          <div className="relative mx-auto h-[calc(100svh-8rem)] w-full max-w-[1480px] overflow-hidden border border-ink/14 bg-canvas/65 shadow-[0_18px_60px_rgba(8,8,7,0.035)]">
+          <div className="relative mx-auto h-[calc(100svh-8rem)] w-full max-w-[1480px] overflow-hidden border border-ink/14 bg-canvas/65 shadow-[0_18px_60px_color-mix(in_srgb,var(--color-ink)_3.5%,transparent)]">
             <div className="pointer-events-none absolute inset-5 z-20 hidden md:block" aria-hidden="true">
               <div className="absolute left-0 top-0 h-3 w-px bg-ink/18" />
               <div className="absolute left-0 top-0 h-px w-3 bg-ink/18" />
@@ -157,7 +157,7 @@ export default function AtlasCelestialParallaxPage() {
                   key={annotation.label}
                   className={`absolute max-w-[10rem] text-[9px] leading-tight text-ink/52 ${annotation.className}`}
                 >
-                  <span className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ink/28 bg-canvas shadow-[0_0_0_5px_rgba(8,8,7,0.035)]" />
+                  <span className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ink/28 bg-canvas shadow-[0_0_0_5px_color-mix(in_srgb,var(--color-ink)_3.5%,transparent)]" />
                   <span
                     className={`absolute top-1/2 -translate-y-1/2 border-dashed border-ink/20 ${annotation.line}`}
                   />
@@ -180,7 +180,7 @@ export default function AtlasCelestialParallaxPage() {
                 <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
                   ATLAS ENGINE
                 </p>
-                <h1 className="font-serif text-[clamp(3rem,13vw,5.1rem)] font-light leading-[0.9] tracking-normal text-ink md:text-[clamp(3.4rem,5.1vw,5.1rem)]">
+                <h1 className="font-serif text-[3rem] font-light leading-[0.9] tracking-normal text-ink md:text-[4.25rem] xl:text-[5.1rem]">
                   To see the{' '}
                   <br />
                   whole structure.

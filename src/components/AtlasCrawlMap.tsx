@@ -198,7 +198,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
       {/* Top View Mode Selectors */}
       <div className="flex items-center justify-between border-b border-canvas/14 pb-3 mb-4 text-[9px] uppercase tracking-[0.25em] z-10">
         <div className="flex items-center gap-1">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#b7c8a8] animate-pulse" />
+          <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
           <span className="text-canvas/50">ENGINE SCAN MODE:</span>
         </div>
         <div className="flex gap-4">
@@ -212,7 +212,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
               {viewMode === mode && (
                 <motion.div 
                   layoutId="activeModeUnderline" 
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#f1efe8]" 
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-canvas"
                 />
               )}
             </button>
@@ -533,12 +533,12 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
         <div className="absolute left-6 bottom-6 w-80 bg-black/82 border border-canvas/14 p-4 font-mono z-10">
           <div className="text-[9px] uppercase tracking-[0.25em] text-canvas/42 mb-2 border-b border-canvas/12 pb-1.5 flex items-center justify-between">
             <span>LIVE TELEMETRY STREAM</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-[#b7c8a8] animate-ping" />
+            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />
           </div>
           <div className="space-y-1.5 min-h-[90px] flex flex-col justify-end text-[8.5px] text-canvas/68">
             {logs.map((log, index) => (
               <div key={index} className="truncate select-none font-mono">
-                <span className="text-[#f1efe8]/80 mr-1.5">&gt;</span> {log}
+                <span className="text-canvas/80 mr-1.5">&gt;</span> {log}
               </div>
             ))}
           </div>

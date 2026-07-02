@@ -36,7 +36,7 @@ export default function SimplePage() {
           <section className="grid min-h-[68vh] content-end gap-12 pt-20 lg:grid-cols-[minmax(0,0.72fr)_minmax(220px,0.28fr)]">
             <div>
               <p className="text-[10px] uppercase tracking-[0.34em] text-ink/45">Sulayman Bowles / Book</p>
-              <h1 className="mt-10 max-w-4xl font-serif text-[clamp(4rem,13vw,10rem)] italic leading-[0.84] tracking-normal">
+              <h1 className="mt-10 max-w-4xl font-serif text-[4rem] md:text-[7rem] xl:text-[10rem] italic leading-[0.84] tracking-normal">
                 {SIMPLE_BOOK_H1}
               </h1>
             </div>
@@ -105,7 +105,7 @@ export default function SimplePage() {
               <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-ink/42">
                 {chapter.numeral} / {chapter.eyebrow}
               </p>
-              <h2 className="mt-5 font-serif text-[clamp(2.4rem,6vw,4.6rem)] italic leading-[0.95] tracking-normal text-ink">
+              <h2 className="mt-5 font-serif text-[2.4rem] md:text-[3.5rem] xl:text-[4.5rem] italic leading-[0.95] tracking-normal text-ink">
                 {chapter.title}
               </h2>
               <div className="mt-8">

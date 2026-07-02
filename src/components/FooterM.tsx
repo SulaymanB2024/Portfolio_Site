@@ -30,7 +30,7 @@ export function FooterM() {
 
   return (
     <motion.div 
-      className="absolute bottom-[-10%] right-[-5%] text-[60vw] md:text-[40vw] font-serif uppercase tracking-tighter leading-none opacity-[0.03] pointer-events-none select-none transform-gpu"
+      className="absolute bottom-[-10%] right-[-5%] text-[18rem] md:text-[26rem] xl:text-[34rem] font-serif uppercase tracking-normal leading-none opacity-[0.03] pointer-events-none select-none transform-gpu"
       style={{
         x: animX,
         y: animY,

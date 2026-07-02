@@ -17,6 +17,7 @@ videos/
 traces/
 downloads/
 artifacts/
+audits/
 *.trace
 *.trace.zip
 *.har

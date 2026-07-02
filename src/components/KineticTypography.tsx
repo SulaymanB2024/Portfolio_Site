@@ -18,19 +18,19 @@ export function KineticTypography() {
 
       
       <motion.div style={{ x: x1, willChange: 'transform', backfaceVisibility: 'hidden' }} className="flex whitespace-nowrap transform-gpu">
-        <span className="text-[15vw] md:text-[10vw] font-sans font-black uppercase tracking-tighter mix-blend-difference opacity-20">
+        <span className="text-[4.5rem] md:text-[7rem] xl:text-[9rem] font-sans font-black uppercase tracking-normal mix-blend-difference opacity-20">
           CRAWL SIGNAL CRAWL SIGNAL CRAWL SIGNAL
         </span>
       </motion.div>
       
       <motion.div style={{ x: x2, willChange: 'transform', backfaceVisibility: 'hidden' }} className="flex whitespace-nowrap -mt-[5vw] transform-gpu">
-        <span className="text-[15vw] md:text-[10vw] font-serif italic uppercase tracking-tighter text-outline-light opacity-50">
+        <span className="text-[4.5rem] md:text-[7rem] xl:text-[9rem] font-serif italic uppercase tracking-normal text-outline-light opacity-50">
           STRUCTURE EVIDENCE STRUCTURE EVIDENCE STRUCTURE EVIDENCE
         </span>
       </motion.div>
       
       <motion.div style={{ x: x3, willChange: 'transform', backfaceVisibility: 'hidden' }} className="flex whitespace-nowrap -mt-[5vw] transform-gpu">
-        <span className="text-[15vw] md:text-[10vw] font-sans font-black uppercase tracking-tighter mix-blend-difference opacity-20">
+        <span className="text-[4.5rem] md:text-[7rem] xl:text-[9rem] font-sans font-black uppercase tracking-normal mix-blend-difference opacity-20">
           MODEL DECIDE SHIP MODEL DECIDE SHIP
         </span>
       </motion.div>

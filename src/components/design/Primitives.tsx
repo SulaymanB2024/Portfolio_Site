@@ -118,7 +118,7 @@ export function SectionHeader({
 export function EditorialHeading({ className, ...props }: ComponentPropsWithoutRef<'h1'>) {
   return (
     <h1
-      className={cx('font-serif text-[clamp(3rem,9vw,8rem)] italic leading-[0.86] tracking-normal', className)}
+      className={cx('font-serif text-[3.4rem] md:text-[5.75rem] xl:text-[8rem] italic leading-[0.86] tracking-normal', className)}
       {...props}
     />
   );
