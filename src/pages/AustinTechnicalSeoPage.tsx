@@ -14,7 +14,7 @@ import {
   TechnicalPanel,
   TextLink,
 } from '../components/design/Primitives';
-import { austinSeoSignals } from '../content/seoExpansion';
+import { austinBenchmarkLimits, austinBenchmarkSnapshot, austinSeoSignals } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
@@ -23,6 +23,17 @@ const austinArtifactItems = austinSeoSignals.slice(0, 4).map((signal, index) => 
   label: `Signal ${String(index + 1).padStart(2, '0')}`,
   value: signal,
 }));
+const localReviewDetails = [
+  'Review whether Austin service, product, location, and proof pages are reachable from normal internal paths and represented by stable canonical URLs.',
+  'Check whether the page explains who the business serves, what is offered, how to contact the owner, and which public evidence supports the claim.',
+  'Use Search Console, analytics, and Google Business Profile data only when access is available; do not infer private performance from public crawl output.',
+];
+
+const austinDeliverables = [
+  'A short URL-level issue list with observed fields, affected pages, severity, and implementation notes.',
+  'A crawlability and source-clarity review covering robots.txt, sitemap, canonicals, structured data, internal links, and page copy.',
+  'A practical next-step order for founders, marketers, or developers, with unsupported ranking and traffic claims left out.',
+];
 
 export default function AustinTechnicalSeoPage() {
   useSEO(AUSTIN_SEO);
@@ -86,6 +97,73 @@ export default function AustinTechnicalSeoPage() {
           </SurfaceGrid>
         </PageFrame>
       </section>
+
+      <PageFrame className="relative z-10 py-16">
+        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.44fr_0.56fr]">
+          <div>
+            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
+              Austin crawlability pilot snapshot.
+            </h2>
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
+              The local page is backed by a bounded public fetch sample, not a local-ranking claim. It gives a small public-data baseline for how Austin-area company sites expose crawlability signals.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4 text-[10px] uppercase tracking-[0.22em] text-current/58">
+              <TextLink href="/research/austin-crawlability-benchmark-summary.json" className="text-current/68 hover:text-current">
+                Open summary JSON
+              </TextLink>
+              <TextLink href="/research/austin-crawlability-benchmark-pilot.csv" className="text-current/68 hover:text-current">
+                Open pilot CSV
+              </TextLink>
+            </div>
+          </div>
+          <div className="grid gap-6">
+            <div className="grid grid-cols-1 gap-px overflow-hidden border border-current/14 md:grid-cols-2">
+              {austinBenchmarkSnapshot.map((item) => (
+                <TechnicalPanel key={item.label} className="min-h-[120px] p-5">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-current/42">{item.label}</p>
+                  <p className="mt-5 text-sm leading-relaxed text-current/66">{item.value}</p>
+                </TechnicalPanel>
+              ))}
+            </div>
+            <ul className="grid gap-3 text-sm leading-relaxed text-current/58">
+              {austinBenchmarkLimits.map((item) => (
+                <li key={item} className="border-l border-current/14 pl-4">{item}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </PageFrame>
+
+      <PageFrame className="relative z-10 py-16">
+        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.46fr_0.54fr]">
+          <div>
+            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
+              Local evidence before local claims.
+            </h2>
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
+              The Austin page should be useful even before analytics access exists. The first pass uses public crawl evidence and page clarity, then adds private Search Console or analytics data only when the site owner provides it.
+            </p>
+          </div>
+          <div className="grid gap-6">
+            <div>
+              <h3 className="text-[10px] uppercase tracking-[0.24em] text-current/44">Review detail</h3>
+              <ul className="mt-6 grid gap-4 text-sm leading-relaxed text-current/62">
+                {localReviewDetails.map((item) => (
+                  <li key={item} className="border-l border-current/14 pl-4">{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-[10px] uppercase tracking-[0.24em] text-current/44">Deliverables</h3>
+              <ul className="mt-6 grid gap-4 text-sm leading-relaxed text-current/62">
+                {austinDeliverables.map((item) => (
+                  <li key={item} className="border-l border-current/14 pl-4">{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+      </PageFrame>
 
       <PageFrame className="relative z-10 py-16">
         <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.55fr_0.45fr]">

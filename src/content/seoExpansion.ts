@@ -170,6 +170,29 @@ export const auditCaseStudySteps = [
   },
 ];
 
+export const auditExampleFindingChain = [
+  {
+    label: 'Observed field',
+    value:
+      '/resources/seo-tools is a sanitized demo URL with status 200, indexable state, crawl depth 2, 18 inlinks, and a missing canonical field.',
+  },
+  {
+    label: 'Interpreted risk',
+    value:
+      'A missing canonical can fragment duplicate or template signals when similar pages exist, but the crawl row is still an observation before it becomes a priority.',
+  },
+  {
+    label: 'Implementation action',
+    value:
+      'Choose the preferred canonical, update template output, confirm internal links point at the preferred URL, and rerun the crawl to verify the field changed.',
+  },
+  {
+    label: 'Boundary',
+    value:
+      'This is a sanitized demo row, not a private client record, ranking claim, traffic claim, revenue result, or answer-placement claim.',
+  },
+];
+
 export const austinSeoSignals = [
   'Crawlable service and location pages with stable canonical URLs',
   'Clear business identity, contact path, and service-area language',
@@ -177,6 +200,21 @@ export const austinSeoSignals = [
   'Structured data that matches visible content instead of inventing credentials',
   'Clear copy for search review and human readers',
   'Google Business Profile, analytics, and Search Console review when access is available',
+];
+
+export const austinBenchmarkSnapshot = [
+  { label: 'Generated', value: '2026-06-25' },
+  { label: 'Sample', value: '12 Austin-area public homepages' },
+  { label: 'Homepage fetches', value: '12 completed; 12 resolved to HTTPS' },
+  { label: 'Robots sitemap declarations', value: '10 rows declared a sitemap URL' },
+  { label: 'Sitemap fetches', value: '10 returned 2xx or 3xx' },
+  { label: 'Measurement gaps', value: '6 rows carried access, timeout, or challenge notes' },
+];
+
+export const austinBenchmarkLimits = [
+  'The pilot is not representative of all Austin companies.',
+  'Rows do not claim rankings, traffic movement, revenue impact, AI citations, or site health.',
+  'Access-limited, timed-out, or challenged fetches are measurement gaps, not negative findings.',
 ];
 
 export const voidAgencyProofLinks = [

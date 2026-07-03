@@ -56,6 +56,12 @@ const archivedMarketFiles = [
   'dist/markets/fiat-horizon/index.html',
 ];
 
+const archivedMarketPaths = [
+  '/markets/network-monopolies',
+  '/markets/computational-commodity-systems',
+  '/markets/fiat-horizon',
+];
+
 function read(file) {
   return fs.readFileSync(path.resolve(file), 'utf8');
 }
@@ -481,6 +487,12 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     assert(publicSitemapText.includes(loc), `public sitemap: missing ${loc}`);
   }
 
+  for (const pathname of archivedMarketPaths) {
+    const loc = `<loc>${absolutePath(pathname)}</loc>`;
+    assert(!sitemapText.includes(loc), `dist sitemap: archived URL should be excluded: ${loc}`);
+    assert(!publicSitemapText.includes(loc), `public sitemap: archived URL should be excluded: ${loc}`);
+  }
+
   assert(!sitemapText.includes('#'), 'dist sitemap should not contain hash-only URLs');
   assert(!publicSitemapText.includes('#'), 'public sitemap should not contain hash-only URLs');
 }
@@ -552,6 +564,7 @@ for (const file of archivedMarketFiles) {
   const html = read(file);
   const robots = metaContent(html, 'name="robots"');
   assert(robots === 'noindex,nofollow', `${file}: archived market note should be statically generated with noindex,nofollow`);
+  assertVisibleText(file, ['Archived', 'not investment advice', 'current recommendation']);
 }
 
 assertVisibleText('dist/markets/ai-search-crawler-policy/index.html', [

@@ -34,6 +34,18 @@ const fitNotes = [
   },
 ];
 
+const usefulBriefDetails = [
+  'The canonical site URL, the pages or templates that feel underperforming, and whether the issue is crawlability, indexation, visibility, conversion, or reporting.',
+  'Any available Search Console, GA4, CMS, sitemap, crawl export, or analytics context that can be reviewed after scope is agreed.',
+  'The decision the audit should support: what to fix first, what to stop doing, what evidence is missing, or what handoff an engineer or owner needs.',
+];
+
+const intakeBoundaries = [
+  'Do not send passwords, API keys, payment details, unreleased client data, or production credentials through the public form.',
+  'The first pass can use public pages and crawl evidence. Private analytics or Search Console data should only enter after the project scope is clear.',
+  'The output should separate observations from interpretation, then turn the evidence into a short implementation path.',
+];
+
 const contactProofLinks = [
   ...contextualProofLinks.slice(0, 2),
   {
@@ -136,6 +148,35 @@ export default function ContactPage() {
           <a href="mailto:sulayman.bowles@gmail.com" className="underline decoration-canvas/18 underline-offset-4 transition-colors hover:text-canvas">
             Direct contact: sulayman.bowles@gmail.com
           </a>
+        </div>
+      </section>
+
+      <section className="relative z-10 mx-auto max-w-[1480px] border-y border-canvas/12 px-4 py-16 md:px-8 xl:px-10">
+        <div className="mb-10 grid gap-8 lg:grid-cols-[0.38fr_0.62fr]">
+          <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
+            What makes the brief usable.
+          </h2>
+          <p className="max-w-3xl self-end text-base leading-relaxed text-canvas/58">
+            A useful audit request gives enough source material to inspect the problem without guessing. The first exchange should define the site, the evidence available, and the decision the work needs to support.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-canvas/14 lg:grid-cols-2">
+          <div className="bg-canvas/[0.012] p-5">
+            <h3 className="text-[10px] uppercase tracking-[0.24em] text-canvas/44">Include</h3>
+            <ul className="mt-6 grid gap-4 text-sm leading-relaxed text-canvas/62">
+              {usefulBriefDetails.map((item) => (
+                <li key={item} className="border-l border-canvas/14 pl-4">{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-canvas/[0.012] p-5">
+            <h3 className="text-[10px] uppercase tracking-[0.24em] text-canvas/44">Keep out of the form</h3>
+            <ul className="mt-6 grid gap-4 text-sm leading-relaxed text-canvas/62">
+              {intakeBoundaries.map((item) => (
+                <li key={item} className="border-l border-canvas/14 pl-4">{item}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 

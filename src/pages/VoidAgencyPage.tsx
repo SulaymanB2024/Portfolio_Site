@@ -8,6 +8,17 @@ import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const VOID_AGENCY_SEO = getSeoRoute('/void-agency')!;
+const reviewInputs = [
+  'Crawlable public URLs, sitemap coverage, robots directives, redirects, canonical tags, and indexability controls.',
+  'Page templates, internal-link paths, structured data, source clarity, and visible service proof before any growth claim.',
+  'Google Search Console, GA4, query groups, and conversion paths when the site owner can provide access.',
+];
+
+const serviceBoundaries = [
+  'No private client names, traffic gains, rankings, revenue movement, or AI citations are implied from this page.',
+  'The agency page explains the service branch; the method page carries the process; sample crawl data shows the evidence format.',
+  'Recommendations should stay tied to affected URLs, source observations, implementation effort, and a decision the owner can act on.',
+];
 
 export default function VoidAgencyPage() {
   useSEO(VOID_AGENCY_SEO);
@@ -42,6 +53,35 @@ export default function VoidAgencyPage() {
                 {item}
               </p>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative z-10 mx-auto max-w-[1480px] border-y border-canvas/12 px-4 py-16 md:px-8 xl:px-10">
+        <div className="mb-10 grid gap-8 lg:grid-cols-[0.38fr_0.62fr]">
+          <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
+            What gets reviewed before claims.
+          </h2>
+          <p className="max-w-3xl self-end text-base leading-relaxed text-canvas/58">
+            Void Agency work should start with inspectable site evidence, then move into priorities. The page stays separate from unsupported outcome claims so the service description remains reviewable.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-canvas/14 lg:grid-cols-2">
+          <div className="bg-canvas/[0.012] p-6">
+            <h3 className="text-[10px] uppercase tracking-[0.24em] text-canvas/44">Audit inputs</h3>
+            <ul className="mt-6 grid gap-4 text-sm leading-relaxed text-canvas/62">
+              {reviewInputs.map((item) => (
+                <li key={item} className="border-l border-canvas/14 pl-4">{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-canvas/[0.012] p-6">
+            <h3 className="text-[10px] uppercase tracking-[0.24em] text-canvas/44">Public limits</h3>
+            <ul className="mt-6 grid gap-4 text-sm leading-relaxed text-canvas/62">
+              {serviceBoundaries.map((item) => (
+                <li key={item} className="border-l border-canvas/14 pl-4">{item}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

@@ -11,7 +11,10 @@ import {
   appianAssumptionRows,
   atlasSampleFindings,
   atlasSampleRows,
+  auditExampleFindingChain,
   auditCaseStudySteps,
+  austinBenchmarkLimits,
+  austinBenchmarkSnapshot,
   austinSeoSignals,
   contextualProofLinks,
   RESEARCH_ASSETS,
@@ -385,6 +388,11 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'Void Agency',
       'Service-practice page for the technical SEO branch.',
       `<p>Void Agency is the service branch connected to Sulayman Bowles work in technical SEO, crawlability, indexation diagnostics, structured content, analytics review, and web audits.</p>
+        <h2>What Gets Reviewed Before Claims</h2>
+        <h3>Audit inputs</h3>
+        <ul><li>Crawlable public URLs, sitemap coverage, robots directives, redirects, canonical tags, and indexability controls.</li><li>Page templates, internal-link paths, structured data, source clarity, and visible service proof before any growth claim.</li><li>Google Search Console, GA4, query groups, and conversion paths when the site owner can provide access.</li></ul>
+        <h3>Public limits</h3>
+        <ul><li>No private client names, traffic gains, rankings, revenue movement, or AI citations are implied from this page.</li><li>The agency page explains the service branch; the method page carries the process; sample crawl data shows the evidence format.</li><li>Recommendations should stay tied to affected URLs, source observations, implementation effort, and a decision the owner can act on.</li></ul>
         <h2>Supporting Links</h2>
         ${voidAgencyProofLinks
           .map(
@@ -408,6 +416,11 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'Request a Technical SEO Audit',
       'Audit intake for technical SEO, crawl reviews, indexation, internal-link, structured-data, analytics, and markets research requests.',
       `<p>Use this route for technical SEO audits, crawl reviews, analytics, markets research, or other projects that need the source material checked before the recommendation.</p>
+        <h2>What Makes the Brief Usable</h2>
+        <h3>Include</h3>
+        <ul><li>The canonical site URL, the pages or templates that feel underperforming, and whether the issue is crawlability, indexation, visibility, conversion, or reporting.</li><li>Any available Search Console, GA4, CMS, sitemap, crawl export, or analytics context that can be reviewed after scope is agreed.</li><li>The decision the audit should support: what to fix first, what to stop doing, what evidence is missing, or what handoff an engineer or owner needs.</li></ul>
+        <h3>Keep out of the form</h3>
+        <ul><li>Do not send passwords, API keys, payment details, unreleased client data, or production credentials through the public form.</li><li>The first pass can use public pages and crawl evidence. Private analytics or Search Console data should only enter after the project scope is clear.</li><li>The output should separate observations from interpretation, then turn the evidence into a short implementation path.</li></ul>
         <h2>Project Types</h2>
         <ul><li>Technical SEO and search visibility audit</li><li>Atlas-style crawl review</li><li>GA4/GSC search analytics and launch baseline</li></ul>
         <h2>Typical Output</h2>
@@ -435,6 +448,17 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'Austin Technical SEO',
       'Local service-intent page for Austin technical SEO work.',
       `<p>Austin teams can use this page to evaluate crawlability, indexation, structured data, page clarity, and implementation detail before broader content or growth work.</p>
+        <h2>Austin Crawlability Pilot Snapshot</h2>
+        <p>The local page is backed by a bounded public fetch sample, not a local-ranking claim. It gives a small public-data baseline for how Austin-area company sites expose crawlability signals.</p>
+        ${definitionCards(austinBenchmarkSnapshot.map((item) => [item.label, item.value]))}
+        <h3>Measurement Limits</h3>
+        <ul>${austinBenchmarkLimits.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        ${linkList([
+          { label: 'Open Austin benchmark summary JSON', href: '/research/austin-crawlability-benchmark-summary.json' },
+          { label: 'Open Austin benchmark pilot CSV', href: '/research/austin-crawlability-benchmark-pilot.csv' },
+        ])}
+        <h2>Local Evidence Before Local Claims</h2>
+        <ul><li>Review whether Austin service, product, location, and proof pages are reachable from normal internal paths and represented by stable canonical URLs.</li><li>Check whether the page explains who the business serves, what is offered, how to contact the owner, and which public evidence supports the claim.</li><li>Use Search Console, analytics, and Google Business Profile data only when access is available; do not infer private performance from public crawl output.</li></ul>
         <h2>What Gets Checked</h2>
         <ul>${austinSeoSignals.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
         <h2>Claim Boundary</h2>
@@ -456,6 +480,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       `<p>This case study describes a public method and sample files. It does not expose private client records or claim private traffic movement, rankings, revenue impact, or answer-placement gains.</p>
         <h2>Case Study Steps</h2>
         ${definitionCards(auditCaseStudySteps.map((step) => [step.title, step.copy]))}
+        <h2>One Finding Chain</h2>
+        <p>A useful audit does not jump from a crawl field to a recommendation. It keeps the observed row, interpreted risk, implementation action, and boundary visible.</p>
+        ${definitionCards(auditExampleFindingChain.map((item) => [item.label, item.value]))}
         <h2>Review Chain</h2>
         ${definitionCards([
           ['Observed field', 'Status code, crawl depth, inlinks, outlinks, canonical state, and indexability.'],

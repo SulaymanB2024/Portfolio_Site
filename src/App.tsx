@@ -356,18 +356,39 @@ function SitemapPage() {
 
 function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
   const dark = route ? isDarkRoute(route.path) : false;
+  const heading = route?.h1 ?? HOME_SEO.h1;
+  const description = route?.description ?? HOME_SEO.description;
+  const summary = route?.staticSummary ?? HOME_SEO.staticSummary;
+  const fallbackLinks = [
+    ['Home', '/'],
+    ['Selected Work', '/work'],
+    ['Atlas', '/atlas'],
+    ['Method', '/method'],
+    ['Research', '/research'],
+    ['Contact', '/contact'],
+  ];
 
   return (
     <main
+      aria-busy="true"
       className={`flex min-h-screen items-center justify-center px-6 font-sans ${
         dark ? 'bg-ink text-canvas' : 'bg-canvas text-ink'
       }`}
     >
       <div className="w-full max-w-[1480px] border-t border-current/20 pt-6">
-        <div className="text-[10px] uppercase tracking-[0.32em] opacity-45">Loading</div>
+        <div className="text-[10px] uppercase tracking-[0.32em] opacity-45">Route overview</div>
         <h1 className="mt-6 font-serif text-[3.4rem] md:text-[5.75rem] xl:text-[8rem] italic leading-[0.86] tracking-normal">
-          {route?.h1 ?? HOME_SEO.h1}
+          {heading}
         </h1>
+        <p className="mt-8 max-w-3xl text-base leading-relaxed opacity-70">{description}</p>
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed opacity-58">{summary}</p>
+        <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-[10px] uppercase tracking-[0.22em] opacity-70" aria-label="Fallback route links">
+          {fallbackLinks.map(([label, href]) => (
+            <a key={href} href={href} className="underline decoration-current/20 underline-offset-4 transition-opacity hover:opacity-100">
+              {label}
+            </a>
+          ))}
+        </nav>
       </div>
     </main>
   );

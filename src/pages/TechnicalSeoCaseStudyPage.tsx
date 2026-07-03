@@ -12,7 +12,7 @@ import {
   SurfaceGrid,
   TechnicalPanel,
 } from '../components/design/Primitives';
-import { auditCaseStudySteps, contextualProofLinks } from '../content/seoExpansion';
+import { auditCaseStudySteps, auditExampleFindingChain, contextualProofLinks } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
@@ -75,6 +75,23 @@ export default function TechnicalSeoCaseStudyPage() {
                   </p>
                   <h2 className="text-xs uppercase leading-relaxed tracking-[0.18em] text-current">{step.title}</h2>
                   <p className="mt-5 text-sm leading-relaxed text-current/62">{step.copy}</p>
+                </TechnicalPanel>
+              ))}
+            </SurfaceGrid>
+          </section>
+
+          <section className="border-b border-current/12 py-16">
+            <SectionHeader eyebrow="Sanitized example" title="One finding chain.">
+              A useful audit does not jump from a crawl field to a recommendation. It keeps the observed row, interpreted risk, implementation action, and boundary visible.
+            </SectionHeader>
+            <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+              {auditExampleFindingChain.map((item, index) => (
+                <TechnicalPanel key={item.label} className="min-h-[230px] p-6">
+                  <p className="mb-8 text-[10px] uppercase tracking-[0.2em] text-current/42">
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <h2 className="text-xs uppercase leading-relaxed tracking-[0.18em] text-current">{item.label}</h2>
+                  <p className="mt-5 text-sm leading-relaxed text-current/62">{item.value}</p>
                 </TechnicalPanel>
               ))}
             </SurfaceGrid>
