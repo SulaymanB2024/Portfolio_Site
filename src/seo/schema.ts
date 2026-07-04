@@ -79,10 +79,10 @@ export function personSchema({ includeVoidAgencyAffiliation = false }: { include
     subjectOf: [
       {
         '@type': 'WebPage',
-        name: 'AI Information for Sulayman Bowles, Void Agency, and Atlas',
+        name: 'Profile Context for Sulayman Bowles, Void Agency, and Atlas',
         url: absoluteUrl('/ai-information'),
         description:
-          'Reference page for current identity, source links, clarifications, crawler signals, and search context.',
+          'Profile context page for current identity, project links, older background, and clarification limits.',
       },
       {
         '@type': 'ProfilePage',
@@ -518,7 +518,7 @@ export function aiInformationJsonLd(): JsonLd {
     projectSchema(),
     webPageSchema({
       path: '/ai-information',
-      name: 'AI Information for Sulayman Bowles, Void Agency, and Atlas',
+      name: 'Profile Context for Sulayman Bowles, Void Agency, and Atlas',
       description: AI_INFORMATION_DESCRIPTION,
       mainEntityId: `${SITE_URL}/#person`,
       aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`, `${SITE_URL}/#void-agency`],
@@ -537,7 +537,7 @@ export function aiInformationJsonLd(): JsonLd {
       '@context': 'https://schema.org',
       '@type': 'ProfilePage',
       '@id': `${absoluteUrl('/ai-information')}#profile`,
-      name: 'AI Information for Sulayman Bowles, Void Agency, and Atlas',
+      name: 'Profile Context for Sulayman Bowles, Void Agency, and Atlas',
       url: absoluteUrl('/ai-information'),
       description: AI_INFORMATION_DESCRIPTION,
       mainEntity: {
@@ -554,7 +554,7 @@ export function aiInformationJsonLd(): JsonLd {
     },
     breadcrumbSchema([
       { name: 'Home', path: '/' },
-      { name: 'AI Information', path: '/ai-information' },
+      { name: 'Profile Context', path: '/ai-information' },
     ]),
   ]);
 }

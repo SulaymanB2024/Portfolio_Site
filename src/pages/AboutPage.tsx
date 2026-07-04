@@ -454,12 +454,6 @@ export default function AboutPage() {
           <p className="text-base leading-relaxed text-canvas/62">
             {identityReconciliation.copy}
           </p>
-          <a
-            href="/ai-information#identity-reconciliation"
-            className="mt-6 inline-flex text-[10px] uppercase tracking-[0.24em] text-canvas/58 underline decoration-canvas/22 underline-offset-4 transition-colors hover:text-canvas"
-          >
-            Read the full identity reconciliation
-          </a>
         </ScrollReveal>
         <div className="grid grid-cols-1 gap-px overflow-hidden border border-canvas/14 md:grid-cols-2 xl:grid-cols-7">
           {identityReconciliation.links.map((link, index) => (

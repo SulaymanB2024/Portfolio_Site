@@ -6,7 +6,6 @@ import {
 } from '../content/aiInformation';
 import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
 import { MARKET_THESES, PUBLIC_MARKET_THESES } from '../content/marketTheses';
-import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import {
   appianAssumptionRows,
   atlasSampleFindings,
@@ -174,7 +173,6 @@ function linkCards(items: Array<{ label: string; href: string; description?: str
 function historicalSourceContextStaticHtml() {
   return `<h2>Historical Source Context</h2>
         <p>${escapeHtml(identityReconciliation.copy)}</p>
-        <p><a href="/ai-information#identity-reconciliation">Read the full identity reconciliation on the AI Information page</a>.</p>
         ${linkList(identityReconciliation.links)}`;
 }
 
@@ -221,24 +219,23 @@ export function buildRouteStaticHtml(route: SeoRoute) {
 
   if (route.path === '/research') {
     return articleShell(
-      'Research Assets',
-      'Public research notes and source files across technical SEO, Atlas, crawlability, identity, and markets research.',
-      `<h2>Research notes and source files.</h2>
-        <p>This index gives editors, collaborators, technical SEO writers, and profile reviewers one clean place to find the relevant pages and files.</p>
-        <p>The <a href="/llms.txt">llms.txt reference file</a> and <a href="/research/authority-assets.json">Authority asset JSON</a> provide crawler context and source review notes.</p>
-        <h2>Public References</h2>
-        ${publicResearchAssets
-          .map(
-            (asset) =>
-              `<h3><a href="${asset.href}">${escapeHtml(asset.name)}</a></h3><p>Priority: P${asset.priority}. Type: ${escapeHtml(asset.type)}. Preferred anchor: ${escapeHtml(asset.preferredAnchor)}.</p><p>${escapeHtml(asset.pitchAngle)}</p>`,
-          )
-          .join('\n        ')}
-        <h2>Downloadable Public Files</h2>
-        ${linkList(publicDataDownloads)}
-        <h2>Limits</h2>
-        <ul>${researchClaimBoundaries.map((boundary) => `<li>${escapeHtml(boundary)}</li>`).join('')}</ul>
-        <h2>Internal Links</h2>
-        ${linkList(primaryLinks)}`,
+      'Research Notes',
+      'Selected notes on search systems, crawlability, Atlas, public data, and markets work.',
+      `<h2>Selected Notes</h2>
+        <h3><a href="/markets/ai-search-crawler-policy">Crawler Policy Comes Before Visibility</a></h3>
+        <p>A note on crawler access, redirects, and why discovery has to be settled before visibility claims matter.</p>
+        <h3><a href="/markets/technical-seo-public-data-infrastructure">Technical SEO as Public Data Infrastructure</a></h3>
+        <p>A practical bridge between crawlability, structured data, provenance, and public records people can inspect.</p>
+        <h3><a href="/markets/canonical-identity-personal-seo">Canonical Identity for Personal SEO</a></h3>
+        <p>A reconciliation checklist for profiles, stale PDFs, source pages, and external bio consistency.</p>
+        <h3><a href="/atlas/sample-crawl">Atlas Sample Crawl Run</a></h3>
+        <p>A sanitized walkthrough of how crawl rows, canonical state, depth, links, and issue labels become reviewable evidence.</p>
+        <h2>Related Work</h2>
+        ${linkList([
+          { label: 'Atlas audit console', href: '/atlas', description: 'The crawl and evidence workflow behind the audit examples.' },
+          { label: 'Markets research', href: '/markets', description: 'Finance notes, assumptions, and source-backed market questions.' },
+          { label: 'Selected work', href: '/work', description: 'Projects, case studies, and public work in one place.' },
+        ])}`,
     );
   }
 
@@ -315,7 +312,6 @@ export function buildRouteStaticHtml(route: SeoRoute) {
 	          { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl', description: 'Sanitized URL-level crawl data and CSV download.' },
           { label: 'GitHub profile', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
           { label: 'View the GitHub repo for the audit CLI', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', description: 'Public scraper/audit code.' },
-          { label: 'AI Information', href: '/ai-information', description: 'Reference page.' },
           { label: 'Read the technical SEO audit method', href: '/method', description: 'Service/process context.' },
           { label: 'Request an audit', href: '/contact', description: 'Audit intake for technical SEO, analytics, and markets research.' },
         ])}
@@ -518,7 +514,6 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'GitHub', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
           { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
           { label: 'Download PDF Resume', href: '/Sulayman_Bowles_Resume.pdf', description: 'Current one-page PDF resume.' },
-	          { label: 'AI Information', href: '/ai-information', description: 'Reference page.' },
           { label: 'Email', href: 'mailto:sulayman.bowles@gmail.com', description: 'Direct contact.' },
         ])}`,
     );

@@ -57,7 +57,6 @@ const supportingLinks = [
   { label: 'Void Agency method', href: '/method', meta: 'Technical SEO process' },
   { label: 'GitHub', href: 'https://github.com/SulaymanB2024', meta: 'Public code profile' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', meta: 'Professional profile' },
-  { label: 'AI information', href: '/ai-information', meta: 'Reference page' },
   { label: 'Email', href: 'mailto:sulayman.bowles@gmail.com', meta: 'Direct contact' },
 ];
 

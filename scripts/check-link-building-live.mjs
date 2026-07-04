@@ -6,10 +6,10 @@ const requiredChecks = [
     url: `${SITE_URL}/research`,
     type: 'html',
     requiredText: [
-      'Research notes and source files.',
-      'Authority asset JSON',
-      'llms.txt reference file',
-      'Research Notes | Technical SEO',
+      'Research Notes',
+      'Selected Notes',
+      'Crawler Policy Comes Before Visibility',
+      'Research Notes | Sulayman Bowles',
     ],
   },
   {

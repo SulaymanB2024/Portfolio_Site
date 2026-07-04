@@ -31,7 +31,7 @@ export const publicResearchAssets: ResearchAsset[] = [
       'A browsable index of technical SEO notes, Atlas samples, local crawlability work, identity context, and markets research files.',
     supportingAssets: [
       { label: 'Authority asset JSON', href: '/research/authority-assets.json' },
-      { label: 'AI information reference page', href: '/ai-information' },
+      { label: 'Profile context page', href: '/ai-information' },
     ],
   },
   {
@@ -45,7 +45,7 @@ export const publicResearchAssets: ResearchAsset[] = [
       'Current project index for public engineering, research, markets, and technical SEO work without implying outside validation.',
     supportingAssets: [
       { label: 'Research asset index', href: '/research' },
-      { label: 'AI information reference page', href: '/ai-information' },
+      { label: 'Profile context page', href: '/ai-information' },
     ],
   },
   {
@@ -144,7 +144,7 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 3,
-    name: 'AI Information Source Record',
+    name: 'Profile Context Source Record',
     href: '/ai-information',
     type: 'reference_page',
     preferredAnchor: 'Sulayman Bowles reference page',

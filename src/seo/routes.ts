@@ -197,7 +197,7 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/ai-information',
     aliases: ['/official-information', '/entity-profile', '/source-information'],
-    title: 'AI Information | Sulayman Bowles Source Record',
+    title: 'Profile Context | Sulayman Bowles',
     description: AI_INFORMATION_DESCRIPTION,
     h1: AI_INFORMATION_TITLE,
     section: 'source-information',
@@ -206,16 +206,16 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'Official public information about Sulayman Bowles, Void Agency, and Atlas SEO Audit Console for users and search systems.',
+      'Current profile context for Sulayman Bowles, Void Agency, and Atlas SEO Audit Console.',
     staticHtml: AI_INFORMATION_STATIC_HTML,
     jsonLd: aiInformationJsonLd(),
   },
   {
     path: '/research',
     aliases: ['/research-assets'],
-    title: 'Research Notes | Technical SEO, Crawler Policy & Atlas Data',
+    title: 'Research Notes | Sulayman Bowles',
     description:
-      'Public research files from Sulayman Bowles across technical SEO, crawler policy, Atlas crawl data, Austin crawlability, identity, and markets research work.',
+      'Readable research notes from Sulayman Bowles on search systems, crawlability, Atlas, public data, identity cleanup, market assumptions, and project evidence.',
     h1: 'Research Notes',
     section: 'research',
     pageType: 'research',

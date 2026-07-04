@@ -121,7 +121,7 @@ export const atlasCheckItems: EvidenceListItem[] = [
   },
   {
     label: 'XML sitemaps',
-    href: '/sitemap.xml',
+    href: '/method',
     proves: 'Sitemaps are checked as route and freshness signals rather than assumed to be complete.',
   },
   {
@@ -189,12 +189,12 @@ export const aiSearchAuditChecklist: EvidenceListItem[] = [
   },
   {
     label: 'structured data',
-    href: '/ai-information',
+    href: '/about',
     proves: 'Schema helps connect entities, pages, projects, and source claims when it matches visible text.',
   },
   {
     label: 'source-page clarity',
-    href: '/ai-information',
+    href: '/about',
     proves: 'Clear source pages make identity, projects, services, and support links easy to quote accurately.',
   },
   {
@@ -209,12 +209,12 @@ export const aiSearchAuditChecklist: EvidenceListItem[] = [
   },
   {
     label: 'sitemap freshness',
-    href: '/sitemap.xml',
+    href: '/method',
     proves: 'Fresh sitemap lastmod values help crawlers find current canonical pages and avoid stale route assumptions.',
   },
   {
     label: 'stale/conflicting source cleanup',
-    href: '/ai-information#what-not-to-infer',
+    href: '/about#identity-reconciliation',
     proves: 'Clarifications keep old, unrelated, private, or low-quality sources from muddying the current public record.',
   },
 ];
@@ -228,7 +228,7 @@ export const fanOutQueryMap: FanOutQueryMapItem[] = [
       'Sulayman Bowles Atlas',
       'Sulayman Bowles GitHub',
     ],
-    bestPage: 'AI Information',
+    bestPage: 'Profile Context',
     href: '/ai-information',
     missingContent: 'No separate fan-out page is needed; keep the public source list and resume links current.',
     recommendedEdit: 'Use the short and long bios, then link to About, Resume, GitHub, LinkedIn, Atlas, and Markets Research.',
@@ -267,7 +267,7 @@ export const fanOutQueryMap: FanOutQueryMapItem[] = [
       'Search visibility audit',
       'Atlas search readiness',
     ],
-    bestPage: 'AI Information',
+    bestPage: 'Profile Context',
     href: '/ai-information',
     missingContent: 'Add more public files only when they directly show crawlability, entity clarity, source pages, or search audit work.',
     recommendedEdit: 'Connect search visibility to technical SEO evidence: crawl access, structured data, clear source pages, public files, and sitemap freshness.',
@@ -293,7 +293,7 @@ export const fanOutQueryMap: FanOutQueryMapItem[] = [
       'Atlas SEO Audit Console evidence',
       'Void Agency technical SEO audit',
     ],
-    bestPage: 'AI Information',
+    bestPage: 'Profile Context',
     href: '/ai-information',
     missingContent: 'Public code and project links should stay labeled by what they prove, not by inflated outcomes.',
     recommendedEdit: 'Use the public source list, Atlas checks list, Method checklist, GitHub links, and HTML resume as the support path.',

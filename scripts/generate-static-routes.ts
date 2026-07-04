@@ -187,7 +187,6 @@ ${route.staticHtml}
     ['Atlas', '/atlas'],
     ['Method', '/method'],
     ['Markets', '/markets'],
-    ['AI Information', '/ai-information'],
   ];
 
   return `<section id="seo-static-summary" aria-label="Static route summary">

@@ -133,10 +133,31 @@ function assertVisibleText(file, expectedItems) {
   }
 }
 
+function visibleBodyMarkup(file) {
+  const html = read(file);
+  const body = html.match(/<body[\s\S]*?<\/body>/i)?.[0] ?? html;
+  return body.replace(/<script[\s\S]*?<\/script>/g, ' ');
+}
+
+function visibleText(file) {
+  return textFromHtml(visibleBodyMarkup(file));
+}
+
+function assertHiddenText(file, rejectedItems) {
+  const text = visibleText(file).toLowerCase();
+  for (const item of rejectedItems) {
+    assert(!text.includes(item.toLowerCase()), `${file}: should not expose visible text "${item}"`);
+  }
+}
+
 function assertHref(file, href, label) {
   const html = read(file);
   assert(html.includes(`href="${href}"`), `${file}: missing href "${href}"`);
   assert(textFromHtml(html).toLowerCase().includes(label.toLowerCase()), `${file}: missing anchor text "${label}"`);
+}
+
+function assertNoVisibleHref(file, href) {
+  assert(!visibleBodyMarkup(file).includes(`href="${href}"`), `${file}: should not expose visible href "${href}"`);
 }
 
 for (const [route, file] of Object.entries(routeFiles)) {
@@ -190,68 +211,82 @@ for (const [route, file] of Object.entries(routeFiles)) {
 }
 
 assertVisibleText('dist/ai-information/index.html', [
+  'Profile Context for Sulayman Bowles, Void Agency, and Atlas',
+  'This page keeps current descriptions and older background in one place',
   'Identity reconciliation',
   "Earlier public sources describe Sulayman's classical bass and composition background through Golden Hornet, McCallum, and UT Butler.",
   'Golden Hornet',
   'UT Butler',
+  'What the Work Supports',
+  'Entity Summaries',
+  'What Void Agency Does',
+  'What Atlas SEO Audit Console Does',
+  'Relevant Expertise',
+  'What Not to Infer',
+  'How to Use This Page',
+]);
+assertHiddenText('dist/ai-information/index.html', [
+  'AI Information',
   'Public Source List',
-  'Primary source',
-  'Technical ledger',
-  'sulayman-bowles.tech',
-  'Code evidence',
-  'Professional profile',
-  'Agency',
-  'Projects',
-  'Work index',
-  'Contact / intake',
-  'Academic context',
-  'Earlier music background',
-  'Research files',
-  'Clarifications / what not to infer',
   'Likely Search Questions',
-  'Original query',
-  'Likely fan-out queries',
-  'Best page to satisfy them',
-  'Missing content',
-  'Recommended edit',
-  'Who is Sulayman Bowles?',
-  'What is Atlas SEO Audit Console?',
-  'What does Void Agency do?',
-  'Does Sulayman Bowles work on search visibility?',
-  'Is Sulayman Bowles an SEO person, finance person, or software builder?',
-  "What public evidence supports Sulayman Bowles's technical SEO work?",
   'Crawler and Indexation Signals',
-  'Canonical host: https://sulayman-bowles.dev.',
-  'The www host redirects to the apex canonical host.',
-  'Robots.txt explicitly allows Googlebot, Bingbot, and DuckDuckBot.',
-  'Brave Search does not publish a separate crawler user agent',
-  'Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User',
-  'The old Sulayman_Bowles_Resume_2025.pdf URL redirects to /resume',
-  'Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals',
   'Provider Discovery Plan',
-  'Google Search and Google AI surfaces',
-  'Bing, Microsoft Copilot, and Bing-powered search partners',
-  'Brave Search',
-  'DuckDuckGo',
-  'ChatGPT search and OpenAI retrieval',
-  'Claude search and user-requested retrieval',
-  'Perplexity search and user-requested retrieval',
+  'Evidence and Source Links',
+  'Source List',
+  'llms.txt',
+  'Search Console',
+  'Bing Webmaster Tools',
 ]);
 
 assertVisibleText('dist/research/index.html', [
-  'Research Assets',
-  'Research notes and source files.',
-  'Public References',
-  'Project Work Index',
+  'Research Notes',
+  'Selected notes',
+  'Crawler Policy Comes Before Visibility',
+  'Technical SEO as Public Data Infrastructure',
+  'Canonical Identity for Personal SEO',
+  'Atlas Sample Crawl Run',
+  'Related work',
+]);
+assertHiddenText('dist/research/index.html', [
   'Authority asset JSON',
-  'Crawler policy sources',
-  'Limits',
+  'llms.txt reference file',
+  'Public References',
+  'Downloadable Public Files',
+  'Preferred anchor',
   'These assets do not claim rankings',
 ]);
-assertHref('dist/research/index.html', '/research/authority-assets.json', 'Authority asset JSON');
-assertHref('dist/research/index.html', '/llms.txt', 'llms.txt reference file');
-assertHref('dist/research/index.html', '/work', 'Project Work Index');
-assertHref('dist/research/index.html', '/research/austin-crawlability-benchmark-pilot.csv', 'Austin crawlability benchmark pilot');
+assertNoVisibleHref('dist/research/index.html', '/research/authority-assets.json');
+assertNoVisibleHref('dist/research/index.html', '/llms.txt');
+assertHref('dist/research/index.html', '/work', 'Selected work');
+assertHref('dist/research/index.html', '/markets/ai-search-crawler-policy', 'Crawler Policy Comes Before Visibility');
+
+const visibleArtifactTextRejects = [
+  'AI Information',
+  'Authority asset JSON',
+  'llms.txt reference file',
+  'Crawler policy sources',
+  'Public Source List',
+  'Likely Search Questions',
+  'Crawler and Indexation Signals',
+  'Provider Discovery Plan',
+  'Downloadable Public Files',
+  'Preferred anchor',
+  'Ahrefs Domain Rating',
+];
+
+const visibleArtifactHrefRejects = [
+  '/research/authority-assets.json',
+  '/research/ai-search-crawler-policy-sources.csv',
+  '/llms.txt',
+  '/sitemap.xml',
+];
+
+for (const file of new Set([...Object.values(routeFiles), ...marketFiles, ...archivedMarketFiles])) {
+  assertHiddenText(file, visibleArtifactTextRejects);
+  for (const href of visibleArtifactHrefRejects) {
+    assertNoVisibleHref(file, href);
+  }
+}
 
 {
   const graph = jsonLdGraph(read('dist/research/index.html'));
@@ -276,7 +311,6 @@ assertHref('dist/research/index.html', '/research/austin-crawlability-benchmark-
 assertVisibleText('dist/about/index.html', [
   'Historical Source Context',
   "Earlier public sources describe Sulayman's classical bass and composition background through Golden Hornet, McCallum, and UT Butler.",
-  'Read the full identity reconciliation',
   'Golden Hornet',
   'UT Butler',
   'GitHub',

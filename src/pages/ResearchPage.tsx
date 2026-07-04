@@ -5,22 +5,70 @@ import { ScrollProgress } from '../components/ScrollProgress';
 import { WireframeGrid } from '../components/WireframeGrid';
 import {
   LinkPanel,
+  EditorialHeading,
   PageFrame,
-  PageHero,
   PageShell,
   PrimaryCTA,
   SectionHeader,
+  SectionEyebrow,
   SurfaceGrid,
   TechnicalPanel,
   TextLink,
 } from '../components/design/Primitives';
-import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const RESEARCH_ROUTE = getSeoRoute('/research')!;
-const priorityOneAssets = publicResearchAssets.filter((asset) => asset.priority === 1);
-const audienceCount = new Set(publicResearchAssets.flatMap((asset) => asset.audiences)).size;
+const RESEARCH_COIN_ART = '/images/markets/noise-expansion-coin-alpha.png';
+
+const featuredResearchNotes = [
+  {
+    kicker: 'Crawler access',
+    title: 'Crawler Policy Comes Before Visibility',
+    href: '/markets/ai-search-crawler-policy',
+    description:
+      'A note on crawler access, redirects, and why discovery has to be settled before visibility claims matter.',
+  },
+  {
+    kicker: 'Public data',
+    title: 'Technical SEO as Public Data Infrastructure',
+    href: '/markets/technical-seo-public-data-infrastructure',
+    description:
+      'A practical bridge between crawlability, structured data, provenance, and public records people can inspect.',
+  },
+  {
+    kicker: 'Identity',
+    title: 'Canonical Identity for Personal SEO',
+    href: '/markets/canonical-identity-personal-seo',
+    description:
+      'A reconciliation checklist for profiles, stale PDFs, source pages, and external bio consistency.',
+  },
+  {
+    kicker: 'Atlas',
+    title: 'Atlas Sample Crawl Run',
+    href: '/atlas/sample-crawl',
+    description:
+      'A sanitized walkthrough of how crawl rows, canonical state, depth, links, and issue labels become reviewable evidence.',
+  },
+];
+
+const relatedResearchRoutes = [
+  {
+    label: 'Atlas audit console',
+    href: '/atlas',
+    description: 'The crawl and evidence workflow behind the audit examples.',
+  },
+  {
+    label: 'Markets research',
+    href: '/markets',
+    description: 'Finance notes, assumptions, and source-backed market questions.',
+  },
+  {
+    label: 'Selected work',
+    href: '/work',
+    description: 'Projects, case studies, and public work in one place.',
+  },
+];
 
 export default function ResearchPage() {
   useSEO(RESEARCH_ROUTE);
@@ -33,77 +81,71 @@ export default function ResearchPage() {
       <InternalHeader activePath="/research" tone="light" />
 
       <PageFrame className="relative z-10">
-        <PageHero
-          eyebrow="Research assets"
-            title="Research notes and source files."
-            intro={
+        <section className="relative grid min-h-[64vh] items-end gap-12 overflow-hidden border-b border-current/12 pb-14 pt-16 md:pt-20 lg:grid-cols-[minmax(0,0.58fr)_minmax(320px,0.42fr)]">
+          <div className="relative z-10 min-w-0">
+            <SectionEyebrow className="text-ink/48">Research</SectionEyebrow>
+            <EditorialHeading className="mt-8">Research notes.</EditorialHeading>
+            <div className="mt-8 max-w-3xl text-base leading-relaxed text-current/64">
               <p>
-                A public index of technical SEO notes, Atlas samples, crawlability research, profile context, and markets research files. Each item is meant to be opened and checked directly.
+                Selected notes on search systems, crawlability, Atlas, public data, and markets work. Each piece is meant to stand on its own.
               </p>
-            }
-          aside={
-            <div className="grid gap-5 text-sm leading-relaxed">
-              <p>
-                The hub gives editors, collaborators, technical SEO writers, and profile reviewers one clean place to find the relevant pages and files.
-              </p>
-              <div className="grid grid-cols-3 gap-px border border-current/14 text-center">
-                <Metric label="Assets" value={publicResearchAssets.length} />
-                <Metric label="P1" value={priorityOneAssets.length} />
-                <Metric label="Audiences" value={audienceCount} />
-              </div>
             </div>
-          }
-        />
+          </div>
+
+          <div aria-hidden="true" className="pointer-events-none relative z-0 -my-12 hidden min-h-[520px] select-none lg:block">
+            <img
+              src={RESEARCH_COIN_ART}
+              alt=""
+              className="absolute left-[-4rem] top-1/2 h-auto w-[min(1120px,72vw)] max-w-none -translate-y-1/2 opacity-60 mix-blend-multiply"
+              draggable={false}
+            />
+          </div>
+
+          <div aria-hidden="true" className="pointer-events-none relative z-0 -mt-8 min-h-[260px] overflow-hidden lg:hidden">
+            <img
+              src={RESEARCH_COIN_ART}
+              alt=""
+              className="absolute left-1/2 top-1/2 h-auto w-[min(760px,145vw)] max-w-none -translate-x-[38%] -translate-y-1/2 opacity-40 mix-blend-multiply"
+              draggable={false}
+            />
+          </div>
+        </section>
 
         <div className="flex flex-wrap items-center gap-5 border-b border-current/12 py-8">
           <PrimaryCTA href="/contact" id="research-contact-link">
             Discuss a project
           </PrimaryCTA>
-          <TextLink
-            href="/research/authority-assets.json"
-            id="research-authority-json-link"
-            className="text-[10px] uppercase tracking-[0.2em] text-current/62 hover:text-current"
-          >
-            Authority asset JSON
+          <TextLink href="/markets" id="research-markets-link" className="text-[10px] uppercase tracking-[0.2em] text-current/62 hover:text-current">
+            Markets notes
           </TextLink>
-          <TextLink href="/llms.txt" id="research-llms-link" className="text-[10px] uppercase tracking-[0.2em] text-current/62 hover:text-current">
-            llms.txt reference file
+          <TextLink href="/atlas" id="research-atlas-link" className="text-[10px] uppercase tracking-[0.2em] text-current/62 hover:text-current">
+            Atlas work
           </TextLink>
         </div>
       </PageFrame>
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Public references" title="Pages worth reading.">
-            These are the public pages and files most useful for profile updates, references, newsletter submissions, and editorial conversations. Priority reflects usefulness, not authority.
+          <SectionHeader eyebrow="Selected notes" title="Readable research.">
+            Notes and essays across search systems, crawlability, public data, and markets.
           </SectionHeader>
 
           <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-            {publicResearchAssets.map((asset) => (
-              <TechnicalPanel key={asset.href} className="grid min-h-[330px] content-between gap-8 bg-current/[0.012]">
+            {featuredResearchNotes.map((note) => (
+              <TechnicalPanel key={note.href} className="grid min-h-[270px] content-between gap-8 bg-current/[0.012]">
                 <div>
-                  <div className="mb-7 flex items-start justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-current/42">
-                    <span>P{asset.priority}</span>
-                    <span>{asset.type.replaceAll('_', ' ')}</span>
-                  </div>
+                  <p className="mb-7 text-[10px] uppercase tracking-[0.22em] text-current/42">{note.kicker}</p>
                   <h2 className="font-serif text-3xl italic leading-[0.95] tracking-normal text-current">
-                    <a href={asset.href} className="transition-opacity hover:opacity-70">
-                      {asset.name}
+                    <a href={note.href} className="transition-opacity hover:opacity-70">
+                      {note.title}
                     </a>
                   </h2>
-                  <p className="mt-5 text-sm leading-relaxed text-current/62">{asset.pitchAngle}</p>
+                  <p className="mt-5 text-sm leading-relaxed text-current/62">{note.description}</p>
                 </div>
 
-                <div className="grid gap-5 border-t border-current/12 pt-5">
-                  <div>
-                    <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-current/42">Preferred anchor</p>
-                    <p className="text-sm leading-relaxed text-current/72">{asset.preferredAnchor}</p>
-                  </div>
-                  <div>
-                    <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-current/42">Audience</p>
-                    <p className="text-sm leading-relaxed text-current/58">{asset.audiences.join(' / ')}</p>
-                  </div>
-                </div>
+                <a href={note.href} className="w-fit border-b border-current/18 pb-1 text-[10px] uppercase tracking-[0.2em] text-current/58 transition-colors hover:border-current/42 hover:text-current">
+                  Read note
+                </a>
               </TechnicalPanel>
             ))}
           </SurfaceGrid>
@@ -112,52 +154,24 @@ export default function ResearchPage() {
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Public files" title="Downloadable files.">
-            These files support the public pages above. They are useful because the rows can be inspected directly.
+          <SectionHeader eyebrow="Related work" title="Project context.">
+            The main project pages behind the research notes.
           </SectionHeader>
 
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {publicDataDownloads.map((download) => (
-              <LinkPanel key={download.href} href={download.href} className="grid min-h-[170px] content-between gap-6">
-                <span className="font-serif text-2xl italic leading-tight tracking-normal text-current">{download.label}</span>
-                <span className="text-sm normal-case leading-relaxed tracking-normal text-current/58">{download.description}</span>
+            {relatedResearchRoutes.map((route) => (
+              <LinkPanel key={route.href} href={route.href} className="grid min-h-[170px] content-between gap-6">
+                <span className="font-serif text-2xl italic leading-tight tracking-normal text-current">{route.label}</span>
+                <span className="text-sm normal-case leading-relaxed tracking-normal text-current/58">{route.description}</span>
               </LinkPanel>
             ))}
           </div>
         </PageFrame>
       </section>
 
-      <PageFrame className="relative z-10 py-16 xl:py-24">
-        <section className="grid gap-10 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.42fr_0.58fr]">
-          <div>
-            <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-current/48">Limits</p>
-            <h2 className="font-serif text-[3rem] md:text-[5rem] xl:text-[6.75rem] italic leading-[0.9] tracking-normal">
-              Evidence stays separate from outcomes.
-            </h2>
-          </div>
-          <div className="grid gap-4">
-            {researchClaimBoundaries.map((boundary, index) => (
-              <article key={boundary} className="border border-current/12 p-5">
-                <p className="mb-4 text-[10px] uppercase tracking-[0.2em] text-current/38">{String(index + 1).padStart(2, '0')}</p>
-                <p className="text-sm leading-relaxed text-current/64">{boundary}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      </PageFrame>
-
       <PageFrame className="relative z-10 pb-8">
         <InternalFooter activePath="/research" tone="light" />
       </PageFrame>
     </PageShell>
-  );
-}
-
-function Metric({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="grid min-h-24 content-center gap-2 bg-current/[0.018] p-4">
-      <span className="font-serif text-3xl italic leading-none">{value}</span>
-      <span className="text-[9px] uppercase tracking-[0.18em] text-current/42">{label}</span>
-    </div>
   );
 }

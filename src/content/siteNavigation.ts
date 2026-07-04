@@ -8,7 +8,7 @@ export const primaryNav: SiteNavItem[] = [
   { label: 'Work', href: '/work', description: 'Selected project work and supporting links.' },
   { label: 'Atlas', href: '/atlas', description: 'Technical SEO audit console.' },
   { label: 'Method', href: '/method', description: 'Void Agency technical SEO process.' },
-  { label: 'Research', href: '/research', description: 'Citation-ready public research assets and source files.' },
+  { label: 'Research', href: '/research', description: 'Readable notes on search systems, Atlas, and markets.' },
   { label: 'About', href: '/about', description: 'Profile, experience, and operating principles.' },
   { label: 'Resume', href: '/resume', description: 'Resume and supporting links.' },
   { label: 'Contact', href: '/contact', description: 'Audit intake and contact form.' },
@@ -16,11 +16,9 @@ export const primaryNav: SiteNavItem[] = [
 
 export const utilityNav: SiteNavItem[] = [
   { label: 'Book', href: '/simple', description: 'First-person text edition and personal monograph.' },
-  { label: 'AI Information', href: '/ai-information', description: 'Entity reference for search and AI systems.' },
   { label: 'Markets', href: '/markets', description: 'Finance and market research archive.' },
   { label: 'Void Agency', href: '/void-agency', description: 'Void Agency technical SEO practice page.' },
   { label: 'Tech Ledger', href: 'https://sulayman-bowles.tech/', description: 'Technical projects, experiments, and project ledger.' },
-  { label: 'Sitemap', href: '/sitemap', description: 'Plain HTML links to public pages.' },
 ];
 
 export function navLabel(item: SiteNavItem) {
