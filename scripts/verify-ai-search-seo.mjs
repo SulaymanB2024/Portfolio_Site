@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const siteUrl = 'https://sulayman-bowles.dev';
+const personId = `${siteUrl}/ai-information#sulayman-bowles`;
 
 const routeFiles = {
   home: 'dist/index.html',
@@ -163,13 +164,14 @@ function assertNoVisibleHref(file, href) {
 for (const [route, file] of Object.entries(routeFiles)) {
   const html = read(file);
   const graph = jsonLdGraph(html);
-  const person = findType(graph, 'Person', `${siteUrl}/#person`);
+  const person = findType(graph, 'Person', personId);
   const org = findType(graph, 'Organization', `${siteUrl}/#void-agency`);
   const software = findType(graph, 'SoftwareApplication', `${siteUrl}/atlas#software`);
   const website = findType(graph, 'WebSite', `${siteUrl}/#website`);
   const webPage = findType(graph, 'WebPage', `${absolutePath(routePaths[route])}#webpage`);
 
   assert(person, `${route}: missing canonical Person schema`);
+  assert(!html.includes(`${siteUrl}/#person`), `${route}: stale homepage-fragment Person ID found`);
   assert(person.url === siteUrl, `${route}: Person url must be absolute canonical site URL`);
   assert(Array.isArray(person.sameAs) && person.sameAs.includes('https://github.com/SulaymanB2024'), `${route}: Person sameAs missing GitHub`);
   assert(Array.isArray(person.sameAs) && person.sameAs.includes('https://www.linkedin.com/in/sulayman-bowles/'), `${route}: Person sameAs missing LinkedIn`);
@@ -469,7 +471,11 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     'Perplexity-User',
   ];
 
-  assert(llmsText.includes('Last updated: July 1, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('Last updated: July 4, 2026'), 'llms.txt: stale last updated date');
+  assert(
+    llmsText.includes('Canonical person ID: https://sulayman-bowles.dev/ai-information#sulayman-bowles'),
+    'llms.txt: missing canonical person ID',
+  );
   assert(llmsText.includes('Selected work: https://sulayman-bowles.dev/work'), 'llms.txt: missing selected work route');
   assert(llmsText.includes('Atlas sample crawl run: https://sulayman-bowles.dev/atlas/sample-crawl'), 'llms.txt: missing Atlas sample crawl route');
   assert(llmsText.includes('Void Agency: https://sulayman-bowles.dev/void-agency'), 'llms.txt: missing Void Agency route');

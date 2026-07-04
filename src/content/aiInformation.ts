@@ -1,7 +1,7 @@
 export const AI_INFORMATION_PATH = '/ai-information';
 
-export const AI_INFORMATION_LASTMOD = '2026-07-01';
-export const AI_INFORMATION_LAST_UPDATED = 'July 1, 2026';
+export const AI_INFORMATION_LASTMOD = '2026-07-04';
+export const AI_INFORMATION_LAST_UPDATED = 'July 4, 2026';
 
 export const AI_INFORMATION_TITLE = 'Profile Context for Sulayman Bowles, Void Agency, and Atlas';
 
