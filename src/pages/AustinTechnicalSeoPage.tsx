@@ -14,7 +14,13 @@ import {
   TechnicalPanel,
   TextLink,
 } from '../components/design/Primitives';
-import { austinBenchmarkLimits, austinBenchmarkSnapshot, austinSeoSignals } from '../content/seoExpansion';
+import {
+  austinBenchmarkLimits,
+  austinBenchmarkSnapshot,
+  austinDiagnosticExamples,
+  austinPilotMethod,
+  austinSeoSignals,
+} from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
@@ -26,12 +32,14 @@ const austinArtifactItems = austinSeoSignals.slice(0, 4).map((signal, index) => 
 const localReviewDetails = [
   'Review whether Austin service, product, location, and proof pages are reachable from normal internal paths and represented by stable canonical URLs.',
   'Check whether the page explains who the business serves, what is offered, how to contact the owner, and which public evidence supports the claim.',
+  'Sample concrete local intents such as emergency HVAC repair, foundation repair estimates, dentists near Mueller, and med spa consultations to see whether page copy and tracking match the query.',
   'Use Search Console, analytics, and Google Business Profile data only when access is available; do not infer private performance from public crawl output.',
 ];
 
 const austinDeliverables = [
   'A short URL-level issue list with observed fields, affected pages, severity, and implementation notes.',
   'A crawlability and source-clarity review covering robots.txt, sitemap, canonicals, structured data, internal links, and page copy.',
+  'A local-intent map that pairs each priority query family with the ranking URL, proof block, CTA path, and measurement field.',
   'A practical next-step order for founders, marketers, or developers, with unsupported ranking and traffic claims left out.',
 ];
 
@@ -55,6 +63,12 @@ export default function AustinTechnicalSeoPage() {
             <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/64 lg:mt-10">
               A local service page for Austin teams that need crawlability, indexation, structured data, page clarity, and technical search issues reviewed before broader content or growth work.
             </p>
+            <div className="mt-8 max-w-3xl border border-current/14 bg-current/[0.035] p-5">
+              <p className="mb-3 text-[10px] uppercase tracking-[0.24em] text-current/46">Short answer</p>
+              <p className="text-sm leading-relaxed text-current/66">
+                Austin technical SEO is the review of whether a local service page can be crawled, understood, trusted, and measured for a specific service intent before anyone publishes more pages or claims visibility gains.
+              </p>
+            </div>
             <div className="mt-8 flex flex-wrap items-center gap-5 lg:mt-10">
               <PrimaryCTA href="/contact" className="text-accent hover:text-[var(--page-bg)]">
                 Request an audit
@@ -125,11 +139,40 @@ export default function AustinTechnicalSeoPage() {
                 </TechnicalPanel>
               ))}
             </div>
+            <div>
+              <h3 className="text-[10px] uppercase tracking-[0.24em] text-current/44">Pilot method</h3>
+              <ul className="mt-5 grid gap-3 text-sm leading-relaxed text-current/58">
+                {austinPilotMethod.map((item) => (
+                  <li key={item} className="border-l border-current/14 pl-4">{item}</li>
+                ))}
+              </ul>
+            </div>
             <ul className="grid gap-3 text-sm leading-relaxed text-current/58">
               {austinBenchmarkLimits.map((item) => (
                 <li key={item} className="border-l border-current/14 pl-4">{item}</li>
               ))}
             </ul>
+          </div>
+        </section>
+      </PageFrame>
+
+      <PageFrame className="relative z-10 py-16">
+        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.42fr_0.58fr]">
+          <div>
+            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
+              Query examples before page expansion.
+            </h2>
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
+              The audit starts with concrete Austin service intents, then checks whether the public page, proof, profile signals, and measurement path support that intent.
+            </p>
+          </div>
+          <div className="grid gap-px overflow-hidden border border-current/14 md:grid-cols-2">
+            {austinDiagnosticExamples.map((item) => (
+              <TechnicalPanel key={item.prompt} className="min-h-[170px] p-5">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-current/42">{item.prompt}</p>
+                <p className="mt-5 text-sm leading-relaxed text-current/66">{item.review}</p>
+              </TechnicalPanel>
+            ))}
           </div>
         </section>
       </PageFrame>

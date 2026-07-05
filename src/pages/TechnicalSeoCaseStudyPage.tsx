@@ -12,7 +12,12 @@ import {
   SurfaceGrid,
   TechnicalPanel,
 } from '../components/design/Primitives';
-import { auditCaseStudySteps, auditExampleFindingChain, contextualProofLinks } from '../content/seoExpansion';
+import {
+  auditCaseStudyAnswer,
+  auditCaseStudySteps,
+  auditExampleFindingChain,
+  contextualProofLinks,
+} from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
@@ -62,6 +67,23 @@ export default function TechnicalSeoCaseStudyPage() {
               footer="Sanitized public frame. No private traffic, ranking, revenue, or answer-placement claims."
             />
           </header>
+
+          <section className="border-b border-current/12 py-16">
+            <SectionHeader eyebrow="Short answer" title="What changed after the crawl review.">
+              The public case study shows how one crawl observation becomes an implementation path and a rerun check without turning a sanitized row into a private performance claim.
+            </SectionHeader>
+            <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5">
+              {auditCaseStudyAnswer.map((item, index) => (
+                <TechnicalPanel key={item.label} className="min-h-[240px] p-6">
+                  <p className="mb-8 text-[10px] uppercase tracking-[0.2em] text-current/42">
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <h2 className="text-xs uppercase leading-relaxed tracking-[0.18em] text-current">{item.label}</h2>
+                  <p className="mt-5 text-sm leading-relaxed text-current/62">{item.value}</p>
+                </TechnicalPanel>
+              ))}
+            </SurfaceGrid>
+          </section>
 
           <section className="border-b border-current/12 py-16">
             <SectionHeader eyebrow="Sanitized process" title="What this case study shows.">

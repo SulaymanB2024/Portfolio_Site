@@ -72,6 +72,17 @@ const heroRunStats = [
   { label: 'Sample package', value: 'Reviewed', note: 'illustrative run ID and review bound' },
 ];
 
+const mobileHeroLinks = [
+  { href: '/atlas/sample-crawl', label: 'See an Atlas sample crawl run', note: 'Review package' },
+  {
+    href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-',
+    label: 'View GitHub repo',
+    note: 'Audit CLI',
+    external: true,
+  },
+  { href: '/contact', label: 'Request an audit', note: 'Contact' },
+];
+
 const crawlLedgerRows = [
   { field: 'Seed + sitemap', value: '13,642 URLs', state: 'inventory' },
   { field: 'Rendered content', value: '8,731 pages', state: 'confirmed_content' },
@@ -342,7 +353,7 @@ export default function AtlasPage() {
         <motion.img
           src={ATLAS_ARTWORK}
           alt=""
-          className="absolute left-1/2 top-[54%] h-[94svh] w-[178vw] -translate-x-1/2 -translate-y-1/2 scale-[1.16] object-contain object-center md:left-auto md:right-[-28rem] md:top-[55%] md:h-[112svh] md:w-[88rem] md:translate-x-0 md:scale-100 xl:right-[-20rem] xl:w-[96rem]"
+          className="absolute left-[61%] top-[43%] h-[72svh] w-[136vw] -translate-x-1/2 -translate-y-1/2 object-contain object-center max-md:!opacity-[0.08] md:left-auto md:right-[-28rem] md:top-[55%] md:h-[112svh] md:w-[88rem] md:translate-x-0 md:scale-100 xl:right-[-20rem] xl:w-[96rem]"
           style={{ opacity: atlasOpacity }}
           decoding="async"
         />
@@ -351,8 +362,7 @@ export default function AtlasPage() {
       <section
         ref={heroRef}
         id="atlas-hero"
-        className="relative overflow-visible"
-        style={{ height: '165svh' }}
+        className="relative h-[118svh] overflow-visible md:h-[165svh]"
       >
         <div className="sticky top-0 z-10 min-h-[100svh] overflow-hidden px-4 pt-32 md:px-8 md:pt-36 xl:px-10">
           <motion.div
@@ -366,7 +376,7 @@ export default function AtlasPage() {
             aria-hidden="true"
           />
 
-          <div className="relative z-10 mx-auto grid min-h-[calc(100svh-8rem)] w-full max-w-[1480px] items-end gap-10 pb-10 md:grid-cols-[minmax(0,0.9fr)_minmax(18rem,0.58fr)] md:items-center md:gap-14 md:pb-0 lg:px-10">
+          <div className="relative z-10 mx-auto grid min-h-[calc(100svh-8rem)] w-full max-w-[1480px] items-center gap-10 pb-8 md:grid-cols-[minmax(0,0.9fr)_minmax(18rem,0.58fr)] md:gap-14 md:pb-0 lg:px-10">
             <motion.div
               initial={prefersReducedMotion ? false : { y: 18 }}
               animate={prefersReducedMotion ? undefined : { y: 0 }}
@@ -405,18 +415,9 @@ export default function AtlasPage() {
               >
                 View methodology
               </a>
-              <nav className="mt-7 grid max-w-[27rem] gap-3 text-[11px] tracking-normal text-ink/52 md:text-[10px] md:uppercase md:tracking-[0.2em]" aria-label="Atlas sample links">
+              <nav className="mt-7 hidden max-w-[27rem] gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/52 md:grid" aria-label="Atlas sample links">
                 <a href="/atlas/sample-crawl" className="group grid min-h-11 w-full border-y border-ink/16 py-3 transition-colors hover:border-ink/40 hover:text-ink/78 md:w-fit md:min-h-0 md:border-b md:border-t-0 md:py-1">
-                  <span className="flex items-center justify-between gap-4 md:hidden">
-                    <span>01 / Review package</span>
-                    <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">Open</span>
-                  </span>
-                  <span className="mt-1 font-serif text-sm italic normal-case tracking-normal text-ink/70 md:hidden">
-                    See an Atlas sample crawl run
-                  </span>
-                  <span className="hidden md:block">
-                    See an Atlas sample crawl run
-                  </span>
+                  <span>See an Atlas sample crawl run</span>
                 </a>
                 <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
                   View GitHub repo
@@ -425,45 +426,14 @@ export default function AtlasPage() {
                   Request an audit
                 </a>
               </nav>
-              <dl className="mt-6 grid grid-cols-2 border-y border-ink/12 md:hidden">
-                {heroRunStats.map((stat) => (
-                  <div key={stat.label} className="border-b border-ink/10 px-3 py-3 odd:border-r odd:border-ink/10">
-                    <dt className="text-[9px] uppercase tracking-[0.16em] text-ink/42">{stat.label}</dt>
-                    <dd className="mt-2 font-serif text-xl leading-none text-ink/82">{stat.value}</dd>
-                  </div>
-                ))}
-              </dl>
             </motion.div>
 
-            <motion.aside
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
-              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
-              style={prefersReducedMotion ? undefined : { opacity: heroContentOpacity, y: heroCopyY }}
-              className="relative z-10 hidden max-w-[30rem] border-y border-ink/12 bg-canvas/70 py-5 md:block"
-              aria-label="Atlas sample run summary"
-            >
-              <div className="mb-4 flex items-center justify-between text-[9px] uppercase tracking-[0.22em] text-ink/44">
-                <span>Sample run package</span>
-                <span>sanitized demo package</span>
-              </div>
-              <dl className="grid grid-cols-2 border-t border-ink/10">
-                {heroRunStats.map((stat) => (
-                  <div key={stat.label} className="min-h-[7.25rem] border-b border-ink/10 px-4 py-4 odd:border-r odd:border-ink/10">
-                    <dt className="text-[9px] uppercase tracking-[0.18em] text-ink/42">{stat.label}</dt>
-                    <dd className="mt-3 font-serif text-[1.7rem] md:text-[2.2rem] xl:text-[2.6rem] leading-none text-ink/84">{stat.value}</dd>
-                    <dd className="mt-3 text-[11px] leading-5 text-ink/48">{stat.note}</dd>
-                  </div>
-                ))}
-              </dl>
-              <p className="mt-5 border-l border-ink/16 pl-4 text-xs leading-6 text-ink/54">
-                The public page shows a sanitized sample run so the method is inspectable without implying private client results.
-              </p>
-            </motion.aside>
           </div>
         </div>
 
       </section>
+
+      <MobileSamplePackage />
 
       <section
         ref={methodologyRef}
@@ -552,6 +522,61 @@ export default function AtlasPage() {
       <FinalAtlasSection prefersReducedMotion={prefersReducedMotion} />
       <InternalFooter activePath="/atlas" tone="light" />
     </main>
+  );
+}
+
+function MobileSamplePackage() {
+  return (
+    <section className="relative z-10 border-y border-ink/12 bg-canvas/[0.88] px-4 py-9 md:hidden" aria-labelledby="atlas-mobile-sample-title">
+      <div className="grid gap-6">
+        <div className="flex items-end justify-between gap-5">
+          <div>
+            <p className="text-[9px] font-medium uppercase tracking-[0.34em] text-ink/42">
+              SAMPLE PACKAGE
+            </p>
+            <h2 id="atlas-mobile-sample-title" className="mt-2 font-serif text-2xl font-light leading-none tracking-normal text-ink/82">
+              Reviewed crawl evidence
+            </h2>
+          </div>
+          <span className="shrink-0 border-b border-ink/18 pb-1 text-[10px] uppercase tracking-[0.2em] text-ink/42">
+            Mobile
+          </span>
+        </div>
+
+        <dl className="grid grid-cols-2 border-y border-ink/12">
+          {heroRunStats.map((stat) => (
+            <div key={stat.label} className="min-h-[6rem] border-b border-ink/10 px-3 py-3 odd:border-r odd:border-ink/10">
+              <dt className="text-[9px] uppercase tracking-[0.16em] text-ink/42">{stat.label}</dt>
+              <dd className="mt-2 font-serif text-xl leading-none text-ink/82">{stat.value}</dd>
+              <dd className="mt-2 text-[11px] leading-5 text-ink/46">{stat.note}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <nav className="grid gap-2 text-[11px] tracking-normal text-ink/58" aria-label="Atlas secondary links">
+          {mobileHeroLinks.map((link, index) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noreferrer' : undefined}
+              className="group grid min-h-12 grid-cols-[2.4rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-ink/12 py-2 transition-colors hover:border-ink/36 hover:text-ink/78"
+            >
+              <span className="font-mono text-[10px] text-ink/36">{String(index + 1).padStart(2, '0')}</span>
+              <span>
+                <span className="block text-[9px] uppercase tracking-[0.22em] text-ink/40">{link.note}</span>
+                <span className="mt-1 block font-serif text-sm italic leading-none tracking-normal text-ink/70">
+                  {link.label}
+                </span>
+              </span>
+              <span aria-hidden="true" className="text-[10px] uppercase tracking-[0.18em] text-ink/34 transition-transform group-hover:translate-x-1">
+                Open
+              </span>
+            </a>
+          ))}
+        </nav>
+      </div>
+    </section>
   );
 }
 

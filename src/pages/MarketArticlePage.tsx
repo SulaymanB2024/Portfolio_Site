@@ -55,12 +55,24 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
               <dd className="text-canvas">{thesis.category}</dd>
             </div>
             <div>
+              <dt className="mb-1 text-canvas/34">Author</dt>
+              <dd className="text-canvas">{thesis.author}</dd>
+            </div>
+            <div>
               <dt className="mb-1 text-canvas/34">Published</dt>
               <dd className="text-canvas">{thesis.date}</dd>
             </div>
             <div>
               <dt className="mb-1 text-canvas/34">Read Time</dt>
               <dd className="text-canvas">{thesis.readTime}</dd>
+            </div>
+            <div>
+              <dt className="mb-1 text-canvas/34">Sources</dt>
+              <dd className="text-canvas">{thesis.sources?.length ?? 0}</dd>
+            </div>
+            <div>
+              <dt className="mb-1 text-canvas/34">Boundary</dt>
+              <dd className="text-canvas">{thesis.claimBoundary ? 'Explicit' : 'Educational'}</dd>
             </div>
           </dl>
         </aside>
@@ -124,7 +136,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
             <div className="flex justify-center items-center py-8 border-y border-canvas/8 text-canvas text-base md:text-lg overflow-x-auto font-sans select-all bg-ink/30 shadow-inner">
               <span className="px-4 text-canvas filter drop-shadow-[0_0_8px_color-mix(in_srgb,var(--color-canvas)_15%,transparent)] font-semibold tracking-normal">{thesis.formula}</span>
             </div>
-            <div className="mt-4 flex justify-between text-[7.5px] text-canvas/34 tracking-[0.18em] font-sans">
+            <div className="mt-4 flex flex-col gap-2 text-[7.5px] text-canvas/34 tracking-[0.18em] font-sans sm:flex-row sm:justify-between">
               <span>QUANT_ENGINE // MODEL_0{thesis.number}</span>
               <span>COLLATERAL_RATIO // SECULAR_GROWTH</span>
             </div>

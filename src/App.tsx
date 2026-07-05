@@ -786,10 +786,10 @@ function HomePage() {
                  <div className="hidden md:block absolute left-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
                  
                  {/* Corner brackets */}
-                 <div className="absolute top-4 left-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌜</div>
-                 <div className="absolute top-4 right-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌝</div>
-                 <div className="absolute bottom-4 left-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌞</div>
-                 <div className="absolute bottom-4 right-4 text-canvas/50 text-[10px] pointer-events-none z-10 font-mono">⌟</div>
+                 <div className="absolute top-4 left-4 text-canvas/50 text-[10px] pointer-events-none z-10">⌜</div>
+                 <div className="absolute top-4 right-4 text-canvas/50 text-[10px] pointer-events-none z-10">⌝</div>
+                 <div className="absolute bottom-4 left-4 text-canvas/50 text-[10px] pointer-events-none z-10">⌞</div>
+                 <div className="absolute bottom-4 right-4 text-canvas/50 text-[10px] pointer-events-none z-10">⌟</div>
 
                  {!prefersReducedMotion && <Suspense fallback={null}>
                    <FlowField className="absolute inset-0 w-full h-full opacity-90 mix-blend-screen" density={80} />

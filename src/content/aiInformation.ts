@@ -1,7 +1,7 @@
 export const AI_INFORMATION_PATH = '/ai-information';
 
-export const AI_INFORMATION_LASTMOD = '2026-07-04';
-export const AI_INFORMATION_LAST_UPDATED = 'July 4, 2026';
+export const AI_INFORMATION_LASTMOD = '2026-07-05';
+export const AI_INFORMATION_LAST_UPDATED = 'July 5, 2026';
 
 export const AI_INFORMATION_TITLE = 'Profile Context for Sulayman Bowles, Void Agency, and Atlas';
 
@@ -126,7 +126,7 @@ export const crawlerAccessFacts = [
   'Robots.txt explicitly allows Googlebot, Bingbot, and DuckDuckBot. Brave Search does not publish a separate crawler user agent, so the practical Brave requirement is that the site remains crawlable to Googlebot and public web crawlers.',
   'Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User for public discovery and AI/search retrieval where those systems honor robots directives.',
   'The old Sulayman_Bowles_Resume_2025.pdf URL redirects to /resume so stale PDF results resolve to the current HTML resume.',
-  'IndexNow verification is hosted at https://sulayman-bowles.dev/831c8d8efafea91f80fd661d0390f52d.txt and sitemap URLs are submitted with the old PDF URL for rediscovery.',
+  'IndexNow verification is hosted at https://sulayman-bowles.dev/831c8d8efafea91f80fd661d0390f52d.txt. Sitemap and stale-PDF rediscovery submissions should be run or confirmed when current access is available.',
   'Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals; they do not prove rankings, indexing, traffic movement, or AI citations.',
   'Crawler reference support comes from the sitemap, JSON-LD, visible static fallback HTML, /ai-information, and /llms.txt together.',
 ];
@@ -135,16 +135,16 @@ export const providerDiscoveryPlan = [
   {
     provider: 'Google Search and Google AI surfaces',
     currentSignal:
-      'Google Search Console has the domain property, a successful sitemap for /sitemap.xml, URL Inspection recrawl requests for updated pages, and a live-test/indexing request for the old resume PDF redirect.',
+      'Public site signals are present: sitemap, canonical host, robots access, static fallback HTML, JSON-LD, /ai-information, /llms.txt, and the old resume PDF redirect. Google Search Console should confirm property, sitemap, URL Inspection, and performance state only when current access is available.',
     nextAction:
-      'Monitor the Pages, Sitemaps, Performance, and URL Inspection reports over the next few days to weeks instead of repeatedly resubmitting the same URLs.',
+      'When Search Console access is available, monitor Pages, Sitemaps, Performance, and URL Inspection reports. Treat missing access as a measurement gap, not ranking or indexing evidence.',
   },
   {
     provider: 'Bing, Microsoft Copilot, and Bing-powered search partners',
     currentSignal:
-      'Bing Webmaster Tools has the sulayman-bowles.dev property, /sitemap.xml, 12 submitted priority URLs, and IndexNow notifications backed by a root-hosted IndexNow key file.',
+      'Public site signals are present: /sitemap.xml, Bingbot access, canonical routes, and a root-hosted IndexNow key file. Bing Webmaster Tools should confirm property, sitemap, URL submissions, IndexNow processing, and AI Performance state only when current access is available.',
     nextAction:
-      'Run the IndexNow submission helper after material content, redirect, sitemap, or source-list changes and monitor Bing Webmaster Tools IndexNow, URL Submission, Sitemaps, and AI Performance reports.',
+      'After material content, redirect, sitemap, or source-list changes, run the IndexNow submission helper only when the key and submission path are current, then monitor Bing Webmaster Tools reports when access is available.',
   },
   {
     provider: 'Brave Search',
@@ -156,7 +156,7 @@ export const providerDiscoveryPlan = [
   {
     provider: 'DuckDuckGo',
     currentSignal:
-      'DuckDuckGo says it maintains DuckDuckBot and its own indexes while traditional links and images are largely sourced from Bing, so Bing Webmaster Tools, IndexNow, public crawlability, and DuckDuckBot access are the strongest practical levers.',
+      'DuckDuckGo says it maintains DuckDuckBot and its own indexes while traditional links and images are largely sourced from Bing, so public crawlability, DuckDuckBot access, Bing-indexable source paths where available, and Bing Webmaster Tools checks are the strongest practical levers.',
     nextAction:
       'Monitor DuckDuckGo branded and site queries after Bing processes the sitemap and URL submissions.',
   },

@@ -151,22 +151,50 @@ export const auditCaseStudySteps = [
   {
     title: 'Crawl data before recommendations',
     copy:
-      'Collect raw URLs, rendered content, robots and sitemap signals, canonical tags, indexability directives, internal links, and template patterns before writing fixes.',
+      'Collect raw URLs, rendered content, robots and sitemap signals, canonical tags, indexability directives, internal links, and template patterns before writing fixes. The first output is evidence, not advice.',
   },
   {
     title: 'Separate observations from interpretation',
     copy:
-      'A missing canonical, low inlink count, or noindex directive is recorded as an observation first. Impact and priority are added only after the pattern is reviewed across the crawl.',
+      'A missing canonical, low inlink count, or noindex directive is recorded as an observation first. Impact and priority are added only after the pattern is reviewed across templates, depth, traffic access, and business role.',
   },
   {
     title: 'Prioritize implementation paths',
     copy:
-      'Findings become a short action list: consolidate duplicate templates, repair canonical targets, strengthen hubs, preserve crawl paths, and document owner-ready tasks.',
+      'Findings become a short action list with owners and acceptance checks: consolidate duplicate templates, repair canonical targets, strengthen hubs, preserve crawl paths, and rerun the crawl to confirm the field changed.',
   },
   {
     title: 'Keep limits visible',
     copy:
-      'The case study describes the method and sample files. It does not claim private traffic movement, rankings, revenue impact, or answer placement.',
+      'The case study describes the method and sample files. It does not claim private traffic movement, rankings, revenue impact, or answer placement. Missing provider access remains a measurement gap, not a negative finding.',
+  },
+];
+
+export const auditCaseStudyAnswer = [
+  {
+    label: 'Problem observed',
+    value:
+      'A sanitized crawl row can show an indexable page with weak canonical data, shallow inlinks, or template risk. That is enough to investigate, not enough to claim a ranking loss.',
+  },
+  {
+    label: 'Evidence used',
+    value:
+      'The review uses status code, indexability, crawl depth, inlinks, outlinks, canonical field, issue label, source notes, and the related sitemap or template context.',
+  },
+  {
+    label: 'Recommended repair',
+    value:
+      'Pick the preferred canonical, update the affected template, strengthen internal links from relevant hubs, and document the owner and acceptance check.',
+  },
+  {
+    label: 'Rerun check',
+    value:
+      'Run the crawl again after implementation and compare the new row against the expected field changes before calling the issue closed.',
+  },
+  {
+    label: 'What it does not prove',
+    value:
+      'The public case study does not prove private traffic, ranking movement, revenue impact, answer placement, or site-health conclusions beyond the sanitized sample.',
   },
 ];
 
@@ -174,17 +202,17 @@ export const auditExampleFindingChain = [
   {
     label: 'Observed field',
     value:
-      '/resources/seo-tools is a sanitized demo URL with status 200, indexable state, crawl depth 2, 18 inlinks, and a missing canonical field.',
+      '/resources/seo-tools is a sanitized demo URL with status 200, indexable state, crawl depth 2, 18 inlinks, and a missing canonical field. The row is enough to inspect, not enough to claim performance impact.',
   },
   {
     label: 'Interpreted risk',
     value:
-      'A missing canonical can fragment duplicate or template signals when similar pages exist, but the crawl row is still an observation before it becomes a priority.',
+      'A missing canonical can fragment duplicate or template signals when similar pages exist, but it becomes a priority only after template duplication, internal links, and canonical intent are reviewed together.',
   },
   {
     label: 'Implementation action',
     value:
-      'Choose the preferred canonical, update template output, confirm internal links point at the preferred URL, and rerun the crawl to verify the field changed.',
+      'Choose the preferred canonical, update template output, confirm internal links point at the preferred URL, rerun the crawl, and compare the new row against the acceptance check.',
   },
   {
     label: 'Boundary',
@@ -194,12 +222,35 @@ export const auditExampleFindingChain = [
 ];
 
 export const austinSeoSignals = [
-  'Crawlable service and location pages with stable canonical URLs',
-  'Clear business identity, contact path, and service-area language',
-  'Internal links from project pages to intake, method, and sample files',
-  'Structured data that matches visible content instead of inventing credentials',
-  'Clear copy for search review and human readers',
-  'Google Business Profile, analytics, and Search Console review when access is available',
+  'Crawlable Austin service, product, location, and proof pages with stable canonical URLs',
+  'Short answer blocks that state who the page serves, what is offered, service-area limits, and the next step',
+  'Internal links from service pages to proof assets, intake, method notes, and sample crawl data',
+  'Structured data that matches visible content instead of inventing credentials, reviews, or coverage',
+  'Local proof such as project examples, service boundaries, review themes, owner context, and measurement fields',
+  'Google Business Profile, analytics, Search Console, and call/form data review only when access is available',
+];
+
+export const austinDiagnosticExamples = [
+  {
+    prompt: 'emergency HVAC repair Austin',
+    review:
+      'Check whether an emergency service page is crawlable, locally specific, linked from the main service hub, and connected to a tracked call path.',
+  },
+  {
+    prompt: 'foundation repair estimate Austin',
+    review:
+      'Check estimate language, qualification criteria, proof photos or case notes, review themes, and whether form submissions preserve service intent.',
+  },
+  {
+    prompt: 'dentist near Mueller',
+    review:
+      'Check whether location language is real, whether Google Business Profile categories match the site, and whether appointment CTAs preserve source context.',
+  },
+  {
+    prompt: 'med spa consultation Austin',
+    review:
+      'Check service boundaries, consultation steps, credibility signals, visible disclaimers, and whether answer-style copy avoids medical overclaiming.',
+  },
 ];
 
 export const austinBenchmarkSnapshot = [
@@ -215,6 +266,13 @@ export const austinBenchmarkLimits = [
   'The pilot is not representative of all Austin companies.',
   'Rows do not claim rankings, traffic movement, revenue impact, AI citations, or site health.',
   'Access-limited, timed-out, or challenged fetches are measurement gaps, not negative findings.',
+];
+
+export const austinPilotMethod = [
+  'The pilot used 12 Austin-area public homepages generated on 2026-06-25.',
+  'Each row started with one homepage fetch, one robots.txt fetch, and one sitemap declaration check where the public site exposed those files.',
+  'The review recorded presence and access signals only; it did not score local rankings, conversions, site health, or business quality.',
+  'Challenge pages, timeouts, blocked responses, and fetch gaps stay recorded as measurement gaps instead of negative SEO findings.',
 ];
 
 export const voidAgencyProofLinks = [

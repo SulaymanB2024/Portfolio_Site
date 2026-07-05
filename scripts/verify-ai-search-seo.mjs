@@ -51,6 +51,12 @@ const marketFiles = [
   'dist/markets/canonical-identity-personal-seo/index.html',
 ];
 
+const publicMarketLastmods = {
+  '/markets/ai-search-crawler-policy': '2026-07-05',
+  '/markets/technical-seo-public-data-infrastructure': '2026-07-05',
+  '/markets/canonical-identity-personal-seo': '2026-07-05',
+};
+
 const archivedMarketFiles = [
   'dist/markets/network-monopolies/index.html',
   'dist/markets/computational-commodity-systems/index.html',
@@ -413,6 +419,11 @@ assertHref('dist/atlas/sample-crawl/index.html', 'https://github.com/SulaymanB20
 
 assertVisibleText('dist/case-studies/technical-seo-audit/index.html', [
   'Technical SEO Audit Case Study',
+  'Short Answer',
+  'Problem observed',
+  'Evidence used',
+  'Rerun check',
+  'What it does not prove',
   'Crawl data before recommendations',
   'Separate observations from interpretation',
   'Request an audit',
@@ -422,6 +433,11 @@ assertHref('dist/case-studies/technical-seo-audit/index.html', '/contact', 'Requ
 assertVisibleText('dist/austin-technical-seo/index.html', [
   'Austin Technical SEO',
   'search visibility',
+  'Short Answer',
+  'Pilot Method',
+  'Query Examples Before Page Expansion',
+  'emergency HVAC repair Austin',
+  'foundation repair estimate Austin',
   'This page does not claim local rankings',
   'View Void Agency',
 ]);
@@ -440,6 +456,9 @@ assertHref('dist/void-agency/index.html', '/method', 'Read the technical SEO aud
 
 assertVisibleText('dist/method/index.html', [
   'Search Visibility Audit Checklist',
+  'Public Page Clarity Review',
+  'Product Discovery System',
+  'Service-Area Visibility Audit',
   'crawlability',
   'indexability',
   'internal links',
@@ -451,6 +470,8 @@ assertVisibleText('dist/method/index.html', [
   'stale/conflicting source cleanup',
 ]);
 assertHref('dist/method/index.html', '/atlas/sample-crawl', 'See an Atlas sample crawl run');
+assertHref('dist/method/index.html', '/ai-information', 'Open reference page');
+assertHref('dist/method/index.html', '/austin-technical-seo', 'Open local SEO page');
 assertHref('dist/method/index.html', '/void-agency', 'View Void Agency');
 assertHref('dist/method/index.html', '/contact', 'Request an audit');
 
@@ -471,7 +492,7 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     'Perplexity-User',
   ];
 
-  assert(llmsText.includes('Last updated: July 4, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('Last updated: July 5, 2026'), 'llms.txt: stale last updated date');
   assert(
     llmsText.includes('Canonical person ID: https://sulayman-bowles.dev/ai-information#sulayman-bowles'),
     'llms.txt: missing canonical person ID',
@@ -497,6 +518,14 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
   assert(llmsText.includes('Canonical Identity Beats More Content'), 'llms.txt: missing canonical identity article');
   assert(llmsText.includes('Brave Search: the site is publicly crawlable'), 'llms.txt: missing Brave discovery plan');
   assert(
+    llmsText.includes('Google Search and Google AI surfaces: public site signals are present'),
+    'llms.txt: Google provider plan should describe public signals, not unverified private Search Console state',
+  );
+  assert(
+    llmsText.includes('Bing, Microsoft Copilot, and Bing-powered search partners: public site signals are present'),
+    'llms.txt: Bing provider plan should describe public signals, not unverified private Bing Webmaster state',
+  );
+  assert(
     llmsText.includes('Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User'),
     'llms.txt: missing explicit AI crawler allow fact',
   );
@@ -508,6 +537,7 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     llmsText.includes('Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals'),
     'llms.txt: missing submission claim boundary',
   );
+  assert(!llmsText.includes('Bing-indexed source paths'), 'llms.txt: should not claim Bing indexing without live verification');
   assert(robotsText.includes('Sitemap: https://sulayman-bowles.dev/sitemap.xml'), 'robots.txt: missing sitemap directive');
 
   for (const agent of expectedAiAgents) {
@@ -525,6 +555,12 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     const loc = `<loc>${absolutePath(pathname)}</loc>`;
     assert(sitemapText.includes(loc), `dist sitemap: missing ${loc}`);
     assert(publicSitemapText.includes(loc), `public sitemap: missing ${loc}`);
+  }
+
+  for (const [pathname, lastmod] of Object.entries(publicMarketLastmods)) {
+    const sitemapEntry = `<loc>${absolutePath(pathname)}</loc>\n    <lastmod>${lastmod}</lastmod>`;
+    assert(sitemapText.includes(sitemapEntry), `dist sitemap: stale lastmod for ${pathname}`);
+    assert(publicSitemapText.includes(sitemapEntry), `public sitemap: stale lastmod for ${pathname}`);
   }
 
   for (const pathname of archivedMarketPaths) {
@@ -594,6 +630,7 @@ for (const file of marketFiles) {
   assert(webPage, `${file}: missing canonical WebPage schema`);
   assert(webPage.mainEntity?.['@id'] === article['@id'], `${file}: WebPage should point to Article as mainEntity`);
   assert(String(article.image?.url ?? article.image).startsWith(siteUrl), `${file}: Article image must be absolute`);
+  assert(article.dateModified === publicMarketLastmods[pathname], `${file}: Article schema should carry current dateModified`);
   assert(ogImage && ogImage === twitterImage, `${file}: OG and Twitter images must match`);
   assert(ogImage === (article.image?.url ?? article.image), `${file}: Article image must match OG/Twitter image`);
   assert(title.replaceAll('&amp;', '&').length <= 62, `${file}: title is too long (${title.length})`);

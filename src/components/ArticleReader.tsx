@@ -6,7 +6,7 @@ import { useFocusTrap } from '../hooks/useFocusTrap';
 interface ArticleReaderProps {
   isOpen: boolean;
   onClose: () => void;
-  thesisId: number; // 0, 1, 2
+  thesisId: number;
 }
 
 export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleReaderProps) {
@@ -192,7 +192,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
               <div className="flex justify-center items-center py-8 border-y border-canvas/8 text-canvas text-base md:text-lg overflow-x-auto font-sans select-all bg-ink/30 shadow-inner">
                 <span className="px-4 text-canvas filter drop-shadow-[0_0_8px_color-mix(in_srgb,var(--color-canvas)_15%,transparent)] font-semibold tracking-normal">{data.formula}</span>
               </div>
-              <div className="mt-4 flex justify-between text-[7.5px] text-canvas/34 tracking-[0.18em] font-sans">
+              <div className="mt-4 flex flex-col gap-2 text-[7.5px] text-canvas/34 tracking-[0.18em] font-sans sm:flex-row sm:justify-between">
                 <span>QUANT_ENGINE // MODEL_0{data.number}</span>
                 <span>COLLATERAL_RATIO // SECULAR_GROWTH</span>
               </div>

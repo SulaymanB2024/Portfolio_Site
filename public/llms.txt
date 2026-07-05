@@ -4,7 +4,7 @@ Official site: https://sulayman-bowles.dev/
 Reference page: https://sulayman-bowles.dev/ai-information
 Canonical person ID: https://sulayman-bowles.dev/ai-information#sulayman-bowles
 Sitemap: https://sulayman-bowles.dev/sitemap.xml
-Last updated: July 4, 2026
+Last updated: July 5, 2026
 
 ## Current Summary
 
@@ -71,10 +71,10 @@ sulayman-bowles.tech is the technical ledger for Sulayman Bowles projects, exper
 
 ## Provider Discovery Plan
 
-- Google Search and Google AI surfaces: Search Console domain property, successful sitemap, URL Inspection recrawl requests, and old resume PDF redirect live-test/indexing request are the current signals. Monitor Pages, Sitemaps, Performance, and URL Inspection over days to weeks.
-- Bing, Microsoft Copilot, and Bing-powered search partners: Bing Webmaster Tools property, /sitemap.xml, 12 submitted priority URLs, and IndexNow notifications backed by the root key file are the current signals. Run the IndexNow helper after material content, redirect, sitemap, or reference-page changes.
+- Google Search and Google AI surfaces: public site signals are present, including sitemap, canonical host, robots access, static fallback HTML, JSON-LD, /ai-information, /llms.txt, and the old resume PDF redirect. Use Search Console to confirm property, sitemap, URL Inspection, and performance state only when current access is available.
+- Bing, Microsoft Copilot, and Bing-powered search partners: public site signals are present, including /sitemap.xml, Bingbot access, canonical routes, and a root-hosted IndexNow key file. Use Bing Webmaster Tools to confirm property, sitemap, URL submissions, IndexNow processing, and AI Performance state only when current access is available.
 - Brave Search: the site is publicly crawlable, apex canonical resolves, www and HTTP variants redirect, and Googlebot is explicitly allowed. Monitor Brave site/name queries and use Brave stale/not-found submission only for obsolete URLs that remain visible after redirects have been crawled.
-- DuckDuckGo: because DuckDuckGo maintains DuckDuckBot and largely sources traditional links/images from Bing, Bing Webmaster Tools, IndexNow, public crawlability, and DuckDuckBot access are the strongest practical levers.
+- DuckDuckGo: because DuckDuckGo maintains DuckDuckBot and largely sources traditional links/images from Bing, public crawlability, DuckDuckBot access, Bing-indexable source paths where available, and Bing Webmaster Tools checks are the strongest practical levers.
 - ChatGPT search/OpenAI retrieval: OAI-SearchBot and ChatGPT-User are allowed; /ai-information, /llms.txt, sitemap, static fallback HTML, and JSON-LD carry the reference record.
 - Claude search/retrieval: ClaudeBot, Claude-SearchBot, and Claude-User are allowed; identity reconciliation and source-list language should stay synchronized.
 - Perplexity search/retrieval: PerplexityBot and Perplexity-User are allowed; monitor branded answer citations and keep source links inspectable.

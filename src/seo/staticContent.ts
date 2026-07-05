@@ -8,12 +8,15 @@ import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceList
 import { MARKET_THESES, PUBLIC_MARKET_THESES } from '../content/marketTheses';
 import {
   appianAssumptionRows,
+  auditCaseStudyAnswer,
   atlasSampleFindings,
   atlasSampleRows,
   auditExampleFindingChain,
   auditCaseStudySteps,
   austinBenchmarkLimits,
   austinBenchmarkSnapshot,
+  austinDiagnosticExamples,
+  austinPilotMethod,
   austinSeoSignals,
   contextualProofLinks,
   RESEARCH_ASSETS,
@@ -60,10 +63,30 @@ const methodColumns = [
 ];
 
 const methodCaseStudies = [
-  ['Indexation Audit at Scale', 'Mapped thousands of URLs to uncover crawl waste, duplicate templates, weak canonicals, orphaned pages, redirect chains, and pages blocked from meaningful discovery.'],
-  ['Visibility Benchmark', 'Reviewed whether a company could be understood clearly from its public pages. Tested entity clarity, page structure, schema, source material, and crawler access.'],
-  ['Product Discovery System', 'Audited product and collection pages to find missing metadata, thin templates, weak internal links, duplicate paths, and search-intent gaps.'],
-  ['Service-Area Visibility Audit', 'Mapped location pages, service pages, Google Business Profile signals, crawl structure, and local entity clarity to improve discovery in high-intent searches.'],
+  {
+    title: 'Indexation Audit at Scale',
+    copy: 'Mapped thousands of URLs to uncover crawl waste, duplicate templates, weak canonicals, orphaned pages, redirect chains, and pages blocked from meaningful discovery.',
+    href: '/atlas',
+    cta: 'Open Atlas page',
+  },
+  {
+    title: 'Public Page Clarity Review',
+    copy: 'Reviewed whether a company could be understood clearly from its public pages. Tested entity clarity, page structure, schema, source material, and crawler access.',
+    href: '/ai-information',
+    cta: 'Open reference page',
+  },
+  {
+    title: 'Product Discovery System',
+    copy: 'Audited product and collection pages to find missing metadata, thin templates, weak internal links, duplicate paths, and search-intent gaps.',
+    href: '/contact',
+    cta: 'Request product audit',
+  },
+  {
+    title: 'Service-Area Visibility Audit',
+    copy: 'Mapped location pages, service pages, Google Business Profile signals, crawl structure, and local entity clarity to improve discovery in high-intent searches.',
+    href: '/austin-technical-seo',
+    cta: 'Open local SEO page',
+  },
 ];
 
 const resumeExperience = [
@@ -166,6 +189,15 @@ function linkCards(items: Array<{ label: string; href: string; description?: str
     .map(
       (item) =>
         `<h3><a href="${item.href}">${escapeHtml(item.label)}</a></h3><p>${escapeHtml(item.description ?? '')}</p>`,
+    )
+    .join('\n        ');
+}
+
+function methodCaseStudyCards() {
+  return methodCaseStudies
+    .map(
+      (item) =>
+        `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.copy)}</p><p><a href="${item.href}">${escapeHtml(item.cta)}</a></p>`,
     )
     .join('\n        ');
 }
@@ -361,7 +393,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Search Visibility Audit Checklist</h2>
         ${evidenceLinkCards(aiSearchAuditChecklist)}
         <h2>Void in Action</h2>
-        ${definitionCards(methodCaseStudies)}
+        ${methodCaseStudyCards()}
         <h2>Source Material Used in the Method</h2>
         ${definitionCards([
           ['Crawlability', 'Robots rules, sitemap coverage, response codes, redirects, page templates, and crawl-depth patterns.'],
@@ -444,17 +476,24 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'Austin Technical SEO',
       'Local service-intent page for Austin technical SEO work.',
       `<p>Austin teams can use this page to evaluate crawlability, indexation, structured data, page clarity, and implementation detail before broader content or growth work.</p>
+        <h2>Short Answer</h2>
+        <p>Austin technical SEO is the review of whether a local service page can be crawled, understood, trusted, and measured for a specific service intent before anyone publishes more pages or claims visibility gains.</p>
         <h2>Austin Crawlability Pilot Snapshot</h2>
         <p>The local page is backed by a bounded public fetch sample, not a local-ranking claim. It gives a small public-data baseline for how Austin-area company sites expose crawlability signals.</p>
         ${definitionCards(austinBenchmarkSnapshot.map((item) => [item.label, item.value]))}
+        <h3>Pilot Method</h3>
+        <ul>${austinPilotMethod.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
         <h3>Measurement Limits</h3>
         <ul>${austinBenchmarkLimits.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
         ${linkList([
           { label: 'Open Austin benchmark summary JSON', href: '/research/austin-crawlability-benchmark-summary.json' },
           { label: 'Open Austin benchmark pilot CSV', href: '/research/austin-crawlability-benchmark-pilot.csv' },
         ])}
+        <h2>Query Examples Before Page Expansion</h2>
+        <p>The audit starts with concrete Austin service intents, then checks whether the public page, proof, profile signals, and measurement path support that intent.</p>
+        ${definitionCards(austinDiagnosticExamples.map((item) => [item.prompt, item.review]))}
         <h2>Local Evidence Before Local Claims</h2>
-        <ul><li>Review whether Austin service, product, location, and proof pages are reachable from normal internal paths and represented by stable canonical URLs.</li><li>Check whether the page explains who the business serves, what is offered, how to contact the owner, and which public evidence supports the claim.</li><li>Use Search Console, analytics, and Google Business Profile data only when access is available; do not infer private performance from public crawl output.</li></ul>
+        <ul><li>Review whether Austin service, product, location, and proof pages are reachable from normal internal paths and represented by stable canonical URLs.</li><li>Check whether the page explains who the business serves, what is offered, how to contact the owner, and which public evidence supports the claim.</li><li>Sample concrete local intents such as emergency HVAC repair, foundation repair estimates, dentists near Mueller, and med spa consultations to see whether page copy and tracking match the query.</li><li>Use Search Console, analytics, and Google Business Profile data only when access is available; do not infer private performance from public crawl output.</li></ul>
         <h2>What Gets Checked</h2>
         <ul>${austinSeoSignals.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
         <h2>Claim Boundary</h2>
@@ -474,6 +513,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'Technical SEO Audit Case Study',
       'A sanitized technical SEO case-study frame for turning crawl data into implementation work.',
       `<p>This case study describes a public method and sample files. It does not expose private client records or claim private traffic movement, rankings, revenue impact, or answer-placement gains.</p>
+        <h2>Short Answer</h2>
+        <p>The public case study shows how one crawl observation becomes an implementation path and a rerun check without turning a sanitized row into a private performance claim.</p>
+        ${definitionCards(auditCaseStudyAnswer.map((item) => [item.label, item.value]))}
         <h2>Case Study Steps</h2>
         ${definitionCards(auditCaseStudySteps.map((step) => [step.title, step.copy]))}
         <h2>One Finding Chain</h2>
@@ -588,7 +630,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       thesis.title,
       thesis.subtitle,
       `<h2>Memo Details</h2>
-        <p>Category: ${escapeHtml(thesis.category)}. Published: ${escapeHtml(thesis.date)}. Read time: ${escapeHtml(thesis.readTime)}.</p>
+        <p>Category: ${escapeHtml(thesis.category)}. Author: ${escapeHtml(thesis.author)}. Published: ${escapeHtml(thesis.date)}. Read time: ${escapeHtml(thesis.readTime)}. Source count: ${String(thesis.sources?.length ?? 0)}.</p>
         ${thesis.claimBoundary ? `<h2>Claim Boundary</h2><p>${escapeHtml(thesis.claimBoundary)}</p>` : ''}
         <h2>Educational Boundary</h2><p>Educational research sample, not an investment recommendation.</p>
         <h2>Article Metrics</h2>

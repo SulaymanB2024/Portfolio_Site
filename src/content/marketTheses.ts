@@ -8,6 +8,7 @@ export interface MarketThesis {
   seoDescription: string;
   image: string;
   date: string;
+  dateModified?: string;
   readTime: string;
   author: string;
   conviction: string;
@@ -137,6 +138,7 @@ export const MARKET_THESES: MarketThesis[] = [
       'Research note by Sulayman Bowles on crawler policy, robots.txt limits, OpenAI, Claude, Perplexity, IndexNow, canonical URLs, and search visibility.',
     image: '/og-default.png',
     date: '2026.06.19',
+    dateModified: '2026.07.05',
     readTime: '08 MIN',
     author: 'SULAYMAN BOWLES',
     conviction: 'EVIDENCE-LED',
@@ -182,6 +184,7 @@ export const MARKET_THESES: MarketThesis[] = [
       'Research note by Sulayman Bowles on technical SEO as public data infrastructure: crawl access, structured data, provenance, and SEC-style comparability.',
     image: '/og-default.png',
     date: '2026.06.19',
+    dateModified: '2026.07.05',
     readTime: '09 MIN',
     author: 'SULAYMAN BOWLES',
     conviction: 'SOURCE-NOTED',
@@ -223,6 +226,7 @@ export const MARKET_THESES: MarketThesis[] = [
       'Practical research note by Sulayman Bowles on identity cleanup, sameAs discipline, profile-page schema, stale resume PDFs, internal links, and external bio consistency.',
     image: '/og-default.png',
     date: '2026.06.19',
+    dateModified: '2026.07.05',
     readTime: '07 MIN',
     author: 'SULAYMAN BOWLES',
     conviction: 'PRACTICAL',
