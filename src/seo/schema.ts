@@ -700,6 +700,7 @@ export function atlasSampleCrawlJsonLd(): JsonLd {
       url: absoluteUrl('/research/atlas-sanitized-crawl-sample.csv'),
       description:
         'Sanitized/demo crawl sample with URL-level technical SEO fields. It is not a private client export or ranking claim.',
+      license: 'https://creativecommons.org/licenses/by/4.0',
       creator: {
         '@id': PERSON_ID,
       },
