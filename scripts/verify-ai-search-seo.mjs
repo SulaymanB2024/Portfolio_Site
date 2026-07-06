@@ -338,6 +338,13 @@ assertVisibleText('dist/atlas/sample-crawl/index.html', [
 assertHref('dist/atlas/sample-crawl/index.html', '/research/atlas-sanitized-crawl-sample.csv', 'Download sanitized crawl CSV');
 assertHref('dist/atlas/sample-crawl/index.html', 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', 'View the GitHub repo for the audit CLI');
 
+{
+  const graph = jsonLdGraph(read('dist/atlas/sample-crawl/index.html'));
+  const dataset = findType(graph, 'Dataset', `${siteUrl}/atlas/sample-crawl#sanitized-crawl-dataset`);
+  assert(dataset, 'atlas sample crawl: missing Dataset schema');
+  assert(dataset.license === 'https://creativecommons.org/licenses/by/4.0', 'atlas sample crawl: Dataset schema missing CC BY 4.0 license');
+}
+
 assertVisibleText('dist/case-studies/technical-seo-audit/index.html', [
   'Technical SEO Audit Case Study',
   'Crawl evidence before recommendations',
