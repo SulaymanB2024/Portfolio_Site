@@ -43,6 +43,32 @@ const austinDeliverables = [
   'A practical next-step order for founders, marketers, or developers, with unsupported ranking and traffic claims left out.',
 ];
 
+const austinBuyerFit = [
+  'Austin founders, local service owners, and small growth teams that need to know whether their important pages can be crawled, understood, and measured.',
+  'Teams with a site redesign, new service page, local landing page, or migration that needs a technical review before more content is added.',
+  'Operators who want a short implementation list, not a broad SEO retainer or vague visibility score.',
+];
+
+const austinCommonProblems = [
+  'Important service pages exist, but they are buried behind weak navigation, duplicate paths, or thin location-page templates.',
+  'The page says what the business does, but the title, H1, internal links, schema, and CTA path do not reinforce the same service intent.',
+  'Google Business Profile, Search Console, analytics, and site pages are not connected cleanly enough to tell what changed after a fix.',
+  'The site has useful proof, reviews, case notes, or local context, but those signals are not visible on the pages that need to convert.',
+];
+
+const austinSampleOutput = [
+  'URL, template, crawl depth, indexability state, canonical target, and internal-link count.',
+  'Observed issue, affected evidence, likely owner, implementation note, and rerun check.',
+  'Local-intent note that ties the page to a query family, proof block, CTA path, and measurement field.',
+  'Claim boundary showing what the crawl proves, what analytics would need to confirm, and what should not be inferred.',
+];
+
+const austinWhenNotToHire = [
+  'You need paid ads, social media management, generic blog production, or guaranteed local rankings.',
+  'You cannot make website changes or give a developer enough context to implement the fixes.',
+  'The problem is mainly branding, sales process, offer clarity, or operations rather than crawlability, indexation, page structure, or measurement.',
+];
+
 export default function AustinTechnicalSeoPage() {
   useSEO(AUSTIN_SEO);
 
@@ -98,7 +124,41 @@ export default function AustinTechnicalSeoPage() {
 
       <section className="relative z-10 border-y border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Review surfaces" title="What gets checked.">
+          <SectionHeader eyebrow="Buyer fit" title="Who this is for.">
+            This is for teams that need a concrete technical audit before investing in more local pages, content, or outreach.
+          </SectionHeader>
+          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-3">
+            <TechnicalPanel className="min-h-[260px]">
+              <p className="mb-7 text-[10px] uppercase tracking-[0.2em] text-current/42">Who this is for</p>
+              <ul className="grid gap-3 text-sm leading-relaxed text-current/64">
+                {austinBuyerFit.map((item) => (
+                  <li key={item} className="border-l border-current/14 pl-4">{item}</li>
+                ))}
+              </ul>
+            </TechnicalPanel>
+            <TechnicalPanel className="min-h-[260px]">
+              <p className="mb-7 text-[10px] uppercase tracking-[0.2em] text-current/42">What you receive</p>
+              <ul className="grid gap-3 text-sm leading-relaxed text-current/64">
+                {austinDeliverables.map((item) => (
+                  <li key={item} className="border-l border-current/14 pl-4">{item}</li>
+                ))}
+              </ul>
+            </TechnicalPanel>
+            <TechnicalPanel className="min-h-[260px]">
+              <p className="mb-7 text-[10px] uppercase tracking-[0.2em] text-current/42">When not to hire me</p>
+              <ul className="grid gap-3 text-sm leading-relaxed text-current/64">
+                {austinWhenNotToHire.map((item) => (
+                  <li key={item} className="border-l border-current/14 pl-4">{item}</li>
+                ))}
+              </ul>
+            </TechnicalPanel>
+          </SurfaceGrid>
+        </PageFrame>
+      </section>
+
+      <section className="relative z-10 border-b border-current/12">
+        <PageFrame className="py-16 xl:py-24">
+          <SectionHeader eyebrow="Audit scope" title="What I check.">
             The local frame is useful only when it is backed by crawlable pages, real source signals, and implementation detail. This page does not claim local rankings, traffic movement, or AI citations.
           </SectionHeader>
           <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
@@ -157,6 +217,32 @@ export default function AustinTechnicalSeoPage() {
       </PageFrame>
 
       <PageFrame className="relative z-10 py-16">
+        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.54fr_0.46fr]">
+          <div>
+            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
+              Use this format for your site audit.
+            </h2>
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
+              The pilot shows the evidence format: crawl fields first, interpretation second, and claim limits kept visible. A paid audit applies the same structure to your site, your priority pages, and your measurement setup.
+            </p>
+          </div>
+          <div className="grid content-center gap-5 text-sm leading-relaxed text-current/62">
+            <p>
+              Send the site, the pages that matter, and the business question the audit needs to answer. If Search Console, GA4, CMS, or Google Business Profile access exists, it can be added after scope is clear.
+            </p>
+            <div className="flex flex-wrap items-center gap-5">
+              <PrimaryCTA href="/contact" className="text-accent hover:text-[var(--page-bg)]">
+                Request an audit
+              </PrimaryCTA>
+              <TextLink href="/atlas/sample-crawl" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
+                Review the sample crawl format
+              </TextLink>
+            </div>
+          </div>
+        </section>
+      </PageFrame>
+
+      <PageFrame className="relative z-10 py-16">
         <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.42fr_0.58fr]">
           <div>
             <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
@@ -171,6 +257,48 @@ export default function AustinTechnicalSeoPage() {
               <TechnicalPanel key={item.prompt} className="min-h-[170px] p-5">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-current/42">{item.prompt}</p>
                 <p className="mt-5 text-sm leading-relaxed text-current/66">{item.review}</p>
+              </TechnicalPanel>
+            ))}
+          </div>
+        </section>
+      </PageFrame>
+
+      <PageFrame className="relative z-10 py-16">
+        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.48fr_0.52fr]">
+          <div>
+            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
+              Common Austin site problems.
+            </h2>
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
+              These are the issues the audit is meant to clarify before the team spends more time on content, ads, or outreach.
+            </p>
+          </div>
+          <div className="grid gap-px overflow-hidden border border-current/14 md:grid-cols-2">
+            {austinCommonProblems.map((item, index) => (
+              <TechnicalPanel key={item} className="min-h-[170px] p-5">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-current/42">{String(index + 1).padStart(2, '0')}</p>
+                <p className="mt-5 text-sm leading-relaxed text-current/66">{item}</p>
+              </TechnicalPanel>
+            ))}
+          </div>
+        </section>
+      </PageFrame>
+
+      <PageFrame className="relative z-10 py-16">
+        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.42fr_0.58fr]">
+          <div>
+            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
+              Sample audit output.
+            </h2>
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
+              The output is meant to be handed to a founder, marketer, or developer without hiding the evidence behind a score.
+            </p>
+          </div>
+          <div className="grid gap-px overflow-hidden border border-current/14 md:grid-cols-2">
+            {austinSampleOutput.map((item, index) => (
+              <TechnicalPanel key={item} className="min-h-[150px] p-5">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-current/42">Output {String(index + 1).padStart(2, '0')}</p>
+                <p className="mt-5 text-sm leading-relaxed text-current/66">{item}</p>
               </TechnicalPanel>
             ))}
           </div>

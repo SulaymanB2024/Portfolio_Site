@@ -89,6 +89,70 @@ const methodCaseStudies = [
   },
 ];
 
+const methodDeliverables = [
+  ['URL-level findings', 'A table of affected URLs, observed issue, evidence source, severity, owner, and implementation note.'],
+  ['Priority repair plan', 'A short order of operations for crawlability, indexation, internal links, page templates, structured data, and conversion paths.'],
+  ['Evidence appendix', 'Crawl rows, screenshots or rendered observations where useful, sitemap/robots notes, and analytics references when access is available.'],
+  ['Rerun checklist', 'The specific checks to run after fixes ship so the team can separate implementation completion from actual search movement.'],
+];
+
+const methodTimeline = [
+  ['Day 0', 'Confirm scope, canonical domain, priority pages, target queries or page types, access boundaries, and the business decision the audit must support.'],
+  ['Days 1-3', 'Run the crawl, inspect templates, review source pages, and map visible issues to affected URLs and owner-ready fixes.'],
+  ['Days 4-5', 'Deliver the prioritized findings, implementation notes, and measurement plan. Larger sites can split this into crawl, template, and analytics phases.'],
+];
+
+const methodRequiredAccess = [
+  ['Public site', 'Canonical domain, staging or production URL, known important pages, sitemap URL, and any launch or migration context.'],
+  ['Optional analytics', 'Google Search Console, GA4, CMS, log files, or rank-tracking exports can improve prioritization, but the public crawl can start without them.'],
+  ['Implementation context', 'CMS or framework constraints, developer availability, previous SEO changes, and any pages that should stay private or out of scope.'],
+];
+
+const methodExclusions = [
+  ['No ranking guarantees', 'The audit can identify crawl, indexation, page, and measurement problems. It does not promise rankings, traffic, AI citations, or revenue movement.'],
+  ['No generic content package', 'The work can identify missing page substance and intent gaps, but it is not a bulk blog calendar or outsourced publishing retainer.'],
+  ['No credential-first work', 'Private credentials, API keys, and production access should not be sent through the public form and are not required before scope is agreed.'],
+];
+
+const methodMeasurementPlan = [
+  ['After implementation', 'Rerun crawl checks, inspect changed pages, verify canonical/indexation behavior, and confirm the expected pages are still internally reachable.'],
+  ['Search data window', 'Track Search Console query groups, indexed URLs, landing pages, crawl errors, and page-level changes over a realistic post-ship window.'],
+  ['Conversion path', 'Review whether audit-relevant CTAs, form submissions, phone/email clicks, and analytics events are measurable from the fixed pages.'],
+];
+
+const austinBuyerFit = [
+  'Austin founders, local service owners, and small growth teams that need to know whether their important pages can be crawled, understood, and measured.',
+  'Teams with a site redesign, new service page, local landing page, or migration that needs a technical review before more content is added.',
+  'Operators who want a short implementation list, not a broad SEO retainer or vague visibility score.',
+];
+
+const austinDeliverables = [
+  'A short URL-level issue list with observed fields, affected pages, severity, and implementation notes.',
+  'A crawlability and source-clarity review covering robots.txt, sitemap, canonicals, structured data, internal links, and page copy.',
+  'A local-intent map that pairs each priority query family with the ranking URL, proof block, CTA path, and measurement field.',
+  'A practical next-step order for founders, marketers, or developers, with unsupported ranking and traffic claims left out.',
+];
+
+const austinWhenNotToHire = [
+  'You need paid ads, social media management, generic blog production, or guaranteed local rankings.',
+  'You cannot make website changes or give a developer enough context to implement the fixes.',
+  'The problem is mainly branding, sales process, offer clarity, or operations rather than crawlability, indexation, page structure, or measurement.',
+];
+
+const austinCommonProblems = [
+  'Important service pages exist, but they are buried behind weak navigation, duplicate paths, or thin location-page templates.',
+  'The page says what the business does, but the title, H1, internal links, schema, and CTA path do not reinforce the same service intent.',
+  'Google Business Profile, Search Console, analytics, and site pages are not connected cleanly enough to tell what changed after a fix.',
+  'The site has useful proof, reviews, case notes, or local context, but those signals are not visible on the pages that need to convert.',
+];
+
+const austinSampleOutput = [
+  'URL, template, crawl depth, indexability state, canonical target, and internal-link count.',
+  'Observed issue, affected evidence, likely owner, implementation note, and rerun check.',
+  'Local-intent note that ties the page to a query family, proof block, CTA path, and measurement field.',
+  'Claim boundary showing what the crawl proves, what analytics would need to confirm, and what should not be inferred.',
+];
+
 const resumeExperience = [
   ['Founder', 'VOID Agency', 'Dec 2025 - Present', 'Built Void Agency around technical SEO audits, website builds, local search work, and crawler-access checks, with $50K+ collected revenue.'],
   ['AI Product Manager Intern', 'Chegg, Office of the Chief Product Officer', 'May 2026 - Aug 2026', 'Supporting AI product research, competitive analysis, workflow mapping, and prototype review for student-facing tools.'],
@@ -390,6 +454,25 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h3>Analyze</h3><p>Indexation, architecture, links, metadata, speed, and schema.</p>
         <h3>Prioritize</h3><p>Rank fixes by severity, effort, affected pages, source notes, and implementation context.</p>
         <h3>Deliver</h3><p>Clear reports, implementation guidance, and measurable next steps.</p>
+        <h2>Audit Details</h2>
+        <p>The method is meant to bridge technical AEO/GEO theory and paid work by making scope, inputs, exclusions, and post-implementation measurement explicit before the audit starts.</p>
+        <h3>Concrete Deliverables</h3>
+        ${definitionCards(methodDeliverables)}
+        <h3>Timeline</h3>
+        ${definitionCards(methodTimeline)}
+        <h3>Required Access</h3>
+        ${definitionCards(methodRequiredAccess)}
+        <h3>What the Audit Does Not Include</h3>
+        ${definitionCards(methodExclusions)}
+        <h3>Measurement Plan After Implementation</h3>
+        ${definitionCards(methodMeasurementPlan)}
+        <h3>Sample Output Links</h3>
+        ${linkList([
+          { label: 'Atlas sample crawl', href: '/atlas/sample-crawl' },
+          { label: 'Technical SEO case study', href: '/case-studies/technical-seo-audit' },
+          { label: 'Austin local SEO page', href: '/austin-technical-seo' },
+          { label: 'Request an audit', href: '/contact' },
+        ])}
         <h2>Search Visibility Audit Checklist</h2>
         ${evidenceLinkCards(aiSearchAuditChecklist)}
         <h2>Void in Action</h2>
@@ -478,6 +561,14 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       `<p>Austin teams can use this page to evaluate crawlability, indexation, structured data, page clarity, and implementation detail before broader content or growth work.</p>
         <h2>Short Answer</h2>
         <p>Austin technical SEO is the review of whether a local service page can be crawled, understood, trusted, and measured for a specific service intent before anyone publishes more pages or claims visibility gains.</p>
+        <h2>Who This Is For</h2>
+        <ul>${austinBuyerFit.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        <h2>What You Receive</h2>
+        <ul>${austinDeliverables.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        <h2>When Not To Hire Me</h2>
+        <ul>${austinWhenNotToHire.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        <h2>What I Check</h2>
+        <ul>${austinSeoSignals.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
         <h2>Austin Crawlability Pilot Snapshot</h2>
         <p>The local page is backed by a bounded public fetch sample, not a local-ranking claim. It gives a small public-data baseline for how Austin-area company sites expose crawlability signals.</p>
         ${definitionCards(austinBenchmarkSnapshot.map((item) => [item.label, item.value]))}
@@ -489,13 +580,21 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'Open Austin benchmark summary JSON', href: '/research/austin-crawlability-benchmark-summary.json' },
           { label: 'Open Austin benchmark pilot CSV', href: '/research/austin-crawlability-benchmark-pilot.csv' },
         ])}
+        <h2>Use This Format For Your Site Audit</h2>
+        <p>The pilot shows the evidence format: crawl fields first, interpretation second, and claim limits kept visible. A paid audit applies the same structure to your site, your priority pages, and your measurement setup.</p>
+        ${linkList([
+          { label: 'Request an audit', href: '/contact' },
+          { label: 'Review the sample crawl format', href: '/atlas/sample-crawl' },
+        ])}
         <h2>Query Examples Before Page Expansion</h2>
         <p>The audit starts with concrete Austin service intents, then checks whether the public page, proof, profile signals, and measurement path support that intent.</p>
         ${definitionCards(austinDiagnosticExamples.map((item) => [item.prompt, item.review]))}
+        <h2>Common Austin Site Problems</h2>
+        <ul>${austinCommonProblems.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        <h2>Sample Audit Output</h2>
+        <ul>${austinSampleOutput.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
         <h2>Local Evidence Before Local Claims</h2>
         <ul><li>Review whether Austin service, product, location, and proof pages are reachable from normal internal paths and represented by stable canonical URLs.</li><li>Check whether the page explains who the business serves, what is offered, how to contact the owner, and which public evidence supports the claim.</li><li>Sample concrete local intents such as emergency HVAC repair, foundation repair estimates, dentists near Mueller, and med spa consultations to see whether page copy and tracking match the query.</li><li>Use Search Console, analytics, and Google Business Profile data only when access is available; do not infer private performance from public crawl output.</li></ul>
-        <h2>What Gets Checked</h2>
-        <ul>${austinSeoSignals.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
         <h2>Claim Boundary</h2>
         <p>This page does not claim local rankings, private traffic movement, revenue impact, or AI citations. Analytics and Search Console data are used only when access is available.</p>
         <h2>Contextual Links</h2>

@@ -38,7 +38,10 @@ type CaseStudy = {
   cta: string;
 };
 
-
+type MethodDetail = {
+  title: string;
+  copy: string;
+};
 
 const methodColumns: MethodColumn[] = [
   {
@@ -64,6 +67,85 @@ const methodColumns: MethodColumn[] = [
     title: 'MEASURE',
     visual: 'measure',
     copy: 'Track what changed after implementation: indexation, search queries, page performance, crawl behavior, and conversion events where analytics access supports it.',
+  },
+];
+
+const methodDeliverables: MethodDetail[] = [
+  {
+    title: 'URL-level findings',
+    copy: 'A table of affected URLs, observed issue, evidence source, severity, owner, and implementation note.',
+  },
+  {
+    title: 'Priority repair plan',
+    copy: 'A short order of operations for crawlability, indexation, internal links, page templates, structured data, and conversion paths.',
+  },
+  {
+    title: 'Evidence appendix',
+    copy: 'Crawl rows, screenshots or rendered observations where useful, sitemap/robots notes, and analytics references when access is available.',
+  },
+  {
+    title: 'Rerun checklist',
+    copy: 'The specific checks to run after fixes ship so the team can separate implementation completion from actual search movement.',
+  },
+];
+
+const methodTimeline: MethodDetail[] = [
+  {
+    title: 'Day 0',
+    copy: 'Confirm scope, canonical domain, priority pages, target queries or page types, access boundaries, and the business decision the audit must support.',
+  },
+  {
+    title: 'Days 1-3',
+    copy: 'Run the crawl, inspect templates, review source pages, and map visible issues to affected URLs and owner-ready fixes.',
+  },
+  {
+    title: 'Days 4-5',
+    copy: 'Deliver the prioritized findings, implementation notes, and measurement plan. Larger sites can split this into crawl, template, and analytics phases.',
+  },
+];
+
+const methodRequiredAccess: MethodDetail[] = [
+  {
+    title: 'Public site',
+    copy: 'Canonical domain, staging or production URL, known important pages, sitemap URL, and any launch or migration context.',
+  },
+  {
+    title: 'Optional analytics',
+    copy: 'Google Search Console, GA4, CMS, log files, or rank-tracking exports can improve prioritization, but the public crawl can start without them.',
+  },
+  {
+    title: 'Implementation context',
+    copy: 'CMS or framework constraints, developer availability, previous SEO changes, and any pages that should stay private or out of scope.',
+  },
+];
+
+const methodExclusions: MethodDetail[] = [
+  {
+    title: 'No ranking guarantees',
+    copy: 'The audit can identify crawl, indexation, page, and measurement problems. It does not promise rankings, traffic, AI citations, or revenue movement.',
+  },
+  {
+    title: 'No generic content package',
+    copy: 'The work can identify missing page substance and intent gaps, but it is not a bulk blog calendar or outsourced publishing retainer.',
+  },
+  {
+    title: 'No credential-first work',
+    copy: 'Private credentials, API keys, and production access should not be sent through the public form and are not required before scope is agreed.',
+  },
+];
+
+const methodMeasurementPlan: MethodDetail[] = [
+  {
+    title: 'After implementation',
+    copy: 'Rerun crawl checks, inspect changed pages, verify canonical/indexation behavior, and confirm the expected pages are still internally reachable.',
+  },
+  {
+    title: 'Search data window',
+    copy: 'Track Search Console query groups, indexed URLs, landing pages, crawl errors, and page-level changes over a realistic post-ship window.',
+  },
+  {
+    title: 'Conversion path',
+    copy: 'Review whether audit-relevant CTAs, form submissions, phone/email clicks, and analytics events are measurable from the fixed pages.',
   },
 ];
 
@@ -139,7 +221,7 @@ function ArrowLink({ children, href = '#', id }: { children: ReactNode; href?: s
 function CircleAuditButton({ className = '', id }: { className?: string; id?: string }) {
   return (
     <motion.a
-      href="/#contact"
+      href="/contact"
       id={id}
       className={`relative grid h-28 w-28 place-items-center overflow-hidden rounded-full bg-canvas text-center text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-ink md:h-32 md:w-32 ${className}`}
       whileHover={{ scale: 1.045 }}
@@ -660,6 +742,51 @@ export default function VoidAgencyMethodPage() {
               <ProcessStepCard step={step} index={index} />
             </div>
           ))}
+        </div>
+      </section>
+
+      <section id="audit-details" className="mx-auto max-w-[1480px] border-b border-canvas/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+        <ScrollReveal yOffset={18} blur={false} className="mb-10 grid gap-8 lg:grid-cols-[0.4fr_0.6fr]">
+          <div>
+            <h2 className="mb-8 text-[10px] uppercase tracking-[0.36em] text-canvas/45">AUDIT DETAILS</h2>
+            <p className="max-w-xl font-serif text-[2.6rem] md:text-[4.2rem] xl:text-[5.75rem] italic leading-[0.92] tracking-normal">
+              Deliverables, access, timeline, and measurement boundaries.
+            </p>
+          </div>
+          <p className="max-w-3xl self-end text-base leading-relaxed text-canvas/58">
+            The method is meant to bridge technical AEO/GEO theory and paid work by making scope, inputs, exclusions, and post-implementation measurement explicit before the audit starts.
+          </p>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-canvas/14 md:grid-cols-2 xl:grid-cols-3">
+          {[
+            ['Concrete deliverables', methodDeliverables],
+            ['Timeline', methodTimeline],
+            ['Required access', methodRequiredAccess],
+            ['What the audit does not include', methodExclusions],
+            ['Measurement plan after implementation', methodMeasurementPlan],
+          ].map(([title, items]) => (
+            <article key={String(title)} className="min-h-[300px] bg-canvas/[0.012] p-5">
+              <h3 className="mb-6 text-[10px] uppercase tracking-[0.24em] text-canvas/45">{String(title)}</h3>
+              <ul className="grid gap-4 text-sm leading-relaxed text-canvas/58">
+                {(items as MethodDetail[]).map((item) => (
+                  <li key={item.title} className="border-l border-canvas/12 pl-4">
+                    <span className="block text-xs uppercase tracking-[0.18em] text-canvas/72">{item.title}</span>
+                    <span className="mt-2 block">{item.copy}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+          <article className="min-h-[300px] bg-canvas/[0.012] p-5">
+            <h3 className="mb-6 text-[10px] uppercase tracking-[0.24em] text-canvas/45">Sample output links</h3>
+            <div className="grid gap-4">
+              <ArrowLink id="method-detail-sample-crawl" href="/atlas/sample-crawl">ATLAS SAMPLE CRAWL</ArrowLink>
+              <ArrowLink id="method-detail-case-study" href="/case-studies/technical-seo-audit">TECHNICAL SEO CASE STUDY</ArrowLink>
+              <ArrowLink id="method-detail-austin-page" href="/austin-technical-seo">AUSTIN LOCAL SEO PAGE</ArrowLink>
+              <ArrowLink id="method-detail-contact" href="/contact">REQUEST AN AUDIT</ArrowLink>
+            </div>
+          </article>
         </div>
       </section>
 
