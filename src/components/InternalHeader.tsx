@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { isNavItemActive, navItemId, navLabel, primaryNav } from '../content/siteNavigation';
 
 type InternalHeaderProps = {
@@ -10,7 +10,9 @@ type InternalHeaderProps = {
 export function InternalHeader({ activePath, tone = 'light', variant = 'default' }: InternalHeaderProps) {
   const activeItem = primaryNav.find((item) => isNavItemActive(activePath, item.href));
   const [routeNote, setRouteNote] = useState<string | null>(null);
-  const isDark = tone === 'dark';
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const useLightGlass = variant === 'home';
+  const isDark = tone === 'dark' && !useLightGlass;
   const showRouteNote = variant !== 'home';
   const displayedRouteNote = routeNote ?? activeItem?.description ?? 'Index of work, systems, and supporting links.';
   
@@ -26,9 +28,39 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
     ? 'fixed top-0 left-0 right-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 xl:px-10'
     : 'sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 xl:px-10';
 
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header className={shellClass}>
-      <div className={`site-header grid gap-3 ${bgClass} rounded-[8px] px-4 py-3 text-[10px] uppercase md:hidden`}>
+      {mobileMenuOpen && (
+        <button
+          type="button"
+          aria-label="Close navigation menu"
+          className="fixed inset-0 z-40 cursor-default bg-ink/8 backdrop-blur-[2px] md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      <div className={`site-header relative z-[60] flex items-center justify-between gap-4 ${bgClass} rounded-[8px] px-4 py-3 text-[10px] uppercase md:hidden`}>
         <div className="flex min-h-10 items-center justify-between gap-4">
           <a href="/" id="header-brand-link-mobile" className="min-w-0">
             <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
@@ -37,33 +69,47 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
             </span>
           </a>
         </div>
-        <details className={`group border-t ${menuBorderClass} pt-2`}>
-          <summary className={`flex min-h-11 cursor-pointer list-none items-center justify-between ${textMutedNavClass}`}>
-            <span className="site-header-menu-label tracking-[0.24em]">INDEX</span>
-            <span aria-hidden="true" className="text-sm leading-none transition-transform group-open:rotate-45">+</span>
-          </summary>
-          <nav className="mt-3 grid grid-cols-2 gap-2" aria-label="Mobile navigation">
-            {primaryNav.map((item, index) => {
-              const active = isNavItemActive(activePath, item.href);
-              const cleanId = navItemId('header-mobile-nav', item);
-              
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  id={cleanId}
-                  aria-current={active ? 'page' : undefined}
-                  title={item.description}
-                  style={{ transitionDelay: `${index * 26}ms` }}
-                  className={`site-header-link flex min-h-10 translate-y-1 items-center rounded-[6px] border px-3 py-2 tracking-[0.24em] opacity-[0.82] transition-[background-color,color,opacity,transform] duration-200 group-open:translate-y-0 group-open:opacity-100 ${menuBorderClass} ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
-                >
-                  {navLabel(item)}
-                </a>
-              );
-            })}
-          </nav>
-        </details>
+        <button
+          type="button"
+          id="header-mobile-menu-button"
+          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-controls="header-mobile-menu"
+          aria-expanded={mobileMenuOpen}
+          className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[6px] border text-sm leading-none transition-colors duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${textMutedNavClass}`}
+          onClick={() => setMobileMenuOpen((open) => !open)}
+        >
+          <span aria-hidden="true">{mobileMenuOpen ? 'x' : '+'}</span>
+        </button>
       </div>
+
+      {mobileMenuOpen && (
+        <nav
+          id="header-mobile-menu"
+          className={`mobile-nav-sheet fixed left-4 right-4 top-[96px] z-[55] grid max-h-[calc(100dvh-112px)] grid-cols-1 gap-2 overflow-y-auto rounded-[8px] p-3 text-[10px] uppercase shadow-2xl md:hidden ${bgClass}`}
+          aria-label="Mobile navigation"
+        >
+          {primaryNav.map((item, index) => {
+            const active = isNavItemActive(activePath, item.href);
+            const cleanId = navItemId('header-mobile-nav', item);
+
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                id={cleanId}
+                aria-current={active ? 'page' : undefined}
+                title={item.description}
+                style={{ transitionDelay: `${index * 22}ms` }}
+                className={`site-header-link flex min-h-12 items-center justify-between rounded-[6px] border px-4 py-3 tracking-[0.24em] opacity-[0.9] transition-[background-color,color,opacity,transform] duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>{navLabel(item)}</span>
+                <span aria-hidden="true" className="opacity-40">/</span>
+              </a>
+            );
+          })}
+        </nav>
+      )}
 
       <div className={`site-header hidden items-center gap-3 ${bgClass} rounded-[8px] px-5 py-3 text-[10px] uppercase md:grid md:grid-cols-1 lg:grid-cols-[minmax(245px,0.78fr)_minmax(0,1.32fr)] lg:px-6`}>
         <a href="/" id="header-brand-link" className="block min-w-0 justify-self-start transition-opacity duration-200 hover:opacity-72">

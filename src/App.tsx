@@ -1395,9 +1395,6 @@ function HomePage() {
         {/* INTERSTITIAL SECTION */}
         <section className="w-full h-[50vh] md:h-[80vh] overflow-hidden relative">
            {!prefersReducedMotion && <KineticTypography />}
-           <div className="absolute inset-0 flex items-center justify-center mix-blend-difference pointer-events-none">
-              <div className="w-[1px] h-32 bg-canvas mb-8"></div>
-           </div>
         </section>
 
         {/* FOOTER */}

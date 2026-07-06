@@ -137,23 +137,67 @@ select:focus-visible {
 }
 
 .frosted-acrylic-light {
-  background: color-mix(in srgb, var(--color-canvas) 84%, transparent);
-  -webkit-backdrop-filter: blur(18px) saturate(120%);
-  backdrop-filter: blur(18px) saturate(120%);
-  border: 1px solid rgba(8, 8, 7, 0.1);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.42), rgba(241, 239, 232, 0.28)),
+    color-mix(in srgb, var(--color-canvas) 42%, transparent);
+  -webkit-backdrop-filter: blur(24px) saturate(150%) contrast(105%);
+  backdrop-filter: blur(24px) saturate(150%) contrast(105%);
+  border: 1px solid rgba(255, 255, 255, 0.34);
   box-shadow: 
-    0 8px 28px rgba(8, 8, 7, 0.045),
-    inset 0 1px 0 rgba(255, 255, 255, 0.46);
+    0 18px 46px rgba(8, 8, 7, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.56),
+    inset 0 -1px 0 rgba(8, 8, 7, 0.06);
 }
 
 .frosted-acrylic-dark {
-  background: color-mix(in srgb, var(--color-ink) 78%, transparent);
-  -webkit-backdrop-filter: blur(18px) saturate(120%);
-  backdrop-filter: blur(18px) saturate(120%);
-  border: 1px solid rgba(241, 239, 232, 0.1);
+  background:
+    linear-gradient(135deg, rgba(241, 239, 232, 0.13), rgba(8, 8, 7, 0.1)),
+    color-mix(in srgb, var(--color-ink) 58%, transparent);
+  -webkit-backdrop-filter: blur(26px) saturate(155%) contrast(108%);
+  backdrop-filter: blur(26px) saturate(155%) contrast(108%);
+  border: 1px solid rgba(241, 239, 232, 0.24);
   box-shadow: 
-    0 8px 28px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 18px 50px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+}
+
+.site-header {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.26), transparent 28%),
+    linear-gradient(290deg, transparent 62%, rgba(255, 255, 255, 0.11));
+  opacity: 0.78;
+  pointer-events: none;
+}
+
+.site-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-nav-sheet.frosted-acrylic-light {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.74), rgba(241, 239, 232, 0.62)),
+    color-mix(in srgb, var(--color-canvas) 76%, transparent);
+  border-color: rgba(255, 255, 255, 0.44);
+}
+
+.mobile-nav-sheet.frosted-acrylic-dark {
+  background:
+    linear-gradient(135deg, rgba(241, 239, 232, 0.16), rgba(8, 8, 7, 0.38)),
+    color-mix(in srgb, var(--color-ink) 76%, transparent);
+  border-color: rgba(241, 239, 232, 0.22);
 }
 
 .site-page {
