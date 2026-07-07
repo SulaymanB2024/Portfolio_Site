@@ -392,14 +392,26 @@ export function buildRouteStaticHtml(route: SeoRoute) {
 
   if (route.path === '/contact') {
     return articleShell(
-      'Request a Technical SEO Audit',
-      'Technical SEO, AI-search visibility, crawl evidence, indexation, internal-link, structured-data, analytics, and finance/data research intake.',
-      `<p>Use this route for technical SEO, AI-search visibility, crawl evidence, indexation, internal-link, structured-data, analytics, or finance/data research requests.</p>
-        <h2>Before You Send</h2>
-        ${proofLinkCards(contextualProofLinks.slice(0, 3))}
+      'Contact Sulayman Bowles',
+      'Direct contact and compact audit brief route for technical SEO, AI-search visibility, crawl evidence, analytics, and source-backed research requests.',
+      `<p>Use this route to contact Sulayman Bowles directly or send a short brief for technical SEO, AI-search visibility, crawl evidence, analytics, or source-backed research.</p>
         <h2>Direct Contact</h2>
         ${linkList([
-          { label: 'Email Sulayman Bowles', href: 'mailto:sulayman.bowles@gmail.com', description: 'Direct contact path if the form is unavailable.' },
+          { label: 'Email Sulayman Bowles', href: 'mailto:sulayman.bowles@gmail.com', description: 'Primary contact path.' },
+        ])}
+        <h2>Brief Form</h2>
+        <p>The public brief form is secondary to direct contact. It is useful when the site URL, suspected problem, and decision the work needs to support are already clear.</p>
+        <ul><li>Use the brief for technical SEO, AI-search visibility, crawl evidence, analytics, or source-backed research requests.</li><li>Start with the site URL, the suspected problem, and the decision the work needs to support.</li><li>Do not include passwords, API keys, payment details, unreleased client data, or production secrets.</li></ul>
+        <h2>Elsewhere</h2>
+        ${linkList([
+          { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
+          { label: 'GitHub', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
+          { label: 'Resume', href: '/resume', description: 'Readable profile.' },
+          { label: 'Tech Ledger', href: 'https://sulayman-bowles.tech/', description: 'Technical projects, experiments, and project ledger.' },
+          { label: 'Public Site', href: '/', description: 'Home page.' },
+        ])}
+        <h2>Related Context</h2>
+        ${linkList([
           { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl' },
           { label: 'Read the technical SEO audit method', href: '/method' },
         ])}`,
