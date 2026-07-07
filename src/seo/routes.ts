@@ -215,7 +215,7 @@ const CORE_ROUTES: SeoRoute[] = [
     aliases: ['/research-assets', '/proof-assets'],
     title: 'Research Assets | Technical SEO, AI Search & Atlas Data',
     description:
-      'Citation-ready public research assets from Sulayman Bowles across technical SEO, AI-search crawler policy, Atlas crawl evidence, Austin crawlability, identity, and finance/data research.',
+      'Citation-ready public research assets from Sulayman Bowles covering technical SEO, AI-search crawler policy, Atlas crawl data, identity context, and finance research.',
     h1: 'Research Assets',
     section: 'research',
     pageType: 'research',
