@@ -64,7 +64,7 @@ export interface SeoRoute {
 export type RouteVisualMode = 'canvas-sample' | 'dark-evidence' | 'memo-reader' | 'book' | 'prototype';
 export type RouteTone = 'light' | 'dark';
 
-export const SITE_LASTMOD = '2026-07-05';
+export const SITE_LASTMOD = '2026-07-07';
 
 const CORE_ROUTES: SeoRoute[] = [
   {
@@ -276,17 +276,17 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/contact',
     aliases: ['/audit-intake'],
-    title: 'Request Technical SEO Audit | Sulayman Bowles',
+    title: 'Contact Sulayman Bowles | Technical SEO Audit Brief',
     description:
-      'Request a technical SEO audit from Sulayman Bowles for crawl data, indexation, internal links, structured data, analytics, markets research, or site clarity.',
-    h1: 'Request a Technical SEO Audit',
+      'Contact Sulayman Bowles directly or send a brief for technical SEO, crawl evidence, analytics, search visibility, source-backed research, and audit scope.',
+    h1: 'Contact Sulayman Bowles',
     section: 'contact',
     pageType: 'service',
     priority: 0.8,
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'Request a technical SEO audit with crawl data, indexation, internal links, structured data, analytics, and page clarity.',
+      'Contact-first route with direct email, a compact audit brief form, and links to LinkedIn, GitHub, resume, and public project records.',
     jsonLd: contactJsonLd(),
   },
   {

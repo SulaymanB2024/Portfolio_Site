@@ -1,4 +1,4 @@
-import { AI_INFORMATION_DESCRIPTION, providerDiscoveryPlan } from '../content/aiInformation';
+import { AI_INFORMATION_DESCRIPTION, expertiseAreas, providerDiscoveryPlan } from '../content/aiInformation';
 import {
   aiSearchAuditChecklist,
   atlasCheckItems,
@@ -25,7 +25,37 @@ const canonicalLogo = {
   url: absoluteUrl(DEFAULT_OG_IMAGE),
 };
 
-export function personSchema({ includeVoidAgencyAffiliation = false }: { includeVoidAgencyAffiliation?: boolean } = {}): JsonLd {
+const schemaDateModified = '2026-07-07';
+const directEmail = 'sulayman.bowles@gmail.com';
+
+const primarySiteParts = [
+  { name: 'About Sulayman Bowles', path: '/about' },
+  { name: 'Selected Work', path: '/work' },
+  { name: 'Atlas SEO Audit Console', path: '/atlas' },
+  { name: 'Void Agency Method', path: '/method' },
+  { name: 'Profile Context', path: '/ai-information' },
+  { name: 'Contact Sulayman Bowles', path: '/contact' },
+  { name: 'Research Notes', path: '/research' },
+];
+
+function contactPointSchema(): JsonLd {
+  return {
+    '@type': 'ContactPoint',
+    '@id': `${absoluteUrl('/contact')}#technical-seo-contact`,
+    contactType: 'technical SEO, crawl evidence, analytics, and source-backed research inquiries',
+    email: directEmail,
+    url: absoluteUrl('/contact'),
+    availableLanguage: ['en-US', 'English'],
+  };
+}
+
+export function personSchema({
+  includeVoidAgencyAffiliation = false,
+  includeContactPoint = false,
+}: {
+  includeVoidAgencyAffiliation?: boolean;
+  includeContactPoint?: boolean;
+} = {}): JsonLd {
   const affiliation: JsonLd[] = [
     {
       '@type': 'CollegeOrUniversity',
@@ -55,6 +85,7 @@ export function personSchema({ includeVoidAgencyAffiliation = false }: { include
     url: SITE_URL,
     logo: canonicalLogo,
     image: canonicalLogo,
+    jobTitle: 'Technical systems builder',
     mainEntityOfPage: absoluteUrl('/ai-information'),
     description:
       'Sulayman Bowles is a UT Austin McCombs student and technical systems builder focused on Atlas, technical SEO, search visibility, and finance research.',
@@ -124,6 +155,7 @@ export function personSchema({ includeVoidAgencyAffiliation = false }: { include
       },
     ],
     affiliation,
+    knowsLanguage: ['English'],
     knowsAbout: [
       'Technical SEO',
       'Search discoverability',
@@ -136,6 +168,7 @@ export function personSchema({ includeVoidAgencyAffiliation = false }: { include
       'Atlas SEO Audit Console',
       'Void Agency',
     ],
+    ...(includeContactPoint ? { contactPoint: [contactPointSchema()] } : {}),
   };
 }
 
@@ -146,10 +179,22 @@ export function websiteSchema(): JsonLd {
     '@id': `${SITE_URL}/#website`,
     name: SITE_NAME,
     url: SITE_URL,
+    description:
+      'Personal site for Sulayman Bowles covering Atlas, technical SEO, search visibility, finance research, public source context, and selected work.',
     inLanguage: 'en-US',
     publisher: {
       '@id': PERSON_ID,
     },
+    about: [
+      { '@id': PERSON_ID },
+      { '@id': `${SITE_URL}/atlas#software` },
+      { '@id': `${SITE_URL}/#void-agency` },
+    ],
+    hasPart: primarySiteParts.map((part) => ({
+      '@type': 'WebPage',
+      name: part.name,
+      url: absoluteUrl(part.path),
+    })),
   };
 }
 
@@ -167,12 +212,23 @@ export function voidAgencyOrganizationSchema(): JsonLd {
     founder: {
       '@id': PERSON_ID,
     },
+    contactPoint: [contactPointSchema()],
+    areaServed: 'United States',
   };
 }
 
-export function canonicalEntitySchemas({ includeVoidAgency = false }: { includeVoidAgency?: boolean } = {}): JsonLd[] {
+export function canonicalEntitySchemas({
+  includeVoidAgency = false,
+  includeContactPoint = false,
+}: {
+  includeVoidAgency?: boolean;
+  includeContactPoint?: boolean;
+} = {}): JsonLd[] {
   return [
-    personSchema({ includeVoidAgencyAffiliation: includeVoidAgency }),
+    personSchema({
+      includeVoidAgencyAffiliation: includeVoidAgency,
+      includeContactPoint,
+    }),
     ...(includeVoidAgency ? [voidAgencyOrganizationSchema()] : []),
   ];
 }
@@ -183,21 +239,26 @@ function webPageSchema({
   description,
   mainEntityId,
   aboutIds = [],
+  additionalType,
+  dateModified,
 }: {
   path: string;
   name: string;
   description: string;
   mainEntityId?: string;
   aboutIds?: string[];
+  additionalType?: string;
+  dateModified?: string;
 }): JsonLd {
   return {
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
+    '@type': additionalType ? ['WebPage', additionalType] : 'WebPage',
     '@id': `${absoluteUrl(path)}#webpage`,
     name,
     url: absoluteUrl(path),
     description,
     inLanguage: 'en-US',
+    ...(dateModified ? { dateModified } : {}),
     isPartOf: {
       '@id': `${SITE_URL}/#website`,
     },
@@ -281,6 +342,77 @@ function providerDiscoveryPlanItemListSchema(): JsonLd {
   };
 }
 
+function expertiseDefinedTermSetSchema(): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTermSet',
+    '@id': `${absoluteUrl('/ai-information')}#expertise-areas`,
+    name: 'Relevant Expertise Areas',
+    description:
+      'Public expertise terms stated on the profile context page for Sulayman Bowles.',
+    hasDefinedTerm: expertiseAreas.map((area, index) => ({
+      '@type': 'DefinedTerm',
+      '@id': `${absoluteUrl('/ai-information')}#expertise-${index + 1}`,
+      name: area,
+    })),
+  };
+}
+
+function methodOfferCatalogSchema(): JsonLd {
+  const offers = [
+    {
+      name: 'Indexation Audit at Scale',
+      url: absoluteUrl('/atlas'),
+      serviceType: 'Technical SEO Audit',
+      description:
+        'Crawl waste, duplicate templates, canonicals, orphaned pages, redirects, and blocked discovery review.',
+    },
+    {
+      name: 'Public Page Clarity Review',
+      url: absoluteUrl('/ai-information'),
+      serviceType: 'Search Visibility Audit',
+      description:
+        'Entity clarity, page structure, schema, source material, and crawler access review.',
+    },
+    {
+      name: 'Product Discovery System',
+      url: absoluteUrl('/contact'),
+      serviceType: 'Product and Collection Page SEO Audit',
+      description:
+        'Metadata, thin templates, internal links, duplicate paths, and search-intent gap review.',
+    },
+    {
+      name: 'Service-Area Visibility Audit',
+      url: absoluteUrl('/austin-technical-seo'),
+      serviceType: 'Local Search Visibility Audit',
+      description:
+        'Service pages, location pages, local entity clarity, crawl structure, and measurement-path review.',
+    },
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'OfferCatalog',
+    '@id': `${absoluteUrl('/method')}#offer-catalog`,
+    name: 'Technical SEO Audit Offer Catalog',
+    description:
+      'Service examples visible on the Void Agency method page for technical SEO and search visibility audits.',
+    itemListElement: offers.map((offer) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: offer.name,
+        url: offer.url,
+        serviceType: offer.serviceType,
+        description: offer.description,
+        provider: {
+          '@id': `${SITE_URL}/#void-agency`,
+        },
+      },
+    })),
+  };
+}
+
 export function projectSchema(): JsonLd {
   return {
     '@context': 'https://schema.org',
@@ -325,6 +457,14 @@ export function serviceSchema(): JsonLd {
       'Crawlability Audit',
       'Structured Data Audit',
     ],
+    hasOfferCatalog: {
+      '@id': `${absoluteUrl('/method')}#offer-catalog`,
+    },
+    availableChannel: {
+      '@type': 'ServiceChannel',
+      serviceUrl: absoluteUrl('/contact'),
+      availableLanguage: ['en-US', 'English'],
+    },
     description:
       'Technical SEO and search visibility audit work covering crawlability, robots.txt, sitemaps, raw and rendered HTML, canonical URLs, internal links, structured data, GSC/GA4 review, page templates, query buckets, and implementation recommendations.',
   };
@@ -423,6 +563,8 @@ export function aboutJsonLd(): JsonLd {
         'About page explaining Sulayman Bowles through UT Austin McCombs, Atlas, technical SEO, Void Agency, search visibility, and finance research.',
       mainEntityId: PERSON_ID,
       aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
+      additionalType: 'AboutPage',
+      dateModified: schemaDateModified,
     }),
     {
       '@context': 'https://schema.org',
@@ -432,6 +574,7 @@ export function aboutJsonLd(): JsonLd {
       url: absoluteUrl('/about'),
       description:
         'Profile page explaining Sulayman Bowles through UT Austin McCombs, Atlas, technical SEO, Void Agency, search visibility, and finance research.',
+      dateModified: schemaDateModified,
       mainEntity: {
         '@id': PERSON_ID,
       },
@@ -466,6 +609,7 @@ export function simpleBookJsonLd(): JsonLd {
       url: absoluteUrl('/simple'),
       description:
         'A first-person text edition of Sulayman Bowles website, covering technical SEO, Atlas, Void Agency, Markets Research, finance research, software systems, and current direction.',
+      dateModified: schemaDateModified,
       mainEntity: {
         '@id': PERSON_ID,
       },
@@ -500,6 +644,7 @@ export function resumeJsonLd(): JsonLd {
       url: absoluteUrl('/resume'),
       description:
         'HTML-first resume for Sulayman Bowles across UT Austin McCombs, Void Agency, Atlas, technical SEO, search visibility, finance research, public code, and professional profiles.',
+      dateModified: schemaDateModified,
       mainEntity: {
         '@id': PERSON_ID,
       },
@@ -525,6 +670,8 @@ export function aiInformationJsonLd(): JsonLd {
       description: AI_INFORMATION_DESCRIPTION,
       mainEntityId: PERSON_ID,
       aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`, `${SITE_URL}/#void-agency`],
+      additionalType: 'AboutPage',
+      dateModified: schemaDateModified,
     }),
     evidenceItemListSchema({
       id: 'public-source-graph',
@@ -536,6 +683,7 @@ export function aiInformationJsonLd(): JsonLd {
     }),
     fanOutQueryItemListSchema(fanOutQueryMap),
     providerDiscoveryPlanItemListSchema(),
+    expertiseDefinedTermSetSchema(),
     {
       '@context': 'https://schema.org',
       '@type': 'ProfilePage',
@@ -543,6 +691,7 @@ export function aiInformationJsonLd(): JsonLd {
       name: 'Profile Context for Sulayman Bowles, Void Agency, and Atlas',
       url: absoluteUrl('/ai-information'),
       description: AI_INFORMATION_DESCRIPTION,
+      dateModified: schemaDateModified,
       mainEntity: {
         '@id': PERSON_ID,
       },
@@ -595,6 +744,7 @@ export function methodJsonLd(): JsonLd {
     ...canonicalEntitySchemas({ includeVoidAgency: true }),
     websiteSchema(),
     serviceSchema(),
+    methodOfferCatalogSchema(),
     webPageSchema({
       path: '/method',
       name: 'Void Agency Method',
@@ -648,7 +798,7 @@ export function contactJsonLd(): JsonLd {
   const serviceId = `${absoluteUrl('/contact')}#audit-intake-service`;
 
   return graphSchema([
-    ...canonicalEntitySchemas(),
+    ...canonicalEntitySchemas({ includeContactPoint: true }),
     websiteSchema(),
     {
       '@context': 'https://schema.org',
@@ -661,16 +811,23 @@ export function contactJsonLd(): JsonLd {
       },
       serviceType: ['Technical SEO Audit', 'Search Visibility Audit', 'Crawlability Review'],
       areaServed: 'United States',
+      availableChannel: {
+        '@type': 'ServiceChannel',
+        serviceUrl: absoluteUrl('/contact'),
+        availableLanguage: ['en-US', 'English'],
+      },
       description:
-        'Audit intake for technical SEO audits, crawl reviews, analytics, markets research, and structured web systems.',
+        'Contact and compact audit brief path for technical SEO audits, crawl reviews, analytics, markets research, and structured web systems.',
     },
     webPageSchema({
       path: '/contact',
-      name: 'Request a Technical SEO Audit',
+      name: 'Contact Sulayman Bowles',
       description:
-        'Audit intake page for Sulayman Bowles with a Formspree brief form, direct email fallback, fit notes, deliverables, and links to Atlas sample crawl data and the technical SEO method.',
+        'Contact page for Sulayman Bowles with a direct email path, compact Formspree brief form, and links to LinkedIn, GitHub, resume, public site, Atlas sample crawl data, and the technical SEO method.',
       mainEntityId: serviceId,
       aboutIds: [PERSON_ID],
+      additionalType: 'ContactPage',
+      dateModified: schemaDateModified,
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },

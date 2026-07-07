@@ -4,7 +4,7 @@ import { isNavItemActive, navItemId, navLabel, primaryNav } from '../content/sit
 type InternalHeaderProps = {
   activePath: string;
   tone?: 'light' | 'dark';
-  variant?: 'default' | 'home';
+  variant?: 'default' | 'home' | 'final-frame';
 };
 
 export function InternalHeader({ activePath, tone = 'light', variant = 'default' }: InternalHeaderProps) {
@@ -12,8 +12,9 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   const [routeNote, setRouteNote] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const useLightGlass = variant === 'home';
+  const isFinalFrame = variant === 'final-frame';
   const isDark = tone === 'dark' && !useLightGlass;
-  const showRouteNote = variant !== 'home';
+  const showRouteNote = variant !== 'home' && !isFinalFrame;
   const displayedRouteNote = routeNote ?? activeItem?.description ?? 'Index of work, systems, and supporting links.';
   
   const textClass = isDark ? 'text-canvas' : 'text-ink';
@@ -21,9 +22,16 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   const textMutedNavClass = isDark ? 'text-canvas/56 hover:text-canvas' : 'text-ink/54 hover:text-ink';
   const activeRuleClass = isDark ? 'bg-canvas' : 'bg-ink';
   const hoverSurfaceClass = isDark ? 'hover:bg-canvas/7' : 'hover:bg-ink/[0.035]';
-  const bgClass = isDark ? 'frosted-acrylic-dark' : 'frosted-acrylic-light';
+  const bgClass = isFinalFrame
+    ? isDark
+      ? 'border border-canvas/12 bg-ink/80'
+      : 'border border-ink/12 bg-canvas/82'
+    : isDark ? 'frosted-acrylic-dark' : 'frosted-acrylic-light';
   const menuBorderClass = isDark ? 'border-canvas/16' : 'border-ink/16';
   const noteBorderClass = isDark ? 'border-canvas/12' : 'border-ink/12';
+  const surfaceClass = isFinalFrame ? 'relative z-[60]' : 'site-header relative z-[60]';
+  const surfaceRadiusClass = isFinalFrame ? 'rounded-none' : 'rounded-[8px]';
+  const mobileMenuClass = isFinalFrame ? '' : 'mobile-nav-sheet';
   const shellClass = variant === 'home'
     ? 'fixed top-0 left-0 right-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 xl:px-10'
     : 'sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 xl:px-10';
@@ -60,7 +68,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
         />
       )}
 
-      <div className={`site-header relative z-[60] flex items-center justify-between gap-4 ${bgClass} rounded-[8px] px-4 py-3 text-[10px] uppercase md:hidden`}>
+      <div className={`${surfaceClass} flex items-center justify-between gap-4 ${bgClass} ${surfaceRadiusClass} px-4 py-3 text-[10px] uppercase md:hidden`}>
         <div className="flex min-h-10 items-center justify-between gap-4">
           <a href="/" id="header-brand-link-mobile" className="min-w-0">
             <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
@@ -85,7 +93,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
       {mobileMenuOpen && (
         <nav
           id="header-mobile-menu"
-          className={`mobile-nav-sheet fixed left-4 right-4 top-[96px] z-[55] grid max-h-[calc(100dvh-112px)] grid-cols-1 gap-2 overflow-y-auto rounded-[8px] p-3 text-[10px] uppercase shadow-2xl md:hidden ${bgClass}`}
+          className={`${mobileMenuClass} fixed left-4 right-4 top-[96px] z-[55] grid max-h-[calc(100dvh-112px)] grid-cols-1 gap-2 overflow-y-auto ${surfaceRadiusClass} p-3 text-[10px] uppercase shadow-2xl md:hidden ${bgClass}`}
           aria-label="Mobile navigation"
         >
           {primaryNav.map((item, index) => {
@@ -111,7 +119,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
         </nav>
       )}
 
-      <div className={`site-header hidden items-center gap-3 ${bgClass} rounded-[8px] px-5 py-3 text-[10px] uppercase md:grid md:grid-cols-1 lg:grid-cols-[minmax(245px,0.78fr)_minmax(0,1.32fr)] lg:px-6`}>
+      <div className={`${isFinalFrame ? 'relative' : 'site-header'} hidden items-center gap-3 ${bgClass} ${surfaceRadiusClass} px-5 py-3 text-[10px] uppercase md:grid md:grid-cols-1 lg:grid-cols-[minmax(245px,0.78fr)_minmax(0,1.32fr)] lg:px-6`}>
         <a href="/" id="header-brand-link" className="block min-w-0 justify-self-start transition-opacity duration-200 hover:opacity-72">
           <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
           <span className={`site-header-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>

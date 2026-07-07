@@ -88,8 +88,12 @@ function jsonLdGraph(html) {
   });
 }
 
+function schemaTypes(item) {
+  return Array.isArray(item?.['@type']) ? item['@type'] : [item?.['@type']];
+}
+
 function findType(graph, type, id) {
-  return graph.find((item) => item['@type'] === type && (!id || item['@id'] === id));
+  return graph.find((item) => schemaTypes(item).includes(type) && (!id || item['@id'] === id));
 }
 
 function findItemList(graph, id) {
@@ -208,6 +212,9 @@ for (const [route, file] of Object.entries(routeFiles)) {
   assert(webPage, `${route}: missing canonical WebPage schema`);
   assert(webPage.url === absolutePath(routePaths[route]), `${route}: WebPage url must match canonical route URL`);
   assert(webPage.isPartOf?.['@id'] === `${siteUrl}/#website`, `${route}: WebPage must be part of shared WebSite`);
+  assert(website.description?.includes('Atlas'), `${route}: WebSite schema should describe the site focus`);
+  assert(graphUrls(website.hasPart).includes(`${siteUrl}/atlas`), `${route}: WebSite hasPart missing Atlas page`);
+  assert(graphUrls(website.hasPart).includes(`${siteUrl}/contact`), `${route}: WebSite hasPart missing contact page`);
 
   const title = html.match(/<title>(.*?)<\/title>/s)?.[1] ?? '';
   assert(title.replaceAll('&amp;', '&').length <= 62, `${route}: title is too long (${title.length})`);
@@ -308,12 +315,16 @@ for (const file of new Set([...Object.values(routeFiles), ...marketFiles, ...arc
   const sourceGraphList = findItemList(graph, `${siteUrl}/ai-information#public-source-graph`);
   const fanOutList = findItemList(graph, `${siteUrl}/ai-information#fan-out-query-map`);
   const providerPlanList = findItemList(graph, `${siteUrl}/ai-information#provider-discovery-plan`);
+  const expertiseTerms = findType(graph, 'DefinedTermSet', `${siteUrl}/ai-information#expertise-areas`);
   assert(sourceGraphList, 'ai-information: missing Public Source List ItemList schema');
   assert(fanOutList, 'ai-information: missing Likely Search Questions ItemList schema');
   assert(providerPlanList, 'ai-information: missing Provider Discovery Plan ItemList schema');
+  assert(expertiseTerms, 'ai-information: missing Relevant Expertise Areas DefinedTermSet schema');
   assert(sourceGraphList.itemListElement?.length === 13, 'ai-information: Public Source List ItemList should have 13 items');
   assert(fanOutList.itemListElement?.length === 6, 'ai-information: Likely Search Questions ItemList should have 6 items');
   assert(providerPlanList.itemListElement?.length === 7, 'ai-information: Provider Discovery Plan ItemList should have 7 items');
+  assert(expertiseTerms.hasDefinedTerm?.length === 14, 'ai-information: Relevant Expertise Areas should have 14 terms');
+  assert(findType(graph, 'AboutPage', `${siteUrl}/ai-information#webpage`), 'ai-information: WebPage should also be typed as AboutPage');
 }
 
 assertVisibleText('dist/about/index.html', [
@@ -327,6 +338,10 @@ assertVisibleText('dist/about/index.html', [
   'Atlas',
   'Resume',
 ]);
+{
+  const graph = jsonLdGraph(read('dist/about/index.html'));
+  assert(findType(graph, 'AboutPage', `${siteUrl}/about#webpage`), 'about: WebPage should also be typed as AboutPage');
+}
 
 assertVisibleText('dist/resume/index.html', [
   'Download PDF Resume',
@@ -393,17 +408,29 @@ assertHref('dist/work/index.html', '/contact', 'Request an audit');
 assertHref('dist/work/index.html', '/markets#appian-assumptions', 'Read the markets research memo with assumptions');
 
 assertVisibleText('dist/contact/index.html', [
-  'Request a Technical SEO Audit',
+  'Contact Sulayman Bowles',
   'Direct Contact',
-  'Project Types',
-  'Typical Output',
-  'Best Fit',
-  'Not a Fit',
+  'Brief Form',
+  'Elsewhere',
+  'LinkedIn',
+  'GitHub',
+  'Tech Ledger',
+  'Related Context',
   'See an Atlas sample crawl run',
   'Read the technical SEO audit method',
 ]);
+assertHref('dist/contact/index.html', 'mailto:sulayman.bowles@gmail.com', 'Email Sulayman Bowles');
 assertHref('dist/contact/index.html', '/atlas/sample-crawl', 'See an Atlas sample crawl run');
 assertHref('dist/contact/index.html', '/method', 'Read the technical SEO audit method');
+{
+  const graph = jsonLdGraph(read('dist/contact/index.html'));
+  const contactPage = findType(graph, 'ContactPage', `${siteUrl}/contact#webpage`);
+  const contactService = findType(graph, 'Service', `${siteUrl}/contact#audit-intake-service`);
+  const person = findType(graph, 'Person', personId);
+  assert(contactPage, 'contact: WebPage should also be typed as ContactPage');
+  assert(contactService?.availableChannel?.serviceUrl === `${siteUrl}/contact`, 'contact: Service schema missing available channel');
+  assert(person.contactPoint?.some((point) => point.email === 'sulayman.bowles@gmail.com'), 'contact: Person schema missing direct contact point');
+}
 
 assertVisibleText('dist/atlas/sample-crawl/index.html', [
   'Atlas Sample Crawl Run',
@@ -513,7 +540,7 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     'Perplexity-User',
   ];
 
-  assert(llmsText.includes('Last updated: July 5, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('Last updated: July 7, 2026'), 'llms.txt: stale last updated date');
   assert(
     llmsText.includes('Canonical person ID: https://sulayman-bowles.dev/ai-information#sulayman-bowles'),
     'llms.txt: missing canonical person ID',
@@ -620,8 +647,11 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
 {
   const graph = jsonLdGraph(read('dist/method/index.html'));
   const methodChecklist = findItemList(graph, `${siteUrl}/method#search-visibility-checklist`);
+  const offerCatalog = findType(graph, 'OfferCatalog', `${siteUrl}/method#offer-catalog`);
   assert(methodChecklist, 'method: missing Search Visibility Audit Checklist ItemList schema');
+  assert(offerCatalog, 'method: missing Technical SEO Audit Offer Catalog schema');
   assert(methodChecklist.itemListElement?.length === 9, 'method: audit checklist ItemList should have 9 items');
+  assert(offerCatalog.itemListElement?.length === 4, 'method: OfferCatalog should have 4 offers');
 }
 
 assertVisibleText('dist/markets/index.html', [

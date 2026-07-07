@@ -524,30 +524,26 @@ export function buildRouteStaticHtml(route: SeoRoute) {
 
   if (route.path === '/contact') {
     return articleShell(
-      'Request a Technical SEO Audit',
-      'Audit intake for technical SEO, crawl reviews, indexation, internal-link, structured-data, analytics, and markets research requests.',
-      `<p>Use this route for technical SEO audits, crawl reviews, analytics, markets research, or other projects that need the source material checked before the recommendation.</p>
-        <h2>What Makes the Brief Usable</h2>
-        <h3>Include</h3>
-        <ul><li>The canonical site URL, the pages or templates that feel underperforming, and whether the issue is crawlability, indexation, visibility, conversion, or reporting.</li><li>Any available Search Console, GA4, CMS, sitemap, crawl export, or analytics context that can be reviewed after scope is agreed.</li><li>The decision the audit should support: what to fix first, what to stop doing, what evidence is missing, or what handoff an engineer or owner needs.</li></ul>
-        <h3>Keep out of the form</h3>
-        <ul><li>Do not send passwords, API keys, payment details, unreleased client data, or production credentials through the public form.</li><li>The first pass can use public pages and crawl evidence. Private analytics or Search Console data should only enter after the project scope is clear.</li><li>The output should separate observations from interpretation, then turn the evidence into a short implementation path.</li></ul>
-        <h2>Project Types</h2>
-        <ul><li>Technical SEO and search visibility audit</li><li>Atlas-style crawl review</li><li>GA4/GSC search analytics and launch baseline</li></ul>
-        <h2>Typical Output</h2>
-        <ul><li>Crawl findings tied to affected URLs and source notes</li><li>Indexation, canonical, internal-link, and structured-data review</li><li>GSC/GA4 review where access is available</li><li>Prioritized implementation notes for the next fixes</li></ul>
-        <h2>Best Fit</h2>
-        <p>Startups, local businesses, B2B sites, technical websites, and content-heavy sites that need crawlability, indexation, page structure, or search visibility reviewed.</p>
-        <h2>Not a Fit</h2>
-        <p>Generic content packages, paid ads management, social media management, or work that depends on private credentials before scope is clear.</p>
-        <h2>Before You Send</h2>
-        ${linkCards([
-          ...contextualProofLinks.slice(0, 2),
-          { label: 'Void Agency page', href: '/void-agency', description: 'Service-practice page for the Void Agency technical SEO work.' },
-        ])}
+      'Contact Sulayman Bowles',
+      'Direct contact and compact audit brief route for technical SEO, crawl evidence, analytics, search visibility, and source-backed research requests.',
+      `<p>Use this route to contact Sulayman Bowles directly or send a short brief for technical SEO, crawl evidence, analytics, search visibility, or source-backed research.</p>
         <h2>Direct Contact</h2>
         ${linkList([
-          { label: 'Email Sulayman Bowles', href: 'mailto:sulayman.bowles@gmail.com', description: 'Direct contact path if the form is unavailable.' },
+          { label: 'Email Sulayman Bowles', href: 'mailto:sulayman.bowles@gmail.com', description: 'Primary contact path.' },
+        ])}
+        <h2>Brief Form</h2>
+        <p>The public brief form is secondary to direct contact. It is useful when the site URL, suspected problem, and decision the work needs to support are already clear.</p>
+        <ul><li>Use the brief for technical SEO, crawl evidence, analytics, or source-backed research requests.</li><li>Start with the site URL, the suspected problem, and the decision the work needs to support.</li><li>Do not include passwords, API keys, payment details, unreleased client data, or production secrets.</li></ul>
+        <h2>Elsewhere</h2>
+        ${linkList([
+          { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
+          { label: 'GitHub', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
+          { label: 'Resume', href: '/resume', description: 'Readable profile.' },
+          { label: 'Tech Ledger', href: 'https://sulayman-bowles.tech/', description: 'Technical projects, experiments, and project ledger.' },
+          { label: 'Public Site', href: '/', description: 'Home page.' },
+        ])}
+        <h2>Related Context</h2>
+        ${linkList([
           { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl' },
           { label: 'Read the technical SEO audit method', href: '/method' },
         ])}`,

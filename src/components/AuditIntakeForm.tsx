@@ -3,6 +3,9 @@ import { useState, type FormEvent } from 'react';
 
 type AuditIntakeFormProps = {
   className?: string;
+  variant?: 'default' | 'compact';
+  showProgress?: boolean;
+  submitLabel?: string;
 };
 
 const contactFieldClass =
@@ -23,7 +26,12 @@ function ContactFieldLabel({ htmlFor, children }: { htmlFor: string; children: s
   );
 }
 
-export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
+export function AuditIntakeForm({
+  className = '',
+  variant = 'default',
+  showProgress = true,
+  submitLabel = 'SUBMIT BRIEF',
+}: AuditIntakeFormProps) {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -42,12 +50,15 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
     { step: '04', label: 'Message', complete: Boolean(message) },
   ];
   const completeStepCount = progressSteps.filter((step) => step.complete).length;
+  const isCompact = variant === 'compact';
   const statusDetail =
     formStatus === 'submitting'
       ? 'sealing brief'
       : formStatus === 'error'
         ? validationMessage || 'endpoint refused'
-        : `${completeStepCount}/4 fields traced`;
+        : showProgress
+          ? `${completeStepCount}/4 fields traced`
+          : 'email + message required';
 
   const resetForm = () => {
     setName('');
@@ -130,7 +141,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
 
   if (formStatus === 'success') {
     return (
-      <div className={`text-canvas font-sans font-light tracking-widest uppercase text-base md:text-lg py-6 border border-canvas/20 px-8 rounded bg-canvas/5 max-w-lg mt-4 ${className}`}>
+      <div className={`text-canvas font-sans font-light tracking-widest uppercase text-base md:text-lg py-6 border border-canvas/20 px-8 bg-canvas/5 ${isCompact ? 'max-w-none' : 'max-w-lg mt-4'} ${className}`}>
         <p className="mb-2 font-medium text-accent">Brief Received</p>
         <p className="text-[10px] text-canvas/60 normal-case tracking-normal leading-relaxed">
           Thank you. Your message has been sent successfully. I will review your submission and get back to you shortly.
@@ -140,7 +151,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`w-full max-w-xl space-y-6 mt-4 ${className}`}>
+    <form onSubmit={handleSubmit} className={`w-full ${isCompact ? 'max-w-none space-y-4' : 'max-w-xl space-y-6 mt-4'} ${className}`}>
       <div aria-hidden="true" className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
         <label htmlFor="contact-company-url">Company URL</label>
         <input
@@ -152,19 +163,21 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
           onChange={(e) => setHoneypot(e.target.value)}
         />
       </div>
-      <ol className="grid grid-cols-2 gap-px overflow-hidden border border-canvas/12 text-[8px] uppercase tracking-[0.18em] text-canvas/46 md:grid-cols-4">
-        {progressSteps.map((item) => (
-          <li
-            key={item.step}
-            className={`grid min-h-14 content-between bg-canvas/[0.025] p-3 transition-colors duration-200 ${
-              item.complete ? 'text-canvas' : ''
-            }`}
-          >
-            <span className="font-serif text-sm italic tracking-normal text-canvas/72">{item.step}</span>
-            <span className="leading-none">{item.label}</span>
-          </li>
-        ))}
-      </ol>
+      {showProgress && (
+        <ol className="grid grid-cols-2 gap-px overflow-hidden border border-canvas/12 text-[8px] uppercase tracking-[0.18em] text-canvas/46 md:grid-cols-4">
+          {progressSteps.map((item) => (
+            <li
+              key={item.step}
+              className={`grid min-h-14 content-between bg-canvas/[0.025] p-3 transition-colors duration-200 ${
+                item.complete ? 'text-canvas' : ''
+              }`}
+            >
+              <span className="font-serif text-sm italic tracking-normal text-canvas/72">{item.step}</span>
+              <span className="leading-none">{item.label}</span>
+            </li>
+          ))}
+        </ol>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <ContactFieldLabel htmlFor="contact-name">Your name</ContactFieldLabel>
@@ -261,7 +274,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
       </div>
       <ContactFieldLabel htmlFor="contact-broken-area">What feels broken?</ContactFieldLabel>
       <textarea
-        rows={2}
+        rows={isCompact ? 1 : 2}
         id="contact-broken-area"
         name="brokenArea"
         placeholder="What feels broken?"
@@ -273,7 +286,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
       <ContactFieldLabel htmlFor="contact-message">Project details, goals, or audit request</ContactFieldLabel>
       <textarea
         required
-        rows={3}
+        rows={isCompact ? 2 : 3}
         id="contact-message"
         name="message"
         placeholder="Project details, goals, or audit request"
@@ -299,7 +312,7 @@ export function AuditIntakeForm({ className = '' }: AuditIntakeFormProps) {
           className="group flex min-h-11 w-fit items-center gap-6 bg-transparent border-none outline-none text-left disabled:opacity-50"
         >
           <span className="text-lg md:text-xl font-sans font-light tracking-widest uppercase pb-1 border-b-2 border-canvas/20 group-hover:border-canvas transition-colors text-canvas">
-            {formStatus === 'submitting' ? 'SENDING...' : 'SUBMIT BRIEF'}
+            {formStatus === 'submitting' ? 'SENDING...' : submitLabel}
           </span>
           <div className="flex h-11 w-11 items-center justify-center rounded-full border border-canvas/20 text-canvas transition-colors group-hover:bg-canvas group-hover:text-ink">
             <ArrowUpRight aria-hidden="true" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.5} />
