@@ -2,112 +2,97 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sulayman-bowles.dev/</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/work</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/about</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/simple</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/atlas</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/atlas/sample-crawl</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/resume</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/ai-information</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/research</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/sitemap</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/method</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/void-agency</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/contact</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/austin-technical-seo</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/case-studies/technical-seo-audit</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/markets</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sulayman-bowles.dev/markets/network-monopolies</loc>
-    <lastmod>2026-04-18</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://sulayman-bowles.dev/markets/computational-commodity-systems</loc>
-    <lastmod>2026-05-02</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://sulayman-bowles.dev/markets/fiat-horizon</loc>
-    <lastmod>2026-05-15</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://sulayman-bowles.dev/markets/ai-search-crawler-policy</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/markets/canonical-identity-personal-seo</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>

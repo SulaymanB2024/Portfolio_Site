@@ -1,5 +1,5 @@
 import { type ReactNode, useEffect } from 'react';
-import { getMarketThesisBySlug } from '../content/marketTheses';
+import { PUBLIC_MARKET_THESES, getMarketThesisBySlug } from '../content/marketTheses';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
@@ -9,8 +9,9 @@ import { InternalFooter } from '../components/InternalFooter';
 import { WireframeGrid } from '../components/WireframeGrid';
 
 export default function MarketArticlePage({ slug }: { slug: string }) {
-  const thesis = getMarketThesisBySlug(slug) ?? getMarketThesisBySlug('network-monopolies')!;
+  const thesis = getMarketThesisBySlug(slug) ?? PUBLIC_MARKET_THESES[0];
   const route = getSeoRoute(`/markets/${thesis.slug}`) ?? getSeoRoute('/markets')!;
+  const isArchived = thesis.indexable === false;
   const metrics = thesis.metrics ?? [
     { label: 'Conviction', value: thesis.conviction },
     { label: 'Horizon', value: thesis.horizon },
@@ -71,6 +72,13 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
           <p className="mt-8 max-w-3xl border-l border-[#f1efe8]/24 pl-5 text-lg italic leading-relaxed text-[#f1efe8]/68">
             {thesis.subtitle}
           </p>
+
+          {isArchived ? (
+            <div className="mt-8 border border-[#c2695e]/35 bg-[#c2695e]/8 p-5 text-sm leading-relaxed text-[#f1efe8]/68">
+              <p className="mb-2 text-[10px] uppercase tracking-[0.28em] text-[#c2695e]/90">Archived</p>
+              <p>This memo is preserved for continuity but is no longer a current recommendation, not investment advice, and excluded from the public sitemap.</p>
+            </div>
+          ) : null}
 
           <div className="my-12 grid gap-4 border-y border-[#f1efe8]/10 py-6 text-[10px] uppercase tracking-[0.2em] text-[#f1efe8]/54 md:grid-cols-3">
             {metrics.map((metric, index) => (

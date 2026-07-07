@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { InternalFooter } from '../components/InternalFooter';
 import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
-import { MARKET_THESES } from '../content/marketTheses';
+import { PUBLIC_MARKET_THESES } from '../content/marketTheses';
 import { RESEARCH_ASSETS } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
@@ -176,7 +176,7 @@ function CaseArchiveSection() {
       </div>
 
       <div className="divide-y divide-ink/12 border-y border-ink/12">
-        {MARKET_THESES.map((thesis, index) => (
+        {PUBLIC_MARKET_THESES.map((thesis, index) => (
           <a
             key={thesis.slug}
             href={`/markets/${thesis.slug}`}

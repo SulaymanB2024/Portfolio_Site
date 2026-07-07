@@ -43,12 +43,27 @@ const routesWithVoidOrganization = new Set(['aiInformation', 'method', 'voidAgen
 const atlasSoftwareRoutes = new Set(['atlas', 'atlasSampleCrawl', 'aiInformation']);
 
 const marketFiles = [
-  'dist/markets/network-monopolies/index.html',
-  'dist/markets/computational-commodity-systems/index.html',
-  'dist/markets/fiat-horizon/index.html',
   'dist/markets/ai-search-crawler-policy/index.html',
   'dist/markets/technical-seo-public-data-infrastructure/index.html',
   'dist/markets/canonical-identity-personal-seo/index.html',
+];
+
+const publicMarketLastmods = {
+  '/markets/ai-search-crawler-policy': '2026-07-06',
+  '/markets/technical-seo-public-data-infrastructure': '2026-07-06',
+  '/markets/canonical-identity-personal-seo': '2026-07-06',
+};
+
+const archivedMarketFiles = [
+  'dist/markets/network-monopolies/index.html',
+  'dist/markets/computational-commodity-systems/index.html',
+  'dist/markets/fiat-horizon/index.html',
+];
+
+const archivedMarketPaths = [
+  '/markets/network-monopolies',
+  '/markets/computational-commodity-systems',
+  '/markets/fiat-horizon',
 ];
 
 function read(file) {
@@ -405,7 +420,7 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     'Perplexity-User',
   ];
 
-  assert(llmsText.includes('Last updated: June 28, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('Last updated: July 6, 2026'), 'llms.txt: stale last updated date');
   assert(llmsText.includes('Selected work: https://sulayman-bowles.dev/work'), 'llms.txt: missing selected work route');
   assert(llmsText.includes('Atlas sample crawl run: https://sulayman-bowles.dev/atlas/sample-crawl'), 'llms.txt: missing Atlas sample crawl route');
   assert(llmsText.includes('Void Agency proof: https://sulayman-bowles.dev/void-agency'), 'llms.txt: missing Void Agency proof route');
@@ -454,6 +469,18 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     const loc = `<loc>${absolutePath(pathname)}</loc>`;
     assert(sitemapText.includes(loc), `dist sitemap: missing ${loc}`);
     assert(publicSitemapText.includes(loc), `public sitemap: missing ${loc}`);
+  }
+
+  for (const [pathname, lastmod] of Object.entries(publicMarketLastmods)) {
+    const sitemapEntry = `<loc>${absolutePath(pathname)}</loc>\n    <lastmod>${lastmod}</lastmod>`;
+    assert(sitemapText.includes(sitemapEntry), `dist sitemap: stale lastmod for ${pathname}`);
+    assert(publicSitemapText.includes(sitemapEntry), `public sitemap: stale lastmod for ${pathname}`);
+  }
+
+  for (const pathname of archivedMarketPaths) {
+    const loc = `<loc>${absolutePath(pathname)}</loc>`;
+    assert(!sitemapText.includes(loc), `dist sitemap: archived URL should be excluded: ${loc}`);
+    assert(!publicSitemapText.includes(loc), `public sitemap: archived URL should be excluded: ${loc}`);
   }
 
   assert(!sitemapText.includes('#'), 'dist sitemap should not contain hash-only URLs');
@@ -509,10 +536,18 @@ for (const file of marketFiles) {
   assert(webPage, `${file}: missing canonical WebPage schema`);
   assert(webPage.mainEntity?.['@id'] === article['@id'], `${file}: WebPage should point to Article as mainEntity`);
   assert(String(article.image?.url ?? article.image).startsWith(siteUrl), `${file}: Article image must be absolute`);
+  assert(article.dateModified === publicMarketLastmods[pathname], `${file}: Article schema should carry current dateModified`);
   assert(ogImage && ogImage === twitterImage, `${file}: OG and Twitter images must match`);
   assert(ogImage === (article.image?.url ?? article.image), `${file}: Article image must match OG/Twitter image`);
   assert(title.replaceAll('&amp;', '&').length <= 62, `${file}: title is too long (${title.length})`);
   assert(description.length >= 145 && description.length <= 180, `${file}: description should be expanded to 145-180 chars (${description.length})`);
+}
+
+for (const file of archivedMarketFiles) {
+  const html = read(file);
+  const robots = metaContent(html, 'name="robots"');
+  assert(robots === 'noindex,nofollow', `${file}: archived market note should be statically generated with noindex,nofollow`);
+  assertVisibleText(file, ['Archived', 'not investment advice', 'current recommendation']);
 }
 
 assertVisibleText('dist/markets/ai-search-crawler-policy/index.html', [

@@ -351,12 +351,14 @@ export function articleSchema({
   description,
   path,
   datePublished,
+  dateModified,
   image = DEFAULT_OG_IMAGE,
 }: {
   title: string;
   description: string;
   path: string;
   datePublished: string;
+  dateModified?: string;
   image?: string;
 }): JsonLd {
   const imageUrl = absoluteUrl(image);
@@ -374,6 +376,7 @@ export function articleSchema({
     },
     description,
     datePublished,
+    dateModified: dateModified ?? datePublished,
     author: {
       '@id': `${SITE_URL}/#person`,
     },
@@ -917,12 +920,14 @@ export function marketArticleJsonLd({
   description,
   path,
   datePublished,
+  dateModified,
   image,
 }: {
   title: string;
   description: string;
   path: string;
   datePublished: string;
+  dateModified?: string;
   image?: string;
 }): JsonLd {
   const articleId = `${absoluteUrl(path)}#article`;
@@ -930,7 +935,7 @@ export function marketArticleJsonLd({
   return graphSchema([
     ...canonicalEntitySchemas(),
     websiteSchema(),
-    articleSchema({ title, description, path, datePublished, image }),
+    articleSchema({ title, description, path, datePublished, dateModified, image }),
     webPageSchema({
       path,
       name: title,

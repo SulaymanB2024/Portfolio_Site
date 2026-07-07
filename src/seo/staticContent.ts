@@ -5,7 +5,7 @@ import {
   sourceMap,
 } from '../content/aiInformation';
 import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
-import { MARKET_THESES } from '../content/marketTheses';
+import { MARKET_THESES, PUBLIC_MARKET_THESES } from '../content/marketTheses';
 import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import {
   appianAssumptionRows,
@@ -514,7 +514,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h3>Market and Macro</h3><p>Liquidity, volatility, currency systems, commodity reserves, and allocation frameworks.</p>
         <h3>Models and Tools</h3><p>Financial spreadsheets, assumptions tables, dashboards, and analytical workflows.</p>
         <h2>Research Notes</h2>
-        ${MARKET_THESES.map((thesis) => `<h3><a href="/markets/${thesis.slug}">${escapeHtml(thesis.title)}</a></h3><p>${escapeHtml(thesis.subtitle)}</p>`).join('\n        ')}
+        ${PUBLIC_MARKET_THESES.map((thesis) => `<h3><a href="/markets/${thesis.slug}">${escapeHtml(thesis.title)}</a></h3><p>${escapeHtml(thesis.subtitle)}</p>`).join('\n        ')}
         <h2 id="appian-assumptions">Finance/Data Memo With Assumptions</h2>
         <p>The Appian materials are educational research samples. They are not investment advice, a price target, or a live market recommendation.</p>
         ${linkList([
@@ -531,6 +531,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
 
   const thesis = MARKET_THESES.find((item) => route.path === `/markets/${item.slug}`);
   if (thesis) {
+    const isArchived = thesis.indexable === false;
     const metrics = thesis.metrics ?? [
       { label: 'Conviction', value: thesis.conviction },
       { label: 'Horizon', value: thesis.horizon },
@@ -543,6 +544,11 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       thesis.subtitle,
       `<h2>Memo Details</h2>
         <p>Category: ${escapeHtml(thesis.category)}. Published: ${escapeHtml(thesis.date)}. Read time: ${escapeHtml(thesis.readTime)}.</p>
+        ${
+          isArchived
+            ? '<h2>Archived</h2><p>This memo is preserved for continuity but is no longer a current recommendation, not investment advice, and excluded from the public sitemap.</p>'
+            : ''
+        }
         <h2>Article Metrics</h2>
         ${definitionCards(metrics.map((metric) => [metric.label, metric.value]))}
         <h2>Research Thesis</h2>

@@ -64,7 +64,7 @@ export interface SeoRoute {
 export type RouteVisualMode = 'canvas-artifact' | 'dark-proof' | 'memo-reader' | 'book' | 'prototype';
 export type RouteTone = 'light' | 'dark';
 
-export const SITE_LASTMOD = '2026-06-28';
+export const SITE_LASTMOD = '2026-07-06';
 
 const CORE_ROUTES: SeoRoute[] = [
   {
@@ -344,6 +344,9 @@ const CORE_ROUTES: SeoRoute[] = [
 
 const ARTICLE_ROUTES: SeoRoute[] = MARKET_THESES.map((thesis) => {
   const path = `/markets/${thesis.slug}`;
+  const isIndexable = thesis.indexable !== false;
+  const datePublished = thesis.date.replaceAll('.', '-');
+  const dateModified = (thesis.dateModified ?? thesis.date).replaceAll('.', '-');
 
   return {
     path,
@@ -353,16 +356,19 @@ const ARTICLE_ROUTES: SeoRoute[] = MARKET_THESES.map((thesis) => {
     h1: thesis.title,
     section: 'research-article',
     pageType: 'article',
-    priority: 0.6,
-    includeInSitemap: true,
-    lastmod: thesis.date.replaceAll('.', '-'),
+    priority: isIndexable ? 0.6 : 0.2,
+    includeInSitemap: isIndexable,
+    generateStatic: !isIndexable,
+    noindex: !isIndexable,
+    lastmod: dateModified,
     staticSummary: thesis.content[0],
     image: thesis.image,
     jsonLd: marketArticleJsonLd({
       title: thesis.title,
       description: thesis.seoDescription,
       path,
-      datePublished: thesis.date.replaceAll('.', '-'),
+      datePublished,
+      dateModified,
       image: thesis.image,
     }),
   };

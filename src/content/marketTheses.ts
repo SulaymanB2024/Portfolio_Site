@@ -8,6 +8,8 @@ export interface MarketThesis {
   seoDescription: string;
   image: string;
   date: string;
+  dateModified?: string;
+  indexable?: boolean;
   readTime: string;
   author: string;
   conviction: string;
@@ -33,6 +35,7 @@ export const MARKET_THESES: MarketThesis[] = [
       'Market research memo by Sulayman Bowles on network monopolies, fiat debasement, pricing power, platform margins, and allocation logic for long-horizon investors.',
     image: '/og-default.png',
     date: '2026.04.18',
+    indexable: false,
     readTime: '09 MIN',
     author: 'SULAYMAN BOWLES',
     conviction: '9.4 / 10',
@@ -58,6 +61,7 @@ export const MARKET_THESES: MarketThesis[] = [
       'Market research memo by Sulayman Bowles on decentralized compute, node architecture, zero-knowledge verification hardware, resource pricing, and protocol incentives.',
     image: '/og-default.png',
     date: '2026.05.02',
+    indexable: false,
     readTime: '11 MIN',
     author: 'SULAYMAN BOWLES',
     conviction: '8.6 / 10',
@@ -83,6 +87,7 @@ export const MARKET_THESES: MarketThesis[] = [
       'Market research memo by Sulayman Bowles on fiat velocity, credit expansion, hard-money reserves, gold and Bitcoin backing, volatility bands, and solvency risk.',
     image: '/og-default.png',
     date: '2026.05.15',
+    indexable: false,
     readTime: '12 MIN',
     author: 'SULAYMAN BOWLES',
     conviction: '9.8 / 10',
@@ -108,6 +113,7 @@ export const MARKET_THESES: MarketThesis[] = [
       'Research note by Sulayman Bowles on AI-search crawler policy, robots.txt limits, OpenAI, Claude, Perplexity, IndexNow, canonical URLs, and source-backed visibility.',
     image: '/og-default.png',
     date: '2026.06.19',
+    dateModified: '2026.07.06',
     readTime: '08 MIN',
     author: 'SULAYMAN BOWLES',
     conviction: 'EVIDENCE-LED',
@@ -154,6 +160,7 @@ export const MARKET_THESES: MarketThesis[] = [
       'Research note by Sulayman Bowles on technical SEO as public data infrastructure: crawl access, structured data, provenance, SEC-style comparability, and AI discovery.',
     image: '/og-default.png',
     date: '2026.06.19',
+    dateModified: '2026.07.06',
     readTime: '09 MIN',
     author: 'SULAYMAN BOWLES',
     conviction: 'SOURCE-BACKED',
@@ -195,6 +202,7 @@ export const MARKET_THESES: MarketThesis[] = [
       'Practical research note by Sulayman Bowles on canonical identity, sameAs discipline, profile-page schema, stale resume PDFs, internal links, and external bio consistency.',
     image: '/og-default.png',
     date: '2026.06.19',
+    dateModified: '2026.07.06',
     readTime: '07 MIN',
     author: 'SULAYMAN BOWLES',
     conviction: 'PRACTICAL',
@@ -226,6 +234,8 @@ export const MARKET_THESES: MarketThesis[] = [
     ],
   },
 ];
+
+export const PUBLIC_MARKET_THESES = MARKET_THESES.filter((thesis) => thesis.indexable !== false);
 
 export function getMarketThesisBySlug(slug: string) {
   return MARKET_THESES.find((thesis) => thesis.slug === slug);
