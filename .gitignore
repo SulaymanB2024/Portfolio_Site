@@ -23,3 +23,4 @@ artifacts/
 *.webm
 *.mp4
 *.zip
+.vercel
