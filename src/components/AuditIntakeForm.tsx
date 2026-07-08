@@ -59,6 +59,10 @@ export function AuditIntakeForm({
         : showProgress
           ? `${completeStepCount}/4 fields traced`
           : 'email + message required';
+  const twoColumnGridClass = `grid grid-cols-1 ${isCompact ? 'gap-4 sm:grid-cols-2' : 'gap-6 md:grid-cols-2'}`;
+  const threeColumnGridClass = `grid grid-cols-1 ${
+    isCompact ? 'gap-4 sm:grid-cols-3' : 'gap-6 md:grid-cols-3'
+  }`;
 
   const resetForm = () => {
     setName('');
@@ -151,7 +155,7 @@ export function AuditIntakeForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`w-full ${isCompact ? 'max-w-none space-y-4' : 'max-w-xl space-y-6 mt-4'} ${className}`}>
+    <form onSubmit={handleSubmit} className={`w-full ${isCompact ? 'max-w-none space-y-5' : 'max-w-xl space-y-6 mt-4'} ${className}`}>
       <div aria-hidden="true" className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
         <label htmlFor="contact-company-url">Company URL</label>
         <input
@@ -178,7 +182,7 @@ export function AuditIntakeForm({
           ))}
         </ol>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className={twoColumnGridClass}>
         <div>
           <ContactFieldLabel htmlFor="contact-name">Your name</ContactFieldLabel>
           <input
@@ -222,7 +226,7 @@ export function AuditIntakeForm({
         onChange={(e) => setWebsiteUrl(e.target.value)}
         className={contactFieldClass}
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className={threeColumnGridClass}>
         <div>
           <ContactFieldLabel htmlFor="contact-project-type">Project type</ContactFieldLabel>
           <select
@@ -274,7 +278,7 @@ export function AuditIntakeForm({
       </div>
       <ContactFieldLabel htmlFor="contact-broken-area">What feels broken?</ContactFieldLabel>
       <textarea
-        rows={isCompact ? 1 : 2}
+        rows={2}
         id="contact-broken-area"
         name="brokenArea"
         placeholder="What feels broken?"
@@ -286,7 +290,7 @@ export function AuditIntakeForm({
       <ContactFieldLabel htmlFor="contact-message">Project details, goals, or audit request</ContactFieldLabel>
       <textarea
         required
-        rows={isCompact ? 2 : 3}
+        rows={isCompact ? 4 : 3}
         id="contact-message"
         name="message"
         placeholder="Project details, goals, or audit request"
