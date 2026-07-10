@@ -23,6 +23,13 @@ const RESEARCH_COIN_ART = '/images/markets/noise-expansion-coin-alpha.png';
 
 const featuredResearchNotes = [
   {
+    kicker: 'Agent evaluation',
+    title: 'Beyond the Leaderboard: ViralBench + Codex',
+    href: '/viralbench-codex-agent-harness',
+    description:
+      'A code-level design for traces, replay, controlled trials, and a bounded Codex engineering loop around a live marketing agent.',
+  },
+  {
     kicker: 'Crawler access',
     title: 'Crawler Policy Comes Before Visibility',
     href: '/markets/ai-search-crawler-policy',

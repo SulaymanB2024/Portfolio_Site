@@ -6,6 +6,15 @@ import {
 } from '../content/aiInformation';
 import { SIMPLE_BOOK_DESCRIPTION, SIMPLE_BOOK_H1, SIMPLE_BOOK_STATIC_SUMMARY, SIMPLE_BOOK_TITLE } from '../content/simpleBook';
 import {
+  VIRALBENCH_ARTICLE_DATE,
+  VIRALBENCH_ARTICLE_DESCRIPTION,
+  VIRALBENCH_ARTICLE_EXCERPT,
+  VIRALBENCH_ARTICLE_IMAGE,
+  VIRALBENCH_ARTICLE_PATH,
+  VIRALBENCH_ARTICLE_SEO_TITLE,
+  VIRALBENCH_ARTICLE_TITLE,
+} from '../content/viralBenchArticle';
+import {
   aboutJsonLd,
   austinTechnicalSeoJsonLd,
   aiInformationJsonLd,
@@ -21,6 +30,7 @@ import {
   simpleBookJsonLd,
   sitemapJsonLd,
   technicalSeoCaseStudyJsonLd,
+  viralBenchArticleJsonLd,
   voidAgencyJsonLd,
   workJsonLd,
   type JsonLd,
@@ -320,6 +330,21 @@ const CORE_ROUTES: SeoRoute[] = [
     staticSummary:
       'A sanitized technical SEO audit case study showing how crawl data becomes findings, implementation priorities, and review notes without private client claims.',
     jsonLd: technicalSeoCaseStudyJsonLd(),
+  },
+  {
+    path: VIRALBENCH_ARTICLE_PATH,
+    aliases: [],
+    title: VIRALBENCH_ARTICLE_SEO_TITLE,
+    description: VIRALBENCH_ARTICLE_DESCRIPTION,
+    h1: VIRALBENCH_ARTICLE_TITLE,
+    section: 'research-article',
+    pageType: 'article',
+    priority: 0.8,
+    includeInSitemap: true,
+    lastmod: VIRALBENCH_ARTICLE_DATE,
+    staticSummary: VIRALBENCH_ARTICLE_EXCERPT,
+    image: VIRALBENCH_ARTICLE_IMAGE,
+    jsonLd: viralBenchArticleJsonLd(),
   },
   {
     path: '/markets',

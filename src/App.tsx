@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { useRef, useEffect, useState, lazy, Suspense, type CSSProperties } from 'react';
-import { RevealText } from './components/RevealText';
 import { StaggeredText } from './components/StaggeredText';
 import { InkTrails } from './components/InkTrails';
 import { RomanTogaReveal } from './components/RomanTogaReveal';
@@ -31,6 +30,7 @@ const loadAiInformationPage = () => import('./pages/AiInformationPage');
 const loadResearchPage = () => import('./pages/ResearchPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
+const loadViralBenchArticlePage = () => import('./pages/ViralBenchArticlePage');
 const loadSimplePage = () => import('./pages/SimplePage');
 const loadWorkPage = () => import('./pages/WorkPage');
 const loadContactPage = () => import('./pages/ContactPage');
@@ -48,6 +48,7 @@ const AiInformationPage = lazy(loadAiInformationPage);
 const ResearchPage = lazy(loadResearchPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
+const ViralBenchArticlePage = lazy(loadViralBenchArticlePage);
 const SimplePage = lazy(loadSimplePage);
 const WorkPage = lazy(loadWorkPage);
 const ContactPage = lazy(loadContactPage);
@@ -67,64 +68,26 @@ const FooterM = lazy(() => import('./components/FooterM').then(m => ({ default: 
 const CONTACT_HASH = '#contact';
 const HOME_SEO = getSeoRoute('/')!;
 
-const workHighlights = [
-  {
-    label: 'Atlas',
-    copy: 'Built a crawl system for indexation, internal links, schema, and audit reports.',
-    href: '/atlas',
-  },
-  {
-    label: 'Void Agency',
-    copy: 'Founded a technical SEO and web systems practice with $50K+ collected revenue.',
-    href: '/void-agency',
-  },
-  {
-    label: 'Chegg AI PM',
-    copy: 'AI Product Manager intern in the Office of the Chief Product Officer.',
-    href: '/resume',
-  },
-  {
-    label: 'SEO Analytics',
-    copy: 'GA4 and Google Search Console work across launch baselines, query tracking, and prioritized recommendations.',
-    href: '/method',
-  },
-  {
-    label: 'Texas Venture Labs',
-    copy: 'Student Associate work on market validation, customer discovery, unit economics, and financial models.',
-    href: '/resume',
-  },
-  {
-    label: 'Public Work',
-    copy: 'GitHub projects, research notes, sample data, and current profile links are collected here.',
-    href: '/research',
-  },
-];
-
 const homeDisciplineItems = [
   {
     num: '01',
-    title: 'Technical SEO Systems',
-    desc: 'Crawl architecture, indexability, internal links, page templates, metadata, structured data, performance inputs, and issue logic. Built for diagnosis, not vague scoring.',
+    title: 'Technical SEO',
+    desc: 'Crawl architecture, indexability, internal links, page templates, metadata, structured data, and issue logic built for diagnosis.',
   },
   {
     num: '02',
     title: 'Search Visibility',
-    desc: 'Crawler access, entity clarity, structured data, and pages that explain the work without forcing a reader to guess.',
+    desc: 'Crawler access, entity clarity, structured content, and pages that explain the work without forcing a reader to guess.',
   },
   {
     num: '03',
     title: 'Atlas / Crawl Evidence',
-    desc: 'URL discovery, raw and rendered HTML, canonical state, internal-link maps, structured-data checks, and report-ready audit notes.',
+    desc: 'URL discovery, rendered HTML, canonical state, internal-link maps, structured-data checks, and report-ready audit notes.',
   },
   {
     num: '04',
     title: 'Markets Research',
-    desc: 'Finance research, valuation assumptions, market structure, operating analysis, dashboards, and decision tools built around inspectable assumptions.',
-  },
-  {
-    num: '05',
-    title: 'Product + Web Systems',
-    desc: 'React interfaces, portfolio pages, audit dashboards, product research, and written explanations that make the work easier to inspect.',
+    desc: 'Finance research, valuation assumptions, market structure, operating analysis, dashboards, and decision tools with inspectable assumptions.',
   },
 ];
 
@@ -165,6 +128,8 @@ async function preloadRoute(path: string) {
     await loadResearchPage();
   } else if (route?.path === '/markets') {
     await loadMarketsPage();
+  } else if (route?.path === '/viralbench-codex-agent-harness') {
+    await loadViralBenchArticlePage();
   } else if (route?.section === 'research-article') {
     await loadMarketArticlePage();
   }
@@ -281,6 +246,12 @@ export default function App() {
     );
   } else if (route?.path === '/sitemap') {
     page = <SitemapPage />;
+  } else if (route?.path === '/viralbench-codex-agent-harness') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <ViralBenchArticlePage />
+      </Suspense>
+    );
   } else if (route?.section === 'research-article') {
     const slug = route.path.split('/').at(-1) ?? '';
     page = (
@@ -409,24 +380,36 @@ function HomePage() {
   useEffect(() => {
     if (initialLoadComplete) return;
 
-    const interval = setInterval(() => {
-      setCounter((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            initialLoadComplete = true;
-            setIsLoaded(true);
-          }, 120);
-          return 100;
-        }
-        // Keep the preloader brief so it never reads as a footer-like dark band.
-        const increment = Math.ceil((100 - prev) * 0.28);
-        return prev + increment > 100 ? 100 : prev + increment;
-      });
-    }, 24);
+    let frameId = 0;
+    let finishTimeoutId = 0;
+    const startedAt = window.performance.now();
+    const duration = prefersReducedMotion ? 180 : 900;
+    const holdDuration = prefersReducedMotion ? 40 : 100;
 
-    return () => clearInterval(interval);
-  }, []);
+    const animateCounter = (time: number) => {
+      const progress = Math.min((time - startedAt) / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 2.4);
+
+      setCounter(Math.min(100, Math.round(easedProgress * 100)));
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(animateCounter);
+        return;
+      }
+
+      finishTimeoutId = window.setTimeout(() => {
+        initialLoadComplete = true;
+        setIsLoaded(true);
+      }, holdDuration);
+    };
+
+    frameId = window.requestAnimationFrame(animateCounter);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(finishTimeoutId);
+    };
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     if (!isLoaded) {
@@ -583,7 +566,7 @@ function HomePage() {
             className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center p-8 text-canvas"
             data-header-tone-ignore="true"
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.45, ease: [0.33, 1, 0.68, 1] }}
+            transition={{ duration: prefersReducedMotion ? 0.12 : 0.35, ease: [0.33, 1, 0.68, 1] }}
           >
             <div className="w-full flex justify-between absolute pt-8 px-8 md:px-16 normal-case font-sans uppercase tracking-[0.2em] text-xs opacity-50 justify-self-start self-start top-0">
                <span>Building Evidence</span>
@@ -618,7 +601,7 @@ function HomePage() {
         <section className="relative w-full h-screen flex flex-col justify-end pb-12 px-4 md:px-16 pt-32 overflow-hidden">
           {/* Background Motion */}
           {!prefersReducedMotion && <Suspense fallback={null}>
-            <FlowField className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-overlay" density={25} />
+            <FlowField className="absolute inset-0 z-0 opacity-[0.12] pointer-events-none mix-blend-overlay" density={25} />
           </Suspense>}
           
           {/* Faint sample reveal */}
@@ -630,8 +613,8 @@ function HomePage() {
               <RomanTogaReveal
                 fit="cover"
                 focus="large-figure"
-                restOpacity={0.05}
-                revealOpacity={0.68}
+                restOpacity={0.14}
+                revealOpacity={0.82}
                 className="h-full w-full"
               />
             )}
@@ -642,86 +625,61 @@ function HomePage() {
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
              transition={{ duration: 0.8, delay: isLoaded ? 0.2 : 0 }}
-             className="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-ink/20 pb-8 gap-8 md:gap-0"
+             className="relative z-10 ml-auto w-full max-w-[28rem] pb-8 md:pb-12 md:text-right"
            >
-	             <div className="max-w-[34rem]">
+	             <div>
 	               <h1 className="font-serif text-5xl font-light leading-none tracking-normal text-ink md:text-7xl">
 	                 Sulayman Bowles
 	               </h1>
-	               <p className="mt-5 max-w-lg font-sans text-sm leading-relaxed tracking-normal text-ink/72 md:text-base">
-		                 I am a UT Austin McCombs student building Atlas and running Void Agency. Most of my work sits where technical SEO, product, and research meet: crawl the site, find what blocks discovery, and turn the mess into fixes people can ship.
+	               <p className="mt-5 font-sans text-sm leading-relaxed tracking-normal text-ink/64 md:text-base">
+		                 Technical SEO, Atlas crawl evidence, and markets research. Source material first; shipping decisions second.
 	               </p>
-                <div className="mt-7 flex flex-wrap items-center gap-4 text-xs text-ink/70">
-                  <a href="/atlas" id="hero-view-atlas-link" className="inline-flex min-h-11 items-center border border-ink/28 bg-ink/[0.035] px-5 py-3 font-sans text-[10px] uppercase tracking-[0.2em] text-ink transition-colors hover:border-ink hover:bg-ink hover:text-canvas">View Atlas</a>
-                  <a href="/contact" id="hero-start-audit-link" className="inline-flex min-h-11 items-center border-b border-ink/24 pb-1 font-sans text-[10px] uppercase tracking-[0.2em] transition-colors hover:border-ink hover:text-ink">Request an audit</a>
-                  <a href="/resume" id="hero-view-resume-link" className="inline-flex min-h-11 items-center border-b border-ink/24 pb-1 font-sans text-[10px] uppercase tracking-[0.2em] transition-colors hover:border-ink hover:text-ink">View resume</a>
-                </div>
 	             </div>
-             <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-ink/40 md:text-xs">Trace the work</span>
            </motion.div>
         </section>
 
-        {/* PROOF SNAPSHOT */}
-        <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-16 text-ink md:px-16 md:py-24">
-          <div className="mx-auto grid w-full max-w-[1800px] gap-10 lg:grid-cols-[0.34fr_0.66fr]">
-            <div>
-	              <p className="mb-5 text-[10px] uppercase tracking-[0.3em] text-ink/48">Work in 30 seconds</p>
-              <h2 className="max-w-md font-serif text-4xl italic leading-[0.95] tracking-normal md:text-6xl">
-                Start with the inputs.
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 gap-px overflow-hidden border border-ink/14 bg-ink/14 sm:grid-cols-2 xl:grid-cols-3">
-              {workHighlights.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="group min-h-[190px] bg-canvas p-5 transition-colors hover:bg-ink hover:text-canvas"
-                >
-                  <span className="block text-[10px] uppercase tracking-[0.24em] text-inherit opacity-50">{item.label}</span>
-                  <span className="mt-8 block text-sm leading-relaxed text-inherit opacity-68 transition-opacity group-hover:opacity-82">{item.copy}</span>
-	                  <span className="mt-6 inline-flex text-[9px] uppercase tracking-[0.22em] text-inherit opacity-45">Open</span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* INTRODUCTION - High contrast split */}
-        <section className="relative w-full py-32 md:py-48 px-4 md:px-16 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
-          <div className="md:col-span-8 md:col-start-2">
-            <StaggeredText 
-	               text="I build systems for search, finance, and decision-making. The common thread is source material."
-               delay={0.1}
-               className="font-serif italic font-light text-5xl sm:text-6xl md:text-6xl lg:text-[6rem] leading-[1.05] tracking-normal mb-4 md:mb-8"
-            />
-          </div>
-          <div className="md:col-span-4 md:col-start-8 flex flex-col">
-            <RevealText 
-               text="My work starts with messy surfaces: crawl data, page templates, market signals, search behavior, financial assumptions, and unfinished product logic. I turn that into structured systems people can inspect, question, and use."
-               elementType="p"
-               delay={0.4}
-               className="font-sans text-sm md:text-base tracking-normal text-ink/62 leading-relaxed max-w-md mt-4 md:mt-2"
-            />
-            
-            <motion.div 
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-              className="mt-16 w-full h-[1px] bg-ink/20 transform origin-left" 
-            />
-            <ScrollReveal delay={0.7} yOffset={15} className="pt-8 grid grid-cols-2 gap-8 text-[10px] uppercase font-sans tracking-widest text-ink/60">
-              <ul>
-                <li className="mb-2 text-ink line-through decoration-ink/40">Vanity metrics</li>
-                <li className="mb-2 text-ink line-through decoration-ink/40">Black-box audits</li>
-                <li className="line-through decoration-ink/40">Generic decks</li>
-              </ul>
-              <ul>
-                <li className="mb-2 text-ink">Crawl data</li>
-                <li className="mb-2 text-ink">Structured analysis</li>
-                <li className="text-ink">Shipped systems</li>
-              </ul>
-            </ScrollReveal>
+        <section className="relative w-full border-y border-ink/10 bg-canvas px-4 py-24 text-ink md:px-16 md:py-36">
+          <div className="mx-auto grid w-full max-w-[1800px] grid-cols-1 gap-14 md:grid-cols-12 md:gap-16">
+            <div className="md:col-span-7 md:col-start-2">
+              <ScrollReveal blur={false}>
+                <p className="mb-7 font-sans text-[10px] uppercase tracking-[0.3em] text-ink/46">Working method</p>
+              </ScrollReveal>
+              <StaggeredText
+                text="Evidence systems for messy surfaces."
+                delay={0.1}
+                className="max-w-[11ch] font-serif text-5xl font-light leading-[0.92] tracking-normal sm:text-6xl md:text-7xl lg:text-[6.6rem]"
+              />
+            </div>
+            <div className="flex flex-col md:col-span-4 md:col-start-9">
+              <ScrollReveal delay={0.25} yOffset={14} blur={false} className="md:mt-10">
+                <p className="max-w-md font-sans text-sm leading-relaxed tracking-normal text-ink/64 md:text-base">
+                  The work starts where the source material is still rough: crawl data, page templates, search behavior, market assumptions, and product logic. I turn that into systems people can inspect, question, and ship from.
+                </p>
+              </ScrollReveal>
+
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true, margin: '-10%' }}
+                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+                className="mt-14 h-[1px] w-full origin-left transform bg-ink/20"
+              />
+              <ScrollReveal delay={0.45} yOffset={15} blur={false} className="grid gap-5 pt-8 font-sans text-[10px] uppercase tracking-[0.22em] text-ink/56">
+                <div className="grid grid-cols-[6.5rem_1fr] gap-5 border-b border-ink/10 pb-5">
+                  <span className="text-ink/42">Collect</span>
+                  <span className="text-ink">Crawls, templates, queries, assumptions</span>
+                </div>
+                <div className="grid grid-cols-[6.5rem_1fr] gap-5 border-b border-ink/10 pb-5">
+                  <span className="text-ink/42">Structure</span>
+                  <span className="text-ink">Evidence, states, constraints, gaps</span>
+                </div>
+                <div className="grid grid-cols-[6.5rem_1fr] gap-5">
+                  <span className="text-ink/42">Ship</span>
+                  <span className="text-ink">Fixes, reports, dashboards, pages</span>
+                </div>
+              </ScrollReveal>
+            </div>
           </div>
         </section>
 
@@ -953,12 +911,12 @@ function HomePage() {
                 </ScrollReveal>
                 <ScrollReveal delay={0.2} blur={false}>
                   <p className="font-serif italic text-2xl md:text-3xl text-ink max-w-sm leading-snug">
-		                    I work across technical SEO systems, Atlas crawl audits, markets research, and product/web systems with the same habit: inspect the inputs before trusting the answer.
+		                    Four lanes, one habit: inspect the source material before trusting the answer.
                   </p>
                 </ScrollReveal>
               </div>
               <div className="md:col-span-9 flex flex-col w-full text-ink">
-<div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 md:gap-y-32 group">
+                <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 md:gap-y-32 group">
                  {homeDisciplineItems.map((item, i) => (
                     <div key={item.num}>
                       <ScrollReveal delay={i % 2 === 0 ? 0.2 : 0.4} blur={false}>
@@ -1445,13 +1403,6 @@ function HomePage() {
                  </div>
               </div>
               
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-[10px] uppercase font-sans tracking-[0.2em] text-canvas/40 py-8 gap-4 md:gap-0">
-                 <span>© 2026 Sulayman Bowles</span>
-                 <a href="#top" id="footer-back-to-top" className="hover:text-canvas transition-colors flex items-center gap-2">
-                    Back to top <span className="transform -rotate-90 block">→</span>
-                 </a>
-                 <span>Technical SEO · Search Systems · Finance Research</span>
-              </div>
            </div>
         </footer>
       </main>

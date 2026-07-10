@@ -20,6 +20,7 @@ const routeFiles = {
   contact: 'dist/contact/index.html',
   austinTechnicalSeo: 'dist/austin-technical-seo/index.html',
   technicalSeoCaseStudy: 'dist/case-studies/technical-seo-audit/index.html',
+  viralBenchArticle: 'dist/viralbench-codex-agent-harness/index.html',
   markets: 'dist/markets/index.html',
 };
 
@@ -39,6 +40,7 @@ const routePaths = {
   contact: '/contact',
   austinTechnicalSeo: '/austin-technical-seo',
   technicalSeoCaseStudy: '/case-studies/technical-seo-audit',
+  viralBenchArticle: '/viralbench-codex-agent-harness',
   markets: '/markets',
 };
 
@@ -464,6 +466,32 @@ assertVisibleText('dist/case-studies/technical-seo-audit/index.html', [
 ]);
 assertHref('dist/case-studies/technical-seo-audit/index.html', '/contact', 'Request an audit');
 
+{
+  const file = 'dist/viralbench-codex-agent-harness/index.html';
+  const html = read(file);
+  const graph = jsonLdGraph(html);
+  const article = findType(graph, 'BlogPosting');
+  const faq = findType(graph, 'FAQPage');
+  const webPage = findType(graph, 'WebPage', `${siteUrl}/viralbench-codex-agent-harness#webpage`);
+  const ogImage = metaContent(html, 'property="og:image"');
+
+  assert(article, 'viralbench article: missing BlogPosting schema');
+  assert(faq?.mainEntity?.length >= 4, 'viralbench article: FAQ schema should match visible FAQ content');
+  assert(webPage?.mainEntity?.['@id'] === article['@id'], 'viralbench article: WebPage should point to BlogPosting');
+  assert(article.datePublished === '2026-07-09', 'viralbench article: wrong publication date');
+  assert(article.citation?.includes('https://github.com/JibranK12345/Viral-Bench'), 'viralbench article: audited repository citation missing');
+  assert(ogImage === `${siteUrl}/images/viralbench-codex-harness.svg`, 'viralbench article: unique OG image missing');
+  assertVisibleText(file, [
+    'Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench',
+    'The ViralBench agent tries to make a successful post. Codex tries to make the ViralBench agent more reliable and effective.',
+    'The evidence layer comes before the Codex layer',
+    'Frequently asked questions',
+    '5f5f57e251023ceb37961c0fc2c808f67ceb71eb',
+  ]);
+  assertHref(file, '/research', 'Research notes');
+  assertHref(file, '/about', 'Sulayman Bowles');
+}
+
 assertVisibleText('dist/austin-technical-seo/index.html', [
   'Austin Technical SEO',
   'search visibility',
@@ -540,13 +568,14 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     'Perplexity-User',
   ];
 
-  assert(llmsText.includes('Last updated: July 7, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('Last updated: July 9, 2026'), 'llms.txt: stale last updated date');
   assert(
     llmsText.includes('Canonical person ID: https://sulayman-bowles.dev/ai-information#sulayman-bowles'),
     'llms.txt: missing canonical person ID',
   );
   assert(llmsText.includes('Selected work: https://sulayman-bowles.dev/work'), 'llms.txt: missing selected work route');
   assert(llmsText.includes('Atlas sample crawl run: https://sulayman-bowles.dev/atlas/sample-crawl'), 'llms.txt: missing Atlas sample crawl route');
+  assert(llmsText.includes('https://sulayman-bowles.dev/viralbench-codex-agent-harness'), 'llms.txt: missing ViralBench article route');
   assert(llmsText.includes('Void Agency: https://sulayman-bowles.dev/void-agency'), 'llms.txt: missing Void Agency route');
   assert(llmsText.includes('Technical ledger: https://sulayman-bowles.tech/'), 'llms.txt: missing technical ledger link');
   assert(llmsText.includes('Audit intake/contact: https://sulayman-bowles.dev/contact'), 'llms.txt: missing contact route');

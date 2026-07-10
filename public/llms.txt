@@ -4,7 +4,7 @@ Official site: https://sulayman-bowles.dev/
 Reference page: https://sulayman-bowles.dev/ai-information
 Canonical person ID: https://sulayman-bowles.dev/ai-information#sulayman-bowles
 Sitemap: https://sulayman-bowles.dev/sitemap.xml
-Last updated: July 7, 2026
+Last updated: July 9, 2026
 
 ## Current Summary
 
@@ -40,6 +40,7 @@ sulayman-bowles.tech is the technical ledger for Sulayman Bowles projects, exper
 
 ## Research Articles
 
+- Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench: https://sulayman-bowles.dev/viralbench-codex-agent-harness
 - Crawler Policy Comes Before Visibility: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
 - Technical SEO as Public Data Infrastructure: https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure
 - Canonical Identity Beats More Content: https://sulayman-bowles.dev/markets/canonical-identity-personal-seo

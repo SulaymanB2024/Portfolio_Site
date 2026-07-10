@@ -900,6 +900,83 @@ export function technicalSeoCaseStudyJsonLd(): JsonLd {
   ]);
 }
 
+export function viralBenchArticleJsonLd(): JsonLd {
+  const path = '/viralbench-codex-agent-harness';
+  const title = 'Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench';
+  const description =
+    'How I’m turning ViralBench into a Codex-powered agent harness for replay, trace evaluation, controlled experiments, and safer marketing automation.';
+  const articleId = `${absoluteUrl(path)}#article`;
+  const image = absoluteUrl('/images/viralbench-codex-harness.svg');
+  const article = articleSchema({
+    title,
+    description,
+    path,
+    datePublished: '2026-07-09',
+    dateModified: '2026-07-09',
+    image,
+  });
+
+  return graphSchema([
+    ...canonicalEntitySchemas(),
+    websiteSchema(),
+    {
+      ...article,
+      '@type': ['Article', 'BlogPosting'],
+      alternativeHeadline: 'ViralBench + Codex: Building an AI Agent Evaluation Harness',
+      articleSection: 'AI Systems Engineering',
+      keywords: [
+        'ViralBench',
+        'Codex agent harness',
+        'AI agent evaluation harness',
+        'autonomous marketing agent',
+        'AI marketing benchmark',
+        'agent replay testing',
+        'harness engineering',
+      ],
+      about: [
+        { '@type': 'Thing', name: 'ViralBench', sameAs: 'https://viralbench.ai/' },
+        { '@type': 'SoftwareApplication', name: 'Codex', applicationCategory: 'DeveloperApplication', sameAs: 'https://developers.openai.com/codex' },
+        { '@type': 'Thing', name: 'AI agent evaluation' },
+      ],
+      citation: [
+        'https://viralbench.ai/',
+        'https://github.com/JibranK12345/Viral-Bench',
+        'https://openai.com/index/harness-engineering/',
+        'https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop',
+        'https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content',
+      ],
+    },
+    webPageSchema({
+      path,
+      name: title,
+      description,
+      mainEntityId: articleId,
+      aboutIds: [PERSON_ID],
+      dateModified: '2026-07-09',
+    }),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      '@id': `${absoluteUrl(path)}#faq`,
+      mainEntity: [
+        ['What is ViralBench?', 'ViralBench is a live AI marketing benchmark in which frontier models operate TikTok accounts and try to maximize views in the fitness category.'],
+        ['What is an AI agent harness?', 'An agent harness is the operating system around a model: instructions, tools, schemas, memory, permissions, execution loop, tests, traces, validation rules, and deployment boundaries.'],
+        ['How would Codex use ViralBench as a harness?', 'Codex would operate outside the content agent, inspect failed runs, modify a bounded part of the repository, run replay tests, and produce a candidate patch for review.'],
+        ['Why is offline replay necessary?', 'Replay catches process failures cheaply and repeatedly. It cannot predict TikTok distribution, so it is a prerequisite for a live test rather than a substitute for one.'],
+      ].map(([name, text]) => ({
+        '@type': 'Question',
+        name,
+        acceptedAnswer: { '@type': 'Answer', text },
+      })),
+    },
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Research', path: '/research' },
+      { name: 'ViralBench + Codex Agent Harness', path },
+    ]),
+  ]);
+}
+
 export function austinTechnicalSeoJsonLd(): JsonLd {
   const serviceId = `${absoluteUrl('/austin-technical-seo')}#service`;
 

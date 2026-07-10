@@ -24,7 +24,13 @@ import {
   workProofCards,
 } from '../content/seoExpansion';
 import { SIMPLE_BOOK_CHAPTERS, SIMPLE_BOOK_LINKS } from '../content/simpleBook';
+import {
+  VIRALBENCH_ARTICLE_EXCERPT,
+  VIRALBENCH_ARTICLE_MARKDOWN,
+  VIRALBENCH_ARTICLE_TITLE,
+} from '../content/viralBenchArticle';
 import { primaryNav, utilityNav } from '../content/siteNavigation';
+import { markdownToHtml } from '../utils/markdownToHtml';
 import type { SeoRoute } from './routes';
 
 type LinkItem = {
@@ -318,6 +324,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'Research Notes',
       'Selected notes on search systems, crawlability, Atlas, public data, and markets work.',
       `<h2>Selected Notes</h2>
+        <h3><a href="/viralbench-codex-agent-harness">Beyond the Leaderboard: ViralBench + Codex</a></h3>
+        <p>A code-level design for traces, replay, controlled trials, and a bounded Codex engineering loop around a live marketing agent.</p>
         <h3><a href="/markets/ai-search-crawler-policy">Crawler Policy Comes Before Visibility</a></h3>
         <p>A note on crawler access, redirects, and why discovery has to be settled before visibility claims matter.</p>
         <h3><a href="/markets/technical-seo-public-data-infrastructure">Technical SEO as Public Data Infrastructure</a></h3>
@@ -332,6 +340,19 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'Markets research', href: '/markets', description: 'Finance notes, assumptions, and source-backed market questions.' },
           { label: 'Selected work', href: '/work', description: 'Projects, case studies, and public work in one place.' },
         ])}`,
+    );
+  }
+
+  if (route.path === '/viralbench-codex-agent-harness') {
+    return articleShell(
+      VIRALBENCH_ARTICLE_TITLE,
+      VIRALBENCH_ARTICLE_EXCERPT,
+      `<p><a href="/research">Research notes</a> · AI Systems Engineering · Published July 9, 2026 · By <a href="/about">Sulayman Bowles</a></p>
+        <figure>
+          <img src="/images/viralbench-codex-harness.svg" width="1200" height="630" alt="Architecture showing ViralBench as a live marketing-agent loop, an immutable evidence and evaluation layer, and Codex improving the system through isolated experiments." />
+          <figcaption>ViralBench inner marketing-agent loop, evidence and evaluation layer, and Codex outer engineering loop.</figcaption>
+        </figure>
+        ${markdownToHtml(VIRALBENCH_ARTICLE_MARKDOWN)}`,
     );
   }
 
