@@ -1,3 +1,14 @@
+import {
+  TEXAS_TOLL_ARTICLE_DATE,
+  TEXAS_TOLL_ARTICLE_DESCRIPTION,
+  TEXAS_TOLL_ARTICLE_IMAGE,
+  TEXAS_TOLL_ARTICLE_READ_TIME,
+  TEXAS_TOLL_ARTICLE_SEO_TITLE,
+  TEXAS_TOLL_ARTICLE_SLUG,
+  TEXAS_TOLL_ARTICLE_TITLE,
+  TEXAS_TOLL_ARTICLE_UPDATED,
+} from './texasTollRoadArticleMeta';
+
 export interface MarketThesis {
   slug: string;
   number: string;
@@ -255,6 +266,44 @@ export const MARKET_THESES: MarketThesis[] = [
       'Structured data should be conservative. Schema.org defines sameAs as a URL that unambiguously identifies the same item, not a bucket for every social link ever created. For a person, GitHub and LinkedIn can be strong sameAs links when they visibly describe the same person and current role. A dead, private, or weakly matching profile should stay out of sameAs even if it once existed. It can still appear as historical context on a source page if that context is useful.',
       'ProfilePage markup works best when the visible page is clearly about one person or one organization. Google guidance describes mainEntity as the person or organization the profile page is about. That makes /about, /resume, and /ai-information useful profile surfaces if they share the same Person @id, current description, and source links. The markup should not invent claims that the page text does not support.',
       'The reconciliation process is practical: pick the canonical domain, redirect duplicate hosts, redirect stale PDFs, keep /about and /resume aligned, publish an /ai-information page with source roles and caveats, and push the same one-line current identity to external bios. The output is not a bigger personal brand. It is a smaller, cleaner set of records that makes the current public identity easier to verify.',
+    ],
+  },
+  {
+    slug: TEXAS_TOLL_ARTICLE_SLUG,
+    number: '07',
+    category: 'INFRASTRUCTURE INVESTING',
+    title: TEXAS_TOLL_ARTICLE_TITLE,
+    seoTitle: TEXAS_TOLL_ARTICLE_SEO_TITLE,
+    subtitle: 'The state usually owns the pavement. Contracts decide who controls the toll revenue, who gets paid first, and who absorbs the loss.',
+    seoDescription: TEXAS_TOLL_ARTICLE_DESCRIPTION,
+    image: TEXAS_TOLL_ARTICLE_IMAGE,
+    date: TEXAS_TOLL_ARTICLE_DATE,
+    dateModified: TEXAS_TOLL_ARTICLE_UPDATED,
+    readTime: TEXAS_TOLL_ARTICLE_READ_TIME,
+    author: 'SULAYMAN BOWLES',
+    conviction: 'SOURCE-LED',
+    horizon: '2026 OWNERSHIP MAP',
+    allocation: 'EDUCATIONAL RESEARCH',
+    risks:
+      'Concession-company percentages are not ownership of state land. Dated cap tables, sponsor-adjusted EBITDA, analyst calculations, and unresolved financial disclosures are labeled throughout.',
+    formula: 'equity value = finite toll cash flow - debt - lifecycle obligations - public share',
+    formulaLabel: 'Finite-Life Toll Concession Frame',
+    metrics: [
+      { label: 'Scope', value: 'TEXAS STATEWIDE' },
+      { label: 'Private Concessions', value: '4 MATERIAL' },
+      { label: 'Evidence Cutoff', value: 'JULY 11, 2026' },
+    ],
+    sources: [
+      { label: 'TxDOT statewide toll-road inventory', href: 'https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html' },
+      { label: 'Ferrovial 2026 Fact Book', href: 'https://www.sec.gov/Archives/edgar/data/1468522/000162828026032618/ferrovial-factbook2026_s.htm' },
+      { label: 'Build America SH 130 project profile', href: 'https://www.transportation.gov/buildamerica/projects/sh-130-segments-5-and-6' },
+      { label: 'TxDOT SH 288 executed agreements', href: 'https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh288-toll-lanes/executed-agreements.html' },
+      { label: 'NTTA 2025 annual financial report', href: 'https://www.ntta.org/sites/default/files/2026-06/06-25-2026_Digital-Annual-Report_2025.pdf' },
+    ],
+    content: [
+      'Texas toll roads do not have one owner. Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.',
+      'The ownership stack explains two cases that otherwise look contradictory. SH 130 stayed open while the original private equity was eliminated in bankruptcy and creditors received new debt and equity claims. Texas later paid $1.7317 billion to terminate SH 288 even though the state already owned the corridor, because it was buying out the remaining toll and operating rights rather than buying land.',
+      'The article follows a toll dollar through collection, operations, lifecycle capital, debt service, reserves, public sharing, and the final equity residual. It then compares public systems, the four material active private concessions, practical investment routes, and the facts that remain unavailable in public records.',
     ],
   },
 ];

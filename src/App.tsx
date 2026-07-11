@@ -17,6 +17,7 @@ import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
 import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
 import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavigation';
+import { TEXAS_TOLL_ARTICLE_SLUG } from './content/texasTollRoadArticleMeta';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
 import { TextMarquee } from './components/TextMarquee';
@@ -31,6 +32,7 @@ const loadAiInformationPage = () => import('./pages/AiInformationPage');
 const loadResearchPage = () => import('./pages/ResearchPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
+const loadTexasTollRoadArticlePage = () => import('./pages/TexasTollRoadArticlePage');
 const loadSimplePage = () => import('./pages/SimplePage');
 const loadWorkPage = () => import('./pages/WorkPage');
 const loadContactPage = () => import('./pages/ContactPage');
@@ -48,6 +50,7 @@ const AiInformationPage = lazy(loadAiInformationPage);
 const ResearchPage = lazy(loadResearchPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
+const TexasTollRoadArticlePage = lazy(loadTexasTollRoadArticlePage);
 const SimplePage = lazy(loadSimplePage);
 const WorkPage = lazy(loadWorkPage);
 const ContactPage = lazy(loadContactPage);
@@ -165,6 +168,8 @@ async function preloadRoute(path: string) {
     await loadResearchPage();
   } else if (route?.path === '/markets') {
     await loadMarketsPage();
+  } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
+    await loadTexasTollRoadArticlePage();
   } else if (route?.section === 'research-article') {
     await loadMarketArticlePage();
   }
@@ -281,6 +286,12 @@ export default function App() {
     );
   } else if (route?.path === '/sitemap') {
     page = <SitemapPage />;
+  } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <TexasTollRoadArticlePage />
+      </Suspense>
+    );
   } else if (route?.section === 'research-article') {
     const slug = route.path.split('/').at(-1) ?? '';
     page = (

@@ -1,4 +1,5 @@
 import { MARKET_THESES } from '../content/marketTheses';
+import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
 import {
   AI_INFORMATION_DESCRIPTION,
   AI_INFORMATION_STATIC_HTML,
@@ -221,7 +222,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'research',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: '2026-07-11',
     staticSummary:
       'Public research files across technical SEO, crawler policy, Atlas crawl data, Austin crawlability, identity, and markets research.',
     jsonLd: researchAssetsJsonLd(),
@@ -332,7 +333,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'research',
     priority: 0.7,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: '2026-07-11',
     staticSummary:
       'Markets Research separates signal from noise through notes across search infrastructure, public data hygiene, markets research assumptions, and educational memos.',
     jsonLd: marketsJsonLd(
@@ -351,7 +352,7 @@ const ARTICLE_ROUTES: SeoRoute[] = MARKET_THESES.map((thesis) => {
   return {
     path,
     aliases: [],
-    title: `${thesis.seoTitle} | Sulayman Bowles`,
+    title: thesis.slug === TEXAS_TOLL_ARTICLE_SLUG ? thesis.seoTitle : `${thesis.seoTitle} | Sulayman Bowles`,
     description: thesis.seoDescription,
     h1: thesis.title,
     section: 'research-article',

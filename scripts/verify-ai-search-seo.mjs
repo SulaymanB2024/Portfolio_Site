@@ -49,12 +49,14 @@ const marketFiles = [
   'dist/markets/ai-search-crawler-policy/index.html',
   'dist/markets/technical-seo-public-data-infrastructure/index.html',
   'dist/markets/canonical-identity-personal-seo/index.html',
+  'dist/markets/who-owns-texas-toll-roads/index.html',
 ];
 
 const publicMarketLastmods = {
   '/markets/ai-search-crawler-policy': '2026-07-05',
   '/markets/technical-seo-public-data-infrastructure': '2026-07-05',
   '/markets/canonical-identity-personal-seo': '2026-07-05',
+  '/markets/who-owns-texas-toll-roads': '2026-07-11',
 };
 
 const archivedMarketFiles = [
@@ -307,7 +309,7 @@ for (const file of new Set([...Object.values(routeFiles), ...marketFiles, ...arc
   const graph = jsonLdGraph(read('dist/research/index.html'));
   const researchAssetList = findItemList(graph, `${siteUrl}/research#asset-list`);
   assert(researchAssetList, 'research: missing Research Assets ItemList schema');
-  assert(researchAssetList.itemListElement?.length === 13, 'research: Research Assets ItemList should have 13 items');
+  assert(researchAssetList.itemListElement?.length === 14, 'research: Research Assets ItemList should have 14 items');
 }
 
 {
@@ -540,7 +542,7 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     'Perplexity-User',
   ];
 
-  assert(llmsText.includes('Last updated: July 7, 2026'), 'llms.txt: stale last updated date');
+  assert(llmsText.includes('Last updated: July 11, 2026'), 'llms.txt: stale last updated date');
   assert(
     llmsText.includes('Canonical person ID: https://sulayman-bowles.dev/ai-information#sulayman-bowles'),
     'llms.txt: missing canonical person ID',
@@ -564,6 +566,7 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
   assert(llmsText.includes('Crawler Policy Comes Before Visibility'), 'llms.txt: missing crawler policy article');
   assert(llmsText.includes('Technical SEO as Public Data Infrastructure'), 'llms.txt: missing public data infrastructure article');
   assert(llmsText.includes('Canonical Identity Beats More Content'), 'llms.txt: missing canonical identity article');
+  assert(llmsText.includes('Who Owns the Toll Roads in Texas?'), 'llms.txt: missing Texas toll-road ownership article');
   assert(llmsText.includes('Brave Search: the site is publicly crawlable'), 'llms.txt: missing Brave discovery plan');
   assert(
     llmsText.includes('Google Search and Google AI surfaces: public site signals are present'),
@@ -720,4 +723,26 @@ assertVisibleText('dist/markets/canonical-identity-personal-seo/index.html', [
   'Schema.org Person',
 ]);
 
-console.log('SEO verification passed');
+assertVisibleText('dist/markets/who-owns-texas-toll-roads/index.html', [
+  'Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics',
+  'Texas toll roads do not have one owner',
+  'A road can have seven different owners',
+  'SH 130: the danger of believing the traffic model',
+  'SH 288: the value of a termination clause',
+  'Texas toll-road ownership map',
+  '65% / 32% / 4% other',
+  'What remains unknown',
+  'Frequently asked questions',
+  'Source ledger',
+]);
+assertHref('dist/research/index.html', '/markets/who-owns-texas-toll-roads', 'Who Owns the Toll Roads in Texas?');
+
+{
+  const html = read('dist/markets/who-owns-texas-toll-roads/index.html');
+  assert((html.match(/id="source-s\d+"/g) ?? []).length === 25, 'Texas toll-road article: expected 25 source-ledger entries');
+  assert((html.match(/<table>/g) ?? []).length >= 4, 'Texas toll-road article: expected at least four evidence tables');
+  assert((html.match(/<h3>[^<]*\?<\/h3>/g) ?? []).length >= 8, 'Texas toll-road article: expected visible FAQ answers');
+  assert(html.includes('Scenario, not price.'), 'Texas toll-road article: missing model-screening boundary');
+}
+
+console.log('AI-search SEO verification passed');
