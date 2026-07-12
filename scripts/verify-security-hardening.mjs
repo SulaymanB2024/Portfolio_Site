@@ -89,6 +89,7 @@ expect(!staticGenerator.includes('<script>${'), 'static generator must not templ
 
 const main = read('src/main.tsx');
 expect(main.includes("document.documentElement.classList.add('js')"), 'main.tsx must set the js class from bundled script');
+expect(main.includes("document.getElementById('seo-static-summary')?.remove()"), 'main.tsx must remove the static fallback before React renders');
 
 const packageJson = readJson('package.json');
 expect(packageJson.scripts.dev.includes('--host=127.0.0.1'), 'dev server must bind to loopback by default');

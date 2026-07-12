@@ -40,6 +40,7 @@ const transitionSource = read('src/hooks/usePageTransitions.ts');
 const headerSource = read('src/components/InternalHeader.tsx');
 const contactSource = read('src/components/AuditIntakeForm.tsx');
 const appSource = read('src/App.tsx');
+const mainSource = read('src/main.tsx');
 const profileSource = read('src/content/profileFacts.ts');
 const llmsText = read('public/llms.txt');
 const indexCss = read('src/index.css');
@@ -63,6 +64,10 @@ for (const focusContract of ['querySelectorAll<HTMLElement>', "event.key === 'Es
 assert(homeHtml.includes('.app-mounted #seo-static-summary'), 'Static fallback is not hidden by the post-commit mount marker');
 assert(!homeHtml.includes('.js #seo-static-summary'), 'Static fallback is hidden before React commits');
 assert(homeHtml.includes('id="seo-static-summary"'), 'Homepage static fallback is missing');
+assert(mainSource.includes("document.getElementById('seo-static-summary')?.remove()"), 'Mounted app does not remove the static fallback before rendering');
+assert(!appSource.includes('<span>Building Evidence</span>'), 'Preloader label is exposed as machine-readable page content');
+assert(appSource.includes('aria-hidden="true"'), 'Preloader is not hidden from the accessibility tree');
+assert(indexCss.includes('.visual-label::before'), 'Visual-only preloader labels are missing their CSS renderer');
 
 assert(fs.existsSync(path.resolve('dist/404.html')), 'Generated 404.html is missing');
 assert(notFoundHtml.includes('name="robots" content="noindex,nofollow"'), '404 artifact must be noindex,nofollow');

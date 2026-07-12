@@ -6,6 +6,9 @@ import './index.css';
 import Lenis from 'lenis';
 
 document.documentElement.classList.add('js');
+// Static route HTML is the no-JavaScript fallback. Remove it before React
+// renders so browser-backed readers receive one page body instead of two.
+document.getElementById('seo-static-summary')?.remove();
 
 function Root() {
   useLayoutEffect(() => {

@@ -567,14 +567,15 @@ function HomePage() {
       <AnimatePresence>
         {!isLoaded && (
           <motion.div 
+            aria-hidden="true"
             className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center p-8 text-canvas"
             data-header-tone-ignore="true"
             exit={{ opacity: 0 }}
             transition={{ duration: prefersReducedMotion ? 0.12 : 0.35, ease: [0.33, 1, 0.68, 1] }}
           >
             <div className="w-full flex justify-between absolute pt-8 px-8 md:px-16 normal-case font-sans uppercase tracking-[0.2em] text-xs opacity-60 justify-self-start self-start top-0">
-               <span>Building Evidence</span>
-               <span>{counter}%</span>
+               <span className="visual-label" data-visual-label="Building Evidence" />
+               <span className="visual-label" data-visual-label={`${counter}%`} />
             </div>
             
             <motion.div
@@ -583,8 +584,8 @@ function HomePage() {
                transition={{ duration: 0.4 }}
                className="font-serif text-6xl md:text-9xl font-light tracking-normal flex items-baseline"
             >
-              <span className="italic">{counter}</span>
-              <span className="text-xl md:text-2xl ml-2 font-sans tracking-widest">%</span>
+              <span className="visual-label italic" data-visual-label={String(counter)} />
+              <span className="visual-label text-xl md:text-2xl ml-2 font-sans tracking-widest" data-visual-label="%" />
             </motion.div>
 
             {/* Progress bar */}
