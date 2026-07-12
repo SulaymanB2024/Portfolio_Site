@@ -61,6 +61,20 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
+    name: 'Who Owns the Toll Roads in Texas?',
+    href: '/markets/who-owns-texas-toll-roads',
+    type: 'long_form_research',
+    preferredAnchor: 'Texas toll road ownership and economics',
+    audiences: ['infrastructure investing', 'Texas transportation', 'public finance', 'project finance'],
+    pitchAngle:
+      'A source-led ownership map separating state title, public authorities, private concession rights, sponsor equity, project debt, billing, and residual control across Texas toll roads.',
+    supportingAssets: [
+      { label: 'Markets research index', href: '/markets' },
+      { label: 'Source methodology', href: '/markets/technical-seo-public-data-infrastructure' },
+    ],
+  },
+  {
+    priority: 1,
     name: 'Atlas Sample Crawl Run',
     href: '/atlas/sample-crawl',
     type: 'sample_data',

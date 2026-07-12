@@ -4,7 +4,7 @@ Official site: https://sulayman-bowles.dev/
 Reference page: https://sulayman-bowles.dev/ai-information
 Canonical person ID: https://sulayman-bowles.dev/ai-information#sulayman-bowles
 Sitemap: https://sulayman-bowles.dev/sitemap.xml
-Last updated: July 9, 2026
+Last updated: July 12, 2026
 
 ## Current Summary
 
@@ -44,6 +44,7 @@ sulayman-bowles.tech is the technical ledger for Sulayman Bowles projects, exper
 - Crawler Policy Comes Before Visibility: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
 - Technical SEO as Public Data Infrastructure: https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure
 - Canonical Identity Beats More Content: https://sulayman-bowles.dev/markets/canonical-identity-personal-seo
+- Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics: https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads
 
 ## Public Reference Assets
 
@@ -57,6 +58,7 @@ sulayman-bowles.tech is the technical ledger for Sulayman Bowles projects, exper
 - Austin crawlability benchmark summary: https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json
 - The Atlas crawl sample is sanitized/demo data. It does not identify a private client or claim rankings, traffic, revenue impact, or AI citations.
 - The Appian materials are educational research samples. They are not investment advice, a price target, or a live market recommendation.
+- The Texas toll-road article is educational infrastructure research. Its valuation ranges are analyst screening estimates, not bids, prices, appraisals, or investment recommendations.
 - The authority asset index, crawler policy source table, and Austin benchmark files support reference and outreach workflows. They do not prove backlinks, Ahrefs Domain Rating movement, rankings, traffic, site health, revenue impact, or AI answer citations.
 
 ## Crawler and Indexation Signals

@@ -30,6 +30,18 @@ import {
   VIRALBENCH_ARTICLE_TITLE,
 } from '../content/viralBenchArticle';
 import { primaryNav, utilityNav } from '../content/siteNavigation';
+import {
+  TEXAS_TOLL_ARTICLE_DESCRIPTION,
+  TEXAS_TOLL_ARTICLE_FACT_GAPS,
+  TEXAS_TOLL_ARTICLE_FAQS,
+  TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN,
+  TEXAS_TOLL_ARTICLE_SECTIONS,
+  TEXAS_TOLL_ARTICLE_SLUG,
+  TEXAS_TOLL_ARTICLE_SOURCES,
+  TEXAS_TOLL_ARTICLE_TABLES,
+  TEXAS_TOLL_ARTICLE_TITLE,
+  type TexasTollArticleTable,
+} from '../content/texasTollRoadArticle';
 import { markdownToHtml } from '../utils/markdownToHtml';
 import type { SeoRoute } from './routes';
 
@@ -314,6 +326,75 @@ function articleShell(title: string, intro: string, body: string) {
       </article>`;
 }
 
+function texasTollTableStaticHtml(table: TexasTollArticleTable) {
+  return `<table>
+          <caption>${escapeHtml(table.caption)}</caption>
+          <thead><tr>${table.columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('')}</tr></thead>
+          <tbody>
+          ${table.rows
+            .map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join('')}</tr>`)
+            .join('\n          ')}
+          </tbody>
+        </table>
+        ${table.note ? `<p>${escapeHtml(table.note)}</p>` : ''}`;
+}
+
+function texasTollArticleStaticHtml() {
+  const tableById = new Map(TEXAS_TOLL_ARTICLE_TABLES.map((table) => [table.id, table]));
+  const sections = TEXAS_TOLL_ARTICLE_SECTIONS.map((section) => {
+    const blocks = section.blocks.map((block) => {
+      if (block.kind === 'markdown') return markdownToHtml(block.markdown);
+      const table = tableById.get(block.tableId);
+      return table ? texasTollTableStaticHtml(table) : '';
+    });
+    return `<h2 id="${section.id}">${escapeHtml(section.title)}</h2>${blocks.join('\n        ')}`;
+  }).join('\n        ');
+  const factGaps = TEXAS_TOLL_ARTICLE_FACT_GAPS.map(
+    (group) => `<h3>${escapeHtml(group.title)}</h3>${markdownToHtml(group.items.map((item) => `- ${item}`).join('\n'))}`,
+  ).join('\n        ');
+  const faqs = TEXAS_TOLL_ARTICLE_FAQS.map(
+    (faq) => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`,
+  ).join('\n        ');
+  const sources = TEXAS_TOLL_ARTICLE_SOURCES.map(
+    (source) => `<li id="source-${source.id}"><strong>${escapeHtml(`${source.id.toUpperCase()}: ${source.label}`)}</strong><p>${escapeHtml(source.note)}</p>${source.hrefs.map((href, index) => `<a href="${href}">${escapeHtml(source.hrefs.length > 1 ? `Open source ${index + 1}` : 'Open source')}</a>`).join(' ')}</li>`,
+  ).join('\n          ');
+
+  return articleShell(
+    TEXAS_TOLL_ARTICLE_TITLE,
+    TEXAS_TOLL_ARTICLE_DESCRIPTION,
+    `<h2>Short answer</h2>
+        <p>Texas toll roads do not have one owner. The state, a county, or a public authority usually owns the physical roadway. Contracts determine who controls toll revenue, operations, debt claims, equity, billing, and the residual rights at expiry.</p>
+        ${markdownToHtml(TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN)}
+        ${sections}
+        <h2 id="analyst-model-screen">Analyst model screening</h2>
+        <p><strong>Scenario, not price.</strong> These 2025-base finite-life DCF ranges are analyst screening estimates, not bids, carrying values, appraisals, fairness opinions, or current security quotations.</p>
+        <table>
+          <thead><tr><th>Project</th><th>Bear EV</th><th>Base EV</th><th>Bull EV</th><th>Base equity</th><th>Base discount rate</th><th>Input status</th></tr></thead>
+          <tbody>
+            <tr><td>North Tarrant Express</td><td>$2.88B</td><td>$4.44B</td><td>$6.91B</td><td>$2.84B</td><td>7.25%</td><td>DFW inputs source-backed</td></tr>
+            <tr><td>LBJ Express</td><td>$1.89B</td><td>$2.95B</td><td>$4.50B</td><td>$0.91B</td><td>7.50%</td><td>DFW inputs source-backed</td></tr>
+            <tr><td>NTE 35W</td><td>$2.74B</td><td>$4.72B</td><td>$8.12B</td><td>$3.12B</td><td>7.75%</td><td>DFW inputs source-backed</td></tr>
+            <tr><td>SH 130 Segments 5–6</td><td>$0.56B</td><td>$0.99B</td><td>$2.12B</td><td>$0.54B</td><td>9.00%</td><td>Revenue, EBITDA, and $450M debt estimated</td></tr>
+          </tbody>
+        </table>
+        <p>The model holds margins constant and simplifies maintenance, sharing, cash tax, and handback reserves. It omits a levered debt-service schedule, refinancing, swaps, working capital, tax basis, and explicit growth capex. SH 130 inputs are analyst estimates.</p>
+        <h2 id="what-remains-unknown">What remains unknown</h2>
+        <p>Missing cap-table rights, debt schedules, or current financial statements are measurement gaps, not evidence for or against the asset.</p>
+        ${factGaps}
+        <h2 id="frequently-asked-questions">Frequently asked questions</h2>
+        ${faqs}
+        <h2 id="source-ledger">Source ledger</h2>
+        <ol>${sources}</ol>
+        <h2>Related research</h2>
+        ${linkList([
+          { label: 'Markets research', href: '/markets' },
+          { label: 'Research assets', href: '/research' },
+          { label: 'Source methodology', href: '/markets/technical-seo-public-data-infrastructure' },
+          { label: 'About the author', href: '/about' },
+        ])}`,
+  );
+}
+
 export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/ai-information') {
     return AI_INFORMATION_STATIC_HTML;
@@ -332,6 +413,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>A practical bridge between crawlability, structured data, provenance, and public records people can inspect.</p>
         <h3><a href="/markets/canonical-identity-personal-seo">Canonical Identity for Personal SEO</a></h3>
         <p>A reconciliation checklist for profiles, stale PDFs, source pages, and external bio consistency.</p>
+        <h3><a href="/markets/who-owns-texas-toll-roads">Who Owns the Toll Roads in Texas?</a></h3>
+        <p>A statewide ownership map separating public title, private concessions, operators, creditors, revenue rights, and analyst-screening economics.</p>
         <h3><a href="/atlas/sample-crawl">Atlas Sample Crawl Run</a></h3>
         <p>A sanitized walkthrough of how crawl rows, canonical state, depth, links, and issue labels become reviewable evidence.</p>
         <h2>Related Work</h2>
@@ -731,6 +814,10 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Internal Links</h2>
         ${linkList(primaryLinks)}`,
     );
+  }
+
+  if (route.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
+    return texasTollArticleStaticHtml();
   }
 
   const thesis = MARKET_THESES.find((item) => route.path === `/markets/${item.slug}`);

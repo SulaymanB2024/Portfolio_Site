@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-25",
+  "generated_at": "2026-07-11",
   "canonical_host": "https://sulayman-bowles.dev",
-  "objective": "Public index of useful pages and files for technical SEO, crawler policy, Atlas, identity context, and markets research links.",
+  "objective": "Public index of useful pages and files for technical SEO, crawler policy, Atlas, identity context, infrastructure, and markets research links.",
   "limits": [
     "This file does not claim rankings, indexing, traffic movement, revenue impact, AI citations, or Ahrefs Domain Rating movement.",
     "Private client names and private outcomes are intentionally excluded.",
@@ -38,6 +38,16 @@
       "audiences": ["technical SEO", "search visibility", "web developers", "search policy writers"],
       "pitch_angle": "Map of search, training, and user-requested retrieval crawlers with conservative visibility limits.",
       "supporting_assets": ["https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv"]
+    },
+    {
+      "priority": 1,
+      "name": "Who Owns the Toll Roads in Texas?",
+      "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+      "type": "long_form_research",
+      "preferred_anchor": "Texas toll road ownership and economics",
+      "audiences": ["infrastructure investing", "Texas transportation", "public finance", "project finance"],
+      "pitch_angle": "Source-led ownership map separating state title, public authorities, private concession rights, sponsor equity, project debt, billing, and residual control across Texas toll roads.",
+      "supporting_assets": ["https://sulayman-bowles.dev/markets", "https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure"]
     },
     {
       "priority": 1,
