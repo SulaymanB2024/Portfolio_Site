@@ -69,9 +69,9 @@ assert(notFoundHtml.includes('name="robots" content="noindex,nofollow"'), '404 a
 assert(textFromHtml(notFoundHtml).includes('Page Not Found'), '404 artifact needs a clear page identity');
 assert(appSource.includes('<NotFoundPage'), 'Unknown client routes do not render the dedicated NotFound page');
 assert(vercelConfig.routes?.some((route) => route.handle === 'filesystem'), 'Vercel custom 404 routing must check generated files first');
-assert(vercelConfig.routes?.some((route) => route.src === '/(.*)' && route.status === 404 && route.dest === '/404.html'), 'Vercel custom 404 routing must preserve HTTP 404 status');
+assert(vercelConfig.routes?.some((route) => route.src === '/(.*)' && route.status === 404 && route.dest === '/404'), 'Vercel custom 404 routing must preserve HTTP 404 status and target the generated clean URL');
 const filesystemRouteIndex = vercelConfig.routes.findIndex((route) => route.handle === 'filesystem');
-const notFoundRouteIndex = vercelConfig.routes.findIndex((route) => route.status === 404 && route.dest === '/404.html');
+const notFoundRouteIndex = vercelConfig.routes.findIndex((route) => route.status === 404 && route.dest === '/404');
 const securityRouteIndex = vercelConfig.routes.findIndex((route) => route.continue === true && route.headers?.['Content-Security-Policy']);
 const legacyAliasIndex = vercelConfig.routes.findIndex((route) => route.src === '/projects/atlas' && route.headers?.Location === '/atlas');
 assert(legacyAliasIndex >= 0 && legacyAliasIndex < filesystemRouteIndex, 'Legacy aliases must run before filesystem and 404 handling');

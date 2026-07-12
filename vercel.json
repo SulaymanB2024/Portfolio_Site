@@ -70,6 +70,6 @@
       "continue": true
     },
     { "handle": "filesystem" },
-    { "src": "/(.*)", "status": 404, "dest": "/404.html" }
+    { "src": "/(.*)", "status": 404, "dest": "/404" }
   ]
 }
