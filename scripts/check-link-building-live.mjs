@@ -6,10 +6,10 @@ const requiredChecks = [
     url: `${SITE_URL}/research`,
     type: 'html',
     requiredText: [
-      'Research Notes',
-      'Selected Notes',
-      'Crawler Policy Comes Before Visibility',
-      'Research Notes | Sulayman Bowles',
+      'Citation surfaces, not empty claims.',
+      'Authority asset JSON',
+      'LLMs text file',
+      'Research Assets | Technical SEO, AI Search',
     ],
   },
   {
@@ -23,8 +23,8 @@ const requiredChecks = [
           Array.isArray(value.assets) &&
           value.assets.length >= 12 &&
           value.assets.some((asset) => asset.url === `${SITE_URL}/research`) &&
-          Array.isArray(value.limits) &&
-          value.limits.some((limit) => limit.includes('Domain Rating movement')),
+          Array.isArray(value.claim_boundaries) &&
+          value.claim_boundaries.some((boundary) => boundary.includes('Domain Rating movement')),
         detail: {
           canonical_host: value?.canonical_host,
           asset_count: Array.isArray(value?.assets) ? value.assets.length : null,
@@ -54,7 +54,7 @@ const requiredChecks = [
     requiredText: [`<loc>${SITE_URL}/research</loc>`],
   },
   {
-    id: 'crawler-policy-source-table',
+    id: 'crawler-policy-source-map',
     url: `${SITE_URL}/research/ai-search-crawler-policy-sources.csv`,
     type: 'csv',
     requiredText: ['source_name,source_url,source_type,used_for,claim_boundary', 'Ahrefs Domain Rating'],
@@ -74,12 +74,12 @@ const requiredChecks = [
         ok:
           value?.generated_at === '2026-06-25' &&
           value?.sample_size >= 10 &&
-          Array.isArray(value.limits) &&
-          value.limits.some((limit) => limit.includes('measurement gaps')),
+          Array.isArray(value.claim_boundaries) &&
+          value.claim_boundaries.some((boundary) => boundary.includes('measurement gaps')),
         detail: {
           generated_at: value?.generated_at,
           sample_size: value?.sample_size,
-          limits: Array.isArray(value?.limits) ? value.limits.length : null,
+          claim_boundaries: Array.isArray(value?.claim_boundaries) ? value.claim_boundaries.length : null,
         },
       };
     },

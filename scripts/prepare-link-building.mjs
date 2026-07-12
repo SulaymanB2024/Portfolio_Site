@@ -273,18 +273,18 @@ ${evidenceBlock}- Send status: not sent.
 function draftForQueueRow(row) {
   if (row.prospect_name === 'Search Engine Land') {
     return {
-      subject: 'Crawler policy reference',
+      subject: 'Source-backed AI crawler policy reference',
       body: `Hi Search Engine Land team,
 
-I put together a reference on crawler policy, robots directives, IndexNow, and source-page clarity:
+I put together a source-backed reference on AI-search crawler policy, robots directives, IndexNow, and source-page clarity:
 
 https://sulayman-bowles.dev/markets/ai-search-crawler-policy
 
-The companion source table is here:
+The companion source map is here:
 
 https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv
 
-The piece is intentionally conservative. It treats crawler access as a discovery condition, not a ranking, indexing, AI-citation, or DR guarantee. If you are collecting expert sources around search crawler policy, search-vs-training crawler distinctions, or public source-page hygiene, it may be useful as a reference.
+The piece is intentionally conservative. It treats crawler access as a discovery condition, not a ranking, indexing, AI-citation, or DR guarantee. If you are collecting expert sources around AI search crawl policy, search-vs-training crawler distinctions, or public source-page hygiene, it may be useful as a reference.
 
 Best,
 Sulayman`,
@@ -293,14 +293,14 @@ Sulayman`,
 
   if (row.prospect_name === 'SEOFOMO') {
     return {
-      subject: 'Crawler policy source table',
+      subject: 'AI-search crawler policy source map',
       body: `Suggested SEOFOMO submission:
 
-Title: Crawler policy: map of search, training, and user-requested retrieval agents
+Title: AI search crawler policy: source-backed map of search, training, and user-requested retrieval agents
 
 URL: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
 
-Description: A conservative technical reference on crawler policy, robots directives, IndexNow, source pages, and stated limits. Includes a source table at https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv. It does not claim rankings, AI citations, or visibility guarantees.`,
+Description: A conservative technical reference on AI-search crawler policy, robots directives, IndexNow, canonical source pages, and claim boundaries. Includes a source map at https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv. It does not claim rankings, AI citations, or visibility guarantees.`,
     };
   }
 
@@ -309,13 +309,13 @@ Description: A conservative technical reference on crawler policy, robots direct
       subject: 'AI crawler policy and source-page clarity',
       body: `Draft discussion post:
 
-I wrote a reference on crawler policy and public source-page clarity:
+I wrote a source-backed reference on AI-search crawler policy and public source-page clarity:
 
 https://sulayman-bowles.dev/markets/ai-search-crawler-policy
 
 The practical distinction I wanted to make is between search crawlers, training crawlers, and user-requested retrieval agents. The post also covers robots directives, IndexNow, canonical URLs, and why crawler access is only a discovery condition, not a ranking or citation guarantee.
 
-Source table:
+Source map:
 https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv
 
 Interested in feedback on whether the crawler/source-page framing is clear for developers maintaining public docs or project sites.`,
@@ -339,7 +339,7 @@ https://sulayman-bowles.dev/austin-technical-seo
 
 The benchmark is intentionally bounded: public homepage, robots.txt, and sitemap checks only. It does not claim rankings, traffic, revenue impact, AI citations, or site health, and access-limited/challenged fetches are treated as measurement gaps rather than negative findings.
 
-If you are covering Austin companies' public web infrastructure or search readiness, I can share the methodology and explain the aggregate patterns without naming-and-shaming individual sites.
+If you are covering Austin companies' public web infrastructure or AI-search readiness, I can share the methodology and explain the aggregate patterns without naming-and-shaming individual sites.
 
 Best,
 Sulayman`,
@@ -348,19 +348,19 @@ Sulayman`,
 
   if (row.prospect_name === 'Search Engine Journal') {
     return {
-      subject: 'Expert source on crawler policy',
+      subject: 'Expert source on AI crawler policy',
       body: `Hi SEJ team,
 
 I know contributor access is editorially gated, so this is a source note rather than a guest-post request.
 
-I published a conservative reference on crawler policy, source-page clarity, robots directives, and IndexNow:
+I published a conservative reference on AI-search crawler policy, source-page clarity, robots directives, and IndexNow:
 
 https://sulayman-bowles.dev/markets/ai-search-crawler-policy
 
-Source table:
+Source map:
 https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv
 
-The piece avoids ranking, traffic, DR, or AI-citation claims and focuses on public technical signals. If you need a source or quote around search-vs-training crawler distinctions or public site readiness for retrieval systems, I am happy to help.
+The piece avoids ranking, traffic, DR, or AI-citation claims and focuses on public technical signals. If you need a source or quote around search-vs-training crawler distinctions or public site readiness for AI retrieval, I am happy to help.
 
 Best,
 Sulayman`,
@@ -391,7 +391,7 @@ function validatePack() {
   const authorityAssets = JSON.parse(read(paths.assets));
   assert(authorityAssets.generated_at === TODAY, 'authority asset index generated_at must match current pack date');
   assert(authorityAssets.canonical_host === SITE_URL, 'authority asset index canonical_host mismatch');
-  assert(Array.isArray(authorityAssets.limits) && authorityAssets.limits.length >= 4, 'authority asset index needs limits');
+  assert(Array.isArray(authorityAssets.claim_boundaries) && authorityAssets.claim_boundaries.length >= 4, 'authority asset index needs claim boundaries');
   assert(Array.isArray(authorityAssets.assets) && authorityAssets.assets.length >= 8, 'authority asset index needs at least 8 assets');
 
   const assetUrls = new Set(authorityAssets.assets.map((asset) => asset.url));
@@ -424,10 +424,10 @@ function validatePack() {
 
   const crawlerSources = parseCsv(paths.crawlerSources);
   compareColumns(crawlerSources.columns, requiredSourceColumns, paths.crawlerSources);
-  assert(crawlerSources.rows.length >= 10, 'crawler policy source table should have at least 10 sources');
-  assert(crawlerSources.rows.every((row) => row.source_url.startsWith('https://')), 'crawler policy source table URLs must be HTTPS');
-  assert(crawlerSources.rows.some((row) => row.source_name.includes('Google Search spam policies')), 'source table missing Google spam policy source');
-  assert(crawlerSources.rows.some((row) => row.source_name.includes('Ahrefs Domain Rating')), 'source table missing Ahrefs DR source');
+  assert(crawlerSources.rows.length >= 10, 'crawler policy source map should have at least 10 sources');
+  assert(crawlerSources.rows.every((row) => row.source_url.startsWith('https://')), 'crawler policy source map URLs must be HTTPS');
+  assert(crawlerSources.rows.some((row) => row.source_name.includes('Google Search spam policies')), 'source map missing Google spam policy source');
+  assert(crawlerSources.rows.some((row) => row.source_name.includes('Ahrefs Domain Rating')), 'source map missing Ahrefs DR source');
 
   const austinBenchmark = parseCsv(paths.austinBenchmarkCsv);
   compareColumns(austinBenchmark.columns, requiredAustinBenchmarkColumns, paths.austinBenchmarkCsv);
@@ -437,7 +437,7 @@ function validatePack() {
   const austinSummary = JSON.parse(read(paths.austinBenchmarkSummary));
   assert(austinSummary.generated_at === TODAY, 'Austin benchmark summary generated_at must match pack date');
   assert(austinSummary.sample_size === austinBenchmark.rows.length, 'Austin benchmark summary sample size must match CSV rows');
-  assert(Array.isArray(austinSummary.limits) && austinSummary.limits.length >= 4, 'Austin benchmark summary needs limits');
+  assert(Array.isArray(austinSummary.claim_boundaries) && austinSummary.claim_boundaries.length >= 4, 'Austin benchmark summary needs claim boundaries');
   assert(read(paths.austinBenchmarkReport).includes('Austin Crawlability Benchmark Pilot'), 'Austin benchmark report missing title');
 
   const liveEvidence = parseCsv(paths.liveEvidence);
@@ -484,7 +484,7 @@ function validatePack() {
   const llms = read(paths.llms);
   assert(llms.includes(`${SITE_URL}/research`), 'llms.txt missing research asset hub');
   assert(llms.includes(`${SITE_URL}/research/authority-assets.json`), 'llms.txt missing authority asset index');
-  assert(llms.includes(`${SITE_URL}/research/ai-search-crawler-policy-sources.csv`), 'llms.txt missing crawler policy source table');
+  assert(llms.includes(`${SITE_URL}/research/ai-search-crawler-policy-sources.csv`), 'llms.txt missing crawler policy source map');
   assert(llms.includes(`${SITE_URL}/research/austin-crawlability-benchmark-pilot.csv`), 'llms.txt missing Austin benchmark CSV');
   assert(llms.includes(`${SITE_URL}/research/austin-crawlability-benchmark-summary.json`), 'llms.txt missing Austin benchmark summary');
   assert(llms.includes('They do not prove backlinks, Ahrefs Domain Rating movement, rankings, traffic, site health, revenue impact, or AI answer citations.'), 'llms.txt missing authority claim boundary');
@@ -569,7 +569,7 @@ function writeAudit({ authorityAssets, tracker, crawlerSources, liveEvidence, la
     ['Outreach outcome log', paths.outcomeLog, `${outcomeLog.rows.length} tracked external actions`],
     ['GitHub owned repo opportunity audit', paths.githubRepoAudit, `${githubRepoAudit.rows.length} long-tail repos classified`],
     ['Authority asset index', paths.assets, `${authorityAssets.assets.length} assets`],
-    ['Crawler policy source table', paths.crawlerSources, `${crawlerSources.rows.length} sources`],
+    ['Crawler policy source map', paths.crawlerSources, `${crawlerSources.rows.length} sources`],
     ['Austin crawlability benchmark', `${paths.austinBenchmarkCsv} and ${paths.austinBenchmarkSummary}`, `${austinBenchmark.rows.length} measured rows`],
     ['Publish manifest', paths.publishManifest, 'defines the link-building-only file scope'],
     ['Publish readiness handoff', paths.publishReadiness, 'documents current deploy/scope blockers'],

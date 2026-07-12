@@ -30,6 +30,13 @@ export const publicSourceGraph: EvidenceListItem[] = [
       'Public technical ledger for projects, experiments, competitions, file boundaries, and technical work connected to this site.',
   },
   {
+    category: 'Technical ledger',
+    label: 'sulayman-bowles.tech',
+    href: 'https://sulayman-bowles.tech/',
+    proves:
+      'Public technical ledger for projects, experiments, competitions, artifact boundaries, and technical proof connected to the canonical identity hub.',
+  },
+  {
     category: 'Code evidence',
     label: 'GitHub profile',
     href: 'https://github.com/SulaymanB2024',

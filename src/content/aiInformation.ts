@@ -199,6 +199,13 @@ export const sourceMap = [
       'Public technical ledger for projects, experiments, competitions, file boundaries, and technical work that should remain separate from the commercial agency site.',
   },
   {
+    role: 'Technical ledger',
+    label: 'sulayman-bowles.tech',
+    href: 'https://sulayman-bowles.tech/',
+    proves:
+      'Public technical ledger for projects, experiments, competitions, artifact boundaries, and technical proof that should remain separate from the commercial agency site.',
+  },
+  {
     role: 'Code evidence',
     label: 'GitHub profile',
     href: 'https://github.com/SulaymanB2024',
@@ -330,6 +337,27 @@ export const sourceMap = [
     href: '/resume',
     proves:
       'Resume page connecting GitHub, LinkedIn, UT Austin/McCombs, Void Agency, Atlas, and finance research.',
+  },
+  {
+    role: 'Authority source',
+    label: 'Research asset hub',
+    href: '/research',
+    proves:
+      'Human-readable index of citation-ready technical SEO, AI-search, Atlas, crawlability, identity, and finance/data research assets.',
+  },
+  {
+    role: 'Authority source',
+    label: 'Authority asset index',
+    href: '/research/authority-assets.json',
+    proves:
+      'Machine-readable index of citation-worthy public pages, target audiences, pitch angles, supporting assets, and explicit claim boundaries for link-building work.',
+  },
+  {
+    role: 'Authority source',
+    label: 'AI crawler policy source map',
+    href: '/research/ai-search-crawler-policy-sources.csv',
+    proves:
+      'Source map for the AI-search crawler policy article, including official crawler, robots, canonicalization, spam-policy, AI optimization, IndexNow, and DR references.',
   },
 ];
 
