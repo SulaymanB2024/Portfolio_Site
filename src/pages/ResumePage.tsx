@@ -1,7 +1,6 @@
-import { useEffect, type Key, type ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
-import { sourceMap } from '../content/aiInformation';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 import { InternalHeader } from '../components/InternalHeader';
@@ -52,7 +51,7 @@ const skillGroups = [
 ];
 
 const proofLinks = [
-  { label: 'Atlas technical SEO console', href: '/atlas', meta: 'Product case study' },
+  { label: 'Atlas technical SEO console', href: '/atlas', meta: 'Project overview' },
   { label: 'Markets research index', href: '/markets', meta: 'Research notes' },
   { label: 'Void Agency method', href: '/method', meta: 'Technical SEO process' },
   { label: 'GitHub', href: 'https://github.com/SulaymanB2024', meta: 'Public code profile' },
@@ -101,7 +100,7 @@ export default function ResumePage() {
       <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 py-14 md:px-8 xl:px-10 xl:py-20">
         <section className="grid min-h-[72vh] items-end gap-12 pb-14 lg:grid-cols-[0.64fr_0.36fr]">
           <div>
-            <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-ink/48">Resume</p>
+            <p className="mb-8 text-[10px] uppercase tracking-[0.36em] text-ink/48">Selected experience</p>
             <h1 className="max-w-full font-serif text-[clamp(3.2rem,16vw,12rem)] italic leading-[0.82] tracking-normal md:leading-[0.78] md:tracking-normal">
               <span className="block sm:inline">Sulayman</span>{' '}
               <span className="block sm:inline">Bowles</span>{' '}
@@ -116,6 +115,9 @@ export default function ResumePage() {
             <p className="max-w-xl [overflow-wrap:anywhere] text-base leading-relaxed text-ink/62">
               UT Austin McCombs student and Void Agency founder building Atlas, technical SEO audit workflows, research notes, and inspectable web interfaces.
             </p>
+            <p className="mt-4 max-w-xl [overflow-wrap:anywhere] text-sm leading-relaxed text-ink/48">
+              This page highlights selected experience. The linked PDF contains the full one-page resume.
+            </p>
             <div className="mt-8 grid min-w-0 gap-3 break-words text-[10px] uppercase tracking-[0.14em] [overflow-wrap:anywhere] sm:tracking-[0.22em]">
               <a href="mailto:sulayman.bowles@gmail.com" className="min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
                 sulayman.bowles@gmail.com
@@ -127,7 +129,7 @@ export default function ResumePage() {
                 LinkedIn
               </a>
               <a href={RESUME_PDF_PATH} className="min-w-0 border border-ink/18 px-4 py-3 transition-colors hover:bg-ink hover:text-canvas">
-                Download PDF Resume
+                Download Full PDF Resume
               </a>
               <button 
                 onClick={() => window.print()}
@@ -155,7 +157,7 @@ export default function ResumePage() {
           </div>
         </Section>
 
-        <Section label="02" title="Experience">
+        <Section label="02" title="Selected experience">
           <div className="grid gap-4">
             {experience.map((item) => (
               <article key={`${item.role}-${item.org}`} className="border border-ink/14 p-5">
@@ -214,30 +216,10 @@ export default function ResumePage() {
               <h3 className="mb-4 text-[10px] uppercase tracking-[0.24em] text-ink/50">Ventures & System Audits</h3>
               <p className="text-sm font-semibold text-ink">Selected Milestones</p>
               <ul className="mt-3 space-y-2 text-xs leading-relaxed text-ink/68">
-                <li>• Void Agency: Built crawl audit models and website systems for commercial engagements ($50k+ revenue May 2026)</li>
-                <li>• Scraper Atlas: Custom Python & SQLite crawler parsing 50k+ URLs for diagnostic intelligence</li>
+                <li>• Void Agency: Built crawl audit models and website systems for commercial engagements ($50K+ in collected client revenue as of May 2026)</li>
+                <li>• Scraper Atlas: Python and SQLite crawler for crawl-state diagnostics; public sample assets are illustrative</li>
               </ul>
             </article>
-          </div>
-        </Section>
-
-        <Section label="06" title="Source reconciliation">
-          <div className="grid gap-3">
-            {sourceMap
-              .filter((source) => ['Primary source', 'Code evidence', 'Professional profile', 'Agency proof', 'Academic affiliation', 'Academic context', 'Project proof', 'Finance/data proof'].includes(source.role))
-              .map((source) => (
-                <a
-                  key={`${source.role}-${source.href}`}
-                  href={source.href}
-                  target={source.href.startsWith('http') ? '_blank' : undefined}
-                  rel={source.href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="grid gap-3 border border-ink/14 px-5 py-4 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[0.28fr_0.28fr_0.44fr]"
-                >
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-inherit opacity-60">{source.role}</span>
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-inherit">{source.label}</span>
-                  <span className="text-sm leading-relaxed text-inherit opacity-65">{source.proves}</span>
-                </a>
-              ))}
           </div>
         </Section>
 

@@ -1,11 +1,12 @@
 export type ResearchAsset = {
-  priority: 1 | 2 | 3;
   name: string;
   href: string;
   type: string;
-  preferredAnchor: string;
-  audiences: string[];
-  pitchAngle: string;
+  description: string;
+  topics: string[];
+  published?: string;
+  featured?: boolean;
+  claimBoundary: string;
   supportingAssets: Array<{
     label: string;
     href: string;
@@ -13,169 +14,153 @@ export type ResearchAsset = {
 };
 
 export const researchClaimBoundaries = [
-  'These assets do not claim rankings, indexing, traffic movement, revenue impact, AI citations, backlinks, or Ahrefs Domain Rating movement.',
+  'Each entry distinguishes observed evidence, sourced interpretation, and open questions. A method or model is not an independently verified outcome.',
   'Private client names and private outcomes are intentionally excluded.',
-  'Crawler access, static fallbacks, source maps, and machine-readable files are discovery aids, not authority or visibility guarantees.',
-  'Links should be earned editorially; paid, exchanged, automated, or low-quality placements should not be counted as wins.',
+  'Crawler access, static fallbacks, source tables, and machine-readable files help discovery and review; they do not guarantee rankings, indexing, traffic, or AI citations.',
+  'Demo, sanitized, and pilot datasets are labeled as such. Missing, blocked, or failed coverage is a measurement gap rather than evidence of site quality.',
+  'Markets materials are educational research, not investment advice, a price target, or a live recommendation.',
 ];
 
 export const publicResearchAssets: ResearchAsset[] = [
   {
-    priority: 1,
-    name: 'Research Asset Index',
-    href: '/research',
-    type: 'research_hub',
-    preferredAnchor: 'technical SEO research assets',
-    audiences: ['technical SEO', 'AI search', 'web developers', 'student founder profiles'],
-    pitchAngle:
-      'A browsable index of source-backed technical SEO, AI-search, Atlas, local crawlability, identity, and finance/data proof assets.',
+    name: 'Who Owns the Toll Roads in Texas?',
+    href: '/markets/who-owns-texas-toll-roads',
+    type: 'long_form_research',
+    description:
+      'A source-led ownership map separating state title, public authorities, private concession rights, sponsor equity, project debt, billing, and residual control across Texas toll roads.',
+    topics: ['Texas infrastructure', 'project finance', 'public records'],
+    published: '2026-07-11',
+    featured: true,
+    claimBoundary:
+      'Concession-company percentages are not ownership of state land. Dated cap tables, analyst calculations, and unresolved disclosures are identified in the article.',
+    supportingAssets: [{ label: 'Markets research index', href: '/markets' }],
+  },
+  {
+    name: 'Beyond the Leaderboard: ViralBench + Codex',
+    href: '/viralbench-codex-agent-harness',
+    type: 'engineering_research_note',
+    description:
+      'A code-audit-backed design note for adding immutable traces, replay, independent evaluation, and bounded Codex engineering loops around a live marketing agent.',
+    topics: ['AI agent evaluation', 'harness engineering', 'controlled experimentation'],
+    published: '2026-07-09',
+    featured: true,
+    claimBoundary:
+      'The article describes an audited baseline and a proposed improvement architecture. It does not claim that the proposed harness, experiments, or performance improvements are already deployed.',
     supportingAssets: [
-      { label: 'Authority asset JSON', href: '/research/authority-assets.json' },
-      { label: 'AI information source graph', href: '/ai-information' },
+      { label: 'ViralBench repository', href: 'https://github.com/JibranK12345/Viral-Bench' },
     ],
   },
   {
-    priority: 1,
     name: 'AI Search Crawler Policy',
     href: '/markets/ai-search-crawler-policy',
     type: 'research_note',
-    preferredAnchor: 'AI search crawler policy',
-    audiences: ['technical SEO', 'AI search', 'web developers', 'search policy writers'],
-    pitchAngle:
-      'Source-backed map of search, training, and user-requested retrieval crawlers with conservative visibility boundaries.',
+    description:
+      'A source-backed map of search, training, and user-requested retrieval crawlers, with practical guidance for public websites.',
+    topics: ['crawler policy', 'AI search', 'technical SEO'],
+    published: '2026-06-19',
+    featured: true,
+    claimBoundary:
+      'Crawler access is a discovery condition. It does not guarantee ranking, indexing, model inclusion, AI citation, or answer-system trust.',
     supportingAssets: [{ label: 'Crawler policy source map', href: '/research/ai-search-crawler-policy-sources.csv' }],
   },
   {
-    priority: 1,
-    name: 'Atlas Sample Crawl Run',
-    href: '/atlas/sample-crawl',
-    type: 'evidence_artifact',
-    preferredAnchor: 'Atlas sample crawl run',
-    audiences: ['technical SEO', 'crawlability', 'open-source SEO tooling', 'audit workflow writers'],
-    pitchAngle:
-      'Sanitized crawl evidence showing URL status, indexability, crawl depth, link counts, canonical state, issue labels, and CSV evidence.',
-    supportingAssets: [{ label: 'Sanitized crawl CSV', href: '/research/atlas-sanitized-crawl-sample.csv' }],
-  },
-  {
-    priority: 1,
-    name: 'Atlas SEO Audit Console',
-    href: '/atlas',
-    type: 'project_page',
-    preferredAnchor: 'Atlas SEO Audit Console',
-    audiences: ['technical SEO', 'software builders', 'student founders', 'web audit teams'],
-    pitchAngle:
-      'Crawl evidence system for indexation, internal links, canonicals, structured data, rendered HTML, and audit exports.',
-    supportingAssets: [{ label: 'Audit CLI repository', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-' }],
-  },
-  {
-    priority: 2,
     name: 'Technical SEO as Public Data Infrastructure',
     href: '/markets/technical-seo-public-data-infrastructure',
     type: 'research_note',
-    preferredAnchor: 'technical SEO as public data infrastructure',
-    audiences: ['technical SEO', 'data infrastructure', 'AI discovery', 'structured data'],
-    pitchAngle:
-      'Editorial bridge between crawlability, structured data, provenance, source consistency, and machine-readable public records.',
+    description:
+      'An editorial bridge between crawlability, structured data, provenance, source consistency, and machine-readable public records.',
+    topics: ['technical SEO', 'data infrastructure', 'provenance'],
+    published: '2026-06-19',
+    featured: true,
+    claimBoundary:
+      'The public-data analogy is a working framework. A portfolio is not a regulated disclosure system, and better infrastructure does not guarantee distribution.',
     supportingAssets: [],
   },
   {
-    priority: 2,
     name: 'Canonical Identity for Personal SEO',
     href: '/markets/canonical-identity-personal-seo',
     type: 'research_note',
-    preferredAnchor: 'canonical identity for personal SEO',
-    audiences: ['personal SEO', 'founder profiles', 'structured data', 'profile cleanup'],
-    pitchAngle:
-      'Reconciliation checklist for profile pages, stale PDFs, sameAs links, source pages, and external bio consistency.',
+    description:
+      'A reconciliation checklist for profile pages, stale PDFs, sameAs links, source pages, and external bio consistency.',
+    topics: ['canonical identity', 'structured data', 'profile hygiene'],
+    published: '2026-06-19',
+    claimBoundary:
+      'External profiles can drift or block crawlers. The checklist improves record consistency without promising search visibility or entity recognition.',
     supportingAssets: [],
   },
   {
-    priority: 2,
-    name: 'Technical SEO Audit Case Study',
-    href: '/case-studies/technical-seo-audit',
-    type: 'case_study',
-    preferredAnchor: 'technical SEO audit case study',
-    audiences: ['technical SEO', 'client reporting', 'crawl evidence', 'web teams'],
-    pitchAngle:
-      'Sanitized explanation of how crawl evidence becomes findings, priorities, and review artifacts without private client claims.',
+    name: 'Atlas Sample Crawl Run',
+    href: '/atlas/sample-crawl',
+    type: 'evidence_artifact',
+    description:
+      'A sanitized crawl example showing URL status, indexability, crawl depth, link counts, canonical state, issue labels, and reviewable CSV rows.',
+    topics: ['crawl evidence', 'indexability', 'audit workflow'],
+    claimBoundary:
+      'The public rows are a small fictional demonstration. They show the output contract, not real-site coverage, production scale, or client outcomes.',
     supportingAssets: [{ label: 'Sanitized crawl CSV', href: '/research/atlas-sanitized-crawl-sample.csv' }],
   },
   {
-    priority: 3,
-    name: 'Austin Technical SEO',
-    href: '/austin-technical-seo',
-    type: 'local_service_page',
-    preferredAnchor: 'Austin technical SEO',
-    audiences: ['Austin startups', 'local business', 'student entrepreneurship', 'B2B web teams'],
-    pitchAngle:
-      'Local technical SEO and AI-search visibility page for crawlability, indexation, source clarity, and implementation evidence.',
-    supportingAssets: [
-      { label: 'Austin benchmark CSV', href: '/research/austin-crawlability-benchmark-pilot.csv' },
-      { label: 'Austin benchmark summary', href: '/research/austin-crawlability-benchmark-summary.json' },
-    ],
+    name: 'Atlas SEO Audit Console',
+    href: '/atlas',
+    type: 'project_page',
+    description:
+      'A crawl evidence system for indexation, internal links, canonicals, structured data, rendered HTML, and audit exports.',
+    topics: ['technical SEO', 'crawler systems', 'evidence review'],
+    claimBoundary:
+      'The project page documents system behavior and implementation. It should not be read as third-party validation, complete provider coverage, or proof of client impact.',
+    supportingAssets: [{ label: 'Audit CLI repository', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-' }],
   },
   {
-    priority: 3,
+    name: 'Technical SEO Audit Method Walkthrough',
+    href: '/case-studies/technical-seo-audit',
+    type: 'method_walkthrough',
+    description:
+      'An illustrative explanation of how crawl evidence can become findings, priorities, and review artifacts without presenting a completed client result.',
+    topics: ['audit method', 'crawl evidence', 'client reporting'],
+    claimBoundary:
+      'This is an illustrative method walkthrough. Its examples do not establish rankings, traffic movement, revenue impact, or a named client result.',
+    supportingAssets: [{ label: 'Sanitized crawl CSV', href: '/research/atlas-sanitized-crawl-sample.csv' }],
+  },
+  {
     name: 'Austin Crawlability Benchmark Pilot',
     href: '/research/austin-crawlability-benchmark-pilot.csv',
-    type: 'public_data_asset',
-    preferredAnchor: 'Austin crawlability benchmark pilot',
-    audiences: ['Austin startups', 'local business media', 'technical SEO', 'public web infrastructure'],
-    pitchAngle:
-      'Bounded public crawlability signal sample for Austin-area technology and business websites with explicit measurement-gap boundaries.',
+    type: 'public_dataset',
+    description:
+      'A bounded sample of homepage, robots.txt, and sitemap signals for Austin-area technology and business websites.',
+    topics: ['Austin', 'crawlability', 'public web infrastructure'],
+    claimBoundary:
+      'Challenge pages, failed fetches, and blocked requests are access limitations. The pilot does not score overall site health or represent all Austin businesses.',
     supportingAssets: [
-      { label: 'Austin benchmark summary', href: '/research/austin-crawlability-benchmark-summary.json' },
+      { label: 'Benchmark summary', href: '/research/austin-crawlability-benchmark-summary.json' },
       { label: 'Austin technical SEO page', href: '/austin-technical-seo' },
     ],
   },
   {
-    priority: 3,
-    name: 'AI Information Source Graph',
-    href: '/ai-information',
-    type: 'source_graph',
-    preferredAnchor: 'Sulayman Bowles source graph',
-    audiences: ['profile pages', 'AI retrieval', 'identity reconciliation', 'external bios'],
-    pitchAngle:
-      'Canonical public source page for current identity, source roles, project evidence, and what not to infer.',
-    supportingAssets: [{ label: 'LLMs text file', href: '/llms.txt' }],
-  },
-  {
-    priority: 3,
     name: 'Markets Research',
     href: '/markets',
     type: 'research_collection',
-    preferredAnchor: 'Markets Research',
-    audiences: ['finance/data research', 'student profiles', 'markets writing', 'research portfolios'],
-    pitchAngle:
-      'Public finance and data reasoning archive with market research notes, thesis framing, source tables, and explicit limits.',
+    description:
+      'A public finance and data-reasoning archive with research notes, assumption tables, source links, and explicit uncertainty boundaries.',
+    topics: ['markets', 'finance', 'data reasoning'],
+    claimBoundary:
+      'Markets materials are educational research samples. They are not investment advice, a price target, an allocation recommendation, or an offer to transact.',
     supportingAssets: [
-      { label: 'Appian research memo PDF', href: '/research/appian-enterprise-software-durability-memo.pdf' },
+      { label: 'Appian educational memo', href: '/research/appian-enterprise-software-durability-memo.pdf' },
       { label: 'Appian assumptions table', href: '/research/appian-assumptions-table.csv' },
     ],
-  },
-  {
-    priority: 3,
-    name: 'HTML Resume',
-    href: '/resume',
-    type: 'profile_page',
-    preferredAnchor: 'Sulayman Bowles resume',
-    audiences: ['academic profiles', 'professional profiles', 'speaker bios', 'student founder profiles'],
-    pitchAngle:
-      'Current HTML-first resume connecting UT Austin McCombs, Atlas, Void Agency, technical SEO, finance/data work, public code, and professional profiles.',
-    supportingAssets: [{ label: 'Current PDF resume', href: '/Sulayman_Bowles_Resume.pdf' }],
   },
 ];
 
 export const publicDataDownloads = [
   {
-    label: 'Authority asset JSON',
+    label: 'Research index JSON',
     href: '/research/authority-assets.json',
-    description: 'Machine-readable index of citation targets, anchor suggestions, audiences, and claim boundaries.',
+    description: 'Machine-readable bibliography of public research pages, topics, supporting files, and claim boundaries.',
   },
   {
     label: 'AI-search crawler policy source map',
     href: '/research/ai-search-crawler-policy-sources.csv',
-    description: 'Source table for crawler policy, robots, IndexNow, DR, and visibility-boundary claims.',
+    description: 'Source table for crawler roles, robots directives, IndexNow, and visibility-boundary claims.',
   },
   {
     label: 'Austin crawlability benchmark pilot',
@@ -185,7 +170,7 @@ export const publicDataDownloads = [
   {
     label: 'Austin crawlability benchmark summary',
     href: '/research/austin-crawlability-benchmark-summary.json',
-    description: 'Aggregate counts, methodology, and claim boundaries for the Austin benchmark pilot.',
+    description: 'Aggregate counts, methodology, and measurement limits for the Austin benchmark pilot.',
   },
   {
     label: 'Atlas sanitized crawl sample',
@@ -195,11 +180,11 @@ export const publicDataDownloads = [
   {
     label: 'Appian educational research memo',
     href: '/research/appian-enterprise-software-durability-memo.pdf',
-    description: 'Finance/data research sample with educational-use boundaries.',
+    description: 'Finance research sample with educational-use and investment-advice boundaries.',
   },
   {
     label: 'Appian assumptions table',
     href: '/research/appian-assumptions-table.csv',
-    description: 'CSV assumptions table that supports the finance/data memo.',
+    description: 'CSV assumptions table supporting the Appian educational research memo.',
   },
 ];

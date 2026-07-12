@@ -6,6 +6,15 @@ import {
 } from '../content/aiInformation';
 import { SIMPLE_BOOK_DESCRIPTION, SIMPLE_BOOK_H1, SIMPLE_BOOK_STATIC_SUMMARY, SIMPLE_BOOK_TITLE } from '../content/simpleBook';
 import {
+  VIRALBENCH_ARTICLE_DATE,
+  VIRALBENCH_ARTICLE_DESCRIPTION,
+  VIRALBENCH_ARTICLE_EXCERPT,
+  VIRALBENCH_ARTICLE_IMAGE,
+  VIRALBENCH_ARTICLE_PATH,
+  VIRALBENCH_ARTICLE_SEO_TITLE,
+  VIRALBENCH_ARTICLE_TITLE,
+} from '../content/viralBenchArticle';
+import {
   aboutJsonLd,
   austinTechnicalSeoJsonLd,
   aiInformationJsonLd,
@@ -21,6 +30,7 @@ import {
   simpleBookJsonLd,
   sitemapJsonLd,
   technicalSeoCaseStudyJsonLd,
+  viralBenchArticleJsonLd,
   voidAgencyJsonLd,
   workJsonLd,
   type JsonLd,
@@ -64,7 +74,7 @@ export interface SeoRoute {
 export type RouteVisualMode = 'canvas-artifact' | 'dark-proof' | 'memo-reader' | 'book' | 'prototype';
 export type RouteTone = 'light' | 'dark';
 
-export const SITE_LASTMOD = '2026-07-07';
+export const SITE_LASTMOD = '2026-07-12';
 
 const CORE_ROUTES: SeoRoute[] = [
   {
@@ -88,7 +98,7 @@ const CORE_ROUTES: SeoRoute[] = [
     aliases: [],
     title: 'Selected Work | Atlas, SEO & Finance Proof',
     description:
-      'Selected public work from Sulayman Bowles across Atlas crawl evidence, technical SEO method, sanitized case-study logic, and finance/data artifacts.',
+      'Selected public work from Sulayman Bowles across Atlas crawl evidence, technical SEO method, an illustrative audit walkthrough, and finance/data artifacts.',
     h1: 'Selected Work',
     section: 'work',
     pageType: 'website',
@@ -96,7 +106,7 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'Selected public work from Sulayman Bowles across Atlas crawl evidence, technical SEO method, sanitized case-study logic, and finance/data artifacts.',
+      'Selected public work from Sulayman Bowles across Atlas crawl evidence, technical SEO method, an illustrative audit walkthrough, and finance/data artifacts.',
     jsonLd: workJsonLd(),
   },
   {
@@ -183,7 +193,7 @@ const CORE_ROUTES: SeoRoute[] = [
     aliases: ['/resume.html', '/cv', '/cv.html', '/Sulayman_Bowles_Resume_2025.pdf'],
     title: 'Sulayman Bowles Resume | SEO, Product & Finance',
     description:
-      'HTML-first resume for Sulayman Bowles covering UT Austin McCombs, Void Agency, Atlas, technical SEO, AI product research, finance/data work, and public proof links.',
+      'Selected-experience HTML resume for Sulayman Bowles, with UT Austin McCombs, Void Agency, Atlas, technical SEO, AI product, finance/data work, and a full PDF link.',
     h1: 'Sulayman Bowles Resume',
     section: 'resume',
     pageType: 'profile',
@@ -191,7 +201,7 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'Stable resume and profile page for Sulayman Bowles with links to Atlas, technical SEO work, finance/data research, public code, LinkedIn, and contact paths.',
+      'Selected-experience profile for Sulayman Bowles with a linked full one-page PDF resume and public proof paths.',
     jsonLd: resumeJsonLd(),
   },
   {
@@ -308,18 +318,33 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/case-studies/technical-seo-audit',
     aliases: ['/technical-seo-case-study'],
-    title: 'Technical SEO Audit Case Study | Crawl Evidence',
+    title: 'Technical SEO Audit Method Walkthrough | Crawl Evidence',
     description:
-      'A sanitized technical SEO audit case study showing how crawl evidence becomes findings, implementation priorities, and review artifacts without private client claims.',
-    h1: 'Technical SEO Audit Case Study',
+      'An illustrative technical SEO method walkthrough showing how crawl evidence can become findings and implementation work without presenting a completed client result.',
+    h1: 'Technical SEO Audit Method Walkthrough',
     section: 'case-study',
     pageType: 'article',
     priority: 0.7,
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'A sanitized technical SEO audit case study showing how crawl evidence becomes findings, implementation priorities, and review artifacts without private client claims.',
+      'An illustrative technical SEO method walkthrough showing how crawl evidence can become findings and implementation work without presenting a completed client result.',
     jsonLd: technicalSeoCaseStudyJsonLd(),
+  },
+  {
+    path: VIRALBENCH_ARTICLE_PATH,
+    aliases: [],
+    title: VIRALBENCH_ARTICLE_SEO_TITLE,
+    description: VIRALBENCH_ARTICLE_DESCRIPTION,
+    h1: VIRALBENCH_ARTICLE_TITLE,
+    section: 'research-article',
+    pageType: 'article',
+    priority: 0.8,
+    includeInSitemap: true,
+    lastmod: VIRALBENCH_ARTICLE_DATE,
+    staticSummary: VIRALBENCH_ARTICLE_EXCERPT,
+    image: VIRALBENCH_ARTICLE_IMAGE,
+    jsonLd: viralBenchArticleJsonLd(),
   },
   {
     path: '/markets',
@@ -348,10 +373,12 @@ const ARTICLE_ROUTES: SeoRoute[] = MARKET_THESES.map((thesis) => {
   const datePublished = thesis.date.replaceAll('.', '-');
   const dateModified = (thesis.dateModified ?? thesis.date).replaceAll('.', '-');
 
+  const fullTitle = `${thesis.seoTitle} | Sulayman Bowles`;
+
   return {
     path,
     aliases: [],
-    title: `${thesis.seoTitle} | Sulayman Bowles`,
+    title: fullTitle.length <= 62 ? fullTitle : thesis.seoTitle,
     description: thesis.seoDescription,
     h1: thesis.title,
     section: 'research-article',

@@ -21,12 +21,14 @@ export function ScrollProgress({ tone = 'light' }: ScrollProgressProps) {
         className={`w-full ${barClass} origin-top`}
         style={{ scaleY, height: '100%' }}
       />
-      <div className={`absolute -left-2 top-0 mt-3 font-sans text-[8px] transform -translate-x-full ${textClass} uppercase tracking-[0.3em]`}>
-        Top
-      </div>
-      <div className={`absolute -left-2 bottom-0 mb-3 font-sans text-[8px] transform -translate-x-full ${textClass} uppercase tracking-[0.3em]`}>
-        End
-      </div>
+      <div
+        data-visual-label="Top"
+        className={`visual-label absolute -left-2 top-0 mt-3 font-sans text-[8px] transform -translate-x-full ${textClass} uppercase tracking-[0.3em]`}
+      />
+      <div
+        data-visual-label="End"
+        className={`visual-label absolute -left-2 bottom-0 mb-3 font-sans text-[8px] transform -translate-x-full ${textClass} uppercase tracking-[0.3em]`}
+      />
     </div>
   );
 }

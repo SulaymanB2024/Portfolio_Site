@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const RUN_DATE = '2026-06-25';
-const USER_AGENT = 'SulaymanBowlesAustinBenchmark/1.0 (+https://sulayman-bowles.dev/austin-technical-seo)';
+const RUN_DATE = process.env.AUSTIN_TECHNICAL_ACCESS_DATE ?? new Date().toISOString().slice(0, 10);
+const USER_AGENT = 'SulaymanBowlesAustinTechnicalAccessPilot/2.0 (+https://sulayman-bowles.dev/austin-technical-seo)';
 const TIMEOUT_MS = 12000;
 
 const paths = {
@@ -79,7 +79,10 @@ function writeCsv(relativePath, rows) {
     'segment',
     'final_url',
     'homepage_status',
-    'homepage_fetch_result',
+    'homepage_request_result',
+    'homepage_response_2xx_or_3xx',
+    'homepage_content_evidence_state',
+    'included_in_homepage_content_aggregate',
     'https_final',
     'title_present',
     'meta_description_present',
@@ -87,12 +90,15 @@ function writeCsv(relativePath, rows) {
     'h1_present',
     'jsonld_present',
     'robots_status',
-    'robots_fetch_result',
+    'robots_request_result',
+    'robots_response_2xx_or_3xx',
     'robots_sitemap_count',
     'sitemap_checked_url',
     'sitemap_status',
-    'sitemap_fetch_result',
-    'observed_signal_count',
+    'sitemap_request_result',
+    'sitemap_response_2xx_or_3xx',
+    'successful_check_count',
+    'successful_check_total',
     'measurement_note',
     'measured_at',
   ];
@@ -119,9 +125,14 @@ async function fetchText(url) {
 async function safeFetch(url) {
   try {
     const result = await fetchText(url);
-    return { ...result, fetchResult: 'ok' };
+    return { ...result, requestResult: 'completed' };
   } catch (error) {
-    return { status: '', url, text: '', fetchResult: error?.name === 'TimeoutError' ? 'timeout' : 'error' };
+    return {
+      status: '',
+      url,
+      text: '',
+      requestResult: error?.name === 'TimeoutError' ? 'timeout' : 'network_error',
+    };
   }
 }
 
@@ -155,24 +166,68 @@ function sitemapUrlsFromRobots(robotsText) {
   return Array.from(robotsText.matchAll(/^sitemap:\s*(.+)$/gim), (match) => match[1].trim()).filter(Boolean);
 }
 
-function measurementNote(homepage, robots, sitemap, html) {
-  const notes = [];
-  if (homepage.fetchResult !== 'ok') {
-    notes.push(`homepage_${homepage.fetchResult}`);
+function responseIs2xxOr3xx(result) {
+  return result.requestResult === 'completed'
+    && Number(result.status) >= 200
+    && Number(result.status) < 400;
+}
+
+function normalizedHostname(url) {
+  return new URL(url).hostname.replace(/^www\./i, '').toLowerCase();
+}
+
+function selectSitemapUrl(target, sitemapUrls, origin) {
+  if (target.sample_id === 'self') {
+    // The first declared sitemap uses a legacy host. Prefer the declaration on the current site.
+    const targetHostname = normalizedHostname(target.homepage_url);
+    const sameSiteSitemap = sitemapUrls.find((url) => {
+      try {
+        return normalizedHostname(url) === targetHostname;
+      } catch {
+        return false;
+      }
+    });
+
+    if (sameSiteSitemap) {
+      return sameSiteSitemap;
+    }
+  }
+
+  return sitemapUrls[0] ?? `${origin}/sitemap.xml`;
+}
+
+function homepageEvidenceState(homepage, html) {
+  if (homepage.requestResult !== 'completed') {
+    return `measurement_gap_${homepage.requestResult}`;
   }
   if (homepage.status === 403 || homepage.status === 429) {
-    notes.push('homepage_access_limited');
+    return 'measurement_gap_access_limited';
   }
   if (/captcha|access denied|cf-chl|cloudflare|security checkpoint/i.test(html)) {
-    notes.push('possible_bot_challenge_or_interstitial');
+    return 'measurement_gap_possible_access_challenge_or_interstitial';
   }
-  if (robots.fetchResult !== 'ok') {
-    notes.push(`robots_${robots.fetchResult}`);
+  if (!responseIs2xxOr3xx(homepage)) {
+    return `measurement_gap_http_${homepage.status || 'unknown'}`;
   }
-  if (sitemap.fetchResult !== 'ok') {
-    notes.push(`sitemap_${sitemap.fetchResult}`);
+  return 'confirmed_public_surface';
+}
+
+function addEndpointMeasurementNote(notes, label, result) {
+  if (result.requestResult !== 'completed') {
+    notes.push(`${label}_${result.requestResult}`);
+  } else if (!responseIs2xxOr3xx(result)) {
+    notes.push(`${label}_http_${result.status || 'unknown'}`);
   }
-  return notes.length ? notes.join(';') : 'public_fetch_completed';
+}
+
+function measurementNote(homepageState, robots, sitemap) {
+  const notes = [];
+  if (homepageState !== 'confirmed_public_surface') {
+    notes.push(homepageState);
+  }
+  addEndpointMeasurementNote(notes, 'robots', robots);
+  addEndpointMeasurementNote(notes, 'sitemap', sitemap);
+  return notes.length ? notes.join(';') : 'no_measurement_gap_observed';
 }
 
 async function measureTarget(target) {
@@ -181,10 +236,12 @@ async function measureTarget(target) {
   const origin = originFor(finalUrl);
   const robotsUrl = `${origin}/robots.txt`;
   const robots = await safeFetch(robotsUrl);
-  const sitemapUrls = robots.fetchResult === 'ok' ? sitemapUrlsFromRobots(robots.text) : [];
-  const sitemapUrl = sitemapUrls[0] ?? `${origin}/sitemap.xml`;
+  const sitemapUrls = responseIs2xxOr3xx(robots) ? sitemapUrlsFromRobots(robots.text) : [];
+  const sitemapUrl = selectSitemapUrl(target, sitemapUrls, origin);
   const sitemap = await safeFetch(sitemapUrl);
   const html = homepage.text ?? '';
+  const homepageState = homepageEvidenceState(homepage, html);
+  const includeHomepageContent = homepageState === 'confirmed_public_surface';
   const checks = {
     https_final: finalUrl.startsWith('https://'),
     title_present: hasTitle(html),
@@ -193,10 +250,11 @@ async function measureTarget(target) {
     h1_present: hasH1(html),
     jsonld_present: hasJsonLd(html),
   };
-  const observedSignalCount = Object.values(checks).filter(Boolean).length
-    + (robots.fetchResult === 'ok' && Number(robots.status) >= 200 && Number(robots.status) < 400 ? 1 : 0)
-    + (sitemap.fetchResult === 'ok' && Number(sitemap.status) >= 200 && Number(sitemap.status) < 400 ? 1 : 0)
-    + sitemapUrls.length;
+  const successfulCheckCount = includeHomepageContent
+    ? Object.values(checks).filter(Boolean).length
+      + (responseIs2xxOr3xx(robots) ? 1 : 0)
+      + (responseIs2xxOr3xx(sitemap) ? 1 : 0)
+    : '';
 
   return {
     sample_id: target.sample_id,
@@ -205,21 +263,27 @@ async function measureTarget(target) {
     segment: target.segment,
     final_url: finalUrl,
     homepage_status: homepage.status,
-    homepage_fetch_result: homepage.fetchResult,
+    homepage_request_result: homepage.requestResult,
+    homepage_response_2xx_or_3xx: responseIs2xxOr3xx(homepage),
+    homepage_content_evidence_state: homepageState,
+    included_in_homepage_content_aggregate: includeHomepageContent,
     https_final: checks.https_final,
-    title_present: checks.title_present,
-    meta_description_present: checks.meta_description_present,
-    canonical_present: checks.canonical_present,
-    h1_present: checks.h1_present,
-    jsonld_present: checks.jsonld_present,
+    title_present: includeHomepageContent ? checks.title_present : '',
+    meta_description_present: includeHomepageContent ? checks.meta_description_present : '',
+    canonical_present: includeHomepageContent ? checks.canonical_present : '',
+    h1_present: includeHomepageContent ? checks.h1_present : '',
+    jsonld_present: includeHomepageContent ? checks.jsonld_present : '',
     robots_status: robots.status,
-    robots_fetch_result: robots.fetchResult,
+    robots_request_result: robots.requestResult,
+    robots_response_2xx_or_3xx: responseIs2xxOr3xx(robots),
     robots_sitemap_count: sitemapUrls.length,
     sitemap_checked_url: sitemapUrl,
     sitemap_status: sitemap.status,
-    sitemap_fetch_result: sitemap.fetchResult,
-    observed_signal_count: observedSignalCount,
-    measurement_note: measurementNote(homepage, robots, sitemap, html),
+    sitemap_request_result: sitemap.requestResult,
+    sitemap_response_2xx_or_3xx: responseIs2xxOr3xx(sitemap),
+    successful_check_count: successfulCheckCount,
+    successful_check_total: includeHomepageContent ? 8 : '',
+    measurement_note: measurementNote(homepageState, robots, sitemap),
     measured_at: RUN_DATE,
   };
 }
@@ -230,41 +294,51 @@ function count(rows, predicate) {
 
 function buildSummary(rows) {
   const sampleSize = rows.length;
+  const homepageContentRows = rows.filter((row) => row.included_in_homepage_content_aggregate === true);
   const aggregate = {
     sample_size: sampleSize,
-    homepage_fetch_ok: count(rows, (row) => row.homepage_fetch_result === 'ok'),
-    homepage_2xx_or_3xx: count(rows, (row) => Number(row.homepage_status) >= 200 && Number(row.homepage_status) < 400),
+    homepage_requests_completed: count(rows, (row) => row.homepage_request_result === 'completed'),
+    homepage_responses_2xx_or_3xx: count(rows, (row) => row.homepage_response_2xx_or_3xx === true),
+    homepage_content_aggregate_eligible: homepageContentRows.length,
+    homepage_access_measurement_gaps: sampleSize - homepageContentRows.length,
     https_final: count(rows, (row) => row.https_final === true),
-    title_present: count(rows, (row) => row.title_present === true),
-    meta_description_present: count(rows, (row) => row.meta_description_present === true),
-    canonical_present: count(rows, (row) => row.canonical_present === true),
-    h1_present: count(rows, (row) => row.h1_present === true),
-    jsonld_present: count(rows, (row) => row.jsonld_present === true),
-    robots_request_completed: count(rows, (row) => row.robots_fetch_result === 'ok'),
-    robots_2xx_or_3xx: count(rows, (row) => Number(row.robots_status) >= 200 && Number(row.robots_status) < 400),
+    title_present_among_eligible: count(homepageContentRows, (row) => row.title_present === true),
+    meta_description_present_among_eligible: count(homepageContentRows, (row) => row.meta_description_present === true),
+    canonical_present_among_eligible: count(homepageContentRows, (row) => row.canonical_present === true),
+    h1_present_among_eligible: count(homepageContentRows, (row) => row.h1_present === true),
+    jsonld_present_among_eligible: count(homepageContentRows, (row) => row.jsonld_present === true),
+    robots_requests_completed: count(rows, (row) => row.robots_request_result === 'completed'),
+    robots_responses_2xx_or_3xx: count(rows, (row) => row.robots_response_2xx_or_3xx === true),
     robots_declared_sitemap: count(rows, (row) => Number(row.robots_sitemap_count) > 0),
-    sitemap_request_completed: count(rows, (row) => row.sitemap_fetch_result === 'ok'),
-    sitemap_2xx_or_3xx: count(rows, (row) => Number(row.sitemap_status) >= 200 && Number(row.sitemap_status) < 400),
-    measurement_gaps: count(rows, (row) => row.measurement_note !== 'public_fetch_completed'),
+    sitemap_requests_completed: count(rows, (row) => row.sitemap_request_result === 'completed'),
+    sitemap_responses_2xx_or_3xx: count(rows, (row) => row.sitemap_response_2xx_or_3xx === true),
+    rows_with_measurement_gaps: count(rows, (row) => row.measurement_note !== 'no_measurement_gap_observed'),
   };
 
   return {
     generated_at: RUN_DATE,
-    sample_type: 'Austin public-site crawlability pilot',
+    sample_type: 'Austin public-site technical access pilot',
     sample_size: sampleSize,
     public_csv: 'https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv',
     methodology: [
       'Bounded one-request public fetch of each homepage.',
       'One public robots.txt fetch per final origin.',
-      'One sitemap fetch using the first robots.txt sitemap URL when available, otherwise /sitemap.xml.',
-      'Signals are presence/availability checks, not quality scores or SEO diagnoses.',
+      'One sitemap fetch using a robots.txt sitemap URL when available, otherwise /sitemap.xml.',
+      'Request completion is recorded separately from whether the HTTP response was 2xx or 3xx.',
+      'Challenge or interstitial responses are measurement gaps and are excluded from homepage content-presence aggregates.',
+      'The successful check count covers eight fixed presence/availability checks for eligible rows; it is not a quality score or SEO diagnosis.',
     ],
     claim_boundaries: [
       'This pilot is not representative of all Austin companies.',
-      'Rows do not claim rankings, traffic movement, revenue impact, AI citations, or site health.',
+      'This is a technical-access snapshot, not evidence of local search performance or content health.',
+      'Rows do not claim rankings, traffic movement, revenue impact, or AI citations.',
       'Access-limited, timed-out, or challenged fetches are measurement gaps, not negative findings.',
-      'The benchmark should be used as a public-data conversation starter before any local media pitch.',
+      'The pilot should be used as a public-data conversation starter only after review.',
     ],
+    aggregate_denominators: {
+      request_response_and_endpoint_checks: sampleSize,
+      homepage_content_presence_checks: homepageContentRows.length,
+    },
     aggregate,
   };
 }
@@ -276,14 +350,19 @@ function percentage(value, total) {
 function buildReport(summary, rows) {
   const aggregateRows = Object.entries(summary.aggregate)
     .filter(([key]) => key !== 'sample_size')
-    .map(([key, value]) => `| ${key} | ${value} | ${percentage(value, summary.sample_size)} |`)
+    .map(([key, value]) => {
+      const denominator = key.endsWith('_among_eligible')
+        ? summary.aggregate_denominators.homepage_content_presence_checks
+        : summary.aggregate_denominators.request_response_and_endpoint_checks;
+      return `| ${key} | ${value} | ${denominator} | ${percentage(value, denominator)} |`;
+    })
     .join('\n');
 
-  return `# Austin Crawlability Benchmark Pilot
+  return `# Austin Technical Access Pilot
 
 Generated: ${RUN_DATE}
 
-This pilot measures a bounded public sample of Austin-area technology and business websites. It is intended to create a source-backed local conversation around crawlability, source clarity, and machine-readable public pages.
+This bounded public-request pilot records technical access and source availability for a sample of Austin-area technology and business websites. It is not a local-performance benchmark or a content-health audit.
 
 ## Public Assets
 
@@ -298,21 +377,21 @@ ${summary.claim_boundaries.map((item) => `- ${item}`).join('\n')}
 
 ${summary.methodology.map((item) => `- ${item}`).join('\n')}
 
-## Aggregate Signals
+## Aggregate Technical-Access Checks
 
-| Signal | Count | Share |
-| --- | ---: | ---: |
+| Check | Count | Denominator | Share |
+| --- | ---: | ---: | ---: |
 ${aggregateRows}
 
 ## Sample
 
-| Site | Segment | Homepage status | Signals observed | Measurement note |
-| --- | --- | ---: | ---: | --- |
-${rows.map((row) => `| ${row.display_name} | ${row.segment} | ${row.homepage_status || 'n/a'} | ${row.observed_signal_count} | ${row.measurement_note} |`).join('\n')}
+| Site | Segment | Homepage request | Homepage response | Content evidence state | Successful fixed checks | Measurement note |
+| --- | --- | --- | --- | --- | ---: | --- |
+${rows.map((row) => `| ${row.display_name} | ${row.segment} | ${row.homepage_request_result} | ${row.homepage_status || 'n/a'} | ${row.homepage_content_evidence_state} | ${row.successful_check_count === '' ? 'excluded' : `${row.successful_check_count}/${row.successful_check_total}`} | ${row.measurement_note} |`).join('\n')}
 
 ## Pitch Use
 
-Use this as support for Austin-local outreach only after review. The pitch should discuss aggregate public-web patterns and the need for technical SEO evidence. It should not call out individual companies as broken, unhealthy, or ranking poorly.
+Use this only after review and only to discuss aggregate technical-access patterns. It must not be presented as local-performance proof or used to call individual companies broken, unhealthy, or ranking poorly.
 `;
 }
 

@@ -66,18 +66,16 @@ export function WireframeGrid({ className = '', cols = 12, rows = 12, tone = 'da
           >
             {i % 3 === 0 && (
               <>
-                <motion.span 
+                <motion.span
                   style={{ x: animX, y: animY }}
-                  className={`text-[8px] font-sans ${textClass} -translate-x-1/2 rotate-90 origin-left mt-4 block`}
-                >
-                  C.{i.toString().padStart(2, '0')}
-                </motion.span>
-                <motion.span 
+                  data-visual-label={`C.${i.toString().padStart(2, '0')}`}
+                  className={`visual-label text-[8px] font-sans ${textClass} -translate-x-1/2 rotate-90 origin-left mt-4 block`}
+                />
+                <motion.span
                   style={{ x: animX, y: animY }}
-                  className={`text-[8px] font-sans ${textClass} -translate-x-1/2 rotate-90 origin-left mb-8 block`}
-                >
-                  C.{i.toString().padStart(2, '0')}
-                </motion.span>
+                  data-visual-label={`C.${i.toString().padStart(2, '0')}`}
+                  className={`visual-label text-[8px] font-sans ${textClass} -translate-x-1/2 rotate-90 origin-left mb-8 block`}
+                />
               </>
             )}
           </motion.div>
@@ -98,18 +96,16 @@ export function WireframeGrid({ className = '', cols = 12, rows = 12, tone = 'da
           >
            {i % 3 === 0 && (
               <>
-                <motion.span 
+                <motion.span
                   style={{ x: animX, y: animY }}
-                  className={`text-[8px] font-sans ${textClass} mt-[12px] block`}
-                >
-                  R.{i.toString().padStart(2, '0')}
-                </motion.span>
-                <motion.span 
+                  data-visual-label={`R.${i.toString().padStart(2, '0')}`}
+                  className={`visual-label text-[8px] font-sans ${textClass} mt-[12px] block`}
+                />
+                <motion.span
                   style={{ x: animX, y: animY }}
-                  className={`text-[8px] font-sans ${textClass} mt-[12px] block`}
-                >
-                  R.{i.toString().padStart(2, '0')}
-                </motion.span>
+                  data-visual-label={`R.${i.toString().padStart(2, '0')}`}
+                  className={`visual-label text-[8px] font-sans ${textClass} mt-[12px] block`}
+                />
               </>
             )}
           </motion.div>

@@ -389,15 +389,24 @@ function validatePack() {
   }
 
   const authorityAssets = JSON.parse(read(paths.assets));
-  assert(authorityAssets.generated_at === TODAY, 'authority asset index generated_at must match current pack date');
+  assert(authorityAssets.reviewed_at === '2026-07-12', 'authority asset index reviewed_at must match the current public review date');
   assert(authorityAssets.canonical_host === SITE_URL, 'authority asset index canonical_host mismatch');
   assert(Array.isArray(authorityAssets.claim_boundaries) && authorityAssets.claim_boundaries.length >= 4, 'authority asset index needs claim boundaries');
   assert(Array.isArray(authorityAssets.assets) && authorityAssets.assets.length >= 8, 'authority asset index needs at least 8 assets');
 
   const assetUrls = new Set(authorityAssets.assets.map((asset) => asset.url));
-  assert(assetUrls.has(`${SITE_URL}/research`), 'authority asset index missing research hub');
   for (const asset of authorityAssets.assets) {
-    assert(asset.name && asset.url && asset.type && asset.preferred_anchor && asset.pitch_angle, `incomplete authority asset: ${asset.name ?? asset.url}`);
+    assert(
+      asset.name &&
+        asset.url &&
+        asset.type &&
+        asset.description &&
+        Array.isArray(asset.topics) &&
+        asset.topics.length > 0 &&
+        asset.claim_boundary &&
+        Array.isArray(asset.supporting_assets),
+      `incomplete public research asset: ${asset.name ?? asset.url}`,
+    );
     assert(asset.url.startsWith(SITE_URL), `authority asset must be on canonical host: ${asset.url}`);
   }
 

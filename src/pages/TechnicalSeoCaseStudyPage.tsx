@@ -3,14 +3,14 @@ import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { WireframeGrid } from '../components/WireframeGrid';
-import { auditCaseStudySteps, contextualProofLinks } from '../content/seoExpansion';
+import { auditCaseStudySteps as auditWalkthroughSteps, contextualProofLinks } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
-const CASE_STUDY_SEO = getSeoRoute('/case-studies/technical-seo-audit')!;
+const METHOD_WALKTHROUGH_SEO = getSeoRoute('/case-studies/technical-seo-audit')!;
 
-export default function TechnicalSeoCaseStudyPage() {
-  useSEO(CASE_STUDY_SEO);
+export default function TechnicalSeoMethodWalkthroughPage() {
+  useSEO(METHOD_WALKTHROUGH_SEO);
 
   return (
     <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-[#080807] font-sans text-[#f1efe8] selection:bg-[#f1efe8] selection:text-[#080807]">
@@ -21,17 +21,17 @@ export default function TechnicalSeoCaseStudyPage() {
 
       <article className="relative z-10 mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <header className="grid min-h-[64vh] content-end border-b border-[#f1efe8]/12 pb-14">
-          <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/45">Case study / sanitized</p>
+          <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-[#f1efe8]/45">Method walkthrough / illustrative demo</p>
           <h1 className="max-w-6xl font-serif text-[clamp(3.7rem,9vw,10rem)] italic leading-[0.84] tracking-normal">
-            Technical SEO audit case study.
+            Technical SEO audit method walkthrough.
           </h1>
           <p className="mt-10 max-w-3xl text-base leading-relaxed text-[#f1efe8]/62">
-            A public, source-backed case-study frame for turning crawl evidence into implementation work without exposing private client records or claiming unverified search outcomes.
+            An illustrative walkthrough of how crawl fields can become implementation work without exposing private client records or claiming a completed client result, search outcome, or performance lift.
           </p>
         </header>
 
         <section className="grid grid-cols-1 gap-px overflow-hidden border-b border-[#f1efe8]/12 py-16 md:grid-cols-4">
-          {auditCaseStudySteps.map((step, index) => (
+          {auditWalkthroughSteps.map((step, index) => (
             <section key={step.title} className="min-h-[250px] bg-[#f1efe8]/[0.012] p-6">
               <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42">
                 {String(index + 1).padStart(2, '0')}

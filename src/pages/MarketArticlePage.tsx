@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
 import { PUBLIC_MARKET_THESES, getMarketThesisBySlug } from '../content/marketTheses';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { getSeoRoute } from '../seo/routes';
@@ -12,6 +12,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
   const thesis = getMarketThesisBySlug(slug) ?? PUBLIC_MARKET_THESES[0];
   const route = getSeoRoute(`/markets/${thesis.slug}`) ?? getSeoRoute('/markets')!;
   const isArchived = thesis.indexable === false;
+  const isFinanceResearch = thesis.researchType === 'finance';
   const metrics = thesis.metrics ?? [
     { label: 'Conviction', value: thesis.conviction },
     { label: 'Horizon', value: thesis.horizon },
@@ -76,7 +77,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
           {isArchived ? (
             <div className="mt-8 border border-[#c2695e]/35 bg-[#c2695e]/8 p-5 text-sm leading-relaxed text-[#f1efe8]/68">
               <p className="mb-2 text-[10px] uppercase tracking-[0.28em] text-[#c2695e]/90">Archived</p>
-              <p>This memo is preserved for continuity but is no longer a current recommendation, not investment advice, and excluded from the public sitemap.</p>
+              <p>{thesis.claimBoundary}</p>
             </div>
           ) : null}
 
@@ -107,7 +108,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
             })}
           </div>
 
-          {/* Monetarist / Quantitative Formula Box */}
+          {/* Research framework */}
           <div className="my-12 border border-[#f1efe8]/12 bg-[#0c0c0b] p-6 relative overflow-hidden group">
             {/* Terminal Grid Background */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.02] bg-[linear-gradient(to_right,#f1efe8_1px,transparent_1px),linear-gradient(to_bottom,#f1efe8_1px,transparent_1px)] bg-[size:10px_10px]" />
@@ -123,14 +124,16 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
               <span className="px-4 text-[#f1efe8] filter drop-shadow-[0_0_8px_rgba(241,239,232,0.15)] font-semibold tracking-normal">{thesis.formula}</span>
             </div>
             <div className="mt-4 flex justify-between text-[7.5px] text-[#f1efe8]/34 tracking-[0.18em] font-sans">
-              <span>QUANT_ENGINE // MODEL_0{thesis.number}</span>
-              <span>COLLATERAL_RATIO // SECULAR_GROWTH</span>
+              <span>{isFinanceResearch ? `RESEARCH MEMO // ${thesis.number}` : `METHOD NOTE // ${thesis.number}`}</span>
+              <span>{isFinanceResearch ? 'EDUCATIONAL // NOT INVESTMENT ADVICE' : 'SOURCES // CLAIM BOUNDARY'}</span>
             </div>
           </div>
 
           <section className="border-t border-[#f1efe8]/12 pt-8">
-            <h2 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#c2695e]/80">Key Risk Vector</h2>
-            <p className="text-sm leading-relaxed text-[#f1efe8]/58">{thesis.risks}</p>
+            <h2 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#c2695e]/80">
+              {isFinanceResearch ? 'Risk and education boundary' : 'Claim boundary'}
+            </h2>
+            <p className="text-sm leading-relaxed text-[#f1efe8]/58">{thesis.claimBoundary}</p>
           </section>
 
           {thesis.sources?.length ? (

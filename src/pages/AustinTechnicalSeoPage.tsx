@@ -55,16 +55,16 @@ export default function AustinTechnicalSeoPage() {
                 See an Atlas sample crawl run
               </TextLink>
               <TextLink href="/research/austin-crawlability-benchmark-pilot.csv" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
-                Download the Austin crawlability pilot
+                Download the Austin technical-access pilot
               </TextLink>
             </div>
           </div>
 
           <DarkProofArtifactPanel
             className="self-center max-md:-mt-4 lg:ml-auto"
-            eyebrow="Local proof stack"
-            title="Evidence before local SEO claims."
-            summary="The page keeps the Austin frame tied to crawlable surfaces, source clarity, and implementation evidence."
+            eyebrow="Technical-access pilot"
+            title="Access evidence before local-performance claims."
+            summary="The Austin data is a bounded public-request pilot about technical access and source availability, not proof of local search performance."
             items={austinArtifactItems}
             footer="Public page review first. Analytics and Search Console only when access is available."
           />
@@ -74,7 +74,7 @@ export default function AustinTechnicalSeoPage() {
       <section className="relative z-10 border-y border-current/12">
         <PageFrame className="py-16 xl:py-24">
           <SectionHeader eyebrow="Review surfaces" title="What gets checked.">
-            The local frame is useful only when it is backed by crawlable pages, real source signals, and implementation detail. This page does not claim local rankings, traffic movement, or AI citations.
+            The downloadable Austin data is a bounded technical-access pilot. It records public request and response states, not content health or local performance, and does not claim rankings, traffic movement, or AI citations. Possible challenge or interstitial rows remain measurement gaps and are excluded from content-presence aggregates.
           </SectionHeader>
           <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {austinSeoSignals.map((signal, index) => (
@@ -102,7 +102,7 @@ export default function AustinTechnicalSeoPage() {
               View Void Agency proof
             </LinkPanel>
             <LinkPanel href="/case-studies/technical-seo-audit">
-              Read the technical SEO case study
+              Read the technical SEO method walkthrough
             </LinkPanel>
           </div>
         </section>

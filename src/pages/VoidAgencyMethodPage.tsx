@@ -93,32 +93,32 @@ const processSteps: ProcessStep[] = [
 const caseStudies: CaseStudy[] = [
   {
     category: 'TECHNICAL SEO',
-    title: 'Indexation Audit at Scale',
+    title: 'Indexation Audit Workflow',
     visual: 'urls',
     href: '/atlas',
-    cta: 'VIEW CASE STUDY',
-    copy: 'Mapped thousands of URLs to uncover crawl waste, duplicate templates, weak canonicals, orphaned pages, redirect chains, and pages blocked from meaningful discovery.',
+    cta: 'VIEW ATLAS METHOD',
+    copy: 'An illustrative workflow for mapping crawl waste, duplicate templates, weak canonicals, orphaned pages, redirect chains, and pages blocked from meaningful discovery.',
   },
   {
     category: 'AI SEARCH',
     title: 'AI Visibility Benchmark',
     visual: 'entity',
     cta: 'PREVIEW FRAMEWORK',
-    copy: 'Reviewed whether a company could be clearly understood and cited by AI systems. Tested entity, clarity, answer-ready pages, schema, source structure, and crawler access.',
+    copy: 'A framework for reviewing entity clarity, answer-ready pages, schema, source structure, and crawler access without treating access as proof of citation.',
   },
   {
     category: 'ECOMMERCE SEO',
     title: 'Product Discovery System',
     visual: 'heatmap',
     cta: 'PREVIEW FRAMEWORK',
-    copy: 'Audited product and collection pages to find missing metadata, thin templates, weak internal links, duplicate paths, and search-intent gaps.',
+    copy: 'A framework for reviewing product and collection pages for missing metadata, thin templates, weak internal links, duplicate paths, and search-intent gaps.',
   },
   {
     category: 'LOCAL SEO',
     title: 'Service-Area Visibility Audit',
     visual: 'local',
     cta: 'PREVIEW FRAMEWORK',
-    copy: 'Mapped location pages, service pages, Google Business Profile signals, crawl structure, and local entity clarity to improve discovery in high-intent searches.',
+    copy: 'A framework for reviewing location pages, service pages, public business-profile signals, crawl structure, and local entity clarity.',
   },
 ];
 
@@ -739,7 +739,7 @@ export default function VoidAgencyMethodPage() {
       <section id="case-studies" className="mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-12 flex flex-col justify-between gap-6 border-b border-[#f1efe8]/12 pb-8 md:flex-row md:items-end">
           <h2 className="font-serif text-[clamp(4rem,8vw,9rem)] italic leading-none tracking-normal">VOID IN ACTION</h2>
-          <span className="text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42">CASE STUDY INDEX</span>
+          <span className="text-[10px] uppercase tracking-[0.28em] text-[#f1efe8]/42">METHOD EXAMPLE INDEX</span>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">

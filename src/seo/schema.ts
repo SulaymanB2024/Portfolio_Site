@@ -1,11 +1,13 @@
-import { AI_INFORMATION_DESCRIPTION, expertiseAreas, providerDiscoveryPlan } from '../content/aiInformation';
+import {
+  AI_INFORMATION_DESCRIPTION,
+  CANONICAL_PERSON_ID,
+  expertiseAreas,
+} from '../content/aiInformation';
 import {
   aiSearchAuditChecklist,
   atlasCheckItems,
-  fanOutQueryMap,
   publicSourceGraph,
   type EvidenceListItem,
-  type FanOutQueryMapItem,
 } from '../content/evidenceLists';
 import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from './site';
@@ -25,8 +27,8 @@ const canonicalLogo = {
   url: absoluteUrl(DEFAULT_OG_IMAGE),
 };
 
-const schemaDateModified = '2026-07-07';
-const personId = `${SITE_URL}/#person`;
+const schemaDateModified = '2026-07-12';
+const personId = CANONICAL_PERSON_ID;
 const directEmail = 'sulayman.bowles@gmail.com';
 
 const primarySiteParts = [
@@ -303,47 +305,6 @@ function evidenceItemListSchema({
   };
 }
 
-function fanOutQueryItemListSchema(items: FanOutQueryMapItem[]): JsonLd {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    '@id': `${absoluteUrl('/ai-information')}#fan-out-query-map`,
-    name: 'Fan-Out Query Map',
-    url: `${absoluteUrl('/ai-information')}#fan-out-query-map`,
-    description:
-      'A public map of likely search follow-up questions, the canonical page best suited to answer each one, missing content, and recommended edits.',
-    itemListOrder: 'https://schema.org/ItemListOrderAscending',
-    numberOfItems: items.length,
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.originalQuery,
-      description: `Likely fan-out queries: ${item.likelyFanOutQueries.join('; ')}. Missing content: ${item.missingContent}. Recommended edit: ${item.recommendedEdit}`,
-      url: absoluteUrl(item.href),
-    })),
-  };
-}
-
-function providerDiscoveryPlanItemListSchema(): JsonLd {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    '@id': `${absoluteUrl('/ai-information')}#provider-discovery-plan`,
-    name: 'Provider Discovery Plan',
-    url: `${absoluteUrl('/ai-information')}#provider-discovery-plan`,
-    description:
-      'A public search-provider discovery plan describing current crawl/indexation signals and next monitoring actions for Google, Bing, Brave, DuckDuckGo, ChatGPT search, Claude, and Perplexity.',
-    itemListOrder: 'https://schema.org/ItemListOrderAscending',
-    numberOfItems: providerDiscoveryPlan.length,
-    itemListElement: providerDiscoveryPlan.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.provider,
-      description: `Current signal: ${item.currentSignal} Next action: ${item.nextAction}`,
-      url: absoluteUrl('/ai-information'),
-    })),
-  };
-}
 
 function expertiseDefinedTermSetSchema(): JsonLd {
   return {
@@ -426,7 +387,7 @@ export function projectSchema(): JsonLd {
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web',
     creator: {
-      '@id': `${SITE_URL}/#person`,
+      '@id': personId,
     },
     description:
       'A technical SEO audit and evidence system for crawling websites, preserving raw and rendered page evidence, checking robots.txt and sitemap behavior, analyzing internal link graphs, scoring technical findings, persisting crawl data, and exporting operator or client-facing reports.',
@@ -482,7 +443,7 @@ export function collectionPageSchema(name: string, description: string, path: st
     url: absoluteUrl(path),
     description,
     author: {
-      '@id': `${SITE_URL}/#person`,
+      '@id': personId,
     },
   };
 }
@@ -519,10 +480,10 @@ export function articleSchema({
     datePublished,
     dateModified: dateModified ?? datePublished,
     author: {
-      '@id': `${SITE_URL}/#person`,
+      '@id': personId,
     },
     publisher: {
-      '@id': `${SITE_URL}/#person`,
+      '@id': personId,
     },
   };
 }
@@ -549,8 +510,8 @@ export function homeJsonLd(): JsonLd {
       name: 'Sulayman Bowles',
       description:
         'Homepage for Sulayman Bowles, a UT Austin McCombs student and technical systems builder focused on Atlas, technical SEO, AI-search visibility, and finance/data research.',
-      mainEntityId: `${SITE_URL}/#person`,
-      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`],
+      mainEntityId: personId,
+      aboutIds: [personId, `${SITE_URL}/atlas#software`],
     }),
   ]);
 }
@@ -601,8 +562,8 @@ export function simpleBookJsonLd(): JsonLd {
       name: 'A Short Book About Sulayman Bowles',
       description:
         'First-person text edition explaining Sulayman Bowles, technical SEO, AI-search visibility, Atlas, Void Agency, Markets Research, finance/data work, and software systems.',
-      mainEntityId: `${SITE_URL}/#person`,
-      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`],
+      mainEntityId: personId,
+      aboutIds: [personId, `${SITE_URL}/atlas#software`],
     }),
     {
       '@context': 'https://schema.org',
@@ -636,8 +597,8 @@ export function resumeJsonLd(): JsonLd {
       name: 'Sulayman Bowles Resume',
       description:
         'HTML-first canonical resume for Sulayman Bowles across UT Austin McCombs, Void Agency, Atlas, technical SEO, AI-search visibility, finance/data research, public code, and professional profiles.',
-      mainEntityId: `${SITE_URL}/#person`,
-      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`],
+      mainEntityId: personId,
+      aboutIds: [personId, `${SITE_URL}/atlas#software`],
     }),
     {
       '@context': 'https://schema.org',
@@ -684,8 +645,6 @@ export function aiInformationJsonLd(): JsonLd {
       path: '/ai-information',
       items: publicSourceGraph,
     }),
-    fanOutQueryItemListSchema(fanOutQueryMap),
-    providerDiscoveryPlanItemListSchema(),
     expertiseDefinedTermSetSchema(),
     {
       '@context': 'https://schema.org',
@@ -725,7 +684,7 @@ export function atlasJsonLd(): JsonLd {
       description:
         'Canonical software/project page for Atlas SEO Audit Console, a crawl and evidence system for technical SEO, indexation, internal links, structured data, scoring, and exports.',
       mainEntityId: `${SITE_URL}/atlas#software`,
-      aboutIds: [`${SITE_URL}/#person`],
+      aboutIds: [personId],
     }),
     evidenceItemListSchema({
       id: 'atlas-checks',
@@ -754,7 +713,7 @@ export function methodJsonLd(): JsonLd {
       description:
         'Canonical service/process page for Void Agency technical SEO and AI-search visibility audits.',
       mainEntityId: `${SITE_URL}/method#service`,
-      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/#void-agency`, `${SITE_URL}/atlas#software`],
+      aboutIds: [personId, `${SITE_URL}/#void-agency`, `${SITE_URL}/atlas#software`],
     }),
     evidenceItemListSchema({
       id: 'ai-search-visibility-checklist',
@@ -779,7 +738,7 @@ export function workJsonLd(): JsonLd {
     websiteSchema(),
     collectionPageSchema(
       'Selected Work',
-      'Selected public work from Sulayman Bowles across Atlas crawl evidence, technical SEO method, sanitized case-study logic, and finance/data artifacts.',
+      'Selected public work from Sulayman Bowles across Atlas crawl evidence, technical SEO method, an illustrative audit walkthrough, and finance/data artifacts.',
       '/work',
     ),
     webPageSchema({
@@ -788,7 +747,7 @@ export function workJsonLd(): JsonLd {
       description:
         'A canonical work index for Sulayman Bowles with contextual proof links to Atlas sample crawl data, technical SEO method, public code, audit intake, and finance/data assumptions.',
       mainEntityId: collectionId,
-      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`],
+      aboutIds: [personId, `${SITE_URL}/atlas#software`],
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -850,7 +809,7 @@ export function atlasSampleCrawlJsonLd(): JsonLd {
       description:
         'A sanitized Atlas sample crawl table showing URL status, indexability, crawl depth, link counts, canonical state, issue labels, and evidence notes.',
       mainEntityId: `${SITE_URL}/atlas#software`,
-      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`],
+      aboutIds: [personId, `${SITE_URL}/atlas#software`],
     }),
     {
       '@context': 'https://schema.org',
@@ -862,7 +821,7 @@ export function atlasSampleCrawlJsonLd(): JsonLd {
         'Sanitized/demo crawl sample with URL-level technical SEO fields. It is not a private client export or ranking claim.',
       license: 'https://creativecommons.org/licenses/by/4.0',
       creator: {
-        '@id': `${SITE_URL}/#person`,
+        '@id': personId,
       },
       isAccessibleForFree: true,
     },
@@ -881,24 +840,118 @@ export function technicalSeoCaseStudyJsonLd(): JsonLd {
     ...canonicalEntitySchemas(),
     websiteSchema(),
     articleSchema({
-      title: 'Technical SEO Audit Case Study',
+      title: 'Technical SEO Audit Method Walkthrough',
       description:
-        'A sanitized technical SEO case-study frame showing how crawl evidence becomes findings, priorities, and implementation work without private client claims.',
+        'An illustrative technical SEO method walkthrough showing how crawl evidence can become findings and implementation work without presenting a completed client result.',
       path: '/case-studies/technical-seo-audit',
       datePublished: '2026-06-21',
     }),
     webPageSchema({
       path: '/case-studies/technical-seo-audit',
-      name: 'Technical SEO Audit Case Study',
+      name: 'Technical SEO Audit Method Walkthrough',
       description:
-        'A public case study for Sulayman Bowles showing an evidence chain from crawl fields to interpreted risk, implementation action, and review artifacts.',
+        'An illustrative walkthrough showing an evidence chain from crawl fields to interpreted risk, implementation action, and review artifacts.',
       mainEntityId: articleId,
-      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`],
+      aboutIds: [personId, `${SITE_URL}/atlas#software`],
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Work', path: '/work' },
-      { name: 'Technical SEO Audit Case Study', path: '/case-studies/technical-seo-audit' },
+      { name: 'Technical SEO Audit Method Walkthrough', path: '/case-studies/technical-seo-audit' },
+    ]),
+  ]);
+}
+
+export function viralBenchArticleJsonLd(): JsonLd {
+  const path = '/viralbench-codex-agent-harness';
+  const title = 'Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench';
+  const description =
+    'How I’m turning ViralBench into a Codex-powered agent harness for replay, trace evaluation, controlled experiments, and safer marketing automation.';
+  const articleId = `${absoluteUrl(path)}#article`;
+  const image = absoluteUrl('/images/viralbench-codex-harness.svg');
+  const article = articleSchema({
+    title,
+    description,
+    path,
+    datePublished: '2026-07-09',
+    dateModified: '2026-07-09',
+    image,
+  });
+
+  return graphSchema([
+    ...canonicalEntitySchemas(),
+    websiteSchema(),
+    {
+      ...article,
+      '@type': ['Article', 'BlogPosting'],
+      alternativeHeadline: 'ViralBench + Codex: Building an AI Agent Evaluation Harness',
+      articleSection: 'AI Systems Engineering',
+      keywords: [
+        'ViralBench',
+        'Codex agent harness',
+        'AI agent evaluation harness',
+        'autonomous marketing agent',
+        'AI marketing benchmark',
+        'agent replay testing',
+        'harness engineering',
+      ],
+      about: [
+        { '@type': 'Thing', name: 'ViralBench', sameAs: 'https://viralbench.ai/' },
+        {
+          '@type': 'SoftwareApplication',
+          name: 'Codex',
+          applicationCategory: 'DeveloperApplication',
+          sameAs: 'https://developers.openai.com/codex',
+        },
+        { '@type': 'Thing', name: 'AI agent evaluation' },
+      ],
+      citation: [
+        'https://viralbench.ai/',
+        'https://github.com/JibranK12345/Viral-Bench',
+        'https://openai.com/index/harness-engineering/',
+        'https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop',
+        'https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content',
+      ],
+    },
+    webPageSchema({
+      path,
+      name: title,
+      description,
+      mainEntityId: articleId,
+      aboutIds: [personId],
+      dateModified: '2026-07-09',
+    }),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      '@id': `${absoluteUrl(path)}#faq`,
+      mainEntity: [
+        [
+          'What is ViralBench?',
+          'ViralBench is a live AI marketing benchmark in which frontier models operate TikTok accounts and try to maximize views in the fitness category.',
+        ],
+        [
+          'What is an AI agent harness?',
+          'An agent harness is the operating system around a model: instructions, tools, schemas, memory, permissions, execution loop, tests, traces, validation rules, and deployment boundaries.',
+        ],
+        [
+          'How would Codex use ViralBench as a harness?',
+          'Codex would operate outside the content agent, inspect failed runs, modify a bounded part of the repository, run replay tests, and produce a candidate patch for review.',
+        ],
+        [
+          'Why is offline replay necessary?',
+          'Replay catches process failures cheaply and repeatedly. It cannot predict TikTok distribution, so it is a prerequisite for a live test rather than a substitute for one.',
+        ],
+      ].map(([name, text]) => ({
+        '@type': 'Question',
+        name,
+        acceptedAnswer: { '@type': 'Answer', text },
+      })),
+    },
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Research', path: '/research' },
+      { name: 'ViralBench + Codex Agent Harness', path },
     ]),
   ]);
 }
@@ -916,7 +969,7 @@ export function austinTechnicalSeoJsonLd(): JsonLd {
       name: 'Austin Technical SEO and AI Search Visibility',
       url: absoluteUrl('/austin-technical-seo'),
       provider: {
-        '@id': `${SITE_URL}/#person`,
+        '@id': personId,
       },
       areaServed: {
         '@type': 'City',
@@ -934,7 +987,7 @@ export function austinTechnicalSeoJsonLd(): JsonLd {
       description:
         'A local service-intent page for Austin technical SEO and AI-search visibility work with conservative claim boundaries and links to method, sample crawl data, and intake.',
       mainEntityId: serviceId,
-      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`],
+      aboutIds: [personId, `${SITE_URL}/atlas#software`],
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -960,7 +1013,7 @@ export function researchAssetsJsonLd(): JsonLd {
       description:
         'Public index of citation-ready technical SEO, AI-search, Atlas, crawlability, identity, and finance/data research assets with source-file links and claim boundaries.',
       mainEntityId: collectionId,
-      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/atlas#software`],
+      aboutIds: [personId, `${SITE_URL}/atlas#software`],
     }),
     {
       '@context': 'https://schema.org',
@@ -976,7 +1029,7 @@ export function researchAssetsJsonLd(): JsonLd {
         '@type': 'ListItem',
         position: index + 1,
         name: asset.name,
-        description: asset.pitchAngle,
+        description: `${asset.description} Claim boundary: ${asset.claimBoundary}`,
         url: absoluteUrl(asset.href),
       })),
     },
@@ -989,7 +1042,7 @@ export function researchAssetsJsonLd(): JsonLd {
       description: download.description,
       isAccessibleForFree: true,
       creator: {
-        '@id': `${SITE_URL}/#person`,
+        '@id': personId,
       },
       isPartOf: {
         '@id': collectionId,
@@ -1025,7 +1078,7 @@ export function voidAgencyJsonLd(): JsonLd {
       description:
         'Canonical organization proof page for Void Agency, the service branch connected to Sulayman Bowles technical SEO, AI-search visibility, crawlability, and evidence-backed audits.',
       mainEntityId: `${SITE_URL}/#void-agency`,
-      aboutIds: [`${SITE_URL}/#person`, `${SITE_URL}/#void-agency`, `${SITE_URL}/atlas#software`],
+      aboutIds: [personId, `${SITE_URL}/#void-agency`, `${SITE_URL}/atlas#software`],
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -1043,7 +1096,7 @@ export function sitemapJsonLd(): JsonLd {
       name: 'HTML Sitemap',
       description:
         'Plain HTML sitemap for sulayman-bowles.dev with canonical public routes for work, Atlas, method, markets, resume, contact, source graph, and research pages.',
-      aboutIds: [`${SITE_URL}/#person`],
+      aboutIds: [personId],
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -1064,7 +1117,7 @@ export function marketsJsonLd(title: string, description: string, path = '/marke
       name: title,
       description,
       mainEntityId: collectionId,
-      aboutIds: [`${SITE_URL}/#person`],
+      aboutIds: [personId],
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -1099,7 +1152,7 @@ export function marketArticleJsonLd({
       name: title,
       description,
       mainEntityId: articleId,
-      aboutIds: [`${SITE_URL}/#person`],
+      aboutIds: [personId],
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },

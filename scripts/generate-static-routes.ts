@@ -44,13 +44,9 @@ function buildHead(route: SeoRoute, assetTags: string) {
   const ogType = route.pageType === 'article' ? 'article' : 'website';
   const robots = route.noindex || !route.includeInSitemap ? 'noindex,nofollow' : 'index,follow';
 
-  const staticFallbackScript =
-    "document.documentElement.classList.add('js');document.addEventListener('DOMContentLoaded',function(){document.getElementById('seo-static-summary')?.remove();});";
-
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>${staticFallbackScript}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="${FONT_STYLESHEET}" />
@@ -144,9 +140,6 @@ function buildHead(route: SeoRoute, assetTags: string) {
         font-size: 0.68rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-      }
-      .js #seo-static-summary {
-        display: none;
       }
     </style>
     ${assetTags}

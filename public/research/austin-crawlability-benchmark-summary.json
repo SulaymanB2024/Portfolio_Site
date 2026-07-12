@@ -1,35 +1,45 @@
 {
   "generated_at": "2026-06-25",
-  "sample_type": "Austin public-site crawlability pilot",
+  "corrected_at": "2026-07-12",
+  "sample_type": "Austin public-site technical access pilot",
   "sample_size": 12,
   "public_csv": "https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv",
   "methodology": [
     "Bounded one-request public fetch of each homepage.",
     "One public robots.txt fetch per final origin.",
-    "One sitemap fetch using the first robots.txt sitemap URL when available, otherwise /sitemap.xml.",
-    "Signals are presence/availability checks, not quality scores or SEO diagnoses."
+    "One sitemap fetch using a robots.txt sitemap URL when available, otherwise /sitemap.xml.",
+    "Request completion is recorded separately from whether the HTTP response was 2xx or 3xx.",
+    "Challenge or interstitial responses are measurement gaps and are excluded from homepage content-presence aggregates.",
+    "The successful check count covers eight fixed presence/availability checks for eligible rows; it is not a quality score or SEO diagnosis."
   ],
   "claim_boundaries": [
     "This pilot is not representative of all Austin companies.",
-    "Rows do not claim rankings, traffic movement, revenue impact, AI citations, or site health.",
+    "This is a technical-access snapshot, not evidence of local search performance or content health.",
+    "Rows do not claim rankings, traffic movement, revenue impact, or AI citations.",
     "Access-limited, timed-out, or challenged fetches are measurement gaps, not negative findings.",
-    "The benchmark should be used as a public-data conversation starter before any local media pitch."
+    "The pilot should be used as a public-data conversation starter only after review."
   ],
+  "aggregate_denominators": {
+    "request_response_and_endpoint_checks": 12,
+    "homepage_content_presence_checks": 6
+  },
   "aggregate": {
     "sample_size": 12,
-    "homepage_fetch_ok": 12,
-    "homepage_2xx_or_3xx": 12,
+    "homepage_requests_completed": 12,
+    "homepage_responses_2xx_or_3xx": 12,
+    "homepage_content_aggregate_eligible": 6,
+    "homepage_access_measurement_gaps": 6,
     "https_final": 12,
-    "title_present": 12,
-    "meta_description_present": 12,
-    "canonical_present": 12,
-    "h1_present": 11,
-    "jsonld_present": 12,
-    "robots_request_completed": 12,
-    "robots_2xx_or_3xx": 12,
+    "title_present_among_eligible": 6,
+    "meta_description_present_among_eligible": 6,
+    "canonical_present_among_eligible": 6,
+    "h1_present_among_eligible": 5,
+    "jsonld_present_among_eligible": 6,
+    "robots_requests_completed": 12,
+    "robots_responses_2xx_or_3xx": 12,
     "robots_declared_sitemap": 10,
-    "sitemap_request_completed": 12,
-    "sitemap_2xx_or_3xx": 10,
-    "measurement_gaps": 6
+    "sitemap_requests_completed": 11,
+    "sitemap_responses_2xx_or_3xx": 10,
+    "rows_with_measurement_gaps": 7
   }
 }

@@ -17,6 +17,7 @@ import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
 import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
 import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavigation';
+import { TEXAS_TOLL_ARTICLE_SLUG } from './content/texasTollRoadArticleMeta';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
 import { TextMarquee } from './components/TextMarquee';
@@ -31,6 +32,8 @@ const loadAiInformationPage = () => import('./pages/AiInformationPage');
 const loadResearchPage = () => import('./pages/ResearchPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
+const loadTexasTollRoadArticlePage = () => import('./pages/TexasTollRoadArticlePage');
+const loadViralBenchArticlePage = () => import('./pages/ViralBenchArticlePage');
 const loadSimplePage = () => import('./pages/SimplePage');
 const loadWorkPage = () => import('./pages/WorkPage');
 const loadContactPage = () => import('./pages/ContactPage');
@@ -48,6 +51,8 @@ const AiInformationPage = lazy(loadAiInformationPage);
 const ResearchPage = lazy(loadResearchPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
+const TexasTollRoadArticlePage = lazy(loadTexasTollRoadArticlePage);
+const ViralBenchArticlePage = lazy(loadViralBenchArticlePage);
 const SimplePage = lazy(loadSimplePage);
 const WorkPage = lazy(loadWorkPage);
 const ContactPage = lazy(loadContactPage);
@@ -104,6 +109,10 @@ async function preloadRoute(path: string) {
     await loadResearchPage();
   } else if (route?.path === '/markets') {
     await loadMarketsPage();
+  } else if (route?.path === '/viralbench-codex-agent-harness') {
+    await loadViralBenchArticlePage();
+  } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
+    await loadTexasTollRoadArticlePage();
   } else if (route?.section === 'research-article') {
     await loadMarketArticlePage();
   }
@@ -220,6 +229,18 @@ export default function App() {
     );
   } else if (route?.path === '/sitemap') {
     page = <SitemapPage />;
+  } else if (route?.path === '/viralbench-codex-agent-harness') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <ViralBenchArticlePage />
+      </Suspense>
+    );
+  } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <TexasTollRoadArticlePage />
+      </Suspense>
+    );
   } else if (route?.section === 'research-article') {
     const slug = route.path.split('/').at(-1) ?? '';
     page = (
@@ -496,13 +517,14 @@ function HomePage() {
       <AnimatePresence>
         {!isLoaded && (
           <motion.div 
+            aria-hidden="true"
             className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center p-8 origin-bottom text-canvas"
             exit={{ scaleY: 0 }}
             transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
           >
             <div className="w-full flex justify-between absolute pt-8 px-8 md:px-16 normal-case font-sans uppercase tracking-[0.2em] text-xs opacity-50 justify-self-start self-start top-0">
-               <span>Building Evidence</span>
-               <span>{counter}%</span>
+               <span className="visual-label" data-visual-label="Building Evidence" />
+               <span className="visual-label" data-visual-label={`${counter}%`} />
             </div>
             
             <motion.div
@@ -511,8 +533,8 @@ function HomePage() {
                transition={{ duration: 0.4 }}
                className="font-serif text-6xl md:text-9xl font-light tracking-tighter flex items-baseline"
             >
-              <span className="italic">{counter}</span>
-              <span className="text-xl md:text-2xl ml-2 font-sans tracking-widest">%</span>
+              <span className="visual-label italic" data-visual-label={String(counter)} />
+              <span className="visual-label text-xl md:text-2xl ml-2 font-sans tracking-widest" data-visual-label="%" />
             </motion.div>
 
             {/* Progress bar */}

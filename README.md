@@ -10,23 +10,27 @@ Key source surfaces: [AI information](https://sulayman-bowles.dev/ai-information
 
 - `/`
 - `/work`
+- `/about`
+- `/simple`
 - `/atlas`
 - `/atlas/sample-crawl`
-- `/simple`
-- `/markets`
-- `/method`
-- `/void-agency`
-- `/austin-technical-seo`
-- `/case-studies/technical-seo-audit`
-- `/about`
 - `/resume`
-- `/contact`
 - `/ai-information`
 - `/research`
 - `/sitemap`
-- `/markets/network-monopolies`
-- `/markets/computational-commodity-systems`
-- `/markets/fiat-horizon`
+- `/method`
+- `/void-agency`
+- `/contact`
+- `/austin-technical-seo`
+- `/case-studies/technical-seo-audit`
+- `/viralbench-codex-agent-harness`
+- `/markets`
+- `/markets/ai-search-crawler-policy`
+- `/markets/technical-seo-public-data-infrastructure`
+- `/markets/canonical-identity-personal-seo`
+- `/markets/who-owns-texas-toll-roads`
+
+The retired market routes remain generated as `noindex,nofollow` compatibility pages, but they are excluded from the canonical route inventory and sitemap.
 
 Aliases such as `/projects/atlas`, `/atlas/sample-run`, `/projects/markets`, `/audit-intake`, `/austin-seo`, `/technical-seo-case-study`, `/book`, `/plain`, `/text`, `/cv`, and `/resume.html` redirect or normalize to their canonical routes.
 
@@ -44,9 +48,21 @@ npm run dev
 ```bash
 npm run lint
 npm run build
+npm run verify:seo
+npm run audit:style
+npm run submit:indexnow -- --dry-run
 ```
 
 `npm run build` runs `vite build` and then `scripts/generate-static-routes.ts`, which writes canonical route HTML into `dist/`.
+
+`npm run verify:seo` checks the 21-route canonical inventory, metadata, sitemap, JSON-LD, one-H1 static fallbacks, public research assets, claim boundaries, and PDF signatures. The style audit is informational. Keep IndexNow in dry-run mode during local validation.
+
+The public resume and Appian memo are reproducible PDFs. Generate them with:
+
+```bash
+python3 -m pip install -r requirements-pdf.txt
+python3 scripts/generate-public-pdfs.py
+```
 
 ## Link-Building Authority Assets
 

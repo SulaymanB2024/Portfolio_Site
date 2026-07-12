@@ -25,7 +25,7 @@ export default function WorkPage() {
           Work built from evidence.
         </h1>
         <p className="mt-10 max-w-2xl text-base leading-relaxed text-[#f1efe8]/62">
-          A compact index of public work surfaces: Atlas crawl evidence, technical SEO method, sanitized case-study logic, and finance/data artifacts with visible assumptions.
+          A compact index of public work surfaces: Atlas crawl evidence, technical SEO method, an illustrative audit walkthrough, and finance/data artifacts with visible assumptions.
         </p>
       </section>
 

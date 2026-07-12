@@ -22,16 +22,16 @@ export default function AtlasSampleCrawlPage() {
 
       <section className="relative z-10 mx-auto grid min-h-[66vh] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-16 pt-20 md:px-8 lg:grid-cols-[0.46fr_0.54fr] xl:px-10">
         <div className="self-end">
-          <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-ink/48">Atlas sample crawl</p>
+          <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-ink/48">Atlas illustrative crawl demo</p>
           <h1 className="font-serif text-[clamp(3.5rem,8vw,8.8rem)] italic leading-[0.84] tracking-normal">
-            Sanitized crawl evidence.
+            Illustrative crawl format.
           </h1>
           <p className="mt-10 max-w-2xl text-base leading-relaxed text-ink/64">
-            This sample run shows how Atlas records URL-level evidence before recommendations: status, indexability, crawl depth, link counts, canonical state, issue labels, and notes.
+            This six-row synthetic demo illustrates the Atlas output format before recommendations: status, indexability, crawl depth, link counts, canonical state, issue labels, and notes. It is not product proof or evidence of a completed client crawl.
           </p>
           <div className="mt-9 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
             <a href={RESEARCH_ASSETS.atlasSampleCsv} className="border-b border-ink/24 pb-1 transition-colors hover:border-ink">
-              Download sanitized crawl CSV
+              Download illustrative demo CSV
             </a>
             <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="border-b border-ink/24 pb-1 transition-colors hover:border-ink">
               View the GitHub repo for the audit CLI
@@ -50,7 +50,7 @@ export default function AtlasSampleCrawlPage() {
       <section className="relative z-10 mx-auto max-w-[1480px] border-y border-ink/12 px-4 py-16 md:px-8 xl:px-10">
         <div className="mb-9 grid gap-8 lg:grid-cols-[0.38fr_0.62fr]">
           <h2 className="font-serif text-[clamp(2.8rem,5vw,6rem)] italic leading-[0.92] tracking-normal">
-            What the sample proves.
+            What the demo illustrates.
           </h2>
           <div className="grid gap-3">
             {atlasSampleFindings.map((item) => (
@@ -63,7 +63,7 @@ export default function AtlasSampleCrawlPage() {
 
         <div className="overflow-x-auto border border-ink/14">
           <table className="min-w-[920px] w-full border-collapse text-left text-xs">
-            <caption className="sr-only">Sanitized Atlas crawl sample table</caption>
+            <caption className="sr-only">Six-row illustrative Atlas crawl output-format demo</caption>
             <thead className="bg-ink text-canvas">
               <tr>
                 {['URL', 'Status', 'Indexability', 'Depth', 'Inlinks', 'Outlinks', 'Canonical', 'Issue', 'Evidence note'].map((heading) => (
@@ -95,10 +95,10 @@ export default function AtlasSampleCrawlPage() {
       <section className="relative z-10 mx-auto max-w-[1480px] px-4 py-16 md:px-8 xl:px-10">
         <div className="grid gap-5 border border-ink/14 p-6 md:grid-cols-[1fr_auto] md:items-center">
           <p className="max-w-3xl text-sm leading-relaxed text-ink/64">
-            Use this sample as a proof-of-method artifact. It is intentionally small and sanitized, so it supports the public explanation without exposing private crawl exports.
+            Use this six-row sample only as an illustrative output-format demo. The synthetic example.com rows are not product proof, client evidence, or a performance claim.
           </p>
           <a href="/case-studies/technical-seo-audit" className="text-[10px] uppercase tracking-[0.22em] underline decoration-ink/24 underline-offset-4 transition-colors hover:text-ink/70">
-            Read the technical SEO audit case study
+            Read the technical SEO method walkthrough
           </a>
         </div>
       </section>

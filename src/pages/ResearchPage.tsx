@@ -19,8 +19,8 @@ import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const RESEARCH_ROUTE = getSeoRoute('/research')!;
-const priorityOneAssets = publicResearchAssets.filter((asset) => asset.priority === 1);
-const audienceCount = new Set(publicResearchAssets.flatMap((asset) => asset.audiences)).size;
+const featuredAssetCount = publicResearchAssets.filter((asset) => asset.featured).length;
+const topicCount = new Set(publicResearchAssets.flatMap((asset) => asset.topics)).size;
 
 export default function ResearchPage() {
   useSEO(RESEARCH_ROUTE);
@@ -34,37 +34,37 @@ export default function ResearchPage() {
 
       <PageFrame className="relative z-10">
         <PageHero
-          eyebrow="Research assets"
-          title="Citation surfaces, not empty claims."
+          eyebrow="Research library"
+          title="Research, methods, and inspectable artifacts."
           intro={
             <p>
-              A public index of technical SEO, AI-search, Atlas, crawlability, identity, and finance/data artifacts. Each item is meant to be inspectable before it is cited, pitched, or used in outreach.
+              A public index of long-form analysis, technical notes, datasets, and system examples across infrastructure, search, Atlas, identity, and finance.
             </p>
           }
           aside={
             <div className="grid gap-5 text-sm leading-relaxed">
               <p>
-                The hub gives editors, profile owners, technical SEO writers, and AI-search researchers one clean URL for source-backed assets instead of a loose set of raw files.
+                Start with the Texas toll-road ownership study, then use the source notes and downloadable files to inspect how each conclusion was bounded.
               </p>
               <div className="grid grid-cols-3 gap-px border border-current/14 text-center">
                 <Metric label="Assets" value={publicResearchAssets.length} />
-                <Metric label="P1" value={priorityOneAssets.length} />
-                <Metric label="Audiences" value={audienceCount} />
+                <Metric label="Featured" value={featuredAssetCount} />
+                <Metric label="Topics" value={topicCount} />
               </div>
             </div>
           }
         />
 
         <div className="flex flex-wrap items-center gap-5 border-b border-current/12 py-8">
-          <PrimaryCTA href="/contact" id="research-contact-link">
-            Discuss an audit
+          <PrimaryCTA href="#research-library" id="research-library-link">
+            Browse the library
           </PrimaryCTA>
           <TextLink
             href="/research/authority-assets.json"
             id="research-authority-json-link"
             className="text-[10px] uppercase tracking-[0.2em] text-current/62 hover:text-current"
           >
-            Authority asset JSON
+            Machine-readable index
           </TextLink>
           <TextLink href="/llms.txt" id="research-llms-link" className="text-[10px] uppercase tracking-[0.2em] text-current/62 hover:text-current">
             LLMs text file
@@ -72,18 +72,18 @@ export default function ResearchPage() {
         </div>
       </PageFrame>
 
-      <section className="relative z-10 border-b border-current/12">
+      <section id="research-library" className="relative z-10 scroll-mt-24 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Citation targets" title="Assets worth linking to.">
-            These are the best public targets for earned links, profile updates, source citations, newsletter submissions, and editorial conversations. Priority reflects campaign usefulness, not proof of authority.
+          <SectionHeader eyebrow="Research index" title="Start with the evidence.">
+            Each entry explains what the work contains, where its supporting files live, and what the evidence does not establish.
           </SectionHeader>
 
           <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {publicResearchAssets.map((asset) => (
-              <TechnicalPanel key={asset.href} className="grid min-h-[330px] content-between gap-8 bg-current/[0.012]">
+              <TechnicalPanel key={asset.href} className="grid min-h-[390px] content-between gap-8 bg-current/[0.012]">
                 <div>
                   <div className="mb-7 flex items-start justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-current/42">
-                    <span>P{asset.priority}</span>
+                    <span>{asset.featured ? 'Featured' : 'Research'}</span>
                     <span>{asset.type.replaceAll('_', ' ')}</span>
                   </div>
                   <h2 className="font-serif text-3xl italic leading-[0.95] tracking-normal text-current">
@@ -91,18 +91,37 @@ export default function ResearchPage() {
                       {asset.name}
                     </a>
                   </h2>
-                  <p className="mt-5 text-sm leading-relaxed text-current/62">{asset.pitchAngle}</p>
+                  <p className="mt-5 text-sm leading-relaxed text-current/62">{asset.description}</p>
+                  {asset.published ? (
+                    <p className="mt-5 text-[10px] uppercase tracking-[0.18em] text-current/42">Published {asset.published}</p>
+                  ) : null}
                 </div>
 
                 <div className="grid gap-5 border-t border-current/12 pt-5">
                   <div>
-                    <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-current/42">Preferred anchor</p>
-                    <p className="text-sm leading-relaxed text-current/72">{asset.preferredAnchor}</p>
+                    <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-current/42">Topics</p>
+                    <p className="text-sm leading-relaxed text-current/72">{asset.topics.join(' / ')}</p>
                   </div>
                   <div>
-                    <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-current/42">Audience</p>
-                    <p className="text-sm leading-relaxed text-current/58">{asset.audiences.join(' / ')}</p>
+                    <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-current/42">Claim boundary</p>
+                    <p className="text-sm leading-relaxed text-current/58">{asset.claimBoundary}</p>
                   </div>
+                  {asset.supportingAssets.length ? (
+                    <div>
+                      <p className="mb-3 text-[10px] uppercase tracking-[0.2em] text-current/42">Supporting files</p>
+                      <div className="flex flex-wrap gap-x-4 gap-y-2">
+                        {asset.supportingAssets.map((supportingAsset) => (
+                          <TextLink
+                            key={supportingAsset.href}
+                            href={supportingAsset.href}
+                            className="text-[10px] uppercase tracking-[0.14em] text-current/58 hover:text-current"
+                          >
+                            {supportingAsset.label}
+                          </TextLink>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </TechnicalPanel>
             ))}
@@ -113,7 +132,7 @@ export default function ResearchPage() {
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
           <SectionHeader eyebrow="Public files" title="Downloadable proof.">
-            These files support the public pages above. They are useful for citation, review, and outreach because the source rows can be inspected directly.
+            Source maps, datasets, and assumption tables that can be inspected independently of the surrounding page copy.
           </SectionHeader>
 
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">

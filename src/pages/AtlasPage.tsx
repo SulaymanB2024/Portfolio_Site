@@ -172,15 +172,15 @@ const coverageRows = [
 ];
 
 const coverageMetrics = [
-  { label: 'Pages read', value: '12,842' },
-  { label: 'Intent fields', value: '30' },
-  { label: 'Open repairs', value: '42' },
+  { label: 'Demo pages read', value: '12,842' },
+  { label: 'Demo intent fields', value: '30' },
+  { label: 'Demo open repairs', value: '42' },
 ];
 
 const coverageLadder = [
   {
     label: 'Inventory',
-    value: 'Every indexable page, redirect, canonical, and source path is kept traceable back to discovery.',
+    value: 'Each page admitted to a reviewed run keeps its redirect, canonical, and discovery path traceable.',
   },
   {
     label: 'Map',
@@ -197,6 +197,7 @@ const coverageLadder = [
 ];
 
 const terminalLines = [
+  '[illustrative demo transcript — not a recorded production run]',
   '$ atlas audit --domain example.com --depth 3 --render',
   'Opening crawl ledger...',
   '13,642 URLs discovered from seed, sitemap, render links',
@@ -375,7 +376,7 @@ export default function AtlasPage() {
                   className="block whitespace-nowrap"
                   style={prefersReducedMotion ? undefined : { color: firstLineColor, opacity: firstLineOpacity, y: firstLineY }}
                 >
-                  To see the
+                  {'To see the '}
                 </motion.span>
                 <span className="block whitespace-nowrap">
                   <span className="inline-block">
@@ -387,8 +388,8 @@ export default function AtlasPage() {
                 </span>
               </h1>
               <p className="mt-6 max-w-[26rem] text-sm leading-relaxed tracking-normal text-ink/48 md:text-[15px]">
-                A technical audit drawn like a map: every page located, every claim traced,
-                every recommendation tied to proof.
+                A technical audit drawn like a map: discovered pages mapped, claims traced
+                to available sources, and reviewed recommendations tied to evidence.
               </p>
               <a
                 href="#atlas-methodology"
@@ -510,7 +511,7 @@ function EvidenceSection({
             EVIDENCE MODEL
           </p>
           <h2 className="max-w-[13ch] font-serif text-[clamp(2rem,7vw,3.15rem)] font-light leading-none tracking-normal text-ink">
-            Every claim keeps its edge.
+            Claims keep their edges visible.
           </h2>
           <p className="mt-8 text-sm leading-7 text-ink/58">
             Atlas reads a site as an evidence field. The page, passage, state, and
@@ -556,8 +557,8 @@ function EvidenceSection({
               />
             </motion.div>
             <div className="mb-7 flex items-center justify-between border-b border-ink/10 pb-4 text-[9px] uppercase tracking-[0.24em] text-ink/44">
-              <span>Proof path</span>
-              <span>sample plate</span>
+              <span>Illustrative proof path</span>
+              <span>demo plate</span>
             </div>
             <div className="absolute left-[3rem] right-[3rem] top-[7.75rem] hidden border-t border-ink/12 md:block" aria-hidden="true" />
             <div className="relative grid gap-7 md:grid-cols-4">
@@ -676,6 +677,9 @@ function CoverageSection({ prefersReducedMotion }: { prefersReducedMotion: boole
           <p className="mt-9 border-l border-ink/16 pl-5 font-serif text-base italic leading-7 text-ink/50">
             The useful map is not the biggest one. It is the one that shows where a
             search system runs out of evidence.
+          </p>
+          <p className="mt-6 text-[10px] uppercase leading-5 tracking-[0.18em] text-ink/42">
+            Illustrative demo values and routes — not a recorded client run or scale claim.
           </p>
           <dl className="mt-10 grid max-w-[25rem] grid-cols-3 border-y border-ink/12 text-center">
             {coverageMetrics.map((metric) => (
@@ -813,8 +817,8 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
           className="relative overflow-hidden border border-ink/14 bg-[#edeae1]/72 p-5 shadow-[0_10px_34px_rgba(8,8,7,0.025)]"
         >
           <div className="mb-5 flex items-center justify-between border-b border-ink/10 pb-4 text-[9px] uppercase tracking-[0.22em] text-ink/44">
-            <span>Run ledger</span>
-            <span>atlas.audit</span>
+            <span>Illustrative demo transcript</span>
+            <span>not a recorded run</span>
           </div>
           <div className="mb-6 grid gap-0 border-b border-ink/10 pb-5 md:grid-cols-4">
             {technicalFlow.map((step) => (
@@ -878,8 +882,8 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
             </tbody>
           </table>
           <p className="mt-8 border-t border-ink/10 pt-5 text-xs leading-6 text-ink/48">
-            Every issue is anchored to source URLs, passages, and a repeatable run,
-            so the audit can be inspected before it is acted on.
+            Issues admitted to the review queue retain source URLs, passages, and run
+            context so they can be inspected before they are acted on.
           </p>
         </motion.div>
 

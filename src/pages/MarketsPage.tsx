@@ -43,7 +43,7 @@ const researchTypes = [
 
 const memoLinks = [
   {
-    label: 'Appian educational memo',
+    label: 'Appian operating durability diligence framework',
     href: RESEARCH_ASSETS.appianMemoPdf,
     meta: 'PDF research sample',
   },
@@ -99,7 +99,7 @@ function MarketsHero() {
           </p>
 
           <h1 className="font-serif text-[clamp(4.2rem,4.65vw,5rem)] italic leading-[0.9] text-ink text-balance">
-            Separate signal
+            {'Separate signal '}
             <br />
             from noise.
           </h1>
@@ -112,7 +112,7 @@ function MarketsHero() {
             href="#case-archive"
             className="mt-8 inline-flex border-b border-ink/28 pb-1 font-serif text-sm italic text-ink/56 transition-colors duration-200 hover:border-ink/55 hover:text-ink"
           >
-            Explore our research
+            Explore the research
           </a>
 
           <nav className="mt-8 grid max-w-[310px] gap-3" aria-label="Markets page sections">

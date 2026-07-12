@@ -21,85 +21,114 @@ export interface MarketThesis {
   content: string[];
   metrics?: Array<{ label: string; value: string }>;
   sources?: Array<{ label: string; href: string }>;
+  researchType: 'finance' | 'technical';
+  claimBoundary: string;
 }
 
 export const MARKET_THESES: MarketThesis[] = [
   {
     slug: 'network-monopolies',
     number: '01',
-    category: 'MACRO EQUITY STRATEGY',
-    title: 'On the Structural Allocation to Network Monopolies under Perpetual Debasement',
-    seoTitle: 'Network Monopolies & Debasement',
-    subtitle: 'Why global scale network effects act as sovereign-grade collateral in credit expansion cycles.',
+    category: 'ARCHIVED FINANCE RESEARCH',
+    title: 'Archived Network Effects Memo',
+    seoTitle: 'Archived Network Effects Memo',
+    subtitle: 'A retained methodology example for separating system assumptions from public evidence.',
     seoDescription:
-      'Market research memo by Sulayman Bowles on network monopolies, fiat debasement, pricing power, platform margins, and allocation logic for long-horizon investors.',
+      'Archived, noindexed finance methodology note by Sulayman Bowles. It is not investment advice, allocation guidance, or a current recommendation.',
     image: '/og-default.png',
     date: '2026.04.18',
     indexable: false,
     readTime: '09 MIN',
     author: 'SULAYMAN BOWLES',
-    conviction: '9.4 / 10',
-    horizon: '7 - 10 YEARS',
-    allocation: '40.0%',
-    risks: 'Antitrust regulation, hardware supply chain choke points, margin compression.',
-    formula: 'V(N) \\propto N \\cdot \\log(N) \\cdot R_{debase}',
-    formulaLabel: 'Liquidity Adjusted Network Value Multiplier',
+    conviction: 'ARCHIVE',
+    horizon: 'HISTORICAL',
+    allocation: 'NOT ADVICE',
+    risks:
+      'Archived material may include old framing. It should not be treated as a current recommendation, forecast, price target, or allocation model.',
+    formula: 'research frame = assumption + evidence required + stated limit',
+    formulaLabel: 'Archived Method Frame',
+    metrics: [
+      { label: 'Status', value: 'ARCHIVE' },
+      { label: 'Use', value: 'EDUCATIONAL' },
+      { label: 'Boundary', value: 'NOT ADVICE' },
+    ],
+    researchType: 'finance',
+    claimBoundary:
+      'Archived finance note retained for context. It is not investment advice, allocation guidance, a price target, or a current recommendation.',
     content: [
-      'Modern asset allocation models fail to account for the systemic debasement of fiat denominators. When central bank balance sheets expand at a secular compound annual rate of 8% to 12%, nominal valuations become a vector of monetary dilution rather than organic growth. In this regime, traditional discounted cash flow (DCF) models collapse under unstable discount rates.',
-      'To preserve purchasing power, capital must settle in assets with high pricing power and low capital expenditure requirements. Global network monopolies represent the ultimate sink for excess liquidity. Because their margins are protected by high switching costs and near-zero marginal distribution costs, they can absorb monetary expansion and pass inflation directly to consumers.',
-      'Our allocation strategy prioritizes platforms that function as private tax collectors on global digital transactions. As long as money supply velocity remains suppressed and aggregate credit expansion continues, these digital estates will compound value at a rate that outpaces currency debasement by an average of 450 basis points annually.',
+      'This archived note is retained only to preserve research-history context. It now functions as a methodology example: name a system-level assumption, identify the public evidence needed to support it, and keep unsupported forecast language out of current public claims.',
+      'The useful signal is the discipline behind the draft, not any old allocation, return, or macro conclusion. Current public research should be read through the newer crawler-policy, public-data, identity, and infrastructure articles.',
+      'The route is excluded from the sitemap and marked noindex so it does not compete with current research pages or appear as a current recommendation.',
     ],
   },
   {
     slug: 'computational-commodity-systems',
     number: '02',
-    category: 'DECENTRALIZED INFRASTRUCTURE',
-    title: 'Computational Commodity Systems: Node Architecture & Cryptographic Resource Pricing',
-    seoTitle: 'Computational Commodity Systems',
-    subtitle: 'Evaluating the emerging market for trustless, zero-knowledge verification hardware.',
+    category: 'ARCHIVED FINANCE RESEARCH',
+    title: 'Archived Compute Infrastructure Memo',
+    seoTitle: 'Archived Compute Infrastructure Memo',
+    subtitle: 'A retained methodology example for technical-infrastructure assumptions and evidence limits.',
     seoDescription:
-      'Market research memo by Sulayman Bowles on decentralized compute, node architecture, zero-knowledge verification hardware, resource pricing, and protocol incentives.',
+      'Archived, noindexed finance methodology note by Sulayman Bowles. It is not investment advice, token guidance, or a current recommendation.',
     image: '/og-default.png',
     date: '2026.05.02',
     indexable: false,
     readTime: '11 MIN',
     author: 'SULAYMAN BOWLES',
-    conviction: '8.6 / 10',
-    horizon: '5 - 8 YEARS',
-    allocation: '25.0%',
-    risks: 'Smart contract vulnerability, hardware supply shocks, network incentive dilution.',
-    formula: 'P_{compute} = \\frac{\\mu_{demand}}{\\sigma_{capacity}} \\cdot \\Theta_{incentive}',
-    formulaLabel: 'Algorithmic Resource Pricing Equilibrium',
+    conviction: 'ARCHIVE',
+    horizon: 'HISTORICAL',
+    allocation: 'NOT ADVICE',
+    risks:
+      'Archived material may include old framing. It should not be treated as current protocol diligence, token guidance, or infrastructure-market advice.',
+    formula: 'infrastructure claim = capacity signal + demand evidence + operational risk',
+    formulaLabel: 'Archived Method Frame',
+    metrics: [
+      { label: 'Status', value: 'ARCHIVE' },
+      { label: 'Use', value: 'EDUCATIONAL' },
+      { label: 'Boundary', value: 'NOT ADVICE' },
+    ],
+    researchType: 'finance',
+    claimBoundary:
+      'Archived finance note retained for context. It is not investment advice, token guidance, a price target, or a current recommendation.',
     content: [
-      'The centralization of computing power in hyperscale data centers poses a structural threat to sovereign privacy and system redundancy. Decentralized physical infrastructure networks (DePIN) offer a viable alternative by coordinating globally distributed compute hardware via trustless smart contracts.',
-      'We view raw compute capacity (GPU cycles, zero-knowledge proof generation, and machine learning model training) as the defining commodity of the next half-century. By tokenizing compute supply, decentralized markets align global incentives, lowering barrier to entry for developers and reducing overall infrastructure overhead by 60% compared to legacy cloud providers.',
-      'Our investment framework focuses on protocol coordination layers. By standardizing verification mechanisms and establishing algorithmic market clearing prices, these systems turn volatile hardware supplies into reliable, institutional-grade compute assets.',
+      'This archived note is retained as a research-process example, not as a live market view. The current standard is to separate technical infrastructure observations from unsupported claims about market size, protocol durability, or future token economics.',
+      'A useful compute-infrastructure memo needs visible evidence for capacity, demand, verification costs, reliability, security assumptions, and operational bottlenecks. Without those inputs, the public page should describe the question being studied rather than imply a current conclusion.',
+      'The route is excluded from the sitemap and marked noindex so it remains available as historical context without becoming part of the current public research surface.',
     ],
   },
   {
     slug: 'fiat-horizon',
     number: '03',
-    category: 'MONETARY METRICS',
-    title: 'Fiat Horizon: Standard Deviation Boundaries, Credit Expansion, and Hard-Money Backings',
-    seoTitle: 'Fiat Horizon & Hard-Money Backing',
-    subtitle: 'A quantitative study of volatility bands surrounding fiat currency velocity and commodity reserves.',
+    category: 'ARCHIVED FINANCE RESEARCH',
+    title: 'Archived Monetary Assumptions Memo',
+    seoTitle: 'Archived Monetary Assumptions Memo',
+    subtitle: 'A retained methodology example for macro assumptions, source limits, and careful public language.',
     seoDescription:
-      'Market research memo by Sulayman Bowles on fiat velocity, credit expansion, hard-money reserves, gold and Bitcoin backing, volatility bands, and solvency risk.',
+      'Archived, noindexed finance methodology note by Sulayman Bowles. It is not investment advice, macro guidance, or a current recommendation.',
     image: '/og-default.png',
     date: '2026.05.15',
     indexable: false,
     readTime: '12 MIN',
     author: 'SULAYMAN BOWLES',
-    conviction: '9.8 / 10',
-    horizon: '10+ YEARS',
-    allocation: '35.0%',
-    risks: 'Central bank digital currency overrides, custody confiscation, short-term liquidity squeezes.',
-    formula: 'B_{backing} = \\sum (Res_{gold} + Net_{bitcoin}) \\div M_{2}',
-    formulaLabel: 'Sovereign Solvency Hard-Backing Ratio',
+    conviction: 'ARCHIVE',
+    horizon: 'HISTORICAL',
+    allocation: 'NOT ADVICE',
+    risks:
+      'Archived material may include old framing. It should not be treated as current macro research, portfolio guidance, or an asset recommendation.',
+    formula: 'macro note = source data + assumption table + uncertainty boundary',
+    formulaLabel: 'Archived Method Frame',
+    metrics: [
+      { label: 'Status', value: 'ARCHIVE' },
+      { label: 'Use', value: 'EDUCATIONAL' },
+      { label: 'Boundary', value: 'NOT ADVICE' },
+    ],
+    researchType: 'finance',
+    claimBoundary:
+      'Archived finance note retained for context. It is not investment advice, allocation guidance, a price target, or a current recommendation.',
     content: [
-      'The current international monetary architecture operates on a confidence model that is increasingly detached from physical constraints. When sovereign debt to GDP ratios exceed 120%, the mathematical paths to solvency narrow to two options: outright default or financial repression via negative real interest rates.',
-      'We track the standard deviation boundaries of fiat currency velocity. As velocity drops toward its historical lower bounds, the marginal utility of additional debt creation declines, leading to currency debasement. In this environment, hard assets - specifically physical gold and decentralized digital assets like Bitcoin - serve as the absolute counterweight to credit expansion.',
-      'Our metric models show that holding gold and Bitcoin provides an asymmetric protection profile. They carry no counterparty risk, cannot be arbitrarily inflated by committee decree, and behave as highly liquid sovereign-grade collateral when credit confidence shifts.',
+      'This archived note is retained as a reminder that macro writing needs stricter limits than ordinary commentary. Public pages should distinguish measured data, inferred relationships, scenario analysis, and unsupported recommendations.',
+      'A useful monetary-assumptions memo needs source tables, defined windows, clear units, and uncertainty language. When those pieces are missing, the safer public format is a methodology note rather than a live claim about assets, solvency, or portfolio construction.',
+      'The route is excluded from the sitemap and marked noindex so it remains available as context without becoming part of the current public research surface.',
     ],
   },
   {
@@ -118,11 +147,14 @@ export const MARKET_THESES: MarketThesis[] = [
     author: 'SULAYMAN BOWLES',
     conviction: 'EVIDENCE-LED',
     horizon: '2026 CRAWL POLICY',
-    allocation: 'NOT INVESTMENT ADVICE',
+    allocation: 'CRAWLER POLICY',
     risks:
       'Crawler access is only a discovery condition. It does not guarantee ranking, indexing, AI citation, model inclusion, or answer-system trust.',
     formula: 'visibility != ranking; visibility starts with access + canonical facts + source quality',
     formulaLabel: 'AI Search Discoverability Constraint',
+    researchType: 'technical',
+    claimBoundary:
+      'Crawler access is only a discovery condition. It does not guarantee ranking, indexing, AI citation, model inclusion, or answer-system trust.',
     metrics: [
       { label: 'Scope', value: 'AI CRAWLERS' },
       { label: 'Horizon', value: '2026 POLICY' },
@@ -170,6 +202,9 @@ export const MARKET_THESES: MarketThesis[] = [
       'The analogy to financial data infrastructure is useful but limited. A portfolio site is not a regulated disclosure system, and search visibility should not be framed as guaranteed distribution.',
     formula: 'machine-readable evidence = access + identifiers + provenance + consistency',
     formulaLabel: 'Public Data Infrastructure Pattern',
+    researchType: 'technical',
+    claimBoundary:
+      'The public-data analogy is a working framework. A portfolio is not a regulated disclosure system, and better infrastructure does not guarantee distribution.',
     metrics: [
       { label: 'Scope', value: 'SEO + DATA' },
       { label: 'Frame', value: 'INFRASTRUCTURE' },
@@ -212,6 +247,9 @@ export const MARKET_THESES: MarketThesis[] = [
       'External profiles can drift, block unauthenticated crawlers, or expose old positioning. The site should distinguish verified profile links from weak or dead references.',
     formula: 'one person graph = canonical URL + profile pages + sameAs discipline + redirected stale artifacts',
     formulaLabel: 'Personal Entity Reconciliation Pattern',
+    researchType: 'technical',
+    claimBoundary:
+      'External profiles can drift or block crawlers. The checklist improves record consistency without promising search visibility or entity recognition.',
     metrics: [
       { label: 'Scope', value: 'PERSON GRAPH' },
       { label: 'Priority', value: 'CANONICALS' },
@@ -231,6 +269,49 @@ export const MARKET_THESES: MarketThesis[] = [
       'Structured data should be conservative. Schema.org defines sameAs as a URL that unambiguously identifies the same item, not a bucket for every social link ever created. For a person, GitHub and LinkedIn can be strong sameAs links when they visibly describe the same person and current role. A dead, private, or weakly matching profile should stay out of sameAs even if it once existed. It can still appear as historical context on a source page if that context is useful.',
       'ProfilePage markup works best when the visible page is clearly about one person or one organization. Google guidance describes mainEntity as the person or organization the profile page is about. That makes /about, /resume, and /ai-information useful profile surfaces if they share the same Person @id, current description, and source links. The markup should not invent claims that the page text does not support.',
       'The reconciliation process is practical: pick the canonical domain, redirect duplicate hosts, redirect stale PDFs, keep /about and /resume aligned, publish an /ai-information page with source roles and caveats, and push the same one-line current identity to external bios. The output is not a bigger personal brand. It is a smaller, cleaner set of records that makes the current public identity easier to verify.',
+    ],
+  },
+  {
+    slug: 'who-owns-texas-toll-roads',
+    number: '07',
+    category: 'INFRASTRUCTURE INVESTING',
+    title: 'Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics',
+    seoTitle: 'Who Owns Texas Toll Roads? Public vs. Private Explained',
+    subtitle:
+      'The state usually owns the pavement. Contracts decide who controls the toll revenue, who gets paid first, and who absorbs the loss.',
+    seoDescription:
+      'See who owns and operates Texas toll roads, from TxDOT, NTTA, and CTRMA to SH 130 and private concessions, plus revenue, debt, and foreign ownership.',
+    image: '/og-default.png',
+    date: '2026.07.11',
+    dateModified: '2026.07.11',
+    readTime: '24 MIN',
+    author: 'SULAYMAN BOWLES',
+    conviction: 'SOURCE-LED',
+    horizon: '2026 OWNERSHIP MAP',
+    allocation: 'EDUCATIONAL RESEARCH',
+    risks:
+      'Concession-company percentages are not ownership of state land. Dated cap tables, sponsor-adjusted EBITDA, analyst calculations, and unresolved financial disclosures are labeled throughout.',
+    formula: 'equity value = finite toll cash flow - debt - lifecycle obligations - public share',
+    formulaLabel: 'Finite-Life Toll Concession Frame',
+    researchType: 'finance',
+    claimBoundary:
+      'This is educational infrastructure research, not investment advice or a recommendation. Dated cap tables, analyst calculations, and unresolved disclosures are identified in the article.',
+    metrics: [
+      { label: 'Scope', value: 'TEXAS STATEWIDE' },
+      { label: 'Private Concessions', value: '4 MATERIAL' },
+      { label: 'Evidence Cutoff', value: 'JULY 11, 2026' },
+    ],
+    sources: [
+      { label: 'TxDOT statewide toll-road inventory', href: 'https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html' },
+      { label: 'Ferrovial 2026 Fact Book', href: 'https://www.sec.gov/Archives/edgar/data/1468522/000162828026032618/ferrovial-factbook2026_s.htm' },
+      { label: 'Build America SH 130 project profile', href: 'https://www.transportation.gov/buildamerica/projects/sh-130-segments-5-and-6' },
+      { label: 'TxDOT SH 288 executed agreements', href: 'https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh288-toll-lanes/executed-agreements.html' },
+      { label: 'NTTA 2025 annual financial report', href: 'https://www.ntta.org/sites/default/files/2026-06/06-25-2026_Digital-Annual-Report_2025.pdf' },
+    ],
+    content: [
+      'Texas toll roads do not have one owner. Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.',
+      'The ownership stack explains two cases that otherwise look contradictory. SH 130 stayed open while the original private equity was eliminated in bankruptcy and creditors received new debt and equity claims. Texas later paid $1.7317 billion to terminate SH 288 even though the state already owned the corridor, because it was buying out the remaining toll and operating rights rather than buying land.',
+      'The full article follows a toll dollar through collection, operations, lifecycle capital, debt service, reserves, public sharing, and the final equity residual. It then compares public systems, the four material active private concessions, practical investment routes, and the facts that remain unavailable in public records.',
     ],
   },
 ];

@@ -52,12 +52,12 @@ export const workProofCards = [
     ctaHref: '/method',
   },
   {
-    eyebrow: 'Case study',
-    title: 'Sanitized Technical SEO Audit',
+    eyebrow: 'Method walkthrough',
+    title: 'Illustrative Technical SEO Audit',
     href: '/case-studies/technical-seo-audit',
     copy:
-      'A public case-study frame showing how site evidence becomes findings without exposing private client data.',
-    cta: 'View the audit case study',
+      'An illustrative walkthrough showing how site evidence can become findings without presenting a completed client result.',
+    cta: 'View the audit method walkthrough',
     ctaHref: '/case-studies/technical-seo-audit',
   },
   {
@@ -166,7 +166,7 @@ export const auditCaseStudySteps = [
   {
     title: 'Keep claim boundaries visible',
     copy:
-      'The case study describes the method and sample artifacts. It does not claim private traffic movement, rankings, revenue impact, or AI-search citation gains.',
+      'The walkthrough describes a method and illustrative artifacts. It does not claim a completed client result, private traffic movement, rankings, revenue impact, or AI-search citation gains.',
   },
 ];
 
@@ -208,31 +208,31 @@ export const voidAgencyProofLinks = [
 
 export const appianAssumptionRows = [
   {
-    category: 'Thesis',
-    variable: 'Core question',
-    baseCase: 'Recurring workflow deployments may be more durable than the multiple implies',
-    downsideCase: 'Revenue behaves more like short-cycle software demand',
-    boundary: 'Educational research sample only; no price target or recommendation.',
+    category: 'Revenue mix',
+    variable: 'Observed fact',
+    baseCase: 'FY2025 subscriptions revenue was $576.5M of $726.9M total revenue (about 79%).',
+    downsideCase: 'Recurring revenue categories do not disclose customer-level durability.',
+    boundary: 'Reported mix is separate from assumptions about retention.',
   },
   {
-    category: 'Market structure',
-    variable: 'Buyer type',
-    baseCase: 'Enterprise workflow and process automation buyers reduce churn risk',
-    downsideCase: 'Budget scrutiny delays expansion and renewals',
-    boundary: 'Validate against filings, customer concentration, and revenue commentary.',
+    category: 'Cloud growth',
+    variable: 'Observed fact',
+    baseCase: 'Q1 2026 cloud subscriptions revenue was $124.5M, up 25% year over year.',
+    downsideCase: 'Full-year cloud guidance was 18%-19%; one quarter should not be annualized.',
+    boundary: 'Tests whether recent growth persists.',
   },
   {
     category: 'Margins',
-    variable: 'Gross margin direction',
-    baseCase: 'Software mix supports durable gross margin',
-    downsideCase: 'Services or implementation costs pressure margin',
-    boundary: 'Source-table rows are assumptions, not live market data.',
+    variable: 'Observed fact',
+    baseCase: 'FY2025 subscription gross margin was 85.4% versus 86.6% in 2024.',
+    downsideCase: 'Hosting costs increased and margin declined 120 basis points.',
+    boundary: 'Tests whether cloud growth scales efficiently.',
   },
   {
-    category: 'Disclaimer',
-    variable: 'Investment use',
-    baseCase: 'Educational research sample only',
-    downsideCase: 'Not a recommendation or price target',
-    boundary: 'Verify assumptions and sources before relying on any thesis.',
+    category: 'Guidance',
+    variable: 'Observed management outlook',
+    baseCase: 'FY2026 guidance was $819M-$831M revenue and $97M-$105M adjusted EBITDA.',
+    downsideCase: 'Guidance is not an audited outcome and still requires GAAP reconciliation.',
+    boundary: 'Educational diligence framework; no price target or recommendation.',
   },
 ];

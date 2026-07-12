@@ -6,7 +6,7 @@ import { ScrollProgress } from '../components/ScrollProgress';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { StaggeredText } from '../components/StaggeredText';
 import { ScrambleText } from '../components/ScrambleText';
-import { identityReconciliation, sourceMap } from '../content/aiInformation';
+import { sourceMap } from '../content/aiInformation';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 import InternalHeader from '../components/InternalHeader';
@@ -26,13 +26,13 @@ const experience = [
   {
     role: 'FOUNDER',
     meta: 'VOID Agency · Dec 2025 — Present',
-    copy: 'Built an SEO and web systems agency generating $50K+ in collected revenue through technical SEO audits, website builds, local search strategy, and AI-search visibility work.',
+    copy: 'Built an SEO and web systems agency with $50K+ in collected client revenue as of May 2026 through technical SEO audits, website builds, local search strategy, and AI-search visibility work.',
     details: ['Technical Audits', 'Next.js & Astro', 'LLM Search Visibility']
   },
   {
     role: 'AI PRODUCT MANAGER INTERN',
     meta: 'Chegg · Office of the Chief Product Officer · May 2026 — Aug 2026',
-    copy: 'Working on AI product strategy, research, competitive analysis, user workflows, prototype review, and AI-enabled student experiences.',
+    copy: 'Currently supporting AI product strategy, research, competitive analysis, user workflows, prototype review, and AI-enabled student experiences.',
     details: ['AI Chat UX', 'Competitive Mapping', 'LLM Workflows']
   },
   {
@@ -67,12 +67,23 @@ const workCards = [
 ];
 
 const metrics = [
-  ['$50K+', 'Collected revenue through VOID Agency'],
+  ['$50K+', 'Collected client revenue through VOID Agency as of May 2026'],
   ['SCRAPER ATLAS', 'Python + SQLite audit console'],
   ['CHEGG', 'AI product strategy'],
   ['GA4 + GSC', 'Search analytics and launch tracking'],
   ['TEXAS VENTURE LABS', 'Market validation and financial models'],
 ];
+
+const aboutSourceLabels = new Set([
+  'GitHub profile',
+  'LinkedIn',
+  'Void Agency',
+  'Atlas SEO Audit Console',
+  'Markets Research',
+  'HTML resume',
+]);
+
+const aboutSources = sourceMap.filter((source) => aboutSourceLabels.has(source.label));
 
 
 
@@ -388,7 +399,7 @@ export default function AboutPage() {
         </ScrollReveal>
 
         <ScrollReveal yOffset={18} blur={false} delay={0.08}>
-          <SectionLabel>EXPERIENCE</SectionLabel>
+          <SectionLabel>SELECTED EXPERIENCE</SectionLabel>
           <ExperienceTimeline />
         </ScrollReveal>
 
@@ -415,13 +426,13 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-[1480px] border-y border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-3xl">
-          <SectionLabel>PUBLIC SOURCE GRAPH</SectionLabel>
+          <SectionLabel>SELECTED PUBLIC SOURCES</SectionLabel>
           <p className="text-base leading-relaxed text-[#f1efe8]/58">
-            This site is the canonical hub. The surrounding sources are useful when they prove one part of the same thesis: technical SEO, Atlas, Void Agency, finance/data judgment, and evidence-backed web/search systems.
+            A short verification list for current work, professional context, public code, and the fuller resume record.
           </p>
         </ScrollReveal>
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-4">
-          {sourceMap.slice(0, 14).map((source, index) => (
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-3">
+          {aboutSources.map((source, index) => (
             <div key={`${source.role}-${source.href}`}>
               <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
               <a
@@ -434,38 +445,6 @@ export default function AboutPage() {
                 <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-[#f1efe8]">{source.label}</h3>
                 <p className="text-sm leading-relaxed text-[#f1efe8]/56">{source.proves}</p>
               </a>
-              </ScrollReveal>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="identity-reconciliation" className="mx-auto max-w-[1480px] border-b border-[#f1efe8]/12 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
-        <ScrollReveal yOffset={18} blur={false} className="mb-10 max-w-4xl">
-          <SectionLabel>HISTORICAL SOURCE CONTEXT</SectionLabel>
-          <p className="text-base leading-relaxed text-[#f1efe8]/62">
-            {identityReconciliation.copy}
-          </p>
-          <a
-            href="/ai-information#identity-reconciliation"
-            className="mt-6 inline-flex text-[10px] uppercase tracking-[0.24em] text-[#f1efe8]/58 underline decoration-[#f1efe8]/22 underline-offset-4 transition-colors hover:text-[#f1efe8]"
-          >
-            Read the full identity reconciliation
-          </a>
-        </ScrollReveal>
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#f1efe8]/14 md:grid-cols-2 xl:grid-cols-7">
-          {identityReconciliation.links.map((link, index) => (
-            <div key={link.href}>
-              <ScrollReveal delay={index * 0.025} yOffset={14} blur={false}>
-                <a
-                  href={link.href}
-                  target={link.href.startsWith('http') ? '_blank' : undefined}
-                  rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="block min-h-[160px] bg-[#f1efe8]/[0.012] p-5 transition-colors hover:bg-[#f1efe8]/[0.035]"
-                >
-                  <h3 className="mb-5 text-xs uppercase leading-relaxed tracking-[0.26em] text-[#f1efe8]">{link.label}</h3>
-                  <p className="text-sm leading-relaxed text-[#f1efe8]/56">{link.description}</p>
-                </a>
               </ScrollReveal>
             </div>
           ))}

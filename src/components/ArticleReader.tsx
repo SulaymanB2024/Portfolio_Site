@@ -11,6 +11,12 @@ interface ArticleReaderProps {
 
 export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleReaderProps) {
   const data = getMarketThesisByIndex(thesisId);
+  const isFinanceResearch = data.researchType === 'finance';
+  const metrics = data.metrics ?? [
+    { label: 'Conviction', value: data.conviction },
+    { label: 'Horizon', value: data.horizon },
+    { label: 'Allocation', value: data.allocation },
+  ];
   const readerRef = useFocusTrap(isOpen);
   const titleId = `memo-reader-title-${data.slug}`;
   const subtitleId = `memo-reader-subtitle-${data.slug}`;
@@ -105,20 +111,16 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
             </div>
 
             <div className="border-t border-[#f1efe8]/12 pt-6">
-              <div className="text-[9px] uppercase tracking-[0.24em] text-[#f1efe8]/45 mb-4">THESIS INDICATORS</div>
+              <div className="text-[9px] uppercase tracking-[0.24em] text-[#f1efe8]/45 mb-4">RESEARCH INDICATORS</div>
               <div className="space-y-3.5 text-[9.5px] uppercase tracking-[0.18em]">
-                <div className="flex justify-between border-b border-[#f1efe8]/8 pb-2">
-                  <span className="text-[#f1efe8]/48">CONVICTION</span>
-                  <span className="text-[#b7c8a8] font-semibold">{data.conviction}</span>
-                </div>
-                <div className="flex justify-between border-b border-[#f1efe8]/8 pb-2">
-                  <span className="text-[#f1efe8]/48">HORIZON</span>
-                  <span className="text-[#f1efe8]/80">{data.horizon}</span>
-                </div>
-                <div className="flex justify-between border-b border-[#f1efe8]/8 pb-2">
-                  <span className="text-[#f1efe8]/48">ALLOCATION</span>
-                  <span className="text-[#f1efe8]/80 font-sans">{data.allocation}</span>
-                </div>
+                {metrics.map((metric, index) => (
+                  <div key={`${metric.label}-${metric.value}`} className="flex justify-between gap-4 border-b border-[#f1efe8]/8 pb-2">
+                    <span className="text-[#f1efe8]/48">{metric.label}</span>
+                    <span className={index === 0 ? 'text-right font-semibold text-[#b7c8a8]' : 'text-right font-sans text-[#f1efe8]/80'}>
+                      {metric.value}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -131,9 +133,9 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
           </div>
 
           <div className="hidden md:block text-[8px] leading-relaxed text-[#f1efe8]/32 font-sans uppercase tracking-[0.18em] border-t border-[#f1efe8]/12 pt-6">
-            VOID PORTFOLIO RESEARCH SYSTEM //
+            PUBLIC RESEARCH ARCHIVE //
             <br />
-            CONFIDENTIAL ACADEMIC MEMORANDUM.
+            SOURCES AND LIMITS APPLY.
           </div>
         </div>
 
@@ -177,7 +179,7 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
               })}
             </div>
 
-            {/* Monetarist / Quantitative Formula Box */}
+            {/* Research framework */}
             <div className="my-10 border border-[#f1efe8]/12 bg-[#0c0c0b] p-6 relative overflow-hidden group">
               {/* Terminal Grid Background */}
               <div className="absolute inset-0 pointer-events-none opacity-[0.02] bg-[linear-gradient(to_right,#f1efe8_1px,transparent_1px),linear-gradient(to_bottom,#f1efe8_1px,transparent_1px)] bg-[size:10px_10px]" />
@@ -193,16 +195,18 @@ export default function ArticleReader({ isOpen, onClose, thesisId }: ArticleRead
                 <span className="px-4 text-[#f1efe8] filter drop-shadow-[0_0_8px_rgba(241,239,232,0.15)] font-semibold tracking-normal">{data.formula}</span>
               </div>
               <div className="mt-4 flex justify-between text-[7.5px] text-[#f1efe8]/34 tracking-[0.18em] font-sans">
-                <span>QUANT_ENGINE // MODEL_0{data.number}</span>
-                <span>COLLATERAL_RATIO // SECULAR_GROWTH</span>
+                <span>{isFinanceResearch ? `RESEARCH MEMO // ${data.number}` : `METHOD NOTE // ${data.number}`}</span>
+                <span>{isFinanceResearch ? 'EDUCATIONAL // NOT INVESTMENT ADVICE' : 'SOURCES // CLAIM BOUNDARY'}</span>
               </div>
             </div>
 
-            {/* Bottom Risk Segment */}
+            {/* Evidence and risk boundary */}
             <div className="mt-12 border-t border-[#f1efe8]/12 pt-8">
-              <h4 className="text-[10px] uppercase tracking-[0.28em] text-[#c2695e]/80 mb-3">KEY RISK VECTOR</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.28em] text-[#c2695e]/80 mb-3">
+                {isFinanceResearch ? 'RISK AND EDUCATION BOUNDARY' : 'CLAIM BOUNDARY'}
+              </h4>
               <p className="text-xs leading-relaxed text-[#f1efe8]/52">
-                {data.risks}
+                {data.claimBoundary}
               </p>
             </div>
           </article>

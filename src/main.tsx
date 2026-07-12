@@ -5,6 +5,10 @@ import App from './App.tsx';
 import './index.css';
 import Lenis from 'lenis';
 
+// Static route HTML is the no-JavaScript fallback. Remove it from the live DOM
+// before React renders so browser-based readers receive exactly one page body.
+document.getElementById('seo-static-summary')?.remove();
+
 function Root() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
