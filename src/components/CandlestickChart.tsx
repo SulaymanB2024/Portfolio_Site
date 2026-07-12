@@ -8,6 +8,34 @@ interface Candle {
   idx: number;
 }
 
+const tooltipRows: Array<[label: string, field: keyof Pick<Candle, 'open' | 'high' | 'low' | 'close'>]> = [
+  ['O', 'open'],
+  ['H', 'high'],
+  ['L', 'low'],
+  ['C', 'close'],
+];
+
+function setTooltipContent(tooltip: HTMLDivElement, candle: Candle) {
+  const container = document.createElement('div');
+  container.className = 'font-mono text-[10px] text-canvas/80 leading-relaxed uppercase tracking-wider';
+
+  tooltipRows.forEach(([label, field]) => {
+    const row = document.createElement('div');
+    row.className = 'flex justify-between gap-4';
+
+    const labelNode = document.createElement('span');
+    labelNode.textContent = label;
+
+    const valueNode = document.createElement('span');
+    valueNode.textContent = candle[field].toFixed(2);
+
+    row.replaceChildren(labelNode, valueNode);
+    container.appendChild(row);
+  });
+
+  tooltip.replaceChildren(container);
+}
+
 export default function CandlestickChart({ className = '' }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -134,7 +162,7 @@ export default function CandlestickChart({ className = '' }: { className?: strin
       }
       ctx.setLineDash([]);
 
-      let hoveredData: any = null;
+      let hoveredData: (Candle & { x: number; y: number }) | null = null;
 
       candles.forEach((c, i) => {
         const x = i * step - currentPan;
@@ -201,14 +229,7 @@ export default function CandlestickChart({ className = '' }: { className?: strin
           const yPos = hoveredData.y - 40;
           tooltipRef.current.style.top = `${yPos < 0 ? 10 : yPos}px`;
           
-          tooltipRef.current.innerHTML = `
-            <div class="font-mono text-[10px] text-canvas/80 leading-relaxed uppercase tracking-wider">
-              <div class="flex justify-between gap-4"><span>O</span><span>${hoveredData.open.toFixed(2)}</span></div>
-              <div class="flex justify-between gap-4"><span>H</span><span>${hoveredData.high.toFixed(2)}</span></div>
-              <div class="flex justify-between gap-4"><span>L</span><span>${hoveredData.low.toFixed(2)}</span></div>
-              <div class="flex justify-between gap-4"><span>C</span><span>${hoveredData.close.toFixed(2)}</span></div>
-            </div>
-          `;
+          setTooltipContent(tooltipRef.current, hoveredData);
       } else if (tooltipRef.current) {
           tooltipRef.current.style.opacity = '0';
       }
@@ -229,7 +250,7 @@ export default function CandlestickChart({ className = '' }: { className?: strin
   return (
     <div className={`w-full h-full relative group ${className}`}>
         <canvas ref={canvasRef} className="w-full h-full block mix-blend-screen pointer-events-auto" role="img" aria-label="Interactive candlestick chart showing real-time simulated market data and trading indicators" />
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_40%,#080807_120%)] mix-blend-multiply opacity-80"></div>
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_40%,var(--color-ink)_120%)] mix-blend-multiply opacity-80"></div>
         <div 
           ref={tooltipRef} 
           className="absolute pointer-events-none opacity-0 bg-ink/90 border border-canvas/20 p-3 backdrop-blur-md transition-opacity duration-150 z-20 shadow-2xl"

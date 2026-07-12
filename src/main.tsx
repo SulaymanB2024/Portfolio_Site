@@ -7,6 +7,7 @@ import Lenis from 'lenis';
 
 // Static route HTML is the no-JavaScript fallback. Remove it from the live DOM
 // before React renders so browser-based readers receive exactly one page body.
+document.documentElement.classList.add('js');
 document.getElementById('seo-static-summary')?.remove();
 
 function Root() {
