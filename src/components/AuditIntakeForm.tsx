@@ -1,5 +1,5 @@
 import ArrowUpRight from 'lucide-react/dist/esm/icons/arrow-up-right.js';
-import { useState, type FormEvent, type ReactNode } from 'react';
+import { useRef, useState, type FormEvent, type ReactNode } from 'react';
 
 type AuditIntakeFormProps = {
   className?: string;
@@ -11,6 +11,7 @@ type AuditIntakeFormProps = {
 const fieldClass =
   'w-full border-b border-canvas/24 bg-transparent py-3 text-sm tracking-normal text-canvas outline-none transition-colors placeholder:text-canvas/60 focus:border-canvas';
 const selectClass = `${fieldClass} appearance-none text-canvas/86`;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const sensitiveSubmissionPattern =
   /(-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{20,}|ghp_[0-9A-Za-z]{20,}|sk-[0-9A-Za-z_-]{20,}|xox[baprs]-[0-9A-Za-z-]{20,}|(?:api[_-]?key|access[_-]?token|password|private[_-]?key|client[_-]?secret)\s*[:=])/i;
 
@@ -37,9 +38,14 @@ export function AuditIntakeForm({
   const [scope, setScope] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [validationMessage, setValidationMessage] = useState('');
+  const [invalidFields, setInvalidFields] = useState({ email: false, websiteUrl: false, message: false });
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const websiteInputRef = useRef<HTMLInputElement>(null);
+  const messageInputRef = useRef<HTMLTextAreaElement>(null);
   const isCompact = variant === 'compact';
-  const emailInvalid = formStatus === 'error' && !email.trim();
-  const messageInvalid = formStatus === 'error' && !message.trim();
+  const emailInvalid = formStatus === 'error' && invalidFields.email;
+  const websiteInvalid = formStatus === 'error' && invalidFields.websiteUrl;
+  const messageInvalid = formStatus === 'error' && invalidFields.message;
 
   const resetForm = () => {
     setName('');
@@ -51,17 +57,56 @@ export function AuditIntakeForm({
     setScope('');
     setHoneypot('');
     setValidationMessage('');
+    setInvalidFields({ email: false, websiteUrl: false, message: false });
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setValidationMessage('');
 
-    if (!email.trim() || !message.trim()) {
-      setValidationMessage('Email and message required.');
+    const normalizedEmail = email.trim();
+    const normalizedWebsiteUrl = websiteUrl.trim();
+    const normalizedMessage = message.trim();
+    let websiteIsValid = true;
+
+    if (normalizedWebsiteUrl) {
+      try {
+        const parsedWebsiteUrl = new URL(normalizedWebsiteUrl);
+        websiteIsValid = parsedWebsiteUrl.protocol === 'http:' || parsedWebsiteUrl.protocol === 'https:';
+      } catch {
+        websiteIsValid = false;
+      }
+    }
+
+    const nextInvalidFields = {
+      email: !normalizedEmail || !emailPattern.test(normalizedEmail),
+      websiteUrl: !websiteIsValid,
+      message: !normalizedMessage,
+    };
+
+    if (nextInvalidFields.email || nextInvalidFields.websiteUrl || nextInvalidFields.message) {
+      const nextMessage = !normalizedEmail && !normalizedMessage
+        ? 'Email and message required.'
+        : !normalizedEmail
+          ? 'Email is required.'
+          : !emailPattern.test(normalizedEmail)
+            ? 'Enter a valid email address.'
+            : !websiteIsValid
+              ? 'Enter a complete website URL including https://.'
+              : 'Message is required.';
+
+      setValidationMessage(nextMessage);
+      setInvalidFields(nextInvalidFields);
       setFormStatus('error');
+      (nextInvalidFields.email
+        ? emailInputRef.current
+        : nextInvalidFields.websiteUrl
+          ? websiteInputRef.current
+          : messageInputRef.current)?.focus();
       return;
     }
+
+    setInvalidFields({ email: false, websiteUrl: false, message: false });
 
     if (honeypot.trim()) {
       setFormStatus('success');
@@ -114,7 +159,7 @@ export function AuditIntakeForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`w-full ${isCompact ? 'space-y-5' : 'max-w-xl space-y-6'} ${className}`}>
+    <form noValidate onSubmit={handleSubmit} className={`w-full ${isCompact ? 'space-y-5' : 'max-w-xl space-y-6'} ${className}`}>
       <div aria-hidden="true" className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
         <label htmlFor="contact-company-url">Company URL</label>
         <input id="contact-company-url" name="_gotcha" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(event) => setHoneypot(event.target.value)} />
@@ -127,18 +172,18 @@ export function AuditIntakeForm({
         </div>
         <div>
           <FieldLabel htmlFor="contact-email">Email</FieldLabel>
-          <input id="contact-email" name="email" type="email" required aria-invalid={emailInvalid} aria-describedby="contact-form-status" autoComplete="email" maxLength={160} value={email} onChange={(event) => setEmail(event.target.value)} className={fieldClass} />
+          <input ref={emailInputRef} id="contact-email" name="email" type="email" required aria-invalid={emailInvalid} aria-describedby="contact-form-status" autoComplete="email" maxLength={160} value={email} onChange={(event) => setEmail(event.target.value)} className={fieldClass} />
         </div>
       </div>
 
       <div>
         <FieldLabel htmlFor="contact-website-url">Website <span className="normal-case tracking-normal">(optional)</span></FieldLabel>
-        <input id="contact-website-url" name="websiteUrl" type="url" autoComplete="url" placeholder="https://example.com" maxLength={240} value={websiteUrl} onChange={(event) => setWebsiteUrl(event.target.value)} className={fieldClass} />
+        <input ref={websiteInputRef} id="contact-website-url" name="websiteUrl" type="url" aria-invalid={websiteInvalid} aria-describedby="contact-form-status" autoComplete="url" placeholder="https://example.com" maxLength={240} value={websiteUrl} onChange={(event) => setWebsiteUrl(event.target.value)} className={fieldClass} />
       </div>
 
       <div>
         <FieldLabel htmlFor="contact-message">Message</FieldLabel>
-        <textarea id="contact-message" name="message" required aria-invalid={messageInvalid} aria-describedby="contact-form-status" rows={isCompact ? 5 : 4} placeholder="What are you trying to understand, fix, or build?" maxLength={2000} value={message} onChange={(event) => setMessage(event.target.value)} className={`${fieldClass} resize-y`} />
+        <textarea ref={messageInputRef} id="contact-message" name="message" required aria-invalid={messageInvalid} aria-describedby="contact-form-status" rows={isCompact ? 5 : 4} placeholder="What are you trying to understand, fix, or build?" maxLength={2000} value={message} onChange={(event) => setMessage(event.target.value)} className={`${fieldClass} resize-y`} />
       </div>
 
       <details className="border border-canvas/16 bg-canvas/[0.025]">
