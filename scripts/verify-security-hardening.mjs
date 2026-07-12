@@ -21,7 +21,10 @@ function expect(condition, message) {
 }
 
 function headerMap(headers = []) {
-  return Object.fromEntries(headers.map((header) => [header.key.toLowerCase(), header.value]));
+  if (Array.isArray(headers)) {
+    return Object.fromEntries(headers.map((header) => [header.key.toLowerCase(), header.value]));
+  }
+  return Object.fromEntries(Object.entries(headers).map(([key, value]) => [key.toLowerCase(), value]));
 }
 
 function cspDirective(csp, name) {
@@ -57,7 +60,8 @@ function scanFiles(dir, predicate) {
 }
 
 const vercel = readJson('vercel.json');
-const globalHeaders = vercel.headers?.find((entry) => entry.source === '/(.*)');
+const globalHeaders = vercel.headers?.find((entry) => entry.source === '/(.*)')
+  ?? vercel.routes?.find((entry) => entry.src === '/(.*)' && entry.continue === true && entry.headers?.['Content-Security-Policy']);
 expect(Boolean(globalHeaders), 'vercel.json must define global security headers for /(.*)');
 
 const headers = headerMap(globalHeaders?.headers);

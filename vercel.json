@@ -10,86 +10,66 @@
       "config": { "distDir": "dist" }
     }
   ],
-  "redirects": [
+  "routes": [
     {
-      "source": "/Sulayman_Bowles_Resume_2025.pdf",
+      "src": "/Sulayman_Bowles_Resume_2025\\.pdf",
       "has": [{ "type": "host", "value": "www.sulayman-bowles.dev" }],
-      "destination": "https://sulayman-bowles.dev/resume",
-      "statusCode": 301
+      "headers": { "Location": "https://sulayman-bowles.dev/resume" },
+      "status": 301
     },
     {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "host", "value": "www.sulayman-bowles.dev" }],
-      "destination": "https://sulayman-bowles.dev/",
-      "statusCode": 301
+      "headers": { "Location": "https://sulayman-bowles.dev/" },
+      "status": 301
     },
     {
-      "source": "/:path*",
+      "src": "/(.*)",
       "has": [{ "type": "host", "value": "www.sulayman-bowles.dev" }],
-      "destination": "https://sulayman-bowles.dev/:path*",
-      "statusCode": 301
+      "headers": { "Location": "https://sulayman-bowles.dev/$1" },
+      "status": 301
     },
     {
-      "source": "/Sulayman_Bowles_Resume_2025.pdf",
-      "destination": "/resume",
-      "statusCode": 301
+      "src": "/Sulayman_Bowles_Resume_2025\\.pdf",
+      "headers": { "Location": "/resume" },
+      "status": 301
     },
     {
-      "source": "/resume.pdf",
-      "destination": "/Sulayman_Bowles_Resume.pdf",
-      "statusCode": 301
+      "src": "/resume\\.pdf",
+      "headers": { "Location": "/Sulayman_Bowles_Resume.pdf" },
+      "status": 301
     },
-    { "source": "/projects/atlas", "destination": "/atlas", "permanent": true },
-    { "source": "/projects/markets", "destination": "/markets", "permanent": true },
-    { "source": "/atlas/sample-run", "destination": "/atlas/sample-crawl", "permanent": true },
-    { "source": "/atlas-animation", "destination": "/atlas/celestial-parallax", "permanent": true },
-    { "source": "/audit-intake", "destination": "/contact", "permanent": true },
-    { "source": "/austin-seo", "destination": "/austin-technical-seo", "permanent": true },
-    { "source": "/technical-seo-case-study", "destination": "/case-studies/technical-seo-audit", "permanent": true },
-    { "source": "/book", "destination": "/simple", "permanent": true },
-    { "source": "/plain", "destination": "/simple", "permanent": true },
-    { "source": "/text", "destination": "/simple", "permanent": true },
-    { "source": "/cv", "destination": "/resume", "permanent": true },
-    { "source": "/cv.html", "destination": "/resume", "permanent": true },
-    { "source": "/resume.html", "destination": "/resume", "permanent": true },
-    { "source": "/official-information", "destination": "/ai-information", "permanent": true },
-    { "source": "/entity-profile", "destination": "/ai-information", "permanent": true },
-    { "source": "/source-information", "destination": "/ai-information", "permanent": true },
-    { "source": "/research-assets", "destination": "/research", "permanent": true }
-  ],
-  "headers": [
+    { "src": "/projects/atlas", "headers": { "Location": "/atlas" }, "status": 308 },
+    { "src": "/projects/markets", "headers": { "Location": "/markets" }, "status": 308 },
+    { "src": "/atlas/sample-run", "headers": { "Location": "/atlas/sample-crawl" }, "status": 308 },
+    { "src": "/atlas-animation", "headers": { "Location": "/atlas/celestial-parallax" }, "status": 308 },
+    { "src": "/audit-intake", "headers": { "Location": "/contact" }, "status": 308 },
+    { "src": "/austin-seo", "headers": { "Location": "/austin-technical-seo" }, "status": 308 },
+    { "src": "/technical-seo-case-study", "headers": { "Location": "/case-studies/technical-seo-audit" }, "status": 308 },
+    { "src": "/book", "headers": { "Location": "/simple" }, "status": 308 },
+    { "src": "/plain", "headers": { "Location": "/simple" }, "status": 308 },
+    { "src": "/text", "headers": { "Location": "/simple" }, "status": 308 },
+    { "src": "/cv", "headers": { "Location": "/resume" }, "status": 308 },
+    { "src": "/cv\\.html", "headers": { "Location": "/resume" }, "status": 308 },
+    { "src": "/resume\\.html", "headers": { "Location": "/resume" }, "status": 308 },
+    { "src": "/official-information", "headers": { "Location": "/ai-information" }, "status": 308 },
+    { "src": "/entity-profile", "headers": { "Location": "/ai-information" }, "status": 308 },
+    { "src": "/source-information", "headers": { "Location": "/ai-information" }, "status": 308 },
+    { "src": "/research-assets", "headers": { "Location": "/research" }, "status": 308 },
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://formspree.io; frame-src 'none'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=31536000"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
-        },
-        {
-          "key": "X-Permitted-Cross-Domain-Policies",
-          "value": "none"
-        }
-      ]
-    }
+      "src": "/(.*)",
+      "headers": {
+        "Content-Security-Policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://formspree.io; frame-src 'none'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests",
+        "Strict-Transport-Security": "max-age=31536000",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "X-Permitted-Cross-Domain-Policies": "none"
+      },
+      "continue": true
+    },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "status": 404, "dest": "/404.html" }
   ]
 }

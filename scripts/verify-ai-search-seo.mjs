@@ -651,7 +651,15 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
 
 {
   const vercelConfig = JSON.parse(read('vercel.json'));
-  const redirects = vercelConfig.redirects ?? [];
+  const redirects = [
+    ...(vercelConfig.redirects ?? []),
+    ...(vercelConfig.routes ?? [])
+      .filter((item) => item.headers?.Location && item.status >= 300 && item.status < 400)
+      .map((item) => ({
+        source: item.src.replaceAll('\\.', '.'),
+        destination: item.headers.Location,
+      })),
+  ];
   assert(vercelConfig.cleanUrls === true, 'vercel: cleanUrls must redirect .html duplicate URLs');
   assert(vercelConfig.trailingSlash === false, 'vercel: trailingSlash must redirect slash duplicate URLs');
   assert(!redirects.some((item) => item.source === '/void-agency'), 'vercel: /void-agency must not redirect away from canonical route');

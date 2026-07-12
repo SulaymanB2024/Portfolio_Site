@@ -43,6 +43,7 @@ const appSource = read('src/App.tsx');
 const profileSource = read('src/content/profileFacts.ts');
 const llmsText = read('public/llms.txt');
 const indexCss = read('src/index.css');
+const vercelConfig = JSON.parse(read('vercel.json'));
 
 const primaryBlock = navSource.match(/export const primaryNav[\s\S]*?\n\];/)?.[0] ?? '';
 const primaryLabels = [...primaryBlock.matchAll(/label: '([^']+)'/g)].map((match) => match[1]);
@@ -67,6 +68,15 @@ assert(fs.existsSync(path.resolve('dist/404.html')), 'Generated 404.html is miss
 assert(notFoundHtml.includes('name="robots" content="noindex,nofollow"'), '404 artifact must be noindex,nofollow');
 assert(textFromHtml(notFoundHtml).includes('Page Not Found'), '404 artifact needs a clear page identity');
 assert(appSource.includes('<NotFoundPage'), 'Unknown client routes do not render the dedicated NotFound page');
+assert(vercelConfig.routes?.some((route) => route.handle === 'filesystem'), 'Vercel custom 404 routing must check generated files first');
+assert(vercelConfig.routes?.some((route) => route.src === '/(.*)' && route.status === 404 && route.dest === '/404.html'), 'Vercel custom 404 routing must preserve HTTP 404 status');
+const filesystemRouteIndex = vercelConfig.routes.findIndex((route) => route.handle === 'filesystem');
+const notFoundRouteIndex = vercelConfig.routes.findIndex((route) => route.status === 404 && route.dest === '/404.html');
+const securityRouteIndex = vercelConfig.routes.findIndex((route) => route.continue === true && route.headers?.['Content-Security-Policy']);
+const legacyAliasIndex = vercelConfig.routes.findIndex((route) => route.src === '/projects/atlas' && route.headers?.Location === '/atlas');
+assert(legacyAliasIndex >= 0 && legacyAliasIndex < filesystemRouteIndex, 'Legacy aliases must run before filesystem and 404 handling');
+assert(securityRouteIndex >= 0 && securityRouteIndex < filesystemRouteIndex, 'Security headers must run before filesystem and 404 handling');
+assert(filesystemRouteIndex >= 0 && filesystemRouteIndex < notFoundRouteIndex, 'Vercel filesystem handling must precede the branded 404 catch-all');
 
 for (const artifact of ['Atlas SEO Audit Console', 'Who Owns the Toll Roads in Texas?', 'ViralBench + Codex Improvement Harness', 'Austin Crawlability Pilot', 'Void Agency', 'Sulayman Bowles Technical Ledger']) {
   assert(textFromHtml(workHtml).includes(artifact), `Work page missing artifact: ${artifact}`);
