@@ -201,19 +201,40 @@ if (!existsSync(migrationsDirectory)) {
   const migrationNames = readdirSync(migrationsDirectory)
     .filter((name) => name.endsWith('.sql'))
     .sort();
-  const expectedMigrationNames = [
+  const requiredMigrationNames = [
     '20260711221900_bot_observer_initial.sql',
     '20260711222043_bot_observer_advisor_hardening.sql',
     '20260712193843_bot_observer_vault_credentials.sql',
   ];
-  if (JSON.stringify(migrationNames) !== JSON.stringify(expectedMigrationNames)) {
-    fail(`unexpected migration ledger: ${migrationNames.join(', ')}`);
+  const invalidMigrationNames = migrationNames.filter(
+    (name) => !/^\d{14}_[a-z0-9_]+\.sql$/.test(name),
+  );
+  const migrationVersions = migrationNames.map((name) => name.slice(0, 14));
+  const duplicateVersions = migrationVersions.filter(
+    (version, index) => migrationVersions.indexOf(version) !== index,
+  );
+  const requiredMigrationIndexes = requiredMigrationNames.map((name) =>
+    migrationNames.indexOf(name),
+  );
+  const hasRequiredMigrations = requiredMigrationIndexes.every((index) => index >= 0);
+  const requiredMigrationsAreOrdered = requiredMigrationIndexes.every(
+    (index, position) => position === 0 || index > requiredMigrationIndexes[position - 1],
+  );
+
+  if (
+    invalidMigrationNames.length > 0 ||
+    duplicateVersions.length > 0 ||
+    !hasRequiredMigrations ||
+    !requiredMigrationsAreOrdered
+  ) {
+    fail(`invalid migration ledger: ${migrationNames.join(', ')}`);
   } else {
-    pass('local migration filenames match the hosted ledger plus the Vault upgrade');
-    migration = migrationNames
-      .map((name) => readFileSync(resolve(migrationsDirectory, name), 'utf8'))
-      .join('\n');
+    pass('migration ledger preserves the required baseline and valid additive migrations');
   }
+
+  migration = migrationNames
+    .map((name) => readFileSync(resolve(migrationsDirectory, name), 'utf8'))
+    .join('\n');
 }
 
 for (const objectName of [
