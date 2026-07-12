@@ -727,24 +727,30 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     return articleShell(
       'Sulayman Bowles Resume',
       'Technical SEO, Atlas, finance research, and product/software execution.',
-      `<p>${escapeHtml(PROFILE_FACTS.currentSummary)}</p>
+      `<p>Technical SEO, search systems, product, and finance research.</p>
+        <p>Builds inspectable systems that keep raw observations separate from analysis, recommendations, and measurement gaps.</p>
         <p>Reviewed ${escapeHtml(formatIsoDate(PROFILE_FACTS.lastReviewed))}. Current-role tense review scheduled for ${escapeHtml(formatIsoDate(PROFILE_FACTS.nextRoleReview))}.</p>
-        <h2>Education and Current Focus</h2>
-        <h3>McCombs School of Business</h3><p>Bachelor of Business Administration in Finance, The University of Texas at Austin. Expected May 2027.</p>
-        <h3>Current focus</h3><p>Atlas, technical SEO, product systems, and source-led research with raw observations kept separate from analysis and recommendations.</p>
+        <h2>Education</h2>
+        <h3>McCombs School of Business</h3><p>Bachelor of Business Administration in Finance, The University of Texas at Austin. Expected May 2027. Coursework includes valuation, quantitative investment, database management, and predictive analytics. Activities include Texas Venture Labs.</p>
         <h2>Experience</h2>
         ${resumeExperience
           .map(([role, org, dates, summary]) => `<h3>${escapeHtml(role)}</h3><p><strong>${escapeHtml(org)}</strong> - ${escapeHtml(dates)}. ${escapeHtml(summary)}</p>`)
           .join('\n        ')}
-        <h2>Skill Inventory</h2>
+        <p><strong>Void Agency dated annotation:</strong> $50K+ collected revenue as of May 31, 2026.</p>
+        <h2>Capabilities</h2>
         ${definitionCards(resumeSkills)}
-	        <h2>Supporting Links</h2>
+        <h2>Selected Public Evidence</h2>
         ${linkList([
-          { label: 'Atlas technical SEO console', href: '/atlas', description: 'Product case study.' },
-          { label: 'Markets research index', href: '/markets', description: 'Research notes.' },
-          { label: 'Void Agency method', href: '/method', description: 'Technical SEO process.' },
+          { label: 'Atlas', href: '/atlas/sample-crawl', description: 'Crawl and evidence console with a public sanitized run. As of July 12, 2026.' },
+          { label: 'Public research', href: '/markets/who-owns-texas-toll-roads', description: 'Texas toll-road ownership, operators, and economics. As of July 11, 2026.' },
+        ])}
+        <h2>Profiles and Sources</h2>
+        ${linkList([
+          { label: 'Selected Work', href: '/work', description: 'Inspectable public artifacts.' },
+          { label: 'Research', href: '/research', description: 'Search, product, and markets notes.' },
           { label: 'GitHub', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
           { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
+          { label: 'Contact', href: '/contact', description: 'Direct email and compact brief.' },
           { label: 'Download PDF résumé', href: '/Sulayman_Bowles_Resume.pdf', description: 'Current PDF résumé.' },
           { label: 'Email', href: 'mailto:sulayman.bowles@gmail.com', description: 'Direct contact.' },
         ])}`,

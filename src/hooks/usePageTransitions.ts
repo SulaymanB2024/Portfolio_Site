@@ -86,19 +86,39 @@ export function usePageTransitions({
   hashFocusSelector = '#contact-name',
 }: UsePageTransitionsOptions) {
   const isPopStateRef = useRef(false);
-  const preloadedPathsRef = useRef(new Set<string>());
+  const preloadPromisesRef = useRef(new Map<string, Promise<void>>());
 
   useEffect(() => {
+    const preloadTarget = (targetPath?: string) => {
+      if (!targetPath || !preloadPath) {
+        return Promise.resolve();
+      }
+
+      const existingPromise = preloadPromisesRef.current.get(targetPath);
+      if (existingPromise) {
+        return existingPromise;
+      }
+
+      const preloadPromise = Promise.resolve(preloadPath(targetPath)).catch((error: unknown) => {
+        preloadPromisesRef.current.delete(targetPath);
+        throw error;
+      });
+      preloadPromisesRef.current.set(targetPath, preloadPromise);
+      return preloadPromise;
+    };
+
     const preloadInBackground = (targetPath?: string) => {
-      if (!targetPath || !preloadPath || preloadedPathsRef.current.has(targetPath)) return;
-      preloadedPathsRef.current.add(targetPath);
-      void Promise.resolve(preloadPath(targetPath)).catch(() => {
-        preloadedPathsRef.current.delete(targetPath);
+      void preloadTarget(targetPath).catch(() => {
+        // Suspense remains the destination recovery state when preloading fails.
       });
     };
 
-    const executeTransition = (navigateCallback: () => void, targetPath?: string) => {
-      preloadInBackground(targetPath);
+    const executeTransition = async (navigateCallback: () => void, targetPath?: string) => {
+      try {
+        await preloadTarget(targetPath);
+      } catch {
+        // Continue to the route-level recovery UI if the destination chunk failed.
+      }
 
       const viewTransitionDocument = document as ViewTransitionDocument;
       if (reducedMotionRequested() || !viewTransitionDocument.startViewTransition) {
@@ -124,7 +144,7 @@ export function usePageTransitions({
       const href = link?.getAttribute('href');
       if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
-      const url = new URL(href, window.location.origin);
+      const url = new URL(href, window.location.href);
       if (url.origin !== window.location.origin || /\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
       preloadInBackground(`${normalizePath(url.pathname)}${url.search}${url.hash}`);
     };
@@ -155,7 +175,7 @@ export function usePageTransitions({
       const href = link.getAttribute('href');
       if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
-      const url = new URL(href, window.location.origin);
+      const url = new URL(href, window.location.href);
       if (url.origin !== window.location.origin || /\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
 
       const canonicalPath = normalizePath(url.pathname);

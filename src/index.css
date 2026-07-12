@@ -218,6 +218,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.js #seo-static-summary {
+  display: none;
+}
+
+.route-loader-rule {
+  animation: route-loader-rule 1100ms cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+  transform: scaleX(0.14);
+}
+
+@keyframes route-loader-rule {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-loader-rule {
+    animation: none;
+    transform: scaleX(0.66);
+  }
+}
+
 /* Reversing the default theme so the background is light "canvas" and text is "ink" for a more painterly paper feel */
 /* We will do a dark section later to contrast it */
 
@@ -349,26 +371,161 @@ select:focus-visible {
     inset 0 -1px 0 rgba(0, 0, 0, 0.18);
 }
 
-.site-header {
+.site-header-editorial {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  border-bottom: 1px solid;
+  -webkit-backdrop-filter: blur(18px) saturate(112%);
+  backdrop-filter: blur(18px) saturate(112%);
+  transition:
+    background-color 260ms ease,
+    border-color 260ms ease,
+    color 260ms ease;
 }
 
-.site-header::before {
+.site-header-surface-light {
+  border-color: color-mix(in srgb, var(--color-ink) 16%, transparent);
+  background: color-mix(in srgb, var(--color-canvas) 92%, transparent);
+  color: var(--color-ink);
+}
+
+.site-header-surface-dark {
+  border-color: color-mix(in srgb, var(--color-canvas) 16%, transparent);
+  background: color-mix(in srgb, var(--color-ink) 92%, transparent);
+  color: var(--color-canvas);
+}
+
+.site-header-editorial::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  border-radius: inherit;
   background:
-    linear-gradient(115deg, rgba(255, 255, 255, 0.26), transparent 28%),
-    linear-gradient(290deg, transparent 62%, rgba(255, 255, 255, 0.11));
-  opacity: 0.78;
+    linear-gradient(currentColor, currentColor) 14px 14px / 16px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) 14px 14px / 1px 16px no-repeat,
+    linear-gradient(currentColor, currentColor) calc(100% - 30px) 14px / 16px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) calc(100% - 15px) 14px / 1px 16px no-repeat;
+  opacity: 0.24;
   pointer-events: none;
 }
 
-.site-header > * {
+.site-header-editorial > * {
+  position: relative;
+  z-index: 1;
+}
+
+.site-header-mobile-sheet {
+  -webkit-backdrop-filter: blur(22px) saturate(112%);
+  backdrop-filter: blur(22px) saturate(112%);
+}
+
+.research-hero {
+  min-height: 410px;
+}
+
+.research-hero-copy-scrim {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 1;
+  width: 88%;
+  background: linear-gradient(
+    90deg,
+    var(--color-canvas) 0%,
+    color-mix(in srgb, var(--color-canvas) 96%, transparent) 58%,
+    transparent 100%
+  );
+}
+
+.research-coin-art {
+  position: absolute;
+  top: 50%;
+  right: -230px;
+  width: 500px;
+  max-width: none;
+  height: auto;
+  opacity: 0.29;
+  transform: translateY(-50%);
+}
+
+.markets-coin-art {
+  position: absolute;
+  top: 52%;
+  right: -250px;
+  width: 520px;
+  opacity: 0.2;
+  transform: translateY(-50%);
+}
+
+@media (min-width: 768px) {
+  .research-hero {
+    min-height: 360px;
+  }
+
+  .research-hero-copy-scrim {
+    width: 70%;
+  }
+
+  .research-coin-art {
+    right: -190px;
+    width: 690px;
+    opacity: 0.52;
+  }
+
+  .markets-coin-art {
+    right: -230px;
+    width: 720px;
+    opacity: 0.3;
+  }
+}
+
+@media (min-width: 1280px) {
+  .research-hero {
+    min-height: 430px;
+  }
+
+  .research-hero-copy-scrim {
+    width: 62%;
+  }
+
+  .research-coin-art {
+    right: -130px;
+    width: 890px;
+    opacity: 0.62;
+  }
+
+  .markets-coin-art {
+    top: 40px;
+    right: -10vw;
+    width: min(76vw, 1160px);
+    opacity: 0.48;
+    transform: none;
+  }
+}
+
+.site-footer-editorial {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.site-footer-editorial::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(currentColor, currentColor) 14px 14px / 16px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) 14px 14px / 1px 16px no-repeat,
+    linear-gradient(currentColor, currentColor) calc(100% - 30px) calc(100% - 15px) / 16px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) calc(100% - 15px) calc(100% - 30px) / 1px 16px no-repeat;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.site-footer-editorial > * {
   position: relative;
   z-index: 1;
 }
@@ -1452,7 +1609,7 @@ select:focus-visible {
     font-size: 11pt !important;
   }
 
-  header,
+  main > header,
   footer,
   button,
   .fixed,
@@ -1486,5 +1643,108 @@ select:focus-visible {
   article {
     border-color: rgba(8, 8, 7, 0.2) !important;
     background-color: transparent !important;
+  }
+
+  .resume-page {
+    color: #000000 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .resume-page > div {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .resume-page section,
+  .resume-page .grid {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  .resume-page .resume-hero {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) !important;
+    gap: 0.45in !important;
+    padding: 0 0 0.22in !important;
+  }
+
+  .resume-page .resume-hero h1 {
+    margin-top: 0.14in !important;
+    font-size: 30pt !important;
+    line-height: 0.9 !important;
+  }
+
+  .resume-page .resume-hero h1 + p {
+    margin-top: 0.12in !important;
+    font-size: 16pt !important;
+    line-height: 1 !important;
+  }
+
+  .resume-page .resume-hero aside {
+    border-top: 0 !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.22) !important;
+    padding-top: 0 !important;
+    padding-left: 0.22in !important;
+  }
+
+  .resume-page .resume-print-contact {
+    display: block !important;
+  }
+
+  .resume-page .resume-actions,
+  .resume-page .resume-evidence-band nav {
+    display: none !important;
+  }
+
+  .resume-page .resume-chapter {
+    display: grid !important;
+    grid-template-columns: 1.25in minmax(0, 1fr) !important;
+    gap: 0.28in !important;
+    padding: 0.2in 0 !important;
+  }
+
+  .resume-page .resume-chapter h2,
+  .resume-page .resume-evidence-band h2 {
+    font-size: 16pt !important;
+    line-height: 1 !important;
+  }
+
+  .resume-page .resume-experience-row,
+  .resume-page .resume-capability,
+  .resume-page .resume-evidence-entry {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .resume-page .resume-experience-row {
+    display: grid !important;
+    grid-template-columns: 1.65in minmax(0, 1fr) !important;
+    gap: 0.22in !important;
+    padding: 0.11in 0 !important;
+  }
+
+  .resume-page .resume-capability {
+    min-height: 0 !important;
+    padding: 0.14in !important;
+  }
+
+  .resume-page .resume-evidence-band {
+    margin-top: 0.08in !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.22) !important;
+    background: #ffffff !important;
+    padding: 0.2in 0 0 !important;
+    color: #000000 !important;
+  }
+
+  .resume-page .resume-evidence-band > div:first-child {
+    padding-bottom: 0.12in !important;
+  }
+
+  .resume-page .resume-evidence-entry {
+    min-height: 0 !important;
+    border-color: rgba(0, 0, 0, 0.22) !important;
+    padding: 0.14in !important;
+    color: #000000 !important;
   }
 }

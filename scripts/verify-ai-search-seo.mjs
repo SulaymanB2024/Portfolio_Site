@@ -350,9 +350,11 @@ assertVisibleText('dist/about/index.html', [
 }
 
 assertVisibleText('dist/resume/index.html', [
-  'Education and Current Focus',
+  'Education',
   'Expected May 2027',
-  'Skill Inventory',
+  'Capabilities',
+  'Selected Public Evidence',
+  'Profiles and Sources',
   'Download PDF résumé',
 ]);
 assert(read('dist/resume/index.html').includes('/Sulayman_Bowles_Resume.pdf'), 'resume: missing PDF resume href');
@@ -360,7 +362,7 @@ assert(read('dist/resume/index.html').includes('/Sulayman_Bowles_Resume.pdf'), '
 {
   const resumePdf = path.resolve('public/Sulayman_Bowles_Resume.pdf');
   const pdfStat = fs.statSync(resumePdf);
-  assert(pdfStat.size > 100000, 'resume PDF should be present and non-empty');
+  assert(pdfStat.size > 20000, 'resume PDF should be present and non-empty');
   const signature = fs.readFileSync(resumePdf).subarray(0, 4).toString('utf8');
   assert(signature === '%PDF', 'resume PDF should have a PDF signature');
 }

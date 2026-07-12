@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState, type KeyboardEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 type VisibilitySystemMapProps = {
@@ -79,9 +79,33 @@ const colDescriptions = [
 
 export default function VisibilitySystemMap({ className = '' }: VisibilitySystemMapProps) {
   const [hoveredCol, setHoveredCol] = useState<number | null>(null);
+  const stageButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  const handleStageKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let nextIndex: number | null = null;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      nextIndex = (index + 1) % colDescriptions.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      nextIndex = (index - 1 + colDescriptions.length) % colDescriptions.length;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = colDescriptions.length - 1;
+    }
+
+    if (nextIndex === null) {
+      return;
+    }
+
+    event.preventDefault();
+    setHoveredCol(nextIndex);
+    stageButtonRefs.current[nextIndex]?.focus();
+  };
 
   return (
     <div className={`relative overflow-hidden border border-canvas/15 bg-ink ${className}`}>
+      <div className="aspect-[1000/620] w-full">
       <svg viewBox="0 0 1000 620" className="h-full w-full" role="img" aria-label="Visibility system map showing messy web signals transformed into business clarity">
         <defs>
           <pattern id="visibility-grid" width="32" height="32" patternUnits="userSpaceOnUse">
@@ -349,19 +373,50 @@ export default function VisibilitySystemMap({ className = '' }: VisibilitySystem
             fontSize="8.5" 
             letterSpacing="1.2"
           >
-            {hoveredCol !== null ? colDescriptions[hoveredCol].desc : "Hover over columns above to trace technical search signals to business growth."}
+            {hoveredCol !== null ? colDescriptions[hoveredCol].desc : "Select a stage below to trace technical search signals to business growth."}
           </text>
         </g>
 
         {/* Invisible Vertical Hover Zones */}
         <g opacity="0">
-          <rect x="24" y="24" width="166" height="484" fill="red" pointerEvents="all" onMouseEnter={() => setHoveredCol(0)} onMouseLeave={() => setHoveredCol(null)} />
-          <rect x="190" y="24" width="220" height="484" fill="green" pointerEvents="all" onMouseEnter={() => setHoveredCol(1)} onMouseLeave={() => setHoveredCol(null)} />
-          <rect x="410" y="24" width="220" height="484" fill="blue" pointerEvents="all" onMouseEnter={() => setHoveredCol(2)} onMouseLeave={() => setHoveredCol(null)} />
-          <rect x="630" y="24" width="180" height="484" fill="yellow" pointerEvents="all" onMouseEnter={() => setHoveredCol(3)} onMouseLeave={() => setHoveredCol(null)} />
-          <rect x="810" y="24" width="166" height="484" fill="purple" pointerEvents="all" onMouseEnter={() => setHoveredCol(4)} onMouseLeave={() => setHoveredCol(null)} />
+          <rect x="24" y="24" width="166" height="484" fill="red" pointerEvents="all" onMouseEnter={() => setHoveredCol(0)} />
+          <rect x="190" y="24" width="220" height="484" fill="green" pointerEvents="all" onMouseEnter={() => setHoveredCol(1)} />
+          <rect x="410" y="24" width="220" height="484" fill="blue" pointerEvents="all" onMouseEnter={() => setHoveredCol(2)} />
+          <rect x="630" y="24" width="180" height="484" fill="yellow" pointerEvents="all" onMouseEnter={() => setHoveredCol(3)} />
+          <rect x="810" y="24" width="166" height="484" fill="purple" pointerEvents="all" onMouseEnter={() => setHoveredCol(4)} />
         </g>
       </svg>
+      </div>
+
+      <div className="grid border-t border-canvas/14 sm:grid-cols-5" role="group" aria-label="Visibility system stages">
+        {colDescriptions.map((item, index) => (
+          <button
+            key={item.title}
+            ref={(node) => { stageButtonRefs.current[index] = node; }}
+            type="button"
+            aria-pressed={hoveredCol === index}
+            className={`grid min-h-12 grid-cols-[2rem_1fr] items-center gap-2 border-b border-canvas/12 px-3 py-3 text-left transition-colors last:border-b-0 sm:min-h-[76px] sm:grid-cols-1 sm:border-r sm:border-b-0 sm:last:border-r-0 ${hoveredCol === index ? 'bg-canvas text-ink' : 'text-canvas/64 hover:bg-canvas/[0.05] hover:text-canvas'}`}
+            onClick={() => setHoveredCol(index)}
+            onFocus={() => setHoveredCol(index)}
+            onMouseEnter={() => setHoveredCol(index)}
+            onKeyDown={(event) => handleStageKeyDown(event, index)}
+          >
+            <span aria-hidden="true" className="font-serif text-base italic leading-none opacity-56">{String(index + 1).padStart(2, '0')}</span>
+            <span className="text-[9px] uppercase leading-relaxed tracking-[0.18em]">{item.title}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="min-h-[88px] border-t border-canvas/14 px-4 py-4 sm:px-5" aria-live="polite">
+        <p className="text-[10px] uppercase tracking-[0.2em] text-canvas/60">
+          {hoveredCol === null ? 'Technical visibility map' : colDescriptions[hoveredCol].title}
+        </p>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-canvas/70">
+          {hoveredCol === null
+            ? 'Choose a stage to trace raw site signals into reviewable business decisions.'
+            : colDescriptions[hoveredCol].desc}
+        </p>
+      </div>
     </div>
   );
 }

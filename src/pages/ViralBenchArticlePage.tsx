@@ -1,4 +1,6 @@
 import { createElement, useMemo, type ReactNode } from 'react';
+import ArrowDown from 'lucide-react/dist/esm/icons/arrow-down.js';
+import ArrowLeft from 'lucide-react/dist/esm/icons/arrow-left.js';
 import { InternalFooter } from '../components/InternalFooter';
 import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
@@ -68,13 +70,13 @@ function ArchitectureDiagram() {
           <strong>ViralBench agent</strong>
           <p>Research → create → preview → submit</p>
         </div>
-        <span className="viralbench-architecture__arrow" aria-hidden="true">↓</span>
+        <ArrowDown className="viralbench-architecture__arrow" aria-hidden="true" size={18} strokeWidth={1.3} />
         <div className="viralbench-node viralbench-node--evidence">
           <span className="viralbench-node__index">02 / evidence spine</span>
           <strong>Immutable trace + evaluator</strong>
           <p>Sources, artifacts, configuration, checks, fixed-window outcomes</p>
         </div>
-        <span className="viralbench-architecture__arrow" aria-hidden="true">↓</span>
+        <ArrowDown className="viralbench-architecture__arrow" aria-hidden="true" size={18} strokeWidth={1.3} />
         <div className="viralbench-node viralbench-node--codex">
           <span className="viralbench-node__index">03 / outer loop</span>
           <strong>Codex worktree</strong>
@@ -102,7 +104,10 @@ export default function ViralBenchArticlePage() {
       <article className="viralbench-article relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-20 pt-16 md:px-8 lg:px-10 lg:pt-24">
         <header className="grid gap-12 border-b border-canvas/12 pb-14 lg:grid-cols-[minmax(220px,0.25fr)_minmax(0,0.75fr)] lg:gap-16 lg:pb-20">
           <aside className="order-2 grid content-start gap-8 border-t border-canvas/12 pt-8 text-[10px] uppercase tracking-[0.22em] text-canvas/52 lg:order-1 lg:border-r lg:border-t-0 lg:pr-8 lg:pt-0">
-            <a href="/research" className="text-accent transition-colors hover:text-canvas">← Research notes</a>
+            <a href="/research" className="inline-flex min-h-11 items-center gap-2 text-accent transition-colors hover:text-canvas">
+              <ArrowLeft aria-hidden="true" size={14} strokeWidth={1.4} />
+              <span>Research notes</span>
+            </a>
             <dl className="grid gap-5">
               <div><dt className="text-canvas/30">Category</dt><dd className="mt-1 text-canvas">AI Systems Engineering</dd></div>
               <div><dt className="text-canvas/30">Author</dt><dd className="mt-1"><a href="/about" className="text-canvas hover:text-accent">Sulayman Bowles</a></dd></div>
@@ -114,7 +119,7 @@ export default function ViralBenchArticlePage() {
 
           <div className="order-1 lg:order-2">
             <p className="mb-7 text-[10px] uppercase tracking-[0.34em] text-accent">ViralBench × Codex / build note 001</p>
-            <h1 className="max-w-[13ch] font-serif text-[3.35rem] font-light italic leading-[0.86] tracking-normal text-canvas sm:text-[4.5rem] lg:text-[6.6rem] xl:text-[8rem]">
+            <h1 className="max-w-[13ch] font-serif text-[3.35rem] font-light italic leading-[0.86] tracking-normal text-canvas sm:text-[4.5rem] lg:text-7xl xl:text-8xl">
               {VIRALBENCH_ARTICLE_TITLE}
             </h1>
             <p className="mt-9 max-w-3xl border-l border-accent/55 pl-5 text-lg italic leading-relaxed text-canvas/66 md:text-xl">

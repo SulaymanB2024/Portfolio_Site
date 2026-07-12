@@ -38,6 +38,8 @@ export function AuditIntakeForm({
   const [honeypot, setHoneypot] = useState('');
   const [validationMessage, setValidationMessage] = useState('');
   const isCompact = variant === 'compact';
+  const emailInvalid = formStatus === 'error' && !email.trim();
+  const messageInvalid = formStatus === 'error' && !message.trim();
 
   const resetForm = () => {
     setName('');
@@ -120,12 +122,12 @@ export function AuditIntakeForm({
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-          <FieldLabel htmlFor="contact-name">Name</FieldLabel>
-          <input id="contact-name" name="name" type="text" required autoComplete="name" maxLength={120} value={name} onChange={(event) => setName(event.target.value)} className={fieldClass} />
+          <FieldLabel htmlFor="contact-name">Name <span className="normal-case tracking-normal">(optional)</span></FieldLabel>
+          <input id="contact-name" name="name" type="text" autoComplete="name" maxLength={120} value={name} onChange={(event) => setName(event.target.value)} className={fieldClass} />
         </div>
         <div>
           <FieldLabel htmlFor="contact-email">Email</FieldLabel>
-          <input id="contact-email" name="email" type="email" required autoComplete="email" maxLength={160} value={email} onChange={(event) => setEmail(event.target.value)} className={fieldClass} />
+          <input id="contact-email" name="email" type="email" required aria-invalid={emailInvalid} aria-describedby="contact-form-status" autoComplete="email" maxLength={160} value={email} onChange={(event) => setEmail(event.target.value)} className={fieldClass} />
         </div>
       </div>
 
@@ -136,7 +138,7 @@ export function AuditIntakeForm({
 
       <div>
         <FieldLabel htmlFor="contact-message">Message</FieldLabel>
-        <textarea id="contact-message" name="message" required rows={isCompact ? 5 : 4} placeholder="What are you trying to understand, fix, or build?" maxLength={2000} value={message} onChange={(event) => setMessage(event.target.value)} className={`${fieldClass} resize-y`} />
+        <textarea id="contact-message" name="message" required aria-invalid={messageInvalid} aria-describedby="contact-form-status" rows={isCompact ? 5 : 4} placeholder="What are you trying to understand, fix, or build?" maxLength={2000} value={message} onChange={(event) => setMessage(event.target.value)} className={`${fieldClass} resize-y`} />
       </div>
 
       <details className="border border-canvas/16 bg-canvas/[0.025]">
@@ -178,7 +180,7 @@ export function AuditIntakeForm({
       </details>
 
       <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-        <div className="max-w-sm text-xs leading-relaxed text-canvas/64" aria-live="polite">
+        <div id="contact-form-status" className="max-w-sm text-xs leading-relaxed text-canvas/64" role={formStatus === 'error' ? 'alert' : 'status'} aria-live={formStatus === 'error' ? 'assertive' : 'polite'}>
           {formStatus === 'submitting' ? 'Sending…' : formStatus === 'error' ? validationMessage : 'Email and message required.'}
           <span className="mt-1 block text-canvas/60">
             Formspree processes this submission. Do not send credentials or sensitive client data.
@@ -188,7 +190,7 @@ export function AuditIntakeForm({
           <span className="border-b-2 border-canvas/24 pb-1 text-base font-light uppercase tracking-[0.18em] text-canvas transition-colors group-hover:border-canvas">
             {formStatus === 'submitting' ? 'SENDING…' : submitLabel}
           </span>
-          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-canvas/24 text-canvas transition-colors group-hover:bg-canvas group-hover:text-ink">
+          <span className="flex h-11 w-11 items-center justify-center border border-canvas/24 text-canvas transition-colors group-hover:bg-canvas group-hover:text-ink">
             <ArrowUpRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.5} />
           </span>
         </button>

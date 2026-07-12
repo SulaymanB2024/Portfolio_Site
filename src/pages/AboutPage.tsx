@@ -1,7 +1,6 @@
 import { InternalFooter } from '../components/InternalFooter';
 import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
-import { ScrollProgress } from '../components/ScrollProgress';
 import VisibilitySystemMap from '../components/VisibilitySystemMap';
 import { WireframeGrid } from '../components/WireframeGrid';
 import { getSeoRoute } from '../seo/routes';
@@ -52,16 +51,15 @@ export default function AboutPage() {
     <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
       <WireframeGrid tone="dark" className="pointer-events-none absolute inset-0 z-0 opacity-20" />
       <PageTechnicalChrome tone="dark" />
-      <ScrollProgress />
       <InternalHeader activePath="/about" tone="dark" />
 
-      <section className="relative z-10 mx-auto grid min-h-[calc(100vh-102px)] max-w-[1480px] grid-cols-1 gap-12 px-4 pb-20 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] xl:px-10 xl:pt-20">
-        <div className="self-center">
+      <section className="relative z-10 mx-auto grid min-h-[calc(100svh-82px)] max-w-[1480px] grid-cols-1 items-start gap-14 px-4 pb-16 pt-16 md:px-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:gap-14 xl:px-10">
+        <div className="min-w-0">
           <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">About</p>
-          <h1 className="font-serif text-[3.8rem] italic leading-[0.9] tracking-normal md:text-[5.6rem] xl:text-[7rem]">
+          <h1 className="max-w-[10.5ch] font-serif text-[4.25rem] italic leading-[0.88] tracking-normal md:text-[5.5rem] xl:text-[6.5rem]">
             I build systems for messy evidence.
           </h1>
-          <div className="mt-10 max-w-2xl space-y-5 text-base leading-relaxed text-canvas/70">
+          <div className="mt-9 max-w-[58ch] space-y-5 text-base leading-[1.7] text-canvas/72 md:text-[17px]">
             <p>
               I am a UT Austin McCombs student working across technical SEO, product, software, and finance research. Atlas is the clearest expression of that mix: collect the source material, preserve what actually happened, and turn it into a decision someone can review.
             </p>
@@ -69,15 +67,15 @@ export default function AboutPage() {
               Technical SEO and finance feel related to me because both punish vague inputs. A crawl audit needs URL-level evidence; an investment or operating question needs ownership, cash-flow, assumptions, and missing facts kept separate.
             </p>
           </div>
-          <div className="mt-8 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
-            <a href="/work" className="border-b border-canvas/30 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Selected work</a>
-            <a href="/resume" className="border-b border-canvas/30 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Resume</a>
-            <a href="/contact" className="border-b border-accent/45 pb-1 text-accent hover:border-canvas hover:text-canvas">Contact</a>
+          <div className="mt-7 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
+            <a href="/work" className="inline-flex min-h-11 items-center border-b border-canvas/30 text-canvas/72 hover:border-canvas hover:text-canvas">Selected work</a>
+            <a href="/resume" className="inline-flex min-h-11 items-center border-b border-canvas/30 text-canvas/72 hover:border-canvas hover:text-canvas">Resume</a>
+            <a href="/contact" className="inline-flex min-h-11 items-center border-b border-accent/45 text-accent hover:border-canvas hover:text-canvas">Contact</a>
           </div>
         </div>
 
-        <div className="self-center">
-          <VisibilitySystemMap className="aspect-[1000/620] w-full" />
+        <div className="min-w-0">
+          <VisibilitySystemMap className="w-full" />
           <div className="mt-4 flex flex-col gap-3 border-b border-canvas/14 pb-4 text-[10px] uppercase tracking-[0.2em] text-canvas/60 sm:flex-row sm:justify-between">
             <span>Inputs: crawl / product / market</span>
             <span>Output: reviewable decision</span>

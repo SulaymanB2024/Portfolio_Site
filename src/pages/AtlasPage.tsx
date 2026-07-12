@@ -362,7 +362,7 @@ export default function AtlasPage() {
         <motion.img
           src={ATLAS_ARTWORK}
           alt=""
-          className="absolute left-[61%] top-[43%] h-[72svh] w-[136vw] -translate-x-1/2 -translate-y-1/2 object-contain object-center max-md:!opacity-[0.08] md:left-auto md:right-[-28rem] md:top-[55%] md:h-[112svh] md:w-[88rem] md:translate-x-0 md:scale-100 xl:right-[-20rem] xl:w-[96rem]"
+          className="absolute left-[61%] top-[43%] h-[72svh] w-[136vw] -translate-x-1/2 -translate-y-1/2 object-contain object-center max-md:!opacity-[0.14] md:left-auto md:right-[-28rem] md:top-[55%] md:h-[112svh] md:w-[88rem] md:translate-x-0 md:scale-100 xl:right-[-20rem] xl:w-[96rem]"
           style={{ opacity: atlasOpacity }}
           decoding="async"
         />
@@ -530,7 +530,9 @@ export default function AtlasPage() {
       <CoverageSection prefersReducedMotion={prefersReducedMotion} />
       <TechnicalSection prefersReducedMotion={prefersReducedMotion} />
       <FinalAtlasSection prefersReducedMotion={prefersReducedMotion} />
-      <InternalFooter activePath="/atlas" tone="light" />
+      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-8 md:px-8 xl:px-10">
+        <InternalFooter activePath="/atlas" tone="light" />
+      </div>
     </main>
   );
 }

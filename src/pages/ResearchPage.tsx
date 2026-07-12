@@ -1,19 +1,13 @@
 import { InternalFooter } from '../components/InternalFooter';
 import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
-import { ScrollProgress } from '../components/ScrollProgress';
 import { WireframeGrid } from '../components/WireframeGrid';
 import {
-  EditorialHeading,
   LinkPanel,
   PageFrame,
   PageShell,
-  PrimaryCTA,
   SectionEyebrow,
   SectionHeader,
-  SurfaceGrid,
-  TechnicalPanel,
-  TextLink,
 } from '../components/design/Primitives';
 import { RESEARCH_ARTICLES } from '../content/researchArticles';
 import { getSeoRoute } from '../seo/routes';
@@ -60,12 +54,28 @@ const researchNotes = [
   },
 ];
 
-const categorySummary = [
-  ['Search systems', 'Crawler policy, canonical identity, and public records.'],
-  ['Technical SEO', 'Crawlability, structured data, provenance, and bounded public studies.'],
-  ['Markets and investing', 'Ownership structures, valuation frames, assumptions, and risk.'],
-  ['Product and data', 'Agent evaluation, Atlas outputs, and inspectable technical artifacts.'],
-];
+const researchCategories = [
+  {
+    id: 'research-search-systems',
+    title: 'Search systems',
+    description: 'Crawler policy, canonical identity, and public records.',
+  },
+  {
+    id: 'research-technical-seo',
+    title: 'Technical SEO',
+    description: 'Crawlability, structured data, provenance, and bounded public studies.',
+  },
+  {
+    id: 'research-markets-investing',
+    title: 'Markets and investing',
+    description: 'Ownership structures, valuation frames, assumptions, and risk.',
+  },
+  {
+    id: 'research-product-data',
+    title: 'Product and data',
+    description: 'Agent evaluation, Atlas outputs, and inspectable technical artifacts.',
+  },
+] as const;
 
 export default function ResearchPage() {
   useSEO(RESEARCH_ROUTE);
@@ -74,76 +84,108 @@ export default function ResearchPage() {
     <PageShell id="top" tone="light">
       <WireframeGrid tone="light" className="pointer-events-none absolute inset-0 z-0 opacity-35" />
       <PageTechnicalChrome tone="light" />
-      <ScrollProgress />
       <InternalHeader activePath="/research" tone="light" />
 
       <PageFrame className="relative z-10">
-        <section className="relative grid min-h-[64vh] items-end gap-12 overflow-hidden border-b border-current/12 pb-14 pt-16 md:pt-20 lg:grid-cols-[minmax(0,0.6fr)_minmax(320px,0.4fr)]">
-          <div className="relative z-10 min-w-0">
-            <SectionEyebrow className="text-ink/60">Research</SectionEyebrow>
-            <EditorialHeading className="mt-8">One archive. Clear categories.</EditorialHeading>
-            <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/68">
+        <section className="research-hero relative flex items-center overflow-hidden border-b border-current/12 py-12 md:py-14">
+          <div aria-hidden="true" className="research-hero-copy-scrim" />
+          <img
+            src={RESEARCH_COIN_ART}
+            alt=""
+            aria-hidden="true"
+            className="research-coin-art pointer-events-none select-none mix-blend-multiply"
+            draggable={false}
+          />
+          <div className="relative z-10 max-w-3xl">
+            <SectionEyebrow className="text-ink/64">Research</SectionEyebrow>
+            <h1 className="mt-7 max-w-3xl font-serif text-5xl italic leading-[0.86] tracking-normal text-current md:text-8xl xl:text-9xl">
+              One archive. Clear categories.
+            </h1>
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/72">
               Search systems, technical SEO, markets, infrastructure, product, and data work now live in one research hub. Finance-only material remains available as a filtered Markets archive.
             </p>
           </div>
-
-          <div aria-hidden="true" className="pointer-events-none relative z-0 -my-12 hidden min-h-[520px] select-none lg:block">
-            <img src={RESEARCH_COIN_ART} alt="" className="absolute left-[-4rem] top-1/2 h-auto w-[min(1120px,72vw)] max-w-none -translate-y-1/2 opacity-55 mix-blend-multiply" draggable={false} />
-          </div>
         </section>
 
-        <div className="flex flex-wrap items-center gap-5 border-b border-current/12 py-8">
-          <PrimaryCTA href="/work" id="research-work-link">View selected work</PrimaryCTA>
-          <TextLink href="/markets" id="research-markets-link" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
-            Markets filter
-          </TextLink>
-          <TextLink href="/atlas" id="research-atlas-link" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
-            Atlas
-          </TextLink>
-        </div>
+        <nav aria-label="Research categories" className="border-b border-current/12 py-6 md:py-8">
+          <div className="mb-6 grid gap-4 md:grid-cols-[0.42fr_0.58fr] md:items-end">
+            <div>
+              <SectionEyebrow className="mb-4 text-current/60">Categories</SectionEyebrow>
+              <h2 className="font-serif text-4xl italic leading-none tracking-normal md:text-5xl">Four ways into the work.</h2>
+            </div>
+            <p className="max-w-2xl text-base leading-relaxed text-current/68 md:justify-self-end">
+              Each lane has a concrete question, source base, and boundary between observed facts and interpretation.
+            </p>
+          </div>
+          <div className="grid border-l border-t border-current/14 md:grid-cols-2 xl:grid-cols-4">
+            {researchCategories.map((category, index) => (
+              <a
+                key={category.id}
+                href={`#${category.id}`}
+                className="group grid min-h-40 content-between border-b border-r border-current/14 p-5 text-current transition-colors hover:bg-current hover:text-canvas focus-visible:bg-current focus-visible:text-canvas"
+              >
+                <span className="text-xs uppercase tracking-[0.18em] text-inherit opacity-64">{String(index + 1).padStart(2, '0')}</span>
+                <span>
+                  <span className="block font-serif text-3xl italic leading-none tracking-normal md:text-4xl">{category.title}</span>
+                  <span className="mt-4 block text-sm leading-relaxed text-inherit opacity-72">{category.description}</span>
+                  <span aria-hidden="true" className="mt-5 block h-px w-10 bg-current transition-all duration-300 group-hover:w-20 group-focus-visible:w-20" />
+                </span>
+              </a>
+            ))}
+          </div>
+        </nav>
       </PageFrame>
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Categories" title="Four ways into the work.">
-            Each lane has a concrete question, source base, and boundary between observed facts and interpretation.
-          </SectionHeader>
-          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-            {categorySummary.map(([title, description], index) => (
-              <TechnicalPanel key={title} className="min-h-[210px]">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-current/60">{String(index + 1).padStart(2, '0')}</p>
-                <h2 className="mt-10 font-serif text-3xl italic leading-none tracking-normal text-current">{title}</h2>
-                <p className="mt-5 text-sm leading-relaxed text-current/64">{description}</p>
-              </TechnicalPanel>
-            ))}
-          </SurfaceGrid>
-        </PageFrame>
-      </section>
-
-      <section className="relative z-10 border-b border-current/12">
-        <PageFrame className="py-16 xl:py-24">
           <SectionHeader eyebrow="Publication index" title="Questions, evidence, limits.">
-            Seven distinct notes and artifacts, with finance terminology reserved for finance work.
+            Seven distinct notes and artifacts, grouped by the question they help answer. Finance terminology remains reserved for finance work.
           </SectionHeader>
-          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-            {researchNotes.map((note) => (
-              <TechnicalPanel key={note.href} className="grid min-h-[285px] content-between gap-8 bg-current/[0.012]">
-                <div>
-                  <div className="flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-current/60">
-                    <span>{note.category}</span>
-                    <time>{note.date}</time>
+
+          <div className="divide-y divide-current/14 border-y border-current/14">
+            {researchCategories.map((category, categoryIndex) => {
+              const notes = researchNotes.filter((note) => note.category === category.title);
+
+              return (
+                <section
+                  key={category.id}
+                  id={category.id}
+                  aria-labelledby={`${category.id}-heading`}
+                  className="scroll-mt-28 py-12 lg:grid lg:grid-cols-[minmax(220px,0.28fr)_minmax(0,0.72fr)] lg:gap-12 lg:scroll-mt-36 xl:py-16"
+                >
+                  <header className="mb-8 lg:mb-0">
+                    <p className="text-xs uppercase tracking-[0.18em] text-current/60">{String(categoryIndex + 1).padStart(2, '0')} / 04</p>
+                    <h3 id={`${category.id}-heading`} className="mt-5 max-w-sm font-serif text-4xl italic leading-none tracking-normal md:text-5xl">
+                      {category.title}
+                    </h3>
+                    <p className="mt-5 max-w-sm text-sm leading-relaxed text-current/68">{category.description}</p>
+                  </header>
+
+                  <div className="grid gap-px border border-current/14 md:grid-cols-2">
+                    {notes.map((note) => (
+                      <a
+                        key={note.href}
+                        href={note.href}
+                        className="group grid min-h-64 content-between bg-current/[0.018] p-5 text-current transition-colors hover:bg-current hover:text-canvas focus-visible:bg-current focus-visible:text-canvas md:p-6"
+                      >
+                        <span>
+                          <span className="flex items-center justify-between gap-4 text-xs uppercase tracking-[0.16em] text-inherit opacity-64">
+                            <span>{note.category}</span>
+                            <time>{note.date}</time>
+                          </span>
+                          <h4 className="mt-8 font-serif text-3xl italic leading-none tracking-normal md:text-4xl">{note.title}</h4>
+                          <span className="mt-5 block text-sm leading-relaxed text-inherit opacity-72">{note.description}</span>
+                        </span>
+                        <span className="mt-8 w-fit border-b border-current/30 pb-1 text-xs uppercase tracking-[0.16em] text-inherit">
+                          Open artifact
+                        </span>
+                      </a>
+                    ))}
                   </div>
-                  <h2 className="mt-8 font-serif text-3xl italic leading-[0.95] tracking-normal text-current">
-                    <a href={note.href} className="transition-opacity hover:opacity-70">{note.title}</a>
-                  </h2>
-                  <p className="mt-5 text-sm leading-relaxed text-current/64">{note.description}</p>
-                </div>
-                <a href={note.href} className="w-fit border-b border-current/20 pb-1 text-[10px] uppercase tracking-[0.2em] text-current/64 transition-colors hover:border-current/45 hover:text-current">
-                  Open artifact
-                </a>
-              </TechnicalPanel>
-            ))}
-          </SurfaceGrid>
+                </section>
+              );
+            })}
+          </div>
         </PageFrame>
       </section>
 
@@ -158,9 +200,9 @@ export default function ResearchPage() {
               ['Selected work', '/work', 'Six public artifacts with role, constraints, status, and evidence links.'],
               ['Markets filter', '/markets', 'Finance and infrastructure-investing material only.'],
             ].map(([label, href, description]) => (
-              <LinkPanel key={href} href={href} className="grid min-h-[170px] content-between gap-6">
-                <span className="font-serif text-2xl italic leading-tight tracking-normal text-current">{label}</span>
-                <span className="text-sm normal-case leading-relaxed tracking-normal text-current/64">{description}</span>
+              <LinkPanel key={href} href={href} className="grid min-h-44 content-between gap-6">
+                <span className="font-serif text-3xl italic leading-tight tracking-normal text-current">{label}</span>
+                <span className="text-sm normal-case leading-relaxed tracking-normal text-current/68">{description}</span>
               </LinkPanel>
             ))}
           </div>

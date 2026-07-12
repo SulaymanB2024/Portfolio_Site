@@ -1,11 +1,15 @@
 import {StrictMode, useEffect, useLayoutEffect} from 'react';
-import {createRoot} from 'react-dom/client';
+import {createRoot, type Root as ReactRoot} from 'react-dom/client';
 import {Analytics} from '@vercel/analytics/react';
 import App from './App.tsx';
 import './index.css';
 import Lenis from 'lenis';
 
 document.documentElement.classList.add('js');
+
+type PortfolioWindow = Window & {
+  __portfolioReactRoot?: ReactRoot;
+};
 
 function Root() {
   useLayoutEffect(() => {
@@ -49,7 +53,11 @@ function Root() {
   return <App />;
 }
 
-createRoot(document.getElementById('root')!).render(
+const portfolioWindow = window as PortfolioWindow;
+const reactRoot = portfolioWindow.__portfolioReactRoot ?? createRoot(document.getElementById('root')!);
+portfolioWindow.__portfolioReactRoot = reactRoot;
+
+reactRoot.render(
   <StrictMode>
     <Root />
     <Analytics />

@@ -341,39 +341,26 @@ function SitemapPage() {
 
 function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
   const dark = route ? isDarkRoute(route.path) : false;
-  const heading = route?.h1 ?? HOME_SEO.h1;
-  const description = route?.description ?? HOME_SEO.description;
-  const summary = route?.staticSummary ?? HOME_SEO.staticSummary;
-  const fallbackLinks = [
-    ['Home', '/'],
-    ['Selected Work', '/work'],
-    ['Atlas', '/atlas'],
-    ['Method', '/method'],
-    ['Research', '/research'],
-    ['Contact', '/contact'],
-  ];
+  const tone = dark ? 'dark' : 'light';
 
   return (
     <main
       aria-busy="true"
-      className={`flex min-h-screen items-center justify-center px-6 font-sans ${
+      className={`site-page relative min-h-screen overflow-hidden font-sans ${
         dark ? 'bg-ink text-canvas' : 'bg-canvas text-ink'
       }`}
     >
-      <div className="w-full max-w-[1480px] border-t border-current/20 pt-6">
-        <div className="text-[10px] uppercase tracking-[0.32em] opacity-60">Route overview</div>
-        <h1 className="mt-6 font-serif text-[3.4rem] md:text-[5.75rem] xl:text-[8rem] italic leading-[0.86] tracking-normal">
-          {heading}
-        </h1>
-        <p className="mt-8 max-w-3xl text-base leading-relaxed opacity-70">{description}</p>
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed opacity-58">{summary}</p>
-        <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-[10px] uppercase tracking-[0.22em] opacity-70" aria-label="Fallback route links">
-          {fallbackLinks.map(([label, href]) => (
-            <a key={href} href={href} className="underline decoration-current/20 underline-offset-4 transition-opacity hover:opacity-100">
-              {label}
-            </a>
-          ))}
-        </nav>
+      <InternalHeader activePath={route?.path ?? '/'} tone={tone} />
+      <div className="mx-auto flex min-h-[calc(100vh-82px)] w-full max-w-[1480px] items-center px-4 md:px-8 xl:px-10">
+        <div className="w-full" aria-live="polite">
+          <div className="flex items-center justify-between gap-6 text-xs uppercase tracking-[0.16em] text-current/56">
+            <span>Opening route</span>
+            <span>{route?.path ?? '/'}</span>
+          </div>
+          <div className="mt-6 h-px overflow-hidden bg-current/16">
+            <div className="route-loader-rule h-full origin-left bg-current" />
+          </div>
+        </div>
       </div>
     </main>
   );
@@ -617,8 +604,8 @@ function HomePage() {
               <RomanTogaReveal
                 fit="cover"
                 focus="large-figure"
-                restOpacity={0.14}
-                revealOpacity={0.82}
+                restOpacity={0.24}
+                revealOpacity={0.88}
                 className="h-full w-full"
               />
             )}
@@ -635,7 +622,7 @@ function HomePage() {
 	               <h1 className="font-serif text-5xl font-light leading-none tracking-normal text-ink md:text-7xl">
 	                 Sulayman Bowles
 	               </h1>
-	               <p className="mt-5 font-sans text-sm leading-relaxed tracking-normal text-ink/64 md:text-base">
+	               <p className="mt-5 font-sans text-sm leading-relaxed tracking-normal text-ink/72 md:text-base">
 		                 UT Austin McCombs student building Atlas and running Void Agency across technical SEO, product, and finance research.
 	               </p>
 	               <div className="mt-7 flex flex-wrap gap-4 text-[10px] uppercase tracking-[0.2em] md:justify-end">

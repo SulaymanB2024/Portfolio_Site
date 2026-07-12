@@ -24,8 +24,8 @@ export default function MarketsPage() {
       <InternalHeader activePath="/research" tone="light" />
 
       <section className="relative min-h-[calc(100svh-88px)] overflow-hidden px-4 pb-14 pt-12 md:px-8 md:pt-16 xl:px-10">
-        <div aria-hidden="true" className="pointer-events-none absolute right-[-10vw] top-10 z-0 hidden w-[min(76vw,1160px)] select-none opacity-48 lg:block">
-          <img src={COIN_ART} alt="" className="h-auto w-full" draggable={false} />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 select-none">
+          <img src={COIN_ART} alt="" className="markets-coin-art h-auto max-w-none" draggable={false} />
         </div>
         <div className="relative z-10 mx-auto flex min-h-[calc(100svh-210px)] w-full max-w-[1480px] flex-col justify-center lg:min-h-[560px] lg:pl-14">
           <p className="mb-10 text-[10px] uppercase tracking-[0.32em] text-ink/60">Research / Markets filter</p>

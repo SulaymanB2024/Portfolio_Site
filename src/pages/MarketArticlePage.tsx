@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import ArrowLeft from 'lucide-react/dist/esm/icons/arrow-left.js';
 
 import { InternalFooter } from '../components/InternalFooter';
 import { InternalHeader } from '../components/InternalHeader';
@@ -23,6 +24,15 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
     { label: 'Updated', value: article.dateModified ?? article.date },
     { label: 'Sources', value: String(article.sources.length) },
   ];
+  const articleMetadata = [
+    ['Article', article.number],
+    ['Category', article.category],
+    ['Author', article.author],
+    ['Published', article.date],
+    ['Updated', article.dateModified ?? article.date],
+    ['Read time', article.readTime],
+    ['Sources', String(article.sources.length)],
+  ];
 
   useSEO(route);
 
@@ -38,21 +48,13 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
       <InternalHeader activePath={investmentMemo ? '/markets' : '/research'} tone="dark" />
 
       <article className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 px-4 py-16 md:px-8 lg:grid-cols-[0.28fr_0.72fr] xl:px-10 xl:py-24">
-        <aside className="space-y-8 border-b border-canvas/14 pb-10 text-[10px] uppercase tracking-[0.22em] text-canvas/60 lg:border-b-0 lg:border-r lg:pr-8">
+        <aside className="border-b border-canvas/14 pb-5 text-[10px] uppercase tracking-[0.22em] text-canvas/60 lg:space-y-8 lg:border-b-0 lg:border-r lg:pb-10 lg:pr-8">
           <a href={backHref} className="inline-flex min-h-11 items-center gap-2 text-accent transition-colors hover:text-canvas">
-            <span aria-hidden="true">←</span>
+            <ArrowLeft aria-hidden="true" size={14} strokeWidth={1.4} />
             <span>{backLabel}</span>
           </a>
-          <dl className="grid gap-5 pt-4">
-            {[
-              ['Article', article.number],
-              ['Category', article.category],
-              ['Author', article.author],
-              ['Published', article.date],
-              ['Updated', article.dateModified ?? article.date],
-              ['Read time', article.readTime],
-              ['Sources', String(article.sources.length)],
-            ].map(([label, value]) => (
+          <dl className="hidden gap-5 pt-4 lg:grid">
+            {articleMetadata.map(([label, value]) => (
               <div key={label}>
                 <dt className="mb-1 text-canvas/60">{label}</dt>
                 <dd className="text-canvas">{value}</dd>
@@ -69,6 +71,15 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
           <p className="mt-8 max-w-3xl border-l border-canvas/24 pl-5 text-lg italic leading-relaxed text-canvas/72">
             {article.subtitle}
           </p>
+
+          <dl className="mt-8 grid grid-cols-2 gap-x-5 gap-y-4 border-y border-canvas/14 py-6 text-[10px] uppercase tracking-[0.18em] text-canvas/60 lg:hidden">
+            {articleMetadata.map(([label, value]) => (
+              <div key={label}>
+                <dt className="mb-1 text-canvas/60">{label}</dt>
+                <dd className="leading-relaxed text-canvas">{value}</dd>
+              </div>
+            ))}
+          </dl>
 
           {boundary ? (
             <p className={`mt-6 max-w-3xl border px-4 py-3 text-xs uppercase leading-6 tracking-[0.16em] text-canvas/72 ${investmentMemo ? 'border-risk/35 bg-risk/8' : 'border-canvas/18 bg-canvas/[0.025]'}`}>
