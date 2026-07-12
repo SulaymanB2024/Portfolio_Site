@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { useEffect } from 'react';
 
 import { InternalFooter } from '../components/InternalFooter';
@@ -12,229 +11,6 @@ import { useSEO } from '../utils/seo';
 const MARKETS_SEO = getSeoRoute('/markets')!;
 const COIN_ART = '/images/markets/noise-expansion-coin-alpha.png';
 
-const heroLinks = [
-  { label: 'Browse public notes', href: '#case-archive' },
-  { label: 'View market research types', href: '#research-types' },
-  { label: 'Open educational memos', href: '#investment-memos' },
-];
-
-const researchTypes = [
-  {
-    index: '01',
-    title: 'Business quality',
-    copy: 'Operating logic, assumptions, downside cases, and business research tied to sources.',
-  },
-  {
-    index: '02',
-    title: 'Search infrastructure',
-    copy: 'Crawler policy, canonical URLs, public pages, and the cleanup work that makes a site easier to read.',
-  },
-  {
-    index: '03',
-    title: 'Market systems',
-    copy: 'Rates, liquidity regimes, volatility, credit stress, commodities, and capital flows with visible boundaries.',
-  },
-  {
-    index: '04',
-    title: 'Models and memos',
-    copy: 'Assumption tables, decision frameworks, source notes, and research memos.',
-  },
-];
-
-const memoLinks = [
-  {
-    label: 'Read the markets research memo with assumptions',
-    href: RESEARCH_ASSETS.appianMemoPdf,
-    meta: 'PDF research sample',
-  },
-  {
-    label: 'Appian assumptions table',
-    href: RESEARCH_ASSETS.appianAssumptionsCsv,
-    meta: 'CSV source table',
-  },
-];
-
-function MarketsHero() {
-  return (
-    <section className="relative min-h-[calc(100svh-88px)] overflow-hidden px-4 pb-12 pt-12 md:px-8 md:pb-14 md:pt-16 lg:pt-20 xl:px-10">
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[-10vw] top-10 z-0 hidden w-[min(76vw,1160px)] select-none lg:block xl:right-[-4vw]"
-        initial={{ opacity: 0, x: 22, scale: 0.985 }}
-        animate={{ opacity: 0.52, x: 0, scale: 1 }}
-        transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <img
-          src={COIN_ART}
-          alt=""
-          className="h-auto w-full"
-          draggable={false}
-        />
-      </motion.div>
-
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[8.5rem] z-0 opacity-38 lg:hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.26 }}
-        transition={{ duration: 0.9, ease: 'easeOut' }}
-      >
-        <img
-          src={COIN_ART}
-          alt=""
-          className="mx-auto h-auto w-[min(980px,125vw)] max-w-none"
-          draggable={false}
-        />
-      </motion.div>
-
-      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-210px)] w-full max-w-[1480px] flex-col justify-center lg:min-h-[560px] lg:pl-14">
-        <motion.div
-          className="max-w-[560px]"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <p className="mb-10 text-[10px] uppercase tracking-[0.32em] text-ink/54">
-            Markets Research
-          </p>
-
-          <h1 className="font-serif text-[4.2rem] md:text-[4.6rem] xl:text-[5rem] italic leading-[0.9] text-ink text-balance">
-            Separate signal
-            <br />
-            from noise.
-          </h1>
-
-          <p className="mt-8 max-w-[385px] text-[15px] leading-relaxed text-ink/62 md:text-base">
-            Research notes across search infrastructure, public data, and markets assumptions.
-          </p>
-
-          <a
-            href="#case-archive"
-            className="mt-8 inline-flex border-b border-ink/28 pb-1 font-serif text-sm italic text-ink/56 transition-colors duration-200 hover:border-ink/55 hover:text-ink"
-          >
-            Explore our research
-          </a>
-
-          <nav className="mt-8 grid max-w-[310px] gap-3" aria-label="Markets page sections">
-            {heroLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="border-b border-ink/12 pb-2 text-[10px] uppercase tracking-[0.24em] text-ink/62 transition-colors duration-200 hover:border-ink/35 hover:text-ink"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        </motion.div>
-
-        <div className="absolute bottom-2 hidden items-center gap-5 text-ink/62 lg:flex">
-          <span className="text-sm tabular-nums">03</span>
-          <span className="font-serif text-sm italic">Noise expansion</span>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ResearchTypesSection() {
-  return (
-    <section id="research-types" className="mx-auto w-full max-w-[1480px] px-4 py-16 md:px-8 md:py-24 xl:px-10">
-      <div className="mb-10 flex flex-col gap-3 border-t border-ink/12 pt-6 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="mb-3 text-[10px] uppercase tracking-[0.28em] text-ink/48">Research types</p>
-          <h2 className="font-serif text-[2.5rem] md:text-[4rem] xl:text-[5.25rem] italic leading-[0.9] text-ink">
-            Four ways into the work.
-          </h2>
-        </div>
-        <p className="max-w-md text-sm leading-relaxed text-ink/58">
-          Each lane keeps the assumptions, sources, and downside cases visible before a conclusion is trusted.
-        </p>
-      </div>
-
-      <div className="grid gap-px border border-ink/12 bg-ink/12 md:grid-cols-2 lg:grid-cols-4">
-        {researchTypes.map((type) => (
-          <article key={type.index} className="min-h-[245px] bg-canvas p-6 transition-colors duration-200 hover:bg-canvas-dark">
-            <span className="font-serif text-lg italic text-ink/42">{type.index}</span>
-            <h3 className="mt-12 text-[11px] uppercase tracking-[0.24em] text-ink">{type.title}</h3>
-            <p className="mt-4 text-sm leading-relaxed text-ink/58">{type.copy}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function CaseArchiveSection() {
-  return (
-    <section id="case-archive" className="mx-auto w-full max-w-[1480px] px-4 py-16 md:px-8 md:py-24 xl:px-10">
-      <div className="mb-8 border-t border-ink/12 pt-6">
-        <p className="mb-3 text-[10px] uppercase tracking-[0.28em] text-ink/48">Case archive</p>
-        <h2 className="font-serif text-[2.5rem] md:text-[4rem] xl:text-[5.25rem] italic leading-[0.9] text-ink">
-          Notes with sources and limits.
-        </h2>
-      </div>
-
-      <div className="divide-y divide-ink/12 border-y border-ink/12">
-        {PUBLIC_MARKET_THESES.map((thesis, index) => (
-          <a
-            key={thesis.slug}
-            href={`/markets/${thesis.slug}`}
-            className="group grid gap-4 py-6 text-ink transition-colors duration-200 hover:bg-ink/[0.025] md:grid-cols-[72px_minmax(0,1fr)_minmax(180px,0.28fr)] md:items-center md:px-4"
-          >
-            <span className="font-serif text-lg italic text-ink/44">{String(index + 1).padStart(2, '0')}</span>
-            <span>
-              <span className="block text-[11px] uppercase tracking-[0.24em] text-ink">{thesis.title}</span>
-              <span className="mt-2 block max-w-2xl text-sm leading-relaxed text-ink/56">{thesis.subtitle}</span>
-              <span className="mt-3 block translate-y-1 text-[9px] uppercase tracking-[0.18em] text-ink/38 opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-y-0 group-hover:opacity-100">
-                {thesis.category} / {thesis.readTime} / sources and limits visible
-              </span>
-            </span>
-            <span className="text-[10px] uppercase tracking-[0.22em] text-ink/46 md:text-right">
-              {thesis.date}
-            </span>
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function InvestmentMemosSection() {
-  return (
-    <section id="investment-memos" className="mx-auto w-full max-w-[1480px] px-4 py-16 md:px-8 md:py-24 xl:px-10">
-      <div className="grid gap-10 border-y border-ink/12 py-10 lg:grid-cols-[0.78fr_1fr] lg:items-start">
-        <div>
-          <p className="mb-3 text-[10px] uppercase tracking-[0.28em] text-ink/48">Investment memos</p>
-          <h2 className="font-serif text-[2.5rem] md:text-[4rem] xl:text-[5.25rem] italic leading-[0.9] text-ink">
-            Memos, not advice.
-          </h2>
-        </div>
-        <div className="space-y-6">
-          <p className="max-w-2xl text-sm leading-relaxed text-ink/60">
-            Public materials are educational research samples. They show how assumptions are structured, challenged, and sourced without becoming live recommendations or price targets.
-          </p>
-          <p className="max-w-2xl border-l border-risk/35 pl-4 text-xs uppercase leading-6 tracking-[0.16em] text-ink/52">
-            Educational research sample, not an investment recommendation. Not a recommendation or price target.
-          </p>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {memoLinks.map((memo) => (
-              <a
-                key={memo.href}
-                href={memo.href}
-                className="min-h-[132px] border border-ink/12 bg-ink/[0.018] p-5 transition-colors duration-200 hover:border-ink/28 hover:bg-ink/[0.035]"
-              >
-                <span className="block text-[10px] uppercase tracking-[0.22em] text-ink/44">{memo.meta}</span>
-                <span className="mt-8 block text-[11px] uppercase tracking-[0.22em] text-ink">{memo.label}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function MarketsPage() {
   useSEO(MARKETS_SEO);
 
@@ -245,13 +21,79 @@ export default function MarketsPage() {
   return (
     <main id="top" className="min-h-screen overflow-x-hidden bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
       <PageTechnicalChrome tone="light" />
-      <InternalHeader activePath="/markets" tone="light" />
-      <MarketsHero />
-      <ResearchTypesSection />
-      <CaseArchiveSection />
-      <InvestmentMemosSection />
+      <InternalHeader activePath="/research" tone="light" />
+
+      <section className="relative min-h-[calc(100svh-88px)] overflow-hidden px-4 pb-14 pt-12 md:px-8 md:pt-16 xl:px-10">
+        <div aria-hidden="true" className="pointer-events-none absolute right-[-10vw] top-10 z-0 hidden w-[min(76vw,1160px)] select-none opacity-48 lg:block">
+          <img src={COIN_ART} alt="" className="h-auto w-full" draggable={false} />
+        </div>
+        <div className="relative z-10 mx-auto flex min-h-[calc(100svh-210px)] w-full max-w-[1480px] flex-col justify-center lg:min-h-[560px] lg:pl-14">
+          <p className="mb-10 text-[10px] uppercase tracking-[0.32em] text-ink/60">Research / Markets filter</p>
+          <h1 className="max-w-[720px] font-serif text-[4.2rem] italic leading-[0.88] text-ink md:text-[6.5rem] xl:text-[8.5rem]">
+            Markets and investing.
+          </h1>
+          <p className="mt-8 max-w-[520px] text-base leading-relaxed text-ink/68">
+            Finance and infrastructure-investing research only: ownership, cash-flow rights, valuation frames, assumptions, downside cases, and explicit recommendation boundaries.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
+            <a href="#investment-research" className="border-b border-ink/30 pb-1 text-ink/70 hover:text-ink">Open research</a>
+            <a href="/research" className="border-b border-ink/20 pb-1 text-ink/64 hover:text-ink">All categories</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="investment-research" className="mx-auto w-full max-w-[1480px] border-y border-ink/14 px-4 py-16 md:px-8 md:py-24 xl:px-10">
+        <div className="mb-10 grid gap-8 lg:grid-cols-[0.42fr_0.58fr] lg:items-end">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-ink/60">Current research</p>
+            <h2 className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">Source-led, not promotional.</h2>
+          </div>
+          <p className="max-w-2xl text-sm leading-relaxed text-ink/64">
+            Every current item must distinguish public facts, analyst inference, missing information, and recommendation limits. Archived drafts remain noindexed and are not presented as current views.
+          </p>
+        </div>
+
+        <div className="divide-y divide-ink/14 border-y border-ink/14">
+          {PUBLIC_MARKET_THESES.map((memo, index) => (
+            <a key={memo.slug} href={`/markets/${memo.slug}`} className="group grid gap-5 py-7 transition-colors hover:bg-ink/[0.025] md:grid-cols-[72px_minmax(0,1fr)_minmax(180px,0.24fr)] md:items-center md:px-4">
+              <span className="font-serif text-xl italic text-ink/60">{String(index + 1).padStart(2, '0')}</span>
+              <span>
+                <span className="block text-[11px] uppercase tracking-[0.24em] text-ink">{memo.title}</span>
+                <span className="mt-2 block max-w-3xl text-sm leading-relaxed text-ink/64">{memo.subtitle}</span>
+                <span className="mt-3 block text-[10px] uppercase tracking-[0.18em] text-ink/60">{memo.category} / {memo.readTime} / {memo.sources.length} sources</span>
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.22em] text-ink/64 md:text-right">{memo.date}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-[1480px] px-4 py-16 md:px-8 md:py-24 xl:px-10">
+        <div className="grid gap-10 border-y border-ink/14 py-10 lg:grid-cols-[0.46fr_0.54fr]">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-ink/60">Supporting model</p>
+            <h2 className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">Assumptions visible.</h2>
+          </div>
+          <div>
+            <p className="max-w-2xl text-sm leading-relaxed text-ink/64">
+              The Appian memo and assumptions table remain educational samples. They are not current recommendations or price targets.
+            </p>
+            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+              <a href={RESEARCH_ASSETS.appianMemoPdf} className="min-h-[132px] border border-ink/14 p-5 hover:bg-ink hover:text-canvas">
+                <span className="text-[10px] uppercase tracking-[0.22em] text-current/64">PDF research sample</span>
+                <span className="mt-8 block text-[11px] uppercase tracking-[0.22em]">Open memo</span>
+              </a>
+              <a href={RESEARCH_ASSETS.appianAssumptionsCsv} className="min-h-[132px] border border-ink/14 p-5 hover:bg-ink hover:text-canvas">
+                <span className="text-[10px] uppercase tracking-[0.22em] text-current/64">CSV source table</span>
+                <span className="mt-8 block text-[11px] uppercase tracking-[0.22em]">Open assumptions</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div className="mx-auto w-full max-w-[1480px] px-4 pb-8 md:px-8 xl:px-10">
-        <InternalFooter activePath="/markets" tone="light" />
+        <InternalFooter activePath="/research" tone="light" />
       </div>
     </main>
   );

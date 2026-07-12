@@ -49,12 +49,12 @@ export default function TechnicalSeoCaseStudyPage() {
         <PageFrame className="py-16 xl:py-24">
           <header className="grid grid-cols-1 gap-12 border-b border-current/12 pb-14 lg:min-h-[calc(100vh-104px)] lg:grid-cols-[minmax(0,0.48fr)_minmax(340px,0.52fr)]">
             <div className="self-end">
-              <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-current/48">Case study / sanitized</p>
+              <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-current/60">Finding walkthrough / sanitized</p>
               <h1 className="max-w-6xl font-serif text-[3.7rem] md:text-[6.5rem] xl:text-[9rem] italic leading-[0.84] tracking-normal">
-                Technical SEO audit case study.
+                Technical SEO finding walkthrough.
               </h1>
               <p className="mt-10 max-w-3xl text-base leading-relaxed text-current/64">
-                A public case-study frame for turning crawl data into implementation work without exposing private client records or claiming unverified search outcomes.
+                A crawl-to-repair example showing how one observed field becomes an interpreted risk, implementation action, and rerun check.
               </p>
             </div>
 
@@ -69,8 +69,8 @@ export default function TechnicalSeoCaseStudyPage() {
           </header>
 
           <section className="border-b border-current/12 py-16">
-            <SectionHeader eyebrow="Short answer" title="What changed after the crawl review.">
-              The public case study shows how one crawl observation becomes an implementation path and a rerun check without turning a sanitized row into a private performance claim.
+            <SectionHeader eyebrow="Short answer" title="What the finding walkthrough demonstrates.">
+              One crawl observation becomes an implementation path and a rerun check without turning a sanitized row into a private performance claim.
             </SectionHeader>
             <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5">
               {auditCaseStudyAnswer.map((item, index) => (
@@ -86,8 +86,8 @@ export default function TechnicalSeoCaseStudyPage() {
           </section>
 
           <section className="border-b border-current/12 py-16">
-            <SectionHeader eyebrow="Sanitized process" title="What this case study shows.">
-              The case study is a method frame, not a private client outcome report. It keeps observed crawl data separate from interpreted risk and implementation advice.
+            <SectionHeader eyebrow="Sanitized process" title="What the walkthrough shows.">
+              This is a reasoning example, not a private client outcome report. It keeps observed crawl data separate from interpreted risk and implementation advice.
             </SectionHeader>
             <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
               {auditCaseStudySteps.map((step, index) => (

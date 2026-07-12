@@ -1,4 +1,4 @@
-import { AI_INFORMATION_DESCRIPTION, expertiseAreas, providerDiscoveryPlan } from '../content/aiInformation';
+import { AI_INFORMATION_DESCRIPTION, expertiseAreas } from '../content/aiInformation';
 import {
   aiSearchAuditChecklist,
   atlasCheckItems,
@@ -8,6 +8,7 @@ import {
   type FanOutQueryMapItem,
 } from '../content/evidenceLists';
 import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
+import { PROFILE_FACTS } from '../content/profileFacts';
 import { absoluteUrl, DEFAULT_OG_IMAGE, PERSON_ID, SITE_NAME, SITE_URL } from './site';
 
 export type JsonLd = Record<string, unknown>;
@@ -25,7 +26,7 @@ const canonicalLogo = {
   url: absoluteUrl(DEFAULT_OG_IMAGE),
 };
 
-const schemaDateModified = '2026-07-07';
+const schemaDateModified = PROFILE_FACTS.lastReviewed;
 const directEmail = 'sulayman.bowles@gmail.com';
 
 const primarySiteParts = [
@@ -59,12 +60,12 @@ export function personSchema({
   const affiliation: JsonLd[] = [
     {
       '@type': 'CollegeOrUniversity',
-      name: 'The University of Texas at Austin',
+      name: PROFILE_FACTS.education.institution,
       url: 'https://www.utexas.edu/',
     },
     {
       '@type': 'CollegeOrUniversity',
-      name: 'McCombs School of Business',
+      name: PROFILE_FACTS.education.school,
       url: 'https://www.mccombs.utexas.edu/',
     },
   ];
@@ -81,19 +82,16 @@ export function personSchema({
     '@context': 'https://schema.org',
     '@type': 'Person',
     '@id': PERSON_ID,
-    name: SITE_NAME,
+    name: PROFILE_FACTS.name,
     url: SITE_URL,
-    logo: canonicalLogo,
-    image: canonicalLogo,
     jobTitle: 'Technical systems builder',
     mainEntityOfPage: absoluteUrl('/ai-information'),
-    description:
-      'Sulayman Bowles is a UT Austin McCombs student and technical systems builder focused on Atlas, technical SEO, search visibility, and finance research.',
+    description: PROFILE_FACTS.currentSummary,
     sameAs: [
-      'https://www.linkedin.com/in/sulayman-bowles/',
-      'https://github.com/SulaymanB2024',
+      PROFILE_FACTS.canonicalLinks.linkedin,
+      PROFILE_FACTS.canonicalLinks.github,
       'https://devpost.com/sulayman-bowles',
-      'https://sulayman-bowles.tech/',
+      PROFILE_FACTS.canonicalLinks.technicalLedger,
     ],
     identifier: [
       {
@@ -317,27 +315,6 @@ function fanOutQueryItemListSchema(items: FanOutQueryMapItem[]): JsonLd {
       name: item.originalQuery,
       description: `Likely fan-out queries: ${item.likelyFanOutQueries.join('; ')}. Missing content: ${item.missingContent}. Recommended edit: ${item.recommendedEdit}`,
       url: absoluteUrl(item.href),
-    })),
-  };
-}
-
-function providerDiscoveryPlanItemListSchema(): JsonLd {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    '@id': `${absoluteUrl('/ai-information')}#provider-discovery-plan`,
-    name: 'Provider Discovery Plan',
-    url: `${absoluteUrl('/ai-information')}#provider-discovery-plan`,
-    description:
-      'A public search-provider discovery plan describing current crawl/indexation signals and next monitoring actions for Google, Bing, Brave, DuckDuckGo, ChatGPT search, Claude, and Perplexity.',
-    itemListOrder: 'https://schema.org/ItemListOrderAscending',
-    numberOfItems: providerDiscoveryPlan.length,
-    itemListElement: providerDiscoveryPlan.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.provider,
-      description: `Current signal: ${item.currentSignal} Next action: ${item.nextAction}`,
-      url: absoluteUrl('/ai-information'),
     })),
   };
 }
@@ -682,7 +659,6 @@ export function aiInformationJsonLd(): JsonLd {
       items: publicSourceGraph,
     }),
     fanOutQueryItemListSchema(fanOutQueryMap),
-    providerDiscoveryPlanItemListSchema(),
     expertiseDefinedTermSetSchema(),
     {
       '@context': 'https://schema.org',
@@ -878,24 +854,24 @@ export function technicalSeoCaseStudyJsonLd(): JsonLd {
     ...canonicalEntitySchemas(),
     websiteSchema(),
     articleSchema({
-      title: 'Technical SEO Audit Case Study',
+      title: 'Technical SEO Finding Walkthrough',
       description:
-        'A sanitized technical SEO case-study frame showing how crawl data becomes findings, priorities, and implementation work without private client claims.',
+        'A sanitized crawl-to-repair walkthrough showing how one observed field becomes an interpreted risk, implementation action, and rerun check.',
       path: '/case-studies/technical-seo-audit',
       datePublished: '2026-06-21',
     }),
     webPageSchema({
       path: '/case-studies/technical-seo-audit',
-      name: 'Technical SEO Audit Case Study',
+      name: 'Technical SEO Finding Walkthrough',
       description:
-        'A public case study for Sulayman Bowles showing the path from crawl fields to interpreted risk, implementation action, and review notes.',
+        'A public reasoning walkthrough showing the path from crawl fields to interpreted risk, implementation action, and rerun notes.',
       mainEntityId: articleId,
       aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Work', path: '/work' },
-      { name: 'Technical SEO Audit Case Study', path: '/case-studies/technical-seo-audit' },
+      { name: 'Technical SEO Finding Walkthrough', path: '/case-studies/technical-seo-audit' },
     ]),
   ]);
 }
@@ -1154,6 +1130,8 @@ export function marketArticleJsonLd({
   datePublished,
   dateModified,
   image,
+  collectionPath = '/markets',
+  collectionName = 'Markets',
 }: {
   title: string;
   description: string;
@@ -1161,6 +1139,8 @@ export function marketArticleJsonLd({
   datePublished: string;
   dateModified?: string;
   image?: string;
+  collectionPath?: string;
+  collectionName?: string;
 }): JsonLd {
   const articleId = `${absoluteUrl(path)}#article`;
 
@@ -1177,7 +1157,7 @@ export function marketArticleJsonLd({
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
-      { name: 'Markets', path: '/markets' },
+      { name: collectionName, path: collectionPath },
       { name: title, path },
     ]),
   ]);

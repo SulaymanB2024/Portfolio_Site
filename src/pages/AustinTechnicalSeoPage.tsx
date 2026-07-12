@@ -87,7 +87,7 @@ export default function AustinTechnicalSeoPage() {
               Austin technical SEO and search visibility.
             </h1>
             <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/64 lg:mt-10">
-              A local service page for Austin teams that need crawlability, indexation, structured data, page clarity, and technical search issues reviewed before broader content or growth work.
+              Based in Austin, I run fixed-scope reviews for teams that need crawlability, indexation, structured data, page clarity, and technical search issues checked before broader content or growth work.
             </p>
             <div className="mt-8 max-w-3xl border border-current/14 bg-current/[0.035] p-5">
               <p className="mb-3 text-[10px] uppercase tracking-[0.24em] text-current/46">Short answer</p>
@@ -97,7 +97,7 @@ export default function AustinTechnicalSeoPage() {
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-5 lg:mt-10">
               <PrimaryCTA href="/contact" className="text-accent hover:text-[var(--page-bg)]">
-                Request an audit
+                Request a fixed-scope review
               </PrimaryCTA>
               <TextLink href="/method" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
                 Read the technical SEO audit method
@@ -191,6 +191,18 @@ export default function AustinTechnicalSeoPage() {
             </div>
           </div>
           <div className="grid gap-6">
+            <figure id="austin-report-example" className="scroll-mt-28 border border-current/14 bg-canvas p-3 text-ink">
+              <img
+                src="/images/austin-audit-report-example.png"
+                alt="Example Austin crawlability report layout showing the June 25, 2026 public pilot cutoff, 12 homepage fetches, 10 sitemap declarations, and six measurement-gap rows."
+                className="h-auto w-full"
+                loading="lazy"
+              />
+              <figcaption className="flex flex-wrap items-center justify-between gap-3 border-t border-ink/14 px-2 pt-3 text-[10px] uppercase tracking-[0.18em] text-ink/60">
+                <span>Illustrative report layout · public pilot values</span>
+                <a href="/research/austin-crawlability-benchmark-pilot.csv" className="border-b border-ink/30 pb-1 text-ink/70 hover:border-ink hover:text-ink">Open source CSV</a>
+              </figcaption>
+            </figure>
             <div className="grid grid-cols-1 gap-px overflow-hidden border border-current/14 md:grid-cols-2">
               {austinBenchmarkSnapshot.map((item) => (
                 <TechnicalPanel key={item.label} className="min-h-[120px] p-5">

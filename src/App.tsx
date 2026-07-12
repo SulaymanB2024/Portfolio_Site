@@ -10,17 +10,19 @@ import { MagneticButton } from './components/MagneticButton';
 import { InternalHeader } from './components/InternalHeader';
 import { InternalFooter } from './components/InternalFooter';
 import { KineticTypography } from './components/KineticTypography';
-import { ShutterWipe } from './components/pageTransitions/ShutterWipe';
 import { usePageTransitions } from './hooks/usePageTransitions';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
 import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
 import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavigation';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './content/texasTollRoadArticleMeta';
+import { formatIsoDate, PROFILE_FACTS } from './content/profileFacts';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
 import { TextMarquee } from './components/TextMarquee';
 import { AuditIntakeForm } from './components/AuditIntakeForm';
+import { WireframeGrid } from './components/WireframeGrid';
+import NotFoundPage from './pages/NotFoundPage';
 
 const loadAtlasPage = () => import('./pages/AtlasPage');
 const loadAtlasCelestialParallaxPage = () => import('./pages/AtlasCelestialParallaxPage');
@@ -65,7 +67,6 @@ const CandlestickChart = lazy(() => import('./components/CandlestickChart').then
 const AtmosphereCore = lazy(() => import('./components/AtmosphereCore').then(m => ({ default: m.default })));
 const GenerativeMesh = lazy(() => import('./components/GenerativeMesh').then(m => ({ default: m.GenerativeMesh })));
 const GeometricPattern = lazy(() => import('./components/GeometricPattern').then(m => ({ default: m.GeometricPattern })));
-const WireframeGrid = lazy(() => import('./components/WireframeGrid').then(m => ({ default: m.WireframeGrid })));
 const FooterM = lazy(() => import('./components/FooterM').then(m => ({ default: m.FooterM })));
 
 const CONTACT_HASH = '#contact';
@@ -93,6 +94,11 @@ const homeDisciplineItems = [
     desc: 'Finance research, valuation assumptions, market structure, operating analysis, dashboards, and decision tools with inspectable assumptions.',
   },
 ];
+
+const homeProofHighlights = PROFILE_FACTS.proofClaims.map((item) => ({
+  ...item,
+  displayDate: formatIsoDate(item.asOf),
+}));
 
 function isDarkRoute(path: string) {
   return getRouteTone(path) === 'dark';
@@ -276,16 +282,13 @@ export default function App() {
         <MarketsPage />
       </Suspense>
     );
-  } else {
+  } else if (route?.path === '/') {
     page = <HomePage />;
+  } else {
+    page = <NotFoundPage />;
   }
 
-  return (
-    <>
-      {route?.path !== '/simple' && <ShutterWipe />}
-      {page}
-    </>
-  );
+  return page;
 }
 
 function SitemapPage() {
@@ -324,7 +327,7 @@ function SitemapPage() {
                 >
                   <span className="block text-sm uppercase tracking-[0.18em]">{item.h1}</span>
                   <span className="mt-2 block text-sm leading-relaxed opacity-65">{item.description}</span>
-                  <span className="mt-3 block text-[10px] uppercase tracking-[0.22em] opacity-45">{item.path}</span>
+                  <span className="mt-3 block text-[10px] uppercase tracking-[0.22em] opacity-60">{item.path}</span>
                 </a>
               </li>
             ))}
@@ -358,7 +361,7 @@ function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
       }`}
     >
       <div className="w-full max-w-[1480px] border-t border-current/20 pt-6">
-        <div className="text-[10px] uppercase tracking-[0.32em] opacity-45">Route overview</div>
+        <div className="text-[10px] uppercase tracking-[0.32em] opacity-60">Route overview</div>
         <h1 className="mt-6 font-serif text-[3.4rem] md:text-[5.75rem] xl:text-[8rem] italic leading-[0.86] tracking-normal">
           {heading}
         </h1>
@@ -535,16 +538,6 @@ function HomePage() {
   const subY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
-  // Philosophy horizontal scroll
-  const philosophyRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: philosophyScroll } = useScroll({
-    target: philosophyRef,
-    offset: ["start end", "end start"]
-  });
-  
-  const h1Transform = useTransform(philosophyScroll, [0, 1], ["0%", "-40%"]);
-  const h2Transform = useTransform(philosophyScroll, [0, 1], ["0%", "40%"]);
-
   return (
     <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas" ref={containerRef}>
       {!prefersReducedMotion && <InkTrails />}
@@ -579,7 +572,7 @@ function HomePage() {
             exit={{ opacity: 0 }}
             transition={{ duration: prefersReducedMotion ? 0.12 : 0.35, ease: [0.33, 1, 0.68, 1] }}
           >
-            <div className="w-full flex justify-between absolute pt-8 px-8 md:px-16 normal-case font-sans uppercase tracking-[0.2em] text-xs opacity-50 justify-self-start self-start top-0">
+            <div className="w-full flex justify-between absolute pt-8 px-8 md:px-16 normal-case font-sans uppercase tracking-[0.2em] text-xs opacity-60 justify-self-start self-start top-0">
                <span>Building Evidence</span>
                <span>{counter}%</span>
             </div>
@@ -643,10 +636,41 @@ function HomePage() {
 	                 Sulayman Bowles
 	               </h1>
 	               <p className="mt-5 font-sans text-sm leading-relaxed tracking-normal text-ink/64 md:text-base">
-		                 Technical SEO, Atlas crawl evidence, and markets research. Source material first; shipping decisions second.
+		                 UT Austin McCombs student building Atlas and running Void Agency across technical SEO, product, and finance research.
 	               </p>
+	               <div className="mt-7 flex flex-wrap gap-4 text-[10px] uppercase tracking-[0.2em] md:justify-end">
+	                 <a href="/atlas" className="border-b border-ink/30 pb-1 text-ink/70 hover:border-ink hover:text-ink">Open Atlas</a>
+	                 <a href="/contact" className="border-b border-ink/30 pb-1 text-ink/70 hover:border-ink hover:text-ink">Request an audit</a>
+	                 <a href="/resume" className="border-b border-ink/30 pb-1 text-ink/70 hover:border-ink hover:text-ink">Resume</a>
+	               </div>
 	             </div>
            </motion.div>
+        </section>
+
+        <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-14 text-ink md:px-16 md:py-20" aria-labelledby="home-proof-heading">
+          <div className="mx-auto w-full max-w-[1800px]">
+            <div className="mb-9 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-ink/60">Proof snapshot</p>
+                <h2 id="home-proof-heading" className="mt-4 font-serif text-4xl italic leading-none md:text-6xl">Current work in 30 seconds.</h2>
+              </div>
+              <a href="/work" className="w-fit border-b border-ink/28 pb-1 text-[10px] uppercase tracking-[0.2em] text-ink/68 hover:border-ink hover:text-ink">All selected work</a>
+            </div>
+            <div className="grid gap-px border border-ink/14 bg-ink/14 sm:grid-cols-2 lg:grid-cols-3">
+              {homeProofHighlights.map((item, index) => (
+                <a key={item.label} href={item.publicSource} className="group grid min-h-[190px] content-between bg-canvas p-5 transition-colors hover:bg-ink hover:text-canvas">
+                  <div className="flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-current/60">
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <time dateTime={item.asOf}>As of {item.displayDate}</time>
+                  </div>
+                  <div>
+                    <h3 className="text-[11px] uppercase tracking-[0.22em] text-current">{item.label}</h3>
+                    <p className="mt-4 text-sm leading-relaxed text-current/70">{item.claim}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* INTRODUCTION - High contrast split */}
@@ -654,7 +678,7 @@ function HomePage() {
           <div className="mx-auto grid w-full max-w-[1800px] grid-cols-1 gap-14 md:grid-cols-12 md:gap-16">
             <div className="md:col-span-7 md:col-start-2">
               <ScrollReveal blur={false}>
-                <p className="mb-7 font-sans text-[10px] uppercase tracking-[0.3em] text-ink/46">Working method</p>
+                <p className="mb-7 font-sans text-[10px] uppercase tracking-[0.3em] text-ink/60">Working method</p>
               </ScrollReveal>
               <StaggeredText
                 text="Evidence systems for messy surfaces."
@@ -678,15 +702,15 @@ function HomePage() {
               />
               <ScrollReveal delay={0.45} yOffset={15} blur={false} className="grid gap-5 pt-8 font-sans text-[10px] uppercase tracking-[0.22em] text-ink/56">
                 <div className="grid grid-cols-[6.5rem_1fr] gap-5 border-b border-ink/10 pb-5">
-                  <span className="text-ink/42">Collect</span>
+                  <span className="text-ink/60">Collect</span>
                   <span className="text-ink">Crawls, templates, queries, assumptions</span>
                 </div>
                 <div className="grid grid-cols-[6.5rem_1fr] gap-5 border-b border-ink/10 pb-5">
-                  <span className="text-ink/42">Structure</span>
+                  <span className="text-ink/60">Structure</span>
                   <span className="text-ink">Evidence, states, constraints, gaps</span>
                 </div>
                 <div className="grid grid-cols-[6.5rem_1fr] gap-5">
-                  <span className="text-ink/42">Ship</span>
+                  <span className="text-ink/60">Ship</span>
                   <span className="text-ink">Fixes, reports, dashboards, pages</span>
                 </div>
               </ScrollReveal>
@@ -704,7 +728,7 @@ function HomePage() {
                <h3 className="font-sans tracking-[0.3em] text-xs md:text-sm uppercase font-medium text-canvas/50">Selected Work</h3>
              </ScrollReveal>
              <ScrollReveal blur={false} delay={0.2}>
-               <span className="font-serif italic opacity-50 text-xl text-canvas/50">2024 — 2026</span>
+               <span className="font-serif italic text-xl text-canvas/60">2024 — 2026</span>
              </ScrollReveal>
            </div>            {/* Project 01 */}
            <div className="order-1 max-w-[1800px] mx-auto w-full px-4 md:px-16 mb-48 md:mb-64 relative pt-16">
@@ -738,11 +762,11 @@ function HomePage() {
                    <ScrollReveal delay={0.6}>
                      <div className="flex flex-col border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:max-w-xs">
                        <div className="flex justify-between">
-                         <span className="opacity-50">Role</span>
+                         <span className="opacity-60">Role</span>
                          <span className="text-canvas">Builder / Operator</span>
                        </div>
                        <div className="flex justify-between">
-                         <span className="opacity-50">Output</span>
+                         <span className="opacity-60">Output</span>
                          <span className="text-canvas">Crawl Data, Issue Logic, Reports</span>
                        </div>
                      </div>
@@ -785,24 +809,24 @@ function HomePage() {
                
              </div>
             </div>
-                    {/* PROJECT 03 - MARKETS */}
+                    {/* PROJECT 03 - TEXAS TOLL-ROAD RESEARCH */}
          <div className="order-3 w-full relative py-20 bg-ink" id="systems">
             <div className="max-w-[1800px] mx-auto w-full px-4 md:px-16 mb-48 md:mb-64 relative pt-16">
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 03</span>
-                  <span className="opacity-60">Market + Operating Analysis</span>
+                  <span className="opacity-60">Infrastructure Ownership Research</span>
                </div>
                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">FINANCE</span>
-                  <span className="opacity-60">Models, Dashboards, Research</span>
+                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PUBLISHED RESEARCH</span>
+                  <span className="opacity-60">Ownership, Operators, Economics</span>
                </div>
              </div>
              
              <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-stretch pt-24 pb-48">
                
                {/* Left Column Canvas */}
-               <a href="/markets" id="work-link-markets" className="md:col-span-8 overflow-hidden relative block h-[60vh] md:h-[90vh] border border-canvas/20 origin-left group">
+               <a href="/markets/who-owns-texas-toll-roads" id="work-link-markets" className="md:col-span-8 overflow-hidden relative block h-[60vh] md:h-[90vh] border border-canvas/20 origin-left group">
                  <div className="hidden md:block absolute right-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
                  
                  {/* Corner markers */}
@@ -816,8 +840,8 @@ function HomePage() {
                  {/* Title overlapping canvas */}
                  <ScrollReveal delay={0.2} className="absolute top-8 left-4 pointer-events-none z-10 text-canvas mix-blend-difference select-none md:left-8 lg:left-10">
                    <h4 className="text-[4.5rem] md:text-[6rem] lg:text-[7rem] font-serif leading-[0.85] font-light uppercase tracking-normal text-left">
-                     <span className="block opacity-90"><ScrambleText text="MAR" trigger="hover" /></span>
-                     <span className="block italic opacity-70"><ScrambleText text="KETS" trigger="hover" /></span>
+                     <span className="block opacity-90"><ScrambleText text="TEXAS" trigger="hover" /></span>
+                     <span className="block italic opacity-70"><ScrambleText text="TOLLS" trigger="hover" /></span>
                    </h4>
                  </ScrollReveal>
                </a>
@@ -828,7 +852,7 @@ function HomePage() {
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
-                        Markets research covering valuation, market structure, operating models, and decision dashboards with visible assumptions.
+                        A source-led map of who owns Texas toll roads, who controls revenue, who gets paid first, and how finite concessions can be valued.
                      </p>
                    </ScrollReveal>
                    
@@ -837,12 +861,12 @@ function HomePage() {
                    <ScrollReveal delay={0.4} className="w-full">
                      <div className="flex flex-col md:items-end border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:ml-auto md:max-w-xs">
                         <div className="flex justify-between w-full">
-                          <span className="text-left opacity-50">Focus</span>
-                          <span className="text-right text-canvas">Markets Research</span>
+                          <span className="text-left opacity-60">Focus</span>
+                          <span className="text-right text-canvas">Infrastructure Ownership</span>
                         </div>
                         <div className="flex justify-between w-full">
-                          <span className="text-left opacity-50">Tools</span>
-                          <span className="text-right text-canvas">Excel, Python, R, SQL</span>
+                          <span className="text-left opacity-60">Output</span>
+                          <span className="text-right text-canvas">Source Ledger, Tables, DCF</span>
                         </div>
                      </div>
                    </ScrollReveal>
@@ -880,39 +904,6 @@ function HomePage() {
            </a>
         </section>
 
-        {/* TYPOGRAPHY / PHILOSOPHY STATEMENT SECTION */}
-        <section ref={philosophyRef} id="expertise" className="py-48 px-4 md:px-16 flex flex-col justify-center relative bg-canvas text-ink overflow-hidden border-t border-ink/10 h-screen">
-          <div className="max-w-[1800px] mx-auto w-full relative h-[60vh] flex flex-col justify-center">
-            
-            {/* Background huge offset typography */}
-            <motion.div style={{ x: h1Transform }} className="flex whitespace-nowrap mb-8 md:mb-16 -ml-[20%]">
-              <span className="text-[4.5rem] md:text-[7rem] xl:text-[9rem] font-serif uppercase tracking-normal text-outline opacity-20 pr-16 select-none">
-                EVIDENCE BEFORE
-              </span>
-            </motion.div>
-            
-            <motion.div style={{ x: h2Transform }} className="flex whitespace-nowrap -ml-[40%]">
-               <span className="text-[4.5rem] md:text-[7rem] xl:text-[9rem] font-serif uppercase tracking-normal opacity-10 pr-16 select-none leading-none">
-                 INTERPRETATION
-               </span>
-            </motion.div>
-            
-            {/* Foreground content */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 max-w-sm md:max-w-md bg-canvas/80 backdrop-blur-md p-8 md:p-12 border border-ink/10">
-               <h3 className="font-serif italic text-3xl md:text-5xl mb-8 font-light">Operating Method</h3>
-               <p className="font-sans text-sm tracking-normal text-ink/70 leading-relaxed mb-8">
-                 I separate signal from presentation. First, collect the source material. Then structure it. Then decide what it means, what risk it creates, and what should be fixed.
-               </p>
-               <ul className="space-y-4 font-sans text-[10px] uppercase tracking-widest border-t border-ink/10 pt-8 text-ink/50 group">
-                 <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>01</span><span className="text-ink">Crawl before claims</span></li>
-                 <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>02</span><span className="text-ink">Structure before scale</span></li>
-                 <li className="flex justify-between transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-30 cursor-pointer"><span>03</span><span className="text-ink">Evidence before polish</span></li>
-               </ul>
-            </div>
-            
-          </div>
-        </section>
-
         {/* EXPERTISE SECTION */}
         <section className="py-32 md:py-48 px-4 md:px-16 bg-canvas text-ink border-t border-ink/10 relative">
            <div className="max-w-[1800px] mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
@@ -938,7 +929,7 @@ function HomePage() {
                           style={{ perspective: 1000 }}
                         >
                           <div className="relative z-10 flex flex-col pointer-events-none w-full">
-                            <span className="font-sans text-[10px] tracking-widest uppercase opacity-50 mb-6 md:mb-8">{item.num}</span>
+                            <span className="font-sans text-[10px] tracking-widest uppercase opacity-60 mb-6 md:mb-8">{item.num}</span>
                             <h4 className="text-4xl md:text-4xl lg:text-5xl font-serif tracking-normal uppercase font-light leading-none mb-6 md:mb-8">
                               {item.title}
                             </h4>

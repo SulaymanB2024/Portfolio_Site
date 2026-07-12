@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { flushSync } from 'react-dom';
 
 type NormalizePath = (path: string) => string;
 
@@ -8,8 +9,6 @@ type UsePageTransitionsOptions = {
   normalizePath?: NormalizePath;
   preloadPath?: (path: string) => Promise<void> | void;
   contactHash?: string;
-  shutterCoverMs?: number;
-  revealDelayMs?: number;
   hashFocusSelector?: string;
 };
 
@@ -21,6 +20,7 @@ type ViewTransitionDocument = Document & {
 
 type LenisWindow = Window & {
   lenis?: {
+    resize?: () => void;
     scrollTo: (
       target: string | number,
       options?: {
@@ -30,10 +30,13 @@ type LenisWindow = Window & {
       },
     ) => void;
   };
-  triggerShutter?: (active: boolean) => void;
 };
 
 const identityNormalize: NormalizePath = (path) => path;
+
+function reducedMotionRequested() {
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+}
 
 function focusElement(selector?: string) {
   if (!selector) return;
@@ -41,24 +44,24 @@ function focusElement(selector?: string) {
 }
 
 function scrollToHashTarget(hash: string, contactHash?: string, hashFocusSelector?: string) {
-  const target = document.querySelector(hash);
+  const target = document.querySelector<HTMLElement>(hash);
   if (!target) return;
 
+  const reducedMotion = reducedMotionRequested();
   const lenis = (window as unknown as LenisWindow).lenis;
-  if (lenis) {
-    if (typeof (lenis as any).resize === 'function') {
-      (lenis as any).resize();
-    }
+
+  if (lenis && !reducedMotion) {
+    lenis.resize?.();
     lenis.scrollTo(hash, {
-      duration: 1.2,
+      duration: 0.55,
       ease: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
   } else {
-    target.scrollIntoView({ behavior: 'smooth' });
+    target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
   }
 
   if (contactHash && hash === contactHash) {
-    window.setTimeout(() => focusElement(hashFocusSelector), 450);
+    window.requestAnimationFrame(() => focusElement(hashFocusSelector));
   }
 }
 
@@ -70,16 +73,8 @@ function getCurrentCanonicalPath(normalizePath: NormalizePath) {
   return `${canonicalPath}${window.location.search}${window.location.hash}`;
 }
 
-function wait(ms: number) {
-  return new Promise((resolve) => window.setTimeout(resolve, ms));
-}
-
-function waitForNextPaint() {
-  return new Promise<void>((resolve) => {
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => resolve());
-    });
-  });
+function commitNavigation(callback: () => void) {
+  flushSync(callback);
 }
 
 export function usePageTransitions({
@@ -88,87 +83,61 @@ export function usePageTransitions({
   normalizePath = identityNormalize,
   preloadPath,
   contactHash = '#contact',
-  shutterCoverMs = 800,
-  revealDelayMs = 90,
   hashFocusSelector = '#contact-name',
 }: UsePageTransitionsOptions) {
   const isPopStateRef = useRef(false);
+  const preloadedPathsRef = useRef(new Set<string>());
 
   useEffect(() => {
-    const executeTransition = async (navigateCallback: () => void, targetPath?: string) => {
-      const triggerShutter = (window as unknown as LenisWindow).triggerShutter;
+    const preloadInBackground = (targetPath?: string) => {
+      if (!targetPath || !preloadPath || preloadedPathsRef.current.has(targetPath)) return;
+      preloadedPathsRef.current.add(targetPath);
+      void Promise.resolve(preloadPath(targetPath)).catch(() => {
+        preloadedPathsRef.current.delete(targetPath);
+      });
+    };
+
+    const executeTransition = (navigateCallback: () => void, targetPath?: string) => {
+      preloadInBackground(targetPath);
+
       const viewTransitionDocument = document as ViewTransitionDocument;
-      const unlockScroll = () => {
-        document.documentElement.classList.remove('page-transition-lock');
-      };
-      const reveal = async () => {
-        await waitForNextPaint();
-        if (revealDelayMs > 0) {
-          await wait(revealDelayMs);
-        }
-        triggerShutter?.(false);
-        unlockScroll();
-      };
+      if (reducedMotionRequested() || !viewTransitionDocument.startViewTransition) {
+        commitNavigation(navigateCallback);
+        return;
+      }
 
-      document.documentElement.classList.add('page-transition-lock');
-
-      if (triggerShutter) {
-        triggerShutter(true);
-
-        try {
-          await Promise.all([
-            wait(shutterCoverMs),
-            targetPath ? Promise.resolve(preloadPath?.(targetPath)) : Promise.resolve(),
-          ]);
-
-          if (viewTransitionDocument.startViewTransition) {
-            const transition = viewTransitionDocument.startViewTransition(() => {
-              navigateCallback();
-            });
-
-            transition.ready
-              .then(reveal)
-              .catch(reveal);
-          } else {
-            navigateCallback();
-            void reveal();
-          }
-        } catch {
-          navigateCallback();
-          void reveal();
-        }
-      } else if (viewTransitionDocument.startViewTransition) {
-        try {
-          if (targetPath) {
-            await Promise.resolve(preloadPath?.(targetPath));
-          }
-        } finally {
-          viewTransitionDocument.startViewTransition(navigateCallback);
-          unlockScroll();
-        }
-      } else {
-        try {
-          if (targetPath) {
-            await Promise.resolve(preloadPath?.(targetPath));
-          }
-        } finally {
-          navigateCallback();
-          unlockScroll();
+      let committed = false;
+      try {
+        viewTransitionDocument.startViewTransition(() => {
+          committed = true;
+          commitNavigation(navigateCallback);
+        });
+      } catch {
+        if (!committed) {
+          commitNavigation(navigateCallback);
         }
       }
+    };
+
+    const handleLinkIntent = (event: Event) => {
+      const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a');
+      const href = link?.getAttribute('href');
+      if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+      const url = new URL(href, window.location.origin);
+      if (url.origin !== window.location.origin || /\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
+      preloadInBackground(`${normalizePath(url.pathname)}${url.search}${url.hash}`);
     };
 
     const handlePopState = () => {
       isPopStateRef.current = true;
       const targetPath = getCurrentCanonicalPath(normalizePath);
-      void executeTransition(() => {
-        setCurrentPath(targetPath);
-      }, targetPath);
+      void executeTransition(() => setCurrentPath(targetPath), targetPath);
     };
 
     const handleLinkClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      const link = target.closest('a');
+      const link = target.closest<HTMLAnchorElement>('a');
 
       if (
         !link ||
@@ -184,12 +153,10 @@ export function usePageTransitions({
       }
 
       const href = link.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('mailto:') || href.startsWith('tel:')) return;
+      if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
       const url = new URL(href, window.location.origin);
-      if (url.origin !== window.location.origin) return;
-      if (/\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
+      if (url.origin !== window.location.origin || /\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
 
       const canonicalPath = normalizePath(url.pathname);
       const currentCanonicalPath = normalizePath(window.location.pathname);
@@ -206,7 +173,6 @@ export function usePageTransitions({
       }
 
       event.preventDefault();
-
       const fullPath = `${canonicalPath}${url.search}${url.hash}`;
       isPopStateRef.current = false;
       void executeTransition(() => {
@@ -217,40 +183,34 @@ export function usePageTransitions({
 
     window.addEventListener('popstate', handlePopState);
     document.addEventListener('click', handleLinkClick);
+    document.addEventListener('pointerover', handleLinkIntent);
+    document.addEventListener('focusin', handleLinkIntent);
 
     return () => {
       window.removeEventListener('popstate', handlePopState);
       document.removeEventListener('click', handleLinkClick);
+      document.removeEventListener('pointerover', handleLinkIntent);
+      document.removeEventListener('focusin', handleLinkIntent);
     };
-  }, [contactHash, hashFocusSelector, normalizePath, preloadPath, revealDelayMs, setCurrentPath, shutterCoverMs]);
+  }, [contactHash, hashFocusSelector, normalizePath, preloadPath, setCurrentPath]);
 
   useEffect(() => {
     const lenis = (window as unknown as LenisWindow).lenis;
     const hash = window.location.hash;
 
     if (hash) {
-      const performScroll = () => {
-        if (document.documentElement.classList.contains('page-transition-lock')) {
-          requestAnimationFrame(performScroll);
-        } else {
-          scrollToHashTarget(hash, contactHash, hashFocusSelector);
-        }
-      };
-
-      if (hash === contactHash) {
-        window.setTimeout(() => {
-          scrollToHashTarget(hash, contactHash, hashFocusSelector);
-        }, 1400);
-      }
-
-      performScroll();
-    } else {
-      if (isPopStateRef.current) {
-        isPopStateRef.current = false;
-      } else {
-        window.scrollTo({ top: 0, behavior: 'auto' });
-        lenis?.scrollTo(0, { immediate: true });
-      }
+      const firstFrame = window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => scrollToHashTarget(hash, contactHash, hashFocusSelector));
+      });
+      return () => window.cancelAnimationFrame(firstFrame);
     }
+
+    if (isPopStateRef.current) {
+      isPopStateRef.current = false;
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    lenis?.scrollTo(0, { immediate: true });
   }, [currentPath, contactHash, hashFocusSelector]);
 }

@@ -1,7 +1,8 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { buildRouteStaticHtml, buildSitemapStaticHtml } from '../src/seo/staticContent';
-import { getCanonicalRoutes, SEO_ROUTES, SITE_LASTMOD, type SeoRoute } from '../src/seo/routes';
+import { buildSitemapXml } from '../src/seo/generatedPublicFiles';
+import { getCanonicalRoutes, NOT_FOUND_ROUTE, SEO_ROUTES, type SeoRoute } from '../src/seo/routes';
 import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME } from '../src/seo/site';
 
 const DIST_DIR = path.resolve(process.cwd(), 'dist');
@@ -157,7 +158,7 @@ function buildHead(route: SeoRoute, assetTags: string) {
         letter-spacing: 0.12em;
         text-transform: uppercase;
       }
-      .js #seo-static-summary {
+      .app-mounted #seo-static-summary {
         display: none;
       }
     </style>
@@ -219,24 +220,13 @@ async function writeRouteHtml(template: string, assetTags: string, route: SeoRou
   }
 }
 
+async function writeNotFoundHtml(template: string, assetTags: string) {
+  const routeHtml = replaceHead(injectFallback(template, NOT_FOUND_ROUTE), NOT_FOUND_ROUTE, assetTags);
+  await fs.writeFile(path.join(DIST_DIR, '404.html'), routeHtml);
+}
+
 async function writeSitemap() {
-  const urls = getCanonicalRoutes()
-    .map(
-      (route) => `  <url>
-    <loc>${absoluteUrl(route.path)}</loc>
-    <lastmod>${route.lastmod ?? SITE_LASTMOD}</lastmod>
-    <priority>${route.priority.toFixed(1)}</priority>
-  </url>`,
-    )
-    .join('\n');
-
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
-</urlset>
-`;
-
-  await fs.writeFile(path.join(DIST_DIR, 'sitemap.xml'), xml);
+  await fs.writeFile(path.join(DIST_DIR, 'sitemap.xml'), buildSitemapXml());
 }
 
 async function main() {
@@ -244,7 +234,10 @@ async function main() {
   const template = await fs.readFile(templatePath, 'utf8');
   const assetTags = extractAssetTags(extractHead(template));
 
-  await Promise.all(SEO_ROUTES.filter((route) => route.includeInSitemap || route.generateStatic).map((route) => writeRouteHtml(template, assetTags, route)));
+  await Promise.all([
+    ...SEO_ROUTES.filter((route) => route.includeInSitemap || route.generateStatic).map((route) => writeRouteHtml(template, assetTags, route)),
+    writeNotFoundHtml(template, assetTags),
+  ]);
   await writeSitemap();
 }
 

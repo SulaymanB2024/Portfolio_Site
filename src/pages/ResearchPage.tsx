@@ -4,77 +4,67 @@ import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { WireframeGrid } from '../components/WireframeGrid';
 import {
-  LinkPanel,
   EditorialHeading,
+  LinkPanel,
   PageFrame,
   PageShell,
   PrimaryCTA,
-  SectionHeader,
   SectionEyebrow,
+  SectionHeader,
   SurfaceGrid,
   TechnicalPanel,
   TextLink,
 } from '../components/design/Primitives';
+import { RESEARCH_ARTICLES } from '../content/researchArticles';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const RESEARCH_ROUTE = getSeoRoute('/research')!;
 const RESEARCH_COIN_ART = '/images/markets/noise-expansion-coin-alpha.png';
 
-const featuredResearchNotes = [
+const researchNotes = [
   {
-    kicker: 'Agent evaluation',
+    category: 'Product and data',
     title: 'Beyond the Leaderboard: ViralBench + Codex',
     href: '/viralbench-codex-agent-harness',
-    description:
-      'A code-level design for traces, replay, controlled trials, and a bounded Codex engineering loop around a live marketing agent.',
+    description: 'A code-level design for traces, replay, controlled trials, and a bounded engineering loop around a live marketing agent.',
+    date: '2026.07.09',
+  },
+  ...RESEARCH_ARTICLES.map((article) => ({
+    category: article.slug === 'technical-seo-public-data-infrastructure' ? 'Technical SEO' : 'Search systems',
+    title: article.title,
+    href: `/markets/${article.slug}`,
+    description: article.subtitle,
+    date: article.dateModified ?? article.date,
+  })),
+  {
+    category: 'Markets and investing',
+    title: 'Who Owns the Toll Roads in Texas?',
+    href: '/markets/who-owns-texas-toll-roads',
+    description: 'A statewide ownership map separating public title, private concessions, operators, creditors, revenue rights, and analyst-screening economics.',
+    date: '2026.07.11',
   },
   {
-    kicker: 'Crawler access',
-    title: 'Crawler Policy Comes Before Visibility',
-    href: '/markets/ai-search-crawler-policy',
-    description:
-      'A note on crawler access, redirects, and why discovery has to be settled before visibility claims matter.',
+    category: 'Technical SEO',
+    title: 'Austin Crawlability Pilot',
+    href: '/austin-technical-seo',
+    description: 'A bounded 12-site public-homepage pilot with explicit data cutoff, measurement gaps, source CSV, and no ranking or site-health claims.',
+    date: '2026.06.25',
   },
   {
-    kicker: 'Public data',
-    title: 'Technical SEO as Public Data Infrastructure',
-    href: '/markets/technical-seo-public-data-infrastructure',
-    description:
-      'A practical bridge between crawlability, structured data, provenance, and public records people can inspect.',
-  },
-  {
-    kicker: 'Identity',
-    title: 'Canonical Identity for Personal SEO',
-    href: '/markets/canonical-identity-personal-seo',
-    description:
-      'A reconciliation checklist for profiles, stale PDFs, source pages, and external bio consistency.',
-  },
-  {
-    kicker: 'Atlas',
+    category: 'Product and data',
     title: 'Atlas Sample Crawl Run',
     href: '/atlas/sample-crawl',
-    description:
-      'A sanitized walkthrough of how crawl rows, canonical state, depth, links, and issue labels become reviewable evidence.',
+    description: 'A sanitized walkthrough of how crawl rows, canonical state, depth, links, and issue labels become reviewable evidence.',
+    date: '2026.07.12',
   },
 ];
 
-const relatedResearchRoutes = [
-  {
-    label: 'Atlas audit console',
-    href: '/atlas',
-    description: 'The crawl and evidence workflow behind the audit examples.',
-  },
-  {
-    label: 'Markets research',
-    href: '/markets',
-    description: 'Finance notes, assumptions, and source-backed market questions.',
-  },
-  {
-    label: 'Selected work',
-    href: '/work',
-    description: 'Projects, case studies, and public work in one place.',
-  },
+const categorySummary = [
+  ['Search systems', 'Crawler policy, canonical identity, and public records.'],
+  ['Technical SEO', 'Crawlability, structured data, provenance, and bounded public studies.'],
+  ['Markets and investing', 'Ownership structures, valuation frames, assumptions, and risk.'],
+  ['Product and data', 'Agent evaluation, Atlas outputs, and inspectable technical artifacts.'],
 ];
 
 export default function ResearchPage() {
@@ -82,76 +72,74 @@ export default function ResearchPage() {
 
   return (
     <PageShell id="top" tone="light">
-      <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-35" />
+      <WireframeGrid tone="light" className="pointer-events-none absolute inset-0 z-0 opacity-35" />
       <PageTechnicalChrome tone="light" />
       <ScrollProgress />
       <InternalHeader activePath="/research" tone="light" />
 
       <PageFrame className="relative z-10">
-        <section className="relative grid min-h-[64vh] items-end gap-12 overflow-hidden border-b border-current/12 pb-14 pt-16 md:pt-20 lg:grid-cols-[minmax(0,0.58fr)_minmax(320px,0.42fr)]">
+        <section className="relative grid min-h-[64vh] items-end gap-12 overflow-hidden border-b border-current/12 pb-14 pt-16 md:pt-20 lg:grid-cols-[minmax(0,0.6fr)_minmax(320px,0.4fr)]">
           <div className="relative z-10 min-w-0">
-            <SectionEyebrow className="text-ink/48">Research</SectionEyebrow>
-            <EditorialHeading className="mt-8">Research notes.</EditorialHeading>
-            <div className="mt-8 max-w-3xl text-base leading-relaxed text-current/64">
-              <p>
-                Selected notes on search systems, crawlability, Atlas, public data, and markets work. Each piece is meant to stand on its own.
-              </p>
-            </div>
+            <SectionEyebrow className="text-ink/60">Research</SectionEyebrow>
+            <EditorialHeading className="mt-8">One archive. Clear categories.</EditorialHeading>
+            <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/68">
+              Search systems, technical SEO, markets, infrastructure, product, and data work now live in one research hub. Finance-only material remains available as a filtered Markets archive.
+            </p>
           </div>
 
           <div aria-hidden="true" className="pointer-events-none relative z-0 -my-12 hidden min-h-[520px] select-none lg:block">
-            <img
-              src={RESEARCH_COIN_ART}
-              alt=""
-              className="absolute left-[-4rem] top-1/2 h-auto w-[min(1120px,72vw)] max-w-none -translate-y-1/2 opacity-60 mix-blend-multiply"
-              draggable={false}
-            />
-          </div>
-
-          <div aria-hidden="true" className="pointer-events-none relative z-0 -mt-8 min-h-[260px] overflow-hidden lg:hidden">
-            <img
-              src={RESEARCH_COIN_ART}
-              alt=""
-              className="absolute left-1/2 top-1/2 h-auto w-[min(760px,145vw)] max-w-none -translate-x-[38%] -translate-y-1/2 opacity-40 mix-blend-multiply"
-              draggable={false}
-            />
+            <img src={RESEARCH_COIN_ART} alt="" className="absolute left-[-4rem] top-1/2 h-auto w-[min(1120px,72vw)] max-w-none -translate-y-1/2 opacity-55 mix-blend-multiply" draggable={false} />
           </div>
         </section>
 
         <div className="flex flex-wrap items-center gap-5 border-b border-current/12 py-8">
-          <PrimaryCTA href="/contact" id="research-contact-link">
-            Discuss a project
-          </PrimaryCTA>
-          <TextLink href="/markets" id="research-markets-link" className="text-[10px] uppercase tracking-[0.2em] text-current/62 hover:text-current">
-            Markets notes
+          <PrimaryCTA href="/work" id="research-work-link">View selected work</PrimaryCTA>
+          <TextLink href="/markets" id="research-markets-link" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
+            Markets filter
           </TextLink>
-          <TextLink href="/atlas" id="research-atlas-link" className="text-[10px] uppercase tracking-[0.2em] text-current/62 hover:text-current">
-            Atlas work
+          <TextLink href="/atlas" id="research-atlas-link" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
+            Atlas
           </TextLink>
         </div>
       </PageFrame>
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Selected notes" title="Readable research.">
-            Notes and essays across search systems, crawlability, public data, and markets.
+          <SectionHeader eyebrow="Categories" title="Four ways into the work.">
+            Each lane has a concrete question, source base, and boundary between observed facts and interpretation.
           </SectionHeader>
+          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+            {categorySummary.map(([title, description], index) => (
+              <TechnicalPanel key={title} className="min-h-[210px]">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-current/60">{String(index + 1).padStart(2, '0')}</p>
+                <h2 className="mt-10 font-serif text-3xl italic leading-none tracking-normal text-current">{title}</h2>
+                <p className="mt-5 text-sm leading-relaxed text-current/64">{description}</p>
+              </TechnicalPanel>
+            ))}
+          </SurfaceGrid>
+        </PageFrame>
+      </section>
 
+      <section className="relative z-10 border-b border-current/12">
+        <PageFrame className="py-16 xl:py-24">
+          <SectionHeader eyebrow="Publication index" title="Questions, evidence, limits.">
+            Seven distinct notes and artifacts, with finance terminology reserved for finance work.
+          </SectionHeader>
           <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-            {featuredResearchNotes.map((note) => (
-              <TechnicalPanel key={note.href} className="grid min-h-[270px] content-between gap-8 bg-current/[0.012]">
+            {researchNotes.map((note) => (
+              <TechnicalPanel key={note.href} className="grid min-h-[285px] content-between gap-8 bg-current/[0.012]">
                 <div>
-                  <p className="mb-7 text-[10px] uppercase tracking-[0.22em] text-current/42">{note.kicker}</p>
-                  <h2 className="font-serif text-3xl italic leading-[0.95] tracking-normal text-current">
-                    <a href={note.href} className="transition-opacity hover:opacity-70">
-                      {note.title}
-                    </a>
+                  <div className="flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-current/60">
+                    <span>{note.category}</span>
+                    <time>{note.date}</time>
+                  </div>
+                  <h2 className="mt-8 font-serif text-3xl italic leading-[0.95] tracking-normal text-current">
+                    <a href={note.href} className="transition-opacity hover:opacity-70">{note.title}</a>
                   </h2>
-                  <p className="mt-5 text-sm leading-relaxed text-current/62">{note.description}</p>
+                  <p className="mt-5 text-sm leading-relaxed text-current/64">{note.description}</p>
                 </div>
-
-                <a href={note.href} className="w-fit border-b border-current/18 pb-1 text-[10px] uppercase tracking-[0.2em] text-current/58 transition-colors hover:border-current/42 hover:text-current">
-                  Read note
+                <a href={note.href} className="w-fit border-b border-current/20 pb-1 text-[10px] uppercase tracking-[0.2em] text-current/64 transition-colors hover:border-current/45 hover:text-current">
+                  Open artifact
                 </a>
               </TechnicalPanel>
             ))}
@@ -161,15 +149,18 @@ export default function ResearchPage() {
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Related work" title="Project context.">
-            The main project pages behind the research notes.
+          <SectionHeader eyebrow="Context" title="From note to artifact.">
+            Research should connect back to the product, source file, or public work it helps explain.
           </SectionHeader>
-
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {relatedResearchRoutes.map((route) => (
-              <LinkPanel key={route.href} href={route.href} className="grid min-h-[170px] content-between gap-6">
-                <span className="font-serif text-2xl italic leading-tight tracking-normal text-current">{route.label}</span>
-                <span className="text-sm normal-case leading-relaxed tracking-normal text-current/58">{route.description}</span>
+          <div className="grid gap-3 md:grid-cols-3">
+            {[
+              ['Atlas audit console', '/atlas', 'The crawl and evidence workflow behind the audit examples.'],
+              ['Selected work', '/work', 'Six public artifacts with role, constraints, status, and evidence links.'],
+              ['Markets filter', '/markets', 'Finance and infrastructure-investing material only.'],
+            ].map(([label, href, description]) => (
+              <LinkPanel key={href} href={href} className="grid min-h-[170px] content-between gap-6">
+                <span className="font-serif text-2xl italic leading-tight tracking-normal text-current">{label}</span>
+                <span className="text-sm normal-case leading-relaxed tracking-normal text-current/64">{description}</span>
               </LinkPanel>
             ))}
           </div>

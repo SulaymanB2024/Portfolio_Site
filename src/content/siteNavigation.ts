@@ -5,19 +5,21 @@ export type SiteNavItem = {
 };
 
 export const primaryNav: SiteNavItem[] = [
-  { label: 'Work', href: '/work', description: 'Selected project work and supporting links.' },
-  { label: 'Atlas', href: '/atlas', description: 'Technical SEO audit console.' },
-  { label: 'Method', href: '/method', description: 'Void Agency technical SEO process.' },
-  { label: 'Research', href: '/research', description: 'Readable notes on search systems, Atlas, and markets.' },
-  { label: 'About', href: '/about', description: 'Profile, experience, and operating principles.' },
-  { label: 'Resume', href: '/resume', description: 'Resume and supporting links.' },
-  { label: 'Contact', href: '/contact', description: 'Audit intake and contact form.' },
+  { label: 'Work', href: '/work', description: 'Six distinct public artifacts with role, status, and evidence.' },
+  { label: 'Atlas', href: '/atlas', description: 'Technical SEO crawl and evidence console.' },
+  { label: 'Research', href: '/research', description: 'Search, technical SEO, product, data, markets, and infrastructure research.' },
+  { label: 'About', href: '/about', description: 'Current work, experience, and why the projects connect.' },
+  { label: 'Resume', href: '/resume', description: 'Recruiter-ready experience, education, skills, and PDF.' },
+  { label: 'Contact', href: '/contact', description: 'Direct email and a short project brief.' },
 ];
 
 export const utilityNav: SiteNavItem[] = [
-  { label: 'Book', href: '/simple', description: 'First-person text edition and personal monograph.' },
-  { label: 'Markets', href: '/markets', description: 'Finance and market research archive.' },
-  { label: 'Void Agency', href: '/void-agency', description: 'Void Agency technical SEO practice page.' },
+  { label: 'Method', href: '/method', description: 'Void Agency technical SEO process.' },
+  { label: 'Austin SEO', href: '/austin-technical-seo', description: 'Austin crawlability pilot and fixed-scope audit entry point.' },
+  { label: 'Void Agency', href: '/void-agency', description: 'Canonical organization record for the service practice.' },
+  { label: 'Text Edition', href: '/simple', description: 'First-person text edition and personal monograph.' },
+  { label: 'AI Information', href: '/ai-information', description: 'Compact source roles and current profile context.' },
+  { label: 'HTML Sitemap', href: '/sitemap', description: 'Plain links to every public canonical route.' },
   { label: 'Tech Ledger', href: 'https://sulayman-bowles.tech/', description: 'Technical projects, experiments, and project ledger.' },
 ];
 

@@ -1,7 +1,7 @@
 export const AI_INFORMATION_PATH = '/ai-information';
 
-export const AI_INFORMATION_LASTMOD = '2026-07-07';
-export const AI_INFORMATION_LAST_UPDATED = 'July 7, 2026';
+export const AI_INFORMATION_LASTMOD = '2026-07-12';
+export const AI_INFORMATION_LAST_UPDATED = 'July 12, 2026';
 
 export const AI_INFORMATION_TITLE = 'Profile Context for Sulayman Bowles, Void Agency, and Atlas';
 
@@ -450,12 +450,6 @@ function definitionCards(items: Array<{ label: string; copy: string }>) {
   return items.map((item) => `<h3>${item.label}</h3><p>${item.copy}</p>`).join('\n        ');
 }
 
-function evidenceGroupHtml() {
-  return evidenceGroups
-    .map((group) => `<h3>${group.title}</h3><ul>${listItems(group.items)}</ul>`)
-    .join('\n        ');
-}
-
 function identityReconciliationHtml() {
   return `<h2>${identityReconciliation.title}</h2>
         <p>${identityReconciliation.copy}</p>
@@ -466,31 +460,20 @@ function identityReconciliationHtml() {
 
 export const AI_INFORMATION_STATIC_HTML = `
       <article class="ai-information-static">
-        <h1>Profile Context for Sulayman Bowles, Void Agency, and Atlas</h1>
-        <p>This page keeps current descriptions and older background in one place so readers do not have to piece it together from stale snippets.</p>
-        <h2>Descriptions</h2>
+        <h1>Current identity, source roles, and claim limits</h1>
+        <p>A compact public reference for reconciling Sulayman Bowles, Atlas, Void Agency, and older source records. Provider-monitoring plans are intentionally not part of the public profile.</p>
+        <h2>Current descriptions</h2>
         ${definitionCards(canonicalDescriptions)}
         ${identityReconciliationHtml()}
-        <h2>Entity Names and Aliases</h2>
-        ${entityAliases
-          .map((item) => `<h3>${item.name}</h3><p>Aliases: ${item.aliases.join(', ')}. Reference page: <a href="${item.canonicalPage}">${item.canonicalPage}</a>.</p>`)
-          .join('\n        ')}
-        <h2>Short Descriptions</h2>
-        ${shortDescriptions.map((item) => `<p><strong>Short description:</strong> ${item}</p>`).join('\n        ')}
-        <h2>What the Work Supports</h2>
-        ${evidenceGroupHtml()}
-        <h2>Entity Summaries</h2>
-        ${entitySummaries.map((item) => `<h3>${item.name}</h3><p>${item.copy}</p>`).join('\n        ')}
-        <h2>What Void Agency Does</h2>
-        <ul>${listItems(voidAgencyServices)}</ul>
-        <h2>What Atlas SEO Audit Console Does</h2>
-        <ul>${listItems(atlasCapabilities)}</ul>
-        <h2>Relevant Expertise</h2>
-        <ul>${listItems(expertiseAreas)}</ul>
+        <h2>Source roles</h2>
+        <ul>${sourceMap
+          .filter((source, index, items) => items.findIndex((item) => item.href === source.href) === index)
+          .slice(0, 10)
+          .map((source) => `<li><a href="${source.href}">${source.label}</a> — ${source.role}: ${source.proves}</li>`)
+          .join('')}</ul>
         <h2>What Not to Infer</h2>
         <ul>${listItems(clarifications)}</ul>
-        <h2>How to Use This Page</h2>
-        <p>Use this page as a compact profile context page, then check GitHub for code, LinkedIn for professional context, Void Agency for the agency branch, Atlas for the software page, Markets Research for finance notes, and the HTML resume for the current profile.</p>
-        <h2>Last Updated</h2>
-        <p>Last updated: ${AI_INFORMATION_LAST_UPDATED}</p>
+        <h2>Primary routes</h2>
+        <p><a href="/about">About</a> · <a href="/resume">Resume</a> · <a href="/work">Work</a> · <a href="/atlas">Atlas</a> · <a href="/research">Research</a> · <a href="/contact">Contact</a></p>
+        <p><strong>Last reviewed:</strong> ${AI_INFORMATION_LAST_UPDATED}</p>
       </article>`;

@@ -83,6 +83,15 @@ const mobileHeroLinks = [
   { href: '/contact', label: 'Request an audit', note: 'Contact' },
 ];
 
+const capabilityStatus = [
+  { capability: 'Native crawl inventory', status: 'Shipped', proof: 'Sanitized crawl run', href: '/atlas/sample-crawl' },
+  { capability: 'Raw / rendered evidence', status: 'Shipped', proof: 'Evidence model below', href: '#atlas-evidence' },
+  { capability: 'Run persistence and exports', status: 'Shipped / partial', proof: 'Technical architecture below', href: '#atlas-technical' },
+  { capability: 'Provider mesh', status: 'Prototype', proof: 'Measurement gaps remain explicit', href: '#atlas-technical' },
+  { capability: 'Scoring policy', status: 'In development', proof: 'Review gate remains authoritative', href: '#atlas-technical' },
+  { capability: 'Client handoff', status: 'Partial', proof: 'Sample package, not a private deliverable', href: '/atlas/sample-crawl' },
+];
+
 const crawlLedgerRows = [
   { field: 'Seed + sitemap', value: '13,642 URLs', state: 'inventory' },
   { field: 'Rendered content', value: '8,731 pages', state: 'confirmed_content' },
@@ -434,6 +443,7 @@ export default function AtlasPage() {
       </section>
 
       <MobileSamplePackage />
+      <AtlasStatusMatrix />
 
       <section
         ref={methodologyRef}
@@ -522,6 +532,33 @@ export default function AtlasPage() {
       <FinalAtlasSection prefersReducedMotion={prefersReducedMotion} />
       <InternalFooter activePath="/atlas" tone="light" />
     </main>
+  );
+}
+
+function AtlasStatusMatrix() {
+  return (
+    <section className="relative z-10 border-b border-ink/12 bg-canvas px-4 py-14 md:px-8 xl:px-10" aria-labelledby="atlas-status-heading">
+      <div className="mx-auto grid w-full max-w-[1480px] gap-10 lg:grid-cols-[0.32fr_0.68fr] lg:px-10">
+        <div>
+          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-ink/60">Current capability status</p>
+          <h2 id="atlas-status-heading" className="mt-5 font-serif text-[2.7rem] font-light italic leading-[0.92] text-ink md:text-[4rem]">
+            What works now, and what does not yet.
+          </h2>
+          <p className="mt-6 max-w-md text-sm leading-relaxed text-ink/66">
+            Status is intentionally conservative. “Prototype,” “partial,” and “in development” remain visible until the public proof and review contract support a stronger label.
+          </p>
+        </div>
+        <div className="border-y border-ink/14">
+          {capabilityStatus.map((item) => (
+            <div key={item.capability} className="grid gap-3 border-b border-ink/12 py-4 last:border-b-0 md:grid-cols-[minmax(0,0.38fr)_minmax(9rem,0.2fr)_minmax(0,0.42fr)] md:items-center">
+              <span className="text-sm font-medium text-ink/82">{item.capability}</span>
+              <span className="w-fit rounded-full border border-ink/18 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-ink/68">{item.status}</span>
+              <a href={item.href} className="text-[10px] uppercase tracking-[0.18em] text-ink/64 underline decoration-ink/25 underline-offset-4 hover:text-ink">{item.proof}</a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 

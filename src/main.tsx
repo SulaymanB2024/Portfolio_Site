@@ -1,4 +1,4 @@
-import {StrictMode, useEffect} from 'react';
+import {StrictMode, useEffect, useLayoutEffect} from 'react';
 import {createRoot} from 'react-dom/client';
 import {Analytics} from '@vercel/analytics/react';
 import App from './App.tsx';
@@ -8,6 +8,11 @@ import Lenis from 'lenis';
 document.documentElement.classList.add('js');
 
 function Root() {
+  useLayoutEffect(() => {
+    document.documentElement.classList.add('app-mounted');
+    return () => document.documentElement.classList.remove('app-mounted');
+  }, []);
+
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {

@@ -21,6 +21,11 @@ function walk(path) {
 }
 
 const files = ROOTS.flatMap(walk).filter((file) => /\.(tsx|ts|css)$/.test(file));
+const globalStyles = readFileSync('src/index.css', 'utf8');
+const contrastFloorPresent =
+  globalStyles.includes('var(--color-ink) 56%') &&
+  globalStyles.includes('var(--color-canvas) 58%') &&
+  globalStyles.includes('[class~="text-current/42"]');
 const report = PATTERNS.map(([label, pattern, maxAllowed]) => {
   let count = 0;
   const examples = [];
@@ -46,6 +51,12 @@ for (const item of report) {
 }
 
 const failures = report.filter((item) => item.count > item.maxAllowed);
+if (!contrastFloorPresent) {
+  failures.push({ label: 'essential small-text contrast floor' });
+  console.error('- essential small-text contrast floor: missing light, dark, or inherited-color safeguard');
+} else {
+  console.log('- essential small-text contrast floor: present (light 56%, dark 58%)');
+}
 if (failures.length) {
   console.error('\nStyle drift budget exceeded. Keep new work on theme tokens, fixed breakpoint typography, and shared primitives.');
   process.exitCode = 1;

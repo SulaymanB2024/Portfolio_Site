@@ -408,6 +408,41 @@ select:focus-visible {
   --page-fg: var(--color-ink);
 }
 
+/* Essential copy never falls below the audited small-text contrast floor.
+   Decorative SVG marks and explicitly hidden/pointer-only layers are excluded. */
+.site-page :where(
+  [class~="text-ink/30"], [class~="text-ink/34"], [class~="text-ink/36"],
+  [class~="text-ink/38"], [class~="text-ink/40"], [class~="text-ink/42"],
+  [class~="text-ink/44"], [class~="text-ink/45"], [class~="text-ink/46"],
+  [class~="text-ink/48"], [class~="text-ink/50"], [class~="text-ink/52"],
+  [class~="text-ink/54"]
+):not(svg):not(g):not(path):not([aria-hidden="true"]):not(.pointer-events-none) {
+  color: color-mix(in srgb, var(--color-ink) 56%, transparent) !important;
+}
+
+.site-page :where(
+  [class~="text-canvas/30"], [class~="text-canvas/32"], [class~="text-canvas/34"],
+  [class~="text-canvas/40"], [class~="text-canvas/42"], [class~="text-canvas/45"],
+  [class~="text-canvas/48"], [class~="text-canvas/50"], [class~="text-canvas/52"],
+  [class~="text-canvas/54"], [class~="text-canvas/56"]
+):not(svg):not(g):not(path):not([aria-hidden="true"]):not(.pointer-events-none) {
+  color: color-mix(in srgb, var(--color-canvas) 58%, transparent) !important;
+}
+
+.site-page-light :where(
+  [class~="text-current/28"], [class~="text-current/42"], [class~="text-current/44"],
+  [class~="text-current/46"], [class~="text-current/48"], [class~="text-current/52"]
+):not([aria-hidden="true"]):not(.pointer-events-none) {
+  color: color-mix(in srgb, var(--color-ink) 56%, transparent) !important;
+}
+
+.site-page-dark :where(
+  [class~="text-current/28"], [class~="text-current/42"], [class~="text-current/44"],
+  [class~="text-current/46"], [class~="text-current/48"], [class~="text-current/52"]
+):not([aria-hidden="true"]):not(.pointer-events-none) {
+  color: color-mix(in srgb, var(--color-canvas) 58%, transparent) !important;
+}
+
 .site-page :where(h2.font-serif, h2[class*="font-serif"], blockquote.font-serif, blockquote[class*="font-serif"]) {
   text-wrap: balance;
 }

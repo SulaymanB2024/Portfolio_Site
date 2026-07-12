@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f4f4f0"/>
+  <path d="M48 48h1104v534H48zM48 470h1104M760 48v534" fill="none" stroke="#080807" stroke-opacity=".2"/>
+  <text x="84" y="112" fill="#080807" font-family="Arial, sans-serif" font-size="19" letter-spacing="8">RESEARCH / SOURCE-LED NOTES</text>
+  <text x="78" y="278" fill="#080807" font-family="Georgia, serif" font-size="126" font-style="italic">Questions with</text>
+  <text x="84" y="382" fill="#080807" font-family="Georgia, serif" font-size="92" font-style="italic">visible limits.</text>
+  <text x="84" y="525" fill="#080807" fill-opacity=".68" font-family="Arial, sans-serif" font-size="18" letter-spacing="4">SEARCH SYSTEMS · PRODUCT · INFRASTRUCTURE · MARKETS</text>
+  <g transform="translate(955 262)" fill="none" stroke="#080807"><circle r="124" stroke-opacity=".18"/><path d="M-124 0h248M0-124v248" stroke-opacity=".18"/><path d="M-84 84L84-84" stroke="#b7c8a8" stroke-width="18"/></g>
+</svg>

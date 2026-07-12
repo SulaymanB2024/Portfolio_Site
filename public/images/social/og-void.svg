@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#080807"/>
+  <path d="M48 48h1104v534H48z" fill="none" stroke="#f4f4f0" stroke-opacity=".2"/>
+  <circle cx="930" cy="315" r="214" fill="none" stroke="#f4f4f0" stroke-opacity=".16"/>
+  <circle cx="930" cy="315" r="142" fill="none" stroke="#b7c8a8" stroke-width="16"/>
+  <circle cx="930" cy="315" r="50" fill="#080807" stroke="#f4f4f0" stroke-opacity=".5"/>
+  <text x="84" y="112" fill="#b7c8a8" font-family="Arial, sans-serif" font-size="19" letter-spacing="8">VOID AGENCY / TECHNICAL SEO</text>
+  <text x="76" y="292" fill="#f4f4f0" font-family="Georgia, serif" font-size="146" font-style="italic">Evidence,</text>
+  <text x="84" y="397" fill="#f4f4f0" font-family="Georgia, serif" font-size="92" font-style="italic">then action.</text>
+  <text x="84" y="510" fill="#f4f4f0" fill-opacity=".7" font-family="Arial, sans-serif" font-size="18" letter-spacing="4">CRAWL · DIAGNOSE · REPAIR · MEASURE</text>
+</svg>

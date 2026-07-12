@@ -16,7 +16,7 @@ export function LocalTime() {
 
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-[10px] font-sans tracking-[0.3em] uppercase opacity-50">Local Time</span>
+      <span className="text-[10px] font-sans tracking-[0.3em] uppercase opacity-60">Local Time</span>
       <span className="font-serif italic text-2xl tracking-normal">
         {hours}<span className="opacity-60">:</span>{minutes}<span className="opacity-60">:</span>{seconds} GMT
       </span>

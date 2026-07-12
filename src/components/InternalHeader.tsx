@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { isNavItemActive, navItemId, navLabel, primaryNav } from '../content/siteNavigation';
 
 type InternalHeaderProps = {
@@ -11,6 +11,8 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   const activeItem = primaryNav.find((item) => isNavItemActive(activePath, item.href));
   const [routeNote, setRouteNote] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLElement>(null);
   const useLightGlass = variant === 'home';
   const isFinalFrame = variant === 'final-frame';
   const isDark = tone === 'dark' && !useLightGlass;
@@ -37,14 +39,47 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
     : 'sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 xl:px-10';
 
   useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [activePath]);
+
+  useEffect(() => {
     if (!mobileMenuOpen) {
       return;
     }
 
     const previousOverflow = document.body.style.overflow;
+    const focusFrame = window.requestAnimationFrame(() => {
+      mobileMenuRef.current?.querySelector<HTMLElement>('a[href]')?.focus();
+    });
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
+        event.preventDefault();
         setMobileMenuOpen(false);
+        return;
+      }
+
+      if (event.key !== 'Tab') {
+        return;
+      }
+
+      const focusableNodes = mobileMenuRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      const focusable: HTMLElement[] = focusableNodes ? [...focusableNodes] : [];
+      const first = focusable[0];
+      const last = focusable.at(-1);
+
+      if (!first || !last) {
+        event.preventDefault();
+        return;
+      }
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
@@ -52,8 +87,12 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
+      window.cancelAnimationFrame(focusFrame);
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', handleKeyDown);
+      if (mobileMenuButtonRef.current?.isConnected) {
+        mobileMenuButtonRef.current.focus({ preventScroll: true });
+      }
     };
   }, [mobileMenuOpen]);
 
@@ -63,6 +102,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
         <button
           type="button"
           aria-label="Close navigation menu"
+          tabIndex={-1}
           className="fixed inset-0 z-40 cursor-default bg-ink/8 backdrop-blur-[2px] md:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
@@ -78,20 +118,22 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
           </a>
         </div>
         <button
+          ref={mobileMenuButtonRef}
           type="button"
           id="header-mobile-menu-button"
           aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-controls="header-mobile-menu"
           aria-expanded={mobileMenuOpen}
-          className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[6px] border text-sm leading-none transition-colors duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${textMutedNavClass}`}
+          className={`inline-flex min-h-10 shrink-0 items-center justify-center rounded-[6px] border px-3 text-[10px] uppercase leading-none tracking-[0.18em] transition-colors duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${textMutedNavClass}`}
           onClick={() => setMobileMenuOpen((open) => !open)}
         >
-          <span aria-hidden="true">{mobileMenuOpen ? 'x' : '+'}</span>
+          <span>{mobileMenuOpen ? 'Close' : 'Menu'}</span>
         </button>
       </div>
 
       {mobileMenuOpen && (
         <nav
+          ref={mobileMenuRef}
           id="header-mobile-menu"
           className={`${mobileMenuClass} fixed left-4 right-4 top-[96px] z-[55] grid max-h-[calc(100dvh-112px)] grid-cols-1 gap-2 overflow-y-auto ${surfaceRadiusClass} p-3 text-[10px] uppercase shadow-2xl md:hidden ${bgClass}`}
           aria-label="Mobile navigation"
@@ -156,7 +198,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
         {showRouteNote && (
           <div className={`hidden border-t pt-2 text-[9px] uppercase leading-relaxed tracking-[0.2em] ${noteBorderClass} ${textMutedClass} md:block lg:col-span-2`}>
             <span className={textClass}>Route note</span>
-            <span className="px-2 opacity-38">/</span>
+            <span aria-hidden="true" className="px-2 opacity-38">/</span>
             <span>{displayedRouteNote}</span>
           </div>
         )}

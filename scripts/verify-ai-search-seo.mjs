@@ -55,9 +55,9 @@ const marketFiles = [
 ];
 
 const publicMarketLastmods = {
-  '/markets/ai-search-crawler-policy': '2026-07-05',
-  '/markets/technical-seo-public-data-infrastructure': '2026-07-05',
-  '/markets/canonical-identity-personal-seo': '2026-07-05',
+  '/markets/ai-search-crawler-policy': '2026-07-12',
+  '/markets/technical-seo-public-data-infrastructure': '2026-07-12',
+  '/markets/canonical-identity-personal-seo': '2026-07-12',
   '/markets/who-owns-texas-toll-roads': '2026-07-11',
 };
 
@@ -197,7 +197,8 @@ for (const [route, file] of Object.entries(routeFiles)) {
   assert(graphUrls(person.subjectOf).includes('https://www.goldenhornet.org/calendar/young-composers-concert-2022'), `${route}: Person subjectOf missing Golden Hornet historical source`);
   assert(graphUrls(person.subjectOf).includes('https://music.utexas.edu/events/4645-university-orchestra'), `${route}: Person subjectOf missing UT Butler historical source`);
   assert(propertyValues(person.identifier).includes('SulaymanB2024'), `${route}: Person identifier missing GitHub username`);
-  assert(String(person.logo?.url ?? person.logo).startsWith(siteUrl), `${route}: Person logo must be absolute`);
+  assert(person.logo === undefined, `${route}: Person schema must not use Organization-style logo`);
+  assert(person.image === undefined, `${route}: Person schema must not reuse the Organization logo as an image`);
 
   if (routesWithVoidOrganization.has(route)) {
     assert(org, `${route}: missing canonical Organization schema`);
@@ -230,22 +231,19 @@ for (const [route, file] of Object.entries(routeFiles)) {
 }
 
 assertVisibleText('dist/ai-information/index.html', [
-  'Profile Context for Sulayman Bowles, Void Agency, and Atlas',
-  'This page keeps current descriptions and older background in one place',
+  'Current identity, source roles, and claim limits',
+  'A compact public reference',
+  'Current descriptions',
   'Identity reconciliation',
   "Earlier public sources describe Sulayman's classical bass and composition background through Golden Hornet, McCallum, and UT Butler.",
   'Golden Hornet',
   'UT Butler',
-  'What the Work Supports',
-  'Entity Summaries',
-  'What Void Agency Does',
-  'What Atlas SEO Audit Console Does',
-  'Relevant Expertise',
+  'Source roles',
   'What Not to Infer',
-  'How to Use This Page',
+  'Primary routes',
+  'Last reviewed',
 ]);
 assertHiddenText('dist/ai-information/index.html', [
-  'AI Information',
   'Public Source List',
   'Likely Search Questions',
   'Crawler and Indexation Signals',
@@ -259,11 +257,17 @@ assertHiddenText('dist/ai-information/index.html', [
 
 assertVisibleText('dist/research/index.html', [
   'Research Notes',
-  'Selected notes',
+  'Four Research Categories',
+  'Search systems',
+  'Technical SEO',
+  'Markets and investing',
+  'Product and data',
+  'Seven Notes and Artifacts',
   'Crawler Policy Comes Before Visibility',
   'Technical SEO as Public Data Infrastructure',
   'Canonical Identity for Personal SEO',
   'Atlas Sample Crawl Run',
+  'Austin Crawlability Pilot',
   'Related work',
 ]);
 assertHiddenText('dist/research/index.html', [
@@ -280,7 +284,6 @@ assertHref('dist/research/index.html', '/work', 'Selected work');
 assertHref('dist/research/index.html', '/markets/ai-search-crawler-policy', 'Crawler Policy Comes Before Visibility');
 
 const visibleArtifactTextRejects = [
-  'AI Information',
   'Authority asset JSON',
   'llms.txt reference file',
   'Crawler policy sources',
@@ -322,25 +325,24 @@ for (const file of new Set([...Object.values(routeFiles), ...marketFiles, ...arc
   const expertiseTerms = findType(graph, 'DefinedTermSet', `${siteUrl}/ai-information#expertise-areas`);
   assert(sourceGraphList, 'ai-information: missing Public Source List ItemList schema');
   assert(fanOutList, 'ai-information: missing Likely Search Questions ItemList schema');
-  assert(providerPlanList, 'ai-information: missing Provider Discovery Plan ItemList schema');
+  assert(!providerPlanList, 'ai-information: Provider Discovery Plan must remain internal, not structured as public profile content');
   assert(expertiseTerms, 'ai-information: missing Relevant Expertise Areas DefinedTermSet schema');
-  assert(sourceGraphList.itemListElement?.length === 13, 'ai-information: Public Source List ItemList should have 13 items');
+  assert(sourceGraphList.itemListElement?.length === 14, 'ai-information: Public Source List ItemList should have 14 items');
   assert(fanOutList.itemListElement?.length === 6, 'ai-information: Likely Search Questions ItemList should have 6 items');
-  assert(providerPlanList.itemListElement?.length === 7, 'ai-information: Provider Discovery Plan ItemList should have 7 items');
   assert(expertiseTerms.hasDefinedTerm?.length === 14, 'ai-information: Relevant Expertise Areas should have 14 terms');
   assert(findType(graph, 'AboutPage', `${siteUrl}/ai-information#webpage`), 'ai-information: WebPage should also be typed as AboutPage');
 }
 
 assertVisibleText('dist/about/index.html', [
-  'Historical Source Context',
-  "Earlier public sources describe Sulayman's classical bass and composition background through Golden Hornet, McCallum, and UT Butler.",
-  'Golden Hornet',
-  'UT Butler',
-  'GitHub',
-  'LinkedIn',
-  'Void',
+  'Technical SEO and finance feel related because both punish vague inputs',
+  'Current Work',
   'Atlas',
-  'Resume',
+  'Void Agency',
+  'Product work',
+  'Finance and research',
+  'Operating Principles',
+  'Before Business',
+  'classical bass and composition',
 ]);
 {
   const graph = jsonLdGraph(read('dist/about/index.html'));
@@ -348,7 +350,10 @@ assertVisibleText('dist/about/index.html', [
 }
 
 assertVisibleText('dist/resume/index.html', [
-  'Download PDF Resume',
+  'Education and Current Focus',
+  'Expected May 2027',
+  'Skill Inventory',
+  'Download PDF résumé',
 ]);
 assert(read('dist/resume/index.html').includes('/Sulayman_Bowles_Resume.pdf'), 'resume: missing PDF resume href');
 
@@ -401,15 +406,17 @@ assertHref('dist/atlas/index.html', '/contact', 'Request an audit');
 
 assertVisibleText('dist/work/index.html', [
   'Selected Work',
-  'See an Atlas sample crawl run',
-  'Read the technical SEO audit method',
-  'View the GitHub repo for the audit CLI',
-  'Request an audit',
-  'Read the markets research memo with assumptions',
+  'Atlas SEO Audit Console',
+  'Who Owns the Toll Roads in Texas?',
+  'ViralBench + Codex Improvement Harness',
+  'Austin Crawlability Pilot',
+  'Void Agency',
+  'Sulayman Bowles Technical Ledger',
+  'Inspect the sanitized crawl run',
+  'Open the source-led article',
 ]);
-assertHref('dist/work/index.html', '/atlas/sample-crawl', 'See an Atlas sample crawl run');
-assertHref('dist/work/index.html', '/contact', 'Request an audit');
-assertHref('dist/work/index.html', '/markets#appian-assumptions', 'Read the markets research memo with assumptions');
+assertHref('dist/work/index.html', '/atlas/sample-crawl', 'Inspect the sanitized crawl run');
+assertHref('dist/work/index.html', '/markets/who-owns-texas-toll-roads', 'Who Owns the Toll Roads in Texas?');
 
 assertVisibleText('dist/contact/index.html', [
   'Contact Sulayman Bowles',
@@ -456,7 +463,7 @@ assertHref('dist/atlas/sample-crawl/index.html', 'https://github.com/SulaymanB20
 }
 
 assertVisibleText('dist/case-studies/technical-seo-audit/index.html', [
-  'Technical SEO Audit Case Study',
+  'Technical SEO Finding Walkthrough',
   'Short Answer',
   'Problem observed',
   'Evidence used',
@@ -498,11 +505,15 @@ assertVisibleText('dist/austin-technical-seo/index.html', [
   'Austin Technical SEO',
   'search visibility',
   'Short Answer',
+  'Based in Austin',
+  'fixed-scope reviews',
   'Who this is for',
   'What you receive',
   'When not to hire me',
   'What I check',
   'Pilot Method',
+  'June 25, 2026',
+  'Illustrative report layout',
   'Use this format for your site audit',
   'Query Examples Before Page Expansion',
   'Common Austin site problems',
@@ -526,29 +537,22 @@ assertHref('dist/void-agency/index.html', 'https://www.void-agency.com/', 'Void 
 assertHref('dist/void-agency/index.html', '/method', 'Read the technical SEO audit method');
 
 assertVisibleText('dist/method/index.html', [
-  'Search Visibility Audit Checklist',
-  'Audit Details',
-  'Concrete deliverables',
-  'Timeline',
-  'Required access',
-  'What the audit does not include',
-  'Sample output links',
-  'Measurement plan after implementation',
-  'Public Page Clarity Review',
-  'Product Discovery System',
-  'Service-Area Visibility Audit',
-  'crawlability',
-  'indexability',
-  'internal links',
-  'structured data',
-  'source-page clarity',
-  'entity consistency',
-  'public work',
-  'sitemap freshness',
-  'stale/conflicting source cleanup',
+  'Four Stages',
+  'Crawl',
+  'Diagnose',
+  'Repair',
+  'Measure',
+  'Deliverables',
+  'Typical Timing',
+  'Inputs and Access',
+  'Exclusions',
+  'Worked Finding',
+  'Observed field',
+  'Interpreted risk',
+  'Implementation action',
+  'Evidence Links',
 ]);
 assertHref('dist/method/index.html', '/atlas/sample-crawl', 'See an Atlas sample crawl run');
-assertHref('dist/method/index.html', '/ai-information', 'Open reference page');
 assertHref('dist/method/index.html', '/austin-technical-seo', 'Open local SEO page');
 assertHref('dist/method/index.html', '/void-agency', 'View Void Agency');
 assertHref('dist/method/index.html', '/contact', 'Request an audit');
@@ -589,22 +593,14 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     llmsText.includes('Robots.txt explicitly allows Googlebot, Bingbot, and DuckDuckBot.'),
     'llms.txt: missing search crawler allow fact',
   );
-  assert(llmsText.includes('## Provider Discovery Plan'), 'llms.txt: missing provider discovery plan');
+  assert(!llmsText.includes('## Provider Discovery Plan'), 'llms.txt: provider discovery planning belongs in internal operations, not the public reference');
   assert(llmsText.includes('Current PDF resume: https://sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf'), 'llms.txt: missing current PDF resume link');
-  assert(llmsText.includes('## Research Articles'), 'llms.txt: missing research articles section');
+  assert(llmsText.includes('## Public Work and Research'), 'llms.txt: missing public work and research section');
   assert(llmsText.includes('Crawler Policy Comes Before Visibility'), 'llms.txt: missing crawler policy article');
   assert(llmsText.includes('Technical SEO as Public Data Infrastructure'), 'llms.txt: missing public data infrastructure article');
   assert(llmsText.includes('Canonical Identity Beats More Content'), 'llms.txt: missing canonical identity article');
   assert(llmsText.includes('Who Owns the Toll Roads in Texas?'), 'llms.txt: missing Texas toll-road ownership article');
-  assert(llmsText.includes('Brave Search: the site is publicly crawlable'), 'llms.txt: missing Brave discovery plan');
-  assert(
-    llmsText.includes('Google Search and Google AI surfaces: public site signals are present'),
-    'llms.txt: Google provider plan should describe public signals, not unverified private Search Console state',
-  );
-  assert(
-    llmsText.includes('Bing, Microsoft Copilot, and Bing-powered search partners: public site signals are present'),
-    'llms.txt: Bing provider plan should describe public signals, not unverified private Bing Webmaster state',
-  );
+  assert(!llmsText.includes('monitor branded answer citations'), 'llms.txt: should not expose provider-monitoring prose');
   assert(
     llmsText.includes('Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User'),
     'llms.txt: missing explicit AI crawler allow fact',

@@ -1,5 +1,5 @@
 import ArrowUpRight from 'lucide-react/dist/esm/icons/arrow-up-right.js';
-import { useState, type FormEvent } from 'react';
+import { useState, type FormEvent, type ReactNode } from 'react';
 
 type AuditIntakeFormProps = {
   className?: string;
@@ -8,19 +8,15 @@ type AuditIntakeFormProps = {
   submitLabel?: string;
 };
 
-const contactFieldClass =
-  'w-full bg-transparent border-b border-canvas/20 focus:border-canvas py-2 text-sm font-sans tracking-normal outline-none transition-colors placeholder:text-canvas/32 text-canvas';
-const contactSelectClass = `${contactFieldClass} appearance-none text-canvas/82`;
+const fieldClass =
+  'w-full border-b border-canvas/24 bg-transparent py-3 text-sm tracking-normal text-canvas outline-none transition-colors placeholder:text-canvas/60 focus:border-canvas';
+const selectClass = `${fieldClass} appearance-none text-canvas/86`;
 const sensitiveSubmissionPattern =
   /(-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{20,}|ghp_[0-9A-Za-z]{20,}|sk-[0-9A-Za-z_-]{20,}|xox[baprs]-[0-9A-Za-z-]{20,}|(?:api[_-]?key|access[_-]?token|password|private[_-]?key|client[_-]?secret)\s*[:=])/i;
 
-function hasSensitiveSubmissionText(values: string[]) {
-  return values.some((value) => sensitiveSubmissionPattern.test(value));
-}
-
-function ContactFieldLabel({ htmlFor, children }: { htmlFor: string; children: string }) {
+function FieldLabel({ htmlFor, children }: { htmlFor: string; children: ReactNode }) {
   return (
-    <label htmlFor={htmlFor} className="sr-only">
+    <label htmlFor={htmlFor} className="mb-1 block text-[10px] uppercase tracking-[0.2em] text-canvas/64">
       {children}
     </label>
   );
@@ -29,58 +25,41 @@ function ContactFieldLabel({ htmlFor, children }: { htmlFor: string; children: s
 export function AuditIntakeForm({
   className = '',
   variant = 'default',
-  showProgress = true,
-  submitLabel = 'SUBMIT BRIEF',
+  submitLabel = 'SEND MESSAGE',
 }: AuditIntakeFormProps) {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [websiteUrl, setWebsiteUrl] = useState('');
+  const [message, setMessage] = useState('');
   const [projectType, setProjectType] = useState('');
   const [timeline, setTimeline] = useState('');
   const [scope, setScope] = useState('');
-  const [brokenArea, setBrokenArea] = useState('');
-  const [message, setMessage] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [validationMessage, setValidationMessage] = useState('');
-  const progressSteps = [
-    { step: '01', label: 'Identity', complete: Boolean(name && email) },
-    { step: '02', label: 'Site', complete: Boolean(websiteUrl) },
-    { step: '03', label: 'Scope', complete: Boolean(projectType || timeline || scope) },
-    { step: '04', label: 'Message', complete: Boolean(message) },
-  ];
-  const completeStepCount = progressSteps.filter((step) => step.complete).length;
   const isCompact = variant === 'compact';
-  const statusDetail =
-    formStatus === 'submitting'
-      ? 'sealing brief'
-      : formStatus === 'error'
-        ? validationMessage || 'endpoint refused'
-        : showProgress
-          ? `${completeStepCount}/4 fields traced`
-          : 'email + message required';
-  const twoColumnGridClass = `grid grid-cols-1 ${isCompact ? 'gap-4 sm:grid-cols-2' : 'gap-6 md:grid-cols-2'}`;
-  const threeColumnGridClass = `grid grid-cols-1 ${
-    isCompact ? 'gap-4 sm:grid-cols-3' : 'gap-6 md:grid-cols-3'
-  }`;
 
   const resetForm = () => {
     setName('');
     setEmail('');
     setWebsiteUrl('');
+    setMessage('');
     setProjectType('');
     setTimeline('');
     setScope('');
-    setBrokenArea('');
-    setMessage('');
     setHoneypot('');
     setValidationMessage('');
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setValidationMessage('');
-    if (!email || !message) return;
+
+    if (!email.trim() || !message.trim()) {
+      setValidationMessage('Email and message required.');
+      setFormStatus('error');
+      return;
+    }
 
     if (honeypot.trim()) {
       setFormStatus('success');
@@ -88,17 +67,13 @@ export function AuditIntakeForm({
       return;
     }
 
-    if (hasSensitiveSubmissionText([name, email, websiteUrl, projectType, timeline, scope, brokenArea, message])) {
-      setValidationMessage('remove secrets');
+    if (sensitiveSubmissionPattern.test([name, email, websiteUrl, message, projectType, timeline, scope].join('\n'))) {
+      setValidationMessage('Remove credentials, keys, tokens, or passwords before sending.');
       setFormStatus('error');
       return;
     }
 
     setFormStatus('submitting');
-    const triggerShutter = (window as Window & { triggerShutter?: (covered: boolean) => void }).triggerShutter;
-    if (triggerShutter) {
-      triggerShutter(true);
-    }
 
     try {
       const response = await fetch('https://formspree.io/f/xyzrppzo', {
@@ -107,220 +82,115 @@ export function AuditIntakeForm({
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({
-          name,
-          email,
-          websiteUrl,
-          projectType,
-          timeline,
-          scope,
-          brokenArea,
-          message,
-        }),
+        body: JSON.stringify({ name, email, websiteUrl, message, projectType, timeline, scope }),
       });
 
-      if (response.ok) {
-        setTimeout(() => {
-          setFormStatus('success');
-          resetForm();
-          if (triggerShutter) {
-            triggerShutter(false);
-          }
-        }, 800);
-      } else {
-        setValidationMessage('endpoint refused');
-        setFormStatus('error');
-        if (triggerShutter) {
-          triggerShutter(false);
-        }
+      if (!response.ok) {
+        throw new Error('Formspree request failed');
       }
+
+      resetForm();
+      setFormStatus('success');
     } catch {
-      setValidationMessage('submission failed');
+      setValidationMessage('Could not send. Please try again or use direct email.');
       setFormStatus('error');
-      if (triggerShutter) {
-        triggerShutter(false);
-      }
     }
   };
 
   if (formStatus === 'success') {
     return (
-      <div className={`text-canvas font-sans font-light tracking-widest uppercase text-base md:text-lg py-6 border border-canvas/20 px-8 bg-canvas/5 ${isCompact ? 'max-w-none' : 'max-w-lg mt-4'} ${className}`}>
-        <p className="mb-2 font-medium text-accent">Brief Received</p>
-        <p className="text-[10px] text-canvas/60 normal-case tracking-normal leading-relaxed">
-          Thank you. Your message has been sent successfully. I will review your submission and get back to you shortly.
+      <div className={`border border-canvas/24 bg-canvas/5 px-6 py-6 text-canvas ${className}`} role="status" aria-live="polite">
+        <p className="font-medium text-accent">Message sent</p>
+        <p className="mt-2 text-sm normal-case leading-relaxed tracking-normal text-canvas/72">
+          Thank you. I will review the message and reply by email.
         </p>
+        <button type="button" className="mt-5 text-[10px] uppercase tracking-[0.2em] text-canvas/68 underline underline-offset-4" onClick={() => setFormStatus('idle')}>
+          Send another message
+        </button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`w-full ${isCompact ? 'max-w-none space-y-5' : 'max-w-xl space-y-6 mt-4'} ${className}`}>
+    <form onSubmit={handleSubmit} className={`w-full ${isCompact ? 'space-y-5' : 'max-w-xl space-y-6'} ${className}`}>
       <div aria-hidden="true" className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
         <label htmlFor="contact-company-url">Company URL</label>
-        <input
-          id="contact-company-url"
-          name="_gotcha"
-          tabIndex={-1}
-          autoComplete="off"
-          value={honeypot}
-          onChange={(e) => setHoneypot(e.target.value)}
-        />
+        <input id="contact-company-url" name="_gotcha" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(event) => setHoneypot(event.target.value)} />
       </div>
-      {showProgress && (
-        <ol className="grid grid-cols-2 gap-px overflow-hidden border border-canvas/12 text-[8px] uppercase tracking-[0.18em] text-canvas/46 md:grid-cols-4">
-          {progressSteps.map((item) => (
-            <li
-              key={item.step}
-              className={`grid min-h-14 content-between bg-canvas/[0.025] p-3 transition-colors duration-200 ${
-                item.complete ? 'text-canvas' : ''
-              }`}
-            >
-              <span className="font-serif text-sm italic tracking-normal text-canvas/72">{item.step}</span>
-              <span className="leading-none">{item.label}</span>
-            </li>
-          ))}
-        </ol>
-      )}
-      <div className={twoColumnGridClass}>
+
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-          <ContactFieldLabel htmlFor="contact-name">Your name</ContactFieldLabel>
-          <input
-            type="text"
-            required
-            id="contact-name"
-            name="name"
-            autoComplete="name"
-            placeholder="Your name"
-            maxLength={120}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className={contactFieldClass}
-          />
+          <FieldLabel htmlFor="contact-name">Name</FieldLabel>
+          <input id="contact-name" name="name" type="text" required autoComplete="name" maxLength={120} value={name} onChange={(event) => setName(event.target.value)} className={fieldClass} />
         </div>
         <div>
-          <ContactFieldLabel htmlFor="contact-email">Your email</ContactFieldLabel>
-          <input
-            type="email"
-            required
-            id="contact-email"
-            name="email"
-            autoComplete="email"
-            placeholder="Your email"
-            maxLength={160}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={contactFieldClass}
-          />
+          <FieldLabel htmlFor="contact-email">Email</FieldLabel>
+          <input id="contact-email" name="email" type="email" required autoComplete="email" maxLength={160} value={email} onChange={(event) => setEmail(event.target.value)} className={fieldClass} />
         </div>
       </div>
-      <ContactFieldLabel htmlFor="contact-website-url">Website URL</ContactFieldLabel>
-      <input
-        type="url"
-        id="contact-website-url"
-        name="websiteUrl"
-        autoComplete="url"
-        placeholder="Website URL"
-        maxLength={240}
-        value={websiteUrl}
-        onChange={(e) => setWebsiteUrl(e.target.value)}
-        className={contactFieldClass}
-      />
-      <div className={threeColumnGridClass}>
-        <div>
-          <ContactFieldLabel htmlFor="contact-project-type">Project type</ContactFieldLabel>
-          <select
-            id="contact-project-type"
-            name="projectType"
-            value={projectType}
-            onChange={(e) => setProjectType(e.target.value)}
-            className={contactSelectClass}
-          >
-            <option value="" className="bg-ink text-canvas">Project type</option>
-            <option value="Technical SEO audit" className="bg-ink text-canvas">Technical SEO audit</option>
-            <option value="Search visibility" className="bg-ink text-canvas">Search visibility</option>
-            <option value="Markets research" className="bg-ink text-canvas">Markets research</option>
-            <option value="Web system" className="bg-ink text-canvas">Web system</option>
-          </select>
-        </div>
-        <div>
-          <ContactFieldLabel htmlFor="contact-timeline">Timeline</ContactFieldLabel>
-          <select
-            id="contact-timeline"
-            name="timeline"
-            value={timeline}
-            onChange={(e) => setTimeline(e.target.value)}
-            className={contactSelectClass}
-          >
-            <option value="" className="bg-ink text-canvas">Timeline</option>
-            <option value="This week" className="bg-ink text-canvas">This week</option>
-            <option value="2-4 weeks" className="bg-ink text-canvas">2-4 weeks</option>
-            <option value="1-2 months" className="bg-ink text-canvas">1-2 months</option>
-            <option value="Flexible" className="bg-ink text-canvas">Flexible</option>
-          </select>
-        </div>
-        <div>
-          <ContactFieldLabel htmlFor="contact-scope">Scope size</ContactFieldLabel>
-          <select
-            id="contact-scope"
-            name="scope"
-            value={scope}
-            onChange={(e) => setScope(e.target.value)}
-            className={contactSelectClass}
-          >
-            <option value="" className="bg-ink text-canvas">Scope size</option>
-            <option value="Small audit" className="bg-ink text-canvas">Small audit</option>
-            <option value="Full site audit" className="bg-ink text-canvas">Full site audit</option>
-            <option value="Implementation support" className="bg-ink text-canvas">Implementation support</option>
-            <option value="Research sprint" className="bg-ink text-canvas">Research sprint</option>
-          </select>
-        </div>
+
+      <div>
+        <FieldLabel htmlFor="contact-website-url">Website <span className="normal-case tracking-normal">(optional)</span></FieldLabel>
+        <input id="contact-website-url" name="websiteUrl" type="url" autoComplete="url" placeholder="https://example.com" maxLength={240} value={websiteUrl} onChange={(event) => setWebsiteUrl(event.target.value)} className={fieldClass} />
       </div>
-      <ContactFieldLabel htmlFor="contact-broken-area">What feels broken?</ContactFieldLabel>
-      <textarea
-        rows={2}
-        id="contact-broken-area"
-        name="brokenArea"
-        placeholder="What feels broken?"
-        maxLength={500}
-        value={brokenArea}
-        onChange={(e) => setBrokenArea(e.target.value)}
-        className={`${contactFieldClass} resize-none`}
-      />
-      <ContactFieldLabel htmlFor="contact-message">Project details, goals, or audit request</ContactFieldLabel>
-      <textarea
-        required
-        rows={isCompact ? 4 : 3}
-        id="contact-message"
-        name="message"
-        placeholder="Project details, goals, or audit request"
-        maxLength={2000}
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        className={`${contactFieldClass} resize-none`}
-      />
-      <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-        {formStatus === 'error' && (
-          <span className="text-red-400 text-[10px] font-sans tracking-widest uppercase">
-            {validationMessage === 'remove secrets'
-              ? 'Remove credentials, keys, tokens, or passwords before sending.'
-              : 'Submission failed. Please try again.'}
-          </span>
-        )}
-        <span className="text-[10px] uppercase tracking-[0.2em] text-canvas/42">
-          {statusDetail}
-        </span>
-        <button
-          type="submit"
-          disabled={formStatus === 'submitting'}
-          className="group flex min-h-11 w-fit items-center gap-6 bg-transparent border-none outline-none text-left disabled:opacity-50"
-        >
-          <span className="text-lg md:text-xl font-sans font-light tracking-widest uppercase pb-1 border-b-2 border-canvas/20 group-hover:border-canvas transition-colors text-canvas">
-            {formStatus === 'submitting' ? 'SENDING...' : submitLabel}
-          </span>
-          <div className="flex h-11 w-11 items-center justify-center rounded-full border border-canvas/20 text-canvas transition-colors group-hover:bg-canvas group-hover:text-ink">
-            <ArrowUpRight aria-hidden="true" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.5} />
+
+      <div>
+        <FieldLabel htmlFor="contact-message">Message</FieldLabel>
+        <textarea id="contact-message" name="message" required rows={isCompact ? 5 : 4} placeholder="What are you trying to understand, fix, or build?" maxLength={2000} value={message} onChange={(event) => setMessage(event.target.value)} className={`${fieldClass} resize-y`} />
+      </div>
+
+      <details className="border border-canvas/16 bg-canvas/[0.025]">
+        <summary className="min-h-11 cursor-pointer px-4 py-3 text-[10px] uppercase tracking-[0.2em] text-canvas/68">
+          Add project details <span className="normal-case tracking-normal">(optional)</span>
+        </summary>
+        <div className="grid gap-5 border-t border-canvas/14 p-4 sm:grid-cols-3">
+          <div>
+            <FieldLabel htmlFor="contact-project-type">Project type</FieldLabel>
+            <select id="contact-project-type" name="projectType" value={projectType} onChange={(event) => setProjectType(event.target.value)} className={selectClass}>
+              <option value="" className="bg-ink text-canvas">Choose</option>
+              <option value="Technical SEO audit" className="bg-ink text-canvas">Technical SEO audit</option>
+              <option value="Search visibility" className="bg-ink text-canvas">Search visibility</option>
+              <option value="Research" className="bg-ink text-canvas">Research</option>
+              <option value="Web system" className="bg-ink text-canvas">Web system</option>
+            </select>
           </div>
+          <div>
+            <FieldLabel htmlFor="contact-timeline">Timeline</FieldLabel>
+            <select id="contact-timeline" name="timeline" value={timeline} onChange={(event) => setTimeline(event.target.value)} className={selectClass}>
+              <option value="" className="bg-ink text-canvas">Choose</option>
+              <option value="This week" className="bg-ink text-canvas">This week</option>
+              <option value="2-4 weeks" className="bg-ink text-canvas">2–4 weeks</option>
+              <option value="1-2 months" className="bg-ink text-canvas">1–2 months</option>
+              <option value="Flexible" className="bg-ink text-canvas">Flexible</option>
+            </select>
+          </div>
+          <div>
+            <FieldLabel htmlFor="contact-scope">Scope</FieldLabel>
+            <select id="contact-scope" name="scope" value={scope} onChange={(event) => setScope(event.target.value)} className={selectClass}>
+              <option value="" className="bg-ink text-canvas">Choose</option>
+              <option value="Focused review" className="bg-ink text-canvas">Focused review</option>
+              <option value="Full audit" className="bg-ink text-canvas">Full audit</option>
+              <option value="Implementation" className="bg-ink text-canvas">Implementation</option>
+              <option value="Research sprint" className="bg-ink text-canvas">Research sprint</option>
+            </select>
+          </div>
+        </div>
+      </details>
+
+      <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+        <div className="max-w-sm text-xs leading-relaxed text-canvas/64" aria-live="polite">
+          {formStatus === 'submitting' ? 'Sending…' : formStatus === 'error' ? validationMessage : 'Email and message required.'}
+          <span className="mt-1 block text-canvas/60">
+            Formspree processes this submission. Do not send credentials or sensitive client data.
+          </span>
+        </div>
+        <button type="submit" disabled={formStatus === 'submitting'} className="group flex min-h-11 items-center gap-5 disabled:opacity-50">
+          <span className="border-b-2 border-canvas/24 pb-1 text-base font-light uppercase tracking-[0.18em] text-canvas transition-colors group-hover:border-canvas">
+            {formStatus === 'submitting' ? 'SENDING…' : submitLabel}
+          </span>
+          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-canvas/24 text-canvas transition-colors group-hover:bg-canvas group-hover:text-ink">
+            <ArrowUpRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.5} />
+          </span>
         </button>
       </div>
     </form>
