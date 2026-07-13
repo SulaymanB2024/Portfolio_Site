@@ -13,30 +13,22 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useRef<HTMLElement>(null);
-  const useLightGlass = variant === 'home';
   const isFinalFrame = variant === 'final-frame';
-  const isDark = tone === 'dark' && !useLightGlass;
+  const isDark = tone === 'dark';
   const showRouteNote = variant !== 'home' && !isFinalFrame;
   const displayedRouteNote = routeNote ?? activeItem?.description ?? 'Index of work, systems, and supporting links.';
   
   const textClass = isDark ? 'text-canvas' : 'text-ink';
-  const textMutedClass = isDark ? 'text-canvas/58' : 'text-ink/56';
-  const textMutedNavClass = isDark ? 'text-canvas/56 hover:text-canvas' : 'text-ink/54 hover:text-ink';
+  const textMutedClass = isDark ? 'text-canvas/64' : 'text-ink/60';
+  const textMutedNavClass = isDark ? 'text-canvas/70 hover:text-canvas' : 'text-ink/64 hover:text-ink';
   const activeRuleClass = isDark ? 'bg-canvas' : 'bg-ink';
-  const hoverSurfaceClass = isDark ? 'hover:bg-canvas/7' : 'hover:bg-ink/[0.035]';
-  const bgClass = isFinalFrame
-    ? isDark
-      ? 'border border-canvas/12 bg-ink/80'
-      : 'border border-ink/12 bg-canvas/82'
-    : isDark ? 'frosted-acrylic-dark' : 'frosted-acrylic-light';
+  const hoverSurfaceClass = isDark ? 'hover:bg-canvas/[0.035]' : 'hover:bg-ink/[0.025]';
+  const bgClass = isDark ? 'site-header-surface-dark' : 'site-header-surface-light';
   const menuBorderClass = isDark ? 'border-canvas/16' : 'border-ink/16';
-  const noteBorderClass = isDark ? 'border-canvas/12' : 'border-ink/12';
   const surfaceClass = isFinalFrame ? 'relative z-[60]' : 'site-header relative z-[60]';
-  const surfaceRadiusClass = isFinalFrame ? 'rounded-none' : 'rounded-[8px]';
-  const mobileMenuClass = isFinalFrame ? '' : 'mobile-nav-sheet';
   const shellClass = variant === 'home'
-    ? 'fixed top-0 left-0 right-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 xl:px-10'
-    : 'sticky top-0 z-50 mx-auto w-full max-w-[1480px] px-4 py-4 md:px-8 xl:px-10';
+    ? 'fixed inset-x-0 top-0 z-50 w-full'
+    : 'sticky top-0 z-50 w-full';
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -108,8 +100,8 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
         />
       )}
 
-      <div className={`${surfaceClass} flex items-center justify-between gap-4 ${bgClass} ${surfaceRadiusClass} px-4 py-3 text-[10px] uppercase md:hidden`}>
-        <div className="flex min-h-10 items-center justify-between gap-4">
+      <div className={`${surfaceClass} site-header-editorial mx-auto flex min-h-[72px] max-w-[1480px] items-stretch justify-between ${bgClass} text-[10px] uppercase md:hidden`}>
+        <div className="flex min-w-0 flex-1 items-center px-5">
           <a href="/" id="header-brand-link-mobile" className="min-w-0">
             <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
             <span className={`site-header-tagline mt-2 block truncate font-serif text-sm italic normal-case leading-none tracking-normal ${textMutedClass}`}>
@@ -124,10 +116,11 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
           aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-controls="header-mobile-menu"
           aria-expanded={mobileMenuOpen}
-          className={`inline-flex min-h-10 shrink-0 items-center justify-center rounded-[6px] border px-3 text-[10px] uppercase leading-none tracking-[0.18em] transition-colors duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${textMutedNavClass}`}
+          className={`inline-flex min-w-[78px] shrink-0 items-center justify-center gap-2 border-l text-[9px] leading-none tracking-[0.22em] transition-colors duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${textMutedNavClass}`}
           onClick={() => setMobileMenuOpen((open) => !open)}
         >
-          <span>{mobileMenuOpen ? 'Close' : 'Menu'}</span>
+          <span>INDEX</span>
+          <span aria-hidden="true" className="text-sm font-light tracking-normal">{mobileMenuOpen ? 'x' : '+'}</span>
         </button>
       </div>
 
@@ -135,7 +128,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
         <nav
           ref={mobileMenuRef}
           id="header-mobile-menu"
-          className={`${mobileMenuClass} fixed left-4 right-4 top-[96px] z-[55] grid max-h-[calc(100dvh-112px)] grid-cols-1 gap-2 overflow-y-auto ${surfaceRadiusClass} p-3 text-[10px] uppercase shadow-2xl md:hidden ${bgClass}`}
+          className={`site-header-mobile-sheet fixed inset-x-0 bottom-0 top-[72px] z-[55] grid content-start overflow-y-auto text-[10px] uppercase md:hidden ${bgClass}`}
           aria-label="Mobile navigation"
         >
           {primaryNav.map((item, index) => {
@@ -150,27 +143,31 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
                 aria-current={active ? 'page' : undefined}
                 title={item.description}
                 style={{ transitionDelay: `${index * 22}ms` }}
-                className={`site-header-link flex min-h-12 items-center justify-between rounded-[6px] border px-4 py-3 tracking-[0.24em] opacity-[0.9] transition-[background-color,color,opacity,transform] duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
+                className={`site-header-link group grid min-h-[72px] grid-cols-[3rem_1fr_auto] items-center border-b px-5 tracking-[0.24em] transition-[background-color,color,opacity,transform] duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
+                <span aria-hidden="true" className="font-serif text-lg italic tracking-normal opacity-42">{String(index + 1).padStart(2, '0')}</span>
                 <span>{navLabel(item)}</span>
-                <span aria-hidden="true" className="opacity-40">/</span>
+                <svg aria-hidden="true" viewBox="0 0 16 16" className="h-3.5 w-3.5 opacity-42 transition-transform duration-200 group-hover:translate-x-1" fill="none">
+                  <path d="M4 12 12 4M6 4h6v6" stroke="currentColor" strokeWidth="1" strokeLinecap="square" strokeLinejoin="miter" />
+                </svg>
               </a>
             );
           })}
         </nav>
       )}
 
-      <div className={`${isFinalFrame ? 'relative' : 'site-header'} hidden items-center gap-3 ${bgClass} ${surfaceRadiusClass} px-5 py-3 text-[10px] uppercase md:grid md:grid-cols-1 lg:grid-cols-[minmax(245px,0.78fr)_minmax(0,1.32fr)] lg:px-6`}>
-        <a href="/" id="header-brand-link" className="block min-w-0 justify-self-start transition-opacity duration-200 hover:opacity-72">
-          <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
+      <div className={`${isFinalFrame ? 'relative' : 'site-header'} site-header-editorial mx-auto hidden min-h-[82px] max-w-[1480px] items-stretch ${bgClass} text-[10px] uppercase md:grid md:grid-cols-[minmax(265px,0.72fr)_minmax(0,1.28fr)]`}>
+        <a href="/" id="header-brand-link" className={`flex min-w-0 flex-col justify-center border-r px-8 transition-opacity duration-200 hover:opacity-72 ${menuBorderClass}`}>
+          <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.38em] ${textClass}`}>SULAYMAN BOWLES</span>
           <span className={`site-header-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
             Technical SEO · Search Systems · Finance Research
           </span>
         </a>
-        
-        <nav className="flex min-w-0 flex-wrap items-center justify-start gap-x-1 gap-y-1 lg:justify-end" aria-label="Main navigation">
-          {primaryNav.map((item) => {
+
+        <div className="grid min-w-0 grid-rows-[1fr_auto]">
+          <nav className="flex min-w-0 items-stretch justify-end" aria-label="Main navigation">
+          {primaryNav.map((item, index) => {
             const active = isNavItemActive(activePath, item.href);
             const cleanId = navItemId('header-nav', item);
             
@@ -185,23 +182,22 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
                 onMouseEnter={() => setRouteNote(item.description ?? item.label)}
                 onBlur={() => setRouteNote(null)}
                 onMouseLeave={() => setRouteNote(null)}
-                className={`site-header-link group relative inline-flex min-h-10 items-center justify-center rounded-[6px] px-3 py-2 leading-none tracking-[0.24em] transition-colors duration-200 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
+                className={`site-header-link group relative inline-flex min-w-0 items-center justify-center gap-1.5 px-3 leading-none tracking-[0.22em] transition-colors duration-200 xl:px-4 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
               >
+                <span aria-hidden="true" className="hidden font-serif text-[10px] italic tracking-normal opacity-38 xl:inline">{String(index + 1).padStart(2, '0')}</span>
                 <span className="block whitespace-nowrap">
                   {navLabel(item)}
                 </span>
-                <span className={`absolute inset-x-3 bottom-1 h-px origin-left transition-opacity duration-200 ${active ? `opacity-100 ${activeRuleClass}` : `opacity-0 ${activeRuleClass} group-hover:opacity-40`}`} />
+                <span className={`absolute inset-x-3 bottom-0 h-px origin-left transition-opacity duration-200 ${active ? `opacity-100 ${activeRuleClass}` : `opacity-0 ${activeRuleClass} group-hover:opacity-40`}`} />
               </a>
             );
           })}
-        </nav>
-        {showRouteNote && (
-          <div className={`hidden border-t pt-2 text-[9px] uppercase leading-relaxed tracking-[0.2em] ${noteBorderClass} ${textMutedClass} md:block lg:col-span-2`}>
-            <span className={textClass}>Route note</span>
-            <span aria-hidden="true" className="px-2 opacity-38">/</span>
-            <span>{displayedRouteNote}</span>
+          </nav>
+          <div className={`flex min-h-6 items-center justify-end border-t px-4 font-serif text-[11px] italic normal-case leading-none tracking-normal ${menuBorderClass} ${textMutedClass}`}>
+            <span className={showRouteNote ? '' : 'sr-only'}>{displayedRouteNote}</span>
+            {!showRouteNote && <span aria-hidden="true">Index of work, systems, and supporting links.</span>}
           </div>
-        )}
+        </div>
       </div>
     </header>
   );

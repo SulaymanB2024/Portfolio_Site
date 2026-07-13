@@ -601,50 +601,67 @@ function HomePage() {
 
       {/* Main Container */}
       <main className="w-full" id="top">
-        {/* HERO SECTION - Very Editorial */}
-        <section className="relative w-full h-screen flex flex-col justify-end pb-12 px-4 md:px-16 pt-32 overflow-hidden">
+        {/* HERO SECTION - Evidence ledger cover */}
+        <section className="home-cover relative flex min-h-[100svh] w-full overflow-hidden px-4 pb-6 pt-28 md:px-16 md:pb-10 md:pt-32">
           {/* Background Motion */}
           {!prefersReducedMotion && <Suspense fallback={null}>
-            <FlowField className="absolute inset-0 z-0 opacity-[0.12] pointer-events-none mix-blend-overlay" density={25} />
+            <FlowField className="pointer-events-none absolute inset-0 z-0 opacity-[0.07] mix-blend-multiply" density={25} />
           </Suspense>}
           
-          {/* Faint sample reveal */}
+          {/* Roman figure becomes supporting material instead of the headline. */}
           <motion.div 
             style={{ opacity: titleOpacity }}
-            className="pointer-events-none absolute inset-0 z-[1]"
+            className="home-cover__figure pointer-events-none absolute inset-0 z-[1]"
           >
             {isLoaded && (
               <RomanTogaReveal
                 fit="cover"
                 focus="large-figure"
-                restOpacity={0.14}
-                revealOpacity={0.82}
+                restOpacity={0.1}
+                revealOpacity={0.46}
                 className="h-full w-full"
               />
             )}
            </motion.div>
 
-           <motion.div 
-             style={{ y: subY }}
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-             transition={{ duration: 0.8, delay: isLoaded ? 0.2 : 0 }}
-             className="relative z-10 ml-auto w-full max-w-[28rem] pb-8 md:pb-12 md:text-right"
-           >
-	             <div>
-	               <h1 className="font-serif text-5xl font-light leading-none tracking-normal text-ink md:text-7xl">
-	                 Sulayman Bowles
-	               </h1>
-	               <p className="mt-5 font-sans text-sm leading-relaxed tracking-normal text-ink/64 md:text-base">
-		                 UT Austin McCombs student building Atlas and running Void Agency across technical SEO, product, and finance research.
-	               </p>
-	               <div className="mt-7 flex flex-wrap gap-4 text-[10px] uppercase tracking-[0.2em] md:justify-end">
-	                 <a href="/atlas" className="border-b border-ink/30 pb-1 text-ink/70 hover:border-ink hover:text-ink">Open Atlas</a>
-	                 <a href="/contact" className="border-b border-ink/30 pb-1 text-ink/70 hover:border-ink hover:text-ink">Request an audit</a>
-	                 <a href="/resume" className="border-b border-ink/30 pb-1 text-ink/70 hover:border-ink hover:text-ink">Resume</a>
-	               </div>
-	             </div>
-           </motion.div>
+          <motion.div
+            style={{ y: subY }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+            transition={{ duration: 0.8, delay: isLoaded ? 0.2 : 0 }}
+            className="relative z-10 grid w-full grid-cols-1 content-end gap-y-10 md:grid-cols-12 md:gap-x-8"
+          >
+            <div className="md:col-span-8 md:self-end">
+              <h1 className="home-cover__title font-serif font-light tracking-normal text-ink">
+                <span className="block">Sulayman</span>
+                <span className="block italic">Bowles</span>
+              </h1>
+            </div>
+
+            <div className="flex max-w-[29rem] flex-col justify-end border-t border-ink/20 pt-5 md:col-span-4 md:mb-4 md:ml-auto md:min-h-[14rem] md:w-full">
+              <p className="font-sans text-sm leading-relaxed tracking-normal text-ink/68 md:text-[15px]">
+                Technical SEO, Atlas crawl evidence, and markets research. Source material first; shipping decisions second.
+              </p>
+              <a
+                href="#selected-works"
+                className="group mt-8 flex items-center justify-between border-b border-ink/28 pb-3 text-[10px] uppercase tracking-[0.26em] text-ink transition-colors hover:border-ink"
+              >
+                <span>Selected work</span>
+                <svg aria-hidden="true" viewBox="0 0 18 18" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" fill="none">
+                  <path d="M4.5 13.5 13.5 4.5M6 4.5h7.5V12" stroke="currentColor" strokeWidth="1" />
+                </svg>
+              </a>
+            </div>
+
+            <div className="home-cover__index md:col-span-12">
+              {homeDisciplineItems.map((item) => (
+                <div key={item.num} className="home-cover__index-item">
+                  <span className="font-serif text-base italic text-ink/42">{item.num}</span>
+                  <span>{item.title}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </section>
 
         <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-14 text-ink md:px-16 md:py-20" aria-labelledby="home-proof-heading">
@@ -674,7 +691,7 @@ function HomePage() {
         </section>
 
         {/* INTRODUCTION - High contrast split */}
-        <section className="relative w-full border-y border-ink/10 bg-canvas px-4 py-24 text-ink md:px-16 md:py-36">
+        <section className="relative w-full border-y border-ink/10 bg-canvas px-4 py-20 text-ink md:px-16 md:py-28">
           <div className="mx-auto grid w-full max-w-[1800px] grid-cols-1 gap-14 md:grid-cols-12 md:gap-16">
             <div className="md:col-span-7 md:col-start-2">
               <ScrollReveal blur={false}>
@@ -722,16 +739,19 @@ function HomePage() {
         <TextMarquee />
 
          {/* SELECTED WORKS - EDITORIAL GRID */}
-        <section id="selected-works" className="w-full py-32 bg-ink text-canvas selection:bg-canvas selection:text-ink relative flex flex-col border-t border-canvas/10">
-           <div className="px-4 md:px-16 flex items-center justify-between mb-24 md:mb-48 pt-16 max-w-[1800px] mx-auto w-full">
+        <section id="selected-works" className="relative flex w-full flex-col border-t border-canvas/10 bg-ink py-24 text-canvas selection:bg-canvas selection:text-ink md:py-28">
+           <div className="mx-auto mb-16 flex w-full max-w-[1800px] items-end justify-between border-b border-canvas/14 px-4 pb-8 md:mb-24 md:px-16">
              <ScrollReveal blur={false}>
-               <h3 className="font-sans tracking-[0.3em] text-xs md:text-sm uppercase font-medium text-canvas/50">Selected Work</h3>
+               <div>
+                 <span className="mb-4 block font-serif text-xl italic text-canvas/42">01 — 03</span>
+                 <h3 className="font-serif text-5xl font-light leading-none tracking-normal text-canvas md:text-7xl">Selected work</h3>
+               </div>
              </ScrollReveal>
              <ScrollReveal blur={false} delay={0.2}>
-               <span className="font-serif italic text-xl text-canvas/60">2024 — 2026</span>
+               <span className="font-sans text-[10px] uppercase tracking-[0.28em] text-canvas/45">2024 — 2026</span>
              </ScrollReveal>
            </div>            {/* Project 01 */}
-           <div className="order-1 max-w-[1800px] mx-auto w-full px-4 md:px-16 mb-48 md:mb-64 relative pt-16">
+           <div className="relative order-1 mx-auto mb-32 w-full max-w-[1800px] px-4 pt-8 md:mb-40 md:px-16 md:pt-12">
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
@@ -775,7 +795,7 @@ function HomePage() {
                </div>
 
                {/* Right Column Canvas */}
-               <a href="/atlas" id="work-link-atlas" className="md:col-span-8 block overflow-hidden relative h-[60vh] md:h-[90vh] border border-canvas/20 order-1 md:order-2 origin-right group/atlas">
+               <a href="/atlas" id="work-link-atlas" className="group/atlas relative order-1 block h-[60vh] origin-right overflow-hidden border border-canvas/20 md:order-2 md:col-span-8 md:h-[78vh]">
                  <div className="hidden md:block absolute left-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
                  
                  {/* Corner brackets */}
@@ -810,8 +830,8 @@ function HomePage() {
              </div>
             </div>
                     {/* PROJECT 03 - TEXAS TOLL-ROAD RESEARCH */}
-         <div className="order-3 w-full relative py-20 bg-ink" id="systems">
-            <div className="max-w-[1800px] mx-auto w-full px-4 md:px-16 mb-48 md:mb-64 relative pt-16">
+         <div className="relative order-3 w-full bg-ink py-12 md:py-16" id="systems">
+            <div className="relative mx-auto mb-24 w-full max-w-[1800px] px-4 pt-8 md:mb-32 md:px-16 md:pt-12">
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 03</span>
@@ -823,10 +843,10 @@ function HomePage() {
                </div>
              </div>
              
-             <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-stretch pt-24 pb-48">
+             <div className="grid grid-cols-1 items-stretch gap-0 pb-16 pt-20 md:grid-cols-12 md:gap-8 md:pb-24">
                
                {/* Left Column Canvas */}
-               <a href="/markets/who-owns-texas-toll-roads" id="work-link-markets" className="md:col-span-8 overflow-hidden relative block h-[60vh] md:h-[90vh] border border-canvas/20 origin-left group">
+               <a href="/markets/who-owns-texas-toll-roads" id="work-link-markets" className="group relative block h-[60vh] origin-left overflow-hidden border border-canvas/20 md:col-span-8 md:h-[78vh]">
                  <div className="hidden md:block absolute right-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
                  
                  {/* Corner markers */}
@@ -878,7 +898,7 @@ function HomePage() {
          </div>
            
            {/* Project 02 - Void */}
-           <a href="/method" id="work-link-void" className="order-2 w-full mt-32 md:mt-64 pt-32 pb-48 relative min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center border-t border-b border-canvas/10 my-32 bg-ink overflow-hidden group">
+           <a href="/method" id="work-link-void" className="group relative order-2 my-20 mt-20 flex min-h-[58vh] w-full flex-col items-center justify-center overflow-hidden border-y border-canvas/10 bg-ink py-24 md:my-28 md:min-h-[68vh] md:py-28">
               {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
               <div className="relative z-10 flex flex-col items-center">
                 <ScrollReveal>
@@ -1353,7 +1373,7 @@ function HomePage() {
          </section>
 
         {/* INTERSTITIAL SECTION */}
-        <section className="w-full h-[50vh] md:h-[80vh] overflow-hidden relative">
+        <section className="relative h-[38vh] w-full overflow-hidden md:h-[48vh]">
            {!prefersReducedMotion && <KineticTypography />}
         </section>
 
