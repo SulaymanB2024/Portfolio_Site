@@ -28,6 +28,11 @@ Atlas is a technical SEO audit and evidence console. Void Agency is the fixed-sc
 - Audit intake/contact: https://sulayman-bowles.dev/contact
 - Technical ledger: https://sulayman-bowles.tech/
 
+## Markdown Alternates
+
+- Profile context: https://sulayman-bowles.dev/ai-information.md
+- Atlas: https://sulayman-bowles.dev/atlas.md
+
 ## Public Work and Research
 
 - Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench: https://sulayman-bowles.dev/viralbench-codex-agent-harness

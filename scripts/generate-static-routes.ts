@@ -1,7 +1,7 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { buildRouteStaticHtml, buildSitemapStaticHtml } from '../src/seo/staticContent';
-import { buildSitemapXml } from '../src/seo/generatedPublicFiles';
+import { buildSitemapXml, markdownAlternateForRoute } from '../src/seo/generatedPublicFiles';
 import { getCanonicalRoutes, NOT_FOUND_ROUTE, SEO_ROUTES, type SeoRoute } from '../src/seo/routes';
 import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME } from '../src/seo/site';
 
@@ -41,6 +41,7 @@ function routeOutputPath(route: SeoRoute) {
 
 function buildHead(route: SeoRoute, assetTags: string) {
   const canonicalUrl = absoluteUrl(route.path);
+  const markdownAlternate = markdownAlternateForRoute(route.path);
   const imageUrl = absoluteUrl(route.image ?? DEFAULT_OG_IMAGE);
   const ogType = route.pageType === 'article' ? 'article' : 'website';
   const robots = route.noindex || !route.includeInSitemap ? 'noindex,nofollow' : 'index,follow';
@@ -53,6 +54,7 @@ function buildHead(route: SeoRoute, assetTags: string) {
     <link rel="stylesheet" href="${FONT_STYLESHEET}" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="text/plain" title="LLMs text" href="/llms.txt" />
+    ${markdownAlternate ? `<link rel="alternate" type="text/markdown" href="${markdownAlternate.markdownPath}" />` : ''}
     <title>${escapeHtml(route.title)}</title>
     <meta name="description" content="${escapeHtml(route.description)}" />
     <link rel="canonical" href="${canonicalUrl}" />
