@@ -18,6 +18,8 @@
     "linkbuilding:prepare": "node scripts/prepare-link-building.mjs",
     "linkbuilding:scope-check": "node scripts/check-link-building-publish-scope.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
+    "test:bot-observer": "node --import tsx --test packages/bot-observer/tests/*.test.ts",
+    "verify:bot-observer": "node scripts/verify-bot-observer.mjs",
     "verify:seo": "node scripts/verify-ai-search-seo.mjs",
     "verify:generated": "tsx scripts/verify-generated-public-files.ts",
     "verify:reduction": "node scripts/verify-portfolio-reduction.mjs",
@@ -26,7 +28,9 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/functions": "3.7.5",
     "@vitejs/plugin-react": "^5.0.4",
+    "isbot": "5.2.0",
     "lenis": "^1.3.23",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",

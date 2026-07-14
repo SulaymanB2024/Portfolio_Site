@@ -12,9 +12,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm run test:bot-observer
+      - run: npm run verify:bot-observer
       - run: npm run verify:generated
       - run: npm run lint
       - run: npm run build
