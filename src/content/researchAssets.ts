@@ -50,8 +50,8 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
-    name: 'Crawler Policy Comes Before Visibility',
-    href: '/markets/ai-search-crawler-policy',
+    name: 'AI Crawler Robots.txt Guide',
+    href: '/research/ai-crawlers/ai-search-crawler-policy',
     type: 'research_note',
     preferredAnchor: 'crawler policy for public websites',
     audiences: ['technical SEO', 'search visibility', 'web developers', 'search policy writers'],
@@ -70,7 +70,7 @@ export const publicResearchAssets: ResearchAsset[] = [
       'A source-led ownership map separating state title, public authorities, private concession rights, sponsor equity, project debt, billing, and residual control across Texas toll roads.',
     supportingAssets: [
       { label: 'Markets research index', href: '/markets' },
-      { label: 'Source methodology', href: '/markets/technical-seo-public-data-infrastructure' },
+      { label: 'Source methodology', href: '/research/search-console/technical-seo-public-data-infrastructure' },
     ],
   },
   {
@@ -98,7 +98,7 @@ export const publicResearchAssets: ResearchAsset[] = [
   {
     priority: 2,
     name: 'Technical SEO as Public Data Infrastructure',
-    href: '/markets/technical-seo-public-data-infrastructure',
+    href: '/research/search-console/technical-seo-public-data-infrastructure',
     type: 'research_note',
     preferredAnchor: 'technical SEO as public data infrastructure',
     audiences: ['technical SEO', 'data infrastructure', 'public discovery', 'structured data'],
@@ -109,7 +109,7 @@ export const publicResearchAssets: ResearchAsset[] = [
   {
     priority: 2,
     name: 'Canonical Identity for Personal SEO',
-    href: '/markets/canonical-identity-personal-seo',
+    href: '/research/personal-seo/canonical-identity-personal-seo',
     type: 'research_note',
     preferredAnchor: 'canonical identity for personal SEO',
     audiences: ['personal SEO', 'founder profiles', 'structured data', 'profile cleanup'],

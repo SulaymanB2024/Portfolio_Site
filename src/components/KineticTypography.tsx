@@ -1,39 +1,24 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 
 export function KineticTypography() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const x1 = useTransform(scrollYProgress, [0, 1], [0, -500]);
-  const x2 = useTransform(scrollYProgress, [0, 1], [-500, 0]);
-  const x3 = useTransform(scrollYProgress, [0, 1], [0, -800]);
+  const prefersReducedMotion = useReducedMotion();
+  const steps = ['Observe', 'Structure', 'Decide', 'Ship'];
 
   return (
-    <div ref={containerRef} className="w-full h-full bg-ink text-canvas overflow-hidden flex flex-col justify-center relative">
-
-      
-      <motion.div style={{ x: x1, willChange: 'transform', backfaceVisibility: 'hidden' }} className="flex whitespace-nowrap transform-gpu">
-        <span className="text-[4.5rem] md:text-[7rem] xl:text-[9rem] font-sans font-black uppercase tracking-normal mix-blend-difference opacity-20">
-          CRAWL SIGNAL CRAWL SIGNAL CRAWL SIGNAL
-        </span>
-      </motion.div>
-      
-      <motion.div style={{ x: x2, willChange: 'transform', backfaceVisibility: 'hidden' }} className="flex whitespace-nowrap -mt-[5vw] transform-gpu">
-        <span className="text-[4.5rem] md:text-[7rem] xl:text-[9rem] font-serif italic uppercase tracking-normal text-outline-light opacity-50">
-          STRUCTURE EVIDENCE STRUCTURE EVIDENCE STRUCTURE EVIDENCE
-        </span>
-      </motion.div>
-      
-      <motion.div style={{ x: x3, willChange: 'transform', backfaceVisibility: 'hidden' }} className="flex whitespace-nowrap -mt-[5vw] transform-gpu">
-        <span className="text-[4.5rem] md:text-[7rem] xl:text-[9rem] font-sans font-black uppercase tracking-normal mix-blend-difference opacity-20">
-          MODEL DECIDE SHIP MODEL DECIDE SHIP
-        </span>
-      </motion.div>
+    <div className="mx-auto grid w-full max-w-[1800px] grid-cols-2 px-4 md:grid-cols-4 md:px-16">
+      {steps.map((step, index) => (
+        <motion.div
+          key={step}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-10%' }}
+          transition={{ duration: 0.5, delay: index * 0.08 }}
+          className="flex min-h-20 items-center gap-4 border-canvas/14 py-5 odd:border-l odd:pl-5 md:min-h-24 md:border-l md:px-7 md:first:border-l-0 md:first:pl-0"
+        >
+          <span className="font-serif text-lg italic text-canvas/42">{String(index + 1).padStart(2, '0')}</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-canvas/82">{step}</span>
+        </motion.div>
+      ))}
     </div>
   );
 }

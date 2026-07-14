@@ -31,9 +31,9 @@ Atlas is a technical SEO audit and evidence console. Void Agency is the fixed-sc
 ## Public Work and Research
 
 - Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench: https://sulayman-bowles.dev/viralbench-codex-agent-harness
-- Crawler Policy Comes Before Visibility: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
-- Technical SEO as Public Data Infrastructure: https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure
-- Canonical Identity Beats More Content: https://sulayman-bowles.dev/markets/canonical-identity-personal-seo
+- AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
+- Technical SEO as Public Data Infrastructure: https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure
+- Canonical Identity Beats More Content: https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo
 - Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics: https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads
 - Sanitized Atlas crawl sample CSV: https://sulayman-bowles.dev/research/atlas-sanitized-crawl-sample.csv
 - Appian educational research memo PDF: https://sulayman-bowles.dev/research/appian-enterprise-software-durability-memo.pdf

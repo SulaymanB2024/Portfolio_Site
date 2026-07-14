@@ -1,6 +1,7 @@
 export type ArticleSource = {
   label: string;
   href: string;
+  lastVerified?: string;
 };
 
 export type ArticleMetric = {
@@ -8,8 +9,33 @@ export type ArticleMetric = {
   value: string;
 };
 
+export type ResearchCluster = 'firecrawl' | 'ai-crawlers' | 'search-console' | 'personal-seo';
+
+export type ArticleTable = {
+  caption: string;
+  columns: string[];
+  rows: string[][];
+};
+
+export type ArticleCodeExample = {
+  title: string;
+  description: string;
+  language: 'robots.txt' | 'shell';
+  code: string;
+};
+
+export type ArticleSection = {
+  id: string;
+  title: string;
+  paragraphs: string[];
+  bullets?: string[];
+  table?: ArticleTable;
+  codeExamples?: ArticleCodeExample[];
+};
+
 export type ResearchArticle = {
   kind: 'research';
+  cluster: ResearchCluster;
   slug: string;
   number: string;
   category: string;
@@ -20,17 +46,19 @@ export type ResearchArticle = {
   image: string;
   date: string;
   dateModified?: string;
+  lastVerified?: string;
   readTime: string;
   author: string;
   thesis?: string;
   evidenceBoundary?: string;
   content: string[];
+  sections?: ArticleSection[];
   metrics?: ArticleMetric[];
   sources: ArticleSource[];
   indexable?: boolean;
 };
 
-export type InvestmentMemo = Omit<ResearchArticle, 'kind' | 'evidenceBoundary'> & {
+export type InvestmentMemo = Omit<ResearchArticle, 'kind' | 'evidenceBoundary' | 'cluster' | 'lastVerified' | 'sections'> & {
   kind: 'investment-memo';
   assumptions?: string[];
   valuationFrame?: string;

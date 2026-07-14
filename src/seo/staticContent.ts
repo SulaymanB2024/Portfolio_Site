@@ -5,8 +5,8 @@ import {
   sourceMap,
 } from '../content/aiInformation';
 import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
-import { ALL_ARTICLES } from '../content/articleRegistry';
-import { isInvestmentMemo } from '../content/articleModels';
+import { getArticleByPath } from '../content/articleRegistry';
+import { isInvestmentMemo, type ArticleSection } from '../content/articleModels';
 import { PUBLIC_MARKET_THESES } from '../content/marketTheses';
 import { PROFILE_FACTS, formatIsoDate } from '../content/profileFacts';
 import {
@@ -29,6 +29,8 @@ import {
 import { SIMPLE_BOOK_CHAPTERS, SIMPLE_BOOK_LINKS } from '../content/simpleBook';
 import {
   VIRALBENCH_ARTICLE_EXCERPT,
+  VIRALBENCH_ARTICLE_IMAGE,
+  VIRALBENCH_ARTICLE_INLINE_IMAGE,
   VIRALBENCH_ARTICLE_MARKDOWN,
   VIRALBENCH_ARTICLE_TITLE,
 } from '../content/viralBenchArticle';
@@ -203,12 +205,6 @@ const homeDisciplines = [
   ['Product + Web Systems', 'React interfaces, portfolio pages, audit dashboards, product research, and written explanations that make the work easier to inspect.'],
 ];
 
-const homeProofHighlights = PROFILE_FACTS.proofClaims.map((item) => [
-  item.label,
-  `${item.claim}. As of ${formatIsoDate(item.asOf)}.`,
-  item.publicSource,
-]);
-
 function escapeHtml(value: string) {
   return value
     .replaceAll('&', '&amp;')
@@ -326,6 +322,57 @@ function articleShell(title: string, intro: string, body: string) {
       </article>`;
 }
 
+function viralBenchArticleStaticHtml() {
+  const evidenceLayerHeading = '<h2 id="the-evidence-layer-comes-before-the-codex-layer">The evidence layer comes before the Codex layer</h2>';
+  const architectureFigure = `<figure>
+          <img src="/images/viralbench-codex-harness.svg" width="1200" height="630" alt="Architecture showing ViralBench as a live marketing-agent loop, an immutable evidence and evaluation layer, and Codex improving the system through isolated experiments." />
+          <figcaption>ViralBench inner marketing-agent loop, evidence and evaluation layer, and Codex outer engineering loop.</figcaption>
+        </figure>`;
+  const inlineFigure = `<figure>
+          <img src="${VIRALBENCH_ARTICLE_INLINE_IMAGE}" width="1672" height="941" alt="An abstract monochrome room filled with speech bubbles connected by fine lines and flowing data-like strands." />
+        </figure>`;
+  const articleHtml = markdownToHtml(VIRALBENCH_ARTICLE_MARKDOWN).replace(
+    evidenceLayerHeading,
+    `${architectureFigure}\n        ${evidenceLayerHeading}\n        ${inlineFigure}`,
+  );
+
+  return `<figure>
+          <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1672" height="941" alt="A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space." />
+        </figure>
+        ${articleHtml}`;
+}
+
+function articleSectionsStaticHtml(sections: ArticleSection[]) {
+  return sections.map((section) => {
+    const table = section.table
+      ? `<figure>
+          <figcaption>${escapeHtml(section.table.caption)}</figcaption>
+          <table>
+            <thead><tr>${section.table.columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('')}</tr></thead>
+            <tbody>${section.table.rows.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join('')}</tr>`).join('')}</tbody>
+          </table>
+        </figure>`
+      : '';
+    const bullets = section.bullets?.length
+      ? `<ul>${section.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`
+      : '';
+    const codeExamples = section.codeExamples?.map(
+      (example) => `<figure>
+          <figcaption><strong>${escapeHtml(example.title)}</strong> — ${escapeHtml(example.description)}</figcaption>
+          <pre><code>${escapeHtml(example.code)}</code></pre>
+        </figure>`,
+    ).join('\n        ') ?? '';
+
+    return `<section aria-labelledby="${section.id}-title">
+        <h2 id="${section.id}-title">${escapeHtml(section.title)}</h2>
+        ${paragraphList(section.paragraphs)}
+        ${bullets}
+        ${table}
+        ${codeExamples}
+      </section>`;
+  }).join('\n        ');
+}
+
 function texasTollTableStaticHtml(table: TexasTollArticleTable) {
   return `<table>
           <caption>${escapeHtml(table.caption)}</caption>
@@ -389,7 +436,7 @@ function texasTollArticleStaticHtml() {
         ${linkList([
           { label: 'Markets research', href: '/markets' },
           { label: 'Research assets', href: '/research' },
-          { label: 'Source methodology', href: '/markets/technical-seo-public-data-infrastructure' },
+          { label: 'Source methodology', href: '/research/search-console/technical-seo-public-data-infrastructure' },
           { label: 'About the author', href: '/about' },
         ])}`,
   );
@@ -414,11 +461,11 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Seven Notes and Artifacts</h2>
         <h3><a href="/viralbench-codex-agent-harness">Beyond the Leaderboard: ViralBench + Codex</a></h3>
         <p>A code-level design for traces, replay, controlled trials, and a bounded Codex engineering loop around a live marketing agent.</p>
-        <h3><a href="/markets/ai-search-crawler-policy">Crawler Policy Comes Before Visibility</a></h3>
-        <p>A note on crawler access, redirects, and why discovery has to be settled before visibility claims matter.</p>
-        <h3><a href="/markets/technical-seo-public-data-infrastructure">Technical SEO as Public Data Infrastructure</a></h3>
+        <h3><a href="/research/ai-crawlers/ai-search-crawler-policy">AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot</a></h3>
+        <p>A role-by-role guide to AI search, training, and user-triggered agents, with deployable robots.txt policies and log-verification steps.</p>
+        <h3><a href="/research/search-console/technical-seo-public-data-infrastructure">Technical SEO as Public Data Infrastructure</a></h3>
         <p>A practical bridge between crawlability, structured data, provenance, and public records people can inspect.</p>
-        <h3><a href="/markets/canonical-identity-personal-seo">Canonical Identity for Personal SEO</a></h3>
+        <h3><a href="/research/personal-seo/canonical-identity-personal-seo">Canonical Identity for Personal SEO</a></h3>
         <p>A reconciliation checklist for profiles, stale PDFs, source pages, and external bio consistency.</p>
         <h3><a href="/markets/who-owns-texas-toll-roads">Who Owns the Toll Roads in Texas?</a></h3>
         <p>A statewide ownership map separating public title, private concessions, operators, creditors, revenue rights, and analyst-screening economics.</p>
@@ -440,23 +487,16 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       VIRALBENCH_ARTICLE_TITLE,
       VIRALBENCH_ARTICLE_EXCERPT,
       `<p><a href="/research">Research notes</a> · AI Systems Engineering · Published July 9, 2026 · By <a href="/about">Sulayman Bowles</a></p>
-        <figure>
-          <img src="/images/viralbench-codex-harness.svg" width="1200" height="630" alt="Architecture showing ViralBench as a live marketing-agent loop, an immutable evidence and evaluation layer, and Codex improving the system through isolated experiments." />
-          <figcaption>ViralBench inner marketing-agent loop, evidence and evaluation layer, and Codex outer engineering loop.</figcaption>
-        </figure>
-        ${markdownToHtml(VIRALBENCH_ARTICLE_MARKDOWN)}`,
+        ${viralBenchArticleStaticHtml()}`,
     );
   }
 
   if (route.path === '/') {
     return articleShell(
       'Sulayman Bowles',
-      PROFILE_FACTS.currentSummary,
-      `<h2>Introduction</h2>
-        <p>${escapeHtml(PROFILE_FACTS.currentSummary)}</p>
-        <p>The work starts with messy evidence—crawl data, page templates, product workflows, ownership records, and financial assumptions—and turns it into systems a reviewer can inspect.</p>
-        <h2>Work in 30 seconds</h2>
-        ${homeProofHighlights.map(([label, copy, href]) => `<h3><a href="${href}">${escapeHtml(label)}</a></h3><p>${escapeHtml(copy)}</p>`).join('\n        ')}
+      'Selected work and evidence-led systems from Sulayman Bowles.',
+      `<h2>Evidence, before answers</h2>
+        <p>Keep the source, the interpretation, and the missing pieces separate. The result should show what was observed, what was inferred, and what still needs proof.</p>
         <h2>Selected Work</h2>
         <h3><a href="/atlas">Atlas SEO Audit Console</a></h3>
         <p>A crawl-based audit system for finding indexation, architecture, performance, and structured-data issues across real websites.</p>
@@ -805,7 +845,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     return texasTollArticleStaticHtml();
   }
 
-  const article = ALL_ARTICLES.find((item) => route.path === `/markets/${item.slug}`);
+  const article = getArticleByPath(route.path);
   if (article) {
     const investmentMemo = isInvestmentMemo(article);
     const metrics = article.metrics ?? [
@@ -815,6 +855,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     ];
     const sourceLinks = article.sources.map((source) => ({ label: source.label, href: source.href }));
     const boundary = investmentMemo ? article.recommendationBoundary : article.evidenceBoundary;
+    const structuredSections = article.kind === 'research' && article.sections
+      ? articleSectionsStaticHtml(article.sections)
+      : '';
     const investmentSections = investmentMemo
       ? `<h2>Valuation Frame</h2>
         <p>${escapeHtml(article.formulaLabel)}: ${escapeHtml(article.formula)}</p>
@@ -834,8 +877,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${definitionCards(metrics.map((metric) => [metric.label, metric.value]))}
         <h2>Research Note</h2>
         ${paragraphList(article.content)}
+        ${structuredSections}
         ${investmentSections}
-        ${sourceLinks.length ? `<h2>Research Sources</h2>${linkList(sourceLinks)}` : ''}
+        ${sourceLinks.length ? `<h2>${structuredSections ? 'Source Ledger' : 'Research Sources'}</h2>${linkList(sourceLinks)}` : ''}
         <h2>Internal Links</h2>
         ${linkList([
           { label: investmentMemo ? 'Markets Research' : 'Research Notes', href: investmentMemo ? '/markets' : '/research' },

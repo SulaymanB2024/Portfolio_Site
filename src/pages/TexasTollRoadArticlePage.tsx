@@ -575,7 +575,7 @@ export default function TexasTollRoadArticlePage() {
               <nav aria-label="Related research">
                 <a href="/markets">Markets research</a>
                 <a href="/research">Research assets</a>
-                <a href="/markets/technical-seo-public-data-infrastructure">Source methodology</a>
+                <a href="/research/search-console/technical-seo-public-data-infrastructure">Source methodology</a>
                 <a href="/about">About the author</a>
               </nav>
             </footer>

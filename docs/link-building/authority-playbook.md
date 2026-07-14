@@ -46,11 +46,11 @@ The scope checker verifies that only link-building publish files are being stage
 | Priority | Asset | URL | Why it can earn links |
 | --- | --- | --- | --- |
 | 1 | Research asset index | `https://sulayman-bowles.dev/research` | Human-readable hub for the citation-ready pages, data files, source maps, and claim boundaries. |
-| 1 | AI-search crawler policy note | `https://sulayman-bowles.dev/markets/ai-search-crawler-policy` | Timely, source-backed explanation of AI crawler policy, robots, IndexNow, and source-page clarity. |
+| 1 | AI-search crawler policy note | `https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy` | Timely, source-backed explanation of AI crawler policy, robots, IndexNow, and source-page clarity. |
 | 1 | Atlas sample crawl run | `https://sulayman-bowles.dev/atlas/sample-crawl` | Public evidence artifact with CSV, URL rows, indexability, internal links, canonicals, and issue labels. |
 | 1 | Atlas project page | `https://sulayman-bowles.dev/atlas` | Canonical project page for the crawl evidence system and related public code. |
-| 2 | Technical SEO as public data infrastructure | `https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure` | Strong editorial bridge between SEO, source quality, structured data, and data infrastructure. |
-| 2 | Canonical identity for personal SEO | `https://sulayman-bowles.dev/markets/canonical-identity-personal-seo` | Useful for personal-site/profile cleanup, stale PDFs, sameAs discipline, and source graph consistency. |
+| 2 | Technical SEO as public data infrastructure | `https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure` | Strong editorial bridge between SEO, source quality, structured data, and data infrastructure. |
+| 2 | Canonical identity for personal SEO | `https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo` | Useful for personal-site/profile cleanup, stale PDFs, sameAs discipline, and source graph consistency. |
 | 2 | Technical SEO audit case study | `https://sulayman-bowles.dev/case-studies/technical-seo-audit` | Sanitized case-study logic without private client claims. |
 | 3 | Austin technical SEO page | `https://sulayman-bowles.dev/austin-technical-seo` | Local-service surface for Austin/startup/business-context citations. |
 | 3 | Austin crawlability benchmark pilot | `https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv` | Local public-data hook for Austin media and startup/web-infrastructure conversations. |
@@ -62,7 +62,7 @@ The human-readable public hub is `https://sulayman-bowles.dev/research`. The mac
 
 ### Campaign 1: AI Crawler Policy Citation Push
 
-Target page: `/markets/ai-search-crawler-policy`
+Target page: `/research/ai-crawlers/ai-search-crawler-policy`
 
 Audience:
 

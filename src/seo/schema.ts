@@ -9,6 +9,13 @@ import {
 } from '../content/evidenceLists';
 import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import { PROFILE_FACTS } from '../content/profileFacts';
+import {
+  VIRALBENCH_ARTICLE_DATE,
+  VIRALBENCH_ARTICLE_DESCRIPTION,
+  VIRALBENCH_ARTICLE_IMAGE,
+  VIRALBENCH_ARTICLE_MODIFIED_DATE,
+  VIRALBENCH_ARTICLE_TITLE,
+} from '../content/viralBenchArticle';
 import { absoluteUrl, DEFAULT_OG_IMAGE, PERSON_ID, SITE_NAME, SITE_URL } from './site';
 
 export type JsonLd = Record<string, unknown>;
@@ -878,17 +885,16 @@ export function technicalSeoCaseStudyJsonLd(): JsonLd {
 
 export function viralBenchArticleJsonLd(): JsonLd {
   const path = '/viralbench-codex-agent-harness';
-  const title = 'Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench';
-  const description =
-    'How I’m turning ViralBench into a Codex-powered agent harness for replay, trace evaluation, controlled experiments, and safer marketing automation.';
+  const title = VIRALBENCH_ARTICLE_TITLE;
+  const description = VIRALBENCH_ARTICLE_DESCRIPTION;
   const articleId = `${absoluteUrl(path)}#article`;
-  const image = absoluteUrl('/images/viralbench-codex-harness.svg');
+  const image = absoluteUrl(VIRALBENCH_ARTICLE_IMAGE);
   const article = articleSchema({
     title,
     description,
     path,
-    datePublished: '2026-07-09',
-    dateModified: '2026-07-09',
+    datePublished: VIRALBENCH_ARTICLE_DATE,
+    dateModified: VIRALBENCH_ARTICLE_MODIFIED_DATE,
     image,
   });
 

@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { useRef, useEffect, useState, lazy, Suspense, type CSSProperties } from 'react';
-import { StaggeredText } from './components/StaggeredText';
 import { InkTrails } from './components/InkTrails';
 import { RomanTogaReveal } from './components/RomanTogaReveal';
 import { ScrambleText } from './components/ScrambleText';
@@ -16,7 +15,6 @@ import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
 import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
 import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavigation';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './content/texasTollRoadArticleMeta';
-import { formatIsoDate, PROFILE_FACTS } from './content/profileFacts';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
 import { TextMarquee } from './components/TextMarquee';
@@ -67,7 +65,6 @@ const CandlestickChart = lazy(() => import('./components/CandlestickChart').then
 const AtmosphereCore = lazy(() => import('./components/AtmosphereCore').then(m => ({ default: m.default })));
 const GenerativeMesh = lazy(() => import('./components/GenerativeMesh').then(m => ({ default: m.GenerativeMesh })));
 const GeometricPattern = lazy(() => import('./components/GeometricPattern').then(m => ({ default: m.GeometricPattern })));
-const FooterM = lazy(() => import('./components/FooterM').then(m => ({ default: m.FooterM })));
 
 const CONTACT_HASH = '#contact';
 const HOME_SEO = getSeoRoute('/')!;
@@ -94,11 +91,6 @@ const homeDisciplineItems = [
     desc: 'Finance research, valuation assumptions, market structure, operating analysis, dashboards, and decision tools with inspectable assumptions.',
   },
 ];
-
-const homeProofHighlights = PROFILE_FACTS.proofClaims.map((item) => ({
-  ...item,
-  displayDate: formatIsoDate(item.asOf),
-}));
 
 function isDarkRoute(path: string) {
   return getRouteTone(path) === 'dark';
@@ -390,6 +382,8 @@ function HomePage() {
   const [counter, setCounter] = useState(initialLoadComplete ? 100 : 0);
   const [isLoaded, setIsLoaded] = useState(initialLoadComplete);
   const [homeHeaderTone, setHomeHeaderTone] = useState<'light' | 'dark'>('light');
+  const [activeSelectedWork, setActiveSelectedWork] = useState(0);
+  const selectedWorksGuideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (initialLoadComplete) return;
@@ -426,12 +420,54 @@ function HomePage() {
   }, [prefersReducedMotion]);
 
   useEffect(() => {
-    if (!isLoaded) {
-      document.body.style.overflow = 'hidden';
-    } else {
+    document.body.style.overflow = isLoaded ? '' : 'hidden';
+
+    return () => {
       document.body.style.overflow = '';
-    }
+    };
   }, [isLoaded]);
+
+  useEffect(() => {
+    const guide = selectedWorksGuideRef.current;
+    if (!guide) return;
+
+    const mobileQuery = window.matchMedia('(max-width: 767px)');
+    let observer: IntersectionObserver | null = null;
+
+    const observeSteps = () => {
+      observer?.disconnect();
+      observer = null;
+
+      if (!mobileQuery.matches) {
+        setActiveSelectedWork(0);
+        return;
+      }
+
+      const steps = guide.querySelectorAll<HTMLElement>('[data-selected-work-step]');
+      observer = new IntersectionObserver((entries) => {
+        const activeEntry = entries
+          .filter((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.55)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        const nextStep = Number((activeEntry?.target as HTMLElement | undefined)?.dataset.selectedWorkStep);
+
+        if (Number.isInteger(nextStep)) {
+          setActiveSelectedWork((currentStep) => currentStep === nextStep ? currentStep : nextStep);
+        }
+      }, { root: guide, threshold: [0.55, 0.7] });
+
+      steps.forEach((step) => {
+        observer?.observe(step);
+      });
+    };
+
+    observeSteps();
+    mobileQuery.addEventListener('change', observeSteps);
+
+    return () => {
+      observer?.disconnect();
+      mobileQuery.removeEventListener('change', observeSteps);
+    };
+  }, []);
 
   useEffect(() => {
     if (!isLoaded) {
@@ -542,7 +578,7 @@ function HomePage() {
     <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas" ref={containerRef}>
       {!prefersReducedMotion && <InkTrails />}
         
-      <InternalHeader activePath="/" tone={homeHeaderTone} variant="home" />
+      <InternalHeader activePath="/" tone={homeHeaderTone} variant="home" minimalBrand />
 
       {/* Grid Crosshairs */}
       <div className="fixed inset-0 pointer-events-none z-40 hidden md:block mix-blend-difference text-canvas select-none">
@@ -566,30 +602,29 @@ function HomePage() {
       {/* Intro Preloader Mask */}
       <AnimatePresence>
         {!isLoaded && (
-          <motion.div 
-            className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center p-8 text-canvas"
+          <motion.div
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-ink p-8 text-canvas"
             data-header-tone-ignore="true"
             exit={{ opacity: 0 }}
             transition={{ duration: prefersReducedMotion ? 0.12 : 0.35, ease: [0.33, 1, 0.68, 1] }}
           >
-            <div className="w-full flex justify-between absolute pt-8 px-8 md:px-16 normal-case font-sans uppercase tracking-[0.2em] text-xs opacity-60 justify-self-start self-start top-0">
-               <span>Building Evidence</span>
-               <span>{counter}%</span>
+            <div className="absolute top-0 flex w-full justify-between px-8 pt-8 font-sans text-xs uppercase tracking-[0.2em] opacity-60 md:px-16">
+              <span>Building Evidence</span>
+              <span>{counter}%</span>
             </div>
-            
+
             <motion.div
-               animate={{ opacity: 1 }}
-               exit={{ opacity: 0 }}
-               transition={{ duration: 0.4 }}
-               className="font-serif text-6xl md:text-9xl font-light tracking-normal flex items-baseline"
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="flex items-baseline font-serif text-6xl font-light tracking-normal md:text-9xl"
             >
               <span className="italic">{counter}</span>
-              <span className="text-xl md:text-2xl ml-2 font-sans tracking-widest">%</span>
+              <span className="ml-2 font-sans text-xl tracking-widest md:text-2xl">%</span>
             </motion.div>
 
-            {/* Progress bar */}
-            <div className="absolute bottom-16 left-8 right-8 md:left-16 md:right-16 h-[1px] bg-canvas/20">
-              <motion.div 
+            <div className="absolute bottom-16 left-8 right-8 h-[1px] bg-canvas/20 md:left-16 md:right-16">
+              <motion.div
                 className="h-full bg-canvas"
                 style={{ width: `${counter}%` }}
                 transition={{ duration: 0.1 }}
@@ -601,15 +636,15 @@ function HomePage() {
 
       {/* Main Container */}
       <main className="w-full" id="top">
-        {/* HERO SECTION - Evidence ledger cover */}
-        <section className="home-cover relative flex min-h-[100svh] w-full overflow-hidden px-4 pb-6 pt-28 md:px-16 md:pb-10 md:pt-32">
-          {/* Background Motion */}
-          {!prefersReducedMotion && <Suspense fallback={null}>
-            <FlowField className="pointer-events-none absolute inset-0 z-0 opacity-[0.07] mix-blend-multiply" density={25} />
-          </Suspense>}
-          
-          {/* Roman figure becomes supporting material instead of the headline. */}
-          <motion.div 
+        {/* HERO SECTION — name and figure only */}
+        <section className="home-cover relative flex min-h-[100svh] w-full overflow-hidden px-4 pb-8 pt-28 md:px-16 md:pb-12 md:pt-32">
+          {!prefersReducedMotion && (
+            <Suspense fallback={null}>
+              <FlowField className="pointer-events-none absolute inset-0 z-0 opacity-[0.07] mix-blend-multiply" density={25} />
+            </Suspense>
+          )}
+
+          <motion.div
             style={{ opacity: titleOpacity }}
             className="home-cover__figure pointer-events-none absolute inset-0 z-[1]"
           >
@@ -622,115 +657,62 @@ function HomePage() {
                 className="h-full w-full"
               />
             )}
-           </motion.div>
+          </motion.div>
 
           <motion.div
             style={{ y: subY }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
             transition={{ duration: 0.8, delay: isLoaded ? 0.2 : 0 }}
-            className="relative z-10 grid w-full grid-cols-1 content-end gap-y-10 md:grid-cols-12 md:gap-x-8"
+            className="relative z-10 flex w-full items-end"
           >
-            <div className="md:col-span-8 md:self-end">
-              <h1 className="home-cover__title font-serif font-light tracking-normal text-ink">
-                <span className="block">Sulayman</span>
-                <span className="block italic">Bowles</span>
-              </h1>
-            </div>
-
-            <div className="flex max-w-[29rem] flex-col justify-end border-t border-ink/20 pt-5 md:col-span-4 md:mb-4 md:ml-auto md:min-h-[14rem] md:w-full">
-              <p className="font-sans text-sm leading-relaxed tracking-normal text-ink/68 md:text-[15px]">
-                Technical SEO, Atlas crawl evidence, and markets research. Source material first; shipping decisions second.
-              </p>
-              <a
-                href="#selected-works"
-                className="group mt-8 flex items-center justify-between border-b border-ink/28 pb-3 text-[10px] uppercase tracking-[0.26em] text-ink transition-colors hover:border-ink"
-              >
-                <span>Selected work</span>
-                <svg aria-hidden="true" viewBox="0 0 18 18" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" fill="none">
-                  <path d="M4.5 13.5 13.5 4.5M6 4.5h7.5V12" stroke="currentColor" strokeWidth="1" />
-                </svg>
-              </a>
-            </div>
-
-            <div className="home-cover__index md:col-span-12">
-              {homeDisciplineItems.map((item) => (
-                <div key={item.num} className="home-cover__index-item">
-                  <span className="font-serif text-base italic text-ink/42">{item.num}</span>
-                  <span>{item.title}</span>
-                </div>
-              ))}
-            </div>
+            <h1 className="home-cover__title font-serif font-light tracking-normal text-ink">
+              <span className="block">Sulayman</span>
+              <span className="block italic">Bowles</span>
+            </h1>
           </motion.div>
         </section>
 
-        <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-14 text-ink md:px-16 md:py-20" aria-labelledby="home-proof-heading">
+        {/* INTRODUCTION — an evidence system, reduced to its essential logic */}
+        <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-24 text-ink md:px-16 md:py-36">
           <div className="mx-auto w-full max-w-[1800px]">
-            <div className="mb-9 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-ink/60">Proof snapshot</p>
-                <h2 id="home-proof-heading" className="mt-4 font-serif text-4xl italic leading-none md:text-6xl">Current work in 30 seconds.</h2>
-              </div>
-              <a href="/work" className="w-fit border-b border-ink/28 pb-1 text-[10px] uppercase tracking-[0.2em] text-ink/68 hover:border-ink hover:text-ink">All selected work</a>
+            <div className="flex items-center justify-between border-b border-ink/14 pb-5 text-[10px] uppercase tracking-[0.3em] text-ink/58">
+              <span>Working method</span>
+              <span aria-hidden="true" className="font-serif text-base italic tracking-normal">01 — 03</span>
             </div>
-            <div className="grid gap-px border border-ink/14 bg-ink/14 sm:grid-cols-2 lg:grid-cols-3">
-              {homeProofHighlights.map((item, index) => (
-                <a key={item.label} href={item.publicSource} className="group grid min-h-[190px] content-between bg-canvas p-5 transition-colors hover:bg-ink hover:text-canvas">
-                  <div className="flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-current/60">
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    <time dateTime={item.asOf}>As of {item.displayDate}</time>
-                  </div>
-                  <div>
-                    <h3 className="text-[11px] uppercase tracking-[0.22em] text-current">{item.label}</h3>
-                    <p className="mt-4 text-sm leading-relaxed text-current/70">{item.claim}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* INTRODUCTION - High contrast split */}
-        <section className="relative w-full border-y border-ink/10 bg-canvas px-4 py-20 text-ink md:px-16 md:py-28">
-          <div className="mx-auto grid w-full max-w-[1800px] grid-cols-1 gap-14 md:grid-cols-12 md:gap-16">
-            <div className="md:col-span-7 md:col-start-2">
-              <ScrollReveal blur={false}>
-                <p className="mb-7 font-sans text-[10px] uppercase tracking-[0.3em] text-ink/60">Working method</p>
-              </ScrollReveal>
-              <StaggeredText
-                text="Evidence systems for messy surfaces."
-                delay={0.1}
-                className="max-w-[11ch] font-serif text-5xl font-light leading-[0.92] tracking-normal sm:text-6xl md:text-7xl lg:text-[6.6rem]"
-              />
-            </div>
-            <div className="flex flex-col md:col-span-4 md:col-start-9">
-              <ScrollReveal delay={0.25} yOffset={14} blur={false} className="md:mt-10">
-                <p className="max-w-md font-sans text-sm leading-relaxed tracking-normal text-ink/64 md:text-base">
-                  The work starts where the source material is still rough: crawl data, page templates, search behavior, market assumptions, and product logic. I turn that into systems people can inspect, question, and ship from.
+            <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-12 md:gap-8 md:py-24">
+              <div className="md:col-span-8">
+                <ScrollReveal blur={false}>
+                  <h2 className="max-w-[9ch] font-serif text-[4rem] font-light leading-[0.82] tracking-normal sm:text-7xl md:text-[6.8rem] lg:text-[7.625rem]">
+                    Evidence,
+                    <span className="block italic">before answers.</span>
+                  </h2>
+                </ScrollReveal>
+              </div>
+              <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
+                <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
+                  Keep the source, the interpretation, and the missing pieces separate. The result should show what was observed, what was inferred, and what still needs proof.
                 </p>
               </ScrollReveal>
+            </div>
 
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true, margin: '-10%' }}
-                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-                className="mt-14 h-[1px] w-full origin-left transform bg-ink/20"
-              />
-              <ScrollReveal delay={0.45} yOffset={15} blur={false} className="grid gap-5 pt-8 font-sans text-[10px] uppercase tracking-[0.22em] text-ink/56">
-                <div className="grid grid-cols-[6.5rem_1fr] gap-5 border-b border-ink/10 pb-5">
-                  <span className="text-ink/60">Collect</span>
-                  <span className="text-ink">Crawls, templates, queries, assumptions</span>
+            <div className="grid border-y border-ink/14 md:grid-cols-3">
+              {[
+                ['01', 'Observe', 'Capture the source material without cleaning away the gaps.'],
+                ['02', 'Separate', 'Mark facts, assumptions, constraints, and unknowns distinctly.'],
+                ['03', 'Ship', 'Turn the evidence into a decision, artifact, or next check.'],
+              ].map(([num, title, copy], index) => (
+                <div key={num} className="min-h-52 border-b border-ink/14 py-7 last:border-b-0 md:border-b-0 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0 md:last:pr-0">
+                  <ScrollReveal delay={index * 0.08} blur={false} className="grid h-full min-h-40 content-between">
+                    <span className="font-serif text-xl italic text-ink/46">{num}</span>
+                    <div>
+                      <h3 className="font-serif text-4xl font-light tracking-normal">{title}</h3>
+                      <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/62">{copy}</p>
+                    </div>
+                  </ScrollReveal>
                 </div>
-                <div className="grid grid-cols-[6.5rem_1fr] gap-5 border-b border-ink/10 pb-5">
-                  <span className="text-ink/60">Structure</span>
-                  <span className="text-ink">Evidence, states, constraints, gaps</span>
-                </div>
-                <div className="grid grid-cols-[6.5rem_1fr] gap-5">
-                  <span className="text-ink/60">Ship</span>
-                  <span className="text-ink">Fixes, reports, dashboards, pages</span>
-                </div>
-              </ScrollReveal>
+              ))}
             </div>
           </div>
         </section>
@@ -750,8 +732,17 @@ function HomePage() {
              <ScrollReveal blur={false} delay={0.2}>
                <span className="font-sans text-[10px] uppercase tracking-[0.28em] text-canvas/45">2024 — 2026</span>
              </ScrollReveal>
-           </div>            {/* Project 01 */}
-           <div className="relative order-1 mx-auto mb-32 w-full max-w-[1800px] px-4 pt-8 md:mb-40 md:px-16 md:pt-12">
+           </div>
+           <div className="selected-works__guide-frame relative w-full">
+             <div
+               ref={selectedWorksGuideRef}
+               className="selected-works__guide flex w-full flex-col"
+               role="region"
+               aria-label="Selected work guided focus"
+               tabIndex={0}
+             >
+           {/* Project 01 */}
+           <div data-selected-work-step="0" className="selected-work-step relative order-1 mx-auto mb-0 w-full max-w-[1800px] px-4 pt-8 md:mb-40 md:px-16 md:pt-12">
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
@@ -763,16 +754,16 @@ function HomePage() {
                </div>
              </div>
              
-             <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-stretch pt-24">
+             <div className="grid grid-cols-1 items-stretch gap-0 pt-16 md:grid-cols-12 md:gap-8 md:pt-24">
                
                {/* Left Column Text */}
-               <div className="md:col-span-4 flex flex-col pt-12 md:pt-0 md:pr-8 lg:pr-16 relative z-10 order-2 md:order-1 mt-12 md:mt-0">
+               <div className="relative z-10 order-2 mt-6 flex flex-col pt-6 md:order-1 md:col-span-4 md:mt-0 md:pt-0 md:pr-8 lg:pr-16">
                  
                  <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start">
                    <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6">( 01 )</span></ScrollReveal>
                    
                    <ScrollReveal delay={0.2} blur={false}>
-                     <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
+                     <p className="mb-8 max-w-sm font-serif text-xl italic leading-tight normal-case tracking-normal text-canvas/90 md:mb-0 md:text-3xl lg:text-4xl">
 		                       A crawl system for indexation, internal links, canonicals, structured data, and raw/rendered HTML.
                      </p>
                    </ScrollReveal>
@@ -795,7 +786,7 @@ function HomePage() {
                </div>
 
                {/* Right Column Canvas */}
-               <a href="/atlas" id="work-link-atlas" className="group/atlas relative order-1 block h-[60vh] origin-right overflow-hidden border border-canvas/20 md:order-2 md:col-span-8 md:h-[78vh]">
+               <a href="/atlas" id="work-link-atlas" className="group/atlas relative order-1 block h-[42svh] min-h-72 origin-right overflow-hidden border border-canvas/20 md:order-2 md:col-span-8 md:h-[78vh]">
                  <div className="hidden md:block absolute left-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
                  
                  {/* Corner brackets */}
@@ -830,8 +821,8 @@ function HomePage() {
              </div>
             </div>
                     {/* PROJECT 03 - TEXAS TOLL-ROAD RESEARCH */}
-         <div className="relative order-3 w-full bg-ink py-12 md:py-16" id="systems">
-            <div className="relative mx-auto mb-24 w-full max-w-[1800px] px-4 pt-8 md:mb-32 md:px-16 md:pt-12">
+         <div data-selected-work-step="2" className="selected-work-step relative order-3 w-full bg-ink py-0 md:py-16" id="systems">
+            <div className="relative mx-auto mb-0 w-full max-w-[1800px] px-4 pt-8 md:mb-32 md:px-16 md:pt-12">
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 03</span>
@@ -843,10 +834,10 @@ function HomePage() {
                </div>
              </div>
              
-             <div className="grid grid-cols-1 items-stretch gap-0 pb-16 pt-20 md:grid-cols-12 md:gap-8 md:pb-24">
+             <div className="grid grid-cols-1 items-stretch gap-0 pb-0 pt-16 md:grid-cols-12 md:gap-8 md:pb-24 md:pt-20">
                
                {/* Left Column Canvas */}
-               <a href="/markets/who-owns-texas-toll-roads" id="work-link-markets" className="group relative block h-[60vh] origin-left overflow-hidden border border-canvas/20 md:col-span-8 md:h-[78vh]">
+               <a href="/markets/who-owns-texas-toll-roads" id="work-link-markets" className="group relative block h-[42svh] min-h-72 origin-left overflow-hidden border border-canvas/20 md:col-span-8 md:h-[78vh]">
                  <div className="hidden md:block absolute right-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
                  
                  {/* Corner markers */}
@@ -866,12 +857,12 @@ function HomePage() {
                  </ScrollReveal>
                </a>
 
-               <div className="md:col-span-4 flex flex-col justify-between pt-12 md:pt-0">
+               <div className="flex flex-col justify-between pt-6 md:col-span-4 md:pt-0">
                  <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start items-start md:items-end md:text-right">
                    <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6 block">( 03 )</span></ScrollReveal>
                    
                    <ScrollReveal delay={0.2} blur={false}>
-                     <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
+                     <p className="mb-8 max-w-sm font-serif text-xl italic leading-tight normal-case tracking-normal text-canvas/90 md:mb-0 md:text-3xl lg:text-4xl">
                         A source-led map of who owns Texas toll roads, who controls revenue, who gets paid first, and how finite concessions can be valued.
                      </p>
                    </ScrollReveal>
@@ -898,7 +889,7 @@ function HomePage() {
          </div>
            
            {/* Project 02 - Void */}
-           <a href="/method" id="work-link-void" className="group relative order-2 my-20 mt-20 flex min-h-[58vh] w-full flex-col items-center justify-center overflow-hidden border-y border-canvas/10 bg-ink py-24 md:my-28 md:min-h-[68vh] md:py-28">
+           <a href="/method" id="work-link-void" data-selected-work-step="1" className="selected-work-step group relative order-2 my-0 flex min-h-full w-full flex-col items-center justify-center overflow-hidden border-y border-canvas/10 bg-ink px-4 py-16 md:my-28 md:min-h-[68vh] md:px-0 md:py-28">
               {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
               <div className="relative z-10 flex flex-col items-center">
                 <ScrollReveal>
@@ -922,6 +913,18 @@ function HomePage() {
                 </ScrollReveal>
               </div>
            </a>
+             </div>
+
+             <div className="selected-works__guide-status md:hidden" aria-live="polite" aria-atomic="true">
+               <span>Guided focus</span>
+               <span className="selected-works__guide-count">{String(activeSelectedWork + 1).padStart(2, '0')} / 03</span>
+               <span className="selected-works__guide-dots" aria-hidden="true">
+                 {[0, 1, 2].map((step) => (
+                   <span key={step} className={step === activeSelectedWork ? 'is-active' : ''} />
+                 ))}
+               </span>
+             </div>
+           </div>
         </section>
 
         {/* EXPERTISE SECTION */}
@@ -1372,60 +1375,51 @@ function HomePage() {
             </div>
          </section>
 
-        {/* INTERSTITIAL SECTION */}
-        <section className="relative h-[38vh] w-full overflow-hidden md:h-[48vh]">
-           {!prefersReducedMotion && <KineticTypography />}
+        {/* INTERSTITIAL SECTION — a quiet handoff into contact */}
+        <section className="relative w-full overflow-hidden border-y border-canvas/14 bg-ink text-canvas">
+           <KineticTypography />
         </section>
 
         {/* FOOTER */}
-        <footer id="contact" className="relative w-full overflow-hidden bg-ink pt-32 text-canvas selection:bg-canvas selection:text-ink before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-24 before:bg-gradient-to-b before:from-canvas/10 before:to-transparent">
-           <Suspense fallback={null}><FooterM /></Suspense>
-
-           <div className="px-4 md:px-16 relative z-10 w-full flex flex-col">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 border-b border-canvas/20 pb-16 md:pb-32">
-                 <div className="md:col-span-8 flex flex-col items-start justify-end">
-                    <ScrollReveal blur={false}>
-                      <span className="text-canvas/50 font-sans tracking-[0.2em] text-xs uppercase mb-8 block flex items-center gap-4">
-                        <span className="status-dot" /> Projects, roles, and technical work
-                      </span>
-                    </ScrollReveal>
-                    
-                    <ScrollReveal delay={0.1} blur={false}>
-                      <h4 className="mb-12 font-serif text-[4rem] font-light uppercase leading-[0.8] tracking-normal md:text-[6rem] lg:text-[7rem]">
-                         <span className="block italic opacity-90">Send</span>
-                         <span className="block opacity-80">The Brief</span>
-                      </h4>
-                    </ScrollReveal>
-                    
-                    <ScrollReveal delay={0.2} blur={false}>
-                      <AuditIntakeForm />
-                    </ScrollReveal>
-                 </div>
-                 
-                 <div className="md:col-span-4 flex flex-col justify-end items-start md:items-end w-full space-y-16">
-                    <ScrollReveal delay={0.3} yOffset={10} blur={false}>
-                      <Suspense fallback={null}><LocalTime /></Suspense>
-                    </ScrollReveal>
-                    
-                    <ScrollReveal delay={0.4} blur={false}>
-                        <div className="grid grid-cols-2 gap-x-12 gap-y-6 text-[10px] uppercase font-sans tracking-[0.2em] opacity-70 w-full">
-                           {[...primaryNav.filter((item) => item.label !== 'Work'), ...utilityNav].map((item) => (
-                             <a
-                               key={item.href}
-                               href={item.href}
-                               id={navItemId('home-footer-link', item)}
-                               className="hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1"
-                             >
-                               {navLabel(item)}
-                             </a>
-                           ))}
-                           <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">EMAIL</a>
-                        </div>
-                     </ScrollReveal>
-                 </div>
+        <footer id="contact" className="relative w-full overflow-hidden border-t border-ink/14 bg-canvas text-ink selection:bg-ink selection:text-canvas">
+          <div className="mx-auto w-full max-w-[1800px] px-4 py-24 md:px-16 md:py-36">
+            <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-8">
+              <div className="md:col-span-5">
+                <ScrollReveal blur={false}>
+                  <span className="block text-[10px] uppercase tracking-[0.3em] text-ink/56">Contact / Direct</span>
+                  <h2 className="mt-10 max-w-[7ch] font-serif text-[4rem] font-light leading-[0.84] tracking-normal sm:text-7xl md:text-[5.5rem] lg:text-[6.3rem]">
+                    Send the <span className="italic">brief.</span>
+                  </h2>
+                  <p className="mt-10 max-w-sm text-sm leading-[1.8] text-ink/64 md:text-base">
+                    A URL, the decision in front of you, and the evidence that feels incomplete is enough to start.
+                  </p>
+                  <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="mt-8 inline-block border-b border-ink/24 pb-1 text-[10px] uppercase tracking-[0.24em] text-ink/68 transition-colors hover:border-ink hover:text-ink">
+                    sulayman.bowles@gmail.com
+                  </a>
+                </ScrollReveal>
               </div>
-              
-           </div>
+
+              <ScrollReveal delay={0.12} yOffset={12} blur={false} className="md:col-span-7 md:pl-8">
+                <AuditIntakeForm variant="editorial" tone="light" submitLabel="SEND BRIEF" />
+              </ScrollReveal>
+            </div>
+
+            <div className="mt-24 flex flex-col gap-10 border-t border-ink/14 pt-8 md:mt-32 md:flex-row md:items-end md:justify-between">
+              <Suspense fallback={null}><LocalTime /></Suspense>
+              <nav className="flex max-w-4xl flex-wrap gap-x-7 gap-y-4 text-[10px] uppercase tracking-[0.2em] text-ink/62 md:justify-end" aria-label="Footer navigation">
+                {[...primaryNav, ...utilityNav].map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    id={navItemId('home-footer-link', item)}
+                    className="border-b border-transparent pb-1 transition-colors hover:border-ink hover:text-ink"
+                  >
+                    {navLabel(item)}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </div>
         </footer>
       </main>
     </div>

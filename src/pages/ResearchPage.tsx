@@ -15,6 +15,7 @@ import {
   TechnicalPanel,
   TextLink,
 } from '../components/design/Primitives';
+import { getArticlePath } from '../content/articleRegistry';
 import { RESEARCH_ARTICLES } from '../content/researchArticles';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
@@ -33,7 +34,7 @@ const researchNotes = [
   ...RESEARCH_ARTICLES.map((article) => ({
     category: article.slug === 'technical-seo-public-data-infrastructure' ? 'Technical SEO' : 'Search systems',
     title: article.title,
-    href: `/markets/${article.slug}`,
+    href: getArticlePath(article),
     description: article.subtitle,
     date: article.dateModified ?? article.date,
   })),

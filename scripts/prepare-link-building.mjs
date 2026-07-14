@@ -278,7 +278,7 @@ function draftForQueueRow(row) {
 
 I put together a source-backed reference on AI-search crawler policy, robots directives, IndexNow, and source-page clarity:
 
-https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 
 The companion source map is here:
 
@@ -298,7 +298,7 @@ Sulayman`,
 
 Title: AI search crawler policy: source-backed map of search, training, and user-requested retrieval agents
 
-URL: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+URL: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 
 Description: A conservative technical reference on AI-search crawler policy, robots directives, IndexNow, canonical source pages, and claim boundaries. Includes a source map at https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv. It does not claim rankings, AI citations, or visibility guarantees.`,
     };
@@ -311,7 +311,7 @@ Description: A conservative technical reference on AI-search crawler policy, rob
 
 I wrote a source-backed reference on AI-search crawler policy and public source-page clarity:
 
-https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 
 The practical distinction I wanted to make is between search crawlers, training crawlers, and user-requested retrieval agents. The post also covers robots directives, IndexNow, canonical URLs, and why crawler access is only a discovery condition, not a ranking or citation guarantee.
 
@@ -355,7 +355,7 @@ I know contributor access is editorially gated, so this is a source note rather 
 
 I published a conservative reference on AI-search crawler policy, source-page clarity, robots directives, and IndexNow:
 
-https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 
 Source map:
 https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv
@@ -409,7 +409,7 @@ function validatePack() {
     'tracker missing GitHub profile owned or won action',
   );
   assert(tracker.rows.some((row) => row.prospect_name === 'LinkedIn profile' && row.status === 'owned'), 'tracker missing LinkedIn profile owned action');
-  assert(tracker.rows.some((row) => row.target_page.includes('/markets/ai-search-crawler-policy')), 'tracker missing AI crawler policy prospects');
+  assert(tracker.rows.some((row) => row.target_page.includes('/research/ai-crawlers/ai-search-crawler-policy')), 'tracker missing AI crawler policy prospects');
   assert(tracker.rows.some((row) => row.target_page.includes('/atlas/sample-crawl')), 'tracker missing Atlas sample crawl prospects');
   assert(tracker.rows.some((row) => row.target_page.includes('/austin-technical-seo')), 'tracker missing Austin technical SEO prospects');
 

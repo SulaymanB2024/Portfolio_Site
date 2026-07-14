@@ -46,14 +46,15 @@ export default function CandlestickChart({ className = '' }: { className?: strin
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationFrameId: number;
-    let dpr = window.devicePixelRatio || 1;
+    let animationFrameId = 0;
+    const isMobile = window.innerWidth < 768;
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5);
     let width = 0;
     let height = 0;
     
     let candleWidth = 6;
     let spacing = 3;
-    let panSpeed = 0.5; // pixels per frame
+    const panSpeed = isMobile ? 0.4 : 0.5; // pixels per rendered frame
     let currentPan = 0; // total panned amount
     let frame = 0;
 
@@ -112,11 +113,30 @@ export default function CandlestickChart({ className = '' }: { className?: strin
       mouseY = -1;
     };
 
-    canvas.addEventListener('mousemove', handleMouseMove);
-    canvas.addEventListener('mouseleave', handleMouseLeave);
+    if (!isMobile) {
+      canvas.addEventListener('mousemove', handleMouseMove);
+      canvas.addEventListener('mouseleave', handleMouseLeave);
+    }
     window.addEventListener('resize', handleResize);
 
-    const render = () => {
+    let isVisible = false;
+    let lastFrameTime = 0;
+
+    const scheduleRender = () => {
+      if (!animationFrameId && isVisible && !document.hidden) {
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    const render = (frameTime: number) => {
+      animationFrameId = 0;
+      if (!isVisible || document.hidden) return;
+
+      if (isMobile && frameTime - lastFrameTime < 1000 / 30) {
+        scheduleRender();
+        return;
+      }
+      lastFrameTime = frameTime;
       frame++;
       ctx.clearRect(0, 0, width, height);
 
@@ -234,15 +254,39 @@ export default function CandlestickChart({ className = '' }: { className?: strin
           tooltipRef.current.style.opacity = '0';
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      scheduleRender();
     };
 
-    render();
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        scheduleRender();
+      } else if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = 0;
+      }
+    }, { rootMargin: '120px 0px' });
+
+    const handleVisibilityChange = () => {
+      if (document.hidden && animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = 0;
+      } else {
+        scheduleRender();
+      }
+    };
+
+    observer.observe(canvas);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('mouseleave', handleMouseLeave);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (!isMobile) {
+        canvas.removeEventListener('mousemove', handleMouseMove);
+        canvas.removeEventListener('mouseleave', handleMouseLeave);
+      }
       window.removeEventListener('resize', handleResize);
     };
   }, []);

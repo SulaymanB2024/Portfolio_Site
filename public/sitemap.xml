@@ -77,7 +77,7 @@
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/viralbench-codex-agent-harness</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -86,17 +86,17 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sulayman-bowles.dev/markets/ai-search-crawler-policy</loc>
+    <loc>https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure</loc>
     <lastmod>2026-07-12</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure</loc>
-    <lastmod>2026-07-12</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://sulayman-bowles.dev/markets/canonical-identity-personal-seo</loc>
+    <loc>https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo</loc>
     <lastmod>2026-07-12</lastmod>
     <priority>0.6</priority>
   </url>

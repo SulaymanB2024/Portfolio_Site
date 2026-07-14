@@ -1,4 +1,4 @@
-import { ALL_ARTICLES } from '../content/articleRegistry';
+import { ALL_ARTICLES, getArticlePath } from '../content/articleRegistry';
 import { PROFILE_FACTS } from '../content/profileFacts';
 import { VIRALBENCH_ARTICLE_PATH, VIRALBENCH_ARTICLE_TITLE } from '../content/viralBenchArticle';
 import { getCanonicalRoutes, SITE_LASTMOD } from './routes';
@@ -38,7 +38,7 @@ ${urls}
 export function buildLlmsText() {
   const articleLines = ALL_ARTICLES
     .filter((article) => article.indexable !== false)
-    .map((article) => `- ${article.title}: ${absoluteUrl(`/markets/${article.slug}`)}`)
+    .map((article) => `- ${article.title}: ${absoluteUrl(getArticlePath(article))}`)
     .join('\n');
 
   return `# Sulayman Bowles

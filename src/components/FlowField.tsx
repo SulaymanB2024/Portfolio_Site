@@ -38,7 +38,7 @@ export function FlowField({ className = '', density = 40 }: FlowFieldProps) {
 
     const particles: { x: number; y: number; vx: number; vy: number; length: number }[] = [];
     const isMobile = window.innerWidth < 768;
-    const numParticles = isMobile ? density * 8 : density * 20;
+    const numParticles = isMobile ? density * 4 : density * 20;
 
     for (let i = 0; i < numParticles; i++) {
       particles.push({
@@ -52,12 +52,19 @@ export function FlowField({ className = '', density = 40 }: FlowFieldProps) {
 
     let animationFrameId: number;
     let time = 0;
+    let lastFrameTime = 0;
 
-    const render = () => {
+    const render = (frameTime: number) => {
       if (!isInViewRef.current) {
         animationFrameId = requestAnimationFrame(render);
         return;
       }
+
+      if (isMobile && frameTime - lastFrameTime < 1000 / 30) {
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
+      lastFrameTime = frameTime;
       
       const vMultiplier = 1 + (Math.abs(smoothVelocity.get()) * 0.002);
       time += 0.002 * vMultiplier; // Accelerate time progression with scroll
@@ -94,7 +101,7 @@ export function FlowField({ className = '', density = 40 }: FlowFieldProps) {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    animationFrameId = requestAnimationFrame(render);
 
     const handleResize = () => {
       width = canvas.offsetWidth;

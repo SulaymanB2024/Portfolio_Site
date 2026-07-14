@@ -14,9 +14,9 @@ Key source surfaces: [AI information](https://sulayman-bowles.dev/ai-information
 - `/atlas/sample-crawl`
 - `/simple`
 - `/markets`
-- `/markets/ai-search-crawler-policy`
-- `/markets/technical-seo-public-data-infrastructure`
-- `/markets/canonical-identity-personal-seo`
+- `/research/ai-crawlers/ai-search-crawler-policy`
+- `/research/search-console/technical-seo-public-data-infrastructure`
+- `/research/personal-seo/canonical-identity-personal-seo`
 - `/markets/who-owns-texas-toll-roads`
 - `/method`
 - `/void-agency`

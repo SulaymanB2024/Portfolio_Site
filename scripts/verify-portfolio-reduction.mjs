@@ -78,6 +78,17 @@ assert(legacyAliasIndex >= 0 && legacyAliasIndex < filesystemRouteIndex, 'Legacy
 assert(securityRouteIndex >= 0 && securityRouteIndex < filesystemRouteIndex, 'Security headers must run before filesystem and 404 handling');
 assert(filesystemRouteIndex >= 0 && filesystemRouteIndex < notFoundRouteIndex, 'Vercel filesystem handling must precede the branded 404 catch-all');
 
+const taxonomyRedirects = new Map([
+  ['/markets/ai-search-crawler-policy', '/research/ai-crawlers/ai-search-crawler-policy'],
+  ['/markets/technical-seo-public-data-infrastructure', '/research/search-console/technical-seo-public-data-infrastructure'],
+  ['/markets/canonical-identity-personal-seo', '/research/personal-seo/canonical-identity-personal-seo'],
+]);
+for (const [source, destination] of taxonomyRedirects) {
+  const redirectIndex = vercelConfig.routes.findIndex((route) => route.src === source && route.headers?.Location === destination && route.status === 308);
+  assert(redirectIndex >= 0 && redirectIndex < filesystemRouteIndex, `Permanent taxonomy redirect missing or misordered: ${source}`);
+  assert(!llmsText.includes(`sulayman-bowles.dev${source}`), `llms.txt still exposes migrated URL: ${source}`);
+}
+
 for (const artifact of ['Atlas SEO Audit Console', 'Who Owns the Toll Roads in Texas?', 'ViralBench + Codex Improvement Harness', 'Austin Crawlability Pilot', 'Void Agency', 'Sulayman Bowles Technical Ledger']) {
   assert(textFromHtml(workHtml).includes(artifact), `Work page missing artifact: ${artifact}`);
 }
@@ -87,15 +98,15 @@ assert(workHtml.includes('href="/markets/who-owns-texas-toll-roads"'), 'Texas to
 for (const researchCategory of ['Search systems', 'Technical SEO', 'Markets and investing', 'Product and data']) {
   assert(textFromHtml(researchHtml).includes(researchCategory), `Research hub missing category: ${researchCategory}`);
 }
-for (const nonFinanceTitle of ['Crawler Policy Comes Before Visibility', 'Technical SEO as Public Data Infrastructure', 'Canonical Identity for Personal SEO']) {
+for (const nonFinanceTitle of ['AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot', 'Technical SEO as Public Data Infrastructure', 'Canonical Identity for Personal SEO']) {
   assert(!textFromHtml(marketsHtml).includes(nonFinanceTitle), `Markets filter duplicates non-finance research: ${nonFinanceTitle}`);
 }
 assert(textFromHtml(marketsHtml).includes('Who Owns the Toll Roads in Texas?'), 'Markets filter is missing the current infrastructure-investing article');
 
 for (const articlePath of [
-  'dist/markets/ai-search-crawler-policy/index.html',
-  'dist/markets/technical-seo-public-data-infrastructure/index.html',
-  'dist/markets/canonical-identity-personal-seo/index.html',
+  'dist/research/ai-crawlers/ai-search-crawler-policy/index.html',
+  'dist/research/search-console/technical-seo-public-data-infrastructure/index.html',
+  'dist/research/personal-seo/canonical-identity-personal-seo/index.html',
 ]) {
   const body = textFromHtml(read(articlePath)).toLowerCase();
   assert(!body.includes('not investment advice'), `${articlePath} exposes an investment disclaimer on non-finance research`);

@@ -56,6 +56,9 @@
     { "src": "/entity-profile", "headers": { "Location": "/ai-information" }, "status": 308 },
     { "src": "/source-information", "headers": { "Location": "/ai-information" }, "status": 308 },
     { "src": "/research-assets", "headers": { "Location": "/research" }, "status": 308 },
+    { "src": "/markets/ai-search-crawler-policy", "headers": { "Location": "/research/ai-crawlers/ai-search-crawler-policy" }, "status": 308 },
+    { "src": "/markets/technical-seo-public-data-infrastructure", "headers": { "Location": "/research/search-console/technical-seo-public-data-infrastructure" }, "status": 308 },
+    { "src": "/markets/canonical-identity-personal-seo", "headers": { "Location": "/research/personal-seo/canonical-identity-personal-seo" }, "status": 308 },
     {
       "src": "/(.*)",
       "headers": {

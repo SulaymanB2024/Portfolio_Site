@@ -48,16 +48,16 @@ const routesWithVoidOrganization = new Set(['aiInformation', 'method', 'voidAgen
 const atlasSoftwareRoutes = new Set(['atlas', 'atlasSampleCrawl', 'aiInformation']);
 
 const marketFiles = [
-  'dist/markets/ai-search-crawler-policy/index.html',
-  'dist/markets/technical-seo-public-data-infrastructure/index.html',
-  'dist/markets/canonical-identity-personal-seo/index.html',
+  'dist/research/ai-crawlers/ai-search-crawler-policy/index.html',
+  'dist/research/search-console/technical-seo-public-data-infrastructure/index.html',
+  'dist/research/personal-seo/canonical-identity-personal-seo/index.html',
   'dist/markets/who-owns-texas-toll-roads/index.html',
 ];
 
 const publicMarketLastmods = {
-  '/markets/ai-search-crawler-policy': '2026-07-12',
-  '/markets/technical-seo-public-data-infrastructure': '2026-07-12',
-  '/markets/canonical-identity-personal-seo': '2026-07-12',
+  '/research/ai-crawlers/ai-search-crawler-policy': '2026-07-14',
+  '/research/search-console/technical-seo-public-data-infrastructure': '2026-07-12',
+  '/research/personal-seo/canonical-identity-personal-seo': '2026-07-12',
   '/markets/who-owns-texas-toll-roads': '2026-07-11',
 };
 
@@ -263,7 +263,7 @@ assertVisibleText('dist/research/index.html', [
   'Markets and investing',
   'Product and data',
   'Seven Notes and Artifacts',
-  'Crawler Policy Comes Before Visibility',
+  'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot',
   'Technical SEO as Public Data Infrastructure',
   'Canonical Identity for Personal SEO',
   'Atlas Sample Crawl Run',
@@ -281,7 +281,7 @@ assertHiddenText('dist/research/index.html', [
 assertNoVisibleHref('dist/research/index.html', '/research/authority-assets.json');
 assertNoVisibleHref('dist/research/index.html', '/llms.txt');
 assertHref('dist/research/index.html', '/work', 'Selected work');
-assertHref('dist/research/index.html', '/markets/ai-search-crawler-policy', 'Crawler Policy Comes Before Visibility');
+assertHref('dist/research/index.html', '/research/ai-crawlers/ai-search-crawler-policy', 'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot');
 
 const visibleArtifactTextRejects = [
   'Authority asset JSON',
@@ -488,8 +488,9 @@ assertHref('dist/case-studies/technical-seo-audit/index.html', '/contact', 'Requ
   assert(faq?.mainEntity?.length >= 4, 'viralbench article: FAQ schema should match visible FAQ content');
   assert(webPage?.mainEntity?.['@id'] === article['@id'], 'viralbench article: WebPage should point to BlogPosting');
   assert(article.datePublished === '2026-07-09', 'viralbench article: wrong publication date');
+  assert(article.dateModified === '2026-07-14', 'viralbench article: wrong modification date');
   assert(article.citation?.includes('https://github.com/JibranK12345/Viral-Bench'), 'viralbench article: audited repository citation missing');
-  assert(ogImage === `${siteUrl}/images/viralbench-codex-harness.svg`, 'viralbench article: unique OG image missing');
+  assert(ogImage === `${siteUrl}/images/viralbench-agent-harness-hero.png`, 'viralbench article: unique OG image missing');
   assertVisibleText(file, [
     'Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench',
     'The ViralBench agent tries to make a successful post. Codex tries to make the ViralBench agent more reliable and effective.',
@@ -596,7 +597,7 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
   assert(!llmsText.includes('## Provider Discovery Plan'), 'llms.txt: provider discovery planning belongs in internal operations, not the public reference');
   assert(llmsText.includes('Current PDF resume: https://sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf'), 'llms.txt: missing current PDF resume link');
   assert(llmsText.includes('## Public Work and Research'), 'llms.txt: missing public work and research section');
-  assert(llmsText.includes('Crawler Policy Comes Before Visibility'), 'llms.txt: missing crawler policy article');
+  assert(llmsText.includes('AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot'), 'llms.txt: missing crawler policy article');
   assert(llmsText.includes('Technical SEO as Public Data Infrastructure'), 'llms.txt: missing public data infrastructure article');
   assert(llmsText.includes('Canonical Identity Beats More Content'), 'llms.txt: missing canonical identity article');
   assert(llmsText.includes('Who Owns the Toll Roads in Texas?'), 'llms.txt: missing Texas toll-road ownership article');
@@ -645,6 +646,16 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
     assert(!publicSitemapText.includes(loc), `public sitemap: archived URL should be excluded: ${loc}`);
   }
 
+  for (const pathname of [
+    '/markets/ai-search-crawler-policy',
+    '/markets/technical-seo-public-data-infrastructure',
+    '/markets/canonical-identity-personal-seo',
+  ]) {
+    const loc = `<loc>${absolutePath(pathname)}</loc>`;
+    assert(!sitemapText.includes(loc), `dist sitemap: migrated URL should be excluded: ${loc}`);
+    assert(!publicSitemapText.includes(loc), `public sitemap: migrated URL should be excluded: ${loc}`);
+  }
+
   assert(!sitemapText.includes('#'), 'dist sitemap should not contain hash-only URLs');
   assert(!publicSitemapText.includes('#'), 'public sitemap should not contain hash-only URLs');
 }
@@ -678,6 +689,9 @@ assertHref('dist/method/index.html', '/contact', 'Request an audit');
   assert(redirects.some((item) => item.source === '/entity-profile' && item.destination === '/ai-information'), 'vercel: missing /entity-profile redirect');
   assert(redirects.some((item) => item.source === '/source-information' && item.destination === '/ai-information'), 'vercel: missing /source-information redirect');
   assert(redirects.some((item) => item.source === '/research-assets' && item.destination === '/research'), 'vercel: missing /research-assets redirect');
+  assert(redirects.some((item) => item.source === '/markets/ai-search-crawler-policy' && item.destination === '/research/ai-crawlers/ai-search-crawler-policy'), 'vercel: missing crawler-policy taxonomy redirect');
+  assert(redirects.some((item) => item.source === '/markets/technical-seo-public-data-infrastructure' && item.destination === '/research/search-console/technical-seo-public-data-infrastructure'), 'vercel: missing technical-SEO taxonomy redirect');
+  assert(redirects.some((item) => item.source === '/markets/canonical-identity-personal-seo' && item.destination === '/research/personal-seo/canonical-identity-personal-seo'), 'vercel: missing personal-SEO taxonomy redirect');
 }
 
 {
@@ -720,7 +734,8 @@ for (const file of marketFiles) {
   assert(article.dateModified === publicMarketLastmods[pathname], `${file}: Article schema should carry current dateModified`);
   assert(ogImage && ogImage === twitterImage, `${file}: OG and Twitter images must match`);
   assert(ogImage === (article.image?.url ?? article.image), `${file}: Article image must match OG/Twitter image`);
-  assert(title.replaceAll('&amp;', '&').length <= 62, `${file}: title is too long (${title.length})`);
+  const titleLimit = pathname === '/research/ai-crawlers/ai-search-crawler-policy' ? 79 : 62;
+  assert(title.replaceAll('&amp;', '&').length <= titleLimit, `${file}: title is too long (${title.length})`);
   assert(description.length >= 145 && description.length <= 180, `${file}: description should be expanded to 145-180 chars (${description.length})`);
 }
 
@@ -731,16 +746,32 @@ for (const file of archivedMarketFiles) {
   assertVisibleText(file, ['Archived', 'not investment advice', 'current recommendation']);
 }
 
-assertVisibleText('dist/markets/ai-search-crawler-policy/index.html', [
-  'Crawler Policy Comes Before Visibility',
-  'Research Sources',
-  'OpenAI Crawlers',
+assertVisibleText('dist/research/ai-crawlers/ai-search-crawler-policy/index.html', [
+  'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot',
+  'AI crawler comparison table',
+  'Search crawler versus training crawler versus user-triggered crawler',
+  'Allow AI search but block training',
+  'Block all AI crawlers',
+  'What robots.txt cannot accomplish',
+  'Verify crawler behavior in server logs',
+  'Source Ledger',
+  'OpenAI crawler documentation',
   'Anthropic crawler guidance',
-  'Perplexity Crawlers',
-  'IndexNow documentation',
+  'Perplexity crawler documentation',
+  'OpenAI OAI-SearchBot IP ranges',
 ]);
 
-assertVisibleText('dist/markets/technical-seo-public-data-infrastructure/index.html', [
+{
+  const html = read('dist/research/ai-crawlers/ai-search-crawler-policy/index.html');
+  for (const agent of ['OAI-SearchBot', 'GPTBot', 'ChatGPT-User', 'Claude-SearchBot', 'ClaudeBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User']) {
+    assert(html.includes(agent), `AI crawler guide: missing exact user-agent ${agent}`);
+  }
+  assert((html.match(/<table>/g) ?? []).length >= 1, 'AI crawler guide: missing crawler comparison table');
+  assert((html.match(/User-agent: GPTBot/g) ?? []).length >= 2, 'AI crawler guide: missing copy-ready GPTBot policies');
+  assert(html.includes('Last verified'), 'AI crawler guide: missing last-verified dates');
+}
+
+assertVisibleText('dist/research/search-console/technical-seo-public-data-infrastructure/index.html', [
   'Technical SEO as Public Data Infrastructure',
   'Research Sources',
   'Google structured data introduction',
@@ -748,7 +779,7 @@ assertVisibleText('dist/markets/technical-seo-public-data-infrastructure/index.h
   'SEC EDGAR APIs',
 ]);
 
-assertVisibleText('dist/markets/canonical-identity-personal-seo/index.html', [
+assertVisibleText('dist/research/personal-seo/canonical-identity-personal-seo/index.html', [
   'Canonical Identity Beats More Content',
   'Research Sources',
   'Google canonicalization guide',

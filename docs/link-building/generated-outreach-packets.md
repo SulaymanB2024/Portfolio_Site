@@ -14,14 +14,14 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 | 1 | UT Austin Student Government | existing-mention | https://sulayman-bowles.dev/ai-information | AI information source graph | Confirm mention and contact owner |
 | 1 | McCombs School of Business | academic | https://sulayman-bowles.dev/resume | Resume | Find relevant program/profile owner |
 | 1 | Texas Venture Labs | academic | https://sulayman-bowles.dev/atlas | Atlas project | Verify eligibility and contact path |
-| 1 | Search Engine Land | technical-seo | https://sulayman-bowles.dev/markets/ai-search-crawler-policy | AI crawler policy | Find contributor/editor contact |
-| 1 | Search Engine Journal | technical-seo | https://sulayman-bowles.dev/markets/ai-search-crawler-policy | AI crawler policy | Find contributor/editor contact |
-| 1 | SEOFOMO | technical-seo | https://sulayman-bowles.dev/markets/ai-search-crawler-policy | AI crawler policy | Find submission/contact path |
-| 1 | Detailed | technical-seo | https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure | Public data infrastructure | Research fit and contact |
+| 1 | Search Engine Land | technical-seo | https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy | AI crawler policy | Find contributor/editor contact |
+| 1 | Search Engine Journal | technical-seo | https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy | AI crawler policy | Find contributor/editor contact |
+| 1 | SEOFOMO | technical-seo | https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy | AI crawler policy | Find submission/contact path |
+| 1 | Detailed | technical-seo | https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure | Public data infrastructure | Research fit and contact |
 | 1 | TechnicalSEO.com | technical-seo | https://sulayman-bowles.dev/atlas/sample-crawl | Atlas sample crawl | Research submission path |
-| 1 | OpenAI developer community | ai-search | https://sulayman-bowles.dev/markets/ai-search-crawler-policy | AI crawler policy | Post only if community rules allow |
-| 1 | Perplexity docs/community | ai-search | https://sulayman-bowles.dev/markets/ai-search-crawler-policy | AI crawler policy | Research discussion channels |
-| 1 | Anthropic support/community | ai-search | https://sulayman-bowles.dev/markets/ai-search-crawler-policy | AI crawler policy | Research discussion channels |
+| 1 | OpenAI developer community | ai-search | https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy | AI crawler policy | Post only if community rules allow |
+| 1 | Perplexity docs/community | ai-search | https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy | AI crawler policy | Research discussion channels |
+| 1 | Anthropic support/community | ai-search | https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy | AI crawler policy | Research discussion channels |
 | 1 | Austin Chamber | local-austin | https://sulayman-bowles.dev/austin-technical-seo | Austin technical SEO | Check member/directory requirements |
 | 1 | Built In Austin | local-austin | https://sulayman-bowles.dev/austin-technical-seo | Austin technical SEO | Research contributor/company profile options |
 
@@ -188,7 +188,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: technical-seo
 - Prospect URL: https://searchengineland.com/
-- Target page: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Target page: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 - Asset: AI crawler policy
 - Angle: Source-backed AI crawler policy pitch
 - Next action: Find contributor/editor contact
@@ -209,7 +209,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: technical-seo
 - Prospect URL: https://www.searchenginejournal.com/
-- Target page: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Target page: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 - Asset: AI crawler policy
 - Angle: AI search crawler policy and technical SEO source clarity
 - Next action: Find contributor/editor contact
@@ -230,7 +230,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: technical-seo
 - Prospect URL: https://seofomo.co/
-- Target page: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Target page: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 - Asset: AI crawler policy
 - Angle: Newsletter mention for AI crawler policy source map
 - Next action: Find submission/contact path
@@ -251,7 +251,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: technical-seo
 - Prospect URL: https://detailed.com/
-- Target page: https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure
+- Target page: https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure
 - Asset: Public data infrastructure
 - Angle: Editorial pitch on technical SEO as data infrastructure
 - Next action: Research fit and contact
@@ -293,7 +293,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: ai-search
 - Prospect URL: https://community.openai.com/
-- Target page: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Target page: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 - Asset: AI crawler policy
 - Angle: Source-backed discussion of search vs training crawlers
 - Next action: Post only if community rules allow
@@ -314,7 +314,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: ai-search
 - Prospect URL: https://docs.perplexity.ai/
-- Target page: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Target page: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 - Asset: AI crawler policy
 - Angle: Resource citing crawler distinctions
 - Next action: Research discussion channels
@@ -330,7 +330,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: ai-search
 - Prospect URL: https://support.claude.com/
-- Target page: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Target page: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 - Asset: AI crawler policy
 - Angle: Resource citing crawler distinctions
 - Next action: Research discussion channels

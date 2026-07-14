@@ -15,7 +15,8 @@ function Root() {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
+    const prefersNativeScrolling = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
+    if (prefersReducedMotion || prefersNativeScrolling) {
       return;
     }
 

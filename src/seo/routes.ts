@@ -1,4 +1,4 @@
-import { ALL_ARTICLES } from '../content/articleRegistry';
+import { ALL_ARTICLES, getArticlePath, getLegacyArticlePath } from '../content/articleRegistry';
 import { isInvestmentMemo } from '../content/articleModels';
 import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
 import {
@@ -12,6 +12,7 @@ import {
   VIRALBENCH_ARTICLE_DESCRIPTION,
   VIRALBENCH_ARTICLE_EXCERPT,
   VIRALBENCH_ARTICLE_IMAGE,
+  VIRALBENCH_ARTICLE_MODIFIED_DATE,
   VIRALBENCH_ARTICLE_PATH,
   VIRALBENCH_ARTICLE_SEO_TITLE,
   VIRALBENCH_ARTICLE_TITLE,
@@ -379,7 +380,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'article',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: VIRALBENCH_ARTICLE_DATE,
+    lastmod: VIRALBENCH_ARTICLE_MODIFIED_DATE,
     staticSummary: VIRALBENCH_ARTICLE_EXCERPT,
     image: VIRALBENCH_ARTICLE_IMAGE,
     jsonLd: viralBenchArticleJsonLd(),
@@ -407,7 +408,8 @@ const CORE_ROUTES: SeoRoute[] = [
 ];
 
 const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
-  const path = `/markets/${article.slug}`;
+  const path = getArticlePath(article);
+  const legacyPath = getLegacyArticlePath(article);
   const isIndexable = article.indexable !== false;
   const datePublished = article.date.replaceAll('.', '-');
   const dateModified = (article.dateModified ?? article.date).replaceAll('.', '-');
@@ -416,8 +418,8 @@ const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
 
   return {
     path,
-    aliases: [],
-    title: article.slug === TEXAS_TOLL_ARTICLE_SLUG ? article.seoTitle : `${article.seoTitle} | Sulayman Bowles`,
+    aliases: legacyPath ? [legacyPath] : [],
+    title: article.slug === TEXAS_TOLL_ARTICLE_SLUG || article.seoTitle.length > 60 ? article.seoTitle : `${article.seoTitle} | Sulayman Bowles`,
     description: article.seoDescription,
     h1: article.title,
     section: 'research-article',

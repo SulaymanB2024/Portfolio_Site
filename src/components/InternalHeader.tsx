@@ -5,9 +5,10 @@ type InternalHeaderProps = {
   activePath: string;
   tone?: 'light' | 'dark';
   variant?: 'default' | 'home' | 'final-frame';
+  minimalBrand?: boolean;
 };
 
-export function InternalHeader({ activePath, tone = 'light', variant = 'default' }: InternalHeaderProps) {
+export function InternalHeader({ activePath, tone = 'light', variant = 'default', minimalBrand = false }: InternalHeaderProps) {
   const activeItem = primaryNav.find((item) => isNavItemActive(activePath, item.href));
   const [routeNote, setRouteNote] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -104,9 +105,11 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
         <div className="flex min-w-0 flex-1 items-center px-5">
           <a href="/" id="header-brand-link-mobile" className="min-w-0">
             <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
-            <span className={`site-header-tagline mt-2 block truncate font-serif text-sm italic normal-case leading-none tracking-normal ${textMutedClass}`}>
-              Technical SEO · Search Systems · Finance Research
-            </span>
+            {!minimalBrand && (
+              <span className={`site-header-tagline mt-2 block truncate font-serif text-sm italic normal-case leading-none tracking-normal ${textMutedClass}`}>
+                Technical SEO · Search Systems · Finance Research
+              </span>
+            )}
           </a>
         </div>
         <button
@@ -160,12 +163,14 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
       <div className={`${isFinalFrame ? 'relative' : 'site-header'} site-header-editorial mx-auto hidden min-h-[82px] max-w-[1480px] items-stretch ${bgClass} text-[10px] uppercase md:grid md:grid-cols-[minmax(265px,0.72fr)_minmax(0,1.28fr)]`}>
         <a href="/" id="header-brand-link" className={`flex min-w-0 flex-col justify-center border-r px-8 transition-opacity duration-200 hover:opacity-72 ${menuBorderClass}`}>
           <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.38em] ${textClass}`}>SULAYMAN BOWLES</span>
-          <span className={`site-header-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
-            Technical SEO · Search Systems · Finance Research
-          </span>
+          {!minimalBrand && (
+            <span className={`site-header-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
+              Technical SEO · Search Systems · Finance Research
+            </span>
+          )}
         </a>
 
-        <div className="grid min-w-0 grid-rows-[1fr_auto]">
+        <div className={`grid min-w-0 ${minimalBrand ? 'grid-rows-1' : 'grid-rows-[1fr_auto]'}`}>
           <nav className="flex min-w-0 items-stretch justify-end" aria-label="Main navigation">
           {primaryNav.map((item, index) => {
             const active = isNavItemActive(activePath, item.href);
@@ -193,10 +198,12 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
             );
           })}
           </nav>
-          <div className={`flex min-h-6 items-center justify-end border-t px-4 font-serif text-[11px] italic normal-case leading-none tracking-normal ${menuBorderClass} ${textMutedClass}`}>
-            <span className={showRouteNote ? '' : 'sr-only'}>{displayedRouteNote}</span>
-            {!showRouteNote && <span aria-hidden="true">Index of work, systems, and supporting links.</span>}
-          </div>
+          {!minimalBrand && (
+            <div className={`flex min-h-6 items-center justify-end border-t px-4 font-serif text-[11px] italic normal-case leading-none tracking-normal ${menuBorderClass} ${textMutedClass}`}>
+              <span className={showRouteNote ? '' : 'sr-only'}>{displayedRouteNote}</span>
+              {!showRouteNote && <span aria-hidden="true">Index of work, systems, and supporting links.</span>}
+            </div>
+          )}
         </div>
       </div>
     </header>

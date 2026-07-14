@@ -31,8 +31,8 @@
     },
     {
       "priority": 1,
-      "name": "Crawler Policy Comes Before Visibility",
-      "url": "https://sulayman-bowles.dev/markets/ai-search-crawler-policy",
+      "name": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
+      "url": "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
       "type": "research_note",
       "preferred_anchor": "crawler policy for public websites",
       "audiences": ["technical SEO", "search visibility", "web developers", "search policy writers"],
@@ -47,7 +47,7 @@
       "preferred_anchor": "Texas toll road ownership and economics",
       "audiences": ["infrastructure investing", "Texas transportation", "public finance", "project finance"],
       "pitch_angle": "Source-led ownership map separating state title, public authorities, private concession rights, sponsor equity, project debt, billing, and residual control across Texas toll roads.",
-      "supporting_assets": ["https://sulayman-bowles.dev/markets", "https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure"]
+      "supporting_assets": ["https://sulayman-bowles.dev/markets", "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"]
     },
     {
       "priority": 1,
@@ -72,7 +72,7 @@
     {
       "priority": 2,
       "name": "Technical SEO as Public Data Infrastructure",
-      "url": "https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure",
+      "url": "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
       "type": "research_note",
       "preferred_anchor": "technical SEO as public data infrastructure",
       "audiences": ["technical SEO", "data infrastructure", "public discovery", "structured data"],
@@ -82,7 +82,7 @@
     {
       "priority": 2,
       "name": "Canonical Identity for Personal SEO",
-      "url": "https://sulayman-bowles.dev/markets/canonical-identity-personal-seo",
+      "url": "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
       "type": "research_note",
       "preferred_anchor": "canonical identity for personal SEO",
       "audiences": ["personal SEO", "founder profiles", "structured data", "profile cleanup"],

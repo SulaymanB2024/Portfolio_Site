@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 
 export function GeometricPattern() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -11,7 +12,8 @@ export function GeometricPattern() {
 
     let width = 0;
     let height = 0;
-    let dpr = window.devicePixelRatio || 1;
+    const isMobile = window.innerWidth < 768;
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5);
 
     interface Particle {
       x: number;
@@ -24,7 +26,7 @@ export function GeometricPattern() {
     }
 
     const particles: Particle[] = [];
-    const numParticles = 800;
+    const numParticles = isMobile ? 220 : 800;
 
     const init = () => {
       width = canvas.offsetWidth;
@@ -62,9 +64,26 @@ export function GeometricPattern() {
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
+    let isVisible = false;
+    let lastFrameTime = 0;
 
-    const render = () => {
+    const scheduleRender = () => {
+      if (!animationFrameId && isVisible && !document.hidden) {
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    const render = (frameTime: number) => {
+        animationFrameId = 0;
+        if (!isVisible || document.hidden) return;
+
+        if (isMobile && frameTime - lastFrameTime < 1000 / 30) {
+          scheduleRender();
+          return;
+        }
+        lastFrameTime = frameTime;
+
         // Draw slightly transparent black for motion trails
         ctx.fillStyle = 'rgba(7, 7, 7, 0.2)'; 
         ctx.fillRect(0, 0, width, height);
@@ -117,20 +136,42 @@ export function GeometricPattern() {
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        animationFrameId = requestAnimationFrame(render);
+        scheduleRender();
     };
 
-    render();
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        scheduleRender();
+      } else if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = 0;
+      }
+    }, { rootMargin: '120px 0px' });
+
+    const handleVisibilityChange = () => {
+      if (document.hidden && animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = 0;
+      } else {
+        scheduleRender();
+      }
+    };
+
+    observer.observe(canvas);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', init);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
   return (
-    <div className="w-full h-full absolute inset-0 overflow-hidden bg-ink pointer-events-none z-0">
+    <div ref={containerRef} className="w-full h-full absolute inset-0 overflow-hidden bg-ink pointer-events-none z-0">
       <canvas ref={canvasRef} className="w-full h-full block" role="presentation" aria-hidden="true" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--color-ink)_100%)] opacity-60" />
     </div>

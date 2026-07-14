@@ -158,6 +158,22 @@ function buildHead(route: SeoRoute, assetTags: string) {
         letter-spacing: 0.12em;
         text-transform: uppercase;
       }
+      #seo-static-summary figure {
+        margin: 1.5rem 0 2rem;
+      }
+      #seo-static-summary figcaption {
+        margin-bottom: 0.75rem;
+        line-height: 1.6;
+      }
+      #seo-static-summary pre {
+        overflow-x: auto;
+        padding: 1rem;
+        border: 1px solid rgba(8, 8, 7, 0.16);
+        background: rgba(8, 8, 7, 0.05);
+        font-size: 0.78rem;
+        line-height: 1.6;
+        white-space: pre;
+      }
       .app-mounted #seo-static-summary {
         display: none;
       }

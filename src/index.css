@@ -14,9 +14,91 @@
   --radius-soft: 16px;
 }
 
-/* ViralBench long-form research article */
+/* ViralBench article refinements within the shared toll-road long-form system. */
+.viralbench-page-visual {
+  overflow: hidden;
+  border: 1px solid var(--toll-line);
+  background: #11110f;
+}
+
+.viralbench-page-visual--hero {
+  margin: 2rem 0 0;
+}
+
+.viralbench-page-visual--inline {
+  margin: 3rem 0;
+}
+
+.viralbench-page-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1672 / 941;
+  object-fit: cover;
+}
+
+.viralbench-toll-article .toll-article-hero h1 {
+  max-width: 15ch !important;
+  font-size: clamp(3rem, 6.25vw, 7rem) !important;
+}
+
+.viralbench-toll-article .toll-article-hero__display-title {
+  max-width: 20ch;
+}
+
+.viralbench-toll-article .article-table-wrap {
+  margin: 2.4rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--toll-line);
+}
+
+.viralbench-toll-article .article-table-wrap table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.viralbench-toll-article .article-table-wrap th,
+.viralbench-toll-article .article-table-wrap td {
+  border-right: 1px solid var(--toll-line);
+  border-bottom: 1px solid var(--toll-line);
+  padding: 0.85rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.viralbench-toll-article .article-table-wrap tr:last-child td {
+  border-bottom: 0;
+}
+
+.viralbench-toll-article .article-table-wrap th:last-child,
+.viralbench-toll-article .article-table-wrap td:last-child {
+  border-right: 0;
+}
+
+.viralbench-toll-article .article-table-wrap th {
+  color: var(--color-canvas);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.viralbench-toll-article .article-table-wrap td {
+  color: color-mix(in srgb, var(--color-canvas) 64%, transparent);
+}
+
+.viralbench-toll-article .article-notes {
+  margin-top: 2rem;
+  border-top: 1px solid var(--toll-line);
+  padding-top: 1.5rem;
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
 .viralbench-architecture {
-  margin: 0 0 5rem;
+  margin: 3rem 0;
   border: 1px solid color-mix(in srgb, var(--color-canvas) 14%, transparent);
   background: color-mix(in srgb, var(--color-canvas) 2.5%, transparent);
 }
@@ -197,8 +279,9 @@
 }
 
 @media (max-width: 640px) {
+  .viralbench-page-visual--hero { margin-top: 1.5rem; }
+  .viralbench-page-visual--inline { margin: 2.5rem 0; }
   .viralbench-architecture__rail { display: none; }
-  .viralbench-prose { font-size: 0.96rem; }
 }
 
 @layer base {
@@ -598,7 +681,7 @@ select:focus-visible {
   max-width: 11ch;
 }
 
-/* Texas toll-road ownership long-form article */
+/* Shared evidence-led long-form article system (introduced with the Texas toll-road article). */
 .toll-article {
   --toll-paper: #f1efe8;
   --toll-ink: #080807;
@@ -1393,6 +1476,96 @@ select:focus-visible {
   color: var(--toll-green);
   text-decoration: none;
   text-transform: uppercase;
+}
+
+/* Research-guide refinements within the shared long-form system. */
+.research-longform .toll-article-hero h1 {
+  max-width: 18ch !important;
+  font-size: clamp(2.85rem, 5.35vw, 6.25rem) !important;
+  line-height: 0.91 !important;
+}
+
+.research-longform .toll-article-hero__display-title {
+  max-width: 21ch;
+  font-size: clamp(1.8rem, 3.6vw, 3.7rem);
+}
+
+.research-longform .toll-headline-metrics strong {
+  font-size: clamp(2rem, 3.8vw, 4rem);
+  overflow-wrap: anywhere;
+}
+
+.research-guide-table__agent {
+  color: var(--toll-blue);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  white-space: nowrap;
+}
+
+.research-guide-code-list {
+  display: grid;
+  gap: 1px;
+  max-width: 48rem;
+  margin: 3rem 0;
+  background: var(--toll-line);
+}
+
+.research-guide-code {
+  min-width: 0;
+  background: #0c0c0b;
+}
+
+.research-guide-code figcaption {
+  border-bottom: 1px solid var(--toll-line);
+  padding: 1.25rem;
+}
+
+.research-guide-code figcaption > span,
+.research-guide-code__format {
+  color: var(--toll-green);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+
+.research-guide-code figcaption strong {
+  display: block;
+  margin-top: 0.85rem;
+  color: var(--toll-paper);
+  font-family: var(--font-serif);
+  font-size: clamp(1.55rem, 3vw, 2.5rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.research-guide-code figcaption p {
+  max-width: 44rem;
+  margin-top: 0.85rem;
+  color: rgba(241, 239, 232, 0.52);
+  font-size: 0.74rem;
+  line-height: 1.65;
+}
+
+.research-guide-code pre {
+  max-height: 36rem;
+  margin: 0;
+  overflow: auto;
+  padding: 1.25rem;
+  color: rgba(241, 239, 232, 0.78);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  line-height: 1.75;
+  overscroll-behavior: contain;
+  tab-size: 2;
+}
+
+.research-guide-code code {
+  color: inherit;
+}
+
+.research-guide-code__format {
+  border-top: 1px solid var(--toll-line);
+  padding: 0.7rem 1.25rem;
+  color: rgba(241, 239, 232, 0.35);
 }
 
 @media (min-width: 640px) {
