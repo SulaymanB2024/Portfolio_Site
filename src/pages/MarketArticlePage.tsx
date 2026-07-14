@@ -259,8 +259,13 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
       <InternalHeader activePath={investmentMemo ? '/markets' : '/research'} tone="dark" />
 
       <article className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 px-4 py-16 md:px-8 lg:grid-cols-[0.28fr_0.72fr] xl:px-10 xl:py-24">
-        <aside className="space-y-8 border-b border-canvas/14 pb-10 text-[10px] uppercase tracking-[0.22em] text-canvas/60 lg:border-b-0 lg:border-r lg:pr-8">
-          <a href={backHref} className="inline-flex min-h-11 items-center gap-2 text-accent transition-colors hover:text-canvas">
+        <a href={backHref} className="inline-flex min-h-11 items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-accent transition-colors hover:text-canvas lg:hidden">
+          <span aria-hidden="true">←</span>
+          <span>{backLabel}</span>
+        </a>
+
+        <aside className="order-2 space-y-8 border-b border-canvas/14 pb-10 text-[10px] uppercase tracking-[0.22em] text-canvas/60 lg:order-1 lg:border-b-0 lg:border-r lg:pr-8">
+          <a href={backHref} className="hidden min-h-11 items-center gap-2 text-accent transition-colors hover:text-canvas lg:inline-flex">
             <span aria-hidden="true">←</span>
             <span>{backLabel}</span>
           </a>
@@ -293,7 +298,7 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
           ) : null}
         </aside>
 
-        <div className="max-w-4xl select-text">
+        <div className="order-1 max-w-4xl select-text lg:order-2">
           <p className="mb-7 text-[10px] uppercase tracking-[0.36em] text-accent">{article.category}</p>
           <h1 className={`font-serif italic leading-[0.9] tracking-normal text-canvas ${structuredSections?.length ? 'text-[3rem] md:text-[4.5rem] xl:text-[6rem]' : 'text-[3.25rem] md:text-[5.75rem] xl:text-[8rem]'}`}>
             {article.title}

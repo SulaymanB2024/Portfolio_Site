@@ -92,10 +92,8 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   return (
     <header className={shellClass}>
       {mobileMenuOpen && (
-        <button
-          type="button"
-          aria-label="Close navigation menu"
-          tabIndex={-1}
+        <div
+          aria-hidden="true"
           className="fixed inset-0 z-40 cursor-default bg-ink/8 backdrop-blur-[2px] md:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
