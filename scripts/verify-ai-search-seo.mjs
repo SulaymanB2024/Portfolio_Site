@@ -489,7 +489,7 @@ assertHref('dist/case-studies/technical-seo-audit/index.html', '/contact', 'Requ
   assert(webPage?.mainEntity?.['@id'] === article['@id'], 'viralbench article: WebPage should point to BlogPosting');
   assert(article.datePublished === '2026-07-09', 'viralbench article: wrong publication date');
   assert(article.citation?.includes('https://github.com/JibranK12345/Viral-Bench'), 'viralbench article: audited repository citation missing');
-  assert(ogImage === `${siteUrl}/images/viralbench-codex-harness.svg`, 'viralbench article: unique OG image missing');
+  assert(ogImage === `${siteUrl}/images/research/viralbench-codex-harness-light.svg`, 'viralbench article: unique OG image missing');
   assertVisibleText(file, [
     'Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench',
     'The ViralBench agent tries to make a successful post. Codex tries to make the ViralBench agent more reliable and effective.',

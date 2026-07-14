@@ -1,23 +1,102 @@
 import { useEffect } from 'react';
 
 import { InternalFooter } from '../components/InternalFooter';
-import { InternalHeader } from '../components/InternalHeader';
-import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
-import { ScrollProgress } from '../components/ScrollProgress';
-import { WireframeGrid } from '../components/WireframeGrid';
+import { EditorialArticleHero, EditorialArticlePage } from '../components/articles/EditorialArticle';
 import { getArticleBySlug } from '../content/articleRegistry';
 import { isInvestmentMemo } from '../content/articleModels';
 import { RESEARCH_ARTICLES } from '../content/researchArticles';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
+type ArticlePresentation = {
+  sectionTitles: readonly [string, string, string];
+  heroImage: string;
+  heroAlt: string;
+  figureLabel: string;
+  figureTitle: string;
+  figureCaption: string;
+  figureSteps: readonly { index: string; label: string; detail: string }[];
+};
+
+const RESEARCH_PRESENTATIONS: Record<string, ArticlePresentation> = {
+  'ai-search-crawler-policy': {
+    sectionTitles: ['Access begins with intent', 'Public pages need a policy surface', 'Discovery still stops short of trust'],
+    heroImage: '/images/research/crawler-policy-map-light.svg',
+    heroAlt: 'Diagram separating search, training, and user-requested crawler intent',
+    figureLabel: 'Operating model',
+    figureTitle: 'Crawler policy is a sequence, not a switch.',
+    figureCaption: 'Each stage is necessary. None of the first three stages guarantees the fourth.',
+    figureSteps: [
+      { index: '01', label: 'Allow', detail: 'Make the intended public record reachable.' },
+      { index: '02', label: 'Identify', detail: 'Separate agents by stated purpose.' },
+      { index: '03', label: 'Notify', detail: 'Publish sitemaps and change signals.' },
+      { index: '04', label: 'Earn trust', detail: 'Let the page answer clearly with sources.' },
+    ],
+  },
+  'technical-seo-public-data-infrastructure': {
+    sectionTitles: ['Treat the page as a record', 'Make meaning explicit', 'Retire conflicting versions'],
+    heroImage: '/images/research/public-data-infrastructure-light.svg',
+    heroAlt: 'Diagram of access, identity, provenance, and distribution layers',
+    figureLabel: 'Reliability stack',
+    figureTitle: 'Public reach rests on record quality.',
+    figureCaption: 'Distribution sits at the top of a stack whose lower layers must remain coherent.',
+    figureSteps: [
+      { index: '01', label: 'Access', detail: 'A machine can reach the public page.' },
+      { index: '02', label: 'Identity', detail: 'The record keeps a stable address.' },
+      { index: '03', label: 'Provenance', detail: 'Claims expose authorship, date, and source.' },
+      { index: '04', label: 'Distribution', detail: 'Search and readers can evaluate the result.' },
+    ],
+  },
+  'canonical-identity-personal-seo': {
+    sectionTitles: ['Shrink the identity graph', 'Keep schema conservative', 'Reconcile the public record'],
+    heroImage: '/images/research/canonical-identity-graph-light.svg',
+    heroAlt: 'Canonical person graph connecting aligned pages and isolating stale records',
+    figureLabel: 'Reconciliation loop',
+    figureTitle: 'One current identity, reinforced everywhere.',
+    figureCaption: 'The useful graph is not the largest one. It is the smallest graph that stays current.',
+    figureSteps: [
+      { index: '01', label: 'Choose', detail: 'Set one preferred host and profile thesis.' },
+      { index: '02', label: 'Align', detail: 'Make About, resume, and bios agree.' },
+      { index: '03', label: 'Connect', detail: 'Use only strong, matching identity links.' },
+      { index: '04', label: 'Retire', detail: 'Redirect or remove conflicting records.' },
+    ],
+  },
+};
+
+const ARCHIVE_PRESENTATION: ArticlePresentation = {
+  sectionTitles: ['Historical premise', 'Evidence required', 'Current boundary'],
+  heroImage: '/images/research/archive-method-frame-light.svg',
+  heroAlt: 'Archived research method separating assumptions, evidence, and claim limits',
+  figureLabel: 'Archive protocol',
+  figureTitle: 'Preserve the method. Retire the recommendation.',
+  figureCaption: 'Archived notes remain useful only when their historical framing and present limit are explicit.',
+  figureSteps: [
+    { index: '01', label: 'Name', detail: 'State the old assumption without reviving it.' },
+    { index: '02', label: 'Require', detail: 'List the evidence a current claim would need.' },
+    { index: '03', label: 'Separate', detail: 'Keep measured facts apart from inference.' },
+    { index: '04', label: 'Limit', detail: 'Mark the route as context, not guidance.' },
+  ],
+};
+
+function groupParagraphs(content: string[], sectionTitles: ArticlePresentation['sectionTitles']) {
+  const groupSize = Math.ceil(content.length / sectionTitles.length);
+  return sectionTitles.map((title, index) => ({
+    id: `section-${index + 1}`,
+    title,
+    paragraphs: content.slice(index * groupSize, (index + 1) * groupSize),
+  })).filter((section) => section.paragraphs.length > 0);
+}
+
 export default function MarketArticlePage({ slug }: { slug: string }) {
   const article = getArticleBySlug(slug) ?? RESEARCH_ARTICLES[0];
   const investmentMemo = isInvestmentMemo(article);
   const route = getSeoRoute(`/markets/${article.slug}`) ?? getSeoRoute('/research')!;
-  const backHref = investmentMemo ? '/markets' : '/research';
-  const backLabel = investmentMemo ? 'Back to Markets' : 'Back to Research';
+  const activePath = investmentMemo ? '/markets' : '/research';
+  const backHref = activePath;
+  const backLabel = investmentMemo ? 'Markets archive' : 'Research index';
   const boundary = investmentMemo ? article.recommendationBoundary : article.evidenceBoundary;
+  const presentation = RESEARCH_PRESENTATIONS[article.slug] ?? ARCHIVE_PRESENTATION;
+  const sections = groupParagraphs(article.content, presentation.sectionTitles);
   const metrics = article.metrics ?? [
     { label: 'Category', value: article.category },
     { label: 'Updated', value: article.dateModified ?? article.date },
@@ -28,123 +107,142 @@ export default function MarketArticlePage({ slug }: { slug: string }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [slug]);
 
   return (
-    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
-      <WireframeGrid tone="dark" className="pointer-events-none absolute inset-0 z-0 opacity-20" />
-      <PageTechnicalChrome tone="dark" />
-      <ScrollProgress />
-      <InternalHeader activePath={investmentMemo ? '/markets' : '/research'} tone="dark" />
+    <EditorialArticlePage
+      id="top"
+      activePath={activePath}
+      className={`market-editorial-article ${investmentMemo ? 'market-editorial-article--archive' : ''}`}
+    >
+      <div className="editorial-article-frame">
+        <a className="market-editorial-back" href={backHref}>
+          <span aria-hidden="true">←</span>
+          <span>{backLabel}</span>
+        </a>
 
-      <article className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-12 px-4 py-16 md:px-8 lg:grid-cols-[0.28fr_0.72fr] xl:px-10 xl:py-24">
-        <aside className="space-y-8 border-b border-canvas/14 pb-10 text-[10px] uppercase tracking-[0.22em] text-canvas/60 lg:border-b-0 lg:border-r lg:pr-8">
-          <a href={backHref} className="inline-flex min-h-11 items-center gap-2 text-accent transition-colors hover:text-canvas">
-            <span aria-hidden="true">←</span>
-            <span>{backLabel}</span>
-          </a>
-          <dl className="grid gap-5 pt-4">
-            {[
-              ['Article', article.number],
-              ['Category', article.category],
-              ['Author', article.author],
-              ['Published', article.date],
-              ['Updated', article.dateModified ?? article.date],
-              ['Read time', article.readTime],
-              ['Sources', String(article.sources.length)],
-            ].map(([label, value]) => (
-              <div key={label}>
-                <dt className="mb-1 text-canvas/60">{label}</dt>
-                <dd className="text-canvas">{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </aside>
+        <EditorialArticleHero
+          dateTime={article.date.replaceAll('.', '-')}
+          published={article.date}
+          kind={article.category}
+          readTime={article.readTime}
+          title={article.title}
+          summary={article.subtitle}
+          image={{ src: presentation.heroImage, alt: presentation.heroAlt, width: 1200, height: 630 }}
+          caption={`${presentation.figureLabel} · ${presentation.figureCaption}`}
+        />
 
-        <div className="max-w-4xl select-text">
-          <p className="mb-7 text-[10px] uppercase tracking-[0.36em] text-accent">{article.category}</p>
-          <h1 className="font-serif text-[3.25rem] italic leading-[0.86] tracking-normal text-canvas md:text-[5.75rem] xl:text-[8rem]">
-            {article.title}
-          </h1>
-          <p className="mt-8 max-w-3xl border-l border-canvas/24 pl-5 text-lg italic leading-relaxed text-canvas/72">
-            {article.subtitle}
-          </p>
+        <section className="market-editorial-metrics" aria-label="Article details">
+          {metrics.map((metric) => (
+            <div key={`${metric.label}-${metric.value}`}>
+              <span>{metric.label}</span>
+              <strong>{metric.value}</strong>
+            </div>
+          ))}
+        </section>
 
-          {boundary ? (
-            <p className={`mt-6 max-w-3xl border px-4 py-3 text-xs uppercase leading-6 tracking-[0.16em] text-canvas/72 ${investmentMemo ? 'border-risk/35 bg-risk/8' : 'border-canvas/18 bg-canvas/[0.025]'}`}>
-              {boundary}
-            </p>
-          ) : null}
-
-          {article.thesis ? (
-            <section className="mt-8 border border-canvas/16 bg-canvas/[0.025] p-5">
-              <h2 className="text-[10px] uppercase tracking-[0.26em] text-accent">Thesis</h2>
-              <p className="mt-4 text-base leading-relaxed text-canvas/76">{article.thesis}</p>
-            </section>
-          ) : null}
-
-          <div className="my-12 grid gap-4 border-y border-canvas/12 py-6 text-[10px] uppercase tracking-[0.2em] text-canvas/60 md:grid-cols-3">
-            {metrics.map((metric, index) => (
-              <div key={`${metric.label}-${metric.value}`}>
-                <span className="block text-canvas/60">{metric.label}</span>
-                <span className={`mt-2 block ${index === 0 ? 'text-accent' : 'text-canvas/84'}`}>{metric.value}</span>
-              </div>
-            ))}
+        <section className="market-editorial-answer" aria-labelledby="article-thesis">
+          <p>{investmentMemo ? 'Archive status' : 'Core thesis'}</p>
+          <div>
+            <h2 id="article-thesis">{investmentMemo ? 'Historical context, with the claim boundary intact.' : article.thesis}</h2>
+            {boundary ? <p>{boundary}</p> : null}
           </div>
+        </section>
 
-          <div className="space-y-8 text-base leading-relaxed text-canvas/76">
-            {article.content.map((paragraph, index) => (
-              <p key={paragraph.slice(0, 56)}>
-                {index === 0 ? (
-                  <span className="float-left mr-2.5 mt-1 font-serif text-[3.85rem] italic leading-[0.8] text-accent" aria-hidden="true">
-                    {paragraph.charAt(0)}
-                  </span>
-                ) : null}
-                {index === 0 ? paragraph.slice(1) : paragraph}
-              </p>
-            ))}
-          </div>
-
-          {investmentMemo ? (
-            <>
-              <section className="my-12 border border-canvas/16 bg-canvas/[0.018] p-6">
-                <h2 className="text-center text-[10px] uppercase tracking-[0.24em] text-accent">{article.formulaLabel}</h2>
-                <p className="mt-5 border-y border-canvas/10 py-7 text-center text-base font-semibold text-canvas md:text-lg">
-                  {article.formula}
-                </p>
-              </section>
-              <section className="border-t border-canvas/14 pt-8">
-                <h2 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-risk/90">Key risk vector</h2>
-                <p className="text-sm leading-relaxed text-canvas/72">{article.risks}</p>
-              </section>
-            </>
-          ) : null}
-
-          {article.sources.length ? (
-            <section className="mt-10 border-t border-canvas/14 pt-8">
-              <h2 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-accent">Research sources</h2>
-              <div className="grid gap-3">
-                {article.sources.map((source) => (
-                  <a
-                    key={source.href}
-                    href={source.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="grid min-h-11 gap-2 border border-canvas/14 px-4 py-3 text-[10px] uppercase tracking-[0.18em] text-canvas/68 transition-colors hover:border-accent/60 hover:text-canvas sm:grid-cols-[1fr_auto]"
-                  >
-                    <span>{source.label}</span>
-                    <span className="text-accent">Open source</span>
+        <div className="market-editorial-layout">
+          <aside className="market-editorial-rail" aria-label="Article outline">
+            <div>
+              <p>Article outline</p>
+              <nav>
+                {sections.map((section, index) => (
+                  <a key={section.id} href={`#${section.id}`}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    {section.title}
                   </a>
                 ))}
-              </div>
-            </section>
-          ) : null}
-        </div>
-      </article>
+                {investmentMemo ? <a href="#method-frame"><span>04</span>Method frame</a> : null}
+                {article.sources.length ? <a href="#sources"><span>{investmentMemo ? '05' : '04'}</span>Sources</a> : null}
+              </nav>
+              {boundary ? (
+                <div className="market-editorial-rail__boundary">
+                  <span>{investmentMemo ? 'Not advice' : 'Evidence limit'}</span>
+                  <p>{boundary}</p>
+                </div>
+              ) : null}
+            </div>
+          </aside>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-8 md:px-8 xl:px-10">
-        <InternalFooter activePath={investmentMemo ? '/markets' : '/research'} tone="dark" />
+          <article className="market-editorial-copy">
+            {sections.map((section, index) => (
+              <section key={section.id} id={section.id} className="market-editorial-section">
+                <header>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h2>{section.title}</h2>
+                </header>
+                <div className="market-editorial-prose">
+                  {section.paragraphs.map((paragraph) => <p key={paragraph.slice(0, 72)}>{paragraph}</p>)}
+                </div>
+
+                {index === 0 ? (
+                  <figure className="market-editorial-system-figure">
+                    <div className="market-editorial-figure-label">
+                      <span>{presentation.figureLabel}</span>
+                      <span>Four-stage view</span>
+                    </div>
+                    <h3>{presentation.figureTitle}</h3>
+                    <ol>
+                      {presentation.figureSteps.map((step) => (
+                        <li key={step.index}>
+                          <span>{step.index}</span>
+                          <strong>{step.label}</strong>
+                          <p>{step.detail}</p>
+                        </li>
+                      ))}
+                    </ol>
+                    <figcaption>{presentation.figureCaption}</figcaption>
+                  </figure>
+                ) : null}
+              </section>
+            ))}
+
+            {investmentMemo ? (
+              <section id="method-frame" className="market-editorial-method">
+                <p>{article.formulaLabel}</p>
+                <h2>{article.formula}</h2>
+                <div>
+                  <span>Key risk vector</span>
+                  <p>{article.risks}</p>
+                </div>
+              </section>
+            ) : null}
+
+            {article.sources.length ? (
+              <section id="sources" className="market-editorial-sources">
+                <p>Research sources</p>
+                <div>
+                  {article.sources.map((source, index) => (
+                    <a key={source.href} href={source.href} target="_blank" rel="noreferrer">
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <strong>{source.label}</strong>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            <div className="market-editorial-endnote">
+              <span>{article.author}</span>
+              <span>Published {article.date}</span>
+              <span>Updated {article.dateModified ?? article.date}</span>
+            </div>
+          </article>
+        </div>
       </div>
-    </main>
+
+      <div className="market-editorial-footer-shell">
+        <InternalFooter activePath={activePath} tone="light" />
+      </div>
+    </EditorialArticlePage>
   );
 }

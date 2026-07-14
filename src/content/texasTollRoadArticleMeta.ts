@@ -1,5 +1,6 @@
 export const TEXAS_TOLL_ARTICLE_SLUG = 'who-owns-texas-toll-roads';
 export const TEXAS_TOLL_ARTICLE_TITLE = 'Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics';
+export const TEXAS_TOLL_ARTICLE_HERO_TITLE = 'Who Owns the Toll Roads in Texas?';
 export const TEXAS_TOLL_ARTICLE_DISPLAY_TITLE = 'The state owns the pavement. Who owns the cash flow?';
 export const TEXAS_TOLL_ARTICLE_SEO_TITLE = 'Who Owns Texas Toll Roads? Public vs. Private Explained';
 export const TEXAS_TOLL_ARTICLE_DESCRIPTION = 'See who owns and operates Texas toll roads, from TxDOT, NTTA, and CTRMA to SH 130 and private concessions, plus revenue, debt, and foreign ownership.';
@@ -7,4 +8,4 @@ export const TEXAS_TOLL_ARTICLE_DATE = '2026.07.11';
 export const TEXAS_TOLL_ARTICLE_UPDATED = '2026.07.11';
 export const TEXAS_TOLL_ARTICLE_WORD_COUNT = 5748;
 export const TEXAS_TOLL_ARTICLE_READ_TIME = '24 MIN';
-export const TEXAS_TOLL_ARTICLE_IMAGE = '/og-default.png';
+export const TEXAS_TOLL_ARTICLE_IMAGE = '/images/research/texas-toll-roads-hero.png';

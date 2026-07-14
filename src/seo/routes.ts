@@ -73,7 +73,7 @@ export interface SeoRoute {
   jsonLd?: JsonLd;
 }
 
-export type RouteVisualMode = 'canvas-sample' | 'dark-evidence' | 'memo-reader' | 'book' | 'prototype';
+export type RouteVisualMode = 'canvas-sample' | 'dark-evidence' | 'memo-reader' | 'editorial-article' | 'book' | 'prototype';
 export type RouteTone = 'light' | 'dark';
 
 export const SITE_LASTMOD = '2026-07-12';
@@ -472,8 +472,8 @@ export function getRouteVisualMode(path: string): RouteVisualMode {
     return 'prototype';
   }
 
-  if (route?.section === 'research-article') {
-    return 'memo-reader';
+  if (route?.section === 'research-article' || route?.path === VIRALBENCH_ARTICLE_PATH) {
+    return 'editorial-article';
   }
 
   if (

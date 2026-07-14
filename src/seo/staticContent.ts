@@ -29,6 +29,7 @@ import {
 import { SIMPLE_BOOK_CHAPTERS, SIMPLE_BOOK_LINKS } from '../content/simpleBook';
 import {
   VIRALBENCH_ARTICLE_EXCERPT,
+  VIRALBENCH_ARTICLE_IMAGE,
   VIRALBENCH_ARTICLE_MARKDOWN,
   VIRALBENCH_ARTICLE_TITLE,
 } from '../content/viralBenchArticle';
@@ -441,7 +442,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       VIRALBENCH_ARTICLE_EXCERPT,
       `<p><a href="/research">Research notes</a> · AI Systems Engineering · Published July 9, 2026 · By <a href="/about">Sulayman Bowles</a></p>
         <figure>
-          <img src="/images/viralbench-codex-harness.svg" width="1200" height="630" alt="Architecture showing ViralBench as a live marketing-agent loop, an immutable evidence and evaluation layer, and Codex improving the system through isolated experiments." />
+          <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1200" height="630" alt="Architecture showing ViralBench as a live marketing-agent loop, an immutable evidence and evaluation layer, and Codex improving the system through isolated experiments." />
           <figcaption>ViralBench inner marketing-agent loop, evidence and evaluation layer, and Codex outer engineering loop.</figcaption>
         </figure>
         ${markdownToHtml(VIRALBENCH_ARTICLE_MARKDOWN)}`,

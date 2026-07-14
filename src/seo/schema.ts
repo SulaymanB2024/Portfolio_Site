@@ -9,6 +9,7 @@ import {
 } from '../content/evidenceLists';
 import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import { PROFILE_FACTS } from '../content/profileFacts';
+import { VIRALBENCH_ARTICLE_IMAGE } from '../content/viralBenchArticle';
 import { absoluteUrl, DEFAULT_OG_IMAGE, PERSON_ID, SITE_NAME, SITE_URL } from './site';
 
 export type JsonLd = Record<string, unknown>;
@@ -882,7 +883,7 @@ export function viralBenchArticleJsonLd(): JsonLd {
   const description =
     'How I’m turning ViralBench into a Codex-powered agent harness for replay, trace evaluation, controlled experiments, and safer marketing automation.';
   const articleId = `${absoluteUrl(path)}#article`;
-  const image = absoluteUrl('/images/viralbench-codex-harness.svg');
+  const image = absoluteUrl(VIRALBENCH_ARTICLE_IMAGE);
   const article = articleSchema({
     title,
     description,
