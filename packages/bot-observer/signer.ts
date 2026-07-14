@@ -1,5 +1,11 @@
 const encoder = new TextEncoder();
 
+function toArrayBuffer(bytes: Uint8Array): ArrayBuffer {
+  const copy = new Uint8Array(bytes.byteLength);
+  copy.set(bytes);
+  return copy.buffer;
+}
+
 interface SignatureInput {
   siteId: string;
   timestamp: string;
@@ -42,7 +48,7 @@ function fromBase64Url(value: string): Uint8Array | null {
 async function hmacKey(secret: string, usage: KeyUsage[]): Promise<CryptoKey> {
   return crypto.subtle.importKey(
     'raw',
-    encoder.encode(secret),
+    toArrayBuffer(encoder.encode(secret)),
     { name: 'HMAC', hash: 'SHA-256' },
     false,
     usage,
@@ -50,7 +56,7 @@ async function hmacKey(secret: string, usage: KeyUsage[]): Promise<CryptoKey> {
 }
 
 export async function sha256Hex(value: string): Promise<string> {
-  const digest = await crypto.subtle.digest('SHA-256', encoder.encode(value));
+  const digest = await crypto.subtle.digest('SHA-256', toArrayBuffer(encoder.encode(value)));
   return toHex(new Uint8Array(digest));
 }
 
@@ -66,7 +72,11 @@ export async function collectorSigningInput(
 export async function signCollectorRequest(input: SignatureInput): Promise<string> {
   const key = await hmacKey(input.secret, ['sign']);
   const message = await collectorSigningInput(input.siteId, input.timestamp, input.nonce, input.body);
-  const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(message));
+  const signature = await crypto.subtle.sign(
+    'HMAC',
+    key,
+    toArrayBuffer(encoder.encode(message)),
+  );
   return `v1=${toBase64Url(new Uint8Array(signature))}`;
 }
 
@@ -76,7 +86,12 @@ export async function verifyCollectorSignature(input: VerificationInput): Promis
   if (!signature) return false;
   const key = await hmacKey(input.secret, ['verify']);
   const message = await collectorSigningInput(input.siteId, input.timestamp, input.nonce, input.body);
-  return crypto.subtle.verify('HMAC', key, signature, encoder.encode(message));
+  return crypto.subtle.verify(
+    'HMAC',
+    key,
+    toArrayBuffer(signature),
+    toArrayBuffer(encoder.encode(message)),
+  );
 }
 
 export async function sendSignedEvent(event: unknown, config: SignedDeliveryConfig): Promise<number> {
