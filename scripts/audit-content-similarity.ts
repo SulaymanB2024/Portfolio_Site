@@ -137,7 +137,9 @@ function extractArticle(route: SeoRoute): AuditDocument {
 
   const text = [lead, ...sections.filter((section) => section.id !== 'introduction').map((section) => section.text)]
     .filter(Boolean)
-    .join('\n\n');
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
   assert(text.split(/\s+/).length >= 80, `${route.path}: insufficient article text after boilerplate removal`);
 
   return {

@@ -290,7 +290,7 @@ function viralBenchArticleStaticHtml() {
   );
 
   return `<figure>
-          <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1672" height="941" alt="A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space." />
+          <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1536" height="1024" alt="Streams of activity pass through a sequence of physical gates, filters, and review surfaces." />
         </figure>
         ${articleHtml}`;
 }
@@ -311,7 +311,7 @@ function articleSectionsStaticHtml(sections: ArticleSection[]) {
       : '';
     const codeExamples = section.codeExamples?.map(
       (example) => `<figure>
-          <figcaption><strong>${escapeHtml(example.title)}</strong> — ${escapeHtml(example.description)}</figcaption>
+          <figcaption><strong>${escapeHtml(example.title)}</strong>: ${escapeHtml(example.description)}</figcaption>
           <pre><code>${escapeHtml(example.code)}</code></pre>
         </figure>`,
     ).join('\n        ') ?? '';
@@ -404,7 +404,7 @@ function aiManagersArticleStaticHtml() {
   ).join('\n        ');
   const cases = AI_MANAGER_CASES.map(
     (item) => `<li>
-        <h3>${escapeHtml(`${item.name} — Grade ${item.grade}`)}</h3>
+        <h3>${escapeHtml(`${item.name}: Grade ${item.grade}`)}</h3>
         <p>${escapeHtml(`${item.form}; ${item.geography}.`)}</p>
         <p><strong>Agent authority:</strong> ${escapeHtml(item.authority)}</p>
         <p><strong>Human layer:</strong> ${escapeHtml(item.humanLayer)}</p>

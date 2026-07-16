@@ -19,7 +19,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     seoTitle: AI_MANAGERS_ARTICLE_SEO_TITLE,
     subtitle: AI_MANAGERS_ARTICLE_DESCRIPTION,
     seoDescription: AI_MANAGERS_ARTICLE_DESCRIPTION,
-    image: '/images/social/og-research.png',
+    image: '/images/articles/ai-managers-operator-workflow.jpg',
     date: '2026.07.14',
     dateModified: '2026.07.14',
     lastVerified: '2026.07.14',
@@ -53,17 +53,17 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     category: 'CRAWLER POLICY',
     title: 'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot',
     seoTitle: 'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot',
-    subtitle: 'Copy-ready host rules for eight named product tokens, with exact Allow, Disallow, sitemap, and release checks.',
+    subtitle: 'Allow: / and Disallow: / for eight named tokens; copy, publish, curl, and zgrep.',
     seoDescription:
       'Compare OpenAI, Anthropic, and Perplexity crawler user agents, then copy robots.txt policies for allowing AI search, blocking training, or blocking named AI agents.',
-    image: '/og-default.png',
+    image: '/images/articles/ai-crawler-compute-landscape.jpg',
     date: '2026.06.19',
     dateModified: '2026.07.14',
     lastVerified: '2026.07.14',
     readTime: '10 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
-      'Treat search crawlers, training crawlers, and user-triggered fetchers as separate policy choices, then verify observed traffic with server logs and provider-published IP ranges.',
+      'One host, one product token, one explicit directive.',
     evidenceBoundary:
       'This guide documents published crawler controls as verified on July 14, 2026. A robots.txt rule expresses policy; it does not secure private content, authenticate a bot, or prove indexing, ranking, training exclusion, or answer-system citation.',
     metrics: [
@@ -239,7 +239,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     subtitle: 'A systems essay on how URLs become crawlable, renderable, attributable, and exportable public records.',
     seoDescription:
       'A systems essay by Sulayman Bowles on URL discovery, crawling, rendering, structured records, provenance, crawl evidence, and durable technical SEO exports.',
-    image: '/og-default.png',
+    image: '/images/articles/public-data-record-layers.jpg',
     date: '2026.06.19',
     dateModified: '2026.07.16',
     lastVerified: '2026.07.16',
@@ -373,7 +373,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     subtitle: 'An operational playbook for reconciling domains, profile pages, resumes, sameAs links, and external biographies.',
     seoDescription:
       'A practical personal-identity reconciliation playbook covering canonical hosts, ProfilePage schema, sameAs eligibility, resume PDFs, and external profile maintenance.',
-    image: '/og-default.png',
+    image: '/images/articles/canonical-identity-graph.jpg',
     date: '2026.06.19',
     dateModified: '2026.07.16',
     lastVerified: '2026.07.16',

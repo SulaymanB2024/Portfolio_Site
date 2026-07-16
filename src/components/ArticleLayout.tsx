@@ -62,8 +62,10 @@ type ArticleHeroProps = {
   backLabel: string;
   eyebrow: ReactNode;
   title: ReactNode;
+  titleLabel?: string;
   deck: ReactNode;
   metadata: ArticleMetaItem[];
+  lead?: ReactNode;
   displayTitle?: ReactNode;
   image?: {
     src: string;
@@ -84,8 +86,10 @@ export function ArticleHero({
   backLabel,
   eyebrow,
   title,
+  titleLabel,
   deck,
   metadata,
+  lead,
   displayTitle,
   image,
   imagePlaceholder,
@@ -94,26 +98,27 @@ export function ArticleHero({
   return (
     <PageFrame>
       <header className="article-reader__hero">
-        <aside className="article-reader__hero-meta">
+        <div className="article-reader__hero-bar">
           <a href={backHref} className="article-reader__back-link">
             <span aria-hidden="true">←</span>
             <span>{backLabel}</span>
           </a>
           <dl>
             {metadata.map((item) => (
-              <div key={item.label}>
+              <div key={item.label} data-label={item.label.toLowerCase()}>
                 <dt>{item.label}</dt>
                 <dd>{item.value}</dd>
               </div>
             ))}
           </dl>
-        </aside>
+        </div>
 
         <div className="article-reader__hero-main">
           <SectionEyebrow>{eyebrow}</SectionEyebrow>
-          <h1>{title}</h1>
+          <h1 aria-label={titleLabel}>{title}</h1>
           {displayTitle ? <p className="article-reader__display-title">{displayTitle}</p> : null}
           <p className="article-reader__deck">{deck}</p>
+          {lead ? <div className="article-reader__lead">{lead}</div> : null}
           {children}
         </div>
 

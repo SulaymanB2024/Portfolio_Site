@@ -1,6 +1,9 @@
 import { ALL_ARTICLES, getArticlePath, getLegacyArticlePath } from '../content/articleRegistry';
 import { isInvestmentMemo } from '../content/articleModels';
-import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
+import {
+  TEXAS_TOLL_ARTICLE_IMAGE,
+  TEXAS_TOLL_ARTICLE_SLUG,
+} from '../content/texasTollRoadArticleMeta';
 import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
@@ -70,7 +73,7 @@ const ATLAS_OG_IMAGE = '/images/social/og-atlas.png';
 const WORK_OG_IMAGE = '/images/social/og-work.png';
 const VOID_OG_IMAGE = '/images/social/og-void.png';
 const RESEARCH_OG_IMAGE = '/images/social/og-research.png';
-const TOLL_ROADS_OG_IMAGE = '/images/social/og-toll-roads.png';
+const TOLL_ROADS_OG_IMAGE = TEXAS_TOLL_ARTICLE_IMAGE;
 
 export const NOT_FOUND_ROUTE: SeoRoute = {
   path: '/404',

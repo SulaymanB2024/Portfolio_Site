@@ -287,7 +287,7 @@ export const TEXAS_TOLL_ARTICLE_TABLES = [
         "Ferrovial SE; Meridiam-managed funds",
         "2061",
         "Operating private concession on public road",
-        "May 2026 — confirmed percentages"
+        "May 2026, confirmed percentages"
       ],
       [
         "LBJ Express",
@@ -300,7 +300,7 @@ export const TEXAS_TOLL_ARTICLE_TABLES = [
         "Ferrovial SE; APG-managed pension capital; Meridiam-managed funds",
         "2061",
         "Operating private concession on public road",
-        "May 2026 — confirmed percentages"
+        "May 2026, confirmed percentages"
       ],
       [
         "NTE 35W",
@@ -313,7 +313,7 @@ export const TEXAS_TOLL_ARTICLE_TABLES = [
         "Ferrovial SE; APG-managed pension capital; Meridiam-managed funds",
         "2061",
         "Operating private concession on public road",
-        "May 2026 — confirmed percentages"
+        "May 2026, confirmed percentages"
       ],
       [
         "SH 130 Segments 5–6",
@@ -567,7 +567,7 @@ export const TEXAS_TOLL_ARTICLE_TABLES = [
 export const TEXAS_TOLL_ARTICLE_SOURCES = [
   {
     "id": "s1",
-    "label": "TxDOT, SH 288 Managed Lanes — executed agreements and termination page",
+    "label": "TxDOT, SH 288 Managed Lanes: executed agreements and termination page",
     "note": "(primary; current through 2026). Establishes CDA execution, October 8, 2024 termination, reversion of control, and TTFC authorization.",
     "hrefs": [
       "https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh288-toll-lanes/executed-agreements.html"
@@ -835,7 +835,7 @@ export const TEXAS_TOLL_ARTICLE_FAQS = [
   },
   {
     "question": "Are Texas toll roads owned by China?",
-    "answer": "The reviewed ownership records do not support that claim. Some concession companies have foreign institutional shareholders, including Spain-based Ferrovial and global infrastructure or pension funds, but that is equity in a concession company—not Chinese ownership of Texas highways or land."
+    "answer": "The reviewed ownership records do not support that claim. Some concession companies have foreign institutional shareholders, including Spain-based Ferrovial and global infrastructure or pension funds. That is equity in a concession company, not Chinese ownership of Texas highways or land."
   },
   {
     "question": "Is NTTA a private company?",

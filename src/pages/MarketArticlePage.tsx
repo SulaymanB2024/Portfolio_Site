@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
 
 import {
   ArticleBody,
@@ -10,6 +10,7 @@ import {
   ArticleSectionHeader,
   type ArticleImagePlaceholderVariant,
   type ArticleNavItem,
+  type ArticleReaderVariant,
 } from '../components/ArticleLayout';
 import { getArticleBySlug, getArticlePath } from '../content/articleRegistry';
 import {
@@ -41,6 +42,73 @@ const ARTICLE_PLACEHOLDERS: Record<string, {
     label: 'Archive methodology / triptych',
     note: 'Temporary study for the network, compute, and monetary research methods.',
     variant: 'triptych',
+  },
+};
+
+const ARTICLE_VARIANTS: Record<string, ArticleReaderVariant> = {
+  'ai-search-crawler-policy': 'research',
+  'technical-seo-public-data-infrastructure': 'wide',
+  'canonical-identity-personal-seo': 'chapters',
+  'archived-research-methodology': 'research',
+};
+
+const ARTICLE_CALLOUT_TITLES: Partial<Record<string, string>> = {
+  'ai-search-crawler-policy':
+    'The file is a policy switch, not a security boundary.',
+  'technical-seo-public-data-infrastructure':
+    'A finding is useful only when its lineage survives export.',
+  'canonical-identity-personal-seo':
+    'One maintained biography should own the present tense.',
+};
+
+const ARTICLE_TITLES: Partial<Record<string, ReactNode>> = {
+  'ai-search-crawler-policy': (
+    <>
+      <span>AI Crawler Robots.txt</span>
+      <span>Guide</span>
+      <span>GPTBot, OAI‑SearchBot,</span>
+      <span>ClaudeBot and PerplexityBot</span>
+    </>
+  ),
+  'technical-seo-public-data-infrastructure': (
+    <>
+      <span>Technical SEO as</span>
+      <span>Public Data Infrastructure</span>
+    </>
+  ),
+  'canonical-identity-personal-seo': (
+    <>
+      <span>Canonical Identity</span>
+      <span>Beats More Content</span>
+    </>
+  ),
+  'archived-research-methodology': (
+    <>
+      <span>Archived Market Research</span>
+      <span>Methodology</span>
+    </>
+  ),
+};
+
+const ARTICLE_IMAGE_COPY: Partial<Record<string, {
+  alt: string;
+  label: string;
+  caption: string;
+}>> = {
+  'ai-search-crawler-policy': {
+    alt: 'A vast monochrome compute landscape with illuminated traffic moving between rows of machine infrastructure.',
+    label: 'Access layer / 01',
+    caption: 'Named crawler policy sits at the edge of a much larger machine-fetching system.',
+  },
+  'technical-seo-public-data-infrastructure': {
+    alt: 'An archive of files and records assembled into transparent layers with visible links between each transformation.',
+    label: 'Record pipeline / 01',
+    caption: 'Public records become dependable when every transformation preserves its source and lineage.',
+  },
+  'canonical-identity-personal-seo': {
+    alt: 'A central person record connected to many surrounding profiles, documents, credentials, and identity signals.',
+    label: 'Identity graph / 01',
+    caption: 'One maintained person record reconciles the profiles and documents that describe it.',
   },
 };
 
@@ -157,15 +225,16 @@ function articleNav(article: PublicArticle, sections: ArticleSection[] | undefin
 }
 
 function articleImage(article: PublicArticle) {
+  const copy = ARTICLE_IMAGE_COPY[article.slug];
   const image = article.image !== '/og-default.png'
-    ? { src: article.image, alt: `${article.title} editorial artwork.` }
+    ? { src: article.image, alt: copy?.alt ?? `${article.title} editorial artwork.` }
     : undefined;
 
   return image
     ? {
         ...image,
-        label: `${article.category} / editorial plate`,
-        caption: article.title,
+        label: copy?.label ?? `${article.category} / editorial plate`,
+        caption: copy?.caption ?? article.title,
       }
     : undefined;
 }
@@ -190,8 +259,10 @@ function ArticleHeroBlock({
       backHref={backHref}
       backLabel={backLabel}
       eyebrow={`${article.category} / ${article.number}`}
-      title={article.title}
+      title={ARTICLE_TITLES[article.slug] ?? article.title}
+      titleLabel={article.title}
       deck={article.subtitle}
+      lead={<p>{article.content[0]}</p>}
       image={articleImage(article)}
       imagePlaceholder={placeholder}
       metadata={[
@@ -220,11 +291,15 @@ function GenericArticle({
     { label: 'Sources', value: String(article.sources.length) },
   ];
   const sections = article.sections;
-  const variant = sections?.length ? 'research' : 'wide';
+  const variant = ARTICLE_VARIANTS[article.slug] ?? (sections?.length ? 'research' : 'wide');
   const navItems = articleNav(article, sections);
 
   return (
-    <ArticlePage activePath={investmentMemo ? '/markets' : '/research'} variant={variant}>
+    <ArticlePage
+      activePath={investmentMemo ? '/markets' : '/research'}
+      variant={variant}
+      className={`article-${article.slug}`}
+    >
       <ArticleHeroBlock article={article} backHref={backHref} backLabel={backLabel} />
 
       <ArticleMetricStrip
@@ -238,7 +313,12 @@ function GenericArticle({
       {article.thesis ? (
         <ArticleCallout
           label={investmentMemo ? 'Thesis' : 'Key takeaway'}
-          title={investmentMemo ? 'The decision rests on explicit assumptions.' : 'The useful claim is the one the evidence can support.'}
+          title={
+            ARTICLE_CALLOUT_TITLES[article.slug] ??
+            (investmentMemo
+              ? 'The decision rests on explicit assumptions.'
+              : 'The useful claim is the one the evidence can support.')
+          }
         >
           <p>{article.thesis}</p>
         </ArticleCallout>
@@ -253,7 +333,7 @@ function GenericArticle({
         <section id="overview">
           <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
           <div className="article-reader__prose">
-            {article.content.map((paragraph) => <p key={paragraph.slice(0, 72)}>{paragraph}</p>)}
+            {article.content.slice(1).map((paragraph) => <p key={paragraph.slice(0, 72)}>{paragraph}</p>)}
           </div>
         </section>
 

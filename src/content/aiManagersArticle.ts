@@ -4,7 +4,7 @@ export const AI_MANAGERS_ARTICLE_TITLE = 'The First AI Managers';
 export const AI_MANAGERS_ARTICLE_DISPLAY_TITLE = 'The Shopkeeper in the Machine';
 export const AI_MANAGERS_ARTICLE_SEO_TITLE = 'The First AI Managers: What Happens When AI Runs a Business?';
 export const AI_MANAGERS_ARTICLE_DESCRIPTION =
-  'Inside the first AI-operated shops, cafés, vending machines, and radio stations—and the gap between completing the next task and preserving a coherent business.';
+  'Inside the first AI-operated shops, cafés, vending machines, and radio stations, examining the gap between completing the next task and preserving a coherent business.';
 export const AI_MANAGERS_ARTICLE_DATE = '2026.07.14';
 export const AI_MANAGERS_ARTICLE_UPDATED = '2026.07.14';
 export const AI_MANAGERS_ARTICLE_READ_TIME = '31 MIN';
@@ -50,7 +50,7 @@ There were **6,000 napkins**, **3,000 nitrile gloves**, canned tomatoes for sand
 
 The same manager also did recognizably useful work. She hired the people who made the coffee. She negotiated a prepaid order for 300 drinks. She sent suppliers detailed questions, adjusted prices, designed promotions, and praised staff after midnight. The interesting thing about the first AI shopkeepers is not that they are stupid. It is that intelligence arrives unevenly. A system can write the email, place the order, explain its reasoning, and still fail to preserve the business behind those actions.
 
-That gap—between **task competence** and **organizational continuity**—is the real story. Today's AI managers can often complete the next step. They are much less reliable at remembering what already failed, maintaining a policy across weeks, resisting a persuasive customer, or translating financial feedback into disciplined control. Once a general-purpose assistant receives operational authority, its conversational habits stop being style. They become business policy.
+The gap between **task competence** and **organizational continuity** is the real story. Today's AI managers can often complete the next step. They are much less reliable at remembering what already failed, maintaining a policy across weeks, resisting a persuasive customer, or translating financial feedback into disciplined control. Once a general-purpose assistant receives operational authority, its conversational habits stop being style. They become business policy.
 `;
 
 export const AI_MANAGERS_ARTICLE_SECTIONS: AiManagerSection[] = [
@@ -67,7 +67,7 @@ Four categories keep the evidence straight:
 
 - **Live operations** have real leases or platforms, customers, workers, inventory, payments, and recurring model decisions. Andon Market, Andon Café, Valerie, and Andon FM are the strongest public examples.
 - **Bounded pilots** use real goods or real commercial systems, but the environment is temporary, internal, heavily staged, or approval-gated. Project Vend and the office-store replications belong here.
-- **Production agents** operate a narrow commercial function—pricing, delivery promotion, menu synchronization, or store planning—while a human still runs the company.
+- **Production agents** operate a narrow commercial function, such as pricing, delivery promotion, menu synchronization, or store planning, while a human still runs the company.
 - **Simulations** remove leases, customers, and physical risk so researchers can test a year of pricing, purchasing, negotiation, memory, competition, and failure in hours.
 
 The legal boundary is simpler. None of the reviewed models signed its own lease, held legal employment obligations, completed know-your-customer checks, authenticated government forms, or bore the loss. Humans and human-controlled entities did. “No human in the loop” dissolves quickly when the loop includes a bank account, a delivery dock, a stove, payroll, or a signature.
@@ -118,7 +118,7 @@ Andon Café added perishables, permits, supplier deadlines, fixed staff, and a k
 
 The procurement failures were more physical. Mona confused units, bought enormous quantities, missed order deadlines, accepted supplier substitutions, and authorized customer discounts without a measurement plan. Under Gemini, the café's reconstructed spend reached roughly $38,000 against $9,000 in sales. Andon's report separates multiple accounting views, but none is a fully burdened statement including every wage, rent, supervision, and setup cost. [S01](#source-s01)
 
-Switching the manager to a newer GPT system reduced over-ordering and made the café harder to manipulate. Product availability then fell from roughly 95 percent to 77 percent, and ten dishes disappeared. The correction was real—and incomplete. An extravagant manager became a cautious one, but the operation did not automatically settle on the right inventory policy.
+Switching the manager to a newer GPT system reduced over-ordering and made the café harder to manipulate. Product availability then fell from roughly 95 percent to 77 percent, and ten dishes disappeared. The correction was real but incomplete. An extravagant manager became a cautious one, but the operation did not automatically settle on the right inventory policy.
 
 ### Valerie: price discovery without common sense
 
@@ -219,7 +219,7 @@ The same architecture explains why production agents can outperform broad experi
   {
     id: 'simulations',
     index: '07',
-    title: 'What simulations reveal—and what they cannot prove',
+    title: 'What simulations reveal and what they cannot prove',
     markdown: `
 Simulated shops are not evidence of a profitable real shop. They are evidence about behavior under controlled conditions.
 
@@ -239,7 +239,7 @@ Simulations also make a practical contribution: they can evaluate memory designs
   {
     id: 'field-map',
     index: '08',
-    title: 'A field larger than the headline—and thinner than it looks',
+    title: 'A field larger than the headline but thinner than it looks',
     markdown: `
 The accompanying case map contains 30 reviewed systems. Only four received the highest evidence grade for a live, recurring operation in which a general-purpose model controlled a meaningful share of management. The rest are bounded pilots, narrow production systems, simulations, vendor-reported deployments, terminology counterexamples, or one excluded AI-founder project retained only for architectural comparison.
 
@@ -247,7 +247,7 @@ That distribution matters more than the raw count. Many apparent examples collap
 
 The explorer below is designed to preserve those distinctions. It is not a leaderboard. An A grade means the case is well documented and commercially real enough to study; it does not mean the business succeeded. A C grade can still contain useful evidence, especially when the system is narrow or simulated. “Excluded” means the project did not meet this article's operating definition, not that it lacks cultural or technical interest.
 
-The concentration is itself a finding. A large share of the richest physical evidence comes from Andon Labs and closely related replications. That gives the field unusually detailed logs and unusually low independence. We know more about a few carefully publicized systems than we know about a broad market of ordinary AI-run businesses—because that broad market does not yet exist in public evidence.
+The concentration is itself a finding. A large share of the richest physical evidence comes from Andon Labs and closely related replications. That gives the field unusually detailed logs and unusually low independence. We know more about a few carefully publicized systems than we know about a broad market of ordinary AI-run businesses. That broad market does not yet exist in public evidence.
 `,
   },
   {
@@ -283,7 +283,7 @@ Until those questions are answered, “autonomous” should be treated as a test
     markdown: `
 The first AI bosses have arrived as unstable mixtures of intern, concierge, buyer, scheduler, negotiator, analyst, and improv performer. They can build a menu, call a candidate, source a product, write a promotion, and defend the result in polished language. They can also forget the shift, overbuy the napkins, accept the discount, invent the precedent, and mistake a novelty purchase for demand.
 
-The surprise is not that they fail. New operating systems fail, and these ones are being placed in unusually public, adversarial environments. The surprise is how quickly a general-purpose assistant can be made manager-shaped—and how specifically managerial its failures become.
+The surprise is not that they fail. New operating systems fail, and these ones are being placed in unusually public, adversarial environments. The surprise is how quickly a general-purpose assistant can be made manager-shaped and how specifically managerial its failures become.
 
 That is the near-term frontier: not an AI that owns the shop, but an institution deciding which parts of management can be translated into tools, ledgers, procedures, and bounded authority. The winning system may have less personality than today's experiments and more accounting. It may look less like a synthetic founder and more like a disciplined layer of middle management.
 

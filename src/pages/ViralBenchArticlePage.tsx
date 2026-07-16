@@ -22,6 +22,7 @@ import {
 import { getSeoRoute } from '../seo/routes';
 import { markdownToHtml } from '../utils/markdownToHtml';
 import { useSEO } from '../utils/seo';
+import { splitMarkdownLead } from '../utils/splitMarkdownLead';
 
 const ROUTE = getSeoRoute('/viralbench-codex-agent-harness')!;
 const EVIDENCE_SECTION_ID = 'the-evidence-layer-comes-before-the-codex-layer';
@@ -76,6 +77,10 @@ function splitArticle(markdown: string) {
 }
 
 const ARTICLE = splitArticle(VIRALBENCH_ARTICLE_MARKDOWN);
+const {
+  lead: VIRALBENCH_ARTICLE_OPENING,
+  remainder: VIRALBENCH_ARTICLE_REMAINDER,
+} = splitMarkdownLead(ARTICLE.lede);
 const HEADLINE_METRICS = [
   { value: '18', label: 'working rounds', note: 'fixed per agent run' },
   { value: '5', label: 'execution tools', note: 'research through publishing' },
@@ -252,21 +257,30 @@ export default function ViralBenchArticlePage() {
         backHref="/research"
         backLabel="Research notes"
         eyebrow="ViralBench / Codex / agent evaluation"
-        title={VIRALBENCH_ARTICLE_TITLE}
+        title={(
+          <>
+            <span>Beyond the Leaderboard:</span>
+            <span>A Codex‑Powered</span>
+            <span>Improvement Harness</span>
+            <span>for ViralBench</span>
+          </>
+        )}
+        titleLabel={VIRALBENCH_ARTICLE_TITLE}
         displayTitle="A bounded outer loop for improving a live marketing agent."
         deck={VIRALBENCH_ARTICLE_DESCRIPTION}
+        lead={<ArticleMarkdown markdown={VIRALBENCH_ARTICLE_OPENING} />}
         image={{
           src: VIRALBENCH_ARTICLE_IMAGE,
-          alt: 'A monochrome gallery of suspended social-media posts receding toward a bright exit.',
+          alt: 'Streams of activity pass through a sequence of physical gates, filters, and review surfaces.',
           label: 'System view / 01',
-          caption: 'The live attention environment surrounding the agent harness.',
+          caption: 'The harness turns an unbounded stream of agent activity into traceable, testable, and reviewable output.',
         }}
         metadata={[
           { label: 'Subject', value: 'AI systems engineering' },
           { label: 'Published', value: <time dateTime={VIRALBENCH_ARTICLE_DATE}>July 9, 2026</time> },
           { label: 'Updated', value: <time dateTime={VIRALBENCH_ARTICLE_MODIFIED_DATE}>July 14, 2026</time> },
           { label: 'Read time', value: VIRALBENCH_ARTICLE_READ_TIME },
-          { label: 'Method', value: <>Live methodology, supplied source archive, and code audit at commit <code>5f5f57e</code>.</> },
+          { label: 'Method', value: <>Live methodology + code audit at <code>5f5f57e</code></> },
         ]}
       />
 
@@ -274,7 +288,7 @@ export default function ViralBenchArticlePage() {
 
       <ArticleCallout label="Short answer" title="The benchmark is the system, not only the model.">
         <p>
-          The ViralBench agent tries to make a successful post. Codex improves the system that researches, creates, reviews, and publishes it—through isolated patches, replay tests, independent evaluation, and controlled promotion.
+          The ViralBench agent tries to make a successful post. Codex improves the system that researches, creates, reviews, and publishes it. The improvement process uses isolated patches, replay tests, independent evaluation, and controlled promotion.
         </p>
       </ArticleCallout>
 
@@ -286,7 +300,7 @@ export default function ViralBenchArticlePage() {
       >
         <section id="overview">
           <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
-          <ArticleMarkdown markdown={ARTICLE.lede} />
+          <ArticleMarkdown markdown={VIRALBENCH_ARTICLE_REMAINDER} />
         </section>
         {ARTICLE.sections.map((section, index) => (
           createElement(ViralBenchSection, { key: section.id, section, index })

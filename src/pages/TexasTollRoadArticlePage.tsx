@@ -16,6 +16,7 @@ import {
   TEXAS_TOLL_ARTICLE_DISPLAY_TITLE,
   TEXAS_TOLL_ARTICLE_FACT_GAPS,
   TEXAS_TOLL_ARTICLE_FAQS,
+  TEXAS_TOLL_ARTICLE_IMAGE,
   TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN,
   TEXAS_TOLL_ARTICLE_READ_TIME,
   TEXAS_TOLL_ARTICLE_SECTIONS,
@@ -30,9 +31,14 @@ import {
 import { getSeoRoute } from '../seo/routes';
 import { markdownToReact } from '../utils/markdownToReact';
 import { useSEO } from '../utils/seo';
+import { splitMarkdownLead } from '../utils/splitMarkdownLead';
 
 const ROUTE = getSeoRoute(`/markets/${TEXAS_TOLL_ARTICLE_SLUG}`)!;
 const TABLES_BY_ID = new Map(TEXAS_TOLL_ARTICLE_TABLES.map((table) => [table.id, table]));
+const {
+  lead: TEXAS_TOLL_ARTICLE_OPENING,
+  remainder: TEXAS_TOLL_ARTICLE_REMAINDER,
+} = splitMarkdownLead(TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN);
 
 const headlineMetrics = [
   { value: '872', label: 'open toll miles', note: 'TxDOT statewide inventory' },
@@ -220,7 +226,7 @@ function ModelScreeningSnapshot() {
         </table>
       </div>
       <figcaption id="model-screen-caption">
-        The model holds EBITDA margins constant and simplifies maintenance, sharing, cash tax, and handback reserves. It subtracts modeled debt from enterprise value rather than building a levered debt-service schedule; it omits refinancing, swaps, working capital, tax basis, and explicit growth capex. SH 130’s $81.7M revenue, $68M EBITDA, and $450M debt are analyst estimates. Scenario width—not the base case—is the main conclusion.
+        The model holds EBITDA margins constant and simplifies maintenance, sharing, cash tax, and handback reserves. It subtracts modeled debt from enterprise value rather than building a levered debt-service schedule; it omits refinancing, swaps, working capital, tax basis, and explicit growth capex. SH 130’s $81.7M revenue, $68M EBITDA, and $450M debt are analyst estimates. Scenario width, rather than the base case, is the main conclusion.
       </figcaption>
     </figure>
   );
@@ -380,7 +386,7 @@ function FactGapLedger() {
     <section id="what-remains-unknown">
       <ArticleSectionHeader index="09">What remains unknown</ArticleSectionHeader>
       <p className="toll-section-intro">
-        The public record is unusually rich, but it does not expose every cap-table right, distribution waterfall, operating subcontract, or current SH 130 financial statement. Those gaps are measurement limits—not evidence that the missing fact favors either side of the investment case.
+        The public record is unusually rich, but it does not expose every cap-table right, distribution waterfall, operating subcontract, or current SH 130 financial statement. Those gaps are measurement limits, not evidence that the missing fact favors either side of the investment case.
       </p>
       <div className="toll-gap-grid">
         {TEXAS_TOLL_ARTICLE_FACT_GAPS.map((group) => (
@@ -498,12 +504,21 @@ export default function TexasTollRoadArticlePage() {
         backHref="/markets"
         backLabel="Markets research"
         eyebrow="Texas toll-road ownership / cash flow / risk"
-        title={TEXAS_TOLL_ARTICLE_TITLE}
+        title={(
+          <>
+            <span>Who Owns the Toll Roads</span>
+            <span>in Texas?</span>
+            <span>Ownership, Operators,</span>
+            <span>and Economics</span>
+          </>
+        )}
+        titleLabel={TEXAS_TOLL_ARTICLE_TITLE}
         displayTitle={TEXAS_TOLL_ARTICLE_DISPLAY_TITLE}
         deck={TEXAS_TOLL_ARTICLE_DESCRIPTION}
+        lead={<ArticleMarkdown markdown={TEXAS_TOLL_ARTICLE_OPENING} />}
         image={{
-          src: '/images/social/og-toll-roads.png',
-          alt: 'Monochrome editorial artwork representing Texas toll-road infrastructure and layered ownership.',
+          src: TEXAS_TOLL_ARTICLE_IMAGE,
+          alt: 'A public-finance landscape of government buildings, contractual ledgers, market charts, and layered dollar imagery.',
           label: 'Ownership map / 01',
           caption: 'Public pavement, contractual rights, debt claims, and residual cash flow.',
         }}
@@ -512,7 +527,7 @@ export default function TexasTollRoadArticlePage() {
           { label: 'Published', value: <time dateTime={TEXAS_TOLL_ARTICLE_DATE.replaceAll('.', '-')}>July 11, 2026</time> },
           { label: 'Updated', value: <time dateTime={TEXAS_TOLL_ARTICLE_UPDATED.replaceAll('.', '-')}>July 11, 2026</time> },
           { label: 'Length', value: `${TEXAS_TOLL_ARTICLE_READ_TIME} / ${TEXAS_TOLL_ARTICLE_WORD_COUNT.toLocaleString()} words` },
-          { label: 'Method', value: 'Primary records, audited statements, sponsor filings, and a finite-life model.' },
+          { label: 'Method', value: 'Primary records + finite-life model' },
         ]}
       />
 
@@ -531,7 +546,7 @@ export default function TexasTollRoadArticlePage() {
       >
         <section id="overview">
           <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
-          <ArticleMarkdown markdown={TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN} />
+          <ArticleMarkdown markdown={TEXAS_TOLL_ARTICLE_REMAINDER} />
         </section>
         {TEXAS_TOLL_ARTICLE_SECTIONS.map((section) => (
           <Fragment key={section.id}><ArticleSection section={section} /></Fragment>

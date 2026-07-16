@@ -30,8 +30,13 @@ import {
 import { getSeoRoute } from '../seo/routes';
 import { markdownToReact } from '../utils/markdownToReact';
 import { useSEO } from '../utils/seo';
+import { splitMarkdownLead } from '../utils/splitMarkdownLead';
 
 const ROUTE = getSeoRoute(AI_MANAGERS_ARTICLE_PATH)!;
+const {
+  lead: AI_MANAGERS_ARTICLE_OPENING,
+  remainder: AI_MANAGERS_ARTICLE_REMAINDER,
+} = splitMarkdownLead(AI_MANAGERS_ARTICLE_LEDE);
 
 const headlineMetrics = [
   { value: '30', label: 'cases reviewed', note: 'live, bounded, narrow, simulated' },
@@ -340,7 +345,7 @@ function CaseExplorer() {
         ))}
       </div>
       {!filteredCases.length ? <p className="ai-case-explorer__empty">No cases match that combination. Clear the search or choose another operating form.</p> : null}
-      <p className="ai-case-explorer__note">Grades describe evidence quality and operating reality—not commercial success.</p>
+      <p className="ai-case-explorer__note">Grades describe evidence quality and operating reality. They do not describe commercial success.</p>
     </div>
   );
 }
@@ -472,19 +477,28 @@ export default function AiManagersArticlePage() {
         backHref="/research"
         backLabel="Research archive"
         eyebrow="AI-operated shops / human control / commercial reality"
-        title={AI_MANAGERS_ARTICLE_TITLE}
+        title={(
+          <>
+            <span>The First</span>
+            <span>AI Managers</span>
+          </>
+        )}
+        titleLabel={AI_MANAGERS_ARTICLE_TITLE}
         displayTitle={AI_MANAGERS_ARTICLE_DISPLAY_TITLE}
         deck={AI_MANAGERS_ARTICLE_DESCRIPTION}
-        imagePlaceholder={{
-          label: 'AI-operated businesses / image study pending',
-          note: 'Reserved for a page-specific image of the human and machine operating layer.',
+        lead={<ArticleMarkdown markdown={AI_MANAGERS_ARTICLE_OPENING} />}
+        image={{
+          src: '/images/articles/ai-managers-operator-workflow.jpg',
+          alt: 'A café operator reviews records at a counter while a diagram of machine-assisted workflows passes through the business.',
+          label: 'Operating layer / 01',
+          caption: 'Human judgment remains inside the workflow even when software coordinates the next action.',
         }}
         metadata={[
           { label: 'Subject', value: 'AI systems / business operations' },
           { label: 'Published', value: <time dateTime={AI_MANAGERS_ARTICLE_DATE.replaceAll('.', '-')}>July 14, 2026</time> },
           { label: 'Updated', value: <time dateTime={AI_MANAGERS_ARTICLE_UPDATED.replaceAll('.', '-')}>July 14, 2026</time> },
           { label: 'Length', value: `${AI_MANAGERS_ARTICLE_READ_TIME} / ${AI_MANAGERS_ARTICLE_WORD_COUNT.toLocaleString()} words` },
-          { label: 'Method', value: `${AI_MANAGER_SOURCES.length}-entry public source ledger, live dashboards, operator logs, independent reporting, public code, and benchmark papers.` },
+          { label: 'Method', value: `${AI_MANAGER_SOURCES.length}-source public-record review` },
         ]}
       />
 
@@ -504,7 +518,7 @@ export default function AiManagersArticlePage() {
       >
         <section id="overview">
           <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
-          <ArticleMarkdown markdown={AI_MANAGERS_ARTICLE_LEDE} />
+          <ArticleMarkdown markdown={AI_MANAGERS_ARTICLE_REMAINDER} />
           <HallOfShameFigure />
         </section>
         {AI_MANAGERS_ARTICLE_SECTIONS.map((section) => <Fragment key={section.id}><ArticleSection section={section} /></Fragment>)}

@@ -7,4 +7,4 @@ export const TEXAS_TOLL_ARTICLE_DATE = '2026.07.11';
 export const TEXAS_TOLL_ARTICLE_UPDATED = '2026.07.11';
 export const TEXAS_TOLL_ARTICLE_WORD_COUNT = 5748;
 export const TEXAS_TOLL_ARTICLE_READ_TIME = '24 MIN';
-export const TEXAS_TOLL_ARTICLE_IMAGE = '/og-default.png';
+export const TEXAS_TOLL_ARTICLE_IMAGE = '/images/articles/texas-toll-public-finance.jpg';
