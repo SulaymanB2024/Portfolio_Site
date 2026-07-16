@@ -1,10 +1,15 @@
 import { Fragment, useEffect, useMemo } from 'react';
 
-import { InternalFooter } from '../components/InternalFooter';
-import { InternalHeader } from '../components/InternalHeader';
-import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
-import { ScrollProgress } from '../components/ScrollProgress';
-import { WireframeGrid } from '../components/WireframeGrid';
+import {
+  ArticleBody,
+  ArticleCallout,
+  ArticleEndnote,
+  ArticleHero,
+  ArticleMetricStrip,
+  ArticlePage,
+  ArticleSectionHeader,
+  type ArticleNavItem,
+} from '../components/ArticleLayout';
 import {
   TEXAS_TOLL_ARTICLE_DATE,
   TEXAS_TOLL_ARTICLE_DESCRIPTION,
@@ -85,7 +90,7 @@ interface ArticleMarkdownProps {
 function ArticleMarkdown({ markdown, className = '' }: ArticleMarkdownProps) {
   const content = useMemo(() => markdownToReact(markdown), [markdown]);
 
-  return <div className={`toll-article-prose ${className}`}>{content}</div>;
+  return <div className={`article-reader__prose ${className}`}>{content}</div>;
 }
 
 function OwnershipStackDiagram() {
@@ -353,11 +358,10 @@ function SectionVisual({ sectionId, position }: { sectionId: string; position: '
 
 function ArticleSection({ section }: { section: (typeof TEXAS_TOLL_ARTICLE_SECTIONS)[number] }) {
   return (
-    <section id={section.id} className="toll-article-section scroll-mt-28">
-      <header>
-        <span>{section.title.match(/^[IVX]+/)?.[0] ?? '→'}</span>
-        <h2>{section.title.replace(/^[IVX]+\.\s*/, '')}</h2>
-      </header>
+    <section id={section.id}>
+      <ArticleSectionHeader index={section.title.match(/^[IVX]+/)?.[0] ?? '→'}>
+        {section.title.replace(/^[IVX]+\.\s*/, '')}
+      </ArticleSectionHeader>
       <SectionVisual sectionId={section.id} position="before" />
       {section.blocks.map((block, index) => {
         if (block.kind === 'table') {
@@ -373,11 +377,8 @@ function ArticleSection({ section }: { section: (typeof TEXAS_TOLL_ARTICLE_SECTI
 
 function FactGapLedger() {
   return (
-    <section id="what-remains-unknown" className="toll-article-section scroll-mt-28">
-      <header>
-        <span>09</span>
-        <h2>What remains unknown</h2>
-      </header>
+    <section id="what-remains-unknown">
+      <ArticleSectionHeader index="09">What remains unknown</ArticleSectionHeader>
       <p className="toll-section-intro">
         The public record is unusually rich, but it does not expose every cap-table right, distribution waterfall, operating subcontract, or current SH 130 financial statement. Those gaps are measurement limits—not evidence that the missing fact favors either side of the investment case.
       </p>
@@ -395,11 +396,8 @@ function FactGapLedger() {
 
 function FrequentlyAskedQuestions() {
   return (
-    <section id="frequently-asked-questions" className="toll-article-section scroll-mt-28">
-      <header>
-        <span>FAQ</span>
-        <h2>Texas toll-road ownership, answered directly</h2>
-      </header>
+    <section id="frequently-asked-questions">
+      <ArticleSectionHeader index="FAQ">Texas toll-road ownership, answered directly</ArticleSectionHeader>
       <div className="toll-faq-list">
         {TEXAS_TOLL_ARTICLE_FAQS.map((faq, index) => (
           <details key={faq.question} open={index === 0}>
@@ -414,11 +412,8 @@ function FrequentlyAskedQuestions() {
 
 function SourceLedger() {
   return (
-    <section id="source-ledger" className="toll-article-section toll-source-ledger scroll-mt-28">
-      <header>
-        <span>S</span>
-        <h2>Source ledger</h2>
-      </header>
+    <section id="source-ledger" className="toll-source-ledger">
+      <ArticleSectionHeader index="S">Source ledger</ArticleSectionHeader>
       <p className="toll-section-intro">
         Executed agreements, government records, audited statements, SEC-filed sponsor disclosures, and clearly labeled company or pension materials. Source dates and limitations are preserved in the text.
       </p>
@@ -441,32 +436,6 @@ function SourceLedger() {
         ))}
       </ol>
     </section>
-  );
-}
-
-function ArticleRail() {
-  const railSections = TEXAS_TOLL_ARTICLE_SECTIONS.filter((section) => section.id !== 'closing');
-  return (
-    <aside className="toll-article-rail">
-      <div className="toll-article-rail__sticky">
-        <p>Article map</p>
-        <nav aria-label="Texas toll-road article sections">
-          {railSections.map((section, index) => (
-            <a key={section.id} href={`#${section.id}`}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              {section.title.replace(/^[IVX]+\.\s*/, '')}
-            </a>
-          ))}
-          <a href="#what-remains-unknown"><span>09</span>What remains unknown</a>
-          <a href="#frequently-asked-questions"><span>FAQ</span>Direct answers</a>
-          <a href="#source-ledger"><span>S</span>Source ledger</a>
-        </nav>
-        <div className="toll-article-rail__boundary">
-          <span>Boundary</span>
-          <p>Educational infrastructure research. Not investment, legal, tax, or municipal-bond advice.</p>
-        </div>
-      </div>
-    </aside>
   );
 }
 
@@ -510,82 +479,78 @@ export default function TexasTollRoadArticlePage() {
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
+  const railSections = TEXAS_TOLL_ARTICLE_SECTIONS.filter((section) => section.id !== 'closing');
+  const navItems: ArticleNavItem[] = [
+    { id: 'overview', label: 'Overview', index: '00' },
+    ...railSections.map((section, index) => ({
+      id: section.id,
+      label: section.title.replace(/^[IVX]+\.\s*/, ''),
+      index: String(index + 1).padStart(2, '0'),
+    })),
+    { id: 'what-remains-unknown', label: 'What remains unknown', index: '09' },
+    { id: 'frequently-asked-questions', label: 'Direct answers', index: 'FAQ' },
+    { id: 'source-ledger', label: 'Source ledger', index: 'S' },
+  ];
+
   return (
-    <main id="top" className="site-page site-page-dark toll-article min-h-screen overflow-x-hidden font-sans">
-      <WireframeGrid tone="dark" className="pointer-events-none absolute inset-0 z-0 opacity-20" />
-      <PageTechnicalChrome tone="dark" />
-      <ScrollProgress />
-      <InternalHeader activePath="/markets" tone="dark" />
+    <ArticlePage activePath="/markets" variant="research" className="texas-toll-article">
+      <ArticleHero
+        backHref="/markets"
+        backLabel="Markets research"
+        eyebrow="Texas toll-road ownership / cash flow / risk"
+        title={TEXAS_TOLL_ARTICLE_TITLE}
+        displayTitle={TEXAS_TOLL_ARTICLE_DISPLAY_TITLE}
+        deck={TEXAS_TOLL_ARTICLE_DESCRIPTION}
+        image={{
+          src: '/images/social/og-toll-roads.png',
+          alt: 'Monochrome editorial artwork representing Texas toll-road infrastructure and layered ownership.',
+          label: 'Ownership map / 01',
+          caption: 'Public pavement, contractual rights, debt claims, and residual cash flow.',
+        }}
+        metadata={[
+          { label: 'Subject', value: 'Infrastructure ownership' },
+          { label: 'Published', value: <time dateTime={TEXAS_TOLL_ARTICLE_DATE.replaceAll('.', '-')}>July 11, 2026</time> },
+          { label: 'Updated', value: <time dateTime={TEXAS_TOLL_ARTICLE_UPDATED.replaceAll('.', '-')}>July 11, 2026</time> },
+          { label: 'Length', value: `${TEXAS_TOLL_ARTICLE_READ_TIME} / ${TEXAS_TOLL_ARTICLE_WORD_COUNT.toLocaleString()} words` },
+          { label: 'Method', value: 'Primary records, audited statements, sponsor filings, and a finite-life model.' },
+        ]}
+      />
 
-      <article className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-24 pt-14 md:px-8 lg:px-10 lg:pt-24">
-        <header className="toll-article-hero">
-          <aside>
-            <a href="/markets">← Markets research</a>
-            <dl>
-              <div><dt>Subject</dt><dd>Infrastructure ownership</dd></div>
-              <div><dt>Published</dt><dd><time dateTime={TEXAS_TOLL_ARTICLE_DATE.replaceAll('.', '-')}>July 11, 2026</time></dd></div>
-              <div><dt>Updated</dt><dd><time dateTime={TEXAS_TOLL_ARTICLE_UPDATED.replaceAll('.', '-')}>July 11, 2026</time></dd></div>
-              <div><dt>Length</dt><dd>{TEXAS_TOLL_ARTICLE_READ_TIME} / {TEXAS_TOLL_ARTICLE_WORD_COUNT.toLocaleString()} words</dd></div>
-              <div><dt>Method</dt><dd>Primary records, audited statements, sponsor filings, and a finite-life model.</dd></div>
-            </dl>
-          </aside>
-          <div>
-            <p className="toll-article-hero__eyebrow">Texas toll-road ownership / cash flow / risk</p>
-            <h1>{TEXAS_TOLL_ARTICLE_TITLE}</h1>
-            <p className="toll-article-hero__display-title">{TEXAS_TOLL_ARTICLE_DISPLAY_TITLE}</p>
-            <p className="toll-article-hero__deck">{TEXAS_TOLL_ARTICLE_DESCRIPTION}</p>
-          </div>
-        </header>
+      <ArticleMetricStrip items={headlineMetrics.map((metric) => ({ label: metric.label, value: metric.value, note: metric.note }))} />
 
-        <div className="toll-headline-metrics" aria-label="Texas toll-road headline figures">
-          {headlineMetrics.map((metric) => (
-            <div key={metric.label}>
-              <strong>{metric.value}</strong>
-              <span>{metric.label}</span>
-              <small>{metric.note}</small>
-            </div>
-          ))}
-        </div>
+      <ArticleCallout label="Short answer" title="Texas toll roads do not have one owner.">
+        <p>
+          Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.
+        </p>
+      </ArticleCallout>
 
-        <section className="toll-quick-answer" aria-labelledby="quick-answer-title">
-          <p>Short answer</p>
-          <div>
-            <h2 id="quick-answer-title">Texas toll roads do not have one owner.</h2>
-            <p>
-              Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.
-            </p>
-          </div>
+      <ArticleBody
+        items={navItems}
+        variant="research"
+        boundary="Educational infrastructure research. Not investment, legal, tax, or municipal-bond advice."
+      >
+        <section id="overview">
+          <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
+          <ArticleMarkdown markdown={TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN} />
         </section>
+        {TEXAS_TOLL_ARTICLE_SECTIONS.map((section) => (
+          <Fragment key={section.id}><ArticleSection section={section} /></Fragment>
+        ))}
+        <FactGapLedger />
+        <FrequentlyAskedQuestions />
+        <SourceLedger />
 
-        <div className="toll-article-layout">
-          <ArticleRail />
-          <div className="min-w-0 max-w-[920px]">
-            <section className="toll-article-lede">
-              <ArticleMarkdown markdown={TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN} />
-            </section>
-            {TEXAS_TOLL_ARTICLE_SECTIONS.map((section) => (
-              <Fragment key={section.id}><ArticleSection section={section} /></Fragment>
-            ))}
-            <FactGapLedger />
-            <FrequentlyAskedQuestions />
-            <SourceLedger />
-
-            <footer className="toll-article-endnote">
-              <p>Research cutoff: July 11, 2026. All dollar figures are nominal unless stated otherwise. Calculated figures are labeled in context.</p>
-              <nav aria-label="Related research">
-                <a href="/markets">Markets research</a>
-                <a href="/research">Research assets</a>
-                <a href="/research/search-console/technical-seo-public-data-infrastructure">Source methodology</a>
-                <a href="/about">About the author</a>
-              </nav>
-            </footer>
-          </div>
-        </div>
-      </article>
-
-      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-8 md:px-8 lg:px-10">
-        <InternalFooter activePath="/markets" tone="dark" />
-      </div>
-    </main>
+        <ArticleEndnote
+          links={[
+            { href: '/markets', label: 'Markets research' },
+            { href: '/research', label: 'Research assets' },
+            { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },
+            { href: '/about', label: 'About the author' },
+          ]}
+        >
+          Research cutoff: July 11, 2026. All dollar figures are nominal unless stated otherwise. Calculated figures are labeled in context.
+        </ArticleEndnote>
+      </ArticleBody>
+    </ArticlePage>
   );
 }

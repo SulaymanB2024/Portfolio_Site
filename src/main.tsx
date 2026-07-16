@@ -3,6 +3,7 @@ import {createRoot} from 'react-dom/client';
 import {Analytics} from '@vercel/analytics/react';
 import App from './App.tsx';
 import './index.css';
+import './styles/article-reader.css';
 import Lenis from 'lenis';
 
 document.documentElement.classList.add('js');

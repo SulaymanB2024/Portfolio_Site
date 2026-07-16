@@ -231,8 +231,8 @@ function templateFor(row) {
   if (row.segment.includes('local-austin') || row.target_page.includes('/austin-technical-seo')) {
     return 'Austin Crawlability Benchmark';
   }
-  if (row.target_page.includes('/case-studies/technical-seo-audit')) {
-    return 'Collaboration / Case Study';
+  if (row.target_page.includes('/method#worked-finding')) {
+    return 'Collaboration / Worked Finding';
   }
   return 'AI Crawler Policy Resource';
 }

@@ -15,58 +15,12 @@ import {
   TechnicalPanel,
   TextLink,
 } from '../components/design/Primitives';
-import { getArticlePath } from '../content/articleRegistry';
-import { RESEARCH_ARTICLES } from '../content/researchArticles';
+import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const RESEARCH_ROUTE = getSeoRoute('/research')!;
 const RESEARCH_COIN_ART = '/images/markets/noise-expansion-coin-alpha.png';
-
-const researchNotes = [
-  {
-    category: 'Product and data',
-    title: 'Beyond the Leaderboard: ViralBench + Codex',
-    href: '/viralbench-codex-agent-harness',
-    description: 'A code-level design for traces, replay, controlled trials, and a bounded engineering loop around a live marketing agent.',
-    date: '2026.07.09',
-  },
-  ...RESEARCH_ARTICLES.map((article) => ({
-    category: article.slug === 'technical-seo-public-data-infrastructure' ? 'Technical SEO' : 'Search systems',
-    title: article.title,
-    href: getArticlePath(article),
-    description: article.subtitle,
-    date: article.dateModified ?? article.date,
-  })),
-  {
-    category: 'Markets and investing',
-    title: 'Who Owns the Toll Roads in Texas?',
-    href: '/markets/who-owns-texas-toll-roads',
-    description: 'A statewide ownership map separating public title, private concessions, operators, creditors, revenue rights, and analyst-screening economics.',
-    date: '2026.07.11',
-  },
-  {
-    category: 'Technical SEO',
-    title: 'Austin Crawlability Pilot',
-    href: '/austin-technical-seo',
-    description: 'A bounded 12-site public-homepage pilot with explicit data cutoff, measurement gaps, source CSV, and no ranking or site-health claims.',
-    date: '2026.06.25',
-  },
-  {
-    category: 'Product and data',
-    title: 'Atlas Sample Crawl Run',
-    href: '/atlas/sample-crawl',
-    description: 'A sanitized walkthrough of how crawl rows, canonical state, depth, links, and issue labels become reviewable evidence.',
-    date: '2026.07.12',
-  },
-];
-
-const categorySummary = [
-  ['Search systems', 'Crawler policy, canonical identity, and public records.'],
-  ['Technical SEO', 'Crawlability, structured data, provenance, and bounded public studies.'],
-  ['Markets and investing', 'Ownership structures, valuation frames, assumptions, and risk.'],
-  ['Product and data', 'Agent evaluation, Atlas outputs, and inspectable technical artifacts.'],
-];
 
 export default function ResearchPage() {
   useSEO(RESEARCH_ROUTE);
@@ -84,7 +38,7 @@ export default function ResearchPage() {
             <SectionEyebrow className="text-ink/60">Research</SectionEyebrow>
             <EditorialHeading className="mt-8">One archive. Clear categories.</EditorialHeading>
             <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/68">
-              Search systems, technical SEO, markets, infrastructure, product, and data work now live in one research hub. Finance-only material remains available as a filtered Markets archive.
+              This archive contains crawler-policy analysis, URL-level technical SEO artifacts, AI-system evaluation designs, ownership models, assumption tables, and source-led market research. Each item states its source base, method, evidence limit, and current implementation status; finance-only work remains available as a filtered Markets archive.
             </p>
           </div>
 
@@ -110,7 +64,7 @@ export default function ResearchPage() {
             Each lane has a concrete question, source base, and boundary between observed facts and interpretation.
           </SectionHeader>
           <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-            {categorySummary.map(([title, description], index) => (
+            {PUBLICATION_CATEGORY_SUMMARY.map(([title, description], index) => (
               <TechnicalPanel key={title} className="min-h-[210px]">
                 <p className="text-[10px] uppercase tracking-[0.22em] text-current/60">{String(index + 1).padStart(2, '0')}</p>
                 <h2 className="mt-10 font-serif text-3xl italic leading-none tracking-normal text-current">{title}</h2>
@@ -124,10 +78,10 @@ export default function ResearchPage() {
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
           <SectionHeader eyebrow="Publication index" title="Questions, evidence, limits.">
-            Seven distinct notes and artifacts, with finance terminology reserved for finance work.
+            {PUBLICATION_INDEX.length} distinct notes and artifacts, with finance terminology reserved for finance work.
           </SectionHeader>
           <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-            {researchNotes.map((note) => (
+            {PUBLICATION_INDEX.map((note) => (
               <TechnicalPanel key={note.href} className="grid min-h-[285px] content-between gap-8 bg-current/[0.012]">
                 <div>
                   <div className="flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-current/60">

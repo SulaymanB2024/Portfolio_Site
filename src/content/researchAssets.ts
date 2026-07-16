@@ -31,7 +31,7 @@ export const publicResearchAssets: ResearchAsset[] = [
       'A browsable index of technical SEO notes, Atlas samples, local crawlability work, identity context, and markets research files.',
     supportingAssets: [
       { label: 'Authority asset JSON', href: '/research/authority-assets.json' },
-      { label: 'Profile context page', href: '/ai-information' },
+      { label: 'About Sulayman Bowles', href: '/about' },
     ],
   },
   {
@@ -45,7 +45,7 @@ export const publicResearchAssets: ResearchAsset[] = [
       'Current project index for public engineering, research, markets, and technical SEO work without implying outside validation.',
     supportingAssets: [
       { label: 'Research asset index', href: '/research' },
-      { label: 'Profile context page', href: '/ai-information' },
+      { label: 'About Sulayman Bowles', href: '/about' },
     ],
   },
   {
@@ -75,14 +75,17 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
-    name: 'Atlas Sample Crawl Run',
+    name: 'Atlas Open-Corpus Demonstration',
     href: '/atlas/sample-crawl',
     type: 'sample_data',
     preferredAnchor: 'Atlas sample crawl run',
     audiences: ['technical SEO', 'crawlability', 'open-source SEO tooling', 'audit workflow writers'],
     pitchAngle:
-      'Sanitized crawl sample showing URL status, indexability, crawl depth, link counts, canonical state, issue labels, and CSV rows.',
-    supportingAssets: [{ label: 'Sanitized crawl CSV', href: '/research/atlas-sanitized-crawl-sample.csv' }],
+      'Dated raw-versus-rendered capture with traceable findings, confidence states, and versioned CSV and JSON exports.',
+    supportingAssets: [
+      { label: 'Open-corpus CSV', href: '/research/atlas-open-corpus-run-2026-07-16.csv' },
+      { label: 'Open-corpus capture manifest', href: '/research/atlas-open-corpus-run-2026-07-16.json' },
+    ],
   },
   {
     priority: 1,
@@ -118,17 +121,6 @@ export const publicResearchAssets: ResearchAsset[] = [
     supportingAssets: [],
   },
   {
-    priority: 2,
-    name: 'Technical SEO Audit Case Study',
-    href: '/case-studies/technical-seo-audit',
-    type: 'case_study',
-    preferredAnchor: 'technical SEO audit case study',
-    audiences: ['technical SEO', 'client reporting', 'crawl data', 'web teams'],
-    pitchAngle:
-      'Sanitized explanation of how crawl data becomes findings, priorities, and implementation notes without private client claims.',
-    supportingAssets: [{ label: 'Sanitized crawl CSV', href: '/research/atlas-sanitized-crawl-sample.csv' }],
-  },
-  {
     priority: 3,
     name: 'Austin Technical SEO',
     href: '/austin-technical-seo',
@@ -158,13 +150,13 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 3,
-    name: 'Profile Context Source Record',
-    href: '/ai-information',
+    name: 'About Sulayman Bowles',
+    href: '/about',
     type: 'reference_page',
     preferredAnchor: 'Sulayman Bowles reference page',
     audiences: ['profile pages', 'profile reviewers', 'identity reconciliation', 'external bios'],
     pitchAngle:
-      'Reference page for current identity, source roles, project context, and what not to infer.',
+      'Current identity, project context, public experience, and canonical links.',
     supportingAssets: [{ label: 'llms.txt reference file', href: '/llms.txt' }],
   },
   {
@@ -216,9 +208,9 @@ export const publicDataDownloads = [
     description: 'Aggregate counts, methodology, and limits for the Austin benchmark pilot.',
   },
   {
-    label: 'Atlas sanitized crawl sample',
-    href: '/research/atlas-sanitized-crawl-sample.csv',
-    description: 'Demo URL-level crawl data for indexability, canonical, link, and issue-field examples.',
+    label: 'Atlas open-corpus demonstration CSV',
+    href: '/research/atlas-open-corpus-run-2026-07-16.csv',
+    description: 'Dated open-corpus URL-level capture with raw/render and confidence fields.',
   },
   {
     label: 'Appian educational research memo',

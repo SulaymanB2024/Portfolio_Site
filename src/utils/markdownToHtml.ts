@@ -16,6 +16,7 @@ function inlineMarkdown(value: string) {
 
   html = html
     .replace(/\[\^([^\]]+)\]/g, '<sup><a href="#note-$1" id="note-ref-$1">$1</a></sup>')
+    .replace(/\[(S\d+)\]\((#source-[^\s)]*)\)/g, '<sup class="article-citation"><a href="$2" aria-label="Source $1">$1</a></sup>')
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]*|#[^\s)]*)\)/g, '<a href="$2">$1</a>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[\s(])\*([^*]+)\*/g, '$1<em>$2</em>');

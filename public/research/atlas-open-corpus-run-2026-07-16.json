@@ -1,0 +1,25 @@
+{
+  "run_id": "quotes-to-scrape-2026-07-16",
+  "corpus": "Quotes to Scrape",
+  "seed_urls": ["https://quotes.toscrape.com/", "https://quotes.toscrape.com/js/"],
+  "captured_at": "2026-07-16T16:14:17Z",
+  "capture_method": "Bounded direct HTTPS source capture; no live crawl occurs during portfolio builds.",
+  "claim_limit": "This is a reproducible technical demonstration, not an audit of the corpus owner or a claim about search performance.",
+  "rows": [
+    {
+      "url": "https://quotes.toscrape.com/",
+      "status_code": 200,
+      "source_quote_card_count": 10,
+      "source_canonical": null,
+      "discovered_next_url": "https://quotes.toscrape.com/page/2/"
+    },
+    {
+      "url": "https://quotes.toscrape.com/js/",
+      "status_code": 200,
+      "source_quote_card_count": 0,
+      "runtime_data_record_count": 10,
+      "source_canonical": null,
+      "discovered_next_url": "https://quotes.toscrape.com/js/page/2/"
+    }
+  ]
+}

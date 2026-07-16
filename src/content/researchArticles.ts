@@ -1,6 +1,50 @@
 import type { ResearchArticle } from './articleModels';
+import {
+  AI_MANAGER_SOURCES,
+  AI_MANAGERS_ARTICLE_DESCRIPTION,
+  AI_MANAGERS_ARTICLE_READ_TIME,
+  AI_MANAGERS_ARTICLE_SEO_TITLE,
+  AI_MANAGERS_ARTICLE_SLUG,
+  AI_MANAGERS_ARTICLE_TITLE,
+} from './aiManagersArticle';
 
 export const RESEARCH_ARTICLES: ResearchArticle[] = [
+  {
+    kind: 'research',
+    cluster: 'ai-systems',
+    slug: AI_MANAGERS_ARTICLE_SLUG,
+    number: '04',
+    category: 'AI SYSTEMS',
+    title: AI_MANAGERS_ARTICLE_TITLE,
+    seoTitle: AI_MANAGERS_ARTICLE_SEO_TITLE,
+    subtitle: AI_MANAGERS_ARTICLE_DESCRIPTION,
+    seoDescription: AI_MANAGERS_ARTICLE_DESCRIPTION,
+    image: '/images/social/og-research.png',
+    date: '2026.07.14',
+    dateModified: '2026.07.14',
+    lastVerified: '2026.07.14',
+    readTime: AI_MANAGERS_ARTICLE_READ_TIME,
+    author: 'SULAYMAN BOWLES',
+    thesis:
+      'When a general-purpose assistant gets operational authority, its conversational habits stop being style and start becoming business policy.',
+    evidenceBoundary:
+      'Operator dashboards and financial reconstructions are unaudited. Simulations are controlled behavior evidence, not commercial businesses. Human legal, financial, physical, and supervisory work remains part of every live case.',
+    metrics: [
+      { label: 'Cases reviewed', value: '30' },
+      { label: 'Published sources', value: String(AI_MANAGER_SOURCES.length) },
+      { label: 'Grade A live cases', value: '4' },
+      { label: 'Audited autonomy proofs', value: '0' },
+    ],
+    sources: AI_MANAGER_SOURCES.filter((source) => source.href.startsWith('http')).map((source) => ({
+      label: source.label,
+      href: source.href,
+      lastVerified: '2026.07.14',
+    })),
+    content: [
+      'The first public AI-operated shops are not synthetic companies with software owners. They are bounded systems inside human institutions: a boutique, a café, vending machines, radio stations, production agents, and simulated markets.',
+      'Across the strongest cases, models can complete the next action but struggle to preserve a coherent operating policy. The article separates real operations from pilots and simulations, makes the human layer visible, and keeps revenue, margin, and fully burdened profit distinct.',
+    ],
+  },
   {
     kind: 'research',
     cluster: 'ai-crawlers',
@@ -9,14 +53,14 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     category: 'CRAWLER POLICY',
     title: 'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot',
     seoTitle: 'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot',
-    subtitle: 'A role-by-role guide to AI search, training, and user-triggered agents, with deployable robots.txt policies and log-verification steps.',
+    subtitle: 'Copy-ready host rules for eight named product tokens, with exact Allow, Disallow, sitemap, and release checks.',
     seoDescription:
       'Compare OpenAI, Anthropic, and Perplexity crawler user agents, then copy robots.txt policies for allowing AI search, blocking training, or blocking named AI agents.',
     image: '/og-default.png',
     date: '2026.06.19',
     dateModified: '2026.07.14',
     lastVerified: '2026.07.14',
-    readTime: '14 MIN',
+    readTime: '10 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
       'Treat search crawlers, training crawlers, and user-triggered fetchers as separate policy choices, then verify observed traffic with server logs and provider-published IP ranges.',
@@ -26,6 +70,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
       { label: 'Agents compared', value: '8 USER AGENTS' },
       { label: 'Policies', value: '2 COPY-READY' },
       { label: 'Last verified', value: '2026.07.14' },
+      { label: 'Primary artifact', value: 'ROBOTS POLICY' },
     ],
     sources: [
       { label: 'OpenAI crawler documentation', href: 'https://developers.openai.com/api/docs/bots', lastVerified: '2026.07.14' },
@@ -44,41 +89,45 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
       { label: 'Perplexity-User IP ranges', href: 'https://www.perplexity.ai/perplexity-user.json', lastVerified: '2026.07.14' },
     ],
     content: [
-      'AI crawler policy is not one yes-or-no switch. OpenAI, Anthropic, and Perplexity publish different agents for search discovery, model-development crawling, and fetches initiated by a user. A useful robots.txt file starts by deciding what each role may access instead of treating every AI-related request as equivalent.',
-      'The configurations below are policy templates, not security controls. Publish them at the root of every host and subdomain they are meant to govern, test the live response, then inspect access logs. Keep confidential or regulated material behind authentication because a robots.txt file is public and voluntary.',
+      '/robots.txt is a host-scoped text file. Match the exact case-sensitive product token, then assign Allow: / or Disallow: /. Preserve the correct Sitemap line.',
+      'Release sequence: outcome → token → group → file merge → production fetch → access-log check.',
     ],
     sections: [
       {
-        id: 'crawler-types',
-        title: 'Search crawler versus training crawler versus user-triggered crawler',
+        id: 'outcome-matrix',
+        title: 'Choose the policy outcome before choosing a user-agent',
         paragraphs: [
-          'A search crawler builds or improves an index used to retrieve and cite web pages in an answer product. A training crawler gathers public content that may contribute to future foundation-model development. A user-triggered crawler or fetcher visits a URL because a person asked a product to retrieve it at that moment.',
-          'Those roles have different consequences. Blocking a search crawler can reduce eligibility for that provider\'s search results. Blocking a training crawler expresses an opt-out from future training collection without necessarily blocking search. Blocking a user-triggered fetcher can prevent a product from opening a page on a user\'s behalf, but robots.txt behavior is provider-specific.',
+          'Choose one row before editing the file.',
         ],
-        bullets: [
-          'Search: OAI-SearchBot, Claude-SearchBot, and PerplexityBot.',
-          'Training or model development: GPTBot and ClaudeBot.',
-          'User-triggered retrieval: ChatGPT-User, Claude-User, and Perplexity-User.',
-        ],
+        table: {
+          caption: 'Outcome-to-user-agent decision matrix',
+          columns: ['Operator outcome', 'Token group', 'Rule', 'Release check'],
+          rows: [
+            ['AI answer discovery', 'OAI-SearchBot, Claude-SearchBot, PerplexityBot', 'Allow: /', '/robots.txt returns the intended groups'],
+            ['Model-development opt-out', 'GPTBot, ClaudeBot', 'Disallow: /', 'Release time and provider guidance saved'],
+            ['User-opened URLs', 'ChatGPT-User, Claude-User, Perplexity-User', 'Provider-specific choice', 'Request type classified correctly'],
+            ['Private files', 'Every client', 'Authentication or edge authorization', 'Unauthenticated request denied'],
+          ],
+        },
       },
       {
         id: 'crawler-comparison',
         title: 'AI crawler comparison table',
         paragraphs: [
-          'Use the exact case-sensitive product tokens below in robots.txt. Version numbers in full HTTP User-Agent strings can change, so policy should target the stable token rather than a copied versioned string.',
+          'Target the stable token, not a versioned HTTP header.',
         ],
         table: {
           caption: 'Published AI crawler roles and robots.txt behavior, last verified July 14, 2026',
-          columns: ['Provider', 'Exact user-agent', 'Role', 'robots.txt behavior', 'Operational note', 'Last verified'],
+          columns: ['Provider', 'Exact token', 'Mode', 'robots.txt', 'Operator note', 'Verified'],
           rows: [
-            ['OpenAI', 'OAI-SearchBot', 'Search crawler', 'Supported', 'Controls inclusion in ChatGPT search answers; navigational links may still appear.', '2026-07-14'],
-            ['OpenAI', 'GPTBot', 'Training crawler', 'Supported', 'Disallowing signals that crawled content should not be used to train generative AI foundation models.', '2026-07-14'],
-            ['OpenAI', 'ChatGPT-User', 'User-triggered fetcher', 'May not apply', 'Not used for automatic crawling or Search inclusion; requests are initiated by a user.', '2026-07-14'],
-            ['Anthropic', 'Claude-SearchBot', 'Search crawler', 'Honored', 'Supports search quality and indexing for Claude search responses.', '2026-07-14'],
-            ['Anthropic', 'ClaudeBot', 'Training crawler', 'Honored', 'Collects public content that could contribute to model training.', '2026-07-14'],
-            ['Anthropic', 'Claude-User', 'User-triggered fetcher', 'Honored', 'Retrieves content in response to a Claude user request.', '2026-07-14'],
-            ['Perplexity', 'PerplexityBot', 'Search crawler', 'Supported', 'Surfaces and links websites in Perplexity search; not used for foundation-model training.', '2026-07-14'],
-            ['Perplexity', 'Perplexity-User', 'User-triggered fetcher', 'Generally ignored', 'Perplexity says this user-requested fetcher generally ignores robots.txt.', '2026-07-14'],
+            ['OpenAI', 'OAI-SearchBot', 'Search', 'Supported', 'Answer-discovery token', '2026-07-14'],
+            ['OpenAI', 'GPTBot', 'Model development', 'Supported', 'Training opt-out token', '2026-07-14'],
+            ['OpenAI', 'ChatGPT-User', 'User request', 'May not apply', 'Not an automatic-index token', '2026-07-14'],
+            ['Anthropic', 'Claude-SearchBot', 'Search', 'Honored', 'Claude search token', '2026-07-14'],
+            ['Anthropic', 'ClaudeBot', 'Model development', 'Honored', 'Training token', '2026-07-14'],
+            ['Anthropic', 'Claude-User', 'User request', 'Honored', 'User-opened URL token', '2026-07-14'],
+            ['Perplexity', 'PerplexityBot', 'Search', 'Supported', 'Search token; not training', '2026-07-14'],
+            ['Perplexity', 'Perplexity-User', 'User request', 'Generally ignored', 'User-requested fetch token', '2026-07-14'],
           ],
         },
       },
@@ -86,7 +135,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
         id: 'robots-configurations',
         title: 'Copy-and-paste robots.txt configurations',
         paragraphs: [
-          'These examples cover the named agents in the comparison table. They are not an exhaustive registry of every AI-related crawler on the web. Preserve any existing rules for Googlebot, Bingbot, media crawlers, private paths, and your sitemap when merging a template into a live file.',
+          'Merge one template with the host’s existing search-engine, media, private-path, and sitemap groups. Replace the example sitemap hostname before release.',
         ],
         codeExamples: [
           {
@@ -154,33 +203,15 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
         ],
       },
       {
-        id: 'robots-limitations',
-        title: 'What robots.txt cannot accomplish',
-        paragraphs: [
-          'Robots.txt manages cooperative crawler access. It does not authenticate a requester, create a legal or technical access barrier, remove a URL from every index, or guarantee that previously collected material is deleted. A malicious client can copy a trusted User-Agent token, and compliant providers can interpret user-triggered requests differently from automatic crawling.',
-          'Google also warns that a disallowed URL can still appear in search results when other pages link to it. Use authentication for private content, noindex for crawlable pages that should not appear in supporting search engines, and server or WAF rules when you need enforceable traffic controls. Do not block a page in robots.txt and expect a crawler to read a noindex directive on that blocked page.',
-        ],
-        bullets: [
-          'It cannot keep secrets private or replace access control.',
-          'It cannot prove a request came from the company named in its User-Agent.',
-          'It cannot guarantee deindexing, ranking, citation, or model-training outcomes.',
-          'It cannot retroactively govern content already fetched under an earlier policy.',
-          'It cannot cover unknown or newly introduced agents unless the policy is reviewed and updated.',
-        ],
-      },
-      {
         id: 'server-log-verification',
-        title: 'Verify crawler behavior in server logs',
+        title: 'Verify deployment with server logs',
         paragraphs: [
-          'Start with raw access logs rather than an analytics dashboard: many bot requests do not execute client-side analytics. Record the timestamp, request path, status, response bytes, source IP, host, and full User-Agent. The example below filters a standard NGINX access-log archive for the exact tokens in this guide.',
-          'A matching User-Agent is only a claim. Compare the source IP with the provider\'s current published CIDR manifest, and retain the manifest retrieval time with your evidence. Do not hard-code today\'s ranges forever; providers update them. Then check whether requests to /robots.txt preceded content fetches, whether disallowed paths stopped receiving compliant automatic-crawler traffic after the provider\'s stated propagation window, and whether CDN or WAF rules changed the observed result.',
+          'Fetch each production /robots.txt endpoint and compare the returned group with the committed file. Then run the log filter below against current and rotated NGINX files. A matching token is only a claim, so check the address against the provider’s linked JSON range before attributing the request.',
         ],
         bullets: [
-          'Confirm /robots.txt returns 200 on every relevant host and contains the intended group.',
-          'Filter logs by exact User-Agent token and review status codes, paths, rate, and timestamps.',
-          'Validate the source IP against the linked OpenAI, Anthropic, or Perplexity JSON manifest.',
-          'Separate automatic crawlers from user-triggered fetchers when interpreting compliance.',
-          'Recheck after policy changes and keep a dated snapshot; absence of requests is not proof of blocking.',
+          'Expected response: HTTP 200, text/plain, intended group, correct sitemap hostname.',
+          'Useful fields: timestamp, host, path, status, source address, complete User-Agent.',
+          'Interpretation rule: absence from the log does not prove a block succeeded.',
         ],
         codeExamples: [
           {
@@ -205,37 +236,130 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     category: 'DATA INFRASTRUCTURE',
     title: 'Technical SEO as Public Data Infrastructure',
     seoTitle: 'Technical SEO as Data Infrastructure',
-    subtitle: 'Why crawlability, structured data, and provenance matter for public discovery and finance-style research.',
+    subtitle: 'A systems essay on how URLs become crawlable, renderable, attributable, and exportable public records.',
     seoDescription:
-      'Research note by Sulayman Bowles on technical SEO as public data infrastructure: crawl access, structured data, provenance, and SEC-style comparability.',
+      'A systems essay by Sulayman Bowles on URL discovery, crawling, rendering, structured records, provenance, crawl evidence, and durable technical SEO exports.',
     image: '/og-default.png',
     date: '2026.06.19',
-    dateModified: '2026.07.12',
-    readTime: '09 MIN',
+    dateModified: '2026.07.16',
+    lastVerified: '2026.07.16',
+    readTime: '14 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
-      'Technical SEO is best understood as public-data infrastructure: access, stable identifiers, provenance, and consistent records before distribution.',
+      'Technical SEO becomes infrastructure when every important URL can move through a traceable pipeline from discovery to rendered evidence and reusable output.',
     evidenceBoundary:
-      'The comparison to financial-data infrastructure is an analytical frame. A portfolio is not a regulated disclosure system, and infrastructure does not guarantee distribution.',
+      'The data-infrastructure comparison describes operating discipline. It does not make a website equivalent to a regulated filing system or guarantee crawling, indexing, ranking, citation, or traffic.',
     metrics: [
-      { label: 'Scope', value: 'SEO + DATA' },
-      { label: 'Frame', value: 'INFRASTRUCTURE' },
-      { label: 'Evidence standard', value: 'SOURCES FIRST' },
+      { label: 'Pipeline stages', value: '05' },
+      { label: 'Observed states', value: 'RAW + RENDERED' },
+      { label: 'Primary artifact', value: 'DATA CONTRACT' },
     ],
     sources: [
-      { label: 'Google structured data introduction', href: 'https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data' },
-      { label: 'Google helpful content guidance', href: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content' },
-      { label: 'SEC EDGAR APIs', href: 'https://www.sec.gov/search-filings/edgar-application-programming-interfaces' },
-      { label: 'SEC developer resources', href: 'https://www.sec.gov/about/developer-resources' },
-      { label: 'Google sitemap overview', href: 'https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview' },
+      { label: 'Google crawling and indexing overview', href: 'https://developers.google.com/search/docs/crawling-indexing', lastVerified: '2026.07.16' },
+      { label: 'Google JavaScript SEO basics', href: 'https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics', lastVerified: '2026.07.16' },
+      { label: 'Google structured data introduction', href: 'https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data', lastVerified: '2026.07.16' },
+      { label: 'Google sitemap construction guidance', href: 'https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap', lastVerified: '2026.07.16' },
+      { label: 'SEC EDGAR public data APIs', href: 'https://www.sec.gov/search-filings/edgar-application-programming-interfaces', lastVerified: '2026.07.16' },
+      { label: 'Atlas open-corpus demonstration', href: '/atlas/sample-crawl', lastVerified: '2026.07.16' },
     ],
     content: [
-      'Technical SEO is usually described as a marketing function, but the better frame is data infrastructure. Crawlers need access. Indexes need stable identifiers. Search systems need source clarity. Human readers need provenance. When those layers are missing, the site may still look polished, but it behaves like an unreliable dataset: hard to join, hard to verify, and easy to misread.',
-      'Finance research gives a useful analogy. Public-market workflows depend on records that can be located, parsed, compared, and tied back to the issuer. SEC EDGAR APIs expose company submissions and extracted XBRL facts because serious analysis depends on structured public records. A personal site is not EDGAR, but the same quality instinct applies: if a public claim matters, it should have a stable URL, a date or context, a source link, and a consistent relationship to the rest of the public record.',
-      'Google describes structured data as a standardized way to provide explicit clues about page meaning. That is not magic markup, and it is not a substitute for visible content. It is a way to make the page easier to classify when the page already says something useful. A ProfilePage schema should match the actual profile page. Article schema should describe the actual article.',
-      'The public-data lens also changes how you think about old files. A stale PDF, duplicate subdomain, outdated bio, or orphaned project page is not only an aesthetic problem. It is a conflicting record. Search engines may discover it without understanding which version is current. Redirecting obsolete URLs, using one canonical host, and keeping internal links pointed at the preferred page are basic data hygiene steps.',
-      'Google helpful-content guidance is useful here because it pulls the conversation away from mechanical SEO. The page should make clear who created the content, how the work was produced where that matters, and why the content exists. That is especially important for finance-adjacent writing. The reader should be able to see the assumptions, source base, and limits of the claim.',
-      'The practical standard is not more pages. It is better public records. A technical SEO audit should ask whether the site has crawlable support pages, sourced claims, consistent authorship, structured data that matches visible content, and a sitemap that reflects the current public record.',
+      'A publication system produces addressable records. DNS and routing assign an address; the server emits a source snapshot; browser execution may create another state; extractors normalize fields; and exports carry those fields into review tools. Calling every state “the page” hides where information changed or disappeared.',
+      'Technical SEO becomes a data-infrastructure problem when each transformation has an input, output, timestamp, identifier, and owner. The useful question is whether a public claim can move from nominated address to captured artifact without losing its lineage. That frame turns an ambiguous visibility complaint into a diagnosable record-flow failure.',
+    ],
+    sections: [
+      {
+        id: 'public-record-pipeline',
+        title: 'The public-record pipeline has five distinct stages',
+        paragraphs: [
+          'Nomination is the entry condition. An internal relation, sitemap row, external reference, feed item, redirect target, or earlier run can place an address into scope. Store that origin as data. It explains why one route entered the inventory and another did not; a sitemap declaration alone does not establish architectural reachability.',
+          'Capture creates a transport artifact containing the requested and resolved addresses, status, headers, body, timing, and failure state. Browser execution creates a related artifact rather than silently replacing the first one. Assets, APIs, consent layers, and runtime capabilities can all change the second state.',
+          'Normalization and export come last. Directives, links, headings, typed metadata, and visible claims must retain the artifact and rule from which they were derived. A review table is trustworthy only when a reader can move from a labeled row back to the captured input.',
+        ],
+        table: {
+          caption: 'URL-to-evidence pipeline',
+          columns: ['Stage', 'Minimum record', 'Failure question'],
+          rows: [
+            ['URL', 'Normalized address and discovery source', 'Was the intended route ever nominated or linked?'],
+            ['Crawl', 'Status, headers, source body, timestamp, fetch state', 'Did the server return a usable public document?'],
+            ['Render', 'Rendered DOM, discovered links, asset and console state', 'Did client execution materially change the record?'],
+            ['Structure', 'Directives, metadata, headings, schema, content fields', 'Do machine-readable claims match visible content?'],
+            ['Evidence export', 'Observation, derivation, confidence, route, run, artifact', 'Can another reviewer reproduce the finding?'],
+          ],
+        },
+      },
+      {
+        id: 'raw-rendered-states',
+        title: 'Raw source and rendered output answer different questions',
+        paragraphs: [
+          'The source snapshot is the transport ledger: status, headers, redirects, markup, and server-provided content at a recorded time. It is the correct artifact for diagnosing delivery failures and fields that existed before any client execution.',
+          'The executed snapshot records the document after scripts and dependent requests settle in a named environment. Google describes rendering as a separate processing stage for JavaScript pages. The useful measurement is therefore the delta between snapshots: added and removed links, headings, claims, directives, fields, and errors.',
+          'A screenshot is not that delta. The execution record also needs browser version, timeout, console state, failed dependencies, and completeness status. Otherwise a partial render can be mistaken for a complete public record.',
+        ],
+      },
+      {
+        id: 'structured-records',
+        title: 'Structured data is a typed view of visible evidence',
+        paragraphs: [
+          'Structured data serializes selected page fields into a predictable shape. A Dataset record can expose distribution formats, measurement dates, and licensing; a SoftwareApplication record can declare operating context and category. The serialization should be generated from the same fields that produce the visible table or product description.',
+          'Typed output also forces decisions about units, enumerations, identifiers, and missing values. SEC data APIs offer a useful analogy because extracted XBRL facts remain tied to a filing period and unit. A website has no comparable regulatory status, but its exports still benefit from explicit grain and machine-checkable field definitions.',
+          'Mismatch is more dangerous than omission. If the JSON-LD, visible table, CSV, and route metadata disagree on a date, count, unit, or identifier, downstream consumers receive competing values. Repair the shared source field and regenerate every representation rather than patching each output independently.',
+        ],
+      },
+      {
+        id: 'atlas-case-study',
+        title: 'Atlas demonstrates the pipeline on an open corpus',
+        paragraphs: [
+          'The Atlas open-corpus demonstration uses run ID quotes-to-scrape-2026-07-16 and two declared seeds: the static Quotes to Scrape route and its JavaScript variant. The JSON manifest records the capture time, bounded direct-HTTPS method, claim limit, and row payload. The CSV repeats the address-level fields in a form that can be filtered without discarding the manifest.',
+          'Both responses returned status 200, but they exposed different source states. The static route contained ten quote cards in its captured markup. The JavaScript route contained zero source quote cards and ten embedded runtime data records used by a client-side loop. Each row also retains the next-page address, canonical state, confidence, and a note explaining the count.',
+          'Those values support a narrow comparison of delivery states; they do not establish search performance or a defect in the corpus. The row can be reproduced from its seed, capture time, and method, while any later label remains a separate interpretation. This is the practical value of lineage: a reviewer can disagree with the finding without losing the underlying artifact.',
+        ],
+        table: {
+          caption: 'Atlas open-corpus record: observation versus derivation',
+          columns: ['Layer', 'Example field', 'Allowed conclusion'],
+          rows: [
+            ['Captured source', 'HTTP status, source body, response time', 'What the fetch returned at the recorded time'],
+            ['Rendered state', 'DOM delta, discovered paths, browser errors', 'What changed in the tested browser environment'],
+            ['Derived review', 'Finding label, confidence, affected route', 'A versioned interpretation of captured fields'],
+            ['Artifact', 'Run ID, CSV row, JSON manifest, capture method', 'How the reviewer can locate and reproduce the record'],
+            ['Gap state', 'Skipped provider, challenge page, failed render', 'Coverage is incomplete; no normal health claim follows'],
+          ],
+        },
+      },
+      {
+        id: 'data-quality-contract',
+        title: 'A technical audit needs a data-quality contract',
+        paragraphs: [
+          'Before scoring a site, the audit should define its grain and completeness rules. One row might represent a requested URL, a final response, a rendered page, or a normalized canonical document. Mixing those grains creates duplicate counts, broken joins, and misleading percentages. Required fields should be named, and absent values should distinguish not observed, not applicable, blocked, failed, and truly empty.',
+          'Freshness also belongs in the contract. A sitemap captured today and a rendered page from last month should not silently appear in one current-state table. Timestamps, run identifiers, model or renderer versions, and source hashes make drift visible. Reproducible output is less about freezing the web than about declaring exactly which version of the web the report describes.',
+        ],
+        table: {
+          caption: 'Minimum quality checks before a finding is publishable',
+          columns: ['Quality dimension', 'Check', 'Unsafe shortcut'],
+          rows: [
+            ['Completeness', 'Required capture fields and explicit gap states', 'Treating null as proof that a feature is absent'],
+            ['Uniqueness', 'One declared row grain with duplicate-key checks', 'Counting requested, redirected, and canonical URLs as peers'],
+            ['Consistency', 'Visible content, metadata, schema, and exports agree', 'Validating each representation in isolation'],
+            ['Freshness', 'Capture time, run ID, hashes, and tool version retained', 'Combining observations from different collection windows'],
+            ['Integrity', 'Every finding links back to supporting observations', 'Publishing labels without reproducible source rows'],
+          ],
+        },
+      },
+      {
+        id: 'publication-standard',
+        title: 'The deliverable is a reviewable public record',
+        paragraphs: [
+          'The strongest technical SEO output is not the largest issue list. It is a compact system in which priority pages are reachable, raw and rendered states are inspectable, machine-readable fields agree with visible content, and every recommendation can be traced to a captured observation. That operating standard supports engineering handoff because developers can verify the same conditions after a repair ships.',
+          'Distribution remains downstream. A clean pipeline can make information eligible to be processed and easier to audit; it cannot force an index, ranking system, or answer product to use the page. The value of the infrastructure frame is narrower and more practical: it makes the site less ambiguous to operate and makes claims about its state easier to defend.',
+        ],
+        bullets: [
+          'Nominate important routes through crawlable internal links and a canonical sitemap.',
+          'Capture transport and rendered states separately, with timestamps and failure reasons.',
+          'Generate metadata and structured records from the same visible source fields.',
+          'Keep observations, derived findings, confidence, and measurement gaps in separate columns.',
+          'Ship CSV or JSON artifacts that retain route, run, source, and calculation lineage.',
+          'Rerun the same checks after implementation before declaring the repair complete.',
+        ],
+      },
     ],
   },
   {
@@ -246,37 +370,142 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     category: 'ENTITY CONSISTENCY',
     title: 'Canonical Identity Beats More Content',
     seoTitle: 'Canonical Identity for Personal SEO',
-    subtitle: 'A reconciliation checklist for profiles, stale PDFs, sameAs links, and public reference pages.',
+    subtitle: 'An operational playbook for reconciling domains, profile pages, resumes, sameAs links, and external biographies.',
     seoDescription:
-      'Practical research note by Sulayman Bowles on identity cleanup, sameAs discipline, profile-page schema, stale resume PDFs, internal links, and external bio consistency.',
+      'A practical personal-identity reconciliation playbook covering canonical hosts, ProfilePage schema, sameAs eligibility, resume PDFs, and external profile maintenance.',
     image: '/og-default.png',
     date: '2026.06.19',
-    dateModified: '2026.07.12',
-    readTime: '07 MIN',
+    dateModified: '2026.07.16',
+    lastVerified: '2026.07.16',
+    readTime: '12 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
-      'A smaller set of current, connected records is more useful than publishing more disconnected versions of the same person.',
+      'A personal identity graph becomes trustworthy when one profile record owns each fact and every external reference either agrees with it or clearly represents history.',
     evidenceBoundary:
-      'External profiles can drift or block unauthenticated access. Only current, visibly matching profiles should be treated as identity evidence.',
+      'This playbook improves consistency among controlled and observable profiles. It cannot force third-party platforms to update, remain public, or be interpreted as identity evidence by a search system.',
     metrics: [
-      { label: 'Scope', value: 'PERSON GRAPH' },
-      { label: 'Priority', value: 'CANONICALS' },
-      { label: 'Maintenance', value: 'ONGOING' },
+      { label: 'Primary artifact', value: 'RECONCILIATION LOG' },
+      { label: 'Decision layers', value: '06' },
+      { label: 'Review cadence', value: 'QUARTERLY' },
     ],
     sources: [
-      { label: 'Google canonicalization guide', href: 'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls' },
-      { label: 'Google ProfilePage structured data', href: 'https://developers.google.com/search/docs/appearance/structured-data/profile-page' },
-      { label: 'Schema.org Person', href: 'https://schema.org/Person' },
-      { label: 'Schema.org ProfilePage', href: 'https://schema.org/ProfilePage' },
-      { label: 'Google structured data policies', href: 'https://developers.google.com/search/docs/appearance/structured-data/sd-policies' },
+      { label: 'Google canonical URL guidance', href: 'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls', lastVerified: '2026.07.16' },
+      { label: 'Google redirects guidance', href: 'https://developers.google.com/search/docs/crawling-indexing/301-redirects', lastVerified: '2026.07.16' },
+      { label: 'Google ProfilePage structured data', href: 'https://developers.google.com/search/docs/appearance/structured-data/profile-page', lastVerified: '2026.07.16' },
+      { label: 'Schema.org Person', href: 'https://schema.org/Person', lastVerified: '2026.07.16' },
+      { label: 'Schema.org sameAs', href: 'https://schema.org/sameAs', lastVerified: '2026.07.16' },
+      { label: 'Schema.org ProfilePage', href: 'https://schema.org/ProfilePage', lastVerified: '2026.07.16' },
     ],
     content: [
-      'The fastest way to weaken a personal SEO graph is to publish more disconnected versions of the same person. A portfolio homepage says one thing, an old resume PDF says another, GitHub says nothing, LinkedIn uses a different line, and a hackathon profile still points at an abandoned project. None of those pieces is necessarily wrong on its own. The problem is that crawlers and human reviewers have to decide which one is current.',
-      'Canonical identity starts with one preferred host and one preferred profile thesis. Google describes redirects as one of the strongest canonicalization signals and recommends consistent canonical URLs across a site. For a personal site, that means the apex domain should resolve clearly, the www host should redirect, internal links should point at the same canonical pages, and stale URLs should be retired through redirects rather than left as dead ends.',
-      'The HTML resume should be the durable source of truth because it can carry visible text, internal links, schema, and a current update path. A downloadable PDF can still be useful, but it should not become the canonical identity page unless there is a reason for that tradeoff.',
-      'Structured data should be conservative. Schema.org defines sameAs as a URL that unambiguously identifies the same item, not a bucket for every social link ever created. A dead, private, or weakly matching profile should stay out of sameAs even if it once existed.',
-      'ProfilePage markup works best when the visible page is clearly about one person or one organization. Google guidance describes mainEntity as the person or organization the profile page is about. That makes /about, /resume, and /ai-information useful profile surfaces if they share the same Person identifier, current description, and source links.',
-      'The reconciliation process is practical: pick the canonical domain, redirect duplicate hosts, redirect stale PDFs, keep /about and /resume aligned, publish a compact source-role page, and push the same current identity to external bios. The output is not a bigger personal brand. It is a smaller, cleaner set of records that makes the current public identity easier to verify.',
+      'Personal SEO often fails when biographies disagree. A portfolio, resume PDF, university page, GitHub profile, LinkedIn page, competition account, old domain, and copied speaker bio can name different titles, employers, graduation dates, projects, or official websites.',
+      'The remedy is reconciliation. Designate which controlled profile owns the current biography, experience, and education; classify outside profiles by role; and decide what should happen to stale URLs. Publish more only after the identity surface has one clear authority.',
+    ],
+    sections: [
+      {
+        id: 'profile-inventory',
+        title: 'Map the biographies before writing another one',
+        paragraphs: [
+          'Collect the preferred website, HTML resume, public PDF, GitHub, LinkedIn, portfolio accounts, institutional biographies, event programs, press mentions, and abandoned domains. Compare the displayed name, headline, employer, education date, project ownership, and preferred homepage.',
+          'Label each item by purpose. The canonical biography states the present; supporting profiles corroborate it; historical pages document dated events; and stale controlled pages need repair. Private, deleted, or weakly matching profiles stay unresolved.',
+        ],
+        table: {
+          caption: 'Profile inventory fields',
+          columns: ['Field', 'Decision it supports', 'Example state'],
+          rows: [
+            ['URL and owner', 'Can this record be edited or redirected?', 'Controlled / third party'],
+            ['Profile role', 'What is the page allowed to establish?', 'Canonical / supporting / historical'],
+            ['Visible identity', 'Does the name and headline match the intended person?', 'Match / partial / conflict'],
+            ['Freshness', 'Is the content expected to describe the present?', 'Current / dated history / unknown'],
+            ['Action', 'What should happen next?', 'Keep / update / redirect / omit / monitor'],
+          ],
+        },
+      },
+      {
+        id: 'canonical-host',
+        title: 'Select one host and one current profile thesis',
+        paragraphs: [
+          'The preferred domain should resolve consistently across protocol and hostname variants. Permanently redirect duplicate hosts and retired controlled routes when they have one destination. Align redirects, canonical annotations, sitemaps, and internal links instead of asking one signal to overrule a contradictory site.',
+          'The canonical thesis is the approved set of current facts from which the homepage, about page, resume, and metadata draw: what the person does, which projects or institutions matter, and where proof can be inspected. It need not be copied word for word.',
+        ],
+        table: {
+          caption: 'Canonical-host decision tree',
+          columns: ['Observed state', 'Action', 'Expected result'],
+          rows: [
+            ['Alternate host contains the same site', 'Permanently redirect to the preferred host', 'One hostname receives internal and external references'],
+            ['Old controlled route has a direct replacement', 'Permanently redirect to the closest current page', 'Existing links reach the maintained record'],
+            ['Duplicate page must remain available', 'Declare the preferred URL and link internally to it', 'Signals consistently favor one version'],
+            ['Historical page documents a real past event', 'Keep dated context; do not rewrite it as a current profile', 'History remains legible without competing with the present'],
+          ],
+        },
+      },
+      {
+        id: 'sameas-rubric',
+        title: 'Use sameAs only for unambiguous identity matches',
+        paragraphs: [
+          'Treat sameAs as an identity-equivalence assertion: the destination represents this person, functions as that person’s profile or homepage, is publicly inspectable, and contains no material contradiction. All four conditions should be true before the URL enters Person markup.',
+          'A page that merely mentions the person fails the profile-function test. Articles, programs, employer pages, repositories, and schedules belong in visible citations, subjectOf relationships, project markup, or editorial context instead.',
+        ],
+        table: {
+          caption: 'sameAs eligibility rubric',
+          columns: ['Test', 'Include when', 'Exclude when'],
+          rows: [
+            ['Identity', 'The destination unambiguously represents the same person', 'The name is shared or the connection is inferred'],
+            ['Access', 'A reviewer can inspect the profile without privileged access', 'The page is private, deleted, blocked, or empty'],
+            ['Agreement', 'Core current facts do not materially conflict', 'Employer, role, location, or ownership is misleading'],
+            ['Profile function', 'The destination is a profile or official homepage', 'The destination merely mentions the person'],
+            ['Maintenance', 'The link is reviewed and still expected to persist', 'The account was abandoned or transferred'],
+          ],
+        },
+      },
+      {
+        id: 'resume-policy',
+        title: 'Make HTML the maintained resume and PDF the portable copy',
+        paragraphs: [
+          'An HTML resume is easier to update, link, and connect to the site. Semantic headings, current project links, profile information, and a modification date make it the maintained record for website readers.',
+          'The PDF remains useful for applications and offline sharing. Give the current file one stable URL, redirect obsolete controlled filenames, and avoid leaving dated PDFs public with incompatible facts.',
+        ],
+        bullets: [
+          'Treat the HTML route as the current, maintainable experience and education record.',
+          'Publish one stable PDF URL rather than creating a new public filename for each revision.',
+          'Check that the visible PDF facts match the HTML record before release.',
+          'Redirect known retired filenames instead of allowing silent duplicate copies.',
+          'Keep private application variants outside the public web surface.',
+        ],
+      },
+      {
+        id: 'external-reconciliation',
+        title: 'Reconcile external profiles by priority and controllability',
+        paragraphs: [
+          'Update controlled profiles in the order reviewers are likely to encounter them: preferred website, LinkedIn, GitHub, then major portfolio accounts. Institutional and event pages may require another owner; record the request date, and preserve accurate historical context.',
+          'When a platform cannot be changed, log the discrepancy. A stale third-party title is a maintenance dependency; the same title on the canonical site is a controlled inconsistency. They are not equally actionable.',
+        ],
+        table: {
+          caption: 'External-profile reconciliation queue',
+          columns: ['Priority', 'Profile class', 'Required check', 'Owner response'],
+          rows: [
+            ['1', 'Preferred site and HTML resume', 'Name, headline, dates, links, canonical identifiers', 'Edit immediately'],
+            ['2', 'LinkedIn, GitHub, portfolio accounts', 'Current role, canonical website, project ownership', 'Update controlled fields'],
+            ['3', 'Employer or university biographies', 'Material current-fact conflicts', 'Request correction when appropriate'],
+            ['4', 'Programs, press, and event archives', 'Whether the page is accurate for its historical date', 'Preserve accurate history'],
+            ['5', 'Private, deleted, or inaccessible profiles', 'Whether identity can still be verified', 'Omit from structured identity claims'],
+          ],
+        },
+      },
+      {
+        id: 'maintenance-cadence',
+        title: 'Maintain a small identity surface on a fixed cadence',
+        paragraphs: [
+          'Reconcile after role or graduation changes, major launches, domain migrations, and public resume revisions. A quarterly review catches expired links, copied biographies, changed usernames, and newly indexed files. Record the observation and action instead of marking a profile “done.”',
+          'Success is the share of important, controllable records that agree on the current identity and point to the same maintained source. Historical evidence can remain diverse because it documents a specific time.',
+        ],
+        bullets: [
+          'Review controlled profile pages and the public PDF every quarter.',
+          'Recheck redirects and canonical host behavior after deployments or domain changes.',
+          'Validate sameAs destinations before adding them and after username changes.',
+          'Record third-party correction requests separately from edits you directly control.',
+          'Keep dated historical sources when they are accurate for their original context.',
+        ],
+      },
     ],
   },
 ];

@@ -62,7 +62,12 @@ function renderInline(value: string, keyPrefix: string): ReactNode[] {
           const label = value.slice(start + 1, labelEnd);
           const href = value.slice(hrefStart + 1, hrefEnd);
           if (isSafeHref(href)) {
-            nodes.push(<a key={key} href={href}>{renderInline(label, `${key}-link`)}</a>);
+            const children = renderInline(label, `${key}-link`);
+            nodes.push(
+              /^S\d+$/.test(label) && href.startsWith('#source-')
+                ? <sup key={key} className="article-citation"><a href={href} aria-label={`Source ${label.slice(1)}`}>{children}</a></sup>
+                : <a key={key} href={href}>{children}</a>,
+            );
             cursor = hrefEnd + 1;
             continue;
           }

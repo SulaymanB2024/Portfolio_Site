@@ -1,5 +1,8 @@
+import { ATLAS_OPEN_CORPUS_RUN, atlasOpenCorpusFindings, atlasOpenCorpusRows } from './atlasOpenCorpus';
+
 export const RESEARCH_ASSETS = {
-  atlasSampleCsv: '/research/atlas-sanitized-crawl-sample.csv',
+  atlasSampleCsv: ATLAS_OPEN_CORPUS_RUN.artifacts.csv,
+  atlasSampleManifest: ATLAS_OPEN_CORPUS_RUN.artifacts.manifest,
   appianAssumptionsCsv: '/research/appian-assumptions-table.csv',
   appianMemoPdf: '/research/appian-enterprise-software-durability-memo.pdf',
 };
@@ -38,8 +41,8 @@ export const workProofCards = [
     title: 'Atlas SEO Audit Console',
     href: '/atlas',
     problem: 'Technical audits lose credibility when recommendations cannot be traced back to URL-level evidence.',
-    role: 'Founder; product, crawler, evidence policy, and interface design.',
-    built: 'Native crawl records, raw/render comparison, indexability and canonical checks, link graphs, issue review, persistence, and export paths.',
+    role: 'Founder; product architecture, crawler behavior, evidence-state policy, review workflow, and interface design.',
+    built: 'Native crawl records, raw/render comparison, indexability and canonical checks, link graphs, SQLite-backed run persistence, issue review, and structured export paths.',
     constraints: 'Provider gaps, failed fetches, challenge pages, and contaminated renders remain measurement gaps—not site-health findings.',
     status: 'Core crawl and evidence workflow shipped; provider mesh and scoring policy remain active development.',
     evidenceLabel: 'Inspect the sanitized crawl run',
@@ -88,10 +91,10 @@ export const workProofCards = [
   {
     eyebrow: 'Operating practice',
     title: 'Void Agency',
-    href: '/void-agency',
+    href: 'https://www.void-agency.com/',
     problem: 'Teams need a bounded route from crawl evidence to implementation work without a generic growth retainer or opaque audit deck.',
     role: 'Founder and operator across scoping, audit systems, implementation, analytics, and client delivery.',
-    built: 'A technical SEO and web-systems practice with a four-stage method, explicit inputs and exclusions, and Atlas-backed evidence paths.',
+    built: 'A technical SEO and web-systems practice with a four-stage method, explicit inputs and exclusions, Atlas-backed evidence paths, implementation handoffs, analytics review, and acceptance checks.',
     constraints: 'Private client names and outcome data remain private; the public site shows method and artifacts instead.',
     status: 'Operating; $50K+ collected revenue as of May 31, 2026.',
     evidenceLabel: 'Read the scoped audit method',
@@ -113,81 +116,8 @@ export const workProofCards = [
   },
 ];
 
-export const atlasSampleRows = [
-  {
-    url: 'https://example.com/',
-    status: '200',
-    indexability: 'indexable',
-    depth: '0',
-    inlinks: '1240',
-    outlinks: '56',
-    canonical: 'self-canonical',
-    issue: 'none',
-    note: 'Homepage retained as crawl root',
-  },
-  {
-    url: 'https://example.com/blog',
-    status: '200',
-    indexability: 'indexable',
-    depth: '1',
-    inlinks: '340',
-    outlinks: '48',
-    canonical: 'self-canonical',
-    issue: 'thin hub copy',
-    note: 'Blog hub needs stronger internal context',
-  },
-  {
-    url: 'https://example.com/services',
-    status: '200',
-    indexability: 'indexable',
-    depth: '1',
-    inlinks: '290',
-    outlinks: '32',
-    canonical: 'self-canonical',
-    issue: 'slow lcp',
-    note: 'Hero image lacks priority and stable dimensions',
-  },
-  {
-    url: 'https://example.com/resources/seo-tools',
-    status: '200',
-    indexability: 'indexable',
-    depth: '2',
-    inlinks: '18',
-    outlinks: '14',
-    canonical: 'missing',
-    issue: 'missing canonical',
-    note: 'Canonical target not declared in source HTML',
-  },
-  {
-    url: 'https://example.com/pricing/plans',
-    status: '200',
-    indexability: 'indexable',
-    depth: '2',
-    inlinks: '24',
-    outlinks: '18',
-    canonical: 'missing',
-    issue: 'duplicate candidate',
-    note: 'Similar pricing templates require canonical review',
-  },
-  {
-    url: 'https://example.com/search?q=audit',
-    status: '200',
-    indexability: 'noindex',
-    depth: '3',
-    inlinks: '4',
-    outlinks: '96',
-    canonical: 'parameterized',
-    issue: 'soft 404 risk',
-    note: 'Search result page returns thin body for empty states',
-  },
-];
-
-export const atlasSampleFindings = [
-  'The sample is sanitized/demo data and does not identify a private client or claim a live ranking outcome.',
-  'Atlas treats URL discovery, status code, canonical state, crawl depth, inlinks, outlinks, and indexability as reviewable crawl data.',
-  'Issue labels remain tied to observed fields, not broad score claims.',
-  'The CSV exists so reviewers can inspect the source table instead of relying only on page copy.',
-];
+export const atlasSampleRows = atlasOpenCorpusRows;
+export const atlasSampleFindings = atlasOpenCorpusFindings;
 
 export const auditCaseStudySteps = [
   {

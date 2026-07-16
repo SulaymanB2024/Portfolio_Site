@@ -9,7 +9,7 @@ export type ArticleMetric = {
   value: string;
 };
 
-export type ResearchCluster = 'firecrawl' | 'ai-crawlers' | 'search-console' | 'personal-seo';
+export type ResearchCluster = 'firecrawl' | 'ai-crawlers' | 'ai-systems' | 'search-console' | 'personal-seo';
 
 export type ArticleTable = {
   caption: string;
@@ -58,7 +58,7 @@ export type ResearchArticle = {
   indexable?: boolean;
 };
 
-export type InvestmentMemo = Omit<ResearchArticle, 'kind' | 'evidenceBoundary' | 'cluster' | 'lastVerified' | 'sections'> & {
+export type InvestmentMemo = Omit<ResearchArticle, 'kind' | 'evidenceBoundary' | 'cluster' | 'lastVerified'> & {
   kind: 'investment-memo';
   assumptions?: string[];
   valuationFrame?: string;

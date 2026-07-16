@@ -10,6 +10,7 @@
     "clean": "rm -rf dist server.js",
     "generate:public": "tsx scripts/generate-public-files.ts",
     "lint": "tsc --noEmit",
+    "audit:content-similarity": "tsx scripts/audit-content-similarity.ts",
     "audit:style": "node scripts/style-audit.mjs",
     "benchmark:austin": "node scripts/build-austin-crawlability-benchmark.mjs",
     "linkbuilding:external-check": "node scripts/check-link-building-external.mjs",

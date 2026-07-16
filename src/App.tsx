@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef, useEffect, useState, lazy, Suspense, type CSSProperties } from 'react';
 import { InkTrails } from './components/InkTrails';
 import { RomanTogaReveal } from './components/RomanTogaReveal';
@@ -14,6 +14,8 @@ import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
 import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
 import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavigation';
+import { AI_MANAGERS_ARTICLE_PATH } from './content/aiManagersArticle';
+import { PROFILE_FACTS } from './content/profileFacts';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './content/texasTollRoadArticleMeta';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
@@ -27,38 +29,32 @@ const loadAtlasCelestialParallaxPage = () => import('./pages/AtlasCelestialParal
 const loadMethodPage = () => import('./pages/VoidAgencyMethodPage');
 const loadAboutPage = () => import('./pages/AboutPage');
 const loadResumePage = () => import('./pages/ResumePage');
-const loadAiInformationPage = () => import('./pages/AiInformationPage');
 const loadResearchPage = () => import('./pages/ResearchPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
 const loadViralBenchArticlePage = () => import('./pages/ViralBenchArticlePage');
 const loadTexasTollRoadArticlePage = () => import('./pages/TexasTollRoadArticlePage');
-const loadSimplePage = () => import('./pages/SimplePage');
+const loadAiManagersArticlePage = () => import('./pages/AiManagersArticlePage');
 const loadWorkPage = () => import('./pages/WorkPage');
 const loadContactPage = () => import('./pages/ContactPage');
 const loadAtlasSampleCrawlPage = () => import('./pages/AtlasSampleCrawlPage');
-const loadTechnicalSeoCaseStudyPage = () => import('./pages/TechnicalSeoCaseStudyPage');
 const loadAustinTechnicalSeoPage = () => import('./pages/AustinTechnicalSeoPage');
-const loadVoidAgencyPage = () => import('./pages/VoidAgencyPage');
 
 const AtlasPage = lazy(loadAtlasPage);
 const AtlasCelestialParallaxPage = lazy(loadAtlasCelestialParallaxPage);
 const VoidAgencyMethodPage = lazy(loadMethodPage);
 const AboutPage = lazy(loadAboutPage);
 const ResumePage = lazy(loadResumePage);
-const AiInformationPage = lazy(loadAiInformationPage);
 const ResearchPage = lazy(loadResearchPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
 const ViralBenchArticlePage = lazy(loadViralBenchArticlePage);
 const TexasTollRoadArticlePage = lazy(loadTexasTollRoadArticlePage);
-const SimplePage = lazy(loadSimplePage);
+const AiManagersArticlePage = lazy(loadAiManagersArticlePage);
 const WorkPage = lazy(loadWorkPage);
 const ContactPage = lazy(loadContactPage);
 const AtlasSampleCrawlPage = lazy(loadAtlasSampleCrawlPage);
-const TechnicalSeoCaseStudyPage = lazy(loadTechnicalSeoCaseStudyPage);
 const AustinTechnicalSeoPage = lazy(loadAustinTechnicalSeoPage);
-const VoidAgencyPage = lazy(loadVoidAgencyPage);
 const LocalTime = lazy(() => import('./components/LocalTime').then(m => ({ default: m.LocalTime })));
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
@@ -107,30 +103,24 @@ async function preloadRoute(path: string) {
     await loadMethodPage();
   } else if (route?.path === '/about') {
     await loadAboutPage();
-  } else if (route?.path === '/simple') {
-    await loadSimplePage();
   } else if (route?.path === '/work') {
     await loadWorkPage();
   } else if (route?.path === '/contact') {
     await loadContactPage();
   } else if (route?.path === '/atlas/sample-crawl') {
     await loadAtlasSampleCrawlPage();
-  } else if (route?.path === '/case-studies/technical-seo-audit') {
-    await loadTechnicalSeoCaseStudyPage();
   } else if (route?.path === '/austin-technical-seo') {
     await loadAustinTechnicalSeoPage();
-  } else if (route?.path === '/void-agency') {
-    await loadVoidAgencyPage();
   } else if (route?.path === '/resume') {
     await loadResumePage();
-  } else if (route?.path === '/ai-information') {
-    await loadAiInformationPage();
   } else if (route?.path === '/research') {
     await loadResearchPage();
   } else if (route?.path === '/markets') {
     await loadMarketsPage();
   } else if (route?.path === '/viralbench-codex-agent-harness') {
     await loadViralBenchArticlePage();
+  } else if (route?.path === AI_MANAGERS_ARTICLE_PATH) {
+    await loadAiManagersArticlePage();
   } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
     await loadTexasTollRoadArticlePage();
   } else if (route?.section === 'research-article') {
@@ -187,12 +177,6 @@ export default function App() {
         <AboutPage />
       </Suspense>
     );
-  } else if (route?.path === '/simple') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <SimplePage />
-      </Suspense>
-    );
   } else if (route?.path === '/work') {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
@@ -211,34 +195,16 @@ export default function App() {
         <AtlasSampleCrawlPage />
       </Suspense>
     );
-  } else if (route?.path === '/case-studies/technical-seo-audit') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <TechnicalSeoCaseStudyPage />
-      </Suspense>
-    );
   } else if (route?.path === '/austin-technical-seo') {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
         <AustinTechnicalSeoPage />
       </Suspense>
     );
-  } else if (route?.path === '/void-agency') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <VoidAgencyPage />
-      </Suspense>
-    );
   } else if (route?.path === '/resume') {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
         <ResumePage />
-      </Suspense>
-    );
-  } else if (route?.path === '/ai-information') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AiInformationPage />
       </Suspense>
     );
   } else if (route?.path === '/research') {
@@ -253,6 +219,12 @@ export default function App() {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
         <ViralBenchArticlePage />
+      </Suspense>
+    );
+  } else if (route?.path === AI_MANAGERS_ARTICLE_PATH) {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <AiManagersArticlePage />
       </Suspense>
     );
   } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
@@ -371,61 +343,15 @@ function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
   );
 }
 
-let initialLoadComplete = false;
-
 function HomePage() {
   useSEO(HOME_SEO);
   const prefersReducedMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
 
-  const [counter, setCounter] = useState(initialLoadComplete ? 100 : 0);
-  const [isLoaded, setIsLoaded] = useState(initialLoadComplete);
   const [homeHeaderTone, setHomeHeaderTone] = useState<'light' | 'dark'>('light');
   const [activeSelectedWork, setActiveSelectedWork] = useState(0);
   const selectedWorksGuideRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (initialLoadComplete) return;
-
-    let frameId = 0;
-    let finishTimeoutId = 0;
-    const startedAt = window.performance.now();
-    const duration = prefersReducedMotion ? 180 : 900;
-    const holdDuration = prefersReducedMotion ? 40 : 100;
-
-    const animateCounter = (time: number) => {
-      const progress = Math.min((time - startedAt) / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 2.4);
-
-      setCounter(Math.min(100, Math.round(easedProgress * 100)));
-
-      if (progress < 1) {
-        frameId = window.requestAnimationFrame(animateCounter);
-        return;
-      }
-
-      finishTimeoutId = window.setTimeout(() => {
-        initialLoadComplete = true;
-        setIsLoaded(true);
-      }, holdDuration);
-    };
-
-    frameId = window.requestAnimationFrame(animateCounter);
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-      window.clearTimeout(finishTimeoutId);
-    };
-  }, [prefersReducedMotion]);
-
-  useEffect(() => {
-    document.body.style.overflow = isLoaded ? '' : 'hidden';
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isLoaded]);
 
   useEffect(() => {
     const guide = selectedWorksGuideRef.current;
@@ -470,11 +396,6 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (!isLoaded) {
-      setHomeHeaderTone('light');
-      return;
-    }
-
     let frameId = 0;
     const darkBackgroundClasses = new Set(['bg-ink', 'site-page-dark']);
     const toneIgnoreSelector = '[data-header-tone-ignore="true"]';
@@ -531,7 +452,13 @@ function HomePage() {
       );
       const toneElements = document
         .elementsFromPoint(probeX, probeY)
-        .filter((element) => !header?.contains(element) && !element.closest(toneIgnoreSelector));
+        .filter((element) => {
+          if (header?.contains(element) || element.closest(toneIgnoreSelector)) {
+            return false;
+          }
+
+          return window.getComputedStyle(element).pointerEvents !== 'none';
+        });
       const nextTone = toneElements.some(elementNeedsDarkHeader)
         ? 'dark'
         : 'light';
@@ -569,7 +496,7 @@ function HomePage() {
       window.removeEventListener('hashchange', scheduleHeaderToneUpdate);
       window.removeEventListener('popstate', scheduleHeaderToneUpdate);
     };
-  }, [isLoaded]);
+  }, []);
 
   const subY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
@@ -599,44 +526,9 @@ function HomePage() {
         <div className="absolute bottom-8 right-12 w-[1px] h-4 bg-canvas opacity-30" />
       </div>
 
-      {/* Intro Preloader Mask */}
-      <AnimatePresence>
-        {!isLoaded && (
-          <motion.div
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-ink p-8 text-canvas"
-            data-header-tone-ignore="true"
-            exit={{ opacity: 0 }}
-            transition={{ duration: prefersReducedMotion ? 0.12 : 0.35, ease: [0.33, 1, 0.68, 1] }}
-          >
-            <div className="absolute top-0 flex w-full justify-between px-8 pt-8 font-sans text-xs uppercase tracking-[0.2em] opacity-60 md:px-16">
-              <span>Building Evidence</span>
-              <span>{counter}%</span>
-            </div>
-
-            <motion.div
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="flex items-baseline font-serif text-6xl font-light tracking-normal md:text-9xl"
-            >
-              <span className="italic">{counter}</span>
-              <span className="ml-2 font-sans text-xl tracking-widest md:text-2xl">%</span>
-            </motion.div>
-
-            <div className="absolute bottom-16 left-8 right-8 h-[1px] bg-canvas/20 md:left-16 md:right-16">
-              <motion.div
-                className="h-full bg-canvas"
-                style={{ width: `${counter}%` }}
-                transition={{ duration: 0.1 }}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Main Container */}
       <main className="w-full" id="top">
-        {/* HERO SECTION — name and figure only */}
+        {/* HERO SECTION — identity, current work, and three proof paths */}
         <section className="home-cover relative flex min-h-[100svh] w-full overflow-hidden px-4 pb-8 pt-28 md:px-16 md:pb-12 md:pt-32">
           {!prefersReducedMotion && (
             <Suspense fallback={null}>
@@ -648,28 +540,39 @@ function HomePage() {
             style={{ opacity: titleOpacity }}
             className="home-cover__figure pointer-events-none absolute inset-0 z-[1]"
           >
-            {isLoaded && (
-              <RomanTogaReveal
-                fit="cover"
-                focus="large-figure"
-                restOpacity={0.1}
-                revealOpacity={0.46}
-                className="h-full w-full"
-              />
-            )}
+            <RomanTogaReveal
+              fit="cover"
+              focus="large-figure"
+              restOpacity={0.1}
+              revealOpacity={0.46}
+              className="h-full w-full"
+            />
           </motion.div>
 
           <motion.div
             style={{ y: subY }}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-            transition={{ duration: 0.8, delay: isLoaded ? 0.2 : 0 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.45, delay: prefersReducedMotion ? 0 : 0.05 }}
             className="relative z-10 flex w-full items-end"
           >
-            <h1 className="home-cover__title font-serif font-light tracking-normal text-ink">
-              <span className="block">Sulayman</span>
-              <span className="block italic">Bowles</span>
-            </h1>
+            <div className="w-full">
+              <h1 className="home-cover__title font-serif font-light tracking-normal text-ink">
+                <span className="block">Sulayman</span>
+                <span className="block italic">Bowles</span>
+              </h1>
+              <div className="mt-7 grid max-w-5xl gap-5 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-10">
+                <div>
+                  <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; founder of Void Agency, builder of Atlas, and publisher of source-led research.</p>
+                </div>
+                <nav aria-label="Featured proof" className="grid gap-2 self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
+                  <a href={AI_MANAGERS_ARTICLE_PATH} className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">The First AI Managers</a>
+                  <a href="/atlas" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Atlas</a>
+                  <a href="/markets/who-owns-texas-toll-roads" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Texas Toll Roads</a>
+                </nav>
+              </div>
+            </div>
           </motion.div>
         </section>
 
@@ -692,16 +595,16 @@ function HomePage() {
               </div>
               <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
                 <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
-                  Keep the source, the interpretation, and the missing pieces separate. The result should show what was observed, what was inferred, and what still needs proof.
+                  I build crawl, evidence, and research systems that preserve how a conclusion was produced. The work spans raw and rendered page data, React and TypeScript interfaces, Python and SQLite workflows, structured exports, analytics, and source-led research.
                 </p>
               </ScrollReveal>
             </div>
 
             <div className="grid border-y border-ink/14 md:grid-cols-3">
               {[
-                ['01', 'Observe', 'Capture the source material without cleaning away the gaps.'],
-                ['02', 'Separate', 'Mark facts, assumptions, constraints, and unknowns distinctly.'],
-                ['03', 'Ship', 'Turn the evidence into a decision, artifact, or next check.'],
+                ['01', 'Observe', 'Capture URL records, source and rendered states, links, directives, and provider failures without cleaning away the gaps.'],
+                ['02', 'Separate', 'Keep observations, derived findings, assumptions, and measurement gaps in distinct fields.'],
+                ['03', 'Ship', 'Export a decision with its source, owner, acceptance check, and rerun path.'],
               ].map(([num, title, copy], index) => (
                 <div key={num} className="min-h-52 border-b border-ink/14 py-7 last:border-b-0 md:border-b-0 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0 md:last:pr-0">
                   <ScrollReveal delay={index * 0.08} blur={false} className="grid h-full min-h-40 content-between">
@@ -764,7 +667,7 @@ function HomePage() {
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="mb-8 max-w-sm font-serif text-xl italic leading-tight normal-case tracking-normal text-canvas/90 md:mb-0 md:text-3xl lg:text-4xl">
-		                       A crawl system for indexation, internal links, canonicals, structured data, and raw/rendered HTML.
+		                       A crawl and evidence system that preserves raw and rendered pages, tests indexation, canonicals, links, and structured data, then exports reviewable findings.
                      </p>
                    </ScrollReveal>
                    
@@ -774,11 +677,11 @@ function HomePage() {
                      <div className="flex flex-col border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:max-w-xs">
                        <div className="flex justify-between">
                          <span className="opacity-60">Role</span>
-                         <span className="text-canvas">Builder / Operator</span>
+                         <span className="text-canvas">Founder / Product / Engineering</span>
                        </div>
                        <div className="flex justify-between">
                          <span className="opacity-60">Output</span>
-                         <span className="text-canvas">Crawl Data, Issue Logic, Reports</span>
+                         <span className="text-canvas">Crawl Records, Review, Exports</span>
                        </div>
                      </div>
                    </ScrollReveal>
@@ -904,7 +807,7 @@ function HomePage() {
                   </h4>
                 </ScrollReveal>
                 <ScrollReveal delay={0.4}>
-	                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">Void Agency is the service branch of my technical SEO, crawlability, structured content, analytics, and search visibility work.</p>
+	                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">I use Void Agency to turn crawl diagnostics into fixed-scope technical SEO audits: URL-level findings, implementation notes, analytics review, owners, and rerun checks.</p>
                 </ScrollReveal>
                 <ScrollReveal delay={0.6}>
                   <MagneticButton className="mt-16">

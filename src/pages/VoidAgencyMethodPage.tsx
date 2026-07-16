@@ -85,8 +85,8 @@ export default function VoidAgencyMethodPage() {
         </p>
         <div className="mt-8 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
           <a href="/contact" className="border-b border-accent/45 pb-1 text-accent hover:border-canvas hover:text-canvas">Request an audit</a>
-          <a href="/atlas/sample-crawl" className="border-b border-canvas/28 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Sample crawl</a>
-          <a href="/case-studies/technical-seo-audit" className="border-b border-canvas/28 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Finding walkthrough</a>
+          <a href="/atlas/sample-crawl" className="border-b border-canvas/28 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Open-corpus demonstration</a>
+          <a href="#worked-finding" className="border-b border-canvas/28 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Worked finding</a>
         </div>
       </section>
 
@@ -183,7 +183,7 @@ export default function VoidAgencyMethodPage() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-[1480px] border-t border-canvas/14 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+      <section id="worked-finding" className="relative z-10 mx-auto max-w-[1480px] scroll-mt-24 border-t border-canvas/14 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.38fr_0.62fr] lg:items-end">
           <div>
             <p className="text-[10px] uppercase tracking-[0.28em] text-canvas/60">Worked finding</p>

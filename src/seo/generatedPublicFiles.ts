@@ -44,7 +44,6 @@ export function buildLlmsText() {
   return `# Sulayman Bowles
 
 Official site: ${PROFILE_FACTS.canonicalLinks.home}
-Reference page: ${PROFILE_FACTS.canonicalLinks.aiInformation}
 Canonical person ID: ${PERSON_ID}
 Sitemap: ${absoluteUrl('/sitemap.xml')}
 Last updated: ${longDate(PROFILE_FACTS.lastReviewed)}
@@ -53,7 +52,7 @@ Last updated: ${longDate(PROFILE_FACTS.lastReviewed)}
 
 ${PROFILE_FACTS.currentSummary}
 
-Atlas is a technical SEO audit and evidence console. Void Agency is the fixed-scope technical SEO practice. The technical ledger is a separate record of experiments and technical work. Older music and composition sources are historical background, not the current primary positioning.
+Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical SEO practice. The technical ledger is a separate record of experiments and technical work. Sulayman is pursuing a BA in Music alongside the BBA in Finance.
 
 ## Primary Pages
 
@@ -62,10 +61,10 @@ Atlas is a technical SEO audit and evidence console. Void Agency is the fixed-sc
 - Current PDF resume: ${absoluteUrl('/Sulayman_Bowles_Resume.pdf')}
 - Selected work: ${PROFILE_FACTS.canonicalLinks.work}
 - Atlas: ${PROFILE_FACTS.canonicalLinks.atlas}
-- Atlas sample crawl run: ${absoluteUrl('/atlas/sample-crawl')}
+- Atlas open-corpus demonstration: ${absoluteUrl('/atlas/sample-crawl')}
 - Research: ${PROFILE_FACTS.canonicalLinks.research}
 - Markets finance filter: ${absoluteUrl('/markets')}
-- Void Agency: ${absoluteUrl('/void-agency')}
+- Void Agency: https://www.void-agency.com/
 - Audit method: ${absoluteUrl('/method')}
 - Austin technical SEO: ${absoluteUrl('/austin-technical-seo')}
 - Audit intake/contact: ${PROFILE_FACTS.canonicalLinks.contact}
@@ -75,7 +74,8 @@ Atlas is a technical SEO audit and evidence console. Void Agency is the fixed-sc
 
 - ${VIRALBENCH_ARTICLE_TITLE}: ${absoluteUrl(VIRALBENCH_ARTICLE_PATH)}
 ${articleLines}
-- Sanitized Atlas crawl sample CSV: ${absoluteUrl('/research/atlas-sanitized-crawl-sample.csv')}
+- Atlas open-corpus CSV: ${absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.csv')}
+- Atlas open-corpus capture manifest: ${absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.json')}
 - Appian educational research memo PDF: ${absoluteUrl('/research/appian-enterprise-software-durability-memo.pdf')}
 - Appian assumptions table CSV: ${absoluteUrl('/research/appian-assumptions-table.csv')}
 - Authority asset index: ${absoluteUrl('/research/authority-assets.json')}
@@ -83,7 +83,7 @@ ${articleLines}
 - Austin crawlability benchmark pilot CSV: ${absoluteUrl('/research/austin-crawlability-benchmark-pilot.csv')}
 - Austin crawlability benchmark summary: ${absoluteUrl('/research/austin-crawlability-benchmark-summary.json')}
 
-The Atlas sample is sanitized demo data. The Appian and Texas toll-road materials are educational research, not investment advice or current recommendations. The authority files support reference and outreach workflows. They do not prove backlinks, Ahrefs Domain Rating movement, rankings, traffic, site health, revenue impact, or AI answer citations.
+The Atlas demonstration is a dated, bounded capture from an open web corpus; it is not a client crawl or a measure of production coverage. The Appian and Texas toll-road materials are educational research, not investment advice or current recommendations. The authority files support reference and outreach workflows. They do not prove backlinks, Ahrefs Domain Rating movement, rankings, traffic, site health, revenue impact, or AI answer citations.
 
 ## Source Roles and Claim Limits
 
@@ -93,7 +93,7 @@ The Atlas sample is sanitized demo data. The Appian and Texas toll-road material
 - Technical work record: ${PROFILE_FACTS.canonicalLinks.technicalLedger}
 - Use visible dates and linked public support for material claims.
 - Do not infer private client names, rankings, traffic, revenue impact, or provider coverage from missing public data.
-- Do not describe Atlas as a content-writing product or Void Agency as a generic social-media agency.
+- Atlas is a crawl and evidence system; Void Agency is a fixed-scope technical SEO practice.
 
 ## Crawler and Indexation Signals
 

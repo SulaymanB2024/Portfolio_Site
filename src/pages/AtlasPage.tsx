@@ -66,10 +66,10 @@ const methodSteps = [
 ];
 
 const heroRunStats = [
-  { label: 'Sample pages read', value: '12,842', note: 'sanitized seed, sitemap, rendered links' },
-  { label: 'Sample evidence states', value: '4', note: 'content, challenge, utility, error' },
-  { label: 'Sample repairs', value: '42', note: 'demo recommendations held for review' },
-  { label: 'Sample package', value: 'Reviewed', note: 'illustrative run ID and review bound' },
+  { label: 'Public pages captured', value: '2', note: 'bounded open-corpus seed set' },
+  { label: 'Observed states', value: '2', note: 'static and render-dependent source' },
+  { label: 'Traceable findings', value: '3', note: 'observation, derivation, next check' },
+  { label: 'Run package', value: 'CSV + JSON', note: 'dated snapshot; no build-time crawl' },
 ];
 
 const mobileHeroLinks = [
@@ -84,30 +84,30 @@ const mobileHeroLinks = [
 ];
 
 const capabilityStatus = [
-  { capability: 'Native crawl inventory', status: 'Shipped', proof: 'Sanitized crawl run', href: '/atlas/sample-crawl' },
+  { capability: 'Native crawl inventory', status: 'Shipped', proof: 'Open-corpus demonstration', href: '/atlas/sample-crawl' },
   { capability: 'Raw / rendered evidence', status: 'Shipped', proof: 'Evidence model below', href: '#atlas-evidence' },
   { capability: 'Run persistence and exports', status: 'Shipped / partial', proof: 'Technical architecture below', href: '#atlas-technical' },
   { capability: 'Provider mesh', status: 'Prototype', proof: 'Measurement gaps remain explicit', href: '#atlas-technical' },
   { capability: 'Scoring policy', status: 'In development', proof: 'Review gate remains authoritative', href: '#atlas-technical' },
-  { capability: 'Client handoff', status: 'Partial', proof: 'Sample package, not a private deliverable', href: '/atlas/sample-crawl' },
+  { capability: 'Client handoff', status: 'Partial', proof: 'Public demonstration package, not a client deliverable', href: '/atlas/sample-crawl' },
 ];
 
 const crawlLedgerRows = [
-  { field: 'Seed + sitemap', value: '13,642 URLs', state: 'inventory' },
-  { field: 'Rendered content', value: '8,731 pages', state: 'confirmed_content' },
-  { field: 'Access challenge', value: '44 pages', state: 'measurement_gap' },
-  { field: 'Utility URLs', value: '318 held', state: 'suppressed' },
-  { field: 'Client actions', value: '42 queued', state: 'review_gate' },
+  { field: 'Seed URLs', value: '2 public pages', state: 'inventory' },
+  { field: 'Static source', value: '10 quote cards', state: 'confirmed_source_content' },
+  { field: 'JS source', value: '10 embedded data records', state: 'render_review_required' },
+  { field: 'Canonical field', value: 'absent in both source responses', state: 'observation_only' },
+  { field: 'Exports', value: 'CSV + JSON manifest', state: 'reviewable_artifact' },
 ];
 
 const evidenceCards = [
-  { label: 'Search question', value: 'austin deck builder' },
-  { label: 'Crawl-backed page', value: '/services/deck-building' },
-  { label: 'Supporting passage', value: 'Deck construction, repair, materials, and project examples.' },
-  { label: 'Measured state', value: 'confirmed_content' },
-  { label: 'Confidence', value: '0.87', kind: 'score' },
-  { label: 'Claim limit', value: 'Useful category signal, weak city-level support' },
-  { label: 'Smallest reviewed repair', value: '/austin/deck-builder' },
+  { label: 'Demonstration corpus', value: 'Quotes to Scrape' },
+  { label: 'Render-sensitive page', value: '/js/' },
+  { label: 'Source signal', value: '10 embedded JSON records + DOM-write loop' },
+  { label: 'Measured state', value: 'render_review_required' },
+  { label: 'Confidence', value: 'high observation', kind: 'score' },
+  { label: 'Claim limit', value: 'Demonstration only; not a corpus-owner audit' },
+  { label: 'Next check', value: 'Render before content-coverage claims' },
 ];
 
 const evidenceTrace = [
@@ -161,47 +161,37 @@ const evidenceStateChips = [
 
 const coverageRows = [
   {
-    area: 'Deck builder intent',
-    observed: '/services/deck-building',
-    gap: 'City intent missing',
-    next: '/austin/deck-builder',
+    area: 'Static quote route',
+    observed: '/',
+    gap: 'None in source quote-card extraction',
+    next: 'Keep as source baseline',
   },
   {
-    area: 'Patio repair support',
-    observed: '/services/patio-repair',
-    gap: 'Thin local support',
-    next: 'Add local examples',
+    area: 'JavaScript quote route',
+    observed: '/js/',
+    gap: 'Rendered quote elements absent from source HTML',
+    next: 'Run rendered capture',
   },
   {
-    area: 'Outdoor kitchen entity',
-    observed: '/services/outdoor-kitchens',
-    gap: 'Weak internal links',
-    next: 'Link from project pages',
+    area: 'Canonical field',
+    observed: 'Both sampled responses',
+    gap: 'No canonical field observed',
+    next: 'Record only; no severity assigned',
   },
   {
-    area: 'Pergola service surface',
-    observed: '/services/pergolas',
-    gap: 'Schema incomplete',
-    next: 'Add service schema',
+    area: 'Static pagination',
+    observed: '/page/2/',
+    gap: 'Uncrawled in this bounded snapshot',
+    next: 'Add to next manifest',
   },
   {
-    area: 'Service area lattice',
-    observed: '/locations',
-    gap: 'Support not tied to services',
-    next: 'Connect service + city pairs',
-  },
-  {
-    area: 'Project evidence',
-    observed: '/projects',
-    gap: 'Examples not query-aligned',
-    next: 'Tag examples by service',
   },
 ];
 
 const coverageMetrics = [
-  { label: 'Sample pages', value: '12,842' },
-  { label: 'Intent fields', value: '30' },
-  { label: 'Sample repairs', value: '42' },
+  { label: 'Sample pages', value: '2' },
+  { label: 'Observed fields', value: '9' },
+  { label: 'Finding chains', value: '3' },
 ];
 
 const coverageLadder = [
@@ -224,26 +214,23 @@ const coverageLadder = [
 ];
 
 const terminalLines = [
-  '# sample output only; not a private client run',
-  '$ atlas audit --domain example.com --depth 3 --render',
+  '# bounded public demonstration; not a private client run',
+  '$ atlas audit --seed https://quotes.toscrape.com/js/ --render',
   'Opening crawl ledger...',
-  '13,642 URLs discovered from seed, sitemap, render links',
+  '2 seed pages captured from the versioned manifest',
   'Drawing evidence states...',
-  'confirmed_content=8,731 access_challenge=44 utility_url=318',
-  'Extracting text, headings, canonicals, internal links, schema',
-  'Binding passages to questions...',
-  '20 grounded passages per query family',
-  '42 recommendation candidates held for review',
-  'Export package sealed with source URLs, run ID, and boundaries',
+  'static_source=1 render_review_required=1',
+  'Extracting titles, canonicals, links, source content, and runtime indicators',
+  'Binding observations to finding chains...',
+  '3 reviewable findings with confidence and claim limits',
+  'No client actions generated from demonstration data',
+  'Export package sealed with seed URLs, run ID, and boundaries',
 ];
 
 const issueRows = [
-  { issue: 'Absent city-service page', evidence: 'Query gap', impact: 'High' },
-  { issue: 'Weak supporting passage', evidence: 'Thin support', impact: 'High' },
-  { issue: 'Competing service surfaces', evidence: 'Cluster overlap', impact: 'Medium' },
-  { issue: 'Broken internal path', evidence: 'HTTP + graph', impact: 'Medium' },
-  { issue: 'Unmarked service entity', evidence: 'DOM extract', impact: 'Medium' },
-  { issue: 'Slow rendered template', evidence: 'Render timing', impact: 'Low' },
+  { issue: 'Render-dependent quote output', evidence: 'Source script', impact: 'Review' },
+  { issue: 'Canonical field absent', evidence: 'Source extraction', impact: 'Observation' },
+  { issue: 'Pagination path discovered', evidence: 'HTML navigation', impact: 'Inventory' },
 ];
 
 const technicalPillars = [

@@ -2,12 +2,6 @@ import { ALL_ARTICLES, getArticlePath, getLegacyArticlePath } from '../content/a
 import { isInvestmentMemo } from '../content/articleModels';
 import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
 import {
-  AI_INFORMATION_DESCRIPTION,
-  AI_INFORMATION_STATIC_HTML,
-  AI_INFORMATION_TITLE,
-} from '../content/aiInformation';
-import { SIMPLE_BOOK_DESCRIPTION, SIMPLE_BOOK_H1, SIMPLE_BOOK_STATIC_SUMMARY, SIMPLE_BOOK_TITLE } from '../content/simpleBook';
-import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
   VIRALBENCH_ARTICLE_EXCERPT,
@@ -20,7 +14,6 @@ import {
 import {
   aboutJsonLd,
   austinTechnicalSeoJsonLd,
-  aiInformationJsonLd,
   atlasSampleCrawlJsonLd,
   atlasJsonLd,
   contactJsonLd,
@@ -30,11 +23,8 @@ import {
   methodJsonLd,
   researchAssetsJsonLd,
   resumeJsonLd,
-  simpleBookJsonLd,
   sitemapJsonLd,
-  technicalSeoCaseStudyJsonLd,
   viralBenchArticleJsonLd,
-  voidAgencyJsonLd,
   workJsonLd,
   type JsonLd,
 } from './schema';
@@ -42,16 +32,13 @@ import {
 export type RouteSection =
   | 'home'
   | 'about'
-  | 'book'
   | 'resume'
   | 'source-information'
   | 'work'
   | 'contact'
   | 'project'
   | 'service'
-  | 'organization'
   | 'local-service'
-  | 'case-study'
   | 'research'
   | 'research-article';
 
@@ -77,7 +64,7 @@ export interface SeoRoute {
 export type RouteVisualMode = 'canvas-sample' | 'dark-evidence' | 'memo-reader' | 'book' | 'prototype';
 export type RouteTone = 'light' | 'dark';
 
-export const SITE_LASTMOD = '2026-07-12';
+export const SITE_LASTMOD = '2026-07-16';
 const PROFILE_OG_IMAGE = '/images/social/og-profile.png';
 const ATLAS_OG_IMAGE = '/images/social/og-atlas.png';
 const WORK_OG_IMAGE = '/images/social/og-work.png';
@@ -105,9 +92,9 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/',
     aliases: [],
-    title: 'Sulayman Bowles | Technical SEO Systems Builder',
+    title: 'Sulayman Bowles | AI Product, Systems & Research',
     description:
-      'Sulayman Bowles builds technical SEO tools, Atlas crawl audit systems, search visibility workflows, and finance research samples through Atlas and Void Agency.',
+      'Sulayman Bowles works in AI product, technical systems, and investment research—building Atlas and publishing source-led work on AI and infrastructure.',
     h1: 'Sulayman Bowles',
     section: 'home',
     pageType: 'website',
@@ -115,16 +102,16 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'UT Austin McCombs student and technical systems builder focused on Atlas, technical SEO, search visibility, and finance research.',
+      'Technical systems builder and UT Austin McCombs student working across crawl infrastructure, AI product workflows, analytics, and finance research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: homeJsonLd(),
   },
   {
     path: '/work',
     aliases: [],
-    title: 'Selected Work | Products, Research & Technical Systems',
+    title: 'Selected Work | Technical Systems & Research',
     description:
-      'Six distinct public artifacts from Sulayman Bowles across Atlas, infrastructure research, AI-agent evaluation, SEO analytics, Void Agency, and technical builds.',
+      'Six public artifacts from Sulayman Bowles with explicit ownership, implementation details, current status, constraints, and inspectable evidence.',
     h1: 'Selected Work',
     section: 'work',
     pageType: 'website',
@@ -132,16 +119,16 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'Six distinct public artifacts across Atlas, infrastructure research, AI-agent evaluation, SEO analytics, Void Agency, and technical builds.',
+      'Six public artifacts across Atlas, infrastructure research, AI-agent evaluation, SEO analytics, Void Agency, and technical builds, each with ownership and proof.',
     image: WORK_OG_IMAGE,
     jsonLd: workJsonLd(),
   },
   {
     path: '/about',
     aliases: [],
-    title: 'About Sulayman Bowles | McCombs, SEO & Atlas',
+    title: 'About Sulayman Bowles | Technical Systems Builder',
     description:
-      'About Sulayman Bowles: UT Austin McCombs student, Void Agency founder, and Atlas builder focused on technical SEO, crawl audits, and markets research systems.',
+      'Sulayman Bowles designs crawl and evidence systems across React, TypeScript, Python, SQLite, technical SEO, AI product work, and finance research.',
     h1: 'About Sulayman Bowles',
     section: 'about',
     pageType: 'profile',
@@ -149,24 +136,9 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'Sulayman Bowles is a UT Austin McCombs student and builder/operator connecting Atlas, technical SEO, Void Agency, and finance research.',
+      'Sulayman Bowles is a technical systems builder connecting Atlas, technical SEO, Void Agency, AI product workflows, and finance research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: aboutJsonLd(),
-  },
-  {
-    path: '/simple',
-    aliases: ['/book', '/plain', '/text'],
-    title: SIMPLE_BOOK_TITLE,
-    description: SIMPLE_BOOK_DESCRIPTION,
-    h1: SIMPLE_BOOK_H1,
-    section: 'book',
-    pageType: 'profile',
-    priority: 0.7,
-    includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
-    staticSummary: SIMPLE_BOOK_STATIC_SUMMARY,
-    image: PROFILE_OG_IMAGE,
-    jsonLd: simpleBookJsonLd(),
   },
   {
     path: '/atlas',
@@ -188,17 +160,17 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/atlas/sample-crawl',
     aliases: ['/atlas/sample-run'],
-    title: 'Atlas Sample Crawl Run | Sanitized SEO Data',
+    title: 'Atlas Open Corpus Demonstration | Crawl Evidence',
     description:
-      'A sanitized Atlas sample crawl run showing URL status, indexability, crawl depth, link counts, canonical state, issue labels, and downloadable CSV rows.',
-    h1: 'Atlas Sample Crawl Run',
+      'A dated Atlas demonstration showing source and render states, discovered paths, confidence, findings, and downloadable run artifacts from a bounded open corpus.',
+    h1: 'Atlas Open Corpus Demonstration',
     section: 'project',
     pageType: 'project',
     priority: 0.8,
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'A sanitized Atlas sample crawl run showing URL status, indexability, crawl depth, link counts, canonical state, issue labels, and CSV rows.',
+      'A dated Atlas open-corpus demonstration with source state, render-state questions, traceable findings, confidence, and CSV/JSON artifacts.',
     image: ATLAS_OG_IMAGE,
     jsonLd: atlasSampleCrawlJsonLd(),
   },
@@ -235,23 +207,6 @@ const CORE_ROUTES: SeoRoute[] = [
       'Stable resume and profile page for Sulayman Bowles with links to Atlas, technical SEO work, finance research, public code, LinkedIn, and contact paths.',
     image: PROFILE_OG_IMAGE,
     jsonLd: resumeJsonLd(),
-  },
-  {
-    path: '/ai-information',
-    aliases: ['/official-information', '/entity-profile', '/source-information'],
-    title: 'Profile Context | Sulayman Bowles',
-    description: AI_INFORMATION_DESCRIPTION,
-    h1: AI_INFORMATION_TITLE,
-    section: 'source-information',
-    pageType: 'profile',
-    priority: 0.7,
-    includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
-    staticSummary:
-      'Current profile context for Sulayman Bowles, Void Agency, and Atlas SEO Audit Console.',
-    staticHtml: AI_INFORMATION_STATIC_HTML,
-    image: PROFILE_OG_IMAGE,
-    jsonLd: aiInformationJsonLd(),
   },
   {
     path: '/research',
@@ -303,28 +258,11 @@ const CORE_ROUTES: SeoRoute[] = [
     jsonLd: methodJsonLd(),
   },
   {
-    path: '/void-agency',
-    aliases: [],
-    title: 'Void Agency | Technical SEO Audits',
-    description:
-      'Void Agency service-practice page for technical SEO, crawlability, indexation diagnostics, structured content, analytics review, web audits, and search visibility.',
-    h1: 'Void Agency',
-    section: 'organization',
-    pageType: 'service',
-    priority: 0.8,
-    includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
-    staticSummary:
-      'Void Agency is the service branch connected to technical SEO, crawlability, indexation diagnostics, structured content, analytics review, web audits, and search visibility.',
-    image: VOID_OG_IMAGE,
-    jsonLd: voidAgencyJsonLd(),
-  },
-  {
     path: '/contact',
     aliases: ['/audit-intake'],
     title: 'Contact Sulayman Bowles | Technical SEO Audit Brief',
     description:
-      'Contact Sulayman Bowles directly or send a brief for technical SEO, crawl evidence, analytics, search visibility, source-backed research, and audit scope.',
+      'Contact Sulayman Bowles about technical SEO, raw/render crawl evidence, analytics, implementation handoffs, validation, or source-backed research.',
     h1: 'Contact Sulayman Bowles',
     section: 'contact',
     pageType: 'service',
@@ -332,7 +270,7 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: SITE_LASTMOD,
     staticSummary:
-      'Contact-first route with direct email, a compact audit brief form, and links to LinkedIn, GitHub, resume, and public project records.',
+      'Direct email and a compact brief for technical SEO, crawl evidence, analytics, implementation, validation, and source-backed research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: contactJsonLd(),
   },
@@ -352,23 +290,6 @@ const CORE_ROUTES: SeoRoute[] = [
       'Austin technical SEO page for teams that need crawlability, indexation, structured data, page clarity, local search context, and implementation details reviewed.',
     image: VOID_OG_IMAGE,
     jsonLd: austinTechnicalSeoJsonLd(),
-  },
-  {
-    path: '/case-studies/technical-seo-audit',
-    aliases: ['/technical-seo-case-study'],
-    title: 'Technical SEO Finding Walkthrough | Crawl Data',
-    description:
-      'A sanitized crawl-to-repair walkthrough showing how one observed field becomes an interpreted risk, implementation action, rerun check, and clear evidence boundary.',
-    h1: 'Technical SEO Finding Walkthrough',
-    section: 'case-study',
-    pageType: 'article',
-    priority: 0.7,
-    includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
-    staticSummary:
-      'A sanitized crawl-to-repair walkthrough showing how one observed field becomes an interpreted risk, implementation action, and rerun check.',
-    image: VOID_OG_IMAGE,
-    jsonLd: technicalSeoCaseStudyJsonLd(),
   },
   {
     path: VIRALBENCH_ARTICLE_PATH,
@@ -466,10 +387,6 @@ export function getSeoRoute(path: string) {
 export function getRouteVisualMode(path: string): RouteVisualMode {
   const route = getSeoRoute(path);
 
-  if (route?.path === '/simple') {
-    return 'book';
-  }
-
   if (route?.path === '/atlas/celestial-parallax') {
     return 'prototype';
   }
@@ -483,9 +400,7 @@ export function getRouteVisualMode(path: string): RouteVisualMode {
     route?.section === 'work' ||
     route?.section === 'contact' ||
     route?.section === 'service' ||
-    route?.section === 'organization' ||
-    route?.section === 'local-service' ||
-    route?.section === 'case-study'
+    route?.section === 'local-service'
   ) {
     return 'dark-evidence';
   }
@@ -495,7 +410,11 @@ export function getRouteVisualMode(path: string): RouteVisualMode {
 
 export function getRouteTone(path: string): RouteTone {
   const mode = getRouteVisualMode(path);
-  return mode === 'dark-evidence' || mode === 'memo-reader' ? 'dark' : 'light';
+  const route = getSeoRoute(path);
+  if (mode === 'memo-reader') {
+    return 'light';
+  }
+  return mode === 'dark-evidence' ? 'dark' : 'light';
 }
 
 export function getCanonicalRoutes() {

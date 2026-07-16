@@ -5,50 +5,12 @@ import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { WireframeGrid } from '../components/WireframeGrid';
-import { PROFILE_FACTS, formatIsoDate } from '../content/profileFacts';
+import { PROFILE_FACTS, formatEducation, formatIsoDate } from '../content/profileFacts';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const RESUME_SEO = getSeoRoute('/resume')!;
 const RESUME_PDF_PATH = '/Sulayman_Bowles_Resume.pdf';
-
-const experience = [
-  {
-    role: 'Founder',
-    org: 'Void Agency',
-    dates: 'Dec 2025 — Present',
-    summary:
-      'Builds fixed-scope technical SEO audits, website systems, local-search reviews, and crawl-access checks with explicit evidence and handoff boundaries.',
-  },
-  {
-    role: 'AI Product Manager Intern',
-    org: 'Chegg, Office of the Chief Product Officer',
-    dates: 'May 2026 — Aug 2026',
-    summary:
-      'Supports AI product research, competitive analysis, workflow mapping, and prototype review for student-facing product work.',
-  },
-  {
-    role: 'Technical SEO Analytics',
-    org: 'Private engagement',
-    dates: 'May 2026 — Present',
-    summary:
-      'Supports GA4 and Search Console reporting, launch baselines, traffic analysis, keyword tracking, and prioritized site recommendations.',
-  },
-  {
-    role: 'Student Associate',
-    org: 'Jon Brumley Texas Venture Labs',
-    dates: 'Sep 2025 — Present',
-    summary:
-      'Advises early-stage teams on customer discovery, market validation, competitive positioning, unit economics, go-to-market work, and financial models.',
-  },
-];
-
-const skillGroups = [
-  ['Technical SEO', 'Crawlability, indexation, canonicals, redirects, robots.txt, sitemaps, internal links, structured data, templates, and rerun checks.'],
-  ['Analytics & research', 'GA4, Google Search Console, public-source research, assumption tables, market structure, valuation frames, and claim boundaries.'],
-  ['Product & software', 'React, TypeScript, Vite, Python, SQLite, product research, workflow mapping, prototypes, structured reports, and CSV/JSON exports.'],
-  ['Operating practice', 'Scoping, evidence review, issue prioritization, implementation handoff, client-safe reporting, and acceptance criteria.'],
-];
 
 const supportingLinks = [
   { label: 'Atlas', href: '/atlas', meta: 'Product and public crawl evidence' },
@@ -93,7 +55,7 @@ export default function ResumePage() {
               Sulayman Bowles
             </h1>
             <p className="mt-9 max-w-4xl font-serif text-[1.7rem] italic leading-[1] tracking-normal text-ink/72 md:text-[3.4rem]">
-              Technical SEO, search systems, product, and finance research.
+              Technical systems builder working across crawl infrastructure, AI product workflows, analytics, and finance research.
             </p>
           </div>
 
@@ -101,8 +63,8 @@ export default function ResumePage() {
             <p className="text-[10px] uppercase tracking-[0.22em] text-ink/60">Education</p>
             <p className="mt-5 text-lg leading-snug text-ink">{PROFILE_FACTS.education.school}</p>
             <p className="mt-2 text-sm leading-relaxed text-ink/70">
-              {PROFILE_FACTS.education.degree} in {PROFILE_FACTS.education.field}<br />
-              {PROFILE_FACTS.education.institution} · Expected {PROFILE_FACTS.education.graduation}
+              {formatEducation()}<br />
+              {PROFILE_FACTS.education.institution} · Expected {PROFILE_FACTS.education.expectedGraduation}
             </p>
             <div className="mt-8 grid gap-3 text-[10px] uppercase tracking-[0.18em]">
               <a href={RESUME_PDF_PATH} className="flex min-h-12 items-center justify-between border border-ink/24 bg-ink px-4 text-canvas transition-colors hover:bg-accent hover:text-ink">
@@ -121,30 +83,33 @@ export default function ResumePage() {
         <Section label="01" title="Education & focus">
           <div className="grid gap-px overflow-hidden border border-ink/14 md:grid-cols-2">
             <article className="bg-ink/[0.018] p-6">
-              <h3 className="text-[10px] uppercase tracking-[0.24em] text-ink/64">McCombs School of Business</h3>
-              <p className="mt-5 text-sm font-semibold text-ink">BBA in Finance · expected May 2027</p>
-              <p className="mt-3 text-sm leading-relaxed text-ink/70">Coursework includes valuation, quantitative investment, database management, and predictive analytics. Activities include Texas Venture Labs.</p>
+              <h3 className="text-[10px] uppercase tracking-[0.24em] text-ink/64">UT Austin</h3>
+              <p className="mt-5 text-sm font-semibold text-ink">{formatEducation()} · expected {PROFILE_FACTS.education.expectedGraduation}</p>
+              <p className="mt-3 text-sm leading-relaxed text-ink/70">Coursework includes {PROFILE_FACTS.education.coursework.join(', ')}.</p>
             </article>
             <article className="bg-ink/[0.018] p-6">
               <h3 className="text-[10px] uppercase tracking-[0.24em] text-ink/64">Current focus</h3>
               <p className="mt-5 text-sm font-semibold text-ink">Atlas, technical SEO, product systems, and source-led research</p>
-              <p className="mt-3 text-sm leading-relaxed text-ink/70">Builds inspectable systems that keep raw observations separate from analysis, recommendations, and measurement gaps.</p>
+              <p className="mt-3 text-sm leading-relaxed text-ink/70">Designs crawl and evidence workflows, React and TypeScript interfaces, Python and SQLite data paths, structured exports, and review gates that keep observations separate from recommendations and measurement gaps.</p>
             </article>
           </div>
         </Section>
 
         <Section label="02" title="Experience">
           <div className="grid gap-4">
-            {experience.map((item) => (
-              <article key={`${item.role}-${item.org}`} className="border border-ink/14 p-5">
+            {PROFILE_FACTS.experience.map((item) => (
+              <article key={`${item.title}-${item.organization}`} className="border border-ink/14 p-5">
                 <div className="mb-5 grid gap-2 md:grid-cols-[1fr_auto] md:items-start">
                   <div>
-                    <h3 className="text-sm uppercase tracking-[0.2em] text-ink">{item.role}</h3>
-                    <p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-ink/60">{item.org}</p>
+                    <h3 className="text-sm uppercase tracking-[0.2em] text-ink">{item.title}</h3>
+                    <p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-ink/60">{item.organization} · {item.location}</p>
                   </div>
                   <p className="text-[10px] uppercase tracking-[0.18em] text-ink/60 md:text-right">{item.dates}</p>
                 </div>
-                <p className="max-w-3xl text-sm leading-relaxed text-ink/70">{item.summary}</p>
+                <p className="max-w-3xl text-sm leading-relaxed text-ink/70">{item.publicSummary}</p>
+                <ul className="mt-4 grid max-w-3xl gap-2 text-sm leading-relaxed text-ink/70">
+                  {item.bullets.map((bullet) => <li key={bullet} className="border-l border-ink/16 pl-3">{bullet}</li>)}
+                </ul>
               </article>
             ))}
           </div>
@@ -152,16 +117,46 @@ export default function ResumePage() {
 
         <Section label="03" title="Skill inventory">
           <div className="grid gap-px overflow-hidden border border-ink/14 md:grid-cols-2">
-            {skillGroups.map(([label, copy]) => (
-              <article key={label} className="bg-ink/[0.018] p-5">
-                <h3 className="mb-4 text-[10px] uppercase tracking-[0.24em] text-ink/64">{label}</h3>
-                <p className="text-sm leading-relaxed text-ink/70">{copy}</p>
+            {PROFILE_FACTS.skillGroups.map((group) => (
+              <article key={group.label} className="bg-ink/[0.018] p-5">
+                <h3 className="mb-4 text-[10px] uppercase tracking-[0.24em] text-ink/64">{group.label}</h3>
+                <p className="text-sm leading-relaxed text-ink/70">{group.items.join(' · ')}</p>
               </article>
             ))}
           </div>
         </Section>
 
-        <Section label="04" title="Dated public proof">
+        <Section label="04" title="Awards & leadership">
+          <div className="grid gap-4">
+            {PROFILE_FACTS.awardsAndLeadership.map((item) => (
+              <article key={`${item.organization}-${item.title}`} className="border border-ink/14 p-5">
+                <div className="grid gap-2 md:grid-cols-[1fr_auto]">
+                  <div>
+                    <h3 className="text-sm uppercase tracking-[0.2em] text-ink">{item.title}</h3>
+                    <p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-ink/60">{item.organization} · {item.location}</p>
+                  </div>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-ink/60 md:text-right">{item.dates}</p>
+                </div>
+                <p className="mt-4 max-w-3xl text-sm leading-relaxed text-ink/70">{item.detail}</p>
+              </article>
+            ))}
+          </div>
+        </Section>
+
+        <Section label="05" title="Additional qualifications">
+          <div className="grid gap-px overflow-hidden border border-ink/14 md:grid-cols-2">
+            <article className="bg-ink/[0.018] p-5">
+              <h3 className="mb-4 text-[10px] uppercase tracking-[0.24em] text-ink/64">Certifications</h3>
+              <p className="text-sm leading-relaxed text-ink/70">{PROFILE_FACTS.certifications.join(' · ')}</p>
+            </article>
+            <article className="bg-ink/[0.018] p-5">
+              <h3 className="mb-4 text-[10px] uppercase tracking-[0.24em] text-ink/64">Languages</h3>
+              <p className="text-sm leading-relaxed text-ink/70">{PROFILE_FACTS.languages.join(' · ')}</p>
+            </article>
+          </div>
+        </Section>
+
+        <Section label="06" title="Dated public proof">
           <div className="grid gap-px overflow-hidden border border-ink/14 md:grid-cols-2 xl:grid-cols-3">
             {PROFILE_FACTS.proofClaims.map((item) => (
               <a key={item.label} href={item.publicSource} className="min-h-[190px] bg-ink/[0.018] p-5 transition-colors hover:bg-ink hover:text-canvas">
@@ -173,7 +168,7 @@ export default function ResumePage() {
           </div>
         </Section>
 
-        <Section label="05" title="Supporting links">
+        <Section label="07" title="Supporting links">
           <div className="grid gap-3">
             {supportingLinks.map((link) => (
               <a key={link.href} href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined} className="grid gap-3 border border-ink/14 px-5 py-4 text-[10px] uppercase tracking-[0.22em] text-ink/70 transition-colors hover:bg-ink hover:text-canvas md:grid-cols-[1fr_auto]">

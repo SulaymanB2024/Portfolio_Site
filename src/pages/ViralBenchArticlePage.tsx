@@ -1,9 +1,14 @@
 import { createElement, useEffect, useMemo, type ReactNode } from 'react';
-import { InternalFooter } from '../components/InternalFooter';
-import { InternalHeader } from '../components/InternalHeader';
-import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
-import { ScrollProgress } from '../components/ScrollProgress';
-import { WireframeGrid } from '../components/WireframeGrid';
+import {
+  ArticleBody,
+  ArticleCallout,
+  ArticleEndnote,
+  ArticleHero,
+  ArticleMetricStrip,
+  ArticlePage,
+  ArticleSectionHeader,
+  type ArticleNavItem,
+} from '../components/ArticleLayout';
 import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
@@ -114,7 +119,7 @@ function markdownToReact(markdown: string) {
 function ArticleMarkdown({ markdown }: { markdown: string }) {
   const content = useMemo(() => markdownToReact(markdown), [markdown]);
 
-  return <div className="toll-article-prose">{content}</div>;
+  return <div className="article-reader__prose">{content}</div>;
 }
 
 function ArticleVisual({ placement }: { placement: 'hero' | 'inline' }) {
@@ -179,42 +184,12 @@ function sectionMarker(section: ArticleSection, index: number) {
 
 function ViralBenchSection({ section, index }: { section: ArticleSection; index: number }) {
   return (
-    <section id={section.id} className="toll-article-section scroll-mt-28">
-      <header>
-        <span>{sectionMarker(section, index)}</span>
-        <h2>{section.title}</h2>
-      </header>
+    <section id={section.id}>
+      <ArticleSectionHeader index={sectionMarker(section, index)}>{section.title}</ArticleSectionHeader>
       {section.id === EVIDENCE_SECTION_ID ? <ArticleVisual placement="inline" /> : null}
       <ArticleMarkdown markdown={section.markdown} />
       {section.id === HARNESS_SECTION_ID ? <ArchitectureDiagram /> : null}
     </section>
-  );
-}
-
-function ArticleRail() {
-  const sections = ARTICLE.sections.filter((section) => RAIL_SECTION_IDS.has(section.id));
-
-  return (
-    <aside className="toll-article-rail">
-      <div className="toll-article-rail__sticky">
-        <p>Article map</p>
-        <nav aria-label="ViralBench article sections">
-          {sections.map((section) => {
-            const articleIndex = ARTICLE.sections.findIndex((candidate) => candidate.id === section.id);
-            return (
-              <a key={section.id} href={`/viralbench-codex-agent-harness#${section.id}`}>
-                <span>{sectionMarker(section, articleIndex)}</span>
-                {section.title}
-              </a>
-            );
-          })}
-        </nav>
-        <div className="toll-article-rail__boundary">
-          <span>Build boundary</span>
-          <p>Codex can diagnose and patch the harness. It cannot grade or deploy its own work.</p>
-        </div>
-      </div>
-    </aside>
   );
 }
 
@@ -258,80 +233,75 @@ export default function ViralBenchArticlePage() {
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
+  const railSections = ARTICLE.sections.filter((section) => RAIL_SECTION_IDS.has(section.id));
+  const navItems: ArticleNavItem[] = [
+    { id: 'overview', label: 'Overview', index: '00', summary: 'The system and the outer loop.' },
+    ...railSections.map((section) => {
+      const articleIndex = ARTICLE.sections.findIndex((candidate) => candidate.id === section.id);
+      return {
+        id: section.id,
+        label: section.title,
+        index: sectionMarker(section, articleIndex),
+      };
+    }),
+  ];
+
   return (
-    <main id="top" className="site-page site-page-dark toll-article viralbench-toll-article min-h-screen overflow-x-hidden font-sans">
-      <WireframeGrid tone="dark" className="pointer-events-none absolute inset-0 z-0 opacity-20" />
-      <PageTechnicalChrome tone="dark" />
-      <ScrollProgress />
-      <InternalHeader activePath="/research" tone="dark" />
+    <ArticlePage activePath="/research" variant="chapters" className="viralbench-toll-article">
+      <ArticleHero
+        backHref="/research"
+        backLabel="Research notes"
+        eyebrow="ViralBench / Codex / agent evaluation"
+        title={VIRALBENCH_ARTICLE_TITLE}
+        displayTitle="A bounded outer loop for improving a live marketing agent."
+        deck={VIRALBENCH_ARTICLE_DESCRIPTION}
+        image={{
+          src: VIRALBENCH_ARTICLE_IMAGE,
+          alt: 'A monochrome gallery of suspended social-media posts receding toward a bright exit.',
+          label: 'System view / 01',
+          caption: 'The live attention environment surrounding the agent harness.',
+        }}
+        metadata={[
+          { label: 'Subject', value: 'AI systems engineering' },
+          { label: 'Published', value: <time dateTime={VIRALBENCH_ARTICLE_DATE}>July 9, 2026</time> },
+          { label: 'Updated', value: <time dateTime={VIRALBENCH_ARTICLE_MODIFIED_DATE}>July 14, 2026</time> },
+          { label: 'Read time', value: VIRALBENCH_ARTICLE_READ_TIME },
+          { label: 'Method', value: <>Live methodology, supplied source archive, and code audit at commit <code>5f5f57e</code>.</> },
+        ]}
+      />
 
-      <article className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-24 pt-14 md:px-8 lg:px-10 lg:pt-24">
-        <header className="toll-article-hero">
-          <aside>
-            <a href="/research">← Research notes</a>
-            <dl>
-              <div><dt>Subject</dt><dd>AI systems engineering</dd></div>
-              <div><dt>Published</dt><dd><time dateTime={VIRALBENCH_ARTICLE_DATE}>July 9, 2026</time></dd></div>
-              <div><dt>Updated</dt><dd><time dateTime={VIRALBENCH_ARTICLE_MODIFIED_DATE}>July 14, 2026</time></dd></div>
-              <div><dt>Length</dt><dd>{VIRALBENCH_ARTICLE_READ_TIME}</dd></div>
-              <div><dt>Method</dt><dd>Live methodology, supplied source archive, and code audit at commit <code>5f5f57e</code>.</dd></div>
-            </dl>
-          </aside>
-          <div>
-            <p className="toll-article-hero__eyebrow">ViralBench / Codex / agent evaluation</p>
-            <h1>{VIRALBENCH_ARTICLE_TITLE}</h1>
-            <p className="toll-article-hero__display-title">A bounded outer loop for improving a live marketing agent.</p>
-            <p className="toll-article-hero__deck">{VIRALBENCH_ARTICLE_DESCRIPTION}</p>
-          </div>
-        </header>
+      <ArticleMetricStrip items={HEADLINE_METRICS.map((metric) => ({ label: metric.label, value: metric.value, note: metric.note }))} />
 
-        <ArticleVisual placement="hero" />
+      <ArticleCallout label="Short answer" title="The benchmark is the system, not only the model.">
+        <p>
+          The ViralBench agent tries to make a successful post. Codex improves the system that researches, creates, reviews, and publishes it—through isolated patches, replay tests, independent evaluation, and controlled promotion.
+        </p>
+      </ArticleCallout>
 
-        <div className="toll-headline-metrics" aria-label="ViralBench harness headline figures">
-          {HEADLINE_METRICS.map((metric) => (
-            <div key={metric.label}>
-              <strong>{metric.value}</strong>
-              <span>{metric.label}</span>
-              <small>{metric.note}</small>
-            </div>
-          ))}
-        </div>
-
-        <section className="toll-quick-answer" aria-labelledby="viralbench-quick-answer">
-          <p>Short answer</p>
-          <div>
-            <h2 id="viralbench-quick-answer">The benchmark is the system, not only the model.</h2>
-            <p>
-              The ViralBench agent tries to make a successful post. Codex improves the system that researches, creates, reviews, and publishes it—through isolated patches, replay tests, independent evaluation, and controlled promotion.
-            </p>
-          </div>
+      <ArticleBody
+        items={navItems}
+        variant="chapters"
+        boundary="Codex can diagnose and patch the harness. It cannot grade or deploy its own work."
+        boundaryLabel="Build boundary"
+      >
+        <section id="overview">
+          <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
+          <ArticleMarkdown markdown={ARTICLE.lede} />
         </section>
+        {ARTICLE.sections.map((section, index) => (
+          createElement(ViralBenchSection, { key: section.id, section, index })
+        ))}
 
-        <div className="toll-article-layout">
-          <ArticleRail />
-          <div className="min-w-0 max-w-[920px]">
-            <section className="toll-article-lede">
-              <ArticleMarkdown markdown={ARTICLE.lede} />
-            </section>
-            {ARTICLE.sections.map((section, index) => (
-              createElement(ViralBenchSection, { key: section.id, section, index })
-            ))}
-
-            <footer className="toll-article-endnote">
-              <p>Build note based on the live ViralBench methodology and the supplied standalone handoff at commit 5f5f57e.</p>
-              <nav aria-label="Related research">
-                <a href="/research">Research assets</a>
-                <a href="/atlas">Atlas</a>
-                <a href="/about">About the author</a>
-              </nav>
-            </footer>
-          </div>
-        </div>
-      </article>
-
-      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-8 md:px-8 lg:px-10">
-        <InternalFooter activePath="/research" tone="dark" />
-      </div>
-    </main>
+        <ArticleEndnote
+          links={[
+            { href: '/research', label: 'Research assets' },
+            { href: '/atlas', label: 'Atlas' },
+            { href: '/about', label: 'About the author' },
+          ]}
+        >
+          Build note based on the live ViralBench methodology and the supplied standalone handoff at commit 5f5f57e.
+        </ArticleEndnote>
+      </ArticleBody>
+    </ArticlePage>
   );
 }

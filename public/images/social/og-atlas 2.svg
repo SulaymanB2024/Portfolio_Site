@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f4f4f0"/>
+  <path d="M48 48h1104v534H48z" fill="none" stroke="#080807" stroke-opacity=".2"/>
+  <g transform="translate(880 300)" fill="none">
+    <circle r="190" stroke="#080807" stroke-opacity=".2"/>
+    <ellipse rx="190" ry="72" stroke="#080807" stroke-width="2"/>
+    <ellipse rx="190" ry="72" transform="rotate(58)" stroke="#080807" stroke-width="2"/>
+    <ellipse rx="190" ry="72" transform="rotate(118)" stroke="#b7c8a8" stroke-width="12"/>
+    <circle r="18" fill="#080807"/>
+  </g>
+  <text x="84" y="112" fill="#080807" font-family="Arial, sans-serif" font-size="19" letter-spacing="8">ATLAS / SEO AUDIT CONSOLE</text>
+  <text x="78" y="275" fill="#080807" font-family="Georgia, serif" font-size="132" font-style="italic">Crawl.</text>
+  <text x="84" y="372" fill="#080807" font-family="Georgia, serif" font-size="78" font-style="italic">Evidence. Action.</text>
+  <path d="M84 455h620" stroke="#080807" stroke-opacity=".24"/>
+  <text x="84" y="506" fill="#080807" fill-opacity=".68" font-family="Arial, sans-serif" font-size="18" letter-spacing="4">RAW + RENDERED RECORDS · REVIEW GATES · EXPORTS</text>
+</svg>

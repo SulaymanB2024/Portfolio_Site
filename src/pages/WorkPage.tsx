@@ -11,14 +11,14 @@ const WORK_SEO = getSeoRoute('/work')!;
 
 const supportingArtifacts = [
   {
-    label: 'Technical SEO Finding Walkthrough',
-    href: '/case-studies/technical-seo-audit',
-    description: 'A sanitized field → risk → repair → rerun example. It is supporting evidence, not a client-outcome case study.',
+    label: 'Worked finding example',
+    href: '/method#worked-finding',
+    description: 'A field → review → rerun example embedded in the audit method, not a client-outcome case study.',
   },
   {
-    label: 'Atlas sample crawl CSV',
-    href: '/research/atlas-sanitized-crawl-sample.csv',
-    description: 'The source table behind the public Atlas sample.',
+    label: 'Atlas open-corpus run CSV',
+    href: '/research/atlas-open-corpus-run-2026-07-16.csv',
+    description: 'The dated source table behind the public Atlas demonstration.',
   },
   {
     label: 'Technical SEO audit method',
@@ -49,10 +49,10 @@ export default function WorkPage() {
       <section className="relative z-10 mx-auto grid min-h-[62vh] max-w-[1480px] content-end px-4 pb-16 pt-20 md:px-8 xl:px-10">
         <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Selected work / six public artifacts</p>
         <h1 className="max-w-5xl font-serif text-[4rem] italic leading-[0.82] tracking-normal md:text-[7.5rem] xl:text-[10rem]">
-          Work I can point to.
+          Systems I built. Evidence you can inspect.
         </h1>
         <p className="mt-10 max-w-3xl text-base leading-relaxed text-canvas/68">
-          Products, research, operating work, and technical records—not alternate names for the same SEO process. Each entry states what I owned, what exists now, and where the public evidence stops.
+          Each entry names the problem, my ownership, the system or study I built, its constraints, its current state, and the artifact that supports the claim. Shipped crawler behavior is labeled shipped; published architecture is not presented as a deployed service.
         </p>
       </section>
 

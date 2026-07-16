@@ -9,9 +9,9 @@ const DIRECT_EMAIL = 'sulayman.bowles@gmail.com';
 const DIRECT_EMAIL_HREF = `mailto:${DIRECT_EMAIL}`;
 
 const responsePaths = [
-  'Technical SEO audit',
-  'Crawl evidence review',
-  'Analytics and source research',
+  'Technical SEO — indexation, canonicals, links, schema',
+  'Crawl evidence — raw/rendered states, issue review, reruns',
+  'Analytics and research — GA4, Search Console, source ledgers',
 ];
 
 const intakeNotes = [
@@ -123,7 +123,10 @@ export default function ContactPage() {
                 </a>
 
                 <p className="mt-8 max-w-2xl text-base leading-relaxed text-canvas/64 md:text-lg">
-                  Send a short brief for technical SEO, crawl evidence, search visibility, analytics, or source-backed research. Direct email is the fastest path when the request is still taking shape.
+                  I take on bounded technical SEO, crawl evidence, analytics, and source-backed research problems. Typical outputs include URL-level findings, raw/render comparisons, implementation notes, owners, acceptance checks, and a rerun path—not an opaque score or generic audit deck.
+                </p>
+                <p className="mt-5 max-w-2xl text-sm leading-relaxed text-canvas/56">
+                  Direct email is the fastest path when the request is still taking shape. If the site, suspected issue, and decision are already clear, the brief form preserves that context in one pass.
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-5">
