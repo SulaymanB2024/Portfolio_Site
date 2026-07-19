@@ -805,8 +805,6 @@ export function austinTechnicalSeoJsonLd(): JsonLd {
       areaServed: {
         '@type': 'City',
         name: 'Austin',
-        addressRegion: 'TX',
-        addressCountry: 'US',
       },
       serviceType: ['Technical SEO Audit', 'Search Visibility Audit', 'Local Search Visibility Review'],
       description:
