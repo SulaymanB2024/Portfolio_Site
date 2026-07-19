@@ -19,6 +19,7 @@ import {
   VIRALBENCH_ARTICLE_READ_TIME,
   VIRALBENCH_ARTICLE_TITLE,
 } from '../content/viralBenchArticle';
+import { canonicalizeKnownExternalLinks } from '../content/canonicalExternalLinks';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToHtml } from '../utils/markdownToHtml';
 import { useSEO } from '../utils/seo';
@@ -75,7 +76,7 @@ function splitArticle(markdown: string) {
   return { lede, sections };
 }
 
-const ARTICLE = splitArticle(VIRALBENCH_ARTICLE_MARKDOWN);
+const ARTICLE = splitArticle(canonicalizeKnownExternalLinks(VIRALBENCH_ARTICLE_MARKDOWN));
 const HEADLINE_METRICS = [
   { value: '18', label: 'working rounds', note: 'fixed per agent run' },
   { value: '5', label: 'execution tools', note: 'research through publishing' },

@@ -65,6 +65,7 @@ export type RouteVisualMode = 'canvas-sample' | 'dark-evidence' | 'memo-reader' 
 export type RouteTone = 'light' | 'dark';
 
 export const SITE_LASTMOD = '2026-07-16';
+const METADATA_REFRESH_LASTMOD = '2026-07-19';
 const PROFILE_OG_IMAGE = '/images/social/og-profile.png';
 const ATLAS_OG_IMAGE = '/images/social/og-atlas.png';
 const WORK_OG_IMAGE = '/images/social/og-work.png';
@@ -196,13 +197,13 @@ const CORE_ROUTES: SeoRoute[] = [
     aliases: ['/resume.html', '/cv', '/cv.html', '/Sulayman_Bowles_Resume_2025.pdf'],
     title: 'Sulayman Bowles Resume | SEO, Product & Finance',
     description:
-      'HTML-first resume for Sulayman Bowles covering UT Austin McCombs, Void Agency, Atlas, technical SEO, AI product research, markets research, and supporting links.',
+      'Resume for Sulayman Bowles covering UT Austin McCombs, Void Agency, Atlas, technical SEO, AI product research, markets, and supporting links.',
     h1: 'Sulayman Bowles Resume',
     section: 'resume',
     pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: METADATA_REFRESH_LASTMOD,
     staticSummary:
       'Stable resume and profile page for Sulayman Bowles with links to Atlas, technical SEO work, finance research, public code, LinkedIn, and contact paths.',
     image: PROFILE_OG_IMAGE,
@@ -245,13 +246,13 @@ const CORE_ROUTES: SeoRoute[] = [
     aliases: [],
     title: 'Technical SEO Audit Method | Void Agency',
     description:
-      'Technical SEO audit method from Void Agency for crawl paths, indexation, internal links, structured data, analytics review, search visibility, and implementation priorities.',
+      'Void Agency’s technical SEO audit method for crawl paths, indexation, internal links, structured data, analytics, and implementation priorities.',
     h1: 'Void Agency Method',
     section: 'service',
     pageType: 'service',
     priority: 0.9,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: METADATA_REFRESH_LASTMOD,
     staticSummary:
       'Void Agency audits crawl paths, indexation, architecture, structured data, performance, analytics, and crawler access to improve search visibility.',
     image: VOID_OG_IMAGE,
@@ -279,13 +280,13 @@ const CORE_ROUTES: SeoRoute[] = [
     aliases: ['/austin-seo'],
     title: 'Austin Technical SEO & Search Visibility',
     description:
-      'Austin technical SEO page for teams that need crawlability, indexation, structured data, page clarity, local search context, and implementation details reviewed.',
+      'Austin technical SEO for teams that need crawlability, indexation, structured data, page clarity, local context, and implementation guidance.',
     h1: 'Austin Technical SEO',
     section: 'local-service',
     pageType: 'service',
     priority: 0.7,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: METADATA_REFRESH_LASTMOD,
     staticSummary:
       'Austin technical SEO page for teams that need crawlability, indexation, structured data, page clarity, local search context, and implementation details reviewed.',
     image: VOID_OG_IMAGE,
@@ -311,13 +312,13 @@ const CORE_ROUTES: SeoRoute[] = [
     aliases: ['/projects/markets'],
     title: 'Markets & Investing Research | Sulayman Bowles',
     description:
-      'Finance and infrastructure-investing research from Sulayman Bowles with visible assumptions, source tables, valuation frames, risks, and recommendation boundaries.',
+      'Finance and infrastructure-investing research with visible assumptions, source tables, valuation frames, risks, and recommendation boundaries.',
     h1: 'Markets and Investing',
     section: 'research',
     pageType: 'research',
     priority: 0.7,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: METADATA_REFRESH_LASTMOD,
     staticSummary:
       'A filtered finance and infrastructure-investing archive within the broader Research hub.',
     image: RESEARCH_OG_IMAGE,

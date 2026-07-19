@@ -28,6 +28,7 @@ import {
   AI_MANAGERS_ARTICLE_SECTIONS,
   AI_MANAGERS_ARTICLE_TITLE,
 } from '../content/aiManagersArticle';
+import { canonicalizeKnownExternalLinks } from '../content/canonicalExternalLinks';
 import {
   VIRALBENCH_ARTICLE_EXCERPT,
   VIRALBENCH_ARTICLE_IMAGE,
@@ -284,7 +285,7 @@ function viralBenchArticleStaticHtml() {
   const inlineFigure = `<figure>
           <img src="${VIRALBENCH_ARTICLE_INLINE_IMAGE}" width="1672" height="941" alt="An abstract monochrome room filled with speech bubbles connected by fine lines and flowing data-like strands." />
         </figure>`;
-  const articleHtml = markdownToHtml(VIRALBENCH_ARTICLE_MARKDOWN).replace(
+  const articleHtml = markdownToHtml(canonicalizeKnownExternalLinks(VIRALBENCH_ARTICLE_MARKDOWN)).replace(
     evidenceLayerHeading,
     `${architectureFigure}\n        ${evidenceLayerHeading}\n        ${inlineFigure}`,
   );
