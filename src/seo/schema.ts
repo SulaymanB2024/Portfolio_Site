@@ -745,7 +745,7 @@ export function viralBenchArticleJsonLd(): JsonLd {
       ],
       about: [
         { '@type': 'Thing', name: 'ViralBench', sameAs: 'https://viralbench.ai/' },
-        { '@type': 'SoftwareApplication', name: 'Codex', applicationCategory: 'DeveloperApplication', sameAs: 'https://developers.openai.com/codex' },
+        { '@type': 'Thing', name: 'Codex', sameAs: 'https://developers.openai.com/codex' },
         { '@type': 'Thing', name: 'AI agent evaluation' },
       ],
       citation: [
@@ -762,7 +762,7 @@ export function viralBenchArticleJsonLd(): JsonLd {
       description,
       mainEntityId: articleId,
       aboutIds: [PERSON_ID],
-      dateModified: '2026-07-09',
+      dateModified: VIRALBENCH_ARTICLE_MODIFIED_DATE,
     }),
     {
       '@context': 'https://schema.org',
