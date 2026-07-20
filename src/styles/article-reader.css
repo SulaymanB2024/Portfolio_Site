@@ -149,6 +149,38 @@
   object-fit: cover;
 }
 
+.toll-editorial-plate {
+  margin: clamp(2.5rem, 5vw, 4.5rem) 0;
+  overflow: hidden;
+  border: 1px solid var(--article-line);
+  background: var(--article-paper);
+}
+
+.toll-editorial-plate img {
+  display: block;
+  width: 100%;
+  max-height: 52rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.toll-editorial-plate > .toll-figure-label,
+.toll-editorial-plate > figcaption {
+  margin: 0;
+  padding: 0.9rem 1rem;
+}
+
+.toll-editorial-plate > .toll-figure-label {
+  border-bottom: 1px solid var(--article-line);
+}
+
+.toll-editorial-plate > figcaption {
+  border-top: 1px solid var(--article-line);
+  color: var(--article-muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
 .article-reader__image-placeholder {
   position: relative;
   display: grid;

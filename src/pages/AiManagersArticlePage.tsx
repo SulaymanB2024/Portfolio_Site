@@ -477,9 +477,11 @@ export default function AiManagersArticlePage() {
         title={AI_MANAGERS_ARTICLE_TITLE}
         displayTitle={AI_MANAGERS_ARTICLE_DISPLAY_TITLE}
         deck={AI_MANAGERS_ARTICLE_DESCRIPTION}
-        imagePlaceholder={{
-          label: 'AI-operated businesses / image study pending',
-          note: 'Reserved for a page-specific image of the human and machine operating layer.',
+        image={{
+          src: '/images/research/ai-managers-operating-layer.jpg',
+          alt: 'Monochrome editorial artwork showing a central operator directing several bounded AI systems.',
+          label: 'AI-operated businesses / operating layer',
+          caption: 'Model decisions remain nested inside human legal, financial, and physical control.',
         }}
         metadata={[
           { label: 'Subject', value: 'AI systems / business operations' },

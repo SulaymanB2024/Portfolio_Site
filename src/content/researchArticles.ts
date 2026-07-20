@@ -56,7 +56,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     subtitle: 'Copy-ready host rules for eight named product tokens, with exact Allow, Disallow, sitemap, and release checks.',
     seoDescription:
       'Compare OpenAI, Anthropic, and Perplexity crawlers, then copy robots.txt rules for AI search, training controls, or named-agent blocks.',
-    image: '/og-default.png',
+    image: '/images/research/ai-crawler-policy-abstract.jpg',
     date: '2026.06.19',
     dateModified: '2026.07.19',
     lastVerified: '2026.07.19',
@@ -239,7 +239,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     subtitle: 'A systems essay on how URLs become crawlable, renderable, attributable, and exportable public records.',
     seoDescription:
       'A systems essay by Sulayman Bowles on URL discovery, crawling, rendering, structured records, provenance, crawl evidence, and durable technical SEO exports.',
-    image: '/og-default.png',
+    image: '/images/research/public-data-infrastructure-abstract.jpg',
     date: '2026.06.19',
     dateModified: '2026.07.16',
     lastVerified: '2026.07.16',
@@ -373,7 +373,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     subtitle: 'An operational playbook for reconciling domains, profile pages, resumes, sameAs links, and external biographies.',
     seoDescription:
       'A personal-identity reconciliation playbook for canonical hosts, ProfilePage schema, sameAs eligibility, resumes, and external profile maintenance.',
-    image: '/og-default.png',
+    image: '/images/research/canonical-identity-abstract.jpg',
     date: '2026.06.19',
     dateModified: '2026.07.19',
     lastVerified: '2026.07.19',

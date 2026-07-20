@@ -345,14 +345,62 @@ function InstrumentRoutes() {
   );
 }
 
+const tollEditorialPlates = {
+  ownership: {
+    src: '/images/research/toll-road-ownership-stack.jpg',
+    alt: 'Monochrome cutaway artwork showing a toll road above layered contracts, data, and capital claims.',
+    label: 'Editorial plate 01 / ownership stack',
+    caption: 'The pavement, operating rights, information systems, debt, and residual equity occupy different layers.',
+  },
+  cashFlow: {
+    src: '/images/research/toll-road-capital-layers.jpg',
+    alt: 'Monochrome artwork showing elevated highways above layered traffic data and capital flows.',
+    label: 'Editorial plate 02 / capital layers',
+    caption: 'Traffic becomes equity value only after collection, operating, lifecycle, financing, and public claims.',
+  },
+  access: {
+    src: '/images/research/toll-road-contract-paths.jpg',
+    alt: 'Monochrome artwork showing several paths branching from one central toll-road corridor.',
+    label: 'Editorial plate 03 / access paths',
+    caption: 'Bond, fund, listed-sponsor, and distressed-debt routes lead to different claims on the same infrastructure.',
+  },
+  risk: {
+    src: '/images/research/toll-road-risk-horizon.jpg',
+    alt: 'Monochrome artwork showing a highway running through rising and falling financial curves toward the horizon.',
+    label: 'Editorial plate 04 / duration and risk',
+    caption: 'Finite concession life, traffic variance, leverage, and discount rates reshape the value of a durable road.',
+  },
+} as const;
+
+function TollEditorialPlate({ plate }: { plate: (typeof tollEditorialPlates)[keyof typeof tollEditorialPlates] }) {
+  return (
+    <figure className="toll-editorial-plate">
+      <div className="toll-figure-label">
+        <span>{plate.label}</span>
+        <span>Generated editorial artwork / July 20, 2026</span>
+      </div>
+      <img src={plate.src} alt={plate.alt} loading="lazy" decoding="async" />
+      <figcaption>{plate.caption}</figcaption>
+    </figure>
+  );
+}
+
 function SectionVisual({ sectionId, position }: { sectionId: string; position: 'before' | 'after' }) {
-  if (sectionId === 'a-road-can-have-seven-different-owners' && position === 'after') return <OwnershipStackDiagram />;
+  if (sectionId === 'a-road-can-have-seven-different-owners' && position === 'after') {
+    return <><OwnershipStackDiagram /><TollEditorialPlate plate={tollEditorialPlates.ownership} /></>;
+  }
   if (sectionId === 'how-a-toll-road-turns-traffic-into-equity-cash' && position === 'before') return <CashFlowWaterfall />;
-  if (sectionId === 'how-a-toll-road-turns-traffic-into-equity-cash' && position === 'after') return <DfwOperatingSnapshot />;
+  if (sectionId === 'how-a-toll-road-turns-traffic-into-equity-cash' && position === 'after') {
+    return <><TollEditorialPlate plate={tollEditorialPlates.cashFlow} /><DfwOperatingSnapshot /></>;
+  }
   if (sectionId === 'sh-130-the-danger-of-believing-the-traffic-model' && position === 'before') return <Sh130RestructuringDiagram />;
   if (sectionId === 'sh-288-the-value-of-a-termination-clause' && position === 'before') return <Sh288BuyoutDiagram />;
-  if (sectionId === 'what-makes-a-texas-toll-road-valuable' && position === 'after') return <ModelScreeningSnapshot />;
-  if (sectionId === 'can-an-investor-actually-buy-one' && position === 'after') return <InstrumentRoutes />;
+  if (sectionId === 'what-makes-a-texas-toll-road-valuable' && position === 'after') {
+    return <><TollEditorialPlate plate={tollEditorialPlates.risk} /><ModelScreeningSnapshot /></>;
+  }
+  if (sectionId === 'can-an-investor-actually-buy-one' && position === 'after') {
+    return <><InstrumentRoutes /><TollEditorialPlate plate={tollEditorialPlates.access} /></>;
+  }
   return null;
 }
 
