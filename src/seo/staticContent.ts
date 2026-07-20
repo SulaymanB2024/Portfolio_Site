@@ -800,7 +800,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${definitionCards(austinDiagnosticExamples.map((item) => [item.prompt, item.review]))}
         <h2>Contextual Links</h2>
         ${linkList([
-          { label: 'Request an Austin technical SEO audit', href: '/contact' },
+          { label: 'Request an audit', href: '/contact' },
           { label: 'Review technical SEO audit services and process', href: '/method' },
           { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl' },
           { label: 'View Void Agency', href: 'https://www.void-agency.com/' },
