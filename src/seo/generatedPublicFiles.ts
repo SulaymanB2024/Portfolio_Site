@@ -1,6 +1,7 @@
 import { ALL_ARTICLES, getArticlePath } from '../content/articleRegistry';
 import { PROFILE_FACTS } from '../content/profileFacts';
 import { VIRALBENCH_ARTICLE_PATH, VIRALBENCH_ARTICLE_TITLE } from '../content/viralBenchArticle';
+import { ARTICLE_SEARCH_TARGETS } from './articleSearchTargets';
 import { getCanonicalRoutes, SITE_LASTMOD } from './routes';
 import { absoluteUrl, PERSON_ID } from './site';
 
@@ -79,6 +80,7 @@ ${articleLines}
 - Appian educational research memo PDF: ${absoluteUrl('/research/appian-enterprise-software-durability-memo.pdf')}
 - Appian assumptions table CSV: ${absoluteUrl('/research/appian-assumptions-table.csv')}
 - Authority asset index: ${absoluteUrl('/research/authority-assets.json')}
+- Article research briefs: ${absoluteUrl('/research/article-research-briefs.json')}
 - Crawler policy sources: ${absoluteUrl('/research/ai-search-crawler-policy-sources.csv')}
 - Austin crawlability benchmark pilot CSV: ${absoluteUrl('/research/austin-crawlability-benchmark-pilot.csv')}
 - Austin crawlability benchmark summary: ${absoluteUrl('/research/austin-crawlability-benchmark-summary.json')}
@@ -104,4 +106,107 @@ The Atlas demonstration is a dated, bounded capture from an open web corpus; it 
 - The old Sulayman_Bowles_Resume_2025.pdf URL redirects to ${PROFILE_FACTS.canonicalLinks.resume}.
 - Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals; they do not prove rankings, indexing, traffic movement, or AI citations.
 `;
+}
+
+export function buildArticleResearchBriefsJson() {
+  return `${JSON.stringify({
+    generated_at: '2026-07-20',
+    canonical_host: 'https://sulayman-bowles.dev',
+    objective: 'Public intent, evidence, artifact, and related-reading briefs for the site research archive.',
+    limits: [
+      'These briefs describe editorial scope and evidence boundaries; they do not claim rankings, indexing, traffic, revenue impact, or backlinks.',
+      'Dates are verification dates for source and artifact review, not artificial freshness signals.',
+      'Related links are selected for reader relevance and crawlable context, not exact-match anchor manipulation.',
+    ],
+    articles: ARTICLE_SEARCH_TARGETS.map((target) => ({
+      url: absoluteUrl(target.path),
+      question: target.primaryQuery,
+      supporting_questions: target.supportingQueries,
+      intent: target.intent,
+      cohort: target.cohort,
+      direct_answer: target.directAnswer,
+      evidence_gap: target.serpGap,
+      original_artifact: target.originalArtifact,
+      scope_boundary: target.cannibalizationBoundary,
+      related_articles: target.relatedPaths.map(absoluteUrl),
+      last_verified: '2026-07-20',
+    })),
+  }, null, 2)}\n`;
+}
+
+export function buildAuthorityAssetsJson() {
+  const articleAssets = ARTICLE_SEARCH_TARGETS.map((target, index) => {
+    const route = getCanonicalRoutes().find((candidate) => candidate.path === target.path);
+    if (!route) throw new Error(`Authority asset route is missing: ${target.path}`);
+    return {
+      priority: target.cohort,
+      name: route.h1,
+      url: absoluteUrl(target.path),
+      type: 'source_led_article',
+      cluster: target.path.split('/')[2] || 'ai-systems',
+      preferred_anchor: route.h1,
+      pitch_angle: target.serpGap,
+      supporting_assets: [
+        absoluteUrl('/research/article-research-briefs.json'),
+        ...target.relatedPaths.slice(0, index === 0 ? 3 : 2).map(absoluteUrl),
+      ],
+    };
+  });
+
+  return `${JSON.stringify({
+    generated_at: '2026-07-20',
+    canonical_host: 'https://sulayman-bowles.dev',
+    objective: 'Topical authority index for source-led technical SEO, crawler, AI-agent, data-system, and infrastructure research.',
+    claim_boundaries: [
+      'The index does not claim rankings, indexing, traffic movement, revenue impact, backlinks, Domain Rating movement, or AI citations.',
+      'Outreach targets are editorial-fit candidates, not promised placements.',
+      'Preferred anchors are descriptive suggestions only; publishers retain editorial control and forced exact-match anchors are prohibited.',
+      'Private clients, private outcomes, and unsupported performance claims are intentionally excluded.',
+      'Artifacts preserve verification dates and evidence limits; publication dates are not changed merely to signal freshness.',
+    ],
+    assets: [
+      {
+        priority: 1,
+        name: 'Research Notes',
+        url: absoluteUrl('/research'),
+        type: 'research_hub',
+        cluster: 'all',
+        preferred_anchor: 'Sulayman Bowles research notes',
+        pitch_angle: 'A crawlable hub connecting source-led articles, public artifacts, methodology, and explicit claim boundaries.',
+        supporting_assets: [absoluteUrl('/research/article-research-briefs.json')],
+      },
+      ...articleAssets,
+      {
+        priority: 1,
+        name: 'Atlas Open-Corpus Demonstration',
+        url: absoluteUrl('/atlas/sample-crawl'),
+        type: 'public_demonstration',
+        cluster: 'crawler-engineering',
+        preferred_anchor: 'Atlas open-corpus crawl demonstration',
+        pitch_angle: 'A bounded public crawl dataset with raw evidence, runtime indicators, and an explicit measurement boundary.',
+        supporting_assets: [
+          absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.csv'),
+          absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.json'),
+        ],
+      },
+      ...[
+        ['/atlas', 'Atlas technical SEO audit software', 'crawler-engineering', 'Atlas crawl evidence system', 'A product page connecting crawl contracts, evidence preservation, review states, and public demonstration artifacts.'],
+        ['/austin-technical-seo', 'Austin Technical SEO', 'technical-seo', 'Austin technical SEO audit services', 'A locally scoped technical SEO service page with a bounded public crawlability benchmark.'],
+        ['/method', 'Void Agency Method', 'technical-seo', 'technical SEO audit method', 'A fixed-scope audit method organized around crawl evidence, implementation priorities, and reviewable handoff.'],
+        ['/markets', 'Markets and Investing', 'infrastructure', 'markets and infrastructure research', 'A finance-only research filter with visible assumptions, ownership evidence, and recommendation boundaries.'],
+        ['/resume', 'Resume', 'identity', 'Sulayman Bowles resume', 'The current canonical résumé and professional history source.'],
+        ['/work', 'Selected Work', 'identity', 'Sulayman Bowles technical portfolio', 'A selected-work index linking public software, research, and implementation evidence.'],
+        ['/about', 'About Sulayman Bowles', 'identity', 'about Sulayman Bowles', 'The canonical public identity page with current work, education, controlled profiles, and evidence boundaries.'],
+      ].map(([assetPath, name, cluster, preferredAnchor, pitchAngle], index) => ({
+        priority: index < 3 ? 1 : 2,
+        name,
+        url: absoluteUrl(assetPath),
+        type: 'canonical_site_asset',
+        cluster,
+        preferred_anchor: preferredAnchor,
+        pitch_angle: pitchAngle,
+        supporting_assets: [absoluteUrl('/research')],
+      })),
+    ],
+  }, null, 2)}\n`;
 }

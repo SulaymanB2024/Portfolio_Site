@@ -51,6 +51,7 @@ import {
   type TexasTollArticleTable,
 } from '../content/texasTollRoadArticle';
 import { markdownToHtml } from '../utils/markdownToHtml';
+import { getArticleSearchTarget } from './articleSearchTargets';
 import type { SeoRoute } from './routes';
 
 type LinkItem = {
@@ -284,6 +285,28 @@ function articleShell(title: string, intro: string, body: string) {
       </article>`;
 }
 
+function articleSearchBriefStaticHtml(path: string) {
+  const target = getArticleSearchTarget(path);
+  if (!target) return '';
+
+  return `<section aria-labelledby="direct-answer-title">
+        <h2 id="direct-answer-title">Direct answer: ${escapeHtml(target.primaryQuery)}</h2>
+        <p>${escapeHtml(target.directAnswer)}</p>
+        <h3>Original research artifact</h3>
+        <p>${escapeHtml(target.originalArtifact)}</p>
+        <h3>What this page adds</h3>
+        <p>${escapeHtml(target.serpGap)}</p>
+        <h3>Related research</h3>
+        ${linkList(target.relatedPaths.map((relatedPath) => {
+          const relatedTarget = getArticleSearchTarget(relatedPath);
+          return {
+            href: relatedPath,
+            label: relatedTarget?.primaryQuery ?? relatedPath,
+          };
+        }))}
+      </section>`;
+}
+
 function viralBenchArticleStaticHtml() {
   const evidenceLayerHeading = '<h2 id="the-evidence-layer-comes-before-the-codex-layer">The evidence layer comes before the Codex layer</h2>';
   const architectureFigure = `<figure>
@@ -301,7 +324,15 @@ function viralBenchArticleStaticHtml() {
   return `<figure>
           <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1672" height="941" alt="A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space." />
         </figure>
-        ${articleHtml}`;
+        ${articleHtml}
+        <h2>Source ledger</h2>
+        ${linkList([
+          { href: 'https://viralbench.ai/', label: 'ViralBench live methodology' },
+          { href: 'https://github.com/JibranK12345/Viral-Bench', label: 'ViralBench public repository' },
+          { href: 'https://openai.com/index/harness-engineering/', label: 'OpenAI harness engineering' },
+          { href: 'https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop', label: 'OpenAI agent improvement loop' },
+          { href: 'https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content', label: 'TikTok AI-generated content policy' },
+        ])}`;
 }
 
 function articleSectionsStaticHtml(sections: ArticleSection[]) {
@@ -373,6 +404,7 @@ function texasTollArticleStaticHtml() {
     TEXAS_TOLL_ARTICLE_DESCRIPTION,
     `<h2>Short answer</h2>
         <p>Texas toll roads do not have one owner. The state, a county, or a public authority usually owns the physical roadway. Contracts determine who controls toll revenue, operations, debt claims, equity, billing, and the residual rights at expiry.</p>
+        ${articleSearchBriefStaticHtml(`/markets/${TEXAS_TOLL_ARTICLE_SLUG}`)}
         ${markdownToHtml(TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN)}
         ${sections}
         <h2 id="analyst-model-screen">Analyst model screening</h2>
@@ -441,6 +473,7 @@ function aiManagersArticleStaticHtml() {
     `<p><a href="/research">Research archive</a> · AI systems · Published July 14, 2026 · By <a href="/about">Sulayman Bowles</a></p>
       <h2>${escapeHtml(AI_MANAGERS_ARTICLE_DISPLAY_TITLE)}</h2>
       <p><strong>Short answer:</strong> AI can run the next action. It still cannot reliably preserve the company.</p>
+      ${articleSearchBriefStaticHtml(AI_MANAGERS_ARTICLE_PATH)}
       <p><strong>Evidence boundary:</strong> Operator dashboards are unaudited. Simulations are not businesses. Human legal, financial, physical, and supervisory work remains part of every live case.</p>
       ${markdownToHtml(AI_MANAGERS_ARTICLE_LEDE)}
       ${sections}
@@ -483,6 +516,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       VIRALBENCH_ARTICLE_TITLE,
       VIRALBENCH_ARTICLE_EXCERPT,
       `<p><a href="/research">Research notes</a> · AI Systems Engineering · Published July 9, 2026 · By <a href="/about">Sulayman Bowles</a></p>
+        ${articleSearchBriefStaticHtml('/viralbench-codex-agent-harness')}
         ${viralBenchArticleStaticHtml()}`,
     );
   }
@@ -809,7 +843,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     return articleShell(
       article.title,
       article.subtitle,
-      `<h2>Memo Details</h2>
+      `${articleSearchBriefStaticHtml(route.path)}
+        <h2>Memo Details</h2>
         <p>Category: ${escapeHtml(article.category)}. Author: ${escapeHtml(article.author)}. Published: ${escapeHtml(article.date)}. Read time: ${escapeHtml(article.readTime)}. Source count: ${String(article.sources.length)}.</p>
         ${boundary ? `<h2>${investmentMemo ? 'Recommendation Boundary' : 'Evidence Boundary'}</h2><p>${escapeHtml(boundary)}</p>` : ''}
         <h2>Article Metrics</h2>

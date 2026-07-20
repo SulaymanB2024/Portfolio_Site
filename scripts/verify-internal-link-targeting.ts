@@ -1,4 +1,5 @@
 import { getCanonicalRoutes, getSeoRoute, type SeoRoute } from '../src/seo/routes';
+import { ARTICLE_SEARCH_TARGETS } from '../src/seo/articleSearchTargets';
 import { buildRouteStaticHtml, buildSitemapStaticHtml } from '../src/seo/staticContent';
 
 type InternalLink = {
@@ -111,7 +112,31 @@ for (const [target, phrase] of DESCRIPTIVE_ANCHOR_EXPECTATIONS) {
   assert(matchingLinks.length > 0, `${target}: no contextual inbound anchor covers "${phrase}"`);
 }
 
+for (const articleTarget of ARTICLE_SEARCH_TARGETS) {
+  const contextualInbound = new Set(
+    links
+      .filter(
+        (link) =>
+          link.target === articleTarget.path
+          && link.source !== articleTarget.path
+          && link.source !== '/sitemap',
+      )
+      .map((link) => link.source),
+  );
+  assert(
+    contextualInbound.size >= 3,
+    `${articleTarget.path}: only ${contextualInbound.size} contextual inbound sources; expected at least 3`,
+  );
+
+  const route = getSeoRoute(articleTarget.path)!;
+  const staticHtml = staticHtmlFor(route, routes);
+  assert(
+    articleTarget.relatedPaths.every((relatedPath) => staticHtml.includes(`href="${relatedPath}"`)),
+    `${articleTarget.path}: one or more contracted related-article links are missing`,
+  );
+}
+
 const maxDepth = Math.max(...depths.values());
 console.log(
-  `Internal-link verification passed for ${routes.length} canonical routes: zero orphans, maximum depth ${maxDepth}, and ${DESCRIPTIVE_ANCHOR_EXPECTATIONS.length} descriptive anchor targets.`,
+  `Internal-link verification passed for ${routes.length} canonical routes: zero orphans, maximum depth ${maxDepth}, ${DESCRIPTIVE_ANCHOR_EXPECTATIONS.length} descriptive anchor targets, and at least three contextual inbound sources for all 16 articles.`,
 );

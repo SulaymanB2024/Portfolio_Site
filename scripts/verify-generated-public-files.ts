@@ -1,11 +1,18 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
-import { buildLlmsText, buildSitemapXml } from '../src/seo/generatedPublicFiles';
+import {
+  buildArticleResearchBriefsJson,
+  buildAuthorityAssetsJson,
+  buildLlmsText,
+  buildSitemapXml,
+} from '../src/seo/generatedPublicFiles';
 
 const expectedFiles = [
   ['public/llms.txt', buildLlmsText()],
   ['public/sitemap.xml', buildSitemapXml()],
+  ['public/research/article-research-briefs.json', buildArticleResearchBriefsJson()],
+  ['public/research/authority-assets.json', buildAuthorityAssetsJson()],
 ] as const;
 
 const staleFiles: string[] = [];

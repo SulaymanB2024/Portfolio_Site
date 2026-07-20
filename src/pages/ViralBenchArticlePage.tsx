@@ -20,11 +20,13 @@ import {
   VIRALBENCH_ARTICLE_TITLE,
 } from '../content/viralBenchArticle';
 import { canonicalizeKnownExternalLinks } from '../content/canonicalExternalLinks';
+import { getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToHtml } from '../utils/markdownToHtml';
 import { useSEO } from '../utils/seo';
 
 const ROUTE = getSeoRoute('/viralbench-codex-agent-harness')!;
+const SEARCH_TARGET = getArticleSearchTarget('/viralbench-codex-agent-harness')!;
 const EVIDENCE_SECTION_ID = 'the-evidence-layer-comes-before-the-codex-layer';
 const HARNESS_SECTION_ID = 'what-i-mean-by-codex-as-a-harness';
 const RAIL_SECTION_IDS = new Set([
@@ -273,10 +275,9 @@ export default function ViralBenchArticlePage() {
 
       <ArticleMetricStrip items={HEADLINE_METRICS.map((metric) => ({ label: metric.label, value: metric.value, note: metric.note }))} />
 
-      <ArticleCallout label="Short answer" title="The benchmark is the system, not only the model.">
-        <p>
-          The ViralBench agent tries to make a successful post. Codex improves the system that researches, creates, reviews, and publishes it—through isolated patches, replay tests, independent evaluation, and controlled promotion.
-        </p>
+      <ArticleCallout label="Direct answer" title={SEARCH_TARGET.primaryQuery}>
+        <p>{SEARCH_TARGET.directAnswer}</p>
+        <p><strong>Original artifact:</strong> {SEARCH_TARGET.originalArtifact}</p>
       </ArticleCallout>
 
       <ArticleBody
@@ -293,8 +294,25 @@ export default function ViralBenchArticlePage() {
           createElement(ViralBenchSection, { key: section.id, section, index })
         ))}
 
+        <section id="source-ledger">
+          <ArticleSectionHeader index="SL">Source ledger</ArticleSectionHeader>
+          <div className="article-reader__prose">
+            <ul>
+              <li><a href="https://viralbench.ai/">ViralBench live methodology</a></li>
+              <li><a href="https://github.com/JibranK12345/Viral-Bench">ViralBench public repository</a></li>
+              <li><a href="https://openai.com/index/harness-engineering/">OpenAI harness engineering</a></li>
+              <li><a href="https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop">OpenAI agent improvement loop</a></li>
+              <li><a href="https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content">TikTok AI-generated content policy</a></li>
+            </ul>
+          </div>
+        </section>
+
         <ArticleEndnote
           links={[
+            ...SEARCH_TARGET.relatedPaths.map((path) => ({
+              href: path,
+              label: getArticleSearchTarget(path)?.primaryQuery ?? path,
+            })),
             { href: '/research', label: 'Research assets' },
             { href: '/atlas', label: 'Atlas' },
             { href: '/about', label: 'About the author' },

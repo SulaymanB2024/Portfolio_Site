@@ -31,6 +31,7 @@ export const publicResearchAssets: ResearchAsset[] = [
       'A browsable index of technical SEO notes, Atlas samples, local crawlability work, identity context, and markets research files.',
     supportingAssets: [
       { label: 'Authority asset JSON', href: '/research/authority-assets.json' },
+      { label: 'Article research briefs', href: '/research/article-research-briefs.json' },
       { label: 'About Sulayman Bowles', href: '/about' },
     ],
   },
@@ -187,6 +188,11 @@ export const publicResearchAssets: ResearchAsset[] = [
 ];
 
 export const publicDataDownloads = [
+  {
+    label: 'Article research briefs',
+    href: '/research/article-research-briefs.json',
+    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 16 indexable articles.',
+  },
   {
     label: 'Authority asset JSON',
     href: '/research/authority-assets.json',

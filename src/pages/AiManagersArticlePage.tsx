@@ -27,11 +27,13 @@ import {
   AI_MANAGERS_ARTICLE_WORD_COUNT,
   type AiManagerCaseKind,
 } from '../content/aiManagersArticle';
+import { getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToReact } from '../utils/markdownToReact';
 import { useSEO } from '../utils/seo';
 
 const ROUTE = getSeoRoute(AI_MANAGERS_ARTICLE_PATH)!;
+const SEARCH_TARGET = getArticleSearchTarget(AI_MANAGERS_ARTICLE_PATH)!;
 
 const headlineMetrics = [
   { value: '30', label: 'cases reviewed', note: 'live, bounded, narrow, simulated' },
@@ -490,10 +492,9 @@ export default function AiManagersArticlePage() {
 
       <ArticleMetricStrip items={headlineMetrics.map((metric) => ({ label: metric.label, value: metric.value, note: metric.note }))} />
 
-      <ArticleCallout label="Short answer" title="AI can run the next action. It still cannot reliably preserve the company.">
-        <p>
-          Current systems can hire, schedule, price, order, negotiate, promote, and answer customers. Across the strongest public cases, the recurring weakness is continuity: retaining the right state, resisting manipulation, keeping corrections in force, and connecting local decisions to fully burdened economics.
-        </p>
+      <ArticleCallout label="Direct answer" title={SEARCH_TARGET.primaryQuery}>
+        <p>{SEARCH_TARGET.directAnswer}</p>
+        <p><strong>Original artifact:</strong> {SEARCH_TARGET.originalArtifact}</p>
       </ArticleCallout>
 
       <ArticleBody
@@ -513,6 +514,10 @@ export default function AiManagersArticlePage() {
 
         <ArticleEndnote
           links={[
+            ...SEARCH_TARGET.relatedPaths.map((path) => ({
+              href: path,
+              label: getArticleSearchTarget(path)?.primaryQuery ?? path,
+            })),
             { href: '/research', label: 'Research archive' },
             { href: '/viralbench-codex-agent-harness', label: 'Agent evaluation' },
             { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },

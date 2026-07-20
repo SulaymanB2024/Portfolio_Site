@@ -1313,7 +1313,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     number: '13',
     category: 'DATA SYSTEMS',
     title: 'SQLite for Crawl Pipelines: Idempotency, WAL, and Bounded Concurrency',
-    seoTitle: 'SQLite for Crawl Pipelines: Idempotency, WAL, and Concurrency',
+    seoTitle: 'SQLite Web Crawler Pipelines: Idempotency, WAL, and Concurrency',
     subtitle:
       'A storage architecture for URL identity, append-only attempts, transactional batches, upserts, one-writer discipline, WAL checkpoints, integrity checks, and portable exports.',
     seoDescription:
@@ -1463,7 +1463,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     number: '14',
     category: 'SITE MIGRATIONS',
     title: 'Technical SEO Migrations Need Executable Release Gates',
-    seoTitle: 'Technical SEO Migration Gates for URLs, Redirects, and Indexability',
+    seoTitle: 'Technical SEO Migration Checklist: Executable Release Gates',
     subtitle:
       'A fail-closed migration method for URL manifests, redirect graphs, canonical output, internal links, sitemaps, rendered content, launch sequencing, and post-release evidence.',
     seoDescription:

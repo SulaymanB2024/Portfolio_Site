@@ -1,0 +1,332 @@
+{
+  "generated_at": "2026-07-20",
+  "canonical_host": "https://sulayman-bowles.dev",
+  "objective": "Public intent, evidence, artifact, and related-reading briefs for the site research archive.",
+  "limits": [
+    "These briefs describe editorial scope and evidence boundaries; they do not claim rankings, indexing, traffic, revenue impact, or backlinks.",
+    "Dates are verification dates for source and artifact review, not artificial freshness signals.",
+    "Related links are selected for reader relevance and crawlable context, not exact-match anchor manipulation."
+  ],
+  "articles": [
+    {
+      "url": "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
+      "question": "can AI run a business",
+      "supporting_questions": [
+        "AI operated businesses",
+        "AI business manager"
+      ],
+      "intent": "evaluation",
+      "cohort": 1,
+      "direct_answer": "AI can run bounded business actions such as scheduling, pricing, customer replies, purchasing, and promotion, but the strongest public cases still depend on humans for legal authority, capital, physical work, supervision, and recovery when state or policy fails.",
+      "evidence_gap": "Separate live businesses, pilots, simulations, and vendor claims instead of treating every autonomy demonstration as equivalent evidence.",
+      "original_artifact": "A 30-case evidence table that grades operating reality, human involvement, economics, and source limitations.",
+      "scope_boundary": "This page evaluates whether AI can operate a business; the ViralBench and replayable-trace pages evaluate agent harnesses and test evidence.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+      "question": "AI agent evaluation harness",
+      "supporting_questions": [
+        "AI agent testing harness",
+        "AI agent replay evaluation"
+      ],
+      "intent": "implementation",
+      "cohort": 1,
+      "direct_answer": "An AI agent evaluation harness surrounds a model with versioned tasks, immutable traces, replay fixtures, independent graders, protected policies, and promotion gates so a proposed improvement can be reviewed without letting the agent redefine success or deploy itself.",
+      "evidence_gap": "Connect a live agent environment to concrete engineering controls rather than describing evaluation as a prompt-only scoring exercise.",
+      "original_artifact": "A three-layer harness architecture and bounded Codex task contract derived from a code-level ViralBench audit.",
+      "scope_boundary": "This page covers the complete harness and improvement loop; the replayable-traces article focuses on trace schemas and evaluator evidence.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
+      "question": "robots.txt GPTBot OAI-SearchBot",
+      "supporting_questions": [
+        "AI crawler robots.txt",
+        "GPTBot vs OAI-SearchBot"
+      ],
+      "intent": "implementation",
+      "cohort": 1,
+      "direct_answer": "Robots.txt can express different crawl preferences for GPTBot, OAI-SearchBot, and other named agents, but those directives govern crawler access only; they do not guarantee indexing, rankings, citations, model inclusion, or retrieval by a user-requested tool.",
+      "evidence_gap": "Keep search, training, and user-requested retrieval agents distinct and tie every directive to provider documentation and a dated source map.",
+      "original_artifact": "A maintained provider-agent matrix and public CSV source map for crawler identities, purposes, and policy boundaries.",
+      "scope_boundary": "This page compares named AI crawlers; the robots access-control article explains the protocol and security boundary for crawlers generally.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+      "question": "SEO data pipeline",
+      "supporting_questions": [
+        "technical SEO data pipeline",
+        "Search Console data infrastructure"
+      ],
+      "intent": "implementation",
+      "cohort": 1,
+      "direct_answer": "An SEO data pipeline should preserve URL identity, collection time, raw observations, rendered evidence, source provenance, derived findings, and export state so Search Console metrics and crawler records can support reviewable decisions instead of becoming disconnected dashboard totals.",
+      "evidence_gap": "Treat technical SEO as a governed data system with provenance and failure states, not as a sequence of opaque exports and scores.",
+      "original_artifact": "A URL-to-evidence pipeline model with public schema fields, source roles, and failure-state handling.",
+      "scope_boundary": "This page covers end-to-end SEO data infrastructure; the audit-findings article focuses on deriving one finding from immutable observations.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
+      "question": "personal SEO canonical identity",
+      "supporting_questions": [
+        "canonical person identity SEO",
+        "personal website entity SEO"
+      ],
+      "intent": "implementation",
+      "cohort": 2,
+      "direct_answer": "Personal SEO canonical identity starts with one current person page, consistent names and facts, redirected stale records, selective sameAs links, and controlled profiles that point back to the canonical source instead of multiplying thin biographies across the web.",
+      "evidence_gap": "Provide an operational identity-reconciliation method that distinguishes controlled sources, corroborating profiles, stale records, and unsupported sameAs claims.",
+      "original_artifact": "A profile inventory template, canonical-host decision tree, sameAs rubric, and external-record reconciliation queue.",
+      "scope_boundary": "This page governs a person and profile graph; the canonicalization-graph article governs URL consolidation inside a website.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+        "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+      "question": "are toll roads privately owned in Texas",
+      "supporting_questions": [
+        "who owns Texas toll roads",
+        "Texas toll road private operators"
+      ],
+      "intent": "ownership",
+      "cohort": 1,
+      "direct_answer": "Texas toll roads are not governed by one ownership model: the state, counties, and public authorities usually own the roadway, while contracts may give private concessionaires defined rights to operate lanes, collect revenue, service debt, earn equity returns, and transfer the asset at expiry.",
+      "evidence_gap": "Separate physical ownership from concession rights, operators, lenders, revenue claims, and residual control using project-level public records.",
+      "original_artifact": "A project-by-project ownership, operator, concession, debt, revenue-rights, valuation, and source-gap table.",
+      "scope_boundary": "This is the only article targeting Texas toll-road ownership; supporting data-system articles discuss evidence methods rather than road ownership.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+        "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
+      "question": "crawl frontier design",
+      "supporting_questions": [
+        "web crawler frontier state machine",
+        "crawler URL scheduling"
+      ],
+      "intent": "implementation",
+      "cohort": 2,
+      "direct_answer": "Reliable crawl frontier design models each URL as a versioned state transition across discovery, admission, scheduling, fetching, retry, suppression, and completion while keeping URL identity, origin politeness, leases, budgets, and evidence records explicit and replayable.",
+      "evidence_gap": "Move beyond queue tutorials by defining identity, state invariants, host scheduling, crawl-trap bounds, and recovery evidence together.",
+      "original_artifact": "A typed frontier-transition schema, lifecycle table, origin scheduler contract, and crawl-budget gap record.",
+      "scope_boundary": "This page covers crawler scheduling and lifecycle; the SQLite article covers persistence and the internal-link article covers the discovered graph.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+        "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
+        "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
+      "question": "raw HTML vs rendered DOM",
+      "supporting_questions": [
+        "raw HTML rendered DOM SEO",
+        "JavaScript SEO rendering evidence"
+      ],
+      "intent": "comparison",
+      "cohort": 2,
+      "direct_answer": "Raw HTML is the response body returned by the server, while the rendered DOM is the browser-created document after parsing, scripts, dependent requests, and mutations; a technical SEO audit needs both artifacts plus an explicit render-completeness state.",
+      "evidence_gap": "Define a reproducible evidence envelope and failure taxonomy instead of reducing the comparison to screenshots or a binary JavaScript check.",
+      "original_artifact": "A raw-versus-rendered capture contract, completeness taxonomy, field-level diff table, and triage sequence.",
+      "scope_boundary": "This page compares transport and browser evidence; the structured-data article addresses drift between visible content and JSON-LD.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
+        "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+      "question": "canonicalization graph SEO",
+      "supporting_questions": [
+        "SEO canonical graph",
+        "canonical URL consistency"
+      ],
+      "intent": "implementation",
+      "cohort": 2,
+      "direct_answer": "A canonicalization graph is consistent when redirects, HTML canonicals, sitemap entries, internal links, hreflang references, and structured data converge on the same indexable URL rather than sending search systems through cycles, splits, or contradictory targets.",
+      "evidence_gap": "Evaluate canonical signals as one directed graph and expose conflicts mechanically instead of checking each tag in isolation.",
+      "original_artifact": "A canonical-signal edge model, conflict taxonomy, diagnostic table, and graph-level acceptance rules.",
+      "scope_boundary": "This page covers canonical URL signals inside a site; the personal-identity article covers external person and profile records.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
+        "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
+        "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
+      "question": "internal linking graph",
+      "supporting_questions": [
+        "SEO internal link graph",
+        "internal link crawl depth"
+      ],
+      "intent": "implementation",
+      "cohort": 2,
+      "direct_answer": "An internal linking graph models pages as nodes and crawlable links as directed edges so teams can measure depth, orphan risk, inlink concentration, anchor context, cluster connectivity, and the actual retrieval paths supporting each important page.",
+      "evidence_gap": "Connect graph measures to user journeys and crawl evidence instead of presenting PageRank-like scores without inspectable edges.",
+      "original_artifact": "A directed-edge schema, breadth-first depth calculation, orphan test, anchor audit, and cluster-connectivity checklist.",
+      "scope_boundary": "This page covers internal retrieval edges; the crawl-frontier article covers fetch scheduling and the canonical article covers signal convergence.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
+        "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+      "question": "is robots.txt access control",
+      "supporting_questions": [
+        "robots.txt security boundary",
+        "robots exclusion protocol access control"
+      ],
+      "intent": "definition",
+      "cohort": 2,
+      "direct_answer": "Robots.txt is not access control: it is a publicly readable crawler-coordination protocol that cooperative agents may follow, while authentication, authorization, network policy, and server-side response controls must protect material that cannot be publicly retrieved.",
+      "evidence_gap": "Show the complete control stack and failure modes instead of repeating that robots.txt is voluntary without an implementation boundary.",
+      "original_artifact": "A layered crawler-policy matrix separating discovery guidance, authentication, authorization, network controls, and response handling.",
+      "scope_boundary": "This page explains protocol and security boundaries; the AI crawler policy page compares named provider agents and their documented purposes.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
+        "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
+      "question": "structured data content drift",
+      "supporting_questions": [
+        "JSON-LD content mismatch",
+        "structured data source of truth"
+      ],
+      "intent": "implementation",
+      "cohort": 2,
+      "direct_answer": "Structured data content drift occurs when JSON-LD describes names, dates, prices, authors, availability, or claims that the visible page no longer supports; generating both surfaces from one typed source and testing their fields prevents silent divergence.",
+      "evidence_gap": "Treat structured-data accuracy as a source-of-truth and release-contract problem rather than a one-time schema markup task.",
+      "original_artifact": "A typed single-source example, HTML-to-JSON-LD field map, drift tests, and release acceptance table.",
+      "scope_boundary": "This page focuses on visible-content and JSON-LD parity; the raw-rendered article focuses on browser execution and capture completeness.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
+        "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+      "question": "SEO audit provenance",
+      "supporting_questions": [
+        "technical SEO finding provenance",
+        "SEO audit evidence model"
+      ],
+      "intent": "implementation",
+      "cohort": 3,
+      "direct_answer": "SEO audit provenance means every finding can be regenerated from immutable observations, rule and policy versions, affected URLs, timestamps, confidence, and reviewer decisions while unknown or incomplete evidence remains a named measurement gap instead of becoming a claim.",
+      "evidence_gap": "Define a derivation and review contract for findings instead of presenting severity labels without their source records.",
+      "original_artifact": "A finding-provenance schema, observation-to-finding lineage table, confidence states, and review transition contract.",
+      "scope_boundary": "This page focuses on one derived audit record; the SEO data-pipeline page covers collection and movement across the broader system.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
+        "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
+      "question": "AI agent evaluation traces",
+      "supporting_questions": [
+        "replayable AI agent traces",
+        "AI agent trajectory evaluation"
+      ],
+      "intent": "evaluation",
+      "cohort": 3,
+      "direct_answer": "AI agent evaluation traces should preserve the task, messages, tool calls, tool results, state transitions, artifacts, policy versions, costs, timing, and grader evidence so a failure can be replayed without pretending a frozen test world predicts the live environment.",
+      "evidence_gap": "Join trace completeness, replay limits, independent grading, and promotion evidence in one inspectable evaluation contract.",
+      "original_artifact": "A typed trace-event schema, replay-world manifest, evaluator separation matrix, and promotion evidence checklist.",
+      "scope_boundary": "This page covers trace and replay evidence; the ViralBench article covers the full improvement harness around a live agent.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+        "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
+      "question": "SQLite web crawler",
+      "supporting_questions": [
+        "SQLite crawl pipeline",
+        "SQLite crawler concurrency"
+      ],
+      "intent": "implementation",
+      "cohort": 3,
+      "direct_answer": "SQLite can support a bounded web crawler when URL identity is unique, writes use short transactions and idempotent upserts, one process coordinates write pressure, WAL behavior is measured, leases are recoverable, and artifacts remain outside oversized database rows.",
+      "evidence_gap": "Specify the concurrency and recovery envelope where SQLite is useful instead of arguing that it is either universally sufficient or never production-ready.",
+      "original_artifact": "A normalized crawl schema, idempotent UPSERT, transaction pattern, WAL checklist, and migration boundary table.",
+      "scope_boundary": "This page covers crawl persistence and concurrency; the frontier article covers scheduling and the provenance article covers derived findings.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
+      "question": "technical SEO migration checklist",
+      "supporting_questions": [
+        "SEO migration release checklist",
+        "technical SEO migration testing"
+      ],
+      "intent": "implementation",
+      "cohort": 3,
+      "direct_answer": "A technical SEO migration checklist should be executable: inventory old and new URLs, validate redirect and canonical maps, render templates, compare indexability, preserve internal links and structured data, define rollback thresholds, and rerun the same checks after launch.",
+      "evidence_gap": "Turn migration advice into fail-closed release gates with artifacts, owners, tolerances, and rollback evidence.",
+      "original_artifact": "A staged migration gate matrix covering URL mappings, redirects, canonicals, rendering, schema, sitemaps, monitoring, and rollback.",
+      "scope_boundary": "This page governs migration release decisions; the canonical, rendering, and structured-data pages provide deep checks for individual gates.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
+        "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+        "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift"
+      ],
+      "last_verified": "2026-07-20"
+    }
+  ]
+}

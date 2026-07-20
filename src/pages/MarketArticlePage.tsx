@@ -19,6 +19,7 @@ import {
   type ResearchArticle,
 } from '../content/articleModels';
 import { RESEARCH_ARTICLES } from '../content/researchArticles';
+import { getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
@@ -222,6 +223,11 @@ function GenericArticle({
   const sections = article.sections;
   const variant = sections?.length ? 'research' : 'wide';
   const navItems = articleNav(article, sections);
+  const searchTarget = getArticleSearchTarget(getArticlePath(article));
+  const relatedLinks = searchTarget?.relatedPaths.map((path) => ({
+    href: path,
+    label: getArticleSearchTarget(path)?.primaryQuery ?? path,
+  })) ?? [];
 
   return (
     <ArticlePage activePath={investmentMemo ? '/markets' : '/research'} variant={variant}>
@@ -234,6 +240,13 @@ function GenericArticle({
           note: metric.label === 'Sources' ? 'Public source records' : undefined,
         }))}
       />
+
+      {searchTarget ? (
+        <ArticleCallout label="Direct answer" title={searchTarget.primaryQuery}>
+          <p>{searchTarget.directAnswer}</p>
+          <p><strong>Original artifact:</strong> {searchTarget.originalArtifact}</p>
+        </ArticleCallout>
+      ) : null}
 
       {article.thesis ? (
         <ArticleCallout
@@ -282,11 +295,13 @@ function GenericArticle({
         <ArticleEndnote
           links={investmentMemo
             ? [
+                ...relatedLinks,
                 { href: backHref, label: backLabel },
                 { href: '/research', label: 'Technical SEO and AI systems research' },
                 { href: '/about', label: 'About Sulayman Bowles' },
               ]
             : [
+                ...relatedLinks,
                 { href: '/research', label: 'Technical SEO research' },
                 { href: '/atlas', label: 'Atlas technical SEO audit software' },
                 { href: '/method', label: 'Technical SEO audit services' },

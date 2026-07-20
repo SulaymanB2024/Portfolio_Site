@@ -50,6 +50,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - Appian educational research memo PDF: https://sulayman-bowles.dev/research/appian-enterprise-software-durability-memo.pdf
 - Appian assumptions table CSV: https://sulayman-bowles.dev/research/appian-assumptions-table.csv
 - Authority asset index: https://sulayman-bowles.dev/research/authority-assets.json
+- Article research briefs: https://sulayman-bowles.dev/research/article-research-briefs.json
 - Crawler policy sources: https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv
 - Austin crawlability benchmark pilot CSV: https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv
 - Austin crawlability benchmark summary: https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json

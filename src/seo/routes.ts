@@ -28,6 +28,7 @@ import {
   workJsonLd,
   type JsonLd,
 } from './schema';
+import { getArticleSearchTarget } from './articleSearchTargets';
 
 export type RouteSection =
   | 'home'
@@ -73,6 +74,7 @@ const WORK_OG_IMAGE = '/images/social/og-work.png';
 const VOID_OG_IMAGE = '/images/social/og-void.png';
 const RESEARCH_OG_IMAGE = '/images/social/og-research.png';
 const TOLL_ROADS_OG_IMAGE = '/images/social/og-toll-roads.png';
+const VIRALBENCH_SEARCH_TARGET = getArticleSearchTarget(VIRALBENCH_ARTICLE_PATH);
 
 export const NOT_FOUND_ROUTE: SeoRoute = {
   path: '/404',
@@ -304,7 +306,7 @@ const CORE_ROUTES: SeoRoute[] = [
     priority: 0.8,
     includeInSitemap: true,
     lastmod: VIRALBENCH_ARTICLE_MODIFIED_DATE,
-    staticSummary: VIRALBENCH_ARTICLE_EXCERPT,
+    staticSummary: `${VIRALBENCH_SEARCH_TARGET?.directAnswer ?? VIRALBENCH_ARTICLE_EXCERPT} ${VIRALBENCH_ARTICLE_EXCERPT}`,
     image: VIRALBENCH_ARTICLE_IMAGE,
     jsonLd: viralBenchArticleJsonLd(),
   },
@@ -337,6 +339,7 @@ const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
   const datePublished = article.date.replaceAll('.', '-');
   const dateModified = (article.dateModified ?? article.date).replaceAll('.', '-');
   const investmentMemo = isInvestmentMemo(article);
+  const searchTarget = getArticleSearchTarget(path);
   const articleImage = article.slug === TEXAS_TOLL_ARTICLE_SLUG ? TOLL_ROADS_OG_IMAGE : article.image === '/og-default.png' ? RESEARCH_OG_IMAGE : article.image;
 
   return {
@@ -352,7 +355,7 @@ const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
     generateStatic: !isIndexable,
     noindex: !isIndexable,
     lastmod: dateModified,
-    staticSummary: article.content[0],
+    staticSummary: `${searchTarget?.directAnswer ?? ''} ${article.content[0]}`.trim(),
     image: articleImage,
     jsonLd: marketArticleJsonLd({
       title: article.title,

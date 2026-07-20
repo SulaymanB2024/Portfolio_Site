@@ -1,25 +1,260 @@
 {
-  "generated_at": "2026-07-16",
+  "generated_at": "2026-07-20",
   "canonical_host": "https://sulayman-bowles.dev",
-  "objective": "Public index of current portfolio pages and research artifacts.",
-  "limits": [
-    "This file does not claim rankings, indexing, traffic movement, revenue impact, or AI citations.",
-    "Private client names and private outcomes are intentionally excluded.",
-    "The Atlas demonstration is a dated open-web capture, not a client crawl or production-coverage claim."
+  "objective": "Topical authority index for source-led technical SEO, crawler, AI-agent, data-system, and infrastructure research.",
+  "claim_boundaries": [
+    "The index does not claim rankings, indexing, traffic movement, revenue impact, backlinks, Domain Rating movement, or AI citations.",
+    "Outreach targets are editorial-fit candidates, not promised placements.",
+    "Preferred anchors are descriptive suggestions only; publishers retain editorial control and forced exact-match anchors are prohibited.",
+    "Private clients, private outcomes, and unsupported performance claims are intentionally excluded.",
+    "Artifacts preserve verification dates and evidence limits; publication dates are not changed merely to signal freshness."
   ],
   "assets": [
     {
       "priority": 1,
+      "name": "Research Notes",
+      "url": "https://sulayman-bowles.dev/research",
+      "type": "research_hub",
+      "cluster": "all",
+      "preferred_anchor": "Sulayman Bowles research notes",
+      "pitch_angle": "A crawlable hub connecting source-led articles, public artifacts, methodology, and explicit claim boundaries.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json"
+      ]
+    },
+    {
+      "priority": 1,
       "name": "The First AI Managers",
       "url": "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
-      "type": "long_form_research",
-      "supporting_assets": ["https://sulayman-bowles.dev/research"]
+      "type": "source_led_article",
+      "cluster": "ai-systems",
+      "preferred_anchor": "The First AI Managers",
+      "pitch_angle": "Separate live businesses, pilots, simulations, and vendor claims instead of treating every autonomy demonstration as equivalent evidence.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench",
+      "url": "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+      "type": "source_led_article",
+      "cluster": "ai-systems",
+      "preferred_anchor": "Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench",
+      "pitch_angle": "Connect a live agent environment to concrete engineering controls rather than describing evaluation as a prompt-only scoring exercise.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
+      "url": "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
+      "type": "source_led_article",
+      "cluster": "ai-crawlers",
+      "preferred_anchor": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
+      "pitch_angle": "Keep search, training, and user-requested retrieval agents distinct and tie every directive to provider documentation and a dated source map.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Technical SEO as Public Data Infrastructure",
+      "url": "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+      "type": "source_led_article",
+      "cluster": "search-console",
+      "preferred_anchor": "Technical SEO as Public Data Infrastructure",
+      "pitch_angle": "Treat technical SEO as a governed data system with provenance and failure states, not as a sequence of opaque exports and scores.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Canonical Identity Beats More Content",
+      "url": "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
+      "type": "source_led_article",
+      "cluster": "personal-seo",
+      "preferred_anchor": "Canonical Identity Beats More Content",
+      "pitch_angle": "Provide an operational identity-reconciliation method that distinguishes controlled sources, corroborating profiles, stale records, and unsupported sameAs claims.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+        "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
+      "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+      "type": "source_led_article",
+      "cluster": "who-owns-texas-toll-roads",
+      "preferred_anchor": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
+      "pitch_angle": "Separate physical ownership from concession rights, operators, lenders, revenue claims, and residual control using project-level public records.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+        "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "The Crawl Frontier Is a State Machine, Not a Queue",
+      "url": "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
+      "type": "source_led_article",
+      "cluster": "crawler-engineering",
+      "preferred_anchor": "The Crawl Frontier Is a State Machine, Not a Queue",
+      "pitch_angle": "Move beyond queue tutorials by defining identity, state invariants, host scheduling, crawl-trap bounds, and recovery evidence together.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+        "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Raw HTML and Rendered DOM Are Separate Evidence",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
+      "type": "source_led_article",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Raw HTML and Rendered DOM Are Separate Evidence",
+      "pitch_angle": "Define a reproducible evidence envelope and failure taxonomy instead of reducing the comparison to screenshots or a binary JavaScript check.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
+        "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Canonicalization Is a Graph Consistency Problem",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+      "type": "source_led_article",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Canonicalization Is a Graph Consistency Problem",
+      "pitch_angle": "Evaluate canonical signals as one directed graph and expose conflicts mechanically instead of checking each tag in isolation.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
+        "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Internal Links Are a Directed Retrieval Graph",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
+      "type": "source_led_article",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Internal Links Are a Directed Retrieval Graph",
+      "pitch_angle": "Connect graph measures to user journeys and crawl evidence instead of presenting PageRank-like scores without inspectable edges.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Robots.txt Is a Courtesy Layer, Not Access Control",
+      "url": "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+      "type": "source_led_article",
+      "cluster": "ai-crawlers",
+      "preferred_anchor": "Robots.txt Is a Courtesy Layer, Not Access Control",
+      "pitch_angle": "Show the complete control stack and failure modes instead of repeating that robots.txt is voluntary without an implementation boundary.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Structured Data Without Content Drift",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
+      "type": "source_led_article",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Structured Data Without Content Drift",
+      "pitch_angle": "Treat structured-data accuracy as a source-of-truth and release-contract problem rather than a one-time schema markup task.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
+        "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates"
+      ]
+    },
+    {
+      "priority": 3,
+      "name": "Audit Findings Should Be Derived Records",
+      "url": "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+      "type": "source_led_article",
+      "cluster": "data-systems",
+      "preferred_anchor": "Audit Findings Should Be Derived Records",
+      "pitch_angle": "Define a derivation and review contract for findings instead of presenting severity labels without their source records.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation"
+      ]
+    },
+    {
+      "priority": 3,
+      "name": "Replayable Traces for Evaluating Tool-Using AI Agents",
+      "url": "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
+      "type": "source_led_article",
+      "cluster": "ai-systems",
+      "preferred_anchor": "Replayable Traces for Evaluating Tool-Using AI Agents",
+      "pitch_angle": "Join trace completeness, replay limits, independent grading, and promotion evidence in one inspectable evaluation contract.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+        "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers"
+      ]
+    },
+    {
+      "priority": 3,
+      "name": "SQLite for Crawl Pipelines: Idempotency, WAL, and Bounded Concurrency",
+      "url": "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
+      "type": "source_led_article",
+      "cluster": "data-systems",
+      "preferred_anchor": "SQLite for Crawl Pipelines: Idempotency, WAL, and Bounded Concurrency",
+      "pitch_angle": "Specify the concurrency and recovery envelope where SQLite is useful instead of arguing that it is either universally sufficient or never production-ready.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+      ]
+    },
+    {
+      "priority": 3,
+      "name": "Technical SEO Migrations Need Executable Release Gates",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
+      "type": "source_led_article",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Technical SEO Migrations Need Executable Release Gates",
+      "pitch_angle": "Turn migration advice into fail-closed release gates with artifacts, owners, tolerances, and rollback evidence.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
+        "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency"
+      ]
     },
     {
       "priority": 1,
       "name": "Atlas Open-Corpus Demonstration",
       "url": "https://sulayman-bowles.dev/atlas/sample-crawl",
       "type": "public_demonstration",
+      "cluster": "crawler-engineering",
+      "preferred_anchor": "Atlas open-corpus crawl demonstration",
+      "pitch_angle": "A bounded public crawl dataset with raw evidence, runtime indicators, and an explicit measurement boundary.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.csv",
         "https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.json"
@@ -27,17 +262,87 @@
     },
     {
       "priority": 1,
-      "name": "Who Owns the Toll Roads in Texas?",
-      "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
-      "type": "long_form_research",
-      "supporting_assets": ["https://sulayman-bowles.dev/markets"]
+      "name": "Atlas technical SEO audit software",
+      "url": "https://sulayman-bowles.dev/atlas",
+      "type": "canonical_site_asset",
+      "cluster": "crawler-engineering",
+      "preferred_anchor": "Atlas crawl evidence system",
+      "pitch_angle": "A product page connecting crawl contracts, evidence preservation, review states, and public demonstration artifacts.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Austin Technical SEO",
+      "url": "https://sulayman-bowles.dev/austin-technical-seo",
+      "type": "canonical_site_asset",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Austin technical SEO audit services",
+      "pitch_angle": "A locally scoped technical SEO service page with a bounded public crawlability benchmark.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Void Agency Method",
+      "url": "https://sulayman-bowles.dev/method",
+      "type": "canonical_site_asset",
+      "cluster": "technical-seo",
+      "preferred_anchor": "technical SEO audit method",
+      "pitch_angle": "A fixed-scope audit method organized around crawl evidence, implementation priorities, and reviewable handoff.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Markets and Investing",
+      "url": "https://sulayman-bowles.dev/markets",
+      "type": "canonical_site_asset",
+      "cluster": "infrastructure",
+      "preferred_anchor": "markets and infrastructure research",
+      "pitch_angle": "A finance-only research filter with visible assumptions, ownership evidence, and recommendation boundaries.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Resume",
+      "url": "https://sulayman-bowles.dev/resume",
+      "type": "canonical_site_asset",
+      "cluster": "identity",
+      "preferred_anchor": "Sulayman Bowles resume",
+      "pitch_angle": "The current canonical résumé and professional history source.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Selected Work",
+      "url": "https://sulayman-bowles.dev/work",
+      "type": "canonical_site_asset",
+      "cluster": "identity",
+      "preferred_anchor": "Sulayman Bowles technical portfolio",
+      "pitch_angle": "A selected-work index linking public software, research, and implementation evidence.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
     },
     {
       "priority": 2,
       "name": "About Sulayman Bowles",
       "url": "https://sulayman-bowles.dev/about",
-      "type": "profile_page",
-      "supporting_assets": ["https://sulayman-bowles.dev/resume", "https://sulayman-bowles.dev/llms.txt"]
+      "type": "canonical_site_asset",
+      "cluster": "identity",
+      "preferred_anchor": "about Sulayman Bowles",
+      "pitch_angle": "The canonical public identity page with current work, education, controlled profiles, and evidence boundaries.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
     }
   ]
 }

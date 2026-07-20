@@ -3,7 +3,8 @@ import path from 'node:path';
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://sulayman-bowles.dev';
-const TODAY = '2026-06-25';
+const TODAY = '2026-07-20';
+const AUSTIN_BENCHMARK_DATE = '2026-06-25';
 
 const paths = {
   playbook: 'docs/link-building/authority-playbook.md',
@@ -19,6 +20,8 @@ const paths = {
   publishManifest: 'docs/link-building/publish-manifest.json',
   publishReadiness: 'docs/link-building/publish-readiness.md',
   githubRepoAudit: 'docs/link-building/github-owned-repo-opportunities.csv',
+  articleClusterProspects: 'docs/link-building/article-cluster-prospects.csv',
+  articleClusterDrafts: 'docs/link-building/article-cluster-outreach-drafts.md',
   assets: 'public/research/authority-assets.json',
   crawlerSources: 'public/research/ai-search-crawler-policy-sources.csv',
   austinBenchmarkTargets: 'docs/link-building/austin-benchmark-targets.csv',
@@ -47,7 +50,7 @@ const requiredTrackerColumns = [
   'notes',
 ];
 
-const requiredSourceColumns = ['source_name', 'source_url', 'source_type', 'used_for', 'claim_boundary'];
+const requiredSourceColumns = ['source_name', 'source_url', 'source_type', 'used_for', 'claim_boundary', 'last_verified'];
 const requiredEvidenceColumns = [
   'verified_at',
   'prospect_name',
@@ -118,6 +121,18 @@ const requiredGithubRepoAuditColumns = [
   'target_page',
   'evidence',
   'next_action',
+  'risk_boundary',
+];
+const requiredArticleClusterProspectColumns = [
+  'cluster',
+  'prospect_name',
+  'prospect_url',
+  'contact_or_submission_url',
+  'fit_status',
+  'target_page',
+  'asset_angle',
+  'last_verified',
+  'approval_required',
   'risk_boundary',
 ];
 const allowedStatuses = new Set(['owned', 'research', 'ready', 'sent', 'won', 'lost', 'blocked']);
@@ -435,7 +450,7 @@ function validatePack() {
   assert(austinBenchmark.rows.every((row) => row.homepage_fetch_result), 'Austin benchmark rows need homepage fetch results');
   assert(austinBenchmark.rows.every((row) => row.measurement_note), 'Austin benchmark rows need measurement notes');
   const austinSummary = JSON.parse(read(paths.austinBenchmarkSummary));
-  assert(austinSummary.generated_at === TODAY, 'Austin benchmark summary generated_at must match pack date');
+  assert(austinSummary.generated_at === AUSTIN_BENCHMARK_DATE, 'Austin benchmark summary must retain its measurement date');
   assert(austinSummary.sample_size === austinBenchmark.rows.length, 'Austin benchmark summary sample size must match CSV rows');
   assert(Array.isArray(austinSummary.claim_boundaries) && austinSummary.claim_boundaries.length >= 4, 'Austin benchmark summary needs claim boundaries');
   assert(read(paths.austinBenchmarkReport).includes('Austin Crawlability Benchmark Pilot'), 'Austin benchmark report missing title');
@@ -476,6 +491,29 @@ function validatePack() {
     'GitHub repo audit missing verified Race-the-Case metadata link',
   );
 
+  const articleClusterProspects = parseCsv(paths.articleClusterProspects);
+  compareColumns(articleClusterProspects.columns, requiredArticleClusterProspectColumns, paths.articleClusterProspects);
+  const clusterCounts = new Map();
+  for (const row of articleClusterProspects.rows) {
+    clusterCounts.set(row.cluster, (clusterCounts.get(row.cluster) ?? 0) + 1);
+    assert(row.prospect_url.startsWith('https://'), `article cluster prospect URL must use HTTPS: ${row.prospect_name}`);
+    assert(row.contact_or_submission_url.startsWith('https://'), `article cluster contact URL must use HTTPS: ${row.prospect_name}`);
+    assert(row.target_page.startsWith(SITE_URL), `article cluster target must stay on canonical host: ${row.target_page}`);
+    assert(row.approval_required === 'yes', `article cluster prospect must remain approval-gated: ${row.prospect_name}`);
+    assert(row.last_verified, `article cluster prospect needs verification evidence: ${row.prospect_name}`);
+  }
+  assert(clusterCounts.size === 5, `article cluster prospect pack must contain exactly 5 topical clusters; found ${clusterCounts.size}`);
+  for (const [cluster, count] of clusterCounts) {
+    assert(count >= 5, `${cluster}: article cluster prospect pack needs at least 5 prospects`);
+  }
+
+  const articleClusterDrafts = read(paths.articleClusterDrafts);
+  assert((articleClusterDrafts.match(/^## Cluster:/gm) ?? []).length === 5, 'article cluster drafts need exactly 5 cluster sections');
+  assert((articleClusterDrafts.match(/^### Draft [12]:/gm) ?? []).length === 10, 'article cluster drafts need two drafts per cluster');
+  for (const prohibited of ['Paid links', 'exchanges', 'spam directories', 'forced exact-match anchors']) {
+    assert(articleClusterDrafts.includes(prohibited), `article cluster drafts missing prohibition: ${prohibited}`);
+  }
+
   const profileUpdates = read(paths.ownedProfileUpdates);
   for (const requiredText of ['GitHub Profile', 'LinkedIn', 'Thick-Scraper-VOID- Repository', 'Claim Boundary']) {
     assert(profileUpdates.includes(requiredText), `owned profile updates missing ${requiredText}`);
@@ -492,7 +530,7 @@ function validatePack() {
   const sitemap = read(paths.sitemap);
   assert(sitemap.includes(`<loc>${SITE_URL}/research</loc>`), 'sitemap missing research asset hub');
 
-  return { authorityAssets, tracker, crawlerSources, liveEvidence, launchQueue, outcomeLog, austinBenchmark, githubRepoAudit };
+  return { authorityAssets, tracker, crawlerSources, liveEvidence, launchQueue, outcomeLog, austinBenchmark, githubRepoAudit, articleClusterProspects };
 }
 
 function writePackets(tracker, liveEvidence) {
@@ -511,7 +549,7 @@ ${markdownTable(priorityRows)}
 ${priorityRows.map((row, index) => buildPacket(row, index, liveEvidence)).join('\n')}
 `;
 
-  write(paths.packets, packets);
+  write(paths.packets, `${packets.trimEnd()}\n`);
 }
 
 function writeLaunchDrafts(launchQueue) {
@@ -554,10 +592,10 @@ ${draft.body}
   .join('\n')}
 `;
 
-  write(paths.launchDrafts, body);
+  write(paths.launchDrafts, `${body.trimEnd()}\n`);
 }
 
-function writeAudit({ authorityAssets, tracker, crawlerSources, liveEvidence, launchQueue, outcomeLog, austinBenchmark, githubRepoAudit }) {
+function writeAudit({ authorityAssets, tracker, crawlerSources, liveEvidence, launchQueue, outcomeLog, austinBenchmark, githubRepoAudit, articleClusterProspects }) {
   const doneRows = [
     ['Authority playbook', paths.playbook, 'done in repo'],
     ['Outreach templates', paths.templates, 'done in repo'],
@@ -568,6 +606,8 @@ function writeAudit({ authorityAssets, tracker, crawlerSources, liveEvidence, la
     ['Generated launch drafts', paths.launchDrafts, `${launchQueue.rows.filter((row) => ['ready_after_login', 'ready_after_review', 'ready_after_publish', 'ready_if_non_promotional', 'gated'].includes(row.queue_status)).length} draft payloads`],
     ['Outreach outcome log', paths.outcomeLog, `${outcomeLog.rows.length} tracked external actions`],
     ['GitHub owned repo opportunity audit', paths.githubRepoAudit, `${githubRepoAudit.rows.length} long-tail repos classified`],
+    ['Article cluster prospects', paths.articleClusterProspects, `${articleClusterProspects.rows.length} vetted cluster mappings`],
+    ['Article cluster editorial drafts', paths.articleClusterDrafts, 'two unsent approval-gated drafts per cluster'],
     ['Authority asset index', paths.assets, `${authorityAssets.assets.length} assets`],
     ['Crawler policy source map', paths.crawlerSources, `${crawlerSources.rows.length} sources`],
     ['Austin crawlability benchmark', `${paths.austinBenchmarkCsv} and ${paths.austinBenchmarkSummary}`, `${austinBenchmark.rows.length} measured rows`],

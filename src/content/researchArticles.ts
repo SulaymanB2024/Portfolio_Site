@@ -52,7 +52,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     number: '01',
     category: 'CRAWLER POLICY',
     title: 'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot',
-    seoTitle: 'AI Robots.txt Guide: GPTBot & ClaudeBot',
+    seoTitle: 'Robots.txt Guide for GPTBot, OAI-SearchBot, and AI Crawlers',
     subtitle: 'Copy-ready host rules for eight named product tokens, with exact Allow, Disallow, sitemap, and release checks.',
     seoDescription:
       'Compare OpenAI, Anthropic, and Perplexity crawlers, then copy robots.txt rules for AI search, training controls, or named-agent blocks.',
@@ -235,7 +235,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     number: '02',
     category: 'DATA INFRASTRUCTURE',
     title: 'Technical SEO as Public Data Infrastructure',
-    seoTitle: 'Technical SEO as Data Infrastructure',
+    seoTitle: 'SEO Data Pipeline as Public Infrastructure',
     subtitle: 'A systems essay on how URLs become crawlable, renderable, attributable, and exportable public records.',
     seoDescription:
       'A systems essay by Sulayman Bowles on URL discovery, crawling, rendering, structured records, provenance, crawl evidence, and durable technical SEO exports.',

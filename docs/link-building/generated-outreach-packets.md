@@ -1,6 +1,6 @@
 # Generated Link-Building Outreach Packets
 
-Generated: 2026-06-25
+Generated: 2026-07-20
 
 These packets are generated from `docs/link-building/prospect-tracker.csv`. They are not sent mail. Review each prospect manually before outreach.
 
@@ -10,8 +10,8 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 | 1 | Portfolio_Site repository | owned-profile | https://sulayman-bowles.dev/ | Portfolio static SEO implementation | Monitor public GitHub metadata and README links |
 | 1 | Thick-Scraper-VOID- repository | owned-profile | https://sulayman-bowles.dev/atlas | Atlas project | Monitor public GitHub metadata and README links |
 | 1 | LinkedIn profile | owned-profile | https://sulayman-bowles.dev/resume | Resume and source graph | Update profile manually |
-| 1 | Legacy sulaymanbowles-hash Website-80-2 repository | existing-mention | https://sulayman-bowles.dev/ai-information | AI information source graph | Verify account ownership and update legacy repo links |
-| 1 | UT Austin Student Government | existing-mention | https://sulayman-bowles.dev/ai-information | AI information source graph | Confirm mention and contact owner |
+| 1 | Legacy sulaymanbowles-hash Website-80-2 repository | existing-mention | https://sulayman-bowles.dev/about | AI information source graph | Verify account ownership and update legacy repo links |
+| 1 | UT Austin Student Government | existing-mention | https://sulayman-bowles.dev/about | AI information source graph | Confirm mention and contact owner |
 | 1 | McCombs School of Business | academic | https://sulayman-bowles.dev/resume | Resume | Find relevant program/profile owner |
 | 1 | Texas Venture Labs | academic | https://sulayman-bowles.dev/atlas | Atlas project | Verify eligibility and contact path |
 | 1 | Search Engine Land | technical-seo | https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy | AI crawler policy | Find contributor/editor contact |
@@ -45,6 +45,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Send status: not sent.
 - Approval note: send manually only after confirming fit, contact path, and account permission.
 - Claim boundary: do not imply rankings, traffic, revenue, AI citations, or DR movement.
+
 ## Packet 2: Portfolio_Site repository
 
 - Status: won
@@ -109,7 +110,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: existing-mention
 - Prospect URL: https://github.com/sulaymanbowles-hash/Website-80-2
-- Target page: https://sulayman-bowles.dev/ai-information
+- Target page: https://sulayman-bowles.dev/about
 - Asset: AI information source graph
 - Angle: Reclaim old GitHub namespace and dead sulaymanbowles.com references if account or domain control exists
 - Next action: Verify account ownership and update legacy repo links
@@ -125,7 +126,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: existing-mention
 - Prospect URL: https://studentgovernment.utexas.edu/legislative-branch
-- Target page: https://sulayman-bowles.dev/ai-information
+- Target page: https://sulayman-bowles.dev/about
 - Asset: AI information source graph
 - Angle: Current source link for identity reconciliation
 - Next action: Confirm mention and contact owner
