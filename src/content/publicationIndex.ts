@@ -1,5 +1,7 @@
 import { AI_MANAGERS_ARTICLE_PATH } from './aiManagersArticle';
+import type { ResearchArticle } from './articleModels';
 import { getArticlePath, getArticleBySlug } from './articleRegistry';
+import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
 
 export type PublicationIndexItem = {
@@ -22,7 +24,22 @@ const publicDataInfrastructure = article('technical-seo-public-data-infrastructu
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
 
+function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['category'] {
+  if (articleItem.cluster === 'ai-systems') return 'AI systems and products';
+  if (articleItem.cluster === 'ai-crawlers' || articleItem.cluster === 'crawler-engineering') {
+    return 'Search systems';
+  }
+  return 'Technical SEO';
+}
+
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
+  ...TECHNICAL_ARTICLE_SERIES.map((articleItem) => ({
+    category: seriesCategory(articleItem),
+    title: articleItem.title,
+    href: getArticlePath(articleItem),
+    description: articleItem.subtitle,
+    date: articleItem.dateModified ?? articleItem.date,
+  })),
   {
     category: 'AI systems and products',
     title: 'The First AI Managers',

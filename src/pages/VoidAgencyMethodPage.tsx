@@ -76,15 +76,15 @@ export default function VoidAgencyMethodPage() {
       <InternalHeader activePath="/method" tone="dark" />
 
       <section className="relative z-10 mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] content-end px-4 pb-16 pt-20 md:px-8 xl:px-10">
-        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Void Agency / technical SEO method</p>
+        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Void Agency / technical SEO audit services</p>
         <h1 className="max-w-6xl font-serif text-[4rem] italic leading-[0.82] tracking-normal md:text-[7.5rem] xl:text-[10rem]">
-          Crawl. Diagnose. Repair. Measure.
+          Technical SEO audits, evidence first.
         </h1>
         <p className="mt-10 max-w-3xl text-base leading-relaxed text-canvas/70">
-          A fixed-scope path from inspectable site evidence to implementation work. The deliverable is not a long checklist; it is a small set of defensible findings, owners, and checks.
+          Fixed-scope technical SEO audit services for crawlability, indexation, rendering, internal links, structured data, analytics, and implementation. The deliverable is a small set of defensible findings, owners, and rerun checks.
         </p>
         <div className="mt-8 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
-          <a href="/contact" className="border-b border-accent/45 pb-1 text-accent hover:border-canvas hover:text-canvas">Request an audit</a>
+          <a href="/contact" className="border-b border-accent/45 pb-1 text-accent hover:border-canvas hover:text-canvas">Request a technical SEO audit</a>
           <a href="/atlas/sample-crawl" className="border-b border-canvas/28 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Open-corpus demonstration</a>
           <a href="#worked-finding" className="border-b border-canvas/28 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Worked finding</a>
         </div>

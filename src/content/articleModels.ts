@@ -9,7 +9,15 @@ export type ArticleMetric = {
   value: string;
 };
 
-export type ResearchCluster = 'firecrawl' | 'ai-crawlers' | 'ai-systems' | 'search-console' | 'personal-seo';
+export type ResearchCluster =
+  | 'firecrawl'
+  | 'ai-crawlers'
+  | 'ai-systems'
+  | 'search-console'
+  | 'personal-seo'
+  | 'crawler-engineering'
+  | 'technical-seo'
+  | 'data-systems';
 
 export type ArticleTable = {
   caption: string;
@@ -20,7 +28,7 @@ export type ArticleTable = {
 export type ArticleCodeExample = {
   title: string;
   description: string;
-  language: 'robots.txt' | 'shell';
+  language: 'robots.txt' | 'shell' | 'typescript' | 'sql' | 'json';
   code: string;
 };
 

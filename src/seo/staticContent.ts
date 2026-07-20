@@ -14,6 +14,7 @@ import {
   austinPilotMethod,
   contextualProofLinks,
   RESEARCH_ASSETS,
+  researchContextLinks,
   workProofCards,
 } from '../content/seoExpansion';
 import {
@@ -156,6 +157,13 @@ const austinDeliverables = [
   'A crawlability and source-clarity review covering robots.txt, sitemap, canonicals, structured data, internal links, and page copy.',
   'A local-intent map that pairs each priority query family with the ranking URL, proof block, CTA path, and measurement field.',
   'A practical next-step order for founders, marketers, or developers, with unsupported ranking and traffic claims left out.',
+];
+
+const austinAuditCoverage = [
+  ['Crawlability and indexation audit', 'Review robots.txt, XML sitemaps, status codes, redirects, canonicals, noindex rules, crawl paths, and priority Austin service pages.'],
+  ['JavaScript rendering and templates', 'Compare raw and rendered HTML and identify content, links, metadata, or structured data that depend on client-side rendering.'],
+  ['Site architecture and internal links', 'Map crawl depth, orphan risk, navigation, anchor text, service-page relationships, and internal links supporting local commercial intent.'],
+  ['Structured data and AI search readiness', 'Review entity clarity, schema, public source files, crawler access, and the evidence available to search engines and AI answer systems.'],
 ];
 
 const austinWhenNotToHire = [
@@ -465,12 +473,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${definitionCards(PUBLICATION_CATEGORY_SUMMARY.map(([title, description]) => [title, description]))}
         <h2>${PUBLICATION_INDEX.length} Notes and Artifacts</h2>
         ${PUBLICATION_INDEX.map((item) => `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.description)}</p>`).join('\n        ')}
-        <h2>Related Work</h2>
-        ${linkList([
-          { label: 'Atlas audit console', href: '/atlas', description: 'The crawl and evidence workflow behind the audit examples.' },
-          { label: 'Markets research', href: '/markets', description: 'Finance notes, assumptions, and source-backed market questions.' },
-          { label: 'Selected work', href: '/work', description: 'Projects, case studies, and public work in one place.' },
-        ])}`,
+        <h2>From Research to Implementation</h2>
+        ${linkList([...researchContextLinks])}`,
     );
   }
 
@@ -486,14 +490,20 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/') {
     return articleShell(
       'Sulayman Bowles',
-      'Technical systems, operating work, and source-led research from Sulayman Bowles.',
-      `<h2>AI product, technical systems, and investment research.</h2>
-        <p>UT Austin student working in AI product at Chegg, building Atlas, and publishing source-led research on AI systems and infrastructure.</p>
+      'Technical SEO, AI product, systems, and source-led research from Sulayman Bowles.',
+      `<h2>Technical SEO, AI product, systems, and investment research.</h2>
+        <p>UT Austin student working in AI product at Chegg, running technical SEO consulting through Void Agency, building Atlas audit software, and publishing source-led research.</p>
         <h2>Start with the proof</h2>
         <h3><a href="/research/ai-systems/the-first-ai-managers">The First AI Managers</a></h3>
         <p>A source-led review of the operational realities behind businesses that claim AI management.</p>
-        <h3><a href="/atlas">Atlas SEO Audit Console</a></h3>
-        <p>A crawl and evidence system that preserves raw and rendered pages, tests indexation, canonicals, links, and structured data, then exports reviewable findings.</p>
+        <h3><a href="/atlas">Atlas technical SEO audit software</a></h3>
+        <p>A technical SEO crawler and evidence system that preserves raw and rendered pages, tests indexation, canonicals, links, and structured data, then exports reviewable findings.</p>
+        <h3><a href="/method">Technical SEO audit services</a></h3>
+        <p>A fixed-scope audit process for crawlability, indexation, rendering, internal links, structured data, analytics, implementation, and rerun checks.</p>
+        <h3><a href="/austin-technical-seo">Austin technical SEO consultant</a></h3>
+        <p>Local technical SEO audits for Austin teams that need service pages, crawl paths, evidence, and implementation priorities reviewed.</p>
+        <h3><a href="/research">Technical SEO research</a></h3>
+        <p>Source-led notes on crawlability, crawler policy, public search data, canonical identity, AI systems, and evidence limits.</p>
         <h3><a href="/markets/who-owns-texas-toll-roads">Who Owns the Toll Roads in Texas?</a></h3>
         <p>Source-led infrastructure research on public ownership, private concessions, operators, debt claims, revenue rights, and missing facts.</p>
         <h2>How I work</h2>
@@ -506,7 +516,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/work') {
     return articleShell(
       'Selected Work',
-      'Six public artifacts with explicit ownership, implementation details, current status, constraints, and inspectable evidence.',
+      'A technical SEO portfolio and AI systems portfolio with six public artifacts, explicit ownership, implementation details, constraints, and inspectable evidence.',
       `<h2>Six Public Artifacts</h2>
         ${workProofCards
           .map(
@@ -531,8 +541,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/atlas') {
     return articleShell(
       'Atlas SEO Audit Console',
-      'Crawl and evidence system for technical SEO review.',
-      `<p>Atlas preserves page-level crawl evidence—HTTP responses, raw and rendered HTML, directives, canonicals, internal links, structured data, and fetch state—before a finding enters review. It is not a generic content-writing product.</p>
+      'Technical SEO audit software and crawl-analysis system for reviewable site evidence.',
+      `<p>Atlas is technical SEO audit software that preserves page-level crawl evidence—HTTP responses, raw and rendered HTML, directives, canonicals, internal links, structured data, and fetch state—before a finding enters review. It is not a generic content-writing product.</p>
         <h2>Beyond Basic Crawls</h2>
         <p>The system connects observations to URL, run, source, and review state; stores crawl history; and produces structured exports. Derived findings stay distinguishable from observations and measurement gaps.</p>
         <h2>Search Visibility Aware</h2>
@@ -598,10 +608,10 @@ export function buildRouteStaticHtml(route: SeoRoute) {
 
   if (route.path === '/method') {
     return articleShell(
-      'Void Agency Method',
-      'A fixed-scope path from inspectable site evidence to implementation work, owners, and rerun checks.',
-      `<p>The deliverable is a bounded set of defensible findings, owners, implementation notes, and acceptance checks—not a long generic checklist.</p>
-        <h2>Four Stages</h2>
+      'Technical SEO Audit Services',
+      'Fixed-scope technical SEO audit services from inspectable site evidence to implementation work, owners, and rerun checks.',
+      `<p>Void Agency reviews crawlability, indexation, JavaScript rendering, internal links, structured data, analytics, and implementation constraints. The deliverable is a bounded set of defensible findings and acceptance checks—not a long generic checklist.</p>
+        <h2>Technical SEO Audit Process</h2>
         ${definitionCards(methodColumns)}
         <h2>Deliverables</h2>
         ${definitionCards(methodDeliverables)}
@@ -617,7 +627,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${linkList([
           { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl' },
           { label: 'Read the worked finding', href: '/method#worked-finding' },
-          { label: 'Open local SEO page', href: '/austin-technical-seo' },
+          { label: 'Austin technical SEO consultant', href: '/austin-technical-seo' },
           { label: 'View Void Agency', href: 'https://www.void-agency.com/' },
           { label: 'Request an audit', href: '/contact' },
         ])}`,
@@ -626,9 +636,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
 
   if (route.path === '/contact') {
     return articleShell(
-      'Contact Sulayman Bowles',
-      'Direct contact for technical SEO, crawl evidence, analytics, implementation handoffs, validation, and source-backed research.',
-      `<p>I take on bounded technical SEO, crawl evidence, analytics, and source-backed research problems. Typical outputs include URL-level findings, raw/render comparisons, implementation notes, owners, acceptance checks, and a rerun path—not an opaque score or generic audit deck.</p>
+      'Contact a Technical SEO Consultant',
+      'Direct contact for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and source-backed research.',
+      `<p>I work as a technical SEO consultant on bounded crawlability, indexation, rendering, internal-link, structured-data, analytics, and implementation problems. Typical outputs include URL-level findings, raw/render comparisons, owners, acceptance checks, and a rerun path—not an opaque score or generic audit deck.</p>
         <h2>Good-Fit Technical Work</h2>
         <ul><li>Indexation, canonical, redirect, internal-link, structured-data, and template diagnosis tied to affected URLs.</li><li>Raw and rendered page comparison, crawl-state review, measurement-gap handling, and post-fix reruns.</li><li>GA4 and Search Console baselines, source-led research, implementation handoffs, and validation criteria.</li></ul>
         <h2>Direct Contact</h2>
@@ -649,18 +659,21 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Related Context</h2>
         ${linkList([
           { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl' },
-          { label: 'Read the technical SEO audit method', href: '/method' },
+          { label: 'Review technical SEO audit services and process', href: '/method' },
+          { label: 'Austin technical SEO consultant', href: '/austin-technical-seo' },
         ])}`,
     );
   }
 
   if (route.path === '/austin-technical-seo') {
     return articleShell(
-      'Austin Technical SEO',
-      'Local service-intent page for Austin technical SEO work.',
-      `<p>Based in Austin, Sulayman Bowles runs fixed-scope reviews for teams that need crawlability, indexation, structured data, page clarity, and implementation detail checked before broader content or growth work.</p>
+      'Austin Technical SEO Consultant',
+      'Austin technical SEO consulting and audit services for local businesses and growth teams.',
+      `<p>Based in Austin, Sulayman Bowles runs fixed-scope technical SEO audits for teams that need crawlability, indexation, JavaScript rendering, internal links, structured data, local service pages, analytics, and implementation checked.</p>
         <h2>Short Answer</h2>
-        <p>Austin technical SEO is the review of whether a local service page can be crawled, understood, trusted, and measured for a specific service intent before anyone publishes more pages or claims visibility gains.</p>
+        <p>An Austin technical SEO consultant checks whether priority service pages can be crawled, indexed, understood, internally supported, and measured before anyone expands content or claims local visibility gains.</p>
+        <h2>What an Austin Technical SEO Audit Covers</h2>
+        ${definitionCards(austinAuditCoverage)}
         <h2>Who This Is For</h2>
         <ul>${austinBuyerFit.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
         <h2>What You Receive</h2>
@@ -681,12 +694,12 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'Open Austin benchmark pilot CSV', href: '/research/austin-crawlability-benchmark-pilot.csv' },
         ])}
         <h2>Query Examples Before Page Expansion</h2>
-        <p>The audit starts with concrete Austin service intents, then checks whether the public page, proof, profile signals, and measurement path support that intent.</p>
+        <p>The audit starts with concrete queries such as technical SEO Austin, Austin SEO audit, and Austin crawlability audit, then checks whether the public page, proof, profile signals, and measurement path support that intent.</p>
         ${definitionCards(austinDiagnosticExamples.map((item) => [item.prompt, item.review]))}
         <h2>Contextual Links</h2>
         ${linkList([
-          { label: 'Request an audit', href: '/contact' },
-          { label: 'Read the technical SEO audit method', href: '/method' },
+          { label: 'Request an Austin technical SEO audit', href: '/contact' },
+          { label: 'Review technical SEO audit services and process', href: '/method' },
           { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl' },
           { label: 'View Void Agency', href: 'https://www.void-agency.com/' },
         ])}`,
@@ -727,7 +740,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     return articleShell(
       'About Sulayman Bowles',
       'Technical practice, current work, experience, and operating principles from Sulayman Bowles.',
-      `<p>I design and implement crawl, product, and research systems. Atlas is the clearest expression of that work: preserve raw and rendered page states, connect findings to URL-level evidence, and carry reviewed results through persistence and exports.</p>
+      `<p>Sulayman Bowles works across technical SEO consulting, AI product, crawl software, analytics, and research systems. Atlas is the clearest expression of that work: preserve raw and rendered page states, connect findings to URL-level evidence, and carry reviewed results through persistence and exports.</p>
         <p>My implementation work spans React and TypeScript interfaces, Python and SQLite workflows, CSV and JSON exports, analytics, and validation gates. I am pursuing ${escapeHtml(formatEducation())} at UT Austin.</p>
         <p>The work is inspectable rather than assertion-led: the relevant project pages attach sanitized crawl rows, source ledgers, method notes, system designs, public code, and explicit evidence limits.</p>
         <h2>Current Work</h2>
@@ -810,9 +823,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${linkList([
           { label: investmentMemo ? 'Markets Research' : 'Research Notes', href: investmentMemo ? '/markets' : '/research' },
           { label: 'Home', href: '/' },
-          { label: 'Atlas', href: '/atlas' },
-          { label: 'Method', href: '/method' },
-          { label: 'Resume', href: '/resume' },
+          { label: 'Atlas technical SEO audit software', href: '/atlas' },
+          { label: 'Technical SEO audit services', href: '/method' },
+          { label: 'Sulayman Bowles resume', href: '/resume' },
         ])}`,
     );
   }

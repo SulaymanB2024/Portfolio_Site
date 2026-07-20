@@ -16,8 +16,8 @@ export type ProfileSkillGroup = {
 export const PROFILE_FACTS = {
   name: 'Sulayman Bowles',
   currentSummary:
-    'Sulayman Bowles is a UT Austin student working in AI product at Chegg, building Atlas, running Void Agency, and publishing research on AI systems, technical infrastructure, and investment questions.',
-  positioning: 'AI product, technical systems, and investment research.',
+    'Sulayman Bowles is a UT Austin student working in AI product at Chegg, building Atlas technical SEO software, running Void Agency, and publishing research on AI systems, crawlability, infrastructure, and investment questions.',
+  positioning: 'Technical SEO, AI product, systems, and investment research.',
   education: {
     institution: 'The University of Texas at Austin',
     school: 'McCombs School of Business',
@@ -149,7 +149,7 @@ export const PROFILE_FACTS = {
     github: 'https://github.com/SulaymanB2024',
     linkedin: 'https://www.linkedin.com/in/sulayman-bowles/',
   },
-  lastReviewed: '2026-07-16',
+  lastReviewed: '2026-07-18',
   nextRoleReview: '2026-08-31',
 } as const;
 

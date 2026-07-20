@@ -66,6 +66,7 @@ export type RouteTone = 'light' | 'dark';
 
 export const SITE_LASTMOD = '2026-07-16';
 const METADATA_REFRESH_LASTMOD = '2026-07-19';
+const KEYWORD_LASTMOD = '2026-07-18';
 const PROFILE_OG_IMAGE = '/images/social/og-profile.png';
 const ATLAS_OG_IMAGE = '/images/social/og-atlas.png';
 const WORK_OG_IMAGE = '/images/social/og-work.png';
@@ -93,68 +94,68 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/',
     aliases: [],
-    title: 'Sulayman Bowles | AI Product, Systems & Research',
+    title: 'Sulayman Bowles | Technical SEO, AI Systems & Research',
     description:
-      'Sulayman Bowles works in AI product, technical systems, and investment research—building Atlas and publishing source-led work on AI and infrastructure.',
+      'Technical SEO, AI product, crawl systems, analytics, and source-led investment research from Sulayman Bowles, builder of Atlas and founder of Void Agency.',
     h1: 'Sulayman Bowles',
     section: 'home',
     pageType: 'website',
     priority: 1.0,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Technical systems builder and UT Austin McCombs student working across crawl infrastructure, AI product workflows, analytics, and finance research.',
+      'Technical SEO and AI systems builder working across crawl infrastructure, analytics, product workflows, and source-led investment research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: homeJsonLd(),
   },
   {
     path: '/work',
     aliases: [],
-    title: 'Selected Work | Technical Systems & Research',
+    title: 'Technical SEO, AI Systems & Research Portfolio',
     description:
-      'Six public artifacts from Sulayman Bowles with explicit ownership, implementation details, current status, constraints, and inspectable evidence.',
+      'Technical SEO portfolio and AI systems work from Sulayman Bowles, including Atlas crawl software, audit methods, analytics, research, and public evidence.',
     h1: 'Selected Work',
     section: 'work',
     pageType: 'website',
     priority: 0.9,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Six public artifacts across Atlas, infrastructure research, AI-agent evaluation, SEO analytics, Void Agency, and technical builds, each with ownership and proof.',
+      'A technical SEO, AI systems, analytics, and research portfolio with six public artifacts, explicit ownership, implementation details, and proof.',
     image: WORK_OG_IMAGE,
     jsonLd: workJsonLd(),
   },
   {
     path: '/about',
     aliases: [],
-    title: 'About Sulayman Bowles | Technical Systems Builder',
+    title: 'About Sulayman Bowles | Technical SEO & AI Systems',
     description:
-      'Sulayman Bowles designs crawl and evidence systems across React, TypeScript, Python, SQLite, technical SEO, AI product work, and finance research.',
+      'About Sulayman Bowles: technical SEO consultant, AI product manager, and systems builder working across React, Python, SQLite, analytics, and research.',
     h1: 'About Sulayman Bowles',
     section: 'about',
     pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Sulayman Bowles is a technical systems builder connecting Atlas, technical SEO, Void Agency, AI product workflows, and finance research.',
+      'Sulayman Bowles connects technical SEO consulting, Atlas crawl software, AI product work, analytics, and source-led finance research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: aboutJsonLd(),
   },
   {
     path: '/atlas',
     aliases: ['/projects/atlas'],
-    title: 'Atlas SEO Audit Console | Crawl Data System',
+    title: 'Technical SEO Audit Software & Crawler | Atlas',
     description:
-      'Atlas SEO Audit Console is Sulayman Bowles crawl data system for indexation, internal links, canonicals, structured data, rendered HTML, and audit exports.',
+      'Atlas is technical SEO audit software and a crawler for indexation, internal links, canonicals, structured data, rendered HTML, evidence, and audit exports.',
     h1: 'Atlas SEO Audit Console',
     section: 'project',
     pageType: 'project',
     priority: 0.9,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Atlas is a technical SEO audit console for crawl data, indexation, architecture, internal links, structured data, and performance inputs.',
+      'Atlas is technical SEO audit software for crawl analysis, indexation, site architecture, internal links, structured data, and reviewable exports.',
     image: ATLAS_OG_IMAGE,
     jsonLd: atlasJsonLd(),
   },
@@ -195,7 +196,7 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/resume',
     aliases: ['/resume.html', '/cv', '/cv.html', '/Sulayman_Bowles_Resume_2025.pdf'],
-    title: 'Sulayman Bowles Resume | SEO, Product & Finance',
+    title: 'Sulayman Bowles Resume | Technical SEO & AI Product',
     description:
       'Resume for Sulayman Bowles covering UT Austin McCombs, Void Agency, Atlas, technical SEO, AI product research, markets, and supporting links.',
     h1: 'Sulayman Bowles Resume',
@@ -212,17 +213,17 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/research',
     aliases: ['/research-assets'],
-    title: 'Research Notes | Sulayman Bowles',
+    title: 'Technical SEO & AI Systems Research | Sulayman Bowles',
     description:
-      'Readable research notes from Sulayman Bowles on search systems, crawlability, Atlas, public data, identity cleanup, market assumptions, and project evidence.',
+      'Technical SEO research and AI systems notes from Sulayman Bowles on crawlability, crawler policy, Atlas, public data, identity, markets, and evidence.',
     h1: 'Research Notes',
     section: 'research',
     pageType: 'research',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'One research hub with categories for search systems, technical SEO, infrastructure, product and data, and markets research.',
+      'Technical SEO, AI search, crawlability, infrastructure, product, data, and markets research with visible sources and evidence limits.',
     image: RESEARCH_OG_IMAGE,
     jsonLd: researchAssetsJsonLd(),
   },
@@ -244,7 +245,7 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/method',
     aliases: [],
-    title: 'Technical SEO Audit Method | Void Agency',
+    title: 'Technical SEO Audit Services & Process | Void Agency',
     description:
       'Void Agency’s technical SEO audit method for crawl paths, indexation, internal links, structured data, analytics, and implementation priorities.',
     h1: 'Void Agency Method',
@@ -254,31 +255,31 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: METADATA_REFRESH_LASTMOD,
     staticSummary:
-      'Void Agency audits crawl paths, indexation, architecture, structured data, performance, analytics, and crawler access to improve search visibility.',
+      'Technical SEO audit services for crawlability, indexation, rendering, internal links, structured data, analytics, implementation priorities, and rerun checks.',
     image: VOID_OG_IMAGE,
     jsonLd: methodJsonLd(),
   },
   {
     path: '/contact',
     aliases: ['/audit-intake'],
-    title: 'Contact Sulayman Bowles | Technical SEO Audit Brief',
+    title: 'Technical SEO Consultant & Audit Contact | Sulayman Bowles',
     description:
-      'Contact Sulayman Bowles about technical SEO, raw/render crawl evidence, analytics, implementation handoffs, validation, or source-backed research.',
-    h1: 'Contact Sulayman Bowles',
+      'Contact technical SEO consultant Sulayman Bowles for crawlability, indexation, rendering, structured data, analytics, implementation, or audit support.',
+    h1: 'Contact a Technical SEO Consultant',
     section: 'contact',
     pageType: 'service',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Direct email and a compact brief for technical SEO, crawl evidence, analytics, implementation, validation, and source-backed research.',
+      'Direct contact and a compact brief for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: contactJsonLd(),
   },
   {
     path: '/austin-technical-seo',
     aliases: ['/austin-seo'],
-    title: 'Austin Technical SEO & Search Visibility',
+    title: 'Austin Technical SEO Consultant & Audit Services',
     description:
       'Austin technical SEO for teams that need crawlability, indexation, structured data, page clarity, local context, and implementation guidance.',
     h1: 'Austin Technical SEO',
@@ -288,7 +289,7 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: METADATA_REFRESH_LASTMOD,
     staticSummary:
-      'Austin technical SEO page for teams that need crawlability, indexation, structured data, page clarity, local search context, and implementation details reviewed.',
+      'Austin technical SEO consulting and audit services for crawlability, indexation, rendering, internal links, structured data, local pages, and implementation.',
     image: VOID_OG_IMAGE,
     jsonLd: austinTechnicalSeoJsonLd(),
   },

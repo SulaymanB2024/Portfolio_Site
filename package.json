@@ -21,8 +21,11 @@
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "test:bot-observer": "node --import tsx --test packages/bot-observer/tests/*.test.ts",
     "verify:bot-observer": "node scripts/verify-bot-observer.mjs",
+    "verify:articles": "tsx scripts/verify-technical-article-series.ts",
     "verify:seo": "node scripts/verify-ai-search-seo.mjs",
     "verify:generated": "tsx scripts/verify-generated-public-files.ts",
+    "verify:internal-links": "tsx scripts/verify-internal-link-targeting.ts",
+    "verify:keywords": "tsx scripts/verify-keyword-targeting.ts",
     "verify:reduction": "node scripts/verify-portfolio-reduction.mjs",
     "verify:security": "node scripts/verify-security-hardening.mjs"
   },

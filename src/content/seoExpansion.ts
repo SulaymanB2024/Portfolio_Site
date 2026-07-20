@@ -35,6 +35,34 @@ export const contextualProofLinks = [
   },
 ];
 
+export const researchContextLinks = [
+  {
+    label: 'Atlas technical SEO audit software',
+    href: '/atlas',
+    description: 'The crawl and evidence workflow behind the technical SEO research and audit examples.',
+  },
+  {
+    label: 'Technical SEO audit services',
+    href: '/method',
+    description: 'A fixed-scope process for turning crawl evidence into implementation priorities and rerun checks.',
+  },
+  {
+    label: 'Austin technical SEO consultant',
+    href: '/austin-technical-seo',
+    description: 'Local audit coverage, a bounded Austin crawlability pilot, and an implementation entry point.',
+  },
+  {
+    label: 'Technical SEO portfolio',
+    href: '/work',
+    description: 'Public systems, studies, constraints, ownership, and inspectable evidence in one place.',
+  },
+  {
+    label: 'Contact a technical SEO consultant',
+    href: '/contact',
+    description: 'Direct contact for crawlability, indexation, rendering, structured data, and analytics work.',
+  },
+] as const;
+
 export const workProofCards = [
   {
     eyebrow: 'Product',

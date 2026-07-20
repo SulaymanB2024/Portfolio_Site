@@ -16,6 +16,7 @@ import {
   TextLink,
 } from '../components/design/Primitives';
 import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
+import { researchContextLinks } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
@@ -104,15 +105,11 @@ export default function ResearchPage() {
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Context" title="From note to artifact.">
-            Research should connect back to the product, source file, or public work it helps explain.
+          <SectionHeader eyebrow="Context" title="From research to implementation.">
+            Follow the evidence into the audit software, service process, local study, portfolio, or direct project brief it supports.
           </SectionHeader>
-          <div className="grid gap-3 md:grid-cols-3">
-            {[
-              ['Atlas audit console', '/atlas', 'The crawl and evidence workflow behind the audit examples.'],
-              ['Selected work', '/work', 'Six public artifacts with role, constraints, status, and evidence links.'],
-              ['Markets filter', '/markets', 'Finance and infrastructure-investing material only.'],
-            ].map(([label, href, description]) => (
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+            {researchContextLinks.map(({ label, href, description }) => (
               <LinkPanel key={href} href={href} className="grid min-h-[170px] content-between gap-6">
                 <span className="font-serif text-2xl italic leading-tight tracking-normal text-current">{label}</span>
                 <span className="text-sm normal-case leading-relaxed tracking-normal text-current/64">{description}</span>

@@ -564,11 +564,11 @@ function HomePage() {
               <div className="mt-7 grid max-w-5xl gap-5 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-10">
                 <div>
                   <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; founder of Void Agency, builder of Atlas, and publisher of source-led research.</p>
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and publisher of source-led research.</p>
                 </div>
                 <nav aria-label="Featured proof" className="grid gap-2 self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
                   <a href={AI_MANAGERS_ARTICLE_PATH} className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">The First AI Managers</a>
-                  <a href="/atlas" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Atlas</a>
+                  <a href="/atlas" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Atlas SEO Audit Software</a>
                   <a href="/markets/who-owns-texas-toll-roads" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Texas Toll Roads</a>
                 </nav>
               </div>
@@ -595,7 +595,7 @@ function HomePage() {
               </div>
               <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
                 <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
-                  I build crawl, evidence, and research systems that preserve how a conclusion was produced. The work spans raw and rendered page data, React and TypeScript interfaces, Python and SQLite workflows, structured exports, analytics, and source-led research.
+                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and <a href="/research" className="border-b border-ink/24 hover:border-ink">technical SEO research</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
                 </p>
               </ScrollReveal>
             </div>
@@ -649,7 +649,7 @@ function HomePage() {
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
-                  <span className="opacity-60">Technical SEO Audit Console</span>
+                  <span className="opacity-60">Technical SEO Audit Software</span>
                </div>
                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT</span>
@@ -811,7 +811,7 @@ function HomePage() {
                 </ScrollReveal>
                 <ScrollReveal delay={0.6}>
                   <MagneticButton className="mt-16">
-                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Void Agency Technical SEO Method</span>
+                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Technical SEO Audit Services</span>
                   </MagneticButton>
                 </ScrollReveal>
               </div>

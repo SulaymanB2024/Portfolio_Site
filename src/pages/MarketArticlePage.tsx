@@ -280,11 +280,18 @@ function GenericArticle({
         {article.sources.length ? <SourceLedger article={article} /> : null}
 
         <ArticleEndnote
-          links={[
-            { href: backHref, label: backLabel },
-            { href: '/research', label: 'Research archive' },
-            { href: '/about', label: 'About the author' },
-          ]}
+          links={investmentMemo
+            ? [
+                { href: backHref, label: backLabel },
+                { href: '/research', label: 'Technical SEO and AI systems research' },
+                { href: '/about', label: 'About Sulayman Bowles' },
+              ]
+            : [
+                { href: '/research', label: 'Technical SEO research' },
+                { href: '/atlas', label: 'Atlas technical SEO audit software' },
+                { href: '/method', label: 'Technical SEO audit services' },
+                { href: '/about', label: 'About Sulayman Bowles' },
+              ]}
         >
           Research cutoff: {article.kind === 'research' ? article.lastVerified ?? article.dateModified ?? article.date : article.dateModified ?? article.date}.
           Public evidence and provider behavior can change; verify current sources before acting.

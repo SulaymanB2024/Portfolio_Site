@@ -65,9 +65,9 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - Research: ${PROFILE_FACTS.canonicalLinks.research}
 - Markets finance filter: ${absoluteUrl('/markets')}
 - Void Agency: https://www.void-agency.com/
-- Audit method: ${absoluteUrl('/method')}
-- Austin technical SEO: ${absoluteUrl('/austin-technical-seo')}
-- Audit intake/contact: ${PROFILE_FACTS.canonicalLinks.contact}
+- Technical SEO audit services and process: ${absoluteUrl('/method')}
+- Austin technical SEO consultant and audit services: ${absoluteUrl('/austin-technical-seo')}
+- Technical SEO consultant contact and audit intake: ${PROFILE_FACTS.canonicalLinks.contact}
 - Technical ledger: ${PROFILE_FACTS.canonicalLinks.technicalLedger}
 
 ## Public Work and Research
