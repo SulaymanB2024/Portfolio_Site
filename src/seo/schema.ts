@@ -402,7 +402,6 @@ export function serviceSchema(): JsonLd {
     },
     description:
       'Technical SEO and search visibility audit work covering crawlability, robots.txt, sitemaps, raw and rendered HTML, canonical URLs, internal links, structured data, GSC/GA4 review, page templates, query buckets, and implementation recommendations.',
-    keywords: searchTerms('/method'),
   };
 }
 
@@ -672,7 +671,6 @@ export function contactJsonLd(): JsonLd {
       },
       description:
         'Contact and compact audit brief path for technical SEO audits, crawl reviews, analytics, markets research, and structured web systems.',
-      keywords: searchTerms('/contact'),
     },
     webPageSchema({
       path: '/contact',
@@ -825,7 +823,6 @@ export function austinTechnicalSeoJsonLd(): JsonLd {
       serviceType: ['Austin Technical SEO Consulting', 'Technical SEO Audit', 'Crawlability Audit', 'Local Search Visibility Review'],
       description:
         'Austin technical SEO consulting for teams that need crawlability, indexation, JavaScript rendering, internal links, structured data, local pages, and implementation reviewed.',
-      keywords: searchTerms('/austin-technical-seo'),
     },
     webPageSchema({
       path: '/austin-technical-seo',
