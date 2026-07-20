@@ -1,5 +1,6 @@
 import { ALL_ARTICLES, getArticlePath } from '../content/articleRegistry';
 import { PROFILE_FACTS } from '../content/profileFacts';
+import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from '../content/programmaticSeo';
 import { VIRALBENCH_ARTICLE_PATH, VIRALBENCH_ARTICLE_TITLE } from '../content/viralBenchArticle';
 import { ARTICLE_SEARCH_TARGETS } from './articleSearchTargets';
 import { getCanonicalRoutes, SITE_LASTMOD } from './routes';
@@ -41,6 +42,9 @@ export function buildLlmsText() {
     .filter((article) => article.indexable !== false)
     .map((article) => `- ${article.title}: ${absoluteUrl(getArticlePath(article))}`)
     .join('\n');
+  const programmaticLines = PROGRAMMATIC_SEO_PAGES
+    .map((page) => `- ${page.title}: ${absoluteUrl(page.path)}`)
+    .join('\n');
 
   return `# Sulayman Bowles
 
@@ -64,6 +68,10 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - Atlas: ${PROFILE_FACTS.canonicalLinks.atlas}
 - Atlas open-corpus demonstration: ${absoluteUrl('/atlas/sample-crawl')}
 - Research: ${PROFILE_FACTS.canonicalLinks.research}
+- Technical SEO diagnostic library: ${absoluteUrl('/research/technical-seo')}
+- Technical SEO issue guides: ${absoluteUrl('/research/technical-seo/issues')}
+- Technical SEO platform guides: ${absoluteUrl('/research/technical-seo/platforms')}
+- Technical SEO audit checklists: ${absoluteUrl('/research/technical-seo/checklists')}
 - Markets finance filter: ${absoluteUrl('/markets')}
 - Void Agency: https://www.void-agency.com/
 - Technical SEO audit services and process: ${absoluteUrl('/method')}
@@ -75,12 +83,14 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 
 - ${VIRALBENCH_ARTICLE_TITLE}: ${absoluteUrl(VIRALBENCH_ARTICLE_PATH)}
 ${articleLines}
+${programmaticLines}
 - Atlas open-corpus CSV: ${absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.csv')}
 - Atlas open-corpus capture manifest: ${absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.json')}
 - Appian educational research memo PDF: ${absoluteUrl('/research/appian-enterprise-software-durability-memo.pdf')}
 - Appian assumptions table CSV: ${absoluteUrl('/research/appian-assumptions-table.csv')}
 - Authority asset index: ${absoluteUrl('/research/authority-assets.json')}
 - Article research briefs: ${absoluteUrl('/research/article-research-briefs.json')}
+- Technical SEO reference index: ${absoluteUrl('/research/technical-seo-reference-index.json')}
 - Crawler policy sources: ${absoluteUrl('/research/ai-search-crawler-policy-sources.csv')}
 - Austin crawlability benchmark pilot CSV: ${absoluteUrl('/research/austin-crawlability-benchmark-pilot.csv')}
 - Austin crawlability benchmark summary: ${absoluteUrl('/research/austin-crawlability-benchmark-summary.json')}
@@ -106,6 +116,45 @@ The Atlas demonstration is a dated, bounded capture from an open web corpus; it 
 - The old Sulayman_Bowles_Resume_2025.pdf URL redirects to ${PROFILE_FACTS.canonicalLinks.resume}.
 - Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals; they do not prove rankings, indexing, traffic movement, or AI citations.
 `;
+}
+
+export function buildProgrammaticSeoIndexJson() {
+  return `${JSON.stringify({
+    generated_at: '2026-07-20',
+    canonical_host: 'https://sulayman-bowles.dev',
+    objective: 'Evidence-backed technical SEO diagnostic references for issue, platform, and audit-checklist queries.',
+    claim_boundaries: [
+      'Fixtures are illustrative and Atlas-compatible; they are not client crawl evidence or claims about a live third-party site.',
+      'Publication and discovery do not guarantee indexation, rankings, impressions, clicks, backlinks, leads, or revenue.',
+      'A guide remains indexable only while it retains unique evidence, substantive utility, and a reproducible acceptance gate.',
+    ],
+    hubs: PROGRAMMATIC_SEO_HUBS.map((hub) => ({
+      family: hub.family,
+      url: absoluteUrl(hub.path),
+      title: hub.title,
+      description: hub.description,
+      last_verified: hub.dateModified,
+    })),
+    pages: PROGRAMMATIC_SEO_PAGES.map((page) => ({
+      family: page.family,
+      url: absoluteUrl(page.path),
+      title: page.title,
+      primary_query: page.primaryQuery,
+      supporting_queries: page.supportingQueries,
+      direct_answer: page.directAnswer,
+      evidence_artifact: page.evidenceArtifact,
+      diagnostic_procedure: page.diagnosticProcedure,
+      false_positive_boundary: page.falsePositiveBoundary,
+      repair_steps: page.repairSteps,
+      rerun_acceptance_check: page.rerunAcceptanceCheck,
+      sources: page.sources,
+      related_pages: page.relatedPaths.map(absoluteUrl),
+      cta: { label: page.cta.label, url: absoluteUrl(page.cta.href) },
+      indexability_state: page.indexabilityState,
+      indexable: page.indexable,
+      last_verified: page.dateModified,
+    })),
+  }, null, 2)}\n`;
 }
 
 export function buildArticleResearchBriefsJson() {
@@ -152,6 +201,21 @@ export function buildAuthorityAssetsJson() {
       ],
     };
   });
+  const cornerstoneAssets = PROGRAMMATIC_SEO_PAGES
+    .filter((page) => page.family === 'platform')
+    .map((page) => ({
+      priority: 1,
+      name: page.title,
+      url: absoluteUrl(page.path),
+      type: 'technical_seo_cornerstone',
+      cluster: 'technical-seo-platforms',
+      preferred_anchor: page.primaryQuery,
+      pitch_angle: `A platform-specific ${page.primaryQuery} reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.`,
+      supporting_assets: [
+        absoluteUrl('/research/technical-seo-reference-index.json'),
+        ...page.sources.map((source) => source.href),
+      ],
+    }));
 
   return `${JSON.stringify({
     generated_at: '2026-07-20',
@@ -175,6 +239,17 @@ export function buildAuthorityAssetsJson() {
         pitch_angle: 'A crawlable hub connecting source-led articles, public artifacts, methodology, and explicit claim boundaries.',
         supporting_assets: [absoluteUrl('/research/article-research-briefs.json')],
       },
+      {
+        priority: 1,
+        name: 'Technical SEO Diagnostic Library',
+        url: absoluteUrl('/research/technical-seo'),
+        type: 'research_hub',
+        cluster: 'technical-seo',
+        preferred_anchor: 'technical SEO diagnostic library',
+        pitch_angle: 'Forty issue, platform, checklist, and collection routes governed by evidence, false-positive, repair, and rerun contracts.',
+        supporting_assets: [absoluteUrl('/research/technical-seo-reference-index.json')],
+      },
+      ...cornerstoneAssets,
       ...articleAssets,
       {
         priority: 1,

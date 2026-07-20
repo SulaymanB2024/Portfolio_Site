@@ -20,6 +20,10 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - Atlas: https://sulayman-bowles.dev/atlas
 - Atlas open-corpus demonstration: https://sulayman-bowles.dev/atlas/sample-crawl
 - Research: https://sulayman-bowles.dev/research
+- Technical SEO diagnostic library: https://sulayman-bowles.dev/research/technical-seo
+- Technical SEO issue guides: https://sulayman-bowles.dev/research/technical-seo/issues
+- Technical SEO platform guides: https://sulayman-bowles.dev/research/technical-seo/platforms
+- Technical SEO audit checklists: https://sulayman-bowles.dev/research/technical-seo/checklists
 - Markets finance filter: https://sulayman-bowles.dev/markets
 - Void Agency: https://www.void-agency.com/
 - Technical SEO audit services and process: https://sulayman-bowles.dev/method
@@ -45,12 +49,49 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - Technical SEO as Public Data Infrastructure: https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure
 - Canonical Identity Beats More Content: https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo
 - Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics: https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads
+- Missing Canonical Tag: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/missing-canonical
+- Multiple Canonical Tags: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/multiple-canonical-tags
+- Canonical to Redirect: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/canonical-to-redirect
+- Canonical and Noindex Conflict: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/canonical-noindex-conflict
+- Redirect Chain: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/redirect-chain
+- Redirect Loop: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/redirect-loop
+- Soft 404: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/soft-404
+- Robots-Blocked Indexable URL: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/robots-blocked-indexable-url
+- Noindex URL in Sitemap: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/noindex-in-sitemap
+- Redirecting URLs in Sitemap: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/sitemap-redirects
+- Orphan Page: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/orphan-page
+- Excessive Crawl Depth: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/excessive-crawl-depth
+- Broken Internal Link: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/broken-internal-link
+- JavaScript-Only Link: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/javascript-only-link
+- Raw and Rendered HTML Mismatch: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/raw-rendered-content-mismatch
+- Structured Data Content Drift: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/structured-data-content-drift
+- Duplicate Title Tag: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-title-tag
+- Duplicate Meta Description: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-meta-description
+- Faceted Navigation Crawl Trap: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/faceted-navigation-crawl-trap
+- Parameter URL Duplication: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/parameter-url-duplication
+- Pagination and Infinite Scroll Indexing: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/pagination-infinite-scroll-indexing
+- Hreflang Return Tag Error: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/hreflang-return-tag-error
+- Mobile and Desktop Content Mismatch: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/mobile-desktop-content-mismatch
+- Lazy-Loaded Primary Content: Diagnosis and Repair: https://sulayman-bowles.dev/research/technical-seo/issues/lazy-loaded-primary-content
+- Next.js Technical SEO Guide: https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs
+- React and Vite Technical SEO Guide: https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite
+- WordPress Technical SEO Guide: https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress
+- Shopify Technical SEO Guide: https://sulayman-bowles.dev/research/technical-seo/platforms/shopify
+- Webflow Technical SEO Guide: https://sulayman-bowles.dev/research/technical-seo/platforms/webflow
+- Squarespace Technical SEO Guide: https://sulayman-bowles.dev/research/technical-seo/platforms/squarespace
+- Wix Technical SEO Guide: https://sulayman-bowles.dev/research/technical-seo/platforms/wix
+- Headless CMS Technical SEO Guide: https://sulayman-bowles.dev/research/technical-seo/platforms/headless-cms
+- JavaScript Technical SEO Audit Checklist: https://sulayman-bowles.dev/research/technical-seo/checklists/javascript-seo-audit
+- Ecommerce Technical SEO Audit Checklist: https://sulayman-bowles.dev/research/technical-seo/checklists/ecommerce-technical-seo-audit
+- SaaS Technical SEO Audit Checklist: https://sulayman-bowles.dev/research/technical-seo/checklists/saas-technical-seo-audit
+- Local Business Technical SEO Audit Checklist: https://sulayman-bowles.dev/research/technical-seo/checklists/local-business-technical-seo-audit
 - Atlas open-corpus CSV: https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.csv
 - Atlas open-corpus capture manifest: https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.json
 - Appian educational research memo PDF: https://sulayman-bowles.dev/research/appian-enterprise-software-durability-memo.pdf
 - Appian assumptions table CSV: https://sulayman-bowles.dev/research/appian-assumptions-table.csv
 - Authority asset index: https://sulayman-bowles.dev/research/authority-assets.json
 - Article research briefs: https://sulayman-bowles.dev/research/article-research-briefs.json
+- Technical SEO reference index: https://sulayman-bowles.dev/research/technical-seo-reference-index.json
 - Crawler policy sources: https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv
 - Austin crawlability benchmark pilot CSV: https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv
 - Austin crawlability benchmark summary: https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json

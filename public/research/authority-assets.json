@@ -24,6 +24,130 @@
     },
     {
       "priority": 1,
+      "name": "Technical SEO Diagnostic Library",
+      "url": "https://sulayman-bowles.dev/research/technical-seo",
+      "type": "research_hub",
+      "cluster": "technical-seo",
+      "preferred_anchor": "technical SEO diagnostic library",
+      "pitch_angle": "Forty issue, platform, checklist, and collection routes governed by evidence, false-positive, repair, and rerun contracts.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Next.js Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "Next.js technical SEO",
+      "pitch_angle": "A platform-specific Next.js technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://nextjs.org/docs/app/getting-started/metadata-and-og-images",
+        "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "React and Vite Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "React Vite SEO",
+      "pitch_angle": "A platform-specific React Vite SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://vite.dev/guide/ssr",
+        "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "WordPress Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "WordPress technical SEO",
+      "pitch_angle": "A platform-specific WordPress technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://developer.wordpress.org/reference/functions/rel_canonical/",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Shopify Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/shopify",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "Shopify technical SEO",
+      "pitch_angle": "A platform-specific Shopify technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://help.shopify.com/en/manual/promoting-marketing/seo/seo-overview",
+        "https://developers.google.com/search/docs/specialty/ecommerce/designing-a-url-structure-for-ecommerce-sites"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Webflow Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/webflow",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "Webflow technical SEO",
+      "pitch_angle": "A platform-specific Webflow technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://help.webflow.com/hc/en-us/articles/33961237278611-Add-SEO-title-and-meta-description",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Squarespace Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/squarespace",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "Squarespace technical SEO",
+      "pitch_angle": "A platform-specific Squarespace technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://support.squarespace.com/hc/en-us/articles/360002090267-SEO-checklist",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Wix Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/wix",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "Wix technical SEO",
+      "pitch_angle": "A platform-specific Wix technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://www.wix.com/seo/learn/resource/technical-seo-101",
+        "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Headless CMS Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/headless-cms",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "headless CMS SEO",
+      "pitch_angle": "A platform-specific headless CMS SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://web.dev/articles/rendering-on-the-web",
+        "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+      ]
+    },
+    {
+      "priority": 1,
       "name": "The First AI Managers",
       "url": "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
       "type": "source_led_article",

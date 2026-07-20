@@ -5,6 +5,7 @@ import {
   buildArticleResearchBriefsJson,
   buildAuthorityAssetsJson,
   buildLlmsText,
+  buildProgrammaticSeoIndexJson,
   buildSitemapXml,
 } from '../src/seo/generatedPublicFiles';
 
@@ -13,6 +14,7 @@ const expectedFiles = [
   ['public/sitemap.xml', buildSitemapXml()],
   ['public/research/article-research-briefs.json', buildArticleResearchBriefsJson()],
   ['public/research/authority-assets.json', buildAuthorityAssetsJson()],
+  ['public/research/technical-seo-reference-index.json', buildProgrammaticSeoIndexJson()],
 ] as const;
 
 const staleFiles: string[] = [];

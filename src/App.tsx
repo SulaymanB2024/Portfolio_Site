@@ -39,6 +39,8 @@ const loadWorkPage = () => import('./pages/WorkPage');
 const loadContactPage = () => import('./pages/ContactPage');
 const loadAtlasSampleCrawlPage = () => import('./pages/AtlasSampleCrawlPage');
 const loadAustinTechnicalSeoPage = () => import('./pages/AustinTechnicalSeoPage');
+const loadProgrammaticSeoPage = () => import('./pages/ProgrammaticSeoPage');
+const loadProgrammaticSeoHubPage = () => import('./pages/ProgrammaticSeoHubPage');
 
 const AtlasPage = lazy(loadAtlasPage);
 const AtlasCelestialParallaxPage = lazy(loadAtlasCelestialParallaxPage);
@@ -55,6 +57,8 @@ const WorkPage = lazy(loadWorkPage);
 const ContactPage = lazy(loadContactPage);
 const AtlasSampleCrawlPage = lazy(loadAtlasSampleCrawlPage);
 const AustinTechnicalSeoPage = lazy(loadAustinTechnicalSeoPage);
+const ProgrammaticSeoPage = lazy(loadProgrammaticSeoPage);
+const ProgrammaticSeoHubPage = lazy(loadProgrammaticSeoHubPage);
 const LocalTime = lazy(() => import('./components/LocalTime').then(m => ({ default: m.LocalTime })));
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
@@ -115,6 +119,10 @@ async function preloadRoute(path: string) {
     await loadResumePage();
   } else if (route?.path === '/research') {
     await loadResearchPage();
+  } else if (route?.section === 'technical-seo-hub') {
+    await loadProgrammaticSeoHubPage();
+  } else if (route?.section === 'technical-seo-guide') {
+    await loadProgrammaticSeoPage();
   } else if (route?.path === '/markets') {
     await loadMarketsPage();
   } else if (route?.path === '/viralbench-codex-agent-harness') {
@@ -211,6 +219,18 @@ export default function App() {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
         <ResearchPage />
+      </Suspense>
+    );
+  } else if (route?.section === 'technical-seo-hub') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <ProgrammaticSeoHubPage path={route.path} />
+      </Suspense>
+    );
+  } else if (route?.section === 'technical-seo-guide') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <ProgrammaticSeoPage path={route.path} />
       </Suspense>
     );
   } else if (route?.path === '/sitemap') {
@@ -595,7 +615,7 @@ function HomePage() {
               </div>
               <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
                 <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
-                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and <a href="/research" className="border-b border-ink/24 hover:border-ink">technical SEO research</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
+                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and an <a href="/research/technical-seo" className="border-b border-ink/24 hover:border-ink">evidence-backed technical SEO diagnostic library</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
                 </p>
               </ScrollReveal>
             </div>

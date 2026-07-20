@@ -1,5 +1,6 @@
 import { ALL_ARTICLES, getArticlePath, getLegacyArticlePath } from '../content/articleRegistry';
 import { isInvestmentMemo } from '../content/articleModels';
+import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from '../content/programmaticSeo';
 import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
 import {
   VIRALBENCH_ARTICLE_DATE,
@@ -26,6 +27,7 @@ import {
   sitemapJsonLd,
   viralBenchArticleJsonLd,
   workJsonLd,
+  technicalSeoCollectionJsonLd,
   type JsonLd,
 } from './schema';
 import { getArticleSearchTarget } from './articleSearchTargets';
@@ -41,7 +43,9 @@ export type RouteSection =
   | 'service'
   | 'local-service'
   | 'research'
-  | 'research-article';
+  | 'research-article'
+  | 'technical-seo-hub'
+  | 'technical-seo-guide';
 
 export interface SeoRoute {
   path: string;
@@ -167,7 +171,7 @@ const CORE_ROUTES: SeoRoute[] = [
     title: 'Atlas Open Corpus Demonstration | Crawl Evidence',
     description:
       'A dated Atlas demonstration showing source and render states, discovered paths, confidence, findings, and downloadable run artifacts from a bounded open corpus.',
-    h1: 'Atlas Open Corpus Demonstration',
+    h1: 'Atlas Open-Corpus Demonstration',
     section: 'project',
     pageType: 'project',
     priority: 0.8,
@@ -250,7 +254,7 @@ const CORE_ROUTES: SeoRoute[] = [
     title: 'Technical SEO Audit Services & Process | Void Agency',
     description:
       'Void Agency’s technical SEO audit method for crawl paths, indexation, internal links, structured data, analytics, and implementation priorities.',
-    h1: 'Void Agency Method',
+    h1: 'Technical SEO Audit Services',
     section: 'service',
     pageType: 'service',
     priority: 0.9,
@@ -284,7 +288,7 @@ const CORE_ROUTES: SeoRoute[] = [
     title: 'Austin Technical SEO Consultant & Audit Services',
     description:
       'Austin technical SEO for teams that need crawlability, indexation, structured data, page clarity, local context, and implementation guidance.',
-    h1: 'Austin Technical SEO',
+    h1: 'Austin Technical SEO Consultant',
     section: 'local-service',
     pageType: 'service',
     priority: 0.7,
@@ -370,7 +374,59 @@ const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
   };
 });
 
-export const SEO_ROUTES: SeoRoute[] = [...CORE_ROUTES, ...ARTICLE_ROUTES];
+const PROGRAMMATIC_HUB_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_HUBS.map((hub) => ({
+  path: hub.path,
+  aliases: [],
+  title: hub.seoTitle,
+  description: hub.description,
+  h1: hub.title,
+  section: 'technical-seo-hub',
+  pageType: 'research',
+  priority: hub.family === 'all' ? 0.8 : 0.7,
+  includeInSitemap: hub.indexable,
+  lastmod: hub.dateModified,
+  staticSummary: hub.directAnswer,
+  image: RESEARCH_OG_IMAGE,
+  jsonLd: technicalSeoCollectionJsonLd({
+    title: hub.title,
+    description: hub.description,
+    path: hub.path,
+    parentPath: hub.family === 'all' ? '/research' : '/research/technical-seo',
+    parentName: hub.family === 'all' ? 'Research' : 'Technical SEO Diagnostic Library',
+  }),
+}));
+
+const PROGRAMMATIC_PAGE_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_PAGES.map((page) => ({
+  path: page.path,
+  aliases: [],
+  title: page.seoTitle,
+  description: page.description,
+  h1: page.title,
+  section: 'technical-seo-guide',
+  pageType: 'article',
+  priority: 0.6,
+  includeInSitemap: page.indexable,
+  lastmod: page.dateModified,
+  staticSummary: page.directAnswer,
+  image: RESEARCH_OG_IMAGE,
+  jsonLd: marketArticleJsonLd({
+    title: page.title,
+    description: page.description,
+    path: page.path,
+    datePublished: page.datePublished,
+    dateModified: page.dateModified,
+    image: RESEARCH_OG_IMAGE,
+    collectionPath: `/research/technical-seo/${page.family === 'issue' ? 'issues' : page.family === 'platform' ? 'platforms' : 'checklists'}`,
+    collectionName: `${page.family[0].toUpperCase()}${page.family.slice(1)} guides`,
+  }),
+}));
+
+export const SEO_ROUTES: SeoRoute[] = [
+  ...CORE_ROUTES,
+  ...ARTICLE_ROUTES,
+  ...PROGRAMMATIC_HUB_ROUTES,
+  ...PROGRAMMATIC_PAGE_ROUTES,
+];
 
 export function normalizeInputPath(path: string) {
   const pathname = path.split(/[?#]/)[0] || '/';
@@ -396,7 +452,7 @@ export function getRouteVisualMode(path: string): RouteVisualMode {
     return 'prototype';
   }
 
-  if (route?.section === 'research-article') {
+  if (route?.section === 'research-article' || route?.section === 'technical-seo-guide') {
     return 'memo-reader';
   }
 

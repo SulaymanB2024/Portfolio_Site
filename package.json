@@ -8,6 +8,7 @@
     "build": "npm run generate:public && vite build && tsx scripts/generate-static-routes.ts",
     "preview": "vite preview",
     "report:article-rankings": "tsx scripts/report-article-rankings.ts",
+    "report:pseo-growth": "tsx scripts/report-pseo-growth.ts",
     "clean": "rm -rf dist server.js",
     "generate:public": "tsx scripts/generate-public-files.ts",
     "lint": "tsc --noEmit",
@@ -29,6 +30,8 @@
     "verify:generated": "tsx scripts/verify-generated-public-files.ts",
     "verify:internal-links": "tsx scripts/verify-internal-link-targeting.ts",
     "verify:keywords": "tsx scripts/verify-keyword-targeting.ts",
+    "verify:pseo": "tsx scripts/verify-programmatic-seo.ts",
+    "verify:pseo-live": "tsx scripts/verify-live-canonical-routes.ts",
     "verify:reduction": "node scripts/verify-portfolio-reduction.mjs",
     "verify:security": "node scripts/verify-security-hardening.mjs"
   },

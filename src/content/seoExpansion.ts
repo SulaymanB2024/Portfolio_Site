@@ -37,6 +37,11 @@ export const contextualProofLinks = [
 
 export const researchContextLinks = [
   {
+    label: 'Technical SEO diagnostic library',
+    href: '/research/technical-seo',
+    description: 'Issue guides, platform playbooks, and audit checklists with fixtures, false-positive boundaries, and rerun gates.',
+  },
+  {
     label: 'Atlas technical SEO audit software',
     href: '/atlas',
     description: 'The crawl and evidence workflow behind the technical SEO research and audit examples.',

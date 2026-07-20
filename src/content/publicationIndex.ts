@@ -33,6 +33,14 @@ function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['cat
 }
 
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
+  {
+    category: 'Technical SEO',
+    title: 'Technical SEO Diagnostic Library',
+    href: '/research/technical-seo',
+    description: 'Forty evidence-backed issue guides, platform playbooks, audit checklists, and collection routes with reproducible repair gates.',
+    date: '2026.07.20',
+    featured: true,
+  },
   ...TECHNICAL_ARTICLE_SERIES.map((articleItem) => ({
     category: seriesCategory(articleItem),
     title: articleItem.title,

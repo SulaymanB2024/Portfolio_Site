@@ -994,3 +994,42 @@ export function marketArticleJsonLd({
     ]),
   ]);
 }
+
+export function technicalSeoCollectionJsonLd({
+  title,
+  description,
+  path,
+  parentPath = '/research',
+  parentName = 'Research',
+}: {
+  title: string;
+  description: string;
+  path: string;
+  parentPath?: string;
+  parentName?: string;
+}): JsonLd {
+  const collectionId = `${absoluteUrl(path)}#collection`;
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Research', path: '/research' },
+  ];
+
+  if (parentPath !== '/research') {
+    breadcrumbs.push({ name: parentName, path: parentPath });
+  }
+  breadcrumbs.push({ name: title, path });
+
+  return graphSchema([
+    ...canonicalEntitySchemas(),
+    websiteSchema(),
+    collectionPageSchema(title, description, path),
+    webPageSchema({
+      path,
+      name: title,
+      description,
+      mainEntityId: collectionId,
+      aboutIds: [PERSON_ID],
+    }),
+    breadcrumbSchema(breadcrumbs),
+  ]);
+}
