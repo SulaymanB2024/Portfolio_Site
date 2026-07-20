@@ -6,10 +6,11 @@ const requiredChecks = [
     url: `${SITE_URL}/research`,
     type: 'html',
     requiredText: [
-      'Citation surfaces, not empty claims.',
+      'Research Notes',
+      'Four Research Categories',
+      'The First AI Managers',
       'Authority asset JSON',
-      'LLMs text file',
-      'Research Assets | Technical SEO, AI Search',
+      'article-research-briefs',
     ],
   },
   {
@@ -36,12 +37,38 @@ const requiredChecks = [
     },
   },
   {
+    id: 'article-research-briefs-json',
+    url: `${SITE_URL}/research/article-research-briefs.json`,
+    type: 'json',
+    validateJson(value) {
+      return {
+        ok:
+          value?.generated_at === '2026-07-20' &&
+          value?.canonical_host === SITE_URL &&
+          Array.isArray(value.articles) &&
+          value.articles.length === 16 &&
+          value.articles.every((article) =>
+            article.url?.startsWith(SITE_URL) &&
+            article.question &&
+            article.direct_answer &&
+            article.original_artifact &&
+            article.scope_boundary),
+        detail: {
+          generated_at: value?.generated_at,
+          canonical_host: value?.canonical_host,
+          article_count: Array.isArray(value?.articles) ? value.articles.length : null,
+        },
+      };
+    },
+  },
+  {
     id: 'llms-research-references',
     url: `${SITE_URL}/llms.txt`,
     type: 'text',
     requiredText: [
       `${SITE_URL}/research`,
       `${SITE_URL}/research/authority-assets.json`,
+      `${SITE_URL}/research/article-research-briefs.json`,
       `${SITE_URL}/research/ai-search-crawler-policy-sources.csv`,
       `${SITE_URL}/research/austin-crawlability-benchmark-pilot.csv`,
       'They do not prove backlinks, Ahrefs Domain Rating movement',
