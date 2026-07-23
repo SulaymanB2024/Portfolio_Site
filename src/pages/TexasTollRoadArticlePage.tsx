@@ -550,7 +550,7 @@ export default function TexasTollRoadArticlePage() {
         displayTitle={TEXAS_TOLL_ARTICLE_DISPLAY_TITLE}
         deck={TEXAS_TOLL_ARTICLE_DESCRIPTION}
         image={{
-          src: '/images/social/og-toll-roads.png',
+          src: '/images/research/texas-toll-roads-reader-hero.webp',
           alt: 'Monochrome editorial artwork representing Texas toll-road infrastructure and layered ownership.',
           label: 'Ownership map / 01',
           caption: 'Public pavement, contractual rights, debt claims, and residual cash flow.',

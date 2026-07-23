@@ -8,7 +8,7 @@ import { PROFILE_FACTS } from '../content/profileFacts';
 import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
-  VIRALBENCH_ARTICLE_IMAGE,
+  VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
   VIRALBENCH_ARTICLE_MODIFIED_DATE,
   VIRALBENCH_ARTICLE_TITLE,
 } from '../content/viralBenchArticle';
@@ -730,7 +730,7 @@ export function viralBenchArticleJsonLd(): JsonLd {
   const title = VIRALBENCH_ARTICLE_TITLE;
   const description = VIRALBENCH_ARTICLE_DESCRIPTION;
   const articleId = `${absoluteUrl(path)}#article`;
-  const image = absoluteUrl(VIRALBENCH_ARTICLE_IMAGE);
+  const image = absoluteUrl(VIRALBENCH_ARTICLE_SOCIAL_IMAGE);
   const article = articleSchema({
     title,
     description,

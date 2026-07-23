@@ -322,7 +322,7 @@ function viralBenchArticleStaticHtml() {
   );
 
   return `<figure>
-          <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1672" height="941" alt="A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space." />
+          <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1800" height="1200" alt="A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space." />
         </figure>
         ${articleHtml}
         <h2>Source ledger</h2>

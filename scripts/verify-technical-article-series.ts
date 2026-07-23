@@ -1,9 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { getArticlePath } from '../src/content/articleRegistry';
+import { ALL_ARTICLES, INDEXABLE_ARTICLES, getArticlePath } from '../src/content/articleRegistry';
 import { PUBLICATION_INDEX } from '../src/content/publicationIndex';
 import { TECHNICAL_ARTICLE_SERIES } from '../src/content/technicalArticleSeries';
+import {
+  VIRALBENCH_ARTICLE_IMAGE,
+  VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
+  VIRALBENCH_ARTICLE_TITLE,
+} from '../src/content/viralBenchArticle';
 import { getSeoRoute } from '../src/seo/routes';
 import { buildRouteStaticHtml } from '../src/seo/staticContent';
 
@@ -41,6 +46,85 @@ function normalizedWords(value: string) {
     .filter(Boolean);
 }
 
+type ImageDimensions = { width: number; height: number };
+
+function imageDimensions(filePath: string): ImageDimensions {
+  const buffer = fs.readFileSync(filePath);
+
+  if (buffer.subarray(1, 4).toString('ascii') === 'PNG') {
+    return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+  }
+
+  if (buffer[0] === 0xff && buffer[1] === 0xd8) {
+    const startOfFrameMarkers = new Set([
+      0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7,
+      0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf,
+    ]);
+    let offset = 2;
+
+    while (offset < buffer.length) {
+      while (buffer[offset] === 0xff) offset += 1;
+      const marker = buffer[offset];
+      offset += 1;
+      if (marker === 0xd8 || marker === 0xd9) continue;
+      if (marker === 0xda || offset + 1 >= buffer.length) break;
+
+      const segmentLength = buffer.readUInt16BE(offset);
+      if (startOfFrameMarkers.has(marker)) {
+        return {
+          width: buffer.readUInt16BE(offset + 5),
+          height: buffer.readUInt16BE(offset + 3),
+        };
+      }
+      offset += segmentLength;
+    }
+  }
+
+  if (buffer.subarray(0, 4).toString('ascii') === 'RIFF' && buffer.subarray(8, 12).toString('ascii') === 'WEBP') {
+    const chunk = buffer.subarray(12, 16).toString('ascii');
+    if (chunk === 'VP8X') {
+      const width = 1 + buffer[24] + (buffer[25] << 8) + (buffer[26] << 16);
+      const height = 1 + buffer[27] + (buffer[28] << 8) + (buffer[29] << 16);
+      return { width, height };
+    }
+    if (chunk === 'VP8 ') {
+      return {
+        width: buffer.readUInt16LE(26) & 0x3fff,
+        height: buffer.readUInt16LE(28) & 0x3fff,
+      };
+    }
+    if (chunk === 'VP8L') {
+      const bits = buffer.readUInt32LE(21);
+      return {
+        width: (bits & 0x3fff) + 1,
+        height: ((bits >>> 14) & 0x3fff) + 1,
+      };
+    }
+  }
+
+  throw new Error(`Unsupported image header: ${filePath}`);
+}
+
+function publicAssetPath(assetPath: string) {
+  assert(assetPath.startsWith('/'), `artwork path must be root-relative: ${assetPath}`);
+  return path.resolve('public', assetPath.slice(1));
+}
+
+function assertArtworkAsset(
+  owner: string,
+  role: 'hero' | 'social',
+  assetPath: string,
+  expected: ImageDimensions,
+) {
+  const filePath = publicAssetPath(assetPath);
+  assert(fs.existsSync(filePath), `${owner}: ${role} artwork is missing: ${assetPath}`);
+  const actual = imageDimensions(filePath);
+  assert(
+    actual.width === expected.width && actual.height === expected.height,
+    `${owner}: ${role} artwork must be ${expected.width}x${expected.height}, got ${actual.width}x${actual.height}: ${assetPath}`,
+  );
+}
+
 function crossArticleDuplicatePassages(wordsPerPassage: number) {
   const owners = new Map<string, Set<string>>();
 
@@ -71,6 +155,55 @@ assert(
   duplicateValues(TECHNICAL_ARTICLE_SERIES.map((article) => article.title)).length === 0,
   'article series contains duplicate titles',
 );
+
+assert(
+  !JSON.stringify(ALL_ARTICLES).includes('/og-default.png'),
+  'public article data must not use the /og-default.png artwork sentinel',
+);
+
+const archivedMethodology = ALL_ARTICLES.find((article) => article.slug === 'archived-research-methodology');
+assert(archivedMethodology?.indexable === false, 'archive methodology must remain noindex');
+assert(
+  archivedMethodology.artwork.kind === 'study' && archivedMethodology.artwork.variant === 'triptych',
+  'archive methodology must use the explicit triptych study artwork',
+);
+
+const artworkRecords = [
+  ...INDEXABLE_ARTICLES.map((article) => {
+    assert(article.artwork.kind === 'image', `${article.slug}: indexable articles require image artwork`);
+    return {
+      owner: article.slug,
+      heroSrc: article.artwork.heroSrc,
+      socialSrc: article.artwork.socialSrc,
+      copy: `${article.artwork.label} ${article.artwork.caption}`,
+    };
+  }),
+  {
+    owner: 'viralbench-codex-agent-harness',
+    heroSrc: VIRALBENCH_ARTICLE_IMAGE,
+    socialSrc: VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
+    copy: VIRALBENCH_ARTICLE_TITLE,
+  },
+];
+
+assert(
+  duplicateValues(artworkRecords.map((record) => record.heroSrc)).length === 0,
+  'indexable article hero artwork must be unique',
+);
+assert(
+  duplicateValues(artworkRecords.map((record) => record.socialSrc)).length === 0,
+  'indexable article social artwork must be unique',
+);
+
+for (const artwork of artworkRecords) {
+  assert(artwork.heroSrc !== artwork.socialSrc, `${artwork.owner}: heroSrc and socialSrc must be separate assets`);
+  assert(
+    !/(?:\bpending\b|\breserved\b|\bplaceholder\b|will replace)/i.test(artwork.copy),
+    `${artwork.owner}: artwork copy contains placeholder language`,
+  );
+  assertArtworkAsset(artwork.owner, 'hero', artwork.heroSrc, { width: 1800, height: 1200 });
+  assertArtworkAsset(artwork.owner, 'social', artwork.socialSrc, { width: 1200, height: 630 });
+}
 
 const expectedNumbers = Array.from({ length: 10 }, (_, index) => String(index + 5).padStart(2, '0'));
 assert(

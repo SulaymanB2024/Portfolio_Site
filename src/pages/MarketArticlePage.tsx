@@ -8,7 +8,6 @@ import {
   ArticleMetricStrip,
   ArticlePage,
   ArticleSectionHeader,
-  type ArticleImagePlaceholderVariant,
   type ArticleNavItem,
 } from '../components/ArticleLayout';
 import { getArticleBySlug, getArticlePath } from '../content/articleRegistry';
@@ -22,28 +21,6 @@ import { RESEARCH_ARTICLES } from '../content/researchArticles';
 import { getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
-
-const ARTICLE_PLACEHOLDERS: Record<string, {
-  label: string;
-  note: string;
-  variant: ArticleImagePlaceholderVariant;
-}> = {
-  'technical-seo-public-data-infrastructure': {
-    label: 'Systems essay / pipeline study',
-    note: 'Placeholder for the URL → crawl → render → structured record → evidence/export pipeline.',
-    variant: 'pipeline',
-  },
-  'canonical-identity-personal-seo': {
-    label: 'Operational playbook / identity graph',
-    note: 'Placeholder for the canonical person node, controlled profiles, and redirected stale records.',
-    variant: 'identity',
-  },
-  'archived-research-methodology': {
-    label: 'Archive methodology / triptych',
-    note: 'Temporary study for the network, compute, and monetary research methods.',
-    variant: 'triptych',
-  },
-};
 
 function StructuredArticleSections({ sections }: { sections: ArticleSection[] }) {
   return (
@@ -199,18 +176,15 @@ function articleNav(article: PublicArticle, sections: ArticleSection[] | undefin
 }
 
 function articleImage(article: PublicArticle) {
-  const image = article.image !== '/og-default.png'
-    ? { src: article.image, alt: article.imageAlt ?? `${article.title} editorial artwork.` }
-    : undefined;
+  if (article.artwork.kind !== 'image') return undefined;
 
-  return image
-    ? {
-        ...image,
-        label: article.imageLabel ?? `${article.category} / editorial plate`,
-        caption: article.imageCaption ?? article.title,
-        presentation: article.imagePresentation,
-      }
-    : undefined;
+  return {
+    src: article.artwork.heroSrc,
+    alt: article.artwork.alt,
+    label: article.artwork.label,
+    caption: article.artwork.caption,
+    objectPosition: article.artwork.objectPosition,
+  };
 }
 
 function ArticleHeroBlock({
@@ -222,11 +196,13 @@ function ArticleHeroBlock({
   backHref: string;
   backLabel: string;
 }) {
-  const placeholder = ARTICLE_PLACEHOLDERS[article.slug] ?? {
-    label: `${article.category} / image study pending`,
-    note: 'Reserved for a page-specific editorial image.',
-    variant: 'default' as const,
-  };
+  const study = article.artwork.kind === 'study'
+    ? {
+        label: article.artwork.label,
+        note: article.artwork.note,
+        variant: article.artwork.variant,
+      }
+    : undefined;
 
   return (
     <ArticleHero
@@ -236,7 +212,7 @@ function ArticleHeroBlock({
       title={article.title}
       deck={article.subtitle}
       image={articleImage(article)}
-      imagePlaceholder={placeholder}
+      imagePlaceholder={study}
       metadata={[
         { label: 'Author', value: article.author },
         { label: 'Published', value: <time dateTime={article.date.replaceAll('.', '-')}>{article.date}</time> },
