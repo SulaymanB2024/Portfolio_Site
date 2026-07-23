@@ -62,6 +62,13 @@ function splitArticle(markdown: string) {
 }
 
 const ARTICLE = splitArticle(canonicalizeKnownExternalLinks(VIRALBENCH_ARTICLE_MARKDOWN));
+const ARTICLE_NOTE_REF_COUNTS = new Map<string, number>();
+const ARTICLE_MARKUP = new Map(
+  [ARTICLE.lede, ...ARTICLE.sections.map((section) => section.markdown)].map((markdown) => [
+    markdown,
+    markdownToHtml(markdown, { noteRefCounts: ARTICLE_NOTE_REF_COUNTS }),
+  ]),
+);
 const HEADLINE_METRICS = [
   { value: '18', label: 'working rounds', note: 'fixed per agent run' },
   { value: '5', label: 'execution tools', note: 'research through publishing' },
@@ -98,7 +105,10 @@ function articleNodeToReact(node: Node, key: string): ReactNode {
 }
 
 function markdownToReact(markdown: string) {
-  const document = new DOMParser().parseFromString(markdownToHtml(markdown), 'text/html');
+  const document = new DOMParser().parseFromString(
+    ARTICLE_MARKUP.get(markdown) ?? markdownToHtml(markdown),
+    'text/html',
+  );
   return Array.from(document.body.childNodes).map((node, index) => articleNodeToReact(node, `article-${index}`));
 }
 
