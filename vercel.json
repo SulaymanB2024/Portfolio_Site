@@ -59,6 +59,8 @@
     { "src": "/markets/ai-search-crawler-policy", "headers": { "Location": "/research/ai-crawlers/ai-search-crawler-policy" }, "status": 308 },
     { "src": "/markets/technical-seo-public-data-infrastructure", "headers": { "Location": "/research/search-console/technical-seo-public-data-infrastructure" }, "status": 308 },
     { "src": "/markets/canonical-identity-personal-seo", "headers": { "Location": "/research/personal-seo/canonical-identity-personal-seo" }, "status": 308 },
+    { "src": "/markets/where-online-returns-actually-go", "headers": { "Location": "/research/financial-systems/where-online-returns-actually-go" }, "status": 308 },
+    { "src": "/markets/hidden-financing-hardware-startups", "headers": { "Location": "/research/financial-systems/hidden-financing-hardware-startups" }, "status": 308 },
     { "src": "/markets/network-monopolies", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
     { "src": "/markets/computational-commodity-systems", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
     { "src": "/markets/fiat-horizon", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },

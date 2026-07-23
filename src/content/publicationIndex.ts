@@ -1,6 +1,8 @@
 import { AI_MANAGERS_ARTICLE_PATH } from './aiManagersArticle';
 import type { ResearchArticle } from './articleModels';
 import { getArticlePath, getArticleBySlug } from './articleRegistry';
+import { HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG } from './hiddenFinancingHardwareArticle';
+import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvestigationArticle';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingArticle';
@@ -24,6 +26,8 @@ const crawlerPolicy = article('ai-search-crawler-policy');
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
+const onlineReturnsInvestigation = article(ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG);
+const hiddenFinancingHardware = article(HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG);
 const waymoHardwareFinancing = article(WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG);
 
 function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['category'] {
@@ -80,11 +84,25 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
   },
   {
     category: 'Markets and investing',
+    title: onlineReturnsInvestigation.title,
+    href: getArticlePath(onlineReturnsInvestigation),
+    description: onlineReturnsInvestigation.subtitle,
+    date: onlineReturnsInvestigation.dateModified ?? onlineReturnsInvestigation.date,
+    featured: true,
+  },
+  {
+    category: 'Markets and investing',
+    title: hiddenFinancingHardware.title,
+    href: getArticlePath(hiddenFinancingHardware),
+    description: hiddenFinancingHardware.subtitle,
+    date: hiddenFinancingHardware.dateModified ?? hiddenFinancingHardware.date,
+  },
+  {
+    category: 'Markets and investing',
     title: waymoHardwareFinancing.title,
     href: getArticlePath(waymoHardwareFinancing),
     description: waymoHardwareFinancing.subtitle,
     date: waymoHardwareFinancing.dateModified ?? waymoHardwareFinancing.date,
-    featured: true,
   },
   {
     category: 'Markets and investing',

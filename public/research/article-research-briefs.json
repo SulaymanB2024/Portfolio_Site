@@ -85,6 +85,8 @@
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
         "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
       "last_verified": "2026-07-20"
@@ -110,6 +112,49 @@
       "last_verified": "2026-07-20"
     },
     {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+      "question": "where do online returns go",
+      "supporting_questions": [
+        "what happens to online returns",
+        "reverse logistics returns process"
+      ],
+      "intent": "definition",
+      "cohort": 1,
+      "direct_answer": "An online return can be restocked, sold open-box, refurbished, liquidated, donated, recycled, destroyed, or held as fraud evidence. The route depends on whether expected recovery after reverse freight, inspection, repair, fees, delay, and disposal exceeds the cost of retrieving the item.",
+      "evidence_gap": "Connect the physical return path to product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing a single universal returns process.",
+      "original_artifact": "A 36-sheet reverse-logistics model, nine product archetypes, route and condition engines, auction analysis, decision diagrams, and a 49-page source-led investigation.",
+      "scope_boundary": "This page studies reverse logistics and the return tax on consumer products; the hardware-financing pages study capital stacks, asset claims, and residual-value risk before a product is returned.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+      "question": "hardware startup financing",
+      "supporting_questions": [
+        "hardware financing structures",
+        "asset financing for hardware startups"
+      ],
+      "intent": "comparison",
+      "cohort": 1,
+      "direct_answer": "Hardware startup financing usually combines three layers: corporate equity or debt, asset-level debt or leases, and adjacent support such as customer prepayments, supplier terms, public incentives, or parent guarantees. The structure is only asset-light when fixed claims, recourse, and residual-value risk genuinely move away from the operator.",
+      "evidence_gap": "Compare real company capital stacks by asset owner, payment source, recourse, utilization exposure, and loss allocation instead of treating announced venture funding as the complete financing structure.",
+      "original_artifact": "A 29-sheet comparative model, five full-resolution capital-stack diagrams, a 19-page report, cross-case scenario tables, and an explicit evidence hierarchy.",
+      "scope_boundary": "This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
       "url": "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
       "question": "Waymo financing structure",
       "supporting_questions": [
@@ -121,8 +166,10 @@
       "direct_answer": "The supplied public evidence supports an equity-heavy, parent-funded Waymo financing structure: Alphabet and outside investors fund the platform, while no quantified fleet-debt facility, asset SPV, customer pre-funding program, supplier facility, or government financing instrument is established in the package.",
       "evidence_gap": "Separate fundraising from physical-asset financing, legal ownership, residual value, utilization risk, and the party that absorbs losses.",
       "original_artifact": "A 21-sheet financing model, capital-stack diagram, downside waterfall, scenario tables, and instrument-by-instrument evidence map.",
-      "scope_boundary": "This page studies Waymo and hardware-startup financing; the Texas toll-road article studies concession ownership and project-level infrastructure finance.",
+      "scope_boundary": "This page is the Waymo-specific deep dive; the five-company hardware-financing article compares parent funding with equipment finance, SPVs, customer capital, public support, and project debt.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
@@ -146,6 +193,7 @@
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
         "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
       "last_verified": "2026-07-20"
@@ -287,6 +335,7 @@
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
         "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
       "last_verified": "2026-07-20"

@@ -104,6 +104,8 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/data-systems/audit-findings-derived-records',
       '/research/ai-crawlers/ai-search-crawler-policy',
       '/markets/who-owns-texas-toll-roads',
+      '/research/financial-systems/where-online-returns-actually-go',
+      '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
     ],
   },
@@ -128,6 +130,49 @@ export const ARTICLE_SEARCH_TARGETS = [
     ],
   },
   {
+    path: '/research/financial-systems/where-online-returns-actually-go',
+    primaryQuery: 'where do online returns go',
+    supportingQueries: ['what happens to online returns', 'reverse logistics returns process'],
+    intent: 'definition',
+    cohort: 1,
+    directAnswer:
+      'An online return can be restocked, sold open-box, refurbished, liquidated, donated, recycled, destroyed, or held as fraud evidence. The route depends on whether expected recovery after reverse freight, inspection, repair, fees, delay, and disposal exceeds the cost of retrieving the item.',
+    serpGap:
+      'Connect the physical return path to product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing a single universal returns process.',
+    originalArtifact:
+      'A 36-sheet reverse-logistics model, nine product archetypes, route and condition engines, auction analysis, decision diagrams, and a 49-page source-led investigation.',
+    cannibalizationBoundary:
+      'This page studies reverse logistics and the return tax on consumer products; the hardware-financing pages study capital stacks, asset claims, and residual-value risk before a product is returned.',
+    relatedPaths: [
+      '/research/financial-systems/hidden-financing-hardware-startups',
+      '/research/financial-systems/waymo-hardware-financing',
+      '/markets/who-owns-texas-toll-roads',
+      '/research/data-systems/audit-findings-derived-records',
+    ],
+  },
+  {
+    path: '/research/financial-systems/hidden-financing-hardware-startups',
+    primaryQuery: 'hardware startup financing',
+    supportingQueries: ['hardware financing structures', 'asset financing for hardware startups'],
+    intent: 'comparison',
+    cohort: 1,
+    directAnswer:
+      'Hardware startup financing usually combines three layers: corporate equity or debt, asset-level debt or leases, and adjacent support such as customer prepayments, supplier terms, public incentives, or parent guarantees. The structure is only asset-light when fixed claims, recourse, and residual-value risk genuinely move away from the operator.',
+    serpGap:
+      'Compare real company capital stacks by asset owner, payment source, recourse, utilization exposure, and loss allocation instead of treating announced venture funding as the complete financing structure.',
+    originalArtifact:
+      'A 29-sheet comparative model, five full-resolution capital-stack diagrams, a 19-page report, cross-case scenario tables, and an explicit evidence hierarchy.',
+    cannibalizationBoundary:
+      'This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.',
+    relatedPaths: [
+      '/research/financial-systems/where-online-returns-actually-go',
+      '/research/financial-systems/waymo-hardware-financing',
+      '/markets/who-owns-texas-toll-roads',
+      '/research/data-systems/audit-findings-derived-records',
+      '/research/search-console/technical-seo-public-data-infrastructure',
+    ],
+  },
+  {
     path: '/research/financial-systems/waymo-hardware-financing',
     primaryQuery: 'Waymo financing structure',
     supportingQueries: ['how is Waymo funded', 'Waymo hardware financing'],
@@ -140,8 +185,10 @@ export const ARTICLE_SEARCH_TARGETS = [
     originalArtifact:
       'A 21-sheet financing model, capital-stack diagram, downside waterfall, scenario tables, and instrument-by-instrument evidence map.',
     cannibalizationBoundary:
-      'This page studies Waymo and hardware-startup financing; the Texas toll-road article studies concession ownership and project-level infrastructure finance.',
+      'This page is the Waymo-specific deep dive; the five-company hardware-financing article compares parent funding with equipment finance, SPVs, customer capital, public support, and project debt.',
     relatedPaths: [
+      '/research/financial-systems/where-online-returns-actually-go',
+      '/research/financial-systems/hidden-financing-hardware-startups',
       '/markets/who-owns-texas-toll-roads',
       '/research/data-systems/audit-findings-derived-records',
       '/research/search-console/technical-seo-public-data-infrastructure',
@@ -165,6 +212,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/search-console/technical-seo-public-data-infrastructure',
       '/research/personal-seo/canonical-identity-personal-seo',
       '/research/data-systems/audit-findings-derived-records',
+      '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
     ],
   },
@@ -306,6 +354,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/search-console/technical-seo-public-data-infrastructure',
       '/research/ai-systems/replayable-traces-ai-agent-evaluation',
       '/research/data-systems/sqlite-crawl-pipelines',
+      '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
     ],
   },

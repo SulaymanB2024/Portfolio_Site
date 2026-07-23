@@ -60,7 +60,7 @@ const expectedPaths = [
 const targetPaths = ARTICLE_SEARCH_TARGETS.map((target) => target.path).sort();
 const targetPathSet = new Set<string>(targetPaths);
 
-assert(expectedPaths.length === 17, `expected 17 indexable article routes, found ${expectedPaths.length}`);
+assert(expectedPaths.length === 19, `expected 19 indexable article routes, found ${expectedPaths.length}`);
 assert(
   expectedPaths.join('\n') === targetPaths.join('\n'),
   `article target registry does not match indexable routes:\nexpected ${expectedPaths.join(', ')}\nreceived ${targetPaths.join(', ')}`,
@@ -136,5 +136,5 @@ for (const target of ARTICLE_SEARCH_TARGETS) {
 }
 
 console.log(
-  `Article ranking verification passed for 17 unique page/query contracts, ${ARTICLE_TOP_TEN_MIN_IMPRESSIONS}+ impressions, position ${ARTICLE_TOP_TEN_MAX_POSITION} or better, and ${ARTICLE_TOP_TEN_SUSTAINED_SNAPSHOTS} sustained snapshots.`,
+  `Article ranking verification passed for ${ARTICLE_SEARCH_TARGETS.length} unique page/query contracts, ${ARTICLE_TOP_TEN_MIN_IMPRESSIONS}+ impressions, position ${ARTICLE_TOP_TEN_MAX_POSITION} or better, and ${ARTICLE_TOP_TEN_SUSTAINED_SNAPSHOTS} sustained snapshots.`,
 );

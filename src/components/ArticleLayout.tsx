@@ -71,6 +71,7 @@ type ArticleHeroProps = {
     label?: ReactNode;
     caption?: ReactNode;
     presentation?: 'editorial' | 'diagram';
+    objectPosition?: string;
   };
   imagePlaceholder?: {
     label?: ReactNode;
@@ -92,6 +93,20 @@ export function ArticleHero({
   imagePlaceholder,
   children,
 }: ArticleHeroProps) {
+  const titleLength = typeof title === 'string' ? title.trim().length : 0;
+  const compactMetadata = metadata
+    .filter((item) => {
+      const label = item.label.toLowerCase();
+      return label === 'published' || label === 'read time' || label === 'length';
+    })
+    .map((item) => ({
+      ...item,
+      label: item.label.toLowerCase() === 'length' ? 'Read time' : item.label,
+      value: item.label.toLowerCase() === 'length' && typeof item.value === 'string'
+        ? item.value.split('/')[0].trim()
+        : item.value,
+    }));
+
   return (
     <PageFrame>
       <header className="article-reader__hero">
@@ -111,11 +126,39 @@ export function ArticleHero({
         </aside>
 
         <div className="article-reader__hero-main">
+          <div className="article-reader__mobile-prelude">
+            <a href={backHref} className="article-reader__back-link">
+              <span aria-hidden="true">←</span>
+              <span>{backLabel}</span>
+            </a>
+            <div className="article-reader__mobile-publication" aria-label="Publication summary">
+              {compactMetadata.map((item) => (
+                <span key={item.label}>
+                  <strong>{item.label}</strong>
+                  {item.value}
+                </span>
+              ))}
+            </div>
+          </div>
           <SectionEyebrow>{eyebrow}</SectionEyebrow>
-          <h1>{title}</h1>
+          <h1 data-title-scale={titleLength > 58 ? 'long' : 'standard'}>{title}</h1>
           {displayTitle ? <p className="article-reader__display-title">{displayTitle}</p> : null}
           <p className="article-reader__deck">{deck}</p>
           {children}
+          <details className="article-reader__hero-details">
+            <summary>
+              <span>Article details</span>
+              <span aria-hidden="true">+</span>
+            </summary>
+            <dl>
+              {metadata.map((item) => (
+                <div key={item.label}>
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </details>
         </div>
 
         <figure
@@ -130,7 +173,13 @@ export function ArticleHero({
           </figcaption>
           <div className="article-reader__image-media">
             {image ? (
-              <img src={image.src} alt={image.alt} decoding="async" fetchPriority="high" />
+              <img
+                src={image.src}
+                alt={image.alt}
+                decoding="async"
+                fetchPriority="high"
+                style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
+              />
             ) : (
               <ArticleImagePlaceholder variant={imagePlaceholder?.variant ?? 'default'} />
             )}
@@ -247,19 +296,33 @@ function useActiveSection(items: ArticleNavItem[]) {
 
     if (!nodes.length) return undefined;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        const next = visible[0]?.target.id;
-        if (next) setActiveId(next);
-      },
-      { rootMargin: '-18% 0px -68% 0px', threshold: [0, 0.1, 0.5] },
-    );
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const marker = Math.min(Math.max(window.innerHeight * 0.24, 140), 260);
+      const current = nodes.find((node) => {
+        const rect = node.getBoundingClientRect();
+        return rect.top <= marker && rect.bottom > marker;
+      }) ?? [...nodes].reverse().find((node) => node.getBoundingClientRect().top <= marker) ?? nodes[0];
 
-    nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
+      setActiveId((previous) => previous === current.id ? previous : current.id);
+    };
+    const scheduleUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    scheduleUpdate();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    window.addEventListener('hashchange', scheduleUpdate);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      window.removeEventListener('hashchange', scheduleUpdate);
+    };
   }, [ids]);
 
   return activeId;
@@ -267,14 +330,20 @@ function useActiveSection(items: ArticleNavItem[]) {
 
 function ArticleUtilities() {
   const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('');
 
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
       setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
+      setCopyStatus('Article link copied to clipboard.');
+      window.setTimeout(() => {
+        setCopied(false);
+        setCopyStatus('');
+      }, 1800);
     } catch {
       setCopied(false);
+      setCopyStatus('Unable to copy the article link.');
     }
   };
 
@@ -282,7 +351,40 @@ function ArticleUtilities() {
     <div className="article-reader__utilities" aria-label="Article utilities">
       <button type="button" onClick={copyLink}>{copied ? 'Copied' : 'Copy link'}</button>
       <button type="button" onClick={() => window.print()}>Print / PDF</button>
+      <span className="sr-only" role="status" aria-live="polite">{copyStatus}</span>
     </div>
+  );
+}
+
+export function ArticleOverviewBand({
+  items,
+  activeId,
+}: {
+  items: ArticleNavItem[];
+  activeId?: string;
+}) {
+  return (
+    <section className="article-reader__overview-band" aria-labelledby="article-overview-title">
+      <header>
+        <SectionEyebrow>Reading map</SectionEyebrow>
+        <p id="article-overview-title">
+          <strong>{String(items.length).padStart(2, '0')}</strong>
+          <span>{items.length === 1 ? 'section' : 'sections'}</span>
+        </p>
+      </header>
+      <nav aria-label="Article overview">
+        <ol>
+          {items.map((item, index) => (
+            <li key={item.id}>
+              <a href={`#${item.id}`} aria-current={activeId === item.id ? 'location' : undefined}>
+                <span>{item.index ?? String(index + 1).padStart(2, '0')}</span>
+                <strong>{item.label}</strong>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </section>
   );
 }
 
@@ -305,18 +407,31 @@ export function ArticleBody({
 }: ArticleBodyProps) {
   const activeId = useActiveSection(items);
   const activeIndex = Math.max(0, items.findIndex((item) => item.id === activeId));
+  const activeItem = items[activeIndex];
   const progress = items.length ? ((activeIndex + 1) / items.length) * 100 : 0;
 
   return (
     <PageFrame className="article-reader__body-frame">
+      <ArticleOverviewBand items={items} activeId={activeId} />
+
       <details className="article-reader__mobile-contents">
         <summary>
-          <span>{contentsLabel}</span>
-          <span>{String(activeIndex + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}</span>
+          <span className="article-reader__mobile-contents-label">
+            <small>{contentsLabel}</small>
+            <strong>{activeItem?.label ?? 'Overview'}</strong>
+          </span>
+          <span className="article-reader__mobile-contents-count">
+            {String(activeIndex + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
+          </span>
         </summary>
         <nav aria-label={`${contentsLabel} navigation`}>
           {items.map((item, index) => (
-            <a key={item.id} href={`#${item.id}`} aria-current={activeId === item.id ? 'location' : undefined}>
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              aria-current={activeId === item.id ? 'location' : undefined}
+              onClick={(event) => event.currentTarget.closest('details')?.removeAttribute('open')}
+            >
               <span>{item.index ?? String(index + 1).padStart(2, '0')}</span>
               <span>{item.label}</span>
             </a>
@@ -415,11 +530,15 @@ export function ArticleEndnote({
   children: ReactNode;
   links: Array<{ href: string; label: string }>;
 }) {
+  const uniqueLinks = links.filter(
+    (link, index) => links.findIndex((candidate) => candidate.href === link.href) === index,
+  );
+
   return (
     <footer className="article-reader__endnote">
       <p>{children}</p>
       <nav aria-label="Related reading">
-        {links.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
+        {uniqueLinks.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
       </nav>
     </footer>
   );

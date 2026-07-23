@@ -7,9 +7,13 @@ import {
   AI_MANAGERS_ARTICLE_SLUG,
   AI_MANAGERS_ARTICLE_TITLE,
 } from './aiManagersArticle';
+import { HIDDEN_FINANCING_HARDWARE_ARTICLE } from './hiddenFinancingHardwareArticle';
+import { ONLINE_RETURNS_INVESTIGATION_ARTICLE } from './onlineReturnsInvestigationArticle';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE } from './waymoHardwareFinancingArticle';
 
 export const RESEARCH_ARTICLES: ResearchArticle[] = [
+  ONLINE_RETURNS_INVESTIGATION_ARTICLE,
+  HIDDEN_FINANCING_HARDWARE_ARTICLE,
   WAYMO_HARDWARE_FINANCING_ARTICLE,
   {
     kind: 'research',

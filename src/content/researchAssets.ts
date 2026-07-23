@@ -76,6 +76,36 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
+    name: 'Where Your Online Return Actually Goes',
+    href: '/research/financial-systems/where-online-returns-actually-go',
+    type: 'long_form_research',
+    preferredAnchor: 'where online returns actually go',
+    audiences: ['e-commerce', 'retail operations', 'reverse logistics', 'unit economics'],
+    pitchAngle:
+      'A product-level investigation of when a return is restocked, refurbished, liquidated, recycled, destroyed, or never retrieved—and why the same retail price can produce opposite decisions.',
+    supportingAssets: [
+      { label: 'Full reverse-logistics investigation', href: '/research/where-online-return-actually-goes-report.pdf' },
+      { label: 'Reverse-logistics tax model', href: '/research/reverse-logistics-tax-model.xlsx' },
+      { label: 'Retrieval-decision chart', href: '/images/research/online-returns-retrieval-decision.png' },
+    ],
+  },
+  {
+    priority: 1,
+    name: 'Hardware Startup Financing: Five Capital Stacks',
+    href: '/research/financial-systems/hidden-financing-hardware-startups',
+    type: 'long_form_research',
+    preferredAnchor: 'hardware startup financing structures',
+    audiences: ['hardware startups', 'venture finance', 'asset finance', 'project finance'],
+    pitchAngle:
+      'A five-company comparison of parent funding, equipment finance, secured SPVs, customer capital, public support, project debt, asset ownership, and downside allocation.',
+    supportingAssets: [
+      { label: 'Full comparative financing report', href: '/research/hidden-financing-report.pdf' },
+      { label: 'Comparative hardware financing model', href: '/research/hidden-financing-model.xlsx' },
+      { label: 'Five capital-stack diagrams', href: '/research/capital-stack-diagrams.zip' },
+    ],
+  },
+  {
+    priority: 1,
     name: 'The Hidden Financing Behind Hardware Startups',
     href: '/research/financial-systems/waymo-hardware-financing',
     type: 'long_form_research',
@@ -205,7 +235,7 @@ export const publicDataDownloads = [
   {
     label: 'Article research briefs',
     href: '/research/article-research-briefs.json',
-    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 17 indexable articles.',
+    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 19 indexable articles.',
   },
   {
     label: 'Authority asset JSON',
@@ -251,5 +281,40 @@ export const publicDataDownloads = [
     label: 'Waymo hardware financing model',
     href: '/research/waymo-hardware-financing-model.xlsx',
     description: 'Twenty-one-sheet scenario model covering funding, asset capital, utilization, debt service, residual value, and downside.',
+  },
+  {
+    label: 'Where Your Online Return Actually Goes report',
+    href: '/research/where-online-return-actually-goes-report.pdf',
+    description: 'Forty-nine-page investigation of reverse logistics, return-center decisions, liquidation, fraud, ownership, and environmental disposition.',
+  },
+  {
+    label: 'Editable online-returns investigation',
+    href: '/research/where-online-return-actually-goes-report.docx',
+    description: 'Editable source document for the online-returns and reverse-logistics investigation.',
+  },
+  {
+    label: 'Reverse-logistics tax model',
+    href: '/research/reverse-logistics-tax-model.xlsx',
+    description: 'Thirty-six-sheet model covering nine product archetypes, route engines, thresholds, fraud, sustainability, auctions, and sensitivities.',
+  },
+  {
+    label: 'Comparative hardware financing report',
+    href: '/research/hidden-financing-report.pdf',
+    description: 'Nineteen-page comparison of five hardware capital stacks, asset ownership, recourse, utilization, and downside.',
+  },
+  {
+    label: 'Editable comparative hardware financing report',
+    href: '/research/hidden-financing-report.docx',
+    description: 'Editable source document for the five-company hardware financing investigation.',
+  },
+  {
+    label: 'Comparative hardware financing model',
+    href: '/research/hidden-financing-model.xlsx',
+    description: 'Twenty-nine-sheet evidence ledger, assumption book, company comparison, scenarios, and loss waterfalls.',
+  },
+  {
+    label: 'Hardware capital-stack diagram package',
+    href: '/research/capital-stack-diagrams.zip',
+    description: 'Original full-resolution PNG and Graphviz DOT files for Waymo, Serve Robotics, CoreWeave, Anduril, and Northvolt.',
   },
 ];

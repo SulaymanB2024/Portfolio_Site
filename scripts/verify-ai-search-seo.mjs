@@ -18,6 +18,8 @@ const routeFiles = [
   ['/atlas/sample-crawl', 'dist/atlas/sample-crawl/index.html'],
   ['/research', 'dist/research/index.html'],
   ['/research/ai-systems/the-first-ai-managers', 'dist/research/ai-systems/the-first-ai-managers/index.html'],
+  ['/research/financial-systems/where-online-returns-actually-go', 'dist/research/financial-systems/where-online-returns-actually-go/index.html'],
+  ['/research/financial-systems/hidden-financing-hardware-startups', 'dist/research/financial-systems/hidden-financing-hardware-startups/index.html'],
   ['/research/financial-systems/waymo-hardware-financing', 'dist/research/financial-systems/waymo-hardware-financing/index.html'],
   ['/method', 'dist/method/index.html'],
   ['/austin-technical-seo', 'dist/austin-technical-seo/index.html'],
@@ -78,7 +80,7 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('19 Notes and Artifacts'), 'research: publication count is not derived as nineteen');
+assert(textFromHtml(research).includes('21 Notes and Artifacts'), 'research: publication count is not derived as twenty-one');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
 assert(textFromHtml(research).includes('The Hidden Financing Behind Hardware Startups'), 'research: Waymo financing article missing');
 
@@ -88,6 +90,59 @@ assert([...aiManagers.matchAll(/<li id="source-s\d+">/g)].length === 18, 'AI man
 assert(aiManagers.includes('<section id="field-map" aria-labelledby="field-map-title">'), 'AI managers: field map section anchor missing');
 assert(aiManagers.includes('href="#field-map"'), 'AI managers: source ledger does not link to the field map');
 assert(!textFromHtml(aiManagers).includes('72 source'), 'AI managers: unpublished 72-source claim remains');
+
+const onlineReturns = read('dist/research/financial-systems/where-online-returns-actually-go/index.html');
+for (const expected of [
+  'Where Your Online Return Actually Goes',
+  'The refund does not tell you where the product went',
+  'Nine products at three prices produce nine different routes',
+  'Liquidation recovery is not the consumer resale price',
+  'Financial recovery does not establish the environmental endpoint',
+]) {
+  assert(textFromHtml(onlineReturns).includes(expected), `Online returns: missing ${expected}`);
+}
+for (const href of [
+  '/research/where-online-return-actually-goes-report.pdf',
+  '/research/where-online-return-actually-goes-report.docx',
+  '/research/reverse-logistics-tax-model.xlsx',
+  '/images/research/online-returns-retrieval-decision.png',
+  '/images/research/online-returns-disposition-decision-tree.png',
+  '/images/research/online-returns-headphones-waterfall.png',
+  '/images/research/online-returns-furniture-waterfall.png',
+  '/images/research/online-returns-auction-recovery.png',
+  '/images/research/online-returns-retailer-reseller-waterfall.png',
+  '/images/research/online-returns-freight-burden.png',
+  '/images/research/online-returns-fraud-loss.png',
+  '/images/research/online-returns-environmental-routes.png',
+]) {
+  assert(onlineReturns.includes(`href="${href}"`) || onlineReturns.includes(`src="${href}"`), `Online returns: missing artifact ${href}`);
+  assert(fs.existsSync(path.resolve(`public${href}`)), `Online returns: missing public file ${href}`);
+}
+
+const hiddenFinancing = read('dist/research/financial-systems/hidden-financing-hardware-startups/index.html');
+for (const expected of [
+  'Five Capital Stacks Compared',
+  'The venture round is only one of three capital stacks',
+  'CoreWeave FY2025 debt principal',
+  'Which structures actually scale?',
+  'Evidence hierarchy used throughout the report and model',
+]) {
+  assert(textFromHtml(hiddenFinancing).includes(expected), `Hidden financing: missing ${expected}`);
+}
+for (const href of [
+  '/research/hidden-financing-report.pdf',
+  '/research/hidden-financing-report.docx',
+  '/research/hidden-financing-model.xlsx',
+  '/research/capital-stack-diagrams.zip',
+  '/images/research/hidden-financing-waymo-capital-stack.png',
+  '/images/research/hidden-financing-serve-capital-stack.png',
+  '/images/research/hidden-financing-coreweave-capital-stack.png',
+  '/images/research/hidden-financing-anduril-capital-stack.png',
+  '/images/research/hidden-financing-northvolt-capital-stack.png',
+]) {
+  assert(hiddenFinancing.includes(`href="${href}"`) || hiddenFinancing.includes(`src="${href}"`), `Hidden financing: missing artifact ${href}`);
+  assert(fs.existsSync(path.resolve(`public${href}`)), `Hidden financing: missing public file ${href}`);
+}
 
 const waymo = read('dist/research/financial-systems/waymo-hardware-financing/index.html');
 for (const expected of [
