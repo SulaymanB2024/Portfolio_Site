@@ -9,9 +9,6 @@ export const ALL_ARTICLES: PublicArticle[] = [
   ...INVESTMENT_MEMOS,
 ];
 export const INDEXABLE_ARTICLES = ALL_ARTICLES.filter((article) => article.indexable !== false);
-const LEGACY_MARKET_RESEARCH_SLUGS = new Set(
-  RESEARCH_ARTICLES.map((article) => article.slug),
-);
 
 export function getArticlePath(article: PublicArticle) {
   return article.kind === 'investment-memo'
@@ -19,10 +16,8 @@ export function getArticlePath(article: PublicArticle) {
     : `/research/${article.cluster}/${article.slug}`;
 }
 
-export function getLegacyArticlePath(article: PublicArticle) {
-  return article.kind === 'research' && LEGACY_MARKET_RESEARCH_SLUGS.has(article.slug)
-    ? `/markets/${article.slug}`
-    : undefined;
+export function getArticleAliases(article: PublicArticle) {
+  return article.aliases ?? [];
 }
 
 export function getArticleBySlug(slug: string) {

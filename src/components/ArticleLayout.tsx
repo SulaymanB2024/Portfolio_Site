@@ -70,6 +70,7 @@ type ArticleHeroProps = {
     alt: string;
     label?: ReactNode;
     caption?: ReactNode;
+    presentation?: 'editorial' | 'diagram';
   };
   imagePlaceholder?: {
     label?: ReactNode;
@@ -120,6 +121,7 @@ export function ArticleHero({
         <figure
           className="article-reader__hero-image"
           data-placeholder={image ? undefined : 'true'}
+          data-presentation={image?.presentation}
           aria-label={image ? undefined : 'Editorial image placeholder'}
         >
           <figcaption className="article-reader__image-caption">

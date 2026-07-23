@@ -76,6 +76,20 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
+    name: 'The Hidden Financing Behind Hardware Startups',
+    href: '/research/financial-systems/waymo-hardware-financing',
+    type: 'long_form_research',
+    preferredAnchor: 'Waymo hardware financing structure',
+    audiences: ['hardware startups', 'autonomous vehicles', 'venture finance', 'asset finance'],
+    pitchAngle:
+      'A Waymo case study separating disclosed equity funding from modeled physical-asset capital, utilization, residual-value risk, and the party that absorbs downside.',
+    supportingAssets: [
+      { label: 'Full Waymo financing report', href: '/research/waymo-hardware-financing-report.pdf' },
+      { label: 'Waymo hardware financing model', href: '/research/waymo-hardware-financing-model.xlsx' },
+    ],
+  },
+  {
+    priority: 1,
     name: 'Atlas Open-Corpus Demonstration',
     href: '/atlas/sample-crawl',
     type: 'sample_data',
@@ -191,7 +205,7 @@ export const publicDataDownloads = [
   {
     label: 'Article research briefs',
     href: '/research/article-research-briefs.json',
-    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 16 indexable articles.',
+    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 17 indexable articles.',
   },
   {
     label: 'Authority asset JSON',
@@ -227,5 +241,15 @@ export const publicDataDownloads = [
     label: 'Appian assumptions table',
     href: '/research/appian-assumptions-table.csv',
     description: 'CSV assumptions table that supports the markets research memo.',
+  },
+  {
+    label: 'Waymo hardware financing report',
+    href: '/research/waymo-hardware-financing-report.pdf',
+    description: 'Full source-led report with financing archetypes, methodology, appendices, and selected source register.',
+  },
+  {
+    label: 'Waymo hardware financing model',
+    href: '/research/waymo-hardware-financing-model.xlsx',
+    description: 'Twenty-one-sheet scenario model covering funding, asset capital, utilization, debt service, residual value, and downside.',
   },
 ];

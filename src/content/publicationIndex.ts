@@ -3,6 +3,7 @@ import type { ResearchArticle } from './articleModels';
 import { getArticlePath, getArticleBySlug } from './articleRegistry';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
+import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingArticle';
 
 export type PublicationIndexItem = {
   category: 'AI systems and products' | 'Search systems' | 'Technical SEO' | 'Markets and investing';
@@ -23,6 +24,7 @@ const crawlerPolicy = article('ai-search-crawler-policy');
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
+const waymoHardwareFinancing = article(WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG);
 
 function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['category'] {
   if (articleItem.cluster === 'ai-systems') return 'AI systems and products';
@@ -75,6 +77,14 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     href: getArticlePath(canonicalIdentity),
     description: canonicalIdentity.subtitle,
     date: canonicalIdentity.dateModified ?? canonicalIdentity.date,
+  },
+  {
+    category: 'Markets and investing',
+    title: waymoHardwareFinancing.title,
+    href: getArticlePath(waymoHardwareFinancing),
+    description: waymoHardwareFinancing.subtitle,
+    date: waymoHardwareFinancing.dateModified ?? waymoHardwareFinancing.date,
+    featured: true,
   },
   {
     category: 'Markets and investing',

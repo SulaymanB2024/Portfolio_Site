@@ -138,5 +138,5 @@ for (const articleTarget of ARTICLE_SEARCH_TARGETS) {
 
 const maxDepth = Math.max(...depths.values());
 console.log(
-  `Internal-link verification passed for ${routes.length} canonical routes: zero orphans, maximum depth ${maxDepth}, ${DESCRIPTIVE_ANCHOR_EXPECTATIONS.length} descriptive anchor targets, and at least three contextual inbound sources for all 16 articles.`,
+  `Internal-link verification passed for ${routes.length} canonical routes: zero orphans, maximum depth ${maxDepth}, ${DESCRIPTIVE_ANCHOR_EXPECTATIONS.length} descriptive anchor targets, and at least three contextual inbound sources for all 17 articles.`,
 );

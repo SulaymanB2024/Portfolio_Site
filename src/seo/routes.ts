@@ -1,4 +1,4 @@
-import { ALL_ARTICLES, getArticlePath, getLegacyArticlePath } from '../content/articleRegistry';
+import { ALL_ARTICLES, getArticleAliases, getArticlePath } from '../content/articleRegistry';
 import { isInvestmentMemo } from '../content/articleModels';
 import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
 import {
@@ -334,7 +334,6 @@ const CORE_ROUTES: SeoRoute[] = [
 
 const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
   const path = getArticlePath(article);
-  const legacyPath = getLegacyArticlePath(article);
   const isIndexable = article.indexable !== false;
   const datePublished = article.date.replaceAll('.', '-');
   const dateModified = (article.dateModified ?? article.date).replaceAll('.', '-');
@@ -344,7 +343,7 @@ const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
 
   return {
     path,
-    aliases: legacyPath ? [legacyPath] : [],
+    aliases: getArticleAliases(article),
     title: article.slug === TEXAS_TOLL_ARTICLE_SLUG || article.seoTitle.length > 60 ? article.seoTitle : `${article.seoTitle} | Sulayman Bowles`,
     description: article.seoDescription,
     h1: article.title,

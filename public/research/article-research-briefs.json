@@ -84,7 +84,8 @@
       "related_articles": [
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
         "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
-        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
       "last_verified": "2026-07-20"
     },
@@ -109,6 +110,26 @@
       "last_verified": "2026-07-20"
     },
     {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+      "question": "Waymo financing structure",
+      "supporting_questions": [
+        "how is Waymo funded",
+        "Waymo hardware financing"
+      ],
+      "intent": "ownership",
+      "cohort": 1,
+      "direct_answer": "The supplied public evidence supports an equity-heavy, parent-funded Waymo financing structure: Alphabet and outside investors fund the platform, while no quantified fleet-debt facility, asset SPV, customer pre-funding program, supplier facility, or government financing instrument is established in the package.",
+      "evidence_gap": "Separate fundraising from physical-asset financing, legal ownership, residual value, utilization risk, and the party that absorbs losses.",
+      "original_artifact": "A 21-sheet financing model, capital-stack diagram, downside waterfall, scenario tables, and instrument-by-instrument evidence map.",
+      "scope_boundary": "This page studies Waymo and hardware-startup financing; the Texas toll-road article studies concession ownership and project-level infrastructure finance.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
       "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
       "question": "are toll roads privately owned in Texas",
       "supporting_questions": [
@@ -124,7 +145,8 @@
       "related_articles": [
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
         "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
-        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
       "last_verified": "2026-07-20"
     },
@@ -264,7 +286,8 @@
       "related_articles": [
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
-        "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines"
+        "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
       "last_verified": "2026-07-20"
     },

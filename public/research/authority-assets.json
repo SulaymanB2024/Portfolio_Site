@@ -95,6 +95,20 @@
     },
     {
       "priority": 1,
+      "name": "The Hidden Financing Behind Hardware Startups",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "The Hidden Financing Behind Hardware Startups",
+      "pitch_angle": "Separate fundraising from physical-asset financing, legal ownership, residual value, utilization risk, and the party that absorbs losses.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ]
+    },
+    {
+      "priority": 1,
       "name": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
       "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
       "type": "source_led_article",

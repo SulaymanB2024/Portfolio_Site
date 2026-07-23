@@ -63,6 +63,21 @@ function StructuredArticleSections({ sections }: { sections: ArticleSection[] })
             ) : null}
           </div>
 
+          {section.figures?.map((figure) => (
+            <figure key={figure.src} className="toll-editorial-plate article-reader__figure">
+              <p className="toll-figure-label">{figure.label}</p>
+              <img
+                src={figure.src}
+                alt={figure.alt}
+                width={figure.width}
+                height={figure.height}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>{figure.caption}</figcaption>
+            </figure>
+          ))}
+
           {section.table ? (
             <figure className="toll-data-table research-guide-table">
               <figcaption className="article-reader__table-caption">
@@ -136,6 +151,30 @@ function SourceLedger({ article }: { article: PublicArticle }) {
   );
 }
 
+function ArticleResources({ article }: { article: PublicArticle }) {
+  if (!article.resources?.length) return null;
+
+  return (
+    <section id="downloads" className="article-reader__resources">
+      <ArticleSectionHeader index="D">Downloads</ArticleSectionHeader>
+      <p className="article-reader__resources-intro">
+        The formatted article is the reading layer. These files preserve the supplied report, live model, and full-resolution figures.
+      </p>
+      <ul>
+        {article.resources.map((resource) => (
+          <li key={resource.href}>
+            <a href={resource.href} download>
+              <span>{resource.format}</span>
+              <strong>{resource.label}</strong>
+              <small>{resource.description}</small>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 function articleNav(article: PublicArticle, sections: ArticleSection[] | undefined): ArticleNavItem[] {
   if (sections?.length) {
     return [
@@ -146,6 +185,7 @@ function articleNav(article: PublicArticle, sections: ArticleSection[] | undefin
         index: String(index + 1).padStart(2, '0'),
       })),
       ...(isInvestmentMemo(article) ? [{ id: 'decision-frame', label: 'Decision frame', index: 'D' }] : []),
+      ...(article.resources?.length ? [{ id: 'downloads', label: 'Downloads', index: 'D' }] : []),
       ...(article.sources.length ? [{ id: 'source-ledger', label: 'Source ledger', index: 'S' }] : []),
     ];
   }
@@ -153,20 +193,22 @@ function articleNav(article: PublicArticle, sections: ArticleSection[] | undefin
   return [
     { id: 'overview', label: 'Overview', index: '01' },
     ...(isInvestmentMemo(article) ? [{ id: 'decision-frame', label: 'Decision frame', index: '02' }] : []),
+    ...(article.resources?.length ? [{ id: 'downloads', label: 'Downloads', index: 'D' }] : []),
     ...(article.sources.length ? [{ id: 'source-ledger', label: 'Research sources', index: 'S' }] : []),
   ];
 }
 
 function articleImage(article: PublicArticle) {
   const image = article.image !== '/og-default.png'
-    ? { src: article.image, alt: `${article.title} editorial artwork.` }
+    ? { src: article.image, alt: article.imageAlt ?? `${article.title} editorial artwork.` }
     : undefined;
 
   return image
     ? {
         ...image,
-        label: `${article.category} / editorial plate`,
-        caption: article.title,
+        label: article.imageLabel ?? `${article.category} / editorial plate`,
+        caption: article.imageCaption ?? article.title,
+        presentation: article.imagePresentation,
       }
     : undefined;
 }
@@ -290,6 +332,8 @@ function GenericArticle({
           </section>
         ) : null}
 
+        <ArticleResources article={article} />
+
         {article.sources.length ? <SourceLedger article={article} /> : null}
 
         <ArticleEndnote
@@ -300,7 +344,14 @@ function GenericArticle({
                 { href: '/research', label: 'Technical SEO and AI systems research' },
                 { href: '/about', label: 'About Sulayman Bowles' },
               ]
-            : [
+            : article.cluster === 'financial-systems'
+              ? [
+                  ...relatedLinks,
+                  { href: '/research', label: 'Research archive' },
+                  { href: '/markets', label: 'Markets research' },
+                  { href: '/about', label: 'About Sulayman Bowles' },
+                ]
+              : [
                 ...relatedLinks,
                 { href: '/research', label: 'Technical SEO research' },
                 { href: '/atlas', label: 'Atlas technical SEO audit software' },

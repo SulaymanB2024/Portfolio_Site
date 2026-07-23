@@ -104,6 +104,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/data-systems/audit-findings-derived-records',
       '/research/ai-crawlers/ai-search-crawler-policy',
       '/markets/who-owns-texas-toll-roads',
+      '/research/financial-systems/waymo-hardware-financing',
     ],
   },
   {
@@ -127,6 +128,26 @@ export const ARTICLE_SEARCH_TARGETS = [
     ],
   },
   {
+    path: '/research/financial-systems/waymo-hardware-financing',
+    primaryQuery: 'Waymo financing structure',
+    supportingQueries: ['how is Waymo funded', 'Waymo hardware financing'],
+    intent: 'ownership',
+    cohort: 1,
+    directAnswer:
+      'The supplied public evidence supports an equity-heavy, parent-funded Waymo financing structure: Alphabet and outside investors fund the platform, while no quantified fleet-debt facility, asset SPV, customer pre-funding program, supplier facility, or government financing instrument is established in the package.',
+    serpGap:
+      'Separate fundraising from physical-asset financing, legal ownership, residual value, utilization risk, and the party that absorbs losses.',
+    originalArtifact:
+      'A 21-sheet financing model, capital-stack diagram, downside waterfall, scenario tables, and instrument-by-instrument evidence map.',
+    cannibalizationBoundary:
+      'This page studies Waymo and hardware-startup financing; the Texas toll-road article studies concession ownership and project-level infrastructure finance.',
+    relatedPaths: [
+      '/markets/who-owns-texas-toll-roads',
+      '/research/data-systems/audit-findings-derived-records',
+      '/research/search-console/technical-seo-public-data-infrastructure',
+    ],
+  },
+  {
     path: '/markets/who-owns-texas-toll-roads',
     primaryQuery: 'are toll roads privately owned in Texas',
     supportingQueries: ['who owns Texas toll roads', 'Texas toll road private operators'],
@@ -144,6 +165,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/search-console/technical-seo-public-data-infrastructure',
       '/research/personal-seo/canonical-identity-personal-seo',
       '/research/data-systems/audit-findings-derived-records',
+      '/research/financial-systems/waymo-hardware-financing',
     ],
   },
   {
@@ -284,6 +306,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/search-console/technical-seo-public-data-infrastructure',
       '/research/ai-systems/replayable-traces-ai-agent-evaluation',
       '/research/data-systems/sqlite-crawl-pipelines',
+      '/research/financial-systems/waymo-hardware-financing',
     ],
   },
   {

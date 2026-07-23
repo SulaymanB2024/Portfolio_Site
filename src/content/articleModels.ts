@@ -17,7 +17,24 @@ export type ResearchCluster =
   | 'personal-seo'
   | 'crawler-engineering'
   | 'technical-seo'
-  | 'data-systems';
+  | 'data-systems'
+  | 'financial-systems';
+
+export type ArticleFigure = {
+  src: string;
+  alt: string;
+  label: string;
+  caption: string;
+  width: number;
+  height: number;
+};
+
+export type ArticleResource = {
+  label: string;
+  href: string;
+  description: string;
+  format: string;
+};
 
 export type ArticleTable = {
   caption: string;
@@ -38,6 +55,7 @@ export type ArticleSection = {
   paragraphs: string[];
   bullets?: string[];
   table?: ArticleTable;
+  figures?: ArticleFigure[];
   codeExamples?: ArticleCodeExample[];
 };
 
@@ -45,6 +63,7 @@ export type ResearchArticle = {
   kind: 'research';
   cluster: ResearchCluster;
   slug: string;
+  aliases?: string[];
   number: string;
   category: string;
   title: string;
@@ -52,6 +71,10 @@ export type ResearchArticle = {
   subtitle: string;
   seoDescription: string;
   image: string;
+  imageAlt?: string;
+  imageLabel?: string;
+  imageCaption?: string;
+  imagePresentation?: 'editorial' | 'diagram';
   date: string;
   dateModified?: string;
   lastVerified?: string;
@@ -62,6 +85,7 @@ export type ResearchArticle = {
   content: string[];
   sections?: ArticleSection[];
   metrics?: ArticleMetric[];
+  resources?: ArticleResource[];
   sources: ArticleSource[];
   indexable?: boolean;
 };

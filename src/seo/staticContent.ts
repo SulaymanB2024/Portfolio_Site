@@ -1,6 +1,6 @@
 import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
 import { getArticleByPath } from '../content/articleRegistry';
-import { isInvestmentMemo, type ArticleSection } from '../content/articleModels';
+import { isInvestmentMemo, type ArticleResource, type ArticleSection } from '../content/articleModels';
 import { PUBLIC_MARKET_THESES } from '../content/marketTheses';
 import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
 import { PROFILE_FACTS, formatEducation, formatIsoDate } from '../content/profileFacts';
@@ -355,15 +355,33 @@ function articleSectionsStaticHtml(sections: ArticleSection[]) {
           <pre><code>${escapeHtml(example.code)}</code></pre>
         </figure>`,
     ).join('\n        ') ?? '';
+    const figures = section.figures?.map(
+      (figure) => `<figure>
+          <img src="${escapeHtml(figure.src)}" width="${figure.width}" height="${figure.height}" alt="${escapeHtml(figure.alt)}" />
+          <figcaption><strong>${escapeHtml(figure.label)}</strong> — ${escapeHtml(figure.caption)}</figcaption>
+        </figure>`,
+    ).join('\n        ') ?? '';
 
     return `<section aria-labelledby="${section.id}-title">
         <h2 id="${section.id}-title">${escapeHtml(section.title)}</h2>
         ${paragraphList(section.paragraphs)}
         ${bullets}
+        ${figures}
         ${table}
         ${codeExamples}
       </section>`;
   }).join('\n        ');
+}
+
+function articleResourcesStaticHtml(resources: ArticleResource[]) {
+  return `<section aria-labelledby="article-downloads-title">
+        <h2 id="article-downloads-title">Downloads</h2>
+        <p>The web article is the reading layer. These files preserve the supplied source package and model.</p>
+        <ul>${resources.map((resource) => `<li>
+          <a href="${escapeHtml(resource.href)}">${escapeHtml(resource.label)} (${escapeHtml(resource.format)})</a>
+          — ${escapeHtml(resource.description)}
+        </li>`).join('')}</ul>
+      </section>`;
 }
 
 function texasTollTableStaticHtml(table: TexasTollArticleTable) {
@@ -831,6 +849,15 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     const structuredSections = article.sections
       ? articleSectionsStaticHtml(article.sections)
       : '';
+    const articleImage = article.imageAlt && article.image !== '/og-default.png'
+      ? `<figure>
+          <img src="${escapeHtml(article.image)}" alt="${escapeHtml(article.imageAlt)}" />
+          <figcaption>${escapeHtml(article.imageCaption ?? article.title)}</figcaption>
+        </figure>`
+      : '';
+    const resources = article.resources?.length
+      ? articleResourcesStaticHtml(article.resources)
+      : '';
     const investmentSections = investmentMemo
       ? `<h2>Valuation Frame</h2>
         <p>${escapeHtml(article.formulaLabel)}: ${escapeHtml(article.formula)}</p>
@@ -844,6 +871,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       article.title,
       article.subtitle,
       `${articleSearchBriefStaticHtml(route.path)}
+        ${articleImage}
         <h2>Memo Details</h2>
         <p>Category: ${escapeHtml(article.category)}. Author: ${escapeHtml(article.author)}. Published: ${escapeHtml(article.date)}. Read time: ${escapeHtml(article.readTime)}. Source count: ${String(article.sources.length)}.</p>
         ${boundary ? `<h2>${investmentMemo ? 'Recommendation Boundary' : 'Evidence Boundary'}</h2><p>${escapeHtml(boundary)}</p>` : ''}
@@ -853,6 +881,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${paragraphList(article.content)}
         ${structuredSections}
         ${investmentSections}
+        ${resources}
         ${sourceLinks.length ? `<h2>${structuredSections ? 'Source Ledger' : 'Research Sources'}</h2>${linkList(sourceLinks)}` : ''}
         <h2>Internal Links</h2>
         ${linkList([

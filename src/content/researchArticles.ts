@@ -7,12 +7,15 @@ import {
   AI_MANAGERS_ARTICLE_SLUG,
   AI_MANAGERS_ARTICLE_TITLE,
 } from './aiManagersArticle';
+import { WAYMO_HARDWARE_FINANCING_ARTICLE } from './waymoHardwareFinancingArticle';
 
 export const RESEARCH_ARTICLES: ResearchArticle[] = [
+  WAYMO_HARDWARE_FINANCING_ARTICLE,
   {
     kind: 'research',
     cluster: 'ai-systems',
     slug: AI_MANAGERS_ARTICLE_SLUG,
+    aliases: ['/markets/the-first-ai-managers'],
     number: '04',
     category: 'AI SYSTEMS',
     title: AI_MANAGERS_ARTICLE_TITLE,
@@ -49,6 +52,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     kind: 'research',
     cluster: 'ai-crawlers',
     slug: 'ai-search-crawler-policy',
+    aliases: ['/markets/ai-search-crawler-policy'],
     number: '01',
     category: 'CRAWLER POLICY',
     title: 'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot',
@@ -232,6 +236,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     kind: 'research',
     cluster: 'search-console',
     slug: 'technical-seo-public-data-infrastructure',
+    aliases: ['/markets/technical-seo-public-data-infrastructure'],
     number: '02',
     category: 'DATA INFRASTRUCTURE',
     title: 'Technical SEO as Public Data Infrastructure',
@@ -366,6 +371,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     kind: 'research',
     cluster: 'personal-seo',
     slug: 'canonical-identity-personal-seo',
+    aliases: ['/markets/canonical-identity-personal-seo'],
     number: '03',
     category: 'ENTITY CONSISTENCY',
     title: 'Canonical Identity Beats More Content',

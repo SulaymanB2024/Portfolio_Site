@@ -18,6 +18,7 @@ const routeFiles = [
   ['/atlas/sample-crawl', 'dist/atlas/sample-crawl/index.html'],
   ['/research', 'dist/research/index.html'],
   ['/research/ai-systems/the-first-ai-managers', 'dist/research/ai-systems/the-first-ai-managers/index.html'],
+  ['/research/financial-systems/waymo-hardware-financing', 'dist/research/financial-systems/waymo-hardware-financing/index.html'],
   ['/method', 'dist/method/index.html'],
   ['/austin-technical-seo', 'dist/austin-technical-seo/index.html'],
   ['/contact', 'dist/contact/index.html'],
@@ -77,8 +78,9 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('18 Notes and Artifacts'), 'research: publication count is not derived as eighteen');
+assert(textFromHtml(research).includes('19 Notes and Artifacts'), 'research: publication count is not derived as nineteen');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
+assert(textFromHtml(research).includes('The Hidden Financing Behind Hardware Startups'), 'research: Waymo financing article missing');
 
 const aiManagers = read('dist/research/ai-systems/the-first-ai-managers/index.html');
 assert(textFromHtml(aiManagers).includes('Source ledger'), 'AI managers: source ledger missing');
@@ -86,6 +88,27 @@ assert([...aiManagers.matchAll(/<li id="source-s\d+">/g)].length === 18, 'AI man
 assert(aiManagers.includes('<section id="field-map" aria-labelledby="field-map-title">'), 'AI managers: field map section anchor missing');
 assert(aiManagers.includes('href="#field-map"'), 'AI managers: source ledger does not link to the field map');
 assert(!textFromHtml(aiManagers).includes('72 source'), 'AI managers: unpublished 72-source claim remains');
+
+const waymo = read('dist/research/financial-systems/waymo-hardware-financing/index.html');
+for (const expected of [
+  'The Hidden Financing Behind Hardware Startups',
+  '$27.1B–$27.35B',
+  'Counterfactual fleet-debt coverage',
+  'Which structures actually scale',
+  'Hardware financing model',
+]) {
+  assert(textFromHtml(waymo).includes(expected), `Waymo financing: missing ${expected}`);
+}
+for (const href of [
+  '/research/waymo-hardware-financing-report.pdf',
+  '/research/waymo-hardware-financing-report.docx',
+  '/research/waymo-hardware-financing-model.xlsx',
+  '/images/research/waymo-capital-stack.png',
+  '/images/research/waymo-downside-waterfall.png',
+]) {
+  assert(waymo.includes(`href="${href}"`) || waymo.includes(`src="${href}"`), `Waymo financing: missing artifact ${href}`);
+  assert(fs.existsSync(path.resolve(`public${href}`)), `Waymo financing: missing public file ${href}`);
+}
 
 const toll = read('dist/markets/who-owns-texas-toll-roads/index.html');
 assert(/<sup class="article-citation"><a href="#source-s1"/.test(toll), 'toll roads: citation markers are not linked superscripts');
