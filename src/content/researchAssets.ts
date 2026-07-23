@@ -76,6 +76,21 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
+    name: 'How Airlines Borrow Against Loyalty Programs',
+    href: '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
+    type: 'long_form_research',
+    preferredAnchor: 'how airlines borrow against loyalty programs',
+    audiences: ['airline finance', 'loyalty programs', 'structured finance', 'credit analysis'],
+    pitchAngle:
+      'A transaction-level investigation separating card-settlement cash, co-brand consideration, deferred revenue, award fulfillment, and lender-controlled collections.',
+    supportingAssets: [
+      { label: 'Full airline loyalty financing investigation', href: '/research/airline-loyalty-financing-report.pdf' },
+      { label: 'Editable airline loyalty financing investigation', href: '/research/airline-loyalty-financing-report.docx' },
+      { label: 'Loyalty-backed financing diagram', href: '/images/research/airline-loyalty-backed-financing.png' },
+    ],
+  },
+  {
+    priority: 1,
     name: 'Where Do Online Returns Go? Reverse Logistics Model',
     href: '/research/financial-systems/where-online-returns-actually-go',
     type: 'long_form_research',

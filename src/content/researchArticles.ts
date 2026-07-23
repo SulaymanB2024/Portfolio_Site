@@ -7,11 +7,13 @@ import {
   AI_MANAGERS_ARTICLE_SLUG,
   AI_MANAGERS_ARTICLE_TITLE,
 } from './aiManagersArticle';
+import { AIRLINE_LOYALTY_FINANCING_ARTICLE } from './airlineLoyaltyFinancingArticle';
 import { HIDDEN_FINANCING_HARDWARE_ARTICLE } from './hiddenFinancingHardwareArticle';
 import { ONLINE_RETURNS_INVESTIGATION_ARTICLE } from './onlineReturnsInvestigationArticle';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE } from './waymoHardwareFinancingArticle';
 
 export const RESEARCH_ARTICLES: ResearchArticle[] = [
+  AIRLINE_LOYALTY_FINANCING_ARTICLE,
   ONLINE_RETURNS_INVESTIGATION_ARTICLE,
   HIDDEN_FINANCING_HARDWARE_ARTICLE,
   WAYMO_HARDWARE_FINANCING_ARTICLE,

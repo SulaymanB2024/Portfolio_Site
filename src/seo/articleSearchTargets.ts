@@ -105,6 +105,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/ai-crawlers/ai-search-crawler-policy',
       '/markets/who-owns-texas-toll-roads',
       '/research/financial-systems/where-online-returns-actually-go',
+      '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
     ],
@@ -150,10 +151,39 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page studies reverse logistics and the return tax on consumer products; the hardware-financing pages study capital stacks, asset claims, and residual-value risk before a product is returned.',
     relatedPaths: [
+      '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
       '/markets/who-owns-texas-toll-roads',
       '/research/data-systems/audit-findings-derived-records',
+    ],
+  },
+  {
+    path: '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
+    primaryQuery: 'how airlines borrow against loyalty programs',
+    supportingQueries: [
+      'airline loyalty program financing',
+      'airline loyalty-backed debt',
+      'how do airlines make money from loyalty programs',
+      'are airline miles a liability',
+      'are airline loyalty programs worth more than airlines',
+      'airline loyalty program securitization',
+    ],
+    intent: 'definition',
+    cohort: 1,
+    directAnswer:
+      'How airlines borrow against loyalty programs: the card issuer pays cash under a commercial agreement; the airline records some consideration as current revenue and some as a contract liability; the member claims an award later; and a separate financing structure can give lenders first claim on designated partner and intercompany collections.',
+    serpGap:
+      'Separate consumer card spending, issuer partner payments, deferred-revenue accounting, award fulfillment, operating float, and the lender-controlled cash waterfall instead of calling airline miles deposits or treating every partner payment as debt.',
+    originalArtifact:
+      'A 22-page source-led investigation, nine full-resolution exhibits, a point-level cash model, and a lender-waterfall reconstruction.',
+    cannibalizationBoundary:
+      'This page explains loyalty-program cash, accounting, and secured financing; the hardware-financing articles compare physical-asset capital stacks, while the Texas toll-road article covers public and concession infrastructure claims.',
+    relatedPaths: [
+      '/research/financial-systems/hidden-financing-hardware-startups',
+      '/research/financial-systems/where-online-returns-actually-go',
+      '/markets/who-owns-texas-toll-roads',
+      '/research/financial-systems/waymo-hardware-financing',
     ],
   },
   {
@@ -177,6 +207,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.',
     relatedPaths: [
+      '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/where-online-returns-actually-go',
       '/research/financial-systems/waymo-hardware-financing',
       '/markets/who-owns-texas-toll-roads',
@@ -199,6 +230,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page is the Waymo-specific deep dive; the five-company hardware-financing article compares parent funding with equipment finance, SPVs, customer capital, public support, and project debt.',
     relatedPaths: [
+      '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/where-online-returns-actually-go',
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/markets/who-owns-texas-toll-roads',

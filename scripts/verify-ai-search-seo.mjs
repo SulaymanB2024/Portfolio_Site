@@ -18,6 +18,7 @@ const routeFiles = [
   ['/atlas/sample-crawl', 'dist/atlas/sample-crawl/index.html'],
   ['/research', 'dist/research/index.html'],
   ['/research/ai-systems/the-first-ai-managers', 'dist/research/ai-systems/the-first-ai-managers/index.html'],
+  ['/research/financial-systems/how-airlines-borrow-against-loyalty-programs', 'dist/research/financial-systems/how-airlines-borrow-against-loyalty-programs/index.html'],
   ['/research/financial-systems/where-online-returns-actually-go', 'dist/research/financial-systems/where-online-returns-actually-go/index.html'],
   ['/research/financial-systems/hidden-financing-hardware-startups', 'dist/research/financial-systems/hidden-financing-hardware-startups/index.html'],
   ['/research/financial-systems/waymo-hardware-financing', 'dist/research/financial-systems/waymo-hardware-financing/index.html'],
@@ -80,9 +81,10 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('21 Notes and Artifacts'), 'research: publication count is not derived as twenty-one');
+assert(textFromHtml(research).includes('22 Notes and Artifacts'), 'research: publication count is not derived as twenty-two');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
 assert(textFromHtml(research).includes('The Hidden Financing Behind Hardware Startups'), 'research: Waymo financing article missing');
+assert(textFromHtml(research).includes('How Airlines Borrow Against Loyalty Programs'), 'research: airline loyalty financing article missing');
 
 const aiManagers = read('dist/research/ai-systems/the-first-ai-managers/index.html');
 assert(textFromHtml(aiManagers).includes('Source ledger'), 'AI managers: source ledger missing');
@@ -118,6 +120,35 @@ for (const href of [
 ]) {
   assert(onlineReturns.includes(`href="${href}"`) || onlineReturns.includes(`src="${href}"`), `Online returns: missing artifact ${href}`);
   assert(fs.existsSync(path.resolve(`public${href}`)), `Online returns: missing public file ${href}`);
+}
+
+const airlineLoyalty = read('dist/research/financial-systems/how-airlines-borrow-against-loyalty-programs/index.html');
+for (const expected of [
+  'How Airlines Borrow Against Loyalty Programs',
+  'One airline point starts four financial clocks',
+  'Partner cash is not the same thing as loyalty revenue',
+  'Airline loyalty-backed debt redirects the cash waterfall',
+  'American kept the channel; United repaid it',
+  'Airline loyalty program financing questions, answered',
+  'Methodology, labels, and evidence limits',
+]) {
+  assert(textFromHtml(airlineLoyalty).includes(expected), `Airline loyalty financing: missing ${expected}`);
+}
+for (const href of [
+  '/research/airline-loyalty-financing-report.pdf',
+  '/research/airline-loyalty-financing-report.docx',
+  '/images/research/airline-loyalty-parties-money.png',
+  '/images/research/airline-loyalty-cash-conversion-cycle.png',
+  '/images/research/airline-loyalty-cash-not-revenue.png',
+  '/images/research/airline-loyalty-balance-sheets.png',
+  '/images/research/airline-loyalty-point-values.png',
+  '/images/research/airline-loyalty-backed-financing.png',
+  '/images/research/airline-loyalty-program-value.png',
+  '/images/research/airline-loyalty-partner-stress.png',
+  '/images/research/airline-loyalty-profit-bridge.png',
+]) {
+  assert(airlineLoyalty.includes(`href="${href}"`) || airlineLoyalty.includes(`src="${href}"`), `Airline loyalty financing: missing artifact ${href}`);
+  assert(fs.existsSync(path.resolve(`public${href}`)), `Airline loyalty financing: missing public file ${href}`);
 }
 
 const hiddenFinancing = read('dist/research/financial-systems/hidden-financing-hardware-startups/index.html');

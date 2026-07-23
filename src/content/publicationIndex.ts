@@ -1,4 +1,5 @@
 import { AI_MANAGERS_ARTICLE_PATH } from './aiManagersArticle';
+import { AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG } from './airlineLoyaltyFinancingArticle';
 import type { ResearchArticle } from './articleModels';
 import { getArticlePath, getArticleBySlug } from './articleRegistry';
 import { HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG } from './hiddenFinancingHardwareArticle';
@@ -26,6 +27,7 @@ const crawlerPolicy = article('ai-search-crawler-policy');
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
+const airlineLoyaltyFinancing = article(AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG);
 const onlineReturnsInvestigation = article(ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG);
 const hiddenFinancingHardware = article(HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG);
 const waymoHardwareFinancing = article(WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG);
@@ -84,11 +86,18 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
   },
   {
     category: 'Markets and investing',
+    title: airlineLoyaltyFinancing.title,
+    href: getArticlePath(airlineLoyaltyFinancing),
+    description: airlineLoyaltyFinancing.subtitle,
+    date: airlineLoyaltyFinancing.dateModified ?? airlineLoyaltyFinancing.date,
+    featured: true,
+  },
+  {
+    category: 'Markets and investing',
     title: onlineReturnsInvestigation.title,
     href: getArticlePath(onlineReturnsInvestigation),
     description: onlineReturnsInvestigation.subtitle,
     date: onlineReturnsInvestigation.dateModified ?? onlineReturnsInvestigation.date,
-    featured: true,
   },
   {
     category: 'Markets and investing',

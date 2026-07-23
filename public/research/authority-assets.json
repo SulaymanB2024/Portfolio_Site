@@ -103,8 +103,22 @@
       "pitch_angle": "Answer the cross-retailer question with product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing one retailer or one universal returns process.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "How Airlines Borrow Against Loyalty Programs",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "How Airlines Borrow Against Loyalty Programs",
+      "pitch_angle": "Separate consumer card spending, issuer partner payments, deferred-revenue accounting, award fulfillment, operating float, and the lender-controlled cash waterfall instead of calling airline miles deposits or treating every partner payment as debt.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
-        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go"
       ]
     },
     {
@@ -117,8 +131,8 @@
       "pitch_angle": "Replace generic funding-option lists with five real company capital stacks organized by asset owner, payment source, recourse, utilization exposure, and loss allocation.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
-        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
-        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go"
       ]
     },
     {
@@ -131,8 +145,8 @@
       "pitch_angle": "Separate fundraising from physical-asset financing, legal ownership, residual value, utilization risk, and the party that absorbs losses.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
-        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
-        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go"
       ]
     },
     {

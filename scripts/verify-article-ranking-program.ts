@@ -60,11 +60,12 @@ const expectedPaths = [
 const targetPaths = ARTICLE_SEARCH_TARGETS.map((target) => target.path).sort();
 const targetPathSet = new Set<string>(targetPaths);
 const priorityQueryPaths = new Set([
+  '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
   '/research/financial-systems/where-online-returns-actually-go',
   '/research/financial-systems/hidden-financing-hardware-startups',
 ]);
 
-assert(expectedPaths.length === 19, `expected 19 indexable article routes, found ${expectedPaths.length}`);
+assert(expectedPaths.length === 20, `expected 20 indexable article routes, found ${expectedPaths.length}`);
 assert(
   expectedPaths.join('\n') === targetPaths.join('\n'),
   `article target registry does not match indexable routes:\nexpected ${expectedPaths.join(', ')}\nreceived ${targetPaths.join(', ')}`,

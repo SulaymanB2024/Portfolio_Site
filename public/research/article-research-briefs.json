@@ -86,6 +86,7 @@
         "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
         "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
@@ -128,10 +129,36 @@
       "original_artifact": "A 36-sheet reverse-logistics model, nine product archetypes, route and condition engines, auction analysis, decision diagrams, and a 49-page source-led investigation.",
       "scope_boundary": "This page studies reverse logistics and the return tax on consumer products; the hardware-financing pages study capital stacks, asset claims, and residual-value risk before a product is returned.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "last_verified": "2026-07-20"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+      "question": "how airlines borrow against loyalty programs",
+      "supporting_questions": [
+        "airline loyalty program financing",
+        "airline loyalty-backed debt",
+        "how do airlines make money from loyalty programs",
+        "are airline miles a liability",
+        "are airline loyalty programs worth more than airlines",
+        "airline loyalty program securitization"
+      ],
+      "intent": "definition",
+      "cohort": 1,
+      "direct_answer": "How airlines borrow against loyalty programs: the card issuer pays cash under a commercial agreement; the airline records some consideration as current revenue and some as a contract liability; the member claims an award later; and a separate financing structure can give lenders first claim on designated partner and intercompany collections.",
+      "evidence_gap": "Separate consumer card spending, issuer partner payments, deferred-revenue accounting, award fulfillment, operating float, and the lender-controlled cash waterfall instead of calling airline miles deposits or treating every partner payment as debt.",
+      "original_artifact": "A 22-page source-led investigation, nine full-resolution exhibits, a point-level cash model, and a lender-waterfall reconstruction.",
+      "scope_boundary": "This page explains loyalty-program cash, accounting, and secured financing; the hardware-financing articles compare physical-asset capital stacks, while the Texas toll-road article covers public and concession infrastructure claims.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
       "last_verified": "2026-07-20"
     },
@@ -152,6 +179,7 @@
       "original_artifact": "A 29-sheet comparative model, five full-resolution capital-stack diagrams, a 19-page report, cross-case scenario tables, and an explicit evidence hierarchy.",
       "scope_boundary": "This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
@@ -174,6 +202,7 @@
       "original_artifact": "A 21-sheet financing model, capital-stack diagram, downside waterfall, scenario tables, and instrument-by-instrument evidence map.",
       "scope_boundary": "This page is the Waymo-specific deep dive; the five-company hardware-financing article compares parent funding with equipment finance, SPVs, customer capital, public support, and project debt.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
