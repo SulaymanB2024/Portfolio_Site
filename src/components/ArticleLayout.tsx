@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 import { InternalFooter } from './InternalFooter';
 import { InternalHeader } from './InternalHeader';
@@ -12,7 +12,7 @@ import {
   TechnicalPanel,
 } from './design/Primitives';
 
-export type ArticleReaderVariant = 'wide' | 'research' | 'chapters';
+export type ArticleReadingMode = 'reference' | 'narrative';
 
 export type ArticleNavItem = {
   id: string;
@@ -21,23 +21,108 @@ export type ArticleNavItem = {
   summary?: string;
 };
 
-export type ArticleMetaItem = {
+type ArticleMetaItem = {
   label: string;
   value: ReactNode;
 };
 
 export type ArticleImagePlaceholderVariant = 'default' | 'pipeline' | 'identity' | 'triptych';
 
+export type ArticlePublicationMeta = {
+  subject: ReactNode;
+  published: {
+    dateTime: string;
+    value: ReactNode;
+  };
+  updated: {
+    dateTime: string;
+    value: ReactNode;
+  };
+  readTime: ReactNode;
+  evidence: ReactNode;
+};
+
+export type ArticleReaderConfig = {
+  activePath: string;
+  mode: ArticleReadingMode;
+  className?: string;
+  archive: {
+    href: string;
+    label: string;
+  };
+  hero: {
+    eyebrow: ReactNode;
+    title: ReactNode;
+    deck: ReactNode;
+    displayTitle?: ReactNode;
+    image?: {
+      src: string;
+      alt: string;
+      label?: ReactNode;
+      caption?: ReactNode;
+      presentation?: 'editorial' | 'diagram';
+      objectPosition?: string;
+    };
+    imagePlaceholder?: {
+      label?: ReactNode;
+      note?: ReactNode;
+      variant?: ArticleImagePlaceholderVariant;
+    };
+  };
+  publication: ArticlePublicationMeta;
+  metrics?: Array<{ label: string; value: ReactNode; note?: ReactNode }>;
+  callouts?: Array<{
+    label: ReactNode;
+    title: ReactNode;
+    content: ReactNode;
+  }>;
+  navigation: {
+    items: ArticleNavItem[];
+    contentsLabel?: string;
+  };
+  boundary?: {
+    label: ReactNode;
+    content: ReactNode;
+  };
+  endnote?: {
+    content: ReactNode;
+    links: Array<{ href: string; label: string }>;
+  };
+};
+
+export type ArticleNavigationSeed = Omit<ArticleNavItem, 'index'> & {
+  kind: 'overview' | 'section' | 'faq' | 'source';
+};
+
+export function createArticleNavigation(seeds: ArticleNavigationSeed[]): ArticleNavItem[] {
+  let sectionIndex = 0;
+
+  return seeds.map((seed) => {
+    const { kind, ...item } = seed;
+
+    if (kind === 'overview') return { ...item, index: '00' };
+    if (kind === 'faq') return { ...item, index: 'FAQ' };
+    if (kind === 'source') return { ...item, index: 'S' };
+
+    sectionIndex += 1;
+    return { ...item, index: String(sectionIndex).padStart(2, '0') };
+  });
+}
+
+export function getArticleNavigationIndex(items: ArticleNavItem[], id: string) {
+  return items.find((item) => item.id === id)?.index ?? '—';
+}
+
 type ArticlePageProps = {
   activePath: string;
-  variant: ArticleReaderVariant;
+  mode: ArticleReadingMode;
   children: ReactNode;
   className?: string;
 };
 
-export function ArticlePage({
+function ArticlePage({
   activePath,
-  variant,
+  mode,
   children,
   className = '',
 }: ArticlePageProps) {
@@ -45,7 +130,7 @@ export function ArticlePage({
     <PageShell
       id="top"
       tone="light"
-      className={`article-reader article-reader--${variant} ${className}`}
+      className={`article-reader article-reader--${mode} ${className}`}
     >
       <ScrollProgress />
       <InternalHeader activePath={activePath} tone="light" minimalBrand />
@@ -81,7 +166,7 @@ type ArticleHeroProps = {
   children?: ReactNode;
 };
 
-export function ArticleHero({
+function ArticleHero({
   backHref,
   backLabel,
   eyebrow,
@@ -243,7 +328,7 @@ function ArticleImagePlaceholder({
   );
 }
 
-export function ArticleMetricStrip({
+function ArticleMetricStrip({
   items,
 }: {
   items: Array<{ label: string; value: ReactNode; note?: ReactNode }>;
@@ -263,7 +348,7 @@ export function ArticleMetricStrip({
   );
 }
 
-export function ArticleCallout({
+function ArticleCallout({
   label,
   title,
   children,
@@ -282,6 +367,75 @@ export function ArticleCallout({
         </div>
       </section>
     </PageFrame>
+  );
+}
+
+function publicationItems(publication: ArticlePublicationMeta): ArticleMetaItem[] {
+  return [
+    { label: 'Subject', value: publication.subject },
+    {
+      label: 'Published',
+      value: <time dateTime={publication.published.dateTime}>{publication.published.value}</time>,
+    },
+    {
+      label: 'Updated',
+      value: <time dateTime={publication.updated.dateTime}>{publication.updated.value}</time>,
+    },
+    { label: 'Read time', value: publication.readTime },
+    { label: 'Evidence', value: publication.evidence },
+  ];
+}
+
+export function ArticleReader({
+  config,
+  children,
+}: {
+  config: ArticleReaderConfig;
+  children: ReactNode;
+}) {
+  return (
+    <ArticlePage
+      activePath={config.activePath}
+      mode={config.mode}
+      className={config.className}
+    >
+      <ArticleHero
+        backHref={config.archive.href}
+        backLabel={config.archive.label}
+        eyebrow={config.hero.eyebrow}
+        title={config.hero.title}
+        deck={config.hero.deck}
+        displayTitle={config.hero.displayTitle}
+        image={config.hero.image}
+        imagePlaceholder={config.hero.imagePlaceholder}
+        metadata={publicationItems(config.publication)}
+      />
+
+      {config.metrics?.length ? <ArticleMetricStrip items={config.metrics} /> : null}
+
+      {config.callouts?.map((callout, index) => (
+        <Fragment key={`${String(callout.label)}-${index}`}>
+          <ArticleCallout label={callout.label} title={callout.title}>
+            {callout.content}
+          </ArticleCallout>
+        </Fragment>
+      ))}
+
+      <ArticleBody
+        items={config.navigation.items}
+        boundary={config.boundary?.content}
+        boundaryLabel={config.boundary?.label}
+        mode={config.mode}
+        contentsLabel={config.navigation.contentsLabel}
+      >
+        {children}
+        {config.endnote ? (
+          <ArticleEndnote links={config.endnote.links}>
+            {config.endnote.content}
+          </ArticleEndnote>
+        ) : null}
+      </ArticleBody>
+    </ArticlePage>
   );
 }
 
@@ -356,7 +510,7 @@ function ArticleUtilities() {
   );
 }
 
-export function ArticleOverviewBand({
+function ArticleOverviewBand({
   items,
   activeId,
 }: {
@@ -393,17 +547,17 @@ type ArticleBodyProps = {
   boundary?: ReactNode;
   boundaryLabel?: ReactNode;
   children: ReactNode;
-  variant: ArticleReaderVariant;
+  mode: ArticleReadingMode;
   contentsLabel?: string;
 };
 
-export function ArticleBody({
+function ArticleBody({
   items,
   boundary,
   boundaryLabel = 'Boundary',
   children,
-  variant,
-  contentsLabel = variant === 'chapters' ? 'Chapters' : 'Contents',
+  mode,
+  contentsLabel = mode === 'narrative' ? 'Chapters' : 'Contents',
 }: ArticleBodyProps) {
   const activeId = useActiveSection(items);
   const activeIndex = Math.max(0, items.findIndex((item) => item.id === activeId));
@@ -439,7 +593,7 @@ export function ArticleBody({
         </nav>
       </details>
 
-      {variant === 'chapters' ? (
+      {mode === 'narrative' ? (
         <div className="article-reader__mobile-progress" aria-hidden="true">
           <span style={{ width: `${progress}%` }} />
         </div>
@@ -450,11 +604,11 @@ export function ArticleBody({
           <div className="article-reader__rail-sticky">
             <div className="article-reader__rail-heading">
               <SectionEyebrow>{contentsLabel}</SectionEyebrow>
-              {variant === 'chapters' ? (
+              {mode === 'narrative' ? (
                 <span>{String(Math.round(progress)).padStart(2, '0')}%</span>
               ) : null}
             </div>
-            {variant === 'chapters' ? (
+            {mode === 'narrative' ? (
               <div className="article-reader__rail-progress" aria-hidden="true">
                 <span style={{ width: `${progress}%` }} />
               </div>
@@ -486,7 +640,7 @@ export function ArticleBody({
 
         <ReaderPanel className="article-reader__content">
           {children}
-          {variant === 'chapters' && items.length ? (
+          {mode === 'narrative' && items.length ? (
             <nav className="article-reader__chapter-nav" aria-label="Chapter navigation">
               {activeIndex > 0 ? (
                 <a href={`#${items[activeIndex - 1].id}`}>
@@ -523,7 +677,7 @@ export function ArticleSectionHeader({
   );
 }
 
-export function ArticleEndnote({
+function ArticleEndnote({
   children,
   links,
 }: {

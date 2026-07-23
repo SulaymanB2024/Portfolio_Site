@@ -1,14 +1,12 @@
 import { Fragment, useEffect, useMemo } from 'react';
 
 import {
-  ArticleBody,
-  ArticleCallout,
-  ArticleEndnote,
-  ArticleHero,
-  ArticleMetricStrip,
-  ArticlePage,
+  ArticleReader,
   ArticleSectionHeader,
+  createArticleNavigation,
+  getArticleNavigationIndex,
   type ArticleNavItem,
+  type ArticleReaderConfig,
 } from '../components/ArticleLayout';
 import {
   TEXAS_TOLL_ARTICLE_DATE,
@@ -24,7 +22,6 @@ import {
   TEXAS_TOLL_ARTICLE_TABLES,
   TEXAS_TOLL_ARTICLE_TITLE,
   TEXAS_TOLL_ARTICLE_UPDATED,
-  TEXAS_TOLL_ARTICLE_WORD_COUNT,
   type TexasTollArticleTable,
 } from '../content/texasTollRoadArticle';
 import { getSeoRoute } from '../seo/routes';
@@ -404,10 +401,16 @@ function SectionVisual({ sectionId, position }: { sectionId: string; position: '
   return null;
 }
 
-function ArticleSection({ section }: { section: (typeof TEXAS_TOLL_ARTICLE_SECTIONS)[number] }) {
+function ArticleSection({
+  section,
+  index,
+}: {
+  section: (typeof TEXAS_TOLL_ARTICLE_SECTIONS)[number];
+  index: string;
+}) {
   return (
     <section id={section.id}>
-      <ArticleSectionHeader index={section.title.match(/^[IVX]+/)?.[0] ?? '→'}>
+      <ArticleSectionHeader index={index}>
         {section.title.replace(/^[IVX]+\.\s*/, '')}
       </ArticleSectionHeader>
       <SectionVisual sectionId={section.id} position="before" />
@@ -423,10 +426,10 @@ function ArticleSection({ section }: { section: (typeof TEXAS_TOLL_ARTICLE_SECTI
   );
 }
 
-function FactGapLedger() {
+function FactGapLedger({ index }: { index: string }) {
   return (
     <section id="what-remains-unknown">
-      <ArticleSectionHeader index="09">What remains unknown</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>What remains unknown</ArticleSectionHeader>
       <p className="toll-section-intro">
         The public record is unusually rich, but it does not expose every cap-table right, distribution waterfall, operating subcontract, or current SH 130 financial statement. Those gaps are measurement limits—not evidence that the missing fact favors either side of the investment case.
       </p>
@@ -442,10 +445,10 @@ function FactGapLedger() {
   );
 }
 
-function FrequentlyAskedQuestions() {
+function FrequentlyAskedQuestions({ index }: { index: string }) {
   return (
     <section id="frequently-asked-questions">
-      <ArticleSectionHeader index="FAQ">Texas toll-road ownership, answered directly</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>Texas toll-road ownership, answered directly</ArticleSectionHeader>
       <div className="toll-faq-list">
         {TEXAS_TOLL_ARTICLE_FAQS.map((faq, index) => (
           <details key={faq.question} open={index === 0}>
@@ -458,10 +461,10 @@ function FrequentlyAskedQuestions() {
   );
 }
 
-function SourceLedger() {
+function SourceLedger({ index }: { index: string }) {
   return (
     <section id="source-ledger" className="toll-source-ledger">
-      <ArticleSectionHeader index="S">Source ledger</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>Source ledger</ArticleSectionHeader>
       <p className="toll-section-intro">
         Executed agreements, government records, audited statements, SEC-filed sponsor disclosures, and clearly labeled company or pension materials. Source dates and limitations are preserved in the text.
       </p>
@@ -527,78 +530,113 @@ export default function TexasTollRoadArticlePage() {
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
-  const railSections = TEXAS_TOLL_ARTICLE_SECTIONS.filter((section) => section.id !== 'closing');
-  const navItems: ArticleNavItem[] = [
-    { id: 'overview', label: 'Overview', index: '00' },
-    ...railSections.map((section, index) => ({
+  const navItems: ArticleNavItem[] = createArticleNavigation([
+    { kind: 'overview', id: 'overview', label: 'Overview' },
+    ...TEXAS_TOLL_ARTICLE_SECTIONS.map((section) => ({
+      kind: 'section' as const,
       id: section.id,
       label: section.title.replace(/^[IVX]+\.\s*/, ''),
-      index: String(index + 1).padStart(2, '0'),
     })),
-    { id: 'what-remains-unknown', label: 'What remains unknown', index: '09' },
-    { id: 'frequently-asked-questions', label: 'Direct answers', index: 'FAQ' },
-    { id: 'source-ledger', label: 'Source ledger', index: 'S' },
-  ];
-
-  return (
-    <ArticlePage activePath="/markets" variant="research" className="texas-toll-article">
-      <ArticleHero
-        backHref="/markets"
-        backLabel="Markets research"
-        eyebrow="Texas toll-road ownership / cash flow / risk"
-        title={TEXAS_TOLL_ARTICLE_TITLE}
-        displayTitle={TEXAS_TOLL_ARTICLE_DISPLAY_TITLE}
-        deck={TEXAS_TOLL_ARTICLE_DESCRIPTION}
-        image={{
-          src: '/images/research/texas-toll-roads-reader-hero.webp',
-          alt: 'Monochrome editorial artwork representing Texas toll-road infrastructure and layered ownership.',
-          label: 'Ownership map / 01',
-          caption: 'Public pavement, contractual rights, debt claims, and residual cash flow.',
-        }}
-        metadata={[
-          { label: 'Subject', value: 'Infrastructure ownership' },
-          { label: 'Published', value: <time dateTime={TEXAS_TOLL_ARTICLE_DATE.replaceAll('.', '-')}>July 11, 2026</time> },
-          { label: 'Updated', value: <time dateTime={TEXAS_TOLL_ARTICLE_UPDATED.replaceAll('.', '-')}>July 11, 2026</time> },
-          { label: 'Length', value: `${TEXAS_TOLL_ARTICLE_READ_TIME} / ${TEXAS_TOLL_ARTICLE_WORD_COUNT.toLocaleString()} words` },
-          { label: 'Method', value: 'Primary records, audited statements, sponsor filings, and a finite-life model.' },
-        ]}
-      />
-
-      <ArticleMetricStrip items={headlineMetrics.map((metric) => ({ label: metric.label, value: metric.value, note: metric.note }))} />
-
-      <ArticleCallout label="Short answer" title="Texas toll roads do not have one owner.">
+    {
+      kind: 'section',
+      id: 'what-remains-unknown',
+      label: 'What remains unknown',
+    },
+    {
+      kind: 'faq',
+      id: 'frequently-asked-questions',
+      label: 'Direct answers',
+    },
+    {
+      kind: 'source',
+      id: 'source-ledger',
+      label: 'Source ledger',
+    },
+  ]);
+  const config: ArticleReaderConfig = {
+    activePath: '/markets',
+    mode: 'reference',
+    className: 'texas-toll-article',
+    archive: {
+      href: '/markets',
+      label: 'Markets archive',
+    },
+    hero: {
+      eyebrow: 'Texas toll-road ownership / cash flow / risk',
+      title: TEXAS_TOLL_ARTICLE_TITLE,
+      displayTitle: TEXAS_TOLL_ARTICLE_DISPLAY_TITLE,
+      deck: TEXAS_TOLL_ARTICLE_DESCRIPTION,
+      image: {
+        src: '/images/research/texas-toll-roads-reader-hero.webp',
+        alt: 'Monochrome editorial artwork representing Texas toll-road infrastructure and layered ownership.',
+        label: 'Ownership map / 01',
+        caption: 'Public pavement, contractual rights, debt claims, and residual cash flow.',
+      },
+    },
+    publication: {
+      subject: 'Infrastructure ownership',
+      published: {
+        dateTime: TEXAS_TOLL_ARTICLE_DATE.replaceAll('.', '-'),
+        value: 'July 11, 2026',
+      },
+      updated: {
+        dateTime: TEXAS_TOLL_ARTICLE_UPDATED.replaceAll('.', '-'),
+        value: 'July 11, 2026',
+      },
+      readTime: TEXAS_TOLL_ARTICLE_READ_TIME,
+      evidence: `${TEXAS_TOLL_ARTICLE_SOURCES.length} sources`,
+    },
+    metrics: headlineMetrics.map((metric) => ({
+      label: metric.label,
+      value: metric.value,
+      note: metric.note,
+    })),
+    callouts: [{
+      label: 'Direct answer',
+      title: 'Texas toll roads do not have one owner.',
+      content: (
         <p>
           Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.
         </p>
-      </ArticleCallout>
+      ),
+    }],
+    navigation: { items: navItems },
+    boundary: {
+      label: 'Evidence boundary',
+      content: 'Educational infrastructure research. Not investment, legal, tax, or municipal-bond advice.',
+    },
+    endnote: {
+      content: 'Research cutoff: July 11, 2026. All dollar figures are nominal unless stated otherwise. Calculated figures are labeled in context.',
+      links: [
+        { href: '/markets', label: 'Markets archive' },
+        { href: '/research', label: 'Research archive' },
+        { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },
+        { href: '/about', label: 'About the author' },
+      ],
+    },
+  };
 
-      <ArticleBody
-        items={navItems}
-        variant="research"
-        boundary="Educational infrastructure research. Not investment, legal, tax, or municipal-bond advice."
-      >
+  return (
+    <ArticleReader config={config}>
         <section id="overview">
-          <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
+          <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'overview')}>
+            Overview
+          </ArticleSectionHeader>
           <ArticleMarkdown markdown={TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN} />
         </section>
         {TEXAS_TOLL_ARTICLE_SECTIONS.map((section) => (
-          <Fragment key={section.id}><ArticleSection section={section} /></Fragment>
+          <Fragment key={section.id}>
+            <ArticleSection
+              section={section}
+              index={getArticleNavigationIndex(navItems, section.id)}
+            />
+          </Fragment>
         ))}
-        <FactGapLedger />
-        <FrequentlyAskedQuestions />
-        <SourceLedger />
-
-        <ArticleEndnote
-          links={[
-            { href: '/markets', label: 'Markets research' },
-            { href: '/research', label: 'Research assets' },
-            { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },
-            { href: '/about', label: 'About the author' },
-          ]}
-        >
-          Research cutoff: July 11, 2026. All dollar figures are nominal unless stated otherwise. Calculated figures are labeled in context.
-        </ArticleEndnote>
-      </ArticleBody>
-    </ArticlePage>
+        <FactGapLedger index={getArticleNavigationIndex(navItems, 'what-remains-unknown')} />
+        <FrequentlyAskedQuestions
+          index={getArticleNavigationIndex(navItems, 'frequently-asked-questions')}
+        />
+        <SourceLedger index={getArticleNavigationIndex(navItems, 'source-ledger')} />
+    </ArticleReader>
   );
 }

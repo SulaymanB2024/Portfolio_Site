@@ -37,15 +37,6 @@
   object-fit: cover;
 }
 
-.viralbench-toll-article .toll-article-hero h1 {
-  max-width: 15ch !important;
-  font-size: clamp(3rem, 6.25vw, 7rem) !important;
-}
-
-.viralbench-toll-article .toll-article-hero__display-title {
-  max-width: 20ch;
-}
-
 .viralbench-toll-article .article-table-wrap {
   margin: 2.4rem 0;
   overflow-x: auto;
@@ -1795,10 +1786,6 @@ select:focus-visible {
   --ai-blue: #91a9b6;
   --ai-risk: #c2695e;
   --ai-amber: #cbb487;
-}
-
-.ai-managers-article .toll-article-hero h1 {
-  max-width: 10ch !important;
 }
 
 .ai-hall-of-shame,

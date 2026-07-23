@@ -849,10 +849,10 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     const structuredSections = article.sections
       ? articleSectionsStaticHtml(article.sections)
       : '';
-    const articleImage = article.imageAlt && article.image !== '/og-default.png'
+    const articleImage = article.artwork.kind === 'image'
       ? `<figure>
-          <img src="${escapeHtml(article.image)}" alt="${escapeHtml(article.imageAlt)}" />
-          <figcaption>${escapeHtml(article.imageCaption ?? article.title)}</figcaption>
+          <img src="${escapeHtml(article.artwork.heroSrc)}" alt="${escapeHtml(article.artwork.alt)}" />
+          <figcaption>${escapeHtml(article.artwork.caption)}</figcaption>
         </figure>`
       : '';
     const resources = article.resources?.length

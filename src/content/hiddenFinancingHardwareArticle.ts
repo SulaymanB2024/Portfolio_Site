@@ -17,13 +17,16 @@ export const HIDDEN_FINANCING_HARDWARE_ARTICLE: ResearchArticle = {
     'How hardware startup financing combines venture equity, equipment finance, asset-backed debt, leases, customer capital, public support, and project finance across five companies.',
   seoDescription:
     'Hardware startup financing compared across five capital stacks: equity, equipment finance, asset debt, customer capital, public support, and project debt.',
-  image: '/images/research/hidden-financing-coreweave-capital-stack.png',
-  imageAlt:
-    'CoreWeave capital-stack diagram showing corporate equity, secured asset financing, leases, customer prepayments, infrastructure assets, and the parties exposed to downside.',
-  imageLabel: 'Comparative investigation / five capital stacks',
-  imageCaption:
-    'CoreWeave makes the hidden stack visible: corporate capital sits beside secured asset finance, leases, and customer funding rather than replacing them.',
-  imagePresentation: 'diagram',
+  artwork: {
+    kind: 'image',
+    heroSrc: '/images/research/hidden-hardware-financing-reader-hero.webp',
+    socialSrc: '/images/research/hidden-hardware-financing-social.jpg',
+    alt: 'A monochrome hardware platform stacked above equity, secured finance, leases, logistics, and public-capital foundations.',
+    label: 'Comparative investigation / five capital stacks',
+    caption:
+      'The hidden stack is the operating system beneath the hardware: corporate capital sits beside secured asset finance, leases, customer funding, and public support rather than replacing them.',
+    objectPosition: '50% 48%',
+  },
   date: '2026.07.22',
   lastVerified: '2026.07.22',
   readTime: '28 MIN',

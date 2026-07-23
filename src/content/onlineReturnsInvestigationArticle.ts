@@ -17,13 +17,16 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
     'What happens to online returns after a refund: a product-level model of restocking, open-box resale, refurbishment, liquidation, recycling, destruction, and returnless refunds.',
   seoDescription:
     'Where do online returns go? Follow restocking, refurbishment, liquidation, recycling, or disposal with a nine-product reverse logistics model.',
-  image: '/images/research/online-returns-retrieval-decision.png',
-  imageAlt:
-    'Bar chart comparing the modeled retrieval value of nine online-return archetypes at retail prices of 20, 100, and 500 dollars.',
-  imageLabel: 'Reverse-logistics investigation / nine product archetypes',
-  imageCaption:
-    'Retail price does not determine whether retrieval works. Freight, condition, inspection cost, eligible resale channels, and value density do.',
-  imagePresentation: 'diagram',
+  artwork: {
+    kind: 'image',
+    heroSrc: '/images/research/online-returns-reader-hero.webp',
+    socialSrc: '/images/research/online-returns-social.jpg',
+    alt: 'A monochrome reverse-logistics machine routing a returned parcel toward restock, refurbishment, recovery, recycling, or disposal.',
+    label: 'Reverse-logistics investigation / nine product archetypes',
+    caption:
+      'Retail price does not determine whether retrieval works. Freight, condition, inspection cost, eligible resale channels, and value density do.',
+    objectPosition: '50% 50%',
+  },
   date: '2026.07.22',
   lastVerified: '2026.07.22',
   readTime: '26 MIN',
