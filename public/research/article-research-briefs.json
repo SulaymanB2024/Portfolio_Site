@@ -116,12 +116,15 @@
       "question": "where do online returns go",
       "supporting_questions": [
         "what happens to online returns",
-        "reverse logistics returns process"
+        "reverse logistics returns process",
+        "do online returns get resold",
+        "are online returns thrown away",
+        "why do retailers issue returnless refunds"
       ],
       "intent": "definition",
       "cohort": 1,
-      "direct_answer": "An online return can be restocked, sold open-box, refurbished, liquidated, donated, recycled, destroyed, or held as fraud evidence. The route depends on whether expected recovery after reverse freight, inspection, repair, fees, delay, and disposal exceeds the cost of retrieving the item.",
-      "evidence_gap": "Connect the physical return path to product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing a single universal returns process.",
+      "direct_answer": "Where do online returns go? An online return can be restocked, sold open-box, refurbished, liquidated, donated, recycled, destroyed, held as fraud evidence, or never retrieved. The route depends on whether expected recovery after reverse freight, inspection, repair, fees, delay, and disposal exceeds the cost of retrieving the item.",
+      "evidence_gap": "Answer the cross-retailer question with product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing one retailer or one universal returns process.",
       "original_artifact": "A 36-sheet reverse-logistics model, nine product archetypes, route and condition engines, auction analysis, decision diagrams, and a 49-page source-led investigation.",
       "scope_boundary": "This page studies reverse logistics and the return tax on consumer products; the hardware-financing pages study capital stacks, asset claims, and residual-value risk before a product is returned.",
       "related_articles": [
@@ -137,12 +140,15 @@
       "question": "hardware startup financing",
       "supporting_questions": [
         "hardware financing structures",
-        "asset financing for hardware startups"
+        "asset financing for hardware startups",
+        "how are hardware startups financed",
+        "hardware startup funding options",
+        "equipment financing for startups"
       ],
       "intent": "comparison",
       "cohort": 1,
       "direct_answer": "Hardware startup financing usually combines three layers: corporate equity or debt, asset-level debt or leases, and adjacent support such as customer prepayments, supplier terms, public incentives, or parent guarantees. The structure is only asset-light when fixed claims, recourse, and residual-value risk genuinely move away from the operator.",
-      "evidence_gap": "Compare real company capital stacks by asset owner, payment source, recourse, utilization exposure, and loss allocation instead of treating announced venture funding as the complete financing structure.",
+      "evidence_gap": "Replace generic funding-option lists with five real company capital stacks organized by asset owner, payment source, recourse, utilization exposure, and loss allocation.",
       "original_artifact": "A 29-sheet comparative model, five full-resolution capital-stack diagrams, a 19-page report, cross-case scenario tables, and an explicit evidence hierarchy.",
       "scope_boundary": "This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.",
       "related_articles": [

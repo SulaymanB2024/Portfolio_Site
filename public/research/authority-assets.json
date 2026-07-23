@@ -95,12 +95,12 @@
     },
     {
       "priority": 1,
-      "name": "Where Your Online Return Actually Goes",
+      "name": "Where Do Online Returns Go? Inside Reverse Logistics",
       "url": "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
       "type": "source_led_article",
       "cluster": "financial-systems",
-      "preferred_anchor": "Where Your Online Return Actually Goes",
-      "pitch_angle": "Connect the physical return path to product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing a single universal returns process.",
+      "preferred_anchor": "Where Do Online Returns Go? Inside Reverse Logistics",
+      "pitch_angle": "Answer the cross-retailer question with product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing one retailer or one universal returns process.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
@@ -109,12 +109,12 @@
     },
     {
       "priority": 1,
-      "name": "The Hidden Financing Behind Hardware Startups: Five Capital Stacks Compared",
+      "name": "Hardware Startup Financing: Five Capital Stacks",
       "url": "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
       "type": "source_led_article",
       "cluster": "financial-systems",
-      "preferred_anchor": "The Hidden Financing Behind Hardware Startups: Five Capital Stacks Compared",
-      "pitch_angle": "Compare real company capital stacks by asset owner, payment source, recourse, utilization exposure, and loss allocation instead of treating announced venture funding as the complete financing structure.",
+      "preferred_anchor": "Hardware Startup Financing: Five Capital Stacks",
+      "pitch_angle": "Replace generic funding-option lists with five real company capital stacks organized by asset owner, payment source, recourse, utilization exposure, and loss allocation.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",

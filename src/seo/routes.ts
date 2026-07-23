@@ -340,11 +340,12 @@ const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
   const investmentMemo = isInvestmentMemo(article);
   const searchTarget = getArticleSearchTarget(path);
   const articleImage = article.slug === TEXAS_TOLL_ARTICLE_SLUG ? TOLL_ROADS_OG_IMAGE : article.image === '/og-default.png' ? RESEARCH_OG_IMAGE : article.image;
+  const brandedTitle = `${article.seoTitle} | Sulayman Bowles`;
 
   return {
     path,
     aliases: getArticleAliases(article),
-    title: article.slug === TEXAS_TOLL_ARTICLE_SLUG || article.seoTitle.length > 60 ? article.seoTitle : `${article.seoTitle} | Sulayman Bowles`,
+    title: article.slug === TEXAS_TOLL_ARTICLE_SLUG || brandedTitle.length > 60 ? article.seoTitle : brandedTitle,
     description: article.seoDescription,
     h1: article.title,
     section: 'research-article',

@@ -93,11 +93,12 @@ assert(!textFromHtml(aiManagers).includes('72 source'), 'AI managers: unpublishe
 
 const onlineReturns = read('dist/research/financial-systems/where-online-returns-actually-go/index.html');
 for (const expected of [
-  'Where Your Online Return Actually Goes',
-  'The refund does not tell you where the product went',
-  'Nine products at three prices produce nine different routes',
+  'Where Do Online Returns Go? Inside Reverse Logistics',
+  'Where online returns go after the refund',
+  'Online return outcomes across nine products and three prices',
   'Liquidation recovery is not the consumer resale price',
   'Financial recovery does not establish the environmental endpoint',
+  'What happens to online returns? Five direct answers',
 ]) {
   assert(textFromHtml(onlineReturns).includes(expected), `Online returns: missing ${expected}`);
 }
@@ -121,10 +122,11 @@ for (const href of [
 
 const hiddenFinancing = read('dist/research/financial-systems/hidden-financing-hardware-startups/index.html');
 for (const expected of [
-  'Five Capital Stacks Compared',
-  'The venture round is only one of three capital stacks',
+  'Hardware Startup Financing: Five Capital Stacks',
+  'Hardware startup financing has three capital stacks',
   'CoreWeave FY2025 debt principal',
-  'Which structures actually scale?',
+  'Which hardware financing structures actually scale?',
+  'Hardware startup financing questions, answered',
   'Evidence hierarchy used throughout the report and model',
 ]) {
   assert(textFromHtml(hiddenFinancing).includes(expected), `Hidden financing: missing ${expected}`);

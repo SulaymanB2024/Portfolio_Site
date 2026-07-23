@@ -11,12 +11,12 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
   aliases: ['/markets/where-online-returns-actually-go'],
   number: '17',
   category: 'FINANCIAL SYSTEMS',
-  title: 'Where Your Online Return Actually Goes',
-  seoTitle: 'Where Online Returns Go: Reverse Logistics Economics',
+  title: 'Where Do Online Returns Go? Inside Reverse Logistics',
+  seoTitle: 'Where Do Online Returns Go? Reverse Logistics Model',
   subtitle:
-    'A product-level investigation of what survives after the refund: transportation, inspection, repair, liquidation, resale, fraud, ownership, and environmental disposition.',
+    'What happens to online returns after a refund: a product-level model of restocking, open-box resale, refurbishment, liquidation, recycling, destruction, and returnless refunds.',
   seoDescription:
-    'Follow an online return through reverse logistics, inspection, resale, liquidation, fraud controls, and disposal with a nine-product unit-economic model.',
+    'Where do online returns go? Follow restocking, refurbishment, liquidation, recycling, or disposal with a nine-product reverse logistics model.',
   image: '/images/research/online-returns-retrieval-decision.png',
   imageAlt:
     'Bar chart comparing the modeled retrieval value of nine online-return archetypes at retail prices of 20, 100, and 500 dollars.',
@@ -26,7 +26,7 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
   imagePresentation: 'diagram',
   date: '2026.07.22',
   lastVerified: '2026.07.22',
-  readTime: '24 MIN',
+  readTime: '26 MIN',
   author: 'SULAYMAN BOWLES',
   thesis:
     'A refund and a physical return are separate events. The value of retrieving the product depends on the cost of moving it, the cost of learning its condition, and the resale channels still legally and commercially available—not retail price alone.',
@@ -61,14 +61,14 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
     },
   ],
   content: [
-    'A $100 pair of headphones can be refunded before it reaches a return center. The product may then be consolidated, moved, opened, matched to a serial number, tested, cleaned, relisted, liquidated, recycled, or rejected. That sequence is not clerical overhead. It is a wager that the information gained from inspection will unlock a resale channel worth more than the cost of retrieval.',
+    'Where do online returns go after a refund? They can be restocked, sold open-box, refurbished, liquidated, donated, recycled, destroyed, held as fraud evidence, or never retrieved at all. A $100 pair of headphones may be refunded before it reaches a return center, then consolidated, moved, opened, matched to a serial number, tested, cleaned, and routed. That sequence is a wager that inspection will unlock a resale channel worth more than the cost of retrieval.',
     'In the supplied base model, those headphones carry $5.91 of weighted reverse freight and $4.00 of intake and inspection cost. Expected net disposition recovery is $33.37. Retrieval adds $22.56 after the separate fraud-administration allowance, yet the returned order still produces a $77.44 return tax relative to the kept sale. Recovery does not make the return profitable; it makes the loss smaller.',
     'The same price can produce the opposite decision. A $100 small appliance has only $3.77 of retrieval value after fraud administration because its package and testing costs are heavier. A $100 footwear return has $41.70 because it moves cheaply and can often enter a controlled restock or outlet channel. Price is one input. The route is the outcome of a chain.',
   ],
   sections: [
     {
       id: 'refund-versus-product',
-      title: 'The refund does not tell you where the product went',
+      title: 'Where online returns go after the refund',
       paragraphs: [
         'The consumer sees money move. The merchandise can remain still. Marketplace programs allow a seller or platform to settle a claim without creating a recoverable product asset: Walmart sellers can establish Keep It rules, Amazon supports returnless resolutions and liquidation programs, and marketplace refund policies can separate the customer payment from later physical disposition.',
         'The accounting makes that split visible. Amazon reports a return-allowance liability and a separate asset for rights to recover products from customers. Nike reports a sales-returns reserve separately from its inventory reserve. The refund obligation and the expected value of returned goods are related, but they are not the same balance or the same event.',
@@ -87,7 +87,7 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
     },
     {
       id: 'return-decision-engine',
-      title: 'The return decision engine is an expected-value calculation',
+      title: 'How the reverse logistics returns process chooses a route',
       paragraphs: [
         'The immediate retrieval rule is compact: expected disposition recovery must exceed reverse freight, inspection, and fraud-administration cost. The route engine then compares only legally and commercially eligible outcomes and selects the highest present-value net proceeds after cleaning, testing, storage, selling fees, secondary transport, disposal cost, and delay.',
         'Condition matters twice. It changes expected proceeds and changes which routes are available. An unopened item can support primary restock. A lightly used device may justify refurbishment. An opened cosmetic may retain physical material while losing commercial resale eligibility. A substituted laptop can have almost no legitimate recovery but high evidentiary value.',
@@ -107,7 +107,7 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
     },
     {
       id: 'return-center',
-      title: 'A return center manufactures information',
+      title: 'What happens to online returns at a return center',
       paragraphs: [
         'Consolidation can reduce transportation and per-unit receiving cost, but it also delays resale. Inspection is not one uniform task. Apparel may require tag, odor, wear, size, and season checks. Electronics add serial identity, activation, battery health, accessories, data risk, and function tests. Furniture adds structural condition, missing hardware, assembly state, and packaging damage. Beauty turns on seals and product integrity.',
         'The cost of learning can be worth more than the physical handling. The modeled $100 headphones support roughly 55 minutes of inspection at the assumed labor rate before retrieval turns negative. The $20 household item cannot support the two-minute base inspection under its weighted parcel route. Deeper inspection is rational when it opens a much stronger resale channel.',
@@ -127,7 +127,7 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
     },
     {
       id: 'nine-product-grid',
-      title: 'Nine products at three prices produce nine different routes',
+      title: 'Online return outcomes across nine products and three prices',
       paragraphs: [
         'The model holds retail price at $20, $100, or $500 and changes package geometry, condition mix, inspection, channel eligibility, fraud exposure, and resale recovery. The spread inside each price tier is the point. A low-value item can be worth retrieving through a store but not by parcel. A premium item can carry a large return tax and still support retrieval because enough value remains to recover.',
         'Return tax is kept-sale contribution minus post-return contribution. Under the required formula, landed product cost, original fulfillment, and original payment expense appear in both cases and cancel from the incremental dollar tax. They still determine the post-return loss and the percentage of kept-sale contribution consumed by the return.',
@@ -245,6 +245,39 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
           height: 1354,
         },
       ],
+    },
+    {
+      id: 'online-returns-questions',
+      title: 'What happens to online returns? Five direct answers',
+      paragraphs: [
+        'The shortest accurate answer is that there is no single destination. The reverse logistics returns process evaluates identity, condition, safety, freight, inspection cost, resale eligibility, delay, and expected recovery before the inventory owner chooses a route.',
+      ],
+      table: {
+        caption: 'Direct answers to common online-return questions',
+        columns: ['Question', 'Answer'],
+        rows: [
+          [
+            'Do online returns get resold?',
+            'Many do when identity, condition, safety, and channel rules permit restocking, open-box sale, refurbishment, or secondary-market resale. A refund alone does not prove that resale occurred.',
+          ],
+          [
+            'Are online returns thrown away?',
+            'Some are destroyed or disposed of when safety, contamination, recall, identity, damage, or recovery economics block reuse. Public evidence rarely supports one retailer-wide disposal percentage.',
+          ],
+          [
+            'Why do retailers issue returnless refunds?',
+            'A retailer may refund without retrieval when reverse freight, inspection, and handling cost more than expected recovery, or when safety and policy make the item ineligible for resale.',
+          ],
+          [
+            'What does a reverse logistics return center do?',
+            'It consolidates products, verifies identity, inspects condition, tests eligible items, records evidence, and routes inventory to restock, refurbishment, liquidation, donation, recycling, disposal, or an evidence hold.',
+          ],
+          [
+            'What determines where an online return goes?',
+            'The decision combines product ownership, condition probabilities, route eligibility, value density, freight, inspection, fees, fraud exposure, delay, and the present value of each recoverable channel.',
+          ],
+        ],
+      },
     },
     {
       id: 'method-and-limitations',

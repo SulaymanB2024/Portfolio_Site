@@ -76,10 +76,10 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
-    name: 'Where Your Online Return Actually Goes',
+    name: 'Where Do Online Returns Go? Reverse Logistics Model',
     href: '/research/financial-systems/where-online-returns-actually-go',
     type: 'long_form_research',
-    preferredAnchor: 'where online returns actually go',
+    preferredAnchor: 'where do online returns go',
     audiences: ['e-commerce', 'retail operations', 'reverse logistics', 'unit economics'],
     pitchAngle:
       'A product-level investigation of when a return is restocked, refurbished, liquidated, recycled, destroyed, or never retrieved—and why the same retail price can produce opposite decisions.',

@@ -132,13 +132,19 @@ export const ARTICLE_SEARCH_TARGETS = [
   {
     path: '/research/financial-systems/where-online-returns-actually-go',
     primaryQuery: 'where do online returns go',
-    supportingQueries: ['what happens to online returns', 'reverse logistics returns process'],
+    supportingQueries: [
+      'what happens to online returns',
+      'reverse logistics returns process',
+      'do online returns get resold',
+      'are online returns thrown away',
+      'why do retailers issue returnless refunds',
+    ],
     intent: 'definition',
     cohort: 1,
     directAnswer:
-      'An online return can be restocked, sold open-box, refurbished, liquidated, donated, recycled, destroyed, or held as fraud evidence. The route depends on whether expected recovery after reverse freight, inspection, repair, fees, delay, and disposal exceeds the cost of retrieving the item.',
+      'Where do online returns go? An online return can be restocked, sold open-box, refurbished, liquidated, donated, recycled, destroyed, held as fraud evidence, or never retrieved. The route depends on whether expected recovery after reverse freight, inspection, repair, fees, delay, and disposal exceeds the cost of retrieving the item.',
     serpGap:
-      'Connect the physical return path to product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing a single universal returns process.',
+      'Answer the cross-retailer question with product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing one retailer or one universal returns process.',
     originalArtifact:
       'A 36-sheet reverse-logistics model, nine product archetypes, route and condition engines, auction analysis, decision diagrams, and a 49-page source-led investigation.',
     cannibalizationBoundary:
@@ -153,13 +159,19 @@ export const ARTICLE_SEARCH_TARGETS = [
   {
     path: '/research/financial-systems/hidden-financing-hardware-startups',
     primaryQuery: 'hardware startup financing',
-    supportingQueries: ['hardware financing structures', 'asset financing for hardware startups'],
+    supportingQueries: [
+      'hardware financing structures',
+      'asset financing for hardware startups',
+      'how are hardware startups financed',
+      'hardware startup funding options',
+      'equipment financing for startups',
+    ],
     intent: 'comparison',
     cohort: 1,
     directAnswer:
       'Hardware startup financing usually combines three layers: corporate equity or debt, asset-level debt or leases, and adjacent support such as customer prepayments, supplier terms, public incentives, or parent guarantees. The structure is only asset-light when fixed claims, recourse, and residual-value risk genuinely move away from the operator.',
     serpGap:
-      'Compare real company capital stacks by asset owner, payment source, recourse, utilization exposure, and loss allocation instead of treating announced venture funding as the complete financing structure.',
+      'Replace generic funding-option lists with five real company capital stacks organized by asset owner, payment source, recourse, utilization exposure, and loss allocation.',
     originalArtifact:
       'A 29-sheet comparative model, five full-resolution capital-stack diagrams, a 19-page report, cross-case scenario tables, and an explicit evidence hierarchy.',
     cannibalizationBoundary:

@@ -59,6 +59,10 @@ const expectedPaths = [
 ].sort();
 const targetPaths = ARTICLE_SEARCH_TARGETS.map((target) => target.path).sort();
 const targetPathSet = new Set<string>(targetPaths);
+const priorityQueryPaths = new Set([
+  '/research/financial-systems/where-online-returns-actually-go',
+  '/research/financial-systems/hidden-financing-hardware-startups',
+]);
 
 assert(expectedPaths.length === 19, `expected 19 indexable article routes, found ${expectedPaths.length}`);
 assert(
@@ -109,6 +113,19 @@ for (const target of ARTICLE_SEARCH_TARGETS) {
     `${target.path}: static HTML is missing a contracted related-article link`,
   );
   assert(sitemap.includes(`https://sulayman-bowles.dev${target.path}`), `${target.path}: missing from sitemap`);
+
+  if (priorityQueryPaths.has(target.path)) {
+    const primaryQuery = normalize(target.primaryQuery);
+    const normalizedHtml = normalize(staticHtml);
+    assert(normalize(route.h1).startsWith(primaryQuery), `${target.path}: H1 does not lead with the exact primary query`);
+    assert(normalize(route.title).startsWith(primaryQuery), `${target.path}: title does not lead with the exact primary query`);
+    assert(normalize(route.description).includes(primaryQuery), `${target.path}: description omits the exact primary query`);
+    assert(route.title.length <= 60, `${target.path}: title exceeds 60 characters`);
+    assert(
+      target.supportingQueries.every((query) => normalizedHtml.includes(normalize(query))),
+      `${target.path}: one or more supporting queries are not answered in visible static HTML`,
+    );
+  }
 
   const structuredData = JSON.stringify(route.jsonLd ?? {});
   assert(structuredData.includes('"Article"'), `${target.path}: Article JSON-LD is missing`);
