@@ -43,6 +43,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - How Airlines Borrow Against Loyalty Programs: https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs
 - Where Do Online Returns Go? Inside Reverse Logistics: https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go
 - Hardware Startup Financing: Five Capital Stacks: https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups
+- Who Owns the Apartments Around Campus?: https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing
 - The Hidden Financing Behind Hardware Startups: https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing
 - The First AI Managers: https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers
 - AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy

@@ -22,6 +22,7 @@ const routeFiles = [
   ['/research/financial-systems/where-online-returns-actually-go', 'dist/research/financial-systems/where-online-returns-actually-go/index.html'],
   ['/research/financial-systems/hidden-financing-hardware-startups', 'dist/research/financial-systems/hidden-financing-hardware-startups/index.html'],
   ['/research/financial-systems/waymo-hardware-financing', 'dist/research/financial-systems/waymo-hardware-financing/index.html'],
+  ['/research/financial-systems/west-campus-student-housing', 'dist/research/financial-systems/west-campus-student-housing/index.html'],
   ['/markets/who-owns-texas-toll-roads', 'dist/markets/who-owns-texas-toll-roads/index.html'],
   ['/method', 'dist/method/index.html'],
   ['/austin-technical-seo', 'dist/austin-technical-seo/index.html'],
@@ -82,10 +83,11 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('22 Notes and Artifacts'), 'research: publication count is not derived as twenty-two');
+assert(textFromHtml(research).includes('23 Notes and Artifacts'), 'research: publication count is not derived as twenty-three');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
 assert(textFromHtml(research).includes('The Hidden Financing Behind Hardware Startups'), 'research: Waymo financing article missing');
 assert(textFromHtml(research).includes('How Airlines Borrow Against Loyalty Programs'), 'research: airline loyalty financing article missing');
+assert(textFromHtml(research).includes('Who Owns the Apartments Around Campus?'), 'research: West Campus housing article missing');
 
 const aiManagers = read('dist/research/ai-systems/the-first-ai-managers/index.html');
 assert(textFromHtml(aiManagers).includes('Source ledger'), 'AI managers: source ledger missing');
@@ -197,6 +199,35 @@ for (const href of [
 ]) {
   assert(waymo.includes(`href="${href}"`) || waymo.includes(`src="${href}"`), `Waymo financing: missing artifact ${href}`);
   assert(fs.existsSync(path.resolve(`public${href}`)), `Waymo financing: missing public file ${href}`);
+}
+
+const westCampus = read('dist/research/financial-systems/west-campus-student-housing/index.html');
+for (const expected of [
+  'Who Owns the Apartments Around Campus?',
+  '4,805 BEDS',
+  'High property margins are not high owner returns',
+  'Modeled refinancing gap under the combined stress',
+  'What the evidence still cannot answer',
+  'Six-property financial model',
+]) {
+  assert(textFromHtml(westCampus).includes(expected), `West Campus housing: missing ${expected}`);
+}
+for (const href of [
+  '/research/west-campus-investigative-report.pdf',
+  '/research/west-campus-investigative-report.docx',
+  '/research/west-campus-executive-analytical-memo.docx',
+  '/research/west-campus-property-models.xlsx',
+  '/research/west-campus-dossiers-methodology-claims.docx',
+  '/images/research/west-campus-properties-map.png',
+  '/images/research/west-campus-noi-margin.png',
+  '/images/research/west-campus-capital-stack.png',
+  '/images/research/waterloo-development-stress.png',
+  '/images/research/waterloo-residual-land-value.png',
+  '/images/research/west-campus-prelease-points.png',
+  '/images/research/west-campus-equity-stress.png',
+]) {
+  assert(westCampus.includes(`href="${href}"`) || westCampus.includes(`src="${href}"`), `West Campus housing: missing artifact ${href}`);
+  assert(fs.existsSync(path.resolve(`public${href}`)), `West Campus housing: missing public file ${href}`);
 }
 
 const toll = read('dist/markets/who-owns-texas-toll-roads/index.html');

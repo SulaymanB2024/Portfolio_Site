@@ -146,7 +146,23 @@
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
-        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go"
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Who Owns the Apartments Around Campus?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Who Owns the Apartments Around Campus?",
+      "pitch_angle": "Trace a student installment through the operating statement, acquisition basis, capital stack, refinancing test, and loss waterfall while keeping reported facts separate from modeled assumptions.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
       ]
     },
     {

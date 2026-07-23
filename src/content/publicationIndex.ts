@@ -7,6 +7,7 @@ import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvest
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingArticle';
+import { WEST_CAMPUS_STUDENT_HOUSING_ARTICLE_SLUG } from './westCampusStudentHousingArticle';
 
 export type PublicationIndexItem = {
   category: 'AI systems and products' | 'Search systems' | 'Technical SEO' | 'Markets and investing';
@@ -31,6 +32,7 @@ const airlineLoyaltyFinancing = article(AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG);
 const onlineReturnsInvestigation = article(ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG);
 const hiddenFinancingHardware = article(HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG);
 const waymoHardwareFinancing = article(WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG);
+const westCampusStudentHousing = article(WEST_CAMPUS_STUDENT_HOUSING_ARTICLE_SLUG);
 
 function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['category'] {
   if (articleItem.cluster === 'ai-systems') return 'AI systems and products';
@@ -105,6 +107,13 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     href: getArticlePath(hiddenFinancingHardware),
     description: hiddenFinancingHardware.subtitle,
     date: hiddenFinancingHardware.dateModified ?? hiddenFinancingHardware.date,
+  },
+  {
+    category: 'Markets and investing',
+    title: westCampusStudentHousing.title,
+    href: getArticlePath(westCampusStudentHousing),
+    description: westCampusStudentHousing.subtitle,
+    date: westCampusStudentHousing.dateModified ?? westCampusStudentHousing.date,
   },
   {
     category: 'Markets and investing',

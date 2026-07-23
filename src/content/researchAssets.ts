@@ -135,6 +135,21 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
+    name: 'Who Owns the Apartments Around Campus?',
+    href: '/research/financial-systems/west-campus-student-housing',
+    type: 'long_form_research',
+    preferredAnchor: 'West Campus student housing ownership and returns',
+    audiences: ['student housing', 'real estate investing', 'Austin development', 'university housing'],
+    pitchAngle:
+      'A six-property West Campus study tracing student lease obligations through normalized NOI, acquisition basis, capital structure, refinancing stress, and first-loss allocation.',
+    supportingAssets: [
+      { label: 'Full West Campus investigative report', href: '/research/west-campus-investigative-report.pdf' },
+      { label: 'West Campus property model', href: '/research/west-campus-property-models.xlsx' },
+      { label: 'Methodology and claims appendix', href: '/research/west-campus-dossiers-methodology-claims.docx' },
+    ],
+  },
+  {
+    priority: 1,
     name: 'Atlas Open-Corpus Demonstration',
     href: '/atlas/sample-crawl',
     type: 'sample_data',
@@ -250,7 +265,7 @@ export const publicDataDownloads = [
   {
     label: 'Article research briefs',
     href: '/research/article-research-briefs.json',
-    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 19 indexable articles.',
+    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 20 indexable articles.',
   },
   {
     label: 'Authority asset JSON',
@@ -331,5 +346,15 @@ export const publicDataDownloads = [
     label: 'Hardware capital-stack diagram package',
     href: '/research/capital-stack-diagrams.zip',
     description: 'Original full-resolution PNG and Graphviz DOT files for Waymo, Serve Robotics, CoreWeave, Anduril, and Northvolt.',
+  },
+  {
+    label: 'West Campus student housing report',
+    href: '/research/west-campus-investigative-report.pdf',
+    description: 'Six-property investigation of contracts, ownership, normalized property economics, capital structure, and first-loss allocation.',
+  },
+  {
+    label: 'West Campus property model',
+    href: '/research/west-campus-property-models.xlsx',
+    description: 'Seventeen-sheet model covering property statements, student cost, development, zoning, refinancing stress, and claims.',
   },
 ];

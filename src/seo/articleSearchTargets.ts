@@ -129,6 +129,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
+      '/research/financial-systems/west-campus-student-housing',
     ],
   },
   {
@@ -255,7 +256,28 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/financial-systems/where-online-returns-actually-go',
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/markets/who-owns-texas-toll-roads',
+      '/research/financial-systems/west-campus-student-housing',
       '/research/data-systems/audit-findings-derived-records',
+      '/research/search-console/technical-seo-public-data-infrastructure',
+    ],
+  },
+  {
+    path: '/research/financial-systems/west-campus-student-housing',
+    primaryQuery: 'West Campus student housing ownership',
+    supportingQueries: ['who owns West Campus apartments', 'UT Austin student housing investment returns'],
+    intent: 'ownership',
+    cohort: 1,
+    directAnswer:
+      'The six-property evidence sample shows several ownership models around UT Austin: ACC and Landmark platforms, Global Student Accommodation, the UT System, and a SkyLoft special-purpose borrower with mortgage and preferred-capital layers. The evidence supports a location premium and post-signing lease lock-in, but not a market-wide concentration ratio or one return claim for every owner.',
+    serpGap:
+      'Trace a student installment through the operating statement, acquisition basis, capital stack, refinancing test, and loss waterfall while keeping reported facts separate from modeled assumptions.',
+    originalArtifact:
+      'A 17-sheet six-property model, 16-page investigative report, property dossiers, claims matrix, student-cost comparison, ownership map, and stress-case figures.',
+    cannibalizationBoundary:
+      'This page studies West Campus student housing contracts and property finance; the Texas toll-road article studies public and concession infrastructure, while the Waymo article studies hardware-platform financing.',
+    relatedPaths: [
+      '/research/financial-systems/waymo-hardware-financing',
+      '/markets/who-owns-texas-toll-roads',
       '/research/search-console/technical-seo-public-data-infrastructure',
     ],
   },
@@ -283,6 +305,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/data-systems/audit-findings-derived-records',
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
+      '/research/financial-systems/west-campus-student-housing',
     ],
     rankingGoal: {
       country: 'USA',
