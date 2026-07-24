@@ -135,6 +135,7 @@
       "original_artifact": "A 36-sheet reverse-logistics model, nine product archetypes, route and condition engines, auction analysis, decision diagrams, and a 49-page source-led investigation.",
       "scope_boundary": "This page studies reverse logistics and the return tax on consumer products; the hardware-financing pages study capital stacks, asset claims, and residual-value risk before a product is returned.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
         "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
@@ -143,6 +144,32 @@
       ],
       "ranking_goal": null,
       "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+      "question": "what happens when an index decides a company matters",
+      "supporting_questions": [
+        "what happens when a stock is added to an index",
+        "what happens when a company joins the S&P 500",
+        "stock index inclusion effect",
+        "do stocks go up when added to an index",
+        "how index funds buy new constituents",
+        "index rebalancing price impact",
+        "does index inclusion lower cost of capital"
+      ],
+      "intent": "evaluation",
+      "cohort": 1,
+      "direct_answer": "When a stock is added to a major index, the provider changes a rulebook rather than buying shares. Tracking funds then acquire the required exposure through early trading, derivatives, internal crosses, or the effective closing auction. The event can change ownership, liquidity, and price, but published evidence does not support a permanent, uniform index-inclusion premium.",
+      "evidence_gap": "Connect provider governance, eligibility rules, fund mandates, source-index offsets, closing-auction mechanics, event-study evidence, and cost-of-capital limits instead of treating headline benchmark assets as forced one-day buying.",
+      "original_artifact": "A 32-page evidence audit with four index-family rule systems, 13 exhibits, a Tesla implementation case, participant economics, fact checks, a reproducible event-study protocol, and a 44-source ledger.",
+      "scope_boundary": "This page explains index membership, implementation demand, price effects, and provider economics; the airline, hardware, and toll-road investigations study different financial claims and ownership structures.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "last_verified": "2026-07-20"
     },
     {
       "url": "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
@@ -162,6 +189,7 @@
       "original_artifact": "A 22-page source-led investigation, nine full-resolution exhibits, a point-level cash model, and a lender-waterfall reconstruction.",
       "scope_boundary": "This page explains loyalty-program cash, accounting, and secured financing; the hardware-financing articles compare physical-asset capital stacks, while the Texas toll-road article covers public and concession infrastructure claims.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
@@ -187,6 +215,7 @@
       "original_artifact": "A 29-sheet comparative model, five full-resolution capital-stack diagrams, a 19-page report, cross-case scenario tables, and an explicit evidence hierarchy.",
       "scope_boundary": "This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
         "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
@@ -211,6 +240,7 @@
       "original_artifact": "A 21-sheet financing model, capital-stack diagram, downside waterfall, scenario tables, and instrument-by-instrument evidence map.",
       "scope_boundary": "This page is the Waymo-specific deep dive; the five-company hardware-financing article compares parent funding with equipment finance, SPVs, customer capital, public support, and project debt.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
         "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",

@@ -9,11 +9,13 @@ import {
 } from './aiManagersArticle';
 import { AIRLINE_LOYALTY_FINANCING_ARTICLE } from './airlineLoyaltyFinancingArticle';
 import { HIDDEN_FINANCING_HARDWARE_ARTICLE } from './hiddenFinancingHardwareArticle';
+import { INDEX_COMPANY_MATTERS_ARTICLE } from './indexCompanyMattersArticle';
 import { ONLINE_RETURNS_INVESTIGATION_ARTICLE } from './onlineReturnsInvestigationArticle';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE } from './waymoHardwareFinancingArticle';
 import { WEST_CAMPUS_STUDENT_HOUSING_ARTICLE } from './westCampusStudentHousingArticle';
 
 export const RESEARCH_ARTICLES: ResearchArticle[] = [
+  INDEX_COMPANY_MATTERS_ARTICLE,
   AIRLINE_LOYALTY_FINANCING_ARTICLE,
   ONLINE_RETURNS_INVESTIGATION_ARTICLE,
   HIDDEN_FINANCING_HARDWARE_ARTICLE,
