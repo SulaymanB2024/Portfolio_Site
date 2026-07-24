@@ -62,6 +62,13 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
         'The 36-sheet model covering product assumptions, route engines, unit economics, thresholds, fraud, sustainability, auctions, and sensitivities.',
       format: 'XLSX',
     },
+    {
+      label: 'Retrieval-decision chart',
+      href: '/images/research/online-returns-retrieval-decision.png',
+      description:
+        'A downloadable chart showing when expected recovery supports retrieving a returned product instead of issuing a returnless refund.',
+      format: 'PNG',
+    },
   ],
   content: [
     'Where do online returns go after a refund? They can be restocked, sold open-box, refurbished, liquidated, donated, recycled, destroyed, held as fraud evidence, or never retrieved at all. A $100 pair of headphones may be refunded before it reaches a return center, then consolidated, moved, opened, matched to a serial number, tested, cleaned, and routed. That sequence is a wager that inspection will unlock a resale channel worth more than the cost of retrieval.',

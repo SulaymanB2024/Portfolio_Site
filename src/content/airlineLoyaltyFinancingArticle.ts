@@ -57,6 +57,13 @@ export const AIRLINE_LOYALTY_FINANCING_ARTICLE: ResearchArticle = {
         'The supplied editable report used as the source document for this web edition.',
       format: 'DOCX',
     },
+    {
+      label: 'Loyalty parties and money map',
+      href: '/images/research/airline-loyalty-parties-money.png',
+      description:
+        'A downloadable map separating the cardholder, merchant, issuer, airline, loyalty vehicle, award claim, and lender-controlled cash flow.',
+      format: 'PNG',
+    },
   ],
   content: [
     'How airlines borrow against loyalty programs: the card issuer pays cash under a commercial agreement; the airline records some consideration as current revenue and some as a contract liability; the member claims an award later; and a separate financing structure can give lenders first claim on designated partner and intercompany collections. The collateral is recurring cash, contracts, controlled accounts, loyalty intellectual property, data rights, reserves, and special-purpose-vehicle equity—not the member’s points as a fixed-dollar deposit.',
