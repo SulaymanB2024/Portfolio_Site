@@ -151,10 +151,40 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page studies reverse logistics and the return tax on consumer products; the hardware-financing pages study capital stacks, asset claims, and residual-value risk before a product is returned.',
     relatedPaths: [
+      '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
       '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
       '/markets/who-owns-texas-toll-roads',
+      '/research/data-systems/audit-findings-derived-records',
+    ],
+  },
+  {
+    path: '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
+    primaryQuery: 'what happens when an index decides a company matters',
+    supportingQueries: [
+      'what happens when a stock is added to an index',
+      'what happens when a company joins the S&P 500',
+      'stock index inclusion effect',
+      'do stocks go up when added to an index',
+      'how index funds buy new constituents',
+      'index rebalancing price impact',
+      'does index inclusion lower cost of capital',
+    ],
+    intent: 'evaluation',
+    cohort: 1,
+    directAnswer:
+      'When a stock is added to a major index, the provider changes a rulebook rather than buying shares. Tracking funds then acquire the required exposure through early trading, derivatives, internal crosses, or the effective closing auction. The event can change ownership, liquidity, and price, but published evidence does not support a permanent, uniform index-inclusion premium.',
+    serpGap:
+      'Connect provider governance, eligibility rules, fund mandates, source-index offsets, closing-auction mechanics, event-study evidence, and cost-of-capital limits instead of treating headline benchmark assets as forced one-day buying.',
+    originalArtifact:
+      'A 32-page evidence audit with four index-family rule systems, 13 exhibits, a Tesla implementation case, participant economics, fact checks, a reproducible event-study protocol, and a 44-source ledger.',
+    cannibalizationBoundary:
+      'This page explains index membership, implementation demand, price effects, and provider economics; the airline, hardware, and toll-road investigations study different financial claims and ownership structures.',
+    relatedPaths: [
+      '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
+      '/markets/who-owns-texas-toll-roads',
+      '/research/search-console/technical-seo-public-data-infrastructure',
       '/research/data-systems/audit-findings-derived-records',
     ],
   },
@@ -180,6 +210,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page explains loyalty-program cash, accounting, and secured financing; the hardware-financing articles compare physical-asset capital stacks, while the Texas toll-road article covers public and concession infrastructure claims.',
     relatedPaths: [
+      '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/where-online-returns-actually-go',
       '/markets/who-owns-texas-toll-roads',
@@ -207,6 +238,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.',
     relatedPaths: [
+      '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
       '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/where-online-returns-actually-go',
       '/research/financial-systems/waymo-hardware-financing',
@@ -230,6 +262,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page is the Waymo-specific deep dive; the five-company hardware-financing article compares parent funding with equipment finance, SPVs, customer capital, public support, and project debt.',
     relatedPaths: [
+      '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
       '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/where-online-returns-actually-go',
       '/research/financial-systems/hidden-financing-hardware-startups',

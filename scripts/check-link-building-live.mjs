@@ -46,7 +46,7 @@ const requiredChecks = [
           value?.generated_at === '2026-07-20' &&
           value?.canonical_host === SITE_URL &&
           Array.isArray(value.articles) &&
-          value.articles.length === 20 &&
+          value.articles.length === 21 &&
           value.articles.every((article) =>
             article.url?.startsWith(SITE_URL) &&
             article.question &&

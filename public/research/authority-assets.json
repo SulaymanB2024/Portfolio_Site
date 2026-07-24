@@ -103,8 +103,22 @@
       "pitch_angle": "Answer the cross-retailer question with product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing one retailer or one universal returns process.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "What Happens When an Index Decides a Company Matters?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "What Happens When an Index Decides a Company Matters?",
+      "pitch_angle": "Connect provider governance, eligibility rules, fund mandates, source-index offsets, closing-auction mechanics, event-study evidence, and cost-of-capital limits instead of treating headline benchmark assets as forced one-day buying.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
-        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
       ]
     },
     {
@@ -117,8 +131,8 @@
       "pitch_angle": "Separate consumer card spending, issuer partner payments, deferred-revenue accounting, award fulfillment, operating float, and the lender-controlled cash waterfall instead of calling airline miles deposits or treating every partner payment as debt.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
-        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
-        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go"
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
       ]
     },
     {
@@ -131,8 +145,8 @@
       "pitch_angle": "Replace generic funding-option lists with five real company capital stacks organized by asset owner, payment source, recourse, utilization exposure, and loss allocation.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
-        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
-        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go"
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
       ]
     },
     {
@@ -145,8 +159,8 @@
       "pitch_angle": "Separate fundraising from physical-asset financing, legal ownership, residual value, utilization risk, and the party that absorbs losses.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
-        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
-        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go"
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
       ]
     },
     {

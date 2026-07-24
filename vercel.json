@@ -59,6 +59,7 @@
     { "src": "/markets/ai-search-crawler-policy", "headers": { "Location": "/research/ai-crawlers/ai-search-crawler-policy" }, "status": 308 },
     { "src": "/markets/technical-seo-public-data-infrastructure", "headers": { "Location": "/research/search-console/technical-seo-public-data-infrastructure" }, "status": 308 },
     { "src": "/markets/canonical-identity-personal-seo", "headers": { "Location": "/research/personal-seo/canonical-identity-personal-seo" }, "status": 308 },
+    { "src": "/markets/what-happens-when-an-index-decides-a-company-matters", "headers": { "Location": "/research/financial-systems/what-happens-when-an-index-decides-a-company-matters" }, "status": 308 },
     { "src": "/markets/how-airlines-borrow-against-loyalty-programs", "headers": { "Location": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs" }, "status": 308 },
     { "src": "/markets/where-online-returns-actually-go", "headers": { "Location": "/research/financial-systems/where-online-returns-actually-go" }, "status": 308 },
     { "src": "/markets/hidden-financing-hardware-startups", "headers": { "Location": "/research/financial-systems/hidden-financing-hardware-startups" }, "status": 308 },

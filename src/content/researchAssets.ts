@@ -76,6 +76,21 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
+    name: 'What Happens When an Index Decides a Company Matters?',
+    href: '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
+    type: 'long_form_research',
+    preferredAnchor: 'what happens when a stock joins a major index',
+    audiences: ['index investing', 'market structure', 'passive funds', 'capital markets'],
+    pitchAngle:
+      'A source-led map from index-provider rules through fund implementation, closing auctions, event-study evidence, participant economics, and cost-of-capital limits.',
+    supportingAssets: [
+      { label: 'Full index-decision evidence audit', href: '/research/index-company-matters-evidence-audit.pdf' },
+      { label: 'Editable index-decision audit', href: '/research/index-company-matters-evidence-audit.docx' },
+      { label: 'Index effect by era', href: '/images/research/index-effect-by-era.png' },
+    ],
+  },
+  {
+    priority: 1,
     name: 'How Airlines Borrow Against Loyalty Programs',
     href: '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
     type: 'long_form_research',

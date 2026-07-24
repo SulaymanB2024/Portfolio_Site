@@ -18,6 +18,7 @@ const routeFiles = [
   ['/atlas/sample-crawl', 'dist/atlas/sample-crawl/index.html'],
   ['/research', 'dist/research/index.html'],
   ['/research/ai-systems/the-first-ai-managers', 'dist/research/ai-systems/the-first-ai-managers/index.html'],
+  ['/research/financial-systems/what-happens-when-an-index-decides-a-company-matters', 'dist/research/financial-systems/what-happens-when-an-index-decides-a-company-matters/index.html'],
   ['/research/financial-systems/how-airlines-borrow-against-loyalty-programs', 'dist/research/financial-systems/how-airlines-borrow-against-loyalty-programs/index.html'],
   ['/research/financial-systems/where-online-returns-actually-go', 'dist/research/financial-systems/where-online-returns-actually-go/index.html'],
   ['/research/financial-systems/hidden-financing-hardware-startups', 'dist/research/financial-systems/hidden-financing-hardware-startups/index.html'],
@@ -81,10 +82,11 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('22 Notes and Artifacts'), 'research: publication count is not derived as twenty-two');
+assert(textFromHtml(research).includes('23 Notes and Artifacts'), 'research: publication count is not derived as twenty-three');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
 assert(textFromHtml(research).includes('The Hidden Financing Behind Hardware Startups'), 'research: Waymo financing article missing');
 assert(textFromHtml(research).includes('How Airlines Borrow Against Loyalty Programs'), 'research: airline loyalty financing article missing');
+assert(textFromHtml(research).includes('What Happens When an Index Decides a Company Matters?'), 'research: index-company article missing');
 
 const aiManagers = read('dist/research/ai-systems/the-first-ai-managers/index.html');
 assert(textFromHtml(aiManagers).includes('Source ledger'), 'AI managers: source ledger missing');
@@ -149,6 +151,30 @@ for (const href of [
 ]) {
   assert(airlineLoyalty.includes(`href="${href}"`) || airlineLoyalty.includes(`src="${href}"`), `Airline loyalty financing: missing artifact ${href}`);
   assert(fs.existsSync(path.resolve(`public${href}`)), `Airline loyalty financing: missing public file ${href}`);
+}
+
+const indexCompany = read('dist/research/financial-systems/what-happens-when-an-index-decides-a-company-matters/index.html');
+for (const expected of [
+  'What Happens When an Index Decides a Company Matters?',
+  'The effective close: Tesla enters',
+  'Four different systems decide who gets in',
+  'How a rule becomes a market order',
+  'The index effect changed by era',
+  'Inclusion does not automatically lower the cost of capital',
+  'Methodology and five interpretation limits',
+]) {
+  assert(textFromHtml(indexCompany).includes(expected), `Index company: missing ${expected}`);
+}
+for (const href of [
+  '/research/index-company-matters-evidence-audit.pdf',
+  '/research/index-company-matters-evidence-audit.docx',
+  '/images/research/index-provider-revenue-mix.png',
+  '/images/research/index-migration-net-demand.png',
+  '/images/research/tesla-sp500-inclusion-price-path.png',
+  '/images/research/index-effect-by-era.png',
+]) {
+  assert(indexCompany.includes(`href="${href}"`) || indexCompany.includes(`src="${href}"`), `Index company: missing artifact ${href}`);
+  assert(fs.existsSync(path.resolve(`public${href}`)), `Index company: missing public file ${href}`);
 }
 
 const hiddenFinancing = read('dist/research/financial-systems/hidden-financing-hardware-startups/index.html');
