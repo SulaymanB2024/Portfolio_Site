@@ -768,6 +768,14 @@ export const TEXAS_TOLL_ARTICLE_SOURCES = [
       "https://www.txdot.gov/projects/planning/freight-planning.html",
       "https://ftp.txdot.gov/pub/txdot/move-texas-freight/resources/texas-delivers-2050.pdf"
     ]
+  },
+  {
+    "id": "s26",
+    "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+    "note": "(primary state operator inventory; reviewed July 23, 2026). Identifies statewide operators, their facilities, and the public billing agency serving each system or concession.",
+    "hrefs": [
+      "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+    ]
   }
 ] as const;
 

@@ -1,3 +1,5 @@
+import { TEXAS_TOLL_DIRECT_ANSWER } from '../content/texasTollRoadOwnership';
+
 export type ArticleSearchIntent =
   | 'definition'
   | 'comparison'
@@ -18,12 +20,30 @@ export type ArticleSearchTarget = {
   originalArtifact: string;
   cannibalizationBoundary: string;
   relatedPaths: readonly string[];
+  rankingGoal?: {
+    country: 'USA';
+    device: 'MOBILE';
+    targetPosition: 1;
+    sustainedSnapshots: 3;
+  };
 };
 
 export const ARTICLE_RANKING_DEADLINE = '2027-01-20';
 export const ARTICLE_TOP_TEN_MIN_IMPRESSIONS = 10;
 export const ARTICLE_TOP_TEN_MAX_POSITION = 10;
 export const ARTICLE_TOP_TEN_SUSTAINED_SNAPSHOTS = 3;
+export const TEXAS_TOLL_RANK_ONE_TARGET_POSITION = 1;
+export const TEXAS_TOLL_RANK_ONE_SUSTAINED_SNAPSHOTS = 3;
+const TEXAS_TOLL_SEARCH_PATH = '/markets/who-owns-texas-toll-roads';
+const TEXAS_TOLL_RELATED_LABELS: Readonly<Record<string, string>> = {
+  '/research/ai-systems/the-first-ai-managers': 'Texas infrastructure ownership',
+  '/research/search-console/technical-seo-public-data-infrastructure': 'Texas toll-road ownership evidence',
+  '/research/personal-seo/canonical-identity-personal-seo': 'public and private Texas toll-road ownership',
+  '/research/financial-systems/where-online-returns-actually-go': 'Texas toll-road operators and billing',
+  '/research/financial-systems/how-airlines-borrow-against-loyalty-programs': 'Texas toll-road revenue claims',
+  '/research/financial-systems/hidden-financing-hardware-startups': 'Texas toll-road concession financing',
+  '/research/financial-systems/waymo-hardware-financing': 'who owns Texas toll roads',
+};
 
 export const ARTICLE_SEARCH_TARGETS = [
   {
@@ -240,12 +260,15 @@ export const ARTICLE_SEARCH_TARGETS = [
   },
   {
     path: '/markets/who-owns-texas-toll-roads',
-    primaryQuery: 'are toll roads privately owned in Texas',
-    supportingQueries: ['who owns Texas toll roads', 'Texas toll road private operators'],
+    primaryQuery: 'are Texas toll roads privately owned',
+    supportingQueries: [
+      'are toll roads in Texas privately owned',
+      'who owns Texas toll roads',
+      'Texas toll road private operators',
+    ],
     intent: 'ownership',
     cohort: 1,
-    directAnswer:
-      'Texas toll roads are not governed by one ownership model: the state, counties, and public authorities usually own the roadway, while contracts may give private concessionaires defined rights to operate lanes, collect revenue, service debt, earn equity returns, and transfer the asset at expiry.',
+    directAnswer: TEXAS_TOLL_DIRECT_ANSWER,
     serpGap:
       'Separate physical ownership from concession rights, operators, lenders, revenue claims, and residual control using project-level public records.',
     originalArtifact:
@@ -259,6 +282,12 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
     ],
+    rankingGoal: {
+      country: 'USA',
+      device: 'MOBILE',
+      targetPosition: TEXAS_TOLL_RANK_ONE_TARGET_POSITION,
+      sustainedSnapshots: TEXAS_TOLL_RANK_ONE_SUSTAINED_SNAPSHOTS,
+    },
   },
   {
     path: '/research/crawler-engineering/crawl-frontier-state-machine',
@@ -466,4 +495,12 @@ export const ARTICLE_SEARCH_TARGETS = [
 
 export function getArticleSearchTarget(path: string) {
   return ARTICLE_SEARCH_TARGETS.find((target) => target.path === path);
+}
+
+export function getArticleRelatedLinkLabel(sourcePath: string, relatedPath: string) {
+  if (relatedPath === TEXAS_TOLL_SEARCH_PATH) {
+    return TEXAS_TOLL_RELATED_LABELS[sourcePath] ?? 'Texas toll-road ownership guide';
+  }
+
+  return getArticleSearchTarget(relatedPath)?.primaryQuery ?? relatedPath;
 }

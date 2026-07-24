@@ -16,7 +16,7 @@ import {
   type ResearchArticle,
 } from '../content/articleModels';
 import { RESEARCH_ARTICLES } from '../content/researchArticles';
-import { getArticleSearchTarget } from '../seo/articleSearchTargets';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
@@ -231,9 +231,10 @@ function GenericArticle({
   const faqSections = sections?.filter((section) => section.id.toLowerCase().includes('faq'));
   const navItems = articleNav(article, sections);
   const searchTarget = getArticleSearchTarget(getArticlePath(article));
+  const articlePath = getArticlePath(article);
   const relatedLinks = searchTarget?.relatedPaths.map((path) => ({
     href: path,
-    label: getArticleSearchTarget(path)?.primaryQuery ?? path,
+    label: getArticleRelatedLinkLabel(articlePath, path),
   })) ?? [];
   const study = article.artwork.kind === 'study'
     ? {

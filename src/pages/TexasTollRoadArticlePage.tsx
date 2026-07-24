@@ -24,6 +24,11 @@ import {
   TEXAS_TOLL_ARTICLE_UPDATED,
   type TexasTollArticleTable,
 } from '../content/texasTollRoadArticle';
+import {
+  TEXAS_TOLL_DIRECT_ANSWER,
+  TEXAS_TOLL_OWNERSHIP_CSV_PATH,
+  TEXAS_TOLL_OWNERSHIP_ROWS,
+} from '../content/texasTollRoadOwnership';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToReact } from '../utils/markdownToReact';
 import { useSEO } from '../utils/seo';
@@ -88,6 +93,73 @@ function ArticleMarkdown({ markdown, className = '' }: ArticleMarkdownProps) {
   const content = useMemo(() => markdownToReact(markdown), [markdown]);
 
   return <div className={`article-reader__prose ${className}`}>{content}</div>;
+}
+
+function TexasTollOwnershipLookup() {
+  return (
+    <div id="ownership-lookup" className="toll-ownership-lookup">
+      <p className="toll-ownership-lookup__answer">{TEXAS_TOLL_DIRECT_ANSWER}</p>
+      <p className="toll-ownership-lookup__guide">
+        Use this lookup to separate the owner of the pavement from the party operating the lanes,
+        claiming toll revenue, or issuing the bill.
+      </p>
+      <div className="toll-ownership-lookup__scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Facility or system</th>
+              <th>Physical owner</th>
+              <th>Operator / revenue claimant</th>
+              <th>Private rights</th>
+              <th>Billing agency</th>
+            </tr>
+          </thead>
+          <tbody>
+            {TEXAS_TOLL_OWNERSHIP_ROWS.map((row) => (
+              <tr key={row.facility}>
+                <th scope="row">
+                  {row.facility}
+                  <span>{row.region}</span>
+                </th>
+                <td>{row.physicalOwner}</td>
+                <td>
+                  <strong>{row.operator}</strong>
+                  <span>{row.tollRevenueClaimant}</span>
+                </td>
+                <td>
+                  {row.privateRightsStatus}
+                  <span>{row.term}</span>
+                </td>
+                <td>
+                  {row.billingAgency}
+                  <span className="toll-ownership-lookup__sources">
+                    {row.sourceIds.map((sourceId, index) => (
+                      <Fragment key={sourceId}>
+                        {index > 0 ? ', ' : ''}
+                        <a href={`#source-${sourceId}`}>{sourceId.toUpperCase()}</a>
+                      </Fragment>
+                    ))}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="toll-ownership-lookup__actions">
+        <a href={TEXAS_TOLL_OWNERSHIP_CSV_PATH} download>
+          Download the complete ownership matrix (CSV)
+        </a>
+        <a
+          href="https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Compare TxDOT’s current operator inventory
+        </a>
+      </div>
+    </div>
+  );
 }
 
 function OwnershipStackDiagram() {
@@ -581,7 +653,7 @@ export default function TexasTollRoadArticlePage() {
       },
       updated: {
         dateTime: TEXAS_TOLL_ARTICLE_UPDATED.replaceAll('.', '-'),
-        value: 'July 11, 2026',
+        value: 'July 23, 2026',
       },
       readTime: TEXAS_TOLL_ARTICLE_READ_TIME,
       evidence: `${TEXAS_TOLL_ARTICLE_SOURCES.length} sources`,
@@ -592,13 +664,9 @@ export default function TexasTollRoadArticlePage() {
       note: metric.note,
     })),
     callouts: [{
-      label: 'Direct answer',
-      title: 'Texas toll roads do not have one owner.',
-      content: (
-        <p>
-          Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.
-        </p>
-      ),
+      label: 'Ownership lookup',
+      title: 'Most Texas toll roads are public. Four major concessions are private.',
+      content: <TexasTollOwnershipLookup />,
     }],
     navigation: { items: navItems },
     boundary: {

@@ -470,11 +470,132 @@
   line-height: 1;
 }
 
+.article-reader__callout > div,
+.article-reader__callout div > div {
+  min-width: 0;
+}
+
 .article-reader__callout div > div {
   max-width: 48rem;
   margin-top: 1.2rem;
   color: var(--article-muted);
   line-height: 1.7;
+}
+
+.texas-toll-article .article-reader__callout {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.texas-toll-article .article-reader__callout > div,
+.texas-toll-article .article-reader__callout > div > div,
+.texas-toll-article .article-reader__callout div > div,
+.texas-toll-article .article-reader__callout div > .toll-ownership-lookup {
+  width: 100%;
+  max-width: none;
+}
+
+.toll-ownership-lookup__answer {
+  max-width: 76ch;
+  color: var(--article-ink);
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.6;
+}
+
+.toll-ownership-lookup__guide {
+  max-width: 68ch;
+  margin-top: 0.9rem;
+}
+
+.toll-ownership-lookup__scroll {
+  width: 100%;
+  margin-top: 1.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--article-line);
+}
+
+.toll-ownership-lookup table {
+  width: 100%;
+  min-width: 62rem;
+  border-collapse: collapse;
+  color: var(--article-muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.toll-ownership-lookup th,
+.toll-ownership-lookup td {
+  width: 19%;
+  border-right: 1px solid var(--article-line);
+  border-bottom: 1px solid var(--article-line);
+  padding: 0.85rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.toll-ownership-lookup th:first-child {
+  width: 24%;
+}
+
+.toll-ownership-lookup th:last-child,
+.toll-ownership-lookup td:last-child {
+  border-right: 0;
+}
+
+.toll-ownership-lookup tbody tr:last-child th,
+.toll-ownership-lookup tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.toll-ownership-lookup thead th {
+  background: #e8e7e2;
+  color: var(--article-ink);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.toll-ownership-lookup tbody th {
+  background: color-mix(in srgb, var(--article-ink) 3%, transparent);
+  color: var(--article-ink);
+  font-weight: 600;
+}
+
+.toll-ownership-lookup td {
+  background: var(--article-paper);
+}
+
+.toll-ownership-lookup td strong {
+  display: block;
+  color: var(--article-ink);
+  font-weight: 600;
+}
+
+.toll-ownership-lookup td span,
+.toll-ownership-lookup tbody th span {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--article-faint);
+  font-weight: 400;
+}
+
+.toll-ownership-lookup__sources a {
+  color: inherit;
+  text-underline-offset: 0.16em;
+}
+
+.toll-ownership-lookup__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+  margin-top: 1rem;
+}
+
+.toll-ownership-lookup__actions a {
+  color: var(--article-ink);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-underline-offset: 0.22em;
 }
 
 .article-reader__body-frame {

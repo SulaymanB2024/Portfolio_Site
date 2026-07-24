@@ -24,7 +24,7 @@ import {
   AI_MANAGERS_ARTICLE_UPDATED,
   type AiManagerCaseKind,
 } from '../content/aiManagersArticle';
-import { getArticleSearchTarget } from '../seo/articleSearchTargets';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToReact } from '../utils/markdownToReact';
 import { useSEO } from '../utils/seo';
@@ -546,7 +546,7 @@ export default function AiManagersArticlePage() {
       links: [
         ...SEARCH_TARGET.relatedPaths.map((path) => ({
           href: path,
-          label: getArticleSearchTarget(path)?.primaryQuery ?? path,
+          label: getArticleRelatedLinkLabel(AI_MANAGERS_ARTICLE_PATH, path),
         })),
         { href: '/research', label: 'Research archive' },
         { href: '/viralbench-codex-agent-harness', label: 'Agent evaluation' },

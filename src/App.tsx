@@ -569,7 +569,7 @@ function HomePage() {
                 <nav aria-label="Featured proof" className="grid gap-2 self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
                   <a href={AI_MANAGERS_ARTICLE_PATH} className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">The First AI Managers</a>
                   <a href="/atlas" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Atlas SEO Audit Software</a>
-                  <a href="/markets/who-owns-texas-toll-roads" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Texas Toll Roads</a>
+                  <a href="/markets/who-owns-texas-toll-roads" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Texas Toll-Road Ownership</a>
                 </nav>
               </div>
             </div>

@@ -22,6 +22,7 @@ const routeFiles = [
   ['/research/financial-systems/where-online-returns-actually-go', 'dist/research/financial-systems/where-online-returns-actually-go/index.html'],
   ['/research/financial-systems/hidden-financing-hardware-startups', 'dist/research/financial-systems/hidden-financing-hardware-startups/index.html'],
   ['/research/financial-systems/waymo-hardware-financing', 'dist/research/financial-systems/waymo-hardware-financing/index.html'],
+  ['/markets/who-owns-texas-toll-roads', 'dist/markets/who-owns-texas-toll-roads/index.html'],
   ['/method', 'dist/method/index.html'],
   ['/austin-technical-seo', 'dist/austin-technical-seo/index.html'],
   ['/contact', 'dist/contact/index.html'],
@@ -201,6 +202,22 @@ for (const href of [
 const toll = read('dist/markets/who-owns-texas-toll-roads/index.html');
 assert(/<sup class="article-citation"><a href="#source-s1"/.test(toll), 'toll roads: citation markers are not linked superscripts');
 assert(!toll.includes('shareholders.S1S2S3'), 'toll roads: citation markers remain adjacent to prose');
+assert(toll.includes('<title>Are Texas Toll Roads Privately Owned? Ownership Guide</title>'), 'toll roads: approved title changed');
+assert(
+  toll.includes('Most Texas toll roads are publicly owned. See who owns each system, which private concessions operate lanes, and where toll revenue and billing sit.'),
+  'toll roads: approved description is missing',
+);
+assert(
+  textFromHtml(toll).includes('Most Texas toll roads are publicly owned, not privately owned. TxDOT, counties, and public toll authorities own most roadways.'),
+  'toll roads: shared direct answer is missing',
+);
+assert(toll.includes('id="ownership-lookup"'), 'toll roads: early ownership lookup is missing');
+assert(toll.includes('href="/research/texas-toll-road-ownership-2026.csv"'), 'toll roads: ownership CSV link is missing');
+const tollGraph = graph(toll);
+assert(tollGraph.some((item) => item['@type'] === 'Article'), 'toll roads: Article schema is missing');
+assert(tollGraph.some((item) => item['@type'] === 'BreadcrumbList'), 'toll roads: Breadcrumb schema is missing');
+const tollCsv = read('public/research/texas-toll-road-ownership-2026.csv');
+assert(tollCsv.trim().split('\n').length === 10, 'toll roads: ownership CSV must contain one header and nine data rows');
 
 const publicData = read('dist/research/search-console/technical-seo-public-data-infrastructure/index.html');
 for (const expected of ['URL-to-evidence pipeline', 'Atlas demonstrates the pipeline on an open corpus', 'Minimum quality checks before a finding is publishable']) {

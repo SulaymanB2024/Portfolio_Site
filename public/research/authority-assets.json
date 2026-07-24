@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20",
+  "generated_at": "2026-07-23",
   "canonical_host": "https://sulayman-bowles.dev",
   "objective": "Topical authority index for source-led technical SEO, crawler, AI-agent, data-system, and infrastructure research.",
   "claim_boundaries": [
@@ -155,10 +155,11 @@
       "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
       "type": "source_led_article",
       "cluster": "who-owns-texas-toll-roads",
-      "preferred_anchor": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
+      "preferred_anchor": "Texas toll-road ownership and concession guide",
       "pitch_angle": "Separate physical ownership from concession rights, operators, lenders, revenue claims, and residual control using project-level public records.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/texas-toll-road-ownership-2026.csv",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
         "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo"
       ]

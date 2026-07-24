@@ -6,6 +6,7 @@ import {
   buildAuthorityAssetsJson,
   buildLlmsText,
   buildSitemapXml,
+  buildTexasTollOwnershipCsv,
 } from '../src/seo/generatedPublicFiles';
 
 const publicDir = path.resolve(process.cwd(), 'public');
@@ -15,4 +16,5 @@ await Promise.all([
   fs.writeFile(path.join(publicDir, 'sitemap.xml'), buildSitemapXml()),
   fs.writeFile(path.join(publicDir, 'research', 'article-research-briefs.json'), buildArticleResearchBriefsJson()),
   fs.writeFile(path.join(publicDir, 'research', 'authority-assets.json'), buildAuthorityAssetsJson()),
+  fs.writeFile(path.join(publicDir, 'research', 'texas-toll-road-ownership-2026.csv'), buildTexasTollOwnershipCsv()),
 ]);

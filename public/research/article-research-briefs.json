@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20",
+  "generated_at": "2026-07-23",
   "canonical_host": "https://sulayman-bowles.dev",
   "objective": "Public intent, evidence, artifact, and related-reading briefs for the site research archive.",
   "limits": [
@@ -26,7 +26,8 @@
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
@@ -46,7 +47,8 @@
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
@@ -66,7 +68,8 @@
         "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
@@ -90,7 +93,8 @@
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
@@ -110,7 +114,8 @@
         "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
@@ -135,7 +140,8 @@
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
@@ -160,7 +166,8 @@
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
@@ -186,7 +193,8 @@
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
@@ -209,18 +217,20 @@
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
-      "question": "are toll roads privately owned in Texas",
+      "question": "are Texas toll roads privately owned",
       "supporting_questions": [
+        "are toll roads in Texas privately owned",
         "who owns Texas toll roads",
         "Texas toll road private operators"
       ],
       "intent": "ownership",
       "cohort": 1,
-      "direct_answer": "Texas toll roads are not governed by one ownership model: the state, counties, and public authorities usually own the roadway, while contracts may give private concessionaires defined rights to operate lanes, collect revenue, service debt, earn equity returns, and transfer the asset at expiry.",
+      "direct_answer": "Most Texas toll roads are publicly owned, not privately owned. TxDOT, counties, and public toll authorities own most roadways. Four major concessions—North Tarrant Express, LBJ Express, NTE 35W, and SH 130 Segments 5–6—give private companies time-limited operating and toll-revenue rights while Texas retains title to the pavement.",
       "evidence_gap": "Separate physical ownership from concession rights, operators, lenders, revenue claims, and residual control using project-level public records.",
       "original_artifact": "A project-by-project ownership, operator, concession, debt, revenue-rights, valuation, and source-gap table.",
       "scope_boundary": "This is the only article targeting Texas toll-road ownership; supporting data-system articles discuss evidence methods rather than road ownership.",
@@ -231,7 +241,13 @@
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": {
+        "country": "USA",
+        "device": "MOBILE",
+        "targetPosition": 1,
+        "sustainedSnapshots": 3
+      },
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
@@ -251,7 +267,8 @@
         "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
         "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
@@ -271,7 +288,8 @@
         "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
         "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
@@ -291,7 +309,8 @@
         "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
         "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
@@ -311,7 +330,8 @@
         "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
         "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
@@ -331,7 +351,8 @@
         "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
         "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
@@ -351,7 +372,8 @@
         "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
@@ -373,7 +395,8 @@
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
@@ -393,7 +416,8 @@
         "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
@@ -413,7 +437,8 @@
         "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
@@ -433,7 +458,8 @@
         "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
         "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     }
   ]
 }

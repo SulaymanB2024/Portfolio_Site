@@ -18,7 +18,7 @@ import {
   VIRALBENCH_ARTICLE_TITLE,
 } from '../content/viralBenchArticle';
 import { canonicalizeKnownExternalLinks } from '../content/canonicalExternalLinks';
-import { getArticleSearchTarget } from '../seo/articleSearchTargets';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToHtml } from '../utils/markdownToHtml';
 import { useSEO } from '../utils/seo';
@@ -314,7 +314,7 @@ export default function ViralBenchArticlePage() {
       links: [
         ...SEARCH_TARGET.relatedPaths.map((path) => ({
           href: path,
-          label: getArticleSearchTarget(path)?.primaryQuery ?? path,
+          label: getArticleRelatedLinkLabel(ROUTE.path, path),
         })),
         { href: '/research', label: 'Research archive' },
         { href: '/atlas', label: 'Atlas' },
