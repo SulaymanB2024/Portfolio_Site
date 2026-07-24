@@ -206,8 +206,8 @@ export default function AtlasCelestialParallaxPage() {
                   >
                     View the GitHub repo for the audit CLI
                   </a>
-                  <a href="/contact" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
-                    Request an audit
+                  <a href="https://www.void-agency.com/" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
+                    Work with Void Agency
                   </a>
                 </div>
               </motion.div>

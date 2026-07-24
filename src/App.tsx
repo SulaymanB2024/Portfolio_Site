@@ -20,7 +20,6 @@ import { TEXAS_TOLL_ARTICLE_SLUG } from './content/texasTollRoadArticleMeta';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
 import { TextMarquee } from './components/TextMarquee';
-import { AuditIntakeForm } from './components/AuditIntakeForm';
 import { WireframeGrid } from './components/WireframeGrid';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -39,7 +38,6 @@ const loadAiManagersArticlePage = () => import('./pages/AiManagersArticlePage');
 const loadWorkPage = () => import('./pages/WorkPage');
 const loadContactPage = () => import('./pages/ContactPage');
 const loadAtlasSampleCrawlPage = () => import('./pages/AtlasSampleCrawlPage');
-const loadAustinTechnicalSeoPage = () => import('./pages/AustinTechnicalSeoPage');
 
 const AtlasPage = lazy(loadAtlasPage);
 const AtlasCelestialParallaxPage = lazy(loadAtlasCelestialParallaxPage);
@@ -56,7 +54,6 @@ const AiManagersArticlePage = lazy(loadAiManagersArticlePage);
 const WorkPage = lazy(loadWorkPage);
 const ContactPage = lazy(loadContactPage);
 const AtlasSampleCrawlPage = lazy(loadAtlasSampleCrawlPage);
-const AustinTechnicalSeoPage = lazy(loadAustinTechnicalSeoPage);
 const LocalTime = lazy(() => import('./components/LocalTime').then(m => ({ default: m.LocalTime })));
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
@@ -113,8 +110,6 @@ async function preloadRoute(path: string) {
     await loadContactPage();
   } else if (route?.path === '/atlas/sample-crawl') {
     await loadAtlasSampleCrawlPage();
-  } else if (route?.path === '/austin-technical-seo') {
-    await loadAustinTechnicalSeoPage();
   } else if (route?.path === '/resume') {
     await loadResumePage();
   } else if (route?.path === '/research') {
@@ -203,12 +198,6 @@ export default function App() {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
         <AtlasSampleCrawlPage />
-      </Suspense>
-    );
-  } else if (route?.path === '/austin-technical-seo') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AustinTechnicalSeoPage />
       </Suspense>
     );
   } else if (route?.path === '/resume') {
@@ -1300,11 +1289,11 @@ function HomePage() {
               <div className="md:col-span-5">
                 <ScrollReveal blur={false}>
                   <span className="block text-[10px] uppercase tracking-[0.3em] text-ink/56">Contact / Direct</span>
-                  <h2 className="mt-10 max-w-[7ch] font-serif text-[4rem] font-light leading-[0.84] tracking-normal sm:text-7xl md:text-[5.5rem] lg:text-[6.3rem]">
-                    Send the <span className="italic">brief.</span>
+                  <h2 className="mt-10 max-w-[8ch] font-serif text-[4rem] font-light leading-[0.84] tracking-normal sm:text-7xl md:text-[5.5rem] lg:text-[6.3rem]">
+                    Start a <span className="italic">conversation.</span>
                   </h2>
                   <p className="mt-10 max-w-sm text-sm leading-[1.8] text-ink/64 md:text-base">
-                    A URL, the decision in front of you, and the evidence that feels incomplete is enough to start.
+                    Use direct email for personal, research, product, or technical-work context. Commercial SEO and local-service requests belong with Void Agency.
                   </p>
                   <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="mt-8 inline-block border-b border-ink/24 pb-1 text-[10px] uppercase tracking-[0.24em] text-ink/68 transition-colors hover:border-ink hover:text-ink">
                     sulayman.bowles@gmail.com
@@ -1313,7 +1302,18 @@ function HomePage() {
               </div>
 
               <ScrollReveal delay={0.12} yOffset={12} blur={false} className="md:col-span-7 md:pl-8">
-                <AuditIntakeForm variant="editorial" tone="light" submitLabel="SEND BRIEF" />
+                <div className="grid gap-px border border-ink/14 bg-ink/14 sm:grid-cols-2">
+                  <a href="/contact" className="min-h-64 bg-canvas p-6 transition-colors hover:bg-ink hover:text-canvas md:p-8">
+                    <span className="text-[10px] uppercase tracking-[0.24em] opacity-55">Personal contact</span>
+                    <h3 className="mt-10 font-serif text-4xl italic leading-none">Contact Sulayman</h3>
+                    <p className="mt-6 text-sm leading-relaxed opacity-65">Research, product, technical work, speaking, and professional context.</p>
+                  </a>
+                  <a href="https://www.void-agency.com/" className="min-h-64 bg-canvas p-6 transition-colors hover:bg-ink hover:text-canvas md:p-8">
+                    <span className="text-[10px] uppercase tracking-[0.24em] opacity-55">Commercial work</span>
+                    <h3 className="mt-10 font-serif text-4xl italic leading-none">Work with Void</h3>
+                    <p className="mt-6 text-sm leading-relaxed opacity-65">Agency, Austin, service-business, technical SEO, and lead-generation requests.</p>
+                  </a>
+                </div>
               </ScrollReveal>
             </div>
 

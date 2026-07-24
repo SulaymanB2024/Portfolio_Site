@@ -1,38 +1,31 @@
 # Sulayman Bowles Portfolio
 
-A Vite React portfolio and agency/research site for Sulayman Bowles. The app keeps the animated client experience, while the production build generates route-specific static HTML for crawlable metadata, summaries, canonical URLs, and JSON-LD.
+A Vite React identity, portfolio, and research site for Sulayman Bowles. Commercial agency, local-service, and lead-generation intent lives on [Void Agency](https://www.void-agency.com/). The app keeps the animated client experience, while the production build generates route-specific static HTML for crawlable metadata, summaries, canonical URLs, and JSON-LD.
 
 Live site: [sulayman-bowles.dev](https://sulayman-bowles.dev/)
 
-Key source surfaces: [AI information](https://sulayman-bowles.dev/ai-information) · [Research assets](https://sulayman-bowles.dev/research) · [authority asset index](https://sulayman-bowles.dev/research/authority-assets.json) · [AI crawler policy source map](https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv)
+Key source surfaces: [About](https://sulayman-bowles.dev/about) · [Void Agency relationship](https://sulayman-bowles.dev/void-agency) · [Research assets](https://sulayman-bowles.dev/research) · [authority asset index](https://sulayman-bowles.dev/research/authority-assets.json) · [AI crawler policy source map](https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv)
 
 ## Routes
 
 - `/`
 - `/work`
+- `/about`
+- `/void-agency`
 - `/atlas`
 - `/atlas/sample-crawl`
-- `/simple`
 - `/markets`
+- `/research`
 - `/research/ai-crawlers/ai-search-crawler-policy`
 - `/research/search-console/technical-seo-public-data-infrastructure`
 - `/research/personal-seo/canonical-identity-personal-seo`
 - `/markets/who-owns-texas-toll-roads`
 - `/method`
-- `/void-agency`
-- `/austin-technical-seo`
-- `/case-studies/technical-seo-audit`
-- `/about`
 - `/resume`
 - `/contact`
-- `/ai-information`
-- `/research`
 - `/sitemap`
-- `/markets/network-monopolies`
-- `/markets/computational-commodity-systems`
-- `/markets/fiat-horizon`
 
-Aliases such as `/projects/atlas`, `/atlas/sample-run`, `/projects/markets`, `/audit-intake`, `/austin-seo`, `/technical-seo-case-study`, `/book`, `/plain`, `/text`, `/cv`, and `/resume.html` redirect or normalize to their canonical routes.
+The route registry in `src/seo/routes.ts` is authoritative for all article routes. Legacy commercial paths such as `/audit-intake`, `/austin-seo`, and `/austin-technical-seo` redirect to Void Agency; identity and content aliases normalize to their canonical `.dev` routes.
 
 ## Local Development
 

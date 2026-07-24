@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23",
+  "generated_at": "2026-07-24",
   "canonical_host": "https://sulayman-bowles.dev",
   "objective": "Topical authority index for source-led technical SEO, crawler, AI-agent, data-system, and infrastructure research.",
   "claim_boundaries": [
@@ -331,18 +331,6 @@
     },
     {
       "priority": 1,
-      "name": "Austin Technical SEO",
-      "url": "https://sulayman-bowles.dev/austin-technical-seo",
-      "type": "canonical_site_asset",
-      "cluster": "technical-seo",
-      "preferred_anchor": "Austin technical SEO audit services",
-      "pitch_angle": "A locally scoped technical SEO service page with a bounded public crawlability benchmark.",
-      "supporting_assets": [
-        "https://sulayman-bowles.dev/research"
-      ]
-    },
-    {
-      "priority": 1,
       "name": "Evidence-Led Technical SEO Audit Method",
       "url": "https://sulayman-bowles.dev/method",
       "type": "canonical_site_asset",
@@ -354,7 +342,7 @@
       ]
     },
     {
-      "priority": 2,
+      "priority": 1,
       "name": "Sulayman Bowles and Void Agency",
       "url": "https://sulayman-bowles.dev/void-agency",
       "type": "canonical_site_asset",

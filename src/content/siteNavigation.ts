@@ -15,7 +15,6 @@ export const primaryNav: SiteNavItem[] = [
 
 export const utilityNav: SiteNavItem[] = [
   { label: 'SEO Audit Method', href: '/method', description: 'Sulayman’s evidence-led process, deliverables, and rerun checks.' },
-  { label: 'Austin Technical SEO', href: '/austin-technical-seo', description: 'Austin technical SEO consultant, crawlability pilot, and audit entry point.' },
   { label: 'Void Agency', href: '/void-agency', description: 'Sulayman’s role, public contributions, and relationship to the commercial agency.' },
   { label: 'HTML Sitemap', href: '/sitemap', description: 'Plain links to every public canonical route.' },
   { label: 'Tech Ledger', href: 'https://sulayman-bowles.tech/', description: 'Technical projects, experiments, and project ledger.' },

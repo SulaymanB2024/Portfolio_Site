@@ -107,8 +107,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - Void Agency: https://www.void-agency.com/
 - Sulayman Bowles and Void Agency: ${absoluteUrl('/void-agency')}
 - Evidence-led technical SEO audit method: ${absoluteUrl('/method')}
-- Austin technical SEO consultant and audit services: ${absoluteUrl('/austin-technical-seo')}
-- Technical SEO consultant contact and audit intake: ${PROFILE_FACTS.canonicalLinks.contact}
+- Personal contact for Sulayman Bowles: ${PROFILE_FACTS.canonicalLinks.contact}
 - Technical ledger: ${PROFILE_FACTS.canonicalLinks.technicalLedger}
 
 ## Public Work and Research
@@ -151,7 +150,7 @@ The Atlas demonstration is a dated, bounded capture from an open web corpus; it 
 
 export function buildArticleResearchBriefsJson() {
   return `${JSON.stringify({
-    generated_at: '2026-07-23',
+    generated_at: '2026-07-24',
     canonical_host: 'https://sulayman-bowles.dev',
     objective: 'Public intent, evidence, artifact, and related-reading briefs for the site research archive.',
     limits: [
@@ -201,7 +200,7 @@ export function buildAuthorityAssetsJson() {
   });
 
   return `${JSON.stringify({
-    generated_at: '2026-07-23',
+    generated_at: '2026-07-24',
     canonical_host: 'https://sulayman-bowles.dev',
     objective: 'Topical authority index for source-led technical SEO, crawler, AI-agent, data-system, and infrastructure research.',
     claim_boundaries: [
@@ -238,7 +237,6 @@ export function buildAuthorityAssetsJson() {
       },
       ...[
         ['/atlas', 'Atlas technical SEO audit software', 'crawler-engineering', 'Atlas crawl evidence system', 'A product page connecting crawl contracts, evidence preservation, review states, and public demonstration artifacts.'],
-        ['/austin-technical-seo', 'Austin Technical SEO', 'technical-seo', 'Austin technical SEO audit services', 'A locally scoped technical SEO service page with a bounded public crawlability benchmark.'],
         ['/method', 'Evidence-Led Technical SEO Audit Method', 'technical-seo', 'technical SEO audit method', 'Sulayman Bowles’s personal audit method, organized around crawl evidence, implementation priorities, and reviewable handoff.'],
         ['/void-agency', 'Sulayman Bowles and Void Agency', 'identity', 'Sulayman Bowles Void Agency role', 'An author-and-company relationship page documenting the founder role, public contributions, supporting evidence, and claim boundaries.'],
         ['/markets', 'Markets and Investing', 'infrastructure', 'markets and infrastructure research', 'A finance-only research filter with visible assumptions, ownership evidence, and recommendation boundaries.'],

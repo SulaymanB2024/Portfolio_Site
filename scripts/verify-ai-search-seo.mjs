@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const siteUrl = 'https://sulayman-bowles.dev';
 const personId = `${siteUrl}/about#sulayman-bowles`;
-const retiredPaths = ['/simple', '/ai-information', '/case-studies/technical-seo-audit'];
+const retiredPaths = ['/simple', '/ai-information', '/austin-technical-seo', '/case-studies/technical-seo-audit'];
 const retiredArchivePaths = [
   '/markets/network-monopolies',
   '/markets/computational-commodity-systems',
@@ -25,7 +25,6 @@ const routeFiles = [
   ['/research/financial-systems/waymo-hardware-financing', 'dist/research/financial-systems/waymo-hardware-financing/index.html'],
   ['/markets/who-owns-texas-toll-roads', 'dist/markets/who-owns-texas-toll-roads/index.html'],
   ['/method', 'dist/method/index.html'],
-  ['/austin-technical-seo', 'dist/austin-technical-seo/index.html'],
   ['/contact', 'dist/contact/index.html'],
 ];
 
@@ -71,11 +70,6 @@ for (const expected of ['How Sulayman Bowles Builds and Runs Void Agency', 'Foun
   assert(textFromHtml(voidRelationship).includes(expected), `void relationship: missing ${expected}`);
 }
 assert(voidRelationship.includes('href="https://www.void-agency.com/"'), 'void relationship: missing commercial handoff');
-
-const austin = read('dist/austin-technical-seo/index.html');
-for (const expected of ['Austin Technical SEO Consultant', 'Crawlability and indexation audit', 'JavaScript rendering and templates', 'Structured data and AI search readiness']) {
-  assert(textFromHtml(austin).includes(expected), `Austin SEO: missing ${expected}`);
-}
 
 const atlas = read('dist/atlas/sample-crawl/index.html');
 for (const expected of ['Atlas Open-Corpus Demonstration', 'raw-versus-rendered', 'Traceable Findings', 'Confidence', 'Download open-corpus CSV', 'Download capture manifest']) {
@@ -265,6 +259,9 @@ for (const [source, destination] of [
   ['/simple', '/about'],
   ['/ai-information', '/about'],
   ['/case-studies/technical-seo-audit', '/method'],
+  ['/audit-intake', 'https://www.void-agency.com/'],
+  ['/austin-seo', 'https://www.void-agency.com/'],
+  ['/austin-technical-seo', 'https://www.void-agency.com/'],
   ['/markets/network-monopolies', '/markets/archived-research-methodology'],
   ['/markets/computational-commodity-systems', '/markets/archived-research-methodology'],
   ['/markets/fiat-horizon', '/markets/archived-research-methodology'],

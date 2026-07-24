@@ -1,6 +1,6 @@
 # Link-Building Completion Audit
 
-Generated: 2026-07-20
+Generated: 2026-07-24
 
 ## Completed In This Repository
 
@@ -17,7 +17,7 @@ Generated: 2026-07-20
 | GitHub owned repo opportunity audit | docs/link-building/github-owned-repo-opportunities.csv | 16 long-tail repos classified |
 | Article cluster prospects | docs/link-building/article-cluster-prospects.csv | 25 vetted cluster mappings |
 | Article cluster editorial drafts | docs/link-building/article-cluster-outreach-drafts.md | two unsent approval-gated drafts per cluster |
-| Authority asset index | public/research/authority-assets.json | 25 assets |
+| Authority asset index | public/research/authority-assets.json | 29 assets |
 | Crawler policy source map | public/research/ai-search-crawler-policy-sources.csv | 16 sources |
 | Austin crawlability benchmark | public/research/austin-crawlability-benchmark-pilot.csv and public/research/austin-crawlability-benchmark-summary.json | 12 measured rows |
 | Publish manifest | docs/link-building/publish-manifest.json | defines the link-building-only file scope |

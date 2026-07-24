@@ -39,7 +39,7 @@ const primarySiteParts = [
   { name: 'Technical SEO and AI Systems Portfolio', path: '/work' },
   { name: 'Atlas Technical SEO Audit Software', path: '/atlas' },
   { name: 'Evidence-Led Technical SEO Audit Method', path: '/method' },
-  { name: 'Technical SEO Consultant Contact', path: '/contact' },
+  { name: 'Contact Sulayman Bowles', path: '/contact' },
   { name: 'Technical SEO and AI Systems Research', path: '/research' },
 ];
 
@@ -47,7 +47,7 @@ function contactPointSchema(): JsonLd {
   return {
     '@type': 'ContactPoint',
     '@id': `${absoluteUrl('/contact')}#technical-seo-contact`,
-    contactType: 'technical SEO, crawl evidence, analytics, and source-backed research inquiries',
+    contactType: 'research, product, technical work, speaking, and professional inquiries',
     email: directEmail,
     url: absoluteUrl('/contact'),
     availableLanguage: ['en-US', 'English'],
@@ -568,7 +568,7 @@ export function workJsonLd(): JsonLd {
       path: '/work',
       name: 'Selected Work',
       description:
-        'A work index for Sulayman Bowles with contextual links to Atlas sample crawl data, technical SEO method, public code, audit intake, and markets research assumptions.',
+        'A work index for Sulayman Bowles with contextual links to Atlas sample crawl data, technical SEO method, public code, personal contact, and markets research assumptions.',
       keywords: searchTerms('/work'),
       mainEntityId: collectionId,
       aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
@@ -581,37 +581,16 @@ export function workJsonLd(): JsonLd {
 }
 
 export function contactJsonLd(): JsonLd {
-  const serviceId = `${absoluteUrl('/contact')}#audit-intake-service`;
-
   return graphSchema([
     ...canonicalEntitySchemas({ includeContactPoint: true }),
     websiteSchema(),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      '@id': serviceId,
-      name: 'Technical SEO Audit Intake',
-      url: absoluteUrl('/contact'),
-      provider: {
-        '@id': PERSON_ID,
-      },
-      serviceType: ['Technical SEO Audit', 'Search Visibility Audit', 'Crawlability Review'],
-      areaServed: 'United States',
-      availableChannel: {
-        '@type': 'ServiceChannel',
-        serviceUrl: absoluteUrl('/contact'),
-        availableLanguage: ['en-US', 'English'],
-      },
-      description:
-        'Contact and compact audit brief path for technical SEO audits, crawl reviews, analytics, markets research, and structured web systems.',
-    },
     webPageSchema({
       path: '/contact',
       name: 'Contact Sulayman Bowles',
       description:
-        'Contact page for Sulayman Bowles with a direct email path, compact Formspree brief form, and links to LinkedIn, GitHub, resume, public site, Atlas sample crawl data, and the technical SEO method.',
+        'Personal contact page for Sulayman Bowles with direct email and links for research, product, technical work, speaking, and professional context; commercial SEO requests are handed to Void Agency.',
       keywords: searchTerms('/contact'),
-      mainEntityId: serviceId,
+      mainEntityId: PERSON_ID,
       aboutIds: [PERSON_ID],
       additionalType: 'ContactPage',
       dateModified: schemaDateModified,
@@ -730,45 +709,6 @@ export function viralBenchArticleJsonLd(): JsonLd {
       { name: 'Home', path: '/' },
       { name: 'Research', path: '/research' },
       { name: 'ViralBench + Codex Agent Harness', path },
-    ]),
-  ]);
-}
-
-export function austinTechnicalSeoJsonLd(): JsonLd {
-  const serviceId = `${absoluteUrl('/austin-technical-seo')}#service`;
-
-  return graphSchema([
-    ...canonicalEntitySchemas(),
-    websiteSchema(),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      '@id': serviceId,
-      name: 'Austin Technical SEO Consultant and Audit Services',
-      url: absoluteUrl('/austin-technical-seo'),
-      provider: {
-        '@id': PERSON_ID,
-      },
-      areaServed: {
-        '@type': 'City',
-        name: 'Austin',
-      },
-      serviceType: ['Austin Technical SEO Consulting', 'Technical SEO Audit', 'Crawlability Audit', 'Local Search Visibility Review'],
-      description:
-        'Austin technical SEO consulting for teams that need crawlability, indexation, JavaScript rendering, internal links, structured data, local pages, and implementation reviewed.',
-    },
-    webPageSchema({
-      path: '/austin-technical-seo',
-      name: 'Austin Technical SEO Consultant',
-      description:
-        'Austin technical SEO consultant and audit-services page with crawlability evidence, defined limits, method links, sample crawl data, and intake.',
-      keywords: searchTerms('/austin-technical-seo'),
-      mainEntityId: serviceId,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
-    }),
-    breadcrumbSchema([
-      { name: 'Home', path: '/' },
-      { name: 'Austin Technical SEO', path: '/austin-technical-seo' },
     ]),
   ]);
 }

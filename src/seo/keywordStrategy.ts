@@ -44,15 +44,9 @@ export const SEARCH_INTENT_CLUSTERS = [
   },
   {
     path: '/contact',
-    intent: 'commercial',
-    primary: 'technical SEO consultant',
-    supporting: ['technical SEO audit contact', 'crawlability consultant', 'SEO implementation support'],
-  },
-  {
-    path: '/austin-technical-seo',
-    intent: 'local-commercial',
-    primary: 'Austin technical SEO consultant',
-    supporting: ['technical SEO Austin', 'Austin SEO audit', 'Austin technical SEO services', 'Austin crawlability audit'],
+    intent: 'profile',
+    primary: 'Contact Sulayman Bowles',
+    supporting: ['Sulayman Bowles email', 'technical work', 'research collaboration'],
   },
   {
     path: '/research',

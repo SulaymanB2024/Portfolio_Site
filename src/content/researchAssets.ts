@@ -182,10 +182,10 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 3,
-    name: 'Austin Technical SEO',
-    href: '/austin-technical-seo',
-    type: 'local_service_page',
-    preferredAnchor: 'Austin technical SEO',
+    name: 'Void Agency Austin Technical SEO',
+    href: 'https://www.void-agency.com/',
+    type: 'external_reference',
+    preferredAnchor: 'Void Agency Austin technical SEO',
     audiences: ['Austin startups', 'local business', 'student entrepreneurship', 'B2B web teams'],
     pitchAngle:
       'Local technical SEO page for crawlability, indexation, page clarity, and implementation detail.',
@@ -205,7 +205,7 @@ export const publicResearchAssets: ResearchAsset[] = [
       'Bounded public crawlability signal sample for Austin-area technology and business websites with explicit measurement limits.',
     supportingAssets: [
       { label: 'Austin benchmark summary', href: '/research/austin-crawlability-benchmark-summary.json' },
-      { label: 'Austin technical SEO page', href: '/austin-technical-seo' },
+      { label: 'Void Agency Austin technical SEO', href: 'https://www.void-agency.com/' },
     ],
   },
   {

@@ -13,7 +13,6 @@ import {
 } from '../content/viralBenchArticle';
 import {
   aboutJsonLd,
-  austinTechnicalSeoJsonLd,
   atlasSampleCrawlJsonLd,
   atlasJsonLd,
   contactJsonLd,
@@ -281,37 +280,20 @@ const CORE_ROUTES: SeoRoute[] = [
   },
   {
     path: '/contact',
-    aliases: ['/audit-intake'],
-    title: 'Technical SEO Consultant & Audit Contact | Sulayman Bowles',
+    aliases: [],
+    title: 'Contact Sulayman Bowles | Technical Work & Research',
     description:
-      'Contact technical SEO consultant Sulayman Bowles for crawlability, indexation, rendering, structured data, analytics, implementation, or audit support.',
-    h1: 'Contact a Technical SEO Consultant',
+      'Contact Sulayman Bowles about research, product, technical systems, speaking, or professional context; commercial SEO requests are handled by Void Agency.',
+    h1: 'Contact Sulayman Bowles',
     section: 'contact',
-    pageType: 'service',
+    pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: KEYWORD_LASTMOD,
+    lastmod: SEO_PERFORMANCE_LASTMOD,
     staticSummary:
-      'Direct contact and a compact brief for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and research.',
+      'Personal contact page for Sulayman Bowles with direct email and professional profiles; commercial agency and local-service requests are handed to Void Agency.',
     image: PROFILE_OG_IMAGE,
     jsonLd: contactJsonLd(),
-  },
-  {
-    path: '/austin-technical-seo',
-    aliases: ['/austin-seo'],
-    title: 'Austin Technical SEO Consultant & Audit Services',
-    description:
-      'Austin technical SEO for teams that need crawlability, indexation, structured data, page clarity, local context, and implementation guidance.',
-    h1: 'Austin Technical SEO',
-    section: 'local-service',
-    pageType: 'service',
-    priority: 0.7,
-    includeInSitemap: true,
-    lastmod: METADATA_REFRESH_LASTMOD,
-    staticSummary:
-      'Austin technical SEO consulting and audit services for crawlability, indexation, rendering, internal links, structured data, local pages, and implementation.',
-    image: VOID_OG_IMAGE,
-    jsonLd: austinTechnicalSeoJsonLd(),
   },
   {
     path: VIRALBENCH_ARTICLE_PATH,

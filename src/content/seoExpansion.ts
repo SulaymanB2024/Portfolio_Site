@@ -24,9 +24,9 @@ export const contextualProofLinks = [
     description: 'Public scraper and audit-system code.',
   },
   {
-    label: 'Request an audit',
-    href: '/contact',
-    description: 'Audit intake for technical SEO, site systems, analytics, and markets research.',
+    label: 'Work with Void Agency',
+    href: 'https://www.void-agency.com/',
+    description: 'Commercial technical SEO, site systems, analytics, and service-business work.',
   },
   {
     label: 'Read the markets research memo with assumptions',
@@ -47,9 +47,9 @@ export const researchContextLinks = [
     description: 'Sulayman’s personal process for turning crawl evidence into implementation priorities and rerun checks.',
   },
   {
-    label: 'Austin technical SEO consultant',
-    href: '/austin-technical-seo',
-    description: 'Local audit coverage, a bounded Austin crawlability pilot, and an implementation entry point.',
+    label: 'Void Agency Austin technical SEO',
+    href: 'https://www.void-agency.com/',
+    description: 'Commercial Austin, local-service, technical SEO, and lead-generation scope.',
   },
   {
     label: 'Technical SEO portfolio',
@@ -57,9 +57,9 @@ export const researchContextLinks = [
     description: 'Public systems, studies, constraints, ownership, and inspectable evidence in one place.',
   },
   {
-    label: 'Contact a technical SEO consultant',
+    label: 'Contact Sulayman Bowles',
     href: '/contact',
-    description: 'Direct contact for crawlability, indexation, rendering, structured data, and analytics work.',
+    description: 'Personal contact for research, product, technical work, speaking, and professional context.',
   },
 ] as const;
 
@@ -134,7 +134,7 @@ export const workProofCards = [
   {
     eyebrow: 'Technical SEO research',
     title: 'Austin Crawlability Pilot',
-    href: '/austin-technical-seo',
+    href: '/research/austin-crawlability-benchmark-pilot.csv',
     problem: 'Local-service SEO advice is often published without a bounded sample, inspectable rows, or a distinction between access gaps and negative findings.',
     role: 'Study design, public collection, measurement-gap policy, analysis, and publication.',
     built: 'A 12-site homepage/robots/sitemap pilot, aggregate summary, public CSV, methodology, and cutoff-aware reporting.',
@@ -323,10 +323,10 @@ export const voidAgencyProofLinks = [
     copy: 'Sanitized crawl table showing the kind of data reviewed before audit recommendations.',
   },
   {
-    label: 'Request an audit',
-    href: '/contact',
-    role: 'Intake',
-    copy: 'Direct audit intake for technical SEO, site systems, analytics, and markets research work.',
+    label: 'Work with Void Agency',
+    href: 'https://www.void-agency.com/',
+    role: 'Commercial handoff',
+    copy: 'Agency, local-service, technical SEO service, and lead-generation requests belong on the Void site.',
   },
 ];
 

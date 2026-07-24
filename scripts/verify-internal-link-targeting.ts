@@ -12,8 +12,8 @@ const DESCRIPTIVE_ANCHOR_EXPECTATIONS = [
   ['/work', 'technical SEO portfolio'],
   ['/atlas', 'technical SEO audit software'],
   ['/method', 'evidence-led technical SEO audit method'],
-  ['/contact', 'technical SEO consultant'],
-  ['/austin-technical-seo', 'Austin technical SEO consultant'],
+  ['/contact', 'Contact Sulayman Bowles'],
+  ['/void-agency', 'Sulayman Bowles Void Agency'],
   ['/research', 'technical SEO research'],
   ['/markets/who-owns-texas-toll-roads', 'Texas toll road ownership'],
 ] as const;

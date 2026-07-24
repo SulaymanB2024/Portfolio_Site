@@ -80,7 +80,7 @@ const mobileHeroLinks = [
     note: 'Audit CLI',
     external: true,
   },
-  { href: '/contact', label: 'Request an audit', note: 'Contact' },
+  { href: 'https://www.void-agency.com/', label: 'Work with Void Agency', note: 'Commercial', external: true },
 ];
 
 const capabilityStatus = [
@@ -278,7 +278,7 @@ const finalActions = [
     label: 'View the audit CLI',
     external: true,
   },
-  { href: '/contact', label: 'Request an audit' },
+  { href: 'https://www.void-agency.com/', label: 'Work with Void Agency', external: true },
 ];
 
 const finalNodes = [
@@ -418,8 +418,8 @@ export default function AtlasPage() {
                 <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
                   View GitHub repo
                 </a>
-                <a href="/contact" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
-                  Request an audit
+                <a href="https://www.void-agency.com/" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
+                  Work with Void Agency
                 </a>
               </nav>
             </motion.div>

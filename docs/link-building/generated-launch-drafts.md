@@ -1,6 +1,6 @@
 # Generated Launch Drafts
 
-Generated: 2026-07-20
+Generated: 2026-07-24
 
 These drafts are approval-ready payloads for the launch queue. They are not sent messages and should not be posted without account access, fit review, and approval.
 
@@ -141,7 +141,7 @@ Interested in feedback on whether the crawler/source-page framing is clear for d
 - Queue status: ready_after_publish
 - Action type: story_tip
 - Contact/submission URL: https://www.bizjournals.com/austin/about-us
-- Target page: https://sulayman-bowles.dev/austin-technical-seo
+- Target page: https://www.void-agency.com/
 - Approval required: yes
 - Send ready now: no
 - Boundary: Benchmark assets now exist in-repo; pitch only after review and deployment.
@@ -164,8 +164,8 @@ https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv
 Summary:
 https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json
 
-The local context page is here:
-https://sulayman-bowles.dev/austin-technical-seo
+The agency context page is here:
+https://www.void-agency.com/
 
 The benchmark is intentionally bounded: public homepage, robots.txt, and sitemap checks only. It does not claim rankings, traffic, revenue impact, AI citations, or site health, and access-limited/challenged fetches are treated as measurement gaps rather than negative findings.
 
