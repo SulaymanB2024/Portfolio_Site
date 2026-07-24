@@ -50,8 +50,13 @@ import {
   TEXAS_TOLL_ARTICLE_TITLE,
   type TexasTollArticleTable,
 } from '../content/texasTollRoadArticle';
+import {
+  TEXAS_TOLL_DIRECT_ANSWER,
+  TEXAS_TOLL_OWNERSHIP_CSV_PATH,
+  TEXAS_TOLL_OWNERSHIP_ROWS,
+} from '../content/texasTollRoadOwnership';
 import { markdownToHtml } from '../utils/markdownToHtml';
-import { getArticleSearchTarget } from './articleSearchTargets';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from './articleSearchTargets';
 import type { SeoRoute } from './routes';
 
 type LinkItem = {
@@ -285,25 +290,48 @@ function articleShell(title: string, intro: string, body: string) {
       </article>`;
 }
 
-function articleSearchBriefStaticHtml(path: string) {
+function articleSearchBriefStaticHtml(path: string, options: { includeDirectAnswer?: boolean } = {}) {
   const target = getArticleSearchTarget(path);
   if (!target) return '';
+  const includeDirectAnswer = options.includeDirectAnswer ?? true;
 
-  return `<section aria-labelledby="direct-answer-title">
-        <h2 id="direct-answer-title">Direct answer: ${escapeHtml(target.primaryQuery)}</h2>
-        <p>${escapeHtml(target.directAnswer)}</p>
+  return `<section ${includeDirectAnswer ? 'aria-labelledby="direct-answer-title"' : 'aria-label="Article research brief"'}>
+        ${includeDirectAnswer ? `<h2 id="direct-answer-title">Direct answer: ${escapeHtml(target.primaryQuery)}</h2>
+        <p>${escapeHtml(target.directAnswer)}</p>` : ''}
         <h3>Original research artifact</h3>
         <p>${escapeHtml(target.originalArtifact)}</p>
         <h3>What this page adds</h3>
         <p>${escapeHtml(target.serpGap)}</p>
         <h3>Related research</h3>
         ${linkList(target.relatedPaths.map((relatedPath) => {
-          const relatedTarget = getArticleSearchTarget(relatedPath);
           return {
             href: relatedPath,
-            label: relatedTarget?.primaryQuery ?? relatedPath,
+            label: getArticleRelatedLinkLabel(path, relatedPath),
           };
         }))}
+      </section>`;
+}
+
+function texasTollOwnershipLookupStaticHtml() {
+  const rows = TEXAS_TOLL_OWNERSHIP_ROWS.map(
+    (row) => `<tr>
+            <th scope="row">${escapeHtml(row.facility)}<br /><small>${escapeHtml(row.region)}</small></th>
+            <td>${escapeHtml(row.physicalOwner)}</td>
+            <td><strong>${escapeHtml(row.operator)}</strong><br /><small>${escapeHtml(row.tollRevenueClaimant)}</small></td>
+            <td>${escapeHtml(row.privateRightsStatus)}<br /><small>${escapeHtml(row.term)}</small></td>
+            <td>${escapeHtml(row.billingAgency)}<br /><small>${row.sourceIds.map((sourceId) => `<a href="#source-${sourceId}">${sourceId.toUpperCase()}</a>`).join(', ')}</small></td>
+          </tr>`,
+  ).join('\n          ');
+
+  return `<section id="ownership-lookup" aria-labelledby="ownership-lookup-title">
+        <h2 id="ownership-lookup-title">Are Texas toll roads privately owned?</h2>
+        <p>${escapeHtml(TEXAS_TOLL_DIRECT_ANSWER)}</p>
+        <p>Use this lookup to separate the physical owner from the operator, toll-revenue claimant, private-rights status, and billing agency. It also answers “Are toll roads in Texas privately owned?” and “Who owns Texas toll roads?” at the facility level.</p>
+        <table>
+          <thead><tr><th>Facility or system</th><th>Physical owner</th><th>Operator / revenue claimant</th><th>Private rights</th><th>Billing agency</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+        <p><a href="${TEXAS_TOLL_OWNERSHIP_CSV_PATH}" download>Download the complete Texas toll-road ownership matrix (CSV)</a> · <a href="https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html">Compare TxDOT’s current operator inventory</a></p>
       </section>`;
 }
 
@@ -322,7 +350,7 @@ function viralBenchArticleStaticHtml() {
   );
 
   return `<figure>
-          <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1672" height="941" alt="A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space." />
+          <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1800" height="1200" alt="A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space." />
         </figure>
         ${articleHtml}
         <h2>Source ledger</h2>
@@ -420,9 +448,8 @@ function texasTollArticleStaticHtml() {
   return articleShell(
     TEXAS_TOLL_ARTICLE_TITLE,
     TEXAS_TOLL_ARTICLE_DESCRIPTION,
-    `<h2>Short answer</h2>
-        <p>Texas toll roads do not have one owner. The state, a county, or a public authority usually owns the physical roadway. Contracts determine who controls toll revenue, operations, debt claims, equity, billing, and the residual rights at expiry.</p>
-        ${articleSearchBriefStaticHtml(`/markets/${TEXAS_TOLL_ARTICLE_SLUG}`)}
+    `${texasTollOwnershipLookupStaticHtml()}
+        ${articleSearchBriefStaticHtml(`/markets/${TEXAS_TOLL_ARTICLE_SLUG}`, { includeDirectAnswer: false })}
         ${markdownToHtml(TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN)}
         ${sections}
         <h2 id="analyst-model-screen">Analyst model screening</h2>
@@ -556,7 +583,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>Local technical SEO audits for Austin teams that need service pages, crawl paths, evidence, and implementation priorities reviewed.</p>
         <h3><a href="/research">Technical SEO research</a></h3>
         <p>Source-led notes on crawlability, crawler policy, public search data, canonical identity, AI systems, and evidence limits.</p>
-        <h3><a href="/markets/who-owns-texas-toll-roads">Who Owns the Toll Roads in Texas?</a></h3>
+        <h3><a href="/markets/who-owns-texas-toll-roads">Texas Toll-Road Ownership Map</a></h3>
         <p>Source-led infrastructure research on public ownership, private concessions, operators, debt claims, revenue rights, and missing facts.</p>
         <h2>How I work</h2>
         <p>Collect the source material, preserve the observed state, separate interpretation from fact, name the owner, and define the next check.</p>
@@ -849,10 +876,10 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     const structuredSections = article.sections
       ? articleSectionsStaticHtml(article.sections)
       : '';
-    const articleImage = article.imageAlt && article.image !== '/og-default.png'
+    const articleImage = article.artwork.kind === 'image'
       ? `<figure>
-          <img src="${escapeHtml(article.image)}" alt="${escapeHtml(article.imageAlt)}" />
-          <figcaption>${escapeHtml(article.imageCaption ?? article.title)}</figcaption>
+          <img src="${escapeHtml(article.artwork.heroSrc)}" alt="${escapeHtml(article.artwork.alt)}" />
+          <figcaption>${escapeHtml(article.artwork.caption)}</figcaption>
         </figure>`
       : '';
     const resources = article.resources?.length

@@ -1,14 +1,12 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
 
 import {
-  ArticleBody,
-  ArticleCallout,
-  ArticleEndnote,
-  ArticleHero,
-  ArticleMetricStrip,
-  ArticlePage,
+  ArticleReader,
   ArticleSectionHeader,
+  createArticleNavigation,
+  getArticleNavigationIndex,
   type ArticleNavItem,
+  type ArticleReaderConfig,
 } from '../components/ArticleLayout';
 import {
   AI_MANAGER_CASES,
@@ -24,10 +22,9 @@ import {
   AI_MANAGERS_ARTICLE_SECTIONS,
   AI_MANAGERS_ARTICLE_TITLE,
   AI_MANAGERS_ARTICLE_UPDATED,
-  AI_MANAGERS_ARTICLE_WORD_COUNT,
   type AiManagerCaseKind,
 } from '../content/aiManagersArticle';
-import { getArticleSearchTarget } from '../seo/articleSearchTargets';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToReact } from '../utils/markdownToReact';
 import { useSEO } from '../utils/seo';
@@ -373,20 +370,26 @@ function SectionVisual({ sectionId }: { sectionId: string }) {
   return null;
 }
 
-function ArticleSection({ section }: { section: (typeof AI_MANAGERS_ARTICLE_SECTIONS)[number] }) {
+function ArticleSection({
+  section,
+  index,
+}: {
+  section: (typeof AI_MANAGERS_ARTICLE_SECTIONS)[number];
+  index: string;
+}) {
   return (
     <section id={section.id}>
-      <ArticleSectionHeader index={section.index}>{section.title}</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>{section.title}</ArticleSectionHeader>
       <ArticleMarkdown markdown={section.markdown} />
       <SectionVisual sectionId={section.id} />
     </section>
   );
 }
 
-function FrequentlyAskedQuestions() {
+function FrequentlyAskedQuestions({ index }: { index: string }) {
   return (
     <section id="frequently-asked-questions">
-      <ArticleSectionHeader index="FAQ">AI-operated small businesses, answered directly</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>AI-operated small businesses, answered directly</ArticleSectionHeader>
       <div className="toll-faq-list">
         {AI_MANAGER_FAQS.map((faq, index) => (
           <details key={faq.question} open={index === 0}>
@@ -399,10 +402,10 @@ function FrequentlyAskedQuestions() {
   );
 }
 
-function SourceLedger() {
+function SourceLedger({ index }: { index: string }) {
   return (
     <section id="source-ledger" className="toll-source-ledger">
-      <ArticleSectionHeader index="S">Source ledger</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>Source ledger</ArticleSectionHeader>
       <p className="toll-section-intro">
         The article uses operator logs and dashboards for detailed traces, independent reporting to verify physical reality, public code to inspect architecture, and papers for controlled evidence. Operator economics remain unaudited unless stated otherwise.
       </p>
@@ -459,76 +462,121 @@ export default function AiManagersArticlePage() {
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
-  const navItems: ArticleNavItem[] = [
-    { id: 'overview', label: 'Overview', index: '00', summary: 'The operating claim and its limit.' },
-    ...AI_MANAGERS_ARTICLE_SECTIONS
-      .filter((section) => section.id !== 'closing')
-      .map((section) => ({ id: section.id, label: section.title, index: section.index })),
-    { id: 'frequently-asked-questions', label: 'Direct answers', index: 'FAQ' },
-    { id: 'source-ledger', label: 'Source ledger', index: 'S' },
-  ];
+  const navItems: ArticleNavItem[] = createArticleNavigation([
+    {
+      kind: 'overview',
+      id: 'overview',
+      label: 'Overview',
+      summary: 'The operating claim and its limit.',
+    },
+    ...AI_MANAGERS_ARTICLE_SECTIONS.map((section) => ({
+      kind: 'section' as const,
+      id: section.id,
+      label: section.title,
+    })),
+    {
+      kind: 'faq',
+      id: 'frequently-asked-questions',
+      label: 'Direct answers',
+    },
+    {
+      kind: 'source',
+      id: 'source-ledger',
+      label: 'Source ledger',
+    },
+  ]);
+  const config: ArticleReaderConfig = {
+    activePath: '/research',
+    mode: 'narrative',
+    className: 'ai-managers-article',
+    archive: {
+      href: '/research',
+      label: 'Research archive',
+    },
+    hero: {
+      eyebrow: 'AI-operated shops / human control / commercial reality',
+      title: AI_MANAGERS_ARTICLE_TITLE,
+      displayTitle: AI_MANAGERS_ARTICLE_DISPLAY_TITLE,
+      deck: AI_MANAGERS_ARTICLE_DESCRIPTION,
+      image: {
+        src: '/images/research/ai-managers-reader-hero.webp',
+        alt: 'Monochrome editorial artwork showing a central operator directing several bounded AI systems.',
+        label: 'AI-operated businesses / operating layer',
+        caption: 'Model decisions remain nested inside human legal, financial, and physical control.',
+      },
+    },
+    publication: {
+      subject: 'AI systems / business operations',
+      published: {
+        dateTime: AI_MANAGERS_ARTICLE_DATE.replaceAll('.', '-'),
+        value: 'July 14, 2026',
+      },
+      updated: {
+        dateTime: AI_MANAGERS_ARTICLE_UPDATED.replaceAll('.', '-'),
+        value: 'July 14, 2026',
+      },
+      readTime: AI_MANAGERS_ARTICLE_READ_TIME,
+      evidence: `${AI_MANAGER_SOURCES.length} sources`,
+    },
+    metrics: headlineMetrics.map((metric) => ({
+      label: metric.label,
+      value: metric.value,
+      note: metric.note,
+    })),
+    callouts: [{
+      label: 'Direct answer',
+      title: SEARCH_TARGET.primaryQuery,
+      content: (
+        <>
+          <p>{SEARCH_TARGET.directAnswer}</p>
+          <p><strong>Original artifact:</strong> {SEARCH_TARGET.originalArtifact}</p>
+        </>
+      ),
+    }],
+    navigation: {
+      items: navItems,
+      contentsLabel: 'Chapters',
+    },
+    boundary: {
+      label: 'Evidence boundary',
+      content: 'Operator dashboards are unaudited. Simulations are not businesses. Human legal, financial, and physical work is counted, not cropped out.',
+    },
+    endnote: {
+      content: 'Research cutoff: July 14, 2026. Financial claims are labeled by source type and accounting limit. No simulation score is presented as real-world profit.',
+      links: [
+        ...SEARCH_TARGET.relatedPaths.map((path) => ({
+          href: path,
+          label: getArticleRelatedLinkLabel(AI_MANAGERS_ARTICLE_PATH, path),
+        })),
+        { href: '/research', label: 'Research archive' },
+        { href: '/viralbench-codex-agent-harness', label: 'Agent evaluation' },
+        { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },
+        { href: '/about', label: 'About the author' },
+      ],
+    },
+  };
 
   return (
-    <ArticlePage activePath="/research" variant="chapters" className="ai-managers-article">
-      <ArticleHero
-        backHref="/research"
-        backLabel="Research archive"
-        eyebrow="AI-operated shops / human control / commercial reality"
-        title={AI_MANAGERS_ARTICLE_TITLE}
-        displayTitle={AI_MANAGERS_ARTICLE_DISPLAY_TITLE}
-        deck={AI_MANAGERS_ARTICLE_DESCRIPTION}
-        image={{
-          src: '/images/research/ai-managers-operating-layer.jpg',
-          alt: 'Monochrome editorial artwork showing a central operator directing several bounded AI systems.',
-          label: 'AI-operated businesses / operating layer',
-          caption: 'Model decisions remain nested inside human legal, financial, and physical control.',
-        }}
-        metadata={[
-          { label: 'Subject', value: 'AI systems / business operations' },
-          { label: 'Published', value: <time dateTime={AI_MANAGERS_ARTICLE_DATE.replaceAll('.', '-')}>July 14, 2026</time> },
-          { label: 'Updated', value: <time dateTime={AI_MANAGERS_ARTICLE_UPDATED.replaceAll('.', '-')}>July 14, 2026</time> },
-          { label: 'Length', value: `${AI_MANAGERS_ARTICLE_READ_TIME} / ${AI_MANAGERS_ARTICLE_WORD_COUNT.toLocaleString()} words` },
-          { label: 'Method', value: `${AI_MANAGER_SOURCES.length}-entry public source ledger, live dashboards, operator logs, independent reporting, public code, and benchmark papers.` },
-        ]}
-      />
-
-      <ArticleMetricStrip items={headlineMetrics.map((metric) => ({ label: metric.label, value: metric.value, note: metric.note }))} />
-
-      <ArticleCallout label="Direct answer" title={SEARCH_TARGET.primaryQuery}>
-        <p>{SEARCH_TARGET.directAnswer}</p>
-        <p><strong>Original artifact:</strong> {SEARCH_TARGET.originalArtifact}</p>
-      </ArticleCallout>
-
-      <ArticleBody
-        items={navItems}
-        variant="chapters"
-        boundary="Operator dashboards are unaudited. Simulations are not businesses. Human legal, financial, and physical work is counted, not cropped out."
-        boundaryLabel="Evidence boundary"
-      >
+    <ArticleReader config={config}>
         <section id="overview">
-          <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
+          <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'overview')}>
+            Overview
+          </ArticleSectionHeader>
           <ArticleMarkdown markdown={AI_MANAGERS_ARTICLE_LEDE} />
           <HallOfShameFigure />
         </section>
-        {AI_MANAGERS_ARTICLE_SECTIONS.map((section) => <Fragment key={section.id}><ArticleSection section={section} /></Fragment>)}
-        <FrequentlyAskedQuestions />
-        <SourceLedger />
-
-        <ArticleEndnote
-          links={[
-            ...SEARCH_TARGET.relatedPaths.map((path) => ({
-              href: path,
-              label: getArticleSearchTarget(path)?.primaryQuery ?? path,
-            })),
-            { href: '/research', label: 'Research archive' },
-            { href: '/viralbench-codex-agent-harness', label: 'Agent evaluation' },
-            { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },
-            { href: '/about', label: 'About the author' },
-          ]}
-        >
-          Research cutoff: July 14, 2026. Financial claims are labeled by source type and accounting limit. No simulation score is presented as real-world profit.
-        </ArticleEndnote>
-      </ArticleBody>
-    </ArticlePage>
+        {AI_MANAGERS_ARTICLE_SECTIONS.map((section) => (
+          <Fragment key={section.id}>
+            <ArticleSection
+              section={section}
+              index={getArticleNavigationIndex(navItems, section.id)}
+            />
+          </Fragment>
+        ))}
+        <FrequentlyAskedQuestions
+          index={getArticleNavigationIndex(navItems, 'frequently-asked-questions')}
+        />
+        <SourceLedger index={getArticleNavigationIndex(navItems, 'source-ledger')} />
+    </ArticleReader>
   );
 }

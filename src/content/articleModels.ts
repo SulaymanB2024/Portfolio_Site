@@ -49,6 +49,23 @@ export type ArticleCodeExample = {
   code: string;
 };
 
+export type ArticleArtwork =
+  | {
+      kind: 'image';
+      heroSrc: string;
+      socialSrc: string;
+      alt: string;
+      label: string;
+      caption: string;
+      objectPosition?: string;
+    }
+  | {
+      kind: 'study';
+      variant: 'triptych';
+      label: string;
+      note: string;
+    };
+
 export type ArticleSection = {
   id: string;
   title: string;
@@ -70,11 +87,7 @@ export type ResearchArticle = {
   seoTitle: string;
   subtitle: string;
   seoDescription: string;
-  image: string;
-  imageAlt?: string;
-  imageLabel?: string;
-  imageCaption?: string;
-  imagePresentation?: 'editorial' | 'diagram';
+  artwork: ArticleArtwork;
   date: string;
   dateModified?: string;
   lastVerified?: string;

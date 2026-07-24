@@ -11,6 +11,7 @@ document.documentElement.classList.add('js');
 function Root() {
   useLayoutEffect(() => {
     document.documentElement.classList.add('app-mounted');
+    document.getElementById('seo-static-summary')?.remove();
     return () => document.documentElement.classList.remove('app-mounted');
   }, []);
 

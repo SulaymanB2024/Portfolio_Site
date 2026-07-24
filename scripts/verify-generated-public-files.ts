@@ -6,6 +6,7 @@ import {
   buildAuthorityAssetsJson,
   buildLlmsText,
   buildSitemapXml,
+  buildTexasTollOwnershipCsv,
 } from '../src/seo/generatedPublicFiles';
 
 const expectedFiles = [
@@ -13,6 +14,7 @@ const expectedFiles = [
   ['public/sitemap.xml', buildSitemapXml()],
   ['public/research/article-research-briefs.json', buildArticleResearchBriefsJson()],
   ['public/research/authority-assets.json', buildAuthorityAssetsJson()],
+  ['public/research/texas-toll-road-ownership-2026.csv', buildTexasTollOwnershipCsv()],
 ] as const;
 
 const staleFiles: string[] = [];

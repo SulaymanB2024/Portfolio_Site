@@ -1,9 +1,26 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { getArticlePath } from '../src/content/articleRegistry';
+import {
+  createArticleNavigation,
+  type ArticleNavigationSeed,
+} from '../src/components/ArticleLayout';
+import {
+  AI_MANAGERS_ARTICLE_PATH,
+  AI_MANAGERS_ARTICLE_SECTIONS,
+} from '../src/content/aiManagersArticle';
+import { ALL_ARTICLES, INDEXABLE_ARTICLES, getArticlePath } from '../src/content/articleRegistry';
 import { PUBLICATION_INDEX } from '../src/content/publicationIndex';
 import { TECHNICAL_ARTICLE_SERIES } from '../src/content/technicalArticleSeries';
+import { TEXAS_TOLL_ARTICLE_SECTIONS } from '../src/content/texasTollRoadArticle';
+import { TEXAS_TOLL_ARTICLE_SLUG } from '../src/content/texasTollRoadArticleMeta';
+import {
+  VIRALBENCH_ARTICLE_IMAGE,
+  VIRALBENCH_ARTICLE_MARKDOWN,
+  VIRALBENCH_ARTICLE_PATH,
+  VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
+  VIRALBENCH_ARTICLE_TITLE,
+} from '../src/content/viralBenchArticle';
 import { getSeoRoute } from '../src/seo/routes';
 import { buildRouteStaticHtml } from '../src/seo/staticContent';
 
@@ -41,6 +58,133 @@ function normalizedWords(value: string) {
     .filter(Boolean);
 }
 
+type ImageDimensions = { width: number; height: number };
+
+function imageDimensions(filePath: string): ImageDimensions {
+  const buffer = fs.readFileSync(filePath);
+
+  if (buffer.subarray(1, 4).toString('ascii') === 'PNG') {
+    return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+  }
+
+  if (buffer[0] === 0xff && buffer[1] === 0xd8) {
+    const startOfFrameMarkers = new Set([
+      0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7,
+      0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf,
+    ]);
+    let offset = 2;
+
+    while (offset < buffer.length) {
+      while (buffer[offset] === 0xff) offset += 1;
+      const marker = buffer[offset];
+      offset += 1;
+      if (marker === 0xd8 || marker === 0xd9) continue;
+      if (marker === 0xda || offset + 1 >= buffer.length) break;
+
+      const segmentLength = buffer.readUInt16BE(offset);
+      if (startOfFrameMarkers.has(marker)) {
+        return {
+          width: buffer.readUInt16BE(offset + 5),
+          height: buffer.readUInt16BE(offset + 3),
+        };
+      }
+      offset += segmentLength;
+    }
+  }
+
+  if (buffer.subarray(0, 4).toString('ascii') === 'RIFF' && buffer.subarray(8, 12).toString('ascii') === 'WEBP') {
+    const chunk = buffer.subarray(12, 16).toString('ascii');
+    if (chunk === 'VP8X') {
+      const width = 1 + buffer[24] + (buffer[25] << 8) + (buffer[26] << 16);
+      const height = 1 + buffer[27] + (buffer[28] << 8) + (buffer[29] << 16);
+      return { width, height };
+    }
+    if (chunk === 'VP8 ') {
+      return {
+        width: buffer.readUInt16LE(26) & 0x3fff,
+        height: buffer.readUInt16LE(28) & 0x3fff,
+      };
+    }
+    if (chunk === 'VP8L') {
+      const bits = buffer.readUInt32LE(21);
+      return {
+        width: (bits & 0x3fff) + 1,
+        height: ((bits >>> 14) & 0x3fff) + 1,
+      };
+    }
+  }
+
+  throw new Error(`Unsupported image header: ${filePath}`);
+}
+
+function publicAssetPath(assetPath: string) {
+  assert(assetPath.startsWith('/'), `artwork path must be root-relative: ${assetPath}`);
+  return path.resolve('public', assetPath.slice(1));
+}
+
+function assertSharedReaderSource(filePath: string) {
+  const source = fs.readFileSync(filePath, 'utf8');
+  assert(source.includes('ArticleReaderConfig'), `${filePath}: missing typed ArticleReaderConfig`);
+  assert(source.includes('<ArticleReader config={config}>'), `${filePath}: does not render the shared ArticleReader`);
+  assert(source.includes('createArticleNavigation'), `${filePath}: does not use shared navigation normalization`);
+  assert(!source.includes('metadata={['), `${filePath}: still declares free-form reader metadata`);
+  assert(!source.includes('<ArticlePage'), `${filePath}: bypasses the shared reader configuration`);
+  assert(!source.includes('<ArticleHero'), `${filePath}: bypasses the shared reader configuration`);
+}
+
+function assertNavigationContract(
+  owner: string,
+  seeds: ArticleNavigationSeed[],
+  targetIds: string[],
+) {
+  const items = createArticleNavigation(seeds);
+  const itemIds = items.map((item) => item.id);
+
+  assert(duplicateValues(itemIds).length === 0, `${owner}: navigation contains duplicate targets`);
+  assert(duplicateValues(targetIds).length === 0, `${owner}: article contains duplicate anchor IDs`);
+  assert(
+    itemIds.length === targetIds.length && itemIds.every((id) => targetIds.includes(id)),
+    `${owner}: navigation targets do not match rendered article anchors`,
+  );
+  assert(items[0]?.id === 'overview' && items[0]?.index === '00', `${owner}: navigation must begin with 00 Overview`);
+  assert(items.at(-1)?.index === 'S', `${owner}: navigation must end with S Source ledger`);
+
+  const faqIndex = items.findIndex((item) => item.index === 'FAQ');
+  if (faqIndex >= 0) {
+    assert(faqIndex === items.length - 2, `${owner}: FAQ must precede the source ledger`);
+  }
+
+  const sequentialIndexes = items
+    .filter((item) => item.index !== '00' && item.index !== 'FAQ' && item.index !== 'S')
+    .map((item) => item.index);
+  const expectedIndexes = sequentialIndexes.map((_, index) => String(index + 1).padStart(2, '0'));
+  assert(
+    sequentialIndexes.join(',') === expectedIndexes.join(','),
+    `${owner}: numbered navigation sections must be sequential`,
+  );
+}
+
+function articleHeadingIds(markdown: string) {
+  return Array.from(markdown.matchAll(/^##\s+(.+)$/gm)).map((match) => (
+    match[1].trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  ));
+}
+
+function assertArtworkAsset(
+  owner: string,
+  role: 'hero' | 'social',
+  assetPath: string,
+  expected: ImageDimensions,
+) {
+  const filePath = publicAssetPath(assetPath);
+  assert(fs.existsSync(filePath), `${owner}: ${role} artwork is missing: ${assetPath}`);
+  const actual = imageDimensions(filePath);
+  assert(
+    actual.width === expected.width && actual.height === expected.height,
+    `${owner}: ${role} artwork must be ${expected.width}x${expected.height}, got ${actual.width}x${actual.height}: ${assetPath}`,
+  );
+}
+
 function crossArticleDuplicatePassages(wordsPerPassage: number) {
   const owners = new Map<string, Set<string>>();
 
@@ -70,6 +214,188 @@ assert(
 assert(
   duplicateValues(TECHNICAL_ARTICLE_SERIES.map((article) => article.title)).length === 0,
   'article series contains duplicate titles',
+);
+
+assert(
+  !JSON.stringify(ALL_ARTICLES).includes('/og-default.png'),
+  'public article data must not use the /og-default.png artwork sentinel',
+);
+
+const archivedMethodology = ALL_ARTICLES.find((article) => article.slug === 'archived-research-methodology');
+assert(archivedMethodology?.indexable === false, 'archive methodology must remain noindex');
+assert(
+  archivedMethodology.artwork.kind === 'study' && archivedMethodology.artwork.variant === 'triptych',
+  'archive methodology must use the explicit triptych study artwork',
+);
+
+const artworkRecords = [
+  ...INDEXABLE_ARTICLES.map((article) => {
+    assert(article.artwork.kind === 'image', `${article.slug}: indexable articles require image artwork`);
+    return {
+      owner: article.slug,
+      heroSrc: article.artwork.heroSrc,
+      socialSrc: article.artwork.socialSrc,
+      copy: `${article.artwork.label} ${article.artwork.caption}`,
+    };
+  }),
+  {
+    owner: 'viralbench-codex-agent-harness',
+    heroSrc: VIRALBENCH_ARTICLE_IMAGE,
+    socialSrc: VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
+    copy: VIRALBENCH_ARTICLE_TITLE,
+  },
+];
+
+assert(
+  duplicateValues(artworkRecords.map((record) => record.heroSrc)).length === 0,
+  'indexable article hero artwork must be unique',
+);
+assert(
+  duplicateValues(artworkRecords.map((record) => record.socialSrc)).length === 0,
+  'indexable article social artwork must be unique',
+);
+
+for (const artwork of artworkRecords) {
+  assert(artwork.heroSrc !== artwork.socialSrc, `${artwork.owner}: heroSrc and socialSrc must be separate assets`);
+  assert(
+    !/(?:\bpending\b|\breserved\b|\bplaceholder\b|will replace)/i.test(artwork.copy),
+    `${artwork.owner}: artwork copy contains placeholder language`,
+  );
+  assertArtworkAsset(artwork.owner, 'hero', artwork.heroSrc, { width: 1800, height: 1200 });
+  assertArtworkAsset(artwork.owner, 'social', artwork.socialSrc, { width: 1200, height: 630 });
+}
+
+[
+  'src/pages/MarketArticlePage.tsx',
+  'src/pages/AiManagersArticlePage.tsx',
+  'src/pages/ViralBenchArticlePage.tsx',
+  'src/pages/TexasTollRoadArticlePage.tsx',
+].forEach(assertSharedReaderSource);
+
+for (const article of INDEXABLE_ARTICLES) {
+  const routePath = getArticlePath(article);
+  const route = getSeoRoute(routePath);
+
+  assert(route, `${routePath}: canonical SEO route is missing`);
+  assert(route.path === routePath, `${routePath}: SEO route is not self-canonical`);
+  assert(route.h1 === article.title, `${routePath}: canonical h1 does not match the article title`);
+  assert(route.description === article.seoDescription, `${routePath}: canonical description does not match article metadata`);
+  assert(route.includeInSitemap && !route.noindex, `${routePath}: indexable article has conflicting canonical indexation metadata`);
+  assert(article.artwork.kind === 'image', `${routePath}: canonical metadata requires image artwork`);
+  assert(route.image === article.artwork.socialSrc, `${routePath}: metadata must use socialSrc`);
+  assert(
+    JSON.stringify(route.jsonLd).includes(article.artwork.socialSrc),
+    `${routePath}: Article structured data must use socialSrc`,
+  );
+}
+
+const viralBenchRoute = getSeoRoute(VIRALBENCH_ARTICLE_PATH);
+assert(viralBenchRoute?.path === VIRALBENCH_ARTICLE_PATH, 'ViralBench canonical route is missing');
+assert(viralBenchRoute.image === VIRALBENCH_ARTICLE_SOCIAL_IMAGE, 'ViralBench metadata must use socialSrc');
+assert(
+  JSON.stringify(viralBenchRoute.jsonLd).includes(VIRALBENCH_ARTICLE_SOCIAL_IMAGE),
+  'ViralBench structured data must use socialSrc',
+);
+
+for (const article of INDEXABLE_ARTICLES) {
+  const routePath = getArticlePath(article);
+  if (routePath === AI_MANAGERS_ARTICLE_PATH || article.slug === TEXAS_TOLL_ARTICLE_SLUG) continue;
+
+  const faqSections = (article.sections ?? []).filter((section) => section.id.toLowerCase().includes('faq'));
+  const numberedSections = (article.sections ?? []).filter((section) => !section.id.toLowerCase().includes('faq'));
+  const seeds: ArticleNavigationSeed[] = [
+    { kind: 'overview', id: 'overview', label: 'Overview' },
+    ...numberedSections.map((section) => ({
+      kind: 'section' as const,
+      id: section.id,
+      label: section.title,
+    })),
+    ...(article.kind === 'investment-memo'
+      ? [{ kind: 'section' as const, id: 'decision-frame', label: 'Decision frame' }]
+      : []),
+    ...(article.resources?.length
+      ? [{ kind: 'section' as const, id: 'downloads', label: 'Downloads' }]
+      : []),
+    ...faqSections.map((section) => ({
+      kind: 'faq' as const,
+      id: section.id,
+      label: section.title,
+    })),
+    { kind: 'source', id: 'source-ledger', label: 'Source ledger' },
+  ];
+  const targetIds = [
+    'overview',
+    ...(article.sections ?? []).map((section) => section.id),
+    ...(article.kind === 'investment-memo' ? ['decision-frame'] : []),
+    ...(article.resources?.length ? ['downloads'] : []),
+    'source-ledger',
+  ];
+  assertNavigationContract(routePath, seeds, targetIds);
+}
+
+const aiManagerSeeds: ArticleNavigationSeed[] = [
+  { kind: 'overview', id: 'overview', label: 'Overview' },
+  ...AI_MANAGERS_ARTICLE_SECTIONS.map((section) => ({
+    kind: 'section' as const,
+    id: section.id,
+    label: section.title,
+  })),
+  { kind: 'faq', id: 'frequently-asked-questions', label: 'Direct answers' },
+  { kind: 'source', id: 'source-ledger', label: 'Source ledger' },
+];
+assertNavigationContract(
+  AI_MANAGERS_ARTICLE_PATH,
+  aiManagerSeeds,
+  [
+    'overview',
+    ...AI_MANAGERS_ARTICLE_SECTIONS.map((section) => section.id),
+    'frequently-asked-questions',
+    'source-ledger',
+  ],
+);
+
+const texasTollSeeds: ArticleNavigationSeed[] = [
+  { kind: 'overview', id: 'overview', label: 'Overview' },
+  ...TEXAS_TOLL_ARTICLE_SECTIONS.map((section) => ({
+    kind: 'section' as const,
+    id: section.id,
+    label: section.title,
+  })),
+  { kind: 'section', id: 'what-remains-unknown', label: 'What remains unknown' },
+  { kind: 'faq', id: 'frequently-asked-questions', label: 'Direct answers' },
+  { kind: 'source', id: 'source-ledger', label: 'Source ledger' },
+];
+assertNavigationContract(
+  `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`,
+  texasTollSeeds,
+  [
+    'overview',
+    ...TEXAS_TOLL_ARTICLE_SECTIONS.map((section) => section.id),
+    'what-remains-unknown',
+    'frequently-asked-questions',
+    'source-ledger',
+  ],
+);
+
+const viralBenchHeadingIds = articleHeadingIds(VIRALBENCH_ARTICLE_MARKDOWN);
+const viralBenchNumberedIds = viralBenchHeadingIds.filter(
+  (id) => id !== 'frequently-asked-questions' && id !== 'sources-and-technical-notes',
+);
+const viralBenchSeeds: ArticleNavigationSeed[] = [
+  { kind: 'overview', id: 'overview', label: 'Overview' },
+  ...viralBenchNumberedIds.map((id) => ({ kind: 'section' as const, id, label: id })),
+  { kind: 'faq', id: 'frequently-asked-questions', label: 'Direct answers' },
+  { kind: 'source', id: 'source-ledger', label: 'Source ledger' },
+];
+assertNavigationContract(
+  VIRALBENCH_ARTICLE_PATH,
+  viralBenchSeeds,
+  [
+    'overview',
+    ...viralBenchNumberedIds,
+    'frequently-asked-questions',
+    'source-ledger',
+  ],
 );
 
 const expectedNumbers = Array.from({ length: 10 }, (_, index) => String(index + 5).padStart(2, '0'));
@@ -160,5 +486,5 @@ const totalWords = articleWordCounts.reduce((sum, article) => sum + article.word
 const minimumWords = Math.min(...articleWordCounts.map((article) => article.words));
 const maximumWords = Math.max(...articleWordCounts.map((article) => article.words));
 console.log(
-  `Technical article series verification passed: 10 articles, ${totalWords} prose words, ${minimumWords}-${maximumWords} words each, and no repeated 16-word passages.`,
+  `Article verification passed: ${artworkRecords.length} indexable readers use unique artwork and normalized navigation; the 10-article technical series contains ${totalWords} prose words, ${minimumWords}-${maximumWords} words each, and no repeated 16-word passages.`,
 );

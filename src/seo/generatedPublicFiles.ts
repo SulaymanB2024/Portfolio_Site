@@ -1,5 +1,9 @@
 import { ALL_ARTICLES, getArticlePath } from '../content/articleRegistry';
 import { PROFILE_FACTS } from '../content/profileFacts';
+import {
+  TEXAS_TOLL_OWNERSHIP_CSV_PATH,
+  TEXAS_TOLL_OWNERSHIP_ROWS,
+} from '../content/texasTollRoadOwnership';
 import { VIRALBENCH_ARTICLE_PATH, VIRALBENCH_ARTICLE_TITLE } from '../content/viralBenchArticle';
 import { ARTICLE_SEARCH_TARGETS } from './articleSearchTargets';
 import { getCanonicalRoutes, SITE_LASTMOD } from './routes';
@@ -16,6 +20,41 @@ function longDate(isoDate: string) {
     year: 'numeric',
     timeZone: 'UTC',
   }).format(new Date(`${isoDate}T00:00:00Z`));
+}
+
+function escapeCsv(value: string) {
+  return `"${value.replaceAll('"', '""')}"`;
+}
+
+export function buildTexasTollOwnershipCsv() {
+  const header = [
+    'facility',
+    'region',
+    'physical_owner',
+    'operator',
+    'toll_revenue_claimant',
+    'concessionaire',
+    'term',
+    'private_rights_status',
+    'billing_agency',
+    'evidence_date',
+    'source_ids',
+  ];
+  const rows = TEXAS_TOLL_OWNERSHIP_ROWS.map((row) => [
+    row.facility,
+    row.region,
+    row.physicalOwner,
+    row.operator,
+    row.tollRevenueClaimant,
+    row.concessionaire,
+    row.term,
+    row.privateRightsStatus,
+    row.billingAgency,
+    row.evidenceDate,
+    row.sourceIds.join('|'),
+  ]);
+
+  return `${[header, ...rows].map((row) => row.map(escapeCsv).join(',')).join('\n')}\n`;
 }
 
 export function buildSitemapXml() {
@@ -81,6 +120,7 @@ ${articleLines}
 - Appian assumptions table CSV: ${absoluteUrl('/research/appian-assumptions-table.csv')}
 - Authority asset index: ${absoluteUrl('/research/authority-assets.json')}
 - Article research briefs: ${absoluteUrl('/research/article-research-briefs.json')}
+- Texas toll-road ownership matrix: ${absoluteUrl(TEXAS_TOLL_OWNERSHIP_CSV_PATH)}
 - Crawler policy sources: ${absoluteUrl('/research/ai-search-crawler-policy-sources.csv')}
 - Austin crawlability benchmark pilot CSV: ${absoluteUrl('/research/austin-crawlability-benchmark-pilot.csv')}
 - Austin crawlability benchmark summary: ${absoluteUrl('/research/austin-crawlability-benchmark-summary.json')}
@@ -110,7 +150,7 @@ The Atlas demonstration is a dated, bounded capture from an open web corpus; it 
 
 export function buildArticleResearchBriefsJson() {
   return `${JSON.stringify({
-    generated_at: '2026-07-20',
+    generated_at: '2026-07-23',
     canonical_host: 'https://sulayman-bowles.dev',
     objective: 'Public intent, evidence, artifact, and related-reading briefs for the site research archive.',
     limits: [
@@ -129,7 +169,8 @@ export function buildArticleResearchBriefsJson() {
       original_artifact: target.originalArtifact,
       scope_boundary: target.cannibalizationBoundary,
       related_articles: target.relatedPaths.map(absoluteUrl),
-      last_verified: '2026-07-20',
+      ranking_goal: 'rankingGoal' in target ? target.rankingGoal : null,
+      last_verified: '2026-07-23',
     })),
   }, null, 2)}\n`;
 }
@@ -144,17 +185,22 @@ export function buildAuthorityAssetsJson() {
       url: absoluteUrl(target.path),
       type: 'source_led_article',
       cluster: target.path.split('/')[2] || 'ai-systems',
-      preferred_anchor: route.h1,
+      preferred_anchor: target.path === '/markets/who-owns-texas-toll-roads'
+        ? 'Texas toll-road ownership and concession guide'
+        : route.h1,
       pitch_angle: target.serpGap,
       supporting_assets: [
         absoluteUrl('/research/article-research-briefs.json'),
+        ...(target.path === '/markets/who-owns-texas-toll-roads'
+          ? [absoluteUrl(TEXAS_TOLL_OWNERSHIP_CSV_PATH)]
+          : []),
         ...target.relatedPaths.slice(0, index === 0 ? 3 : 2).map(absoluteUrl),
       ],
     };
   });
 
   return `${JSON.stringify({
-    generated_at: '2026-07-20',
+    generated_at: '2026-07-23',
     canonical_host: 'https://sulayman-bowles.dev',
     objective: 'Topical authority index for source-led technical SEO, crawler, AI-agent, data-system, and infrastructure research.',
     claim_boundaries: [

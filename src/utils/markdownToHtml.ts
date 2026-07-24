@@ -7,7 +7,7 @@ function escapeHtml(value: string) {
     .replaceAll("'", '&#39;');
 }
 
-function inlineMarkdown(value: string) {
+function inlineMarkdown(value: string, noteRefCounts: Map<string, number>) {
   const code: string[] = [];
   let html = escapeHtml(value).replace(/`([^`]+)`/g, (_match, contents: string) => {
     code.push(`<code>${contents}</code>`);
@@ -15,7 +15,12 @@ function inlineMarkdown(value: string) {
   });
 
   html = html
-    .replace(/\[\^([^\]]+)\]/g, '<sup><a href="#note-$1" id="note-ref-$1">$1</a></sup>')
+    .replace(/\[\^([^\]]+)\]/g, (_match, id: string) => {
+      const occurrence = noteRefCounts.get(id) ?? 0;
+      noteRefCounts.set(id, occurrence + 1);
+      const refId = occurrence === 0 ? `note-ref-${id}` : `note-ref-${id}-${occurrence + 1}`;
+      return `<sup><a href="#note-${id}" id="${refId}">${id}</a></sup>`;
+    })
     .replace(/\[(S\d+)\]\((#source-[^\s)]*)\)/g, '<sup class="article-citation"><a href="$2" aria-label="Source $1">$1</a></sup>')
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]*|#[^\s)]*)\)/g, '<a href="$2">$1</a>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
@@ -32,8 +37,12 @@ function tableCells(line: string) {
   return line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => cell.trim());
 }
 
-export function markdownToHtml(markdown: string) {
+export function markdownToHtml(
+  markdown: string,
+  options: { noteRefCounts?: Map<string, number> } = {},
+) {
   const notes = new Map<string, string>();
+  const noteRefCounts = options.noteRefCounts ?? new Map<string, number>();
   const lines = markdown.replace(/\r\n/g, '\n').split('\n').filter((line) => {
     const match = line.match(/^\[\^([^\]]+)\]:\s*(.+)$/);
     if (!match) return true;
@@ -66,7 +75,7 @@ export function markdownToHtml(markdown: string) {
     if (heading) {
       const level = heading[1].length;
       const id = heading[2].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-      blocks.push(`<h${level} id="${id}">${inlineMarkdown(heading[2])}</h${level}>`);
+      blocks.push(`<h${level} id="${id}">${inlineMarkdown(heading[2], noteRefCounts)}</h${level}>`);
       index += 1;
       continue;
     }
@@ -79,7 +88,7 @@ export function markdownToHtml(markdown: string) {
         rows.push(tableCells(lines[index]));
         index += 1;
       }
-      blocks.push(`<div class="article-table-wrap"><table><thead><tr>${headers.map((cell) => `<th>${inlineMarkdown(cell)}</th>`).join('')}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdown(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
+      blocks.push(`<div class="article-table-wrap"><table><thead><tr>${headers.map((cell) => `<th>${inlineMarkdown(cell, noteRefCounts)}</th>`).join('')}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdown(cell, noteRefCounts)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
       continue;
     }
 
@@ -89,7 +98,7 @@ export function markdownToHtml(markdown: string) {
         quote.push(lines[index].replace(/^>\s?/, ''));
         index += 1;
       }
-      blocks.push(`<blockquote>${quote.map((item) => `<p>${inlineMarkdown(item)}</p>`).join('')}</blockquote>`);
+      blocks.push(`<blockquote>${quote.map((item) => `<p>${inlineMarkdown(item, noteRefCounts)}</p>`).join('')}</blockquote>`);
       continue;
     }
 
@@ -102,7 +111,7 @@ export function markdownToHtml(markdown: string) {
       while (index < lines.length) {
         const item = lines[index].match(pattern);
         if (!item) break;
-        items.push(`<li>${inlineMarkdown(item[1])}</li>`);
+        items.push(`<li>${inlineMarkdown(item[1], noteRefCounts)}</li>`);
         index += 1;
       }
       blocks.push(`<${tag}>${items.join('')}</${tag}>`);
@@ -123,11 +132,11 @@ export function markdownToHtml(markdown: string) {
       paragraph.push(lines[index].trim());
       index += 1;
     }
-    blocks.push(`<p>${inlineMarkdown(paragraph.join(' '))}</p>`);
+    blocks.push(`<p>${inlineMarkdown(paragraph.join(' '), noteRefCounts)}</p>`);
   }
 
   if (notes.size) {
-    blocks.push(`<ol class="article-notes">${Array.from(notes, ([id, note]) => `<li id="note-${escapeHtml(id)}">${inlineMarkdown(note)} <a href="#note-ref-${escapeHtml(id)}" aria-label="Back to reference ${escapeHtml(id)}">↩</a></li>`).join('')}</ol>`);
+    blocks.push(`<ol class="article-notes">${Array.from(notes, ([id, note]) => `<li id="note-${escapeHtml(id)}">${inlineMarkdown(note, noteRefCounts)} <a href="#note-ref-${escapeHtml(id)}" aria-label="Back to reference ${escapeHtml(id)}">↩</a></li>`).join('')}</ol>`);
   }
 
   return blocks.join('\n');

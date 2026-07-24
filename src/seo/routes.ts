@@ -5,10 +5,10 @@ import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
   VIRALBENCH_ARTICLE_EXCERPT,
-  VIRALBENCH_ARTICLE_IMAGE,
   VIRALBENCH_ARTICLE_MODIFIED_DATE,
   VIRALBENCH_ARTICLE_PATH,
   VIRALBENCH_ARTICLE_SEO_TITLE,
+  VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
   VIRALBENCH_ARTICLE_TITLE,
 } from '../content/viralBenchArticle';
 import {
@@ -73,7 +73,6 @@ const ATLAS_OG_IMAGE = '/images/social/og-atlas.png';
 const WORK_OG_IMAGE = '/images/social/og-work.png';
 const VOID_OG_IMAGE = '/images/social/og-void.png';
 const RESEARCH_OG_IMAGE = '/images/social/og-research.png';
-const TOLL_ROADS_OG_IMAGE = '/images/social/og-toll-roads.png';
 const VIRALBENCH_SEARCH_TARGET = getArticleSearchTarget(VIRALBENCH_ARTICLE_PATH);
 
 export const NOT_FOUND_ROUTE: SeoRoute = {
@@ -307,7 +306,7 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: VIRALBENCH_ARTICLE_MODIFIED_DATE,
     staticSummary: `${VIRALBENCH_SEARCH_TARGET?.directAnswer ?? VIRALBENCH_ARTICLE_EXCERPT} ${VIRALBENCH_ARTICLE_EXCERPT}`,
-    image: VIRALBENCH_ARTICLE_IMAGE,
+    image: VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
     jsonLd: viralBenchArticleJsonLd(),
   },
   {
@@ -339,7 +338,9 @@ const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
   const dateModified = (article.dateModified ?? article.date).replaceAll('.', '-');
   const investmentMemo = isInvestmentMemo(article);
   const searchTarget = getArticleSearchTarget(path);
-  const articleImage = article.slug === TEXAS_TOLL_ARTICLE_SLUG ? TOLL_ROADS_OG_IMAGE : article.image === '/og-default.png' ? RESEARCH_OG_IMAGE : article.image;
+  const articleImage = article.artwork.kind === 'image'
+    ? article.artwork.socialSrc
+    : RESEARCH_OG_IMAGE;
   const brandedTitle = `${article.seoTitle} | Sulayman Bowles`;
 
   return {

@@ -16,13 +16,16 @@ export const WAYMO_HARDWARE_FINANCING_ARTICLE: ResearchArticle = {
     'A Waymo case study of who finances the vehicles and infrastructure, who owns the risk, and who absorbs the loss when utilization or technology fails.',
   seoDescription:
     'A source-led Waymo case study mapping $27.1B+ of equity funding, modeled fleet economics, residual-value risk, and who absorbs downside.',
-  image: '/images/research/waymo-capital-stack.png',
-  imageAlt:
-    'Capital-stack diagram separating Waymo’s disclosed equity funding from modeled physical-asset capital and unidentified debt, lease, customer, supplier, and government financing.',
-  imageLabel: 'Case study / capital stack',
-  imageCaption:
-    'Public funding is visible; asset-level financing and legal ownership remain materially undisclosed.',
-  imagePresentation: 'diagram',
+  artwork: {
+    kind: 'image',
+    heroSrc: '/images/research/waymo-financing-reader-hero.webp',
+    socialSrc: '/images/research/waymo-financing-social.jpg',
+    alt: 'A monochrome autonomous-vehicle depot above layered fleet, infrastructure, capital, and downside systems.',
+    label: 'Case study / capital stack',
+    caption:
+      'Public funding is visible; asset-level financing and legal ownership remain materially undisclosed.',
+    objectPosition: '50% 46%',
+  },
   date: '2026.07.22',
   lastVerified: '2026.06.17',
   readTime: '22 MIN',

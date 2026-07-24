@@ -18,13 +18,16 @@ export const AIRLINE_LOYALTY_FINANCING_ARTICLE: ResearchArticle = {
     'How airline loyalty program financing turns bank payments, co-brand contracts, controlled accounts, and loyalty IP into collateral—without treating points as deposits.',
   seoDescription:
     'How airlines borrow against loyalty programs: follow bank cash, deferred revenue, pledged accounts, loyalty-backed debt, and the lender waterfall.',
-  image: '/images/research/airline-loyalty-parties-money.png',
-  imageAlt:
-    'Two-part diagram separating the card purchase and merchant settlement chain from the co-brand, redemption, pledged-account, and lender cash paths.',
-  imageLabel: 'Airline loyalty financing / AAdvantage primary case',
-  imageCaption:
-    'The card purchase, bank payment, future award, and lender claim are separate transactions. The financing only works after designated loyalty cash is routed into controlled accounts.',
-  imagePresentation: 'diagram',
+  artwork: {
+    kind: 'image',
+    heroSrc: '/images/research/airline-loyalty-financing-reader-hero.webp',
+    socialSrc: '/images/research/airline-loyalty-financing-social.jpg',
+    alt: 'A monochrome airline financing system linking aircraft operations, loyalty value, bank cash, and secured collateral channels.',
+    label: 'Airline loyalty financing / AAdvantage primary case',
+    caption:
+      'The card purchase, bank payment, future award, and lender claim are separate transactions. The financing only works after designated loyalty cash is routed into controlled accounts.',
+    objectPosition: '50% 48%',
+  },
   date: '2026.07.23',
   lastVerified: '2026.07.23',
   readTime: '24 MIN',
@@ -53,6 +56,13 @@ export const AIRLINE_LOYALTY_FINANCING_ARTICLE: ResearchArticle = {
       description:
         'The supplied editable report used as the source document for this web edition.',
       format: 'DOCX',
+    },
+    {
+      label: 'Loyalty parties and money map',
+      href: '/images/research/airline-loyalty-parties-money.png',
+      description:
+        'A downloadable map separating the cardholder, merchant, issuer, airline, loyalty vehicle, award claim, and lender-controlled cash flow.',
+      format: 'PNG',
     },
   ],
   content: [
