@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const siteUrl = 'https://sulayman-bowles.dev';
 const personId = `${siteUrl}/about#sulayman-bowles`;
-const retiredPaths = ['/simple', '/ai-information', '/void-agency', '/case-studies/technical-seo-audit'];
+const retiredPaths = ['/simple', '/ai-information', '/case-studies/technical-seo-audit'];
 const retiredArchivePaths = [
   '/markets/network-monopolies',
   '/markets/computational-commodity-systems',
@@ -12,6 +12,7 @@ const retiredArchivePaths = [
 const routeFiles = [
   ['/', 'dist/index.html'],
   ['/about', 'dist/about/index.html'],
+  ['/void-agency', 'dist/void-agency/index.html'],
   ['/work', 'dist/work/index.html'],
   ['/resume', 'dist/resume/index.html'],
   ['/atlas', 'dist/atlas/index.html'],
@@ -64,6 +65,12 @@ assert(fs.existsSync(path.resolve('public/Sulayman_Bowles_Resume.pdf')), 'public
 
 const about = read('dist/about/index.html');
 assert(textFromHtml(about).includes('current second degree'), 'about: music must be current, not historical');
+
+const voidRelationship = read('dist/void-agency/index.html');
+for (const expected of ['How Sulayman Bowles Builds and Runs Void Agency', 'Founder and operator', 'Verified Operating Record', 'Evidence Boundaries']) {
+  assert(textFromHtml(voidRelationship).includes(expected), `void relationship: missing ${expected}`);
+}
+assert(voidRelationship.includes('href="https://www.void-agency.com/"'), 'void relationship: missing commercial handoff');
 
 const austin = read('dist/austin-technical-seo/index.html');
 for (const expected of ['Austin Technical SEO Consultant', 'Crawlability and indexation audit', 'JavaScript rendering and templates', 'Structured data and AI search readiness']) {
@@ -258,7 +265,6 @@ for (const [source, destination] of [
   ['/simple', '/about'],
   ['/ai-information', '/about'],
   ['/case-studies/technical-seo-audit', '/method'],
-  ['/void-agency', 'https://www.void-agency.com/'],
   ['/markets/network-monopolies', '/markets/archived-research-methodology'],
   ['/markets/computational-commodity-systems', '/markets/archived-research-methodology'],
   ['/markets/fiat-horizon', '/markets/archived-research-methodology'],

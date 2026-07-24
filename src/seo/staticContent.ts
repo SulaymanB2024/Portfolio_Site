@@ -688,6 +688,34 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     );
   }
 
+  if (route.path === '/void-agency') {
+    return articleShell(
+      'How Sulayman Bowles Builds and Runs Void Agency',
+      'An author-and-company relationship page documenting Sulayman Bowles’s role, public contributions, supporting evidence, and claim boundaries at Void Agency.',
+      `<p>Void Agency is the commercial branch of my technical SEO and web-systems work. I founded the practice, define the operating method, build and review its public systems, and keep every outcome claim tied to inspectable evidence.</p>
+        <h2>Role and Contributions</h2>
+        ${definitionCards([
+          ['Founder and operator', 'I set the practice scope, shape engagements, review findings, and own the handoff from public crawl evidence to implementation work.'],
+          ['Technical SEO systems', 'I connect crawlability, indexation, rendering, internal links, structured data, analytics, and acceptance checks into bounded audit and repair workflows.'],
+          ['Search-ready web delivery', 'I build service architecture, proof sections, conversion paths, event measurement, and post-release validation for the agency’s public web systems.'],
+        ])}
+        <h2>Verified Operating Record</h2>
+        <p>The public résumé records more than $50,000 in collected Void Agency revenue as of May 31, 2026. That verifies an operating practice; it does not establish a client ranking or traffic outcome.</p>
+        ${linkList([{ label: 'Review the supporting résumé', href: '/resume' }])}
+        <h2>Evidence Boundaries</h2>
+        <ul><li>Commercial, local-service, agency, and lead-generation intent belongs on void-agency.com.</li><li>Public examples are labeled representative whenever client results are unavailable.</li><li>Release, crawlability, indexability, impressions, rankings, clicks, and qualified leads remain separate claims.</li><li>No ranking, traffic, revenue, or AI-citation outcome is implied without matching provider evidence.</li></ul>
+        <h2>Public Proof</h2>
+        ${linkList([
+          { label: 'Open Void Agency', href: 'https://www.void-agency.com/', description: 'Commercial services, positioning, examples, and consultation path.' },
+          { label: 'Technical SEO audit example', href: 'https://www.void-agency.com/examples/technical-seo-audit', description: 'Representative scope, sanitized output, and evidence limits.' },
+          { label: 'Search-ready website example', href: 'https://www.void-agency.com/examples/search-ready-website', description: 'Representative architecture, proof, contact, and measurement deliverables.' },
+          { label: 'AI lead-intake workflow example', href: 'https://www.void-agency.com/examples/ai-lead-intake-workflow', description: 'Representative source capture, review, and handoff.' },
+          { label: 'Read Sulayman’s audit method', href: '/method', description: 'Personal process from crawl evidence to owners and rerun checks.' },
+          { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl', description: 'Dated, bounded public crawl evidence.' },
+        ])}`,
+    );
+  }
+
   if (route.path === '/method') {
     return articleShell(
       'How Sulayman Bowles Runs Evidence-Led Technical SEO Audits',
@@ -826,7 +854,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>The work is inspectable rather than assertion-led: the relevant project pages attach sanitized crawl rows, source ledgers, method notes, system designs, public code, and explicit evidence limits.</p>
         <h2>Current Work</h2>
         <h3><a href="/atlas">Atlas</a></h3><p>I designed the product, crawl evidence contract, review states, persistence, and export paths.</p>
-        <h3><a href="https://www.void-agency.com/">Void Agency</a></h3><p>I run fixed-scope technical audits, web systems, analytics review, and implementation handoffs through this practice.</p>
+        <h3><a href="/void-agency">Void Agency</a></h3><p>I run fixed-scope technical audits, web systems, analytics review, and implementation handoffs through this practice.</p>
         <h3><a href="/resume">Product work</a></h3><p>AI product research, competitive analysis, workflow mapping, and prototype review.</p>
         <h3><a href="/research">Finance and research</a></h3><p>Ownership, operating logic, source tables, market validation, unit economics, and financial models.</p>
         <h2>Experience</h2>

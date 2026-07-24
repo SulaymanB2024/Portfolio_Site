@@ -53,7 +53,6 @@
     { "src": "/entity-profile", "headers": { "Location": "/about" }, "status": 308 },
     { "src": "/source-information", "headers": { "Location": "/about" }, "status": 308 },
     { "src": "/ai-information", "headers": { "Location": "/about" }, "status": 308 },
-    { "src": "/void-agency", "headers": { "Location": "https://www.void-agency.com/" }, "status": 308 },
     { "src": "/research-assets", "headers": { "Location": "/research" }, "status": 308 },
     { "src": "/markets/the-first-ai-managers", "headers": { "Location": "/research/ai-systems/the-first-ai-managers" }, "status": 308 },
     { "src": "/markets/ai-search-crawler-policy", "headers": { "Location": "/research/ai-crawlers/ai-search-crawler-policy" }, "status": 308 },

@@ -355,6 +355,18 @@
     },
     {
       "priority": 2,
+      "name": "Sulayman Bowles and Void Agency",
+      "url": "https://sulayman-bowles.dev/void-agency",
+      "type": "canonical_site_asset",
+      "cluster": "identity",
+      "preferred_anchor": "Sulayman Bowles Void Agency role",
+      "pitch_angle": "An author-and-company relationship page documenting the founder role, public contributions, supporting evidence, and claim boundaries.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
+    },
+    {
+      "priority": 2,
       "name": "Markets and Investing",
       "url": "https://sulayman-bowles.dev/markets",
       "type": "canonical_site_asset",

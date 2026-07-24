@@ -28,6 +28,7 @@ const loadAtlasPage = () => import('./pages/AtlasPage');
 const loadAtlasCelestialParallaxPage = () => import('./pages/AtlasCelestialParallaxPage');
 const loadMethodPage = () => import('./pages/VoidAgencyMethodPage');
 const loadAboutPage = () => import('./pages/AboutPage');
+const loadVoidAgencyRelationshipPage = () => import('./pages/VoidAgencyRelationshipPage');
 const loadResumePage = () => import('./pages/ResumePage');
 const loadResearchPage = () => import('./pages/ResearchPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
@@ -44,6 +45,7 @@ const AtlasPage = lazy(loadAtlasPage);
 const AtlasCelestialParallaxPage = lazy(loadAtlasCelestialParallaxPage);
 const VoidAgencyMethodPage = lazy(loadMethodPage);
 const AboutPage = lazy(loadAboutPage);
+const VoidAgencyRelationshipPage = lazy(loadVoidAgencyRelationshipPage);
 const ResumePage = lazy(loadResumePage);
 const ResearchPage = lazy(loadResearchPage);
 const MarketsPage = lazy(loadMarketsPage);
@@ -103,6 +105,8 @@ async function preloadRoute(path: string) {
     await loadMethodPage();
   } else if (route?.path === '/about') {
     await loadAboutPage();
+  } else if (route?.path === '/void-agency') {
+    await loadVoidAgencyRelationshipPage();
   } else if (route?.path === '/work') {
     await loadWorkPage();
   } else if (route?.path === '/contact') {
@@ -175,6 +179,12 @@ export default function App() {
     page = (
       <Suspense fallback={<RouteFallback route={route} />}>
         <AboutPage />
+      </Suspense>
+    );
+  } else if (route?.path === '/void-agency') {
+    page = (
+      <Suspense fallback={<RouteFallback route={route} />}>
+        <VoidAgencyRelationshipPage />
       </Suspense>
     );
   } else if (route?.path === '/work') {

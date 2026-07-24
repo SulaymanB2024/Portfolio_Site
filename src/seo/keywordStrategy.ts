@@ -25,6 +25,12 @@ export const SEARCH_INTENT_CLUSTERS = [
     supporting: ['AI product manager', 'technical systems builder', 'UT Austin McCombs'],
   },
   {
+    path: '/void-agency',
+    intent: 'profile',
+    primary: 'Sulayman Bowles and Void Agency',
+    supporting: ['Void Agency founder', 'Void Agency role', 'technical SEO practice'],
+  },
+  {
     path: '/atlas',
     intent: 'product',
     primary: 'technical SEO audit software',

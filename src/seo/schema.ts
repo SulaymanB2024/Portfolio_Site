@@ -35,6 +35,7 @@ const directEmail = 'sulayman.bowles@gmail.com';
 
 const primarySiteParts = [
   { name: 'About Sulayman Bowles', path: '/about' },
+  { name: 'Sulayman Bowles and Void Agency', path: '/void-agency' },
   { name: 'Technical SEO and AI Systems Portfolio', path: '/work' },
   { name: 'Atlas Technical SEO Audit Software', path: '/atlas' },
   { name: 'Evidence-Led Technical SEO Audit Method', path: '/method' },
@@ -472,6 +473,25 @@ export function resumeJsonLd(): JsonLd {
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Resume', path: '/resume' },
+    ]),
+  ]);
+}
+
+export function voidAgencyRelationshipJsonLd(): JsonLd {
+  return graphSchema([
+    ...canonicalEntitySchemas({ includeVoidAgency: true }),
+    websiteSchema(),
+    webPageSchema({
+      path: '/void-agency',
+      name: 'Sulayman Bowles and Void Agency',
+      description:
+        'Profile page documenting Sulayman Bowles’s role, public work, verified contributions, and evidence boundaries at Void Agency.',
+      mainEntityId: PERSON_ID,
+      aboutIds: [PERSON_ID, `${SITE_URL}/#void-agency`],
+    }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Void Agency', path: '/void-agency' },
     ]),
   ]);
 }

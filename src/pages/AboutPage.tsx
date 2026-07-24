@@ -19,7 +19,7 @@ const currentWork = [
   {
     title: 'Void Agency',
     copy: 'I run fixed-scope technical audits, web systems, analytics review, and implementation handoffs through this practice. $50K+ collected revenue as of May 31, 2026.',
-    href: 'https://www.void-agency.com/',
+    href: '/void-agency',
   },
   {
     title: 'Product work',

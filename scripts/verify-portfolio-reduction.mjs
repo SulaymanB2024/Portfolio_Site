@@ -6,7 +6,7 @@ const assert = (condition, message) => { if (!condition) throw new Error(message
 const textFromHtml = (html) => html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 
 const nav = read('src/content/siteNavigation.ts');
-for (const retired of ['/simple', '/ai-information', '/case-studies/technical-seo-audit', '/void-agency']) {
+for (const retired of ['/simple', '/ai-information', '/case-studies/technical-seo-audit']) {
   assert(!nav.includes(`href: '${retired}'`), `navigation retains ${retired}`);
 }
 
@@ -23,12 +23,17 @@ for (const stale of ['Common Austin site problems.', 'Sample audit output.', 'Us
 }
 
 const routes = read('src/seo/routes.ts');
-for (const retired of ["path: '/simple'", "path: '/ai-information'", "path: '/void-agency'", "path: '/case-studies/technical-seo-audit'"]) {
+for (const retired of ["path: '/simple'", "path: '/ai-information'", "path: '/case-studies/technical-seo-audit'"]) {
   assert(!routes.includes(retired), `route registry retains ${retired}`);
 }
 
-for (const missing of ['dist/simple/index.html', 'dist/ai-information/index.html', 'dist/void-agency/index.html', 'dist/case-studies/technical-seo-audit/index.html']) {
+for (const missing of ['dist/simple/index.html', 'dist/ai-information/index.html', 'dist/case-studies/technical-seo-audit/index.html']) {
   assert(!fs.existsSync(path.resolve(missing)), `static generation retained retired route ${missing}`);
+}
+
+const voidRelationship = read('dist/void-agency/index.html');
+for (const expected of ['How Sulayman Bowles Builds and Runs Void Agency', 'Role and Contributions', 'Verified Operating Record', 'Evidence Boundaries']) {
+  assert(textFromHtml(voidRelationship).includes(expected), `void relationship: missing ${expected}`);
 }
 
 for (const missing of [

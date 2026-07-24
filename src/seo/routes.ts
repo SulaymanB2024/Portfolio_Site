@@ -25,6 +25,7 @@ import {
   resumeJsonLd,
   sitemapJsonLd,
   viralBenchArticleJsonLd,
+  voidAgencyRelationshipJsonLd,
   workJsonLd,
   type JsonLd,
 } from './schema';
@@ -143,6 +144,23 @@ const CORE_ROUTES: SeoRoute[] = [
       'Sulayman Bowles connects technical SEO consulting, Atlas crawl software, AI product work, analytics, and source-led finance research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: aboutJsonLd(),
+  },
+  {
+    path: '/void-agency',
+    aliases: [],
+    title: 'Sulayman Bowles and Void Agency | Role & Contributions',
+    description:
+      'Sulayman Bowles’s role, public work, verified contributions, and evidence boundaries at Void Agency, with commercial services kept on the agency site.',
+    h1: 'How Sulayman Bowles Builds and Runs Void Agency',
+    section: 'about',
+    pageType: 'profile',
+    priority: 0.7,
+    includeInSitemap: true,
+    lastmod: SEO_PERFORMANCE_LASTMOD,
+    staticSummary:
+      'An author-and-company relationship page documenting Sulayman Bowles’s founder role, public systems work, verified contribution record, and claim boundaries at Void Agency.',
+    image: VOID_OG_IMAGE,
+    jsonLd: voidAgencyRelationshipJsonLd(),
   },
   {
     path: '/atlas',
