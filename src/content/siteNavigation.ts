@@ -14,7 +14,7 @@ export const primaryNav: SiteNavItem[] = [
 ];
 
 export const utilityNav: SiteNavItem[] = [
-  { label: 'SEO Audit Method', href: '/method', description: 'Technical SEO audit services, process, deliverables, and rerun checks.' },
+  { label: 'SEO Audit Method', href: '/method', description: 'Sulayman’s evidence-led process, deliverables, and rerun checks.' },
   { label: 'Austin Technical SEO', href: '/austin-technical-seo', description: 'Austin technical SEO consultant, crawlability pilot, and audit entry point.' },
   { label: 'Void Agency', href: 'https://www.void-agency.com/', description: 'External site for the fixed-scope technical SEO practice.' },
   { label: 'HTML Sitemap', href: '/sitemap', description: 'Plain links to every public canonical route.' },

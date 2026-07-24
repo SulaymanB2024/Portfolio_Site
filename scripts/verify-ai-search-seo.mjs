@@ -50,8 +50,8 @@ for (const proof of ['/research/ai-systems/the-first-ai-managers', '/atlas', '/m
   assert(home.includes(`href="${proof}"`), `home: missing proof link ${proof}`);
 }
 assert(textFromHtml(home).includes('Technical SEO, AI product, systems, and investment research.'), 'home: missing positioning');
-assert(home.includes('href="/method">Technical SEO audit services</a>'), 'home: missing technical SEO audit services anchor');
-assert(home.includes('href="/austin-technical-seo">Austin technical SEO consultant</a>'), 'home: missing Austin technical SEO consultant anchor');
+assert(home.includes('href="/method">Evidence-led technical SEO audit method</a>'), 'home: missing technical SEO audit method anchor');
+assert(home.includes('href="https://www.void-agency.com/services/technical-seo-ai-search-visibility">Void Agency technical SEO services</a>'), 'home: missing Void Agency commercial handoff');
 
 const resume = read('dist/resume/index.html');
 for (const fact of ['Bachelor of Business Administration in Finance', 'Bachelor of Arts in Music', 'Expected May 2028', 'AI Product Manager Intern', 'Confidential B2B manufacturer']) {

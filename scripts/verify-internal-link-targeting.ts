@@ -11,7 +11,7 @@ type InternalLink = {
 const DESCRIPTIVE_ANCHOR_EXPECTATIONS = [
   ['/work', 'technical SEO portfolio'],
   ['/atlas', 'technical SEO audit software'],
-  ['/method', 'technical SEO audit services'],
+  ['/method', 'evidence-led technical SEO audit method'],
   ['/contact', 'technical SEO consultant'],
   ['/austin-technical-seo', 'Austin technical SEO consultant'],
   ['/research', 'technical SEO research'],

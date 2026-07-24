@@ -37,7 +37,7 @@ const primarySiteParts = [
   { name: 'About Sulayman Bowles', path: '/about' },
   { name: 'Technical SEO and AI Systems Portfolio', path: '/work' },
   { name: 'Atlas Technical SEO Audit Software', path: '/atlas' },
-  { name: 'Technical SEO Audit Services', path: '/method' },
+  { name: 'Evidence-Led Technical SEO Audit Method', path: '/method' },
   { name: 'Technical SEO Consultant Contact', path: '/contact' },
   { name: 'Technical SEO and AI Systems Research', path: '/research' },
 ];
@@ -292,61 +292,6 @@ function evidenceItemListSchema({
   };
 }
 
-function methodOfferCatalogSchema(): JsonLd {
-  const offers = [
-    {
-      name: 'Indexation Audit at Scale',
-      url: absoluteUrl('/atlas'),
-      serviceType: 'Technical SEO Audit',
-      description:
-        'Crawl waste, duplicate templates, canonicals, orphaned pages, redirects, and blocked discovery review.',
-    },
-    {
-      name: 'Public Page Clarity Review',
-      url: absoluteUrl('/about'),
-      serviceType: 'Search Visibility Audit',
-      description:
-        'Entity clarity, page structure, schema, source material, and crawler access review.',
-    },
-    {
-      name: 'Product Discovery System',
-      url: absoluteUrl('/contact'),
-      serviceType: 'Product and Collection Page SEO Audit',
-      description:
-        'Metadata, thin templates, internal links, duplicate paths, and search-intent gap review.',
-    },
-    {
-      name: 'Service-Area Visibility Audit',
-      url: absoluteUrl('/austin-technical-seo'),
-      serviceType: 'Local Search Visibility Audit',
-      description:
-        'Service pages, location pages, local entity clarity, crawl structure, and measurement-path review.',
-    },
-  ];
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'OfferCatalog',
-    '@id': `${absoluteUrl('/method')}#offer-catalog`,
-    name: 'Technical SEO Audit Offer Catalog',
-    description:
-      'Service examples visible on the Void Agency method page for technical SEO and search visibility audits.',
-    itemListElement: offers.map((offer) => ({
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name: offer.name,
-        url: offer.url,
-        serviceType: offer.serviceType,
-        description: offer.description,
-        provider: {
-          '@id': `${SITE_URL}/#void-agency`,
-        },
-      },
-    })),
-  };
-}
-
 export function projectSchema(): JsonLd {
   return {
     '@context': 'https://schema.org',
@@ -372,36 +317,6 @@ export function projectSchema(): JsonLd {
       'Technical scoring and issue prioritization',
       'Operator dashboard and client-facing export structures',
     ],
-  };
-}
-
-export function serviceSchema(): JsonLd {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${SITE_URL}/method#service`,
-    name: 'Technical SEO and Search Visibility Audit',
-    url: absoluteUrl('/method'),
-    provider: {
-      '@id': `${SITE_URL}/#void-agency`,
-    },
-    areaServed: 'United States',
-    serviceType: [
-      'Technical SEO Audit',
-      'Search Visibility Audit',
-      'Crawlability Audit',
-      'Structured Data Audit',
-    ],
-    hasOfferCatalog: {
-      '@id': `${absoluteUrl('/method')}#offer-catalog`,
-    },
-    availableChannel: {
-      '@type': 'ServiceChannel',
-      serviceUrl: absoluteUrl('/contact'),
-      availableLanguage: ['en-US', 'English'],
-    },
-    description:
-      'Technical SEO and search visibility audit work covering crawlability, robots.txt, sitemaps, raw and rendered HTML, canonical URLs, internal links, structured data, GSC/GA4 review, page templates, query buckets, and implementation recommendations.',
   };
 }
 
@@ -594,22 +509,20 @@ export function methodJsonLd(): JsonLd {
   return graphSchema([
     ...canonicalEntitySchemas({ includeVoidAgency: true }),
     websiteSchema(),
-    serviceSchema(),
-    methodOfferCatalogSchema(),
     webPageSchema({
       path: '/method',
-      name: 'Void Agency Method',
+      name: 'Evidence-Led Technical SEO Audit Method',
       description:
-        'Technical SEO audit services and process page for Void Agency, covering crawlability, indexation, rendering, structured data, implementation, and rerun checks.',
+        'Sulayman Bowles’s personal technical SEO audit methodology for crawlability, indexation, rendering, structured data, implementation, and rerun checks.',
       keywords: searchTerms('/method'),
-      mainEntityId: `${SITE_URL}/method#service`,
+      mainEntityId: PERSON_ID,
       aboutIds: [PERSON_ID, `${SITE_URL}/#void-agency`, `${SITE_URL}/atlas#software`],
     }),
     evidenceItemListSchema({
-      id: 'search-visibility-checklist',
-      name: 'Search Visibility Audit Checklist',
+      id: 'technical-seo-audit-method',
+      name: 'Evidence-Led Technical SEO Audit Method',
       description:
-        'Checklist for crawlability, indexability, source clarity, entity consistency, public files, freshness, and stale-source cleanup.',
+        'Sulayman Bowles’s checklist for crawlability, indexability, source clarity, entity consistency, public files, freshness, and stale-source cleanup.',
       path: '/method',
       items: aiSearchAuditChecklist,
     }),

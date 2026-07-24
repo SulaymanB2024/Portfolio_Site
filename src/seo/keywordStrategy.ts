@@ -32,9 +32,9 @@ export const SEARCH_INTENT_CLUSTERS = [
   },
   {
     path: '/method',
-    intent: 'commercial',
-    primary: 'technical SEO audit services',
-    supporting: ['technical SEO audit process', 'crawlability audit', 'indexation audit', 'structured data audit'],
+    intent: 'research',
+    primary: 'technical SEO audit method',
+    supporting: ['evidence-led technical SEO audits', 'technical SEO audit process', 'crawl evidence', 'audit rerun checks'],
   },
   {
     path: '/contact',

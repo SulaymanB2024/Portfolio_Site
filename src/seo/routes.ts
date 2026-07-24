@@ -68,6 +68,7 @@ export type RouteTone = 'light' | 'dark';
 export const SITE_LASTMOD = '2026-07-16';
 const METADATA_REFRESH_LASTMOD = '2026-07-19';
 const KEYWORD_LASTMOD = '2026-07-18';
+const SEO_PERFORMANCE_LASTMOD = '2026-07-24';
 const PROFILE_OG_IMAGE = '/images/social/og-profile.png';
 const ATLAS_OG_IMAGE = '/images/social/og-atlas.png';
 const WORK_OG_IMAGE = '/images/social/og-work.png';
@@ -246,18 +247,18 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/method',
     aliases: [],
-    title: 'Technical SEO Audit Services & Process | Void Agency',
+    title: 'Evidence-Led Technical SEO Audit Method | Sulayman Bowles',
     description:
-      'Void Agency’s technical SEO audit method for crawl paths, indexation, internal links, structured data, analytics, and implementation priorities.',
-    h1: 'Void Agency Method',
-    section: 'service',
-    pageType: 'service',
+      'How Sulayman Bowles runs evidence-led technical SEO audits across crawl paths, indexation, rendering, internal links, structured data, and rerun checks.',
+    h1: 'How Sulayman Bowles Runs Evidence-Led Technical SEO Audits',
+    section: 'research',
+    pageType: 'research',
     priority: 0.9,
     includeInSitemap: true,
-    lastmod: METADATA_REFRESH_LASTMOD,
+    lastmod: SEO_PERFORMANCE_LASTMOD,
     staticSummary:
-      'Technical SEO audit services for crawlability, indexation, rendering, internal links, structured data, analytics, implementation priorities, and rerun checks.',
-    image: VOID_OG_IMAGE,
+      'Sulayman Bowles’s personal technical SEO audit methodology for preserving crawl evidence, separating observation from interpretation, assigning implementation owners, and validating repairs.',
+    image: RESEARCH_OG_IMAGE,
     jsonLd: methodJsonLd(),
   },
   {

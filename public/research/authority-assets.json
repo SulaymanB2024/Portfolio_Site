@@ -343,12 +343,12 @@
     },
     {
       "priority": 1,
-      "name": "Void Agency Method",
+      "name": "Evidence-Led Technical SEO Audit Method",
       "url": "https://sulayman-bowles.dev/method",
       "type": "canonical_site_asset",
       "cluster": "technical-seo",
       "preferred_anchor": "technical SEO audit method",
-      "pitch_angle": "A fixed-scope audit method organized around crawl evidence, implementation priorities, and reviewable handoff.",
+      "pitch_angle": "Sulayman Bowles’s personal audit method, organized around crawl evidence, implementation priorities, and reviewable handoff.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research"
       ]

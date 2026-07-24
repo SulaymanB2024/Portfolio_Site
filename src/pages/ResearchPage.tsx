@@ -16,7 +16,7 @@ import {
   TextLink,
 } from '../components/design/Primitives';
 import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
-import { researchContextLinks } from '../content/seoExpansion';
+import { researchContextLinks, researchPriorityPaths } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
@@ -58,6 +58,25 @@ export default function ResearchPage() {
           </TextLink>
         </div>
       </PageFrame>
+
+      <section className="relative z-10 border-b border-current/12">
+        <PageFrame className="py-16 xl:py-24">
+          <SectionHeader eyebrow="Start here" title="Priority research paths.">
+            The strongest technical SEO, AI-crawler, Atlas, and public-data work—linked by the decision each artifact helps answer.
+          </SectionHeader>
+          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5">
+            {researchPriorityPaths.map(({ label, href, description }, index) => (
+              <LinkPanel key={href} href={href} className="grid min-h-[220px] content-between gap-8">
+                <span>
+                  <span className="block text-[10px] uppercase tracking-[0.22em] text-current/60">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="mt-8 block font-serif text-2xl italic leading-tight tracking-normal text-current">{label}</span>
+                </span>
+                <span className="text-sm normal-case leading-relaxed tracking-normal text-current/64">{description}</span>
+              </LinkPanel>
+            ))}
+          </SurfaceGrid>
+        </PageFrame>
+      </section>
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">

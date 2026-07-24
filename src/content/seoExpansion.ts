@@ -42,9 +42,9 @@ export const researchContextLinks = [
     description: 'The crawl and evidence workflow behind the technical SEO research and audit examples.',
   },
   {
-    label: 'Technical SEO audit services',
+    label: 'Evidence-led technical SEO audit method',
     href: '/method',
-    description: 'A fixed-scope process for turning crawl evidence into implementation priorities and rerun checks.',
+    description: 'Sulayman’s personal process for turning crawl evidence into implementation priorities and rerun checks.',
   },
   {
     label: 'Austin technical SEO consultant',
@@ -60,6 +60,34 @@ export const researchContextLinks = [
     label: 'Contact a technical SEO consultant',
     href: '/contact',
     description: 'Direct contact for crawlability, indexation, rendering, structured data, and analytics work.',
+  },
+] as const;
+
+export const researchPriorityPaths = [
+  {
+    label: 'AI crawler robots.txt guide',
+    href: '/research/ai-crawlers/ai-search-crawler-policy',
+    description: 'Maintained OpenAI, Anthropic, and Perplexity agent roles, copy-ready directives, and verification checks.',
+  },
+  {
+    label: 'Atlas technical SEO evidence',
+    href: '/atlas',
+    description: 'Implemented crawl capabilities, proof surfaces, screenshots, constraints, and an open-corpus run.',
+  },
+  {
+    label: 'Texas toll-road ownership',
+    href: '/markets/who-owns-texas-toll-roads',
+    description: 'Answer-first ownership, operator, concession, and billing responsibility research with linked sources.',
+  },
+  {
+    label: 'Technical SEO as public data infrastructure',
+    href: '/research/search-console/technical-seo-public-data-infrastructure',
+    description: 'How URLs become crawlable, renderable, attributable, and exportable public records.',
+  },
+  {
+    label: 'The First AI Managers',
+    href: '/research/ai-systems/the-first-ai-managers',
+    description: 'A source-led operating model for AI systems with explicit human control and evidence boundaries.',
   },
 ] as const;
 

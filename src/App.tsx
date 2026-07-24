@@ -595,7 +595,7 @@ function HomePage() {
               </div>
               <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
                 <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
-                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and <a href="/research" className="border-b border-ink/24 hover:border-ink">technical SEO research</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
+                  I document an <a href="/method" className="border-b border-ink/24 hover:border-ink">evidence-led technical SEO audit method</a>, crawl evidence systems, and <a href="/research" className="border-b border-ink/24 hover:border-ink">technical SEO research</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; commercial technical SEO work belongs to <a href="https://www.void-agency.com/services/technical-seo-ai-search-visibility" className="border-b border-ink/24 hover:border-ink">Void Agency</a>.
                 </p>
               </ScrollReveal>
             </div>
@@ -811,7 +811,7 @@ function HomePage() {
                 </ScrollReveal>
                 <ScrollReveal delay={0.6}>
                   <MagneticButton className="mt-16">
-                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Technical SEO Audit Services</span>
+                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Technical SEO Audit Method</span>
                   </MagneticButton>
                 </ScrollReveal>
               </div>
