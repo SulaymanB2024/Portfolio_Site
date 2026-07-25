@@ -754,11 +754,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     number: '09',
     category: 'CRAWLER POLICY',
     title: 'Robots.txt Is a Courtesy Layer, Not Access Control',
-    seoTitle: 'Robots.txt Is Not Access Control: A Layered Crawler Policy',
+    seoTitle: 'RFC 9309: Robots.txt Is Not Access Control',
     subtitle:
       'A precise model for separating crawler requests, indexing directives, authentication, authorization, rate controls, and evidence of enforcement.',
     seoDescription:
-      'Separate robots.txt from authentication, authorization, indexing directives, rate limits, and bot verification with a layered crawler-control model and release checks.',
+      'RFC 9309 says robots.txt rules are not access authorization. Learn what robots.txt controls—and when to use noindex, authentication, authorization, or rate limits.',
     artwork: {
       kind: 'image',
       heroSrc: '/images/research/robots-policy-editorial.webp',
@@ -768,7 +768,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       caption: 'A published courtesy rule and a materially secured resource are different control layers.',
     },
     date: PUBLISHED,
-    dateModified: PUBLISHED,
+    dateModified: '2026.07.25',
     lastVerified: VERIFIED,
     readTime: '13 MIN',
     author: 'SULAYMAN BOWLES',
@@ -790,7 +790,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       source('OpenAI crawler documentation', 'https://developers.openai.com/api/docs/bots'),
     ],
     content: [
-      'A robots.txt file is public text that asks automated clients how they may access paths on one service. It is valuable because cooperating crawlers can retrieve one predictable policy before requesting content. It is not a credential, firewall, authorization decision, encryption layer, or proof of the client behind a User-Agent string. Treating it as any of those creates a security boundary that an ordinary HTTP client can cross by ignoring the file.',
+      'RFC 9309 is explicit: robots.txt rules are not a form of access authorization. A robots.txt file is public text that asks automated clients how they may access paths on one service. It is valuable because cooperating crawlers can retrieve one predictable policy before requesting content. It is not a credential, firewall, authorization decision, encryption layer, or proof of the client behind a User-Agent string. Treating it as any of those creates a security boundary that an ordinary HTTP client can cross by ignoring the file.',
       'A robust crawler policy uses separate controls for separate outcomes. Robots rules govern cooperating automated retrieval. Page-level robots directives express indexing and presentation preferences to supporting systems. Authentication establishes an identity; authorization decides whether that identity may access a resource. Edge and application controls protect capacity. Logging and verification provide evidence about what happened. The layers can support one policy, but none substitutes for the others.',
     ],
     sections: [
@@ -817,7 +817,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       },
       {
         id: 'rep-semantics',
-        title: 'Implement robots semantics as a versioned policy parser',
+        title: 'Implement RFC 9309 semantics as a versioned policy parser',
         paragraphs: [
           'RFC 9309 standardizes the Robots Exclusion Protocol, including user-agent matching, rule matching, access results, and caching. A production parser should be covered by fixtures for casing, group selection, percent-encoding, longest-match behavior, comments, empty rules, Unicode handling, and retrieval failure states. A hand-written substring test is not an adequate policy engine.',
           'Policy is scoped to the service where the file is served. Hostname, scheme, and port distinctions matter operationally. Redirects and cache behavior must be recorded because a stale or cross-host file can produce a policy different from the one an operator inspected in source control. Store the retrieved bytes, effective URL, status, fetch time, parser version, selected group, and matched rule.',

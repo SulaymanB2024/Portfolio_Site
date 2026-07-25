@@ -150,7 +150,7 @@ The Atlas demonstration is a dated, bounded capture from an open web corpus; it 
 
 export function buildArticleResearchBriefsJson() {
   return `${JSON.stringify({
-    generated_at: '2026-07-23',
+    generated_at: '2026-07-25',
     canonical_host: 'https://sulayman-bowles.dev',
     objective: 'Public intent, evidence, artifact, and related-reading briefs for the site research archive.',
     limits: [
@@ -170,7 +170,7 @@ export function buildArticleResearchBriefsJson() {
       scope_boundary: target.cannibalizationBoundary,
       related_articles: target.relatedPaths.map(absoluteUrl),
       ranking_goal: 'rankingGoal' in target ? target.rankingGoal : null,
-      last_verified: '2026-07-23',
+      last_verified: 'lastVerified' in target ? target.lastVerified : '2026-07-23',
     })),
   }, null, 2)}\n`;
 }
@@ -200,7 +200,7 @@ export function buildAuthorityAssetsJson() {
   });
 
   return `${JSON.stringify({
-    generated_at: '2026-07-23',
+    generated_at: '2026-07-25',
     canonical_host: 'https://sulayman-bowles.dev',
     objective: 'Topical authority index for source-led technical SEO, crawler, AI-agent, data-system, and infrastructure research.',
     claim_boundaries: [

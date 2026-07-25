@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23",
+  "generated_at": "2026-07-25",
   "canonical_host": "https://sulayman-bowles.dev",
   "objective": "Public intent, evidence, artifact, and related-reading briefs for the site research archive.",
   "limits": [
@@ -222,10 +222,10 @@
     },
     {
       "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
-      "question": "are Texas toll roads privately owned",
+      "question": "who owns Texas toll roads",
       "supporting_questions": [
+        "are Texas toll roads privately owned",
         "are toll roads in Texas privately owned",
-        "who owns Texas toll roads",
         "Texas toll road private operators"
       ],
       "intent": "ownership",
@@ -247,7 +247,7 @@
         "targetPosition": 1,
         "sustainedSnapshots": 3
       },
-      "last_verified": "2026-07-23"
+      "last_verified": "2026-07-25"
     },
     {
       "url": "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
@@ -286,7 +286,8 @@
       "related_articles": [
         "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
         "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
-        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
+        "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control"
       ],
       "ranking_goal": null,
       "last_verified": "2026-07-23"
@@ -337,12 +338,13 @@
       "url": "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
       "question": "is robots.txt access control",
       "supporting_questions": [
-        "robots.txt security boundary",
-        "robots exclusion protocol access control"
+        "RFC 9309 robots.txt not access authorization",
+        "robots.txt is not access control",
+        "robots.txt security boundary"
       ],
       "intent": "definition",
       "cohort": 2,
-      "direct_answer": "Robots.txt is not access control: it is a publicly readable crawler-coordination protocol that cooperative agents may follow, while authentication, authorization, network policy, and server-side response controls must protect material that cannot be publicly retrieved.",
+      "direct_answer": "RFC 9309 states that robots.txt rules are not access authorization. The file is a publicly readable crawler-coordination protocol that cooperative agents may follow; authentication, authorization, network policy, and server-side response controls must protect material that cannot be publicly retrieved.",
       "evidence_gap": "Show the complete control stack and failure modes instead of repeating that robots.txt is voluntary without an implementation boundary.",
       "original_artifact": "A layered crawler-policy matrix separating discovery guidance, authentication, authorization, network controls, and response handling.",
       "scope_boundary": "This page explains protocol and security boundaries; the AI crawler policy page compares named provider agents and their documented purposes.",
@@ -352,7 +354,7 @@
         "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence"
       ],
       "ranking_goal": null,
-      "last_verified": "2026-07-23"
+      "last_verified": "2026-07-25"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
@@ -456,7 +458,8 @@
       "related_articles": [
         "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
         "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
-        "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift"
+        "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
+        "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control"
       ],
       "ranking_goal": null,
       "last_verified": "2026-07-23"
