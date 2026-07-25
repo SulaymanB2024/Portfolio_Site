@@ -455,7 +455,10 @@ for (const article of TECHNICAL_ARTICLE_SERIES) {
   assert(route.section === 'research-article', `${routePath}: wrong route section`);
   assert(route.includeInSitemap, `${routePath}: route is not indexable`);
   assert(route.aliases.length === 0, `${routePath}: new article should not create a legacy Markets alias`);
-  assert(route.lastmod === '2026-07-19', `${routePath}: route lastmod mismatch`);
+  assert(
+    route.lastmod === (article.dateModified ?? article.date).replaceAll('.', '-'),
+    `${routePath}: route lastmod mismatch`,
+  );
   assert(publication?.title === article.title, `${routePath}: publication index entry is missing`);
 
   const builtFile = path.resolve('dist', routePath.slice(1), 'index.html');

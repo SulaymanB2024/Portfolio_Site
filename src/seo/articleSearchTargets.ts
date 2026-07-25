@@ -20,6 +20,7 @@ export type ArticleSearchTarget = {
   originalArtifact: string;
   cannibalizationBoundary: string;
   relatedPaths: readonly string[];
+  lastVerified?: string;
   rankingGoal?: {
     country: 'USA';
     device: 'MOBILE';
@@ -260,10 +261,10 @@ export const ARTICLE_SEARCH_TARGETS = [
   },
   {
     path: '/markets/who-owns-texas-toll-roads',
-    primaryQuery: 'are Texas toll roads privately owned',
+    primaryQuery: 'who owns Texas toll roads',
     supportingQueries: [
+      'are Texas toll roads privately owned',
       'are toll roads in Texas privately owned',
-      'who owns Texas toll roads',
       'Texas toll road private operators',
     ],
     intent: 'ownership',
@@ -275,6 +276,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       'A project-by-project ownership, operator, concession, debt, revenue-rights, valuation, and source-gap table.',
     cannibalizationBoundary:
       'This is the only article targeting Texas toll-road ownership; supporting data-system articles discuss evidence methods rather than road ownership.',
+    lastVerified: '2026-07-25',
     relatedPaths: [
       '/research/search-console/technical-seo-public-data-infrastructure',
       '/research/personal-seo/canonical-identity-personal-seo',
@@ -327,6 +329,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/technical-seo/structured-data-without-content-drift',
       '/research/technical-seo/technical-seo-migration-release-gates',
       '/research/crawler-engineering/crawl-frontier-state-machine',
+      '/research/ai-crawlers/robots-txt-courtesy-not-access-control',
     ],
   },
   {
@@ -372,17 +375,22 @@ export const ARTICLE_SEARCH_TARGETS = [
   {
     path: '/research/ai-crawlers/robots-txt-courtesy-not-access-control',
     primaryQuery: 'is robots.txt access control',
-    supportingQueries: ['robots.txt security boundary', 'robots exclusion protocol access control'],
+    supportingQueries: [
+      'RFC 9309 robots.txt not access authorization',
+      'robots.txt is not access control',
+      'robots.txt security boundary',
+    ],
     intent: 'definition',
     cohort: 2,
     directAnswer:
-      'Robots.txt is not access control: it is a publicly readable crawler-coordination protocol that cooperative agents may follow, while authentication, authorization, network policy, and server-side response controls must protect material that cannot be publicly retrieved.',
+      'RFC 9309 states that robots.txt rules are not access authorization. The file is a publicly readable crawler-coordination protocol that cooperative agents may follow; authentication, authorization, network policy, and server-side response controls must protect material that cannot be publicly retrieved.',
     serpGap:
       'Show the complete control stack and failure modes instead of repeating that robots.txt is voluntary without an implementation boundary.',
     originalArtifact:
       'A layered crawler-policy matrix separating discovery guidance, authentication, authorization, network controls, and response handling.',
     cannibalizationBoundary:
       'This page explains protocol and security boundaries; the AI crawler policy page compares named provider agents and their documented purposes.',
+    lastVerified: '2026-07-25',
     relatedPaths: [
       '/research/ai-crawlers/ai-search-crawler-policy',
       '/research/crawler-engineering/crawl-frontier-state-machine',
@@ -489,6 +497,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/technical-seo/raw-html-rendered-dom-evidence',
       '/research/technical-seo/canonicalization-graph-consistency',
       '/research/technical-seo/structured-data-without-content-drift',
+      '/research/ai-crawlers/robots-txt-courtesy-not-access-control',
     ],
   },
 ] as const satisfies readonly ArticleSearchTarget[];

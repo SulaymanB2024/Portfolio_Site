@@ -202,9 +202,9 @@ for (const href of [
 const toll = read('dist/markets/who-owns-texas-toll-roads/index.html');
 assert(/<sup class="article-citation"><a href="#source-s1"/.test(toll), 'toll roads: citation markers are not linked superscripts');
 assert(!toll.includes('shareholders.S1S2S3'), 'toll roads: citation markers remain adjacent to prose');
-assert(toll.includes('<title>Are Texas Toll Roads Privately Owned? Ownership Guide</title>'), 'toll roads: approved title changed');
+assert(toll.includes('<title>Who Owns Texas Toll Roads? Public vs. Private Operators</title>'), 'toll roads: approved title changed');
 assert(
-  toll.includes('Most Texas toll roads are publicly owned. See who owns each system, which private concessions operate lanes, and where toll revenue and billing sit.'),
+  toll.includes('Most Texas toll roads are publicly owned. See the four major private concessions, who operates each road, who collects toll revenue, and where ownership ends.'),
   'toll roads: approved description is missing',
 );
 assert(
