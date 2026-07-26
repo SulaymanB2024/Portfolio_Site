@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25",
+  "generated_at": "2026-07-26",
   "canonical_host": "https://sulayman-bowles.dev",
   "objective": "Public intent, evidence, artifact, and related-reading briefs for the site research archive.",
   "limits": [
@@ -92,7 +92,8 @@
         "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
-        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing"
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+        "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies"
       ],
       "ranking_goal": null,
       "last_verified": "2026-07-23"
@@ -140,6 +141,7 @@
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
       ],
       "ranking_goal": null,
@@ -269,10 +271,35 @@
       "related_articles": [
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
       ],
       "ranking_goal": null,
       "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
+      "question": "who owns Austin home service companies",
+      "supporting_questions": [
+        "Austin HVAC private equity",
+        "Austin plumbing company ownership",
+        "Austin home service roll ups",
+        "is my Austin contractor locally owned"
+      ],
+      "intent": "ownership",
+      "cohort": 1,
+      "direct_answer": "Who owns Austin home-service companies depends on the brand: the 67-brand July 2026 census includes 32 founder, family, or locally owned records, 14 sponsor-backed platform brands, four public-company brands, five local franchise operators, 11 private businesses with unresolved control, and one founder-controlled company with a documented minority investment.",
+      "evidence_gap": "Separate the consumer brand, legal operator, platform, franchise relationship, controlling owner, minority investor, and transaction date while keeping brand-count evidence distinct from market share.",
+      "original_artifact": "A 67-brand ownership table, 170-entity register, 102 sourced relationships, 29-transaction timeline, 130-record evidence ledger, conflict log, downloadable dataset, and reproducibility package.",
+      "scope_boundary": "This page maps ownership of Austin residential service brands; the West Campus article covers student-housing property finance and the Texas toll-road article covers public infrastructure and concession rights.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-26"
     },
     {
       "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
@@ -294,7 +321,8 @@
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
-        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing"
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+        "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies"
       ],
       "ranking_goal": {
         "country": "USA",

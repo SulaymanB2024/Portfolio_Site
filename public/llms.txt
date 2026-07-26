@@ -40,6 +40,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - Replayable Traces for Evaluating Tool-Using AI Agents: https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation
 - SQLite for Crawl Pipelines: Idempotency, WAL, and Bounded Concurrency: https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines
 - Technical SEO Migrations Need Executable Release Gates: https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates
+- Who Owns Austin’s Home-Service Companies?: https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies
 - What Happens When an Index Decides a Company Matters?: https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters
 - How Airlines Borrow Against Loyalty Programs: https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs
 - Where Do Online Returns Go? Inside Reverse Logistics: https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go

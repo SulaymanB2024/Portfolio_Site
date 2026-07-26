@@ -130,6 +130,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
       '/research/financial-systems/west-campus-student-housing',
+      '/research/financial-systems/who-owns-austin-home-service-companies',
     ],
   },
   {
@@ -178,6 +179,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
       '/markets/who-owns-texas-toll-roads',
+      '/research/financial-systems/who-owns-austin-home-service-companies',
       '/research/data-systems/audit-findings-derived-records',
     ],
   },
@@ -311,7 +313,35 @@ export const ARTICLE_SEARCH_TARGETS = [
     relatedPaths: [
       '/research/financial-systems/waymo-hardware-financing',
       '/markets/who-owns-texas-toll-roads',
+      '/research/financial-systems/who-owns-austin-home-service-companies',
       '/research/search-console/technical-seo-public-data-infrastructure',
+    ],
+  },
+  {
+    path: '/research/financial-systems/who-owns-austin-home-service-companies',
+    primaryQuery: 'who owns Austin home service companies',
+    supportingQueries: [
+      'Austin HVAC private equity',
+      'Austin plumbing company ownership',
+      'Austin home service roll ups',
+      'is my Austin contractor locally owned',
+    ],
+    intent: 'ownership',
+    cohort: 1,
+    directAnswer:
+      'Who owns Austin home-service companies depends on the brand: the 67-brand July 2026 census includes 32 founder, family, or locally owned records, 14 sponsor-backed platform brands, four public-company brands, five local franchise operators, 11 private businesses with unresolved control, and one founder-controlled company with a documented minority investment.',
+    serpGap:
+      'Separate the consumer brand, legal operator, platform, franchise relationship, controlling owner, minority investor, and transaction date while keeping brand-count evidence distinct from market share.',
+    originalArtifact:
+      'A 67-brand ownership table, 170-entity register, 102 sourced relationships, 29-transaction timeline, 130-record evidence ledger, conflict log, downloadable dataset, and reproducibility package.',
+    cannibalizationBoundary:
+      'This page maps ownership of Austin residential service brands; the West Campus article covers student-housing property finance and the Texas toll-road article covers public infrastructure and concession rights.',
+    lastVerified: '2026-07-26',
+    relatedPaths: [
+      '/research/financial-systems/west-campus-student-housing',
+      '/markets/who-owns-texas-toll-roads',
+      '/research/search-console/technical-seo-public-data-infrastructure',
+      '/research/data-systems/audit-findings-derived-records',
     ],
   },
   {
@@ -339,6 +369,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
       '/research/financial-systems/west-campus-student-housing',
+      '/research/financial-systems/who-owns-austin-home-service-companies',
     ],
     rankingGoal: {
       country: 'USA',

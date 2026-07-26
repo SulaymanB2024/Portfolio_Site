@@ -1,5 +1,6 @@
 import { AI_MANAGERS_ARTICLE_PATH } from './aiManagersArticle';
 import { AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG } from './airlineLoyaltyFinancingArticle';
+import { AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE_SLUG } from './austinHomeServiceOwnershipArticle';
 import type { ResearchArticle } from './articleModels';
 import { getArticlePath, getArticleBySlug } from './articleRegistry';
 import { HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG } from './hiddenFinancingHardwareArticle';
@@ -26,6 +27,7 @@ const article = (slug: string) => {
 };
 
 const crawlerPolicy = article('ai-search-crawler-policy');
+const austinHomeServiceOwnership = article(AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE_SLUG);
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
@@ -87,6 +89,14 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     href: getArticlePath(canonicalIdentity),
     description: canonicalIdentity.subtitle,
     date: canonicalIdentity.dateModified ?? canonicalIdentity.date,
+  },
+  {
+    category: 'Markets and investing',
+    title: austinHomeServiceOwnership.title,
+    href: getArticlePath(austinHomeServiceOwnership),
+    description: austinHomeServiceOwnership.subtitle,
+    date: austinHomeServiceOwnership.dateModified ?? austinHomeServiceOwnership.date,
+    featured: true,
   },
   {
     category: 'Markets and investing',

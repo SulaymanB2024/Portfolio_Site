@@ -84,8 +84,9 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('24 Notes and Artifacts'), 'research: publication count is not derived as twenty-four');
+assert(textFromHtml(research).includes('25 Notes and Artifacts'), 'research: publication count is not derived as twenty-five');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
+assert(textFromHtml(research).includes('Who Owns Austin’s Home-Service Companies?'), 'research: Austin home-service ownership article missing');
 assert(textFromHtml(research).includes('The Hidden Financing Behind Hardware Startups'), 'research: Waymo financing article missing');
 assert(textFromHtml(research).includes('How Airlines Borrow Against Loyalty Programs'), 'research: airline loyalty financing article missing');
 assert(textFromHtml(research).includes('Who Owns the Apartments Around Campus?'), 'research: West Campus housing article missing');

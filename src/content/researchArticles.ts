@@ -7,6 +7,7 @@ import {
   AI_MANAGERS_ARTICLE_SLUG,
   AI_MANAGERS_ARTICLE_TITLE,
 } from './aiManagersArticle';
+import { AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE } from './austinHomeServiceOwnershipArticle';
 import { AIRLINE_LOYALTY_FINANCING_ARTICLE } from './airlineLoyaltyFinancingArticle';
 import { HIDDEN_FINANCING_HARDWARE_ARTICLE } from './hiddenFinancingHardwareArticle';
 import { INDEX_COMPANY_MATTERS_ARTICLE } from './indexCompanyMattersArticle';
@@ -15,6 +16,7 @@ import { WAYMO_HARDWARE_FINANCING_ARTICLE } from './waymoHardwareFinancingArticl
 import { WEST_CAMPUS_STUDENT_HOUSING_ARTICLE } from './westCampusStudentHousingArticle';
 
 export const RESEARCH_ARTICLES: ResearchArticle[] = [
+  AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE,
   INDEX_COMPANY_MATTERS_ARTICLE,
   AIRLINE_LOYALTY_FINANCING_ARTICLE,
   ONLINE_RETURNS_INVESTIGATION_ARTICLE,

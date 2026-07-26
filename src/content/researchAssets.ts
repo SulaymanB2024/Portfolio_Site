@@ -150,6 +150,21 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
+    name: 'Who Owns Austin’s Home-Service Companies?',
+    href: '/research/financial-systems/who-owns-austin-home-service-companies',
+    type: 'long_form_research',
+    preferredAnchor: 'Austin home-service company ownership map',
+    audiences: ['Austin homeowners', 'local business reporting', 'home-service operators', 'private equity'],
+    pitchAngle:
+      'A dated 67-brand ownership map separating consumer brands, legal operators, platforms, sponsors, public parents, minority investors, and local franchisees.',
+    supportingAssets: [
+      { label: 'Austin ownership brand table', href: '/research/austin-home-service-ownership-2026.csv' },
+      { label: 'Machine-readable Austin ownership dataset', href: '/research/austin-home-service-ownership-2026.json' },
+      { label: 'Complete publication package', href: '/research/austin-home-service-ownership-publication-package.zip' },
+    ],
+  },
+  {
+    priority: 1,
     name: 'Who Owns the Apartments Around Campus?',
     href: '/research/financial-systems/west-campus-student-housing',
     type: 'long_form_research',
@@ -278,9 +293,21 @@ export const publicResearchAssets: ResearchAsset[] = [
 
 export const publicDataDownloads = [
   {
+    label: 'Austin home-service ownership table',
+    href: '/research/austin-home-service-ownership-2026.csv',
+    description:
+      'Dated 67-brand ownership table with company chain, owner type, evidence rating, and Austin footprint fields.',
+  },
+  {
+    label: 'Austin home-service ownership dataset',
+    href: '/research/austin-home-service-ownership-2026.json',
+    description:
+      'Machine-readable brands, entities, relationships, transactions, evidence references, conflicts, and unresolved records.',
+  },
+  {
     label: 'Article research briefs',
     href: '/research/article-research-briefs.json',
-    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 21 indexable articles.',
+    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 22 indexable articles.',
   },
   {
     label: 'Authority asset JSON',
