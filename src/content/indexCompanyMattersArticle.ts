@@ -18,13 +18,16 @@ export const INDEX_COMPANY_MATTERS_ARTICLE: ResearchArticle = {
     'How private index rules become public market orders—and why inclusion can move ownership, liquidity, and price without guaranteeing permanent value.',
   seoDescription:
     'What happens when an index decides a company matters: follow index rules, fund demand, closing auctions, price effects, and cost-of-capital limits.',
-  image: '/images/research/tesla-sp500-inclusion-price-path.png',
-  imageAlt:
-    'Line chart indexing Tesla at 100 at its S&P 500 effective close, then showing 95.2 at the first open, 93.5 at the first close, and 89.7 six months later.',
-  imageLabel: 'Index inclusion / rules, demand, and price',
-  imageCaption:
-    'Tesla illustrates the difference between a large implementation trade and durable value. The effective close coordinated the handoff; the following path did not preserve the closing premium.',
-  imagePresentation: 'diagram',
+  artwork: {
+    kind: 'image',
+    heroSrc: '/images/research/index-company-reader-hero.jpg',
+    socialSrc: '/images/research/index-company-social.jpg',
+    alt: 'Editorial market mechanism turning index rules into coordinated trading flows, ownership changes, liquidity, and divergent price paths.',
+    label: 'Index inclusion / rules, demand, and market outcomes',
+    caption:
+      'The provider changes a rulebook; funds and market participants implement exposure through several channels, without guaranteeing a permanent price effect.',
+    objectPosition: '50% 50%',
+  },
   date: '2026.07.23',
   lastVerified: '2026.07.23',
   readTime: '22 MIN',

@@ -16,13 +16,16 @@ export const WEST_CAMPUS_STUDENT_HOUSING_ARTICLE: ResearchArticle = {
     'The captive economics of student housing around the University of Texas at Austin, traced from one student installment through property operations, capital structure, and first loss.',
   seoDescription:
     'A six-property West Campus analysis of student lease lock-in, ownership, NOI, basis, refinancing risk, and who absorbs losses.',
-  image: '/images/research/west-campus-properties-map.png',
-  imageAlt:
-    'Schematic street-grid map locating Callaway, SkyLoft, 2400 Nueces, Waterloo, The Standard, and 26 West along the western edge of the UT Austin campus.',
-  imageLabel: 'Six-property study / schematic map',
-  imageCaption:
-    'The sample contains 4,805 beds and was selected for evidence quality, not as a complete inventory of West Campus.',
-  imagePresentation: 'diagram',
+  artwork: {
+    kind: 'image',
+    heroSrc: '/images/research/west-campus-reader-hero.jpg',
+    socialSrc: '/images/research/west-campus-social.jpg',
+    alt: 'Editorial architectural model connecting West Campus apartment blocks, the UT Austin campus edge, and layered property-finance flows.',
+    label: 'West Campus housing / ownership and capital stack',
+    caption:
+      'The editorial system separates location, operations, debt, and equity; the article’s linked model and figures carry the property-specific evidence.',
+    objectPosition: '50% 50%',
+  },
   date: '2026.07.22',
   lastVerified: '2026.07.22',
   readTime: '21 MIN',
@@ -101,6 +104,17 @@ export const WEST_CAMPUS_STUDENT_HOUSING_ARTICLE: ResearchArticle = {
         'The sample was chosen for the quality of the available ownership and financing evidence. SkyLoft exposes a 2019 securitized mortgage and preferred-equity stack. 2400 Nueces records a private ground-lease development followed by a university purchase. Waterloo connects a 0.45-acre site, a density bonus, a 796-bed tower, and a sale to Global Student Accommodation. The Standard shows construction debt followed by a recapitalization. Callaway provides a service-heavy private-dorm product. 26 West supplies an older asset with a reported acquisition price.',
         'The manager collecting rent is not necessarily the real-estate owner. The fee owner may sit in a special-purpose borrower; a master tenant may operate under another entity; the mortgage can be divided into senior and subordinate notes; and preferred capital can hold intervention rights before it suffers a complete economic loss. The leasing-office brand is only the first name in the chain.',
         'The sample also cannot prove market concentration. American Campus Communities, now part of Blackstone, and Landmark each control multiple properties, while UT, Global Student Accommodation, and the SkyLoft borrower represent other forms of ownership. Unresolved parcel entities and bed counts make a precise concentration ratio indefensible.',
+      ],
+      figures: [
+        {
+          src: '/images/research/west-campus-properties-map.png',
+          alt: 'Schematic street-grid map locating Callaway, SkyLoft, 2400 Nueces, Waterloo, The Standard, and 26 West along the western edge of the UT Austin campus.',
+          label: 'Study map / six-property evidence sample',
+          caption:
+            'The map is schematic rather than parcel-accurate. The sample was selected for evidence quality and is not a complete West Campus inventory.',
+          width: 1786,
+          height: 1305,
+        },
       ],
       table: {
         caption: 'Ownership and operating structure in the modeled sample',
