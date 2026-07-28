@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const ROOT = process.cwd();
 const RUN_DATE = '2026-06-25';
-const USER_AGENT = 'SulaymanBowlesAustinBenchmark/1.0 (+https://sulayman-bowles.dev/austin-technical-seo)';
+const USER_AGENT = 'SulaymanBowlesAustinBenchmark/1.0 (+https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv)';
 const TIMEOUT_MS = 12000;
 
 const paths = {

@@ -1,6 +1,6 @@
 # Generated Link-Building Outreach Packets
 
-Generated: 2026-07-20
+Generated: 2026-07-24
 
 These packets are generated from `docs/link-building/prospect-tracker.csv`. They are not sent mail. Review each prospect manually before outreach.
 
@@ -22,8 +22,8 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 | 1 | OpenAI developer community | ai-search | https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy | AI crawler policy | Post only if community rules allow |
 | 1 | Perplexity docs/community | ai-search | https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy | AI crawler policy | Research discussion channels |
 | 1 | Anthropic support/community | ai-search | https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy | AI crawler policy | Research discussion channels |
-| 1 | Austin Chamber | local-austin | https://sulayman-bowles.dev/austin-technical-seo | Austin technical SEO | Check member/directory requirements |
-| 1 | Built In Austin | local-austin | https://sulayman-bowles.dev/austin-technical-seo | Austin technical SEO | Research contributor/company profile options |
+| 1 | Austin Chamber | local-austin | https://www.void-agency.com/ | Austin technical SEO | Check member/directory requirements |
+| 1 | Built In Austin | local-austin | https://www.void-agency.com/ | Austin technical SEO | Research contributor/company profile options |
 
 ## Packet 1: GitHub profile
 
@@ -347,7 +347,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: local-austin
 - Prospect URL: https://www.austinchamber.com/
-- Target page: https://sulayman-bowles.dev/austin-technical-seo
+- Target page: https://www.void-agency.com/
 - Asset: Austin technical SEO
 - Angle: Local service/resource profile if legitimate
 - Next action: Check member/directory requirements
@@ -368,7 +368,7 @@ These packets are generated from `docs/link-building/prospect-tracker.csv`. They
 - Priority: 1
 - Segment: local-austin
 - Prospect URL: https://www.builtinaustin.com/
-- Target page: https://sulayman-bowles.dev/austin-technical-seo
+- Target page: https://www.void-agency.com/
 - Asset: Austin technical SEO
 - Angle: Local startup/tech profile or benchmark story
 - Next action: Research contributor/company profile options

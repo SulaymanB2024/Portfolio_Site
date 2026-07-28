@@ -373,24 +373,24 @@
     },
     {
       "priority": 1,
-      "name": "Austin Technical SEO",
-      "url": "https://sulayman-bowles.dev/austin-technical-seo",
+      "name": "Evidence-Led Technical SEO Audit Method",
+      "url": "https://sulayman-bowles.dev/method",
       "type": "canonical_site_asset",
       "cluster": "technical-seo",
-      "preferred_anchor": "Austin technical SEO audit services",
-      "pitch_angle": "A locally scoped technical SEO service page with a bounded public crawlability benchmark.",
+      "preferred_anchor": "technical SEO audit method",
+      "pitch_angle": "Sulayman Bowles’s personal audit method, organized around crawl evidence, implementation priorities, and reviewable handoff.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research"
       ]
     },
     {
       "priority": 1,
-      "name": "Void Agency Method",
-      "url": "https://sulayman-bowles.dev/method",
+      "name": "Sulayman Bowles and Void Agency",
+      "url": "https://sulayman-bowles.dev/void-agency",
       "type": "canonical_site_asset",
-      "cluster": "technical-seo",
-      "preferred_anchor": "technical SEO audit method",
-      "pitch_angle": "A fixed-scope audit method organized around crawl evidence, implementation priorities, and reviewable handoff.",
+      "cluster": "identity",
+      "preferred_anchor": "Sulayman Bowles Void Agency role",
+      "pitch_angle": "An author-and-company relationship page documenting the founder role, public contributions, supporting evidence, and claim boundaries.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research"
       ]

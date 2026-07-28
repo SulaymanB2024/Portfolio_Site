@@ -60,7 +60,7 @@ The method behind the work is here:
 
 The local technical SEO page is here:
 
-`https://sulayman-bowles.dev/austin-technical-seo`
+`https://www.void-agency.com/`
 
 The benchmark will not name-and-shame companies or claim ranking/traffic impact. It will summarize patterns and practical fixes for teams that need their public sites to be more legible to search and AI retrieval systems.
 

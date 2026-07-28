@@ -24,9 +24,9 @@ export const contextualProofLinks = [
     description: 'Public scraper and audit-system code.',
   },
   {
-    label: 'Request an audit',
-    href: '/contact',
-    description: 'Audit intake for technical SEO, site systems, analytics, and markets research.',
+    label: 'Work with Void Agency',
+    href: 'https://www.void-agency.com/',
+    description: 'Commercial technical SEO, site systems, analytics, and service-business work.',
   },
   {
     label: 'Read the markets research memo with assumptions',
@@ -42,14 +42,14 @@ export const researchContextLinks = [
     description: 'The crawl and evidence workflow behind the technical SEO research and audit examples.',
   },
   {
-    label: 'Technical SEO audit services',
+    label: 'Evidence-led technical SEO audit method',
     href: '/method',
-    description: 'A fixed-scope process for turning crawl evidence into implementation priorities and rerun checks.',
+    description: 'Sulayman’s personal process for turning crawl evidence into implementation priorities and rerun checks.',
   },
   {
-    label: 'Austin technical SEO consultant',
-    href: '/austin-technical-seo',
-    description: 'Local audit coverage, a bounded Austin crawlability pilot, and an implementation entry point.',
+    label: 'Void Agency Austin technical SEO',
+    href: 'https://www.void-agency.com/',
+    description: 'Commercial Austin, local-service, technical SEO, and lead-generation scope.',
   },
   {
     label: 'Technical SEO portfolio',
@@ -57,9 +57,37 @@ export const researchContextLinks = [
     description: 'Public systems, studies, constraints, ownership, and inspectable evidence in one place.',
   },
   {
-    label: 'Contact a technical SEO consultant',
+    label: 'Contact Sulayman Bowles',
     href: '/contact',
-    description: 'Direct contact for crawlability, indexation, rendering, structured data, and analytics work.',
+    description: 'Personal contact for research, product, technical work, speaking, and professional context.',
+  },
+] as const;
+
+export const researchPriorityPaths = [
+  {
+    label: 'AI crawler robots.txt guide',
+    href: '/research/ai-crawlers/ai-search-crawler-policy',
+    description: 'Maintained OpenAI, Anthropic, and Perplexity agent roles, copy-ready directives, and verification checks.',
+  },
+  {
+    label: 'Atlas technical SEO evidence',
+    href: '/atlas',
+    description: 'Implemented crawl capabilities, proof surfaces, screenshots, constraints, and an open-corpus run.',
+  },
+  {
+    label: 'Texas toll-road ownership',
+    href: '/markets/who-owns-texas-toll-roads',
+    description: 'Answer-first ownership, operator, concession, and billing responsibility research with linked sources.',
+  },
+  {
+    label: 'Technical SEO as public data infrastructure',
+    href: '/research/search-console/technical-seo-public-data-infrastructure',
+    description: 'How URLs become crawlable, renderable, attributable, and exportable public records.',
+  },
+  {
+    label: 'The First AI Managers',
+    href: '/research/ai-systems/the-first-ai-managers',
+    description: 'A source-led operating model for AI systems with explicit human control and evidence boundaries.',
   },
 ] as const;
 
@@ -106,7 +134,7 @@ export const workProofCards = [
   {
     eyebrow: 'Technical SEO research',
     title: 'Austin Crawlability Pilot',
-    href: '/austin-technical-seo',
+    href: '/research/austin-crawlability-benchmark-pilot.csv',
     problem: 'Local-service SEO advice is often published without a bounded sample, inspectable rows, or a distinction between access gaps and negative findings.',
     role: 'Study design, public collection, measurement-gap policy, analysis, and publication.',
     built: 'A 12-site homepage/robots/sitemap pilot, aggregate summary, public CSV, methodology, and cutoff-aware reporting.',
@@ -295,10 +323,10 @@ export const voidAgencyProofLinks = [
     copy: 'Sanitized crawl table showing the kind of data reviewed before audit recommendations.',
   },
   {
-    label: 'Request an audit',
-    href: '/contact',
-    role: 'Intake',
-    copy: 'Direct audit intake for technical SEO, site systems, analytics, and markets research work.',
+    label: 'Work with Void Agency',
+    href: 'https://www.void-agency.com/',
+    role: 'Commercial handoff',
+    copy: 'Agency, local-service, technical SEO service, and lead-generation requests belong on the Void site.',
   },
 ];
 

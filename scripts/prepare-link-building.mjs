@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://sulayman-bowles.dev';
-const TODAY = '2026-07-20';
+const TODAY = '2026-07-24';
 const AUSTIN_BENCHMARK_DATE = '2026-06-25';
 
 const paths = {
@@ -243,7 +243,7 @@ function templateFor(row) {
   if (row.asset.includes('Atlas') || row.target_page.includes('/atlas')) {
     return 'Atlas Evidence Pack';
   }
-  if (row.segment.includes('local-austin') || row.target_page.includes('/austin-technical-seo')) {
+  if (row.segment.includes('local-austin')) {
     return 'Austin Crawlability Benchmark';
   }
   if (row.target_page.includes('/method#worked-finding')) {
@@ -349,8 +349,8 @@ https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv
 Summary:
 https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json
 
-The local context page is here:
-https://sulayman-bowles.dev/austin-technical-seo
+The agency context page is here:
+https://www.void-agency.com/
 
 The benchmark is intentionally bounded: public homepage, robots.txt, and sitemap checks only. It does not claim rankings, traffic, revenue impact, AI citations, or site health, and access-limited/challenged fetches are treated as measurement gaps rather than negative findings.
 
@@ -426,7 +426,10 @@ function validatePack() {
   assert(tracker.rows.some((row) => row.prospect_name === 'LinkedIn profile' && row.status === 'owned'), 'tracker missing LinkedIn profile owned action');
   assert(tracker.rows.some((row) => row.target_page.includes('/research/ai-crawlers/ai-search-crawler-policy')), 'tracker missing AI crawler policy prospects');
   assert(tracker.rows.some((row) => row.target_page.includes('/atlas/sample-crawl')), 'tracker missing Atlas sample crawl prospects');
-  assert(tracker.rows.some((row) => row.target_page.includes('/austin-technical-seo')), 'tracker missing Austin technical SEO prospects');
+  assert(
+    tracker.rows.some((row) => row.segment.includes('local-austin') && row.target_page === 'https://www.void-agency.com/'),
+    'tracker missing Void Agency Austin technical SEO prospects',
+  );
 
   for (const row of tracker.rows) {
     assert(allowedStatuses.has(row.status), `unsupported tracker status: ${row.status}`);

@@ -105,9 +105,9 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - Research: ${PROFILE_FACTS.canonicalLinks.research}
 - Markets finance filter: ${absoluteUrl('/markets')}
 - Void Agency: https://www.void-agency.com/
-- Technical SEO audit services and process: ${absoluteUrl('/method')}
-- Austin technical SEO consultant and audit services: ${absoluteUrl('/austin-technical-seo')}
-- Technical SEO consultant contact and audit intake: ${PROFILE_FACTS.canonicalLinks.contact}
+- Sulayman Bowles and Void Agency: ${absoluteUrl('/void-agency')}
+- Evidence-led technical SEO audit method: ${absoluteUrl('/method')}
+- Personal contact for Sulayman Bowles: ${PROFILE_FACTS.canonicalLinks.contact}
 - Technical ledger: ${PROFILE_FACTS.canonicalLinks.technicalLedger}
 
 ## Public Work and Research
@@ -237,8 +237,8 @@ export function buildAuthorityAssetsJson() {
       },
       ...[
         ['/atlas', 'Atlas technical SEO audit software', 'crawler-engineering', 'Atlas crawl evidence system', 'A product page connecting crawl contracts, evidence preservation, review states, and public demonstration artifacts.'],
-        ['/austin-technical-seo', 'Austin Technical SEO', 'technical-seo', 'Austin technical SEO audit services', 'A locally scoped technical SEO service page with a bounded public crawlability benchmark.'],
-        ['/method', 'Void Agency Method', 'technical-seo', 'technical SEO audit method', 'A fixed-scope audit method organized around crawl evidence, implementation priorities, and reviewable handoff.'],
+        ['/method', 'Evidence-Led Technical SEO Audit Method', 'technical-seo', 'technical SEO audit method', 'Sulayman Bowles’s personal audit method, organized around crawl evidence, implementation priorities, and reviewable handoff.'],
+        ['/void-agency', 'Sulayman Bowles and Void Agency', 'identity', 'Sulayman Bowles Void Agency role', 'An author-and-company relationship page documenting the founder role, public contributions, supporting evidence, and claim boundaries.'],
         ['/markets', 'Markets and Investing', 'infrastructure', 'markets and infrastructure research', 'A finance-only research filter with visible assumptions, ownership evidence, and recommendation boundaries.'],
         ['/resume', 'Resume', 'identity', 'Sulayman Bowles resume', 'The current canonical résumé and professional history source.'],
         ['/work', 'Selected Work', 'identity', 'Sulayman Bowles technical portfolio', 'A selected-work index linking public software, research, and implementation evidence.'],

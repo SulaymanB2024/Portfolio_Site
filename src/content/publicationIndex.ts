@@ -158,7 +158,7 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
   {
     category: 'Technical SEO',
     title: 'Austin Crawlability Pilot',
-    href: '/austin-technical-seo',
+    href: '/research/austin-crawlability-benchmark-pilot.csv',
     description: 'A bounded 12-site public-homepage pilot with a dated cutoff, public CSV, and explicit measurement gaps.',
     date: '2026.06.25',
   },

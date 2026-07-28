@@ -76,15 +76,15 @@ export default function VoidAgencyMethodPage() {
       <InternalHeader activePath="/method" tone="dark" />
 
       <section className="relative z-10 mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] content-end px-4 pb-16 pt-20 md:px-8 xl:px-10">
-        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Void Agency / technical SEO audit services</p>
+        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Sulayman Bowles / technical SEO audit methodology</p>
         <h1 className="max-w-6xl font-serif text-[4rem] italic leading-[0.82] tracking-normal md:text-[7.5rem] xl:text-[10rem]">
-          Technical SEO audits, evidence first.
+          How Sulayman Bowles Runs Evidence-Led Technical SEO Audits
         </h1>
         <p className="mt-10 max-w-3xl text-base leading-relaxed text-canvas/70">
-          Fixed-scope technical SEO audit services for crawlability, indexation, rendering, internal links, structured data, analytics, and implementation. The deliverable is a small set of defensible findings, owners, and rerun checks.
+          I begin with crawlable evidence, keep observations separate from interpretation, and turn the result into a small set of defensible findings, owners, and rerun checks. Commercial audit work is delivered through Void Agency.
         </p>
         <div className="mt-8 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
-          <a href="/contact" className="border-b border-accent/45 pb-1 text-accent hover:border-canvas hover:text-canvas">Request a technical SEO audit</a>
+          <a href="https://www.void-agency.com/services/technical-seo-ai-search-visibility" className="border-b border-accent/45 pb-1 text-accent hover:border-canvas hover:text-canvas">Work with Void Agency</a>
           <a href="/atlas/sample-crawl" className="border-b border-canvas/28 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Open-corpus demonstration</a>
           <a href="#worked-finding" className="border-b border-canvas/28 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Worked finding</a>
         </div>
@@ -206,12 +206,12 @@ export default function VoidAgencyMethodPage() {
 
       <section className="relative z-10 mx-auto max-w-[1480px] border-y border-canvas/14 px-4 py-14 md:px-8 xl:px-10">
         <div className="grid gap-10 lg:grid-cols-[0.56fr_0.44fr] lg:items-center">
-          <h2 className="font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">Start with the site and the decision.</h2>
+          <h2 className="font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">Use the method; take commercial work to Void.</h2>
           <div>
             <p className="text-base leading-relaxed text-canvas/70">
-              A useful first message includes the URL, what changed or feels broken, and the decision the review needs to support. Sensitive access can be handled only after scope is agreed.
+              This page documents my personal process. Void Agency owns the agency, local-service, and lead-generation intent; its commercial page explains scope and the consultation path.
             </p>
-            <a href="/contact" className="mt-8 inline-flex min-h-11 items-center border-b border-accent/45 text-[10px] uppercase tracking-[0.22em] text-accent hover:border-canvas hover:text-canvas">Send a short brief</a>
+            <a href="https://www.void-agency.com/services/technical-seo-ai-search-visibility" className="mt-8 inline-flex min-h-11 items-center border-b border-accent/45 text-[10px] uppercase tracking-[0.22em] text-accent hover:border-canvas hover:text-canvas">Review Void’s technical SEO service</a>
           </div>
         </div>
       </section>

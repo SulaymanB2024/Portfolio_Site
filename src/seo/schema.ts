@@ -35,10 +35,11 @@ const directEmail = 'sulayman.bowles@gmail.com';
 
 const primarySiteParts = [
   { name: 'About Sulayman Bowles', path: '/about' },
+  { name: 'Sulayman Bowles and Void Agency', path: '/void-agency' },
   { name: 'Technical SEO and AI Systems Portfolio', path: '/work' },
   { name: 'Atlas Technical SEO Audit Software', path: '/atlas' },
-  { name: 'Technical SEO Audit Services', path: '/method' },
-  { name: 'Technical SEO Consultant Contact', path: '/contact' },
+  { name: 'Evidence-Led Technical SEO Audit Method', path: '/method' },
+  { name: 'Contact Sulayman Bowles', path: '/contact' },
   { name: 'Technical SEO and AI Systems Research', path: '/research' },
 ];
 
@@ -46,7 +47,7 @@ function contactPointSchema(): JsonLd {
   return {
     '@type': 'ContactPoint',
     '@id': `${absoluteUrl('/contact')}#technical-seo-contact`,
-    contactType: 'technical SEO, crawl evidence, analytics, and source-backed research inquiries',
+    contactType: 'research, product, technical work, speaking, and professional inquiries',
     email: directEmail,
     url: absoluteUrl('/contact'),
     availableLanguage: ['en-US', 'English'],
@@ -116,13 +117,13 @@ export function personSchema({
         description: 'Current public profile for Sulayman Bowles, including AI product work, technical systems, research, education, and selected work.',
       },
       {
-        '@type': 'ProfilePage',
+        '@type': 'WebPage',
         name: 'SulaymanB2024 GitHub profile',
         url: 'https://github.com/SulaymanB2024',
         description: 'Public code profile for portfolio, crawler, technical SEO, and finance research projects.',
       },
       {
-        '@type': 'ProfilePage',
+        '@type': 'WebPage',
         name: 'Sulayman Bowles Devpost profile',
         url: 'https://devpost.com/sulayman-bowles',
         description: 'Public project and hackathon profile corroborating the technical builder identity.',
@@ -292,61 +293,6 @@ function evidenceItemListSchema({
   };
 }
 
-function methodOfferCatalogSchema(): JsonLd {
-  const offers = [
-    {
-      name: 'Indexation Audit at Scale',
-      url: absoluteUrl('/atlas'),
-      serviceType: 'Technical SEO Audit',
-      description:
-        'Crawl waste, duplicate templates, canonicals, orphaned pages, redirects, and blocked discovery review.',
-    },
-    {
-      name: 'Public Page Clarity Review',
-      url: absoluteUrl('/about'),
-      serviceType: 'Search Visibility Audit',
-      description:
-        'Entity clarity, page structure, schema, source material, and crawler access review.',
-    },
-    {
-      name: 'Product Discovery System',
-      url: absoluteUrl('/contact'),
-      serviceType: 'Product and Collection Page SEO Audit',
-      description:
-        'Metadata, thin templates, internal links, duplicate paths, and search-intent gap review.',
-    },
-    {
-      name: 'Service-Area Visibility Audit',
-      url: absoluteUrl('/austin-technical-seo'),
-      serviceType: 'Local Search Visibility Audit',
-      description:
-        'Service pages, location pages, local entity clarity, crawl structure, and measurement-path review.',
-    },
-  ];
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'OfferCatalog',
-    '@id': `${absoluteUrl('/method')}#offer-catalog`,
-    name: 'Technical SEO Audit Offer Catalog',
-    description:
-      'Service examples visible on the Void Agency method page for technical SEO and search visibility audits.',
-    itemListElement: offers.map((offer) => ({
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name: offer.name,
-        url: offer.url,
-        serviceType: offer.serviceType,
-        description: offer.description,
-        provider: {
-          '@id': `${SITE_URL}/#void-agency`,
-        },
-      },
-    })),
-  };
-}
-
 export function projectSchema(): JsonLd {
   return {
     '@context': 'https://schema.org',
@@ -372,36 +318,6 @@ export function projectSchema(): JsonLd {
       'Technical scoring and issue prioritization',
       'Operator dashboard and client-facing export structures',
     ],
-  };
-}
-
-export function serviceSchema(): JsonLd {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${SITE_URL}/method#service`,
-    name: 'Technical SEO and Search Visibility Audit',
-    url: absoluteUrl('/method'),
-    provider: {
-      '@id': `${SITE_URL}/#void-agency`,
-    },
-    areaServed: 'United States',
-    serviceType: [
-      'Technical SEO Audit',
-      'Search Visibility Audit',
-      'Crawlability Audit',
-      'Structured Data Audit',
-    ],
-    hasOfferCatalog: {
-      '@id': `${absoluteUrl('/method')}#offer-catalog`,
-    },
-    availableChannel: {
-      '@type': 'ServiceChannel',
-      serviceUrl: absoluteUrl('/contact'),
-      availableLanguage: ['en-US', 'English'],
-    },
-    description:
-      'Technical SEO and search visibility audit work covering crawlability, robots.txt, sitemaps, raw and rendered HTML, canonical URLs, internal links, structured data, GSC/GA4 review, page templates, query buckets, and implementation recommendations.',
   };
 }
 
@@ -561,6 +477,25 @@ export function resumeJsonLd(): JsonLd {
   ]);
 }
 
+export function voidAgencyRelationshipJsonLd(): JsonLd {
+  return graphSchema([
+    ...canonicalEntitySchemas({ includeVoidAgency: true }),
+    websiteSchema(),
+    webPageSchema({
+      path: '/void-agency',
+      name: 'Sulayman Bowles and Void Agency',
+      description:
+        'Profile page documenting Sulayman Bowles’s role, public work, verified contributions, and evidence boundaries at Void Agency.',
+      mainEntityId: PERSON_ID,
+      aboutIds: [PERSON_ID, `${SITE_URL}/#void-agency`],
+    }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Void Agency', path: '/void-agency' },
+    ]),
+  ]);
+}
+
 export function atlasJsonLd(): JsonLd {
   return graphSchema([
     ...canonicalEntitySchemas(),
@@ -594,22 +529,20 @@ export function methodJsonLd(): JsonLd {
   return graphSchema([
     ...canonicalEntitySchemas({ includeVoidAgency: true }),
     websiteSchema(),
-    serviceSchema(),
-    methodOfferCatalogSchema(),
     webPageSchema({
       path: '/method',
-      name: 'Void Agency Method',
+      name: 'Evidence-Led Technical SEO Audit Method',
       description:
-        'Technical SEO audit services and process page for Void Agency, covering crawlability, indexation, rendering, structured data, implementation, and rerun checks.',
+        'Sulayman Bowles’s personal technical SEO audit methodology for crawlability, indexation, rendering, structured data, implementation, and rerun checks.',
       keywords: searchTerms('/method'),
-      mainEntityId: `${SITE_URL}/method#service`,
+      mainEntityId: PERSON_ID,
       aboutIds: [PERSON_ID, `${SITE_URL}/#void-agency`, `${SITE_URL}/atlas#software`],
     }),
     evidenceItemListSchema({
-      id: 'search-visibility-checklist',
-      name: 'Search Visibility Audit Checklist',
+      id: 'technical-seo-audit-method',
+      name: 'Evidence-Led Technical SEO Audit Method',
       description:
-        'Checklist for crawlability, indexability, source clarity, entity consistency, public files, freshness, and stale-source cleanup.',
+        'Sulayman Bowles’s checklist for crawlability, indexability, source clarity, entity consistency, public files, freshness, and stale-source cleanup.',
       path: '/method',
       items: aiSearchAuditChecklist,
     }),
@@ -635,7 +568,7 @@ export function workJsonLd(): JsonLd {
       path: '/work',
       name: 'Selected Work',
       description:
-        'A work index for Sulayman Bowles with contextual links to Atlas sample crawl data, technical SEO method, public code, audit intake, and markets research assumptions.',
+        'A work index for Sulayman Bowles with contextual links to Atlas sample crawl data, technical SEO method, public code, personal contact, and markets research assumptions.',
       keywords: searchTerms('/work'),
       mainEntityId: collectionId,
       aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
@@ -648,37 +581,16 @@ export function workJsonLd(): JsonLd {
 }
 
 export function contactJsonLd(): JsonLd {
-  const serviceId = `${absoluteUrl('/contact')}#audit-intake-service`;
-
   return graphSchema([
     ...canonicalEntitySchemas({ includeContactPoint: true }),
     websiteSchema(),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      '@id': serviceId,
-      name: 'Technical SEO Audit Intake',
-      url: absoluteUrl('/contact'),
-      provider: {
-        '@id': PERSON_ID,
-      },
-      serviceType: ['Technical SEO Audit', 'Search Visibility Audit', 'Crawlability Review'],
-      areaServed: 'United States',
-      availableChannel: {
-        '@type': 'ServiceChannel',
-        serviceUrl: absoluteUrl('/contact'),
-        availableLanguage: ['en-US', 'English'],
-      },
-      description:
-        'Contact and compact audit brief path for technical SEO audits, crawl reviews, analytics, markets research, and structured web systems.',
-    },
     webPageSchema({
       path: '/contact',
       name: 'Contact Sulayman Bowles',
       description:
-        'Contact page for Sulayman Bowles with a direct email path, compact Formspree brief form, and links to LinkedIn, GitHub, resume, public site, Atlas sample crawl data, and the technical SEO method.',
+        'Personal contact page for Sulayman Bowles with direct email and links for research, product, technical work, speaking, and professional context; commercial SEO requests are handed to Void Agency.',
       keywords: searchTerms('/contact'),
-      mainEntityId: serviceId,
+      mainEntityId: PERSON_ID,
       aboutIds: [PERSON_ID],
       additionalType: 'ContactPage',
       dateModified: schemaDateModified,
@@ -797,45 +709,6 @@ export function viralBenchArticleJsonLd(): JsonLd {
       { name: 'Home', path: '/' },
       { name: 'Research', path: '/research' },
       { name: 'ViralBench + Codex Agent Harness', path },
-    ]),
-  ]);
-}
-
-export function austinTechnicalSeoJsonLd(): JsonLd {
-  const serviceId = `${absoluteUrl('/austin-technical-seo')}#service`;
-
-  return graphSchema([
-    ...canonicalEntitySchemas(),
-    websiteSchema(),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      '@id': serviceId,
-      name: 'Austin Technical SEO Consultant and Audit Services',
-      url: absoluteUrl('/austin-technical-seo'),
-      provider: {
-        '@id': PERSON_ID,
-      },
-      areaServed: {
-        '@type': 'City',
-        name: 'Austin',
-      },
-      serviceType: ['Austin Technical SEO Consulting', 'Technical SEO Audit', 'Crawlability Audit', 'Local Search Visibility Review'],
-      description:
-        'Austin technical SEO consulting for teams that need crawlability, indexation, JavaScript rendering, internal links, structured data, local pages, and implementation reviewed.',
-    },
-    webPageSchema({
-      path: '/austin-technical-seo',
-      name: 'Austin Technical SEO Consultant',
-      description:
-        'Austin technical SEO consultant and audit-services page with crawlability evidence, defined limits, method links, sample crawl data, and intake.',
-      keywords: searchTerms('/austin-technical-seo'),
-      mainEntityId: serviceId,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
-    }),
-    breadcrumbSchema([
-      { name: 'Home', path: '/' },
-      { name: 'Austin Technical SEO', path: '/austin-technical-seo' },
     ]),
   ]);
 }

@@ -9,12 +9,10 @@ import {
   atlasSampleFindings,
   atlasSampleRows,
   auditExampleFindingChain,
-  austinBenchmarkSnapshot,
-  austinDiagnosticExamples,
-  austinPilotMethod,
   contextualProofLinks,
   RESEARCH_ASSETS,
   researchContextLinks,
+  researchPriorityPaths,
   workProofCards,
 } from '../content/seoExpansion';
 import {
@@ -110,14 +108,14 @@ const methodCaseStudies = [
   {
     title: 'Product Discovery System',
     copy: 'Audited product and collection pages to find missing metadata, thin templates, weak internal links, duplicate paths, and search-intent gaps.',
-    href: '/contact',
-    cta: 'Request product audit',
+    href: 'https://www.void-agency.com/',
+    cta: 'Open Void Agency',
   },
   {
     title: 'Service-Area Visibility Audit',
     copy: 'Mapped location pages, service pages, Google Business Profile signals, crawl structure, and local entity clarity to improve discovery in high-intent searches.',
-    href: '/austin-technical-seo',
-    cta: 'Open local SEO page',
+    href: 'https://www.void-agency.com/',
+    cta: 'Open Void Agency',
   },
 ];
 
@@ -150,32 +148,6 @@ const methodMeasurementPlan = [
   ['After implementation', 'Rerun crawl checks, inspect changed pages, verify canonical/indexation behavior, and confirm the expected pages are still internally reachable.'],
   ['Search data window', 'Track Search Console query groups, indexed URLs, landing pages, crawl errors, and page-level changes over a realistic post-ship window.'],
   ['Conversion path', 'Review whether audit-relevant CTAs, form submissions, phone/email clicks, and analytics events are measurable from the fixed pages.'],
-];
-
-const austinBuyerFit = [
-  'Austin founders, local service owners, and small growth teams that need to know whether their important pages can be crawled, understood, and measured.',
-  'Teams with a site redesign, new service page, local landing page, or migration that needs a technical review before more content is added.',
-  'Operators who want a short implementation list, not a broad SEO retainer or vague visibility score.',
-];
-
-const austinDeliverables = [
-  'A short URL-level issue list with observed fields, affected pages, severity, and implementation notes.',
-  'A crawlability and source-clarity review covering robots.txt, sitemap, canonicals, structured data, internal links, and page copy.',
-  'A local-intent map that pairs each priority query family with the ranking URL, proof block, CTA path, and measurement field.',
-  'A practical next-step order for founders, marketers, or developers, with unsupported ranking and traffic claims left out.',
-];
-
-const austinAuditCoverage = [
-  ['Crawlability and indexation audit', 'Review robots.txt, XML sitemaps, status codes, redirects, canonicals, noindex rules, crawl paths, and priority Austin service pages.'],
-  ['JavaScript rendering and templates', 'Compare raw and rendered HTML and identify content, links, metadata, or structured data that depend on client-side rendering.'],
-  ['Site architecture and internal links', 'Map crawl depth, orphan risk, navigation, anchor text, service-page relationships, and internal links supporting local commercial intent.'],
-  ['Structured data and AI search readiness', 'Review entity clarity, schema, public source files, crawler access, and the evidence available to search engines and AI answer systems.'],
-];
-
-const austinWhenNotToHire = [
-  'You need paid ads, social media management, generic blog production, or guaranteed local rankings.',
-  'You cannot make website changes or give a developer enough context to implement the fixes.',
-  'The problem is mainly branding, sales process, offer clarity, or operations rather than crawlability, indexation, page structure, or measurement.',
 ];
 
 const homeDisciplines = [
@@ -547,7 +519,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     return articleShell(
       'Research Notes',
       'Selected notes on search systems, crawlability, Atlas, public data, and markets work.',
-      `<h2>Four Research Categories</h2>
+      `<h2>Priority Research Paths</h2>
+        ${linkList([...researchPriorityPaths])}
+        <h2>Four Research Categories</h2>
         ${definitionCards(PUBLICATION_CATEGORY_SUMMARY.map(([title, description]) => [title, description]))}
         <h2>${PUBLICATION_INDEX.length} Notes and Artifacts</h2>
         ${PUBLICATION_INDEX.map((item) => `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.description)}</p>`).join('\n        ')}
@@ -577,10 +551,10 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>A source-led review of the operational realities behind businesses that claim AI management.</p>
         <h3><a href="/atlas">Atlas technical SEO audit software</a></h3>
         <p>A technical SEO crawler and evidence system that preserves raw and rendered pages, tests indexation, canonicals, links, and structured data, then exports reviewable findings.</p>
-        <h3><a href="/method">Technical SEO audit services</a></h3>
-        <p>A fixed-scope audit process for crawlability, indexation, rendering, internal links, structured data, analytics, implementation, and rerun checks.</p>
-        <h3><a href="/austin-technical-seo">Austin technical SEO consultant</a></h3>
-        <p>Local technical SEO audits for Austin teams that need service pages, crawl paths, evidence, and implementation priorities reviewed.</p>
+        <h3><a href="/method">Evidence-led technical SEO audit method</a></h3>
+        <p>Sulayman’s personal audit process for crawlability, indexation, rendering, internal links, structured data, implementation, and rerun checks.</p>
+        <h3><a href="https://www.void-agency.com/services/technical-seo-ai-search-visibility">Void Agency technical SEO services</a></h3>
+        <p>Commercial, local, agency, and lead-generation intent is owned by Void Agency.</p>
         <h3><a href="/research">Technical SEO research</a></h3>
         <p>Source-led notes on crawlability, crawler policy, public search data, canonical identity, AI systems, and evidence limits.</p>
         <h3><a href="/markets/who-owns-texas-toll-roads">Texas Toll-Road Ownership Map</a></h3>
@@ -650,8 +624,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl', description: 'Dated raw/render capture, source records, and exports.' },
           { label: 'GitHub profile', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
           { label: 'View the GitHub repo for the audit CLI', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', description: 'Public scraper/audit code.' },
-          { label: 'Read the technical SEO audit method', href: '/method', description: 'Service/process context.' },
-          { label: 'Request an audit', href: '/contact', description: 'Audit intake for technical SEO, analytics, and markets research.' },
+          { label: 'Read the evidence-led technical SEO audit method', href: '/method', description: 'Sulayman’s personal process and evidence boundary.' },
+          { label: 'Review Void Agency technical SEO services', href: 'https://www.void-agency.com/services/technical-seo-ai-search-visibility', description: 'Commercial technical SEO scope and consultation path.' },
         ])}
         <h2>System Intelligence You Can Act On</h2>
         <p>Atlas turns complexity into inspectable records so operators can decide what matters, what should be fixed, and what source data supports the recommendation.</p>
@@ -680,17 +654,45 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${linkList([
           { label: 'Read the technical SEO audit method', href: '/method' },
           { label: 'View the GitHub repo for the audit CLI', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-' },
-          { label: 'Request an audit', href: '/contact' },
+          { label: 'Work with Void Agency', href: 'https://www.void-agency.com/' },
+        ])}`,
+    );
+  }
+
+  if (route.path === '/void-agency') {
+    return articleShell(
+      'How Sulayman Bowles Builds and Runs Void Agency',
+      'An author-and-company relationship page documenting Sulayman Bowles’s role, public contributions, supporting evidence, and claim boundaries at Void Agency.',
+      `<p>Void Agency is the commercial branch of my technical SEO and web-systems work. I founded the practice, define the operating method, build and review its public systems, and keep every outcome claim tied to inspectable evidence.</p>
+        <h2>Role and Contributions</h2>
+        ${definitionCards([
+          ['Founder and operator', 'I set the practice scope, shape engagements, review findings, and own the handoff from public crawl evidence to implementation work.'],
+          ['Technical SEO systems', 'I connect crawlability, indexation, rendering, internal links, structured data, analytics, and acceptance checks into bounded audit and repair workflows.'],
+          ['Search-ready web delivery', 'I build service architecture, proof sections, conversion paths, event measurement, and post-release validation for the agency’s public web systems.'],
+        ])}
+        <h2>Verified Operating Record</h2>
+        <p>The public résumé records more than $50,000 in collected Void Agency revenue as of May 31, 2026. That verifies an operating practice; it does not establish a client ranking or traffic outcome.</p>
+        ${linkList([{ label: 'Review the supporting résumé', href: '/resume' }])}
+        <h2>Evidence Boundaries</h2>
+        <ul><li>Commercial, local-service, agency, and lead-generation intent belongs on void-agency.com.</li><li>Public examples are labeled representative whenever client results are unavailable.</li><li>Release, crawlability, indexability, impressions, rankings, clicks, and qualified leads remain separate claims.</li><li>No ranking, traffic, revenue, or AI-citation outcome is implied without matching provider evidence.</li></ul>
+        <h2>Public Proof</h2>
+        ${linkList([
+          { label: 'Open Void Agency', href: 'https://www.void-agency.com/', description: 'Commercial services, positioning, examples, and consultation path.' },
+          { label: 'Technical SEO audit example', href: 'https://www.void-agency.com/examples/technical-seo-audit', description: 'Representative scope, sanitized output, and evidence limits.' },
+          { label: 'Search-ready website example', href: 'https://www.void-agency.com/examples/search-ready-website', description: 'Representative architecture, proof, contact, and measurement deliverables.' },
+          { label: 'AI lead-intake workflow example', href: 'https://www.void-agency.com/examples/ai-lead-intake-workflow', description: 'Representative source capture, review, and handoff.' },
+          { label: 'Read Sulayman’s audit method', href: '/method', description: 'Personal process from crawl evidence to owners and rerun checks.' },
+          { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl', description: 'Dated, bounded public crawl evidence.' },
         ])}`,
     );
   }
 
   if (route.path === '/method') {
     return articleShell(
-      'Technical SEO Audit Services',
-      'Fixed-scope technical SEO audit services from inspectable site evidence to implementation work, owners, and rerun checks.',
-      `<p>Void Agency reviews crawlability, indexation, JavaScript rendering, internal links, structured data, analytics, and implementation constraints. The deliverable is a bounded set of defensible findings and acceptance checks—not a long generic checklist.</p>
-        <h2>Technical SEO Audit Process</h2>
+      'How Sulayman Bowles Runs Evidence-Led Technical SEO Audits',
+      'Sulayman Bowles’s personal method for moving from inspectable site evidence to implementation work, owners, and rerun checks.',
+      `<p>I review crawlability, indexation, JavaScript rendering, internal links, structured data, analytics, and implementation constraints. The output is a bounded set of defensible findings and acceptance checks—not a long generic checklist. Commercial audit work is delivered through Void Agency.</p>
+        <h2>Evidence-Led Technical SEO Audit Process</h2>
         ${definitionCards(methodColumns)}
         <h2>Deliverables</h2>
         ${definitionCards(methodDeliverables)}
@@ -706,27 +708,29 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${linkList([
           { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl' },
           { label: 'Read the worked finding', href: '/method#worked-finding' },
-          { label: 'Austin technical SEO consultant', href: '/austin-technical-seo' },
-          { label: 'View Void Agency', href: 'https://www.void-agency.com/' },
-          { label: 'Request an audit', href: '/contact' },
+          { label: 'Review Void Agency technical SEO services', href: 'https://www.void-agency.com/services/technical-seo-ai-search-visibility' },
+          { label: 'Contact Sulayman Bowles', href: '/contact' },
         ])}`,
     );
   }
 
   if (route.path === '/contact') {
     return articleShell(
-      'Contact a Technical SEO Consultant',
-      'Direct contact for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and source-backed research.',
-      `<p>I work as a technical SEO consultant on bounded crawlability, indexation, rendering, internal-link, structured-data, analytics, and implementation problems. Typical outputs include URL-level findings, raw/render comparisons, owners, acceptance checks, and a rerun path—not an opaque score or generic audit deck.</p>
-        <h2>Good-Fit Technical Work</h2>
-        <ul><li>Indexation, canonical, redirect, internal-link, structured-data, and template diagnosis tied to affected URLs.</li><li>Raw and rendered page comparison, crawl-state review, measurement-gap handling, and post-fix reruns.</li><li>GA4 and Search Console baselines, source-led research, implementation handoffs, and validation criteria.</li></ul>
+      'Contact Sulayman Bowles',
+      'Personal contact for research, product, technical systems, speaking, professional context, and collaboration.',
+      `<p>Email me about research, product, technical systems, speaking, professional context, or a collaboration that belongs with me personally. Commercial technical SEO, Austin, service-business, agency, and lead-generation requests belong with Void Agency.</p>
         <h2>Direct Contact</h2>
         ${linkList([
           { label: 'Email Sulayman Bowles', href: 'mailto:sulayman.bowles@gmail.com', description: 'Primary contact path.' },
         ])}
-        <h2>Brief Form</h2>
-        <p>The public brief form is secondary to direct contact. It is useful when the site URL, suspected problem, and decision the work needs to support are already clear.</p>
-        <ul><li>Use the brief for technical SEO, crawl evidence, analytics, or source-backed research requests.</li><li>Start with the site URL, the suspected problem, and the decision the work needs to support.</li><li>Do not include passwords, API keys, payment details, unreleased client data, or production secrets.</li></ul>
+        <h2>Useful Context</h2>
+        <ul><li>What prompted the message.</li><li>The project, role, research question, or decision involved.</li><li>Any public link that makes the context easier to inspect.</li></ul>
+        <p>Do not include passwords, API keys, payment details, unreleased client data, or production secrets.</p>
+        <h2>Commercial Technical SEO</h2>
+        <p>Void Agency owns the commercial, local-service, technical SEO service, and lead-generation intent.</p>
+        ${linkList([
+          { label: 'Open Void Agency', href: 'https://www.void-agency.com/', description: 'Commercial scope, representative examples, and consultation path.' },
+        ])}
         <h2>Elsewhere</h2>
         ${linkList([
           { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
@@ -738,49 +742,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Related Context</h2>
         ${linkList([
           { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl' },
-          { label: 'Review technical SEO audit services and process', href: '/method' },
-          { label: 'Austin technical SEO consultant', href: '/austin-technical-seo' },
-        ])}`,
-    );
-  }
-
-  if (route.path === '/austin-technical-seo') {
-    return articleShell(
-      'Austin Technical SEO Consultant',
-      'Austin technical SEO consulting and audit services for local businesses and growth teams.',
-      `<p>Based in Austin, Sulayman Bowles runs fixed-scope technical SEO audits for teams that need crawlability, indexation, JavaScript rendering, internal links, structured data, local service pages, analytics, and implementation checked.</p>
-        <h2>Short Answer</h2>
-        <p>An Austin technical SEO consultant checks whether priority service pages can be crawled, indexed, understood, internally supported, and measured before anyone expands content or claims local visibility gains.</p>
-        <h2>What an Austin Technical SEO Audit Covers</h2>
-        ${definitionCards(austinAuditCoverage)}
-        <h2>Who This Is For</h2>
-        <ul>${austinBuyerFit.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-        <h2>What You Receive</h2>
-        <ul>${austinDeliverables.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-        <h2>When Not To Hire Me</h2>
-        <ul>${austinWhenNotToHire.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-        <h2>Austin Crawlability Pilot Snapshot</h2>
-        <p>The local page is backed by a bounded public fetch sample, not a local-ranking claim. It gives a small public-data baseline for how Austin-area company sites expose crawlability signals.</p>
-        <p><strong>Evidence cutoff:</strong> June 25, 2026.</p>
-        <figure id="austin-report-example"><img src="/images/austin-audit-report-example.png" width="1200" height="760" alt="Example report layout using the June 25, 2026 public Austin pilot values." /><figcaption>Illustrative report layout; values come from the published summary and CSV.</figcaption></figure>
-        ${definitionCards(austinBenchmarkSnapshot.map((item) => [item.label, item.value]))}
-        <h3>Pilot Method</h3>
-        <ul>${austinPilotMethod.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-        <h3>Disclosure</h3>
-        <p>This bounded public fetch sample is not a local-ranking claim and does not establish traffic, revenue, or site health.</p>
-        ${linkList([
-          { label: 'Open Austin benchmark summary JSON', href: '/research/austin-crawlability-benchmark-summary.json' },
-          { label: 'Open Austin benchmark pilot CSV', href: '/research/austin-crawlability-benchmark-pilot.csv' },
-        ])}
-        <h2>Query Examples Before Page Expansion</h2>
-        <p>The audit starts with concrete queries such as technical SEO Austin, Austin SEO audit, and Austin crawlability audit, then checks whether the public page, proof, profile signals, and measurement path support that intent.</p>
-        ${definitionCards(austinDiagnosticExamples.map((item) => [item.prompt, item.review]))}
-        <h2>Contextual Links</h2>
-        ${linkList([
-          { label: 'Request an Austin technical SEO audit', href: '/contact' },
-          { label: 'Review technical SEO audit services and process', href: '/method' },
-          { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl' },
-          { label: 'View Void Agency', href: 'https://www.void-agency.com/' },
+          { label: 'Review the evidence-led technical SEO audit method', href: '/method' },
+          { label: 'Read the Void Agency relationship page', href: '/void-agency' },
         ])}`,
     );
   }
@@ -824,7 +787,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>The work is inspectable rather than assertion-led: the relevant project pages attach sanitized crawl rows, source ledgers, method notes, system designs, public code, and explicit evidence limits.</p>
         <h2>Current Work</h2>
         <h3><a href="/atlas">Atlas</a></h3><p>I designed the product, crawl evidence contract, review states, persistence, and export paths.</p>
-        <h3><a href="https://www.void-agency.com/">Void Agency</a></h3><p>I run fixed-scope technical audits, web systems, analytics review, and implementation handoffs through this practice.</p>
+        <h3><a href="/void-agency">Sulayman Bowles and Void Agency</a></h3><p>I run fixed-scope technical audits, web systems, analytics review, and implementation handoffs through this practice.</p>
         <h3><a href="/resume">Product work</a></h3><p>AI product research, competitive analysis, workflow mapping, and prototype review.</p>
         <h3><a href="/research">Finance and research</a></h3><p>Ownership, operating logic, source tables, market validation, unit economics, and financial models.</p>
         <h2>Experience</h2>
@@ -915,7 +878,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: investmentMemo ? 'Markets Research' : 'Research Notes', href: investmentMemo ? '/markets' : '/research' },
           { label: 'Home', href: '/' },
           { label: 'Atlas technical SEO audit software', href: '/atlas' },
-          { label: 'Technical SEO audit services', href: '/method' },
+          { label: 'Evidence-led technical SEO audit method', href: '/method' },
           { label: 'Sulayman Bowles resume', href: '/resume' },
         ])}`,
     );

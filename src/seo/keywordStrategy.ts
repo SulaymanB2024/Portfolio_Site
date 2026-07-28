@@ -25,6 +25,12 @@ export const SEARCH_INTENT_CLUSTERS = [
     supporting: ['AI product manager', 'technical systems builder', 'UT Austin McCombs'],
   },
   {
+    path: '/void-agency',
+    intent: 'profile',
+    primary: 'Sulayman Bowles and Void Agency',
+    supporting: ['Void Agency founder', 'Void Agency role', 'technical SEO practice'],
+  },
+  {
     path: '/atlas',
     intent: 'product',
     primary: 'technical SEO audit software',
@@ -32,21 +38,15 @@ export const SEARCH_INTENT_CLUSTERS = [
   },
   {
     path: '/method',
-    intent: 'commercial',
-    primary: 'technical SEO audit services',
-    supporting: ['technical SEO audit process', 'crawlability audit', 'indexation audit', 'structured data audit'],
+    intent: 'research',
+    primary: 'technical SEO audit method',
+    supporting: ['evidence-led technical SEO audits', 'technical SEO audit process', 'crawl evidence', 'audit rerun checks'],
   },
   {
     path: '/contact',
-    intent: 'commercial',
-    primary: 'technical SEO consultant',
-    supporting: ['technical SEO audit contact', 'crawlability consultant', 'SEO implementation support'],
-  },
-  {
-    path: '/austin-technical-seo',
-    intent: 'local-commercial',
-    primary: 'Austin technical SEO consultant',
-    supporting: ['technical SEO Austin', 'Austin SEO audit', 'Austin technical SEO services', 'Austin crawlability audit'],
+    intent: 'profile',
+    primary: 'Contact Sulayman Bowles',
+    supporting: ['Sulayman Bowles email', 'technical work', 'research collaboration'],
   },
   {
     path: '/research',

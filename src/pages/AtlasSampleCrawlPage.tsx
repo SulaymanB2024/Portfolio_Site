@@ -45,8 +45,8 @@ export default function AtlasSampleCrawlPage() {
             <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="border-b border-ink/24 pb-1 transition-colors hover:border-ink">
               View the GitHub repo for the audit CLI
             </a>
-            <a href="/contact" className="border-b border-ink/24 pb-1 transition-colors hover:border-ink">
-              Request an audit
+            <a href="https://www.void-agency.com/" className="border-b border-ink/24 pb-1 transition-colors hover:border-ink">
+              Work with Void Agency
             </a>
           </div>
         </div>

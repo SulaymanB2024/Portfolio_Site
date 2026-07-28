@@ -1,5 +1,4 @@
 import ArrowUpRight from 'lucide-react/dist/esm/icons/arrow-up-right.js';
-import { AuditIntakeForm } from '../components/AuditIntakeForm';
 import { InternalHeader } from '../components/InternalHeader';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
@@ -9,15 +8,15 @@ const DIRECT_EMAIL = 'sulayman.bowles@gmail.com';
 const DIRECT_EMAIL_HREF = `mailto:${DIRECT_EMAIL}`;
 
 const responsePaths = [
-  'Technical SEO consulting — indexation, canonicals, links, schema',
-  'Crawl evidence — raw/rendered states, issue review, reruns',
-  'Analytics and research — GA4, Search Console, source ledgers',
+  'Product and technical-systems conversations',
+  'Research, source work, and speaking context',
+  'Professional, recruiting, and collaboration inquiries',
 ];
 
-const intakeNotes = [
-  'Site URL or product surface',
-  'Suspected crawl, visibility, or analytics issue',
-  'Decision the work needs to support',
+const contextNotes = [
+  'What prompted the message',
+  'The project, role, research question, or decision involved',
+  'Any public link that makes the context easier to inspect',
 ];
 
 const elsewhereLinks = [
@@ -107,7 +106,7 @@ export default function ContactPage() {
                 </div>
 
                 <h1 className="mt-12 max-w-[8ch] font-serif text-[5rem] italic leading-[0.82] tracking-normal text-canvas sm:text-[6.6rem] md:text-[8.4rem] lg:text-[9.5rem] xl:text-[11.5rem]">
-                  SEO audit contact.
+                  Contact Sulayman.
                 </h1>
 
                 <a
@@ -123,16 +122,16 @@ export default function ContactPage() {
                 </a>
 
                 <p className="mt-8 max-w-2xl text-base leading-relaxed text-canvas/64 md:text-lg">
-                  I work as a technical SEO consultant on bounded crawlability, indexation, rendering, internal-link, structured-data, analytics, and implementation problems. Typical outputs include URL-level findings, owners, acceptance checks, and a rerun path—not an opaque score or generic audit deck.
+                  Email me about research, product, technical systems, speaking, professional context, or a collaboration that belongs with me personally.
                 </p>
                 <p className="mt-5 max-w-2xl text-sm leading-relaxed text-canvas/56">
-                  Direct email is the fastest path when the request is still taking shape. If the site, suspected issue, and decision are already clear, the brief form preserves that context in one pass.
+                  Commercial technical SEO, Austin, service-business, agency, and lead-generation requests belong with Void Agency.
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-5">
                   <ArrowLink href={DIRECT_EMAIL_HREF}>Email directly</ArrowLink>
-                  <ArrowLink href="/method">Technical SEO audit method</ArrowLink>
-                  <ArrowLink href="/atlas/sample-crawl">Atlas crawl example</ArrowLink>
+                  <ArrowLink href="/about">About Sulayman</ArrowLink>
+                  <ArrowLink href="/resume">Resume</ArrowLink>
                 </div>
               </div>
 
@@ -148,28 +147,29 @@ export default function ContactPage() {
             <div className="grid gap-6 lg:py-4">
               <aside id="contact-brief-panel" className="border border-canvas/16 bg-canvas/[0.035] p-5 text-canvas md:p-7">
                 <div className="border-b border-canvas/12 pb-5">
-                  <p className="text-xs text-canvas/48">Brief form</p>
+                  <p className="text-xs text-canvas/48">Commercial handoff</p>
                   <h2 className="mt-4 font-serif text-4xl italic leading-none text-canvas md:text-5xl">
-                    Send the context.
+                    Work with Void Agency.
                   </h2>
                   <p className="mt-5 max-w-lg text-sm leading-relaxed text-canvas/62">
-                    Useful when the site, suspected problem, and decision are clear enough to capture in one pass.
+                    Void owns the agency, local-service, technical SEO service, and lead-generation intent. Its site contains the commercial scope, representative examples, and consultation path.
                   </p>
+                  <a href="https://www.void-agency.com/" className="mt-7 inline-flex min-h-11 items-center border-b border-accent/45 text-[10px] uppercase tracking-[0.22em] text-accent hover:border-canvas hover:text-canvas">
+                    Open Void Agency
+                  </a>
                 </div>
 
-                <AuditIntakeForm variant="compact" showProgress={false} submitLabel="SEND BRIEF" className="mt-6 text-left" />
-
-                <div className="mt-6 border-t border-canvas/12 pt-5">
-                  <p className="text-xs text-canvas/48">Include</p>
+                <div className="mt-6">
+                  <p className="text-xs text-canvas/48">Helpful personal-message context</p>
                   <ul className="mt-4 grid gap-3 text-sm leading-relaxed text-canvas/62">
-                    {intakeNotes.map((item) => (
+                    {contextNotes.map((item) => (
                       <li key={item} className="border-l border-canvas/16 pl-4">
                         {item}
                       </li>
                     ))}
                   </ul>
                   <p className="mt-5 text-xs leading-relaxed text-canvas/42">
-                    Do not include credentials, API keys, payment details, unreleased client data, or production secrets.
+                    Do not include credentials, API keys, payment details, unreleased client data, or production secrets in email.
                   </p>
                 </div>
               </aside>

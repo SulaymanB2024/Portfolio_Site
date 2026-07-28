@@ -13,7 +13,6 @@ import {
 } from '../content/viralBenchArticle';
 import {
   aboutJsonLd,
-  austinTechnicalSeoJsonLd,
   atlasSampleCrawlJsonLd,
   atlasJsonLd,
   contactJsonLd,
@@ -25,6 +24,7 @@ import {
   resumeJsonLd,
   sitemapJsonLd,
   viralBenchArticleJsonLd,
+  voidAgencyRelationshipJsonLd,
   workJsonLd,
   type JsonLd,
 } from './schema';
@@ -68,6 +68,7 @@ export type RouteTone = 'light' | 'dark';
 export const SITE_LASTMOD = '2026-07-16';
 const METADATA_REFRESH_LASTMOD = '2026-07-19';
 const KEYWORD_LASTMOD = '2026-07-18';
+const SEO_PERFORMANCE_LASTMOD = '2026-07-24';
 const PROFILE_OG_IMAGE = '/images/social/og-profile.png';
 const ATLAS_OG_IMAGE = '/images/social/og-atlas.png';
 const WORK_OG_IMAGE = '/images/social/og-work.png';
@@ -142,6 +143,23 @@ const CORE_ROUTES: SeoRoute[] = [
       'Sulayman Bowles connects technical SEO consulting, Atlas crawl software, AI product work, analytics, and source-led finance research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: aboutJsonLd(),
+  },
+  {
+    path: '/void-agency',
+    aliases: [],
+    title: 'Sulayman Bowles and Void Agency | Role & Contributions',
+    description:
+      'Sulayman Bowles’s role, public work, verified contributions, and evidence boundaries at Void Agency, with commercial services kept on the agency site.',
+    h1: 'How Sulayman Bowles Builds and Runs Void Agency',
+    section: 'about',
+    pageType: 'profile',
+    priority: 0.7,
+    includeInSitemap: true,
+    lastmod: SEO_PERFORMANCE_LASTMOD,
+    staticSummary:
+      'An author-and-company relationship page documenting Sulayman Bowles’s founder role, public systems work, verified contribution record, and claim boundaries at Void Agency.',
+    image: VOID_OG_IMAGE,
+    jsonLd: voidAgencyRelationshipJsonLd(),
   },
   {
     path: '/atlas',
@@ -246,53 +264,36 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/method',
     aliases: [],
-    title: 'Technical SEO Audit Services & Process | Void Agency',
+    title: 'Evidence-Led Technical SEO Audit Method | Sulayman Bowles',
     description:
-      'Void Agency’s technical SEO audit method for crawl paths, indexation, internal links, structured data, analytics, and implementation priorities.',
-    h1: 'Void Agency Method',
-    section: 'service',
-    pageType: 'service',
+      'How Sulayman Bowles runs evidence-led technical SEO audits across crawl paths, indexation, rendering, internal links, structured data, and rerun checks.',
+    h1: 'How Sulayman Bowles Runs Evidence-Led Technical SEO Audits',
+    section: 'research',
+    pageType: 'research',
     priority: 0.9,
     includeInSitemap: true,
-    lastmod: METADATA_REFRESH_LASTMOD,
+    lastmod: SEO_PERFORMANCE_LASTMOD,
     staticSummary:
-      'Technical SEO audit services for crawlability, indexation, rendering, internal links, structured data, analytics, implementation priorities, and rerun checks.',
-    image: VOID_OG_IMAGE,
+      'Sulayman Bowles’s personal technical SEO audit methodology for preserving crawl evidence, separating observation from interpretation, assigning implementation owners, and validating repairs.',
+    image: RESEARCH_OG_IMAGE,
     jsonLd: methodJsonLd(),
   },
   {
     path: '/contact',
-    aliases: ['/audit-intake'],
-    title: 'Technical SEO Consultant & Audit Contact | Sulayman Bowles',
+    aliases: [],
+    title: 'Contact Sulayman Bowles | Technical Work & Research',
     description:
-      'Contact technical SEO consultant Sulayman Bowles for crawlability, indexation, rendering, structured data, analytics, implementation, or audit support.',
-    h1: 'Contact a Technical SEO Consultant',
+      'Contact Sulayman Bowles about research, product, technical systems, speaking, or professional context; commercial SEO requests are handled by Void Agency.',
+    h1: 'Contact Sulayman Bowles',
     section: 'contact',
-    pageType: 'service',
+    pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: KEYWORD_LASTMOD,
+    lastmod: SEO_PERFORMANCE_LASTMOD,
     staticSummary:
-      'Direct contact and a compact brief for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and research.',
+      'Personal contact page for Sulayman Bowles with direct email and professional profiles; commercial agency and local-service requests are handed to Void Agency.',
     image: PROFILE_OG_IMAGE,
     jsonLd: contactJsonLd(),
-  },
-  {
-    path: '/austin-technical-seo',
-    aliases: ['/austin-seo'],
-    title: 'Austin Technical SEO Consultant & Audit Services',
-    description:
-      'Austin technical SEO for teams that need crawlability, indexation, structured data, page clarity, local context, and implementation guidance.',
-    h1: 'Austin Technical SEO',
-    section: 'local-service',
-    pageType: 'service',
-    priority: 0.7,
-    includeInSitemap: true,
-    lastmod: METADATA_REFRESH_LASTMOD,
-    staticSummary:
-      'Austin technical SEO consulting and audit services for crawlability, indexation, rendering, internal links, structured data, local pages, and implementation.',
-    image: VOID_OG_IMAGE,
-    jsonLd: austinTechnicalSeoJsonLd(),
   },
   {
     path: VIRALBENCH_ARTICLE_PATH,

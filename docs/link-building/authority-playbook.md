@@ -52,7 +52,7 @@ The scope checker verifies that only link-building publish files are being stage
 | 2 | Technical SEO as public data infrastructure | `https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure` | Strong editorial bridge between SEO, source quality, structured data, and data infrastructure. |
 | 2 | Canonical identity for personal SEO | `https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo` | Useful for personal-site/profile cleanup, stale PDFs, sameAs discipline, and source graph consistency. |
 | 2 | Technical SEO audit case study | `https://sulayman-bowles.dev/case-studies/technical-seo-audit` | Sanitized case-study logic without private client claims. |
-| 3 | Austin technical SEO page | `https://sulayman-bowles.dev/austin-technical-seo` | Local-service surface for Austin/startup/business-context citations. |
+| 3 | Austin technical SEO page | `https://www.void-agency.com/` | Local-service surface for Austin/startup/business-context citations. |
 | 3 | Austin crawlability benchmark pilot | `https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv` | Local public-data hook for Austin media and startup/web-infrastructure conversations. |
 | 3 | AI information source graph | `https://sulayman-bowles.dev/ai-information` | Canonical identity/source page for profile, AI retrieval, and entity reconciliation links. |
 | 1 | Texas toll-road ownership guide | `https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads` | Answer-first ownership explainer with public/private distinctions, project-level source records, and preserved investor analysis. |
@@ -110,7 +110,7 @@ Success criteria:
 
 ### Campaign 3: Austin Crawlability Benchmark
 
-Target pages: `/austin-technical-seo`, `/method`, future benchmark article if created.
+Target pages: `https://www.void-agency.com/` for commercial/local intent, `/method` for personal methodology, and `/research/austin-crawlability-benchmark-pilot.csv` for the bounded public-data asset.
 
 Audience:
 
