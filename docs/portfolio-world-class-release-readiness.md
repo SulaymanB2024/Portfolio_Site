@@ -2,7 +2,7 @@
 
 ## Decision
 
-The source-current portfolio implementation is locally accepted, but it is not released. The repository default branch and the canonical production domains still resolve to the pre-program source. No commit, push, preview creation, production promotion, domain reassignment, or rollback was performed during the read-only audit that produced this ledger.
+The source-current portfolio implementation is locally accepted, committed to a release branch, pushed, and accepted on an exact-commit Vercel preview, but it is not yet released to production. The repository default branch and the canonical production domains still resolve to the pre-program source. No production promotion, domain reassignment, or rollback has occurred.
 
 The user subsequently authorized the full guarded release cycle: create the release commit, push a release branch, generate and validate a Vercel preview, and—only if every preview gate passes—merge/promote it to production while retaining the recorded rollback target. Until that sequence finishes, the implementation remains **authorized and release-ready, not live**.
 
@@ -12,11 +12,13 @@ The user subsequently authorized the full guarded release cycle: create the rele
 |---|---|---|
 | Accepted worktree | `/Users/sulaymanbowles/.codex/worktrees/37ee/Portfolio_Site` | Sole source-current implementation owner |
 | Accepted worktree base | `c2f5ecac154b15e1cfe789cf6cc974f66483c130` | Unpublished child of the current remote default branch |
+| Release branch | `codex/portfolio-world-class-release` | Published review branch for PR 9 |
+| Accepted release runtime | `38fd8cef37b40a8840902c5409a3db222a7c8e03` | Exact source validated on the final preview gate |
 | Remote `main` | `e449a404e20f0bee615a780764e5ceb32c7200af` | Current GitHub default-branch head |
 | Production deployment | `dpl_H3yNyBHnZJb6HvRQwD4fwRRtLgWT` | Current rollback target and canonical-domain deployment |
 | Production source | `main` at `e449a404e20f0bee615a780764e5ceb32c7200af` | Confirms production is pre-program |
 | Production aliases | `sulayman-bowles.dev`, `www.sulayman-bowles.dev` | Both point to the deployment above |
-| Newest known preview | `dpl_gCxMCYvDR6PnCkYs4J5rQSDWxBP1` | Preview-only deployment from `codex/seo-expansion-20260728` at `abb8e64de075cd274fdbe7b17ce61e0eec9b8eb1`; not the accepted source |
+| Accepted preview | `dpl_EVDV6RAj6KdGw9xHSCebD2FQqtvc` | `READY` preview for PR 9 and exact runtime commit `38fd8ce`; target `null`, alias error `null` |
 | Vercel project | `prj_XG5xtn0h0aR7D7ek9cqxHdYzqDac` | `portfolio-site`, Vite, team `team_MYMuDXoBrKio5LKLLvZWfXef` |
 
 Direct ancestry inspection proved that `c2f5ecac` has parent `e449a404`. `git ls-remote` independently returned `e449a404` for `refs/heads/main`.
@@ -29,7 +31,20 @@ Direct ancestry inspection proved that `c2f5ecac` has parent `e449a404`. `git ls
 - `conclusion-verification.json`, generated at `2026-07-31T01:27:55.767Z`, records the route, viewport, robots state, conclusion label/title/content/note, geometry, overflow state, link count, screenshot path, and screenshot byte count for every conclusion follow-up surface.
 - The final source passed the bounded lint, style, build, generated-file, link, SEO, keyword, article, route, responsive, interaction, reduced-motion, and print gates recorded in the program checkpoint.
 
-This is source-current local acceptance only. It is not evidence that GitHub, a Vercel preview, or production contains the accepted implementation.
+This section records local acceptance. The release preview evidence below separately proves GitHub/Vercel preview state. Neither section is production acceptance.
+
+## Release preview acceptance evidence
+
+- GitHub PR 9 points to `codex/portfolio-world-class-release`; the remote branch and preview metadata identify runtime commit `38fd8cef37b40a8840902c5409a3db222a7c8e03`.
+- Vercel deployment `dpl_EVDV6RAj6KdGw9xHSCebD2FQqtvc` is `READY`, has target `null`, has no alias error, and belongs to project `portfolio-site` under the expected team.
+- The fresh preview matrix covered all 38 route states at 1440×1000, 820×1180, and 390×844. All 114 cells passed raw fallback, hydrated DOM, canonical/robots, overflow, completed-image, console, screenshot, and hash checks.
+- The protected preview passed the exact 35-route sitemap, robots policy, semantic 404 with true HTTP 404, security headers, representative downloads/assets, redirects, and all 23 live article contracts.
+- Fifteen targeted interaction groups passed, including INDEX focus/scroll restoration, invalid-form safety, disclosure/Q&A surfaces, reduced motion, mobile/tablet/desktop table treatments, six conclusion surfaces, conversion/recovery paths, and generic/custom print.
+- The prior Texas print failure is closed. All seven responsive evidence tables use the stacked print contract and remain within the printable viewport.
+- Machine-readable evidence is retained at `/Users/sulaymanbowles/.codex/visualizations/2026/07/30/019fb548-8559-7cc0-a683-13da0c800b31/portfolio-release-preview-38fd8ce/`.
+- The release-level manifest is `/Users/sulaymanbowles/.codex/visualizations/2026/07/30/019fb548-8559-7cc0-a683-13da0c800b31/portfolio-release-preview-38fd8ce/release-verification-manifest.json`.
+
+This is exact-runtime preview acceptance. Production acceptance still requires the guarded merge, exact production-deployment identity, and cache-busted canonical-domain verification.
 
 ## Production divergence evidence
 
@@ -144,6 +159,8 @@ The user explicitly authorized commit, release-branch push, preview generation a
 6. Review the preview diff and evidence. Only then merge/promote to production.
 7. Re-run cache-busted canonical-domain smoke checks and the material visual/interaction states against production. Confirm the production deployment metadata points to the released commit.
 8. If the production gate fails, restore deployment `dpl_H3yNyBHnZJb6HvRQwD4fwRRtLgWT` to the canonical aliases and verify both aliases after rollback.
+
+Current execution status: steps 1–6 are complete for runtime commit `38fd8ce`; step 7 is pending the guarded merge and production deployment; step 8 remains the conditional rollback path.
 
 ## Authorization received
 

@@ -118,8 +118,8 @@ Done means the full route/state/device ledger passes; the copy and claim system 
 
 ## Checkpoint
 
-- Stage: local implementation and source-current acceptance complete; authorized release execution in progress.
-- Verified state: all three read-only Wave 1 reports and the editorial cross-review were reconciled by one implementation owner. A fresh production build of the final source passes type, style, build, generated-file, internal-link, SEO, route, responsive, interaction, reduced-motion, and print checks.
+- Stage: local implementation and source-current Vercel preview acceptance complete; production promotion remains pending the guarded merge and canonical-domain checks.
+- Verified state: all three read-only Wave 1 reports and the editorial cross-review were reconciled by one implementation owner. Release runtime commit `38fd8cef37b40a8840902c5409a3db222a7c8e03` passes the local source gate and the fresh exact-commit Vercel preview gate across raw HTML, hydrated DOM, responsive, interaction, reduced-motion, print, live-article, HTTP, asset, and redirect contracts.
 - Material changes:
   - Reused the readable stacked-table treatment for print media and added a style-audit safeguard, preventing wide Texas evidence tables from clipping outside the printable article surface.
   - Replaced the raw static crawl fallback's generic wrapper with a semantic `main` landmark and made static-route generation fail closed when any generated route or 404 lacks that landmark or an H1.
@@ -158,8 +158,16 @@ Done means the full route/state/device ledger passes; the copy and claim system 
 - Conclusion follow-up Browser result: passed against the corrected fresh production preview on port 4193.
   - The source-current conclusion matrix covered generic technical research, generic financial research, the custom AI reader, the noindex market archive, the Texas market reader, and ViralBench at 1440×1000, 820×1180, and 390×844. Every route rendered the expected label, unique heading, synthesis, source note, and related links with correct robots state, no page or footer overflow, and zero browser warnings or errors.
   - The first 390px conclusion capture exposed a fixed-chrome anchor overlap. `scroll-margin-top` now keeps the heading visible below the header and contents rail; all six conclusion captures were regenerated from the corrected source.
+- Release preview Browser result: passed against Vercel deployment `dpl_EVDV6RAj6KdGw9xHSCebD2FQqtvc`, built from release runtime commit `38fd8cef37b40a8840902c5409a3db222a7c8e03`.
+  - Provider metadata matched project `portfolio-site`, PR 9, branch `codex/portfolio-world-class-release`, and the exact commit; the preview was `READY`, had no alias error, and was not a production deployment.
+  - All 38 states passed at 1440×1000, 820×1180, and 390×844: 114/114 fresh viewport cells, 114 screenshot hashes, 38 raw-HTML captures, zero browser warnings/errors, zero broken completed images, and zero page/footer overflow failures.
+  - The protected preview passed the 35-route sitemap, robots policy, semantic raw fallback, true HTTP 404, seven security-header checks, representative PDF/static assets, legacy redirects, and all 23 live article contracts.
+  - Fifteen targeted interaction groups passed, including INDEX focus/scroll restoration at mobile and tablet widths, empty form validation with zero Formspree traffic, article contents and disclosure states, responsive tables, reduced motion, two print readers, six representative conclusions, conversion paths, and 404 recovery links.
+  - The Texas print regression is closed: all seven responsive evidence tables render as stacked rows with `min-width: 0`, remain inside the 1440px print viewport, and produce no document overflow.
 - Source-current evidence: `/Users/sulaymanbowles/.codex/visualizations/2026/07/30/019fb548-8559-7cc0-a683-13da0c800b31/portfolio-source-current-final-verification/`.
 - Conclusion evidence manifest: `/Users/sulaymanbowles/.codex/visualizations/2026/07/30/019fb548-8559-7cc0-a683-13da0c800b31/portfolio-source-current-final-verification/conclusion-verification.json`.
+- Release preview evidence: `/Users/sulaymanbowles/.codex/visualizations/2026/07/30/019fb548-8559-7cc0-a683-13da0c800b31/portfolio-release-preview-38fd8ce/`.
+- Release preview manifest: `/Users/sulaymanbowles/.codex/visualizations/2026/07/30/019fb548-8559-7cc0-a683-13da0c800b31/portfolio-release-preview-38fd8ce/release-verification-manifest.json`.
 - A previously saved screenshot set was rejected because its prototype capture displayed pre-change copy; it is not acceptance evidence.
 - Cleanup: browser viewport and media overrides were reset, controlled tabs were closed, the production preview was stopped, and both temporary validation mirrors were moved to Trash. The conclusion mirror is recoverable at `/Users/sulaymanbowles/.Trash/portfolio-conclusions.eiwkYL`.
 - Unresolved visual-evidence ledger:
@@ -169,4 +177,4 @@ Done means the full route/state/device ledger passes; the copy and claim system 
 - Local-acceptance evidence boundary: acceptance was completed before release authorization; no commit, push, deployment, publication, or provider change was used as acceptance evidence.
 - Release-readiness audit: `docs/portfolio-world-class-release-readiness.md` records the exact 69-path release delta, current remote and Vercel identities, live divergence proof, preview gates, rollback target, and granted authorization.
 - Current remote/live state: GitHub `main` and canonical production remain at `e449a404e20f0bee615a780764e5ceb32c7200af`; the accepted source is not published. Production deployment `dpl_H3yNyBHnZJb6HvRQwD4fwRRtLgWT` remains the verified rollback target.
-- Current release gate: no local acceptance blocker remains. The release may proceed through commit, branch push, and preview validation; production promotion is conditional on every recorded preview gate passing. Git porcelain in the iCloud-backed shared metadata remains unsuitable as the release integration surface, so execution uses a clean clone under `/Users/sulaymanbowles/Projects/CodexWork`.
+- Current release gate: no local or preview acceptance blocker remains. The release branch and PR are published, and the exact runtime preview passed every recorded gate. Production may proceed only through the guarded PR merge, exact production-deployment identity check, canonical-domain HTTP/browser verification, and rollback to `dpl_H3yNyBHnZJb6HvRQwD4fwRRtLgWT` if any production gate fails.
