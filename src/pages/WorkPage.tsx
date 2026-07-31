@@ -3,6 +3,7 @@ import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { WireframeGrid } from '../components/WireframeGrid';
+import { buyerDecisionEvidence } from '../content/evidenceLists';
 import { workProofCards } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
@@ -137,20 +138,65 @@ export default function WorkPage() {
         </div>
       </section>
 
+      <section
+        aria-labelledby="buyer-decision-title"
+        className="relative z-10 mx-auto grid max-w-[1480px] gap-10 border-t border-canvas/14 px-4 py-16 md:px-8 lg:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] xl:px-10 xl:py-24"
+      >
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.24em] text-canvas/60">Evidence before intake</p>
+          <h2 id="buyer-decision-title" className="mt-5 max-w-xl font-serif text-[3rem] italic leading-[0.9] tracking-normal md:text-[4.5rem]">
+            Make three decisions before contact.
+          </h2>
+          <p className="mt-7 max-w-lg text-sm leading-relaxed text-canvas/64">
+            A serious brief should make the standard, the available proof, and the blocked decision inspectable. These public records let you evaluate the first two before sharing a site.
+          </p>
+        </div>
+
+        <ol className="grid gap-px border border-canvas/14 bg-canvas/14">
+          {buyerDecisionEvidence.map((item, index) => (
+            <li key={item.question} className="group grid gap-6 bg-ink p-5 transition-colors duration-200 hover:bg-canvas/[0.045] motion-reduce:transition-none sm:grid-cols-[3.5rem_minmax(0,1fr)] md:p-7">
+              <span aria-hidden="true" className="text-[10px] uppercase tracking-[0.24em] text-accent">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3 className="text-sm font-medium leading-relaxed text-canvas">{item.question}</h3>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-canvas/64">{item.answer}</p>
+                <a
+                  href={item.href}
+                  className="mt-5 inline-flex min-h-11 items-center border-b border-canvas/24 text-[10px] uppercase tracking-[0.2em] text-canvas/70 transition-colors hover:border-accent hover:text-accent"
+                >
+                  {item.action}
+                </a>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
       <section className="relative z-10 mx-auto max-w-[1480px] border-y border-canvas/14 px-4 py-12 md:px-8 xl:px-10">
-        <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(260px,0.34fr)] lg:items-end">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.24em] text-canvas/60">Work with me</p>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-canvas/60">Decision ready?</p>
             <h2 className="mt-4 max-w-3xl font-serif text-[2.8rem] italic leading-[0.92] tracking-normal md:text-[4rem]">
-              Bring the site, the evidence gap, and the decision.
+              Bring one surface, one evidence gap, and the decision it blocks.
             </h2>
+            <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-[10px] uppercase tracking-[0.2em] text-canvas/54" aria-label="Useful brief inputs">
+              <li>Site or product surface</li>
+              <li>Suspected issue</li>
+              <li>Decision and owner</li>
+            </ul>
           </div>
-          <a
-            href="/contact"
-            className="inline-flex min-h-11 w-fit items-center border border-canvas bg-canvas px-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink transition-colors hover:bg-accent"
-          >
-            Send a project brief
-          </a>
+          <div>
+            <p className="mb-5 max-w-sm text-xs leading-relaxed text-canvas/54">
+              No credentials in the form. Public method and sample evidence remain open for review.
+            </p>
+            <a
+              href="/contact#contact-brief-panel"
+              className="inline-flex min-h-11 w-fit items-center border border-canvas bg-canvas px-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink transition-colors hover:bg-accent"
+            >
+              Start an evidence brief
+            </a>
+          </div>
         </div>
       </section>
 

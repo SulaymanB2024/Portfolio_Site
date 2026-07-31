@@ -1,4 +1,5 @@
 import ArrowUpRight from 'lucide-react/dist/esm/icons/arrow-up-right.js';
+import { useEffect } from 'react';
 import { AuditIntakeForm } from '../components/AuditIntakeForm';
 import { InternalHeader } from '../components/InternalHeader';
 import { getSeoRoute } from '../seo/routes';
@@ -9,15 +10,88 @@ const DIRECT_EMAIL = 'sulayman.bowles@gmail.com';
 const DIRECT_EMAIL_HREF = `mailto:${DIRECT_EMAIL}`;
 
 const responsePaths = [
-  'Technical SEO consulting — indexation, canonicals, links, schema',
-  'Crawl evidence — raw/rendered states, issue review, reruns',
-  'Analytics and research — GA4, Search Console, source ledgers',
+  {
+    label: 'Technical SEO',
+    description: 'Indexation, canonicals, redirects, internal links, schema, and template diagnosis.',
+  },
+  {
+    label: 'Crawl evidence',
+    description: 'Raw/rendered states, measurement gaps, finding review, implementation checks, and reruns.',
+  },
+  {
+    label: 'AI-system evidence',
+    description: 'Evaluation traces, source boundaries, replay plans, and a clear split between built and proposed work.',
+  },
+  {
+    label: 'Analytics / research',
+    description: 'GA4, Search Console, source ledgers, decision baselines, and inspectable assumptions.',
+  },
 ];
 
 const intakeNotes = [
-  'Site URL or product surface',
-  'Suspected crawl, visibility, or analytics issue',
-  'Decision the work needs to support',
+  {
+    label: 'Surface',
+    description: 'Site URL, product surface, affected template, or system boundary.',
+  },
+  {
+    label: 'Observed problem',
+    description: 'What changed, failed, or remains unverified—and what evidence already exists.',
+  },
+  {
+    label: 'Decision',
+    description: 'Who needs to act, what the work must support, and what would count as a useful next check.',
+  },
+];
+
+const decisionProtocol = [
+  {
+    label: '01 / Fit',
+    title: 'Name the blocked decision.',
+    description: 'Start with the site or system, the observable issue, and the person or team that must act.',
+  },
+  {
+    label: '02 / Boundary',
+    title: 'Separate evidence from access gaps.',
+    description: 'Keep observed, inferred, inaccessible, and private states distinct. Credentials never belong in the brief.',
+  },
+  {
+    label: '03 / First step',
+    title: 'Scope the smallest useful pass.',
+    description: 'Choose a focused diagnosis, audit, implementation handoff, or validation rerun before expanding.',
+  },
+];
+
+const buyerQuestions = [
+  {
+    question: 'Is this only for a full-site audit?',
+    answer:
+      'No. A focused diagnosis can be a better first step when the affected surface and decision are already narrow. A larger audit should earn its scope from the evidence gap.',
+  },
+  {
+    question: 'What does a useful deliverable look like?',
+    answer:
+      'It depends on scope, but the public method uses URL or source-level observations, interpretation, confidence, priority, an owner, an acceptance check, and a rerun path. That structure is process evidence, not a promised business outcome.',
+  },
+  {
+    question: 'Do you need credentials or production access before we talk?',
+    answer:
+      'No. Start with a public URL or a plain-language description of the private surface. Any later access should be agreed after fit and scope are clear; never put credentials in this form.',
+  },
+  {
+    question: 'Can you guarantee rankings, traffic, revenue, or AI answer placement?',
+    answer:
+      'No. Those outcomes depend on external systems and conditions beyond a technical review. The work can make evidence, implementation choices, acceptance checks, and remaining uncertainty explicit.',
+  },
+  {
+    question: 'What does submitting the form authorize?',
+    answer:
+      'It creates a request to discuss fit and scope. It does not authorize system access, deployment, publication, or billable work.',
+  },
+  {
+    question: 'What happens after the brief is reviewed?',
+    answer:
+      'The first decision is whether the surface, evidence gap, and intended decision are specific enough to scope. Missing context should be clarified before recommending a broader engagement.',
+  },
 ];
 
 const elsewhereLinks = [
@@ -87,6 +161,21 @@ function ArrowLink({
 export default function ContactPage() {
   useSEO(CONTACT_SEO);
 
+  useEffect(() => {
+    if (window.location.hash !== '#contact-brief-panel') {
+      return;
+    }
+
+    const animationFrame = window.requestAnimationFrame(() => {
+      document.getElementById('contact-brief-panel')?.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start',
+      });
+    });
+
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, []);
+
   return (
     <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-clip bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
       <InternalHeader activePath="/contact" tone="dark" variant="final-frame" />
@@ -123,7 +212,7 @@ export default function ContactPage() {
                 </a>
 
                 <p className="mt-8 max-w-2xl text-base leading-relaxed text-canvas/64 md:text-lg">
-                  I work as a technical SEO consultant on bounded crawlability, indexation, rendering, internal-link, structured-data, analytics, and implementation problems. Typical outputs include URL-level findings, owners, acceptance checks, and a rerun path—not an opaque score or generic audit deck.
+                  I work on bounded technical SEO and AI-system evidence problems: crawlability, indexation, rendering, internal links, structured data, analytics, evaluation traces, and implementation validation. Typical outputs connect an observation to its source, owner, acceptance check, and rerun path—not an opaque score or unsupported outcome claim.
                 </p>
                 <p className="mt-5 max-w-2xl text-sm leading-relaxed text-canvas/56">
                   Direct email is the fastest path when the request is still taking shape. If the site, suspected issue, and decision are already clear, the brief form preserves that context in one pass.
@@ -137,10 +226,11 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="grid max-w-3xl gap-px overflow-hidden border border-canvas/12 bg-canvas/12 sm:grid-cols-3">
+              <div className="grid max-w-3xl gap-px overflow-hidden border border-canvas/12 bg-canvas/12 sm:grid-cols-2">
                 {responsePaths.map((item) => (
-                  <div key={item} className="bg-ink px-4 py-4 text-sm text-canvas/68">
-                    {item}
+                  <div key={item.label} className="bg-ink px-4 py-4">
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-canvas/48">{item.label}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-canvas/68">{item.description}</p>
                   </div>
                 ))}
               </div>
@@ -149,12 +239,12 @@ export default function ContactPage() {
             <div className="grid gap-6 lg:py-4">
               <aside id="contact-brief-panel" className="scroll-mt-28 border border-canvas/16 bg-canvas/[0.035] p-5 text-canvas md:p-7">
                 <div className="border-b border-canvas/12 pb-5">
-                  <p className="text-xs text-canvas/48">Brief form</p>
+                  <p className="text-xs text-canvas/48">Structured evidence brief</p>
                   <h2 className="mt-4 font-serif text-4xl italic leading-none text-canvas md:text-5xl">
-                    Send the context.
+                    Send the decision context.
                   </h2>
                   <p className="mt-5 max-w-lg text-sm leading-relaxed text-canvas/62">
-                    Useful when the site, suspected problem, and decision are clear enough to capture in one pass.
+                    Useful when the surface, suspected problem, and decision are clear enough to capture in one pass. A public URL helps, but is not required for a private or pre-launch system.
                   </p>
                 </div>
 
@@ -164,8 +254,9 @@ export default function ContactPage() {
                   <p className="text-xs text-canvas/48">Include</p>
                   <ul className="mt-4 grid gap-3 text-sm leading-relaxed text-canvas/62">
                     {intakeNotes.map((item) => (
-                      <li key={item} className="border-l border-canvas/16 pl-4">
-                        {item}
+                      <li key={item.label} className="border-l border-canvas/16 pl-4">
+                        <span className="font-medium text-canvas/82">{item.label} — </span>
+                        {item.description}
                       </li>
                     ))}
                   </ul>
@@ -174,6 +265,42 @@ export default function ContactPage() {
                   </p>
                 </div>
               </aside>
+
+              <section aria-labelledby="decision-protocol-title" className="border border-canvas/12 p-5 md:p-7">
+                <p className="text-xs text-canvas/48">Before scope expands</p>
+                <h2 id="decision-protocol-title" className="mt-4 font-serif text-3xl italic leading-none text-canvas md:text-4xl">
+                  Three decision gates.
+                </h2>
+                <ol className="mt-6 grid gap-px border border-canvas/12 bg-canvas/12">
+                  {decisionProtocol.map((item) => (
+                    <li key={item.label} className="bg-ink p-4">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-accent">{item.label}</p>
+                      <h3 className="mt-3 text-sm font-medium leading-relaxed text-canvas">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-canvas/60">{item.description}</p>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+
+              <section aria-labelledby="buyer-questions-title" className="border border-canvas/12 p-5 md:p-7">
+                <p className="text-xs text-canvas/48">Buyer Q/A</p>
+                <h2 id="buyer-questions-title" className="mt-4 font-serif text-3xl italic leading-none text-canvas md:text-4xl">
+                  Questions to settle before access.
+                </h2>
+                <div className="mt-6 border-t border-canvas/12">
+                  {buyerQuestions.map((item) => (
+                    <details key={item.question} className="group border-b border-canvas/12">
+                      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-5 py-4 text-sm leading-relaxed text-canvas/76 marker:content-none">
+                        <span>{item.question}</span>
+                        <span aria-hidden="true" className="shrink-0 text-accent transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none">
+                          +
+                        </span>
+                      </summary>
+                      <p className="max-w-xl pb-5 pr-8 text-sm leading-relaxed text-canvas/60">{item.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </section>
 
               <nav className="border border-canvas/12" aria-label="Elsewhere links">
                 {elsewhereLinks.map((link) => (

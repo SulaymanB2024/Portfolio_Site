@@ -5,6 +5,37 @@ export type EvidenceListItem = {
   proves: string;
 };
 
+export type BuyerDecisionEvidenceItem = {
+  question: string;
+  answer: string;
+  href: string;
+  action: string;
+};
+
+export const buyerDecisionEvidence: BuyerDecisionEvidenceItem[] = [
+  {
+    question: 'What standard will the work use?',
+    answer:
+      'The public method shows evidence capture, finding review, owners, acceptance checks, and reruns. It is process evidence—not a client-outcome case study.',
+    href: '/method#worked-finding',
+    action: 'Inspect the worked finding',
+  },
+  {
+    question: 'Can I inspect the proof before sharing access?',
+    answer:
+      'The Atlas demonstration exposes a dated, sanitized source record and its limits. It does not establish rankings, traffic, revenue, or full production coverage.',
+    href: '/atlas/sample-crawl',
+    action: 'Inspect the sample crawl',
+  },
+  {
+    question: 'What makes a useful first brief?',
+    answer:
+      'Bring a site or product surface, the suspected evidence gap, and the decision the work must support. Keep credentials and sensitive client data out of the form.',
+    href: '/contact#contact-brief-panel',
+    action: 'Prepare the evidence brief',
+  },
+];
+
 export const atlasCheckItems: EvidenceListItem[] = [
   { label: 'URL discovery', href: '/atlas', proves: 'Atlas starts from discovered URLs and crawl records, not only manual page samples.' },
   { label: 'robots.txt', href: '/method', proves: 'Robots directives are part of the audit evidence used to understand crawler access.' },
