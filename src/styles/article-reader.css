@@ -1847,7 +1847,7 @@
 
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px), print {
   .article-reader :is(
     .toll-data-table__scroll,
     .toll-snapshot__scroll,
