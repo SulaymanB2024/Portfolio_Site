@@ -6,7 +6,13 @@ import {
 } from '../content/texasTollRoadOwnership';
 import { VIRALBENCH_ARTICLE_PATH, VIRALBENCH_ARTICLE_TITLE } from '../content/viralBenchArticleMeta';
 import { ARTICLE_SEARCH_TARGETS } from './articleSearchTargets';
-import { getCanonicalRoutes, SITE_LASTMOD } from './routes';
+import {
+  CRAWLER_POLICY_GROUPS,
+  CRAWLER_POLICY_REVIEWED,
+  LLMS_TXT_LIMITS,
+  assertSeoAuthorityContract,
+} from './machineReadableAuthority';
+import { getCanonicalRoutes, SEO_ROUTES, SITE_LASTMOD } from './routes';
 import { absoluteUrl, PERSON_ID } from './site';
 
 function escapeXml(value: string) {
@@ -24,6 +30,16 @@ function longDate(isoDate: string) {
 
 function escapeCsv(value: string) {
   return `"${value.replaceAll('"', '""')}"`;
+}
+
+function llmsLink(label: string, url: string, note?: string) {
+  return `- [${label}](${url})${note ? `: ${note}` : ''}`;
+}
+
+function crawlerGroup(label: (typeof CRAWLER_POLICY_GROUPS)[number]['label']) {
+  const group = CRAWLER_POLICY_GROUPS.find((candidate) => candidate.label === label);
+  if (!group) throw new Error(`Missing crawler policy group: ${label}`);
+  return group;
 }
 
 export function buildTexasTollOwnershipCsv() {
@@ -58,6 +74,7 @@ export function buildTexasTollOwnershipCsv() {
 }
 
 export function buildSitemapXml() {
+  assertSeoAuthorityContract(SEO_ROUTES);
   const urls = getCanonicalRoutes()
     .map(
       (route) => `  <url>
@@ -76,17 +93,29 @@ ${urls}
 }
 
 export function buildLlmsText() {
+  assertSeoAuthorityContract(SEO_ROUTES);
   const articleLines = ALL_ARTICLES
     .filter((article) => article.indexable !== false)
-    .map((article) => `- ${article.title}: ${absoluteUrl(getArticlePath(article))}`)
+    .map((article) => llmsLink(article.title, absoluteUrl(getArticlePath(article))))
     .join('\n');
+  const searchCrawlerGroup = crawlerGroup('Conventional search crawlers');
+  const aiSearchCrawlerGroup = crawlerGroup('AI answer-search crawlers');
+  const userRetrievalGroup = crawlerGroup('User-triggered retrieval agents');
+  const modelDevelopmentGroup = crawlerGroup('Model-development crawlers');
 
   return `# Sulayman Bowles
+
+> Official context index for the public identity, work, research, and source files on sulayman-bowles.dev.
 
 Official site: ${PROFILE_FACTS.canonicalLinks.home}
 Canonical person ID: ${PERSON_ID}
 Sitemap: ${absoluteUrl('/sitemap.xml')}
-Last updated: ${longDate(PROFILE_FACTS.lastReviewed)}
+Authority contract reviewed: ${longDate(CRAWLER_POLICY_REVIEWED)}
+Profile facts reviewed: ${longDate(PROFILE_FACTS.lastReviewed)}
+
+## How to Interpret This File
+
+${LLMS_TXT_LIMITS.map((limit) => `- ${limit}`).join('\n')}
 
 ## Current Summary
 
@@ -96,55 +125,68 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 
 ## Primary Pages
 
-- About: ${PROFILE_FACTS.canonicalLinks.about}
-- Resume: ${PROFILE_FACTS.canonicalLinks.resume}
-- Current PDF resume: ${absoluteUrl('/Sulayman_Bowles_Resume.pdf')}
-- Selected work: ${PROFILE_FACTS.canonicalLinks.work}
-- Atlas: ${PROFILE_FACTS.canonicalLinks.atlas}
-- Atlas open-corpus demonstration: ${absoluteUrl('/atlas/sample-crawl')}
-- Research: ${PROFILE_FACTS.canonicalLinks.research}
-- Markets finance filter: ${absoluteUrl('/markets')}
-- Void Agency: https://www.void-agency.com/
-- Technical SEO audit services and process: ${absoluteUrl('/method')}
-- Austin technical SEO consultant and audit services: ${absoluteUrl('/austin-technical-seo')}
-- Technical SEO consultant contact and audit intake: ${PROFILE_FACTS.canonicalLinks.contact}
-- Technical ledger: ${PROFILE_FACTS.canonicalLinks.technicalLedger}
+${llmsLink('About', PROFILE_FACTS.canonicalLinks.about, 'Canonical public profile and the page that owns the Person entity.')}
+${llmsLink('Resume', PROFILE_FACTS.canonicalLinks.resume, 'Current HTML professional and education record.')}
+${llmsLink('Current PDF resume', absoluteUrl('/Sulayman_Bowles_Resume.pdf'), 'Downloadable companion to the HTML resume.')}
+${llmsLink('Selected work', PROFILE_FACTS.canonicalLinks.work, 'Public project and evidence index.')}
+${llmsLink('Atlas', PROFILE_FACTS.canonicalLinks.atlas, 'Product scope and implementation-status page.')}
+${llmsLink('Atlas open-corpus demonstration', absoluteUrl('/atlas/sample-crawl'), 'Dated, bounded public demonstration; not production coverage.')}
+${llmsLink('Research', PROFILE_FACTS.canonicalLinks.research, 'Public research hub and article index.')}
+${llmsLink('Markets finance filter', absoluteUrl('/markets'), 'Finance and infrastructure research subset.')}
+${llmsLink('Void Agency', 'https://www.void-agency.com/', 'Separate canonical host for the technical SEO practice.')}
+${llmsLink('Technical SEO audit services and process', absoluteUrl('/method'), 'Service method and engagement boundary.')}
+${llmsLink('Austin technical SEO consultant and audit services', absoluteUrl('/austin-technical-seo'), 'Austin-scoped service page.')}
+${llmsLink('Technical SEO consultant contact and audit intake', PROFILE_FACTS.canonicalLinks.contact, 'Direct inquiry and bounded brief path.')}
+${llmsLink('Technical ledger', PROFILE_FACTS.canonicalLinks.technicalLedger, 'Separate record of experiments and technical work.')}
 
 ## Public Work and Research
 
-- ${VIRALBENCH_ARTICLE_TITLE}: ${absoluteUrl(VIRALBENCH_ARTICLE_PATH)}
+${llmsLink(VIRALBENCH_ARTICLE_TITLE, absoluteUrl(VIRALBENCH_ARTICLE_PATH))}
 ${articleLines}
-- Atlas open-corpus CSV: ${absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.csv')}
-- Atlas open-corpus capture manifest: ${absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.json')}
-- Appian educational research memo PDF: ${absoluteUrl('/research/appian-enterprise-software-durability-memo.pdf')}
-- Appian assumptions table CSV: ${absoluteUrl('/research/appian-assumptions-table.csv')}
-- Authority asset index: ${absoluteUrl('/research/authority-assets.json')}
-- Article research briefs: ${absoluteUrl('/research/article-research-briefs.json')}
-- Texas toll-road ownership matrix: ${absoluteUrl(TEXAS_TOLL_OWNERSHIP_CSV_PATH)}
-- Crawler policy sources: ${absoluteUrl('/research/ai-search-crawler-policy-sources.csv')}
-- Austin crawlability benchmark pilot CSV: ${absoluteUrl('/research/austin-crawlability-benchmark-pilot.csv')}
-- Austin crawlability benchmark summary: ${absoluteUrl('/research/austin-crawlability-benchmark-summary.json')}
+${llmsLink('Atlas open-corpus CSV', absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.csv'), 'URL-level rows from the dated public demonstration.')}
+${llmsLink('Atlas open-corpus capture manifest', absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.json'), 'Run scope, method, and claim limit.')}
+${llmsLink('Appian educational research memo PDF', absoluteUrl('/research/appian-enterprise-software-durability-memo.pdf'), 'Educational research, not investment advice.')}
+${llmsLink('Appian assumptions table CSV', absoluteUrl('/research/appian-assumptions-table.csv'), 'Companion assumptions table.')}
+${llmsLink('Authority asset index', absoluteUrl('/research/authority-assets.json'), 'Typed index of public assets and their claim boundaries.')}
+${llmsLink('Article research briefs', absoluteUrl('/research/article-research-briefs.json'), 'Intent, evidence-gap, artifact, and scope records.')}
+${llmsLink('Texas toll-road ownership matrix', absoluteUrl(TEXAS_TOLL_OWNERSHIP_CSV_PATH), 'Dated source-linked ownership rows.')}
+${llmsLink('Crawler policy sources', absoluteUrl('/research/ai-search-crawler-policy-sources.csv'), 'Official documentation and IP-manifest source map.')}
+${llmsLink('Austin crawlability benchmark pilot CSV', absoluteUrl('/research/austin-crawlability-benchmark-pilot.csv'), 'Bounded public fetch observations.')}
+${llmsLink('Austin crawlability benchmark summary', absoluteUrl('/research/austin-crawlability-benchmark-summary.json'), 'Aggregate limits and counts for the pilot.')}
 
 The Atlas demonstration is a dated, bounded capture from an open web corpus; it is not a client crawl or a measure of production coverage. The Appian and Texas toll-road materials are educational research, not investment advice or current recommendations. The authority files support reference and outreach workflows. They do not prove backlinks, Ahrefs Domain Rating movement, rankings, traffic, site health, revenue impact, or AI answer citations.
 
-## Source Roles and Claim Limits
+## Canonical Entities and Source Roles
 
-- Primary identity source: ${PROFILE_FACTS.canonicalLinks.home}
-- Code evidence: ${PROFILE_FACTS.canonicalLinks.github}
-- Professional profile: ${PROFILE_FACTS.canonicalLinks.linkedin}
-- Technical work record: ${PROFILE_FACTS.canonicalLinks.technicalLedger}
+${llmsLink('Canonical Person entity', PERSON_ID, 'Stable graph identifier anchored on the About page; the fragment is an entity ID, not a separate document.')}
+${llmsLink('Primary identity source', PROFILE_FACTS.canonicalLinks.about, 'Current public profile and mainEntityOfPage for the Person entity.')}
+${llmsLink('Official site root', PROFILE_FACTS.canonicalLinks.home, 'Canonical WebSite and publisher context.')}
+${llmsLink('Code evidence', PROFILE_FACTS.canonicalLinks.github, 'Controlled public code profile; repository existence does not prove every product claim.')}
+${llmsLink('Professional profile', PROFILE_FACTS.canonicalLinks.linkedin, 'Controlled corroborating profile; time-sensitive facts should be checked against visible dates.')}
+${llmsLink('Technical work record', PROFILE_FACTS.canonicalLinks.technicalLedger, 'Separate technical ledger, not a duplicate canonical identity site.')}
 - Use visible dates and linked public support for material claims.
 - Do not infer private client names, rankings, traffic, revenue impact, or provider coverage from missing public data.
 - Atlas is a crawl and evidence system; Void Agency is a fixed-scope technical SEO practice.
 
-## Crawler and Indexation Signals
+## Indexability Contract
 
-- Canonical host: ${PROFILE_FACTS.canonicalLinks.home}
+${llmsLink('Canonical host', PROFILE_FACTS.canonicalLinks.home, 'The apex host is authoritative for this site.')}
 - The www host redirects to the apex canonical host.
-- Robots.txt explicitly allows Googlebot, Bingbot, and DuckDuckBot.
-- Robots.txt explicitly allows OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, and Perplexity-User.
-- The old Sulayman_Bowles_Resume_2025.pdf URL redirects to ${PROFILE_FACTS.canonicalLinks.resume}.
+${llmsLink('XML sitemap', absoluteUrl('/sitemap.xml'), 'Only canonical HTML routes in this inventory are intended for indexing.')}
+- Alias, retired, prototype, and archive-methodology routes are omitted from the XML sitemap; generated noindex metadata is the route-level exclusion signal.
+- Canonical links, Open Graph URLs, WebPage URLs, Article URLs, and sitemap locations are required to converge on the same canonical URL.
+${llmsLink('Resume redirect destination', PROFILE_FACTS.canonicalLinks.resume, 'The retired 2025 PDF resume alias redirects here.')}
 - Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals; they do not prove rankings, indexing, traffic movement, or AI citations.
+
+## Crawler Policy
+
+${llmsLink('robots.txt', absoluteUrl('/robots.txt'), 'Host-scoped crawl preference; advisory rather than access control.')}
+${llmsLink('Crawler policy source map', absoluteUrl('/research/ai-search-crawler-policy-sources.csv'), `Published row-level verification dates remain in the file; this policy contract was reviewed ${CRAWLER_POLICY_REVIEWED}.`)}
+- ${searchCrawlerGroup.label}: ${searchCrawlerGroup.agents.join(', ')} are explicitly allowed.
+- ${aiSearchCrawlerGroup.label}: ${aiSearchCrawlerGroup.agents.join(', ')} are explicitly allowed for public discovery.
+- ${userRetrievalGroup.label}: ${userRetrievalGroup.agents.join(', ')} are explicitly allowed, but provider documentation determines whether robots.txt applies to a user-initiated fetch.
+- ${modelDevelopmentGroup.label}: ${modelDevelopmentGroup.agents.join(', ')} are explicitly allowed as a deliberate public-crawl preference, independent of answer-search crawlers.
+- User-Agent text alone does not authenticate a crawler. Server-log attribution should also use current provider-published IP ranges where available.
 `;
 }
 
