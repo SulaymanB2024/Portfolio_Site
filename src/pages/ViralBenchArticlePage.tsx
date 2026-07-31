@@ -88,6 +88,7 @@ function articleNodeToReact(node: Node, key: string): ReactNode {
 
   const href = element.getAttribute('href');
   const props: Record<string, unknown> = { key };
+  let renderedTag = tag;
   if (element.id) props.id = element.id;
   if (element.className) props.className = element.className;
   if (href && (/^https:\/\//.test(href) || /^\/[a-z0-9]/i.test(href) || /^#/.test(href))) {
@@ -99,9 +100,28 @@ function articleNodeToReact(node: Node, key: string): ReactNode {
   }
   const ariaLabel = element.getAttribute('aria-label');
   if (ariaLabel) props['aria-label'] = ariaLabel;
+  if (tag === 'table') {
+    const headers = Array.from(element.querySelectorAll('thead th'))
+      .map((header) => header.textContent?.replace(/\s+/g, ' ').trim())
+      .filter(Boolean);
+    props['data-responsive-table'] = 'stacked';
+    props['aria-label'] = headers.length ? `Data table with fields: ${headers.join(', ')}` : 'Article data table';
+  }
+  if (tag === 'th' && element.closest('thead')) {
+    props.scope = 'col';
+  }
+  if ((tag === 'td' || tag === 'th') && element.closest('tbody')) {
+    const columnIndex = Array.from(element.parentElement?.children ?? []).indexOf(element);
+    const header = element.closest('table')?.querySelectorAll('thead th')[columnIndex];
+    props['data-label'] = header?.textContent?.replace(/\s+/g, ' ').trim() || `Field ${columnIndex + 1}`;
+    if (columnIndex === 0) {
+      renderedTag = 'th';
+      props.scope = 'row';
+    }
+  }
 
   const children = Array.from(element.childNodes).map((child, index) => articleNodeToReact(child, `${key}-${index}`));
-  return createElement(tag, props, ...children);
+  return createElement(renderedTag, props, ...children);
 }
 
 function markdownToReact(markdown: string) {
@@ -310,7 +330,10 @@ export default function ViralBenchArticlePage() {
       content: 'Codex can diagnose and patch the harness. It cannot grade or deploy its own work.',
     },
     endnote: {
-      content: 'Build note based on the live ViralBench methodology and the supplied standalone handoff at commit 5f5f57e.',
+      label: 'Build conclusion',
+      title: 'The harness determines whether the agent can learn',
+      content: 'ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before promotion.',
+      note: 'Build note based on the live ViralBench methodology and the supplied standalone handoff at commit 5f5f57e.',
       links: [
         ...SEARCH_TARGET.relatedPaths.map((path) => ({
           href: path,

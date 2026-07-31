@@ -10,7 +10,7 @@ export const WAYMO_HARDWARE_FINANCING_ARTICLE: ResearchArticle = {
   slug: WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG,
   number: '15',
   category: 'FINANCIAL SYSTEMS',
-  title: 'The Hidden Financing Behind Hardware Startups',
+  title: 'Who Funds Waymo’s Hardware?',
   seoTitle: 'Waymo Hardware Financing: Who Funds the Assets?',
   subtitle:
     'A Waymo case study of who finances the vehicles and infrastructure, who owns the risk, and who absorbs the loss when utilization or technology fails.',
@@ -32,6 +32,11 @@ export const WAYMO_HARDWARE_FINANCING_ARTICLE: ResearchArticle = {
   author: 'SULAYMAN BOWLES',
   thesis:
     'The supplied evidence describes Waymo as a parent-funded, equity-heavy platform—not a conventional leased-fleet, asset-backed, or project-financed operator. That removes visible debt-service and refinancing pressure, but leaves operating losses, technology obsolescence, and most residual-value risk with Waymo equity and, economically, Alphabet.',
+  conclusion: {
+    title: 'Parent willingness remains the scaling mechanism',
+    content:
+      'The supplied record is most consistent with a parent-funded, equity-heavy platform, not a conventional asset-backed fleet. Until standalone cash flow, asset title, and residual economics are disclosed, the critical question is who funds the next unit when utilization or technology assumptions fail.',
+  },
   evidenceBoundary:
     'This article reformats the supplied July 22, 2026 report and analytical workbook. No source was independently refreshed for this publication. Waymo does not publish a standalone asset register, title schedule, lease schedule, lender package, or complete operating P&L in the supplied evidence. Unreported amounts are modeled ranges or named unknowns; a documented lower bound of zero means no quantified instrument was identified, not proof that none exists.',
   metrics: [

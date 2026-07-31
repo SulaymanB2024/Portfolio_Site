@@ -394,7 +394,7 @@ body {
   }
 
   .home-cover__figure {
-    transform: translateX(16%) scale(1.04);
+    transform: translate(8%, 5%) scale(0.98);
     opacity: 0.72;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 35%, black 100%);
     mask-image: linear-gradient(to right, transparent 0%, black 35%, black 100%);
@@ -475,18 +475,26 @@ body {
   }
 }
 
-:focus-visible {
-  outline: 1px solid var(--color-accent);
-  outline-offset: 4px;
+:root,
+.bg-canvas,
+.site-page-light,
+.site-header-surface-light {
+  --focus-ring: var(--color-ink);
+  --focus-halo: color-mix(in srgb, var(--color-canvas) 92%, transparent);
 }
 
-button:focus-visible,
-a:focus-visible,
-summary:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 26%, transparent);
+.bg-ink,
+.site-page-dark,
+.site-header-surface-dark,
+.toll-article {
+  --focus-ring: var(--color-canvas);
+  --focus-halo: color-mix(in srgb, var(--color-ink) 92%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring, var(--color-ink));
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px var(--focus-halo, var(--color-canvas));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -567,6 +575,21 @@ select:focus-visible {
   z-index: 1;
 }
 
+@media (max-width: 1279px) {
+  .site-header-editorial {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .site-header-surface-light {
+    background: var(--color-canvas);
+  }
+
+  .site-header-surface-dark {
+    background: var(--color-ink);
+  }
+}
+
 .site-header-mobile-sheet {
   -webkit-backdrop-filter: blur(22px) saturate(112%);
   backdrop-filter: blur(22px) saturate(112%);
@@ -614,32 +637,36 @@ select:focus-visible {
   [class~="text-ink/38"], [class~="text-ink/40"], [class~="text-ink/42"],
   [class~="text-ink/44"], [class~="text-ink/45"], [class~="text-ink/46"],
   [class~="text-ink/48"], [class~="text-ink/50"], [class~="text-ink/52"],
-  [class~="text-ink/54"]
+  [class~="text-ink/54"], [class~="text-ink/56"], [class~="text-ink/58"],
+  [class~="text-ink/60"]
 ):not(svg):not(g):not(path):not([aria-hidden="true"]):not(.pointer-events-none) {
-  color: color-mix(in srgb, var(--color-ink) 56%, transparent) !important;
+  color: color-mix(in srgb, var(--color-ink) 64%, transparent) !important;
 }
 
 .site-page :where(
   [class~="text-canvas/30"], [class~="text-canvas/32"], [class~="text-canvas/34"],
   [class~="text-canvas/40"], [class~="text-canvas/42"], [class~="text-canvas/45"],
   [class~="text-canvas/48"], [class~="text-canvas/50"], [class~="text-canvas/52"],
-  [class~="text-canvas/54"], [class~="text-canvas/56"]
+  [class~="text-canvas/54"], [class~="text-canvas/56"], [class~="text-canvas/58"],
+  [class~="text-canvas/60"]
 ):not(svg):not(g):not(path):not([aria-hidden="true"]):not(.pointer-events-none) {
-  color: color-mix(in srgb, var(--color-canvas) 58%, transparent) !important;
+  color: color-mix(in srgb, var(--color-canvas) 66%, transparent) !important;
 }
 
 .site-page-light :where(
   [class~="text-current/28"], [class~="text-current/42"], [class~="text-current/44"],
-  [class~="text-current/46"], [class~="text-current/48"], [class~="text-current/52"]
+  [class~="text-current/46"], [class~="text-current/48"], [class~="text-current/52"],
+  [class~="text-current/56"], [class~="text-current/58"], [class~="text-current/60"]
 ):not([aria-hidden="true"]):not(.pointer-events-none) {
-  color: color-mix(in srgb, var(--color-ink) 56%, transparent) !important;
+  color: color-mix(in srgb, var(--color-ink) 64%, transparent) !important;
 }
 
 .site-page-dark :where(
   [class~="text-current/28"], [class~="text-current/42"], [class~="text-current/44"],
-  [class~="text-current/46"], [class~="text-current/48"], [class~="text-current/52"]
+  [class~="text-current/46"], [class~="text-current/48"], [class~="text-current/52"],
+  [class~="text-current/56"], [class~="text-current/58"], [class~="text-current/60"]
 ):not([aria-hidden="true"]):not(.pointer-events-none) {
-  color: color-mix(in srgb, var(--color-canvas) 58%, transparent) !important;
+  color: color-mix(in srgb, var(--color-canvas) 66%, transparent) !important;
 }
 
 .site-page :where(h2.font-serif, h2[class*="font-serif"], blockquote.font-serif, blockquote[class*="font-serif"]) {
@@ -1741,8 +1768,8 @@ select:focus-visible {
     font-size: 11pt !important;
   }
 
-  header,
-  footer,
+  .site-header,
+  .site-footer,
   button,
   .fixed,
   .sticky,
@@ -2232,6 +2259,12 @@ select:focus-visible {
 
 .ai-case-explorer__controls input::placeholder {
   color: rgba(241, 239, 232, 0.28);
+}
+
+@media (max-width: 719px) {
+  .ai-case-explorer__controls input {
+    font-size: 1rem;
+  }
 }
 
 .ai-case-explorer__list {

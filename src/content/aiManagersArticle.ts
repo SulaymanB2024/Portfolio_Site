@@ -9,6 +9,11 @@ export const AI_MANAGERS_ARTICLE_DATE = '2026.07.14';
 export const AI_MANAGERS_ARTICLE_UPDATED = '2026.07.19';
 export const AI_MANAGERS_ARTICLE_READ_TIME = '31 MIN';
 export const AI_MANAGERS_ARTICLE_WORD_COUNT = 6300;
+export const AI_MANAGERS_ARTICLE_CONCLUSION = {
+  title: 'Autonomy stops where the human company begins',
+  content:
+    'Current cases show models can execute bounded actions, but not that they independently own, capitalize, supervise, or sustain a business. The operating claim must include every human legal, financial, physical, and policy dependency.',
+} as const;
 
 export type AiManagerCaseKind = 'live' | 'bounded' | 'narrow' | 'simulation' | 'excluded';
 

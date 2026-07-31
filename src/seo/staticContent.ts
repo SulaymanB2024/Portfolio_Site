@@ -22,6 +22,7 @@ import {
   AI_MANAGER_FAQS,
   AI_MANAGER_OPEN_QUESTIONS,
   AI_MANAGER_SOURCES,
+  AI_MANAGERS_ARTICLE_CONCLUSION,
   AI_MANAGERS_ARTICLE_DESCRIPTION,
   AI_MANAGERS_ARTICLE_DISPLAY_TITLE,
   AI_MANAGERS_ARTICLE_LEDE,
@@ -39,6 +40,7 @@ import {
 } from '../content/viralBenchArticle';
 import { primaryNav, utilityNav } from '../content/siteNavigation';
 import {
+  TEXAS_TOLL_ARTICLE_CONCLUSION,
   TEXAS_TOLL_ARTICLE_DESCRIPTION,
   TEXAS_TOLL_ARTICLE_FACT_GAPS,
   TEXAS_TOLL_ARTICLE_FAQS,
@@ -353,6 +355,8 @@ function viralBenchArticleStaticHtml() {
           <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1800" height="1200" alt="A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space." />
         </figure>
         ${articleHtml}
+        <h2 id="article-conclusion-title">The harness determines whether the agent can learn</h2>
+        <p>ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before promotion.</p>
         <h2>Source ledger</h2>
         ${linkList([
           { href: 'https://viralbench.ai/', label: 'ViralBench live methodology' },
@@ -471,6 +475,8 @@ function texasTollArticleStaticHtml() {
         ${faqs}
         <h2 id="source-ledger">Source ledger</h2>
         <ol>${sources}</ol>
+        <h2 id="article-conclusion-title">${escapeHtml(TEXAS_TOLL_ARTICLE_CONCLUSION.title)}</h2>
+        <p>${escapeHtml(TEXAS_TOLL_ARTICLE_CONCLUSION.content)}</p>
         <h2>Related research</h2>
         ${linkList([
           { label: 'Markets research', href: '/markets' },
@@ -538,6 +544,10 @@ function aiManagersArticleStaticHtml() {
       <section aria-labelledby="source-ledger-title">
         <h2 id="source-ledger-title">Source ledger</h2>
         <ol>${sources}</ol>
+      </section>
+      <section id="article-conclusion" aria-labelledby="article-conclusion-title">
+        <h2 id="article-conclusion-title">${escapeHtml(AI_MANAGERS_ARTICLE_CONCLUSION.title)}</h2>
+        <p>${escapeHtml(AI_MANAGERS_ARTICLE_CONCLUSION.content)}</p>
       </section>`,
   );
 }
@@ -909,6 +919,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${structuredSections}
         ${investmentSections}
         ${resources}
+        <h2 id="article-conclusion-title">${escapeHtml(article.conclusion.title)}</h2>
+        <p>${escapeHtml(article.conclusion.content)}</p>
         ${sourceLinks.length ? `<h2>${structuredSections ? 'Source Ledger' : 'Research Sources'}</h2>${linkList(sourceLinks)}` : ''}
         <h2>Internal Links</h2>
         ${linkList([

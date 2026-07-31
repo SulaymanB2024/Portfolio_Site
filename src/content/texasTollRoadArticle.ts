@@ -14,6 +14,7 @@ export type TexasTollArticleFactGap = { title: string; items: string[] };
 export type TexasTollArticleFaq = { question: string; answer: string };
 
 export {
+  TEXAS_TOLL_ARTICLE_CONCLUSION,
   TEXAS_TOLL_ARTICLE_DATE,
   TEXAS_TOLL_ARTICLE_DESCRIPTION,
   TEXAS_TOLL_ARTICLE_DISPLAY_TITLE,

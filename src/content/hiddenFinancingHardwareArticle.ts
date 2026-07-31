@@ -33,6 +33,11 @@ export const HIDDEN_FINANCING_HARDWARE_ARTICLE: ResearchArticle = {
   author: 'SULAYMAN BOWLES',
   thesis:
     'The venture round is only the corporate layer of a hardware startup. The economic outcome is set by the asset layer and the adjacent support layer: who owns the equipment, which cash flow services it, what recourse survives a shortfall, and who holds the asset after demand or technology disappoints.',
+  conclusion: {
+    title: 'Follow the asset burden past the funding headline',
+    content:
+      'Financing can reduce immediate equity needs while leaving purchase commitments, fixed payments, guarantees, replacement obligations, and residual risk inside the operating system. The decisive diligence starts with asset title, liens, recourse, cash-flow coverage, and recovery value.',
+  },
   evidenceBoundary:
     'This web edition reformats the supplied July 22, 2026 report, workbook, and capital-stack diagrams. The underlying sources were not independently refreshed for publication. Reported values retain the source package’s evidence cutoff; modeled values are analytical scenarios, not company guidance, appraisals, forecasts, covenant calculations, or investment recommendations. A missing quantified instrument means the package did not establish it, not that the instrument cannot exist.',
   metrics: [

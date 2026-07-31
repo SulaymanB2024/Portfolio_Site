@@ -88,7 +88,7 @@ export function markdownToHtml(
         rows.push(tableCells(lines[index]));
         index += 1;
       }
-      blocks.push(`<div class="article-table-wrap"><table><thead><tr>${headers.map((cell) => `<th>${inlineMarkdown(cell, noteRefCounts)}</th>`).join('')}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdown(cell, noteRefCounts)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
+      blocks.push(`<div class="article-table-wrap" role="region" aria-label="Scrollable data table" tabindex="0"><table><thead><tr>${headers.map((cell) => `<th>${inlineMarkdown(cell, noteRefCounts)}</th>`).join('')}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdown(cell, noteRefCounts)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
       continue;
     }
 

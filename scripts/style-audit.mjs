@@ -22,10 +22,15 @@ function walk(path) {
 
 const files = ROOTS.flatMap(walk).filter((file) => /\.(tsx|ts|css)$/.test(file));
 const globalStyles = readFileSync('src/index.css', 'utf8');
+const articleReaderStyles = readFileSync('src/styles/article-reader.css', 'utf8');
 const contrastFloorPresent =
-  globalStyles.includes('var(--color-ink) 56%') &&
-  globalStyles.includes('var(--color-canvas) 58%') &&
+  globalStyles.includes('var(--color-ink) 64%') &&
+  globalStyles.includes('var(--color-canvas) 66%') &&
   globalStyles.includes('[class~="text-current/42"]');
+const printTableSafeguardPresent =
+  articleReaderStyles.includes('@media (max-width: 767px), print {') &&
+  articleReaderStyles.includes(".article-reader table[data-responsive-table='stacked'] {") &&
+  articleReaderStyles.includes('min-width: 0;');
 const report = PATTERNS.map(([label, pattern, maxAllowed]) => {
   let count = 0;
   const examples = [];
@@ -55,7 +60,13 @@ if (!contrastFloorPresent) {
   failures.push({ label: 'essential small-text contrast floor' });
   console.error('- essential small-text contrast floor: missing light, dark, or inherited-color safeguard');
 } else {
-  console.log('- essential small-text contrast floor: present (light 56%, dark 58%)');
+  console.log('- essential small-text contrast floor: present (light 64%, dark 66%)');
+}
+if (!printTableSafeguardPresent) {
+  failures.push({ label: 'responsive print table safeguard' });
+  console.error('- responsive print table safeguard: missing stacked-table print contract');
+} else {
+  console.log('- responsive print table safeguard: present (mobile and print)');
 }
 if (failures.length) {
   console.error('\nStyle drift budget exceeded. Keep new work on theme tokens, fixed breakpoint typography, and shared primitives.');

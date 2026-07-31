@@ -40,19 +40,19 @@ export default function WorkPage() {
   useSEO(WORK_SEO);
 
   return (
-    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
+    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-clip bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
       <WireframeGrid tone="dark" className="pointer-events-none absolute inset-0 z-0 opacity-20" />
       <PageTechnicalChrome tone="dark" />
       <ScrollProgress />
       <InternalHeader activePath="/work" tone="dark" />
 
       <section className="relative z-10 mx-auto grid min-h-[62vh] max-w-[1480px] content-end px-4 pb-16 pt-20 md:px-8 xl:px-10">
-        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Selected work / six public artifacts</p>
+        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Selected work / six public records</p>
         <h1 className="max-w-5xl font-serif text-[4rem] italic leading-[0.82] tracking-normal md:text-[7.5rem] xl:text-[10rem]">
           Systems I built. Evidence you can inspect.
         </h1>
         <p className="mt-10 max-w-3xl text-base leading-relaxed text-canvas/68">
-          Each entry names the problem, my ownership, the system or study I built, its constraints, its current state, and the artifact that supports the claim. Shipped crawler behavior is labeled shipped; published architecture is not presented as a deployed service.
+          Each entry names the problem, my ownership, the system, study, or practice I built, its constraints, its current state, and the public record linked to the claim. Product status and public proof are separated; published architecture is not presented as a deployed service.
         </p>
       </section>
 
@@ -66,7 +66,7 @@ export default function WorkPage() {
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-[0.24em] text-canvas/60">
                   <span>{String(index + 1).padStart(2, '0')} / {item.eyebrow}</span>
-                  <span className="rounded-full border border-canvas/20 px-3 py-1.5 text-accent">Current state recorded</span>
+                  <span className="rounded-full border border-canvas/20 px-3 py-1.5 text-accent">{item.statusLabel}</span>
                 </div>
 
                 <h2 className="mt-10 max-w-xl font-serif text-[2.8rem] italic leading-[0.92] tracking-normal text-canvas md:text-[4rem]">
@@ -108,7 +108,7 @@ export default function WorkPage() {
                 </div>
                 <div className="mt-6 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
                   <a href={item.href} target={externalProject ? '_blank' : undefined} rel={externalProject ? 'noreferrer' : undefined} className="border-b border-canvas/28 pb-1 text-canvas/74 transition-colors hover:border-canvas hover:text-canvas">
-                    Open project
+                    {item.projectLabel}
                   </a>
                   <a href={item.evidenceHref} target={externalEvidence ? '_blank' : undefined} rel={externalEvidence ? 'noreferrer' : undefined} className="border-b border-accent/40 pb-1 text-accent transition-colors hover:border-canvas hover:text-canvas">
                     {item.evidenceLabel}
@@ -134,6 +134,23 @@ export default function WorkPage() {
               <p className="mt-6 text-sm leading-relaxed text-inherit opacity-70">{artifact.description}</p>
             </a>
           ))}
+        </div>
+      </section>
+
+      <section className="relative z-10 mx-auto max-w-[1480px] border-y border-canvas/14 px-4 py-12 md:px-8 xl:px-10">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-canvas/60">Work with me</p>
+            <h2 className="mt-4 max-w-3xl font-serif text-[2.8rem] italic leading-[0.92] tracking-normal md:text-[4rem]">
+              Bring the site, the evidence gap, and the decision.
+            </h2>
+          </div>
+          <a
+            href="/contact"
+            className="inline-flex min-h-11 w-fit items-center border border-canvas bg-canvas px-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink transition-colors hover:bg-accent"
+          >
+            Send a project brief
+          </a>
         </div>
       </section>
 

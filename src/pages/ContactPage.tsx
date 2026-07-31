@@ -88,7 +88,7 @@ export default function ContactPage() {
   useSEO(CONTACT_SEO);
 
   return (
-    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
+    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-clip bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
       <InternalHeader activePath="/contact" tone="dark" variant="final-frame" />
 
       <section className="relative z-10 mx-auto max-w-[1480px] px-4 pb-12 pt-4 md:px-8 md:pb-16 lg:px-10">
@@ -131,6 +131,7 @@ export default function ContactPage() {
 
                 <div className="mt-8 flex flex-wrap gap-5">
                   <ArrowLink href={DIRECT_EMAIL_HREF}>Email directly</ArrowLink>
+                  <ArrowLink href="#contact-brief-panel">Send a structured brief</ArrowLink>
                   <ArrowLink href="/method">Technical SEO audit method</ArrowLink>
                   <ArrowLink href="/atlas/sample-crawl">Atlas crawl example</ArrowLink>
                 </div>
@@ -146,7 +147,7 @@ export default function ContactPage() {
             </div>
 
             <div className="grid gap-6 lg:py-4">
-              <aside id="contact-brief-panel" className="border border-canvas/16 bg-canvas/[0.035] p-5 text-canvas md:p-7">
+              <aside id="contact-brief-panel" className="scroll-mt-28 border border-canvas/16 bg-canvas/[0.035] p-5 text-canvas md:p-7">
                 <div className="border-b border-canvas/12 pb-5">
                   <p className="text-xs text-canvas/48">Brief form</p>
                   <h2 className="mt-4 font-serif text-4xl italic leading-none text-canvas md:text-5xl">

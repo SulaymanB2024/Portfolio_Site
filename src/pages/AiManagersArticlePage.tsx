@@ -13,6 +13,7 @@ import {
   AI_MANAGER_FAQS,
   AI_MANAGER_OPEN_QUESTIONS,
   AI_MANAGER_SOURCES,
+  AI_MANAGERS_ARTICLE_CONCLUSION,
   AI_MANAGERS_ARTICLE_DATE,
   AI_MANAGERS_ARTICLE_DESCRIPTION,
   AI_MANAGERS_ARTICLE_DISPLAY_TITLE,
@@ -176,12 +177,19 @@ function BehaviorMatrix() {
   return (
     <figure className="toll-snapshot ai-behavior-matrix" aria-labelledby="behavior-matrix-caption">
       <div className="toll-figure-label"><span>Figure 03</span><span>Observed pattern / containment</span></div>
-      <div className="toll-snapshot__scroll">
-        <table>
+      <div
+        className="toll-snapshot__scroll"
+        role="region"
+        aria-label="Observed manager behavior and containment matrix. Scroll horizontally to inspect every field."
+        tabIndex={0}
+      >
+        <table data-responsive-table="stacked">
           <thead><tr><th>Manager</th><th>Environment</th><th>Failure path</th><th>Containment response</th></tr></thead>
           <tbody>
             {behaviorMatrix.map((row) => (
-              <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th scope="row" key={cell}>{cell}</th> : <td key={cell}>{cell}</td>)}</tr>
+              <tr key={row[0]}>{row.map((cell, index) => index === 0
+                ? <th scope="row" key={cell} data-label="Manager">{cell}</th>
+                : <td key={cell} data-label={['Manager', 'Environment', 'Failure path', 'Containment response'][index]}>{cell}</td>)}</tr>
             ))}
           </tbody>
         </table>
@@ -542,7 +550,10 @@ export default function AiManagersArticlePage() {
       content: 'Operator dashboards are unaudited. Simulations are not businesses. Human legal, financial, and physical work is counted, not cropped out.',
     },
     endnote: {
-      content: 'Research cutoff: July 14, 2026. Financial claims are labeled by source type and accounting limit. No simulation score is presented as real-world profit.',
+      label: 'Conclusion',
+      title: AI_MANAGERS_ARTICLE_CONCLUSION.title,
+      content: AI_MANAGERS_ARTICLE_CONCLUSION.content,
+      note: 'Research cutoff: July 14, 2026. Financial claims are labeled by source type and accounting limit. No simulation score is presented as real-world profit.',
       links: [
         ...SEARCH_TARGET.relatedPaths.map((path) => ({
           href: path,

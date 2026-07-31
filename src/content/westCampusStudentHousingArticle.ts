@@ -10,7 +10,7 @@ export const WEST_CAMPUS_STUDENT_HOUSING_ARTICLE: ResearchArticle = {
   slug: WEST_CAMPUS_STUDENT_HOUSING_ARTICLE_SLUG,
   number: '16',
   category: 'FINANCIAL SYSTEMS',
-  title: 'Who Owns the Apartments Around Campus?',
+  title: 'Who Owns West Campus Student Housing?',
   seoTitle: 'West Campus Student Housing: Ownership and Returns',
   subtitle:
     'The captive economics of student housing around the University of Texas at Austin, traced from one student installment through property operations, capital structure, and first loss.',
@@ -32,6 +32,11 @@ export const WEST_CAMPUS_STUDENT_HOUSING_ARTICLE: ResearchArticle = {
   author: 'SULAYMAN BOWLES',
   thesis:
     'The evidence supports a real location and service premium before a lease is signed and substantial contractual lock-in afterward. It does not support a simple monopoly story or one excess-return claim for every owner: service mix, acquisition basis, capital structure, concessions, and refinancing exposure determine who keeps the rent dollar and who absorbs a loss.',
+  conclusion: {
+    title: 'Contractual lock-in is clearer than monopoly',
+    content:
+      'The evidence supports a real location and service premium before signing and much stronger bargaining constraints afterward. Owner returns still turn on basis, capital structure, concessions, and refinancing, so the same rent dollar can produce very different equity outcomes.',
+  },
   evidenceBoundary:
     'This web edition reformats the supplied July 2026 report, analytical memo, workbook, and claims appendix. The six-property sample is not a complete market inventory, so it cannot support a West Campus concentration ratio. Only SkyLoft has a disclosed property-level mortgage stack in the package; current debt for the other five properties is illustrative. Normalized NOI, values, returns, and stress outcomes are model outputs rather than audited property results, realized sponsor returns, appraisals, or forecasts. The linked public sources were not independently refreshed for this publication.',
   metrics: [

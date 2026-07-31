@@ -34,6 +34,11 @@ export const INDEX_COMPANY_MATTERS_ARTICLE: ResearchArticle = {
   author: 'SULAYMAN BOWLES',
   thesis:
     'Index administrators define classifications and weights. Contracts built around those definitions convert a private rule into public trading demand, but the size, timing, and persistence of the price effect depend on governance, source-index offsets, implementation choices, anticipation, and market liquidity.',
+  conclusion: {
+    title: 'A rule becomes demand through implementation',
+    content:
+      'Index providers define eligibility and weights; products tracking those rules translate them into time-bound trading demand. Any claimed price or capital-cost effect still needs product-level replication flows, event windows, offsets, liquidity, and persistence evidence.',
+  },
   evidenceBoundary:
     'This web edition reformats the supplied July 23, 2026 institutional and quantitative evidence audit. The underlying sources were not independently refreshed for web publication. The supplied package did not include the event-level database, model outputs, exchange auction files, product-level holdings, or reproducible code required for a new multi-index event study, so no missing means, confidence intervals, auction fractions, arbitrage returns, or persistence estimates have been invented.',
   metrics: [

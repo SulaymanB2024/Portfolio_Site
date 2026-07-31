@@ -1,6 +1,7 @@
 import type { ResearchArticle } from './articleModels';
 import {
   AI_MANAGER_SOURCES,
+  AI_MANAGERS_ARTICLE_CONCLUSION,
   AI_MANAGERS_ARTICLE_DESCRIPTION,
   AI_MANAGERS_ARTICLE_READ_TIME,
   AI_MANAGERS_ARTICLE_SEO_TITLE,
@@ -49,6 +50,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'When a general-purpose assistant gets operational authority, its conversational habits stop being style and start becoming business policy.',
+    conclusion: AI_MANAGERS_ARTICLE_CONCLUSION,
     evidenceBoundary:
       'Operator dashboards and financial reconstructions are unaudited. Simulations are controlled behavior evidence, not commercial businesses. Human legal, financial, physical, and supervisory work remains part of every live case.',
     metrics: [
@@ -94,6 +96,11 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Treat search crawlers, training crawlers, and user-triggered fetchers as separate policy choices, then verify observed traffic with server logs and provider-published IP ranges.',
+    conclusion: {
+      title: 'Choose the outcome before the token',
+      content:
+        'Search discovery, model-development access, and user-triggered fetches are separate policy decisions. Encode each by exact agent group, deploy the merged file, then use provider ranges and logs to verify observed traffic without mistaking a user-agent string for identity.',
+    },
     evidenceBoundary:
       'This guide documents published crawler controls as verified on July 14, 2026. A robots.txt rule expresses policy; it does not secure private content, authenticate a bot, or prove indexing, ranking, training exclusion, or answer-system citation.',
     metrics: [
@@ -285,6 +292,11 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Technical SEO becomes infrastructure when every important URL can move through a traceable pipeline from discovery to rendered evidence and reusable output.',
+    conclusion: {
+      title: 'Build a traceable public record',
+      content:
+        'Technical SEO becomes infrastructure when discovery, transport, rendering, extraction, interpretation, and publication remain connected by reviewable evidence. That makes site state easier to operate and defend, while distribution remains an external outcome.',
+    },
     evidenceBoundary:
       'The data-infrastructure comparison describes operating discipline. It does not make a website equivalent to a regulated filing system or guarantee crawling, indexing, ranking, citation, or traffic.',
     metrics: [
@@ -427,6 +439,11 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'A personal identity graph becomes trustworthy when one profile record owns each fact and every external reference either agrees with it or clearly represents history.',
+    conclusion: {
+      title: 'Maintain one current identity source',
+      content:
+        'A personal identity surface becomes legible when one profile record owns each current fact and controlled references agree with it or clearly preserve history. Measure consistency across important records rather than publishing more biographies into unresolved contradiction.',
+    },
     evidenceBoundary:
       'This playbook improves consistency among controlled and observable profiles. It cannot force third-party platforms to update, remain public, or be interpreted as identity evidence by a search system.',
     metrics: [

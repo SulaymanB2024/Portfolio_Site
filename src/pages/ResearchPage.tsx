@@ -15,13 +15,23 @@ import {
   TechnicalPanel,
   TextLink,
 } from '../components/design/Primitives';
+import { INVESTMENT_MEMOS } from '../content/marketTheses';
 import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
 import { researchContextLinks } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
+import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
 import { useSEO } from '../utils/seo';
 
 const RESEARCH_ROUTE = getSeoRoute('/research')!;
 const RESEARCH_COIN_ART = '/images/markets/noise-expansion-coin-alpha.png';
+const ARCHIVED_RESEARCH = INVESTMENT_MEMOS.filter((memo) => memo.indexable === false);
+
+function publicationAction(href: string) {
+  if (href === '/atlas/sample-crawl') return 'Inspect sample';
+  if (href === '/austin-technical-seo') return 'Open pilot';
+  if (href === '/viralbench-codex-agent-harness') return 'Read design';
+  return 'Read article';
+}
 
 export default function ResearchPage() {
   useSEO(RESEARCH_ROUTE);
@@ -30,7 +40,7 @@ export default function ResearchPage() {
     <PageShell id="top" tone="light">
       <WireframeGrid tone="light" className="pointer-events-none absolute inset-0 z-0 opacity-35" />
       <PageTechnicalChrome tone="light" />
-      <ScrollProgress />
+      <ScrollProgress tone="dark" />
       <InternalHeader activePath="/research" tone="light" />
 
       <PageFrame className="relative z-10">
@@ -61,10 +71,10 @@ export default function ResearchPage() {
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Categories" title="Four ways into the work.">
+          <SectionHeader eyebrow="Categories" title="Five ways into the work.">
             Each lane has a concrete question, source base, and boundary between observed facts and interpretation.
           </SectionHeader>
-          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5">
             {PUBLICATION_CATEGORY_SUMMARY.map(([title, description], index) => (
               <TechnicalPanel key={title} className="min-h-[210px]">
                 <p className="text-[10px] uppercase tracking-[0.22em] text-current/60">{String(index + 1).padStart(2, '0')}</p>
@@ -87,7 +97,7 @@ export default function ResearchPage() {
                 <div>
                   <div className="flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-current/60">
                     <span>{note.category}</span>
-                    <time>{note.date}</time>
+                    <time dateTime={normalizePublicationDate(note.date)}>{formatPublicationDate(note.date)}</time>
                   </div>
                   <h2 className="mt-8 font-serif text-3xl italic leading-[0.95] tracking-normal text-current">
                     <a href={note.href} className="transition-opacity hover:opacity-70">{note.title}</a>
@@ -95,13 +105,44 @@ export default function ResearchPage() {
                   <p className="mt-5 text-sm leading-relaxed text-current/64">{note.description}</p>
                 </div>
                 <a href={note.href} className="w-fit border-b border-current/20 pb-1 text-[10px] uppercase tracking-[0.2em] text-current/64 transition-colors hover:border-current/45 hover:text-current">
-                  Open artifact
+                  {publicationAction(note.href)}
                 </a>
               </TechnicalPanel>
             ))}
           </SurfaceGrid>
         </PageFrame>
       </section>
+
+      {ARCHIVED_RESEARCH.length > 0 && (
+        <section className="relative z-10 border-b border-current/12">
+          <PageFrame className="py-16 xl:py-24">
+            <SectionHeader eyebrow="Archive" title="Retired work, still legible.">
+              These records are retained for methodology and provenance. They remain noindexed and are not current recommendations.
+            </SectionHeader>
+            <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+              {ARCHIVED_RESEARCH.map((note) => (
+                <TechnicalPanel key={note.slug} className="grid min-h-[250px] content-between gap-8 bg-current/[0.012]">
+                  <div>
+                    <div className="flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-current/60">
+                      <span>Archive / noindex</span>
+                      <time dateTime={normalizePublicationDate(note.dateModified ?? note.date)}>
+                        {formatPublicationDate(note.dateModified ?? note.date)}
+                      </time>
+                    </div>
+                    <h2 className="mt-8 font-serif text-3xl italic leading-[0.95] tracking-normal text-current">
+                      <a href={`/markets/${note.slug}`} className="transition-opacity hover:opacity-70">{note.title}</a>
+                    </h2>
+                    <p className="mt-5 text-sm leading-relaxed text-current/64">{note.subtitle}</p>
+                  </div>
+                  <a href={`/markets/${note.slug}`} className="w-fit border-b border-current/20 pb-1 text-[10px] uppercase tracking-[0.2em] text-current/64 transition-colors hover:border-current/45 hover:text-current">
+                    Review methodology
+                  </a>
+                </TechnicalPanel>
+              ))}
+            </SurfaceGrid>
+          </PageFrame>
+        </section>
+      )}
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">

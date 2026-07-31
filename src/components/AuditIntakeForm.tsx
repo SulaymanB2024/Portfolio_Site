@@ -9,12 +9,16 @@ type AuditIntakeFormProps = {
   submitLabel?: string;
 };
 
+type IntakeField = 'name' | 'email' | 'websiteUrl' | 'message';
+type IntakeFieldErrors = Partial<Record<IntakeField, string>>;
+
 const sensitiveSubmissionPattern =
   /(-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{20,}|ghp_[0-9A-Za-z]{20,}|sk-[0-9A-Za-z_-]{20,}|xox[baprs]-[0-9A-Za-z-]{20,}|(?:api[_-]?key|access[_-]?token|password|private[_-]?key|client[_-]?secret)\s*[:=])/i;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function FieldLabel({ htmlFor, children, tone }: { htmlFor: string; children: ReactNode; tone: 'dark' | 'light' }) {
   return (
-    <label htmlFor={htmlFor} className={`mb-2 block text-[10px] uppercase tracking-[0.24em] ${tone === 'light' ? 'text-ink/60' : 'text-canvas/64'}`}>
+    <label htmlFor={htmlFor} className={`mb-2 block text-[10px] font-medium uppercase tracking-[0.22em] ${tone === 'light' ? 'text-ink/68' : 'text-canvas/72'}`}>
       {children}
     </label>
   );
@@ -36,13 +40,14 @@ export function AuditIntakeForm({
   const [scope, setScope] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [validationMessage, setValidationMessage] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<IntakeFieldErrors>({});
   const isCompact = variant === 'compact';
   const isEditorial = variant === 'editorial';
   const isLight = tone === 'light';
-  const fieldClass = `w-full border-b bg-transparent py-3 text-sm tracking-normal outline-none transition-colors ${
+  const fieldClass = `w-full rounded-none border px-3 py-3 text-base tracking-normal outline-none transition-[background-color,border-color,box-shadow] sm:text-sm ${
     isLight
-      ? 'border-ink/22 text-ink placeholder:text-ink/42 focus:border-ink'
-      : 'border-canvas/24 text-canvas placeholder:text-canvas/60 focus:border-canvas'
+      ? 'border-ink/24 bg-ink/[0.025] text-ink placeholder:text-ink/58 hover:border-ink/40 focus:border-accent focus:bg-ink/[0.045]'
+      : 'border-canvas/28 bg-canvas/[0.035] text-canvas placeholder:text-canvas/68 hover:border-canvas/44 focus:border-accent focus:bg-canvas/[0.055]'
   }`;
   const selectClass = `${fieldClass} appearance-none ${isLight ? 'text-ink/86' : 'text-canvas/86'}`;
   const optionClass = isLight ? 'bg-canvas text-ink' : 'bg-ink text-canvas';
@@ -57,17 +62,73 @@ export function AuditIntakeForm({
     setScope('');
     setHoneypot('');
     setValidationMessage('');
+    setFieldErrors({});
+  };
+
+  const clearFieldError = (field: IntakeField) => {
+    if (formStatus === 'error') {
+      setFormStatus('idle');
+      setValidationMessage('');
+    }
+    setFieldErrors((current) => {
+      if (!current[field]) {
+        return current;
+      }
+
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setValidationMessage('');
 
-    if (!email.trim() || !message.trim()) {
-      setValidationMessage('Email and message required.');
+    const nextFieldErrors: IntakeFieldErrors = {};
+    if (!name.trim()) {
+      nextFieldErrors.name = 'Enter your name.';
+    }
+    if (!email.trim()) {
+      nextFieldErrors.email = 'Enter your email address.';
+    } else if (!emailPattern.test(email.trim())) {
+      nextFieldErrors.email = 'Enter a complete email address.';
+    }
+    if (websiteUrl.trim()) {
+      try {
+        const parsedWebsiteUrl = new URL(websiteUrl.trim());
+        if (!['http:', 'https:'].includes(parsedWebsiteUrl.protocol)) {
+          nextFieldErrors.websiteUrl = 'Use a full http:// or https:// URL.';
+        }
+      } catch {
+        nextFieldErrors.websiteUrl = 'Use a full URL such as https://example.com.';
+      }
+    }
+    if (!message.trim()) {
+      nextFieldErrors.message = 'Describe what you want to understand, fix, or build.';
+    }
+
+    if (Object.keys(nextFieldErrors).length > 0) {
+      setFieldErrors(nextFieldErrors);
+      setValidationMessage('Review the highlighted fields.');
       setFormStatus('error');
+      const firstInvalidField = (['name', 'email', 'websiteUrl', 'message'] as IntakeField[]).find(
+        (field) => nextFieldErrors[field],
+      );
+      if (firstInvalidField) {
+        window.requestAnimationFrame(() => {
+          const element = document.getElementById(`contact-${firstInvalidField.replace('websiteUrl', 'website-url')}`);
+          element?.focus({ preventScroll: true });
+          element?.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+            block: 'center',
+          });
+        });
+      }
       return;
     }
+
+    setFieldErrors({});
 
     if (honeypot.trim()) {
       setFormStatus('success');
@@ -120,31 +181,111 @@ export function AuditIntakeForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`w-full ${isCompact ? 'space-y-5' : isEditorial ? 'space-y-8' : 'max-w-xl space-y-6'} ${className}`}>
+    <form noValidate onSubmit={handleSubmit} className={`w-full ${isCompact ? 'space-y-5' : isEditorial ? 'space-y-8' : 'max-w-xl space-y-6'} ${className}`}>
       <div aria-hidden="true" className="hidden">
         <label htmlFor="contact-company-url">Company URL</label>
         <input id="contact-company-url" name="_gotcha" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(event) => setHoneypot(event.target.value)} />
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <div>
+        <div className="scroll-mt-28">
           <FieldLabel htmlFor="contact-name" tone={tone}>Name</FieldLabel>
-          <input id="contact-name" name="name" type="text" required autoComplete="name" maxLength={120} value={name} onChange={(event) => setName(event.target.value)} className={fieldClass} />
+          <input
+            id="contact-name"
+            name="name"
+            type="text"
+            required
+            autoComplete="name"
+            maxLength={120}
+            value={name}
+            aria-invalid={fieldErrors.name ? true : undefined}
+            aria-describedby={fieldErrors.name ? 'contact-name-error' : undefined}
+            onChange={(event) => {
+              setName(event.target.value);
+              clearFieldError('name');
+            }}
+            className={`${fieldClass} ${fieldErrors.name ? 'border-risk' : ''}`}
+          />
+          {fieldErrors.name && (
+            <p id="contact-name-error" className={`mt-2 border-l border-risk pl-3 text-xs leading-relaxed ${isLight ? 'text-ink/76' : 'text-canvas/78'}`}>
+              Error — {fieldErrors.name}
+            </p>
+          )}
         </div>
-        <div>
+        <div className="scroll-mt-28">
           <FieldLabel htmlFor="contact-email" tone={tone}>Email</FieldLabel>
-          <input id="contact-email" name="email" type="email" required autoComplete="email" maxLength={160} value={email} onChange={(event) => setEmail(event.target.value)} className={fieldClass} />
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            maxLength={160}
+            value={email}
+            aria-invalid={fieldErrors.email ? true : undefined}
+            aria-describedby={fieldErrors.email ? 'contact-email-error' : undefined}
+            onChange={(event) => {
+              setEmail(event.target.value);
+              clearFieldError('email');
+            }}
+            className={`${fieldClass} ${fieldErrors.email ? 'border-risk' : ''}`}
+          />
+          {fieldErrors.email && (
+            <p id="contact-email-error" className={`mt-2 border-l border-risk pl-3 text-xs leading-relaxed ${isLight ? 'text-ink/76' : 'text-canvas/78'}`}>
+              Error — {fieldErrors.email}
+            </p>
+          )}
         </div>
       </div>
 
-      <div>
+      <div className="scroll-mt-28">
         <FieldLabel htmlFor="contact-website-url" tone={tone}>Website <span className="normal-case tracking-normal">(optional)</span></FieldLabel>
-        <input id="contact-website-url" name="websiteUrl" type="url" autoComplete="url" placeholder="https://example.com" maxLength={240} value={websiteUrl} onChange={(event) => setWebsiteUrl(event.target.value)} className={fieldClass} />
+        <input
+          id="contact-website-url"
+          name="websiteUrl"
+          type="url"
+          autoComplete="url"
+          placeholder="https://example.com"
+          maxLength={240}
+          value={websiteUrl}
+          aria-invalid={fieldErrors.websiteUrl ? true : undefined}
+          aria-describedby={fieldErrors.websiteUrl ? 'contact-website-url-error' : undefined}
+          onChange={(event) => {
+            setWebsiteUrl(event.target.value);
+            clearFieldError('websiteUrl');
+          }}
+          className={`${fieldClass} ${fieldErrors.websiteUrl ? 'border-risk' : ''}`}
+        />
+        {fieldErrors.websiteUrl && (
+          <p id="contact-website-url-error" className={`mt-2 border-l border-risk pl-3 text-xs leading-relaxed ${isLight ? 'text-ink/76' : 'text-canvas/78'}`}>
+            Error — {fieldErrors.websiteUrl}
+          </p>
+        )}
       </div>
 
-      <div>
+      <div className="scroll-mt-28">
         <FieldLabel htmlFor="contact-message" tone={tone}>Message</FieldLabel>
-        <textarea id="contact-message" name="message" required rows={isCompact ? 5 : isEditorial ? 6 : 4} placeholder={isEditorial ? 'What decision are you trying to make, and what should I look at?' : 'What are you trying to understand, fix, or build?'} maxLength={2000} value={message} onChange={(event) => setMessage(event.target.value)} className={`${fieldClass} resize-y`} />
+        <textarea
+          id="contact-message"
+          name="message"
+          required
+          rows={isCompact ? 5 : isEditorial ? 6 : 4}
+          placeholder={isEditorial ? 'What decision are you trying to make, and what should I look at?' : 'What are you trying to understand, fix, or build?'}
+          maxLength={2000}
+          value={message}
+          aria-invalid={fieldErrors.message ? true : undefined}
+          aria-describedby={fieldErrors.message ? 'contact-message-error' : undefined}
+          onChange={(event) => {
+            setMessage(event.target.value);
+            clearFieldError('message');
+          }}
+          className={`${fieldClass} resize-y ${fieldErrors.message ? 'border-risk' : ''}`}
+        />
+        {fieldErrors.message && (
+          <p id="contact-message-error" className={`mt-2 border-l border-risk pl-3 text-xs leading-relaxed ${isLight ? 'text-ink/76' : 'text-canvas/78'}`}>
+            Error — {fieldErrors.message}
+          </p>
+        )}
       </div>
 
       <details className={`border ${isLight ? 'border-ink/16 bg-ink/[0.018]' : 'border-canvas/16 bg-canvas/[0.025]'}`}>
@@ -187,7 +328,7 @@ export function AuditIntakeForm({
 
       <div className={`flex flex-wrap items-center justify-between gap-5 pt-2 ${isEditorial ? `border-t py-5 ${isLight ? 'border-ink/18' : 'border-canvas/18'}` : ''}`}>
         <div className={`max-w-sm text-xs leading-relaxed ${isLight ? 'text-ink/64' : 'text-canvas/64'}`} aria-live="polite">
-          {formStatus === 'submitting' ? 'Sending…' : formStatus === 'error' ? validationMessage : 'Email and message required.'}
+          {formStatus === 'submitting' ? 'Sending…' : formStatus === 'error' ? validationMessage : 'Name, email, and message required.'}
           <span className={`mt-1 block ${isLight ? 'text-ink/60' : 'text-canvas/60'}`}>
             Formspree processes this submission. Do not send credentials or sensitive client data.
           </span>

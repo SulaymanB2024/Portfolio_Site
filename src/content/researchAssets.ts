@@ -136,7 +136,7 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
-    name: 'The Hidden Financing Behind Hardware Startups',
+    name: 'Who Funds Waymo’s Hardware?',
     href: '/research/financial-systems/waymo-hardware-financing',
     type: 'long_form_research',
     preferredAnchor: 'Waymo hardware financing structure',
@@ -165,7 +165,7 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
-    name: 'Who Owns the Apartments Around Campus?',
+    name: 'Who Owns West Campus Student Housing?',
     href: '/research/financial-systems/west-campus-student-housing',
     type: 'long_form_research',
     preferredAnchor: 'West Campus student housing ownership and returns',
@@ -332,7 +332,7 @@ export const publicDataDownloads = [
   {
     label: 'Atlas open-corpus demonstration CSV',
     href: '/research/atlas-open-corpus-run-2026-07-16.csv',
-    description: 'Dated open-corpus URL-level capture with raw/render and confidence fields.',
+    description: 'Dated open-corpus source capture with render-review and confidence fields.',
   },
   {
     label: 'Appian educational research memo',

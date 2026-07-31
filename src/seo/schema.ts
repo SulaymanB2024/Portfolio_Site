@@ -11,7 +11,7 @@ import {
   VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
   VIRALBENCH_ARTICLE_MODIFIED_DATE,
   VIRALBENCH_ARTICLE_TITLE,
-} from '../content/viralBenchArticle';
+} from '../content/viralBenchArticleMeta';
 import { searchTerms } from './keywordStrategy';
 import { absoluteUrl, DEFAULT_OG_IMAGE, PERSON_ID, SITE_NAME, SITE_URL } from './site';
 
@@ -360,17 +360,15 @@ export function projectSchema(): JsonLd {
       '@id': PERSON_ID,
     },
     description:
-      'A technical SEO audit and evidence system for crawling websites, preserving raw and rendered page evidence, checking robots.txt and sitemap behavior, analyzing internal link graphs, scoring technical findings, persisting crawl data, and exporting operator or client-facing reports.',
+      'An in-development technical SEO audit and evidence system. Its public demonstration covers bounded source capture, render-review states, traceable findings, and CSV/JSON artifacts; the Atlas page labels additional capabilities by implementation and public-proof status.',
     keywords: searchTerms('/atlas'),
     featureList: [
-      'Crawling and URL discovery',
-      'robots.txt and sitemap handling',
-      'Raw HTML and rendered-page evidence',
-      'SQLite persistence for crawl records',
-      'Internal link graph analysis',
-      'Canonical, noindex, redirect, and indexability checks',
-      'Technical scoring and issue prioritization',
-      'Operator dashboard and client-facing export structures',
+      'Bounded URL and source capture',
+      'Source-versus-render review states',
+      'robots.txt, sitemap, canonical, noindex, and redirect review',
+      'Evidence-linked finding records',
+      'CSV and JSON demonstration artifacts',
+      'Persistence, graph, scoring, and client-handoff capabilities labeled as partial or in development',
     ],
   };
 }
@@ -570,7 +568,7 @@ export function atlasJsonLd(): JsonLd {
       path: '/atlas',
       name: 'Atlas SEO Audit Console',
       description:
-        'Software/project page for Atlas SEO Audit Console, a crawl system for technical SEO, indexation, internal links, structured data, scoring, and exports.',
+        'Project page for the in-development Atlas technical SEO audit system, including a bounded public crawl sample and labeled implementation and proof status.',
       keywords: searchTerms('/atlas'),
       mainEntityId: `${SITE_URL}/atlas#software`,
       aboutIds: [PERSON_ID],
@@ -699,7 +697,7 @@ export function atlasSampleCrawlJsonLd(): JsonLd {
       path: '/atlas/sample-crawl',
       name: 'Atlas Open Corpus Demonstration',
       description:
-        'A dated Atlas demonstration showing source and render states, discovered paths, confidence, findings, and exportable artifacts from a bounded open corpus.',
+        'A dated Atlas sample with bounded source capture, render-review states, traceable findings, confidence, and exportable CSV/JSON artifacts.',
       mainEntityId: `${SITE_URL}/atlas#software`,
       aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
     }),

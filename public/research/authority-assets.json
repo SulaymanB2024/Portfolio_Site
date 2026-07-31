@@ -151,11 +151,11 @@
     },
     {
       "priority": 1,
-      "name": "The Hidden Financing Behind Hardware Startups",
+      "name": "Who Funds Waymo’s Hardware?",
       "url": "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
       "type": "source_led_article",
       "cluster": "financial-systems",
-      "preferred_anchor": "The Hidden Financing Behind Hardware Startups",
+      "preferred_anchor": "Who Funds Waymo’s Hardware?",
       "pitch_angle": "Separate fundraising from physical-asset financing, legal ownership, residual value, utilization risk, and the party that absorbs losses.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
@@ -165,11 +165,11 @@
     },
     {
       "priority": 1,
-      "name": "Who Owns the Apartments Around Campus?",
+      "name": "Who Owns West Campus Student Housing?",
       "url": "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
       "type": "source_led_article",
       "cluster": "financial-systems",
-      "preferred_anchor": "Who Owns the Apartments Around Campus?",
+      "preferred_anchor": "Who Owns West Campus Student Housing?",
       "pitch_angle": "Trace a student installment through the operating statement, acquisition basis, capital stack, refinancing test, and loss waterfall while keeping reported facts separate from modeled assumptions.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",

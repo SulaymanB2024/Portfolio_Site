@@ -152,6 +152,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'A crawler becomes trustworthy when every URL transition is explicit, replayable, and bounded; a fast queue without an identity and state contract only processes ambiguity faster.',
+    conclusion: {
+      title: 'Balance the crawl ledger',
+      content:
+        'A frontier is finished only when every admitted URL reconciles to a terminal or explicitly unresolved state. Speed matters after identity, transitions, host capacity, and retry rules make that accounting replayable.',
+    },
     evidenceBoundary:
       'This architecture describes an operator-controlled crawler. It does not predict how any search engine schedules a site, and provider crawl-budget guidance is used only to distinguish host capacity, demand, and URL-inventory concerns.',
     metrics: [
@@ -309,6 +314,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Raw source and browser-rendered output answer different questions, so a technical audit must preserve both artifacts and qualify the browser environment before interpreting their delta.',
+    conclusion: {
+      title: 'Preserve both sides of the render',
+      content:
+        'Source and rendered DOM are observations from different execution stages, not competing versions of truth. Keep both, record the browser conditions, and rerun the same completion contract before calling a rendering finding resolved.',
+    },
     evidenceBoundary:
       'A controlled browser run describes the tested environment at a recorded time. It does not reproduce every search crawler, user device, cache state, geography, consent choice, or personalization path, and a successful local render does not prove indexing.',
     metrics: [
@@ -463,6 +473,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Canonicalization is reliable when every duplicate cluster converges on one reachable representative and redirects, annotations, sitemaps, and internal links agree with that graph.',
+    conclusion: {
+      title: 'Make every signal converge',
+      content:
+        'The site-controlled standard is one reachable representative per duplicate cluster, with redirects, canonicals, links, and sitemaps agreeing. That proves publisher consistency—not which URL an external index will ultimately select.',
+    },
     evidenceBoundary:
       'Canonical annotations and related site signals express preferences; they do not compel a search system to select a URL. The graph method diagnoses internal consistency and transport behavior, not the final decision of an external index.',
     metrics: [
@@ -617,6 +632,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Internal-link quality is the ability of people and crawlers to reach the right canonical pages through meaningful, crawlable paths—not the number of links a template can emit.',
+    conclusion: {
+      title: 'Repair the journey, then rerun the graph',
+      content:
+        'Useful internal architecture gives priority pages several meaningful, crawlable paths from real entry points. The durable artifact is a versioned graph whose reachability and path-diversity invariants survive template and route changes.',
+    },
     evidenceBoundary:
       'Graph metrics describe the captured internal architecture and help prioritize review. They do not measure proprietary ranking weights, guarantee crawling or indexing, or prove that adding a link will improve search performance.',
     metrics: [
@@ -774,6 +794,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Robots.txt is a host-scoped request policy for cooperating crawlers; confidential or costly resources need enforceable server-side authorization and capacity controls that do not depend on a claimed user agent.',
+    conclusion: {
+      title: 'Separate policy from enforcement',
+      content:
+        'Use robots.txt to state host-level preferences to cooperating crawlers; protect private or expensive resources with authentication, authorization, and capacity controls. Logs can verify observed requests, not universal compliance or downstream use.',
+    },
     evidenceBoundary:
       'The controls in this article describe publisher-side policy and enforcement. A rule does not prove that every client complies, that a provider attributed a request the same way, or that an allowed page will be crawled, indexed, trained on, or cited.',
     metrics: [
@@ -922,6 +947,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Structured data is trustworthy when it is a typed projection of the same maintained record that renders the page, and release gates test semantic agreement rather than syntax alone.',
+    conclusion: {
+      title: 'Publish one fact graph',
+      content:
+        'Render visible content and JSON-LD from the same maintained record, then test semantic agreement across both outputs. A valid projection establishes internal coherence and eligibility—not a promised rich result or ranking outcome.',
+    },
     evidenceBoundary:
       'Valid JSON-LD and policy-aligned page content can establish internal consistency and eligibility conditions. They do not guarantee a rich result, ranking change, indexation, citation, or any particular downstream interpretation.',
     metrics: [
@@ -1079,6 +1109,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'An audit finding is defensible only when it can be regenerated from named observations and a versioned rule while preserving uncertainty, reviewer decisions, and the exact evidence used.',
+    conclusion: {
+      title: 'Keep the finding reproducible',
+      content:
+        'A finding should remain regenerable from immutable observations, versioned rules, named gaps, and reviewer decisions. Resolution requires a fresh evaluation over the agreed scope; a merged patch alone is only implementation evidence.',
+    },
     evidenceBoundary:
       'Provenance makes derivation inspectable; it does not make the observation complete or the rule correct. Findings still require scope, data-quality checks, domain review, and explicit treatment of measurement gaps.',
     metrics: [
@@ -1233,6 +1268,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'An agent score is meaningful only when the task, environment, observable trajectory, side effects, grader versions, and repeated-trial distribution are preserved well enough to inspect and reproduce.',
+    conclusion: {
+      title: 'Promote the tested system',
+      content:
+        'Agent evaluation is credible when the task, environment, trajectory, side effects, graders, and repeated-trial distribution travel together. A passing report supports only the recorded configuration and test distribution—not a universal model claim.',
+    },
     evidenceBoundary:
       'A replay can reproduce recorded inputs or simulate an environment boundary; it cannot prove that a stochastic model will emit the same trajectory. Evaluation results apply to the tested agent, tools, models, policies, graders, and environment versions.',
     metrics: [
@@ -1389,6 +1429,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'SQLite works well for bounded crawl and audit systems when the design accepts one-writer semantics, makes every write idempotent, separates immutable attempts from current projections, and operates WAL and checkpoints deliberately.',
+    conclusion: {
+      title: 'Design for one writer and recoverability',
+      content:
+        'SQLite is a strong bounded crawl store when writes are idempotent, attempts remain append-only, projections converge, and WAL and checkpoint behavior are deliberate. The database is operationally complete only after integrity checks, deterministic export, and tested restoration.',
+    },
     evidenceBoundary:
       'SQLite behavior depends on the linked library version, VFS, filesystem, durability settings, connection pattern, and workload. Official documentation should be rechecked before deployment; WAL is not a shared-database design for independent hosts or a substitute for backups.',
     metrics: [
@@ -1546,6 +1591,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'A migration is ready when every important old URL has an approved terminal state, every new canonical route satisfies a page contract, and production evidence proves the mapping after the real edge and application stack.',
+    conclusion: {
+      title: 'Gate the route contract, not the launch date',
+      content:
+        'A migration is ready when every important old URL has an approved terminal state and every new route passes its page contract through the real production edge. Rankings and index consolidation remain external transitions to monitor separately.',
+    },
     evidenceBoundary:
       'Passing migration gates proves the tested publisher-controlled routing and page signals. It cannot guarantee unchanged rankings, traffic, crawling cadence, index consolidation, or behavior in untested caches, regions, clients, and external systems.',
     metrics: [
