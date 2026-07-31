@@ -9,6 +9,7 @@ import {
   type ArticleReaderConfig,
 } from '../components/ArticleLayout';
 import {
+  TEXAS_TOLL_ARTICLE_CONCLUSION,
   TEXAS_TOLL_ARTICLE_DATE,
   TEXAS_TOLL_ARTICLE_DESCRIPTION,
   TEXAS_TOLL_ARTICLE_DISPLAY_TITLE,
@@ -103,8 +104,13 @@ function TexasTollOwnershipLookup() {
         Use this lookup to separate the owner of the pavement from the party operating the lanes,
         claiming toll revenue, or issuing the bill.
       </p>
-      <div className="toll-ownership-lookup__scroll">
-        <table>
+      <div
+        className="toll-ownership-lookup__scroll"
+        role="region"
+        aria-label="Texas toll-road ownership lookup. Scroll horizontally to inspect every field."
+        tabIndex={0}
+      >
+        <table data-responsive-table="stacked">
           <thead>
             <tr>
               <th>Facility or system</th>
@@ -117,20 +123,20 @@ function TexasTollOwnershipLookup() {
           <tbody>
             {TEXAS_TOLL_OWNERSHIP_ROWS.map((row) => (
               <tr key={row.facility}>
-                <th scope="row">
+                <th scope="row" data-label="Facility or system">
                   {row.facility}
                   <span>{row.region}</span>
                 </th>
-                <td>{row.physicalOwner}</td>
-                <td>
+                <td data-label="Physical owner">{row.physicalOwner}</td>
+                <td data-label="Operator / revenue claimant">
                   <strong>{row.operator}</strong>
                   <span>{row.tollRevenueClaimant}</span>
                 </td>
-                <td>
+                <td data-label="Private rights">
                   {row.privateRightsStatus}
                   <span>{row.term}</span>
                 </td>
-                <td>
+                <td data-label="Billing agency">
                   {row.billingAgency}
                   <span className="toll-ownership-lookup__sources">
                     {row.sourceIds.map((sourceId, index) => (
@@ -216,8 +222,13 @@ function DfwOperatingSnapshot() {
         <span>2025 sponsor-reported snapshot</span>
         <span>USD / adjusted figures</span>
       </div>
-      <div className="toll-snapshot__scroll">
-        <table>
+      <div
+        className="toll-snapshot__scroll"
+        role="region"
+        aria-label="2025 sponsor-reported operating snapshot. Scroll horizontally to inspect every field."
+        tabIndex={0}
+      >
+        <table data-responsive-table="stacked">
           <thead>
             <tr>
               <th>Project</th>
@@ -231,12 +242,12 @@ function DfwOperatingSnapshot() {
           <tbody>
             {dfwMetrics.map((metric) => (
               <tr key={metric.project}>
-                <th scope="row">{metric.project}</th>
-                <td>{metric.revenue}</td>
-                <td>{metric.ebitda}</td>
-                <td>{metric.margin}</td>
-                <td>{metric.leverage}</td>
-                <td>{metric.revenuePerTransaction}</td>
+                <th scope="row" data-label="Project">{metric.project}</th>
+                <td data-label="Revenue">{metric.revenue}</td>
+                <td data-label="Adj. EBITDA">{metric.ebitda}</td>
+                <td data-label="Margin">{metric.margin}</td>
+                <td data-label="Net debt / EBITDA">{metric.leverage}</td>
+                <td data-label="Revenue / transaction">{metric.revenuePerTransaction}</td>
               </tr>
             ))}
           </tbody>
@@ -260,8 +271,13 @@ function ModelScreeningSnapshot() {
         <strong>Scenario, not price.</strong>
         <p>These ranges are simplified DCF outputs from the supplied workbook. They are not bids, carrying values, fairness opinions, or current security quotations.</p>
       </div>
-      <div className="toll-snapshot__scroll">
-        <table>
+      <div
+        className="toll-snapshot__scroll"
+        role="region"
+        aria-label="Analyst model screening snapshot. Scroll horizontally to inspect every field."
+        tabIndex={0}
+      >
+        <table data-responsive-table="stacked">
           <thead>
             <tr>
               <th>Project</th>
@@ -276,13 +292,13 @@ function ModelScreeningSnapshot() {
           <tbody>
             {screeningEstimates.map((estimate) => (
               <tr key={estimate.project}>
-                <th scope="row">{estimate.project}</th>
-                <td>{estimate.bearEv}</td>
-                <td>{estimate.baseEv}</td>
-                <td>{estimate.bullEv}</td>
-                <td>{estimate.baseEquity}</td>
-                <td>{estimate.discountRate}</td>
-                <td>{estimate.inputStatus}</td>
+                <th scope="row" data-label="Project">{estimate.project}</th>
+                <td data-label="Bear EV">{estimate.bearEv}</td>
+                <td data-label="Base EV">{estimate.baseEv}</td>
+                <td data-label="Bull EV">{estimate.bullEv}</td>
+                <td data-label="Base equity">{estimate.baseEquity}</td>
+                <td data-label="Base discount rate">{estimate.discountRate}</td>
+                <td data-label="Input status">{estimate.inputStatus}</td>
               </tr>
             ))}
           </tbody>
@@ -375,8 +391,13 @@ function Sh288BuyoutDiagram() {
 function ArticleTable({ table }: { table: TexasTollArticleTable }) {
   return (
     <figure className="toll-data-table" aria-labelledby={`${table.id}-caption`}>
-      <div className="toll-data-table__scroll">
-        <table>
+      <div
+        className="toll-data-table__scroll"
+        role="region"
+        aria-label={`${table.caption}. Scroll horizontally to inspect every field.`}
+        tabIndex={0}
+      >
+        <table data-responsive-table="stacked">
           <caption id={`${table.id}-caption`}>{table.caption}</caption>
           <thead>
             <tr>
@@ -387,8 +408,8 @@ function ArticleTable({ table }: { table: TexasTollArticleTable }) {
             {table.rows.map((row) => (
               <tr key={row.join('|')}>
                 {row.map((cell, index) => index === 0
-                  ? <th key={`${index}-${cell}`} scope="row">{cell}</th>
-                  : <td key={`${index}-${cell}`}>{cell}</td>)}
+                  ? <th key={`${index}-${cell}`} scope="row" data-label={table.columns[index] ?? 'Record'}>{cell}</th>
+                  : <td key={`${index}-${cell}`} data-label={table.columns[index] ?? `Field ${index + 1}`}>{cell}</td>)}
               </tr>
             ))}
           </tbody>
@@ -674,7 +695,10 @@ export default function TexasTollRoadArticlePage() {
       content: 'Educational infrastructure research. Not investment, legal, tax, or municipal-bond advice.',
     },
     endnote: {
-      content: 'Research cutoff: July 11, 2026. All dollar figures are nominal unless stated otherwise. Calculated figures are labeled in context.',
+      label: 'Decision frame',
+      title: TEXAS_TOLL_ARTICLE_CONCLUSION.title,
+      content: TEXAS_TOLL_ARTICLE_CONCLUSION.content,
+      note: 'Research cutoff: July 11, 2026. All dollar figures are nominal unless stated otherwise. Calculated figures are labeled in context.',
       links: [
         { href: '/markets', label: 'Markets archive' },
         { href: '/research', label: 'Research archive' },

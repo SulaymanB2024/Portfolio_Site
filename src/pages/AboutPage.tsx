@@ -13,7 +13,7 @@ const ABOUT_SEO = getSeoRoute('/about')!;
 const currentWork = [
   {
     title: 'Atlas',
-    copy: 'I designed the product, crawl evidence contract, review states, persistence, and export paths so every recommendation can be traced to the page, render, source, and run that produced it.',
+    copy: 'I designed the product, crawl evidence contract, review states, persistence, and export paths. The public sample demonstrates bounded source capture, a render-review state, and export artifacts—not the full product surface.',
     href: '/atlas',
   },
   {
@@ -43,7 +43,7 @@ export default function AboutPage() {
   useSEO(ABOUT_SEO);
 
   return (
-    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
+    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-clip bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
       <WireframeGrid tone="dark" className="pointer-events-none absolute inset-0 z-0 opacity-20" />
       <PageTechnicalChrome tone="dark" />
       <ScrollProgress />
@@ -57,7 +57,7 @@ export default function AboutPage() {
           </h1>
           <div className="mt-10 max-w-2xl space-y-5 text-base leading-relaxed text-canvas/70">
             <p>
-              I design and implement crawl, product, and research systems. Atlas is the clearest expression of that work: preserve raw and rendered page states, connect findings to URL-level evidence, and carry reviewed results through persistence and exports.
+              I design and implement crawl, product, and research systems. Atlas is the clearest expression of that work: its public sample preserves bounded source capture, render-review states, traceable findings, and export artifacts, while additional product capabilities remain explicitly labeled by implementation and public-proof status.
             </p>
             <p>
               My implementation work spans React and TypeScript interfaces, Python and SQLite workflows, CSV and JSON exports, analytics, and validation gates. At UT Austin, I am pursuing {formatEducation()} through McCombs and the music program. Music remains a live part of how I think about structure, iteration, and whether an underlying system holds together.

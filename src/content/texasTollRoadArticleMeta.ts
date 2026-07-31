@@ -8,3 +8,8 @@ export const TEXAS_TOLL_ARTICLE_UPDATED = '2026.07.25';
 export const TEXAS_TOLL_ARTICLE_WORD_COUNT = 5748;
 export const TEXAS_TOLL_ARTICLE_READ_TIME = '24 MIN';
 export const TEXAS_TOLL_ARTICLE_IMAGE = '/images/research/texas-toll-roads-reader-hero.webp';
+export const TEXAS_TOLL_ARTICLE_CONCLUSION = {
+  title: 'Ownership is a stack of claims',
+  content:
+    'Texas toll roads separate public title, operating authority, revenue rights, creditor control, and residual equity across different parties. Any investment analysis must follow the toll dollar and concession terms rather than treating the facility’s nameplate owner as the whole capital stack.',
+} as const;

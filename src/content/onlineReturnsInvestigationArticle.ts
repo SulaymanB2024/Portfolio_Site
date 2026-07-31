@@ -33,6 +33,11 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
   author: 'SULAYMAN BOWLES',
   thesis:
     'A refund and a physical return are separate events. The value of retrieving the product depends on the cost of moving it, the cost of learning its condition, and the resale channels still legally and commercially available—not retail price alone.',
+  conclusion: {
+    title: 'Trace value after the refund',
+    content:
+      'A refund ends the customer transaction, not the product’s physical journey. Recovery depends on transport, inspection, condition, fraud controls, and available resale channels, so retail price alone cannot predict the route or environmental endpoint.',
+  },
   evidenceBoundary:
     'This web edition reformats the supplied July 22, 2026 investigation and reverse-logistics workbook. The underlying source ledger was not independently refreshed for publication. Product-level values are analytical scenarios, not disclosed retailer averages, forecasts, accounting measures, or environmental disposition rates. The public auction sample contains two completed lots and is descriptive only.',
   metrics: [

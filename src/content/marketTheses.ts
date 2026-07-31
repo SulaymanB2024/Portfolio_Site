@@ -1,5 +1,6 @@
 import type { InvestmentMemo } from './articleModels';
 import {
+  TEXAS_TOLL_ARTICLE_CONCLUSION,
   TEXAS_TOLL_ARTICLE_DATE,
   TEXAS_TOLL_ARTICLE_DESCRIPTION,
   TEXAS_TOLL_ARTICLE_IMAGE,
@@ -34,6 +35,11 @@ export const INVESTMENT_MEMOS: InvestmentMemo[] = [
     dateModified: '2026.07.16',
     readTime: '12 MIN',
     author: 'SULAYMAN BOWLES',
+    conclusion: {
+      title: 'Archive the question, not a recommendation',
+      content:
+        'The surviving value of these sketches is their evidence contract: network persistence, compute utilization, or monetary transmission would each need current data, explicit units, and falsifiable links before supporting an allocation. None is presented here as a live thesis.',
+    },
     conviction: 'ARCHIVE',
     horizon: 'HISTORICAL',
     allocation: 'NOT ADVICE',
@@ -127,6 +133,7 @@ export const INVESTMENT_MEMOS: InvestmentMemo[] = [
     dateModified: TEXAS_TOLL_ARTICLE_UPDATED,
     readTime: TEXAS_TOLL_ARTICLE_READ_TIME,
     author: 'SULAYMAN BOWLES',
+    conclusion: TEXAS_TOLL_ARTICLE_CONCLUSION,
     conviction: 'SOURCE-LED',
     horizon: '2026 OWNERSHIP MAP',
     allocation: 'EDUCATIONAL RESEARCH',

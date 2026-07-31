@@ -34,7 +34,7 @@ export type ArticlePublicationMeta = {
     dateTime: string;
     value: ReactNode;
   };
-  updated: {
+  updated?: {
     dateTime: string;
     value: ReactNode;
   };
@@ -85,7 +85,10 @@ export type ArticleReaderConfig = {
     content: ReactNode;
   };
   endnote?: {
+    label: ReactNode;
+    title: ReactNode;
     content: ReactNode;
+    note?: ReactNode;
     links: Array<{ href: string; label: string }>;
   };
 };
@@ -132,7 +135,7 @@ function ArticlePage({
       tone="light"
       className={`article-reader article-reader--${mode} ${className}`}
     >
-      <ScrollProgress />
+      <ScrollProgress tone="dark" />
       <InternalHeader activePath={activePath} tone="light" minimalBrand />
       {children}
       <PageFrame className="pb-8">
@@ -261,6 +264,7 @@ function ArticleHero({
               <img
                 src={image.src}
                 alt={image.alt}
+                loading="eager"
                 decoding="async"
                 fetchPriority="high"
                 style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
@@ -371,19 +375,27 @@ function ArticleCallout({
 }
 
 function publicationItems(publication: ArticlePublicationMeta): ArticleMetaItem[] {
-  return [
+  const items: ArticleMetaItem[] = [
     { label: 'Subject', value: publication.subject },
     {
       label: 'Published',
       value: <time dateTime={publication.published.dateTime}>{publication.published.value}</time>,
     },
-    {
+  ];
+
+  if (publication.updated && publication.updated.dateTime !== publication.published.dateTime) {
+    items.push({
       label: 'Updated',
       value: <time dateTime={publication.updated.dateTime}>{publication.updated.value}</time>,
-    },
+    });
+  }
+
+  items.push(
     { label: 'Read time', value: publication.readTime },
     { label: 'Evidence', value: publication.evidence },
-  ];
+  );
+
+  return items;
 }
 
 export function ArticleReader({
@@ -430,7 +442,12 @@ export function ArticleReader({
       >
         {children}
         {config.endnote ? (
-          <ArticleEndnote links={config.endnote.links}>
+          <ArticleEndnote
+            label={config.endnote.label}
+            title={config.endnote.title}
+            note={config.endnote.note}
+            links={config.endnote.links}
+          >
             {config.endnote.content}
           </ArticleEndnote>
         ) : null}
@@ -640,16 +657,23 @@ function ArticleBody({
 
         <ReaderPanel className="article-reader__content">
           {children}
-          {mode === 'narrative' && items.length ? (
-            <nav className="article-reader__chapter-nav" aria-label="Chapter navigation">
+          {mode === 'narrative' && items.length > 1 ? (
+            <nav
+              className={`article-reader__chapter-nav ${
+                activeIndex === 0 || activeIndex === items.length - 1
+                  ? 'article-reader__chapter-nav--single'
+                  : ''
+              }`}
+              aria-label="Chapter navigation"
+            >
               {activeIndex > 0 ? (
-                <a href={`#${items[activeIndex - 1].id}`}>
+                <a href={`#${items[activeIndex - 1].id}`} data-direction="previous">
                   <span>Previous</span>
                   <strong>{items[activeIndex - 1].label}</strong>
                 </a>
-              ) : <span />}
+              ) : null}
               {activeIndex < items.length - 1 ? (
-                <a href={`#${items[activeIndex + 1].id}`}>
+                <a href={`#${items[activeIndex + 1].id}`} data-direction="next">
                   <span>Next</span>
                   <strong>{items[activeIndex + 1].label}</strong>
                 </a>
@@ -679,9 +703,15 @@ export function ArticleSectionHeader({
 
 function ArticleEndnote({
   children,
+  label,
+  title,
+  note,
   links,
 }: {
   children: ReactNode;
+  label: ReactNode;
+  title: ReactNode;
+  note?: ReactNode;
   links: Array<{ href: string; label: string }>;
 }) {
   const uniqueLinks = links.filter(
@@ -689,8 +719,17 @@ function ArticleEndnote({
   );
 
   return (
-    <footer className="article-reader__endnote">
-      <p>{children}</p>
+    <footer
+      id="article-conclusion"
+      className="article-reader__endnote"
+      aria-labelledby="article-conclusion-title"
+    >
+      <div className="article-reader__endnote-copy">
+        <span>{label}</span>
+        <h2 id="article-conclusion-title">{title}</h2>
+        <p>{children}</p>
+        {note ? <p className="article-reader__endnote-note">{note}</p> : null}
+      </div>
       <nav aria-label="Related reading">
         {uniqueLinks.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
       </nav>

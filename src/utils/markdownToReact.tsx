@@ -147,10 +147,41 @@ export function markdownToReact(markdown: string): ReactNode[] {
         index += 1;
       }
       blocks.push(
-        <div key={key} className="article-table-wrap">
-          <table>
+        <div
+          key={key}
+          className="article-table-wrap"
+          role="region"
+          aria-label={`Data table with fields: ${headers.join(', ')}. Scroll horizontally to inspect every field.`}
+          tabIndex={0}
+        >
+          <table data-responsive-table="stacked" aria-label={`Data table with fields: ${headers.join(', ')}`}>
             <thead><tr>{headers.map((cell, cellIndex) => <th key={`${key}-head-${cellIndex}`}>{renderInline(cell, `${key}-head-${cellIndex}`)}</th>)}</tr></thead>
-            <tbody>{rows.map((row, rowIndex) => <tr key={`${key}-row-${rowIndex}`}>{row.map((cell, cellIndex) => <td key={`${key}-cell-${rowIndex}-${cellIndex}`}>{renderInline(cell, `${key}-cell-${rowIndex}-${cellIndex}`)}</td>)}</tr>)}</tbody>
+            <tbody>
+              {rows.map((row, rowIndex) => (
+                <tr key={`${key}-row-${rowIndex}`}>
+                  {row.map((cell, cellIndex) => (
+                    cellIndex === 0
+                      ? (
+                          <th
+                            key={`${key}-cell-${rowIndex}-${cellIndex}`}
+                            scope="row"
+                            data-label={headers[cellIndex] ?? 'Record'}
+                          >
+                            {renderInline(cell, `${key}-cell-${rowIndex}-${cellIndex}`)}
+                          </th>
+                        )
+                      : (
+                          <td
+                            key={`${key}-cell-${rowIndex}-${cellIndex}`}
+                            data-label={headers[cellIndex] ?? `Field ${cellIndex + 1}`}
+                          >
+                            {renderInline(cell, `${key}-cell-${rowIndex}-${cellIndex}`)}
+                          </td>
+                        )
+                  ))}
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>,
       );

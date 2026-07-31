@@ -14,7 +14,7 @@ export function PageShell({
   return (
     <main
       className={cx(
-        'relative min-h-screen overflow-x-hidden font-sans antialiased',
+        'relative min-h-screen overflow-x-clip font-sans antialiased',
         tone === 'dark' ? 'site-page site-page-dark' : 'site-page site-page-light',
         tone === 'dark'
           ? 'bg-ink text-canvas selection:bg-canvas selection:text-ink'
@@ -85,7 +85,7 @@ export function PageHero({
 export function SectionEyebrow({ className, ...props }: ComponentPropsWithoutRef<'p'>) {
   return (
     <p
-      className={cx('text-[10px] uppercase tracking-[0.28em] text-current/48', className)}
+      className={cx('text-[10px] uppercase tracking-[0.28em] text-current/64', className)}
       {...props}
     />
   );

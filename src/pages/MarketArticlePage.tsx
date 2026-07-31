@@ -18,6 +18,7 @@ import {
 import { RESEARCH_ARTICLES } from '../content/researchArticles';
 import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
+import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
 import { useSEO } from '../utils/seo';
 
 function StructuredArticleSections({
@@ -63,10 +64,18 @@ function StructuredArticleSections({
             <figure className="toll-data-table research-guide-table">
               <figcaption className="article-reader__table-caption">
                 <span>{section.table.caption}</span>
-                <small>Scroll horizontally to inspect every field</small>
+                <small>
+                  <span className="md:hidden">Fields are grouped by record below</span>
+                  <span className="hidden md:inline">Scroll horizontally to inspect every field</span>
+                </small>
               </figcaption>
-              <div className="toll-data-table__scroll">
-                <table>
+              <div
+                className="toll-data-table__scroll"
+                role="region"
+                aria-label={`${section.table.caption}. Scroll horizontally to inspect every field.`}
+                tabIndex={0}
+              >
+                <table data-responsive-table="stacked">
                   <caption className="sr-only">{section.table.caption}</caption>
                   <thead>
                     <tr>
@@ -78,8 +87,8 @@ function StructuredArticleSections({
                       <tr key={row.join('|')}>
                         {row.map((cell, index) => (
                           index === 0
-                            ? <th key={`${index}-${cell}`} scope="row">{cell}</th>
-                            : <td key={`${index}-${cell}`} className={index === 1 ? 'research-guide-table__agent' : undefined}>{cell}</td>
+                            ? <th key={`${index}-${cell}`} scope="row" data-label={section.table?.columns[index] ?? 'Record'}>{cell}</th>
+                            : <td key={`${index}-${cell}`} data-label={section.table?.columns[index] ?? `Field ${index + 1}`} className={index === 1 ? 'research-guide-table__agent' : undefined}>{cell}</td>
                         ))}
                       </tr>
                     ))}
@@ -99,7 +108,7 @@ function StructuredArticleSections({
                     <p>{example.description}</p>
                   </figcaption>
                   <pre tabIndex={0}><code>{example.code}</code></pre>
-                  <p className="research-guide-code__format">Copy-ready {example.language}</p>
+                  <p className="research-guide-code__format">Review before release · {example.language}</p>
                 </figure>
               ))}
             </div>
@@ -128,7 +137,11 @@ function SourceLedger({
             <span className="toll-source-ledger__id">{String(index + 1).padStart(2, '0')}</span>
             <div>
               <strong>{source.label}</strong>
-              <p>{source.lastVerified ? `Last verified ${source.lastVerified}.` : 'Supporting reference.'}</p>
+              <p>
+                {source.lastVerified
+                  ? `Last verified ${formatPublicationDate(source.lastVerified)}.`
+                  : 'Verification date not recorded in this web edition.'}
+              </p>
               <div className="toll-source-ledger__links">
                 <a href={source.href} target="_blank" rel="noreferrer">Open source</a>
               </div>
@@ -155,7 +168,7 @@ function ArticleResources({
         Downloads
       </ArticleSectionHeader>
       <p className="article-reader__resources-intro">
-        The formatted article is the reading layer. These files preserve the supplied report, live model, and full-resolution figures.
+        These downloads contain the reports, datasets, models, or figures available for this article.
       </p>
       <ul>
         {article.resources.map((resource) => (
@@ -221,9 +234,11 @@ function GenericArticle({
   const backHref = investmentMemo ? '/markets' : '/research';
   const backLabel = investmentMemo ? 'Markets archive' : 'Research archive';
   const boundary = investmentMemo ? article.recommendationBoundary : article.evidenceBoundary;
+  const modifiedDate = article.dateModified ?? article.date;
+  const hasDistinctModifiedDate = normalizePublicationDate(modifiedDate) !== normalizePublicationDate(article.date);
   const metrics = article.metrics ?? [
     { label: 'Category', value: article.category },
-    { label: 'Updated', value: article.dateModified ?? article.date },
+    { label: hasDistinctModifiedDate ? 'Updated' : 'Published', value: formatPublicationDate(modifiedDate) },
     { label: 'Sources', value: String(article.sources.length) },
   ];
   const sections = article.sections;
@@ -282,15 +297,17 @@ function GenericArticle({
     publication: {
       subject: article.category,
       published: {
-        dateTime: article.date.replaceAll('.', '-'),
-        value: article.date,
+        dateTime: normalizePublicationDate(article.date),
+        value: formatPublicationDate(article.date),
       },
-      updated: {
-        dateTime: (article.dateModified ?? article.date).replaceAll('.', '-'),
-        value: article.dateModified ?? article.date,
-      },
+      updated: hasDistinctModifiedDate
+        ? {
+            dateTime: normalizePublicationDate(modifiedDate),
+            value: formatPublicationDate(modifiedDate),
+          }
+        : undefined,
       readTime: article.readTime,
-      evidence: `${String(article.sources.length).padStart(2, '0')} sources`,
+      evidence: `${article.sources.length} public source ${article.sources.length === 1 ? 'record' : 'records'}`,
     },
     metrics: metrics.slice(0, 4).map((metric) => ({
       label: metric.label,
@@ -306,11 +323,14 @@ function GenericArticle({
         }
       : undefined,
     endnote: {
-      content: (
+      label: investmentMemo ? 'Decision frame' : 'Conclusion',
+      title: article.conclusion.title,
+      content: article.conclusion.content,
+      note: (
         <>
           Research cutoff: {article.kind === 'research'
-            ? article.lastVerified ?? article.dateModified ?? article.date
-            : article.dateModified ?? article.date}.
+            ? formatPublicationDate(article.lastVerified ?? modifiedDate)
+            : formatPublicationDate(modifiedDate)}.
           {' '}Public evidence and provider behavior can change; verify current sources before acting.
         </>
       ),

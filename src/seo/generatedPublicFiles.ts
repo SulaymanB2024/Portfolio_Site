@@ -4,7 +4,7 @@ import {
   TEXAS_TOLL_OWNERSHIP_CSV_PATH,
   TEXAS_TOLL_OWNERSHIP_ROWS,
 } from '../content/texasTollRoadOwnership';
-import { VIRALBENCH_ARTICLE_PATH, VIRALBENCH_ARTICLE_TITLE } from '../content/viralBenchArticle';
+import { VIRALBENCH_ARTICLE_PATH, VIRALBENCH_ARTICLE_TITLE } from '../content/viralBenchArticleMeta';
 import { ARTICLE_SEARCH_TARGETS } from './articleSearchTargets';
 import { getCanonicalRoutes, SITE_LASTMOD } from './routes';
 import { absoluteUrl, PERSON_ID } from './site';

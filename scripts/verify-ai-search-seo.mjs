@@ -87,9 +87,9 @@ const research = read('dist/research/index.html');
 assert(textFromHtml(research).includes('25 Notes and Artifacts'), 'research: publication count is not derived as twenty-five');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
 assert(textFromHtml(research).includes('Who Owns Austin’s Home-Service Companies?'), 'research: Austin home-service ownership article missing');
-assert(textFromHtml(research).includes('The Hidden Financing Behind Hardware Startups'), 'research: Waymo financing article missing');
+assert(textFromHtml(research).includes('Who Funds Waymo’s Hardware?'), 'research: Waymo financing article missing');
 assert(textFromHtml(research).includes('How Airlines Borrow Against Loyalty Programs'), 'research: airline loyalty financing article missing');
-assert(textFromHtml(research).includes('Who Owns the Apartments Around Campus?'), 'research: West Campus housing article missing');
+assert(textFromHtml(research).includes('Who Owns West Campus Student Housing?'), 'research: West Campus housing article missing');
 assert(textFromHtml(research).includes('What Happens When an Index Decides a Company Matters?'), 'research: index-company article missing');
 
 const aiManagers = read('dist/research/ai-systems/the-first-ai-managers/index.html');
@@ -209,7 +209,7 @@ for (const href of [
 
 const waymo = read('dist/research/financial-systems/waymo-hardware-financing/index.html');
 for (const expected of [
-  'The Hidden Financing Behind Hardware Startups',
+  'Who Funds Waymo’s Hardware?',
   '$27.1B–$27.35B',
   'Counterfactual fleet-debt coverage',
   'Which structures actually scale',
@@ -230,7 +230,7 @@ for (const href of [
 
 const westCampus = read('dist/research/financial-systems/west-campus-student-housing/index.html');
 for (const expected of [
-  'Who Owns the Apartments Around Campus?',
+  'Who Owns West Campus Student Housing?',
   '4,805 BEDS',
   'High property margins are not high owner returns',
   'Modeled refinancing gap under the combined stress',

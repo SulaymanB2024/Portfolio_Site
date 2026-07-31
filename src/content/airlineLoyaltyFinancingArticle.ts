@@ -34,6 +34,11 @@ export const AIRLINE_LOYALTY_FINANCING_ARTICLE: ResearchArticle = {
   author: 'SULAYMAN BOWLES',
   thesis:
     'Airlines do not borrow against points as if miles were customer deposits. They borrow against recurring partner receipts and the contracts, accounts, intellectual property, data rights, reserves, and intercompany payments that make those receipts durable and controllable.',
+  conclusion: {
+    title: 'The collateral is the partner-cash system',
+    content:
+      'Loyalty-backed borrowing depends on recurring partner receipts and the contracts, accounts, intellectual property, reserves, and intercompany controls around them—not on treating miles as deposits. Stress analysis must follow that cash waterfall without substituting modeled point economics for undisclosed contract terms.',
+  },
   evidenceBoundary:
     'This web edition reformats the supplied July 23, 2026 investigation and its embedded exhibits. The underlying sources were not independently refreshed for publication. Reported values retain the source package’s evidence cutoff; derived, estimated, management-defined, and pro forma values remain labeled. Point prices, revenue allocations, redemption costs, valuation ranges, and stress cases are analytical estimates—not disclosed contract terms, forecasts, covenant calculations, appraisals, or investment recommendations.',
   metrics: [

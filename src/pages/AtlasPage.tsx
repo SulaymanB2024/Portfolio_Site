@@ -84,9 +84,9 @@ const mobileHeroLinks = [
 ];
 
 const capabilityStatus = [
-  { capability: 'Native crawl inventory', status: 'Shipped', proof: 'Open-corpus demonstration', href: '/atlas/sample-crawl' },
-  { capability: 'Raw / rendered evidence', status: 'Shipped', proof: 'Evidence model below', href: '#atlas-evidence' },
-  { capability: 'Run persistence and exports', status: 'Shipped / partial', proof: 'Technical architecture below', href: '#atlas-technical' },
+  { capability: 'Native crawl inventory', status: 'Publicly demonstrated', proof: 'Bounded open-corpus source capture', href: '/atlas/sample-crawl' },
+  { capability: 'Raw / rendered evidence', status: 'Implemented / proof partial', proof: 'Source capture plus a render-review state; no public browser trace', href: '#atlas-evidence' },
+  { capability: 'Run persistence and exports', status: 'Implemented / proof partial', proof: 'CSV/JSON sample; runtime persistence is not publicly demonstrated', href: '#atlas-technical' },
   { capability: 'Provider mesh', status: 'Prototype', proof: 'Measurement gaps remain explicit', href: '#atlas-technical' },
   { capability: 'Scoring policy', status: 'In development', proof: 'Review gate remains authoritative', href: '#atlas-technical' },
   { capability: 'Client handoff', status: 'Partial', proof: 'Public demonstration package, not a client deliverable', href: '/atlas/sample-crawl' },
@@ -184,8 +184,6 @@ const coverageRows = [
     gap: 'Uncrawled in this bounded snapshot',
     next: 'Add to next manifest',
   },
-  {
-  },
 ];
 
 const coverageMetrics = [
@@ -214,17 +212,14 @@ const coverageLadder = [
 ];
 
 const terminalLines = [
-  '# bounded public demonstration; not a private client run',
-  '$ atlas audit --seed https://quotes.toscrape.com/js/ --render',
-  'Opening crawl ledger...',
-  '2 seed pages captured from the versioned manifest',
-  'Drawing evidence states...',
-  'static_source=1 render_review_required=1',
-  'Extracting titles, canonicals, links, source content, and runtime indicators',
-  'Binding observations to finding chains...',
-  '3 reviewable findings with confidence and claim limits',
-  'No client actions generated from demonstration data',
-  'Export package sealed with seed URLs, run ID, and boundaries',
+  'Public sample summary — not a live CLI transcript',
+  'Corpus: Quotes to Scrape',
+  'Seed pages: 2',
+  'Completed browser traces: 0',
+  'Render review required: 1',
+  'Reviewable findings: 3',
+  'Artifacts: CSV + JSON',
+  'Claim limit: demonstration only; not a corpus-owner audit',
 ];
 
 const issueRows = [
@@ -358,9 +353,9 @@ export default function AtlasPage() {
       <section
         ref={heroRef}
         id="atlas-hero"
-        className="relative h-[118svh] overflow-visible md:h-[165svh]"
+        className={`relative overflow-visible ${prefersReducedMotion ? 'min-h-[100svh]' : 'h-[118svh] md:h-[165svh]'}`}
       >
-        <div className="sticky top-0 z-10 min-h-[100svh] overflow-hidden px-4 pt-32 md:px-8 md:pt-36 xl:px-10">
+        <div className={`${prefersReducedMotion ? 'relative' : 'sticky top-0'} z-10 min-h-[100svh] overflow-hidden px-4 pt-32 md:px-8 md:pt-36 xl:px-10`}>
           <motion.div
             className="pointer-events-none absolute left-[calc(50%-5rem)] top-[50%] z-[3] hidden w-px origin-top bg-ink/42 md:block lg:left-[calc(50%-6.75rem)]"
             style={prefersReducedMotion ? { height: '46%', opacity: 0.42 } : { height: heroSpineHeight, opacity: heroSpineOpacity }}
@@ -400,26 +395,34 @@ export default function AtlasPage() {
                   </span>
                 </span>
               </h1>
-              <p className="mt-6 max-w-[26rem] text-sm leading-relaxed tracking-normal text-ink/48 md:text-[15px]">
-                A technical audit drawn like a map: every page located, every claim traced,
-                every recommendation tied to source data.
+              <p className="mt-6 max-w-[26rem] text-sm leading-relaxed tracking-normal text-ink/64 md:text-[15px]">
+                A technical audit drawn like a map: captured pages located, public findings
+                tied to evidence, and unmeasured states left explicit.
               </p>
               <a
                 href="/atlas#atlas-methodology"
                 id="atlas-view-methodology-link"
-                className="mt-8 inline-block border-b border-ink/18 pb-1 font-serif text-sm italic tracking-normal text-ink/45 transition-colors hover:border-ink/45 hover:text-ink/72"
+                className="mt-8 inline-block border-b border-ink/28 pb-1 font-serif text-sm italic tracking-normal text-ink/68 transition-colors hover:border-ink/55 hover:text-ink"
               >
                 View methodology
               </a>
-              <nav className="mt-7 hidden max-w-[27rem] gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/52 md:grid" aria-label="Atlas sample links">
+              <nav className="mt-6 flex flex-wrap items-center gap-3 md:hidden" aria-label="Atlas primary actions">
+                <a href="/atlas/sample-crawl" className="inline-flex min-h-11 items-center border-b border-ink/28 text-[10px] uppercase tracking-[0.18em] text-ink/70">
+                  Inspect the public sample
+                </a>
+                <a href="/contact" className="inline-flex min-h-11 items-center bg-ink px-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-canvas">
+                  Request an audit
+                </a>
+              </nav>
+              <nav className="mt-7 hidden max-w-[27rem] gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/64 md:grid" aria-label="Atlas sample links">
                 <a href="/atlas/sample-crawl" className="group grid min-h-11 w-full border-y border-ink/16 py-3 transition-colors hover:border-ink/40 hover:text-ink/78 md:w-fit md:min-h-0 md:border-b md:border-t-0 md:py-1">
-                  <span>See an Atlas sample crawl run</span>
+                  <span>Inspect the public sample</span>
+                </a>
+                <a href="/contact" className="inline-flex min-h-11 w-fit items-center bg-ink px-4 font-semibold text-canvas transition-colors hover:bg-ink/84">
+                  Request an audit
                 </a>
                 <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
-                  View GitHub repo
-                </a>
-                <a href="/contact" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
-                  Request an audit
+                  View the audit CLI
                 </a>
               </nav>
             </motion.div>
@@ -435,9 +438,9 @@ export default function AtlasPage() {
       <section
         ref={methodologyRef}
         id="atlas-methodology"
-        className="relative min-h-[104svh] scroll-mt-28 overflow-hidden border-t border-b border-ink/12 px-4 py-24 md:px-8 md:py-28 xl:px-10"
+        className={`relative scroll-mt-28 overflow-hidden border-t border-b border-ink/12 px-4 py-24 md:px-8 md:py-28 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[104svh]'}`}
       >
-        <div className="relative z-10 mx-auto grid min-h-[calc(100svh-12rem)] w-full max-w-[1480px] items-center gap-10 md:grid-cols-[minmax(10rem,0.38fr)_minmax(0,0.84fr)_minmax(18rem,0.78fr)] md:gap-12 lg:px-10">
+        <div className={`relative z-10 mx-auto grid w-full max-w-[1480px] items-center gap-10 md:grid-cols-[minmax(10rem,0.38fr)_minmax(0,0.84fr)_minmax(18rem,0.78fr)] md:gap-12 lg:px-10 ${prefersReducedMotion ? '' : 'min-h-[calc(100svh-12rem)]'}`}>
           <motion.div
             style={prefersReducedMotion ? undefined : { opacity: methodologyContentOpacity, y: methodologyContentY }}
             className="self-start md:pt-6"
@@ -616,7 +619,7 @@ function EvidenceSection({
   frameOpacity: MotionValue<number>;
 }) {
   return (
-    <section ref={sectionRef} id="atlas-evidence" className="relative min-h-[108svh] scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10">
+    <section ref={sectionRef} id="atlas-evidence" className={`relative scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[108svh]'}`}>
       <motion.div
         className="pointer-events-none absolute right-[-20rem] top-8 hidden h-[52rem] w-[52rem] md:block"
         style={{ ...widePlateMaskStyle, opacity: plateOpacity }}
@@ -777,7 +780,7 @@ function EvidenceSection({
 
 function CoverageSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section id="atlas-coverage" className="relative min-h-[112svh] scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10">
+    <section id="atlas-coverage" className={`relative scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[112svh]'}`}>
       <div
         className="pointer-events-none absolute -left-[18rem] top-16 h-[42rem] w-[42rem] opacity-[0.13] md:-left-[8rem] md:top-20 md:h-[54rem] md:w-[54rem]"
         style={widePlateMaskStyle}
@@ -902,7 +905,7 @@ function CoverageSection({ prefersReducedMotion }: { prefersReducedMotion: boole
 
 function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section id="atlas-technical" className="relative min-h-[112svh] scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10">
+    <section id="atlas-technical" className={`relative scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[112svh]'}`}>
       <div className="pointer-events-none absolute left-1/2 top-4 hidden w-[112rem] max-w-none -translate-x-1/2 opacity-[0.17] md:block" aria-hidden="true">
         <img
           src={ATLAS_ASSETS.celestialArc}
@@ -956,8 +959,8 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
           className="relative overflow-hidden border border-ink/14 bg-canvas-dark/72 p-5 shadow-[0_10px_34px_color-mix(in_srgb,var(--color-ink)_2.5%,transparent)]"
         >
           <div className="mb-5 flex items-center justify-between border-b border-ink/10 pb-4 text-[9px] uppercase tracking-[0.22em] text-ink/44">
-            <span>Run ledger</span>
-            <span>atlas.audit</span>
+            <span>Illustrative operator flow</span>
+            <span>public package: source capture only</span>
           </div>
           <div className="mb-6 grid gap-0 border-b border-ink/10 pb-5 md:grid-cols-4">
             {technicalFlow.map((step) => (
@@ -996,6 +999,7 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
         >
           <h3 className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/62">Review queue</h3>
           <table className="mt-5 w-full text-left text-xs text-ink/58">
+            <caption className="sr-only">Illustrative Atlas review queue with issue, evidence, and impact columns</caption>
             <thead className="border-b border-ink/14 text-[10px] uppercase tracking-[0.18em] text-ink/48">
               <tr>
                 <th className="pb-3 font-medium">Issue</th>
@@ -1054,7 +1058,7 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
 
 function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section id="atlas-final" className="relative min-h-[112svh] scroll-mt-28 overflow-hidden px-4 py-28 md:px-8 md:py-36 xl:px-10">
+    <section id="atlas-final" className={`relative scroll-mt-28 overflow-hidden px-4 py-28 md:px-8 md:py-36 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[112svh]'}`}>
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <img
           src={ATLAS_ASSETS.atlasFigurePortrait}
@@ -1087,7 +1091,7 @@ function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boo
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto grid min-h-[calc(100svh-14rem)] w-full max-w-[1480px] items-center gap-14 md:grid-cols-[minmax(18rem,0.82fr)_minmax(0,1fr)] lg:px-10">
+      <div className={`relative z-10 mx-auto grid w-full max-w-[1480px] items-center gap-14 md:grid-cols-[minmax(18rem,0.82fr)_minmax(0,1fr)] lg:px-10 ${prefersReducedMotion ? '' : 'min-h-[calc(100svh-14rem)]'}`}>
         <motion.div {...(prefersReducedMotion ? {} : gentleReveal)} className="max-w-[33rem]">
           <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
             ATLAS ENGINE

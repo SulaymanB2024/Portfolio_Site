@@ -3,13 +3,15 @@ import { useEffect } from 'react';
 import { InternalFooter } from '../components/InternalFooter';
 import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
-import { PUBLIC_MARKET_THESES } from '../content/marketTheses';
+import { PUBLICATION_INDEX } from '../content/publicationIndex';
 import { RESEARCH_ASSETS } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
+import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
 import { useSEO } from '../utils/seo';
 
 const MARKETS_SEO = getSeoRoute('/markets')!;
 const COIN_ART = '/images/markets/noise-expansion-coin-alpha.png';
+const MARKET_PUBLICATIONS = PUBLICATION_INDEX.filter((item) => item.category === 'Markets and investing');
 
 export default function MarketsPage() {
   useSEO(MARKETS_SEO);
@@ -19,7 +21,7 @@ export default function MarketsPage() {
   }, []);
 
   return (
-    <main id="top" className="min-h-screen overflow-x-hidden bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
+    <main id="top" className="min-h-screen overflow-x-clip bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
       <PageTechnicalChrome tone="light" />
       <InternalHeader activePath="/research" tone="light" />
 
@@ -45,8 +47,8 @@ export default function MarketsPage() {
       <section id="investment-research" className="mx-auto w-full max-w-[1480px] border-y border-ink/14 px-4 py-16 md:px-8 md:py-24 xl:px-10">
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.42fr_0.58fr] lg:items-end">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.28em] text-ink/60">Current research</p>
-            <h2 className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">Source-led, not promotional.</h2>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-ink/60">{MARKET_PUBLICATIONS.length} public records</p>
+            <h2 className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">The finance archive.</h2>
           </div>
           <p className="max-w-2xl text-sm leading-relaxed text-ink/64">
             Every current item must distinguish public facts, analyst inference, missing information, and recommendation limits. Archived drafts remain noindexed and are not presented as current views.
@@ -54,15 +56,17 @@ export default function MarketsPage() {
         </div>
 
         <div className="divide-y divide-ink/14 border-y border-ink/14">
-          {PUBLIC_MARKET_THESES.map((memo, index) => (
-            <a key={memo.slug} href={`/markets/${memo.slug}`} className="group grid gap-5 py-7 transition-colors hover:bg-ink/[0.025] md:grid-cols-[72px_minmax(0,1fr)_minmax(180px,0.24fr)] md:items-center md:px-4">
+          {MARKET_PUBLICATIONS.map((memo, index) => (
+            <a key={memo.href} href={memo.href} className="group grid gap-5 py-7 transition-colors hover:bg-ink/[0.025] md:grid-cols-[72px_minmax(0,1fr)_minmax(180px,0.24fr)] md:items-center md:px-4">
               <span className="font-serif text-xl italic text-ink/60">{String(index + 1).padStart(2, '0')}</span>
               <span>
                 <span className="block text-[11px] uppercase tracking-[0.24em] text-ink">{memo.title}</span>
-                <span className="mt-2 block max-w-3xl text-sm leading-relaxed text-ink/64">{memo.subtitle}</span>
-                <span className="mt-3 block text-[10px] uppercase tracking-[0.18em] text-ink/60">{memo.category} / {memo.readTime} / {memo.sources.length} sources</span>
+                <span className="mt-2 block max-w-3xl text-sm leading-relaxed text-ink/64">{memo.description}</span>
+                <span className="mt-3 block text-[10px] uppercase tracking-[0.18em] text-ink/60">Finance &amp; ownership / public research record</span>
               </span>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-ink/64 md:text-right">{memo.date}</span>
+              <time dateTime={normalizePublicationDate(memo.date)} className="text-[10px] uppercase tracking-[0.22em] text-ink/64 md:text-right">
+                {formatPublicationDate(memo.date)}
+              </time>
             </a>
           ))}
         </div>

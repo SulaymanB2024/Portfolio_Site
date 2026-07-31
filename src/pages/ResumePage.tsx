@@ -14,7 +14,7 @@ const RESUME_PDF_PATH = '/Sulayman_Bowles_Resume.pdf';
 
 const supportingLinks = [
   { label: 'Atlas', href: '/atlas', meta: 'Product and public crawl evidence' },
-  { label: 'Selected Work', href: '/work', meta: 'Six inspectable artifacts' },
+  { label: 'Selected Work', href: '/work', meta: 'Six inspectable public records' },
   { label: 'Research', href: '/research', meta: 'Search, product, and markets notes' },
   { label: 'GitHub', href: PROFILE_FACTS.canonicalLinks.github, meta: 'Public code profile' },
   { label: 'LinkedIn', href: PROFILE_FACTS.canonicalLinks.linkedin, meta: 'Professional profile' },
@@ -41,7 +41,7 @@ export default function ResumePage() {
   }, []);
 
   return (
-    <main className="site-page site-page-light relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink antialiased selection:bg-ink selection:text-canvas">
+    <main className="site-page site-page-light relative min-h-screen overflow-x-clip bg-canvas font-sans text-ink antialiased selection:bg-ink selection:text-canvas">
       <WireframeGrid tone="light" className="pointer-events-none absolute inset-0 z-0 opacity-40 print:hidden" />
       <PageTechnicalChrome tone="light" />
       <ScrollProgress tone="dark" />
@@ -156,15 +156,27 @@ export default function ResumePage() {
           </div>
         </Section>
 
-        <Section label="06" title="Dated public proof">
+        <Section label="06" title="Dated public claims and supporting records">
           <div className="grid gap-px overflow-hidden border border-ink/14 md:grid-cols-2 xl:grid-cols-3">
-            {PROFILE_FACTS.proofClaims.map((item) => (
-              <a key={item.label} href={item.publicSource} className="min-h-[190px] bg-ink/[0.018] p-5 transition-colors hover:bg-ink hover:text-canvas">
-                <span className="text-[10px] uppercase tracking-[0.22em] text-inherit opacity-72">As of {formatIsoDate(item.asOf)}</span>
-                <strong className="mt-6 block text-xs uppercase tracking-[0.2em] text-inherit">{item.label}</strong>
-                <span className="mt-4 block text-sm leading-relaxed text-inherit opacity-78">{item.claim}</span>
-              </a>
-            ))}
+            {PROFILE_FACTS.proofClaims.map((item) => {
+              const content = (
+                <>
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-inherit opacity-72">As of {formatIsoDate(item.asOf)}</span>
+                  <strong className="mt-6 block text-xs uppercase tracking-[0.2em] text-inherit">{item.label}</strong>
+                  <span className="mt-4 block text-sm leading-relaxed text-inherit opacity-78">{item.claim}</span>
+                </>
+              );
+
+              return item.publicSource ? (
+                <a key={item.label} href={item.publicSource} className="min-h-[190px] bg-ink/[0.018] p-5 transition-colors hover:bg-ink hover:text-canvas">
+                  {content}
+                </a>
+              ) : (
+                <article key={item.label} className="min-h-[190px] bg-ink/[0.018] p-5">
+                  {content}
+                </article>
+              );
+            })}
           </div>
         </Section>
 

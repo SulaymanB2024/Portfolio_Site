@@ -1,16 +1,15 @@
-import { ALL_ARTICLES, getArticleAliases, getArticlePath } from '../content/articleRegistry';
-import { isInvestmentMemo } from '../content/articleModels';
+import { ARTICLE_ROUTE_METADATA } from '../content/articleRouteMetadata';
 import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
 import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
-  VIRALBENCH_ARTICLE_EXCERPT,
   VIRALBENCH_ARTICLE_MODIFIED_DATE,
   VIRALBENCH_ARTICLE_PATH,
   VIRALBENCH_ARTICLE_SEO_TITLE,
   VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
+  VIRALBENCH_ARTICLE_STATIC_SUMMARY,
   VIRALBENCH_ARTICLE_TITLE,
-} from '../content/viralBenchArticle';
+} from '../content/viralBenchArticleMeta';
 import {
   aboutJsonLd,
   austinTechnicalSeoJsonLd,
@@ -28,7 +27,6 @@ import {
   workJsonLd,
   type JsonLd,
 } from './schema';
-import { getArticleSearchTarget } from './articleSearchTargets';
 
 export type RouteSection =
   | 'home'
@@ -49,6 +47,7 @@ export interface SeoRoute {
   title: string;
   description: string;
   h1: string;
+  displayH1?: string;
   section: RouteSection;
   pageType: 'website' | 'profile' | 'project' | 'service' | 'research' | 'article';
   priority: number;
@@ -73,14 +72,13 @@ const ATLAS_OG_IMAGE = '/images/social/og-atlas.png';
 const WORK_OG_IMAGE = '/images/social/og-work.png';
 const VOID_OG_IMAGE = '/images/social/og-void.png';
 const RESEARCH_OG_IMAGE = '/images/social/og-research.png';
-const VIRALBENCH_SEARCH_TARGET = getArticleSearchTarget(VIRALBENCH_ARTICLE_PATH);
-
 export const NOT_FOUND_ROUTE: SeoRoute = {
   path: '/404',
   aliases: [],
   title: 'Page Not Found | Sulayman Bowles',
   description: 'The requested page is not part of the current public record for sulayman-bowles.dev.',
   h1: 'Page Not Found',
+  displayH1: 'This page is not part of the record.',
   section: 'source-information',
   pageType: 'website',
   priority: 0,
@@ -95,9 +93,9 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/',
     aliases: [],
-    title: 'Sulayman Bowles | Technical SEO, AI Systems & Research',
+    title: 'Sulayman Bowles | Technical SEO, AI Systems & Finance Research',
     description:
-      'Technical SEO, AI product, crawl systems, analytics, and source-led investment research from Sulayman Bowles, builder of Atlas and founder of Void Agency.',
+      'Technical SEO, AI systems, and finance research from Sulayman Bowles, builder of Atlas and founder of Void Agency.',
     h1: 'Sulayman Bowles',
     section: 'home',
     pageType: 'website',
@@ -116,6 +114,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Technical SEO portfolio and AI systems work from Sulayman Bowles, including Atlas crawl software, audit methods, analytics, research, and public evidence.',
     h1: 'Selected Work',
+    displayH1: 'Systems I built. Evidence you can inspect.',
     section: 'work',
     pageType: 'website',
     priority: 0.9,
@@ -133,6 +132,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'About Sulayman Bowles: technical SEO consultant, AI product manager, and systems builder working across React, Python, SQLite, analytics, and research.',
     h1: 'About Sulayman Bowles',
+    displayH1: 'I build technical systems that make evidence inspectable.',
     section: 'about',
     pageType: 'profile',
     priority: 0.8,
@@ -150,6 +150,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Atlas is technical SEO audit software and a crawler for indexation, internal links, canonicals, structured data, rendered HTML, evidence, and audit exports.',
     h1: 'Atlas SEO Audit Console',
+    displayH1: 'To see the whole structure.',
     section: 'project',
     pageType: 'project',
     priority: 0.9,
@@ -167,6 +168,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'A dated Atlas demonstration showing source and render states, discovered paths, confidence, findings, and downloadable run artifacts from a bounded open corpus.',
     h1: 'Atlas Open Corpus Demonstration',
+    displayH1: 'Open-corpus evidence.',
     section: 'project',
     pageType: 'project',
     priority: 0.8,
@@ -184,6 +186,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Temporary Atlas scroll-animation prototype exploring a celestial parallax treatment for the Atlas page hero, methodology transition, and route-specific motion direction.',
     h1: 'Atlas Celestial Parallax Prototype',
+    displayH1: 'To see the whole structure.',
     section: 'project',
     pageType: 'project',
     priority: 0.2,
@@ -201,6 +204,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Resume for Sulayman Bowles covering UT Austin McCombs, Void Agency, Atlas, technical SEO, AI product research, markets, and supporting links.',
     h1: 'Sulayman Bowles Resume',
+    displayH1: 'Sulayman Bowles',
     section: 'resume',
     pageType: 'profile',
     priority: 0.8,
@@ -218,6 +222,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Technical SEO research and AI systems notes from Sulayman Bowles on crawlability, crawler policy, Atlas, public data, identity, markets, and evidence.',
     h1: 'Research Notes',
+    displayH1: 'One archive. Clear categories.',
     section: 'research',
     pageType: 'research',
     priority: 0.8,
@@ -250,6 +255,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Void Agency’s technical SEO audit method for crawl paths, indexation, internal links, structured data, analytics, and implementation priorities.',
     h1: 'Void Agency Method',
+    displayH1: 'Technical SEO audits, evidence first.',
     section: 'service',
     pageType: 'service',
     priority: 0.9,
@@ -267,6 +273,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Contact technical SEO consultant Sulayman Bowles for crawlability, indexation, rendering, structured data, analytics, implementation, or audit support.',
     h1: 'Contact a Technical SEO Consultant',
+    displayH1: 'SEO audit contact.',
     section: 'contact',
     pageType: 'service',
     priority: 0.8,
@@ -284,6 +291,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Austin technical SEO for teams that need crawlability, indexation, structured data, page clarity, local context, and implementation guidance.',
     h1: 'Austin Technical SEO',
+    displayH1: 'Austin technical SEO consultant.',
     section: 'local-service',
     pageType: 'service',
     priority: 0.7,
@@ -305,7 +313,7 @@ const CORE_ROUTES: SeoRoute[] = [
     priority: 0.8,
     includeInSitemap: true,
     lastmod: VIRALBENCH_ARTICLE_MODIFIED_DATE,
-    staticSummary: `${VIRALBENCH_SEARCH_TARGET?.directAnswer ?? VIRALBENCH_ARTICLE_EXCERPT} ${VIRALBENCH_ARTICLE_EXCERPT}`,
+    staticSummary: VIRALBENCH_ARTICLE_STATIC_SUMMARY,
     image: VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
     jsonLd: viralBenchArticleJsonLd(),
   },
@@ -316,6 +324,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Finance and infrastructure-investing research with visible assumptions, source tables, valuation frames, risks, and recommendation boundaries.',
     h1: 'Markets and Investing',
+    displayH1: 'Markets and investing.',
     section: 'research',
     pageType: 'research',
     priority: 0.7,
@@ -331,22 +340,19 @@ const CORE_ROUTES: SeoRoute[] = [
   },
 ];
 
-const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
-  const path = getArticlePath(article);
-  const isIndexable = article.indexable !== false;
+const ARTICLE_ROUTES: SeoRoute[] = ARTICLE_ROUTE_METADATA.map((article) => {
+  const path = article.path;
+  const isIndexable = article.indexable;
   const datePublished = article.date.replaceAll('.', '-');
-  const dateModified = (article.dateModified ?? article.date).replaceAll('.', '-');
-  const investmentMemo = isInvestmentMemo(article);
-  const searchTarget = getArticleSearchTarget(path);
-  const articleImage = article.artwork.kind === 'image'
-    ? article.artwork.socialSrc
-    : RESEARCH_OG_IMAGE;
+  const dateModified = article.dateModified.replaceAll('.', '-');
+  const investmentMemo = article.kind === 'investment-memo';
+  const articleImage = article.image;
   const brandedTitle = `${article.seoTitle} | Sulayman Bowles`;
 
   return {
     path,
-    aliases: getArticleAliases(article),
-    title: article.slug === TEXAS_TOLL_ARTICLE_SLUG || brandedTitle.length > 60 ? article.seoTitle : brandedTitle,
+    aliases: article.aliases,
+    title: path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}` || brandedTitle.length > 60 ? article.seoTitle : brandedTitle,
     description: article.seoDescription,
     h1: article.title,
     section: 'research-article',
@@ -356,7 +362,7 @@ const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
     generateStatic: !isIndexable,
     noindex: !isIndexable,
     lastmod: dateModified,
-    staticSummary: `${searchTarget?.directAnswer ?? ''} ${article.content[0]}`.trim(),
+    staticSummary: article.staticSummary,
     image: articleImage,
     jsonLd: marketArticleJsonLd({
       title: article.title,

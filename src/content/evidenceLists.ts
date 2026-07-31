@@ -10,14 +10,14 @@ export const atlasCheckItems: EvidenceListItem[] = [
   { label: 'robots.txt', href: '/method', proves: 'Robots directives are part of the audit evidence used to understand crawler access.' },
   { label: 'XML sitemaps', href: '/method', proves: 'Sitemaps are checked as route and freshness signals rather than assumed to be complete.' },
   { label: 'raw HTML', href: '/atlas/sample-crawl', proves: 'The public demonstration keeps source capture separate from rendered-page observations.' },
-  { label: 'rendered HTML', href: '/atlas/sample-crawl', proves: 'Rendered checks show when browser-visible page content differs from the initial source response.' },
+  { label: 'render review', href: '/atlas/sample-crawl', proves: 'The public sample records when a browser render is required before content-coverage claims; it does not contain a completed browser trace.' },
   { label: 'titles/meta', href: '/method', proves: 'Document titles and meta descriptions are treated as inspectable page-level evidence.' },
   { label: 'canonicals', href: '/method', proves: 'Canonical URLs are checked for duplicate-path, consolidation, and indexation clarity.' },
   { label: 'structured data', href: '/about', proves: 'JSON-LD and visible page text are aligned so entity claims are structured and readable.' },
   { label: 'internal links', href: '/atlas', proves: 'Internal link evidence supports crawl-depth, orphan-risk, and page-relationship analysis.' },
   { label: 'scoring', href: '/atlas', proves: 'Findings are prioritized by severity, confidence, affected URLs, effort, and evidence quality.' },
-  { label: 'SQLite persistence', href: '/atlas', proves: 'Crawl records can be persisted for repeatable review instead of treated as one-off notes.' },
-  { label: 'exports/dashboards', href: '/atlas', proves: 'Audit outputs are structured for operators and client-facing review, with evidence attached to recommendations.' },
+  { label: 'SQLite persistence', href: '/atlas', proves: 'Atlas describes implemented persistence; runtime persistence is not demonstrated by the public sample.' },
+  { label: 'exports/dashboards', href: '/atlas', proves: 'The public sample includes CSV and JSON artifacts; broader operator and client handoff remains partial.' },
 ];
 
 export const aiSearchAuditChecklist: EvidenceListItem[] = [

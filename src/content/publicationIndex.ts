@@ -165,8 +165,9 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
 ];
 
 export const PUBLICATION_CATEGORY_SUMMARY = [
-  ['Search systems', 'Crawler policy, canonical identity, and public records.'],
-  ['Technical SEO', 'Crawlability, structured data, provenance, and bounded public studies.'],
-  ['Markets and investing', 'Ownership structures, valuation frames, assumptions, and risk.'],
-  ['AI systems and products', 'AI operations, agent evaluation, Atlas outputs, and inspectable technical artifacts.'],
+  ['Crawler engineering', 'Crawl frontiers, robots policy, rendering evidence, and retrieval systems.'],
+  ['Technical SEO', 'Canonicals, internal links, structured data, migrations, and identity consistency.'],
+  ['Data & AI systems', 'Derived records, SQLite pipelines, agent evaluation, and AI operations.'],
+  ['Finance & ownership', 'Capital stacks, infrastructure, market mechanics, and local ownership.'],
+  ['Public studies & archive', 'Atlas evidence, the Austin pilot, and clearly labeled retired methodology.'],
 ] as const;

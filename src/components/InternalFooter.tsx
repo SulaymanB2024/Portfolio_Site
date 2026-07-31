@@ -14,26 +14,26 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
   ];
 
   const textClass = isDark ? 'text-canvas' : 'text-ink';
-  const textMutedClass = isDark ? 'text-canvas/58' : 'text-ink/56';
-  const textMutedNavClass = isDark ? 'text-canvas/56 hover:text-canvas' : 'text-ink/54 hover:text-ink';
+  const textMutedClass = isDark ? 'text-canvas/66' : 'text-ink/64';
+  const textMutedNavClass = isDark ? 'text-canvas/64 hover:text-canvas' : 'text-ink/62 hover:text-ink';
   const activeRuleClass = isDark ? 'bg-canvas' : 'bg-ink';
   const hoverSurfaceClass = isDark ? 'hover:bg-canvas/7' : 'hover:bg-ink/[0.035]';
   const bgClass = isDark ? 'frosted-acrylic-dark' : 'frosted-acrylic-light';
   const dividerClass = isDark ? 'border-canvas/16' : 'border-ink/16';
   const returnClass = isDark
-    ? 'border-canvas/24 text-canvas/56 hover:border-canvas/44 hover:bg-canvas/7 hover:text-canvas'
-    : 'border-ink/24 text-ink/54 hover:border-ink/44 hover:bg-ink/[0.035] hover:text-ink';
+    ? 'border-canvas/28 text-canvas/64 hover:border-canvas/44 hover:bg-canvas/7 hover:text-canvas'
+    : 'border-ink/28 text-ink/62 hover:border-ink/44 hover:bg-ink/[0.035] hover:text-ink';
 
   return (
     <footer className={`mx-auto w-full max-w-[1480px] px-4 py-4 text-[10px] uppercase ${textMutedClass} md:px-8 xl:px-10`}>
       <div className={`site-footer grid gap-4 rounded-[8px] ${bgClass} px-4 py-4 md:px-6`}>
-        <div className="grid gap-5 lg:grid-cols-[minmax(245px,0.58fr)_minmax(0,1.78fr)_minmax(230px,0.56fr)_auto] lg:items-start lg:gap-4">
+        <div className="grid gap-5 lg:grid-cols-[minmax(285px,0.68fr)_minmax(0,1.68fr)_minmax(220px,0.52fr)_auto] lg:items-start lg:gap-4">
           <a href="/" id="footer-brand-link" className="block min-w-0 transition-opacity duration-200 hover:opacity-72">
             <span className={`site-footer-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>
               SULAYMAN BOWLES
             </span>
-            <span className={`site-footer-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
-              Technical SEO · Search Systems · Finance Research
+            <span className={`site-footer-tagline mt-2 block max-w-[34ch] text-balance font-serif text-[15px] italic normal-case leading-[1.15] tracking-normal ${textMutedClass}`}>
+              Technical SEO · AI Systems · Finance Research
             </span>
           </a>
 

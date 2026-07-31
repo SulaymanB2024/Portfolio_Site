@@ -9,6 +9,11 @@ export type ArticleMetric = {
   value: string;
 };
 
+export type ArticleConclusion = {
+  title: string;
+  content: string;
+};
+
 export type ResearchCluster =
   | 'firecrawl'
   | 'ai-crawlers'
@@ -94,6 +99,7 @@ export type ResearchArticle = {
   readTime: string;
   author: string;
   thesis?: string;
+  conclusion: ArticleConclusion;
   evidenceBoundary?: string;
   content: string[];
   sections?: ArticleSection[];

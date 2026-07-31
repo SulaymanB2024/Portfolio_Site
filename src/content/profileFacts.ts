@@ -17,7 +17,7 @@ export const PROFILE_FACTS = {
   name: 'Sulayman Bowles',
   currentSummary:
     'Sulayman Bowles is a UT Austin student working in AI product at Chegg, building Atlas technical SEO software, running Void Agency, and publishing research on AI systems, crawlability, infrastructure, and investment questions.',
-  positioning: 'Technical SEO, AI product, systems, and investment research.',
+  positioning: 'Technical SEO, AI systems, and finance research.',
   education: {
     institution: 'The University of Texas at Austin',
     school: 'McCombs School of Business',
@@ -57,7 +57,7 @@ export const PROFILE_FACTS = {
       location: 'Austin, TX',
       title: 'Founder',
       dates: 'Jan 2026 — Present',
-      publicSummary: 'Founded a technical SEO and web-systems agency with $50K+ in collected revenue.',
+      publicSummary: 'Founded a technical SEO and web-systems agency and reports $50K+ in collected revenue; private invoices are not public.',
       bullets: [
         'Built Atlas, a Python and SQLite audit system that crawls websites, maps internal links, classifies pages, flags technical issues, and exports structured reports.',
         'Turns crawl, metadata, schema, performance, and AI-search findings into prioritized implementation roadmaps for SMB clients.',
@@ -80,7 +80,7 @@ export const PROFILE_FACTS = {
       location: 'Remote',
       title: 'Co-Founder',
       dates: 'Jan 2025 — Sep 2025',
-      publicSummary: 'Co-founded an AI visual-services venture that generated $100K in collected revenue.',
+      publicSummary: 'Co-founded an AI visual-services venture and reports $100K in collected revenue; private transaction records are not public.',
       bullets: [
         'Evaluated model-quality tradeoffs, creator workflows, pricing logic, and visual-asset positioning for AI-enabled creative services.',
       ],
@@ -126,15 +126,15 @@ export const PROFILE_FACTS = {
   certifications: ['Google Data Analytics Professional Certificate', 'Google Project Management Professional Certificate', 'Bloomberg Market Concepts'],
   languages: ['Spanish (Intermediate)'],
   projects: [
-    { name: 'Atlas SEO Audit Console', path: '/atlas', status: 'Core workflow shipped; active development' },
+    { name: 'Atlas SEO Audit Console', path: '/atlas', status: 'Implemented; public proof partial; active development' },
     { name: 'Void Agency', path: 'https://www.void-agency.com/', status: 'Operating' },
     { name: 'The First AI Managers', path: '/research/ai-systems/the-first-ai-managers', status: 'Published July 14, 2026' },
     { name: 'Texas toll-road ownership research', path: '/markets/who-owns-texas-toll-roads', status: 'Published July 11, 2026' },
   ],
   proofClaims: [
     { label: 'Atlas', claim: 'Crawl and evidence console with a reproducible public demonstration', asOf: '2026-07-16', publicSource: '/atlas/sample-crawl' },
-    { label: 'Void Agency', claim: '$50K+ collected revenue', asOf: '2026-07-16', publicSource: '/resume' },
-    { label: 'Chegg', claim: 'AI Product Manager Intern, Office of the Chief Product Officer', asOf: '2026-07-16', publicSource: '/resume' },
+    { label: 'Void Agency', claim: '$50K+ collected revenue — first-party claim; private invoices are not public', asOf: '2026-05-31', publicSource: null },
+    { label: 'Chegg', claim: 'AI Product Manager Intern, Office of the Chief Product Officer — role stated in this résumé; corroborating employer record is not linked', asOf: '2026-07-16', publicSource: null },
     { label: 'Public research', claim: 'AI systems, infrastructure, and investment research with source-led analysis', asOf: '2026-07-16', publicSource: '/research' },
   ],
   canonicalLinks: {

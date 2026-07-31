@@ -33,6 +33,11 @@ export const AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE: ResearchArticle = {
   author: 'SULAYMAN BOWLES',
   thesis:
     'Austin homeowners encounter dozens of apparently separate home-service brands, but the public record connects many of them to a smaller set of platforms, sponsors, public companies, and franchise systems. The same record also shows why “locally managed,” “family founded,” and “locally owned” cannot be treated as synonyms.',
+  conclusion: {
+    title: 'Ownership is the finding—not the outcome',
+    content:
+      'The public record can connect consumer brands to operators, platforms, sponsors, public companies, and franchise systems while keeping unresolved ties visible. It cannot infer pricing, service, employment, or market share from ownership alone.',
+  },
   evidenceBoundary:
     'This is a July 26, 2026 snapshot of 67 active consumer-facing brand records reconstructed from a larger audit package. Brand counts are not revenue, customer, job, permit, or market share. An A or B rating means the current ownership structure is supported well enough for publication; C and D records preserve partial or unresolved evidence. Sponsor investments, sale processes, franchise operators, legal entities, and consumer brands are kept separate. Ownership can change after the cutoff, and no claim here attributes price, service, or employment outcomes to an ownership type.',
   metrics: [

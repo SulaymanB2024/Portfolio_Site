@@ -4,6 +4,16 @@
   --article-line: color-mix(in srgb, var(--article-ink) 14%, transparent);
   --article-muted: color-mix(in srgb, var(--article-ink) 62%, transparent);
   --article-faint: color-mix(in srgb, var(--article-ink) 58%, transparent);
+  /* Legacy evidence components still consume the original toll-road tokens.
+     Bridge them here so their border shorthands remain valid inside the
+     current paper reader while those components are progressively retired. */
+  --toll-paper: var(--article-paper);
+  --toll-ink: var(--article-ink);
+  --toll-blue: #465c67;
+  --toll-green: #2f4738;
+  --toll-risk: #8b4d45;
+  --toll-line: var(--article-line);
+  --toll-muted: var(--article-muted);
   overflow-x: clip;
   background: var(--article-paper);
   color: var(--article-ink);
@@ -405,6 +415,18 @@
     ),
     var(--article-paper);
   padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .article-reader__image-placeholder--triptych > div {
+    grid-template-rows: auto 1fr;
+    align-content: stretch;
+  }
+
+  .article-reader__image-placeholder--triptych > div > strong {
+    align-self: center;
+    justify-self: center;
+  }
 }
 
 .article-reader__metric-frame {
@@ -1249,8 +1271,11 @@
   background: var(--article-line);
 }
 
-.article-reader__chapter-nav > a,
-.article-reader__chapter-nav > span {
+.article-reader__chapter-nav--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.article-reader__chapter-nav > a {
   min-height: 6rem;
   background: var(--article-paper);
   padding: 1rem;
@@ -1263,7 +1288,7 @@
   text-decoration: none;
 }
 
-.article-reader__chapter-nav a:last-child {
+.article-reader__chapter-nav a[data-direction='next'] {
   text-align: right;
 }
 
@@ -1280,10 +1305,45 @@
 }
 
 .article-reader__endnote {
+  scroll-margin-top: 9rem;
   padding: 3rem 0 1rem;
   color: var(--article-faint);
   font-size: 0.7rem;
   line-height: 1.65;
+}
+
+.article-reader__endnote-copy {
+  max-width: 46rem;
+}
+
+.article-reader__endnote-copy > span {
+  display: block;
+  color: var(--article-faint);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.article-reader__endnote h2 {
+  margin-top: 0.6rem;
+  color: var(--article-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.article-reader__endnote-copy > p {
+  margin-top: 0.85rem;
+  color: var(--article-muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.article-reader__endnote-copy > .article-reader__endnote-note {
+  color: var(--article-faint);
+  font-size: 0.66rem;
 }
 
 .article-reader__endnote nav {
@@ -1559,6 +1619,10 @@
 }
 
 @media (min-width: 720px) {
+  .article-reader__endnote {
+    scroll-margin-top: 6.5rem;
+  }
+
   .article-reader__mobile-contents {
     top: 5.125rem;
     max-height: calc(100dvh - 5.125rem);
@@ -1781,6 +1845,117 @@
     color: var(--article-ink);
   }
 
+}
+
+@media (max-width: 767px) {
+  .article-reader :is(
+    .toll-data-table__scroll,
+    .toll-snapshot__scroll,
+    .toll-ownership-lookup__scroll,
+    .article-table-wrap
+  ):has(table[data-responsive-table='stacked']) {
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .article-reader .article-table-wrap:has(table[data-responsive-table='stacked']) {
+    border: 0;
+  }
+
+  .article-reader table[data-responsive-table='stacked'] {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .article-reader .toll-data-table table[data-responsive-table='stacked'] {
+    min-width: 0;
+  }
+
+  .article-reader table[data-responsive-table='stacked'] caption {
+    display: block;
+    width: 100%;
+  }
+
+  .article-reader table[data-responsive-table='stacked'] thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .article-reader table[data-responsive-table='stacked'] tbody {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .article-reader table[data-responsive-table='stacked'] tbody tr {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    border: 1px solid var(--article-line);
+    background: var(--article-paper);
+  }
+
+  .article-reader table[data-responsive-table='stacked'] tbody :is(th[scope='row'], td) {
+    position: static;
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    box-sizing: border-box;
+    justify-self: stretch;
+    grid-template-columns: minmax(6.75rem, 0.42fr) minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+    border: 0;
+    border-bottom: 1px solid var(--article-line);
+    padding: 0.75rem;
+    background: var(--article-paper);
+    overflow-wrap: anywhere;
+  }
+
+  .article-reader table[data-responsive-table='stacked'] tbody :is(th[scope='row'], td)::before {
+    color: var(--article-faint);
+    content: attr(data-label);
+    font-size: 0.56rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  .article-reader table[data-responsive-table='stacked'] tbody td > * {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .article-reader table[data-responsive-table='stacked'] tbody th[scope='row'] {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.4rem;
+    background: color-mix(in srgb, var(--article-ink) 4%, var(--article-paper));
+    color: var(--article-ink);
+    font-size: 0.82rem;
+  }
+
+  .article-reader table[data-responsive-table='stacked'] tbody tr > :last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 1079px) {
+  .article-reader__content > section,
+  .article-reader .toll-source-ledger > ol > li {
+    scroll-margin-top: 10rem;
+  }
 }
 
 @media print {

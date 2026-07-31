@@ -410,6 +410,45 @@ assert(
   `article series repeats exact 16-word passages: ${JSON.stringify(duplicatedPassages.slice(0, 3))}`,
 );
 
+assert(ALL_ARTICLES.length === 23, `expected 23 canonical articles; found ${ALL_ARTICLES.length}`);
+assert(
+  duplicateValues(ALL_ARTICLES.map((article) => normalizedWords(article.conclusion.title).join(' '))).length === 0,
+  'article conclusion titles must be route-specific',
+);
+assert(
+  duplicateValues(ALL_ARTICLES.map((article) => normalizedWords(article.conclusion.content).join(' '))).length === 0,
+  'article conclusion copy must be route-specific',
+);
+
+for (const article of ALL_ARTICLES) {
+  const routePath = getArticlePath(article);
+  const conclusionTitleWords = wordCount(article.conclusion.title);
+  const conclusionContentWords = wordCount(article.conclusion.content);
+
+  assert(
+    conclusionTitleWords >= 3 && conclusionTitleWords <= 10,
+    `${routePath}: conclusion title must contain 3-10 words`,
+  );
+  assert(
+    conclusionContentWords >= 25 && conclusionContentWords <= 55,
+    `${routePath}: conclusion must contain 25-55 words`,
+  );
+  assert(
+    !article.conclusion.content.includes('Public evidence and provider behavior can change'),
+    `${routePath}: freshness boilerplate belongs in the source note, not the conclusion`,
+  );
+
+  const builtFile = path.resolve('dist', routePath.slice(1), 'index.html');
+  if (fs.existsSync(builtFile)) {
+    const html = fs.readFileSync(builtFile, 'utf8');
+    assert(html.includes(article.conclusion.title), `${routePath}: built static conclusion is missing`);
+    assert(
+      html.includes('id="article-conclusion-title"'),
+      `${routePath}: built static conclusion heading is not addressable`,
+    );
+  }
+}
+
 const articleWordCounts: Array<{ slug: string; words: number }> = [];
 
 for (const article of TECHNICAL_ARTICLE_SERIES) {
@@ -489,5 +528,5 @@ const totalWords = articleWordCounts.reduce((sum, article) => sum + article.word
 const minimumWords = Math.min(...articleWordCounts.map((article) => article.words));
 const maximumWords = Math.max(...articleWordCounts.map((article) => article.words));
 console.log(
-  `Article verification passed: ${artworkRecords.length} indexable readers use unique artwork and normalized navigation; the 10-article technical series contains ${totalWords} prose words, ${minimumWords}-${maximumWords} words each, and no repeated 16-word passages.`,
+  `Article verification passed: all ${ALL_ARTICLES.length} canonical articles have unique route-specific conclusions; ${artworkRecords.length} indexable readers use unique artwork and normalized navigation; the 10-article technical series contains ${totalWords} prose words, ${minimumWords}-${maximumWords} words each, and no repeated 16-word passages.`,
 );

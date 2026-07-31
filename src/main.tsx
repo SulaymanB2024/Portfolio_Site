@@ -1,4 +1,4 @@
-import {StrictMode, useEffect, useLayoutEffect} from 'react';
+import {StrictMode, useEffect} from 'react';
 import {createRoot} from 'react-dom/client';
 import {Analytics} from '@vercel/analytics/react';
 import App from './App.tsx';
@@ -8,13 +8,16 @@ import Lenis from 'lenis';
 
 document.documentElement.classList.add('js');
 
-function Root() {
-  useLayoutEffect(() => {
-    document.documentElement.classList.add('app-mounted');
-    document.getElementById('seo-static-summary')?.remove();
-    return () => document.documentElement.classList.remove('app-mounted');
-  }, []);
+const editorialFontStylesheet = document.getElementById('editorial-fonts') as HTMLLinkElement | null;
+if (editorialFontStylesheet) {
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+      editorialFontStylesheet.rel = 'stylesheet';
+    });
+  });
+}
 
+function Root() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const prefersNativeScrolling = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
