@@ -515,20 +515,20 @@ function buildFallback(route: SeoRoute) {
   if (staticHtml) {
     return `<section id="seo-static-summary" aria-label="Static route content">
       ${buildClientShell(route)}
-      <div class="seo-static-crawl-content">
+      <main class="seo-static-crawl-content">
         ${buildStaticBrand()}
 ${staticHtml}
-      </div>
+      </main>
     </section>`;
   }
 
   if (route.staticHtml) {
     return `<section id="seo-static-summary" aria-label="Static route summary">
       ${buildClientShell(route)}
-      <div class="seo-static-crawl-content">
+      <main class="seo-static-crawl-content">
         ${buildStaticBrand()}
 ${route.staticHtml}
-      </div>
+      </main>
     </section>`;
   }
 
@@ -543,14 +543,14 @@ ${route.staticHtml}
 
   return `<section id="seo-static-summary" aria-label="Static route summary">
       ${buildClientShell(route)}
-      <div class="seo-static-crawl-content">
+      <main class="seo-static-crawl-content">
         ${buildStaticBrand()}
         <h1>${escapeHtml(route.h1)}</h1>
         <p>${escapeHtml(route.staticSummary)}</p>
         <nav aria-label="Primary static links">
           ${navLinks.map(([label, href]) => `<a href="${href}">${label}</a>`).join('\n          ')}
         </nav>
-      </div>
+      </main>
     </section>`;
 }
 
@@ -562,9 +562,19 @@ function replaceHead(html: string, route: SeoRoute, assetTags: string) {
   return html.replace(/<head[^>]*>[\s\S]*?<\/head>/i, buildHead(route, assetTags));
 }
 
+function verifyStaticFallback(routeHtml: string, routePath: string) {
+  if (!routeHtml.includes('<main class="seo-static-crawl-content">')) {
+    throw new Error(`${routePath}: generated static fallback is missing its semantic main landmark`);
+  }
+  if (!/<h1\b/i.test(routeHtml)) {
+    throw new Error(`${routePath}: generated static fallback is missing its H1`);
+  }
+}
+
 async function writeRouteHtml(template: string, assetTags: string, route: SeoRoute) {
   const outputPath = routeOutputPath(route);
   const routeHtml = replaceHead(injectFallback(template, route), route, assetTags);
+  verifyStaticFallback(routeHtml, route.path);
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
   await fs.writeFile(outputPath, routeHtml);
 
@@ -577,6 +587,7 @@ async function writeRouteHtml(template: string, assetTags: string, route: SeoRou
 
 async function writeNotFoundHtml(template: string, assetTags: string) {
   const routeHtml = replaceHead(injectFallback(template, NOT_FOUND_ROUTE), NOT_FOUND_ROUTE, assetTags);
+  verifyStaticFallback(routeHtml, '404');
   await fs.writeFile(path.join(DIST_DIR, '404.html'), routeHtml);
 }
 

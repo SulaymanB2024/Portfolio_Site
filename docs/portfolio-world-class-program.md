@@ -121,6 +121,7 @@ Done means the full route/state/device ledger passes; the copy and claim system 
 - Stage: local implementation and source-current acceptance complete; authorized release execution in progress.
 - Verified state: all three read-only Wave 1 reports and the editorial cross-review were reconciled by one implementation owner. A fresh production build of the final source passes type, style, build, generated-file, internal-link, SEO, route, responsive, interaction, reduced-motion, and print checks.
 - Material changes:
+  - Replaced the raw static crawl fallback's generic wrapper with a semantic `main` landmark and made static-route generation fail closed when any generated route or 404 lacks that landmark or an H1.
   - Repaired tablet navigation, modal semantics, focus treatment, scroll locking, route notes, print scoping, article legacy tokens, and keyboard-accessible overflow regions.
   - Replaced page-root `overflow-x-hidden` with `overflow-x-clip`, restoring the intended sticky header; captured the pre-open scroll position, fixed the header while INDEX is open, and made its focus cycle deterministic in both directions.
   - Added inline accessible form errors, a contact form jump path, a distinct commercial-action pattern, and a Work-to-contact handoff.
