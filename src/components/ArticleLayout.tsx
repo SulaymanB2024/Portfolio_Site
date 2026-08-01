@@ -1,4 +1,13 @@
-import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react';
+import {
+  Fragment,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
+  type ReactNode,
+} from 'react';
 
 import { InternalFooter } from './InternalFooter';
 import { InternalHeader } from './InternalHeader';
@@ -129,16 +138,81 @@ function ArticlePage({
   children,
   className = '',
 }: ArticlePageProps) {
+  useEffect(() => {
+    let currentTarget: HTMLElement | null = null;
+    let frame = 0;
+
+    const markHashTarget = (moveFocus = false) => {
+      currentTarget?.removeAttribute('data-article-target');
+      currentTarget = null;
+
+      let id = '';
+      try {
+        id = decodeURIComponent(window.location.hash.slice(1));
+      } catch {
+        return;
+      }
+
+      if (!id) return;
+      const nextTarget = document.getElementById(id);
+      if (!nextTarget) return;
+
+      nextTarget.setAttribute('data-article-target', 'true');
+      currentTarget = nextTarget;
+      if (moveFocus) {
+        if (!nextTarget.hasAttribute('tabindex')) nextTarget.setAttribute('tabindex', '-1');
+        nextTarget.focus({ preventScroll: true });
+      }
+    };
+    const scheduleHashTarget = (moveFocus = false) => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        frame = window.requestAnimationFrame(() => markHashTarget(moveFocus));
+      });
+    };
+    const handleHashClick = (event: MouseEvent) => {
+      const anchor = event.target instanceof Element
+        ? event.target.closest<HTMLAnchorElement>('a[href^="#"]')
+        : null;
+      if (!anchor) return;
+
+      const moveFocus = Boolean(
+        anchor.closest(
+          '.article-citation, .article-note-ref, .article-note-backlinks, .article-note-backlink',
+        ) ||
+        anchor.classList.contains('article-reader__skip-link'),
+      );
+      scheduleHashTarget(moveFocus);
+    };
+    const handleLocationChange = () => scheduleHashTarget(false);
+
+    scheduleHashTarget(false);
+    document.addEventListener('click', handleHashClick, true);
+    window.addEventListener('hashchange', handleLocationChange);
+    window.addEventListener('popstate', handleLocationChange);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      currentTarget?.removeAttribute('data-article-target');
+      document.removeEventListener('click', handleHashClick, true);
+      window.removeEventListener('hashchange', handleLocationChange);
+      window.removeEventListener('popstate', handleLocationChange);
+    };
+  }, []);
+
   return (
     <PageShell
       id="top"
       tone="light"
       className={`article-reader article-reader--${mode} ${className}`}
     >
+      <a className="article-reader__skip-link" href="#article-body">
+        Skip to article
+      </a>
       <ScrollProgress tone="dark" />
       <InternalHeader activePath={activePath} tone="light" minimalBrand />
       {children}
-      <PageFrame className="pb-8">
+      <PageFrame className="article-reader__site-footer-frame pb-8">
         <InternalFooter activePath={activePath} tone="light" />
       </PageFrame>
     </PageShell>
@@ -446,6 +520,8 @@ export function ArticleReader({
             label={config.endnote.label}
             title={config.endnote.title}
             note={config.endnote.note}
+            boundary={config.boundary?.content}
+            boundaryLabel={config.boundary?.label}
             links={config.endnote.links}
           >
             {config.endnote.content}
@@ -499,16 +575,67 @@ function useActiveSection(items: ArticleNavItem[]) {
   return activeId;
 }
 
-function ArticleUtilities() {
+function moveArticleNavFocus(
+  event: KeyboardEvent<HTMLElement>,
+  orientation: 'horizontal' | 'vertical',
+) {
+  if (event.altKey || event.ctrlKey || event.metaKey) return;
+
+  const backwardsKey = orientation === 'horizontal' ? 'ArrowLeft' : 'ArrowUp';
+  const forwardsKey = orientation === 'horizontal' ? 'ArrowRight' : 'ArrowDown';
+  if (
+    event.key !== backwardsKey &&
+    event.key !== forwardsKey &&
+    event.key !== 'Home' &&
+    event.key !== 'End'
+  ) {
+    return;
+  }
+
+  const target = event.target instanceof Element ? event.target.closest('a[href^="#"]') : null;
+  if (!(target instanceof HTMLAnchorElement)) return;
+
+  const links = [...event.currentTarget.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')];
+  const currentIndex = links.indexOf(target);
+  if (currentIndex === -1 || !links.length) return;
+
+  let nextIndex = currentIndex;
+  if (event.key === 'Home') nextIndex = 0;
+  if (event.key === 'End') nextIndex = links.length - 1;
+  if (event.key === backwardsKey) nextIndex = (currentIndex - 1 + links.length) % links.length;
+  if (event.key === forwardsKey) nextIndex = (currentIndex + 1) % links.length;
+
+  event.preventDefault();
+  links[nextIndex]?.focus();
+}
+
+function ArticleUtilities({
+  activeItem,
+  onSourceClick,
+  sourceItem,
+}: {
+  activeItem?: ArticleNavItem;
+  onSourceClick?: (event: ReactMouseEvent<HTMLAnchorElement>) => void;
+  sourceItem?: ArticleNavItem;
+}) {
   const [copied, setCopied] = useState(false);
   const [copyStatus, setCopyStatus] = useState('');
+  const resetTimerRef = useRef<number | undefined>(undefined);
+
+  useEffect(() => () => {
+    window.clearTimeout(resetTimerRef.current);
+  }, []);
 
   const copyLink = async () => {
+    const url = new URL(window.location.href);
+    if (activeItem?.id) url.hash = activeItem.id;
+
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(url.toString());
       setCopied(true);
-      setCopyStatus('Article link copied to clipboard.');
-      window.setTimeout(() => {
+      setCopyStatus(`${activeItem?.label ?? 'Article'} link copied to clipboard.`);
+      window.clearTimeout(resetTimerRef.current);
+      resetTimerRef.current = window.setTimeout(() => {
         setCopied(false);
         setCopyStatus('');
       }, 1800);
@@ -520,7 +647,16 @@ function ArticleUtilities() {
 
   return (
     <div className="article-reader__utilities" aria-label="Article utilities">
-      <button type="button" onClick={copyLink}>{copied ? 'Copied' : 'Copy link'}</button>
+      {sourceItem ? (
+        <a href={`#${sourceItem.id}`} onClick={onSourceClick}>{sourceItem.label}</a>
+      ) : null}
+      <button
+        type="button"
+        aria-label={`Copy link to ${activeItem?.label ?? 'this article'}`}
+        onClick={copyLink}
+      >
+        {copied ? 'Copied' : 'Copy section'}
+      </button>
       <button type="button" onClick={() => window.print()}>Print / PDF</button>
       <span className="sr-only" role="status" aria-live="polite">{copyStatus}</span>
     </div>
@@ -543,7 +679,10 @@ function ArticleOverviewBand({
           <span>{items.length === 1 ? 'section' : 'sections'}</span>
         </p>
       </header>
-      <nav aria-label="Article overview">
+      <nav
+        aria-label="Article overview"
+        onKeyDown={(event) => moveArticleNavFocus(event, 'horizontal')}
+      >
         <ol>
           {items.map((item, index) => (
             <li key={item.id}>
@@ -579,35 +718,66 @@ function ArticleBody({
   const activeId = useActiveSection(items);
   const activeIndex = Math.max(0, items.findIndex((item) => item.id === activeId));
   const activeItem = items[activeIndex];
+  const sourceItem = items.find((item) => item.id === 'source-ledger' || item.index === 'S');
   const progress = items.length ? ((activeIndex + 1) / items.length) * 100 : 0;
+  const closeMobileContents = (event: ReactMouseEvent<HTMLAnchorElement>) => {
+    const details = event.currentTarget.closest('details');
+    if (!details) return;
+
+    details.open = false;
+    window.requestAnimationFrame(() => {
+      details.querySelector<HTMLElement>('summary')?.focus({ preventScroll: true });
+    });
+  };
+  const handleMobileContentsKeyDown = (event: KeyboardEvent<HTMLDetailsElement>) => {
+    if (event.key !== 'Escape' || !event.currentTarget.open) return;
+
+    event.preventDefault();
+    event.currentTarget.open = false;
+    event.currentTarget.querySelector<HTMLElement>('summary')?.focus({ preventScroll: true });
+  };
 
   return (
     <PageFrame className="article-reader__body-frame">
       <ArticleOverviewBand items={items} activeId={activeId} />
 
-      <details className="article-reader__mobile-contents">
+      <details
+        className="article-reader__mobile-contents"
+        onKeyDown={handleMobileContentsKeyDown}
+      >
         <summary>
           <span className="article-reader__mobile-contents-label">
             <small>{contentsLabel}</small>
             <strong>{activeItem?.label ?? 'Overview'}</strong>
           </span>
-          <span className="article-reader__mobile-contents-count">
-            {String(activeIndex + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
+          <span className="article-reader__mobile-contents-status">
+            <span className="article-reader__mobile-contents-count">
+              {String(activeIndex + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
+            </span>
+            <span className="article-reader__mobile-contents-toggle" aria-hidden="true">+</span>
           </span>
         </summary>
-        <nav aria-label={`${contentsLabel} navigation`}>
+        <nav
+          aria-label={`${contentsLabel} navigation`}
+          onKeyDown={(event) => moveArticleNavFocus(event, 'vertical')}
+        >
           {items.map((item, index) => (
             <a
               key={item.id}
               href={`#${item.id}`}
               aria-current={activeId === item.id ? 'location' : undefined}
-              onClick={(event) => event.currentTarget.closest('details')?.removeAttribute('open')}
+              onClick={closeMobileContents}
             >
               <span>{item.index ?? String(index + 1).padStart(2, '0')}</span>
               <span>{item.label}</span>
             </a>
           ))}
         </nav>
+        <ArticleUtilities
+          activeItem={activeItem}
+          onSourceClick={closeMobileContents}
+          sourceItem={sourceItem}
+        />
       </details>
 
       {mode === 'narrative' ? (
@@ -630,7 +800,10 @@ function ArticleBody({
                 <span style={{ width: `${progress}%` }} />
               </div>
             ) : null}
-            <nav aria-label={`${contentsLabel} navigation`}>
+            <nav
+              aria-label={`${contentsLabel} navigation`}
+              onKeyDown={(event) => moveArticleNavFocus(event, 'vertical')}
+            >
               {items.map((item, index) => (
                 <a
                   key={item.id}
@@ -651,11 +824,11 @@ function ArticleBody({
                 <p>{boundary}</p>
               </div>
             ) : null}
-            <ArticleUtilities />
+            <ArticleUtilities activeItem={activeItem} sourceItem={sourceItem} />
           </div>
         </aside>
 
-        <ReaderPanel className="article-reader__content">
+        <ReaderPanel id="article-body" className="article-reader__content" tabIndex={-1}>
           {children}
           {mode === 'narrative' && items.length > 1 ? (
             <nav
@@ -706,12 +879,16 @@ function ArticleEndnote({
   label,
   title,
   note,
+  boundary,
+  boundaryLabel = 'Evidence boundary',
   links,
 }: {
   children: ReactNode;
   label: ReactNode;
   title: ReactNode;
   note?: ReactNode;
+  boundary?: ReactNode;
+  boundaryLabel?: ReactNode;
   links: Array<{ href: string; label: string }>;
 }) {
   const uniqueLinks = links.filter(
@@ -728,9 +905,25 @@ function ArticleEndnote({
         <span>{label}</span>
         <h2 id="article-conclusion-title">{title}</h2>
         <p>{children}</p>
-        {note ? <p className="article-reader__endnote-note">{note}</p> : null}
       </div>
-      <nav aria-label="Related reading">
+      {boundary || note ? (
+        <div className="article-reader__endnote-evidence" aria-label="Evidence status">
+          {boundary ? (
+            <div>
+              <span>{boundaryLabel}</span>
+              <p>{boundary}</p>
+            </div>
+          ) : null}
+          {note ? (
+            <div>
+              <span>Evidence currency</span>
+              <p>{note}</p>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+      <nav aria-label="Continue reading">
+        <span aria-hidden="true">Continue reading</span>
         {uniqueLinks.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
       </nav>
     </footer>

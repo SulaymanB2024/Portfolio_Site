@@ -7,6 +7,18 @@ function escapeHtml(value: string) {
     .replaceAll("'", '&#39;');
 }
 
+function fragmentId(value: string) {
+  return value.trim().replace(/[^a-zA-Z0-9_-]+/g, '-').replace(/^-|-$/g, '') || 'note';
+}
+
+function plainMarkdownLabel(value: string) {
+  return value
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[*_`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function inlineMarkdown(value: string, noteRefCounts: Map<string, number>) {
   const code: string[] = [];
   let html = escapeHtml(value).replace(/`([^`]+)`/g, (_match, contents: string) => {
@@ -18,11 +30,16 @@ function inlineMarkdown(value: string, noteRefCounts: Map<string, number>) {
     .replace(/\[\^([^\]]+)\]/g, (_match, id: string) => {
       const occurrence = noteRefCounts.get(id) ?? 0;
       noteRefCounts.set(id, occurrence + 1);
-      const refId = occurrence === 0 ? `note-ref-${id}` : `note-ref-${id}-${occurrence + 1}`;
-      return `<sup><a href="#note-${id}" id="${refId}">${id}</a></sup>`;
+      const safeId = fragmentId(id);
+      const refId = occurrence === 0 ? `note-ref-${safeId}` : `note-ref-${safeId}-${occurrence + 1}`;
+      return `<sup class="article-note-ref"><a href="#note-${safeId}" id="${refId}" aria-label="Note ${escapeHtml(id)}">${escapeHtml(id)}</a></sup>`;
     })
-    .replace(/\[(S\d+)\]\((#source-[^\s)]*)\)/g, '<sup class="article-citation"><a href="$2" aria-label="Source $1">$1</a></sup>')
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]*|#[^\s)]*)\)/g, '<a href="$2">$1</a>')
+    .replace(/\[(S\d+)\]\((#source-[^\s)]*)\)/g, '<sup class="article-citation"><a href="$2" aria-label="Source $1 in source ledger">$1</a></sup>')
+    .replace(
+      /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noreferrer" aria-label="$1 (external link, opens in a new tab)">$1</a>',
+    )
+    .replace(/\[([^\]]+)\]\((\/[^\s)]*|#[^\s)]*)\)/g, '<a href="$2">$1</a>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[\s(])\*([^*]+)\*/g, '$1<em>$2</em>');
 
@@ -35,6 +52,20 @@ function isTableDivider(line: string) {
 
 function tableCells(line: string) {
   return line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => cell.trim());
+}
+
+function noteBacklinks(id: string, noteRefCounts: Map<string, number>) {
+  const safeId = fragmentId(id);
+  const referenceCount = noteRefCounts.get(id) ?? 0;
+  if (!referenceCount) return '';
+
+  const links = Array.from({ length: referenceCount }, (_, index) => {
+    const refId = index === 0 ? `note-ref-${safeId}` : `note-ref-${safeId}-${index + 1}`;
+    const label = referenceCount === 1 ? '↩' : `↩${index + 1}`;
+    return `<a class="article-note-backlink" href="#${refId}" aria-label="Back to reference ${index + 1} for note ${escapeHtml(id)}">${label}</a>`;
+  });
+
+  return ` <span class="article-note-backlinks">${links.join(' ')}</span>`;
 }
 
 export function markdownToHtml(
@@ -88,7 +119,18 @@ export function markdownToHtml(
         rows.push(tableCells(lines[index]));
         index += 1;
       }
-      blocks.push(`<div class="article-table-wrap" role="region" aria-label="Scrollable data table" tabindex="0"><table><thead><tr>${headers.map((cell) => `<th>${inlineMarkdown(cell, noteRefCounts)}</th>`).join('')}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdown(cell, noteRefCounts)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
+      const tableLabel = escapeHtml(headers.map(plainMarkdownLabel).join(', '));
+      blocks.push(
+        `<div class="article-table-wrap" role="region" aria-label="Data table with fields: ${tableLabel}. Scroll horizontally to inspect every field." tabindex="0">` +
+        `<table data-responsive-table="stacked" aria-label="Data table with fields: ${tableLabel}">` +
+        `<thead><tr>${headers.map((cell) => `<th scope="col">${inlineMarkdown(cell, noteRefCounts)}</th>`).join('')}</tr></thead>` +
+        `<tbody>${rows.map((row) => `<tr>${row.map((cell, cellIndex) => {
+          const dataLabel = escapeHtml(plainMarkdownLabel(headers[cellIndex] ?? `Field ${cellIndex + 1}`));
+          return cellIndex === 0
+            ? `<th scope="row" data-label="${dataLabel}">${inlineMarkdown(cell, noteRefCounts)}</th>`
+            : `<td data-label="${dataLabel}">${inlineMarkdown(cell, noteRefCounts)}</td>`;
+        }).join('')}</tr>`).join('')}</tbody></table></div>`,
+      );
       continue;
     }
 
@@ -136,7 +178,12 @@ export function markdownToHtml(
   }
 
   if (notes.size) {
-    blocks.push(`<ol class="article-notes">${Array.from(notes, ([id, note]) => `<li id="note-${escapeHtml(id)}">${inlineMarkdown(note, noteRefCounts)} <a href="#note-ref-${escapeHtml(id)}" aria-label="Back to reference ${escapeHtml(id)}">↩</a></li>`).join('')}</ol>`);
+    blocks.push(
+      `<ol class="article-notes" aria-label="Article notes">${Array.from(notes, ([id, note]) => {
+        const noteMarkup = inlineMarkdown(note, noteRefCounts);
+        return `<li id="note-${fragmentId(id)}">${noteMarkup}${noteBacklinks(id, noteRefCounts)}</li>`;
+      }).join('')}</ol>`,
+    );
   }
 
   return blocks.join('\n');

@@ -333,7 +333,7 @@ export default function AtlasPage() {
   const methodologyLineScale = useTransform(smoothMethodologyProgress, [0.12, 0.55, 1], [0, 0.72, 1]);
 
   return (
-    <main className="relative min-h-screen bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
+    <main className="site-page site-page-light visual-lab-page atlas-visual relative min-h-screen overflow-x-clip bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
       <PageTechnicalChrome tone="light" />
       <InternalHeader activePath="/atlas" tone="light" variant="home" />
       <motion.div
@@ -344,7 +344,7 @@ export default function AtlasPage() {
         <motion.img
           src={ATLAS_ARTWORK}
           alt=""
-          className="absolute left-[61%] top-[43%] h-[72svh] w-[136vw] -translate-x-1/2 -translate-y-1/2 object-contain object-center max-md:!opacity-[0.08] md:left-auto md:right-[-28rem] md:top-[55%] md:h-[112svh] md:w-[88rem] md:translate-x-0 md:scale-100 xl:right-[-20rem] xl:w-[96rem]"
+          className="atlas-visual__hero-art absolute left-[61%] top-[43%] h-[72svh] w-[136vw] -translate-x-1/2 -translate-y-1/2 object-contain object-center max-md:!opacity-[0.1] md:left-auto md:right-[-28rem] md:top-[55%] md:h-[112svh] md:w-[88rem] md:translate-x-0 md:scale-100 xl:right-[-20rem] xl:w-[96rem]"
           style={{ opacity: atlasOpacity }}
           decoding="async"
         />
@@ -353,9 +353,9 @@ export default function AtlasPage() {
       <section
         ref={heroRef}
         id="atlas-hero"
-        className={`relative overflow-visible ${prefersReducedMotion ? 'min-h-[100svh]' : 'h-[118svh] md:h-[165svh]'}`}
+        className={`atlas-visual__hero relative overflow-visible ${prefersReducedMotion ? 'min-h-[100svh]' : 'h-[104svh] md:h-[165svh]'}`}
       >
-        <div className={`${prefersReducedMotion ? 'relative' : 'sticky top-0'} z-10 min-h-[100svh] overflow-hidden px-4 pt-32 md:px-8 md:pt-36 xl:px-10`}>
+        <div className={`atlas-visual__hero-stage ${prefersReducedMotion ? 'relative' : 'sticky top-0'} z-10 min-h-[100svh] overflow-hidden px-4 pt-32 md:px-8 md:pt-36 xl:px-10`}>
           <motion.div
             className="pointer-events-none absolute left-[calc(50%-5rem)] top-[50%] z-[3] hidden w-px origin-top bg-ink/42 md:block lg:left-[calc(50%-6.75rem)]"
             style={prefersReducedMotion ? { height: '46%', opacity: 0.42 } : { height: heroSpineHeight, opacity: heroSpineOpacity }}
@@ -374,7 +374,7 @@ export default function AtlasPage() {
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               style={prefersReducedMotion ? undefined : { opacity: heroContentOpacity, y: heroCopyY }}
               id="atlas-hero-copy"
-              className="w-full max-w-[24rem] md:max-w-[40rem]"
+              className="atlas-visual__hero-copy w-full max-w-[24rem] md:max-w-[40rem]"
             >
               <p className="mb-7 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42 md:mb-8">
                 ATLAS ENGINE
@@ -385,7 +385,7 @@ export default function AtlasPage() {
                   style={prefersReducedMotion ? undefined : { color: firstLineColor, opacity: firstLineOpacity, y: firstLineY }}
                 >
                   To see the
-                </motion.span>
+                </motion.span>{' '}
                 <span className="block md:whitespace-nowrap">
                   <span className="inline-block">
                     whole&nbsp;
@@ -527,7 +527,7 @@ export default function AtlasPage() {
 
 function AtlasStatusMatrix() {
   return (
-    <section className="relative z-10 border-b border-ink/12 bg-canvas px-4 py-14 md:px-8 xl:px-10" aria-labelledby="atlas-status-heading">
+    <section className="atlas-visual__status relative z-10 border-b border-ink/12 bg-canvas px-4 py-14 md:px-8 xl:px-10" aria-labelledby="atlas-status-heading">
       <div className="mx-auto grid w-full max-w-[1480px] gap-10 lg:grid-cols-[0.32fr_0.68fr] lg:px-10">
         <div>
           <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-ink/60">Current capability status</p>
@@ -542,7 +542,7 @@ function AtlasStatusMatrix() {
           {capabilityStatus.map((item) => (
             <div key={item.capability} className="grid gap-3 border-b border-ink/12 py-4 last:border-b-0 md:grid-cols-[minmax(0,0.38fr)_minmax(9rem,0.2fr)_minmax(0,0.42fr)] md:items-center">
               <span className="text-sm font-medium text-ink/82">{item.capability}</span>
-              <span className="w-fit rounded-full border border-ink/18 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-ink/68">{item.status}</span>
+              <span className="w-fit border-l-2 border-ink/28 py-1 pl-3 text-[10px] uppercase tracking-[0.18em] text-ink/68">{item.status}</span>
               <a href={item.href} className="text-[10px] uppercase tracking-[0.18em] text-ink/64 underline decoration-ink/25 underline-offset-4 hover:text-ink">{item.proof}</a>
             </div>
           ))}
@@ -554,7 +554,7 @@ function AtlasStatusMatrix() {
 
 function MobileSamplePackage() {
   return (
-    <section className="relative z-10 border-y border-ink/12 bg-canvas/[0.88] px-4 py-9 md:hidden" aria-labelledby="atlas-mobile-sample-title">
+    <section className="atlas-visual__mobile-package relative z-10 border-y border-ink/12 bg-canvas/[0.88] px-4 py-9 md:hidden" aria-labelledby="atlas-mobile-sample-title">
       <div className="grid gap-6">
         <div className="flex items-end justify-between gap-5">
           <div>
