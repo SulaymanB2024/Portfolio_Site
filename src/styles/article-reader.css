@@ -2352,6 +2352,12 @@
     font-size: 7.5pt;
   }
 
+  /* Table captions stay available to screen readers on screen, but Chromium's
+     print table formatting expands an sr-only caption beyond the page box. */
+  .article-reader:not(.texas-toll-article) table[data-responsive-table='stacked'] > caption.sr-only {
+    display: none !important;
+  }
+
   .article-reader:not(.texas-toll-article) table[data-responsive-table='stacked'] thead {
     position: static;
     display: table-header-group;
