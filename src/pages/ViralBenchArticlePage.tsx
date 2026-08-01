@@ -332,7 +332,7 @@ export default function ViralBenchArticlePage() {
     endnote: {
       label: 'Build conclusion',
       title: 'The harness determines whether the agent can learn',
-      content: 'ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before promotion.',
+      content: 'ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before any promotion.',
       note: 'Build note based on the live ViralBench methodology and the supplied standalone handoff at commit 5f5f57e.',
       links: [
         ...SEARCH_TARGET.relatedPaths.map((path) => ({

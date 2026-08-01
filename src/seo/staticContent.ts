@@ -364,7 +364,7 @@ function viralBenchArticleStaticHtml() {
         </figure>
         ${articleHtml}
         <h2 id="article-conclusion-title">The harness determines whether the agent can learn</h2>
-        <p>ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before promotion.</p>
+        <p>ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before any promotion.</p>
         <h2>Source ledger</h2>
         ${linkList([
           { href: 'https://viralbench.ai/', label: 'ViralBench live methodology' },
