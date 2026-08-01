@@ -1,4 +1,12 @@
-import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
+import {
+  aiSearchAuditChecklist,
+  atlasCheckItems,
+  buyerDecisionEvidence,
+  contactBuyerQuestions,
+  contactDecisionProtocol,
+  contactIntakeNotes,
+  contactResponsePaths,
+} from '../content/evidenceLists';
 import { getArticleByPath } from '../content/articleRegistry';
 import { isInvestmentMemo, type ArticleResource, type ArticleSection } from '../content/articleModels';
 import { PUBLIC_MARKET_THESES } from '../content/marketTheses';
@@ -622,6 +630,13 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           .join('\n        ')}
         <h2>Supporting Links</h2>
         ${linkCards(contextualProofLinks)}
+        <h2>Evidence Before Intake</h2>
+        ${buyerDecisionEvidence
+          .map(
+            (item) =>
+              `<h3>${escapeHtml(item.question)}</h3><p>${escapeHtml(item.answer)}</p><p><a href="${escapeHtml(item.href)}">${escapeHtml(item.action)}</a></p>`,
+          )
+          .join('\n        ')}
         <h2>Public Routes</h2>
         ${linkList(primaryLinks)}`,
     );
@@ -729,14 +744,19 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'Direct contact for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and source-backed research.',
       `<p>I work as a technical SEO consultant on bounded crawlability, indexation, rendering, internal-link, structured-data, analytics, and implementation problems. Typical outputs include URL-level findings, raw/render comparisons, owners, acceptance checks, and a rerun path—not an opaque score or generic audit deck.</p>
         <h2>Good-Fit Technical Work</h2>
-        <ul><li>Indexation, canonical, redirect, internal-link, structured-data, and template diagnosis tied to affected URLs.</li><li>Raw and rendered page comparison, crawl-state review, measurement-gap handling, and post-fix reruns.</li><li>GA4 and Search Console baselines, source-led research, implementation handoffs, and validation criteria.</li></ul>
+        ${definitionCards(contactResponsePaths.map((item) => [item.label, item.description]))}
         <h2>Direct Contact</h2>
         ${linkList([
           { label: 'Email Sulayman Bowles', href: 'mailto:sulayman.bowles@gmail.com', description: 'Primary contact path.' },
         ])}
         <h2>Brief Form</h2>
         <p>The public brief form is secondary to direct contact. It is useful when the site URL, suspected problem, and decision the work needs to support are already clear.</p>
-        <ul><li>Use the brief for technical SEO, crawl evidence, analytics, or source-backed research requests.</li><li>Start with the site URL, the suspected problem, and the decision the work needs to support.</li><li>Do not include passwords, API keys, payment details, unreleased client data, or production secrets.</li></ul>
+        ${definitionCards(contactIntakeNotes.map((item) => [item.label, item.description]))}
+        <p>Do not include passwords, API keys, payment details, unreleased client data, or production secrets.</p>
+        <h2>Decision Gates</h2>
+        ${definitionCards(contactDecisionProtocol.map((item) => [item.title, `${item.label}. ${item.description}`]))}
+        <h2>Buyer Questions</h2>
+        ${definitionCards(contactBuyerQuestions.map((item) => [item.question, item.answer]))}
         <h2>Elsewhere</h2>
         ${linkList([
           { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },

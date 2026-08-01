@@ -36,6 +36,105 @@ export const buyerDecisionEvidence: BuyerDecisionEvidenceItem[] = [
   },
 ];
 
+export type ContactEvidenceItem = {
+  label: string;
+  description: string;
+};
+
+export type ContactDecisionItem = ContactEvidenceItem & {
+  title: string;
+};
+
+export type ContactBuyerQuestion = {
+  question: string;
+  answer: string;
+};
+
+export const contactResponsePaths: ContactEvidenceItem[] = [
+  {
+    label: 'Technical SEO',
+    description: 'Indexation, canonicals, redirects, internal links, schema, and template diagnosis.',
+  },
+  {
+    label: 'Crawl evidence',
+    description: 'Raw/rendered states, measurement gaps, finding review, implementation checks, and reruns.',
+  },
+  {
+    label: 'AI-system evidence',
+    description: 'Evaluation traces, source boundaries, replay plans, and a clear split between built and proposed work.',
+  },
+  {
+    label: 'Analytics / research',
+    description: 'GA4, Search Console, source ledgers, decision baselines, and inspectable assumptions.',
+  },
+];
+
+export const contactIntakeNotes: ContactEvidenceItem[] = [
+  {
+    label: 'Surface',
+    description: 'Site URL, product surface, affected template, or system boundary.',
+  },
+  {
+    label: 'Observed problem',
+    description: 'What changed, failed, or remains unverified—and what evidence already exists.',
+  },
+  {
+    label: 'Decision',
+    description: 'Who needs to act, what the work must support, and what would count as a useful next check.',
+  },
+];
+
+export const contactDecisionProtocol: ContactDecisionItem[] = [
+  {
+    label: '01 / Fit',
+    title: 'Name the blocked decision.',
+    description: 'Start with the site or system, the observable issue, and the person or team that must act.',
+  },
+  {
+    label: '02 / Boundary',
+    title: 'Separate evidence from access gaps.',
+    description: 'Keep observed, inferred, inaccessible, and private states distinct. Credentials never belong in the brief.',
+  },
+  {
+    label: '03 / First step',
+    title: 'Scope the smallest useful pass.',
+    description: 'Choose a focused diagnosis, audit, implementation handoff, or validation rerun before expanding.',
+  },
+];
+
+export const contactBuyerQuestions: ContactBuyerQuestion[] = [
+  {
+    question: 'Is this only for a full-site audit?',
+    answer:
+      'No. A focused diagnosis can be a better first step when the affected surface and decision are already narrow. A larger audit should earn its scope from the evidence gap.',
+  },
+  {
+    question: 'What does a useful deliverable look like?',
+    answer:
+      'It depends on scope, but the public method uses URL or source-level observations, interpretation, confidence, priority, an owner, an acceptance check, and a rerun path. That structure is process evidence, not a promised business outcome.',
+  },
+  {
+    question: 'Do you need credentials or production access before we talk?',
+    answer:
+      'No. Start with a public URL or a plain-language description of the private surface. Any later access should be agreed after fit and scope are clear; never put credentials in this form.',
+  },
+  {
+    question: 'Can you guarantee rankings, traffic, revenue, or AI answer placement?',
+    answer:
+      'No. Those outcomes depend on external systems and conditions beyond a technical review. The work can make evidence, implementation choices, acceptance checks, and remaining uncertainty explicit.',
+  },
+  {
+    question: 'What does submitting the form authorize?',
+    answer:
+      'It creates a request to discuss fit and scope. It does not authorize system access, deployment, publication, or billable work.',
+  },
+  {
+    question: 'What happens after the brief is reviewed?',
+    answer:
+      'The first decision is whether the surface, evidence gap, and intended decision are specific enough to scope. Missing context should be clarified before recommending a broader engagement.',
+  },
+];
+
 export const atlasCheckItems: EvidenceListItem[] = [
   { label: 'URL discovery', href: '/atlas', proves: 'Atlas starts from discovered URLs and crawl records, not only manual page samples.' },
   { label: 'robots.txt', href: '/method', proves: 'Robots directives are part of the audit evidence used to understand crawler access.' },
