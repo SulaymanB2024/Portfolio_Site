@@ -118,6 +118,21 @@ Done means the full route/state/device ledger passes; the copy and claim system 
 
 ## Checkpoint
 
+### Current checkpoint — 2026-07-31 model-fixes release
+
+- Stage: source-current implementation and protected Vercel preview acceptance complete; production remains untouched pending the guarded PR merge and canonical-domain verification.
+- Release candidate: branch `codex/portfolio-model-fixes-release-20260731`, PR 10, runtime commit `5dc99a21a7667813d06de17c3d2461a97397ede5`.
+- Release preview: deployment `dpl_6w5fD21VbkwEyUrQ9WQkMDbuNpDb` is `READY`, targets preview, has no alias error, and its build log names the release branch and commit `5dc99a2`.
+- Preview acceptance: 38 raw-HTML route states passed; the same 38 states passed at 1440×1000, 820×1180, and 390×844 for 114/114 fresh Chromium viewport cells and 114 source-current screenshots. The matrix recorded zero application warnings/errors, zero broken completed images, and zero overflow cells. Exact Vercel feedback-toolbar CSP events were retained as preview-infrastructure evidence rather than attributed to the application.
+- Interaction acceptance: 15/15 groups passed, covering mobile/tablet INDEX focus and scroll restoration; form validation with zero Formspree traffic; optional contact context; article contents keyboard behavior; AI and Texas disclosures; mobile evidence tables; Atlas tablet cards and desktop focus; reduced motion; generic, ViralBench, and Texas print contracts; six route-specific conclusions; conversion links; and 404 recovery.
+- HTTP and machine-readable acceptance: security headers, crawler policy, the 35-route sitemap, semantic 404, representative assets, legacy redirects, all 23 live article contracts, and authored/static-fallback parity passed on the exact protected preview.
+- Source-current evidence: `/Users/sulaymanbowles/.codex/visualizations/2026/07/30/019fb548-8559-7cc0-a683-13da0c800b31/portfolio-model-fixes-preview-5dc99a2/`.
+- Release manifest: `/Users/sulaymanbowles/.codex/visualizations/2026/07/30/019fb548-8559-7cc0-a683-13da0c800b31/portfolio-model-fixes-preview-5dc99a2/release-verification-manifest.json`.
+- Evidence boundary: the 27 Wave 1 Core captures and the earlier 37-route/38-state clean-commit audit are historical inputs, not acceptance evidence for this implementation. This checkpoint relies only on the exact-commit preview artifacts above. Physical screen-reader, physical-printer, and non-Chromium checks remain outside the bounded automated gate.
+- Production guard: retain `dpl_H3yNyBHnZJb6HvRQwD4fwRRtLgWT` as the recorded rollback target. Merge and promotion are authorized only while every preview gate remains green; any failed canonical-domain production gate requires rollback and verification.
+
+### Prior checkpoint — portfolio program baseline
+
 - Stage: local implementation and source-current Vercel preview acceptance complete; production promotion remains pending the guarded merge and canonical-domain checks.
 - Verified state: all three read-only Wave 1 reports and the editorial cross-review were reconciled by one implementation owner. Release runtime commit `38fd8cef37b40a8840902c5409a3db222a7c8e03` passes the local source gate and the fresh exact-commit Vercel preview gate across raw HTML, hydrated DOM, responsive, interaction, reduced-motion, print, live-article, HTTP, asset, and redirect contracts.
 - Material changes:
