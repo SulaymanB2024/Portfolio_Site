@@ -200,9 +200,9 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/resume',
     aliases: ['/resume.html', '/cv', '/cv.html', '/Sulayman_Bowles_Resume_2025.pdf'],
-    title: 'Sulayman Bowles Resume | Technical SEO & AI Product',
+    title: 'Sulayman Bowles Resume | Experience, Skills & Projects',
     description:
-      'Resume for Sulayman Bowles covering UT Austin McCombs, Void Agency, Atlas, technical SEO, AI product research, markets, and supporting links.',
+      'Review Sulayman Bowles’s technical SEO and AI product experience, UT Austin education, selected projects, skills, and downloadable résumé PDF.',
     h1: 'Sulayman Bowles Resume',
     displayH1: 'Sulayman Bowles',
     section: 'resume',
