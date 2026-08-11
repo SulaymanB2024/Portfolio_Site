@@ -5,9 +5,10 @@ push, preview, merge, deployment, provider submission, indexing action, or
 baseline collection is recorded as complete.
 
 This is a branch-local receipt mirror. The canonical Hermes worktree changed to
-an unrelated dirty branch during execution, so its journal was preserved
-untouched. Copy these entries into the canonical journal only after that
-worktree and owner are reconciled.
+an unrelated dirty branch during execution, so it was initially preserved
+untouched. After that work committed cleanly, the canonical journal, ledger,
+and handoff were updated in Hermes commit
+`2a05900045a34260ec9c3db7ce648c0e7972f493`.
 
 ## 2026-08-11 — Measurement contract
 

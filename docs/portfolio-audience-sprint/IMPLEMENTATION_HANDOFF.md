@@ -152,8 +152,8 @@ The final SEO command exposes PA-008 and is not represented as green.
 
 ## Remaining release sequence
 
-1. Reconcile the Hermes documentation collision and restore Google read-only
-   OAuth.
+1. Restore Google read-only OAuth; the Hermes documentation collision is
+   closed by commit `2a05900045a34260ec9c3db7ce648c0e7972f493`.
 2. With exact approval, create the dedicated GA4 property and shared stream in
    `America/Los_Angeles`; configure all four domains and disable Signals and ad
    personalization in the property/UI as well as code.
