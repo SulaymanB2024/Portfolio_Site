@@ -81,6 +81,12 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
               event.preventDefault();
               const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
               window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+              window.requestAnimationFrame(() => {
+                const target = document.getElementById('top');
+                if (!target) return;
+                if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+                target.focus({ preventScroll: true });
+              });
             }}
             className={`site-footer-return group relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border transition-colors duration-200 ${returnClass}`}
           >
