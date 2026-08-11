@@ -88,6 +88,9 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
             <ArrowUp aria-hidden="true" className="relative h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" strokeWidth={1.5} />
           </a>
         </div>
+        <p className={`m-0 max-w-[92ch] border-t ${dividerClass} pt-3 text-[11px] normal-case leading-relaxed tracking-normal ${textMutedClass}`}>
+          Measurement disclosure: on the exact production host, this site may use a shared Google Analytics 4 portfolio property to record page paths and aggregate engagement across Sulayman Bowles projects. The site integration does not send form contents, names, email addresses, user IDs, or URL query strings. Google Signals and ad-personalization signals are disabled; Google may still process standard device, network, cookie, and referrer data. This configuration and wording require site-owner and privacy review before production and do not assert legal compliance.
+        </p>
       </div>
     </footer>
   );

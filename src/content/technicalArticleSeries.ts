@@ -774,7 +774,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     number: '09',
     category: 'CRAWLER POLICY',
     title: 'Robots.txt Is a Courtesy Layer, Not Access Control',
-    seoTitle: 'RFC 9309: Robots.txt Is Not Access Control',
+    seoTitle: 'Is Robots.txt Access Control? RFC 9309 Says No',
     subtitle:
       'A precise model for separating crawler requests, indexing directives, authentication, authorization, rate controls, and evidence of enforcement.',
     seoDescription:
@@ -823,20 +823,19 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
         id: 'six-control-layers',
         title: 'Name the six control layers before writing rules',
         paragraphs: [
+          'The shortest safe decision is to ask whether the goal is crawler guidance, search-index processing, private access, or service capacity. Robots.txt addresses the first outcome only. Noindex, authentication plus authorization, and rate or concurrency limits each enforce a different boundary.',
           'The first layer is discovery policy: robots.txt communicates path rules to crawlers that implement the protocol. The second is document processing policy: robots meta elements and response headers can ask supporting indexers not to index a fetched resource or not to expose certain features. The third and fourth are authentication and authorization, which establish who or what is making a request and whether that principal may perform the action.',
           'The fifth layer protects service capacity with connection limits, rate limits, quotas, caching, circuit breakers, and workload isolation. The sixth is observation: logs, challenge outcomes, provider-published address ranges, and response evidence used to classify requests after or during access. Observation can inform an enforcement decision, but a log label alone does not protect a route.',
           'Write the desired outcome first. “Do not spend crawler capacity on faceted combinations,” “do not expose this account document publicly,” “allow search discovery but decline a named model-development crawler,” and “keep the origin healthy under bursts” are different requirements. Each belongs to a different combination of layers.',
         ],
         table: {
-          caption: 'Crawler-control layers and their boundaries',
-          columns: ['Layer', 'Mechanism', 'Controls', 'Does not establish'],
+          caption: 'Robots, noindex, authentication, and rate-limit decision table',
+          columns: ['Desired outcome', 'Primary control', 'What it changes', 'Boundary'],
           rows: [
-            ['Discovery policy', '/robots.txt', 'Cooperating crawler path access', 'Confidentiality or client identity'],
-            ['Document policy', 'robots meta or X-Robots-Tag', 'Supporting indexer processing', 'Request denial'],
-            ['Authentication', 'Session, token, certificate, signed request', 'Claimed principal', 'Permission by itself'],
-            ['Authorization', 'Server or edge policy', 'Allowed action on resource', 'Crawler compliance'],
-            ['Capacity', 'Rate, concurrency, quota, cache', 'Resource consumption', 'Content eligibility'],
-            ['Observation', 'Logs, ranges, reverse verification, traces', 'Attribution evidence', 'Retroactive prevention'],
+            ['Guide cooperative crawlers away from paths', 'robots.txt', 'Crawler request policy', 'Does not deny access or establish identity'],
+            ['Keep a public response out of supporting indexes', 'noindex via meta or X-Robots-Tag', 'Indexer processing after retrieval', 'Does not make the response private'],
+            ['Keep a resource private', 'Authentication plus server-side authorization', 'Whether a principal receives the representation', 'Must hold across hosts, methods, caches, and alternate routes'],
+            ['Protect origin capacity', 'Rate, concurrency, quota, and cache controls', 'How much work a client may consume', 'Does not decide search or training eligibility'],
           ],
         },
       },

@@ -22,6 +22,7 @@
     "linkbuilding:scope-check": "node scripts/check-link-building-publish-scope.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "test:bot-observer": "node --import tsx --test packages/bot-observer/tests/*.test.ts",
+    "test:portfolio-analytics": "node --import tsx --test src/analytics/portfolioAnalytics.test.ts",
     "verify:bot-observer": "node scripts/verify-bot-observer.mjs",
     "verify:articles": "tsx scripts/verify-technical-article-series.ts",
     "verify:articles-live": "tsx scripts/verify-live-article-routes.ts",

@@ -104,6 +104,12 @@ function TexasTollOwnershipLookup() {
         Use this lookup to separate the owner of the pavement from the party operating the lanes,
         claiming toll revenue, or issuing the bill.
       </p>
+      <ul className="toll-ownership-lookup__concessions" aria-label="Four major private Texas toll-road concessions">
+        <li><strong>North Tarrant Express</strong><span>TxDOT pavement; private operating and revenue rights through 2061.</span></li>
+        <li><strong>LBJ Express</strong><span>TxDOT pavement; private operating and revenue rights through 2061.</span></li>
+        <li><strong>NTE 35W</strong><span>TxDOT pavement; private operating and revenue rights through 2061.</span></li>
+        <li><strong>SH 130 Segments 5–6</strong><span>TxDOT pavement; private operating and revenue rights through 2062.</span></li>
+      </ul>
       <div
         className="toll-ownership-lookup__scroll"
         role="region"
@@ -153,6 +159,9 @@ function TexasTollOwnershipLookup() {
         </table>
       </div>
       <div className="toll-ownership-lookup__actions">
+        <a href="#the-texas-ownership-map">Read the ownership and concession map</a>
+        <a href="#sh-130-the-danger-of-believing-the-traffic-model">Review the SH 130 concession case</a>
+        <a href="/markets">Explore the markets research archive</a>
         <a href={TEXAS_TOLL_OWNERSHIP_CSV_PATH} download>
           Download the complete ownership matrix (CSV)
         </a>

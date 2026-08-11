@@ -549,6 +549,34 @@
   margin-top: 0.9rem;
 }
 
+.toll-ownership-lookup__concessions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 1.25rem;
+  padding: 1px;
+  background: var(--article-line);
+  list-style: none;
+}
+
+.toll-ownership-lookup__concessions li {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.85rem;
+  background: var(--article-paper);
+}
+
+.toll-ownership-lookup__concessions strong {
+  color: var(--article-ink);
+  font-size: 0.76rem;
+}
+
+.toll-ownership-lookup__concessions span {
+  color: var(--article-faint);
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
 .toll-ownership-lookup__scroll {
   width: 100%;
   margin-top: 1.5rem;
@@ -639,6 +667,12 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-underline-offset: 0.22em;
+}
+
+@media (max-width: 640px) {
+  .toll-ownership-lookup__concessions {
+    grid-template-columns: 1fr;
+  }
 }
 
 .article-reader__body-frame {
