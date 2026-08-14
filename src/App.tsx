@@ -13,14 +13,12 @@ import { usePageTransitions } from './hooks/usePageTransitions';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
 import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
-import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavigation';
 import { AI_MANAGERS_ARTICLE_PATH } from './content/aiManagersArticle';
 import { PROFILE_FACTS } from './content/profileFacts';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './content/texasTollRoadArticleMeta';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
 import { TextMarquee } from './components/TextMarquee';
-import { AuditIntakeForm } from './components/AuditIntakeForm';
 import { WireframeGrid } from './components/WireframeGrid';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -55,7 +53,6 @@ const WorkPage = lazy(loadWorkPage);
 const ContactPage = lazy(loadContactPage);
 const AtlasSampleCrawlPage = lazy(loadAtlasSampleCrawlPage);
 const AustinTechnicalSeoPage = lazy(loadAustinTechnicalSeoPage);
-const LocalTime = lazy(() => import('./components/LocalTime').then(m => ({ default: m.LocalTime })));
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
 const AtmosphereCore = lazy(() => import('./components/AtmosphereCore').then(m => ({ default: m.default })));
@@ -519,50 +516,6 @@ function HomePage() {
               </div>
             </div>
           </motion.div>
-        </section>
-
-        {/* INTRODUCTION — an evidence system, reduced to its essential logic */}
-        <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-24 text-ink md:px-16 md:py-36">
-          <div className="mx-auto w-full max-w-[1800px]">
-            <div className="flex items-center justify-between border-b border-ink/14 pb-5 text-[10px] uppercase tracking-[0.3em] text-ink/58">
-              <span>Working method</span>
-              <span aria-hidden="true" className="font-serif text-base italic tracking-normal">01 — 03</span>
-            </div>
-
-            <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-12 md:gap-8 md:py-24">
-              <div className="md:col-span-8">
-                <ScrollReveal blur={false}>
-                  <h2 className="max-w-[9ch] font-serif text-[4rem] font-light leading-[0.82] tracking-normal sm:text-7xl md:text-[6.8rem] lg:text-[7.625rem]">
-                    Evidence,
-                    <span className="block italic">before answers.</span>
-                  </h2>
-                </ScrollReveal>
-              </div>
-              <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
-                <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
-                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and <a href="/research" className="border-b border-ink/24 hover:border-ink">technical SEO research</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
-                </p>
-              </ScrollReveal>
-            </div>
-
-            <div className="grid border-y border-ink/14 md:grid-cols-3">
-              {[
-                ['01', 'Observe', 'Capture URL records, source and rendered states, links, directives, and provider failures without cleaning away the gaps.'],
-                ['02', 'Separate', 'Keep observations, derived findings, assumptions, and measurement gaps in distinct fields.'],
-                ['03', 'Ship', 'Export a decision with its source, owner, acceptance check, and rerun path.'],
-              ].map(([num, title, copy], index) => (
-                <div key={num} className="min-h-52 border-b border-ink/14 py-7 last:border-b-0 md:border-b-0 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0 md:last:pr-0">
-                  <ScrollReveal delay={index * 0.08} blur={false} className="grid h-full min-h-40 content-between">
-                    <span className="font-serif text-xl italic text-ink/46">{num}</span>
-                    <div>
-                      <h3 className="font-serif text-4xl font-light tracking-normal">{title}</h3>
-                      <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/62">{copy}</p>
-                    </div>
-                  </ScrollReveal>
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
 
         {/* TEXT MARQUEE */}
@@ -1228,45 +1181,44 @@ function HomePage() {
            <KineticTypography />
         </section>
 
-        {/* FOOTER */}
+        {/* CONTACT */}
         <footer id="contact" className="relative w-full overflow-hidden border-t border-ink/14 bg-canvas text-ink selection:bg-ink selection:text-canvas">
-          <div className="mx-auto w-full max-w-[1800px] px-4 py-24 md:px-16 md:py-36">
-            <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-8">
-              <div className="md:col-span-5">
-                <ScrollReveal blur={false}>
-                  <span className="block text-[10px] uppercase tracking-[0.3em] text-ink/56">Contact / Direct</span>
-                  <h2 className="mt-10 max-w-[7ch] font-serif text-[4rem] font-light leading-[0.84] tracking-normal sm:text-7xl md:text-[5.5rem] lg:text-[6.3rem]">
-                    Send the <span className="italic">brief.</span>
-                  </h2>
-                  <p className="mt-10 max-w-sm text-sm leading-[1.8] text-ink/64 md:text-base">
-                    A URL, the decision in front of you, and the evidence that feels incomplete is enough to start.
-                  </p>
-                  <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="mt-8 inline-block border-b border-ink/24 pb-1 text-[10px] uppercase tracking-[0.24em] text-ink/68 transition-colors hover:border-ink hover:text-ink">
-                    sulayman.bowles@gmail.com
-                  </a>
-                </ScrollReveal>
-              </div>
+          <div className="mx-auto grid min-h-[62vh] w-full max-w-[1800px] content-between px-4 py-16 md:px-16 md:py-24">
+            <a
+              href="mailto:sulayman.bowles@gmail.com"
+              id="footer-link-email"
+              className="group inline-flex w-fit max-w-full items-end gap-4 font-serif text-[clamp(3.5rem,11vw,11rem)] italic leading-[0.8] tracking-normal transition-colors duration-200 hover:text-ink/58 motion-reduce:transition-none"
+            >
+              <span>Email.</span>
+              <span aria-hidden="true" className="mb-1 text-[0.28em] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none">↗</span>
+              <span className="sr-only">sulayman.bowles@gmail.com</span>
+            </a>
 
-              <ScrollReveal delay={0.12} yOffset={12} blur={false} className="md:col-span-7 md:pl-8">
-                <AuditIntakeForm variant="editorial" tone="light" submitLabel="SEND BRIEF" />
-              </ScrollReveal>
-            </div>
+            <nav className="mt-16 grid border-y border-ink/14 sm:grid-cols-3" aria-label="Contact links">
+              {[
+                ['LinkedIn', PROFILE_FACTS.canonicalLinks.linkedin],
+                ['Résumé', '/resume'],
+                ['GitHub', PROFILE_FACTS.canonicalLinks.github],
+              ].map(([label, href], index) => {
+                const external = href.startsWith('http');
 
-            <div className="mt-24 flex flex-col gap-10 border-t border-ink/14 pt-8 md:mt-32 md:flex-row md:items-end md:justify-between">
-              <Suspense fallback={null}><LocalTime /></Suspense>
-              <nav className="flex max-w-4xl flex-wrap gap-x-7 gap-y-4 text-[10px] uppercase tracking-[0.2em] text-ink/62 md:justify-end" aria-label="Footer navigation">
-                {[...primaryNav, ...utilityNav].map((item) => (
+                return (
                   <a
-                    key={item.href}
-                    href={item.href}
-                    id={navItemId('home-footer-link', item)}
-                    className="border-b border-transparent pb-1 transition-colors hover:border-ink hover:text-ink"
+                    key={href}
+                    href={href}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noreferrer' : undefined}
+                    className="group flex min-h-20 items-center justify-between gap-5 border-b border-ink/14 px-4 text-[10px] uppercase tracking-[0.24em] text-ink/64 transition-colors duration-200 last:border-b-0 hover:bg-ink hover:text-canvas motion-reduce:transition-none sm:border-b-0 sm:border-r sm:last:border-r-0"
                   >
-                    {navLabel(item)}
+                    <span className="flex items-center gap-4">
+                      <span className="font-serif text-sm italic tracking-normal text-current/45">{String(index + 1).padStart(2, '0')}</span>
+                      {label}
+                    </span>
+                    <span aria-hidden="true" className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none">↗</span>
                   </a>
-                ))}
-              </nav>
-            </div>
+                );
+              })}
+            </nav>
           </div>
         </footer>
       </main>
