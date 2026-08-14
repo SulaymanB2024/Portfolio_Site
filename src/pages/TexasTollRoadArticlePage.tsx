@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 
 import {
   ArticleReader,
@@ -579,7 +579,14 @@ function SourceLedger({ index }: { index: string }) {
               <p>{source.note}</p>
               <div className="toll-source-ledger__links">
                 {source.hrefs.map((href, index) => (
-                  <a key={href} href={href} target="_blank" rel="noreferrer">
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="article-reader__external-link"
+                    aria-label={`Open ${source.label}${source.hrefs.length > 1 ? ` source ${index + 1}` : ''} in a new tab`}
+                  >
                     {source.hrefs.length > 1 ? `Open source ${index + 1}` : 'Open source'}
                   </a>
                 ))}
@@ -594,43 +601,6 @@ function SourceLedger({ index }: { index: string }) {
 
 export default function TexasTollRoadArticlePage() {
   useSEO(ROUTE);
-
-  useEffect(() => {
-    const targetId = window.location.hash.slice(1);
-
-    if (!targetId) {
-      window.scrollTo(0, 0);
-      return undefined;
-    }
-
-    let frame = 0;
-    let attempts = 0;
-    const scrollToTarget = () => {
-      const target = document.querySelector<HTMLElement>(`#top #${CSS.escape(targetId)}`);
-      const lenis = window.lenis as unknown as {
-        resize?: () => void;
-        scrollTo: (target: HTMLElement, options: { immediate: boolean }) => void;
-      } | undefined;
-
-      if (target && lenis) {
-        lenis.resize?.();
-        lenis.scrollTo(target, { immediate: true });
-        return;
-      }
-
-      if (attempts < 4) {
-        attempts += 1;
-        frame = window.requestAnimationFrame(scrollToTarget);
-        return;
-      }
-
-      target?.scrollIntoView();
-    };
-
-    frame = window.requestAnimationFrame(scrollToTarget);
-
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
 
   const navItems: ArticleNavItem[] = createArticleNavigation([
     { kind: 'overview', id: 'overview', label: 'Overview' },
@@ -676,6 +646,7 @@ export default function TexasTollRoadArticlePage() {
       },
     },
     publication: {
+      author: 'Sulayman Bowles',
       subject: 'Infrastructure ownership',
       published: {
         dateTime: TEXAS_TOLL_ARTICLE_DATE.replaceAll('.', '-'),

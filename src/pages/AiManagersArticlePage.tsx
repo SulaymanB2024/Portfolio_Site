@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 
 import {
   ArticleReader,
@@ -94,7 +94,7 @@ function HallOfShameFigure() {
     <figure className="ai-hall-of-shame" aria-labelledby="hall-of-shame-caption" data-image-slot="andon-cafe-hall-of-shame">
       <div className="toll-figure-label">
         <span>Opening scene / Andon Café</span>
-        <span>Default editorial visual</span>
+        <span>Inventory failure pattern</span>
       </div>
       <div className="ai-hall-of-shame__header">
         <p>Inventory received</p>
@@ -111,7 +111,7 @@ function HallOfShameFigure() {
         ))}
       </div>
       <figcaption id="hall-of-shame-caption">
-        Quantity errors made the abstract management problem physical. This code-native figure is the planned replacement slot for the supplied café image.
+        Quantity errors made the abstract management problem physical: locally plausible actions accumulated into an incoherent operating policy.
       </figcaption>
     </figure>
   );
@@ -307,7 +307,7 @@ function CaseExplorer() {
         <p><strong>{filteredCases.length}</strong> shown</p>
       </div>
       <div className="ai-case-explorer__controls">
-        <div className="ai-case-explorer__filters" aria-label="Filter cases by operating form">
+        <div className="ai-case-explorer__filters" role="group" aria-label="Filter cases by operating form">
           {caseFilters.map((filter) => (
             <button
               type="button"
@@ -427,7 +427,14 @@ function SourceLedger({ index }: { index: string }) {
               <p>{source.note}</p>
               <p className="ai-source-limit"><span>Limit</span> {source.limitation}</p>
               <div className="toll-source-ledger__links">
-                <a href={source.href} target={source.href.startsWith('#') ? undefined : '_blank'} rel={source.href.startsWith('#') ? undefined : 'noreferrer'}>
+                <a
+                  href={source.href}
+                  target={source.href.startsWith('#') ? undefined : '_blank'}
+                  rel={source.href.startsWith('#') ? undefined : 'noreferrer'}
+                  aria-label={source.href.startsWith('#')
+                    ? `Open ${source.label} in the field map`
+                    : `Open ${source.label} in a new tab`}
+                >
                   {source.href.startsWith('#') ? 'Open field map' : 'Open source ↗'}
                 </a>
               </div>
@@ -441,34 +448,6 @@ function SourceLedger({ index }: { index: string }) {
 
 export default function AiManagersArticlePage() {
   useSEO(ROUTE);
-
-  useEffect(() => {
-    const targetId = window.location.hash.slice(1);
-    if (!targetId) {
-      window.scrollTo(0, 0);
-      return undefined;
-    }
-
-    let frame = 0;
-    let attempts = 0;
-    const scrollToTarget = () => {
-      const target = document.querySelector<HTMLElement>(`#top #${CSS.escape(targetId)}`);
-      const lenis = window.lenis as unknown as { resize?: () => void; scrollTo: (target: HTMLElement, options: { immediate: boolean }) => void } | undefined;
-      if (target && lenis) {
-        lenis.resize?.();
-        lenis.scrollTo(target, { immediate: true });
-        return;
-      }
-      if (attempts < 4) {
-        attempts += 1;
-        frame = window.requestAnimationFrame(scrollToTarget);
-        return;
-      }
-      target?.scrollIntoView();
-    };
-    frame = window.requestAnimationFrame(scrollToTarget);
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
 
   const navItems: ArticleNavItem[] = createArticleNavigation([
     {
@@ -514,6 +493,7 @@ export default function AiManagersArticlePage() {
       },
     },
     publication: {
+      author: 'Sulayman Bowles',
       subject: 'AI systems / business operations',
       published: {
         dateTime: AI_MANAGERS_ARTICLE_DATE.replaceAll('.', '-'),
@@ -521,7 +501,7 @@ export default function AiManagersArticlePage() {
       },
       updated: {
         dateTime: AI_MANAGERS_ARTICLE_UPDATED.replaceAll('.', '-'),
-        value: 'July 14, 2026',
+        value: 'July 19, 2026',
       },
       readTime: AI_MANAGERS_ARTICLE_READ_TIME,
       evidence: `${AI_MANAGER_SOURCES.length} sources`,
