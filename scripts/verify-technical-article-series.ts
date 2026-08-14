@@ -132,6 +132,24 @@ function assertSharedReaderSource(filePath: string) {
   assert(!source.includes('<ArticleHero'), `${filePath}: bypasses the shared reader configuration`);
 }
 
+const articleLayoutSource = fs.readFileSync('src/components/ArticleLayout.tsx', 'utf8');
+assert(
+  articleLayoutSource.includes('export function useArticleHashNavigation()'),
+  'shared reader must export useArticleHashNavigation',
+);
+assert(
+  articleLayoutSource.includes('useArticleHashNavigation();'),
+  'ArticlePage must activate shared hash navigation',
+);
+assert(
+  articleLayoutSource.includes("window.addEventListener('hashchange', handleLocationChange)"),
+  'shared hash navigation must respond to hash changes',
+);
+assert(
+  articleLayoutSource.includes("boundaryLabel = 'Boundary'"),
+  'ArticleBody must keep the optional boundaryLabel contract',
+);
+
 function assertNavigationContract(
   owner: string,
   seeds: ArticleNavigationSeed[],

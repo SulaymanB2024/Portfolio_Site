@@ -133,12 +133,7 @@ type ArticlePageProps = {
   className?: string;
 };
 
-function ArticlePage({
-  activePath,
-  mode,
-  children,
-  className = '',
-}: ArticlePageProps) {
+export function useArticleHashNavigation() {
   useEffect(() => {
     let currentTarget: HTMLElement | null = null;
     let frame = 0;
@@ -254,6 +249,15 @@ function ArticlePage({
       window.removeEventListener('popstate', handleLocationChange);
     };
   }, []);
+}
+
+function ArticlePage({
+  activePath,
+  mode,
+  children,
+  className = '',
+}: ArticlePageProps) {
+  useArticleHashNavigation();
 
   return (
     <PageShell
