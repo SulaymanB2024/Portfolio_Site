@@ -1187,7 +1187,7 @@ function HomePage() {
             <a
               href="mailto:sulayman.bowles@gmail.com"
               id="footer-link-email"
-              className="group inline-flex w-fit max-w-full items-end gap-4 font-serif text-[clamp(3.5rem,11vw,11rem)] italic leading-[0.8] tracking-normal transition-colors duration-200 hover:text-ink/58 motion-reduce:transition-none"
+              className="group inline-flex w-fit max-w-full items-end gap-4 font-serif text-6xl italic leading-[0.8] tracking-normal transition-colors duration-200 hover:text-ink/58 motion-reduce:transition-none sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[11rem]"
             >
               <span>Email.</span>
               <span aria-hidden="true" className="mb-1 text-[0.28em] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none">↗</span>

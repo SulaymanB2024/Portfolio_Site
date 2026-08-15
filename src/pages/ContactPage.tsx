@@ -52,7 +52,7 @@ export default function ContactPage() {
           <div className="relative z-10 flex items-center">
             <a
               href="mailto:sulayman.bowles@gmail.com"
-              className="group inline-flex max-w-full items-end gap-4 font-serif text-[clamp(3.5rem,10vw,10rem)] italic leading-[0.8] tracking-normal text-canvas transition-colors duration-200 hover:text-accent motion-reduce:transition-none"
+              className="group inline-flex max-w-full items-end gap-4 font-serif text-6xl italic leading-[0.8] tracking-normal text-canvas transition-colors duration-200 hover:text-accent motion-reduce:transition-none sm:text-7xl md:text-8xl lg:text-[8rem] xl:text-[10rem]"
             >
               <span className="min-w-0 break-words">Email.</span>
               <ArrowUpRight
