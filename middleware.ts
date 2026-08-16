@@ -1,6 +1,5 @@
 import { next } from '@vercel/functions';
 
-import { trailingSlashRedirectUrl } from './packages/bot-observer/canonical-url.js';
 import {
   createBotEvent,
   getBotObserverRuntimeConfig,
@@ -22,16 +21,6 @@ function reportDeliveryFailure(): void {
 }
 
 export default function middleware(request: Request, context: RequestContext) {
-  const canonicalUrl = trailingSlashRedirectUrl(request.url);
-  if (canonicalUrl) {
-    return new Response(null, {
-      status: 308,
-      headers: {
-        Location: canonicalUrl,
-      },
-    });
-  }
-
   const observerConfig = getBotObserverRuntimeConfig(process.env);
   if (observerConfig && shouldObserveRequest(request)) {
     const event = createBotEvent(request, observerConfig);
