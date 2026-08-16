@@ -23,6 +23,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run verify:seo
+      - run: npm run verify:vercel-seo
       - run: npm run verify:internal-links
       - run: npm run verify:keywords
       - run: npm run verify:reduction

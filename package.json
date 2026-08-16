@@ -29,6 +29,7 @@
     "verify:articles-live": "tsx scripts/verify-live-article-routes.ts",
     "verify:article-ranking": "tsx scripts/verify-article-ranking-program.ts",
     "verify:seo": "node scripts/verify-ai-search-seo.mjs",
+    "verify:vercel-seo": "node scripts/verify-vercel-seo-routes.mjs",
     "verify:generated": "tsx scripts/verify-generated-public-files.ts",
     "verify:internal-links": "tsx scripts/verify-internal-link-targeting.ts",
     "verify:keywords": "tsx scripts/verify-keyword-targeting.ts",
