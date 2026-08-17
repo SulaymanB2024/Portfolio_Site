@@ -33,9 +33,20 @@ jobs:
           import io
           import zipfile
 
-          parts = sorted(Path('scripts').glob('optimum-web-text-assets.b64x.part*'))
-          if not parts:
-              raise SystemExit('No article package parts found')
+          part_names = [
+              'optimum-web-text-assets.b64x.part00',
+              'optimum-web-text-assets.b64x.part01',
+              'optimum-web-text-assets.b64x.part02',
+              'optimum-web-text-assets.b64x.part03',
+              'optimum-web-text-assets.b64x.part04a',
+              'optimum-web-text-assets.b64x.part04b',
+              'optimum-web-text-assets.b64x.part05',
+              'optimum-web-text-assets.b64x.part06',
+          ]
+          parts = [Path('scripts') / name for name in part_names]
+          missing = [str(part) for part in parts if not part.exists()]
+          if missing:
+              raise SystemExit(f'Missing article package parts: {missing}')
           payload = ''.join(part.read_text(encoding='ascii') for part in parts)
           archive = base64.b64decode(payload.encode('ascii'), validate=True)
           with zipfile.ZipFile(io.BytesIO(archive)) as bundle:
