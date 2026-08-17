@@ -1,0 +1,81 @@
+name: Publish Optimum debt-wall research
+
+on:
+  push:
+    branches:
+      - content/optimum-2027-debt-wall
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-optimum-debt-wall
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: ${{ !contains(github.event.head_commit.message, '[article-publish-complete]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Materialize the audited article package
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          import io
+          import zipfile
+
+          parts = sorted(Path('scripts').glob('optimum-web-text-assets.b64x.part*'))
+          if not parts:
+              raise SystemExit('No article package parts found')
+          payload = ''.join(part.read_text(encoding='ascii') for part in parts)
+          archive = base64.b64decode(payload.encode('ascii'), validate=True)
+          with zipfile.ZipFile(io.BytesIO(archive)) as bundle:
+              bundle.extractall('.')
+          print(f'Extracted {len(bundle.namelist())} article files from {len(parts)} package parts')
+          PY
+      - run: npm ci
+      - name: Integrate article into current site architecture
+        run: node scripts/apply-optimum-debt-wall.mjs
+      - name: Regenerate tracked article and public manifests
+        run: |
+          npm run generate:article-routes
+          npm run generate:public
+      - name: Remove one-use automation from the final branch
+        run: |
+          rm .github/workflows/publish-optimum-debt-wall.yml
+          rm scripts/apply-optimum-debt-wall.mjs
+          rm scripts/optimum-web-text-assets.b64x.part*
+          rm -f scripts/optimum-web-text-assets.b85.part*
+      - name: Validate article and repository
+        run: |
+          npm run test:bot-observer
+          npm run test:portfolio-analytics
+          npm run verify:bot-observer
+          npm run verify:generated
+          npm run lint
+          npm run build
+          npm run verify:articles
+          npm run verify:article-ranking
+          npm run verify:internal-links
+          npm run verify:keywords
+          npm run verify:seo
+          npm run verify:reduction
+          npm run audit:style
+          npm run verify:security
+      - name: Commit generated publication bundle
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --stat
+          git commit -m "Content: publish Optimum debt-wall research [article-publish-complete]"
+          git push origin HEAD:${{ github.ref_name }}
