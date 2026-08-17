@@ -62,11 +62,12 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Technical SEO as Public Data Infrastructure](https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure)
 - [Canonical Identity Beats More Content](https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo)
 - [Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics](https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads)
+- [UNI Is Deflationary in Economics, Not in ERC-20 Accounting](https://sulayman-bowles.dev/research/financial-systems/uni-burn-supply-accounting)
 - [Atlas open-corpus CSV](https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.csv): URL-level rows from the dated public demonstration.
 - [Atlas open-corpus capture manifest](https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.json): Run scope, method, and claim limit.
 - [Appian educational research memo PDF](https://sulayman-bowles.dev/research/appian-enterprise-software-durability-memo.pdf): Educational research, not investment advice.
 - [Appian assumptions table CSV](https://sulayman-bowles.dev/research/appian-assumptions-table.csv): Companion assumptions table.
-- [Authority asset index](https://sulayman-bowles.dev/research/authority-assets.json): Typed index of public assets and their claim boundaries.
+- [Authority asset index](https://sulayman-bowles.dev/research/authority-assets.json): Typed index of public assets and claim boundaries.
 - [Article research briefs](https://sulayman-bowles.dev/research/article-research-briefs.json): Intent, evidence-gap, artifact, and scope records.
 - [Texas toll-road ownership matrix](https://sulayman-bowles.dev/research/texas-toll-road-ownership-2026.csv): Dated source-linked ownership rows.
 - [Crawler policy sources](https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv): Official documentation and IP-manifest source map.
