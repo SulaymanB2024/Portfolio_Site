@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Check out research branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: content/internship-posting-lifespans
 
@@ -26,11 +26,8 @@ jobs:
           curl --fail --location --retry 3 \
             https://raw.githubusercontent.com/SimplifyJobs/Summer2027-Internships/3c16fd5d8ff8fe54a073bccfdb1990fa01e8154b/.github/scripts/listings.json \
             --output export/listings.json
-          curl --fail --location --retry 3 \
-            https://raw.githubusercontent.com/SimplifyJobs/Summer2027-Internships/3c16fd5d8ff8fe54a073bccfdb1990fa01e8154b/archived/README-2026.md \
-            --output export/archive_README_2026.md
           git archive --format=zip --output=export/site-source.zip HEAD
-          sha256sum export/listings.json export/archive_README_2026.md export/site-source.zip > export/SHA256SUMS.txt
+          sha256sum export/listings.json export/site-source.zip > export/SHA256SUMS.txt
 
       - name: Upload research inputs
         uses: actions/upload-artifact@v4
