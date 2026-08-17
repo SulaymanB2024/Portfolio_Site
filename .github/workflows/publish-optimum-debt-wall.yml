@@ -60,6 +60,7 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import base64
           import re
 
           hero_path = Path('public/images/research/optimum-2027-debt-wall-reader-hero.svg')
@@ -79,18 +80,9 @@ jobs:
           marker = 'SVG artwork may be text rather than a binary raster header.'
           if marker not in verifier:
               needle = "  throw new Error(`Unsupported image header: ${filePath}`);"
-              svg_support = r"""  // SVG artwork may be text rather than a binary raster header.
-  const svg = buffer.toString('utf8');
-  const svgTag = svg.match(/<svg\b[^>]*>/i)?.[0];
-  if (svgTag) {
-    const width = svgTag.match(/\bwidth=["']([\d.]+)(?:px|pt)?["']/i)?.[1];
-    const height = svgTag.match(/\bheight=["']([\d.]+)(?:px|pt)?["']/i)?.[1];
-    if (width && height) {
-      return { width: Math.round(Number(width)), height: Math.round(Number(height)) };
-    }
-  }
-
-"""
+              svg_support = base64.b64decode(
+                  'ICAvLyBTVkcgYXJ0d29yayBtYXkgYmUgdGV4dCByYXRoZXIgdGhhbiBhIGJpbmFyeSByYXN0ZXIgaGVhZGVyLgogIGNvbnN0IHN2ZyA9IGJ1ZmZlci50b1N0cmluZygndXRmOCcpOwogIGNvbnN0IHN2Z1RhZyA9IHN2Zy5tYXRjaCgvPHN2Z1xiW14+XSo+L2kpPy5bMF07CiAgaWYgKHN2Z1RhZykgewogICAgY29uc3Qgd2lkdGggPSBzdmdUYWcubWF0Y2goL1xid2lkdGg9WyInXShbXGQuXSspKD86cHh8cHQpP1siJ10vaSk/LlsxXTsKICAgIGNvbnN0IGhlaWdodCA9IHN2Z1RhZy5tYXRjaCgvXGJoZWlnaHQ9WyInXShbXGQuXSspKD86cHh8cHQpP1siJ10vaSk/LlsxXTsKICAgIGlmICh3aWR0aCAmJiBoZWlnaHQpIHsKICAgICAgcmV0dXJuIHsgd2lkdGg6IE1hdGgucm91bmQoTnVtYmVyKHdpZHRoKSksIGhlaWdodDogTWF0aC5yb3VuZChOdW1iZXIoaGVpZ2h0KSkgfTsKICAgIH0KICB9Cgo='
+              ).decode('utf-8')
               if verifier.count(needle) != 1:
                   raise SystemExit('Could not locate image-header verifier insertion point')
               verifier = verifier.replace(needle, svg_support + needle)
