@@ -6,6 +6,7 @@ on:
       - content/treasury-interest-repricing
     paths:
       - "research/treasury-interest-repricing/fetch_treasury_data.py"
+      - "research/treasury-interest-repricing/fetch_treasury_data_v2.py"
       - ".github/workflows/treasury-interest-data.yml"
   workflow_dispatch:
 
@@ -19,7 +20,7 @@ concurrency:
 jobs:
   fetch-data:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Check out research branch
         uses: actions/checkout@v4
@@ -33,7 +34,7 @@ jobs:
           python-version: "3.12"
 
       - name: Fetch Treasury Fiscal Data
-        run: python research/treasury-interest-repricing/fetch_treasury_data.py
+        run: python research/treasury-interest-repricing/fetch_treasury_data_v2.py
 
       - name: Upload source snapshots
         uses: actions/upload-artifact@v4
