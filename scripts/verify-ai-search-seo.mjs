@@ -40,8 +40,8 @@ const asTypes = (value) => Array.isArray(value) ? value : [value];
 const hasType = (item, type) => asTypes(item?.['@type']).includes(type);
 const canonicalUrlFor = (pathname) => `${siteUrl}${pathname === '/' ? '/' : pathname}`;
 const headFromHtml = (html) => html.match(/<head[^>]*>([\s\S]*?)<\/head>/i)?.[1] ?? '';
-const tags = (html, tagName) => [...headFromHtml(html).matchAll(new RegExp(`<${tagName}\\b[^>]*>`, 'gi'))].map((match) => match[0]);
-const attr = (tag, name) => tag.match(new RegExp(`\\b${name}=(?:\"([^\"]*)\"|'([^']*)')`, 'i'))?.slice(1).find((value) => value !== undefined);
+const tags = (html, tagName) => [...headFromHtml(html).matchAll(new RegExp(`<${tagName}\b[^>]*>`, 'gi'))].map((match) => match[0]);
+const attr = (tag, name) => tag.match(new RegExp(`\b${name}=(?:"([^"]*)"|'([^']*)')`, 'i'))?.slice(1).find((value) => value !== undefined);
 const relTokens = (tag) => new Set((attr(tag, 'rel') ?? '').toLowerCase().split(/\s+/).filter(Boolean));
 const metaTags = (html, key, value) => tags(html, 'meta').filter((tag) => attr(tag, key)?.toLowerCase() === value.toLowerCase());
 const linkTags = (html, rel) => tags(html, 'link').filter((tag) => relTokens(tag).has(rel.toLowerCase()));
@@ -62,7 +62,7 @@ function pathnameFromStaticFile(file) {
 }
 
 function xmlText(block, tagName) {
-  return block.match(new RegExp(`<${tagName}>([\\s\\S]*?)</${tagName}>`, 'i'))?.[1]?.trim();
+  return block.match(new RegExp(`<${tagName}>([\s\S]*?)</${tagName}>`, 'i'))?.[1]?.trim();
 }
 
 const sitemap = read('public/sitemap.xml');
@@ -347,7 +347,7 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('25 Notes and Artifacts'), 'research: publication count is not derived as twenty-five');
+assert(textFromHtml(research).includes('26 Notes and Artifacts'), 'research: publication count is not derived as twenty-six');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
 assert(textFromHtml(research).includes('Who Owns Austin’s Home-Service Companies?'), 'research: Austin home-service ownership article missing');
 assert(textFromHtml(research).includes('Who Funds Waymo’s Hardware?'), 'research: Waymo financing article missing');
