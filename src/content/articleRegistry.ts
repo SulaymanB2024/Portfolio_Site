@@ -1,11 +1,13 @@
 import type { PublicArticle } from './articleModels';
 import { INVESTMENT_MEMOS } from './marketTheses';
+import { RARE_EARTH_MAGNET_BUILDOUT_ARTICLE } from './rareEarthMagnetBuildoutArticle';
 import { RESEARCH_ARTICLES } from './researchArticles';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 
 export const ALL_ARTICLES: PublicArticle[] = [
   ...TECHNICAL_ARTICLE_SERIES,
   ...RESEARCH_ARTICLES,
+  RARE_EARTH_MAGNET_BUILDOUT_ARTICLE,
   ...INVESTMENT_MEMOS,
 ];
 export const INDEXABLE_ARTICLES = ALL_ARTICLES.filter((article) => article.indexable !== false);
