@@ -1,0 +1,50 @@
+name: Treasury interest research data
+
+on:
+  push:
+    branches:
+      - content/treasury-interest-repricing
+    paths:
+      - "research/treasury-interest-repricing/fetch_treasury_data.py"
+      - ".github/workflows/treasury-interest-data.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: treasury-interest-data-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  fetch-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch Treasury Fiscal Data
+        run: python research/treasury-interest-repricing/fetch_treasury_data.py
+
+      - name: Commit source snapshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add research/treasury-interest-repricing/data
+          if git diff --cached --quiet; then
+            echo "Treasury source snapshots are already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "research: refresh Treasury source snapshots"
+          git push origin HEAD:${{ github.ref_name }}
