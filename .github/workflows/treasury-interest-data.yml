@@ -14,12 +14,12 @@ permissions:
 
 concurrency:
   group: treasury-interest-data-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   fetch-data:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - name: Check out research branch
         uses: actions/checkout@v4
