@@ -1,0 +1,42 @@
+name: Temporary internship registry analysis
+
+on:
+  push:
+    branches:
+      - content/internship-posting-lifespans
+    paths:
+      - .github/workflows/temporary-internship-registry-analysis.yml
+      - scripts/temporary_analyze_internship_lifespans.py
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: content/internship-posting-lifespans
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run registry diagnostics
+        run: python scripts/temporary_analyze_internship_lifespans.py
+
+      - name: Commit aggregate diagnostics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research_tmp
+          if git diff --cached --quiet; then
+            echo "No diagnostic changes to commit."
+          else
+            git commit -m "research: generate internship registry diagnostics"
+            git push origin HEAD:content/internship-posting-lifespans
+          fi
