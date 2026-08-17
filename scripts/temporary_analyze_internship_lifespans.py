@@ -1,25 +1,29 @@
 #!/usr/bin/env python3
-"""Temporary research probe for the Summer 2026 internship registry.
+"""Build a reproducible research bundle from the Summer 2026 internship registry.
 
-The script is intentionally standard-library only so it can run in GitHub Actions.
-It downloads the registry at the archive snapshot commit and emits aggregate
-research diagnostics. It does not redistribute the raw registry.
+This is a temporary research utility. It downloads the public registry at the
+commit used for the closed Summer 2026 archive, constructs the archive cohort,
+and emits only derived/cleaned data plus aggregate diagnostics. The original
+registry is not committed.
 """
 
 from __future__ import annotations
 
 import csv
 import json
+import math
 import re
-import statistics
 import urllib.parse
 import urllib.request
+import zipfile
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Sequence
 
 SNAPSHOT_SHA = "3c16fd5d8ff8fe54a073bccfdb1990fa01e8154b"
+SNAPSHOT_AT = datetime(2026, 7, 29, 16, 0, 54, tzinfo=timezone.utc)
+ARCHIVE_CUTOFF = SNAPSHOT_AT - timedelta(days=30)
 SOURCE_URL = (
     "https://raw.githubusercontent.com/SimplifyJobs/"
     f"Summer2027-Internships/{SNAPSHOT_SHA}/.github/scripts/listings.json"
@@ -27,12 +31,40 @@ SOURCE_URL = (
 OUT_DIR = Path("research_tmp")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+CATEGORY_MAP = {
+    "Software": "Software Engineering",
+    "Software Engineering": "Software Engineering",
+    "Product": "Product Management",
+    "Product Management": "Product Management",
+    "AI/ML/Data": "Data Science, AI & Machine Learning",
+    "Data Science, AI & Machine Learning": "Data Science, AI & Machine Learning",
+    "Quant": "Quantitative Finance",
+    "Quantitative Finance": "Quantitative Finance",
+    "Hardware": "Hardware Engineering",
+    "Hardware Engineering": "Hardware Engineering",
+}
+CATEGORY_ORDER = [
+    "Software Engineering",
+    "Product Management",
+    "Data Science, AI & Machine Learning",
+    "Quantitative Finance",
+    "Hardware Engineering",
+]
+
+US_STATE_CODES = {
+    "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID",
+    "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS",
+    "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK",
+    "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV",
+    "WI", "WY", "DC",
+}
+CANADA_CODES = {
+    "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"
+}
+
 
 def fetch_json(url: str) -> list[dict[str, Any]]:
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": "sulayman-bowles-research/1.0"},
-    )
+    req = urllib.request.Request(url, headers={"User-Agent": "sulayman-bowles-research/1.0"})
     with urllib.request.urlopen(req, timeout=180) as response:
         return json.load(response)
 
@@ -50,6 +82,11 @@ def norm_text(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "").strip().lower())
 
 
+def normalized_category(value: Any) -> str:
+    raw = str(value or "Unknown")
+    return CATEGORY_MAP.get(raw, raw)
+
+
 def norm_url(value: Any) -> str:
     raw = str(value or "").strip()
     if not raw:
@@ -57,29 +94,80 @@ def norm_url(value: Any) -> str:
     try:
         parsed = urllib.parse.urlsplit(raw)
         host = parsed.netloc.lower().removeprefix("www.")
-        path = re.sub(r"/+", "/", parsed.path).rstrip("/")
-        # Preserve the path because ATS requisition IDs often live there. Drop
-        # tracking parameters and fragments; they do not identify a vacancy.
-        return f"{host}{path}".lower()
+        path = re.sub(r"/+", "/", parsed.path).rstrip("/").lower()
+        params = urllib.parse.parse_qs(parsed.query, keep_blank_values=False)
+        # Retain query parameters that can carry the actual requisition ID when
+        # the path itself is generic; strip tracking parameters.
+        id_keys = {
+            "gh_jid", "jobid", "job_id", "jid", "reqid", "req_id", "requisitionid",
+            "requisition_id", "rid", "postingid", "posting_id", "job", "jobnumber",
+        }
+        kept: list[tuple[str, str]] = []
+        for key, values in params.items():
+            if key.lower() in id_keys:
+                kept.extend((key.lower(), str(v)) for v in values)
+        query = urllib.parse.urlencode(sorted(kept))
+        return f"{host}{path}" + (f"?{query}" if query else "")
     except ValueError:
         return raw.lower()
 
 
-def month_key(dt: datetime | None) -> str:
-    return dt.strftime("%Y-%m") if dt else "unknown"
-
-
-def percentile(values: list[float], p: float) -> float | None:
+def percentile(values: Sequence[float], p: float) -> float | None:
     if not values:
         return None
     xs = sorted(values)
     if len(xs) == 1:
-        return xs[0]
+        return float(xs[0])
     pos = (len(xs) - 1) * p
-    lo = int(pos)
-    hi = min(lo + 1, len(xs) - 1)
+    lo = math.floor(pos)
+    hi = math.ceil(pos)
+    if lo == hi:
+        return float(xs[lo])
     frac = pos - lo
-    return xs[lo] * (1 - frac) + xs[hi] * frac
+    return float(xs[lo] * (1 - frac) + xs[hi] * frac)
+
+
+def date_quantile(rows: Sequence[dict[str, Any]], p: float) -> str | None:
+    ts = [r["posted_at"].timestamp() for r in rows if r.get("posted_at")]
+    value = percentile(ts, p)
+    return datetime.fromtimestamp(value, tz=timezone.utc).date().isoformat() if value is not None else None
+
+
+def week_start(d: date) -> date:
+    return d - timedelta(days=d.weekday())
+
+
+def classify_region(locations: Sequence[str]) -> str:
+    if not locations:
+        return "Unknown"
+    labels: set[str] = set()
+    for raw in locations:
+        text = str(raw).strip()
+        lower = text.lower()
+        if any(token in lower for token in ["remote in usa", "remote - usa", "united states", "usa", "u.s."]):
+            labels.add("United States")
+            continue
+        if any(token in lower for token in ["remote in canada", "canada"]):
+            labels.add("Canada")
+            continue
+        if any(token in lower for token in ["united kingdom", " uk", "london", "england", "scotland", "wales"]):
+            labels.add("United Kingdom")
+            continue
+        if text in {"NYC", "SF", "LA", "United States"}:
+            labels.add("United States")
+            continue
+        codes = set(re.findall(r"\b[A-Z]{2}\b", text))
+        if codes & US_STATE_CODES:
+            labels.add("United States")
+        elif codes & CANADA_CODES:
+            labels.add("Canada")
+        else:
+            labels.add("Other")
+    if len(labels) == 1:
+        return next(iter(labels))
+    if not labels:
+        return "Unknown"
+    return "Multi-region"
 
 
 def write_csv(path: Path, fieldnames: list[str], rows: Iterable[dict[str, Any]]) -> None:
@@ -89,177 +177,384 @@ def write_csv(path: Path, fieldnames: list[str], rows: Iterable[dict[str, Any]])
         writer.writerows(rows)
 
 
+def timing_metrics(rows: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    if not rows:
+        return {
+            "n": 0,
+            "first_seen_min": None,
+            "p10": None,
+            "p25": None,
+            "median": None,
+            "p75": None,
+            "p90": None,
+            "first_seen_max": None,
+        }
+    dates = sorted(r["posted_at"].date() for r in rows)
+    result: dict[str, Any] = {
+        "n": len(rows),
+        "first_seen_min": dates[0].isoformat(),
+        "p10": date_quantile(rows, 0.10),
+        "p25": date_quantile(rows, 0.25),
+        "median": date_quantile(rows, 0.50),
+        "p75": date_quantile(rows, 0.75),
+        "p90": date_quantile(rows, 0.90),
+        "first_seen_max": dates[-1].isoformat(),
+    }
+    for threshold in [
+        date(2026, 1, 1), date(2026, 2, 1), date(2026, 3, 1),
+        date(2026, 4, 1), date(2026, 5, 1), date(2026, 6, 1),
+    ]:
+        key = f"share_on_or_after_{threshold.isoformat()}"
+        result[key] = sum(r["posted_at"].date() >= threshold for r in rows) / len(rows)
+    return result
+
+
 def main() -> None:
-    rows = fetch_json(SOURCE_URL)
-    visible = [r for r in rows if r.get("is_visible", True)]
-    summer_2026 = [
-        r for r in visible if "Summer 2026" in (r.get("terms") or [])
-    ]
+    raw_rows = fetch_json(SOURCE_URL)
+    visible = [r for r in raw_rows if r.get("is_visible", True)]
+    summer_rows: list[dict[str, Any]] = []
 
-    term_counts: Counter[str] = Counter()
-    for row in visible:
-        for term in row.get("terms") or ["(no term)"]:
-            term_counts[str(term)] += 1
-
-    posted_dates = [as_dt(r.get("date_posted")) for r in summer_2026]
-    posted_dates = [d for d in posted_dates if d]
-    updated_dates = [as_dt(r.get("date_updated")) for r in summer_2026]
-    updated_dates = [d for d in updated_dates if d]
-
-    deltas_days: list[float] = []
-    equal_dates = 0
-    negative_dates = 0
-    missing_dates = 0
-    for r in summer_2026:
-        p = as_dt(r.get("date_posted"))
-        u = as_dt(r.get("date_updated"))
-        if not p or not u:
-            missing_dates += 1
+    for raw in visible:
+        if "Summer 2026" not in (raw.get("terms") or []):
             continue
-        delta = (u - p).total_seconds() / 86400
-        if abs(delta) < 1e-9:
-            equal_dates += 1
-        elif delta < 0:
-            negative_dates += 1
-        else:
-            deltas_days.append(delta)
+        posted_at = as_dt(raw.get("date_posted"))
+        if not posted_at:
+            continue
+        row = dict(raw)
+        row["posted_at"] = posted_at
+        row["category_norm"] = normalized_category(raw.get("category"))
+        row["normalized_url"] = norm_url(raw.get("url"))
+        row["locations_norm"] = [str(x).strip() for x in (raw.get("locations") or [])]
+        row["region"] = classify_region(row["locations_norm"])
+        row["remote"] = any("remote" in x.lower() for x in row["locations_norm"])
+        summer_rows.append(row)
 
-    exact_url_counts = Counter(norm_url(r.get("url")) for r in summer_2026)
-    exact_url_counts.pop("", None)
-    duplicate_url_groups = {k: v for k, v in exact_url_counts.items() if v > 1}
-    rows_in_duplicate_url_groups = sum(duplicate_url_groups.values())
+    cutoff_candidates = {
+        "posted_before_exact_30_day_cutoff": sum(r["posted_at"] < ARCHIVE_CUTOFF for r in summer_rows),
+        "posted_on_or_before_exact_30_day_cutoff": sum(r["posted_at"] <= ARCHIVE_CUTOFF for r in summer_rows),
+        "posted_before_cutoff_calendar_day": sum(r["posted_at"].date() < ARCHIVE_CUTOFF.date() for r in summer_rows),
+        "posted_on_or_before_cutoff_calendar_day": sum(r["posted_at"].date() <= ARCHIVE_CUTOFF.date() for r in summer_rows),
+    }
 
-    composite_counts: Counter[str] = Counter()
-    for r in summer_2026:
-        locs = sorted(norm_text(x) for x in (r.get("locations") or []))
-        key = "|".join(
-            [norm_text(r.get("company_name")), norm_text(r.get("title")), ";".join(locs)]
-        )
-        composite_counts[key] += 1
-    duplicate_composite_groups = {k: v for k, v in composite_counts.items() if v > 1}
+    # This exact timestamp rule reproduces the archive-generation note: records
+    # first observed within 30 days of the snapshot are excluded.
+    archive_rows = [r for r in summer_rows if r["posted_at"] < ARCHIVE_CUTOFF]
 
-    month_counts: Counter[tuple[str, str]] = Counter()
-    source_month_counts: Counter[tuple[str, str]] = Counter()
-    category_counts: Counter[str] = Counter()
-    source_counts: Counter[str] = Counter()
-    active_counts: Counter[str] = Counter()
-    company_counts: Counter[str] = Counter()
-    location_count_distribution: Counter[int] = Counter()
+    # Exact-URL sensitivity dedupe: retain earliest observed record per normalized
+    # application URL. Empty URLs remain distinct via the listing ID.
+    by_url: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in archive_rows:
+        key = row["normalized_url"] or f"missing-url:{row.get('id')}"
+        by_url[key].append(row)
+    dedup_rows = [min(group, key=lambda r: r["posted_at"]) for group in by_url.values()]
 
-    for r in summer_2026:
-        dt = as_dt(r.get("date_posted"))
-        month = month_key(dt)
-        category = str(r.get("category") or "Unknown")
-        source = str(r.get("source") or "Unknown")
-        month_counts[(month, category)] += 1
-        source_month_counts[(month, source)] += 1
-        category_counts[category] += 1
-        source_counts[source] += 1
-        active_counts[str(bool(r.get("active"))).lower()] += 1
-        company_counts[str(r.get("company_name") or "Unknown")] += 1
-        location_count_distribution[len(r.get("locations") or [])] += 1
+    min_posted = min(r["posted_at"] for r in archive_rows)
+    launch_day = min_posted.date()
+    flow_rows = [r for r in archive_rows if r["posted_at"].date() > launch_day]
+    dedup_flow_rows = [r for r in dedup_rows if r["posted_at"].date() > launch_day]
 
-    month_rows = [
-        {"month": m, "category": c, "posting_records": n}
-        for (m, c), n in sorted(month_counts.items())
+    cleaned_fields = [
+        "listing_id", "posted_at_utc", "posted_date_utc", "week_start_utc", "month",
+        "category", "company", "title", "locations", "location_count", "region", "remote",
+        "sponsorship", "degrees", "source", "active_at_snapshot", "url", "normalized_url",
+        "launch_day_stock",
+    ]
+    cleaned_rows: list[dict[str, Any]] = []
+    for r in sorted(archive_rows, key=lambda x: (x["posted_at"], str(x.get("id")))):
+        posted_date = r["posted_at"].date()
+        cleaned_rows.append({
+            "listing_id": r.get("id"),
+            "posted_at_utc": r["posted_at"].isoformat(),
+            "posted_date_utc": posted_date.isoformat(),
+            "week_start_utc": week_start(posted_date).isoformat(),
+            "month": posted_date.strftime("%Y-%m"),
+            "category": r["category_norm"],
+            "company": str(r.get("company_name") or "").strip(),
+            "title": str(r.get("title") or "").strip(),
+            "locations": " | ".join(r["locations_norm"]),
+            "location_count": len(r["locations_norm"]),
+            "region": r["region"],
+            "remote": str(bool(r["remote"])).lower(),
+            "sponsorship": str(r.get("sponsorship") or "Unknown"),
+            "degrees": " | ".join(str(x) for x in (r.get("degrees") or [])),
+            "source": str(r.get("source") or "Unknown"),
+            "active_at_snapshot": str(bool(r.get("active"))).lower(),
+            "url": str(r.get("url") or ""),
+            "normalized_url": r["normalized_url"],
+            "launch_day_stock": str(posted_date == launch_day).lower(),
+        })
+    write_csv(OUT_DIR / "summer_2026_archive_cleaned.csv", cleaned_fields, cleaned_rows)
+
+    daily: Counter[tuple[date, str]] = Counter()
+    daily_dedup: Counter[tuple[date, str]] = Counter()
+    weekly: Counter[tuple[date, str]] = Counter()
+    weekly_dedup: Counter[tuple[date, str]] = Counter()
+    monthly: Counter[tuple[str, str]] = Counter()
+    for r in archive_rows:
+        d = r["posted_at"].date()
+        c = r["category_norm"]
+        daily[(d, c)] += 1
+        weekly[(week_start(d), c)] += 1
+        monthly[(d.strftime("%Y-%m"), c)] += 1
+    for r in dedup_rows:
+        d = r["posted_at"].date()
+        c = r["category_norm"]
+        daily_dedup[(d, c)] += 1
+        weekly_dedup[(week_start(d), c)] += 1
+
+    all_dates = sorted({d for d, _ in daily})
+    daily_rows: list[dict[str, Any]] = []
+    for d in all_dates:
+        for category in ["All"] + CATEGORY_ORDER:
+            if category == "All":
+                raw_n = sum(daily[(d, c)] for c in CATEGORY_ORDER)
+                dedup_n = sum(daily_dedup[(d, c)] for c in CATEGORY_ORDER)
+            else:
+                raw_n = daily[(d, category)]
+                dedup_n = daily_dedup[(d, category)]
+            daily_rows.append({
+                "date": d.isoformat(), "category": category,
+                "raw_posting_records": raw_n, "exact_url_dedup_records": dedup_n,
+            })
+    write_csv(
+        OUT_DIR / "summer_2026_archive_daily_flow.csv",
+        ["date", "category", "raw_posting_records", "exact_url_dedup_records"],
+        daily_rows,
+    )
+
+    all_weeks = sorted({d for d, _ in weekly})
+    weekly_rows: list[dict[str, Any]] = []
+    for d in all_weeks:
+        for category in ["All"] + CATEGORY_ORDER:
+            if category == "All":
+                raw_n = sum(weekly[(d, c)] for c in CATEGORY_ORDER)
+                dedup_n = sum(weekly_dedup[(d, c)] for c in CATEGORY_ORDER)
+            else:
+                raw_n = weekly[(d, category)]
+                dedup_n = weekly_dedup[(d, category)]
+            weekly_rows.append({
+                "week_start": d.isoformat(), "category": category,
+                "raw_posting_records": raw_n, "exact_url_dedup_records": dedup_n,
+            })
+    write_csv(
+        OUT_DIR / "summer_2026_archive_weekly_flow.csv",
+        ["week_start", "category", "raw_posting_records", "exact_url_dedup_records"],
+        weekly_rows,
+    )
+
+    monthly_rows = [
+        {"month": month, "category": category, "posting_records": n}
+        for (month, category), n in sorted(monthly.items())
     ]
     write_csv(
-        OUT_DIR / "summer_2026_posting_month_by_category.csv",
+        OUT_DIR / "summer_2026_archive_monthly_by_category.csv",
         ["month", "category", "posting_records"],
-        month_rows,
+        monthly_rows,
     )
 
-    source_month_rows = [
-        {"month": m, "source": s, "posting_records": n}
-        for (m, s), n in sorted(source_month_counts.items())
-    ]
+    timing_rows: list[dict[str, Any]] = []
+    for label, source_rows in [
+        ("All raw records", archive_rows),
+        ("All exact-URL deduped", dedup_rows),
+        ("Post-launch raw flow", flow_rows),
+        ("Post-launch exact-URL deduped flow", dedup_flow_rows),
+    ]:
+        timing_rows.append({"population": label, "category": "All", **timing_metrics(source_rows)})
+    for category in CATEGORY_ORDER:
+        cat_rows = [r for r in archive_rows if r["category_norm"] == category]
+        cat_dedup = [r for r in dedup_rows if r["category_norm"] == category]
+        cat_flow = [r for r in cat_rows if r["posted_at"].date() > launch_day]
+        cat_dedup_flow = [r for r in cat_dedup if r["posted_at"].date() > launch_day]
+        timing_rows.extend([
+            {"population": "Raw records", "category": category, **timing_metrics(cat_rows)},
+            {"population": "Exact-URL deduped", "category": category, **timing_metrics(cat_dedup)},
+            {"population": "Post-launch raw flow", "category": category, **timing_metrics(cat_flow)},
+            {"population": "Post-launch exact-URL deduped flow", "category": category, **timing_metrics(cat_dedup_flow)},
+        ])
+    timing_fields = list(timing_rows[0].keys())
+    write_csv(OUT_DIR / "summer_2026_archive_timing_metrics.csv", timing_fields, timing_rows)
+
+    cumulative_rows: list[dict[str, Any]] = []
+    for category in ["All"] + CATEGORY_ORDER:
+        raw_subset = archive_rows if category == "All" else [r for r in archive_rows if r["category_norm"] == category]
+        dedup_subset = dedup_rows if category == "All" else [r for r in dedup_rows if r["category_norm"] == category]
+        raw_dates = Counter(r["posted_at"].date() for r in raw_subset)
+        dedup_dates = Counter(r["posted_at"].date() for r in dedup_subset)
+        raw_running = 0
+        dedup_running = 0
+        for d in all_dates:
+            raw_running += raw_dates[d]
+            dedup_running += dedup_dates[d]
+            cumulative_rows.append({
+                "date": d.isoformat(),
+                "category": category,
+                "raw_cumulative_records": raw_running,
+                "raw_cumulative_share": raw_running / len(raw_subset) if raw_subset else 0,
+                "dedup_cumulative_records": dedup_running,
+                "dedup_cumulative_share": dedup_running / len(dedup_subset) if dedup_subset else 0,
+            })
     write_csv(
-        OUT_DIR / "summer_2026_posting_month_by_source.csv",
-        ["month", "source", "posting_records"],
-        source_month_rows,
+        OUT_DIR / "summer_2026_archive_cumulative_curve.csv",
+        ["date", "category", "raw_cumulative_records", "raw_cumulative_share", "dedup_cumulative_records", "dedup_cumulative_share"],
+        cumulative_rows,
     )
 
-    company_rows = [
-        {"company": company, "posting_records": count}
-        for company, count in company_counts.most_common(100)
-    ]
+    company_counts = Counter(str(r.get("company_name") or "Unknown").strip() for r in archive_rows)
+    company_rows: list[dict[str, Any]] = []
+    running = 0
+    for rank, (company, n) in enumerate(company_counts.most_common(), start=1):
+        running += n
+        company_rows.append({
+            "rank": rank, "company": company, "posting_records": n,
+            "share_of_records": n / len(archive_rows),
+            "cumulative_share": running / len(archive_rows),
+        })
     write_csv(
-        OUT_DIR / "summer_2026_top_companies.csv",
-        ["company", "posting_records"],
+        OUT_DIR / "summer_2026_archive_employer_concentration.csv",
+        ["rank", "company", "posting_records", "share_of_records", "cumulative_share"],
         company_rows,
     )
 
-    duplicate_rows = [
-        {
-            "normalized_url": url,
-            "posting_records": count,
-        }
-        for url, count in sorted(
-            duplicate_url_groups.items(), key=lambda item: (-item[1], item[0])
-        )
+    duplicate_groups = [
+        group for key, group in by_url.items()
+        if not key.startswith("missing-url:") and len(group) > 1
     ]
+    duplicate_rows: list[dict[str, Any]] = []
+    for group in sorted(duplicate_groups, key=lambda g: (-len(g), g[0]["normalized_url"])):
+        duplicate_rows.append({
+            "normalized_url": group[0]["normalized_url"],
+            "records": len(group),
+            "companies": " | ".join(sorted({str(r.get("company_name") or "") for r in group})),
+            "titles": " | ".join(sorted({str(r.get("title") or "") for r in group})),
+            "first_seen_min": min(r["posted_at"] for r in group).isoformat(),
+            "first_seen_max": max(r["posted_at"] for r in group).isoformat(),
+        })
     write_csv(
-        OUT_DIR / "summer_2026_duplicate_url_groups.csv",
-        ["normalized_url", "posting_records"],
+        OUT_DIR / "summer_2026_archive_duplicate_url_audit.csv",
+        ["normalized_url", "records", "companies", "titles", "first_seen_min", "first_seen_max"],
         duplicate_rows,
     )
 
-    timestamps_sorted = sorted(d.timestamp() for d in posted_dates)
+    def categorical_summary(field: str, getter) -> list[dict[str, Any]]:
+        counts = Counter(getter(r) for r in archive_rows)
+        return [
+            {field: key, "posting_records": n, "share_of_records": n / len(archive_rows)}
+            for key, n in counts.most_common()
+        ]
+
+    write_csv(
+        OUT_DIR / "summer_2026_archive_region_summary.csv",
+        ["region", "posting_records", "share_of_records"],
+        categorical_summary("region", lambda r: r["region"]),
+    )
+    write_csv(
+        OUT_DIR / "summer_2026_archive_source_summary.csv",
+        ["source", "posting_records", "share_of_records"],
+        categorical_summary("source", lambda r: str(r.get("source") or "Unknown")),
+    )
+    write_csv(
+        OUT_DIR / "summer_2026_archive_sponsorship_summary.csv",
+        ["sponsorship", "posting_records", "share_of_records"],
+        categorical_summary("sponsorship", lambda r: str(r.get("sponsorship") or "Unknown")),
+    )
+    write_csv(
+        OUT_DIR / "summer_2026_archive_remote_summary.csv",
+        ["remote", "posting_records", "share_of_records"],
+        categorical_summary("remote", lambda r: str(bool(r["remote"])).lower()),
+    )
+    write_csv(
+        OUT_DIR / "summer_2026_archive_degree_requirement_summary.csv",
+        ["advanced_degree_flag", "posting_records", "share_of_records"],
+        categorical_summary("advanced_degree_flag", lambda r: "advanced_degree_listed" if (r.get("degrees") or []) else "no_advanced_degree_listed"),
+    )
+
+    category_counts = Counter(r["category_norm"] for r in archive_rows)
+    launch_stock = [r for r in archive_rows if r["posted_at"].date() == launch_day]
+    peak_day, peak_day_n = max(Counter(r["posted_at"].date() for r in flow_rows).items(), key=lambda x: x[1])
+    peak_week, peak_week_n = max(Counter(week_start(r["posted_at"].date()) for r in flow_rows).items(), key=lambda x: x[1])
+
     summary = {
         "source": {
             "repository": "SimplifyJobs/Summer2027-Internships",
             "snapshot_sha": SNAPSHOT_SHA,
-            "snapshot_commit_timestamp_utc": "2026-07-29T16:00:54Z",
+            "snapshot_at_utc": SNAPSHOT_AT.isoformat(),
+            "archive_cutoff_utc": ARCHIVE_CUTOFF.isoformat(),
             "registry_url": SOURCE_URL,
+            "archive_readme_claimed_records": 9271,
         },
-        "counts": {
-            "registry_rows_all_terms": len(rows),
-            "visible_rows_all_terms": len(visible),
-            "summer_2026_visible_rows": len(summer_2026),
-            "unique_companies_summer_2026": len(company_counts),
-            "normalized_unique_urls_summer_2026": len(exact_url_counts),
-            "duplicate_url_groups": len(duplicate_url_groups),
-            "rows_in_duplicate_url_groups": rows_in_duplicate_url_groups,
-            "duplicate_composite_groups": len(duplicate_composite_groups),
-            "rows_in_duplicate_composite_groups": sum(duplicate_composite_groups.values()),
+        "cohort_construction": {
+            "visible_summer_2026_records_before_cutoff": len(archive_rows),
+            "cutoff_candidate_counts": cutoff_candidates,
+            "category_counts": dict(category_counts),
+            "launch_day": launch_day.isoformat(),
+            "launch_day_stock_records": len(launch_stock),
+            "launch_day_stock_share": len(launch_stock) / len(archive_rows),
+            "post_launch_flow_records": len(flow_rows),
         },
-        "date_quality": {
-            "posted_min_utc": min(posted_dates).isoformat() if posted_dates else None,
-            "posted_max_utc": max(posted_dates).isoformat() if posted_dates else None,
-            "updated_min_utc": min(updated_dates).isoformat() if updated_dates else None,
-            "updated_max_utc": max(updated_dates).isoformat() if updated_dates else None,
-            "date_updated_equals_date_posted": equal_dates,
-            "date_updated_after_date_posted": len(deltas_days),
-            "date_updated_before_date_posted": negative_dates,
-            "missing_posted_or_updated": missing_dates,
-            "positive_delta_days_p10": percentile(deltas_days, 0.10),
-            "positive_delta_days_p25": percentile(deltas_days, 0.25),
-            "positive_delta_days_median": percentile(deltas_days, 0.50),
-            "positive_delta_days_p75": percentile(deltas_days, 0.75),
-            "positive_delta_days_p90": percentile(deltas_days, 0.90),
+        "deduplication": {
+            "raw_records": len(archive_rows),
+            "exact_url_deduped_records": len(dedup_rows),
+            "records_removed": len(archive_rows) - len(dedup_rows),
+            "records_removed_share": (len(archive_rows) - len(dedup_rows)) / len(archive_rows),
+            "duplicate_url_groups": len(duplicate_groups),
         },
-        "posting_date_quantiles_utc": {
-            "p10": datetime.fromtimestamp(percentile(timestamps_sorted, 0.10), tz=timezone.utc).isoformat() if timestamps_sorted else None,
-            "p25": datetime.fromtimestamp(percentile(timestamps_sorted, 0.25), tz=timezone.utc).isoformat() if timestamps_sorted else None,
-            "p50": datetime.fromtimestamp(percentile(timestamps_sorted, 0.50), tz=timezone.utc).isoformat() if timestamps_sorted else None,
-            "p75": datetime.fromtimestamp(percentile(timestamps_sorted, 0.75), tz=timezone.utc).isoformat() if timestamps_sorted else None,
-            "p90": datetime.fromtimestamp(percentile(timestamps_sorted, 0.90), tz=timezone.utc).isoformat() if timestamps_sorted else None,
+        "timing": {
+            "raw": timing_metrics(archive_rows),
+            "exact_url_deduped": timing_metrics(dedup_rows),
+            "post_launch_raw_flow": timing_metrics(flow_rows),
+            "post_launch_exact_url_deduped_flow": timing_metrics(dedup_flow_rows),
+            "peak_post_launch_day": peak_day.isoformat(),
+            "peak_post_launch_day_records": peak_day_n,
+            "peak_post_launch_week_start": peak_week.isoformat(),
+            "peak_post_launch_week_records": peak_week_n,
         },
-        "term_counts": dict(term_counts.most_common()),
-        "category_counts_summer_2026": dict(category_counts.most_common()),
-        "source_counts_summer_2026": dict(source_counts.most_common()),
-        "active_counts_summer_2026": dict(active_counts.most_common()),
-        "location_count_distribution_summer_2026": {
-            str(k): v for k, v in sorted(location_count_distribution.items())
+        "coverage_and_composition": {
+            "unique_companies": len(company_counts),
+            "top_10_company_share": sum(n for _, n in company_counts.most_common(10)) / len(archive_rows),
+            "top_25_company_share": sum(n for _, n in company_counts.most_common(25)) / len(archive_rows),
+            "source_counts": dict(Counter(str(r.get("source") or "Unknown") for r in archive_rows)),
+            "region_counts": dict(Counter(r["region"] for r in archive_rows)),
+            "remote_records": sum(bool(r["remote"]) for r in archive_rows),
+            "multi_location_records": sum(len(r["locations_norm"]) > 1 for r in archive_rows),
+            "advanced_degree_listed_records": sum(bool(r.get("degrees") or []) for r in archive_rows),
         },
-        "top_companies_summer_2026": dict(company_counts.most_common(25)),
+        "invalid_lifespan_measurement": {
+            "date_updated_equals_date_posted": sum(r.get("date_updated") == r.get("date_posted") for r in summer_rows),
+            "reason_not_used": "date_updated is not a reliable closure timestamp in this snapshot; it frequently equals date_posted or differs by minutes.",
+        },
     }
-
-    with (OUT_DIR / "internship_registry_summary.json").open(
-        "w", encoding="utf-8"
-    ) as f:
+    with (OUT_DIR / "summer_2026_archive_summary.json").open("w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, sort_keys=True)
         f.write("\n")
+
+    report = [
+        "# Summer 2026 internship archive research diagnostics",
+        "",
+        f"- Archive cohort under exact 30-day cutoff: **{len(archive_rows):,} records** (archive README: 9,271).",
+        f"- Exact-URL deduped sensitivity sample: **{len(dedup_rows):,} records**; removed {len(archive_rows) - len(dedup_rows):,} ({(len(archive_rows)-len(dedup_rows))/len(archive_rows):.2%}).",
+        f"- Earliest first-seen date: **{min_posted.date().isoformat()}**.",
+        f"- Launch-day stock: **{len(launch_stock):,} records** ({len(launch_stock)/len(archive_rows):.1%}); treat as left-censored opening stock, not same-day market flow.",
+        f"- Raw median first-seen date: **{timing_metrics(archive_rows)['median']}**.",
+        f"- Post-launch flow median: **{timing_metrics(flow_rows)['median']}**.",
+        f"- Share first seen on/after March 1: **{timing_metrics(archive_rows)['share_on_or_after_2026-03-01']:.1%}** raw; **{timing_metrics(dedup_rows)['share_on_or_after_2026-03-01']:.1%}** exact-URL deduped.",
+        f"- Peak post-launch week: **{peak_week.isoformat()}**, {peak_week_n:,} records.",
+        "",
+        "## Category counts",
+        "",
+    ]
+    report.extend(f"- {category}: {category_counts[category]:,}" for category in CATEGORY_ORDER)
+    report.extend([
+        "",
+        "## Measurement warning",
+        "",
+        "`date_posted` is the repository's first-observed/addition timestamp, not a guaranteed employer publication timestamp. The December 1 launch-day stock is left-censored. `date_updated` is not used as a closure date.",
+    ])
+    (OUT_DIR / "summer_2026_archive_diagnostics.md").write_text("\n".join(report) + "\n", encoding="utf-8")
+
+    bundle_paths = [p for p in OUT_DIR.iterdir() if p.is_file() and p.name != "summer_2026_research_bundle.zip"]
+    with zipfile.ZipFile(OUT_DIR / "summer_2026_research_bundle.zip", "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        for path in sorted(bundle_paths):
+            zf.write(path, arcname=path.name)
 
     print(json.dumps(summary, indent=2, sort_keys=True))
 
