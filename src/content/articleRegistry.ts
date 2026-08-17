@@ -2,8 +2,10 @@ import type { PublicArticle } from './articleModels';
 import { INVESTMENT_MEMOS } from './marketTheses';
 import { RESEARCH_ARTICLES } from './researchArticles';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
+import { THE_AI_MEGAWATT_ARTICLE } from './theAiMegawattArticle';
 
 export const ALL_ARTICLES: PublicArticle[] = [
+  THE_AI_MEGAWATT_ARTICLE,
   ...TECHNICAL_ARTICLE_SERIES,
   ...RESEARCH_ARTICLES,
   ...INVESTMENT_MEMOS,
