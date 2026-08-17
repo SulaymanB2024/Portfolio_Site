@@ -40,6 +40,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 ## Public Work and Research
 
 - [Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench](https://sulayman-bowles.dev/viralbench-codex-agent-harness)
+- [America’s Solid-Rocket-Motor Buildout Is Real. The Capacity Numbers Are Not Additive.](https://sulayman-bowles.dev/research/financial-systems/us-solid-rocket-motor-capacity-audit)
 - [The Crawl Frontier Is a State Machine, Not a Queue](https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine)
 - [Raw HTML and Rendered DOM Are Separate Evidence](https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence)
 - [Canonicalization Is a Graph Consistency Problem](https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency)

@@ -17,6 +17,19 @@ export type ArticleRouteMetadata = {
 export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
   {
     "kind": "research",
+    "path": "/research/financial-systems/us-solid-rocket-motor-capacity-audit",
+    "aliases": [],
+    "title": "America’s Solid-Rocket-Motor Buildout Is Real. The Capacity Numbers Are Not Additive.",
+    "seoTitle": "U.S. Solid Rocket Motor Capacity Audit: 2018-2029",
+    "seoDescription": "A 31-record audit of U.S. solid rocket motor plants, capacity claims, supplier readiness, qualification, ammonium perchlorate, HTPB, and 2029 bottlenecks.",
+    "date": "2026.08.16",
+    "dateModified": "2026.08.16",
+    "indexable": true,
+    "staticSummary": "The United States is building substantially more solid-rocket-motor capacity. Northrop Grumman says it can process 30 million pounds of propellant a year today and is moving toward nearly 50 million pounds by 2028. L3Harris is constructing a large-motor complex in Camden, Arkansas, while planning a more than $1 billion expansion in Orange County, Virginia. Anduril has opened a tactical-motor plant in Mississippi. X-Bow has installed modular energetics equipment in Texas. Ursa Major has completed a Navy-funded manufacturing pathfinder in Colorado. Prometheus Energetics broke ground on a four-line campus in Indiana. American Pacific is expanding the concentrated domestic ammonium-perchlorate base by more than 50 percent. [S05-S09, S12-S24]",
+    "image": "/images/social/og-research.png"
+  },
+  {
+    "kind": "research",
     "path": "/research/crawler-engineering/crawl-frontier-state-machine",
     "aliases": [],
     "title": "The Crawl Frontier Is a State Machine, Not a Queue",
