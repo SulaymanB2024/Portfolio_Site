@@ -1,0 +1,36 @@
+name: Generate SRM article outputs
+
+on:
+  push:
+    branches:
+      - content/us-solid-rocket-motor-capacity-audit
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: content/us-solid-rocket-motor-capacity-audit
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run generate:article-routes
+      - run: npm run generate:public
+      - name: Commit generated outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/articleRouteMetadata.ts public/llms.txt public/sitemap.xml public/research/article-research-briefs.json public/research/authority-assets.json public/research/texas-toll-road-ownership-2026.csv
+          if git diff --cached --quiet; then
+            echo "Generated outputs already current."
+          else
+            git commit -m "content: generate SRM article route and public indexes"
+            git push origin HEAD:content/us-solid-rocket-motor-capacity-audit
+          fi

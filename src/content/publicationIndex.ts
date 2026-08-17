@@ -6,6 +6,7 @@ import { getArticlePath, getArticleBySlug } from './articleRegistry';
 import { HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG } from './hiddenFinancingHardwareArticle';
 import { INDEX_COMPANY_MATTERS_ARTICLE_SLUG } from './indexCompanyMattersArticle';
 import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvestigationArticle';
+import { SOLID_ROCKET_MOTOR_CAPACITY_ARTICLE_SLUG } from './solidRocketMotorCapacityArticle';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingArticle';
@@ -26,6 +27,7 @@ const article = (slug: string) => {
   return item;
 };
 
+const solidRocketMotorCapacity = article(SOLID_ROCKET_MOTOR_CAPACITY_ARTICLE_SLUG);
 const crawlerPolicy = article('ai-search-crawler-policy');
 const austinHomeServiceOwnership = article(AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE_SLUG);
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
@@ -47,6 +49,14 @@ function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['cat
 }
 
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
+  {
+    category: 'Markets and investing',
+    title: solidRocketMotorCapacity.title,
+    href: getArticlePath(solidRocketMotorCapacity),
+    description: solidRocketMotorCapacity.subtitle,
+    date: solidRocketMotorCapacity.dateModified ?? solidRocketMotorCapacity.date,
+    featured: true,
+  },
   ...TECHNICAL_ARTICLE_SERIES.map((articleItem) => ({
     category: seriesCategory(articleItem),
     title: articleItem.title,

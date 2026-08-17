@@ -1,9 +1,11 @@
 import type { PublicArticle } from './articleModels';
 import { INVESTMENT_MEMOS } from './marketTheses';
 import { RESEARCH_ARTICLES } from './researchArticles';
+import { SOLID_ROCKET_MOTOR_CAPACITY_ARTICLE } from './solidRocketMotorCapacityArticle';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 
 export const ALL_ARTICLES: PublicArticle[] = [
+  SOLID_ROCKET_MOTOR_CAPACITY_ARTICLE,
   ...TECHNICAL_ARTICLE_SERIES,
   ...RESEARCH_ARTICLES,
   ...INVESTMENT_MEMOS,
