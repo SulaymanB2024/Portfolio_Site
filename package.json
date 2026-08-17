@@ -10,7 +10,7 @@
     "report:article-rankings": "tsx scripts/report-article-rankings.ts",
     "clean": "rm -rf dist server.js",
     "generate:article-routes": "tsx scripts/generate-article-route-metadata.ts",
-    "generate:public": "tsx scripts/generate-public-files.ts",
+    "generate:public": "npm run generate:article-routes && tsx scripts/generate-public-files.ts",
     "lint": "tsc --noEmit",
     "audit:content-similarity": "tsx scripts/audit-content-similarity.ts",
     "audit:style": "node scripts/style-audit.mjs",
