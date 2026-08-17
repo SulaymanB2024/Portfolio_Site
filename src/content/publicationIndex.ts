@@ -8,6 +8,7 @@ import { INDEX_COMPANY_MATTERS_ARTICLE_SLUG } from './indexCompanyMattersArticle
 import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvestigationArticle';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
+import { UNI_BURN_SUPPLY_ACCOUNTING_ARTICLE_SLUG } from './uniBurnSupplyAccountingArticle';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingArticle';
 import { WEST_CAMPUS_STUDENT_HOUSING_ARTICLE_SLUG } from './westCampusStudentHousingArticle';
 
@@ -27,6 +28,7 @@ const article = (slug: string) => {
 };
 
 const crawlerPolicy = article('ai-search-crawler-policy');
+const uniBurnSupplyAccounting = article(UNI_BURN_SUPPLY_ACCOUNTING_ARTICLE_SLUG);
 const austinHomeServiceOwnership = article(AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE_SLUG);
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
@@ -89,6 +91,14 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     href: getArticlePath(canonicalIdentity),
     description: canonicalIdentity.subtitle,
     date: canonicalIdentity.dateModified ?? canonicalIdentity.date,
+  },
+  {
+    category: 'Markets and investing',
+    title: uniBurnSupplyAccounting.title,
+    href: getArticlePath(uniBurnSupplyAccounting),
+    description: uniBurnSupplyAccounting.subtitle,
+    date: uniBurnSupplyAccounting.dateModified ?? uniBurnSupplyAccounting.date,
+    featured: true,
   },
   {
     category: 'Markets and investing',
