@@ -1,0 +1,139 @@
+{
+  "cohort_construction": {
+    "category_counts": {
+      "Data Science, AI & Machine Learning": 4387,
+      "Hardware Engineering": 1452,
+      "Product Management": 702,
+      "Quantitative Finance": 122,
+      "Software Engineering": 3088
+    },
+    "cutoff_candidate_counts": {
+      "posted_before_cutoff_calendar_day": 9751,
+      "posted_before_exact_30_day_cutoff": 9751,
+      "posted_on_or_before_cutoff_calendar_day": 9755,
+      "posted_on_or_before_exact_30_day_cutoff": 9751
+    },
+    "launch_day": "2025-12-01",
+    "launch_day_stock_records": 20,
+    "launch_day_stock_share": 0.002051071684955389,
+    "post_launch_flow_records": 9731,
+    "visible_summer_2026_records_before_cutoff": 9751
+  },
+  "coverage_and_composition": {
+    "advanced_degree_listed_records": 7192,
+    "multi_location_records": 923,
+    "region_counts": {
+      "Canada": 974,
+      "Multi-region": 116,
+      "Other": 159,
+      "United Kingdom": 402,
+      "United States": 8100
+    },
+    "remote_records": 502,
+    "source_counts": {
+      "AlmondCroffle": 208,
+      "DereC4": 27,
+      "Saugatsaugat": 1,
+      "Simplify": 9501,
+      "Vedant2402": 1,
+      "adamthorne27": 1,
+      "angie-hue": 2,
+      "jamesthechen": 5,
+      "matthewjyhan": 2,
+      "natalieh235": 2,
+      "zach-marto": 1
+    },
+    "top_10_company_share": 0.11414213926776741,
+    "top_25_company_share": 0.1984411855194339,
+    "unique_companies": 2169
+  },
+  "deduplication": {
+    "duplicate_url_groups": 3,
+    "exact_url_deduped_records": 9736,
+    "raw_records": 9751,
+    "records_removed": 15,
+    "records_removed_share": 0.0015383037637165418
+  },
+  "invalid_lifespan_measurement": {
+    "date_updated_equals_date_posted": 6555,
+    "reason_not_used": "date_updated is not a reliable closure timestamp in this snapshot; it frequently equals date_posted or differs by minutes."
+  },
+  "source": {
+    "archive_cutoff_utc": "2026-06-29T16:00:54+00:00",
+    "archive_readme_claimed_records": 9271,
+    "registry_url": "https://raw.githubusercontent.com/SimplifyJobs/Summer2027-Internships/3c16fd5d8ff8fe54a073bccfdb1990fa01e8154b/.github/scripts/listings.json",
+    "repository": "SimplifyJobs/Summer2027-Internships",
+    "snapshot_at_utc": "2026-07-29T16:00:54+00:00",
+    "snapshot_sha": "3c16fd5d8ff8fe54a073bccfdb1990fa01e8154b"
+  },
+  "timing": {
+    "exact_url_deduped": {
+      "first_seen_max": "2026-06-27",
+      "first_seen_min": "2025-12-01",
+      "median": "2026-03-02",
+      "n": 9736,
+      "p10": "2025-12-23",
+      "p25": "2026-01-30",
+      "p75": "2026-04-06",
+      "p90": "2026-05-12",
+      "share_on_or_after_2026-01-01": 0.8873253903040262,
+      "share_on_or_after_2026-02-01": 0.7416803615447822,
+      "share_on_or_after_2026-03-01": 0.5070870994248151,
+      "share_on_or_after_2026-04-01": 0.2786565324568611,
+      "share_on_or_after_2026-05-01": 0.13249794576828267,
+      "share_on_or_after_2026-06-01": 0.04899342645850452
+    },
+    "peak_post_launch_day": "2025-12-10",
+    "peak_post_launch_day_records": 194,
+    "peak_post_launch_week_records": 681,
+    "peak_post_launch_week_start": "2026-02-02",
+    "post_launch_exact_url_deduped_flow": {
+      "first_seen_max": "2026-06-27",
+      "first_seen_min": "2025-12-02",
+      "median": "2026-03-02",
+      "n": 9716,
+      "p10": "2025-12-23",
+      "p25": "2026-01-30",
+      "p75": "2026-04-06",
+      "p90": "2026-05-12",
+      "share_on_or_after_2026-01-01": 0.8891519143680527,
+      "share_on_or_after_2026-02-01": 0.7432070811033347,
+      "share_on_or_after_2026-03-01": 0.5081309180732811,
+      "share_on_or_after_2026-04-01": 0.2792301358583779,
+      "share_on_or_after_2026-05-01": 0.13277068752573076,
+      "share_on_or_after_2026-06-01": 0.04909427748044463
+    },
+    "post_launch_raw_flow": {
+      "first_seen_max": "2026-06-27",
+      "first_seen_min": "2025-12-02",
+      "median": "2026-03-02",
+      "n": 9731,
+      "p10": "2025-12-23",
+      "p25": "2026-01-30",
+      "p75": "2026-04-06",
+      "p90": "2026-05-12",
+      "share_on_or_after_2026-01-01": 0.889014489774946,
+      "share_on_or_after_2026-02-01": 0.7425752748946666,
+      "share_on_or_after_2026-03-01": 0.5076559449183023,
+      "share_on_or_after_2026-04-01": 0.2791080053437468,
+      "share_on_or_after_2026-05-01": 0.13277155482478675,
+      "share_on_or_after_2026-06-01": 0.049121364710718325
+    },
+    "raw": {
+      "first_seen_max": "2026-06-27",
+      "first_seen_min": "2025-12-01",
+      "median": "2026-03-02",
+      "n": 9751,
+      "p10": "2025-12-23",
+      "p25": "2026-01-30",
+      "p75": "2026-04-06",
+      "p90": "2026-05-12",
+      "share_on_or_after_2026-01-01": 0.8871910573274536,
+      "share_on_or_after_2026-02-01": 0.7410521997743821,
+      "share_on_or_after_2026-03-01": 0.5066147061839811,
+      "share_on_or_after_2026-04-01": 0.2785355348169419,
+      "share_on_or_after_2026-05-01": 0.13249923084811815,
+      "share_on_or_after_2026-06-01": 0.049020613270433805
+    }
+  }
+}

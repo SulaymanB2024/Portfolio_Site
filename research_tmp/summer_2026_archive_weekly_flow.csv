@@ -1,0 +1,181 @@
+week_start,category,raw_posting_records,exact_url_dedup_records
+2025-12-01,All,195,195
+2025-12-01,Software Engineering,58,58
+2025-12-01,Product Management,12,12
+2025-12-01,"Data Science, AI & Machine Learning",96,96
+2025-12-01,Quantitative Finance,4,4
+2025-12-01,Hardware Engineering,25,25
+2025-12-08,All,407,406
+2025-12-08,Software Engineering,102,101
+2025-12-08,Product Management,18,18
+2025-12-08,"Data Science, AI & Machine Learning",234,234
+2025-12-08,Quantitative Finance,1,1
+2025-12-08,Hardware Engineering,52,52
+2025-12-15,All,323,321
+2025-12-15,Software Engineering,94,93
+2025-12-15,Product Management,20,20
+2025-12-15,"Data Science, AI & Machine Learning",168,167
+2025-12-15,Quantitative Finance,3,3
+2025-12-15,Hardware Engineering,38,38
+2025-12-22,All,109,109
+2025-12-22,Software Engineering,35,35
+2025-12-22,Product Management,6,6
+2025-12-22,"Data Science, AI & Machine Learning",53,53
+2025-12-22,Quantitative Finance,3,3
+2025-12-22,Hardware Engineering,12,12
+2025-12-29,All,105,105
+2025-12-29,Software Engineering,29,29
+2025-12-29,Product Management,9,9
+2025-12-29,"Data Science, AI & Machine Learning",49,49
+2025-12-29,Quantitative Finance,1,1
+2025-12-29,Hardware Engineering,17,17
+2026-01-05,All,290,288
+2026-01-05,Software Engineering,107,106
+2026-01-05,Product Management,18,18
+2026-01-05,"Data Science, AI & Machine Learning",130,129
+2026-01-05,Quantitative Finance,5,5
+2026-01-05,Hardware Engineering,30,30
+2026-01-12,All,313,311
+2026-01-12,Software Engineering,84,84
+2026-01-12,Product Management,25,25
+2026-01-12,"Data Science, AI & Machine Learning",160,158
+2026-01-12,Quantitative Finance,3,3
+2026-01-12,Hardware Engineering,41,41
+2026-01-19,All,352,349
+2026-01-19,Software Engineering,113,110
+2026-01-19,Product Management,31,31
+2026-01-19,"Data Science, AI & Machine Learning",166,166
+2026-01-19,Quantitative Finance,5,5
+2026-01-19,Hardware Engineering,37,37
+2026-01-26,All,438,438
+2026-01-26,Software Engineering,143,143
+2026-01-26,Product Management,46,46
+2026-01-26,"Data Science, AI & Machine Learning",189,189
+2026-01-26,Quantitative Finance,2,2
+2026-01-26,Hardware Engineering,58,58
+2026-02-02,All,681,680
+2026-02-02,Software Engineering,199,198
+2026-02-02,Product Management,54,54
+2026-02-02,"Data Science, AI & Machine Learning",329,329
+2026-02-02,Quantitative Finance,11,11
+2026-02-02,Hardware Engineering,88,88
+2026-02-09,All,486,486
+2026-02-09,Software Engineering,160,160
+2026-02-09,Product Management,35,35
+2026-02-09,"Data Science, AI & Machine Learning",218,218
+2026-02-09,Quantitative Finance,7,7
+2026-02-09,Hardware Engineering,66,66
+2026-02-16,All,540,539
+2026-02-16,Software Engineering,164,164
+2026-02-16,Product Management,47,47
+2026-02-16,"Data Science, AI & Machine Learning",222,222
+2026-02-16,Quantitative Finance,10,9
+2026-02-16,Hardware Engineering,97,97
+2026-02-23,All,574,574
+2026-02-23,Software Engineering,174,174
+2026-02-23,Product Management,37,37
+2026-02-23,"Data Science, AI & Machine Learning",276,276
+2026-02-23,Quantitative Finance,10,10
+2026-02-23,Hardware Engineering,77,77
+2026-03-02,All,609,609
+2026-03-02,Software Engineering,166,166
+2026-03-02,Product Management,43,43
+2026-03-02,"Data Science, AI & Machine Learning",307,307
+2026-03-02,Quantitative Finance,9,9
+2026-03-02,Hardware Engineering,84,84
+2026-03-09,All,558,558
+2026-03-09,Software Engineering,154,154
+2026-03-09,Product Management,46,46
+2026-03-09,"Data Science, AI & Machine Learning",236,236
+2026-03-09,Quantitative Finance,8,8
+2026-03-09,Hardware Engineering,114,114
+2026-03-16,All,513,513
+2026-03-16,Software Engineering,179,179
+2026-03-16,Product Management,55,55
+2026-03-16,"Data Science, AI & Machine Learning",198,198
+2026-03-16,Quantitative Finance,4,4
+2026-03-16,Hardware Engineering,77,77
+2026-03-23,All,395,395
+2026-03-23,Software Engineering,128,128
+2026-03-23,Product Management,30,30
+2026-03-23,"Data Science, AI & Machine Learning",160,160
+2026-03-23,Quantitative Finance,4,4
+2026-03-23,Hardware Engineering,73,73
+2026-03-30,All,376,376
+2026-03-30,Software Engineering,117,117
+2026-03-30,Product Management,29,29
+2026-03-30,"Data Science, AI & Machine Learning",162,162
+2026-03-30,Quantitative Finance,3,3
+2026-03-30,Hardware Engineering,65,65
+2026-04-06,All,391,391
+2026-04-06,Software Engineering,152,152
+2026-04-06,Product Management,26,26
+2026-04-06,"Data Science, AI & Machine Learning",135,135
+2026-04-06,Quantitative Finance,6,6
+2026-04-06,Hardware Engineering,72,72
+2026-04-13,All,364,364
+2026-04-13,Software Engineering,133,133
+2026-04-13,Product Management,27,27
+2026-04-13,"Data Science, AI & Machine Learning",140,140
+2026-04-13,Quantitative Finance,3,3
+2026-04-13,Hardware Engineering,61,61
+2026-04-20,All,259,258
+2026-04-20,Software Engineering,104,103
+2026-04-20,Product Management,21,21
+2026-04-20,"Data Science, AI & Machine Learning",84,84
+2026-04-20,Quantitative Finance,2,2
+2026-04-20,Hardware Engineering,48,48
+2026-04-27,All,236,236
+2026-04-27,Software Engineering,79,79
+2026-04-27,Product Management,15,15
+2026-04-27,"Data Science, AI & Machine Learning",101,101
+2026-04-27,Quantitative Finance,4,4
+2026-04-27,Hardware Engineering,37,37
+2026-05-04,All,226,225
+2026-05-04,Software Engineering,78,78
+2026-05-04,Product Management,23,23
+2026-05-04,"Data Science, AI & Machine Learning",82,81
+2026-05-04,Quantitative Finance,1,1
+2026-05-04,Hardware Engineering,42,42
+2026-05-11,All,221,221
+2026-05-11,Software Engineering,66,66
+2026-05-11,Product Management,13,13
+2026-05-11,"Data Science, AI & Machine Learning",106,106
+2026-05-11,Quantitative Finance,6,6
+2026-05-11,Hardware Engineering,30,30
+2026-05-18,All,205,205
+2026-05-18,Software Engineering,73,73
+2026-05-18,Product Management,7,7
+2026-05-18,"Data Science, AI & Machine Learning",83,83
+2026-05-18,Quantitative Finance,2,2
+2026-05-18,Hardware Engineering,40,40
+2026-05-25,All,107,107
+2026-05-25,Software Engineering,32,32
+2026-05-25,Product Management,1,1
+2026-05-25,"Data Science, AI & Machine Learning",60,60
+2026-05-25,Quantitative Finance,2,2
+2026-05-25,Hardware Engineering,12,12
+2026-06-01,All,178,177
+2026-06-01,Software Engineering,58,58
+2026-06-01,Product Management,1,1
+2026-06-01,"Data Science, AI & Machine Learning",98,97
+2026-06-01,Quantitative Finance,1,1
+2026-06-01,Hardware Engineering,20,20
+2026-06-08,All,130,130
+2026-06-08,Software Engineering,50,50
+2026-06-08,Product Management,3,3
+2026-06-08,"Data Science, AI & Machine Learning",59,59
+2026-06-08,Quantitative Finance,0,0
+2026-06-08,Hardware Engineering,18,18
+2026-06-15,All,100,100
+2026-06-15,Software Engineering,36,36
+2026-06-15,Product Management,1,1
+2026-06-15,"Data Science, AI & Machine Learning",49,49
+2026-06-15,Quantitative Finance,2,2
+2026-06-15,Hardware Engineering,12,12
+2026-06-22,All,70,70
+2026-06-22,Software Engineering,21,21
+2026-06-22,Product Management,3,3
+2026-06-22,"Data Science, AI & Machine Learning",37,37
+2026-06-22,Quantitative Finance,0,0
+2026-06-22,Hardware Engineering,9,9
