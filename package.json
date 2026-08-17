@@ -32,7 +32,8 @@
     "verify:internal-links": "tsx scripts/verify-internal-link-targeting.ts",
     "verify:keywords": "tsx scripts/verify-keyword-targeting.ts",
     "verify:reduction": "node scripts/verify-portfolio-reduction.mjs",
-    "verify:security": "node scripts/verify-security-hardening.mjs"
+    "verify:security": "node scripts/verify-security-hardening.mjs",
+    "postinstall": "node scripts/fix-optimum-article-before-install.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
