@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Fetch authoritative Treasury Fiscal Data inputs for the interest-repricing article.
 
-The script uses only the Python standard library so it can run in GitHub Actions
-without a dependency installation step. It writes raw, source-faithful CSV files
-plus a manifest with endpoint, retrieval timestamp, row count, and API metadata.
+The script uses only the Python standard library. It writes source-faithful CSV
+snapshots and a manifest containing endpoint, filter, API metadata, row count,
+record-date range, and SHA-256. Broad budget tables are intentionally excluded:
+the article's critical path is gross Treasury interest expense, average rates,
+daily debt, and selected security-level Monthly Statement of the Public Debt rows.
 """
 
 from __future__ import annotations
@@ -11,7 +13,6 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
-import os
 import time
 import urllib.error
 import urllib.parse
@@ -25,7 +26,7 @@ OUT = Path(__file__).resolve().parent / "data"
 OUT.mkdir(parents=True, exist_ok=True)
 
 
-def request_json(path: str, params: dict[str, Any], attempts: int = 5) -> dict[str, Any]:
+def request_json(path: str, params: dict[str, Any], attempts: int = 3) -> dict[str, Any]:
     query = urllib.parse.urlencode(params, doseq=True)
     url = f"{BASE}{path}?{query}"
     headers = {
@@ -33,27 +34,32 @@ def request_json(path: str, params: dict[str, Any], attempts: int = 5) -> dict[s
         "Accept": "application/json",
     }
     last_error: Exception | None = None
-    for attempt in range(attempts):
+    for attempt in range(1, attempts + 1):
         try:
+            print(f"GET attempt={attempt} {url}", flush=True)
             req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=90) as response:
+            with urllib.request.urlopen(req, timeout=30) as response:
                 return json.loads(response.read().decode("utf-8"))
-        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, json.JSONDecodeError) as exc:
+        except urllib.error.HTTPError as exc:
+            # Parameter and endpoint errors are deterministic; do not hide them in retries.
+            if 400 <= exc.code < 500 and exc.code != 429:
+                body = exc.read().decode("utf-8", errors="replace")[:1000]
+                raise RuntimeError(f"Treasury HTTP {exc.code}: {url}: {body}") from exc
             last_error = exc
-            if attempt + 1 < attempts:
-                time.sleep(2**attempt)
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+            last_error = exc
+        if attempt < attempts:
+            time.sleep(2 ** (attempt - 1))
     raise RuntimeError(f"Treasury request failed after {attempts} attempts: {url}: {last_error}")
 
 
-def fetch_all(path: str, *, fields: str | None = None, filter_expr: str | None = None,
-              sort: str | None = None, page_size: int = 10000) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def fetch_all(path: str, *, filter_expr: str | None = None, sort: str | None = None,
+              page_size: int = 5000) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     page = 1
     first_meta: dict[str, Any] = {}
     while True:
         params: dict[str, Any] = {"page[number]": page, "page[size]": page_size}
-        if fields:
-            params["fields"] = fields
         if filter_expr:
             params["filter"] = filter_expr
         if sort:
@@ -65,20 +71,34 @@ def fetch_all(path: str, *, fields: str | None = None, filter_expr: str | None =
         if not isinstance(batch, list):
             raise RuntimeError(f"Unexpected data payload for {path}: {type(batch)!r}")
         rows.extend(batch)
-        total_pages = int(payload.get("meta", {}).get("total-pages", page) or page)
+        meta = payload.get("meta", {})
+        total_pages = int(meta.get("total-pages", page) or page)
+        print(
+            f"PAGE endpoint={path} page={page}/{total_pages} batch={len(batch)} cumulative={len(rows)}",
+            flush=True,
+        )
         if page >= total_pages or len(batch) < page_size:
             break
         page += 1
     return rows, first_meta
 
 
+def latest_record_date(path: str) -> str:
+    payload = request_json(path, {"sort": "-record_date", "page[number]": 1, "page[size]": 1})
+    rows = payload.get("data", [])
+    if not rows or not rows[0].get("record_date"):
+        raise RuntimeError(f"Could not discover latest record_date for {path}")
+    return str(rows[0]["record_date"])
+
+
 def stable_columns(rows: Iterable[dict[str, Any]]) -> list[str]:
     preferred = [
-        "record_date", "record_fiscal_year", "record_fiscal_quarter", "record_calendar_year",
-        "record_calendar_quarter", "security_type_desc", "security_class1_desc", "security_class2_desc",
-        "debt_catg_1", "debt_catg_2", "debt_catg_3", "debt_catg_4", "issue_date", "maturity_date",
-        "interest_rate_pct", "avg_interest_rate_amt", "outstanding_amt", "interest_expense_amt",
-        "debt_held_public_amt", "intragov_hold_amt", "tot_pub_debt_out_amt",
+        "snapshot_requested", "record_date", "record_fiscal_year", "record_fiscal_quarter",
+        "record_calendar_year", "record_calendar_quarter", "security_type_desc", "security_desc",
+        "security_class1_desc", "security_class2_desc", "debt_catg_1", "debt_catg_2",
+        "debt_catg_3", "debt_catg_4", "issue_date", "maturity_date", "interest_rate_pct",
+        "avg_interest_rate_amt", "outstanding_amt", "interest_expense_amt", "debt_held_public_amt",
+        "intragov_hold_amt", "tot_pub_debt_out_amt",
     ]
     observed: set[str] = set()
     for row in rows:
@@ -108,66 +128,62 @@ def write_csv(name: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 def main() -> None:
     retrieved_at = datetime.now(timezone.utc).isoformat()
-    specs = [
-        {
-            "name": "interest_expense_raw.csv",
-            "path": "/v2/accounting/od/interest_expense",
-            "filter": "record_date:gte:2020-09-30",
-            "sort": "record_date,debt_catg_1,debt_catg_2,debt_catg_3,debt_catg_4",
-        },
-        {
-            "name": "average_interest_rates_raw.csv",
-            "path": "/v2/accounting/od/avg_interest_rates",
-            "filter": "record_date:gte:2020-09-30",
-            "sort": "record_date,security_type_desc,security_desc",
-        },
-        {
-            "name": "debt_to_penny_raw.csv",
-            "path": "/v2/accounting/od/debt_to_penny",
-            "filter": "record_date:gte:2020-09-30",
-            "sort": "record_date",
-        },
-        {
-            "name": "mspd_summary_raw.csv",
-            "path": "/v1/debt/mspd/mspd_table_1",
-            "filter": "record_date:gte:2020-09-30",
-            "sort": "record_date,security_type_desc",
-        },
-        {
-            "name": "monthly_treasury_statement_raw.csv",
-            "path": "/v1/accounting/mts/mts_table_3",
-            "filter": "record_date:gte:2020-09-30",
-            "sort": "record_date,classification_id",
-        },
-    ]
-
     manifest: dict[str, Any] = {
         "retrieved_at_utc": retrieved_at,
         "base_url": BASE,
         "datasets": [],
         "snapshot_dates_requested": [
-            "2021-09-30", "2022-09-30", "2023-09-30", "2024-09-30", "2025-09-30", "2026-07-31"
+            "2021-09-30", "2022-09-30", "2023-09-30", "2024-09-30", "2025-09-30"
         ],
     }
-
     errors: list[dict[str, str]] = []
+
+    specs = [
+        {
+            "name": "interest_expense_raw.csv",
+            "path": "/v2/accounting/od/interest_expense",
+            "filter": "record_date:gte:2020-09-30",
+        },
+        {
+            "name": "average_interest_rates_raw.csv",
+            "path": "/v2/accounting/od/avg_interest_rates",
+            "filter": "record_date:gte:2020-09-30",
+        },
+        {
+            "name": "debt_to_penny_raw.csv",
+            "path": "/v2/accounting/od/debt_to_penny",
+            "filter": "record_date:gte:2020-09-30",
+        },
+    ]
+
     for spec in specs:
+        print(f"START dataset={spec['name']}", flush=True)
         try:
-            rows, meta = fetch_all(spec["path"], filter_expr=spec["filter"], sort=spec["sort"])
+            rows, meta = fetch_all(spec["path"], filter_expr=spec["filter"], sort="record_date")
             entry = write_csv(spec["name"], rows)
             entry.update({"endpoint": spec["path"], "filter": spec["filter"], "api_meta": meta})
             manifest["datasets"].append(entry)
-        except Exception as exc:  # preserve failure evidence; fail after all attempts
+        except Exception as exc:
             errors.append({"dataset": spec["name"], "error": repr(exc)})
+            print(f"ERROR dataset={spec['name']} {exc!r}", flush=True)
+
+    market_endpoint = "/v1/debt/mspd/mspd_table_3_market"
+    try:
+        latest_market_date = latest_record_date(market_endpoint)
+        if latest_market_date not in manifest["snapshot_dates_requested"]:
+            manifest["snapshot_dates_requested"].append(latest_market_date)
+    except Exception as exc:
+        errors.append({"dataset": "mspd_latest_date", "error": repr(exc)})
 
     market_rows: list[dict[str, Any]] = []
     market_meta: dict[str, Any] = {}
     for snapshot_date in manifest["snapshot_dates_requested"]:
+        print(f"START dataset=mspd_market snapshot={snapshot_date}", flush=True)
         try:
             rows, meta = fetch_all(
-                "/v1/debt/mspd/mspd_table_3_market",
+                market_endpoint,
                 filter_expr=f"record_date:eq:{snapshot_date}",
-                sort="record_date,maturity_date,security_class1_desc,security_class2_desc",
+                sort="record_date",
             )
             for row in rows:
                 row["snapshot_requested"] = snapshot_date
@@ -175,11 +191,12 @@ def main() -> None:
             market_meta[snapshot_date] = meta
         except Exception as exc:
             errors.append({"dataset": f"mspd_market_{snapshot_date}", "error": repr(exc)})
+            print(f"ERROR dataset=mspd_market snapshot={snapshot_date} {exc!r}", flush=True)
 
     if market_rows:
         entry = write_csv("mspd_marketable_snapshots_raw.csv", market_rows)
         entry.update({
-            "endpoint": "/v1/debt/mspd/mspd_table_3_market",
+            "endpoint": market_endpoint,
             "filter": "one exact record_date request per snapshot",
             "api_meta_by_snapshot": market_meta,
         })
@@ -188,7 +205,12 @@ def main() -> None:
     manifest["errors"] = errors
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
 
-    required = {"interest_expense_raw.csv", "average_interest_rates_raw.csv", "mspd_marketable_snapshots_raw.csv"}
+    required = {
+        "interest_expense_raw.csv",
+        "average_interest_rates_raw.csv",
+        "debt_to_penny_raw.csv",
+        "mspd_marketable_snapshots_raw.csv",
+    }
     produced = {Path(d["file"]).name for d in manifest["datasets"]}
     missing = sorted(required.difference(produced))
     print(json.dumps({"retrieved_at_utc": retrieved_at, "produced": sorted(produced), "errors": errors}, indent=2))
