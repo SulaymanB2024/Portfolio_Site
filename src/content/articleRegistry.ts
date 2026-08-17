@@ -2,11 +2,13 @@ import type { PublicArticle } from './articleModels';
 import { INVESTMENT_MEMOS } from './marketTheses';
 import { RESEARCH_ARTICLES } from './researchArticles';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
+import { UNI_BURN_SUPPLY_ACCOUNTING_ARTICLE } from './uniBurnSupplyAccountingArticle';
 
 export const ALL_ARTICLES: PublicArticle[] = [
   ...TECHNICAL_ARTICLE_SERIES,
   ...RESEARCH_ARTICLES,
   ...INVESTMENT_MEMOS,
+  UNI_BURN_SUPPLY_ACCOUNTING_ARTICLE,
 ];
 export const INDEXABLE_ARTICLES = ALL_ARTICLES.filter((article) => article.indexable !== false);
 
