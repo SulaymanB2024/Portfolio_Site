@@ -77,6 +77,12 @@ jobs:
 
           verifier_path = Path('scripts/verify-technical-article-series.ts')
           verifier = verifier_path.read_text(encoding='utf-8')
+          count_before = "assert(ALL_ARTICLES.length === 23, `expected 23 canonical articles; found ${ALL_ARTICLES.length}`);"
+          count_after = "assert(ALL_ARTICLES.length === 24, `expected 24 canonical articles; found ${ALL_ARTICLES.length}`);"
+          if count_before in verifier:
+              verifier = verifier.replace(count_before, count_after, 1)
+          elif count_after not in verifier:
+              raise SystemExit('Could not update canonical article count')
           marker = 'SVG artwork may be text rather than a binary raster header.'
           if marker not in verifier:
               needle = "  throw new Error(`Unsupported image header: ${filePath}`);"
