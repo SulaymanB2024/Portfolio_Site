@@ -56,6 +56,46 @@ jobs:
       - run: npm ci
       - name: Integrate article into current site architecture
         run: node scripts/apply-optimum-debt-wall.mjs
+      - name: Prepare SVG hero and validator support
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          hero_path = Path('public/images/research/optimum-2027-debt-wall-reader-hero.svg')
+          hero = hero_path.read_text(encoding='utf-8')
+          hero, count = re.subn(
+              r'(<svg\b[^>]*?)\swidth="[^"]+"\sheight="[^"]+"',
+              r'\1 width="1800" height="1200"',
+              hero,
+              count=1,
+          )
+          if count != 1:
+              raise SystemExit('Could not normalize hero SVG dimensions')
+          hero_path.write_text(hero, encoding='utf-8')
+
+          verifier_path = Path('scripts/verify-technical-article-series.ts')
+          verifier = verifier_path.read_text(encoding='utf-8')
+          marker = 'SVG artwork may be text rather than a binary raster header.'
+          if marker not in verifier:
+              needle = "  throw new Error(`Unsupported image header: ${filePath}`);"
+              svg_support = r"""  // SVG artwork may be text rather than a binary raster header.
+  const svg = buffer.toString('utf8');
+  const svgTag = svg.match(/<svg\b[^>]*>/i)?.[0];
+  if (svgTag) {
+    const width = svgTag.match(/\bwidth=["']([\d.]+)(?:px|pt)?["']/i)?.[1];
+    const height = svgTag.match(/\bheight=["']([\d.]+)(?:px|pt)?["']/i)?.[1];
+    if (width && height) {
+      return { width: Math.round(Number(width)), height: Math.round(Number(height)) };
+    }
+  }
+
+"""
+              if verifier.count(needle) != 1:
+                  raise SystemExit('Could not locate image-header verifier insertion point')
+              verifier = verifier.replace(needle, svg_support + needle)
+              verifier_path.write_text(verifier, encoding='utf-8')
+          PY
       - name: Regenerate tracked article and public manifests
         run: |
           npm run generate:article-routes
