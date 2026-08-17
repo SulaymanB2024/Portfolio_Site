@@ -35,6 +35,14 @@ jobs:
       - name: Fetch Treasury Fiscal Data
         run: python research/treasury-interest-repricing/fetch_treasury_data.py
 
+      - name: Upload source snapshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: treasury-interest-source-snapshots
+          path: research/treasury-interest-repricing/data
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Commit source snapshots
         shell: bash
         run: |
