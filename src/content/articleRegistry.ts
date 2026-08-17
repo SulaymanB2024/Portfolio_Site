@@ -2,8 +2,10 @@ import type { PublicArticle } from './articleModels';
 import { INVESTMENT_MEMOS } from './marketTheses';
 import { RESEARCH_ARTICLES } from './researchArticles';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
+import { US_RARE_EARTH_MAGNET_CAPACITY_AUDIT_ARTICLE } from './usRareEarthMagnetCapacityAuditArticle';
 
 export const ALL_ARTICLES: PublicArticle[] = [
+  US_RARE_EARTH_MAGNET_CAPACITY_AUDIT_ARTICLE,
   ...TECHNICAL_ARTICLE_SERIES,
   ...RESEARCH_ARTICLES,
   ...INVESTMENT_MEMOS,

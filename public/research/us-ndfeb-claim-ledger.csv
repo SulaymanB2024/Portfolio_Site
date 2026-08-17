@@ -1,0 +1,25 @@
+claim_id,claim,claim_type,importance,source_ids,calculation_reference,status,confidence,notes
+C01,"Explicitly disclosed U.S. sintered NdFeB project capacity totals 37,584-38,048 metric tonnes per year after unit normalization and double-counting controls.",derived,load-bearing,S03;S05;S06;S08;S09;S10;S12;S13;S14;S15,capacity model,verified,high,Range reflects ambiguous “tons” at JS Link and Noveon.
+C02,"The high-case stated-unit total is 38,048 metric tonnes per year.",derived,load-bearing,S03;S05;S06;S08;S09;S10;S12;S13;S14,capacity model,verified,high,All ambiguous tons treated as metric.
+C03,"The low-case normalized total is 37,584 metric tonnes per year.",derived,load-bearing,S10;S13,capacity model,verified,high,Both ambiguous claims treated as U.S. short tons.
+C04,"On the companies’ stated units, 4,000 tonnes belongs to plants with public commercial-shipment evidence and disclosed nameplate capacity.",derived,load-bearing,S08;S09;S10;S11,status summary,verified,high,Does not assert actual annual output.
+C05,"On the companies’ stated units, 3,600 tonnes is in commissioning, ramp or qualification.",derived,load-bearing,S03;S04;S05,status summary,verified,high,"3,000 MP plus 600 USAR Phase 1a."
+C06,"On the companies’ stated units, 30,448 tonnes depends on later construction, installation or scale-up.",derived,load-bearing,S03;S05;S06;S12;S13;S14;S15,status summary,verified,high,Includes USAR derived remainder and all future projects.
+C07,"The top three corporate programs—MP, USA Rare Earth and Vulcan—represent about 79% of the stated-unit capacity stack.",derived,supporting,S03;S06;S12,capacity model,verified,high,"Company-program concentration, not facility output concentration."
+C08,"MP targets 3,000 tpa at Independence and 7,000 tpa at 10X, with 10X commissioning expected in 2028.",observed,load-bearing,S03,,verified,high,
+C09,MP remained in qualification and start-up ahead of commercial production in Q2 2026.,observed,load-bearing,S04,,verified,high,
+C10,"USAR commissioned Phase 1a and targets 600 tpa by Q4 2026, while its combined U.S. program targets 10,000 tpa.",observed,load-bearing,S05;S06;S07,,verified,high,
+C11,"eVAC publicly reported commercial shipments and approximately 2,000 tpa nameplate capacity.",observed,load-bearing,S08;S09,,verified,high,
+C12,"Noveon publicly reported commercial deliveries and capacity beyond a 2,000-ton baseline, but did not define the unit or expanded capacity.",observed,load-bearing,S10;S11,,verified,high,
+C13,"Vulcan’s Benson project targets 10,000 metric tonnes per year.",observed,load-bearing,S12,,verified,high,
+C14,"JS Link’s Georgia project targets 3,000 tons per year and late-2027 operations, with the ton unit unspecified.",observed,load-bearing,S13,,verified,high,
+C15,HyProMag’s full design contains 673 tpa finished magnets and 375 tpa sintered blocks; 478 tpa of powder/swarf co-products is excluded.,observed,load-bearing,S14;S15,,verified,high,
+C16,"The Commerce/DOE 37,000-tonne 2030 forecast is total demand, including magnets embedded in imported goods.",observed,load-bearing,S01,,verified,high,
+C17,"Commerce reported about 7,500 tonnes of direct sintered NdFeB magnet imports in 2021 and cited a DLA estimate that embedded imports supplied 60% of essential civilian demand.",observed,supporting,S01,,verified,high,"Historical baseline, not a 2026 direct-demand estimate."
+C18,"Commerce says total, direct and embedded demand estimates should be approached with caution because the supply chain is opaque.",observed,load-bearing,S01,,verified,high,
+C19,Commerce reports 54-81% recovery from alloy to finished magnet and notes that machining swarf is often recycled.,observed,load-bearing,S01,,verified,high,
+C20,"Full utilization of the audited capacity implies roughly 46,400-70,459 tonnes per year of gross alloy process flow at 81-54% recovery.",derived,load-bearing,S01,material balance,verified,high,Not virgin-feed requirement.
+C21,"At 30% rare-earth content, the gross process-flow range contains roughly 13,920-21,138 tonnes of rare earths.",derived,supporting,S01,material balance,verified,high,Gross flow before recycling effects.
+C22,"China accounted for 94% of sintered permanent-magnet production in 2024, while magnet manufacturing and metallisation remain the main diversification bottlenecks.",observed,supporting,S02,,verified,high,
+C23,"Capacity tonnes are not fungible across blocks, finished shapes, grades, coatings and qualification regimes.",interpretation,load-bearing,S03;S05;S09;S14;S15;S16,,verified,medium-high,Mechanically supported by product-form disclosures and qualification status.
+C24,The project stack does not by itself prove independence from Chinese supply.,interpretation,load-bearing,S01;S02;S03;S04;S05;S06;S08;S09;S10;S12;S13;S14;S15;S17;S18,,verified,high,"Conclusion is “not yet,” not “cannot.”"
