@@ -402,7 +402,7 @@ export default function AtlasPage() {
               <a
                 href="/atlas#atlas-methodology"
                 id="atlas-view-methodology-link"
-                className="mt-8 inline-block border-b border-ink/28 pb-1 font-serif text-sm italic tracking-normal text-ink/68 transition-colors hover:border-ink/55 hover:text-ink"
+                className="mt-6 inline-flex min-h-11 items-center border-b border-ink/28 font-serif text-sm italic tracking-normal text-ink/68 transition-colors hover:border-ink/55 hover:text-ink"
               >
                 View methodology
               </a>
@@ -415,13 +415,13 @@ export default function AtlasPage() {
                 </a>
               </nav>
               <nav className="mt-7 hidden max-w-[27rem] gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/64 md:grid" aria-label="Atlas sample links">
-                <a href="/atlas/sample-crawl" className="group grid min-h-11 w-full border-y border-ink/16 py-3 transition-colors hover:border-ink/40 hover:text-ink/78 md:w-fit md:min-h-0 md:border-b md:border-t-0 md:py-1">
+                <a href="/atlas/sample-crawl" className="group grid min-h-11 w-full items-center border-y border-ink/16 py-3 transition-colors hover:border-ink/40 hover:text-ink/78 md:w-fit md:border-b md:border-t-0 md:py-0">
                   <span>Inspect the public sample</span>
                 </a>
                 <a href="/contact" className="inline-flex min-h-11 w-fit items-center bg-ink px-4 font-semibold text-canvas transition-colors hover:bg-ink/84">
                   Request an audit
                 </a>
-                <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
+                <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="inline-flex min-h-11 w-fit items-center border-b border-ink/18 transition-colors hover:border-ink/45 hover:text-ink/72">
                   View the audit CLI
                 </a>
               </nav>
@@ -543,7 +543,7 @@ function AtlasStatusMatrix() {
             <div key={item.capability} className="grid gap-3 border-b border-ink/12 py-4 last:border-b-0 md:grid-cols-[minmax(0,0.38fr)_minmax(9rem,0.2fr)_minmax(0,0.42fr)] md:items-center">
               <span className="text-sm font-medium text-ink/82">{item.capability}</span>
               <span className="w-fit border-l-2 border-ink/28 py-1 pl-3 text-[10px] uppercase tracking-[0.18em] text-ink/68">{item.status}</span>
-              <a href={item.href} className="text-[10px] uppercase tracking-[0.18em] text-ink/64 underline decoration-ink/25 underline-offset-4 hover:text-ink">{item.proof}</a>
+              <a href={item.href} className="inline-flex min-h-11 items-center text-[10px] uppercase tracking-[0.18em] text-ink/64 underline decoration-ink/25 underline-offset-4 hover:text-ink">{item.proof}</a>
             </div>
           ))}
         </div>
@@ -1113,7 +1113,7 @@ function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boo
                 href={action.href}
                 target={action.external ? '_blank' : undefined}
                 rel={action.external ? 'noreferrer' : undefined}
-                className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72"
+                className="inline-flex min-h-11 w-fit items-center border-b border-ink/18 transition-colors hover:border-ink/45 hover:text-ink/72"
               >
                 {action.label}
               </a>

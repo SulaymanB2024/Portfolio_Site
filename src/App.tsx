@@ -506,15 +506,32 @@ function HomePage() {
                 <span className="block">Sulayman</span>
                 <span className="block italic">Bowles</span>
               </h1>
-              <div className="mt-7 grid max-w-5xl gap-5 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-10">
+              <div className="mt-7 grid max-w-5xl gap-6 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-10">
                 <div>
                   <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
                   <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and publisher of source-led research.</p>
+                  <nav className="mt-6 flex flex-wrap gap-3" aria-label="Primary actions">
+                    <a
+                      href="/work"
+                      id="home-primary-work-link"
+                      className="inline-flex min-h-11 items-center border border-ink bg-ink px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-canvas transition-colors hover:bg-accent hover:text-ink"
+                    >
+                      View selected work
+                    </a>
+                    <a
+                      href="/contact#contact-brief-panel"
+                      id="home-primary-contact-link"
+                      className="inline-flex min-h-11 items-center border border-ink/28 px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/72 transition-colors hover:border-ink hover:bg-ink hover:text-canvas"
+                    >
+                      Start a project
+                    </a>
+                  </nav>
                 </div>
-                <nav aria-label="Featured proof" className="grid gap-2 self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
-                  <a href={AI_MANAGERS_ARTICLE_PATH} className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">The First AI Managers</a>
-                  <a href="/atlas" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Atlas SEO Audit Software</a>
-                  <a href="/markets/who-owns-texas-toll-roads" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Texas Toll-Road Ownership</a>
+                <nav aria-label="Featured proof" className="grid self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
+                  <span className="mb-1 text-[9px] tracking-[0.28em] text-ink/48">Selected proof</span>
+                  <a href={AI_MANAGERS_ARTICLE_PATH} className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>The First AI Managers</span><span aria-hidden="true">↗</span></a>
+                  <a href="/atlas" className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>Atlas SEO Audit Software</span><span aria-hidden="true">↗</span></a>
+                  <a href="/markets/who-owns-texas-toll-roads" className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>Texas Toll-Road Ownership</span><span aria-hidden="true">↗</span></a>
                 </nav>
               </div>
             </div>
@@ -1217,7 +1234,7 @@ function HomePage() {
                   ))}
                             </div>
                   <div className="pt-32 w-full flex justify-start md:justify-end">
-                    <a href="#selected-works" id="discipline-view-work-link" className="text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
+                    <a href="/work" id="discipline-view-work-link" className="inline-flex min-h-11 items-center border-b border-ink/30 text-[10px] font-sans uppercase tracking-widest text-ink transition-colors hover:border-ink">Explore all work ↗</a>
                   </div>
                </div>
             </div>
@@ -1241,7 +1258,7 @@ function HomePage() {
                   <p className="mt-10 max-w-sm text-sm leading-[1.8] text-ink/64 md:text-base">
                     A URL, the decision in front of you, and the evidence that feels incomplete is enough to start.
                   </p>
-                  <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="mt-8 inline-block border-b border-ink/24 pb-1 text-[10px] uppercase tracking-[0.24em] text-ink/68 transition-colors hover:border-ink hover:text-ink">
+                  <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="mt-8 inline-flex min-h-11 items-center border-b border-ink/24 text-[10px] uppercase tracking-[0.24em] text-ink/68 transition-colors hover:border-ink hover:text-ink">
                     sulayman.bowles@gmail.com
                   </a>
                 </ScrollReveal>
@@ -1260,7 +1277,7 @@ function HomePage() {
                     key={item.href}
                     href={item.href}
                     id={navItemId('home-footer-link', item)}
-                    className="border-b border-transparent pb-1 transition-colors hover:border-ink hover:text-ink"
+                    className="inline-flex min-h-11 items-center border-b border-transparent transition-colors hover:border-ink hover:text-ink"
                   >
                     {navLabel(item)}
                   </a>
