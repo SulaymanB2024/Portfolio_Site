@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Rare-earth magnet finished capacity versus gross process flow</title>
+  <desc id="desc">A process diagram traces oxide and metal through alloy strip, powder, pressing, sintering, machining, coating, internal recycling, and 37,584 to 38,048 tonnes of normalized finished magnet nameplate. Gross process flow is modeled at 46,400 to 70,459 tonnes.</desc>
+  <rect width="1600" height="900" fill="#f4f3ef"/>
+  <g stroke="#deddd7" stroke-width="1">
+    <path d="M80 120H1520M80 240H1520M80 360H1520M80 480H1520M80 600H1520M80 720H1520"/>
+    <path d="M200 80V820M440 80V820M680 80V820M920 80V820M1160 80V820M1400 80V820"/>
+  </g>
+  <text x="90" y="90" font-family="Arial,Helvetica,sans-serif" font-size="22" letter-spacing="3" fill="#55554f">FIGURE 03 / MATERIAL BALANCE</text>
+  <text x="90" y="165" font-family="Arial,Helvetica,sans-serif" font-size="54" font-weight="700" fill="#171715">Gross flow is not a second capacity total</text>
+  <text x="90" y="215" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="#565650">Every disclosure must preserve its chemical form, process stage, unit, and yield boundary</text>
+  <g font-family="Arial,Helvetica,sans-serif">
+    <g transform="translate(85 330)">
+      <rect width="225" height="150" rx="10" fill="#e5e4de" stroke="#171715" stroke-width="2"/>
+      <text x="22" y="48" font-size="22" font-weight="700" fill="#20201e">Oxide / metal</text>
+      <text x="22" y="83" font-size="18" fill="#55554f">NdPr + additives</text>
+      <text x="22" y="116" font-size="18" fill="#55554f">origin and purity matter</text>
+    </g>
+    <g transform="translate(385 330)">
+      <rect width="225" height="150" rx="10" fill="#d8d7d0" stroke="#171715" stroke-width="2"/>
+      <text x="22" y="48" font-size="22" font-weight="700" fill="#20201e">Alloy / strip</text>
+      <text x="22" y="83" font-size="18" fill="#55554f">chemistry + casting</text>
+      <text x="22" y="116" font-size="18" fill="#55554f">oxygen control</text>
+    </g>
+    <g transform="translate(685 330)">
+      <rect width="225" height="150" rx="10" fill="#c7c6bf" stroke="#171715" stroke-width="2"/>
+      <text x="22" y="48" font-size="22" font-weight="700" fill="#20201e">Powder / press</text>
+      <text x="22" y="83" font-size="18" fill="#454540">milling + orientation</text>
+      <text x="22" y="116" font-size="18" fill="#454540">handling loss</text>
+    </g>
+    <g transform="translate(985 330)">
+      <rect width="225" height="150" rx="10" fill="#a8a7a0" stroke="#171715" stroke-width="2"/>
+      <text x="22" y="48" font-size="22" font-weight="700" fill="#ffffff">Sinter / machine</text>
+      <text x="22" y="83" font-size="18" fill="#ffffff">shrinkage + cracking</text>
+      <text x="22" y="116" font-size="18" fill="#ffffff">geometry loss</text>
+    </g>
+    <g transform="translate(1285 330)">
+      <rect width="225" height="150" rx="10" fill="#20201e" stroke="#171715" stroke-width="2"/>
+      <text x="22" y="48" font-size="22" font-weight="700" fill="#ffffff">Finished magnets</text>
+      <text x="22" y="88" font-size="26" font-weight="700" fill="#ffffff">37.6–38.0 kt</text>
+      <text x="22" y="120" font-size="17" fill="#deddd7">normalized nameplate</text>
+    </g>
+    <g stroke="#171715" stroke-width="4" fill="none">
+      <path d="M310 405H375"/><path d="M610 405H675"/><path d="M910 405H975"/><path d="M1210 405H1275"/>
+    </g>
+    <g fill="#171715">
+      <path d="M375 405l-15-10v20z"/><path d="M675 405l-15-10v20z"/><path d="M975 405l-15-10v20z"/><path d="M1275 405l-15-10v20z"/>
+    </g>
+    <path d="M1100 500C1100 660 790 660 790 520" fill="none" stroke="#777770" stroke-width="4" stroke-dasharray="12 10"/>
+    <path d="M790 520l-10 17h20z" fill="#777770"/>
+    <text x="830" y="628" font-size="20" font-weight="700" fill="#55554f">Internal scrap recovery</text>
+    <text x="830" y="658" font-size="18" fill="#666660">reduces virgin feed but does not erase process loss</text>
+    <rect x="90" y="705" width="1420" height="90" rx="8" fill="#e5e4de" stroke="#171715" stroke-width="2"/>
+    <text x="125" y="748" font-size="27" font-weight="700" fill="#20201e">Modeled gross process flow: 46.4–70.5 kt</text>
+    <text x="795" y="748" font-size="21" fill="#4d4d48">throughput requirement across stages · not additive to finished capacity</text>
+  </g>
+</svg>

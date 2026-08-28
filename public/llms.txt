@@ -62,6 +62,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot](https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy)
 - [Technical SEO as Public Data Infrastructure](https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure)
 - [Canonical Identity Beats More Content](https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo)
+- [The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature](https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity)
 - [Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics](https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads)
 - [Atlas open-corpus CSV](https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.csv): URL-level rows from the dated public demonstration.
 - [Atlas open-corpus capture manifest](https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.json): Run scope, method, and claim limit.
