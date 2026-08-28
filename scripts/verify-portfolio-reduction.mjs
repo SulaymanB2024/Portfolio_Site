@@ -15,7 +15,7 @@ assert(method.includes('id="worked-finding"'), 'method: worked finding anchor mi
 assert(method.includes('href="/method#worked-finding"') || method.includes('href="#worked-finding"'), 'method: worked finding link missing');
 
 const austin = read('dist/austin-technical-seo/index.html');
-for (const required of ['Austin Crawlability Pilot Snapshot', 'Query Examples Before Page Expansion', 'Request an audit']) {
+for (const required of ['Austin Crawlability Pilot Snapshot', 'Query Examples Before Page Expansion', 'Request an Austin technical SEO audit']) {
   assert(textFromHtml(austin).includes(required), `austin: missing ${required}`);
 }
 for (const stale of ['Common Austin site problems.', 'Sample audit output.', 'Use this format for your site audit.']) {

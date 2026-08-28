@@ -16,6 +16,16 @@ const DESCRIPTIVE_ANCHOR_EXPECTATIONS = [
   ['/contact', 'technical SEO consultant'],
   ['/austin-technical-seo', 'Austin technical SEO consultant'],
   ['/research', 'technical SEO research'],
+  ['/markets/who-owns-texas-toll-roads', 'Texas toll road ownership'],
+] as const;
+const TEXAS_TOLL_PATH = '/markets/who-owns-texas-toll-roads';
+const TEXAS_TOLL_REQUIRED_HUB_SOURCES = ['/', '/work', '/markets', '/research'] as const;
+const TEXAS_TOLL_REQUIRED_ARTICLE_SOURCES = [
+  '/research/search-console/technical-seo-public-data-infrastructure',
+  '/research/financial-systems/where-online-returns-actually-go',
+  '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
+  '/research/financial-systems/hidden-financing-hardware-startups',
+  '/research/financial-systems/waymo-hardware-financing',
 ] as const;
 
 function assert(condition: unknown, message: string): asserts condition {
@@ -155,7 +165,24 @@ for (const target of PROGRAMMATIC_SEARCH_TARGETS) {
   );
 }
 
+const texasTollInbound = links.filter(
+  (link) => link.target === TEXAS_TOLL_PATH && link.source !== TEXAS_TOLL_PATH && link.source !== '/sitemap',
+);
+const texasTollInboundSources = new Set(texasTollInbound.map((link) => link.source));
+assert(
+  TEXAS_TOLL_REQUIRED_HUB_SOURCES.every((source) => texasTollInboundSources.has(source)),
+  'Texas toll-road article is missing a contextual link from home, work, markets, or research',
+);
+assert(
+  TEXAS_TOLL_REQUIRED_ARTICLE_SOURCES.every((source) => texasTollInboundSources.has(source)),
+  'Texas toll-road article is missing one or more finance/infrastructure article links',
+);
+assert(
+  new Set(texasTollInbound.map((link) => link.label)).size >= 5,
+  'Texas toll-road inbound anchors are not sufficiently varied',
+);
+
 const maxDepth = Math.max(...depths.values());
 console.log(
-  `Internal-link verification passed for ${routes.length} canonical routes: zero orphans, maximum depth ${maxDepth}, ${DESCRIPTIVE_ANCHOR_EXPECTATIONS.length} descriptive anchor targets, and at least three contextual inbound sources for all 16 articles and 36 programmatic guides.`,
+  `Internal-link verification passed for ${routes.length} canonical routes: zero orphans, maximum depth ${maxDepth}, ${DESCRIPTIVE_ANCHOR_EXPECTATIONS.length} descriptive anchor targets, and at least three contextual inbound sources for all ${ARTICLE_SEARCH_TARGETS.length} articles and ${PROGRAMMATIC_SEARCH_TARGETS.length} programmatic guides.`,
 );

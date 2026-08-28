@@ -1,0 +1,9 @@
+record_type,record_name,capacity_metric_tonnes,status_factor_conservative,status_factor_base,status_factor_high,illustrative_output_conservative_t,illustrative_output_base_t,illustrative_output_high_t,notes
+maturity_bucket,Commercial shipments,4000,0.85,0.90,0.95,3400,3600,3800,"Disclosed nameplate plus public evidence of commercial shipments; does not imply full utilization or broad product qualification."
+maturity_bucket,Commissioning / ramp / qualification,3600,0.45,0.70,0.90,1620,2520,3240,"Installed or starting capacity, including commissioning and customer qualification."
+maturity_bucket,Future firm projects,30150,0.10,0.35,0.70,3015,10552.5,21105,"Named and disclosed U.S. projects or later phases without sufficient evidence of sustained commercial output."
+summary,Firm-project stated-unit total,37750,,,,8035,16672.5,28145,"Sum of the three maturity buckets. Scenario values are illustrations, not forecasts."
+normalization,Lower normalized total,37584,,,,,,,"Ambiguous public references to tons treated as U.S. short tons where applicable."
+normalization,Upper normalized total,38048,,,,,,,"Ambiguous public references to tons treated as metric tonnes where applicable."
+material_flow,Lower gross process flow,46400,,,,,,,"Derived upstream and in-process throughput required under higher-yield and stronger-recycling assumptions. Not finished capacity."
+material_flow,Upper gross process flow,70459,,,,,,,"Derived upstream and in-process throughput required under lower-yield and weaker-recycling assumptions. Not finished capacity."

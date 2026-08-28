@@ -1,6 +1,14 @@
-import { aiSearchAuditChecklist, atlasCheckItems } from '../content/evidenceLists';
+import {
+  aiSearchAuditChecklist,
+  atlasCheckItems,
+  buyerDecisionEvidence,
+  contactBuyerQuestions,
+  contactDecisionProtocol,
+  contactIntakeNotes,
+  contactResponsePaths,
+} from '../content/evidenceLists';
 import { getArticleByPath } from '../content/articleRegistry';
-import { isInvestmentMemo, type ArticleSection } from '../content/articleModels';
+import { isInvestmentMemo, type ArticleResource, type ArticleSection } from '../content/articleModels';
 import { PUBLIC_MARKET_THESES } from '../content/marketTheses';
 import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
 import {
@@ -29,6 +37,7 @@ import {
   AI_MANAGER_FAQS,
   AI_MANAGER_OPEN_QUESTIONS,
   AI_MANAGER_SOURCES,
+  AI_MANAGERS_ARTICLE_CONCLUSION,
   AI_MANAGERS_ARTICLE_DESCRIPTION,
   AI_MANAGERS_ARTICLE_DISPLAY_TITLE,
   AI_MANAGERS_ARTICLE_LEDE,
@@ -46,6 +55,7 @@ import {
 } from '../content/viralBenchArticle';
 import { primaryNav, utilityNav } from '../content/siteNavigation';
 import {
+  TEXAS_TOLL_ARTICLE_CONCLUSION,
   TEXAS_TOLL_ARTICLE_DESCRIPTION,
   TEXAS_TOLL_ARTICLE_FACT_GAPS,
   TEXAS_TOLL_ARTICLE_FAQS,
@@ -57,8 +67,13 @@ import {
   TEXAS_TOLL_ARTICLE_TITLE,
   type TexasTollArticleTable,
 } from '../content/texasTollRoadArticle';
+import {
+  TEXAS_TOLL_DIRECT_ANSWER,
+  TEXAS_TOLL_OWNERSHIP_CSV_PATH,
+  TEXAS_TOLL_OWNERSHIP_ROWS,
+} from '../content/texasTollRoadOwnership';
 import { markdownToHtml } from '../utils/markdownToHtml';
-import { getArticleSearchTarget } from './articleSearchTargets';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from './articleSearchTargets';
 import { getSeoRoute, type SeoRoute } from './routes';
 
 type LinkItem = {
@@ -296,25 +311,48 @@ function articleShell(title: string, intro: string, body: string) {
       </article>`;
 }
 
-function articleSearchBriefStaticHtml(path: string) {
+function articleSearchBriefStaticHtml(path: string, options: { includeDirectAnswer?: boolean } = {}) {
   const target = getArticleSearchTarget(path);
   if (!target) return '';
+  const includeDirectAnswer = options.includeDirectAnswer ?? true;
 
-  return `<section aria-labelledby="direct-answer-title">
-        <h2 id="direct-answer-title">Direct answer: ${escapeHtml(target.primaryQuery)}</h2>
-        <p>${escapeHtml(target.directAnswer)}</p>
+  return `<section ${includeDirectAnswer ? 'aria-labelledby="direct-answer-title"' : 'aria-label="Article research brief"'}>
+        ${includeDirectAnswer ? `<h2 id="direct-answer-title">Direct answer: ${escapeHtml(target.primaryQuery)}</h2>
+        <p>${escapeHtml(target.directAnswer)}</p>` : ''}
         <h3>Original research artifact</h3>
         <p>${escapeHtml(target.originalArtifact)}</p>
         <h3>What this page adds</h3>
         <p>${escapeHtml(target.serpGap)}</p>
         <h3>Related research</h3>
         ${linkList(target.relatedPaths.map((relatedPath) => {
-          const relatedTarget = getArticleSearchTarget(relatedPath);
           return {
             href: relatedPath,
-            label: relatedTarget?.primaryQuery ?? relatedPath,
+            label: getArticleRelatedLinkLabel(path, relatedPath),
           };
         }))}
+      </section>`;
+}
+
+function texasTollOwnershipLookupStaticHtml() {
+  const rows = TEXAS_TOLL_OWNERSHIP_ROWS.map(
+    (row) => `<tr>
+            <th scope="row">${escapeHtml(row.facility)}<br /><small>${escapeHtml(row.region)}</small></th>
+            <td>${escapeHtml(row.physicalOwner)}</td>
+            <td><strong>${escapeHtml(row.operator)}</strong><br /><small>${escapeHtml(row.tollRevenueClaimant)}</small></td>
+            <td>${escapeHtml(row.privateRightsStatus)}<br /><small>${escapeHtml(row.term)}</small></td>
+            <td>${escapeHtml(row.billingAgency)}<br /><small>${row.sourceIds.map((sourceId) => `<a href="#source-${sourceId}">${sourceId.toUpperCase()}</a>`).join(', ')}</small></td>
+          </tr>`,
+  ).join('\n          ');
+
+  return `<section id="ownership-lookup" aria-labelledby="ownership-lookup-title">
+        <h2 id="ownership-lookup-title">Are Texas toll roads privately owned?</h2>
+        <p>${escapeHtml(TEXAS_TOLL_DIRECT_ANSWER)}</p>
+        <p>Use this lookup to separate the physical owner from the operator, toll-revenue claimant, private-rights status, and billing agency. It also answers “Are toll roads in Texas privately owned?” and “Who owns Texas toll roads?” at the facility level.</p>
+        <table>
+          <thead><tr><th>Facility or system</th><th>Physical owner</th><th>Operator / revenue claimant</th><th>Private rights</th><th>Billing agency</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+        <p><a href="${TEXAS_TOLL_OWNERSHIP_CSV_PATH}" download>Download the complete Texas toll-road ownership matrix (CSV)</a> · <a href="https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html">Compare TxDOT’s current operator inventory</a></p>
       </section>`;
 }
 
@@ -333,9 +371,11 @@ function viralBenchArticleStaticHtml() {
   );
 
   return `<figure>
-          <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1672" height="941" alt="A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space." />
+          <img src="${VIRALBENCH_ARTICLE_IMAGE}" width="1800" height="1200" alt="A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space." />
         </figure>
         ${articleHtml}
+        <h2 id="article-conclusion-title">The harness determines whether the agent can learn</h2>
+        <p>ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before any promotion.</p>
         <h2>Source ledger</h2>
         ${linkList([
           { href: 'https://viralbench.ai/', label: 'ViralBench live methodology' },
@@ -366,15 +406,33 @@ function articleSectionsStaticHtml(sections: ArticleSection[]) {
           <pre><code>${escapeHtml(example.code)}</code></pre>
         </figure>`,
     ).join('\n        ') ?? '';
+    const figures = section.figures?.map(
+      (figure) => `<figure>
+          <img src="${escapeHtml(figure.src)}" width="${figure.width}" height="${figure.height}" alt="${escapeHtml(figure.alt)}" />
+          <figcaption><strong>${escapeHtml(figure.label)}</strong> — ${escapeHtml(figure.caption)}</figcaption>
+        </figure>`,
+    ).join('\n        ') ?? '';
 
     return `<section aria-labelledby="${section.id}-title">
         <h2 id="${section.id}-title">${escapeHtml(section.title)}</h2>
         ${paragraphList(section.paragraphs)}
         ${bullets}
+        ${figures}
         ${table}
         ${codeExamples}
       </section>`;
   }).join('\n        ');
+}
+
+function articleResourcesStaticHtml(resources: ArticleResource[]) {
+  return `<section aria-labelledby="article-downloads-title">
+        <h2 id="article-downloads-title">Downloads</h2>
+        <p>The web article is the reading layer. These files preserve the supplied source package and model.</p>
+        <ul>${resources.map((resource) => `<li>
+          <a href="${escapeHtml(resource.href)}">${escapeHtml(resource.label)} (${escapeHtml(resource.format)})</a>
+          — ${escapeHtml(resource.description)}
+        </li>`).join('')}</ul>
+      </section>`;
 }
 
 function texasTollTableStaticHtml(table: TexasTollArticleTable) {
@@ -413,9 +471,8 @@ function texasTollArticleStaticHtml() {
   return articleShell(
     TEXAS_TOLL_ARTICLE_TITLE,
     TEXAS_TOLL_ARTICLE_DESCRIPTION,
-    `<h2>Short answer</h2>
-        <p>Texas toll roads do not have one owner. The state, a county, or a public authority usually owns the physical roadway. Contracts determine who controls toll revenue, operations, debt claims, equity, billing, and the residual rights at expiry.</p>
-        ${articleSearchBriefStaticHtml(`/markets/${TEXAS_TOLL_ARTICLE_SLUG}`)}
+    `${texasTollOwnershipLookupStaticHtml()}
+        ${articleSearchBriefStaticHtml(`/markets/${TEXAS_TOLL_ARTICLE_SLUG}`, { includeDirectAnswer: false })}
         ${markdownToHtml(TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN)}
         ${sections}
         <h2 id="analyst-model-screen">Analyst model screening</h2>
@@ -437,6 +494,8 @@ function texasTollArticleStaticHtml() {
         ${faqs}
         <h2 id="source-ledger">Source ledger</h2>
         <ol>${sources}</ol>
+        <h2 id="article-conclusion-title">${escapeHtml(TEXAS_TOLL_ARTICLE_CONCLUSION.title)}</h2>
+        <p>${escapeHtml(TEXAS_TOLL_ARTICLE_CONCLUSION.content)}</p>
         <h2>Related research</h2>
         ${linkList([
           { label: 'Markets research', href: '/markets' },
@@ -504,6 +563,10 @@ function aiManagersArticleStaticHtml() {
       <section aria-labelledby="source-ledger-title">
         <h2 id="source-ledger-title">Source ledger</h2>
         <ol>${sources}</ol>
+      </section>
+      <section id="article-conclusion" aria-labelledby="article-conclusion-title">
+        <h2 id="article-conclusion-title">${escapeHtml(AI_MANAGERS_ARTICLE_CONCLUSION.title)}</h2>
+        <p>${escapeHtml(AI_MANAGERS_ARTICLE_CONCLUSION.content)}</p>
       </section>`,
   );
 }
@@ -606,7 +669,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>Source-led notes on crawlability, crawler policy, public search data, canonical identity, AI systems, and evidence limits.</p>
         <h3><a href="/research/technical-seo">Technical SEO diagnostic library</a></h3>
         <p>Evidence-backed issue guides, platform playbooks, and audit checklists with reproducible repair gates.</p>
-        <h3><a href="/markets/who-owns-texas-toll-roads">Who Owns the Toll Roads in Texas?</a></h3>
+        <h3><a href="/markets/who-owns-texas-toll-roads">Texas Toll-Road Ownership Map</a></h3>
         <p>Source-led infrastructure research on public ownership, private concessions, operators, debt claims, revenue rights, and missing facts.</p>
         <h2>How I work</h2>
         <p>Collect the source material, preserve the observed state, separate interpretation from fact, name the owner, and define the next check.</p>
@@ -635,6 +698,13 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           .join('\n        ')}
         <h2>Supporting Links</h2>
         ${linkCards(contextualProofLinks)}
+        <h2>Evidence Before Intake</h2>
+        ${buyerDecisionEvidence
+          .map(
+            (item) =>
+              `<h3>${escapeHtml(item.question)}</h3><p>${escapeHtml(item.answer)}</p><p><a href="${escapeHtml(item.href)}">${escapeHtml(item.action)}</a></p>`,
+          )
+          .join('\n        ')}
         <h2>Public Routes</h2>
         ${linkList(primaryLinks)}`,
     );
@@ -742,14 +812,19 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'Direct contact for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and source-backed research.',
       `<p>I work as a technical SEO consultant on bounded crawlability, indexation, rendering, internal-link, structured-data, analytics, and implementation problems. Typical outputs include URL-level findings, raw/render comparisons, owners, acceptance checks, and a rerun path—not an opaque score or generic audit deck.</p>
         <h2>Good-Fit Technical Work</h2>
-        <ul><li>Indexation, canonical, redirect, internal-link, structured-data, and template diagnosis tied to affected URLs.</li><li>Raw and rendered page comparison, crawl-state review, measurement-gap handling, and post-fix reruns.</li><li>GA4 and Search Console baselines, source-led research, implementation handoffs, and validation criteria.</li></ul>
+        ${definitionCards(contactResponsePaths.map((item) => [item.label, item.description]))}
         <h2>Direct Contact</h2>
         ${linkList([
           { label: 'Email Sulayman Bowles', href: 'mailto:sulayman.bowles@gmail.com', description: 'Primary contact path.' },
         ])}
         <h2>Brief Form</h2>
         <p>The public brief form is secondary to direct contact. It is useful when the site URL, suspected problem, and decision the work needs to support are already clear.</p>
-        <ul><li>Use the brief for technical SEO, crawl evidence, analytics, or source-backed research requests.</li><li>Start with the site URL, the suspected problem, and the decision the work needs to support.</li><li>Do not include passwords, API keys, payment details, unreleased client data, or production secrets.</li></ul>
+        ${definitionCards(contactIntakeNotes.map((item) => [item.label, item.description]))}
+        <p>Do not include passwords, API keys, payment details, unreleased client data, or production secrets.</p>
+        <h2>Decision Gates</h2>
+        ${definitionCards(contactDecisionProtocol.map((item) => [item.title, `${item.label}. ${item.description}`]))}
+        <h2>Buyer Questions</h2>
+        ${definitionCards(contactBuyerQuestions.map((item) => [item.question, item.answer]))}
         <h2>Elsewhere</h2>
         ${linkList([
           { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
@@ -800,7 +875,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${definitionCards(austinDiagnosticExamples.map((item) => [item.prompt, item.review]))}
         <h2>Contextual Links</h2>
         ${linkList([
-          { label: 'Request an audit', href: '/contact' },
+          { label: 'Request an Austin technical SEO audit', href: '/contact' },
           { label: 'Review technical SEO audit services and process', href: '/method' },
           { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl' },
           { label: 'View Void Agency', href: 'https://www.void-agency.com/' },
@@ -899,6 +974,15 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     const structuredSections = article.sections
       ? articleSectionsStaticHtml(article.sections)
       : '';
+    const articleImage = article.artwork.kind === 'image'
+      ? `<figure>
+          <img src="${escapeHtml(article.artwork.heroSrc)}" alt="${escapeHtml(article.artwork.alt)}" />
+          <figcaption>${escapeHtml(article.artwork.caption)}</figcaption>
+        </figure>`
+      : '';
+    const resources = article.resources?.length
+      ? articleResourcesStaticHtml(article.resources)
+      : '';
     const investmentSections = investmentMemo
       ? `<h2>Valuation Frame</h2>
         <p>${escapeHtml(article.formulaLabel)}: ${escapeHtml(article.formula)}</p>
@@ -912,6 +996,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       article.title,
       article.subtitle,
       `${articleSearchBriefStaticHtml(route.path)}
+        ${articleImage}
         <h2>Memo Details</h2>
         <p>Category: ${escapeHtml(article.category)}. Author: ${escapeHtml(article.author)}. Published: ${escapeHtml(article.date)}. Read time: ${escapeHtml(article.readTime)}. Source count: ${String(article.sources.length)}.</p>
         ${boundary ? `<h2>${investmentMemo ? 'Recommendation Boundary' : 'Evidence Boundary'}</h2><p>${escapeHtml(boundary)}</p>` : ''}
@@ -921,6 +1006,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${paragraphList(article.content)}
         ${structuredSections}
         ${investmentSections}
+        ${resources}
+        <h2 id="article-conclusion-title">${escapeHtml(article.conclusion.title)}</h2>
+        <p>${escapeHtml(article.conclusion.content)}</p>
         ${sourceLinks.length ? `<h2>${structuredSections ? 'Source Ledger' : 'Research Sources'}</h2>${linkList(sourceLinks)}` : ''}
         <h2>Internal Links</h2>
         ${linkList([

@@ -1,6 +1,6 @@
 # Link-Building Authority Playbook
 
-Last updated: 2026-06-25
+Last updated: 2026-07-23
 
 ## Objective
 
@@ -55,6 +55,8 @@ The scope checker verifies that only link-building publish files are being stage
 | 3 | Austin technical SEO page | `https://sulayman-bowles.dev/austin-technical-seo` | Local-service surface for Austin/startup/business-context citations. |
 | 3 | Austin crawlability benchmark pilot | `https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv` | Local public-data hook for Austin media and startup/web-infrastructure conversations. |
 | 3 | AI information source graph | `https://sulayman-bowles.dev/ai-information` | Canonical identity/source page for profile, AI retrieval, and entity reconciliation links. |
+| 1 | Texas toll-road ownership guide | `https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads` | Answer-first ownership explainer with public/private distinctions, project-level source records, and preserved investor analysis. |
+| 1 | Texas toll-road ownership CSV | `https://sulayman-bowles.dev/research/texas-toll-road-ownership-2026.csv` | Citation-ready facility matrix for physical owner, operator, revenue claimant, concession rights, term, billing, evidence date, and source IDs. |
 
 The human-readable public hub is `https://sulayman-bowles.dev/research`. The machine-readable public asset index is `public/research/authority-assets.json`.
 
@@ -150,6 +152,42 @@ Success criteria:
 - All owned profiles use one current identity line.
 - Old resume or project links point to `/resume`, `/ai-information`, `/atlas`, or `/method`.
 - Existing unlinked mentions have been checked and logged.
+
+### Campaign 5: Texas Toll-Road Ownership Citation Asset
+
+Target pages: `/markets/who-owns-texas-toll-roads` and `/research/texas-toll-road-ownership-2026.csv`.
+
+Audience:
+
+- Texas transportation and public-accountability reporters.
+- Road, tolling, P3, municipal-finance, and infrastructure-investment publications.
+- University transportation centers, research libraries, and legitimate public resource pages.
+- Existing toll-road explainers or reporting that would benefit from a current facility-level ownership and billing reference.
+
+Offer:
+
+- A nine-row ownership lookup separating pavement title, operator, toll-revenue claimant, concessionaire, term, private-rights status, and billing agency.
+- A downloadable CSV generated from the same typed source as the visible and static article.
+- A 26-source ledger, explicit evidence dates, corrections invitation, and a clear non-official/non-peer-reviewed boundary.
+
+Prohibited:
+
+- Paid links, exchanges, private blog networks, mass submissions, fabricated affiliations, and forced exact-match anchors.
+- Claims that publication, outreach, reindexing, impressions, or a new referring domain proves a ranking outcome.
+- Sending any draft without exact recipient and batch approval.
+
+Working files:
+
+- `docs/link-building/texas-toll-road-prospects.csv`
+- `docs/link-building/texas-toll-road-outreach-drafts.md`
+
+Success criteria:
+
+- 30 qualified prospects researched.
+- 15 exact pitches prepared and batch-approval gated.
+- 5 relevant new referring domains within 90 days.
+- At least 2 placements from transport, academic, government-adjacent, or established editorial sources.
+- Outcomes verified in the tracker before any referring-domain or ranking claim is made.
 
 ## Outreach Workflow
 

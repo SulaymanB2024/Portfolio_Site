@@ -1,39 +1,33 @@
+# Public crawl policy for https://sulayman-bowles.dev.
+# Intent: allow crawling of public routes. robots.txt is advisory, not access control.
+# Indexability is declared in page metadata and the XML sitemap; private data requires server-side controls.
+# Crawler role references reviewed: 2026-07-30.
+
+# Default public-web policy: Public discovery.
 User-agent: *
 Allow: /
 
-# Major search crawlers explicitly allowed for public discovery.
+# Conventional search crawlers: Search discovery.
 User-agent: Googlebot
-Allow: /
-
 User-agent: Bingbot
-Allow: /
-
 User-agent: DuckDuckBot
 Allow: /
 
-# AI/search crawlers explicitly allowed for public discovery.
+# AI answer-search crawlers: Automated answer-search discovery.
 User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: GPTBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
 User-agent: Claude-SearchBot
-Allow: /
-
-User-agent: Claude-User
-Allow: /
-
 User-agent: PerplexityBot
 Allow: /
 
+# User-triggered retrieval agents: Retrieval initiated by a user.
+User-agent: ChatGPT-User
+User-agent: Claude-User
 User-agent: Perplexity-User
+Allow: /
+
+# Model-development crawlers: Potential model-development collection.
+User-agent: GPTBot
+User-agent: ClaudeBot
 Allow: /
 
 Sitemap: https://sulayman-bowles.dev/sitemap.xml

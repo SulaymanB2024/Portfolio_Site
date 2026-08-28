@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef, useEffect, useState, lazy, Suspense, type CSSProperties } from 'react';
+import { useRef, useEffect, useLayoutEffect, useState, lazy, Suspense, type CSSProperties, type ReactNode } from 'react';
 import { InkTrails } from './components/InkTrails';
 import { RomanTogaReveal } from './components/RomanTogaReveal';
 import { ScrambleText } from './components/ScrambleText';
@@ -144,6 +144,16 @@ function getCurrentCanonicalPath() {
   return `${canonicalPath}${window.location.search}${window.location.hash}`;
 }
 
+function RouteReady({ children }: { children: ReactNode }) {
+  useLayoutEffect(() => {
+    document.documentElement.classList.add('app-mounted');
+    document.documentElement.classList.remove('js-pending');
+    document.getElementById('seo-static-summary')?.remove();
+  }, []);
+
+  return children;
+}
+
 export default function App() {
   const [currentPath, setCurrentPath] = useState(getCurrentCanonicalPath);
 
@@ -162,117 +172,53 @@ export default function App() {
   let page;
 
   if (route?.path === '/atlas') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AtlasPage />
-      </Suspense>
-    );
+    page = <AtlasPage />;
   } else if (route?.path === '/atlas/celestial-parallax') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AtlasCelestialParallaxPage />
-      </Suspense>
-    );
+    page = <AtlasCelestialParallaxPage />;
   } else if (route?.path === '/method') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <VoidAgencyMethodPage />
-      </Suspense>
-    );
+    page = <VoidAgencyMethodPage />;
   } else if (route?.path === '/about') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AboutPage />
-      </Suspense>
-    );
+    page = <AboutPage />;
   } else if (route?.path === '/work') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <WorkPage />
-      </Suspense>
-    );
+    page = <WorkPage />;
   } else if (route?.path === '/contact') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ContactPage />
-      </Suspense>
-    );
+    page = <ContactPage />;
   } else if (route?.path === '/atlas/sample-crawl') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AtlasSampleCrawlPage />
-      </Suspense>
-    );
+    page = <AtlasSampleCrawlPage />;
   } else if (route?.path === '/austin-technical-seo') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AustinTechnicalSeoPage />
-      </Suspense>
-    );
+    page = <AustinTechnicalSeoPage />;
   } else if (route?.path === '/resume') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ResumePage />
-      </Suspense>
-    );
+    page = <ResumePage />;
   } else if (route?.path === '/research') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ResearchPage />
-      </Suspense>
-    );
+    page = <ResearchPage />;
   } else if (route?.section === 'technical-seo-hub') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ProgrammaticSeoHubPage path={route.path} />
-      </Suspense>
-    );
+    page = <ProgrammaticSeoHubPage path={route.path} />;
   } else if (route?.section === 'technical-seo-guide') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ProgrammaticSeoPage path={route.path} />
-      </Suspense>
-    );
+    page = <ProgrammaticSeoPage path={route.path} />;
   } else if (route?.path === '/sitemap') {
     page = <SitemapPage />;
   } else if (route?.path === '/viralbench-codex-agent-harness') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ViralBenchArticlePage />
-      </Suspense>
-    );
+    page = <ViralBenchArticlePage />;
   } else if (route?.path === AI_MANAGERS_ARTICLE_PATH) {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AiManagersArticlePage />
-      </Suspense>
-    );
+    page = <AiManagersArticlePage />;
   } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <TexasTollRoadArticlePage />
-      </Suspense>
-    );
+    page = <TexasTollRoadArticlePage />;
   } else if (route?.section === 'research-article') {
     const slug = route.path.split('/').at(-1) ?? '';
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <MarketArticlePage slug={slug} />
-      </Suspense>
-    );
+    page = <MarketArticlePage slug={slug} />;
   } else if (route?.path === '/markets') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <MarketsPage />
-      </Suspense>
-    );
+    page = <MarketsPage />;
   } else if (route?.path === '/') {
     page = <HomePage />;
   } else {
     page = <NotFoundPage />;
   }
 
-  return page;
+  return (
+    <Suspense fallback={<RouteFallback route={route} />}>
+      <RouteReady>{page}</RouteReady>
+    </Suspense>
+  );
 }
 
 function SitemapPage() {
@@ -287,8 +233,8 @@ function SitemapPage() {
         <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
       </Suspense>
       <InternalHeader activePath="/sitemap" tone="light" />
-      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 py-14 md:px-8 xl:px-10 xl:py-20">
-        <header className="grid min-h-[52vh] content-end border-b border-ink/14 pb-12">
+      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-14 pt-6 md:px-8 md:pt-8 xl:px-10 xl:pb-20 xl:pt-10">
+        <header className="border-b border-ink/14 py-12 md:py-16 xl:py-20">
           <p className="text-[10px] uppercase tracking-[0.28em] text-ink/58">
             Sulayman Bowles / Sitemap
           </p>
@@ -301,7 +247,7 @@ function SitemapPage() {
         </header>
 
         <section className="py-10">
-          <h2 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/48">Pages</h2>
+          <h2 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/64">Pages</h2>
           <ul className="grid gap-3">
             {routes.map((item) => (
               <li key={item.path}>
@@ -325,40 +271,31 @@ function SitemapPage() {
 
 function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
   const dark = route ? isDarkRoute(route.path) : false;
-  const heading = route?.h1 ?? HOME_SEO.h1;
+  const heading = route?.displayH1 ?? route?.h1 ?? HOME_SEO.h1;
   const description = route?.description ?? HOME_SEO.description;
-  const summary = route?.staticSummary ?? HOME_SEO.staticSummary;
-  const fallbackLinks = [
-    ['Home', '/'],
-    ['Selected Work', '/work'],
-    ['Atlas', '/atlas'],
-    ['Method', '/method'],
-    ['Research', '/research'],
-    ['Contact', '/contact'],
-  ];
+
+  if (typeof document !== 'undefined' && document.getElementById('seo-static-summary')) {
+    return null;
+  }
 
   return (
     <main
       aria-busy="true"
-      className={`flex min-h-screen items-center justify-center px-6 font-sans ${
+      className={`site-page relative min-h-screen overflow-hidden font-sans ${
         dark ? 'bg-ink text-canvas' : 'bg-canvas text-ink'
       }`}
     >
-      <div className="w-full max-w-[1480px] border-t border-current/20 pt-6">
-        <div className="text-[10px] uppercase tracking-[0.32em] opacity-60">Route overview</div>
-        <h1 className="mt-6 font-serif text-[3.4rem] md:text-[5.75rem] xl:text-[8rem] italic leading-[0.86] tracking-normal">
+      <InternalHeader activePath={route?.path ?? '/'} tone={dark ? 'dark' : 'light'} />
+      <section className="relative mx-auto grid min-h-[calc(100svh-4.5rem)] w-full max-w-[1480px] content-center px-4 py-20 md:px-8 xl:min-h-[calc(100svh-5.125rem)] xl:px-10">
+        <div className="border-t border-current/16 pt-6">
+          <p className="text-[10px] uppercase tracking-[0.32em] opacity-60">Opening the current route</p>
+          <h1 className="mt-8 max-w-[14ch] font-serif text-[3.4rem] italic font-light leading-[0.86] tracking-normal md:text-[5.75rem] xl:text-[8rem]">
           {heading}
-        </h1>
-        <p className="mt-8 max-w-3xl text-base leading-relaxed opacity-70">{description}</p>
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed opacity-58">{summary}</p>
-        <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-[10px] uppercase tracking-[0.22em] opacity-70" aria-label="Fallback route links">
-          {fallbackLinks.map(([label, href]) => (
-            <a key={href} href={href} className="underline decoration-current/20 underline-offset-4 transition-opacity hover:opacity-100">
-              {label}
-            </a>
-          ))}
-        </nav>
-      </div>
+          </h1>
+          <p className="mt-8 max-w-3xl text-sm leading-relaxed opacity-68 md:text-base">{description}</p>
+          <div aria-hidden="true" className="mt-10 h-px w-10 bg-current opacity-45" />
+        </div>
+      </section>
     </main>
   );
 }
@@ -522,7 +459,7 @@ function HomePage() {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   return (
-    <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas" ref={containerRef}>
+    <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-clip selection:bg-ink selection:text-canvas" ref={containerRef}>
       {!prefersReducedMotion && <InkTrails />}
         
       <InternalHeader activePath="/" tone={homeHeaderTone} variant="home" minimalBrand />
@@ -581,15 +518,32 @@ function HomePage() {
                 <span className="block">Sulayman</span>
                 <span className="block italic">Bowles</span>
               </h1>
-              <div className="mt-7 grid max-w-5xl gap-5 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-10">
+              <div className="mt-7 grid max-w-5xl gap-6 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-10">
                 <div>
                   <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
                   <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and publisher of source-led research.</p>
+                  <nav className="mt-6 flex flex-wrap gap-3" aria-label="Primary actions">
+                    <a
+                      href="/work"
+                      id="home-primary-work-link"
+                      className="inline-flex min-h-11 items-center border border-ink bg-ink px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-canvas transition-colors hover:bg-accent hover:text-ink"
+                    >
+                      View selected work
+                    </a>
+                    <a
+                      href="/contact#contact-brief-panel"
+                      id="home-primary-contact-link"
+                      className="inline-flex min-h-11 items-center border border-ink/28 px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/72 transition-colors hover:border-ink hover:bg-ink hover:text-canvas"
+                    >
+                      Start a project
+                    </a>
+                  </nav>
                 </div>
-                <nav aria-label="Featured proof" className="grid gap-2 self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
-                  <a href={AI_MANAGERS_ARTICLE_PATH} className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">The First AI Managers</a>
-                  <a href="/atlas" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Atlas SEO Audit Software</a>
-                  <a href="/markets/who-owns-texas-toll-roads" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Texas Toll Roads</a>
+                <nav aria-label="Featured proof" className="grid self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
+                  <span className="mb-1 text-[9px] tracking-[0.28em] text-ink/48">Selected proof</span>
+                  <a href={AI_MANAGERS_ARTICLE_PATH} className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>The First AI Managers</span><span aria-hidden="true">↗</span></a>
+                  <a href="/atlas" className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>Atlas SEO Audit Software</span><span aria-hidden="true">↗</span></a>
+                  <a href="/markets/who-owns-texas-toll-roads" className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>Texas Toll-Road Ownership</span><span aria-hidden="true">↗</span></a>
                 </nav>
               </div>
             </div>
@@ -1292,7 +1246,7 @@ function HomePage() {
                   ))}
                             </div>
                   <div className="pt-32 w-full flex justify-start md:justify-end">
-                    <a href="#selected-works" id="discipline-view-work-link" className="text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
+                    <a href="/work" id="discipline-view-work-link" className="inline-flex min-h-11 items-center border-b border-ink/30 text-[10px] font-sans uppercase tracking-widest text-ink transition-colors hover:border-ink">Explore all work ↗</a>
                   </div>
                </div>
             </div>
@@ -1316,7 +1270,7 @@ function HomePage() {
                   <p className="mt-10 max-w-sm text-sm leading-[1.8] text-ink/64 md:text-base">
                     A URL, the decision in front of you, and the evidence that feels incomplete is enough to start.
                   </p>
-                  <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="mt-8 inline-block border-b border-ink/24 pb-1 text-[10px] uppercase tracking-[0.24em] text-ink/68 transition-colors hover:border-ink hover:text-ink">
+                  <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="mt-8 inline-flex min-h-11 items-center border-b border-ink/24 text-[10px] uppercase tracking-[0.24em] text-ink/68 transition-colors hover:border-ink hover:text-ink">
                     sulayman.bowles@gmail.com
                   </a>
                 </ScrollReveal>
@@ -1335,7 +1289,7 @@ function HomePage() {
                     key={item.href}
                     href={item.href}
                     id={navItemId('home-footer-link', item)}
-                    className="border-b border-transparent pb-1 transition-colors hover:border-ink hover:text-ink"
+                    className="inline-flex min-h-11 items-center border-b border-transparent transition-colors hover:border-ink hover:text-ink"
                   >
                     {navLabel(item)}
                   </a>

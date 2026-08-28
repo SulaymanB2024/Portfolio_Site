@@ -76,6 +76,110 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 1,
+    name: 'What Happens When an Index Decides a Company Matters?',
+    href: '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
+    type: 'long_form_research',
+    preferredAnchor: 'what happens when a stock joins a major index',
+    audiences: ['index investing', 'market structure', 'passive funds', 'capital markets'],
+    pitchAngle:
+      'A source-led map from index-provider rules through fund implementation, closing auctions, event-study evidence, participant economics, and cost-of-capital limits.',
+    supportingAssets: [
+      { label: 'Full index-decision evidence audit', href: '/research/index-company-matters-evidence-audit.pdf' },
+      { label: 'Editable index-decision audit', href: '/research/index-company-matters-evidence-audit.docx' },
+      { label: 'Index effect by era', href: '/images/research/index-effect-by-era.png' },
+    ],
+  },
+  {
+    priority: 1,
+    name: 'How Airlines Borrow Against Loyalty Programs',
+    href: '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
+    type: 'long_form_research',
+    preferredAnchor: 'how airlines borrow against loyalty programs',
+    audiences: ['airline finance', 'loyalty programs', 'structured finance', 'credit analysis'],
+    pitchAngle:
+      'A transaction-level investigation separating card-settlement cash, co-brand consideration, deferred revenue, award fulfillment, and lender-controlled collections.',
+    supportingAssets: [
+      { label: 'Full airline loyalty financing investigation', href: '/research/airline-loyalty-financing-report.pdf' },
+      { label: 'Editable airline loyalty financing investigation', href: '/research/airline-loyalty-financing-report.docx' },
+      { label: 'Loyalty-backed financing diagram', href: '/images/research/airline-loyalty-backed-financing.png' },
+    ],
+  },
+  {
+    priority: 1,
+    name: 'Where Do Online Returns Go? Reverse Logistics Model',
+    href: '/research/financial-systems/where-online-returns-actually-go',
+    type: 'long_form_research',
+    preferredAnchor: 'where do online returns go',
+    audiences: ['e-commerce', 'retail operations', 'reverse logistics', 'unit economics'],
+    pitchAngle:
+      'A product-level investigation of when a return is restocked, refurbished, liquidated, recycled, destroyed, or never retrieved—and why the same retail price can produce opposite decisions.',
+    supportingAssets: [
+      { label: 'Full reverse-logistics investigation', href: '/research/where-online-return-actually-goes-report.pdf' },
+      { label: 'Reverse-logistics tax model', href: '/research/reverse-logistics-tax-model.xlsx' },
+      { label: 'Retrieval-decision chart', href: '/images/research/online-returns-retrieval-decision.png' },
+    ],
+  },
+  {
+    priority: 1,
+    name: 'Hardware Startup Financing: Five Capital Stacks',
+    href: '/research/financial-systems/hidden-financing-hardware-startups',
+    type: 'long_form_research',
+    preferredAnchor: 'hardware startup financing structures',
+    audiences: ['hardware startups', 'venture finance', 'asset finance', 'project finance'],
+    pitchAngle:
+      'A five-company comparison of parent funding, equipment finance, secured SPVs, customer capital, public support, project debt, asset ownership, and downside allocation.',
+    supportingAssets: [
+      { label: 'Full comparative financing report', href: '/research/hidden-financing-report.pdf' },
+      { label: 'Comparative hardware financing model', href: '/research/hidden-financing-model.xlsx' },
+      { label: 'Five capital-stack diagrams', href: '/research/capital-stack-diagrams.zip' },
+    ],
+  },
+  {
+    priority: 1,
+    name: 'Who Funds Waymo’s Hardware?',
+    href: '/research/financial-systems/waymo-hardware-financing',
+    type: 'long_form_research',
+    preferredAnchor: 'Waymo hardware financing structure',
+    audiences: ['hardware startups', 'autonomous vehicles', 'venture finance', 'asset finance'],
+    pitchAngle:
+      'A Waymo case study separating disclosed equity funding from modeled physical-asset capital, utilization, residual-value risk, and the party that absorbs downside.',
+    supportingAssets: [
+      { label: 'Full Waymo financing report', href: '/research/waymo-hardware-financing-report.pdf' },
+      { label: 'Waymo hardware financing model', href: '/research/waymo-hardware-financing-model.xlsx' },
+    ],
+  },
+  {
+    priority: 1,
+    name: 'Who Owns Austin’s Home-Service Companies?',
+    href: '/research/financial-systems/who-owns-austin-home-service-companies',
+    type: 'long_form_research',
+    preferredAnchor: 'Austin home-service company ownership map',
+    audiences: ['Austin homeowners', 'local business reporting', 'home-service operators', 'private equity'],
+    pitchAngle:
+      'A dated 67-brand ownership map separating consumer brands, legal operators, platforms, sponsors, public parents, minority investors, and local franchisees.',
+    supportingAssets: [
+      { label: 'Austin ownership brand table', href: '/research/austin-home-service-ownership-2026.csv' },
+      { label: 'Machine-readable Austin ownership dataset', href: '/research/austin-home-service-ownership-2026.json' },
+      { label: 'Complete publication package', href: '/research/austin-home-service-ownership-publication-package.zip' },
+    ],
+  },
+  {
+    priority: 1,
+    name: 'Who Owns West Campus Student Housing?',
+    href: '/research/financial-systems/west-campus-student-housing',
+    type: 'long_form_research',
+    preferredAnchor: 'West Campus student housing ownership and returns',
+    audiences: ['student housing', 'real estate investing', 'Austin development', 'university housing'],
+    pitchAngle:
+      'A six-property West Campus study tracing student lease obligations through normalized NOI, acquisition basis, capital structure, refinancing stress, and first-loss allocation.',
+    supportingAssets: [
+      { label: 'Full West Campus investigative report', href: '/research/west-campus-investigative-report.pdf' },
+      { label: 'West Campus property model', href: '/research/west-campus-property-models.xlsx' },
+      { label: 'Methodology and claims appendix', href: '/research/west-campus-dossiers-methodology-claims.docx' },
+    ],
+  },
+  {
+    priority: 1,
     name: 'Atlas Open-Corpus Demonstration',
     href: '/atlas/sample-crawl',
     type: 'sample_data',
@@ -189,9 +293,21 @@ export const publicResearchAssets: ResearchAsset[] = [
 
 export const publicDataDownloads = [
   {
+    label: 'Austin home-service ownership table',
+    href: '/research/austin-home-service-ownership-2026.csv',
+    description:
+      'Dated 67-brand ownership table with company chain, owner type, evidence rating, and Austin footprint fields.',
+  },
+  {
+    label: 'Austin home-service ownership dataset',
+    href: '/research/austin-home-service-ownership-2026.json',
+    description:
+      'Machine-readable brands, entities, relationships, transactions, evidence references, conflicts, and unresolved records.',
+  },
+  {
     label: 'Article research briefs',
     href: '/research/article-research-briefs.json',
-    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 16 indexable articles.',
+    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 22 indexable articles.',
   },
   {
     label: 'Authority asset JSON',
@@ -216,7 +332,7 @@ export const publicDataDownloads = [
   {
     label: 'Atlas open-corpus demonstration CSV',
     href: '/research/atlas-open-corpus-run-2026-07-16.csv',
-    description: 'Dated open-corpus URL-level capture with raw/render and confidence fields.',
+    description: 'Dated open-corpus source capture with render-review and confidence fields.',
   },
   {
     label: 'Appian educational research memo',
@@ -227,5 +343,60 @@ export const publicDataDownloads = [
     label: 'Appian assumptions table',
     href: '/research/appian-assumptions-table.csv',
     description: 'CSV assumptions table that supports the markets research memo.',
+  },
+  {
+    label: 'Waymo hardware financing report',
+    href: '/research/waymo-hardware-financing-report.pdf',
+    description: 'Full source-led report with financing archetypes, methodology, appendices, and selected source register.',
+  },
+  {
+    label: 'Waymo hardware financing model',
+    href: '/research/waymo-hardware-financing-model.xlsx',
+    description: 'Twenty-one-sheet scenario model covering funding, asset capital, utilization, debt service, residual value, and downside.',
+  },
+  {
+    label: 'Where Your Online Return Actually Goes report',
+    href: '/research/where-online-return-actually-goes-report.pdf',
+    description: 'Forty-nine-page investigation of reverse logistics, return-center decisions, liquidation, fraud, ownership, and environmental disposition.',
+  },
+  {
+    label: 'Editable online-returns investigation',
+    href: '/research/where-online-return-actually-goes-report.docx',
+    description: 'Editable source document for the online-returns and reverse-logistics investigation.',
+  },
+  {
+    label: 'Reverse-logistics tax model',
+    href: '/research/reverse-logistics-tax-model.xlsx',
+    description: 'Thirty-six-sheet model covering nine product archetypes, route engines, thresholds, fraud, sustainability, auctions, and sensitivities.',
+  },
+  {
+    label: 'Comparative hardware financing report',
+    href: '/research/hidden-financing-report.pdf',
+    description: 'Nineteen-page comparison of five hardware capital stacks, asset ownership, recourse, utilization, and downside.',
+  },
+  {
+    label: 'Editable comparative hardware financing report',
+    href: '/research/hidden-financing-report.docx',
+    description: 'Editable source document for the five-company hardware financing investigation.',
+  },
+  {
+    label: 'Comparative hardware financing model',
+    href: '/research/hidden-financing-model.xlsx',
+    description: 'Twenty-nine-sheet evidence ledger, assumption book, company comparison, scenarios, and loss waterfalls.',
+  },
+  {
+    label: 'Hardware capital-stack diagram package',
+    href: '/research/capital-stack-diagrams.zip',
+    description: 'Original full-resolution PNG and Graphviz DOT files for Waymo, Serve Robotics, CoreWeave, Anduril, and Northvolt.',
+  },
+  {
+    label: 'West Campus student housing report',
+    href: '/research/west-campus-investigative-report.pdf',
+    description: 'Six-property investigation of contracts, ownership, normalized property economics, capital structure, and first-loss allocation.',
+  },
+  {
+    label: 'West Campus property model',
+    href: '/research/west-campus-property-models.xlsx',
+    description: 'Seventeen-sheet model covering property statements, student cost, development, zoning, refinancing stress, and claims.',
   },
 ];

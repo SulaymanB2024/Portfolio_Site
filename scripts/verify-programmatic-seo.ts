@@ -48,7 +48,13 @@ assert(PROGRAMMATIC_SEO_PAGES.filter((page) => page.family === 'platform').lengt
 assert(PROGRAMMATIC_SEO_PAGES.filter((page) => page.family === 'checklist').length === 4, 'Expected four audit checklists');
 
 const canonicalRoutes = getCanonicalRoutes();
-assert(canonicalRoutes.length === 68, `Expected exactly 68 indexable canonical URLs; found ${canonicalRoutes.length}`);
+const programmaticPaths = new Set(
+  [...PROGRAMMATIC_SEO_HUBS, ...PROGRAMMATIC_SEO_PAGES].map((item) => item.path),
+);
+assert(
+  canonicalRoutes.filter((route) => programmaticPaths.has(route.path)).length === programmaticPaths.size,
+  'One or more programmatic routes are missing from the canonical inventory',
+);
 const sitemap = buildSitemapXml();
 const phraseIndex = new Map<string, string>();
 

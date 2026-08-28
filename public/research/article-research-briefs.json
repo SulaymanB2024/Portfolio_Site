@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20",
+  "generated_at": "2026-07-26",
   "canonical_host": "https://sulayman-bowles.dev",
   "objective": "Public intent, evidence, artifact, and related-reading briefs for the site research archive.",
   "limits": [
@@ -24,9 +24,55 @@
       "related_articles": [
         "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+      "question": "AI data center power",
+      "supporting_questions": [
+        "1 GW AI data center GPUs",
+        "AI data center power capacity"
+      ],
+      "intent": "evaluation",
+      "cohort": 1,
+      "direct_answer": "AI data center power claims are not interchangeable: a requested grid interconnection, total-facility nameplate, IT nameplate, installed accelerator fleet, and average utilized load describe different boundaries. A defensible GPU estimate requires the electrical boundary, PUE, network overhead, rack design, accelerator configuration, and utilization assumptions.",
+      "evidence_gap": "Replace one-ratio gigawatt-to-GPU estimates with an explicit capacity ladder, sensitivity range, and boundary-specific evidence requirements.",
+      "original_artifact": "A downloadable GB300 capacity model, sensitivity table, source ledger, methodology note, and three boundary diagrams.",
+      "scope_boundary": "This page translates AI power claims into physical compute capacity; the hardware-financing and rare-earth articles analyze capital structure and upstream manufacturing capacity.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-08-16"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+      "question": "U.S. rare-earth magnet manufacturing capacity",
+      "supporting_questions": [
+        "U.S. rare earth magnet production capacity",
+        "domestic permanent magnet manufacturing"
+      ],
+      "intent": "evaluation",
+      "cohort": 1,
+      "direct_answer": "U.S. rare-earth magnet manufacturing capacity is growing, but announced nameplate, installed equipment, qualification, commercial shipments, and sustained saleable output are different maturity states. Bankable supply also depends on product mix, yield, qualified customers, imported inputs, and utilization rather than the sum of every announced project headline.",
+      "evidence_gap": "Separate disclosed finished-magnet nameplate from qualified output, upstream-only material capacity, ambiguous units, and demand denominators.",
+      "original_artifact": "A project-level capacity model, source ledger, material-flow diagram, maturity chart, and demand-denominator comparison.",
+      "scope_boundary": "This page audits domestic rare-earth magnet projects and physical supply maturity; the AI megawatt page models compute power and the hardware articles model financing.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-08-17"
     },
     {
       "url": "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
@@ -46,7 +92,8 @@
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
@@ -66,7 +113,8 @@
         "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
@@ -84,9 +132,16 @@
       "related_articles": [
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
         "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
-        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+        "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
@@ -106,27 +161,225 @@
         "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+      "question": "where do online returns go",
+      "supporting_questions": [
+        "what happens to online returns",
+        "reverse logistics returns process",
+        "do online returns get resold",
+        "are online returns thrown away",
+        "why do retailers issue returnless refunds"
+      ],
+      "intent": "definition",
+      "cohort": 1,
+      "direct_answer": "Where do online returns go? An online return can be restocked, sold open-box, refurbished, liquidated, donated, recycled, destroyed, held as fraud evidence, or never retrieved. The route depends on whether expected recovery after reverse freight, inspection, repair, fees, delay, and disposal exceeds the cost of retrieving the item.",
+      "evidence_gap": "Answer the cross-retailer question with product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing one retailer or one universal returns process.",
+      "original_artifact": "A 36-sheet reverse-logistics model, nine product archetypes, route and condition engines, auction analysis, decision diagrams, and a 49-page source-led investigation.",
+      "scope_boundary": "This page studies reverse logistics and the return tax on consumer products; the hardware-financing pages study capital stacks, asset claims, and residual-value risk before a product is returned.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+      "question": "what happens when an index decides a company matters",
+      "supporting_questions": [
+        "what happens when a stock is added to an index",
+        "what happens when a company joins the S&P 500",
+        "stock index inclusion effect",
+        "do stocks go up when added to an index",
+        "how index funds buy new constituents",
+        "index rebalancing price impact",
+        "does index inclusion lower cost of capital"
+      ],
+      "intent": "evaluation",
+      "cohort": 1,
+      "direct_answer": "When a stock is added to a major index, the provider changes a rulebook rather than buying shares. Tracking funds then acquire the required exposure through early trading, derivatives, internal crosses, or the effective closing auction. The event can change ownership, liquidity, and price, but published evidence does not support a permanent, uniform index-inclusion premium.",
+      "evidence_gap": "Connect provider governance, eligibility rules, fund mandates, source-index offsets, closing-auction mechanics, event-study evidence, and cost-of-capital limits instead of treating headline benchmark assets as forced one-day buying.",
+      "original_artifact": "A 32-page evidence audit with four index-family rule systems, 13 exhibits, a Tesla implementation case, participant economics, fact checks, a reproducible event-study protocol, and a 44-source ledger.",
+      "scope_boundary": "This page explains index membership, implementation demand, price effects, and provider economics; the airline, hardware, and toll-road investigations study different financial claims and ownership structures.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+      "question": "how airlines borrow against loyalty programs",
+      "supporting_questions": [
+        "airline loyalty program financing",
+        "airline loyalty-backed debt",
+        "how do airlines make money from loyalty programs",
+        "are airline miles a liability",
+        "are airline loyalty programs worth more than airlines",
+        "airline loyalty program securitization"
+      ],
+      "intent": "definition",
+      "cohort": 1,
+      "direct_answer": "How airlines borrow against loyalty programs: the card issuer pays cash under a commercial agreement; the airline records some consideration as current revenue and some as a contract liability; the member claims an award later; and a separate financing structure can give lenders first claim on designated partner and intercompany collections.",
+      "evidence_gap": "Separate consumer card spending, issuer partner payments, deferred-revenue accounting, award fulfillment, operating float, and the lender-controlled cash waterfall instead of calling airline miles deposits or treating every partner payment as debt.",
+      "original_artifact": "A 22-page source-led investigation, nine full-resolution exhibits, a point-level cash model, and a lender-waterfall reconstruction.",
+      "scope_boundary": "This page explains loyalty-program cash, accounting, and secured financing; the hardware-financing articles compare physical-asset capital stacks, while the Texas toll-road article covers public and concession infrastructure claims.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+      "question": "hardware startup financing",
+      "supporting_questions": [
+        "hardware financing structures",
+        "asset financing for hardware startups",
+        "how are hardware startups financed",
+        "hardware startup funding options",
+        "equipment financing for startups"
+      ],
+      "intent": "comparison",
+      "cohort": 1,
+      "direct_answer": "Hardware startup financing usually combines three layers: corporate equity or debt, asset-level debt or leases, and adjacent support such as customer prepayments, supplier terms, public incentives, or parent guarantees. The structure is only asset-light when fixed claims, recourse, and residual-value risk genuinely move away from the operator.",
+      "evidence_gap": "Replace generic funding-option lists with five real company capital stacks organized by asset owner, payment source, recourse, utilization exposure, and loss allocation.",
+      "original_artifact": "A 29-sheet comparative model, five full-resolution capital-stack diagrams, a 19-page report, cross-case scenario tables, and an explicit evidence hierarchy.",
+      "scope_boundary": "This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+        "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+      "question": "Waymo financing structure",
+      "supporting_questions": [
+        "how is Waymo funded",
+        "Waymo hardware financing"
+      ],
+      "intent": "ownership",
+      "cohort": 1,
+      "direct_answer": "The supplied public evidence supports an equity-heavy, parent-funded Waymo financing structure: Alphabet and outside investors fund the platform, while no quantified fleet-debt facility, asset SPV, customer pre-funding program, supplier facility, or government financing instrument is established in the package.",
+      "evidence_gap": "Separate fundraising from physical-asset financing, legal ownership, residual value, utilization risk, and the party that absorbs losses.",
+      "original_artifact": "A 21-sheet financing model, capital-stack diagram, downside waterfall, scenario tables, and instrument-by-instrument evidence map.",
+      "scope_boundary": "This page is the Waymo-specific deep dive; the five-company hardware-financing article compares parent funding with equipment finance, SPVs, customer capital, public support, and project debt.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+        "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+      "question": "West Campus student housing ownership",
+      "supporting_questions": [
+        "who owns West Campus apartments",
+        "UT Austin student housing investment returns"
+      ],
+      "intent": "ownership",
+      "cohort": 1,
+      "direct_answer": "The six-property evidence sample shows several ownership models around UT Austin: ACC and Landmark platforms, Global Student Accommodation, the UT System, and a SkyLoft special-purpose borrower with mortgage and preferred-capital layers. The evidence supports a location premium and post-signing lease lock-in, but not a market-wide concentration ratio or one return claim for every owner.",
+      "evidence_gap": "Trace a student installment through the operating statement, acquisition basis, capital stack, refinancing test, and loss waterfall while keeping reported facts separate from modeled assumptions.",
+      "original_artifact": "A 17-sheet six-property model, 16-page investigative report, property dossiers, claims matrix, student-cost comparison, ownership map, and stress-case figures.",
+      "scope_boundary": "This page studies West Campus student housing contracts and property finance; the Texas toll-road article studies public and concession infrastructure, while the Waymo article studies hardware-platform financing.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
+      "question": "who owns Austin home service companies",
+      "supporting_questions": [
+        "Austin HVAC private equity",
+        "Austin plumbing company ownership",
+        "Austin home service roll ups",
+        "is my Austin contractor locally owned"
+      ],
+      "intent": "ownership",
+      "cohort": 1,
+      "direct_answer": "Who owns Austin home-service companies depends on the brand: the 67-brand July 2026 census includes 32 founder, family, or locally owned records, 14 sponsor-backed platform brands, four public-company brands, five local franchise operators, 11 private businesses with unresolved control, and one founder-controlled company with a documented minority investment.",
+      "evidence_gap": "Separate the consumer brand, legal operator, platform, franchise relationship, controlling owner, minority investor, and transaction date while keeping brand-count evidence distinct from market share.",
+      "original_artifact": "A 67-brand ownership table, 170-entity register, 102 sourced relationships, 29-transaction timeline, 130-record evidence ledger, conflict log, downloadable dataset, and reproducibility package.",
+      "scope_boundary": "This page maps ownership of Austin residential service brands; the West Campus article covers student-housing property finance and the Texas toll-road article covers public infrastructure and concession rights.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-26"
     },
     {
       "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
-      "question": "are toll roads privately owned in Texas",
+      "question": "who owns Texas toll roads",
       "supporting_questions": [
-        "who owns Texas toll roads",
+        "are Texas toll roads privately owned",
+        "are toll roads in Texas privately owned",
         "Texas toll road private operators"
       ],
       "intent": "ownership",
       "cohort": 1,
-      "direct_answer": "Texas toll roads are not governed by one ownership model: the state, counties, and public authorities usually own the roadway, while contracts may give private concessionaires defined rights to operate lanes, collect revenue, service debt, earn equity returns, and transfer the asset at expiry.",
+      "direct_answer": "Most Texas toll roads are publicly owned, not privately owned. TxDOT, counties, and public toll authorities own most roadways. Four major concessions—North Tarrant Express, LBJ Express, NTE 35W, and SH 130 Segments 5–6—give private companies time-limited operating and toll-revenue rights while Texas retains title to the pavement.",
       "evidence_gap": "Separate physical ownership from concession rights, operators, lenders, revenue claims, and residual control using project-level public records.",
       "original_artifact": "A project-by-project ownership, operator, concession, debt, revenue-rights, valuation, and source-gap table.",
       "scope_boundary": "This is the only article targeting Texas toll-road ownership; supporting data-system articles discuss evidence methods rather than road ownership.",
       "related_articles": [
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
         "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
-        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+        "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": {
+        "country": "USA",
+        "device": "MOBILE",
+        "targetPosition": 1,
+        "sustainedSnapshots": 3
+      },
+      "last_verified": "2026-07-25"
     },
     {
       "url": "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
@@ -146,7 +399,8 @@
         "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
         "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
@@ -164,9 +418,11 @@
       "related_articles": [
         "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
         "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
-        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
+        "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
@@ -186,7 +442,8 @@
         "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
         "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
@@ -206,18 +463,20 @@
         "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
         "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
       "question": "is robots.txt access control",
       "supporting_questions": [
-        "robots.txt security boundary",
-        "robots exclusion protocol access control"
+        "RFC 9309 robots.txt not access authorization",
+        "robots.txt is not access control",
+        "robots.txt security boundary"
       ],
       "intent": "definition",
       "cohort": 2,
-      "direct_answer": "Robots.txt is not access control: it is a publicly readable crawler-coordination protocol that cooperative agents may follow, while authentication, authorization, network policy, and server-side response controls must protect material that cannot be publicly retrieved.",
+      "direct_answer": "RFC 9309 states that robots.txt rules are not access authorization. The file is a publicly readable crawler-coordination protocol that cooperative agents may follow; authentication, authorization, network policy, and server-side response controls must protect material that cannot be publicly retrieved.",
       "evidence_gap": "Show the complete control stack and failure modes instead of repeating that robots.txt is voluntary without an implementation boundary.",
       "original_artifact": "A layered crawler-policy matrix separating discovery guidance, authentication, authorization, network controls, and response handling.",
       "scope_boundary": "This page explains protocol and security boundaries; the AI crawler policy page compares named provider agents and their documented purposes.",
@@ -226,7 +485,8 @@
         "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
         "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-25"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
@@ -246,7 +506,8 @@
         "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
@@ -264,9 +525,12 @@
       "related_articles": [
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
-        "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines"
+        "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
@@ -286,7 +550,8 @@
         "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
@@ -306,7 +571,8 @@
         "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
@@ -324,9 +590,11 @@
       "related_articles": [
         "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
         "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
-        "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift"
+        "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
+        "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control"
       ],
-      "last_verified": "2026-07-20"
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
     }
   ]
 }

@@ -1,13 +1,11 @@
-import { createElement, useEffect, useMemo, type ReactNode } from 'react';
+import { createElement, useMemo, type ReactNode } from 'react';
 import {
-  ArticleBody,
-  ArticleCallout,
-  ArticleEndnote,
-  ArticleHero,
-  ArticleMetricStrip,
-  ArticlePage,
+  ArticleReader,
   ArticleSectionHeader,
+  createArticleNavigation,
+  getArticleNavigationIndex,
   type ArticleNavItem,
+  type ArticleReaderConfig,
 } from '../components/ArticleLayout';
 import {
   VIRALBENCH_ARTICLE_DATE,
@@ -20,7 +18,7 @@ import {
   VIRALBENCH_ARTICLE_TITLE,
 } from '../content/viralBenchArticle';
 import { canonicalizeKnownExternalLinks } from '../content/canonicalExternalLinks';
-import { getArticleSearchTarget } from '../seo/articleSearchTargets';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToHtml } from '../utils/markdownToHtml';
 import { useSEO } from '../utils/seo';
@@ -29,21 +27,6 @@ const ROUTE = getSeoRoute('/viralbench-codex-agent-harness')!;
 const SEARCH_TARGET = getArticleSearchTarget('/viralbench-codex-agent-harness')!;
 const EVIDENCE_SECTION_ID = 'the-evidence-layer-comes-before-the-codex-layer';
 const HARNESS_SECTION_ID = 'what-i-mean-by-codex-as-a-harness';
-const RAIL_SECTION_IDS = new Set([
-  'viralbench-is-a-live-agent-environment',
-  'the-leaderboard-is-a-system-result-not-a-pure-model-score',
-  'what-the-code-audit-reveals',
-  HARNESS_SECTION_ID,
-  EVIDENCE_SECTION_ID,
-  'the-evaluator-must-be-independent-of-codex',
-  'replay-is-a-test-world-not-a-market-simulator',
-  'provenance-and-similarity-have-to-be-first-class',
-  'the-first-build-sequence',
-  'the-experiments-i-would-run-first',
-  'the-durable-asset-is-the-learning-system',
-  'frequently-asked-questions',
-  'sources-and-technical-notes',
-]);
 const ALLOWED_ARTICLE_TAGS = new Set([
   'a', 'blockquote', 'code', 'div', 'em', 'figcaption', 'h2', 'h3', 'h4', 'li', 'ol', 'p',
   'pre', 'strong', 'sup', 'table', 'tbody', 'td', 'th', 'thead', 'tr', 'ul',
@@ -79,6 +62,13 @@ function splitArticle(markdown: string) {
 }
 
 const ARTICLE = splitArticle(canonicalizeKnownExternalLinks(VIRALBENCH_ARTICLE_MARKDOWN));
+const ARTICLE_NOTE_REF_COUNTS = new Map<string, number>();
+const ARTICLE_MARKUP = new Map(
+  [ARTICLE.lede, ...ARTICLE.sections.map((section) => section.markdown)].map((markdown) => [
+    markdown,
+    markdownToHtml(markdown, { noteRefCounts: ARTICLE_NOTE_REF_COUNTS }),
+  ]),
+);
 const HEADLINE_METRICS = [
   { value: '18', label: 'working rounds', note: 'fixed per agent run' },
   { value: '5', label: 'execution tools', note: 'research through publishing' },
@@ -98,6 +88,7 @@ function articleNodeToReact(node: Node, key: string): ReactNode {
 
   const href = element.getAttribute('href');
   const props: Record<string, unknown> = { key };
+  let renderedTag = tag;
   if (element.id) props.id = element.id;
   if (element.className) props.className = element.className;
   if (href && (/^https:\/\//.test(href) || /^\/[a-z0-9]/i.test(href) || /^#/.test(href))) {
@@ -107,15 +98,43 @@ function articleNodeToReact(node: Node, key: string): ReactNode {
       props.rel = 'noreferrer';
     }
   }
+  if (tag === 'pre') props.tabIndex = 0;
+  if (tag === 'div' && element.classList.contains('article-table-wrap')) {
+    props.tabIndex = 0;
+    props.role = 'region';
+    props['aria-label'] = element.getAttribute('aria-label') ?? 'Scrollable data table';
+  }
   const ariaLabel = element.getAttribute('aria-label');
-  if (ariaLabel) props['aria-label'] = ariaLabel;
+  if (ariaLabel && !props['aria-label']) props['aria-label'] = ariaLabel;
+  if (tag === 'table') {
+    const headers = Array.from(element.querySelectorAll('thead th'))
+      .map((header) => header.textContent?.replace(/\s+/g, ' ').trim())
+      .filter(Boolean);
+    props['data-responsive-table'] = 'stacked';
+    props['aria-label'] = headers.length ? `Data table with fields: ${headers.join(', ')}` : 'Article data table';
+  }
+  if (tag === 'th' && element.closest('thead')) {
+    props.scope = 'col';
+  }
+  if ((tag === 'td' || tag === 'th') && element.closest('tbody')) {
+    const columnIndex = Array.from(element.parentElement?.children ?? []).indexOf(element);
+    const header = element.closest('table')?.querySelectorAll('thead th')[columnIndex];
+    props['data-label'] = header?.textContent?.replace(/\s+/g, ' ').trim() || `Field ${columnIndex + 1}`;
+    if (columnIndex === 0) {
+      renderedTag = 'th';
+      props.scope = 'row';
+    }
+  }
 
   const children = Array.from(element.childNodes).map((child, index) => articleNodeToReact(child, `${key}-${index}`));
-  return createElement(tag, props, ...children);
+  return createElement(renderedTag, props, ...children);
 }
 
 function markdownToReact(markdown: string) {
-  const document = new DOMParser().parseFromString(markdownToHtml(markdown), 'text/html');
+  const document = new DOMParser().parseFromString(
+    ARTICLE_MARKUP.get(markdown) ?? markdownToHtml(markdown),
+    'text/html',
+  );
   return Array.from(document.body.childNodes).map((node, index) => articleNodeToReact(node, `article-${index}`));
 }
 
@@ -179,16 +198,10 @@ function ArchitectureDiagram() {
   );
 }
 
-function sectionMarker(section: ArticleSection, index: number) {
-  if (section.id === 'frequently-asked-questions') return 'FAQ';
-  if (section.id === 'sources-and-technical-notes') return 'S';
-  return String(index + 1).padStart(2, '0');
-}
-
-function ViralBenchSection({ section, index }: { section: ArticleSection; index: number }) {
+function ViralBenchSection({ section, index }: { section: ArticleSection; index: string }) {
   return (
     <section id={section.id}>
-      <ArticleSectionHeader index={sectionMarker(section, index)}>{section.title}</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>{section.title}</ArticleSectionHeader>
       {section.id === EVIDENCE_SECTION_ID ? <ArticleVisual placement="inline" /> : null}
       <ArticleMarkdown markdown={section.markdown} />
       {section.id === HARNESS_SECTION_ID ? <ArchitectureDiagram /> : null}
@@ -199,128 +212,153 @@ function ViralBenchSection({ section, index }: { section: ArticleSection; index:
 export default function ViralBenchArticlePage() {
   useSEO(ROUTE);
 
-  useEffect(() => {
-    const targetId = window.location.hash.slice(1);
-
-    if (!targetId) {
-      window.scrollTo(0, 0);
-      return undefined;
-    }
-
-    let frame = 0;
-    let attempts = 0;
-    const scrollToTarget = () => {
-      const target = document.querySelector<HTMLElement>(`#top #${CSS.escape(targetId)}`);
-      const lenis = window.lenis as unknown as {
-        resize?: () => void;
-        scrollTo: (target: HTMLElement, options: { immediate: boolean }) => void;
-      } | undefined;
-
-      if (target && lenis) {
-        lenis.resize?.();
-        lenis.scrollTo(target, { immediate: true });
-        return;
-      }
-
-      if (attempts < 4) {
-        attempts += 1;
-        frame = window.requestAnimationFrame(scrollToTarget);
-        return;
-      }
-
-      target?.scrollIntoView();
-    };
-
-    frame = window.requestAnimationFrame(scrollToTarget);
-
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
-
-  const railSections = ARTICLE.sections.filter((section) => RAIL_SECTION_IDS.has(section.id));
-  const navItems: ArticleNavItem[] = [
-    { id: 'overview', label: 'Overview', index: '00', summary: 'The system and the outer loop.' },
-    ...railSections.map((section) => {
-      const articleIndex = ARTICLE.sections.findIndex((candidate) => candidate.id === section.id);
-      return {
-        id: section.id,
-        label: section.title,
-        index: sectionMarker(section, articleIndex),
-      };
-    }),
-  ];
+  const faqSection = ARTICLE.sections.find((section) => section.id === 'frequently-asked-questions');
+  const sourceNotesSection = ARTICLE.sections.find((section) => section.id === 'sources-and-technical-notes');
+  const numberedSections = ARTICLE.sections.filter(
+    (section) => section !== faqSection && section !== sourceNotesSection,
+  );
+  const navItems: ArticleNavItem[] = createArticleNavigation([
+    {
+      kind: 'overview',
+      id: 'overview',
+      label: 'Overview',
+      summary: 'The system and the outer loop.',
+    },
+    ...numberedSections.map((section) => ({
+      kind: 'section' as const,
+      id: section.id,
+      label: section.title,
+    })),
+    ...(faqSection
+      ? [{
+          kind: 'faq' as const,
+          id: faqSection.id,
+          label: 'Direct answers',
+        }]
+      : []),
+    {
+      kind: 'source',
+      id: 'source-ledger',
+      label: 'Source ledger',
+    },
+  ]);
+  const config: ArticleReaderConfig = {
+    activePath: '/research',
+    mode: 'narrative',
+    className: 'viralbench-toll-article',
+    archive: {
+      href: '/research',
+      label: 'Research archive',
+    },
+    hero: {
+      eyebrow: 'ViralBench / Codex / agent evaluation',
+      title: VIRALBENCH_ARTICLE_TITLE,
+      displayTitle: 'A bounded outer loop for improving a live marketing agent.',
+      deck: VIRALBENCH_ARTICLE_DESCRIPTION,
+      image: {
+        src: VIRALBENCH_ARTICLE_IMAGE,
+        alt: 'A monochrome gallery of suspended social-media posts receding toward a bright exit.',
+        label: 'System view / 01',
+        caption: 'The live attention environment surrounding the agent harness.',
+      },
+    },
+    publication: {
+      author: 'Sulayman Bowles',
+      subject: 'AI systems engineering',
+      published: {
+        dateTime: VIRALBENCH_ARTICLE_DATE,
+        value: 'July 9, 2026',
+      },
+      updated: {
+        dateTime: VIRALBENCH_ARTICLE_MODIFIED_DATE,
+        value: 'July 14, 2026',
+      },
+      readTime: VIRALBENCH_ARTICLE_READ_TIME,
+      evidence: 'Live methodology + code audit',
+    },
+    metrics: HEADLINE_METRICS.map((metric) => ({
+      label: metric.label,
+      value: metric.value,
+      note: metric.note,
+    })),
+    callouts: [{
+      label: 'Direct answer',
+      title: SEARCH_TARGET.primaryQuery,
+      content: (
+        <>
+          <p>{SEARCH_TARGET.directAnswer}</p>
+          <p><strong>Original artifact:</strong> {SEARCH_TARGET.originalArtifact}</p>
+        </>
+      ),
+    }],
+    navigation: {
+      items: navItems,
+      contentsLabel: 'Chapters',
+    },
+    boundary: {
+      label: 'Build boundary',
+      content: 'Codex can diagnose and patch the harness. It cannot grade or deploy its own work.',
+    },
+    endnote: {
+      label: 'Build conclusion',
+      title: 'The harness determines whether the agent can learn',
+      content: 'ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before any promotion.',
+      note: 'Build note based on the live ViralBench methodology and the supplied standalone handoff at commit 5f5f57e.',
+      links: [
+        ...SEARCH_TARGET.relatedPaths.map((path) => ({
+          href: path,
+          label: getArticleRelatedLinkLabel(ROUTE.path, path),
+        })),
+        { href: '/research', label: 'Research archive' },
+        { href: '/atlas', label: 'Atlas' },
+        { href: '/about', label: 'About the author' },
+      ],
+    },
+  };
 
   return (
-    <ArticlePage activePath="/research" variant="chapters" className="viralbench-toll-article">
-      <ArticleHero
-        backHref="/research"
-        backLabel="Research notes"
-        eyebrow="ViralBench / Codex / agent evaluation"
-        title={VIRALBENCH_ARTICLE_TITLE}
-        displayTitle="A bounded outer loop for improving a live marketing agent."
-        deck={VIRALBENCH_ARTICLE_DESCRIPTION}
-        image={{
-          src: VIRALBENCH_ARTICLE_IMAGE,
-          alt: 'A monochrome gallery of suspended social-media posts receding toward a bright exit.',
-          label: 'System view / 01',
-          caption: 'The live attention environment surrounding the agent harness.',
-        }}
-        metadata={[
-          { label: 'Subject', value: 'AI systems engineering' },
-          { label: 'Published', value: <time dateTime={VIRALBENCH_ARTICLE_DATE}>July 9, 2026</time> },
-          { label: 'Updated', value: <time dateTime={VIRALBENCH_ARTICLE_MODIFIED_DATE}>July 14, 2026</time> },
-          { label: 'Read time', value: VIRALBENCH_ARTICLE_READ_TIME },
-          { label: 'Method', value: <>Live methodology, supplied source archive, and code audit at commit <code>5f5f57e</code>.</> },
-        ]}
-      />
-
-      <ArticleMetricStrip items={HEADLINE_METRICS.map((metric) => ({ label: metric.label, value: metric.value, note: metric.note }))} />
-
-      <ArticleCallout label="Direct answer" title={SEARCH_TARGET.primaryQuery}>
-        <p>{SEARCH_TARGET.directAnswer}</p>
-        <p><strong>Original artifact:</strong> {SEARCH_TARGET.originalArtifact}</p>
-      </ArticleCallout>
-
-      <ArticleBody
-        items={navItems}
-        variant="chapters"
-        boundary="Codex can diagnose and patch the harness. It cannot grade or deploy its own work."
-        boundaryLabel="Build boundary"
-      >
+    <ArticleReader config={config}>
         <section id="overview">
-          <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
+          <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'overview')}>
+            Overview
+          </ArticleSectionHeader>
           <ArticleMarkdown markdown={ARTICLE.lede} />
         </section>
-        {ARTICLE.sections.map((section, index) => (
-          createElement(ViralBenchSection, { key: section.id, section, index })
+        {numberedSections.map((section) => (
+          createElement(ViralBenchSection, {
+            key: section.id,
+            section,
+            index: getArticleNavigationIndex(navItems, section.id),
+          })
         ))}
+        {faqSection
+          ? createElement(ViralBenchSection, {
+              key: faqSection.id,
+              section: faqSection,
+              index: getArticleNavigationIndex(navItems, faqSection.id),
+            })
+          : null}
 
         <section id="source-ledger">
-          <ArticleSectionHeader index="SL">Source ledger</ArticleSectionHeader>
+          <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'source-ledger')}>
+            Source ledger
+          </ArticleSectionHeader>
+          {sourceNotesSection ? (
+            <div id={sourceNotesSection.id}>
+              <ArticleMarkdown markdown={sourceNotesSection.markdown} />
+            </div>
+          ) : null}
           <div className="article-reader__prose">
             <ul>
-              <li><a href="https://viralbench.ai/">ViralBench live methodology</a></li>
-              <li><a href="https://github.com/JibranK12345/Viral-Bench">ViralBench public repository</a></li>
-              <li><a href="https://openai.com/index/harness-engineering/">OpenAI harness engineering</a></li>
-              <li><a href="https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop">OpenAI agent improvement loop</a></li>
-              <li><a href="https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content">TikTok AI-generated content policy</a></li>
+              <li><a href="https://viralbench.ai/" target="_blank" rel="noreferrer" aria-label="ViralBench live methodology (opens in a new tab)">ViralBench live methodology</a></li>
+              <li><a href="https://github.com/JibranK12345/Viral-Bench" target="_blank" rel="noreferrer" aria-label="ViralBench public repository (opens in a new tab)">ViralBench public repository</a></li>
+              <li><a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noreferrer" aria-label="OpenAI harness engineering (opens in a new tab)">OpenAI harness engineering</a></li>
+              <li><a href="https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop" target="_blank" rel="noreferrer" aria-label="OpenAI agent improvement loop (opens in a new tab)">OpenAI agent improvement loop</a></li>
+              <li><a href="https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content" target="_blank" rel="noreferrer" aria-label="TikTok AI-generated content policy (opens in a new tab)">TikTok AI-generated content policy</a></li>
             </ul>
           </div>
         </section>
 
-        <ArticleEndnote
-          links={[
-            ...SEARCH_TARGET.relatedPaths.map((path) => ({
-              href: path,
-              label: getArticleSearchTarget(path)?.primaryQuery ?? path,
-            })),
-            { href: '/research', label: 'Research assets' },
-            { href: '/atlas', label: 'Atlas' },
-            { href: '/about', label: 'About the author' },
-          ]}
-        >
-          Build note based on the live ViralBench methodology and the supplied standalone handoff at commit 5f5f57e.
-        </ArticleEndnote>
-      </ArticleBody>
-    </ArticlePage>
+    </ArticleReader>
   );
 }

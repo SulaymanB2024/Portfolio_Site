@@ -260,6 +260,7 @@ function buildPage(seed: PageSeed, indexInFamily: number, familySeeds: PageSeed[
   const next = familySeeds[(indexInFamily + 1) % familySeeds.length];
   const path = `${BASE}/${family.segment}/${seed.slug}`;
   const marker = seed.slug.replaceAll('-', '').toUpperCase();
+  const brandedSeoTitle = `${seed.title} | Sulayman Bowles`;
 
   return {
     kind: 'programmatic-seo',
@@ -267,7 +268,7 @@ function buildPage(seed: PageSeed, indexInFamily: number, familySeeds: PageSeed[
     path,
     slug: seed.slug,
     title: seed.title,
-    seoTitle: `${seed.title} | Sulayman Bowles`,
+    seoTitle: brandedSeoTitle.length <= 70 ? brandedSeoTitle : seed.title,
     description: `Diagnose ${seed.primaryQuery} with an evidence fixture, false-positive boundary, repair sequence, and reproducible rerun gate.`,
     primaryQuery: seed.primaryQuery,
     supportingQueries: seed.supportingQueries,

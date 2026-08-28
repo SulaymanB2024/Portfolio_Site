@@ -1,25 +1,48 @@
 import type { ResearchArticle } from './articleModels';
 import {
   AI_MANAGER_SOURCES,
+  AI_MANAGERS_ARTICLE_CONCLUSION,
   AI_MANAGERS_ARTICLE_DESCRIPTION,
   AI_MANAGERS_ARTICLE_READ_TIME,
   AI_MANAGERS_ARTICLE_SEO_TITLE,
   AI_MANAGERS_ARTICLE_SLUG,
   AI_MANAGERS_ARTICLE_TITLE,
 } from './aiManagersArticle';
+import { AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE } from './austinHomeServiceOwnershipArticle';
+import { AIRLINE_LOYALTY_FINANCING_ARTICLE } from './airlineLoyaltyFinancingArticle';
+import { HIDDEN_FINANCING_HARDWARE_ARTICLE } from './hiddenFinancingHardwareArticle';
+import { INDEX_COMPANY_MATTERS_ARTICLE } from './indexCompanyMattersArticle';
+import { ONLINE_RETURNS_INVESTIGATION_ARTICLE } from './onlineReturnsInvestigationArticle';
+import { WAYMO_HARDWARE_FINANCING_ARTICLE } from './waymoHardwareFinancingArticle';
+import { WEST_CAMPUS_STUDENT_HOUSING_ARTICLE } from './westCampusStudentHousingArticle';
 
 export const RESEARCH_ARTICLES: ResearchArticle[] = [
+  AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE,
+  INDEX_COMPANY_MATTERS_ARTICLE,
+  AIRLINE_LOYALTY_FINANCING_ARTICLE,
+  ONLINE_RETURNS_INVESTIGATION_ARTICLE,
+  HIDDEN_FINANCING_HARDWARE_ARTICLE,
+  WEST_CAMPUS_STUDENT_HOUSING_ARTICLE,
+  WAYMO_HARDWARE_FINANCING_ARTICLE,
   {
     kind: 'research',
     cluster: 'ai-systems',
     slug: AI_MANAGERS_ARTICLE_SLUG,
+    aliases: ['/markets/the-first-ai-managers'],
     number: '04',
     category: 'AI SYSTEMS',
     title: AI_MANAGERS_ARTICLE_TITLE,
     seoTitle: AI_MANAGERS_ARTICLE_SEO_TITLE,
     subtitle: AI_MANAGERS_ARTICLE_DESCRIPTION,
     seoDescription: AI_MANAGERS_ARTICLE_DESCRIPTION,
-    image: '/images/social/og-research.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/ai-managers-reader-hero.webp',
+      socialSrc: '/images/research/ai-managers-social.jpg',
+      alt: 'Monochrome editorial artwork showing a central operator directing several bounded AI systems.',
+      label: 'AI-operated businesses / operating layer',
+      caption: 'Model decisions remain nested inside human legal, financial, and physical control.',
+    },
     date: '2026.07.14',
     dateModified: '2026.07.19',
     lastVerified: '2026.07.19',
@@ -27,6 +50,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'When a general-purpose assistant gets operational authority, its conversational habits stop being style and start becoming business policy.',
+    conclusion: AI_MANAGERS_ARTICLE_CONCLUSION,
     evidenceBoundary:
       'Operator dashboards and financial reconstructions are unaudited. Simulations are controlled behavior evidence, not commercial businesses. Human legal, financial, physical, and supervisory work remains part of every live case.',
     metrics: [
@@ -49,6 +73,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     kind: 'research',
     cluster: 'ai-crawlers',
     slug: 'ai-search-crawler-policy',
+    aliases: ['/markets/ai-search-crawler-policy'],
     number: '01',
     category: 'CRAWLER POLICY',
     title: 'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot',
@@ -56,7 +81,14 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     subtitle: 'Copy-ready host rules for eight named product tokens, with exact Allow, Disallow, sitemap, and release checks.',
     seoDescription:
       'Compare OpenAI, Anthropic, and Perplexity crawlers, then copy robots.txt rules for AI search, training controls, or named-agent blocks.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/ai-crawler-policy-reader-hero.webp',
+      socialSrc: '/images/research/ai-crawler-policy-social.jpg',
+      alt: 'Monochrome editorial artwork showing crawler pathways meeting policy and access-control boundaries.',
+      label: 'Crawler policy / control map',
+      caption: 'Named crawler rules express policy; authentication and edge controls protect private resources.',
+    },
     date: '2026.06.19',
     dateModified: '2026.07.19',
     lastVerified: '2026.07.19',
@@ -64,6 +96,11 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Treat search crawlers, training crawlers, and user-triggered fetchers as separate policy choices, then verify observed traffic with server logs and provider-published IP ranges.',
+    conclusion: {
+      title: 'Choose the outcome before the token',
+      content:
+        'Search discovery, model-development access, and user-triggered fetches are separate policy decisions. Encode each by exact agent group, deploy the merged file, then use provider ranges and logs to verify observed traffic without mistaking a user-agent string for identity.',
+    },
     evidenceBoundary:
       'This guide documents published crawler controls as verified on July 14, 2026. A robots.txt rule expresses policy; it does not secure private content, authenticate a bot, or prove indexing, ranking, training exclusion, or answer-system citation.',
     metrics: [
@@ -232,6 +269,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     kind: 'research',
     cluster: 'search-console',
     slug: 'technical-seo-public-data-infrastructure',
+    aliases: ['/markets/technical-seo-public-data-infrastructure'],
     number: '02',
     category: 'DATA INFRASTRUCTURE',
     title: 'Technical SEO as Public Data Infrastructure',
@@ -239,7 +277,14 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     subtitle: 'A systems essay on how URLs become crawlable, renderable, attributable, and exportable public records.',
     seoDescription:
       'A systems essay by Sulayman Bowles on URL discovery, crawling, rendering, structured records, provenance, crawl evidence, and durable technical SEO exports.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/public-data-infrastructure-reader-hero.webp',
+      socialSrc: '/images/research/public-data-infrastructure-social.jpg',
+      alt: 'Monochrome editorial artwork showing public web evidence flowing through a layered data pipeline.',
+      label: 'Public data / evidence pipeline',
+      caption: 'Crawl, render, normalize, and export remain traceable layers in one evidence system.',
+    },
     date: '2026.06.19',
     dateModified: '2026.07.16',
     lastVerified: '2026.07.16',
@@ -247,6 +292,11 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Technical SEO becomes infrastructure when every important URL can move through a traceable pipeline from discovery to rendered evidence and reusable output.',
+    conclusion: {
+      title: 'Build a traceable public record',
+      content:
+        'Technical SEO becomes infrastructure when discovery, transport, rendering, extraction, interpretation, and publication remain connected by reviewable evidence. That makes site state easier to operate and defend, while distribution remains an external outcome.',
+    },
     evidenceBoundary:
       'The data-infrastructure comparison describes operating discipline. It does not make a website equivalent to a regulated filing system or guarantee crawling, indexing, ranking, citation, or traffic.',
     metrics: [
@@ -366,6 +416,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     kind: 'research',
     cluster: 'personal-seo',
     slug: 'canonical-identity-personal-seo',
+    aliases: ['/markets/canonical-identity-personal-seo'],
     number: '03',
     category: 'ENTITY CONSISTENCY',
     title: 'Canonical Identity Beats More Content',
@@ -373,7 +424,14 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     subtitle: 'An operational playbook for reconciling domains, profile pages, resumes, sameAs links, and external biographies.',
     seoDescription:
       'A personal-identity reconciliation playbook for canonical hosts, ProfilePage schema, sameAs eligibility, resumes, and external profile maintenance.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/canonical-identity-reader-hero.webp',
+      socialSrc: '/images/research/canonical-identity-social.jpg',
+      alt: 'Monochrome editorial artwork showing one canonical identity connected to controlled public records.',
+      label: 'Canonical identity / entity graph',
+      caption: 'A maintained person record aligns the site, resume, profiles, and historical references.',
+    },
     date: '2026.06.19',
     dateModified: '2026.07.19',
     lastVerified: '2026.07.19',
@@ -381,6 +439,11 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'A personal identity graph becomes trustworthy when one profile record owns each fact and every external reference either agrees with it or clearly represents history.',
+    conclusion: {
+      title: 'Maintain one current identity source',
+      content:
+        'A personal identity surface becomes legible when one profile record owns each current fact and controlled references agree with it or clearly preserve history. Measure consistency across important records rather than publishing more biographies into unresolved contradiction.',
+    },
     evidenceBoundary:
       'This playbook improves consistency among controlled and observable profiles. It cannot force third-party platforms to update, remain public, or be interpreted as identity evidence by a search system.',
     metrics: [

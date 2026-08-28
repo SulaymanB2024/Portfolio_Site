@@ -137,7 +137,14 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'A practical architecture for URL identity, admission control, host politeness, bounded retries, crawl traps, and evidence-preserving frontier transitions.',
     seoDescription:
       'Design a reliable web-crawler frontier with explicit URL identity, state transitions, per-origin scheduling, retry policy, crawl-trap controls, and reproducible evidence.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/crawl-frontier-editorial.webp',
+      socialSrc: '/images/research/crawl-frontier-social.jpg',
+      alt: 'A monochrome mechanical switchyard routes URL records through explicit crawler states.',
+      label: 'Crawler lifecycle / state study',
+      caption: 'Branching tracks make scheduling, retries, completion, and terminal states visible as separate transitions.',
+    },
     date: PUBLISHED,
     dateModified: PUBLISHED,
     lastVerified: VERIFIED,
@@ -145,6 +152,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'A crawler becomes trustworthy when every URL transition is explicit, replayable, and bounded; a fast queue without an identity and state contract only processes ambiguity faster.',
+    conclusion: {
+      title: 'Balance the crawl ledger',
+      content:
+        'A frontier is finished only when every admitted URL reconciles to a terminal or explicitly unresolved state. Speed matters after identity, transitions, host capacity, and retry rules make that accounting replayable.',
+    },
     evidenceBoundary:
       'This architecture describes an operator-controlled crawler. It does not predict how any search engine schedules a site, and provider crawl-budget guidance is used only to distinguish host capacity, demand, and URL-inventory concerns.',
     metrics: [
@@ -287,7 +299,14 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'How to capture, compare, and qualify transport source, browser output, dependent requests, runtime failures, and render completeness without treating screenshots as data.',
     seoDescription:
       'Build a raw HTML versus rendered DOM evidence contract for JavaScript SEO, including capture fields, completeness states, DOM diffs, runtime failures, and triage.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/raw-html-rendered-dom-editorial.webp',
+      socialSrc: '/images/research/raw-html-rendered-dom-social.jpg',
+      alt: 'A monochrome source-document field faces a reconstructed rendered architecture across a bright boundary.',
+      label: 'Rendering evidence / source and reconstruction',
+      caption: 'Transport markup and browser-rendered state remain separate observations joined by an explicit rendering boundary.',
+    },
     date: PUBLISHED,
     dateModified: PUBLISHED,
     lastVerified: VERIFIED,
@@ -295,6 +314,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Raw source and browser-rendered output answer different questions, so a technical audit must preserve both artifacts and qualify the browser environment before interpreting their delta.',
+    conclusion: {
+      title: 'Preserve both sides of the render',
+      content:
+        'Source and rendered DOM are observations from different execution stages, not competing versions of truth. Keep both, record the browser conditions, and rerun the same completion contract before calling a rendering finding resolved.',
+    },
     evidenceBoundary:
       'A controlled browser run describes the tested environment at a recorded time. It does not reproduce every search crawler, user device, cache state, geography, consent choice, or personalization path, and a successful local render does not prove indexing.',
     metrics: [
@@ -434,7 +458,14 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'A systems method for finding conflicting canonicals, redirect chains, cycles, duplicate clusters, and sitemap disagreements before they become indexation ambiguity.',
     seoDescription:
       'Model canonicalization as a graph across redirects, rel canonical, sitemaps, internal links, and duplicate clusters, then validate consistency with executable gates.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/canonicalization-editorial.webp',
+      socialSrc: '/images/research/canonicalization-social.jpg',
+      alt: 'A dense monochrome network of routes converges on one illuminated authoritative node.',
+      label: 'Canonical graph / convergence study',
+      caption: 'Redirects, canonicals, internal links, and sitemap references converge on one route identity.',
+    },
     date: PUBLISHED,
     dateModified: PUBLISHED,
     lastVerified: VERIFIED,
@@ -442,6 +473,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Canonicalization is reliable when every duplicate cluster converges on one reachable representative and redirects, annotations, sitemaps, and internal links agree with that graph.',
+    conclusion: {
+      title: 'Make every signal converge',
+      content:
+        'The site-controlled standard is one reachable representative per duplicate cluster, with redirects, canonicals, links, and sitemaps agreeing. That proves publisher consistency—not which URL an external index will ultimately select.',
+    },
     evidenceBoundary:
       'Canonical annotations and related site signals express preferences; they do not compel a search system to select a URL. The graph method diagnoses internal consistency and transport behavior, not the final decision of an external index.',
     metrics: [
@@ -581,7 +617,14 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'A graph-first method for crawlable links, reachability, depth, contextual edges, orphan diagnosis, and repair plans that preserve user intent.',
     seoDescription:
       'Analyze internal links as a directed graph using reachability, depth, components, edge context, orphan states, and executable validation instead of raw link counts.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/internal-links-editorial.webp',
+      socialSrc: '/images/research/internal-links-social.jpg',
+      alt: 'A deep monochrome architectural lattice connects chambers with directed paths.',
+      label: 'Internal retrieval / directed lattice',
+      caption: 'Reachability emerges from directed pathways between entry points, hubs, and isolated chambers.',
+    },
     date: PUBLISHED,
     dateModified: PUBLISHED,
     lastVerified: VERIFIED,
@@ -589,6 +632,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Internal-link quality is the ability of people and crawlers to reach the right canonical pages through meaningful, crawlable paths—not the number of links a template can emit.',
+    conclusion: {
+      title: 'Repair the journey, then rerun the graph',
+      content:
+        'Useful internal architecture gives priority pages several meaningful, crawlable paths from real entry points. The durable artifact is a versioned graph whose reachability and path-diversity invariants survive template and route changes.',
+    },
     evidenceBoundary:
       'Graph metrics describe the captured internal architecture and help prioritize review. They do not measure proprietary ranking weights, guarantee crawling or indexing, or prove that adding a link will improve search performance.',
     metrics: [
@@ -726,19 +774,31 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     number: '09',
     category: 'CRAWLER POLICY',
     title: 'Robots.txt Is a Courtesy Layer, Not Access Control',
-    seoTitle: 'Robots.txt Is Not Access Control: A Layered Crawler Policy',
+    seoTitle: 'Is Robots.txt Access Control? RFC 9309 Says No',
     subtitle:
       'A precise model for separating crawler requests, indexing directives, authentication, authorization, rate controls, and evidence of enforcement.',
     seoDescription:
-      'Separate robots.txt from authentication, authorization, indexing directives, rate limits, and bot verification with a layered crawler-control model and release checks.',
-    image: '/og-default.png',
+      'RFC 9309 says robots.txt rules are not access authorization. Learn what robots.txt controls—and when to use noindex, authentication, authorization, or rate limits.',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/robots-policy-editorial.webp',
+      socialSrc: '/images/research/robots-policy-social.jpg',
+      alt: 'A ceremonial paper boundary gives way to progressively stronger barriers protecting a monochrome vault.',
+      label: 'Crawler policy / access boundary',
+      caption: 'A published courtesy rule and a materially secured resource are different control layers.',
+    },
     date: PUBLISHED,
-    dateModified: PUBLISHED,
+    dateModified: '2026.07.25',
     lastVerified: VERIFIED,
     readTime: '13 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
       'Robots.txt is a host-scoped request policy for cooperating crawlers; confidential or costly resources need enforceable server-side authorization and capacity controls that do not depend on a claimed user agent.',
+    conclusion: {
+      title: 'Separate policy from enforcement',
+      content:
+        'Use robots.txt to state host-level preferences to cooperating crawlers; protect private or expensive resources with authentication, authorization, and capacity controls. Logs can verify observed requests, not universal compliance or downstream use.',
+    },
     evidenceBoundary:
       'The controls in this article describe publisher-side policy and enforcement. A rule does not prove that every client complies, that a provider attributed a request the same way, or that an allowed page will be crawled, indexed, trained on, or cited.',
     metrics: [
@@ -755,7 +815,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       source('OpenAI crawler documentation', 'https://developers.openai.com/api/docs/bots'),
     ],
     content: [
-      'A robots.txt file is public text that asks automated clients how they may access paths on one service. It is valuable because cooperating crawlers can retrieve one predictable policy before requesting content. It is not a credential, firewall, authorization decision, encryption layer, or proof of the client behind a User-Agent string. Treating it as any of those creates a security boundary that an ordinary HTTP client can cross by ignoring the file.',
+      'RFC 9309 is explicit: robots.txt rules are not a form of access authorization. A robots.txt file is public text that asks automated clients how they may access paths on one service. It is valuable because cooperating crawlers can retrieve one predictable policy before requesting content. It is not a credential, firewall, authorization decision, encryption layer, or proof of the client behind a User-Agent string. Treating it as any of those creates a security boundary that an ordinary HTTP client can cross by ignoring the file.',
       'A robust crawler policy uses separate controls for separate outcomes. Robots rules govern cooperating automated retrieval. Page-level robots directives express indexing and presentation preferences to supporting systems. Authentication establishes an identity; authorization decides whether that identity may access a resource. Edge and application controls protect capacity. Logging and verification provide evidence about what happened. The layers can support one policy, but none substitutes for the others.',
     ],
     sections: [
@@ -763,26 +823,25 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
         id: 'six-control-layers',
         title: 'Name the six control layers before writing rules',
         paragraphs: [
+          'The shortest safe decision is to ask whether the goal is crawler guidance, search-index processing, private access, or service capacity. Robots.txt addresses the first outcome only. Noindex, authentication plus authorization, and rate or concurrency limits each enforce a different boundary.',
           'The first layer is discovery policy: robots.txt communicates path rules to crawlers that implement the protocol. The second is document processing policy: robots meta elements and response headers can ask supporting indexers not to index a fetched resource or not to expose certain features. The third and fourth are authentication and authorization, which establish who or what is making a request and whether that principal may perform the action.',
           'The fifth layer protects service capacity with connection limits, rate limits, quotas, caching, circuit breakers, and workload isolation. The sixth is observation: logs, challenge outcomes, provider-published address ranges, and response evidence used to classify requests after or during access. Observation can inform an enforcement decision, but a log label alone does not protect a route.',
           'Write the desired outcome first. “Do not spend crawler capacity on faceted combinations,” “do not expose this account document publicly,” “allow search discovery but decline a named model-development crawler,” and “keep the origin healthy under bursts” are different requirements. Each belongs to a different combination of layers.',
         ],
         table: {
-          caption: 'Crawler-control layers and their boundaries',
-          columns: ['Layer', 'Mechanism', 'Controls', 'Does not establish'],
+          caption: 'Robots, noindex, authentication, and rate-limit decision table',
+          columns: ['Desired outcome', 'Primary control', 'What it changes', 'Boundary'],
           rows: [
-            ['Discovery policy', '/robots.txt', 'Cooperating crawler path access', 'Confidentiality or client identity'],
-            ['Document policy', 'robots meta or X-Robots-Tag', 'Supporting indexer processing', 'Request denial'],
-            ['Authentication', 'Session, token, certificate, signed request', 'Claimed principal', 'Permission by itself'],
-            ['Authorization', 'Server or edge policy', 'Allowed action on resource', 'Crawler compliance'],
-            ['Capacity', 'Rate, concurrency, quota, cache', 'Resource consumption', 'Content eligibility'],
-            ['Observation', 'Logs, ranges, reverse verification, traces', 'Attribution evidence', 'Retroactive prevention'],
+            ['Guide cooperative crawlers away from paths', 'robots.txt', 'Crawler request policy', 'Does not deny access or establish identity'],
+            ['Keep a public response out of supporting indexes', 'noindex via meta or X-Robots-Tag', 'Indexer processing after retrieval', 'Does not make the response private'],
+            ['Keep a resource private', 'Authentication plus server-side authorization', 'Whether a principal receives the representation', 'Must hold across hosts, methods, caches, and alternate routes'],
+            ['Protect origin capacity', 'Rate, concurrency, quota, and cache controls', 'How much work a client may consume', 'Does not decide search or training eligibility'],
           ],
         },
       },
       {
         id: 'rep-semantics',
-        title: 'Implement robots semantics as a versioned policy parser',
+        title: 'Implement RFC 9309 semantics as a versioned policy parser',
         paragraphs: [
           'RFC 9309 standardizes the Robots Exclusion Protocol, including user-agent matching, rule matching, access results, and caching. A production parser should be covered by fixtures for casing, group selection, percent-encoding, longest-match behavior, comments, empty rules, Unicode handling, and retrieval failure states. A hand-written substring test is not an adequate policy engine.',
           'Policy is scoped to the service where the file is served. Hostname, scheme, and port distinctions matter operationally. Redirects and cache behavior must be recorded because a stale or cross-host file can produce a policy different from the one an operator inspected in source control. Store the retrieved bytes, effective URL, status, fetch time, parser version, selected group, and matched rule.',
@@ -872,7 +931,14 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'A typed-content architecture for keeping visible pages, metadata, JSON-LD, sitemaps, and exports consistent through generation, invariants, and production tests.',
     seoDescription:
       'Prevent structured-data drift by generating HTML, metadata, JSON-LD, sitemaps, and exports from one typed content model with semantic invariants and release checks.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/structured-data-editorial.webp',
+      socialSrc: '/images/research/structured-data-social.jpg',
+      alt: 'Two synchronized monochrome ledgers run in parallel while one translucent layer begins to drift.',
+      label: 'Structured data / synchronized ledgers',
+      caption: 'Visible content and machine-readable projections stay aligned until an unmanaged shadow layer separates.',
+    },
     date: PUBLISHED,
     dateModified: PUBLISHED,
     lastVerified: VERIFIED,
@@ -880,6 +946,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'Structured data is trustworthy when it is a typed projection of the same maintained record that renders the page, and release gates test semantic agreement rather than syntax alone.',
+    conclusion: {
+      title: 'Publish one fact graph',
+      content:
+        'Render visible content and JSON-LD from the same maintained record, then test semantic agreement across both outputs. A valid projection establishes internal coherence and eligibility—not a promised rich result or ranking outcome.',
+    },
     evidenceBoundary:
       'Valid JSON-LD and policy-aligned page content can establish internal consistency and eligibility conditions. They do not guarantee a rich result, ranking change, indexation, citation, or any particular downstream interpretation.',
     metrics: [
@@ -963,7 +1034,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
               '    datePublished: article.publishedAt,',
               '    dateModified: article.modifiedAt,',
               '    author: { "@id": `${site.origin}/about#person` },',
-              '    image: new URL(article.image.path, site.origin).href,',
+              '    image: new URL(article.artwork.socialSrc, site.origin).href,',
               '  };',
               '}',
             ].join('\n'),
@@ -1022,7 +1093,14 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'A data model that separates captured observations, artifacts, rule evaluations, findings, confidence, review state, and recommendations without losing lineage.',
     seoDescription:
       'Model technical SEO audit findings as derived records with observation lineage, immutable artifacts, versioned rules, explicit gaps, confidence, review, and reproducible exports.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/audit-findings-editorial.webp',
+      socialSrc: '/images/research/audit-findings-social.jpg',
+      alt: 'Captured evidence passes through transparent rule plates into a sealed monochrome finding record.',
+      label: 'Audit lineage / sealed findings',
+      caption: 'Artifacts pass through versioned rules before becoming traceable, reviewable finding records.',
+    },
     date: PUBLISHED,
     dateModified: PUBLISHED,
     lastVerified: VERIFIED,
@@ -1030,6 +1108,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'An audit finding is defensible only when it can be regenerated from named observations and a versioned rule while preserving uncertainty, reviewer decisions, and the exact evidence used.',
+    conclusion: {
+      title: 'Keep the finding reproducible',
+      content:
+        'A finding should remain regenerable from immutable observations, versioned rules, named gaps, and reviewer decisions. Resolution requires a fresh evaluation over the agreed scope; a merged patch alone is only implementation evidence.',
+    },
     evidenceBoundary:
       'Provenance makes derivation inspectable; it does not make the observation complete or the rule correct. Findings still require scope, data-quality checks, domain review, and explicit treatment of measurement gaps.',
     metrics: [
@@ -1169,7 +1252,14 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'An evaluation architecture for tasks, trials, observable trajectories, controlled environments, layered graders, repeated runs, and evidence-gated promotion.',
     seoDescription:
       'Evaluate tool-using AI agents with replayable observable traces, controlled environments, layered graders, repeated trials, side-effect checks, and promotion gates.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/replayable-traces-editorial.webp',
+      socialSrc: '/images/research/replayable-traces-social.jpg',
+      alt: 'A looping monochrome agent trajectory repeatedly crosses tools, observations, records, and graders.',
+      label: 'Agent evaluation / replay loop',
+      caption: 'Repeated trajectories preserve tools, observations, side effects, and grader evidence as one inspectable loop.',
+    },
     date: PUBLISHED,
     dateModified: PUBLISHED,
     lastVerified: VERIFIED,
@@ -1177,6 +1267,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'An agent score is meaningful only when the task, environment, observable trajectory, side effects, grader versions, and repeated-trial distribution are preserved well enough to inspect and reproduce.',
+    conclusion: {
+      title: 'Promote the tested system',
+      content:
+        'Agent evaluation is credible when the task, environment, trajectory, side effects, graders, and repeated-trial distribution travel together. A passing report supports only the recorded configuration and test distribution—not a universal model claim.',
+    },
     evidenceBoundary:
       'A replay can reproduce recorded inputs or simulate an environment boundary; it cannot prove that a stochastic model will emit the same trajectory. Evaluation results apply to the tested agent, tools, models, policies, graders, and environment versions.',
     metrics: [
@@ -1318,7 +1413,14 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'A storage architecture for URL identity, append-only attempts, transactional batches, upserts, one-writer discipline, WAL checkpoints, integrity checks, and portable exports.',
     seoDescription:
       'Build reliable SQLite crawl pipelines with stable keys, idempotent writes, append-only attempts, bounded transactions, WAL-aware concurrency, checkpoints, and recovery checks.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/sqlite-pipelines-editorial.webp',
+      socialSrc: '/images/research/sqlite-pipelines-social.jpg',
+      alt: 'Parallel monochrome data streams converge through a single writer into concentric WAL-like records.',
+      label: 'Data systems / single-writer study',
+      caption: 'Bounded workers converge on one durable writer while layered records preserve recovery and replay.',
+    },
     date: PUBLISHED,
     dateModified: PUBLISHED,
     lastVerified: VERIFIED,
@@ -1326,6 +1428,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'SQLite works well for bounded crawl and audit systems when the design accepts one-writer semantics, makes every write idempotent, separates immutable attempts from current projections, and operates WAL and checkpoints deliberately.',
+    conclusion: {
+      title: 'Design for one writer and recoverability',
+      content:
+        'SQLite is a strong bounded crawl store when writes are idempotent, attempts remain append-only, projections converge, and WAL and checkpoint behavior are deliberate. The database is operationally complete only after integrity checks, deterministic export, and tested restoration.',
+    },
     evidenceBoundary:
       'SQLite behavior depends on the linked library version, VFS, filesystem, durability settings, connection pattern, and workload. Official documentation should be rechecked before deployment; WAL is not a shared-database design for independent hosts or a substitute for backups.',
     metrics: [
@@ -1468,7 +1575,14 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'A fail-closed migration method for URL manifests, redirect graphs, canonical output, internal links, sitemaps, rendered content, launch sequencing, and post-release evidence.',
     seoDescription:
       'Build executable technical SEO migration gates for URL mappings, redirects, canonicals, internal links, sitemaps, rendered content, launch rollout, and monitoring.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'image',
+      heroSrc: '/images/research/migration-gates-editorial.webp',
+      socialSrc: '/images/research/migration-gates-social.jpg',
+      alt: 'A monochrome corridor of sequential checkpoints governs several converging release paths.',
+      label: 'Migration controls / release corridor',
+      caption: 'Redirects, canonicals, internal links, and release evidence must pass the same ordered checkpoints.',
+    },
     date: PUBLISHED,
     dateModified: PUBLISHED,
     lastVerified: VERIFIED,
@@ -1476,6 +1590,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     author: 'SULAYMAN BOWLES',
     thesis:
       'A migration is ready when every important old URL has an approved terminal state, every new canonical route satisfies a page contract, and production evidence proves the mapping after the real edge and application stack.',
+    conclusion: {
+      title: 'Gate the route contract, not the launch date',
+      content:
+        'A migration is ready when every important old URL has an approved terminal state and every new route passes its page contract through the real production edge. Rankings and index consolidation remain external transitions to monitor separately.',
+    },
     evidenceBoundary:
       'Passing migration gates proves the tested publisher-controlled routing and page signals. It cannot guarantee unchanged rankings, traffic, crawling cadence, index consolidation, or behavior in untested caches, regions, clients, and external systems.',
     metrics: [

@@ -1,12 +1,7 @@
 import { useEffect } from 'react';
 
 import {
-  ArticleBody,
-  ArticleCallout,
-  ArticleEndnote,
-  ArticleHero,
-  ArticleMetricStrip,
-  ArticlePage,
+  ArticleReader,
   ArticleSectionHeader,
 } from '../components/ArticleLayout';
 import {
@@ -76,38 +71,71 @@ export default function ProgrammaticSeoPage({ path }: { path: string }) {
     ...page.sections.map((section, index) => ({ id: section.id, label: section.title, index: String(index + 1).padStart(2, '0') })),
     { id: 'sources', label: 'Source ledger', index: 'S' },
   ];
+  const wordCount = programmaticPageWordCount(page);
+  const readTime = `${Math.max(1, Math.ceil(wordCount / 200))} min`;
 
   return (
-    <ArticlePage activePath="/research" variant="research">
-      <ArticleHero
-        backHref={familyHub}
-        backLabel={`${page.family} guides`}
-        eyebrow={`Technical SEO / ${page.family}`}
-        title={page.title}
-        deck={page.directAnswer}
-        metadata={[
-          { label: 'Primary query', value: page.primaryQuery },
-          { label: 'Published', value: page.datePublished },
-          { label: 'Updated', value: page.dateModified },
-          { label: 'Length', value: `${programmaticPageWordCount(page).toLocaleString()} words` },
-          { label: 'Sources', value: String(page.sources.length).padStart(2, '0') },
-        ]}
-        imagePlaceholder={{ label: `${page.family} diagnostic / evidence plate`, note: page.evidenceArtifact.label, variant: 'pipeline' }}
-      />
-
-      <ArticleMetricStrip items={[
-        { label: 'Evidence state', value: 'Fixture', note: 'Illustrative; replace before a live claim' },
-        { label: 'Diagnostic steps', value: page.diagnosticProcedure.length },
-        { label: 'Repair steps', value: page.repairSteps.length },
-        { label: 'Rerun gates', value: page.rerunAcceptanceCheck.length },
-      ]} />
-
-      <ArticleCallout label="Direct answer" title={page.primaryQuery}>
-        <p>{page.directAnswer}</p>
-        <p><strong>Evidence boundary:</strong> {page.evidenceArtifact.description}</p>
-      </ArticleCallout>
-
-      <ArticleBody items={navItems} boundary={page.falsePositiveBoundary} boundaryLabel="False-positive boundary" variant="research">
+    <ArticleReader
+      config={{
+        activePath: '/research',
+        mode: 'reference',
+        archive: {
+          href: familyHub,
+          label: `${page.family} guides`,
+        },
+        hero: {
+          eyebrow: `Technical SEO / ${page.family}`,
+          title: page.title,
+          deck: page.directAnswer,
+          imagePlaceholder: {
+            label: `${page.family} diagnostic / evidence plate`,
+            note: page.evidenceArtifact.label,
+            variant: 'pipeline',
+          },
+        },
+        publication: {
+          author: 'Sulayman Bowles',
+          subject: page.primaryQuery,
+          published: { dateTime: page.datePublished, value: page.datePublished },
+          updated: { dateTime: page.dateModified, value: page.dateModified },
+          readTime,
+          evidence: `${page.sources.length} sources / labeled fixture`,
+        },
+        metrics: [
+          { label: 'Evidence state', value: 'Fixture', note: 'Illustrative; replace before a live claim' },
+          { label: 'Diagnostic steps', value: page.diagnosticProcedure.length },
+          { label: 'Repair steps', value: page.repairSteps.length },
+          { label: 'Rerun gates', value: page.rerunAcceptanceCheck.length },
+        ],
+        callouts: [{
+          label: 'Direct answer',
+          title: page.primaryQuery,
+          content: (
+            <>
+              <p>{page.directAnswer}</p>
+              <p><strong>Evidence boundary:</strong> {page.evidenceArtifact.description}</p>
+            </>
+          ),
+        }],
+        navigation: { items: navItems },
+        boundary: {
+          label: 'False-positive boundary',
+          content: page.falsePositiveBoundary,
+        },
+        endnote: {
+          label: 'Release boundary',
+          title: 'Replace the fixture before a production claim.',
+          content: 'This guide uses an explicitly labeled fixture. Replace it with a dated crawl before making a production claim; rankings and traffic remain external outcomes.',
+          links: [
+            { href: familyHub, label: `${page.family} guide collection` },
+            { href: '/research/technical-seo', label: 'Technical SEO diagnostic library' },
+            ...page.relatedPaths.map((relatedPath) => ({ href: relatedPath, label: getSeoRoute(relatedPath)?.h1 ?? relatedPath })),
+            { href: '/method', label: 'Technical SEO audit method' },
+            { href: '/contact', label: page.cta.label },
+          ],
+        },
+      }}
+    >
         <section id="direct-answer">
           <ArticleSectionHeader index="00">Answer and scope</ArticleSectionHeader>
           <div className="article-reader__prose">
@@ -130,17 +158,6 @@ export default function ProgrammaticSeoPage({ path }: { path: string }) {
             ))}
           </ol>
         </section>
-
-        <ArticleEndnote links={[
-          { href: familyHub, label: `${page.family} guide collection` },
-          { href: '/research/technical-seo', label: 'Technical SEO diagnostic library' },
-          ...page.relatedPaths.map((relatedPath) => ({ href: relatedPath, label: getSeoRoute(relatedPath)?.h1 ?? relatedPath })),
-          { href: '/method', label: 'Technical SEO audit method' },
-          { href: '/contact', label: page.cta.label },
-        ]}>
-          This guide uses an explicitly labeled fixture. Replace it with a dated crawl before making a production claim; rankings and traffic remain external outcomes.
-        </ArticleEndnote>
-      </ArticleBody>
-    </ArticlePage>
+    </ArticleReader>
   );
 }

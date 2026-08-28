@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20",
+  "generated_at": "2026-07-26",
   "canonical_host": "https://sulayman-bowles.dev",
   "objective": "Topical authority index for source-led technical SEO, crawler, AI-agent, data-system, and infrastructure research.",
   "claim_boundaries": [
@@ -158,7 +158,35 @@
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
-        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "The AI Megawatt Is Not a Megawatt",
+      "url": "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+      "type": "source_led_article",
+      "cluster": "ai-systems",
+      "preferred_anchor": "The AI Megawatt Is Not a Megawatt",
+      "pitch_angle": "Replace one-ratio gigawatt-to-GPU estimates with an explicit capacity ladder, sensitivity range, and boundary-specific evidence requirements.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature",
+      "url": "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+      "type": "source_led_article",
+      "cluster": "data-systems",
+      "preferred_anchor": "The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature",
+      "pitch_angle": "Separate disclosed finished-magnet nameplate from qualified output, upstream-only material capacity, ambiguous units, and demand denominators.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
       ]
     },
     {
@@ -219,14 +247,113 @@
     },
     {
       "priority": 1,
+      "name": "Where Do Online Returns Go? Inside Reverse Logistics",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Where Do Online Returns Go? Inside Reverse Logistics",
+      "pitch_angle": "Answer the cross-retailer question with product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing one retailer or one universal returns process.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "What Happens When an Index Decides a Company Matters?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "What Happens When an Index Decides a Company Matters?",
+      "pitch_angle": "Connect provider governance, eligibility rules, fund mandates, source-index offsets, closing-auction mechanics, event-study evidence, and cost-of-capital limits instead of treating headline benchmark assets as forced one-day buying.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "How Airlines Borrow Against Loyalty Programs",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "How Airlines Borrow Against Loyalty Programs",
+      "pitch_angle": "Separate consumer card spending, issuer partner payments, deferred-revenue accounting, award fulfillment, operating float, and the lender-controlled cash waterfall instead of calling airline miles deposits or treating every partner payment as debt.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Hardware Startup Financing: Five Capital Stacks",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Hardware Startup Financing: Five Capital Stacks",
+      "pitch_angle": "Replace generic funding-option lists with five real company capital stacks organized by asset owner, payment source, recourse, utilization exposure, and loss allocation.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Who Funds Waymo’s Hardware?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Who Funds Waymo’s Hardware?",
+      "pitch_angle": "Separate fundraising from physical-asset financing, legal ownership, residual value, utilization risk, and the party that absorbs losses.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Who Owns West Campus Student Housing?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Who Owns West Campus Student Housing?",
+      "pitch_angle": "Trace a student installment through the operating statement, acquisition basis, capital stack, refinancing test, and loss waterfall while keeping reported facts separate from modeled assumptions.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Who Owns Austin’s Home-Service Companies?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Who Owns Austin’s Home-Service Companies?",
+      "pitch_angle": "Separate the consumer brand, legal operator, platform, franchise relationship, controlling owner, minority investor, and transaction date while keeping brand-count evidence distinct from market share.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ]
+    },
+    {
+      "priority": 1,
       "name": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
       "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
       "type": "source_led_article",
       "cluster": "who-owns-texas-toll-roads",
-      "preferred_anchor": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
+      "preferred_anchor": "Texas toll-road ownership and concession guide",
       "pitch_angle": "Separate physical ownership from concession rights, operators, lenders, revenue claims, and residual control using project-level public records.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/texas-toll-road-ownership-2026.csv",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
         "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo"
       ]

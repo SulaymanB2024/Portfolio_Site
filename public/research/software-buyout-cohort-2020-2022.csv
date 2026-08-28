@@ -1,0 +1,26 @@
+announcement_year,company,headline_transaction_value_usd_billions,sponsor_group,outcome_category,current_control_summary,classification_note
+2020,RealPage,10.2,Thoma Bravo,continuing sponsor ownership,Private; sponsor control continues,Headline transaction value
+2020,Pluralsight,3.5,Vista Equity Partners,completed creditor transfer,Lenders became owners through restructuring,Control transfer is not a sponsor realization
+2020,Endurance International Group,3.0,Clearlake Capital; Siris Capital,continuing sponsor ownership,Operates as Newfold Digital under sponsor ownership,Rebranding does not change control classification
+2021,Proofpoint,12.3,Thoma Bravo,continuing sponsor ownership,Private; sponsor control continues,No clean control exit identified
+2021,McAfee,14.0,Advent International-led investor group,continuing sponsor ownership,Private; sponsor consortium control continues,Liquidity and refinancing are separate from control exit
+2021,Inovalon,7.3,Nordic Capital; Insight Partners-led group,continuing sponsor ownership,Private; sponsor group remains in control,Added after cohort verification correction
+2021,Mimecast,5.8,Permira,continuing sponsor ownership,Private; sponsor control continues,No clean control exit identified
+2021,Cloudera,5.3,KKR; Clayton Dubilier & Rice,continuing sponsor ownership,Private; sponsor control continues,Debt and dividend events do not establish realization
+2021,Stamps.com / Auctane,6.6,Thoma Bravo,continuing sponsor ownership,Private; operates as Auctane under sponsor ownership,Name change does not change classification
+2021,Medallia,6.4,Thoma Bravo,continuing sponsor ownership,Private at cutoff; sponsor and creditor developments classified separately,Public evidence does not establish sponsor return
+2021,Cornerstone OnDemand,5.2,Clearlake Capital,continuing sponsor ownership,Private; sponsor control continues,No clean control exit identified
+2021,Bottomline Technologies,2.6,Thoma Bravo,continuing sponsor ownership,Private; sponsor control continues,No clean control exit identified
+2021,QAD,2.0,Thoma Bravo,continuing sponsor ownership,Private; sponsor control continues,No clean control exit identified
+2021,Talend,2.4,Thoma Bravo,continuing sponsor ownership,Combined with other sponsor-controlled software assets,Combination is not a clean sponsor realization
+2021,CoreLogic / Cotality,5.9,Stone Point Capital; Insight Partners,continuing sponsor ownership,Private; sponsor ownership continues after rebrand,Value follows cohort headline convention
+2022,Citrix Systems,16.5,Vista Equity Partners; Evergreen Coast Capital,continuing sponsor ownership,Operates within Cloud Software Group; original sponsor control not shown as fully realized,Debt restructuring is not automatically an equity exit
+2022,Zendesk,10.2,Hellman & Friedman; Permira,continuing sponsor ownership,Private; sponsor consortium control continues,No clean control exit identified
+2022,Coupa Software,8.0,Thoma Bravo,continuing sponsor ownership,Private; sponsor control continues,No clean control exit identified
+2022,Anaplan,10.7,Thoma Bravo,continuing sponsor ownership,Private; sponsor control continues,Uses announced headline value; final terms discussed in report
+2022,SailPoint,6.9,Thoma Bravo,partial liquidity,Public listing completed but sponsor retained voting control at cutoff,IPO is a route to exit not a completed control exit
+2022,Avalara,8.4,Vista Equity Partners,continuing sponsor ownership,Private; sponsor control continues,No clean control exit identified
+2022,CDK Global,8.3,Brookfield Business Partners,continuing sponsor ownership,Private; sponsor control continues,Operational events do not determine sponsor return
+2022,KnowBe4,4.6,Vista Equity Partners,continuing sponsor ownership,Private; sponsor control continues,Secondary or continuation liquidity is classified separately
+2022,Ping Identity,2.8,Thoma Bravo,continuing sponsor ownership,Private; combined with ForgeRock under sponsor control,Combination does not remove sponsor control
+2022,ForgeRock,2.3,Thoma Bravo,continuing sponsor ownership,Merged into Ping Identity under sponsor control,Regulatory close and integration are not sponsor realization

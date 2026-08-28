@@ -14,7 +14,7 @@ export function PageShell({
   return (
     <main
       className={cx(
-        'relative min-h-screen overflow-x-hidden font-sans antialiased',
+        'relative min-h-screen overflow-x-clip font-sans antialiased',
         tone === 'dark' ? 'site-page site-page-dark' : 'site-page site-page-light',
         tone === 'dark'
           ? 'bg-ink text-canvas selection:bg-canvas selection:text-ink'
@@ -85,7 +85,7 @@ export function PageHero({
 export function SectionEyebrow({ className, ...props }: ComponentPropsWithoutRef<'p'>) {
   return (
     <p
-      className={cx('text-[10px] uppercase tracking-[0.28em] text-current/48', className)}
+      className={cx('text-[10px] uppercase tracking-[0.28em] text-current/64', className)}
       {...props}
     />
   );
@@ -187,7 +187,7 @@ export type DarkProofArtifactItem = {
   status?: ReactNode;
 };
 
-function CornerMarks() {
+export function CalibrationMarks() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 text-current/28">
       <span className="absolute left-3 top-3 h-px w-5 bg-current" />
@@ -199,6 +199,78 @@ function CornerMarks() {
       <span className="absolute bottom-3 right-3 h-px w-5 bg-current" />
       <span className="absolute bottom-3 right-3 h-5 w-px bg-current" />
     </div>
+  );
+}
+
+export function CalibrationFrame({
+  className,
+  children,
+  ...props
+}: ComponentPropsWithoutRef<'div'>) {
+  return (
+    <div className={cx('visual-lab-calibration-frame relative', className)} {...props}>
+      <CalibrationMarks />
+      <div className="relative">{children}</div>
+    </div>
+  );
+}
+
+export function IndexedSection({
+  index,
+  title,
+  description,
+  headingId,
+  className,
+  children,
+  ...props
+}: ComponentPropsWithoutRef<'section'> & {
+  index: ReactNode;
+  title: ReactNode;
+  description?: ReactNode;
+  headingId: string;
+}) {
+  return (
+    <section
+      aria-labelledby={headingId}
+      className={cx('visual-lab-indexed-section', className)}
+      {...props}
+    >
+      <header className="visual-lab-indexed-section__header">
+        <SectionEyebrow className="visual-lab-indexed-section__index">{index}</SectionEyebrow>
+        <h2 id={headingId} className="visual-lab-indexed-section__title">
+          {title}
+        </h2>
+        {description && (
+          <div className="visual-lab-indexed-section__description">
+            {description}
+          </div>
+        )}
+      </header>
+      <div className="visual-lab-indexed-section__body">{children}</div>
+    </section>
+  );
+}
+
+export function DownloadArrowIcon({
+  className,
+  ...props
+}: ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 16 16"
+      className={cx('h-4 w-4', className)}
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M8 2v8m0 0 3-3m-3 3L5 7M3 13h10"
+        stroke="currentColor"
+        strokeWidth="1"
+        strokeLinecap="square"
+        strokeLinejoin="miter"
+      />
+    </svg>
   );
 }
 
@@ -222,7 +294,7 @@ export function DarkProofArtifactPanel({
       className={cx('relative overflow-hidden border border-current/14 bg-current/[0.018] p-5 text-current md:p-6', className)}
       {...props}
     >
-      <CornerMarks />
+      <CalibrationMarks />
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-6 top-1/2 h-px bg-current/10" />
       <div aria-hidden="true" className="pointer-events-none absolute bottom-6 top-6 left-1/2 w-px bg-current/10" />
       <div className="relative">
@@ -321,7 +393,7 @@ export function PrimaryCTA({ className, ...props }: ComponentPropsWithoutRef<'a'
 export function TextLink({ className, ...props }: ComponentPropsWithoutRef<'a'>) {
   return (
     <a
-      className={cx('border-b border-current/24 pb-1 transition-colors hover:border-current', className)}
+      className={cx('inline-flex min-h-11 items-center border-b border-current/24 transition-colors hover:border-current', className)}
       {...props}
     />
   );
