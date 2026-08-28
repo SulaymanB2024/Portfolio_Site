@@ -162,14 +162,17 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
       )}
 
       <div className={`${surfaceClass} site-header-editorial mx-auto flex min-h-[72px] max-w-[1480px] items-stretch justify-between ${bgClass} text-[10px] uppercase xl:hidden`}>
-        <div className="flex min-w-0 flex-1 items-center px-5">
-          <a href="/" id="header-brand-link-mobile" className="block w-full min-w-0">
-            <span className={`site-header-brand block whitespace-nowrap text-[11px] font-semibold leading-none tracking-[0.34em] ${textClass}`}>SULAYMAN BOWLES</span>
-            {!minimalBrand && (
-              <span className={`site-header-tagline mt-2 block truncate font-serif text-[13px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
-                Technical SEO · AI Systems · Finance Research
-              </span>
-            )}
+        <div className="flex min-w-0 flex-1 items-center px-4">
+          <a href="/" id="header-brand-link-mobile" aria-label="Sulayman Bowles — Home" className={`site-brand-link flex w-full min-w-0 items-center gap-3 ${textClass}`}>
+            <img src="/favicon.svg" width="32" height="32" alt="" aria-hidden="true" className="site-brand-mark h-8 w-8" />
+            <span className="block min-w-0">
+              <span className="site-header-brand block truncate whitespace-nowrap text-[11px] font-semibold leading-none tracking-[0.3em]">SULAYMAN BOWLES</span>
+              {!minimalBrand && (
+                <span className={`site-header-tagline mt-2 block truncate font-serif text-[13px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
+                  Technical SEO · AI Systems · Finance Research
+                </span>
+              )}
+            </span>
           </a>
         </div>
         <button
@@ -209,14 +212,22 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
                   aria-current={active ? 'page' : undefined}
                   title={item.description}
                   style={{ transitionDelay: `${index * 22}ms` }}
-                  className={`site-header-link group grid min-h-[72px] grid-cols-[3rem_1fr_auto] items-center border-b px-5 tracking-[0.24em] transition-[background-color,color,opacity,transform] duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
+                  className={`site-header-link group grid min-h-[88px] grid-cols-[3rem_minmax(0,1fr)_auto] items-center border-b px-5 py-3 tracking-[0.24em] transition-[background-color,color,opacity,transform] duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <span aria-hidden="true" className="font-serif text-lg italic tracking-normal opacity-42">{String(index + 1).padStart(2, '0')}</span>
-                  <span>{navLabel(item)}</span>
-                  <svg aria-hidden="true" viewBox="0 0 16 16" className="h-3.5 w-3.5 opacity-42 transition-transform duration-200 group-hover:translate-x-1" fill="none">
-                    <path d="M4 12 12 4M6 4h6v6" stroke="currentColor" strokeWidth="1" strokeLinecap="square" strokeLinejoin="miter" />
-                  </svg>
+                  <span className="min-w-0">
+                    <span className="block">{navLabel(item)}</span>
+                    <span className={`site-header-mobile-description mt-1.5 block max-w-[38ch] text-[11px] normal-case leading-[1.35] tracking-normal ${textMutedClass}`}>
+                      {item.description}
+                    </span>
+                  </span>
+                  <span className="flex flex-col items-end gap-2">
+                    {active && <span className="text-[7px] tracking-[0.18em] opacity-64">Current</span>}
+                    <svg aria-hidden="true" viewBox="0 0 16 16" className="h-3.5 w-3.5 opacity-42 transition-transform duration-200 group-hover:translate-x-1" fill="none">
+                      <path d="M4 12 12 4M6 4h6v6" stroke="currentColor" strokeWidth="1" strokeLinecap="square" strokeLinejoin="miter" />
+                    </svg>
+                  </span>
                 </a>
               );
             })}
@@ -224,14 +235,17 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
         </div>
       )}
 
-      <div className={`${isFinalFrame ? 'relative' : 'site-header'} site-header-editorial mx-auto hidden min-h-[82px] max-w-[1480px] items-stretch ${bgClass} text-[10px] uppercase xl:grid xl:grid-cols-[minmax(265px,0.72fr)_minmax(0,1.28fr)]`}>
-        <a href="/" id="header-brand-link" className={`flex min-w-0 flex-col justify-center border-r px-8 transition-opacity duration-200 hover:opacity-72 ${menuBorderClass}`}>
-          <span className={`site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.38em] ${textClass}`}>SULAYMAN BOWLES</span>
-          {!minimalBrand && (
-            <span className={`site-header-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
-              Technical SEO · AI Systems · Finance Research
-            </span>
-          )}
+      <div className={`${isFinalFrame ? 'relative' : 'site-header'} site-header-editorial mx-auto hidden min-h-[82px] max-w-[1480px] items-stretch ${bgClass} text-[11px] uppercase xl:grid xl:grid-cols-[minmax(300px,0.74fr)_minmax(0,1.26fr)]`}>
+        <a href="/" id="header-brand-link" aria-label="Sulayman Bowles — Home" className={`site-brand-link flex min-w-0 items-center gap-3 border-r px-7 transition-opacity duration-200 hover:opacity-80 ${menuBorderClass} ${textClass}`}>
+          <img src="/favicon.svg" width="36" height="36" alt="" aria-hidden="true" className="site-brand-mark h-9 w-9" />
+          <span className="block min-w-0">
+            <span className="site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em]">SULAYMAN BOWLES</span>
+            {!minimalBrand && (
+              <span className={`site-header-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
+                Technical SEO · AI Systems · Finance Research
+              </span>
+            )}
+          </span>
         </a>
 
         <div className={`grid min-w-0 ${minimalBrand ? 'grid-rows-1' : 'grid-rows-[1fr_auto]'}`}>
@@ -251,7 +265,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
                 onMouseEnter={() => setRouteNote(item.description ?? item.label)}
                 onBlur={() => setRouteNote(null)}
                 onMouseLeave={() => setRouteNote(null)}
-                className={`site-header-link group relative inline-flex min-w-0 items-center justify-center gap-1.5 px-3 leading-none tracking-[0.22em] transition-colors duration-200 xl:px-4 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
+                className={`site-header-link group relative inline-flex min-w-0 items-center justify-center gap-1.5 px-3 leading-none tracking-[0.18em] transition-colors duration-200 xl:px-4 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
               >
                 <span aria-hidden="true" className="hidden font-serif text-[10px] italic tracking-normal opacity-38 xl:inline">{String(index + 1).padStart(2, '0')}</span>
                 <span className="block whitespace-nowrap">

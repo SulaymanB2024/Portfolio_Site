@@ -89,6 +89,12 @@ const homeDisciplineItems = [
   },
 ];
 
+const homeProofItems = [
+  { type: 'Research', title: 'The First AI Managers', href: AI_MANAGERS_ARTICLE_PATH },
+  { type: 'Product', title: 'Atlas SEO Audit Software', href: '/atlas' },
+  { type: 'Markets', title: 'Texas Toll-Road Ownership', href: '/markets/who-owns-texas-toll-roads' },
+];
+
 function isDarkRoute(path: string) {
   return getRouteTone(path) === 'dark';
 }
@@ -497,8 +503,8 @@ function HomePage() {
             <RomanTogaReveal
               fit="cover"
               focus="large-figure"
-              restOpacity={0.1}
-              revealOpacity={0.46}
+              restOpacity={0.16}
+              revealOpacity={0.58}
               className="h-full w-full"
             />
           </motion.div>
@@ -515,7 +521,7 @@ function HomePage() {
                 <span className="block">Sulayman</span>
                 <span className="block italic">Bowles</span>
               </h1>
-              <div className="mt-7 grid max-w-5xl gap-6 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-10">
+              <div className="mt-7 grid max-w-[1180px] gap-6 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.14fr)_minmax(340px,0.86fr)] md:gap-8">
                 <div>
                   <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
                   <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and publisher of source-led research.</p>
@@ -536,11 +542,22 @@ function HomePage() {
                     </a>
                   </nav>
                 </div>
-                <nav aria-label="Featured proof" className="grid self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
-                  <span className="mb-1 text-[9px] tracking-[0.28em] text-ink/48">Selected proof</span>
-                  <a href={AI_MANAGERS_ARTICLE_PATH} className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>The First AI Managers</span><span aria-hidden="true">↗</span></a>
-                  <a href="/atlas" className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>Atlas SEO Audit Software</span><span aria-hidden="true">↗</span></a>
-                  <a href="/markets/who-owns-texas-toll-roads" className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>Texas Toll-Road Ownership</span><span aria-hidden="true">↗</span></a>
+                <nav aria-label="Featured proof" className="grid self-end border border-ink bg-ink px-4 py-3 uppercase text-canvas md:px-5 md:py-4">
+                  <span className="mb-1 flex items-center justify-between text-[9px] tracking-[0.28em] text-canvas/66">
+                    <span>Selected proof</span>
+                    <span aria-hidden="true" className="font-serif text-sm italic tracking-normal">03</span>
+                  </span>
+                  {homeProofItems.map((item) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      className="group grid min-h-12 grid-cols-[4.75rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-canvas/18 transition-colors hover:border-canvas/44 hover:bg-canvas/[0.035] md:grid-cols-[5.25rem_minmax(0,1fr)_auto]"
+                    >
+                      <span className="text-[8px] tracking-[0.22em] text-canvas/66">{item.type}</span>
+                      <span className="text-[10px] font-medium tracking-[0.15em] text-canvas/90">{item.title}</span>
+                      <span aria-hidden="true" className="text-xs transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+                    </a>
+                  ))}
                 </nav>
               </div>
             </div>
