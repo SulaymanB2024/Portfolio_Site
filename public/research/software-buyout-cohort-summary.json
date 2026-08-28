@@ -1,0 +1,31 @@
+{
+  "title": "What Happened to the Software Buyout Boom?",
+  "evidence_cutoff": "2026-08-17",
+  "cohort": {
+    "deal_count": 25,
+    "announcement_years": [2020, 2021, 2022],
+    "headline_transaction_value_usd_billions": 171.2,
+    "value_basis": "Mixed company-reported headline transaction-value definitions; cohort sizing only"
+  },
+  "headline_result": {
+    "clean_sponsor_realizations": 0,
+    "definition": "A completed sale, broad public distribution, or equivalent transfer that removes the original sponsor group's control",
+    "interpretation": "Liquidity and ownership events occurred, but no row met the completed control-transfer definition at the evidence cutoff"
+  },
+  "classification_order": [
+    "full sponsor realization",
+    "partial liquidity",
+    "completed creditor transfer",
+    "signed creditor transfer",
+    "continuing sponsor ownership"
+  ],
+  "boundaries": [
+    "Headline transaction value is not sponsor equity invested, debt funded, current enterprise value, net asset value, or realized proceeds.",
+    "An IPO with continuing sponsor voting control is a liquidity route, not a clean realization.",
+    "Creditor ownership is classified separately from sponsor realization.",
+    "The public record does not support a cohort MOIC, IRR, or impairment estimate."
+  ],
+  "counter_case": "Most cohort companies were only three to five years into ownership at the cutoff, while technology holding periods at exit had lengthened to roughly five years by the end of 2025.",
+  "canonical_typed_article_path": "/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
+  "fallback_web_edition": "/research/software-buyout-cohort-2020-2022.html"
+}

@@ -66,6 +66,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt</loc>
+    <lastmod>2026-08-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine</loc>
     <lastmod>2026-07-19</lastmod>
     <priority>0.6</priority>

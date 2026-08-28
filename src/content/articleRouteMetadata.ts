@@ -17,6 +17,19 @@ export type ArticleRouteMetadata = {
 export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
   {
     "kind": "research",
+    "path": "/research/ai-systems/the-ai-megawatt",
+    "aliases": [],
+    "title": "The AI Megawatt Is Not a Megawatt",
+    "seoTitle": "What 1 GW of AI Data Center Power Actually Means",
+    "seoDescription": "A current GB300 model translating a 1 GW data-center claim across grid interconnection, facility power, PUE, network overhead, rack capacity, installed GPUs, and utilization.",
+    "date": "2026.08.16",
+    "dateModified": "2026.08.16",
+    "indexable": true,
+    "staticSummary": "A one-gigawatt AI data center can mean at least four different things. It may be a requested grid interconnection, a total facility nameplate, an IT nameplate, or an average electrical draw. Those quantities are related, but they are not interchangeable. A bare “1 GW” claim therefore does not identify a GPU fleet.",
+    "image": "/images/social/og-research.png"
+  },
+  {
+    "kind": "research",
     "path": "/research/crawler-engineering/crawl-frontier-state-machine",
     "aliases": [],
     "title": "The Crawl Frontier Is a State Machine, Not a Queue",

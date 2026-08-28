@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<svg width="712.56pt" height="394.17pt" version="1.1" viewBox="0 0 712.56 394.17" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<metadata>
+<rdf:RDF xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<cc:Work>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:date>2026-08-17T05:36:29.203487</dc:date>
+<dc:format>image/svg+xml</dc:format>
+<dc:creator>
+<cc:Agent>
+<dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+</cc:Agent>
+</dc:creator>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<defs>
+<style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+</defs>
+<path d="m0 394.17h712.56v-394.17h-712.56z" fill="#fff"/>
+<path d="m53.328 359.09h652.03v-336.78h-652.03z" fill="#fff"/>
+<path d="m82.966 359.09h169.36v-306.16h-169.36z" clip-path="url(#b)" fill="#1f77b4"/>
+<path d="m294.66 359.09h169.36v-267.39h-169.36z" clip-path="url(#b)" fill="#1f77b4"/>
+<path d="m506.36 359.09h169.36v-243.08h-169.36z" clip-path="url(#b)" fill="#1f77b4"/>
+<defs>
+<path id="c" d="m0 0v3.5" stroke="#000" stroke-width=".8"/>
+</defs>
+<use x="167.645073" y="359.094125" stroke="#000000" stroke-width=".8" xlink:href="#c"/>
+<g font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px">
+<text transform="translate(150.33 373.69)">Facility</text>
+<text transform="translate(140.8 384.89)">nameplate</text>
+</g>
+<use x="379.343125" y="359.094125" stroke="#000000" stroke-width=".8" xlink:href="#c"/>
+<g font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px">
+<text transform="translate(374.81 373.69)">IT</text>
+<text transform="translate(352.5 384.89)">nameplate</text>
+</g>
+<use x="591.041177" y="359.094125" stroke="#000000" stroke-width=".8" xlink:href="#c"/>
+<g font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px">
+<text transform="translate(561.84 373.69)">GB300 rack</text>
+<text transform="translate(564.2 384.89)">nameplate</text>
+</g>
+<defs>
+<path id="a" d="m0 0h-3.5" stroke="#000" stroke-width=".8"/>
+</defs>
+<use x="53.328125" y="359.094125" stroke="#000000" stroke-width=".8" xlink:href="#a"/>
+<text transform="rotate(-0 46.328 362.89)" x="46.328125" y="362.893344" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px" text-anchor="end">0</text>
+<use x="53.328125" y="297.862125" stroke="#000000" stroke-width=".8" xlink:href="#a"/>
+<text transform="rotate(-0 46.328 301.66)" x="46.328125" y="301.661344" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px" text-anchor="end">200</text>
+<use x="53.328125" y="236.630125" stroke="#000000" stroke-width=".8" xlink:href="#a"/>
+<text transform="rotate(-0 46.328 240.43)" x="46.328125" y="240.429344" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px" text-anchor="end">400</text>
+<use x="53.328125" y="175.398125" stroke="#000000" stroke-width=".8" xlink:href="#a"/>
+<text transform="rotate(-0 46.328 179.2)" x="46.328125" y="179.197344" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px" text-anchor="end">600</text>
+<use x="53.328125" y="114.166125" stroke="#000000" stroke-width=".8" xlink:href="#a"/>
+<text transform="rotate(-0 46.328 117.97)" x="46.328125" y="117.965344" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px" text-anchor="end">800</text>
+<use x="53.328125" y="52.934125" stroke="#000000" stroke-width=".8" xlink:href="#a"/>
+<text transform="rotate(-0 46.328 56.733)" x="46.328125" y="56.733344" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px" text-anchor="end">1000</text>
+<text transform="rotate(-90 14.798 190.71)" x="14.798438" y="190.706125" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px" text-anchor="middle">Power capacity (MW)</text>
+<path d="m53.328 359.09v-336.78" fill="none" stroke="#000" stroke-linecap="square" stroke-width=".8"/>
+<path d="m705.36 359.09v-336.78" fill="none" stroke="#000" stroke-linecap="square" stroke-width=".8"/>
+<path d="m53.328 359.09h652.03" fill="none" stroke="#000" stroke-linecap="square" stroke-width=".8"/>
+<path d="m53.328 22.318h652.03" fill="none" stroke="#000" stroke-linecap="square" stroke-width=".8"/>
+<text transform="rotate(-0 167.65 46.262)" x="167.645073" y="46.262037" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px" text-anchor="middle">1,000 MW</text>
+<text transform="rotate(-0 379.34 85.033)" x="379.343125" y="85.033391" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px" text-anchor="middle">873 MW</text>
+<text transform="rotate(-0 591.04 109.34)" x="591.041177" y="109.34145" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="10px" text-anchor="middle">794 MW</text>
+<text transform="rotate(-0 379.34 16.318)" x="379.343125" y="16.318125" font-family="'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" font-size="12px" text-anchor="middle">Reference conversion of a 1 GW facility nameplate</text>
+<defs>
+<clipPath id="b">
+<rect x="53.328" y="22.318" width="652.03" height="336.78"/>
+</clipPath>
+</defs>
+</svg>
