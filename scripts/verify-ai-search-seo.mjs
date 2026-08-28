@@ -225,6 +225,32 @@ for (const [pathname, file] of staticRoutes) {
     `${pathname}: llms.txt alternate discovery link drifted`,
   );
 
+  const icons = linkTags(html, 'icon');
+  assert(
+    icons.some((tag) => attr(tag, 'type') === 'image/svg+xml'
+      && attr(tag, 'sizes') === 'any'
+      && attr(tag, 'href') === '/favicon.svg'),
+    `${pathname}: scalable favicon discovery link drifted`,
+  );
+  assert(
+    icons.some((tag) => attr(tag, 'type') === 'image/png'
+      && attr(tag, 'sizes') === '32x32'
+      && attr(tag, 'href') === '/favicon-32x32.png'),
+    `${pathname}: 32px favicon discovery link drifted`,
+  );
+  const touchIcons = linkTags(html, 'apple-touch-icon');
+  assert(
+    touchIcons.length === 1
+      && attr(touchIcons[0], 'sizes') === '180x180'
+      && attr(touchIcons[0], 'href') === '/apple-touch-icon.png',
+    `${pathname}: Apple Touch icon discovery link drifted`,
+  );
+  const themeColors = metaTags(html, 'name', 'theme-color');
+  assert(
+    themeColors.length === 1 && attr(themeColors[0], 'content') === '#f1efe8',
+    `${pathname}: browser theme color drifted`,
+  );
+
   const robotsMeta = metaTags(html, 'name', 'robots');
   assert(robotsMeta.length === 1, `${pathname}: expected exactly one robots meta tag`);
   assert(

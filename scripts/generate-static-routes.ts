@@ -82,7 +82,10 @@ function buildHead(route: SeoRoute, assetTags: string) {
     <noscript>
       <link rel="stylesheet" href="${FONT_STYLESHEET}" />
     </noscript>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#f1efe8" />
     <link rel="alternate" type="text/plain" title="LLMs text" href="/llms.txt" />
     <title>${escapeHtml(route.title)}</title>
     <meta name="description" content="${escapeHtml(route.description)}" />
