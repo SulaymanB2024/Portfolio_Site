@@ -101,7 +101,7 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
           </a>
         </div>
         <p className={`m-0 max-w-[92ch] border-t ${dividerClass} pt-3 text-[11px] normal-case leading-relaxed tracking-normal ${textMutedClass}`}>
-          Measurement disclosure: on the exact production host, this site may use a shared Google Analytics 4 portfolio property to record page paths and aggregate engagement across Sulayman Bowles projects. The site integration does not send form contents, names, email addresses, user IDs, or URL query strings. Google Signals and ad-personalization signals are disabled; Google may still process standard device, network, cookie, and referrer data. This configuration and wording require site-owner and privacy review before production and do not assert legal compliance.
+          Measurement disclosure: on an exact production host, this site may use Vercel Web Analytics, Vercel Speed Insights, and a shared Google Analytics 4 portfolio property to record page paths, fixed content-safe interaction labels, and aggregate performance or engagement. The site integration does not send typed content, names, email addresses, user IDs, URL query strings, or fragments. Google Signals and ad-personalization signals are disabled; the providers may still process standard device, network, cookie, performance, and referrer data. This configuration and wording require site-owner and privacy review and do not assert legal compliance.
         </p>
       </div>
     </footer>

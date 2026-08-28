@@ -83,7 +83,7 @@ export function usePageTransitions({
   normalizePath = identityNormalize,
   preloadPath,
   contactHash = '#contact',
-  hashFocusSelector = '#contact-name',
+  hashFocusSelector = '#footer-link-email',
 }: UsePageTransitionsOptions) {
   const isPopStateRef = useRef(false);
   const preloadedPathsRef = useRef(new Set<string>());

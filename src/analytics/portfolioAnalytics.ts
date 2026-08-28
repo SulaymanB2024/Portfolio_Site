@@ -1,3 +1,5 @@
+import { track as trackVercelEvent } from '@vercel/analytics';
+
 export const PORTFOLIO_HOSTS = [
   'www.void-agency.com',
   'sulayman-bowles.dev',
@@ -19,6 +21,7 @@ declare global {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
     __portfolioAnalyticsStarted?: boolean;
+    __portfolioCtaTrackingStarted?: boolean;
   }
 }
 
@@ -26,6 +29,44 @@ const MEASUREMENT_ID_PATTERN = /^G-[A-Z0-9]{6,20}$/;
 const SCRIPT_ID = 'portfolio-ga4-script';
 let lastPageViewKey = '';
 let pageViewScheduled = false;
+
+export const PORTFOLIO_CTA_METADATA = {
+  home_view_work: { surface: 'home', target: 'selected_work', kind: 'internal' },
+  home_start_project: { surface: 'home', target: 'contact', kind: 'internal' },
+  home_open_proof: { surface: 'home', target: 'featured_proof', kind: 'internal' },
+  home_email: { surface: 'home', target: 'email', kind: 'email' },
+  home_linkedin: { surface: 'home', target: 'linkedin', kind: 'external' },
+  home_resume: { surface: 'home', target: 'resume', kind: 'internal' },
+  home_github: { surface: 'home', target: 'github', kind: 'external' },
+  resume_download_pdf: { surface: 'resume', target: 'resume_pdf', kind: 'download' },
+  resume_email: { surface: 'resume', target: 'email', kind: 'email' },
+  resume_view_work: { surface: 'resume', target: 'selected_work', kind: 'internal' },
+  resume_read_research: { surface: 'resume', target: 'research', kind: 'internal' },
+  resume_supporting_link: { surface: 'resume', target: 'supporting_record', kind: 'mixed' },
+  research_view_work: { surface: 'research', target: 'selected_work', kind: 'internal' },
+  research_markets: { surface: 'research', target: 'markets', kind: 'internal' },
+  research_atlas: { surface: 'research', target: 'atlas', kind: 'internal' },
+  research_open_publication: { surface: 'research', target: 'publication', kind: 'internal' },
+  work_open_project: { surface: 'work', target: 'project', kind: 'mixed' },
+  work_open_evidence: { surface: 'work', target: 'evidence', kind: 'mixed' },
+  work_open_artifact: { surface: 'work', target: 'supporting_artifact', kind: 'internal' },
+  work_open_contact: { surface: 'work', target: 'contact', kind: 'internal' },
+  contact_email: { surface: 'contact', target: 'email', kind: 'email' },
+  contact_linkedin: { surface: 'contact', target: 'linkedin', kind: 'external' },
+  contact_resume: { surface: 'contact', target: 'resume', kind: 'internal' },
+  contact_github: { surface: 'contact', target: 'github', kind: 'external' },
+} as const;
+
+export type PortfolioCtaId = keyof typeof PORTFOLIO_CTA_METADATA;
+
+export type PortfolioCtaEvent = {
+  cta_id: PortfolioCtaId;
+  cta_surface: (typeof PORTFOLIO_CTA_METADATA)[PortfolioCtaId]['surface'];
+  destination: (typeof PORTFOLIO_CTA_METADATA)[PortfolioCtaId]['target'];
+  destination_kind: (typeof PORTFOLIO_CTA_METADATA)[PortfolioCtaId]['kind'];
+  page_path: string;
+  portfolio_site: PortfolioSite;
+};
 
 export function normalizePortfolioMeasurementId(value: unknown): string | null {
   if (typeof value !== 'string') return null;
@@ -61,6 +102,71 @@ export function sanitizePortfolioReferrer(value: unknown): string {
   } catch {
     return '';
   }
+}
+
+function isPortfolioCtaId(value: unknown): value is PortfolioCtaId {
+  return typeof value === 'string'
+    && Object.prototype.hasOwnProperty.call(PORTFOLIO_CTA_METADATA, value);
+}
+
+export function buildPortfolioCtaEvent(
+  ctaId: unknown,
+  hostname: string,
+  pathname: string,
+): PortfolioCtaEvent | null {
+  if (!isPortfolioCtaId(ctaId)) return null;
+  const portfolioSite = resolvePortfolioSite(hostname);
+  if (!portfolioSite) return null;
+  const metadata = PORTFOLIO_CTA_METADATA[ctaId];
+
+  return {
+    cta_id: ctaId,
+    cta_surface: metadata.surface,
+    destination: metadata.target,
+    destination_kind: metadata.kind,
+    page_path: sanitizePortfolioPath(pathname),
+    portfolio_site: portfolioSite,
+  };
+}
+
+function sendPortfolioCta(ctaId: unknown): void {
+  if (window.location.protocol !== 'https:') return;
+  const properties = buildPortfolioCtaEvent(
+    ctaId,
+    window.location.hostname,
+    window.location.pathname,
+  );
+  if (!properties) return;
+
+  try {
+    trackVercelEvent('portfolio_cta', properties);
+  } catch {
+    // Measurement must never interfere with the user's navigation.
+  }
+
+  try {
+    window.gtag?.('event', 'portfolio_cta', {
+      ...properties,
+      transport_type: 'beacon',
+    });
+  } catch {
+    // GA4 is optional and fails closed when unavailable or blocked.
+  }
+}
+
+export function startPortfolioCtaTracking(): boolean {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return false;
+  if (window.__portfolioCtaTrackingStarted) return false;
+  if (!resolvePortfolioSite(window.location.hostname) || window.location.protocol !== 'https:') return false;
+
+  window.__portfolioCtaTrackingStarted = true;
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+    const target = event.target.closest<HTMLElement>('[data-portfolio-cta]');
+    if (!target) return;
+    sendPortfolioCta(target.dataset.portfolioCta);
+  }, { capture: true });
+  return true;
 }
 
 function ensureGtag(measurementId: string): NonNullable<Window['gtag']> {

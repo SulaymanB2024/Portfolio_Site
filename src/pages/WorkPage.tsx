@@ -71,7 +71,7 @@ export default function WorkPage() {
                 </div>
 
                 <h2 className="mt-10 max-w-xl font-serif text-[2.8rem] italic leading-[0.92] tracking-normal text-canvas md:text-[4rem]">
-                  <a href={item.href} target={externalProject ? '_blank' : undefined} rel={externalProject ? 'noreferrer' : undefined} className="transition-opacity hover:opacity-72">
+                  <a href={item.href} data-portfolio-cta="work_open_project" target={externalProject ? '_blank' : undefined} rel={externalProject ? 'noreferrer' : undefined} className="transition-opacity hover:opacity-72">
                     {item.title}
                   </a>
                 </h2>
@@ -108,10 +108,10 @@ export default function WorkPage() {
                   </div>
                 </div>
                 <div className="mt-6 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
-                  <a href={item.href} target={externalProject ? '_blank' : undefined} rel={externalProject ? 'noreferrer' : undefined} className="inline-flex min-h-11 items-center border-b border-canvas/28 text-canvas/74 transition-colors hover:border-canvas hover:text-canvas">
+                  <a href={item.href} data-portfolio-cta="work_open_project" target={externalProject ? '_blank' : undefined} rel={externalProject ? 'noreferrer' : undefined} className="inline-flex min-h-11 items-center border-b border-canvas/28 text-canvas/74 transition-colors hover:border-canvas hover:text-canvas">
                     {item.projectLabel}
                   </a>
-                  <a href={item.evidenceHref} target={externalEvidence ? '_blank' : undefined} rel={externalEvidence ? 'noreferrer' : undefined} className="inline-flex min-h-11 items-center border-b border-accent/40 text-accent transition-colors hover:border-canvas hover:text-canvas">
+                  <a href={item.evidenceHref} data-portfolio-cta="work_open_evidence" target={externalEvidence ? '_blank' : undefined} rel={externalEvidence ? 'noreferrer' : undefined} className="inline-flex min-h-11 items-center border-b border-accent/40 text-accent transition-colors hover:border-canvas hover:text-canvas">
                     {item.evidenceLabel}
                   </a>
                 </div>
@@ -130,7 +130,7 @@ export default function WorkPage() {
         </div>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
           {supportingArtifacts.map((artifact) => (
-            <a key={artifact.href} href={artifact.href} className="group min-h-[220px] border border-canvas/14 p-5 transition-colors hover:bg-canvas hover:text-ink">
+            <a key={artifact.href} href={artifact.href} data-portfolio-cta="work_open_artifact" className="group min-h-[220px] border border-canvas/14 p-5 transition-colors hover:bg-canvas hover:text-ink">
               <h3 className="text-xs uppercase leading-relaxed tracking-[0.22em] text-inherit">{artifact.label}</h3>
               <p className="mt-6 text-sm leading-relaxed text-inherit opacity-70">{artifact.description}</p>
             </a>
@@ -163,6 +163,7 @@ export default function WorkPage() {
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-canvas/64">{item.answer}</p>
                 <a
                   href={item.href}
+                  data-portfolio-cta="work_open_artifact"
                   className="mt-5 inline-flex min-h-11 items-center border-b border-canvas/24 text-[10px] uppercase tracking-[0.2em] text-canvas/70 transition-colors hover:border-accent hover:text-accent"
                 >
                   {item.action}
@@ -192,6 +193,7 @@ export default function WorkPage() {
             </p>
             <a
               href="/contact"
+              data-portfolio-cta="work_open_contact"
               className="inline-flex min-h-11 w-fit items-center border border-canvas bg-canvas px-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink transition-colors hover:bg-accent"
             >
               Open direct contact

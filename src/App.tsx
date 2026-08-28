@@ -12,6 +12,7 @@ import { KineticTypography } from './components/KineticTypography';
 import { usePageTransitions } from './hooks/usePageTransitions';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
+import type { PortfolioCtaId } from './analytics/portfolioAnalytics';
 import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
 import { AI_MANAGERS_ARTICLE_PATH } from './content/aiManagersArticle';
 import { PROFILE_FACTS } from './content/profileFacts';
@@ -95,6 +96,12 @@ const homeProofItems = [
   { type: 'Markets', title: 'Texas Toll-Road Ownership', href: '/markets/who-owns-texas-toll-roads' },
 ];
 
+const homeContactLinks = [
+  { label: 'LinkedIn', href: PROFILE_FACTS.canonicalLinks.linkedin, ctaId: 'home_linkedin' },
+  { label: 'Résumé', href: '/resume', ctaId: 'home_resume' },
+  { label: 'GitHub', href: PROFILE_FACTS.canonicalLinks.github, ctaId: 'home_github' },
+] satisfies ReadonlyArray<{ label: string; href: string; ctaId: PortfolioCtaId }>;
+
 function isDarkRoute(path: string) {
   return getRouteTone(path) === 'dark';
 }
@@ -166,7 +173,7 @@ export default function App() {
     normalizePath,
     preloadPath: preloadRoute,
     contactHash: CONTACT_HASH,
-    hashFocusSelector: '#contact-name',
+    hashFocusSelector: '#footer-link-email',
   });
 
   useRouteBodyTheme({ currentPath, isDarkRoute });
@@ -529,6 +536,7 @@ function HomePage() {
                     <a
                       href="/work"
                       id="home-primary-work-link"
+                      data-portfolio-cta="home_view_work"
                       className="inline-flex min-h-11 items-center border border-ink bg-ink px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-canvas transition-colors hover:bg-accent hover:text-ink"
                     >
                       View selected work
@@ -536,6 +544,7 @@ function HomePage() {
                     <a
                       href="/contact"
                       id="home-primary-contact-link"
+                      data-portfolio-cta="home_start_project"
                       className="inline-flex min-h-11 items-center border border-ink/28 px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/72 transition-colors hover:border-ink hover:bg-ink hover:text-canvas"
                     >
                       Start a project
@@ -551,6 +560,7 @@ function HomePage() {
                     <a
                       key={item.href}
                       href={item.href}
+                      data-portfolio-cta="home_open_proof"
                       className="group grid min-h-12 grid-cols-[4.75rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-canvas/18 transition-colors hover:border-canvas/44 hover:bg-canvas/[0.035] md:grid-cols-[5.25rem_minmax(0,1fr)_auto]"
                     >
                       <span className="text-[8px] tracking-[0.22em] text-canvas/66">{item.type}</span>
@@ -1260,7 +1270,7 @@ function HomePage() {
                   ))}
                             </div>
                   <div className="pt-32 w-full flex justify-start md:justify-end">
-                    <a href="/work" id="discipline-view-work-link" className="inline-flex min-h-11 items-center border-b border-ink/30 text-[10px] font-sans uppercase tracking-widest text-ink transition-colors hover:border-ink">Explore all work ↗</a>
+                    <a href="/work" id="discipline-view-work-link" data-portfolio-cta="home_view_work" className="inline-flex min-h-11 items-center border-b border-ink/30 text-[10px] font-sans uppercase tracking-widest text-ink transition-colors hover:border-ink">Explore all work ↗</a>
                   </div>
                </div>
             </div>
@@ -1277,6 +1287,7 @@ function HomePage() {
             <a
               href="mailto:sulayman.bowles@gmail.com"
               id="footer-link-email"
+              data-portfolio-cta="home_email"
               className="group inline-flex w-fit max-w-full items-end gap-4 font-serif text-6xl italic leading-[0.8] tracking-normal transition-colors duration-200 hover:text-ink/58 motion-reduce:transition-none sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[11rem]"
             >
               <span>Email.</span>
@@ -1285,17 +1296,14 @@ function HomePage() {
             </a>
 
             <nav className="mt-16 grid border-y border-ink/14 sm:grid-cols-3" aria-label="Contact links">
-              {[
-                ['LinkedIn', PROFILE_FACTS.canonicalLinks.linkedin],
-                ['Résumé', '/resume'],
-                ['GitHub', PROFILE_FACTS.canonicalLinks.github],
-              ].map(([label, href], index) => {
+              {homeContactLinks.map(({ label, href, ctaId }, index) => {
                 const external = href.startsWith('http');
 
                 return (
                   <a
                     key={href}
                     href={href}
+                    data-portfolio-cta={ctaId}
                     target={external ? '_blank' : undefined}
                     rel={external ? 'noreferrer' : undefined}
                     className="group flex min-h-20 items-center justify-between gap-5 border-b border-ink/14 px-4 text-[10px] uppercase tracking-[0.24em] text-ink/64 transition-colors duration-200 last:border-b-0 hover:bg-ink hover:text-canvas motion-reduce:transition-none sm:border-b-0 sm:border-r sm:last:border-r-0"

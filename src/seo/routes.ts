@@ -284,7 +284,7 @@ const CORE_ROUTES: SeoRoute[] = [
     includeInSitemap: true,
     lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Direct contact and a compact brief for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and research.',
+      'Direct email and profile links for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: contactJsonLd(),
   },
