@@ -817,8 +817,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${linkList([
           { label: 'Email Sulayman Bowles', href: 'mailto:sulayman.bowles@gmail.com', description: 'Primary contact path.' },
         ])}
-        <h2>Brief Form</h2>
-        <p>The public brief form is secondary to direct contact. It is useful when the site URL, suspected problem, and decision the work needs to support are already clear.</p>
+        <h2>Prepare a Direct Brief</h2>
+        <p>An initial email is most useful when it names the site or product surface, the suspected problem, and the decision the work needs to support.</p>
         ${definitionCards(contactIntakeNotes.map((item) => [item.label, item.description]))}
         <p>Do not include passwords, API keys, payment details, unreleased client data, or production secrets.</p>
         <h2>Decision Gates</h2>

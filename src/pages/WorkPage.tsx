@@ -188,13 +188,13 @@ export default function WorkPage() {
           </div>
           <div>
             <p className="mb-5 max-w-sm text-xs leading-relaxed text-canvas/54">
-              No credentials in the form. Public method and sample evidence remain open for review.
+              Do not send credentials or sensitive client data in the first email. Public method and sample evidence remain open for review.
             </p>
             <a
-              href="/contact#contact-brief-panel"
+              href="/contact"
               className="inline-flex min-h-11 w-fit items-center border border-canvas bg-canvas px-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink transition-colors hover:bg-accent"
             >
-              Start an evidence brief
+              Open direct contact
             </a>
           </div>
         </div>
