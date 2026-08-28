@@ -179,11 +179,11 @@ The public authority asset index currently lists 13 assets:
 
 1. Research Asset Index: `https://sulayman-bowles.dev/research`
 2. Project Work Index: `https://sulayman-bowles.dev/work`
-3. Crawler Policy Comes Before Visibility: `https://sulayman-bowles.dev/markets/ai-search-crawler-policy`
+3. AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot: `https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy`
 4. Atlas Sample Crawl Run: `https://sulayman-bowles.dev/atlas/sample-crawl`
 5. Atlas SEO Audit Console: `https://sulayman-bowles.dev/atlas`
-6. Technical SEO as Public Data Infrastructure: `https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure`
-7. Canonical Identity for Personal SEO: `https://sulayman-bowles.dev/markets/canonical-identity-personal-seo`
+6. Technical SEO as Public Data Infrastructure: `https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure`
+7. Canonical Identity for Personal SEO: `https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo`
 8. Technical SEO Audit Case Study: `https://sulayman-bowles.dev/case-studies/technical-seo-audit`
 9. Austin Technical SEO: `https://sulayman-bowles.dev/austin-technical-seo`
 10. Austin Crawlability Benchmark Pilot: `https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv`
@@ -357,7 +357,7 @@ Suggested data to pull before a serious next plan:
 
 - GSC Performance: queries, pages, countries, devices, search appearance, date range comparison, branded vs non-branded split.
 - GSC Pages/Indexing and Sitemap reports.
-- URL Inspection for core pages: `/`, `/about`, `/resume`, `/atlas`, `/method`, `/research`, `/ai-information`, `/austin-technical-seo`, `/markets/ai-search-crawler-policy`.
+- URL Inspection for core pages: `/`, `/about`, `/resume`, `/atlas`, `/method`, `/research`, `/ai-information`, `/austin-technical-seo`, `/research/ai-crawlers/ai-search-crawler-policy`.
 - GSC Links report.
 - Bing Webmaster Tools: sitemap, URL submission/IndexNow status, backlinks, crawl/indexation issues.
 - Ahrefs or similar: DR, referring domains, linked pages, anchors, new/lost links.
@@ -458,7 +458,7 @@ Result:
 ## Recommended Questions for the Stronger Model
 
 1. What should be the next 30-day SEO plan, split into measurement, content, technical, and authority work?
-2. Which current pages are most likely to earn non-branded impressions: `/method`, `/austin-technical-seo`, `/atlas`, `/atlas/sample-crawl`, `/markets/ai-search-crawler-policy`, `/research`, or `/case-studies/technical-seo-audit`?
+2. Which current pages are most likely to earn non-branded impressions: `/method`, `/austin-technical-seo`, `/atlas`, `/atlas/sample-crawl`, `/research/ai-crawlers/ai-search-crawler-policy`, `/research`, or `/case-studies/technical-seo-audit`?
 3. Which assets should be strengthened before outreach so they can earn legitimate editorial links?
 4. Should the Austin crawlability pilot be expanded into a proper public report, and if so, what sample size, methodology, and claim boundaries should it use?
 5. What data exports should be pulled from GSC, GA4, Bing, Ahrefs, and server logs before deciding content priorities?
@@ -485,7 +485,7 @@ Current state:
 - Site has route-specific static HTML, sitemap, robots, JSON-LD, canonical URLs, visible fallback content, `llms.txt`, `/ai-information`, public source graph, public research assets, and authority/link-building docs.
 - Canonical identity is `https://sulayman-bowles.dev/ai-information#sulayman-bowles`.
 - Current thesis is UT Austin McCombs, Atlas, technical SEO/search visibility, Void Agency, and finance research.
-- Authority assets include `/research`, `/atlas`, `/atlas/sample-crawl`, `/markets/ai-search-crawler-policy`, `/markets/technical-seo-public-data-infrastructure`, `/markets/canonical-identity-personal-seo`, `/case-studies/technical-seo-audit`, `/austin-technical-seo`, `/ai-information`, `/markets`, and `/resume`.
+- Authority assets include `/research`, `/atlas`, `/atlas/sample-crawl`, `/research/ai-crawlers/ai-search-crawler-policy`, `/research/search-console/technical-seo-public-data-infrastructure`, `/research/personal-seo/canonical-identity-personal-seo`, `/case-studies/technical-seo-audit`, `/austin-technical-seo`, `/ai-information`, `/markets`, and `/resume`.
 - Current live validation passed for research hub, authority JSON, `llms.txt`, sitemap, crawler-policy source CSV, Austin benchmark CSV, and Austin benchmark summary JSON.
 - Current external-link verification passed for 24 verified rows with 0 failures; most are owned GitHub/profile surfaces and many are nofollow.
 - Austin crawlability pilot has 12 companies, 100% homepage fetch/title/meta/canonical/JSON-LD/robots availability, 11/12 H1 present, 10/12 robots-declared sitemap, 10/12 sitemap 2xx/3xx, and 6/12 measurement gaps.

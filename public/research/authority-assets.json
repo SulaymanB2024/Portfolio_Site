@@ -1,153 +1,599 @@
 {
-  "generated_at": "2026-07-11",
+  "generated_at": "2026-07-26",
   "canonical_host": "https://sulayman-bowles.dev",
-  "objective": "Public index of useful pages and files for technical SEO, crawler policy, Atlas, identity context, infrastructure, and markets research links.",
-  "limits": [
-    "This file does not claim rankings, indexing, traffic movement, revenue impact, AI citations, or Ahrefs Domain Rating movement.",
-    "Private client names and private outcomes are intentionally excluded.",
-    "Crawler access and reference files are discovery signals, not authority or visibility guarantees.",
-    "Links should be earned editorially; paid, exchanged, automated, or low-quality placements should not be counted as campaign wins."
+  "objective": "Topical authority index for source-led technical SEO, crawler, AI-agent, data-system, and infrastructure research.",
+  "claim_boundaries": [
+    "The index does not claim rankings, indexing, traffic movement, revenue impact, backlinks, Domain Rating movement, or AI citations.",
+    "Outreach targets are editorial-fit candidates, not promised placements.",
+    "Preferred anchors are descriptive suggestions only; publishers retain editorial control and forced exact-match anchors are prohibited.",
+    "Private clients, private outcomes, and unsupported performance claims are intentionally excluded.",
+    "Artifacts preserve verification dates and evidence limits; publication dates are not changed merely to signal freshness."
   ],
   "assets": [
     {
       "priority": 1,
-      "name": "Research Asset Index",
+      "name": "Research Notes",
       "url": "https://sulayman-bowles.dev/research",
       "type": "research_hub",
-      "preferred_anchor": "technical SEO research files",
-      "audiences": ["technical SEO", "search visibility", "web developers", "student founder profiles"],
-      "pitch_angle": "Browsable index of technical SEO notes, Atlas samples, local crawlability work, identity context, and markets research files.",
-      "supporting_assets": ["https://sulayman-bowles.dev/research/authority-assets.json", "https://sulayman-bowles.dev/ai-information"]
-    },
-    {
-      "priority": 2,
-      "name": "Project Work Index",
-      "url": "https://sulayman-bowles.dev/work",
-      "type": "project_collection",
-      "preferred_anchor": "Sulayman Bowles project work",
-      "audiences": ["project reviewers", "student profiles", "software builders", "technical portfolio readers"],
-      "pitch_angle": "Current project surface for public engineering, research, markets, and technical SEO work without implying external validation.",
-      "supporting_assets": ["https://sulayman-bowles.dev/research", "https://sulayman-bowles.dev/ai-information"]
+      "cluster": "all",
+      "preferred_anchor": "Sulayman Bowles research notes",
+      "pitch_angle": "A crawlable hub connecting source-led articles, public artifacts, methodology, and explicit claim boundaries.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json"
+      ]
     },
     {
       "priority": 1,
-      "name": "Crawler Policy Comes Before Visibility",
-      "url": "https://sulayman-bowles.dev/markets/ai-search-crawler-policy",
-      "type": "research_note",
-      "preferred_anchor": "crawler policy for public websites",
-      "audiences": ["technical SEO", "search visibility", "web developers", "search policy writers"],
-      "pitch_angle": "Map of search, training, and user-requested retrieval crawlers with conservative visibility limits.",
-      "supporting_assets": ["https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv"]
+      "name": "Technical SEO Diagnostic Library",
+      "url": "https://sulayman-bowles.dev/research/technical-seo",
+      "type": "research_hub",
+      "cluster": "technical-seo",
+      "preferred_anchor": "technical SEO diagnostic library",
+      "pitch_angle": "Forty issue, platform, checklist, and collection routes governed by evidence, false-positive, repair, and rerun contracts.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json"
+      ]
     },
     {
       "priority": 1,
-      "name": "Who Owns the Toll Roads in Texas?",
-      "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
-      "type": "long_form_research",
-      "preferred_anchor": "Texas toll road ownership and economics",
-      "audiences": ["infrastructure investing", "Texas transportation", "public finance", "project finance"],
-      "pitch_angle": "Source-led ownership map separating state title, public authorities, private concession rights, sponsor equity, project debt, billing, and residual control across Texas toll roads.",
-      "supporting_assets": ["https://sulayman-bowles.dev/markets", "https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure"]
+      "name": "Next.js Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "Next.js technical SEO",
+      "pitch_angle": "A platform-specific Next.js technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://nextjs.org/docs/app/getting-started/metadata-and-og-images",
+        "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+      ]
     },
     {
       "priority": 1,
-      "name": "Atlas Sample Crawl Run",
-      "url": "https://sulayman-bowles.dev/atlas/sample-crawl",
-      "type": "sample_data",
-      "preferred_anchor": "Atlas sample crawl run",
-      "audiences": ["technical SEO", "crawlability", "open-source SEO tooling", "audit workflow writers"],
-      "pitch_angle": "Sanitized crawl sample showing URL status, indexability, crawl depth, link counts, canonical state, issue labels, and CSV rows.",
-      "supporting_assets": ["https://sulayman-bowles.dev/research/atlas-sanitized-crawl-sample.csv"]
+      "name": "React and Vite Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "React Vite SEO",
+      "pitch_angle": "A platform-specific React Vite SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://vite.dev/guide/ssr",
+        "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+      ]
     },
     {
       "priority": 1,
-      "name": "Atlas SEO Audit Console",
-      "url": "https://sulayman-bowles.dev/atlas",
-      "type": "project_page",
-      "preferred_anchor": "Atlas SEO Audit Console",
-      "audiences": ["technical SEO", "software builders", "student founders", "web audit teams"],
-      "pitch_angle": "Crawl system for indexation, internal links, canonicals, structured data, rendered HTML, and audit exports.",
-      "supporting_assets": ["https://github.com/SulaymanB2024/Thick-Scraper-VOID-"]
+      "name": "WordPress Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "WordPress technical SEO",
+      "pitch_angle": "A platform-specific WordPress technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://developer.wordpress.org/reference/functions/rel_canonical/",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ]
     },
     {
-      "priority": 2,
+      "priority": 1,
+      "name": "Shopify Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/shopify",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "Shopify technical SEO",
+      "pitch_angle": "A platform-specific Shopify technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://help.shopify.com/en/manual/promoting-marketing/seo/seo-overview",
+        "https://developers.google.com/search/docs/specialty/ecommerce/designing-a-url-structure-for-ecommerce-sites"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Webflow Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/webflow",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "Webflow technical SEO",
+      "pitch_angle": "A platform-specific Webflow technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://help.webflow.com/hc/en-us/articles/33961237278611-Add-SEO-title-and-meta-description",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Squarespace Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/squarespace",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "Squarespace technical SEO",
+      "pitch_angle": "A platform-specific Squarespace technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://support.squarespace.com/hc/en-us/articles/360002090267-SEO-checklist",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Wix Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/wix",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "Wix technical SEO",
+      "pitch_angle": "A platform-specific Wix technical SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://www.wix.com/seo/learn/resource/technical-seo-101",
+        "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Headless CMS Technical SEO Guide",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/headless-cms",
+      "type": "technical_seo_cornerstone",
+      "cluster": "technical-seo-platforms",
+      "preferred_anchor": "headless CMS SEO",
+      "pitch_angle": "A platform-specific headless CMS SEO reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/technical-seo-reference-index.json",
+        "https://web.dev/articles/rendering-on-the-web",
+        "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "The First AI Managers",
+      "url": "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
+      "type": "source_led_article",
+      "cluster": "ai-systems",
+      "preferred_anchor": "The First AI Managers",
+      "pitch_angle": "Separate live businesses, pilots, simulations, and vendor claims instead of treating every autonomy demonstration as equivalent evidence.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "The AI Megawatt Is Not a Megawatt",
+      "url": "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+      "type": "source_led_article",
+      "cluster": "ai-systems",
+      "preferred_anchor": "The AI Megawatt Is Not a Megawatt",
+      "pitch_angle": "Replace one-ratio gigawatt-to-GPU estimates with an explicit capacity ladder, sensitivity range, and boundary-specific evidence requirements.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature",
+      "url": "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+      "type": "source_led_article",
+      "cluster": "data-systems",
+      "preferred_anchor": "The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature",
+      "pitch_angle": "Separate disclosed finished-magnet nameplate from qualified output, upstream-only material capacity, ambiguous units, and demand denominators.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench",
+      "url": "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+      "type": "source_led_article",
+      "cluster": "ai-systems",
+      "preferred_anchor": "Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench",
+      "pitch_angle": "Connect a live agent environment to concrete engineering controls rather than describing evaluation as a prompt-only scoring exercise.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
+      "url": "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
+      "type": "source_led_article",
+      "cluster": "ai-crawlers",
+      "preferred_anchor": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
+      "pitch_angle": "Keep search, training, and user-requested retrieval agents distinct and tie every directive to provider documentation and a dated source map.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+      ]
+    },
+    {
+      "priority": 1,
       "name": "Technical SEO as Public Data Infrastructure",
-      "url": "https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure",
-      "type": "research_note",
-      "preferred_anchor": "technical SEO as public data infrastructure",
-      "audiences": ["technical SEO", "data infrastructure", "public discovery", "structured data"],
-      "pitch_angle": "Editorial bridge between crawlability, structured data, provenance, source consistency, and public records.",
-      "supporting_assets": []
+      "url": "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+      "type": "source_led_article",
+      "cluster": "search-console",
+      "preferred_anchor": "Technical SEO as Public Data Infrastructure",
+      "pitch_angle": "Treat technical SEO as a governed data system with provenance and failure states, not as a sequence of opaque exports and scores.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy"
+      ]
     },
     {
       "priority": 2,
-      "name": "Canonical Identity for Personal SEO",
-      "url": "https://sulayman-bowles.dev/markets/canonical-identity-personal-seo",
-      "type": "research_note",
-      "preferred_anchor": "canonical identity for personal SEO",
-      "audiences": ["personal SEO", "founder profiles", "structured data", "profile cleanup"],
-      "pitch_angle": "Reconciliation checklist for profile pages, stale PDFs, sameAs links, source pages, and external bio consistency.",
-      "supporting_assets": []
+      "name": "Canonical Identity Beats More Content",
+      "url": "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
+      "type": "source_led_article",
+      "cluster": "personal-seo",
+      "preferred_anchor": "Canonical Identity Beats More Content",
+      "pitch_angle": "Provide an operational identity-reconciliation method that distinguishes controlled sources, corroborating profiles, stale records, and unsupported sameAs claims.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+        "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Where Do Online Returns Go? Inside Reverse Logistics",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Where Do Online Returns Go? Inside Reverse Logistics",
+      "pitch_angle": "Answer the cross-retailer question with product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing one retailer or one universal returns process.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "What Happens When an Index Decides a Company Matters?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "What Happens When an Index Decides a Company Matters?",
+      "pitch_angle": "Connect provider governance, eligibility rules, fund mandates, source-index offsets, closing-auction mechanics, event-study evidence, and cost-of-capital limits instead of treating headline benchmark assets as forced one-day buying.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "How Airlines Borrow Against Loyalty Programs",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "How Airlines Borrow Against Loyalty Programs",
+      "pitch_angle": "Separate consumer card spending, issuer partner payments, deferred-revenue accounting, award fulfillment, operating float, and the lender-controlled cash waterfall instead of calling airline miles deposits or treating every partner payment as debt.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Hardware Startup Financing: Five Capital Stacks",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Hardware Startup Financing: Five Capital Stacks",
+      "pitch_angle": "Replace generic funding-option lists with five real company capital stacks organized by asset owner, payment source, recourse, utilization exposure, and loss allocation.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Who Funds Waymo’s Hardware?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Who Funds Waymo’s Hardware?",
+      "pitch_angle": "Separate fundraising from physical-asset financing, legal ownership, residual value, utilization risk, and the party that absorbs losses.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Who Owns West Campus Student Housing?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Who Owns West Campus Student Housing?",
+      "pitch_angle": "Trace a student installment through the operating statement, acquisition basis, capital stack, refinancing test, and loss waterfall while keeping reported facts separate from modeled assumptions.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Who Owns Austin’s Home-Service Companies?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "Who Owns Austin’s Home-Service Companies?",
+      "pitch_angle": "Separate the consumer brand, legal operator, platform, franchise relationship, controlling owner, minority investor, and transaction date while keeping brand-count evidence distinct from market share.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
+      "url": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+      "type": "source_led_article",
+      "cluster": "who-owns-texas-toll-roads",
+      "preferred_anchor": "Texas toll-road ownership and concession guide",
+      "pitch_angle": "Separate physical ownership from concession rights, operators, lenders, revenue claims, and residual control using project-level public records.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/texas-toll-road-ownership-2026.csv",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+        "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo"
+      ]
     },
     {
       "priority": 2,
-      "name": "Technical SEO Audit Case Study",
-      "url": "https://sulayman-bowles.dev/case-studies/technical-seo-audit",
-      "type": "case_study",
-      "preferred_anchor": "technical SEO audit case study",
-      "audiences": ["technical SEO", "client reporting", "crawl data", "web teams"],
-      "pitch_angle": "Sanitized explanation of how crawl data becomes findings, priorities, and implementation notes without private client claims.",
-      "supporting_assets": ["https://sulayman-bowles.dev/research/atlas-sanitized-crawl-sample.csv"]
+      "name": "The Crawl Frontier Is a State Machine, Not a Queue",
+      "url": "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
+      "type": "source_led_article",
+      "cluster": "crawler-engineering",
+      "preferred_anchor": "The Crawl Frontier Is a State Machine, Not a Queue",
+      "pitch_angle": "Move beyond queue tutorials by defining identity, state invariants, host scheduling, crawl-trap bounds, and recovery evidence together.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+        "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Raw HTML and Rendered DOM Are Separate Evidence",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
+      "type": "source_led_article",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Raw HTML and Rendered DOM Are Separate Evidence",
+      "pitch_angle": "Define a reproducible evidence envelope and failure taxonomy instead of reducing the comparison to screenshots or a binary JavaScript check.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
+        "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Canonicalization Is a Graph Consistency Problem",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+      "type": "source_led_article",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Canonicalization Is a Graph Consistency Problem",
+      "pitch_angle": "Evaluate canonical signals as one directed graph and expose conflicts mechanically instead of checking each tag in isolation.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
+        "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Internal Links Are a Directed Retrieval Graph",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
+      "type": "source_led_article",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Internal Links Are a Directed Retrieval Graph",
+      "pitch_angle": "Connect graph measures to user journeys and crawl evidence instead of presenting PageRank-like scores without inspectable edges.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Robots.txt Is a Courtesy Layer, Not Access Control",
+      "url": "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+      "type": "source_led_article",
+      "cluster": "ai-crawlers",
+      "preferred_anchor": "Robots.txt Is a Courtesy Layer, Not Access Control",
+      "pitch_angle": "Show the complete control stack and failure modes instead of repeating that robots.txt is voluntary without an implementation boundary.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Structured Data Without Content Drift",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
+      "type": "source_led_article",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Structured Data Without Content Drift",
+      "pitch_angle": "Treat structured-data accuracy as a source-of-truth and release-contract problem rather than a one-time schema markup task.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
+        "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates"
+      ]
     },
     {
       "priority": 3,
+      "name": "Audit Findings Should Be Derived Records",
+      "url": "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+      "type": "source_led_article",
+      "cluster": "data-systems",
+      "preferred_anchor": "Audit Findings Should Be Derived Records",
+      "pitch_angle": "Define a derivation and review contract for findings instead of presenting severity labels without their source records.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation"
+      ]
+    },
+    {
+      "priority": 3,
+      "name": "Replayable Traces for Evaluating Tool-Using AI Agents",
+      "url": "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
+      "type": "source_led_article",
+      "cluster": "ai-systems",
+      "preferred_anchor": "Replayable Traces for Evaluating Tool-Using AI Agents",
+      "pitch_angle": "Join trace completeness, replay limits, independent grading, and promotion evidence in one inspectable evaluation contract.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+        "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers"
+      ]
+    },
+    {
+      "priority": 3,
+      "name": "SQLite for Crawl Pipelines: Idempotency, WAL, and Bounded Concurrency",
+      "url": "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
+      "type": "source_led_article",
+      "cluster": "data-systems",
+      "preferred_anchor": "SQLite for Crawl Pipelines: Idempotency, WAL, and Bounded Concurrency",
+      "pitch_angle": "Specify the concurrency and recovery envelope where SQLite is useful instead of arguing that it is either universally sufficient or never production-ready.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+        "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine"
+      ]
+    },
+    {
+      "priority": 3,
+      "name": "Technical SEO Migrations Need Executable Release Gates",
+      "url": "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
+      "type": "source_led_article",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Technical SEO Migrations Need Executable Release Gates",
+      "pitch_angle": "Turn migration advice into fail-closed release gates with artifacts, owners, tolerances, and rollback evidence.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
+        "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Atlas Open-Corpus Demonstration",
+      "url": "https://sulayman-bowles.dev/atlas/sample-crawl",
+      "type": "public_demonstration",
+      "cluster": "crawler-engineering",
+      "preferred_anchor": "Atlas open-corpus crawl demonstration",
+      "pitch_angle": "A bounded public crawl dataset with raw evidence, runtime indicators, and an explicit measurement boundary.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.csv",
+        "https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.json"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "Atlas technical SEO audit software",
+      "url": "https://sulayman-bowles.dev/atlas",
+      "type": "canonical_site_asset",
+      "cluster": "crawler-engineering",
+      "preferred_anchor": "Atlas crawl evidence system",
+      "pitch_angle": "A product page connecting crawl contracts, evidence preservation, review states, and public demonstration artifacts.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
+    },
+    {
+      "priority": 1,
       "name": "Austin Technical SEO",
       "url": "https://sulayman-bowles.dev/austin-technical-seo",
-      "type": "local_service_page",
-      "preferred_anchor": "Austin technical SEO",
-      "audiences": ["Austin startups", "local business", "student entrepreneurship", "B2B web teams"],
-      "pitch_angle": "Local technical SEO page for crawlability, indexation, page clarity, and implementation detail.",
-      "supporting_assets": ["https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv", "https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json"]
+      "type": "canonical_site_asset",
+      "cluster": "technical-seo",
+      "preferred_anchor": "Austin technical SEO audit services",
+      "pitch_angle": "A locally scoped technical SEO service page with a bounded public crawlability benchmark.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
     },
     {
-      "priority": 3,
-      "name": "Austin Crawlability Benchmark Pilot",
-      "url": "https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv",
-      "type": "public_data_asset",
-      "preferred_anchor": "Austin crawlability benchmark pilot",
-      "audiences": ["Austin startups", "local business media", "technical SEO", "public web infrastructure"],
-      "pitch_angle": "Bounded public crawlability signal sample for Austin-area technology and business websites with explicit measurement limits.",
-      "supporting_assets": ["https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json", "https://sulayman-bowles.dev/austin-technical-seo"]
+      "priority": 1,
+      "name": "Void Agency Method",
+      "url": "https://sulayman-bowles.dev/method",
+      "type": "canonical_site_asset",
+      "cluster": "technical-seo",
+      "preferred_anchor": "technical SEO audit method",
+      "pitch_angle": "A fixed-scope audit method organized around crawl evidence, implementation priorities, and reviewable handoff.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
     },
     {
-      "priority": 3,
-      "name": "AI Information Source Record",
-      "url": "https://sulayman-bowles.dev/ai-information",
-      "type": "reference_page",
-      "preferred_anchor": "Sulayman Bowles reference page",
-      "audiences": ["profile pages", "profile reviewers", "identity reconciliation", "external bios"],
-      "pitch_angle": "Reference page for current identity, source roles, project context, and what not to infer.",
-      "supporting_assets": ["https://sulayman-bowles.dev/llms.txt"]
-    },
-    {
-      "priority": 3,
-      "name": "Markets Research",
+      "priority": 2,
+      "name": "Markets and Investing",
       "url": "https://sulayman-bowles.dev/markets",
-      "type": "research_collection",
-      "preferred_anchor": "Markets Research",
-      "audiences": ["markets research", "student profiles", "markets writing", "research portfolios"],
-      "pitch_angle": "Public finance and data reasoning archive with market research notes, thesis framing, source tables, and explicit limits.",
-      "supporting_assets": ["https://sulayman-bowles.dev/research/appian-enterprise-software-durability-memo.pdf", "https://sulayman-bowles.dev/research/appian-assumptions-table.csv"]
+      "type": "canonical_site_asset",
+      "cluster": "infrastructure",
+      "preferred_anchor": "markets and infrastructure research",
+      "pitch_angle": "A finance-only research filter with visible assumptions, ownership evidence, and recommendation boundaries.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
     },
     {
-      "priority": 3,
-      "name": "HTML Resume",
+      "priority": 2,
+      "name": "Resume",
       "url": "https://sulayman-bowles.dev/resume",
-      "type": "profile_page",
+      "type": "canonical_site_asset",
+      "cluster": "identity",
       "preferred_anchor": "Sulayman Bowles resume",
-      "audiences": ["academic profiles", "professional profiles", "speaker bios", "student founder profiles"],
-      "pitch_angle": "Current HTML-first resume connecting UT Austin McCombs, Atlas, Void Agency, technical SEO, finance research, public code, and professional profiles.",
-      "supporting_assets": ["https://sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf"]
+      "pitch_angle": "The current canonical résumé and professional history source.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "Selected Work",
+      "url": "https://sulayman-bowles.dev/work",
+      "type": "canonical_site_asset",
+      "cluster": "identity",
+      "preferred_anchor": "Sulayman Bowles technical portfolio",
+      "pitch_angle": "A selected-work index linking public software, research, and implementation evidence.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "About Sulayman Bowles",
+      "url": "https://sulayman-bowles.dev/about",
+      "type": "canonical_site_asset",
+      "cluster": "identity",
+      "preferred_anchor": "about Sulayman Bowles",
+      "pitch_angle": "The canonical public identity page with current work, education, controlled profiles, and evidence boundaries.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research"
+      ]
     }
   ]
 }

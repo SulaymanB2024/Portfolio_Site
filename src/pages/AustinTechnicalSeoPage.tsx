@@ -29,13 +29,6 @@ const austinArtifactItems = austinSeoSignals.slice(0, 4).map((signal, index) => 
   label: `Signal ${String(index + 1).padStart(2, '0')}`,
   value: signal,
 }));
-const localReviewDetails = [
-  'Review whether Austin service, product, location, and proof pages are reachable from normal internal paths and represented by stable canonical URLs.',
-  'Check whether the page explains who the business serves, what is offered, how to contact the owner, and which public evidence supports the claim.',
-  'Sample concrete local intents such as emergency HVAC repair, foundation repair estimates, dentists near Mueller, and med spa consultations to see whether page copy and tracking match the query.',
-  'Use Search Console, analytics, and Google Business Profile data only when access is available; do not infer private performance from public crawl output.',
-];
-
 const austinDeliverables = [
   'A short URL-level issue list with observed fields, affected pages, severity, and implementation notes.',
   'A crawlability and source-clarity review covering robots.txt, sitemap, canonicals, structured data, internal links, and page copy.',
@@ -49,18 +42,23 @@ const austinBuyerFit = [
   'Operators who want a short implementation list, not a broad SEO retainer or vague visibility score.',
 ];
 
-const austinCommonProblems = [
-  'Important service pages exist, but they are buried behind weak navigation, duplicate paths, or thin location-page templates.',
-  'The page says what the business does, but the title, H1, internal links, schema, and CTA path do not reinforce the same service intent.',
-  'Google Business Profile, Search Console, analytics, and site pages are not connected cleanly enough to tell what changed after a fix.',
-  'The site has useful proof, reviews, case notes, or local context, but those signals are not visible on the pages that need to convert.',
-];
-
-const austinSampleOutput = [
-  'URL, template, crawl depth, indexability state, canonical target, and internal-link count.',
-  'Observed issue, affected evidence, likely owner, implementation note, and rerun check.',
-  'Local-intent note that ties the page to a query family, proof block, CTA path, and measurement field.',
-  'Claim boundary showing what the crawl proves, what analytics would need to confirm, and what should not be inferred.',
+const austinAuditCoverage = [
+  {
+    title: 'Crawlability and indexation audit',
+    copy: 'Review robots.txt, XML sitemaps, status codes, redirects, canonicals, noindex rules, crawl paths, and whether priority Austin service pages are discoverable.',
+  },
+  {
+    title: 'JavaScript rendering and templates',
+    copy: 'Compare raw and rendered HTML, inspect page templates, and identify content, links, metadata, or structured data that depend on client-side rendering.',
+  },
+  {
+    title: 'Site architecture and internal links',
+    copy: 'Map crawl depth, orphan risk, navigation, anchor text, service-page relationships, and internal links supporting local commercial intent.',
+  },
+  {
+    title: 'Structured data and AI search readiness',
+    copy: 'Review entity clarity, schema, public source files, crawler access, and the evidence that search engines and AI answer systems can inspect.',
+  },
 ];
 
 const austinWhenNotToHire = [
@@ -84,26 +82,26 @@ export default function AustinTechnicalSeoPage() {
           <div className="self-end">
             <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-current/48">Austin technical SEO</p>
             <h1 className="max-w-6xl font-serif text-[3.8rem] md:text-[6.5rem] xl:text-[9rem] italic leading-[0.84] tracking-normal">
-              Austin technical SEO and search visibility.
+              Austin technical SEO consultant.
             </h1>
             <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/64 lg:mt-10">
-              Based in Austin, I run fixed-scope reviews for teams that need crawlability, indexation, structured data, page clarity, and technical search issues checked before broader content or growth work.
+              Based in Austin, I run fixed-scope technical SEO audits for teams that need crawlability, indexation, JavaScript rendering, internal links, structured data, local service pages, analytics, and implementation checked before broader growth work.
             </p>
             <div className="mt-8 max-w-3xl border border-current/14 bg-current/[0.035] p-5">
               <p className="mb-3 text-[10px] uppercase tracking-[0.24em] text-current/46">Short answer</p>
               <p className="text-sm leading-relaxed text-current/66">
-                Austin technical SEO is the review of whether a local service page can be crawled, understood, trusted, and measured for a specific service intent before anyone publishes more pages or claims visibility gains.
+                An Austin technical SEO consultant checks whether priority service pages can be crawled, indexed, understood, internally supported, and measured before anyone expands content or claims local visibility gains.
               </p>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-5 lg:mt-10">
               <PrimaryCTA href="/contact" className="text-accent hover:text-[var(--page-bg)]">
-                Request a fixed-scope review
+                Request an Austin technical SEO audit
               </PrimaryCTA>
               <TextLink href="/method" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
                 Read the technical SEO audit method
               </TextLink>
               <TextLink href="/atlas/sample-crawl" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
-                See an Atlas sample crawl run
+                See the Atlas open-corpus demonstration
               </TextLink>
               <TextLink href="/research/austin-crawlability-benchmark-pilot.csv" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
                 Download the Austin crawlability pilot
@@ -114,13 +112,29 @@ export default function AustinTechnicalSeoPage() {
           <DarkProofArtifactPanel
             className="self-center max-md:-mt-4 lg:ml-auto"
             eyebrow="Local audit stack"
-            title="Site checks before local SEO claims."
-            summary="The page keeps the Austin frame tied to crawlable pages, clear services, and implementation evidence."
+            title="Technical SEO checks before local ranking claims."
+            summary="The Austin audit stays tied to crawlable service pages, clear entities, inspectable evidence, and implementation work."
             items={austinArtifactItems}
             footer="Public page review first. Analytics and Search Console only when access is available."
           />
         </section>
       </PageFrame>
+
+      <section className="relative z-10 border-y border-current/12">
+        <PageFrame className="py-16 xl:py-24">
+          <SectionHeader eyebrow="Audit coverage" title="What an Austin technical SEO audit covers.">
+            Each review starts with the public site and a defined decision, then produces URL-level evidence and a prioritized implementation path.
+          </SectionHeader>
+          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+            {austinAuditCoverage.map((item) => (
+              <TechnicalPanel key={item.title} className="min-h-[260px]">
+                <h2 className="font-serif text-3xl italic leading-none text-current">{item.title}</h2>
+                <p className="mt-6 text-sm leading-relaxed text-current/64">{item.copy}</p>
+              </TechnicalPanel>
+            ))}
+          </SurfaceGrid>
+        </PageFrame>
+      </section>
 
       <section className="relative z-10 border-y border-current/12">
         <PageFrame className="py-16 xl:py-24">
@@ -152,22 +166,6 @@ export default function AustinTechnicalSeoPage() {
                 ))}
               </ul>
             </TechnicalPanel>
-          </SurfaceGrid>
-        </PageFrame>
-      </section>
-
-      <section className="relative z-10 border-b border-current/12">
-        <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Audit scope" title="What I check.">
-            The local frame is useful only when it is backed by crawlable pages, real source signals, and implementation detail. This page does not claim local rankings, traffic movement, or AI citations.
-          </SectionHeader>
-          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-            {austinSeoSignals.map((signal, index) => (
-              <TechnicalPanel key={signal} className="min-h-[150px]">
-                <p className="mb-7 text-[10px] uppercase tracking-[0.2em] text-current/42">{String(index + 1).padStart(2, '0')}</p>
-                <h3 className="text-sm leading-relaxed text-current/72">{signal}</h3>
-              </TechnicalPanel>
-            ))}
           </SurfaceGrid>
         </PageFrame>
       </section>
@@ -229,39 +227,13 @@ export default function AustinTechnicalSeoPage() {
       </PageFrame>
 
       <PageFrame className="relative z-10 py-16">
-        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.54fr_0.46fr]">
-          <div>
-            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
-              Use this format for your site audit.
-            </h2>
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
-              The pilot shows the evidence format: crawl fields first, interpretation second, and claim limits kept visible. A paid audit applies the same structure to your site, your priority pages, and your measurement setup.
-            </p>
-          </div>
-          <div className="grid content-center gap-5 text-sm leading-relaxed text-current/62">
-            <p>
-              Send the site, the pages that matter, and the business question the audit needs to answer. If Search Console, GA4, CMS, or Google Business Profile access exists, it can be added after scope is clear.
-            </p>
-            <div className="flex flex-wrap items-center gap-5">
-              <PrimaryCTA href="/contact" className="text-accent hover:text-[var(--page-bg)]">
-                Request an audit
-              </PrimaryCTA>
-              <TextLink href="/atlas/sample-crawl" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
-                Review the sample crawl format
-              </TextLink>
-            </div>
-          </div>
-        </section>
-      </PageFrame>
-
-      <PageFrame className="relative z-10 py-16">
         <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.42fr_0.58fr]">
           <div>
             <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
               Query examples before page expansion.
             </h2>
             <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
-              The audit starts with concrete Austin service intents, then checks whether the public page, proof, profile signals, and measurement path support that intent.
+              The audit starts with concrete queries such as technical SEO Austin, Austin SEO audit, and Austin crawlability audit, then checks whether the public page, proof, profile signals, and measurement path support that intent.
             </p>
           </div>
           <div className="grid gap-px overflow-hidden border border-current/14 md:grid-cols-2">
@@ -271,79 +243,6 @@ export default function AustinTechnicalSeoPage() {
                 <p className="mt-5 text-sm leading-relaxed text-current/66">{item.review}</p>
               </TechnicalPanel>
             ))}
-          </div>
-        </section>
-      </PageFrame>
-
-      <PageFrame className="relative z-10 py-16">
-        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.48fr_0.52fr]">
-          <div>
-            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
-              Common Austin site problems.
-            </h2>
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
-              These are the issues the audit is meant to clarify before the team spends more time on content, ads, or outreach.
-            </p>
-          </div>
-          <div className="grid gap-px overflow-hidden border border-current/14 md:grid-cols-2">
-            {austinCommonProblems.map((item, index) => (
-              <TechnicalPanel key={item} className="min-h-[170px] p-5">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-current/42">{String(index + 1).padStart(2, '0')}</p>
-                <p className="mt-5 text-sm leading-relaxed text-current/66">{item}</p>
-              </TechnicalPanel>
-            ))}
-          </div>
-        </section>
-      </PageFrame>
-
-      <PageFrame className="relative z-10 py-16">
-        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.42fr_0.58fr]">
-          <div>
-            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
-              Sample audit output.
-            </h2>
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
-              The output is meant to be handed to a founder, marketer, or developer without hiding the evidence behind a score.
-            </p>
-          </div>
-          <div className="grid gap-px overflow-hidden border border-current/14 md:grid-cols-2">
-            {austinSampleOutput.map((item, index) => (
-              <TechnicalPanel key={item} className="min-h-[150px] p-5">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-current/42">Output {String(index + 1).padStart(2, '0')}</p>
-                <p className="mt-5 text-sm leading-relaxed text-current/66">{item}</p>
-              </TechnicalPanel>
-            ))}
-          </div>
-        </section>
-      </PageFrame>
-
-      <PageFrame className="relative z-10 py-16">
-        <section className="grid gap-8 border border-current/14 p-6 md:p-10 lg:grid-cols-[0.46fr_0.54fr]">
-          <div>
-            <h2 className="font-serif text-[3rem] md:text-[4.5rem] xl:text-[6rem] italic leading-[0.9] tracking-normal">
-              Local evidence before local claims.
-            </h2>
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
-              The Austin page should be useful even before analytics access exists. The first pass uses public crawl evidence and page clarity, then adds private Search Console or analytics data only when the site owner provides it.
-            </p>
-          </div>
-          <div className="grid gap-6">
-            <div>
-              <h3 className="text-[10px] uppercase tracking-[0.24em] text-current/44">Review detail</h3>
-              <ul className="mt-6 grid gap-4 text-sm leading-relaxed text-current/62">
-                {localReviewDetails.map((item) => (
-                  <li key={item} className="border-l border-current/14 pl-4">{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-[10px] uppercase tracking-[0.24em] text-current/44">Deliverables</h3>
-              <ul className="mt-6 grid gap-4 text-sm leading-relaxed text-current/62">
-                {austinDeliverables.map((item) => (
-                  <li key={item} className="border-l border-current/14 pl-4">{item}</li>
-                ))}
-              </ul>
-            </div>
           </div>
         </section>
       </PageFrame>
@@ -359,11 +258,11 @@ export default function AustinTechnicalSeoPage() {
             </p>
           </div>
           <div className="grid content-center gap-4 text-[10px] uppercase tracking-[0.2em]">
-            <LinkPanel href="/void-agency">
+            <LinkPanel href="https://www.void-agency.com/">
               View Void Agency
             </LinkPanel>
-            <LinkPanel href="/case-studies/technical-seo-audit">
-              Read the technical SEO case study
+            <LinkPanel href="/method#worked-finding">
+              Read the worked finding
             </LinkPanel>
           </div>
         </section>

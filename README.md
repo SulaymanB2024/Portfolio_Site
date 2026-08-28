@@ -14,9 +14,9 @@ Key source surfaces: [AI information](https://sulayman-bowles.dev/ai-information
 - `/atlas/sample-crawl`
 - `/simple`
 - `/markets`
-- `/markets/ai-search-crawler-policy`
-- `/markets/technical-seo-public-data-infrastructure`
-- `/markets/canonical-identity-personal-seo`
+- `/research/ai-crawlers/ai-search-crawler-policy`
+- `/research/search-console/technical-seo-public-data-infrastructure`
+- `/research/personal-seo/canonical-identity-personal-seo`
 - `/markets/who-owns-texas-toll-roads`
 - `/method`
 - `/void-agency`
@@ -51,6 +51,24 @@ npm run build
 ```
 
 `npm run build` runs `vite build` and then `scripts/generate-static-routes.ts`, which writes canonical route HTML into `dist/`.
+
+## Portfolio analytics
+
+Portfolio measurement is disabled unless a valid public GA4 web-stream ID is
+provided at build time:
+
+```bash
+VITE_PORTFOLIO_GA_MEASUREMENT_ID=G-XXXXXXXXXX npm run build
+```
+
+The value is a public measurement identifier, not a credential. Do not enable
+it until the shared property, stream, disclosure, and deployment have received
+their separate approvals. The browser integration only activates on
+`https://sulayman-bowles.dev`, emits one explicit `page_view` for the initial
+route and each accepted path change, labels events with
+`portfolio_site=sulayman_bowles_dev`, and removes query strings and fragments.
+Preview, localhost, and lookalike hosts fail closed. Google Signals and
+ad-personalization signals are disabled by the site configuration.
 
 ## Link-Building Authority Assets
 

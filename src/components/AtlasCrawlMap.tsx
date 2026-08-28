@@ -221,7 +221,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
       </div>
 
       <div className="relative flex-1 min-h-[500px]">
-        <svg viewBox="0 0 1000 820" className="absolute inset-0 h-full w-full" role="img" aria-label="Atlas crawl map for example.com">
+        <svg viewBox="0 0 1000 820" className="absolute inset-0 h-full w-full" role="img" aria-label="Atlas crawl map for the open-corpus demonstration">
           <rect width="1000" height="820" fill="#080807" />
           <defs>
             <pattern id="atlas-map-grid" width="42" height="42" patternUnits="userSpaceOnUse">
@@ -500,7 +500,7 @@ export function AtlasCrawlMap({ className = '' }: AtlasCrawlMapProps) {
         {/* Floating details overlay on top-left */}
         <div className="absolute left-6 top-6 font-mono text-[9px] uppercase tracking-[0.25em] text-canvas/50 pointer-events-none select-none">
           <div className="text-canvas text-xs tracking-[0.2em] mb-1 font-sans font-bold">CRAWL RADAR SCAN</div>
-          <div>TARGET: example.com</div>
+          <div>TARGET: quotes.toscrape.com</div>
           <div>URLS INDEXED: 52,846</div>
           <div>CRAWL DEPTH LIMIT: 6</div>
         </div>

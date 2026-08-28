@@ -1,8 +1,0 @@
-url,status_code,indexability,crawl_depth,inlinks,outlinks,canonical_state,primary_issue,evidence_note
-https://example.com/,200,indexable,0,1240,56,self-canonical,none,Homepage retained as crawl root
-https://example.com/blog,200,indexable,1,340,48,self-canonical,thin hub copy,Blog hub needs stronger internal context
-https://example.com/services,200,indexable,1,290,32,self-canonical,slow lcp,Hero image lacks priority and stable dimensions
-https://example.com/resources/seo-tools,200,indexable,2,18,14,missing,missing canonical,Canonical target not declared in source HTML
-https://example.com/pricing/plans,200,indexable,2,24,18,missing,duplicate candidate,Similar pricing templates require canonical review
-https://example.com/search?q=audit,200,noindex,3,4,96,parameterized,soft 404 risk,Search result page returns thin body for empty states
-

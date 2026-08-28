@@ -1,21 +1,29 @@
-import {StrictMode, useEffect, useLayoutEffect} from 'react';
+import {StrictMode, useEffect} from 'react';
 import {createRoot} from 'react-dom/client';
 import {Analytics} from '@vercel/analytics/react';
 import App from './App.tsx';
 import './index.css';
+import './styles/article-reader.css';
 import Lenis from 'lenis';
+import { startPortfolioAnalytics } from './analytics/portfolioAnalytics';
 
 document.documentElement.classList.add('js');
+startPortfolioAnalytics();
+
+const editorialFontStylesheet = document.getElementById('editorial-fonts') as HTMLLinkElement | null;
+if (editorialFontStylesheet) {
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+      editorialFontStylesheet.rel = 'stylesheet';
+    });
+  });
+}
 
 function Root() {
-  useLayoutEffect(() => {
-    document.documentElement.classList.add('app-mounted');
-    return () => document.documentElement.classList.remove('app-mounted');
-  }, []);
-
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
+    const prefersNativeScrolling = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
+    if (prefersReducedMotion || prefersNativeScrolling) {
       return;
     }
 

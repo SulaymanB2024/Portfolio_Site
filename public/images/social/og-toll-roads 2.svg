@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#080807"/>
+  <path d="M48 48h1104v534H48z" fill="none" stroke="#f4f4f0" stroke-opacity=".2"/>
+  <path d="M820 65c-34 72-40 144 5 211s72 136 23 292M980 63c-78 82-93 169-18 247s88 164 44 258" fill="none" stroke="#f4f4f0" stroke-opacity=".28" stroke-width="28"/>
+  <path d="M820 65c-34 72-40 144 5 211s72 136 23 292" fill="none" stroke="#b7c8a8" stroke-width="4" stroke-dasharray="14 15"/>
+  <text x="84" y="112" fill="#b7c8a8" font-family="Arial, sans-serif" font-size="19" letter-spacing="8">TEXAS INFRASTRUCTURE RESEARCH</text>
+  <text x="78" y="258" fill="#f4f4f0" font-family="Georgia, serif" font-size="105" font-style="italic">Who owns the</text>
+  <text x="84" y="360" fill="#f4f4f0" font-family="Georgia, serif" font-size="112" font-style="italic">toll roads?</text>
+  <text x="84" y="455" fill="#f4f4f0" fill-opacity=".72" font-family="Arial, sans-serif" font-size="20" letter-spacing="4">OWNERSHIP · OPERATORS · DEBT · CASH FLOW</text>
+  <text x="84" y="526" fill="#f4f4f0" fill-opacity=".55" font-family="Arial, sans-serif" font-size="16" letter-spacing="3">EVIDENCE CUTOFF / JULY 11, 2026</text>
+</svg>

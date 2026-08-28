@@ -1,83 +1,141 @@
+export type ProfileExperience = {
+  organization: string;
+  location: string;
+  title: string;
+  dates: string;
+  publicSummary: string;
+  bullets: readonly string[];
+  visibility: 'public' | 'confidential-generic';
+};
+
+export type ProfileSkillGroup = {
+  label: string;
+  items: readonly string[];
+};
+
 export const PROFILE_FACTS = {
   name: 'Sulayman Bowles',
   currentSummary:
-    'Sulayman Bowles is a UT Austin McCombs student building Atlas, running Void Agency, and working across technical SEO, search systems, product, and finance research.',
+    'Sulayman Bowles is a UT Austin student working in AI product at Chegg, building Atlas technical SEO software, running Void Agency, and publishing research on AI systems, crawlability, infrastructure, and investment questions.',
+  positioning: 'Technical SEO, AI systems, and finance research.',
   education: {
     institution: 'The University of Texas at Austin',
     school: 'McCombs School of Business',
-    degree: 'Bachelor of Business Administration',
-    field: 'Finance',
-    graduation: 'May 2027',
+    location: 'Austin, TX',
+    expectedGraduation: 'May 2028',
+    degrees: [
+      { degree: 'Bachelor of Business Administration', field: 'Finance' },
+      { degree: 'Bachelor of Arts', field: 'Music' },
+    ],
+    coursework: ['Business Analytics', 'Statistics', 'Data Science', 'Accounting', 'Finance', 'Program Management'],
   },
-  roles: [
+  experience: [
     {
-      title: 'Founder',
-      organization: 'Void Agency',
-      dates: 'Dec 2025 — Present',
-      path: '/void-agency',
-    },
-    {
-      title: 'AI Product Manager Intern',
-      organization: 'Chegg, Office of the Chief Product Officer',
+      organization: 'Chegg, Inc.',
+      location: 'Austin, TX',
+      title: 'AI Product Manager Intern, Office of the Chief Product Officer',
       dates: 'May 2026 — Aug 2026',
-      path: '/resume',
+      publicSummary: 'Supports AI product strategy, research, and discovery for student-facing education tools.',
+      bullets: [
+        'Develops product briefs, competitive research, workflow analysis, and evaluation criteria for student experiences.',
+      ],
+      visibility: 'public',
     },
     {
-      title: 'Technical SEO Analytics',
-      organization: 'Private engagement',
+      organization: 'Confidential B2B manufacturer',
+      location: 'Remote',
+      title: 'SEO & Digital Marketing Analytics Intern',
       dates: 'May 2026 — Present',
-      path: '/resume',
+      publicSummary: 'Builds GA4 and Search Console baselines and turns search, site, and messaging data into recurring decision support.',
+      bullets: [
+        'Reviews launch-site traffic, query performance, engagement, and user-flow diagnostics without disclosing company-identifying details or private outcomes.',
+      ],
+      visibility: 'confidential-generic',
     },
     {
-      title: 'Student Associate',
+      organization: 'Void Agency',
+      location: 'Austin, TX',
+      title: 'Founder',
+      dates: 'Jan 2026 — Present',
+      publicSummary: 'Founded a technical SEO and web-systems agency and reports $50K+ in collected revenue; private invoices are not public.',
+      bullets: [
+        'Built Atlas, a Python and SQLite audit system that crawls websites, maps internal links, classifies pages, flags technical issues, and exports structured reports.',
+        'Turns crawl, metadata, schema, performance, and AI-search findings into prioritized implementation roadmaps for SMB clients.',
+      ],
+      visibility: 'public',
+    },
+    {
       organization: 'Jon Brumley Texas Venture Labs',
+      location: 'Austin, TX',
+      title: 'Student Associate',
       dates: 'Sep 2025 — Present',
-      path: '/resume',
+      publicSummary: 'Builds market, pricing, and financial models for early-stage companies and supports founder decision-making.',
+      bullets: [
+        'Synthesizes research into investor-style recommendations covering customer discovery, competitive positioning, unit economics, and go-to-market strategy.',
+      ],
+      visibility: 'public',
+    },
+    {
+      organization: 'AI Visual Infrastructure Venture',
+      location: 'Remote',
+      title: 'Co-Founder',
+      dates: 'Jan 2025 — Sep 2025',
+      publicSummary: 'Co-founded an AI visual-services venture and reports $100K in collected revenue; private transaction records are not public.',
+      bullets: [
+        'Evaluated model-quality tradeoffs, creator workflows, pricing logic, and visual-asset positioning for AI-enabled creative services.',
+      ],
+      visibility: 'public',
+    },
+  ] satisfies readonly ProfileExperience[],
+  awardsAndLeadership: [
+    {
+      organization: 'OnionDAO Hackathon',
+      location: 'Chicago, IL',
+      title: '1st Place, Team Lead',
+      dates: 'Jun 2025',
+      detail: 'Led a three-person team to build PayrollPro, a Solana payroll prototype with confidential transfers, multisig treasury controls, and treasury-risk logic.',
+    },
+    {
+      organization: 'No Limit Holdings x Artemis Researchathon',
+      location: 'Philadelphia, PA',
+      title: 'Crypto Investment Research Prize Winner, Penn Blockchain Conference',
+      dates: 'Mar 2026',
+      detail: 'Prepared a digital-asset thesis using public token data, valuation logic, market-structure analysis, risk assessment, and execution planning.',
+    },
+    {
+      organization: 'Student Government',
+      location: 'Austin, TX',
+      title: 'University-Wide Representative',
+      dates: 'Sep 2024 — Present',
+      detail: 'Elected university-wide representative coordinating student input through surveys, town halls, and cross-college outreach.',
+    },
+    {
+      organization: 'Texas Blockchain',
+      location: 'Austin, TX',
+      title: 'Investment Team Analyst',
+      dates: 'Sep 2025 — Present',
+      detail: 'Researches digital assets and infrastructure protocols for student-run investment discussions.',
     },
   ],
+  skillGroups: [
+    { label: 'Technical skills', items: ['Python', 'SQL', 'JavaScript', 'SQLite', 'Tableau', 'Excel', 'PowerPoint'] },
+    { label: 'Analytics & SEO', items: ['GA4', 'Google Search Console', 'technical SEO auditing', 'crawl analysis', 'structured reporting'] },
+    { label: 'Product & research', items: ['Product briefs', 'competitive research', 'workflow analysis', 'market sizing', 'financial modeling'] },
+    { label: 'AI & design tools', items: ['Claude Code', 'Cursor', 'Figma'] },
+  ] satisfies readonly ProfileSkillGroup[],
+  certifications: ['Google Data Analytics Professional Certificate', 'Google Project Management Professional Certificate', 'Bloomberg Market Concepts'],
+  languages: ['Spanish (Intermediate)'],
   projects: [
-    { name: 'Atlas SEO Audit Console', path: '/atlas', status: 'Core workflow shipped; active development' },
-    { name: 'Void Agency', path: '/void-agency', status: 'Operating' },
+    { name: 'Atlas SEO Audit Console', path: '/atlas', status: 'Implemented; public proof partial; active development' },
+    { name: 'Void Agency', path: 'https://www.void-agency.com/', status: 'Operating' },
+    { name: 'The First AI Managers', path: '/research/ai-systems/the-first-ai-managers', status: 'Published July 14, 2026' },
     { name: 'Texas toll-road ownership research', path: '/markets/who-owns-texas-toll-roads', status: 'Published July 11, 2026' },
-    { name: 'ViralBench + Codex harness design', path: '/viralbench-codex-agent-harness', status: 'Published July 9, 2026' },
   ],
   proofClaims: [
-    {
-      label: 'Atlas',
-      claim: 'Crawl and evidence console with a public sanitized run',
-      asOf: '2026-07-12',
-      publicSource: '/atlas/sample-crawl',
-    },
-    {
-      label: 'Void Agency',
-      claim: '$50K+ collected revenue',
-      asOf: '2026-05-31',
-      publicSource: '/resume',
-    },
-    {
-      label: 'Chegg',
-      claim: 'AI Product Manager Intern, Office of the Chief Product Officer',
-      asOf: '2026-07-12',
-      publicSource: '/resume',
-    },
-    {
-      label: 'SEO analytics',
-      claim: 'GA4, Search Console, launch baselines, and prioritized recommendations',
-      asOf: '2026-07-12',
-      publicSource: '/resume',
-    },
-    {
-      label: 'Texas Venture Labs',
-      claim: 'Student Associate working on validation, unit economics, GTM, and financial models',
-      asOf: '2026-07-12',
-      publicSource: '/resume',
-    },
-    {
-      label: 'Public research',
-      claim: 'Texas toll-road ownership, operators, and economics',
-      asOf: '2026-07-11',
-      publicSource: '/markets/who-owns-texas-toll-roads',
-    },
+    { label: 'Atlas', claim: 'Crawl and evidence console with a reproducible public demonstration', asOf: '2026-07-16', publicSource: '/atlas/sample-crawl' },
+    { label: 'Void Agency', claim: '$50K+ collected revenue — first-party claim; private invoices are not public', asOf: '2026-05-31', publicSource: null },
+    { label: 'Chegg', claim: 'AI Product Manager Intern, Office of the Chief Product Officer — role stated in this résumé; corroborating employer record is not linked', asOf: '2026-07-16', publicSource: null },
+    { label: 'Public research', claim: 'AI systems, infrastructure, and investment research with source-led analysis', asOf: '2026-07-16', publicSource: '/research' },
   ],
   canonicalLinks: {
     home: 'https://sulayman-bowles.dev/',
@@ -87,12 +145,11 @@ export const PROFILE_FACTS = {
     atlas: 'https://sulayman-bowles.dev/atlas',
     research: 'https://sulayman-bowles.dev/research',
     contact: 'https://sulayman-bowles.dev/contact',
-    aiInformation: 'https://sulayman-bowles.dev/ai-information',
     technicalLedger: 'https://sulayman-bowles.tech/',
     github: 'https://github.com/SulaymanB2024',
     linkedin: 'https://www.linkedin.com/in/sulayman-bowles/',
   },
-  lastReviewed: '2026-07-12',
+  lastReviewed: '2026-07-18',
   nextRoleReview: '2026-08-31',
 } as const;
 
@@ -103,4 +160,8 @@ export function formatIsoDate(isoDate: string) {
     year: 'numeric',
     timeZone: 'UTC',
   }).format(new Date(`${isoDate}T00:00:00Z`));
+}
+
+export function formatEducation() {
+  return PROFILE_FACTS.education.degrees.map((degree) => `${degree.degree} in ${degree.field}`).join('; ');
 }

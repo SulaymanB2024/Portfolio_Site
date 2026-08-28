@@ -1,5 +1,8 @@
+import { ATLAS_OPEN_CORPUS_RUN, atlasOpenCorpusFindings, atlasOpenCorpusRows } from './atlasOpenCorpus';
+
 export const RESEARCH_ASSETS = {
-  atlasSampleCsv: '/research/atlas-sanitized-crawl-sample.csv',
+  atlasSampleCsv: ATLAS_OPEN_CORPUS_RUN.artifacts.csv,
+  atlasSampleManifest: ATLAS_OPEN_CORPUS_RUN.artifacts.manifest,
   appianAssumptionsCsv: '/research/appian-assumptions-table.csv',
   appianMemoPdf: '/research/appian-enterprise-software-durability-memo.pdf',
 };
@@ -32,16 +35,51 @@ export const contextualProofLinks = [
   },
 ];
 
+export const researchContextLinks = [
+  {
+    label: 'Technical SEO diagnostic library',
+    href: '/research/technical-seo',
+    description: 'Issue guides, platform playbooks, and audit checklists with fixtures, false-positive boundaries, and rerun gates.',
+  },
+  {
+    label: 'Atlas technical SEO audit software',
+    href: '/atlas',
+    description: 'The crawl and evidence workflow behind the technical SEO research and audit examples.',
+  },
+  {
+    label: 'Technical SEO audit services',
+    href: '/method',
+    description: 'A fixed-scope process for turning crawl evidence into implementation priorities and rerun checks.',
+  },
+  {
+    label: 'Austin technical SEO consultant',
+    href: '/austin-technical-seo',
+    description: 'Local audit coverage, a bounded Austin crawlability pilot, and an implementation entry point.',
+  },
+  {
+    label: 'Technical SEO portfolio',
+    href: '/work',
+    description: 'Public systems, studies, constraints, ownership, and inspectable evidence in one place.',
+  },
+  {
+    label: 'Contact a technical SEO consultant',
+    href: '/contact',
+    description: 'Direct contact for crawlability, indexation, rendering, structured data, and analytics work.',
+  },
+] as const;
+
 export const workProofCards = [
   {
     eyebrow: 'Product',
     title: 'Atlas SEO Audit Console',
     href: '/atlas',
     problem: 'Technical audits lose credibility when recommendations cannot be traced back to URL-level evidence.',
-    role: 'Founder; product, crawler, evidence policy, and interface design.',
-    built: 'Native crawl records, raw/render comparison, indexability and canonical checks, link graphs, issue review, persistence, and export paths.',
+    role: 'Founder; product architecture, crawler behavior, evidence-state policy, review workflow, and interface design.',
+    built: 'Native crawl records, raw/render comparison, indexability and canonical checks, link graphs, SQLite-backed run persistence, issue review, and structured export paths.',
     constraints: 'Provider gaps, failed fetches, challenge pages, and contaminated renders remain measurement gaps—not site-health findings.',
-    status: 'Core crawl and evidence workflow shipped; provider mesh and scoring policy remain active development.',
+    status: 'Core crawl and evidence workflow implemented; public proof covers bounded source capture and a render-review state. Provider mesh and scoring policy remain active development.',
+    statusLabel: 'Implemented / proof partial',
+    projectLabel: 'Open Atlas',
     evidenceLabel: 'Inspect the sanitized crawl run',
     evidenceHref: '/atlas/sample-crawl',
     notPublic: 'Private targets, client records, credentials, and unreviewed provider output.',
@@ -52,9 +90,11 @@ export const workProofCards = [
     href: '/markets/who-owns-texas-toll-roads',
     problem: '“Who owns the road?” collapses public title, concession rights, creditors, operators, billing, and residual value into one misleading answer.',
     role: 'Research design, source ledger, ownership model, calculations, writing, and visual explanation.',
-    built: 'A statewide ownership map, toll-dollar waterfall, project comparison, finite-life DCF screen, fact-gap ledger, and primary-source index.',
+    built: 'An answer-first statewide ownership lookup, downloadable CSV, toll-dollar waterfall, project comparison, finite-life DCF screen, fact-gap ledger, and primary-source index.',
     constraints: 'Public/private distinctions, dated cap tables, analyst estimates, and missing disclosures stay labeled throughout.',
-    status: 'Published July 11, 2026; evidence cutoff is explicit in the article.',
+    status: 'Published July 11, 2026; ownership lookup and reader updated July 23, with the evidence cutoff preserved.',
+    statusLabel: 'Published',
+    projectLabel: 'Read the article',
     evidenceLabel: 'Open the source-led article',
     evidenceHref: '/markets/who-owns-texas-toll-roads#source-ledger',
     notPublic: 'No private diligence, bids, carrying values, or current security recommendations.',
@@ -68,6 +108,8 @@ export const workProofCards = [
     built: 'A proposed trace schema, replay layer, controlled-trial loop, evidence boundary, and bounded Codex engineering workflow.',
     constraints: 'The article separates implemented repository behavior from proposed harness work and unverified production coverage.',
     status: 'Published engineering design; not represented as a deployed evaluation service.',
+    statusLabel: 'Published design',
+    projectLabel: 'Read the design',
     evidenceLabel: 'Read the architecture and limits',
     evidenceHref: '/viralbench-codex-agent-harness',
     notPublic: 'Credentials, live campaign data, and any production experiments not evidenced in the public repository.',
@@ -81,6 +123,8 @@ export const workProofCards = [
     built: 'A 12-site homepage/robots/sitemap pilot, aggregate summary, public CSV, methodology, and cutoff-aware reporting.',
     constraints: 'The pilot is not representative and makes no ranking, traffic, conversion, revenue, citation, or site-health claim.',
     status: 'Published pilot generated June 25, 2026.',
+    statusLabel: 'Published pilot',
+    projectLabel: 'Open the pilot',
     evidenceLabel: 'Open the public CSV',
     evidenceHref: '/research/austin-crawlability-benchmark-pilot.csv',
     notPublic: 'No private analytics, Search Console data, client identity, or broader Austin-market inference.',
@@ -88,12 +132,14 @@ export const workProofCards = [
   {
     eyebrow: 'Operating practice',
     title: 'Void Agency',
-    href: '/void-agency',
+    href: 'https://www.void-agency.com/',
     problem: 'Teams need a bounded route from crawl evidence to implementation work without a generic growth retainer or opaque audit deck.',
     role: 'Founder and operator across scoping, audit systems, implementation, analytics, and client delivery.',
-    built: 'A technical SEO and web-systems practice with a four-stage method, explicit inputs and exclusions, and Atlas-backed evidence paths.',
+    built: 'A technical SEO and web-systems practice with a four-stage method, explicit inputs and exclusions, Atlas-backed evidence paths, implementation handoffs, analytics review, and acceptance checks.',
     constraints: 'Private client names and outcome data remain private; the public site shows method and artifacts instead.',
-    status: 'Operating; $50K+ collected revenue as of May 31, 2026.',
+    status: 'Operating; $50K+ collected revenue as of May 31, 2026. The figure is a first-party claim; the linked method does not verify revenue.',
+    statusLabel: 'Operating',
+    projectLabel: 'Open Void Agency',
     evidenceLabel: 'Read the scoped audit method',
     evidenceHref: '/method',
     notPublic: 'Client identities, credentials, unreleased deliverables, and unsupported outcome claims.',
@@ -107,87 +153,16 @@ export const workProofCards = [
     built: 'A separate artifact domain for projects, source links, technical notes, and durable records that support—rather than duplicate—the identity site.',
     constraints: 'The ledger stays artifact-first and routes canonical identity context back to this site.',
     status: 'Live public proof layer; reviewed July 12, 2026.',
+    statusLabel: 'Live',
+    projectLabel: 'Open the ledger',
     evidenceLabel: 'Open the technical ledger',
     evidenceHref: 'https://sulayman-bowles.tech/',
     notPublic: 'Private repositories, abandoned experiments without learning value, and secrets or local machine state.',
   },
 ];
 
-export const atlasSampleRows = [
-  {
-    url: 'https://example.com/',
-    status: '200',
-    indexability: 'indexable',
-    depth: '0',
-    inlinks: '1240',
-    outlinks: '56',
-    canonical: 'self-canonical',
-    issue: 'none',
-    note: 'Homepage retained as crawl root',
-  },
-  {
-    url: 'https://example.com/blog',
-    status: '200',
-    indexability: 'indexable',
-    depth: '1',
-    inlinks: '340',
-    outlinks: '48',
-    canonical: 'self-canonical',
-    issue: 'thin hub copy',
-    note: 'Blog hub needs stronger internal context',
-  },
-  {
-    url: 'https://example.com/services',
-    status: '200',
-    indexability: 'indexable',
-    depth: '1',
-    inlinks: '290',
-    outlinks: '32',
-    canonical: 'self-canonical',
-    issue: 'slow lcp',
-    note: 'Hero image lacks priority and stable dimensions',
-  },
-  {
-    url: 'https://example.com/resources/seo-tools',
-    status: '200',
-    indexability: 'indexable',
-    depth: '2',
-    inlinks: '18',
-    outlinks: '14',
-    canonical: 'missing',
-    issue: 'missing canonical',
-    note: 'Canonical target not declared in source HTML',
-  },
-  {
-    url: 'https://example.com/pricing/plans',
-    status: '200',
-    indexability: 'indexable',
-    depth: '2',
-    inlinks: '24',
-    outlinks: '18',
-    canonical: 'missing',
-    issue: 'duplicate candidate',
-    note: 'Similar pricing templates require canonical review',
-  },
-  {
-    url: 'https://example.com/search?q=audit',
-    status: '200',
-    indexability: 'noindex',
-    depth: '3',
-    inlinks: '4',
-    outlinks: '96',
-    canonical: 'parameterized',
-    issue: 'soft 404 risk',
-    note: 'Search result page returns thin body for empty states',
-  },
-];
-
-export const atlasSampleFindings = [
-  'The sample is sanitized/demo data and does not identify a private client or claim a live ranking outcome.',
-  'Atlas treats URL discovery, status code, canonical state, crawl depth, inlinks, outlinks, and indexability as reviewable crawl data.',
-  'Issue labels remain tied to observed fields, not broad score claims.',
-  'The CSV exists so reviewers can inspect the source table instead of relying only on page copy.',
-];
+export const atlasSampleRows = atlasOpenCorpusRows;
+export const atlasSampleFindings = atlasOpenCorpusFindings;
 
 export const auditCaseStudySteps = [
   {

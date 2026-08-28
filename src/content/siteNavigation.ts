@@ -5,20 +5,18 @@ export type SiteNavItem = {
 };
 
 export const primaryNav: SiteNavItem[] = [
-  { label: 'Work', href: '/work', description: 'Six distinct public artifacts with role, status, and evidence.' },
-  { label: 'Atlas', href: '/atlas', description: 'Technical SEO crawl and evidence console.' },
+  { label: 'Work', href: '/work', description: 'Six public records with ownership, system details, status, constraints, and supporting evidence.' },
+  { label: 'Atlas', href: '/atlas', description: 'An in-development crawl and evidence system with capability and public-proof status.' },
   { label: 'Research', href: '/research', description: 'Search, technical SEO, product, data, markets, and infrastructure research.' },
-  { label: 'About', href: '/about', description: 'Current work, experience, and why the projects connect.' },
+  { label: 'About', href: '/about', description: 'Technical practice, current work, experience, and operating principles.' },
   { label: 'Resume', href: '/resume', description: 'Recruiter-ready experience, education, skills, and PDF.' },
   { label: 'Contact', href: '/contact', description: 'Direct email and a short project brief.' },
 ];
 
 export const utilityNav: SiteNavItem[] = [
-  { label: 'Method', href: '/method', description: 'Void Agency technical SEO process.' },
-  { label: 'Austin SEO', href: '/austin-technical-seo', description: 'Austin crawlability pilot and fixed-scope audit entry point.' },
-  { label: 'Void Agency', href: '/void-agency', description: 'Canonical organization record for the service practice.' },
-  { label: 'Text Edition', href: '/simple', description: 'First-person text edition and personal monograph.' },
-  { label: 'AI Information', href: '/ai-information', description: 'Compact source roles and current profile context.' },
+  { label: 'SEO Audit Method', href: '/method', description: 'Technical SEO audit services, process, deliverables, and rerun checks.' },
+  { label: 'Austin Technical SEO', href: '/austin-technical-seo', description: 'Austin technical SEO consultant, crawlability pilot, and audit entry point.' },
+  { label: 'Void Agency', href: 'https://www.void-agency.com/', description: 'External site for the fixed-scope technical SEO practice.' },
   { label: 'HTML Sitemap', href: '/sitemap', description: 'Plain links to every public canonical route.' },
   { label: 'Tech Ledger', href: 'https://sulayman-bowles.tech/', description: 'Technical projects, experiments, and project ledger.' },
 ];

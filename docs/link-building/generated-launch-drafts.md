@@ -1,6 +1,6 @@
 # Generated Launch Drafts
 
-Generated: 2026-06-25
+Generated: 2026-07-20
 
 These drafts are approval-ready payloads for the launch queue. They are not sent messages and should not be posted without account access, fit review, and approval.
 
@@ -9,7 +9,7 @@ These drafts are approval-ready payloads for the launch queue. They are not sent
 - Queue status: ready_after_login
 - Action type: community_submission
 - Contact/submission URL: https://news.seofomo.co/submit-story/
-- Target page: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Target page: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 - Approval required: yes
 - Send ready now: no
 - Boundary: Submission requires login and must follow community rules.
@@ -27,7 +27,7 @@ Suggested SEOFOMO submission:
 
 Title: AI search crawler policy: source-backed map of search, training, and user-requested retrieval agents
 
-URL: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+URL: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 
 Description: A conservative technical reference on AI-search crawler policy, robots directives, IndexNow, canonical source pages, and claim boundaries. Includes a source map at https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv. It does not claim rankings, AI citations, or visibility guarantees.
 ```
@@ -37,7 +37,7 @@ Description: A conservative technical reference on AI-search crawler policy, rob
 - Queue status: ready_after_review
 - Action type: editorial_pitch
 - Contact/submission URL: https://searchengineland.com/contact
-- Target page: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Target page: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 - Approval required: yes
 - Send ready now: no
 - Boundary: Contact path verified, but pitch should be reviewed before sending.
@@ -55,7 +55,7 @@ Hi Search Engine Land team,
 
 I put together a source-backed reference on AI-search crawler policy, robots directives, IndexNow, and source-page clarity:
 
-https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 
 The companion source map is here:
 
@@ -66,12 +66,13 @@ The piece is intentionally conservative. It treats crawler access as a discovery
 Best,
 Sulayman
 ```
+
 ## Draft 3: Search Engine Journal
 
 - Queue status: gated
 - Action type: editorial_pitch
 - Contact/submission URL: https://www.searchenginejournal.com/contact/
-- Target page: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Target page: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 - Approval required: yes
 - Send ready now: no
 - Boundary: Contributor path is invite/pre-approval gated; only send source pitch, not guest-post request.
@@ -91,7 +92,7 @@ I know contributor access is editorially gated, so this is a source note rather 
 
 I published a conservative reference on AI-search crawler policy, source-page clarity, robots directives, and IndexNow:
 
-https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 
 Source map:
 https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv
@@ -107,7 +108,7 @@ Sulayman
 - Queue status: ready_if_non_promotional
 - Action type: community_post
 - Contact/submission URL: https://community.openai.com/
-- Target page: https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+- Target page: https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 - Approval required: yes
 - Send ready now: no
 - Boundary: Community rules allow relevant technical discussion but not link-only promotion.
@@ -125,7 +126,7 @@ Draft discussion post:
 
 I wrote a source-backed reference on AI-search crawler policy and public source-page clarity:
 
-https://sulayman-bowles.dev/markets/ai-search-crawler-policy
+https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy
 
 The practical distinction I wanted to make is between search crawlers, training crawlers, and user-requested retrieval agents. The post also covers robots directives, IndexNow, canonical URLs, and why crawler access is only a discovery condition, not a ranking or citation guarantee.
 

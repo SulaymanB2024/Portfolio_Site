@@ -142,9 +142,9 @@ Technical SEO, AI-search visibility, Atlas crawl evidence, and finance/data rese
 
 Suggested canonical links for republished posts:
 
-- AI crawler policy: `https://sulayman-bowles.dev/markets/ai-search-crawler-policy`
-- Technical SEO as public data infrastructure: `https://sulayman-bowles.dev/markets/technical-seo-public-data-infrastructure`
-- Canonical identity for personal SEO: `https://sulayman-bowles.dev/markets/canonical-identity-personal-seo`
+- AI crawler policy: `https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy`
+- Technical SEO as public data infrastructure: `https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure`
+- Canonical identity for personal SEO: `https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo`
 
 ## Claim Boundary
 

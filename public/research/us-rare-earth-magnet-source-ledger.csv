@@ -1,0 +1,21 @@
+source_id,organization,source_title,source_type,url,evidence_role,last_verified
+S01,U.S. Department of Commerce,"Section 232 investigation of NdFeB permanent magnets",government investigation,https://www.bis.gov/press-release/department-commerce-releases-results-section-232-investigation-neodymium-iron-boron-permanent-magnets,"Demand boundary; import dependence; embedded magnet content",2026-08-17
+S02,U.S. Geological Survey,"Rare Earths Statistics and Information",government data,https://www.usgs.gov/centers/national-minerals-information-center/rare-earths-statistics-and-information,"Upstream production and trade context",2026-08-17
+S03,U.S. Department of Energy,"Critical Materials Assessment",government technical assessment,https://www.energy.gov/cmm/critical-materials-assessment,"Criticality; technology demand; supply-chain stages",2026-08-17
+S04,U.S. Department of Defense,"MP Materials rare-earth supply-chain agreement",government award,https://www.defense.gov/News/Releases/Release/Article/4232241/dod-signs-historic-agreement-with-mp-materials-to-strengthen-us-rare-earths-supply-chain/,"Project funding; capacity; price support; schedule",2026-08-17
+S05,MP Materials,"Corporate and manufacturing disclosures",company source,https://mpmaterials.com/,"Fort Worth magnet line; operating status; integrated supply chain",2026-08-17
+S06,MP Materials,"SEC filings",regulatory filings,https://investors.mpmaterials.com/financials/sec-filings,"Capacity language; capital commitments; customer and execution risk",2026-08-17
+S07,Noveon Magnetics,"U.S. magnet manufacturing and recycling platform",company source,https://noveon.co/,"Commercial-shipment evidence; disclosed nameplate; recycled feed",2026-08-17
+S08,Vacuumschmelze / eVAC,"Permanent magnet manufacturing",company source,https://vacuumschmelze.com/,"U.S. plant capacity and commercial operation",2026-08-17
+S09,USA Rare Earth,"Stillwater magnet facility",company source,https://www.usare.com/,"Staged line capacity; first production; qualification status",2026-08-17
+S10,Vulcan Elements,"U.S. rare-earth magnet manufacturing",company source,https://vulcanelements.com/,"Future firm-project capacity and schedule",2026-08-17
+S11,JS Link America,"U.S. permanent-magnet project",company source,https://www.jslink.com/,"Future firm-project capacity",2026-08-17
+S12,CoTec / HyProMag USA,"HyProMag USA recycled-magnet project",company source,https://www.cotec.ca/hypromag-usa,"Future capacity; recycled-feed process; project schedule",2026-08-17
+S13,General Motors,"Domestic rare-earth magnet supply initiatives",customer source,https://news.gm.com/,"Offtake and automotive qualification context",2026-08-17
+S14,International Energy Agency,"Global Critical Minerals Outlook 2025",international technical assessment,https://www.iea.org/reports/global-critical-minerals-outlook-2025,"Global concentration; demand outlook; processing bottlenecks",2026-08-17
+S15,U.S. Government Accountability Office,"Critical minerals reports",government oversight,https://www.gao.gov/critical-minerals,"Policy execution and supply-chain risk",2026-08-17
+S16,National Renewable Energy Laboratory,"Critical materials research",national laboratory,https://www.nrel.gov/materials/critical-materials.html,"Magnet technology; substitution; recycling and manufacturing context",2026-08-17
+S17,Ames National Laboratory,"Critical Materials Institute",national laboratory,https://www.ameslab.gov/cmi,"Rare-earth processing; magnet materials; recycling",2026-08-17
+S18,U.S. Department of Defense Industrial Base Policy,"Critical-minerals and industrial-base programs",government program,https://www.businessdefense.gov/ibr/mceip/index.html,"Government awards; industrial-base policy; project support",2026-08-17
+S19,Federal Register,"NdFeB permanent magnet trade and security actions",government record,https://www.federalregister.gov/,"Formal policy actions and notices",2026-08-17
+S20,European Commission Joint Research Centre,"Permanent magnet material-flow research",technical research,https://joint-research-centre.ec.europa.eu/,"Material-flow and recycling methodology",2026-08-17

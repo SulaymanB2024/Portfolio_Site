@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Demand denominators for U.S. rare-earth magnets</title>
+  <desc id="desc">The diagram separates direct domestic magnet purchases, magnets embedded in imported finished goods, replacement demand, and export demand. Only direct domestic purchases are the near-term order book immediately contestable by a new U.S. magnet factory.</desc>
+  <rect width="1600" height="900" fill="#f4f3ef"/>
+  <g stroke="#deddd7" stroke-width="1">
+    <path d="M80 120H1520M80 240H1520M80 360H1520M80 480H1520M80 600H1520M80 720H1520"/>
+    <path d="M200 80V820M440 80V820M680 80V820M920 80V820M1160 80V820M1400 80V820"/>
+  </g>
+  <text x="90" y="90" font-family="Arial,Helvetica,sans-serif" font-size="22" letter-spacing="3" fill="#55554f">FIGURE 02 / DEMAND BOUNDARY</text>
+  <text x="90" y="165" font-family="Arial,Helvetica,sans-serif" font-size="54" font-weight="700" fill="#171715">“U.S. demand” is not one addressable market</text>
+  <text x="90" y="215" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="#565650">Strategic exposure is broader than the orders immediately available to a domestic magnet plant</text>
+  <g font-family="Arial,Helvetica,sans-serif">
+    <rect x="90" y="310" width="520" height="235" rx="12" fill="#20201e"/>
+    <text x="125" y="365" font-size="21" letter-spacing="2" fill="#d9d8d1">NEAR-TERM CONTESTABLE</text>
+    <text x="125" y="425" font-size="36" font-weight="700" fill="#ffffff">Direct domestic magnet demand</text>
+    <text x="125" y="468" font-size="21" fill="#eeeeea">Magnets purchased by U.S. motor, component,</text>
+    <text x="125" y="500" font-size="21" fill="#eeeeea">and system manufacturers.</text>
+
+    <rect x="690" y="310" width="820" height="235" rx="12" fill="#cecdc6" stroke="#171715" stroke-width="2"/>
+    <text x="725" y="365" font-size="21" letter-spacing="2" fill="#4d4d48">STRATEGIC EXPOSURE / LONG-RUN RESHORING</text>
+    <text x="725" y="425" font-size="36" font-weight="700" fill="#171715">Magnets embedded in imported finished goods</text>
+    <text x="725" y="468" font-size="21" fill="#44443f">Capturing this volume may require relocating motor production,</text>
+    <text x="725" y="500" font-size="21" fill="#44443f">redesigning components, or requalifying a complete system.</text>
+
+    <rect x="90" y="610" width="680" height="120" rx="10" fill="#e5e4de" stroke="#75756f" stroke-width="2"/>
+    <text x="125" y="658" font-size="26" font-weight="700" fill="#20201e">Replacement / aftermarket demand</text>
+    <text x="125" y="695" font-size="19" fill="#55554f">Fragmented, geometry-specific, and often tied to installed equipment.</text>
+
+    <rect x="830" y="610" width="680" height="120" rx="10" fill="#e5e4de" stroke="#75756f" stroke-width="2"/>
+    <text x="865" y="658" font-size="26" font-weight="700" fill="#20201e">Export demand</text>
+    <text x="865" y="695" font-size="19" fill="#55554f">Potential utilization subject to qualification, cost, logistics, and trade rules.</text>
+  </g>
+  <path d="M610 428H665" stroke="#171715" stroke-width="4"/>
+  <path d="M654 416L670 428 654 440" fill="none" stroke="#171715" stroke-width="4"/>
+  <text x="622" y="395" font-family="Arial,Helvetica,sans-serif" font-size="17" fill="#4d4d48">not automatic</text>
+  <line x1="90" y1="775" x2="1510" y2="775" stroke="#171715" stroke-width="2"/>
+  <text x="90" y="817" font-family="Arial,Helvetica,sans-serif" font-size="20" fill="#4d4d48">Do not divide announced domestic nameplate by an embedded-import denominator and call the supply gap closed.</text>
+</svg>

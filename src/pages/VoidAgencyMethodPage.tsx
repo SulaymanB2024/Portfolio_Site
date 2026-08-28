@@ -69,24 +69,24 @@ export default function VoidAgencyMethodPage() {
   useSEO(METHOD_SEO);
 
   return (
-    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
+    <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-clip bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
       <WireframeGrid tone="dark" className="pointer-events-none absolute inset-0 z-0 opacity-20" />
       <PageTechnicalChrome tone="dark" />
       <ScrollProgress />
       <InternalHeader activePath="/method" tone="dark" />
 
       <section className="relative z-10 mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] content-end px-4 pb-16 pt-20 md:px-8 xl:px-10">
-        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Void Agency / technical SEO method</p>
+        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Void Agency / technical SEO audit services</p>
         <h1 className="max-w-6xl font-serif text-[4rem] italic leading-[0.82] tracking-normal md:text-[7.5rem] xl:text-[10rem]">
-          Crawl. Diagnose. Repair. Measure.
+          Technical SEO audits, evidence first.
         </h1>
         <p className="mt-10 max-w-3xl text-base leading-relaxed text-canvas/70">
-          A fixed-scope path from inspectable site evidence to implementation work. The deliverable is not a long checklist; it is a small set of defensible findings, owners, and checks.
+          Fixed-scope technical SEO audit services for crawlability, indexation, rendering, internal links, structured data, analytics, and implementation. The deliverable is a small set of defensible findings, owners, and rerun checks.
         </p>
-        <div className="mt-8 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
-          <a href="/contact" className="border-b border-accent/45 pb-1 text-accent hover:border-canvas hover:text-canvas">Request an audit</a>
-          <a href="/atlas/sample-crawl" className="border-b border-canvas/28 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Sample crawl</a>
-          <a href="/case-studies/technical-seo-audit" className="border-b border-canvas/28 pb-1 text-canvas/72 hover:border-canvas hover:text-canvas">Finding walkthrough</a>
+        <div className="mt-8 flex flex-wrap items-center gap-4 text-[10px] uppercase tracking-[0.22em]">
+          <a href="/contact" className="inline-flex min-h-11 items-center border border-canvas bg-canvas px-4 text-[11px] font-semibold text-ink transition-colors hover:bg-accent">Request a technical SEO audit</a>
+          <a href="/atlas/sample-crawl" className="inline-flex min-h-11 items-center border-b border-canvas/28 text-canvas/72 hover:border-canvas hover:text-canvas">Open-corpus demonstration</a>
+          <a href="#worked-finding" className="inline-flex min-h-11 items-center border-b border-canvas/28 text-canvas/72 hover:border-canvas hover:text-canvas">Worked finding</a>
         </div>
       </section>
 
@@ -183,7 +183,7 @@ export default function VoidAgencyMethodPage() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-[1480px] border-t border-canvas/14 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
+      <section id="worked-finding" className="relative z-10 mx-auto max-w-[1480px] scroll-mt-24 border-t border-canvas/14 px-4 py-16 md:px-8 xl:px-10 xl:py-24">
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.38fr_0.62fr] lg:items-end">
           <div>
             <p className="text-[10px] uppercase tracking-[0.28em] text-canvas/60">Worked finding</p>
@@ -211,7 +211,7 @@ export default function VoidAgencyMethodPage() {
             <p className="text-base leading-relaxed text-canvas/70">
               A useful first message includes the URL, what changed or feels broken, and the decision the review needs to support. Sensitive access can be handled only after scope is agreed.
             </p>
-            <a href="/contact" className="mt-8 inline-flex min-h-11 items-center border-b border-accent/45 text-[10px] uppercase tracking-[0.22em] text-accent hover:border-canvas hover:text-canvas">Send a short brief</a>
+            <a href="/contact" className="mt-8 inline-flex min-h-11 items-center border border-canvas bg-canvas px-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink transition-colors hover:bg-accent">Send a short brief</a>
           </div>
         </div>
       </section>

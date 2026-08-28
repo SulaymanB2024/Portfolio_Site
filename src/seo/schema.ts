@@ -1,16 +1,30 @@
-import { AI_INFORMATION_DESCRIPTION, expertiseAreas } from '../content/aiInformation';
 import {
   aiSearchAuditChecklist,
   atlasCheckItems,
-  fanOutQueryMap,
-  publicSourceGraph,
   type EvidenceListItem,
-  type FanOutQueryMapItem,
 } from '../content/evidenceLists';
 import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import { PROFILE_FACTS } from '../content/profileFacts';
-import { VIRALBENCH_ARTICLE_IMAGE } from '../content/viralBenchArticle';
-import { absoluteUrl, DEFAULT_OG_IMAGE, PERSON_ID, SITE_NAME, SITE_URL } from './site';
+import {
+  VIRALBENCH_ARTICLE_DATE,
+  VIRALBENCH_ARTICLE_DESCRIPTION,
+  VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
+  VIRALBENCH_ARTICLE_MODIFIED_DATE,
+  VIRALBENCH_ARTICLE_TITLE,
+} from '../content/viralBenchArticleMeta';
+import { searchTerms } from './keywordStrategy';
+import {
+  ATLAS_SOFTWARE_ID,
+  DEFAULT_OG_IMAGE,
+  LOGO_ID,
+  PERSON_ID,
+  PRIMARY_IMAGE_ID,
+  SITE_NAME,
+  SITE_URL,
+  VOID_AGENCY_ID,
+  WEBSITE_ID,
+  absoluteUrl,
+} from './site';
 
 export type JsonLd = Record<string, unknown>;
 
@@ -23,8 +37,16 @@ function graphSchema(items: JsonLd[]): JsonLd {
 
 const canonicalLogo = {
   '@type': 'ImageObject',
-  '@id': `${SITE_URL}/#logo`,
+  '@id': LOGO_ID,
+  url: absoluteUrl('/favicon.svg'),
+  contentUrl: absoluteUrl('/favicon.svg'),
+};
+
+const canonicalPrimaryImage = {
+  '@type': 'ImageObject',
+  '@id': PRIMARY_IMAGE_ID,
   url: absoluteUrl(DEFAULT_OG_IMAGE),
+  contentUrl: absoluteUrl(DEFAULT_OG_IMAGE),
 };
 
 const schemaDateModified = PROFILE_FACTS.lastReviewed;
@@ -32,12 +54,11 @@ const directEmail = 'sulayman.bowles@gmail.com';
 
 const primarySiteParts = [
   { name: 'About Sulayman Bowles', path: '/about' },
-  { name: 'Selected Work', path: '/work' },
-  { name: 'Atlas SEO Audit Console', path: '/atlas' },
-  { name: 'Void Agency Method', path: '/method' },
-  { name: 'Profile Context', path: '/ai-information' },
-  { name: 'Contact Sulayman Bowles', path: '/contact' },
-  { name: 'Research Notes', path: '/research' },
+  { name: 'Technical SEO and AI Systems Portfolio', path: '/work' },
+  { name: 'Atlas Technical SEO Audit Software', path: '/atlas' },
+  { name: 'Technical SEO Audit Services', path: '/method' },
+  { name: 'Technical SEO Consultant Contact', path: '/contact' },
+  { name: 'Technical SEO and AI Systems Research', path: '/research' },
 ];
 
 function contactPointSchema(): JsonLd {
@@ -75,7 +96,7 @@ export function personSchema({
     affiliation.push({
       '@type': 'Organization',
       name: 'Void Agency',
-      '@id': `${SITE_URL}/#void-agency`,
+      '@id': VOID_AGENCY_ID,
     });
   }
 
@@ -86,7 +107,7 @@ export function personSchema({
     name: PROFILE_FACTS.name,
     url: SITE_URL,
     jobTitle: 'Technical systems builder',
-    mainEntityOfPage: absoluteUrl('/ai-information'),
+    mainEntityOfPage: absoluteUrl('/about'),
     description: PROFILE_FACTS.currentSummary,
     sameAs: [
       PROFILE_FACTS.canonicalLinks.linkedin,
@@ -108,23 +129,7 @@ export function personSchema({
     ],
     subjectOf: [
       {
-        '@type': 'WebPage',
-        name: 'Profile Context for Sulayman Bowles, Void Agency, and Atlas',
-        url: absoluteUrl('/ai-information'),
-        description:
-          'Profile context page for current identity, project links, older background, and clarification limits.',
-      },
-      {
-        '@type': 'ProfilePage',
-        name: 'SulaymanB2024 GitHub profile',
-        url: 'https://github.com/SulaymanB2024',
-        description: 'Public code profile for portfolio, crawler, technical SEO, and finance research projects.',
-      },
-      {
-        '@type': 'ProfilePage',
-        name: 'Sulayman Bowles Devpost profile',
-        url: 'https://devpost.com/sulayman-bowles',
-        description: 'Public project and hackathon profile corroborating the technical builder identity.',
+        '@id': `${absoluteUrl('/about')}#webpage`,
       },
       {
         '@type': 'WebPage',
@@ -138,32 +143,20 @@ export function personSchema({
         url: 'https://sulayman-bowles.tech/',
         description: 'Public technical ledger for projects, experiments, files, and competition records connected to the main identity site.',
       },
-      {
-        '@type': 'WebPage',
-        name: 'Golden Hornet Young Composers Concert',
-        url: 'https://www.goldenhornet.org/calendar/young-composers-concert-2022',
-        description:
-          'Historical composition-background source that should be interpreted as earlier context, not current primary positioning.',
-      },
-      {
-        '@type': 'WebPage',
-        name: 'UT Butler University Orchestra',
-        url: 'https://music.utexas.edu/events/4645-university-orchestra',
-        description:
-          'Historical classical-bass source that should be reconciled with the current McCombs, Atlas, technical SEO, search visibility, and finance research positioning.',
-      },
     ],
     affiliation,
     knowsLanguage: ['English'],
     knowsAbout: [
       'Technical SEO',
-      'Search discoverability',
-      'Search visibility',
+      'Technical SEO consulting',
+      'Technical SEO audit software',
+      'AI product management',
+      'Technical systems',
       'Crawlability',
       'Indexation',
       'Structured data',
-      'Finance and data analysis',
-      'Market research',
+      'Investment research',
+      'Music composition',
       'Atlas SEO Audit Console',
       'Void Agency',
     ],
@@ -175,19 +168,20 @@ export function websiteSchema(): JsonLd {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    '@id': `${SITE_URL}/#website`,
+    '@id': WEBSITE_ID,
     name: SITE_NAME,
     url: SITE_URL,
     description:
       'Personal site for Sulayman Bowles covering Atlas, technical SEO, search visibility, finance research, public source context, and selected work.',
+    keywords: searchTerms('/'),
     inLanguage: 'en-US',
     publisher: {
       '@id': PERSON_ID,
     },
     about: [
       { '@id': PERSON_ID },
-      { '@id': `${SITE_URL}/atlas#software` },
-      { '@id': `${SITE_URL}/#void-agency` },
+      { '@id': ATLAS_SOFTWARE_ID },
+      { '@id': VOID_AGENCY_ID },
     ],
     hasPart: primarySiteParts.map((part) => ({
       '@type': 'WebPage',
@@ -201,7 +195,7 @@ export function voidAgencyOrganizationSchema(): JsonLd {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': `${SITE_URL}/#void-agency`,
+    '@id': VOID_AGENCY_ID,
     name: 'Void Agency',
     url: 'https://www.void-agency.com/',
     logo: canonicalLogo,
@@ -240,30 +234,35 @@ function webPageSchema({
   aboutIds = [],
   additionalType,
   dateModified,
+  keywords,
 }: {
   path: string;
   name: string;
   description: string;
   mainEntityId?: string;
   aboutIds?: string[];
-  additionalType?: string;
+  additionalType?: string | string[];
   dateModified?: string;
+  keywords?: readonly string[];
 }): JsonLd {
   return {
     '@context': 'https://schema.org',
-    '@type': additionalType ? ['WebPage', additionalType] : 'WebPage',
+    '@type': additionalType
+      ? ['WebPage', ...(Array.isArray(additionalType) ? additionalType : [additionalType])]
+      : 'WebPage',
     '@id': `${absoluteUrl(path)}#webpage`,
     name,
     url: absoluteUrl(path),
     description,
+    ...(keywords?.length ? { keywords } : {}),
     inLanguage: 'en-US',
     ...(dateModified ? { dateModified } : {}),
     isPartOf: {
-      '@id': `${SITE_URL}/#website`,
+      '@id': WEBSITE_ID,
     },
     ...(mainEntityId ? { mainEntity: { '@id': mainEntityId } } : {}),
     ...(aboutIds.length ? { about: aboutIds.map((id) => ({ '@id': id })) } : {}),
-    primaryImageOfPage: canonicalLogo,
+    primaryImageOfPage: canonicalPrimaryImage,
   };
 }
 
@@ -299,43 +298,6 @@ function evidenceItemListSchema({
   };
 }
 
-function fanOutQueryItemListSchema(items: FanOutQueryMapItem[]): JsonLd {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    '@id': `${absoluteUrl('/ai-information')}#fan-out-query-map`,
-    name: 'Likely Search Questions',
-    url: `${absoluteUrl('/ai-information')}#fan-out-query-map`,
-    description:
-      'A public map of likely search follow-up questions, the best page to answer each one, missing content, and recommended edits.',
-    itemListOrder: 'https://schema.org/ItemListOrderAscending',
-    numberOfItems: items.length,
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.originalQuery,
-      description: `Likely fan-out queries: ${item.likelyFanOutQueries.join('; ')}. Missing content: ${item.missingContent}. Recommended edit: ${item.recommendedEdit}`,
-      url: absoluteUrl(item.href),
-    })),
-  };
-}
-
-function expertiseDefinedTermSetSchema(): JsonLd {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'DefinedTermSet',
-    '@id': `${absoluteUrl('/ai-information')}#expertise-areas`,
-    name: 'Relevant Expertise Areas',
-    description:
-      'Public expertise terms stated on the profile context page for Sulayman Bowles.',
-    hasDefinedTerm: expertiseAreas.map((area, index) => ({
-      '@type': 'DefinedTerm',
-      '@id': `${absoluteUrl('/ai-information')}#expertise-${index + 1}`,
-      name: area,
-    })),
-  };
-}
-
 function methodOfferCatalogSchema(): JsonLd {
   const offers = [
     {
@@ -347,7 +309,7 @@ function methodOfferCatalogSchema(): JsonLd {
     },
     {
       name: 'Public Page Clarity Review',
-      url: absoluteUrl('/ai-information'),
+      url: absoluteUrl('/about'),
       serviceType: 'Search Visibility Audit',
       description:
         'Entity clarity, page structure, schema, source material, and crawler access review.',
@@ -384,7 +346,7 @@ function methodOfferCatalogSchema(): JsonLd {
         serviceType: offer.serviceType,
         description: offer.description,
         provider: {
-          '@id': `${SITE_URL}/#void-agency`,
+          '@id': VOID_AGENCY_ID,
         },
       },
     })),
@@ -395,7 +357,7 @@ export function projectSchema(): JsonLd {
   return {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    '@id': `${SITE_URL}/atlas#software`,
+    '@id': ATLAS_SOFTWARE_ID,
     name: 'Atlas SEO Audit Console',
     url: absoluteUrl('/atlas'),
     applicationCategory: 'BusinessApplication',
@@ -404,16 +366,15 @@ export function projectSchema(): JsonLd {
       '@id': PERSON_ID,
     },
     description:
-      'A technical SEO audit and evidence system for crawling websites, preserving raw and rendered page evidence, checking robots.txt and sitemap behavior, analyzing internal link graphs, scoring technical findings, persisting crawl data, and exporting operator or client-facing reports.',
+      'An in-development technical SEO audit and evidence system. Its public demonstration covers bounded source capture, render-review states, traceable findings, and CSV/JSON artifacts; the Atlas page labels additional capabilities by implementation and public-proof status.',
+    keywords: searchTerms('/atlas'),
     featureList: [
-      'Crawling and URL discovery',
-      'robots.txt and sitemap handling',
-      'Raw HTML and rendered-page evidence',
-      'SQLite persistence for crawl records',
-      'Internal link graph analysis',
-      'Canonical, noindex, redirect, and indexability checks',
-      'Technical scoring and issue prioritization',
-      'Operator dashboard and client-facing export structures',
+      'Bounded URL and source capture',
+      'Source-versus-render review states',
+      'robots.txt, sitemap, canonical, noindex, and redirect review',
+      'Evidence-linked finding records',
+      'CSV and JSON demonstration artifacts',
+      'Persistence, graph, scoring, and client-handoff capabilities labeled as partial or in development',
     ],
   };
 }
@@ -426,7 +387,7 @@ export function serviceSchema(): JsonLd {
     name: 'Technical SEO and Search Visibility Audit',
     url: absoluteUrl('/method'),
     provider: {
-      '@id': `${SITE_URL}/#void-agency`,
+      '@id': VOID_AGENCY_ID,
     },
     areaServed: 'United States',
     serviceType: [
@@ -523,9 +484,10 @@ export function homeJsonLd(): JsonLd {
       path: '/',
       name: 'Sulayman Bowles',
       description:
-        'Homepage for Sulayman Bowles, a UT Austin McCombs student and technical systems builder focused on Atlas, technical SEO, search visibility, and finance research.',
+        'Homepage for Sulayman Bowles, a technical systems builder working across crawl infrastructure, AI product workflows, analytics, and finance research.',
+      keywords: searchTerms('/'),
       mainEntityId: PERSON_ID,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
+      aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
     }),
   ]);
 }
@@ -538,66 +500,16 @@ export function aboutJsonLd(): JsonLd {
       path: '/about',
       name: 'About Sulayman Bowles',
       description:
-        'About page explaining Sulayman Bowles through UT Austin McCombs, Atlas, technical SEO, Void Agency, search visibility, and finance research.',
+        'About page explaining Sulayman Bowles through technical systems work, UT Austin McCombs, Atlas, technical SEO, Void Agency, AI product workflows, and finance research.',
+      keywords: searchTerms('/about'),
       mainEntityId: PERSON_ID,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
-      additionalType: 'AboutPage',
+      aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
+      additionalType: ['AboutPage', 'ProfilePage'],
       dateModified: schemaDateModified,
     }),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'ProfilePage',
-      '@id': `${absoluteUrl('/about')}#profile`,
-      name: 'About Sulayman Bowles',
-      url: absoluteUrl('/about'),
-      description:
-        'Profile page explaining Sulayman Bowles through UT Austin McCombs, Atlas, technical SEO, Void Agency, search visibility, and finance research.',
-      dateModified: schemaDateModified,
-      mainEntity: {
-        '@id': PERSON_ID,
-      },
-      isPartOf: {
-        '@id': `${SITE_URL}/#website`,
-      },
-    },
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'About', path: '/about' },
-    ]),
-  ]);
-}
-
-export function simpleBookJsonLd(): JsonLd {
-  return graphSchema([
-    ...canonicalEntitySchemas(),
-    websiteSchema(),
-    webPageSchema({
-      path: '/simple',
-      name: 'A Short Book About Sulayman Bowles',
-      description:
-        'First-person text edition explaining Sulayman Bowles, technical SEO, Atlas, Void Agency, Markets Research, finance research, and software systems.',
-      mainEntityId: PERSON_ID,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
-    }),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'ProfilePage',
-      '@id': `${absoluteUrl('/simple')}#profile`,
-      name: 'A Short Book About Sulayman Bowles',
-      url: absoluteUrl('/simple'),
-      description:
-        'A first-person text edition of Sulayman Bowles website, covering technical SEO, Atlas, Void Agency, Markets Research, finance research, software systems, and current direction.',
-      dateModified: schemaDateModified,
-      mainEntity: {
-        '@id': PERSON_ID,
-      },
-      isPartOf: {
-        '@id': `${SITE_URL}/#website`,
-      },
-    },
-    breadcrumbSchema([
-      { name: 'Home', path: '/' },
-      { name: 'Book', path: '/simple' },
     ]),
   ]);
 }
@@ -612,78 +524,11 @@ export function resumeJsonLd(): JsonLd {
       description:
         'HTML-first resume for Sulayman Bowles across UT Austin McCombs, Void Agency, Atlas, technical SEO, search visibility, finance research, public code, and professional profiles.',
       mainEntityId: PERSON_ID,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
+      aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
     }),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'ProfilePage',
-      '@id': `${absoluteUrl('/resume')}#profile`,
-      name: 'Sulayman Bowles Resume | Technical SEO, Atlas & Finance Research',
-      url: absoluteUrl('/resume'),
-      description:
-        'HTML-first resume for Sulayman Bowles across UT Austin McCombs, Void Agency, Atlas, technical SEO, search visibility, finance research, public code, and professional profiles.',
-      dateModified: schemaDateModified,
-      mainEntity: {
-        '@id': PERSON_ID,
-      },
-      isPartOf: {
-        '@id': `${SITE_URL}/#website`,
-      },
-    },
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Resume', path: '/resume' },
-    ]),
-  ]);
-}
-
-export function aiInformationJsonLd(): JsonLd {
-  return graphSchema([
-    ...canonicalEntitySchemas({ includeVoidAgency: true }),
-    websiteSchema(),
-    projectSchema(),
-    webPageSchema({
-      path: '/ai-information',
-      name: 'Profile Context for Sulayman Bowles, Void Agency, and Atlas',
-      description: AI_INFORMATION_DESCRIPTION,
-      mainEntityId: PERSON_ID,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`, `${SITE_URL}/#void-agency`],
-      additionalType: 'AboutPage',
-      dateModified: schemaDateModified,
-    }),
-    evidenceItemListSchema({
-      id: 'public-source-graph',
-      name: 'Public Source List',
-      description:
-        'A categorized list of public sources that explain Sulayman Bowles, Atlas SEO Audit Console, Void Agency, academic context, research files, and clarification limits.',
-      path: '/ai-information',
-      items: publicSourceGraph,
-    }),
-    fanOutQueryItemListSchema(fanOutQueryMap),
-    expertiseDefinedTermSetSchema(),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'ProfilePage',
-      '@id': `${absoluteUrl('/ai-information')}#profile`,
-      name: 'Profile Context for Sulayman Bowles, Void Agency, and Atlas',
-      url: absoluteUrl('/ai-information'),
-      description: AI_INFORMATION_DESCRIPTION,
-      dateModified: schemaDateModified,
-      mainEntity: {
-        '@id': PERSON_ID,
-      },
-      about: [
-        { '@id': PERSON_ID },
-        { '@id': `${SITE_URL}/#void-agency` },
-        { '@id': `${SITE_URL}/atlas#software` },
-      ],
-      isPartOf: {
-        '@id': `${SITE_URL}/#website`,
-      },
-    },
-    breadcrumbSchema([
-      { name: 'Home', path: '/' },
-      { name: 'Profile Context', path: '/ai-information' },
     ]),
   ]);
 }
@@ -697,8 +542,9 @@ export function atlasJsonLd(): JsonLd {
       path: '/atlas',
       name: 'Atlas SEO Audit Console',
       description:
-        'Software/project page for Atlas SEO Audit Console, a crawl system for technical SEO, indexation, internal links, structured data, scoring, and exports.',
-      mainEntityId: `${SITE_URL}/atlas#software`,
+        'Project page for the in-development Atlas technical SEO audit system, including a bounded public crawl sample and labeled implementation and proof status.',
+      keywords: searchTerms('/atlas'),
+      mainEntityId: ATLAS_SOFTWARE_ID,
       aboutIds: [PERSON_ID],
     }),
     evidenceItemListSchema({
@@ -726,9 +572,10 @@ export function methodJsonLd(): JsonLd {
       path: '/method',
       name: 'Void Agency Method',
       description:
-        'Service/process page for Void Agency technical SEO and search visibility audits.',
+        'Technical SEO audit services and process page for Void Agency, covering crawlability, indexation, rendering, structured data, implementation, and rerun checks.',
+      keywords: searchTerms('/method'),
       mainEntityId: `${SITE_URL}/method#service`,
-      aboutIds: [PERSON_ID, `${SITE_URL}/#void-agency`, `${SITE_URL}/atlas#software`],
+      aboutIds: [PERSON_ID, VOID_AGENCY_ID, ATLAS_SOFTWARE_ID],
     }),
     evidenceItemListSchema({
       id: 'search-visibility-checklist',
@@ -761,8 +608,9 @@ export function workJsonLd(): JsonLd {
       name: 'Selected Work',
       description:
         'A work index for Sulayman Bowles with contextual links to Atlas sample crawl data, technical SEO method, public code, audit intake, and markets research assumptions.',
+      keywords: searchTerms('/work'),
       mainEntityId: collectionId,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
+      aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -801,6 +649,7 @@ export function contactJsonLd(): JsonLd {
       name: 'Contact Sulayman Bowles',
       description:
         'Contact page for Sulayman Bowles with a direct email path, compact Formspree brief form, and links to LinkedIn, GitHub, resume, public site, Atlas sample crawl data, and the technical SEO method.',
+      keywords: searchTerms('/contact'),
       mainEntityId: serviceId,
       aboutIds: [PERSON_ID],
       additionalType: 'ContactPage',
@@ -820,20 +669,20 @@ export function atlasSampleCrawlJsonLd(): JsonLd {
     projectSchema(),
     webPageSchema({
       path: '/atlas/sample-crawl',
-      name: 'Atlas Sample Crawl Run',
+      name: 'Atlas Open Corpus Demonstration',
       description:
-        'A sanitized Atlas sample crawl table showing URL status, indexability, crawl depth, link counts, canonical state, issue labels, and evidence notes.',
-      mainEntityId: `${SITE_URL}/atlas#software`,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
+        'A dated Atlas sample with bounded source capture, render-review states, traceable findings, confidence, and exportable CSV/JSON artifacts.',
+      mainEntityId: ATLAS_SOFTWARE_ID,
+      aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
     }),
     {
       '@context': 'https://schema.org',
       '@type': 'Dataset',
-      '@id': `${absoluteUrl('/atlas/sample-crawl')}#sanitized-crawl-dataset`,
-      name: 'Atlas Sanitized Crawl Sample',
-      url: absoluteUrl('/research/atlas-sanitized-crawl-sample.csv'),
+      '@id': `${absoluteUrl('/atlas/sample-crawl')}#open-corpus-dataset`,
+      name: 'Atlas Open Corpus Run: Quotes to Scrape',
+      url: absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.csv'),
       description:
-        'Sanitized/demo crawl sample with URL-level technical SEO fields. It is not a private client export or ranking claim.',
+        'Dated bounded source-capture artifact with URL-level source and runtime indicators. It is not a private client export, corpus-owner audit, or ranking claim.',
       license: 'https://creativecommons.org/licenses/by/4.0',
       creator: {
         '@id': PERSON_ID,
@@ -848,48 +697,18 @@ export function atlasSampleCrawlJsonLd(): JsonLd {
   ]);
 }
 
-export function technicalSeoCaseStudyJsonLd(): JsonLd {
-  const articleId = `${absoluteUrl('/case-studies/technical-seo-audit')}#article`;
-
-  return graphSchema([
-    ...canonicalEntitySchemas(),
-    websiteSchema(),
-    articleSchema({
-      title: 'Technical SEO Finding Walkthrough',
-      description:
-        'A sanitized crawl-to-repair walkthrough showing how one observed field becomes an interpreted risk, implementation action, and rerun check.',
-      path: '/case-studies/technical-seo-audit',
-      datePublished: '2026-06-21',
-    }),
-    webPageSchema({
-      path: '/case-studies/technical-seo-audit',
-      name: 'Technical SEO Finding Walkthrough',
-      description:
-        'A public reasoning walkthrough showing the path from crawl fields to interpreted risk, implementation action, and rerun notes.',
-      mainEntityId: articleId,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
-    }),
-    breadcrumbSchema([
-      { name: 'Home', path: '/' },
-      { name: 'Work', path: '/work' },
-      { name: 'Technical SEO Finding Walkthrough', path: '/case-studies/technical-seo-audit' },
-    ]),
-  ]);
-}
-
 export function viralBenchArticleJsonLd(): JsonLd {
   const path = '/viralbench-codex-agent-harness';
-  const title = 'Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench';
-  const description =
-    'How I’m turning ViralBench into a Codex-powered agent harness for replay, trace evaluation, controlled experiments, and safer marketing automation.';
+  const title = VIRALBENCH_ARTICLE_TITLE;
+  const description = VIRALBENCH_ARTICLE_DESCRIPTION;
   const articleId = `${absoluteUrl(path)}#article`;
-  const image = absoluteUrl(VIRALBENCH_ARTICLE_IMAGE);
+  const image = absoluteUrl(VIRALBENCH_ARTICLE_SOCIAL_IMAGE);
   const article = articleSchema({
     title,
     description,
     path,
-    datePublished: '2026-07-09',
-    dateModified: '2026-07-09',
+    datePublished: VIRALBENCH_ARTICLE_DATE,
+    dateModified: VIRALBENCH_ARTICLE_MODIFIED_DATE,
     image,
   });
 
@@ -912,7 +731,7 @@ export function viralBenchArticleJsonLd(): JsonLd {
       ],
       about: [
         { '@type': 'Thing', name: 'ViralBench', sameAs: 'https://viralbench.ai/' },
-        { '@type': 'SoftwareApplication', name: 'Codex', applicationCategory: 'DeveloperApplication', sameAs: 'https://developers.openai.com/codex' },
+        { '@type': 'Thing', name: 'Codex', sameAs: 'https://developers.openai.com/codex' },
         { '@type': 'Thing', name: 'AI agent evaluation' },
       ],
       citation: [
@@ -929,7 +748,7 @@ export function viralBenchArticleJsonLd(): JsonLd {
       description,
       mainEntityId: articleId,
       aboutIds: [PERSON_ID],
-      dateModified: '2026-07-09',
+      dateModified: VIRALBENCH_ARTICLE_MODIFIED_DATE,
     }),
     {
       '@context': 'https://schema.org',
@@ -964,7 +783,7 @@ export function austinTechnicalSeoJsonLd(): JsonLd {
       '@context': 'https://schema.org',
       '@type': 'Service',
       '@id': serviceId,
-      name: 'Austin Technical SEO',
+      name: 'Austin Technical SEO Consultant and Audit Services',
       url: absoluteUrl('/austin-technical-seo'),
       provider: {
         '@id': PERSON_ID,
@@ -972,20 +791,19 @@ export function austinTechnicalSeoJsonLd(): JsonLd {
       areaServed: {
         '@type': 'City',
         name: 'Austin',
-        addressRegion: 'TX',
-        addressCountry: 'US',
       },
-      serviceType: ['Technical SEO Audit', 'Search Visibility Audit', 'Local Search Visibility Review'],
+      serviceType: ['Austin Technical SEO Consulting', 'Technical SEO Audit', 'Crawlability Audit', 'Local Search Visibility Review'],
       description:
-        'Technical SEO audit work for Austin teams that need crawlability, indexation, structured data, page clarity, and implementation detail reviewed.',
+        'Austin technical SEO consulting for teams that need crawlability, indexation, JavaScript rendering, internal links, structured data, local pages, and implementation reviewed.',
     },
     webPageSchema({
       path: '/austin-technical-seo',
-      name: 'Austin Technical SEO',
+      name: 'Austin Technical SEO Consultant',
       description:
-        'A local service-intent page for Austin technical SEO work with conservative limits and links to method, sample crawl data, and intake.',
+        'Austin technical SEO consultant and audit-services page with crawlability evidence, defined limits, method links, sample crawl data, and intake.',
+      keywords: searchTerms('/austin-technical-seo'),
       mainEntityId: serviceId,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
+      aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
     }),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
@@ -1010,8 +828,9 @@ export function researchAssetsJsonLd(): JsonLd {
       name: 'Research Assets',
       description:
         'Public index of technical SEO, crawler policy, Atlas, crawlability, identity, and finance research files with source-file links and limits.',
+      keywords: searchTerms('/research'),
       mainEntityId: collectionId,
-      aboutIds: [PERSON_ID, `${SITE_URL}/atlas#software`],
+      aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
     }),
     {
       '@context': 'https://schema.org',
@@ -1062,25 +881,6 @@ export function researchAssetsJsonLd(): JsonLd {
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Research Assets', path: '/research' },
-    ]),
-  ]);
-}
-
-export function voidAgencyJsonLd(): JsonLd {
-  return graphSchema([
-    ...canonicalEntitySchemas({ includeVoidAgency: true }),
-    websiteSchema(),
-    webPageSchema({
-      path: '/void-agency',
-      name: 'Void Agency',
-      description:
-        'Service-practice page for Void Agency, the branch connected to Sulayman Bowles technical SEO, crawlability, and practical audits.',
-      mainEntityId: `${SITE_URL}/#void-agency`,
-      aboutIds: [PERSON_ID, `${SITE_URL}/#void-agency`, `${SITE_URL}/atlas#software`],
-    }),
-    breadcrumbSchema([
-      { name: 'Home', path: '/' },
-      { name: 'Void Agency', path: '/void-agency' },
     ]),
   ]);
 }
@@ -1161,5 +961,44 @@ export function marketArticleJsonLd({
       { name: collectionName, path: collectionPath },
       { name: title, path },
     ]),
+  ]);
+}
+
+export function technicalSeoCollectionJsonLd({
+  title,
+  description,
+  path,
+  parentPath = '/research',
+  parentName = 'Research',
+}: {
+  title: string;
+  description: string;
+  path: string;
+  parentPath?: string;
+  parentName?: string;
+}): JsonLd {
+  const collectionId = `${absoluteUrl(path)}#collection`;
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Research', path: '/research' },
+  ];
+
+  if (parentPath !== '/research') {
+    breadcrumbs.push({ name: parentName, path: parentPath });
+  }
+  breadcrumbs.push({ name: title, path });
+
+  return graphSchema([
+    ...canonicalEntitySchemas(),
+    websiteSchema(),
+    collectionPageSchema(title, description, path),
+    webPageSchema({
+      path,
+      name: title,
+      description,
+      mainEntityId: collectionId,
+      aboutIds: [PERSON_ID],
+    }),
+    breadcrumbSchema(breadcrumbs),
   ]);
 }

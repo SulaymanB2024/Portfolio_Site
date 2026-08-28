@@ -124,7 +124,7 @@ export function usePageTransitions({
       const href = link?.getAttribute('href');
       if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
-      const url = new URL(href, window.location.origin);
+      const url = new URL(href, window.location.href);
       if (url.origin !== window.location.origin || /\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
       preloadInBackground(`${normalizePath(url.pathname)}${url.search}${url.hash}`);
     };
@@ -155,7 +155,7 @@ export function usePageTransitions({
       const href = link.getAttribute('href');
       if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
-      const url = new URL(href, window.location.origin);
+      const url = new URL(href, window.location.href);
       if (url.origin !== window.location.origin || /\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
 
       const canonicalPath = normalizePath(url.pathname);

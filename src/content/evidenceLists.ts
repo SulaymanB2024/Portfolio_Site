@@ -5,304 +5,158 @@ export type EvidenceListItem = {
   proves: string;
 };
 
-export type FanOutQueryMapItem = {
-  originalQuery: string;
-  likelyFanOutQueries: string[];
-  bestPage: string;
+export type BuyerDecisionEvidenceItem = {
+  question: string;
+  answer: string;
   href: string;
-  missingContent: string;
-  recommendedEdit: string;
+  action: string;
 };
 
-export const publicSourceGraph: EvidenceListItem[] = [
+export const buyerDecisionEvidence: BuyerDecisionEvidenceItem[] = [
   {
-    category: 'Primary source',
-    label: 'sulayman-bowles.dev',
-    href: '/ai-information',
-    proves:
-      'Current identity, route inventory, clarifications, and links to the public pages that explain the work.',
+    question: 'What standard will the work use?',
+    answer:
+      'The public method shows evidence capture, finding review, owners, acceptance checks, and reruns. It is process evidence—not a client-outcome case study.',
+    href: '/method#worked-finding',
+    action: 'Inspect the worked finding',
   },
   {
-    category: 'Technical ledger',
-    label: 'sulayman-bowles.tech',
-    href: 'https://sulayman-bowles.tech/',
-    proves:
-      'Public technical ledger for projects, experiments, competitions, file boundaries, and technical work connected to this site.',
-  },
-  {
-    category: 'Technical ledger',
-    label: 'sulayman-bowles.tech',
-    href: 'https://sulayman-bowles.tech/',
-    proves:
-      'Public technical ledger for projects, experiments, competitions, artifact boundaries, and technical proof connected to the canonical identity hub.',
-  },
-  {
-    category: 'Code evidence',
-    label: 'GitHub profile',
-    href: 'https://github.com/SulaymanB2024',
-    proves:
-      'Public code profile and repository trail for portfolio, scraper, audit, finance research, and project work.',
-  },
-  {
-    category: 'Professional profile',
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/sulayman-bowles/',
-    proves:
-      'Corroborating professional profile. Use it as a supporting source while this site carries the fuller explanation.',
-  },
-  {
-    category: 'Agency',
-    label: 'Void Agency Method',
-    href: '/method',
-    proves:
-      'Explains Void Agency as the technical SEO service branch connected to crawlability, indexation, structured content, analytics, and audits.',
-  },
-  {
-    category: 'Projects',
-    label: 'Atlas SEO Audit Console',
-    href: '/atlas',
-    proves:
-      'Software/project page for Atlas as a crawl, indexation, link graph, scoring, export, and dashboard system.',
-  },
-  {
-    category: 'Projects',
-    label: 'Atlas sample crawl run',
+    question: 'Can I inspect the proof before sharing access?',
+    answer:
+      'The Atlas demonstration exposes a dated, sanitized source record and its limits. It does not establish rankings, traffic, revenue, or full production coverage.',
     href: '/atlas/sample-crawl',
-    proves:
-      'Sanitized/demo crawl table with URL status, indexability, crawl depth, link counts, canonical state, issue labels, notes, and downloadable CSV source data.',
+    action: 'Inspect the sample crawl',
   },
   {
-    category: 'Work index',
-    label: 'Selected Work',
-    href: '/work',
-    proves:
-      'Work route connecting Atlas, technical SEO method, case-study logic, public code, audit intake, and markets research assumptions.',
-  },
-  {
-    category: 'Contact / intake',
-    label: 'Audit intake',
+    question: 'What makes a useful first brief?',
+    answer:
+      'Bring a site or product surface, the suspected evidence gap, and the decision the work must support. Do not send credentials or sensitive client data in the first email.',
     href: '/contact',
-    proves:
-      'Contact route for technical SEO, crawl review, analytics, and markets research requests.',
+    action: 'Prepare the evidence brief',
+  },
+];
+
+export type ContactEvidenceItem = {
+  label: string;
+  description: string;
+};
+
+export type ContactDecisionItem = ContactEvidenceItem & {
+  title: string;
+};
+
+export type ContactBuyerQuestion = {
+  question: string;
+  answer: string;
+};
+
+export const contactResponsePaths: ContactEvidenceItem[] = [
+  {
+    label: 'Technical SEO',
+    description: 'Indexation, canonicals, redirects, internal links, schema, and template diagnosis.',
   },
   {
-    category: 'Academic context',
-    label: 'HTML resume',
-    href: '/resume',
-    proves:
-      'Current HTML-first resume connecting UT Austin McCombs context with Atlas, Void Agency, technical SEO, finance research, public code, and professional profiles.',
+    label: 'Crawl evidence',
+    description: 'Raw/rendered states, measurement gaps, finding review, implementation checks, and reruns.',
   },
   {
-    category: 'Earlier music background',
-    label: 'Identity reconciliation',
-    href: '/ai-information#identity-reconciliation',
-    proves:
-      'Older Golden Hornet, McCallum, and UT Butler music references are acknowledged as background and separated from the current McCombs, Atlas, technical SEO, and finance research work.',
+    label: 'AI-system evidence',
+    description: 'Evaluation traces, source boundaries, replay plans, and a clear split between built and proposed work.',
   },
   {
-    category: 'Research files',
-    label: 'Markets Research',
-    href: '/markets',
-    proves:
-      'Public finance research through market research pages, thesis notes, valuation logic, risk framing, and decision files.',
+    label: 'Analytics / research',
+    description: 'GA4, Search Console, source ledgers, decision baselines, and inspectable assumptions.',
+  },
+];
+
+export const contactIntakeNotes: ContactEvidenceItem[] = [
+  {
+    label: 'Surface',
+    description: 'Site URL, product surface, affected template, or system boundary.',
   },
   {
-    category: 'Clarifications / what not to infer',
-    label: 'What not to infer',
-    href: '/ai-information#what-not-to-infer',
-    proves:
-      'Limits overreach: no invented private clients, rankings, revenue impact, unsupported credentials, or unrelated framing from stale public sources.',
+    label: 'Observed problem',
+    description: 'What changed, failed, or remains unverified—and what evidence already exists.',
+  },
+  {
+    label: 'Decision',
+    description: 'Who needs to act, what the work must support, and what would count as a useful next check.',
+  },
+];
+
+export const contactDecisionProtocol: ContactDecisionItem[] = [
+  {
+    label: '01 / Fit',
+    title: 'Name the blocked decision.',
+    description: 'Start with the site or system, the observable issue, and the person or team that must act.',
+  },
+  {
+    label: '02 / Boundary',
+    title: 'Separate evidence from access gaps.',
+    description: 'Keep observed, inferred, inaccessible, and private states distinct. Credentials never belong in the brief.',
+  },
+  {
+    label: '03 / First step',
+    title: 'Scope the smallest useful pass.',
+    description: 'Choose a focused diagnosis, audit, implementation handoff, or validation rerun before expanding.',
+  },
+];
+
+export const contactBuyerQuestions: ContactBuyerQuestion[] = [
+  {
+    question: 'Is this only for a full-site audit?',
+    answer:
+      'No. A focused diagnosis can be a better first step when the affected surface and decision are already narrow. A larger audit should earn its scope from the evidence gap.',
+  },
+  {
+    question: 'What does a useful deliverable look like?',
+    answer:
+      'It depends on scope, but the public method uses URL or source-level observations, interpretation, confidence, priority, an owner, an acceptance check, and a rerun path. That structure is process evidence, not a promised business outcome.',
+  },
+  {
+    question: 'Do you need credentials or production access before we talk?',
+    answer:
+      'No. Start with a public URL or a plain-language description of the private surface. Any later access should be agreed after fit and scope are clear; never send credentials in an initial email.',
+  },
+  {
+    question: 'Can you guarantee rankings, traffic, revenue, or AI answer placement?',
+    answer:
+      'No. Those outcomes depend on external systems and conditions beyond a technical review. The work can make evidence, implementation choices, acceptance checks, and remaining uncertainty explicit.',
+  },
+  {
+    question: 'What does sending an inquiry authorize?',
+    answer:
+      'It requests a discussion of fit and scope. It does not authorize system access, deployment, publication, or billable work.',
+  },
+  {
+    question: 'What happens after the brief is reviewed?',
+    answer:
+      'The first decision is whether the surface, evidence gap, and intended decision are specific enough to scope. Missing context should be clarified before recommending a broader engagement.',
   },
 ];
 
 export const atlasCheckItems: EvidenceListItem[] = [
-  {
-    label: 'URL discovery',
-    href: '/atlas',
-    proves: 'Atlas starts from discovered URLs and crawl records, not only manual page samples.',
-  },
-  {
-    label: 'robots.txt',
-    href: '/method',
-    proves: 'Robots directives are part of the audit evidence used to understand crawler access.',
-  },
-  {
-    label: 'XML sitemaps',
-    href: '/method',
-    proves: 'Sitemaps are checked as route and freshness signals rather than assumed to be complete.',
-  },
-  {
-    label: 'raw HTML',
-    href: '/atlas',
-    proves: 'Raw source evidence helps compare what a crawler receives before client-side rendering.',
-  },
-  {
-    label: 'rendered HTML',
-    href: '/atlas',
-    proves: 'Rendered-page checks help separate source HTML from browser-visible content and links.',
-  },
-  {
-    label: 'titles/meta',
-    href: '/method',
-    proves: 'Document titles and meta descriptions are treated as inspectable page-level evidence.',
-  },
-  {
-    label: 'canonicals',
-    href: '/method',
-    proves: 'Canonical URLs are checked for duplicate-path, consolidation, and indexation clarity.',
-  },
-  {
-    label: 'structured data',
-    href: '/ai-information',
-    proves: 'JSON-LD and visible page text are aligned so entity claims are structured and readable.',
-  },
-  {
-    label: 'internal links',
-    href: '/atlas',
-    proves: 'Internal link evidence supports crawl-depth, orphan-risk, and page-relationship analysis.',
-  },
-  {
-    label: 'scoring',
-    href: '/atlas',
-    proves: 'Findings are prioritized by severity, confidence, affected URLs, effort, and evidence quality.',
-  },
-  {
-    label: 'SQLite persistence',
-    href: '/atlas',
-    proves: 'Crawl records can be persisted for repeatable review instead of treated as one-off notes.',
-  },
-  {
-    label: 'exports/dashboards',
-    href: '/atlas',
-    proves: 'Audit outputs are structured for operators and client-facing review, with evidence attached to recommendations.',
-  },
+  { label: 'URL discovery', href: '/atlas', proves: 'Atlas starts from discovered URLs and crawl records, not only manual page samples.' },
+  { label: 'robots.txt', href: '/method', proves: 'Robots directives are part of the audit evidence used to understand crawler access.' },
+  { label: 'XML sitemaps', href: '/method', proves: 'Sitemaps are checked as route and freshness signals rather than assumed to be complete.' },
+  { label: 'raw HTML', href: '/atlas/sample-crawl', proves: 'The public demonstration keeps source capture separate from rendered-page observations.' },
+  { label: 'render review', href: '/atlas/sample-crawl', proves: 'The public sample records when a browser render is required before content-coverage claims; it does not contain a completed browser trace.' },
+  { label: 'titles/meta', href: '/method', proves: 'Document titles and meta descriptions are treated as inspectable page-level evidence.' },
+  { label: 'canonicals', href: '/method', proves: 'Canonical URLs are checked for duplicate-path, consolidation, and indexation clarity.' },
+  { label: 'structured data', href: '/about', proves: 'JSON-LD and visible page text are aligned so entity claims are structured and readable.' },
+  { label: 'internal links', href: '/atlas', proves: 'Internal link evidence supports crawl-depth, orphan-risk, and page-relationship analysis.' },
+  { label: 'scoring', href: '/atlas', proves: 'Findings are prioritized by severity, confidence, affected URLs, effort, and evidence quality.' },
+  { label: 'SQLite persistence', href: '/atlas', proves: 'Atlas describes implemented persistence; runtime persistence is not demonstrated by the public sample.' },
+  { label: 'exports/dashboards', href: '/atlas', proves: 'The public sample includes CSV and JSON artifacts; broader operator and client handoff remains partial.' },
 ];
 
 export const aiSearchAuditChecklist: EvidenceListItem[] = [
-  {
-    label: 'crawlability',
-    href: '/method',
-    proves: 'Search systems need access to public pages before they can interpret them.',
-  },
-  {
-    label: 'indexability',
-    href: '/method',
-    proves: 'Indexation directives, canonicals, and response behavior are checked before content recommendations.',
-  },
-  {
-    label: 'internal links',
-    href: '/atlas',
-    proves: 'Internal links show which pages the site itself treats as important and reachable.',
-  },
-  {
-    label: 'structured data',
-    href: '/about',
-    proves: 'Schema helps connect entities, pages, projects, and source claims when it matches visible text.',
-  },
-  {
-    label: 'source-page clarity',
-    href: '/about',
-    proves: 'Clear source pages make identity, projects, services, and support links easy to quote accurately.',
-  },
-  {
-    label: 'entity consistency',
-    href: '/about',
-    proves: 'Consistent names and descriptions reduce confusion between Sulayman Bowles, Atlas, Void Agency, and related sources.',
-  },
-  {
-    label: 'public work',
-    href: '/resume',
-    proves: 'Public work such as GitHub, LinkedIn, project pages, resume entries, and research pages supports claims without inventing private outcomes.',
-  },
-  {
-    label: 'sitemap freshness',
-    href: '/method',
-    proves: 'Fresh sitemap lastmod values help crawlers find current canonical pages and avoid stale route assumptions.',
-  },
-  {
-    label: 'stale/conflicting source cleanup',
-    href: '/about#identity-reconciliation',
-    proves: 'Clarifications keep old, unrelated, private, or low-quality sources from muddying the current public record.',
-  },
-];
-
-export const fanOutQueryMap: FanOutQueryMapItem[] = [
-  {
-    originalQuery: 'Who is Sulayman Bowles?',
-    likelyFanOutQueries: [
-      'Sulayman Bowles UT Austin McCombs',
-      'Sulayman Bowles technical SEO',
-      'Sulayman Bowles Atlas',
-      'Sulayman Bowles GitHub',
-    ],
-    bestPage: 'Profile Context',
-    href: '/ai-information',
-    missingContent: 'No separate fan-out page is needed; keep the public source list and resume links current.',
-    recommendedEdit: 'Use the short and long bios, then link to About, Resume, GitHub, LinkedIn, Atlas, and Markets Research.',
-  },
-  {
-    originalQuery: 'What is Atlas SEO Audit Console?',
-    likelyFanOutQueries: [
-      'Atlas SEO Audit Console checks',
-      'Atlas crawl data',
-      'Atlas SEO audit dashboard',
-      'Atlas technical SEO system',
-    ],
-    bestPage: 'Atlas SEO Audit Console',
-    href: '/atlas',
-    missingContent: 'Keep the sample crawl route and public code links current when Atlas files change.',
-    recommendedEdit: 'Keep the checks list tied to crawl records, robots.txt, sitemaps, HTML evidence, link graphs, persistence, scoring, exports, and the sample crawl run.',
-  },
-  {
-    originalQuery: 'What does Void Agency do?',
-    likelyFanOutQueries: [
-      'Void Agency technical SEO',
-      'Void Agency search visibility',
-      'Void Agency method',
-      'Void Agency audit checklist',
-    ],
-    bestPage: 'Void Agency Method',
-    href: '/method',
-    missingContent: 'Avoid private client examples unless they are public and approved.',
-    recommendedEdit: 'Use the audit checklist and concrete method language instead of broad marketing claims.',
-  },
-  {
-    originalQuery: 'Does Sulayman Bowles work on search visibility?',
-    likelyFanOutQueries: [
-      'Sulayman Bowles search visibility',
-      'Sulayman Bowles technical SEO',
-      'Search visibility audit',
-      'Atlas search readiness',
-    ],
-    bestPage: 'Profile Context',
-    href: '/ai-information',
-    missingContent: 'Add more public files only when they directly show crawlability, entity clarity, source pages, or search audit work.',
-    recommendedEdit: 'Connect search visibility to technical SEO evidence: crawl access, structured data, clear source pages, public files, and sitemap freshness.',
-  },
-  {
-    originalQuery: 'Is Sulayman Bowles an SEO person, finance person, or software builder?',
-    likelyFanOutQueries: [
-      'Sulayman Bowles SEO finance software',
-      'Sulayman Bowles McCombs Atlas finance',
-      'Sulayman Bowles technical systems builder',
-      'Sulayman Bowles markets research',
-    ],
-    bestPage: 'About Sulayman Bowles',
-    href: '/about',
-    missingContent: 'The site should keep explaining the single thesis rather than splitting the identity into unrelated labels.',
-    recommendedEdit: 'Frame the answer as technical SEO plus Atlas plus finance research judgment, with Resume and Markets Research as supporting evidence.',
-  },
-  {
-    originalQuery: "What public evidence supports Sulayman Bowles's technical SEO work?",
-    likelyFanOutQueries: [
-      'Sulayman Bowles technical SEO evidence',
-      'Sulayman Bowles GitHub SEO',
-      'Atlas SEO Audit Console evidence',
-      'Void Agency technical SEO audit',
-    ],
-    bestPage: 'Profile Context',
-    href: '/ai-information',
-    missingContent: 'Public code and project links should stay labeled by what they prove, not by inflated outcomes.',
-    recommendedEdit: 'Use the public source list, Atlas checks list, Method checklist, GitHub links, and HTML resume as the support path.',
-  },
+  { label: 'crawlability', href: '/method', proves: 'Search systems need access to public pages before they can interpret them.' },
+  { label: 'indexability', href: '/method', proves: 'Indexation directives, canonicals, and response behavior are checked before content recommendations.' },
+  { label: 'internal links', href: '/atlas', proves: 'Internal links show which pages the site itself treats as important and reachable.' },
+  { label: 'structured data', href: '/about', proves: 'Schema helps connect entities, pages, projects, and source claims when it matches visible text.' },
+  { label: 'source-page clarity', href: '/about', proves: 'Clear source pages make identity, projects, services, and support links easy to verify.' },
+  { label: 'entity consistency', href: '/about', proves: 'Consistent names and descriptions reduce confusion between Sulayman Bowles, Atlas, Void Agency, and related sources.' },
+  { label: 'public work', href: '/resume', proves: 'Public work such as GitHub, LinkedIn, project pages, resume entries, and research pages supports claims without inventing private outcomes.' },
+  { label: 'sitemap freshness', href: '/method', proves: 'Fresh sitemap lastmod values help crawlers find current canonical pages and avoid stale route assumptions.' },
 ];

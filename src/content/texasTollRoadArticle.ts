@@ -14,10 +14,10 @@ export type TexasTollArticleFactGap = { title: string; items: string[] };
 export type TexasTollArticleFaq = { question: string; answer: string };
 
 export {
+  TEXAS_TOLL_ARTICLE_CONCLUSION,
   TEXAS_TOLL_ARTICLE_DATE,
   TEXAS_TOLL_ARTICLE_DESCRIPTION,
   TEXAS_TOLL_ARTICLE_DISPLAY_TITLE,
-  TEXAS_TOLL_ARTICLE_HERO_TITLE,
   TEXAS_TOLL_ARTICLE_IMAGE,
   TEXAS_TOLL_ARTICLE_READ_TIME,
   TEXAS_TOLL_ARTICLE_SEO_TITLE,
@@ -769,6 +769,14 @@ export const TEXAS_TOLL_ARTICLE_SOURCES = [
       "https://www.txdot.gov/projects/planning/freight-planning.html",
       "https://ftp.txdot.gov/pub/txdot/move-texas-freight/resources/texas-delivers-2050.pdf"
     ]
+  },
+  {
+    "id": "s26",
+    "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+    "note": "(primary state operator inventory; reviewed July 23, 2026). Identifies statewide operators, their facilities, and the public billing agency serving each system or concession.",
+    "hrefs": [
+      "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+    ]
   }
 ] as const;
 
@@ -841,6 +849,18 @@ export const TEXAS_TOLL_ARTICLE_FAQS = [
   {
     "question": "Is NTTA a private company?",
     "answer": "No. The North Texas Tollway Authority is a public political subdivision governed by county and gubernatorial appointees. It has bondholders, but no shareholders. Its toll revenue supports a pledged public system and debt service."
+  },
+  {
+    "question": "Is NTTA foreign owned?",
+    "answer": "No. NTTA is a public Texas political subdivision, not a foreign-owned company. Its bondholders can include investors from many places, but bond ownership is a creditor claim—not ownership of NTTA, its roads, or Texas land."
+  },
+  {
+    "question": "Is the Dallas North Tollway privately owned?",
+    "answer": "No. The Dallas North Tollway is part of NTTA's public toll-road system. NTTA operates it and pledges system revenue to public toll-revenue bonds; a private concession company does not own the road or hold its toll rights."
+  },
+  {
+    "question": "Do taxpayers pay for Texas toll roads?",
+    "answer": "The answer depends on the road. Toll revenue and toll-revenue bonds fund most system costs, but some projects also use public right-of-way, state or federal funds, loans, grants, or other public support. A toll road is therefore not automatically financed only by its drivers or only by taxes."
   },
   {
     "question": "Who owns SH 130?",

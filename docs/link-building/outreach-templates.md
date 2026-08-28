@@ -12,7 +12,7 @@ Hi `NAME`,
 
 I saw your `PAGE_OR_RESOURCE` on `TOPIC`. I put together a source-backed reference on AI-search crawler policy, robots directives, IndexNow, and source-page clarity:
 
-`https://sulayman-bowles.dev/markets/ai-search-crawler-policy`
+`https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy`
 
 There is also a source map here:
 

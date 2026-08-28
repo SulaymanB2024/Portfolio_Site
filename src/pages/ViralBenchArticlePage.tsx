@@ -1,123 +1,80 @@
-import { createElement, Fragment, useEffect, useMemo, type ReactNode } from 'react';
-
-import { InternalFooter } from '../components/InternalFooter';
-import { EditorialArticleHero, EditorialArticlePage } from '../components/articles/EditorialArticle';
+import { createElement, useMemo, type ReactNode } from 'react';
+import {
+  ArticleReader,
+  ArticleSectionHeader,
+  createArticleNavigation,
+  getArticleNavigationIndex,
+  type ArticleNavItem,
+  type ArticleReaderConfig,
+} from '../components/ArticleLayout';
 import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
-  VIRALBENCH_ARTICLE_HERO_TITLE,
   VIRALBENCH_ARTICLE_IMAGE,
+  VIRALBENCH_ARTICLE_INLINE_IMAGE,
   VIRALBENCH_ARTICLE_MARKDOWN,
+  VIRALBENCH_ARTICLE_MODIFIED_DATE,
   VIRALBENCH_ARTICLE_READ_TIME,
+  VIRALBENCH_ARTICLE_TITLE,
 } from '../content/viralBenchArticle';
+import { canonicalizeKnownExternalLinks } from '../content/canonicalExternalLinks';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToHtml } from '../utils/markdownToHtml';
 import { useSEO } from '../utils/seo';
 
 const ROUTE = getSeoRoute('/viralbench-codex-agent-harness')!;
+const SEARCH_TARGET = getArticleSearchTarget('/viralbench-codex-agent-harness')!;
+const EVIDENCE_SECTION_ID = 'the-evidence-layer-comes-before-the-codex-layer';
+const HARNESS_SECTION_ID = 'what-i-mean-by-codex-as-a-harness';
 const ALLOWED_ARTICLE_TAGS = new Set([
   'a', 'blockquote', 'code', 'div', 'em', 'figcaption', 'h2', 'h3', 'h4', 'li', 'ol', 'p',
   'pre', 'strong', 'sup', 'table', 'tbody', 'td', 'th', 'thead', 'tr', 'ul',
 ]);
 
-type ViralBenchSection = {
+type ArticleSection = {
   id: string;
-  title: string;
   markdown: string;
+  title: string;
 };
-
-const headlineMetrics = [
-  { value: '937', label: 'lines audited', note: 'single TypeScript handoff' },
-  { value: '18', label: 'agent rounds', note: 'fixed working budget' },
-  { value: '5', label: 'operational tools', note: 'research through publishing' },
-  { value: '6', label: 'research calls', note: 'maximum per run' },
-] as const;
-
-const toolBudget = [
-  { label: 'Agent rounds', value: 18, max: 18, display: '18' },
-  { label: 'Operational tools', value: 5, max: 18, display: '5' },
-  { label: 'Research calls', value: 6, max: 18, display: '6' },
-  { label: 'Viewed references / round', value: 12, max: 18, display: '12' },
-] as const;
-
-const systemLayers = [
-  { label: 'Model', detail: 'Base reasoning and vision capability' },
-  { label: 'Harness', detail: 'Prompt, tool schemas, limits, and memory' },
-  { label: 'Creative stack', detail: 'Retrieval, references, image model, renderer' },
-  { label: 'Account state', detail: 'History, timing, audience, and prior performance' },
-  { label: 'Platform', detail: 'Distribution conditions and delayed feedback' },
-] as const;
-
-const auditGaps = [
-  { index: '01', label: 'Thin run record', consequence: 'Success and failure cannot be reconstructed' },
-  { index: '02', label: 'Prompt-only constraints', consequence: 'Policy is described but not enforced' },
-  { index: '03', label: 'Partial visual review', consequence: 'Long carousels can ship unseen slides' },
-  { index: '04', label: 'Free-form memory', consequence: 'Belief and evidence collapse into one note' },
-  { index: '05', label: 'Attribution edge cases', consequence: 'Caption matching can attach the wrong metrics' },
-  { index: '06', label: 'Hidden parallelism', consequence: 'Same-round dependencies are implicit' },
-  { index: '07', label: 'Provenance risk', consequence: 'Adaptation and reproduction are not separated' },
-  { index: '08', label: 'Install drift', consequence: 'The handoff does not reproduce from its manifest' },
-] as const;
-
-const evidenceStages = [
-  { index: '01', label: 'Capture', detail: 'Messages, tools, sources, prompts, artifacts, cost, timing' },
-  { index: '02', label: 'Evaluate', detail: 'Versioned checks, replay results, fixed-window outcomes' },
-  { index: '03', label: 'Change', detail: 'One bounded hypothesis in an isolated worktree' },
-  { index: '04', label: 'Release', detail: 'Draft canary, human review, promote or revert' },
-] as const;
-
-const trialControls = [
-  { label: 'Pair', detail: 'Blocked baseline and treatment accounts' },
-  { label: 'Freeze', detail: 'Predeclared metric and measurement windows' },
-  { label: 'Separate', detail: 'Locked evaluator outside the builder' },
-  { label: 'Gate', detail: 'Human approval before public publishing' },
-] as const;
-
-const buildPhases = [
-  { index: '0', label: 'Freeze the baseline', output: 'Installable, replayable reference system' },
-  { index: '1', label: 'Trace + enforce', output: 'Explainable runs and hard runtime invariants' },
-  { index: '2', label: 'Split + replay', output: 'Offline experiments without publishing' },
-  { index: '3', label: 'Introduce Codex', output: 'Reviewed patches from isolated worktrees' },
-  { index: '4', label: 'Draft canaries', output: 'Online evidence with a rollback point' },
-  { index: '5', label: 'Bounded promotion', output: 'Narrow automation earned by reliability' },
-] as const;
-
-const railSections = [
-  { id: 'viralbench-is-a-live-agent-environment', label: 'Environment' },
-  { id: 'what-the-code-audit-reveals', label: 'Code audit' },
-  { id: 'what-i-mean-by-codex-as-a-harness', label: 'Harness design' },
-  { id: 'the-evidence-layer-comes-before-the-codex-layer', label: 'Evidence spine' },
-  { id: 'offline-replay-should-absorb-most-iteration', label: 'Offline replay' },
-  { id: 'live-evaluation-needs-experimental-discipline', label: 'Live trials' },
-  { id: 'the-first-build-sequence', label: 'Build sequence' },
-  { id: 'the-experiments-i-would-run-first', label: 'Experiments' },
-  { id: 'frequently-asked-questions', label: 'Direct answers' },
-  { id: 'sources-and-technical-notes', label: 'Sources' },
-] as const;
 
 function slugify(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-function splitArticleMarkdown(markdown: string) {
-  const sectionPattern = /^##\s+(.+)$/gm;
-  const matches = Array.from(markdown.matchAll(sectionPattern));
-  const firstSectionStart = matches[0]?.index ?? markdown.length;
-  const lede = markdown.slice(0, firstSectionStart).trim();
-  const sections = matches.map((match, index): ViralBenchSection => {
+function splitArticle(markdown: string) {
+  const matches = Array.from(markdown.matchAll(/^##\s+(.+)$/gm));
+  const firstSectionIndex = matches[0]?.index ?? markdown.length;
+  const lede = markdown.slice(0, firstSectionIndex).trim();
+  const sections = matches.map((match, index): ArticleSection => {
+    const start = (match.index ?? 0) + match[0].length;
+    const end = matches[index + 1]?.index ?? markdown.length;
     const title = match[1].trim();
-    const sectionStart = (match.index ?? 0) + match[0].length;
-    const sectionEnd = matches[index + 1]?.index ?? markdown.length;
 
     return {
       id: slugify(title),
+      markdown: markdown.slice(start, end).trim(),
       title,
-      markdown: markdown.slice(sectionStart, sectionEnd).trim(),
     };
   });
 
   return { lede, sections };
 }
+
+const ARTICLE = splitArticle(canonicalizeKnownExternalLinks(VIRALBENCH_ARTICLE_MARKDOWN));
+const ARTICLE_NOTE_REF_COUNTS = new Map<string, number>();
+const ARTICLE_MARKUP = new Map(
+  [ARTICLE.lede, ...ARTICLE.sections.map((section) => section.markdown)].map((markdown) => [
+    markdown,
+    markdownToHtml(markdown, { noteRefCounts: ARTICLE_NOTE_REF_COUNTS }),
+  ]),
+);
+const HEADLINE_METRICS = [
+  { value: '18', label: 'working rounds', note: 'fixed per agent run' },
+  { value: '5', label: 'execution tools', note: 'research through publishing' },
+  { value: '6', label: 'research calls', note: 'maximum Lightreel budget' },
+  { value: '01', label: 'outer loop', note: 'Codex improves the harness' },
+] as const;
 
 function articleNodeToReact(node: Node, key: string): ReactNode {
   if (node.nodeType === Node.TEXT_NODE) return node.textContent;
@@ -131,6 +88,7 @@ function articleNodeToReact(node: Node, key: string): ReactNode {
 
   const href = element.getAttribute('href');
   const props: Record<string, unknown> = { key };
+  let renderedTag = tag;
   if (element.id) props.id = element.id;
   if (element.className) props.className = element.className;
   if (href && (/^https:\/\//.test(href) || /^\/[a-z0-9]/i.test(href) || /^#/.test(href))) {
@@ -140,334 +98,267 @@ function articleNodeToReact(node: Node, key: string): ReactNode {
       props.rel = 'noreferrer';
     }
   }
+  if (tag === 'pre') props.tabIndex = 0;
+  if (tag === 'div' && element.classList.contains('article-table-wrap')) {
+    props.tabIndex = 0;
+    props.role = 'region';
+    props['aria-label'] = element.getAttribute('aria-label') ?? 'Scrollable data table';
+  }
   const ariaLabel = element.getAttribute('aria-label');
-  if (ariaLabel) props['aria-label'] = ariaLabel;
+  if (ariaLabel && !props['aria-label']) props['aria-label'] = ariaLabel;
+  if (tag === 'table') {
+    const headers = Array.from(element.querySelectorAll('thead th'))
+      .map((header) => header.textContent?.replace(/\s+/g, ' ').trim())
+      .filter(Boolean);
+    props['data-responsive-table'] = 'stacked';
+    props['aria-label'] = headers.length ? `Data table with fields: ${headers.join(', ')}` : 'Article data table';
+  }
+  if (tag === 'th' && element.closest('thead')) {
+    props.scope = 'col';
+  }
+  if ((tag === 'td' || tag === 'th') && element.closest('tbody')) {
+    const columnIndex = Array.from(element.parentElement?.children ?? []).indexOf(element);
+    const header = element.closest('table')?.querySelectorAll('thead th')[columnIndex];
+    props['data-label'] = header?.textContent?.replace(/\s+/g, ' ').trim() || `Field ${columnIndex + 1}`;
+    if (columnIndex === 0) {
+      renderedTag = 'th';
+      props.scope = 'row';
+    }
+  }
 
   const children = Array.from(element.childNodes).map((child, index) => articleNodeToReact(child, `${key}-${index}`));
-  if (tag === 'div' && element.classList.contains('article-table-wrap')) {
-    return createElement(
-      tag,
-      props,
-      createElement('span', { className: 'viralbench-table-scroll-hint', 'aria-hidden': true }, 'Scroll horizontally for the full record'),
-      ...children,
-    );
-  }
-  return createElement(tag, props, ...children);
+  return createElement(renderedTag, props, ...children);
 }
 
 function markdownToReact(markdown: string) {
-  const document = new DOMParser().parseFromString(markdownToHtml(markdown), 'text/html');
+  const document = new DOMParser().parseFromString(
+    ARTICLE_MARKUP.get(markdown) ?? markdownToHtml(markdown),
+    'text/html',
+  );
   return Array.from(document.body.childNodes).map((node, index) => articleNodeToReact(node, `article-${index}`));
 }
 
-function FigureLabel({ number, title }: { number: string; title: string }) {
+function ArticleMarkdown({ markdown }: { markdown: string }) {
+  const content = useMemo(() => markdownToReact(markdown), [markdown]);
+
+  return <div className="article-reader__prose">{content}</div>;
+}
+
+function ArticleVisual({ placement }: { placement: 'hero' | 'inline' }) {
+  const isHero = placement === 'hero';
+
   return (
-    <div className="viralbench-figure-label">
-      <span>{number}</span>
-      <span>{title}</span>
-    </div>
+    <figure className={`viralbench-page-visual viralbench-page-visual--${placement}`}>
+      <img
+        src={isHero ? VIRALBENCH_ARTICLE_IMAGE : VIRALBENCH_ARTICLE_INLINE_IMAGE}
+        width="1672"
+        height="941"
+        alt={isHero
+          ? 'A dark gallery of suspended social-media posts receding toward a bright exit, with a dotted path curving through the space.'
+          : 'An abstract monochrome room filled with speech bubbles connected by fine lines and flowing data-like strands.'}
+        decoding="async"
+        fetchPriority={isHero ? 'high' : 'auto'}
+        loading={isHero ? 'eager' : 'lazy'}
+      />
+    </figure>
   );
 }
 
 function ArchitectureDiagram() {
-  const nodes = [
-    { index: '01', kicker: 'Live inner loop', title: 'ViralBench agent', detail: 'Research, create, preview, submit, learn from delayed outcomes' },
-    { index: '02', kicker: 'Independent control', title: 'Trace + evaluator', detail: 'Preserve evidence, run replay, apply fixed checks and windows' },
-    { index: '03', kicker: 'Bounded outer loop', title: 'Codex worktree', detail: 'Diagnose, patch, replay, draft canary, promote or revert' },
-  ] as const;
-
   return (
-    <figure className="viralbench-flow-figure" aria-labelledby="viralbench-flow-caption">
-      <FigureLabel number="Figure 01" title="The two-loop harness" />
-      <ol className="viralbench-flow-figure__nodes">
-        {nodes.map((node) => (
-          <li key={node.index}>
-            <span>{node.index} / {node.kicker}</span>
-            <strong>{node.title}</strong>
-            <p>{node.detail}</p>
-          </li>
-        ))}
-      </ol>
-      <figcaption id="viralbench-flow-caption">
-        The content agent acts inside the live environment. Evidence and evaluation sit between that loop and any Codex-authored change.
-      </figcaption>
-    </figure>
-  );
-}
-
-function ToolBudgetFigure() {
-  return (
-    <figure className="viralbench-budget-figure" aria-labelledby="viralbench-budget-caption">
-      <FigureLabel number="Figure 02" title="Current handoff operating envelope" />
-      <div className="viralbench-budget-figure__rows">
-        {toolBudget.map((item) => (
-          <div key={item.label}>
-            <span>{item.label}</span>
-            <div aria-hidden="true"><span style={{ width: `${(item.value / item.max) * 100}%` }} /></div>
-            <strong>{item.display}</strong>
-          </div>
-        ))}
+    <figure className="viralbench-architecture" aria-labelledby="viralbench-architecture-caption">
+      <div className="viralbench-architecture__rail">
+        <span>Live environment</span>
+        <span>Independent controls</span>
+        <span>Bounded engineering</span>
       </div>
-      <figcaption id="viralbench-budget-caption">
-        The agent is already bounded. The next system must make those limits observable, replayable, and enforceable rather than leaving important rules in prompt prose.
-      </figcaption>
-    </figure>
-  );
-}
-
-function SystemResultFigure() {
-  return (
-    <figure className="viralbench-stack-figure" aria-labelledby="viralbench-stack-caption">
-      <FigureLabel number="Figure 03" title="What the leaderboard actually measures" />
-      <div className="viralbench-stack-figure__layers">
-        {systemLayers.map((layer, index) => (
-          <div key={layer.label}>
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            <strong>{layer.label}</strong>
-            <p>{layer.detail}</p>
-          </div>
-        ))}
-      </div>
-      <p className="viralbench-stack-figure__result">Observed result = model + harness + creative stack + account state + platform conditions</p>
-      <figcaption id="viralbench-stack-caption">
-        ViralBench is a live system benchmark. Model comparisons remain useful, but each result belongs to a versioned model-plus-harness configuration.
-      </figcaption>
-    </figure>
-  );
-}
-
-function AuditLedgerFigure() {
-  return (
-    <figure className="viralbench-audit-figure" aria-labelledby="viralbench-audit-caption">
-      <FigureLabel number="Figure 04" title="Eight audit gaps that block trustworthy iteration" />
-      <div className="viralbench-audit-figure__grid">
-        {auditGaps.map((gap) => (
-          <div key={gap.index}>
-            <span>{gap.index}</span>
-            <strong>{gap.label}</strong>
-            <p>{gap.consequence}</p>
-          </div>
-        ))}
-      </div>
-      <figcaption id="viralbench-audit-caption">
-        These are not arguments against the benchmark. They are the boundary between a working handoff and an experimental system that can support repeatable engineering claims.
-      </figcaption>
-    </figure>
-  );
-}
-
-function EvidenceSpineFigure() {
-  return (
-    <figure className="viralbench-evidence-figure" aria-labelledby="viralbench-evidence-caption">
-      <FigureLabel number="Figure 05" title="The evidence spine precedes autonomy" />
-      <ol>
-        {evidenceStages.map((stage) => (
-          <li key={stage.index}>
-            <span>{stage.index}</span>
-            <strong>{stage.label}</strong>
-            <p>{stage.detail}</p>
-          </li>
-        ))}
-      </ol>
-      <figcaption id="viralbench-evidence-caption">
-        Raw traces remain inspectable. Evaluations are versioned. Codex changes one bounded surface. Release authority stays outside the builder.
-      </figcaption>
-    </figure>
-  );
-}
-
-function TrialDesignFigure() {
-  return (
-    <figure className="viralbench-trial-figure" aria-labelledby="viralbench-trial-caption">
-      <FigureLabel number="Figure 06" title="A live trial needs controls before optimization" />
-      <div className="viralbench-trial-figure__lanes">
-        <div>
-          <span>Control lane</span>
-          <strong>Frozen baseline</strong>
-          <p>Current approved configuration, unchanged during the test window.</p>
+      <div className="viralbench-architecture__nodes">
+        <div className="viralbench-node viralbench-node--live">
+          <span className="viralbench-node__index">01 / inner loop</span>
+          <strong>ViralBench agent</strong>
+          <p>Research → create → preview → submit</p>
         </div>
-        <div>
-          <span>Treatment lane</span>
-          <strong>One bounded change</strong>
-          <p>Same evaluator, paired timing, explicit hypothesis, reviewable patch.</p>
+        <span className="viralbench-architecture__arrow" aria-hidden="true">↓</span>
+        <div className="viralbench-node viralbench-node--evidence">
+          <span className="viralbench-node__index">02 / evidence spine</span>
+          <strong>Immutable trace + evaluator</strong>
+          <p>Sources, artifacts, configuration, checks, fixed-window outcomes</p>
+        </div>
+        <span className="viralbench-architecture__arrow" aria-hidden="true">↓</span>
+        <div className="viralbench-node viralbench-node--codex">
+          <span className="viralbench-node__index">03 / outer loop</span>
+          <strong>Codex worktree</strong>
+          <p>Diagnose → patch → replay → draft canary → promote or revert</p>
         </div>
       </div>
-      <div className="viralbench-trial-figure__controls">
-        {trialControls.map((control) => (
-          <div key={control.label}>
-            <strong>{control.label}</strong>
-            <span>{control.detail}</span>
-          </div>
-        ))}
-      </div>
-      <figcaption id="viralbench-trial-caption">
-        Views remain noisy and path-dependent. Pairing, fixed windows, independent evaluation, and publish gates reduce the chance that luck is mistaken for improvement.
+      <figcaption id="viralbench-architecture-caption">
+        ViralBench runs the live marketing-agent loop. Codex improves the system through isolated experiments, independent evaluation, and locked deployment gates.
       </figcaption>
     </figure>
   );
 }
 
-function BuildSequenceFigure() {
+function ViralBenchSection({ section, index }: { section: ArticleSection; index: string }) {
   return (
-    <figure className="viralbench-build-figure" aria-labelledby="viralbench-build-caption">
-      <FigureLabel number="Figure 07" title="The first implementation sequence" />
-      <ol>
-        {buildPhases.map((phase) => (
-          <li key={phase.index}>
-            <span>Phase {phase.index}</span>
-            <strong>{phase.label}</strong>
-            <p>{phase.output}</p>
-          </li>
-        ))}
-      </ol>
-      <figcaption id="viralbench-build-caption">
-        Autonomy expands only after the trace, replay, review, and canary layers demonstrate reliability on a defined surface.
-      </figcaption>
-    </figure>
-  );
-}
-
-function SectionVisual({ sectionId, placement }: { sectionId: string; placement: 'before' | 'after' }) {
-  if (placement === 'after' && sectionId === 'viralbench-is-a-live-agent-environment') return <ToolBudgetFigure />;
-  if (placement === 'after' && sectionId === 'the-leaderboard-is-a-system-result-not-a-pure-model-score') return <SystemResultFigure />;
-  if (placement === 'before' && sectionId === 'what-the-code-audit-reveals') return <AuditLedgerFigure />;
-  if (placement === 'before' && sectionId === 'the-evidence-layer-comes-before-the-codex-layer') return <EvidenceSpineFigure />;
-  if (placement === 'before' && sectionId === 'live-evaluation-needs-experimental-discipline') return <TrialDesignFigure />;
-  if (placement === 'before' && sectionId === 'the-first-build-sequence') return <BuildSequenceFigure />;
-  return null;
-}
-
-function ArticleRail() {
-  return (
-    <aside className="viralbench-article-rail">
-      <div>
-        <p>Article map</p>
-        <nav aria-label="ViralBench article sections">
-          {railSections.map((section, index) => (
-            <a key={section.id} href={`#${section.id}`}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              {section.label}
-            </a>
-          ))}
-        </nav>
-        <div className="viralbench-article-rail__boundary">
-          <span>Boundary</span>
-          <p>The builder does not control raw evidence, evaluation, and deployment at the same time.</p>
-        </div>
-      </div>
-    </aside>
-  );
-}
-
-function ArticleSection({ section, index }: { section: ViralBenchSection; index: number }) {
-  const content = useMemo(() => markdownToReact(section.markdown), [section.markdown]);
-
-  return (
-    <section id={section.id} className="viralbench-editorial-section scroll-mt-28">
-      <header>
-        <span>{String(index + 1).padStart(2, '0')}</span>
-        <h2>{section.title}</h2>
-      </header>
-      <SectionVisual sectionId={section.id} placement="before" />
-      <div className="viralbench-article-prose">{content}</div>
-      <SectionVisual sectionId={section.id} placement="after" />
+    <section id={section.id}>
+      <ArticleSectionHeader index={index}>{section.title}</ArticleSectionHeader>
+      {section.id === EVIDENCE_SECTION_ID ? <ArticleVisual placement="inline" /> : null}
+      <ArticleMarkdown markdown={section.markdown} />
+      {section.id === HARNESS_SECTION_ID ? <ArchitectureDiagram /> : null}
     </section>
   );
 }
 
 export default function ViralBenchArticlePage() {
   useSEO(ROUTE);
-  const { lede, sections } = useMemo(() => splitArticleMarkdown(VIRALBENCH_ARTICLE_MARKDOWN), []);
-  const ledeContent = useMemo(() => markdownToReact(lede), [lede]);
 
-  useEffect(() => {
-    const targetId = window.location.hash.slice(1);
-    if (!targetId) {
-      window.scrollTo(0, 0);
-      return;
-    }
-
-    window.requestAnimationFrame(() => {
-      document.getElementById(targetId)?.scrollIntoView();
-    });
-  }, []);
+  const faqSection = ARTICLE.sections.find((section) => section.id === 'frequently-asked-questions');
+  const sourceNotesSection = ARTICLE.sections.find((section) => section.id === 'sources-and-technical-notes');
+  const numberedSections = ARTICLE.sections.filter(
+    (section) => section !== faqSection && section !== sourceNotesSection,
+  );
+  const navItems: ArticleNavItem[] = createArticleNavigation([
+    {
+      kind: 'overview',
+      id: 'overview',
+      label: 'Overview',
+      summary: 'The system and the outer loop.',
+    },
+    ...numberedSections.map((section) => ({
+      kind: 'section' as const,
+      id: section.id,
+      label: section.title,
+    })),
+    ...(faqSection
+      ? [{
+          kind: 'faq' as const,
+          id: faqSection.id,
+          label: 'Direct answers',
+        }]
+      : []),
+    {
+      kind: 'source',
+      id: 'source-ledger',
+      label: 'Source ledger',
+    },
+  ]);
+  const config: ArticleReaderConfig = {
+    activePath: '/research',
+    mode: 'narrative',
+    className: 'viralbench-toll-article',
+    archive: {
+      href: '/research',
+      label: 'Research archive',
+    },
+    hero: {
+      eyebrow: 'ViralBench / Codex / agent evaluation',
+      title: VIRALBENCH_ARTICLE_TITLE,
+      displayTitle: 'A bounded outer loop for improving a live marketing agent.',
+      deck: VIRALBENCH_ARTICLE_DESCRIPTION,
+      image: {
+        src: VIRALBENCH_ARTICLE_IMAGE,
+        alt: 'A monochrome gallery of suspended social-media posts receding toward a bright exit.',
+        label: 'System view / 01',
+        caption: 'The live attention environment surrounding the agent harness.',
+      },
+    },
+    publication: {
+      author: 'Sulayman Bowles',
+      subject: 'AI systems engineering',
+      published: {
+        dateTime: VIRALBENCH_ARTICLE_DATE,
+        value: 'July 9, 2026',
+      },
+      updated: {
+        dateTime: VIRALBENCH_ARTICLE_MODIFIED_DATE,
+        value: 'July 14, 2026',
+      },
+      readTime: VIRALBENCH_ARTICLE_READ_TIME,
+      evidence: 'Live methodology + code audit',
+    },
+    metrics: HEADLINE_METRICS.map((metric) => ({
+      label: metric.label,
+      value: metric.value,
+      note: metric.note,
+    })),
+    callouts: [{
+      label: 'Direct answer',
+      title: SEARCH_TARGET.primaryQuery,
+      content: (
+        <>
+          <p>{SEARCH_TARGET.directAnswer}</p>
+          <p><strong>Original artifact:</strong> {SEARCH_TARGET.originalArtifact}</p>
+        </>
+      ),
+    }],
+    navigation: {
+      items: navItems,
+      contentsLabel: 'Chapters',
+    },
+    boundary: {
+      label: 'Build boundary',
+      content: 'Codex can diagnose and patch the harness. It cannot grade or deploy its own work.',
+    },
+    endnote: {
+      label: 'Build conclusion',
+      title: 'The harness determines whether the agent can learn',
+      content: 'ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before any promotion.',
+      note: 'Build note based on the live ViralBench methodology and the supplied standalone handoff at commit 5f5f57e.',
+      links: [
+        ...SEARCH_TARGET.relatedPaths.map((path) => ({
+          href: path,
+          label: getArticleRelatedLinkLabel(ROUTE.path, path),
+        })),
+        { href: '/research', label: 'Research archive' },
+        { href: '/atlas', label: 'Atlas' },
+        { href: '/about', label: 'About the author' },
+      ],
+    },
+  };
 
   return (
-    <EditorialArticlePage id="top" activePath="/research" className="viralbench-editorial-article">
-      <article className="editorial-article-document">
-        <div className="editorial-article-frame">
-          <EditorialArticleHero
-            dateTime={VIRALBENCH_ARTICLE_DATE}
-            published="July 9, 2026"
-            kind="Build note"
-            readTime={VIRALBENCH_ARTICLE_READ_TIME}
-            title={VIRALBENCH_ARTICLE_HERO_TITLE}
-            summary={VIRALBENCH_ARTICLE_DESCRIPTION}
-            image={{
-              src: VIRALBENCH_ARTICLE_IMAGE,
-              alt: 'System map connecting a live ViralBench agent, an independent evidence spine, and a bounded Codex engineering worktree.',
-              width: 1200,
-              height: 630,
-            }}
-            caption="The live content loop and the engineering loop remain separated by immutable evidence, independent evaluation, and release gates."
-          />
-        </div>
+    <ArticleReader config={config}>
+        <section id="overview">
+          <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'overview')}>
+            Overview
+          </ArticleSectionHeader>
+          <ArticleMarkdown markdown={ARTICLE.lede} />
+        </section>
+        {numberedSections.map((section) => (
+          createElement(ViralBenchSection, {
+            key: section.id,
+            section,
+            index: getArticleNavigationIndex(navItems, section.id),
+          })
+        ))}
+        {faqSection
+          ? createElement(ViralBenchSection, {
+              key: faqSection.id,
+              section: faqSection,
+              index: getArticleNavigationIndex(navItems, faqSection.id),
+            })
+          : null}
 
-        <div className="viralbench-article-body">
-          <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-24 pt-14 md:px-8 lg:px-10 lg:pt-24">
-            <div className="viralbench-headline-metrics" aria-label="ViralBench code-audit headline figures">
-              {headlineMetrics.map((metric) => (
-                <div key={metric.label}>
-                  <strong>{metric.value}</strong>
-                  <span>{metric.label}</span>
-                  <small>{metric.note}</small>
-                </div>
-              ))}
+        <section id="source-ledger">
+          <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'source-ledger')}>
+            Source ledger
+          </ArticleSectionHeader>
+          {sourceNotesSection ? (
+            <div id={sourceNotesSection.id}>
+              <ArticleMarkdown markdown={sourceNotesSection.markdown} />
             </div>
-
-            <section className="viralbench-quick-answer" aria-labelledby="viralbench-quick-answer-title">
-              <p>Core distinction</p>
-              <div>
-                <h2 id="viralbench-quick-answer-title">ViralBench runs the post. Codex improves the system around it.</h2>
-                <p>
-                  The content agent operates in a live attention market. Codex works outside that loop: reading traces, forming one bounded hypothesis, changing a defined surface, running replay, and producing a reviewable candidate without grading or deploying itself.
-                </p>
-              </div>
-            </section>
-
-            <div className="viralbench-editorial-layout">
-              <ArticleRail />
-              <div className="min-w-0 max-w-[920px]">
-                <section className="viralbench-article-lede">
-                  <div className="viralbench-article-prose">{ledeContent}</div>
-                  <ArchitectureDiagram />
-                </section>
-                {sections.map((section, index) => (
-                  <Fragment key={section.id}>
-                    <ArticleSection section={section} index={index} />
-                  </Fragment>
-                ))}
-
-                <footer className="viralbench-article-endnote">
-                  <p>Article basis: public ViralBench methodology and the supplied repository at commit 5f5f57e. Implementation claims are limited to that reviewed snapshot.</p>
-                  <nav aria-label="Related research">
-                    <a href="/research">Research index</a>
-                    <a href="/atlas">Atlas evidence systems</a>
-                    <a href="/method">Operating method</a>
-                    <a href="/about">About the author</a>
-                  </nav>
-                </footer>
-              </div>
-            </div>
+          ) : null}
+          <div className="article-reader__prose">
+            <ul>
+              <li><a href="https://viralbench.ai/" target="_blank" rel="noreferrer" aria-label="ViralBench live methodology (opens in a new tab)">ViralBench live methodology</a></li>
+              <li><a href="https://github.com/JibranK12345/Viral-Bench" target="_blank" rel="noreferrer" aria-label="ViralBench public repository (opens in a new tab)">ViralBench public repository</a></li>
+              <li><a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noreferrer" aria-label="OpenAI harness engineering (opens in a new tab)">OpenAI harness engineering</a></li>
+              <li><a href="https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop" target="_blank" rel="noreferrer" aria-label="OpenAI agent improvement loop (opens in a new tab)">OpenAI agent improvement loop</a></li>
+              <li><a href="https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content" target="_blank" rel="noreferrer" aria-label="TikTok AI-generated content policy (opens in a new tab)">TikTok AI-generated content policy</a></li>
+            </ul>
           </div>
-        </div>
-      </article>
+        </section>
 
-      <div className="viralbench-article-footer-shell">
-        <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-8 md:px-8 lg:px-10">
-          <InternalFooter activePath="/research" tone="light" />
-        </div>
-      </div>
-    </EditorialArticlePage>
+    </ArticleReader>
   );
 }

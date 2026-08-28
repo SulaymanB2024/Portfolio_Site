@@ -1,6 +1,5 @@
-import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import { useRef, useEffect, useState, lazy, Suspense, type CSSProperties } from 'react';
-import { StaggeredText } from './components/StaggeredText';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef, useEffect, useLayoutEffect, useState, lazy, Suspense, type CSSProperties, type ReactNode } from 'react';
 import { InkTrails } from './components/InkTrails';
 import { RomanTogaReveal } from './components/RomanTogaReveal';
 import { ScrambleText } from './components/ScrambleText';
@@ -14,13 +13,12 @@ import { usePageTransitions } from './hooks/usePageTransitions';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
 import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
-import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavigation';
+import { AI_MANAGERS_ARTICLE_PATH } from './content/aiManagersArticle';
+import { PROFILE_FACTS } from './content/profileFacts';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './content/texasTollRoadArticleMeta';
-import { formatIsoDate, PROFILE_FACTS } from './content/profileFacts';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
 import { TextMarquee } from './components/TextMarquee';
-import { AuditIntakeForm } from './components/AuditIntakeForm';
 import { WireframeGrid } from './components/WireframeGrid';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -29,45 +27,41 @@ const loadAtlasCelestialParallaxPage = () => import('./pages/AtlasCelestialParal
 const loadMethodPage = () => import('./pages/VoidAgencyMethodPage');
 const loadAboutPage = () => import('./pages/AboutPage');
 const loadResumePage = () => import('./pages/ResumePage');
-const loadAiInformationPage = () => import('./pages/AiInformationPage');
 const loadResearchPage = () => import('./pages/ResearchPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
 const loadViralBenchArticlePage = () => import('./pages/ViralBenchArticlePage');
 const loadTexasTollRoadArticlePage = () => import('./pages/TexasTollRoadArticlePage');
-const loadSimplePage = () => import('./pages/SimplePage');
+const loadAiManagersArticlePage = () => import('./pages/AiManagersArticlePage');
 const loadWorkPage = () => import('./pages/WorkPage');
 const loadContactPage = () => import('./pages/ContactPage');
 const loadAtlasSampleCrawlPage = () => import('./pages/AtlasSampleCrawlPage');
-const loadTechnicalSeoCaseStudyPage = () => import('./pages/TechnicalSeoCaseStudyPage');
 const loadAustinTechnicalSeoPage = () => import('./pages/AustinTechnicalSeoPage');
-const loadVoidAgencyPage = () => import('./pages/VoidAgencyPage');
+const loadProgrammaticSeoPage = () => import('./pages/ProgrammaticSeoPage');
+const loadProgrammaticSeoHubPage = () => import('./pages/ProgrammaticSeoHubPage');
 
 const AtlasPage = lazy(loadAtlasPage);
 const AtlasCelestialParallaxPage = lazy(loadAtlasCelestialParallaxPage);
 const VoidAgencyMethodPage = lazy(loadMethodPage);
 const AboutPage = lazy(loadAboutPage);
 const ResumePage = lazy(loadResumePage);
-const AiInformationPage = lazy(loadAiInformationPage);
 const ResearchPage = lazy(loadResearchPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
 const ViralBenchArticlePage = lazy(loadViralBenchArticlePage);
 const TexasTollRoadArticlePage = lazy(loadTexasTollRoadArticlePage);
-const SimplePage = lazy(loadSimplePage);
+const AiManagersArticlePage = lazy(loadAiManagersArticlePage);
 const WorkPage = lazy(loadWorkPage);
 const ContactPage = lazy(loadContactPage);
 const AtlasSampleCrawlPage = lazy(loadAtlasSampleCrawlPage);
-const TechnicalSeoCaseStudyPage = lazy(loadTechnicalSeoCaseStudyPage);
 const AustinTechnicalSeoPage = lazy(loadAustinTechnicalSeoPage);
-const VoidAgencyPage = lazy(loadVoidAgencyPage);
-const LocalTime = lazy(() => import('./components/LocalTime').then(m => ({ default: m.LocalTime })));
+const ProgrammaticSeoPage = lazy(loadProgrammaticSeoPage);
+const ProgrammaticSeoHubPage = lazy(loadProgrammaticSeoHubPage);
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
 const AtmosphereCore = lazy(() => import('./components/AtmosphereCore').then(m => ({ default: m.default })));
 const GenerativeMesh = lazy(() => import('./components/GenerativeMesh').then(m => ({ default: m.GenerativeMesh })));
 const GeometricPattern = lazy(() => import('./components/GeometricPattern').then(m => ({ default: m.GeometricPattern })));
-const FooterM = lazy(() => import('./components/FooterM').then(m => ({ default: m.FooterM })));
 
 const CONTACT_HASH = '#contact';
 const HOME_SEO = getSeoRoute('/')!;
@@ -95,10 +89,11 @@ const homeDisciplineItems = [
   },
 ];
 
-const homeProofHighlights = PROFILE_FACTS.proofClaims.map((item) => ({
-  ...item,
-  displayDate: formatIsoDate(item.asOf),
-}));
+const homeProofItems = [
+  { type: 'Research', title: 'The First AI Managers', href: AI_MANAGERS_ARTICLE_PATH },
+  { type: 'Product', title: 'Atlas SEO Audit Software', href: '/atlas' },
+  { type: 'Markets', title: 'Texas Toll-Road Ownership', href: '/markets/who-owns-texas-toll-roads' },
+];
 
 function isDarkRoute(path: string) {
   return getRouteTone(path) === 'dark';
@@ -115,30 +110,28 @@ async function preloadRoute(path: string) {
     await loadMethodPage();
   } else if (route?.path === '/about') {
     await loadAboutPage();
-  } else if (route?.path === '/simple') {
-    await loadSimplePage();
   } else if (route?.path === '/work') {
     await loadWorkPage();
   } else if (route?.path === '/contact') {
     await loadContactPage();
   } else if (route?.path === '/atlas/sample-crawl') {
     await loadAtlasSampleCrawlPage();
-  } else if (route?.path === '/case-studies/technical-seo-audit') {
-    await loadTechnicalSeoCaseStudyPage();
   } else if (route?.path === '/austin-technical-seo') {
     await loadAustinTechnicalSeoPage();
-  } else if (route?.path === '/void-agency') {
-    await loadVoidAgencyPage();
   } else if (route?.path === '/resume') {
     await loadResumePage();
-  } else if (route?.path === '/ai-information') {
-    await loadAiInformationPage();
   } else if (route?.path === '/research') {
     await loadResearchPage();
+  } else if (route?.section === 'technical-seo-hub') {
+    await loadProgrammaticSeoHubPage();
+  } else if (route?.section === 'technical-seo-guide') {
+    await loadProgrammaticSeoPage();
   } else if (route?.path === '/markets') {
     await loadMarketsPage();
   } else if (route?.path === '/viralbench-codex-agent-harness') {
     await loadViralBenchArticlePage();
+  } else if (route?.path === AI_MANAGERS_ARTICLE_PATH) {
+    await loadAiManagersArticlePage();
   } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
     await loadTexasTollRoadArticlePage();
   } else if (route?.section === 'research-article') {
@@ -152,6 +145,16 @@ function getCurrentCanonicalPath() {
     window.history.replaceState({}, '', `${canonicalPath}${window.location.search}${window.location.hash}`);
   }
   return `${canonicalPath}${window.location.search}${window.location.hash}`;
+}
+
+function RouteReady({ children }: { children: ReactNode }) {
+  useLayoutEffect(() => {
+    document.documentElement.classList.add('app-mounted');
+    document.documentElement.classList.remove('js-pending');
+    document.getElementById('seo-static-summary')?.remove();
+  }, []);
+
+  return children;
 }
 
 export default function App() {
@@ -172,123 +175,53 @@ export default function App() {
   let page;
 
   if (route?.path === '/atlas') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AtlasPage />
-      </Suspense>
-    );
+    page = <AtlasPage />;
   } else if (route?.path === '/atlas/celestial-parallax') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AtlasCelestialParallaxPage />
-      </Suspense>
-    );
+    page = <AtlasCelestialParallaxPage />;
   } else if (route?.path === '/method') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <VoidAgencyMethodPage />
-      </Suspense>
-    );
+    page = <VoidAgencyMethodPage />;
   } else if (route?.path === '/about') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AboutPage />
-      </Suspense>
-    );
-  } else if (route?.path === '/simple') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <SimplePage />
-      </Suspense>
-    );
+    page = <AboutPage />;
   } else if (route?.path === '/work') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <WorkPage />
-      </Suspense>
-    );
+    page = <WorkPage />;
   } else if (route?.path === '/contact') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ContactPage />
-      </Suspense>
-    );
+    page = <ContactPage />;
   } else if (route?.path === '/atlas/sample-crawl') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AtlasSampleCrawlPage />
-      </Suspense>
-    );
-  } else if (route?.path === '/case-studies/technical-seo-audit') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <TechnicalSeoCaseStudyPage />
-      </Suspense>
-    );
+    page = <AtlasSampleCrawlPage />;
   } else if (route?.path === '/austin-technical-seo') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AustinTechnicalSeoPage />
-      </Suspense>
-    );
-  } else if (route?.path === '/void-agency') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <VoidAgencyPage />
-      </Suspense>
-    );
+    page = <AustinTechnicalSeoPage />;
   } else if (route?.path === '/resume') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ResumePage />
-      </Suspense>
-    );
-  } else if (route?.path === '/ai-information') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AiInformationPage />
-      </Suspense>
-    );
+    page = <ResumePage />;
   } else if (route?.path === '/research') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ResearchPage />
-      </Suspense>
-    );
+    page = <ResearchPage />;
+  } else if (route?.section === 'technical-seo-hub') {
+    page = <ProgrammaticSeoHubPage path={route.path} />;
+  } else if (route?.section === 'technical-seo-guide') {
+    page = <ProgrammaticSeoPage path={route.path} />;
   } else if (route?.path === '/sitemap') {
     page = <SitemapPage />;
   } else if (route?.path === '/viralbench-codex-agent-harness') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ViralBenchArticlePage />
-      </Suspense>
-    );
+    page = <ViralBenchArticlePage />;
+  } else if (route?.path === AI_MANAGERS_ARTICLE_PATH) {
+    page = <AiManagersArticlePage />;
   } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <TexasTollRoadArticlePage />
-      </Suspense>
-    );
+    page = <TexasTollRoadArticlePage />;
   } else if (route?.section === 'research-article') {
     const slug = route.path.split('/').at(-1) ?? '';
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <MarketArticlePage slug={slug} />
-      </Suspense>
-    );
+    page = <MarketArticlePage slug={slug} />;
   } else if (route?.path === '/markets') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <MarketsPage />
-      </Suspense>
-    );
+    page = <MarketsPage />;
   } else if (route?.path === '/') {
     page = <HomePage />;
   } else {
     page = <NotFoundPage />;
   }
 
-  return page;
+  return (
+    <Suspense fallback={<RouteFallback route={route} />}>
+      <RouteReady>{page}</RouteReady>
+    </Suspense>
+  );
 }
 
 function SitemapPage() {
@@ -303,8 +236,8 @@ function SitemapPage() {
         <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
       </Suspense>
       <InternalHeader activePath="/sitemap" tone="light" />
-      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 py-14 md:px-8 xl:px-10 xl:py-20">
-        <header className="grid min-h-[52vh] content-end border-b border-ink/14 pb-12">
+      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-14 pt-6 md:px-8 md:pt-8 xl:px-10 xl:pb-20 xl:pt-10">
+        <header className="border-b border-ink/14 py-12 md:py-16 xl:py-20">
           <p className="text-[10px] uppercase tracking-[0.28em] text-ink/58">
             Sulayman Bowles / Sitemap
           </p>
@@ -317,7 +250,7 @@ function SitemapPage() {
         </header>
 
         <section className="py-10">
-          <h2 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/48">Pages</h2>
+          <h2 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/64">Pages</h2>
           <ul className="grid gap-3">
             {routes.map((item) => (
               <li key={item.path}>
@@ -341,45 +274,34 @@ function SitemapPage() {
 
 function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
   const dark = route ? isDarkRoute(route.path) : false;
-  const heading = route?.h1 ?? HOME_SEO.h1;
+  const heading = route?.displayH1 ?? route?.h1 ?? HOME_SEO.h1;
   const description = route?.description ?? HOME_SEO.description;
-  const summary = route?.staticSummary ?? HOME_SEO.staticSummary;
-  const fallbackLinks = [
-    ['Home', '/'],
-    ['Selected Work', '/work'],
-    ['Atlas', '/atlas'],
-    ['Method', '/method'],
-    ['Research', '/research'],
-    ['Contact', '/contact'],
-  ];
+
+  if (typeof document !== 'undefined' && document.getElementById('seo-static-summary')) {
+    return null;
+  }
 
   return (
     <main
       aria-busy="true"
-      className={`flex min-h-screen items-center justify-center px-6 font-sans ${
+      className={`site-page relative min-h-screen overflow-hidden font-sans ${
         dark ? 'bg-ink text-canvas' : 'bg-canvas text-ink'
       }`}
     >
-      <div className="w-full max-w-[1480px] border-t border-current/20 pt-6">
-        <div className="text-[10px] uppercase tracking-[0.32em] opacity-60">Route overview</div>
-        <h1 className="mt-6 font-serif text-[3.4rem] md:text-[5.75rem] xl:text-[8rem] italic leading-[0.86] tracking-normal">
+      <InternalHeader activePath={route?.path ?? '/'} tone={dark ? 'dark' : 'light'} />
+      <section className="relative mx-auto grid min-h-[calc(100svh-4.5rem)] w-full max-w-[1480px] content-center px-4 py-20 md:px-8 xl:min-h-[calc(100svh-5.125rem)] xl:px-10">
+        <div className="border-t border-current/16 pt-6">
+          <p className="text-[10px] uppercase tracking-[0.32em] opacity-60">Opening the current route</p>
+          <h1 className="mt-8 max-w-[14ch] font-serif text-[3.4rem] italic font-light leading-[0.86] tracking-normal md:text-[5.75rem] xl:text-[8rem]">
           {heading}
-        </h1>
-        <p className="mt-8 max-w-3xl text-base leading-relaxed opacity-70">{description}</p>
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed opacity-58">{summary}</p>
-        <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-[10px] uppercase tracking-[0.22em] opacity-70" aria-label="Fallback route links">
-          {fallbackLinks.map(([label, href]) => (
-            <a key={href} href={href} className="underline decoration-current/20 underline-offset-4 transition-opacity hover:opacity-100">
-              {label}
-            </a>
-          ))}
-        </nav>
-      </div>
+          </h1>
+          <p className="mt-8 max-w-3xl text-sm leading-relaxed opacity-68 md:text-base">{description}</p>
+          <div aria-hidden="true" className="mt-10 h-px w-10 bg-current opacity-45" />
+        </div>
+      </section>
     </main>
   );
 }
-
-let initialLoadComplete = false;
 
 function HomePage() {
   useSEO(HOME_SEO);
@@ -387,58 +309,53 @@ function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
 
-  const [counter, setCounter] = useState(initialLoadComplete ? 100 : 0);
-  const [isLoaded, setIsLoaded] = useState(initialLoadComplete);
   const [homeHeaderTone, setHomeHeaderTone] = useState<'light' | 'dark'>('light');
+  const [activeSelectedWork, setActiveSelectedWork] = useState(0);
+  const selectedWorksGuideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (initialLoadComplete) return;
+    const guide = selectedWorksGuideRef.current;
+    if (!guide) return;
 
-    let frameId = 0;
-    let finishTimeoutId = 0;
-    const startedAt = window.performance.now();
-    const duration = prefersReducedMotion ? 180 : 900;
-    const holdDuration = prefersReducedMotion ? 40 : 100;
+    const mobileQuery = window.matchMedia('(max-width: 767px)');
+    let observer: IntersectionObserver | null = null;
 
-    const animateCounter = (time: number) => {
-      const progress = Math.min((time - startedAt) / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 2.4);
+    const observeSteps = () => {
+      observer?.disconnect();
+      observer = null;
 
-      setCounter(Math.min(100, Math.round(easedProgress * 100)));
-
-      if (progress < 1) {
-        frameId = window.requestAnimationFrame(animateCounter);
+      if (!mobileQuery.matches) {
+        setActiveSelectedWork(0);
         return;
       }
 
-      finishTimeoutId = window.setTimeout(() => {
-        initialLoadComplete = true;
-        setIsLoaded(true);
-      }, holdDuration);
+      const steps = guide.querySelectorAll<HTMLElement>('[data-selected-work-step]');
+      observer = new IntersectionObserver((entries) => {
+        const activeEntry = entries
+          .filter((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.55)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        const nextStep = Number((activeEntry?.target as HTMLElement | undefined)?.dataset.selectedWorkStep);
+
+        if (Number.isInteger(nextStep)) {
+          setActiveSelectedWork((currentStep) => currentStep === nextStep ? currentStep : nextStep);
+        }
+      }, { root: guide, threshold: [0.55, 0.7] });
+
+      steps.forEach((step) => {
+        observer?.observe(step);
+      });
     };
 
-    frameId = window.requestAnimationFrame(animateCounter);
+    observeSteps();
+    mobileQuery.addEventListener('change', observeSteps);
 
     return () => {
-      window.cancelAnimationFrame(frameId);
-      window.clearTimeout(finishTimeoutId);
+      observer?.disconnect();
+      mobileQuery.removeEventListener('change', observeSteps);
     };
-  }, [prefersReducedMotion]);
+  }, []);
 
   useEffect(() => {
-    if (!isLoaded) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-  }, [isLoaded]);
-
-  useEffect(() => {
-    if (!isLoaded) {
-      setHomeHeaderTone('light');
-      return;
-    }
-
     let frameId = 0;
     const darkBackgroundClasses = new Set(['bg-ink', 'site-page-dark']);
     const toneIgnoreSelector = '[data-header-tone-ignore="true"]';
@@ -495,7 +412,13 @@ function HomePage() {
       );
       const toneElements = document
         .elementsFromPoint(probeX, probeY)
-        .filter((element) => !header?.contains(element) && !element.closest(toneIgnoreSelector));
+        .filter((element) => {
+          if (header?.contains(element) || element.closest(toneIgnoreSelector)) {
+            return false;
+          }
+
+          return window.getComputedStyle(element).pointerEvents !== 'none';
+        });
       const nextTone = toneElements.some(elementNeedsDarkHeader)
         ? 'dark'
         : 'light';
@@ -533,16 +456,16 @@ function HomePage() {
       window.removeEventListener('hashchange', scheduleHeaderToneUpdate);
       window.removeEventListener('popstate', scheduleHeaderToneUpdate);
     };
-  }, [isLoaded]);
+  }, []);
 
   const subY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   return (
-    <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas" ref={containerRef}>
+    <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-clip selection:bg-ink selection:text-canvas" ref={containerRef}>
       {!prefersReducedMotion && <InkTrails />}
         
-      <InternalHeader activePath="/" tone={homeHeaderTone} variant="home" />
+      <InternalHeader activePath="/" tone={homeHeaderTone} variant="home" minimalBrand />
 
       {/* Grid Crosshairs */}
       <div className="fixed inset-0 pointer-events-none z-40 hidden md:block mix-blend-difference text-canvas select-none">
@@ -563,174 +486,124 @@ function HomePage() {
         <div className="absolute bottom-8 right-12 w-[1px] h-4 bg-canvas opacity-30" />
       </div>
 
-      {/* Intro Preloader Mask */}
-      <AnimatePresence>
-        {!isLoaded && (
-          <motion.div 
-            className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center p-8 text-canvas"
-            data-header-tone-ignore="true"
-            exit={{ opacity: 0 }}
-            transition={{ duration: prefersReducedMotion ? 0.12 : 0.35, ease: [0.33, 1, 0.68, 1] }}
-          >
-            <div className="w-full flex justify-between absolute pt-8 px-8 md:px-16 normal-case font-sans uppercase tracking-[0.2em] text-xs opacity-60 justify-self-start self-start top-0">
-               <span>Building Evidence</span>
-               <span>{counter}%</span>
-            </div>
-            
-            <motion.div
-               animate={{ opacity: 1 }}
-               exit={{ opacity: 0 }}
-               transition={{ duration: 0.4 }}
-               className="font-serif text-6xl md:text-9xl font-light tracking-normal flex items-baseline"
-            >
-              <span className="italic">{counter}</span>
-              <span className="text-xl md:text-2xl ml-2 font-sans tracking-widest">%</span>
-            </motion.div>
-
-            {/* Progress bar */}
-            <div className="absolute bottom-16 left-8 right-8 md:left-16 md:right-16 h-[1px] bg-canvas/20">
-              <motion.div 
-                className="h-full bg-canvas"
-                style={{ width: `${counter}%` }}
-                transition={{ duration: 0.1 }}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Main Container */}
       <main className="w-full" id="top">
-        {/* HERO SECTION - Evidence ledger cover */}
-        <section className="home-cover relative flex min-h-[100svh] w-full overflow-hidden px-4 pb-6 pt-28 md:px-16 md:pb-10 md:pt-32">
-          {/* Background Motion */}
-          {!prefersReducedMotion && <Suspense fallback={null}>
-            <FlowField className="pointer-events-none absolute inset-0 z-0 opacity-[0.07] mix-blend-multiply" density={25} />
-          </Suspense>}
-          
-          {/* Roman figure becomes supporting material instead of the headline. */}
-          <motion.div 
+        {/* HERO SECTION — identity, current work, and three proof paths */}
+        <section className="home-cover relative flex min-h-[100svh] w-full overflow-hidden px-4 pb-8 pt-28 md:px-16 md:pb-12 md:pt-32">
+          {!prefersReducedMotion && (
+            <Suspense fallback={null}>
+              <FlowField className="pointer-events-none absolute inset-0 z-0 opacity-[0.07] mix-blend-multiply" density={25} />
+            </Suspense>
+          )}
+
+          <motion.div
             style={{ opacity: titleOpacity }}
             className="home-cover__figure pointer-events-none absolute inset-0 z-[1]"
           >
-            {isLoaded && (
-              <RomanTogaReveal
-                fit="cover"
-                focus="large-figure"
-                restOpacity={0.1}
-                revealOpacity={0.46}
-                className="h-full w-full"
-              />
-            )}
-           </motion.div>
+            <RomanTogaReveal
+              fit="cover"
+              focus="large-figure"
+              restOpacity={0.16}
+              revealOpacity={0.58}
+              className="h-full w-full"
+            />
+          </motion.div>
 
           <motion.div
             style={{ y: subY }}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-            transition={{ duration: 0.8, delay: isLoaded ? 0.2 : 0 }}
-            className="relative z-10 grid w-full grid-cols-1 content-end gap-y-10 md:grid-cols-12 md:gap-x-8"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.45, delay: prefersReducedMotion ? 0 : 0.05 }}
+            className="relative z-10 flex w-full items-end"
           >
-            <div className="md:col-span-8 md:self-end">
+            <div className="w-full">
               <h1 className="home-cover__title font-serif font-light tracking-normal text-ink">
                 <span className="block">Sulayman</span>
                 <span className="block italic">Bowles</span>
               </h1>
-            </div>
-
-            <div className="flex max-w-[29rem] flex-col justify-end border-t border-ink/20 pt-5 md:col-span-4 md:mb-4 md:ml-auto md:min-h-[14rem] md:w-full">
-              <p className="font-sans text-sm leading-relaxed tracking-normal text-ink/68 md:text-[15px]">
-                Technical SEO, Atlas crawl evidence, and markets research. Source material first; shipping decisions second.
-              </p>
-              <a
-                href="#selected-works"
-                className="group mt-8 flex items-center justify-between border-b border-ink/28 pb-3 text-[10px] uppercase tracking-[0.26em] text-ink transition-colors hover:border-ink"
-              >
-                <span>Selected work</span>
-                <svg aria-hidden="true" viewBox="0 0 18 18" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" fill="none">
-                  <path d="M4.5 13.5 13.5 4.5M6 4.5h7.5V12" stroke="currentColor" strokeWidth="1" />
-                </svg>
-              </a>
-            </div>
-
-            <div className="home-cover__index md:col-span-12">
-              {homeDisciplineItems.map((item) => (
-                <div key={item.num} className="home-cover__index-item">
-                  <span className="font-serif text-base italic text-ink/42">{item.num}</span>
-                  <span>{item.title}</span>
+              <div className="mt-7 grid max-w-[1180px] gap-6 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.14fr)_minmax(340px,0.86fr)] md:gap-8">
+                <div>
+                  <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and publisher of source-led research.</p>
+                  <nav className="mt-6 flex flex-wrap gap-3" aria-label="Primary actions">
+                    <a
+                      href="/work"
+                      id="home-primary-work-link"
+                      className="inline-flex min-h-11 items-center border border-ink bg-ink px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-canvas transition-colors hover:bg-accent hover:text-ink"
+                    >
+                      View selected work
+                    </a>
+                    <a
+                      href="/contact"
+                      id="home-primary-contact-link"
+                      className="inline-flex min-h-11 items-center border border-ink/28 px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/72 transition-colors hover:border-ink hover:bg-ink hover:text-canvas"
+                    >
+                      Start a project
+                    </a>
+                  </nav>
                 </div>
-              ))}
+                <nav aria-label="Featured proof" className="grid self-end border border-ink bg-ink px-4 py-3 uppercase text-canvas md:px-5 md:py-4">
+                  <span className="mb-1 flex items-center justify-between text-[9px] tracking-[0.28em] text-canvas/66">
+                    <span>Selected proof</span>
+                    <span aria-hidden="true" className="font-serif text-sm italic tracking-normal">03</span>
+                  </span>
+                  {homeProofItems.map((item) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      className="group grid min-h-12 grid-cols-[4.75rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-canvas/18 transition-colors hover:border-canvas/44 hover:bg-canvas/[0.035] md:grid-cols-[5.25rem_minmax(0,1fr)_auto]"
+                    >
+                      <span className="text-[8px] tracking-[0.22em] text-canvas/66">{item.type}</span>
+                      <span className="text-[10px] font-medium tracking-[0.15em] text-canvas/90">{item.title}</span>
+                      <span aria-hidden="true" className="text-xs transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+                    </a>
+                  ))}
+                </nav>
+              </div>
             </div>
           </motion.div>
         </section>
 
-        <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-14 text-ink md:px-16 md:py-20" aria-labelledby="home-proof-heading">
+        {/* INTRODUCTION — an evidence system, reduced to its essential logic */}
+        <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-24 text-ink md:px-16 md:py-36">
           <div className="mx-auto w-full max-w-[1800px]">
-            <div className="mb-9 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-ink/60">Proof snapshot</p>
-                <h2 id="home-proof-heading" className="mt-4 font-serif text-4xl italic leading-none md:text-6xl">Current work in 30 seconds.</h2>
-              </div>
-              <a href="/work" className="w-fit border-b border-ink/28 pb-1 text-[10px] uppercase tracking-[0.2em] text-ink/68 hover:border-ink hover:text-ink">All selected work</a>
+            <div className="flex items-center justify-between border-b border-ink/14 pb-5 text-[10px] uppercase tracking-[0.3em] text-ink/58">
+              <span>Working method</span>
+              <span aria-hidden="true" className="font-serif text-base italic tracking-normal">01 — 03</span>
             </div>
-            <div className="grid gap-px border border-ink/14 bg-ink/14 sm:grid-cols-2 lg:grid-cols-3">
-              {homeProofHighlights.map((item, index) => (
-                <a key={item.label} href={item.publicSource} className="group grid min-h-[190px] content-between bg-canvas p-5 transition-colors hover:bg-ink hover:text-canvas">
-                  <div className="flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-current/60">
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    <time dateTime={item.asOf}>As of {item.displayDate}</time>
-                  </div>
-                  <div>
-                    <h3 className="text-[11px] uppercase tracking-[0.22em] text-current">{item.label}</h3>
-                    <p className="mt-4 text-sm leading-relaxed text-current/70">{item.claim}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* INTRODUCTION - High contrast split */}
-        <section className="relative w-full border-y border-ink/10 bg-canvas px-4 py-20 text-ink md:px-16 md:py-28">
-          <div className="mx-auto grid w-full max-w-[1800px] grid-cols-1 gap-14 md:grid-cols-12 md:gap-16">
-            <div className="md:col-span-7 md:col-start-2">
-              <ScrollReveal blur={false}>
-                <p className="mb-7 font-sans text-[10px] uppercase tracking-[0.3em] text-ink/60">Working method</p>
-              </ScrollReveal>
-              <StaggeredText
-                text="Evidence systems for messy surfaces."
-                delay={0.1}
-                className="max-w-[11ch] font-serif text-5xl font-light leading-[0.92] tracking-normal sm:text-6xl md:text-7xl lg:text-[6.6rem]"
-              />
-            </div>
-            <div className="flex flex-col md:col-span-4 md:col-start-9">
-              <ScrollReveal delay={0.25} yOffset={14} blur={false} className="md:mt-10">
-                <p className="max-w-md font-sans text-sm leading-relaxed tracking-normal text-ink/64 md:text-base">
-                  The work starts where the source material is still rough: crawl data, page templates, search behavior, market assumptions, and product logic. I turn that into systems people can inspect, question, and ship from.
+            <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-12 md:gap-8 md:py-24">
+              <div className="md:col-span-8">
+                <ScrollReveal blur={false}>
+                  <h2 className="max-w-[9ch] font-serif text-[4rem] font-light leading-[0.82] tracking-normal sm:text-7xl md:text-[6.8rem] lg:text-[7.625rem]">
+                    Evidence,
+                    <span className="block italic">before answers.</span>
+                  </h2>
+                </ScrollReveal>
+              </div>
+              <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
+                <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
+                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and an <a href="/research/technical-seo" className="border-b border-ink/24 hover:border-ink">evidence-backed technical SEO diagnostic library</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
                 </p>
               </ScrollReveal>
+            </div>
 
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true, margin: '-10%' }}
-                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-                className="mt-14 h-[1px] w-full origin-left transform bg-ink/20"
-              />
-              <ScrollReveal delay={0.45} yOffset={15} blur={false} className="grid gap-5 pt-8 font-sans text-[10px] uppercase tracking-[0.22em] text-ink/56">
-                <div className="grid grid-cols-[6.5rem_1fr] gap-5 border-b border-ink/10 pb-5">
-                  <span className="text-ink/60">Collect</span>
-                  <span className="text-ink">Crawls, templates, queries, assumptions</span>
+            <div className="grid border-y border-ink/14 md:grid-cols-3">
+              {[
+                ['01', 'Observe', 'Capture URL records, source and rendered states, links, directives, and provider failures without cleaning away the gaps.'],
+                ['02', 'Separate', 'Keep observations, derived findings, assumptions, and measurement gaps in distinct fields.'],
+                ['03', 'Ship', 'Export a decision with its source, owner, acceptance check, and rerun path.'],
+              ].map(([num, title, copy], index) => (
+                <div key={num} className="min-h-52 border-b border-ink/14 py-7 last:border-b-0 md:border-b-0 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0 md:last:pr-0">
+                  <ScrollReveal delay={index * 0.08} blur={false} className="grid h-full min-h-40 content-between">
+                    <span className="font-serif text-xl italic text-ink/46">{num}</span>
+                    <div>
+                      <h3 className="font-serif text-4xl font-light tracking-normal">{title}</h3>
+                      <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/62">{copy}</p>
+                    </div>
+                  </ScrollReveal>
                 </div>
-                <div className="grid grid-cols-[6.5rem_1fr] gap-5 border-b border-ink/10 pb-5">
-                  <span className="text-ink/60">Structure</span>
-                  <span className="text-ink">Evidence, states, constraints, gaps</span>
-                </div>
-                <div className="grid grid-cols-[6.5rem_1fr] gap-5">
-                  <span className="text-ink/60">Ship</span>
-                  <span className="text-ink">Fixes, reports, dashboards, pages</span>
-                </div>
-              </ScrollReveal>
+              ))}
             </div>
           </div>
         </section>
@@ -750,12 +623,21 @@ function HomePage() {
              <ScrollReveal blur={false} delay={0.2}>
                <span className="font-sans text-[10px] uppercase tracking-[0.28em] text-canvas/45">2024 — 2026</span>
              </ScrollReveal>
-           </div>            {/* Project 01 */}
-           <div className="relative order-1 mx-auto mb-32 w-full max-w-[1800px] px-4 pt-8 md:mb-40 md:px-16 md:pt-12">
+           </div>
+           <div className="selected-works__guide-frame relative w-full">
+             <div
+               ref={selectedWorksGuideRef}
+               className="selected-works__guide flex w-full flex-col"
+               role="region"
+               aria-label="Selected work guided focus"
+               tabIndex={0}
+             >
+           {/* Project 01 */}
+           <div data-selected-work-step="0" className="selected-work-step relative order-1 mx-auto mb-0 w-full max-w-[1800px] px-4 pt-8 md:mb-40 md:px-16 md:pt-12">
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
-                  <span className="opacity-60">Technical SEO Audit Console</span>
+                  <span className="opacity-60">Technical SEO Audit Software</span>
                </div>
                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT</span>
@@ -763,17 +645,17 @@ function HomePage() {
                </div>
              </div>
              
-             <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-stretch pt-24">
+             <div className="grid grid-cols-1 items-stretch gap-0 pt-16 md:grid-cols-12 md:gap-8 md:pt-24">
                
                {/* Left Column Text */}
-               <div className="md:col-span-4 flex flex-col pt-12 md:pt-0 md:pr-8 lg:pr-16 relative z-10 order-2 md:order-1 mt-12 md:mt-0">
+               <div className="relative z-10 order-2 mt-6 flex flex-col pt-6 md:order-1 md:col-span-4 md:mt-0 md:pt-0 md:pr-8 lg:pr-16">
                  
                  <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start">
                    <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6">( 01 )</span></ScrollReveal>
                    
                    <ScrollReveal delay={0.2} blur={false}>
-                     <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
-		                       A crawl system for indexation, internal links, canonicals, structured data, and raw/rendered HTML.
+                     <p className="mb-8 max-w-sm font-serif text-xl italic leading-tight normal-case tracking-normal text-canvas/90 md:mb-0 md:text-3xl lg:text-4xl">
+		                       A crawl and evidence system that preserves raw and rendered pages, tests indexation, canonicals, links, and structured data, then exports reviewable findings.
                      </p>
                    </ScrollReveal>
                    
@@ -783,11 +665,11 @@ function HomePage() {
                      <div className="flex flex-col border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:max-w-xs">
                        <div className="flex justify-between">
                          <span className="opacity-60">Role</span>
-                         <span className="text-canvas">Builder / Operator</span>
+                         <span className="text-canvas">Founder / Product / Engineering</span>
                        </div>
                        <div className="flex justify-between">
                          <span className="opacity-60">Output</span>
-                         <span className="text-canvas">Crawl Data, Issue Logic, Reports</span>
+                         <span className="text-canvas">Crawl Records, Review, Exports</span>
                        </div>
                      </div>
                    </ScrollReveal>
@@ -795,7 +677,7 @@ function HomePage() {
                </div>
 
                {/* Right Column Canvas */}
-               <a href="/atlas" id="work-link-atlas" className="group/atlas relative order-1 block h-[60vh] origin-right overflow-hidden border border-canvas/20 md:order-2 md:col-span-8 md:h-[78vh]">
+               <a href="/atlas" id="work-link-atlas" className="group/atlas relative order-1 block h-[42svh] min-h-72 origin-right overflow-hidden border border-canvas/20 md:order-2 md:col-span-8 md:h-[78vh]">
                  <div className="hidden md:block absolute left-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
                  
                  {/* Corner brackets */}
@@ -830,8 +712,8 @@ function HomePage() {
              </div>
             </div>
                     {/* PROJECT 03 - TEXAS TOLL-ROAD RESEARCH */}
-         <div className="relative order-3 w-full bg-ink py-12 md:py-16" id="systems">
-            <div className="relative mx-auto mb-24 w-full max-w-[1800px] px-4 pt-8 md:mb-32 md:px-16 md:pt-12">
+         <div data-selected-work-step="2" className="selected-work-step relative order-3 w-full bg-ink py-0 md:py-16" id="systems">
+            <div className="relative mx-auto mb-0 w-full max-w-[1800px] px-4 pt-8 md:mb-32 md:px-16 md:pt-12">
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 03</span>
@@ -843,10 +725,10 @@ function HomePage() {
                </div>
              </div>
              
-             <div className="grid grid-cols-1 items-stretch gap-0 pb-16 pt-20 md:grid-cols-12 md:gap-8 md:pb-24">
+             <div className="grid grid-cols-1 items-stretch gap-0 pb-0 pt-16 md:grid-cols-12 md:gap-8 md:pb-24 md:pt-20">
                
                {/* Left Column Canvas */}
-               <a href="/markets/who-owns-texas-toll-roads" id="work-link-markets" className="group relative block h-[60vh] origin-left overflow-hidden border border-canvas/20 md:col-span-8 md:h-[78vh]">
+               <a href="/markets/who-owns-texas-toll-roads" id="work-link-markets" className="group relative block h-[42svh] min-h-72 origin-left overflow-hidden border border-canvas/20 md:col-span-8 md:h-[78vh]">
                  <div className="hidden md:block absolute right-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
                  
                  {/* Corner markers */}
@@ -866,12 +748,12 @@ function HomePage() {
                  </ScrollReveal>
                </a>
 
-               <div className="md:col-span-4 flex flex-col justify-between pt-12 md:pt-0">
+               <div className="flex flex-col justify-between pt-6 md:col-span-4 md:pt-0">
                  <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start items-start md:items-end md:text-right">
                    <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6 block">( 03 )</span></ScrollReveal>
                    
                    <ScrollReveal delay={0.2} blur={false}>
-                     <p className="leading-tight normal-case tracking-normal font-serif italic text-xl md:text-3xl lg:text-4xl text-canvas/90 max-w-sm mb-16 md:mb-0">
+                     <p className="mb-8 max-w-sm font-serif text-xl italic leading-tight normal-case tracking-normal text-canvas/90 md:mb-0 md:text-3xl lg:text-4xl">
                         A source-led map of who owns Texas toll roads, who controls revenue, who gets paid first, and how finite concessions can be valued.
                      </p>
                    </ScrollReveal>
@@ -898,7 +780,7 @@ function HomePage() {
          </div>
            
            {/* Project 02 - Void */}
-           <a href="/method" id="work-link-void" className="group relative order-2 my-20 mt-20 flex min-h-[58vh] w-full flex-col items-center justify-center overflow-hidden border-y border-canvas/10 bg-ink py-24 md:my-28 md:min-h-[68vh] md:py-28">
+           <a href="/method" id="work-link-void" data-selected-work-step="1" className="selected-work-step group relative order-2 my-0 flex min-h-full w-full flex-col items-center justify-center overflow-hidden border-y border-canvas/10 bg-ink px-4 py-16 md:my-28 md:min-h-[68vh] md:px-0 md:py-28">
               {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
               <div className="relative z-10 flex flex-col items-center">
                 <ScrollReveal>
@@ -913,15 +795,27 @@ function HomePage() {
                   </h4>
                 </ScrollReveal>
                 <ScrollReveal delay={0.4}>
-	                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">Void Agency is the service branch of my technical SEO, crawlability, structured content, analytics, and search visibility work.</p>
+	                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">I use Void Agency to turn crawl diagnostics into fixed-scope technical SEO audits: URL-level findings, implementation notes, analytics review, owners, and rerun checks.</p>
                 </ScrollReveal>
                 <ScrollReveal delay={0.6}>
                   <MagneticButton className="mt-16">
-                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Void Agency Technical SEO Method</span>
+                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Technical SEO Audit Services</span>
                   </MagneticButton>
                 </ScrollReveal>
               </div>
            </a>
+             </div>
+
+             <div className="selected-works__guide-status md:hidden" aria-live="polite" aria-atomic="true">
+               <span>Guided focus</span>
+               <span className="selected-works__guide-count">{String(activeSelectedWork + 1).padStart(2, '0')} / 03</span>
+               <span className="selected-works__guide-dots" aria-hidden="true">
+                 {[0, 1, 2].map((step) => (
+                   <span key={step} className={step === activeSelectedWork ? 'is-active' : ''} />
+                 ))}
+               </span>
+             </div>
+           </div>
         </section>
 
         {/* EXPERTISE SECTION */}
@@ -1366,66 +1260,56 @@ function HomePage() {
                   ))}
                             </div>
                   <div className="pt-32 w-full flex justify-start md:justify-end">
-                    <a href="#selected-works" id="discipline-view-work-link" className="text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
+                    <a href="/work" id="discipline-view-work-link" className="inline-flex min-h-11 items-center border-b border-ink/30 text-[10px] font-sans uppercase tracking-widest text-ink transition-colors hover:border-ink">Explore all work ↗</a>
                   </div>
                </div>
             </div>
          </section>
 
-        {/* INTERSTITIAL SECTION */}
-        <section className="relative h-[38vh] w-full overflow-hidden md:h-[48vh]">
-           {!prefersReducedMotion && <KineticTypography />}
+        {/* INTERSTITIAL SECTION — a quiet handoff into contact */}
+        <section className="relative w-full overflow-hidden border-y border-canvas/14 bg-ink text-canvas">
+           <KineticTypography />
         </section>
 
-        {/* FOOTER */}
-        <footer id="contact" className="relative w-full overflow-hidden bg-ink pt-32 text-canvas selection:bg-canvas selection:text-ink before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-24 before:bg-gradient-to-b before:from-canvas/10 before:to-transparent">
-           <Suspense fallback={null}><FooterM /></Suspense>
+        {/* CONTACT */}
+        <footer id="contact" className="relative w-full overflow-hidden border-t border-ink/14 bg-canvas text-ink selection:bg-ink selection:text-canvas">
+          <div className="mx-auto grid min-h-[62vh] w-full max-w-[1800px] content-between px-4 py-16 md:px-16 md:py-24">
+            <a
+              href="mailto:sulayman.bowles@gmail.com"
+              id="footer-link-email"
+              className="group inline-flex w-fit max-w-full items-end gap-4 font-serif text-6xl italic leading-[0.8] tracking-normal transition-colors duration-200 hover:text-ink/58 motion-reduce:transition-none sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[11rem]"
+            >
+              <span>Email.</span>
+              <span aria-hidden="true" className="mb-1 text-[0.28em] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none">↗</span>
+              <span className="sr-only">sulayman.bowles@gmail.com</span>
+            </a>
 
-           <div className="px-4 md:px-16 relative z-10 w-full flex flex-col">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 border-b border-canvas/20 pb-16 md:pb-32">
-                 <div className="md:col-span-8 flex flex-col items-start justify-end">
-                    <ScrollReveal blur={false}>
-                      <span className="text-canvas/50 font-sans tracking-[0.2em] text-xs uppercase mb-8 block flex items-center gap-4">
-                        <span className="status-dot" /> Projects, roles, and technical work
-                      </span>
-                    </ScrollReveal>
-                    
-                    <ScrollReveal delay={0.1} blur={false}>
-                      <h4 className="mb-12 font-serif text-[4rem] font-light uppercase leading-[0.8] tracking-normal md:text-[6rem] lg:text-[7rem]">
-                         <span className="block italic opacity-90">Send</span>
-                         <span className="block opacity-80">The Brief</span>
-                      </h4>
-                    </ScrollReveal>
-                    
-                    <ScrollReveal delay={0.2} blur={false}>
-                      <AuditIntakeForm />
-                    </ScrollReveal>
-                 </div>
-                 
-                 <div className="md:col-span-4 flex flex-col justify-end items-start md:items-end w-full space-y-16">
-                    <ScrollReveal delay={0.3} yOffset={10} blur={false}>
-                      <Suspense fallback={null}><LocalTime /></Suspense>
-                    </ScrollReveal>
-                    
-                    <ScrollReveal delay={0.4} blur={false}>
-                        <div className="grid grid-cols-2 gap-x-12 gap-y-6 text-[10px] uppercase font-sans tracking-[0.2em] opacity-70 w-full">
-                           {[...primaryNav.filter((item) => item.label !== 'Work'), ...utilityNav].map((item) => (
-                             <a
-                               key={item.href}
-                               href={item.href}
-                               id={navItemId('home-footer-link', item)}
-                               className="hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1"
-                             >
-                               {navLabel(item)}
-                             </a>
-                           ))}
-                           <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="hover:text-canvas/100 hover:opacity-100 transition-opacity border-b border-transparent hover:border-canvas pb-1">EMAIL</a>
-                        </div>
-                     </ScrollReveal>
-                 </div>
-              </div>
-              
-           </div>
+            <nav className="mt-16 grid border-y border-ink/14 sm:grid-cols-3" aria-label="Contact links">
+              {[
+                ['LinkedIn', PROFILE_FACTS.canonicalLinks.linkedin],
+                ['Résumé', '/resume'],
+                ['GitHub', PROFILE_FACTS.canonicalLinks.github],
+              ].map(([label, href], index) => {
+                const external = href.startsWith('http');
+
+                return (
+                  <a
+                    key={href}
+                    href={href}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noreferrer' : undefined}
+                    className="group flex min-h-20 items-center justify-between gap-5 border-b border-ink/14 px-4 text-[10px] uppercase tracking-[0.24em] text-ink/64 transition-colors duration-200 last:border-b-0 hover:bg-ink hover:text-canvas motion-reduce:transition-none sm:border-b-0 sm:border-r sm:last:border-r-0"
+                  >
+                    <span className="flex items-center gap-4">
+                      <span className="font-serif text-sm italic tracking-normal text-current/45">{String(index + 1).padStart(2, '0')}</span>
+                      {label}
+                    </span>
+                    <span aria-hidden="true" className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none">↗</span>
+                  </a>
+                );
+              })}
+            </nav>
+          </div>
         </footer>
       </main>
     </div>

@@ -1,248 +1,473 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 
-import { InternalFooter } from '../components/InternalFooter';
-import { EditorialArticleHero, EditorialArticlePage } from '../components/articles/EditorialArticle';
-import { getArticleBySlug } from '../content/articleRegistry';
-import { isInvestmentMemo } from '../content/articleModels';
-import { RESEARCH_ARTICLES } from '../content/researchArticles';
-import { getSeoRoute } from '../seo/routes';
+import {
+  ArticleReader,
+  ArticleSectionHeader,
+  createArticleNavigation,
+  getArticleNavigationIndex,
+  type ArticleNavItem,
+  type ArticleReaderConfig,
+} from '../components/ArticleLayout';
+import { getArticleBySlug, getArticlePath } from '../content/articleRegistry';
+import {
+  isInvestmentMemo,
+  type ArticleSection,
+  type PublicArticle,
+  type ResearchArticle,
+} from '../content/articleModels';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
+import { getSeoRoute, NOT_FOUND_ROUTE } from '../seo/routes';
+import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
 import { useSEO } from '../utils/seo';
+import NotFoundPage from './NotFoundPage';
 
-type ArticlePresentation = {
-  sectionTitles: readonly [string, string, string];
-  heroImage: string;
-  heroAlt: string;
-  figureLabel: string;
-  figureTitle: string;
-  figureCaption: string;
-  figureSteps: readonly { index: string; label: string; detail: string }[];
-};
+function ArticleCodeExample({
+  example,
+  index,
+}: {
+  key?: string;
+  example: NonNullable<ArticleSection['codeExamples']>[number];
+  index: number;
+}) {
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'failed'>('idle');
 
-const RESEARCH_PRESENTATIONS: Record<string, ArticlePresentation> = {
-  'ai-search-crawler-policy': {
-    sectionTitles: ['Access begins with intent', 'Public pages need a policy surface', 'Discovery still stops short of trust'],
-    heroImage: '/images/research/crawler-policy-map-light.svg',
-    heroAlt: 'Diagram separating search, training, and user-requested crawler intent',
-    figureLabel: 'Operating model',
-    figureTitle: 'Crawler policy is a sequence, not a switch.',
-    figureCaption: 'Each stage is necessary. None of the first three stages guarantees the fourth.',
-    figureSteps: [
-      { index: '01', label: 'Allow', detail: 'Make the intended public record reachable.' },
-      { index: '02', label: 'Identify', detail: 'Separate agents by stated purpose.' },
-      { index: '03', label: 'Notify', detail: 'Publish sitemaps and change signals.' },
-      { index: '04', label: 'Earn trust', detail: 'Let the page answer clearly with sources.' },
-    ],
-  },
-  'technical-seo-public-data-infrastructure': {
-    sectionTitles: ['Treat the page as a record', 'Make meaning explicit', 'Retire conflicting versions'],
-    heroImage: '/images/research/public-data-infrastructure-light.svg',
-    heroAlt: 'Diagram of access, identity, provenance, and distribution layers',
-    figureLabel: 'Reliability stack',
-    figureTitle: 'Public reach rests on record quality.',
-    figureCaption: 'Distribution sits at the top of a stack whose lower layers must remain coherent.',
-    figureSteps: [
-      { index: '01', label: 'Access', detail: 'A machine can reach the public page.' },
-      { index: '02', label: 'Identity', detail: 'The record keeps a stable address.' },
-      { index: '03', label: 'Provenance', detail: 'Claims expose authorship, date, and source.' },
-      { index: '04', label: 'Distribution', detail: 'Search and readers can evaluate the result.' },
-    ],
-  },
-  'canonical-identity-personal-seo': {
-    sectionTitles: ['Shrink the identity graph', 'Keep schema conservative', 'Reconcile the public record'],
-    heroImage: '/images/research/canonical-identity-graph-light.svg',
-    heroAlt: 'Canonical person graph connecting aligned pages and isolating stale records',
-    figureLabel: 'Reconciliation loop',
-    figureTitle: 'One current identity, reinforced everywhere.',
-    figureCaption: 'The useful graph is not the largest one. It is the smallest graph that stays current.',
-    figureSteps: [
-      { index: '01', label: 'Choose', detail: 'Set one preferred host and profile thesis.' },
-      { index: '02', label: 'Align', detail: 'Make About, resume, and bios agree.' },
-      { index: '03', label: 'Connect', detail: 'Use only strong, matching identity links.' },
-      { index: '04', label: 'Retire', detail: 'Redirect or remove conflicting records.' },
-    ],
-  },
-};
-
-const ARCHIVE_PRESENTATION: ArticlePresentation = {
-  sectionTitles: ['Historical premise', 'Evidence required', 'Current boundary'],
-  heroImage: '/images/research/archive-method-frame-light.svg',
-  heroAlt: 'Archived research method separating assumptions, evidence, and claim limits',
-  figureLabel: 'Archive protocol',
-  figureTitle: 'Preserve the method. Retire the recommendation.',
-  figureCaption: 'Archived notes remain useful only when their historical framing and present limit are explicit.',
-  figureSteps: [
-    { index: '01', label: 'Name', detail: 'State the old assumption without reviving it.' },
-    { index: '02', label: 'Require', detail: 'List the evidence a current claim would need.' },
-    { index: '03', label: 'Separate', detail: 'Keep measured facts apart from inference.' },
-    { index: '04', label: 'Limit', detail: 'Mark the route as context, not guidance.' },
-  ],
-};
-
-function groupParagraphs(content: string[], sectionTitles: ArticlePresentation['sectionTitles']) {
-  const groupSize = Math.ceil(content.length / sectionTitles.length);
-  return sectionTitles.map((title, index) => ({
-    id: `section-${index + 1}`,
-    title,
-    paragraphs: content.slice(index * groupSize, (index + 1) * groupSize),
-  })).filter((section) => section.paragraphs.length > 0);
-}
-
-export default function MarketArticlePage({ slug }: { slug: string }) {
-  const article = getArticleBySlug(slug) ?? RESEARCH_ARTICLES[0];
-  const investmentMemo = isInvestmentMemo(article);
-  const route = getSeoRoute(`/markets/${article.slug}`) ?? getSeoRoute('/research')!;
-  const activePath = investmentMemo ? '/markets' : '/research';
-  const backHref = activePath;
-  const backLabel = investmentMemo ? 'Markets archive' : 'Research index';
-  const boundary = investmentMemo ? article.recommendationBoundary : article.evidenceBoundary;
-  const presentation = RESEARCH_PRESENTATIONS[article.slug] ?? ARCHIVE_PRESENTATION;
-  const sections = groupParagraphs(article.content, presentation.sectionTitles);
-  const metrics = article.metrics ?? [
-    { label: 'Category', value: article.category },
-    { label: 'Updated', value: article.dateModified ?? article.date },
-    { label: 'Sources', value: String(article.sources.length) },
-  ];
-
-  useSEO(route);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(example.code);
+      setCopyStatus('copied');
+      window.setTimeout(() => setCopyStatus('idle'), 1800);
+    } catch {
+      setCopyStatus('failed');
+    }
+  };
 
   return (
-    <EditorialArticlePage
-      id="top"
-      activePath={activePath}
-      className={`market-editorial-article ${investmentMemo ? 'market-editorial-article--archive' : ''}`}
-    >
-      <div className="editorial-article-frame">
-        <a className="market-editorial-back" href={backHref}>
-          <span aria-hidden="true">←</span>
-          <span>{backLabel}</span>
-        </a>
+    <figure className="research-guide-code">
+      <figcaption>
+        <span>Configuration {String(index + 1).padStart(2, '0')}</span>
+        <strong>{example.title}</strong>
+        <p>{example.description}</p>
+        <button
+          type="button"
+          className="article-reader__code-copy"
+          onClick={copyCode}
+          aria-label={`Copy ${example.title} code`}
+        >
+          {copyStatus === 'copied' ? 'Copied' : copyStatus === 'failed' ? 'Copy failed' : 'Copy code'}
+        </button>
+        <span className="sr-only" aria-live="polite">
+          {copyStatus === 'copied'
+            ? `${example.title} copied to the clipboard.`
+            : copyStatus === 'failed'
+              ? `${example.title} could not be copied.`
+              : ''}
+        </span>
+      </figcaption>
+      <pre tabIndex={0}><code>{example.code}</code></pre>
+      <p className="research-guide-code__format">Review before release · {example.language}</p>
+    </figure>
+  );
+}
 
-        <EditorialArticleHero
-          dateTime={article.date.replaceAll('.', '-')}
-          published={article.date}
-          kind={article.category}
-          readTime={article.readTime}
-          title={article.title}
-          summary={article.subtitle}
-          image={{ src: presentation.heroImage, alt: presentation.heroAlt, width: 1200, height: 630 }}
-          caption={`${presentation.figureLabel} · ${presentation.figureCaption}`}
-        />
+function StructuredArticleSections({
+  sections,
+  navigation,
+}: {
+  sections: ArticleSection[];
+  navigation: ArticleNavItem[];
+}) {
+  return (
+    <>
+      {sections.map((section) => (
+        <section key={section.id} id={section.id}>
+          <ArticleSectionHeader index={getArticleNavigationIndex(navigation, section.id)}>
+            {section.title}
+          </ArticleSectionHeader>
 
-        <section className="market-editorial-metrics" aria-label="Article details">
-          {metrics.map((metric) => (
-            <div key={`${metric.label}-${metric.value}`}>
-              <span>{metric.label}</span>
-              <strong>{metric.value}</strong>
-            </div>
+          <div className="article-reader__prose">
+            {section.paragraphs.map((paragraph) => <p key={paragraph.slice(0, 72)}>{paragraph}</p>)}
+            {section.bullets?.length ? (
+              <ul>
+                {section.bullets.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            ) : null}
+          </div>
+
+          {section.figures?.map((figure) => (
+            <figure key={figure.src} className="toll-editorial-plate article-reader__figure">
+              <p className="toll-figure-label">{figure.label}</p>
+              <img
+                src={figure.src}
+                alt={figure.alt}
+                width={figure.width}
+                height={figure.height}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>{figure.caption}</figcaption>
+            </figure>
           ))}
-        </section>
 
-        <section className="market-editorial-answer" aria-labelledby="article-thesis">
-          <p>{investmentMemo ? 'Archive status' : 'Core thesis'}</p>
-          <div>
-            <h2 id="article-thesis">{investmentMemo ? 'Historical context, with the claim boundary intact.' : article.thesis}</h2>
-            {boundary ? <p>{boundary}</p> : null}
+          {section.table ? (
+            <figure className="toll-data-table research-guide-table">
+              <figcaption className="article-reader__table-caption">
+                <span>{section.table.caption}</span>
+                <small>
+                  <span className="md:hidden">Fields are grouped by record below</span>
+                  <span className="hidden md:inline">Scroll horizontally to inspect every field</span>
+                </small>
+              </figcaption>
+              <div
+                className="toll-data-table__scroll"
+                role="region"
+                aria-label={`${section.table.caption}. Scroll horizontally to inspect every field.`}
+                tabIndex={0}
+              >
+                <table data-responsive-table="stacked">
+                  <caption className="sr-only">{section.table.caption}</caption>
+                  <thead>
+                    <tr>
+                      {section.table.columns.map((column) => <th key={column} scope="col">{column}</th>)}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {section.table.rows.map((row) => (
+                      <tr key={row.join('|')}>
+                        {row.map((cell, index) => (
+                          index === 0
+                            ? <th key={`${index}-${cell}`} scope="row" data-label={section.table?.columns[index] ?? 'Record'}>{cell}</th>
+                            : <td key={`${index}-${cell}`} data-label={section.table?.columns[index] ?? `Field ${index + 1}`} className={index === 1 ? 'research-guide-table__agent' : undefined}>{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </figure>
+          ) : null}
+
+          {section.codeExamples?.length ? (
+            <div className="research-guide-code-list">
+              {section.codeExamples.map((example, exampleIndex) => (
+                <ArticleCodeExample key={example.title} example={example} index={exampleIndex} />
+              ))}
+            </div>
+          ) : null}
+        </section>
+      ))}
+    </>
+  );
+}
+
+function SourceLedger({
+  article,
+  navigation,
+}: {
+  article: PublicArticle;
+  navigation: ArticleNavItem[];
+}) {
+  return (
+    <section id="source-ledger" className="toll-source-ledger">
+      <ArticleSectionHeader index={getArticleNavigationIndex(navigation, 'source-ledger')}>
+        Source ledger
+      </ArticleSectionHeader>
+      <ol>
+        {article.sources.map((source, index) => {
+          const isExternal = /^https?:\/\//.test(source.href);
+
+          return (
+            <li key={source.href}>
+              <span className="toll-source-ledger__id">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <strong>{source.label}</strong>
+                <p>
+                  {source.lastVerified
+                    ? `Last verified ${formatPublicationDate(source.lastVerified)}.`
+                    : 'Verification date not recorded in this web edition.'}
+                </p>
+                <div className="toll-source-ledger__links">
+                  <a
+                    href={source.href}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noreferrer' : undefined}
+                    className={isExternal ? 'article-reader__external-link' : undefined}
+                    aria-label={`Open ${source.label}${isExternal ? ' in a new tab' : ''}`}
+                  >
+                    Open source
+                  </a>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  );
+}
+
+function ArticleResources({
+  article,
+  navigation,
+}: {
+  article: PublicArticle;
+  navigation: ArticleNavItem[];
+}) {
+  if (!article.resources?.length) return null;
+
+  return (
+    <section id="downloads" className="article-reader__resources">
+      <ArticleSectionHeader index={getArticleNavigationIndex(navigation, 'downloads')}>
+        Downloads
+      </ArticleSectionHeader>
+      <p className="article-reader__resources-intro">
+        These downloads contain the reports, datasets, models, or figures available for this article.
+      </p>
+      <ul>
+        {article.resources.map((resource) => (
+          <li key={resource.href}>
+            <a href={resource.href} download>
+              <span>{resource.format}</span>
+              <strong>{resource.label}</strong>
+              <small>{resource.description}</small>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function articleNav(article: PublicArticle, sections: ArticleSection[] | undefined): ArticleNavItem[] {
+  const faqSections = (sections ?? []).filter((section) => section.id.toLowerCase().includes('faq'));
+  const numberedSections = (sections ?? []).filter((section) => !section.id.toLowerCase().includes('faq'));
+
+  return createArticleNavigation([
+    { kind: 'overview', id: 'overview', label: 'Overview' },
+    ...numberedSections.map((section) => ({
+      kind: 'section' as const,
+      id: section.id,
+      label: section.title,
+    })),
+    ...(isInvestmentMemo(article)
+      ? [{ kind: 'section' as const, id: 'decision-frame', label: 'Decision frame' }]
+      : []),
+    ...(article.resources?.length
+      ? [{ kind: 'section' as const, id: 'downloads', label: 'Downloads' }]
+      : []),
+    ...faqSections.map((section) => ({
+      kind: 'faq' as const,
+      id: section.id,
+      label: section.title,
+    })),
+    ...(article.sources.length
+      ? [{ kind: 'source' as const, id: 'source-ledger', label: 'Source ledger' }]
+      : []),
+  ]);
+}
+
+function articleImage(article: PublicArticle) {
+  if (article.artwork.kind !== 'image') return undefined;
+
+  return {
+    src: article.artwork.heroSrc,
+    alt: article.artwork.alt,
+    label: article.artwork.label,
+    caption: article.artwork.caption,
+    objectPosition: article.artwork.objectPosition,
+  };
+}
+
+function GenericArticle({
+  article,
+}: {
+  article: PublicArticle;
+}) {
+  const investmentMemo = isInvestmentMemo(article);
+  const backHref = investmentMemo ? '/markets' : '/research';
+  const backLabel = investmentMemo ? 'Markets archive' : 'Research archive';
+  const boundary = investmentMemo ? article.recommendationBoundary : article.evidenceBoundary;
+  const modifiedDate = article.dateModified ?? article.date;
+  const hasDistinctModifiedDate = normalizePublicationDate(modifiedDate) !== normalizePublicationDate(article.date);
+  const metrics = article.metrics ?? [
+    { label: 'Category', value: article.category },
+    { label: hasDistinctModifiedDate ? 'Updated' : 'Published', value: formatPublicationDate(modifiedDate) },
+    { label: 'Sources', value: String(article.sources.length) },
+  ];
+  const sections = article.sections;
+  const numberedSections = sections?.filter((section) => !section.id.toLowerCase().includes('faq'));
+  const faqSections = sections?.filter((section) => section.id.toLowerCase().includes('faq'));
+  const navItems = articleNav(article, sections);
+  const searchTarget = getArticleSearchTarget(getArticlePath(article));
+  const articlePath = getArticlePath(article);
+  const relatedLinks = searchTarget?.relatedPaths.map((path) => ({
+    href: path,
+    label: getArticleRelatedLinkLabel(articlePath, path),
+  })) ?? [];
+  const study = article.artwork.kind === 'study'
+    ? {
+        label: article.artwork.label,
+        note: article.artwork.note,
+        variant: article.artwork.variant,
+      }
+    : undefined;
+  const callouts: NonNullable<ArticleReaderConfig['callouts']> = [];
+
+  if (searchTarget) {
+    callouts.push({
+      label: 'Direct answer',
+      title: searchTarget.primaryQuery,
+      content: (
+        <>
+          <p>{searchTarget.directAnswer}</p>
+          <p><strong>Original artifact:</strong> {searchTarget.originalArtifact}</p>
+        </>
+      ),
+    });
+  }
+
+  if (article.thesis) {
+    callouts.push({
+      label: investmentMemo ? 'Thesis' : 'Key takeaway',
+      title: investmentMemo
+        ? 'The decision rests on explicit assumptions.'
+        : 'The useful claim is the one the evidence can support.',
+      content: <p>{article.thesis}</p>,
+    });
+  }
+
+  const config: ArticleReaderConfig = {
+    activePath: investmentMemo ? '/markets' : '/research',
+    mode: 'reference',
+    archive: { href: backHref, label: backLabel },
+    hero: {
+      eyebrow: `${article.category} / ${article.number}`,
+      title: article.title,
+      deck: article.subtitle,
+      image: articleImage(article),
+      imagePlaceholder: study,
+    },
+    publication: {
+      author: article.author,
+      subject: article.category,
+      published: {
+        dateTime: normalizePublicationDate(article.date),
+        value: formatPublicationDate(article.date),
+      },
+      updated: hasDistinctModifiedDate
+        ? {
+            dateTime: normalizePublicationDate(modifiedDate),
+            value: formatPublicationDate(modifiedDate),
+          }
+        : undefined,
+      readTime: article.readTime,
+      evidence: `${article.sources.length} public source ${article.sources.length === 1 ? 'record' : 'records'}`,
+    },
+    metrics: metrics.slice(0, 4).map((metric) => ({
+      label: metric.label,
+      value: metric.value,
+      note: metric.label === 'Sources' ? 'Public source records' : undefined,
+    })),
+    callouts,
+    navigation: { items: navItems },
+    boundary: boundary
+      ? {
+          label: investmentMemo ? 'Recommendation boundary' : 'Evidence boundary',
+          content: boundary,
+        }
+      : undefined,
+    endnote: {
+      label: investmentMemo ? 'Decision frame' : 'Conclusion',
+      title: article.conclusion.title,
+      content: article.conclusion.content,
+      note: (
+        <>
+          Research cutoff: {article.kind === 'research'
+            ? formatPublicationDate(article.lastVerified ?? modifiedDate)
+            : formatPublicationDate(modifiedDate)}.
+          {' '}Public evidence and provider behavior can change; verify current sources before acting.
+        </>
+      ),
+      links: investmentMemo
+        ? [
+            ...relatedLinks,
+            { href: backHref, label: backLabel },
+            { href: '/research', label: 'Technical SEO and AI systems research' },
+            { href: '/about', label: 'About Sulayman Bowles' },
+          ]
+        : article.cluster === 'financial-systems'
+          ? [
+              ...relatedLinks,
+              { href: '/research', label: 'Research archive' },
+              { href: '/markets', label: 'Markets archive' },
+              { href: '/about', label: 'About Sulayman Bowles' },
+            ]
+          : [
+              ...relatedLinks,
+              { href: '/research', label: 'Technical SEO research' },
+              { href: '/atlas', label: 'Atlas technical SEO audit software' },
+              { href: '/method', label: 'Technical SEO audit services' },
+              { href: '/about', label: 'About Sulayman Bowles' },
+            ],
+    },
+  };
+
+  return (
+    <ArticleReader config={config}>
+        <section id="overview">
+          <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'overview')}>
+            Overview
+          </ArticleSectionHeader>
+          <div className="article-reader__prose">
+            {article.content.map((paragraph) => <p key={paragraph.slice(0, 72)}>{paragraph}</p>)}
           </div>
         </section>
 
-        <div className="market-editorial-layout">
-          <aside className="market-editorial-rail" aria-label="Article outline">
-            <div>
-              <p>Article outline</p>
-              <nav>
-                {sections.map((section, index) => (
-                  <a key={section.id} href={`#${section.id}`}>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    {section.title}
-                  </a>
-                ))}
-                {investmentMemo ? <a href="#method-frame"><span>04</span>Method frame</a> : null}
-                {article.sources.length ? <a href="#sources"><span>{investmentMemo ? '05' : '04'}</span>Sources</a> : null}
-              </nav>
-              {boundary ? (
-                <div className="market-editorial-rail__boundary">
-                  <span>{investmentMemo ? 'Not advice' : 'Evidence limit'}</span>
-                  <p>{boundary}</p>
-                </div>
-              ) : null}
-            </div>
-          </aside>
+        {numberedSections?.length
+          ? <StructuredArticleSections sections={numberedSections} navigation={navItems} />
+          : null}
 
-          <article className="market-editorial-copy">
-            {sections.map((section, index) => (
-              <section key={section.id} id={section.id} className="market-editorial-section">
-                <header>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <h2>{section.title}</h2>
-                </header>
-                <div className="market-editorial-prose">
-                  {section.paragraphs.map((paragraph) => <p key={paragraph.slice(0, 72)}>{paragraph}</p>)}
-                </div>
-
-                {index === 0 ? (
-                  <figure className="market-editorial-system-figure">
-                    <div className="market-editorial-figure-label">
-                      <span>{presentation.figureLabel}</span>
-                      <span>Four-stage view</span>
-                    </div>
-                    <h3>{presentation.figureTitle}</h3>
-                    <ol>
-                      {presentation.figureSteps.map((step) => (
-                        <li key={step.index}>
-                          <span>{step.index}</span>
-                          <strong>{step.label}</strong>
-                          <p>{step.detail}</p>
-                        </li>
-                      ))}
-                    </ol>
-                    <figcaption>{presentation.figureCaption}</figcaption>
-                  </figure>
-                ) : null}
-              </section>
-            ))}
-
-            {investmentMemo ? (
-              <section id="method-frame" className="market-editorial-method">
+        {investmentMemo ? (
+          <section id="decision-frame">
+            <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'decision-frame')}>
+              Decision frame
+            </ArticleSectionHeader>
+            <div className="article-reader__decision-grid">
+              <article>
+                <span>Formula</span>
+                <strong>{article.formula}</strong>
                 <p>{article.formulaLabel}</p>
-                <h2>{article.formula}</h2>
-                <div>
-                  <span>Key risk vector</span>
-                  <p>{article.risks}</p>
-                </div>
-              </section>
-            ) : null}
-
-            {article.sources.length ? (
-              <section id="sources" className="market-editorial-sources">
-                <p>Research sources</p>
-                <div>
-                  {article.sources.map((source, index) => (
-                    <a key={source.href} href={source.href} target="_blank" rel="noreferrer">
-                      <span>{String(index + 1).padStart(2, '0')}</span>
-                      <strong>{source.label}</strong>
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                  ))}
-                </div>
-              </section>
-            ) : null}
-
-            <div className="market-editorial-endnote">
-              <span>{article.author}</span>
-              <span>Published {article.date}</span>
-              <span>Updated {article.dateModified ?? article.date}</span>
+              </article>
+              <article>
+                <span>Risk</span>
+                <strong>What can break the thesis</strong>
+                <p>{article.risks}</p>
+              </article>
             </div>
-          </article>
-        </div>
-      </div>
+          </section>
+        ) : null}
 
-      <div className="market-editorial-footer-shell">
-        <InternalFooter activePath={activePath} tone="light" />
-      </div>
-    </EditorialArticlePage>
+        <ArticleResources article={article} navigation={navItems} />
+
+        {faqSections?.length
+          ? <StructuredArticleSections sections={faqSections} navigation={navItems} />
+          : null}
+
+        {article.sources.length
+          ? <SourceLedger article={article} navigation={navItems} />
+          : null}
+    </ArticleReader>
   );
+}
+
+export default function MarketArticlePage({ slug }: { slug: string }) {
+  const article = getArticleBySlug(slug);
+  const route = article
+    ? getSeoRoute(getArticlePath(article)) ?? getSeoRoute('/research')!
+    : NOT_FOUND_ROUTE;
+
+  useSEO(route);
+
+  if (!article) return <NotFoundPage />;
+
+  return <GenericArticle article={article} />;
 }

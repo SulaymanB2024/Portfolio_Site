@@ -1,0 +1,3 @@
+url,status_code,source_quote_card_count,runtime_data_record_count,canonical_state,discovered_next_url,confidence,note
+https://quotes.toscrape.com/,200,10,0,not-present-in-source,https://quotes.toscrape.com/page/2/,high,Static quote-card markup was present in captured source HTML.
+https://quotes.toscrape.com/js/,200,0,10,not-present-in-source,https://quotes.toscrape.com/js/page/2/,high,Quote-card markup is written by a client-side loop over ten embedded data records.

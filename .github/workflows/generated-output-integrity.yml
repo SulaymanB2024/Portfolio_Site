@@ -9,16 +9,23 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm run test:bot-observer
+      - run: npm run test:portfolio-analytics
+      - run: npm run test:seo-schema
+      - run: npm run verify:bot-observer
       - run: npm run verify:generated
       - run: npm run lint
       - run: npm run build
       - run: npm run verify:seo
+      - run: npm run verify:vercel-seo
+      - run: npm run verify:internal-links
+      - run: npm run verify:keywords
       - run: npm run verify:reduction
       - run: npm run audit:style
       - run: npm run verify:security

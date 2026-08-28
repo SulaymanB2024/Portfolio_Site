@@ -71,7 +71,9 @@ expect(csp.includes("default-src 'self'"), 'CSP must set default-src self');
 expect(csp.includes("base-uri 'self'"), 'CSP must restrict base-uri');
 expect(csp.includes("object-src 'none'"), 'CSP must disable object embeds');
 expect(csp.includes("frame-ancestors 'none'"), 'CSP must block framing');
-expect(csp.includes('https://formspree.io'), 'CSP must allow the Formspree form boundary');
+expect(cspDirective(csp, 'form-action') === "form-action 'self'", 'CSP form-action must stay self-only');
+expect(cspDirective(csp, 'connect-src') === "connect-src 'self'", 'CSP connect-src must stay self-only');
+expect(!csp.includes('formspree.io'), 'CSP must not retain the retired third-party form boundary');
 expect(cspDirective(csp, 'script-src') === "script-src 'self'", 'CSP script-src must stay self-only');
 expect(csp.includes("script-src-attr 'none'"), 'CSP must block inline script attributes');
 expect(headers['strict-transport-security']?.includes('max-age='), 'HSTS header is required');
@@ -95,9 +97,23 @@ expect(packageJson.scripts.dev.includes('--host=127.0.0.1'), 'dev server must bi
 expect(packageJson.dependencies.vite === '^6.4.3', 'runtime Vite spec must stay on the patched 6.4.x line');
 expect(packageJson.devDependencies.vite === '^6.4.3', 'dev Vite spec must stay on the patched 6.4.x line');
 
-const form = read('src/components/AuditIntakeForm.tsx');
-expect(form.includes('name="_gotcha"'), 'intake form must keep the honeypot field');
-expect(form.includes('sensitiveSubmissionPattern'), 'intake form must keep secret-pattern blocking');
+const sourceFiles = scanFiles('src', (filePath) => /\.(?:ts|tsx|js|jsx)$/.test(filePath));
+const retiredContactBoundaryReferences = sourceFiles.filter((relativePath) => {
+  const source = read(relativePath);
+  return source.includes('AuditIntakeForm') || source.includes('formspree.io');
+});
+expect(
+  retiredContactBoundaryReferences.length === 0,
+  `retired contact-form boundary remains in source: ${retiredContactBoundaryReferences.join(', ')}`,
+);
+expect(!fs.existsSync(path.resolve(ROOT, 'src/components/AuditIntakeForm.tsx')), 'retired intake component must stay deleted');
+const retiredContactAnchorReferences = sourceFiles.filter((relativePath) =>
+  read(relativePath).includes('contact-brief-panel'),
+);
+expect(
+  retiredContactAnchorReferences.length === 0,
+  `retired contact-form anchor remains in source: ${retiredContactAnchorReferences.join(', ')}`,
+);
 
 const unsafeDomFiles = scanFiles('src', (filePath) => {
   const source = fs.readFileSync(filePath, 'utf8');

@@ -26,10 +26,10 @@ Devpost profile,owned_profile_update,https://sulayman-bowles.dev/,2026-06-26T01:
 LinkedIn profile,owned_profile_update,https://sulayman-bowles.dev/resume,,,not_started,,,,,,Requires LinkedIn account access and approval
 Legacy sulaymanbowles-hash Website-80-2 repository,legacy_account_reclamation,https://sulayman-bowles.dev/ai-information,,,not_started,,,,,,Requires access to older GitHub account or old domain; current gh token has READ only and sulaymanbowles.com returned ENOTFOUND
 Kaggle profile,owned_profile_update,https://sulayman-bowles.dev/markets,,,not_started,,,,,,Public Kaggle profile exists but no canonical-site link was found in fetched HTML; requires account access
-SEOFOMO,community_submission,https://sulayman-bowles.dev/markets/ai-search-crawler-policy,,,not_started,,,,,,Requires login and moderation
-Search Engine Land,editorial_pitch,https://sulayman-bowles.dev/markets/ai-search-crawler-policy,,,not_started,,,,,,Requires approval before sending
-Search Engine Journal,editorial_pitch,https://sulayman-bowles.dev/markets/ai-search-crawler-policy,,,not_started,,,,,,Gated contributor path; source pitch only
-OpenAI developer community,community_post,https://sulayman-bowles.dev/markets/ai-search-crawler-policy,,,not_started,,,,,,Requires approved non-promotional discussion post
+SEOFOMO,community_submission,https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy,,,not_started,,,,,,Requires login and moderation
+Search Engine Land,editorial_pitch,https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy,,,not_started,,,,,,Requires approval before sending
+Search Engine Journal,editorial_pitch,https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy,,,not_started,,,,,,Gated contributor path; source pitch only
+OpenAI developer community,community_post,https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy,,,not_started,,,,,,Requires approved non-promotional discussion post
 Austin Business Journal,story_tip,https://sulayman-bowles.dev/austin-technical-seo,,,not_started,,,,,,Pitch only after benchmark review and deployment
 Austin Chamber,member_news_submission,https://sulayman-bowles.dev/austin-technical-seo,,,not_started,,,,,,Requires membership access
 Texas Blockchain Medium Fall 24 Review,existing_mention_reclamation,https://sulayman-bowles.dev/ai-information,,,not_started,,,,,,Public mention exists but source-link request should only happen through a legitimate editor relationship

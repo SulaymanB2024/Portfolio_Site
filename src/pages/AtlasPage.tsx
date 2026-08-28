@@ -66,10 +66,10 @@ const methodSteps = [
 ];
 
 const heroRunStats = [
-  { label: 'Sample pages read', value: '12,842', note: 'sanitized seed, sitemap, rendered links' },
-  { label: 'Sample evidence states', value: '4', note: 'content, challenge, utility, error' },
-  { label: 'Sample repairs', value: '42', note: 'demo recommendations held for review' },
-  { label: 'Sample package', value: 'Reviewed', note: 'illustrative run ID and review bound' },
+  { label: 'Public pages captured', value: '2', note: 'bounded open-corpus seed set' },
+  { label: 'Observed states', value: '2', note: 'static and render-dependent source' },
+  { label: 'Traceable findings', value: '3', note: 'observation, derivation, next check' },
+  { label: 'Run package', value: 'CSV + JSON', note: 'dated snapshot; no build-time crawl' },
 ];
 
 const mobileHeroLinks = [
@@ -84,30 +84,30 @@ const mobileHeroLinks = [
 ];
 
 const capabilityStatus = [
-  { capability: 'Native crawl inventory', status: 'Shipped', proof: 'Sanitized crawl run', href: '/atlas/sample-crawl' },
-  { capability: 'Raw / rendered evidence', status: 'Shipped', proof: 'Evidence model below', href: '#atlas-evidence' },
-  { capability: 'Run persistence and exports', status: 'Shipped / partial', proof: 'Technical architecture below', href: '#atlas-technical' },
+  { capability: 'Native crawl inventory', status: 'Publicly demonstrated', proof: 'Bounded open-corpus source capture', href: '/atlas/sample-crawl' },
+  { capability: 'Raw / rendered evidence', status: 'Implemented / proof partial', proof: 'Source capture plus a render-review state; no public browser trace', href: '#atlas-evidence' },
+  { capability: 'Run persistence and exports', status: 'Implemented / proof partial', proof: 'CSV/JSON sample; runtime persistence is not publicly demonstrated', href: '#atlas-technical' },
   { capability: 'Provider mesh', status: 'Prototype', proof: 'Measurement gaps remain explicit', href: '#atlas-technical' },
   { capability: 'Scoring policy', status: 'In development', proof: 'Review gate remains authoritative', href: '#atlas-technical' },
-  { capability: 'Client handoff', status: 'Partial', proof: 'Sample package, not a private deliverable', href: '/atlas/sample-crawl' },
+  { capability: 'Client handoff', status: 'Partial', proof: 'Public demonstration package, not a client deliverable', href: '/atlas/sample-crawl' },
 ];
 
 const crawlLedgerRows = [
-  { field: 'Seed + sitemap', value: '13,642 URLs', state: 'inventory' },
-  { field: 'Rendered content', value: '8,731 pages', state: 'confirmed_content' },
-  { field: 'Access challenge', value: '44 pages', state: 'measurement_gap' },
-  { field: 'Utility URLs', value: '318 held', state: 'suppressed' },
-  { field: 'Client actions', value: '42 queued', state: 'review_gate' },
+  { field: 'Seed URLs', value: '2 public pages', state: 'inventory' },
+  { field: 'Static source', value: '10 quote cards', state: 'confirmed_source_content' },
+  { field: 'JS source', value: '10 embedded data records', state: 'render_review_required' },
+  { field: 'Canonical field', value: 'absent in both source responses', state: 'observation_only' },
+  { field: 'Exports', value: 'CSV + JSON manifest', state: 'reviewable_artifact' },
 ];
 
 const evidenceCards = [
-  { label: 'Search question', value: 'austin deck builder' },
-  { label: 'Crawl-backed page', value: '/services/deck-building' },
-  { label: 'Supporting passage', value: 'Deck construction, repair, materials, and project examples.' },
-  { label: 'Measured state', value: 'confirmed_content' },
-  { label: 'Confidence', value: '0.87', kind: 'score' },
-  { label: 'Claim limit', value: 'Useful category signal, weak city-level support' },
-  { label: 'Smallest reviewed repair', value: '/austin/deck-builder' },
+  { label: 'Demonstration corpus', value: 'Quotes to Scrape' },
+  { label: 'Render-sensitive page', value: '/js/' },
+  { label: 'Source signal', value: '10 embedded JSON records + DOM-write loop' },
+  { label: 'Measured state', value: 'render_review_required' },
+  { label: 'Confidence', value: 'high observation', kind: 'score' },
+  { label: 'Claim limit', value: 'Demonstration only; not a corpus-owner audit' },
+  { label: 'Next check', value: 'Render before content-coverage claims' },
 ];
 
 const evidenceTrace = [
@@ -161,47 +161,35 @@ const evidenceStateChips = [
 
 const coverageRows = [
   {
-    area: 'Deck builder intent',
-    observed: '/services/deck-building',
-    gap: 'City intent missing',
-    next: '/austin/deck-builder',
+    area: 'Static quote route',
+    observed: '/',
+    gap: 'None in source quote-card extraction',
+    next: 'Keep as source baseline',
   },
   {
-    area: 'Patio repair support',
-    observed: '/services/patio-repair',
-    gap: 'Thin local support',
-    next: 'Add local examples',
+    area: 'JavaScript quote route',
+    observed: '/js/',
+    gap: 'Rendered quote elements absent from source HTML',
+    next: 'Run rendered capture',
   },
   {
-    area: 'Outdoor kitchen entity',
-    observed: '/services/outdoor-kitchens',
-    gap: 'Weak internal links',
-    next: 'Link from project pages',
+    area: 'Canonical field',
+    observed: 'Both sampled responses',
+    gap: 'No canonical field observed',
+    next: 'Record only; no severity assigned',
   },
   {
-    area: 'Pergola service surface',
-    observed: '/services/pergolas',
-    gap: 'Schema incomplete',
-    next: 'Add service schema',
-  },
-  {
-    area: 'Service area lattice',
-    observed: '/locations',
-    gap: 'Support not tied to services',
-    next: 'Connect service + city pairs',
-  },
-  {
-    area: 'Project evidence',
-    observed: '/projects',
-    gap: 'Examples not query-aligned',
-    next: 'Tag examples by service',
+    area: 'Static pagination',
+    observed: '/page/2/',
+    gap: 'Uncrawled in this bounded snapshot',
+    next: 'Add to next manifest',
   },
 ];
 
 const coverageMetrics = [
-  { label: 'Sample pages', value: '12,842' },
-  { label: 'Intent fields', value: '30' },
-  { label: 'Sample repairs', value: '42' },
+  { label: 'Sample pages', value: '2' },
+  { label: 'Observed fields', value: '9' },
+  { label: 'Finding chains', value: '3' },
 ];
 
 const coverageLadder = [
@@ -224,26 +212,20 @@ const coverageLadder = [
 ];
 
 const terminalLines = [
-  '# sample output only; not a private client run',
-  '$ atlas audit --domain example.com --depth 3 --render',
-  'Opening crawl ledger...',
-  '13,642 URLs discovered from seed, sitemap, render links',
-  'Drawing evidence states...',
-  'confirmed_content=8,731 access_challenge=44 utility_url=318',
-  'Extracting text, headings, canonicals, internal links, schema',
-  'Binding passages to questions...',
-  '20 grounded passages per query family',
-  '42 recommendation candidates held for review',
-  'Export package sealed with source URLs, run ID, and boundaries',
+  'Public sample summary — not a live CLI transcript',
+  'Corpus: Quotes to Scrape',
+  'Seed pages: 2',
+  'Completed browser traces: 0',
+  'Render review required: 1',
+  'Reviewable findings: 3',
+  'Artifacts: CSV + JSON',
+  'Claim limit: demonstration only; not a corpus-owner audit',
 ];
 
 const issueRows = [
-  { issue: 'Absent city-service page', evidence: 'Query gap', impact: 'High' },
-  { issue: 'Weak supporting passage', evidence: 'Thin support', impact: 'High' },
-  { issue: 'Competing service surfaces', evidence: 'Cluster overlap', impact: 'Medium' },
-  { issue: 'Broken internal path', evidence: 'HTTP + graph', impact: 'Medium' },
-  { issue: 'Unmarked service entity', evidence: 'DOM extract', impact: 'Medium' },
-  { issue: 'Slow rendered template', evidence: 'Render timing', impact: 'Low' },
+  { issue: 'Render-dependent quote output', evidence: 'Source script', impact: 'Review' },
+  { issue: 'Canonical field absent', evidence: 'Source extraction', impact: 'Observation' },
+  { issue: 'Pagination path discovered', evidence: 'HTML navigation', impact: 'Inventory' },
 ];
 
 const technicalPillars = [
@@ -351,7 +333,7 @@ export default function AtlasPage() {
   const methodologyLineScale = useTransform(smoothMethodologyProgress, [0.12, 0.55, 1], [0, 0.72, 1]);
 
   return (
-    <main className="relative min-h-screen bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
+    <main className="site-page site-page-light visual-lab-page atlas-visual relative min-h-screen overflow-x-clip bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
       <PageTechnicalChrome tone="light" />
       <InternalHeader activePath="/atlas" tone="light" variant="home" />
       <motion.div
@@ -362,7 +344,7 @@ export default function AtlasPage() {
         <motion.img
           src={ATLAS_ARTWORK}
           alt=""
-          className="absolute left-[61%] top-[43%] h-[72svh] w-[136vw] -translate-x-1/2 -translate-y-1/2 object-contain object-center max-md:!opacity-[0.08] md:left-auto md:right-[-28rem] md:top-[55%] md:h-[112svh] md:w-[88rem] md:translate-x-0 md:scale-100 xl:right-[-20rem] xl:w-[96rem]"
+          className="atlas-visual__hero-art absolute left-[61%] top-[43%] h-[72svh] w-[136vw] -translate-x-1/2 -translate-y-1/2 object-contain object-center max-md:!opacity-[0.1] md:left-auto md:right-[-28rem] md:top-[55%] md:h-[112svh] md:w-[88rem] md:translate-x-0 md:scale-100 xl:right-[-20rem] xl:w-[96rem]"
           style={{ opacity: atlasOpacity }}
           decoding="async"
         />
@@ -371,9 +353,9 @@ export default function AtlasPage() {
       <section
         ref={heroRef}
         id="atlas-hero"
-        className="relative h-[118svh] overflow-visible md:h-[165svh]"
+        className={`atlas-visual__hero relative overflow-visible ${prefersReducedMotion ? 'min-h-[100svh]' : 'h-[104svh] md:h-[165svh]'}`}
       >
-        <div className="sticky top-0 z-10 min-h-[100svh] overflow-hidden px-4 pt-32 md:px-8 md:pt-36 xl:px-10">
+        <div className={`atlas-visual__hero-stage ${prefersReducedMotion ? 'relative' : 'sticky top-0'} z-10 min-h-[100svh] overflow-hidden px-4 pt-32 md:px-8 md:pt-36 xl:px-10`}>
           <motion.div
             className="pointer-events-none absolute left-[calc(50%-5rem)] top-[50%] z-[3] hidden w-px origin-top bg-ink/42 md:block lg:left-[calc(50%-6.75rem)]"
             style={prefersReducedMotion ? { height: '46%', opacity: 0.42 } : { height: heroSpineHeight, opacity: heroSpineOpacity }}
@@ -392,7 +374,7 @@ export default function AtlasPage() {
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               style={prefersReducedMotion ? undefined : { opacity: heroContentOpacity, y: heroCopyY }}
               id="atlas-hero-copy"
-              className="w-full max-w-[24rem] md:max-w-[40rem]"
+              className="atlas-visual__hero-copy w-full max-w-[24rem] md:max-w-[40rem]"
             >
               <p className="mb-7 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42 md:mb-8">
                 ATLAS ENGINE
@@ -403,7 +385,7 @@ export default function AtlasPage() {
                   style={prefersReducedMotion ? undefined : { color: firstLineColor, opacity: firstLineOpacity, y: firstLineY }}
                 >
                   To see the
-                </motion.span>
+                </motion.span>{' '}
                 <span className="block md:whitespace-nowrap">
                   <span className="inline-block">
                     whole&nbsp;
@@ -413,26 +395,34 @@ export default function AtlasPage() {
                   </span>
                 </span>
               </h1>
-              <p className="mt-6 max-w-[26rem] text-sm leading-relaxed tracking-normal text-ink/48 md:text-[15px]">
-                A technical audit drawn like a map: every page located, every claim traced,
-                every recommendation tied to source data.
+              <p className="mt-6 max-w-[26rem] text-sm leading-relaxed tracking-normal text-ink/64 md:text-[15px]">
+                A technical audit drawn like a map: captured pages located, public findings
+                tied to evidence, and unmeasured states left explicit.
               </p>
               <a
                 href="/atlas#atlas-methodology"
                 id="atlas-view-methodology-link"
-                className="mt-8 inline-block border-b border-ink/18 pb-1 font-serif text-sm italic tracking-normal text-ink/45 transition-colors hover:border-ink/45 hover:text-ink/72"
+                className="mt-6 inline-flex min-h-11 items-center border-b border-ink/28 font-serif text-sm italic tracking-normal text-ink/68 transition-colors hover:border-ink/55 hover:text-ink"
               >
                 View methodology
               </a>
-              <nav className="mt-7 hidden max-w-[27rem] gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/52 md:grid" aria-label="Atlas sample links">
-                <a href="/atlas/sample-crawl" className="group grid min-h-11 w-full border-y border-ink/16 py-3 transition-colors hover:border-ink/40 hover:text-ink/78 md:w-fit md:min-h-0 md:border-b md:border-t-0 md:py-1">
-                  <span>See an Atlas sample crawl run</span>
+              <nav className="mt-6 flex flex-wrap items-center gap-3 md:hidden" aria-label="Atlas primary actions">
+                <a href="/atlas/sample-crawl" className="inline-flex min-h-11 items-center border-b border-ink/28 text-[10px] uppercase tracking-[0.18em] text-ink/70">
+                  Inspect the public sample
                 </a>
-                <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
-                  View GitHub repo
-                </a>
-                <a href="/contact" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
+                <a href="/contact" className="inline-flex min-h-11 items-center bg-ink px-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-canvas">
                   Request an audit
+                </a>
+              </nav>
+              <nav className="mt-7 hidden max-w-[27rem] gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/64 md:grid" aria-label="Atlas sample links">
+                <a href="/atlas/sample-crawl" className="group grid min-h-11 w-full items-center border-y border-ink/16 py-3 transition-colors hover:border-ink/40 hover:text-ink/78 md:w-fit md:border-b md:border-t-0 md:py-0">
+                  <span>Inspect the public sample</span>
+                </a>
+                <a href="/contact" className="inline-flex min-h-11 w-fit items-center bg-ink px-4 font-semibold text-canvas transition-colors hover:bg-ink/84">
+                  Request an audit
+                </a>
+                <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="inline-flex min-h-11 w-fit items-center border-b border-ink/18 transition-colors hover:border-ink/45 hover:text-ink/72">
+                  View the audit CLI
                 </a>
               </nav>
             </motion.div>
@@ -448,9 +438,9 @@ export default function AtlasPage() {
       <section
         ref={methodologyRef}
         id="atlas-methodology"
-        className="relative min-h-[104svh] scroll-mt-28 overflow-hidden border-t border-b border-ink/12 px-4 py-24 md:px-8 md:py-28 xl:px-10"
+        className={`relative scroll-mt-28 overflow-hidden border-t border-b border-ink/12 px-4 py-24 md:px-8 md:py-28 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[104svh]'}`}
       >
-        <div className="relative z-10 mx-auto grid min-h-[calc(100svh-12rem)] w-full max-w-[1480px] items-center gap-10 md:grid-cols-[minmax(10rem,0.38fr)_minmax(0,0.84fr)_minmax(18rem,0.78fr)] md:gap-12 lg:px-10">
+        <div className={`relative z-10 mx-auto grid w-full max-w-[1480px] items-center gap-10 md:grid-cols-[minmax(10rem,0.38fr)_minmax(0,0.84fr)_minmax(18rem,0.78fr)] md:gap-12 lg:px-10 ${prefersReducedMotion ? '' : 'min-h-[calc(100svh-12rem)]'}`}>
           <motion.div
             style={prefersReducedMotion ? undefined : { opacity: methodologyContentOpacity, y: methodologyContentY }}
             className="self-start md:pt-6"
@@ -537,7 +527,7 @@ export default function AtlasPage() {
 
 function AtlasStatusMatrix() {
   return (
-    <section className="relative z-10 border-b border-ink/12 bg-canvas px-4 py-14 md:px-8 xl:px-10" aria-labelledby="atlas-status-heading">
+    <section className="atlas-visual__status relative z-10 border-b border-ink/12 bg-canvas px-4 py-14 md:px-8 xl:px-10" aria-labelledby="atlas-status-heading">
       <div className="mx-auto grid w-full max-w-[1480px] gap-10 lg:grid-cols-[0.32fr_0.68fr] lg:px-10">
         <div>
           <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-ink/60">Current capability status</p>
@@ -552,8 +542,8 @@ function AtlasStatusMatrix() {
           {capabilityStatus.map((item) => (
             <div key={item.capability} className="grid gap-3 border-b border-ink/12 py-4 last:border-b-0 md:grid-cols-[minmax(0,0.38fr)_minmax(9rem,0.2fr)_minmax(0,0.42fr)] md:items-center">
               <span className="text-sm font-medium text-ink/82">{item.capability}</span>
-              <span className="w-fit rounded-full border border-ink/18 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-ink/68">{item.status}</span>
-              <a href={item.href} className="text-[10px] uppercase tracking-[0.18em] text-ink/64 underline decoration-ink/25 underline-offset-4 hover:text-ink">{item.proof}</a>
+              <span className="w-fit border-l-2 border-ink/28 py-1 pl-3 text-[10px] uppercase tracking-[0.18em] text-ink/68">{item.status}</span>
+              <a href={item.href} className="inline-flex min-h-11 items-center text-[10px] uppercase tracking-[0.18em] text-ink/64 underline decoration-ink/25 underline-offset-4 hover:text-ink">{item.proof}</a>
             </div>
           ))}
         </div>
@@ -564,7 +554,7 @@ function AtlasStatusMatrix() {
 
 function MobileSamplePackage() {
   return (
-    <section className="relative z-10 border-y border-ink/12 bg-canvas/[0.88] px-4 py-9 md:hidden" aria-labelledby="atlas-mobile-sample-title">
+    <section className="atlas-visual__mobile-package relative z-10 border-y border-ink/12 bg-canvas/[0.88] px-4 py-9 md:hidden" aria-labelledby="atlas-mobile-sample-title">
       <div className="grid gap-6">
         <div className="flex items-end justify-between gap-5">
           <div>
@@ -629,7 +619,7 @@ function EvidenceSection({
   frameOpacity: MotionValue<number>;
 }) {
   return (
-    <section ref={sectionRef} id="atlas-evidence" className="relative min-h-[108svh] scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10">
+    <section ref={sectionRef} id="atlas-evidence" className={`relative scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[108svh]'}`}>
       <motion.div
         className="pointer-events-none absolute right-[-20rem] top-8 hidden h-[52rem] w-[52rem] md:block"
         style={{ ...widePlateMaskStyle, opacity: plateOpacity }}
@@ -790,7 +780,7 @@ function EvidenceSection({
 
 function CoverageSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section id="atlas-coverage" className="relative min-h-[112svh] scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10">
+    <section id="atlas-coverage" className={`relative scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[112svh]'}`}>
       <div
         className="pointer-events-none absolute -left-[18rem] top-16 h-[42rem] w-[42rem] opacity-[0.13] md:-left-[8rem] md:top-20 md:h-[54rem] md:w-[54rem]"
         style={widePlateMaskStyle}
@@ -915,7 +905,7 @@ function CoverageSection({ prefersReducedMotion }: { prefersReducedMotion: boole
 
 function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section id="atlas-technical" className="relative min-h-[112svh] scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10">
+    <section id="atlas-technical" className={`relative scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[112svh]'}`}>
       <div className="pointer-events-none absolute left-1/2 top-4 hidden w-[112rem] max-w-none -translate-x-1/2 opacity-[0.17] md:block" aria-hidden="true">
         <img
           src={ATLAS_ASSETS.celestialArc}
@@ -969,8 +959,8 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
           className="relative overflow-hidden border border-ink/14 bg-canvas-dark/72 p-5 shadow-[0_10px_34px_color-mix(in_srgb,var(--color-ink)_2.5%,transparent)]"
         >
           <div className="mb-5 flex items-center justify-between border-b border-ink/10 pb-4 text-[9px] uppercase tracking-[0.22em] text-ink/44">
-            <span>Run ledger</span>
-            <span>atlas.audit</span>
+            <span>Illustrative operator flow</span>
+            <span>public package: source capture only</span>
           </div>
           <div className="mb-6 grid gap-0 border-b border-ink/10 pb-5 md:grid-cols-4">
             {technicalFlow.map((step) => (
@@ -1009,6 +999,7 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
         >
           <h3 className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/62">Review queue</h3>
           <table className="mt-5 w-full text-left text-xs text-ink/58">
+            <caption className="sr-only">Illustrative Atlas review queue with issue, evidence, and impact columns</caption>
             <thead className="border-b border-ink/14 text-[10px] uppercase tracking-[0.18em] text-ink/48">
               <tr>
                 <th className="pb-3 font-medium">Issue</th>
@@ -1067,7 +1058,7 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
 
 function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section id="atlas-final" className="relative min-h-[112svh] scroll-mt-28 overflow-hidden px-4 py-28 md:px-8 md:py-36 xl:px-10">
+    <section id="atlas-final" className={`relative scroll-mt-28 overflow-hidden px-4 py-28 md:px-8 md:py-36 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[112svh]'}`}>
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <img
           src={ATLAS_ASSETS.atlasFigurePortrait}
@@ -1100,7 +1091,7 @@ function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boo
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto grid min-h-[calc(100svh-14rem)] w-full max-w-[1480px] items-center gap-14 md:grid-cols-[minmax(18rem,0.82fr)_minmax(0,1fr)] lg:px-10">
+      <div className={`relative z-10 mx-auto grid w-full max-w-[1480px] items-center gap-14 md:grid-cols-[minmax(18rem,0.82fr)_minmax(0,1fr)] lg:px-10 ${prefersReducedMotion ? '' : 'min-h-[calc(100svh-14rem)]'}`}>
         <motion.div {...(prefersReducedMotion ? {} : gentleReveal)} className="max-w-[33rem]">
           <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
             ATLAS ENGINE
@@ -1122,7 +1113,7 @@ function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boo
                 href={action.href}
                 target={action.external ? '_blank' : undefined}
                 rel={action.external ? 'noreferrer' : undefined}
-                className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72"
+                className="inline-flex min-h-11 w-fit items-center border-b border-ink/18 transition-colors hover:border-ink/45 hover:text-ink/72"
               >
                 {action.label}
               </a>
