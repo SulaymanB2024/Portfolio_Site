@@ -544,6 +544,24 @@ body {
   transition: background-color 260ms ease, border-color 260ms ease, color 260ms ease;
 }
 
+.site-brand-mark {
+  display: block;
+  flex: 0 0 auto;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 18%, transparent);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.site-brand-link:hover .site-brand-mark,
+.site-brand-link:focus-visible .site-brand-mark {
+  box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 34%, transparent);
+  transform: translateY(-1px);
+}
+
+.site-header-mobile-description {
+  text-wrap: pretty;
+}
+
 .site-header-surface-light {
   border-color: color-mix(in srgb, var(--color-ink) 16%, transparent);
   background: color-mix(in srgb, var(--color-canvas) 91%, transparent);
