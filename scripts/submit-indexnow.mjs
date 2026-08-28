@@ -48,7 +48,6 @@ async function readDefaultUrlList() {
 
   return uniqueUrls([
     ...sitemapUrls,
-    `${SITE_URL}/Sulayman_Bowles_Resume.pdf`,
     `${SITE_URL}/llms.txt`,
     `${SITE_URL}/research`,
     `${SITE_URL}/research/authority-assets.json`,

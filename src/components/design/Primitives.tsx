@@ -393,7 +393,7 @@ export function PrimaryCTA({ className, ...props }: ComponentPropsWithoutRef<'a'
 export function TextLink({ className, ...props }: ComponentPropsWithoutRef<'a'>) {
   return (
     <a
-      className={cx('border-b border-current/24 pb-1 transition-colors hover:border-current', className)}
+      className={cx('inline-flex min-h-11 items-center border-b border-current/24 transition-colors hover:border-current', className)}
       {...props}
     />
   );
