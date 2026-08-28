@@ -4,9 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "npm run generate:article-routes",
     "dev": "vite --port=3000 --host=127.0.0.1",
+    "prebuild": "npm run generate:article-routes",
     "build": "npm run generate:public && vite build && tsx scripts/generate-static-routes.ts",
     "preview": "vite preview",
+    "prelint": "npm run generate:article-routes",
     "report:article-rankings": "tsx scripts/report-article-rankings.ts",
     "clean": "rm -rf dist server.js",
     "generate:article-routes": "tsx scripts/generate-article-route-metadata.ts",
