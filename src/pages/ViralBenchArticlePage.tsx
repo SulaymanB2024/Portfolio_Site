@@ -1,4 +1,4 @@
-import { createElement, useEffect, useMemo, type ReactNode } from 'react';
+import { createElement, useMemo, type ReactNode } from 'react';
 import {
   ArticleReader,
   ArticleSectionHeader,
@@ -98,8 +98,14 @@ function articleNodeToReact(node: Node, key: string): ReactNode {
       props.rel = 'noreferrer';
     }
   }
+  if (tag === 'pre') props.tabIndex = 0;
+  if (tag === 'div' && element.classList.contains('article-table-wrap')) {
+    props.tabIndex = 0;
+    props.role = 'region';
+    props['aria-label'] = element.getAttribute('aria-label') ?? 'Scrollable data table';
+  }
   const ariaLabel = element.getAttribute('aria-label');
-  if (ariaLabel) props['aria-label'] = ariaLabel;
+  if (ariaLabel && !props['aria-label']) props['aria-label'] = ariaLabel;
   if (tag === 'table') {
     const headers = Array.from(element.querySelectorAll('thead th'))
       .map((header) => header.textContent?.replace(/\s+/g, ' ').trim())
@@ -206,43 +212,6 @@ function ViralBenchSection({ section, index }: { section: ArticleSection; index:
 export default function ViralBenchArticlePage() {
   useSEO(ROUTE);
 
-  useEffect(() => {
-    const targetId = window.location.hash.slice(1);
-
-    if (!targetId) {
-      window.scrollTo(0, 0);
-      return undefined;
-    }
-
-    let frame = 0;
-    let attempts = 0;
-    const scrollToTarget = () => {
-      const target = document.querySelector<HTMLElement>(`#top #${CSS.escape(targetId)}`);
-      const lenis = window.lenis as unknown as {
-        resize?: () => void;
-        scrollTo: (target: HTMLElement, options: { immediate: boolean }) => void;
-      } | undefined;
-
-      if (target && lenis) {
-        lenis.resize?.();
-        lenis.scrollTo(target, { immediate: true });
-        return;
-      }
-
-      if (attempts < 4) {
-        attempts += 1;
-        frame = window.requestAnimationFrame(scrollToTarget);
-        return;
-      }
-
-      target?.scrollIntoView();
-    };
-
-    frame = window.requestAnimationFrame(scrollToTarget);
-
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
-
   const faqSection = ARTICLE.sections.find((section) => section.id === 'frequently-asked-questions');
   const sourceNotesSection = ARTICLE.sections.find((section) => section.id === 'sources-and-technical-notes');
   const numberedSections = ARTICLE.sections.filter(
@@ -294,6 +263,7 @@ export default function ViralBenchArticlePage() {
       },
     },
     publication: {
+      author: 'Sulayman Bowles',
       subject: 'AI systems engineering',
       published: {
         dateTime: VIRALBENCH_ARTICLE_DATE,
@@ -380,11 +350,11 @@ export default function ViralBenchArticlePage() {
           ) : null}
           <div className="article-reader__prose">
             <ul>
-              <li><a href="https://viralbench.ai/">ViralBench live methodology</a></li>
-              <li><a href="https://github.com/JibranK12345/Viral-Bench">ViralBench public repository</a></li>
-              <li><a href="https://openai.com/index/harness-engineering/">OpenAI harness engineering</a></li>
-              <li><a href="https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop">OpenAI agent improvement loop</a></li>
-              <li><a href="https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content">TikTok AI-generated content policy</a></li>
+              <li><a href="https://viralbench.ai/" target="_blank" rel="noreferrer" aria-label="ViralBench live methodology (opens in a new tab)">ViralBench live methodology</a></li>
+              <li><a href="https://github.com/JibranK12345/Viral-Bench" target="_blank" rel="noreferrer" aria-label="ViralBench public repository (opens in a new tab)">ViralBench public repository</a></li>
+              <li><a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noreferrer" aria-label="OpenAI harness engineering (opens in a new tab)">OpenAI harness engineering</a></li>
+              <li><a href="https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop" target="_blank" rel="noreferrer" aria-label="OpenAI agent improvement loop (opens in a new tab)">OpenAI agent improvement loop</a></li>
+              <li><a href="https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content" target="_blank" rel="noreferrer" aria-label="TikTok AI-generated content policy (opens in a new tab)">TikTok AI-generated content policy</a></li>
             </ul>
           </div>
         </section>

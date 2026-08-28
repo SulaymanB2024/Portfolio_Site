@@ -2656,9 +2656,12 @@ body {
     padding: 0 !important;
   }
 
-  section,
-  article,
-  .grid {
+  figure,
+  table,
+  pre,
+  blockquote,
+  .article-reader__metric,
+  .article-reader__decision-grid article {
     page-break-inside: avoid;
     break-inside: avoid;
   }

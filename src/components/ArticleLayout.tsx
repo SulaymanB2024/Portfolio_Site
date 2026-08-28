@@ -38,6 +38,7 @@ type ArticleMetaItem = {
 export type ArticleImagePlaceholderVariant = 'default' | 'pipeline' | 'identity' | 'triptych';
 
 export type ArticlePublicationMeta = {
+  author: ReactNode;
   subject: ReactNode;
   published: {
     dateTime: string;
@@ -153,21 +154,75 @@ function ArticlePage({
         return;
       }
 
-      if (!id) return;
+      if (!id) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        return true;
+      }
       const nextTarget = document.getElementById(id);
-      if (!nextTarget) return;
+      if (!nextTarget) return false;
 
       nextTarget.setAttribute('data-article-target', 'true');
       currentTarget = nextTarget;
+      const stickyClearance = [
+        document.querySelector<HTMLElement>('header'),
+        document.querySelector<HTMLElement>('.article-reader__mobile-contents'),
+      ].reduce((clearance, element) => {
+        if (!element) return clearance;
+
+        const styles = window.getComputedStyle(element);
+        if (
+          styles.display === 'none' ||
+          styles.visibility === 'hidden' ||
+          !['fixed', 'sticky'].includes(styles.position)
+        ) {
+          return clearance;
+        }
+
+        const stickyTop = Number.parseFloat(styles.top);
+        const top = Number.isFinite(stickyTop) ? stickyTop : 0;
+        return Math.max(clearance, top + element.getBoundingClientRect().height);
+      }, 0);
+      const scrollOffset = Math.ceil(stickyClearance + 16);
+      const lenis = (window as unknown as {
+        lenis?: {
+          resize?: () => void;
+          scrollTo: (
+            target: HTMLElement,
+            options: { immediate: boolean; offset: number },
+          ) => void;
+        };
+      }).lenis;
+
+      if (lenis) {
+        lenis.resize?.();
+        lenis.scrollTo(nextTarget, { immediate: true, offset: -scrollOffset });
+      } else {
+        const top = nextTarget.getBoundingClientRect().top + window.scrollY - scrollOffset;
+        window.scrollTo({ top: Math.max(0, top), left: 0, behavior: 'auto' });
+      }
       if (moveFocus) {
         if (!nextTarget.hasAttribute('tabindex')) nextTarget.setAttribute('tabindex', '-1');
         nextTarget.focus({ preventScroll: true });
       }
+      return true;
     };
     const scheduleHashTarget = (moveFocus = false) => {
       window.cancelAnimationFrame(frame);
+      let attempts = 0;
+      let settleAttempts = 0;
+      const restoreTarget = () => {
+        const foundTarget = markHashTarget(moveFocus && settleAttempts === 0);
+        if (foundTarget) {
+          if (settleAttempts >= 2) return;
+          settleAttempts += 1;
+        } else {
+          if (attempts >= 8) return;
+          attempts += 1;
+        }
+        frame = window.requestAnimationFrame(restoreTarget);
+      };
       frame = window.requestAnimationFrame(() => {
-        frame = window.requestAnimationFrame(() => markHashTarget(moveFocus));
+        frame = window.requestAnimationFrame(restoreTarget);
       });
     };
     const handleHashClick = (event: MouseEvent) => {
@@ -203,6 +258,7 @@ function ArticlePage({
   return (
     <PageShell
       id="top"
+      tabIndex={-1}
       tone="light"
       className={`article-reader article-reader--${mode} ${className}`}
     >
@@ -325,13 +381,13 @@ function ArticleHero({
 
         <figure
           className="article-reader__hero-image"
-          data-placeholder={image ? undefined : 'true'}
+          data-visual={image ? 'image' : 'diagram'}
           data-presentation={image?.presentation}
-          aria-label={image ? undefined : 'Editorial image placeholder'}
+          aria-label={image ? undefined : 'Editorial concept diagram'}
         >
           <figcaption className="article-reader__image-caption">
-            <span>{image?.label ?? imagePlaceholder?.label ?? 'Editorial image pending'}</span>
-            <small>{image?.caption ?? imagePlaceholder?.note ?? 'Purpose-built artwork will replace this study frame.'}</small>
+            <span>{image?.label ?? imagePlaceholder?.label ?? 'Editorial plate'}</span>
+            <small>{image?.caption ?? imagePlaceholder?.note ?? 'A visual index of the article’s core system.'}</small>
           </figcaption>
           <div className="article-reader__image-media">
             {image ? (
@@ -400,8 +456,13 @@ function ArticleImagePlaceholder({
   }
 
   return (
-    <div className="article-reader__image-placeholder">
-      <strong aria-hidden="true">IMAGE STUDY</strong>
+    <div className="article-reader__image-placeholder article-reader__image-placeholder--default" aria-hidden="true">
+      {['Question', 'Evidence', 'Decision'].map((label, index) => (
+        <div key={label}>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <strong>{label}</strong>
+        </div>
+      ))}
     </div>
   );
 }
@@ -450,6 +511,7 @@ function ArticleCallout({
 
 function publicationItems(publication: ArticlePublicationMeta): ArticleMetaItem[] {
   const items: ArticleMetaItem[] = [
+    { label: 'Author', value: publication.author },
     { label: 'Subject', value: publication.subject },
     {
       label: 'Published',
@@ -547,10 +609,14 @@ function useActiveSection(items: ArticleNavItem[]) {
     const update = () => {
       frame = 0;
       const marker = Math.min(Math.max(window.innerHeight * 0.24, 140), 260);
-      const current = nodes.find((node) => {
+      let current = nodes.find((node) => {
         const rect = node.getBoundingClientRect();
         return rect.top <= marker && rect.bottom > marker;
       }) ?? [...nodes].reverse().find((node) => node.getBoundingClientRect().top <= marker) ?? nodes[0];
+
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        current = nodes.at(-1) ?? current;
+      }
 
       setActiveId((previous) => previous === current.id ? previous : current.id);
     };
@@ -646,7 +712,7 @@ function ArticleUtilities({
   };
 
   return (
-    <div className="article-reader__utilities" aria-label="Article utilities">
+    <div className="article-reader__utilities" role="group" aria-label="Article utilities">
       {sourceItem ? (
         <a href={`#${sourceItem.id}`} onClick={onSourceClick}>{sourceItem.label}</a>
       ) : null}
@@ -720,6 +786,7 @@ function ArticleBody({
   const activeItem = items[activeIndex];
   const sourceItem = items.find((item) => item.id === 'source-ledger' || item.index === 'S');
   const progress = items.length ? ((activeIndex + 1) / items.length) * 100 : 0;
+  const positionLabel = `${String(activeIndex + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
   const closeMobileContents = (event: ReactMouseEvent<HTMLAnchorElement>) => {
     const details = event.currentTarget.closest('details');
     if (!details) return;
@@ -780,26 +847,27 @@ function ArticleBody({
         />
       </details>
 
-      {mode === 'narrative' ? (
-        <div className="article-reader__mobile-progress" aria-hidden="true">
-          <span style={{ width: `${progress}%` }} />
-        </div>
-      ) : null}
+      <div
+        className="article-reader__mobile-progress"
+        role="progressbar"
+        aria-label={`${contentsLabel} position`}
+        aria-valuemin={1}
+        aria-valuemax={Math.max(1, items.length)}
+        aria-valuenow={activeIndex + 1}
+      >
+        <span style={{ width: `${progress}%` }} />
+      </div>
 
       <div className="article-reader__body-layout">
         <aside className="article-reader__rail">
           <div className="article-reader__rail-sticky">
             <div className="article-reader__rail-heading">
               <SectionEyebrow>{contentsLabel}</SectionEyebrow>
-              {mode === 'narrative' ? (
-                <span>{String(Math.round(progress)).padStart(2, '0')}%</span>
-              ) : null}
+              <span>{positionLabel}</span>
             </div>
-            {mode === 'narrative' ? (
-              <div className="article-reader__rail-progress" aria-hidden="true">
-                <span style={{ width: `${progress}%` }} />
-              </div>
-            ) : null}
+            <div className="article-reader__rail-progress" aria-hidden="true">
+              <span style={{ width: `${progress}%` }} />
+            </div>
             <nav
               aria-label={`${contentsLabel} navigation`}
               onKeyDown={(event) => moveArticleNavFocus(event, 'vertical')}

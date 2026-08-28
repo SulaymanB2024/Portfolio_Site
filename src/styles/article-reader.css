@@ -239,7 +239,7 @@
 .article-reader__image-caption span,
 .article-reader__image-caption small {
   color: var(--article-faint);
-  font-size: 0.56rem;
+  font-size: 0.62rem;
   line-height: 1.5;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -334,13 +334,55 @@
     color-mix(in srgb, var(--article-ink) 3%, var(--article-paper));
 }
 
-.article-reader__image-placeholder strong {
+.article-reader__image-placeholder > strong {
   justify-self: center;
   color: color-mix(in srgb, var(--article-ink) 13%, transparent);
   font-family: var(--font-serif);
   font-size: clamp(2.2rem, 7vw, 5.5rem);
   font-weight: 400;
   letter-spacing: 0.04em;
+}
+
+.article-reader__image-placeholder--default {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: center;
+  gap: 0.75rem;
+}
+
+.article-reader__image-placeholder--default > div {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 6rem;
+  align-content: space-between;
+  border: 1px solid var(--article-line);
+  background: color-mix(in srgb, var(--article-paper) 82%, transparent);
+  padding: 0.8rem;
+}
+
+.article-reader__image-placeholder--default > div:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -0.55rem;
+  z-index: 1;
+  width: 0.35rem;
+  border-top: 1px solid var(--article-ink);
+  content: "";
+}
+
+.article-reader__image-placeholder--default span {
+  color: var(--article-faint);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+}
+
+.article-reader__image-placeholder--default strong {
+  color: var(--article-ink);
+  font-family: var(--font-sans);
+  font-size: clamp(0.62rem, 1vw, 0.78rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .article-reader__image-placeholder--pipeline {
@@ -1082,6 +1124,25 @@
   color: var(--article-muted);
 }
 
+.article-reader__code-copy {
+  min-height: 2.4rem;
+  margin-top: 1rem;
+  border: 1px solid var(--article-line);
+  background: transparent;
+  padding: 0.55rem 0.75rem;
+  color: var(--article-muted);
+  cursor: pointer;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.article-reader__code-copy:hover,
+.article-reader__code-copy:focus-visible {
+  background: var(--article-ink);
+  color: var(--article-paper);
+}
+
 .article-reader .article-citation {
   display: inline-block;
   margin-left: 0.18em;
@@ -1128,6 +1189,12 @@
   font-size: 0.72em;
   text-decoration: none;
   content: "↗";
+}
+
+.article-reader__external-link::after {
+  content: " ↗";
+  font-size: 0.85em;
+  text-decoration: none;
 }
 
 .article-reader .article-notes {
@@ -1562,6 +1629,24 @@
 }
 
 /* Existing evidence and research primitives are retained, then translated to paper. */
+.article-reader .toll-section-intro,
+.article-reader :is(
+  .toll-ownership-stack,
+  .toll-cash-waterfall,
+  .toll-snapshot,
+  .toll-case-diagram,
+  .toll-data-table,
+  .ai-hall-of-shame,
+  .ai-authority-spectrum,
+  .ai-policy-leak,
+  .ai-human-company,
+  .ai-economics-stack,
+  .ai-operating-stack,
+  .ai-simulation-boundary
+) figcaption {
+  color: var(--article-muted);
+}
+
 .article-reader :is(
   .toll-ownership-stack,
   .toll-cash-waterfall,
@@ -1733,21 +1818,21 @@
   color: var(--article-muted);
 }
 
-.article-reader .viralbench-toll-article .article-table-wrap,
 .article-reader .article-table-wrap {
   border-color: var(--article-line);
 }
 
-.article-reader .viralbench-toll-article .article-table-wrap th,
-.article-reader .viralbench-toll-article .article-table-wrap td {
+.article-reader.viralbench-toll-article .article-table-wrap th,
+.article-reader.viralbench-toll-article .article-table-wrap td {
   border-color: var(--article-line);
 }
 
-.article-reader .viralbench-toll-article .article-table-wrap th {
+.article-reader.viralbench-toll-article .article-table-wrap th {
+  background: #e8e7e2;
   color: var(--article-ink);
 }
 
-.article-reader .viralbench-toll-article .article-table-wrap td {
+.article-reader.viralbench-toll-article .article-table-wrap td {
   color: var(--article-muted);
 }
 
@@ -2234,10 +2319,6 @@
   .article-reader__hero-image {
     margin-top: 1.25rem;
     break-inside: avoid;
-  }
-
-  .article-reader__hero-image[data-placeholder='true'] {
-    display: none;
   }
 
   .article-reader__hero-image .article-reader__image-media img {

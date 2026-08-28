@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 
 import {
   ArticleReader,
@@ -15,11 +15,59 @@ import {
   type PublicArticle,
   type ResearchArticle,
 } from '../content/articleModels';
-import { RESEARCH_ARTICLES } from '../content/researchArticles';
 import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
-import { getSeoRoute } from '../seo/routes';
+import { getSeoRoute, NOT_FOUND_ROUTE } from '../seo/routes';
 import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
 import { useSEO } from '../utils/seo';
+import NotFoundPage from './NotFoundPage';
+
+function ArticleCodeExample({
+  example,
+  index,
+}: {
+  key?: string;
+  example: NonNullable<ArticleSection['codeExamples']>[number];
+  index: number;
+}) {
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'failed'>('idle');
+
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(example.code);
+      setCopyStatus('copied');
+      window.setTimeout(() => setCopyStatus('idle'), 1800);
+    } catch {
+      setCopyStatus('failed');
+    }
+  };
+
+  return (
+    <figure className="research-guide-code">
+      <figcaption>
+        <span>Configuration {String(index + 1).padStart(2, '0')}</span>
+        <strong>{example.title}</strong>
+        <p>{example.description}</p>
+        <button
+          type="button"
+          className="article-reader__code-copy"
+          onClick={copyCode}
+          aria-label={`Copy ${example.title} code`}
+        >
+          {copyStatus === 'copied' ? 'Copied' : copyStatus === 'failed' ? 'Copy failed' : 'Copy code'}
+        </button>
+        <span className="sr-only" aria-live="polite">
+          {copyStatus === 'copied'
+            ? `${example.title} copied to the clipboard.`
+            : copyStatus === 'failed'
+              ? `${example.title} could not be copied.`
+              : ''}
+        </span>
+      </figcaption>
+      <pre tabIndex={0}><code>{example.code}</code></pre>
+      <p className="research-guide-code__format">Review before release · {example.language}</p>
+    </figure>
+  );
+}
 
 function StructuredArticleSections({
   sections,
@@ -101,15 +149,7 @@ function StructuredArticleSections({
           {section.codeExamples?.length ? (
             <div className="research-guide-code-list">
               {section.codeExamples.map((example, exampleIndex) => (
-                <figure key={example.title} className="research-guide-code">
-                  <figcaption>
-                    <span>Configuration {String(exampleIndex + 1).padStart(2, '0')}</span>
-                    <strong>{example.title}</strong>
-                    <p>{example.description}</p>
-                  </figcaption>
-                  <pre tabIndex={0}><code>{example.code}</code></pre>
-                  <p className="research-guide-code__format">Review before release · {example.language}</p>
-                </figure>
+                <ArticleCodeExample key={example.title} example={example} index={exampleIndex} />
               ))}
             </div>
           ) : null}
@@ -132,22 +172,34 @@ function SourceLedger({
         Source ledger
       </ArticleSectionHeader>
       <ol>
-        {article.sources.map((source, index) => (
-          <li key={source.href}>
-            <span className="toll-source-ledger__id">{String(index + 1).padStart(2, '0')}</span>
-            <div>
-              <strong>{source.label}</strong>
-              <p>
-                {source.lastVerified
-                  ? `Last verified ${formatPublicationDate(source.lastVerified)}.`
-                  : 'Verification date not recorded in this web edition.'}
-              </p>
-              <div className="toll-source-ledger__links">
-                <a href={source.href} target="_blank" rel="noreferrer">Open source</a>
+        {article.sources.map((source, index) => {
+          const isExternal = /^https?:\/\//.test(source.href);
+
+          return (
+            <li key={source.href}>
+              <span className="toll-source-ledger__id">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <strong>{source.label}</strong>
+                <p>
+                  {source.lastVerified
+                    ? `Last verified ${formatPublicationDate(source.lastVerified)}.`
+                    : 'Verification date not recorded in this web edition.'}
+                </p>
+                <div className="toll-source-ledger__links">
+                  <a
+                    href={source.href}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noreferrer' : undefined}
+                    className={isExternal ? 'article-reader__external-link' : undefined}
+                    aria-label={`Open ${source.label}${isExternal ? ' in a new tab' : ''}`}
+                  >
+                    Open source
+                  </a>
+                </div>
               </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ol>
     </section>
   );
@@ -295,6 +347,7 @@ function GenericArticle({
       imagePlaceholder: study,
     },
     publication: {
+      author: article.author,
       subject: article.category,
       published: {
         dateTime: normalizePublicationDate(article.date),
@@ -407,24 +460,14 @@ function GenericArticle({
 }
 
 export default function MarketArticlePage({ slug }: { slug: string }) {
-  const article = getArticleBySlug(slug) ?? RESEARCH_ARTICLES[0];
-  const route = getSeoRoute(getArticlePath(article)) ?? getSeoRoute('/research')!;
+  const article = getArticleBySlug(slug);
+  const route = article
+    ? getSeoRoute(getArticlePath(article)) ?? getSeoRoute('/research')!
+    : NOT_FOUND_ROUTE;
 
   useSEO(route);
 
-  useEffect(() => {
-    const targetId = window.location.hash.slice(1);
-    if (targetId) {
-      window.requestAnimationFrame(() => {
-        const target = document.getElementById(targetId);
-        if (!target) return;
-        const top = target.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top, left: 0, behavior: 'auto' });
-      });
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, []);
+  if (!article) return <NotFoundPage />;
 
   return <GenericArticle article={article} />;
 }
