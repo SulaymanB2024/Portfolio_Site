@@ -34,6 +34,13 @@
       "headers": { "Location": "/Sulayman_Bowles_Resume.pdf" },
       "status": 301
     },
+    {
+      "src": "/Sulayman_Bowles_Resume\\.pdf",
+      "headers": {
+        "Link": "<https://sulayman-bowles.dev/resume>; rel=\"canonical\""
+      },
+      "continue": true
+    },
     { "src": "/projects/atlas", "headers": { "Location": "/atlas" }, "status": 308 },
     { "src": "/projects/markets", "headers": { "Location": "/markets" }, "status": 308 },
     { "src": "/atlas/sample-run", "headers": { "Location": "/atlas/sample-crawl" }, "status": 308 },
@@ -63,6 +70,7 @@
     { "src": "/markets/how-airlines-borrow-against-loyalty-programs", "headers": { "Location": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs" }, "status": 308 },
     { "src": "/markets/where-online-returns-actually-go", "headers": { "Location": "/research/financial-systems/where-online-returns-actually-go" }, "status": 308 },
     { "src": "/markets/hidden-financing-hardware-startups", "headers": { "Location": "/research/financial-systems/hidden-financing-hardware-startups" }, "status": 308 },
+    { "src": "/markets/us-rare-earth-magnet-manufacturing-capacity", "headers": { "Location": "/research/data-systems/us-rare-earth-magnet-manufacturing-capacity" }, "status": 308 },
     { "src": "/markets/network-monopolies", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
     { "src": "/markets/computational-commodity-systems", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
     { "src": "/markets/fiat-horizon", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },

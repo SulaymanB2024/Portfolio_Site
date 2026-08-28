@@ -30,8 +30,8 @@ export const buyerDecisionEvidence: BuyerDecisionEvidenceItem[] = [
   {
     question: 'What makes a useful first brief?',
     answer:
-      'Bring a site or product surface, the suspected evidence gap, and the decision the work must support. Keep credentials and sensitive client data out of the form.',
-    href: '/contact#contact-brief-panel',
+      'Bring a site or product surface, the suspected evidence gap, and the decision the work must support. Do not send credentials or sensitive client data in the first email.',
+    href: '/contact',
     action: 'Prepare the evidence brief',
   },
 ];
@@ -116,7 +116,7 @@ export const contactBuyerQuestions: ContactBuyerQuestion[] = [
   {
     question: 'Do you need credentials or production access before we talk?',
     answer:
-      'No. Start with a public URL or a plain-language description of the private surface. Any later access should be agreed after fit and scope are clear; never put credentials in this form.',
+      'No. Start with a public URL or a plain-language description of the private surface. Any later access should be agreed after fit and scope are clear; never send credentials in an initial email.',
   },
   {
     question: 'Can you guarantee rankings, traffic, revenue, or AI answer placement?',
@@ -124,9 +124,9 @@ export const contactBuyerQuestions: ContactBuyerQuestion[] = [
       'No. Those outcomes depend on external systems and conditions beyond a technical review. The work can make evidence, implementation choices, acceptance checks, and remaining uncertainty explicit.',
   },
   {
-    question: 'What does submitting the form authorize?',
+    question: 'What does sending an inquiry authorize?',
     answer:
-      'It creates a request to discuss fit and scope. It does not authorize system access, deployment, publication, or billable work.',
+      'It requests a discussion of fit and scope. It does not authorize system access, deployment, publication, or billable work.',
   },
   {
     question: 'What happens after the brief is reviewed?',

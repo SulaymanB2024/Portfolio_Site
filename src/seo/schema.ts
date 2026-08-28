@@ -129,22 +129,7 @@ export function personSchema({
     ],
     subjectOf: [
       {
-        '@type': 'ProfilePage',
-        name: 'About Sulayman Bowles',
-        url: absoluteUrl('/about'),
-        description: 'Current public profile for Sulayman Bowles, including AI product work, technical systems, research, education, and selected work.',
-      },
-      {
-        '@type': 'ProfilePage',
-        name: 'SulaymanB2024 GitHub profile',
-        url: 'https://github.com/SulaymanB2024',
-        description: 'Public code profile for portfolio, crawler, technical SEO, and finance research projects.',
-      },
-      {
-        '@type': 'ProfilePage',
-        name: 'Sulayman Bowles Devpost profile',
-        url: 'https://devpost.com/sulayman-bowles',
-        description: 'Public project and hackathon profile corroborating the technical builder identity.',
+        '@id': `${absoluteUrl('/about')}#webpage`,
       },
       {
         '@type': 'WebPage',
@@ -256,13 +241,15 @@ function webPageSchema({
   description: string;
   mainEntityId?: string;
   aboutIds?: string[];
-  additionalType?: string;
+  additionalType?: string | string[];
   dateModified?: string;
   keywords?: readonly string[];
 }): JsonLd {
   return {
     '@context': 'https://schema.org',
-    '@type': additionalType ? ['WebPage', additionalType] : 'WebPage',
+    '@type': additionalType
+      ? ['WebPage', ...(Array.isArray(additionalType) ? additionalType : [additionalType])]
+      : 'WebPage',
     '@id': `${absoluteUrl(path)}#webpage`,
     name,
     url: absoluteUrl(path),
@@ -517,25 +504,9 @@ export function aboutJsonLd(): JsonLd {
       keywords: searchTerms('/about'),
       mainEntityId: PERSON_ID,
       aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
-      additionalType: 'AboutPage',
+      additionalType: ['AboutPage', 'ProfilePage'],
       dateModified: schemaDateModified,
     }),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'ProfilePage',
-      '@id': `${absoluteUrl('/about')}#profile`,
-      name: 'About Sulayman Bowles',
-      url: absoluteUrl('/about'),
-      description:
-        'Profile page explaining Sulayman Bowles through technical systems work, UT Austin McCombs, Atlas, technical SEO, Void Agency, AI product workflows, and finance research.',
-      dateModified: schemaDateModified,
-      mainEntity: {
-        '@id': PERSON_ID,
-      },
-      isPartOf: {
-        '@id': WEBSITE_ID,
-      },
-    },
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'About', path: '/about' },
@@ -555,22 +526,6 @@ export function resumeJsonLd(): JsonLd {
       mainEntityId: PERSON_ID,
       aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
     }),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'ProfilePage',
-      '@id': `${absoluteUrl('/resume')}#profile`,
-      name: 'Sulayman Bowles Resume | Technical SEO, Atlas & Finance Research',
-      url: absoluteUrl('/resume'),
-      description:
-        'HTML-first resume for Sulayman Bowles across UT Austin McCombs, Void Agency, Atlas, technical SEO, search visibility, finance research, public code, and professional profiles.',
-      dateModified: schemaDateModified,
-      mainEntity: {
-        '@id': PERSON_ID,
-      },
-      isPartOf: {
-        '@id': WEBSITE_ID,
-      },
-    },
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Resume', path: '/resume' },
@@ -1006,5 +961,44 @@ export function marketArticleJsonLd({
       { name: collectionName, path: collectionPath },
       { name: title, path },
     ]),
+  ]);
+}
+
+export function technicalSeoCollectionJsonLd({
+  title,
+  description,
+  path,
+  parentPath = '/research',
+  parentName = 'Research',
+}: {
+  title: string;
+  description: string;
+  path: string;
+  parentPath?: string;
+  parentName?: string;
+}): JsonLd {
+  const collectionId = `${absoluteUrl(path)}#collection`;
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Research', path: '/research' },
+  ];
+
+  if (parentPath !== '/research') {
+    breadcrumbs.push({ name: parentName, path: parentPath });
+  }
+  breadcrumbs.push({ name: title, path });
+
+  return graphSchema([
+    ...canonicalEntitySchemas(),
+    websiteSchema(),
+    collectionPageSchema(title, description, path),
+    webPageSchema({
+      path,
+      name: title,
+      description,
+      mainEntityId: collectionId,
+      aboutIds: [PERSON_ID],
+    }),
+    breadcrumbSchema(breadcrumbs),
   ]);
 }

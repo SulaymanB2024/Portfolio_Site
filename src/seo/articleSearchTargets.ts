@@ -64,6 +64,51 @@ export const ARTICLE_SEARCH_TARGETS = [
     relatedPaths: [
       '/viralbench-codex-agent-harness',
       '/research/ai-systems/replayable-traces-ai-agent-evaluation',
+      '/research/ai-systems/the-ai-megawatt',
+      '/markets/who-owns-texas-toll-roads',
+    ],
+  },
+  {
+    path: '/research/ai-systems/the-ai-megawatt',
+    primaryQuery: 'AI data center power',
+    supportingQueries: ['1 GW AI data center GPUs', 'AI data center power capacity'],
+    intent: 'evaluation',
+    cohort: 1,
+    directAnswer:
+      'AI data center power claims are not interchangeable: a requested grid interconnection, total-facility nameplate, IT nameplate, installed accelerator fleet, and average utilized load describe different boundaries. A defensible GPU estimate requires the electrical boundary, PUE, network overhead, rack design, accelerator configuration, and utilization assumptions.',
+    serpGap:
+      'Replace one-ratio gigawatt-to-GPU estimates with an explicit capacity ladder, sensitivity range, and boundary-specific evidence requirements.',
+    originalArtifact:
+      'A downloadable GB300 capacity model, sensitivity table, source ledger, methodology note, and three boundary diagrams.',
+    cannibalizationBoundary:
+      'This page translates AI power claims into physical compute capacity; the hardware-financing and rare-earth articles analyze capital structure and upstream manufacturing capacity.',
+    lastVerified: '2026-08-16',
+    relatedPaths: [
+      '/research/data-systems/us-rare-earth-magnet-manufacturing-capacity',
+      '/research/financial-systems/hidden-financing-hardware-startups',
+      '/research/financial-systems/waymo-hardware-financing',
+      '/research/ai-systems/the-first-ai-managers',
+    ],
+  },
+  {
+    path: '/research/data-systems/us-rare-earth-magnet-manufacturing-capacity',
+    primaryQuery: 'U.S. rare-earth magnet manufacturing capacity',
+    supportingQueries: ['U.S. rare earth magnet production capacity', 'domestic permanent magnet manufacturing'],
+    intent: 'evaluation',
+    cohort: 1,
+    directAnswer:
+      'U.S. rare-earth magnet manufacturing capacity is growing, but announced nameplate, installed equipment, qualification, commercial shipments, and sustained saleable output are different maturity states. Bankable supply also depends on product mix, yield, qualified customers, imported inputs, and utilization rather than the sum of every announced project headline.',
+    serpGap:
+      'Separate disclosed finished-magnet nameplate from qualified output, upstream-only material capacity, ambiguous units, and demand denominators.',
+    originalArtifact:
+      'A project-level capacity model, source ledger, material-flow diagram, maturity chart, and demand-denominator comparison.',
+    cannibalizationBoundary:
+      'This page audits domestic rare-earth magnet projects and physical supply maturity; the AI megawatt page models compute power and the hardware articles model financing.',
+    lastVerified: '2026-08-17',
+    relatedPaths: [
+      '/research/ai-systems/the-ai-megawatt',
+      '/research/financial-systems/hidden-financing-hardware-startups',
+      '/research/financial-systems/waymo-hardware-financing',
       '/markets/who-owns-texas-toll-roads',
     ],
   },
@@ -266,6 +311,8 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/where-online-returns-actually-go',
       '/research/financial-systems/waymo-hardware-financing',
+      '/research/ai-systems/the-ai-megawatt',
+      '/research/data-systems/us-rare-earth-magnet-manufacturing-capacity',
       '/markets/who-owns-texas-toll-roads',
       '/research/data-systems/audit-findings-derived-records',
       '/research/search-console/technical-seo-public-data-infrastructure',
@@ -290,6 +337,8 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/where-online-returns-actually-go',
       '/research/financial-systems/hidden-financing-hardware-startups',
+      '/research/ai-systems/the-ai-megawatt',
+      '/research/data-systems/us-rare-earth-magnet-manufacturing-capacity',
       '/markets/who-owns-texas-toll-roads',
       '/research/financial-systems/west-campus-student-housing',
       '/research/data-systems/audit-findings-derived-records',

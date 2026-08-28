@@ -107,6 +107,13 @@ expect(
   `retired contact-form boundary remains in source: ${retiredContactBoundaryReferences.join(', ')}`,
 );
 expect(!fs.existsSync(path.resolve(ROOT, 'src/components/AuditIntakeForm.tsx')), 'retired intake component must stay deleted');
+const retiredContactAnchorReferences = sourceFiles.filter((relativePath) =>
+  read(relativePath).includes('contact-brief-panel'),
+);
+expect(
+  retiredContactAnchorReferences.length === 0,
+  `retired contact-form anchor remains in source: ${retiredContactAnchorReferences.join(', ')}`,
+);
 
 const unsafeDomFiles = scanFiles('src', (filePath) => {
   const source = fs.readFileSync(filePath, 'utf8');

@@ -8,6 +8,7 @@ import { INDEX_COMPANY_MATTERS_ARTICLE_SLUG } from './indexCompanyMattersArticle
 import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvestigationArticle';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
+import { THE_AI_MEGAWATT_ARTICLE_SLUG } from './theAiMegawattArticle';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingArticle';
 import { WEST_CAMPUS_STUDENT_HOUSING_ARTICLE_SLUG } from './westCampusStudentHousingArticle';
 
@@ -26,6 +27,7 @@ const article = (slug: string) => {
   return item;
 };
 
+const aiMegawatt = article(THE_AI_MEGAWATT_ARTICLE_SLUG);
 const crawlerPolicy = article('ai-search-crawler-policy');
 const austinHomeServiceOwnership = article(AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE_SLUG);
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
@@ -47,6 +49,14 @@ function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['cat
 }
 
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
+  {
+    category: 'Technical SEO',
+    title: 'Technical SEO Diagnostic Library',
+    href: '/research/technical-seo',
+    description: 'Forty evidence-backed issue guides, platform playbooks, audit checklists, and collection routes with reproducible repair gates.',
+    date: '2026.07.20',
+    featured: true,
+  },
   ...TECHNICAL_ARTICLE_SERIES.map((articleItem) => ({
     category: seriesCategory(articleItem),
     title: articleItem.title,
@@ -54,6 +64,14 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     description: articleItem.subtitle,
     date: articleItem.dateModified ?? articleItem.date,
   })),
+  {
+    category: 'AI systems and products',
+    title: aiMegawatt.title,
+    href: getArticlePath(aiMegawatt),
+    description: aiMegawatt.subtitle,
+    date: aiMegawatt.dateModified ?? aiMegawatt.date,
+    featured: true,
+  },
   {
     category: 'AI systems and products',
     title: 'The First AI Managers',

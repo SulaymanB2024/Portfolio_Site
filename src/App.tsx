@@ -37,6 +37,8 @@ const loadWorkPage = () => import('./pages/WorkPage');
 const loadContactPage = () => import('./pages/ContactPage');
 const loadAtlasSampleCrawlPage = () => import('./pages/AtlasSampleCrawlPage');
 const loadAustinTechnicalSeoPage = () => import('./pages/AustinTechnicalSeoPage');
+const loadProgrammaticSeoPage = () => import('./pages/ProgrammaticSeoPage');
+const loadProgrammaticSeoHubPage = () => import('./pages/ProgrammaticSeoHubPage');
 
 const AtlasPage = lazy(loadAtlasPage);
 const AtlasCelestialParallaxPage = lazy(loadAtlasCelestialParallaxPage);
@@ -53,6 +55,8 @@ const WorkPage = lazy(loadWorkPage);
 const ContactPage = lazy(loadContactPage);
 const AtlasSampleCrawlPage = lazy(loadAtlasSampleCrawlPage);
 const AustinTechnicalSeoPage = lazy(loadAustinTechnicalSeoPage);
+const ProgrammaticSeoPage = lazy(loadProgrammaticSeoPage);
+const ProgrammaticSeoHubPage = lazy(loadProgrammaticSeoHubPage);
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
 const AtmosphereCore = lazy(() => import('./components/AtmosphereCore').then(m => ({ default: m.default })));
@@ -112,6 +116,10 @@ async function preloadRoute(path: string) {
     await loadResumePage();
   } else if (route?.path === '/research') {
     await loadResearchPage();
+  } else if (route?.section === 'technical-seo-hub') {
+    await loadProgrammaticSeoHubPage();
+  } else if (route?.section === 'technical-seo-guide') {
+    await loadProgrammaticSeoPage();
   } else if (route?.path === '/markets') {
     await loadMarketsPage();
   } else if (route?.path === '/viralbench-codex-agent-harness') {
@@ -180,6 +188,10 @@ export default function App() {
     page = <ResumePage />;
   } else if (route?.path === '/research') {
     page = <ResearchPage />;
+  } else if (route?.section === 'technical-seo-hub') {
+    page = <ProgrammaticSeoHubPage path={route.path} />;
+  } else if (route?.section === 'technical-seo-guide') {
+    page = <ProgrammaticSeoPage path={route.path} />;
   } else if (route?.path === '/sitemap') {
     page = <SitemapPage />;
   } else if (route?.path === '/viralbench-codex-agent-harness') {
@@ -503,19 +515,80 @@ function HomePage() {
                 <span className="block">Sulayman</span>
                 <span className="block italic">Bowles</span>
               </h1>
-              <div className="mt-7 grid max-w-5xl gap-5 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-10">
+              <div className="mt-7 grid max-w-5xl gap-6 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-10">
                 <div>
                   <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
                   <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and publisher of source-led research.</p>
+                  <nav className="mt-6 flex flex-wrap gap-3" aria-label="Primary actions">
+                    <a
+                      href="/work"
+                      id="home-primary-work-link"
+                      className="inline-flex min-h-11 items-center border border-ink bg-ink px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-canvas transition-colors hover:bg-accent hover:text-ink"
+                    >
+                      View selected work
+                    </a>
+                    <a
+                      href="/contact"
+                      id="home-primary-contact-link"
+                      className="inline-flex min-h-11 items-center border border-ink/28 px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/72 transition-colors hover:border-ink hover:bg-ink hover:text-canvas"
+                    >
+                      Start a project
+                    </a>
+                  </nav>
                 </div>
-                <nav aria-label="Featured proof" className="grid gap-2 self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
-                  <a href={AI_MANAGERS_ARTICLE_PATH} className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">The First AI Managers</a>
-                  <a href="/atlas" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Atlas SEO Audit Software</a>
-                  <a href="/markets/who-owns-texas-toll-roads" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Texas Toll-Road Ownership</a>
+                <nav aria-label="Featured proof" className="grid self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
+                  <span className="mb-1 text-[9px] tracking-[0.28em] text-ink/48">Selected proof</span>
+                  <a href={AI_MANAGERS_ARTICLE_PATH} className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>The First AI Managers</span><span aria-hidden="true">↗</span></a>
+                  <a href="/atlas" className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>Atlas SEO Audit Software</span><span aria-hidden="true">↗</span></a>
+                  <a href="/markets/who-owns-texas-toll-roads" className="inline-flex min-h-11 items-center justify-between gap-4 border-b border-ink/18 transition-colors hover:border-ink hover:text-ink"><span>Texas Toll-Road Ownership</span><span aria-hidden="true">↗</span></a>
                 </nav>
               </div>
             </div>
           </motion.div>
+        </section>
+
+        {/* INTRODUCTION — an evidence system, reduced to its essential logic */}
+        <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-24 text-ink md:px-16 md:py-36">
+          <div className="mx-auto w-full max-w-[1800px]">
+            <div className="flex items-center justify-between border-b border-ink/14 pb-5 text-[10px] uppercase tracking-[0.3em] text-ink/58">
+              <span>Working method</span>
+              <span aria-hidden="true" className="font-serif text-base italic tracking-normal">01 — 03</span>
+            </div>
+
+            <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-12 md:gap-8 md:py-24">
+              <div className="md:col-span-8">
+                <ScrollReveal blur={false}>
+                  <h2 className="max-w-[9ch] font-serif text-[4rem] font-light leading-[0.82] tracking-normal sm:text-7xl md:text-[6.8rem] lg:text-[7.625rem]">
+                    Evidence,
+                    <span className="block italic">before answers.</span>
+                  </h2>
+                </ScrollReveal>
+              </div>
+              <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
+                <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
+                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and an <a href="/research/technical-seo" className="border-b border-ink/24 hover:border-ink">evidence-backed technical SEO diagnostic library</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
+                </p>
+              </ScrollReveal>
+            </div>
+
+            <div className="grid border-y border-ink/14 md:grid-cols-3">
+              {[
+                ['01', 'Observe', 'Capture URL records, source and rendered states, links, directives, and provider failures without cleaning away the gaps.'],
+                ['02', 'Separate', 'Keep observations, derived findings, assumptions, and measurement gaps in distinct fields.'],
+                ['03', 'Ship', 'Export a decision with its source, owner, acceptance check, and rerun path.'],
+              ].map(([num, title, copy], index) => (
+                <div key={num} className="min-h-52 border-b border-ink/14 py-7 last:border-b-0 md:border-b-0 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0 md:last:pr-0">
+                  <ScrollReveal delay={index * 0.08} blur={false} className="grid h-full min-h-40 content-between">
+                    <span className="font-serif text-xl italic text-ink/46">{num}</span>
+                    <div>
+                      <h3 className="font-serif text-4xl font-light tracking-normal">{title}</h3>
+                      <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/62">{copy}</p>
+                    </div>
+                  </ScrollReveal>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* TEXT MARQUEE */}
@@ -1170,7 +1243,7 @@ function HomePage() {
                   ))}
                             </div>
                   <div className="pt-32 w-full flex justify-start md:justify-end">
-                    <a href="#selected-works" id="discipline-view-work-link" className="text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
+                    <a href="/work" id="discipline-view-work-link" className="inline-flex min-h-11 items-center border-b border-ink/30 text-[10px] font-sans uppercase tracking-widest text-ink transition-colors hover:border-ink">Explore all work ↗</a>
                   </div>
                </div>
             </div>

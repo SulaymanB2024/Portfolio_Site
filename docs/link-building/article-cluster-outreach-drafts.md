@@ -61,3 +61,55 @@ This source-led table separates roadway ownership from operating rights, toll re
 ### Draft 2: identity resource note
 
 The canonical identity article provides a controlled-profile inventory, canonical-host decision tree, sameAs rubric, and stale-record reconciliation queue. It is about consolidating verifiable identity evidence, not multiplying thin biographies: https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo
+
+## Programmatic SEO cornerstone drafts
+
+The eight drafts below are approval-ready source notes for relevant editors, maintainers, or technical communities. They remain unsent. Re-check the recipient's current rules and the live page before any individual submission.
+
+### Next.js
+
+Subject: Reproducible Next.js technical SEO release checks
+
+I published a Next.js technical SEO reference that maps metadata, rendering, caching, redirects, schema, sitemaps, and built HTML back to one route contract. It includes a labeled fixture, distinguishes Client Components from actual rendering defects, and ends with a production rerun gate rather than a ranking claim: https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs
+
+### React and Vite
+
+Subject: Static fallback contract for React/Vite public routes
+
+This React/Vite guide shows how to generate route-aware static HTML and hydrate it without changing the semantic document. The diagnostic compares raw and rendered content, head tags, status behavior, schema, and crawlable links with an explicit false-positive boundary: https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite
+
+### WordPress
+
+Subject: One ownership model for WordPress canonicals and archives
+
+I documented a WordPress technical SEO audit that treats posts, taxonomies, feeds, media, themes, plugins, and sitemaps as one governed crawl surface. The reference separates useful archives from accidental inventory and provides a reproducible plugin/template conflict check: https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress
+
+### Shopify
+
+Subject: Evidence-backed Shopify collection and product URL audit
+
+This Shopify technical SEO guide connects product, collection, facet, pagination, locale, canonical, link, and structured-data states. It does not assume platform conventions are defects; the included fixture and rerun gate require a measured mismatch before recommending a theme or inventory change: https://sulayman-bowles.dev/research/technical-seo/platforms/shopify
+
+### Webflow
+
+Subject: Webflow CMS technical SEO publishing contract
+
+I created a Webflow reference for governing page settings, CMS fields, custom code, redirects, domains, and generated sitemap output. It focuses on template-scale validation and published-domain evidence, with no traffic or ranking guarantee: https://sulayman-bowles.dev/research/technical-seo/platforms/webflow
+
+### Squarespace
+
+Subject: Squarespace technical SEO checks without platform folklore
+
+This Squarespace guide prioritizes information architecture, page-specific fields, collection behavior, canonicals, status codes, and crawlable links. It explicitly avoids replacing platform-managed output unless a current response demonstrates a defect: https://sulayman-bowles.dev/research/technical-seo/platforms/squarespace
+
+### Wix
+
+Subject: Validating Wix SEO patterns against visible content
+
+I published a Wix technical SEO guide for dynamic routes, bulk SEO patterns, redirects, indexability, and structured-data overrides. The fixture checks raw and rendered output and prevents unsupported schema or duplicate metadata from scaling across CMS pages: https://sulayman-bowles.dev/research/technical-seo/platforms/wix
+
+### Headless CMS
+
+Subject: Atomic SEO publishing contract for headless CMS stacks
+
+This headless CMS guide treats editorial data, frontend rendering, routing, cache invalidation, previews, metadata, schema, redirects, and sitemaps as one observable publishing contract. The acceptance gate tests freshness and derived-surface consistency rather than arguing that headless architecture is inherently better or worse: https://sulayman-bowles.dev/research/technical-seo/platforms/headless-cms
