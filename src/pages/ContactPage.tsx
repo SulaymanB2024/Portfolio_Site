@@ -1,4 +1,5 @@
 import ArrowUpRight from 'lucide-react/dist/esm/icons/arrow-up-right.js';
+import type { PortfolioCtaId } from '../analytics/portfolioAnalytics';
 import { InternalHeader } from '../components/InternalHeader';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
@@ -10,18 +11,21 @@ const contactLinks = [
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/sulayman-bowles/',
     external: true,
+    ctaId: 'contact_linkedin',
   },
   {
     label: 'Résumé',
     href: '/resume',
     external: false,
+    ctaId: 'contact_resume',
   },
   {
     label: 'GitHub',
     href: 'https://github.com/SulaymanB2024',
     external: true,
+    ctaId: 'contact_github',
   },
-];
+] satisfies ReadonlyArray<{ label: string; href: string; external: boolean; ctaId: PortfolioCtaId }>;
 
 function FrameMarks() {
   return (
@@ -52,6 +56,7 @@ export default function ContactPage() {
           <div className="relative z-10 flex items-center">
             <a
               href="mailto:sulayman.bowles@gmail.com"
+              data-portfolio-cta="contact_email"
               className="group inline-flex max-w-full items-end gap-4 font-serif text-6xl italic leading-[0.8] tracking-normal text-canvas transition-colors duration-200 hover:text-accent motion-reduce:transition-none sm:text-7xl md:text-8xl lg:text-[8rem] xl:text-[10rem]"
             >
               <span className="min-w-0 break-words">Email.</span>
@@ -69,6 +74,7 @@ export default function ContactPage() {
               <a
                 key={link.href}
                 href={link.href}
+                data-portfolio-cta={link.ctaId}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noreferrer' : undefined}
                 className="group flex min-h-20 items-center justify-between gap-5 border-b border-canvas/14 px-4 text-[10px] uppercase tracking-[0.24em] text-canvas/64 transition-colors duration-200 last:border-b-0 hover:bg-canvas hover:text-ink motion-reduce:transition-none sm:border-b-0 sm:border-r sm:last:border-r-0"

@@ -89,11 +89,11 @@ export default function ResearchPage() {
         </section>
 
         <div className="flex flex-wrap items-center gap-5 border-b border-current/12 py-8">
-          <PrimaryCTA href="/work" id="research-work-link">View selected work</PrimaryCTA>
-          <TextLink href="/markets" id="research-markets-link" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
+          <PrimaryCTA href="/work" id="research-work-link" data-portfolio-cta="research_view_work">View selected work</PrimaryCTA>
+          <TextLink href="/markets" id="research-markets-link" data-portfolio-cta="research_markets" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
             Markets filter
           </TextLink>
-          <TextLink href="/atlas" id="research-atlas-link" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
+          <TextLink href="/atlas" id="research-atlas-link" data-portfolio-cta="research_atlas" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
             Atlas
           </TextLink>
         </div>
@@ -186,11 +186,11 @@ export default function ResearchPage() {
                     <time dateTime={normalizePublicationDate(note.date)}>{formatPublicationDate(note.date)}</time>
                   </div>
                   <h2 className="mt-8 font-serif text-3xl italic leading-[0.95] tracking-normal text-current">
-                    <a href={note.href} className="transition-opacity hover:opacity-70">{note.title}</a>
+                    <a href={note.href} data-portfolio-cta="research_open_publication" className="transition-opacity hover:opacity-70">{note.title}</a>
                   </h2>
                   <p className="mt-5 text-sm leading-relaxed text-current/64">{note.description}</p>
                 </div>
-                <a href={note.href} className="inline-flex min-h-11 w-fit items-center border-b border-current/20 text-[10px] uppercase tracking-[0.2em] text-current/64 transition-colors hover:border-current/45 hover:text-current">
+                <a href={note.href} data-portfolio-cta="research_open_publication" className="inline-flex min-h-11 w-fit items-center border-b border-current/20 text-[10px] uppercase tracking-[0.2em] text-current/64 transition-colors hover:border-current/45 hover:text-current">
                   {publicationAction(note.href)}
                 </a>
               </TechnicalPanel>
@@ -231,11 +231,11 @@ export default function ResearchPage() {
                       </time>
                     </div>
                     <h2 className="mt-8 font-serif text-3xl italic leading-[0.95] tracking-normal text-current">
-                      <a href={`/markets/${note.slug}`} className="transition-opacity hover:opacity-70">{note.title}</a>
+                      <a href={`/markets/${note.slug}`} data-portfolio-cta="research_open_publication" className="transition-opacity hover:opacity-70">{note.title}</a>
                     </h2>
                     <p className="mt-5 text-sm leading-relaxed text-current/64">{note.subtitle}</p>
                   </div>
-                  <a href={`/markets/${note.slug}`} className="inline-flex min-h-11 w-fit items-center border-b border-current/20 text-[10px] uppercase tracking-[0.2em] text-current/64 transition-colors hover:border-current/45 hover:text-current">
+                  <a href={`/markets/${note.slug}`} data-portfolio-cta="research_open_publication" className="inline-flex min-h-11 w-fit items-center border-b border-current/20 text-[10px] uppercase tracking-[0.2em] text-current/64 transition-colors hover:border-current/45 hover:text-current">
                     Review methodology
                   </a>
                 </TechnicalPanel>

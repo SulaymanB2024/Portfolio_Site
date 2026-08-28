@@ -25,7 +25,7 @@ const supportingLinks = [
   { label: 'Research', href: '/research', meta: 'Search, product, and markets notes' },
   { label: 'GitHub', href: PROFILE_FACTS.canonicalLinks.github, meta: 'Public code profile' },
   { label: 'LinkedIn', href: PROFILE_FACTS.canonicalLinks.linkedin, meta: 'Professional profile' },
-  { label: 'Contact', href: '/contact', meta: 'Direct email and compact brief' },
+  { label: 'Contact', href: '/contact', meta: 'Direct email and profile links' },
 ];
 
 export default function ResumePage() {
@@ -54,6 +54,10 @@ export default function ResumePage() {
             <p className="resume-visual__statement">
               Technical systems builder working across crawl infrastructure, AI product workflows, analytics, and finance research.
             </p>
+            <nav className="resume-visual__pathways" aria-label="Resume next steps">
+              <a href="/work" data-portfolio-cta="resume_view_work">View selected work <span aria-hidden="true">↗</span></a>
+              <a href="/research" data-portfolio-cta="resume_read_research">Read research <span aria-hidden="true">↗</span></a>
+            </nav>
           </div>
 
           <aside className="resume-visual__summary">
@@ -64,10 +68,10 @@ export default function ResumePage() {
               {PROFILE_FACTS.education.institution} · Expected {PROFILE_FACTS.education.expectedGraduation}
             </p>
             <div className="resume-visual__actions">
-              <a href={RESUME_PDF_PATH} className="resume-visual__action resume-visual__action--primary">
+              <a href={RESUME_PDF_PATH} data-portfolio-cta="resume_download_pdf" className="resume-visual__action resume-visual__action--primary">
                 <span>Download PDF résumé</span><DownloadArrowIcon />
               </a>
-              <a href="mailto:sulayman.bowles@gmail.com" className="resume-visual__action">
+              <a href="mailto:sulayman.bowles@gmail.com" data-portfolio-cta="resume_email" className="resume-visual__action">
                 sulayman.bowles@gmail.com
               </a>
               <button type="button" onClick={() => window.print()} className="resume-visual__action resume-visual__print">
@@ -180,7 +184,7 @@ export default function ResumePage() {
         <IndexedSection index="07" title="Supporting links" headingId="resume-links">
           <nav className="visual-lab-link-ledger" aria-label="Resume supporting links">
             {supportingLinks.map((link) => (
-              <a key={link.href} href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>
+              <a key={link.href} href={link.href} data-portfolio-cta="resume_supporting_link" target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>
                 <span>{link.label}</span><span>{link.meta}</span>
               </a>
             ))}

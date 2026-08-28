@@ -1252,6 +1252,30 @@ body {
   text-wrap: balance;
 }
 
+.resume-visual__pathways {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.resume-visual__pathways a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.65rem;
+  border-bottom: 1px solid var(--visual-lab-rule);
+  font-size: 0.625rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.resume-visual__pathways a:hover {
+  border-color: var(--page-fg);
+  color: var(--color-accent);
+}
+
 .resume-visual__summary {
   min-width: 0;
   padding-left: clamp(1.5rem, 3vw, 2.25rem);
@@ -1548,6 +1572,10 @@ body {
   .resume-visual__action {
     transition: none;
   }
+
+  .resume-visual__pathways a {
+    transition: none;
+  }
 }
 
 @media print {
@@ -1580,6 +1608,7 @@ body {
   }
 
   .resume-visual__actions,
+  .resume-visual__pathways,
   .resume-visual__footer {
     display: none !important;
   }

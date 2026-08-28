@@ -1,14 +1,16 @@
 import {StrictMode, useEffect} from 'react';
 import {createRoot} from 'react-dom/client';
 import {Analytics} from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App.tsx';
 import './index.css';
 import './styles/article-reader.css';
 import Lenis from 'lenis';
-import { startPortfolioAnalytics } from './analytics/portfolioAnalytics';
+import { startPortfolioAnalytics, startPortfolioCtaTracking } from './analytics/portfolioAnalytics';
 
 document.documentElement.classList.add('js');
 startPortfolioAnalytics();
+startPortfolioCtaTracking();
 
 const editorialFontStylesheet = document.getElementById('editorial-fonts') as HTMLLinkElement | null;
 if (editorialFontStylesheet) {
@@ -61,5 +63,6 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Root />
     <Analytics />
+    <SpeedInsights />
   </StrictMode>,
 );
