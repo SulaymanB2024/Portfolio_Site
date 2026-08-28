@@ -1,19 +1,16 @@
-import { ALL_ARTICLES, getArticlePath, getLegacyArticlePath } from '../content/articleRegistry';
-import { isInvestmentMemo } from '../content/articleModels';
-import {
-  TEXAS_TOLL_ARTICLE_IMAGE,
-  TEXAS_TOLL_ARTICLE_SLUG,
-} from '../content/texasTollRoadArticleMeta';
+import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from '../content/programmaticSeo';
+import { ARTICLE_ROUTE_METADATA } from '../content/articleRouteMetadata';
+import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
 import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
-  VIRALBENCH_ARTICLE_EXCERPT,
-  VIRALBENCH_ARTICLE_IMAGE,
   VIRALBENCH_ARTICLE_MODIFIED_DATE,
   VIRALBENCH_ARTICLE_PATH,
   VIRALBENCH_ARTICLE_SEO_TITLE,
+  VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
+  VIRALBENCH_ARTICLE_STATIC_SUMMARY,
   VIRALBENCH_ARTICLE_TITLE,
-} from '../content/viralBenchArticle';
+} from '../content/viralBenchArticleMeta';
 import {
   aboutJsonLd,
   austinTechnicalSeoJsonLd,
@@ -29,6 +26,7 @@ import {
   sitemapJsonLd,
   viralBenchArticleJsonLd,
   workJsonLd,
+  technicalSeoCollectionJsonLd,
   type JsonLd,
 } from './schema';
 
@@ -43,7 +41,9 @@ export type RouteSection =
   | 'service'
   | 'local-service'
   | 'research'
-  | 'research-article';
+  | 'research-article'
+  | 'technical-seo-hub'
+  | 'technical-seo-guide';
 
 export interface SeoRoute {
   path: string;
@@ -51,6 +51,7 @@ export interface SeoRoute {
   title: string;
   description: string;
   h1: string;
+  displayH1?: string;
   section: RouteSection;
   pageType: 'website' | 'profile' | 'project' | 'service' | 'research' | 'article';
   priority: number;
@@ -68,19 +69,20 @@ export type RouteVisualMode = 'canvas-sample' | 'dark-evidence' | 'memo-reader' 
 export type RouteTone = 'light' | 'dark';
 
 export const SITE_LASTMOD = '2026-07-16';
+const METADATA_REFRESH_LASTMOD = '2026-07-19';
+const KEYWORD_LASTMOD = '2026-07-18';
 const PROFILE_OG_IMAGE = '/images/social/og-profile.png';
 const ATLAS_OG_IMAGE = '/images/social/og-atlas.png';
 const WORK_OG_IMAGE = '/images/social/og-work.png';
 const VOID_OG_IMAGE = '/images/social/og-void.png';
 const RESEARCH_OG_IMAGE = '/images/social/og-research.png';
-const TOLL_ROADS_OG_IMAGE = TEXAS_TOLL_ARTICLE_IMAGE;
-
 export const NOT_FOUND_ROUTE: SeoRoute = {
   path: '/404',
   aliases: [],
   title: 'Page Not Found | Sulayman Bowles',
   description: 'The requested page is not part of the current public record for sulayman-bowles.dev.',
   h1: 'Page Not Found',
+  displayH1: 'This page is not part of the record.',
   section: 'source-information',
   pageType: 'website',
   priority: 0,
@@ -95,68 +97,71 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/',
     aliases: [],
-    title: 'Sulayman Bowles | AI Product, Systems & Research',
+    title: 'Sulayman Bowles | Technical SEO, AI Systems & Finance Research',
     description:
-      'Sulayman Bowles works in AI product, technical systems, and investment research—building Atlas and publishing source-led work on AI and infrastructure.',
+      'Technical SEO, AI systems, and finance research from Sulayman Bowles, builder of Atlas and founder of Void Agency.',
     h1: 'Sulayman Bowles',
     section: 'home',
     pageType: 'website',
     priority: 1.0,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Technical systems builder and UT Austin McCombs student working across crawl infrastructure, AI product workflows, analytics, and finance research.',
+      'Technical SEO and AI systems builder working across crawl infrastructure, analytics, product workflows, and source-led investment research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: homeJsonLd(),
   },
   {
     path: '/work',
     aliases: [],
-    title: 'Selected Work | Technical Systems & Research',
+    title: 'Technical SEO, AI Systems & Research Portfolio',
     description:
-      'Six public artifacts from Sulayman Bowles with explicit ownership, implementation details, current status, constraints, and inspectable evidence.',
+      'Technical SEO portfolio and AI systems work from Sulayman Bowles, including Atlas crawl software, audit methods, analytics, research, and public evidence.',
     h1: 'Selected Work',
+    displayH1: 'Systems I built. Evidence you can inspect.',
     section: 'work',
     pageType: 'website',
     priority: 0.9,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Six public artifacts across Atlas, infrastructure research, AI-agent evaluation, SEO analytics, Void Agency, and technical builds, each with ownership and proof.',
+      'A technical SEO, AI systems, analytics, and research portfolio with six public artifacts, explicit ownership, implementation details, and proof.',
     image: WORK_OG_IMAGE,
     jsonLd: workJsonLd(),
   },
   {
     path: '/about',
     aliases: [],
-    title: 'About Sulayman Bowles | Technical Systems Builder',
+    title: 'About Sulayman Bowles | Technical SEO & AI Systems',
     description:
-      'Sulayman Bowles designs crawl and evidence systems across React, TypeScript, Python, SQLite, technical SEO, AI product work, and finance research.',
+      'About Sulayman Bowles: technical SEO consultant, AI product manager, and systems builder working across React, Python, SQLite, analytics, and research.',
     h1: 'About Sulayman Bowles',
+    displayH1: 'I build technical systems that make evidence inspectable.',
     section: 'about',
     pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Sulayman Bowles is a technical systems builder connecting Atlas, technical SEO, Void Agency, AI product workflows, and finance research.',
+      'Sulayman Bowles connects technical SEO consulting, Atlas crawl software, AI product work, analytics, and source-led finance research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: aboutJsonLd(),
   },
   {
     path: '/atlas',
     aliases: ['/projects/atlas'],
-    title: 'Atlas SEO Audit Console | Crawl Data System',
+    title: 'Technical SEO Audit Software & Crawler | Atlas',
     description:
-      'Atlas SEO Audit Console is Sulayman Bowles crawl data system for indexation, internal links, canonicals, structured data, rendered HTML, and audit exports.',
+      'Atlas is technical SEO audit software and a crawler for indexation, internal links, canonicals, structured data, rendered HTML, evidence, and audit exports.',
     h1: 'Atlas SEO Audit Console',
+    displayH1: 'To see the whole structure.',
     section: 'project',
     pageType: 'project',
     priority: 0.9,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Atlas is a technical SEO audit console for crawl data, indexation, architecture, internal links, structured data, and performance inputs.',
+      'Atlas is technical SEO audit software for crawl analysis, indexation, site architecture, internal links, structured data, and reviewable exports.',
     image: ATLAS_OG_IMAGE,
     jsonLd: atlasJsonLd(),
   },
@@ -167,6 +172,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'A dated Atlas demonstration showing source and render states, discovered paths, confidence, findings, and downloadable run artifacts from a bounded open corpus.',
     h1: 'Atlas Open Corpus Demonstration',
+    displayH1: 'Open-corpus evidence.',
     section: 'project',
     pageType: 'project',
     priority: 0.8,
@@ -184,6 +190,7 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Temporary Atlas scroll-animation prototype exploring a celestial parallax treatment for the Atlas page hero, methodology transition, and route-specific motion direction.',
     h1: 'Atlas Celestial Parallax Prototype',
+    displayH1: 'To see the whole structure.',
     section: 'project',
     pageType: 'project',
     priority: 0.2,
@@ -197,15 +204,16 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/resume',
     aliases: ['/resume.html', '/cv', '/cv.html', '/Sulayman_Bowles_Resume_2025.pdf'],
-    title: 'Sulayman Bowles Resume | SEO, Product & Finance',
+    title: 'Sulayman Bowles Resume | Experience, Skills & Projects',
     description:
-      'HTML-first resume for Sulayman Bowles covering UT Austin McCombs, Void Agency, Atlas, technical SEO, AI product research, markets research, and supporting links.',
+      'Review Sulayman Bowles’s technical SEO and AI product experience, UT Austin education, selected projects, skills, and downloadable résumé PDF.',
     h1: 'Sulayman Bowles Resume',
+    displayH1: 'Sulayman Bowles',
     section: 'resume',
     pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: METADATA_REFRESH_LASTMOD,
     staticSummary:
       'Stable resume and profile page for Sulayman Bowles with links to Atlas, technical SEO work, finance research, public code, LinkedIn, and contact paths.',
     image: PROFILE_OG_IMAGE,
@@ -214,17 +222,18 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/research',
     aliases: ['/research-assets'],
-    title: 'Research Notes | Sulayman Bowles',
+    title: 'Technical SEO & AI Systems Research | Sulayman Bowles',
     description:
-      'Readable research notes from Sulayman Bowles on search systems, crawlability, Atlas, public data, identity cleanup, market assumptions, and project evidence.',
+      'Technical SEO research and AI systems notes from Sulayman Bowles on crawlability, crawler policy, Atlas, public data, identity, markets, and evidence.',
     h1: 'Research Notes',
+    displayH1: 'One archive. Clear categories.',
     section: 'research',
     pageType: 'research',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'One research hub with categories for search systems, technical SEO, infrastructure, product and data, and markets research.',
+      'Technical SEO, AI search, crawlability, infrastructure, product, data, and markets research with visible sources and evidence limits.',
     image: RESEARCH_OG_IMAGE,
     jsonLd: researchAssetsJsonLd(),
   },
@@ -246,51 +255,54 @@ const CORE_ROUTES: SeoRoute[] = [
   {
     path: '/method',
     aliases: [],
-    title: 'Technical SEO Audit Method | Void Agency',
+    title: 'Technical SEO Audit Services & Process | Void Agency',
     description:
-      'Technical SEO audit method from Void Agency for crawl paths, indexation, internal links, structured data, analytics review, search visibility, and implementation priorities.',
+      'Void Agency’s technical SEO audit method for crawl paths, indexation, internal links, structured data, analytics, and implementation priorities.',
     h1: 'Void Agency Method',
+    displayH1: 'Technical SEO audits, evidence first.',
     section: 'service',
     pageType: 'service',
     priority: 0.9,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: METADATA_REFRESH_LASTMOD,
     staticSummary:
-      'Void Agency audits crawl paths, indexation, architecture, structured data, performance, analytics, and crawler access to improve search visibility.',
+      'Technical SEO audit services for crawlability, indexation, rendering, internal links, structured data, analytics, implementation priorities, and rerun checks.',
     image: VOID_OG_IMAGE,
     jsonLd: methodJsonLd(),
   },
   {
     path: '/contact',
     aliases: ['/audit-intake'],
-    title: 'Contact Sulayman Bowles | Technical SEO Audit Brief',
+    title: 'Technical SEO Consultant & Audit Contact | Sulayman Bowles',
     description:
-      'Contact Sulayman Bowles about technical SEO, raw/render crawl evidence, analytics, implementation handoffs, validation, or source-backed research.',
-    h1: 'Contact Sulayman Bowles',
+      'Contact technical SEO consultant Sulayman Bowles for crawlability, indexation, rendering, structured data, analytics, implementation, or audit support.',
+    h1: 'Contact a Technical SEO Consultant',
+    displayH1: 'SEO audit contact.',
     section: 'contact',
     pageType: 'service',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: KEYWORD_LASTMOD,
     staticSummary:
-      'Direct email and a compact brief for technical SEO, crawl evidence, analytics, implementation, validation, and source-backed research.',
+      'Direct contact and a compact brief for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and research.',
     image: PROFILE_OG_IMAGE,
     jsonLd: contactJsonLd(),
   },
   {
     path: '/austin-technical-seo',
     aliases: ['/austin-seo'],
-    title: 'Austin Technical SEO & Search Visibility',
+    title: 'Austin Technical SEO Consultant & Audit Services',
     description:
-      'Austin technical SEO page for teams that need crawlability, indexation, structured data, page clarity, local search context, and implementation details reviewed.',
+      'Austin technical SEO for teams that need crawlability, indexation, structured data, page clarity, local context, and implementation guidance.',
     h1: 'Austin Technical SEO',
+    displayH1: 'Austin technical SEO consultant.',
     section: 'local-service',
     pageType: 'service',
     priority: 0.7,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: METADATA_REFRESH_LASTMOD,
     staticSummary:
-      'Austin technical SEO page for teams that need crawlability, indexation, structured data, page clarity, local search context, and implementation details reviewed.',
+      'Austin technical SEO consulting and audit services for crawlability, indexation, rendering, internal links, structured data, local pages, and implementation.',
     image: VOID_OG_IMAGE,
     jsonLd: austinTechnicalSeoJsonLd(),
   },
@@ -305,8 +317,8 @@ const CORE_ROUTES: SeoRoute[] = [
     priority: 0.8,
     includeInSitemap: true,
     lastmod: VIRALBENCH_ARTICLE_MODIFIED_DATE,
-    staticSummary: VIRALBENCH_ARTICLE_EXCERPT,
-    image: VIRALBENCH_ARTICLE_IMAGE,
+    staticSummary: VIRALBENCH_ARTICLE_STATIC_SUMMARY,
+    image: VIRALBENCH_ARTICLE_SOCIAL_IMAGE,
     jsonLd: viralBenchArticleJsonLd(),
   },
   {
@@ -314,13 +326,14 @@ const CORE_ROUTES: SeoRoute[] = [
     aliases: ['/projects/markets'],
     title: 'Markets & Investing Research | Sulayman Bowles',
     description:
-      'Finance and infrastructure-investing research from Sulayman Bowles with visible assumptions, source tables, valuation frames, risks, and recommendation boundaries.',
+      'Finance and infrastructure-investing research with visible assumptions, source tables, valuation frames, risks, and recommendation boundaries.',
     h1: 'Markets and Investing',
+    displayH1: 'Markets and investing.',
     section: 'research',
     pageType: 'research',
     priority: 0.7,
     includeInSitemap: true,
-    lastmod: SITE_LASTMOD,
+    lastmod: METADATA_REFRESH_LASTMOD,
     staticSummary:
       'A filtered finance and infrastructure-investing archive within the broader Research hub.',
     image: RESEARCH_OG_IMAGE,
@@ -331,19 +344,19 @@ const CORE_ROUTES: SeoRoute[] = [
   },
 ];
 
-const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
-  const path = getArticlePath(article);
-  const legacyPath = getLegacyArticlePath(article);
-  const isIndexable = article.indexable !== false;
+const ARTICLE_ROUTES: SeoRoute[] = ARTICLE_ROUTE_METADATA.map((article) => {
+  const path = article.path;
+  const isIndexable = article.indexable;
   const datePublished = article.date.replaceAll('.', '-');
-  const dateModified = (article.dateModified ?? article.date).replaceAll('.', '-');
-  const investmentMemo = isInvestmentMemo(article);
-  const articleImage = article.slug === TEXAS_TOLL_ARTICLE_SLUG ? TOLL_ROADS_OG_IMAGE : article.image === '/og-default.png' ? RESEARCH_OG_IMAGE : article.image;
+  const dateModified = article.dateModified.replaceAll('.', '-');
+  const investmentMemo = article.kind === 'investment-memo';
+  const articleImage = article.image;
+  const brandedTitle = `${article.seoTitle} | Sulayman Bowles`;
 
   return {
     path,
-    aliases: legacyPath ? [legacyPath] : [],
-    title: article.slug === TEXAS_TOLL_ARTICLE_SLUG || article.seoTitle.length > 60 ? article.seoTitle : `${article.seoTitle} | Sulayman Bowles`,
+    aliases: article.aliases,
+    title: path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}` || brandedTitle.length > 60 ? article.seoTitle : brandedTitle,
     description: article.seoDescription,
     h1: article.title,
     section: 'research-article',
@@ -353,7 +366,7 @@ const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
     generateStatic: !isIndexable,
     noindex: !isIndexable,
     lastmod: dateModified,
-    staticSummary: article.content[0],
+    staticSummary: article.staticSummary,
     image: articleImage,
     jsonLd: marketArticleJsonLd({
       title: article.title,
@@ -368,7 +381,59 @@ const ARTICLE_ROUTES: SeoRoute[] = ALL_ARTICLES.map((article) => {
   };
 });
 
-export const SEO_ROUTES: SeoRoute[] = [...CORE_ROUTES, ...ARTICLE_ROUTES];
+const PROGRAMMATIC_HUB_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_HUBS.map((hub) => ({
+  path: hub.path,
+  aliases: [],
+  title: hub.seoTitle,
+  description: hub.description,
+  h1: hub.title,
+  section: 'technical-seo-hub',
+  pageType: 'research',
+  priority: hub.family === 'all' ? 0.8 : 0.7,
+  includeInSitemap: hub.indexable,
+  lastmod: hub.dateModified,
+  staticSummary: hub.directAnswer,
+  image: RESEARCH_OG_IMAGE,
+  jsonLd: technicalSeoCollectionJsonLd({
+    title: hub.title,
+    description: hub.description,
+    path: hub.path,
+    parentPath: hub.family === 'all' ? '/research' : '/research/technical-seo',
+    parentName: hub.family === 'all' ? 'Research' : 'Technical SEO Diagnostic Library',
+  }),
+}));
+
+const PROGRAMMATIC_PAGE_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_PAGES.map((page) => ({
+  path: page.path,
+  aliases: [],
+  title: page.seoTitle,
+  description: page.description,
+  h1: page.title,
+  section: 'technical-seo-guide',
+  pageType: 'article',
+  priority: 0.6,
+  includeInSitemap: page.indexable,
+  lastmod: page.dateModified,
+  staticSummary: page.directAnswer,
+  image: RESEARCH_OG_IMAGE,
+  jsonLd: marketArticleJsonLd({
+    title: page.title,
+    description: page.description,
+    path: page.path,
+    datePublished: page.datePublished,
+    dateModified: page.dateModified,
+    image: RESEARCH_OG_IMAGE,
+    collectionPath: `/research/technical-seo/${page.family === 'issue' ? 'issues' : page.family === 'platform' ? 'platforms' : 'checklists'}`,
+    collectionName: `${page.family[0].toUpperCase()}${page.family.slice(1)} guides`,
+  }),
+}));
+
+export const SEO_ROUTES: SeoRoute[] = [
+  ...CORE_ROUTES,
+  ...ARTICLE_ROUTES,
+  ...PROGRAMMATIC_HUB_ROUTES,
+  ...PROGRAMMATIC_PAGE_ROUTES,
+];
 
 export function normalizeInputPath(path: string) {
   const pathname = path.split(/[?#]/)[0] || '/';
@@ -394,7 +459,7 @@ export function getRouteVisualMode(path: string): RouteVisualMode {
     return 'prototype';
   }
 
-  if (route?.section === 'research-article') {
+  if (route?.section === 'research-article' || route?.section === 'technical-seo-guide') {
     return 'memo-reader';
   }
 

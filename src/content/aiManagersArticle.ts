@@ -2,13 +2,18 @@ export const AI_MANAGERS_ARTICLE_SLUG = 'the-first-ai-managers';
 export const AI_MANAGERS_ARTICLE_PATH = `/research/ai-systems/${AI_MANAGERS_ARTICLE_SLUG}`;
 export const AI_MANAGERS_ARTICLE_TITLE = 'The First AI Managers';
 export const AI_MANAGERS_ARTICLE_DISPLAY_TITLE = 'The Shopkeeper in the Machine';
-export const AI_MANAGERS_ARTICLE_SEO_TITLE = 'The First AI Managers: What Happens When AI Runs a Business?';
+export const AI_MANAGERS_ARTICLE_SEO_TITLE = 'AI Managers: When AI Runs a Business';
 export const AI_MANAGERS_ARTICLE_DESCRIPTION =
-  'Inside the first AI-operated shops, cafés, vending machines, and radio stations, examining the gap between completing the next task and preserving a coherent business.';
+  'Inside the first AI-operated shops, cafés, vending machines, and radio stations—and the gap between completing the next task and preserving a coherent business.';
 export const AI_MANAGERS_ARTICLE_DATE = '2026.07.14';
-export const AI_MANAGERS_ARTICLE_UPDATED = '2026.07.14';
+export const AI_MANAGERS_ARTICLE_UPDATED = '2026.07.19';
 export const AI_MANAGERS_ARTICLE_READ_TIME = '31 MIN';
 export const AI_MANAGERS_ARTICLE_WORD_COUNT = 6300;
+export const AI_MANAGERS_ARTICLE_CONCLUSION = {
+  title: 'Autonomy stops where the human company begins',
+  content:
+    'Current cases show models can execute bounded actions, but not that they independently own, capitalize, supervise, or sustain a business. The operating claim must include every human legal, financial, physical, and policy dependency.',
+} as const;
 
 export type AiManagerCaseKind = 'live' | 'bounded' | 'narrow' | 'simulation' | 'excluded';
 
@@ -50,7 +55,7 @@ There were **6,000 napkins**, **3,000 nitrile gloves**, canned tomatoes for sand
 
 The same manager also did recognizably useful work. She hired the people who made the coffee. She negotiated a prepaid order for 300 drinks. She sent suppliers detailed questions, adjusted prices, designed promotions, and praised staff after midnight. The interesting thing about the first AI shopkeepers is not that they are stupid. It is that intelligence arrives unevenly. A system can write the email, place the order, explain its reasoning, and still fail to preserve the business behind those actions.
 
-The gap between **task competence** and **organizational continuity** is the real story. Today's AI managers can often complete the next step. They are much less reliable at remembering what already failed, maintaining a policy across weeks, resisting a persuasive customer, or translating financial feedback into disciplined control. Once a general-purpose assistant receives operational authority, its conversational habits stop being style. They become business policy.
+That gap—between **task competence** and **organizational continuity**—is the real story. Today's AI managers can often complete the next step. They are much less reliable at remembering what already failed, maintaining a policy across weeks, resisting a persuasive customer, or translating financial feedback into disciplined control. Once a general-purpose assistant receives operational authority, its conversational habits stop being style. They become business policy.
 `;
 
 export const AI_MANAGERS_ARTICLE_SECTIONS: AiManagerSection[] = [
@@ -67,7 +72,7 @@ Four categories keep the evidence straight:
 
 - **Live operations** have real leases or platforms, customers, workers, inventory, payments, and recurring model decisions. Andon Market, Andon Café, Valerie, and Andon FM are the strongest public examples.
 - **Bounded pilots** use real goods or real commercial systems, but the environment is temporary, internal, heavily staged, or approval-gated. Project Vend and the office-store replications belong here.
-- **Production agents** operate a narrow commercial function, such as pricing, delivery promotion, menu synchronization, or store planning, while a human still runs the company.
+- **Production agents** operate a narrow commercial function—pricing, delivery promotion, menu synchronization, or store planning—while a human still runs the company.
 - **Simulations** remove leases, customers, and physical risk so researchers can test a year of pricing, purchasing, negotiation, memory, competition, and failure in hours.
 
 The legal boundary is simpler. None of the reviewed models signed its own lease, held legal employment obligations, completed know-your-customer checks, authenticated government forms, or bore the loss. Humans and human-controlled entities did. “No human in the loop” dissolves quickly when the loop includes a bank account, a delivery dock, a stove, payroll, or a signature.
@@ -118,7 +123,7 @@ Andon Café added perishables, permits, supplier deadlines, fixed staff, and a k
 
 The procurement failures were more physical. Mona confused units, bought enormous quantities, missed order deadlines, accepted supplier substitutions, and authorized customer discounts without a measurement plan. Under Gemini, the café's reconstructed spend reached roughly $38,000 against $9,000 in sales. Andon's report separates multiple accounting views, but none is a fully burdened statement including every wage, rent, supervision, and setup cost. [S01](#source-s01)
 
-Switching the manager to a newer GPT system reduced over-ordering and made the café harder to manipulate. Product availability then fell from roughly 95 percent to 77 percent, and ten dishes disappeared. The correction was real but incomplete. An extravagant manager became a cautious one, but the operation did not automatically settle on the right inventory policy.
+Switching the manager to a newer GPT system reduced over-ordering and made the café harder to manipulate. Product availability then fell from roughly 95 percent to 77 percent, and ten dishes disappeared. The correction was real—and incomplete. An extravagant manager became a cautious one, but the operation did not automatically settle on the right inventory policy.
 
 ### Valerie: price discovery without common sense
 
@@ -219,7 +224,7 @@ The same architecture explains why production agents can outperform broad experi
   {
     id: 'simulations',
     index: '07',
-    title: 'What simulations reveal and what they cannot prove',
+    title: 'What simulations reveal—and what they cannot prove',
     markdown: `
 Simulated shops are not evidence of a profitable real shop. They are evidence about behavior under controlled conditions.
 
@@ -239,7 +244,7 @@ Simulations also make a practical contribution: they can evaluate memory designs
   {
     id: 'field-map',
     index: '08',
-    title: 'A field larger than the headline but thinner than it looks',
+    title: 'A field larger than the headline—and thinner than it looks',
     markdown: `
 The accompanying case map contains 30 reviewed systems. Only four received the highest evidence grade for a live, recurring operation in which a general-purpose model controlled a meaningful share of management. The rest are bounded pilots, narrow production systems, simulations, vendor-reported deployments, terminology counterexamples, or one excluded AI-founder project retained only for architectural comparison.
 
@@ -247,7 +252,7 @@ That distribution matters more than the raw count. Many apparent examples collap
 
 The explorer below is designed to preserve those distinctions. It is not a leaderboard. An A grade means the case is well documented and commercially real enough to study; it does not mean the business succeeded. A C grade can still contain useful evidence, especially when the system is narrow or simulated. “Excluded” means the project did not meet this article's operating definition, not that it lacks cultural or technical interest.
 
-The concentration is itself a finding. A large share of the richest physical evidence comes from Andon Labs and closely related replications. That gives the field unusually detailed logs and unusually low independence. We know more about a few carefully publicized systems than we know about a broad market of ordinary AI-run businesses. That broad market does not yet exist in public evidence.
+The concentration is itself a finding. A large share of the richest physical evidence comes from Andon Labs and closely related replications. That gives the field unusually detailed logs and unusually low independence. We know more about a few carefully publicized systems than we know about a broad market of ordinary AI-run businesses—because that broad market does not yet exist in public evidence.
 `,
   },
   {
@@ -283,7 +288,7 @@ Until those questions are answered, “autonomous” should be treated as a test
     markdown: `
 The first AI bosses have arrived as unstable mixtures of intern, concierge, buyer, scheduler, negotiator, analyst, and improv performer. They can build a menu, call a candidate, source a product, write a promotion, and defend the result in polished language. They can also forget the shift, overbuy the napkins, accept the discount, invent the precedent, and mistake a novelty purchase for demand.
 
-The surprise is not that they fail. New operating systems fail, and these ones are being placed in unusually public, adversarial environments. The surprise is how quickly a general-purpose assistant can be made manager-shaped and how specifically managerial its failures become.
+The surprise is not that they fail. New operating systems fail, and these ones are being placed in unusually public, adversarial environments. The surprise is how quickly a general-purpose assistant can be made manager-shaped—and how specifically managerial its failures become.
 
 That is the near-term frontier: not an AI that owns the shop, but an institution deciding which parts of management can be translated into tools, ledgers, procedures, and bounded authority. The winning system may have less personality than today's experiments and more accounting. It may look less like a synthetic founder and more like a disciplined layer of middle management.
 
@@ -299,7 +304,7 @@ export const AI_MANAGER_CASES: AiManagerCase[] = [
   { name: 'Andon FM', grade: 'A', kind: 'live', form: 'Four online radio stations', geography: 'Online / San Francisco', authority: 'Programming, music buying, speech, calls, social replies, research, analytics, and finances.', humanLayer: 'Humans built the platform, select models, fund infrastructure, and terminate broken stations.', economics: 'Live balances and a reported $45 ad; no full cost accounting.', caveat: 'Music rights, inference, and platform costs are incomplete.', href: 'https://andonlabs.com/blog/andon-fm' },
   { name: 'SenseMartGo / 烧卖购', grade: 'B', kind: 'live', form: 'Robot retail micro-stores', geography: 'Shanghai and pilot cities, China', authority: 'Customer interaction, fulfillment, demand analysis, assortment, prices, and inventory counting.', humanLayer: 'Company staff deploy, maintain, and physically replenish stores.', economics: 'One site reportedly exceeded RMB10k weekly revenue; unaudited.', caveat: 'A specialized robotics stack, not a bare general-purpose chatbot.', href: 'https://www.sensetime.com/cn/news-detail/51170659?categoryId=72' },
   { name: 'SUNMICLAW / 浪险橙', grade: 'B', kind: 'live', form: 'Coffee-by-day, drinks-by-night shop', geography: 'Shanghai, China', authority: 'Site, concept, menu screening, naming, daily analysis, competitor monitoring, and coupons.', humanLayer: 'Owner controls quality and final decisions; staff execute service.', economics: 'No public store-level P&L found.', caveat: 'Strong co-manager evidence; no autonomous bank, payroll, or procurement proof.', href: 'https://letschuhai.com/62b47c3c' },
-  { name: 'The Hallucination Herald', grade: 'B', kind: 'live', form: 'Autonomous newspaper experiment', geography: 'Online', authority: 'Story selection, research, drafting, editing, checking, publishing, comments, SEO, and some social output.', humanLayer: 'Founder owns hosting, changes code and prompts, and appears to post some queued social output.', economics: 'Builder reports roughly $2–$3 per day; traffic claims are self-reported.', caveat: 'Public materials conflict on agent count and social autonomy.', href: 'https://github.com/jotapee/thh' },
+  { name: 'The Hallucination Herald', grade: 'B', kind: 'live', form: 'Autonomous newspaper experiment', geography: 'Online', authority: 'Story selection, research, drafting, editing, checking, publishing, comments, SEO, and some social output.', humanLayer: 'Founder owns hosting, changes code and prompts, and appears to post some queued social output.', economics: 'Builder reports roughly $2–$3 per day; traffic claims are self-reported.', caveat: 'Public materials conflict on agent count and social autonomy.', href: 'https://www.hallucinationherald.com/' },
   { name: 'Deep Personality', grade: 'B', kind: 'live', form: 'Consumer SaaS', geography: 'Online', authority: 'Development, marketing, support, pull requests, analytics, and ad-budget changes.', humanLayer: 'Founders report spending about half their time debugging agents.', economics: '$11k first month and about $20k later; self-reported.', caveat: '“Entirely autonomous” conflicts with substantial human maintenance.', href: 'https://deeppersonality.app/' },
   { name: 'Project Vend 1', grade: 'B', kind: 'bounded', form: 'Real-goods office store', geography: 'Anthropic office, US', authority: 'Supplier search, email, ordering, pricing, Slack service, inventory, and notes.', humanLayer: 'Andon staff procured, delivered, stocked, and collected money.', economics: 'Published chart shows net worth falling from about $1,000 to below $800.', caveat: 'Not a public standalone business; some suppliers and payments were simulated.', href: 'https://www.anthropic.com/research/project-vend-1' },
   { name: 'Project Vend 2', grade: 'B', kind: 'bounded', form: 'Four office stores', geography: 'US and UK', authority: 'CRM, inventory, prices, service, purchasing proposals, a CEO layer, and negotiation.', humanLayer: 'Humans approved payments, delivered goods, canceled contracts, and restored governance.', economics: 'Weekly margins improved and were generally positive; not audited P&Ls.', caveat: 'Positive margin is not fully burdened profit.', href: 'https://www.anthropic.com/research/project-vend-2' },
@@ -377,7 +382,7 @@ export const AI_MANAGER_SOURCES: AiManagerSource[] = [
   { id: 's09', label: 'Vending-Bench', publisher: 'Andon Labs researchers / arXiv', date: 'February 2025', type: 'Research paper', note: 'Defines the long-horizon simulated vending architecture, starting balance, supplier loop, scoring, and model variance.', limitation: 'Simulation includes generated market components and cannot establish real-world profit.', href: 'https://arxiv.org/abs/2502.15840' },
   { id: 's10', label: 'Vending-Bench Arena', publisher: 'Andon Labs', date: 'Accessed July 14, 2026', type: 'Competitive simulation', note: 'Controlled evidence on competition, trading, deception, refunds, cooperation, and collusion proposals.', limitation: 'Permissive simulated market; behavior is warning evidence, not a real-world incidence forecast.', href: 'https://andonlabs.com/evals/vending-bench-arena' },
   { id: 's11', label: 'RetailBench: long-horizon retail management', publisher: 'Linghua Zhang et al. / arXiv', date: 'June 2026', type: 'Research preprint', note: 'Tests replenishment, pricing, suppliers, aging stock, partial observability, finance, and coherent policy over time.', limitation: 'Simulated store; similarly titled paper versions require date-specific citation.', href: 'https://arxiv.org/abs/2606.15862' },
-  { id: 's12', label: 'The Hallucination Herald source code', publisher: 'Juan Pisanu / GitHub', date: 'Accessed July 14, 2026', type: 'Public code repository', note: 'Exposes prompts, roles, pipeline, and implementation details behind an autonomous-newspaper claim.', limitation: 'Repository and public descriptions conflict on agent count and social-posting autonomy.', href: 'https://github.com/jotapee/thh' },
+  { id: 's12', label: 'From $0 to $11k in 30 days with Deep Personality', publisher: 'Bryce Edwards / Indie Hackers', date: 'March 1, 2026', type: 'First-party builder report', note: 'Supports the reported first-month revenue and describes the founder-led build and launch process.', limitation: 'Self-reported revenue without audited costs, margin, or a control group.', href: 'https://www.indiehackers.com/post/from-0-to-11k-in-30-days-with-a-vibe-coded-ai-personality-analysis-b9ad81d534' },
   { id: 's13', label: 'Autonomous office-store risk-governance pilot', publisher: 'PwC Japan', date: 'May 2026', type: 'Primary pilot announcement', note: 'A useful architecture for control agents, risk review, escalation gates, inventory, pricing, and ordering.', limitation: 'The design is public; outcome results were not available at the research cutoff.', href: 'https://www.pwc.com/jp/ja/press-room/2026/risk-governance-architecture.html' },
   { id: 's14', label: 'SenseMartGo AI retail micro-store', publisher: 'SenseTime', date: '2026', type: 'Operator announcement', note: 'Real store network, robotics, inventory analytics, assortment, pricing, and a weekly-revenue claim.', limitation: 'Vendor-reported and unaudited; specialized robotics and retail systems share the work.', href: 'https://www.sensetime.com/cn/news-detail/51170659?categoryId=72' },
   { id: 's15', label: 'Meet Luna, the AI boss running a San Francisco store', publisher: 'ABC7 / KGO', date: 'April 22, 2026', type: 'Independent local reporting', note: 'Employee account, phone and Slack interfaces, physical-store verification, and a three-day scheduling failure.', limitation: 'Short segment; broad economics language is less complete than later reporting.', href: 'https://abc7news.com/post/artificial-intelligence-boss-named-luna-running-san-francisco-store-andon-market-cow-hollow-neighborhood/18937564/' },

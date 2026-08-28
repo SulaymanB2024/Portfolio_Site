@@ -34,6 +34,13 @@
       "headers": { "Location": "/Sulayman_Bowles_Resume.pdf" },
       "status": 301
     },
+    {
+      "src": "/Sulayman_Bowles_Resume\\.pdf",
+      "headers": {
+        "Link": "<https://sulayman-bowles.dev/resume>; rel=\"canonical\""
+      },
+      "continue": true
+    },
     { "src": "/projects/atlas", "headers": { "Location": "/atlas" }, "status": 308 },
     { "src": "/projects/markets", "headers": { "Location": "/markets" }, "status": 308 },
     { "src": "/atlas/sample-run", "headers": { "Location": "/atlas/sample-crawl" }, "status": 308 },
@@ -55,16 +62,22 @@
     { "src": "/ai-information", "headers": { "Location": "/about" }, "status": 308 },
     { "src": "/void-agency", "headers": { "Location": "https://www.void-agency.com/" }, "status": 308 },
     { "src": "/research-assets", "headers": { "Location": "/research" }, "status": 308 },
+    { "src": "/markets/the-first-ai-managers", "headers": { "Location": "/research/ai-systems/the-first-ai-managers" }, "status": 308 },
     { "src": "/markets/ai-search-crawler-policy", "headers": { "Location": "/research/ai-crawlers/ai-search-crawler-policy" }, "status": 308 },
     { "src": "/markets/technical-seo-public-data-infrastructure", "headers": { "Location": "/research/search-console/technical-seo-public-data-infrastructure" }, "status": 308 },
     { "src": "/markets/canonical-identity-personal-seo", "headers": { "Location": "/research/personal-seo/canonical-identity-personal-seo" }, "status": 308 },
+    { "src": "/markets/what-happens-when-an-index-decides-a-company-matters", "headers": { "Location": "/research/financial-systems/what-happens-when-an-index-decides-a-company-matters" }, "status": 308 },
+    { "src": "/markets/how-airlines-borrow-against-loyalty-programs", "headers": { "Location": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs" }, "status": 308 },
+    { "src": "/markets/where-online-returns-actually-go", "headers": { "Location": "/research/financial-systems/where-online-returns-actually-go" }, "status": 308 },
+    { "src": "/markets/hidden-financing-hardware-startups", "headers": { "Location": "/research/financial-systems/hidden-financing-hardware-startups" }, "status": 308 },
+    { "src": "/markets/us-rare-earth-magnet-manufacturing-capacity", "headers": { "Location": "/research/data-systems/us-rare-earth-magnet-manufacturing-capacity" }, "status": 308 },
     { "src": "/markets/network-monopolies", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
     { "src": "/markets/computational-commodity-systems", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
     { "src": "/markets/fiat-horizon", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
     {
       "src": "/(.*)",
       "headers": {
-        "Content-Security-Policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://formspree.io; frame-src 'none'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests",
+        "Content-Security-Policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests",
         "Strict-Transport-Security": "max-age=31536000",
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",

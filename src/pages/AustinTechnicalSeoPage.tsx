@@ -42,6 +42,25 @@ const austinBuyerFit = [
   'Operators who want a short implementation list, not a broad SEO retainer or vague visibility score.',
 ];
 
+const austinAuditCoverage = [
+  {
+    title: 'Crawlability and indexation audit',
+    copy: 'Review robots.txt, XML sitemaps, status codes, redirects, canonicals, noindex rules, crawl paths, and whether priority Austin service pages are discoverable.',
+  },
+  {
+    title: 'JavaScript rendering and templates',
+    copy: 'Compare raw and rendered HTML, inspect page templates, and identify content, links, metadata, or structured data that depend on client-side rendering.',
+  },
+  {
+    title: 'Site architecture and internal links',
+    copy: 'Map crawl depth, orphan risk, navigation, anchor text, service-page relationships, and internal links supporting local commercial intent.',
+  },
+  {
+    title: 'Structured data and AI search readiness',
+    copy: 'Review entity clarity, schema, public source files, crawler access, and the evidence that search engines and AI answer systems can inspect.',
+  },
+];
+
 const austinWhenNotToHire = [
   'You need paid ads, social media management, generic blog production, or guaranteed local rankings.',
   'You cannot make website changes or give a developer enough context to implement the fixes.',
@@ -63,20 +82,20 @@ export default function AustinTechnicalSeoPage() {
           <div className="self-end">
             <p className="mb-8 text-[10px] uppercase tracking-[0.28em] text-current/48">Austin technical SEO</p>
             <h1 className="max-w-6xl font-serif text-[3.8rem] md:text-[6.5rem] xl:text-[9rem] italic leading-[0.84] tracking-normal">
-              Austin technical SEO and search visibility.
+              Austin technical SEO consultant.
             </h1>
             <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/64 lg:mt-10">
-              Based in Austin, I run fixed-scope reviews for teams that need crawlability, indexation, structured data, page clarity, and technical search issues checked before broader content or growth work.
+              Based in Austin, I run fixed-scope technical SEO audits for teams that need crawlability, indexation, JavaScript rendering, internal links, structured data, local service pages, analytics, and implementation checked before broader growth work.
             </p>
             <div className="mt-8 max-w-3xl border border-current/14 bg-current/[0.035] p-5">
               <p className="mb-3 text-[10px] uppercase tracking-[0.24em] text-current/46">Short answer</p>
               <p className="text-sm leading-relaxed text-current/66">
-                Austin technical SEO is the review of whether a local service page can be crawled, understood, trusted, and measured for a specific service intent before anyone publishes more pages or claims visibility gains.
+                An Austin technical SEO consultant checks whether priority service pages can be crawled, indexed, understood, internally supported, and measured before anyone expands content or claims local visibility gains.
               </p>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-5 lg:mt-10">
               <PrimaryCTA href="/contact" className="text-accent hover:text-[var(--page-bg)]">
-                Request a fixed-scope review
+                Request an Austin technical SEO audit
               </PrimaryCTA>
               <TextLink href="/method" className="text-[10px] uppercase tracking-[0.2em] text-current/68 hover:text-current">
                 Read the technical SEO audit method
@@ -93,13 +112,29 @@ export default function AustinTechnicalSeoPage() {
           <DarkProofArtifactPanel
             className="self-center max-md:-mt-4 lg:ml-auto"
             eyebrow="Local audit stack"
-            title="Site checks before local SEO claims."
-            summary="The page keeps the Austin frame tied to crawlable pages, clear services, and implementation evidence."
+            title="Technical SEO checks before local ranking claims."
+            summary="The Austin audit stays tied to crawlable service pages, clear entities, inspectable evidence, and implementation work."
             items={austinArtifactItems}
             footer="Public page review first. Analytics and Search Console only when access is available."
           />
         </section>
       </PageFrame>
+
+      <section className="relative z-10 border-y border-current/12">
+        <PageFrame className="py-16 xl:py-24">
+          <SectionHeader eyebrow="Audit coverage" title="What an Austin technical SEO audit covers.">
+            Each review starts with the public site and a defined decision, then produces URL-level evidence and a prioritized implementation path.
+          </SectionHeader>
+          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+            {austinAuditCoverage.map((item) => (
+              <TechnicalPanel key={item.title} className="min-h-[260px]">
+                <h2 className="font-serif text-3xl italic leading-none text-current">{item.title}</h2>
+                <p className="mt-6 text-sm leading-relaxed text-current/64">{item.copy}</p>
+              </TechnicalPanel>
+            ))}
+          </SurfaceGrid>
+        </PageFrame>
+      </section>
 
       <section className="relative z-10 border-y border-current/12">
         <PageFrame className="py-16 xl:py-24">
@@ -198,7 +233,7 @@ export default function AustinTechnicalSeoPage() {
               Query examples before page expansion.
             </h2>
             <p className="mt-8 max-w-2xl text-base leading-relaxed text-current/62">
-              The audit starts with concrete Austin service intents, then checks whether the public page, proof, profile signals, and measurement path support that intent.
+              The audit starts with concrete queries such as technical SEO Austin, Austin SEO audit, and Austin crawlability audit, then checks whether the public page, proof, profile signals, and measurement path support that intent.
             </p>
           </div>
           <div className="grid gap-px overflow-hidden border border-current/14 md:grid-cols-2">

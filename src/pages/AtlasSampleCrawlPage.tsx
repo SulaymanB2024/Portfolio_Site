@@ -20,7 +20,7 @@ export default function AtlasSampleCrawlPage() {
   useSEO(ATLAS_SAMPLE_SEO);
 
   return (
-    <main id="top" className="site-page site-page-light relative min-h-screen overflow-x-hidden bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
+    <main id="top" className="site-page site-page-light relative min-h-screen overflow-x-clip bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
       <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
       <PageTechnicalChrome tone="light" />
       <ScrollProgress tone="dark" />
@@ -35,17 +35,17 @@ export default function AtlasSampleCrawlPage() {
           <p className="mt-10 max-w-2xl text-base leading-relaxed text-ink/64">
             A dated, bounded capture of {ATLAS_OPEN_CORPUS_RUN.corpusName} shows how source state, rendered-state questions, discovered paths, confidence, and exportable evidence stay connected before any recommendation is made.
           </p>
-          <div className="mt-9 flex flex-wrap gap-5 text-[10px] uppercase tracking-[0.22em]">
-            <a href={RESEARCH_ASSETS.atlasSampleCsv} className="border-b border-ink/24 pb-1 transition-colors hover:border-ink">
+          <div className="mt-9 flex flex-wrap gap-x-5 gap-y-2 uppercase tracking-[0.2em]">
+            <a href={RESEARCH_ASSETS.atlasSampleCsv} className="inline-flex min-h-11 items-center border-b border-ink/24 text-[11px] transition-colors hover:border-ink">
               Download run CSV
             </a>
-            <a href={RESEARCH_ASSETS.atlasSampleManifest} className="border-b border-ink/24 pb-1 transition-colors hover:border-ink">
+            <a href={RESEARCH_ASSETS.atlasSampleManifest} className="inline-flex min-h-11 items-center border-b border-ink/24 text-[11px] transition-colors hover:border-ink">
               Open run manifest
             </a>
-            <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="border-b border-ink/24 pb-1 transition-colors hover:border-ink">
+            <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center border-b border-ink/24 text-[11px] transition-colors hover:border-ink">
               View the GitHub repo for the audit CLI
             </a>
-            <a href="/contact" className="border-b border-ink/24 pb-1 transition-colors hover:border-ink">
+            <a href="/contact" className="inline-flex min-h-11 items-center border-b border-ink/24 text-[11px] transition-colors hover:border-ink">
               Request an audit
             </a>
           </div>
@@ -88,13 +88,83 @@ export default function AtlasSampleCrawlPage() {
           </div>
         </div>
 
-        <div className="overflow-x-auto border border-ink/14">
-          <table className="min-w-[920px] w-full border-collapse text-left text-xs">
-            <caption className="sr-only">Atlas open-corpus demonstration table</caption>
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3 border-b border-ink/14 pb-4">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-ink/64">Captured URL records</p>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/64">
+              Crawl, indexability, rendered-state, and evidence fields stay grouped so each record can be reviewed without losing its claim boundary.
+            </p>
+          </div>
+          <p className="text-[10px] uppercase tracking-[0.2em] text-ink/64">{atlasSampleRows.length} records / 6 review groups</p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 xl:hidden" aria-label="Atlas open-corpus demonstration records">
+          {atlasSampleRows.map((row, index) => (
+            <article key={row.url} className="border border-ink/16 bg-canvas">
+              <header className="border-b border-ink/14 bg-ink px-4 py-4 text-canvas">
+                <p className="text-[9px] uppercase tracking-[0.22em] text-canvas/66">Record {String(index + 1).padStart(2, '0')}</p>
+                <h3 className="mt-3 break-all font-mono text-[11px] font-normal leading-relaxed">{row.url}</h3>
+              </header>
+
+              <dl className="grid grid-cols-2 gap-px bg-ink/12">
+                {[
+                  ['HTTP', row.status],
+                  ['Depth', row.depth],
+                  ['Inlinks', row.inlinks],
+                  ['Outlinks', row.outlinks],
+                ].map(([label, value]) => (
+                  <div key={label} className="bg-canvas p-4">
+                    <dt className="text-[9px] uppercase tracking-[0.18em] text-ink/64">{label}</dt>
+                    <dd className="mt-2 text-sm leading-relaxed text-ink/78">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <dl className="grid gap-0 px-4">
+                {[
+                  ['Indexability', row.indexability],
+                  ['Canonical', row.canonical],
+                  ['Observed state', row.issue],
+                  ['Rendered state', row.renderState],
+                ].map(([label, value]) => (
+                  <div key={label} className="border-b border-ink/12 py-4 last:border-b-0">
+                    <dt className="text-[9px] uppercase tracking-[0.18em] text-ink/64">{label}</dt>
+                    <dd className="mt-2 text-sm leading-relaxed text-ink/74">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="border-t border-ink/14 bg-ink/[0.035] p-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 text-[9px] uppercase tracking-[0.18em] text-ink/68">
+                  <span>{row.confidence} confidence</span>
+                  <span>{getSampleEvidenceState(row)}</span>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-ink/70">{row.note}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div
+          className="hidden overflow-x-auto border border-ink/14 xl:block"
+          role="region"
+          aria-label="Atlas open-corpus demonstration table"
+          tabIndex={0}
+        >
+          <table className="w-full min-w-[1120px] table-fixed border-collapse text-left text-xs leading-relaxed">
+            <caption className="sr-only">Atlas open-corpus demonstration table grouped into six review columns</caption>
+            <colgroup>
+              <col className="w-[18%]" />
+              <col className="w-[13%]" />
+              <col className="w-[18%]" />
+              <col className="w-[16%]" />
+              <col className="w-[17%]" />
+              <col className="w-[18%]" />
+            </colgroup>
             <thead className="bg-ink text-canvas">
               <tr>
-                {['URL', 'Status', 'Indexability', 'Depth', 'Inlinks', 'Outlinks', 'Canonical', 'Observed state', 'Render state', 'Confidence', 'Evidence note'].map((heading) => (
-                  <th key={heading} scope="col" className="px-4 py-3 text-[10px] uppercase tracking-[0.18em] font-medium">
+                {['URL', 'Crawl state', 'Indexability', 'Observed state', 'Rendered state', 'Evidence'].map((heading) => (
+                  <th key={heading} scope="col" className="px-4 py-3 text-[10px] font-medium uppercase tracking-[0.18em]">
                     {heading}
                   </th>
                 ))}
@@ -102,23 +172,26 @@ export default function AtlasSampleCrawlPage() {
             </thead>
             <tbody>
               {atlasSampleRows.map((row) => (
-                <tr key={row.url} className="group border-t border-ink/10 transition-colors duration-200 hover:bg-ink/[0.035]">
-                  <td className="max-w-[260px] px-4 py-3 font-mono text-[11px] text-ink/70 transition-colors group-hover:text-ink">{row.url}</td>
-                  <td className="px-4 py-3">{row.status}</td>
-                  <td className="px-4 py-3">{row.indexability}</td>
-                  <td className="px-4 py-3">{row.depth}</td>
-                  <td className="px-4 py-3">{row.inlinks}</td>
-                  <td className="px-4 py-3">{row.outlinks}</td>
-                  <td className="px-4 py-3">{row.canonical}</td>
-                  <td className="px-4 py-3">
-                    <span className="block">{row.issue}</span>
-                    <span className="mt-1 block text-[9px] uppercase tracking-[0.16em] text-ink/38 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                      {getSampleEvidenceState(row)}
-                    </span>
+                <tr key={row.url} className="border-t border-ink/10 align-top transition-colors duration-200 hover:bg-ink/[0.035]">
+                  <td className="break-all px-4 py-4 font-mono text-[11px] text-ink/74">{row.url}</td>
+                  <td className="px-4 py-4 text-ink/72">
+                    <span className="block font-medium text-ink">{row.status} response</span>
+                    <span className="mt-2 block">Depth {row.depth}</span>
+                    <span className="mt-2 block">{row.inlinks} inlinks / {row.outlinks} outlinks</span>
                   </td>
-                  <td className="max-w-[240px] px-4 py-3 text-ink/62">{row.renderState}</td>
-                  <td className="px-4 py-3 text-ink/62">{row.confidence}</td>
-                  <td className="px-4 py-3 text-ink/62">{row.note}</td>
+                  <td className="px-4 py-4 text-ink/72">
+                    <span className="block">{row.indexability}</span>
+                    <span className="mt-3 block break-words font-mono text-[11px] text-ink/64">Canonical: {row.canonical}</span>
+                  </td>
+                  <td className="px-4 py-4 text-ink/72">
+                    <span className="block">{row.issue}</span>
+                    <span className="mt-3 block text-[9px] uppercase tracking-[0.14em] text-ink/64">{getSampleEvidenceState(row)}</span>
+                  </td>
+                  <td className="px-4 py-4 text-ink/72">{row.renderState}</td>
+                  <td className="px-4 py-4 text-ink/72">
+                    <span className="block text-[9px] uppercase tracking-[0.16em] text-ink/68">{row.confidence} confidence</span>
+                    <span className="mt-3 block">{row.note}</span>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -131,7 +204,7 @@ export default function AtlasSampleCrawlPage() {
           <p className="max-w-3xl text-sm leading-relaxed text-ink/64">
             {ATLAS_OPEN_CORPUS_RUN.captureMethod} {ATLAS_OPEN_CORPUS_RUN.claimLimit}
           </p>
-          <a href="/method#worked-finding" className="text-[10px] uppercase tracking-[0.22em] underline decoration-ink/24 underline-offset-4 transition-colors hover:text-ink/70">
+          <a href="/method#worked-finding" className="inline-flex min-h-11 items-center text-[11px] uppercase tracking-[0.2em] underline decoration-ink/24 underline-offset-4 transition-colors hover:text-ink/70">
             Read the worked finding
           </a>
         </div>

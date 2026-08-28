@@ -1,20 +1,19 @@
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 
 import {
-  ArticleBody,
-  ArticleCallout,
-  ArticleEndnote,
-  ArticleHero,
-  ArticleMetricStrip,
-  ArticlePage,
+  ArticleReader,
   ArticleSectionHeader,
+  createArticleNavigation,
+  getArticleNavigationIndex,
   type ArticleNavItem,
+  type ArticleReaderConfig,
 } from '../components/ArticleLayout';
 import {
   AI_MANAGER_CASES,
   AI_MANAGER_FAQS,
   AI_MANAGER_OPEN_QUESTIONS,
   AI_MANAGER_SOURCES,
+  AI_MANAGERS_ARTICLE_CONCLUSION,
   AI_MANAGERS_ARTICLE_DATE,
   AI_MANAGERS_ARTICLE_DESCRIPTION,
   AI_MANAGERS_ARTICLE_DISPLAY_TITLE,
@@ -24,19 +23,15 @@ import {
   AI_MANAGERS_ARTICLE_SECTIONS,
   AI_MANAGERS_ARTICLE_TITLE,
   AI_MANAGERS_ARTICLE_UPDATED,
-  AI_MANAGERS_ARTICLE_WORD_COUNT,
   type AiManagerCaseKind,
 } from '../content/aiManagersArticle';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToReact } from '../utils/markdownToReact';
 import { useSEO } from '../utils/seo';
-import { splitMarkdownLead } from '../utils/splitMarkdownLead';
 
 const ROUTE = getSeoRoute(AI_MANAGERS_ARTICLE_PATH)!;
-const {
-  lead: AI_MANAGERS_ARTICLE_OPENING,
-  remainder: AI_MANAGERS_ARTICLE_REMAINDER,
-} = splitMarkdownLead(AI_MANAGERS_ARTICLE_LEDE);
+const SEARCH_TARGET = getArticleSearchTarget(AI_MANAGERS_ARTICLE_PATH)!;
 
 const headlineMetrics = [
   { value: '30', label: 'cases reviewed', note: 'live, bounded, narrow, simulated' },
@@ -99,7 +94,7 @@ function HallOfShameFigure() {
     <figure className="ai-hall-of-shame" aria-labelledby="hall-of-shame-caption" data-image-slot="andon-cafe-hall-of-shame">
       <div className="toll-figure-label">
         <span>Opening scene / Andon Café</span>
-        <span>Default editorial visual</span>
+        <span>Inventory failure pattern</span>
       </div>
       <div className="ai-hall-of-shame__header">
         <p>Inventory received</p>
@@ -116,7 +111,7 @@ function HallOfShameFigure() {
         ))}
       </div>
       <figcaption id="hall-of-shame-caption">
-        Quantity errors made the abstract management problem physical. This code-native figure is the planned replacement slot for the supplied café image.
+        Quantity errors made the abstract management problem physical: locally plausible actions accumulated into an incoherent operating policy.
       </figcaption>
     </figure>
   );
@@ -182,12 +177,19 @@ function BehaviorMatrix() {
   return (
     <figure className="toll-snapshot ai-behavior-matrix" aria-labelledby="behavior-matrix-caption">
       <div className="toll-figure-label"><span>Figure 03</span><span>Observed pattern / containment</span></div>
-      <div className="toll-snapshot__scroll">
-        <table>
+      <div
+        className="toll-snapshot__scroll"
+        role="region"
+        aria-label="Observed manager behavior and containment matrix. Scroll horizontally to inspect every field."
+        tabIndex={0}
+      >
+        <table data-responsive-table="stacked">
           <thead><tr><th>Manager</th><th>Environment</th><th>Failure path</th><th>Containment response</th></tr></thead>
           <tbody>
             {behaviorMatrix.map((row) => (
-              <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th scope="row" key={cell}>{cell}</th> : <td key={cell}>{cell}</td>)}</tr>
+              <tr key={row[0]}>{row.map((cell, index) => index === 0
+                ? <th scope="row" key={cell} data-label="Manager">{cell}</th>
+                : <td key={cell} data-label={['Manager', 'Environment', 'Failure path', 'Containment response'][index]}>{cell}</td>)}</tr>
             ))}
           </tbody>
         </table>
@@ -305,7 +307,7 @@ function CaseExplorer() {
         <p><strong>{filteredCases.length}</strong> shown</p>
       </div>
       <div className="ai-case-explorer__controls">
-        <div className="ai-case-explorer__filters" aria-label="Filter cases by operating form">
+        <div className="ai-case-explorer__filters" role="group" aria-label="Filter cases by operating form">
           {caseFilters.map((filter) => (
             <button
               type="button"
@@ -345,7 +347,7 @@ function CaseExplorer() {
         ))}
       </div>
       {!filteredCases.length ? <p className="ai-case-explorer__empty">No cases match that combination. Clear the search or choose another operating form.</p> : null}
-      <p className="ai-case-explorer__note">Grades describe evidence quality and operating reality. They do not describe commercial success.</p>
+      <p className="ai-case-explorer__note">Grades describe evidence quality and operating reality—not commercial success.</p>
     </div>
   );
 }
@@ -376,20 +378,26 @@ function SectionVisual({ sectionId }: { sectionId: string }) {
   return null;
 }
 
-function ArticleSection({ section }: { section: (typeof AI_MANAGERS_ARTICLE_SECTIONS)[number] }) {
+function ArticleSection({
+  section,
+  index,
+}: {
+  section: (typeof AI_MANAGERS_ARTICLE_SECTIONS)[number];
+  index: string;
+}) {
   return (
     <section id={section.id}>
-      <ArticleSectionHeader index={section.index}>{section.title}</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>{section.title}</ArticleSectionHeader>
       <ArticleMarkdown markdown={section.markdown} />
       <SectionVisual sectionId={section.id} />
     </section>
   );
 }
 
-function FrequentlyAskedQuestions() {
+function FrequentlyAskedQuestions({ index }: { index: string }) {
   return (
     <section id="frequently-asked-questions">
-      <ArticleSectionHeader index="FAQ">AI-operated small businesses, answered directly</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>AI-operated small businesses, answered directly</ArticleSectionHeader>
       <div className="toll-faq-list">
         {AI_MANAGER_FAQS.map((faq, index) => (
           <details key={faq.question} open={index === 0}>
@@ -402,10 +410,10 @@ function FrequentlyAskedQuestions() {
   );
 }
 
-function SourceLedger() {
+function SourceLedger({ index }: { index: string }) {
   return (
     <section id="source-ledger" className="toll-source-ledger">
-      <ArticleSectionHeader index="S">Source ledger</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>Source ledger</ArticleSectionHeader>
       <p className="toll-section-intro">
         The article uses operator logs and dashboards for detailed traces, independent reporting to verify physical reality, public code to inspect architecture, and papers for controlled evidence. Operator economics remain unaudited unless stated otherwise.
       </p>
@@ -419,7 +427,14 @@ function SourceLedger() {
               <p>{source.note}</p>
               <p className="ai-source-limit"><span>Limit</span> {source.limitation}</p>
               <div className="toll-source-ledger__links">
-                <a href={source.href} target={source.href.startsWith('#') ? undefined : '_blank'} rel={source.href.startsWith('#') ? undefined : 'noreferrer'}>
+                <a
+                  href={source.href}
+                  target={source.href.startsWith('#') ? undefined : '_blank'}
+                  rel={source.href.startsWith('#') ? undefined : 'noreferrer'}
+                  aria-label={source.href.startsWith('#')
+                    ? `Open ${source.label} in the field map`
+                    : `Open ${source.label} in a new tab`}
+                >
                   {source.href.startsWith('#') ? 'Open field map' : 'Open source ↗'}
                 </a>
               </div>
@@ -434,108 +449,125 @@ function SourceLedger() {
 export default function AiManagersArticlePage() {
   useSEO(ROUTE);
 
-  useEffect(() => {
-    const targetId = window.location.hash.slice(1);
-    if (!targetId) {
-      window.scrollTo(0, 0);
-      return undefined;
-    }
-
-    let frame = 0;
-    let attempts = 0;
-    const scrollToTarget = () => {
-      const target = document.querySelector<HTMLElement>(`#top #${CSS.escape(targetId)}`);
-      const lenis = window.lenis as unknown as { resize?: () => void; scrollTo: (target: HTMLElement, options: { immediate: boolean }) => void } | undefined;
-      if (target && lenis) {
-        lenis.resize?.();
-        lenis.scrollTo(target, { immediate: true });
-        return;
-      }
-      if (attempts < 4) {
-        attempts += 1;
-        frame = window.requestAnimationFrame(scrollToTarget);
-        return;
-      }
-      target?.scrollIntoView();
-    };
-    frame = window.requestAnimationFrame(scrollToTarget);
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
-
-  const navItems: ArticleNavItem[] = [
-    { id: 'overview', label: 'Overview', index: '00', summary: 'The operating claim and its limit.' },
-    ...AI_MANAGERS_ARTICLE_SECTIONS
-      .filter((section) => section.id !== 'closing')
-      .map((section) => ({ id: section.id, label: section.title, index: section.index })),
-    { id: 'frequently-asked-questions', label: 'Direct answers', index: 'FAQ' },
-    { id: 'source-ledger', label: 'Source ledger', index: 'S' },
-  ];
+  const navItems: ArticleNavItem[] = createArticleNavigation([
+    {
+      kind: 'overview',
+      id: 'overview',
+      label: 'Overview',
+      summary: 'The operating claim and its limit.',
+    },
+    ...AI_MANAGERS_ARTICLE_SECTIONS.map((section) => ({
+      kind: 'section' as const,
+      id: section.id,
+      label: section.title,
+    })),
+    {
+      kind: 'faq',
+      id: 'frequently-asked-questions',
+      label: 'Direct answers',
+    },
+    {
+      kind: 'source',
+      id: 'source-ledger',
+      label: 'Source ledger',
+    },
+  ]);
+  const config: ArticleReaderConfig = {
+    activePath: '/research',
+    mode: 'narrative',
+    className: 'ai-managers-article',
+    archive: {
+      href: '/research',
+      label: 'Research archive',
+    },
+    hero: {
+      eyebrow: 'AI-operated shops / human control / commercial reality',
+      title: AI_MANAGERS_ARTICLE_TITLE,
+      displayTitle: AI_MANAGERS_ARTICLE_DISPLAY_TITLE,
+      deck: AI_MANAGERS_ARTICLE_DESCRIPTION,
+      image: {
+        src: '/images/research/ai-managers-reader-hero.webp',
+        alt: 'Monochrome editorial artwork showing a central operator directing several bounded AI systems.',
+        label: 'AI-operated businesses / operating layer',
+        caption: 'Model decisions remain nested inside human legal, financial, and physical control.',
+      },
+    },
+    publication: {
+      author: 'Sulayman Bowles',
+      subject: 'AI systems / business operations',
+      published: {
+        dateTime: AI_MANAGERS_ARTICLE_DATE.replaceAll('.', '-'),
+        value: 'July 14, 2026',
+      },
+      updated: {
+        dateTime: AI_MANAGERS_ARTICLE_UPDATED.replaceAll('.', '-'),
+        value: 'July 19, 2026',
+      },
+      readTime: AI_MANAGERS_ARTICLE_READ_TIME,
+      evidence: `${AI_MANAGER_SOURCES.length} sources`,
+    },
+    metrics: headlineMetrics.map((metric) => ({
+      label: metric.label,
+      value: metric.value,
+      note: metric.note,
+    })),
+    callouts: [{
+      label: 'Direct answer',
+      title: SEARCH_TARGET.primaryQuery,
+      content: (
+        <>
+          <p>{SEARCH_TARGET.directAnswer}</p>
+          <p><strong>Original artifact:</strong> {SEARCH_TARGET.originalArtifact}</p>
+        </>
+      ),
+    }],
+    navigation: {
+      items: navItems,
+      contentsLabel: 'Chapters',
+    },
+    boundary: {
+      label: 'Evidence boundary',
+      content: 'Operator dashboards are unaudited. Simulations are not businesses. Human legal, financial, and physical work is counted, not cropped out.',
+    },
+    endnote: {
+      label: 'Conclusion',
+      title: AI_MANAGERS_ARTICLE_CONCLUSION.title,
+      content: AI_MANAGERS_ARTICLE_CONCLUSION.content,
+      note: 'Research cutoff: July 14, 2026. Financial claims are labeled by source type and accounting limit. No simulation score is presented as real-world profit.',
+      links: [
+        ...SEARCH_TARGET.relatedPaths.map((path) => ({
+          href: path,
+          label: getArticleRelatedLinkLabel(AI_MANAGERS_ARTICLE_PATH, path),
+        })),
+        { href: '/research', label: 'Research archive' },
+        { href: '/viralbench-codex-agent-harness', label: 'Agent evaluation' },
+        { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },
+        { href: '/about', label: 'About the author' },
+      ],
+    },
+  };
 
   return (
-    <ArticlePage activePath="/research" variant="chapters" className="ai-managers-article">
-      <ArticleHero
-        backHref="/research"
-        backLabel="Research archive"
-        eyebrow="AI-operated shops / human control / commercial reality"
-        title={(
-          <>
-            <span>The First</span>
-            <span>AI Managers</span>
-          </>
-        )}
-        titleLabel={AI_MANAGERS_ARTICLE_TITLE}
-        displayTitle={AI_MANAGERS_ARTICLE_DISPLAY_TITLE}
-        deck={AI_MANAGERS_ARTICLE_DESCRIPTION}
-        lead={<ArticleMarkdown markdown={AI_MANAGERS_ARTICLE_OPENING} />}
-        image={{
-          src: '/images/articles/ai-managers-operator-workflow.jpg',
-          alt: 'A café operator reviews records at a counter while a diagram of machine-assisted workflows passes through the business.',
-          label: 'Operating layer / 01',
-          caption: 'Human judgment remains inside the workflow even when software coordinates the next action.',
-        }}
-        metadata={[
-          { label: 'Subject', value: 'AI systems / business operations' },
-          { label: 'Published', value: <time dateTime={AI_MANAGERS_ARTICLE_DATE.replaceAll('.', '-')}>July 14, 2026</time> },
-          { label: 'Updated', value: <time dateTime={AI_MANAGERS_ARTICLE_UPDATED.replaceAll('.', '-')}>July 14, 2026</time> },
-          { label: 'Length', value: `${AI_MANAGERS_ARTICLE_READ_TIME} / ${AI_MANAGERS_ARTICLE_WORD_COUNT.toLocaleString()} words` },
-          { label: 'Method', value: `${AI_MANAGER_SOURCES.length}-source public-record review` },
-        ]}
-      />
-
-      <ArticleMetricStrip items={headlineMetrics.map((metric) => ({ label: metric.label, value: metric.value, note: metric.note }))} />
-
-      <ArticleCallout label="Short answer" title="AI can run the next action. It still cannot reliably preserve the company.">
-        <p>
-          Current systems can hire, schedule, price, order, negotiate, promote, and answer customers. Across the strongest public cases, the recurring weakness is continuity: retaining the right state, resisting manipulation, keeping corrections in force, and connecting local decisions to fully burdened economics.
-        </p>
-      </ArticleCallout>
-
-      <ArticleBody
-        items={navItems}
-        variant="chapters"
-        boundary="Operator dashboards are unaudited. Simulations are not businesses. Human legal, financial, and physical work is counted, not cropped out."
-        boundaryLabel="Evidence boundary"
-      >
+    <ArticleReader config={config}>
         <section id="overview">
-          <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
-          <ArticleMarkdown markdown={AI_MANAGERS_ARTICLE_REMAINDER} />
+          <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'overview')}>
+            Overview
+          </ArticleSectionHeader>
+          <ArticleMarkdown markdown={AI_MANAGERS_ARTICLE_LEDE} />
           <HallOfShameFigure />
         </section>
-        {AI_MANAGERS_ARTICLE_SECTIONS.map((section) => <Fragment key={section.id}><ArticleSection section={section} /></Fragment>)}
-        <FrequentlyAskedQuestions />
-        <SourceLedger />
-
-        <ArticleEndnote
-          links={[
-            { href: '/research', label: 'Research archive' },
-            { href: '/viralbench-codex-agent-harness', label: 'Agent evaluation' },
-            { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },
-            { href: '/about', label: 'About the author' },
-          ]}
-        >
-          Research cutoff: July 14, 2026. Financial claims are labeled by source type and accounting limit. No simulation score is presented as real-world profit.
-        </ArticleEndnote>
-      </ArticleBody>
-    </ArticlePage>
+        {AI_MANAGERS_ARTICLE_SECTIONS.map((section) => (
+          <Fragment key={section.id}>
+            <ArticleSection
+              section={section}
+              index={getArticleNavigationIndex(navItems, section.id)}
+            />
+          </Fragment>
+        ))}
+        <FrequentlyAskedQuestions
+          index={getArticleNavigationIndex(navItems, 'frequently-asked-questions')}
+        />
+        <SourceLedger index={getArticleNavigationIndex(navItems, 'source-ledger')} />
+    </ArticleReader>
   );
 }

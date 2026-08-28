@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef, useEffect, useState, lazy, Suspense, type CSSProperties } from 'react';
+import { useRef, useEffect, useLayoutEffect, useState, lazy, Suspense, type CSSProperties, type ReactNode } from 'react';
 import { InkTrails } from './components/InkTrails';
 import { RomanTogaReveal } from './components/RomanTogaReveal';
 import { ScrambleText } from './components/ScrambleText';
@@ -13,14 +13,12 @@ import { usePageTransitions } from './hooks/usePageTransitions';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
 import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
-import { navItemId, navLabel, primaryNav, utilityNav } from './content/siteNavigation';
 import { AI_MANAGERS_ARTICLE_PATH } from './content/aiManagersArticle';
 import { PROFILE_FACTS } from './content/profileFacts';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './content/texasTollRoadArticleMeta';
 import { useSEO } from './utils/seo';
 import './styles/page-transitions.css';
 import { TextMarquee } from './components/TextMarquee';
-import { AuditIntakeForm } from './components/AuditIntakeForm';
 import { WireframeGrid } from './components/WireframeGrid';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -39,6 +37,8 @@ const loadWorkPage = () => import('./pages/WorkPage');
 const loadContactPage = () => import('./pages/ContactPage');
 const loadAtlasSampleCrawlPage = () => import('./pages/AtlasSampleCrawlPage');
 const loadAustinTechnicalSeoPage = () => import('./pages/AustinTechnicalSeoPage');
+const loadProgrammaticSeoPage = () => import('./pages/ProgrammaticSeoPage');
+const loadProgrammaticSeoHubPage = () => import('./pages/ProgrammaticSeoHubPage');
 
 const AtlasPage = lazy(loadAtlasPage);
 const AtlasCelestialParallaxPage = lazy(loadAtlasCelestialParallaxPage);
@@ -55,7 +55,8 @@ const WorkPage = lazy(loadWorkPage);
 const ContactPage = lazy(loadContactPage);
 const AtlasSampleCrawlPage = lazy(loadAtlasSampleCrawlPage);
 const AustinTechnicalSeoPage = lazy(loadAustinTechnicalSeoPage);
-const LocalTime = lazy(() => import('./components/LocalTime').then(m => ({ default: m.LocalTime })));
+const ProgrammaticSeoPage = lazy(loadProgrammaticSeoPage);
+const ProgrammaticSeoHubPage = lazy(loadProgrammaticSeoHubPage);
 const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
 const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
 const AtmosphereCore = lazy(() => import('./components/AtmosphereCore').then(m => ({ default: m.default })));
@@ -88,6 +89,12 @@ const homeDisciplineItems = [
   },
 ];
 
+const homeProofItems = [
+  { type: 'Research', title: 'The First AI Managers', href: AI_MANAGERS_ARTICLE_PATH },
+  { type: 'Product', title: 'Atlas SEO Audit Software', href: '/atlas' },
+  { type: 'Markets', title: 'Texas Toll-Road Ownership', href: '/markets/who-owns-texas-toll-roads' },
+];
+
 function isDarkRoute(path: string) {
   return getRouteTone(path) === 'dark';
 }
@@ -115,6 +122,10 @@ async function preloadRoute(path: string) {
     await loadResumePage();
   } else if (route?.path === '/research') {
     await loadResearchPage();
+  } else if (route?.section === 'technical-seo-hub') {
+    await loadProgrammaticSeoHubPage();
+  } else if (route?.section === 'technical-seo-guide') {
+    await loadProgrammaticSeoPage();
   } else if (route?.path === '/markets') {
     await loadMarketsPage();
   } else if (route?.path === '/viralbench-codex-agent-harness') {
@@ -136,6 +147,16 @@ function getCurrentCanonicalPath() {
   return `${canonicalPath}${window.location.search}${window.location.hash}`;
 }
 
+function RouteReady({ children }: { children: ReactNode }) {
+  useLayoutEffect(() => {
+    document.documentElement.classList.add('app-mounted');
+    document.documentElement.classList.remove('js-pending');
+    document.getElementById('seo-static-summary')?.remove();
+  }, []);
+
+  return children;
+}
+
 export default function App() {
   const [currentPath, setCurrentPath] = useState(getCurrentCanonicalPath);
 
@@ -154,105 +175,53 @@ export default function App() {
   let page;
 
   if (route?.path === '/atlas') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AtlasPage />
-      </Suspense>
-    );
+    page = <AtlasPage />;
   } else if (route?.path === '/atlas/celestial-parallax') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AtlasCelestialParallaxPage />
-      </Suspense>
-    );
+    page = <AtlasCelestialParallaxPage />;
   } else if (route?.path === '/method') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <VoidAgencyMethodPage />
-      </Suspense>
-    );
+    page = <VoidAgencyMethodPage />;
   } else if (route?.path === '/about') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AboutPage />
-      </Suspense>
-    );
+    page = <AboutPage />;
   } else if (route?.path === '/work') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <WorkPage />
-      </Suspense>
-    );
+    page = <WorkPage />;
   } else if (route?.path === '/contact') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ContactPage />
-      </Suspense>
-    );
+    page = <ContactPage />;
   } else if (route?.path === '/atlas/sample-crawl') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AtlasSampleCrawlPage />
-      </Suspense>
-    );
+    page = <AtlasSampleCrawlPage />;
   } else if (route?.path === '/austin-technical-seo') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AustinTechnicalSeoPage />
-      </Suspense>
-    );
+    page = <AustinTechnicalSeoPage />;
   } else if (route?.path === '/resume') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ResumePage />
-      </Suspense>
-    );
+    page = <ResumePage />;
   } else if (route?.path === '/research') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ResearchPage />
-      </Suspense>
-    );
+    page = <ResearchPage />;
+  } else if (route?.section === 'technical-seo-hub') {
+    page = <ProgrammaticSeoHubPage path={route.path} />;
+  } else if (route?.section === 'technical-seo-guide') {
+    page = <ProgrammaticSeoPage path={route.path} />;
   } else if (route?.path === '/sitemap') {
     page = <SitemapPage />;
   } else if (route?.path === '/viralbench-codex-agent-harness') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <ViralBenchArticlePage />
-      </Suspense>
-    );
+    page = <ViralBenchArticlePage />;
   } else if (route?.path === AI_MANAGERS_ARTICLE_PATH) {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <AiManagersArticlePage />
-      </Suspense>
-    );
+    page = <AiManagersArticlePage />;
   } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <TexasTollRoadArticlePage />
-      </Suspense>
-    );
+    page = <TexasTollRoadArticlePage />;
   } else if (route?.section === 'research-article') {
     const slug = route.path.split('/').at(-1) ?? '';
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <MarketArticlePage slug={slug} />
-      </Suspense>
-    );
+    page = <MarketArticlePage slug={slug} />;
   } else if (route?.path === '/markets') {
-    page = (
-      <Suspense fallback={<RouteFallback route={route} />}>
-        <MarketsPage />
-      </Suspense>
-    );
+    page = <MarketsPage />;
   } else if (route?.path === '/') {
     page = <HomePage />;
   } else {
     page = <NotFoundPage />;
   }
 
-  return page;
+  return (
+    <Suspense fallback={<RouteFallback route={route} />}>
+      <RouteReady>{page}</RouteReady>
+    </Suspense>
+  );
 }
 
 function SitemapPage() {
@@ -267,8 +236,8 @@ function SitemapPage() {
         <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
       </Suspense>
       <InternalHeader activePath="/sitemap" tone="light" />
-      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 py-14 md:px-8 xl:px-10 xl:py-20">
-        <header className="grid min-h-[52vh] content-end border-b border-ink/14 pb-12">
+      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-14 pt-6 md:px-8 md:pt-8 xl:px-10 xl:pb-20 xl:pt-10">
+        <header className="border-b border-ink/14 py-12 md:py-16 xl:py-20">
           <p className="text-[10px] uppercase tracking-[0.28em] text-ink/58">
             Sulayman Bowles / Sitemap
           </p>
@@ -281,7 +250,7 @@ function SitemapPage() {
         </header>
 
         <section className="py-10">
-          <h2 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/48">Pages</h2>
+          <h2 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/64">Pages</h2>
           <ul className="grid gap-3">
             {routes.map((item) => (
               <li key={item.path}>
@@ -305,40 +274,31 @@ function SitemapPage() {
 
 function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
   const dark = route ? isDarkRoute(route.path) : false;
-  const heading = route?.h1 ?? HOME_SEO.h1;
+  const heading = route?.displayH1 ?? route?.h1 ?? HOME_SEO.h1;
   const description = route?.description ?? HOME_SEO.description;
-  const summary = route?.staticSummary ?? HOME_SEO.staticSummary;
-  const fallbackLinks = [
-    ['Home', '/'],
-    ['Selected Work', '/work'],
-    ['Atlas', '/atlas'],
-    ['Method', '/method'],
-    ['Research', '/research'],
-    ['Contact', '/contact'],
-  ];
+
+  if (typeof document !== 'undefined' && document.getElementById('seo-static-summary')) {
+    return null;
+  }
 
   return (
     <main
       aria-busy="true"
-      className={`flex min-h-screen items-center justify-center px-6 font-sans ${
+      className={`site-page relative min-h-screen overflow-hidden font-sans ${
         dark ? 'bg-ink text-canvas' : 'bg-canvas text-ink'
       }`}
     >
-      <div className="w-full max-w-[1480px] border-t border-current/20 pt-6">
-        <div className="text-[10px] uppercase tracking-[0.32em] opacity-60">Route overview</div>
-        <h1 className="mt-6 font-serif text-[3.4rem] md:text-[5.75rem] xl:text-[8rem] italic leading-[0.86] tracking-normal">
+      <InternalHeader activePath={route?.path ?? '/'} tone={dark ? 'dark' : 'light'} />
+      <section className="relative mx-auto grid min-h-[calc(100svh-4.5rem)] w-full max-w-[1480px] content-center px-4 py-20 md:px-8 xl:min-h-[calc(100svh-5.125rem)] xl:px-10">
+        <div className="border-t border-current/16 pt-6">
+          <p className="text-[10px] uppercase tracking-[0.32em] opacity-60">Opening the current route</p>
+          <h1 className="mt-8 max-w-[14ch] font-serif text-[3.4rem] italic font-light leading-[0.86] tracking-normal md:text-[5.75rem] xl:text-[8rem]">
           {heading}
-        </h1>
-        <p className="mt-8 max-w-3xl text-base leading-relaxed opacity-70">{description}</p>
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed opacity-58">{summary}</p>
-        <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-[10px] uppercase tracking-[0.22em] opacity-70" aria-label="Fallback route links">
-          {fallbackLinks.map(([label, href]) => (
-            <a key={href} href={href} className="underline decoration-current/20 underline-offset-4 transition-opacity hover:opacity-100">
-              {label}
-            </a>
-          ))}
-        </nav>
-      </div>
+          </h1>
+          <p className="mt-8 max-w-3xl text-sm leading-relaxed opacity-68 md:text-base">{description}</p>
+          <div aria-hidden="true" className="mt-10 h-px w-10 bg-current opacity-45" />
+        </div>
+      </section>
     </main>
   );
 }
@@ -502,7 +462,7 @@ function HomePage() {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   return (
-    <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-hidden selection:bg-ink selection:text-canvas" ref={containerRef}>
+    <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-clip selection:bg-ink selection:text-canvas" ref={containerRef}>
       {!prefersReducedMotion && <InkTrails />}
         
       <InternalHeader activePath="/" tone={homeHeaderTone} variant="home" minimalBrand />
@@ -543,8 +503,8 @@ function HomePage() {
             <RomanTogaReveal
               fit="cover"
               focus="large-figure"
-              restOpacity={0.1}
-              revealOpacity={0.46}
+              restOpacity={0.16}
+              revealOpacity={0.58}
               className="h-full w-full"
             />
           </motion.div>
@@ -561,15 +521,43 @@ function HomePage() {
                 <span className="block">Sulayman</span>
                 <span className="block italic">Bowles</span>
               </h1>
-              <div className="mt-7 grid max-w-5xl gap-5 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-10">
+              <div className="mt-7 grid max-w-[1180px] gap-6 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.14fr)_minmax(340px,0.86fr)] md:gap-8">
                 <div>
                   <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; founder of Void Agency, builder of Atlas, and publisher of source-led research.</p>
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and publisher of source-led research.</p>
+                  <nav className="mt-6 flex flex-wrap gap-3" aria-label="Primary actions">
+                    <a
+                      href="/work"
+                      id="home-primary-work-link"
+                      className="inline-flex min-h-11 items-center border border-ink bg-ink px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-canvas transition-colors hover:bg-accent hover:text-ink"
+                    >
+                      View selected work
+                    </a>
+                    <a
+                      href="/contact"
+                      id="home-primary-contact-link"
+                      className="inline-flex min-h-11 items-center border border-ink/28 px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/72 transition-colors hover:border-ink hover:bg-ink hover:text-canvas"
+                    >
+                      Start a project
+                    </a>
+                  </nav>
                 </div>
-                <nav aria-label="Featured proof" className="grid gap-2 self-end text-[10px] uppercase tracking-[0.2em] text-ink/70">
-                  <a href={AI_MANAGERS_ARTICLE_PATH} className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">The First AI Managers</a>
-                  <a href="/atlas" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Atlas</a>
-                  <a href="/markets/who-owns-texas-toll-roads" className="border-b border-ink/18 pb-2 transition-colors hover:border-ink hover:text-ink">Texas Toll Roads</a>
+                <nav aria-label="Featured proof" className="grid self-end border border-ink bg-ink px-4 py-3 uppercase text-canvas md:px-5 md:py-4">
+                  <span className="mb-1 flex items-center justify-between text-[9px] tracking-[0.28em] text-canvas/66">
+                    <span>Selected proof</span>
+                    <span aria-hidden="true" className="font-serif text-sm italic tracking-normal">03</span>
+                  </span>
+                  {homeProofItems.map((item) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      className="group grid min-h-12 grid-cols-[4.75rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-canvas/18 transition-colors hover:border-canvas/44 hover:bg-canvas/[0.035] md:grid-cols-[5.25rem_minmax(0,1fr)_auto]"
+                    >
+                      <span className="text-[8px] tracking-[0.22em] text-canvas/66">{item.type}</span>
+                      <span className="text-[10px] font-medium tracking-[0.15em] text-canvas/90">{item.title}</span>
+                      <span aria-hidden="true" className="text-xs transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+                    </a>
+                  ))}
                 </nav>
               </div>
             </div>
@@ -595,7 +583,7 @@ function HomePage() {
               </div>
               <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
                 <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
-                  I build crawl, evidence, and research systems that preserve how a conclusion was produced. The work spans raw and rendered page data, React and TypeScript interfaces, Python and SQLite workflows, structured exports, analytics, and source-led research.
+                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and an <a href="/research/technical-seo" className="border-b border-ink/24 hover:border-ink">evidence-backed technical SEO diagnostic library</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
                 </p>
               </ScrollReveal>
             </div>
@@ -649,7 +637,7 @@ function HomePage() {
              <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
                <div className="flex flex-col gap-1 text-[10px]">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
-                  <span className="opacity-60">Technical SEO Audit Console</span>
+                  <span className="opacity-60">Technical SEO Audit Software</span>
                </div>
                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT</span>
@@ -811,7 +799,7 @@ function HomePage() {
                 </ScrollReveal>
                 <ScrollReveal delay={0.6}>
                   <MagneticButton className="mt-16">
-                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Void Agency Technical SEO Method</span>
+                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Technical SEO Audit Services</span>
                   </MagneticButton>
                 </ScrollReveal>
               </div>
@@ -1272,7 +1260,7 @@ function HomePage() {
                   ))}
                             </div>
                   <div className="pt-32 w-full flex justify-start md:justify-end">
-                    <a href="#selected-works" id="discipline-view-work-link" className="text-ink text-[10px] font-sans tracking-widest uppercase border-b border-ink/30 pb-2 inline-block hover:border-ink transition-colors">View Work ↘</a>
+                    <a href="/work" id="discipline-view-work-link" className="inline-flex min-h-11 items-center border-b border-ink/30 text-[10px] font-sans uppercase tracking-widest text-ink transition-colors hover:border-ink">Explore all work ↗</a>
                   </div>
                </div>
             </div>
@@ -1283,45 +1271,44 @@ function HomePage() {
            <KineticTypography />
         </section>
 
-        {/* FOOTER */}
+        {/* CONTACT */}
         <footer id="contact" className="relative w-full overflow-hidden border-t border-ink/14 bg-canvas text-ink selection:bg-ink selection:text-canvas">
-          <div className="mx-auto w-full max-w-[1800px] px-4 py-24 md:px-16 md:py-36">
-            <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-8">
-              <div className="md:col-span-5">
-                <ScrollReveal blur={false}>
-                  <span className="block text-[10px] uppercase tracking-[0.3em] text-ink/56">Contact / Direct</span>
-                  <h2 className="mt-10 max-w-[7ch] font-serif text-[4rem] font-light leading-[0.84] tracking-normal sm:text-7xl md:text-[5.5rem] lg:text-[6.3rem]">
-                    Send the <span className="italic">brief.</span>
-                  </h2>
-                  <p className="mt-10 max-w-sm text-sm leading-[1.8] text-ink/64 md:text-base">
-                    A URL, the decision in front of you, and the evidence that feels incomplete is enough to start.
-                  </p>
-                  <a href="mailto:sulayman.bowles@gmail.com" id="footer-link-email" className="mt-8 inline-block border-b border-ink/24 pb-1 text-[10px] uppercase tracking-[0.24em] text-ink/68 transition-colors hover:border-ink hover:text-ink">
-                    sulayman.bowles@gmail.com
-                  </a>
-                </ScrollReveal>
-              </div>
+          <div className="mx-auto grid min-h-[62vh] w-full max-w-[1800px] content-between px-4 py-16 md:px-16 md:py-24">
+            <a
+              href="mailto:sulayman.bowles@gmail.com"
+              id="footer-link-email"
+              className="group inline-flex w-fit max-w-full items-end gap-4 font-serif text-6xl italic leading-[0.8] tracking-normal transition-colors duration-200 hover:text-ink/58 motion-reduce:transition-none sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[11rem]"
+            >
+              <span>Email.</span>
+              <span aria-hidden="true" className="mb-1 text-[0.28em] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none">↗</span>
+              <span className="sr-only">sulayman.bowles@gmail.com</span>
+            </a>
 
-              <ScrollReveal delay={0.12} yOffset={12} blur={false} className="md:col-span-7 md:pl-8">
-                <AuditIntakeForm variant="editorial" tone="light" submitLabel="SEND BRIEF" />
-              </ScrollReveal>
-            </div>
+            <nav className="mt-16 grid border-y border-ink/14 sm:grid-cols-3" aria-label="Contact links">
+              {[
+                ['LinkedIn', PROFILE_FACTS.canonicalLinks.linkedin],
+                ['Résumé', '/resume'],
+                ['GitHub', PROFILE_FACTS.canonicalLinks.github],
+              ].map(([label, href], index) => {
+                const external = href.startsWith('http');
 
-            <div className="mt-24 flex flex-col gap-10 border-t border-ink/14 pt-8 md:mt-32 md:flex-row md:items-end md:justify-between">
-              <Suspense fallback={null}><LocalTime /></Suspense>
-              <nav className="flex max-w-4xl flex-wrap gap-x-7 gap-y-4 text-[10px] uppercase tracking-[0.2em] text-ink/62 md:justify-end" aria-label="Footer navigation">
-                {[...primaryNav, ...utilityNav].map((item) => (
+                return (
                   <a
-                    key={item.href}
-                    href={item.href}
-                    id={navItemId('home-footer-link', item)}
-                    className="border-b border-transparent pb-1 transition-colors hover:border-ink hover:text-ink"
+                    key={href}
+                    href={href}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noreferrer' : undefined}
+                    className="group flex min-h-20 items-center justify-between gap-5 border-b border-ink/14 px-4 text-[10px] uppercase tracking-[0.24em] text-ink/64 transition-colors duration-200 last:border-b-0 hover:bg-ink hover:text-canvas motion-reduce:transition-none sm:border-b-0 sm:border-r sm:last:border-r-0"
                   >
-                    {navLabel(item)}
+                    <span className="flex items-center gap-4">
+                      <span className="font-serif text-sm italic tracking-normal text-current/45">{String(index + 1).padStart(2, '0')}</span>
+                      {label}
+                    </span>
+                    <span aria-hidden="true" className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none">↗</span>
                   </a>
-                ))}
-              </nav>
-            </div>
+                );
+              })}
+            </nav>
           </div>
         </footer>
       </main>

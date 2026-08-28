@@ -12,7 +12,7 @@ export default function NotFoundPage() {
     <main id="top" className="site-page site-page-light relative min-h-screen overflow-hidden bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
       <WireframeGrid tone="light" className="pointer-events-none absolute inset-0 z-0 opacity-35" />
       <PageTechnicalChrome tone="light" />
-      <InternalHeader activePath="" tone="light" />
+      <InternalHeader activePath="/404" tone="light" />
 
       <section className="relative z-10 mx-auto grid min-h-[72vh] max-w-[1480px] content-center px-4 py-20 md:px-8 xl:px-10">
         <p className="text-[10px] uppercase tracking-[0.32em] text-ink/60">404 / Route not found</p>

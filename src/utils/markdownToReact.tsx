@@ -4,7 +4,28 @@ function isSafeHref(value: string) {
   return value.startsWith('https://') || value.startsWith('http://') || value.startsWith('/') || value.startsWith('#');
 }
 
-function renderInline(value: string, keyPrefix: string): ReactNode[] {
+function fragmentId(value: string) {
+  return value.trim().replace(/[^a-zA-Z0-9_-]+/g, '-').replace(/^-|-$/g, '') || 'note';
+}
+
+function plainMarkdownLabel(value: string) {
+  return value
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[*_`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+type NoteReferenceState = {
+  counts: Map<string, number>;
+  references: Map<string, string[]>;
+};
+
+function renderInline(
+  value: string,
+  keyPrefix: string,
+  noteReferenceState: NoteReferenceState,
+): ReactNode[] {
   const nodes: ReactNode[] = [];
   let cursor = 0;
   let tokenIndex = 0;
@@ -38,7 +59,11 @@ function renderInline(value: string, keyPrefix: string): ReactNode[] {
     if (value.startsWith('**', start)) {
       const end = value.indexOf('**', start + 2);
       if (end !== -1) {
-        nodes.push(<strong key={key}>{renderInline(value.slice(start + 2, end), `${key}-strong`)}</strong>);
+        nodes.push(
+          <strong key={key}>
+            {renderInline(value.slice(start + 2, end), `${key}-strong`, noteReferenceState)}
+          </strong>,
+        );
         cursor = end + 2;
         continue;
       }
@@ -47,13 +72,41 @@ function renderInline(value: string, keyPrefix: string): ReactNode[] {
     if (value[start] === '*') {
       const end = value.indexOf('*', start + 1);
       if (end !== -1) {
-        nodes.push(<em key={key}>{renderInline(value.slice(start + 1, end), `${key}-em`)}</em>);
+        nodes.push(
+          <em key={key}>
+            {renderInline(value.slice(start + 1, end), `${key}-em`, noteReferenceState)}
+          </em>,
+        );
         cursor = end + 1;
         continue;
       }
     }
 
     if (value[start] === '[') {
+      if (value[start + 1] === '^') {
+        const noteEnd = value.indexOf(']', start + 2);
+        if (noteEnd !== -1) {
+          const id = value.slice(start + 2, noteEnd);
+          const occurrence = noteReferenceState.counts.get(id) ?? 0;
+          const safeId = fragmentId(id);
+          const refId = occurrence === 0
+            ? `note-ref-${safeId}`
+            : `note-ref-${safeId}-${occurrence + 1}`;
+          noteReferenceState.counts.set(id, occurrence + 1);
+          noteReferenceState.references.set(id, [
+            ...(noteReferenceState.references.get(id) ?? []),
+            refId,
+          ]);
+          nodes.push(
+            <sup key={key} className="article-note-ref">
+              <a href={`#note-${safeId}`} id={refId} aria-label={`Note ${id}`}>{id}</a>
+            </sup>,
+          );
+          cursor = noteEnd + 1;
+          continue;
+        }
+      }
+
       const labelEnd = value.indexOf(']', start + 1);
       const hrefStart = labelEnd === -1 ? -1 : labelEnd + 1;
       if (labelEnd !== -1 && value[hrefStart] === '(') {
@@ -62,11 +115,28 @@ function renderInline(value: string, keyPrefix: string): ReactNode[] {
           const label = value.slice(start + 1, labelEnd);
           const href = value.slice(hrefStart + 1, hrefEnd);
           if (isSafeHref(href)) {
-            const children = renderInline(label, `${key}-link`);
+            const children = renderInline(label, `${key}-link`, noteReferenceState);
+            const isExternal = href.startsWith('https://') || href.startsWith('http://');
             nodes.push(
               /^S\d+$/.test(label) && href.startsWith('#source-')
-                ? <sup key={key} className="article-citation"><a href={href} aria-label={`Source ${label.slice(1)}`}>{children}</a></sup>
-                : <a key={key} href={href}>{children}</a>,
+                ? (
+                    <sup key={key} className="article-citation">
+                      <a href={href} aria-label={`Source ${label} in source ledger`}>{children}</a>
+                    </sup>
+                  )
+                : (
+                    <a
+                      key={key}
+                      href={href}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noreferrer' : undefined}
+                      aria-label={isExternal
+                        ? `${plainMarkdownLabel(label)} (external link, opens in a new tab)`
+                        : undefined}
+                    >
+                      {children}
+                    </a>
+                  ),
             );
             cursor = hrefEnd + 1;
             continue;
@@ -92,6 +162,10 @@ function tableCells(line: string) {
 
 export function markdownToReact(markdown: string): ReactNode[] {
   const notes = new Map<string, string>();
+  const noteReferenceState: NoteReferenceState = {
+    counts: new Map<string, number>(),
+    references: new Map<string, string[]>(),
+  };
   const lines = markdown.replace(/\r\n/g, '\n').split('\n').filter((line) => {
     const match = line.match(/^\[\^([^\]]+)\]:\s*(.+)$/);
     if (!match) return true;
@@ -130,7 +204,7 @@ export function markdownToReact(markdown: string): ReactNode[] {
     const heading = line.match(/^(#{2,4})\s+(.+)$/);
     if (heading) {
       const id = heading[2].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-      const children = renderInline(heading[2], `${key}-heading`);
+      const children = renderInline(heading[2], `${key}-heading`, noteReferenceState);
       if (heading[1].length === 2) blocks.push(<h2 key={key} id={id}>{children}</h2>);
       if (heading[1].length === 3) blocks.push(<h3 key={key} id={id}>{children}</h3>);
       if (heading[1].length === 4) blocks.push(<h4 key={key} id={id}>{children}</h4>);
@@ -147,10 +221,57 @@ export function markdownToReact(markdown: string): ReactNode[] {
         index += 1;
       }
       blocks.push(
-        <div key={key} className="article-table-wrap">
-          <table>
-            <thead><tr>{headers.map((cell, cellIndex) => <th key={`${key}-head-${cellIndex}`}>{renderInline(cell, `${key}-head-${cellIndex}`)}</th>)}</tr></thead>
-            <tbody>{rows.map((row, rowIndex) => <tr key={`${key}-row-${rowIndex}`}>{row.map((cell, cellIndex) => <td key={`${key}-cell-${rowIndex}-${cellIndex}`}>{renderInline(cell, `${key}-cell-${rowIndex}-${cellIndex}`)}</td>)}</tr>)}</tbody>
+        <div
+          key={key}
+          className="article-table-wrap"
+          role="region"
+          aria-label={`Data table with fields: ${headers.join(', ')}. Scroll horizontally to inspect every field.`}
+          tabIndex={0}
+        >
+          <table data-responsive-table="stacked" aria-label={`Data table with fields: ${headers.join(', ')}`}>
+            <thead>
+              <tr>
+                {headers.map((cell, cellIndex) => (
+                  <th key={`${key}-head-${cellIndex}`} scope="col">
+                    {renderInline(cell, `${key}-head-${cellIndex}`, noteReferenceState)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, rowIndex) => (
+                <tr key={`${key}-row-${rowIndex}`}>
+                  {row.map((cell, cellIndex) => (
+                    cellIndex === 0
+                      ? (
+                          <th
+                            key={`${key}-cell-${rowIndex}-${cellIndex}`}
+                            scope="row"
+                            data-label={headers[cellIndex] ?? 'Record'}
+                          >
+                            {renderInline(
+                              cell,
+                              `${key}-cell-${rowIndex}-${cellIndex}`,
+                              noteReferenceState,
+                            )}
+                          </th>
+                        )
+                      : (
+                          <td
+                            key={`${key}-cell-${rowIndex}-${cellIndex}`}
+                            data-label={headers[cellIndex] ?? `Field ${cellIndex + 1}`}
+                          >
+                            {renderInline(
+                              cell,
+                              `${key}-cell-${rowIndex}-${cellIndex}`,
+                              noteReferenceState,
+                            )}
+                          </td>
+                        )
+                  ))}
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>,
       );
@@ -163,7 +284,15 @@ export function markdownToReact(markdown: string): ReactNode[] {
         quote.push(lines[index].replace(/^>\s?/, ''));
         index += 1;
       }
-      blocks.push(<blockquote key={key}>{quote.map((item, quoteIndex) => <p key={`${key}-quote-${quoteIndex}`}>{renderInline(item, `${key}-quote-${quoteIndex}`)}</p>)}</blockquote>);
+      blocks.push(
+        <blockquote key={key}>
+          {quote.map((item, quoteIndex) => (
+            <p key={`${key}-quote-${quoteIndex}`}>
+              {renderInline(item, `${key}-quote-${quoteIndex}`, noteReferenceState)}
+            </p>
+          ))}
+        </blockquote>,
+      );
       continue;
     }
 
@@ -178,7 +307,11 @@ export function markdownToReact(markdown: string): ReactNode[] {
         items.push(item[1]);
         index += 1;
       }
-      const listItems = items.map((item, itemIndex) => <li key={`${key}-item-${itemIndex}`}>{renderInline(item, `${key}-item-${itemIndex}`)}</li>);
+      const listItems = items.map((item, itemIndex) => (
+        <li key={`${key}-item-${itemIndex}`}>
+          {renderInline(item, `${key}-item-${itemIndex}`, noteReferenceState)}
+        </li>
+      ));
       blocks.push(ordered ? <ol key={key}>{listItems}</ol> : <ul key={key}>{listItems}</ul>);
       continue;
     }
@@ -197,18 +330,40 @@ export function markdownToReact(markdown: string): ReactNode[] {
       paragraph.push(lines[index].trim());
       index += 1;
     }
-    blocks.push(<p key={key}>{renderInline(paragraph.join(' '), `${key}-paragraph`)}</p>);
+    blocks.push(
+      <p key={key}>
+        {renderInline(paragraph.join(' '), `${key}-paragraph`, noteReferenceState)}
+      </p>,
+    );
   }
 
   if (notes.size) {
     blocks.push(
-      <ol key="markdown-notes" className="article-notes">
-        {Array.from(notes, ([id, note]) => (
-          <li key={id} id={`note-${id}`}>
-            {renderInline(note, `note-${id}`)}{' '}
-            <a href={`#note-ref-${id}`} aria-label={`Back to reference ${id}`}>↩</a>
-          </li>
-        ))}
+      <ol key="markdown-notes" className="article-notes" aria-label="Article notes">
+        {Array.from(notes, ([id, note]) => {
+          const noteContent = renderInline(note, `note-${id}`, noteReferenceState);
+          const references = noteReferenceState.references.get(id) ?? [];
+
+          return (
+            <li key={id} id={`note-${fragmentId(id)}`}>
+              {noteContent}
+              {references.length ? (
+                <span className="article-note-backlinks">
+                  {references.map((reference, index) => (
+                    <a
+                      key={reference}
+                      className="article-note-backlink"
+                      href={`#${reference}`}
+                      aria-label={`Back to reference ${index + 1} for note ${id}`}
+                    >
+                      {references.length === 1 ? '↩' : `↩${index + 1}`}
+                    </a>
+                  ))}
+                </span>
+              ) : null}
+            </li>
+          );
+        })}
       </ol>,
     );
   }

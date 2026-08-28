@@ -1,0 +1,11 @@
+claim_id,claim,evidence_basis,confidence
+C001,"The bounded cohort contains 25 large sponsor-led software take-private transactions announced from 2020 through 2022.","Cohort construction and row-level dossier",High
+C002,"Company-reported headline transaction values sum to $171.2 billion.","Row-level headline value field; mixed company definitions",High for arithmetic; limited comparability
+C003,"No deal qualifies as a clean sponsor realization under the control-based definition at the evidence cutoff.","Current-control evidence for every row",High within stated definition
+C004,"An IPO is treated as a liquidity route, not a realization, when the sponsor retains voting control.","Control methodology; SailPoint sensitivity case",High
+C005,"Creditor ownership is classified separately from sponsor realization.","Ownership-event taxonomy",High
+C006,"The public record cannot establish cohort MOIC, IRR, or impairment.","Missing sponsor cash-flow and fund-mark data",High
+C007,"Transaction value is not sponsor equity invested.","Value-basis methodology",High
+C008,"Partial sales, dividends, refinancings, and continuation transactions do not by themselves prove gain or loss.","Return-evidence boundary",High
+C009,"Most deals were three to five years into ownership at the cutoff.","Announcement and close dates versus evidence cutoff",High
+C010,"The result should be read as an exit-inventory audit, not a verdict on the vintage.","Counter-case and holding-period analysis",Analytical conclusion

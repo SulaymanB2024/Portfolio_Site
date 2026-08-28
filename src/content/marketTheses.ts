@@ -1,5 +1,6 @@
 import type { InvestmentMemo } from './articleModels';
 import {
+  TEXAS_TOLL_ARTICLE_CONCLUSION,
   TEXAS_TOLL_ARTICLE_DATE,
   TEXAS_TOLL_ARTICLE_DESCRIPTION,
   TEXAS_TOLL_ARTICLE_IMAGE,
@@ -24,11 +25,21 @@ export const INVESTMENT_MEMOS: InvestmentMemo[] = [
     subtitle: 'Three retired market questions, preserved as one methodology record for networks, compute infrastructure, and monetary systems.',
     seoDescription:
       'Noindexed methodology archive by Sulayman Bowles covering evidence requirements for network, compute-infrastructure, and monetary-system research.',
-    image: '/og-default.png',
+    artwork: {
+      kind: 'study',
+      variant: 'triptych',
+      label: 'Archive methodology / triptych study',
+      note: 'An intentional three-part study of network, compute, and monetary research methods.',
+    },
     date: '2026.04.18',
     dateModified: '2026.07.16',
     readTime: '12 MIN',
     author: 'SULAYMAN BOWLES',
+    conclusion: {
+      title: 'Archive the question, not a recommendation',
+      content:
+        'The surviving value of these sketches is their evidence contract: network persistence, compute utilization, or monetary transmission would each need current data, explicit units, and falsifiable links before supporting an allocation. None is presented here as a live thesis.',
+    },
     conviction: 'ARCHIVE',
     horizon: 'HISTORICAL',
     allocation: 'NOT ADVICE',
@@ -110,11 +121,19 @@ export const INVESTMENT_MEMOS: InvestmentMemo[] = [
     seoTitle: TEXAS_TOLL_ARTICLE_SEO_TITLE,
     subtitle: 'The state usually owns the pavement. Contracts decide who controls toll revenue, who gets paid first, and who absorbs the loss.',
     seoDescription: TEXAS_TOLL_ARTICLE_DESCRIPTION,
-    image: TEXAS_TOLL_ARTICLE_IMAGE,
+    artwork: {
+      kind: 'image',
+      heroSrc: TEXAS_TOLL_ARTICLE_IMAGE,
+      socialSrc: '/images/research/texas-toll-roads-social.jpg',
+      alt: 'Monochrome editorial artwork representing Texas toll-road infrastructure and layered ownership.',
+      label: 'Ownership map / 01',
+      caption: 'Public pavement, contractual rights, debt claims, and residual cash flow.',
+    },
     date: TEXAS_TOLL_ARTICLE_DATE,
     dateModified: TEXAS_TOLL_ARTICLE_UPDATED,
     readTime: TEXAS_TOLL_ARTICLE_READ_TIME,
     author: 'SULAYMAN BOWLES',
+    conclusion: TEXAS_TOLL_ARTICLE_CONCLUSION,
     conviction: 'SOURCE-LED',
     horizon: '2026 OWNERSHIP MAP',
     allocation: 'EDUCATIONAL RESEARCH',

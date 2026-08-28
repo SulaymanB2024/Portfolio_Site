@@ -1,22 +1,20 @@
-import { Fragment, useEffect, useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 
 import {
-  ArticleBody,
-  ArticleCallout,
-  ArticleEndnote,
-  ArticleHero,
-  ArticleMetricStrip,
-  ArticlePage,
+  ArticleReader,
   ArticleSectionHeader,
+  createArticleNavigation,
+  getArticleNavigationIndex,
   type ArticleNavItem,
+  type ArticleReaderConfig,
 } from '../components/ArticleLayout';
 import {
+  TEXAS_TOLL_ARTICLE_CONCLUSION,
   TEXAS_TOLL_ARTICLE_DATE,
   TEXAS_TOLL_ARTICLE_DESCRIPTION,
   TEXAS_TOLL_ARTICLE_DISPLAY_TITLE,
   TEXAS_TOLL_ARTICLE_FACT_GAPS,
   TEXAS_TOLL_ARTICLE_FAQS,
-  TEXAS_TOLL_ARTICLE_IMAGE,
   TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN,
   TEXAS_TOLL_ARTICLE_READ_TIME,
   TEXAS_TOLL_ARTICLE_SECTIONS,
@@ -25,20 +23,19 @@ import {
   TEXAS_TOLL_ARTICLE_TABLES,
   TEXAS_TOLL_ARTICLE_TITLE,
   TEXAS_TOLL_ARTICLE_UPDATED,
-  TEXAS_TOLL_ARTICLE_WORD_COUNT,
   type TexasTollArticleTable,
 } from '../content/texasTollRoadArticle';
+import {
+  TEXAS_TOLL_DIRECT_ANSWER,
+  TEXAS_TOLL_OWNERSHIP_CSV_PATH,
+  TEXAS_TOLL_OWNERSHIP_ROWS,
+} from '../content/texasTollRoadOwnership';
 import { getSeoRoute } from '../seo/routes';
 import { markdownToReact } from '../utils/markdownToReact';
 import { useSEO } from '../utils/seo';
-import { splitMarkdownLead } from '../utils/splitMarkdownLead';
 
 const ROUTE = getSeoRoute(`/markets/${TEXAS_TOLL_ARTICLE_SLUG}`)!;
 const TABLES_BY_ID = new Map(TEXAS_TOLL_ARTICLE_TABLES.map((table) => [table.id, table]));
-const {
-  lead: TEXAS_TOLL_ARTICLE_OPENING,
-  remainder: TEXAS_TOLL_ARTICLE_REMAINDER,
-} = splitMarkdownLead(TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN);
 
 const headlineMetrics = [
   { value: '872', label: 'open toll miles', note: 'TxDOT statewide inventory' },
@@ -99,6 +96,87 @@ function ArticleMarkdown({ markdown, className = '' }: ArticleMarkdownProps) {
   return <div className={`article-reader__prose ${className}`}>{content}</div>;
 }
 
+function TexasTollOwnershipLookup() {
+  return (
+    <div id="ownership-lookup" className="toll-ownership-lookup">
+      <p className="toll-ownership-lookup__answer">{TEXAS_TOLL_DIRECT_ANSWER}</p>
+      <p className="toll-ownership-lookup__guide">
+        Use this lookup to separate the owner of the pavement from the party operating the lanes,
+        claiming toll revenue, or issuing the bill.
+      </p>
+      <ul className="toll-ownership-lookup__concessions" aria-label="Four major private Texas toll-road concessions">
+        <li><strong>North Tarrant Express</strong><span>TxDOT pavement; private operating and revenue rights through 2061.</span></li>
+        <li><strong>LBJ Express</strong><span>TxDOT pavement; private operating and revenue rights through 2061.</span></li>
+        <li><strong>NTE 35W</strong><span>TxDOT pavement; private operating and revenue rights through 2061.</span></li>
+        <li><strong>SH 130 Segments 5–6</strong><span>TxDOT pavement; private operating and revenue rights through 2062.</span></li>
+      </ul>
+      <div
+        className="toll-ownership-lookup__scroll"
+        role="region"
+        aria-label="Texas toll-road ownership lookup. Scroll horizontally to inspect every field."
+        tabIndex={0}
+      >
+        <table data-responsive-table="stacked">
+          <thead>
+            <tr>
+              <th>Facility or system</th>
+              <th>Physical owner</th>
+              <th>Operator / revenue claimant</th>
+              <th>Private rights</th>
+              <th>Billing agency</th>
+            </tr>
+          </thead>
+          <tbody>
+            {TEXAS_TOLL_OWNERSHIP_ROWS.map((row) => (
+              <tr key={row.facility}>
+                <th scope="row" data-label="Facility or system">
+                  {row.facility}
+                  <span>{row.region}</span>
+                </th>
+                <td data-label="Physical owner">{row.physicalOwner}</td>
+                <td data-label="Operator / revenue claimant">
+                  <strong>{row.operator}</strong>
+                  <span>{row.tollRevenueClaimant}</span>
+                </td>
+                <td data-label="Private rights">
+                  {row.privateRightsStatus}
+                  <span>{row.term}</span>
+                </td>
+                <td data-label="Billing agency">
+                  {row.billingAgency}
+                  <span className="toll-ownership-lookup__sources">
+                    {row.sourceIds.map((sourceId, index) => (
+                      <Fragment key={sourceId}>
+                        {index > 0 ? ', ' : ''}
+                        <a href={`#source-${sourceId}`}>{sourceId.toUpperCase()}</a>
+                      </Fragment>
+                    ))}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="toll-ownership-lookup__actions">
+        <a href="#the-texas-ownership-map">Read the ownership and concession map</a>
+        <a href="#sh-130-the-danger-of-believing-the-traffic-model">Review the SH 130 concession case</a>
+        <a href="/markets">Explore the markets research archive</a>
+        <a href={TEXAS_TOLL_OWNERSHIP_CSV_PATH} download>
+          Download the complete ownership matrix (CSV)
+        </a>
+        <a
+          href="https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Compare TxDOT’s current operator inventory
+        </a>
+      </div>
+    </div>
+  );
+}
+
 function OwnershipStackDiagram() {
   return (
     <figure className="toll-ownership-stack" aria-labelledby="ownership-stack-caption">
@@ -153,8 +231,13 @@ function DfwOperatingSnapshot() {
         <span>2025 sponsor-reported snapshot</span>
         <span>USD / adjusted figures</span>
       </div>
-      <div className="toll-snapshot__scroll">
-        <table>
+      <div
+        className="toll-snapshot__scroll"
+        role="region"
+        aria-label="2025 sponsor-reported operating snapshot. Scroll horizontally to inspect every field."
+        tabIndex={0}
+      >
+        <table data-responsive-table="stacked">
           <thead>
             <tr>
               <th>Project</th>
@@ -168,12 +251,12 @@ function DfwOperatingSnapshot() {
           <tbody>
             {dfwMetrics.map((metric) => (
               <tr key={metric.project}>
-                <th scope="row">{metric.project}</th>
-                <td>{metric.revenue}</td>
-                <td>{metric.ebitda}</td>
-                <td>{metric.margin}</td>
-                <td>{metric.leverage}</td>
-                <td>{metric.revenuePerTransaction}</td>
+                <th scope="row" data-label="Project">{metric.project}</th>
+                <td data-label="Revenue">{metric.revenue}</td>
+                <td data-label="Adj. EBITDA">{metric.ebitda}</td>
+                <td data-label="Margin">{metric.margin}</td>
+                <td data-label="Net debt / EBITDA">{metric.leverage}</td>
+                <td data-label="Revenue / transaction">{metric.revenuePerTransaction}</td>
               </tr>
             ))}
           </tbody>
@@ -197,8 +280,13 @@ function ModelScreeningSnapshot() {
         <strong>Scenario, not price.</strong>
         <p>These ranges are simplified DCF outputs from the supplied workbook. They are not bids, carrying values, fairness opinions, or current security quotations.</p>
       </div>
-      <div className="toll-snapshot__scroll">
-        <table>
+      <div
+        className="toll-snapshot__scroll"
+        role="region"
+        aria-label="Analyst model screening snapshot. Scroll horizontally to inspect every field."
+        tabIndex={0}
+      >
+        <table data-responsive-table="stacked">
           <thead>
             <tr>
               <th>Project</th>
@@ -213,20 +301,20 @@ function ModelScreeningSnapshot() {
           <tbody>
             {screeningEstimates.map((estimate) => (
               <tr key={estimate.project}>
-                <th scope="row">{estimate.project}</th>
-                <td>{estimate.bearEv}</td>
-                <td>{estimate.baseEv}</td>
-                <td>{estimate.bullEv}</td>
-                <td>{estimate.baseEquity}</td>
-                <td>{estimate.discountRate}</td>
-                <td>{estimate.inputStatus}</td>
+                <th scope="row" data-label="Project">{estimate.project}</th>
+                <td data-label="Bear EV">{estimate.bearEv}</td>
+                <td data-label="Base EV">{estimate.baseEv}</td>
+                <td data-label="Bull EV">{estimate.bullEv}</td>
+                <td data-label="Base equity">{estimate.baseEquity}</td>
+                <td data-label="Base discount rate">{estimate.discountRate}</td>
+                <td data-label="Input status">{estimate.inputStatus}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <figcaption id="model-screen-caption">
-        The model holds EBITDA margins constant and simplifies maintenance, sharing, cash tax, and handback reserves. It subtracts modeled debt from enterprise value rather than building a levered debt-service schedule; it omits refinancing, swaps, working capital, tax basis, and explicit growth capex. SH 130’s $81.7M revenue, $68M EBITDA, and $450M debt are analyst estimates. Scenario width, rather than the base case, is the main conclusion.
+        The model holds EBITDA margins constant and simplifies maintenance, sharing, cash tax, and handback reserves. It subtracts modeled debt from enterprise value rather than building a levered debt-service schedule; it omits refinancing, swaps, working capital, tax basis, and explicit growth capex. SH 130’s $81.7M revenue, $68M EBITDA, and $450M debt are analyst estimates. Scenario width—not the base case—is the main conclusion.
       </figcaption>
     </figure>
   );
@@ -312,8 +400,13 @@ function Sh288BuyoutDiagram() {
 function ArticleTable({ table }: { table: TexasTollArticleTable }) {
   return (
     <figure className="toll-data-table" aria-labelledby={`${table.id}-caption`}>
-      <div className="toll-data-table__scroll">
-        <table>
+      <div
+        className="toll-data-table__scroll"
+        role="region"
+        aria-label={`${table.caption}. Scroll horizontally to inspect every field.`}
+        tabIndex={0}
+      >
+        <table data-responsive-table="stacked">
           <caption id={`${table.id}-caption`}>{table.caption}</caption>
           <thead>
             <tr>
@@ -324,8 +417,8 @@ function ArticleTable({ table }: { table: TexasTollArticleTable }) {
             {table.rows.map((row) => (
               <tr key={row.join('|')}>
                 {row.map((cell, index) => index === 0
-                  ? <th key={`${index}-${cell}`} scope="row">{cell}</th>
-                  : <td key={`${index}-${cell}`}>{cell}</td>)}
+                  ? <th key={`${index}-${cell}`} scope="row" data-label={table.columns[index] ?? 'Record'}>{cell}</th>
+                  : <td key={`${index}-${cell}`} data-label={table.columns[index] ?? `Field ${index + 1}`}>{cell}</td>)}
               </tr>
             ))}
           </tbody>
@@ -351,21 +444,75 @@ function InstrumentRoutes() {
   );
 }
 
+const tollEditorialPlates = {
+  ownership: {
+    src: '/images/research/toll-road-ownership-stack.jpg',
+    alt: 'Monochrome cutaway artwork showing a toll road above layered contracts, data, and capital claims.',
+    label: 'Editorial plate 01 / ownership stack',
+    caption: 'The pavement, operating rights, information systems, debt, and residual equity occupy different layers.',
+  },
+  cashFlow: {
+    src: '/images/research/toll-road-capital-layers.jpg',
+    alt: 'Monochrome artwork showing elevated highways above layered traffic data and capital flows.',
+    label: 'Editorial plate 02 / capital layers',
+    caption: 'Traffic becomes equity value only after collection, operating, lifecycle, financing, and public claims.',
+  },
+  access: {
+    src: '/images/research/toll-road-contract-paths.jpg',
+    alt: 'Monochrome artwork showing several paths branching from one central toll-road corridor.',
+    label: 'Editorial plate 03 / access paths',
+    caption: 'Bond, fund, listed-sponsor, and distressed-debt routes lead to different claims on the same infrastructure.',
+  },
+  risk: {
+    src: '/images/research/toll-road-risk-horizon.jpg',
+    alt: 'Monochrome artwork showing a highway running through rising and falling financial curves toward the horizon.',
+    label: 'Editorial plate 04 / duration and risk',
+    caption: 'Finite concession life, traffic variance, leverage, and discount rates reshape the value of a durable road.',
+  },
+} as const;
+
+function TollEditorialPlate({ plate }: { plate: (typeof tollEditorialPlates)[keyof typeof tollEditorialPlates] }) {
+  return (
+    <figure className="toll-editorial-plate">
+      <div className="toll-figure-label">
+        <span>{plate.label}</span>
+        <span>Generated editorial artwork / July 20, 2026</span>
+      </div>
+      <img src={plate.src} alt={plate.alt} loading="lazy" decoding="async" />
+      <figcaption>{plate.caption}</figcaption>
+    </figure>
+  );
+}
+
 function SectionVisual({ sectionId, position }: { sectionId: string; position: 'before' | 'after' }) {
-  if (sectionId === 'a-road-can-have-seven-different-owners' && position === 'after') return <OwnershipStackDiagram />;
+  if (sectionId === 'a-road-can-have-seven-different-owners' && position === 'after') {
+    return <><OwnershipStackDiagram /><TollEditorialPlate plate={tollEditorialPlates.ownership} /></>;
+  }
   if (sectionId === 'how-a-toll-road-turns-traffic-into-equity-cash' && position === 'before') return <CashFlowWaterfall />;
-  if (sectionId === 'how-a-toll-road-turns-traffic-into-equity-cash' && position === 'after') return <DfwOperatingSnapshot />;
+  if (sectionId === 'how-a-toll-road-turns-traffic-into-equity-cash' && position === 'after') {
+    return <><TollEditorialPlate plate={tollEditorialPlates.cashFlow} /><DfwOperatingSnapshot /></>;
+  }
   if (sectionId === 'sh-130-the-danger-of-believing-the-traffic-model' && position === 'before') return <Sh130RestructuringDiagram />;
   if (sectionId === 'sh-288-the-value-of-a-termination-clause' && position === 'before') return <Sh288BuyoutDiagram />;
-  if (sectionId === 'what-makes-a-texas-toll-road-valuable' && position === 'after') return <ModelScreeningSnapshot />;
-  if (sectionId === 'can-an-investor-actually-buy-one' && position === 'after') return <InstrumentRoutes />;
+  if (sectionId === 'what-makes-a-texas-toll-road-valuable' && position === 'after') {
+    return <><TollEditorialPlate plate={tollEditorialPlates.risk} /><ModelScreeningSnapshot /></>;
+  }
+  if (sectionId === 'can-an-investor-actually-buy-one' && position === 'after') {
+    return <><InstrumentRoutes /><TollEditorialPlate plate={tollEditorialPlates.access} /></>;
+  }
   return null;
 }
 
-function ArticleSection({ section }: { section: (typeof TEXAS_TOLL_ARTICLE_SECTIONS)[number] }) {
+function ArticleSection({
+  section,
+  index,
+}: {
+  section: (typeof TEXAS_TOLL_ARTICLE_SECTIONS)[number];
+  index: string;
+}) {
   return (
     <section id={section.id}>
-      <ArticleSectionHeader index={section.title.match(/^[IVX]+/)?.[0] ?? '→'}>
+      <ArticleSectionHeader index={index}>
         {section.title.replace(/^[IVX]+\.\s*/, '')}
       </ArticleSectionHeader>
       <SectionVisual sectionId={section.id} position="before" />
@@ -381,12 +528,12 @@ function ArticleSection({ section }: { section: (typeof TEXAS_TOLL_ARTICLE_SECTI
   );
 }
 
-function FactGapLedger() {
+function FactGapLedger({ index }: { index: string }) {
   return (
     <section id="what-remains-unknown">
-      <ArticleSectionHeader index="09">What remains unknown</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>What remains unknown</ArticleSectionHeader>
       <p className="toll-section-intro">
-        The public record is unusually rich, but it does not expose every cap-table right, distribution waterfall, operating subcontract, or current SH 130 financial statement. Those gaps are measurement limits, not evidence that the missing fact favors either side of the investment case.
+        The public record is unusually rich, but it does not expose every cap-table right, distribution waterfall, operating subcontract, or current SH 130 financial statement. Those gaps are measurement limits—not evidence that the missing fact favors either side of the investment case.
       </p>
       <div className="toll-gap-grid">
         {TEXAS_TOLL_ARTICLE_FACT_GAPS.map((group) => (
@@ -400,10 +547,10 @@ function FactGapLedger() {
   );
 }
 
-function FrequentlyAskedQuestions() {
+function FrequentlyAskedQuestions({ index }: { index: string }) {
   return (
     <section id="frequently-asked-questions">
-      <ArticleSectionHeader index="FAQ">Texas toll-road ownership, answered directly</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>Texas toll-road ownership, answered directly</ArticleSectionHeader>
       <div className="toll-faq-list">
         {TEXAS_TOLL_ARTICLE_FAQS.map((faq, index) => (
           <details key={faq.question} open={index === 0}>
@@ -416,10 +563,10 @@ function FrequentlyAskedQuestions() {
   );
 }
 
-function SourceLedger() {
+function SourceLedger({ index }: { index: string }) {
   return (
     <section id="source-ledger" className="toll-source-ledger">
-      <ArticleSectionHeader index="S">Source ledger</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>Source ledger</ArticleSectionHeader>
       <p className="toll-section-intro">
         Executed agreements, government records, audited statements, SEC-filed sponsor disclosures, and clearly labeled company or pension materials. Source dates and limitations are preserved in the text.
       </p>
@@ -432,7 +579,14 @@ function SourceLedger() {
               <p>{source.note}</p>
               <div className="toll-source-ledger__links">
                 {source.hrefs.map((href, index) => (
-                  <a key={href} href={href} target="_blank" rel="noreferrer">
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="article-reader__external-link"
+                    aria-label={`Open ${source.label}${source.hrefs.length > 1 ? ` source ${index + 1}` : ''} in a new tab`}
+                  >
                     {source.hrefs.length > 1 ? `Open source ${index + 1}` : 'Open source'}
                   </a>
                 ))}
@@ -448,124 +602,113 @@ function SourceLedger() {
 export default function TexasTollRoadArticlePage() {
   useSEO(ROUTE);
 
-  useEffect(() => {
-    const targetId = window.location.hash.slice(1);
-
-    if (!targetId) {
-      window.scrollTo(0, 0);
-      return undefined;
-    }
-
-    let frame = 0;
-    let attempts = 0;
-    const scrollToTarget = () => {
-      const target = document.querySelector<HTMLElement>(`#top #${CSS.escape(targetId)}`);
-      const lenis = window.lenis as unknown as {
-        resize?: () => void;
-        scrollTo: (target: HTMLElement, options: { immediate: boolean }) => void;
-      } | undefined;
-
-      if (target && lenis) {
-        lenis.resize?.();
-        lenis.scrollTo(target, { immediate: true });
-        return;
-      }
-
-      if (attempts < 4) {
-        attempts += 1;
-        frame = window.requestAnimationFrame(scrollToTarget);
-        return;
-      }
-
-      target?.scrollIntoView();
-    };
-
-    frame = window.requestAnimationFrame(scrollToTarget);
-
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
-
-  const railSections = TEXAS_TOLL_ARTICLE_SECTIONS.filter((section) => section.id !== 'closing');
-  const navItems: ArticleNavItem[] = [
-    { id: 'overview', label: 'Overview', index: '00' },
-    ...railSections.map((section, index) => ({
+  const navItems: ArticleNavItem[] = createArticleNavigation([
+    { kind: 'overview', id: 'overview', label: 'Overview' },
+    ...TEXAS_TOLL_ARTICLE_SECTIONS.map((section) => ({
+      kind: 'section' as const,
       id: section.id,
       label: section.title.replace(/^[IVX]+\.\s*/, ''),
-      index: String(index + 1).padStart(2, '0'),
     })),
-    { id: 'what-remains-unknown', label: 'What remains unknown', index: '09' },
-    { id: 'frequently-asked-questions', label: 'Direct answers', index: 'FAQ' },
-    { id: 'source-ledger', label: 'Source ledger', index: 'S' },
-  ];
+    {
+      kind: 'section',
+      id: 'what-remains-unknown',
+      label: 'What remains unknown',
+    },
+    {
+      kind: 'faq',
+      id: 'frequently-asked-questions',
+      label: 'Direct answers',
+    },
+    {
+      kind: 'source',
+      id: 'source-ledger',
+      label: 'Source ledger',
+    },
+  ]);
+  const config: ArticleReaderConfig = {
+    activePath: '/markets',
+    mode: 'reference',
+    className: 'texas-toll-article',
+    archive: {
+      href: '/markets',
+      label: 'Markets archive',
+    },
+    hero: {
+      eyebrow: 'Texas toll-road ownership / cash flow / risk',
+      title: TEXAS_TOLL_ARTICLE_TITLE,
+      displayTitle: TEXAS_TOLL_ARTICLE_DISPLAY_TITLE,
+      deck: TEXAS_TOLL_ARTICLE_DESCRIPTION,
+      image: {
+        src: '/images/research/texas-toll-roads-reader-hero.webp',
+        alt: 'Monochrome editorial artwork representing Texas toll-road infrastructure and layered ownership.',
+        label: 'Ownership map / 01',
+        caption: 'Public pavement, contractual rights, debt claims, and residual cash flow.',
+      },
+    },
+    publication: {
+      author: 'Sulayman Bowles',
+      subject: 'Infrastructure ownership',
+      published: {
+        dateTime: TEXAS_TOLL_ARTICLE_DATE.replaceAll('.', '-'),
+        value: 'July 11, 2026',
+      },
+      updated: {
+        dateTime: TEXAS_TOLL_ARTICLE_UPDATED.replaceAll('.', '-'),
+        value: 'July 23, 2026',
+      },
+      readTime: TEXAS_TOLL_ARTICLE_READ_TIME,
+      evidence: `${TEXAS_TOLL_ARTICLE_SOURCES.length} sources`,
+    },
+    metrics: headlineMetrics.map((metric) => ({
+      label: metric.label,
+      value: metric.value,
+      note: metric.note,
+    })),
+    callouts: [{
+      label: 'Ownership lookup',
+      title: 'Most Texas toll roads are public. Four major concessions are private.',
+      content: <TexasTollOwnershipLookup />,
+    }],
+    navigation: { items: navItems },
+    boundary: {
+      label: 'Evidence boundary',
+      content: 'Educational infrastructure research. Not investment, legal, tax, or municipal-bond advice.',
+    },
+    endnote: {
+      label: 'Decision frame',
+      title: TEXAS_TOLL_ARTICLE_CONCLUSION.title,
+      content: TEXAS_TOLL_ARTICLE_CONCLUSION.content,
+      note: 'Research cutoff: July 11, 2026. All dollar figures are nominal unless stated otherwise. Calculated figures are labeled in context.',
+      links: [
+        { href: '/markets', label: 'Markets archive' },
+        { href: '/research', label: 'Research archive' },
+        { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },
+        { href: '/about', label: 'About the author' },
+      ],
+    },
+  };
 
   return (
-    <ArticlePage activePath="/markets" variant="research" className="texas-toll-article">
-      <ArticleHero
-        backHref="/markets"
-        backLabel="Markets research"
-        eyebrow="Texas toll-road ownership / cash flow / risk"
-        title={(
-          <>
-            <span>Who Owns the Toll Roads</span>
-            <span>in Texas?</span>
-            <span>Ownership, Operators,</span>
-            <span>and Economics</span>
-          </>
-        )}
-        titleLabel={TEXAS_TOLL_ARTICLE_TITLE}
-        displayTitle={TEXAS_TOLL_ARTICLE_DISPLAY_TITLE}
-        deck={TEXAS_TOLL_ARTICLE_DESCRIPTION}
-        lead={<ArticleMarkdown markdown={TEXAS_TOLL_ARTICLE_OPENING} />}
-        image={{
-          src: TEXAS_TOLL_ARTICLE_IMAGE,
-          alt: 'A public-finance landscape of government buildings, contractual ledgers, market charts, and layered dollar imagery.',
-          label: 'Ownership map / 01',
-          caption: 'Public pavement, contractual rights, debt claims, and residual cash flow.',
-        }}
-        metadata={[
-          { label: 'Subject', value: 'Infrastructure ownership' },
-          { label: 'Published', value: <time dateTime={TEXAS_TOLL_ARTICLE_DATE.replaceAll('.', '-')}>July 11, 2026</time> },
-          { label: 'Updated', value: <time dateTime={TEXAS_TOLL_ARTICLE_UPDATED.replaceAll('.', '-')}>July 11, 2026</time> },
-          { label: 'Length', value: `${TEXAS_TOLL_ARTICLE_READ_TIME} / ${TEXAS_TOLL_ARTICLE_WORD_COUNT.toLocaleString()} words` },
-          { label: 'Method', value: 'Primary records + finite-life model' },
-        ]}
-      />
-
-      <ArticleMetricStrip items={headlineMetrics.map((metric) => ({ label: metric.label, value: metric.value, note: metric.note }))} />
-
-      <ArticleCallout label="Short answer" title="Texas toll roads do not have one owner.">
-        <p>
-          Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.
-        </p>
-      </ArticleCallout>
-
-      <ArticleBody
-        items={navItems}
-        variant="research"
-        boundary="Educational infrastructure research. Not investment, legal, tax, or municipal-bond advice."
-      >
+    <ArticleReader config={config}>
         <section id="overview">
-          <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
-          <ArticleMarkdown markdown={TEXAS_TOLL_ARTICLE_REMAINDER} />
+          <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'overview')}>
+            Overview
+          </ArticleSectionHeader>
+          <ArticleMarkdown markdown={TEXAS_TOLL_ARTICLE_LEDE_MARKDOWN} />
         </section>
         {TEXAS_TOLL_ARTICLE_SECTIONS.map((section) => (
-          <Fragment key={section.id}><ArticleSection section={section} /></Fragment>
+          <Fragment key={section.id}>
+            <ArticleSection
+              section={section}
+              index={getArticleNavigationIndex(navItems, section.id)}
+            />
+          </Fragment>
         ))}
-        <FactGapLedger />
-        <FrequentlyAskedQuestions />
-        <SourceLedger />
-
-        <ArticleEndnote
-          links={[
-            { href: '/markets', label: 'Markets research' },
-            { href: '/research', label: 'Research assets' },
-            { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },
-            { href: '/about', label: 'About the author' },
-          ]}
-        >
-          Research cutoff: July 11, 2026. All dollar figures are nominal unless stated otherwise. Calculated figures are labeled in context.
-        </ArticleEndnote>
-      </ArticleBody>
-    </ArticlePage>
+        <FactGapLedger index={getArticleNavigationIndex(navItems, 'what-remains-unknown')} />
+        <FrequentlyAskedQuestions
+          index={getArticleNavigationIndex(navItems, 'frequently-asked-questions')}
+        />
+        <SourceLedger index={getArticleNavigationIndex(navItems, 'source-ledger')} />
+    </ArticleReader>
   );
 }

@@ -67,8 +67,8 @@ function PhaseNote({
     <motion.article style={opacity ? { opacity } : undefined} className="grid min-w-0 grid-cols-[2.25rem_minmax(0,1fr)] gap-4">
       <p className="font-serif text-xl leading-none text-ink/70">{id}</p>
       <div className="min-w-0">
-        <h2 className="text-[10px] font-medium uppercase tracking-[0.34em] text-ink/72">{title}</h2>
-        <p className="mt-3 font-serif text-sm italic leading-5 text-ink/58">{copy}</p>
+        <h2 className="text-[10px] font-medium uppercase tracking-[0.34em] text-ink/82">{title}</h2>
+        <p className="mt-3 font-serif text-sm italic leading-5 text-ink/72">{copy}</p>
       </div>
     </motion.article>
   );
@@ -95,9 +95,9 @@ export default function AtlasCelestialParallaxPage() {
   const annotationY = useTransform(scrollYProgress, [0.18, 0.36], ['0.6rem', '0rem']);
   const methodOpacity = useTransform(scrollYProgress, [0.58, 0.78], [0, 1]);
   const methodY = useTransform(scrollYProgress, [0.58, 0.78], ['1.1rem', '0rem']);
-  const phaseOne = useTransform(scrollYProgress, [0, 0.2, 0.36], [1, 1, 0.34]);
-  const phaseTwo = useTransform(scrollYProgress, [0.18, 0.36, 0.58, 0.74], [0.34, 1, 1, 0.34]);
-  const phaseThree = useTransform(scrollYProgress, [0.58, 0.76], [0.34, 1]);
+  const phaseOne = useTransform(scrollYProgress, [0, 0.2, 0.36], [1, 1, 0.8]);
+  const phaseTwo = useTransform(scrollYProgress, [0.18, 0.36, 0.58, 0.74], [0.8, 1, 1, 0.8]);
+  const phaseThree = useTransform(scrollYProgress, [0.58, 0.76], [0.8, 1]);
 
   const artworkStyle = prefersReducedMotion
     ? { opacity: 0.2, x: '2%', y: '-18%', scale: 0.86 }
@@ -114,8 +114,15 @@ export default function AtlasCelestialParallaxPage() {
       <PageTechnicalChrome tone="light" />
       <InternalHeader activePath="/atlas" tone="light" variant="home" />
 
-      <section ref={stageRef} className="relative h-[330svh]">
-        <div className="sticky top-0 h-[100svh] overflow-hidden bg-canvas px-4 pt-28 md:px-8 md:pt-32 xl:px-10">
+      <section ref={stageRef} className={`relative ${prefersReducedMotion ? 'min-h-[100svh]' : 'h-[330svh]'}`}>
+        {!prefersReducedMotion && (
+          <span
+            id="celestial-methodology"
+            className="pointer-events-none absolute left-0 top-[62%] h-px w-px scroll-mt-28"
+            aria-hidden="true"
+          />
+        )}
+        <div className={`${prefersReducedMotion ? 'relative min-h-[100svh]' : 'sticky top-0 h-[100svh]'} overflow-hidden bg-canvas px-4 pt-28 md:px-8 md:pt-32 xl:px-10`}>
           <div className="pointer-events-none absolute inset-0 opacity-[0.42]" aria-hidden="true">
             <div className="absolute inset-x-0 top-0 h-px bg-ink/8" />
             <div className="absolute inset-x-0 bottom-0 h-px bg-ink/8" />
@@ -169,44 +176,45 @@ export default function AtlasCelestialParallaxPage() {
               ))}
             </motion.div>
 
-            <div className="relative z-10 grid h-full items-end px-5 pb-16 pt-12 md:px-10 md:pb-20 lg:px-14">
+            <div className="relative z-10 grid h-full items-end px-5 pb-60 pt-12 md:px-10 md:pb-20 lg:px-14">
               <motion.div
-                initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
-                animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                initial={false}
                 className="max-w-[23rem] md:max-w-[33rem]"
                 style={prefersReducedMotion ? undefined : { y: copyY, scale: copyScale, transformOrigin: 'left center' }}
               >
-                <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
-                  ATLAS ENGINE
+                <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.32em] text-ink/64">
+                  NOINDEX PROTOTYPE / MOTION STUDY / JULY 2026
                 </p>
                 <h1 className="font-serif text-[3rem] font-light leading-[0.9] tracking-normal text-ink md:text-[4.25rem] xl:text-[5.1rem]">
                   To see the{' '}
                   <br />
                   whole structure.
                 </h1>
-                <p className="mt-6 max-w-[25rem] text-sm leading-7 text-ink/54">
+                <p className="mt-6 max-w-[25rem] text-sm leading-7 text-ink/68">
                   Technical audits for websites, search, and systems.
                 </p>
-                <div className="mt-8 grid gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/48">
+                <p className="mt-3 max-w-[26rem] text-xs leading-5 text-ink/58">
+                  Visual prototype only. It does not describe a separate production Atlas capability.
+                </p>
+                <div className="mt-8 grid gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/68">
                   <a
                     href="#celestial-methodology"
-                    className="w-fit border-b border-ink/18 pb-1 font-serif text-sm italic normal-case tracking-normal text-ink/48 transition-colors hover:border-ink/45 hover:text-ink/72"
+                    className="w-fit border-b border-ink/24 pb-1 font-serif text-sm italic normal-case tracking-normal text-ink/68 transition-colors hover:border-ink/45 hover:text-ink"
                   >
                     View methodology
                   </a>
-                  <a href="/atlas/sample-crawl" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
+                  <a href="/atlas/sample-crawl" className="w-fit border-b border-ink/24 pb-1 transition-colors hover:border-ink/45 hover:text-ink">
                     See an Atlas sample crawl run
                   </a>
                   <a
                     href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-"
                     target="_blank"
                     rel="noreferrer"
-                    className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72"
+                    className="w-fit border-b border-ink/24 pb-1 transition-colors hover:border-ink/45 hover:text-ink"
                   >
                     View the GitHub repo for the audit CLI
                   </a>
-                  <a href="/contact" className="w-fit border-b border-ink/18 pb-1 transition-colors hover:border-ink/45 hover:text-ink/72">
+                  <a href="/contact" className="w-fit border-b border-ink/24 pb-1 transition-colors hover:border-ink/45 hover:text-ink">
                     Request an audit
                   </a>
                 </div>
@@ -214,7 +222,7 @@ export default function AtlasCelestialParallaxPage() {
             </div>
 
             <motion.div
-              id="celestial-methodology"
+              id={prefersReducedMotion ? 'celestial-methodology' : 'celestial-methodology-panel'}
               className="absolute inset-x-0 bottom-0 z-20 grid border-t border-ink/14 bg-canvas/82 text-ink backdrop-blur-md md:grid-cols-[minmax(14rem,0.8fr)_minmax(0,1.45fr)_4.5rem]"
               style={prefersReducedMotion ? { opacity: 1 } : { opacity: methodOpacity, y: methodY }}
             >
@@ -227,7 +235,7 @@ export default function AtlasCelestialParallaxPage() {
                 <div>
                   <h2 className="font-serif text-xl leading-none text-ink/82">Crawl</h2>
                   <p className="mt-3 max-w-xl text-xs leading-6 text-ink/54">
-                    We discover URLs the way modern systems do: rendering, sitemaps, logs, and links.
+                    The proposed workflow combines rendered discovery, sitemaps, logs, and links.
                   </p>
                 </div>
               </div>
@@ -247,20 +255,20 @@ export default function AtlasCelestialParallaxPage() {
         <div className="mx-auto grid w-full max-w-[1480px] gap-8 md:grid-cols-3 md:gap-12 lg:px-10">
           <PhaseNote
             id="01"
-            title="Hero at rest"
-            copy="The page at initial load, with the Atlas figure set back into the paper."
+            title="Source inventory"
+            copy="Begin with dated seeds and every discoverable path the public surface exposes."
             opacity={prefersReducedMotion ? undefined : phaseOne}
           />
           <PhaseNote
             id="02"
-            title="First scroll moment"
-            copy="Atlas and the celestial globe drift upward more slowly than the page. Query arcs begin to appear."
+            title="Evidence boundary"
+            copy="Separate source observations from rendered-state questions before scoring."
             opacity={prefersReducedMotion ? undefined : phaseTwo}
           />
           <PhaseNote
             id="03"
-            title="Further scroll"
-            copy="The globe becomes a retrieval map with connected annotations, then hands off to methodology."
+            title="Human review"
+            copy="Promote a recommendation only after the run, source, and claim still match."
             opacity={prefersReducedMotion ? undefined : phaseThree}
           />
         </div>

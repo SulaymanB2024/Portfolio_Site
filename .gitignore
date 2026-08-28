@@ -24,4 +24,5 @@ audits/
 *.webm
 *.mp4
 *.zip
+!public/research/capital-stack-diagrams.zip
 .vercel

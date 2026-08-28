@@ -1,16 +1,12 @@
-import { useEffect, type ReactNode } from 'react';
+import { useState } from 'react';
 
 import {
-  ArticleBody,
-  ArticleCallout,
-  ArticleEndnote,
-  ArticleHero,
-  ArticleMetricStrip,
-  ArticlePage,
+  ArticleReader,
   ArticleSectionHeader,
-  type ArticleImagePlaceholderVariant,
+  createArticleNavigation,
+  getArticleNavigationIndex,
   type ArticleNavItem,
-  type ArticleReaderVariant,
+  type ArticleReaderConfig,
 } from '../components/ArticleLayout';
 import { getArticleBySlug, getArticlePath } from '../content/articleRegistry';
 import {
@@ -19,105 +15,72 @@ import {
   type PublicArticle,
   type ResearchArticle,
 } from '../content/articleModels';
-import { RESEARCH_ARTICLES } from '../content/researchArticles';
-import { getSeoRoute } from '../seo/routes';
+import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
+import { getSeoRoute, NOT_FOUND_ROUTE } from '../seo/routes';
+import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
 import { useSEO } from '../utils/seo';
+import NotFoundPage from './NotFoundPage';
 
-const ARTICLE_PLACEHOLDERS: Record<string, {
-  label: string;
-  note: string;
-  variant: ArticleImagePlaceholderVariant;
-}> = {
-  'technical-seo-public-data-infrastructure': {
-    label: 'Systems essay / pipeline study',
-    note: 'Placeholder for the URL → crawl → render → structured record → evidence/export pipeline.',
-    variant: 'pipeline',
-  },
-  'canonical-identity-personal-seo': {
-    label: 'Operational playbook / identity graph',
-    note: 'Placeholder for the canonical person node, controlled profiles, and redirected stale records.',
-    variant: 'identity',
-  },
-  'archived-research-methodology': {
-    label: 'Archive methodology / triptych',
-    note: 'Temporary study for the network, compute, and monetary research methods.',
-    variant: 'triptych',
-  },
-};
+function ArticleCodeExample({
+  example,
+  index,
+}: {
+  key?: string;
+  example: NonNullable<ArticleSection['codeExamples']>[number];
+  index: number;
+}) {
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'failed'>('idle');
 
-const ARTICLE_VARIANTS: Record<string, ArticleReaderVariant> = {
-  'ai-search-crawler-policy': 'research',
-  'technical-seo-public-data-infrastructure': 'wide',
-  'canonical-identity-personal-seo': 'chapters',
-  'archived-research-methodology': 'research',
-};
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(example.code);
+      setCopyStatus('copied');
+      window.setTimeout(() => setCopyStatus('idle'), 1800);
+    } catch {
+      setCopyStatus('failed');
+    }
+  };
 
-const ARTICLE_CALLOUT_TITLES: Partial<Record<string, string>> = {
-  'ai-search-crawler-policy':
-    'The file is a policy switch, not a security boundary.',
-  'technical-seo-public-data-infrastructure':
-    'A finding is useful only when its lineage survives export.',
-  'canonical-identity-personal-seo':
-    'One maintained biography should own the present tense.',
-};
+  return (
+    <figure className="research-guide-code">
+      <figcaption>
+        <span>Configuration {String(index + 1).padStart(2, '0')}</span>
+        <strong>{example.title}</strong>
+        <p>{example.description}</p>
+        <button
+          type="button"
+          className="article-reader__code-copy"
+          onClick={copyCode}
+          aria-label={`Copy ${example.title} code`}
+        >
+          {copyStatus === 'copied' ? 'Copied' : copyStatus === 'failed' ? 'Copy failed' : 'Copy code'}
+        </button>
+        <span className="sr-only" aria-live="polite">
+          {copyStatus === 'copied'
+            ? `${example.title} copied to the clipboard.`
+            : copyStatus === 'failed'
+              ? `${example.title} could not be copied.`
+              : ''}
+        </span>
+      </figcaption>
+      <pre tabIndex={0}><code>{example.code}</code></pre>
+      <p className="research-guide-code__format">Review before release · {example.language}</p>
+    </figure>
+  );
+}
 
-const ARTICLE_TITLES: Partial<Record<string, ReactNode>> = {
-  'ai-search-crawler-policy': (
-    <>
-      <span>AI Crawler Robots.txt</span>
-      <span>Guide</span>
-      <span>GPTBot, OAI‑SearchBot,</span>
-      <span>ClaudeBot and PerplexityBot</span>
-    </>
-  ),
-  'technical-seo-public-data-infrastructure': (
-    <>
-      <span>Technical SEO as</span>
-      <span>Public Data Infrastructure</span>
-    </>
-  ),
-  'canonical-identity-personal-seo': (
-    <>
-      <span>Canonical Identity</span>
-      <span>Beats More Content</span>
-    </>
-  ),
-  'archived-research-methodology': (
-    <>
-      <span>Archived Market Research</span>
-      <span>Methodology</span>
-    </>
-  ),
-};
-
-const ARTICLE_IMAGE_COPY: Partial<Record<string, {
-  alt: string;
-  label: string;
-  caption: string;
-}>> = {
-  'ai-search-crawler-policy': {
-    alt: 'A vast monochrome compute landscape with illuminated traffic moving between rows of machine infrastructure.',
-    label: 'Access layer / 01',
-    caption: 'Named crawler policy sits at the edge of a much larger machine-fetching system.',
-  },
-  'technical-seo-public-data-infrastructure': {
-    alt: 'An archive of files and records assembled into transparent layers with visible links between each transformation.',
-    label: 'Record pipeline / 01',
-    caption: 'Public records become dependable when every transformation preserves its source and lineage.',
-  },
-  'canonical-identity-personal-seo': {
-    alt: 'A central person record connected to many surrounding profiles, documents, credentials, and identity signals.',
-    label: 'Identity graph / 01',
-    caption: 'One maintained person record reconciles the profiles and documents that describe it.',
-  },
-};
-
-function StructuredArticleSections({ sections }: { sections: ArticleSection[] }) {
+function StructuredArticleSections({
+  sections,
+  navigation,
+}: {
+  sections: ArticleSection[];
+  navigation: ArticleNavItem[];
+}) {
   return (
     <>
-      {sections.map((section, sectionIndex) => (
+      {sections.map((section) => (
         <section key={section.id} id={section.id}>
-          <ArticleSectionHeader index={String(sectionIndex + 1).padStart(2, '0')}>
+          <ArticleSectionHeader index={getArticleNavigationIndex(navigation, section.id)}>
             {section.title}
           </ArticleSectionHeader>
 
@@ -130,14 +93,37 @@ function StructuredArticleSections({ sections }: { sections: ArticleSection[] })
             ) : null}
           </div>
 
+          {section.figures?.map((figure) => (
+            <figure key={figure.src} className="toll-editorial-plate article-reader__figure">
+              <p className="toll-figure-label">{figure.label}</p>
+              <img
+                src={figure.src}
+                alt={figure.alt}
+                width={figure.width}
+                height={figure.height}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>{figure.caption}</figcaption>
+            </figure>
+          ))}
+
           {section.table ? (
             <figure className="toll-data-table research-guide-table">
               <figcaption className="article-reader__table-caption">
                 <span>{section.table.caption}</span>
-                <small>Scroll horizontally to inspect every field</small>
+                <small>
+                  <span className="md:hidden">Fields are grouped by record below</span>
+                  <span className="hidden md:inline">Scroll horizontally to inspect every field</span>
+                </small>
               </figcaption>
-              <div className="toll-data-table__scroll">
-                <table>
+              <div
+                className="toll-data-table__scroll"
+                role="region"
+                aria-label={`${section.table.caption}. Scroll horizontally to inspect every field.`}
+                tabIndex={0}
+              >
+                <table data-responsive-table="stacked">
                   <caption className="sr-only">{section.table.caption}</caption>
                   <thead>
                     <tr>
@@ -149,8 +135,8 @@ function StructuredArticleSections({ sections }: { sections: ArticleSection[] })
                       <tr key={row.join('|')}>
                         {row.map((cell, index) => (
                           index === 0
-                            ? <th key={`${index}-${cell}`} scope="row">{cell}</th>
-                            : <td key={`${index}-${cell}`} className={index === 1 ? 'research-guide-table__agent' : undefined}>{cell}</td>
+                            ? <th key={`${index}-${cell}`} scope="row" data-label={section.table?.columns[index] ?? 'Record'}>{cell}</th>
+                            : <td key={`${index}-${cell}`} data-label={section.table?.columns[index] ?? `Field ${index + 1}`} className={index === 1 ? 'research-guide-table__agent' : undefined}>{cell}</td>
                         ))}
                       </tr>
                     ))}
@@ -163,15 +149,7 @@ function StructuredArticleSections({ sections }: { sections: ArticleSection[] })
           {section.codeExamples?.length ? (
             <div className="research-guide-code-list">
               {section.codeExamples.map((example, exampleIndex) => (
-                <figure key={example.title} className="research-guide-code">
-                  <figcaption>
-                    <span>Configuration {String(exampleIndex + 1).padStart(2, '0')}</span>
-                    <strong>{example.title}</strong>
-                    <p>{example.description}</p>
-                  </figcaption>
-                  <pre tabIndex={0}><code>{example.code}</code></pre>
-                  <p className="research-guide-code__format">Copy-ready {example.language}</p>
-                </figure>
+                <ArticleCodeExample key={example.title} example={example} index={exampleIndex} />
               ))}
             </div>
           ) : null}
@@ -181,99 +159,122 @@ function StructuredArticleSections({ sections }: { sections: ArticleSection[] })
   );
 }
 
-function SourceLedger({ article }: { article: PublicArticle }) {
+function SourceLedger({
+  article,
+  navigation,
+}: {
+  article: PublicArticle;
+  navigation: ArticleNavItem[];
+}) {
   return (
     <section id="source-ledger" className="toll-source-ledger">
-      <ArticleSectionHeader index="S">Source ledger</ArticleSectionHeader>
+      <ArticleSectionHeader index={getArticleNavigationIndex(navigation, 'source-ledger')}>
+        Source ledger
+      </ArticleSectionHeader>
       <ol>
-        {article.sources.map((source, index) => (
-          <li key={source.href}>
-            <span className="toll-source-ledger__id">{String(index + 1).padStart(2, '0')}</span>
-            <div>
-              <strong>{source.label}</strong>
-              <p>{source.lastVerified ? `Last verified ${source.lastVerified}.` : 'Supporting reference.'}</p>
-              <div className="toll-source-ledger__links">
-                <a href={source.href} target="_blank" rel="noreferrer">Open source</a>
+        {article.sources.map((source, index) => {
+          const isExternal = /^https?:\/\//.test(source.href);
+
+          return (
+            <li key={source.href}>
+              <span className="toll-source-ledger__id">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <strong>{source.label}</strong>
+                <p>
+                  {source.lastVerified
+                    ? `Last verified ${formatPublicationDate(source.lastVerified)}.`
+                    : 'Verification date not recorded in this web edition.'}
+                </p>
+                <div className="toll-source-ledger__links">
+                  <a
+                    href={source.href}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noreferrer' : undefined}
+                    className={isExternal ? 'article-reader__external-link' : undefined}
+                    aria-label={`Open ${source.label}${isExternal ? ' in a new tab' : ''}`}
+                  >
+                    Open source
+                  </a>
+                </div>
               </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ol>
     </section>
   );
 }
 
-function articleNav(article: PublicArticle, sections: ArticleSection[] | undefined): ArticleNavItem[] {
-  if (sections?.length) {
-    return [
-      { id: 'overview', label: 'Overview', index: '00' },
-      ...sections.map((section, index) => ({
-        id: section.id,
-        label: section.title,
-        index: String(index + 1).padStart(2, '0'),
-      })),
-      ...(isInvestmentMemo(article) ? [{ id: 'decision-frame', label: 'Decision frame', index: 'D' }] : []),
-      ...(article.sources.length ? [{ id: 'source-ledger', label: 'Source ledger', index: 'S' }] : []),
-    ];
-  }
+function ArticleResources({
+  article,
+  navigation,
+}: {
+  article: PublicArticle;
+  navigation: ArticleNavItem[];
+}) {
+  if (!article.resources?.length) return null;
 
-  return [
-    { id: 'overview', label: 'Overview', index: '01' },
-    ...(isInvestmentMemo(article) ? [{ id: 'decision-frame', label: 'Decision frame', index: '02' }] : []),
-    ...(article.sources.length ? [{ id: 'source-ledger', label: 'Research sources', index: 'S' }] : []),
-  ];
+  return (
+    <section id="downloads" className="article-reader__resources">
+      <ArticleSectionHeader index={getArticleNavigationIndex(navigation, 'downloads')}>
+        Downloads
+      </ArticleSectionHeader>
+      <p className="article-reader__resources-intro">
+        These downloads contain the reports, datasets, models, or figures available for this article.
+      </p>
+      <ul>
+        {article.resources.map((resource) => (
+          <li key={resource.href}>
+            <a href={resource.href} download>
+              <span>{resource.format}</span>
+              <strong>{resource.label}</strong>
+              <small>{resource.description}</small>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function articleNav(article: PublicArticle, sections: ArticleSection[] | undefined): ArticleNavItem[] {
+  const faqSections = (sections ?? []).filter((section) => section.id.toLowerCase().includes('faq'));
+  const numberedSections = (sections ?? []).filter((section) => !section.id.toLowerCase().includes('faq'));
+
+  return createArticleNavigation([
+    { kind: 'overview', id: 'overview', label: 'Overview' },
+    ...numberedSections.map((section) => ({
+      kind: 'section' as const,
+      id: section.id,
+      label: section.title,
+    })),
+    ...(isInvestmentMemo(article)
+      ? [{ kind: 'section' as const, id: 'decision-frame', label: 'Decision frame' }]
+      : []),
+    ...(article.resources?.length
+      ? [{ kind: 'section' as const, id: 'downloads', label: 'Downloads' }]
+      : []),
+    ...faqSections.map((section) => ({
+      kind: 'faq' as const,
+      id: section.id,
+      label: section.title,
+    })),
+    ...(article.sources.length
+      ? [{ kind: 'source' as const, id: 'source-ledger', label: 'Source ledger' }]
+      : []),
+  ]);
 }
 
 function articleImage(article: PublicArticle) {
-  const copy = ARTICLE_IMAGE_COPY[article.slug];
-  const image = article.image !== '/og-default.png'
-    ? { src: article.image, alt: copy?.alt ?? `${article.title} editorial artwork.` }
-    : undefined;
+  if (article.artwork.kind !== 'image') return undefined;
 
-  return image
-    ? {
-        ...image,
-        label: copy?.label ?? `${article.category} / editorial plate`,
-        caption: copy?.caption ?? article.title,
-      }
-    : undefined;
-}
-
-function ArticleHeroBlock({
-  article,
-  backHref,
-  backLabel,
-}: {
-  article: PublicArticle;
-  backHref: string;
-  backLabel: string;
-}) {
-  const placeholder = ARTICLE_PLACEHOLDERS[article.slug] ?? {
-    label: `${article.category} / image study pending`,
-    note: 'Reserved for a page-specific editorial image.',
-    variant: 'default' as const,
+  return {
+    src: article.artwork.heroSrc,
+    alt: article.artwork.alt,
+    label: article.artwork.label,
+    caption: article.artwork.caption,
+    objectPosition: article.artwork.objectPosition,
   };
-
-  return (
-    <ArticleHero
-      backHref={backHref}
-      backLabel={backLabel}
-      eyebrow={`${article.category} / ${article.number}`}
-      title={ARTICLE_TITLES[article.slug] ?? article.title}
-      titleLabel={article.title}
-      deck={article.subtitle}
-      lead={<p>{article.content[0]}</p>}
-      image={articleImage(article)}
-      imagePlaceholder={placeholder}
-      metadata={[
-        { label: 'Author', value: article.author },
-        { label: 'Published', value: <time dateTime={article.date.replaceAll('.', '-')}>{article.date}</time> },
-        { label: 'Updated', value: <time dateTime={(article.dateModified ?? article.date).replaceAll('.', '-')}>{article.dateModified ?? article.date}</time> },
-        { label: 'Read time', value: article.readTime },
-        { label: 'Sources', value: String(article.sources.length).padStart(2, '0') },
-      ]}
-    />
-  );
 }
 
 function GenericArticle({
@@ -283,65 +284,153 @@ function GenericArticle({
 }) {
   const investmentMemo = isInvestmentMemo(article);
   const backHref = investmentMemo ? '/markets' : '/research';
-  const backLabel = investmentMemo ? 'Markets research' : 'Research archive';
+  const backLabel = investmentMemo ? 'Markets archive' : 'Research archive';
   const boundary = investmentMemo ? article.recommendationBoundary : article.evidenceBoundary;
+  const modifiedDate = article.dateModified ?? article.date;
+  const hasDistinctModifiedDate = normalizePublicationDate(modifiedDate) !== normalizePublicationDate(article.date);
   const metrics = article.metrics ?? [
     { label: 'Category', value: article.category },
-    { label: 'Updated', value: article.dateModified ?? article.date },
+    { label: hasDistinctModifiedDate ? 'Updated' : 'Published', value: formatPublicationDate(modifiedDate) },
     { label: 'Sources', value: String(article.sources.length) },
   ];
   const sections = article.sections;
-  const variant = ARTICLE_VARIANTS[article.slug] ?? (sections?.length ? 'research' : 'wide');
+  const numberedSections = sections?.filter((section) => !section.id.toLowerCase().includes('faq'));
+  const faqSections = sections?.filter((section) => section.id.toLowerCase().includes('faq'));
   const navItems = articleNav(article, sections);
+  const searchTarget = getArticleSearchTarget(getArticlePath(article));
+  const articlePath = getArticlePath(article);
+  const relatedLinks = searchTarget?.relatedPaths.map((path) => ({
+    href: path,
+    label: getArticleRelatedLinkLabel(articlePath, path),
+  })) ?? [];
+  const study = article.artwork.kind === 'study'
+    ? {
+        label: article.artwork.label,
+        note: article.artwork.note,
+        variant: article.artwork.variant,
+      }
+    : undefined;
+  const callouts: NonNullable<ArticleReaderConfig['callouts']> = [];
+
+  if (searchTarget) {
+    callouts.push({
+      label: 'Direct answer',
+      title: searchTarget.primaryQuery,
+      content: (
+        <>
+          <p>{searchTarget.directAnswer}</p>
+          <p><strong>Original artifact:</strong> {searchTarget.originalArtifact}</p>
+        </>
+      ),
+    });
+  }
+
+  if (article.thesis) {
+    callouts.push({
+      label: investmentMemo ? 'Thesis' : 'Key takeaway',
+      title: investmentMemo
+        ? 'The decision rests on explicit assumptions.'
+        : 'The useful claim is the one the evidence can support.',
+      content: <p>{article.thesis}</p>,
+    });
+  }
+
+  const config: ArticleReaderConfig = {
+    activePath: investmentMemo ? '/markets' : '/research',
+    mode: 'reference',
+    archive: { href: backHref, label: backLabel },
+    hero: {
+      eyebrow: `${article.category} / ${article.number}`,
+      title: article.title,
+      deck: article.subtitle,
+      image: articleImage(article),
+      imagePlaceholder: study,
+    },
+    publication: {
+      author: article.author,
+      subject: article.category,
+      published: {
+        dateTime: normalizePublicationDate(article.date),
+        value: formatPublicationDate(article.date),
+      },
+      updated: hasDistinctModifiedDate
+        ? {
+            dateTime: normalizePublicationDate(modifiedDate),
+            value: formatPublicationDate(modifiedDate),
+          }
+        : undefined,
+      readTime: article.readTime,
+      evidence: `${article.sources.length} public source ${article.sources.length === 1 ? 'record' : 'records'}`,
+    },
+    metrics: metrics.slice(0, 4).map((metric) => ({
+      label: metric.label,
+      value: metric.value,
+      note: metric.label === 'Sources' ? 'Public source records' : undefined,
+    })),
+    callouts,
+    navigation: { items: navItems },
+    boundary: boundary
+      ? {
+          label: investmentMemo ? 'Recommendation boundary' : 'Evidence boundary',
+          content: boundary,
+        }
+      : undefined,
+    endnote: {
+      label: investmentMemo ? 'Decision frame' : 'Conclusion',
+      title: article.conclusion.title,
+      content: article.conclusion.content,
+      note: (
+        <>
+          Research cutoff: {article.kind === 'research'
+            ? formatPublicationDate(article.lastVerified ?? modifiedDate)
+            : formatPublicationDate(modifiedDate)}.
+          {' '}Public evidence and provider behavior can change; verify current sources before acting.
+        </>
+      ),
+      links: investmentMemo
+        ? [
+            ...relatedLinks,
+            { href: backHref, label: backLabel },
+            { href: '/research', label: 'Technical SEO and AI systems research' },
+            { href: '/about', label: 'About Sulayman Bowles' },
+          ]
+        : article.cluster === 'financial-systems'
+          ? [
+              ...relatedLinks,
+              { href: '/research', label: 'Research archive' },
+              { href: '/markets', label: 'Markets archive' },
+              { href: '/about', label: 'About Sulayman Bowles' },
+            ]
+          : [
+              ...relatedLinks,
+              { href: '/research', label: 'Technical SEO research' },
+              { href: '/atlas', label: 'Atlas technical SEO audit software' },
+              { href: '/method', label: 'Technical SEO audit services' },
+              { href: '/about', label: 'About Sulayman Bowles' },
+            ],
+    },
+  };
 
   return (
-    <ArticlePage
-      activePath={investmentMemo ? '/markets' : '/research'}
-      variant={variant}
-      className={`article-${article.slug}`}
-    >
-      <ArticleHeroBlock article={article} backHref={backHref} backLabel={backLabel} />
-
-      <ArticleMetricStrip
-        items={metrics.slice(0, 4).map((metric) => ({
-          label: metric.label,
-          value: metric.value,
-          note: metric.label === 'Sources' ? 'Public source records' : undefined,
-        }))}
-      />
-
-      {article.thesis ? (
-        <ArticleCallout
-          label={investmentMemo ? 'Thesis' : 'Key takeaway'}
-          title={
-            ARTICLE_CALLOUT_TITLES[article.slug] ??
-            (investmentMemo
-              ? 'The decision rests on explicit assumptions.'
-              : 'The useful claim is the one the evidence can support.')
-          }
-        >
-          <p>{article.thesis}</p>
-        </ArticleCallout>
-      ) : null}
-
-      <ArticleBody
-        items={navItems}
-        boundary={boundary}
-        boundaryLabel={investmentMemo ? 'Recommendation boundary' : 'Evidence boundary'}
-        variant={variant}
-      >
+    <ArticleReader config={config}>
         <section id="overview">
-          <ArticleSectionHeader index="00">Overview</ArticleSectionHeader>
+          <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'overview')}>
+            Overview
+          </ArticleSectionHeader>
           <div className="article-reader__prose">
-            {article.content.slice(1).map((paragraph) => <p key={paragraph.slice(0, 72)}>{paragraph}</p>)}
+            {article.content.map((paragraph) => <p key={paragraph.slice(0, 72)}>{paragraph}</p>)}
           </div>
         </section>
 
-        {sections?.length ? <StructuredArticleSections sections={sections} /> : null}
+        {numberedSections?.length
+          ? <StructuredArticleSections sections={numberedSections} navigation={navItems} />
+          : null}
 
         {investmentMemo ? (
           <section id="decision-frame">
-            <ArticleSectionHeader index="02">Decision frame</ArticleSectionHeader>
+            <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'decision-frame')}>
+              Decision frame
+            </ArticleSectionHeader>
             <div className="article-reader__decision-grid">
               <article>
                 <span>Formula</span>
@@ -357,42 +446,28 @@ function GenericArticle({
           </section>
         ) : null}
 
-        {article.sources.length ? <SourceLedger article={article} /> : null}
+        <ArticleResources article={article} navigation={navItems} />
 
-        <ArticleEndnote
-          links={[
-            { href: backHref, label: backLabel },
-            { href: '/research', label: 'Research archive' },
-            { href: '/about', label: 'About the author' },
-          ]}
-        >
-          Research cutoff: {article.kind === 'research' ? article.lastVerified ?? article.dateModified ?? article.date : article.dateModified ?? article.date}.
-          Public evidence and provider behavior can change; verify current sources before acting.
-        </ArticleEndnote>
-      </ArticleBody>
-    </ArticlePage>
+        {faqSections?.length
+          ? <StructuredArticleSections sections={faqSections} navigation={navItems} />
+          : null}
+
+        {article.sources.length
+          ? <SourceLedger article={article} navigation={navItems} />
+          : null}
+    </ArticleReader>
   );
 }
 
 export default function MarketArticlePage({ slug }: { slug: string }) {
-  const article = getArticleBySlug(slug) ?? RESEARCH_ARTICLES[0];
-  const route = getSeoRoute(getArticlePath(article)) ?? getSeoRoute('/research')!;
+  const article = getArticleBySlug(slug);
+  const route = article
+    ? getSeoRoute(getArticlePath(article)) ?? getSeoRoute('/research')!
+    : NOT_FOUND_ROUTE;
 
   useSEO(route);
 
-  useEffect(() => {
-    const targetId = window.location.hash.slice(1);
-    if (targetId) {
-      window.requestAnimationFrame(() => {
-        const target = document.getElementById(targetId);
-        if (!target) return;
-        const top = target.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top, left: 0, behavior: 'auto' });
-      });
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, []);
+  if (!article) return <NotFoundPage />;
 
   return <GenericArticle article={article} />;
 }
