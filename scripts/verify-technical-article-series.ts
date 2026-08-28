@@ -229,8 +229,14 @@ assert(
 );
 
 const artworkRecords = [
-  ...INDEXABLE_ARTICLES.map((article) => {
-    assert(article.artwork.kind === 'image', `${article.slug}: indexable articles require image artwork`);
+  ...INDEXABLE_ARTICLES.flatMap((article) => {
+    if (article.artwork.kind === 'study') {
+      assert(
+        Boolean(article.artwork.label && article.artwork.note),
+        `${article.slug}: study artwork requires a visible label and evidence note`,
+      );
+      return [];
+    }
     return {
       owner: article.slug,
       heroSrc: article.artwork.heroSrc,
@@ -281,11 +287,14 @@ for (const article of INDEXABLE_ARTICLES) {
   assert(route.h1 === article.title, `${routePath}: canonical h1 does not match the article title`);
   assert(route.description === article.seoDescription, `${routePath}: canonical description does not match article metadata`);
   assert(route.includeInSitemap && !route.noindex, `${routePath}: indexable article has conflicting canonical indexation metadata`);
-  assert(article.artwork.kind === 'image', `${routePath}: canonical metadata requires image artwork`);
-  assert(route.image === article.artwork.socialSrc, `${routePath}: metadata must use socialSrc`);
+  const metadataImage = article.artwork.kind === 'image' ? article.artwork.socialSrc : route.image;
+  assert(metadataImage, `${routePath}: canonical metadata requires an image`);
+  if (article.artwork.kind === 'image') {
+    assert(route.image === metadataImage, `${routePath}: metadata must use socialSrc`);
+  }
   assert(
-    JSON.stringify(route.jsonLd).includes(article.artwork.socialSrc),
-    `${routePath}: Article structured data must use socialSrc`,
+    JSON.stringify(route.jsonLd).includes(metadataImage),
+    `${routePath}: Article structured data must use the canonical metadata image`,
   );
 }
 
@@ -410,7 +419,7 @@ assert(
   `article series repeats exact 16-word passages: ${JSON.stringify(duplicatedPassages.slice(0, 3))}`,
 );
 
-assert(ALL_ARTICLES.length === 23, `expected 23 canonical articles; found ${ALL_ARTICLES.length}`);
+assert(ALL_ARTICLES.length === 25, `expected 25 canonical articles; found ${ALL_ARTICLES.length}`);
 assert(
   duplicateValues(ALL_ARTICLES.map((article) => normalizedWords(article.conclusion.title).join(' '))).length === 0,
   'article conclusion titles must be route-specific',

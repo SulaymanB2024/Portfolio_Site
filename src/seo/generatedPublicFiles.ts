@@ -1,5 +1,6 @@
 import { ALL_ARTICLES, getArticlePath } from '../content/articleRegistry';
 import { PROFILE_FACTS } from '../content/profileFacts';
+import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from '../content/programmaticSeo';
 import {
   TEXAS_TOLL_OWNERSHIP_CSV_PATH,
   TEXAS_TOLL_OWNERSHIP_ROWS,
@@ -98,6 +99,9 @@ export function buildLlmsText() {
     .filter((article) => article.indexable !== false)
     .map((article) => llmsLink(article.title, absoluteUrl(getArticlePath(article))))
     .join('\n');
+  const programmaticLines = PROGRAMMATIC_SEO_PAGES
+    .map((page) => llmsLink(page.title, absoluteUrl(page.path), `${page.family} diagnostic guide with a labeled evidence fixture and rerun gate.`))
+    .join('\n');
   const searchCrawlerGroup = crawlerGroup('Conventional search crawlers');
   const aiSearchCrawlerGroup = crawlerGroup('AI answer-search crawlers');
   const userRetrievalGroup = crawlerGroup('User-triggered retrieval agents');
@@ -132,6 +136,10 @@ ${llmsLink('Selected work', PROFILE_FACTS.canonicalLinks.work, 'Public project a
 ${llmsLink('Atlas', PROFILE_FACTS.canonicalLinks.atlas, 'Product scope and implementation-status page.')}
 ${llmsLink('Atlas open-corpus demonstration', absoluteUrl('/atlas/sample-crawl'), 'Dated, bounded public demonstration; not production coverage.')}
 ${llmsLink('Research', PROFILE_FACTS.canonicalLinks.research, 'Public research hub and article index.')}
+${llmsLink('Technical SEO diagnostic library', absoluteUrl('/research/technical-seo'), 'Evidence-backed issue, platform, and audit-checklist guides.')}
+${llmsLink('Technical SEO issue guides', absoluteUrl('/research/technical-seo/issues'), 'Diagnostic references organized by technical failure mode.')}
+${llmsLink('Technical SEO platform guides', absoluteUrl('/research/technical-seo/platforms'), 'Platform-specific diagnostics and repair gates.')}
+${llmsLink('Technical SEO audit checklists', absoluteUrl('/research/technical-seo/checklists'), 'Reusable audit procedures with acceptance checks.')}
 ${llmsLink('Markets finance filter', absoluteUrl('/markets'), 'Finance and infrastructure research subset.')}
 ${llmsLink('Void Agency', 'https://www.void-agency.com/', 'Separate canonical host for the technical SEO practice.')}
 ${llmsLink('Technical SEO audit services and process', absoluteUrl('/method'), 'Service method and engagement boundary.')}
@@ -143,12 +151,14 @@ ${llmsLink('Technical ledger', PROFILE_FACTS.canonicalLinks.technicalLedger, 'Se
 
 ${llmsLink(VIRALBENCH_ARTICLE_TITLE, absoluteUrl(VIRALBENCH_ARTICLE_PATH))}
 ${articleLines}
+${programmaticLines}
 ${llmsLink('Atlas open-corpus CSV', absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.csv'), 'URL-level rows from the dated public demonstration.')}
 ${llmsLink('Atlas open-corpus capture manifest', absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.json'), 'Run scope, method, and claim limit.')}
 ${llmsLink('Appian educational research memo PDF', absoluteUrl('/research/appian-enterprise-software-durability-memo.pdf'), 'Educational research, not investment advice.')}
 ${llmsLink('Appian assumptions table CSV', absoluteUrl('/research/appian-assumptions-table.csv'), 'Companion assumptions table.')}
 ${llmsLink('Authority asset index', absoluteUrl('/research/authority-assets.json'), 'Typed index of public assets and their claim boundaries.')}
 ${llmsLink('Article research briefs', absoluteUrl('/research/article-research-briefs.json'), 'Intent, evidence-gap, artifact, and scope records.')}
+${llmsLink('Technical SEO reference index', absoluteUrl('/research/technical-seo-reference-index.json'), 'Structured index of every programmatic diagnostic guide and its evidence boundaries.')}
 ${llmsLink('Texas toll-road ownership matrix', absoluteUrl(TEXAS_TOLL_OWNERSHIP_CSV_PATH), 'Dated source-linked ownership rows.')}
 ${llmsLink('Crawler policy sources', absoluteUrl('/research/ai-search-crawler-policy-sources.csv'), 'Official documentation and IP-manifest source map.')}
 ${llmsLink('Austin crawlability benchmark pilot CSV', absoluteUrl('/research/austin-crawlability-benchmark-pilot.csv'), 'Bounded public fetch observations.')}
@@ -188,6 +198,45 @@ ${llmsLink('Crawler policy source map', absoluteUrl('/research/ai-search-crawler
 - ${modelDevelopmentGroup.label}: ${modelDevelopmentGroup.agents.join(', ')} are explicitly allowed as a deliberate public-crawl preference, independent of answer-search crawlers.
 - User-Agent text alone does not authenticate a crawler. Server-log attribution should also use current provider-published IP ranges where available.
 `;
+}
+
+export function buildProgrammaticSeoIndexJson() {
+  return `${JSON.stringify({
+    generated_at: '2026-07-20',
+    canonical_host: 'https://sulayman-bowles.dev',
+    objective: 'Evidence-backed technical SEO diagnostic references for issue, platform, and audit-checklist queries.',
+    claim_boundaries: [
+      'Fixtures are illustrative and Atlas-compatible; they are not client crawl evidence or claims about a live third-party site.',
+      'Publication and discovery do not guarantee indexation, rankings, impressions, clicks, backlinks, leads, or revenue.',
+      'A guide remains indexable only while it retains unique evidence, substantive utility, and a reproducible acceptance gate.',
+    ],
+    hubs: PROGRAMMATIC_SEO_HUBS.map((hub) => ({
+      family: hub.family,
+      url: absoluteUrl(hub.path),
+      title: hub.title,
+      description: hub.description,
+      last_verified: hub.dateModified,
+    })),
+    pages: PROGRAMMATIC_SEO_PAGES.map((page) => ({
+      family: page.family,
+      url: absoluteUrl(page.path),
+      title: page.title,
+      primary_query: page.primaryQuery,
+      supporting_queries: page.supportingQueries,
+      direct_answer: page.directAnswer,
+      evidence_artifact: page.evidenceArtifact,
+      diagnostic_procedure: page.diagnosticProcedure,
+      false_positive_boundary: page.falsePositiveBoundary,
+      repair_steps: page.repairSteps,
+      rerun_acceptance_check: page.rerunAcceptanceCheck,
+      sources: page.sources,
+      related_pages: page.relatedPaths.map(absoluteUrl),
+      cta: { label: page.cta.label, url: absoluteUrl(page.cta.href) },
+      indexability_state: page.indexabilityState,
+      indexable: page.indexable,
+      last_verified: page.dateModified,
+    })),
+  }, null, 2)}\n`;
 }
 
 export function buildArticleResearchBriefsJson() {
@@ -240,6 +289,21 @@ export function buildAuthorityAssetsJson() {
       ],
     };
   });
+  const cornerstoneAssets = PROGRAMMATIC_SEO_PAGES
+    .filter((page) => page.family === 'platform')
+    .map((page) => ({
+      priority: 1,
+      name: page.title,
+      url: absoluteUrl(page.path),
+      type: 'technical_seo_cornerstone',
+      cluster: 'technical-seo-platforms',
+      preferred_anchor: page.primaryQuery,
+      pitch_angle: `A platform-specific ${page.primaryQuery} reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.`,
+      supporting_assets: [
+        absoluteUrl('/research/technical-seo-reference-index.json'),
+        ...page.sources.map((source) => source.href),
+      ],
+    }));
 
   return `${JSON.stringify({
     generated_at: '2026-07-26',
@@ -263,6 +327,17 @@ export function buildAuthorityAssetsJson() {
         pitch_angle: 'A crawlable hub connecting source-led articles, public artifacts, methodology, and explicit claim boundaries.',
         supporting_assets: [absoluteUrl('/research/article-research-briefs.json')],
       },
+      {
+        priority: 1,
+        name: 'Technical SEO Diagnostic Library',
+        url: absoluteUrl('/research/technical-seo'),
+        type: 'research_hub',
+        cluster: 'technical-seo',
+        preferred_anchor: 'technical SEO diagnostic library',
+        pitch_angle: 'Forty issue, platform, checklist, and collection routes governed by evidence, false-positive, repair, and rerun contracts.',
+        supporting_assets: [absoluteUrl('/research/technical-seo-reference-index.json')],
+      },
+      ...cornerstoneAssets,
       ...articleAssets,
       {
         priority: 1,

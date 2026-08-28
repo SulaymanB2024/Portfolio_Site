@@ -34,7 +34,7 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
   conclusion: {
     title: 'Track qualified tonnes, not announced tonnes',
     content:
-      'The buildout is real, but nameplate is the first line of the model rather than the answer. A useful domestic-capacity scorecard must report commercial shipments, qualified product families, input origin, yield, customer concentration, and sustained utilization. Until those measures rise together, the United States has a large project pipeline and a much smaller bankable supply base.',
+      'The buildout is real, but nameplate is the first line of the model rather than the answer. A useful domestic-capacity scorecard must report commercial shipments, qualified product families, input origin, yield, customer concentration, and sustained utilization. Until those measures rise together, the United States has a project pipeline and a smaller bankable supply base.',
   },
   evidenceBoundary:
     'This investigation uses public project disclosures, government awards, company releases, filings, and technical references available through August 17, 2026. Capacity statements are not standardized: some refer to metric tonnes, some to tons, some to a facility phase, and some to a future platform. The 37,750-tonne headline is a stated-unit sum of firm projects in the audit; normalization produces a 37,584–38,048-tonne range. Operating status is classified from disclosed shipments, commissioning, qualification, construction, and target dates. The 2028 scenarios and material-flow ranges are derived illustrations, not company guidance, engineering guarantees, market forecasts, or investment recommendations.',
@@ -283,7 +283,7 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
       },
     },
     {
-      id: 'source-ledger',
+      id: 'methodology',
       title: 'Methodology and source ledger',
       paragraphs: [
         'The project ledger was built from company releases, government award announcements, regulatory filings, facility pages, and technical publications. Each capacity statement was stored with its original unit, product description, facility, phase, target date, and operating-status language. Duplicate announcements referring to the same line were reconciled rather than added.',

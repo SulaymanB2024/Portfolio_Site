@@ -25,7 +25,7 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "date": "2026.08.16",
     "dateModified": "2026.08.16",
     "indexable": true,
-    "staticSummary": "A one-gigawatt AI data center can mean at least four different things. It may be a requested grid interconnection, a total facility nameplate, an IT nameplate, or an average electrical draw. Those quantities are related, but they are not interchangeable. A bare “1 GW” claim therefore does not identify a GPU fleet.",
+    "staticSummary": "AI data center power claims are not interchangeable: a requested grid interconnection, total-facility nameplate, IT nameplate, installed accelerator fleet, and average utilized load describe different boundaries. A defensible GPU estimate requires the electrical boundary, PUE, network overhead, rack design, accelerator configuration, and utilization assumptions. A one-gigawatt AI data center can mean at least four different things. It may be a requested grid interconnection, a total facility nameplate, an IT nameplate, or an average electrical draw. Those quantities are related, but they are not interchangeable. A bare “1 GW” claim therefore does not identify a GPU fleet.",
     "image": "/images/social/og-research.png"
   },
   {
@@ -329,7 +329,7 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "date": "2026.08.17",
     "dateModified": "2026.08.17",
     "indexable": true,
-    "staticSummary": "The United States is no longer starting from zero in sintered neodymium-iron-boron magnets. A project-by-project audit produces 37,750 metric tonnes of disclosed firm-project nameplate. That figure is large enough to resemble published estimates of total U.S. magnet consumption, but the resemblance is misleading. Only 4,000 tonnes belongs to plants with both disclosed nameplate and commercial shipments. Another 3,600 tonnes sits in commissioning, ramp, or customer qualification. The remaining 30,150 tonnes is future capacity tied to construction, later phases, or announced production targets.",
+    "staticSummary": "U.S. rare-earth magnet manufacturing capacity is growing, but announced nameplate, installed equipment, qualification, commercial shipments, and sustained saleable output are different maturity states. Bankable supply also depends on product mix, yield, qualified customers, imported inputs, and utilization rather than the sum of every announced project headline. The United States is no longer starting from zero in sintered neodymium-iron-boron magnets. A project-by-project audit produces 37,750 metric tonnes of disclosed firm-project nameplate. That figure is large enough to resemble published estimates of total U.S. magnet consumption, but the resemblance is misleading. Only 4,000 tonnes belongs to plants with both disclosed nameplate and commercial shipments. Another 3,600 tonnes sits in commissioning, ramp, or customer qualification. The remaining 30,150 tonnes is future capacity tied to construction, later phases, or announced production targets.",
     "image": "/images/social/og-research.png"
   },
   {

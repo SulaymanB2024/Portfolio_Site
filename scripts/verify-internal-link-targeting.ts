@@ -1,5 +1,6 @@
 import { getCanonicalRoutes, getSeoRoute, type SeoRoute } from '../src/seo/routes';
 import { ARTICLE_SEARCH_TARGETS } from '../src/seo/articleSearchTargets';
+import { PROGRAMMATIC_SEARCH_TARGETS } from '../src/seo/programmaticSearchTargets';
 import { buildRouteStaticHtml, buildSitemapStaticHtml } from '../src/seo/staticContent';
 
 type InternalLink = {
@@ -146,6 +147,24 @@ for (const articleTarget of ARTICLE_SEARCH_TARGETS) {
   );
 }
 
+for (const target of PROGRAMMATIC_SEARCH_TARGETS) {
+  const contextualInbound = new Set(
+    links
+      .filter((link) => link.target === target.path && link.source !== target.path && link.source !== '/sitemap')
+      .map((link) => link.source),
+  );
+  assert(
+    contextualInbound.size >= 3,
+    `${target.path}: only ${contextualInbound.size} contextual inbound sources; expected at least 3`,
+  );
+  const route = getSeoRoute(target.path)!;
+  const staticHtml = staticHtmlFor(route, routes);
+  assert(
+    target.relatedPaths.every((relatedPath) => staticHtml.includes(`href="${relatedPath}"`)),
+    `${target.path}: one or more contracted related-page links are missing`,
+  );
+}
+
 const texasTollInbound = links.filter(
   (link) => link.target === TEXAS_TOLL_PATH && link.source !== TEXAS_TOLL_PATH && link.source !== '/sitemap',
 );
@@ -165,5 +184,5 @@ assert(
 
 const maxDepth = Math.max(...depths.values());
 console.log(
-  `Internal-link verification passed for ${routes.length} canonical routes: zero orphans, maximum depth ${maxDepth}, ${DESCRIPTIVE_ANCHOR_EXPECTATIONS.length} descriptive anchor targets, and at least three contextual inbound sources for all ${ARTICLE_SEARCH_TARGETS.length} articles.`,
+  `Internal-link verification passed for ${routes.length} canonical routes: zero orphans, maximum depth ${maxDepth}, ${DESCRIPTIVE_ANCHOR_EXPECTATIONS.length} descriptive anchor targets, and at least three contextual inbound sources for all ${ARTICLE_SEARCH_TARGETS.length} articles and ${PROGRAMMATIC_SEARCH_TARGETS.length} programmatic guides.`,
 );

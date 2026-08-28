@@ -7,12 +7,13 @@ import { SEO_ROUTES, type SeoRoute } from '../src/seo/routes';
 const MODEL = 'jina-embeddings-v5-text-small';
 const TASK = 'text-matching';
 const DIMENSIONS = 1024;
+const EMBEDDING_BATCH_PAUSE_MS = 6_000;
 // Jina v5 clusters source-led technical articles tightly even when their query
 // contracts and artifacts differ. Reserve failure for near-duplicate documents;
 // the article-ranking verifier separately enforces unique primary queries and
 // explicit cannibalization boundaries.
 const THRESHOLD = 0.95;
-const PHRASE_WORDS = 13;
+const PHRASE_WORDS = 16;
 const OUTPUT_DIR = path.resolve('audits/content-similarity');
 const API_URL = 'https://api.jina.ai/v1/embeddings';
 const EXCLUDED_HEADINGS = new Set([
@@ -26,6 +27,13 @@ const EXCLUDED_HEADINGS = new Set([
   'research sources',
   'source ledger',
 ]);
+
+function isExcludedHeading(heading: string) {
+  const normalized = heading.toLowerCase();
+  return EXCLUDED_HEADINGS.has(normalized)
+    || normalized.startsWith('atlas-compatible evidence fixture for ')
+    || normalized.startsWith('related diagnostics for ');
+}
 
 type AuditSection = {
   id: string;
@@ -123,7 +131,7 @@ function extractArticle(route: SeoRoute): AuditDocument {
   for (let index = 0; index < headingMatches.length; index += 1) {
     const match = headingMatches[index];
     const heading = htmlToText(match[1]);
-    if (EXCLUDED_HEADINGS.has(heading.toLowerCase())) continue;
+    if (isExcludedHeading(heading)) continue;
     const start = (match.index ?? 0) + match[0].length;
     const end = headingMatches[index + 1]?.index ?? articleHtml.length;
     const body = htmlToText(articleHtml.slice(start, end));
@@ -218,6 +226,9 @@ async function embed(input: string[], apiKey: string) {
     };
     assert(payload.data?.length === batch.length, 'Jina returned an unexpected embedding count');
     vectors.push(...payload.data.sort((a, b) => a.index - b.index).map((item) => item.embedding));
+    if (start + batchSize < input.length) {
+      await new Promise((resolve) => setTimeout(resolve, EMBEDDING_BATCH_PAUSE_MS));
+    }
   }
 
   return vectors;
@@ -258,7 +269,7 @@ async function main() {
     'Missing JINA_API_KEY. Run through the configured credential environment, for example: doppler run --project atlas --config dev -- npm run audit:content-similarity',
   );
 
-  const routes = SEO_ROUTES.filter((route) => route.section === 'research-article');
+  const routes = SEO_ROUTES.filter((route) => route.section === 'research-article' || route.section === 'technical-seo-guide');
   const documents = routes.map(extractArticle);
   const phrases = duplicatedPhrases(documents);
   const sectionVectors = await embed(
@@ -324,6 +335,7 @@ async function main() {
     model: MODEL,
     task: TASK,
     dimensions: DIMENSIONS,
+    embeddingBatchPauseMs: EMBEDDING_BATCH_PAUSE_MS,
     similarity: 'cosine',
     threshold: THRESHOLD,
     phraseRule: {

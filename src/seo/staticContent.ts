@@ -11,6 +11,13 @@ import { getArticleByPath } from '../content/articleRegistry';
 import { isInvestmentMemo, type ArticleResource, type ArticleSection } from '../content/articleModels';
 import { PUBLIC_MARKET_THESES } from '../content/marketTheses';
 import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
+import {
+  getProgrammaticPagesByFamily,
+  getProgrammaticSeoHub,
+  getProgrammaticSeoPage,
+  PROGRAMMATIC_SEO_HUBS,
+  PROGRAMMATIC_SEO_PAGES,
+} from '../content/programmaticSeo';
 import { PROFILE_FACTS, formatEducation, formatIsoDate } from '../content/profileFacts';
 import {
   appianAssumptionRows,
@@ -67,7 +74,7 @@ import {
 } from '../content/texasTollRoadOwnership';
 import { markdownToHtml } from '../utils/markdownToHtml';
 import { getArticleRelatedLinkLabel, getArticleSearchTarget } from './articleSearchTargets';
-import type { SeoRoute } from './routes';
+import { getSeoRoute, type SeoRoute } from './routes';
 
 type LinkItem = {
   label: string;
@@ -80,6 +87,10 @@ const primaryLinks: LinkItem[] = [
   ...primaryNav.map(({ label, href, description }) => ({ label, href, description })),
   ...utilityNav.map(({ label, href, description }) => ({ label, href, description })),
 ];
+
+function getSeoRouteLabel(path: string) {
+  return getSeoRoute(path)?.h1 ?? path;
+}
 
 const atlasProcess = [
   ['Crawl', 'High-fidelity crawling with smart rate control, JavaScript rendering, and adaptive discovery to map the site as search engines do.'],
@@ -561,6 +572,61 @@ function aiManagersArticleStaticHtml() {
 }
 
 export function buildRouteStaticHtml(route: SeoRoute) {
+  const programmaticHub = getProgrammaticSeoHub(route.path);
+  if (programmaticHub) {
+    const pages = programmaticHub.family === 'all'
+      ? PROGRAMMATIC_SEO_PAGES
+      : getProgrammaticPagesByFamily(programmaticHub.family);
+    const collectionLinks = programmaticHub.family === 'all'
+      ? `<h2>Diagnostic collections</h2>${linkList(PROGRAMMATIC_SEO_HUBS.filter((hub) => hub.family !== 'all').map((hub) => ({ label: hub.title, href: hub.path, description: hub.description })))}`
+      : `<p><a href="/research/technical-seo">Technical SEO diagnostic library</a></p>`;
+
+    return articleShell(
+      programmaticHub.title,
+      programmaticHub.directAnswer,
+      `${collectionLinks}
+        <h2>${pages.length} evidence-backed guides</h2>
+        ${pages.map((page) => `<h3><a href="${page.path}">${escapeHtml(page.title)}</a></h3><p>${escapeHtml(page.description)}</p>`).join('\n        ')}
+        <h2>Implementation boundaries</h2>
+        ${linkList([
+          { label: 'Read the technical SEO audit method', href: '/method', description: 'Service-process intent remains on the method route.' },
+          { label: 'Contact Sulayman Bowles', href: '/contact', description: 'Conversion and audit-intake endpoint.' },
+          { label: 'Return to the research archive', href: '/research', description: 'Research notes and public evidence.' },
+        ])}`,
+    );
+  }
+
+  const programmaticPage = getProgrammaticSeoPage(route.path);
+  if (programmaticPage) {
+    const familyHub = `/research/technical-seo/${programmaticPage.family === 'issue' ? 'issues' : programmaticPage.family === 'platform' ? 'platforms' : 'checklists'}`;
+
+    return articleShell(
+      programmaticPage.title,
+      programmaticPage.directAnswer,
+      `<section aria-labelledby="artifact-title">
+        <h2 id="artifact-title">Atlas-compatible evidence fixture for ${escapeHtml(programmaticPage.primaryQuery)}</h2>
+        <p><strong>${escapeHtml(programmaticPage.evidenceArtifact.label)}.</strong> ${escapeHtml(programmaticPage.evidenceArtifact.description)}</p>
+        <p>Fixture fields: ${escapeHtml(programmaticPage.evidenceArtifact.fields.map((field) => `${field} ${programmaticPage.slug.replaceAll('-', '').toUpperCase()}`).join(', '))}.</p>
+      </section>
+      ${articleSectionsStaticHtml(programmaticPage.sections)}
+      <section aria-labelledby="sources-title">
+        <h2 id="sources-title">Source ledger</h2>
+        ${linkList(programmaticPage.sources.map((source) => ({ label: source.label, href: source.href, description: `Last verified ${source.lastVerified}.` })))}
+      </section>
+      <section aria-labelledby="related-title">
+        <h2 id="related-title">Related diagnostics for ${escapeHtml(programmaticPage.primaryQuery)}</h2>
+        <p>Continue the ${escapeHtml(programmaticPage.primaryQuery)} investigation through its family, evidence foundation, service method, or conversion endpoint.</p>
+        ${linkList([
+          { label: `${programmaticPage.family} guide collection`, href: familyHub },
+          { label: 'Technical SEO diagnostic library', href: '/research/technical-seo' },
+          ...programmaticPage.relatedPaths.map((href) => ({ label: getSeoRouteLabel(href), href })),
+          { label: 'Technical SEO audit method', href: '/method' },
+          { label: programmaticPage.cta.label, href: programmaticPage.cta.href },
+        ])}
+      </section>`,
+    );
+  }
+
   if (route.path === '/research') {
     return articleShell(
       'Research Notes',
@@ -601,6 +667,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>Local technical SEO audits for Austin teams that need service pages, crawl paths, evidence, and implementation priorities reviewed.</p>
         <h3><a href="/research">Technical SEO research</a></h3>
         <p>Source-led notes on crawlability, crawler policy, public search data, canonical identity, AI systems, and evidence limits.</p>
+        <h3><a href="/research/technical-seo">Technical SEO diagnostic library</a></h3>
+        <p>Evidence-backed issue guides, platform playbooks, and audit checklists with reproducible repair gates.</p>
         <h3><a href="/markets/who-owns-texas-toll-roads">Texas Toll-Road Ownership Map</a></h3>
         <p>Source-led infrastructure research on public ownership, private concessions, operators, debt claims, revenue rights, and missing facts.</p>
         <h2>How I work</h2>

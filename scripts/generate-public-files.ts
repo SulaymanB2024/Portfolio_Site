@@ -5,6 +5,7 @@ import {
   buildArticleResearchBriefsJson,
   buildAuthorityAssetsJson,
   buildLlmsText,
+  buildProgrammaticSeoIndexJson,
   buildSitemapXml,
   buildTexasTollOwnershipCsv,
 } from '../src/seo/generatedPublicFiles';
@@ -16,5 +17,6 @@ await Promise.all([
   fs.writeFile(path.join(publicDir, 'sitemap.xml'), buildSitemapXml()),
   fs.writeFile(path.join(publicDir, 'research', 'article-research-briefs.json'), buildArticleResearchBriefsJson()),
   fs.writeFile(path.join(publicDir, 'research', 'authority-assets.json'), buildAuthorityAssetsJson()),
+  fs.writeFile(path.join(publicDir, 'research', 'technical-seo-reference-index.json'), buildProgrammaticSeoIndexJson()),
   fs.writeFile(path.join(publicDir, 'research', 'texas-toll-road-ownership-2026.csv'), buildTexasTollOwnershipCsv()),
 ]);

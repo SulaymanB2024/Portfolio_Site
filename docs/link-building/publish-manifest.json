@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-07-20",
-  "purpose": "Files that belong to the article ranking and topical authority release. Do not stage or deploy unrelated dirty files with this set.",
+  "purpose": "Files that belong to the 68-route article and programmatic technical SEO authority release. Do not stage or deploy unrelated dirty files with this set.",
   "publish_files": [
     "README.md",
     "package.json",
@@ -52,6 +52,7 @@
     "docs/link-building/completion-audit.md",
     "docs/link-building/publish-manifest.json",
     "docs/link-building/publish-readiness.md",
+    "docs/programmatic-seo-growth-sprint.md",
     "public/research/authority-assets.json",
     "public/research/article-research-briefs.json",
     "public/research/ai-search-crawler-policy-sources.csv",
@@ -59,9 +60,21 @@
     "public/research/austin-crawlability-benchmark-summary.json",
     "scripts/generate-public-files.ts",
     "scripts/verify-article-ranking-program.ts",
+    "scripts/verify-ai-search-seo.mjs",
     "scripts/verify-generated-public-files.ts",
     "scripts/verify-internal-link-targeting.ts",
     "scripts/verify-live-article-routes.ts",
+    "scripts/report-pseo-growth.ts",
+    "scripts/verify-programmatic-seo.ts",
+    "scripts/verify-live-canonical-routes.ts",
+    "src/content/programmaticSeo.ts",
+    "src/content/publicationIndex.ts",
+    "src/content/seoExpansion.ts",
+    "src/pages/ProgrammaticSeoHubPage.tsx",
+    "src/pages/ProgrammaticSeoPage.tsx",
+    "src/seo/programmaticSearchTargets.ts",
+    "src/seo/searchTargets.ts",
+    "public/research/technical-seo-reference-index.json",
     "vercel.json"
   ],
   "publish_gates": [
@@ -70,6 +83,8 @@
     "npm run linkbuilding:external-check",
     "npm run lint",
     "npm run build",
+    "npm run verify:pseo",
+    "npm run audit:content-similarity",
     "npm run submit:indexnow -- --dry-run",
     "npm run linkbuilding:live-check after deployment"
   ],

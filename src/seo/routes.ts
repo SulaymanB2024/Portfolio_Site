@@ -1,3 +1,4 @@
+import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from '../content/programmaticSeo';
 import { ARTICLE_ROUTE_METADATA } from '../content/articleRouteMetadata';
 import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
 import {
@@ -25,6 +26,7 @@ import {
   sitemapJsonLd,
   viralBenchArticleJsonLd,
   workJsonLd,
+  technicalSeoCollectionJsonLd,
   type JsonLd,
 } from './schema';
 
@@ -39,7 +41,9 @@ export type RouteSection =
   | 'service'
   | 'local-service'
   | 'research'
-  | 'research-article';
+  | 'research-article'
+  | 'technical-seo-hub'
+  | 'technical-seo-guide';
 
 export interface SeoRoute {
   path: string;
@@ -377,7 +381,59 @@ const ARTICLE_ROUTES: SeoRoute[] = ARTICLE_ROUTE_METADATA.map((article) => {
   };
 });
 
-export const SEO_ROUTES: SeoRoute[] = [...CORE_ROUTES, ...ARTICLE_ROUTES];
+const PROGRAMMATIC_HUB_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_HUBS.map((hub) => ({
+  path: hub.path,
+  aliases: [],
+  title: hub.seoTitle,
+  description: hub.description,
+  h1: hub.title,
+  section: 'technical-seo-hub',
+  pageType: 'research',
+  priority: hub.family === 'all' ? 0.8 : 0.7,
+  includeInSitemap: hub.indexable,
+  lastmod: hub.dateModified,
+  staticSummary: hub.directAnswer,
+  image: RESEARCH_OG_IMAGE,
+  jsonLd: technicalSeoCollectionJsonLd({
+    title: hub.title,
+    description: hub.description,
+    path: hub.path,
+    parentPath: hub.family === 'all' ? '/research' : '/research/technical-seo',
+    parentName: hub.family === 'all' ? 'Research' : 'Technical SEO Diagnostic Library',
+  }),
+}));
+
+const PROGRAMMATIC_PAGE_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_PAGES.map((page) => ({
+  path: page.path,
+  aliases: [],
+  title: page.seoTitle,
+  description: page.description,
+  h1: page.title,
+  section: 'technical-seo-guide',
+  pageType: 'article',
+  priority: 0.6,
+  includeInSitemap: page.indexable,
+  lastmod: page.dateModified,
+  staticSummary: page.directAnswer,
+  image: RESEARCH_OG_IMAGE,
+  jsonLd: marketArticleJsonLd({
+    title: page.title,
+    description: page.description,
+    path: page.path,
+    datePublished: page.datePublished,
+    dateModified: page.dateModified,
+    image: RESEARCH_OG_IMAGE,
+    collectionPath: `/research/technical-seo/${page.family === 'issue' ? 'issues' : page.family === 'platform' ? 'platforms' : 'checklists'}`,
+    collectionName: `${page.family[0].toUpperCase()}${page.family.slice(1)} guides`,
+  }),
+}));
+
+export const SEO_ROUTES: SeoRoute[] = [
+  ...CORE_ROUTES,
+  ...ARTICLE_ROUTES,
+  ...PROGRAMMATIC_HUB_ROUTES,
+  ...PROGRAMMATIC_PAGE_ROUTES,
+];
 
 export function normalizeInputPath(path: string) {
   const pathname = path.split(/[?#]/)[0] || '/';
@@ -403,7 +459,7 @@ export function getRouteVisualMode(path: string): RouteVisualMode {
     return 'prototype';
   }
 
-  if (route?.section === 'research-article') {
+  if (route?.section === 'research-article' || route?.section === 'technical-seo-guide') {
     return 'memo-reader';
   }
 
