@@ -318,6 +318,21 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "image": "/images/research/canonical-identity-social.jpg"
   },
   {
+    "kind": "research",
+    "path": "/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+    "aliases": [
+      "/markets/us-rare-earth-magnet-manufacturing-capacity"
+    ],
+    "title": "The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature",
+    "seoTitle": "U.S. Rare-Earth Magnet Capacity: Plant-by-Plant Buildout",
+    "seoDescription": "Audit U.S. rare-earth magnet manufacturing capacity by plant maturity, product form, qualification status, upstream inputs, and realistic output scenarios.",
+    "date": "2026.08.17",
+    "dateModified": "2026.08.17",
+    "indexable": true,
+    "staticSummary": "The United States is no longer starting from zero in sintered neodymium-iron-boron magnets. A project-by-project audit produces 37,750 metric tonnes of disclosed firm-project nameplate. That figure is large enough to resemble published estimates of total U.S. magnet consumption, but the resemblance is misleading. Only 4,000 tonnes belongs to plants with both disclosed nameplate and commercial shipments. Another 3,600 tonnes sits in commissioning, ramp, or customer qualification. The remaining 30,150 tonnes is future capacity tied to construction, later phases, or announced production targets.",
+    "image": "/images/social/og-research.png"
+  },
+  {
     "kind": "investment-memo",
     "path": "/markets/archived-research-methodology",
     "aliases": [],
