@@ -34,6 +34,13 @@
       "headers": { "Location": "/Sulayman_Bowles_Resume.pdf" },
       "status": 301
     },
+    {
+      "src": "/Sulayman_Bowles_Resume\\.pdf",
+      "headers": {
+        "Link": "<https://sulayman-bowles.dev/resume>; rel=\"canonical\""
+      },
+      "continue": true
+    },
     { "src": "/projects/atlas", "headers": { "Location": "/atlas" }, "status": 308 },
     { "src": "/projects/markets", "headers": { "Location": "/markets" }, "status": 308 },
     { "src": "/atlas/sample-run", "headers": { "Location": "/atlas/sample-crawl" }, "status": 308 },
