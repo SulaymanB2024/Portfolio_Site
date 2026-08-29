@@ -96,6 +96,19 @@ const homeProofItems = [
   { type: 'Markets', title: 'Texas Toll-Road Ownership', href: '/markets/who-owns-texas-toll-roads' },
 ];
 
+const homeJourneyLinks = [
+  { index: '01', label: 'Selected work', href: '/work', ctaId: 'home_view_work', primary: true },
+  { index: '02', label: 'Résumé', href: '/resume', ctaId: 'home_resume', primary: false },
+  { index: '03', label: 'Research', href: '/research', ctaId: 'home_research', primary: false },
+  { index: '04', label: 'Contact', href: '/contact', ctaId: 'home_contact', primary: false },
+] satisfies ReadonlyArray<{
+  index: string;
+  label: string;
+  href: string;
+  ctaId: PortfolioCtaId;
+  primary: boolean;
+}>;
+
 const homeContactLinks = [
   { label: 'LinkedIn', href: PROFILE_FACTS.canonicalLinks.linkedin, ctaId: 'home_linkedin' },
   { label: 'Résumé', href: '/resume', ctaId: 'home_resume' },
@@ -532,23 +545,20 @@ function HomePage() {
                 <div>
                   <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
                   <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and publisher of source-led research.</p>
-                  <nav className="mt-6 flex flex-wrap gap-3" aria-label="Primary actions">
-                    <a
-                      href="/work"
-                      id="home-primary-work-link"
-                      data-portfolio-cta="home_view_work"
-                      className="inline-flex min-h-11 items-center border border-ink bg-ink px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-canvas transition-colors hover:bg-accent hover:text-ink"
-                    >
-                      View selected work
-                    </a>
-                    <a
-                      href="/contact"
-                      id="home-primary-contact-link"
-                      data-portfolio-cta="home_start_project"
-                      className="inline-flex min-h-11 items-center border border-ink/28 px-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/72 transition-colors hover:border-ink hover:bg-ink hover:text-canvas"
-                    >
-                      Start a project
-                    </a>
+                  <nav className="home-cover__index mt-6" aria-label="Portfolio shortcuts">
+                    {homeJourneyLinks.map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        id={item.primary ? 'home-primary-work-link' : undefined}
+                        data-portfolio-cta={item.ctaId}
+                        className={`home-cover__index-item group ${item.primary ? 'home-cover__index-item--primary' : ''}`}
+                      >
+                        <span aria-hidden="true" className="font-serif text-sm italic tracking-normal opacity-55">{item.index}</span>
+                        <span>{item.label}</span>
+                        <span aria-hidden="true" className="home-cover__index-arrow text-sm">↗</span>
+                      </a>
+                    ))}
                   </nav>
                 </div>
                 <nav aria-label="Featured proof" className="grid self-end border border-ink bg-ink px-4 py-3 uppercase text-canvas md:px-5 md:py-4">

@@ -49,23 +49,29 @@ export default function ContactPage() {
     <main id="top" className="site-page site-page-dark relative min-h-screen overflow-x-hidden bg-ink font-sans text-canvas selection:bg-canvas selection:text-ink">
       <InternalHeader activePath="/contact" tone="dark" variant="final-frame" />
 
-      <section className="relative z-10 mx-auto flex min-h-[calc(100svh-82px)] max-w-[1480px] px-4 pb-12 pt-4 md:px-8 md:pb-16 lg:px-10">
+      <section aria-labelledby="contact-title" className="relative z-10 mx-auto flex min-h-[calc(100svh-82px)] max-w-[1480px] px-4 pb-12 pt-4 md:px-8 md:pb-16 lg:px-10">
         <div className="relative isolate grid w-full overflow-hidden border border-canvas/14 px-5 py-8 md:px-8 md:py-10 lg:grid-rows-[minmax(0,1fr)_auto] lg:px-10">
           <FrameMarks />
 
-          <div className="relative z-10 flex items-center">
+          <div className="relative z-10 flex flex-col justify-center py-10 md:py-16">
+            <p className="mb-5 text-[10px] uppercase tracking-[0.3em] text-canvas/48">Direct contact</p>
+            <h1 id="contact-title" className="max-w-5xl font-serif text-6xl font-light italic leading-[0.8] tracking-normal text-canvas sm:text-7xl md:text-8xl lg:text-[8rem] xl:text-[10rem]">
+              Contact Sulayman.
+            </h1>
+            <p className="mt-7 max-w-2xl text-sm leading-relaxed text-canvas/64 md:text-base">
+              For roles, technical SEO, product systems, or research, email me directly.
+            </p>
             <a
               href="mailto:sulayman.bowles@gmail.com"
               data-portfolio-cta="contact_email"
-              className="group inline-flex max-w-full items-end gap-4 font-serif text-6xl italic leading-[0.8] tracking-normal text-canvas transition-colors duration-200 hover:text-accent motion-reduce:transition-none sm:text-7xl md:text-8xl lg:text-[8rem] xl:text-[10rem]"
+              className="group mt-7 inline-flex min-h-12 w-fit max-w-full items-center gap-3 border-b border-canvas/32 text-sm tracking-[0.05em] text-canvas transition-colors duration-200 hover:border-accent hover:text-accent motion-reduce:transition-none sm:text-base md:text-lg"
             >
-              <span className="min-w-0 break-words">Email.</span>
+              <span className="min-w-0 break-all">sulayman.bowles@gmail.com</span>
               <ArrowUpRight
                 aria-hidden="true"
-                className="mb-1 h-[0.28em] w-[0.28em] shrink-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
-                strokeWidth={1.1}
+                className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
+                strokeWidth={1.4}
               />
-              <span className="sr-only">sulayman.bowles@gmail.com</span>
             </a>
           </div>
 

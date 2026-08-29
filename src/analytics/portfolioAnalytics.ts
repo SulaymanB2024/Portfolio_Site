@@ -33,6 +33,8 @@ let pageViewScheduled = false;
 export const PORTFOLIO_CTA_METADATA = {
   home_view_work: { surface: 'home', target: 'selected_work', kind: 'internal' },
   home_start_project: { surface: 'home', target: 'contact', kind: 'internal' },
+  home_research: { surface: 'home', target: 'research', kind: 'internal' },
+  home_contact: { surface: 'home', target: 'contact', kind: 'internal' },
   home_open_proof: { surface: 'home', target: 'featured_proof', kind: 'internal' },
   home_email: { surface: 'home', target: 'email', kind: 'email' },
   home_linkedin: { surface: 'home', target: 'linkedin', kind: 'external' },
