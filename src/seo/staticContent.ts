@@ -9,7 +9,6 @@ import {
 } from '../content/evidenceLists';
 import { getArticleByPath } from '../content/articleRegistry';
 import { isInvestmentMemo, type ArticleResource, type ArticleSection } from '../content/articleModels';
-import { PUBLIC_MARKET_THESES } from '../content/marketTheses';
 import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
 import {
   getProgrammaticPagesByFamily,
@@ -940,7 +939,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'Finance and infrastructure-investing research with visible assumptions, source tables, valuation frames, risks, and recommendation boundaries.',
       `<p>This is the finance-only filter within the broader Research hub. It covers ownership, cash-flow rights, valuation frames, assumptions, downside cases, and explicit recommendation boundaries.</p>
         <h2>Current Investment Research</h2>
-        ${PUBLIC_MARKET_THESES.map((thesis) => `<h3><a href="/markets/${thesis.slug}">${escapeHtml(thesis.title)}</a></h3><p>${escapeHtml(thesis.subtitle)}</p>`).join('\n        ')}
+        ${PUBLICATION_INDEX.filter((item) => item.category === 'Markets and investing').map((item) => `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.description)}</p>`).join('\n        ')}
         <h2 id="appian-assumptions">Supporting Model With Visible Assumptions</h2>
         <p>The Appian materials are educational research samples. Educational research sample, not an investment recommendation. Not a recommendation or price target.</p>
         ${linkList([
