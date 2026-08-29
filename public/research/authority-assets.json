@@ -269,8 +269,22 @@
       "pitch_angle": "Connect provider governance, eligibility rules, fund mandates, source-index offsets, closing-auction mechanics, event-study evidence, and cost-of-capital limits instead of treating headline benchmark assets as forced one-day buying.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
-        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
-        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+        "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+      ]
+    },
+    {
+      "priority": 1,
+      "name": "What Happened to the Software Buyout Boom?",
+      "url": "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
+      "type": "source_led_article",
+      "cluster": "financial-systems",
+      "preferred_anchor": "What Happened to the Software Buyout Boom?",
+      "pitch_angle": "Keep headline transaction value, current control, liquidity events, creditor transfers, and sponsor returns separate instead of labeling every IPO, refinancing, or partial sale as a completed exit.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
       ]
     },
     {
@@ -297,8 +311,8 @@
       "pitch_angle": "Replace generic funding-option lists with five real company capital stacks organized by asset owner, payment source, recourse, utilization exposure, and loss allocation.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
-        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
-        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+        "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters"
       ]
     },
     {

@@ -251,10 +251,37 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page explains index membership, implementation demand, price effects, and provider economics; the airline, hardware, and toll-road investigations study different financial claims and ownership structures.',
     relatedPaths: [
+      '/research/financial-systems/software-buyout-boom-2020-2022-exit-audit',
       '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/markets/who-owns-texas-toll-roads',
       '/research/search-console/technical-seo-public-data-infrastructure',
       '/research/data-systems/audit-findings-derived-records',
+    ],
+  },
+  {
+    path: '/research/financial-systems/software-buyout-boom-2020-2022-exit-audit',
+    primaryQuery: 'software buyout cohort',
+    supportingQueries: [
+      '2020 2022 software private equity exits',
+      'what happened to software take private deals',
+      'software buyout sponsor realizations',
+    ],
+    intent: 'evaluation',
+    cohort: 1,
+    directAnswer:
+      'A control-based audit of 25 large 2020–2022 software take-private transactions found no clean sponsor realizations by August 17, 2026 under its stated definition. That is an inventory of control exits, not evidence that every deal lost money or a basis for calculating cohort returns.',
+    serpGap:
+      'Keep headline transaction value, current control, liquidity events, creditor transfers, and sponsor returns separate instead of labeling every IPO, refinancing, or partial sale as a completed exit.',
+    originalArtifact:
+      'A 25-row classification table, ten-claim ledger, control-based methodology note, machine-readable summary, and bounded fallback web edition.',
+    cannibalizationBoundary:
+      'This page audits a 2020–2022 software take-private cohort and control exits; the index-inclusion article studies public-market rebalancing, while the hardware-financing articles study capital structures.',
+    lastVerified: '2026-08-17',
+    relatedPaths: [
+      '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
+      '/research/financial-systems/hidden-financing-hardware-startups',
+      '/research/financial-systems/where-online-returns-actually-go',
+      '/research/search-console/technical-seo-public-data-infrastructure',
     ],
   },
   {
@@ -307,6 +334,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.',
     relatedPaths: [
+      '/research/financial-systems/software-buyout-boom-2020-2022-exit-audit',
       '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
       '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/research/financial-systems/where-online-returns-actually-go',

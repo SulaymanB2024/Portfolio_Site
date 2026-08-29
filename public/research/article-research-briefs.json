@@ -211,6 +211,7 @@
       "original_artifact": "A 32-page evidence audit with four index-family rule systems, 13 exhibits, a Tesla implementation case, participant economics, fact checks, a reproducible event-study protocol, and a 44-source ledger.",
       "scope_boundary": "This page explains index membership, implementation demand, price effects, and provider economics; the airline, hardware, and toll-road investigations study different financial claims and ownership structures.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
         "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
@@ -218,6 +219,29 @@
       ],
       "ranking_goal": null,
       "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
+      "question": "software buyout cohort",
+      "supporting_questions": [
+        "2020 2022 software private equity exits",
+        "what happened to software take private deals",
+        "software buyout sponsor realizations"
+      ],
+      "intent": "evaluation",
+      "cohort": 1,
+      "direct_answer": "A control-based audit of 25 large 2020–2022 software take-private transactions found no clean sponsor realizations by August 17, 2026 under its stated definition. That is an inventory of control exits, not evidence that every deal lost money or a basis for calculating cohort returns.",
+      "evidence_gap": "Keep headline transaction value, current control, liquidity events, creditor transfers, and sponsor returns separate instead of labeling every IPO, refinancing, or partial sale as a completed exit.",
+      "original_artifact": "A 25-row classification table, ten-claim ledger, control-based methodology note, machine-readable summary, and bounded fallback web edition.",
+      "scope_boundary": "This page audits a 2020–2022 software take-private cohort and control exits; the index-inclusion article studies public-market rebalancing, while the hardware-financing articles study capital structures.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-08-17"
     },
     {
       "url": "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
@@ -263,6 +287,7 @@
       "original_artifact": "A 29-sheet comparative model, five full-resolution capital-stack diagrams, a 19-page report, cross-case scenario tables, and an explicit evidence hierarchy.",
       "scope_boundary": "This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
         "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
         "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
