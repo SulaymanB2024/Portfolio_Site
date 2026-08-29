@@ -188,6 +188,19 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
   },
   {
     "kind": "research",
+    "path": "/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
+    "aliases": [],
+    "title": "What Happened to the Software Buyout Boom?",
+    "seoTitle": "Software Buyout Cohort, 2020–2022: Exit Audit",
+    "seoDescription": "Audit 25 large 2020–2022 software buyouts by current control, liquidity events, creditor transfers, and clean sponsor realizations at the 2026 cutoff.",
+    "date": "2026.08.17",
+    "dateModified": "2026.08.29",
+    "indexable": true,
+    "staticSummary": "A control-based audit of 25 large 2020–2022 software take-private transactions found no clean sponsor realizations by August 17, 2026 under its stated definition. That is an inventory of control exits, not evidence that every deal lost money or a basis for calculating cohort returns. The public research package audits 25 large sponsor-led software take-private transactions announced from 2020 through 2022. Company-reported headline transaction values sum to $171.2 billion, but those values use mixed definitions and size the cohort rather than measuring sponsor equity or current value.",
+    "image": "/images/social/og-research.png"
+  },
+  {
+    "kind": "research",
     "path": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
     "aliases": [
       "/markets/how-airlines-borrow-against-loyalty-programs"

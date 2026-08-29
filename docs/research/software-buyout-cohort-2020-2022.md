@@ -20,4 +20,4 @@ The cohort produced liquidity events and ownership changes, but conventional con
 
 The $171.2 billion total combines mixed company-reported transaction-value definitions. It should not be used as a denominator for equity returns. Sponsor cash flows, debt paydown, add-on investment, dividend proceeds, continuation-vehicle pricing, fund marks, and carried-interest allocations are generally not public at the level required for a cohort return calculation.
 
-The full publication package contains the editable report, rendered report, row-level cohort, source ledger, claim ledger, and machine-readable summary.
+The public repository package contains the row-level cohort, claim ledger, methodology note, machine-readable summary, and a noindex fallback web edition. It does not include the underlying transaction source ledger, editable report, rendered report, or sponsor cash flows, so the package supports the stated control inventory rather than an independently reproducible cohort return estimate.

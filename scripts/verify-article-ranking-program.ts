@@ -78,7 +78,7 @@ const priorityQueryPaths = new Set([
 ]);
 const texasTollPath = '/markets/who-owns-texas-toll-roads';
 
-assert(expectedPaths.length === 25, `expected 25 indexable article routes, found ${expectedPaths.length}`);
+assert(expectedPaths.length === 26, `expected 26 indexable article routes, found ${expectedPaths.length}`);
 assert(
   expectedPaths.join('\n') === targetPaths.join('\n'),
   `article target registry does not match indexable routes:\nexpected ${expectedPaths.join(', ')}\nreceived ${targetPaths.join(', ')}`,

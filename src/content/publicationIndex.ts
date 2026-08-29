@@ -6,6 +6,7 @@ import { getArticlePath, getArticleBySlug } from './articleRegistry';
 import { HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG } from './hiddenFinancingHardwareArticle';
 import { INDEX_COMPANY_MATTERS_ARTICLE_SLUG } from './indexCompanyMattersArticle';
 import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvestigationArticle';
+import { SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG } from './softwareBuyoutCohortArticle';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
 import { THE_AI_MEGAWATT_ARTICLE_SLUG } from './theAiMegawattArticle';
@@ -34,6 +35,7 @@ const publicDataInfrastructure = article('technical-seo-public-data-infrastructu
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
 const indexCompanyMatters = article(INDEX_COMPANY_MATTERS_ARTICLE_SLUG);
+const softwareBuyoutCohort = article(SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG);
 const airlineLoyaltyFinancing = article(AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG);
 const onlineReturnsInvestigation = article(ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG);
 const hiddenFinancingHardware = article(HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG);
@@ -123,6 +125,13 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     description: indexCompanyMatters.subtitle,
     date: indexCompanyMatters.dateModified ?? indexCompanyMatters.date,
     featured: true,
+  },
+  {
+    category: 'Markets and investing',
+    title: softwareBuyoutCohort.title,
+    href: getArticlePath(softwareBuyoutCohort),
+    description: softwareBuyoutCohort.subtitle,
+    date: softwareBuyoutCohort.dateModified ?? softwareBuyoutCohort.date,
   },
   {
     category: 'Markets and investing',

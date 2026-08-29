@@ -57,6 +57,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Technical SEO Migrations Need Executable Release Gates](https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates)
 - [Who Owns Austin’s Home-Service Companies?](https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies)
 - [What Happens When an Index Decides a Company Matters?](https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters)
+- [What Happened to the Software Buyout Boom?](https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit)
 - [How Airlines Borrow Against Loyalty Programs](https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs)
 - [Where Do Online Returns Go? Inside Reverse Logistics](https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go)
 - [Hardware Startup Financing: Five Capital Stacks](https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups)
