@@ -5,9 +5,9 @@ export type SiteNavItem = {
 };
 
 export const primaryNav: SiteNavItem[] = [
-  { label: 'Work', href: '/work', description: 'Six public records with ownership, system details, status, constraints, and supporting evidence.' },
+  { label: 'Work', href: '/work', description: 'A complete project-family ledger plus six flagship records, with ownership, status, visibility, and evidence boundaries.' },
   { label: 'Atlas', href: '/atlas', description: 'An in-development crawl and evidence system with capability and public-proof status.' },
-  { label: 'Research', href: '/research', description: 'Search, technical SEO, product, data, markets, and infrastructure research.' },
+  { label: 'Research', href: '/research', description: 'Four connected clusters for AI systems, search systems, technical SEO, and markets models.' },
   { label: 'About', href: '/about', description: 'Technical practice, current work, experience, and operating principles.' },
   { label: 'Resume', href: '/resume', description: 'Recruiter-ready experience, education, skills, and PDF.' },
   { label: 'Contact', href: '/contact', description: 'Direct email and a short project brief.' },

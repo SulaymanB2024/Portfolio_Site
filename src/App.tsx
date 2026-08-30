@@ -29,6 +29,7 @@ const loadMethodPage = () => import('./pages/VoidAgencyMethodPage');
 const loadAboutPage = () => import('./pages/AboutPage');
 const loadResumePage = () => import('./pages/ResumePage');
 const loadResearchPage = () => import('./pages/ResearchPage');
+const loadResearchClusterPage = () => import('./pages/ResearchClusterPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
 const loadViralBenchArticlePage = () => import('./pages/ViralBenchArticlePage');
@@ -47,6 +48,7 @@ const VoidAgencyMethodPage = lazy(loadMethodPage);
 const AboutPage = lazy(loadAboutPage);
 const ResumePage = lazy(loadResumePage);
 const ResearchPage = lazy(loadResearchPage);
+const ResearchClusterPage = lazy(loadResearchClusterPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
 const ViralBenchArticlePage = lazy(loadViralBenchArticlePage);
@@ -142,6 +144,8 @@ async function preloadRoute(path: string) {
     await loadResumePage();
   } else if (route?.path === '/research') {
     await loadResearchPage();
+  } else if (route?.section === 'research-cluster') {
+    await loadResearchClusterPage();
   } else if (route?.section === 'technical-seo-hub') {
     await loadProgrammaticSeoHubPage();
   } else if (route?.section === 'technical-seo-guide') {
@@ -214,6 +218,8 @@ export default function App() {
     page = <ResumePage />;
   } else if (route?.path === '/research') {
     page = <ResearchPage />;
+  } else if (route?.section === 'research-cluster') {
+    page = <ResearchClusterPage path={route.path} />;
   } else if (route?.section === 'technical-seo-hub') {
     page = <ProgrammaticSeoHubPage path={route.path} />;
   } else if (route?.section === 'technical-seo-guide') {

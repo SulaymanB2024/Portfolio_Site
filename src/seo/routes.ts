@@ -1,4 +1,5 @@
 import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from '../content/programmaticSeo';
+import { CONTENT_CLUSTERS } from '../content/contentClusters';
 import { ARTICLE_ROUTE_METADATA } from '../content/articleRouteMetadata';
 import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
 import {
@@ -22,6 +23,7 @@ import {
   marketsJsonLd,
   methodJsonLd,
   researchAssetsJsonLd,
+  researchClusterJsonLd,
   resumeJsonLd,
   sitemapJsonLd,
   viralBenchArticleJsonLd,
@@ -41,6 +43,7 @@ export type RouteSection =
   | 'service'
   | 'local-service'
   | 'research'
+  | 'research-cluster'
   | 'research-article'
   | 'technical-seo-hub'
   | 'technical-seo-guide';
@@ -105,7 +108,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'website',
     priority: 1.0,
     includeInSitemap: true,
-    lastmod: KEYWORD_LASTMOD,
+    lastmod: '2026-08-30',
     staticSummary:
       'Technical SEO and AI systems builder working across crawl infrastructure, analytics, product workflows, and source-led investment research.',
     image: PROFILE_OG_IMAGE,
@@ -116,16 +119,16 @@ const CORE_ROUTES: SeoRoute[] = [
     aliases: [],
     title: 'Technical SEO, AI Systems & Research Portfolio',
     description:
-      'Technical SEO portfolio and AI systems work from Sulayman Bowles, including Atlas crawl software, audit methods, analytics, research, and public evidence.',
+      'Complete project ledger for Sulayman Bowles across AI systems, search infrastructure, technical SEO, market models, public evidence, and bounded prototypes.',
     h1: 'Selected Work',
     displayH1: 'Systems I built. Evidence you can inspect.',
     section: 'work',
     pageType: 'website',
     priority: 0.9,
     includeInSitemap: true,
-    lastmod: KEYWORD_LASTMOD,
+    lastmod: '2026-08-30',
     staticSummary:
-      'A technical SEO, AI systems, analytics, and research portfolio with six public artifacts, explicit ownership, implementation details, and proof.',
+      'A complete, provenance-bounded project-family ledger with explicit ownership, implementation status, visibility, constraints, and inspectable proof.',
     image: WORK_OG_IMAGE,
     jsonLd: workJsonLd(),
   },
@@ -226,12 +229,12 @@ const CORE_ROUTES: SeoRoute[] = [
     description:
       'Technical SEO research and AI systems notes from Sulayman Bowles on crawlability, crawler policy, Atlas, public data, identity, markets, and evidence.',
     h1: 'Research Notes',
-    displayH1: 'One archive. Clear categories.',
+    displayH1: 'Four clusters. One complete archive.',
     section: 'research',
     pageType: 'research',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: KEYWORD_LASTMOD,
+    lastmod: '2026-08-30',
     staticSummary:
       'Technical SEO, AI search, crawlability, infrastructure, product, data, and markets research with visible sources and evidence limits.',
     image: RESEARCH_OG_IMAGE,
@@ -333,7 +336,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'research',
     priority: 0.7,
     includeInSitemap: true,
-    lastmod: METADATA_REFRESH_LASTMOD,
+    lastmod: '2026-08-30',
     staticSummary:
       'A filtered finance and infrastructure-investing archive within the broader Research hub.',
     image: RESEARCH_OG_IMAGE,
@@ -343,6 +346,29 @@ const CORE_ROUTES: SeoRoute[] = [
     ),
   },
 ];
+
+const RESEARCH_CLUSTER_ROUTES: SeoRoute[] = CONTENT_CLUSTERS
+  .filter((cluster) => cluster.id === 'ai-agent-systems' || cluster.id === 'search-crawl-systems')
+  .map((cluster) => ({
+    path: cluster.path,
+    aliases: [],
+    title: `${cluster.title} Research | Sulayman Bowles`,
+    description: cluster.description,
+    h1: cluster.title,
+    displayH1: cluster.title,
+    section: 'research-cluster',
+    pageType: 'research',
+    priority: 0.75,
+    includeInSitemap: true,
+    lastmod: '2026-08-30',
+    staticSummary: cluster.directAnswer,
+    image: RESEARCH_OG_IMAGE,
+    jsonLd: researchClusterJsonLd({
+      title: cluster.title,
+      description: cluster.description,
+      path: cluster.path,
+    }),
+  }));
 
 const ARTICLE_ROUTES: SeoRoute[] = ARTICLE_ROUTE_METADATA.map((article) => {
   const path = article.path;
@@ -391,7 +417,7 @@ const PROGRAMMATIC_HUB_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_HUBS.map((hub) => (
   pageType: 'research',
   priority: hub.family === 'all' ? 0.8 : 0.7,
   includeInSitemap: hub.indexable,
-  lastmod: hub.dateModified,
+  lastmod: hub.family === 'all' ? '2026-08-30' : hub.dateModified,
   staticSummary: hub.directAnswer,
   image: RESEARCH_OG_IMAGE,
   jsonLd: technicalSeoCollectionJsonLd({
@@ -430,6 +456,7 @@ const PROGRAMMATIC_PAGE_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_PAGES.map((page) =
 
 export const SEO_ROUTES: SeoRoute[] = [
   ...CORE_ROUTES,
+  ...RESEARCH_CLUSTER_ROUTES,
   ...ARTICLE_ROUTES,
   ...PROGRAMMATIC_HUB_ROUTES,
   ...PROGRAMMATIC_PAGE_ROUTES,
