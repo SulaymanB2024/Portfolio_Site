@@ -7,6 +7,7 @@ import { CONTENT_CLUSTERS } from '../content/contentClusters';
 import { buyerDecisionEvidence } from '../content/evidenceLists';
 import {
   PROJECT_FAMILY_COUNT,
+  PROJECT_SOURCE_RECORD_COUNT,
   getProjectsForCluster,
   isExternalProjectHref,
 } from '../content/projectIndex';
@@ -54,12 +55,14 @@ export default function WorkPage() {
       <InternalHeader activePath="/work" tone="dark" />
 
       <section className="relative z-10 mx-auto grid min-h-[54vh] max-w-[1480px] content-end px-4 pb-16 pt-20 md:px-8 xl:px-10">
-        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Project ledger / {PROJECT_FAMILY_COUNT} verified families</p>
+        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">
+          Project ledger / {PROJECT_FAMILY_COUNT} families / {PROJECT_SOURCE_RECORD_COUNT} named records
+        </p>
         <h1 className="max-w-5xl font-serif text-[4rem] italic leading-[0.82] tracking-normal md:text-[7.5rem] xl:text-[10rem]">
           Systems I built. Evidence you can inspect.
         </h1>
         <p className="mt-10 max-w-3xl text-base leading-relaxed text-canvas/68">
-          Six flagship records show the deepest public proof. The complete ledger below also includes active systems, studies, contributions, prototypes, and archived design families, each with explicit ownership, status, visibility, and a boundary on what the evidence proves.
+          Six flagship records show the deepest public proof. The complete ledger below also names the active systems, studies, contributions, prototypes, and archived source projects inside each family, with explicit ownership, status, visibility, and a boundary on what the evidence proves.
         </p>
       </section>
 
@@ -137,10 +140,10 @@ export default function WorkPage() {
           </div>
           <div className="max-w-3xl text-sm leading-relaxed text-canvas/66">
             <p>
-              {PROJECT_FAMILY_COUNT} families are grouped by the research question they support. Duplicate clones, superseded copies, upstream workshops, generated worktrees, support folders, and undocumented placeholders are consolidated or excluded rather than inflated into separate projects.
+              {PROJECT_FAMILY_COUNT} families contain {PROJECT_SOURCE_RECORD_COUNT} named project records and are grouped by the research question they support. Duplicate clones, generated worktrees, empty repositories, support folders, and undocumented placeholders are excluded rather than inflated into separate projects.
             </p>
             <p className="mt-4 text-canvas/50">
-              “Private” means the project is named and bounded here without exposing a repository or claiming a public deployment.
+              Superseded implementations and attributed workshop adaptations remain visible inside their family. “Private” means the project is named and bounded here without exposing a repository or claiming a public deployment.
             </p>
           </div>
         </div>
@@ -176,6 +179,16 @@ export default function WorkPage() {
                           </div>
                           <h4 className="mt-4 font-serif text-3xl italic leading-[0.95] tracking-normal text-canvas">{project.title}</h4>
                           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-canvas/68">{project.summary}</p>
+                          <div className="mt-5">
+                            <p className="text-[9px] uppercase tracking-[0.2em] text-canvas/48">Named project records</p>
+                            <ul className="mt-3 flex flex-wrap gap-2" aria-label={`${project.title} source projects`}>
+                              {project.sourceProjects.map((sourceProject) => (
+                                <li key={sourceProject} className="border border-canvas/14 px-2.5 py-1.5 text-[9px] leading-relaxed tracking-[0.08em] text-canvas/56">
+                                  {sourceProject}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
                         <div className="grid content-between gap-5 border-l border-canvas/14 pl-5">
                           <div>

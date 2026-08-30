@@ -5,7 +5,7 @@ import {
 } from '../content/evidenceLists';
 import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import { PROFILE_FACTS } from '../content/profileFacts';
-import { PROJECT_INDEX } from '../content/projectIndex';
+import { PROJECT_INDEX, PROJECT_SOURCE_RECORD_COUNT } from '../content/projectIndex';
 import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
@@ -622,14 +622,14 @@ export function workJsonLd(): JsonLd {
       '@type': 'ItemList',
       '@id': `${absoluteUrl('/work')}#project-ledger`,
       name: 'Sulayman Bowles Project Families',
-      description: 'Project families grouped without counting duplicate clones, generated worktrees, or undocumented placeholders as separate projects.',
+      description: `${PROJECT_INDEX.length} project families containing ${PROJECT_SOURCE_RECORD_COUNT} named project records, grouped without counting duplicate clones, generated worktrees, empty repositories, or undocumented placeholders as separate accomplishments.`,
       numberOfItems: PROJECT_INDEX.length,
       itemListOrder: 'https://schema.org/ItemListOrderAscending',
       itemListElement: PROJECT_INDEX.map((project, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         name: project.title,
-        description: `${project.summary} Evidence boundary: ${project.evidenceBoundary}`,
+        description: `${project.summary} Named project records: ${project.sourceProjects.join(', ')}. Evidence boundary: ${project.evidenceBoundary}`,
         url: project.href
           ? project.href.startsWith('http') ? project.href : absoluteUrl(project.href)
           : `${absoluteUrl('/work')}#projects-${project.clusterId}`,
