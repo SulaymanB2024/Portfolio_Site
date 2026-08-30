@@ -16,7 +16,12 @@ import {
   getPublicationsForCluster,
 } from '../content/contentClusters';
 import { PUBLICATION_INDEX } from '../content/publicationIndex';
-import { PROJECT_INDEX, getProjectsForCluster, type ProjectIndexItem } from '../content/projectIndex';
+import {
+  PROJECT_INDEX,
+  PROJECT_SOURCE_RECORD_COUNT,
+  getProjectsForCluster,
+  type ProjectIndexItem,
+} from '../content/projectIndex';
 import {
   getProgrammaticPagesByFamily,
   getProgrammaticSeoHub,
@@ -327,6 +332,7 @@ function projectLedgerStaticHtml(projects: readonly ProjectIndexItem[]) {
           <h3>${title}</h3>
           <p><strong>Ownership:</strong> ${escapeHtml(project.ownershipLabel)}. <strong>Status:</strong> ${escapeHtml(project.statusLabel)}. <strong>Visibility:</strong> ${escapeHtml(project.visibilityLabel)}.</p>
           <p>${escapeHtml(project.summary)}</p>
+          <p><strong>Named project records:</strong> ${escapeHtml(project.sourceProjects.join(', '))}.</p>
           <p><strong>Evidence boundary:</strong> ${escapeHtml(project.evidenceBoundary)}</p>
         </article>`;
   }).join('\n        ');
@@ -730,7 +736,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/work') {
     return articleShell(
       'Selected Work',
-      `A complete project ledger with ${PROJECT_INDEX.length} provenance-bounded families plus six flagship public records.`,
+      `A complete project ledger with ${PROJECT_INDEX.length} provenance-bounded families, ${PROJECT_SOURCE_RECORD_COUNT} named project records, and six flagship public records.`,
       `<h2>Six Flagship Public Records</h2>
         ${workProofCards
           .map(
@@ -746,7 +752,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           )
           .join('\n        ')}
         <h2>${PROJECT_INDEX.length} Project Families</h2>
-        <p>Duplicate clones, generated worktrees, upstream workshops, support folders, and undocumented placeholders are consolidated or excluded rather than counted as separate accomplishments.</p>
+        <p>${PROJECT_SOURCE_RECORD_COUNT} named project records remain visible inside their families. Duplicate clones, generated worktrees, empty repositories, support folders, and undocumented placeholders are excluded rather than counted as separate accomplishments.</p>
         ${CONTENT_CLUSTERS.map((cluster) => `<section><h3><a href="${cluster.path}">${escapeHtml(cluster.title)}</a></h3>${projectLedgerStaticHtml(getProjectsForCluster(cluster.id))}</section>`).join('\n        ')}
         <h2>Supporting Links</h2>
         ${linkCards(contextualProofLinks)}

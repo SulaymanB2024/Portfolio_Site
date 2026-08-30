@@ -1,6 +1,10 @@
 import { CONTENT_CLUSTERS, getContentClusterForCategory, getPublicationsForCluster } from '../src/content/contentClusters';
 import { PUBLICATION_INDEX } from '../src/content/publicationIndex';
-import { PROJECT_INDEX } from '../src/content/projectIndex';
+import {
+  PROJECT_INDEX,
+  PROJECT_SOURCE_RECORD_COUNT,
+  PROJECT_SOURCE_RECORDS,
+} from '../src/content/projectIndex';
 import { getSeoRoute } from '../src/seo/routes';
 import { buildRouteStaticHtml } from '../src/seo/staticContent';
 
@@ -8,6 +12,8 @@ const REQUIRED_PROJECT_FAMILY_IDS = [
   'atlas-engine',
   'void-agency',
   'content-spy-helios',
+  'mandatearc',
+  'aerospace-catalog-prototype',
   'portfolio-site',
   'technical-ledger',
   'austin-crawlability-pilot',
@@ -15,6 +21,8 @@ const REQUIRED_PROJECT_FAMILY_IDS = [
   'queen-maker',
   'viralbench-codex',
   'linedown-desk',
+  'project-apollo',
+  'developer-workshops',
   'project-delta',
   'applypilot-contribution',
   'dropkit-sui',
@@ -30,7 +38,30 @@ const REQUIRED_PROJECT_FAMILY_IDS = [
   'energy-trading',
   'solana-balance-engine',
   'funding-research-studio',
+  'jane-street-m0',
+  'real-estate-interface-lab',
+  'investment-interface-lab',
   'portfolio-design-archive',
+] as const;
+
+const REQUIRED_DISCOVERED_PROJECT_RECORDS = [
+  'MandateArc',
+  'AeroSpace-Testing-',
+  'Project-Apollo',
+  'coin-recognition-ios-scaffold',
+  'Jane-Street-M0',
+  'Atlas Estate',
+  'AVANT Real Estate',
+  'LITHIC ESTATES',
+  'SPECTRA',
+  'InvestHub',
+  'Investment_Site',
+  'Website_Investment',
+  'Website_Investment_2.0',
+  'New_repo investment dashboard',
+  'Pulumi AI AgentCore workshop fork',
+  'Sui Journal workshop fork',
+  'Sui Object Model workshop fork',
 ] as const;
 
 function assert(condition: unknown, message: string): asserts condition {
@@ -62,10 +93,18 @@ assert(
 );
 unique(PROJECT_INDEX.map((project) => project.id), 'project family IDs');
 unique(PROJECT_INDEX.map((project) => project.title), 'project family titles');
+unique(PROJECT_SOURCE_RECORDS, 'named project records');
+assert(PROJECT_SOURCE_RECORDS.length === PROJECT_SOURCE_RECORD_COUNT, 'named project record count: duplicate records detected');
+assert(PROJECT_SOURCE_RECORD_COUNT === 83, `named project records: expected 83, received ${PROJECT_SOURCE_RECORD_COUNT}`);
 
 const projectIds = new Set(PROJECT_INDEX.map((project) => project.id));
 for (const requiredId of REQUIRED_PROJECT_FAMILY_IDS) {
   assert(projectIds.has(requiredId), `project ledger: missing required family ${requiredId}`);
+}
+
+const sourceProjects = new Set(PROJECT_SOURCE_RECORDS);
+for (const requiredRecord of REQUIRED_DISCOVERED_PROJECT_RECORDS) {
+  assert(sourceProjects.has(requiredRecord), `project ledger: missing discovered project record ${requiredRecord}`);
 }
 
 const clusterIds = new Set(CONTENT_CLUSTERS.map((cluster) => cluster.id));
@@ -76,6 +115,7 @@ for (const project of PROJECT_INDEX) {
   assert(project.visibilityLabel.trim().length > 0, `${project.id}: visibility is missing`);
   assert(project.summary.length >= 60, `${project.id}: summary is too short`);
   assert(project.evidenceBoundary.length >= 60, `${project.id}: evidence boundary is too short`);
+  assert(project.sourceProjects.length > 0, `${project.id}: named project records are missing`);
   assert(
     !project.href || project.href.startsWith('/') || project.href.startsWith('https://'),
     `${project.id}: public href must be an internal path or HTTPS URL`,
@@ -109,6 +149,9 @@ for (const cluster of CONTENT_CLUSTERS) {
   }
   for (const project of PROJECT_INDEX.filter((item) => item.clusterId === cluster.id)) {
     assert(clusterStatic.includes(project.title), `${cluster.path}: missing connected project ${project.title}`);
+    for (const sourceProject of project.sourceProjects) {
+      assert(clusterStatic.includes(sourceProject), `${cluster.path}: missing named project record ${sourceProject}`);
+    }
   }
   for (const featuredPath of cluster.featuredPaths) {
     assert(
@@ -120,8 +163,11 @@ for (const cluster of CONTENT_CLUSTERS) {
 
 for (const project of PROJECT_INDEX) {
   assert(workStatic.includes(project.title), `/work: missing project family ${project.title}`);
+  for (const sourceProject of project.sourceProjects) {
+    assert(workStatic.includes(sourceProject), `/work: missing named project record ${sourceProject}`);
+  }
 }
 
 console.log(
-  `Content-cluster and project-ledger verification passed: ${CONTENT_CLUSTERS.length} clusters, ${PUBLICATION_INDEX.length} uniquely assigned publications, and ${PROJECT_INDEX.length} project families.`,
+  `Content-cluster and project-ledger verification passed: ${CONTENT_CLUSTERS.length} clusters, ${PUBLICATION_INDEX.length} uniquely assigned publications, ${PROJECT_INDEX.length} project families, and ${PROJECT_SOURCE_RECORD_COUNT} named project records.`,
 );

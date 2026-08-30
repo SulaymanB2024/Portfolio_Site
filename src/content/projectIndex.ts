@@ -11,6 +11,7 @@ export type ProjectIndexItem = {
   evidenceBoundary: string;
   href?: string;
   linkLabel?: string;
+  sourceProjects: readonly string[];
   relatedPaths: readonly string[];
 };
 
@@ -26,6 +27,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The public sample proves a bounded open-corpus run; it does not claim universal crawl coverage or client outcomes.',
     href: '/atlas',
     linkLabel: 'Open Atlas',
+    sourceProjects: ['Atlas Engine', 'Thick-Scraper-VOID-', 'cuddly-waffle', 'npovda / Atlas Places API archive'],
     relatedPaths: ['/atlas/sample-crawl', '/research/technical-seo'],
   },
   {
@@ -39,6 +41,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The public method documents scope and operating standards; it is not a substitute for private client evidence.',
     href: 'https://www.void-agency.com/',
     linkLabel: 'Visit Void Agency',
+    sourceProjects: ['Void Agency', 'Void-Website'],
     relatedPaths: ['/method', '/contact'],
   },
   {
@@ -50,6 +53,31 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     visibilityLabel: 'Private working repository',
     summary: 'A local-first competitor-intelligence and content-research system designed around governed web capture and comparable evidence.',
     evidenceBoundary: 'The repository is an implementation harness, not a finished hosted SaaS product; production data services are not claimed.',
+    sourceProjects: ['Content Spy / Helios'],
+    relatedPaths: ['/research/search-systems'],
+  },
+  {
+    id: 'mandatearc',
+    title: 'MandateArc',
+    clusterId: 'search-crawl-systems',
+    ownershipLabel: 'Product architect / builder',
+    statusLabel: 'Release-gated prototype',
+    visibilityLabel: 'Private working repository',
+    summary: 'An SEO-first public site and metadata-only operator console for qualifying enterprise workflow-data opportunities without taking custody of raw records.',
+    evidenceBoundary: 'The source proves a local product and verification contract; no production deployment, customer intake, domain, or enterprise data access is claimed.',
+    sourceProjects: ['MandateArc'],
+    relatedPaths: ['/research/search-systems'],
+  },
+  {
+    id: 'aerospace-catalog-prototype',
+    title: 'Aerospace Hardware Catalog Prototype',
+    clusterId: 'search-crawl-systems',
+    ownershipLabel: 'Interface prototyper',
+    statusLabel: 'Archived discovery prototype',
+    visibilityLabel: 'Public source; unlinked here',
+    summary: 'A structured B2B product-discovery interface experiment for aerospace fastening hardware, category navigation, and technical product lookup.',
+    evidenceBoundary: 'The prototype is an interface study based on public material; it does not establish supplier affiliation, catalogue accuracy, certification, or commercial availability.',
+    sourceProjects: ['AeroSpace-Testing-'],
     relatedPaths: ['/research/search-systems'],
   },
   {
@@ -63,6 +91,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The repository and live routes show implementation; search exposure and citations remain measured outcomes, not design claims.',
     href: 'https://github.com/SulaymanB2024/Portfolio_Site',
     linkLabel: 'View source',
+    sourceProjects: ['Portfolio_Site'],
     relatedPaths: ['/research', '/work'],
   },
   {
@@ -76,6 +105,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The ledger expands artifact access without replacing this site as the canonical identity source.',
     href: 'https://sulayman-bowles.tech/',
     linkLabel: 'Open the ledger',
+    sourceProjects: ['sulaymanbowles.tech Technical Ledger', 'Tech-Portfolio evidence site'],
     relatedPaths: ['/research/search-systems'],
   },
   {
@@ -89,6 +119,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The sample is a crawlability baseline, not a ranking, traffic, revenue, or whole-site health claim.',
     href: '/austin-technical-seo',
     linkLabel: 'Inspect the pilot',
+    sourceProjects: ['Austin Crawlability Pilot'],
     relatedPaths: ['/research/technical-seo'],
   },
   {
@@ -100,6 +131,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     visibilityLabel: 'Private working repository',
     summary: 'A clean-room internship aggregation engine with immutable observations, field provenance, canonical records, and publication eligibility gates.',
     evidenceBoundary: 'Candidate records, provider claims, and synthetic fixtures are not counted as accepted live coverage.',
+    sourceProjects: ['KING Maker', 'internship-aggregator-engine', 'internship-content-engine'],
     relatedPaths: ['/research/ai-systems'],
   },
   {
@@ -111,6 +143,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     visibilityLabel: 'Private working repository',
     summary: 'A separate job-data architecture for lawful acquisition, canonical deduplication, lineage, acceptance controls, and sealed snapshots.',
     evidenceBoundary: 'It is a source-only bootstrap: no five-million-job coverage, live acquisition, or cloud deployment is claimed.',
+    sourceProjects: ['QUEEN Maker', 'Model F source-acquisition scripts / didactic-succotash'],
     relatedPaths: ['/research/ai-systems'],
   },
   {
@@ -124,6 +157,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The article presents an evaluation architecture, not a deployed autonomous marketing service or performance guarantee.',
     href: '/viralbench-codex-agent-harness',
     linkLabel: 'Read the design',
+    sourceProjects: ['ViralBench', '1-800-Operator'],
     relatedPaths: ['/research/ai-systems'],
   },
   {
@@ -135,6 +169,31 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     visibilityLabel: 'Private working repository',
     summary: 'A maintenance-materials intake agent with typed extraction, evidence spans, deterministic policy checks, exception routing, replay, and fake ERP export packets.',
     evidenceBoundary: 'The working demo uses synthetic fixtures and has no live mailbox, customer send, OCR vendor, production database, or ERP write path.',
+    sourceProjects: ['LineDown Desk'],
+    relatedPaths: ['/research/ai-systems'],
+  },
+  {
+    id: 'project-apollo',
+    title: 'Project Apollo Wallet Provisioning',
+    clusterId: 'ai-agent-systems',
+    ownershipLabel: 'Automation developer',
+    statusLabel: 'Archived operational prototype',
+    visibilityLabel: 'Public source; link withheld for data review',
+    summary: 'An idempotent email-to-wallet provisioning utility with Crossmint wallet creation, lookup retries, CSV exports, and an optional SendGrid notification path.',
+    evidenceBoundary: 'The code demonstrates a bounded workflow; recipient data, outbound email, API permissions, production execution, and credential hygiene are not asserted as release-ready.',
+    sourceProjects: ['Project-Apollo'],
+    relatedPaths: ['/research/ai-systems'],
+  },
+  {
+    id: 'developer-workshops',
+    title: 'Agent and Blockchain Workshop Adaptations',
+    clusterId: 'ai-agent-systems',
+    ownershipLabel: 'Learner / adapter',
+    statusLabel: 'Completed workshop family',
+    visibilityLabel: 'Public forks with upstream attribution',
+    summary: 'Hands-on adaptations of AWS agent infrastructure and Sui object-model tutorials used to test deployment, programmable transactions, and on-chain application patterns.',
+    evidenceBoundary: 'These are attributed workshop and fork records, not original upstream products, independently audited systems, or production deployments.',
+    sourceProjects: ['Pulumi AI AgentCore workshop fork', 'Sui Journal workshop fork', 'Sui Object Model workshop fork'],
     relatedPaths: ['/research/ai-systems'],
   },
   {
@@ -146,6 +205,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     visibilityLabel: 'Private source; restricted preview',
     summary: 'A reusable real-time dithering and post-processing system for Three.js scenes, demonstrated through an interactive helmet experience.',
     evidenceBoundary: 'The hosted preview currently requires authorization; no public demo or packaged production graphics platform is claimed.',
+    sourceProjects: ['Project Delta', 'D-Shaders-V2', 'project-delta-codex-harness', 'project-delta-markdown-pilot', 'project-delta-dithering'],
     relatedPaths: ['/work'],
   },
   {
@@ -157,6 +217,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     visibilityLabel: 'Attribution retained',
     summary: 'Automation and systems work performed in a workspace derived from the open-source ApplyPilot project.',
     evidenceBoundary: 'ApplyPilot originated with Pickle-Pixel; this entry claims contribution work, not authorship of the upstream product.',
+    sourceProjects: ['ApplyPilot contribution workspace'],
     relatedPaths: ['/research/ai-systems'],
   },
   {
@@ -170,6 +231,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The repository describes a testnet milestone plan; later wallet, sponsorship, asset, and frontend milestones are not presented as shipped.',
     href: 'https://github.com/SulaymanB2024/SUI_CalHacks',
     linkLabel: 'View repository',
+    sourceProjects: ['DropKit / SUI_CalHacks', 'CalHacks_SUI execution notes'],
     relatedPaths: ['/research/ai-systems'],
   },
   {
@@ -181,6 +243,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     visibilityLabel: 'Private working repositories',
     summary: 'Solana Token-2022 experiments spanning confidential transfers, reserve logic, payroll batches, allow-listed redemption, and feature-gated yield concepts.',
     evidenceBoundary: 'These are code and test prototypes; no production mint, audited reserve, live collateral, or mainnet deployment is claimed.',
+    sourceProjects: ['pUSD', 'OnionDAO-Project', 'OnionUSD-P', 'SPL Token adapter workspace'],
     relatedPaths: ['/research/ai-systems'],
   },
   {
@@ -192,19 +255,21 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     visibilityLabel: 'Unlinked pending release review',
     summary: 'A Base Sepolia contract-challenge toolkit for transaction inspection, answer signing, winner verification, and reward-claim experiments.',
     evidenceBoundary: 'The archival workspace contains live-action scripts and is not presented as safe to run; credential and release hygiene require review before public linking.',
+    sourceProjects: ['On-Chain Challenge Solver'],
     relatedPaths: ['/research/ai-systems'],
   },
   {
     id: 'coin-app-research',
-    title: 'Coin App Research Archive',
+    title: 'Coin Recognition Research and iOS Engine',
     clusterId: 'markets-models',
     ownershipLabel: 'Researcher / developer',
-    statusLabel: 'Public research repository',
-    visibilityLabel: 'Public code and notes',
-    summary: 'A cryptocurrency research archive for comparing product, protocol, and market questions through inspectable notes and code.',
-    evidenceBoundary: 'The repository is research material, not a production trading product or investment recommendation.',
+    statusLabel: 'Research and implementation family',
+    visibilityLabel: 'Public research; private app source',
+    summary: 'Consumer coin-identification research paired with an offline-native iOS recognition engine, catalogue, and evaluation tooling.',
+    evidenceBoundary: 'The public repository proves a bounded research archive; private iOS source does not establish production accuracy, catalogue completeness, or App Store release.',
     href: 'https://github.com/SulaymanB2024/coin-app',
-    linkLabel: 'View repository',
+    linkLabel: 'View public research',
+    sourceProjects: ['coin-app', 'coin-recognition-ios-scaffold'],
     relatedPaths: ['/markets'],
   },
   {
@@ -218,6 +283,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'Scenario values are analyst screening estimates, not bids, appraisals, fairness opinions, or current security quotations.',
     href: '/markets/who-owns-texas-toll-roads',
     linkLabel: 'Read the study',
+    sourceProjects: ['Texas Toll-Road Ownership Research'],
     relatedPaths: ['/markets'],
   },
   {
@@ -231,6 +297,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'Outputs are competition analysis, not audited financial statements or investment advice.',
     href: 'https://github.com/SulaymanB2024/5-Race-the-Case-Competition',
     linkLabel: 'View repository',
+    sourceProjects: ['5-Race-the-Case-Competition'],
     relatedPaths: ['/markets'],
   },
   {
@@ -244,6 +311,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'Repository results describe the competition dataset and evaluation setup, not a live operational forecast.',
     href: 'https://github.com/SulaymanB2024/DataHack',
     linkLabel: 'View repository',
+    sourceProjects: ['DataHack Wind Forecasting'],
     relatedPaths: ['/markets'],
   },
   {
@@ -257,6 +325,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'Backtests and competition results are bounded to their datasets and rules; no live trading performance is claimed.',
     href: 'https://github.com/SulaymanB2024/IMC_BOT',
     linkLabel: 'View public code',
+    sourceProjects: ['IMC_BOT', 'IMCProsperity research', 'imc-prosperity-3-backtester'],
     relatedPaths: ['/markets'],
   },
   {
@@ -270,6 +339,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The model is an educational research artifact, not a current price target or investment recommendation.',
     href: 'https://github.com/SulaymanB2024/sezzle-fundamental-model',
     linkLabel: 'View repository',
+    sourceProjects: ['Sezzle Fundamental Model'],
     relatedPaths: ['/markets'],
   },
   {
@@ -283,6 +353,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The study was finalized in April 2025 and should not be read as a current commodity forecast.',
     href: 'https://github.com/SulaymanB2024/UTexas_Coal',
     linkLabel: 'View repository',
+    sourceProjects: ['UTexas_Coal'],
     relatedPaths: ['/markets'],
   },
   {
@@ -296,6 +367,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The repository is a historical research exercise, not a live commodity-trading signal.',
     href: 'https://github.com/SulaymanB2024/UTexas_EnergyTrading',
     linkLabel: 'View repository',
+    sourceProjects: ['UTexas_EnergyTrading'],
     relatedPaths: ['/markets'],
   },
   {
@@ -309,6 +381,7 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     evidenceBoundary: 'The tool reconstructs balance history for supplied data; it is not a portfolio tracker, custody service, or performance claim.',
     href: 'https://github.com/SulaymanB2024/sturdy-lamp',
     linkLabel: 'View repository',
+    sourceProjects: ['Solana Balance History Engine / sturdy-lamp'],
     relatedPaths: ['/markets'],
   },
   {
@@ -320,6 +393,43 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     visibilityLabel: 'Private working repository',
     summary: 'A research workspace for perpetual funding, liquidity, and cross-venue comparisons across decentralized and centralized exchanges.',
     evidenceBoundary: 'The workspace supports research and screening; it is not an autonomous arbitrage executor or verified profit record.',
+    sourceProjects: ['Arbitrage', 'ARBI adapter', 'Crypto Arbitrage Calculator fork', 'Liquidations Chart fork'],
+    relatedPaths: ['/markets'],
+  },
+  {
+    id: 'jane-street-m0',
+    title: 'Jane Street M0 Puzzle Solver',
+    clusterId: 'markets-models',
+    ownershipLabel: 'Solver developer',
+    statusLabel: 'Completed exact solver',
+    visibilityLabel: 'Private code',
+    summary: 'An exact Python solver for the July 2026 Jane Street M0 puzzle, structured as a reproducible constraint and search problem rather than a hand-derived answer.',
+    evidenceBoundary: 'The private repository records a bounded puzzle implementation; it is not a trading strategy, competition placement, or generalized optimization benchmark.',
+    sourceProjects: ['Jane-Street-M0'],
+    relatedPaths: ['/markets'],
+  },
+  {
+    id: 'real-estate-interface-lab',
+    title: 'Real Estate Interface and Underwriting Lab',
+    clusterId: 'markets-models',
+    ownershipLabel: 'Product designer / prototyper',
+    statusLabel: 'Prototype family',
+    visibilityLabel: 'Private and archived source',
+    summary: 'A family of real-estate interfaces exploring property discovery, investment-grade asset presentation, underwriting concepts, and AI-assisted browsing.',
+    evidenceBoundary: 'These prototypes test information architecture and interaction; they do not represent brokerage services, verified listings, investment performance, or deployed underwriting models.',
+    sourceProjects: ['Atlas Estate', 'AVANT Real Estate', 'LITHIC ESTATES', 'SPECTRA', 'Void real-estate design study'],
+    relatedPaths: ['/markets'],
+  },
+  {
+    id: 'investment-interface-lab',
+    title: 'Investment Research Interface Lab',
+    clusterId: 'markets-models',
+    ownershipLabel: 'Research-interface builder',
+    statusLabel: 'Archived prototype family',
+    visibilityLabel: 'Public and private historical source',
+    summary: 'Earlier investment-research hubs and dashboard concepts spanning theses, macro views, portfolio composition, market data, and interactive financial interfaces.',
+    evidenceBoundary: 'The interfaces contain prototype and historical research surfaces; they are not live portfolios, verified market feeds, advisory services, or performance records.',
+    sourceProjects: ['InvestHub', 'Investment_Site', 'Website_Investment', 'Website_Investment_2.0', 'New_repo investment dashboard', 'Website-80-2 market dashboard'],
     relatedPaths: ['/markets'],
   },
   {
@@ -331,11 +441,32 @@ export const PROJECT_INDEX: readonly ProjectIndexItem[] = [
     visibilityLabel: 'Public and private historical repositories',
     summary: 'Earlier portfolio, investment-site, venture-site, and visual-interface iterations consolidated as one design lineage.',
     evidenceBoundary: 'Duplicate clones and superseded site iterations are grouped here rather than counted as separate current products.',
+    sourceProjects: [
+      'Website Roman portfolio',
+      'Gemini_G Domus portfolio',
+      'Gotham OS / ubiquitous-goggles',
+      'Repo_one dynamic-background study',
+      'Repo_two generative-art portfolio',
+      'ideal-telegram portfolio concept',
+      'laughing-octo-carnival masterplan',
+      'The_Website design guide',
+      'Website_2.0 build guide',
+      'reimagined-octo-succotash',
+      'probable-chainsaw',
+      'animated-lamp portfolio',
+      'Project Janus / TInkerAKA',
+      'Lumina Digital interface',
+      'monochrome-artist-portfolio',
+      'Wenbs investment dashboard shell',
+      'cioevhwr 3D interface study',
+    ],
     relatedPaths: ['/work'],
   },
 ] as const;
 
 export const PROJECT_FAMILY_COUNT = PROJECT_INDEX.length;
+export const PROJECT_SOURCE_RECORDS = PROJECT_INDEX.flatMap((project) => project.sourceProjects);
+export const PROJECT_SOURCE_RECORD_COUNT = new Set(PROJECT_SOURCE_RECORDS).size;
 
 export function getProjectsForCluster(clusterId: ContentClusterId) {
   return PROJECT_INDEX.filter((project) => project.clusterId === clusterId);
