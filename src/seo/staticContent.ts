@@ -9,7 +9,14 @@ import {
 } from '../content/evidenceLists';
 import { getArticleByPath } from '../content/articleRegistry';
 import { isInvestmentMemo, type ArticleResource, type ArticleSection } from '../content/articleModels';
-import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
+import {
+  CONTENT_CLUSTERS,
+  getContentClusterByPath,
+  getContentClusterForPublicationPath,
+  getPublicationsForCluster,
+} from '../content/contentClusters';
+import { PUBLICATION_INDEX } from '../content/publicationIndex';
+import { PROJECT_INDEX, getProjectsForCluster, type ProjectIndexItem } from '../content/projectIndex';
 import {
   getProgrammaticPagesByFamily,
   getProgrammaticSeoHub,
@@ -310,25 +317,44 @@ function articleShell(title: string, intro: string, body: string) {
       </article>`;
 }
 
+function projectLedgerStaticHtml(projects: readonly ProjectIndexItem[]) {
+  return projects.map((project) => {
+    const title = project.href
+      ? `<a href="${escapeHtml(project.href)}">${escapeHtml(project.title)}</a>`
+      : escapeHtml(project.title);
+
+    return `<article id="project-${escapeHtml(project.id)}">
+          <h3>${title}</h3>
+          <p><strong>Ownership:</strong> ${escapeHtml(project.ownershipLabel)}. <strong>Status:</strong> ${escapeHtml(project.statusLabel)}. <strong>Visibility:</strong> ${escapeHtml(project.visibilityLabel)}.</p>
+          <p>${escapeHtml(project.summary)}</p>
+          <p><strong>Evidence boundary:</strong> ${escapeHtml(project.evidenceBoundary)}</p>
+        </article>`;
+  }).join('\n        ');
+}
+
 function articleSearchBriefStaticHtml(path: string, options: { includeDirectAnswer?: boolean } = {}) {
   const target = getArticleSearchTarget(path);
-  if (!target) return '';
+  const cluster = getContentClusterForPublicationPath(path);
+  if (!target && !cluster) return '';
   const includeDirectAnswer = options.includeDirectAnswer ?? true;
+  const relatedLinks = target?.relatedPaths.map((relatedPath) => ({
+    href: relatedPath,
+    label: getArticleRelatedLinkLabel(path, relatedPath),
+  })) ?? [];
+
+  if (cluster && !relatedLinks.some((link) => link.href === cluster.path)) {
+    relatedLinks.unshift({ href: cluster.path, label: `${cluster.shortTitle} research cluster` });
+  }
 
   return `<section ${includeDirectAnswer ? 'aria-labelledby="direct-answer-title"' : 'aria-label="Article research brief"'}>
-        ${includeDirectAnswer ? `<h2 id="direct-answer-title">Direct answer: ${escapeHtml(target.primaryQuery)}</h2>
+        ${includeDirectAnswer && target ? `<h2 id="direct-answer-title">Direct answer: ${escapeHtml(target.primaryQuery)}</h2>
         <p>${escapeHtml(target.directAnswer)}</p>` : ''}
-        <h3>Original research artifact</h3>
+        ${target ? `<h3>Original research artifact</h3>
         <p>${escapeHtml(target.originalArtifact)}</p>
         <h3>What this page adds</h3>
-        <p>${escapeHtml(target.serpGap)}</p>
+        <p>${escapeHtml(target.serpGap)}</p>` : ''}
         <h3>Related research</h3>
-        ${linkList(target.relatedPaths.map((relatedPath) => {
-          return {
-            href: relatedPath,
-            label: getArticleRelatedLinkLabel(path, relatedPath),
-          };
-        }))}
+        ${linkList(relatedLinks)}
       </section>`;
 }
 
@@ -571,6 +597,27 @@ function aiManagersArticleStaticHtml() {
 }
 
 export function buildRouteStaticHtml(route: SeoRoute) {
+  const researchCluster = route.section === 'research-cluster'
+    ? getContentClusterByPath(route.path)
+    : undefined;
+  if (researchCluster) {
+    const publications = getPublicationsForCluster(researchCluster);
+    const projects = getProjectsForCluster(researchCluster.id);
+
+    return articleShell(
+      researchCluster.title,
+      researchCluster.directAnswer,
+      `<h2>Questions in this cluster</h2>
+        <ol>${researchCluster.questions.map((question) => `<li>${escapeHtml(question)}</li>`).join('')}</ol>
+        <h2>${publications.length} published records</h2>
+        ${publications.map((item) => `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.description)}</p>`).join('\n        ')}
+        <h2>${projects.length} connected project families</h2>
+        ${projectLedgerStaticHtml(projects)}
+        <h2>Explore all research clusters</h2>
+        ${linkList(CONTENT_CLUSTERS.map((cluster) => ({ label: cluster.title, href: cluster.path, description: cluster.description })))}`,
+    );
+  }
+
   const programmaticHub = getProgrammaticSeoHub(route.path);
   if (programmaticHub) {
     const pages = programmaticHub.family === 'all'
@@ -586,11 +633,14 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       `${collectionLinks}
         <h2>${pages.length} evidence-backed guides</h2>
         ${pages.map((page) => `<h3><a href="${page.path}">${escapeHtml(page.title)}</a></h3><p>${escapeHtml(page.description)}</p>`).join('\n        ')}
+        ${programmaticHub.family === 'all' ? `<h2>Technical SEO Studies and Public Artifacts</h2>${getPublicationsForCluster('technical-seo').filter((item) => item.href !== programmaticHub.path).map((item) => `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.description)}</p>`).join('\n        ')}` : ''}
+        ${programmaticHub.family === 'all' ? `<h2>Connected Project Families</h2>${projectLedgerStaticHtml(getProjectsForCluster('technical-seo'))}` : ''}
         <h2>Implementation boundaries</h2>
         ${linkList([
           { label: 'Read the technical SEO audit method', href: '/method', description: 'Service-process intent remains on the method route.' },
           { label: 'Contact Sulayman Bowles', href: '/contact', description: 'Conversion and audit-intake endpoint.' },
           { label: 'Return to the research archive', href: '/research', description: 'Research notes and public evidence.' },
+          ...CONTENT_CLUSTERS.filter((cluster) => cluster.path !== programmaticHub.path).map((cluster) => ({ label: cluster.title, href: cluster.path, description: cluster.description })),
         ])}`,
     );
   }
@@ -630,8 +680,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     return articleShell(
       'Research Notes',
       'Selected notes on search systems, crawlability, Atlas, public data, and markets work.',
-      `<h2>Four Research Categories</h2>
-        ${definitionCards(PUBLICATION_CATEGORY_SUMMARY.map(([title, description]) => [title, description]))}
+      `<h2>Four Research Clusters</h2>
+        ${CONTENT_CLUSTERS.map((cluster) => `<h3><a href="${cluster.path}">${escapeHtml(cluster.title)}</a></h3><p>${escapeHtml(cluster.description)}</p>`).join('\n        ')}
         <h2>${PUBLICATION_INDEX.length} Notes and Artifacts</h2>
         ${PUBLICATION_INDEX.map((item) => `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.description)}</p>`).join('\n        ')}
         <h2>From Research to Implementation</h2>
@@ -680,8 +730,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/work') {
     return articleShell(
       'Selected Work',
-      'A technical SEO portfolio and AI systems portfolio with six public artifacts, explicit ownership, implementation details, constraints, and inspectable evidence.',
-      `<h2>Six Public Artifacts</h2>
+      `A complete project ledger with ${PROJECT_INDEX.length} provenance-bounded families plus six flagship public records.`,
+      `<h2>Six Flagship Public Records</h2>
         ${workProofCards
           .map(
             (item) =>
@@ -695,6 +745,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
               <p><a href="${item.evidenceHref}">${escapeHtml(item.evidenceLabel)}</a></p>`,
           )
           .join('\n        ')}
+        <h2>${PROJECT_INDEX.length} Project Families</h2>
+        <p>Duplicate clones, generated worktrees, upstream workshops, support folders, and undocumented placeholders are consolidated or excluded rather than counted as separate accomplishments.</p>
+        ${CONTENT_CLUSTERS.map((cluster) => `<section><h3><a href="${cluster.path}">${escapeHtml(cluster.title)}</a></h3>${projectLedgerStaticHtml(getProjectsForCluster(cluster.id))}</section>`).join('\n        ')}
         <h2>Supporting Links</h2>
         ${linkCards(contextualProofLinks)}
         <h2>Evidence Before Intake</h2>
@@ -947,8 +1000,13 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'Download the Appian assumptions table', href: RESEARCH_ASSETS.appianAssumptionsCsv, description: 'CSV source table for the research assumptions.' },
         ])}
         ${appianAssumptionTableStaticHtml()}
+        <h2>Connected Project Families</h2>
+        ${projectLedgerStaticHtml(getProjectsForCluster('markets-models'))}
         <h2>All Research Categories</h2>
-        ${linkList([{ label: 'Open the unified Research hub', href: '/research' }])}`,
+        ${linkList([
+          { label: 'Open the unified Research hub', href: '/research' },
+          ...CONTENT_CLUSTERS.filter((cluster) => cluster.id !== 'markets-models').map((cluster) => ({ label: cluster.title, href: cluster.path })),
+        ])}`,
     );
   }
 

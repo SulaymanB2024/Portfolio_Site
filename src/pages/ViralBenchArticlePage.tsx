@@ -247,8 +247,8 @@ export default function ViralBenchArticlePage() {
     mode: 'narrative',
     className: 'viralbench-toll-article',
     archive: {
-      href: '/research',
-      label: 'Research archive',
+      href: '/research/ai-systems',
+      label: 'AI systems cluster',
     },
     hero: {
       eyebrow: 'ViralBench / Codex / agent evaluation',
@@ -305,6 +305,7 @@ export default function ViralBenchArticlePage() {
       content: 'ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before any promotion.',
       note: 'Build note based on the live ViralBench methodology and the supplied standalone handoff at commit 5f5f57e.',
       links: [
+        { href: '/research/ai-systems', label: 'AI systems research cluster' },
         ...SEARCH_TARGET.relatedPaths.map((path) => ({
           href: path,
           label: getArticleRelatedLinkLabel(ROUTE.path, path),

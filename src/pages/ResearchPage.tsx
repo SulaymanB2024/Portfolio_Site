@@ -16,8 +16,10 @@ import {
   TechnicalPanel,
   TextLink,
 } from '../components/design/Primitives';
+import { CONTENT_CLUSTERS, getPublicationsForCluster } from '../content/contentClusters';
 import { INVESTMENT_MEMOS } from '../content/marketTheses';
-import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
+import { PUBLICATION_INDEX } from '../content/publicationIndex';
+import { getProjectsForCluster } from '../content/projectIndex';
 import { researchContextLinks } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
@@ -77,9 +79,9 @@ export default function ResearchPage() {
         <section className="relative grid min-h-[64vh] items-end gap-12 overflow-hidden border-b border-current/12 pb-14 pt-16 md:pt-20 lg:grid-cols-[minmax(0,0.6fr)_minmax(320px,0.4fr)]">
           <div className="relative z-10 min-w-0">
             <SectionEyebrow className="text-ink/60">Research</SectionEyebrow>
-            <EditorialHeading className="mt-8">One archive. Clear categories.</EditorialHeading>
+            <EditorialHeading className="mt-8">Four clusters. One complete archive.</EditorialHeading>
             <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/68">
-              This archive contains crawler-policy analysis, URL-level technical SEO artifacts, AI-system evaluation designs, ownership models, assumption tables, and source-led market research. Each item states its source base, method, evidence limit, and current implementation status; finance-only work remains available as a filtered Markets archive.
+              This archive connects crawler-policy analysis, URL-level technical SEO artifacts, AI-system evaluation designs, ownership models, assumption tables, and source-led market research. Each cluster has a stable question set, a complete publication index, and the project families that put the research into practice.
             </p>
           </div>
 
@@ -91,7 +93,7 @@ export default function ResearchPage() {
         <div className="flex flex-wrap items-center gap-5 border-b border-current/12 py-8">
           <PrimaryCTA href="/work" id="research-work-link" data-portfolio-cta="research_view_work">View selected work</PrimaryCTA>
           <TextLink href="/markets" id="research-markets-link" data-portfolio-cta="research_markets" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
-            Markets filter
+            Markets cluster
           </TextLink>
           <TextLink href="/atlas" id="research-atlas-link" data-portfolio-cta="research_atlas" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
             Atlas
@@ -101,17 +103,28 @@ export default function ResearchPage() {
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Categories" title="Five ways into the work.">
-            Each lane has a concrete question, source base, and boundary between observed facts and interpretation.
+          <SectionHeader eyebrow="Content clusters" title="Four governed ways into the work.">
+            Each cluster has one audience promise, a stable hub, a complete publication set, and connected project systems. No article is counted in more than one primary cluster.
           </SectionHeader>
-          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5">
-            {PUBLICATION_CATEGORY_SUMMARY.map(([title, description], index) => (
-              <TechnicalPanel key={title} className="min-h-[210px]">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-current/60">{String(index + 1).padStart(2, '0')}</p>
-                <h2 className="mt-10 font-serif text-3xl italic leading-none tracking-normal text-current">{title}</h2>
-                <p className="mt-5 text-sm leading-relaxed text-current/64">{description}</p>
-              </TechnicalPanel>
-            ))}
+          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+            {CONTENT_CLUSTERS.map((cluster, index) => {
+              const publicationCount = getPublicationsForCluster(cluster).length;
+              const projectCount = getProjectsForCluster(cluster.id).length;
+
+              return (
+                <LinkPanel key={cluster.id} href={cluster.path} className="grid min-h-[270px] content-between gap-8">
+                  <div>
+                    <div className="flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.22em] text-current/58">
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <span>{publicationCount} records / {projectCount} projects</span>
+                    </div>
+                    <h2 className="mt-10 font-serif text-3xl italic leading-none tracking-normal text-current">{cluster.shortTitle}</h2>
+                    <p className="mt-5 text-sm normal-case leading-relaxed tracking-normal text-current/64">{cluster.description}</p>
+                  </div>
+                  <span className="text-[10px] uppercase tracking-[0.2em]">Open cluster →</span>
+                </LinkPanel>
+              );
+            })}
           </SurfaceGrid>
         </PageFrame>
       </section>

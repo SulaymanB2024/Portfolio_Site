@@ -477,8 +477,8 @@ export default function AiManagersArticlePage() {
     mode: 'narrative',
     className: 'ai-managers-article',
     archive: {
-      href: '/research',
-      label: 'Research archive',
+      href: '/research/ai-systems',
+      label: 'AI systems cluster',
     },
     hero: {
       eyebrow: 'AI-operated shops / human control / commercial reality',
@@ -535,6 +535,7 @@ export default function AiManagersArticlePage() {
       content: AI_MANAGERS_ARTICLE_CONCLUSION.content,
       note: 'Research cutoff: July 14, 2026. Financial claims are labeled by source type and accounting limit. No simulation score is presented as real-world profit.',
       links: [
+        { href: '/research/ai-systems', label: 'AI systems research cluster' },
         ...SEARCH_TARGET.relatedPaths.map((path) => ({
           href: path,
           label: getArticleRelatedLinkLabel(AI_MANAGERS_ARTICLE_PATH, path),

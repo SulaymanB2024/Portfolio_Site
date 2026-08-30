@@ -9,6 +9,7 @@ import {
   type ArticleReaderConfig,
 } from '../components/ArticleLayout';
 import { getArticleBySlug, getArticlePath } from '../content/articleRegistry';
+import { getContentClusterForPublicationPath } from '../content/contentClusters';
 import {
   isInvestmentMemo,
   type ArticleSection,
@@ -283,8 +284,10 @@ function GenericArticle({
   article: PublicArticle;
 }) {
   const investmentMemo = isInvestmentMemo(article);
-  const backHref = investmentMemo ? '/markets' : '/research';
-  const backLabel = investmentMemo ? 'Markets archive' : 'Research archive';
+  const articlePath = getArticlePath(article);
+  const contentCluster = getContentClusterForPublicationPath(articlePath);
+  const backHref = contentCluster?.path ?? (investmentMemo ? '/markets' : '/research');
+  const backLabel = contentCluster ? `${contentCluster.shortTitle} cluster` : investmentMemo ? 'Markets archive' : 'Research archive';
   const boundary = investmentMemo ? article.recommendationBoundary : article.evidenceBoundary;
   const modifiedDate = article.dateModified ?? article.date;
   const hasDistinctModifiedDate = normalizePublicationDate(modifiedDate) !== normalizePublicationDate(article.date);
@@ -297,12 +300,14 @@ function GenericArticle({
   const numberedSections = sections?.filter((section) => !section.id.toLowerCase().includes('faq'));
   const faqSections = sections?.filter((section) => section.id.toLowerCase().includes('faq'));
   const navItems = articleNav(article, sections);
-  const searchTarget = getArticleSearchTarget(getArticlePath(article));
-  const articlePath = getArticlePath(article);
+  const searchTarget = getArticleSearchTarget(articlePath);
   const relatedLinks = searchTarget?.relatedPaths.map((path) => ({
     href: path,
     label: getArticleRelatedLinkLabel(articlePath, path),
   })) ?? [];
+  if (contentCluster && !relatedLinks.some((link) => link.href === contentCluster.path)) {
+    relatedLinks.unshift({ href: contentCluster.path, label: `${contentCluster.shortTitle} research cluster` });
+  }
   const study = article.artwork.kind === 'study'
     ? {
         label: article.artwork.label,

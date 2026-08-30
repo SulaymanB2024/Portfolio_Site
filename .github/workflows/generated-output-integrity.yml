@@ -26,6 +26,7 @@ jobs:
       - run: npm run verify:vercel-seo
       - run: npm run verify:internal-links
       - run: npm run verify:keywords
+      - run: npm run verify:portfolio-coverage
       - run: npm run verify:reduction
       - run: npm run audit:style
       - run: npm run verify:security
