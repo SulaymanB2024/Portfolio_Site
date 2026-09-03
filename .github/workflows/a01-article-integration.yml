@@ -24,8 +24,9 @@ jobs:
 
       - name: Materialize the article content and public assets
         run: |
-          echo "9e35fae01b93d008d93d7b160c1c53b0af1e1e6219837c0f5c6f36c53bcf589f  .github/a01-site-content.tar.gz" | sha256sum --check
-          tar -xzf .github/a01-site-content.tar.gz -C .
+          cat .github/a01-payload/part*.b64 | base64 --decode > /tmp/a01-site-content.tar.gz
+          echo "9e35fae01b93d008d93d7b160c1c53b0af1e1e6219837c0f5c6f36c53bcf589f  /tmp/a01-site-content.tar.gz" | sha256sum --check
+          tar -xzf /tmp/a01-site-content.tar.gz -C .
           test -s src/content/usTollRoadArticle.ts
           test -s public/research/us-toll-road-ownership-2026.csv
           test -s public/images/research/us-toll-road-ownership-stack.svg
