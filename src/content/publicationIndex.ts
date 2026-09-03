@@ -170,6 +170,14 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
   },
   {
     category: 'Markets and investing',
+    title: 'Why Texas Toll Roads Stay Tolled: Where the Money Goes After Construction',
+    href: '/research/financial-systems/why-texas-toll-roads-stay-tolled',
+    description: 'Audited FY2025 records trace operations, debt service, reserves, county mobility transfers, and private concession distributions without forcing unlike systems into one statewide toll-dollar chart.',
+    date: '2026.09.03',
+    featured: true,
+  },
+  {
+    category: 'Markets and investing',
     title: texasTollRoads.title,
     href: getArticlePath(texasTollRoads),
     description: texasTollRoads.subtitle,

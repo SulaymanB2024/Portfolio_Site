@@ -6,7 +6,7 @@
   "scripts": {
     "predev": "npm run generate:article-routes",
     "dev": "vite --port=3000 --host=127.0.0.1",
-    "prebuild": "npm run generate:article-routes",
+    "prebuild": "npm run generate:article-routes && npm run generate:texas-toll-article",
     "build": "npm run generate:public && vite build && tsx scripts/generate-static-routes.ts",
     "preview": "vite preview",
     "prelint": "npm run generate:article-routes",
@@ -40,7 +40,8 @@
     "verify:pseo": "tsx scripts/verify-programmatic-seo.ts",
     "verify:pseo-live": "tsx scripts/verify-live-canonical-routes.ts",
     "verify:reduction": "node scripts/verify-portfolio-reduction.mjs",
-    "verify:security": "node scripts/verify-security-hardening.mjs"
+    "verify:security": "node scripts/verify-security-hardening.mjs",
+    "generate:texas-toll-article": "node scripts/generate-texas-toll-article.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",

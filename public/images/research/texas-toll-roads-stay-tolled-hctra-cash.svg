@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="600" viewBox="0 0 1100 600" role="img" aria-labelledby="title desc">
+<title id="title">HCTRA FY2025 selected cash activity</title>
+<desc id="desc">Horizontal bars show customer receipts, cash operations, principal and interest, capital purchases, and the county mobility transfer. A reference line marks reported toll revenue.</desc>
+<rect width="1100" height="600" fill="#FFFFFF"/>
+<text x="35" y="46" font-size="29" font-weight="700">HCTRA: selected FY2025 cash activity</text>
+<text x="35" y="78" font-size="17" fill="#444444">Absolute amounts, not a closed allocation of one current toll dollar</text>
+<text x="35" y="147" font-size="18">Customer receipts</text><rect x="265" y="120" width="633.63" height="38" fill="#555555"/><text x="913.63" y="147" font-size="18" font-weight="700">$995.7m</text><text x="35" y="222" font-size="18">Cash operations</text><rect x="265" y="195" width="257.60" height="38" fill="#555555"/><text x="537.60" y="222" font-size="18" font-weight="700">$404.8m</text><text x="35" y="297" font-size="18">Principal + interest</text><rect x="265" y="270" width="154.00" height="38" fill="#555555"/><text x="434.00" y="297" font-size="18" font-weight="700">$242.0m</text><text x="35" y="372" font-size="18">Capital purchases</text><rect x="265" y="345" width="200.65" height="38" fill="#555555"/><text x="480.65" y="372" font-size="18" font-weight="700">$315.3m</text><text x="35" y="447" font-size="18">County mobility transfer</text><rect x="265" y="420" width="253.65" height="38" fill="#555555"/><text x="533.65" y="447" font-size="18" font-weight="700">$398.6m</text>
+<line x1="918.93" y1="105" x2="918.93" y2="490" stroke="#111111" stroke-width="3" stroke-dasharray="8,7"/>
+<text x="908.93" y="520" text-anchor="end" font-size="16">Reported toll revenue: $1,027.6m</text>
+<text x="35" y="558" font-size="16" fill="#444444">Selected uses exceed toll revenue because beginning cash, investments, earnings, borrowing and other sources also funded the year.</text>
+</svg>
