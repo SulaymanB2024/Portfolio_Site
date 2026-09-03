@@ -1,0 +1,75 @@
+ = article(TEXAS_TOLL_ARTICLE_SLUG);\n",
+    "const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);\n"
+    "const usTollRoadOwnership = article(US_TOLL_ROAD_OWNERSHIP_ARTICLE_SLUG);\n",
+)
+replace_once(
+    "src/content/publicationIndex.ts",
+    "  {\n    category: 'Markets and investing',\n    title: texasTollRoads.title,\n",
+    "  {\n"
+    "    category: 'Markets and investing',\n"
+    "    title: usTollRoadOwnership.title,\n"
+    "    href: getArticlePath(usTollRoadOwnership),\n"
+    "    description: usTollRoadOwnership.subtitle,\n"
+    "    date: usTollRoadOwnership.dateModified ?? usTollRoadOwnership.date,\n"
+    "    featured: true,\n"
+    "  },\n"
+    "  {\n    category: 'Markets and investing',\n    title: texasTollRoads.title,\n",
+)
+
+search_targets_path = ROOT / "src/seo/articleSearchTargets.ts"
+search_targets = search_targets_path.read_text(encoding="utf-8")
+new_path = "/markets/who-owns-us-toll-roads"
+new_target = '  {\n    path: \'/markets/who-owns-us-toll-roads\',\n    primaryQuery: "who owns America\'s toll roads",\n    supportingQueries: [\n      \'who owns toll roads in the United States\',\n      \'are toll roads privately owned\',\n      \'privately owned toll roads by state\',\n      \'foreign-owned toll roads in America\',\n      \'who owns toll roads in each state\',\n    ],\n    intent: \'ownership\',\n    cohort: 1,\n    directAnswer:\n      \'Most material U.S. toll systems are publicly titled and send toll revenue to a public authority, transportation department, county, city, or public corporation. A smaller but consequential group is privately titled or controlled through long concessions, while legal title, operations, billing, revenue rights, equity, debt, and reversion can sit with different entities.\',\n    serpGap:\n      \'Federal inventories identify facilities but rarely trace title, concession control, billing, toll-revenue rights, equity, debt, and reversion in one current state-by-state reference.\',\n    originalArtifact:\n      \'A 51-jurisdiction lookup, a 33-record private and hybrid structure table, downloadable CSVs, a source ledger, and an ownership-stack data dictionary.\',\n    cannibalizationBoundary:\n      \'This national page compares state models and material U.S. concessions; the Texas page remains the deeper owner-by-owner and cash-flow investigation for one state.\',\n    lastVerified: \'2026-09-02\',\n    relatedPaths: [\n      \'/markets/who-owns-texas-toll-roads-\',\n      \'/research/financial-systems/who-owns-austin-home-service-companies\',\n      \'/research/financial-systems/what-happens-when-an-index-decides-a-company-matters\',\n      \'/research/search-console/technical-seo-public-data-infrastructure\',\n    ],\n  },\n"
+if f"path: '{new_path}'" not in search_targets:
+    anchor = "export const ARTICLE_SEARCH_TARGETS = [\n"
+    if search_targets.count(anchor) != 1:
+        raise RuntimeError("articleSearchTargets.ts: array anchor not found exactly once")
+    search_targets = search_targets.replace(anchor, anchor + new_target, 1)
+
+
+def add_related_path(text: str, source_path: str, related_path: str) -> str:
+    pattern = re.compile(
+        r"(  {\n    path: " + re.escape(repr(source_path)) + r",[\s\S]*?    relatedPaths: \[\n)"
+    )
+    match = pattern.search(text)
+    if not match:
+        raise RuntimeError(f"articleSearchTargets.ts: unable to locate relatedPaths for {source_path}")
+    next_object = text.find("\n  },\n  {", match.end())
+    current_object = text[match.start(): next_object if next_object >= 0 else len(text)]
+    line = f"      '{related_path}',\n"
+    if line in current_object:
+        return text
+    return text[:match.end()] + line + text[match.end():]
+
+
+for source_path in [
+    "/markets/who-owns-texas-toll-roads",
+    "/research/financial-systems/who-owns-austin-home-service-companies",
+    "/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+    "/research/search-console/technical-seo-public-data-infrastructure",
+]:
+    search_targets = add_related_path(search_targets, source_path, new_path)
+
+search_targets_path.write_text(search_targets, encoding="utf-8")
+
+replace_once(
+    "scripts/verify-technical-article-series.ts",
+    "assert(ALL_ARTICLES.length === 26, `expected 26 canonical articles; found ${ALL_ARTICLES.length}`);",
+    "assert(ALL_ARTICLES.length === 27, `expected 27 canonical articles; found ${ALL_ARTICLES.length}`);",
+)
+replace_once(
+    "scripts/verify-article-ranking-program.ts",
+    "assert(expectedPaths.length === 26, `expected 26 indexable article routes, found ${expectedPaths.length}`);",
+    "assert(expectedPaths.length === 27, `expected 27 indexable article routes, found ${expectedPaths.length}`);",
+)
+
+generated_path = ROOT / "src/seo/generatedPublicFiles.ts"
+generated = generated_path.read_text(encoding="utf-8")
+import_anchor = "import {\n  TEXAS_TOLL_OWNERSHIP_CSV_PATH,\n  TEXAS_TOLL_OWNERSHIP_ROWS,\n} from '../content/texasTollRoadOwnership';\n"
+import_snippet = "import {\n  US_TOLL_PRIVATE_HYBRID_ROWS,\n  US_TOLL_ROAD_METHODOLOGY_MARKDOWN,\n  US_TOLL_ROAD_METHODOLOGY_PATH,\n  US_TOLL_ROAD_OWNERSHIP_ARTICLE,\n  US_TOLL_ROAD_PRIVATE_HYBRID_CSV_PATH,\n  US_TOLL_ROAD_SOURCE_LEDGER_CSV_PATH,\n  US_TOLL_ROAD_STATE_OVERVIEW_CSV_PATH,\n  US_TOLL_STATE_OVERVIEW,\n} from '../content/usTollRoadOwnershipArticle';\n"
+if "US_TOLL_ROAD_STATE_OVERVIEW_CSV_PATH" not in generated:
+    if generated.count(import_anchor) != 1:
+        raise RuntimeError("generatedPublicFiles.ts: toll import anchor missing")
+    generated = generated.replace(import_anchor, import_anchor + import_snippet, 1)
+
+builders = "export function buildUsTollRoadStateOverviewCsv() {\n  const header = ['jurisdiction', 'code', 'pattern', 'note'];\n  const rows = US_TOLL_STATE_OVERVIEW.map((row) => [\n    row.jurisdion,\n    row.code,\n    row.pattern,\n    row.note,\n  ]);\n  return `${[header, ...rows].map((row) => row.map(escapeCsv).join(',')).join('\\n')}\\n`;\n}\n\nexport function buildUsTollRoadPrivateHybridCsv() {\n  const header = [\n    'facility',\n    'states',\n    'structure',\n    'public_title_or_sponsor',\n    'priva

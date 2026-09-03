@@ -1,0 +1,63 @@
+te_role_and_current_chain',\n    'term_or_reversion',\n    'confidence',\n    'primary_source',\n  ];\n  const rows = US_TOLL_PRIVATE_HYBRID_ROWS.map((row) => [\n    row.facility,\n    row.states,\n    row.structure,\n    row.public,\n    row.private_role,\n    row.term,\n    row.confidence,\n    row.primary_source,\n  ]);\n  return `${[header, ...rows].map((row) => row.map(escapeCsv).join(',')).join('\\n')}\\n`;\n}\n\nexport function buildUsTollRoadSourceLedgerCsv() {\n  const header = ['source_id', 'label', 'url', 'last_verified', 'source_role'];\n  const rows = US_TOLL_ROAD_OWNERSHIP_ARTICLE.sources.map((source, index) => [\n    `S${String(index + 1).padStart(2, '0')}`,\n    source.label,\n    source.href,\n    source.lastVerified ?? '',\n    source.href.startsWith('https://')\n      ? 'Primary public or first-party record'\n      : 'Internal related investigation',\n  ]);\n  return `${[header, ...rows].map((row) => row.map(escapeCsv).join(',')).join('\\n')}\\n`;\n}\n\nexport function buildUsTollRoadMethodologyMarkdown() {\n  return US_TOLL_ROAD_METHODOLOGY_MARKDOWN.endsWith('\\n')\n    ? US_TOLL_ROAD_METHODOLOGY_MARKDOWN\n    : `${US_TOLL_ROAD_METHODOLOGY_MARKDOWN}\\n`;\n}\n\n"
+if "export function buildUsTollRoadStateOverviewCsv()" not in generated:
+    sitemap_anchor = "export function buildSitemapXml() {"
+    if generated.count(sitemap_anchor) != 1:
+        raise RuntimeError("generatedPublicFiles.ts: sitemap builder anchor missing")
+    generated = generated.replace(sitemap_anchor, builders + sitemap_anchor, 1)
+
+llms_anchor = "${llmsLink('Texas toll-road ownership matrix', absoluteUrl(TEXAS_TOLL_OWNERSHIP_CSV_PATH), 'Dated source-linked ownership rows.')}\n"
+llms_extra = "${llmsLink('U.S. toll-road state ownership overview', absoluteUrl(US_TOLL_ROAD_STATE_OVERVIEW_CSV_PATH), 'Map-ready 50-state and District of Columbia ownership categories.')}\n${llmsLink('U.S. private and hybrid toll structures', absoluteUrl(US_TOLL_ROAD_PRIVATE_HYBRID_CSV_PATH), 'Material private-title, traffic-risk, availability-payment, and nonprofit records.')}\n${llmsLink('U.S. toll-road ownership source ledger', absoluteUrl(US_TOLL_ROAD_SOURCE_LEDGER_CSV_PATH), 'Dated government, authority, concessionaire, and owner sources.')}\n${llmsLink('U.S. toll-road ownership methodology', absoluteUrl(US_TOLL_ROAD_METHODOLOGY_PATH), 'Universe, grouping rules, confidence scale, and correction protocol.')}\n"
+if "U.S. toll-road state ownership overview" not in generated:
+    if generated.count(llms_anchor) != 1:
+        raise RuntimeError("generatedPublicFiles.ts: llms Texas asset anchor missing")
+    generated = generated.replace(llms_anchor, llms_anchor + llms_extra, 1)
+
+generated_path.write_text(generated, encoding="utf-8")
+
+replace_once(
+    "scripts/generate-public-files.ts",
+    "  buildTexasTollOwnershipCsv,\n",
+    "  buildTexasTollOwnershipCsv,\n"
+    "  buildUsTollRoadMethodologyMarkdown,\n"
+    "  buildUsTollRoadPrivateHybridCsv,\n"
+    "  buildUsTollRoadSourceLedgerCsv,\n"
+    "  buildUsTollRoadStateOverviewCsv,\n",
+)
+replace_once(
+    "scripts/generate-public-files.ts",
+    "  fs.writeFile(path.join(publicDir, 'research', 'texas-toll-road-ownership-2026.csv'), buildTexasTollOwnershipCsv()),\n",
+    "  fs.writeFile(path.join(publicDir, 'research', 'texas-toll-road-ownership-2026.csv'), buildTexasTollOwnershipCsv()),\n"
+    "  fs.writeFile(path.join(publicDir, 'research', 'us-toll-road-state-overview-2026.csv'), buildUsTollRoadStateOverviewCsv()),\n"
+    "  fs.writeFile(path.join(publicDir, 'research', 'us-toll-road-private-hybrid-2026.csv'), buildUsTollRoadPrivateHybridCsv()),\n"
+    "  fs.writeFile(path.join(publicDir, 'research', 'us-toll-road-source-ledger-2026.csv'), buildUsTollRoadSourceLedgerCsv()),\n"
+    "  fs.writeFile(path.join(publicDir, 'research', 'us-toll-road-ownership-methodology-2026.md'), buildUsTollRoadMethodologyMarkdown()),\n",
+)
+
+replace_once(
+    "scripts/verify-generated-public-files.ts",
+    "  buildTexasTollOwnershipCsv,\n",
+    "  buildTexasTollOwnershipCsv,\n"
+    "  buildUsTollRoadMethodologyMarkdown,\n"
+    "  buildUsTollRoadPrivateHybridCsv,\n"
+    "  buildUsTollRoadSourceLedgerCsv,\n"
+    "  buildUsTollRoadStateOverviewCsv,\n",
+)
+replace_once(
+    "scripts/verify-generated-public-files.ts",
+    "  ['public/research/texas-toll-road-ownership-2026.csv', buildTexasTollOwnershipCsv()],\n",
+    "  ['public/research/texas-toll-road-ownership-2026.csv', buildTexasTollOwnershipCsv()],\n"
+    "  ['public/research/us-toll-road-state-overview-2026.csv', buildUsTollRoadStateOverviewCsv()],\n"
+    "  ['public/research/us-toll-road-private-hybrid-2026.csv', buildUsTollRoadPrivateHybridCsv()],\n"
+    "  ['public/research/us-toll-road-source-ledger-2026.csv', buildUsTollRoadSourceLedgerCsv()],\n"
+    "  ['public/research/us-toll-road-ownership-methodology-2026.md', buildUsTollRoadMethodologyMarkdown()],\n",
+)
+
+readme_path = ROOT / "README.md"
+readme = readme_path.read_text(encoding="utf-8")
+if "- `/markets/who-owns-us-toll-roads`" not in readme:
+    anchor = "- `/markets/who-owns-texas-toll-roads`"
+    if anchor not in readme:
+        raise RuntimeError("README.md: Texas toll-road route anchor not found")
+    readme_path.write_text(readme.replace(anchor, "- `/markets/who-owns-us-toll-roads`\n" + anchor, 1), encoding="utf-8")
+
+print("National toll-road article registry, discovery, generated assets, and release checks updated.")

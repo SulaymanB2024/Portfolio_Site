@@ -1,0 +1,57 @@
+name: Build national toll-road ownership article
+
+on:
+  push:
+    branches:
+      - research/us-toll-road-ownership-20260902
+
+permissions:
+  contents: write
+
+jobs:
+  build-article:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Reconstruct and apply article patch
+        shell: bash
+        run: |
+          cat scripts/us-toll-bootstrap/part{00..07} > scripts/patch-us-toll-road-article.py
+          echo "e14c6d237a6705e37ba007de2eafd9b498cb145f7d9410f2e6fcdc9d49f18f96  scripts/patch-us-toll-road-article.py" | sha256sum -c -
+          python scripts/patch-us-toll-road-article.py
+      - name: Install dependencies
+        run: npm ci
+      - name: Regenerate typed routes and public assets
+        run: |
+          npm run generate:article-routes
+          npm run generate:public
+      - name: Commit the publication branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: publish national toll-road ownership guide"
+          git push origin HEAD
+      - name: Verify generated outputs
+        run: npm run verify:generated
+      - name: Type-check
+        run: npm run lint
+      - name: Build static routes
+        run: npm run build
+      - name: Verify article contracts
+        run: |
+          npm run verify:articles
+          npm run verify:article-ranking
+          npm run verify:internal-links
+          npm run verify:keywords
+          npm run audit:style
