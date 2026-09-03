@@ -45,7 +45,7 @@ function GuideSection({ section, index }: { section: ProgrammaticSeoSection; ind
       ) : null}
       {section.codeExamples?.map((example) => (
         <figure key={example.title} className="research-guide-code">
-          <figcaption><span>Reproduction fixture</span><strong>{example.title}</strong><p>{example.description}</p></figcaption>
+          <figcaption><span>Worked example</span><strong>{example.title}</strong><p>{example.description}</p></figcaption>
           <pre tabIndex={0}><code>{example.code}</code></pre>
           <p className="research-guide-code__format">Copy-ready {example.language}</p>
         </figure>
@@ -69,7 +69,7 @@ export default function ProgrammaticSeoPage({ path }: { path: string }) {
   const navItems = [
     { id: 'direct-answer', label: 'Direct answer', index: '00' },
     ...page.sections.map((section, index) => ({ id: section.id, label: section.title, index: String(index + 1).padStart(2, '0') })),
-    { id: 'sources', label: 'Source ledger', index: 'S' },
+    { id: 'sources', label: 'Sources', index: 'S' },
   ];
   const wordCount = programmaticPageWordCount(page);
   const readTime = `${Math.max(1, Math.ceil(wordCount / 200))} min`;
@@ -88,7 +88,7 @@ export default function ProgrammaticSeoPage({ path }: { path: string }) {
           title: page.title,
           deck: page.directAnswer,
           imagePlaceholder: {
-            label: `${page.family} diagnostic / evidence plate`,
+            label: `${page.family} diagnostic / worked example`,
             note: page.evidenceArtifact.label,
             variant: 'pipeline',
           },
@@ -99,13 +99,13 @@ export default function ProgrammaticSeoPage({ path }: { path: string }) {
           published: { dateTime: page.datePublished, value: page.datePublished },
           updated: { dateTime: page.dateModified, value: page.dateModified },
           readTime,
-          evidence: `${page.sources.length} sources / labeled fixture`,
+          evidence: `${page.sources.length} sources / labeled example`,
         },
         metrics: [
-          { label: 'Evidence state', value: 'Fixture', note: 'Illustrative; replace before a live claim' },
+          { label: 'Example type', value: 'Illustrative', note: 'Replace before a live claim' },
           { label: 'Diagnostic steps', value: page.diagnosticProcedure.length },
           { label: 'Repair steps', value: page.repairSteps.length },
-          { label: 'Rerun gates', value: page.rerunAcceptanceCheck.length },
+          { label: 'Verification checks', value: page.rerunAcceptanceCheck.length },
         ],
         callouts: [{
           label: 'Direct answer',
@@ -113,19 +113,19 @@ export default function ProgrammaticSeoPage({ path }: { path: string }) {
           content: (
             <>
               <p>{page.directAnswer}</p>
-              <p><strong>Evidence boundary:</strong> {page.evidenceArtifact.description}</p>
+              <p><strong>Example limit:</strong> {page.evidenceArtifact.description}</p>
             </>
           ),
         }],
         navigation: { items: navItems },
         boundary: {
-          label: 'False-positive boundary',
+          label: 'False-positive limit',
           content: page.falsePositiveBoundary,
         },
         endnote: {
-          label: 'Release boundary',
-          title: 'Replace the fixture before a production claim.',
-          content: 'This guide uses an explicitly labeled fixture. Replace it with a dated crawl before making a production claim; rankings and traffic remain external outcomes.',
+          label: 'Before production',
+          title: 'Replace the example before a production claim.',
+          content: 'This guide uses an explicitly labeled example. Replace it with a dated crawl before making a production claim; rankings and traffic remain external outcomes.',
           links: [
             { href: familyHub, label: `${page.family} guide collection` },
             { href: '/research/technical-seo', label: 'Technical SEO diagnostic library' },
@@ -141,14 +141,14 @@ export default function ProgrammaticSeoPage({ path }: { path: string }) {
           <div className="article-reader__prose">
             <p>{page.directAnswer}</p>
             <p><strong>Supporting queries:</strong> {page.supportingQueries.join('; ')}.</p>
-            <p><strong>Fixture fields:</strong> {page.evidenceArtifact.fields.join(', ')}.</p>
+            <p><strong>Example fields:</strong> {page.evidenceArtifact.fields.join(', ')}.</p>
           </div>
         </section>
 
         {page.sections.map((section, index) => <GuideSection key={section.id} section={section} index={index} />)}
 
         <section id="sources" className="toll-source-ledger">
-          <ArticleSectionHeader index="S">Source ledger</ArticleSectionHeader>
+          <ArticleSectionHeader index="S">Sources</ArticleSectionHeader>
           <ol>
             {page.sources.map((source, index) => (
               <li key={source.href}>

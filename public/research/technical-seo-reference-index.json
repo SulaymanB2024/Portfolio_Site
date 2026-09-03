@@ -12,14 +12,14 @@
       "family": "all",
       "url": "https://sulayman-bowles.dev/research/technical-seo",
       "title": "Technical SEO Diagnostic Library",
-      "description": "Evidence-backed technical SEO issue guides, platform playbooks, and audit checklists with reproducible repair gates.",
+      "description": "Technical SEO issue guides, platform playbooks, and audit checklists with reproducible diagnoses and repair checks.",
       "last_verified": "2026-07-20"
     },
     {
       "family": "issue",
       "url": "https://sulayman-bowles.dev/research/technical-seo/issues",
       "title": "Technical SEO Issue Guides",
-      "description": "Diagnose 24 common technical SEO issues with evidence fields, false-positive boundaries, repairs, and rerun checks.",
+      "description": "Diagnose 24 common technical SEO issues with observed fields, false-positive limits, repairs, and post-change checks.",
       "last_verified": "2026-07-20"
     },
     {
@@ -33,7 +33,7 @@
       "family": "checklist",
       "url": "https://sulayman-bowles.dev/research/technical-seo/checklists",
       "title": "Technical SEO Audit Checklists",
-      "description": "Evidence-driven JavaScript, ecommerce, SaaS, and local-business technical SEO audit checklists.",
+      "description": "Measurement-focused JavaScript, ecommerce, SaaS, and local-business technical SEO audit checklists.",
       "last_verified": "2026-07-20"
     }
   ],
@@ -50,9 +50,9 @@
       ],
       "direct_answer": "Missing Canonical Tag: Diagnosis and Repair is confirmed when an indexable HTML document returns no usable rel=canonical declaration in its raw or rendered head. For missing canonical tag, preserve the raw response and rendered document so duplicate candidates remain without an explicit preferred-URL hint, so consolidation depends on weaker signals can be tested against a passing control. Repair missing canonical tag by choosing the authoritative source; accept the missing-canonical change only when raw and rendered HTML expose the same single canonical and the declared URL returns 200 without noindex.",
       "evidence_artifact": {
-        "label": "Missing Canonical Tag: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Missing Canonical Tag: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing missing canonical tag; MISSINGCANONICAL values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing missing canonical tag; MISSINGCANONICAL values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -76,7 +76,7 @@
         "For missing canonical tag, identify the authoritative route, content, or infrastructure owner.",
         "For missing canonical tag, emit one absolute, indexable, final-destination canonical from the server-rendered head.",
         "For missing canonical tag, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For missing canonical tag, retain the failure as a regression fixture."
+        "For missing canonical tag, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For missing canonical tag, raw and rendered HTML expose the same single canonical and the declared URL returns 200 without noindex.",
@@ -120,9 +120,9 @@
       ],
       "direct_answer": "Multiple Canonical Tags: Diagnosis and Repair is confirmed when one document publishes two or more rel=canonical values through HTML, HTTP headers, or rendering. For multiple canonical tags, preserve the raw response and rendered document so conflicting declarations make the preferred URL ambiguous and can cause the hints to be ignored can be tested against a passing control. Repair multiple canonical tags by choosing the authoritative source; accept the multiple-canonical-tags change only when every delivery layer resolves to one normalized canonical target on two consecutive crawls.",
       "evidence_artifact": {
-        "label": "Multiple Canonical Tags: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Multiple Canonical Tags: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing multiple canonical tags; MULTIPLECANONICALTAGS values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing multiple canonical tags; MULTIPLECANONICALTAGS values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -146,7 +146,7 @@
         "For multiple canonical tags, identify the authoritative route, content, or infrastructure owner.",
         "For multiple canonical tags, assign one canonical owner and remove template, plugin, header, or client-side duplicates.",
         "For multiple canonical tags, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For multiple canonical tags, retain the failure as a regression fixture."
+        "For multiple canonical tags, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For multiple canonical tags, every delivery layer resolves to one normalized canonical target on two consecutive crawls.",
@@ -190,9 +190,9 @@
       ],
       "direct_answer": "Canonical to Redirect: Diagnosis and Repair is confirmed when the declared canonical target responds with a redirect instead of a final 200 document. For canonical points to redirect, preserve the raw response and rendered document so the canonical hint and redirect destination disagree about the preferred terminal URL can be tested against a passing control. Repair canonical points to redirect by choosing the authoritative source; accept the canonical-to-redirect change only when the canonical target returns 200 in one request and all sampled links use that same destination.",
       "evidence_artifact": {
-        "label": "Canonical to Redirect: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Canonical to Redirect: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing canonical points to redirect; CANONICALTOREDIRECT values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing canonical points to redirect; CANONICALTOREDIRECT values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -216,7 +216,7 @@
         "For canonical points to redirect, identify the authoritative route, content, or infrastructure owner.",
         "For canonical points to redirect, update the canonical directly to the final indexable destination and align internal links.",
         "For canonical points to redirect, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For canonical points to redirect, retain the failure as a regression fixture."
+        "For canonical points to redirect, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For canonical points to redirect, the canonical target returns 200 in one request and all sampled links use that same destination.",
@@ -260,9 +260,9 @@
       ],
       "direct_answer": "Canonical and Noindex Conflict: Diagnosis and Repair is confirmed when a URL declares a canonical relationship while a noindex directive tells search engines to exclude the document. For canonical noindex conflict, preserve the raw response and rendered document so the page combines consolidation and exclusion instructions that express different intended outcomes can be tested against a passing control. Repair canonical noindex conflict by choosing the authoritative source; accept the canonical-noindex-conflict change only when the final response has one coherent canonical/indexability state confirmed in headers and rendered HTML.",
       "evidence_artifact": {
-        "label": "Canonical and Noindex Conflict: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Canonical and Noindex Conflict: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing canonical noindex conflict; CANONICALNOINDEXCONFLICT values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing canonical noindex conflict; CANONICALNOINDEXCONFLICT values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -286,7 +286,7 @@
         "For canonical noindex conflict, identify the authoritative route, content, or infrastructure owner.",
         "For canonical noindex conflict, choose index-and-consolidate or exclude, then remove the directive that contradicts that decision.",
         "For canonical noindex conflict, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For canonical noindex conflict, retain the failure as a regression fixture."
+        "For canonical noindex conflict, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For canonical noindex conflict, the final response has one coherent canonical/indexability state confirmed in headers and rendered HTML.",
@@ -330,9 +330,9 @@
       ],
       "direct_answer": "Redirect Chain: Diagnosis and Repair is confirmed when a requested URL passes through two or more redirect responses before reaching content. For redirect chain SEO, preserve the raw response and rendered document so legacy migrations or competing rules compose into an unnecessary sequence can be tested against a passing control. Repair redirect chain SEO by choosing the authoritative source; accept the redirect-chain change only when every tested source reaches the intended 200 URL in one redirect or fewer.",
       "evidence_artifact": {
-        "label": "Redirect Chain: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Redirect Chain: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing redirect chain SEO; REDIRECTCHAIN values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing redirect chain SEO; REDIRECTCHAIN values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -356,7 +356,7 @@
         "For redirect chain SEO, identify the authoritative route, content, or infrastructure owner.",
         "For redirect chain SEO, collapse each known source to the final destination and replace internal references to intermediate URLs.",
         "For redirect chain SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For redirect chain SEO, retain the failure as a regression fixture."
+        "For redirect chain SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For redirect chain SEO, every tested source reaches the intended 200 URL in one redirect or fewer.",
@@ -400,9 +400,9 @@
       ],
       "direct_answer": "Redirect Loop: Diagnosis and Repair is confirmed when redirect rules revisit a prior URL or alternate indefinitely between normalized variants. For redirect loop SEO, preserve the raw response and rendered document so host, path, locale, slash, or application rules apply in incompatible order can be tested against a passing control. Repair redirect loop SEO by choosing the authoritative source; accept the redirect-loop change only when clean clients across HTTP and HTTPS reach one final 200 response with no repeated location.",
       "evidence_artifact": {
-        "label": "Redirect Loop: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Redirect Loop: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing redirect loop SEO; REDIRECTLOOP values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing redirect loop SEO; REDIRECTLOOP values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -426,7 +426,7 @@
         "For redirect loop SEO, identify the authoritative route, content, or infrastructure owner.",
         "For redirect loop SEO, identify the smallest cycle, establish one normalization order, and remove the reciprocal rule.",
         "For redirect loop SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For redirect loop SEO, retain the failure as a regression fixture."
+        "For redirect loop SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For redirect loop SEO, clean clients across HTTP and HTTPS reach one final 200 response with no repeated location.",
@@ -470,9 +470,9 @@
       ],
       "direct_answer": "Soft 404: Diagnosis and Repair is confirmed when a thin, empty, or error-like page returns 200 instead of an honest unavailable or useful response. For soft 404 SEO, preserve the raw response and rendered document so the application shell masks missing content while the transport layer reports success can be tested against a passing control. Repair soft 404 SEO by choosing the authoritative source; accept the soft-404 change only when removed URLs return the intended error status and retained URLs pass a rendered-content usefulness review.",
       "evidence_artifact": {
-        "label": "Soft 404: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Soft 404: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing soft 404 SEO; SOFT404 values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing soft 404 SEO; SOFT404 values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -496,7 +496,7 @@
         "For soft 404 SEO, identify the authoritative route, content, or infrastructure owner.",
         "For soft 404 SEO, return 404 or 410 for missing resources, or rebuild the page with complete intent-matching content.",
         "For soft 404 SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For soft 404 SEO, retain the failure as a regression fixture."
+        "For soft 404 SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For soft 404 SEO, removed URLs return the intended error status and retained URLs pass a rendered-content usefulness review.",
@@ -540,9 +540,9 @@
       ],
       "direct_answer": "Robots-Blocked Indexable URL: Diagnosis and Repair is confirmed when robots.txt prevents fetching a URL that remains discoverable and potentially indexable from external signals. For robots blocked indexed page, preserve the raw response and rendered document so crawl control is being used as if it were an index-removal directive can be tested against a passing control. Repair robots blocked indexed page by choosing the authoritative source; accept the robots-blocked-indexable-url change only when the crawler can observe the intended exclusion response and the URL leaves index coverage without new variants.",
       "evidence_artifact": {
-        "label": "Robots-Blocked Indexable URL: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Robots-Blocked Indexable URL: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing robots blocked indexed page; ROBOTSBLOCKEDINDEXABLEURL values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing robots blocked indexed page; ROBOTSBLOCKEDINDEXABLEURL values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -566,7 +566,7 @@
         "For robots blocked indexed page, identify the authoritative route, content, or infrastructure owner.",
         "For robots blocked indexed page, allow crawling long enough to process noindex or return an appropriate status, then control future discovery.",
         "For robots blocked indexed page, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For robots blocked indexed page, retain the failure as a regression fixture."
+        "For robots blocked indexed page, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For robots blocked indexed page, the crawler can observe the intended exclusion response and the URL leaves index coverage without new variants.",
@@ -610,9 +610,9 @@
       ],
       "direct_answer": "Noindex URL in Sitemap: Diagnosis and Repair is confirmed when an XML sitemap lists a URL whose final response or rendered document declares noindex. For noindex URL in sitemap, preserve the raw response and rendered document so the discovery feed recommends crawling a page that the page itself rejects from indexing can be tested against a passing control. Repair noindex URL in sitemap by choosing the authoritative source; accept the noindex-in-sitemap change only when a regenerated sitemap contains only canonical 200 URLs and a recrawl finds no noindex members.",
       "evidence_artifact": {
-        "label": "Noindex URL in Sitemap: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Noindex URL in Sitemap: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing noindex URL in sitemap; NOINDEXINSITEMAP values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing noindex URL in sitemap; NOINDEXINSITEMAP values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -636,7 +636,7 @@
         "For noindex URL in sitemap, identify the authoritative route, content, or infrastructure owner.",
         "For noindex URL in sitemap, derive sitemap membership from the same final indexability contract that emits page directives.",
         "For noindex URL in sitemap, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For noindex URL in sitemap, retain the failure as a regression fixture."
+        "For noindex URL in sitemap, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For noindex URL in sitemap, a regenerated sitemap contains only canonical 200 URLs and a recrawl finds no noindex members.",
@@ -680,9 +680,9 @@
       ],
       "direct_answer": "Redirecting URLs in Sitemap: Diagnosis and Repair is confirmed when an XML sitemap includes one or more URLs that return redirects. For redirect URLs in sitemap, preserve the raw response and rendered document so the sitemap source lags behind routing, migration, or canonical changes can be tested against a passing control. Repair redirect URLs in sitemap by choosing the authoritative source; accept the sitemap-redirects change only when all sitemap members return 200 directly and match their own canonical declarations.",
       "evidence_artifact": {
-        "label": "Redirecting URLs in Sitemap: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Redirecting URLs in Sitemap: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing redirect URLs in sitemap; SITEMAPREDIRECTS values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing redirect URLs in sitemap; SITEMAPREDIRECTS values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -706,7 +706,7 @@
         "For redirect URLs in sitemap, identify the authoritative route, content, or infrastructure owner.",
         "For redirect URLs in sitemap, replace every redirected entry with its canonical final destination and update the feed generator.",
         "For redirect URLs in sitemap, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For redirect URLs in sitemap, retain the failure as a regression fixture."
+        "For redirect URLs in sitemap, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For redirect URLs in sitemap, all sitemap members return 200 directly and match their own canonical declarations.",
@@ -750,9 +750,9 @@
       ],
       "direct_answer": "Orphan Page: Diagnosis and Repair is confirmed when an indexable canonical page receives no crawlable internal link from another indexable page. For orphan page SEO, preserve the raw response and rendered document so publishing, migration, or filtering creates inventory outside the governed navigation graph can be tested against a passing control. Repair orphan page SEO by choosing the authoritative source; accept the orphan-page change only when the page has at least three contextual inbound links and remains within two clicks of the homepage.",
       "evidence_artifact": {
-        "label": "Orphan Page: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Orphan Page: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing orphan page SEO; ORPHANPAGE values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing orphan page SEO; ORPHANPAGE values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -776,7 +776,7 @@
         "For orphan page SEO, identify the authoritative route, content, or infrastructure owner.",
         "For orphan page SEO, add descriptive links from relevant hubs and peer content, or exclude the page if no durable user path exists.",
         "For orphan page SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For orphan page SEO, retain the failure as a regression fixture."
+        "For orphan page SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For orphan page SEO, the page has at least three contextual inbound links and remains within two clicks of the homepage.",
@@ -820,9 +820,9 @@
       ],
       "direct_answer": "Excessive Crawl Depth: Diagnosis and Repair is confirmed when important indexable pages require several navigation hops from an authoritative entry point. For crawl depth SEO, preserve the raw response and rendered document so taxonomy and pagination expose business-priority content only through long paths can be tested against a passing control. Repair crawl depth SEO by choosing the authoritative source; accept the excessive-crawl-depth change only when priority pages are reachable within two clicks and maintain descriptive inbound paths.",
       "evidence_artifact": {
-        "label": "Excessive Crawl Depth: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Excessive Crawl Depth: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing crawl depth SEO; EXCESSIVECRAWLDEPTH values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing crawl depth SEO; EXCESSIVECRAWLDEPTH values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -846,7 +846,7 @@
         "For crawl depth SEO, identify the authoritative route, content, or infrastructure owner.",
         "For crawl depth SEO, introduce intent-based hubs, breadcrumbs, and contextual shortcuts for pages that deserve search visibility.",
         "For crawl depth SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For crawl depth SEO, retain the failure as a regression fixture."
+        "For crawl depth SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For crawl depth SEO, priority pages are reachable within two clicks and maintain descriptive inbound paths.",
@@ -890,9 +890,9 @@
       ],
       "direct_answer": "Broken Internal Link: Diagnosis and Repair is confirmed when a crawlable internal anchor resolves to a 4xx, 5xx, loop, or unintended destination. For broken internal links SEO, preserve the raw response and rendered document so content references outlive moved, renamed, or removed routes can be tested against a passing control. Repair broken internal links SEO by choosing the authoritative source; accept the broken-internal-link change only when the full internal graph returns expected final statuses with no broken interactive anchors.",
       "evidence_artifact": {
-        "label": "Broken Internal Link: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Broken Internal Link: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing broken internal links SEO; BROKENINTERNALLINK values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing broken internal links SEO; BROKENINTERNALLINK values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -916,7 +916,7 @@
         "For broken internal links SEO, identify the authoritative route, content, or infrastructure owner.",
         "For broken internal links SEO, point the source directly to the best live equivalent or remove the link when no replacement exists.",
         "For broken internal links SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For broken internal links SEO, retain the failure as a regression fixture."
+        "For broken internal links SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For broken internal links SEO, the full internal graph returns expected final statuses with no broken interactive anchors.",
@@ -960,9 +960,9 @@
       ],
       "direct_answer": "JavaScript-Only Link: Diagnosis and Repair is confirmed when navigation depends on event handlers, buttons, or router state without a resolvable anchor href. For JavaScript only links SEO, preserve the raw response and rendered document so the interface exposes an action but omits the web-native URL relationship can be tested against a passing control. Repair JavaScript only links SEO by choosing the authoritative source; accept the javascript-only-link change only when raw HTML contains crawlable anchors and keyboard, no-script, and rendered tests reach the same URLs.",
       "evidence_artifact": {
-        "label": "JavaScript-Only Link: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "JavaScript-Only Link: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing JavaScript only links SEO; JAVASCRIPTONLYLINK values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing JavaScript only links SEO; JAVASCRIPTONLYLINK values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -986,7 +986,7 @@
         "For JavaScript only links SEO, identify the authoritative route, content, or infrastructure owner.",
         "For JavaScript only links SEO, render semantic anchors with stable href values and enhance them with client routing only after navigation works.",
         "For JavaScript only links SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For JavaScript only links SEO, retain the failure as a regression fixture."
+        "For JavaScript only links SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For JavaScript only links SEO, raw HTML contains crawlable anchors and keyboard, no-script, and rendered tests reach the same URLs.",
@@ -1030,9 +1030,9 @@
       ],
       "direct_answer": "Raw and Rendered HTML Mismatch: Diagnosis and Repair is confirmed when critical headings, copy, links, directives, or schema differ materially between the response HTML and rendered DOM. For raw rendered HTML mismatch SEO, preserve the raw response and rendered document so hydration, asynchronous data, personalization, or client mutations change the search-visible document can be tested against a passing control. Repair raw rendered HTML mismatch SEO by choosing the authoritative source; accept the raw-rendered-content-mismatch change only when raw and rendered comparisons agree on primary copy, links, metadata, canonical, robots, and schema.",
       "evidence_artifact": {
-        "label": "Raw and Rendered HTML Mismatch: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Raw and Rendered HTML Mismatch: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing raw rendered HTML mismatch SEO; RAWRENDEREDCONTENTMISMATCH values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing raw rendered HTML mismatch SEO; RAWRENDEREDCONTENTMISMATCH values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1056,7 +1056,7 @@
         "For raw rendered HTML mismatch SEO, identify the authoritative route, content, or infrastructure owner.",
         "For raw rendered HTML mismatch SEO, server-render critical intent and reconcile deterministic client output against the same content source.",
         "For raw rendered HTML mismatch SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For raw rendered HTML mismatch SEO, retain the failure as a regression fixture."
+        "For raw rendered HTML mismatch SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For raw rendered HTML mismatch SEO, raw and rendered comparisons agree on primary copy, links, metadata, canonical, robots, and schema.",
@@ -1100,9 +1100,9 @@
       ],
       "direct_answer": "Structured Data Content Drift: Diagnosis and Repair is confirmed when JSON-LD claims names, offers, dates, ratings, or entities that the visible page no longer supports. For structured data content mismatch, preserve the raw response and rendered document so schema and content are generated from separate sources or refresh schedules can be tested against a passing control. Repair structured data content mismatch by choosing the authoritative source; accept the structured-data-content-drift change only when schema validation passes and every material property maps to current visible evidence.",
       "evidence_artifact": {
-        "label": "Structured Data Content Drift: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Structured Data Content Drift: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing structured data content mismatch; STRUCTUREDDATACONTENTDRIFT values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing structured data content mismatch; STRUCTUREDDATACONTENTDRIFT values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1126,7 +1126,7 @@
         "For structured data content mismatch, identify the authoritative route, content, or infrastructure owner.",
         "For structured data content mismatch, generate visible content and JSON-LD from one typed record and remove unsupported properties.",
         "For structured data content mismatch, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For structured data content mismatch, retain the failure as a regression fixture."
+        "For structured data content mismatch, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For structured data content mismatch, schema validation passes and every material property maps to current visible evidence.",
@@ -1170,9 +1170,9 @@
       ],
       "direct_answer": "Duplicate Title Tag: Diagnosis and Repair is confirmed when multiple indexable canonical pages publish the same or functionally indistinguishable title. For duplicate title tags SEO, preserve the raw response and rendered document so templates omit the differentiating entity, intent, location, or state can be tested against a passing control. Repair duplicate title tags SEO by choosing the authoritative source; accept the duplicate-title-tag change only when every indexable canonical has a unique title that matches its H1 and primary query without boilerplate collision.",
       "evidence_artifact": {
-        "label": "Duplicate Title Tag: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Duplicate Title Tag: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing duplicate title tags SEO; DUPLICATETITLETAG values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing duplicate title tags SEO; DUPLICATETITLETAG values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1196,7 +1196,7 @@
         "For duplicate title tags SEO, identify the authoritative route, content, or infrastructure owner.",
         "For duplicate title tags SEO, write concise titles around each page’s unique intent and bind generation to validated route data.",
         "For duplicate title tags SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For duplicate title tags SEO, retain the failure as a regression fixture."
+        "For duplicate title tags SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For duplicate title tags SEO, every indexable canonical has a unique title that matches its H1 and primary query without boilerplate collision.",
@@ -1240,9 +1240,9 @@
       ],
       "direct_answer": "Duplicate Meta Description: Diagnosis and Repair is confirmed when several indexable pages reuse the same search-result summary despite serving different intents. For duplicate meta descriptions SEO, preserve the raw response and rendered document so a global fallback replaces page-specific outcome, scope, and evidence language can be tested against a passing control. Repair duplicate meta descriptions SEO by choosing the authoritative source; accept the duplicate-meta-description change only when descriptions are unique, within a practical snippet length, and accurately preview each page.",
       "evidence_artifact": {
-        "label": "Duplicate Meta Description: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Duplicate Meta Description: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing duplicate meta descriptions SEO; DUPLICATEMETADESCRIPTION values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing duplicate meta descriptions SEO; DUPLICATEMETADESCRIPTION values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1266,7 +1266,7 @@
         "For duplicate meta descriptions SEO, identify the authoritative route, content, or infrastructure owner.",
         "For duplicate meta descriptions SEO, generate a specific benefit-and-boundary description for every canonical route.",
         "For duplicate meta descriptions SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For duplicate meta descriptions SEO, retain the failure as a regression fixture."
+        "For duplicate meta descriptions SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For duplicate meta descriptions SEO, descriptions are unique, within a practical snippet length, and accurately preview each page.",
@@ -1310,9 +1310,9 @@
       ],
       "direct_answer": "Faceted Navigation Crawl Trap: Diagnosis and Repair is confirmed when filter combinations create a near-unbounded set of low-value, duplicate, or empty URLs. For faceted navigation crawl trap, preserve the raw response and rendered document so every facet state becomes crawlable without an inventory or demand policy can be tested against a passing control. Repair faceted navigation crawl trap by choosing the authoritative source; accept the faceted-navigation-crawl-trap change only when crawl growth is bounded while approved facet pages remain unique, linked, indexable, and stocked.",
       "evidence_artifact": {
-        "label": "Faceted Navigation Crawl Trap: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Faceted Navigation Crawl Trap: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing faceted navigation crawl trap; FACETEDNAVIGATIONCRAWLTRAP values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing faceted navigation crawl trap; FACETEDNAVIGATIONCRAWLTRAP values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1336,7 +1336,7 @@
         "For faceted navigation crawl trap, identify the authoritative route, content, or infrastructure owner.",
         "For faceted navigation crawl trap, allowlist valuable combinations, constrain link generation, and canonicalize or exclude the remaining states coherently.",
         "For faceted navigation crawl trap, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For faceted navigation crawl trap, retain the failure as a regression fixture."
+        "For faceted navigation crawl trap, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For faceted navigation crawl trap, crawl growth is bounded while approved facet pages remain unique, linked, indexable, and stocked.",
@@ -1380,9 +1380,9 @@
       ],
       "direct_answer": "Parameter URL Duplication: Diagnosis and Repair is confirmed when query strings expose duplicate content under sortable, trackable, session, or presentation variants. For URL parameter duplicate content SEO, preserve the raw response and rendered document so parameter semantics are not classified before URLs enter links, sitemaps, canonicals, and analytics can be tested against a passing control. Repair URL parameter duplicate content SEO by choosing the authoritative source; accept the parameter-url-duplication change only when equivalent parameters disappear from internal discovery and resolve to the chosen canonical behavior.",
       "evidence_artifact": {
-        "label": "Parameter URL Duplication: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Parameter URL Duplication: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing URL parameter duplicate content SEO; PARAMETERURLDUPLICATION values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing URL parameter duplicate content SEO; PARAMETERURLDUPLICATION values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1406,7 +1406,7 @@
         "For URL parameter duplicate content SEO, identify the authoritative route, content, or infrastructure owner.",
         "For URL parameter duplicate content SEO, classify parameters, strip tracking from links, and consolidate equivalent variants onto one canonical URL.",
         "For URL parameter duplicate content SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For URL parameter duplicate content SEO, retain the failure as a regression fixture."
+        "For URL parameter duplicate content SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For URL parameter duplicate content SEO, equivalent parameters disappear from internal discovery and resolve to the chosen canonical behavior.",
@@ -1450,9 +1450,9 @@
       ],
       "direct_answer": "Pagination and Infinite Scroll Indexing: Diagnosis and Repair is confirmed when items beyond the initial viewport require interaction and lack stable crawlable component URLs. For infinite scroll SEO pagination, preserve the raw response and rendered document so the interface models a sequence as transient client state instead of addressable pages can be tested against a passing control. Repair infinite scroll SEO pagination by choosing the authoritative source; accept the pagination-infinite-scroll-indexing change only when a clean crawl reaches every intended item without scrolling, clicking, or executing custom gestures.",
       "evidence_artifact": {
-        "label": "Pagination and Infinite Scroll Indexing: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Pagination and Infinite Scroll Indexing: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing infinite scroll SEO pagination; PAGINATIONINFINITESCROLLINDEXING values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing infinite scroll SEO pagination; PAGINATIONINFINITESCROLLINDEXING values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1476,7 +1476,7 @@
         "For infinite scroll SEO pagination, identify the authoritative route, content, or infrastructure owner.",
         "For infinite scroll SEO pagination, provide unique paginated URLs, server-visible content, and ordered anchors while retaining progressive enhancement.",
         "For infinite scroll SEO pagination, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For infinite scroll SEO pagination, retain the failure as a regression fixture."
+        "For infinite scroll SEO pagination, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For infinite scroll SEO pagination, a clean crawl reaches every intended item without scrolling, clicking, or executing custom gestures.",
@@ -1520,9 +1520,9 @@
       ],
       "direct_answer": "Hreflang Return Tag Error: Diagnosis and Repair is confirmed when one localized URL references an alternate that does not reciprocally reference the source. For hreflang return tag error, preserve the raw response and rendered document so locale sets are generated independently or omit a region from the shared cluster can be tested against a passing control. Repair hreflang return tag error by choosing the authoritative source; accept the hreflang-return-tag-error change only when every indexable member returns the identical reciprocal set with valid final canonical URLs.",
       "evidence_artifact": {
-        "label": "Hreflang Return Tag Error: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Hreflang Return Tag Error: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing hreflang return tag error; HREFLANGRETURNTAGERROR values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing hreflang return tag error; HREFLANGRETURNTAGERROR values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1546,7 +1546,7 @@
         "For hreflang return tag error, identify the authoritative route, content, or infrastructure owner.",
         "For hreflang return tag error, generate complete hreflang clusters from one locale matrix and include a valid self-reference.",
         "For hreflang return tag error, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For hreflang return tag error, retain the failure as a regression fixture."
+        "For hreflang return tag error, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For hreflang return tag error, every indexable member returns the identical reciprocal set with valid final canonical URLs.",
@@ -1590,9 +1590,9 @@
       ],
       "direct_answer": "Mobile and Desktop Content Mismatch: Diagnosis and Repair is confirmed when mobile rendering omits primary text, links, images, metadata, or structured data present on desktop. For mobile desktop content mismatch SEO, preserve the raw response and rendered document so responsive components, user-agent branching, or deferred resources deliver unequal evidence can be tested against a passing control. Repair mobile desktop content mismatch SEO by choosing the authoritative source; accept the mobile-desktop-content-mismatch change only when mobile and desktop audits match on primary content, links, directives, image context, and schema claims.",
       "evidence_artifact": {
-        "label": "Mobile and Desktop Content Mismatch: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Mobile and Desktop Content Mismatch: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing mobile desktop content mismatch SEO; MOBILEDESKTOPCONTENTMISMATCH values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing mobile desktop content mismatch SEO; MOBILEDESKTOPCONTENTMISMATCH values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1616,7 +1616,7 @@
         "For mobile desktop content mismatch SEO, identify the authoritative route, content, or infrastructure owner.",
         "For mobile desktop content mismatch SEO, serve content and metadata parity through responsive rendering and test the mobile user-agent independently.",
         "For mobile desktop content mismatch SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For mobile desktop content mismatch SEO, retain the failure as a regression fixture."
+        "For mobile desktop content mismatch SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For mobile desktop content mismatch SEO, mobile and desktop audits match on primary content, links, directives, image context, and schema claims.",
@@ -1660,9 +1660,9 @@
       ],
       "direct_answer": "Lazy-Loaded Primary Content: Diagnosis and Repair is confirmed when primary copy or links appear only after scrolling, intersection events, or user interaction. For lazy loaded content SEO, preserve the raw response and rendered document so performance optimization defers the very evidence needed to understand the page can be tested against a passing control. Repair lazy loaded content SEO by choosing the authoritative source; accept the lazy-loaded-primary-content change only when initial raw and rendered output contains the complete main intent before any viewport event.",
       "evidence_artifact": {
-        "label": "Lazy-Loaded Primary Content: Diagnosis and Repair Atlas-compatible fixture",
+        "label": "Lazy-Loaded Primary Content: Diagnosis and Repair Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing lazy loaded content SEO; LAZYLOADEDPRIMARYCONTENT values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing lazy loaded content SEO; LAZYLOADEDPRIMARYCONTENT values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1686,7 +1686,7 @@
         "For lazy loaded content SEO, identify the authoritative route, content, or infrastructure owner.",
         "For lazy loaded content SEO, server-render primary content and reserve lazy loading for nonessential assets with deterministic fallbacks.",
         "For lazy loaded content SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For lazy loaded content SEO, retain the failure as a regression fixture."
+        "For lazy loaded content SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For lazy loaded content SEO, initial raw and rendered output contains the complete main intent before any viewport event.",
@@ -1730,9 +1730,9 @@
       ],
       "direct_answer": "Next.js Technical SEO Guide is confirmed when a Next.js site distributes metadata, rendering, caching, redirects, and sitemap behavior across route conventions. For Next.js technical SEO, preserve the raw response and rendered document so App Router and Pages Router features can drift when route-level ownership is not explicit can be tested against a passing control. Repair Next.js technical SEO by choosing the authoritative source; accept the nextjs change only when production output exposes unique server-visible content, metadata, schema, status, and discovery signals per route.",
       "evidence_artifact": {
-        "label": "Next.js Technical SEO Guide Atlas-compatible fixture",
+        "label": "Next.js Technical SEO Guide Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing Next.js technical SEO; NEXTJS values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing Next.js technical SEO; NEXTJS values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1756,7 +1756,7 @@
         "For Next.js technical SEO, identify the authoritative route, content, or infrastructure owner.",
         "For Next.js technical SEO, centralize typed metadata, choose rendering per intent, and validate built HTML for every canonical route.",
         "For Next.js technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For Next.js technical SEO, retain the failure as a regression fixture."
+        "For Next.js technical SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For Next.js technical SEO, production output exposes unique server-visible content, metadata, schema, status, and discovery signals per route.",
@@ -1800,9 +1800,9 @@
       ],
       "direct_answer": "React and Vite Technical SEO Guide is confirmed when a React/Vite application initially delivers a shared shell while route evidence appears only after JavaScript. For React Vite SEO, preserve the raw response and rendered document so a client-first build lacks route-aware prerendering, head ownership, and response-status semantics can be tested against a passing control. Repair React Vite SEO by choosing the authoritative source; accept the react-vite change only when each built route has complete static HTML, unique head tags, schema, crawlable links, and correct fallback status.",
       "evidence_artifact": {
-        "label": "React and Vite Technical SEO Guide Atlas-compatible fixture",
+        "label": "React and Vite Technical SEO Guide Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing React Vite SEO; REACTVITE values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing React Vite SEO; REACTVITE values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1826,7 +1826,7 @@
         "For React Vite SEO, identify the authoritative route, content, or infrastructure owner.",
         "For React Vite SEO, prerender public routes from the canonical registry and hydrate without changing their semantic output.",
         "For React Vite SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For React Vite SEO, retain the failure as a regression fixture."
+        "For React Vite SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For React Vite SEO, each built route has complete static HTML, unique head tags, schema, crawlable links, and correct fallback status.",
@@ -1870,9 +1870,9 @@
       ],
       "direct_answer": "WordPress Technical SEO Guide is confirmed when WordPress exposes posts, pages, taxonomies, feeds, archives, media, and plugin output as overlapping crawl surfaces. For WordPress technical SEO, preserve the raw response and rendered document so themes, plugins, and core conventions can each emit independent metadata and URL variants can be tested against a passing control. Repair WordPress technical SEO by choosing the authoritative source; accept the wordpress change only when a clean crawl maps one intended canonical per document and no plugin duplicates the governed head output.",
       "evidence_artifact": {
-        "label": "WordPress Technical SEO Guide Atlas-compatible fixture",
+        "label": "WordPress Technical SEO Guide Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing WordPress technical SEO; WORDPRESS values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing WordPress technical SEO; WORDPRESS values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1896,7 +1896,7 @@
         "For WordPress technical SEO, identify the authoritative route, content, or infrastructure owner.",
         "For WordPress technical SEO, assign one owner for canonicals, schema, redirects, sitemaps, and archive indexability before pruning variants.",
         "For WordPress technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For WordPress technical SEO, retain the failure as a regression fixture."
+        "For WordPress technical SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For WordPress technical SEO, a clean crawl maps one intended canonical per document and no plugin duplicates the governed head output.",
@@ -1940,9 +1940,9 @@
       ],
       "direct_answer": "Shopify Technical SEO Guide is confirmed when Shopify storefronts expose products through collections, filters, pagination, locale paths, and theme-generated metadata. For Shopify technical SEO, preserve the raw response and rendered document so platform URL conventions and theme links can create multiple discovery paths to equivalent inventory can be tested against a passing control. Repair Shopify technical SEO by choosing the authoritative source; accept the shopify change only when sample products and collections resolve to unique final canonicals with bounded filters and valid visible schema.",
       "evidence_artifact": {
-        "label": "Shopify Technical SEO Guide Atlas-compatible fixture",
+        "label": "Shopify Technical SEO Guide Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing Shopify technical SEO; SHOPIFY values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing Shopify technical SEO; SHOPIFY values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -1966,7 +1966,7 @@
         "For Shopify technical SEO, identify the authoritative route, content, or infrastructure owner.",
         "For Shopify technical SEO, govern theme links, collection architecture, canonical output, structured data, redirects, and unavailable-product states together.",
         "For Shopify technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For Shopify technical SEO, retain the failure as a regression fixture."
+        "For Shopify technical SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For Shopify technical SEO, sample products and collections resolve to unique final canonicals with bounded filters and valid visible schema.",
@@ -2010,9 +2010,9 @@
       ],
       "direct_answer": "Webflow Technical SEO Guide is confirmed when Webflow page settings, CMS templates, custom code, redirects, and published domains jointly determine search output. For Webflow technical SEO, preserve the raw response and rendered document so manual fields and reusable templates can leave blank, duplicated, or environment-specific head values can be tested against a passing control. Repair Webflow technical SEO by choosing the authoritative source; accept the webflow change only when all public templates publish unique metadata, correct canonicals, useful content, and direct internal paths.",
       "evidence_artifact": {
-        "label": "Webflow Technical SEO Guide Atlas-compatible fixture",
+        "label": "Webflow Technical SEO Guide Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing Webflow technical SEO; WEBFLOW values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing Webflow technical SEO; WEBFLOW values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -2036,7 +2036,7 @@
         "For Webflow technical SEO, identify the authoritative route, content, or infrastructure owner.",
         "For Webflow technical SEO, require CMS SEO fields, govern custom code centrally, and validate the published domain after each structural release.",
         "For Webflow technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For Webflow technical SEO, retain the failure as a regression fixture."
+        "For Webflow technical SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For Webflow technical SEO, all public templates publish unique metadata, correct canonicals, useful content, and direct internal paths.",
@@ -2080,9 +2080,9 @@
       ],
       "direct_answer": "Squarespace Technical SEO Guide is confirmed when Squarespace combines global settings, page fields, collection types, domain configuration, and injected code. For Squarespace technical SEO, preserve the raw response and rendered document so sitewide defaults can conceal missing page-specific intent or collide with custom metadata additions can be tested against a passing control. Repair Squarespace technical SEO by choosing the authoritative source; accept the squarespace change only when published pages have unique intent, one canonical, one title, stable status, and crawlable contextual links.",
       "evidence_artifact": {
-        "label": "Squarespace Technical SEO Guide Atlas-compatible fixture",
+        "label": "Squarespace Technical SEO Guide Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing Squarespace technical SEO; SQUARESPACE values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing Squarespace technical SEO; SQUARESPACE values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -2106,7 +2106,7 @@
         "For Squarespace technical SEO, identify the authoritative route, content, or infrastructure owner.",
         "For Squarespace technical SEO, prioritize information architecture and page-specific fields, then remove custom code that duplicates platform output.",
         "For Squarespace technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For Squarespace technical SEO, retain the failure as a regression fixture."
+        "For Squarespace technical SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For Squarespace technical SEO, published pages have unique intent, one canonical, one title, stable status, and crawlable contextual links.",
@@ -2150,9 +2150,9 @@
       ],
       "direct_answer": "Wix Technical SEO Guide is confirmed when Wix SEO patterns, page settings, dynamic routes, redirects, and structured-data overrides form the indexable surface. For Wix technical SEO, preserve the raw response and rendered document so bulk patterns can propagate a weak field or unsupported markup across many dynamic pages can be tested against a passing control. Repair Wix technical SEO by choosing the authoritative source; accept the wix change only when dynamic samples pass raw/rendered, metadata, canonical, schema, link, and status checks without pattern collisions.",
       "evidence_artifact": {
-        "label": "Wix Technical SEO Guide Atlas-compatible fixture",
+        "label": "Wix Technical SEO Guide Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing Wix technical SEO; WIX values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing Wix technical SEO; WIX values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -2176,7 +2176,7 @@
         "For Wix technical SEO, identify the authoritative route, content, or infrastructure owner.",
         "For Wix technical SEO, configure patterns from reliable CMS fields, restrict indexability to useful routes, and review custom schema against visible content.",
         "For Wix technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For Wix technical SEO, retain the failure as a regression fixture."
+        "For Wix technical SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For Wix technical SEO, dynamic samples pass raw/rendered, metadata, canonical, schema, link, and status checks without pattern collisions.",
@@ -2218,11 +2218,11 @@
         "CMS frontend SEO",
         "headless rendering audit"
       ],
-      "direct_answer": "Headless CMS Technical SEO Guide is confirmed when a headless stack separates editorial data, frontend rendering, routing, cache invalidation, and search metadata. For headless CMS SEO, preserve the raw response and rendered document so distributed ownership lets content and derived artifacts update at different times can be tested against a passing control. Repair headless CMS SEO by choosing the authoritative source; accept the headless-cms change only when content changes propagate to every derived surface within the declared freshness window and route tests stay deterministic.",
+      "direct_answer": "Headless CMS Technical SEO Guide is confirmed when a headless stack separates editorial data, frontend rendering, routing, cache invalidation, and search metadata. For headless CMS SEO, preserve the raw response and rendered document so distributed ownership lets content and derived outputs update at different times can be tested against a passing control. Repair headless CMS SEO by choosing the authoritative source; accept the headless-cms change only when content changes propagate to every derived output within the declared freshness window and route tests stay deterministic.",
       "evidence_artifact": {
-        "label": "Headless CMS Technical SEO Guide Atlas-compatible fixture",
+        "label": "Headless CMS Technical SEO Guide Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing headless CMS SEO; HEADLESSCMS values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing headless CMS SEO; HEADLESSCMS values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -2246,10 +2246,10 @@
         "For headless CMS SEO, identify the authoritative route, content, or infrastructure owner.",
         "For headless CMS SEO, define a typed publishing contract that atomically drives HTML, head data, schema, redirects, sitemaps, and previews.",
         "For headless CMS SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For headless CMS SEO, retain the failure as a regression fixture."
+        "For headless CMS SEO, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
-        "For headless CMS SEO, content changes propagate to every derived surface within the declared freshness window and route tests stay deterministic.",
+        "For headless CMS SEO, content changes propagate to every derived output within the declared freshness window and route tests stay deterministic.",
         "For headless CMS SEO, two uncached raw/rendered captures agree.",
         "For headless CMS SEO, the intended route stays indexable and contextually linked."
       ],
@@ -2290,9 +2290,9 @@
       ],
       "direct_answer": "JavaScript Technical SEO Audit Checklist is confirmed when a JavaScript application needs evidence across response HTML, rendered DOM, resources, routing, metadata, and status behavior. For JavaScript SEO audit checklist, preserve the raw response and rendered document so testing only the browser-visible final state misses discovery and rendering dependencies can be tested against a passing control. Repair JavaScript SEO audit checklist by choosing the authoritative source; accept the javascript-seo-audit change only when representative routes pass no-interaction discovery, parity, metadata, schema, link, and error-state checks.",
       "evidence_artifact": {
-        "label": "JavaScript Technical SEO Audit Checklist Atlas-compatible fixture",
+        "label": "JavaScript Technical SEO Audit Checklist Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing JavaScript SEO audit checklist; JAVASCRIPTSEOAUDIT values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing JavaScript SEO audit checklist; JAVASCRIPTSEOAUDIT values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -2316,7 +2316,7 @@
         "For JavaScript SEO audit checklist, identify the authoritative route, content, or infrastructure owner.",
         "For JavaScript SEO audit checklist, audit raw and rendered states, then move critical evidence to deterministic server or build output.",
         "For JavaScript SEO audit checklist, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For JavaScript SEO audit checklist, retain the failure as a regression fixture."
+        "For JavaScript SEO audit checklist, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For JavaScript SEO audit checklist, representative routes pass no-interaction discovery, parity, metadata, schema, link, and error-state checks.",
@@ -2360,9 +2360,9 @@
       ],
       "direct_answer": "Ecommerce Technical SEO Audit Checklist is confirmed when an ecommerce site needs coordinated checks across products, categories, facets, pagination, availability, schema, and migrations. For ecommerce technical SEO audit checklist, preserve the raw response and rendered document so large changing catalogs create URL states faster than manual review can govern them can be tested against a passing control. Repair ecommerce technical SEO audit checklist by choosing the authoritative source; accept the ecommerce-technical-seo-audit change only when sampled revenue templates and edge states match the approved inventory contract after a full crawl.",
       "evidence_artifact": {
-        "label": "Ecommerce Technical SEO Audit Checklist Atlas-compatible fixture",
+        "label": "Ecommerce Technical SEO Audit Checklist Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing ecommerce technical SEO audit checklist; ECOMMERCETECHNICALSEOAUDIT values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing ecommerce technical SEO audit checklist; ECOMMERCETECHNICALSEOAUDIT values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -2386,7 +2386,7 @@
         "For ecommerce technical SEO audit checklist, identify the authoritative route, content, or infrastructure owner.",
         "For ecommerce technical SEO audit checklist, classify inventory states and automate indexability, linking, canonical, schema, and sitemap decisions from them.",
         "For ecommerce technical SEO audit checklist, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For ecommerce technical SEO audit checklist, retain the failure as a regression fixture."
+        "For ecommerce technical SEO audit checklist, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For ecommerce technical SEO audit checklist, sampled revenue templates and edge states match the approved inventory contract after a full crawl.",
@@ -2430,9 +2430,9 @@
       ],
       "direct_answer": "SaaS Technical SEO Audit Checklist is confirmed when a SaaS site mixes marketing, documentation, integrations, comparisons, localization, authentication, and application routes. For SaaS technical SEO audit checklist, preserve the raw response and rendered document so separate teams and frameworks publish overlapping paths without one search inventory model can be tested against a passing control. Repair SaaS technical SEO audit checklist by choosing the authoritative source; accept the saas-technical-seo-audit change only when every indexable route has a distinct buyer or user intent, contextual inbound links, and an accountable template owner.",
       "evidence_artifact": {
-        "label": "SaaS Technical SEO Audit Checklist Atlas-compatible fixture",
+        "label": "SaaS Technical SEO Audit Checklist Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing SaaS technical SEO audit checklist; SAASTECHNICALSEOAUDIT values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing SaaS technical SEO audit checklist; SAASTECHNICALSEOAUDIT values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -2456,7 +2456,7 @@
         "For SaaS technical SEO audit checklist, identify the authoritative route, content, or infrastructure owner.",
         "For SaaS technical SEO audit checklist, map intent and ownership first, then align routing, metadata, linking, sitemaps, status codes, and conversion paths.",
         "For SaaS technical SEO audit checklist, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For SaaS technical SEO audit checklist, retain the failure as a regression fixture."
+        "For SaaS technical SEO audit checklist, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For SaaS technical SEO audit checklist, every indexable route has a distinct buyer or user intent, contextual inbound links, and an accountable template owner.",
@@ -2500,9 +2500,9 @@
       ],
       "direct_answer": "Local Business Technical SEO Audit Checklist is confirmed when a local business site needs consistent location identity across pages, structured data, links, domains, and conversion details. For local business technical SEO audit checklist, preserve the raw response and rendered document so copied location templates or stale business facts create contradictory geographic signals can be tested against a passing control. Repair local business technical SEO audit checklist by choosing the authoritative source; accept the local-business-technical-seo-audit change only when each retained location has unique proof, consistent visible/schema facts, direct contact paths, and valid canonical status.",
       "evidence_artifact": {
-        "label": "Local Business Technical SEO Audit Checklist Atlas-compatible fixture",
+        "label": "Local Business Technical SEO Audit Checklist Atlas-compatible test case",
         "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing local business technical SEO audit checklist; LOCALBUSINESSTECHNICALSEOAUDIT values require a timestamped crawl before any production claim.",
+        "description": "An illustrative, non-client example for reproducing local business technical SEO audit checklist; LOCALBUSINESSTECHNICALSEOAUDIT values require a timestamped crawl before any production claim.",
         "fields": [
           "requested_url",
           "final_url",
@@ -2526,7 +2526,7 @@
         "For local business technical SEO audit checklist, identify the authoritative route, content, or infrastructure owner.",
         "For local business technical SEO audit checklist, normalize business facts, consolidate duplicate locations, and connect useful local pages through service and geographic context.",
         "For local business technical SEO audit checklist, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For local business technical SEO audit checklist, retain the failure as a regression fixture."
+        "For local business technical SEO audit checklist, retain the failure as a regression test case."
       ],
       "rerun_acceptance_check": [
         "For local business technical SEO audit checklist, each retained location has unique proof, consistent visible/schema facts, direct contact paths, and valid canonical status.",

@@ -187,6 +187,10 @@ for (const agent of crawlerAgents.filter((agent) => agent !== '*')) {
   assert(llms.includes(agent), `llms.txt: crawler policy omits ${agent}`);
 }
 assert(llms.includes(`Canonical person ID: ${personId}`), 'llms.txt: canonical Person ID mismatch');
+assert(
+  llms.includes(`${siteUrl}/research/financial-systems/why-texas-toll-roads-stay-tolled`),
+  'llms.txt: Texas toll-road finance article is missing',
+);
 
 const staticRouteFiles = walkFiles(path.resolve('dist'))
   .filter((file) => file === path.resolve('dist/404.html') || file.endsWith(`${path.sep}index.html`))
@@ -373,16 +377,26 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('28 Notes and Artifacts'), 'research: publication count is not derived as twenty-eight');
+const publicationIndexMatch = research.match(
+  /<h2>(\d+) Articles, Studies, and Guides<\/h2>([\s\S]*?)<h2>From Research to Implementation<\/h2>/,
+);
+assert(publicationIndexMatch, 'research: publication index heading or boundary is missing');
+const renderedPublicationCount = [...publicationIndexMatch[2].matchAll(/<h3><a href=/g)].length;
+assert(
+  Number(publicationIndexMatch[1]) === renderedPublicationCount,
+  `research: displayed publication count ${publicationIndexMatch[1]} does not match ${renderedPublicationCount} rendered entries`,
+);
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
 assert(textFromHtml(research).includes('Who Owns Austin’s Home-Service Companies?'), 'research: Austin home-service ownership article missing');
 assert(textFromHtml(research).includes('Who Funds Waymo’s Hardware?'), 'research: Waymo financing article missing');
 assert(textFromHtml(research).includes('How Airlines Borrow Against Loyalty Programs'), 'research: airline loyalty financing article missing');
 assert(textFromHtml(research).includes('Who Owns West Campus Student Housing?'), 'research: West Campus housing article missing');
+assert(textFromHtml(research).includes('Who Owns 25 of America’s Major Toll Roads?'), 'research: national toll-road ownership article missing');
 assert(textFromHtml(research).includes('What Happens When an Index Decides a Company Matters?'), 'research: index-company article missing');
+assert(textFromHtml(research).includes('Why Texas Toll Roads Stay Tolled'), 'research: Texas toll-road finance article missing');
 
 const aiManagers = read('dist/research/ai-systems/the-first-ai-managers/index.html');
-assert(textFromHtml(aiManagers).includes('Source ledger'), 'AI managers: source ledger missing');
+assert(textFromHtml(aiManagers).includes('Sources'), 'AI managers: sources section missing');
 assert([...aiManagers.matchAll(/<li id="source-s\d+">/g)].length === 18, 'AI managers: expected 18 published source entries');
 assert(aiManagers.includes('<section id="field-map" aria-labelledby="field-map-title">'), 'AI managers: field map section anchor missing');
 assert(aiManagers.includes('href="#field-map"'), 'AI managers: source ledger does not link to the field map');
@@ -544,6 +558,36 @@ for (const href of [
 ]) {
   assert(westCampus.includes(`href="${href}"`) || westCampus.includes(`src="${href}"`), `West Campus housing: missing artifact ${href}`);
   assert(fs.existsSync(path.resolve(`public${href}`)), `West Campus housing: missing public file ${href}`);
+}
+
+const tollMoney = read('dist/research/financial-systems/why-texas-toll-roads-stay-tolled/index.html');
+for (const expected of [
+  'Why Texas Toll Roads Stay Tolled',
+  'The only clean $100 comparison in the current records',
+  'Harris County: toll-system cash can become county mobility funding',
+  'Private concessions: project cash can reach shareholders',
+  'Can a Texas toll road actually become free?',
+  'Method, limitations, and correction route',
+  '$398.6 million',
+  '§370.174',
+  '§228.006',
+]) {
+  assert(textFromHtml(tollMoney).includes(expected), `Texas toll finance: missing ${expected}`);
+}
+assert(!textFromHtml(tollMoney).includes('§370.113'), 'Texas toll finance: stale regional-mobility statute remains');
+assert(!textFromHtml(tollMoney).includes('§228.054'), 'Texas toll finance: stale TxDOT statute remains');
+for (const href of [
+  '/research/texas-toll-revenue-financial-model-2025.xlsx',
+  '/research/texas-toll-revenue-system-comparison.csv',
+  '/research/texas-toll-revenue-source-ledger.csv',
+  '/research/why-texas-toll-roads-stay-tolled.md',
+  '/research/texas-toll-revenue-publication-package.zip',
+  '/images/research/texas-toll-revenue-100-comparison.png',
+  '/images/research/texas-toll-revenue-hctra-cash.png',
+  '/images/research/texas-toll-revenue-five-questions.png',
+]) {
+  assert(tollMoney.includes(`href="${href}"`) || tollMoney.includes(`src="${href}"`), `Texas toll finance: missing artifact ${href}`);
+  assert(fs.existsSync(path.resolve(`public${href}`)), `Texas toll finance: missing public file ${href}`);
 }
 
 const toll = read('dist/markets/who-owns-texas-toll-roads/index.html');

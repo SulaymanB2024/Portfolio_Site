@@ -8,7 +8,9 @@ import {
   type ArticleNavItem,
   type ArticleReaderConfig,
 } from '../components/ArticleLayout';
+import { getArticleGenerativeArtwork } from '../art/generative/manifest';
 import { getArticleBySlug, getArticlePath } from '../content/articleRegistry';
+import { getContentClusterForPublicationPath } from '../content/contentClusters';
 import {
   isInvestmentMemo,
   type ArticleSection,
@@ -20,6 +22,14 @@ import { getSeoRoute, NOT_FOUND_ROUTE } from '../seo/routes';
 import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
 import { useSEO } from '../utils/seo';
 import NotFoundPage from './NotFoundPage';
+import { AustinBrandExplorer } from '../components/art/AustinBrandExplorer';
+import { SoftwareBuyoutBreakdown } from '../components/art/SoftwareBuyoutBreakdown';
+import { CrawlStateMachineDiagram } from '../components/art/CrawlStateMachineDiagram';
+import { RetrievalGraphDiagram } from '../components/art/RetrievalGraphDiagram';
+import { CanonicalGraphDiagram } from '../components/art/CanonicalGraphDiagram';
+import { AiMegawattBalancePlate } from '../components/art/AiMegawattBalancePlate';
+import { RareEarthStagePlate } from '../components/art/RareEarthStagePlate';
+import { WaymoCapitalStackPlate } from '../components/art/WaymoCapitalStackPlate';
 
 function ArticleCodeExample({
   example,
@@ -69,12 +79,42 @@ function ArticleCodeExample({
   );
 }
 
+function ArticleBespokeVisual({ slug, sectionId }: { slug: string; sectionId: string }) {
+  if (slug === 'who-owns-austin-home-service-companies' && sectionId === 'ownership-map') {
+    return <AustinBrandExplorer />;
+  }
+  if (slug === 'software-buyout-boom-2020-2022-exit-audit' && sectionId === 'four-quantities-stay-separate') {
+    return <SoftwareBuyoutBreakdown />;
+  }
+  if (slug === 'crawl-frontier-state-machine' && sectionId === 'frontier-states') {
+    return <CrawlStateMachineDiagram />;
+  }
+  if (slug === 'internal-links-directed-retrieval-graph' && sectionId === 'reachability') {
+    return <RetrievalGraphDiagram />;
+  }
+  if (slug === 'canonicalization-graph-consistency' && sectionId === 'convergence-invariant') {
+    return <CanonicalGraphDiagram />;
+  }
+  if (slug === 'the-ai-megawatt' && sectionId === 'research-contract') {
+    return <AiMegawattBalancePlate />;
+  }
+  if (slug === 'us-rare-earth-magnet-manufacturing-capacity' && sectionId === 'classification') {
+    return <RareEarthStagePlate />;
+  }
+  if (slug === 'waymo-hardware-financing' && sectionId === 'hardware-financing-mechanics') {
+    return <WaymoCapitalStackPlate />;
+  }
+  return null;
+}
+
 function StructuredArticleSections({
   sections,
   navigation,
+  slug,
 }: {
   sections: ArticleSection[];
   navigation: ArticleNavItem[];
+  slug?: string;
 }) {
   return (
     <>
@@ -92,6 +132,8 @@ function StructuredArticleSections({
               </ul>
             ) : null}
           </div>
+
+          {slug ? <ArticleBespokeVisual slug={slug} sectionId={section.id} /> : null}
 
           {section.figures?.map((figure) => (
             <figure key={figure.src} className="toll-editorial-plate article-reader__figure">
@@ -169,7 +211,7 @@ function SourceLedger({
   return (
     <section id="source-ledger" className="toll-source-ledger">
       <ArticleSectionHeader index={getArticleNavigationIndex(navigation, 'source-ledger')}>
-        Source ledger
+        Sources
       </ArticleSectionHeader>
       <ol>
         {article.sources.map((source, index) => {
@@ -260,7 +302,7 @@ function articleNav(article: PublicArticle, sections: ArticleSection[] | undefin
       label: section.title,
     })),
     ...(article.sources.length
-      ? [{ kind: 'source' as const, id: 'source-ledger', label: 'Source ledger' }]
+      ? [{ kind: 'source' as const, id: 'source-ledger', label: 'Sources' }]
       : []),
   ]);
 }
@@ -283,8 +325,10 @@ function GenericArticle({
   article: PublicArticle;
 }) {
   const investmentMemo = isInvestmentMemo(article);
-  const backHref = investmentMemo ? '/markets' : '/research';
-  const backLabel = investmentMemo ? 'Markets archive' : 'Research archive';
+  const articlePath = getArticlePath(article);
+  const contentCluster = getContentClusterForPublicationPath(articlePath);
+  const backHref = contentCluster?.path ?? (investmentMemo ? '/markets' : '/research');
+  const backLabel = contentCluster ? `${contentCluster.shortTitle} cluster` : investmentMemo ? 'Markets archive' : 'Research archive';
   const boundary = investmentMemo ? article.recommendationBoundary : article.evidenceBoundary;
   const modifiedDate = article.dateModified ?? article.date;
   const hasDistinctModifiedDate = normalizePublicationDate(modifiedDate) !== normalizePublicationDate(article.date);
@@ -297,12 +341,14 @@ function GenericArticle({
   const numberedSections = sections?.filter((section) => !section.id.toLowerCase().includes('faq'));
   const faqSections = sections?.filter((section) => section.id.toLowerCase().includes('faq'));
   const navItems = articleNav(article, sections);
-  const searchTarget = getArticleSearchTarget(getArticlePath(article));
-  const articlePath = getArticlePath(article);
+  const searchTarget = getArticleSearchTarget(articlePath);
   const relatedLinks = searchTarget?.relatedPaths.map((path) => ({
     href: path,
     label: getArticleRelatedLinkLabel(articlePath, path),
   })) ?? [];
+  if (contentCluster && !relatedLinks.some((link) => link.href === contentCluster.path)) {
+    relatedLinks.unshift({ href: contentCluster.path, label: `${contentCluster.shortTitle} research cluster` });
+  }
   const study = article.artwork.kind === 'study'
     ? {
         label: article.artwork.label,
@@ -312,25 +358,40 @@ function GenericArticle({
     : undefined;
   const callouts: NonNullable<ArticleReaderConfig['callouts']> = [];
 
-  if (searchTarget) {
+  if (searchTarget && article.thesis) {
     callouts.push({
-      label: 'Direct answer',
-      title: searchTarget.primaryQuery,
+      label: investmentMemo ? 'Direct answer & thesis' : 'Executive briefing & thesis',
+      title: article.title,
       content: (
         <>
           <p>{searchTarget.directAnswer}</p>
-          <p><strong>Original artifact:</strong> {searchTarget.originalArtifact}</p>
+          <div className="mt-4 pt-3 border-t border-current/12">
+            <p className="text-[10px] uppercase tracking-[0.2em] opacity-60 mb-1">
+              {investmentMemo ? 'Core Investment Thesis' : 'Load-Bearing Finding'}
+            </p>
+            <p className="italic text-current/90">{article.thesis}</p>
+          </div>
+          <p className="mt-3 text-xs opacity-65"><strong>Original artifact:</strong> {searchTarget.originalArtifact}</p>
         </>
       ),
     });
-  }
-
-  if (article.thesis) {
+  } else if (searchTarget) {
+    callouts.push({
+      label: 'Direct answer',
+      title: article.title,
+      content: (
+        <>
+          <p>{searchTarget.directAnswer}</p>
+          <p><strong>Research basis:</strong> {searchTarget.originalArtifact}</p>
+        </>
+      ),
+    });
+  } else if (article.thesis) {
     callouts.push({
       label: investmentMemo ? 'Thesis' : 'Key takeaway',
       title: investmentMemo
         ? 'The decision rests on explicit assumptions.'
-        : 'The useful claim is the one the evidence can support.',
+        : 'The argument should travel no farther than its sources.',
       content: <p>{article.thesis}</p>,
     });
   }
@@ -343,6 +404,7 @@ function GenericArticle({
       eyebrow: `${article.category} / ${article.number}`,
       title: article.title,
       deck: article.subtitle,
+      generativeArtwork: getArticleGenerativeArtwork(articlePath),
       image: articleImage(article),
       imagePlaceholder: study,
     },
@@ -371,7 +433,7 @@ function GenericArticle({
     navigation: { items: navItems },
     boundary: boundary
       ? {
-          label: investmentMemo ? 'Recommendation boundary' : 'Evidence boundary',
+          label: investmentMemo ? 'Recommendation scope' : 'Scope and limits',
           content: boundary,
         }
       : undefined,
@@ -384,7 +446,7 @@ function GenericArticle({
           Research cutoff: {article.kind === 'research'
             ? formatPublicationDate(article.lastVerified ?? modifiedDate)
             : formatPublicationDate(modifiedDate)}.
-          {' '}Public evidence and provider behavior can change; verify current sources before acting.
+          {' '}Public sources and provider behavior can change; verify current information before acting.
         </>
       ),
       links: investmentMemo
@@ -423,7 +485,7 @@ function GenericArticle({
         </section>
 
         {numberedSections?.length
-          ? <StructuredArticleSections sections={numberedSections} navigation={navItems} />
+          ? <StructuredArticleSections sections={numberedSections} navigation={navItems} slug={article.slug} />
           : null}
 
         {investmentMemo ? (

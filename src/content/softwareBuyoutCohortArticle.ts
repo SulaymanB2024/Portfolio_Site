@@ -21,7 +21,7 @@ export const SOFTWARE_BUYOUT_COHORT_ARTICLE: ResearchArticle = {
     kind: 'study',
     variant: 'triptych',
     label: 'Software buyouts / control, liquidity, and realization',
-    note: 'Three separate ledgers: headline transaction value, ownership events, and the control status that determines whether a clean realization occurred.',
+    note: 'Three separate measures: headline transaction value, ownership events, and the control status that determines whether a clean realization occurred.',
   },
   date: '2026.08.17',
   dateModified: '2026.08.29',
@@ -36,16 +36,16 @@ export const SOFTWARE_BUYOUT_COHORT_ARTICLE: ResearchArticle = {
       'The cohort had liquidity, restructurings, and ownership changes, but no row met the stated clean-realization test at the cutoff. That result describes control, not investment performance. Without sponsor cash flows and comparable marks, the public package cannot establish cohort returns or permanent impairment.',
   },
   evidenceBoundary:
-    'The public package contains a 25-row classification table, claim ledger, methodology note, summary, and fallback web edition. It does not expose the underlying transaction source ledger or sponsor cash flows. The mixed $171.2 billion headline-value total cannot support MOIC, IRR, impairment, or transaction-by-transaction independent verification from this site alone.',
+    'The public release contains a 25-row classification table, claim table, methodology note, summary, and fallback web edition. It does not include the underlying transaction bibliography or sponsor cash flows. The mixed $171.2 billion headline-value total cannot support MOIC, IRR, impairment, or transaction-by-transaction independent verification from this site alone.',
   metrics: [
     { label: 'Deals audited', value: '25' },
     { label: 'Headline value', value: '$171.2B' },
     { label: 'Clean realizations', value: '0' },
-    { label: 'Evidence cutoff', value: '2026.08.17' },
+    { label: 'Research cutoff', value: '2026.08.17' },
   ],
   content: [
     'The public research package audits 25 large sponsor-led software take-private transactions announced from 2020 through 2022. Company-reported headline transaction values sum to $171.2 billion, but those values use mixed definitions and size the cohort rather than measuring sponsor equity or current value.',
-    'At the August 17, 2026 evidence cutoff, no transaction met the study’s control-based definition of a clean sponsor realization. That result does not mean every investment lost money. It means liquidity and ownership events must not be mislabeled as completed exits while the original sponsor group retains control.',
+    'At the August 17, 2026 research cutoff, no transaction met the study’s control-based definition of a clean sponsor realization. That result does not mean every investment lost money. It means liquidity and ownership events must not be mislabeled as completed exits while the original sponsor group retains control.',
   ],
   sections: [
     {
@@ -101,7 +101,7 @@ export const SOFTWARE_BUYOUT_COHORT_ARTICLE: ResearchArticle = {
       title: 'What the public package cannot establish',
       paragraphs: [
         'A cohort MOIC or IRR would require sponsor equity contributions, acquisition debt, add-on investment, operating cash retained or distributed, dividend proceeds, partial-sale proceeds, continuation-vehicle pricing, management dilution, fees, fund allocations, and current marks. Those fields are not available in the public package at the level required for a return calculation.',
-        'The package can support its stated control map and ownership-event inventory. Because it does not publish the underlying transaction source ledger, readers cannot independently reproduce every row from primary filings using this site alone. The claims should remain inside that evidence boundary.',
+        'The published files support the stated control map and ownership-event inventory. Because they do not include the underlying transaction bibliography, readers cannot independently reproduce every row from primary filings using this site alone. The conclusions should remain within that stated scope.',
       ],
       bullets: [
         'Do not compare current enterprise value with announced purchase price as a synthetic return.',
@@ -118,9 +118,9 @@ export const SOFTWARE_BUYOUT_COHORT_ARTICLE: ResearchArticle = {
       format: 'CSV',
     },
     {
-      label: 'Claim ledger',
+      label: 'Claim table',
       href: '/research/software-buyout-cohort-claim-ledger.csv',
-      description: 'Ten bounded claims with evidence basis and confidence labels.',
+      description: 'Ten bounded claims with source basis and confidence labels.',
       format: 'CSV',
     },
     {
@@ -132,13 +132,13 @@ export const SOFTWARE_BUYOUT_COHORT_ARTICLE: ResearchArticle = {
     {
       label: 'Machine-readable summary',
       href: '/research/software-buyout-cohort-summary.json',
-      description: 'Headline result, definitions, boundaries, and canonical route contract.',
+      description: 'Headline result, definitions, limits, and canonical URL.',
       format: 'JSON',
     },
     {
       label: 'Original fallback web edition',
       href: '/research/software-buyout-cohort-2020-2022',
-      description: 'The noindex standalone edition retained as a source artifact for the merged research package.',
+      description: 'The noindex standalone edition retained as the source document for the merged research release.',
       format: 'HTML',
     },
   ],
@@ -149,7 +149,7 @@ export const SOFTWARE_BUYOUT_COHORT_ARTICLE: ResearchArticle = {
       lastVerified: '2026.08.17',
     },
     {
-      label: 'Software buyout cohort claim ledger',
+      label: 'Software buyout cohort claim table',
       href: 'https://sulayman-bowles.dev/research/software-buyout-cohort-claim-ledger.csv',
       lastVerified: '2026.08.17',
     },

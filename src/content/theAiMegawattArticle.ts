@@ -45,13 +45,13 @@ export const THE_AI_MEGAWATT_ARTICLE: ResearchArticle = {
       format: 'XLSX',
     },
     {
-      label: 'Source ledger',
+      label: 'Source index',
       href: '/research/the-ai-megawatt-source-ledger.csv',
       description: 'Primary and secondary sources with claims, definitions, limitations, and provenance.',
       format: 'CSV',
     },
     {
-      label: 'Claim ledger',
+      label: 'Claim table',
       href: '/research/the-ai-megawatt-claim-ledger.csv',
       description: 'Load-bearing claims classified as observed, derived, scenario, or interpretation.',
       format: 'CSV',

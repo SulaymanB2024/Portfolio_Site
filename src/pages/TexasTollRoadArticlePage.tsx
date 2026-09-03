@@ -8,6 +8,7 @@ import {
   type ArticleNavItem,
   type ArticleReaderConfig,
 } from '../components/ArticleLayout';
+import { getArticleGenerativeArtwork } from '../art/generative/manifest';
 import {
   TEXAS_TOLL_ARTICLE_CONCLUSION,
   TEXAS_TOLL_ARTICLE_DATE,
@@ -566,7 +567,7 @@ function FrequentlyAskedQuestions({ index }: { index: string }) {
 function SourceLedger({ index }: { index: string }) {
   return (
     <section id="source-ledger" className="toll-source-ledger">
-      <ArticleSectionHeader index={index}>Source ledger</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>Sources</ArticleSectionHeader>
       <p className="toll-section-intro">
         Executed agreements, government records, audited statements, SEC-filed sponsor disclosures, and clearly labeled company or pension materials. Source dates and limitations are preserved in the text.
       </p>
@@ -622,7 +623,7 @@ export default function TexasTollRoadArticlePage() {
     {
       kind: 'source',
       id: 'source-ledger',
-      label: 'Source ledger',
+      label: 'Sources',
     },
   ]);
   const config: ArticleReaderConfig = {
@@ -638,6 +639,7 @@ export default function TexasTollRoadArticlePage() {
       title: TEXAS_TOLL_ARTICLE_TITLE,
       displayTitle: TEXAS_TOLL_ARTICLE_DISPLAY_TITLE,
       deck: TEXAS_TOLL_ARTICLE_DESCRIPTION,
+      generativeArtwork: getArticleGenerativeArtwork(`/markets/${TEXAS_TOLL_ARTICLE_SLUG}`),
       image: {
         src: '/images/research/texas-toll-roads-reader-hero.webp',
         alt: 'Monochrome editorial artwork representing Texas toll-road infrastructure and layered ownership.',
@@ -671,7 +673,7 @@ export default function TexasTollRoadArticlePage() {
     }],
     navigation: { items: navItems },
     boundary: {
-      label: 'Evidence boundary',
+      label: 'Scope and limits',
       content: 'Educational infrastructure research. Not investment, legal, tax, or municipal-bond advice.',
     },
     endnote: {
@@ -680,6 +682,7 @@ export default function TexasTollRoadArticlePage() {
       content: TEXAS_TOLL_ARTICLE_CONCLUSION.content,
       note: 'Research cutoff: July 11, 2026. All dollar figures are nominal unless stated otherwise. Calculated figures are labeled in context.',
       links: [
+        { href: '/research/financial-systems/why-texas-toll-roads-stay-tolled', label: 'Where Texas toll money goes' },
         { href: '/markets', label: 'Markets archive' },
         { href: '/research', label: 'Research archive' },
         { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView, useVelocity, useSpring } from 'motion/react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface FlowFieldProps {
   className?: string;
@@ -11,6 +12,7 @@ export function FlowField({ className = '', density = 40 }: FlowFieldProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { margin: "100px" });
   const isInViewRef = useRef(false);
+  const prefersReducedMotion = useReducedMotion();
   
   const { scrollYProgress, scrollY } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
   const yTransform = useTransform(scrollYProgress, [0, 1], [0, 200]);
@@ -31,10 +33,12 @@ export function FlowField({ className = '', density = 40 }: FlowFieldProps) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let width = canvas.offsetWidth;
     let height = canvas.offsetHeight;
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const particles: { x: number; y: number; vx: number; vy: number; length: number }[] = [];
     const isMobile = window.innerWidth < 768;
@@ -54,7 +58,37 @@ export function FlowField({ className = '', density = 40 }: FlowFieldProps) {
     let time = 0;
     let lastFrameTime = 0;
 
+    const drawParticles = (currentTime: number, vMult: number) => {
+      ctx.fillStyle = 'rgba(7, 7, 7, 0.1)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.strokeStyle = 'rgba(235, 232, 225, 0.4)';
+      ctx.lineWidth = 1;
+
+      particles.forEach(p => {
+        const angle = Math.sin(p.x * 0.005 + currentTime) * Math.cos(p.y * 0.005 + currentTime) * Math.PI * 2;
+        p.vx = Math.cos(angle) * 1.5 * vMult;
+        p.vy = Math.sin(angle) * 1.5 * vMult;
+
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        p.x += p.vx;
+        p.y += p.vy;
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+      });
+    };
+
     const render = (frameTime: number) => {
+      if (prefersReducedMotion) {
+        drawParticles(0, 1);
+        return;
+      }
+
       if (!isInViewRef.current) {
         animationFrameId = requestAnimationFrame(render);
         return;
@@ -65,38 +99,11 @@ export function FlowField({ className = '', density = 40 }: FlowFieldProps) {
         return;
       }
       lastFrameTime = frameTime;
-      
+
       const vMultiplier = 1 + (Math.abs(smoothVelocity.get()) * 0.002);
-      time += 0.002 * vMultiplier; // Accelerate time progression with scroll
-      
-      // Clear with trailing effect
-      ctx.fillStyle = 'rgba(7, 7, 7, 0.1)'; // Dark background (ink)
-      ctx.fillRect(0, 0, width, height);
-      
-      ctx.strokeStyle = 'rgba(235, 232, 225, 0.4)'; // Light lines (canvas)
-      ctx.lineWidth = 1;
+      time += 0.002 * vMultiplier;
 
-      particles.forEach(p => {
-        // Calculate vector field based on position and time
-        const angle = Math.sin(p.x * 0.005 + time) * Math.cos(p.y * 0.005 + time) * Math.PI * 2;
-        p.vx = Math.cos(angle) * 1.5 * vMultiplier;
-        p.vy = Math.sin(angle) * 1.5 * vMultiplier;
-
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        
-        p.x += p.vx;
-        p.y += p.vy;
-        
-        ctx.lineTo(p.x, p.y);
-        ctx.stroke();
-
-        // Wrap around edges
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-      });
+      drawParticles(time, vMultiplier);
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -106,8 +113,12 @@ export function FlowField({ className = '', density = 40 }: FlowFieldProps) {
     const handleResize = () => {
       width = canvas.offsetWidth;
       height = canvas.offsetHeight;
-      canvas.width = width;
-      canvas.height = height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (prefersReducedMotion) {
+        drawParticles(0, 1);
+      }
     };
 
     window.addEventListener('resize', handleResize);
@@ -116,7 +127,7 @@ export function FlowField({ className = '', density = 40 }: FlowFieldProps) {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [density, smoothVelocity]);
+  }, [density, smoothVelocity, prefersReducedMotion]);
 
   return (
     <div ref={containerRef} className={`relative overflow-hidden bg-ink ${className}`}>

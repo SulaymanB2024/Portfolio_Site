@@ -71,6 +71,8 @@
     { "src": "/markets/where-online-returns-actually-go", "headers": { "Location": "/research/financial-systems/where-online-returns-actually-go" }, "status": 308 },
     { "src": "/markets/hidden-financing-hardware-startups", "headers": { "Location": "/research/financial-systems/hidden-financing-hardware-startups" }, "status": 308 },
     { "src": "/markets/us-rare-earth-magnet-manufacturing-capacity", "headers": { "Location": "/research/data-systems/us-rare-earth-magnet-manufacturing-capacity" }, "status": 308 },
+    { "src": "/markets/why-texas-toll-roads-stay-tolled", "headers": { "Location": "/research/financial-systems/why-texas-toll-roads-stay-tolled" }, "status": 308 },
+    { "src": "/why-texas-toll-roads-stay-tolled", "headers": { "Location": "/research/financial-systems/why-texas-toll-roads-stay-tolled" }, "status": 308 },
     { "src": "/markets/network-monopolies", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
     { "src": "/markets/computational-commodity-systems", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
     { "src": "/markets/fiat-horizon", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },

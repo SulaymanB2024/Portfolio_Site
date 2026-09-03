@@ -1,0 +1,74 @@
+{
+  "article_id": "A02",
+  "version": "1.3-site-mr",
+  "base_repository": "SulaymanB2024/Portfolio_Site",
+  "base_commit": "5c23b1d2326e093c1766ef2a57b3fce7e55e0af7",
+  "published_date": "2026-09-02",
+  "date_modified": "2026-09-03",
+  "last_verified": "2026-09-02",
+  "canonical_path": "/research/financial-systems/why-texas-toll-roads-stay-tolled",
+  "aliases": [
+    "/markets/why-texas-toll-roads-stay-tolled",
+    "/why-texas-toll-roads-stay-tolled"
+  ],
+  "title": "Why Texas Toll Roads Stay Tolled",
+  "comparison_boundary": "The normalized $100 chart contains only CTTS and Grand Parkway because both use the same TxDOT FY2025 source, operating-revenue denominator, and category schedule.",
+  "files": [
+    {
+      "path": "public/research/texas-toll-revenue-financial-model-2025.xlsx",
+      "bytes": 93433,
+      "sha256": "e0edad8c0754b83c5dc66d3c813055f57bd35d93f755cae9d68853b437077afc"
+    },
+    {
+      "path": "public/research/texas-toll-revenue-system-comparison.csv",
+      "bytes": 1803,
+      "sha256": "83db309b5fa52103cd750a46cbe64a20c0c06e3a00a3174806aad614a53e7051"
+    },
+    {
+      "path": "public/research/texas-toll-revenue-per-100-comparison.csv",
+      "bytes": 433,
+      "sha256": "3a9c7b74062c3459957a448bf6329a14e64729206ef25d7d0451b9c15a1367e6"
+    },
+    {
+      "path": "public/research/texas-toll-revenue-source-ledger.csv",
+      "bytes": 11766,
+      "sha256": "eda3f2b90c46bff61f3906edd09a1fb40ff75b99698b85eeb7e059908181bdc2"
+    },
+    {
+      "path": "public/research/why-texas-toll-roads-stay-tolled.md",
+      "bytes": 34302,
+      "sha256": "98670e5d0b5ff736e1a76e676819957d612bc2ba8c6ccfbab18ec43d798713f5"
+    },
+    {
+      "path": "public/images/research/texas-toll-revenue-100-comparison.png",
+      "bytes": 123110,
+      "sha256": "ab4bf475874e9c7a0a608c8afd6f8894f2f44a532f05d39e213d1192116191a4"
+    },
+    {
+      "path": "public/images/research/texas-toll-revenue-hctra-cash.png",
+      "bytes": 131595,
+      "sha256": "4050bc81826df27549a1975428b16432a082c81068faf4415924131260dbf1de"
+    },
+    {
+      "path": "public/images/research/texas-toll-revenue-five-questions.png",
+      "bytes": 227872,
+      "sha256": "7449524ccc0ea3cf49c9617cc6086698378ec42e0661135cb9c08d9bdd64eea4"
+    },
+    {
+      "path": "public/images/research/texas-toll-revenue-reader-hero.webp",
+      "bytes": 54278,
+      "sha256": "2c456175188b15504460e4ed5c647cd4c536cfc7e280ca8b9cc8a67e6acc8ccd"
+    },
+    {
+      "path": "public/images/research/texas-toll-revenue-social.jpg",
+      "bytes": 72252,
+      "sha256": "125171c9c0ca55b04547d58d7210d822c53e87eaa6fb3aee84686b2b155039e6"
+    }
+  ],
+  "open_evidence_items": [
+    "Final Harris County §284.008(d) Commission order and project list",
+    "Current ultimate-equity chain for SH 130 Concession Company",
+    "CTRMA FY2025 audit-to-monthly category bridge",
+    "Exact page-level FBGPTRA headline extraction"
+  ]
+}

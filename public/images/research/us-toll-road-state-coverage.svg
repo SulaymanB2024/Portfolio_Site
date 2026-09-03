@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc" style="background:#f4f1e8">
+  <title id="title">States represented in the toll-road ownership sample</title>
+  <desc id="desc">A grid lists the 16 states represented and the number of facility or system rows selected in each.</desc>
+  <rect width="1600" height="1000" fill="#f4f1e8"/>
+  <g fill="#151515">
+    <text x="90" y="105" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="5">GEOGRAPHIC COVERAGE / 16 STATES</text>
+    <text x="90" y="175" font-family="Georgia, serif" font-style="italic" font-size="66">A structural sample, not a census.</text>
+    <text x="90" y="225" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#555">Row counts are intentionally uneven because the sample follows ownership variety and evidence quality.</text>
+    <rect x="90" y="310" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="114" y="350" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">CALIFORNIA</text>
+    <text x="396" y="386" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">3</text><rect x="455" y="310" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="479" y="350" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">COLORADO</text>
+    <text x="761" y="386" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="820" y="310" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="844" y="350" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">FLORIDA</text>
+    <text x="1126" y="386" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">3</text><rect x="1185" y="310" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="1209" y="350" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">ILLINOIS</text>
+    <text x="1491" y="386" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">2</text><rect x="90" y="445" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="114" y="485" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">INDIANA</text>
+    <text x="396" y="521" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="455" y="445" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="479" y="485" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">MAINE</text>
+    <text x="761" y="521" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="820" y="445" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="844" y="485" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">MARYLAND</text>
+    <text x="1126" y="521" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="1185" y="445" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="1209" y="485" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">MASSACHUSETTS</text>
+    <text x="1491" y="521" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="90" y="580" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="114" y="620" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">NEW JERSEY</text>
+    <text x="396" y="656" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="455" y="580" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="479" y="620" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">NEW YORK</text>
+    <text x="761" y="656" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="820" y="580" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="844" y="620" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">NORTH CAROLINA</text>
+    <text x="1126" y="656" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="1185" y="580" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="1209" y="620" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">OHIO</text>
+    <text x="1491" y="656" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="90" y="715" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="114" y="755" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">OKLAHOMA</text>
+    <text x="396" y="791" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="455" y="715" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="479" y="755" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">PENNSYLVANIA</text>
+    <text x="761" y="791" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">1</text><rect x="820" y="715" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="844" y="755" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">TEXAS</text>
+    <text x="1126" y="791" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">3</text><rect x="1185" y="715" width="330" height="100" fill="none" stroke="#151515" stroke-width="2"/>
+    <text x="1209" y="755" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">VIRGINIA</text>
+    <text x="1491" y="791" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="42">3</text>
+  </g>
+</svg>

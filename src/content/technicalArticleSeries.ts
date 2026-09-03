@@ -134,9 +134,9 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     title: 'The Crawl Frontier Is a State Machine, Not a Queue',
     seoTitle: 'Crawl Frontier Design: URL Identity, States, and Retries',
     subtitle:
-      'A practical architecture for URL identity, admission control, host politeness, bounded retries, crawl traps, and evidence-preserving frontier transitions.',
+      'A practical architecture for URL identity, admission control, host politeness, bounded retries, crawl traps, and recoverable frontier transitions.',
     seoDescription:
-      'Design a reliable web-crawler frontier with explicit URL identity, state transitions, per-origin scheduling, retry policy, crawl-trap controls, and reproducible evidence.',
+      'Design a reliable web-crawler frontier with explicit URL identity, state transitions, per-origin scheduling, retry policy, crawl-trap controls, and reproducible records.',
     artwork: {
       kind: 'image',
       heroSrc: '/images/research/crawl-frontier-editorial.webp',
@@ -153,7 +153,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     thesis:
       'A crawler becomes trustworthy when every URL transition is explicit, replayable, and bounded; a fast queue without an identity and state contract only processes ambiguity faster.',
     conclusion: {
-      title: 'Balance the crawl ledger',
+      title: 'Account for every admitted URL',
       content:
         'A frontier is finished only when every admitted URL reconciles to a terminal or explicitly unresolved state. Speed matters after identity, transitions, host capacity, and retry rules make that accounting replayable.',
     },
@@ -163,7 +163,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       { label: 'Core states', value: '08' },
       { label: 'Scheduling grain', value: 'ORIGIN' },
       { label: 'Retry rule', value: 'BOUNDED' },
-      { label: 'Primary artifact', value: 'TRANSITION LOG' },
+      { label: 'Core record', value: 'TRANSITION LOG' },
     ],
     sources: [
       URI_STANDARD,
@@ -296,7 +296,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     title: 'Raw HTML and Rendered DOM Are Separate Evidence',
     seoTitle: 'Raw HTML vs Rendered DOM: A Technical SEO Evidence Contract',
     subtitle:
-      'How to capture, compare, and qualify transport source, browser output, dependent requests, runtime failures, and render completeness without treating screenshots as data.',
+      'How to capture, compare, and qualify server responses, browser output, dependent requests, runtime failures, and render completeness without treating screenshots as data.',
     seoDescription:
       'Build a raw HTML versus rendered DOM evidence contract for JavaScript SEO, including capture fields, completeness states, DOM diffs, runtime failures, and triage.',
     artwork: {
@@ -313,19 +313,19 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     readTime: '14 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
-      'Raw source and browser-rendered output answer different questions, so a technical audit must preserve both artifacts and qualify the browser environment before interpreting their delta.',
+      'Raw source and browser-rendered output answer different questions, so a technical audit must preserve both records and qualify the browser environment before interpreting their differences.',
     conclusion: {
       title: 'Preserve both sides of the render',
       content:
-        'Source and rendered DOM are observations from different execution stages, not competing versions of truth. Keep both, record the browser conditions, and rerun the same completion contract before calling a rendering finding resolved.',
+        'Source and rendered DOM are observations from different execution stages, not competing versions of truth. Keep both, record the browser conditions, and repeat the same completeness check before calling a rendering finding resolved.',
     },
     evidenceBoundary:
       'A controlled browser run describes the tested environment at a recorded time. It does not reproduce every search crawler, user device, cache state, geography, consent choice, or personalization path, and a successful local render does not prove indexing.',
     metrics: [
-      { label: 'Evidence states', value: 'SOURCE + DOM' },
+      { label: 'Compared states', value: 'SOURCE + DOM' },
       { label: 'Completeness', value: 'EXPLICIT' },
       { label: 'Diff grain', value: 'FIELD' },
-      { label: 'Primary artifact', value: 'RENDER ENVELOPE' },
+      { label: 'Core record', value: 'RENDER CAPTURE' },
     ],
     sources: [
       GOOGLE_JS_SEO,
@@ -335,7 +335,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       HTTP_STANDARD,
     ],
     content: [
-      'Raw HTML is the response body delivered by the server for a request. The rendered DOM is a browser-created document state after parsing, script execution, network activity, and mutations. They are related artifacts, not competing screenshots of one truth. The source can contain meaningful content that JavaScript removes; the DOM can contain meaningful content that the source never delivered; either state can be incomplete for reasons unrelated to the page template.',
+      'Raw HTML is the response body delivered by the server for a request. The rendered DOM is a browser-created document state after parsing, script execution, network activity, and mutations. They are related records, not competing screenshots of one truth. The source can contain meaningful content that JavaScript removes; the DOM can contain meaningful content that the source never delivered; either state can be incomplete for reasons unrelated to the page template.',
       'A useful rendering audit records both sides of the transformation and the environment between them. That means request and response metadata, source bytes, browser identity, navigation timing, dependent-request outcomes, console errors, stop conditions, DOM serialization, and a completeness label. Only then can a reviewer distinguish an implementation defect from a blocked resource, consent branch, timeout, authentication boundary, or instrumentation failure.',
     ],
     sections: [
@@ -400,7 +400,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
         title: 'Diff semantic fields before diffing serialized markup',
         paragraphs: [
           'A character-level diff between HTML strings is dominated by generated identifiers, attribute order, hydration markers, timestamps, and framework wrappers. Those changes may be irrelevant to discovery or understanding. Extract comparable semantic fields from source and DOM first: headings, visible text blocks, links, canonical, robots directives, language alternates, structured records, forms, media, and named page components.',
-          'For each field, classify added, removed, changed, or unchanged values and retain pointers to both artifacts. Links should be compared after resolution while preserving their original href and anchor text. Structured data should be compared as parsed records with stable identifiers, not as raw JSON key order. Text comparisons should report both normalized and exact states so normalization cannot hide a meaningful difference.',
+          'For each field, classify added, removed, changed, or unchanged values and retain pointers to both captures. Links should be compared after resolution while preserving their original href and anchor text. Structured data should be compared as parsed records with stable identifiers, not as raw JSON key order. Text comparisons should report both normalized and exact states so normalization cannot hide a meaningful difference.',
           'Serialized DOM remains valuable for debugging, especially when a field-level delta points to a component. The order matters: begin with a claim-relevant difference, then inspect the markup that produced it. This keeps a technical SEO report centered on operational consequences rather than on every mutation a framework performs.',
         ],
         codeExamples: [
@@ -428,7 +428,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
         id: 'triage-order',
         title: 'Triage delivery, execution, extraction, and interpretation in order',
         paragraphs: [
-          'When a source field is absent and the DOM field is present, first ask whether client rendering is an intentional delivery choice and whether the render contract completed. When the source field is present and the DOM field is absent, inspect component logic, hydration, consent, and runtime failures. When both are present but an audit says missing, reproduce the extractor against the saved artifacts before changing the site.',
+          'When a source field is absent and the DOM field is present, first ask whether client rendering is an intentional delivery choice and whether the render process completed. When the source field is present and the DOM field is absent, inspect component logic, hydration, consent, and runtime failures. When both are present but an audit says missing, reproduce the extractor against the saved captures before changing the site.',
           'Keep crawler accessibility separate from browser capability. Google documents a crawling, rendering, and indexing process for JavaScript pages, but a local Chromium run is not a Googlebot result. It is controlled implementation evidence. The audit can say that content depends on successful client execution in the tested scenario; it cannot infer that every downstream system failed to process it.',
           'Close the loop with a focused rerun after a repair. Use the same request headers, browser version, scenario, completion contract, and field extractor. A passing rerun should show the expected delta and no new failure state. If the environment changed, treat it as a new comparison rather than silently declaring the old finding resolved.',
         ],
@@ -484,7 +484,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       { label: 'Graph nodes', value: 'URL STATES' },
       { label: 'Edge classes', value: '05' },
       { label: 'Failure mode', value: 'NON-CONVERGENCE' },
-      { label: 'Primary artifact', value: 'CLUSTER MAP' },
+      { label: 'Core model', value: 'CLUSTER MAP' },
     ],
     sources: [
       GOOGLE_CANONICALS,
@@ -496,7 +496,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     ],
     content: [
       'A canonical tag is one edge in a larger URL graph. Redirects move a requester, rel canonical annotations name a preferred representative, sitemaps nominate URLs, internal links reinforce destinations, and duplicate detection groups similar documents. Reviewing any one signal in isolation misses the failures created by their interaction: a sitemap can list a URL that redirects, a canonical can target a page that canonicals elsewhere, and two duplicates can point at each other.',
-      'Graph analysis turns those contradictions into testable structures. Each observed URL is a node with transport and indexability fields. Each redirect, canonical, internal link, sitemap membership, alternate relationship, and duplicate classification becomes a typed edge with an evidence source. The central question is convergence: does every eligible member of a duplicate cluster lead to one stable, indexable representative without cycles, broken targets, or competing nominations?',
+      'Graph analysis turns those contradictions into testable structures. Each observed URL is a node with transport and indexability fields. Each redirect, canonical, internal link, sitemap membership, alternate relationship, and duplicate classification becomes a typed edge with a source reference. The central question is convergence: does every eligible member of a duplicate cluster lead to one stable, indexable representative without cycles, broken targets, or competing nominations?',
     ],
     sections: [
       {
@@ -635,7 +635,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     conclusion: {
       title: 'Repair the journey, then rerun the graph',
       content:
-        'Useful internal architecture gives priority pages several meaningful, crawlable paths from real entry points. The durable artifact is a versioned graph whose reachability and path-diversity invariants survive template and route changes.',
+        'Useful internal architecture gives priority pages several meaningful, crawlable paths from real entry points. A versioned graph makes it possible to verify that reachability and path diversity survive template and route changes.',
     },
     evidenceBoundary:
       'Graph metrics describe the captured internal architecture and help prioritize review. They do not measure proprietary ranking weights, guarantee crawling or indexing, or prove that adding a link will improve search performance.',
@@ -643,7 +643,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       { label: 'Graph', value: 'DIRECTED' },
       { label: 'Edge context', value: 'RETAINED' },
       { label: 'Orphan states', value: '04' },
-      { label: 'Primary artifact', value: 'LINK EDGE TABLE' },
+      { label: 'Core model', value: 'LINK EDGE TABLE' },
     ],
     sources: [
       GOOGLE_LINKS,
@@ -776,7 +776,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     title: 'Robots.txt Is a Courtesy Layer, Not Access Control',
     seoTitle: 'Is Robots.txt Access Control? RFC 9309 Says No',
     subtitle:
-      'A precise model for separating crawler requests, indexing directives, authentication, authorization, rate controls, and evidence of enforcement.',
+      'A precise model for separating crawler requests, indexing directives, authentication, authorization, rate controls, and enforcement logs.',
     seoDescription:
       'RFC 9309 says robots.txt rules are not access authorization. Learn what robots.txt controls—and when to use noindex, authentication, authorization, or rate limits.',
     artwork: {
@@ -805,7 +805,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       { label: 'Control layers', value: '06' },
       { label: 'Security boundary', value: 'SERVER' },
       { label: 'Identity claim', value: 'UNTRUSTED' },
-      { label: 'Primary artifact', value: 'POLICY MATRIX' },
+      { label: 'Core model', value: 'POLICY MATRIX' },
     ],
     sources: [
       ROBOTS_STANDARD,
@@ -815,8 +815,8 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       source('OpenAI crawler documentation', 'https://developers.openai.com/api/docs/bots'),
     ],
     content: [
-      'RFC 9309 is explicit: robots.txt rules are not a form of access authorization. A robots.txt file is public text that asks automated clients how they may access paths on one service. It is valuable because cooperating crawlers can retrieve one predictable policy before requesting content. It is not a credential, firewall, authorization decision, encryption layer, or proof of the client behind a User-Agent string. Treating it as any of those creates a security boundary that an ordinary HTTP client can cross by ignoring the file.',
-      'A robust crawler policy uses separate controls for separate outcomes. Robots rules govern cooperating automated retrieval. Page-level robots directives express indexing and presentation preferences to supporting systems. Authentication establishes an identity; authorization decides whether that identity may access a resource. Edge and application controls protect capacity. Logging and verification provide evidence about what happened. The layers can support one policy, but none substitutes for the others.',
+      'RFC 9309 is explicit: robots.txt rules are not a form of access authorization. A robots.txt file is public text that asks automated clients how they may access paths on one service. It is valuable because cooperating crawlers can retrieve one predictable policy before requesting content. It is not a credential, firewall, authorization decision, encryption layer, or confirmation of the client behind a User-Agent string. Treating it as any of those creates a security boundary that an ordinary HTTP client can cross by ignoring the file.',
+      'A robust crawler policy uses separate controls for separate outcomes. Robots rules govern cooperating automated retrieval. Page-level robots directives express indexing and presentation preferences to supporting systems. Authentication establishes an identity; authorization decides whether that identity may access a resource. Edge and application controls protect capacity. Logs show what happened in the observed window. The layers can support one policy, but none substitutes for the others.',
     ],
     sections: [
       {
@@ -935,8 +935,8 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       kind: 'image',
       heroSrc: '/images/research/structured-data-editorial.webp',
       socialSrc: '/images/research/structured-data-social.jpg',
-      alt: 'Two synchronized monochrome ledgers run in parallel while one translucent layer begins to drift.',
-      label: 'Structured data / synchronized ledgers',
+      alt: 'Two synchronized monochrome records run in parallel while one translucent layer begins to drift.',
+      label: 'Structured data / synchronized outputs',
       caption: 'Visible content and machine-readable projections stay aligned until an unmanaged shadow layer separates.',
     },
     date: PUBLISHED,
@@ -945,7 +945,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     readTime: '14 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
-      'Structured data is trustworthy when it is a typed projection of the same maintained record that renders the page, and release gates test semantic agreement rather than syntax alone.',
+      'Structured data is trustworthy when it is a typed projection of the same maintained record that renders the page, and release checks test semantic agreement rather than syntax alone.',
     conclusion: {
       title: 'Publish one fact graph',
       content:
@@ -956,8 +956,8 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     metrics: [
       { label: 'Source records', value: 'ONE' },
       { label: 'Projections', value: 'HTML + JSON-LD' },
-      { label: 'Gate', value: 'SEMANTIC' },
-      { label: 'Primary artifact', value: 'CONTENT CONTRACT' },
+      { label: 'Verification', value: 'SEMANTIC' },
+      { label: 'Core model', value: 'CONTENT RECORD' },
     ],
     sources: [
       JSON_LD_STANDARD,
@@ -1086,20 +1086,20 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     cluster: 'data-systems',
     slug: 'audit-findings-derived-records',
     number: '11',
-    category: 'EVIDENCE SYSTEMS',
+    category: 'AUDIT SYSTEMS',
     title: 'Audit Findings Should Be Derived Records',
     seoTitle: 'Audit Findings as Derived Records: Provenance for Technical SEO',
     subtitle:
-      'A data model that separates captured observations, artifacts, rule evaluations, findings, confidence, review state, and recommendations without losing lineage.',
+      'A data model that separates captured inputs, rule evaluations, findings, confidence, review state, and recommendations without losing lineage.',
     seoDescription:
-      'Model technical SEO audit findings as derived records with observation lineage, immutable artifacts, versioned rules, explicit gaps, confidence, review, and reproducible exports.',
+      'Model technical SEO audit findings as derived records with observation lineage, immutable inputs, versioned rules, explicit gaps, confidence, review, and reproducible exports.',
     artwork: {
       kind: 'image',
       heroSrc: '/images/research/audit-findings-editorial.webp',
       socialSrc: '/images/research/audit-findings-social.jpg',
-      alt: 'Captured evidence passes through transparent rule plates into a sealed monochrome finding record.',
+      alt: 'Captured source data passes through transparent rule plates into a sealed monochrome finding record.',
       label: 'Audit lineage / sealed findings',
-      caption: 'Artifacts pass through versioned rules before becoming traceable, reviewable finding records.',
+      caption: 'Captured inputs pass through versioned rules before becoming traceable, reviewable findings.',
     },
     date: PUBLISHED,
     dateModified: PUBLISHED,
@@ -1107,11 +1107,11 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     readTime: '15 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
-      'An audit finding is defensible only when it can be regenerated from named observations and a versioned rule while preserving uncertainty, reviewer decisions, and the exact evidence used.',
+      'An audit finding is defensible only when it can be regenerated from named observations and a versioned rule while preserving uncertainty, reviewer decisions, and the exact inputs used.',
     conclusion: {
       title: 'Keep the finding reproducible',
       content:
-        'A finding should remain regenerable from immutable observations, versioned rules, named gaps, and reviewer decisions. Resolution requires a fresh evaluation over the agreed scope; a merged patch alone is only implementation evidence.',
+        'A finding should remain regenerable from immutable observations, versioned rules, named gaps, and reviewer decisions. Resolution requires a fresh evaluation over the agreed scope; merging a patch does not verify the result.',
     },
     evidenceBoundary:
       'Provenance makes derivation inspectable; it does not make the observation complete or the rule correct. Findings still require scope, data-quality checks, domain review, and explicit treatment of measurement gaps.',
@@ -1119,7 +1119,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       { label: 'Record layers', value: '06' },
       { label: 'Rule identity', value: 'VERSIONED' },
       { label: 'History', value: 'APPEND-ONLY' },
-      { label: 'Primary artifact', value: 'LINEAGE CHAIN' },
+      { label: 'Core model', value: 'LINEAGE CHAIN' },
     ],
     sources: [
       PROV_STANDARD,
@@ -1129,8 +1129,8 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       source('OpenLineage facets and extensibility', 'https://openlineage.io/docs/spec/facets/'),
     ],
     content: [
-      'A technical audit often jumps from a crawl table to a sentence: “these pages have missing canonicals,” “this template is orphaned,” or “JavaScript hides the content.” The sentence may be right, but the system has compressed several steps into one label. It observed a response, parsed an artifact, normalized fields, applied a rule, grouped URLs, interpreted impact, and proposed an action. When those layers are not stored separately, the conclusion cannot be reproduced or safely revised.',
-      'Treat a finding as a derived record. Captured artifacts remain immutable. Observations point to fields inside those artifacts. A versioned rule consumes observations and emits an evaluation. A finding groups evaluations into an operator-facing claim with scope, confidence, and gap states. Review events approve, reject, amend, or supersede that claim. Recommendations remain a final planning layer rather than being embedded in the observation.',
+      'A technical audit often jumps from a crawl table to a sentence: “these pages have missing canonicals,” “this template is orphaned,” or “JavaScript hides the content.” The sentence may be right, but the system has compressed several steps into one label. It observed a response, parsed the captured data, normalized fields, applied a rule, grouped URLs, interpreted impact, and proposed an action. When those layers are not stored separately, the conclusion cannot be reproduced or safely revised.',
+      'Treat a finding as a derived record. Captured inputs remain immutable. Observations point to fields inside those inputs. A versioned rule consumes observations and emits an evaluation. A finding groups evaluations into an operator-facing claim with scope, confidence, and gap states. Review events approve, reject, amend, or supersede that claim. Recommendations remain a final planning layer rather than being embedded in the observation.',
     ],
     sections: [
       {
@@ -1176,7 +1176,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
         title: 'Make rule evaluation deterministic and versioned',
         paragraphs: [
           'A rule should declare required input fields, eligibility conditions, parameters, outcomes, and gap behavior. “Missing title” is incomplete if the parser failed, the response was not HTML, the render timed out, or the route intentionally returns no document. Evaluate prerequisites first and return not-applicable or insufficient-evidence when they are not satisfied.',
-          'Version a rule whenever its logic, threshold, normalization, or required inputs change. Store a human-readable summary and a machine-executable implementation reference. Re-running old artifacts through a new rule should create new evaluations rather than mutating historical results. This makes changes in issue counts explainable.',
+          'Version a rule whenever its logic, threshold, normalization, or required inputs change. Store a human-readable summary and a machine-executable implementation reference. Re-running old inputs through a new rule should create new evaluations rather than mutating historical results. This makes changes in issue counts explainable.',
           'Determinism requires controlled inputs. Time-dependent checks need a recorded evaluation time. External lookups need captured responses or versioned datasets. Machine-learned classification needs model and prompt or feature versions, confidence, and a review threshold. If the same inputs can produce materially different results, the evaluation must store the trial or sampling contract.',
         ],
         codeExamples: [
@@ -1249,7 +1249,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     title: 'Replayable Traces for Evaluating Tool-Using AI Agents',
     seoTitle: 'Replayable Traces for AI Agent Evaluation',
     subtitle:
-      'An evaluation architecture for tasks, trials, observable trajectories, controlled environments, layered graders, repeated runs, and evidence-gated promotion.',
+      'An evaluation architecture for tasks, trials, observable trajectories, controlled environments, layered graders, repeated runs, and measured promotion.',
     seoDescription:
       'Evaluate tool-using AI agents with replayable observable traces, controlled environments, layered graders, repeated trials, side-effect checks, and promotion gates.',
     artwork: {
@@ -1258,7 +1258,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       socialSrc: '/images/research/replayable-traces-social.jpg',
       alt: 'A looping monochrome agent trajectory repeatedly crosses tools, observations, records, and graders.',
       label: 'Agent evaluation / replay loop',
-      caption: 'Repeated trajectories preserve tools, observations, side effects, and grader evidence as one inspectable loop.',
+      caption: 'Repeated trajectories preserve tools, observations, side effects, and grader results as one reviewable loop.',
     },
     date: PUBLISHED,
     dateModified: PUBLISHED,
@@ -1276,7 +1276,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'A replay can reproduce recorded inputs or simulate an environment boundary; it cannot prove that a stochastic model will emit the same trajectory. Evaluation results apply to the tested agent, tools, models, policies, graders, and environment versions.',
     metrics: [
       { label: 'Unit', value: 'TRIAL' },
-      { label: 'Evidence', value: 'OBSERVABLE TRACE' },
+      { label: 'Trace', value: 'OBSERVABLE' },
       { label: 'Graders', value: 'LAYERED' },
       { label: 'Promotion', value: 'CONTROLLED' },
     ],
@@ -1344,7 +1344,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
           caption: 'Layered agent graders',
           columns: ['Grader', 'Evidence', 'Example result', 'Failure meaning'],
           rows: [
-            ['outcome', 'Final environment and artifacts', 'Requested record exists', 'Task not completed'],
+            ['outcome', 'Final environment and outputs', 'Requested record exists', 'Task not completed'],
             ['process', 'Ordered tool events', 'Required validation ran', 'Success path violated procedure'],
             ['policy', 'Actions and authorization context', 'No external send without approval', 'Boundary breach'],
             ['side effect', 'Before/after state diff', 'Only approved files changed', 'Collateral mutation'],
@@ -1439,7 +1439,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       { label: 'Writer model', value: 'ONE AT A TIME' },
       { label: 'Write contract', value: 'IDEMPOTENT' },
       { label: 'History', value: 'ATTEMPT-LEVEL' },
-      { label: 'Primary artifact', value: 'STABLE DUMP' },
+      { label: 'Durable export', value: 'STABLE DUMP' },
     ],
     sources: [
       SQLITE_TRANSACTIONS,
@@ -1449,7 +1449,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       source('SQLite PRAGMA integrity_check', 'https://www.sqlite.org/pragma.html#pragma_integrity_check'),
     ],
     content: [
-      'A crawl workload looks hostile to a small embedded database: many workers finish at unpredictable times, every response creates related rows, retries duplicate logical work, render artifacts arrive later than source artifacts, and reporting queries run while collection continues. The pressure often leads to shared connections, row-by-row commits, replace-style writes, and a current-state table that destroys attempt history.',
+      'A crawl workload looks hostile to a small embedded database: many workers finish at unpredictable times, every response creates related rows, retries duplicate logical work, rendered captures arrive later than source captures, and reporting queries run while collection continues. The pressure often leads to shared connections, row-by-row commits, replace-style writes, and a current-state table that destroys attempt history.',
       'SQLite can support the workload when the architecture narrows the write boundary. Workers produce immutable result messages. One writer or a small serialized writer service validates those messages, writes bounded transactions, and acknowledges durable commit. Stable uniqueness keys make delivery idempotent. Append-only attempt tables retain what happened; materialized current tables and views make reporting convenient without becoming the only record.',
     ],
     sections: [
@@ -1572,7 +1572,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     title: 'Technical SEO Migrations Need Executable Release Gates',
     seoTitle: 'Technical SEO Migration Checklist: Executable Release Gates',
     subtitle:
-      'A fail-closed migration method for URL manifests, redirect graphs, canonical output, internal links, sitemaps, rendered content, launch sequencing, and post-release evidence.',
+      'A fail-closed migration method for URL manifests, redirect graphs, canonical output, internal links, sitemaps, rendered content, launch sequencing, and post-release checks.',
     seoDescription:
       'Build executable technical SEO migration gates for URL mappings, redirects, canonicals, internal links, sitemaps, rendered content, launch rollout, and monitoring.',
     artwork: {
@@ -1581,7 +1581,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       socialSrc: '/images/research/migration-gates-social.jpg',
       alt: 'A monochrome corridor of sequential checkpoints governs several converging release paths.',
       label: 'Migration controls / release corridor',
-      caption: 'Redirects, canonicals, internal links, and release evidence must pass the same ordered checkpoints.',
+      caption: 'Redirects, canonicals, internal links, and production behavior must pass the same ordered checkpoints.',
     },
     date: PUBLISHED,
     dateModified: PUBLISHED,
@@ -1589,19 +1589,19 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     readTime: '16 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
-      'A migration is ready when every important old URL has an approved terminal state, every new canonical route satisfies a page contract, and production evidence proves the mapping after the real edge and application stack.',
+      'A migration is ready when every important old URL has an approved terminal state, every new canonical route satisfies its page requirements, and live checks confirm the mapping through the real edge and application stack.',
     conclusion: {
-      title: 'Gate the route contract, not the launch date',
+      title: 'Test route behavior, not the launch date',
       content:
         'A migration is ready when every important old URL has an approved terminal state and every new route passes its page contract through the real production edge. Rankings and index consolidation remain external transitions to monitor separately.',
     },
     evidenceBoundary:
-      'Passing migration gates proves the tested publisher-controlled routing and page signals. It cannot guarantee unchanged rankings, traffic, crawling cadence, index consolidation, or behavior in untested caches, regions, clients, and external systems.',
+      'Passing migration checks demonstrates the tested publisher-controlled routing and page signals. It cannot guarantee unchanged rankings, traffic, crawling cadence, index consolidation, or behavior in untested caches, regions, clients, and external systems.',
     metrics: [
       { label: 'Source of truth', value: 'URL MANIFEST' },
       { label: 'Redirect policy', value: 'ONE HOP' },
       { label: 'Launch gate', value: 'FAIL CLOSED' },
-      { label: 'Primary artifact', value: 'EVIDENCE LEDGER' },
+      { label: 'Release record', value: 'MIGRATION REPORT' },
     ],
     sources: [
       GOOGLE_SITE_MOVES,

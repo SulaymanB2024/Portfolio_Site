@@ -8,6 +8,7 @@ import {
   type ArticleNavItem,
   type ArticleReaderConfig,
 } from '../components/ArticleLayout';
+import { getArticleGenerativeArtwork } from '../art/generative/manifest';
 import {
   AI_MANAGER_CASES,
   AI_MANAGER_FAQS,
@@ -37,7 +38,7 @@ const headlineMetrics = [
   { value: '30', label: 'cases reviewed', note: 'live, bounded, narrow, simulated' },
   { value: '4', label: 'Grade A live cases', note: 'real customers + recurring authority' },
   { value: String(AI_MANAGER_SOURCES.length), label: 'published sources', note: 'primary, independent, code, papers' },
-  { value: '0', label: 'audited autonomy proofs', note: 'fully burdened profitable operations' },
+  { value: '0', label: 'independently audited cases', note: 'fully burdened profitable operations' },
 ] as const;
 
 const caseFilters: Array<{ value: 'all' | AiManagerCaseKind; label: string }> = [
@@ -52,7 +53,7 @@ const caseFilters: Array<{ value: 'all' | AiManagerCaseKind; label: string }> = 
 const operatingStack = [
   ['01', 'Model', 'Reasoning, language, post-training, tool-use behavior'],
   ['02', 'Objective', 'Prompt, role, incentives, commercial target'],
-  ['03', 'Memory', 'State, summaries, ledgers, commitments, precedent'],
+  ['03', 'Memory', 'State, summaries, records, commitments, precedent'],
   ['04', 'Tools', 'Email, CRM, browser, POS, inventory, calendar'],
   ['05', 'Controls', 'Budgets, approvals, disclosures, escalation gates'],
   ['06', 'Humans', 'Identity, liability, physical work, monitoring, rescue'],
@@ -167,7 +168,7 @@ function PolicyLeakFigure() {
         )))}
       </div>
       <figcaption id="policy-leak-caption">
-        A locally reasonable assistant response can become an unstable business rule when the system lacks a durable ledger, constraint, or approval threshold.
+        A locally reasonable assistant response can become an unstable business rule when the system lacks a durable record, constraint, or approval threshold.
       </figcaption>
     </figure>
   );
@@ -301,7 +302,7 @@ function CaseExplorer() {
     <div className="ai-case-explorer" aria-labelledby="case-explorer-title">
       <div className="ai-case-explorer__header">
         <div>
-          <span>Interactive evidence map</span>
+          <span>Interactive case map</span>
           <h3 id="case-explorer-title">Explore all 30 reviewed cases</h3>
         </div>
         <p><strong>{filteredCases.length}</strong> shown</p>
@@ -347,7 +348,7 @@ function CaseExplorer() {
         ))}
       </div>
       {!filteredCases.length ? <p className="ai-case-explorer__empty">No cases match that combination. Clear the search or choose another operating form.</p> : null}
-      <p className="ai-case-explorer__note">Grades describe evidence quality and operating reality—not commercial success.</p>
+      <p className="ai-case-explorer__note">Grades describe source quality and operating reality, not commercial success.</p>
     </div>
   );
 }
@@ -413,9 +414,9 @@ function FrequentlyAskedQuestions({ index }: { index: string }) {
 function SourceLedger({ index }: { index: string }) {
   return (
     <section id="source-ledger" className="toll-source-ledger">
-      <ArticleSectionHeader index={index}>Source ledger</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>Sources</ArticleSectionHeader>
       <p className="toll-section-intro">
-        The article uses operator logs and dashboards for detailed traces, independent reporting to verify physical reality, public code to inspect architecture, and papers for controlled evidence. Operator economics remain unaudited unless stated otherwise.
+        The article uses operator logs and dashboards for operating detail, independent reporting to verify physical reality, public code to inspect architecture, and papers for controlled studies. Operator economics remain unaudited unless stated otherwise.
       </p>
       <ol>
         {AI_MANAGER_SOURCES.map((source) => (
@@ -469,7 +470,7 @@ export default function AiManagersArticlePage() {
     {
       kind: 'source',
       id: 'source-ledger',
-      label: 'Source ledger',
+      label: 'Sources',
     },
   ]);
   const config: ArticleReaderConfig = {
@@ -477,14 +478,15 @@ export default function AiManagersArticlePage() {
     mode: 'narrative',
     className: 'ai-managers-article',
     archive: {
-      href: '/research',
-      label: 'Research archive',
+      href: '/research/ai-systems',
+      label: 'AI systems cluster',
     },
     hero: {
       eyebrow: 'AI-operated shops / human control / commercial reality',
       title: AI_MANAGERS_ARTICLE_TITLE,
       displayTitle: AI_MANAGERS_ARTICLE_DISPLAY_TITLE,
       deck: AI_MANAGERS_ARTICLE_DESCRIPTION,
+      generativeArtwork: getArticleGenerativeArtwork(AI_MANAGERS_ARTICLE_PATH),
       image: {
         src: '/images/research/ai-managers-reader-hero.webp',
         alt: 'Monochrome editorial artwork showing a central operator directing several bounded AI systems.',
@@ -517,7 +519,7 @@ export default function AiManagersArticlePage() {
       content: (
         <>
           <p>{SEARCH_TARGET.directAnswer}</p>
-          <p><strong>Original artifact:</strong> {SEARCH_TARGET.originalArtifact}</p>
+          <p><strong>Research basis:</strong> {SEARCH_TARGET.originalArtifact}</p>
         </>
       ),
     }],
@@ -526,7 +528,7 @@ export default function AiManagersArticlePage() {
       contentsLabel: 'Chapters',
     },
     boundary: {
-      label: 'Evidence boundary',
+      label: 'Scope and limits',
       content: 'Operator dashboards are unaudited. Simulations are not businesses. Human legal, financial, and physical work is counted, not cropped out.',
     },
     endnote: {
@@ -535,6 +537,7 @@ export default function AiManagersArticlePage() {
       content: AI_MANAGERS_ARTICLE_CONCLUSION.content,
       note: 'Research cutoff: July 14, 2026. Financial claims are labeled by source type and accounting limit. No simulation score is presented as real-world profit.',
       links: [
+        { href: '/research/ai-systems', label: 'AI systems research cluster' },
         ...SEARCH_TARGET.relatedPaths.map((path) => ({
           href: path,
           label: getArticleRelatedLinkLabel(AI_MANAGERS_ARTICLE_PATH, path),

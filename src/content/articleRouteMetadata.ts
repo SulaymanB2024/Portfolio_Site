@@ -34,11 +34,11 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "aliases": [],
     "title": "The Crawl Frontier Is a State Machine, Not a Queue",
     "seoTitle": "Crawl Frontier Design: URL Identity, States, and Retries",
-    "seoDescription": "Design a reliable web-crawler frontier with explicit URL identity, state transitions, per-origin scheduling, retry policy, crawl-trap controls, and reproducible evidence.",
+    "seoDescription": "Design a reliable web-crawler frontier with explicit URL identity, state transitions, per-origin scheduling, retry policy, crawl-trap controls, and reproducible records.",
     "date": "2026.07.19",
     "dateModified": "2026.07.19",
     "indexable": true,
-    "staticSummary": "Reliable crawl frontier design models each URL as a versioned state transition across discovery, admission, scheduling, fetching, retry, suppression, and completion while keeping URL identity, origin politeness, leases, budgets, and evidence records explicit and replayable. A crawl frontier is often introduced as a queue of URLs waiting to be fetched. That description is convenient and incomplete. Before a URL reaches a network client, the crawler has already made decisions about identity, scope, priority, policy, host capacity, and prior attempts. After the request, the address may redirect, retry, fail permanently, produce new links, or remain unresolved. Those decisions form a state machine whether the implementation acknowledges them or not.",
+    "staticSummary": "Reliable crawl frontier design models each URL as a versioned state transition across discovery, admission, scheduling, fetching, retry, suppression, and completion while keeping URL identity, origin politeness, leases, budgets, and completion records explicit and replayable. A crawl frontier is often introduced as a queue of URLs waiting to be fetched. That description is convenient and incomplete. Before a URL reaches a network client, the crawler has already made decisions about identity, scope, priority, policy, host capacity, and prior attempts. After the request, the address may redirect, retry, fail permanently, produce new links, or remain unresolved. Those decisions form a state machine whether the implementation acknowledges them or not.",
     "image": "/images/research/crawl-frontier-social.jpg"
   },
   {
@@ -51,7 +51,7 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "date": "2026.07.19",
     "dateModified": "2026.07.19",
     "indexable": true,
-    "staticSummary": "Raw HTML is the response body returned by the server, while the rendered DOM is the browser-created document after parsing, scripts, dependent requests, and mutations; a technical SEO audit needs both artifacts plus an explicit render-completeness state. Raw HTML is the response body delivered by the server for a request. The rendered DOM is a browser-created document state after parsing, script execution, network activity, and mutations. They are related artifacts, not competing screenshots of one truth. The source can contain meaningful content that JavaScript removes; the DOM can contain meaningful content that the source never delivered; either state can be incomplete for reasons unrelated to the page template.",
+    "staticSummary": "Raw HTML is the response body returned by the server, while the rendered DOM is the browser-created document after parsing, scripts, dependent requests, and mutations; a technical SEO audit needs both captures plus an explicit render-completeness state. Raw HTML is the response body delivered by the server for a request. The rendered DOM is a browser-created document state after parsing, script execution, network activity, and mutations. They are related records, not competing screenshots of one truth. The source can contain meaningful content that JavaScript removes; the DOM can contain meaningful content that the source never delivered; either state can be incomplete for reasons unrelated to the page template.",
     "image": "/images/research/raw-html-rendered-dom-social.jpg"
   },
   {
@@ -90,7 +90,7 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "date": "2026.07.19",
     "dateModified": "2026.07.25",
     "indexable": true,
-    "staticSummary": "RFC 9309 states that robots.txt rules are not access authorization. The file is a publicly readable crawler-coordination protocol that cooperative agents may follow; authentication, authorization, network policy, and server-side response controls must protect material that cannot be publicly retrieved. RFC 9309 is explicit: robots.txt rules are not a form of access authorization. A robots.txt file is public text that asks automated clients how they may access paths on one service. It is valuable because cooperating crawlers can retrieve one predictable policy before requesting content. It is not a credential, firewall, authorization decision, encryption layer, or proof of the client behind a User-Agent string. Treating it as any of those creates a security boundary that an ordinary HTTP client can cross by ignoring the file.",
+    "staticSummary": "RFC 9309 states that robots.txt rules are not access authorization. The file is a publicly readable crawler-coordination protocol that cooperative agents may follow; authentication, authorization, network policy, and server-side response controls must protect material that cannot be publicly retrieved. RFC 9309 is explicit: robots.txt rules are not a form of access authorization. A robots.txt file is public text that asks automated clients how they may access paths on one service. It is valuable because cooperating crawlers can retrieve one predictable policy before requesting content. It is not a credential, firewall, authorization decision, encryption layer, or confirmation of the client behind a User-Agent string. Treating it as any of those creates a security boundary that an ordinary HTTP client can cross by ignoring the file.",
     "image": "/images/research/robots-policy-social.jpg"
   },
   {
@@ -112,11 +112,11 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "aliases": [],
     "title": "Audit Findings Should Be Derived Records",
     "seoTitle": "Audit Findings as Derived Records: Provenance for Technical SEO",
-    "seoDescription": "Model technical SEO audit findings as derived records with observation lineage, immutable artifacts, versioned rules, explicit gaps, confidence, review, and reproducible exports.",
+    "seoDescription": "Model technical SEO audit findings as derived records with observation lineage, immutable inputs, versioned rules, explicit gaps, confidence, review, and reproducible exports.",
     "date": "2026.07.19",
     "dateModified": "2026.07.19",
     "indexable": true,
-    "staticSummary": "SEO audit provenance means every finding can be regenerated from immutable observations, rule and policy versions, affected URLs, timestamps, confidence, and reviewer decisions while unknown or incomplete evidence remains a named measurement gap instead of becoming a claim. A technical audit often jumps from a crawl table to a sentence: “these pages have missing canonicals,” “this template is orphaned,” or “JavaScript hides the content.” The sentence may be right, but the system has compressed several steps into one label. It observed a response, parsed an artifact, normalized fields, applied a rule, grouped URLs, interpreted impact, and proposed an action. When those layers are not stored separately, the conclusion cannot be reproduced or safely revised.",
+    "staticSummary": "SEO audit provenance means every finding can be regenerated from immutable observations, rule and policy versions, affected URLs, timestamps, confidence, and reviewer decisions while unknown or incomplete evidence remains a named measurement gap instead of becoming a claim. A technical audit often jumps from a crawl table to a sentence: “these pages have missing canonicals,” “this template is orphaned,” or “JavaScript hides the content.” The sentence may be right, but the system has compressed several steps into one label. It observed a response, parsed the captured data, normalized fields, applied a rule, grouped URLs, interpreted impact, and proposed an action. When those layers are not stored separately, the conclusion cannot be reproduced or safely revised.",
     "image": "/images/research/audit-findings-social.jpg"
   },
   {
@@ -129,7 +129,7 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "date": "2026.07.19",
     "dateModified": "2026.07.19",
     "indexable": true,
-    "staticSummary": "AI agent evaluation traces should preserve the task, messages, tool calls, tool results, state transitions, artifacts, policy versions, costs, timing, and grader evidence so a failure can be replayed without pretending a frozen test world predicts the live environment. A tool-using agent can reach the right final answer through an unsafe path, fail after making a useful partial change, or appear successful because the grader inspected the agent response rather than the external state. Multi-step execution creates more evidence than a prompt and output pair: tool calls, observations, state mutations, retries, costs, policy decisions, and the final environment all matter.",
+    "staticSummary": "AI agent evaluation traces should preserve the task, messages, tool calls, tool results, state transitions, generated outputs, policy versions, costs, timing, and grader results so a failure can be replayed without pretending a frozen test world predicts the live environment. A tool-using agent can reach the right final answer through an unsafe path, fail after making a useful partial change, or appear successful because the grader inspected the agent response rather than the external state. Multi-step execution creates more evidence than a prompt and output pair: tool calls, observations, state mutations, retries, costs, policy decisions, and the final environment all matter.",
     "image": "/images/research/replayable-traces-social.jpg"
   },
   {
@@ -142,7 +142,7 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "date": "2026.07.19",
     "dateModified": "2026.07.19",
     "indexable": true,
-    "staticSummary": "SQLite can support a bounded web crawler when URL identity is unique, writes use short transactions and idempotent upserts, one process coordinates write pressure, WAL behavior is measured, leases are recoverable, and artifacts remain outside oversized database rows. A crawl workload looks hostile to a small embedded database: many workers finish at unpredictable times, every response creates related rows, retries duplicate logical work, render artifacts arrive later than source artifacts, and reporting queries run while collection continues. The pressure often leads to shared connections, row-by-row commits, replace-style writes, and a current-state table that destroys attempt history.",
+    "staticSummary": "SQLite can support a bounded web crawler when URL identity is unique, writes use short transactions and idempotent upserts, one process coordinates write pressure, WAL behavior is measured, leases are recoverable, and large payloads remain outside oversized database rows. A crawl workload looks hostile to a small embedded database: many workers finish at unpredictable times, every response creates related rows, retries duplicate logical work, rendered captures arrive later than source captures, and reporting queries run while collection continues. The pressure often leads to shared connections, row-by-row commits, replace-style writes, and a current-state table that destroys attempt history.",
     "image": "/images/research/sqlite-pipelines-social.jpg"
   },
   {
@@ -263,7 +263,7 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "aliases": [],
     "title": "Who Funds Waymo’s Hardware?",
     "seoTitle": "Waymo Hardware Financing: Who Funds the Assets?",
-    "seoDescription": "A source-led Waymo case study mapping $27.1B+ of equity funding, modeled fleet economics, residual-value risk, and who absorbs downside.",
+    "seoDescription": "A Waymo case study mapping $27.1B+ of equity funding, modeled fleet economics, residual-value risk, and who absorbs downside.",
     "date": "2026.07.22",
     "dateModified": "2026.07.22",
     "indexable": true,
@@ -308,7 +308,7 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     ],
     "title": "Technical SEO as Public Data Infrastructure",
     "seoTitle": "SEO Data Pipeline as Public Infrastructure",
-    "seoDescription": "A systems essay by Sulayman Bowles on URL discovery, crawling, rendering, structured records, provenance, crawl evidence, and durable technical SEO exports.",
+    "seoDescription": "A systems essay by Sulayman Bowles on URL discovery, crawling, rendering, structured records, provenance, and durable technical SEO exports.",
     "date": "2026.06.19",
     "dateModified": "2026.07.16",
     "indexable": true,
@@ -329,6 +329,22 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "indexable": true,
     "staticSummary": "Personal SEO canonical identity starts with one current person page, consistent names and facts, redirected stale records, selective sameAs links, and controlled profiles that point back to the canonical source instead of multiplying thin biographies across the web. Personal SEO often fails when biographies disagree. A portfolio, resume PDF, university page, GitHub profile, LinkedIn page, competition account, old domain, and copied speaker bio can name different titles, employers, graduation dates, projects, or official websites.",
     "image": "/images/research/canonical-identity-social.jpg"
+  },
+  {
+    "kind": "research",
+    "path": "/research/financial-systems/why-texas-toll-roads-stay-tolled",
+    "aliases": [
+      "/markets/why-texas-toll-roads-stay-tolled",
+      "/why-texas-toll-roads-stay-tolled"
+    ],
+    "title": "Why Texas Toll Roads Stay Tolled",
+    "seoTitle": "Why Texas Toll Roads Stay Tolled After Construction",
+    "seoDescription": "Audited records show where Texas toll revenue goes after construction: operations, debt, reserves, capital work, county transfers, and private distributions.",
+    "date": "2026.09.02",
+    "dateModified": "2026.09.03",
+    "indexable": true,
+    "staticSummary": "Build the road, collect tolls, repay the road, remove the toll. That is the model many drivers carry in their heads. It describes a single project, a fixed construction bill, one loan, and a clean ending. Most large Texas toll systems do not work that way.",
+    "image": "/images/research/texas-toll-revenue-social.jpg"
   },
   {
     "kind": "research",
@@ -370,5 +386,18 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "indexable": true,
     "staticSummary": "Most Texas toll roads are publicly owned, not privately owned. TxDOT, counties, and public toll authorities own most roadways. Four major concessions—North Tarrant Express, LBJ Express, NTE 35W, and SH 130 Segments 5–6—give private companies time-limited operating and toll-revenue rights while Texas retains title to the pavement. Texas toll roads do not have one owner. Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.",
     "image": "/images/research/texas-toll-roads-social.jpg"
+  },
+  {
+    "kind": "investment-memo",
+    "path": "/markets/who-owns-us-toll-roads",
+    "aliases": [],
+    "title": "Who Owns 25 of America’s Major Toll Roads?",
+    "seoTitle": "Who Owns America’s Toll Roads? 25 Major Systems Explained",
+    "seoDescription": "A current 25-facility sample separating public title, toll operators, private concessions, equity owners, revenue rights, buybacks, and contract end dates.",
+    "date": "2026.09.02",
+    "dateModified": "2026.09.02",
+    "indexable": true,
+    "staticSummary": "In a dated sample of 25 major U.S. toll facilities, public agencies usually retain legal title, while some concessions transfer operations and toll-revenue risk to private project companies for a finite term. Billing providers, lenders, and equity owners remain separate roles. A driver normally encounters one road name and one toll bill. The legal structure can contain half a dozen different parties. A state may own the pavement. A public authority may issue the debt. A private concessionaire may operate the lanes and receive the toll revenue. A separate company may process the payment. Infrastructure funds, pension plans, or public shareholders may own the concessionaire. At the end of the contract, the road may return to government control.",
+    "image": "/images/social/og-research.png"
   }
 ];

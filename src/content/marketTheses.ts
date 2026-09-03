@@ -134,7 +134,7 @@ export const INVESTMENT_MEMOS: InvestmentMemo[] = [
     readTime: TEXAS_TOLL_ARTICLE_READ_TIME,
     author: 'SULAYMAN BOWLES',
     conclusion: TEXAS_TOLL_ARTICLE_CONCLUSION,
-    conviction: 'SOURCE-LED',
+    conviction: 'PUBLIC-SOURCE MAP',
     horizon: '2026 OWNERSHIP MAP',
     allocation: 'EDUCATIONAL RESEARCH',
     risks:

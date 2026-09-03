@@ -1,3 +1,4 @@
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right.js';
 import ArrowUpRight from 'lucide-react/dist/esm/icons/arrow-up-right.js';
 import type { PortfolioCtaId } from '../analytics/portfolioAnalytics';
 import { InternalHeader } from '../components/InternalHeader';
@@ -54,7 +55,7 @@ export default function ContactPage() {
           <FrameMarks />
 
           <div className="relative z-10 flex flex-col justify-center py-10 md:py-16">
-            <p className="mb-5 text-[10px] uppercase tracking-[0.3em] text-canvas/48">Direct contact</p>
+            <p className="mb-5 text-[11px] uppercase tracking-[0.3em] text-canvas/48">Direct contact</p>
             <h1 id="contact-title" className="max-w-5xl font-serif text-6xl font-light italic leading-[0.8] tracking-normal text-canvas sm:text-7xl md:text-8xl lg:text-[8rem] xl:text-[10rem]">
               Contact Sulayman.
             </h1>
@@ -83,17 +84,25 @@ export default function ContactPage() {
                 data-portfolio-cta={link.ctaId}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noreferrer' : undefined}
-                className="group flex min-h-20 items-center justify-between gap-5 border-b border-canvas/14 px-4 text-[10px] uppercase tracking-[0.24em] text-canvas/64 transition-colors duration-200 last:border-b-0 hover:bg-canvas hover:text-ink motion-reduce:transition-none sm:border-b-0 sm:border-r sm:last:border-r-0"
+                className="group flex min-h-20 items-center justify-between gap-5 border-b border-canvas/14 px-4 text-[11px] uppercase tracking-[0.24em] text-canvas/64 transition-colors duration-200 last:border-b-0 hover:bg-canvas hover:text-ink motion-reduce:transition-none sm:border-b-0 sm:border-r sm:last:border-r-0"
               >
                 <span className="flex items-center gap-4">
                   <span className="font-serif text-sm italic tracking-normal text-current/45">{String(index + 1).padStart(2, '0')}</span>
                   {link.label}
                 </span>
-                <ArrowUpRight
-                  aria-hidden="true"
-                  className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none"
-                  strokeWidth={1.4}
-                />
+                {link.external ? (
+                  <ArrowUpRight
+                    aria-hidden="true"
+                    className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none"
+                    strokeWidth={1.4}
+                  />
+                ) : (
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none"
+                    strokeWidth={1.4}
+                  />
+                )}
               </a>
             ))}
           </nav>

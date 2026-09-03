@@ -52,7 +52,7 @@ export const INDEX_COMPANY_MATTERS_ARTICLE: ResearchArticle = {
       label: 'Full index-decision evidence audit',
       href: '/research/index-company-matters-evidence-audit.pdf',
       description:
-        'The complete 32-page investigation, including methodology comparisons, event evidence, participant economics, interpretation limits, fact checks, and the master source ledger.',
+        'The complete 32-page investigation, including methodology comparisons, event-study results, participant economics, interpretation limits, fact checks, and the master source index.',
       format: 'PDF',
     },
     {

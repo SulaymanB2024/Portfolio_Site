@@ -7,6 +7,7 @@ import {
   type ArticleNavItem,
   type ArticleReaderConfig,
 } from '../components/ArticleLayout';
+import { getArticleGenerativeArtwork } from '../art/generative/manifest';
 import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
@@ -180,9 +181,9 @@ function ArchitectureDiagram() {
         </div>
         <span className="viralbench-architecture__arrow" aria-hidden="true">↓</span>
         <div className="viralbench-node viralbench-node--evidence">
-          <span className="viralbench-node__index">02 / evidence spine</span>
+          <span className="viralbench-node__index">02 / measurement spine</span>
           <strong>Immutable trace + evaluator</strong>
-          <p>Sources, artifacts, configuration, checks, fixed-window outcomes</p>
+          <p>Sources, generated outputs, configuration, checks, fixed-window outcomes</p>
         </div>
         <span className="viralbench-architecture__arrow" aria-hidden="true">↓</span>
         <div className="viralbench-node viralbench-node--codex">
@@ -192,7 +193,7 @@ function ArchitectureDiagram() {
         </div>
       </div>
       <figcaption id="viralbench-architecture-caption">
-        ViralBench runs the live marketing-agent loop. Codex improves the system through isolated experiments, independent evaluation, and locked deployment gates.
+        ViralBench runs the live marketing-agent loop. Codex improves the system through isolated experiments, independent evaluation, and controlled deployment.
       </figcaption>
     </figure>
   );
@@ -201,7 +202,9 @@ function ArchitectureDiagram() {
 function ViralBenchSection({ section, index }: { section: ArticleSection; index: string }) {
   return (
     <section id={section.id}>
-      <ArticleSectionHeader index={index}>{section.title}</ArticleSectionHeader>
+      <ArticleSectionHeader index={index}>
+        {section.id === EVIDENCE_SECTION_ID ? 'Measurement comes before autonomous improvement' : section.title}
+      </ArticleSectionHeader>
       {section.id === EVIDENCE_SECTION_ID ? <ArticleVisual placement="inline" /> : null}
       <ArticleMarkdown markdown={section.markdown} />
       {section.id === HARNESS_SECTION_ID ? <ArchitectureDiagram /> : null}
@@ -227,7 +230,7 @@ export default function ViralBenchArticlePage() {
     ...numberedSections.map((section) => ({
       kind: 'section' as const,
       id: section.id,
-      label: section.title,
+      label: section.id === EVIDENCE_SECTION_ID ? 'Measurement before improvement' : section.title,
     })),
     ...(faqSection
       ? [{
@@ -239,7 +242,7 @@ export default function ViralBenchArticlePage() {
     {
       kind: 'source',
       id: 'source-ledger',
-      label: 'Source ledger',
+      label: 'Sources',
     },
   ]);
   const config: ArticleReaderConfig = {
@@ -247,14 +250,15 @@ export default function ViralBenchArticlePage() {
     mode: 'narrative',
     className: 'viralbench-toll-article',
     archive: {
-      href: '/research',
-      label: 'Research archive',
+      href: '/research/ai-systems',
+      label: 'AI systems cluster',
     },
     hero: {
       eyebrow: 'ViralBench / Codex / agent evaluation',
       title: VIRALBENCH_ARTICLE_TITLE,
       displayTitle: 'A bounded outer loop for improving a live marketing agent.',
       deck: VIRALBENCH_ARTICLE_DESCRIPTION,
+      generativeArtwork: getArticleGenerativeArtwork('/viralbench-codex-agent-harness'),
       image: {
         src: VIRALBENCH_ARTICLE_IMAGE,
         alt: 'A monochrome gallery of suspended social-media posts receding toward a bright exit.',
@@ -287,7 +291,7 @@ export default function ViralBenchArticlePage() {
       content: (
         <>
           <p>{SEARCH_TARGET.directAnswer}</p>
-          <p><strong>Original artifact:</strong> {SEARCH_TARGET.originalArtifact}</p>
+          <p><strong>Research basis:</strong> {SEARCH_TARGET.originalArtifact}</p>
         </>
       ),
     }],
@@ -302,9 +306,10 @@ export default function ViralBenchArticlePage() {
     endnote: {
       label: 'Build conclusion',
       title: 'The harness determines whether the agent can learn',
-      content: 'ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before any promotion.',
+      content: 'ViralBench supplies a live multimodal environment; the durable advantage is a measurement layer that makes each change replayable, reviewable, and independently evaluated before promotion.',
       note: 'Build note based on the live ViralBench methodology and the supplied standalone handoff at commit 5f5f57e.',
       links: [
+        { href: '/research/ai-systems', label: 'AI systems research cluster' },
         ...SEARCH_TARGET.relatedPaths.map((path) => ({
           href: path,
           label: getArticleRelatedLinkLabel(ROUTE.path, path),
@@ -341,7 +346,7 @@ export default function ViralBenchArticlePage() {
 
         <section id="source-ledger">
           <ArticleSectionHeader index={getArticleNavigationIndex(navItems, 'source-ledger')}>
-            Source ledger
+            Sources
           </ArticleSectionHeader>
           {sourceNotesSection ? (
             <div id={sourceNotesSection.id}>

@@ -1,8 +1,10 @@
 import { useRef, useEffect } from 'react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 export function GeometricPattern() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -69,6 +71,7 @@ export function GeometricPattern() {
     let lastFrameTime = 0;
 
     const scheduleRender = () => {
+      if (prefersReducedMotion) return;
       if (!animationFrameId && isVisible && !document.hidden) {
         animationFrameId = requestAnimationFrame(render);
       }
@@ -78,7 +81,7 @@ export function GeometricPattern() {
         animationFrameId = 0;
         if (!isVisible || document.hidden) return;
 
-        if (isMobile && frameTime - lastFrameTime < 1000 / 30) {
+        if (!prefersReducedMotion && isMobile && frameTime - lastFrameTime < 1000 / 30) {
           scheduleRender();
           return;
         }
@@ -136,13 +139,19 @@ export function GeometricPattern() {
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        scheduleRender();
+        if (!prefersReducedMotion) {
+          scheduleRender();
+        }
     };
 
     const observer = new IntersectionObserver(([entry]) => {
       isVisible = entry.isIntersecting;
       if (isVisible) {
-        scheduleRender();
+        if (prefersReducedMotion) {
+          render(0);
+        } else {
+          scheduleRender();
+        }
       } else if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
         animationFrameId = 0;
@@ -153,6 +162,8 @@ export function GeometricPattern() {
       if (document.hidden && animationFrameId) {
         cancelAnimationFrame(animationFrameId);
         animationFrameId = 0;
+      } else if (prefersReducedMotion) {
+        render(0);
       } else {
         scheduleRender();
       }
@@ -168,7 +179,7 @@ export function GeometricPattern() {
       window.removeEventListener('resize', init);
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <div ref={containerRef} className="w-full h-full absolute inset-0 overflow-hidden bg-ink pointer-events-none z-0">

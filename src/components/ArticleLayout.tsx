@@ -20,6 +20,9 @@ import {
   SurfaceGrid,
   TechnicalPanel,
 } from './design/Primitives';
+import { GenerativeArticleArt } from './GenerativeArticleArt';
+import type { GenerativeArtwork } from '../art/generative/types';
+import { getArticleTitleScale } from '../utils/articleDesign';
 
 export type ArticleReadingMode = 'reference' | 'narrative';
 
@@ -65,6 +68,7 @@ export type ArticleReaderConfig = {
     title: ReactNode;
     deck: ReactNode;
     displayTitle?: ReactNode;
+    generativeArtwork?: GenerativeArtwork;
     image?: {
       src: string;
       alt: string;
@@ -287,6 +291,7 @@ type ArticleHeroProps = {
   deck: ReactNode;
   metadata: ArticleMetaItem[];
   displayTitle?: ReactNode;
+  generativeArtwork?: GenerativeArtwork;
   image?: {
     src: string;
     alt: string;
@@ -303,6 +308,22 @@ type ArticleHeroProps = {
   children?: ReactNode;
 };
 
+function ArticlePublicationLine({ items }: { items: ArticleMetaItem[] }) {
+  return (
+    <dl className="article-reader__publication-line" aria-label="Publication summary">
+      {items.map((item) => (
+        <div key={item.label}>
+          <dt className="sr-only">{item.label}</dt>
+          <dd>
+            {item.label.toLowerCase() === 'author' ? 'By ' : null}
+            {item.value}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 function ArticleHero({
   backHref,
   backLabel,
@@ -311,15 +332,16 @@ function ArticleHero({
   deck,
   metadata,
   displayTitle,
+  generativeArtwork,
   image,
   imagePlaceholder,
   children,
 }: ArticleHeroProps) {
-  const titleLength = typeof title === 'string' ? title.trim().length : 0;
+  const titleScale = getArticleTitleScale(title);
   const compactMetadata = metadata
     .filter((item) => {
       const label = item.label.toLowerCase();
-      return label === 'published' || label === 'read time' || label === 'length';
+      return label === 'author' || label === 'published' || label === 'read time' || label === 'length';
     })
     .map((item) => ({
       ...item,
@@ -331,82 +353,77 @@ function ArticleHero({
 
   return (
     <PageFrame>
-      <header className="article-reader__hero">
-        <aside className="article-reader__hero-meta">
+      <header
+        className="article-reader__hero"
+        data-art-treatment={generativeArtwork?.treatment}
+      >
+        <div className="article-reader__hero-meta">
           <a href={backHref} className="article-reader__back-link">
             <span aria-hidden="true">←</span>
             <span>{backLabel}</span>
           </a>
-          <dl>
-            {metadata.map((item) => (
-              <div key={item.label}>
-                <dt>{item.label}</dt>
-                <dd>{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </aside>
+          <ArticlePublicationLine items={compactMetadata} />
+        </div>
 
         <div className="article-reader__hero-main">
-          <div className="article-reader__mobile-prelude">
-            <a href={backHref} className="article-reader__back-link">
-              <span aria-hidden="true">←</span>
-              <span>{backLabel}</span>
-            </a>
-            <div className="article-reader__mobile-publication" aria-label="Publication summary">
-              {compactMetadata.map((item) => (
-                <span key={item.label}>
-                  <strong>{item.label}</strong>
-                  {item.value}
-                </span>
-              ))}
-            </div>
-          </div>
-          <SectionEyebrow>{eyebrow}</SectionEyebrow>
-          <h1 data-title-scale={titleLength > 58 ? 'long' : 'standard'}>{title}</h1>
-          {displayTitle ? <p className="article-reader__display-title">{displayTitle}</p> : null}
+          {!generativeArtwork ? <SectionEyebrow>{eyebrow}</SectionEyebrow> : null}
+          <h1 data-title-scale={titleScale}>
+            {typeof title === 'string' ? title.replace(/(\w)-(\w)/g, '$1\u2011$2') : title}
+          </h1>
+          {displayTitle && !generativeArtwork ? (
+            <p className="article-reader__display-title">{displayTitle}</p>
+          ) : null}
           <p className="article-reader__deck">{deck}</p>
           {children}
-          <details className="article-reader__hero-details">
-            <summary>
-              <span>Article details</span>
-              <span aria-hidden="true">+</span>
-            </summary>
-            <dl>
-              {metadata.map((item) => (
-                <div key={item.label}>
-                  <dt>{item.label}</dt>
-                  <dd>{item.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </details>
+          {!generativeArtwork ? (
+            <details className="article-reader__hero-details">
+              <summary>
+                <span>Article details</span>
+                <span aria-hidden="true">+</span>
+              </summary>
+              <dl>
+                {metadata.map((item) => (
+                  <div key={item.label}>
+                    <dt>{item.label}</dt>
+                    <dd>{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </details>
+          ) : null}
         </div>
 
         <figure
           className="article-reader__hero-image"
-          data-visual={image ? 'image' : 'diagram'}
-          data-presentation={image?.presentation}
-          aria-label={image ? undefined : 'Editorial concept diagram'}
+          data-visual={generativeArtwork ? 'generative' : image ? 'image' : 'diagram'}
+          data-presentation={generativeArtwork ? 'generative' : image?.presentation}
+          data-art-treatment={generativeArtwork?.treatment}
+          aria-label={image || generativeArtwork ? undefined : 'Editorial concept diagram'}
         >
-          <figcaption className="article-reader__image-caption">
-            <span>{image?.label ?? imagePlaceholder?.label ?? 'Editorial plate'}</span>
-            <small>{image?.caption ?? imagePlaceholder?.note ?? 'A visual index of the article’s core system.'}</small>
-          </figcaption>
-          <div className="article-reader__image-media">
-            {image ? (
-              <img
-                src={image.src}
-                alt={image.alt}
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
-                style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
-              />
-            ) : (
-              <ArticleImagePlaceholder variant={imagePlaceholder?.variant ?? 'default'} />
-            )}
-          </div>
+          {generativeArtwork ? (
+            <GenerativeArticleArt artwork={generativeArtwork} />
+          ) : (
+            <>
+              <figcaption className="article-reader__image-caption">
+                <span>{image?.label ?? imagePlaceholder?.label ?? 'Editorial plate'}</span>
+                <small>{image?.caption ?? imagePlaceholder?.note ?? 'A visual index of the article’s core system.'}</small>
+              </figcaption>
+              <div className="article-reader__image-media">
+                {image ? (
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
+                    style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
+                  />
+                ) : (
+                  <ArticleImagePlaceholder variant={imagePlaceholder?.variant ?? 'default'} />
+                )}
+              </div>
+            </>
+          )}
         </figure>
       </header>
     </PageFrame>
@@ -532,7 +549,7 @@ function publicationItems(publication: ArticlePublicationMeta): ArticleMetaItem[
 
   items.push(
     { label: 'Read time', value: publication.readTime },
-    { label: 'Evidence', value: publication.evidence },
+    { label: 'Source base', value: publication.evidence },
   );
 
   return items;
@@ -558,6 +575,7 @@ export function ArticleReader({
         title={config.hero.title}
         deck={config.hero.deck}
         displayTitle={config.hero.displayTitle}
+        generativeArtwork={config.hero.generativeArtwork}
         image={config.hero.image}
         imagePlaceholder={config.hero.imagePlaceholder}
         metadata={publicationItems(config.publication)}
@@ -733,37 +751,25 @@ function ArticleUtilities({
   );
 }
 
-function ArticleOverviewBand({
-  items,
-  activeId,
-}: {
-  items: ArticleNavItem[];
-  activeId?: string;
-}) {
+function ArticlePrintContents({ items }: { items: ArticleNavItem[] }) {
   return (
-    <section className="article-reader__overview-band" aria-labelledby="article-overview-title">
-      <header>
-        <SectionEyebrow>Reading map</SectionEyebrow>
-        <p id="article-overview-title">
-          <strong>{String(items.length).padStart(2, '0')}</strong>
-          <span>{items.length === 1 ? 'section' : 'sections'}</span>
+    <section className="article-reader__print-contents" aria-labelledby="article-print-contents-title">
+      <SectionEyebrow>Contents</SectionEyebrow>
+      <div>
+        <p id="article-print-contents-title">
+          {String(items.length).padStart(2, '0')} {items.length === 1 ? 'section' : 'sections'}
         </p>
-      </header>
-      <nav
-        aria-label="Article overview"
-        onKeyDown={(event) => moveArticleNavFocus(event, 'horizontal')}
-      >
         <ol>
           {items.map((item, index) => (
             <li key={item.id}>
-              <a href={`#${item.id}`} aria-current={activeId === item.id ? 'location' : undefined}>
+              <a href={`#${item.id}`}>
                 <span>{item.index ?? String(index + 1).padStart(2, '0')}</span>
                 <strong>{item.label}</strong>
               </a>
             </li>
           ))}
         </ol>
-      </nav>
+      </div>
     </section>
   );
 }
@@ -810,7 +816,7 @@ function ArticleBody({
 
   return (
     <PageFrame className="article-reader__body-frame">
-      <ArticleOverviewBand items={items} activeId={activeId} />
+      <ArticlePrintContents items={items} />
 
       <details
         className="article-reader__mobile-contents"
@@ -952,7 +958,7 @@ function ArticleEndnote({
   title,
   note,
   boundary,
-  boundaryLabel = 'Evidence boundary',
+  boundaryLabel = 'Scope and limits',
   links,
 }: {
   children: ReactNode;
@@ -979,7 +985,7 @@ function ArticleEndnote({
         <p>{children}</p>
       </div>
       {boundary || note ? (
-        <div className="article-reader__endnote-evidence" aria-label="Evidence status">
+        <div className="article-reader__endnote-evidence" aria-label="Article scope and notes">
           {boundary ? (
             <div>
               <span>{boundaryLabel}</span>

@@ -5,6 +5,7 @@ import {
 } from '../content/evidenceLists';
 import { publicDataDownloads, publicResearchAssets, researchClaimBoundaries } from '../content/researchAssets';
 import { PROFILE_FACTS } from '../content/profileFacts';
+import { PROJECT_INDEX, PROJECT_SOURCE_RECORD_COUNT } from '../content/projectIndex';
 import {
   VIRALBENCH_ARTICLE_DATE,
   VIRALBENCH_ARTICLE_DESCRIPTION,
@@ -59,13 +60,17 @@ const primarySiteParts = [
   { name: 'Technical SEO Audit Services', path: '/method' },
   { name: 'Technical SEO Consultant Contact', path: '/contact' },
   { name: 'Technical SEO and AI Systems Research', path: '/research' },
+  { name: 'AI and Agent Systems Research', path: '/research/ai-systems' },
+  { name: 'Search and Crawl Systems Research', path: '/research/search-systems' },
+  { name: 'Technical SEO Diagnostic Library', path: '/research/technical-seo' },
+  { name: 'Markets, Ownership, and Models', path: '/markets' },
 ];
 
 function contactPointSchema(): JsonLd {
   return {
     '@type': 'ContactPoint',
     '@id': `${absoluteUrl('/contact')}#technical-seo-contact`,
-    contactType: 'technical SEO, crawl evidence, analytics, and source-backed research inquiries',
+    contactType: 'technical SEO, crawl analysis, analytics, and research inquiries',
     email: directEmail,
     url: absoluteUrl('/contact'),
     availableLanguage: ['en-US', 'English'],
@@ -141,7 +146,7 @@ export function personSchema({
         '@type': 'WebPage',
         name: 'Sulayman Bowles Technical Ledger',
         url: 'https://sulayman-bowles.tech/',
-        description: 'Public technical ledger for projects, experiments, files, and competition records connected to the main identity site.',
+        description: 'Public technical archive for projects, experiments, files, and competition work connected to the main portfolio.',
       },
     ],
     affiliation,
@@ -366,14 +371,14 @@ export function projectSchema(): JsonLd {
       '@id': PERSON_ID,
     },
     description:
-      'An in-development technical SEO audit and evidence system. Its public demonstration covers bounded source capture, render-review states, traceable findings, and CSV/JSON artifacts; the Atlas page labels additional capabilities by implementation and public-proof status.',
+      'In-development technical SEO crawl-analysis software. Its public demonstration covers bounded source capture, render-review states, traceable findings, and CSV/JSON outputs; the Atlas page labels additional capabilities by implementation status.',
     keywords: searchTerms('/atlas'),
     featureList: [
       'Bounded URL and source capture',
       'Source-versus-render review states',
       'robots.txt, sitemap, canonical, noindex, and redirect review',
-      'Evidence-linked finding records',
-      'CSV and JSON demonstration artifacts',
+      'Source-linked finding records',
+      'CSV and JSON demonstration files',
       'Persistence, graph, scoring, and client-handoff capabilities labeled as partial or in development',
     ],
   };
@@ -542,7 +547,7 @@ export function atlasJsonLd(): JsonLd {
       path: '/atlas',
       name: 'Atlas SEO Audit Console',
       description:
-        'Project page for the in-development Atlas technical SEO audit system, including a bounded public crawl sample and labeled implementation and proof status.',
+        'Project page for the in-development Atlas technical SEO audit system, including a bounded public crawl sample and candid implementation status.',
       keywords: searchTerms('/atlas'),
       mainEntityId: ATLAS_SOFTWARE_ID,
       aboutIds: [PERSON_ID],
@@ -599,19 +604,37 @@ export function workJsonLd(): JsonLd {
     ...canonicalEntitySchemas(),
     websiteSchema(),
     collectionPageSchema(
-      'Selected Work',
-      'Selected public work from Sulayman Bowles across Atlas crawl data, technical SEO method, sanitized case-study logic, and markets research notes.',
+      'Complete Project Ledger',
+      'A provenance-bounded project ledger from Sulayman Bowles spanning AI and agent systems, search and crawl systems, technical SEO, and markets models.',
       '/work',
     ),
     webPageSchema({
       path: '/work',
-      name: 'Selected Work',
+      name: 'Complete Project Ledger',
       description:
-        'A work index for Sulayman Bowles with contextual links to Atlas sample crawl data, technical SEO method, public code, audit intake, and markets research assumptions.',
+        'A complete project-family index for Sulayman Bowles with ownership, status, visibility, evidence boundaries, public code, live systems, research, contributions, and prototypes.',
       keywords: searchTerms('/work'),
       mainEntityId: collectionId,
       aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
     }),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      '@id': `${absoluteUrl('/work')}#project-ledger`,
+      name: 'Sulayman Bowles Project Families',
+      description: `${PROJECT_INDEX.length} project families containing ${PROJECT_SOURCE_RECORD_COUNT} named project records, grouped without counting duplicate clones, generated worktrees, empty repositories, or undocumented placeholders as separate accomplishments.`,
+      numberOfItems: PROJECT_INDEX.length,
+      itemListOrder: 'https://schema.org/ItemListOrderAscending',
+      itemListElement: PROJECT_INDEX.map((project, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: project.title,
+        description: `${project.summary} Named project records: ${project.sourceProjects.join(', ')}. Evidence boundary: ${project.evidenceBoundary}`,
+        url: project.href
+          ? project.href.startsWith('http') ? project.href : absoluteUrl(project.href)
+          : `${absoluteUrl('/work')}#projects-${project.clusterId}`,
+      })),
+    },
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Work', path: '/work' },
@@ -671,7 +694,7 @@ export function atlasSampleCrawlJsonLd(): JsonLd {
       path: '/atlas/sample-crawl',
       name: 'Atlas Open Corpus Demonstration',
       description:
-        'A dated Atlas sample with bounded source capture, render-review states, traceable findings, confidence, and exportable CSV/JSON artifacts.',
+        'A dated Atlas sample with bounded source capture, render-review states, traceable findings, confidence, and downloadable CSV/JSON files.',
       mainEntityId: ATLAS_SOFTWARE_ID,
       aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
     }),
@@ -682,7 +705,7 @@ export function atlasSampleCrawlJsonLd(): JsonLd {
       name: 'Atlas Open Corpus Run: Quotes to Scrape',
       url: absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.csv'),
       description:
-        'Dated bounded source-capture artifact with URL-level source and runtime indicators. It is not a private client export, corpus-owner audit, or ranking claim.',
+        'Dated bounded source-capture dataset with URL-level source and runtime indicators. It is not a private client export, corpus-owner audit, or ranking claim.',
       license: 'https://creativecommons.org/licenses/by/4.0',
       creator: {
         '@id': PERSON_ID,
@@ -800,7 +823,7 @@ export function austinTechnicalSeoJsonLd(): JsonLd {
       path: '/austin-technical-seo',
       name: 'Austin Technical SEO Consultant',
       description:
-        'Austin technical SEO consultant and audit-services page with crawlability evidence, defined limits, method links, sample crawl data, and intake.',
+        'Austin technical SEO consultant and audit-services page with crawlability analysis, defined limits, method links, sample crawl data, and intake.',
       keywords: searchTerms('/austin-technical-seo'),
       mainEntityId: serviceId,
       aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
@@ -819,15 +842,15 @@ export function researchAssetsJsonLd(): JsonLd {
     ...canonicalEntitySchemas(),
     websiteSchema(),
     collectionPageSchema(
-      'Research Assets',
-      'Public technical SEO, crawler policy, Atlas, crawlability, identity, and finance research files from Sulayman Bowles.',
+      'Research Clusters and Public Archive',
+      'Four connected research clusters and a complete public archive covering AI systems, search and crawl systems, technical SEO, and markets models.',
       '/research',
     ),
     webPageSchema({
       path: '/research',
-      name: 'Research Assets',
+      name: 'Research Clusters and Public Archive',
       description:
-        'Public index of technical SEO, crawler policy, Atlas, crawlability, identity, and finance research files with source-file links and limits.',
+        'A complete research index organized into AI systems, search and crawl systems, technical SEO diagnostics, and markets models, with source-file links and evidence limits.',
       keywords: searchTerms('/research'),
       mainEntityId: collectionId,
       aboutIds: [PERSON_ID, ATLAS_SOFTWARE_ID],
@@ -1001,4 +1024,22 @@ export function technicalSeoCollectionJsonLd({
     }),
     breadcrumbSchema(breadcrumbs),
   ]);
+}
+
+export function researchClusterJsonLd({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}): JsonLd {
+  return technicalSeoCollectionJsonLd({
+    title,
+    description,
+    path,
+    parentPath: '/research',
+    parentName: 'Research',
+  });
 }

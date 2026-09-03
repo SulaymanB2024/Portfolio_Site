@@ -54,6 +54,18 @@ export const SEARCH_INTENT_CLUSTERS = [
     primary: 'technical SEO research',
     supporting: ['AI search research', 'crawler policy research', 'crawlability research'],
   },
+  {
+    path: '/research/ai-systems',
+    intent: 'research',
+    primary: 'AI agent systems research',
+    supporting: ['AI-operated businesses', 'agent harnesses', 'AI system evaluation'],
+  },
+  {
+    path: '/research/search-systems',
+    intent: 'research',
+    primary: 'Search and crawl systems research',
+    supporting: ['crawler policy', 'canonical identity', 'retrieval infrastructure'],
+  },
 ] as const satisfies readonly SearchIntentCluster[];
 
 export function getSearchIntentCluster(path: string) {

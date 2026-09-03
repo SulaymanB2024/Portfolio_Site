@@ -24,7 +24,7 @@ export const HIDDEN_FINANCING_HARDWARE_ARTICLE: ResearchArticle = {
     alt: 'A monochrome hardware platform stacked above equity, secured finance, leases, logistics, and public-capital foundations.',
     label: 'Comparative investigation / five capital stacks',
     caption:
-      'The hidden stack is the operating system beneath the hardware: corporate capital sits beside secured asset finance, leases, customer funding, and public support rather than replacing them.',
+      'The hidden structure sits beneath the hardware: corporate capital works beside secured asset finance, leases, customer funding, and public support rather than replacing them.',
     objectPosition: '50% 48%',
   },
   date: '2026.07.22',
@@ -36,7 +36,7 @@ export const HIDDEN_FINANCING_HARDWARE_ARTICLE: ResearchArticle = {
   conclusion: {
     title: 'Follow the asset burden past the funding headline',
     content:
-      'Financing can reduce immediate equity needs while leaving purchase commitments, fixed payments, guarantees, replacement obligations, and residual risk inside the operating system. The decisive diligence starts with asset title, liens, recourse, cash-flow coverage, and recovery value.',
+      'Financing can reduce immediate equity needs while leaving purchase commitments, fixed payments, guarantees, replacement obligations, and residual risk inside the operating company. The decisive diligence starts with asset title, liens, recourse, cash-flow coverage, and recovery value.',
   },
   evidenceBoundary:
     'This web edition reformats the supplied July 22, 2026 report, workbook, and capital-stack diagrams. The underlying sources were not independently refreshed for publication. Reported values retain the source package’s evidence cutoff; modeled values are analytical scenarios, not company guidance, appraisals, forecasts, covenant calculations, or investment recommendations. A missing quantified instrument means the package did not establish it, not that the instrument cannot exist.',
@@ -62,7 +62,7 @@ export const HIDDEN_FINANCING_HARDWARE_ARTICLE: ResearchArticle = {
     {
       label: 'Comparative financing model',
       href: '/research/hidden-financing-model.xlsx',
-      description: 'The 29-sheet evidence ledger, assumption book, company comparison, scenarios, waterfalls, and findings workbook.',
+      description: 'The 29-sheet model, assumption book, company comparison, scenarios, waterfalls, and findings workbook.',
       format: 'XLSX',
     },
     {

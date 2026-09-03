@@ -34,7 +34,7 @@ function inlineMarkdown(value: string, noteRefCounts: Map<string, number>) {
       const refId = occurrence === 0 ? `note-ref-${safeId}` : `note-ref-${safeId}-${occurrence + 1}`;
       return `<sup class="article-note-ref"><a href="#note-${safeId}" id="${refId}" aria-label="Note ${escapeHtml(id)}">${escapeHtml(id)}</a></sup>`;
     })
-    .replace(/\[(S\d+)\]\((#source-[^\s)]*)\)/g, '<sup class="article-citation"><a href="$2" aria-label="Source $1 in source ledger">$1</a></sup>')
+    .replace(/\[(S\d+)\]\((#source-[^\s)]*)\)/g, '<sup class="article-citation"><a href="$2" aria-label="Source $1 in the source list">$1</a></sup>')
     .replace(
       /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
       '<a href="$2" target="_blank" rel="noreferrer" aria-label="$1 (external link, opens in a new tab)">$1</a>',

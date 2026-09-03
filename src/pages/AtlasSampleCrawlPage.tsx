@@ -30,10 +30,10 @@ export default function AtlasSampleCrawlPage() {
         <div className="self-end">
           <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-ink/48">Atlas public demonstration · {ATLAS_OPEN_CORPUS_RUN.capturedAt.slice(0, 10)}</p>
           <h1 className="font-serif text-[3.5rem] md:text-[6rem] xl:text-[8rem] italic leading-[0.84] tracking-normal">
-            Open-corpus evidence.
+            Inside an Atlas crawl.
           </h1>
           <p className="mt-10 max-w-2xl text-base leading-relaxed text-ink/64">
-            A dated, bounded capture of {ATLAS_OPEN_CORPUS_RUN.corpusName} shows how source state, rendered-state questions, discovered paths, confidence, and exportable evidence stay connected before any recommendation is made.
+            A dated, bounded crawl of {ATLAS_OPEN_CORPUS_RUN.corpusName} shows how source pages, rendering questions, discovered paths, confidence, and downloadable outputs stay connected before any recommendation is made.
           </p>
           <div className="mt-9 flex flex-wrap gap-x-5 gap-y-2 uppercase tracking-[0.2em]">
             <a href={RESEARCH_ASSETS.atlasSampleCsv} className="inline-flex min-h-11 items-center border-b border-ink/24 text-[11px] transition-colors hover:border-ink">
@@ -53,7 +53,7 @@ export default function AtlasSampleCrawlPage() {
 
         <div className="self-center border border-ink/14 bg-ink p-6 text-canvas md:p-8">
           <p className="text-[10px] uppercase tracking-[0.24em] text-canvas/54">Run metadata</p>
-          <h2 className="mt-7 font-serif text-4xl italic leading-none tracking-normal">{ATLAS_OPEN_CORPUS_RUN.id}</h2>
+          <h2 className="mt-4 font-sans text-xl md:text-2xl font-light tracking-[0.06em] text-canvas/90 break-all">{ATLAS_OPEN_CORPUS_RUN.id}</h2>
           <dl className="mt-10 grid gap-px border border-canvas/14 bg-canvas/14 sm:grid-cols-2">
             {[
               ['Corpus', ATLAS_OPEN_CORPUS_RUN.corpusName],
@@ -92,7 +92,7 @@ export default function AtlasSampleCrawlPage() {
           <div>
             <p className="text-[10px] uppercase tracking-[0.24em] text-ink/64">Captured URL records</p>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/64">
-              Crawl, indexability, rendered-state, and evidence fields stay grouped so each record can be reviewed without losing its claim boundary.
+              Crawl, indexability, rendering, and source notes stay grouped so each row can be understood without overstating what the sample shows.
             </p>
           </div>
           <p className="text-[10px] uppercase tracking-[0.2em] text-ink/64">{atlasSampleRows.length} records / 6 review groups</p>
@@ -163,7 +163,7 @@ export default function AtlasSampleCrawlPage() {
             </colgroup>
             <thead className="bg-ink text-canvas">
               <tr>
-                {['URL', 'Crawl state', 'Indexability', 'Observed state', 'Rendered state', 'Evidence'].map((heading) => (
+                {['URL', 'Crawl state', 'Indexability', 'Observed state', 'Rendered state', 'Source notes'].map((heading) => (
                   <th key={heading} scope="col" className="px-4 py-3 text-[10px] font-medium uppercase tracking-[0.18em]">
                     {heading}
                   </th>

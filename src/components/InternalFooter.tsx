@@ -25,7 +25,7 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
     : 'border-ink/28 text-ink/62 hover:border-ink/44 hover:bg-ink/[0.035] hover:text-ink';
 
   return (
-    <footer className={`mx-auto w-full max-w-[1480px] px-4 py-4 text-[10px] uppercase ${textMutedClass} md:px-8 xl:px-10`}>
+    <footer className={`mx-auto w-full max-w-[1480px] px-4 py-4 text-[11px] uppercase ${textMutedClass} md:px-8 xl:px-10`}>
       <div className={`site-footer grid gap-4 rounded-[8px] ${bgClass} px-4 py-4 md:px-6`}>
         <div className="grid gap-5 lg:grid-cols-[minmax(285px,0.68fr)_minmax(0,1.68fr)_minmax(220px,0.52fr)_auto] lg:items-start lg:gap-4">
           <a href="/" id="footer-brand-link" aria-label="Sulayman Bowles — Home" className={`site-brand-link flex min-w-0 items-start gap-3 transition-opacity duration-200 hover:opacity-80 ${textClass}`}>
@@ -43,7 +43,7 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
           <nav className="grid min-w-0 gap-2" id="footer-nav" aria-label="Footer navigation">
             {footerGroups.map((group) => (
               <div key={group.label} className={`grid min-w-0 grid-cols-[4.5rem_minmax(0,1fr)] items-start gap-1 ${group.label === 'Source' ? `border-t ${dividerClass} pt-2 lg:border-t-0 lg:pt-0` : ''}`}>
-                <span className={`pt-3 text-[8px] tracking-[0.2em] ${textMutedClass}`}>{group.label}</span>
+                <span className={`pt-3 text-[10px] tracking-[0.2em] ${textMutedClass}`}>{group.label}</span>
                 <div className="flex min-w-0 flex-wrap items-center gap-x-1 gap-y-1">
                   {group.items.map((item) => {
                     const active = isNavItemActive(activePath, item.href);

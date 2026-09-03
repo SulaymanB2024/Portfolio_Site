@@ -15,7 +15,7 @@ export const WAYMO_HARDWARE_FINANCING_ARTICLE: ResearchArticle = {
   subtitle:
     'A Waymo case study of who finances the vehicles and infrastructure, who owns the risk, and who absorbs the loss when utilization or technology fails.',
   seoDescription:
-    'A source-led Waymo case study mapping $27.1B+ of equity funding, modeled fleet economics, residual-value risk, and who absorbs downside.',
+    'A Waymo case study mapping $27.1B+ of equity funding, modeled fleet economics, residual-value risk, and who absorbs downside.',
   artwork: {
     kind: 'image',
     heroSrc: '/images/research/waymo-financing-reader-hero.webp',

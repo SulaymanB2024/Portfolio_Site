@@ -60,7 +60,7 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
       format: 'MD',
     },
     {
-      label: 'Source ledger',
+      label: 'Source index',
       href: '/research/us-rare-earth-magnet-source-ledger.csv',
       description:
         'Primary-source index for the companies, government programs, technical references, and demand estimates used in the audit.',
@@ -78,7 +78,7 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
       title: 'The 37,750-tonne headline is a project inventory, not current production',
       paragraphs: [
         'The audit starts with disclosed firm projects rather than every aspirational target. A project enters the headline only when a company or government source identifies a U.S. manufacturing site or funded production line and provides a capacity figure. Exploration-stage concepts, upstream oxide projects without magnet conversion, and generic corporate ambitions are excluded.',
-        'The resulting total is 37,750 tonnes in the units used by project disclosures. Because public announcements do not always distinguish metric tonnes from U.S. short tons, the same ledger normalizes ambiguous rows both ways. That produces a range of 37,584 to 38,048 metric tonnes. The spread is small relative to the strategic claim, but preserving it prevents false precision.',
+        'The resulting total is 37,750 tonnes in the units used by project disclosures. Because public announcements do not always distinguish metric tonnes from U.S. short tons, the same dataset normalizes ambiguous rows both ways. That produces a range of 37,584 to 38,048 metric tonnes. The spread is small relative to the strategic claim, but preserving it prevents false precision.',
         'The larger adjustment is maturity. Noveon and eVAC account for the 4,000-tonne commercial-shipment class in the audit. MP Materials’ disclosed 3,000-tonne line and the first 600 tonnes of USA Rare Earth’s staged buildout remain in commissioning, ramp, or qualification. JS Link America, HyProMag USA, Vulcan Elements, the balance of USA Rare Earth’s project, and other disclosed firm lines sit in the future bucket until operating evidence changes their status.',
       ],
       table: {
@@ -284,9 +284,9 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
     },
     {
       id: 'methodology',
-      title: 'Methodology and source ledger',
+      title: 'Methodology and source index',
       paragraphs: [
-        'The project ledger was built from company releases, government award announcements, regulatory filings, facility pages, and technical publications. Each capacity statement was stored with its original unit, product description, facility, phase, target date, and operating-status language. Duplicate announcements referring to the same line were reconciled rather than added.',
+        'The project inventory was built from company releases, government award announcements, regulatory filings, facility pages, and technical publications. Each capacity statement was stored with its original unit, product description, facility, phase, target date, and operating-status language. Duplicate announcements referring to the same line were reconciled rather than added.',
         'Status classification follows the strongest public evidence available. Commercial shipment requires more than first production. Ramp and qualification includes installed or starting lines that have not yet demonstrated broad recurring shipments. Future capacity includes construction, funded expansions, and later phases with a disclosed capacity but insufficient operating evidence.',
         'The workbook preserves reported values before normalization, then calculates maturity buckets, the stated-unit headline, the metric-tonne range, material-flow requirements, and illustrative output scenarios. Where public evidence is incomplete, the model marks the field unknown rather than converting silence into zero.',
       ],

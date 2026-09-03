@@ -150,7 +150,7 @@ const SEEDS: PageSeed[] = [
   platform({ slug: 'webflow', title: 'Webflow Technical SEO Guide', primaryQuery: 'Webflow technical SEO', supportingQueries: ['Webflow SEO audit', 'Webflow canonical tag', 'Webflow CMS SEO'], signal: 'Webflow page settings, CMS templates, custom code, redirects, and published domains jointly determine search output', mechanism: 'manual fields and reusable templates can leave blank, duplicated, or environment-specific head values', consequence: 'CMS inventory scales faster than its quality and indexability controls', falsePositive: 'A Webflow-generated sitemap is useful by default; custom handling is only justified by a demonstrated inventory rule.', repair: 'require CMS SEO fields, govern custom code centrally, and validate the published domain after each structural release', acceptance: 'all public templates publish unique metadata, correct canonicals, useful content, and direct internal paths', sources: ['webflow', 'canonical'], foundationalPath: '/research/snippet-governance' }),
   platform({ slug: 'squarespace', title: 'Squarespace Technical SEO Guide', primaryQuery: 'Squarespace technical SEO', supportingQueries: ['Squarespace SEO audit', 'Squarespace indexing issues', 'Squarespace sitemap SEO'], signal: 'Squarespace combines global settings, page fields, collection types, domain configuration, and injected code', mechanism: 'sitewide defaults can conceal missing page-specific intent or collide with custom metadata additions', consequence: 'titles, descriptions, canonicals, and content structure become inconsistent across collections', falsePositive: 'Platform-managed canonicals and sitemaps should remain in place unless current output proves a concrete defect.', repair: 'prioritize information architecture and page-specific fields, then remove custom code that duplicates platform output', acceptance: 'published pages have unique intent, one canonical, one title, stable status, and crawlable contextual links', sources: ['squarespace', 'canonical'], foundationalPath: '/research/snippet-governance' }),
   platform({ slug: 'wix', title: 'Wix Technical SEO Guide', primaryQuery: 'Wix technical SEO', supportingQueries: ['Wix SEO audit', 'Wix crawl issues', 'Wix structured data SEO'], signal: 'Wix SEO patterns, page settings, dynamic routes, redirects, and structured-data overrides form the indexable surface', mechanism: 'bulk patterns can propagate a weak field or unsupported markup across many dynamic pages', consequence: 'scaled inventory inherits duplicate snippets, thin pages, or schema-content mismatch', falsePositive: 'Default Wix rendering is not an SEO defect; changes need page-level evidence rather than platform folklore.', repair: 'configure patterns from reliable CMS fields, restrict indexability to useful routes, and review custom schema against visible content', acceptance: 'dynamic samples pass raw/rendered, metadata, canonical, schema, link, and status checks without pattern collisions', sources: ['wix', 'structured'], foundationalPath: '/research/structured-data-validation' }),
-  platform({ slug: 'headless-cms', title: 'Headless CMS Technical SEO Guide', primaryQuery: 'headless CMS SEO', supportingQueries: ['headless website technical SEO', 'CMS frontend SEO', 'headless rendering audit'], signal: 'a headless stack separates editorial data, frontend rendering, routing, cache invalidation, and search metadata', mechanism: 'distributed ownership lets content and derived artifacts update at different times', consequence: 'stale pages, broken previews, missing fallbacks, and schema drift reach production', falsePositive: 'Architectural separation is not a disadvantage when publishing contracts and cache invalidation are observable and tested.', repair: 'define a typed publishing contract that atomically drives HTML, head data, schema, redirects, sitemaps, and previews', acceptance: 'content changes propagate to every derived surface within the declared freshness window and route tests stay deterministic', sources: ['headless', 'javascript'], foundationalPath: '/research/structured-data-validation' }),
+  platform({ slug: 'headless-cms', title: 'Headless CMS Technical SEO Guide', primaryQuery: 'headless CMS SEO', supportingQueries: ['headless website technical SEO', 'CMS frontend SEO', 'headless rendering audit'], signal: 'a headless stack separates editorial data, frontend rendering, routing, cache invalidation, and search metadata', mechanism: 'distributed ownership lets content and derived outputs update at different times', consequence: 'stale pages, broken previews, missing fallbacks, and schema drift reach production', falsePositive: 'Architectural separation is not a disadvantage when publishing contracts and cache invalidation are observable and tested.', repair: 'define a typed publishing contract that atomically drives HTML, head data, schema, redirects, sitemaps, and previews', acceptance: 'content changes propagate to every derived output within the declared freshness window and route tests stay deterministic', sources: ['headless', 'javascript'], foundationalPath: '/research/structured-data-validation' }),
 
   checklist({ slug: 'javascript-seo-audit', title: 'JavaScript Technical SEO Audit Checklist', primaryQuery: 'JavaScript SEO audit checklist', supportingQueries: ['JavaScript SEO audit', 'rendering SEO checklist', 'SPA technical SEO audit'], signal: 'a JavaScript application needs evidence across response HTML, rendered DOM, resources, routing, metadata, and status behavior', mechanism: 'testing only the browser-visible final state misses discovery and rendering dependencies', consequence: 'critical content can appear healthy to users while remaining fragile for crawlers', falsePositive: 'JavaScript usage alone is not an issue; the audit should flag only measured gaps in access, parity, or stability.', repair: 'audit raw and rendered states, then move critical evidence to deterministic server or build output', acceptance: 'representative routes pass no-interaction discovery, parity, metadata, schema, link, and error-state checks', sources: ['javascript', 'links'], foundationalPath: '/research/raw-vs-rendered-html' }),
   checklist({ slug: 'ecommerce-technical-seo-audit', title: 'Ecommerce Technical SEO Audit Checklist', primaryQuery: 'ecommerce technical SEO audit checklist', supportingQueries: ['ecommerce SEO audit', 'online store technical SEO', 'product category crawl audit'], signal: 'an ecommerce site needs coordinated checks across products, categories, facets, pagination, availability, schema, and migrations', mechanism: 'large changing catalogs create URL states faster than manual review can govern them', consequence: 'crawl traps and low-value variants compete with revenue pages for discovery and signals', falsePositive: 'A large URL count is not waste when each page serves demand, remains stocked, and has unique evidence.', repair: 'classify inventory states and automate indexability, linking, canonical, schema, and sitemap decisions from them', acceptance: 'sampled revenue templates and edge states match the approved inventory contract after a full crawl', sources: ['ecommerce', 'structured'], foundationalPath: '/research/crawl-budget-prioritization' }),
@@ -165,7 +165,7 @@ function sentenceSignature(seed: PageSeed): string {
 function buildSections(seed: PageSeed): ProgrammaticSeoSection[] {
   const signature = sentenceSignature(seed);
   const marker = seed.slug.replaceAll('-', '').toUpperCase();
-  const artifactLabel = `${seed.title} evidence fixture`;
+  const exampleLabel = `${seed.title} test case`;
   const familyLabel = FAMILIES[seed.family].label;
 
   return [
@@ -179,12 +179,12 @@ function buildSections(seed: PageSeed): ProgrammaticSeoSection[] {
     },
     {
       id: 'evidence',
-      title: `Evidence artifact for ${seed.primaryQuery}`,
+      title: `Worked example for ${seed.primaryQuery}`,
       paragraphs: [
-        `The ${artifactLabel} (${seed.slug}) is explicitly an Atlas-compatible fixture, not a live-client claim. For ${signature}, the ${seed.slug} fixture stores requested and terminal URLs, then ${seed.slug} status trail, canonical target, and robots state. It preserves ${signature} raw/rendered fingerprints, source route, and ${seed.slug} observation time without presenting synthetic values as production evidence.`,
+        `The ${marker} test case uses synthetic values and does not describe a live client. Its ${marker} record covers ${signature}: requested and final URLs, the ${seed.slug} status trail, canonical target, robots state, ${marker} raw and rendered fingerprints, discovery route, and observation time.`,
       ],
       table: {
-        caption: `${artifactLabel}: minimum reproducible fields`,
+        caption: `${exampleLabel}: minimum reproducible fields`,
         columns: [`${seed.slug} field`, 'Observed value', 'Decision use'],
         rows: [
           [`${seed.slug} requested and final URL`, `${seed.slug} absolute URLs plus every response hop`, `Reproduce ${seed.primaryQuery} and expose normalization`],
@@ -234,21 +234,21 @@ function buildSections(seed: PageSeed): ProgrammaticSeoSection[] {
       bullets: [
         `${signature} repair: change the system that owns the incorrect state.`,
         `${signature} repair: update links and discovery feeds to the final intended URL.`,
-        `${signature} repair: rebuild static and rendered artifacts from the same typed record.`,
+        `${signature} repair: rebuild static and rendered outputs from the same typed record.`,
         `${signature} repair: preserve the failing fixture as a regression test.`,
       ],
     },
     {
       id: 'rerun-gate',
-      title: `Rerun acceptance gate for ${seed.primaryQuery}`,
+      title: `Verification after repairing ${seed.primaryQuery}`,
       paragraphs: [
-        `Accept ${signature} only when ${seed.acceptance}. Rerun the ${marker} failing request and control with identical capture fields, then repeat uncached. The ${signature} gate fails closed for a draft URL, redirecting canonical, ${marker} sitemap member, broken inbound link, or raw/rendered contradiction.`,
+        `Consider ${signature} repaired only when ${seed.acceptance}. Rerun the ${marker} failing request and control with identical capture fields, then repeat ${marker} uncached. The check remains incomplete if it encounters a draft URL, redirecting canonical, ${marker} sitemap member, broken inbound link, or raw/rendered contradiction.`,
       ],
       bullets: [
-        `${signature} gate: ${seed.acceptance}.`,
-        `${signature} gate: the page remains indexable, canonical, linked, and present in the intended sitemap.`,
-        `${signature} gate: two uncached captures agree across raw HTML and rendered DOM.`,
-        `${signature} gate: monitored query and ${marker} page data are recorded without claiming guaranteed rankings.`,
+        `${signature} check: ${seed.acceptance}.`,
+        `${signature} check: the page remains indexable, canonical, linked, and present in the intended sitemap.`,
+        `${signature} check: two uncached captures agree across raw HTML and rendered DOM.`,
+        `${signature} check: monitored query and ${marker} page data are recorded without claiming guaranteed rankings.`,
       ],
     },
   ];
@@ -269,14 +269,14 @@ function buildPage(seed: PageSeed, indexInFamily: number, familySeeds: PageSeed[
     slug: seed.slug,
     title: seed.title,
     seoTitle: brandedSeoTitle.length <= 70 ? brandedSeoTitle : seed.title,
-    description: `Diagnose ${seed.primaryQuery} with an evidence fixture, false-positive boundary, repair sequence, and reproducible rerun gate.`,
+    description: `Diagnose ${seed.primaryQuery} with a worked example, false-positive limits, a repair sequence, and a reproducible post-change check.`,
     primaryQuery: seed.primaryQuery,
     supportingQueries: seed.supportingQueries,
     directAnswer: `${seed.title} is confirmed when ${seed.signal}. For ${seed.primaryQuery}, preserve the raw response and rendered document so ${seed.mechanism} can be tested against a passing control. Repair ${seed.primaryQuery} by choosing the authoritative source; accept the ${seed.slug} change only when ${seed.acceptance}.`,
     evidenceArtifact: {
-      label: `${seed.title} Atlas-compatible fixture`,
+      label: `${seed.title} Atlas-compatible test case`,
       kind: 'atlas-compatible-fixture',
-      description: `An illustrative, non-client fixture for reproducing ${seed.primaryQuery}; ${marker} values require a timestamped crawl before any production claim.`,
+      description: `An illustrative, non-client example for reproducing ${seed.primaryQuery}; ${marker} values require a timestamped crawl before any production claim.`,
       fields: ['requested_url', 'final_url', 'status_chain', 'raw_html_sha256', 'rendered_html_sha256', 'canonical_url', 'robots_state', 'discovery_source', 'observed_at'],
     },
     diagnosticProcedure: [
@@ -290,7 +290,7 @@ function buildPage(seed: PageSeed, indexInFamily: number, familySeeds: PageSeed[
       `For ${seed.primaryQuery}, identify the authoritative route, content, or infrastructure owner.`,
       `For ${seed.primaryQuery}, ${seed.repair}.`,
       `For ${seed.primaryQuery}, regenerate dependent links, metadata, schema, and sitemaps.`,
-      `For ${seed.primaryQuery}, retain the failure as a regression fixture.`,
+      `For ${seed.primaryQuery}, retain the failure as a regression test case.`,
     ],
     rerunAcceptanceCheck: [
       `For ${seed.primaryQuery}, ${seed.acceptance}.`,
@@ -324,8 +324,8 @@ export const PROGRAMMATIC_SEO_HUBS: readonly ProgrammaticSeoHub[] = [
     path: BASE,
     title: 'Technical SEO Diagnostic Library',
     seoTitle: 'Technical SEO Diagnostic Library | Sulayman Bowles',
-    description: 'Evidence-backed technical SEO issue guides, platform playbooks, and audit checklists with reproducible repair gates.',
-    directAnswer: 'This technical SEO library turns crawl symptoms into reproducible decisions. Each guide starts with a direct answer, labels its evidence boundary, separates false positives, defines the repair owner, and ends with a rerun acceptance gate.',
+    description: 'Technical SEO issue guides, platform playbooks, and audit checklists with reproducible diagnoses and repair checks.',
+    directAnswer: 'This technical SEO library turns observed crawl symptoms into reproducible diagnoses. Each guide starts with a direct answer, defines the limits of the finding, separates false positives, names the repair owner, and ends with post-change verification.',
     datePublished: PUBLISHED,
     dateModified: PUBLISHED,
     indexabilityState: 'indexable',
@@ -336,7 +336,7 @@ export const PROGRAMMATIC_SEO_HUBS: readonly ProgrammaticSeoHub[] = [
     path: `${BASE}/issues`,
     title: 'Technical SEO Issue Guides',
     seoTitle: 'Technical SEO Issue Guides | Sulayman Bowles',
-    description: 'Diagnose 24 common technical SEO issues with evidence fields, false-positive boundaries, repairs, and rerun checks.',
+    description: 'Diagnose 24 common technical SEO issues with observed fields, false-positive limits, repairs, and post-change checks.',
     directAnswer: 'The issue library covers 24 crawl, indexation, rendering, metadata, linking, and internationalization failures. Use each guide to reproduce the signal before changing production, then rerun the exact failing case against an explicit pass condition.',
     datePublished: PUBLISHED,
     dateModified: PUBLISHED,
@@ -349,7 +349,7 @@ export const PROGRAMMATIC_SEO_HUBS: readonly ProgrammaticSeoHub[] = [
     title: 'Technical SEO Platform Guides',
     seoTitle: 'Technical SEO Platform Guides | Sulayman Bowles',
     description: 'Technical SEO implementation guides for Next.js, React/Vite, WordPress, Shopify, Webflow, Squarespace, Wix, and headless CMS stacks.',
-    directAnswer: 'The platform library maps technical SEO controls to the systems that actually own them. Each guide distinguishes platform defaults from measured defects and provides a production-oriented validation gate for routes, content, metadata, schema, and discovery.',
+    directAnswer: 'The platform library maps technical SEO controls to the systems that actually own them. Each guide distinguishes platform defaults from measured defects and provides a production-oriented verification plan for routes, content, metadata, schema, and discovery.',
     datePublished: PUBLISHED,
     dateModified: PUBLISHED,
     indexabilityState: 'indexable',
@@ -360,8 +360,8 @@ export const PROGRAMMATIC_SEO_HUBS: readonly ProgrammaticSeoHub[] = [
     path: `${BASE}/checklists`,
     title: 'Technical SEO Audit Checklists',
     seoTitle: 'Technical SEO Audit Checklists | Sulayman Bowles',
-    description: 'Evidence-driven JavaScript, ecommerce, SaaS, and local-business technical SEO audit checklists.',
-    directAnswer: 'These four audit checklists organize technical SEO review by business and delivery model. They prioritize observable states, representative templates, false-positive controls, accountable repair owners, and repeatable release gates over generic score chasing.',
+    description: 'Measurement-focused JavaScript, ecommerce, SaaS, and local-business technical SEO audit checklists.',
+    directAnswer: 'These four audit checklists organize technical SEO review by business and delivery model. They prioritize observable states, representative templates, false-positive controls, accountable repair owners, and repeatable release checks over generic score chasing.',
     datePublished: PUBLISHED,
     dateModified: PUBLISHED,
     indexabilityState: 'indexable',
