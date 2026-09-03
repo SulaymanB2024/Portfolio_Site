@@ -1,0 +1,146 @@
+name: A01 article integration
+
+on:
+  push:
+    branches:
+      - content/us-toll-road-ownership-article
+
+permissions:
+  contents: write
+
+jobs:
+  integrate-and-verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Materialize the article content and public assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CONTENT_BLOB_SHA: c5367d0f327274c193609326d1da98234659c361
+        run: |
+          curl --fail --silent --show-error --location \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/git/blobs/${CONTENT_BLOB_SHA}" \
+            | jq -r '.content' \
+            | tr -d '\n' \
+            | base64 --decode \
+            > /tmp/a01-site-content.tar.gz
+          echo "9e35fae01b93d008d93d7b160c1c53b0af1e1e6219837c0f5c6f36c53bcf589f  /tmp/a01-site-content.tar.gz" | sha256sum --check
+          tar -xzf /tmp/a01-site-content.tar.gz -C .
+          test -s src/content/usTollRoadArticle.ts
+          test -s public/research/us-toll-road-ownership-2026.csv
+          test -s public/images/research/us-toll-road-ownership-stack.svg
+
+      - name: Register the article and add it to the markets archive
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          function updateFile(path, transform) {
+            const current = fs.readFileSync(path, 'utf8');
+            const next = transform(current);
+            if (next === current) {
+              console.log(`${path}: already integrated`);
+              return;
+            }
+            fs.writeFileSync(path, next);
+            console.log(`${path}: updated`);
+          }
+
+          updateFile('src/content/articleRegistry.ts', (source) => {
+            let next = source;
+            const importLine = "import { US_TOLL_ROAD_ARTICLE } from './usTollRoadArticle';\n";
+            if (!next.includes(importLine.trim())) {
+              const anchor = "import { INVESTMENT_MEMOS } from './marketTheses';\n";
+              if (!next.includes(anchor)) throw new Error('articleRegistry import anchor missing');
+              next = next.replace(anchor, `${anchor}${importLine}`);
+            }
+
+            if (!next.includes('  US_TOLL_ROAD_ARTICLE,\n')) {
+              const anchor = '  ...INVESTMENT_MEMOS,\n];';
+              if (!next.includes(anchor)) throw new Error('articleRegistry array anchor missing');
+              next = next.replace(anchor, '  ...INVESTMENT_MEMOS,\n  US_TOLL_ROAD_ARTICLE,\n];');
+            }
+            return next;
+          });
+
+          updateFile('src/content/publicationIndex.ts', (source) => {
+            let next = source;
+            const importLine = "import { US_TOLL_ROAD_ARTICLE_SLUG } from './usTollRoadArticle';\n";
+            if (!next.includes(importLine.trim())) {
+              const anchor = "import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';\n";
+              if (!next.includes(anchor)) throw new Error('publicationIndex import anchor missing');
+              next = next.replace(anchor, `${anchor}${importLine}`);
+            }
+
+            const constLine = 'const usTollRoads = article(US_TOLL_ROAD_ARTICLE_SLUG);\n';
+            if (!next.includes(constLine.trim())) {
+              const anchor = 'const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);\n';
+              if (!next.includes(anchor)) throw new Error('publicationIndex const anchor missing');
+              next = next.replace(anchor, `${anchor}${constLine}`);
+            }
+
+            if (!next.includes('    title: usTollRoads.title,')) {
+              const anchor = `  {\n    category: 'Markets and investing',\n    title: texasTollRoads.title,\n`;
+              if (!next.includes(anchor)) throw new Error('publicationIndex item anchor missing');
+              const item = `  {\n    category: 'Markets and investing',\n    title: usTollRoads.title,\n    href: getArticlePath(usTollRoads),\n    description: usTollRoads.subtitle,\n    date: usTollRoads.dateModified ?? usTollRoads.date,\n    featured: true,\n  },\n`;
+              next = next.replace(anchor, `${item}${anchor}`);
+            }
+            return next;
+          });
+          NODE
+
+      - run: npm ci
+      - run: npm run generate:article-routes
+      - run: npm run generate:public
+
+      - name: Commit generated route and authority files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/usTollRoadArticle.ts \
+                  src/content/articleRegistry.ts \
+                  src/content/publicationIndex.ts \
+                  src/content/articleRouteMetadata.ts \
+                  public/images/research/us-toll-road-ownership-stack.svg \
+                  public/images/research/us-toll-road-structure-counts.svg \
+                  public/images/research/us-toll-road-state-coverage.svg \
+                  public/research/us-toll-road-ownership-2026.csv \
+                  public/research/us-toll-road-private-hybrid-2026.csv \
+                  public/research/us-toll-road-source-ledger-2026.csv \
+                  public/llms.txt \
+                  public/sitemap.xml \
+                  public/research/article-research-briefs.json \
+                  public/research/authority-assets.json \
+                  public/research/technical-seo-reference-index.json
+          if git diff --cached --quiet; then
+            echo "No generated integration changes to commit."
+          else
+            git commit -m "Integrate national toll-road ownership article"
+            git push origin HEAD:content/us-toll-road-ownership-article
+          fi
+
+      - run: npm run test:bot-observer
+      - run: npm run test:portfolio-analytics
+      - run: npm run test:seo-schema
+      - run: npm run verify:bot-observer
+      - run: npm run verify:generated
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run verify:seo
+      - run: npm run verify:vercel-seo
+      - run: npm run verify:internal-links
+      - run: npm run verify:keywords
+      - run: npm run verify:reduction
+      - run: npm run audit:style
+      - run: npm run verify:security
