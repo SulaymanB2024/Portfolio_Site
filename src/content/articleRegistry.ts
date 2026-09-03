@@ -3,12 +3,14 @@ import { INVESTMENT_MEMOS } from './marketTheses';
 import { RARE_EARTH_MAGNET_BUILDOUT_ARTICLE } from './rareEarthMagnetBuildoutArticle';
 import { RESEARCH_ARTICLES } from './researchArticles';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
+import { TEXAS_TOLL_MONEY_ARTICLE } from './texasTollMoneyArticle';
 import { THE_AI_MEGAWATT_ARTICLE } from './theAiMegawattArticle';
 
 export const ALL_ARTICLES: PublicArticle[] = [
   THE_AI_MEGAWATT_ARTICLE,
   ...TECHNICAL_ARTICLE_SERIES,
   ...RESEARCH_ARTICLES,
+  TEXAS_TOLL_MONEY_ARTICLE,
   RARE_EARTH_MAGNET_BUILDOUT_ARTICLE,
   ...INVESTMENT_MEMOS,
 ];
