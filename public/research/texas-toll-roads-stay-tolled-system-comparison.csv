@@ -1,0 +1,8 @@
+system,fiscal_year_end,revenue_basis,revenue_usd_m,cash_or_accounting_om_usd_m,cash_debt_service_usd_m,debt_principal_usd_m,coverage_x,final_maturity,pledge_scope,normalized_chart_status,source_url
+North Texas Tollway Authority,2025-12-31,Gross Trust revenue,1357.5,252.7,666.9,8519.0,1.64,2052,Pooled Trust,Excluded: different denominator,https://www.ntta.org/about-us/financial-information
+Harris County Toll Road Authority,2025-09-30,Toll revenue,1027.6,404.8,242.0,2759.0,1.25,2054,County toll system,Excluded: multi-source cash flow,https://auditor.harriscountytx.gov/Reports/Annual-Comprehensive-Financial-Report-Harris-County
+Central Texas Regional Mobility Authority,2025-06-30,Audited toll revenue,276.4,,,2448.0,2.28,,Project and system obligations,Excluded: reconciliation open,https://www.mobilityauthority.com/business/finance/fin-inv-info/
+Central Texas Turnpike System,2025-08-31,System operating revenue,337.64,167.01,160.34,,,2042,Project pledge,Included,https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf
+Grand Parkway System,2025-08-31,System operating revenue,393.32,78.08,175.38,,,2053,Project pledge,Included,https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf
+Fort Bend County Toll Road Authority,FY2025,Toll revenue,68.54,43.0 total accounting expense,,526.91,,,Separate county toll authority,Excluded: accounting expense only,https://transparencydocs.fortbendcountytx.gov/Traditional_Finances/2025/FY2025_FBCTRA.pdf
+Fort Bend Grand Parkway Toll Road Authority,FY2025,Separate audited report,,,,,,,Separate county toll authority,Excluded: page-level extraction open,https://transparencydocs.fortbendcountytx.gov/Traditional_Finances/2025/FY2025_FBGPTRA.pdf
