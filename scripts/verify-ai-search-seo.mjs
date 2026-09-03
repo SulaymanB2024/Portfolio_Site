@@ -187,6 +187,10 @@ for (const agent of crawlerAgents.filter((agent) => agent !== '*')) {
   assert(llms.includes(agent), `llms.txt: crawler policy omits ${agent}`);
 }
 assert(llms.includes(`Canonical person ID: ${personId}`), 'llms.txt: canonical Person ID mismatch');
+assert(
+  llms.includes(`${siteUrl}/research/financial-systems/why-texas-toll-roads-stay-tolled`),
+  'llms.txt: Texas toll-road finance article is missing',
+);
 
 const staticRouteFiles = walkFiles(path.resolve('dist'))
   .filter((file) => file === path.resolve('dist/404.html') || file.endsWith(`${path.sep}index.html`))
@@ -373,13 +377,14 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('28 Notes and Artifacts'), 'research: publication count is not derived as twenty-eight');
+assert(textFromHtml(research).includes('29 Notes and Artifacts'), 'research: publication count is not derived as twenty-nine');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
 assert(textFromHtml(research).includes('Who Owns Austin’s Home-Service Companies?'), 'research: Austin home-service ownership article missing');
 assert(textFromHtml(research).includes('Who Funds Waymo’s Hardware?'), 'research: Waymo financing article missing');
 assert(textFromHtml(research).includes('How Airlines Borrow Against Loyalty Programs'), 'research: airline loyalty financing article missing');
 assert(textFromHtml(research).includes('Who Owns West Campus Student Housing?'), 'research: West Campus housing article missing');
 assert(textFromHtml(research).includes('What Happens When an Index Decides a Company Matters?'), 'research: index-company article missing');
+assert(textFromHtml(research).includes('Why Texas Toll Roads Stay Tolled'), 'research: Texas toll-road finance article missing');
 
 const aiManagers = read('dist/research/ai-systems/the-first-ai-managers/index.html');
 assert(textFromHtml(aiManagers).includes('Source ledger'), 'AI managers: source ledger missing');
@@ -544,6 +549,39 @@ for (const href of [
 ]) {
   assert(westCampus.includes(`href="${href}"`) || westCampus.includes(`src="${href}"`), `West Campus housing: missing artifact ${href}`);
   assert(fs.existsSync(path.resolve(`public${href}`)), `West Campus housing: missing public file ${href}`);
+}
+
+const tollMoney = read('dist/research/financial-systems/why-texas-toll-roads-stay-tolled/index.html');
+for (const expected of [
+  'Why Texas Toll Roads Stay Tolled',
+  '“Paid off” is five different questions',
+  'The only clean $100 comparison in the current records',
+  'Harris County: toll cash can become mobility funding',
+  'SH 288: the concession ended and the toll did not',
+  'Can a Texas toll road become free?',
+  '$398.6 million',
+  '§370.174',
+  '§228.006',
+]) {
+  assert(textFromHtml(tollMoney).includes(expected), `Texas toll finance: missing ${expected}`);
+}
+assert(!textFromHtml(tollMoney).includes('§370.113'), 'Texas toll finance: stale regional-mobility statute remains');
+assert(!textFromHtml(tollMoney).includes('§228.054'), 'Texas toll finance: stale TxDOT statute remains');
+for (const href of [
+  '/research/texas-toll-road-finance-2025.xlsx',
+  '/research/texas-toll-road-finance-system-comparison.csv',
+  '/research/texas-toll-road-finance-100-comparison.csv',
+  '/research/texas-toll-road-finance-concessions.csv',
+  '/research/texas-toll-road-finance-source-ledger.csv',
+  '/research/texas-toll-road-finance-claim-register.csv',
+  '/research/texas-toll-road-finance-methodology.md',
+  '/research/texas-toll-road-finance-summary.json',
+  '/images/research/texas-toll-fy2025-txdot-comparison.svg',
+  '/images/research/texas-toll-hctra-cash-claims.svg',
+  '/images/research/texas-toll-five-questions.svg',
+]) {
+  assert(tollMoney.includes(`href="${href}"`) || tollMoney.includes(`src="${href}"`), `Texas toll finance: missing artifact ${href}`);
+  assert(fs.existsSync(path.resolve(`public${href}`)), `Texas toll finance: missing public file ${href}`);
 }
 
 const toll = read('dist/markets/who-owns-texas-toll-roads/index.html');
