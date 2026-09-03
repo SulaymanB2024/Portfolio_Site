@@ -370,5 +370,18 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "indexable": true,
     "staticSummary": "Most Texas toll roads are publicly owned, not privately owned. TxDOT, counties, and public toll authorities own most roadways. Four major concessions—North Tarrant Express, LBJ Express, NTE 35W, and SH 130 Segments 5–6—give private companies time-limited operating and toll-revenue rights while Texas retains title to the pavement. Texas toll roads do not have one owner. Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.",
     "image": "/images/research/texas-toll-roads-social.jpg"
+  },
+  {
+    "kind": "investment-memo",
+    "path": "/markets/who-owns-us-toll-roads",
+    "aliases": [],
+    "title": "Who Owns 25 of America’s Major Toll Roads?",
+    "seoTitle": "Who Owns America’s Toll Roads? 25 Major Systems Explained",
+    "seoDescription": "A current 25-facility sample separating public title, toll operators, private concessions, equity owners, revenue rights, buybacks, and contract end dates.",
+    "date": "2026.09.02",
+    "dateModified": "2026.09.02",
+    "indexable": true,
+    "staticSummary": "A driver normally encounters one road name and one toll bill. The legal structure can contain half a dozen different parties. A state may own the pavement. A public authority may issue the debt. A private concessionaire may operate the lanes and receive the toll revenue. A separate company may process the payment. Infrastructure funds, pension plans, or public shareholders may own the concessionaire. At the end of the contract, the road may return to government control.",
+    "image": "/images/social/og-research.png"
   }
 ];

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">How toll-road ownership is divided</title>
+  <desc id="desc">A layered diagram separates public title and sponsorship, concession rights, operations and billing, equity and debt, toll revenue, and reversion.</desc>
+  <rect width="1600" height="1000" fill="#f4f1e8"/>
+  <g fill="#151515" font-family="Arial, Helvetica, sans-serif">
+    <text x="90" y="105" font-size="28" letter-spacing="5">OWNERSHIP STACK / A01</text>
+    <text x="90" y="170" font-family="Georgia, serif" font-style="italic" font-size="62">One road can have several “owners.”</text>
+    <text x="90" y="218" font-size="24" fill="#555">Separate the asset, contract, operator, payment system, capital and residual rights.</text>
+  </g>
+  <g stroke="#151515" stroke-width="3" fill="none">
+    <rect x="90" y="280" width="1420" height="120"/>
+    <rect x="90" y="430" width="1420" height="120"/>
+    <rect x="90" y="580" width="1420" height="120"/>
+    <rect x="90" y="730" width="1420" height="120"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#151515">
+    <text x="125" y="325" font-size="20" letter-spacing="3">01 / PUBLIC ASSET</text>
+    <text x="125" y="370" font-family="Georgia, serif" font-style="italic" font-size="38">Legal titleholder + public sponsor</text>
+    <text x="125" y="475" font-size="20" letter-spacing="3">02 / CONTRACTUAL CONTROL</text>
+    <text x="125" y="520" font-family="Georgia, serif" font-style="italic" font-size="38">Lease, concession or DBFOM project company</text>
+    <text x="125" y="625" font-size="20" letter-spacing="3">03 / OPERATING LAYER</text>
+    <text x="125" y="670" font-family="Georgia, serif" font-style="italic" font-size="38">Road operator + maintenance + billing provider</text>
+    <text x="125" y="775" font-size="20" letter-spacing="3">04 / CAPITAL AND CASH</text>
+    <text x="125" y="820" font-family="Georgia, serif" font-style="italic" font-size="38">Equity owners + lenders + toll-revenue claimant</text>
+    <text x="90" y="930" font-size="22" fill="#555">At expiry, concession rights may return to the public titleholder. In an availability-payment project, toll revenue can remain public throughout.</text>
+  </g>
+  <g stroke="#151515" stroke-width="3">
+    <path d="M1370 400 L1370 430" />
+    <path d="M1370 550 L1370 580" />
+    <path d="M1370 700 L1370 730" />
+  </g>
+</svg>

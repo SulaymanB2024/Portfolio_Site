@@ -1,0 +1,32 @@
+name: A01 data fetch
+
+on:
+  push:
+    branches:
+      - content/us-toll-road-ownership-article
+
+permissions:
+  contents: read
+
+jobs:
+  fetch-data:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Download FHWA toll tables and branch source
+        run: |
+          mkdir -p /tmp/a01-data
+          curl --fail --location --retry 3 -o /tmp/a01-data/t1part1.xlsx https://www.fhwa.dot.gov/policyinformation/tollpage/documents/t1part1.xlsx
+          curl --fail --location --retry 3 -o /tmp/a01-data/t1part2.xlsx https://www.fhwa.dot.gov/policyinformation/tollpage/documents/t1part2.xlsx
+          curl --fail --location --retry 3 -o /tmp/a01-data/t1part3.xlsx https://www.fhwa.dot.gov/policyinformation/tollpage/documents/t1part3.xlsx
+          curl --fail --location --retry 3 -o /tmp/a01-data/t1part4.xlsx https://www.fhwa.dot.gov/policyinformation/tollpage/documents/t1part4.xlsx
+          cp src/content/usTollRoadArticle.ts /tmp/a01-data/
+          cp public/research/us-toll-road-ownership-2026.csv /tmp/a01-data/
+          cp public/research/us-toll-road-source-ledger-2026.csv /tmp/a01-data/
+      - uses: actions/upload-artifact@v6
+        with:
+          name: a01-expansion-inputs
+          path: /tmp/a01-data
+          if-no-files-found: error
+          retention-days: 1

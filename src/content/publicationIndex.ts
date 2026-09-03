@@ -9,6 +9,7 @@ import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvest
 import { SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG } from './softwareBuyoutCohortArticle';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
+import { US_TOLL_ROAD_ARTICLE_SLUG } from './usTollRoadArticle';
 import { THE_AI_MEGAWATT_ARTICLE_SLUG } from './theAiMegawattArticle';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingArticle';
 import { WEST_CAMPUS_STUDENT_HOUSING_ARTICLE_SLUG } from './westCampusStudentHousingArticle';
@@ -34,6 +35,7 @@ const austinHomeServiceOwnership = article(AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
+const usTollRoads = article(US_TOLL_ROAD_ARTICLE_SLUG);
 const indexCompanyMatters = article(INDEX_COMPANY_MATTERS_ARTICLE_SLUG);
 const softwareBuyoutCohort = article(SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG);
 const airlineLoyaltyFinancing = article(AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG);
@@ -167,6 +169,14 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     href: getArticlePath(waymoHardwareFinancing),
     description: waymoHardwareFinancing.subtitle,
     date: waymoHardwareFinancing.dateModified ?? waymoHardwareFinancing.date,
+  },
+  {
+    category: 'Markets and investing',
+    title: usTollRoads.title,
+    href: getArticlePath(usTollRoads),
+    description: usTollRoads.subtitle,
+    date: usTollRoads.dateModified ?? usTollRoads.date,
+    featured: true,
   },
   {
     category: 'Markets and investing',
