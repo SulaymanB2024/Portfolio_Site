@@ -347,6 +347,19 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
   },
   {
     "kind": "investment-memo",
+    "path": "/markets/who-owns-us-toll-roads",
+    "aliases": [],
+    "title": "Who Owns America’s Toll Roads? Public Agencies, Private Concessions, and the Companies Behind Them",
+    "seoTitle": "Who Owns America’s Toll Roads? 50-State Guide",
+    "seoDescription": "A 50-state guide to who owns, operates, finances, and receives revenue from U.S. toll roads, including private concessions, P3s, debt, and reversion rights.",
+    "date": "2026.09.02",
+    "dateModified": "2026.09.02",
+    "indexable": true,
+    "staticSummary": "Most material U.S. toll systems are publicly titled and send toll revenue to a public authority, transportation department, county, city, or public corporation. A smaller but consequential group is privately titled or controlled through long concessions, while legal title, operations, billing, revenue rights, equity, debt, and reversion can sit with different entities. Most material U.S. toll systems are publicly titled and send toll revenue to a public authority, transportation department, county, city, or public corporation. A smaller but consequential group is privately titled or controlled through long concessions. The legal owner of the pavement, the operator, the billing agency, the toll-revenue claimant, the project-company shareholders, the lenders, and the future reversion beneficiary can all be different entities.",
+    "image": "/images/social/og-research.png"
+  },
+  {
+    "kind": "investment-memo",
     "path": "/markets/archived-research-methodology",
     "aliases": [],
     "title": "Archived Market Research Methodology",

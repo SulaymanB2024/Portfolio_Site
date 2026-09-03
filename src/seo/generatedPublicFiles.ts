@@ -5,6 +5,16 @@ import {
   TEXAS_TOLL_OWNERSHIP_CSV_PATH,
   TEXAS_TOLL_OWNERSHIP_ROWS,
 } from '../content/texasTollRoadOwnership';
+import {
+  US_TOLL_PRIVATE_HYBRID_ROWS,
+  US_TOLL_ROAD_METHODOLOGY_MARKDOWN,
+  US_TOLL_ROAD_METHODOLOGY_PATH,
+  US_TOLL_ROAD_OWNERSHIP_ARTICLE,
+  US_TOLL_ROAD_PRIVATE_HYBRID_CSV_PATH,
+  US_TOLL_ROAD_SOURCE_LEDGER_CSV_PATH,
+  US_TOLL_ROAD_STATE_OVERVIEW_CSV_PATH,
+  US_TOLL_STATE_OVERVIEW,
+} from '../content/usTollRoadOwnershipArticle';
 import { VIRALBENCH_ARTICLE_PATH, VIRALBENCH_ARTICLE_TITLE } from '../content/viralBenchArticleMeta';
 import { ARTICLE_SEARCH_TARGETS } from './articleSearchTargets';
 import {
@@ -72,6 +82,61 @@ export function buildTexasTollOwnershipCsv() {
   ]);
 
   return `${[header, ...rows].map((row) => row.map(escapeCsv).join(',')).join('\n')}\n`;
+}
+
+export function buildUsTollRoadStateOverviewCsv() {
+  const header = ['jurisdiction', 'code', 'pattern', 'note'];
+  const rows = US_TOLL_STATE_OVERVIEW.map((row) => [
+    row.jurisdiction,
+    row.code,
+    row.pattern,
+    row.note,
+  ]);
+  return `${[header, ...rows].map((row) => row.map(escapeCsv).join(',')).join('\n')}\n`;
+}
+
+export function buildUsTollRoadPrivateHybridCsv() {
+  const header = [
+    'facility',
+    'states',
+    'structure',
+    'public_title_or_sponsor',
+    'private_role_and_current_chain',
+    'term_or_reversion',
+    'confidence',
+    'primary_source',
+  ];
+  const rows = US_TOLL_PRIVATE_HYBRID_ROWS.map((row) => [
+    row.facility,
+    row.states,
+    row.structure,
+    row.public,
+    row.private_role,
+    row.term,
+    row.confidence,
+    row.primary_source,
+  ]);
+  return `${[header, ...rows].map((row) => row.map(escapeCsv).join(',')).join('\n')}\n`;
+}
+
+export function buildUsTollRoadSourceLedgerCsv() {
+  const header = ['source_id', 'label', 'url', 'last_verified', 'source_role'];
+  const rows = US_TOLL_ROAD_OWNERSHIP_ARTICLE.sources.map((source, index) => [
+    `S${String(index + 1).padStart(2, '0')}`,
+    source.label,
+    source.href,
+    source.lastVerified ?? '',
+    source.href.startsWith('https://')
+      ? 'Primary public or first-party record'
+      : 'Internal related investigation',
+  ]);
+  return `${[header, ...rows].map((row) => row.map(escapeCsv).join(',')).join('\n')}\n`;
+}
+
+export function buildUsTollRoadMethodologyMarkdown() {
+  return US_TOLL_ROAD_METHODOLOGY_MARKDOWN.endsWith('\n')
+    ? US_TOLL_ROAD_METHODOLOGY_MARKDOWN
+    : `${US_TOLL_ROAD_METHODOLOGY_MARKDOWN}\n`;
 }
 
 export function buildSitemapXml() {
@@ -160,6 +225,10 @@ ${llmsLink('Authority asset index', absoluteUrl('/research/authority-assets.json
 ${llmsLink('Article research briefs', absoluteUrl('/research/article-research-briefs.json'), 'Intent, evidence-gap, artifact, and scope records.')}
 ${llmsLink('Technical SEO reference index', absoluteUrl('/research/technical-seo-reference-index.json'), 'Structured index of every programmatic diagnostic guide and its evidence boundaries.')}
 ${llmsLink('Texas toll-road ownership matrix', absoluteUrl(TEXAS_TOLL_OWNERSHIP_CSV_PATH), 'Dated source-linked ownership rows.')}
+${llmsLink('U.S. toll-road state ownership overview', absoluteUrl(US_TOLL_ROAD_STATE_OVERVIEW_CSV_PATH), 'Map-ready 50-state and District of Columbia ownership categories.')}
+${llmsLink('U.S. private and hybrid toll structures', absoluteUrl(US_TOLL_ROAD_PRIVATE_HYBRID_CSV_PATH), 'Material private-title, traffic-risk, availability-payment, and nonprofit records.')}
+${llmsLink('U.S. toll-road ownership source ledger', absoluteUrl(US_TOLL_ROAD_SOURCE_LEDGER_CSV_PATH), 'Dated government, authority, concessionaire, and owner sources.')}
+${llmsLink('U.S. toll-road ownership methodology', absoluteUrl(US_TOLL_ROAD_METHODOLOGY_PATH), 'Universe, grouping rules, confidence scale, and correction protocol.')}
 ${llmsLink('Crawler policy sources', absoluteUrl('/research/ai-search-crawler-policy-sources.csv'), 'Official documentation and IP-manifest source map.')}
 ${llmsLink('Austin crawlability benchmark pilot CSV', absoluteUrl('/research/austin-crawlability-benchmark-pilot.csv'), 'Bounded public fetch observations.')}
 ${llmsLink('Austin crawlability benchmark summary', absoluteUrl('/research/austin-crawlability-benchmark-summary.json'), 'Aggregate limits and counts for the pilot.')}

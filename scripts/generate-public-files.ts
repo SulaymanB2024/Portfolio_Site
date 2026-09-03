@@ -8,6 +8,10 @@ import {
   buildProgrammaticSeoIndexJson,
   buildSitemapXml,
   buildTexasTollOwnershipCsv,
+  buildUsTollRoadMethodologyMarkdown,
+  buildUsTollRoadPrivateHybridCsv,
+  buildUsTollRoadSourceLedgerCsv,
+  buildUsTollRoadStateOverviewCsv,
 } from '../src/seo/generatedPublicFiles';
 
 const publicDir = path.resolve(process.cwd(), 'public');
@@ -19,4 +23,8 @@ await Promise.all([
   fs.writeFile(path.join(publicDir, 'research', 'authority-assets.json'), buildAuthorityAssetsJson()),
   fs.writeFile(path.join(publicDir, 'research', 'technical-seo-reference-index.json'), buildProgrammaticSeoIndexJson()),
   fs.writeFile(path.join(publicDir, 'research', 'texas-toll-road-ownership-2026.csv'), buildTexasTollOwnershipCsv()),
+  fs.writeFile(path.join(publicDir, 'research', 'us-toll-road-state-overview-2026.csv'), buildUsTollRoadStateOverviewCsv()),
+  fs.writeFile(path.join(publicDir, 'research', 'us-toll-road-private-hybrid-2026.csv'), buildUsTollRoadPrivateHybridCsv()),
+  fs.writeFile(path.join(publicDir, 'research', 'us-toll-road-source-ledger-2026.csv'), buildUsTollRoadSourceLedgerCsv()),
+  fs.writeFile(path.join(publicDir, 'research', 'us-toll-road-ownership-methodology-2026.md'), buildUsTollRoadMethodologyMarkdown()),
 ]);

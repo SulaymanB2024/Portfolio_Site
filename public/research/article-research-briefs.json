@@ -9,6 +9,31 @@
   ],
   "articles": [
     {
+      "url": "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
+      "question": "who owns America's toll roads",
+      "supporting_questions": [
+        "who owns toll roads in the United States",
+        "are toll roads privately owned",
+        "privately owned toll roads by state",
+        "foreign-owned toll roads in America",
+        "who owns toll roads in each state"
+      ],
+      "intent": "ownership",
+      "cohort": 1,
+      "direct_answer": "Most material U.S. toll systems are publicly titled and send toll revenue to a public authority, transportation department, county, city, or public corporation. A smaller but consequential group is privately titled or controlled through long concessions, while legal title, operations, billing, revenue rights, equity, debt, and reversion can sit with different entities.",
+      "evidence_gap": "Federal inventories identify facilities but rarely trace title, concession control, billing, toll-revenue rights, equity, debt, and reversion in one current state-by-state reference.",
+      "original_artifact": "A 51-jurisdiction lookup, a 33-record private and hybrid structure table, downloadable CSVs, a source ledger, and an ownership-stack data dictionary.",
+      "scope_boundary": "This national page compares state models and material U.S. concessions; the Texas page remains the deeper owner-by-owner and cash-flow investigation for one state.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-09-02"
+    },
+    {
       "url": "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
       "question": "can AI run a business",
       "supporting_questions": [
@@ -130,6 +155,7 @@
       "original_artifact": "A URL-to-evidence pipeline model with public schema fields, source roles, and failure-state handling.",
       "scope_boundary": "This page covers end-to-end SEO data infrastructure; the audit-findings article focuses on deriving one finding from immutable observations.",
       "related_articles": [
+        "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
         "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
@@ -211,6 +237,7 @@
       "original_artifact": "A 32-page evidence audit with four index-family rule systems, 13 exhibits, a Tesla implementation case, participant economics, fact checks, a reproducible event-study protocol, and a 44-source ledger.",
       "scope_boundary": "This page explains index membership, implementation demand, price effects, and provider economics; the airline, hardware, and toll-road investigations study different financial claims and ownership structures.",
       "related_articles": [
+        "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
         "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
         "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
@@ -367,6 +394,7 @@
       "original_artifact": "A 67-brand ownership table, 170-entity register, 102 sourced relationships, 29-transaction timeline, 130-record evidence ledger, conflict log, downloadable dataset, and reproducibility package.",
       "scope_boundary": "This page maps ownership of Austin residential service brands; the West Campus article covers student-housing property finance and the Texas toll-road article covers public infrastructure and concession rights.",
       "related_articles": [
+        "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
         "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
         "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
@@ -390,6 +418,7 @@
       "original_artifact": "A project-by-project ownership, operator, concession, debt, revenue-rights, valuation, and source-gap table.",
       "scope_boundary": "This is the only article targeting Texas toll-road ownership; supporting data-system articles discuss evidence methods rather than road ownership.",
       "related_articles": [
+        "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
         "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
         "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",

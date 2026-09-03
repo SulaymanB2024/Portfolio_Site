@@ -8,6 +8,10 @@ import {
   buildProgrammaticSeoIndexJson,
   buildSitemapXml,
   buildTexasTollOwnershipCsv,
+  buildUsTollRoadMethodologyMarkdown,
+  buildUsTollRoadPrivateHybridCsv,
+  buildUsTollRoadSourceLedgerCsv,
+  buildUsTollRoadStateOverviewCsv,
 } from '../src/seo/generatedPublicFiles';
 import {
   assertSeoAuthorityContract,
@@ -23,6 +27,10 @@ const expectedFiles = [
   ['public/research/authority-assets.json', buildAuthorityAssetsJson()],
   ['public/research/technical-seo-reference-index.json', buildProgrammaticSeoIndexJson()],
   ['public/research/texas-toll-road-ownership-2026.csv', buildTexasTollOwnershipCsv()],
+  ['public/research/us-toll-road-state-overview-2026.csv', buildUsTollRoadStateOverviewCsv()],
+  ['public/research/us-toll-road-private-hybrid-2026.csv', buildUsTollRoadPrivateHybridCsv()],
+  ['public/research/us-toll-road-source-ledger-2026.csv', buildUsTollRoadSourceLedgerCsv()],
+  ['public/research/us-toll-road-ownership-methodology-2026.md', buildUsTollRoadMethodologyMarkdown()],
 ] as const;
 
 assertSeoAuthorityContract(SEO_ROUTES);

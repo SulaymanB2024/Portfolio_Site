@@ -68,6 +68,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Technical SEO as Public Data Infrastructure](https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure)
 - [Canonical Identity Beats More Content](https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo)
 - [The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature](https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity)
+- [Who Owns America’s Toll Roads? Public Agencies, Private Concessions, and the Companies Behind Them](https://sulayman-bowles.dev/markets/who-owns-us-toll-roads)
 - [Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics](https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads)
 - [Missing Canonical Tag: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/missing-canonical): issue diagnostic guide with a labeled evidence fixture and rerun gate.
 - [Multiple Canonical Tags: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/multiple-canonical-tags): issue diagnostic guide with a labeled evidence fixture and rerun gate.
@@ -113,6 +114,10 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Article research briefs](https://sulayman-bowles.dev/research/article-research-briefs.json): Intent, evidence-gap, artifact, and scope records.
 - [Technical SEO reference index](https://sulayman-bowles.dev/research/technical-seo-reference-index.json): Structured index of every programmatic diagnostic guide and its evidence boundaries.
 - [Texas toll-road ownership matrix](https://sulayman-bowles.dev/research/texas-toll-road-ownership-2026.csv): Dated source-linked ownership rows.
+- [U.S. toll-road state ownership overview](https://sulayman-bowles.dev/research/us-toll-road-state-overview-2026.csv): Map-ready 50-state and District of Columbia ownership categories.
+- [U.S. private and hybrid toll structures](https://sulayman-bowles.dev/research/us-toll-road-private-hybrid-2026.csv): Material private-title, traffic-risk, availability-payment, and nonprofit records.
+- [U.S. toll-road ownership source ledger](https://sulayman-bowles.dev/research/us-toll-road-source-ledger-2026.csv): Dated government, authority, concessionaire, and owner sources.
+- [U.S. toll-road ownership methodology](https://sulayman-bowles.dev/research/us-toll-road-ownership-methodology-2026.md): Universe, grouping rules, confidence scale, and correction protocol.
 - [Crawler policy sources](https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv): Official documentation and IP-manifest source map.
 - [Austin crawlability benchmark pilot CSV](https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv): Bounded public fetch observations.
 - [Austin crawlability benchmark summary](https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json): Aggregate limits and counts for the pilot.

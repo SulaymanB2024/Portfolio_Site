@@ -48,6 +48,34 @@ const TEXAS_TOLL_RELATED_LABELS: Readonly<Record<string, string>> = {
 
 export const ARTICLE_SEARCH_TARGETS = [
   {
+    path: '/markets/who-owns-us-toll-roads',
+    primaryQuery: "who owns America's toll roads",
+    supportingQueries: [
+      'who owns toll roads in the United States',
+      'are toll roads privately owned',
+      'privately owned toll roads by state',
+      'foreign-owned toll roads in America',
+      'who owns toll roads in each state',
+    ],
+    intent: 'ownership',
+    cohort: 1,
+    directAnswer:
+      'Most material U.S. toll systems are publicly titled and send toll revenue to a public authority, transportation department, county, city, or public corporation. A smaller but consequential group is privately titled or controlled through long concessions, while legal title, operations, billing, revenue rights, equity, debt, and reversion can sit with different entities.',
+    serpGap:
+      'Federal inventories identify facilities but rarely trace title, concession control, billing, toll-revenue rights, equity, debt, and reversion in one current state-by-state reference.',
+    originalArtifact:
+      'A 51-jurisdiction lookup, a 33-record private and hybrid structure table, downloadable CSVs, a source ledger, and an ownership-stack data dictionary.',
+    cannibalizationBoundary:
+      'This national page compares state models and material U.S. concessions; the Texas page remains the deeper owner-by-owner and cash-flow investigation for one state.',
+    lastVerified: '2026-09-02',
+    relatedPaths: [
+      '/markets/who-owns-texas-toll-roads',
+      '/research/financial-systems/who-owns-austin-home-service-companies',
+      '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
+      '/research/search-console/technical-seo-public-data-infrastructure',
+    ],
+  },
+  {
     path: '/research/ai-systems/the-first-ai-managers',
     primaryQuery: 'can AI run a business',
     supportingQueries: ['AI operated businesses', 'AI business manager'],
@@ -167,6 +195,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page covers end-to-end SEO data infrastructure; the audit-findings article focuses on deriving one finding from immutable observations.',
     relatedPaths: [
+      '/markets/who-owns-us-toll-roads',
       '/research/data-systems/audit-findings-derived-records',
       '/research/ai-crawlers/ai-search-crawler-policy',
       '/markets/who-owns-texas-toll-roads',
@@ -251,6 +280,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page explains index membership, implementation demand, price effects, and provider economics; the airline, hardware, and toll-road investigations study different financial claims and ownership structures.',
     relatedPaths: [
+      '/markets/who-owns-us-toll-roads',
       '/research/financial-systems/software-buyout-boom-2020-2022-exit-audit',
       '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
       '/markets/who-owns-texas-toll-roads',
@@ -415,6 +445,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       'This page maps ownership of Austin residential service brands; the West Campus article covers student-housing property finance and the Texas toll-road article covers public infrastructure and concession rights.',
     lastVerified: '2026-07-26',
     relatedPaths: [
+      '/markets/who-owns-us-toll-roads',
       '/research/financial-systems/west-campus-student-housing',
       '/markets/who-owns-texas-toll-roads',
       '/research/search-console/technical-seo-public-data-infrastructure',
@@ -440,6 +471,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       'This is the only article targeting Texas toll-road ownership; supporting data-system articles discuss evidence methods rather than road ownership.',
     lastVerified: '2026-07-25',
     relatedPaths: [
+      '/markets/who-owns-us-toll-roads',
       '/research/search-console/technical-seo-public-data-infrastructure',
       '/research/personal-seo/canonical-identity-personal-seo',
       '/research/data-systems/audit-findings-derived-records',

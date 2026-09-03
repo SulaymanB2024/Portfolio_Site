@@ -148,6 +148,21 @@
     },
     {
       "priority": 1,
+      "name": "Who Owns America’s Toll Roads? Public Agencies, Private Concessions, and the Companies Behind Them",
+      "url": "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
+      "type": "source_led_article",
+      "cluster": "who-owns-us-toll-roads",
+      "preferred_anchor": "Who Owns America’s Toll Roads? Public Agencies, Private Concessions, and the Companies Behind Them",
+      "pitch_angle": "Federal inventories identify facilities but rarely trace title, concession control, billing, toll-revenue rights, equity, debt, and reversion in one current state-by-state reference.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
+        "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters"
+      ]
+    },
+    {
+      "priority": 1,
       "name": "The First AI Managers",
       "url": "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
       "type": "source_led_article",
@@ -157,8 +172,7 @@
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
-        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
-        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt"
+        "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation"
       ]
     },
     {
@@ -227,8 +241,8 @@
       "pitch_angle": "Treat technical SEO as a governed data system with provenance and failure states, not as a sequence of opaque exports and scores.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
-        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
-        "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy"
+        "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
       ]
     },
     {
@@ -269,8 +283,8 @@
       "pitch_angle": "Connect provider governance, eligibility rules, fund mandates, source-index offsets, closing-auction mechanics, event-study evidence, and cost-of-capital limits instead of treating headline benchmark assets as forced one-day buying.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
-        "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
-        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+        "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit"
       ]
     },
     {
@@ -353,8 +367,8 @@
       "pitch_angle": "Separate the consumer brand, legal operator, platform, franchise relationship, controlling owner, minority investor, and transaction date while keeping brand-count evidence distinct from market share.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
-        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
-        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads"
+        "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing"
       ]
     },
     {
@@ -368,8 +382,8 @@
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/research/texas-toll-road-ownership-2026.csv",
-        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
-        "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo"
+        "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
+        "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure"
       ]
     },
     {

@@ -437,7 +437,7 @@ assert(
   `article series repeats exact 16-word passages: ${JSON.stringify(duplicatedPassages.slice(0, 3))}`,
 );
 
-assert(ALL_ARTICLES.length === 26, `expected 26 canonical articles; found ${ALL_ARTICLES.length}`);
+assert(ALL_ARTICLES.length === 27, `expected 27 canonical articles; found ${ALL_ARTICLES.length}`);
 assert(
   duplicateValues(ALL_ARTICLES.map((article) => normalizedWords(article.conclusion.title).join(' '))).length === 0,
   'article conclusion titles must be route-specific',
