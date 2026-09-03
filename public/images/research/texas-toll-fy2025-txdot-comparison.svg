@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Where one hundred dollars supports each TxDOT debt-financed system</title>
+  <desc id="desc">Stacked bars compare operations, repair and maintenance, debt service, and required reserve for CTTS and Grand Parkway using the same fiscal 2025 TxDOT schedule.</desc>
+  <defs>
+    <pattern id="p1" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="white"/><path d="M0 12L12 0" stroke="black" stroke-width="2"/></pattern>
+    <pattern id="p2" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="white"/><path d="M0 5H10" stroke="black" stroke-width="2"/></pattern>
+    <pattern id="p3" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="white"/><path d="M0 0L12 12M12 0L0 12" stroke="black" stroke-width="1.5"/></pattern>
+    <pattern id="p4" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="white"/><circle cx="5" cy="5" r="2" fill="black"/></pattern>
+  </defs>
+  <rect width="1200" height="675" fill="white"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="black">
+    <text x="600" y="58" text-anchor="middle" font-size="32" font-weight="700">Where $100 supports each TxDOT debt-financed system</text>
+    <text x="600" y="94" text-anchor="middle" font-size="18">Same FY2025 report, fiscal year, operating-revenue denominator, and category schedule</text>
+    <line x1="180" y1="530" x2="1100" y2="530" stroke="black" stroke-width="2"/>
+    <g font-size="16" text-anchor="middle">
+      <text x="180" y="558">0</text><text x="364" y="558">20</text><text x="548" y="558">40</text><text x="732" y="558">60</text><text x="916" y="558">80</text><text x="1100" y="558">100</text>
+    </g>
+    <g stroke="black" stroke-width="1"><line x1="364" y1="180" x2="364" y2="530" opacity="0.18"/><line x1="548" y1="180" x2="548" y2="530" opacity="0.18"/><line x1="732" y1="180" x2="732" y2="530" opacity="0.18"/><line x1="916" y1="180" x2="916" y2="530" opacity="0.18"/></g>
+    <text x="155" y="257" text-anchor="end" font-size="22" font-weight="700">CTTS</text>
+    <text x="155" y="417" text-anchor="end" font-size="22" font-weight="700">Grand Parkway</text>
+    <rect x="180" y="210" width="277.6" height="82" fill="url(#p1)" stroke="black"/>
+    <rect x="457.6" y="210" width="177.5" height="82" fill="url(#p2)" stroke="black"/>
+    <rect x="635.1" y="210" width="436.9" height="82" fill="url(#p3)" stroke="black"/>
+    <rect x="1072" y="210" width="28" height="82" fill="url(#p4)" stroke="black"/>
+    <text x="318.8" y="260" text-anchor="middle" font-size="21" font-weight="700">30.2</text>
+    <text x="546.4" y="260" text-anchor="middle" font-size="21" font-weight="700">19.3</text>
+    <text x="853.5" y="260" text-anchor="middle" font-size="21" font-weight="700">47.5</text>
+    <rect x="180" y="370" width="138.3" height="82" fill="url(#p1)" stroke="black"/>
+    <rect x="318.3" y="370" width="44.3" height="82" fill="url(#p2)" stroke="black"/>
+    <rect x="362.6" y="370" width="410.2" height="82" fill="url(#p3)" stroke="black"/>
+    <rect x="772.8" y="370" width="327.2" height="82" fill="url(#p4)" stroke="black"/>
+    <text x="249.2" y="420" text-anchor="middle" font-size="21" font-weight="700">15.0</text>
+    <text x="340.5" y="420" text-anchor="middle" font-size="18" font-weight="700">4.8</text>
+    <text x="567.7" y="420" text-anchor="middle" font-size="21" font-weight="700">44.6</text>
+    <text x="936.4" y="420" text-anchor="middle" font-size="21" font-weight="700">35.6</text>
+    <text x="640" y="602" text-anchor="middle" font-size="18">Dollars per $100 of FY2025 operating revenue</text>
+    <g font-size="16">
+      <rect x="210" y="626" width="28" height="18" fill="url(#p1)" stroke="black"/><text x="248" y="641">Operations</text>
+      <rect x="410" y="626" width="28" height="18" fill="url(#p2)" stroke="black"/><text x="448" y="641">Repair &amp; maintenance</text>
+      <rect x="680" y="626" width="28" height="18" fill="url(#p3)" stroke="black"/><text x="718" y="641">Debt service</text>
+      <rect x="890" y="626" width="28" height="18" fill="url(#p4)" stroke="black"/><text x="928" y="641">Required reserve</text>
+    </g>
+  </g>
+</svg>
