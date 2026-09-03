@@ -26,7 +26,10 @@ jobs:
       - name: Reconstruct and apply article patch
         shell: bash
         run: |
+          sha256sum scripts/us-toll-bootstrap/part{00..07}
+          wc -c scripts/us-toll-bootstrap/part{00..07}
           cat scripts/us-toll-bootstrap/part{00..07} > scripts/patch-us-toll-road-article.py
+          sha256sum scripts/patch-us-toll-road-article.py
           echo "e14c6d237a6705e37ba007de2eafd9b498cb145f7d9410f2e6fcdc9d49f18f96  scripts/patch-us-toll-road-article.py" | sha256sum -c -
           python scripts/patch-us-toll-road-article.py
       - name: Install dependencies
