@@ -373,12 +373,13 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('28 Notes and Artifacts'), 'research: publication count is not derived as twenty-eight');
+assert(textFromHtml(research).includes('29 Notes and Artifacts'), 'research: publication count is not derived as twenty-nine');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
 assert(textFromHtml(research).includes('Who Owns Austin’s Home-Service Companies?'), 'research: Austin home-service ownership article missing');
 assert(textFromHtml(research).includes('Who Funds Waymo’s Hardware?'), 'research: Waymo financing article missing');
 assert(textFromHtml(research).includes('How Airlines Borrow Against Loyalty Programs'), 'research: airline loyalty financing article missing');
 assert(textFromHtml(research).includes('Who Owns West Campus Student Housing?'), 'research: West Campus housing article missing');
+assert(textFromHtml(research).includes('Who Owns 25 of America’s Major Toll Roads?'), 'research: national toll-road ownership article missing');
 assert(textFromHtml(research).includes('What Happens When an Index Decides a Company Matters?'), 'research: index-company article missing');
 
 const aiManagers = read('dist/research/ai-systems/the-first-ai-managers/index.html');
