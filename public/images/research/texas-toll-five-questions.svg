@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Five questions hidden inside a paid-off-road claim</title>
+  <desc id="desc">The diagram separates initial project cost, road-level debt, system debt and pledges, legal tolling authority, and private concession revenue rights.</desc>
+  <rect width="1200" height="800" fill="white"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="black">
+    <text x="600" y="58" text-anchor="middle" font-size="32" font-weight="700">“Paid off” is five different questions</text>
+    <g>
+      <circle cx="105" cy="145" r="35" fill="white" stroke="black" stroke-width="3"/><text x="105" y="156" text-anchor="middle" font-size="31" font-weight="700">1</text>
+      <text x="175" y="132" font-size="25" font-weight="700">Initial project cost</text><text x="175" y="166" font-size="18">Has cumulative net cash recovered the historical construction cost?</text>
+      <circle cx="105" cy="270" r="35" fill="white" stroke="black" stroke-width="3"/><text x="105" y="281" text-anchor="middle" font-size="31" font-weight="700">2</text>
+      <text x="175" y="257" font-size="25" font-weight="700">Road-level debt</text><text x="175" y="291" font-size="18">Does the individual facility still have identifiable standalone debt?</text>
+      <circle cx="105" cy="395" r="35" fill="white" stroke="black" stroke-width="3"/><text x="105" y="406" text-anchor="middle" font-size="31" font-weight="700">3</text>
+      <text x="175" y="382" font-size="25" font-weight="700">System debt and pledges</text><text x="175" y="416" font-size="18">Can the road’s revenue support pooled obligations or other facilities?</text>
+      <circle cx="105" cy="520" r="35" fill="white" stroke="black" stroke-width="3"/><text x="105" y="531" text-anchor="middle" font-size="31" font-weight="700">4</text>
+      <text x="175" y="507" font-size="25" font-weight="700">Legal tolling authority</text><text x="175" y="541" font-size="18">Does a public board, county, or commission still have power to charge?</text>
+      <circle cx="105" cy="645" r="35" fill="white" stroke="black" stroke-width="3"/><text x="105" y="656" text-anchor="middle" font-size="31" font-weight="700">5</text>
+      <text x="175" y="632" font-size="25" font-weight="700">Concession revenue rights</text><text x="175" y="666" font-size="18">Does a private contract preserve toll rights through a stated term?</text>
+    </g>
+    <rect x="70" y="718" width="1060" height="55" fill="white" stroke="black" stroke-width="2"/>
+    <text x="600" y="753" text-anchor="middle" font-size="20" font-weight="700">A road can satisfy one question and remain tolled because another layer is still active.</text>
+  </g>
+</svg>

@@ -64,8 +64,13 @@ function duplicateValues(values: string[]) {
   return [...counts.entries()].filter(([, count]) => count > 1).map(([value]) => value);
 }
 
+const rankingProgramExclusions = new Set([
+  '/research/financial-systems/why-texas-toll-roads-stay-tolled',
+]);
 const expectedPaths = [
-  ...INDEXABLE_ARTICLES.map(getArticlePath),
+  ...INDEXABLE_ARTICLES
+    .map(getArticlePath)
+    .filter((articlePath) => !rankingProgramExclusions.has(articlePath)),
   '/viralbench-codex-agent-harness',
 ].sort();
 const targetPaths = ARTICLE_SEARCH_TARGETS.map((target) => target.path).sort();
@@ -77,11 +82,21 @@ const priorityQueryPaths = new Set([
   '/research/financial-systems/hidden-financing-hardware-startups',
 ]);
 const texasTollPath = '/markets/who-owns-texas-toll-roads';
+const texasTollFinancePath = '/research/financial-systems/why-texas-toll-roads-stay-tolled';
 
-assert(expectedPaths.length === 26, `expected 26 indexable article routes, found ${expectedPaths.length}`);
+assert(
+  INDEXABLE_ARTICLES.some((article) => getArticlePath(article) === texasTollFinancePath),
+  'Texas toll-road finance article is missing from the indexable article registry',
+);
+assert(
+  rankingProgramExclusions.has(texasTollFinancePath)
+    && !targetPathSet.has(texasTollFinancePath),
+  'Texas toll-road finance article must stay outside ranking targets until its open evidence gates are cleared',
+);
+assert(expectedPaths.length === 26, `expected 26 active ranking-program routes, found ${expectedPaths.length}`);
 assert(
   expectedPaths.join('\n') === targetPaths.join('\n'),
-  `article target registry does not match indexable routes:\nexpected ${expectedPaths.join(', ')}\nreceived ${targetPaths.join(', ')}`,
+  `article target registry does not match active ranking-program routes:\nexpected ${expectedPaths.join(', ')}\nreceived ${targetPaths.join(', ')}`,
 );
 assert(
   TEXAS_TOLL_RANK_ONE_TARGET_POSITION === 1
@@ -209,5 +224,5 @@ for (const target of ARTICLE_SEARCH_TARGETS) {
 }
 
 console.log(
-  `Article ranking verification passed for ${ARTICLE_SEARCH_TARGETS.length} unique page/query contracts, ${ARTICLE_TOP_TEN_MIN_IMPRESSIONS}+ impressions, position ${ARTICLE_TOP_TEN_MAX_POSITION} or better, and ${ARTICLE_TOP_TEN_SUSTAINED_SNAPSHOTS} sustained snapshots.`,
+  `Article ranking verification passed for ${ARTICLE_SEARCH_TARGETS.length} unique page/query contracts, ${ARTICLE_TOP_TEN_MIN_IMPRESSIONS}+ impressions, position ${ARTICLE_TOP_TEN_MAX_POSITION} or better, and ${ARTICLE_TOP_TEN_SUSTAINED_SNAPSHOTS} sustained snapshots. The Texas toll-road finance article remains outside the ranking program until its evidence gates are cleared.`,
 );

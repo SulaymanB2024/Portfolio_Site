@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">HCTRA selected fiscal 2025 cash receipts and uses</title>
+  <desc id="desc">Bars show customer receipts, operating payments, principal and interest, capital purchases, and a county mobility transfer. A dashed line shows reported toll revenue. Selected uses exceed toll revenue because multiple sources funded the year.</desc>
+  <rect width="1200" height="675" fill="white"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="black">
+    <text x="600" y="55" text-anchor="middle" font-size="32" font-weight="700">HCTRA selected FY2025 cash receipts and uses</text>
+    <text x="600" y="88" text-anchor="middle" font-size="18">Absolute dollars; not a closed toll-dollar waterfall</text>
+    <line x1="125" y1="520" x2="1120" y2="520" stroke="black" stroke-width="2"/>
+    <line x1="125" y1="130" x2="1120" y2="130" stroke="black" stroke-width="2" stroke-dasharray="12 9"/>
+    <text x="1110" y="117" text-anchor="end" font-size="18" font-weight="700">Reported toll revenue: $1,027.6m</text>
+    <g stroke="black" fill="white" stroke-width="3">
+      <rect x="160" y="142" width="130" height="378"/>
+      <rect x="355" y="366" width="130" height="154"/>
+      <rect x="550" y="428" width="130" height="92"/>
+      <rect x="745" y="400" width="130" height="120"/>
+      <rect x="940" y="368" width="130" height="152"/>
+    </g>
+    <g text-anchor="middle" font-size="20" font-weight="700">
+      <text x="225" y="132">$995.7m</text><text x="420" y="356">$404.8m</text><text x="615" y="418">$242.0m</text><text x="810" y="390">$315.3m</text><text x="1005" y="358">$398.6m</text>
+    </g>
+    <g text-anchor="middle" font-size="16">
+      <text x="225" y="548"><tspan x="225">Customer cash</tspan><tspan x="225" dy="20">receipts</tspan></text>
+      <text x="420" y="548"><tspan x="420">Cash operating</tspan><tspan x="420" dy="20">payments</tspan></text>
+      <text x="615" y="548"><tspan x="615">Bond principal</tspan><tspan x="615" dy="20">and interest</tspan></text>
+      <text x="810" y="548"><tspan x="810">Capital asset</tspan><tspan x="810" dy="20">purchases</tspan></text>
+      <text x="1005" y="548"><tspan x="1005">County mobility</tspan><tspan x="1005" dy="20">transfer</tspan></text>
+    </g>
+    <text x="600" y="628" text-anchor="middle" font-size="17">Selected cash uses total $1,360.7m. Beginning cash, investments, earnings, borrowing, and other sources also funded the year.</text>
+  </g>
+</svg>

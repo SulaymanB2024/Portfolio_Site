@@ -1,0 +1,11 @@
+claim_id,risk,claim,source_ids,status,publication_rule
+C01,High,"The SH 288 private concession ended in 2024, while tolling continued under public control.",S01,Cleared,"Describe the event as a concession termination, not a purchase of privately owned pavement."
+C02,High,HCTRA transferred $398.6m to Harris County's thoroughfare and mobility program in FY2025.,S02,Cleared with limitation,The ACFR proves the amount and recipient; do not infer that the same amount could immediately reduce toll rates.
+C03,High,The only normalized $100 comparison is CTTS versus Grand Parkway on the same TxDOT FY2025 basis.,S05,Cleared,"Do not add NTTA, HCTRA, CTRMA, or Fort Bend to the same stacked chart."
+C04,High,"Ferrovial's three Texas concessions reported $935m revenue, $776m adjusted EBITDA, and $553m project-company distributions; Ferrovial's share was $318m.",S03,Cleared with denominator label,"Keep 100% project metrics, Ferrovial share, and TxDOT payments distinct."
+C05,High,"NTE, LBJ, and NTE 35W terms extend to 2061; SH 130 Segments 5 and 6 extends to 2062.",S03|S09,Cleared,"Contract term, not original construction-cost recovery, controls the private right."
+C06,High,Transportation Code §284.008 creates a toll-removal path for certain county projects and also allows an exception request.,S10,Cleared with limitation,Do not assign the exception to a named Harris County road until the final order and project list are pinned.
+C07,Medium,"NTTA's $437.9m comparison remainder is algebraic, not a traced reserve deposit or profit.",S04,Cleared,Retain the preliminary label on monthly debt service and do not call the remainder available cash.
+C08,Medium,CTRMA is excluded because its audited and monthly categories do not bridge cleanly.,S06,Open but nonblocking,Resolve the bridge before normalized inclusion.
+C09,Medium,FBCTRA and FBGPTRA are separate authorities and reporting entities.,S07|S08,Cleared,Do not use countywide or combined Fort Bend figures.
+C10,Medium,The current ultimate equity ownership of SH 130 Concession Company is unresolved.,S09,Open and disclosed,Do not infer current owners from the pre-bankruptcy capital structure.
