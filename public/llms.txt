@@ -69,6 +69,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Canonical Identity Beats More Content](https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo)
 - [The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature](https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity)
 - [Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics](https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads)
+- [Who Owns 25 of America’s Major Toll Roads?](https://sulayman-bowles.dev/markets/who-owns-us-toll-roads)
 - [Missing Canonical Tag: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/missing-canonical): issue diagnostic guide with a labeled evidence fixture and rerun gate.
 - [Multiple Canonical Tags: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/multiple-canonical-tags): issue diagnostic guide with a labeled evidence fixture and rerun gate.
 - [Canonical to Redirect: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/canonical-to-redirect): issue diagnostic guide with a labeled evidence fixture and rerun gate.
