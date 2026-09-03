@@ -394,12 +394,13 @@ body {
 }
 
 .home-cover__index-item--primary {
-  background: var(--color-ink);
-  color: var(--color-canvas);
+  background: color-mix(in srgb, var(--color-ink) 4%, transparent);
+  color: var(--color-ink);
+  font-weight: 500;
 }
 
 .home-cover__index-item--primary:hover {
-  background: var(--color-accent);
+  background: color-mix(in srgb, var(--color-ink) 8%, transparent);
   color: var(--color-ink);
 }
 
@@ -601,19 +602,6 @@ body {
   color: var(--color-canvas);
 }
 
-.site-header-editorial::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(currentColor, currentColor) 14px 14px / 16px 1px no-repeat,
-    linear-gradient(currentColor, currentColor) 14px 14px / 1px 16px no-repeat,
-    linear-gradient(currentColor, currentColor) calc(100% - 30px) 14px / 16px 1px no-repeat,
-    linear-gradient(currentColor, currentColor) calc(100% - 15px) 14px / 1px 16px no-repeat;
-  opacity: 0.24;
-  pointer-events: none;
-}
 
 .site-header-editorial > * {
   position: relative;
@@ -751,7 +739,7 @@ body {
   --visual-lab-muted: color-mix(in srgb, var(--page-fg) 68%, transparent);
   --visual-lab-faint: color-mix(in srgb, var(--page-fg) 64%, transparent);
   --visual-lab-wash: color-mix(in srgb, var(--page-fg) 3%, transparent);
-  --visual-lab-section-space: clamp(4.5rem, 8vw, 8rem);
+  --visual-lab-section-space: clamp(2.5rem, 4vw, 4.5rem);
   --visual-lab-reading-measure: 44rem;
 }
 
@@ -1342,6 +1330,11 @@ body {
   transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
+.resume-visual__action[href^="mailto:"] {
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+}
+
 .resume-visual__action:hover {
   border-color: var(--page-fg);
   background: var(--page-fg);
@@ -1377,15 +1370,7 @@ body {
 }
 
 .atlas-visual__status {
-  background:
-    linear-gradient(
-      to right,
-      transparent 0,
-      transparent calc(32% - 0.5px),
-      var(--visual-lab-rule-soft) 32%,
-      transparent calc(32% + 0.5px)
-    ),
-    var(--color-canvas);
+  background-color: var(--color-canvas);
 }
 
 .atlas-visual__mobile-package {

@@ -1,5 +1,6 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { ARTICLE_GENERATIVE_ART_ASSIGNMENTS, getArticleGenerativeArtwork } from '../src/art/generative/manifest';
 import { ARTICLE_ROUTE_METADATA } from '../src/content/articleRouteMetadata';
 import { ALL_ARTICLES, getArticleAliases, getArticlePath } from '../src/content/articleRegistry';
 import { buildRouteStaticHtml, buildSitemapStaticHtml } from '../src/seo/staticContent';
@@ -7,6 +8,7 @@ import { getArticleSearchTarget } from '../src/seo/articleSearchTargets';
 import { buildSitemapXml } from '../src/seo/generatedPublicFiles';
 import { getCanonicalRoutes, getRouteTone, NOT_FOUND_ROUTE, SEO_ROUTES, type SeoRoute } from '../src/seo/routes';
 import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME } from '../src/seo/site';
+import { getArticleTitleScale } from '../src/utils/articleDesign';
 
 const DIST_DIR = path.resolve(process.cwd(), 'dist');
 const FONT_STYLESHEET =
@@ -230,8 +232,23 @@ function buildHead(route: SeoRoute, assetTags: string) {
         text-wrap: balance;
       }
       #seo-static-summary .seo-static-client-shell[data-section="research-article"] .seo-static-shell-heading {
-        max-width: 18ch;
-        font-size: clamp(2.8rem, 10vw, 6.75rem);
+        max-width: 22ch;
+        font-size: clamp(2.7rem, 6.8vw, 7.25rem);
+        font-style: normal;
+        line-height: 0.94;
+      }
+      #seo-static-summary .seo-static-client-shell[data-section="research-article"] .seo-static-shell-heading[data-title-scale="short"] {
+        max-width: 20ch;
+        font-size: clamp(3.05rem, 7.4vw, 8rem);
+      }
+      #seo-static-summary .seo-static-client-shell[data-section="research-article"] .seo-static-shell-heading[data-title-scale="long"] {
+        max-width: 24ch;
+        font-size: clamp(2.45rem, 5.9vw, 6.4rem);
+      }
+      #seo-static-summary .seo-static-client-shell[data-section="research-article"] .seo-static-shell-heading[data-title-scale="extra-long"] {
+        max-width: 27ch;
+        font-size: clamp(2.2rem, 5.25vw, 5.75rem);
+        line-height: 0.92;
       }
       #seo-static-summary .seo-static-shell-description {
         max-width: 42rem;
@@ -417,6 +434,47 @@ function buildHead(route: SeoRoute, assetTags: string) {
       #seo-static-summary figure {
         margin: 1.5rem 0 2rem;
       }
+      #seo-static-summary .seo-static-generative-art {
+        max-width: 36rem;
+        border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+        background: #090909;
+      }
+      #seo-static-summary .seo-static-generative-art img {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin-inline: auto;
+      }
+      #seo-static-summary .seo-static-generative-art figcaption {
+        margin: 0;
+        border-top: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+        background: ${staticBackground};
+        padding: 0.85rem 1rem;
+        color: ${staticForeground};
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+      }
+      #seo-static-summary .seo-static-generative-art[data-art-treatment="dark-field"] {
+        border-color: rgb(255 255 255 / 22%);
+        background: #090909;
+        color: #f4f3ef;
+      }
+      #seo-static-summary .seo-static-generative-art[data-art-treatment="dark-field"] figcaption {
+        border-color: rgb(255 255 255 / 22%);
+        background: #090909;
+        color: #f4f3ef;
+      }
+      #seo-static-summary .seo-static-generative-art[data-art-treatment="paper-field"] {
+        background: #f4f3ef;
+        color: #0a0a09;
+      }
+      #seo-static-summary .seo-static-generative-art[data-art-treatment="paper-field"] img {
+        filter: invert(1);
+      }
+      #seo-static-summary .seo-static-generative-art[data-art-treatment="paper-field"] figcaption {
+        background: #f4f3ef;
+        color: #0a0a09;
+      }
       #seo-static-summary figcaption {
         margin-bottom: 0.75rem;
         line-height: 1.6;
@@ -491,6 +549,9 @@ function buildClientShell(route: SeoRoute) {
     ['Contact', '/contact'],
   ];
   const displayHeading = route.displayH1 ?? route.h1;
+  const titleScale = route.section === 'research-article'
+    ? ` data-title-scale="${getArticleTitleScale(displayHeading)}"`
+    : '';
 
   return `<div class="seo-static-client-shell" data-section="${route.section}" aria-label="Loading ${escapeHtml(displayHeading)}" aria-busy="true">
       <header class="seo-static-shell-header">
@@ -505,21 +566,32 @@ function buildClientShell(route: SeoRoute) {
       </header>
       <div class="seo-static-shell-stage">
         <p class="seo-static-shell-eyebrow">${escapeHtml(routeShellLabel(route))}</p>
-        <div class="seo-static-shell-heading" role="heading" aria-level="1">${escapeHtml(displayHeading)}</div>
+        <div class="seo-static-shell-heading"${titleScale} role="heading" aria-level="1">${escapeHtml(displayHeading)}</div>
         <p class="seo-static-shell-description">${escapeHtml(route.description)}</p>
         <div class="seo-static-shell-status" role="status">Opening the current route</div>
       </div>
     </div>`;
 }
 
+function buildStaticGenerativeArtwork(route: SeoRoute) {
+  if (!(route.path in ARTICLE_GENERATIVE_ART_ASSIGNMENTS)) return '';
+  const artwork = getArticleGenerativeArtwork(route.path);
+  return `<figure class="seo-static-generative-art" data-art-treatment="${artwork.treatment}">
+          <img src="${artwork.posterSrc}" alt="${escapeHtml(artwork.alt)}" width="400" height="400" />
+          <figcaption>p5.js by <a href="${artwork.attribution.artistUrl}">@yuruyurau</a> · <a href="${artwork.attribution.sourceUrl}">Source</a></figcaption>
+        </figure>`;
+}
+
 function buildFallback(route: SeoRoute) {
   const staticHtml = route.path === '/sitemap' ? buildSitemapStaticHtml(getCanonicalRoutes()) : route.staticHtml ?? buildRouteStaticHtml(route);
+  const staticArtwork = buildStaticGenerativeArtwork(route);
 
   if (staticHtml) {
     return `<section id="seo-static-summary" aria-label="Static route content">
       ${buildClientShell(route)}
       <main class="seo-static-crawl-content">
         ${buildStaticBrand()}
+        ${staticArtwork}
 ${staticHtml}
       </main>
     </section>`;
@@ -530,6 +602,7 @@ ${staticHtml}
       ${buildClientShell(route)}
       <main class="seo-static-crawl-content">
         ${buildStaticBrand()}
+        ${staticArtwork}
 ${route.staticHtml}
       </main>
     </section>`;
@@ -548,6 +621,7 @@ ${route.staticHtml}
       ${buildClientShell(route)}
       <main class="seo-static-crawl-content">
         ${buildStaticBrand()}
+        ${staticArtwork}
         <h1>${escapeHtml(route.h1)}</h1>
         <p>${escapeHtml(route.staticSummary)}</p>
         <nav aria-label="Primary static links">

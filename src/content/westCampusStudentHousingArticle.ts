@@ -73,7 +73,7 @@ export const WEST_CAMPUS_STUDENT_HOUSING_ARTICLE: ResearchArticle = {
     {
       label: 'Dossiers, methodology, and claims',
       href: '/research/west-campus-dossiers-methodology-claims.docx',
-      description: 'Property dossiers, source ledger, claims matrix, counter-evidence, and methodology notes.',
+      description: 'Property dossiers, source index, claims matrix, contrary findings, and methodology notes.',
       format: 'DOCX',
     },
   ],
@@ -316,7 +316,7 @@ export const WEST_CAMPUS_STUDENT_HOUSING_ARTICLE: ResearchArticle = {
       id: 'unknowns',
       title: 'What the evidence still cannot answer',
       paragraphs: [
-        'The package is unusually detailed for a public property study, but several decisions remain outside its evidence boundary. Current property-level debt, rates, maturities, guarantees, and reserves are unresolved for five of the six properties. Waterloo\'s sale price and full development budget are undisclosed. Property-level executed leases, bad-debt histories, remaining inventory, and realized concessions are unavailable.',
+        'The package is unusually detailed for a public property study, but several decisions remain outside its scope. Current property-level debt, rates, maturities, guarantees, and reserves are unresolved for five of the six properties. Waterloo\'s sale price and full development budget are undisclosed. Property-level executed leases, bad-debt histories, remaining inventory, and realized concessions are unavailable.',
         'Those gaps prevent a clean concentration ratio, a market-wide rent regression, a realized sponsor-return comparison, and a definitive ranking of refinancing risk. Filling them would require deed and UCC work, lender or sponsor disclosure, weekly lease-up files, executed-lease samples, property-level operating statements, and a complete bed and pipeline denominator.',
         'The most supportable finding survives those unknowns. West Campus combines scarce location, differentiated services, individual-bed pricing, early leasing, and hard-to-exit signed obligations. Property margins can be high, but owner outcomes still depend on basis and capital structure. The same collectible rent dollar can support an ordinary return at one building, a large return at another, and almost no common cash flow at a third.',
       ],

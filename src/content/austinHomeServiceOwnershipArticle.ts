@@ -39,7 +39,7 @@ export const AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE: ResearchArticle = {
       'The public record can connect consumer brands to operators, platforms, sponsors, public companies, and franchise systems while keeping unresolved ties visible. It cannot infer pricing, service, employment, or market share from ownership alone.',
   },
   evidenceBoundary:
-    'This is a July 26, 2026 snapshot of 67 active consumer-facing brand records reconstructed from a larger audit package. Brand counts are not revenue, customer, job, permit, or market share. An A or B rating means the current ownership structure is supported well enough for publication; C and D records preserve partial or unresolved evidence. Sponsor investments, sale processes, franchise operators, legal entities, and consumer brands are kept separate. Ownership can change after the cutoff, and no claim here attributes price, service, or employment outcomes to an ownership type.',
+    'This is a July 26, 2026 snapshot of 67 active consumer-facing brands reconstructed from a larger research set. Brand counts are not revenue, customer, job, permit, or market share. An A or B rating means the current ownership structure is supported well enough for publication; C and D records preserve partial or unresolved sourcing. Sponsor investments, sale processes, franchise operators, legal entities, and consumer brands are kept separate. Ownership can change after the cutoff, and no claim here attributes price, service, or employment outcomes to an ownership type.',
   metrics: [
     { label: 'Active brands', value: '67' },
     { label: 'A/B ownership records', value: '48' },
@@ -51,35 +51,35 @@ export const AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE: ResearchArticle = {
       label: 'Complete publication package',
       href: '/research/austin-home-service-ownership-publication-package.zip',
       description:
-        'Article, datasets, graph files, interactive tools, source ledger, methods, correction system, scripts, and QA records.',
+        'Article, datasets, ownership graph, interactive tools, source index, methods, corrections process, scripts, and QA notes.',
       format: 'ZIP',
     },
     {
       label: 'Austin ownership brand table',
       href: '/research/austin-home-service-ownership-2026.csv',
       description:
-        'The normalized brand-level table behind the 67-brand snapshot, including owner type, chain, evidence rating, and Austin footprint.',
+        'The normalized brand-level table behind the 67-brand snapshot, including owner type, chain, source rating, and Austin footprint.',
       format: 'CSV',
     },
     {
       label: 'Machine-readable ownership dataset',
       href: '/research/austin-home-service-ownership-2026.json',
       description:
-        'Brands, entities, relationships, transactions, evidence references, conflicts, and unresolved records in JSON.',
+        'Brands, entities, relationships, transactions, source references, conflicts, and unresolved records in JSON.',
       format: 'JSON',
     },
     {
       label: 'Full article in Markdown',
       href: '/research/austin-home-service-ownership-article.md',
       description:
-        'The complete 4,255-word source-linked article from the audited publication package.',
+        'The complete 4,255-word source-linked article from the reviewed publication files.',
       format: 'MD',
     },
     {
       label: 'Formatted ownership report',
       href: '/research/austin-home-service-ownership-report.docx',
       description:
-        'The complete formatted publication report, including findings, source register, methods, and publication assets.',
+        'The complete formatted publication report, including findings, source register, methods, and publication materials.',
       format: 'DOCX',
     },
   ],

@@ -373,13 +373,27 @@
       ]
     },
     {
+      "priority": 1,
+      "name": "Who Owns 25 of America’s Major Toll Roads?",
+      "url": "https://sulayman-bowles.dev/markets/who-owns-us-toll-roads",
+      "type": "source_led_article",
+      "cluster": "who-owns-us-toll-roads",
+      "preferred_anchor": "Who Owns 25 of America’s Major Toll Roads?",
+      "pitch_angle": "Separate legal title, public sponsor, operator, billing provider, concessionaire, equity owner, debt vehicle, revenue claimant, traffic risk, and reversion date without presenting a bounded sample as a national census.",
+      "supporting_assets": [
+        "https://sulayman-bowles.dev/research/article-research-briefs.json",
+        "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
+      ]
+    },
+    {
       "priority": 2,
       "name": "The Crawl Frontier Is a State Machine, Not a Queue",
       "url": "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
       "type": "source_led_article",
       "cluster": "crawler-engineering",
       "preferred_anchor": "The Crawl Frontier Is a State Machine, Not a Queue",
-      "pitch_angle": "Move beyond queue tutorials by defining identity, state invariants, host scheduling, crawl-trap bounds, and recovery evidence together.",
+      "pitch_angle": "Move beyond queue tutorials by defining identity, state invariants, host scheduling, crawl-trap bounds, and recovery behavior together.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
@@ -393,7 +407,7 @@
       "type": "source_led_article",
       "cluster": "technical-seo",
       "preferred_anchor": "Raw HTML and Rendered DOM Are Separate Evidence",
-      "pitch_angle": "Define a reproducible evidence envelope and failure taxonomy instead of reducing the comparison to screenshots or a binary JavaScript check.",
+      "pitch_angle": "Define a reproducible comparison and failure taxonomy instead of reducing the work to screenshots or a binary JavaScript check.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
@@ -421,7 +435,7 @@
       "type": "source_led_article",
       "cluster": "technical-seo",
       "preferred_anchor": "Internal Links Are a Directed Retrieval Graph",
-      "pitch_angle": "Connect graph measures to user journeys and crawl evidence instead of presenting PageRank-like scores without inspectable edges.",
+      "pitch_angle": "Connect graph measures to user journeys and crawl records instead of presenting PageRank-like scores without visible edges.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
@@ -477,7 +491,7 @@
       "type": "source_led_article",
       "cluster": "ai-systems",
       "preferred_anchor": "Replayable Traces for Evaluating Tool-Using AI Agents",
-      "pitch_angle": "Join trace completeness, replay limits, independent grading, and promotion evidence in one inspectable evaluation contract.",
+      "pitch_angle": "Join trace completeness, replay limits, independent grading, and promotion criteria in one clear evaluation contract.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
@@ -505,7 +519,7 @@
       "type": "source_led_article",
       "cluster": "technical-seo",
       "preferred_anchor": "Technical SEO Migrations Need Executable Release Gates",
-      "pitch_angle": "Turn migration advice into fail-closed release gates with artifacts, owners, tolerances, and rollback evidence.",
+      "pitch_angle": "Turn migration advice into release checks with owners, tolerances, test output, and rollback criteria.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
         "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",

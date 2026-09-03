@@ -39,7 +39,7 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
       'A refund ends the customer transaction, not the product’s physical journey. Recovery depends on transport, inspection, condition, fraud controls, and available resale channels, so retail price alone cannot predict the route or environmental endpoint.',
   },
   evidenceBoundary:
-    'This web edition reformats the supplied July 22, 2026 investigation and reverse-logistics workbook. The underlying source ledger was not independently refreshed for publication. Product-level values are analytical scenarios, not disclosed retailer averages, forecasts, accounting measures, or environmental disposition rates. The public auction sample contains two completed lots and is descriptive only.',
+    'This web edition reformats the supplied July 22, 2026 investigation and reverse-logistics workbook. The underlying sources were not independently refreshed for publication. Product-level values are analytical scenarios, not disclosed retailer averages, forecasts, accounting measures, or environmental disposition rates. The public auction sample contains two completed lots and is descriptive only.',
   metrics: [
     { label: 'Product archetypes modeled', value: '9' },
     { label: 'Workbook sheets', value: '36' },
@@ -51,7 +51,7 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
       label: 'Full reverse-logistics investigation',
       href: '/research/where-online-return-actually-goes-report.pdf',
       description:
-        'The complete 49-page report with the investigative article, methodology, model appendix, evidence register, limitations, and source ledger.',
+        'The complete 49-page report with the investigative article, methodology, model appendix, claim register, limitations, and source index.',
       format: 'PDF',
     },
     {
@@ -300,7 +300,7 @@ export const ONLINE_RETURNS_INVESTIGATION_ARTICLE: ResearchArticle = {
       paragraphs: [
         'The workbook is an auditable decision model rather than a forecast. It contains separate input, route, condition, disposition, unit-economic, threshold, fraud, sustainability, auction, evidence, assumption, and fact-check sheets. Hardcoded inputs remain visually distinct from inter-sheet links and formulas.',
         'The base case uses nine product archetypes and seven condition states. The condition engine evaluates eligible disposition routes and selects the highest present-value net recovery. The logistics engine then tests store return, consolidated drop-off, short and long parcel, oversize shipment, local pickup, and pallet liquidation. Sensitivities change condition mix, freight, inspection, fees, fraud, delay, recovery, and other drivers.',
-        'The model cannot establish retailer-wide route shares, negotiated carrier rates, category-specific fraud incidence, realized liquidation fees, environmental endpoints, or company profitability. Public tariffs are not merchant contracts. Vendor cases are not random samples. Two closed auctions are not a market distribution. The downloadable report and workbook retain the full assumption register, evidence hierarchy, fact-check list, and source ledger so those limits remain inspectable.',
+        'The model cannot establish retailer-wide route shares, negotiated carrier rates, category-specific fraud incidence, realized liquidation fees, environmental endpoints, or company profitability. Public tariffs are not merchant contracts. Vendor cases are not random samples. Two closed auctions are not a market distribution. The downloadable report and workbook retain the full assumption register, source hierarchy, fact-check list, and source index so those limits remain clear.',
       ],
     },
   ],

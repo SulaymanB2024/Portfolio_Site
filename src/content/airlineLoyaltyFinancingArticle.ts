@@ -52,7 +52,7 @@ export const AIRLINE_LOYALTY_FINANCING_ARTICLE: ResearchArticle = {
       label: 'Full airline loyalty financing investigation',
       href: '/research/airline-loyalty-financing-report.pdf',
       description:
-        'The complete 22-page report covering partner cash, accounting, fulfillment, loyalty-backed debt, valuation, issuer risk, methodology, and the source ledger.',
+        'The complete 22-page report covering partner cash, accounting, fulfillment, loyalty-backed debt, valuation, issuer risk, methodology, and a source index.',
       format: 'PDF',
     },
     {
@@ -72,7 +72,7 @@ export const AIRLINE_LOYALTY_FINANCING_ARTICLE: ResearchArticle = {
   ],
   content: [
     'How airlines borrow against loyalty programs: the card issuer pays cash under a commercial agreement; the airline records some consideration as current revenue and some as a contract liability; the member claims an award later; and a separate financing structure can give lenders first claim on designated partner and intercompany collections. The collateral is recurring cash, contracts, controlled accounts, loyalty intellectual property, data rights, reserves, and special-purpose-vehicle equity—not the member’s points as a fixed-dollar deposit.',
-    'The publication package contains a 22-page source-led investigation, nine full-resolution exhibits, a point-level cash model, and a lender-waterfall reconstruction. American AAdvantage is the primary case, with Delta SkyMiles, United MileagePlus, and Air Canada Aeroplan used to separate ordinary operating float, explicit partner prepayments, and secured loyalty-backed debt.',
+    'The publication includes a 22-page investigation, nine full-resolution exhibits, a point-level cash model, and a lender-waterfall reconstruction. American AAdvantage is the primary case, with Delta SkyMiles, United MileagePlus, and Air Canada Aeroplan used to separate ordinary operating float, explicit partner prepayments, and secured loyalty-backed debt.',
     'The central mistake is collapsing four clocks into one. Bank cash can arrive within weeks. Revenue is recognized across delivered marketing services and future awards. Fulfillment can occur years later or never. When the program is financed, debt service and reserves can be trapped before excess cash reaches the airline.',
   ],
   sections: [

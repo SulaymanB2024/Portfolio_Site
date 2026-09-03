@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from 'motion/react';
 
 export function TextMarquee() {
   const prefersReducedMotion = useReducedMotion();
-  const sequence = ['Observe', 'Separate', 'Decide', 'Ship'];
+  const sequence = ['Observe', 'Separate', 'Ship'];
 
   return (
     <a

@@ -37,6 +37,7 @@ export const TEXAS_TOLL_RANK_ONE_TARGET_POSITION = 1;
 export const TEXAS_TOLL_RANK_ONE_SUSTAINED_SNAPSHOTS = 3;
 const TEXAS_TOLL_SEARCH_PATH = '/markets/who-owns-texas-toll-roads';
 const TEXAS_TOLL_RELATED_LABELS: Readonly<Record<string, string>> = {
+  '/markets/who-owns-us-toll-roads': 'Texas toll-road ownership detail',
   '/research/ai-systems/the-first-ai-managers': 'Texas infrastructure ownership',
   '/research/search-console/technical-seo-public-data-infrastructure': 'Texas toll-road ownership evidence',
   '/research/personal-seo/canonical-identity-personal-seo': 'public and private Texas toll-road ownership',
@@ -79,7 +80,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     serpGap:
       'Replace one-ratio gigawatt-to-GPU estimates with an explicit capacity ladder, sensitivity range, and boundary-specific evidence requirements.',
     originalArtifact:
-      'A downloadable GB300 capacity model, sensitivity table, source ledger, methodology note, and three boundary diagrams.',
+      'A downloadable GB300 capacity model, sensitivity table, source index, methodology note, and three scope diagrams.',
     cannibalizationBoundary:
       'This page translates AI power claims into physical compute capacity; the hardware-financing and rare-earth articles analyze capital structure and upstream manufacturing capacity.',
     lastVerified: '2026-08-16',
@@ -101,7 +102,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     serpGap:
       'Separate disclosed finished-magnet nameplate from qualified output, upstream-only material capacity, ambiguous units, and demand denominators.',
     originalArtifact:
-      'A project-level capacity model, source ledger, material-flow diagram, maturity chart, and demand-denominator comparison.',
+      'A project-level capacity model, source index, material-flow diagram, maturity chart, and demand-denominator comparison.',
     cannibalizationBoundary:
       'This page audits domestic rare-earth magnet projects and physical supply maturity; the AI megawatt page models compute power and the hardware articles model financing.',
     lastVerified: '2026-08-17',
@@ -119,7 +120,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     intent: 'implementation',
     cohort: 1,
     directAnswer:
-      'An AI agent evaluation harness surrounds a model with versioned tasks, immutable traces, replay fixtures, independent graders, protected policies, and promotion gates so a proposed improvement can be reviewed without letting the agent redefine success or deploy itself.',
+      'An AI agent evaluation harness surrounds a model with versioned tasks, immutable traces, replay cases, independent graders, protected policies, and controlled promotion so a proposed improvement can be tested without letting the agent redefine success or deploy itself.',
     serpGap:
       'Connect a live agent environment to concrete engineering controls rather than describing evaluation as a prompt-only scoring exercise.',
     originalArtifact:
@@ -176,6 +177,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       '/research/financial-systems/waymo-hardware-financing',
       '/research/financial-systems/west-campus-student-housing',
       '/research/financial-systems/who-owns-austin-home-service-companies',
+      '/markets/who-owns-us-toll-roads',
     ],
   },
   {
@@ -215,7 +217,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     serpGap:
       'Answer the cross-retailer question with product-level unit economics, ownership, resale eligibility, fraud controls, and environmental evidence instead of describing one retailer or one universal returns process.',
     originalArtifact:
-      'A 36-sheet reverse-logistics model, nine product archetypes, route and condition engines, auction analysis, decision diagrams, and a 49-page source-led investigation.',
+      'A 36-sheet reverse-logistics model, nine product archetypes, route and condition engines, auction analysis, decision diagrams, and a 49-page investigation.',
     cannibalizationBoundary:
       'This page studies reverse logistics and the return tax on consumer products; the hardware-financing pages study capital stacks, asset claims, and residual-value risk before a product is returned.',
     relatedPaths: [
@@ -247,7 +249,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     serpGap:
       'Connect provider governance, eligibility rules, fund mandates, source-index offsets, closing-auction mechanics, event-study evidence, and cost-of-capital limits instead of treating headline benchmark assets as forced one-day buying.',
     originalArtifact:
-      'A 32-page evidence audit with four index-family rule systems, 13 exhibits, a Tesla implementation case, participant economics, fact checks, a reproducible event-study protocol, and a 44-source ledger.',
+      'A 32-page investigation with four index-family rule systems, 13 exhibits, a Tesla implementation case, participant economics, fact checks, a reproducible event-study protocol, and 44 indexed sources.',
     cannibalizationBoundary:
       'This page explains index membership, implementation demand, price effects, and provider economics; the airline, hardware, and toll-road investigations study different financial claims and ownership structures.',
     relatedPaths: [
@@ -273,7 +275,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     serpGap:
       'Keep headline transaction value, current control, liquidity events, creditor transfers, and sponsor returns separate instead of labeling every IPO, refinancing, or partial sale as a completed exit.',
     originalArtifact:
-      'A 25-row classification table, ten-claim ledger, control-based methodology note, machine-readable summary, and bounded fallback web edition.',
+      'A 25-row classification table, ten-claim table, control-based methodology note, machine-readable summary, and bounded fallback web edition.',
     cannibalizationBoundary:
       'This page audits a 2020–2022 software take-private cohort and control exits; the index-inclusion article studies public-market rebalancing, while the hardware-financing articles study capital structures.',
     lastVerified: '2026-08-17',
@@ -302,7 +304,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     serpGap:
       'Separate consumer card spending, issuer partner payments, deferred-revenue accounting, award fulfillment, operating float, and the lender-controlled cash waterfall instead of calling airline miles deposits or treating every partner payment as debt.',
     originalArtifact:
-      'A 22-page source-led investigation, nine full-resolution exhibits, a point-level cash model, and a lender-waterfall reconstruction.',
+      'A 22-page investigation, nine full-resolution exhibits, a point-level cash model, and a lender-waterfall reconstruction.',
     cannibalizationBoundary:
       'This page explains loyalty-program cash, accounting, and secured financing; the hardware-financing articles compare physical-asset capital stacks, while the Texas toll-road article covers public and concession infrastructure claims.',
     relatedPaths: [
@@ -410,7 +412,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     serpGap:
       'Separate the consumer brand, legal operator, platform, franchise relationship, controlling owner, minority investor, and transaction date while keeping brand-count evidence distinct from market share.',
     originalArtifact:
-      'A 67-brand ownership table, 170-entity register, 102 sourced relationships, 29-transaction timeline, 130-record evidence ledger, conflict log, downloadable dataset, and reproducibility package.',
+      'A 67-brand ownership table, 170-entity register, 102 sourced relationships, 29-transaction timeline, 130-source index, conflict log, downloadable dataset, and reproducibility files.',
     cannibalizationBoundary:
       'This page maps ownership of Austin residential service brands; the West Campus article covers student-housing property finance and the Texas toll-road article covers public infrastructure and concession rights.',
     lastVerified: '2026-07-26',
@@ -456,15 +458,42 @@ export const ARTICLE_SEARCH_TARGETS = [
     },
   },
   {
+    path: '/markets/who-owns-us-toll-roads',
+    primaryQuery: 'who owns US toll roads',
+    supportingQueries: [
+      'are toll roads privately owned in the United States',
+      'who owns American toll roads',
+      'US toll road private concessions',
+    ],
+    intent: 'ownership',
+    cohort: 1,
+    directAnswer:
+      'In a dated sample of 25 major U.S. toll facilities, public agencies usually retain legal title, while some concessions transfer operations and toll-revenue risk to private project companies for a finite term. Billing providers, lenders, and equity owners remain separate roles.',
+    serpGap:
+      'Separate legal title, public sponsor, operator, billing provider, concessionaire, equity owner, debt vehicle, revenue claimant, traffic risk, and reversion date without presenting a bounded sample as a national census.',
+    originalArtifact:
+      'A 25-facility, 16-state ownership table with public and private structures, three explanatory figures, downloadable datasets, and a 39-source register.',
+    cannibalizationBoundary:
+      'This page compares major U.S. toll-road ownership structures; the Texas ownership article resolves individual Texas facilities, while the Texas finance article follows cash, debt, reserves, transfers, and concession distributions.',
+    lastVerified: '2026-09-02',
+    relatedPaths: [
+      '/markets/who-owns-texas-toll-roads',
+      '/research/financial-systems/hidden-financing-hardware-startups',
+      '/research/financial-systems/waymo-hardware-financing',
+      '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
+      '/research/financial-systems/who-owns-austin-home-service-companies',
+    ],
+  },
+  {
     path: '/research/crawler-engineering/crawl-frontier-state-machine',
     primaryQuery: 'crawl frontier design',
     supportingQueries: ['web crawler frontier state machine', 'crawler URL scheduling'],
     intent: 'implementation',
     cohort: 2,
     directAnswer:
-      'Reliable crawl frontier design models each URL as a versioned state transition across discovery, admission, scheduling, fetching, retry, suppression, and completion while keeping URL identity, origin politeness, leases, budgets, and evidence records explicit and replayable.',
+      'Reliable crawl frontier design models each URL as a versioned state transition across discovery, admission, scheduling, fetching, retry, suppression, and completion while keeping URL identity, origin politeness, leases, budgets, and completion records explicit and replayable.',
     serpGap:
-      'Move beyond queue tutorials by defining identity, state invariants, host scheduling, crawl-trap bounds, and recovery evidence together.',
+      'Move beyond queue tutorials by defining identity, state invariants, host scheduling, crawl-trap bounds, and recovery behavior together.',
     originalArtifact:
       'A typed frontier-transition schema, lifecycle table, origin scheduler contract, and crawl-budget gap record.',
     cannibalizationBoundary:
@@ -482,9 +511,9 @@ export const ARTICLE_SEARCH_TARGETS = [
     intent: 'comparison',
     cohort: 2,
     directAnswer:
-      'Raw HTML is the response body returned by the server, while the rendered DOM is the browser-created document after parsing, scripts, dependent requests, and mutations; a technical SEO audit needs both artifacts plus an explicit render-completeness state.',
+      'Raw HTML is the response body returned by the server, while the rendered DOM is the browser-created document after parsing, scripts, dependent requests, and mutations; a technical SEO audit needs both captures plus an explicit render-completeness state.',
     serpGap:
-      'Define a reproducible evidence envelope and failure taxonomy instead of reducing the comparison to screenshots or a binary JavaScript check.',
+      'Define a reproducible comparison and failure taxonomy instead of reducing the work to screenshots or a binary JavaScript check.',
     originalArtifact:
       'A raw-versus-rendered capture contract, completeness taxonomy, field-level diff table, and triage sequence.',
     cannibalizationBoundary:
@@ -525,7 +554,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     directAnswer:
       'An internal linking graph models pages as nodes and crawlable links as directed edges so teams can measure depth, orphan risk, inlink concentration, anchor context, cluster connectivity, and the actual retrieval paths supporting each important page.',
     serpGap:
-      'Connect graph measures to user journeys and crawl evidence instead of presenting PageRank-like scores without inspectable edges.',
+      'Connect graph measures to user journeys and crawl records instead of presenting PageRank-like scores without visible edges.',
     originalArtifact:
       'A directed-edge schema, breadth-first depth calculation, orphan test, anchor audit, and cluster-connectivity checklist.',
     cannibalizationBoundary:
@@ -610,11 +639,11 @@ export const ARTICLE_SEARCH_TARGETS = [
     intent: 'evaluation',
     cohort: 3,
     directAnswer:
-      'AI agent evaluation traces should preserve the task, messages, tool calls, tool results, state transitions, artifacts, policy versions, costs, timing, and grader evidence so a failure can be replayed without pretending a frozen test world predicts the live environment.',
+      'AI agent evaluation traces should preserve the task, messages, tool calls, tool results, state transitions, generated outputs, policy versions, costs, timing, and grader results so a failure can be replayed without pretending a frozen test world predicts the live environment.',
     serpGap:
-      'Join trace completeness, replay limits, independent grading, and promotion evidence in one inspectable evaluation contract.',
+      'Join trace completeness, replay limits, independent grading, and promotion criteria in one clear evaluation contract.',
     originalArtifact:
-      'A typed trace-event schema, replay-world manifest, evaluator separation matrix, and promotion evidence checklist.',
+      'A typed trace-event schema, replay-world manifest, evaluator separation matrix, and promotion checklist.',
     cannibalizationBoundary:
       'This page covers trace and replay evidence; the ViralBench article covers the full improvement harness around a live agent.',
     relatedPaths: [
@@ -630,7 +659,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     intent: 'implementation',
     cohort: 3,
     directAnswer:
-      'SQLite can support a bounded web crawler when URL identity is unique, writes use short transactions and idempotent upserts, one process coordinates write pressure, WAL behavior is measured, leases are recoverable, and artifacts remain outside oversized database rows.',
+      'SQLite can support a bounded web crawler when URL identity is unique, writes use short transactions and idempotent upserts, one process coordinates write pressure, WAL behavior is measured, leases are recoverable, and large payloads remain outside oversized database rows.',
     serpGap:
       'Specify the concurrency and recovery envelope where SQLite is useful instead of arguing that it is either universally sufficient or never production-ready.',
     originalArtifact:
@@ -652,7 +681,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     directAnswer:
       'A technical SEO migration checklist should be executable: inventory old and new URLs, validate redirect and canonical maps, render templates, compare indexability, preserve internal links and structured data, define rollback thresholds, and rerun the same checks after launch.',
     serpGap:
-      'Turn migration advice into fail-closed release gates with artifacts, owners, tolerances, and rollback evidence.',
+      'Turn migration advice into release checks with owners, tolerances, test output, and rollback criteria.',
     originalArtifact:
       'A staged migration gate matrix covering URL mappings, redirects, canonicals, rendering, schema, sitemaps, monitoring, and rollback.',
     cannibalizationBoundary:

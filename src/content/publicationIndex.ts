@@ -8,7 +8,9 @@ import { INDEX_COMPANY_MATTERS_ARTICLE_SLUG } from './indexCompanyMattersArticle
 import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvestigationArticle';
 import { SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG } from './softwareBuyoutCohortArticle';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
+import { TEXAS_TOLL_REVENUE_ARTICLE_SLUG } from './texasTollRevenueArticle';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
+import { US_TOLL_ROAD_ARTICLE_SLUG } from './usTollRoadArticle';
 import { THE_AI_MEGAWATT_ARTICLE_SLUG } from './theAiMegawattArticle';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingArticle';
 import { WEST_CAMPUS_STUDENT_HOUSING_ARTICLE_SLUG } from './westCampusStudentHousingArticle';
@@ -34,6 +36,8 @@ const austinHomeServiceOwnership = article(AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
+const usTollRoads = article(US_TOLL_ROAD_ARTICLE_SLUG);
+const texasTollRevenue = article(TEXAS_TOLL_REVENUE_ARTICLE_SLUG);
 const indexCompanyMatters = article(INDEX_COMPANY_MATTERS_ARTICLE_SLUG);
 const softwareBuyoutCohort = article(SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG);
 const airlineLoyaltyFinancing = article(AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG);
@@ -55,7 +59,7 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     category: 'Technical SEO',
     title: 'Technical SEO Diagnostic Library',
     href: '/research/technical-seo',
-    description: 'Forty evidence-backed issue guides, platform playbooks, audit checklists, and collection routes with reproducible repair gates.',
+    description: 'Forty issue guides, platform playbooks, audit checklists, and collection routes with reproducible repair checks.',
     date: '2026.07.20',
     featured: true,
   },
@@ -86,7 +90,7 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     category: 'AI systems and products',
     title: 'Beyond the Leaderboard: ViralBench + Codex',
     href: '/viralbench-codex-agent-harness',
-    description: 'A code-level design for traces, replay, controlled trials, and a bounded engineering loop around a live marketing agent.',
+    description: 'A code-level design for traces, replay, controlled trials, and disciplined software improvement around a live marketing agent.',
     date: '2026.07.09',
   },
   {
@@ -116,6 +120,14 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     href: getArticlePath(austinHomeServiceOwnership),
     description: austinHomeServiceOwnership.subtitle,
     date: austinHomeServiceOwnership.dateModified ?? austinHomeServiceOwnership.date,
+    featured: true,
+  },
+  {
+    category: 'Markets and investing',
+    title: texasTollRevenue.title,
+    href: getArticlePath(texasTollRevenue),
+    description: texasTollRevenue.subtitle,
+    date: texasTollRevenue.dateModified ?? texasTollRevenue.date,
     featured: true,
   },
   {
@@ -170,6 +182,14 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
   },
   {
     category: 'Markets and investing',
+    title: usTollRoads.title,
+    href: getArticlePath(usTollRoads),
+    description: usTollRoads.subtitle,
+    date: usTollRoads.dateModified ?? usTollRoads.date,
+    featured: true,
+  },
+  {
+    category: 'Markets and investing',
     title: texasTollRoads.title,
     href: getArticlePath(texasTollRoads),
     description: texasTollRoads.subtitle,
@@ -179,7 +199,7 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     category: 'Technical SEO',
     title: 'Atlas Open Corpus Demonstration',
     href: '/atlas/sample-crawl',
-    description: 'A versioned public-corpus run showing source and rendered states, traceable findings, confidence, and export excerpts.',
+    description: 'A versioned public-corpus crawl showing source and rendered states, traceable findings, confidence, and downloadable excerpts.',
     date: '2026.07.16',
   },
   {
@@ -192,9 +212,9 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
 ];
 
 export const PUBLICATION_CATEGORY_SUMMARY = [
-  ['Crawler engineering', 'Crawl frontiers, robots policy, rendering evidence, and retrieval systems.'],
+  ['Crawler engineering', 'Crawl frontiers, robots policy, rendering behavior, and retrieval systems.'],
   ['Technical SEO', 'Canonicals, internal links, structured data, migrations, and identity consistency.'],
   ['Data & AI systems', 'Derived records, SQLite pipelines, agent evaluation, and AI operations.'],
   ['Finance & ownership', 'Capital stacks, infrastructure, market mechanics, and local ownership.'],
-  ['Public studies & archive', 'Atlas evidence, the Austin pilot, and clearly labeled retired methodology.'],
+  ['Public studies & archive', 'The Atlas crawl study, the Austin pilot, and clearly labeled earlier methodology.'],
 ] as const;

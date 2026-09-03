@@ -3,7 +3,9 @@ import { useEffect } from 'react';
 import { InternalFooter } from '../components/InternalFooter';
 import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
+import { CONTENT_CLUSTERS } from '../content/contentClusters';
 import { PUBLICATION_INDEX } from '../content/publicationIndex';
+import { getProjectsForCluster, isExternalProjectHref } from '../content/projectIndex';
 import { RESEARCH_ASSETS } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
@@ -12,6 +14,7 @@ import { useSEO } from '../utils/seo';
 const MARKETS_SEO = getSeoRoute('/markets')!;
 const COIN_ART = '/images/markets/noise-expansion-coin-alpha.png';
 const MARKET_PUBLICATIONS = PUBLICATION_INDEX.filter((item) => item.category === 'Markets and investing');
+const MARKET_PROJECTS = getProjectsForCluster('markets-models');
 
 export default function MarketsPage() {
   useSEO(MARKETS_SEO);
@@ -44,10 +47,19 @@ export default function MarketsPage() {
         </div>
       </section>
 
+      <nav aria-label="Research clusters" className="mx-auto grid w-full max-w-[1480px] gap-px border-b border-ink/14 bg-ink/14 sm:grid-cols-2 xl:grid-cols-4">
+        {CONTENT_CLUSTERS.map((cluster, index) => (
+          <a key={cluster.id} href={cluster.path} aria-current={cluster.id === 'markets-models' ? 'page' : undefined} className={`grid min-h-[112px] content-between gap-4 p-4 transition-colors ${cluster.id === 'markets-models' ? 'bg-ink text-canvas' : 'bg-canvas text-ink/68 hover:bg-ink hover:text-canvas'}`}>
+            <span className="text-[9px] uppercase tracking-[0.22em] opacity-58">{String(index + 1).padStart(2, '0')}</span>
+            <span className="font-serif text-2xl italic leading-none">{cluster.shortTitle}</span>
+          </a>
+        ))}
+      </nav>
+
       <section id="investment-research" className="mx-auto w-full max-w-[1480px] border-y border-ink/14 px-4 py-16 md:px-8 md:py-24 xl:px-10">
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.42fr_0.58fr] lg:items-end">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.28em] text-ink/60">{MARKET_PUBLICATIONS.length} public records</p>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-ink/60">{MARKET_PUBLICATIONS.length} published analyses</p>
             <h2 className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">The finance archive.</h2>
           </div>
           <p className="max-w-2xl text-sm leading-relaxed text-ink/64">
@@ -69,6 +81,38 @@ export default function MarketsPage() {
               </time>
             </a>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-[1480px] border-b border-ink/14 px-4 py-16 md:px-8 md:py-24 xl:px-10" aria-labelledby="market-projects-title">
+        <div className="mb-10 grid gap-8 lg:grid-cols-[0.42fr_0.58fr] lg:items-end">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-ink/60">Connected systems</p>
+            <h2 id="market-projects-title" className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">{MARKET_PROJECTS.length} project families.</h2>
+          </div>
+          <p className="max-w-2xl text-sm leading-relaxed text-ink/64">
+            Models, competition systems, data utilities, and private research workspaces sit beside the published archive. Their status and evidence limits remain explicit.
+          </p>
+        </div>
+
+        <div className="divide-y divide-ink/14 border-y border-ink/14">
+          {MARKET_PROJECTS.map((project, index) => {
+            const external = isExternalProjectHref(project.href);
+            return (
+              <article key={project.id} data-project-family-id={project.id} className="grid gap-5 py-7 md:grid-cols-[72px_minmax(0,0.62fr)_minmax(260px,0.38fr)] md:px-4">
+                <span className="font-serif text-xl italic text-ink/48">{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <div className="flex flex-wrap gap-4 text-[9px] uppercase tracking-[0.19em] text-ink/54"><span>{project.statusLabel}</span><span>{project.visibilityLabel}</span></div>
+                  <h3 className="mt-4 font-serif text-3xl italic leading-none">{project.title}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-ink/66">{project.summary}</p>
+                </div>
+                <div className="grid content-between gap-5 border-l border-ink/14 pl-5">
+                  <p className="text-xs leading-relaxed text-ink/54">{project.evidenceBoundary}</p>
+                  {project.href ? <a href={project.href} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined} className="w-fit border-b border-ink/24 pb-1 text-[10px] uppercase tracking-[0.2em] text-ink/68 hover:text-ink">{project.linkLabel ?? 'Open evidence'}</a> : <span className="text-[10px] uppercase tracking-[0.2em] text-ink/42">Private working record</span>}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 

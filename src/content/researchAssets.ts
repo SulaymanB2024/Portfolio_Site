@@ -15,7 +15,7 @@ export type ResearchAsset = {
 export const researchClaimBoundaries = [
   'These assets do not claim rankings, indexing, traffic movement, revenue impact, AI citations, backlinks, or Ahrefs Domain Rating movement.',
   'Private client names and private outcomes are intentionally excluded.',
-  'Crawler access, static fallbacks, source tables, and reference files are discovery aids, not authority or visibility guarantees.',
+  'Crawler access, static fallbacks, source tables, and reference files can aid discovery, but they do not guarantee visibility.',
   'Links should be earned editorially; paid, exchanged, automated, or low-quality placements should not be counted as wins.',
 ];
 
@@ -30,7 +30,7 @@ export const publicResearchAssets: ResearchAsset[] = [
     pitchAngle:
       'A browsable index of technical SEO notes, Atlas samples, local crawlability work, identity context, and markets research files.',
     supportingAssets: [
-      { label: 'Authority asset JSON', href: '/research/authority-assets.json' },
+      { label: 'Public reference index', href: '/research/authority-assets.json' },
       { label: 'Article research briefs', href: '/research/article-research-briefs.json' },
       { label: 'About Sulayman Bowles', href: '/about' },
     ],
@@ -68,10 +68,26 @@ export const publicResearchAssets: ResearchAsset[] = [
     preferredAnchor: 'Texas toll road ownership and economics',
     audiences: ['infrastructure investing', 'Texas transportation', 'public finance', 'project finance'],
     pitchAngle:
-      'A source-led ownership map separating state title, public authorities, private concession rights, sponsor equity, project debt, billing, and residual control across Texas toll roads.',
+      'An ownership map built from public filings and agreements, separating state title, public authorities, private concession rights, sponsor equity, project debt, billing, and residual control across Texas toll roads.',
     supportingAssets: [
       { label: 'Markets research index', href: '/markets' },
       { label: 'Source methodology', href: '/research/search-console/technical-seo-public-data-infrastructure' },
+    ],
+  },
+  {
+    priority: 1,
+    name: 'Why Texas Toll Roads Stay Tolled',
+    href: '/research/financial-systems/why-texas-toll-roads-stay-tolled',
+    type: 'long_form_research',
+    preferredAnchor: 'where Texas toll money goes',
+    audiences: ['Texas transportation', 'public finance', 'infrastructure investing', 'project finance'],
+    pitchAngle:
+      'A system-by-system investigation separating construction cost, road debt, pooled debt, operations, required reserves, county mobility transfers, concession distributions, and legal tolling authority.',
+    supportingAssets: [
+      { label: 'Texas toll-road financial model', href: '/research/texas-toll-revenue-financial-model-2025.xlsx' },
+      { label: 'Primary-source ledger', href: '/research/texas-toll-revenue-source-ledger.csv' },
+      { label: 'System comparison data', href: '/research/texas-toll-revenue-system-comparison.csv' },
+      { label: 'Texas toll-road ownership map', href: '/markets/who-owns-texas-toll-roads' },
     ],
   },
   {
@@ -82,7 +98,7 @@ export const publicResearchAssets: ResearchAsset[] = [
     preferredAnchor: 'what happens when a stock joins a major index',
     audiences: ['index investing', 'market structure', 'passive funds', 'capital markets'],
     pitchAngle:
-      'A source-led map from index-provider rules through fund implementation, closing auctions, event-study evidence, participant economics, and cost-of-capital limits.',
+      'An investigation from index-provider rules through fund implementation, closing auctions, event-study results, participant economics, and cost-of-capital limits.',
     supportingAssets: [
       { label: 'Full index-decision evidence audit', href: '/research/index-company-matters-evidence-audit.pdf' },
       { label: 'Editable index-decision audit', href: '/research/index-company-matters-evidence-audit.docx' },
@@ -307,10 +323,10 @@ export const publicDataDownloads = [
   {
     label: 'Article research briefs',
     href: '/research/article-research-briefs.json',
-    description: 'Intent, direct-answer, original-artifact, scope-boundary, and related-reading contracts for 22 indexable articles.',
+    description: 'Intent, direct answers, research basis, scope limits, and related reading for 22 indexable articles.',
   },
   {
-    label: 'Authority asset JSON',
+    label: 'Public reference index',
     href: '/research/authority-assets.json',
     description: 'Reference index of public pages, anchor suggestions, audiences, and limits.',
   },
@@ -347,7 +363,7 @@ export const publicDataDownloads = [
   {
     label: 'Waymo hardware financing report',
     href: '/research/waymo-hardware-financing-report.pdf',
-    description: 'Full source-led report with financing archetypes, methodology, appendices, and selected source register.',
+    description: 'Full report with financing archetypes, methodology, appendices, and selected source register.',
   },
   {
     label: 'Waymo hardware financing model',
@@ -382,7 +398,7 @@ export const publicDataDownloads = [
   {
     label: 'Comparative hardware financing model',
     href: '/research/hidden-financing-model.xlsx',
-    description: 'Twenty-nine-sheet evidence ledger, assumption book, company comparison, scenarios, and loss waterfalls.',
+    description: 'Twenty-nine-sheet model, assumption book, company comparison, scenarios, and loss waterfalls.',
   },
   {
     label: 'Hardware capital-stack diagram package',

@@ -16,8 +16,10 @@ import {
   TechnicalPanel,
   TextLink,
 } from '../components/design/Primitives';
+import { CONTENT_CLUSTERS, getPublicationsForCluster } from '../content/contentClusters';
 import { INVESTMENT_MEMOS } from '../content/marketTheses';
-import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
+import { PUBLICATION_INDEX } from '../content/publicationIndex';
+import { getProjectsForCluster } from '../content/projectIndex';
 import { researchContextLinks } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
@@ -77,9 +79,9 @@ export default function ResearchPage() {
         <section className="relative grid min-h-[64vh] items-end gap-12 overflow-hidden border-b border-current/12 pb-14 pt-16 md:pt-20 lg:grid-cols-[minmax(0,0.6fr)_minmax(320px,0.4fr)]">
           <div className="relative z-10 min-w-0">
             <SectionEyebrow className="text-ink/60">Research</SectionEyebrow>
-            <EditorialHeading className="mt-8">One archive. Clear categories.</EditorialHeading>
+            <EditorialHeading className="mt-8">Four clusters. One complete archive.</EditorialHeading>
             <p className="mt-8 max-w-3xl text-base leading-relaxed text-current/68">
-              This archive contains crawler-policy analysis, URL-level technical SEO artifacts, AI-system evaluation designs, ownership models, assumption tables, and source-led market research. Each item states its source base, method, evidence limit, and current implementation status; finance-only work remains available as a filtered Markets archive.
+              This archive connects crawler-policy analysis, URL-level technical SEO studies, AI-system evaluation, ownership models, assumption tables, and market research. Each cluster has a stable question set, a complete publication index, and the project families that put the research into practice.
             </p>
           </div>
 
@@ -91,7 +93,7 @@ export default function ResearchPage() {
         <div className="flex flex-wrap items-center gap-5 border-b border-current/12 py-8">
           <PrimaryCTA href="/work" id="research-work-link" data-portfolio-cta="research_view_work">View selected work</PrimaryCTA>
           <TextLink href="/markets" id="research-markets-link" data-portfolio-cta="research_markets" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
-            Markets filter
+            Markets cluster
           </TextLink>
           <TextLink href="/atlas" id="research-atlas-link" data-portfolio-cta="research_atlas" className="text-[10px] uppercase tracking-[0.2em] text-current/64 hover:text-current">
             Atlas
@@ -101,25 +103,36 @@ export default function ResearchPage() {
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Categories" title="Five ways into the work.">
-            Each lane has a concrete question, source base, and boundary between observed facts and interpretation.
+          <SectionHeader eyebrow="Content clusters" title="Four ways into the work.">
+            Each cluster has a clear audience promise, a stable hub, a complete publication set, and connected project systems. Every article has one primary home.
           </SectionHeader>
-          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5">
-            {PUBLICATION_CATEGORY_SUMMARY.map(([title, description], index) => (
-              <TechnicalPanel key={title} className="min-h-[210px]">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-current/60">{String(index + 1).padStart(2, '0')}</p>
-                <h2 className="mt-10 font-serif text-3xl italic leading-none tracking-normal text-current">{title}</h2>
-                <p className="mt-5 text-sm leading-relaxed text-current/64">{description}</p>
-              </TechnicalPanel>
-            ))}
+          <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+            {CONTENT_CLUSTERS.map((cluster, index) => {
+              const publicationCount = getPublicationsForCluster(cluster).length;
+              const projectCount = getProjectsForCluster(cluster.id).length;
+
+              return (
+                <LinkPanel key={cluster.id} href={cluster.path} className="grid min-h-[270px] content-between gap-8">
+                  <div>
+                    <div className="flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.22em] text-current/58">
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <span>{publicationCount} records / {projectCount} projects</span>
+                    </div>
+                    <h2 className="mt-10 font-serif text-3xl italic leading-none tracking-normal text-current">{cluster.shortTitle}</h2>
+                    <p className="mt-5 text-sm normal-case leading-relaxed tracking-normal text-current/64">{cluster.description}</p>
+                  </div>
+                  <span className="text-[10px] uppercase tracking-[0.2em]">Open cluster →</span>
+                </LinkPanel>
+              );
+            })}
           </SurfaceGrid>
         </PageFrame>
       </section>
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Publication index" title="Questions, evidence, limits.">
-            {PUBLICATION_INDEX.length} distinct notes and artifacts, with finance terminology reserved for finance work.
+          <SectionHeader eyebrow="Publication index" title="Questions worth resolving.">
+            {PUBLICATION_INDEX.length} articles, studies, and technical guides, with finance terminology reserved for finance work.
           </SectionHeader>
 
           <div className="mb-8 grid gap-6 border-y border-current/14 py-6 lg:grid-cols-[minmax(17rem,0.58fr)_minmax(0,1fr)] lg:items-end">
@@ -132,7 +145,7 @@ export default function ResearchPage() {
                 type="search"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Title, subject, or evidence type"
+                placeholder="Title, market, system, or subject"
                 autoComplete="off"
                 aria-controls="research-publication-grid"
                 className="min-h-12 w-full border border-ink/22 bg-ink/[0.018] px-4 text-base text-ink outline-none transition-colors placeholder:text-ink/46 hover:border-ink/36 focus:border-ink"
@@ -164,7 +177,7 @@ export default function ResearchPage() {
 
           <div className="mb-5 flex min-h-11 flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-ink/60">
             <p id="research-results-status" aria-live="polite" aria-atomic="true">
-              Showing {filteredPublications.length} of {PUBLICATION_INDEX.length} records
+              Showing {filteredPublications.length} of {PUBLICATION_INDEX.length} entries
             </p>
             {filtersActive && (
               <button
@@ -198,7 +211,7 @@ export default function ResearchPage() {
             {filteredPublications.length === 0 && (
               <div className="col-span-full grid min-h-[260px] place-items-center bg-current/[0.012] p-8 text-center">
                 <div>
-                  <h2 className="font-serif text-4xl italic leading-none tracking-normal text-current">No matching records.</h2>
+                  <h2 className="font-serif text-4xl italic leading-none tracking-normal text-current">No matching research.</h2>
                   <p className="mt-5 max-w-md text-sm leading-relaxed text-current/62">Try a broader subject or return to the full publication index.</p>
                   <button
                     type="button"
@@ -217,8 +230,8 @@ export default function ResearchPage() {
       {ARCHIVED_RESEARCH.length > 0 && (
         <section className="relative z-10 border-b border-current/12">
           <PageFrame className="py-16 xl:py-24">
-            <SectionHeader eyebrow="Archive" title="Retired work, still legible.">
-              These records are retained for methodology and provenance. They remain noindexed and are not current recommendations.
+            <SectionHeader eyebrow="Archive" title="Earlier work, clearly dated.">
+              These pages remain available for historical and methodological context. They are noindexed and are not current recommendations.
             </SectionHeader>
             <SurfaceGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
               {ARCHIVED_RESEARCH.map((note) => (
@@ -247,8 +260,8 @@ export default function ResearchPage() {
 
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
-          <SectionHeader eyebrow="Context" title="From research to implementation.">
-            Follow the evidence into the audit software, service process, local study, portfolio, or direct project brief it supports.
+          <SectionHeader eyebrow="Context" title="Where research becomes practice.">
+            Move from the analysis into the software, service process, local study, portfolio, or project brief it informs.
           </SectionHeader>
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
             {researchContextLinks.map(({ label, href, description }) => (

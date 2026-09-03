@@ -54,12 +54,12 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
       'When a general-purpose assistant gets operational authority, its conversational habits stop being style and start becoming business policy.',
     conclusion: AI_MANAGERS_ARTICLE_CONCLUSION,
     evidenceBoundary:
-      'Operator dashboards and financial reconstructions are unaudited. Simulations are controlled behavior evidence, not commercial businesses. Human legal, financial, physical, and supervisory work remains part of every live case.',
+      'Operator dashboards and financial reconstructions are unaudited. Simulations are controlled behavioral studies, not commercial businesses. Human legal, financial, physical, and supervisory work remains part of every live case.',
     metrics: [
       { label: 'Cases reviewed', value: '30' },
       { label: 'Published sources', value: String(AI_MANAGER_SOURCES.length) },
       { label: 'Grade A live cases', value: '4' },
-      { label: 'Audited autonomy proofs', value: '0' },
+      { label: 'Independently audited cases', value: '0' },
     ],
     sources: AI_MANAGER_SOURCES.filter((source) => source.href.startsWith('http')).map((source) => ({
       label: source.label,
@@ -109,7 +109,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
       { label: 'Agents compared', value: '8 USER AGENTS' },
       { label: 'Policies', value: '2 COPY-READY' },
       { label: 'Last verified', value: '2026.07.14' },
-      { label: 'Primary artifact', value: 'ROBOTS POLICY' },
+      { label: 'Core output', value: 'ROBOTS POLICY' },
     ],
     sources: [
       { label: 'OpenAI crawler documentation', href: 'https://developers.openai.com/api/docs/bots', lastVerified: '2026.07.14' },
@@ -129,7 +129,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     ],
     content: [
       '/robots.txt is a host-scoped text file. Match the exact case-sensitive product token, then assign Allow: / or Disallow: /. Preserve the correct Sitemap line.',
-      'Release sequence: outcome → token → group → file merge → production fetch → access-log check.',
+      'Choose the intended outcome first, map it to the exact token and group, merge the file carefully, then fetch the production version and review the access logs.',
     ],
     sections: [
       {
@@ -276,16 +276,16 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     category: 'DATA INFRASTRUCTURE',
     title: 'Technical SEO as Public Data Infrastructure',
     seoTitle: 'SEO Data Pipeline as Public Infrastructure',
-    subtitle: 'A systems essay on how URLs become crawlable, renderable, attributable, and exportable public records.',
+    subtitle: 'A systems essay on how URLs become crawlable, renderable, attributable, and reusable data.',
     seoDescription:
-      'A systems essay by Sulayman Bowles on URL discovery, crawling, rendering, structured records, provenance, crawl evidence, and durable technical SEO exports.',
+      'A systems essay by Sulayman Bowles on URL discovery, crawling, rendering, structured records, provenance, and durable technical SEO exports.',
     artwork: {
       kind: 'image',
       heroSrc: '/images/research/public-data-infrastructure-reader-hero.webp',
       socialSrc: '/images/research/public-data-infrastructure-social.jpg',
-      alt: 'Monochrome editorial artwork showing public web evidence flowing through a layered data pipeline.',
-      label: 'Public data / evidence pipeline',
-      caption: 'Crawl, render, normalize, and export remain traceable layers in one evidence system.',
+      alt: 'Monochrome editorial artwork showing public web data flowing through a layered pipeline.',
+      label: 'Public data / web pipeline',
+      caption: 'Crawl, render, normalize, and export remain connected stages in one public-data system.',
     },
     date: '2026.06.19',
     dateModified: '2026.07.16',
@@ -293,18 +293,18 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     readTime: '14 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
-      'Technical SEO becomes infrastructure when every important URL can move through a traceable pipeline from discovery to rendered evidence and reusable output.',
+      'Technical SEO becomes infrastructure when every important URL can move through a traceable pipeline from discovery to rendered page and reusable output.',
     conclusion: {
       title: 'Build a traceable public record',
       content:
-        'Technical SEO becomes infrastructure when discovery, transport, rendering, extraction, interpretation, and publication remain connected by reviewable evidence. That makes site state easier to operate and defend, while distribution remains an external outcome.',
+        'Technical SEO becomes infrastructure when discovery, transport, rendering, extraction, interpretation, and publication remain connected. That makes the site easier to operate and explain, while distribution remains an external outcome.',
     },
     evidenceBoundary:
       'The data-infrastructure comparison describes operating discipline. It does not make a website equivalent to a regulated filing system or guarantee crawling, indexing, ranking, citation, or traffic.',
     metrics: [
       { label: 'Pipeline stages', value: '05' },
       { label: 'Observed states', value: 'RAW + RENDERED' },
-      { label: 'Primary artifact', value: 'DATA CONTRACT' },
+      { label: 'Core model', value: 'DATA PIPELINE' },
     ],
     sources: [
       { label: 'Google crawling and indexing overview', href: 'https://developers.google.com/search/docs/crawling-indexing', lastVerified: '2026.07.16' },
@@ -316,7 +316,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     ],
     content: [
       'A publication system produces addressable records. DNS and routing assign an address; the server emits a source snapshot; browser execution may create another state; extractors normalize fields; and exports carry those fields into review tools. Calling every state “the page” hides where information changed or disappeared.',
-      'Technical SEO becomes a data-infrastructure problem when each transformation has an input, output, timestamp, identifier, and owner. The useful question is whether a public claim can move from nominated address to captured artifact without losing its lineage. That frame turns an ambiguous visibility complaint into a diagnosable record-flow failure.',
+      'Technical SEO becomes a data-infrastructure problem when each transformation has an input, output, timestamp, identifier, and owner. The useful question is whether a public claim can move from nominated address to captured page without losing its lineage. That frame turns an ambiguous visibility complaint into a diagnosable break in the data flow.',
     ],
     sections: [
       {
@@ -324,18 +324,18 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
         title: 'The public-record pipeline has five distinct stages',
         paragraphs: [
           'Nomination is the entry condition. An internal relation, sitemap row, external reference, feed item, redirect target, or earlier run can place an address into scope. Store that origin as data. It explains why one route entered the inventory and another did not; a sitemap declaration alone does not establish architectural reachability.',
-          'Capture creates a transport artifact containing the requested and resolved addresses, status, headers, body, timing, and failure state. Browser execution creates a related artifact rather than silently replacing the first one. Assets, APIs, consent layers, and runtime capabilities can all change the second state.',
-          'Normalization and export come last. Directives, links, headings, typed metadata, and visible claims must retain the artifact and rule from which they were derived. A review table is trustworthy only when a reader can move from a labeled row back to the captured input.',
+          'Capture creates a server record containing the requested and resolved addresses, status, headers, body, timing, and failure state. Browser execution creates a related record rather than silently replacing the first one. Assets, APIs, consent layers, and runtime capabilities can all change the second state.',
+          'Normalization and export come last. Directives, links, headings, typed metadata, and visible claims must retain the input and rule from which they were derived. A review table is trustworthy only when a reader can move from a labeled row back to the captured page.',
         ],
         table: {
-          caption: 'URL-to-evidence pipeline',
+          caption: 'URL-to-public-data pipeline',
           columns: ['Stage', 'Minimum record', 'Failure question'],
           rows: [
             ['URL', 'Normalized address and discovery source', 'Was the intended route ever nominated or linked?'],
             ['Crawl', 'Status, headers, source body, timestamp, fetch state', 'Did the server return a usable public document?'],
             ['Render', 'Rendered DOM, discovered links, asset and console state', 'Did client execution materially change the record?'],
             ['Structure', 'Directives, metadata, headings, schema, content fields', 'Do machine-readable claims match visible content?'],
-            ['Evidence export', 'Observation, derivation, confidence, route, run, artifact', 'Can another reviewer reproduce the finding?'],
+            ['Findings export', 'Observation, derivation, confidence, route, run, source', 'Can another reviewer reproduce the finding?'],
           ],
         },
       },
@@ -343,14 +343,14 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
         id: 'raw-rendered-states',
         title: 'Raw source and rendered output answer different questions',
         paragraphs: [
-          'The source snapshot is the transport ledger: status, headers, redirects, markup, and server-provided content at a recorded time. It is the correct artifact for diagnosing delivery failures and fields that existed before any client execution.',
+          'The source snapshot records transport: status, headers, redirects, markup, and server-provided content at a specific time. It is the right input for diagnosing delivery failures and fields that existed before any client execution.',
           'The executed snapshot records the document after scripts and dependent requests settle in a named environment. Google describes rendering as a separate processing stage for JavaScript pages. The useful measurement is therefore the delta between snapshots: added and removed links, headings, claims, directives, fields, and errors.',
           'A screenshot is not that delta. The execution record also needs browser version, timeout, console state, failed dependencies, and completeness status. Otherwise a partial render can be mistaken for a complete public record.',
         ],
       },
       {
         id: 'structured-records',
-        title: 'Structured data is a typed view of visible evidence',
+        title: 'Structured data is a typed view of visible content',
         paragraphs: [
           'Structured data serializes selected page fields into a predictable shape. A Dataset record can expose distribution formats, measurement dates, and licensing; a SoftwareApplication record can declare operating context and category. The serialization should be generated from the same fields that produce the visible table or product description.',
           'Typed output also forces decisions about units, enumerations, identifiers, and missing values. SEC data APIs offer a useful analogy because extracted XBRL facts remain tied to a filing period and unit. A website has no comparable regulatory status, but its exports still benefit from explicit grain and machine-checkable field definitions.',
@@ -363,7 +363,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
         paragraphs: [
           'The Atlas open-corpus demonstration uses run ID quotes-to-scrape-2026-07-16 and two declared seeds: the static Quotes to Scrape route and its JavaScript variant. The JSON manifest records the capture time, bounded direct-HTTPS method, claim limit, and row payload. The CSV repeats the address-level fields in a form that can be filtered without discarding the manifest.',
           'Both responses returned status 200, but they exposed different source states. The static route contained ten quote cards in its captured markup. The JavaScript route contained zero source quote cards and ten embedded runtime data records used by a client-side loop. Each row also retains the next-page address, canonical state, confidence, and a note explaining the count.',
-          'Those values support a narrow comparison of delivery states; they do not establish search performance or a defect in the corpus. The row can be reproduced from its seed, capture time, and method, while any later label remains a separate interpretation. This is the practical value of lineage: a reviewer can disagree with the finding without losing the underlying artifact.',
+          'Those values support a narrow comparison of delivery states; they do not establish search performance or a defect in the corpus. The row can be reproduced from its seed, capture time, and method, while any later label remains a separate interpretation. This is the practical value of lineage: a reviewer can disagree with the finding without losing the underlying source record.',
         ],
         table: {
           caption: 'Atlas open-corpus record: observation versus derivation',
@@ -372,7 +372,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
             ['Captured source', 'HTTP status, source body, response time', 'What the fetch returned at the recorded time'],
             ['Rendered state', 'DOM delta, discovered paths, browser errors', 'What changed in the tested browser environment'],
             ['Derived review', 'Finding label, confidence, affected route', 'A versioned interpretation of captured fields'],
-            ['Artifact', 'Run ID, CSV row, JSON manifest, capture method', 'How the reviewer can locate and reproduce the record'],
+            ['Reproduction record', 'Run ID, CSV row, JSON manifest, capture method', 'How the reviewer can locate and reproduce the result'],
             ['Gap state', 'Skipped provider, challenge page, failed render', 'Coverage is incomplete; no normal health claim follows'],
           ],
         },
@@ -398,7 +398,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
       },
       {
         id: 'publication-standard',
-        title: 'The deliverable is a reviewable public record',
+        title: 'The deliverable is usable public data',
         paragraphs: [
           'The strongest technical SEO output is not the largest issue list. It is a compact system in which priority pages are reachable, raw and rendered states are inspectable, machine-readable fields agree with visible content, and every recommendation can be traced to a captured observation. That operating standard supports engineering handoff because developers can verify the same conditions after a repair ships.',
           'Distribution remains downstream. A clean pipeline can make information eligible to be processed and easier to audit; it cannot force an index, ranking system, or answer product to use the page. The value of the infrastructure frame is narrower and more practical: it makes the site less ambiguous to operate and makes claims about its state easier to defend.',
@@ -408,7 +408,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
           'Capture transport and rendered states separately, with timestamps and failure reasons.',
           'Generate metadata and structured records from the same visible source fields.',
           'Keep observations, derived findings, confidence, and measurement gaps in separate columns.',
-          'Ship CSV or JSON artifacts that retain route, run, source, and calculation lineage.',
+          'Ship CSV or JSON files that retain route, run, source, and calculation lineage.',
           'Rerun the same checks after implementation before declaring the repair complete.',
         ],
       },
@@ -444,12 +444,12 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     conclusion: {
       title: 'Maintain one current identity source',
       content:
-        'A personal identity surface becomes legible when one profile record owns each current fact and controlled references agree with it or clearly preserve history. Measure consistency across important records rather than publishing more biographies into unresolved contradiction.',
+        'A public identity becomes legible when one profile record owns each current fact and controlled references agree with it or clearly preserve history. Measure consistency across important pages rather than publishing more biographies into unresolved contradiction.',
     },
     evidenceBoundary:
-      'This playbook improves consistency among controlled and observable profiles. It cannot force third-party platforms to update, remain public, or be interpreted as identity evidence by a search system.',
+      'This playbook improves consistency among controlled and observable profiles. It cannot force third-party platforms to update, remain public, or be interpreted as an identity signal by a search system.',
     metrics: [
-      { label: 'Primary artifact', value: 'RECONCILIATION LOG' },
+      { label: 'Core record', value: 'RECONCILIATION LOG' },
       { label: 'Decision layers', value: '06' },
       { label: 'Review cadence', value: 'QUARTERLY' },
     ],
@@ -463,7 +463,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     ],
     content: [
       'Personal SEO often fails when biographies disagree. A portfolio, resume PDF, university page, GitHub profile, LinkedIn page, competition account, old domain, and copied speaker bio can name different titles, employers, graduation dates, projects, or official websites.',
-      'The remedy is reconciliation. Designate which controlled profile owns the current biography, experience, and education; classify outside profiles by role; and decide what should happen to stale URLs. Publish more only after the identity surface has one clear authority.',
+      'The remedy is reconciliation. Designate which controlled profile owns the current biography, experience, and education; classify outside profiles by role; and decide what should happen to stale URLs. Publish more only after the public profile ecosystem has one clear center.',
     ],
     sections: [
       {
@@ -487,10 +487,10 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
       },
       {
         id: 'canonical-host',
-        title: 'Select one host and one current profile thesis',
+        title: 'Select one host and one current profile',
         paragraphs: [
           'The preferred domain should resolve consistently across protocol and hostname variants. Permanently redirect duplicate hosts and retired controlled routes when they have one destination. Align redirects, canonical annotations, sitemaps, and internal links instead of asking one signal to overrule a contradictory site.',
-          'The canonical thesis is the approved set of current facts from which the homepage, about page, resume, and metadata draw: what the person does, which projects or institutions matter, and where proof can be inspected. It need not be copied word for word.',
+          'The canonical profile is the maintained set of current facts from which the homepage, about page, resume, and metadata draw: what the person does, which projects or institutions matter, and where the work can be examined. It need not be copied word for word.',
         ],
         table: {
           caption: 'Canonical-host decision tree',
@@ -561,7 +561,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
         title: 'Maintain a small identity surface on a fixed cadence',
         paragraphs: [
           'Reconcile after role or graduation changes, major launches, domain migrations, and public resume revisions. A quarterly review catches expired links, copied biographies, changed usernames, and newly indexed files. Record the observation and action instead of marking a profile “done.”',
-          'Success is the share of important, controllable records that agree on the current identity and point to the same maintained source. Historical evidence can remain diverse because it documents a specific time.',
+          'Success is the share of important, controllable records that agree on the current identity and point to the same maintained source. Historical material can remain diverse because it documents a specific time.',
         ],
         bullets: [
           'Review controlled profile pages and the public PDF every quarter.',

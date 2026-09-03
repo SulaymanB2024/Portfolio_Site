@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface Candle {
   open: number;
@@ -24,6 +25,7 @@ function setTooltipContent(tooltip: HTMLDivElement, candle: Candle) {
     row.className = 'flex justify-between gap-4';
 
     const labelNode = document.createElement('span');
+    labelNode.className = 'text-canvas/50';
     labelNode.textContent = label;
 
     const valueNode = document.createElement('span');
@@ -39,6 +41,7 @@ function setTooltipContent(tooltip: HTMLDivElement, candle: Candle) {
 export default function CandlestickChart({ className = '' }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -123,6 +126,7 @@ export default function CandlestickChart({ className = '' }: { className?: strin
     let lastFrameTime = 0;
 
     const scheduleRender = () => {
+      if (prefersReducedMotion) return;
       if (!animationFrameId && isVisible && !document.hidden) {
         animationFrameId = requestAnimationFrame(render);
       }
@@ -132,7 +136,7 @@ export default function CandlestickChart({ className = '' }: { className?: strin
       animationFrameId = 0;
       if (!isVisible || document.hidden) return;
 
-      if (isMobile && frameTime - lastFrameTime < 1000 / 30) {
+      if (!prefersReducedMotion && isMobile && frameTime - lastFrameTime < 1000 / 30) {
         scheduleRender();
         return;
       }
@@ -141,7 +145,9 @@ export default function CandlestickChart({ className = '' }: { className?: strin
       ctx.clearRect(0, 0, width, height);
 
       // Smooth pan
-      currentPan += panSpeed;
+      if (!prefersReducedMotion) {
+        currentPan += panSpeed;
+      }
       
       // If we panned a full candle length, shift candles
       const step = candleWidth + spacing;
@@ -254,13 +260,19 @@ export default function CandlestickChart({ className = '' }: { className?: strin
           tooltipRef.current.style.opacity = '0';
       }
 
-      scheduleRender();
+      if (!prefersReducedMotion) {
+        scheduleRender();
+      }
     };
 
     const observer = new IntersectionObserver(([entry]) => {
       isVisible = entry.isIntersecting;
       if (isVisible) {
-        scheduleRender();
+        if (prefersReducedMotion) {
+          render(0);
+        } else {
+          scheduleRender();
+        }
       } else if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
         animationFrameId = 0;
@@ -271,6 +283,8 @@ export default function CandlestickChart({ className = '' }: { className?: strin
       if (document.hidden && animationFrameId) {
         cancelAnimationFrame(animationFrameId);
         animationFrameId = 0;
+      } else if (prefersReducedMotion) {
+        render(0);
       } else {
         scheduleRender();
       }
@@ -289,7 +303,7 @@ export default function CandlestickChart({ className = '' }: { className?: strin
       }
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <div className={`w-full h-full relative group ${className}`}>

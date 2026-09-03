@@ -61,6 +61,6 @@ export const atlasOpenCorpusFindings = [
     observation: 'Both sampled pages expose an explicit next-page URL in their HTML.',
     derivation: 'The navigation links point to /page/2/ and /js/page/2/.',
     confidence: 'High',
-    action: 'Preserve the discovered paths in the crawl ledger and test them independently on a later bounded run.',
+    action: 'Preserve the discovered paths in the crawl record and test them independently on a later bounded run.',
   },
 ] as const;

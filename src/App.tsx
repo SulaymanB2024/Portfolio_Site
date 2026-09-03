@@ -29,6 +29,7 @@ const loadMethodPage = () => import('./pages/VoidAgencyMethodPage');
 const loadAboutPage = () => import('./pages/AboutPage');
 const loadResumePage = () => import('./pages/ResumePage');
 const loadResearchPage = () => import('./pages/ResearchPage');
+const loadResearchClusterPage = () => import('./pages/ResearchClusterPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
 const loadViralBenchArticlePage = () => import('./pages/ViralBenchArticlePage');
@@ -47,6 +48,7 @@ const VoidAgencyMethodPage = lazy(loadMethodPage);
 const AboutPage = lazy(loadAboutPage);
 const ResumePage = lazy(loadResumePage);
 const ResearchPage = lazy(loadResearchPage);
+const ResearchClusterPage = lazy(loadResearchClusterPage);
 const MarketsPage = lazy(loadMarketsPage);
 const MarketArticlePage = lazy(loadMarketArticlePage);
 const ViralBenchArticlePage = lazy(loadViralBenchArticlePage);
@@ -80,8 +82,8 @@ const homeDisciplineItems = [
   },
   {
     num: '03',
-    title: 'Atlas / Crawl Evidence',
-    desc: 'URL discovery, rendered HTML, canonical state, internal-link maps, structured-data checks, and report-ready audit notes.',
+    title: 'Atlas / Crawl Intelligence',
+    desc: 'URL discovery, rendered HTML, canonical analysis, internal-link maps, structured-data checks, and prioritized audit findings.',
   },
   {
     num: '04',
@@ -142,6 +144,8 @@ async function preloadRoute(path: string) {
     await loadResumePage();
   } else if (route?.path === '/research') {
     await loadResearchPage();
+  } else if (route?.section === 'research-cluster') {
+    await loadResearchClusterPage();
   } else if (route?.section === 'technical-seo-hub') {
     await loadProgrammaticSeoHubPage();
   } else if (route?.section === 'technical-seo-guide') {
@@ -214,6 +218,8 @@ export default function App() {
     page = <ResumePage />;
   } else if (route?.path === '/research') {
     page = <ResearchPage />;
+  } else if (route?.section === 'research-cluster') {
+    page = <ResearchClusterPage path={route.path} />;
   } else if (route?.section === 'technical-seo-hub') {
     page = <ProgrammaticSeoHubPage path={route.path} />;
   } else if (route?.section === 'technical-seo-guide') {
@@ -544,7 +550,7 @@ function HomePage() {
               <div className="mt-7 grid max-w-[1180px] gap-6 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.14fr)_minmax(340px,0.86fr)] md:gap-8">
                 <div>
                   <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and publisher of source-led research.</p>
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and writer on technology, infrastructure, and markets.</p>
                   <nav className="home-cover__index mt-6" aria-label="Portfolio shortcuts">
                     {homeJourneyLinks.map((item) => (
                       <a
@@ -556,14 +562,14 @@ function HomePage() {
                       >
                         <span aria-hidden="true" className="font-serif text-sm italic tracking-normal opacity-55">{item.index}</span>
                         <span>{item.label}</span>
-                        <span aria-hidden="true" className="home-cover__index-arrow text-sm">↗</span>
+                        <span aria-hidden="true" className="home-cover__index-arrow text-sm transition-transform duration-200 group-hover:translate-x-1">→</span>
                       </a>
                     ))}
                   </nav>
                 </div>
-                <nav aria-label="Featured proof" className="grid self-end border border-ink bg-ink px-4 py-3 uppercase text-canvas md:px-5 md:py-4">
-                  <span className="mb-1 flex items-center justify-between text-[9px] tracking-[0.28em] text-canvas/66">
-                    <span>Selected proof</span>
+                <nav aria-label="Featured work" className="grid self-end border border-ink bg-ink px-4 py-3 uppercase text-canvas md:px-5 md:py-4">
+                  <span className="mb-1.5 flex items-center justify-between text-[11px] tracking-[0.28em] text-canvas/66">
+                    <span>Selected work</span>
                     <span aria-hidden="true" className="font-serif text-sm italic tracking-normal">03</span>
                   </span>
                   {homeProofItems.map((item) => (
@@ -573,9 +579,9 @@ function HomePage() {
                       data-portfolio-cta="home_open_proof"
                       className="group grid min-h-12 grid-cols-[4.75rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-canvas/18 transition-colors hover:border-canvas/44 hover:bg-canvas/[0.035] md:grid-cols-[5.25rem_minmax(0,1fr)_auto]"
                     >
-                      <span className="text-[8px] tracking-[0.22em] text-canvas/66">{item.type}</span>
-                      <span className="text-[10px] font-medium tracking-[0.15em] text-canvas/90">{item.title}</span>
-                      <span aria-hidden="true" className="text-xs transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+                      <span className="text-[10px] tracking-[0.22em] text-canvas/66">{item.type}</span>
+                      <span className="text-xs font-medium tracking-[0.15em] text-canvas/90">{item.title}</span>
+                      <span aria-hidden="true" className="text-xs transition-transform duration-200 group-hover:translate-x-1">→</span>
                     </a>
                   ))}
                 </nav>
@@ -584,7 +590,7 @@ function HomePage() {
           </motion.div>
         </section>
 
-        {/* INTRODUCTION — an evidence system, reduced to its essential logic */}
+        {/* INTRODUCTION — the working method, reduced to its essential logic */}
         <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-24 text-ink md:px-16 md:py-36">
           <div className="mx-auto w-full max-w-[1800px]">
             <div className="flex items-center justify-between border-b border-ink/14 pb-5 text-[10px] uppercase tracking-[0.3em] text-ink/58">
@@ -596,23 +602,23 @@ function HomePage() {
               <div className="md:col-span-8">
                 <ScrollReveal blur={false}>
                   <h2 className="max-w-[9ch] font-serif text-[4rem] font-light leading-[0.82] tracking-normal sm:text-7xl md:text-[6.8rem] lg:text-[7.625rem]">
-                    Evidence,
-                    <span className="block italic">before answers.</span>
+                    Find the signal.
+                    <span className="block italic">Build from it.</span>
                   </h2>
                 </ScrollReveal>
               </div>
               <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
                 <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
-                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and an <a href="/research/technical-seo" className="border-b border-ink/24 hover:border-ink">evidence-backed technical SEO diagnostic library</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
+                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl-analysis software, and a <a href="/research/technical-seo" className="border-b border-ink/24 hover:border-ink">technical SEO diagnostic library</a> for understanding complex sites. Atlas compares source and rendered pages; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns the strongest findings into prioritized repairs.
                 </p>
               </ScrollReveal>
             </div>
 
             <div className="grid border-y border-ink/14 md:grid-cols-3">
               {[
-                ['01', 'Observe', 'Capture URL records, source and rendered states, links, directives, and provider failures without cleaning away the gaps.'],
-                ['02', 'Separate', 'Keep observations, derived findings, assumptions, and measurement gaps in distinct fields.'],
-                ['03', 'Ship', 'Export a decision with its source, owner, acceptance check, and rerun path.'],
+                ['01', 'Observe', 'Map URLs, source and rendered pages, links, directives, and failed requests without hiding what could not be measured.'],
+                ['02', 'Separate', 'Distinguish measured conditions, analysis, assumptions, and unknowns before assigning priority.'],
+                ['03', 'Act', 'Translate the strongest findings into owned fixes, then verify the changed system after release.'],
               ].map(([num, title, copy], index) => (
                 <div key={num} className="min-h-52 border-b border-ink/14 py-7 last:border-b-0 md:border-b-0 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0 md:last:pr-0">
                   <ScrollReveal delay={index * 0.08} blur={false} className="grid h-full min-h-40 content-between">
@@ -653,19 +659,19 @@ function HomePage() {
                tabIndex={0}
              >
            {/* Project 01 */}
-           <div data-selected-work-step="0" className="selected-work-step relative order-1 mx-auto mb-0 w-full max-w-[1800px] px-4 pt-8 md:mb-40 md:px-16 md:pt-12">
-             <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
-               <div className="flex flex-col gap-1 text-[10px]">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
-                  <span className="opacity-60">Technical SEO Audit Software</span>
-               </div>
-               <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT</span>
-                  <span className="opacity-60"><ScrambleText text="Atlas SEO Audit Console" trigger="once" /></span>
-               </div>
-             </div>
-             
-             <div className="grid grid-cols-1 items-stretch gap-0 pt-16 md:grid-cols-12 md:gap-8 md:pt-24">
+            <div data-selected-work-step="0" className="selected-work-step relative mx-auto mb-0 w-full max-w-[1800px] px-4 pt-8 md:mb-40 md:px-16 md:pt-12">
+              <div className="sticky top-[66px] md:top-[74px] z-20 -mx-4 px-4 md:-mx-16 md:px-16 py-3.5 bg-ink/95 backdrop-blur-md border-b border-canvas/14 flex justify-between items-center w-full font-sans uppercase tracking-widest text-canvas/70">
+                <div className="flex flex-col gap-1 text-[10px]">
+                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
+                   <span className="opacity-60">Technical SEO Audit Software</span>
+                </div>
+                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
+                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT</span>
+                   <span className="opacity-60"><ScrambleText text="Atlas SEO Audit Console" trigger="once" /></span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 items-stretch gap-0 pt-8 md:grid-cols-12 md:gap-8 md:pt-12">
                
                {/* Left Column Text */}
                <div className="relative z-10 order-2 mt-6 flex flex-col pt-6 md:order-1 md:col-span-4 md:mt-0 md:pt-0 md:pr-8 lg:pr-16">
@@ -675,7 +681,7 @@ function HomePage() {
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="mb-8 max-w-sm font-serif text-xl italic leading-tight normal-case tracking-normal text-canvas/90 md:mb-0 md:text-3xl lg:text-4xl">
-		                       A crawl and evidence system that preserves raw and rendered pages, tests indexation, canonicals, links, and structured data, then exports reviewable findings.
+		                       Atlas maps raw and rendered pages, tests indexation, canonicals, links, and structured data, then turns the results into a prioritized repair plan.
                      </p>
                    </ScrollReveal>
                    
@@ -731,21 +737,47 @@ function HomePage() {
                
              </div>
             </div>
+           {/* Project 02 - Void */}
+           <a href="/method" id="work-link-void" data-selected-work-step="1" className="selected-work-step group relative my-0 flex min-h-full w-full flex-col items-center justify-center overflow-hidden border-y border-canvas/10 bg-ink px-4 py-16 md:my-28 md:min-h-[68vh] md:px-0 md:py-28">
+              {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
+              <div className="relative z-10 flex flex-col items-center">
+                <ScrollReveal>
+                  <span className="text-canvas font-serif italic text-2xl md:text-4xl mb-8 opacity-30 group-hover:opacity-100 transition-opacity duration-1000">( 02 )</span>
+                </ScrollReveal>
+                <ScrollReveal delay={0.2} blur={false}>
+                  <h4
+	                    style={{ viewTransitionName: 'void-title' } as CSSProperties}
+                    className="text-[5rem] md:text-[8rem] lg:text-[10rem] leading-none font-serif tracking-normal uppercase text-canvas pb-8 opacity-90 transition-opacity duration-1000"
+                  >
+                    <ScrambleText text="VOID" trigger="hover" />
+                  </h4>
+                </ScrollReveal>
+                <ScrollReveal delay={0.4}>
+	                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">I use Void Agency to turn crawl diagnostics into fixed-scope technical SEO audits: URL-level findings, implementation notes, analytics review, owners, and rerun checks.</p>
+                </ScrollReveal>
+                <ScrollReveal delay={0.6}>
+                  <MagneticButton className="mt-16">
+                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Technical SEO Audit Services</span>
+                  </MagneticButton>
+                </ScrollReveal>
+              </div>
+           </a>
+
                     {/* PROJECT 03 - TEXAS TOLL-ROAD RESEARCH */}
-         <div data-selected-work-step="2" className="selected-work-step relative order-3 w-full bg-ink py-0 md:py-16" id="systems">
+         <div data-selected-work-step="2" className="selected-work-step relative w-full bg-ink py-0 md:py-16" id="systems">
             <div className="relative mx-auto mb-0 w-full max-w-[1800px] px-4 pt-8 md:mb-32 md:px-16 md:pt-12">
-             <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
-               <div className="flex flex-col gap-1 text-[10px]">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 03</span>
-                  <span className="opacity-60">Infrastructure Ownership Research</span>
-               </div>
-               <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PUBLISHED RESEARCH</span>
-                  <span className="opacity-60">Ownership, Operators, Economics</span>
-               </div>
-             </div>
-             
-             <div className="grid grid-cols-1 items-stretch gap-0 pb-0 pt-16 md:grid-cols-12 md:gap-8 md:pb-24 md:pt-20">
+              <div className="sticky top-[66px] md:top-[74px] z-20 -mx-4 px-4 md:-mx-16 md:px-16 py-3.5 bg-ink/95 backdrop-blur-md border-b border-canvas/14 flex justify-between items-center w-full font-sans uppercase tracking-widest text-canvas/70">
+                <div className="flex flex-col gap-1 text-[10px]">
+                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 03</span>
+                   <span className="opacity-60">Infrastructure Ownership Research</span>
+                </div>
+                <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
+                   <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PUBLISHED RESEARCH</span>
+                   <span className="opacity-60">Ownership, Operators, Economics</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 items-stretch gap-0 pb-0 pt-8 md:grid-cols-12 md:gap-8 md:pb-24 md:pt-12">
                
                {/* Left Column Canvas */}
                <a href="/markets/who-owns-texas-toll-roads" id="work-link-markets" className="group relative block h-[42svh] min-h-72 origin-left overflow-hidden border border-canvas/20 md:col-span-8 md:h-[78vh]">
@@ -774,7 +806,7 @@ function HomePage() {
                    
                    <ScrollReveal delay={0.2} blur={false}>
                      <p className="mb-8 max-w-sm font-serif text-xl italic leading-tight normal-case tracking-normal text-canvas/90 md:mb-0 md:text-3xl lg:text-4xl">
-                        A source-led map of who owns Texas toll roads, who controls revenue, who gets paid first, and how finite concessions can be valued.
+                        A map of who owns Texas toll roads, who controls revenue, who gets paid first, and how finite concessions can be valued.
                      </p>
                    </ScrollReveal>
                    
@@ -788,7 +820,7 @@ function HomePage() {
                         </div>
                         <div className="flex justify-between w-full">
                           <span className="text-left opacity-60">Output</span>
-                          <span className="text-right text-canvas">Source Ledger, Tables, DCF</span>
+                          <span className="text-right text-canvas">Ownership Model, Tables, DCF</span>
                         </div>
                      </div>
                    </ScrollReveal>
@@ -799,31 +831,6 @@ function HomePage() {
            </div>
          </div>
            
-           {/* Project 02 - Void */}
-           <a href="/method" id="work-link-void" data-selected-work-step="1" className="selected-work-step group relative order-2 my-0 flex min-h-full w-full flex-col items-center justify-center overflow-hidden border-y border-canvas/10 bg-ink px-4 py-16 md:my-28 md:min-h-[68vh] md:px-0 md:py-28">
-              {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
-              <div className="relative z-10 flex flex-col items-center">
-                <ScrollReveal>
-                  <span className="text-canvas font-serif italic text-2xl md:text-4xl mb-8 opacity-30 group-hover:opacity-100 transition-opacity duration-1000">( 02 )</span>
-                </ScrollReveal>
-                <ScrollReveal delay={0.2} blur={false}>
-                  <h4 
-	                    style={{ viewTransitionName: 'void-title' } as CSSProperties}
-                    className="text-[5rem] md:text-[8rem] lg:text-[10rem] leading-none font-serif tracking-normal uppercase text-canvas pb-8 opacity-90 transition-opacity duration-1000"
-                  >
-                    <ScrambleText text="VOID" trigger="hover" />
-                  </h4>
-                </ScrollReveal>
-                <ScrollReveal delay={0.4}>
-	                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">I use Void Agency to turn crawl diagnostics into fixed-scope technical SEO audits: URL-level findings, implementation notes, analytics review, owners, and rerun checks.</p>
-                </ScrollReveal>
-                <ScrollReveal delay={0.6}>
-                  <MagneticButton className="mt-16">
-                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Technical SEO Audit Services</span>
-                  </MagneticButton>
-                </ScrollReveal>
-              </div>
-           </a>
              </div>
 
              <div className="selected-works__guide-status md:hidden" aria-live="polite" aria-atomic="true">
@@ -856,10 +863,10 @@ function HomePage() {
                  {homeDisciplineItems.map((item, i) => (
                     <div key={item.num}>
                       <ScrollReveal delay={i % 2 === 0 ? 0.2 : 0.4} blur={false}>
-                        <motion.div 
+                        <motion.div
                           initial="initial"
                           whileHover="hover"
-                          className="relative overflow-hidden flex flex-col border-t border-ink/20 pt-8 transition-opacity duration-500 hover:!opacity-100 group-hover:opacity-20 group/discipline min-h-[220px]" 
+                          className="relative overflow-hidden flex flex-col border-t border-ink/20 pt-8 transition-opacity duration-500 hover:!opacity-100 group-hover:opacity-50 group/discipline min-h-[220px]"
                           style={{ perspective: 1000 }}
                         >
                           <div className="relative z-10 flex flex-col pointer-events-none w-full">
@@ -1106,13 +1113,13 @@ function HomePage() {
                               />
 
                               {/* Micro labels */}
-                              <text x="115" y="103" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[ENTITY]</text>
-                              <text x="50" y="145" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[CONTEXT]</text>
-                              <text x="85" y="50" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[REF]</text>
+                              <text x="115" y="103" className="fill-ink/30 font-sans text-[9px] tracking-widest uppercase pointer-events-none select-none">[ENTITY]</text>
+                              <text x="50" y="145" className="fill-ink/30 font-sans text-[9px] tracking-widest uppercase pointer-events-none select-none">[CONTEXT]</text>
+                              <text x="85" y="50" className="fill-ink/30 font-sans text-[9px] tracking-widest uppercase pointer-events-none select-none">[REF]</text>
                             </svg>
                           )}
 
-                          {item.num === '03' && (
+                          {item.num === '04' && (
                             <svg
                               className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
                               viewBox="0 0 200 200"
@@ -1200,11 +1207,11 @@ function HomePage() {
                                 />
                               </g>
 
-                              <text x="145" y="150" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[DATA_SET]</text>
+                              <text x="140" y="150" className="fill-ink/30 font-sans text-[9px] tracking-widest uppercase pointer-events-none select-none">[DATA_SET]</text>
                             </svg>
                           )}
 
-                          {item.num === '04' && (
+                          {item.num === '03' && (
                             <svg
                               className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
                               viewBox="0 0 200 200"
@@ -1271,7 +1278,7 @@ function HomePage() {
                               />
 
                               {/* Pixel Resolution Label */}
-                              <text x="25" y="170" className="fill-ink/30 font-sans text-[6px] tracking-widest uppercase pointer-events-none select-none">[W:1920 PX | H:1080 PX]</text>
+                              <text x="25" y="170" className="fill-ink/30 font-sans text-[8.5px] tracking-widest uppercase pointer-events-none select-none">[W:1920 PX | H:1080 PX]</text>
                             </svg>
                           )}
                         </motion.div>

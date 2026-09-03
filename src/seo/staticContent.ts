@@ -9,7 +9,19 @@ import {
 } from '../content/evidenceLists';
 import { getArticleByPath } from '../content/articleRegistry';
 import { isInvestmentMemo, type ArticleResource, type ArticleSection } from '../content/articleModels';
-import { PUBLICATION_CATEGORY_SUMMARY, PUBLICATION_INDEX } from '../content/publicationIndex';
+import {
+  CONTENT_CLUSTERS,
+  getContentClusterByPath,
+  getContentClusterForPublicationPath,
+  getPublicationsForCluster,
+} from '../content/contentClusters';
+import { PUBLICATION_INDEX } from '../content/publicationIndex';
+import {
+  PROJECT_INDEX,
+  PROJECT_SOURCE_RECORD_COUNT,
+  getProjectsForCluster,
+  type ProjectIndexItem,
+} from '../content/projectIndex';
 import {
   getProgrammaticPagesByFamily,
   getProgrammaticSeoHub,
@@ -142,10 +154,10 @@ const methodCaseStudies = [
 ];
 
 const methodDeliverables = [
-  ['URL-level findings', 'A table of affected URLs, observed issue, evidence source, severity, owner, and implementation note.'],
+  ['URL-level findings', 'A table of affected URLs, observed issue, source, severity, owner, and implementation note.'],
   ['Priority repair plan', 'A short order of operations for crawlability, indexation, internal links, page templates, structured data, and conversion paths.'],
-  ['Evidence appendix', 'Crawl rows, screenshots or rendered observations where useful, sitemap/robots notes, and analytics references when access is available.'],
-  ['Rerun checklist', 'The specific checks to run after fixes ship so the team can separate implementation completion from actual search movement.'],
+  ['Source appendix', 'Crawl rows, screenshots or rendered observations where useful, sitemap/robots notes, and analytics references when access is available.'],
+  ['Verification checklist', 'The specific checks to run after fixes ship so the team can separate implementation completion from actual search movement.'],
 ];
 
 const methodTimeline = [
@@ -181,7 +193,7 @@ const austinBuyerFit = [
 const austinDeliverables = [
   'A short URL-level issue list with observed fields, affected pages, severity, and implementation notes.',
   'A crawlability and source-clarity review covering robots.txt, sitemap, canonicals, structured data, internal links, and page copy.',
-  'A local-intent map that pairs each priority query family with the ranking URL, proof block, CTA path, and measurement field.',
+  'A local-intent map that pairs each priority query family with the ranking URL, credibility block, CTA path, and measurement field.',
   'A practical next-step order for founders, marketers, or developers, with unsupported ranking and traffic claims left out.',
 ];
 
@@ -189,7 +201,7 @@ const austinAuditCoverage = [
   ['Crawlability and indexation audit', 'Review robots.txt, XML sitemaps, status codes, redirects, canonicals, noindex rules, crawl paths, and priority Austin service pages.'],
   ['JavaScript rendering and templates', 'Compare raw and rendered HTML and identify content, links, metadata, or structured data that depend on client-side rendering.'],
   ['Site architecture and internal links', 'Map crawl depth, orphan risk, navigation, anchor text, service-page relationships, and internal links supporting local commercial intent.'],
-  ['Structured data and AI search readiness', 'Review entity clarity, schema, public source files, crawler access, and the evidence available to search engines and AI answer systems.'],
+  ['Structured data and AI search readiness', 'Review entity clarity, schema, public source files, crawler access, and the information available to search engines and AI answer systems.'],
 ];
 
 const austinWhenNotToHire = [
@@ -201,7 +213,7 @@ const austinWhenNotToHire = [
 const homeDisciplines = [
   ['Technical SEO Systems', 'Crawl architecture, indexability, internal links, page templates, metadata, structured data, performance inputs, and issue logic. Built for diagnosis, not vague scoring.'],
   ['Search Visibility', 'Crawler access, entity clarity, structured data, and pages that explain the work without forcing a reader to guess.'],
-  ['Atlas / Crawl Data', 'URL discovery, raw and rendered HTML, canonical state, internal-link maps, structured-data checks, and report-ready audit notes.'],
+  ['Atlas / Crawl Intelligence', 'URL discovery, raw and rendered HTML, canonical analysis, internal-link maps, structured-data checks, and prioritized audit findings.'],
   ['Markets Research', 'Finance research, valuation assumptions, market structure, operating analysis, dashboards, and decision tools built around inspectable assumptions.'],
   ['Product + Web Systems', 'React interfaces, portfolio pages, audit dashboards, product research, and written explanations that make the work easier to inspect.'],
 ];
@@ -276,7 +288,7 @@ function methodCaseStudyCards() {
 
 function atlasSampleTableStaticHtml() {
   return `<table>
-          <thead><tr><th>URL</th><th>Status</th><th>Indexability</th><th>Depth</th><th>Inlinks</th><th>Outlinks</th><th>Canonical</th><th>Issue</th><th>Evidence note</th></tr></thead>
+          <thead><tr><th>URL</th><th>Status</th><th>Indexability</th><th>Depth</th><th>Inlinks</th><th>Outlinks</th><th>Canonical</th><th>Issue</th><th>Source note</th></tr></thead>
           <tbody>
           ${atlasSampleRows
             .map(
@@ -310,25 +322,45 @@ function articleShell(title: string, intro: string, body: string) {
       </article>`;
 }
 
+function projectLedgerStaticHtml(projects: readonly ProjectIndexItem[]) {
+  return projects.map((project) => {
+    const title = project.href
+      ? `<a href="${escapeHtml(project.href)}">${escapeHtml(project.title)}</a>`
+      : escapeHtml(project.title);
+
+    return `<article id="project-${escapeHtml(project.id)}">
+          <h3>${title}</h3>
+          <p><strong>Ownership:</strong> ${escapeHtml(project.ownershipLabel)}. <strong>Status:</strong> ${escapeHtml(project.statusLabel)}. <strong>Visibility:</strong> ${escapeHtml(project.visibilityLabel)}.</p>
+          <p>${escapeHtml(project.summary)}</p>
+          <p><strong>Named project records:</strong> ${escapeHtml(project.sourceProjects.join(', '))}.</p>
+          <p><strong>Scope and limits:</strong> ${escapeHtml(project.evidenceBoundary)}</p>
+        </article>`;
+  }).join('\n        ');
+}
+
 function articleSearchBriefStaticHtml(path: string, options: { includeDirectAnswer?: boolean } = {}) {
   const target = getArticleSearchTarget(path);
-  if (!target) return '';
+  const cluster = getContentClusterForPublicationPath(path);
+  if (!target && !cluster) return '';
   const includeDirectAnswer = options.includeDirectAnswer ?? true;
+  const relatedLinks = target?.relatedPaths.map((relatedPath) => ({
+    href: relatedPath,
+    label: getArticleRelatedLinkLabel(path, relatedPath),
+  })) ?? [];
+
+  if (cluster && !relatedLinks.some((link) => link.href === cluster.path)) {
+    relatedLinks.unshift({ href: cluster.path, label: `${cluster.shortTitle} research cluster` });
+  }
 
   return `<section ${includeDirectAnswer ? 'aria-labelledby="direct-answer-title"' : 'aria-label="Article research brief"'}>
-        ${includeDirectAnswer ? `<h2 id="direct-answer-title">Direct answer: ${escapeHtml(target.primaryQuery)}</h2>
+        ${includeDirectAnswer && target ? `<h2 id="direct-answer-title">Direct answer: ${escapeHtml(target.primaryQuery)}</h2>
         <p>${escapeHtml(target.directAnswer)}</p>` : ''}
-        <h3>Original research artifact</h3>
+        ${target ? `<h3>Research basis</h3>
         <p>${escapeHtml(target.originalArtifact)}</p>
         <h3>What this page adds</h3>
-        <p>${escapeHtml(target.serpGap)}</p>
+        <p>${escapeHtml(target.serpGap)}</p>` : ''}
         <h3>Related research</h3>
-        ${linkList(target.relatedPaths.map((relatedPath) => {
-          return {
-            href: relatedPath,
-            label: getArticleRelatedLinkLabel(path, relatedPath),
-          };
-        }))}
+        ${linkList(relatedLinks)}
       </section>`;
 }
 
@@ -357,16 +389,17 @@ function texasTollOwnershipLookupStaticHtml() {
 
 function viralBenchArticleStaticHtml() {
   const evidenceLayerHeading = '<h2 id="the-evidence-layer-comes-before-the-codex-layer">The evidence layer comes before the Codex layer</h2>';
+  const measurementLayerHeading = '<h2 id="the-evidence-layer-comes-before-the-codex-layer">Measurement comes before autonomous improvement</h2>';
   const architectureFigure = `<figure>
-          <img src="/images/viralbench-codex-harness.svg" width="1200" height="630" alt="Architecture showing ViralBench as a live marketing-agent loop, an immutable evidence and evaluation layer, and Codex improving the system through isolated experiments." />
-          <figcaption>ViralBench inner marketing-agent loop, evidence and evaluation layer, and Codex outer engineering loop.</figcaption>
+          <img src="/images/viralbench-codex-harness.svg" width="1200" height="630" alt="Architecture showing ViralBench as a live marketing-agent loop, an immutable measurement and evaluation layer, and Codex improving the system through isolated experiments." />
+          <figcaption>ViralBench inner marketing-agent loop, measurement and evaluation layer, and Codex outer engineering loop.</figcaption>
         </figure>`;
   const inlineFigure = `<figure>
           <img src="${VIRALBENCH_ARTICLE_INLINE_IMAGE}" width="1672" height="941" alt="An abstract monochrome room filled with speech bubbles connected by fine lines and flowing data-like strands." />
         </figure>`;
   const articleHtml = markdownToHtml(canonicalizeKnownExternalLinks(VIRALBENCH_ARTICLE_MARKDOWN)).replace(
     evidenceLayerHeading,
-    `${architectureFigure}\n        ${evidenceLayerHeading}\n        ${inlineFigure}`,
+    `${architectureFigure}\n        ${measurementLayerHeading}\n        ${inlineFigure}`,
   );
 
   return `<figure>
@@ -374,8 +407,8 @@ function viralBenchArticleStaticHtml() {
         </figure>
         ${articleHtml}
         <h2 id="article-conclusion-title">The harness determines whether the agent can learn</h2>
-        <p>ViralBench supplies a live multimodal environment; the durable system is the evidence layer that makes each change replayable, reviewable, and independently evaluated before any promotion.</p>
-        <h2>Source ledger</h2>
+        <p>ViralBench supplies a live multimodal environment; the durable advantage is a measurement layer that makes each change replayable, reviewable, and independently evaluated before promotion.</p>
+        <h2>Sources</h2>
         ${linkList([
           { href: 'https://viralbench.ai/', label: 'ViralBench live methodology' },
           { href: 'https://github.com/JibranK12345/Viral-Bench', label: 'ViralBench public repository' },
@@ -426,7 +459,7 @@ function articleSectionsStaticHtml(sections: ArticleSection[]) {
 function articleResourcesStaticHtml(resources: ArticleResource[]) {
   return `<section aria-labelledby="article-downloads-title">
         <h2 id="article-downloads-title">Downloads</h2>
-        <p>The web article is the reading layer. These files preserve the supplied source package and model.</p>
+        <p>The web article is the reading edition. These downloads preserve the supplied source files and model.</p>
         <ul>${resources.map((resource) => `<li>
           <a href="${escapeHtml(resource.href)}">${escapeHtml(resource.label)} (${escapeHtml(resource.format)})</a>
           — ${escapeHtml(resource.description)}
@@ -487,11 +520,11 @@ function texasTollArticleStaticHtml() {
         </table>
         <p>The model holds margins constant and simplifies maintenance, sharing, cash tax, and handback reserves. It omits a levered debt-service schedule, refinancing, swaps, working capital, tax basis, and explicit growth capex. SH 130 inputs are analyst estimates.</p>
         <h2 id="what-remains-unknown">What remains unknown</h2>
-        <p>Missing cap-table rights, debt schedules, or current financial statements are measurement gaps, not evidence for or against the asset.</p>
+        <p>Missing cap-table rights, debt schedules, or current financial statements do not support a conclusion for or against the asset.</p>
         ${factGaps}
         <h2 id="frequently-asked-questions">Frequently asked questions</h2>
         ${faqs}
-        <h2 id="source-ledger">Source ledger</h2>
+        <h2 id="source-ledger">Sources</h2>
         <ol>${sources}</ol>
         <h2 id="article-conclusion-title">${escapeHtml(TEXAS_TOLL_ARTICLE_CONCLUSION.title)}</h2>
         <p>${escapeHtml(TEXAS_TOLL_ARTICLE_CONCLUSION.content)}</p>
@@ -519,7 +552,7 @@ function aiManagersArticleStaticHtml() {
         <p><strong>Agent authority:</strong> ${escapeHtml(item.authority)}</p>
         <p><strong>Human layer:</strong> ${escapeHtml(item.humanLayer)}</p>
         <p><strong>Economics:</strong> ${escapeHtml(item.economics)}</p>
-        <p><strong>Evidence limit:</strong> ${escapeHtml(item.caveat)}</p>
+        <p><strong>Source limit:</strong> ${escapeHtml(item.caveat)}</p>
         <p><a href="${item.href}">Open case source</a></p>
       </li>`,
   ).join('\n        ');
@@ -543,12 +576,12 @@ function aiManagersArticleStaticHtml() {
       <h2>${escapeHtml(AI_MANAGERS_ARTICLE_DISPLAY_TITLE)}</h2>
       <p><strong>Short answer:</strong> AI can run the next action. It still cannot reliably preserve the company.</p>
       ${articleSearchBriefStaticHtml(AI_MANAGERS_ARTICLE_PATH)}
-      <p><strong>Evidence boundary:</strong> Operator dashboards are unaudited. Simulations are not businesses. Human legal, financial, physical, and supervisory work remains part of every live case.</p>
+      <p><strong>Scope and limits:</strong> Operator dashboards are unaudited. Simulations are not businesses. Human legal, financial, physical, and supervisory work remains part of every live case.</p>
       ${markdownToHtml(AI_MANAGERS_ARTICLE_LEDE)}
       ${sections}
       <section aria-labelledby="case-field-title">
         <h2 id="case-field-title">Explore all 30 reviewed cases</h2>
-        <p>Grades describe evidence quality and operating reality, not commercial success.</p>
+        <p>Grades describe source quality and operating reality, not commercial success.</p>
         <ol>${cases}</ol>
       </section>
       <section aria-labelledby="open-questions-title">
@@ -560,7 +593,7 @@ function aiManagersArticleStaticHtml() {
         ${faqs}
       </section>
       <section aria-labelledby="source-ledger-title">
-        <h2 id="source-ledger-title">Source ledger</h2>
+        <h2 id="source-ledger-title">Sources</h2>
         <ol>${sources}</ol>
       </section>
       <section id="article-conclusion" aria-labelledby="article-conclusion-title">
@@ -571,6 +604,27 @@ function aiManagersArticleStaticHtml() {
 }
 
 export function buildRouteStaticHtml(route: SeoRoute) {
+  const researchCluster = route.section === 'research-cluster'
+    ? getContentClusterByPath(route.path)
+    : undefined;
+  if (researchCluster) {
+    const publications = getPublicationsForCluster(researchCluster);
+    const projects = getProjectsForCluster(researchCluster.id);
+
+    return articleShell(
+      researchCluster.title,
+      researchCluster.directAnswer,
+      `<h2>Questions in this cluster</h2>
+        <ol>${researchCluster.questions.map((question) => `<li>${escapeHtml(question)}</li>`).join('')}</ol>
+        <h2>${publications.length} published records</h2>
+        ${publications.map((item) => `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.description)}</p>`).join('\n        ')}
+        <h2>${projects.length} connected project families</h2>
+        ${projectLedgerStaticHtml(projects)}
+        <h2>Explore all research clusters</h2>
+        ${linkList(CONTENT_CLUSTERS.map((cluster) => ({ label: cluster.title, href: cluster.path, description: cluster.description })))}`,
+    );
+  }
+
   const programmaticHub = getProgrammaticSeoHub(route.path);
   if (programmaticHub) {
     const pages = programmaticHub.family === 'all'
@@ -584,13 +638,16 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       programmaticHub.title,
       programmaticHub.directAnswer,
       `${collectionLinks}
-        <h2>${pages.length} evidence-backed guides</h2>
+        <h2>${pages.length} technical guides</h2>
         ${pages.map((page) => `<h3><a href="${page.path}">${escapeHtml(page.title)}</a></h3><p>${escapeHtml(page.description)}</p>`).join('\n        ')}
+        ${programmaticHub.family === 'all' ? `<h2>Technical SEO Studies and Public Artifacts</h2>${getPublicationsForCluster('technical-seo').filter((item) => item.href !== programmaticHub.path).map((item) => `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.description)}</p>`).join('\n        ')}` : ''}
+        ${programmaticHub.family === 'all' ? `<h2>Connected Project Families</h2>${projectLedgerStaticHtml(getProjectsForCluster('technical-seo'))}` : ''}
         <h2>Implementation boundaries</h2>
         ${linkList([
           { label: 'Read the technical SEO audit method', href: '/method', description: 'Service-process intent remains on the method route.' },
           { label: 'Contact Sulayman Bowles', href: '/contact', description: 'Conversion and audit-intake endpoint.' },
-          { label: 'Return to the research archive', href: '/research', description: 'Research notes and public evidence.' },
+          { label: 'Return to the research archive', href: '/research', description: 'Research articles, studies, and methods.' },
+          ...CONTENT_CLUSTERS.filter((cluster) => cluster.path !== programmaticHub.path).map((cluster) => ({ label: cluster.title, href: cluster.path, description: cluster.description })),
         ])}`,
     );
   }
@@ -603,18 +660,18 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       programmaticPage.title,
       programmaticPage.directAnswer,
       `<section aria-labelledby="artifact-title">
-        <h2 id="artifact-title">Atlas-compatible evidence fixture for ${escapeHtml(programmaticPage.primaryQuery)}</h2>
+        <h2 id="artifact-title">Atlas-compatible test case for ${escapeHtml(programmaticPage.primaryQuery)}</h2>
         <p><strong>${escapeHtml(programmaticPage.evidenceArtifact.label)}.</strong> ${escapeHtml(programmaticPage.evidenceArtifact.description)}</p>
-        <p>Fixture fields: ${escapeHtml(programmaticPage.evidenceArtifact.fields.map((field) => `${field} ${programmaticPage.slug.replaceAll('-', '').toUpperCase()}`).join(', '))}.</p>
+        <p>Example fields: ${escapeHtml(programmaticPage.evidenceArtifact.fields.map((field) => `${field} ${programmaticPage.slug.replaceAll('-', '').toUpperCase()}`).join(', '))}.</p>
       </section>
       ${articleSectionsStaticHtml(programmaticPage.sections)}
       <section aria-labelledby="sources-title">
-        <h2 id="sources-title">Source ledger</h2>
+        <h2 id="sources-title">Sources</h2>
         ${linkList(programmaticPage.sources.map((source) => ({ label: source.label, href: source.href, description: `Last verified ${source.lastVerified}.` })))}
       </section>
       <section aria-labelledby="related-title">
         <h2 id="related-title">Related diagnostics for ${escapeHtml(programmaticPage.primaryQuery)}</h2>
-        <p>Continue the ${escapeHtml(programmaticPage.primaryQuery)} investigation through its family, evidence foundation, service method, or conversion endpoint.</p>
+        <p>Continue the ${escapeHtml(programmaticPage.primaryQuery)} investigation through its guide family, technical basis, service method, or contact path.</p>
         ${linkList([
           { label: `${programmaticPage.family} guide collection`, href: familyHub },
           { label: 'Technical SEO diagnostic library', href: '/research/technical-seo' },
@@ -629,10 +686,10 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/research') {
     return articleShell(
       'Research Notes',
-      'Selected notes on search systems, crawlability, Atlas, public data, and markets work.',
-      `<h2>Four Research Categories</h2>
-        ${definitionCards(PUBLICATION_CATEGORY_SUMMARY.map(([title, description]) => [title, description]))}
-        <h2>${PUBLICATION_INDEX.length} Notes and Artifacts</h2>
+      'Research on search systems, crawlability, Atlas, public data, infrastructure, and markets.',
+      `<h2>Four Research Clusters</h2>
+        ${CONTENT_CLUSTERS.map((cluster) => `<h3><a href="${cluster.path}">${escapeHtml(cluster.title)}</a></h3><p>${escapeHtml(cluster.description)}</p>`).join('\n        ')}
+        <h2>${PUBLICATION_INDEX.length} Articles, Studies, and Guides</h2>
         ${PUBLICATION_INDEX.map((item) => `<h3><a href="${item.href}">${escapeHtml(item.title)}</a></h3><p>${escapeHtml(item.description)}</p>`).join('\n        ')}
         <h2>From Research to Implementation</h2>
         ${linkList([...researchContextLinks])}`,
@@ -652,24 +709,24 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/') {
     return articleShell(
       'Sulayman Bowles',
-      'Technical SEO, AI product, systems, and source-led research from Sulayman Bowles.',
+      'Technical SEO, AI product, systems, and markets research from Sulayman Bowles.',
       `<h2>Technical SEO, AI product, systems, and investment research.</h2>
-        <p>UT Austin student working in AI product at Chegg, running technical SEO consulting through Void Agency, building Atlas audit software, and publishing source-led research.</p>
-        <h2>Start with the proof</h2>
+        <p>UT Austin student working in AI product at Chegg, running technical SEO consulting through Void Agency, building Atlas audit software, and writing about technology, infrastructure, and markets.</p>
+        <h2>Selected work</h2>
         <h3><a href="/research/ai-systems/the-first-ai-managers">The First AI Managers</a></h3>
-        <p>A source-led review of the operational realities behind businesses that claim AI management.</p>
+        <p>A 30-case review of what businesses mean when they claim to be managed by AI.</p>
         <h3><a href="/atlas">Atlas technical SEO audit software</a></h3>
-        <p>A technical SEO crawler and evidence system that preserves raw and rendered pages, tests indexation, canonicals, links, and structured data, then exports reviewable findings.</p>
+        <p>Technical SEO software that compares raw and rendered pages, tests indexation, canonicals, links, and structured data, then turns the results into prioritized repairs.</p>
         <h3><a href="/method">Technical SEO audit services</a></h3>
-        <p>A fixed-scope audit process for crawlability, indexation, rendering, internal links, structured data, analytics, implementation, and rerun checks.</p>
+        <p>A fixed-scope audit process for crawlability, indexation, rendering, internal links, structured data, analytics, implementation, and post-change checks.</p>
         <h3><a href="/austin-technical-seo">Austin technical SEO consultant</a></h3>
-        <p>Local technical SEO audits for Austin teams that need service pages, crawl paths, evidence, and implementation priorities reviewed.</p>
+        <p>Local technical SEO audits for Austin teams that need service pages, crawl paths, and implementation priorities reviewed.</p>
         <h3><a href="/research">Technical SEO research</a></h3>
-        <p>Source-led notes on crawlability, crawler policy, public search data, canonical identity, AI systems, and evidence limits.</p>
+        <p>Research on crawlability, crawler policy, public search data, canonical identity, AI systems, infrastructure, and markets.</p>
         <h3><a href="/research/technical-seo">Technical SEO diagnostic library</a></h3>
-        <p>Evidence-backed issue guides, platform playbooks, and audit checklists with reproducible repair gates.</p>
+        <p>Issue guides, platform playbooks, and audit checklists with reproducible repair checks.</p>
         <h3><a href="/markets/who-owns-texas-toll-roads">Texas Toll-Road Ownership Map</a></h3>
-        <p>Source-led infrastructure research on public ownership, private concessions, operators, debt claims, revenue rights, and missing facts.</p>
+        <p>Infrastructure research on public ownership, private concessions, operators, debt claims, revenue rights, and missing facts.</p>
         <h2>How I work</h2>
         <p>Collect the source material, preserve the observed state, separate interpretation from fact, name the owner, and define the next check.</p>
         <h2>Public Routes</h2>
@@ -680,8 +737,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/work') {
     return articleShell(
       'Selected Work',
-      'A technical SEO portfolio and AI systems portfolio with six public artifacts, explicit ownership, implementation details, constraints, and inspectable evidence.',
-      `<h2>Six Public Artifacts</h2>
+      `A complete project ledger with ${PROJECT_INDEX.length} families, ${PROJECT_SOURCE_RECORD_COUNT} named project records, and six flagship case studies.`,
+      `<h2>Six Flagship Case Studies</h2>
         ${workProofCards
           .map(
             (item) =>
@@ -695,9 +752,12 @@ export function buildRouteStaticHtml(route: SeoRoute) {
               <p><a href="${item.evidenceHref}">${escapeHtml(item.evidenceLabel)}</a></p>`,
           )
           .join('\n        ')}
-        <h2>Supporting Links</h2>
+        <h2>${PROJECT_INDEX.length} Project Families</h2>
+        <p>${PROJECT_SOURCE_RECORD_COUNT} named project records remain visible inside their families. Duplicate clones, generated worktrees, empty repositories, support folders, and undocumented placeholders are excluded rather than counted as separate projects.</p>
+        ${CONTENT_CLUSTERS.map((cluster) => `<section><h3><a href="${cluster.path}">${escapeHtml(cluster.title)}</a></h3>${projectLedgerStaticHtml(getProjectsForCluster(cluster.id))}</section>`).join('\n        ')}
+        <h2>Methods and Working Material</h2>
         ${linkCards(contextualProofLinks)}
-        <h2>Evidence Before Intake</h2>
+        <h2>Before We Talk</h2>
         ${buyerDecisionEvidence
           .map(
             (item) =>
@@ -712,28 +772,28 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/atlas') {
     return articleShell(
       'Atlas SEO Audit Console',
-      'Technical SEO audit software and crawl-analysis system for reviewable site evidence.',
-      `<p>Atlas is technical SEO audit software that preserves page-level crawl evidence—HTTP responses, raw and rendered HTML, directives, canonicals, internal links, structured data, and fetch state—before a finding enters review. It is not a generic content-writing product.</p>
+      'Technical SEO audit software for crawl analysis, site architecture, and prioritized repairs.',
+      `<p>Atlas is technical SEO software that connects HTTP responses, raw and rendered HTML, directives, canonicals, internal links, structured data, and fetch state to the findings they produce. It is not a generic content-writing product.</p>
         <h2>Beyond Basic Crawls</h2>
-        <p>The system connects observations to URL, run, source, and review state; stores crawl history; and produces structured exports. Derived findings stay distinguishable from observations and measurement gaps.</p>
+        <p>The system connects observations to URL, run, source, and review state; stores crawl history; and produces structured exports. Analysis stays distinguishable from direct observations and measurement gaps.</p>
         <h2>Search Visibility Aware</h2>
-        <p>Atlas evaluates content and structure for entity clarity, source signals, freshness, and crawlability.</p>
+        <p>Atlas evaluates content and structure for entity clarity, citations, freshness, and crawlability.</p>
         <h2>Built for Operators</h2>
-        <p>Designed for SEO operators and technical teams who need reliable source material, clear logic, and inspectable outputs to drive decisions.</p>
+        <p>Designed for SEO operators and technical teams who need reliable source material, clear reasoning, and useful outputs to drive decisions.</p>
         <h2>The Atlas Process</h2>
         ${definitionCards(atlasProcess)}
         <h2>What Atlas SEO Audit Console Checks</h2>
         ${evidenceLinkCards(atlasCheckItems)}
         <h2>Data and Outputs</h2>
-        <p>Structured outputs make crawler observations reviewable, inspectable, and defensible across technical teams.</p>
+        <p>Structured outputs make crawler observations easier to review, challenge, and turn into engineering work.</p>
         ${definitionCards(atlasOutputs)}
         <h2>Capability Status</h2>
         ${definitionCards([
           ['Crawl inventory — Shipped', 'Public sanitized run available.'],
-          ['Evidence ledger — Shipped', 'Observed and interpreted states remain separate.'],
+          ['Finding history — Shipped', 'Observed and interpreted states remain separate.'],
           ['Run persistence and exports — Shipped / partial', 'Technical architecture is documented; public coverage remains bounded.'],
           ['Provider mesh — Prototype', 'Missing provider coverage remains a measurement gap.'],
-          ['Scoring policy — In development', 'The review gate remains authoritative.'],
+          ['Prioritization logic — In development', 'Human review still determines final priority.'],
         ])}
         <h2>Specific Data Handled by Atlas</h2>
         ${evidenceGroupCards()}
@@ -746,7 +806,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'Request an audit', href: '/contact', description: 'Audit intake for technical SEO, analytics, and markets research.' },
         ])}
         <h2>System Intelligence You Can Act On</h2>
-        <p>Atlas turns complexity into inspectable records so operators can decide what matters, what should be fixed, and what source data supports the recommendation.</p>
+        <p>Atlas turns a complex site into a legible model so operators can decide what matters, what should be fixed, and which pages support the recommendation.</p>
         <h2>Internal Links</h2>
         ${linkList(primaryLinks)}`,
     );
@@ -755,9 +815,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/atlas/sample-crawl') {
     return articleShell(
       'Atlas Open-Corpus Demonstration',
-      'A dated, versioned raw-versus-rendered capture from a small open-web corpus, with traceable findings and source exports.',
+      'A dated raw-versus-rendered crawl of a small open-web corpus, with traceable findings and downloadable files.',
       `<p>This is a bounded public demonstration, captured on July 16, 2026 from an open web corpus. It does not represent a client crawl or support claims about rankings, traffic, revenue, or production coverage.</p>
-        <h2>Captured Artifacts</h2>
+        <h2>Download the Sample</h2>
         ${linkList([
           { label: 'Download open-corpus CSV', href: RESEARCH_ASSETS.atlasSampleCsv, description: 'URL-level capture records.' },
           { label: 'Download capture manifest', href: RESEARCH_ASSETS.atlasSampleManifest, description: 'Dated run metadata and claim limits.' },
@@ -780,8 +840,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/method') {
     return articleShell(
       'Technical SEO Audit Services',
-      'Fixed-scope technical SEO audit services from inspectable site evidence to implementation work, owners, and rerun checks.',
-      `<p>Void Agency reviews crawlability, indexation, JavaScript rendering, internal links, structured data, analytics, and implementation constraints. The deliverable is a bounded set of defensible findings and acceptance checks—not a long generic checklist.</p>
+      'Fixed-scope technical SEO audit services from crawl analysis to owned repairs and post-change verification.',
+      `<p>Void Agency reviews crawlability, indexation, JavaScript rendering, internal links, structured data, analytics, and implementation constraints. The deliverable is a short set of well-supported findings and verification steps, not a long generic checklist.</p>
         <h2>Technical SEO Audit Process</h2>
         ${definitionCards(methodColumns)}
         <h2>Deliverables</h2>
@@ -794,7 +854,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${definitionCards(methodExclusions)}
         <section id="worked-finding"><h2>Worked Finding</h2>
         ${definitionCards(auditExampleFindingChain.map((item) => [item.label, item.value]))}</section>
-        <h2>Evidence Links</h2>
+        <h2>Related Work</h2>
         ${linkList([
           { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl' },
           { label: 'Read the worked finding', href: '/method#worked-finding' },
@@ -808,8 +868,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === '/contact') {
     return articleShell(
       'Contact a Technical SEO Consultant',
-      'Direct contact for technical SEO consulting, crawl evidence, analytics, implementation support, validation, and source-backed research.',
-      `<p>I work as a technical SEO consultant on bounded crawlability, indexation, rendering, internal-link, structured-data, analytics, and implementation problems. Typical outputs include URL-level findings, raw/render comparisons, owners, acceptance checks, and a rerun path—not an opaque score or generic audit deck.</p>
+      'Direct contact for technical SEO consulting, crawl analysis, analytics, implementation support, validation, and research.',
+      `<p>I work as a technical SEO consultant on focused crawlability, indexation, rendering, internal-link, structured-data, analytics, and implementation problems. Typical outputs include URL-level findings, raw/render comparisons, clear owners, definitions of done, and post-change checks, not an opaque score or generic audit deck.</p>
         <h2>Good-Fit Technical Work</h2>
         ${definitionCards(contactResponsePaths.map((item) => [item.label, item.description]))}
         <h2>Direct Contact</h2>
@@ -820,7 +880,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>An initial email is most useful when it names the site or product surface, the suspected problem, and the decision the work needs to support.</p>
         ${definitionCards(contactIntakeNotes.map((item) => [item.label, item.description]))}
         <p>Do not include passwords, API keys, payment details, unreleased client data, or production secrets.</p>
-        <h2>Decision Gates</h2>
+        <h2>Scoping Decisions</h2>
         ${definitionCards(contactDecisionProtocol.map((item) => [item.title, `${item.label}. ${item.description}`]))}
         <h2>Buyer Questions</h2>
         ${definitionCards(contactBuyerQuestions.map((item) => [item.question, item.answer]))}
@@ -829,7 +889,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
           { label: 'GitHub', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
           { label: 'Resume', href: '/resume', description: 'Readable profile.' },
-          { label: 'Tech Ledger', href: 'https://sulayman-bowles.tech/', description: 'Technical projects, experiments, and project ledger.' },
+          { label: 'Tech Ledger', href: 'https://sulayman-bowles.tech/', description: 'Technical projects, experiments, and working notes.' },
           { label: 'Public Site', href: '/', description: 'Home page.' },
         ])}
         <h2>Related Context</h2>
@@ -858,7 +918,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <ul>${austinWhenNotToHire.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
         <h2>Austin Crawlability Pilot Snapshot</h2>
         <p>The local page is backed by a bounded public fetch sample, not a local-ranking claim. It gives a small public-data baseline for how Austin-area company sites expose crawlability signals.</p>
-        <p><strong>Evidence cutoff:</strong> June 25, 2026.</p>
+        <p><strong>Research cutoff:</strong> June 25, 2026.</p>
         <figure id="austin-report-example"><img src="/images/austin-audit-report-example.png" width="1200" height="760" alt="Example report layout using the June 25, 2026 public Austin pilot values." /><figcaption>Illustrative report layout; values come from the published summary and CSV.</figcaption></figure>
         ${definitionCards(austinBenchmarkSnapshot.map((item) => [item.label, item.value]))}
         <h3>Pilot Method</h3>
@@ -870,7 +930,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'Open Austin benchmark pilot CSV', href: '/research/austin-crawlability-benchmark-pilot.csv' },
         ])}
         <h2>Query Examples Before Page Expansion</h2>
-        <p>The audit starts with concrete queries such as technical SEO Austin, Austin SEO audit, and Austin crawlability audit, then checks whether the public page, proof, profile signals, and measurement path support that intent.</p>
+        <p>The audit starts with concrete queries such as technical SEO Austin, Austin SEO audit, and Austin crawlability audit, then checks whether the public page, project examples, profile signals, and measurement path support that intent.</p>
         ${definitionCards(austinDiagnosticExamples.map((item) => [item.prompt, item.review]))}
         <h2>Contextual Links</h2>
         ${linkList([
@@ -916,18 +976,18 @@ export function buildRouteStaticHtml(route: SeoRoute) {
     return articleShell(
       'About Sulayman Bowles',
       'Technical practice, current work, experience, and operating principles from Sulayman Bowles.',
-      `<p>Sulayman Bowles works across technical SEO consulting, AI product, crawl software, analytics, and research systems. Atlas is the clearest expression of that work: preserve raw and rendered page states, connect findings to URL-level evidence, and carry reviewed results through persistence and exports.</p>
-        <p>My implementation work spans React and TypeScript interfaces, Python and SQLite workflows, CSV and JSON exports, analytics, and validation gates. I am pursuing ${escapeHtml(formatEducation())} at UT Austin.</p>
-        <p>The work is inspectable rather than assertion-led: the relevant project pages attach sanitized crawl rows, source ledgers, method notes, system designs, public code, and explicit evidence limits.</p>
+      `<p>Sulayman Bowles works across technical SEO consulting, AI product, crawl software, analytics, and financial research. Atlas is the clearest expression of that work: it connects raw and rendered pages to specific findings and repair priorities while distinguishing working capabilities from those still in development.</p>
+        <p>My implementation work spans React and TypeScript interfaces, Python and SQLite workflows, CSV and JSON exports, analytics, and validation logic. I am pursuing ${escapeHtml(formatEducation())} at UT Austin.</p>
+        <p>Readers can examine the method behind the work through sanitized crawl rows, research tables, system designs, public code, and clearly stated limits. The goal is to make judgment legible enough to challenge, improve, and use.</p>
         <h2>Current Work</h2>
-        <h3><a href="/atlas">Atlas</a></h3><p>I designed the product, crawl evidence contract, review states, persistence, and export paths.</p>
+        <h3><a href="/atlas">Atlas</a></h3><p>I designed the product, crawl model, review workflow, persistence layer, and exports.</p>
         <h3><a href="https://www.void-agency.com/">Void Agency</a></h3><p>I run fixed-scope technical audits, web systems, analytics review, and implementation handoffs through this practice.</p>
         <h3><a href="/resume">Product work</a></h3><p>AI product research, competitive analysis, workflow mapping, and prototype review.</p>
         <h3><a href="/research">Finance and research</a></h3><p>Ownership, operating logic, source tables, market validation, unit economics, and financial models.</p>
         <h2>Experience</h2>
         ${PROFILE_FACTS.experience.map((item) => `<h3>${escapeHtml(item.title)}</h3><p><strong>${escapeHtml(item.organization)}</strong> - ${escapeHtml(item.dates)}. ${escapeHtml(item.publicSummary)}</p>`).join('\n        ')}
         <h2>Operating Principles</h2>
-        <p>Inspect the inputs. Separate fact from inference. Ship the review path.</p>
+        <p>Inspect the inputs. Separate fact from inference. Make the decision usable.</p>
         <h2>Music</h2>
         <p>Music is a current second degree, not a historical aside. Classical bass and composition inform how I think about structure, iteration, and whether an underlying system holds together.</p>`,
     );
@@ -947,8 +1007,13 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'Download the Appian assumptions table', href: RESEARCH_ASSETS.appianAssumptionsCsv, description: 'CSV source table for the research assumptions.' },
         ])}
         ${appianAssumptionTableStaticHtml()}
+        <h2>Connected Project Families</h2>
+        ${projectLedgerStaticHtml(getProjectsForCluster('markets-models'))}
         <h2>All Research Categories</h2>
-        ${linkList([{ label: 'Open the unified Research hub', href: '/research' }])}`,
+        ${linkList([
+          { label: 'Open the unified Research hub', href: '/research' },
+          ...CONTENT_CLUSTERS.filter((cluster) => cluster.id !== 'markets-models').map((cluster) => ({ label: cluster.title, href: cluster.path })),
+        ])}`,
     );
   }
 
@@ -996,19 +1061,19 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       article.subtitle,
       `${articleSearchBriefStaticHtml(route.path)}
         ${articleImage}
-        <h2>Memo Details</h2>
+        <h2>Publication Details</h2>
         <p>Category: ${escapeHtml(article.category)}. Author: ${escapeHtml(article.author)}. Published: ${escapeHtml(article.date)}. Read time: ${escapeHtml(article.readTime)}. Source count: ${String(article.sources.length)}.</p>
-        ${boundary ? `<h2>${investmentMemo ? 'Recommendation Boundary' : 'Evidence Boundary'}</h2><p>${escapeHtml(boundary)}</p>` : ''}
+        ${boundary ? `<h2>${investmentMemo ? 'Recommendation Scope' : 'Scope and Limits'}</h2><p>${escapeHtml(boundary)}</p>` : ''}
         <h2>Article Metrics</h2>
         ${definitionCards(metrics.map((metric) => [metric.label, metric.value]))}
-        <h2>Research Note</h2>
+        <h2>Article</h2>
         ${paragraphList(article.content)}
         ${structuredSections}
         ${investmentSections}
         ${resources}
         <h2 id="article-conclusion-title">${escapeHtml(article.conclusion.title)}</h2>
         <p>${escapeHtml(article.conclusion.content)}</p>
-        ${sourceLinks.length ? `<h2>${structuredSections ? 'Source Ledger' : 'Research Sources'}</h2>${linkList(sourceLinks)}` : ''}
+        ${sourceLinks.length ? `<h2>Sources</h2>${linkList(sourceLinks)}` : ''}
         <h2>Internal Links</h2>
         ${linkList([
           { label: investmentMemo ? 'Markets Research' : 'Research Notes', href: investmentMemo ? '/markets' : '/research' },

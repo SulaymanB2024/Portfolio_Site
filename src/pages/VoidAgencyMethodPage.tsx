@@ -14,7 +14,7 @@ const stages = [
     number: '01',
     title: 'Crawl',
     copy: 'Map public URLs, status codes, redirects, canonicals, directives, sitemaps, raw and rendered HTML, internal links, structured data, and template patterns.',
-    output: 'Crawl inventory + evidence notes',
+    output: 'Crawl map + source notes',
   },
   {
     number: '02',
@@ -25,7 +25,7 @@ const stages = [
   {
     number: '03',
     title: 'Repair',
-    copy: 'Turn findings into implementation work with an owner, affected surface, recommended change, constraints, and a concrete acceptance check.',
+    copy: 'Turn findings into implementation work with an owner, affected area, recommended change, constraints, and a concrete definition of done.',
     output: 'Implementation plan or direct fixes',
   },
   {
@@ -40,9 +40,9 @@ const deliverables = [
   'Executive summary tied to observed scope',
   'URL- and template-level finding register',
   'Prioritized implementation queue with owners',
-  'Crawl/source exports where public or approved',
-  'Acceptance checks for each recommended repair',
-  'Rerun or handoff notes for the next operator',
+  'Crawl and source exports where public or approved',
+  'Verification steps for each recommended repair',
+  'Post-change or handoff notes for the implementation team',
 ];
 
 const inputs = [
@@ -56,7 +56,7 @@ const exclusions = [
   'No guaranteed rankings, traffic, revenue, AI citations, or answer placement',
   'No credentials or sensitive client data through the public form',
   'No challenge page, failed fetch, or missing provider result treated as a healthy or unhealthy page',
-  'No recommendation published as complete until its rerun or handoff check is clear',
+  'No recommendation called complete until the change has a clear verification or handoff step',
 ];
 
 const timeline = [
@@ -78,10 +78,10 @@ export default function VoidAgencyMethodPage() {
       <section className="relative z-10 mx-auto grid min-h-[calc(100vh-104px)] max-w-[1480px] content-end px-4 pb-16 pt-20 md:px-8 xl:px-10">
         <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Void Agency / technical SEO audit services</p>
         <h1 className="max-w-6xl font-serif text-[4rem] italic leading-[0.82] tracking-normal md:text-[7.5rem] xl:text-[10rem]">
-          Technical SEO audits, evidence first.
+          From crawl data to decisive repairs.
         </h1>
         <p className="mt-10 max-w-3xl text-base leading-relaxed text-canvas/70">
-          Fixed-scope technical SEO audit services for crawlability, indexation, rendering, internal links, structured data, analytics, and implementation. The deliverable is a small set of defensible findings, owners, and rerun checks.
+          Fixed-scope technical SEO audits for crawlability, indexation, rendering, internal links, structured data, analytics, and implementation. The result is a short list of well-supported findings, clear owners, and practical ways to verify each repair.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4 text-[10px] uppercase tracking-[0.22em]">
           <a href="/contact" className="inline-flex min-h-11 items-center border border-canvas bg-canvas px-4 text-[11px] font-semibold text-ink transition-colors hover:bg-accent">Request a technical SEO audit</a>
@@ -99,7 +99,7 @@ export default function VoidAgencyMethodPage() {
               'A migration, redesign, or launch changed crawl paths or indexation.',
               'Templates, canonicals, redirects, internal links, or structured data need review.',
               'A team has many audit findings but no prioritized implementation path.',
-              'Analytics and Search Console exist, but the site evidence and decision boundary are not connected.',
+              'Analytics and Search Console exist, but the site data has not been connected to a clear decision.',
             ].map((item) => <li key={item} className="border-l border-canvas/18 pl-4">{item}</li>)}
           </ul>
         </article>
@@ -111,7 +111,7 @@ export default function VoidAgencyMethodPage() {
               'Guaranteed ranking, traffic, revenue, or AI-answer placement.',
               'Bulk content production without a clear user or product problem.',
               'A hidden security review, credential transfer, or private-data request through public intake.',
-              'A broad retainer before the site, question, access, and acceptance criteria are defined.',
+              'A broad retainer before the site, question, access, and definition of done are clear.',
             ].map((item) => <li key={item} className="border-l border-canvas/18 pl-4">{item}</li>)}
           </ul>
         </article>
@@ -121,10 +121,10 @@ export default function VoidAgencyMethodPage() {
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.38fr_0.62fr] lg:items-end">
           <div>
             <p className="text-[10px] uppercase tracking-[0.28em] text-canvas/60">Four stages</p>
-            <h2 className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">Evidence to acceptance check.</h2>
+            <h2 className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">From crawl to verified repair.</h2>
           </div>
           <p className="max-w-2xl text-base leading-relaxed text-canvas/68">
-            Each phase produces an artifact the next person can inspect. Interpretation is never allowed to erase the source state.
+            Each phase leaves the next person with usable information. Analysis adds judgment without erasing what the crawl actually observed.
           </p>
         </div>
         <div className="grid gap-px border border-canvas/14 bg-canvas/14 md:grid-cols-2 xl:grid-cols-4">
@@ -169,7 +169,7 @@ export default function VoidAgencyMethodPage() {
             <h2 className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">Bounded before work starts.</h2>
           </div>
           <p className="max-w-2xl text-base leading-relaxed text-canvas/68">
-            Timing depends on site size, access, and implementation scope. The agreed brief names the surface, evidence sources, output, and acceptance check.
+            Timing depends on site size, access, and implementation scope. The agreed brief names the area in scope, source material, deliverable, and how changes will be verified.
           </p>
         </div>
         <div className="grid gap-px border border-canvas/14 bg-canvas/14 md:grid-cols-3">
@@ -187,10 +187,10 @@ export default function VoidAgencyMethodPage() {
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.38fr_0.62fr] lg:items-end">
           <div>
             <p className="text-[10px] uppercase tracking-[0.28em] text-canvas/60">Worked finding</p>
-            <h2 className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">One chain, four states.</h2>
+            <h2 className="mt-4 font-serif text-[3rem] italic leading-[0.9] md:text-[5rem]">One finding, four moves.</h2>
           </div>
           <p className="max-w-2xl text-base leading-relaxed text-canvas/68">
-            The public example uses sanitized data. It demonstrates reasoning and a rerun path, not a private outcome.
+            The public example uses sanitized data. It shows the logic from observation through verification, not a private client outcome.
           </p>
         </div>
         <div className="grid gap-px border border-canvas/14 bg-canvas/14 md:grid-cols-2 xl:grid-cols-4">

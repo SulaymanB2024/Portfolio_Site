@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'motion/react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface GenerativeMeshProps {
   className?: string;
@@ -11,6 +12,7 @@ export function GenerativeMesh({ className = '', color = 'rgba(7, 7, 7, 0.4)', b
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { margin: "100px" });
+  const prefersReducedMotion = useReducedMotion();
   
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
   const scrollY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
@@ -22,10 +24,12 @@ export function GenerativeMesh({ className = '', color = 'rgba(7, 7, 7, 0.4)', b
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let width = canvas.offsetWidth;
     let height = canvas.offsetHeight;
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const isMobile = window.innerWidth < 768;
     const cols = isMobile ? 12 : 25;
@@ -34,13 +38,7 @@ export function GenerativeMesh({ className = '', color = 'rgba(7, 7, 7, 0.4)', b
     let time = 0;
     let animationFrameId: number;
 
-    const render = () => {
-      if (!isInView) {
-        animationFrameId = requestAnimationFrame(render);
-        return;
-      }
-      time += 0.01;
-      
+    const drawGrid = (currentTime: number) => {
       ctx.fillStyle = bgColor;
       ctx.fillRect(0, 0, width, height);
       
@@ -61,31 +59,26 @@ export function GenerativeMesh({ className = '', color = 'rgba(7, 7, 7, 0.4)', b
           const x = startX + i * cellW;
           const y = startY + j * cellH;
           
-          // Add distortion
-          const distortX = Math.sin(x * 0.005 + time) * 30;
-          const distortY = Math.cos(y * 0.005 + time) * 30;
+          const distortX = Math.sin(x * 0.005 + currentTime) * 30;
+          const distortY = Math.cos(y * 0.005 + currentTime) * 30;
           
           const px = x + distortX;
           const py = y + distortY;
 
-          // Draw horizontal line
           if (i < cols) {
             const nextX = startX + (i + 1) * cellW;
             const nextY = y;
-            const nextDistortX = Math.sin(nextX * 0.005 + time) * 30;
-            const nextDistortY = Math.cos(nextY * 0.005 + time) * 30;
-            
+            const nextDistortX = Math.sin(nextX * 0.005 + currentTime) * 30;
+            const nextDistortY = Math.cos(nextY * 0.005 + currentTime) * 30;
             ctx.moveTo(px, py);
             ctx.lineTo(nextX + nextDistortX, nextY + nextDistortY);
           }
           
-          // Draw vertical line
           if (j < rows) {
             const nextX = x;
             const nextY = startY + (j + 1) * cellH;
-            const nextDistortX = Math.sin(nextX * 0.005 + time) * 30;
-            const nextDistortY = Math.cos(nextY * 0.005 + time) * 30;
-            
+            const nextDistortX = Math.sin(nextX * 0.005 + currentTime) * 30;
+            const nextDistortY = Math.cos(nextY * 0.005 + currentTime) * 30;
             ctx.moveTo(px, py);
             ctx.lineTo(nextX + nextDistortX, nextY + nextDistortY);
           }
@@ -93,6 +86,19 @@ export function GenerativeMesh({ className = '', color = 'rgba(7, 7, 7, 0.4)', b
       }
       
       ctx.stroke();
+    };
+
+    const render = () => {
+      if (prefersReducedMotion) {
+        drawGrid(0);
+        return;
+      }
+      if (!isInView) {
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
+      time += 0.01;
+      drawGrid(time);
       animationFrameId = requestAnimationFrame(render);
     };
 
@@ -101,8 +107,12 @@ export function GenerativeMesh({ className = '', color = 'rgba(7, 7, 7, 0.4)', b
     const handleResize = () => {
       width = canvas.offsetWidth;
       height = canvas.offsetHeight;
-      canvas.width = width;
-      canvas.height = height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (prefersReducedMotion) {
+        drawGrid(0);
+      }
     };
 
     window.addEventListener('resize', handleResize);
@@ -111,7 +121,7 @@ export function GenerativeMesh({ className = '', color = 'rgba(7, 7, 7, 0.4)', b
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [color, bgColor, isInView]);
+  }, [color, bgColor, isInView, prefersReducedMotion]);
 
   return (
     <div ref={containerRef} className={`relative overflow-hidden bg-canvas ${className}`} style={{ perspective: 1000 }}>

@@ -20,8 +20,8 @@ const RESUME_SEO = getSeoRoute('/resume')!;
 const RESUME_PDF_PATH = '/Sulayman_Bowles_Resume.pdf';
 
 const supportingLinks = [
-  { label: 'Atlas', href: '/atlas', meta: 'Product and public crawl evidence' },
-  { label: 'Selected Work', href: '/work', meta: 'Six inspectable public records' },
+  { label: 'Atlas', href: '/atlas', meta: 'Product, method, and sample crawl' },
+  { label: 'Selected Work', href: '/work', meta: 'Six projects and studies' },
   { label: 'Research', href: '/research', meta: 'Search, product, and markets notes' },
   { label: 'GitHub', href: PROFILE_FACTS.canonicalLinks.github, meta: 'Public code profile' },
   { label: 'LinkedIn', href: PROFILE_FACTS.canonicalLinks.linkedin, meta: 'Professional profile' },
@@ -55,8 +55,8 @@ export default function ResumePage() {
               Technical systems builder working across crawl infrastructure, AI product workflows, analytics, and finance research.
             </p>
             <nav className="resume-visual__pathways" aria-label="Resume next steps">
-              <a href="/work" data-portfolio-cta="resume_view_work">View selected work <span aria-hidden="true">↗</span></a>
-              <a href="/research" data-portfolio-cta="resume_read_research">Read research <span aria-hidden="true">↗</span></a>
+              <a href="/work" data-portfolio-cta="resume_view_work">View selected work <span aria-hidden="true">→</span></a>
+              <a href="/research" data-portfolio-cta="resume_read_research">Read research <span aria-hidden="true">→</span></a>
             </nav>
           </div>
 
@@ -90,8 +90,8 @@ export default function ResumePage() {
             </article>
             <article className="visual-lab-record">
               <SectionEyebrow>Current focus</SectionEyebrow>
-              <p className="visual-lab-record__lead">Atlas, technical SEO, product systems, and source-led research</p>
-              <p className="visual-lab-record__copy">Designs crawl and evidence workflows, React and TypeScript interfaces, Python and SQLite data paths, structured exports, and review gates that keep observations separate from recommendations and measurement gaps.</p>
+              <p className="visual-lab-record__lead">Atlas, technical SEO, product systems, and markets research</p>
+              <p className="visual-lab-record__copy">Designs crawl workflows, React and TypeScript interfaces, Python and SQLite data paths, structured exports, and review logic that keeps observations separate from recommendations and measurement gaps.</p>
             </article>
           </div>
         </IndexedSection>
@@ -157,7 +157,7 @@ export default function ResumePage() {
           </div>
         </IndexedSection>
 
-        <IndexedSection index="06" title="Dated public claims and supporting records" headingId="resume-records">
+        <IndexedSection index="06" title="Dated public claims and sources" headingId="resume-records">
           <div className="visual-lab-proof-ledger">
             {PROFILE_FACTS.proofClaims.map((item) => {
               const content = (

@@ -295,8 +295,6 @@ export function DarkProofArtifactPanel({
       {...props}
     >
       <CalibrationMarks />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-6 top-1/2 h-px bg-current/10" />
-      <div aria-hidden="true" className="pointer-events-none absolute bottom-6 top-6 left-1/2 w-px bg-current/10" />
       <div className="relative">
         <header className="border-b border-current/12 pb-5">
           <SectionEyebrow className="text-current/48">{eyebrow}</SectionEyebrow>

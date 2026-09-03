@@ -1,5 +1,4 @@
-import { motion, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
-import { useRef, type CSSProperties, type RefObject } from 'react';
+import { motion } from 'motion/react';
 import { InternalFooter } from '../components/InternalFooter';
 import InternalHeader from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
@@ -9,38 +8,6 @@ import { useSEO } from '../utils/seo';
 
 const ATLAS_SEO = getSeoRoute('/atlas')!;
 const ATLAS_ARTWORK = '/images/atlas-coelifer.svg';
-const ATLAS_ASSETS = {
-  frameFragment: '/images/atlas/frame-fragment.png',
-  orbitNetwork: '/images/atlas/orbit-network.png',
-  orbitSphere: '/images/atlas/orbit-sphere.png',
-  celestialArc: '/images/atlas/celestial-arc.png',
-  atlasFigureGlobe: '/images/atlas/atlas-figure-globe.png',
-  atlasFigurePortrait: '/images/atlas/atlas-figure-portrait.png',
-  armillarySphere: '/images/atlas/armillary-sphere.png',
-} as const;
-
-const openingArtworkStyle: CSSProperties = {
-  maskImage:
-    'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.96) 50%, rgba(0,0,0,0.9) 90%, transparent 100%), linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.92) 9%, rgba(0,0,0,0.98) 84%, transparent 100%)',
-  maskComposite: 'intersect',
-  WebkitMaskImage:
-    'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.96) 50%, rgba(0,0,0,0.9) 90%, transparent 100%), linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.92) 9%, rgba(0,0,0,0.98) 84%, transparent 100%)',
-  WebkitMaskComposite: 'source-in',
-};
-
-const suppliedPlateStyle: CSSProperties = {
-  filter: 'contrast(1.08) saturate(0.55) brightness(0.98)',
-  mixBlendMode: 'multiply',
-};
-
-const widePlateMaskStyle: CSSProperties = {
-  maskImage:
-    'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.86) 12%, rgba(0,0,0,0.96) 76%, transparent 100%), linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.92) 86%, transparent 100%)',
-  maskComposite: 'intersect',
-  WebkitMaskImage:
-    'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.86) 12%, rgba(0,0,0,0.96) 76%, transparent 100%), linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.92) 86%, transparent 100%)',
-  WebkitMaskComposite: 'source-in',
-};
 
 const methodSteps = [
   {
@@ -51,7 +18,7 @@ const methodSteps = [
   {
     id: '02',
     title: 'Qualify',
-    body: 'Normal content, access challenges, utility URLs, and error surfaces are separated before scoring.',
+    body: 'Normal content, access challenges, utility URLs, and failed responses are separated before scoring.',
   },
   {
     id: '03',
@@ -61,7 +28,7 @@ const methodSteps = [
   {
     id: '04',
     title: 'Review',
-    body: 'Repairs stay behind a human-readable gate until the run, file, and source claim still match.',
+    body: 'Repairs remain in review until the crawl, affected page, and recommendation still agree.',
   },
 ];
 
@@ -69,11 +36,11 @@ const heroRunStats = [
   { label: 'Public pages captured', value: '2', note: 'bounded open-corpus seed set' },
   { label: 'Observed states', value: '2', note: 'static and render-dependent source' },
   { label: 'Traceable findings', value: '3', note: 'observation, derivation, next check' },
-  { label: 'Run package', value: 'CSV + JSON', note: 'dated snapshot; no build-time crawl' },
+  { label: 'Sample files', value: 'CSV + JSON', note: 'dated snapshot; no build-time crawl' },
 ];
 
 const mobileHeroLinks = [
-  { href: '/atlas/sample-crawl', label: 'See an Atlas sample crawl run', note: 'Review package' },
+  { href: '/atlas/sample-crawl', label: 'See an Atlas sample crawl run', note: 'Public sample' },
   {
     href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-',
     label: 'View GitHub repo',
@@ -84,12 +51,12 @@ const mobileHeroLinks = [
 ];
 
 const capabilityStatus = [
-  { capability: 'Native crawl inventory', status: 'Publicly demonstrated', proof: 'Bounded open-corpus source capture', href: '/atlas/sample-crawl' },
-  { capability: 'Raw / rendered evidence', status: 'Implemented / proof partial', proof: 'Source capture plus a render-review state; no public browser trace', href: '#atlas-evidence' },
-  { capability: 'Run persistence and exports', status: 'Implemented / proof partial', proof: 'CSV/JSON sample; runtime persistence is not publicly demonstrated', href: '#atlas-technical' },
-  { capability: 'Provider mesh', status: 'Prototype', proof: 'Measurement gaps remain explicit', href: '#atlas-technical' },
-  { capability: 'Scoring policy', status: 'In development', proof: 'Review gate remains authoritative', href: '#atlas-technical' },
-  { capability: 'Client handoff', status: 'Partial', proof: 'Public demonstration package, not a client deliverable', href: '/atlas/sample-crawl' },
+  { capability: 'Native crawl inventory', status: 'Publicly demonstrated', proof: 'Bounded open-corpus crawl available', href: '/atlas/sample-crawl' },
+  { capability: 'Source / rendered comparison', status: 'Implemented / sample partial', proof: 'Source capture plus a render-review state; no public browser trace', href: '#atlas-evidence' },
+  { capability: 'Run history and exports', status: 'Implemented / sample partial', proof: 'CSV/JSON sample; runtime persistence is not publicly demonstrated', href: '#atlas-technical' },
+  { capability: 'Provider coverage', status: 'Prototype', proof: 'Unavailable measurements remain explicit', href: '#atlas-technical' },
+  { capability: 'Prioritization logic', status: 'In development', proof: 'Human review still determines final priority', href: '#atlas-technical' },
+  { capability: 'Client handoff', status: 'Partial', proof: 'Public demonstration, not a client deliverable', href: '/atlas/sample-crawl' },
 ];
 
 const crawlLedgerRows = [
@@ -97,7 +64,7 @@ const crawlLedgerRows = [
   { field: 'Static source', value: '10 quote cards', state: 'confirmed_source_content' },
   { field: 'JS source', value: '10 embedded data records', state: 'render_review_required' },
   { field: 'Canonical field', value: 'absent in both source responses', state: 'observation_only' },
-  { field: 'Exports', value: 'CSV + JSON manifest', state: 'reviewable_artifact' },
+  { field: 'Exports', value: 'CSV + JSON manifest', state: 'reviewable_export' },
 ];
 
 const evidenceCards = [
@@ -119,7 +86,7 @@ const evidenceTrace = [
   {
     id: '02',
     title: 'Locate',
-    body: 'The closest crawl-backed surface is retrieved with the passage that made it relevant.',
+    body: 'The closest relevant page is retrieved with the passage that made it useful.',
   },
   {
     id: '03',
@@ -148,12 +115,12 @@ const evidenceStateRows = [
   },
   {
     state: 'http_error_page',
-    meaning: 'Status-only error surface; preserve the failure without turning it into a normal page task.',
+    meaning: 'Status-only error response; preserve the failure without turning it into a normal page task.',
   },
 ];
 
 const evidenceStateChips = [
-  { state: 'confirmed_content', label: 'client-visible evidence allowed' },
+  { state: 'confirmed_content', label: 'eligible for client review' },
   { state: 'access_challenge', label: 'measurement gap only' },
   { state: 'utility_url', label: 'inventory, not action queue' },
   { state: 'http_error_page', label: 'failure preserved, not normalized' },
@@ -203,11 +170,11 @@ const coverageLadder = [
   },
   {
     label: 'Compare',
-    value: 'Observed surfaces are compared against the questions and entities the site should be able to answer.',
+    value: 'Observed pages are compared against the questions and entities the site should be able to answer.',
   },
   {
     label: 'Prioritize',
-    value: 'Repairs are ranked by demand, evidence strength, implementation size, and risk of overclaiming.',
+    value: 'Repairs are ranked by demand, source strength, implementation size, and risk of overclaiming.',
   },
 ];
 
@@ -218,7 +185,7 @@ const terminalLines = [
   'Completed browser traces: 0',
   'Render review required: 1',
   'Reviewable findings: 3',
-  'Artifacts: CSV + JSON',
+  'Outputs: CSV + JSON',
   'Claim limit: demonstration only; not a corpus-owner audit',
 ];
 
@@ -231,29 +198,29 @@ const issueRows = [
 const technicalPillars = [
   { label: 'Run state', value: 'SQLite audit store with durable run IDs and current-output checks' },
   { label: 'Sources', value: 'Seed URLs, sitemaps, rendered links, logs, and operator-supplied context' },
-  { label: 'Evidence', value: 'URL, passage, status, render state, source path, and claim boundary' },
-  { label: 'Exports', value: 'JSON, CSV, markdown, and a reviewed operator package' },
-  { label: 'Review gate', value: 'Human-readable issue queue before anything becomes client-facing' },
+  { label: 'Finding context', value: 'URL, passage, status, render state, source path, and claim limit' },
+  { label: 'Exports', value: 'JSON, CSV, markdown, and a reviewed operator brief' },
+  { label: 'Human review', value: 'A clear issue queue before anything becomes client-facing' },
   { label: 'Boundary', value: 'Measurement gaps stay separate from confirmed site defects' },
 ];
 
 const technicalFlow = [
-  { id: '01', label: 'Acquire', detail: 'Fetch, render, normalize, and persist the discovered surface.' },
+  { id: '01', label: 'Acquire', detail: 'Fetch, render, normalize, and save the discovered pages.' },
   { id: '02', label: 'Qualify', detail: 'Sort normal content from challenges, utility URLs, and failed fetches.' },
   { id: '03', label: 'Retrieve', detail: 'Bind questions to passages, pages, confidence values, and limits.' },
-  { id: '04', label: 'Review', detail: 'Hold generated actions behind a human-readable publish gate.' },
+  { id: '04', label: 'Review', detail: 'Hold recommended actions for human review before delivery.' },
 ];
 
 const gateRows = [
   { gate: 'Provider gap', behavior: 'Reported as missing measurement, never as confirmation that the site failed.' },
-  { gate: 'Challenge page', behavior: 'Preserved as access evidence and suppressed from normal issue scoring.' },
+  { gate: 'Challenge page', behavior: 'Recorded as an access problem and excluded from normal issue scoring.' },
   { gate: 'Utility URL', behavior: 'Kept in the atlas inventory but excluded from recommendation queues.' },
-  { gate: 'Fixed output', behavior: 'Trusted only when embedded run IDs match the current reviewed run.' },
+  { gate: 'Current export', behavior: 'Used only when its run ID matches the crawl under review.' },
 ];
 
 const deliverableRows = [
-  { label: 'Crawl inventory', value: 'URLs, statuses, canonicals, redirects, discovery paths, and evidence states' },
-  { label: 'Retrieval evidence', value: 'Questions tied to pages, passages, confidence, and the edge of each claim' },
+  { label: 'Crawl inventory', value: 'URLs, statuses, canonicals, redirects, discovery paths, and observed states' },
+  { label: 'Query analysis', value: 'Questions tied to pages, passages, confidence, and the limit of each claim' },
   { label: 'Coverage map', value: 'The services, locations, entities, and examples the site can or cannot support' },
   { label: 'Issue queue', value: 'Prioritized repairs with affected URLs, rationale, source notes, and review status' },
   { label: 'Client brief', value: 'A restrained summary that separates observed facts from recommended work' },
@@ -263,7 +230,7 @@ const deliverableRows = [
 const handoffNotes = [
   'Observed facts remain separate from derived labels, scores, and recommendations.',
   'Skipped providers, blocked pages, and failed fetches remain measurement gaps.',
-  'Review and publish gates keep stale or unverified packages out of delivery.',
+  'Only current, reviewed files are included in delivery.',
 ];
 
 const finalActions = [
@@ -276,247 +243,230 @@ const finalActions = [
   { href: '/contact', label: 'Request an audit' },
 ];
 
-const finalNodes = [
-  { x: '42%', y: '35%' },
-  { x: '51%', y: '28%' },
-  { x: '60%', y: '42%' },
-  { x: '68%', y: '33%' },
-  { x: '75%', y: '52%' },
-  { x: '57%', y: '62%' },
-  { x: '45%', y: '55%' },
-  { x: '82%', y: '39%' },
-];
-
-const gentleReveal = {
-  initial: { opacity: 0, y: 10 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.34, margin: '-8% 0px -8% 0px' },
-  transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
-} as const;
-
 export default function AtlasPage() {
   useSEO(ATLAS_SEO);
   const prefersReducedMotion = useReducedMotion();
-  const heroRef = useRef<HTMLElement>(null);
-  const methodologyRef = useRef<HTMLElement>(null);
-  const evidenceRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-  const { scrollYProgress: methodologyProgress } = useScroll({
-    target: methodologyRef,
-    offset: ['start 0.74', 'start 0.18'],
-  });
-  const { scrollYProgress: evidenceProgress } = useScroll({
-    target: evidenceRef,
-    offset: ['start 0.98', 'start 0.42'],
-  });
 
-  const smoothHeroProgress = useSpring(heroProgress, { stiffness: 140, damping: 30, mass: 0.2 });
-  const smoothMethodologyProgress = useSpring(methodologyProgress, { stiffness: 130, damping: 30, mass: 0.2 });
-  const smoothEvidenceProgress = useSpring(evidenceProgress, { stiffness: 120, damping: 34, mass: 0.24 });
-
-  const atlasOpacity = useTransform(smoothEvidenceProgress, [0, 0.35, 0.78, 1], [0.16, 0.1, 0.015, 0]);
-  const evidencePlateOpacity = useTransform(smoothEvidenceProgress, [0, 0.45, 1], [0.04, 0.1, 0.14]);
-  const evidenceFrameOpacity = useTransform(smoothEvidenceProgress, [0, 0.5, 1], [0.03, 0.08, 0.11]);
-  const firstLineOpacity = useTransform(smoothHeroProgress, [0, 0.22, 0.52, 0.9], [1, 0.42, 0.16, 0.06]);
-  const firstLineColor = useTransform(smoothHeroProgress, [0, 0.24, 0.56, 0.9], ['rgba(8,8,7,1)', 'rgba(8,8,7,0.58)', 'rgba(8,8,7,0.22)', 'rgba(8,8,7,0.12)']);
-  const firstLineY = useTransform(smoothHeroProgress, [0, 0.7], ['0rem', '-0.92rem']);
-  const heroCopyY = useTransform(smoothHeroProgress, [0, 0.58, 1], ['0rem', '-0.18rem', '-3.25rem']);
-  const heroSpineHeight = useTransform(smoothHeroProgress, [0.22, 0.48, 0.68], ['0%', '34%', '44%']);
-  const heroSpineOpacity = useTransform(smoothHeroProgress, [0.16, 0.34, 0.5, 0.66], [0, 0.42, 0.26, 0]);
-  const methodPreviewOpacity = useTransform(smoothHeroProgress, [0.24, 0.44, 0.58, 0.7], [0, 0.58, 0.28, 0]);
-  const heroContentOpacity = useTransform(smoothHeroProgress, [0, 0.45, 0.64, 0.82], [1, 1, 0.36, 0]);
-  const methodologyContentOpacity = useTransform(smoothMethodologyProgress, [0, 0.45, 1], [0, 0.58, 1]);
-  const methodologyContentY = useTransform(smoothMethodologyProgress, [0, 1], ['2.15rem', '0rem']);
-  const methodologyLineScale = useTransform(smoothMethodologyProgress, [0.12, 0.55, 1], [0, 0.72, 1]);
+  const gentleReveal = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 12 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: { duration: 0.52, ease: [0.16, 1, 0.3, 1] },
+      };
 
   return (
     <main className="site-page site-page-light visual-lab-page atlas-visual relative min-h-screen overflow-x-clip bg-canvas font-sans text-ink selection:bg-ink selection:text-canvas">
       <PageTechnicalChrome tone="light" />
       <InternalHeader activePath="/atlas" tone="light" variant="home" />
-      <motion.div
-        className="pointer-events-none fixed inset-0 z-[1] overflow-hidden"
-        style={openingArtworkStyle}
-        aria-hidden="true"
-      >
-        <motion.img
-          src={ATLAS_ARTWORK}
-          alt=""
-          className="atlas-visual__hero-art absolute left-[61%] top-[43%] h-[72svh] w-[136vw] -translate-x-1/2 -translate-y-1/2 object-contain object-center max-md:!opacity-[0.1] md:left-auto md:right-[-28rem] md:top-[55%] md:h-[112svh] md:w-[88rem] md:translate-x-0 md:scale-100 xl:right-[-20rem] xl:w-[96rem]"
-          style={{ opacity: atlasOpacity }}
-          decoding="async"
-        />
-      </motion.div>
 
-      <section
-        ref={heroRef}
-        id="atlas-hero"
-        className={`atlas-visual__hero relative overflow-visible ${prefersReducedMotion ? 'min-h-[100svh]' : 'h-[104svh] md:h-[165svh]'}`}
-      >
-        <div className={`atlas-visual__hero-stage ${prefersReducedMotion ? 'relative' : 'sticky top-0'} z-10 min-h-[100svh] overflow-hidden px-4 pt-32 md:px-8 md:pt-36 xl:px-10`}>
+      {/* Hero Section */}
+      <section id="atlas-hero" className="relative border-b border-ink/12 px-4 pt-28 pb-16 md:px-8 md:pt-36 md:pb-24 xl:px-10">
+        <div className="mx-auto grid w-full max-w-[1480px] items-center gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16 lg:px-10">
           <motion.div
-            className="pointer-events-none absolute left-[calc(50%-5rem)] top-[50%] z-[3] hidden w-px origin-top bg-ink/42 md:block lg:left-[calc(50%-6.75rem)]"
-            style={prefersReducedMotion ? { height: '46%', opacity: 0.42 } : { height: heroSpineHeight, opacity: heroSpineOpacity }}
-            aria-hidden="true"
-          />
-          <motion.div
-            className="pointer-events-none absolute left-[calc(50%-5rem)] top-[50%] z-[3] hidden h-2 w-2 -translate-x-1/2 rounded-full border border-ink/42 bg-canvas md:block lg:left-[calc(50%-6.75rem)]"
-            style={prefersReducedMotion ? { opacity: 0.7 } : { opacity: methodPreviewOpacity }}
-            aria-hidden="true"
-          />
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-[42rem]"
+          >
+            <div className="flex items-center gap-3">
+              <span className="h-1.5 w-1.5 rounded-full bg-ink/70" aria-hidden="true" />
+              <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-ink/54">
+                ATLAS ENGINE · CRAWL & EVIDENCE SYSTEM
+              </p>
+            </div>
 
-          <div className="relative z-10 mx-auto grid min-h-[calc(100svh-8rem)] w-full max-w-[1480px] items-center gap-10 pb-8 md:grid-cols-[minmax(0,0.9fr)_minmax(18rem,0.58fr)] md:gap-14 md:pb-0 lg:px-10">
-            <motion.div
-              initial={prefersReducedMotion ? false : { y: 18 }}
-              animate={prefersReducedMotion ? undefined : { y: 0 }}
-              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              style={prefersReducedMotion ? undefined : { opacity: heroContentOpacity, y: heroCopyY }}
-              id="atlas-hero-copy"
-              className="atlas-visual__hero-copy w-full max-w-[24rem] md:max-w-[40rem]"
-            >
-              <p className="mb-7 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42 md:mb-8">
-                ATLAS ENGINE
-              </p>
-              <h1 className="font-serif text-[2.7rem] font-light leading-[0.95] tracking-normal text-ink md:text-[3.75rem] xl:text-[4.75rem]">
-                <motion.span
-                  className="block md:whitespace-nowrap"
-                  style={prefersReducedMotion ? undefined : { color: firstLineColor, opacity: firstLineOpacity, y: firstLineY }}
-                >
-                  To see the
-                </motion.span>{' '}
-                <span className="block md:whitespace-nowrap">
-                  <span className="inline-block">
-                    whole&nbsp;
-                  </span>
-                  <span className="inline-block">
-                    structure.
-                  </span>
-                </span>
-              </h1>
-              <p className="mt-6 max-w-[26rem] text-sm leading-relaxed tracking-normal text-ink/64 md:text-[15px]">
-                A technical audit drawn like a map: captured pages located, public findings
-                tied to evidence, and unmeasured states left explicit.
-              </p>
+            <h1 className="mt-6 font-serif text-[2.85rem] font-light leading-[0.95] tracking-normal text-ink sm:text-[3.5rem] md:text-[4.25rem] xl:text-[5.1rem]">
+              To see the <br className="hidden sm:inline" />
+              <span className="italic">whole structure.</span>
+            </h1>
+
+            <p className="mt-7 max-w-[34rem] text-sm leading-relaxed tracking-normal text-ink/68 md:text-base">
+              A technical audit drawn like a map: pages located, findings tied to
+              their source, and unknown territory left visible.
+            </p>
+
+            <div className="mt-9 flex flex-wrap items-center gap-4">
               <a
-                href="/atlas#atlas-methodology"
-                id="atlas-view-methodology-link"
-                className="mt-6 inline-flex min-h-11 items-center border-b border-ink/28 font-serif text-sm italic tracking-normal text-ink/68 transition-colors hover:border-ink/55 hover:text-ink"
+                href="/atlas/sample-crawl"
+                className="inline-flex min-h-11 items-center justify-center bg-ink px-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-canvas transition-colors hover:bg-ink/84 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
               >
-                View methodology
+                Inspect the public sample →
               </a>
-              <nav className="mt-6 flex flex-wrap items-center gap-3 md:hidden" aria-label="Atlas primary actions">
-                <a href="/atlas/sample-crawl" className="inline-flex min-h-11 items-center border-b border-ink/28 text-[10px] uppercase tracking-[0.18em] text-ink/70">
-                  Inspect the public sample
+              <a
+                href="/contact"
+                className="inline-flex min-h-11 items-center justify-center border border-ink/28 bg-canvas px-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink transition-colors hover:border-ink hover:bg-ink/[0.04] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              >
+                Request an audit →
+              </a>
+              <div className="flex items-center gap-5 pt-1 sm:pt-0">
+                <a
+                  href="#atlas-methodology"
+                  className="inline-flex min-h-11 items-center border-b border-ink/28 text-[11px] uppercase tracking-[0.2em] text-ink/68 transition-colors hover:border-ink hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                >
+                  View methodology ↓
                 </a>
-                <a href="/contact" className="inline-flex min-h-11 items-center bg-ink px-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-canvas">
-                  Request an audit
+                <a
+                  href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-11 items-center border-b border-ink/20 text-[11px] uppercase tracking-[0.2em] text-ink/60 transition-colors hover:border-ink hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                >
+                  View audit CLI ↗
                 </a>
-              </nav>
-              <nav className="mt-7 hidden max-w-[27rem] gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/64 md:grid" aria-label="Atlas sample links">
-                <a href="/atlas/sample-crawl" className="group grid min-h-11 w-full items-center border-y border-ink/16 py-3 transition-colors hover:border-ink/40 hover:text-ink/78 md:w-fit md:border-b md:border-t-0 md:py-0">
-                  <span>Inspect the public sample</span>
-                </a>
-                <a href="/contact" className="inline-flex min-h-11 w-fit items-center bg-ink px-4 font-semibold text-canvas transition-colors hover:bg-ink/84">
-                  Request an audit
-                </a>
-                <a href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" target="_blank" rel="noreferrer" className="inline-flex min-h-11 w-fit items-center border-b border-ink/18 transition-colors hover:border-ink/45 hover:text-ink/72">
-                  View the audit CLI
-                </a>
-              </nav>
-            </motion.div>
+              </div>
+            </div>
 
-          </div>
+            <div className="mt-12 hidden grid-cols-2 gap-4 border-t border-ink/10 pt-6 sm:grid lg:grid-cols-4">
+              {heroRunStats.map((stat) => (
+                <div key={stat.label} className="border-l border-ink/14 pl-3">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] text-ink/48">{stat.label}</span>
+                  <span className="mt-1 block font-serif text-lg leading-tight text-ink/82">{stat.value}</span>
+                  <span className="mt-1 block text-[11px] leading-4 text-ink/50">{stat.note}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Dedicated Contained Artwork Plate */}
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.98 }}
+            animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="relative hidden lg:block"
+          >
+            <div className="relative mx-auto flex max-w-[34rem] flex-col overflow-hidden border border-ink/14 bg-canvas/80 p-7 shadow-[0_16px_50px_color-mix(in_srgb,var(--color-ink)_3.5%,transparent)]">
+              {/* Corner decorative marks */}
+              <div className="pointer-events-none absolute left-3 top-3 h-2 w-2 border-l border-t border-ink/30" aria-hidden="true" />
+              <div className="pointer-events-none absolute right-3 top-3 h-2 w-2 border-r border-t border-ink/30" aria-hidden="true" />
+              <div className="pointer-events-none absolute bottom-3 left-3 h-2 w-2 border-b border-l border-ink/30" aria-hidden="true" />
+              <div className="pointer-events-none absolute bottom-3 right-3 h-2 w-2 border-b border-r border-ink/30" aria-hidden="true" />
+
+              <div className="mb-4 flex items-center justify-between border-b border-ink/10 pb-3 text-[10px] uppercase tracking-[0.24em] text-ink/50">
+                <span>SPECIMEN PLATE · ATLAS COELIFER</span>
+                <span>OPEN-CORPUS HARNESS</span>
+              </div>
+
+              <div className="relative flex h-[28rem] w-full items-center justify-center overflow-hidden">
+                <img
+                  src={ATLAS_ARTWORK}
+                  alt="Atlas bearing the celestial sphere engraved diagram"
+                  className="h-full w-full object-contain opacity-[0.22] transition-opacity duration-500 hover:opacity-[0.28]"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+
+              <div className="mt-4 border-t border-ink/10 pt-4">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-ink/70">
+                    Demonstration: Quotes to Scrape
+                  </span>
+                  <a
+                    href="/atlas/sample-crawl"
+                    className="text-[10px] uppercase tracking-[0.18em] text-ink/64 underline decoration-ink/25 underline-offset-4 hover:text-ink"
+                  >
+                    Inspect run records →
+                  </a>
+                </div>
+                <p className="mt-1.5 text-xs leading-5 text-ink/54">
+                  Raw HTML extract vs client-side rendered DOM. Bounded seed set with explicit render checks and no synthetic scoring.
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
-
       </section>
 
       <MobileSamplePackage />
       <AtlasStatusMatrix />
 
+      {/* Methodology Section */}
       <section
-        ref={methodologyRef}
         id="atlas-methodology"
-        className={`relative scroll-mt-28 overflow-hidden border-t border-b border-ink/12 px-4 py-24 md:px-8 md:py-28 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[104svh]'}`}
+        className="relative scroll-mt-28 border-b border-ink/12 px-4 py-16 md:px-8 md:py-24 xl:px-10"
       >
-        <div className={`relative z-10 mx-auto grid w-full max-w-[1480px] items-center gap-10 md:grid-cols-[minmax(10rem,0.38fr)_minmax(0,0.84fr)_minmax(18rem,0.78fr)] md:gap-12 lg:px-10 ${prefersReducedMotion ? '' : 'min-h-[calc(100svh-12rem)]'}`}>
-          <motion.div
-            style={prefersReducedMotion ? undefined : { opacity: methodologyContentOpacity, y: methodologyContentY }}
-            className="self-start md:pt-6"
-          >
-            <p className="text-[9px] font-medium uppercase tracking-[0.42em] text-ink/50">
+        <div className="mx-auto max-w-[1480px] lg:px-10">
+          <div className="mb-12 max-w-2xl">
+            <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-ink/50">
               ATLAS METHODOLOGY
             </p>
-          </motion.div>
+            <h2 className="mt-4 font-serif text-[2.4rem] font-light leading-[1] tracking-normal text-ink sm:text-[3.2rem]">
+              The four-phase crawl cycle.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-ink/64 md:text-base">
+              How an audit moves from raw network discovery to verifiable recommendations without losing provenance or fabricating coverage.
+            </p>
+          </div>
 
-          <motion.div
-            className="relative max-w-[38rem] md:col-start-2"
-            style={prefersReducedMotion ? undefined : { opacity: methodologyContentOpacity, y: methodologyContentY }}
-          >
-            <motion.div
-              className="absolute left-[3.1rem] top-0 h-full w-px origin-top bg-ink/20 md:left-[3.5rem]"
-              style={prefersReducedMotion ? undefined : { scaleY: methodologyLineScale }}
-              aria-hidden="true"
-            />
-            <div>
-              {methodSteps.map((step) => (
-                <article
-                  key={step.id}
-                  className="relative grid min-h-[5.35rem] grid-cols-[5.8rem_minmax(0,1fr)] gap-5 border-b border-ink/10 py-4 md:grid-cols-[6.55rem_minmax(0,1fr)]"
-                >
-                  <div className="relative flex items-start gap-4">
-                    <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-ink/48">{step.id}</span>
-                    <span className="mt-1.5 h-2 w-2 rounded-full border border-ink/48 bg-canvas shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-canvas)_90%,transparent)]" />
-                  </div>
-                  <div className="min-w-0">
-                    <h2 className="font-serif text-[1.08rem] md:text-[1.28rem] xl:text-[1.45rem] font-semibold leading-none tracking-normal text-ink/86">
-                      {step.title}
-                    </h2>
-                    <p className="mt-2 max-w-[25rem] text-xs leading-6 text-ink/56">
-                      {step.body}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.aside
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.24, margin: '-6% 0px -6% 0px' }}
-            transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
-            className="border-y border-ink/12 py-5 md:col-start-3"
-          >
-            <div className="mb-5 flex items-center justify-between text-[9px] uppercase tracking-[0.22em] text-ink/44">
-              <span>Crawl ledger</span>
-              <span>sample run</span>
-            </div>
-            <div className="grid gap-0">
-              {crawlLedgerRows.map((row, index) => (
-                <div key={row.field} className="grid grid-cols-[2.4rem_minmax(0,1fr)] gap-3 border-t border-ink/10 py-3 text-xs leading-5 text-ink/58">
-                  <span className="text-[10px] uppercase tracking-[0.18em] text-ink/38">{String(index + 1).padStart(2, '0')}</span>
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-baseline justify-between gap-2">
-                      <span className="font-medium text-ink/76">{row.field}</span>
-                      <span className="font-serif text-base leading-none text-ink/78">{row.value}</span>
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
+            {/* Steps Timeline */}
+            <div className="relative">
+              <div className="absolute left-[1.1rem] top-4 bottom-4 w-px bg-ink/16 md:left-[1.25rem]" aria-hidden="true" />
+              <div className="space-y-8">
+                {methodSteps.map((step) => (
+                  <motion.article
+                    key={step.id}
+                    {...gentleReveal}
+                    className="relative grid grid-cols-[2.75rem_minmax(0,1fr)] gap-4 md:grid-cols-[3.25rem_minmax(0,1fr)] md:gap-6"
+                  >
+                    <div className="relative flex flex-col items-center pt-1">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full border border-ink/40 bg-canvas text-[10px] font-semibold tracking-wider text-ink shadow-[0_0_0_4px_var(--color-canvas)]">
+                        {step.id}
+                      </span>
                     </div>
-                    <p className="mt-2 font-mono text-[11px] text-ink/46">{row.state}</p>
-                  </div>
-                </div>
-              ))}
+                    <div className="border-b border-ink/10 pb-6">
+                      <h3 className="font-serif text-xl font-medium tracking-normal text-ink/88 md:text-2xl">
+                        {step.title}
+                      </h3>
+                      <p className="mt-2.5 max-w-xl text-sm leading-6 text-ink/60 md:text-[15px]">
+                        {step.body}
+                      </p>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
             </div>
-          </motion.aside>
+
+            {/* Crawl Ledger Card */}
+            <motion.aside
+              {...gentleReveal}
+              className="flex flex-col border border-ink/14 bg-canvas/80 p-6 md:p-8 shadow-[0_8px_30px_color-mix(in_srgb,var(--color-ink)_2.5%,transparent)]"
+            >
+              <div className="mb-6 flex items-center justify-between border-b border-ink/10 pb-4 text-[10px] uppercase tracking-[0.24em] text-ink/50">
+                <span>SAMPLE CRAWL</span>
+                <span>SAMPLE RUN: QUOTES TO SCRAPE</span>
+              </div>
+              <div className="divide-y divide-ink/10">
+                {crawlLedgerRows.map((row, index) => (
+                  <div key={row.field} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 py-3.5 text-xs">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink/40">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-baseline justify-between gap-2">
+                        <span className="font-medium text-ink/82">{row.field}</span>
+                        <span className="font-serif text-sm leading-none text-ink/84">{row.value}</span>
+                      </div>
+                      <div className="mt-1.5">
+                        <span className="inline-block rounded-xs border border-ink/14 bg-ink/[0.03] px-2 py-0.5 font-mono text-[10px] text-ink/58">
+                          {row.state}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 border-t border-ink/10 pt-4 text-xs leading-5 text-ink/50">
+                Every crawl record stores whether content was observed in the initial HTTP response or required a separate headless render state.
+              </div>
+            </motion.aside>
+          </div>
         </div>
       </section>
 
-      <EvidenceSection
-        prefersReducedMotion={prefersReducedMotion}
-        sectionRef={evidenceRef}
-        plateOpacity={evidencePlateOpacity}
-        frameOpacity={evidenceFrameOpacity}
-      />
+      <EvidenceSection prefersReducedMotion={prefersReducedMotion} />
       <CoverageSection prefersReducedMotion={prefersReducedMotion} />
       <TechnicalSection prefersReducedMotion={prefersReducedMotion} />
       <FinalAtlasSection prefersReducedMotion={prefersReducedMotion} />
@@ -527,23 +477,30 @@ export default function AtlasPage() {
 
 function AtlasStatusMatrix() {
   return (
-    <section className="atlas-visual__status relative z-10 border-b border-ink/12 bg-canvas px-4 py-14 md:px-8 xl:px-10" aria-labelledby="atlas-status-heading">
-      <div className="mx-auto grid w-full max-w-[1480px] gap-10 lg:grid-cols-[0.32fr_0.68fr] lg:px-10">
+    <section className="atlas-visual__status relative z-10 border-b border-ink/12 bg-canvas px-4 py-16 md:px-8 md:py-20 xl:px-10" aria-labelledby="atlas-status-heading">
+      <div className="mx-auto grid w-full max-w-[1480px] gap-10 lg:grid-cols-[0.34fr_0.66fr] lg:gap-14 lg:px-10">
         <div>
-          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-ink/60">Current capability status</p>
-          <h2 id="atlas-status-heading" className="mt-5 font-serif text-[2.7rem] font-light italic leading-[0.92] text-ink md:text-[4rem]">
+          <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-ink/50">Current capability status</p>
+          <h2 id="atlas-status-heading" className="mt-4 font-serif text-[2.4rem] font-light italic leading-[0.98] text-ink sm:text-[3.2rem]">
             What works now, and what does not yet.
           </h2>
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-ink/66">
-            Status is intentionally conservative. “Prototype,” “partial,” and “in development” remain visible until the public proof and review contract support a stronger label.
+          <p className="mt-5 text-sm leading-relaxed text-ink/64">
+            Status is intentionally conservative. “Prototype,” “partial,” and “in development” remain visible until the software and public sample justify a stronger label.
           </p>
         </div>
-        <div className="border-y border-ink/14">
+        <div className="divide-y divide-ink/12 border-y border-ink/12">
           {capabilityStatus.map((item) => (
-            <div key={item.capability} className="grid gap-3 border-b border-ink/12 py-4 last:border-b-0 md:grid-cols-[minmax(0,0.38fr)_minmax(9rem,0.2fr)_minmax(0,0.42fr)] md:items-center">
-              <span className="text-sm font-medium text-ink/82">{item.capability}</span>
-              <span className="w-fit border-l-2 border-ink/28 py-1 pl-3 text-[10px] uppercase tracking-[0.18em] text-ink/68">{item.status}</span>
-              <a href={item.href} className="inline-flex min-h-11 items-center text-[10px] uppercase tracking-[0.18em] text-ink/64 underline decoration-ink/25 underline-offset-4 hover:text-ink">{item.proof}</a>
+            <div key={item.capability} className="grid gap-3 py-4 sm:grid-cols-[minmax(0,0.36fr)_minmax(9rem,0.22fr)_minmax(0,0.42fr)] sm:items-center">
+              <span className="text-sm font-medium text-ink/86">{item.capability}</span>
+              <span className="w-fit rounded-xs border border-ink/18 bg-ink/[0.02] px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] text-ink/70">
+                {item.status}
+              </span>
+              <a
+                href={item.href}
+                className="inline-flex min-h-11 items-center text-[10px] uppercase tracking-[0.18em] text-ink/64 underline decoration-ink/25 underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              >
+                {item.proof}
+              </a>
             </div>
           ))}
         </div>
@@ -554,50 +511,50 @@ function AtlasStatusMatrix() {
 
 function MobileSamplePackage() {
   return (
-    <section className="atlas-visual__mobile-package relative z-10 border-y border-ink/12 bg-canvas/[0.88] px-4 py-9 md:hidden" aria-labelledby="atlas-mobile-sample-title">
+    <section className="atlas-visual__mobile-package relative z-10 border-b border-ink/12 bg-canvas px-4 py-10 sm:hidden" aria-labelledby="atlas-mobile-sample-title">
       <div className="grid gap-6">
-        <div className="flex items-end justify-between gap-5">
+        <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="text-[9px] font-medium uppercase tracking-[0.34em] text-ink/42">
+            <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-ink/48">
               SAMPLE PACKAGE
             </p>
-            <h2 id="atlas-mobile-sample-title" className="mt-2 font-serif text-2xl font-light leading-none tracking-normal text-ink/82">
-              Reviewed crawl evidence
+            <h2 id="atlas-mobile-sample-title" className="mt-1.5 font-serif text-2xl font-light leading-none tracking-normal text-ink/86">
+              Reviewed crawl sample
             </h2>
           </div>
-          <span className="shrink-0 border-b border-ink/18 pb-1 text-[10px] uppercase tracking-[0.2em] text-ink/42">
-            Mobile
+          <span className="shrink-0 rounded-xs border border-ink/14 px-2 py-0.5 text-[10px] uppercase tracking-[0.2em] text-ink/48">
+            Mobile Specimen
           </span>
         </div>
 
-        <dl className="grid grid-cols-2 border-y border-ink/12">
+        <dl className="grid grid-cols-2 border border-ink/12 bg-canvas">
           {heroRunStats.map((stat) => (
-            <div key={stat.label} className="min-h-[6rem] border-b border-ink/10 px-3 py-3 odd:border-r odd:border-ink/10">
-              <dt className="text-[9px] uppercase tracking-[0.16em] text-ink/42">{stat.label}</dt>
-              <dd className="mt-2 font-serif text-xl leading-none text-ink/82">{stat.value}</dd>
-              <dd className="mt-2 text-[11px] leading-5 text-ink/46">{stat.note}</dd>
+            <div key={stat.label} className="border-b border-ink/10 p-3 odd:border-r odd:border-ink/10 last:border-b-0">
+              <dt className="text-[10px] uppercase tracking-[0.16em] text-ink/48">{stat.label}</dt>
+              <dd className="mt-1 font-serif text-lg leading-none text-ink/84">{stat.value}</dd>
+              <dd className="mt-1 text-[10px] leading-4 text-ink/48">{stat.note}</dd>
             </div>
           ))}
         </dl>
 
-        <nav className="grid gap-2 text-[11px] tracking-normal text-ink/58" aria-label="Atlas secondary links">
+        <nav className="grid gap-2 text-[11px] tracking-normal text-ink/60" aria-label="Atlas mobile specimen links">
           {mobileHeroLinks.map((link, index) => (
             <a
               key={link.href}
               href={link.href}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noreferrer' : undefined}
-              className="group grid min-h-12 grid-cols-[2.4rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-ink/12 py-2 transition-colors hover:border-ink/36 hover:text-ink/78"
+              className="group grid min-h-12 grid-cols-[2rem_minmax(0,1fr)_auto] items-center gap-3 border border-ink/12 bg-canvas px-3 py-2 transition-colors hover:border-ink/36 hover:text-ink/82"
             >
-              <span className="font-mono text-[10px] text-ink/36">{String(index + 1).padStart(2, '0')}</span>
+              <span className="tabular-nums text-[10px] text-ink/40">{String(index + 1).padStart(2, '0')}</span>
               <span>
-                <span className="block text-[9px] uppercase tracking-[0.22em] text-ink/40">{link.note}</span>
-                <span className="mt-1 block font-serif text-sm italic leading-none tracking-normal text-ink/70">
+                <span className="block text-[10px] uppercase tracking-[0.2em] text-ink/48">{link.note}</span>
+                <span className="mt-0.5 block font-serif text-sm italic leading-none text-ink/78">
                   {link.label}
                 </span>
               </span>
-              <span aria-hidden="true" className="text-[10px] uppercase tracking-[0.18em] text-ink/34 transition-transform group-hover:translate-x-1">
-                Open
+              <span aria-hidden="true" className="text-[10px] uppercase tracking-[0.18em] text-ink/40 transition-transform group-hover:translate-x-1">
+                Open →
               </span>
             </a>
           ))}
@@ -607,294 +564,200 @@ function MobileSamplePackage() {
   );
 }
 
-function EvidenceSection({
-  prefersReducedMotion,
-  sectionRef,
-  plateOpacity,
-  frameOpacity,
-}: {
-  prefersReducedMotion: boolean;
-  sectionRef: RefObject<HTMLElement | null>;
-  plateOpacity: MotionValue<number>;
-  frameOpacity: MotionValue<number>;
-}) {
-  return (
-    <section ref={sectionRef} id="atlas-evidence" className={`relative scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[108svh]'}`}>
-      <motion.div
-        className="pointer-events-none absolute right-[-20rem] top-8 hidden h-[52rem] w-[52rem] md:block"
-        style={{ ...widePlateMaskStyle, opacity: plateOpacity }}
-        aria-hidden="true"
-      >
-        <img
-          src={ATLAS_ASSETS.orbitNetwork}
-          alt=""
-          className="h-full w-full object-contain"
-          style={suppliedPlateStyle}
-          loading="lazy"
-          decoding="async"
-        />
-      </motion.div>
-      <div className="mx-auto grid w-full max-w-[1480px] gap-12 md:grid-cols-[minmax(13rem,0.62fr)_minmax(0,1.45fr)] md:gap-16 lg:px-10">
-        <motion.div {...(prefersReducedMotion ? {} : gentleReveal)} className="max-w-[26rem]">
-          <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
-            EVIDENCE MODEL
-          </p>
-          <h2 className="max-w-[13ch] font-serif text-[2rem] md:text-[2.65rem] xl:text-[3.15rem] font-light leading-none tracking-normal text-ink">
-            Every claim keeps its edge.
-          </h2>
-          <p className="mt-8 text-sm leading-7 text-ink/58">
-            Atlas reads a site as an evidence field. The page, passage, state, and
-            uncertainty stay visible together, so the audit can say what is proved,
-            what is inferred, and what is still absent.
-          </p>
-          <dl className="mt-8 grid max-w-[25rem] grid-cols-3 gap-3 text-[10px] uppercase tracking-[0.18em] text-ink/48">
-            <div className="border-t border-ink/14 pt-3">
-              <dt>Priority</dt>
-              <dd className="mt-1 text-ink/78">High</dd>
-            </div>
-            <div className="border-t border-ink/14 pt-3">
-              <dt>Confidence</dt>
-              <dd className="mt-1 text-ink/78">0.87</dd>
-            </div>
-            <div className="border-t border-ink/14 pt-3">
-              <dt>State</dt>
-              <dd className="mt-1 text-ink/78">Confirmed</dd>
-            </div>
-          </dl>
-          <p className="mt-9 border-l border-ink/16 pl-5 font-serif text-base italic leading-7 text-ink/50">
-            A recommendation should feel less like a guess and more like a line
-            drawn between source and absence.
-          </p>
-        </motion.div>
+function EvidenceSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const gentleReveal = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 12 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: { duration: 0.52, ease: [0.16, 1, 0.3, 1] },
+      };
 
-        <div className="relative">
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
-            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.24, margin: '-6% 0px -6% 0px' }}
-            transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1] }}
-            className="relative overflow-hidden border-y border-ink/12 bg-canvas/70 px-0 py-8"
-          >
-            <motion.div className="pointer-events-none absolute -right-12 -top-28 h-[25rem] w-[34rem]" style={{ opacity: frameOpacity }} aria-hidden="true">
-              <img
-                src={ATLAS_ASSETS.frameFragment}
-                alt=""
-                className="h-full w-full object-contain"
-                style={suppliedPlateStyle}
-                loading="lazy"
-                decoding="async"
-              />
-            </motion.div>
-            <div className="mb-7 flex items-center justify-between border-b border-ink/10 pb-4 text-[9px] uppercase tracking-[0.24em] text-ink/44">
-              <span>Review path</span>
-              <span>sample plate</span>
-            </div>
-            <div className="mb-8 grid gap-2 border-b border-ink/10 pb-6 md:grid-cols-4">
-              {evidenceStateChips.map((chip) => (
-                <div key={chip.state} className="border-l border-ink/14 pl-3">
-                  <p className="font-mono text-[11px] leading-none text-ink/66">{chip.state}</p>
-                  <p className="mt-2 text-[11px] leading-5 text-ink/46">{chip.label}</p>
-                </div>
-              ))}
-            </div>
-            <div className="absolute left-[3rem] right-[3rem] top-[15.25rem] hidden border-t border-ink/12 md:block" aria-hidden="true" />
-            <div className="relative grid gap-7 md:grid-cols-4">
-              {evidenceTrace.map((step, index) => (
-                <motion.article
-                  key={step.id}
-                  initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
-                  whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{
-                    duration: 0.44,
-                    delay: prefersReducedMotion ? 0 : index * 0.035,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="relative px-1 md:px-5"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-ink/48">{step.id}</span>
-                    <span className="h-2 w-2 rounded-full border border-ink/46 bg-canvas shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-canvas)_92%,transparent)]" />
-                  </div>
-                  <h3 className="mt-5 text-[11px] font-semibold uppercase tracking-[0.24em] text-ink/78">{step.title}</h3>
-                  <p className="mt-3 max-w-[14rem] text-xs leading-6 text-ink/52">{step.body}</p>
-                </motion.article>
-              ))}
-            </div>
+  return (
+    <section
+      id="atlas-evidence"
+      className="relative scroll-mt-28 border-b border-ink/12 px-4 py-16 md:px-8 md:py-24 xl:px-10"
+    >
+      <div className="mx-auto max-w-[1480px] lg:px-10">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:gap-16">
+          <motion.div {...gentleReveal}>
+            <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-ink/50">
+              ANALYSIS MODEL
+            </p>
+            <h2 className="mt-4 font-serif text-[2.4rem] font-light leading-[1] tracking-normal text-ink sm:text-[3.2rem]">
+              Every conclusion keeps its limits.
+            </h2>
+            <p className="mt-6 text-sm leading-7 text-ink/64 md:text-base">
+              Atlas reads a site as a network of pages, passages, and technical states.
+              Each finding keeps its source and uncertainty close, so the audit can
+              distinguish what was observed, what was inferred, and what remains unknown.
+            </p>
+            <dl className="mt-8 grid grid-cols-3 gap-3 border-y border-ink/12 py-4 text-[10px] uppercase tracking-[0.18em]">
+              <div>
+                <dt className="text-ink/46">Priority</dt>
+                <dd className="mt-1 text-sm font-semibold text-ink/82">High</dd>
+              </div>
+              <div>
+                <dt className="text-ink/46">Confidence</dt>
+                <dd className="mt-1 text-sm font-semibold text-ink/82">0.87</dd>
+              </div>
+              <div>
+                <dt className="text-ink/46">State</dt>
+                <dd className="mt-1 text-sm font-semibold text-ink/82">Confirmed</dd>
+              </div>
+            </dl>
+            <p className="mt-8 border-l-2 border-ink/20 pl-4 font-serif text-base italic leading-relaxed text-ink/60">
+              “A recommendation becomes useful when the path from observation to repair
+              is short enough for another person to challenge.”
+            </p>
           </motion.div>
 
-          <motion.dl
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.26, margin: '-6% 0px -6% 0px' }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.03 }}
-            className="mt-10 border-t border-ink/12"
-          >
-            <div className="grid gap-2 border-b border-ink/10 py-4 md:grid-cols-[13rem_minmax(0,1fr)] md:items-baseline">
-              <dt className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/52">
-                Trace
-              </dt>
-              <dd className="font-serif text-xl italic leading-none text-ink/78">
-                query to page to passage to limitation to repair
-              </dd>
-            </div>
+          {/* Evidence States Definition Grid */}
+          <motion.div {...gentleReveal} className="grid gap-4 sm:grid-cols-2">
+            {evidenceStateRows.map((row) => (
+              <div key={row.state} className="border border-ink/12 bg-canvas/70 p-5">
+                <span className="font-mono text-xs font-semibold text-ink/76">{row.state}</span>
+                <p className="mt-3 text-xs leading-5 text-ink/58">{row.meaning}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Trace Pipeline Banner */}
+        <motion.div {...gentleReveal} className="mt-14 border border-ink/14 bg-canvas/90 p-6 md:p-8">
+          <div className="mb-6 flex items-center justify-between border-b border-ink/10 pb-4 text-[10px] uppercase tracking-[0.24em] text-ink/50">
+            <span>REVIEW PATH & TRACE PIPELINE</span>
+            <span>QUERY → PAGE → PASSAGE → LIMIT → REPAIR</span>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {evidenceTrace.map((step) => (
+              <article key={step.id} className="border-l border-ink/14 pl-4">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-ink/46">{step.id} / PHASE</span>
+                <h3 className="mt-2 text-xs font-semibold uppercase tracking-[0.24em] text-ink/84">{step.title}</h3>
+                <p className="mt-2 text-xs leading-5 text-ink/56">{step.body}</p>
+              </article>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Evidence Demonstration Table */}
+        <motion.div {...gentleReveal} className="mt-10 border border-ink/14 bg-canvas">
+          <div className="border-b border-ink/10 px-6 py-4 text-[10px] font-medium uppercase tracking-[0.24em] text-ink/50">
+            CONCRETE AUDIT DEMONSTRATION · EVIDENCE LEDGER
+          </div>
+          <div className="divide-y divide-ink/10">
             {evidenceCards.map((card, index) => (
               <div
                 key={card.label}
-                className="grid gap-2 border-b border-ink/10 py-4 md:grid-cols-[13rem_minmax(0,1fr)] md:items-baseline"
+                className="grid gap-2 px-6 py-3.5 md:grid-cols-[14rem_minmax(0,1fr)] md:items-baseline"
               >
-                <dt className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/52">
+                <dt className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink/52">
                   {String(index + 1).padStart(2, '0')} / {card.label}
                 </dt>
-                <dd className={card.kind === 'score' ? 'font-serif text-2xl leading-none text-ink/82' : 'text-sm leading-7 text-ink/62'}>
+                <dd className={card.kind === 'score' ? 'font-serif text-xl leading-none text-ink/84' : 'text-xs leading-6 text-ink/68 md:text-sm'}>
                   {card.value}
                 </dd>
               </div>
             ))}
-          </motion.dl>
-
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.24, margin: '-6% 0px -6% 0px' }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-            className="mt-10 grid gap-5 border-y border-ink/12 py-6 md:grid-cols-[12rem_minmax(0,1fr)]"
-          >
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/62">
-              Evidence states
-            </p>
-            <div className="grid gap-0">
-              {evidenceStateRows.map((row) => (
-                <div key={row.state} className="grid gap-2 border-b border-ink/10 py-3 last:border-b-0 md:grid-cols-[11rem_minmax(0,1fr)]">
-                  <span className="font-mono text-[11px] text-ink/64">{row.state}</span>
-                  <p className="text-xs leading-6 text-ink/54">{row.meaning}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
 function CoverageSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const gentleReveal = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 12 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: { duration: 0.52, ease: [0.16, 1, 0.3, 1] },
+      };
+
   return (
-    <section id="atlas-coverage" className={`relative scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[112svh]'}`}>
-      <div
-        className="pointer-events-none absolute -left-[18rem] top-16 h-[42rem] w-[42rem] opacity-[0.13] md:-left-[8rem] md:top-20 md:h-[54rem] md:w-[54rem]"
-        style={widePlateMaskStyle}
-        aria-hidden="true"
-      >
-        <img
-          src={ATLAS_ASSETS.orbitSphere}
-          alt=""
-          className="h-full w-full object-contain"
-          style={suppliedPlateStyle}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div className="pointer-events-none absolute -bottom-36 right-[-18rem] hidden h-[36rem] w-[36rem] opacity-[0.11] md:block" aria-hidden="true">
-        <img
-          src={ATLAS_ASSETS.armillarySphere}
-          alt=""
-          className="h-full w-full object-contain"
-          style={suppliedPlateStyle}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-
-      <div className="relative z-10 mx-auto grid w-full max-w-[1480px] gap-14 md:grid-cols-[minmax(14rem,0.75fr)_minmax(0,1.35fr)] md:items-start md:gap-16 lg:px-10">
-        <motion.div {...(prefersReducedMotion ? {} : gentleReveal)} className="max-w-[27rem]">
-          <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
-            COVERAGE MAP
-          </p>
-          <h2 className="font-serif text-[2.2rem] md:text-[3rem] xl:text-[3.55rem] font-light leading-[0.98] tracking-normal text-ink">
-            The map shows where the site goes quiet.
-          </h2>
-          <p className="mt-8 text-sm leading-7 text-ink/58">
-            The crawl is not the destination. It is the rough fieldwork that reveals
-            which services, entities, locations, examples, and supporting pages can be
-            found, cited, and trusted.
-          </p>
-          <p className="mt-9 border-l border-ink/16 pl-5 font-serif text-base italic leading-7 text-ink/50">
-            The useful map is not the biggest one. It is the one that shows where a
-            search system runs out of evidence.
-          </p>
-          <dl className="mt-10 grid max-w-[25rem] grid-cols-3 border-y border-ink/12 text-center">
-            {coverageMetrics.map((metric) => (
-              <div key={metric.label} className="border-r border-ink/10 px-3 py-5 last:border-r-0">
-                <dt className="text-[9px] uppercase tracking-[0.2em] text-ink/42">{metric.label}</dt>
-                <dd className="mt-3 font-serif text-2xl leading-none text-ink/78">{metric.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </motion.div>
-
-        <div className="relative">
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
-            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.28, margin: '-6% 0px -6% 0px' }}
-            transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1] }}
-            className="border-t border-ink/12"
-          >
-            <div className="hidden grid-cols-[minmax(0,0.78fr)_minmax(0,0.8fr)_minmax(0,0.78fr)_minmax(0,0.72fr)] gap-4 border-b border-ink/14 py-4 text-[9px] uppercase tracking-[0.18em] text-ink/44 md:grid">
-              <span>Field</span>
-              <span>Observed</span>
-              <span>Quiet edge</span>
-              <span className="text-right">Next move</span>
-            </div>
-            {coverageRows.map((row, index) => (
-              <motion.div
-                key={row.area}
-                initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
-                whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.34 }}
-                transition={{ duration: 0.42, delay: prefersReducedMotion ? 0 : index * 0.028, ease: [0.16, 1, 0.3, 1] }}
-                className="grid gap-3 border-b border-ink/10 py-5 text-xs leading-6 text-ink/58 md:grid-cols-[minmax(0,0.78fr)_minmax(0,0.8fr)_minmax(0,0.78fr)_minmax(0,0.72fr)] md:gap-4"
-              >
-                <div>
-                  <span className="mr-3 text-[10px] uppercase tracking-[0.18em] text-ink/42">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="font-medium text-ink/76">{row.area}</span>
-                </div>
-                <div className="font-mono text-[11px] text-ink/50">
-                  <span className="mb-1 block font-sans text-[9px] uppercase tracking-[0.18em] text-ink/38 md:hidden">Observed</span>
-                  {row.observed}
-                </div>
-                <div>
-                  <span className="mb-1 block text-[9px] uppercase tracking-[0.18em] text-ink/38 md:hidden">Gap</span>
-                  {row.gap}
-                </div>
-                <div className="font-mono text-[11px] text-ink/62 md:text-right">
-                  <span className="mb-1 block font-sans text-[9px] uppercase tracking-[0.18em] text-ink/38 md:hidden">Next</span>
-                  {row.next}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.28, margin: '-6% 0px -6% 0px' }}
-            transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
-            className="mt-12 grid gap-5 border-y border-ink/12 py-7 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:items-center"
-          >
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/62">
-              Coverage ladder
+    <section
+      id="atlas-coverage"
+      className="relative scroll-mt-28 border-b border-ink/12 px-4 py-16 md:px-8 md:py-24 xl:px-10"
+    >
+      <div className="mx-auto max-w-[1480px] lg:px-10">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
+          <motion.div {...gentleReveal} className="max-w-xl">
+            <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-ink/50">
+              COVERAGE MAP
             </p>
-            <div className="grid gap-0">
-              {coverageLadder.map((step, index) => (
-                <div key={step.label} className="grid gap-3 border-b border-ink/10 py-4 last:border-b-0 md:grid-cols-[10rem_minmax(0,1fr)]">
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-ink/46">
-                    {String(index + 1).padStart(2, '0')} / {step.label}
-                  </div>
-                  <p className="text-sm leading-7 text-ink/58">{step.value}</p>
+            <h2 className="mt-4 font-serif text-[2.4rem] font-light leading-[1] tracking-normal text-ink sm:text-[3.2rem]">
+              The map shows where the site goes quiet.
+            </h2>
+            <p className="mt-6 text-sm leading-7 text-ink/64 md:text-base">
+              The crawl is not the destination. It is the rough fieldwork that reveals
+              which services, entities, locations, examples, and supporting pages can be
+              found, understood, and trusted.
+            </p>
+            <p className="mt-6 border-l-2 border-ink/20 pl-4 font-serif text-base italic leading-relaxed text-ink/60">
+              “The useful map is not the biggest one. It is the one that shows where a
+              search system runs out of useful context.”
+            </p>
+            <dl className="mt-8 grid grid-cols-3 gap-3 border-y border-ink/12 py-4">
+              {coverageMetrics.map((metric) => (
+                <div key={metric.label} className="border-l border-ink/12 pl-3 first:border-l-0">
+                  <dt className="text-[10px] uppercase tracking-[0.2em] text-ink/48">{metric.label}</dt>
+                  <dd className="mt-1 font-serif text-xl leading-none text-ink/80">{metric.value}</dd>
                 </div>
               ))}
+            </dl>
+          </motion.div>
+
+          {/* Coverage Table & Ladder */}
+          <motion.div {...gentleReveal} className="space-y-6">
+            <div className="overflow-hidden border border-ink/14 bg-canvas">
+              <div className="border-b border-ink/10 px-5 py-4 text-[10px] font-medium uppercase tracking-[0.22em] text-ink/50">
+                OBSERVED AUDIT SURFACES & QUIET EDGES
+              </div>
+              <div className="divide-y divide-ink/10">
+                {coverageRows.map((row, index) => (
+                  <div
+                    key={row.area}
+                    className="grid gap-3 p-5 text-xs md:grid-cols-[1.1fr_0.9fr_1.1fr_0.9fr] md:items-baseline"
+                  >
+                    <div>
+                      <span className="mr-2 tabular-nums text-[10px] text-ink/40">{String(index + 1).padStart(2, '0')}</span>
+                      <span className="font-medium text-ink/84">{row.area}</span>
+                    </div>
+                    <div className="font-mono text-[11px] text-ink/58">
+                      <span className="block text-[10px] uppercase tracking-[0.16em] text-ink/44 md:hidden">Observed</span>
+                      {row.observed}
+                    </div>
+                    <div className="text-ink/62">
+                      <span className="block text-[10px] uppercase tracking-[0.16em] text-ink/44 md:hidden">Quiet edge</span>
+                      {row.gap}
+                    </div>
+                    <div className="font-mono text-[11px] text-ink/70 md:text-right">
+                      <span className="block text-[10px] uppercase tracking-[0.16em] text-ink/44 md:hidden">Next move</span>
+                      {row.next}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Coverage Ladder */}
+            <div className="border border-ink/14 bg-canvas/70 p-6">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/60">
+                Coverage ladder · from raw discovery to prioritized repairs
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {coverageLadder.map((step, index) => (
+                  <div key={step.label} className="border-l border-ink/14 pl-3">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-ink/44">
+                      0{index + 1} / {step.label}
+                    </span>
+                    <p className="mt-1 text-xs leading-5 text-ink/60">{step.value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
@@ -904,151 +767,136 @@ function CoverageSection({ prefersReducedMotion }: { prefersReducedMotion: boole
 }
 
 function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const gentleReveal = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 12 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: { duration: 0.52, ease: [0.16, 1, 0.3, 1] },
+      };
+
   return (
-    <section id="atlas-technical" className={`relative scroll-mt-28 overflow-hidden border-b border-ink/12 px-4 py-24 md:px-8 md:py-32 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[112svh]'}`}>
-      <div className="pointer-events-none absolute left-1/2 top-4 hidden w-[112rem] max-w-none -translate-x-1/2 opacity-[0.17] md:block" aria-hidden="true">
-        <img
-          src={ATLAS_ASSETS.celestialArc}
-          alt=""
-          className="w-full object-contain"
-          style={suppliedPlateStyle}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div className="mx-auto grid w-full max-w-[1480px] gap-12 md:grid-cols-[minmax(13rem,0.62fr)_minmax(0,1.05fr)_minmax(13rem,0.78fr)] md:gap-10 lg:px-10">
-        <motion.div {...(prefersReducedMotion ? {} : gentleReveal)}>
-          <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
+    <section
+      id="atlas-technical"
+      className="relative scroll-mt-28 border-b border-ink/12 px-4 py-16 md:px-8 md:py-24 xl:px-10"
+    >
+      <div className="mx-auto max-w-[1480px] lg:px-10">
+        <div className="mb-12 max-w-2xl">
+          <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-ink/50">
             UNDER THE HOOD
           </p>
-          <h2 className="font-serif text-[2rem] md:text-[2.6rem] xl:text-[3rem] font-light leading-none tracking-normal text-ink">
+          <h2 className="mt-4 font-serif text-[2.4rem] font-light leading-[1] tracking-normal text-ink sm:text-[3.2rem]">
             The machinery stays legible.
           </h2>
-          <p className="mt-8 text-sm leading-7 text-ink/58">
-            Atlas is a crawl and evidence system first. Source discovery, rendered
-            observations, derived labels, and recommendations stay in separate lanes,
-            so a review can inspect the path instead of trusting the verdict.
+          <p className="mt-4 text-sm leading-relaxed text-ink/64 md:text-base">
+            Atlas begins with the crawl. Source discovery, rendered observations,
+            analysis, and recommendations remain distinct, so a reviewer can follow
+            the reasoning instead of accepting a score at face value.
           </p>
-          <p className="mt-9 border-l border-ink/16 pl-5 font-serif text-base italic leading-7 text-ink/50">
-            The output should have the patience of an archive and the utility of an
-            engineering ticket.
-          </p>
-          <dl className="mt-10 grid gap-0 border-t border-ink/12">
-            {technicalPillars.map((pillar) => (
-              <div key={pillar.label} className="grid grid-cols-[7rem_minmax(0,1fr)] gap-4 border-b border-ink/10 py-3">
-                <dt className="text-[9px] uppercase tracking-[0.2em] text-ink/42">{pillar.label}</dt>
-                <dd className="text-xs leading-5 text-ink/62">{pillar.value}</dd>
-              </div>
-            ))}
-          </dl>
-          <a
-            href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-9 inline-block border-b border-ink/20 pb-1 font-serif text-sm italic text-ink/58 transition-colors hover:border-ink/45 hover:text-ink"
-          >
-            View on GitHub
-          </a>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
-          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3, margin: '-6% 0px -6% 0px' }}
-          transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
-          className="relative overflow-hidden border border-ink/14 bg-canvas-dark/72 p-5 shadow-[0_10px_34px_color-mix(in_srgb,var(--color-ink)_2.5%,transparent)]"
-        >
-          <div className="mb-5 flex items-center justify-between border-b border-ink/10 pb-4 text-[9px] uppercase tracking-[0.22em] text-ink/44">
-            <span>Illustrative operator flow</span>
-            <span>public package: source capture only</span>
-          </div>
-          <div className="mb-6 grid gap-0 border-b border-ink/10 pb-5 md:grid-cols-4">
-            {technicalFlow.map((step) => (
-              <div key={step.id} className="border-b border-ink/10 py-3 last:border-b-0 md:border-b-0 md:border-r md:px-4 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
-                <div className="mb-3 flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/44">
-                  <span>{step.id}</span>
-                  <span className="h-1.5 w-1.5 rounded-full border border-ink/38" />
-                </div>
-                <h3 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/72">{step.label}</h3>
-                <p className="mt-2 text-[11px] leading-5 text-ink/50">{step.detail}</p>
-              </div>
-            ))}
-          </div>
-          <pre className="overflow-x-auto whitespace-pre-wrap text-[11px] leading-6 text-ink/68">
-            {terminalLines.map((line, index) => (
-              <motion.code
-                key={line}
-                initial={prefersReducedMotion ? false : { opacity: 0 }}
-                whileInView={prefersReducedMotion ? undefined : { opacity: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.22, delay: prefersReducedMotion ? 0 : index * 0.018 }}
-                className="block font-mono"
-              >
-                {line}
-              </motion.code>
-            ))}
-          </pre>
-        </motion.div>
-
-        <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
-          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3, margin: '-6% 0px -6% 0px' }}
-          transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
-          className="border-l border-ink/12 pl-6 md:pt-16"
-        >
-          <h3 className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/62">Review queue</h3>
-          <table className="mt-5 w-full text-left text-xs text-ink/58">
-            <caption className="sr-only">Illustrative Atlas review queue with issue, evidence, and impact columns</caption>
-            <thead className="border-b border-ink/14 text-[10px] uppercase tracking-[0.18em] text-ink/48">
-              <tr>
-                <th className="pb-3 font-medium">Issue</th>
-                <th className="pb-3 font-medium">Evidence</th>
-                <th className="pb-3 text-right font-medium">Impact</th>
-              </tr>
-            </thead>
-            <tbody>
-              {issueRows.map((row, index) => (
-                <motion.tr
-                  key={row.issue}
-                  initial={prefersReducedMotion ? false : { opacity: 0 }}
-                  whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{ duration: 0.28, delay: prefersReducedMotion ? 0 : index * 0.018 }}
-                  className="border-b border-ink/10"
-                >
-                  <td className="py-3 pr-4">{row.issue}</td>
-                  <td className="py-3 pr-4 text-ink/44">{row.evidence}</td>
-                  <td className="py-3 text-right">{row.impact}</td>
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="mt-8 border-t border-ink/10 pt-5 text-xs leading-6 text-ink/48">
-            Every issue is anchored to source URLs, passages, and a repeatable run,
-            so the audit can be inspected before it is acted on.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.22, margin: '-6% 0px -6% 0px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.06 }}
-          className="border-y border-ink/12 py-6 md:col-span-3"
-        >
-          <div className="grid gap-5 md:grid-cols-[13rem_minmax(0,1fr)]">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/62">
-              Fail-closed gates
-            </p>
-            <div className="grid gap-0 md:grid-cols-2 md:gap-x-10">
-              {gateRows.map((row) => (
-                <div key={row.gate} className="grid gap-2 border-b border-ink/10 py-4 md:grid-cols-[9rem_minmax(0,1fr)]">
-                  <h3 className="text-[10px] uppercase tracking-[0.2em] text-ink/48">{row.gate}</h3>
-                  <p className="text-xs leading-6 text-ink/56">{row.behavior}</p>
-                </div>
-              ))}
+        {/* 4-Phase Pipeline Banner */}
+        <div className="grid gap-3 border-y border-ink/12 py-5 sm:grid-cols-2 lg:grid-cols-4">
+          {technicalFlow.map((step) => (
+            <div key={step.id} className="border-l border-ink/14 pl-4">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-ink/44">{step.id} / PIPELINE</span>
+              <h3 className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-ink/80">{step.label}</h3>
+              <p className="mt-1 text-xs leading-5 text-ink/54">{step.detail}</p>
             </div>
+          ))}
+        </div>
+
+        {/* Side-by-Side Inspector: Terminal vs Review Queue */}
+        <div className="mt-10 grid gap-8 lg:grid-cols-2">
+          {/* Terminal Inspector */}
+          <motion.div
+            {...gentleReveal}
+            className="overflow-hidden border border-ink/16 bg-canvas-dark text-ink shadow-[0_8px_30px_color-mix(in_srgb,var(--color-ink)_2%,transparent)]"
+          >
+            <div className="flex items-center justify-between border-b border-ink/10 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-ink/50">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-ink/30" />
+                <span className="h-2 w-2 rounded-full bg-ink/30" />
+                <span className="h-2 w-2 rounded-full bg-ink/30" />
+                <span className="ml-2">AUDIT CLI OUTPUT</span>
+              </div>
+              <span>SAMPLE RUN</span>
+            </div>
+            <pre className="overflow-x-auto p-5 font-mono text-[11px] leading-6 text-ink/78">
+              {terminalLines.map((line) => (
+                <code key={line} className="block">
+                  {line}
+                </code>
+              ))}
+            </pre>
+          </motion.div>
+
+          {/* Review Queue Table */}
+          <motion.div
+            {...gentleReveal}
+            className="overflow-hidden border border-ink/14 bg-canvas p-5"
+          >
+            <div className="mb-4 flex items-center justify-between border-b border-ink/10 pb-3 text-[10px] font-medium uppercase tracking-[0.22em] text-ink/50">
+              <span>REVIEW QUEUE</span>
+              <span>GATE STATUS</span>
+            </div>
+            <table className="w-full text-left text-xs">
+              <caption className="sr-only">Atlas review queue issues, sources, and impact</caption>
+              <thead className="border-b border-ink/12 text-[10px] uppercase tracking-[0.16em] text-ink/48">
+                <tr>
+                  <th scope="col" className="pb-2.5 font-medium">Issue</th>
+                  <th scope="col" className="pb-2.5 font-medium">Source</th>
+                  <th scope="col" className="pb-2.5 text-right font-medium">Impact</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-ink/10">
+                {issueRows.map((row) => (
+                  <tr key={row.issue}>
+                    <td className="py-3 pr-3 font-medium text-ink/80">{row.issue}</td>
+                    <td className="py-3 pr-3 text-ink/54">{row.evidence}</td>
+                    <td className="py-3 text-right">
+                      <span className="inline-block rounded-xs border border-ink/14 bg-ink/[0.03] px-2 py-0.5 font-mono text-[10px] text-ink/68">
+                        {row.impact}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="mt-6 border-t border-ink/10 pt-4 text-xs leading-5 text-ink/52">
+              Every finding is anchored to source URLs, passages, and a durable run ID, so recommendations can be audited before they are accepted.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Fail-Closed Gates Grid */}
+        <motion.div {...gentleReveal} className="mt-10 border border-ink/14 bg-canvas/80 p-6 md:p-8">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/60">
+            Quality controls · operating boundaries
+          </p>
+          <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {gateRows.map((row) => (
+              <div key={row.gate} className="border-l border-ink/14 pl-4">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-ink/80">{row.gate}</h3>
+                <p className="mt-1.5 text-xs leading-5 text-ink/56">{row.behavior}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Technical Pillars */}
+        <motion.div {...gentleReveal} className="mt-10 border-t border-ink/12 pt-8">
+          <p className="text-[10px] font-medium uppercase tracking-[0.26em] text-ink/48">
+            ARCHITECTURE PILLARS
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {technicalPillars.map((pillar) => (
+              <div key={pillar.label} className="border-l border-ink/12 pl-3">
+                <dt className="text-[10px] uppercase tracking-[0.18em] text-ink/44">{pillar.label}</dt>
+                <dd className="mt-1 text-xs leading-5 text-ink/64">{pillar.value}</dd>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>
@@ -1057,63 +905,39 @@ function TechnicalSection({ prefersReducedMotion }: { prefersReducedMotion: bool
 }
 
 function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
-  return (
-    <section id="atlas-final" className={`relative scroll-mt-28 overflow-hidden px-4 py-28 md:px-8 md:py-36 xl:px-10 ${prefersReducedMotion ? '' : 'min-h-[112svh]'}`}>
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <img
-          src={ATLAS_ASSETS.atlasFigurePortrait}
-          alt=""
-          className="absolute bottom-[-12rem] right-[-12rem] h-[92svh] w-[58rem] object-contain object-bottom opacity-[0.12] md:bottom-[-9rem] md:right-[-2rem] md:h-[112svh] md:opacity-[0.17]"
-          style={{ ...suppliedPlateStyle, ...widePlateMaskStyle }}
-          loading="lazy"
-          decoding="async"
-        />
-        <img
-          src={ATLAS_ASSETS.armillarySphere}
-          alt=""
-          className="absolute -left-[21rem] top-24 hidden h-[52rem] w-[52rem] object-contain opacity-[0.1] md:block"
-          style={suppliedPlateStyle}
-          loading="lazy"
-          decoding="async"
-        />
-        <div className="absolute inset-0 hidden md:block">
-          {finalNodes.map((node, index) => (
-            <motion.span
-              key={`${node.x}-${node.y}`}
-              className="absolute h-2 w-2 rounded-full border border-ink/42 bg-canvas shadow-[0_0_0_7px_color-mix(in_srgb,var(--color-ink)_4%,transparent)]"
-              style={{ left: node.x, top: node.y }}
-              initial={prefersReducedMotion ? false : { opacity: 0 }}
-              whileInView={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.45 }}
-              transition={{ duration: 0.36, delay: prefersReducedMotion ? 0 : index * 0.025, ease: [0.16, 1, 0.3, 1] }}
-            />
-          ))}
-        </div>
-      </div>
+  const gentleReveal = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 12 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: { duration: 0.52, ease: [0.16, 1, 0.3, 1] },
+      };
 
-      <div className={`relative z-10 mx-auto grid w-full max-w-[1480px] items-center gap-14 md:grid-cols-[minmax(18rem,0.82fr)_minmax(0,1fr)] lg:px-10 ${prefersReducedMotion ? '' : 'min-h-[calc(100svh-14rem)]'}`}>
-        <motion.div {...(prefersReducedMotion ? {} : gentleReveal)} className="max-w-[33rem]">
-          <p className="mb-6 text-[9px] font-medium uppercase tracking-[0.42em] text-ink/42">
+  return (
+    <section id="atlas-final" className="relative scroll-mt-28 border-b border-ink/12 px-4 py-16 md:px-8 md:py-24 xl:px-10">
+      <div className="mx-auto grid w-full max-w-[1480px] gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16 lg:px-10">
+        <motion.div {...gentleReveal} className="max-w-xl">
+          <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-ink/50">
             ATLAS ENGINE
           </p>
-          <h2 className="font-serif text-[2.8rem] md:text-[3.75rem] xl:text-[4.75rem] font-light leading-[0.95] tracking-normal text-ink">
-            A map for
-            <br />
-            actual repairs.
+          <h2 className="mt-4 font-serif text-[2.8rem] font-light leading-[0.96] tracking-normal text-ink sm:text-[3.6rem] xl:text-[4.25rem]">
+            A map for <br />
+            <span className="italic">actual repairs.</span>
           </h2>
-          <p className="mt-6 max-w-[24rem] text-sm leading-7 text-ink/58">
-            The final package should read like an annotation, not a pitch: what was
+          <p className="mt-6 text-sm leading-relaxed text-ink/64 md:text-base">
+            The final report should read like an annotation, not a pitch: what was
             seen, what was missing, what to change first, and what still requires
             judgment.
           </p>
-          <div className="mt-9 grid gap-3 text-[10px] uppercase tracking-[0.2em] text-ink/48">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             {finalActions.map((action) => (
               <a
                 key={action.href}
                 href={action.href}
                 target={action.external ? '_blank' : undefined}
                 rel={action.external ? 'noreferrer' : undefined}
-                className="inline-flex min-h-11 w-fit items-center border-b border-ink/18 transition-colors hover:border-ink/45 hover:text-ink/72"
+                className="inline-flex min-h-11 items-center justify-center border border-ink/20 bg-canvas px-4 text-[10px] uppercase tracking-[0.2em] text-ink/72 transition-colors hover:border-ink hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
               >
                 {action.label}
               </a>
@@ -1121,41 +945,33 @@ function FinalAtlasSection({ prefersReducedMotion }: { prefersReducedMotion: boo
           </div>
         </motion.div>
 
-        <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3, margin: '-6% 0px -6% 0px' }}
-          transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
-          className="relative border-y border-ink/12 py-7 md:ml-auto md:w-full md:max-w-[43rem]"
-        >
-          <div className="mb-5 grid grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)] gap-6 text-[9px] uppercase tracking-[0.2em] text-ink/42">
+        <motion.div {...gentleReveal} className="border border-ink/14 bg-canvas p-6 md:p-8 shadow-[0_8px_30px_color-mix(in_srgb,var(--color-ink)_2.5%,transparent)]">
+          <div className="mb-4 grid grid-cols-[minmax(0,0.4fr)_minmax(0,0.6fr)] gap-4 border-b border-ink/10 pb-3 text-[10px] uppercase tracking-[0.2em] text-ink/50">
             <span>Deliverable</span>
             <span>Contents</span>
           </div>
-          {deliverableRows.map((row, index) => (
-            <motion.div
-              key={row.label}
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
-              whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.34 }}
-              transition={{ duration: 0.42, delay: prefersReducedMotion ? 0 : index * 0.028, ease: [0.16, 1, 0.3, 1] }}
-              className="grid gap-4 border-t border-ink/10 py-5 text-xs leading-6 text-ink/58 md:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)] md:gap-6"
-            >
-              <div>
-                <span className="mr-4 text-[10px] uppercase tracking-[0.18em] text-ink/40">{String(index + 1).padStart(2, '0')}</span>
-                <span className="font-medium text-ink/76">{row.label}</span>
+          <div className="divide-y divide-ink/10">
+            {deliverableRows.map((row, index) => (
+              <div
+                key={row.label}
+                className="grid gap-2 py-3.5 text-xs sm:grid-cols-[minmax(0,0.4fr)_minmax(0,0.6fr)] sm:gap-4"
+              >
+                <div>
+                  <span className="mr-3 tabular-nums text-[10px] text-ink/40">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="font-medium text-ink/84">{row.label}</span>
+                </div>
+                <p className="leading-5 text-ink/60">{row.value}</p>
               </div>
-              <p>{row.value}</p>
-            </motion.div>
-          ))}
-          <div className="mt-6 grid gap-3 border-t border-ink/12 pt-6 md:grid-cols-3">
+            ))}
+          </div>
+          <div className="mt-6 grid gap-4 border-t border-ink/12 pt-6 sm:grid-cols-3">
             {handoffNotes.map((note, index) => (
-              <p key={note} className="border-t border-ink/10 pt-4 text-[11px] leading-6 text-ink/50">
-                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-ink/38">
-                  {String(index + 1).padStart(2, '0')}
+              <div key={note} className="border-t border-ink/10 pt-3 text-[11px] leading-5 text-ink/54 sm:border-t-0 sm:pt-0 sm:border-l sm:pl-3">
+                <span className="block text-[9px] uppercase tracking-[0.2em] text-ink/40">
+                  RULE 0{index + 1}
                 </span>
-                {note}
-              </p>
+                <p className="mt-1">{note}</p>
+              </div>
             ))}
           </div>
         </motion.div>

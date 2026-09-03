@@ -9,7 +9,7 @@ type InternalHeaderProps = {
 };
 
 const routeDescriptions: Record<string, string> = {
-  '/method': 'Technical SEO audits: scope, evidence, deliverables, and rerun checks.',
+  '/method': 'Technical SEO audits: scope, findings, deliverables, and post-change checks.',
   '/sitemap': 'Plain links to every public canonical route.',
   '/404': 'Route not found. Return to public work, research, or the sitemap.',
 };
@@ -34,10 +34,11 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   const hoverSurfaceClass = isDark ? 'hover:bg-canvas/[0.035]' : 'hover:bg-ink/[0.025]';
   const bgClass = isDark ? 'site-header-surface-dark' : 'site-header-surface-light';
   const menuBorderClass = isDark ? 'border-canvas/16' : 'border-ink/16';
-  const surfaceClass = isFinalFrame ? 'relative z-[60]' : 'site-header relative z-[60]';
-  const shellClass = mobileMenuOpen || variant === 'home'
-    ? 'fixed inset-x-0 top-0 z-50 w-full'
-    : 'sticky top-0 z-50 w-full';
+  const shellClass = isFinalFrame
+    ? 'relative z-[60] w-full'
+    : mobileMenuOpen || variant === 'home'
+      ? 'fixed inset-x-0 top-0 z-50 w-full'
+      : 'sticky top-0 z-50 w-full';
   const toggleMobileMenu = () => {
     if (!mobileMenuOpen) {
       mobileMenuScrollYRef.current = window.scrollY;
@@ -152,23 +153,23 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   }, [mobileMenuOpen]);
 
   return (
-    <header className={shellClass}>
+    <header className={`${shellClass} site-header ${bgClass} border-b ${menuBorderClass} transition-colors duration-200`}>
       {mobileMenuOpen && (
         <div
           aria-hidden="true"
-          className="fixed inset-0 z-40 cursor-default bg-ink/8 backdrop-blur-[2px] xl:hidden"
+          className="fixed inset-0 z-40 cursor-default bg-ink/8 backdrop-blur-[2px] lg:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
-      <div className={`${surfaceClass} site-header-editorial mx-auto flex min-h-[72px] max-w-[1480px] items-stretch justify-between ${bgClass} text-[10px] uppercase xl:hidden`}>
-        <div className="flex min-w-0 flex-1 items-center px-4">
+      <div className="site-header-editorial mx-auto flex min-h-[64px] max-w-[1540px] items-stretch justify-between px-4 text-[10px] uppercase lg:hidden sm:px-6">
+        <div className="flex min-w-0 flex-1 items-center py-2.5">
           <a href="/" id="header-brand-link-mobile" aria-label="Sulayman Bowles — Home" className={`site-brand-link flex w-full min-w-0 items-center gap-3 ${textClass}`}>
-            <img src="/favicon.svg" width="32" height="32" alt="" aria-hidden="true" className="site-brand-mark h-8 w-8" />
+            <img src="/favicon.svg" width="30" height="30" alt="" aria-hidden="true" className="site-brand-mark h-[30px] w-[30px]" />
             <span className="block min-w-0">
-              <span className="site-header-brand block truncate whitespace-nowrap text-[11px] font-semibold leading-none tracking-[0.3em]">SULAYMAN BOWLES</span>
+              <span className="site-header-brand block truncate whitespace-nowrap text-[11px] font-semibold leading-none tracking-[0.28em]">SULAYMAN BOWLES</span>
               {!minimalBrand && (
-                <span className={`site-header-tagline mt-2 block truncate font-serif text-[13px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
+                <span className={`site-header-tagline mt-1.5 block truncate font-serif text-[12px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
                   Technical SEO · AI Systems · Finance Research
                 </span>
               )}
@@ -182,10 +183,10 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
           aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-controls="header-mobile-menu"
           aria-expanded={mobileMenuOpen}
-          className={`inline-flex min-w-[78px] shrink-0 items-center justify-center gap-2 border-l text-[9px] leading-none tracking-[0.22em] transition-colors duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${textMutedNavClass}`}
+          className={`inline-flex min-w-[78px] shrink-0 items-center justify-center gap-2 border-l text-[11px] leading-none tracking-[0.22em] transition-colors duration-200 ${menuBorderClass} ${hoverSurfaceClass} ${textMutedNavClass}`}
           onClick={toggleMobileMenu}
         >
-          <span>INDEX</span>
+          <span className="site-header-menu-label">INDEX</span>
           <span aria-hidden="true" className="text-sm font-light tracking-normal">{mobileMenuOpen ? 'x' : '+'}</span>
         </button>
       </div>
@@ -197,7 +198,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
           role="dialog"
           aria-modal="true"
           aria-label="Site index"
-          className={`site-header-mobile-sheet fixed inset-x-0 bottom-0 top-[72px] z-[55] overflow-y-auto overscroll-contain text-[10px] uppercase xl:hidden ${bgClass}`}
+          className={`site-header-mobile-sheet fixed inset-x-0 bottom-0 top-[64px] z-[55] overflow-y-auto overscroll-contain text-[11px] uppercase lg:hidden ${bgClass}`}
         >
           <nav className="grid content-start" aria-label="Mobile navigation">
             {primaryNav.map((item, index) => {
@@ -223,7 +224,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
                     </span>
                   </span>
                   <span className="flex flex-col items-end gap-2">
-                    {active && <span className="text-[7px] tracking-[0.18em] opacity-64">Current</span>}
+                    {active && <span className="text-[9px] uppercase tracking-[0.18em] opacity-64">Current</span>}
                     <svg aria-hidden="true" viewBox="0 0 16 16" className="h-3.5 w-3.5 opacity-42 transition-transform duration-200 group-hover:translate-x-1" fill="none">
                       <path d="M4 12 12 4M6 4h6v6" stroke="currentColor" strokeWidth="1" strokeLinecap="square" strokeLinejoin="miter" />
                     </svg>
@@ -235,21 +236,23 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
         </div>
       )}
 
-      <div className={`${isFinalFrame ? 'relative' : 'site-header'} site-header-editorial mx-auto hidden min-h-[82px] max-w-[1480px] items-stretch ${bgClass} text-[11px] uppercase xl:grid xl:grid-cols-[minmax(300px,0.74fr)_minmax(0,1.26fr)]`}>
-        <a href="/" id="header-brand-link" aria-label="Sulayman Bowles — Home" className={`site-brand-link flex min-w-0 items-center gap-3 border-r px-7 transition-opacity duration-200 hover:opacity-80 ${menuBorderClass} ${textClass}`}>
-          <img src="/favicon.svg" width="36" height="36" alt="" aria-hidden="true" className="site-brand-mark h-9 w-9" />
-          <span className="block min-w-0">
-            <span className="site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.34em]">SULAYMAN BOWLES</span>
-            {!minimalBrand && (
-              <span className={`site-header-tagline mt-2 block truncate font-serif text-[15px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
-                Technical SEO · AI Systems · Finance Research
-              </span>
-            )}
-          </span>
-        </a>
+      <div className={`site-header-editorial mx-auto hidden w-full max-w-[1540px] items-stretch justify-between px-6 text-[11px] uppercase lg:flex xl:px-8 ${minimalBrand ? 'min-h-[66px]' : 'min-h-[74px]'}`}>
+        <div className="flex min-w-0 items-center py-3">
+          <a href="/" id="header-brand-link" aria-label="Sulayman Bowles — Home" className={`site-brand-link flex min-w-0 items-center gap-3.5 transition-opacity duration-200 hover:opacity-80 ${textClass}`}>
+            <img src="/favicon.svg" width="32" height="32" alt="" aria-hidden="true" className="site-brand-mark h-8 w-8" />
+            <span className="block min-w-0">
+              <span className="site-header-brand block truncate text-[11px] font-semibold leading-none tracking-[0.3em]">SULAYMAN BOWLES</span>
+              {!minimalBrand && (
+                <span className={`site-header-tagline mt-1.5 block truncate font-serif text-[13px] italic normal-case leading-none tracking-normal ${textMutedClass}`}>
+                  Technical SEO · AI Systems · Finance Research
+                </span>
+              )}
+            </span>
+          </a>
+        </div>
 
         <div className={`grid min-w-0 ${minimalBrand ? 'grid-rows-1' : 'grid-rows-[1fr_auto]'}`}>
-          <nav className="flex min-w-0 items-stretch justify-end" aria-label="Main navigation">
+          <nav className="flex min-w-0 items-stretch justify-end gap-0.5" aria-label="Main navigation">
           {primaryNav.map((item, index) => {
             const active = isNavItemActive(activePath, item.href);
             const cleanId = navItemId('header-nav', item);
@@ -265,19 +268,19 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
                 onMouseEnter={() => setRouteNote(item.description ?? item.label)}
                 onBlur={() => setRouteNote(null)}
                 onMouseLeave={() => setRouteNote(null)}
-                className={`site-header-link group relative inline-flex min-w-0 items-center justify-center gap-1.5 px-3 leading-none tracking-[0.18em] transition-colors duration-200 xl:px-4 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
+                className={`site-header-link group relative inline-flex min-w-0 items-center justify-center gap-1.5 px-3 leading-none tracking-[0.18em] transition-colors duration-200 xl:px-3.5 ${hoverSurfaceClass} ${active ? textClass : textMutedNavClass}`}
               >
-                <span aria-hidden="true" className="hidden font-serif text-[10px] italic tracking-normal opacity-38 xl:inline">{String(index + 1).padStart(2, '0')}</span>
+                <span aria-hidden="true" className="font-serif text-[10px] italic tracking-normal opacity-40">{String(index + 1).padStart(2, '0')}</span>
                 <span className="block whitespace-nowrap">
                   {navLabel(item)}
                 </span>
-                <span className={`absolute inset-x-3 bottom-0 h-px origin-left transition-opacity duration-200 ${active ? `opacity-100 ${activeRuleClass}` : `opacity-0 ${activeRuleClass} group-hover:opacity-40`}`} />
+                <span className={`absolute inset-x-2.5 bottom-[3px] h-px origin-left transition-opacity duration-200 ${active ? `opacity-100 ${activeRuleClass}` : `opacity-0 ${activeRuleClass} group-hover:opacity-40`}`} />
               </a>
             );
           })}
           </nav>
           {!minimalBrand && (
-            <div className={`flex min-h-6 items-center justify-end border-t px-4 font-serif text-[11px] italic normal-case leading-none tracking-normal ${menuBorderClass} ${textMutedClass}`}>
+            <div className={`flex min-h-6 items-center justify-end border-t px-3 font-serif text-[11px] italic normal-case leading-none tracking-normal ${menuBorderClass} ${textMutedClass}`}>
               <span className={showRouteNote ? '' : 'sr-only'}>{displayedRouteNote}</span>
               {!showRouteNote && <span aria-hidden="true">{defaultRouteNote}</span>}
             </div>

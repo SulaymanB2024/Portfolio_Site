@@ -121,7 +121,7 @@ function renderInline(
               /^S\d+$/.test(label) && href.startsWith('#source-')
                 ? (
                     <sup key={key} className="article-citation">
-                      <a href={href} aria-label={`Source ${label} in source ledger`}>{children}</a>
+                      <a href={href} aria-label={`Source ${label} in the source list`}>{children}</a>
                     </sup>
                   )
                 : (

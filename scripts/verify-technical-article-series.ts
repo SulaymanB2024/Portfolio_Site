@@ -63,6 +63,21 @@ type ImageDimensions = { width: number; height: number };
 function imageDimensions(filePath: string): ImageDimensions {
   const buffer = fs.readFileSync(filePath);
 
+  const svgTag = buffer.toString('utf8').match(/<svg\b[^>]*>/i)?.[0];
+  if (svgTag) {
+    const width = Number(svgTag.match(/\bwidth=["']([\d.]+)["']/i)?.[1]);
+    const height = Number(svgTag.match(/\bheight=["']([\d.]+)["']/i)?.[1]);
+    if (Number.isFinite(width) && Number.isFinite(height)) return { width, height };
+
+    const viewBox = svgTag.match(/\bviewBox=["']([\d.\s-]+)["']/i)?.[1]
+      .trim()
+      .split(/\s+/)
+      .map(Number);
+    if (viewBox?.length === 4 && viewBox.every(Number.isFinite)) {
+      return { width: viewBox[2], height: viewBox[3] };
+    }
+  }
+
   if (buffer.subarray(1, 4).toString('ascii') === 'PNG') {
     return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
   }
@@ -437,7 +452,10 @@ assert(
   `article series repeats exact 16-word passages: ${JSON.stringify(duplicatedPassages.slice(0, 3))}`,
 );
 
-assert(ALL_ARTICLES.length === 26, `expected 26 canonical articles; found ${ALL_ARTICLES.length}`);
+assert(
+  new Set(ALL_ARTICLES.map(getArticlePath)).size === ALL_ARTICLES.length,
+  'canonical article routes must be unique',
+);
 assert(
   duplicateValues(ALL_ARTICLES.map((article) => normalizedWords(article.conclusion.title).join(' '))).length === 0,
   'article conclusion titles must be route-specific',

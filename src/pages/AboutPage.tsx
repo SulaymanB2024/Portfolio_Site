@@ -20,7 +20,7 @@ const ABOUT_SEO = getSeoRoute('/about')!;
 const currentWork = [
   {
     title: 'Atlas',
-    copy: 'I designed the product, crawl evidence contract, review states, persistence, and export paths. The public sample demonstrates bounded source capture, a render-review state, and export artifacts—not the full product surface.',
+    copy: 'I designed the product, crawl model, review workflow, persistence layer, and exports. The public sample shows bounded source capture and a render-review case; it does not imply that every planned capability is public or complete.',
     href: '/atlas',
   },
   {
@@ -35,7 +35,7 @@ const currentWork = [
   },
   {
     title: 'Finance and research',
-    copy: 'I build source ledgers, ownership models, assumption tables, market validation, unit economics, and financial models through McCombs, Texas Venture Labs, and public research.',
+    copy: 'I build ownership maps, assumption tables, market studies, unit-economics analyses, and financial models through McCombs, Texas Venture Labs, and independent research.',
     href: '/research',
   },
 ];
@@ -43,7 +43,7 @@ const currentWork = [
 const operatingPrinciples = [
   ['Inspect the inputs', 'URL records, source and rendered pages, contracts, filings, and user workflows come before the polished answer.'],
   ['Separate fact from inference', 'Observed fields, derived findings, analyst judgment, missing coverage, and recommendations stay distinguishable.'],
-  ['Ship the review path', 'A useful system preserves the source, names the owner, defines the acceptance check, and makes the rerun possible.'],
+  ['Make the decision usable', 'A useful finding points to its source, names an owner, defines what success means, and leaves a clear way to verify the change.'],
 ];
 
 export default function AboutPage() {
@@ -61,17 +61,17 @@ export default function AboutPage() {
           <div className="about-visual__hero-copy">
             <SectionEyebrow className="about-visual__eyebrow">About</SectionEyebrow>
             <h1 id="about-title" className="visual-lab-display about-visual__title">
-              I build technical systems that make evidence inspectable.
+              I build systems that make complex decisions legible.
             </h1>
             <div className="about-visual__intro">
               <p>
-                I design and implement crawl, product, and research systems. Atlas is the clearest expression of that work: its public sample preserves bounded source capture, render-review states, traceable findings, and export artifacts, while additional product capabilities remain explicitly labeled by implementation and public-proof status.
+                I work where messy technical systems meet consequential decisions: crawl software, product workflows, analytics, and financial research. Atlas is the clearest expression of that work. It connects source and rendered pages to specific findings and repair priorities, while its public page distinguishes what is working now from what remains partial or in development.
               </p>
               <p>
-                My implementation work spans React and TypeScript interfaces, Python and SQLite workflows, CSV and JSON exports, analytics, and validation gates. At UT Austin, I am pursuing {formatEducation()} through McCombs and the music program. Music remains a live part of how I think about structure, iteration, and whether an underlying system holds together.
+                My implementation work spans React and TypeScript interfaces, Python and SQLite workflows, CSV and JSON exports, analytics, and validation logic. At UT Austin, I am pursuing {formatEducation()} through McCombs and the music program. Music remains a live part of how I think about structure, iteration, and whether an underlying system holds together.
               </p>
               <p>
-                The work is inspectable rather than assertion-led: the relevant project pages attach sanitized crawl rows, source ledgers, method notes, system designs, public code, and explicit evidence limits.
+                Readers can examine the method behind the work through sanitized crawl rows, research tables, system designs, public code, and clearly stated limits. The point is not documentation for its own sake. It is to make judgment legible enough to challenge, improve, and use.
               </p>
             </div>
             <nav className="visual-lab-text-links" aria-label="About page actions">
@@ -96,7 +96,7 @@ export default function AboutPage() {
           index="01 / Current work"
           title="Four connected lanes."
           headingId="about-current-work"
-          description="The fields differ; the engineering habit does not. Preserve the inputs, make the transformation legible, and ship a result another person can audit or rerun."
+          description="The fields differ; the underlying discipline does not. Understand the inputs, make the reasoning legible, and produce something another person can challenge or extend."
         >
           <ol className="visual-lab-record-index about-visual__work-index">
             {currentWork.map((item, index) => (

@@ -126,16 +126,16 @@ export const PROFILE_FACTS = {
   certifications: ['Google Data Analytics Professional Certificate', 'Google Project Management Professional Certificate', 'Bloomberg Market Concepts'],
   languages: ['Spanish (Intermediate)'],
   projects: [
-    { name: 'Atlas SEO Audit Console', path: '/atlas', status: 'Implemented; public proof partial; active development' },
+    { name: 'Atlas SEO Audit Console', path: '/atlas', status: 'Implemented; public sample available; active development' },
     { name: 'Void Agency', path: 'https://www.void-agency.com/', status: 'Operating' },
     { name: 'The First AI Managers', path: '/research/ai-systems/the-first-ai-managers', status: 'Published July 14, 2026' },
     { name: 'Texas toll-road ownership research', path: '/markets/who-owns-texas-toll-roads', status: 'Published July 11, 2026' },
   ],
   proofClaims: [
-    { label: 'Atlas', claim: 'Crawl and evidence console with a reproducible public demonstration', asOf: '2026-07-16', publicSource: '/atlas/sample-crawl' },
+    { label: 'Atlas', claim: 'Technical SEO crawler and review console with a reproducible public demonstration', asOf: '2026-07-16', publicSource: '/atlas/sample-crawl' },
     { label: 'Void Agency', claim: '$50K+ collected revenue — first-party claim; private invoices are not public', asOf: '2026-05-31', publicSource: null },
     { label: 'Chegg', claim: 'AI Product Manager Intern, Office of the Chief Product Officer — role stated in this résumé; corroborating employer record is not linked', asOf: '2026-07-16', publicSource: null },
-    { label: 'Public research', claim: 'AI systems, infrastructure, and investment research with source-led analysis', asOf: '2026-07-16', publicSource: '/research' },
+    { label: 'Public research', claim: 'AI systems, infrastructure, and investment research using public sources and explicit assumptions', asOf: '2026-07-16', publicSource: '/research' },
   ],
   canonicalLinks: {
     home: 'https://sulayman-bowles.dev/',
