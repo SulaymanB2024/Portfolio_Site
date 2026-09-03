@@ -26,10 +26,39 @@ jobs:
       - name: Reconstruct and apply article patch
         shell: bash
         run: |
-          sha256sum scripts/us-toll-bootstrap/part{00..07}
-          wc -c scripts/us-toll-bootstrap/part{00..07}
-          cat scripts/us-toll-bootstrap/part{00..07} > scripts/patch-us-toll-road-article.py
-          sha256sum scripts/patch-us-toll-road-article.py
+          cat > /tmp/us-toll-parts.sha256 <<'EOF'
+          b56bea442462341e4f73d91b1c6ddd7fa4b9940b1dcfb11222d5e403d3a60d37  scripts/us-toll-bootstrap/part000
+          e648cfe9f8fecbf2a533692532868d495a2e863fc2e610426a309b6076fe6d60  scripts/us-toll-bootstrap/part001
+          6a25c71a9a9f4052ac87fd845b906bbd84ffb8673cf555b7dddd6cd4b812c2af  scripts/us-toll-bootstrap/part002
+          1779ff0f1f5b1ee2304237be3dce73506aa04d0320b2c6daf38e8e2a84e3f1e3  scripts/us-toll-bootstrap/part01
+          0ccf5373f28a24b905d22a0ef8662d8fae3c7df4e2109d037b8af8814e3c33a1  scripts/us-toll-bootstrap/part02
+          43e2e046ce0ee39c31bb0c433f87ced27eb89c90b2185a69d4690aa665c03f96  scripts/us-toll-bootstrap/part030
+          16c4a21894b9f611f0c4a5e03be7b6e67db882e658b3a880d6f46e60410837b5  scripts/us-toll-bootstrap/part031
+          f1b78096ae88ad2d24f0e03d0534fbabddce474043eb51b1cf2f627fc95442ae  scripts/us-toll-bootstrap/part032
+          49259c1e9dec933e60c6da284472b3a1307882adeebeabd467219dc646e19dea  scripts/us-toll-bootstrap/part04
+          94112dcfe4428ca25a13fdcf4d04148a633107bc3ea8a9dd0cf3d49ce1f8c434  scripts/us-toll-bootstrap/part05
+          1110204da44ff568346580f18b9556194001a0d5d5a7ad8dd2712ae318e7179a  scripts/us-toll-bootstrap/part060
+          2c1271c7f57a0d4c9faf51987e668642e2c47a0fd6fc372b7b4178e6f0badec8  scripts/us-toll-bootstrap/part061
+          58cc87f9396d1f5c1fbe09b3ca3fce5e23bb417701219ef42877670342d93c86  scripts/us-toll-bootstrap/part062
+          9fe841f090e5ca45cd7be2cbff1253058204a788cf42e0fc863fe3e03416bd46  scripts/us-toll-bootstrap/part07
+          EOF
+          sha256sum -c /tmp/us-toll-parts.sha256
+          cat \
+            scripts/us-toll-bootstrap/part000 \
+            scripts/us-toll-bootstrap/part001 \
+            scripts/us-toll-bootstrap/part002 \
+            scripts/us-toll-bootstrap/part01 \
+            scripts/us-toll-bootstrap/part02 \
+            scripts/us-toll-bootstrap/part030 \
+            scripts/us-toll-bootstrap/part031 \
+            scripts/us-toll-bootstrap/part032 \
+            scripts/us-toll-bootstrap/part04 \
+            scripts/us-toll-bootstrap/part05 \
+            scripts/us-toll-bootstrap/part060 \
+            scripts/us-toll-bootstrap/part061 \
+            scripts/us-toll-bootstrap/part062 \
+            scripts/us-toll-bootstrap/part07 \
+            > scripts/patch-us-toll-road-article.py
           echo "e14c6d237a6705e37ba007de2eafd9b498cb145f7d9410f2e6fcdc9d49f18f96  scripts/patch-us-toll-road-article.py" | sha256sum -c -
           python scripts/patch-us-toll-road-article.py
       - name: Install dependencies

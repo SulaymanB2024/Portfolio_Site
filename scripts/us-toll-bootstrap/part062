@@ -1,0 +1,23 @@
+h_targets_path.write_text(search_targets, encoding="utf-8")
+
+replace_once(
+    "scripts/verify-technical-article-series.ts",
+    "assert(ALL_ARTICLES.length === 26, `expected 26 canonical articles; found ${ALL_ARTICLES.length}`);",
+    "assert(ALL_ARTICLES.length === 27, `expected 27 canonical articles; found ${ALL_ARTICLES.length}`);",
+)
+replace_once(
+    "scripts/verify-article-ranking-program.ts",
+    "assert(expectedPaths.length === 26, `expected 26 indexable article routes, found ${expectedPaths.length}`);",
+    "assert(expectedPaths.length === 27, `expected 27 indexable article routes, found ${expectedPaths.length}`);",
+)
+
+generated_path = ROOT / "src/seo/generatedPublicFiles.ts"
+generated = generated_path.read_text(encoding="utf-8")
+import_anchor = "import {\n  TEXAS_TOLL_OWNERSHIP_CSV_PATH,\n  TEXAS_TOLL_OWNERSHIP_ROWS,\n} from '../content/texasTollRoadOwnership';\n"
+import_snippet = "import {\n  US_TOLL_PRIVATE_HYBRID_ROWS,\n  US_TOLL_ROAD_METHODOLOGY_MARKDOWN,\n  US_TOLL_ROAD_METHODOLOGY_PATH,\n  US_TOLL_ROAD_OWNERSHIP_ARTICLE,\n  US_TOLL_ROAD_PRIVATE_HYBRID_CSV_PATH,\n  US_TOLL_ROAD_SOURCE_LEDGER_CSV_PATH,\n  US_TOLL_ROAD_STATE_OVERVIEW_CSV_PATH,\n  US_TOLL_STATE_OVERVIEW,\n} from '../content/usTollRoadOwnershipArticle';\n"
+if "US_TOLL_ROAD_STATE_OVERVIEW_CSV_PATH" not in generated:
+    if generated.count(import_anchor) != 1:
+        raise RuntimeError("generatedPublicFiles.ts: toll import anchor missing")
+    generated = generated.replace(import_anchor, import_anchor + import_snippet, 1)
+
+builders = "export function buildUsTollRoadStateOverviewCsv() {\n  const header = ['jurisdiction', 'code', 'pattern', 'note'];\n  const rows = US_TOLL_STATE_OVERVIEW.map((row) => [\n    row.jurisdiction,\n    row.code,\n    row.pattern,\n    row.note,\n  ]);\n  return `${[header, ...rows].map((row) => row.map(escapeCsv).join(',')).join('\\n')}\\n`;\n}\n\nexport function buildUsTollRoadPrivateHybridCsv() {\n  const header = [\n    'facility',\n    'states',\n    'structure',\n    'public_title_or_sponsor',\n    'priva

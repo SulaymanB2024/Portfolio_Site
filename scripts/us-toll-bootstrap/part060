@@ -1,0 +1,22 @@
+ = article(TEXAS_TOLL_ARTICLE_SLUG);\n",
+    "const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);\n"
+    "const usTollRoadOwnership = article(US_TOLL_ROAD_OWNERSHIP_ARTICLE_SLUG);\n",
+)
+replace_once(
+    "src/content/publicationIndex.ts",
+    "  {\n    category: 'Markets and investing',\n    title: texasTollRoads.title,\n",
+    "  {\n"
+    "    category: 'Markets and investing',\n"
+    "    title: usTollRoadOwnership.title,\n"
+    "    href: getArticlePath(usTollRoadOwnership),\n"
+    "    description: usTollRoadOwnership.subtitle,\n"
+    "    date: usTollRoadOwnership.dateModified ?? usTollRoadOwnership.date,\n"
+    "    featured: true,\n"
+    "  },\n"
+    "  {\n    category: 'Markets and investing',\n    title: texasTollRoads.title,\n",
+)
+
+search_targets_path = ROOT / "src/seo/articleSearchTargets.ts"
+search_targets = search_targets_path.read_text(encoding="utf-8")
+new_path = "/markets/who-owns-us-toll-roads"
+new_target = '  {\n    path: \'/markets/who-owns-us-toll-roads\',\n    primaryQuery: "who owns America\'s toll roads",\n    supportingQueries: [\n      \'who owns toll roads in the United States\',\n      \'are toll roads privately owned\',\n      \'privately owned toll roads by state\',\n      \'foreign-owned toll roads in America\',\n      \'who owns toll roads in each state\',\n    ],\n    intent: \'ownership\',\n    cohort: 1,\n    directAnswer:\n      \'Most material U.S. toll systems are publicly titled and send toll revenue to a public authority, transportation department, county, city, or public corporation. A smaller but consequential group is privately titled or controlled through long concessions, while legal title, operations, billing, revenue rights, equity, debt, and reversion can sit with different entities.\',\n    serpGap:\n      \'Federal inventories identify facilities but rarely trace title, concession control, billing, toll-revenue rights, equity, debt, and reversion in one current state-by-state reference.\',\n    originalArtifact:\n      \'A 51-jurisdiction lookup, a 33-record p

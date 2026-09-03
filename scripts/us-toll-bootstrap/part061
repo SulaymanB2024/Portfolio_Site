@@ -1,0 +1,32 @@
+rivate and hybrid structure table, downloadable CSVs, a source ledger, and an ownership-stack data dictionary.\',\n    cannibalizationBoundary:\n      \'This national page compares state models and material U.S. concessions; the Texas page remains the deeper owner-by-owner and cash-flow investigation for one state.\',\n    lastVerified: \'2026-09-02\',\n    relatedPaths: [\n      \'/markets/who-owns-texas-toll-roads\',\n      \'/research/financial-systems/who-owns-austin-home-service-companies\',\n      \'/research/financial-systems/what-happens-when-an-index-decides-a-company-matters\',\n      \'/research/search-console/technical-seo-public-data-infrastructure\',\n    ],\n  },\n'
+if f"path: '{new_path}'" not in search_targets:
+    anchor = "export const ARTICLE_SEARCH_TARGETS = [\n"
+    if search_targets.count(anchor) != 1:
+        raise RuntimeError("articleSearchTargets.ts: array anchor not found exactly once")
+    search_targets = search_targets.replace(anchor, anchor + new_target, 1)
+
+
+def add_related_path(text: str, source_path: str, related_path: str) -> str:
+    pattern = re.compile(
+        r"(  \{\n    path: " + re.escape(repr(source_path)) + r",[\s\S]*?    relatedPaths: \[\n)"
+    )
+    match = pattern.search(text)
+    if not match:
+        raise RuntimeError(f"articleSearchTargets.ts: unable to locate relatedPaths for {source_path}")
+    next_object = text.find("\n  },\n  {", match.end())
+    current_object = text[match.start(): next_object if next_object >= 0 else len(text)]
+    line = f"      '{related_path}',\n"
+    if line in current_object:
+        return text
+    return text[:match.end()] + line + text[match.end():]
+
+
+for source_path in [
+    "/markets/who-owns-texas-toll-roads",
+    "/research/financial-systems/who-owns-austin-home-service-companies",
+    "/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+    "/research/search-console/technical-seo-public-data-infrastructure",
+]:
+    search_targets = add_related_path(search_targets, source_path, new_path)
+
+searc
