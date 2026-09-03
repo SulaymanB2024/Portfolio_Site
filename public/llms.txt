@@ -67,6 +67,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot](https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy)
 - [Technical SEO as Public Data Infrastructure](https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure)
 - [Canonical Identity Beats More Content](https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo)
+- [Why Texas Toll Roads Stay Tolled](https://sulayman-bowles.dev/research/financial-systems/why-texas-toll-roads-stay-tolled)
 - [The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature](https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity)
 - [Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics](https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads)
 - [Missing Canonical Tag: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/missing-canonical): issue diagnostic guide with a labeled evidence fixture and rerun gate.
@@ -92,7 +93,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Pagination and Infinite Scroll Indexing: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/pagination-infinite-scroll-indexing): issue diagnostic guide with a labeled evidence fixture and rerun gate.
 - [Hreflang Return Tag Error: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/hreflang-return-tag-error): issue diagnostic guide with a labeled evidence fixture and rerun gate.
 - [Mobile and Desktop Content Mismatch: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/mobile-desktop-content-mismatch): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Lazy-Loaded Primary Content: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/lazy-loaded-primary-content): issue diagnostic guide with a labeled evidence fixture and rerun gate.
+- [Lazy-Loaded Primary Content: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/lazy-loaded-primary-content-mismatch): issue diagnostic guide with a labeled evidence fixture and rerun gate.
 - [Next.js Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs): platform diagnostic guide with a labeled evidence fixture and rerun gate.
 - [React and Vite Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite): platform diagnostic guide with a labeled evidence fixture and rerun gate.
 - [WordPress Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress): platform diagnostic guide with a labeled evidence fixture and rerun gate.
