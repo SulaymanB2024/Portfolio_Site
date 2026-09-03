@@ -1,5 +1,6 @@
 import { AI_MANAGERS_ARTICLE_PATH } from './aiManagersArticle';
 import { AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG } from './airlineLoyaltyFinancingArticle';
+import { AUSTIN_APARTMENT_OWNERSHIP_ARTICLE_SLUG } from './austinApartmentOwnershipArticle';
 import { AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE_SLUG } from './austinHomeServiceOwnershipArticle';
 import type { ResearchArticle } from './articleModels';
 import { getArticlePath, getArticleBySlug } from './articleRegistry';
@@ -30,6 +31,7 @@ const article = (slug: string) => {
 
 const aiMegawatt = article(THE_AI_MEGAWATT_ARTICLE_SLUG);
 const crawlerPolicy = article('ai-search-crawler-policy');
+const austinApartmentOwnership = article(AUSTIN_APARTMENT_OWNERSHIP_ARTICLE_SLUG);
 const austinHomeServiceOwnership = article(AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE_SLUG);
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
@@ -109,6 +111,14 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     href: getArticlePath(canonicalIdentity),
     description: canonicalIdentity.subtitle,
     date: canonicalIdentity.dateModified ?? canonicalIdentity.date,
+  },
+  {
+    category: 'Markets and investing',
+    title: austinApartmentOwnership.title,
+    href: getArticlePath(austinApartmentOwnership),
+    description: austinApartmentOwnership.subtitle,
+    date: austinApartmentOwnership.dateModified ?? austinApartmentOwnership.date,
+    featured: true,
   },
   {
     category: 'Markets and investing',
