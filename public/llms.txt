@@ -93,7 +93,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Pagination and Infinite Scroll Indexing: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/pagination-infinite-scroll-indexing): issue diagnostic guide with a labeled evidence fixture and rerun gate.
 - [Hreflang Return Tag Error: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/hreflang-return-tag-error): issue diagnostic guide with a labeled evidence fixture and rerun gate.
 - [Mobile and Desktop Content Mismatch: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/mobile-desktop-content-mismatch): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Lazy-Loaded Primary Content: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/lazy-loaded-primary-content-mismatch): issue diagnostic guide with a labeled evidence fixture and rerun gate.
+- [Lazy-Loaded Primary Content: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/lazy-loaded-primary-content): issue diagnostic guide with a labeled evidence fixture and rerun gate.
 - [Next.js Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs): platform diagnostic guide with a labeled evidence fixture and rerun gate.
 - [React and Vite Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite): platform diagnostic guide with a labeled evidence fixture and rerun gate.
 - [WordPress Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress): platform diagnostic guide with a labeled evidence fixture and rerun gate.
