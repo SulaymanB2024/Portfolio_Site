@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  verify-and-report:
+  verify:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
@@ -22,50 +22,46 @@ jobs:
           node-version: 24
           cache: npm
 
-      - run: npm ci
-      - run: npm run generate:article-routes
-      - run: npm run generate:public
-      - run: npm run build
-
-      - name: Run the complete verification suite and preserve output
-        shell: bash
+      - name: Update publication archive regression assertions
         run: |
-          set +e
-          report=.github/a01-ci-report.txt
-          : > "$report"
-          overall=0
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = 'scripts/verify-ai-search-seo.mjs';
+          let source = fs.readFileSync(path, 'utf8');
+          const oldLine = "assert(textFromHtml(research).includes('28 Notes and Artifacts'), 'research: publication count is not derived as twenty-eight');";
+          const newLine = "assert(textFromHtml(research).includes('29 Notes and Artifacts'), 'research: publication count is not derived as twenty-nine');";
+          if (source.includes(oldLine)) source = source.replace(oldLine, newLine);
+          if (!source.includes(newLine)) throw new Error('Publication-count assertion anchor missing');
 
-          run_check() {
-            label="$1"
-            shift
-            {
-              echo "## ${label}"
-              echo '$ ' "$@"
-            } >> "$report"
-            "$@" >> "$report" 2>&1
-            code=$?
-            echo "exit_code=${code}" >> "$report"
-            echo >> "$report"
-            if [ "$code" -ne 0 ]; then overall=1; fi
+          const articleAssertion = "assert(textFromHtml(research).includes('Who Owns 25 of America’s Major Toll Roads?'), 'research: national toll-road ownership article missing');";
+          if (!source.includes(articleAssertion)) {
+            const anchor = "assert(textFromHtml(research).includes('Who Owns West Campus Student Housing?'), 'research: West Campus housing article missing');";
+            if (!source.includes(anchor)) throw new Error('Research article assertion anchor missing');
+            source = source.replace(anchor, `${anchor}\n${articleAssertion}`);
           }
-
-          run_check test:bot-observer npm run test:bot-observer
-          run_check test:portfolio-analytics npm run test:portfolio-analytics
-          run_check test:seo-schema npm run test:seo-schema
-          run_check verify:bot-observer npm run verify:bot-observer
-          run_check verify:generated npm run verify:generated
-          run_check lint npm run lint
-          run_check verify:seo npm run verify:seo
-          run_check verify:vercel-seo npm run verify:vercel-seo
-          run_check verify:internal-links npm run verify:internal-links
-          run_check verify:keywords npm run verify:keywords
-          run_check verify:reduction npm run verify:reduction
-          run_check audit:style npm run audit:style
-          run_check verify:security npm run verify:security
+          fs.writeFileSync(path, source);
+          NODE
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$report"
-          git commit -m "Record A01 integration verification results" || true
+          git add scripts/verify-ai-search-seo.mjs
+          git commit -m "Update SEO regression checks for national toll-road article" || true
           git push origin HEAD:content/us-toll-road-ownership-article
-          exit "$overall"
+
+      - run: npm ci
+      - run: npm run generate:article-routes
+      - run: npm run generate:public
+      - run: npm run test:bot-observer
+      - run: npm run test:portfolio-analytics
+      - run: npm run test:seo-schema
+      - run: npm run verify:bot-observer
+      - run: npm run verify:generated
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run verify:seo
+      - run: npm run verify:vercel-seo
+      - run: npm run verify:internal-links
+      - run: npm run verify:keywords
+      - run: npm run verify:reduction
+      - run: npm run audit:style
+      - run: npm run verify:security
