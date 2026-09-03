@@ -1,0 +1,22 @@
+{
+  "article_id": "A02",
+  "title": "Why Texas Toll Roads Stay Tolled",
+  "canonical_path": "/research/financial-systems/why-texas-toll-roads-stay-tolled",
+  "checked_through": "2026-09-02",
+  "direct_answer": "Texas toll roads can stay tolled after the original construction cost is no longer the main issue because project-cost recovery, road debt, system debt and pledges, statutory tolling authority, and private concession rights are separate.",
+  "normalized_comparison": {
+    "systems": [
+      "Central Texas Turnpike System",
+      "Grand Parkway System"
+    ],
+    "fiscal_year": 2025,
+    "source": "TxDOT HB 803 FY2025 Annual Toll Report",
+    "reason_for_scope": "Same source, fiscal year, denominator, and category schedule"
+  },
+  "open_evidence_items": [
+    "Harris County final §284.008(d) order and project list",
+    "SH 130 Concession Company current ultimate-equity chain",
+    "CTRMA audit-to-monthly category bridge",
+    "FBGPTRA exact page-level headline extraction"
+  ]
+}
