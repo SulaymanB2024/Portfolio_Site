@@ -84,6 +84,7 @@ export type ArticleSection = {
 export type ResearchArticle = {
   kind: 'research';
   cluster: ResearchCluster;
+  path?: string;
   slug: string;
   aliases?: string[];
   number: string;
