@@ -23,20 +23,9 @@ jobs:
           cache: npm
 
       - name: Materialize the article content and public assets
-        env:
-          GH_TOKEN: ${{ github.token }}
-          CONTENT_BLOB_SHA: c5367d0f327274c193609326d1da98234659c361
         run: |
-          curl --fail --silent --show-error --location \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/git/blobs/${CONTENT_BLOB_SHA}" \
-            | jq -r '.content' \
-            | tr -d '\n' \
-            | base64 --decode \
-            > /tmp/a01-site-content.tar.gz
-          echo "9e35fae01b93d008d93d7b160c1c53b0af1e1e6219837c0f5c6f36c53bcf589f  /tmp/a01-site-content.tar.gz" | sha256sum --check
-          tar -xzf /tmp/a01-site-content.tar.gz -C .
+          echo "9e35fae01b93d008d93d7b160c1c53b0af1e1e6219837c0f5c6f36c53bcf589f  .github/a01-site-content.tar.gz" | sha256sum --check
+          tar -xzf .github/a01-site-content.tar.gz -C .
           test -s src/content/usTollRoadArticle.ts
           test -s public/research/us-toll-road-ownership-2026.csv
           test -s public/images/research/us-toll-road-ownership-stack.svg
