@@ -291,13 +291,13 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "aliases": [
       "/markets/ai-search-crawler-policy"
     ],
-    "title": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
-    "seoTitle": "Robots.txt Guide for GPTBot, OAI-SearchBot, and AI Crawlers",
-    "seoDescription": "Compare OpenAI, Anthropic, and Perplexity crawlers, then copy robots.txt rules for AI search, training controls, or named-agent blocks.",
+    "title": "AI Crawler Robots.txt: Allow Search, Block Training, Verify Bots",
+    "seoTitle": "AI Crawler Robots.txt: Allow Search, Block Training",
+    "seoDescription": "Allow AI search, block model-training crawlers, or deny named agents with copy-ready robots.txt rules and a server-log verification checklist.",
     "date": "2026.06.19",
-    "dateModified": "2026.07.19",
+    "dateModified": "2026.09.03",
     "indexable": true,
-    "staticSummary": "Robots.txt can express different crawl preferences for GPTBot, OAI-SearchBot, and other named agents, but those directives govern crawler access only; they do not guarantee indexing, rankings, citations, model inclusion, or retrieval by a user-requested tool. /robots.txt is a host-scoped text file. Match the exact case-sensitive product token, then assign Allow: / or Disallow: /. Preserve the correct Sitemap line.",
+    "staticSummary": "To allow OpenAI search discovery while opting out of model-development crawling, allow OAI-SearchBot and disallow GPTBot in separate robots.txt groups. Treat ChatGPT-User and other user-triggered fetchers separately. These rules express crawl preferences; they do not authenticate a bot or guarantee indexing, citations, training exclusion, or retrieval. Quick answer: robots.txt can express different choices for AI search discovery and model-development crawling. For OpenAI, OAI-SearchBot is the search-discovery token and GPTBot is the model-development token. A rule for one does not automatically control the other. Anthropic and Perplexity publish their own named tokens and behavior notes.",
     "image": "/images/research/ai-crawler-policy-social.jpg"
   },
   {
@@ -363,12 +363,285 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "path": "/markets/who-owns-texas-toll-roads",
     "aliases": [],
     "title": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
-    "seoTitle": "Who Owns Texas Toll Roads? Public Owners & 4 Concessions",
-    "seoDescription": "Most Texas toll roads are publicly owned. See the four major private concessions, who operates each road, who collects toll revenue, and where ownership ends.",
+    "seoTitle": "Who Owns Texas Toll Roads? Owners, Operators & Concessions",
+    "seoDescription": "Texas toll-road ownership tracker: compare public authorities, operators, private concessions, regions, billing agencies, and cited primary sources.",
     "date": "2026.07.11",
-    "dateModified": "2026.07.25",
+    "dateModified": "2026.09.03",
     "indexable": true,
     "staticSummary": "Most Texas toll roads are publicly owned, not privately owned. TxDOT, counties, and public toll authorities own most roadways. Four major concessions—North Tarrant Express, LBJ Express, NTE 35W, and SH 130 Segments 5–6—give private companies time-limited operating and toll-revenue rights while Texas retains title to the pavement. Texas toll roads do not have one owner. Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.",
     "image": "/images/research/texas-toll-roads-social.jpg"
+  }
+];
+
+export type PublicationRouteMetadata = {
+  slug: string;
+  path: string;
+  title: string;
+  subtitle: string;
+  date: string;
+  dateModified: string;
+  cluster?: string;
+  inTechnicalSeries: boolean;
+};
+
+// Archive lists must not pull complete article bodies into the client bundle.
+export const PUBLICATION_ROUTE_METADATA: PublicationRouteMetadata[] = [
+  {
+    "slug": "the-ai-megawatt",
+    "path": "/research/ai-systems/the-ai-megawatt",
+    "title": "The AI Megawatt Is Not a Megawatt",
+    "subtitle": "What a 1 GW data center means from grid interconnection to GB300 rack capacity.",
+    "date": "2026.08.16",
+    "dateModified": "2026.08.16",
+    "cluster": "ai-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "crawl-frontier-state-machine",
+    "path": "/research/crawler-engineering/crawl-frontier-state-machine",
+    "title": "The Crawl Frontier Is a State Machine, Not a Queue",
+    "subtitle": "A practical architecture for URL identity, admission control, host politeness, bounded retries, crawl traps, and evidence-preserving frontier transitions.",
+    "date": "2026.07.19",
+    "dateModified": "2026.07.19",
+    "cluster": "crawler-engineering",
+    "inTechnicalSeries": true
+  },
+  {
+    "slug": "raw-html-rendered-dom-evidence",
+    "path": "/research/technical-seo/raw-html-rendered-dom-evidence",
+    "title": "Raw HTML and Rendered DOM Are Separate Evidence",
+    "subtitle": "How to capture, compare, and qualify transport source, browser output, dependent requests, runtime failures, and render completeness without treating screenshots as data.",
+    "date": "2026.07.19",
+    "dateModified": "2026.07.19",
+    "cluster": "technical-seo",
+    "inTechnicalSeries": true
+  },
+  {
+    "slug": "canonicalization-graph-consistency",
+    "path": "/research/technical-seo/canonicalization-graph-consistency",
+    "title": "Canonicalization Is a Graph Consistency Problem",
+    "subtitle": "A systems method for finding conflicting canonicals, redirect chains, cycles, duplicate clusters, and sitemap disagreements before they become indexation ambiguity.",
+    "date": "2026.07.19",
+    "dateModified": "2026.07.19",
+    "cluster": "technical-seo",
+    "inTechnicalSeries": true
+  },
+  {
+    "slug": "internal-links-directed-retrieval-graph",
+    "path": "/research/technical-seo/internal-links-directed-retrieval-graph",
+    "title": "Internal Links Are a Directed Retrieval Graph",
+    "subtitle": "A graph-first method for crawlable links, reachability, depth, contextual edges, orphan diagnosis, and repair plans that preserve user intent.",
+    "date": "2026.07.19",
+    "dateModified": "2026.07.19",
+    "cluster": "technical-seo",
+    "inTechnicalSeries": true
+  },
+  {
+    "slug": "robots-txt-courtesy-not-access-control",
+    "path": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+    "title": "Robots.txt Is a Courtesy Layer, Not Access Control",
+    "subtitle": "A precise model for separating crawler requests, indexing directives, authentication, authorization, rate controls, and evidence of enforcement.",
+    "date": "2026.07.19",
+    "dateModified": "2026.07.25",
+    "cluster": "ai-crawlers",
+    "inTechnicalSeries": true
+  },
+  {
+    "slug": "structured-data-without-content-drift",
+    "path": "/research/technical-seo/structured-data-without-content-drift",
+    "title": "Structured Data Without Content Drift",
+    "subtitle": "A typed-content architecture for keeping visible pages, metadata, JSON-LD, sitemaps, and exports consistent through generation, invariants, and production tests.",
+    "date": "2026.07.19",
+    "dateModified": "2026.07.19",
+    "cluster": "technical-seo",
+    "inTechnicalSeries": true
+  },
+  {
+    "slug": "audit-findings-derived-records",
+    "path": "/research/data-systems/audit-findings-derived-records",
+    "title": "Audit Findings Should Be Derived Records",
+    "subtitle": "A data model that separates captured observations, artifacts, rule evaluations, findings, confidence, review state, and recommendations without losing lineage.",
+    "date": "2026.07.19",
+    "dateModified": "2026.07.19",
+    "cluster": "data-systems",
+    "inTechnicalSeries": true
+  },
+  {
+    "slug": "replayable-traces-ai-agent-evaluation",
+    "path": "/research/ai-systems/replayable-traces-ai-agent-evaluation",
+    "title": "Replayable Traces for Evaluating Tool-Using AI Agents",
+    "subtitle": "An evaluation architecture for tasks, trials, observable trajectories, controlled environments, layered graders, repeated runs, and evidence-gated promotion.",
+    "date": "2026.07.19",
+    "dateModified": "2026.07.19",
+    "cluster": "ai-systems",
+    "inTechnicalSeries": true
+  },
+  {
+    "slug": "sqlite-crawl-pipelines",
+    "path": "/research/data-systems/sqlite-crawl-pipelines",
+    "title": "SQLite for Crawl Pipelines: Idempotency, WAL, and Bounded Concurrency",
+    "subtitle": "A storage architecture for URL identity, append-only attempts, transactional batches, upserts, one-writer discipline, WAL checkpoints, integrity checks, and portable exports.",
+    "date": "2026.07.19",
+    "dateModified": "2026.07.19",
+    "cluster": "data-systems",
+    "inTechnicalSeries": true
+  },
+  {
+    "slug": "technical-seo-migration-release-gates",
+    "path": "/research/technical-seo/technical-seo-migration-release-gates",
+    "title": "Technical SEO Migrations Need Executable Release Gates",
+    "subtitle": "A fail-closed migration method for URL manifests, redirect graphs, canonical output, internal links, sitemaps, rendered content, launch sequencing, and post-release evidence.",
+    "date": "2026.07.19",
+    "dateModified": "2026.07.19",
+    "cluster": "technical-seo",
+    "inTechnicalSeries": true
+  },
+  {
+    "slug": "who-owns-austin-home-service-companies",
+    "path": "/research/financial-systems/who-owns-austin-home-service-companies",
+    "title": "Who Owns Austin’s Home-Service Companies?",
+    "subtitle": "A verified map of the parent companies, private-equity sponsors, public corporations, franchises, and local operators behind 67 home-service brands advertising across Austin.",
+    "date": "2026.07.26",
+    "dateModified": "2026.07.26",
+    "cluster": "financial-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "what-happens-when-an-index-decides-a-company-matters",
+    "path": "/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+    "title": "What Happens When an Index Decides a Company Matters?",
+    "subtitle": "How private index rules become public market orders—and why inclusion can move ownership, liquidity, and price without guaranteeing permanent value.",
+    "date": "2026.07.23",
+    "dateModified": "2026.07.23",
+    "cluster": "financial-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "software-buyout-boom-2020-2022-exit-audit",
+    "path": "/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
+    "title": "What Happened to the Software Buyout Boom?",
+    "subtitle": "A control-based audit of 25 large sponsor-led software take-private transactions that keeps liquidity, current control, and investment returns separate.",
+    "date": "2026.08.17",
+    "dateModified": "2026.08.29",
+    "cluster": "financial-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "how-airlines-borrow-against-loyalty-programs",
+    "path": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+    "title": "How Airlines Borrow Against Loyalty Programs",
+    "subtitle": "How airline loyalty program financing turns bank payments, co-brand contracts, controlled accounts, and loyalty IP into collateral—without treating points as deposits.",
+    "date": "2026.07.23",
+    "dateModified": "2026.07.23",
+    "cluster": "financial-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "where-online-returns-actually-go",
+    "path": "/research/financial-systems/where-online-returns-actually-go",
+    "title": "Where Do Online Returns Go? Inside Reverse Logistics",
+    "subtitle": "What happens to online returns after a refund: a product-level model of restocking, open-box resale, refurbishment, liquidation, recycling, destruction, and returnless refunds.",
+    "date": "2026.07.22",
+    "dateModified": "2026.07.22",
+    "cluster": "financial-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "hidden-financing-hardware-startups",
+    "path": "/research/financial-systems/hidden-financing-hardware-startups",
+    "title": "Hardware Startup Financing: Five Capital Stacks",
+    "subtitle": "How hardware startup financing combines venture equity, equipment finance, asset-backed debt, leases, customer capital, public support, and project finance across five companies.",
+    "date": "2026.07.22",
+    "dateModified": "2026.07.22",
+    "cluster": "financial-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "west-campus-student-housing",
+    "path": "/research/financial-systems/west-campus-student-housing",
+    "title": "Who Owns West Campus Student Housing?",
+    "subtitle": "The captive economics of student housing around the University of Texas at Austin, traced from one student installment through property operations, capital structure, and first loss.",
+    "date": "2026.07.22",
+    "dateModified": "2026.07.22",
+    "cluster": "financial-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "waymo-hardware-financing",
+    "path": "/research/financial-systems/waymo-hardware-financing",
+    "title": "Who Funds Waymo’s Hardware?",
+    "subtitle": "A Waymo case study of who finances the vehicles and infrastructure, who owns the risk, and who absorbs the loss when utilization or technology fails.",
+    "date": "2026.07.22",
+    "dateModified": "2026.07.22",
+    "cluster": "financial-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "the-first-ai-managers",
+    "path": "/research/ai-systems/the-first-ai-managers",
+    "title": "The First AI Managers",
+    "subtitle": "Inside the first AI-operated shops, cafés, vending machines, and radio stations—and the gap between completing the next task and preserving a coherent business.",
+    "date": "2026.07.14",
+    "dateModified": "2026.07.19",
+    "cluster": "ai-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "ai-search-crawler-policy",
+    "path": "/research/ai-crawlers/ai-search-crawler-policy",
+    "title": "AI Crawler Robots.txt: Allow Search, Block Training, Verify Bots",
+    "subtitle": "Choose the outcome first, then use exact GPTBot, OAI-SearchBot, Claude, and Perplexity rules with a production verification checklist.",
+    "date": "2026.06.19",
+    "dateModified": "2026.09.03",
+    "cluster": "ai-crawlers",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "technical-seo-public-data-infrastructure",
+    "path": "/research/search-console/technical-seo-public-data-infrastructure",
+    "title": "Technical SEO as Public Data Infrastructure",
+    "subtitle": "A systems essay on how URLs become crawlable, renderable, attributable, and exportable public records.",
+    "date": "2026.06.19",
+    "dateModified": "2026.07.16",
+    "cluster": "search-console",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "canonical-identity-personal-seo",
+    "path": "/research/personal-seo/canonical-identity-personal-seo",
+    "title": "Canonical Identity Beats More Content",
+    "subtitle": "An operational playbook for reconciling domains, profile pages, resumes, sameAs links, and external biographies.",
+    "date": "2026.06.19",
+    "dateModified": "2026.07.19",
+    "cluster": "personal-seo",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "us-rare-earth-magnet-manufacturing-capacity",
+    "path": "/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+    "title": "The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature",
+    "subtitle": "A physical-capacity audit of U.S. NdFeB magnet projects: 37,750 tonnes of disclosed firm-project nameplate, only 4,000 tonnes in the commercial-shipment class, and a supply chain still constrained by qualification, product mix, and upstream material conversion.",
+    "date": "2026.08.17",
+    "dateModified": "2026.08.17",
+    "cluster": "data-systems",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "archived-research-methodology",
+    "path": "/markets/archived-research-methodology",
+    "title": "Archived Market Research Methodology",
+    "subtitle": "Three retired market questions, preserved as one methodology record for networks, compute infrastructure, and monetary systems.",
+    "date": "2026.04.18",
+    "dateModified": "2026.07.16",
+    "inTechnicalSeries": false
+  },
+  {
+    "slug": "who-owns-texas-toll-roads",
+    "path": "/markets/who-owns-texas-toll-roads",
+    "title": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
+    "subtitle": "The state usually owns the pavement. Contracts decide who controls toll revenue, who gets paid first, and who absorbs the loss.",
+    "date": "2026.07.11",
+    "dateModified": "2026.09.03",
+    "inTechnicalSeries": false
   }
 ];

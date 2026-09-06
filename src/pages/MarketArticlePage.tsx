@@ -405,7 +405,7 @@ function GenericArticle({
               ...relatedLinks,
               { href: '/research', label: 'Technical SEO research' },
               { href: '/atlas', label: 'Atlas technical SEO audit software' },
-              { href: '/method', label: 'Technical SEO audit services' },
+              { href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist', label: 'VOID technical SEO audit kit' },
               { href: '/about', label: 'About Sulayman Bowles' },
             ],
     },

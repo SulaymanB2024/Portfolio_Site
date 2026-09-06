@@ -7,6 +7,7 @@ import {
   normalizePortfolioMeasurementId,
   PORTFOLIO_CTA_METADATA,
   resolvePortfolioSite,
+  SEO_CONVERSION_EVENTS,
   sanitizePortfolioPath,
   sanitizePortfolioReferrer,
 } from './portfolioAnalytics';
@@ -45,16 +46,30 @@ test('CTA events accept only fixed metadata on exact production hosts', () => {
       '/resume?candidate=private#download',
     ),
     {
+      event_name: 'asset_download',
       cta_id: 'resume_download_pdf',
       cta_surface: 'resume',
       destination: 'resume_pdf',
       destination_kind: 'download',
-      page_path: '/resume',
+      route_cluster: 'dev:resume',
       portfolio_site: 'sulayman_bowles_dev',
     },
   );
   assert.equal(buildPortfolioCtaEvent('private@example.com', 'sulayman-bowles.dev', '/resume'), null);
   assert.equal(buildPortfolioCtaEvent('resume_download_pdf', 'preview.sulayman-bowles.dev', '/resume'), null);
+});
+
+test('conversion event vocabulary is fixed and privacy-safe', () => {
+  assert.deepEqual(SEO_CONVERSION_EVENTS, [
+    'seo_cta_click',
+    'lead_form_start',
+    'lead_form_submit',
+    'asset_download',
+  ]);
+  assert.equal(
+    buildPortfolioCtaEvent('resume_download_pdf', 'sulayman-bowles.dev', '/not-a-registered-route'),
+    null,
+  );
 });
 
 test('literal CTA markers resolve to the fixed content-safe registry', () => {
@@ -64,6 +79,8 @@ test('literal CTA markers resolve to the fixed content-safe registry', () => {
     'src/pages/ResearchPage.tsx',
     'src/pages/ResumePage.tsx',
     'src/pages/WorkPage.tsx',
+    'src/pages/AtlasSampleCrawlPage.tsx',
+    'src/pages/TexasTollRoadArticlePage.tsx',
   ];
   const markerPattern = /data-portfolio-cta="([a-z0-9_]+)"/g;
   const markers = sourceFiles.flatMap((filePath) =>

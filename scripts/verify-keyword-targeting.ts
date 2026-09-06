@@ -53,11 +53,14 @@ for (const cluster of SEARCH_INTENT_CLUSTERS) {
 }
 
 const homeStatic = buildRouteStaticHtml(getSeoRoute('/')!);
-assert(homeStatic.includes('href="/method">Technical SEO audit services</a>'), 'home: missing descriptive audit-services anchor');
-assert(homeStatic.includes('href="/austin-technical-seo">Austin technical SEO consultant</a>'), 'home: missing descriptive Austin anchor');
-
-const methodStatic = buildRouteStaticHtml(getSeoRoute('/method')!);
-assert(methodStatic.includes('href="/austin-technical-seo">Austin technical SEO consultant</a>'), 'method: missing Austin consultant anchor');
+assert(
+  homeStatic.includes('href="https://www.void-agency.com/tools/technical-seo-audit-checklist"'),
+  'home: missing the consolidated VOID audit-kit destination',
+);
+assert(
+  homeStatic.includes('href="https://www.void-agency.com/services/technical-seo-ai-search-visibility"'),
+  'home: missing the consolidated VOID technical-SEO service destination',
+);
 
 for (const file of ['index.html', 'src/utils/seo.ts', 'scripts/generate-static-routes.ts']) {
   const contents = fs.readFileSync(path.resolve(file), 'utf8');

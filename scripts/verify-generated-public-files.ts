@@ -6,8 +6,11 @@ import {
   buildAuthorityAssetsJson,
   buildLlmsText,
   buildProgrammaticSeoIndexJson,
+  buildSeoPortfolioRoutesJson,
+  buildSeoRedirectsJson,
   buildSitemapXml,
   buildTexasTollOwnershipCsv,
+  buildTexasTollOwnershipJson,
 } from '../src/seo/generatedPublicFiles';
 import {
   assertSeoAuthorityContract,
@@ -22,7 +25,10 @@ const expectedFiles = [
   ['public/research/article-research-briefs.json', buildArticleResearchBriefsJson()],
   ['public/research/authority-assets.json', buildAuthorityAssetsJson()],
   ['public/research/technical-seo-reference-index.json', buildProgrammaticSeoIndexJson()],
+  ['public/research/seo-portfolio-routes-v1.json', buildSeoPortfolioRoutesJson()],
+  ['public/research/seo-redirects-v1.json', buildSeoRedirectsJson()],
   ['public/research/texas-toll-road-ownership-2026.csv', buildTexasTollOwnershipCsv()],
+  ['public/research/texas-toll-road-ownership-2026.json', buildTexasTollOwnershipJson()],
 ] as const;
 
 assertSeoAuthorityContract(SEO_ROUTES);

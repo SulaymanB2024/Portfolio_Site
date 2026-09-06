@@ -1,13 +1,11 @@
 import { AI_MANAGERS_ARTICLE_PATH } from './aiManagersArticle';
 import { AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG } from './airlineLoyaltyFinancingArticle';
 import { AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE_SLUG } from './austinHomeServiceOwnershipArticle';
-import type { ResearchArticle } from './articleModels';
-import { getArticlePath, getArticleBySlug } from './articleRegistry';
+import { PUBLICATION_ROUTE_METADATA, type PublicationRouteMetadata } from './articleRouteMetadata';
 import { HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG } from './hiddenFinancingHardwareArticle';
 import { INDEX_COMPANY_MATTERS_ARTICLE_SLUG } from './indexCompanyMattersArticle';
 import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvestigationArticle';
 import { SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG } from './softwareBuyoutCohortArticle';
-import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
 import { THE_AI_MEGAWATT_ARTICLE_SLUG } from './theAiMegawattArticle';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingArticle';
@@ -23,7 +21,7 @@ export type PublicationIndexItem = {
 };
 
 const article = (slug: string) => {
-  const item = getArticleBySlug(slug);
+  const item = PUBLICATION_ROUTE_METADATA.find((item) => item.slug === slug);
   if (!item) throw new Error(`Publication index references missing article: ${slug}`);
   return item;
 };
@@ -34,6 +32,7 @@ const austinHomeServiceOwnership = article(AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
+const rareEarthMagnets = article('us-rare-earth-magnet-manufacturing-capacity');
 const indexCompanyMatters = article(INDEX_COMPANY_MATTERS_ARTICLE_SLUG);
 const softwareBuyoutCohort = article(SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG);
 const airlineLoyaltyFinancing = article(AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG);
@@ -42,7 +41,9 @@ const hiddenFinancingHardware = article(HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG);
 const waymoHardwareFinancing = article(WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG);
 const westCampusStudentHousing = article(WEST_CAMPUS_STUDENT_HOUSING_ARTICLE_SLUG);
 
-function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['category'] {
+const getArticlePath = (item: PublicationRouteMetadata) => item.path;
+
+function seriesCategory(articleItem: PublicationRouteMetadata): PublicationIndexItem['category'] {
   if (articleItem.cluster === 'ai-systems') return 'AI systems and products';
   if (articleItem.cluster === 'ai-crawlers' || articleItem.cluster === 'crawler-engineering') {
     return 'Search systems';
@@ -51,15 +52,7 @@ function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['cat
 }
 
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
-  {
-    category: 'Technical SEO',
-    title: 'Technical SEO Diagnostic Library',
-    href: '/research/technical-seo',
-    description: 'Forty evidence-backed issue guides, platform playbooks, audit checklists, and collection routes with reproducible repair gates.',
-    date: '2026.07.20',
-    featured: true,
-  },
-  ...TECHNICAL_ARTICLE_SERIES.map((articleItem) => ({
+  ...PUBLICATION_ROUTE_METADATA.filter((item) => item.inTechnicalSeries).map((articleItem) => ({
     category: seriesCategory(articleItem),
     title: articleItem.title,
     href: getArticlePath(articleItem),
@@ -176,18 +169,18 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     date: texasTollRoads.dateModified ?? texasTollRoads.date,
   },
   {
+    category: 'Markets and investing',
+    title: rareEarthMagnets.title,
+    href: getArticlePath(rareEarthMagnets),
+    description: rareEarthMagnets.subtitle,
+    date: rareEarthMagnets.dateModified ?? rareEarthMagnets.date,
+  },
+  {
     category: 'Technical SEO',
     title: 'Atlas Open Corpus Demonstration',
     href: '/atlas/sample-crawl',
     description: 'A versioned public-corpus run showing source and rendered states, traceable findings, confidence, and export excerpts.',
     date: '2026.07.16',
-  },
-  {
-    category: 'Technical SEO',
-    title: 'Austin Crawlability Pilot',
-    href: '/austin-technical-seo',
-    description: 'A bounded 12-site public-homepage pilot with a dated cutoff, public CSV, and explicit measurement gaps.',
-    date: '2026.06.25',
   },
 ];
 

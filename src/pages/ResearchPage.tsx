@@ -38,7 +38,6 @@ const RESEARCH_FILTERS: readonly ResearchFilter[] = [
 
 function publicationAction(href: string) {
   if (href === '/atlas/sample-crawl') return 'Inspect sample';
-  if (href === '/austin-technical-seo') return 'Open pilot';
   if (href === '/viralbench-codex-agent-harness') return 'Read design';
   return 'Read article';
 }
@@ -84,7 +83,7 @@ export default function ResearchPage() {
           </div>
 
           <div aria-hidden="true" className="pointer-events-none relative z-0 -my-12 hidden min-h-[520px] select-none lg:block">
-            <img src={RESEARCH_COIN_ART} alt="" className="absolute left-[-4rem] top-1/2 h-auto w-[min(1120px,72vw)] max-w-none -translate-y-1/2 opacity-55 mix-blend-multiply" draggable={false} />
+            <img src={RESEARCH_COIN_ART} loading="lazy" decoding="async" alt="" className="absolute left-[-4rem] top-1/2 h-auto w-[min(1120px,72vw)] max-w-none -translate-y-1/2 opacity-55 mix-blend-multiply" draggable={false} />
           </div>
         </section>
 
@@ -248,7 +247,7 @@ export default function ResearchPage() {
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
           <SectionHeader eyebrow="Context" title="From research to implementation.">
-            Follow the evidence into the audit software, service process, local study, portfolio, or direct project brief it supports.
+            Follow the evidence into the dataset, audit software, canonical VOID implementation path, portfolio, or direct project brief it supports.
           </SectionHeader>
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
             {researchContextLinks.map(({ label, href, description }) => (

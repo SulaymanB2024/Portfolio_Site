@@ -70,6 +70,8 @@ export const publicResearchAssets: ResearchAsset[] = [
     pitchAngle:
       'A source-led ownership map separating state title, public authorities, private concession rights, sponsor equity, project debt, billing, and residual control across Texas toll roads.',
     supportingAssets: [
+      { label: 'Source-linked ownership tracker (CSV)', href: '/research/texas-toll-road-ownership-2026.csv' },
+      { label: 'Machine-readable ownership dataset (JSON)', href: '/research/texas-toll-road-ownership-2026.json' },
       { label: 'Markets research index', href: '/markets' },
       { label: 'Source methodology', href: '/research/search-console/technical-seo-public-data-infrastructure' },
     ],
@@ -227,16 +229,16 @@ export const publicResearchAssets: ResearchAsset[] = [
   },
   {
     priority: 3,
-    name: 'Austin Technical SEO',
-    href: '/austin-technical-seo',
-    type: 'local_service_page',
-    preferredAnchor: 'Austin technical SEO',
-    audiences: ['Austin startups', 'local business', 'student entrepreneurship', 'B2B web teams'],
+    name: 'SEO Portfolio Ownership Manifest',
+    href: '/research/seo-portfolio-routes-v1.json',
+    type: 'governance_manifest',
+    preferredAnchor: 'SEO portfolio route ownership manifest',
+    audiences: ['technical SEO', 'site migrations', 'content governance', 'web platform teams'],
     pitchAngle:
-      'Local technical SEO page for crawlability, indexation, page clarity, and implementation detail.',
+      'Versioned route-level owner, lifecycle, canonical, redirect, publication, and substantive-update decisions across the identity site.',
     supportingAssets: [
-      { label: 'Austin benchmark CSV', href: '/research/austin-crawlability-benchmark-pilot.csv' },
-      { label: 'Austin benchmark summary', href: '/research/austin-crawlability-benchmark-summary.json' },
+      { label: 'Technical SEO migration index', href: '/research/technical-seo-reference-index.json' },
+      { label: 'XML sitemap', href: '/sitemap.xml' },
     ],
   },
   {
@@ -250,7 +252,7 @@ export const publicResearchAssets: ResearchAsset[] = [
       'Bounded public crawlability signal sample for Austin-area technology and business websites with explicit measurement limits.',
     supportingAssets: [
       { label: 'Austin benchmark summary', href: '/research/austin-crawlability-benchmark-summary.json' },
-      { label: 'Austin technical SEO page', href: '/austin-technical-seo' },
+      { label: 'VOID technical SEO service', href: 'https://www.void-agency.com/services/technical-seo-ai-search-visibility' },
     ],
   },
   {
@@ -292,6 +294,16 @@ export const publicResearchAssets: ResearchAsset[] = [
 ];
 
 export const publicDataDownloads = [
+  {
+    label: 'Texas toll-road ownership tracker',
+    href: '/research/texas-toll-road-ownership-2026.csv',
+    description: 'Dated authority, operator, concession, geography, billing, and primary-source fields for nine Texas toll systems and concessions.',
+  },
+  {
+    label: 'Texas toll-road ownership dataset',
+    href: '/research/texas-toll-road-ownership-2026.json',
+    description: 'Machine-readable source-linked records with evidence dates and an explicit distinction between public title and concession rights.',
+  },
   {
     label: 'Austin home-service ownership table',
     href: '/research/austin-home-service-ownership-2026.csv',

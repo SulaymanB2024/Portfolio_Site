@@ -14,9 +14,9 @@ export const contextualProofLinks = [
     description: 'A sanitized crawl table showing URL status, indexability, links, canonicals, and issue notes.',
   },
   {
-    label: 'Read the technical SEO audit method',
-    href: '/method',
-    description: 'The process page for crawl, diagnose, repair, and measure work.',
+    label: 'Use the VOID technical SEO audit kit',
+    href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist',
+    description: 'The canonical commercial checklist, prioritization model, printable worksheet, and worked evidence format.',
   },
   {
     label: 'View the GitHub repo for the audit CLI',
@@ -37,9 +37,9 @@ export const contextualProofLinks = [
 
 export const researchContextLinks = [
   {
-    label: 'Technical SEO diagnostic library',
-    href: '/research/technical-seo',
-    description: 'Issue guides, platform playbooks, and audit checklists with fixtures, false-positive boundaries, and rerun gates.',
+    label: 'Texas toll-road ownership dataset',
+    href: '/markets/who-owns-texas-toll-roads',
+    description: 'A cited tracker separating geography, public authority, operator, concession rights, billing, and primary sources.',
   },
   {
     label: 'Atlas technical SEO audit software',
@@ -47,14 +47,14 @@ export const researchContextLinks = [
     description: 'The crawl and evidence workflow behind the technical SEO research and audit examples.',
   },
   {
-    label: 'Technical SEO audit services',
-    href: '/method',
-    description: 'A fixed-scope process for turning crawl evidence into implementation priorities and rerun checks.',
+    label: 'VOID technical SEO audit kit',
+    href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist',
+    description: 'The commercial audit checklist, printable worksheet, prioritization model, and reproducible evidence format.',
   },
   {
-    label: 'Austin technical SEO consultant',
-    href: '/austin-technical-seo',
-    description: 'Local audit coverage, a bounded Austin crawlability pilot, and an implementation entry point.',
+    label: 'VOID technical SEO service',
+    href: 'https://www.void-agency.com/services/technical-seo-ai-search-visibility',
+    description: 'The canonical Austin and commercial technical SEO implementation destination.',
   },
   {
     label: 'Technical SEO portfolio',
@@ -117,14 +117,14 @@ export const workProofCards = [
   {
     eyebrow: 'Technical SEO research',
     title: 'Austin Crawlability Pilot',
-    href: '/austin-technical-seo',
+    href: '/research/austin-crawlability-benchmark-pilot.csv',
     problem: 'Local-service SEO advice is often published without a bounded sample, inspectable rows, or a distinction between access gaps and negative findings.',
     role: 'Study design, public collection, measurement-gap policy, analysis, and publication.',
     built: 'A 12-site homepage/robots/sitemap pilot, aggregate summary, public CSV, methodology, and cutoff-aware reporting.',
     constraints: 'The pilot is not representative and makes no ranking, traffic, conversion, revenue, citation, or site-health claim.',
     status: 'Published pilot generated June 25, 2026.',
     statusLabel: 'Published pilot',
-    projectLabel: 'Open the pilot',
+    projectLabel: 'Download the pilot data',
     evidenceLabel: 'Open the public CSV',
     evidenceHref: '/research/austin-crawlability-benchmark-pilot.csv',
     notPublic: 'No private analytics, Search Console data, client identity, or broader Austin-market inference.',
@@ -141,7 +141,7 @@ export const workProofCards = [
     statusLabel: 'Operating',
     projectLabel: 'Open Void Agency',
     evidenceLabel: 'Read the scoped audit method',
-    evidenceHref: '/method',
+    evidenceHref: 'https://www.void-agency.com/tools/technical-seo-audit-checklist',
     notPublic: 'Client identities, credentials, unreleased deliverables, and unsupported outcome claims.',
   },
   {
@@ -301,9 +301,9 @@ export const voidAgencyProofLinks = [
   },
   {
     label: 'Technical SEO audit method',
-    href: '/method',
+    href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist',
     role: 'Process',
-    copy: 'Personal-site process page explaining crawlability, indexation, internal links, structured data, analytics, and implementation review.',
+    copy: 'VOID’s canonical commercial audit checklist, evidence format, prioritization model, and implementation review.',
   },
   {
     label: 'Atlas sample crawl run',

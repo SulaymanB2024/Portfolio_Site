@@ -21,6 +21,11 @@ export interface AuthorityRouteContract {
   includeInSitemap: boolean;
   generateStatic?: boolean;
   noindex?: boolean;
+  redirectTarget?: string | null;
+  portfolioRoute?: {
+    lifecycle: string;
+    redirectTarget: string | null;
+  };
   lastmod?: string;
   staticSummary: string;
   jsonLd?: JsonLd;
@@ -251,7 +256,12 @@ export function assertSeoAuthorityContract(routes: readonly AuthorityRouteContra
     assert(isIsoDate(route.lastmod), `${route.path}: lastmod must be an ISO-8601 date`);
     assert(route.lastmod <= today, `${route.path}: lastmod is in the future`);
 
-    if (route.includeInSitemap) {
+    if (route.portfolioRoute?.lifecycle === 'merge') {
+      assert(route.includeInSitemap === false, `${route.path}: merged route entered the sitemap`);
+      assert(route.noindex === true, `${route.path}: merged route lacks a defensive noindex state`);
+      assert(route.generateStatic !== true, `${route.path}: merged route must not emit duplicate HTML`);
+      assert(route.redirectTarget === route.portfolioRoute.redirectTarget, `${route.path}: redirect target drifted from the portfolio contract`);
+    } else if (route.includeInSitemap) {
       assert(route.noindex !== true, `${route.path}: sitemap route is marked noindex`);
       validateSchema(route);
     } else {

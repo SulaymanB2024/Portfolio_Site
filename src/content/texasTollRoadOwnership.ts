@@ -2,6 +2,7 @@ export const TEXAS_TOLL_DIRECT_ANSWER =
   'Most Texas toll roads are publicly owned, not privately owned. TxDOT, counties, and public toll authorities own most roadways. Four major concessions—North Tarrant Express, LBJ Express, NTE 35W, and SH 130 Segments 5–6—give private companies time-limited operating and toll-revenue rights while Texas retains title to the pavement.';
 
 export const TEXAS_TOLL_OWNERSHIP_CSV_PATH = '/research/texas-toll-road-ownership-2026.csv';
+export const TEXAS_TOLL_OWNERSHIP_JSON_PATH = '/research/texas-toll-road-ownership-2026.json';
 export const TEXAS_TOLL_OWNERSHIP_EVIDENCE_DATE = '2026-07-23';
 
 export interface TexasTollOwnershipRow {

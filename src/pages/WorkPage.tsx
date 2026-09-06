@@ -13,8 +13,8 @@ const WORK_SEO = getSeoRoute('/work')!;
 const supportingArtifacts = [
   {
     label: 'Worked finding example',
-    href: '/method#worked-finding',
-    description: 'A field → review → rerun example embedded in the audit method, not a client-outcome case study.',
+    href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist',
+    description: 'VOID’s worked field → review → rerun example, not a client-outcome case study.',
   },
   {
     label: 'Atlas open-corpus run CSV',
@@ -23,8 +23,8 @@ const supportingArtifacts = [
   },
   {
     label: 'Technical SEO audit method',
-    href: '/method',
-    description: 'Scope, stages, deliverables, inputs, exclusions, and acceptance checks.',
+    href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist',
+    description: 'VOID’s canonical scope, stages, evidence format, prioritization, and acceptance checks.',
   },
   {
     label: 'Appian assumptions table',

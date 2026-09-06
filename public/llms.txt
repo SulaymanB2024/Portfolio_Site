@@ -30,14 +30,9 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Atlas](https://sulayman-bowles.dev/atlas): Product scope and implementation-status page.
 - [Atlas open-corpus demonstration](https://sulayman-bowles.dev/atlas/sample-crawl): Dated, bounded public demonstration; not production coverage.
 - [Research](https://sulayman-bowles.dev/research): Public research hub and article index.
-- [Technical SEO diagnostic library](https://sulayman-bowles.dev/research/technical-seo): Evidence-backed issue, platform, and audit-checklist guides.
-- [Technical SEO issue guides](https://sulayman-bowles.dev/research/technical-seo/issues): Diagnostic references organized by technical failure mode.
-- [Technical SEO platform guides](https://sulayman-bowles.dev/research/technical-seo/platforms): Platform-specific diagnostics and repair gates.
-- [Technical SEO audit checklists](https://sulayman-bowles.dev/research/technical-seo/checklists): Reusable audit procedures with acceptance checks.
 - [Markets finance filter](https://sulayman-bowles.dev/markets): Finance and infrastructure research subset.
-- [Void Agency](https://www.void-agency.com/): Separate canonical host for the technical SEO practice.
-- [Technical SEO audit services and process](https://sulayman-bowles.dev/method): Service method and engagement boundary.
-- [Austin technical SEO consultant and audit services](https://sulayman-bowles.dev/austin-technical-seo): Austin-scoped service page.
+- [VOID technical SEO audit kit](https://www.void-agency.com/tools/technical-seo-audit-checklist): Canonical commercial owner for audit checklists and process guidance.
+- [VOID technical SEO service](https://www.void-agency.com/services/technical-seo-ai-search-visibility): Canonical commercial owner for Austin and technical SEO service intent.
 - [Technical SEO consultant contact and audit intake](https://sulayman-bowles.dev/contact): Direct inquiry and bounded brief path.
 - [Technical ledger](https://sulayman-bowles.tech/): Separate record of experiments and technical work.
 
@@ -64,55 +59,22 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Who Owns West Campus Student Housing?](https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing)
 - [Who Funds Waymo’s Hardware?](https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing)
 - [The First AI Managers](https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers)
-- [AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot](https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy)
+- [AI Crawler Robots.txt: Allow Search, Block Training, Verify Bots](https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy)
 - [Technical SEO as Public Data Infrastructure](https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure)
 - [Canonical Identity Beats More Content](https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo)
 - [The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature](https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity)
 - [Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics](https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads)
-- [Missing Canonical Tag: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/missing-canonical): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Multiple Canonical Tags: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/multiple-canonical-tags): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Canonical to Redirect: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/canonical-to-redirect): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Canonical and Noindex Conflict: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/canonical-noindex-conflict): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Redirect Chain: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/redirect-chain): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Redirect Loop: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/redirect-loop): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Soft 404: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/soft-404): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Robots-Blocked Indexable URL: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/robots-blocked-indexable-url): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Noindex URL in Sitemap: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/noindex-in-sitemap): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Redirecting URLs in Sitemap: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/sitemap-redirects): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Orphan Page: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/orphan-page): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Excessive Crawl Depth: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/excessive-crawl-depth): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Broken Internal Link: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/broken-internal-link): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [JavaScript-Only Link: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/javascript-only-link): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Raw and Rendered HTML Mismatch: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/raw-rendered-content-mismatch): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Structured Data Content Drift: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/structured-data-content-drift): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Duplicate Title Tag: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-title-tag): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Duplicate Meta Description: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-meta-description): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Faceted Navigation Crawl Trap: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/faceted-navigation-crawl-trap): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Parameter URL Duplication: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/parameter-url-duplication): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Pagination and Infinite Scroll Indexing: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/pagination-infinite-scroll-indexing): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Hreflang Return Tag Error: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/hreflang-return-tag-error): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Mobile and Desktop Content Mismatch: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/mobile-desktop-content-mismatch): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Lazy-Loaded Primary Content: Diagnosis and Repair](https://sulayman-bowles.dev/research/technical-seo/issues/lazy-loaded-primary-content): issue diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Next.js Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs): platform diagnostic guide with a labeled evidence fixture and rerun gate.
-- [React and Vite Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite): platform diagnostic guide with a labeled evidence fixture and rerun gate.
-- [WordPress Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress): platform diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Shopify Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/shopify): platform diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Webflow Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/webflow): platform diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Squarespace Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/squarespace): platform diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Wix Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/wix): platform diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Headless CMS Technical SEO Guide](https://sulayman-bowles.dev/research/technical-seo/platforms/headless-cms): platform diagnostic guide with a labeled evidence fixture and rerun gate.
-- [JavaScript Technical SEO Audit Checklist](https://sulayman-bowles.dev/research/technical-seo/checklists/javascript-seo-audit): checklist diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Ecommerce Technical SEO Audit Checklist](https://sulayman-bowles.dev/research/technical-seo/checklists/ecommerce-technical-seo-audit): checklist diagnostic guide with a labeled evidence fixture and rerun gate.
-- [SaaS Technical SEO Audit Checklist](https://sulayman-bowles.dev/research/technical-seo/checklists/saas-technical-seo-audit): checklist diagnostic guide with a labeled evidence fixture and rerun gate.
-- [Local Business Technical SEO Audit Checklist](https://sulayman-bowles.dev/research/technical-seo/checklists/local-business-technical-seo-audit): checklist diagnostic guide with a labeled evidence fixture and rerun gate.
 - [Atlas open-corpus CSV](https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.csv): URL-level rows from the dated public demonstration.
 - [Atlas open-corpus capture manifest](https://sulayman-bowles.dev/research/atlas-open-corpus-run-2026-07-16.json): Run scope, method, and claim limit.
 - [Appian educational research memo PDF](https://sulayman-bowles.dev/research/appian-enterprise-software-durability-memo.pdf): Educational research, not investment advice.
 - [Appian assumptions table CSV](https://sulayman-bowles.dev/research/appian-assumptions-table.csv): Companion assumptions table.
 - [Authority asset index](https://sulayman-bowles.dev/research/authority-assets.json): Typed index of public assets and their claim boundaries.
 - [Article research briefs](https://sulayman-bowles.dev/research/article-research-briefs.json): Intent, evidence-gap, artifact, and scope records.
-- [Technical SEO reference index](https://sulayman-bowles.dev/research/technical-seo-reference-index.json): Structured index of every programmatic diagnostic guide and its evidence boundaries.
+- [SEO portfolio ownership manifest](https://sulayman-bowles.dev/research/seo-portfolio-routes-v1.json): Versioned lifecycle, canonical-owner, and redirect decisions for every registered route.
+- [SEO portfolio redirect table](https://sulayman-bowles.dev/research/seo-redirects-v1.json): One-hop permanent redirects generated from the same route-ownership contract.
+- [Technical SEO migration index](https://sulayman-bowles.dev/research/technical-seo-reference-index.json): Structured source-to-VOID ownership and redirect decisions for the frozen commodity library.
 - [Texas toll-road ownership matrix](https://sulayman-bowles.dev/research/texas-toll-road-ownership-2026.csv): Dated source-linked ownership rows.
+- [Texas toll-road ownership dataset](https://sulayman-bowles.dev/research/texas-toll-road-ownership-2026.json): Machine-readable authority, operator, concession, geography, and primary-source records.
 - [Crawler policy sources](https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv): Official documentation and IP-manifest source map.
 - [Austin crawlability benchmark pilot CSV](https://sulayman-bowles.dev/research/austin-crawlability-benchmark-pilot.csv): Bounded public fetch observations.
 - [Austin crawlability benchmark summary](https://sulayman-bowles.dev/research/austin-crawlability-benchmark-summary.json): Aggregate limits and counts for the pilot.
@@ -136,7 +98,7 @@ The Atlas demonstration is a dated, bounded capture from an open web corpus; it 
 - [Canonical host](https://sulayman-bowles.dev/): The apex host is authoritative for this site.
 - The www host redirects to the apex canonical host.
 - [XML sitemap](https://sulayman-bowles.dev/sitemap.xml): Only canonical HTML routes in this inventory are intended for indexing.
-- Alias, retired, prototype, and archive-methodology routes are omitted from the XML sitemap; generated noindex metadata is the route-level exclusion signal.
+- Alias, merged, retired, prototype, sitemap-directory, and archive-methodology routes are omitted from the XML sitemap. Merged routes resolve by permanent redirect; retained nonindex routes emit noindex,follow.
 - Canonical links, Open Graph URLs, WebPage URLs, Article URLs, and sitemap locations are required to converge on the same canonical URL.
 - [Resume redirect destination](https://sulayman-bowles.dev/resume): The retired 2025 PDF resume alias redirects here.
 - Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals; they do not prove rankings, indexing, traffic movement, or AI citations.
