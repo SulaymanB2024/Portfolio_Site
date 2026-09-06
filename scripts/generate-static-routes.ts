@@ -10,7 +10,7 @@ import { getCanonicalRoutes, getRouteTone, NOT_FOUND_ROUTE, SEO_ROUTES, type Seo
 import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME } from '../src/seo/site';
 
 const DIST_DIR = path.resolve(process.cwd(), 'dist');
-const FONT_STYLESHEET = '/fonts/fonts.css';
+const FONT_CSS = await fs.readFile(path.resolve(process.cwd(), 'public/fonts/fonts.css'), 'utf8');
 
 function verifyArticleRouteMetadata() {
   const expected = ALL_ARTICLES.map((article) => ({
@@ -84,7 +84,7 @@ function buildHead(route: SeoRoute, assetTags: string) {
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link id="editorial-fonts" rel="stylesheet" href="${FONT_STYLESHEET}" />
+    <style data-local-fonts="true">${FONT_CSS}</style>
     <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
