@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { getArticleByPath } from '../src/content/articleRegistry';
 import { PUBLICATION_INDEX } from '../src/content/publicationIndex';
 
@@ -15,6 +16,7 @@ const routes = [
 ];
 const sitemap = fs.readFileSync('dist/sitemap.xml', 'utf8');
 const assets = new Set<string>();
+const tracked = new Set(execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0'));
 const receipts: object[] = [];
 
 for (const route of routes) {
@@ -42,6 +44,7 @@ for (const route of routes) {
 
 for (const asset of assets) {
   const file = path.join('public', asset);
+  assert(tracked.has(file), `${asset}: resource exists locally but is absent from Git`);
   const data = fs.readFileSync(file);
   assert(data.length > 30, `${asset}: empty or truncated resource`);
   assert(fs.readFileSync(path.join('dist', asset)).equals(data), `${asset}: build differs from public source`);
