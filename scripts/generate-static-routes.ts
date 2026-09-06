@@ -10,8 +10,7 @@ import { getCanonicalRoutes, getRouteTone, NOT_FOUND_ROUTE, SEO_ROUTES, type Seo
 import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME } from '../src/seo/site';
 
 const DIST_DIR = path.resolve(process.cwd(), 'dist');
-const FONT_STYLESHEET =
-  'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap';
+const FONT_STYLESHEET = '/fonts/fonts.css';
 
 function verifyArticleRouteMetadata() {
   const expected = ALL_ARTICLES.map((article) => ({
@@ -85,12 +84,7 @@ function buildHead(route: SeoRoute, assetTags: string) {
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link id="editorial-fonts" rel="preload" as="style" fetchpriority="high" href="${FONT_STYLESHEET}" />
-    <noscript>
-      <link rel="stylesheet" href="${FONT_STYLESHEET}" />
-    </noscript>
+    <link id="editorial-fonts" rel="stylesheet" href="${FONT_STYLESHEET}" />
     <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
