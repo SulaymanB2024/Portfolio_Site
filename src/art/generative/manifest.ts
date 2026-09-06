@@ -52,6 +52,11 @@ const SKETCH_DETAILS = [
 ] as const satisfies readonly [SketchId, string, string][];
 
 export const ARTICLE_GENERATIVE_ART_ASSIGNMENTS = {
+  '/research/financial-systems/ethereum-blobspace-measurement-audit': 'yuru-15',
+  '/research/financial-systems/uni-burn-supply-accounting': 'yuru-16',
+  '/research/financial-systems/us-solid-rocket-motor-capacity-audit': 'yuru-09',
+  '/markets/when-does-a-data-center-become-infrastructure': 'yuru-11',
+  '/research/app-economics/independent-app-income-distribution': 'yuru-13',
   '/research/ai-systems/the-ai-megawatt': 'yuru-04',
   '/research/crawler-engineering/crawl-frontier-state-machine': 'yuru-06',
   '/research/technical-seo/raw-html-rendered-dom-evidence': 'yuru-05',

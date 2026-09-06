@@ -1,0 +1,5 @@
+﻿metric,value,status
+Mean apps owned,1.8299999999999998,Model assumption
+Successful developers with top app >=70% of portfolio revenue,55%-75%,"Modeled range, not observed census"
+Developers over $1k with at least one app individually over $1k,75%-83%,Modeled range
+Developers crossing $1k only by summing sub-threshold apps,17%-25%,Modeled range

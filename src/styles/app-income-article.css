@@ -1,0 +1,825 @@
+/* Independent-app income article: interactive evidence components within the shared editorial system. */
+.app-income-article .toll-article-hero h1 {
+  max-width: 15ch !important;
+  font-size: clamp(3rem, 6.1vw, 6.8rem) !important;
+  line-height: 0.89 !important;
+}
+
+.app-income-article .toll-article-hero__display-title {
+  max-width: 21ch;
+  font-size: clamp(2rem, 3.8vw, 4rem);
+}
+
+.app-income-article .toll-headline-metrics strong {
+  font-size: clamp(2.25rem, 4.2vw, 4.4rem);
+}
+
+.app-income-evidence-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 1.65rem;
+  border: 1px solid rgba(145, 169, 182, 0.3);
+  padding: 0.32rem 0.5rem;
+  color: var(--toll-blue);
+  font-size: 0.56rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.app-income-evidence-badge[data-kind='Observed fact'] {
+  border-color: rgba(183, 200, 168, 0.35);
+  color: var(--toll-green);
+}
+
+.app-income-evidence-badge[data-kind='Derived calculation'] {
+  border-color: rgba(10, 10, 9, 0.24);
+  color: rgba(10, 10, 9, 0.72);
+}
+
+.app-income-evidence-badge[data-kind='Interpretation'] {
+  border-color: rgba(194, 105, 94, 0.38);
+  color: var(--toll-risk);
+}
+
+.app-income-inline-label {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 2.5rem 0 1rem;
+  color: rgba(10, 10, 9, 0.42);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+
+.app-income-figure {
+  margin: 3.5rem 0 0;
+  border: 1px solid var(--toll-line);
+  background: rgba(10, 10, 9, 0.025);
+}
+
+.app-income-figure .toll-figure-label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  border-bottom: 1px solid var(--toll-line);
+  padding: 0.85rem 1rem;
+}
+
+.app-income-figure__image {
+  overflow: hidden;
+  background: #f7f7f5;
+}
+
+.app-income-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.app-income-figure figcaption,
+.app-income-workbook-preview figcaption {
+  border-top: 1px solid var(--toll-line);
+  padding: 1rem;
+  color: rgba(10, 10, 9, 0.46);
+  font-size: 0.68rem;
+  line-height: 1.65;
+}
+
+.app-income-explorer {
+  margin-top: 3rem;
+  border: 1px solid rgba(145, 169, 182, 0.28);
+  background: rgba(145, 169, 182, 0.045);
+}
+
+.app-income-explorer__heading {
+  display: grid;
+  gap: 1.25rem;
+  border-bottom: 1px solid var(--toll-line);
+  padding: 1.25rem;
+}
+
+.app-income-explorer__heading h3 {
+  max-width: 24ch;
+  margin-top: 1rem;
+  color: var(--toll-paper);
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.app-income-explorer__heading > p {
+  max-width: 32rem;
+  color: rgba(10, 10, 9, 0.5);
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.app-income-control-grid {
+  display: grid;
+  border-bottom: 1px solid var(--toll-line);
+}
+
+.app-income-control-grid fieldset,
+.app-income-calculator fieldset {
+  min-width: 0;
+  border: 0;
+  border-bottom: 1px solid var(--toll-line);
+  padding: 1rem;
+}
+
+.app-income-control-grid fieldset:last-child {
+  border-bottom: 0;
+}
+
+.app-income-control-grid legend,
+.app-income-calculator legend,
+.app-income-calculator label {
+  padding: 0;
+  color: rgba(10, 10, 9, 0.42);
+  font-size: 0.59rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.app-income-control-grid fieldset > div,
+.app-income-calculator fieldset > div,
+.app-income-case-explorer__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.7rem;
+}
+
+.app-income-control-grid button,
+.app-income-calculator button,
+.app-income-case-explorer__controls button {
+  min-height: 2.75rem;
+  border: 1px solid rgba(10, 10, 9, 0.14);
+  background: transparent;
+  padding: 0.7rem 0.75rem;
+  color: rgba(10, 10, 9, 0.54);
+  font: inherit;
+  font-size: 0.61rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.app-income-control-grid button:hover,
+.app-income-calculator button:hover,
+.app-income-case-explorer__controls button:hover,
+.app-income-control-grid button:focus-visible,
+.app-income-calculator button:focus-visible,
+.app-income-case-explorer__controls button:focus-visible {
+  border-color: rgba(183, 200, 168, 0.64);
+  color: var(--toll-paper);
+  outline: none;
+}
+
+.app-income-control-grid button[aria-pressed='true'],
+.app-income-calculator button[aria-pressed='true'],
+.app-income-case-explorer__controls button[aria-pressed='true'] {
+  border-color: var(--toll-green);
+  background: var(--toll-green);
+  color: var(--toll-ink);
+}
+
+.app-income-control-grid button:disabled {
+  cursor: not-allowed;
+  opacity: 0.28;
+}
+
+.app-income-range {
+  display: block;
+  padding: 1.25rem;
+}
+
+.app-income-range__summary {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.app-income-range__summary > div span {
+  display: block;
+  color: var(--toll-blue);
+  font-size: 0.59rem;
+  text-transform: uppercase;
+}
+
+.app-income-range__summary strong {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--toll-paper);
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 0.85;
+}
+
+.app-income-range__summary p {
+  max-width: 35rem;
+  color: rgba(10, 10, 9, 0.5);
+  font-size: 0.72rem;
+  line-height: 1.65;
+}
+
+.app-income-range__plot {
+  margin-top: 2rem;
+}
+
+.app-income-range__axis,
+.app-income-range__labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: rgba(10, 10, 9, 0.34);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+}
+
+.app-income-range__track {
+  position: relative;
+  height: 2.4rem;
+  margin: 0.55rem 0;
+  border-block: 1px solid rgba(10, 10, 9, 0.09);
+  background: linear-gradient(90deg, transparent 49.8%, rgba(10, 10, 9, 0.08) 50%, transparent 50.2%);
+}
+
+.app-income-range__interval {
+  position: absolute;
+  top: 0.72rem;
+  height: 0.9rem;
+  background: rgba(145, 169, 182, 0.48);
+}
+
+.app-income-range__central {
+  position: absolute;
+  top: 0.35rem;
+  width: 2px;
+  height: 1.7rem;
+  background: var(--toll-green);
+  box-shadow: 0 0 0 4px rgba(183, 200, 168, 0.1);
+}
+
+.app-income-range__labels span:nth-child(2) {
+  color: var(--toll-green);
+}
+
+.app-income-bridge {
+  display: grid;
+  gap: 1px;
+  margin-top: 3rem;
+  background: var(--toll-line);
+}
+
+.app-income-bridge__step {
+  position: relative;
+  min-height: 14rem;
+  background: #0b0b0a;
+  padding: 1.15rem;
+}
+
+.app-income-bridge__index {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: rgba(10, 10, 9, 0.2);
+  font-size: 0.58rem;
+}
+
+.app-income-bridge__step > strong {
+  display: block;
+  margin-top: 2.25rem;
+  color: var(--toll-paper);
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 0.9;
+}
+
+.app-income-bridge__step h3 {
+  margin-top: 1rem;
+  color: rgba(10, 10, 9, 0.8);
+  font-size: 0.73rem;
+  font-weight: 500;
+}
+
+.app-income-bridge__step p {
+  margin-top: 0.65rem;
+  color: rgba(10, 10, 9, 0.43);
+  font-size: 0.67rem;
+  line-height: 1.6;
+}
+
+.app-income-bands {
+  border: 1px solid var(--toll-line);
+}
+
+.app-income-bands > div {
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.8fr) minmax(5rem, 1fr) 3.5rem;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 4.4rem;
+  border-bottom: 1px solid var(--toll-line);
+  padding: 0.75rem;
+}
+
+.app-income-bands > div:last-child {
+  border-bottom: 0;
+}
+
+.app-income-bands strong,
+.app-income-bands span {
+  display: block;
+}
+
+.app-income-bands strong {
+  color: var(--toll-paper);
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.app-income-bands span,
+.app-income-bands em {
+  color: rgba(10, 10, 9, 0.42);
+  font-size: 0.58rem;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.app-income-bands__bar {
+  height: 0.6rem;
+  background: rgba(10, 10, 9, 0.05);
+}
+
+.app-income-bands__bar span {
+  height: 100%;
+  background: var(--toll-blue);
+}
+
+.app-income-bands em {
+  text-align: right;
+}
+
+.app-income-portfolio-grid,
+.app-income-profit-scenarios {
+  display: grid;
+  gap: 1px;
+  margin-top: 3rem;
+  background: var(--toll-line);
+}
+
+.app-income-portfolio-grid article,
+.app-income-profit-scenarios article {
+  min-height: 13rem;
+  background: #0b0b0a;
+  padding: 1.25rem;
+}
+
+.app-income-portfolio-grid span,
+.app-income-profit-scenarios span {
+  color: var(--toll-blue);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.app-income-portfolio-grid strong,
+.app-income-profit-scenarios strong {
+  display: block;
+  margin-top: 2.5rem;
+  color: var(--toll-paper);
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4.1rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 0.9;
+}
+
+.app-income-portfolio-grid p,
+.app-income-profit-scenarios p,
+.app-income-profit-scenarios small {
+  display: block;
+  margin-top: 0.7rem;
+  color: rgba(10, 10, 9, 0.46);
+  font-size: 0.67rem;
+  line-height: 1.55;
+}
+
+.app-income-profit-scenarios small {
+  color: rgba(10, 10, 9, 0.28);
+}
+
+.app-income-calculator {
+  display: grid;
+  margin-top: 3rem;
+  border: 1px solid rgba(183, 200, 168, 0.28);
+  background: rgba(183, 200, 168, 0.04);
+}
+
+.app-income-calculator__controls {
+  min-width: 0;
+  border-bottom: 1px solid var(--toll-line);
+}
+
+.app-income-calculator label {
+  display: block;
+  border-bottom: 1px solid var(--toll-line);
+  padding: 1rem;
+}
+
+.app-income-calculator label > span {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.65rem;
+  color: var(--toll-green);
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-style: italic;
+}
+
+.app-income-calculator input {
+  min-width: 0;
+  width: 9rem;
+  border: 0;
+  border-bottom: 1px solid rgba(10, 10, 9, 0.22);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.25rem 0;
+  color: var(--toll-paper);
+  font: inherit;
+  outline: 0;
+}
+
+.app-income-calculator input:focus {
+  border-bottom-color: var(--toll-green);
+}
+
+.app-income-calculator__result {
+  display: block;
+  padding: 1.25rem;
+}
+
+.app-income-calculator__result > span {
+  color: var(--toll-green);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.app-income-calculator__result strong {
+  display: block;
+  margin-top: 1rem;
+  color: var(--toll-paper);
+  font-family: var(--font-serif);
+  font-size: clamp(5rem, 12vw, 8rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 0.75;
+}
+
+.app-income-calculator__result p,
+.app-income-calculator__note {
+  max-width: 35rem;
+  margin-top: 1.5rem;
+  color: rgba(10, 10, 9, 0.52);
+  font-size: 0.72rem;
+  line-height: 1.65;
+}
+
+.app-income-calculator__note {
+  margin: 0;
+  border-top: 1px solid var(--toll-line);
+  padding: 0.85rem 1.25rem;
+  color: rgba(10, 10, 9, 0.3);
+  font-size: 0.61rem;
+}
+
+.app-income-case-explorer {
+  margin-top: 3rem;
+}
+
+.app-income-case-explorer__controls {
+  margin: 0 0 0.75rem;
+}
+
+.app-income-case-table {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--toll-line);
+  overscroll-behavior-inline: contain;
+}
+
+.app-income-case-table:focus-visible {
+  outline: 1px solid var(--toll-green);
+  outline-offset: 2px;
+}
+
+.app-income-case-table table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: 0.67rem;
+  line-height: 1.5;
+}
+
+.app-income-case-table th,
+.app-income-case-table td {
+  border-right: 1px solid var(--toll-line);
+  border-bottom: 1px solid var(--toll-line);
+  padding: 0.85rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.app-income-case-table tr:last-child th,
+.app-income-case-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.app-income-case-table th:last-child,
+.app-income-case-table td:last-child {
+  border-right: 0;
+}
+
+.app-income-case-table thead th {
+  background: rgba(10, 10, 9, 0.055);
+  color: rgba(10, 10, 9, 0.7);
+  font-size: 0.57rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.app-income-case-table tbody th {
+  width: 10rem;
+  color: var(--toll-paper);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.app-income-case-table tbody td {
+  color: rgba(10, 10, 9, 0.52);
+}
+
+.app-income-case-table td[data-threshold='above'] {
+  color: var(--toll-green);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.app-income-case-table td[data-threshold='below'] {
+  color: var(--toll-risk);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.app-income-case-table td strong,
+.app-income-case-table td span {
+  display: block;
+}
+
+.app-income-case-table td strong {
+  color: rgba(10, 10, 9, 0.72);
+  font-weight: 500;
+}
+
+.app-income-case-table td span {
+  margin-top: 0.3rem;
+  color: rgba(10, 10, 9, 0.32);
+}
+
+.app-income-case-table a {
+  color: var(--toll-blue);
+}
+
+.app-income-case-explorer__boundary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.8rem;
+  color: rgba(10, 10, 9, 0.38);
+  font-size: 0.63rem;
+  line-height: 1.6;
+}
+
+.app-income-gap-grid ul {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.2rem;
+  padding-left: 1rem;
+  color: rgba(10, 10, 9, 0.53);
+  font-size: 0.7rem;
+  line-height: 1.55;
+}
+
+.app-income-desired-dataset {
+  margin-top: 1px;
+  border: 1px solid rgba(145, 169, 182, 0.25);
+  padding: 1.25rem;
+}
+
+.app-income-desired-dataset span {
+  color: var(--toll-blue);
+  font-size: 0.61rem;
+  text-transform: uppercase;
+}
+
+.app-income-desired-dataset p {
+  max-width: 44rem;
+  margin-top: 1rem;
+  color: rgba(10, 10, 9, 0.58);
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+
+.app-income-downloads {
+  display: grid;
+  gap: 1px;
+  margin-top: 3rem;
+  background: var(--toll-line);
+}
+
+.app-income-downloads > a {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) 1.25rem;
+  gap: 0.9rem;
+  min-height: 10rem;
+  background: #0b0b0a;
+  padding: 1.15rem;
+  color: inherit;
+  text-decoration: none;
+  transition: background 160ms ease;
+}
+
+.app-income-downloads > a:hover,
+.app-income-downloads > a:focus-visible {
+  background: rgba(145, 169, 182, 0.09);
+  outline: none;
+}
+
+.app-income-downloads > a > span,
+.app-income-downloads em {
+  color: rgba(10, 10, 9, 0.25);
+  font-size: 0.61rem;
+  font-style: normal;
+}
+
+.app-income-downloads em {
+  color: var(--toll-green);
+  font-size: 1.25rem;
+  text-align: right;
+}
+
+.app-income-downloads small,
+.app-income-downloads strong,
+.app-income-downloads p {
+  display: block;
+}
+
+.app-income-downloads small {
+  color: var(--toll-blue);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+}
+
+.app-income-downloads strong {
+  margin-top: 1rem;
+  color: var(--toll-paper);
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.app-income-downloads p {
+  max-width: 35rem;
+  margin-top: 0.75rem;
+  color: rgba(10, 10, 9, 0.4);
+  font-size: 0.66rem;
+  line-height: 1.55;
+}
+
+.app-income-workbook-preview {
+  margin-top: 2rem;
+  border: 1px solid var(--toll-line);
+  background: #f7f7f5;
+}
+
+.app-income-editorial-hero {
+  margin: 2rem 0 0;
+  overflow: hidden;
+  border: 1px solid var(--toll-line);
+  background: #08090b;
+}
+
+.app-income-editorial-hero img {
+  display: block;
+  width: 100%;
+  max-height: 48rem;
+  object-fit: cover;
+  object-position: center 48%;
+}
+
+.app-income-editorial-hero figcaption {
+  border-top: 1px solid var(--toll-line);
+  padding: 0.9rem 1rem;
+  color: rgba(10, 10, 9, 0.52);
+  font-size: 0.66rem;
+  line-height: 1.55;
+}
+
+.app-income-workbook-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.app-income-workbook-preview figcaption {
+  background: var(--toll-ink);
+}
+
+.app-income-source-meta {
+  display: block;
+  margin-top: 0.45rem;
+  color: var(--toll-blue);
+  font-size: 0.57rem;
+  text-transform: uppercase;
+}
+
+.app-income-article .toll-source-ledger__links span {
+  color: rgba(10, 10, 9, 0.28);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .app-income-explorer__heading,
+  .app-income-range__summary {
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.65fr);
+    align-items: end;
+  }
+
+  .app-income-control-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .app-income-control-grid fieldset {
+    border-right: 1px solid var(--toll-line);
+    border-bottom: 0;
+  }
+
+  .app-income-control-grid fieldset:last-child {
+    border-right: 0;
+  }
+
+  .app-income-bridge,
+  .app-income-profit-scenarios,
+  .app-income-downloads {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-income-portfolio-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .app-income-calculator {
+    grid-template-columns: minmax(15rem, 0.42fr) minmax(0, 0.58fr);
+  }
+
+  .app-income-calculator__controls {
+    border-right: 1px solid var(--toll-line);
+    border-bottom: 0;
+  }
+
+  .app-income-calculator__note {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1100px) {
+  .app-income-bridge {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .app-income-profit-scenarios {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

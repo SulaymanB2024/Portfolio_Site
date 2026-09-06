@@ -44,6 +44,11 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 ## Public Work and Research
 
 - [Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench](https://sulayman-bowles.dev/viralbench-codex-agent-harness)
+- [Ethereum Blobspace: 87% Full Inside Posted Blobs, 30–35% of Target in July 2026](https://sulayman-bowles.dev/research/financial-systems/ethereum-blobspace-measurement-audit)
+- [UNI Is Deflationary in Economics, Not in ERC-20 Accounting](https://sulayman-bowles.dev/research/financial-systems/uni-burn-supply-accounting)
+- [America’s Solid-Rocket-Motor Buildout Is Real. The Capacity Numbers Are Not Additive.](https://sulayman-bowles.dev/research/financial-systems/us-solid-rocket-motor-capacity-audit)
+- [When Does a Data Center Become Infrastructure?](https://sulayman-bowles.dev/markets/when-does-a-data-center-become-infrastructure)
+- [How Many Indie App Developers Make $1,000 a Month?](https://sulayman-bowles.dev/research/app-economics/independent-app-income-distribution)
 - [The AI Megawatt Is Not a Megawatt](https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt)
 - [The Crawl Frontier Is a State Machine, Not a Queue](https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine)
 - [Raw HTML and Rendered DOM Are Separate Evidence](https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence)

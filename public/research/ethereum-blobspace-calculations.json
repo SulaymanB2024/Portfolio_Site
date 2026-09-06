@@ -1,0 +1,102 @@
+{
+  "inputs": {
+    "cutoff_date": "2026-07-18",
+    "last_synced_slot_inclusive": 14794852,
+    "total_blobs": 20133327,
+    "unique_blobs": 19807161,
+    "reported_occupancy": 0.8694,
+    "operator_daily_range": [
+      30000,
+      35000
+    ],
+    "raw_bytes_per_blob": 131072,
+    "provenance": "Historical numbers retained in the August draft; original dashboard response not preserved. Operator range is not a daily series."
+  },
+  "regimes": [
+    {
+      "regime": "Dencun",
+      "start_slot": 8626176,
+      "end_slot_exclusive": 11649024,
+      "scheduled_slots": 3022848,
+      "target_per_slot": 3,
+      "maximum_per_slot": 6,
+      "target_opportunities": 9068544,
+      "maximum_opportunities": 18137088
+    },
+    {
+      "regime": "Pectra",
+      "start_slot": 11649024,
+      "end_slot_exclusive": 13205504,
+      "scheduled_slots": 1556480,
+      "target_per_slot": 6,
+      "maximum_per_slot": 9,
+      "target_opportunities": 9338880,
+      "maximum_opportunities": 14008320
+    },
+    {
+      "regime": "BPO1",
+      "start_slot": 13205504,
+      "end_slot_exclusive": 13410304,
+      "scheduled_slots": 204800,
+      "target_per_slot": 10,
+      "maximum_per_slot": 15,
+      "target_opportunities": 2048000,
+      "maximum_opportunities": 3072000
+    },
+    {
+      "regime": "BPO2",
+      "start_slot": 13410304,
+      "end_slot_exclusive": 14794853,
+      "scheduled_slots": 1384549,
+      "target_per_slot": 14,
+      "maximum_per_slot": 21,
+      "target_opportunities": 19383686,
+      "maximum_opportunities": 29075529
+    }
+  ],
+  "target_opportunities": 39839110,
+  "maximum_opportunities": 64292937,
+  "history_target_fraction": 0.5053658829225853,
+  "history_maximum_fraction": 0.3131499032312056,
+  "repeated_blobs": 326166,
+  "daily_scenarios": [
+    {
+      "blobs": 30000,
+      "target_fraction": 0.2976190476190476,
+      "maximum_fraction": 0.1984126984126984,
+      "raw_GB": 3.93216,
+      "raw_GiB": 3.662109375,
+      "estimated_nonzero_GB": 3.418619904
+    },
+    {
+      "blobs": 35000,
+      "target_fraction": 0.3472222222222222,
+      "maximum_fraction": 0.23148148148148148,
+      "raw_GB": 4.58752,
+      "raw_GiB": 4.2724609375,
+      "estimated_nonzero_GB": 3.988389888
+    }
+  ],
+  "missed_slot_sensitivity": [
+    {
+      "hypothetical_miss_fraction": 0,
+      "history_target_fraction": 0.5053658829225853,
+      "history_maximum_fraction": 0.3131499032312056
+    },
+    {
+      "hypothetical_miss_fraction": 0.005,
+      "history_target_fraction": 0.5079054099724476,
+      "history_maximum_fraction": 0.3147235208353826
+    },
+    {
+      "hypothetical_miss_fraction": 0.01,
+      "history_target_fraction": 0.5104705888106923,
+      "history_maximum_fraction": 0.31631303356687435
+    },
+    {
+      "hypothetical_miss_fraction": 0.02,
+      "history_target_fraction": 0.5156794723699851,
+      "history_maximum_fraction": 0.3195407175828629
+    }
+  ]
+}

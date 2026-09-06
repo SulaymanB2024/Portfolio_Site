@@ -9,6 +9,111 @@
   ],
   "articles": [
     {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/ethereum-blobspace-measurement-audit",
+      "question": "Ethereum blobspace utilization",
+      "supporting_questions": [
+        "blob occupancy versus capacity",
+        "BPO2 target utilization"
+      ],
+      "intent": "comparison",
+      "cohort": 3,
+      "direct_answer": "Ethereum blobspace utilization depends on the denominator. The July 2026 inputs report 86.94% occupancy inside submitted blobs, while the operator range corresponds to 29.76–34.72% of scheduled BPO2 target capacity. These are historical measurements of different quantities.",
+      "evidence_gap": "Separate posted-object occupancy from scheduled opportunities, with explicit historical cutoffs and visible provider limitations.",
+      "original_artifact": "A four-regime capacity CSV, calculation JSON, source ledger, and two reproducible denominator charts.",
+      "scope_boundary": "This article measures Ethereum data availability; the UNI article examines token accounting and treasury distribution rather than block capacity.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/uni-burn-supply-accounting",
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/uni-burn-supply-accounting",
+      "question": "UNI burn supply accounting",
+      "supporting_questions": [
+        "UNI dead address total supply",
+        "Uniswap growth budget sell through"
+      ],
+      "intent": "evaluation",
+      "cohort": 3,
+      "direct_answer": "UNI burn supply accounting requires separate contract, dead-address, treasury, and market-float ledgers. The August 2026 reported inputs imply 891.975 million UNI outside recognized burn addresses, while the contract accounting denominator remains one billion. Neither quantity establishes circulating supply or market sales.",
+      "evidence_gap": "Reconcile a treasury cancellation with recurring-and-other transfers before comparing historical annualizations with an assumed distribution flow.",
+      "original_artifact": "A dated supply bridge, claim ledger, no-new-mint scenario CSV, and three reproducible token-flow charts.",
+      "scope_boundary": "This article examines UNI supply mechanics and conditional distribution flows; Ethereum blobspace measures protocol capacity using slot denominators.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/ethereum-blobspace-measurement-audit",
+        "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/financial-systems/us-solid-rocket-motor-capacity-audit",
+      "question": "U.S. solid rocket motor capacity",
+      "supporting_questions": [
+        "solid rocket motor manufacturing buildout",
+        "qualified rocket motor supply"
+      ],
+      "intent": "evaluation",
+      "cohort": 3,
+      "direct_answer": "U.S. solid rocket motor capacity is expanding, but disclosed motors, propellant pounds, floor area, and factory investment cannot be added into one production total. The audit separates native units, facility readiness, qualification, and accepted delivery evidence across the buildout.",
+      "evidence_gap": "Distinguish announced facilities from qualified program supply and preserve incompatible capacity units instead of summing headlines.",
+      "original_artifact": "A 31-record capacity ledger, source register, calculation file, readiness figures, and complete Markdown edition.",
+      "scope_boundary": "This article audits propulsion manufacturing capacity; the rare-earth study covers magnet supply and uses a different facility and product ledger.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/markets/when-does-a-data-center-become-infrastructure",
+      "question": "when does a data center become infrastructure",
+      "supporting_questions": [
+        "data center infrastructure finance",
+        "data center asset states"
+      ],
+      "intent": "evaluation",
+      "cohort": 3,
+      "direct_answer": "A data center becomes an infrastructure cash-flow asset when repayment depends mainly on durable operating payments and residual rights, rather than on the probability that the campus can still be built, powered, accepted, and refinanced.",
+      "evidence_gap": "Follow power rights, tenant acceptance, credit support, and residual recovery through distinct financing states instead of using construction completion alone.",
+      "original_artifact": "An interactive ten-state asset model and primary-source contract tables explaining how financeable claims accumulate.",
+      "scope_boundary": "This article evaluates infrastructure financing states; the AI megawatt article converts power boundaries into physical compute estimates.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
+      "url": "https://sulayman-bowles.dev/research/app-economics/independent-app-income-distribution",
+      "question": "how many indie app developers make $1000 a month",
+      "supporting_questions": [
+        "indie app income distribution",
+        "app revenue versus developer profit"
+      ],
+      "intent": "evaluation",
+      "cohort": 3,
+      "direct_answer": "About one in six developers behind serious independent app attempts are modeled to generate at least $1,000 in current monthly gross app revenue across their portfolios. The 15.4% central estimate has an 8.4% to 25.0% plausible interval. This July 2026 model is not an app-store census.",
+      "evidence_gap": "Expose the population, time window, and revenue basis instead of estimating prevalence from selected successful founder stories.",
+      "original_artifact": "An interactive denominator explorer, subscriber calculator, selected-case ledger, full report, and downloadable model workbook.",
+      "scope_boundary": "This article models independent app income distributions; the AI managers article assesses operating autonomy rather than app earnings prevalence.",
+      "related_articles": [
+        "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
+        "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+        "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records"
+      ],
+      "ranking_goal": null,
+      "last_verified": "2026-07-23"
+    },
+    {
       "url": "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
       "question": "can AI run a business",
       "supporting_questions": [
@@ -22,6 +127,7 @@
       "original_artifact": "A 30-case evidence table that grades operating reality, human involvement, economics, and source limitations.",
       "scope_boundary": "This page evaluates whether AI can operate a business; the ViralBench and replayable-trace pages evaluate agent harnesses and test evidence.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/app-economics/independent-app-income-distribution",
         "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
         "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
@@ -44,6 +150,8 @@
       "original_artifact": "A downloadable GB300 capacity model, sensitivity table, source index, methodology note, and three scope diagrams.",
       "scope_boundary": "This page translates AI power claims into physical compute capacity; the hardware-financing and rare-earth articles analyze capital structure and upstream manufacturing capacity.",
       "related_articles": [
+        "https://sulayman-bowles.dev/markets/when-does-a-data-center-become-infrastructure",
+        "https://sulayman-bowles.dev/research/financial-systems/ethereum-blobspace-measurement-audit",
         "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
@@ -66,6 +174,7 @@
       "original_artifact": "A project-level capacity model, source index, material-flow diagram, maturity chart, and demand-denominator comparison.",
       "scope_boundary": "This page audits domestic rare-earth magnet projects and physical supply maturity; the AI megawatt page models compute power and the hardware articles model financing.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/us-solid-rocket-motor-capacity-audit",
         "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
         "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
         "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
@@ -288,6 +397,8 @@
       "original_artifact": "A 29-sheet comparative model, five full-resolution capital-stack diagrams, a 19-page report, cross-case scenario tables, and an explicit evidence hierarchy.",
       "scope_boundary": "This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/us-solid-rocket-motor-capacity-audit",
+        "https://sulayman-bowles.dev/markets/when-does-a-data-center-become-infrastructure",
         "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
         "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
         "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
@@ -573,6 +684,8 @@
       "original_artifact": "A finding-provenance schema, observation-to-finding lineage table, confidence states, and review transition contract.",
       "scope_boundary": "This page focuses on one derived audit record; the SEO data-pipeline page covers collection and movement across the broader system.",
       "related_articles": [
+        "https://sulayman-bowles.dev/research/financial-systems/ethereum-blobspace-measurement-audit",
+        "https://sulayman-bowles.dev/research/financial-systems/uni-burn-supply-accounting",
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
         "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
         "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",

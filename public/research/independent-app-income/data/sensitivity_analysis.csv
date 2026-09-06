@@ -1,0 +1,10 @@
+﻿sensitivity,case,app_probability_pct,developer_probability_pct,interpretation
+Full stochastic model,All assumptions varied jointly,10.232853764617298,15.408261737906557,Central estimate
+RevenueCat milestone rate,13.0% ever-hit,8.2875,11.78604933525219,Lower anchor
+RevenueCat milestone rate,22.0% ever-hit,14.025000000000002,19.140033070996466,Upper anchor
+Current persistence after ever-hit,35%,5.146749999999999,7.563784544325512,Low persistence
+Current persistence after ever-hit,95%,13.969749999999998,19.071252440679157,High persistence
+Transfer from subscription cohort,45%,5.838749999999999,8.506987527488597,Large subscription-success penalty
+Transfer from subscription cohort,135%,17.516249999999996,23.41256311823805,Non-subscription models perform better than anchor
+Denominator,All listed apps,0.9800557054831217,1.5483980892646525,Broadest denominator
+Denominator,Maintained at least 12 months,12.259265380172229,18.205714683553488,Narrow mature denominator

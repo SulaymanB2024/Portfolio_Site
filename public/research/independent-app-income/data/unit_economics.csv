@@ -1,0 +1,48 @@
+﻿model,scenario,target,required_units,unit_name,formula,assumptions
+Monthly subscription,$4.99/month,"$1,000 gross/month",201,active monthly subscribers,"CEILING(1000/4.99,1)",No refunds or tax.
+Monthly subscription,$4.99/month,"$1,000 proceeds/month",236,active monthly subscribers,"CEILING(1000/(4.99*0.85),1)",15% platform/payment fee.
+Monthly subscription,$4.99/month,"$1,000 owner profit/month",289,active monthly subscribers,"CEILING((1000+150)/(4.99*0.85-0.25),1)","15% fee, $150 fixed cost, $0.25 variable cost per active subscriber."
+Monthly subscription,$9.99/month,"$1,000 gross/month",101,active monthly subscribers,"CEILING(1000/9.99,1)",No refunds or tax.
+Monthly subscription,$9.99/month,"$1,000 proceeds/month",118,active monthly subscribers,"CEILING(1000/(9.99*0.85),1)",15% platform/payment fee.
+Monthly subscription,$9.99/month,"$1,000 owner profit/month",140,active monthly subscribers,"CEILING((1000+150)/(9.99*0.85-0.25),1)","15% fee, $150 fixed cost, $0.25 variable cost per active subscriber."
+Monthly subscription,$19.99/month,"$1,000 gross/month",51,active monthly subscribers,"CEILING(1000/19.99,1)",No refunds or tax.
+Monthly subscription,$19.99/month,"$1,000 proceeds/month",59,active monthly subscribers,"CEILING(1000/(19.99*0.85),1)",15% platform/payment fee.
+Monthly subscription,$19.99/month,"$1,000 owner profit/month",69,active monthly subscribers,"CEILING((1000+150)/(19.99*0.85-0.25),1)","15% fee, $150 fixed cost, $0.25 variable cost per active subscriber."
+Annual subscription (recognized monthly),$29.99/year,"$1,000 gross/month",401,active annual subscribers,"CEILING(1000/(29.99/12),1)",Straight-line revenue recognition; ignores cash timing.
+Annual subscription (recognized monthly),$29.99/year,"$1,000 proceeds/month",471,active annual subscribers,"CEILING(1000/((29.99/12)*0.85),1)",15% fee.
+Annual subscription (recognized monthly),$29.99/year,"$1,000 owner profit/month",614,active annual subscribers,"CEILING((1000+150)/((29.99/12)*0.85-0.25),1)","15% fee, $150 fixed, $0.25 variable per active subscriber."
+Annual subscription (recognized monthly),$49.99/year,"$1,000 gross/month",241,active annual subscribers,"CEILING(1000/(49.99/12),1)",Straight-line revenue recognition; ignores cash timing.
+Annual subscription (recognized monthly),$49.99/year,"$1,000 proceeds/month",283,active annual subscribers,"CEILING(1000/((49.99/12)*0.85),1)",15% fee.
+Annual subscription (recognized monthly),$49.99/year,"$1,000 owner profit/month",350,active annual subscribers,"CEILING((1000+150)/((49.99/12)*0.85-0.25),1)","15% fee, $150 fixed, $0.25 variable per active subscriber."
+Annual subscription (recognized monthly),$79.99/year,"$1,000 gross/month",151,active annual subscribers,"CEILING(1000/(79.99/12),1)",Straight-line revenue recognition; ignores cash timing.
+Annual subscription (recognized monthly),$79.99/year,"$1,000 proceeds/month",177,active annual subscribers,"CEILING(1000/((79.99/12)*0.85),1)",15% fee.
+Annual subscription (recognized monthly),$79.99/year,"$1,000 owner profit/month",213,active annual subscribers,"CEILING((1000+150)/((79.99/12)*0.85-0.25),1)","15% fee, $150 fixed, $0.25 variable per active subscriber."
+Launch cohort downloads,D60 RPI $0.11,"$1,000 cumulative D60 revenue",9091,cohort installs,"CEILING(1000/0.11,1)","RevenueCat selected subscription-app cohort; cumulative cohort revenue, not monthly recurring revenue."
+Launch cohort downloads,D60 RPI $0.34,"$1,000 cumulative D60 revenue",2942,cohort installs,"CEILING(1000/0.34,1)","RevenueCat selected subscription-app cohort; cumulative cohort revenue, not monthly recurring revenue."
+Launch cohort downloads,D60 RPI $0.55,"$1,000 cumulative D60 revenue",1819,cohort installs,"CEILING(1000/0.55,1)","RevenueCat selected subscription-app cohort; cumulative cohort revenue, not monthly recurring revenue."
+Launch cohort downloads,D60 RPI $0.66,"$1,000 cumulative D60 revenue",1516,cohort installs,"CEILING(1000/0.66,1)","RevenueCat selected subscription-app cohort; cumulative cohort revenue, not monthly recurring revenue."
+Subscription acquisition,0.7% download-to-paid,118 active subscribers at $9.99 (about $1k proceeds),16858,downloads before churn,"CEILING(118/0.007,1)","No churn in acquisition count; at 10% monthly churn and 2% conversion, about 590 new downloads/month are needed to maintain 118 subscribers."
+Subscription acquisition,2.0% download-to-paid,118 active subscribers at $9.99 (about $1k proceeds),5900,downloads before churn,"CEILING(118/0.02,1)","No churn in acquisition count; at 10% monthly churn and 2% conversion, about 590 new downloads/month are needed to maintain 118 subscribers."
+Subscription acquisition,2.8% download-to-paid,118 active subscribers at $9.99 (about $1k proceeds),4215,downloads before churn,"CEILING(118/0.028,1)","No churn in acquisition count; at 10% monthly churn and 2% conversion, about 590 new downloads/month are needed to maintain 118 subscribers."
+Advertising,Conservative,"$1,000 gross ad revenue/month",69445,monthly active users,"CEILING(1000/(8*1.5*0.8*1.5/1000),1)","8 sessions/MAU/month, 1.5 ads/session, 80% fill, $1.50 eCPM. Explicit scenario, not an observed universal rate."
+Advertising,Base,"$1,000 gross ad revenue/month",9260,monthly active users,"CEILING(1000/(12*2*0.9*5/1000),1)","12 sessions/MAU/month, 2 ads/session, 90% fill, $5.00 eCPM. Explicit scenario, not an observed universal rate."
+Advertising,Strong,"$1,000 gross ad revenue/month",1462,monthly active users,"CEILING(1000/(20*3*0.95*12/1000),1)","20 sessions/MAU/month, 3 ads/session, 95% fill, $12.00 eCPM. Explicit scenario, not an observed universal rate."
+Commission / marketplace,3% take rate,"$1,000 gross commission/month",33333.33,monthly GMV,1000/0.03,"Before payment losses, support, disputes, and incentives."
+Commission / marketplace,5% take rate,"$1,000 gross commission/month",20000.0,monthly GMV,1000/0.05,"Before payment losses, support, disputes, and incentives."
+Commission / marketplace,10% take rate,"$1,000 gross commission/month",10000.0,monthly GMV,1000/0.1,"Before payment losses, support, disputes, and incentives."
+Commission / marketplace,15% take rate,"$1,000 gross commission/month",6666.67,monthly GMV,1000/0.15,"Before payment losses, support, disputes, and incentives."
+Paid download,$0.99 price,"$1,000 gross/month",1011,paid downloads/month,"CEILING(1000/0.99,1)",No refunds or tax.
+Paid download,$0.99 price,"$1,000 proceeds/month",1189,paid downloads/month,"CEILING(1000/(0.99*0.85),1)",15% fee.
+Paid download,$2.99 price,"$1,000 gross/month",335,paid downloads/month,"CEILING(1000/2.99,1)",No refunds or tax.
+Paid download,$2.99 price,"$1,000 proceeds/month",394,paid downloads/month,"CEILING(1000/(2.99*0.85),1)",15% fee.
+Paid download,$4.99 price,"$1,000 gross/month",201,paid downloads/month,"CEILING(1000/4.99,1)",No refunds or tax.
+Paid download,$4.99 price,"$1,000 proceeds/month",236,paid downloads/month,"CEILING(1000/(4.99*0.85),1)",15% fee.
+Paid download,$9.99 price,"$1,000 gross/month",101,paid downloads/month,"CEILING(1000/9.99,1)",No refunds or tax.
+Paid download,$9.99 price,"$1,000 proceeds/month",118,paid downloads/month,"CEILING(1000/(9.99*0.85),1)",15% fee.
+Gross-to-profit bridge,Lean,"$1,000 owner profit/month",1437.5,gross monthly revenue,(1000+150)/(1-0.15-0.05),"15% platform/payment fee, 5% variable operating/acquisition cost, $150 fixed monthly cost."
+Gross-to-profit bridge,API-heavy,"$1,000 owner profit/month",2142.86,gross monthly revenue,(1000+500)/(1-0.15-0.15),"15% platform/payment fee, 15% variable operating/acquisition cost, $500 fixed monthly cost."
+Gross-to-profit bridge,Paid acquisition,"$1,000 owner profit/month",2727.27,gross monthly revenue,(1000+500)/(1-0.15-0.3),"15% platform/payment fee, 30% variable operating/acquisition cost, $500 fixed monthly cost."
+Gross-to-profit bridge,High fee / high UA,"$1,000 owner profit/month",3750.0,gross monthly revenue,(1000+500)/(1-0.3-0.3),"30% platform/payment fee, 30% variable operating/acquisition cost, $500 fixed monthly cost."
+Gross-to-profit bridge,Lean full-time,"$5,000 owner profit/month",6625.0,gross monthly revenue,(5000+300)/(1-0.15-0.05),"15% platform/payment fee, 5% variable operating/acquisition cost, $300 fixed monthly cost."
+Gross-to-profit bridge,API-heavy full-time,"$5,000 owner profit/month",8571.43,gross monthly revenue,(5000+1000)/(1-0.15-0.15),"15% platform/payment fee, 15% variable operating/acquisition cost, $1,000 fixed monthly cost."
+Gross-to-profit bridge,Paid acquisition full-time,"$5,000 owner profit/month",10909.09,gross monthly revenue,(5000+1000)/(1-0.15-0.3),"15% platform/payment fee, 30% variable operating/acquisition cost, $1,000 fixed monthly cost."

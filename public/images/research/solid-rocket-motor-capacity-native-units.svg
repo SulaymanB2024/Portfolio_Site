@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2420" height="1430" viewBox="0 0 2420 1430" role="img" aria-labelledby="title desc">
+<title id="title">Public solid-rocket-motor capacity disclosures use incompatible native units</title>
+<desc id="desc">Horizontal bars count eleven different metric families among thirty-one audited public facility and capability records. Multipliers appear seven times, motor counts five, annual energetic mass four, percentage changes three, four categories twice, and two categories once.</desc>
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Inter,Arial,sans-serif;fill:#171717}.title{font-size:48px;font-weight:600}.label{font-size:34px}.value{font-size:32px;font-weight:600}.axis{font-size:30px}.grid{stroke:#d9d9d9;stroke-width:2}.bar{fill:#2b7fb8}.axisline{stroke:#222;stroke-width:3}</style>
+<text class="title" x="1210.0" y="65" text-anchor="middle">Public SRM “capacity” disclosures use incompatible native units</text>
+<line class="grid" x1="620.0" y1="115" x2="620.0" y2="1285"/>
+<text class="axis" x="620.0" y="1335" text-anchor="middle">0</text>
+<line class="grid" x1="852.9" y1="115" x2="852.9" y2="1285"/>
+<text class="axis" x="852.9" y="1335" text-anchor="middle">1</text>
+<line class="grid" x1="1085.7" y1="115" x2="1085.7" y2="1285"/>
+<text class="axis" x="1085.7" y="1335" text-anchor="middle">2</text>
+<line class="grid" x1="1318.6" y1="115" x2="1318.6" y2="1285"/>
+<text class="axis" x="1318.6" y="1335" text-anchor="middle">3</text>
+<line class="grid" x1="1551.4" y1="115" x2="1551.4" y2="1285"/>
+<text class="axis" x="1551.4" y="1335" text-anchor="middle">4</text>
+<line class="grid" x1="1784.3" y1="115" x2="1784.3" y2="1285"/>
+<text class="axis" x="1784.3" y="1335" text-anchor="middle">5</text>
+<line class="grid" x1="2017.1" y1="115" x2="2017.1" y2="1285"/>
+<text class="axis" x="2017.1" y="1335" text-anchor="middle">6</text>
+<line class="grid" x1="2250.0" y1="115" x2="2250.0" y2="1285"/>
+<text class="axis" x="2250.0" y="1335" text-anchor="middle">7</text>
+<line class="axisline" x1="620" y1="115" x2="620" y2="1285"/>
+<text class="label" x="595" y="177" text-anchor="end">Multipliers</text>
+<rect class="bar" x="620" y="135" width="1630.0" height="60" rx="3"/>
+<text class="value" x="2270.0" y="177">7</text>
+<text class="label" x="595" y="275" text-anchor="end">Motors / year</text>
+<rect class="bar" x="620" y="233" width="1164.3" height="60" rx="3"/>
+<text class="value" x="1804.3" y="275">5</text>
+<text class="label" x="595" y="373" text-anchor="end">Energetics mass / year</text>
+<rect class="bar" x="620" y="331" width="931.4" height="60" rx="3"/>
+<text class="value" x="1571.4" y="373">4</text>
+<text class="label" x="595" y="471" text-anchor="end">Percent changes</text>
+<rect class="bar" x="620" y="429" width="698.6" height="60" rx="3"/>
+<text class="value" x="1338.6" y="471">3</text>
+<text class="label" x="595" y="569" text-anchor="end">Facility-area proxies</text>
+<rect class="bar" x="620" y="527" width="465.7" height="60" rx="3"/>
+<text class="value" x="1105.7" y="569">2</text>
+<text class="label" x="595" y="667" text-anchor="end">Test / flight milestones</text>
+<rect class="bar" x="620" y="625" width="465.7" height="60" rx="3"/>
+<text class="value" x="1105.7" y="667">2</text>
+<text class="label" x="595" y="765" text-anchor="end">Qualification / prototype milestones</text>
+<rect class="bar" x="620" y="723" width="465.7" height="60" rx="3"/>
+<text class="value" x="1105.7" y="765">2</text>
+<text class="label" x="595" y="863" text-anchor="end">Scenario conversions</text>
+<rect class="bar" x="620" y="821" width="465.7" height="60" rx="3"/>
+<text class="value" x="1105.7" y="863">2</text>
+<text class="label" x="595" y="961" text-anchor="end">No normalized output</text>
+<rect class="bar" x="620" y="919" width="465.7" height="60" rx="3"/>
+<text class="value" x="1105.7" y="961">2</text>
+<text class="label" x="595" y="1059" text-anchor="end">Capital commitment</text>
+<rect class="bar" x="620" y="1017" width="232.9" height="60" rx="3"/>
+<text class="value" x="872.9" y="1059">1</text>
+<text class="label" x="595" y="1157" text-anchor="end">Energetics mass, no time basis</text>
+<rect class="bar" x="620" y="1115" width="232.9" height="60" rx="3"/>
+<text class="value" x="872.9" y="1157">1</text>
+<text class="axis" x="1435.0" y="1395" text-anchor="middle">Number of public claims in the audited dataset</text>
+</svg>

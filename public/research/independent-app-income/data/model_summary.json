@@ -1,0 +1,43 @@
+{
+  "seed": 20260714,
+  "draws": 500000,
+  "headline": {
+    "denominator": "E. Serious commercial attempts",
+    "unit": "Developer",
+    "revenue_state": "Current month",
+    "lower_pct": 8.360258897371144,
+    "central_pct": 15.408261737906557,
+    "upper_pct": 25.019874900428572,
+    "interpretation": ""
+  },
+  "serious_app_current": {
+    "lower_pct": 5.255374669490444,
+    "central_pct": 10.232853764617298,
+    "upper_pct": 17.43522965752049
+  },
+  "serious_developer_current": {
+    "lower_pct": 8.360258897371144,
+    "central_pct": 15.408261737906557,
+    "upper_pct": 25.019874900428572
+  },
+  "serious_app_sustained": {
+    "lower_pct": 3.5882113543471696,
+    "central_pct": 7.276248753968412,
+    "upper_pct": 13.013156401784897
+  },
+  "serious_developer_sustained": {
+    "lower_pct": 6.341137585133866,
+    "central_pct": 12.002086415790092,
+    "upper_pct": 20.179481868509974
+  },
+  "serious_app_sustained6": {
+    "lower_pct": 2.800814197953124,
+    "central_pct": 5.882428692624096,
+    "upper_pct": 10.913779267489726
+  },
+  "serious_developer_sustained6": {
+    "lower_pct": 5.130404558954602,
+    "central_pct": 9.924664337449096,
+    "upper_pct": 17.141814319791994
+  }
+}

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="486pt" viewBox="0 0 864 486" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.7, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 486 
+L 864 486 
+L 864 0 
+L 0 0 
+z
+" style="fill: #f7f4ed"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 259.2 374.22 
+L 838.08 374.22 
+L 838.08 87.48 
+L 259.2 87.48 
+z
+" style="fill: #f7f4ed"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 259.2 374.22 
+L 259.2 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="m097b934434" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m097b934434" x="259.2" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="259.2" y="390.338125" transform="rotate(-0 259.2 390.338125)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 377.822951 374.22 
+L 377.822951 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m097b934434" x="377.822951" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="377.822951" y="390.338125" transform="rotate(-0 377.822951 390.338125)">5</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 496.445902 374.22 
+L 496.445902 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m097b934434" x="496.445902" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="496.445902" y="390.338125" transform="rotate(-0 496.445902 390.338125)">10</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 615.068852 374.22 
+L 615.068852 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m097b934434" x="615.068852" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="615.068852" y="390.338125" transform="rotate(-0 615.068852 390.338125)">15</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 733.691803 374.22 
+L 733.691803 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m097b934434" x="733.691803" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="733.691803" y="390.338125" transform="rotate(-0 733.691803 390.338125)">20</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="548.64" y="405.951875" transform="rotate(-0 548.64 405.951875)">Million UNI</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_11">
+      <defs>
+       <path id="ma1c67140d1" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#ma1c67140d1" x="259.2" y="125.740029" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="252.2" y="130.299092" transform="rotate(-0 252.2 130.299092)">Cumulative residual proxy</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#ma1c67140d1" x="259.2" y="230.85" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="252.2" y="235.409063" transform="rotate(-0 252.2 235.409063)">Reported 90-day proxy</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#ma1c67140d1" x="259.2" y="335.959971" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="252.2" y="340.519033" transform="rotate(-0 252.2 340.519033)">Annual growth budget</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 259.2 100.513636 
+L 573.790127 100.513636 
+L 573.790127 150.966422 
+L 259.2 150.966422 
+z
+" clip-path="url(#p5d7e07da9e)" style="fill: #176b78"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 259.2 205.623607 
+L 637.137993 205.623607 
+L 637.137993 256.076393 
+L 259.2 256.076393 
+z
+" clip-path="url(#p5d7e07da9e)" style="fill: #b25230"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 259.2 310.733578 
+L 733.691803 310.733578 
+L 733.691803 361.186364 
+L 259.2 361.186364 
+z
+" clip-path="url(#p5d7e07da9e)" style="fill: #293447"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 259.2 374.22 
+L 259.2 87.48 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 259.2 374.22 
+L 838.08 374.22 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="583.279963" y="129.051279" transform="rotate(-0 583.279963 129.051279)">13.26M</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="646.62783" y="234.16125" transform="rotate(-0 646.62783 234.16125)">15.93M</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="743.181639" y="339.271221" transform="rotate(-0 743.181639 339.271221)">20.00M</text>
+   </g>
+  </g>
+  <g id="text_13">
+   <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start" x="38.88" y="23.397188" transform="rotate(-0 38.88 23.397188)">Annualized proxies and the treasury distribution schedule</text>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(38.88 457.792188)">August 2026 reported inputs · Burn rates are annualizations, not forecasts.</text>
+   <text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(38.88 468.99)">The 20M budget distributes existing treasury UNI; actual market sales are not established.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p5d7e07da9e">
+   <rect x="259.2" y="87.48" width="578.88" height="286.74"/>
+  </clipPath>
+ </defs>
+</svg>

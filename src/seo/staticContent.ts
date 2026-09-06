@@ -1,4 +1,33 @@
 import {
+  DATA_CENTER_ARTICLE_DESCRIPTION,
+  DATA_CENTER_ARTICLE_FACT_GAPS,
+  DATA_CENTER_ARTICLE_FAQS,
+  DATA_CENTER_ARTICLE_LEDE_MARKDOWN,
+  DATA_CENTER_ARTICLE_SECTIONS,
+  DATA_CENTER_ARTICLE_SLUG,
+  DATA_CENTER_ARTICLE_SOURCES,
+  DATA_CENTER_ARTICLE_TABLES,
+  DATA_CENTER_ARTICLE_TITLE,
+  type DataCenterArticleTable,
+} from '../content/dataCenterInfrastructureArticle';
+import {
+  INDEPENDENT_APP_INCOME_ARTICLE_DESCRIPTION,
+  INDEPENDENT_APP_INCOME_ARTICLE_PATH,
+  INDEPENDENT_APP_INCOME_ARTICLE_TITLE,
+} from '../content/independentAppIncomeArticleMeta';
+import {
+  APP_INCOME_CASES,
+  APP_INCOME_COPY,
+  APP_INCOME_DENOMINATORS,
+  APP_INCOME_DOWNLOADS,
+  APP_INCOME_EVIDENCE_BRIDGE,
+  APP_INCOME_FAQS,
+  APP_INCOME_LEDE,
+  APP_INCOME_LIMITATIONS,
+  APP_INCOME_REVENUE_BANDS,
+  APP_INCOME_SOURCES,
+} from '../content/independentAppIncomeArticle';
+import {
   aiSearchAuditChecklist,
   atlasCheckItems,
   buyerDecisionEvidence,
@@ -227,7 +256,7 @@ function escapeHtml(value: string) {
     .replaceAll("'", '&#39;');
 }
 
-function paragraphList(items: string[]) {
+function paragraphList(items: readonly string[]) {
   return items.map((item) => `<p>${escapeHtml(item)}</p>`).join('\n        ');
 }
 
@@ -537,6 +566,131 @@ function texasTollArticleStaticHtml() {
         ])}`,
   );
 }
+
+function restoredConclusionStaticHtml(path: string) {
+  const article = getArticleByPath(path);
+  if (!article) throw new Error(`Missing restored article: ${path}`);
+  return `<h2 id="article-conclusion-title">${escapeHtml(article.conclusion.title)}</h2><p>${escapeHtml(article.conclusion.content)}</p><p>Research cutoff: July 14, 2026. Publication edition: ${escapeHtml(article.date)}.</p>`;
+}
+
+function independentAppIncomeStaticHtml() {
+  const denominatorRows = APP_INCOME_DENOMINATORS.map((row) => `<tr>
+            <td>${escapeHtml(row.population)}</td>
+            <td>${escapeHtml(row.unit)}</td>
+            <td>${escapeHtml(row.horizon)}</td>
+            <td>${row.lower.toFixed(2)}%</td>
+            <td>${row.central.toFixed(2)}%</td>
+            <td>${row.upper.toFixed(2)}%</td>
+            <td>${escapeHtml(row.note)}</td>
+          </tr>`).join('\n          ');
+  const evidenceBridge = APP_INCOME_EVIDENCE_BRIDGE.map((step) => `<li><strong>${escapeHtml(`${step.kind}: ${step.value} — ${step.label}`)}</strong><p>${escapeHtml(step.detail)}</p></li>`).join('\n          ');
+  const revenueBands = APP_INCOME_REVENUE_BANDS.map((band) => `<tr><td>${escapeHtml(band.label)}</td><td>${band.share}%</td><td>${escapeHtml(band.detail)}</td></tr>`).join('\n          ');
+  const cases = APP_INCOME_CASES.map((item) => `<tr>
+            <td>${escapeHtml(item.name)}</td>
+            <td>${escapeHtml(item.displayMrr)}</td>
+            <td>${escapeHtml(`${item.unit} / ${item.category}`)}</td>
+            <td>${escapeHtml(item.context)}</td>
+            <td><a href="#source-${item.sourceId}">${escapeHtml(item.sourceId)}</a> — ${escapeHtml(item.verification)}</td>
+          </tr>`).join('\n          ');
+  const downloads = APP_INCOME_DOWNLOADS.map((asset) => ({ label: `${asset.label} (${asset.format})`, href: asset.href, description: asset.note }));
+  const faqs = APP_INCOME_FAQS.map((faq) => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`).join('\n        ');
+  const sources = APP_INCOME_SOURCES.map((source) => `<li id="source-${source.id}"><strong>${escapeHtml(`${source.id}: ${source.label}`)}</strong><p>${escapeHtml(`${source.publisher} · ${source.evidenceClass}. ${source.note}`)}</p><a href="${escapeHtml(source.href)}">Open source</a>${source.lastVerified ? `<span> — Verified ${escapeHtml(source.lastVerified)}</span>` : ''}</li>`).join('\n          ');
+
+  return articleShell(
+    INDEPENDENT_APP_INCOME_ARTICLE_TITLE,
+    INDEPENDENT_APP_INCOME_ARTICLE_DESCRIPTION,
+    `${articleSearchBriefStaticHtml('/research/app-economics/independent-app-income-distribution')}
+        <p><strong>Evidence boundary:</strong> Modeled ranges, not an app-store census. Selected public cases illustrate mechanisms and are never used as prevalence counts. Intervals express assumption uncertainty, not sampling confidence.</p>
+        ${paragraphList(APP_INCOME_LEDE)}
+        <h2 id="denominator">The denominator is the result</h2>
+        ${paragraphList(APP_INCOME_COPY.denominator)}
+        <table>
+          <caption>Modeled share at or above $1,000 in gross monthly app revenue</caption>
+          <thead><tr><th>Population</th><th>Unit</th><th>Horizon</th><th>Lower</th><th>Central</th><th>Upper</th><th>Interpretation</th></tr></thead>
+          <tbody>${denominatorRows}</tbody>
+        </table>
+        <figure><img src="/research/independent-app-income/charts/denominator_ladder.png" alt="Modeled app-income estimates across multiple denominators." /><figcaption>The denominator ladder.</figcaption></figure>
+        <h2 id="evidence-bridge">From an observed milestone to a current-state estimate</h2>
+        ${paragraphList(APP_INCOME_COPY.evidence)}
+        <ol>${evidenceBridge}</ol>
+        <figure><img src="/research/independent-app-income/charts/threshold_survival.png" alt="Threshold survival from ever-hit to sustained app revenue." /><figcaption>Threshold survival.</figcaption></figure>
+        <h2 id="distribution">Most serious apps still live below $1,000</h2>
+        ${paragraphList(APP_INCOME_COPY.distribution)}
+        <table><caption>Modeled current monthly gross revenue bands for serious independent apps</caption><thead><tr><th>Band</th><th>Share</th><th>Interpretation</th></tr></thead><tbody>${revenueBands}</tbody></table>
+        <figure><img src="/research/independent-app-income/charts/revenue_bands.png" alt="Modeled monthly revenue bands for serious independent apps." /><figcaption>Modeled revenue bands.</figcaption></figure>
+        <h2 id="portfolio-effect">A developer can win without one breakout app</h2>
+        ${paragraphList(APP_INCOME_COPY.portfolio)}
+        <ul><li>Modeled mean: 1.83 serious apps per developer.</li><li>Between 17% and 25% of successful developers cross $1,000 only by summing sub-threshold apps.</li><li>Between 55% and 75% receive at least 70% of portfolio revenue from the top app.</li></ul>
+        <h2 id="unit-economics">$1,000 of what?</h2>
+        ${paragraphList(APP_INCOME_COPY.economics)}
+        <p>At $9.99 per month, the lean scenario requires 101 active subscribers for $1,000 gross, 118 for $1,000 of proceeds after a 15% fee, and 140 for $1,000 of owner profit after the modeled fee and costs.</p>
+        <figure><img src="/research/independent-app-income/charts/subscriber_requirements.png" alt="Active subscriber requirements for one thousand dollars of gross revenue, proceeds, or owner profit." /><figcaption>Subscriber requirements.</figcaption></figure>
+        <figure><img src="/research/independent-app-income/charts/gross_to_profit.png" alt="Gross monthly revenue required for one thousand dollars of owner profit under four cost scenarios." /><figcaption>Gross required for owner profit.</figcaption></figure>
+        <h2 id="selected-cases">Cases show mechanisms, not odds</h2>
+        ${paragraphList(APP_INCOME_COPY.cases)}
+        <table><caption>Selected public cases; never used as prevalence counts</caption><thead><tr><th>Product</th><th>MRR</th><th>Unit / category</th><th>What it shows</th><th>Evidence</th></tr></thead><tbody>${cases}</tbody></table>
+        <figure><img src="/research/independent-app-income/charts/case_scatter.png" alt="Selected public app cases across the monthly recurring revenue distribution." /><figcaption>Selected public cases.</figcaption></figure>
+        <h2 id="limits">What remains unknown</h2>
+        ${paragraphList(APP_INCOME_COPY.limitations)}
+        <ul>${APP_INCOME_LIMITATIONS.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        <h2 id="research-library">Open the model, not just the conclusion</h2>
+        ${paragraphList(APP_INCOME_COPY.methodology)}
+        ${linkList(downloads)}
+        <h2 id="frequently-asked-questions">Frequently asked questions</h2>
+        ${faqs}
+        <h2 id="source-ledger">Source ledger</h2>
+        <ol>${sources}</ol>
+        ${restoredConclusionStaticHtml('/research/app-economics/independent-app-income-distribution')}`,
+  );
+}
+
+
+function dataCenterArticleStaticHtml() {
+  const tableById = new Map(DATA_CENTER_ARTICLE_TABLES.map((table) => [table.id, table]));
+  const sections = DATA_CENTER_ARTICLE_SECTIONS.map((section) => {
+    const blocks = section.blocks.map((block) => {
+      if (block.kind === 'markdown') return markdownToHtml(block.markdown);
+      const table = tableById.get(block.tableId);
+      return table ? texasTollTableStaticHtml(table) : '';
+    });
+    return `<h2 id="${section.id}">${escapeHtml(section.title)}</h2>${blocks.join('\n        ')}`;
+  }).join('\n        ');
+  const factGaps = DATA_CENTER_ARTICLE_FACT_GAPS.map(
+    (group) => `<h3>${escapeHtml(group.title)}</h3>${markdownToHtml(group.items.map((item) => `- ${item}`).join('\n'))}`,
+  ).join('\n        ');
+  const faqs = DATA_CENTER_ARTICLE_FAQS.map(
+    (faq) => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`,
+  ).join('\n        ');
+  const sources = DATA_CENTER_ARTICLE_SOURCES.map(
+    (source) => `<li id="source-${source.id}"><strong>${escapeHtml(`${source.id.toUpperCase()}: ${source.label}`)}</strong><p>${escapeHtml(source.note)}</p>${source.hrefs.map((href, index) => `<a href="${href}">${escapeHtml(source.hrefs.length > 1 ? `Open source ${index + 1}` : 'Open source')}</a>`).join(' ')}</li>`,
+  ).join('\n          ');
+
+  return articleShell(
+    DATA_CENTER_ARTICLE_TITLE,
+    DATA_CENTER_ARTICLE_DESCRIPTION,
+    `${articleSearchBriefStaticHtml('/markets/when-does-a-data-center-become-infrastructure')}
+        ${markdownToHtml(DATA_CENTER_ARTICLE_LEDE_MARKDOWN)}
+        <h2 id="asset-state-model">Explore the ten-state asset model</h2>
+        <p>The interactive article separates generic land, entitled land, a power position, tenant-backed development, financed construction, an energized technical facility, an accepted rent-producing asset, permanent financing, a portfolio platform, and the residual or re-leasing state.</p>
+        ${sections}
+        <h2 id="what-remains-unknown">What remains unknown</h2>
+        <p>Private contracts, incomplete cost records, and thin recovery evidence remain measurement gaps. They are not evidence that a project is safer or weaker.</p>
+        ${factGaps}
+        <h2 id="frequently-asked-questions">Frequently asked questions</h2>
+        ${faqs}
+        <h2 id="source-ledger">Source ledger</h2>
+        <ol>${sources}</ol>
+        ${restoredConclusionStaticHtml('/markets/when-does-a-data-center-become-infrastructure')}
+        <h2>Related research</h2>
+        ${linkList([
+          { label: 'Markets research', href: '/markets' },
+          { label: 'Research assets', href: '/research' },
+          { label: 'Texas toll-road ownership', href: '/markets/who-owns-texas-toll-roads' },
+          { label: 'About the author', href: '/about' },
+        ])}`,
+  );
+}
+
 
 function aiManagersArticleStaticHtml() {
   const sections = AI_MANAGERS_ARTICLE_SECTIONS.map(
@@ -1020,6 +1174,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
   if (route.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
     return texasTollArticleStaticHtml();
   }
+
+  if (route.path === `/markets/${DATA_CENTER_ARTICLE_SLUG}`) return dataCenterArticleStaticHtml();
+  if (route.path === INDEPENDENT_APP_INCOME_ARTICLE_PATH) return independentAppIncomeStaticHtml();
 
   if (route.path === AI_MANAGERS_ARTICLE_PATH) {
     return aiManagersArticleStaticHtml();

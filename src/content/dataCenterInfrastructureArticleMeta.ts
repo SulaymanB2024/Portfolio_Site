@@ -1,0 +1,11 @@
+export const DATA_CENTER_ARTICLE_SLUG = 'when-does-a-data-center-become-infrastructure';
+export const DATA_CENTER_ARTICLE_TITLE = 'When Does a Data Center Become Infrastructure?';
+export const DATA_CENTER_ARTICLE_HERO_TITLE = 'You Don’t Build an Infrastructure Asset. You Contract One Into Existence.';
+export const DATA_CENTER_ARTICLE_DISPLAY_TITLE = 'The building is only one layer of the asset.';
+export const DATA_CENTER_ARTICLE_SEO_TITLE = 'When Data Centers Become Infrastructure';
+export const DATA_CENTER_ARTICLE_DESCRIPTION = 'A source-led guide to the power rights, tenant commitments, guarantees, construction milestones, and residual value that make a hyperscale data center financeable.';
+export const DATA_CENTER_ARTICLE_DATE = '2026.09.06';
+export const DATA_CENTER_ARTICLE_UPDATED = '2026.09.06';
+export const DATA_CENTER_ARTICLE_WORD_COUNT = 5420;
+export const DATA_CENTER_ARTICLE_READ_TIME = '23 MIN';
+export const DATA_CENTER_ARTICLE_IMAGE = '/images/generative-art/yuru-11.webp';

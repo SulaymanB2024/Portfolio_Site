@@ -55,6 +55,10 @@ function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['cat
 }
 
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
+  ...['ethereum-blobspace-measurement-audit', 'uni-burn-supply-accounting', 'us-solid-rocket-motor-capacity-audit', 'when-does-a-data-center-become-infrastructure', 'independent-app-income-distribution'].map((slug) => {
+    const item = article(slug);
+    return { category: 'Markets and investing' as const, title: item.title, href: getArticlePath(item), description: item.subtitle, date: item.dateModified ?? item.date, featured: true };
+  }),
   {
     category: 'Technical SEO',
     title: 'Technical SEO Diagnostic Library',

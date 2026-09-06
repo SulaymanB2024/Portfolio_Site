@@ -1,0 +1,9 @@
+﻿dimension,score_0,score_1,score_2,description
+Identity and ownership,Absent or contradictory,Partial / indirect,Explicit and verifiable,Can the app and economic owner be identified?
+Direct data connection,Absent or contradictory,Partial / indirect,Explicit and verifiable,Is revenue linked to a store/payment/subscription API?
+Revenue basis,Absent or contradictory,Partial / indirect,Explicit and verifiable,"Are gross revenue, proceeds, and profit distinguished?"
+Time period,Absent or contradictory,Partial / indirect,Explicit and verifiable,Is the measurement window explicit?
+Continuity,Absent or contradictory,Partial / indirect,Explicit and verifiable,Is multi-month persistence shown?
+Costs,Absent or contradictory,Partial / indirect,Explicit and verifiable,"Are platform, operating, and acquisition costs disclosed?"
+Population and denominator,Absent or contradictory,Partial / indirect,Explicit and verifiable,Is the sampled population and exclusion rule explicit?
+Reproducibility,Absent or contradictory,Partial / indirect,Explicit and verifiable,Can the claim be archived or recalculated?

@@ -23,7 +23,8 @@ export type ResearchCluster =
   | 'crawler-engineering'
   | 'technical-seo'
   | 'data-systems'
-  | 'financial-systems';
+  | 'financial-systems'
+  | 'app-economics';
 
 export type ArticleFigure = {
   src: string;

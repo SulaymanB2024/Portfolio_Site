@@ -49,6 +49,61 @@ const TEXAS_TOLL_RELATED_LABELS: Readonly<Record<string, string>> = {
 
 export const ARTICLE_SEARCH_TARGETS = [
   {
+    path: '/research/financial-systems/ethereum-blobspace-measurement-audit',
+    primaryQuery: 'Ethereum blobspace utilization',
+    supportingQueries: ['blob occupancy versus capacity', 'BPO2 target utilization'],
+    intent: 'comparison', cohort: 3,
+    directAnswer: 'Ethereum blobspace utilization depends on the denominator. The July 2026 inputs report 86.94% occupancy inside submitted blobs, while the operator range corresponds to 29.76–34.72% of scheduled BPO2 target capacity. These are historical measurements of different quantities.',
+    serpGap: 'Separate posted-object occupancy from scheduled opportunities, with explicit historical cutoffs and visible provider limitations.',
+    originalArtifact: 'A four-regime capacity CSV, calculation JSON, source ledger, and two reproducible denominator charts.',
+    cannibalizationBoundary: 'This article measures Ethereum data availability; the UNI article examines token accounting and treasury distribution rather than block capacity.',
+    relatedPaths: ['/research/financial-systems/uni-burn-supply-accounting', '/research/ai-systems/the-ai-megawatt', '/research/data-systems/audit-findings-derived-records'],
+  },
+  {
+    path: '/research/financial-systems/uni-burn-supply-accounting',
+    primaryQuery: 'UNI burn supply accounting',
+    supportingQueries: ['UNI dead address total supply', 'Uniswap growth budget sell through'],
+    intent: 'evaluation', cohort: 3,
+    directAnswer: 'UNI burn supply accounting requires separate contract, dead-address, treasury, and market-float ledgers. The August 2026 reported inputs imply 891.975 million UNI outside recognized burn addresses, while the contract accounting denominator remains one billion. Neither quantity establishes circulating supply or market sales.',
+    serpGap: 'Reconcile a treasury cancellation with recurring-and-other transfers before comparing historical annualizations with an assumed distribution flow.',
+    originalArtifact: 'A dated supply bridge, claim ledger, no-new-mint scenario CSV, and three reproducible token-flow charts.',
+    cannibalizationBoundary: 'This article examines UNI supply mechanics and conditional distribution flows; Ethereum blobspace measures protocol capacity using slot denominators.',
+    relatedPaths: ['/research/financial-systems/ethereum-blobspace-measurement-audit', '/research/financial-systems/how-airlines-borrow-against-loyalty-programs', '/research/financial-systems/hidden-financing-hardware-startups'],
+  },
+  {
+    path: '/research/financial-systems/us-solid-rocket-motor-capacity-audit',
+    primaryQuery: 'U.S. solid rocket motor capacity',
+    supportingQueries: ['solid rocket motor manufacturing buildout', 'qualified rocket motor supply'],
+    intent: 'evaluation', cohort: 3,
+    directAnswer: 'U.S. solid rocket motor capacity is expanding, but disclosed motors, propellant pounds, floor area, and factory investment cannot be added into one production total. The audit separates native units, facility readiness, qualification, and accepted delivery evidence across the buildout.',
+    serpGap: 'Distinguish announced facilities from qualified program supply and preserve incompatible capacity units instead of summing headlines.',
+    originalArtifact: 'A 31-record capacity ledger, source register, calculation file, readiness figures, and complete Markdown edition.',
+    cannibalizationBoundary: 'This article audits propulsion manufacturing capacity; the rare-earth study covers magnet supply and uses a different facility and product ledger.',
+    relatedPaths: ['/research/data-systems/us-rare-earth-magnet-manufacturing-capacity', '/research/financial-systems/hidden-financing-hardware-startups', '/research/ai-systems/the-ai-megawatt'],
+  },
+  {
+    path: '/markets/when-does-a-data-center-become-infrastructure',
+    primaryQuery: 'when does a data center become infrastructure',
+    supportingQueries: ['data center infrastructure finance', 'data center asset states'],
+    intent: 'evaluation', cohort: 3,
+    directAnswer: 'A data center becomes an infrastructure cash-flow asset when repayment depends mainly on durable operating payments and residual rights, rather than on the probability that the campus can still be built, powered, accepted, and refinanced.',
+    serpGap: 'Follow power rights, tenant acceptance, credit support, and residual recovery through distinct financing states instead of using construction completion alone.',
+    originalArtifact: 'An interactive ten-state asset model and primary-source contract tables explaining how financeable claims accumulate.',
+    cannibalizationBoundary: 'This article evaluates infrastructure financing states; the AI megawatt article converts power boundaries into physical compute estimates.',
+    relatedPaths: ['/research/ai-systems/the-ai-megawatt', '/research/financial-systems/hidden-financing-hardware-startups', '/research/financial-systems/waymo-hardware-financing'],
+  },
+  {
+    path: '/research/app-economics/independent-app-income-distribution',
+    primaryQuery: 'how many indie app developers make $1000 a month',
+    supportingQueries: ['indie app income distribution', 'app revenue versus developer profit'],
+    intent: 'evaluation', cohort: 3,
+    directAnswer: 'About one in six developers behind serious independent app attempts are modeled to generate at least $1,000 in current monthly gross app revenue across their portfolios. The 15.4% central estimate has an 8.4% to 25.0% plausible interval. This July 2026 model is not an app-store census.',
+    serpGap: 'Expose the population, time window, and revenue basis instead of estimating prevalence from selected successful founder stories.',
+    originalArtifact: 'An interactive denominator explorer, subscriber calculator, selected-case ledger, full report, and downloadable model workbook.',
+    cannibalizationBoundary: 'This article models independent app income distributions; the AI managers article assesses operating autonomy rather than app earnings prevalence.',
+    relatedPaths: ['/research/ai-systems/the-first-ai-managers', '/research/financial-systems/hidden-financing-hardware-startups', '/research/data-systems/audit-findings-derived-records'],
+  },
+  {
     path: '/research/ai-systems/the-first-ai-managers',
     primaryQuery: 'can AI run a business',
     supportingQueries: ['AI operated businesses', 'AI business manager'],
@@ -63,6 +118,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page evaluates whether AI can operate a business; the ViralBench and replayable-trace pages evaluate agent harnesses and test evidence.',
     relatedPaths: [
+      '/research/app-economics/independent-app-income-distribution',
       '/viralbench-codex-agent-harness',
       '/research/ai-systems/replayable-traces-ai-agent-evaluation',
       '/research/ai-systems/the-ai-megawatt',
@@ -85,6 +141,8 @@ export const ARTICLE_SEARCH_TARGETS = [
       'This page translates AI power claims into physical compute capacity; the hardware-financing and rare-earth articles analyze capital structure and upstream manufacturing capacity.',
     lastVerified: '2026-08-16',
     relatedPaths: [
+      '/markets/when-does-a-data-center-become-infrastructure',
+      '/research/financial-systems/ethereum-blobspace-measurement-audit',
       '/research/data-systems/us-rare-earth-magnet-manufacturing-capacity',
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
@@ -107,6 +165,7 @@ export const ARTICLE_SEARCH_TARGETS = [
       'This page audits domestic rare-earth magnet projects and physical supply maturity; the AI megawatt page models compute power and the hardware articles model financing.',
     lastVerified: '2026-08-17',
     relatedPaths: [
+      '/research/financial-systems/us-solid-rocket-motor-capacity-audit',
       '/research/ai-systems/the-ai-megawatt',
       '/research/financial-systems/hidden-financing-hardware-startups',
       '/research/financial-systems/waymo-hardware-financing',
@@ -336,6 +395,8 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page compares five hardware-financing archetypes; the Waymo page is the company-specific deep dive into a parent-funded autonomous-vehicle platform.',
     relatedPaths: [
+      '/research/financial-systems/us-solid-rocket-motor-capacity-audit',
+      '/markets/when-does-a-data-center-become-infrastructure',
       '/research/financial-systems/software-buyout-boom-2020-2022-exit-audit',
       '/research/financial-systems/what-happens-when-an-index-decides-a-company-matters',
       '/research/financial-systems/how-airlines-borrow-against-loyalty-programs',
@@ -625,6 +686,8 @@ export const ARTICLE_SEARCH_TARGETS = [
     cannibalizationBoundary:
       'This page focuses on one derived audit record; the SEO data-pipeline page covers collection and movement across the broader system.',
     relatedPaths: [
+      '/research/financial-systems/ethereum-blobspace-measurement-audit',
+      '/research/financial-systems/uni-burn-supply-accounting',
       '/research/search-console/technical-seo-public-data-infrastructure',
       '/research/ai-systems/replayable-traces-ai-agent-evaluation',
       '/research/data-systems/sqlite-crawl-pipelines',

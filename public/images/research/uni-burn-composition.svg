@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="486pt" viewBox="0 0 864 486" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.7, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 486 
+L 864 486 
+L 864 0 
+L 0 0 
+z
+" style="fill: #f7f4ed"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 259.2 374.22 
+L 838.08 374.22 
+L 838.08 87.48 
+L 259.2 87.48 
+z
+" style="fill: #f7f4ed"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 259.2 374.22 
+L 259.2 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="m097b934434" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m097b934434" x="259.2" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="259.2" y="390.338125" transform="rotate(-0 259.2 390.338125)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 354.098361 374.22 
+L 354.098361 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m097b934434" x="354.098361" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="354.098361" y="390.338125" transform="rotate(-0 354.098361 390.338125)">20</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 448.996721 374.22 
+L 448.996721 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m097b934434" x="448.996721" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="448.996721" y="390.338125" transform="rotate(-0 448.996721 390.338125)">40</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 543.895082 374.22 
+L 543.895082 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m097b934434" x="543.895082" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="543.895082" y="390.338125" transform="rotate(-0 543.895082 390.338125)">60</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 638.793443 374.22 
+L 638.793443 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m097b934434" x="638.793443" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="638.793443" y="390.338125" transform="rotate(-0 638.793443 390.338125)">80</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 733.691803 374.22 
+L 733.691803 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m097b934434" x="733.691803" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="733.691803" y="390.338125" transform="rotate(-0 733.691803 390.338125)">100</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_13">
+      <path d="M 828.590164 374.22 
+L 828.590164 87.48 
+" clip-path="url(#p5d7e07da9e)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#m097b934434" x="828.590164" y="374.22" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="828.590164" y="390.338125" transform="rotate(-0 828.590164 390.338125)">120</text>
+     </g>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="548.64" y="405.951875" transform="rotate(-0 548.64 405.951875)">Million UNI</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_15">
+      <defs>
+       <path id="ma1c67140d1" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#ma1c67140d1" x="259.2" y="142.784889" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="252.2" y="147.343952" transform="rotate(-0 252.2 147.343952)">One-time treasury transfer</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#ma1c67140d1" x="259.2" y="318.915111" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="252.2" y="323.474173" transform="rotate(-0 252.2 323.474173)">Recurring + other residual</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 259.2 100.513636 
+L 733.691803 100.513636 
+L 733.691803 185.056143 
+L 259.2 185.056143 
+z
+" clip-path="url(#p5d7e07da9e)" style="fill: #176b78"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 259.2 276.643857 
+L 297.27903 276.643857 
+L 297.27903 361.186364 
+L 259.2 361.186364 
+z
+" clip-path="url(#p5d7e07da9e)" style="fill: #b25230"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 259.2 374.22 
+L 259.2 87.48 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 259.2 374.22 
+L 838.08 374.22 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="743.181639" y="146.096139" transform="rotate(-0 743.181639 146.096139)">100.00M</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="306.768866" y="322.226361" transform="rotate(-0 306.768866 322.226361)">8.03M</text>
+   </g>
+  </g>
+  <g id="text_13">
+   <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start" x="38.88" y="23.397188" transform="rotate(-0 38.88 23.397188)">One treasury transfer dominates the reported balance</text>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(38.88 457.792188)">Reported August 5, 2026 tracker balance: 108.025M UNI.</text>
+   <text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(38.88 468.99)">Treasury transfer: 92.57%; residual: 7.43%. The residual is not a classified fee-burn total.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p5d7e07da9e">
+   <rect x="259.2" y="87.48" width="578.88" height="286.74"/>
+  </clipPath>
+ </defs>
+</svg>

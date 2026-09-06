@@ -1,0 +1,24 @@
+{
+  "research_cutoff": "2026-08-16",
+  "northrop_propellant_capacity_increase_pct_30m_to_50m": 66.66666666666667,
+  "northrop_implied_2028_motor_output_from_2029_25k_and_25pct_growth": 20000.0,
+  "xbow_implied_lb_per_standard_missile_equivalent_low": 789.4736842105264,
+  "xbow_implied_lb_per_standard_missile_equivalent_high": 1000.0,
+  "xbow_implied_lb_per_tactical_equivalent_low": 60.0,
+  "xbow_implied_lb_per_tactical_equivalent_high": 100.0,
+  "distinct_metric_families": [
+    "capital_commitment",
+    "energetics_mass_no_time_basis",
+    "energetics_mass_per_year",
+    "facility_area_or_proxy",
+    "motor_count_per_year",
+    "multiplicative_change",
+    "no_normalized_output",
+    "percentage_change",
+    "qualification_milestone",
+    "scenario_conversion",
+    "test_or_flight_milestone"
+  ],
+  "metric_family_count": 11,
+  "records": 31
+}

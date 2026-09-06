@@ -1,3 +1,7 @@
+import { ETHEREUM_BLOBSPACE_MEASUREMENT_AUDIT_ARTICLE } from './ethereumBlobspaceMeasurementAuditArticle';
+import { UNI_BURN_SUPPLY_ACCOUNTING_ARTICLE } from './uniBurnSupplyAccountingArticle';
+import { INDEPENDENT_APP_INCOME_ARTICLE, DATA_CENTER_INFRASTRUCTURE_ARTICLE } from './restoredResearchArticles';
+import { SOLID_ROCKET_MOTOR_CAPACITY_ARTICLE } from './solidRocketMotorCapacityArticle';
 import type { PublicArticle } from './articleModels';
 import { INVESTMENT_MEMOS } from './marketTheses';
 import { US_TOLL_ROAD_ARTICLE } from './usTollRoadArticle';
@@ -8,6 +12,11 @@ import { TEXAS_TOLL_REVENUE_ARTICLE } from './texasTollRevenueArticle';
 import { THE_AI_MEGAWATT_ARTICLE } from './theAiMegawattArticle';
 
 export const ALL_ARTICLES: PublicArticle[] = [
+  ETHEREUM_BLOBSPACE_MEASUREMENT_AUDIT_ARTICLE,
+  UNI_BURN_SUPPLY_ACCOUNTING_ARTICLE,
+  SOLID_ROCKET_MOTOR_CAPACITY_ARTICLE,
+  DATA_CENTER_INFRASTRUCTURE_ARTICLE,
+  INDEPENDENT_APP_INCOME_ARTICLE,
   THE_AI_MEGAWATT_ARTICLE,
   ...TECHNICAL_ARTICLE_SERIES,
   ...RESEARCH_ARTICLES,

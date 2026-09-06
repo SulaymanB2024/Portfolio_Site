@@ -1,0 +1,7 @@
+﻿profit_threshold_monthly_usd,unit,lower_pct,central_pct,upper_pct,status
+3000,App,2.0,4.4,7.5,Modeled sensitivity
+3000,Developer,3.2,6.8,11.5,Modeled sensitivity
+5000,App,1.27,2.98,5.32,Primary replacement-income definition
+5000,Developer,2.17,4.67,8.17,Primary replacement-income definition
+8333,App,0.8,1.9,3.5,Modeled sensitivity
+8333,Developer,1.4,3.1,5.5,Modeled sensitivity

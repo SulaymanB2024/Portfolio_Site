@@ -1,0 +1,22 @@
+{
+  "inputs": {
+    "contract_supply": 1000000000,
+    "recognized_burn_balance": 108025224,
+    "treasury_transfer": 100000000,
+    "annual_growth_budget": 20000000,
+    "reported_recent_burn": 3928000,
+    "recent_window_days": 90,
+    "transfer_utc": "2025-12-27T20:33:11+00:00",
+    "snapshot_utc": "2026-08-05T18:15:00+00:00",
+    "provenance": "Reported historical inputs retained in the August draft. Original tracker response and classified 90-day export not preserved."
+  },
+  "elapsed_days": 220.90403935185185,
+  "recurring_and_other_residual": 8025224,
+  "dead_address_adjusted_quantity": 891974776,
+  "annualized_low": 13260086.907394271,
+  "annualized_high": 15930222.222222222,
+  "break_even_low": 0.6630043453697135,
+  "break_even_high": 0.7965111111111111,
+  "new_mint_assumption": 0,
+  "interpretation": "Conditional token-flow model; not measured exchange demand or circulating supply."
+}

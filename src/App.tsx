@@ -31,6 +31,11 @@ const loadResumePage = () => import('./pages/ResumePage');
 const loadResearchPage = () => import('./pages/ResearchPage');
 const loadResearchClusterPage = () => import('./pages/ResearchClusterPage');
 const loadMarketsPage = () => import('./pages/MarketsPage');
+const loadDataCenterInfrastructureArticlePage = () => import('./pages/DataCenterInfrastructureArticlePage');
+const loadIndependentAppIncomeArticlePage = () => import('./pages/IndependentAppIncomeArticlePage');
+const DataCenterInfrastructureArticlePage = lazy(loadDataCenterInfrastructureArticlePage);
+const IndependentAppIncomeArticlePage = lazy(loadIndependentAppIncomeArticlePage);
+
 const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
 const loadViralBenchArticlePage = () => import('./pages/ViralBenchArticlePage');
 const loadTexasTollRoadArticlePage = () => import('./pages/TexasTollRoadArticlePage');
@@ -154,6 +159,10 @@ async function preloadRoute(path: string) {
     await loadMarketsPage();
   } else if (route?.path === '/viralbench-codex-agent-harness') {
     await loadViralBenchArticlePage();
+  } else if (route?.path === '/markets/when-does-a-data-center-become-infrastructure') {
+    await loadDataCenterInfrastructureArticlePage();
+  } else if (route?.path === '/research/app-economics/independent-app-income-distribution') {
+    await loadIndependentAppIncomeArticlePage();
   } else if (route?.path === AI_MANAGERS_ARTICLE_PATH) {
     await loadAiManagersArticlePage();
   } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
@@ -228,6 +237,10 @@ export default function App() {
     page = <SitemapPage />;
   } else if (route?.path === '/viralbench-codex-agent-harness') {
     page = <ViralBenchArticlePage />;
+  } else if (route?.path === '/markets/when-does-a-data-center-become-infrastructure') {
+    page = <DataCenterInfrastructureArticlePage />;
+  } else if (route?.path === '/research/app-economics/independent-app-income-distribution') {
+    page = <IndependentAppIncomeArticlePage />;
   } else if (route?.path === AI_MANAGERS_ARTICLE_PATH) {
     page = <AiManagersArticlePage />;
   } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
