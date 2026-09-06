@@ -240,8 +240,8 @@ export default function AtlasCelestialParallaxPage() {
                 </div>
               </div>
               <a
-                href="/method"
-                aria-label="Open the full methodology page"
+                href="https://www.void-agency.com/tools/technical-seo-audit-checklist"
+                aria-label="Open the VOID technical SEO audit kit"
                 className="hidden min-h-full items-center justify-center border-l border-ink/12 text-3xl text-ink/44 transition-colors hover:bg-ink hover:text-canvas md:grid"
               >
                 <ArrowDown aria-hidden="true" size={24} strokeWidth={1} />

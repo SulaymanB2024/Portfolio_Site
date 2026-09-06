@@ -1,4 +1,14 @@
 import { track as trackVercelEvent } from '@vercel/analytics';
+import { getSeoRoute } from '../seo/routes';
+
+export const SEO_CONVERSION_EVENTS = [
+  'seo_cta_click',
+  'lead_form_start',
+  'lead_form_submit',
+  'asset_download',
+] as const;
+
+export type SeoConversionEventName = typeof SEO_CONVERSION_EVENTS[number];
 
 export const PORTFOLIO_HOSTS = [
   'www.void-agency.com',
@@ -53,6 +63,9 @@ export const PORTFOLIO_CTA_METADATA = {
   work_open_evidence: { surface: 'work', target: 'evidence', kind: 'mixed' },
   work_open_artifact: { surface: 'work', target: 'supporting_artifact', kind: 'internal' },
   work_open_contact: { surface: 'work', target: 'contact', kind: 'internal' },
+  void_audit_kit: { surface: 'portfolio', target: 'void_audit_kit', kind: 'external' },
+  toll_download_csv: { surface: 'texas_toll_tracker', target: 'texas_toll_tracker_csv', kind: 'download' },
+  toll_download_json: { surface: 'texas_toll_tracker', target: 'texas_toll_tracker_json', kind: 'download' },
   contact_email: { surface: 'contact', target: 'email', kind: 'email' },
   contact_linkedin: { surface: 'contact', target: 'linkedin', kind: 'external' },
   contact_resume: { surface: 'contact', target: 'resume', kind: 'internal' },
@@ -62,11 +75,12 @@ export const PORTFOLIO_CTA_METADATA = {
 export type PortfolioCtaId = keyof typeof PORTFOLIO_CTA_METADATA;
 
 export type PortfolioCtaEvent = {
+  event_name: 'seo_cta_click' | 'asset_download';
   cta_id: PortfolioCtaId;
   cta_surface: (typeof PORTFOLIO_CTA_METADATA)[PortfolioCtaId]['surface'];
   destination: (typeof PORTFOLIO_CTA_METADATA)[PortfolioCtaId]['target'];
   destination_kind: (typeof PORTFOLIO_CTA_METADATA)[PortfolioCtaId]['kind'];
-  page_path: string;
+  route_cluster: string;
   portfolio_site: PortfolioSite;
 };
 
@@ -119,14 +133,18 @@ export function buildPortfolioCtaEvent(
   if (!isPortfolioCtaId(ctaId)) return null;
   const portfolioSite = resolvePortfolioSite(hostname);
   if (!portfolioSite) return null;
+  const route = getSeoRoute(sanitizePortfolioPath(pathname));
+  const routeCluster = route?.portfolioRoute?.intentCluster;
+  if (!routeCluster) return null;
   const metadata = PORTFOLIO_CTA_METADATA[ctaId];
 
   return {
+    event_name: metadata.kind === 'download' ? 'asset_download' : 'seo_cta_click',
     cta_id: ctaId,
     cta_surface: metadata.surface,
     destination: metadata.target,
     destination_kind: metadata.kind,
-    page_path: sanitizePortfolioPath(pathname),
+    route_cluster: routeCluster,
     portfolio_site: portfolioSite,
   };
 }
@@ -139,16 +157,17 @@ function sendPortfolioCta(ctaId: unknown): void {
     window.location.pathname,
   );
   if (!properties) return;
+  const { event_name: eventName, ...eventProperties } = properties;
 
   try {
-    trackVercelEvent('portfolio_cta', properties);
+    trackVercelEvent(eventName, eventProperties);
   } catch {
     // Measurement must never interfere with the user's navigation.
   }
 
   try {
-    window.gtag?.('event', 'portfolio_cta', {
-      ...properties,
+    window.gtag?.('event', eventName, {
+      ...eventProperties,
       transport_type: 'beacon',
     });
   } catch {

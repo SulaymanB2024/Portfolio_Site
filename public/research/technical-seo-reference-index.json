@@ -1,2562 +1,455 @@
 {
-  "generated_at": "2026-07-20",
-  "canonical_host": "https://sulayman-bowles.dev",
-  "objective": "Evidence-backed technical SEO diagnostic references for issue, platform, and audit-checklist queries.",
+  "schema_version": "technical_seo_migration_v1",
+  "generated_at": "2026-09-03",
+  "source_host": "https://sulayman-bowles.dev",
+  "canonical_owner": "https://www.void-agency.com",
+  "expansion_frozen": true,
+  "objective": "Preserve an auditable source-to-destination map while VOID owns commodity technical SEO, platform, and audit-checklist intent.",
   "claim_boundaries": [
-    "Fixtures are illustrative and Atlas-compatible; they are not client crawl evidence or claims about a live third-party site.",
-    "Publication and discovery do not guarantee indexation, rankings, impressions, clicks, backlinks, leads, or revenue.",
-    "A guide remains indexable only while it retains unique evidence, substantive utility, and a reproducible acceptance gate."
+    "The legacy source content remains in version control for provenance; production must serve a one-hop permanent redirect rather than duplicate HTML.",
+    "A redirect deployment does not prove recrawl, canonical consolidation, rankings, impressions, clicks, links, leads, or revenue.",
+    "New commodity route expansion stays frozen until each proposed page has distinct evidence, a durable owner, and an approved lifecycle decision."
   ],
-  "hubs": [
+  "routes": [
     {
-      "family": "all",
-      "url": "https://sulayman-bowles.dev/research/technical-seo",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo",
       "title": "Technical SEO Diagnostic Library",
-      "description": "Evidence-backed technical SEO issue guides, platform playbooks, and audit checklists with reproducible repair gates.",
-      "last_verified": "2026-07-20"
+      "family": "all",
+      "primary_query": null,
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues",
       "title": "Technical SEO Issue Guides",
-      "description": "Diagnose 24 common technical SEO issues with evidence fields, false-positive boundaries, repairs, and rerun checks.",
-      "last_verified": "2026-07-20"
+      "family": "issue",
+      "primary_query": null,
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "platform",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/platforms",
       "title": "Technical SEO Platform Guides",
-      "description": "Technical SEO implementation guides for Next.js, React/Vite, WordPress, Shopify, Webflow, Squarespace, Wix, and headless CMS stacks.",
-      "last_verified": "2026-07-20"
+      "family": "platform",
+      "primary_query": null,
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "checklist",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/checklists",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/checklists",
       "title": "Technical SEO Audit Checklists",
-      "description": "Evidence-driven JavaScript, ecommerce, SaaS, and local-business technical SEO audit checklists.",
-      "last_verified": "2026-07-20"
-    }
-  ],
-  "pages": [
+      "family": "checklist",
+      "primary_query": null,
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "redirect_target": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "last_meaningful_update": "2026-09-03"
+    },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/missing-canonical",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/missing-canonical",
       "title": "Missing Canonical Tag: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "missing canonical tag",
-      "supporting_queries": [
-        "page has no canonical tag",
-        "how to fix missing canonical",
-        "canonical tag audit"
-      ],
-      "direct_answer": "Missing Canonical Tag: Diagnosis and Repair is confirmed when an indexable HTML document returns no usable rel=canonical declaration in its raw or rendered head. For missing canonical tag, preserve the raw response and rendered document so duplicate candidates remain without an explicit preferred-URL hint, so consolidation depends on weaker signals can be tested against a passing control. Repair missing canonical tag by choosing the authoritative source; accept the missing-canonical change only when raw and rendered HTML expose the same single canonical and the declared URL returns 200 without noindex.",
-      "evidence_artifact": {
-        "label": "Missing Canonical Tag: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing missing canonical tag; MISSINGCANONICAL values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for missing canonical tag.",
-        "Compare raw and rendered search signals for missing canonical tag.",
-        "Trace sitemap, canonical, and internal-link discovery for missing canonical tag.",
-        "Compare a passing template peer and quantify the reach of missing canonical tag."
-      ],
-      "false_positive_boundary": "A self-referencing canonical is recommended, but an absent tag is not automatically an error when every other signal is singular and stable.",
-      "repair_steps": [
-        "For missing canonical tag, identify the authoritative route, content, or infrastructure owner.",
-        "For missing canonical tag, emit one absolute, indexable, final-destination canonical from the server-rendered head.",
-        "For missing canonical tag, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For missing canonical tag, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For missing canonical tag, raw and rendered HTML expose the same single canonical and the declared URL returns 200 without noindex.",
-        "For missing canonical tag, two uncached raw/rendered captures agree.",
-        "For missing canonical tag, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/lazy-loaded-primary-content",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/multiple-canonical-tags",
-        "https://sulayman-bowles.dev/research/technical-seo-measurement-systems"
-      ],
-      "cta": {
-        "label": "Discuss a missing canonical tag audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "redirect_target": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/multiple-canonical-tags",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/multiple-canonical-tags",
       "title": "Multiple Canonical Tags: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "multiple canonical tags",
-      "supporting_queries": [
-        "two canonical tags SEO",
-        "conflicting canonicals",
-        "duplicate rel canonical"
-      ],
-      "direct_answer": "Multiple Canonical Tags: Diagnosis and Repair is confirmed when one document publishes two or more rel=canonical values through HTML, HTTP headers, or rendering. For multiple canonical tags, preserve the raw response and rendered document so conflicting declarations make the preferred URL ambiguous and can cause the hints to be ignored can be tested against a passing control. Repair multiple canonical tags by choosing the authoritative source; accept the multiple-canonical-tags change only when every delivery layer resolves to one normalized canonical target on two consecutive crawls.",
-      "evidence_artifact": {
-        "label": "Multiple Canonical Tags: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing multiple canonical tags; MULTIPLECANONICALTAGS values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for multiple canonical tags.",
-        "Compare raw and rendered search signals for multiple canonical tags.",
-        "Trace sitemap, canonical, and internal-link discovery for multiple canonical tags.",
-        "Compare a passing template peer and quantify the reach of multiple canonical tags."
-      ],
-      "false_positive_boundary": "Duplicate declarations that resolve to the identical normalized URL are still implementation debt, but they are less severe than conflicting targets.",
-      "repair_steps": [
-        "For multiple canonical tags, identify the authoritative route, content, or infrastructure owner.",
-        "For multiple canonical tags, assign one canonical owner and remove template, plugin, header, or client-side duplicates.",
-        "For multiple canonical tags, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For multiple canonical tags, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For multiple canonical tags, every delivery layer resolves to one normalized canonical target on two consecutive crawls.",
-        "For multiple canonical tags, two uncached raw/rendered captures agree.",
-        "For multiple canonical tags, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/missing-canonical",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/canonical-to-redirect",
-        "https://sulayman-bowles.dev/research/technical-seo-measurement-systems"
-      ],
-      "cta": {
-        "label": "Discuss a multiple canonical tags audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "redirect_target": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/canonical-to-redirect",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/canonical-to-redirect",
       "title": "Canonical to Redirect: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "canonical points to redirect",
-      "supporting_queries": [
-        "canonical URL redirects",
-        "canonical to 301",
-        "redirected canonical fix"
-      ],
-      "direct_answer": "Canonical to Redirect: Diagnosis and Repair is confirmed when the declared canonical target responds with a redirect instead of a final 200 document. For canonical points to redirect, preserve the raw response and rendered document so the canonical hint and redirect destination disagree about the preferred terminal URL can be tested against a passing control. Repair canonical points to redirect by choosing the authoritative source; accept the canonical-to-redirect change only when the canonical target returns 200 in one request and all sampled links use that same destination.",
-      "evidence_artifact": {
-        "label": "Canonical to Redirect: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing canonical points to redirect; CANONICALTOREDIRECT values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for canonical points to redirect.",
-        "Compare raw and rendered search signals for canonical points to redirect.",
-        "Trace sitemap, canonical, and internal-link discovery for canonical points to redirect.",
-        "Compare a passing template peer and quantify the reach of canonical points to redirect."
-      ],
-      "false_positive_boundary": "A temporary migration can briefly contain old canonicals, but the state should have an explicit deadline and monitored decline.",
-      "repair_steps": [
-        "For canonical points to redirect, identify the authoritative route, content, or infrastructure owner.",
-        "For canonical points to redirect, update the canonical directly to the final indexable destination and align internal links.",
-        "For canonical points to redirect, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For canonical points to redirect, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For canonical points to redirect, the canonical target returns 200 in one request and all sampled links use that same destination.",
-        "For canonical points to redirect, two uncached raw/rendered captures agree.",
-        "For canonical points to redirect, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: redirects",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/301-redirects",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/multiple-canonical-tags",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/canonical-noindex-conflict",
-        "https://sulayman-bowles.dev/research/redirect-semantics"
-      ],
-      "cta": {
-        "label": "Discuss a canonical points to redirect audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "redirect_target": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/canonical-noindex-conflict",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/canonical-noindex-conflict",
       "title": "Canonical and Noindex Conflict: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "canonical noindex conflict",
-      "supporting_queries": [
-        "canonical page has noindex",
-        "noindex canonical URL",
-        "canonical robots conflict"
-      ],
-      "direct_answer": "Canonical and Noindex Conflict: Diagnosis and Repair is confirmed when a URL declares a canonical relationship while a noindex directive tells search engines to exclude the document. For canonical noindex conflict, preserve the raw response and rendered document so the page combines consolidation and exclusion instructions that express different intended outcomes can be tested against a passing control. Repair canonical noindex conflict by choosing the authoritative source; accept the canonical-noindex-conflict change only when the final response has one coherent canonical/indexability state confirmed in headers and rendered HTML.",
-      "evidence_artifact": {
-        "label": "Canonical and Noindex Conflict: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing canonical noindex conflict; CANONICALNOINDEXCONFLICT values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for canonical noindex conflict.",
-        "Compare raw and rendered search signals for canonical noindex conflict.",
-        "Trace sitemap, canonical, and internal-link discovery for canonical noindex conflict.",
-        "Compare a passing template peer and quantify the reach of canonical noindex conflict."
-      ],
-      "false_positive_boundary": "During a tightly controlled decommission, noindex may be intentional; a redirect is usually clearer when an equivalent replacement exists.",
-      "repair_steps": [
-        "For canonical noindex conflict, identify the authoritative route, content, or infrastructure owner.",
-        "For canonical noindex conflict, choose index-and-consolidate or exclude, then remove the directive that contradicts that decision.",
-        "For canonical noindex conflict, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For canonical noindex conflict, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For canonical noindex conflict, the final response has one coherent canonical/indexability state confirmed in headers and rendered HTML.",
-        "For canonical noindex conflict, two uncached raw/rendered captures agree.",
-        "For canonical noindex conflict, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: robots meta tags",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/canonical-to-redirect",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/redirect-chain",
-        "https://sulayman-bowles.dev/research/indexability-state-machine"
-      ],
-      "cta": {
-        "label": "Discuss a canonical noindex conflict audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "redirect_target": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/redirect-chain",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/redirect-chain",
       "title": "Redirect Chain: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "redirect chain SEO",
-      "supporting_queries": [
-        "multiple redirect hops",
-        "fix redirect chain",
-        "301 chain audit"
-      ],
-      "direct_answer": "Redirect Chain: Diagnosis and Repair is confirmed when a requested URL passes through two or more redirect responses before reaching content. For redirect chain SEO, preserve the raw response and rendered document so legacy migrations or competing rules compose into an unnecessary sequence can be tested against a passing control. Repair redirect chain SEO by choosing the authoritative source; accept the redirect-chain change only when every tested source reaches the intended 200 URL in one redirect or fewer.",
-      "evidence_artifact": {
-        "label": "Redirect Chain: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing redirect chain SEO; REDIRECTCHAIN values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for redirect chain SEO.",
-        "Compare raw and rendered search signals for redirect chain SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for redirect chain SEO.",
-        "Compare a passing template peer and quantify the reach of redirect chain SEO."
-      ],
-      "false_positive_boundary": "A single protocol or hostname normalization hop can be acceptable, though direct linking remains preferable.",
-      "repair_steps": [
-        "For redirect chain SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For redirect chain SEO, collapse each known source to the final destination and replace internal references to intermediate URLs.",
-        "For redirect chain SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For redirect chain SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For redirect chain SEO, every tested source reaches the intended 200 URL in one redirect or fewer.",
-        "For redirect chain SEO, two uncached raw/rendered captures agree.",
-        "For redirect chain SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: redirects",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/301-redirects",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: crawlable links",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/canonical-noindex-conflict",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/redirect-loop",
-        "https://sulayman-bowles.dev/research/redirect-semantics"
-      ],
-      "cta": {
-        "label": "Discuss a redirect chain SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/redirect-chain-and-loop-qa",
+      "redirect_target": "https://www.void-agency.com/insights/redirect-chain-and-loop-qa",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/redirect-loop",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/redirect-loop",
       "title": "Redirect Loop: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "redirect loop SEO",
-      "supporting_queries": [
-        "too many redirects SEO",
-        "redirect cycle fix",
-        "crawler redirect loop"
-      ],
-      "direct_answer": "Redirect Loop: Diagnosis and Repair is confirmed when redirect rules revisit a prior URL or alternate indefinitely between normalized variants. For redirect loop SEO, preserve the raw response and rendered document so host, path, locale, slash, or application rules apply in incompatible order can be tested against a passing control. Repair redirect loop SEO by choosing the authoritative source; accept the redirect-loop change only when clean clients across HTTP and HTTPS reach one final 200 response with no repeated location.",
-      "evidence_artifact": {
-        "label": "Redirect Loop: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing redirect loop SEO; REDIRECTLOOP values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for redirect loop SEO.",
-        "Compare raw and rendered search signals for redirect loop SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for redirect loop SEO.",
-        "Compare a passing template peer and quantify the reach of redirect loop SEO."
-      ],
-      "false_positive_boundary": "Cookie or geolocation behavior may look cyclic to one client; reproduce with a clean, stateless request before changing rules.",
-      "repair_steps": [
-        "For redirect loop SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For redirect loop SEO, identify the smallest cycle, establish one normalization order, and remove the reciprocal rule.",
-        "For redirect loop SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For redirect loop SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For redirect loop SEO, clean clients across HTTP and HTTPS reach one final 200 response with no repeated location.",
-        "For redirect loop SEO, two uncached raw/rendered captures agree.",
-        "For redirect loop SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: redirects",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/301-redirects",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: crawlable links",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/redirect-chain",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/soft-404",
-        "https://sulayman-bowles.dev/research/redirect-semantics"
-      ],
-      "cta": {
-        "label": "Discuss a redirect loop SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/redirect-chain-and-loop-qa",
+      "redirect_target": "https://www.void-agency.com/insights/redirect-chain-and-loop-qa",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/soft-404",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/soft-404",
       "title": "Soft 404: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "soft 404 SEO",
-      "supporting_queries": [
-        "soft 404 error fix",
-        "Google soft 404",
-        "200 page not found"
-      ],
-      "direct_answer": "Soft 404: Diagnosis and Repair is confirmed when a thin, empty, or error-like page returns 200 instead of an honest unavailable or useful response. For soft 404 SEO, preserve the raw response and rendered document so the application shell masks missing content while the transport layer reports success can be tested against a passing control. Repair soft 404 SEO by choosing the authoritative source; accept the soft-404 change only when removed URLs return the intended error status and retained URLs pass a rendered-content usefulness review.",
-      "evidence_artifact": {
-        "label": "Soft 404: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing soft 404 SEO; SOFT404 values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for soft 404 SEO.",
-        "Compare raw and rendered search signals for soft 404 SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for soft 404 SEO.",
-        "Compare a passing template peer and quantify the reach of soft 404 SEO."
-      ],
-      "false_positive_boundary": "A sparse utility page is not a soft 404 when it fulfills a clear intent and supplies substantive unique information.",
-      "repair_steps": [
-        "For soft 404 SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For soft 404 SEO, return 404 or 410 for missing resources, or rebuild the page with complete intent-matching content.",
-        "For soft 404 SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For soft 404 SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For soft 404 SEO, removed URLs return the intended error status and retained URLs pass a rendered-content usefulness review.",
-        "For soft 404 SEO, two uncached raw/rendered captures agree.",
-        "For soft 404 SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: troubleshoot crawling errors",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/redirect-loop",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/robots-blocked-indexable-url",
-        "https://sulayman-bowles.dev/research/indexability-state-machine"
-      ],
-      "cta": {
-        "label": "Discuss a soft 404 SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/client-side-soft-404-detection",
+      "redirect_target": "https://www.void-agency.com/insights/client-side-soft-404-detection",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/robots-blocked-indexable-url",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/robots-blocked-indexable-url",
       "title": "Robots-Blocked Indexable URL: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "robots blocked indexed page",
-      "supporting_queries": [
-        "indexed though blocked by robots",
-        "robots.txt indexable URL",
-        "blocked page in Google"
-      ],
-      "direct_answer": "Robots-Blocked Indexable URL: Diagnosis and Repair is confirmed when robots.txt prevents fetching a URL that remains discoverable and potentially indexable from external signals. For robots blocked indexed page, preserve the raw response and rendered document so crawl control is being used as if it were an index-removal directive can be tested against a passing control. Repair robots blocked indexed page by choosing the authoritative source; accept the robots-blocked-indexable-url change only when the crawler can observe the intended exclusion response and the URL leaves index coverage without new variants.",
-      "evidence_artifact": {
-        "label": "Robots-Blocked Indexable URL: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing robots blocked indexed page; ROBOTSBLOCKEDINDEXABLEURL values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for robots blocked indexed page.",
-        "Compare raw and rendered search signals for robots blocked indexed page.",
-        "Trace sitemap, canonical, and internal-link discovery for robots blocked indexed page.",
-        "Compare a passing template peer and quantify the reach of robots blocked indexed page."
-      ],
-      "false_positive_boundary": "Blocking non-public crawl traps can be correct when those URLs are not linked, indexed, or expected to carry removal directives.",
-      "repair_steps": [
-        "For robots blocked indexed page, identify the authoritative route, content, or infrastructure owner.",
-        "For robots blocked indexed page, allow crawling long enough to process noindex or return an appropriate status, then control future discovery.",
-        "For robots blocked indexed page, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For robots blocked indexed page, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For robots blocked indexed page, the crawler can observe the intended exclusion response and the URL leaves index coverage without new variants.",
-        "For robots blocked indexed page, two uncached raw/rendered captures agree.",
-        "For robots blocked indexed page, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: robots.txt",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/robots/intro",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: robots meta tags",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/soft-404",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/noindex-in-sitemap",
-        "https://sulayman-bowles.dev/research/robots-directive-conflicts"
-      ],
-      "cta": {
-        "label": "Discuss a robots blocked indexed page audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/crawlability-audit-before-indexing-diagnosis",
+      "redirect_target": "https://www.void-agency.com/insights/crawlability-audit-before-indexing-diagnosis",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/noindex-in-sitemap",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/noindex-in-sitemap",
       "title": "Noindex URL in Sitemap: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "noindex URL in sitemap",
-      "supporting_queries": [
-        "sitemap contains noindex pages",
-        "XML sitemap indexability errors",
-        "remove noindex from sitemap"
-      ],
-      "direct_answer": "Noindex URL in Sitemap: Diagnosis and Repair is confirmed when an XML sitemap lists a URL whose final response or rendered document declares noindex. For noindex URL in sitemap, preserve the raw response and rendered document so the discovery feed recommends crawling a page that the page itself rejects from indexing can be tested against a passing control. Repair noindex URL in sitemap by choosing the authoritative source; accept the noindex-in-sitemap change only when a regenerated sitemap contains only canonical 200 URLs and a recrawl finds no noindex members.",
-      "evidence_artifact": {
-        "label": "Noindex URL in Sitemap: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing noindex URL in sitemap; NOINDEXINSITEMAP values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for noindex URL in sitemap.",
-        "Compare raw and rendered search signals for noindex URL in sitemap.",
-        "Trace sitemap, canonical, and internal-link discovery for noindex URL in sitemap.",
-        "Compare a passing template peer and quantify the reach of noindex URL in sitemap."
-      ],
-      "false_positive_boundary": "A very brief deployment transition can produce overlap, but recurring sitemap generations should never preserve it.",
-      "repair_steps": [
-        "For noindex URL in sitemap, identify the authoritative route, content, or infrastructure owner.",
-        "For noindex URL in sitemap, derive sitemap membership from the same final indexability contract that emits page directives.",
-        "For noindex URL in sitemap, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For noindex URL in sitemap, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For noindex URL in sitemap, a regenerated sitemap contains only canonical 200 URLs and a recrawl finds no noindex members.",
-        "For noindex URL in sitemap, two uncached raw/rendered captures agree.",
-        "For noindex URL in sitemap, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: sitemap guidance",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: robots meta tags",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/robots-blocked-indexable-url",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/sitemap-redirects",
-        "https://sulayman-bowles.dev/research/indexability-state-machine"
-      ],
-      "cta": {
-        "label": "Discuss a noindex URL in sitemap audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/xml-sitemap-canonical-consistency-audit",
+      "redirect_target": "https://www.void-agency.com/insights/xml-sitemap-canonical-consistency-audit",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/sitemap-redirects",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/sitemap-redirects",
       "title": "Redirecting URLs in Sitemap: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "redirect URLs in sitemap",
-      "supporting_queries": [
-        "sitemap contains redirects",
-        "301 URL XML sitemap",
-        "sitemap redirect errors"
-      ],
-      "direct_answer": "Redirecting URLs in Sitemap: Diagnosis and Repair is confirmed when an XML sitemap includes one or more URLs that return redirects. For redirect URLs in sitemap, preserve the raw response and rendered document so the sitemap source lags behind routing, migration, or canonical changes can be tested against a passing control. Repair redirect URLs in sitemap by choosing the authoritative source; accept the sitemap-redirects change only when all sitemap members return 200 directly and match their own canonical declarations.",
-      "evidence_artifact": {
-        "label": "Redirecting URLs in Sitemap: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing redirect URLs in sitemap; SITEMAPREDIRECTS values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for redirect URLs in sitemap.",
-        "Compare raw and rendered search signals for redirect URLs in sitemap.",
-        "Trace sitemap, canonical, and internal-link discovery for redirect URLs in sitemap.",
-        "Compare a passing template peer and quantify the reach of redirect URLs in sitemap."
-      ],
-      "false_positive_boundary": "Short-lived overlap during a cutover is tolerable only when the regenerated feed promptly converges on final URLs.",
-      "repair_steps": [
-        "For redirect URLs in sitemap, identify the authoritative route, content, or infrastructure owner.",
-        "For redirect URLs in sitemap, replace every redirected entry with its canonical final destination and update the feed generator.",
-        "For redirect URLs in sitemap, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For redirect URLs in sitemap, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For redirect URLs in sitemap, all sitemap members return 200 directly and match their own canonical declarations.",
-        "For redirect URLs in sitemap, two uncached raw/rendered captures agree.",
-        "For redirect URLs in sitemap, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: sitemap guidance",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: redirects",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/301-redirects",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/noindex-in-sitemap",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/orphan-page",
-        "https://sulayman-bowles.dev/research/redirect-semantics"
-      ],
-      "cta": {
-        "label": "Discuss a redirect URLs in sitemap audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/xml-sitemap-canonical-consistency-audit",
+      "redirect_target": "https://www.void-agency.com/insights/xml-sitemap-canonical-consistency-audit",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/orphan-page",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/orphan-page",
       "title": "Orphan Page: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "orphan page SEO",
-      "supporting_queries": [
-        "find orphan pages",
-        "page with no internal links",
-        "orphan URL audit"
-      ],
-      "direct_answer": "Orphan Page: Diagnosis and Repair is confirmed when an indexable canonical page receives no crawlable internal link from another indexable page. For orphan page SEO, preserve the raw response and rendered document so publishing, migration, or filtering creates inventory outside the governed navigation graph can be tested against a passing control. Repair orphan page SEO by choosing the authoritative source; accept the orphan-page change only when the page has at least three contextual inbound links and remains within two clicks of the homepage.",
-      "evidence_artifact": {
-        "label": "Orphan Page: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing orphan page SEO; ORPHANPAGE values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for orphan page SEO.",
-        "Compare raw and rendered search signals for orphan page SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for orphan page SEO.",
-        "Compare a passing template peer and quantify the reach of orphan page SEO."
-      ],
-      "false_positive_boundary": "Private campaign or account pages may be intentionally unlinked, but those should not remain indexable search landing pages.",
-      "repair_steps": [
-        "For orphan page SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For orphan page SEO, add descriptive links from relevant hubs and peer content, or exclude the page if no durable user path exists.",
-        "For orphan page SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For orphan page SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For orphan page SEO, the page has at least three contextual inbound links and remains within two clicks of the homepage.",
-        "For orphan page SEO, two uncached raw/rendered captures agree.",
-        "For orphan page SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: crawlable links",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: sitemap guidance",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/sitemap-redirects",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/excessive-crawl-depth",
-        "https://sulayman-bowles.dev/research/internal-link-graph-architecture"
-      ],
-      "cta": {
-        "label": "Discuss a orphan page SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/orphan-url-discovery-and-disposition",
+      "redirect_target": "https://www.void-agency.com/insights/orphan-url-discovery-and-disposition",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/excessive-crawl-depth",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/excessive-crawl-depth",
       "title": "Excessive Crawl Depth: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "crawl depth SEO",
-      "supporting_queries": [
-        "pages too many clicks deep",
-        "reduce crawl depth",
-        "internal link depth audit"
-      ],
-      "direct_answer": "Excessive Crawl Depth: Diagnosis and Repair is confirmed when important indexable pages require several navigation hops from an authoritative entry point. For crawl depth SEO, preserve the raw response and rendered document so taxonomy and pagination expose business-priority content only through long paths can be tested against a passing control. Repair crawl depth SEO by choosing the authoritative source; accept the excessive-crawl-depth change only when priority pages are reachable within two clicks and maintain descriptive inbound paths.",
-      "evidence_artifact": {
-        "label": "Excessive Crawl Depth: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing crawl depth SEO; EXCESSIVECRAWLDEPTH values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for crawl depth SEO.",
-        "Compare raw and rendered search signals for crawl depth SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for crawl depth SEO.",
-        "Compare a passing template peer and quantify the reach of crawl depth SEO."
-      ],
-      "false_positive_boundary": "Low-priority archival material can sit deeper when hubs, sitemaps, and demand do not justify promotion.",
-      "repair_steps": [
-        "For crawl depth SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For crawl depth SEO, introduce intent-based hubs, breadcrumbs, and contextual shortcuts for pages that deserve search visibility.",
-        "For crawl depth SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For crawl depth SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For crawl depth SEO, priority pages are reachable within two clicks and maintain descriptive inbound paths.",
-        "For crawl depth SEO, two uncached raw/rendered captures agree.",
-        "For crawl depth SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: crawlable links",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: sitemap guidance",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/orphan-page",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/broken-internal-link",
-        "https://sulayman-bowles.dev/research/internal-link-graph-architecture"
-      ],
-      "cta": {
-        "label": "Discuss a crawl depth SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/internal-link-evidence-report",
+      "redirect_target": "https://www.void-agency.com/insights/internal-link-evidence-report",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/broken-internal-link",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/broken-internal-link",
       "title": "Broken Internal Link: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "broken internal links SEO",
-      "supporting_queries": [
-        "fix internal 404 links",
-        "broken link audit",
-        "internal link redirects"
-      ],
-      "direct_answer": "Broken Internal Link: Diagnosis and Repair is confirmed when a crawlable internal anchor resolves to a 4xx, 5xx, loop, or unintended destination. For broken internal links SEO, preserve the raw response and rendered document so content references outlive moved, renamed, or removed routes can be tested against a passing control. Repair broken internal links SEO by choosing the authoritative source; accept the broken-internal-link change only when the full internal graph returns expected final statuses with no broken interactive anchors.",
-      "evidence_artifact": {
-        "label": "Broken Internal Link: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing broken internal links SEO; BROKENINTERNALLINK values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for broken internal links SEO.",
-        "Compare raw and rendered search signals for broken internal links SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for broken internal links SEO.",
-        "Compare a passing template peer and quantify the reach of broken internal links SEO."
-      ],
-      "false_positive_boundary": "Links in historical code examples can intentionally demonstrate invalid paths when they are visibly labeled and not interactive.",
-      "repair_steps": [
-        "For broken internal links SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For broken internal links SEO, point the source directly to the best live equivalent or remove the link when no replacement exists.",
-        "For broken internal links SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For broken internal links SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For broken internal links SEO, the full internal graph returns expected final statuses with no broken interactive anchors.",
-        "For broken internal links SEO, two uncached raw/rendered captures agree.",
-        "For broken internal links SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: crawlable links",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: redirects",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/301-redirects",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/excessive-crawl-depth",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/javascript-only-link",
-        "https://sulayman-bowles.dev/research/internal-link-graph-architecture"
-      ],
-      "cta": {
-        "label": "Discuss a broken internal links SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/crawlable-internal-links-in-react",
+      "redirect_target": "https://www.void-agency.com/insights/crawlable-internal-links-in-react",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/javascript-only-link",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/javascript-only-link",
       "title": "JavaScript-Only Link: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "JavaScript only links SEO",
-      "supporting_queries": [
-        "onclick link not crawlable",
-        "SPA crawlable links",
-        "anchor href SEO"
-      ],
-      "direct_answer": "JavaScript-Only Link: Diagnosis and Repair is confirmed when navigation depends on event handlers, buttons, or router state without a resolvable anchor href. For JavaScript only links SEO, preserve the raw response and rendered document so the interface exposes an action but omits the web-native URL relationship can be tested against a passing control. Repair JavaScript only links SEO by choosing the authoritative source; accept the javascript-only-link change only when raw HTML contains crawlable anchors and keyboard, no-script, and rendered tests reach the same URLs.",
-      "evidence_artifact": {
-        "label": "JavaScript-Only Link: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing JavaScript only links SEO; JAVASCRIPTONLYLINK values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for JavaScript only links SEO.",
-        "Compare raw and rendered search signals for JavaScript only links SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for JavaScript only links SEO.",
-        "Compare a passing template peer and quantify the reach of JavaScript only links SEO."
-      ],
-      "false_positive_boundary": "A button is correct for a non-navigation action such as opening a dialog or submitting a form.",
-      "repair_steps": [
-        "For JavaScript only links SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For JavaScript only links SEO, render semantic anchors with stable href values and enhance them with client routing only after navigation works.",
-        "For JavaScript only links SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For JavaScript only links SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For JavaScript only links SEO, raw HTML contains crawlable anchors and keyboard, no-script, and rendered tests reach the same URLs.",
-        "For JavaScript only links SEO, two uncached raw/rendered captures agree.",
-        "For JavaScript only links SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: crawlable links",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/broken-internal-link",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/raw-rendered-content-mismatch",
-        "https://sulayman-bowles.dev/research/raw-vs-rendered-html"
-      ],
-      "cta": {
-        "label": "Discuss a JavaScript only links SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/crawlable-internal-links-in-react",
+      "redirect_target": "https://www.void-agency.com/insights/crawlable-internal-links-in-react",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/raw-rendered-content-mismatch",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/raw-rendered-content-mismatch",
       "title": "Raw and Rendered HTML Mismatch: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "raw rendered HTML mismatch SEO",
-      "supporting_queries": [
-        "rendered HTML SEO audit",
-        "JavaScript content mismatch",
-        "view source versus DOM"
-      ],
-      "direct_answer": "Raw and Rendered HTML Mismatch: Diagnosis and Repair is confirmed when critical headings, copy, links, directives, or schema differ materially between the response HTML and rendered DOM. For raw rendered HTML mismatch SEO, preserve the raw response and rendered document so hydration, asynchronous data, personalization, or client mutations change the search-visible document can be tested against a passing control. Repair raw rendered HTML mismatch SEO by choosing the authoritative source; accept the raw-rendered-content-mismatch change only when raw and rendered comparisons agree on primary copy, links, metadata, canonical, robots, and schema.",
-      "evidence_artifact": {
-        "label": "Raw and Rendered HTML Mismatch: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing raw rendered HTML mismatch SEO; RAWRENDEREDCONTENTMISMATCH values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for raw rendered HTML mismatch SEO.",
-        "Compare raw and rendered search signals for raw rendered HTML mismatch SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for raw rendered HTML mismatch SEO.",
-        "Compare a passing template peer and quantify the reach of raw rendered HTML mismatch SEO."
-      ],
-      "false_positive_boundary": "Benign interactive state and decorative attributes can differ without changing meaning, links, or indexability.",
-      "repair_steps": [
-        "For raw rendered HTML mismatch SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For raw rendered HTML mismatch SEO, server-render critical intent and reconcile deterministic client output against the same content source.",
-        "For raw rendered HTML mismatch SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For raw rendered HTML mismatch SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For raw rendered HTML mismatch SEO, raw and rendered comparisons agree on primary copy, links, metadata, canonical, robots, and schema.",
-        "For raw rendered HTML mismatch SEO, two uncached raw/rendered captures agree.",
-        "For raw rendered HTML mismatch SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: crawlable links",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/javascript-only-link",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/structured-data-content-drift",
-        "https://sulayman-bowles.dev/research/raw-vs-rendered-html"
-      ],
-      "cta": {
-        "label": "Discuss a raw rendered HTML mismatch SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/raw-html-rendered-dom-parity-audit",
+      "redirect_target": "https://www.void-agency.com/insights/raw-html-rendered-dom-parity-audit",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/structured-data-content-drift",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/structured-data-content-drift",
       "title": "Structured Data Content Drift: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "structured data content mismatch",
-      "supporting_queries": [
-        "schema markup content mismatch",
-        "JSON-LD drift",
-        "structured data audit"
-      ],
-      "direct_answer": "Structured Data Content Drift: Diagnosis and Repair is confirmed when JSON-LD claims names, offers, dates, ratings, or entities that the visible page no longer supports. For structured data content mismatch, preserve the raw response and rendered document so schema and content are generated from separate sources or refresh schedules can be tested against a passing control. Repair structured data content mismatch by choosing the authoritative source; accept the structured-data-content-drift change only when schema validation passes and every material property maps to current visible evidence.",
-      "evidence_artifact": {
-        "label": "Structured Data Content Drift: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing structured data content mismatch; STRUCTUREDDATACONTENTDRIFT values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for structured data content mismatch.",
-        "Compare raw and rendered search signals for structured data content mismatch.",
-        "Trace sitemap, canonical, and internal-link discovery for structured data content mismatch.",
-        "Compare a passing template peer and quantify the reach of structured data content mismatch."
-      ],
-      "false_positive_boundary": "Structured data can provide machine-readable identifiers not printed verbatim when the visible entity and claim remain unambiguous.",
-      "repair_steps": [
-        "For structured data content mismatch, identify the authoritative route, content, or infrastructure owner.",
-        "For structured data content mismatch, generate visible content and JSON-LD from one typed record and remove unsupported properties.",
-        "For structured data content mismatch, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For structured data content mismatch, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For structured data content mismatch, schema validation passes and every material property maps to current visible evidence.",
-        "For structured data content mismatch, two uncached raw/rendered captures agree.",
-        "For structured data content mismatch, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: structured data policies",
-          "href": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/raw-rendered-content-mismatch",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-title-tag",
-        "https://sulayman-bowles.dev/research/structured-data-validation"
-      ],
-      "cta": {
-        "label": "Discuss a structured data content mismatch audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/structured-data-drift-audit",
+      "redirect_target": "https://www.void-agency.com/insights/structured-data-drift-audit",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-title-tag",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-title-tag",
       "title": "Duplicate Title Tag: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "duplicate title tags SEO",
-      "supporting_queries": [
-        "same SEO title multiple pages",
-        "duplicate title audit",
-        "unique title tags"
-      ],
-      "direct_answer": "Duplicate Title Tag: Diagnosis and Repair is confirmed when multiple indexable canonical pages publish the same or functionally indistinguishable title. For duplicate title tags SEO, preserve the raw response and rendered document so templates omit the differentiating entity, intent, location, or state can be tested against a passing control. Repair duplicate title tags SEO by choosing the authoritative source; accept the duplicate-title-tag change only when every indexable canonical has a unique title that matches its H1 and primary query without boilerplate collision.",
-      "evidence_artifact": {
-        "label": "Duplicate Title Tag: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing duplicate title tags SEO; DUPLICATETITLETAG values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for duplicate title tags SEO.",
-        "Compare raw and rendered search signals for duplicate title tags SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for duplicate title tags SEO.",
-        "Compare a passing template peer and quantify the reach of duplicate title tags SEO."
-      ],
-      "false_positive_boundary": "Paginated or translated pages can share a stem when each title still exposes its distinct state and audience.",
-      "repair_steps": [
-        "For duplicate title tags SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For duplicate title tags SEO, write concise titles around each page’s unique intent and bind generation to validated route data.",
-        "For duplicate title tags SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For duplicate title tags SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For duplicate title tags SEO, every indexable canonical has a unique title that matches its H1 and primary query without boilerplate collision.",
-        "For duplicate title tags SEO, two uncached raw/rendered captures agree.",
-        "For duplicate title tags SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: title links",
-          "href": "https://developers.google.com/search/docs/appearance/title-link",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/structured-data-content-drift",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-meta-description",
-        "https://sulayman-bowles.dev/research/snippet-governance"
-      ],
-      "cta": {
-        "label": "Discuss a duplicate title tags SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/hydrated-head-metadata-parity",
+      "redirect_target": "https://www.void-agency.com/insights/hydrated-head-metadata-parity",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-meta-description",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-meta-description",
       "title": "Duplicate Meta Description: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "duplicate meta descriptions SEO",
-      "supporting_queries": [
-        "same meta description pages",
-        "unique description tags",
-        "meta description audit"
-      ],
-      "direct_answer": "Duplicate Meta Description: Diagnosis and Repair is confirmed when several indexable pages reuse the same search-result summary despite serving different intents. For duplicate meta descriptions SEO, preserve the raw response and rendered document so a global fallback replaces page-specific outcome, scope, and evidence language can be tested against a passing control. Repair duplicate meta descriptions SEO by choosing the authoritative source; accept the duplicate-meta-description change only when descriptions are unique, within a practical snippet length, and accurately preview each page.",
-      "evidence_artifact": {
-        "label": "Duplicate Meta Description: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing duplicate meta descriptions SEO; DUPLICATEMETADESCRIPTION values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for duplicate meta descriptions SEO.",
-        "Compare raw and rendered search signals for duplicate meta descriptions SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for duplicate meta descriptions SEO.",
-        "Compare a passing template peer and quantify the reach of duplicate meta descriptions SEO."
-      ],
-      "false_positive_boundary": "Google may rewrite even unique descriptions; duplication is a publishing-quality issue, not a ranking penalty by itself.",
-      "repair_steps": [
-        "For duplicate meta descriptions SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For duplicate meta descriptions SEO, generate a specific benefit-and-boundary description for every canonical route.",
-        "For duplicate meta descriptions SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For duplicate meta descriptions SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For duplicate meta descriptions SEO, descriptions are unique, within a practical snippet length, and accurately preview each page.",
-        "For duplicate meta descriptions SEO, two uncached raw/rendered captures agree.",
-        "For duplicate meta descriptions SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: snippets",
-          "href": "https://developers.google.com/search/docs/appearance/snippet",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: title links",
-          "href": "https://developers.google.com/search/docs/appearance/title-link",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-title-tag",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/faceted-navigation-crawl-trap",
-        "https://sulayman-bowles.dev/research/snippet-governance"
-      ],
-      "cta": {
-        "label": "Discuss a duplicate meta descriptions SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/hydrated-head-metadata-parity",
+      "redirect_target": "https://www.void-agency.com/insights/hydrated-head-metadata-parity",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/faceted-navigation-crawl-trap",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/faceted-navigation-crawl-trap",
       "title": "Faceted Navigation Crawl Trap: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "faceted navigation crawl trap",
-      "supporting_queries": [
-        "filter URL SEO",
-        "faceted navigation indexing",
-        "crawl budget filters"
-      ],
-      "direct_answer": "Faceted Navigation Crawl Trap: Diagnosis and Repair is confirmed when filter combinations create a near-unbounded set of low-value, duplicate, or empty URLs. For faceted navigation crawl trap, preserve the raw response and rendered document so every facet state becomes crawlable without an inventory or demand policy can be tested against a passing control. Repair faceted navigation crawl trap by choosing the authoritative source; accept the faceted-navigation-crawl-trap change only when crawl growth is bounded while approved facet pages remain unique, linked, indexable, and stocked.",
-      "evidence_artifact": {
-        "label": "Faceted Navigation Crawl Trap: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing faceted navigation crawl trap; FACETEDNAVIGATIONCRAWLTRAP values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for faceted navigation crawl trap.",
-        "Compare raw and rendered search signals for faceted navigation crawl trap.",
-        "Trace sitemap, canonical, and internal-link discovery for faceted navigation crawl trap.",
-        "Compare a passing template peer and quantify the reach of faceted navigation crawl trap."
-      ],
-      "false_positive_boundary": "A curated facet can deserve indexation when it has demand, stable inventory, unique content, and intentional internal links.",
-      "repair_steps": [
-        "For faceted navigation crawl trap, identify the authoritative route, content, or infrastructure owner.",
-        "For faceted navigation crawl trap, allowlist valuable combinations, constrain link generation, and canonicalize or exclude the remaining states coherently.",
-        "For faceted navigation crawl trap, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For faceted navigation crawl trap, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For faceted navigation crawl trap, crawl growth is bounded while approved facet pages remain unique, linked, indexable, and stocked.",
-        "For faceted navigation crawl trap, two uncached raw/rendered captures agree.",
-        "For faceted navigation crawl trap, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: faceted navigation URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: ecommerce URL design",
-          "href": "https://developers.google.com/search/docs/specialty/ecommerce/designing-a-url-structure-for-ecommerce-sites",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/duplicate-meta-description",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/parameter-url-duplication",
-        "https://sulayman-bowles.dev/research/crawl-budget-prioritization"
-      ],
-      "cta": {
-        "label": "Discuss a faceted navigation crawl trap audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/faceted-navigation-indexing-policy",
+      "redirect_target": "https://www.void-agency.com/insights/faceted-navigation-indexing-policy",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/parameter-url-duplication",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/parameter-url-duplication",
       "title": "Parameter URL Duplication: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "URL parameter duplicate content SEO",
-      "supporting_queries": [
-        "query parameter indexing",
-        "duplicate parameter URLs",
-        "tracking parameters canonical"
-      ],
-      "direct_answer": "Parameter URL Duplication: Diagnosis and Repair is confirmed when query strings expose duplicate content under sortable, trackable, session, or presentation variants. For URL parameter duplicate content SEO, preserve the raw response and rendered document so parameter semantics are not classified before URLs enter links, sitemaps, canonicals, and analytics can be tested against a passing control. Repair URL parameter duplicate content SEO by choosing the authoritative source; accept the parameter-url-duplication change only when equivalent parameters disappear from internal discovery and resolve to the chosen canonical behavior.",
-      "evidence_artifact": {
-        "label": "Parameter URL Duplication: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing URL parameter duplicate content SEO; PARAMETERURLDUPLICATION values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for URL parameter duplicate content SEO.",
-        "Compare raw and rendered search signals for URL parameter duplicate content SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for URL parameter duplicate content SEO.",
-        "Compare a passing template peer and quantify the reach of URL parameter duplicate content SEO."
-      ],
-      "false_positive_boundary": "A parameter represents a separate page when it materially changes intent and produces durable, useful content.",
-      "repair_steps": [
-        "For URL parameter duplicate content SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For URL parameter duplicate content SEO, classify parameters, strip tracking from links, and consolidate equivalent variants onto one canonical URL.",
-        "For URL parameter duplicate content SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For URL parameter duplicate content SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For URL parameter duplicate content SEO, equivalent parameters disappear from internal discovery and resolve to the chosen canonical behavior.",
-        "For URL parameter duplicate content SEO, two uncached raw/rendered captures agree.",
-        "For URL parameter duplicate content SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: ecommerce URL design",
-          "href": "https://developers.google.com/search/docs/specialty/ecommerce/designing-a-url-structure-for-ecommerce-sites",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/faceted-navigation-crawl-trap",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/pagination-infinite-scroll-indexing",
-        "https://sulayman-bowles.dev/research/url-normalization"
-      ],
-      "cta": {
-        "label": "Discuss a URL parameter duplicate content SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/parameter-url-duplication-control",
+      "redirect_target": "https://www.void-agency.com/insights/parameter-url-duplication-control",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/pagination-infinite-scroll-indexing",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/pagination-infinite-scroll-indexing",
       "title": "Pagination and Infinite Scroll Indexing: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "infinite scroll SEO pagination",
-      "supporting_queries": [
-        "pagination indexing SEO",
-        "infinite scroll crawlable",
-        "load more SEO"
-      ],
-      "direct_answer": "Pagination and Infinite Scroll Indexing: Diagnosis and Repair is confirmed when items beyond the initial viewport require interaction and lack stable crawlable component URLs. For infinite scroll SEO pagination, preserve the raw response and rendered document so the interface models a sequence as transient client state instead of addressable pages can be tested against a passing control. Repair infinite scroll SEO pagination by choosing the authoritative source; accept the pagination-infinite-scroll-indexing change only when a clean crawl reaches every intended item without scrolling, clicking, or executing custom gestures.",
-      "evidence_artifact": {
-        "label": "Pagination and Infinite Scroll Indexing: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing infinite scroll SEO pagination; PAGINATIONINFINITESCROLLINDEXING values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for infinite scroll SEO pagination.",
-        "Compare raw and rendered search signals for infinite scroll SEO pagination.",
-        "Trace sitemap, canonical, and internal-link discovery for infinite scroll SEO pagination.",
-        "Compare a passing template peer and quantify the reach of infinite scroll SEO pagination."
-      ],
-      "false_positive_boundary": "Infinite scroll is compatible with search when each segment has a stable URL and crawlable sequential links.",
-      "repair_steps": [
-        "For infinite scroll SEO pagination, identify the authoritative route, content, or infrastructure owner.",
-        "For infinite scroll SEO pagination, provide unique paginated URLs, server-visible content, and ordered anchors while retaining progressive enhancement.",
-        "For infinite scroll SEO pagination, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For infinite scroll SEO pagination, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For infinite scroll SEO pagination, a clean crawl reaches every intended item without scrolling, clicking, or executing custom gestures.",
-        "For infinite scroll SEO pagination, two uncached raw/rendered captures agree.",
-        "For infinite scroll SEO pagination, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: pagination and incremental loading",
-          "href": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: crawlable links",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/parameter-url-duplication",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/hreflang-return-tag-error",
-        "https://sulayman-bowles.dev/research/raw-vs-rendered-html"
-      ],
-      "cta": {
-        "label": "Discuss a infinite scroll SEO pagination audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/pagination-and-infinite-scroll-search-paths",
+      "redirect_target": "https://www.void-agency.com/insights/pagination-and-infinite-scroll-search-paths",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/hreflang-return-tag-error",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/hreflang-return-tag-error",
       "title": "Hreflang Return Tag Error: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "hreflang return tag error",
-      "supporting_queries": [
-        "missing reciprocal hreflang",
-        "hreflang no return tag",
-        "international SEO hreflang audit"
-      ],
-      "direct_answer": "Hreflang Return Tag Error: Diagnosis and Repair is confirmed when one localized URL references an alternate that does not reciprocally reference the source. For hreflang return tag error, preserve the raw response and rendered document so locale sets are generated independently or omit a region from the shared cluster can be tested against a passing control. Repair hreflang return tag error by choosing the authoritative source; accept the hreflang-return-tag-error change only when every indexable member returns the identical reciprocal set with valid final canonical URLs.",
-      "evidence_artifact": {
-        "label": "Hreflang Return Tag Error: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing hreflang return tag error; HREFLANGRETURNTAGERROR values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for hreflang return tag error.",
-        "Compare raw and rendered search signals for hreflang return tag error.",
-        "Trace sitemap, canonical, and internal-link discovery for hreflang return tag error.",
-        "Compare a passing template peer and quantify the reach of hreflang return tag error."
-      ],
-      "false_positive_boundary": "A page excluded from the locale set should not return a tag, but all included members need coherent reciprocal membership.",
-      "repair_steps": [
-        "For hreflang return tag error, identify the authoritative route, content, or infrastructure owner.",
-        "For hreflang return tag error, generate complete hreflang clusters from one locale matrix and include a valid self-reference.",
-        "For hreflang return tag error, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For hreflang return tag error, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For hreflang return tag error, every indexable member returns the identical reciprocal set with valid final canonical URLs.",
-        "For hreflang return tag error, two uncached raw/rendered captures agree.",
-        "For hreflang return tag error, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: localized versions",
-          "href": "https://developers.google.com/search/docs/specialty/international/localized-versions",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/pagination-infinite-scroll-indexing",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/mobile-desktop-content-mismatch",
-        "https://sulayman-bowles.dev/research/structured-data-validation"
-      ],
-      "cta": {
-        "label": "Discuss a hreflang return tag error audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/mobile-desktop-content-mismatch",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/mobile-desktop-content-mismatch",
       "title": "Mobile and Desktop Content Mismatch: Diagnosis and Repair",
-      "primary_query": "mobile desktop content mismatch SEO",
-      "supporting_queries": [
-        "mobile first indexing missing content",
-        "responsive content parity",
-        "mobile SEO audit"
-      ],
-      "direct_answer": "Mobile and Desktop Content Mismatch: Diagnosis and Repair is confirmed when mobile rendering omits primary text, links, images, metadata, or structured data present on desktop. For mobile desktop content mismatch SEO, preserve the raw response and rendered document so responsive components, user-agent branching, or deferred resources deliver unequal evidence can be tested against a passing control. Repair mobile desktop content mismatch SEO by choosing the authoritative source; accept the mobile-desktop-content-mismatch change only when mobile and desktop audits match on primary content, links, directives, image context, and schema claims.",
-      "evidence_artifact": {
-        "label": "Mobile and Desktop Content Mismatch: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing mobile desktop content mismatch SEO; MOBILEDESKTOPCONTENTMISMATCH values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for mobile desktop content mismatch SEO.",
-        "Compare raw and rendered search signals for mobile desktop content mismatch SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for mobile desktop content mismatch SEO.",
-        "Compare a passing template peer and quantify the reach of mobile desktop content mismatch SEO."
-      ],
-      "false_positive_boundary": "Layout, navigation density, and presentation may differ when both modes preserve equivalent meaning and access.",
-      "repair_steps": [
-        "For mobile desktop content mismatch SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For mobile desktop content mismatch SEO, serve content and metadata parity through responsive rendering and test the mobile user-agent independently.",
-        "For mobile desktop content mismatch SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For mobile desktop content mismatch SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For mobile desktop content mismatch SEO, mobile and desktop audits match on primary content, links, directives, image context, and schema claims.",
-        "For mobile desktop content mismatch SEO, two uncached raw/rendered captures agree.",
-        "For mobile desktop content mismatch SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: mobile-first indexing",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: structured data policies",
-          "href": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/hreflang-return-tag-error",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/lazy-loaded-primary-content",
-        "https://sulayman-bowles.dev/research/raw-vs-rendered-html"
-      ],
-      "cta": {
-        "label": "Discuss a mobile desktop content mismatch SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
-    },
-    {
       "family": "issue",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/issues/lazy-loaded-primary-content",
+      "primary_query": "mobile desktop content mismatch SEO",
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/raw-html-rendered-dom-parity-audit",
+      "redirect_target": "https://www.void-agency.com/insights/raw-html-rendered-dom-parity-audit",
+      "last_meaningful_update": "2026-09-03"
+    },
+    {
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/issues/lazy-loaded-primary-content",
       "title": "Lazy-Loaded Primary Content: Diagnosis and Repair",
+      "family": "issue",
       "primary_query": "lazy loaded content SEO",
-      "supporting_queries": [
-        "lazy loading text SEO",
-        "Googlebot lazy content",
-        "intersection observer SEO"
-      ],
-      "direct_answer": "Lazy-Loaded Primary Content: Diagnosis and Repair is confirmed when primary copy or links appear only after scrolling, intersection events, or user interaction. For lazy loaded content SEO, preserve the raw response and rendered document so performance optimization defers the very evidence needed to understand the page can be tested against a passing control. Repair lazy loaded content SEO by choosing the authoritative source; accept the lazy-loaded-primary-content change only when initial raw and rendered output contains the complete main intent before any viewport event.",
-      "evidence_artifact": {
-        "label": "Lazy-Loaded Primary Content: Diagnosis and Repair Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing lazy loaded content SEO; LAZYLOADEDPRIMARYCONTENT values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for lazy loaded content SEO.",
-        "Compare raw and rendered search signals for lazy loaded content SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for lazy loaded content SEO.",
-        "Compare a passing template peer and quantify the reach of lazy loaded content SEO."
-      ],
-      "false_positive_boundary": "Below-the-fold images and secondary modules can load lazily when useful placeholders and accessible fallbacks remain.",
-      "repair_steps": [
-        "For lazy loaded content SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For lazy loaded content SEO, server-render primary content and reserve lazy loading for nonessential assets with deterministic fallbacks.",
-        "For lazy loaded content SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For lazy loaded content SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For lazy loaded content SEO, initial raw and rendered output contains the complete main intent before any viewport event.",
-        "For lazy loaded content SEO, two uncached raw/rendered captures agree.",
-        "For lazy loaded content SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: lazy-loaded content",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/issues/mobile-desktop-content-mismatch",
-        "https://sulayman-bowles.dev/research/technical-seo/issues/missing-canonical",
-        "https://sulayman-bowles.dev/research/raw-vs-rendered-html"
-      ],
-      "cta": {
-        "label": "Discuss a lazy loaded content SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/lazy-loaded-primary-content-release-check",
+      "redirect_target": "https://www.void-agency.com/insights/lazy-loaded-primary-content-release-check",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "platform",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs",
       "title": "Next.js Technical SEO Guide",
+      "family": "platform",
       "primary_query": "Next.js technical SEO",
-      "supporting_queries": [
-        "Next.js SEO checklist",
-        "Next.js metadata canonical",
-        "Next.js rendering SEO"
-      ],
-      "direct_answer": "Next.js Technical SEO Guide is confirmed when a Next.js site distributes metadata, rendering, caching, redirects, and sitemap behavior across route conventions. For Next.js technical SEO, preserve the raw response and rendered document so App Router and Pages Router features can drift when route-level ownership is not explicit can be tested against a passing control. Repair Next.js technical SEO by choosing the authoritative source; accept the nextjs change only when production output exposes unique server-visible content, metadata, schema, status, and discovery signals per route.",
-      "evidence_artifact": {
-        "label": "Next.js Technical SEO Guide Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing Next.js technical SEO; NEXTJS values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for Next.js technical SEO.",
-        "Compare raw and rendered search signals for Next.js technical SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for Next.js technical SEO.",
-        "Compare a passing template peer and quantify the reach of Next.js technical SEO."
-      ],
-      "false_positive_boundary": "Client Components are not inherently harmful when critical content and links arrive in indexable HTML.",
-      "repair_steps": [
-        "For Next.js technical SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For Next.js technical SEO, centralize typed metadata, choose rendering per intent, and validate built HTML for every canonical route.",
-        "For Next.js technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For Next.js technical SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For Next.js technical SEO, production output exposes unique server-visible content, metadata, schema, status, and discovery signals per route.",
-        "For Next.js technical SEO, two uncached raw/rendered captures agree.",
-        "For Next.js technical SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Next.js: metadata and OG images",
-          "href": "https://nextjs.org/docs/app/getting-started/metadata-and-og-images",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/headless-cms",
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite",
-        "https://sulayman-bowles.dev/research/raw-vs-rendered-html"
-      ],
-      "cta": {
-        "label": "Discuss a Next.js technical SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "platform",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite",
       "title": "React and Vite Technical SEO Guide",
+      "family": "platform",
       "primary_query": "React Vite SEO",
-      "supporting_queries": [
-        "Vite SPA SEO",
-        "React static rendering SEO",
-        "Vite sitemap metadata"
-      ],
-      "direct_answer": "React and Vite Technical SEO Guide is confirmed when a React/Vite application initially delivers a shared shell while route evidence appears only after JavaScript. For React Vite SEO, preserve the raw response and rendered document so a client-first build lacks route-aware prerendering, head ownership, and response-status semantics can be tested against a passing control. Repair React Vite SEO by choosing the authoritative source; accept the react-vite change only when each built route has complete static HTML, unique head tags, schema, crawlable links, and correct fallback status.",
-      "evidence_artifact": {
-        "label": "React and Vite Technical SEO Guide Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing React Vite SEO; REACTVITE values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for React Vite SEO.",
-        "Compare raw and rendered search signals for React Vite SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for React Vite SEO.",
-        "Compare a passing template peer and quantify the reach of React Vite SEO."
-      ],
-      "false_positive_boundary": "A client-rendered application can be discoverable, but relying on rendering adds avoidable latency and evidence uncertainty.",
-      "repair_steps": [
-        "For React Vite SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For React Vite SEO, prerender public routes from the canonical registry and hydrate without changing their semantic output.",
-        "For React Vite SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For React Vite SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For React Vite SEO, each built route has complete static HTML, unique head tags, schema, crawlable links, and correct fallback status.",
-        "For React Vite SEO, two uncached raw/rendered captures agree.",
-        "For React Vite SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Vite: server-side rendering",
-          "href": "https://vite.dev/guide/ssr",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs",
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress",
-        "https://sulayman-bowles.dev/research/raw-vs-rendered-html"
-      ],
-      "cta": {
-        "label": "Discuss a React Vite SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "platform",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress",
       "title": "WordPress Technical SEO Guide",
+      "family": "platform",
       "primary_query": "WordPress technical SEO",
-      "supporting_queries": [
-        "WordPress SEO audit",
-        "WordPress canonical issues",
-        "WordPress crawl optimization"
-      ],
-      "direct_answer": "WordPress Technical SEO Guide is confirmed when WordPress exposes posts, pages, taxonomies, feeds, archives, media, and plugin output as overlapping crawl surfaces. For WordPress technical SEO, preserve the raw response and rendered document so themes, plugins, and core conventions can each emit independent metadata and URL variants can be tested against a passing control. Repair WordPress technical SEO by choosing the authoritative source; accept the wordpress change only when a clean crawl maps one intended canonical per document and no plugin duplicates the governed head output.",
-      "evidence_artifact": {
-        "label": "WordPress Technical SEO Guide Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing WordPress technical SEO; WORDPRESS values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for WordPress technical SEO.",
-        "Compare raw and rendered search signals for WordPress technical SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for WordPress technical SEO.",
-        "Compare a passing template peer and quantify the reach of WordPress technical SEO."
-      ],
-      "false_positive_boundary": "Archives are valuable when they serve a distinct browsing intent with unique copy and maintained membership.",
-      "repair_steps": [
-        "For WordPress technical SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For WordPress technical SEO, assign one owner for canonicals, schema, redirects, sitemaps, and archive indexability before pruning variants.",
-        "For WordPress technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For WordPress technical SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For WordPress technical SEO, a clean crawl maps one intended canonical per document and no plugin duplicates the governed head output.",
-        "For WordPress technical SEO, two uncached raw/rendered captures agree.",
-        "For WordPress technical SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "WordPress: canonical API",
-          "href": "https://developer.wordpress.org/reference/functions/rel_canonical/",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/react-vite",
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/shopify",
-        "https://sulayman-bowles.dev/research/indexability-state-machine"
-      ],
-      "cta": {
-        "label": "Discuss a WordPress technical SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "platform",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/shopify",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/platforms/shopify",
       "title": "Shopify Technical SEO Guide",
+      "family": "platform",
       "primary_query": "Shopify technical SEO",
-      "supporting_queries": [
-        "Shopify SEO audit",
-        "Shopify duplicate URLs",
-        "Shopify collection SEO"
-      ],
-      "direct_answer": "Shopify Technical SEO Guide is confirmed when Shopify storefronts expose products through collections, filters, pagination, locale paths, and theme-generated metadata. For Shopify technical SEO, preserve the raw response and rendered document so platform URL conventions and theme links can create multiple discovery paths to equivalent inventory can be tested against a passing control. Repair Shopify technical SEO by choosing the authoritative source; accept the shopify change only when sample products and collections resolve to unique final canonicals with bounded filters and valid visible schema.",
-      "evidence_artifact": {
-        "label": "Shopify Technical SEO Guide Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing Shopify technical SEO; SHOPIFY values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for Shopify technical SEO.",
-        "Compare raw and rendered search signals for Shopify technical SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for Shopify technical SEO.",
-        "Compare a passing template peer and quantify the reach of Shopify technical SEO."
-      ],
-      "false_positive_boundary": "Collection-specific product paths can support browsing, but canonical and linking behavior must still communicate one index target.",
-      "repair_steps": [
-        "For Shopify technical SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For Shopify technical SEO, govern theme links, collection architecture, canonical output, structured data, redirects, and unavailable-product states together.",
-        "For Shopify technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For Shopify technical SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For Shopify technical SEO, sample products and collections resolve to unique final canonicals with bounded filters and valid visible schema.",
-        "For Shopify technical SEO, two uncached raw/rendered captures agree.",
-        "For Shopify technical SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Shopify Help: SEO overview",
-          "href": "https://help.shopify.com/en/manual/promoting-marketing/seo/seo-overview",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: ecommerce URL design",
-          "href": "https://developers.google.com/search/docs/specialty/ecommerce/designing-a-url-structure-for-ecommerce-sites",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/wordpress",
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/webflow",
-        "https://sulayman-bowles.dev/research/internal-link-graph-architecture"
-      ],
-      "cta": {
-        "label": "Discuss a Shopify technical SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "platform",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/webflow",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/platforms/webflow",
       "title": "Webflow Technical SEO Guide",
+      "family": "platform",
       "primary_query": "Webflow technical SEO",
-      "supporting_queries": [
-        "Webflow SEO audit",
-        "Webflow canonical tag",
-        "Webflow CMS SEO"
-      ],
-      "direct_answer": "Webflow Technical SEO Guide is confirmed when Webflow page settings, CMS templates, custom code, redirects, and published domains jointly determine search output. For Webflow technical SEO, preserve the raw response and rendered document so manual fields and reusable templates can leave blank, duplicated, or environment-specific head values can be tested against a passing control. Repair Webflow technical SEO by choosing the authoritative source; accept the webflow change only when all public templates publish unique metadata, correct canonicals, useful content, and direct internal paths.",
-      "evidence_artifact": {
-        "label": "Webflow Technical SEO Guide Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing Webflow technical SEO; WEBFLOW values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for Webflow technical SEO.",
-        "Compare raw and rendered search signals for Webflow technical SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for Webflow technical SEO.",
-        "Compare a passing template peer and quantify the reach of Webflow technical SEO."
-      ],
-      "false_positive_boundary": "A Webflow-generated sitemap is useful by default; custom handling is only justified by a demonstrated inventory rule.",
-      "repair_steps": [
-        "For Webflow technical SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For Webflow technical SEO, require CMS SEO fields, govern custom code centrally, and validate the published domain after each structural release.",
-        "For Webflow technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For Webflow technical SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For Webflow technical SEO, all public templates publish unique metadata, correct canonicals, useful content, and direct internal paths.",
-        "For Webflow technical SEO, two uncached raw/rendered captures agree.",
-        "For Webflow technical SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Webflow Help: SEO title and description",
-          "href": "https://help.webflow.com/hc/en-us/articles/33961237278611-Add-SEO-title-and-meta-description",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/shopify",
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/squarespace",
-        "https://sulayman-bowles.dev/research/snippet-governance"
-      ],
-      "cta": {
-        "label": "Discuss a Webflow technical SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "platform",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/squarespace",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/platforms/squarespace",
       "title": "Squarespace Technical SEO Guide",
+      "family": "platform",
       "primary_query": "Squarespace technical SEO",
-      "supporting_queries": [
-        "Squarespace SEO audit",
-        "Squarespace indexing issues",
-        "Squarespace sitemap SEO"
-      ],
-      "direct_answer": "Squarespace Technical SEO Guide is confirmed when Squarespace combines global settings, page fields, collection types, domain configuration, and injected code. For Squarespace technical SEO, preserve the raw response and rendered document so sitewide defaults can conceal missing page-specific intent or collide with custom metadata additions can be tested against a passing control. Repair Squarespace technical SEO by choosing the authoritative source; accept the squarespace change only when published pages have unique intent, one canonical, one title, stable status, and crawlable contextual links.",
-      "evidence_artifact": {
-        "label": "Squarespace Technical SEO Guide Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing Squarespace technical SEO; SQUARESPACE values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for Squarespace technical SEO.",
-        "Compare raw and rendered search signals for Squarespace technical SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for Squarespace technical SEO.",
-        "Compare a passing template peer and quantify the reach of Squarespace technical SEO."
-      ],
-      "false_positive_boundary": "Platform-managed canonicals and sitemaps should remain in place unless current output proves a concrete defect.",
-      "repair_steps": [
-        "For Squarespace technical SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For Squarespace technical SEO, prioritize information architecture and page-specific fields, then remove custom code that duplicates platform output.",
-        "For Squarespace technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For Squarespace technical SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For Squarespace technical SEO, published pages have unique intent, one canonical, one title, stable status, and crawlable contextual links.",
-        "For Squarespace technical SEO, two uncached raw/rendered captures agree.",
-        "For Squarespace technical SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Squarespace Help: SEO checklist",
-          "href": "https://support.squarespace.com/hc/en-us/articles/360002090267-SEO-checklist",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/webflow",
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/wix",
-        "https://sulayman-bowles.dev/research/snippet-governance"
-      ],
-      "cta": {
-        "label": "Discuss a Squarespace technical SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "platform",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/wix",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/platforms/wix",
       "title": "Wix Technical SEO Guide",
-      "primary_query": "Wix technical SEO",
-      "supporting_queries": [
-        "Wix SEO audit",
-        "Wix crawl issues",
-        "Wix structured data SEO"
-      ],
-      "direct_answer": "Wix Technical SEO Guide is confirmed when Wix SEO patterns, page settings, dynamic routes, redirects, and structured-data overrides form the indexable surface. For Wix technical SEO, preserve the raw response and rendered document so bulk patterns can propagate a weak field or unsupported markup across many dynamic pages can be tested against a passing control. Repair Wix technical SEO by choosing the authoritative source; accept the wix change only when dynamic samples pass raw/rendered, metadata, canonical, schema, link, and status checks without pattern collisions.",
-      "evidence_artifact": {
-        "label": "Wix Technical SEO Guide Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing Wix technical SEO; WIX values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for Wix technical SEO.",
-        "Compare raw and rendered search signals for Wix technical SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for Wix technical SEO.",
-        "Compare a passing template peer and quantify the reach of Wix technical SEO."
-      ],
-      "false_positive_boundary": "Default Wix rendering is not an SEO defect; changes need page-level evidence rather than platform folklore.",
-      "repair_steps": [
-        "For Wix technical SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For Wix technical SEO, configure patterns from reliable CMS fields, restrict indexability to useful routes, and review custom schema against visible content.",
-        "For Wix technical SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For Wix technical SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For Wix technical SEO, dynamic samples pass raw/rendered, metadata, canonical, schema, link, and status checks without pattern collisions.",
-        "For Wix technical SEO, two uncached raw/rendered captures agree.",
-        "For Wix technical SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Wix: technical SEO introduction",
-          "href": "https://www.wix.com/seo/learn/resource/technical-seo-101",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: structured data policies",
-          "href": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/squarespace",
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/headless-cms",
-        "https://sulayman-bowles.dev/research/structured-data-validation"
-      ],
-      "cta": {
-        "label": "Discuss a Wix technical SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
-    },
-    {
       "family": "platform",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/platforms/headless-cms",
+      "primary_query": "Wix technical SEO",
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
+    },
+    {
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/platforms/headless-cms",
       "title": "Headless CMS Technical SEO Guide",
+      "family": "platform",
       "primary_query": "headless CMS SEO",
-      "supporting_queries": [
-        "headless website technical SEO",
-        "CMS frontend SEO",
-        "headless rendering audit"
-      ],
-      "direct_answer": "Headless CMS Technical SEO Guide is confirmed when a headless stack separates editorial data, frontend rendering, routing, cache invalidation, and search metadata. For headless CMS SEO, preserve the raw response and rendered document so distributed ownership lets content and derived artifacts update at different times can be tested against a passing control. Repair headless CMS SEO by choosing the authoritative source; accept the headless-cms change only when content changes propagate to every derived surface within the declared freshness window and route tests stay deterministic.",
-      "evidence_artifact": {
-        "label": "Headless CMS Technical SEO Guide Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing headless CMS SEO; HEADLESSCMS values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for headless CMS SEO.",
-        "Compare raw and rendered search signals for headless CMS SEO.",
-        "Trace sitemap, canonical, and internal-link discovery for headless CMS SEO.",
-        "Compare a passing template peer and quantify the reach of headless CMS SEO."
-      ],
-      "false_positive_boundary": "Architectural separation is not a disadvantage when publishing contracts and cache invalidation are observable and tested.",
-      "repair_steps": [
-        "For headless CMS SEO, identify the authoritative route, content, or infrastructure owner.",
-        "For headless CMS SEO, define a typed publishing contract that atomically drives HTML, head data, schema, redirects, sitemaps, and previews.",
-        "For headless CMS SEO, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For headless CMS SEO, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For headless CMS SEO, content changes propagate to every derived surface within the declared freshness window and route tests stay deterministic.",
-        "For headless CMS SEO, two uncached raw/rendered captures agree.",
-        "For headless CMS SEO, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "web.dev: rendering on the web",
-          "href": "https://web.dev/articles/rendering-on-the-web",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/wix",
-        "https://sulayman-bowles.dev/research/technical-seo/platforms/nextjs",
-        "https://sulayman-bowles.dev/research/structured-data-validation"
-      ],
-      "cta": {
-        "label": "Discuss a headless CMS SEO audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/insights/technical-audits",
+      "redirect_target": "https://www.void-agency.com/insights/technical-audits",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "checklist",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/checklists/javascript-seo-audit",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/checklists/javascript-seo-audit",
       "title": "JavaScript Technical SEO Audit Checklist",
+      "family": "checklist",
       "primary_query": "JavaScript SEO audit checklist",
-      "supporting_queries": [
-        "JavaScript SEO audit",
-        "rendering SEO checklist",
-        "SPA technical SEO audit"
-      ],
-      "direct_answer": "JavaScript Technical SEO Audit Checklist is confirmed when a JavaScript application needs evidence across response HTML, rendered DOM, resources, routing, metadata, and status behavior. For JavaScript SEO audit checklist, preserve the raw response and rendered document so testing only the browser-visible final state misses discovery and rendering dependencies can be tested against a passing control. Repair JavaScript SEO audit checklist by choosing the authoritative source; accept the javascript-seo-audit change only when representative routes pass no-interaction discovery, parity, metadata, schema, link, and error-state checks.",
-      "evidence_artifact": {
-        "label": "JavaScript Technical SEO Audit Checklist Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing JavaScript SEO audit checklist; JAVASCRIPTSEOAUDIT values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for JavaScript SEO audit checklist.",
-        "Compare raw and rendered search signals for JavaScript SEO audit checklist.",
-        "Trace sitemap, canonical, and internal-link discovery for JavaScript SEO audit checklist.",
-        "Compare a passing template peer and quantify the reach of JavaScript SEO audit checklist."
-      ],
-      "false_positive_boundary": "JavaScript usage alone is not an issue; the audit should flag only measured gaps in access, parity, or stability.",
-      "repair_steps": [
-        "For JavaScript SEO audit checklist, identify the authoritative route, content, or infrastructure owner.",
-        "For JavaScript SEO audit checklist, audit raw and rendered states, then move critical evidence to deterministic server or build output.",
-        "For JavaScript SEO audit checklist, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For JavaScript SEO audit checklist, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For JavaScript SEO audit checklist, representative routes pass no-interaction discovery, parity, metadata, schema, link, and error-state checks.",
-        "For JavaScript SEO audit checklist, two uncached raw/rendered captures agree.",
-        "For JavaScript SEO audit checklist, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: JavaScript SEO basics",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: crawlable links",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/checklists/local-business-technical-seo-audit",
-        "https://sulayman-bowles.dev/research/technical-seo/checklists/ecommerce-technical-seo-audit",
-        "https://sulayman-bowles.dev/research/raw-vs-rendered-html"
-      ],
-      "cta": {
-        "label": "Discuss a JavaScript SEO audit checklist audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "redirect_target": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "checklist",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/checklists/ecommerce-technical-seo-audit",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/checklists/ecommerce-technical-seo-audit",
       "title": "Ecommerce Technical SEO Audit Checklist",
+      "family": "checklist",
       "primary_query": "ecommerce technical SEO audit checklist",
-      "supporting_queries": [
-        "ecommerce SEO audit",
-        "online store technical SEO",
-        "product category crawl audit"
-      ],
-      "direct_answer": "Ecommerce Technical SEO Audit Checklist is confirmed when an ecommerce site needs coordinated checks across products, categories, facets, pagination, availability, schema, and migrations. For ecommerce technical SEO audit checklist, preserve the raw response and rendered document so large changing catalogs create URL states faster than manual review can govern them can be tested against a passing control. Repair ecommerce technical SEO audit checklist by choosing the authoritative source; accept the ecommerce-technical-seo-audit change only when sampled revenue templates and edge states match the approved inventory contract after a full crawl.",
-      "evidence_artifact": {
-        "label": "Ecommerce Technical SEO Audit Checklist Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing ecommerce technical SEO audit checklist; ECOMMERCETECHNICALSEOAUDIT values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for ecommerce technical SEO audit checklist.",
-        "Compare raw and rendered search signals for ecommerce technical SEO audit checklist.",
-        "Trace sitemap, canonical, and internal-link discovery for ecommerce technical SEO audit checklist.",
-        "Compare a passing template peer and quantify the reach of ecommerce technical SEO audit checklist."
-      ],
-      "false_positive_boundary": "A large URL count is not waste when each page serves demand, remains stocked, and has unique evidence.",
-      "repair_steps": [
-        "For ecommerce technical SEO audit checklist, identify the authoritative route, content, or infrastructure owner.",
-        "For ecommerce technical SEO audit checklist, classify inventory states and automate indexability, linking, canonical, schema, and sitemap decisions from them.",
-        "For ecommerce technical SEO audit checklist, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For ecommerce technical SEO audit checklist, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For ecommerce technical SEO audit checklist, sampled revenue templates and edge states match the approved inventory contract after a full crawl.",
-        "For ecommerce technical SEO audit checklist, two uncached raw/rendered captures agree.",
-        "For ecommerce technical SEO audit checklist, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: ecommerce URL design",
-          "href": "https://developers.google.com/search/docs/specialty/ecommerce/designing-a-url-structure-for-ecommerce-sites",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: structured data policies",
-          "href": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/checklists/javascript-seo-audit",
-        "https://sulayman-bowles.dev/research/technical-seo/checklists/saas-technical-seo-audit",
-        "https://sulayman-bowles.dev/research/crawl-budget-prioritization"
-      ],
-      "cta": {
-        "label": "Discuss a ecommerce technical SEO audit checklist audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "redirect_target": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "checklist",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/checklists/saas-technical-seo-audit",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/checklists/saas-technical-seo-audit",
       "title": "SaaS Technical SEO Audit Checklist",
+      "family": "checklist",
       "primary_query": "SaaS technical SEO audit checklist",
-      "supporting_queries": [
-        "SaaS SEO audit",
-        "B2B software technical SEO",
-        "SaaS website crawl audit"
-      ],
-      "direct_answer": "SaaS Technical SEO Audit Checklist is confirmed when a SaaS site mixes marketing, documentation, integrations, comparisons, localization, authentication, and application routes. For SaaS technical SEO audit checklist, preserve the raw response and rendered document so separate teams and frameworks publish overlapping paths without one search inventory model can be tested against a passing control. Repair SaaS technical SEO audit checklist by choosing the authoritative source; accept the saas-technical-seo-audit change only when every indexable route has a distinct buyer or user intent, contextual inbound links, and an accountable template owner.",
-      "evidence_artifact": {
-        "label": "SaaS Technical SEO Audit Checklist Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing SaaS technical SEO audit checklist; SAASTECHNICALSEOAUDIT values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for SaaS technical SEO audit checklist.",
-        "Compare raw and rendered search signals for SaaS technical SEO audit checklist.",
-        "Trace sitemap, canonical, and internal-link discovery for SaaS technical SEO audit checklist.",
-        "Compare a passing template peer and quantify the reach of SaaS technical SEO audit checklist."
-      ],
-      "false_positive_boundary": "Subdomains and multiple frameworks are acceptable when canonicals, navigation, ownership, and measurement remain coherent.",
-      "repair_steps": [
-        "For SaaS technical SEO audit checklist, identify the authoritative route, content, or infrastructure owner.",
-        "For SaaS technical SEO audit checklist, map intent and ownership first, then align routing, metadata, linking, sitemaps, status codes, and conversion paths.",
-        "For SaaS technical SEO audit checklist, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For SaaS technical SEO audit checklist, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For SaaS technical SEO audit checklist, every indexable route has a distinct buyer or user intent, contextual inbound links, and an accountable template owner.",
-        "For SaaS technical SEO audit checklist, two uncached raw/rendered captures agree.",
-        "For SaaS technical SEO audit checklist, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: crawlable links",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: canonical URLs",
-          "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/checklists/ecommerce-technical-seo-audit",
-        "https://sulayman-bowles.dev/research/technical-seo/checklists/local-business-technical-seo-audit",
-        "https://sulayman-bowles.dev/research/internal-link-graph-architecture"
-      ],
-      "cta": {
-        "label": "Discuss a SaaS technical SEO audit checklist audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "redirect_target": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "last_meaningful_update": "2026-09-03"
     },
     {
-      "family": "checklist",
-      "url": "https://sulayman-bowles.dev/research/technical-seo/checklists/local-business-technical-seo-audit",
+      "source_url": "https://sulayman-bowles.dev/research/technical-seo/checklists/local-business-technical-seo-audit",
       "title": "Local Business Technical SEO Audit Checklist",
+      "family": "checklist",
       "primary_query": "local business technical SEO audit checklist",
-      "supporting_queries": [
-        "local SEO technical audit",
-        "local business website SEO checklist",
-        "location page technical SEO"
-      ],
-      "direct_answer": "Local Business Technical SEO Audit Checklist is confirmed when a local business site needs consistent location identity across pages, structured data, links, domains, and conversion details. For local business technical SEO audit checklist, preserve the raw response and rendered document so copied location templates or stale business facts create contradictory geographic signals can be tested against a passing control. Repair local business technical SEO audit checklist by choosing the authoritative source; accept the local-business-technical-seo-audit change only when each retained location has unique proof, consistent visible/schema facts, direct contact paths, and valid canonical status.",
-      "evidence_artifact": {
-        "label": "Local Business Technical SEO Audit Checklist Atlas-compatible fixture",
-        "kind": "atlas-compatible-fixture",
-        "description": "An illustrative, non-client fixture for reproducing local business technical SEO audit checklist; LOCALBUSINESSTECHNICALSEOAUDIT values require a timestamped crawl before any production claim.",
-        "fields": [
-          "requested_url",
-          "final_url",
-          "status_chain",
-          "raw_html_sha256",
-          "rendered_html_sha256",
-          "canonical_url",
-          "robots_state",
-          "discovery_source",
-          "observed_at"
-        ]
-      },
-      "diagnostic_procedure": [
-        "Capture the uncached response and redirect trail for local business technical SEO audit checklist.",
-        "Compare raw and rendered search signals for local business technical SEO audit checklist.",
-        "Trace sitemap, canonical, and internal-link discovery for local business technical SEO audit checklist.",
-        "Compare a passing template peer and quantify the reach of local business technical SEO audit checklist."
-      ],
-      "false_positive_boundary": "Shared service language is reasonable when each location page adds real local proof, access details, and distinct usefulness.",
-      "repair_steps": [
-        "For local business technical SEO audit checklist, identify the authoritative route, content, or infrastructure owner.",
-        "For local business technical SEO audit checklist, normalize business facts, consolidate duplicate locations, and connect useful local pages through service and geographic context.",
-        "For local business technical SEO audit checklist, regenerate dependent links, metadata, schema, and sitemaps.",
-        "For local business technical SEO audit checklist, retain the failure as a regression fixture."
-      ],
-      "rerun_acceptance_check": [
-        "For local business technical SEO audit checklist, each retained location has unique proof, consistent visible/schema facts, direct contact paths, and valid canonical status.",
-        "For local business technical SEO audit checklist, two uncached raw/rendered captures agree.",
-        "For local business technical SEO audit checklist, the intended route stays indexable and contextually linked."
-      ],
-      "sources": [
-        {
-          "label": "Google Search Central: local business structured data",
-          "href": "https://developers.google.com/search/docs/appearance/structured-data/local-business",
-          "lastVerified": "2026-07-20"
-        },
-        {
-          "label": "Google Search Central: structured data policies",
-          "href": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
-          "lastVerified": "2026-07-20"
-        }
-      ],
-      "related_pages": [
-        "https://sulayman-bowles.dev/research/technical-seo/checklists/saas-technical-seo-audit",
-        "https://sulayman-bowles.dev/research/technical-seo/checklists/javascript-seo-audit",
-        "https://sulayman-bowles.dev/research/structured-data-validation"
-      ],
-      "cta": {
-        "label": "Discuss a local business technical SEO audit checklist audit",
-        "url": "https://sulayman-bowles.dev/contact"
-      },
-      "indexability_state": "indexable",
-      "indexable": true,
-      "last_verified": "2026-07-20"
+      "owner_domain": "www.void-agency.com",
+      "lifecycle": "merge",
+      "canonical": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "redirect_target": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "last_meaningful_update": "2026-09-03"
     }
   ]
 }

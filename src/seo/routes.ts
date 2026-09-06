@@ -29,6 +29,13 @@ import {
   technicalSeoCollectionJsonLd,
   type JsonLd,
 } from './schema';
+import {
+  createDevSeoPortfolioRoute,
+  getPortfolioRedirectTarget,
+  isIndexableSeoPortfolioRoute,
+  validateSeoPortfolioRoutes,
+  type SeoPortfolioRouteV1,
+} from './portfolioRoutes';
 
 export type RouteSection =
   | 'home'
@@ -58,11 +65,14 @@ export interface SeoRoute {
   includeInSitemap: boolean;
   generateStatic?: boolean;
   noindex?: boolean;
+  redirectTarget?: string | null;
+  publishedAt?: string;
   lastmod?: string;
   staticSummary: string;
   staticHtml?: string;
   image?: string;
   jsonLd?: JsonLd;
+  portfolioRoute?: SeoPortfolioRouteV1;
 }
 
 export type RouteVisualMode = 'canvas-sample' | 'dark-evidence' | 'memo-reader' | 'book' | 'prototype';
@@ -365,6 +375,7 @@ const ARTICLE_ROUTES: SeoRoute[] = ARTICLE_ROUTE_METADATA.map((article) => {
     includeInSitemap: isIndexable,
     generateStatic: !isIndexable,
     noindex: !isIndexable,
+    publishedAt: datePublished,
     lastmod: dateModified,
     staticSummary: article.staticSummary,
     image: articleImage,
@@ -391,6 +402,7 @@ const PROGRAMMATIC_HUB_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_HUBS.map((hub) => (
   pageType: 'research',
   priority: hub.family === 'all' ? 0.8 : 0.7,
   includeInSitemap: hub.indexable,
+  publishedAt: hub.datePublished,
   lastmod: hub.dateModified,
   staticSummary: hub.directAnswer,
   image: RESEARCH_OG_IMAGE,
@@ -413,6 +425,7 @@ const PROGRAMMATIC_PAGE_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_PAGES.map((page) =
   pageType: 'article',
   priority: 0.6,
   includeInSitemap: page.indexable,
+  publishedAt: page.datePublished,
   lastmod: page.dateModified,
   staticSummary: page.directAnswer,
   image: RESEARCH_OG_IMAGE,
@@ -428,12 +441,53 @@ const PROGRAMMATIC_PAGE_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_PAGES.map((page) =
   }),
 }));
 
-export const SEO_ROUTES: SeoRoute[] = [
+const ROUTE_DEFINITIONS: SeoRoute[] = [
   ...CORE_ROUTES,
   ...ARTICLE_ROUTES,
   ...PROGRAMMATIC_HUB_ROUTES,
   ...PROGRAMMATIC_PAGE_ROUTES,
 ];
+
+function portfolioUpdateDate(route: SeoRoute): string {
+  if (
+    route.path === '/sitemap'
+    || route.path === '/markets/who-owns-texas-toll-roads'
+    || route.path === '/research/ai-crawlers/ai-search-crawler-policy'
+    || route.path === '/method'
+    || route.path === '/austin-technical-seo'
+    || getPortfolioRedirectTarget(route.path) !== null
+  ) return '2026-09-03';
+  return route.lastmod ?? SITE_LASTMOD;
+}
+
+export const SEO_ROUTES: SeoRoute[] = ROUTE_DEFINITIONS.map((definition) => {
+  const portfolioRoute = createDevSeoPortfolioRoute({
+    path: definition.path,
+    section: definition.section,
+    noindex: definition.noindex === true || !definition.includeInSitemap,
+    publishedAt: definition.publishedAt ?? definition.lastmod ?? SITE_LASTMOD,
+    lastMeaningfulUpdate: portfolioUpdateDate(definition),
+  });
+  const indexable = isIndexableSeoPortfolioRoute(portfolioRoute);
+  const noindex = portfolioRoute.lifecycle === 'noindex';
+
+  return {
+    ...definition,
+    includeInSitemap: indexable,
+    noindex: !indexable,
+    generateStatic: noindex ? true : false,
+    redirectTarget: portfolioRoute.redirectTarget,
+    lastmod: portfolioRoute.lastMeaningfulUpdate,
+    portfolioRoute,
+  };
+});
+
+export const SEO_PORTFOLIO_ROUTES: readonly SeoPortfolioRouteV1[] = SEO_ROUTES.map((route) => {
+  if (!route.portfolioRoute) throw new Error(`${route.path}: missing SEO portfolio route contract.`);
+  return route.portfolioRoute;
+});
+
+validateSeoPortfolioRoutes(SEO_PORTFOLIO_ROUTES);
 
 export function normalizeInputPath(path: string) {
   const pathname = path.split(/[?#]/)[0] || '/';
@@ -486,5 +540,5 @@ export function getRouteTone(path: string): RouteTone {
 }
 
 export function getCanonicalRoutes() {
-  return SEO_ROUTES.filter((route) => route.includeInSitemap);
+  return SEO_ROUTES.filter((route) => route.portfolioRoute && isIndexableSeoPortfolioRoute(route.portfolioRoute));
 }

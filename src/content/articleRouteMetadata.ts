@@ -291,13 +291,13 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "aliases": [
       "/markets/ai-search-crawler-policy"
     ],
-    "title": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
-    "seoTitle": "Robots.txt Guide for GPTBot, OAI-SearchBot, and AI Crawlers",
-    "seoDescription": "Compare OpenAI, Anthropic, and Perplexity crawlers, then copy robots.txt rules for AI search, training controls, or named-agent blocks.",
+    "title": "AI Crawler Robots.txt: Allow Search, Block Training, Verify Bots",
+    "seoTitle": "AI Crawler Robots.txt: Allow Search, Block Training",
+    "seoDescription": "Allow AI search, block model-training crawlers, or deny named agents with copy-ready robots.txt rules and a server-log verification checklist.",
     "date": "2026.06.19",
-    "dateModified": "2026.07.19",
+    "dateModified": "2026.09.03",
     "indexable": true,
-    "staticSummary": "Robots.txt can express different crawl preferences for GPTBot, OAI-SearchBot, and other named agents, but those directives govern crawler access only; they do not guarantee indexing, rankings, citations, model inclusion, or retrieval by a user-requested tool. /robots.txt is a host-scoped text file. Match the exact case-sensitive product token, then assign Allow: / or Disallow: /. Preserve the correct Sitemap line.",
+    "staticSummary": "To allow OpenAI search discovery while opting out of model-development crawling, allow OAI-SearchBot and disallow GPTBot in separate robots.txt groups. Treat ChatGPT-User and other user-triggered fetchers separately. These rules express crawl preferences; they do not authenticate a bot or guarantee indexing, citations, training exclusion, or retrieval. Quick answer: robots.txt can express different choices for AI search discovery and model-development crawling. For OpenAI, OAI-SearchBot is the search-discovery token and GPTBot is the model-development token. A rule for one does not automatically control the other. Anthropic and Perplexity publish their own named tokens and behavior notes.",
     "image": "/images/research/ai-crawler-policy-social.jpg"
   },
   {
@@ -363,10 +363,10 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "path": "/markets/who-owns-texas-toll-roads",
     "aliases": [],
     "title": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
-    "seoTitle": "Who Owns Texas Toll Roads? Public Owners & 4 Concessions",
-    "seoDescription": "Most Texas toll roads are publicly owned. See the four major private concessions, who operates each road, who collects toll revenue, and where ownership ends.",
+    "seoTitle": "Who Owns Texas Toll Roads? Owners, Operators & Concessions",
+    "seoDescription": "Texas toll-road ownership tracker: compare public authorities, operators, private concessions, regions, billing agencies, and cited primary sources.",
     "date": "2026.07.11",
-    "dateModified": "2026.07.25",
+    "dateModified": "2026.09.03",
     "indexable": true,
     "staticSummary": "Most Texas toll roads are publicly owned, not privately owned. TxDOT, counties, and public toll authorities own most roadways. Four major concessions—North Tarrant Express, LBJ Express, NTE 35W, and SH 130 Segments 5–6—give private companies time-limited operating and toll-revenue rights while Texas retains title to the pavement. Texas toll roads do not have one owner. Texas, a county, or a public authority usually owns the physical roadway. A public system may keep the toll revenue, or a concession company may hold a finite right to operate the lanes and collect tolls. Sponsors own the company; lenders control senior claims; billing can sit with another public agency; and the state retains or recovers the asset at expiry.",
     "image": "/images/research/texas-toll-roads-social.jpg"

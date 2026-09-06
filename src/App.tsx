@@ -603,7 +603,7 @@ function HomePage() {
               </div>
               <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
                 <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
-                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and an <a href="/research/technical-seo" className="border-b border-ink/24 hover:border-ink">evidence-backed technical SEO diagnostic library</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
+                  I build crawl evidence systems and publish original technical research that preserves how a conclusion was produced. Atlas handles raw and rendered page data; <a href="https://www.void-agency.com/insights/technical-audits" className="border-b border-ink/24 hover:border-ink">VOID owns the commercial technical-audit library</a> and its <a href="https://www.void-agency.com/services/technical-seo-ai-search-visibility" className="border-b border-ink/24 hover:border-ink">Austin technical SEO service</a> turns that evidence into bounded implementation work.
                 </p>
               </ScrollReveal>
             </div>
@@ -800,7 +800,7 @@ function HomePage() {
          </div>
            
            {/* Project 02 - Void */}
-           <a href="/method" id="work-link-void" data-selected-work-step="1" className="selected-work-step group relative order-2 my-0 flex min-h-full w-full flex-col items-center justify-center overflow-hidden border-y border-canvas/10 bg-ink px-4 py-16 md:my-28 md:min-h-[68vh] md:px-0 md:py-28">
+           <a href="https://www.void-agency.com/tools/technical-seo-audit-checklist" id="work-link-void" data-selected-work-step="1" data-portfolio-cta="void_audit_kit" className="selected-work-step group relative order-2 my-0 flex min-h-full w-full flex-col items-center justify-center overflow-hidden border-y border-canvas/10 bg-ink px-4 py-16 md:my-28 md:min-h-[68vh] md:px-0 md:py-28">
               {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
               <div className="relative z-10 flex flex-col items-center">
                 <ScrollReveal>

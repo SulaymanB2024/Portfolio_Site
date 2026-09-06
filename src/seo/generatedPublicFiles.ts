@@ -1,8 +1,10 @@
 import { ALL_ARTICLES, getArticlePath } from '../content/articleRegistry';
 import { PROFILE_FACTS } from '../content/profileFacts';
 import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from '../content/programmaticSeo';
+import { TEXAS_TOLL_ARTICLE_SOURCES } from '../content/texasTollRoadArticle';
 import {
   TEXAS_TOLL_OWNERSHIP_CSV_PATH,
+  TEXAS_TOLL_OWNERSHIP_JSON_PATH,
   TEXAS_TOLL_OWNERSHIP_ROWS,
 } from '../content/texasTollRoadOwnership';
 import { VIRALBENCH_ARTICLE_PATH, VIRALBENCH_ARTICLE_TITLE } from '../content/viralBenchArticleMeta';
@@ -46,32 +48,94 @@ function crawlerGroup(label: (typeof CRAWLER_POLICY_GROUPS)[number]['label']) {
 export function buildTexasTollOwnershipCsv() {
   const header = [
     'facility',
-    'region',
-    'physical_owner',
+    'geography',
+    'authority',
     'operator',
     'toll_revenue_claimant',
-    'concessionaire',
-    'term',
-    'private_rights_status',
+    'concession',
+    'concession_term',
+    'concession_status',
     'billing_agency',
     'evidence_date',
-    'source_ids',
+    'primary_source_ids',
+    'primary_source_urls',
   ];
-  const rows = TEXAS_TOLL_OWNERSHIP_ROWS.map((row) => [
+  const rows = buildTexasTollOwnershipTrackerRows().map((row) => [
     row.facility,
-    row.region,
-    row.physicalOwner,
+    row.geography,
+    row.authority,
     row.operator,
     row.tollRevenueClaimant,
-    row.concessionaire,
-    row.term,
-    row.privateRightsStatus,
+    row.concession,
+    row.concessionTerm,
+    row.concessionStatus,
     row.billingAgency,
     row.evidenceDate,
-    row.sourceIds.join('|'),
+    row.primarySources.map((source) => source.id).join('|'),
+    row.primarySources.flatMap((source) => source.urls).join('|'),
   ]);
 
   return `${[header, ...rows].map((row) => row.map(escapeCsv).join(',')).join('\n')}\n`;
+}
+
+export function buildTexasTollOwnershipTrackerRows() {
+  const sourcesById = new Map(TEXAS_TOLL_ARTICLE_SOURCES.map((source) => [source.id, source]));
+
+  return TEXAS_TOLL_OWNERSHIP_ROWS.map((row) => ({
+    facility: row.facility,
+    geography: row.region,
+    authority: row.physicalOwner,
+    operator: row.operator,
+    tollRevenueClaimant: row.tollRevenueClaimant,
+    concession: row.concessionaire,
+    concessionTerm: row.term,
+    concessionStatus: row.privateRightsStatus,
+    billingAgency: row.billingAgency,
+    evidenceDate: row.evidenceDate,
+    primarySources: row.sourceIds.map((id) => {
+      const source = sourcesById.get(id);
+      if (!source) throw new Error(`${row.facility}: missing primary source ${id}.`);
+      return { id, label: source.label, urls: source.hrefs };
+    }),
+  }));
+}
+
+export function buildTexasTollOwnershipJson() {
+  return `${JSON.stringify({
+    schema_version: 'texas_toll_road_ownership_v1',
+    canonical_page: absoluteUrl('/markets/who-owns-texas-toll-roads'),
+    generated_at: '2026-09-03',
+    evidence_cutoff: TEXAS_TOLL_OWNERSHIP_ROWS[0]?.evidenceDate ?? null,
+    interpretation: 'Authority identifies the public titleholder or public system. Concession identifies a finite private operating and revenue-right holder, not ownership of the pavement.',
+    records: buildTexasTollOwnershipTrackerRows(),
+  }, null, 2)}\n`;
+}
+
+export function buildSeoPortfolioRoutesJson() {
+  return `${JSON.stringify({
+    schema_version: 'SeoPortfolioRouteV1',
+    generated_at: '2026-09-03',
+    source_domain: 'sulayman-bowles.dev',
+    expansion_frozen: true,
+    routes: SEO_ROUTES.map((route) => route.portfolioRoute),
+  }, null, 2)}\n`;
+}
+
+export function buildSeoRedirectsJson() {
+  return `${JSON.stringify({
+    schema_version: 'SeoPortfolioRedirectTableV1',
+    generated_at: '2026-09-03',
+    source_domain: 'sulayman-bowles.dev',
+    redirects: SEO_ROUTES
+      .filter((route) => route.portfolioRoute?.lifecycle === 'merge')
+      .map((route) => ({
+        source: route.path,
+        destination: route.portfolioRoute?.redirectTarget,
+        status: 308,
+        intent_cluster: route.portfolioRoute?.intentCluster,
+        owner_domain: route.portfolioRoute?.ownerDomain,
+      })),
+  }, null, 2)}\n`;
 }
 
 export function buildSitemapXml() {
@@ -98,9 +162,6 @@ export function buildLlmsText() {
   const articleLines = ALL_ARTICLES
     .filter((article) => article.indexable !== false)
     .map((article) => llmsLink(article.title, absoluteUrl(getArticlePath(article))))
-    .join('\n');
-  const programmaticLines = PROGRAMMATIC_SEO_PAGES
-    .map((page) => llmsLink(page.title, absoluteUrl(page.path), `${page.family} diagnostic guide with a labeled evidence fixture and rerun gate.`))
     .join('\n');
   const searchCrawlerGroup = crawlerGroup('Conventional search crawlers');
   const aiSearchCrawlerGroup = crawlerGroup('AI answer-search crawlers');
@@ -136,14 +197,9 @@ ${llmsLink('Selected work', PROFILE_FACTS.canonicalLinks.work, 'Public project a
 ${llmsLink('Atlas', PROFILE_FACTS.canonicalLinks.atlas, 'Product scope and implementation-status page.')}
 ${llmsLink('Atlas open-corpus demonstration', absoluteUrl('/atlas/sample-crawl'), 'Dated, bounded public demonstration; not production coverage.')}
 ${llmsLink('Research', PROFILE_FACTS.canonicalLinks.research, 'Public research hub and article index.')}
-${llmsLink('Technical SEO diagnostic library', absoluteUrl('/research/technical-seo'), 'Evidence-backed issue, platform, and audit-checklist guides.')}
-${llmsLink('Technical SEO issue guides', absoluteUrl('/research/technical-seo/issues'), 'Diagnostic references organized by technical failure mode.')}
-${llmsLink('Technical SEO platform guides', absoluteUrl('/research/technical-seo/platforms'), 'Platform-specific diagnostics and repair gates.')}
-${llmsLink('Technical SEO audit checklists', absoluteUrl('/research/technical-seo/checklists'), 'Reusable audit procedures with acceptance checks.')}
 ${llmsLink('Markets finance filter', absoluteUrl('/markets'), 'Finance and infrastructure research subset.')}
-${llmsLink('Void Agency', 'https://www.void-agency.com/', 'Separate canonical host for the technical SEO practice.')}
-${llmsLink('Technical SEO audit services and process', absoluteUrl('/method'), 'Service method and engagement boundary.')}
-${llmsLink('Austin technical SEO consultant and audit services', absoluteUrl('/austin-technical-seo'), 'Austin-scoped service page.')}
+${llmsLink('VOID technical SEO audit kit', 'https://www.void-agency.com/tools/technical-seo-audit-checklist', 'Canonical commercial owner for audit checklists and process guidance.')}
+${llmsLink('VOID technical SEO service', 'https://www.void-agency.com/services/technical-seo-ai-search-visibility', 'Canonical commercial owner for Austin and technical SEO service intent.')}
 ${llmsLink('Technical SEO consultant contact and audit intake', PROFILE_FACTS.canonicalLinks.contact, 'Direct inquiry and bounded brief path.')}
 ${llmsLink('Technical ledger', PROFILE_FACTS.canonicalLinks.technicalLedger, 'Separate record of experiments and technical work.')}
 
@@ -151,15 +207,17 @@ ${llmsLink('Technical ledger', PROFILE_FACTS.canonicalLinks.technicalLedger, 'Se
 
 ${llmsLink(VIRALBENCH_ARTICLE_TITLE, absoluteUrl(VIRALBENCH_ARTICLE_PATH))}
 ${articleLines}
-${programmaticLines}
 ${llmsLink('Atlas open-corpus CSV', absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.csv'), 'URL-level rows from the dated public demonstration.')}
 ${llmsLink('Atlas open-corpus capture manifest', absoluteUrl('/research/atlas-open-corpus-run-2026-07-16.json'), 'Run scope, method, and claim limit.')}
 ${llmsLink('Appian educational research memo PDF', absoluteUrl('/research/appian-enterprise-software-durability-memo.pdf'), 'Educational research, not investment advice.')}
 ${llmsLink('Appian assumptions table CSV', absoluteUrl('/research/appian-assumptions-table.csv'), 'Companion assumptions table.')}
 ${llmsLink('Authority asset index', absoluteUrl('/research/authority-assets.json'), 'Typed index of public assets and their claim boundaries.')}
 ${llmsLink('Article research briefs', absoluteUrl('/research/article-research-briefs.json'), 'Intent, evidence-gap, artifact, and scope records.')}
-${llmsLink('Technical SEO reference index', absoluteUrl('/research/technical-seo-reference-index.json'), 'Structured index of every programmatic diagnostic guide and its evidence boundaries.')}
+${llmsLink('SEO portfolio ownership manifest', absoluteUrl('/research/seo-portfolio-routes-v1.json'), 'Versioned lifecycle, canonical-owner, and redirect decisions for every registered route.')}
+${llmsLink('SEO portfolio redirect table', absoluteUrl('/research/seo-redirects-v1.json'), 'One-hop permanent redirects generated from the same route-ownership contract.')}
+${llmsLink('Technical SEO migration index', absoluteUrl('/research/technical-seo-reference-index.json'), 'Structured source-to-VOID ownership and redirect decisions for the frozen commodity library.')}
 ${llmsLink('Texas toll-road ownership matrix', absoluteUrl(TEXAS_TOLL_OWNERSHIP_CSV_PATH), 'Dated source-linked ownership rows.')}
+${llmsLink('Texas toll-road ownership dataset', absoluteUrl(TEXAS_TOLL_OWNERSHIP_JSON_PATH), 'Machine-readable authority, operator, concession, geography, and primary-source records.')}
 ${llmsLink('Crawler policy sources', absoluteUrl('/research/ai-search-crawler-policy-sources.csv'), 'Official documentation and IP-manifest source map.')}
 ${llmsLink('Austin crawlability benchmark pilot CSV', absoluteUrl('/research/austin-crawlability-benchmark-pilot.csv'), 'Bounded public fetch observations.')}
 ${llmsLink('Austin crawlability benchmark summary', absoluteUrl('/research/austin-crawlability-benchmark-summary.json'), 'Aggregate limits and counts for the pilot.')}
@@ -183,7 +241,7 @@ ${llmsLink('Technical work record', PROFILE_FACTS.canonicalLinks.technicalLedger
 ${llmsLink('Canonical host', PROFILE_FACTS.canonicalLinks.home, 'The apex host is authoritative for this site.')}
 - The www host redirects to the apex canonical host.
 ${llmsLink('XML sitemap', absoluteUrl('/sitemap.xml'), 'Only canonical HTML routes in this inventory are intended for indexing.')}
-- Alias, retired, prototype, and archive-methodology routes are omitted from the XML sitemap; generated noindex metadata is the route-level exclusion signal.
+- Alias, merged, retired, prototype, sitemap-directory, and archive-methodology routes are omitted from the XML sitemap. Merged routes resolve by permanent redirect; retained nonindex routes emit noindex,follow.
 - Canonical links, Open Graph URLs, WebPage URLs, Article URLs, and sitemap locations are required to converge on the same canonical URL.
 ${llmsLink('Resume redirect destination', PROFILE_FACTS.canonicalLinks.resume, 'The retired 2025 PDF resume alias redirects here.')}
 - Search Console, Bing Webmaster Tools, and IndexNow submissions are discovery and recrawl signals; they do not prove rankings, indexing, traffic movement, or AI citations.
@@ -201,41 +259,35 @@ ${llmsLink('Crawler policy source map', absoluteUrl('/research/ai-search-crawler
 }
 
 export function buildProgrammaticSeoIndexJson() {
+  const decisions = [...PROGRAMMATIC_SEO_HUBS, ...PROGRAMMATIC_SEO_PAGES].map((item) => {
+    const route = SEO_ROUTES.find((candidate) => candidate.path === item.path);
+    if (!route?.portfolioRoute) throw new Error(`${item.path}: missing portfolio migration decision.`);
+    return {
+      source_url: absoluteUrl(item.path),
+      title: item.title,
+      family: item.family,
+      primary_query: 'primaryQuery' in item ? item.primaryQuery : null,
+      owner_domain: route.portfolioRoute.ownerDomain,
+      lifecycle: route.portfolioRoute.lifecycle,
+      canonical: route.portfolioRoute.canonical,
+      redirect_target: route.portfolioRoute.redirectTarget,
+      last_meaningful_update: route.portfolioRoute.lastMeaningfulUpdate,
+    };
+  });
+
   return `${JSON.stringify({
-    generated_at: '2026-07-20',
-    canonical_host: 'https://sulayman-bowles.dev',
-    objective: 'Evidence-backed technical SEO diagnostic references for issue, platform, and audit-checklist queries.',
+    schema_version: 'technical_seo_migration_v1',
+    generated_at: '2026-09-03',
+    source_host: 'https://sulayman-bowles.dev',
+    canonical_owner: 'https://www.void-agency.com',
+    expansion_frozen: true,
+    objective: 'Preserve an auditable source-to-destination map while VOID owns commodity technical SEO, platform, and audit-checklist intent.',
     claim_boundaries: [
-      'Fixtures are illustrative and Atlas-compatible; they are not client crawl evidence or claims about a live third-party site.',
-      'Publication and discovery do not guarantee indexation, rankings, impressions, clicks, backlinks, leads, or revenue.',
-      'A guide remains indexable only while it retains unique evidence, substantive utility, and a reproducible acceptance gate.',
+      'The legacy source content remains in version control for provenance; production must serve a one-hop permanent redirect rather than duplicate HTML.',
+      'A redirect deployment does not prove recrawl, canonical consolidation, rankings, impressions, clicks, links, leads, or revenue.',
+      'New commodity route expansion stays frozen until each proposed page has distinct evidence, a durable owner, and an approved lifecycle decision.',
     ],
-    hubs: PROGRAMMATIC_SEO_HUBS.map((hub) => ({
-      family: hub.family,
-      url: absoluteUrl(hub.path),
-      title: hub.title,
-      description: hub.description,
-      last_verified: hub.dateModified,
-    })),
-    pages: PROGRAMMATIC_SEO_PAGES.map((page) => ({
-      family: page.family,
-      url: absoluteUrl(page.path),
-      title: page.title,
-      primary_query: page.primaryQuery,
-      supporting_queries: page.supportingQueries,
-      direct_answer: page.directAnswer,
-      evidence_artifact: page.evidenceArtifact,
-      diagnostic_procedure: page.diagnosticProcedure,
-      false_positive_boundary: page.falsePositiveBoundary,
-      repair_steps: page.repairSteps,
-      rerun_acceptance_check: page.rerunAcceptanceCheck,
-      sources: page.sources,
-      related_pages: page.relatedPaths.map(absoluteUrl),
-      cta: { label: page.cta.label, url: absoluteUrl(page.cta.href) },
-      indexability_state: page.indexabilityState,
-      indexable: page.indexable,
-      last_verified: page.dateModified,
-    })),
+    routes: decisions,
   }, null, 2)}\n`;
 }
 
@@ -283,30 +335,14 @@ export function buildAuthorityAssetsJson() {
       supporting_assets: [
         absoluteUrl('/research/article-research-briefs.json'),
         ...(target.path === '/markets/who-owns-texas-toll-roads'
-          ? [absoluteUrl(TEXAS_TOLL_OWNERSHIP_CSV_PATH)]
+          ? [absoluteUrl(TEXAS_TOLL_OWNERSHIP_CSV_PATH), absoluteUrl(TEXAS_TOLL_OWNERSHIP_JSON_PATH)]
           : []),
         ...target.relatedPaths.slice(0, index === 0 ? 3 : 2).map(absoluteUrl),
       ],
     };
   });
-  const cornerstoneAssets = PROGRAMMATIC_SEO_PAGES
-    .filter((page) => page.family === 'platform')
-    .map((page) => ({
-      priority: 1,
-      name: page.title,
-      url: absoluteUrl(page.path),
-      type: 'technical_seo_cornerstone',
-      cluster: 'technical-seo-platforms',
-      preferred_anchor: page.primaryQuery,
-      pitch_angle: `A platform-specific ${page.primaryQuery} reference with a labeled evidence fixture, false-positive boundary, repair sequence, and rerun gate.`,
-      supporting_assets: [
-        absoluteUrl('/research/technical-seo-reference-index.json'),
-        ...page.sources.map((source) => source.href),
-      ],
-    }));
-
   return `${JSON.stringify({
-    generated_at: '2026-07-26',
+    generated_at: '2026-09-03',
     canonical_host: 'https://sulayman-bowles.dev',
     objective: 'Topical authority index for source-led technical SEO, crawler, AI-agent, data-system, and infrastructure research.',
     claim_boundaries: [
@@ -327,17 +363,6 @@ export function buildAuthorityAssetsJson() {
         pitch_angle: 'A crawlable hub connecting source-led articles, public artifacts, methodology, and explicit claim boundaries.',
         supporting_assets: [absoluteUrl('/research/article-research-briefs.json')],
       },
-      {
-        priority: 1,
-        name: 'Technical SEO Diagnostic Library',
-        url: absoluteUrl('/research/technical-seo'),
-        type: 'research_hub',
-        cluster: 'technical-seo',
-        preferred_anchor: 'technical SEO diagnostic library',
-        pitch_angle: 'Forty issue, platform, checklist, and collection routes governed by evidence, false-positive, repair, and rerun contracts.',
-        supporting_assets: [absoluteUrl('/research/technical-seo-reference-index.json')],
-      },
-      ...cornerstoneAssets,
       ...articleAssets,
       {
         priority: 1,
@@ -354,8 +379,6 @@ export function buildAuthorityAssetsJson() {
       },
       ...[
         ['/atlas', 'Atlas technical SEO audit software', 'crawler-engineering', 'Atlas crawl evidence system', 'A product page connecting crawl contracts, evidence preservation, review states, and public demonstration artifacts.'],
-        ['/austin-technical-seo', 'Austin Technical SEO', 'technical-seo', 'Austin technical SEO audit services', 'A locally scoped technical SEO service page with a bounded public crawlability benchmark.'],
-        ['/method', 'Void Agency Method', 'technical-seo', 'technical SEO audit method', 'A fixed-scope audit method organized around crawl evidence, implementation priorities, and reviewable handoff.'],
         ['/markets', 'Markets and Investing', 'infrastructure', 'markets and infrastructure research', 'A finance-only research filter with visible assumptions, ownership evidence, and recommendation boundaries.'],
         ['/resume', 'Resume', 'identity', 'Sulayman Bowles resume', 'The current canonical résumé and professional history source.'],
         ['/work', 'Selected Work', 'identity', 'Sulayman Bowles technical portfolio', 'A selected-work index linking public software, research, and implementation evidence.'],

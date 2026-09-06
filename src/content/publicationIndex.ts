@@ -34,6 +34,7 @@ const austinHomeServiceOwnership = article(AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
+const rareEarthMagnets = article('us-rare-earth-magnet-manufacturing-capacity');
 const indexCompanyMatters = article(INDEX_COMPANY_MATTERS_ARTICLE_SLUG);
 const softwareBuyoutCohort = article(SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG);
 const airlineLoyaltyFinancing = article(AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG);
@@ -51,14 +52,6 @@ function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['cat
 }
 
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
-  {
-    category: 'Technical SEO',
-    title: 'Technical SEO Diagnostic Library',
-    href: '/research/technical-seo',
-    description: 'Forty evidence-backed issue guides, platform playbooks, audit checklists, and collection routes with reproducible repair gates.',
-    date: '2026.07.20',
-    featured: true,
-  },
   ...TECHNICAL_ARTICLE_SERIES.map((articleItem) => ({
     category: seriesCategory(articleItem),
     title: articleItem.title,
@@ -176,18 +169,18 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     date: texasTollRoads.dateModified ?? texasTollRoads.date,
   },
   {
+    category: 'Markets and investing',
+    title: rareEarthMagnets.title,
+    href: getArticlePath(rareEarthMagnets),
+    description: rareEarthMagnets.subtitle,
+    date: rareEarthMagnets.dateModified ?? rareEarthMagnets.date,
+  },
+  {
     category: 'Technical SEO',
     title: 'Atlas Open Corpus Demonstration',
     href: '/atlas/sample-crawl',
     description: 'A versioned public-corpus run showing source and rendered states, traceable findings, confidence, and export excerpts.',
     date: '2026.07.16',
-  },
-  {
-    category: 'Technical SEO',
-    title: 'Austin Crawlability Pilot',
-    href: '/austin-technical-seo',
-    description: 'A bounded 12-site public-homepage pilot with a dated cutoff, public CSV, and explicit measurement gaps.',
-    date: '2026.06.25',
   },
 ];
 

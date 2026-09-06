@@ -139,7 +139,7 @@ export const ARTICLE_SEARCH_TARGETS = [
     intent: 'implementation',
     cohort: 1,
     directAnswer:
-      'Robots.txt can express different crawl preferences for GPTBot, OAI-SearchBot, and other named agents, but those directives govern crawler access only; they do not guarantee indexing, rankings, citations, model inclusion, or retrieval by a user-requested tool.',
+      'To allow OpenAI search discovery while opting out of model-development crawling, allow OAI-SearchBot and disallow GPTBot in separate robots.txt groups. Treat ChatGPT-User and other user-triggered fetchers separately. These rules express crawl preferences; they do not authenticate a bot or guarantee indexing, citations, training exclusion, or retrieval.',
     serpGap:
       'Keep search, training, and user-requested retrieval agents distinct and tie every directive to provider documentation and a dated source map.',
     originalArtifact:
@@ -435,10 +435,10 @@ export const ARTICLE_SEARCH_TARGETS = [
     serpGap:
       'Separate physical ownership from concession rights, operators, lenders, revenue claims, and residual control using project-level public records.',
     originalArtifact:
-      'A project-by-project ownership, operator, concession, debt, revenue-rights, valuation, and source-gap table.',
+      'A nine-record source-linked ownership tracker and downloadable CSV/JSON dataset with geography, authority, operator, concession, billing, evidence-date, and primary-source fields.',
     cannibalizationBoundary:
       'This is the only article targeting Texas toll-road ownership; supporting data-system articles discuss evidence methods rather than road ownership.',
-    lastVerified: '2026-07-25',
+    lastVerified: '2026-07-23',
     relatedPaths: [
       '/research/search-console/technical-seo-public-data-infrastructure',
       '/research/personal-seo/canonical-identity-personal-seo',

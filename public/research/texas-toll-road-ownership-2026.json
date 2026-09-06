@@ -1,0 +1,360 @@
+{
+  "schema_version": "texas_toll_road_ownership_v1",
+  "canonical_page": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+  "generated_at": "2026-09-03",
+  "evidence_cutoff": "2026-07-23",
+  "interpretation": "Authority identifies the public titleholder or public system. Concession identifies a finite private operating and revenue-right holder, not ownership of the pavement.",
+  "records": [
+    {
+      "facility": "TxDOT-operated toll systems",
+      "geography": "Austin, Houston, and Dallas–Fort Worth",
+      "authority": "State of Texas / TxDOT",
+      "operator": "TxDOT and its public project entities",
+      "tollRevenueClaimant": "The applicable public toll system or project entity",
+      "concession": "None",
+      "concessionTerm": "Ongoing public ownership",
+      "concessionStatus": "No private concession",
+      "billingAgency": "HCTRA",
+      "evidenceDate": "2026-07-23",
+      "primarySources": [
+        {
+          "id": "s21",
+          "label": "TxDOT HB 803 Report, FY2025",
+          "urls": [
+            "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf"
+          ]
+        },
+        {
+          "id": "s22",
+          "label": "TxDOT 2025 Popular Annual Financial Report",
+          "urls": [
+            "https://www.txdot.gov/content/dam/docs/division/fin/pafr/2025-popular-annual-financial-report.pdf"
+          ]
+        },
+        {
+          "id": "s26",
+          "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+          "urls": [
+            "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          ]
+        }
+      ]
+    },
+    {
+      "facility": "North Texas Tollway Authority system",
+      "geography": "Dallas–Fort Worth",
+      "authority": "NTTA; Sam Rayburn Tollway is held through a state right of use",
+      "operator": "NTTA",
+      "tollRevenueClaimant": "NTTA system",
+      "concession": "None",
+      "concessionTerm": "Ongoing public system; Sam Rayburn use right ends 2058",
+      "concessionStatus": "No private concession",
+      "billingAgency": "NTTA",
+      "evidenceDate": "2026-07-23",
+      "primarySources": [
+        {
+          "id": "s15",
+          "label": "NTTA 2025 Annual Comprehensive Financial Report",
+          "urls": [
+            "https://www.ntta.org/sites/default/files/2026-06/06-25-2026_Digital-Annual-Report_2025.pdf"
+          ]
+        },
+        {
+          "id": "s16",
+          "label": "NTTA Board of Directors and system pages",
+          "urls": [
+            "https://www.ntta.org/about-us/board-of-directors"
+          ]
+        },
+        {
+          "id": "s26",
+          "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+          "urls": [
+            "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          ]
+        }
+      ]
+    },
+    {
+      "facility": "Harris County Toll Road Authority system",
+      "geography": "Houston",
+      "authority": "Harris County",
+      "operator": "HCTRA",
+      "tollRevenueClaimant": "HCTRA enterprise fund",
+      "concession": "None",
+      "concessionTerm": "Ongoing county ownership",
+      "concessionStatus": "No private concession",
+      "billingAgency": "HCTRA",
+      "evidenceDate": "2026-07-23",
+      "primarySources": [
+        {
+          "id": "s17",
+          "label": "Harris County 2025 Annual Comprehensive Financial Report",
+          "urls": [
+            "https://auditor.harriscountytx.gov/portals/auditor/documents/ACFRs/HC%20Final%209-30-25.pdf"
+          ]
+        },
+        {
+          "id": "s26",
+          "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+          "urls": [
+            "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          ]
+        }
+      ]
+    },
+    {
+      "facility": "Regional and county toll authorities",
+      "geography": "Austin, East Texas, Houston, Fort Bend, and Rio Grande Valley",
+      "authority": "Applicable public authority, county, or public right-of-way owner",
+      "operator": "CTRMA, NET RMA, BCTRA, FBCTRA, MCTRA, CCRMA, or applicable public authority",
+      "tollRevenueClaimant": "The applicable public authority or pledged system",
+      "concession": "None",
+      "concessionTerm": "Ongoing public ownership or right of use",
+      "concessionStatus": "No private concession",
+      "billingAgency": "CTRMA, NTTA, HCTRA, or CCRMA, depending on the facility",
+      "evidenceDate": "2026-07-23",
+      "primarySources": [
+        {
+          "id": "s18",
+          "label": "CTRMA 2025 Annual Comprehensive Financial Report and governance page",
+          "urls": [
+            "https://www.mobilityauthority.com/wp-content/uploads/2025/11/FY-2025-CTRMA-Annual-Comprehensive-Financial-Report-revised_LR.pdf"
+          ]
+        },
+        {
+          "id": "s19",
+          "label": "Fort Bend County Toll Road Authority FY2025 Annual Financial Report",
+          "urls": [
+            "https://transparencydocs.fortbendcountytx.gov/Traditional_Finances/2025/FY2025_FBCTRA.pdf"
+          ]
+        },
+        {
+          "id": "s20",
+          "label": "Fort Bend Grand Parkway Toll Road Authority FY2025 Annual Financial Report",
+          "urls": [
+            "https://transparencydocs.fortbendcountytx.gov/Traditional_Finances/2025/FY2025_FBGPTRA.pdf"
+          ]
+        },
+        {
+          "id": "s26",
+          "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+          "urls": [
+            "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          ]
+        }
+      ]
+    },
+    {
+      "facility": "North Tarrant Express",
+      "geography": "Dallas–Fort Worth",
+      "authority": "State of Texas / TxDOT",
+      "operator": "NTE Mobility Partners, LLC",
+      "tollRevenueClaimant": "NTE Mobility Partners, LLC, subject to debt and public sharing",
+      "concession": "NTE Mobility Partners, LLC",
+      "concessionTerm": "2009–2061",
+      "concessionStatus": "Yes—time-limited operating and toll-revenue rights",
+      "billingAgency": "NTTA",
+      "evidenceDate": "2026-07-23",
+      "primarySources": [
+        {
+          "id": "s6",
+          "label": "Ferrovial Fact Book, May 2026, filed with the SEC",
+          "urls": [
+            "https://www.sec.gov/Archives/edgar/data/1468522/000162828026032618/ferrovial-factbook2026_s.htm"
+          ]
+        },
+        {
+          "id": "s7",
+          "label": "FHWA project profile, North Tarrant Express",
+          "urls": [
+            "https://www.fhwa.dot.gov/ipd/project_profiles/tx_north_tarrant.aspx"
+          ]
+        },
+        {
+          "id": "s26",
+          "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+          "urls": [
+            "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          ]
+        }
+      ]
+    },
+    {
+      "facility": "LBJ Express",
+      "geography": "Dallas–Fort Worth",
+      "authority": "State of Texas / TxDOT",
+      "operator": "LBJ Infrastructure Group, LLC",
+      "tollRevenueClaimant": "LBJ Infrastructure Group, LLC, subject to debt and public sharing",
+      "concession": "LBJ Infrastructure Group, LLC",
+      "concessionTerm": "2009–2061",
+      "concessionStatus": "Yes—time-limited operating and toll-revenue rights",
+      "billingAgency": "NTTA",
+      "evidenceDate": "2026-07-23",
+      "primarySources": [
+        {
+          "id": "s6",
+          "label": "Ferrovial Fact Book, May 2026, filed with the SEC",
+          "urls": [
+            "https://www.sec.gov/Archives/edgar/data/1468522/000162828026032618/ferrovial-factbook2026_s.htm"
+          ]
+        },
+        {
+          "id": "s8",
+          "label": "FHWA project profile, LBJ Express",
+          "urls": [
+            "https://www.fhwa.dot.gov/ipd/project_profiles/tx_lbj_express.aspx"
+          ]
+        },
+        {
+          "id": "s26",
+          "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+          "urls": [
+            "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          ]
+        }
+      ]
+    },
+    {
+      "facility": "NTE 35W",
+      "geography": "Dallas–Fort Worth",
+      "authority": "State of Texas / TxDOT",
+      "operator": "NTE Mobility Partners Segments 3, LLC",
+      "tollRevenueClaimant": "NTE Mobility Partners Segments 3, LLC, subject to debt and public sharing",
+      "concession": "NTE Mobility Partners Segments 3, LLC",
+      "concessionTerm": "2013–2061",
+      "concessionStatus": "Yes—time-limited operating and toll-revenue rights",
+      "billingAgency": "NTTA",
+      "evidenceDate": "2026-07-23",
+      "primarySources": [
+        {
+          "id": "s6",
+          "label": "Ferrovial Fact Book, May 2026, filed with the SEC",
+          "urls": [
+            "https://www.sec.gov/Archives/edgar/data/1468522/000162828026032618/ferrovial-factbook2026_s.htm"
+          ]
+        },
+        {
+          "id": "s9",
+          "label": "FHWA project profile, NTE 35W",
+          "urls": [
+            "https://www.fhwa.dot.gov/ipd/project_profiles/tx_north_tarrant_3a3b.aspx"
+          ]
+        },
+        {
+          "id": "s26",
+          "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+          "urls": [
+            "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          ]
+        }
+      ]
+    },
+    {
+      "facility": "SH 130 Segments 5–6",
+      "geography": "Austin–San Antonio corridor",
+      "authority": "State of Texas / TxDOT",
+      "operator": "SH 130 Concession Company, LLC",
+      "tollRevenueClaimant": "SH 130 Concession Company, LLC, after debt and public sharing",
+      "concession": "SH 130 Concession Company, LLC",
+      "concessionTerm": "2007–2062",
+      "concessionStatus": "Yes—time-limited operating and toll-revenue rights",
+      "billingAgency": "HCTRA",
+      "evidenceDate": "2026-07-23",
+      "primarySources": [
+        {
+          "id": "s10",
+          "label": "TxDOT, SH 130 Segments 5–6 executed agreements",
+          "urls": [
+            "https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh130/executed-agreements.html"
+          ]
+        },
+        {
+          "id": "s11",
+          "label": "U.S. DOT Build America Bureau, SH 130 Segments 5–6 project profile",
+          "urls": [
+            "https://www.transportation.gov/buildamerica/projects/sh-130-segments-5-and-6"
+          ]
+        },
+        {
+          "id": "s13",
+          "label": "Kentucky Public Pensions Authority, Project Spurs investment recommendation, September 6, 2024",
+          "urls": [
+            "https://www.kyret.ky.gov/About/Meeting-Calendar/Materials/September%206%202024%20KRS%20Investment%20Committee%20Meeting%20Materials.pdf"
+          ]
+        },
+        {
+          "id": "s14",
+          "label": "SH 130 Concession Company, current company history and FAQs",
+          "urls": [
+            "https://mysh130.com/about/company/"
+          ]
+        },
+        {
+          "id": "s26",
+          "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+          "urls": [
+            "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          ]
+        }
+      ]
+    },
+    {
+      "facility": "SH 288 managed lanes (former concession)",
+      "geography": "Houston",
+      "authority": "State of Texas / TxDOT",
+      "operator": "Texas Transportation Finance Corporation / public structure",
+      "tollRevenueClaimant": "Public project structure",
+      "concession": "None since October 8, 2024",
+      "concessionTerm": "Private term ended; original expiry was March 2068",
+      "concessionStatus": "No current private rights; the concession was terminated",
+      "billingAgency": "HCTRA",
+      "evidenceDate": "2026-07-23",
+      "primarySources": [
+        {
+          "id": "s1",
+          "label": "TxDOT, SH 288 Managed Lanes — executed agreements and termination page",
+          "urls": [
+            "https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh288-toll-lanes/executed-agreements.html"
+          ]
+        },
+        {
+          "id": "s2",
+          "label": "Texas Transportation Commission, July 30, 2024 minutes and July 31, 2025 minute order",
+          "urls": [
+            "https://www.txdot.gov/content/dam/docs/commission/2024/0730/minutes.pdf",
+            "https://www.txdot.gov/content/dam/docs/commission/2025/0731/8.pdf"
+          ]
+        },
+        {
+          "id": "s3",
+          "label": "U.S. DOT Build America Bureau, SH 288 project profile",
+          "urls": [
+            "https://www.transportation.gov/buildamerica/projects/state-highway-sh-288-toll-lanes-project"
+          ]
+        },
+        {
+          "id": "s21",
+          "label": "TxDOT HB 803 Report, FY2025",
+          "urls": [
+            "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf"
+          ]
+        },
+        {
+          "id": "s22",
+          "label": "TxDOT 2025 Popular Annual Financial Report",
+          "urls": [
+            "https://www.txdot.gov/content/dam/docs/division/fin/pafr/2025-popular-annual-financial-report.pdf"
+          ]
+        },
+        {
+          "id": "s26",
+          "label": "TxDOT, Toll roads in Texas operator and billing inventory",
+          "urls": [
+            "https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
+          ]
+        }
+      ]
+    }
+  ]
+}

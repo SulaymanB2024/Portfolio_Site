@@ -204,8 +204,8 @@ export default function AtlasSampleCrawlPage() {
           <p className="max-w-3xl text-sm leading-relaxed text-ink/64">
             {ATLAS_OPEN_CORPUS_RUN.captureMethod} {ATLAS_OPEN_CORPUS_RUN.claimLimit}
           </p>
-          <a href="/method#worked-finding" className="inline-flex min-h-11 items-center text-[11px] uppercase tracking-[0.2em] underline decoration-ink/24 underline-offset-4 transition-colors hover:text-ink/70">
-            Read the worked finding
+          <a href="https://www.void-agency.com/tools/technical-seo-audit-checklist" data-portfolio-cta="void_audit_kit" className="inline-flex min-h-11 items-center text-[11px] uppercase tracking-[0.2em] underline decoration-ink/24 underline-offset-4 transition-colors hover:text-ink/70">
+            Use the VOID audit kit
           </a>
         </div>
       </section>

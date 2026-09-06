@@ -28,6 +28,7 @@ import {
 import {
   TEXAS_TOLL_DIRECT_ANSWER,
   TEXAS_TOLL_OWNERSHIP_CSV_PATH,
+  TEXAS_TOLL_OWNERSHIP_JSON_PATH,
   TEXAS_TOLL_OWNERSHIP_ROWS,
 } from '../content/texasTollRoadOwnership';
 import { getSeoRoute } from '../seo/routes';
@@ -41,7 +42,7 @@ const headlineMetrics = [
   { value: '872', label: 'open toll miles', note: 'TxDOT statewide inventory' },
   { value: '4', label: 'large private concessions', note: 'after the SH 288 reversion' },
   { value: '$1.7317B', label: 'SH 288 termination payment', note: 'October 8, 2024' },
-  { value: '7', label: 'distinct ownership layers', note: 'from pavement to residual rights' },
+  { value: '9', label: 'source-linked tracker rows', note: 'evidence cutoff: July 23, 2026' },
 ] as const;
 
 const ownershipLayers = [
@@ -101,8 +102,9 @@ function TexasTollOwnershipLookup() {
     <div id="ownership-lookup" className="toll-ownership-lookup">
       <p className="toll-ownership-lookup__answer">{TEXAS_TOLL_DIRECT_ANSWER}</p>
       <p className="toll-ownership-lookup__guide">
-        Use this lookup to separate the owner of the pavement from the party operating the lanes,
-        claiming toll revenue, or issuing the bill.
+        Use this source-linked tracker to separate geography, public authority, lane operator,
+        concession rights, toll-revenue claimant, and billing agency. Evidence dates remain visible;
+        an older record is not silently presented as current.
       </p>
       <ul className="toll-ownership-lookup__concessions" aria-label="Four major private Texas toll-road concessions">
         <li><strong>North Tarrant Express</strong><span>TxDOT pavement; private operating and revenue rights through 2061.</span></li>
@@ -120,10 +122,13 @@ function TexasTollOwnershipLookup() {
           <thead>
             <tr>
               <th>Facility or system</th>
-              <th>Physical owner</th>
-              <th>Operator / revenue claimant</th>
-              <th>Private rights</th>
+              <th>Geography</th>
+              <th>Public authority</th>
+              <th>Operator</th>
+              <th>Concession</th>
+              <th>Revenue claimant</th>
               <th>Billing agency</th>
+              <th>Primary sources</th>
             </tr>
           </thead>
           <tbody>
@@ -131,19 +136,18 @@ function TexasTollOwnershipLookup() {
               <tr key={row.facility}>
                 <th scope="row" data-label="Facility or system">
                   {row.facility}
-                  <span>{row.region}</span>
                 </th>
-                <td data-label="Physical owner">{row.physicalOwner}</td>
-                <td data-label="Operator / revenue claimant">
-                  <strong>{row.operator}</strong>
-                  <span>{row.tollRevenueClaimant}</span>
-                </td>
-                <td data-label="Private rights">
-                  {row.privateRightsStatus}
+                <td data-label="Geography">{row.region}</td>
+                <td data-label="Public authority">{row.physicalOwner}</td>
+                <td data-label="Operator"><strong>{row.operator}</strong></td>
+                <td data-label="Concession">
+                  {row.concessionaire}
                   <span>{row.term}</span>
+                  <span>{row.privateRightsStatus}</span>
                 </td>
-                <td data-label="Billing agency">
-                  {row.billingAgency}
+                <td data-label="Revenue claimant">{row.tollRevenueClaimant}</td>
+                <td data-label="Billing agency">{row.billingAgency}</td>
+                <td data-label="Primary sources">
                   <span className="toll-ownership-lookup__sources">
                     {row.sourceIds.map((sourceId, index) => (
                       <Fragment key={sourceId}>
@@ -162,8 +166,11 @@ function TexasTollOwnershipLookup() {
         <a href="#the-texas-ownership-map">Read the ownership and concession map</a>
         <a href="#sh-130-the-danger-of-believing-the-traffic-model">Review the SH 130 concession case</a>
         <a href="/markets">Explore the markets research archive</a>
-        <a href={TEXAS_TOLL_OWNERSHIP_CSV_PATH} download>
-          Download the complete ownership matrix (CSV)
+        <a href={TEXAS_TOLL_OWNERSHIP_CSV_PATH} download data-portfolio-cta="toll_download_csv">
+          Download tracker (CSV)
+        </a>
+        <a href={TEXAS_TOLL_OWNERSHIP_JSON_PATH} download data-portfolio-cta="toll_download_json">
+          Download source-linked dataset (JSON)
         </a>
         <a
           href="https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html"
@@ -634,7 +641,7 @@ export default function TexasTollRoadArticlePage() {
       label: 'Markets archive',
     },
     hero: {
-      eyebrow: 'Texas toll-road ownership / cash flow / risk',
+      eyebrow: 'Texas toll-road ownership dataset / concessions / cash flow',
       title: TEXAS_TOLL_ARTICLE_TITLE,
       displayTitle: TEXAS_TOLL_ARTICLE_DISPLAY_TITLE,
       deck: TEXAS_TOLL_ARTICLE_DESCRIPTION,
@@ -654,7 +661,7 @@ export default function TexasTollRoadArticlePage() {
       },
       updated: {
         dateTime: TEXAS_TOLL_ARTICLE_UPDATED.replaceAll('.', '-'),
-        value: 'July 23, 2026',
+        value: 'September 3, 2026',
       },
       readTime: TEXAS_TOLL_ARTICLE_READ_TIME,
       evidence: `${TEXAS_TOLL_ARTICLE_SOURCES.length} sources`,
@@ -682,6 +689,7 @@ export default function TexasTollRoadArticlePage() {
       links: [
         { href: '/markets', label: 'Markets archive' },
         { href: '/research', label: 'Research archive' },
+        { href: TEXAS_TOLL_OWNERSHIP_JSON_PATH, label: 'Ownership dataset' },
         { href: '/research/search-console/technical-seo-public-data-infrastructure', label: 'Source methodology' },
         { href: '/about', label: 'About the author' },
       ],

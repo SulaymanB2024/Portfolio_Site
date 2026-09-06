@@ -78,11 +78,11 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
     aliases: ['/markets/ai-search-crawler-policy'],
     number: '01',
     category: 'CRAWLER POLICY',
-    title: 'AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot',
-    seoTitle: 'Robots.txt Guide for GPTBot, OAI-SearchBot, and AI Crawlers',
-    subtitle: 'Copy-ready host rules for eight named product tokens, with exact Allow, Disallow, sitemap, and release checks.',
+    title: 'AI Crawler Robots.txt: Allow Search, Block Training, Verify Bots',
+    seoTitle: 'AI Crawler Robots.txt: Allow Search, Block Training',
+    subtitle: 'Choose the outcome first, then use exact GPTBot, OAI-SearchBot, Claude, and Perplexity rules with a production verification checklist.',
     seoDescription:
-      'Compare OpenAI, Anthropic, and Perplexity crawlers, then copy robots.txt rules for AI search, training controls, or named-agent blocks.',
+      'Allow AI search, block model-training crawlers, or deny named agents with copy-ready robots.txt rules and a server-log verification checklist.',
     artwork: {
       kind: 'image',
       heroSrc: '/images/research/ai-crawler-policy-reader-hero.webp',
@@ -92,12 +92,12 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
       caption: 'Named crawler rules express policy; authentication and edge controls protect private resources.',
     },
     date: '2026.06.19',
-    dateModified: '2026.07.19',
+    dateModified: '2026.09.03',
     lastVerified: '2026.07.19',
     readTime: '10 MIN',
     author: 'SULAYMAN BOWLES',
     thesis:
-      'Treat search crawlers, training crawlers, and user-triggered fetchers as separate policy choices, then verify observed traffic with server logs and provider-published IP ranges.',
+      'To allow AI answer discovery while opting out of model-development crawling, allow the provider’s search token and disallow its training token. Treat user-triggered fetchers separately, then verify observed traffic with logs and provider-published IP ranges.',
     conclusion: {
       title: 'Choose the outcome before the token',
       content:
@@ -128,8 +128,8 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
       { label: 'Perplexity-User IP ranges', href: 'https://www.perplexity.ai/perplexity-user.json', lastVerified: '2026.07.14' },
     ],
     content: [
-      '/robots.txt is a host-scoped text file. Match the exact case-sensitive product token, then assign Allow: / or Disallow: /. Preserve the correct Sitemap line.',
-      'Release sequence: outcome → token → group → file merge → production fetch → access-log check.',
+      'Quick answer: robots.txt can express different choices for AI search discovery and model-development crawling. For OpenAI, OAI-SearchBot is the search-discovery token and GPTBot is the model-development token. A rule for one does not automatically control the other. Anthropic and Perplexity publish their own named tokens and behavior notes.',
+      'Start with the intended outcome, match the exact case-sensitive token, merge the rule into the host’s existing file, fetch the production response, and inspect logs. Robots policy is not authentication: use access controls for private content and provider-published address ranges when attributing observed requests.',
     ],
     sections: [
       {

@@ -104,7 +104,7 @@
       ],
       "intent": "implementation",
       "cohort": 1,
-      "direct_answer": "Robots.txt can express different crawl preferences for GPTBot, OAI-SearchBot, and other named agents, but those directives govern crawler access only; they do not guarantee indexing, rankings, citations, model inclusion, or retrieval by a user-requested tool.",
+      "direct_answer": "To allow OpenAI search discovery while opting out of model-development crawling, allow OAI-SearchBot and disallow GPTBot in separate robots.txt groups. Treat ChatGPT-User and other user-triggered fetchers separately. These rules express crawl preferences; they do not authenticate a bot or guarantee indexing, citations, training exclusion, or retrieval.",
       "evidence_gap": "Keep search, training, and user-requested retrieval agents distinct and tie every directive to provider documentation and a dated source map.",
       "original_artifact": "A maintained provider-agent matrix and public CSV source map for crawler identities, purposes, and policy boundaries.",
       "scope_boundary": "This page compares named AI crawlers; the robots access-control article explains the protocol and security boundary for crawlers generally.",
@@ -387,7 +387,7 @@
       "cohort": 1,
       "direct_answer": "Most Texas toll roads are publicly owned, not privately owned. TxDOT, counties, and public toll authorities own most roadways. Four major concessions—North Tarrant Express, LBJ Express, NTE 35W, and SH 130 Segments 5–6—give private companies time-limited operating and toll-revenue rights while Texas retains title to the pavement.",
       "evidence_gap": "Separate physical ownership from concession rights, operators, lenders, revenue claims, and residual control using project-level public records.",
-      "original_artifact": "A project-by-project ownership, operator, concession, debt, revenue-rights, valuation, and source-gap table.",
+      "original_artifact": "A nine-record source-linked ownership tracker and downloadable CSV/JSON dataset with geography, authority, operator, concession, billing, evidence-date, and primary-source fields.",
       "scope_boundary": "This is the only article targeting Texas toll-road ownership; supporting data-system articles discuss evidence methods rather than road ownership.",
       "related_articles": [
         "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
@@ -404,7 +404,7 @@
         "targetPosition": 1,
         "sustainedSnapshots": 3
       },
-      "last_verified": "2026-07-25"
+      "last_verified": "2026-07-23"
     },
     {
       "url": "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",

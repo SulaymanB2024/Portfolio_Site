@@ -6,7 +6,6 @@ import {
 import { PROGRAMMATIC_SEARCH_TARGETS } from '../src/seo/programmaticSearchTargets';
 import { getCanonicalRoutes, getSeoRoute } from '../src/seo/routes';
 import { buildSitemapXml } from '../src/seo/generatedPublicFiles';
-import { buildRouteStaticHtml } from '../src/seo/staticContent';
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -52,8 +51,8 @@ const programmaticPaths = new Set(
   [...PROGRAMMATIC_SEO_HUBS, ...PROGRAMMATIC_SEO_PAGES].map((item) => item.path),
 );
 assert(
-  canonicalRoutes.filter((route) => programmaticPaths.has(route.path)).length === programmaticPaths.size,
-  'One or more programmatic routes are missing from the canonical inventory',
+  canonicalRoutes.every((route) => !programmaticPaths.has(route.path)),
+  'A frozen programmatic route remains in the canonical inventory',
 );
 const sitemap = buildSitemapXml();
 const phraseIndex = new Map<string, string>();
@@ -61,9 +60,11 @@ const phraseIndex = new Map<string, string>();
 for (const page of PROGRAMMATIC_SEO_PAGES) {
   const route = getSeoRoute(page.path);
   assert(route, `${page.path}: missing SEO route`);
-  assert(page.indexabilityState === 'indexable', `${page.path}: draft, noindex, or failed-quality page entered the release`);
-  assert(route.includeInSitemap && !route.noindex, `${page.path}: passed page is not indexable`);
-  assert(sitemap.includes(`<loc>https://sulayman-bowles.dev${page.path}</loc>`), `${page.path}: missing from sitemap`);
+  assert(route.portfolioRoute?.lifecycle === 'merge', `${page.path}: missing merged lifecycle decision`);
+  assert(route.portfolioRoute.ownerDomain === 'www.void-agency.com', `${page.path}: VOID is not the owner`);
+  assert(route.includeInSitemap === false && route.noindex === true, `${page.path}: merged source remains indexable`);
+  assert(route.generateStatic !== true, `${page.path}: merged source still emits duplicate HTML`);
+  assert(!sitemap.includes(`<loc>https://sulayman-bowles.dev${page.path}</loc>`), `${page.path}: merged source remains in sitemap`);
   assert(page.sources.length >= 2, `${page.path}: fewer than two authoritative sources`);
   assert(page.sources.every((source) => source.href.startsWith('https://') && source.lastVerified), `${page.path}: source ledger is incomplete`);
   assert(page.diagnosticProcedure.length >= 4, `${page.path}: diagnostic procedure is incomplete`);
@@ -75,13 +76,6 @@ for (const page of PROGRAMMATIC_SEO_PAGES) {
 
   const words = programmaticPageWordCount(page);
   assert(words >= 800 && words <= 1200, `${page.path}: ${words} words; expected 800-1200`);
-  const staticHtml = buildRouteStaticHtml(route);
-  const first150 = normalizedWords(staticHtml).slice(0, 150).join(' ');
-  const answerLead = normalizedWords(page.directAnswer).slice(0, 16).join(' ');
-  assert(first150.includes(answerLead), `${page.path}: direct answer is not present in the first 150 static words`);
-  assert(page.relatedPaths.every((path) => staticHtml.includes(`href="${path}"`)), `${page.path}: missing a related-page link`);
-  assert(staticHtml.includes('href="/method"') && staticHtml.includes('href="/contact"'), `${page.path}: method/contact intent links are missing`);
-
   const wordsForPhrases = normalizedWords(narrative(page));
   const seen = new Set<string>();
   for (let index = 0; index <= wordsForPhrases.length - 16; index += 1) {
@@ -96,9 +90,10 @@ for (const page of PROGRAMMATIC_SEO_PAGES) {
 
 for (const hub of PROGRAMMATIC_SEO_HUBS) {
   const route = getSeoRoute(hub.path);
-  assert(route?.includeInSitemap && !route.noindex, `${hub.path}: hub is not indexable`);
-  assert(hub.indexabilityState === 'indexable', `${hub.path}: non-indexable hub entered the release`);
-  assert(sitemap.includes(`<loc>https://sulayman-bowles.dev${hub.path}</loc>`), `${hub.path}: hub missing from sitemap`);
+  assert(route?.portfolioRoute?.lifecycle === 'merge', `${hub.path}: hub lacks a merged lifecycle decision`);
+  assert(route.portfolioRoute.ownerDomain === 'www.void-agency.com', `${hub.path}: hub owner is not VOID`);
+  assert(route.includeInSitemap === false && route.generateStatic !== true, `${hub.path}: merged hub still publishes duplicate HTML`);
+  assert(!sitemap.includes(`<loc>https://sulayman-bowles.dev${hub.path}</loc>`), `${hub.path}: merged hub remains in sitemap`);
 }
 
 const programmaticRoutes = [...PROGRAMMATIC_SEO_HUBS, ...PROGRAMMATIC_SEO_PAGES].map((item) => getSeoRoute(item.path)!);
@@ -110,5 +105,5 @@ assertUnique(PROGRAMMATIC_SEO_PAGES.map((page) => page.primaryQuery.toLowerCase(
 assertUnique(programmaticRoutes.map((route) => JSON.stringify(route.jsonLd)), 'JSON-LD schema');
 
 console.log(
-  `Programmatic SEO verification passed: 36 leaf pages, 4 hubs, ${canonicalRoutes.length} canonical URLs, 800-1200 words per leaf, two or more sources, unique route/search/schema fields, and zero repeated 16-word passages.`,
+  `Programmatic SEO migration verification passed: 36 leaf pages and 4 hubs are frozen, source-preserved, omitted from generated HTML and sitemap, and assigned to direct VOID destinations; ${canonicalRoutes.length} retained canonical URLs remain.`,
 );

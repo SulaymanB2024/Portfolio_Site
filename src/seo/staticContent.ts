@@ -69,6 +69,7 @@ import {
 import {
   TEXAS_TOLL_DIRECT_ANSWER,
   TEXAS_TOLL_OWNERSHIP_CSV_PATH,
+  TEXAS_TOLL_OWNERSHIP_JSON_PATH,
   TEXAS_TOLL_OWNERSHIP_ROWS,
 } from '../content/texasTollRoadOwnership';
 import { markdownToHtml } from '../utils/markdownToHtml';
@@ -136,7 +137,7 @@ const methodCaseStudies = [
   {
     title: 'Service-Area Visibility Audit',
     copy: 'Mapped location pages, service pages, Google Business Profile signals, crawl structure, and local entity clarity to improve discovery in high-intent searches.',
-    href: '/austin-technical-seo',
+    href: 'https://www.void-agency.com/services/technical-seo-ai-search-visibility',
     cta: 'Open local SEO page',
   },
 ];
@@ -335,23 +336,26 @@ function articleSearchBriefStaticHtml(path: string, options: { includeDirectAnsw
 function texasTollOwnershipLookupStaticHtml() {
   const rows = TEXAS_TOLL_OWNERSHIP_ROWS.map(
     (row) => `<tr>
-            <th scope="row">${escapeHtml(row.facility)}<br /><small>${escapeHtml(row.region)}</small></th>
+            <th scope="row">${escapeHtml(row.facility)}</th>
+            <td>${escapeHtml(row.region)}</td>
             <td>${escapeHtml(row.physicalOwner)}</td>
-            <td><strong>${escapeHtml(row.operator)}</strong><br /><small>${escapeHtml(row.tollRevenueClaimant)}</small></td>
-            <td>${escapeHtml(row.privateRightsStatus)}<br /><small>${escapeHtml(row.term)}</small></td>
-            <td>${escapeHtml(row.billingAgency)}<br /><small>${row.sourceIds.map((sourceId) => `<a href="#source-${sourceId}">${sourceId.toUpperCase()}</a>`).join(', ')}</small></td>
+            <td><strong>${escapeHtml(row.operator)}</strong></td>
+            <td>${escapeHtml(row.concessionaire)}<br /><small>${escapeHtml(row.term)} · ${escapeHtml(row.privateRightsStatus)}</small></td>
+            <td>${escapeHtml(row.tollRevenueClaimant)}</td>
+            <td>${escapeHtml(row.billingAgency)}</td>
+            <td>${row.sourceIds.map((sourceId) => `<a href="#source-${sourceId}">${sourceId.toUpperCase()}</a>`).join(', ')}<br /><small>Evidence ${escapeHtml(row.evidenceDate)}</small></td>
           </tr>`,
   ).join('\n          ');
 
   return `<section id="ownership-lookup" aria-labelledby="ownership-lookup-title">
         <h2 id="ownership-lookup-title">Are Texas toll roads privately owned?</h2>
         <p>${escapeHtml(TEXAS_TOLL_DIRECT_ANSWER)}</p>
-        <p>Use this lookup to separate the physical owner from the operator, toll-revenue claimant, private-rights status, and billing agency. It also answers “Are toll roads in Texas privately owned?” and “Who owns Texas toll roads?” at the facility level.</p>
+        <p>Use this source-linked tracker to separate geography, public authority, operator, concession rights, toll-revenue claimant, billing agency, and evidence date. It also answers “Are toll roads in Texas privately owned?” and “Who owns Texas toll roads?” at the facility level.</p>
         <table>
-          <thead><tr><th>Facility or system</th><th>Physical owner</th><th>Operator / revenue claimant</th><th>Private rights</th><th>Billing agency</th></tr></thead>
+          <thead><tr><th>Facility or system</th><th>Geography</th><th>Public authority</th><th>Operator</th><th>Concession</th><th>Revenue claimant</th><th>Billing agency</th><th>Primary sources</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
-        <p><a href="${TEXAS_TOLL_OWNERSHIP_CSV_PATH}" download>Download the complete Texas toll-road ownership matrix (CSV)</a> · <a href="https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html">Compare TxDOT’s current operator inventory</a></p>
+        <p><a href="${TEXAS_TOLL_OWNERSHIP_CSV_PATH}" download>Download the tracker (CSV)</a> · <a href="${TEXAS_TOLL_OWNERSHIP_JSON_PATH}" download>Download the source-linked dataset (JSON)</a> · <a href="https://www.txdot.gov/discover/toll-roads-managed-lanes/txdot-toll-roads.html">Compare TxDOT’s operator inventory</a></p>
       </section>`;
 }
 
@@ -578,7 +582,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       : getProgrammaticPagesByFamily(programmaticHub.family);
     const collectionLinks = programmaticHub.family === 'all'
       ? `<h2>Diagnostic collections</h2>${linkList(PROGRAMMATIC_SEO_HUBS.filter((hub) => hub.family !== 'all').map((hub) => ({ label: hub.title, href: hub.path, description: hub.description })))}`
-      : `<p><a href="/research/technical-seo">Technical SEO diagnostic library</a></p>`;
+      : `<p><a href="https://www.void-agency.com/insights/technical-audits">Technical SEO diagnostic library</a></p>`;
 
     return articleShell(
       programmaticHub.title,
@@ -588,7 +592,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${pages.map((page) => `<h3><a href="${page.path}">${escapeHtml(page.title)}</a></h3><p>${escapeHtml(page.description)}</p>`).join('\n        ')}
         <h2>Implementation boundaries</h2>
         ${linkList([
-          { label: 'Read the technical SEO audit method', href: '/method', description: 'Service-process intent remains on the method route.' },
+          { label: 'Read the technical SEO audit method', href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist', description: 'Service-process intent remains on the method route.' },
           { label: 'Contact Sulayman Bowles', href: '/contact', description: 'Conversion and audit-intake endpoint.' },
           { label: 'Return to the research archive', href: '/research', description: 'Research notes and public evidence.' },
         ])}`,
@@ -617,9 +621,9 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>Continue the ${escapeHtml(programmaticPage.primaryQuery)} investigation through its family, evidence foundation, service method, or conversion endpoint.</p>
         ${linkList([
           { label: `${programmaticPage.family} guide collection`, href: familyHub },
-          { label: 'Technical SEO diagnostic library', href: '/research/technical-seo' },
+          { label: 'Technical SEO diagnostic library', href: 'https://www.void-agency.com/insights/technical-audits' },
           ...programmaticPage.relatedPaths.map((href) => ({ label: getSeoRouteLabel(href), href })),
-          { label: 'Technical SEO audit method', href: '/method' },
+          { label: 'Technical SEO audit method', href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist' },
           { label: programmaticPage.cta.label, href: programmaticPage.cta.href },
         ])}
       </section>`,
@@ -660,13 +664,13 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <p>A source-led review of the operational realities behind businesses that claim AI management.</p>
         <h3><a href="/atlas">Atlas technical SEO audit software</a></h3>
         <p>A technical SEO crawler and evidence system that preserves raw and rendered pages, tests indexation, canonicals, links, and structured data, then exports reviewable findings.</p>
-        <h3><a href="/method">Technical SEO audit services</a></h3>
+        <h3><a href="https://www.void-agency.com/tools/technical-seo-audit-checklist">Technical SEO audit services</a></h3>
         <p>A fixed-scope audit process for crawlability, indexation, rendering, internal links, structured data, analytics, implementation, and rerun checks.</p>
-        <h3><a href="/austin-technical-seo">Austin technical SEO consultant</a></h3>
+        <h3><a href="https://www.void-agency.com/services/technical-seo-ai-search-visibility">Austin technical SEO consultant</a></h3>
         <p>Local technical SEO audits for Austin teams that need service pages, crawl paths, evidence, and implementation priorities reviewed.</p>
         <h3><a href="/research">Technical SEO research</a></h3>
         <p>Source-led notes on crawlability, crawler policy, public search data, canonical identity, AI systems, and evidence limits.</p>
-        <h3><a href="/research/technical-seo">Technical SEO diagnostic library</a></h3>
+        <h3><a href="https://www.void-agency.com/insights/technical-audits">Technical SEO diagnostic library</a></h3>
         <p>Evidence-backed issue guides, platform playbooks, and audit checklists with reproducible repair gates.</p>
         <h3><a href="/markets/who-owns-texas-toll-roads">Texas Toll-Road Ownership Map</a></h3>
         <p>Source-led infrastructure research on public ownership, private concessions, operators, debt claims, revenue rights, and missing facts.</p>
@@ -742,7 +746,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl', description: 'Dated raw/render capture, source records, and exports.' },
           { label: 'GitHub profile', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
           { label: 'View the GitHub repo for the audit CLI', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-', description: 'Public scraper/audit code.' },
-          { label: 'Read the technical SEO audit method', href: '/method', description: 'Service/process context.' },
+          { label: 'Read the technical SEO audit method', href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist', description: 'Service/process context.' },
           { label: 'Request an audit', href: '/contact', description: 'Audit intake for technical SEO, analytics, and markets research.' },
         ])}
         <h2>System Intelligence You Can Act On</h2>
@@ -770,7 +774,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${atlasSampleTableStaticHtml()}
         <h2>Contextual Links</h2>
         ${linkList([
-          { label: 'Read the technical SEO audit method', href: '/method' },
+          { label: 'Read the technical SEO audit method', href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist' },
           { label: 'View the GitHub repo for the audit CLI', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-' },
           { label: 'Request an audit', href: '/contact' },
         ])}`,
@@ -797,8 +801,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Evidence Links</h2>
         ${linkList([
           { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl' },
-          { label: 'Read the worked finding', href: '/method#worked-finding' },
-          { label: 'Austin technical SEO consultant', href: '/austin-technical-seo' },
+          { label: 'Read the worked finding', href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist' },
+          { label: 'Austin technical SEO consultant', href: 'https://www.void-agency.com/services/technical-seo-ai-search-visibility' },
           { label: 'View Void Agency', href: 'https://www.void-agency.com/' },
           { label: 'Request an audit', href: '/contact' },
         ])}`,
@@ -835,8 +839,8 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Related Context</h2>
         ${linkList([
           { label: 'See an Atlas sample crawl run', href: '/atlas/sample-crawl' },
-          { label: 'Review technical SEO audit services and process', href: '/method' },
-          { label: 'Austin technical SEO consultant', href: '/austin-technical-seo' },
+          { label: 'Review technical SEO audit services and process', href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist' },
+          { label: 'Austin technical SEO consultant', href: 'https://www.void-agency.com/services/technical-seo-ai-search-visibility' },
         ])}`,
     );
   }
@@ -875,7 +879,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Contextual Links</h2>
         ${linkList([
           { label: 'Request an Austin technical SEO audit', href: '/contact' },
-          { label: 'Review technical SEO audit services and process', href: '/method' },
+          { label: 'Review technical SEO audit services and process', href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist' },
           { label: 'See the Atlas open-corpus demonstration', href: '/atlas/sample-crawl' },
           { label: 'View Void Agency', href: 'https://www.void-agency.com/' },
         ])}`,
@@ -903,7 +907,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${linkList([
           { label: 'Atlas technical SEO console', href: '/atlas', description: 'Product case study.' },
           { label: 'Markets research index', href: '/markets', description: 'Research notes.' },
-          { label: 'Void Agency method', href: '/method', description: 'Technical SEO process.' },
+          { label: 'Void Agency method', href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist', description: 'Technical SEO process.' },
           { label: 'GitHub', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
           { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
           { label: 'Download PDF résumé', href: '/Sulayman_Bowles_Resume.pdf', description: 'Current PDF résumé.' },
@@ -1014,7 +1018,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
           { label: investmentMemo ? 'Markets Research' : 'Research Notes', href: investmentMemo ? '/markets' : '/research' },
           { label: 'Home', href: '/' },
           { label: 'Atlas technical SEO audit software', href: '/atlas' },
-          { label: 'Technical SEO audit services', href: '/method' },
+          { label: 'Technical SEO audit services', href: 'https://www.void-agency.com/tools/technical-seo-audit-checklist' },
           { label: 'Sulayman Bowles resume', href: '/resume' },
         ])}`,
     );

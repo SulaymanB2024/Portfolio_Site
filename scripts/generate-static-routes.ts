@@ -5,6 +5,7 @@ import { ALL_ARTICLES, getArticleAliases, getArticlePath } from '../src/content/
 import { buildRouteStaticHtml, buildSitemapStaticHtml } from '../src/seo/staticContent';
 import { getArticleSearchTarget } from '../src/seo/articleSearchTargets';
 import { buildSitemapXml } from '../src/seo/generatedPublicFiles';
+import { robotsForSeoPortfolioRoute } from '../src/seo/portfolioRoutes';
 import { getCanonicalRoutes, getRouteTone, NOT_FOUND_ROUTE, SEO_ROUTES, type SeoRoute } from '../src/seo/routes';
 import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME } from '../src/seo/site';
 
@@ -65,10 +66,18 @@ function routeOutputPath(route: SeoRoute) {
 }
 
 function buildHead(route: SeoRoute, assetTags: string) {
-  const canonicalUrl = absoluteUrl(route.path);
+  const canonicalUrl = route.portfolioRoute?.canonical ?? absoluteUrl(route.path);
   const imageUrl = absoluteUrl(route.image ?? DEFAULT_OG_IMAGE);
   const ogType = route.pageType === 'article' ? 'article' : 'website';
-  const robots = route.noindex || !route.includeInSitemap ? 'noindex,nofollow' : 'index,follow';
+  const robots = route.portfolioRoute
+    ? robotsForSeoPortfolioRoute(route.portfolioRoute)
+    : 'noindex,follow';
+  const canonicalTag = route.path === '/404'
+    ? ''
+    : `<link rel="canonical" href="${canonicalUrl}" />`;
+  const ogUrlTag = route.path === '/404'
+    ? ''
+    : `<meta property="og:url" content="${canonicalUrl}" />`;
   const dark = getRouteTone(route.path) === 'dark';
   const staticBackground = dark ? '#080807' : '#f4f4f0';
   const staticForeground = dark ? '#f4f4f0' : '#080807';
@@ -89,13 +98,13 @@ function buildHead(route: SeoRoute, assetTags: string) {
     <link rel="alternate" type="text/plain" title="LLMs text" href="/llms.txt" />
     <title>${escapeHtml(route.title)}</title>
     <meta name="description" content="${escapeHtml(route.description)}" />
-    <link rel="canonical" href="${canonicalUrl}" />
+    ${canonicalTag}
     <meta name="robots" content="${robots}" />
     <meta property="og:site_name" content="${escapeHtml(SITE_NAME)}" />
     <meta property="og:title" content="${escapeHtml(route.title)}" />
     <meta property="og:description" content="${escapeHtml(route.description)}" />
     <meta property="og:type" content="${ogType}" />
-    <meta property="og:url" content="${canonicalUrl}" />
+    ${ogUrlTag}
     <meta property="og:image" content="${imageUrl}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(route.title)}" />
@@ -540,7 +549,7 @@ ${route.staticHtml}
     ['About', '/about'],
     ['Resume', '/resume'],
     ['Atlas', '/atlas'],
-    ['Method', '/method'],
+    ['VOID audit kit', 'https://www.void-agency.com/tools/technical-seo-audit-checklist'],
     ['Markets', '/markets'],
   ];
 

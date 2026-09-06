@@ -1,0 +1,301 @@
+{
+  "schema_version": "SeoPortfolioRedirectTableV1",
+  "generated_at": "2026-09-03",
+  "source_domain": "sulayman-bowles.dev",
+  "redirects": [
+    {
+      "source": "/method",
+      "destination": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "status": 308,
+      "intent_cluster": "void:/tools/technical-seo-audit-checklist",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/austin-technical-seo",
+      "destination": "https://www.void-agency.com/services/technical-seo-ai-search-visibility",
+      "status": 308,
+      "intent_cluster": "void:/services/technical-seo-ai-search-visibility",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/platforms",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/checklists",
+      "destination": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "status": 308,
+      "intent_cluster": "void:/tools/technical-seo-audit-checklist",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/missing-canonical",
+      "destination": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "status": 308,
+      "intent_cluster": "void:/insights/choose-a-canonical-url-representative",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/multiple-canonical-tags",
+      "destination": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "status": 308,
+      "intent_cluster": "void:/insights/choose-a-canonical-url-representative",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/canonical-to-redirect",
+      "destination": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "status": 308,
+      "intent_cluster": "void:/insights/choose-a-canonical-url-representative",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/canonical-noindex-conflict",
+      "destination": "https://www.void-agency.com/insights/choose-a-canonical-url-representative",
+      "status": 308,
+      "intent_cluster": "void:/insights/choose-a-canonical-url-representative",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/redirect-chain",
+      "destination": "https://www.void-agency.com/insights/redirect-chain-and-loop-qa",
+      "status": 308,
+      "intent_cluster": "void:/insights/redirect-chain-and-loop-qa",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/redirect-loop",
+      "destination": "https://www.void-agency.com/insights/redirect-chain-and-loop-qa",
+      "status": 308,
+      "intent_cluster": "void:/insights/redirect-chain-and-loop-qa",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/soft-404",
+      "destination": "https://www.void-agency.com/insights/client-side-soft-404-detection",
+      "status": 308,
+      "intent_cluster": "void:/insights/client-side-soft-404-detection",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/robots-blocked-indexable-url",
+      "destination": "https://www.void-agency.com/insights/crawlability-audit-before-indexing-diagnosis",
+      "status": 308,
+      "intent_cluster": "void:/insights/crawlability-audit-before-indexing-diagnosis",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/noindex-in-sitemap",
+      "destination": "https://www.void-agency.com/insights/xml-sitemap-canonical-consistency-audit",
+      "status": 308,
+      "intent_cluster": "void:/insights/xml-sitemap-canonical-consistency-audit",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/sitemap-redirects",
+      "destination": "https://www.void-agency.com/insights/xml-sitemap-canonical-consistency-audit",
+      "status": 308,
+      "intent_cluster": "void:/insights/xml-sitemap-canonical-consistency-audit",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/orphan-page",
+      "destination": "https://www.void-agency.com/insights/orphan-url-discovery-and-disposition",
+      "status": 308,
+      "intent_cluster": "void:/insights/orphan-url-discovery-and-disposition",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/excessive-crawl-depth",
+      "destination": "https://www.void-agency.com/insights/internal-link-evidence-report",
+      "status": 308,
+      "intent_cluster": "void:/insights/internal-link-evidence-report",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/broken-internal-link",
+      "destination": "https://www.void-agency.com/insights/crawlable-internal-links-in-react",
+      "status": 308,
+      "intent_cluster": "void:/insights/crawlable-internal-links-in-react",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/javascript-only-link",
+      "destination": "https://www.void-agency.com/insights/crawlable-internal-links-in-react",
+      "status": 308,
+      "intent_cluster": "void:/insights/crawlable-internal-links-in-react",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/raw-rendered-content-mismatch",
+      "destination": "https://www.void-agency.com/insights/raw-html-rendered-dom-parity-audit",
+      "status": 308,
+      "intent_cluster": "void:/insights/raw-html-rendered-dom-parity-audit",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/structured-data-content-drift",
+      "destination": "https://www.void-agency.com/insights/structured-data-drift-audit",
+      "status": 308,
+      "intent_cluster": "void:/insights/structured-data-drift-audit",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/duplicate-title-tag",
+      "destination": "https://www.void-agency.com/insights/hydrated-head-metadata-parity",
+      "status": 308,
+      "intent_cluster": "void:/insights/hydrated-head-metadata-parity",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/duplicate-meta-description",
+      "destination": "https://www.void-agency.com/insights/hydrated-head-metadata-parity",
+      "status": 308,
+      "intent_cluster": "void:/insights/hydrated-head-metadata-parity",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/faceted-navigation-crawl-trap",
+      "destination": "https://www.void-agency.com/insights/faceted-navigation-indexing-policy",
+      "status": 308,
+      "intent_cluster": "void:/insights/faceted-navigation-indexing-policy",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/parameter-url-duplication",
+      "destination": "https://www.void-agency.com/insights/parameter-url-duplication-control",
+      "status": 308,
+      "intent_cluster": "void:/insights/parameter-url-duplication-control",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/pagination-infinite-scroll-indexing",
+      "destination": "https://www.void-agency.com/insights/pagination-and-infinite-scroll-search-paths",
+      "status": 308,
+      "intent_cluster": "void:/insights/pagination-and-infinite-scroll-search-paths",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/hreflang-return-tag-error",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/mobile-desktop-content-mismatch",
+      "destination": "https://www.void-agency.com/insights/raw-html-rendered-dom-parity-audit",
+      "status": 308,
+      "intent_cluster": "void:/insights/raw-html-rendered-dom-parity-audit",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/issues/lazy-loaded-primary-content",
+      "destination": "https://www.void-agency.com/insights/lazy-loaded-primary-content-release-check",
+      "status": 308,
+      "intent_cluster": "void:/insights/lazy-loaded-primary-content-release-check",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/platforms/nextjs",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/platforms/react-vite",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/platforms/wordpress",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/platforms/shopify",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/platforms/webflow",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/platforms/squarespace",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/platforms/wix",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/platforms/headless-cms",
+      "destination": "https://www.void-agency.com/insights/technical-audits",
+      "status": 308,
+      "intent_cluster": "void:/insights/technical-audits",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/checklists/javascript-seo-audit",
+      "destination": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "status": 308,
+      "intent_cluster": "void:/tools/technical-seo-audit-checklist",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/checklists/ecommerce-technical-seo-audit",
+      "destination": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "status": 308,
+      "intent_cluster": "void:/tools/technical-seo-audit-checklist",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/checklists/saas-technical-seo-audit",
+      "destination": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "status": 308,
+      "intent_cluster": "void:/tools/technical-seo-audit-checklist",
+      "owner_domain": "www.void-agency.com"
+    },
+    {
+      "source": "/research/technical-seo/checklists/local-business-technical-seo-audit",
+      "destination": "https://www.void-agency.com/tools/technical-seo-audit-checklist",
+      "status": 308,
+      "intent_cluster": "void:/tools/technical-seo-audit-checklist",
+      "owner_domain": "www.void-agency.com"
+    }
+  ]
+}

@@ -10,16 +10,13 @@ for (const retired of ['/simple', '/ai-information', '/case-studies/technical-se
   assert(!nav.includes(`href: '${retired}'`), `navigation retains ${retired}`);
 }
 
-const method = read('dist/method/index.html');
-assert(method.includes('id="worked-finding"'), 'method: worked finding anchor missing');
-assert(method.includes('href="/method#worked-finding"') || method.includes('href="#worked-finding"'), 'method: worked finding link missing');
-
-const austin = read('dist/austin-technical-seo/index.html');
-for (const required of ['Austin Crawlability Pilot Snapshot', 'Query Examples Before Page Expansion', 'Request an Austin technical SEO audit']) {
-  assert(textFromHtml(austin).includes(required), `austin: missing ${required}`);
-}
-for (const stale of ['Common Austin site problems.', 'Sample audit output.', 'Use this format for your site audit.']) {
-  assert(!textFromHtml(austin).includes(stale), `austin: redundant section remains ${stale}`);
+const vercelRoutes = JSON.parse(read('vercel.json')).routes;
+for (const [source, destination] of [
+  ['/method', 'https://www.void-agency.com/tools/technical-seo-audit-checklist'],
+  ['/austin-technical-seo', 'https://www.void-agency.com/services/technical-seo-ai-search-visibility'],
+]) {
+  assert(!fs.existsSync(path.resolve(`dist${source}/index.html`)), `${source}: migrated page must not emit duplicate HTML`);
+  assert(vercelRoutes.some((route) => !route.has && route.src === source && route.status === 308 && route.headers?.Location === destination), `${source}: exact permanent destination is missing`);
 }
 
 const routes = read('src/seo/routes.ts');

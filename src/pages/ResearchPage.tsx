@@ -38,7 +38,6 @@ const RESEARCH_FILTERS: readonly ResearchFilter[] = [
 
 function publicationAction(href: string) {
   if (href === '/atlas/sample-crawl') return 'Inspect sample';
-  if (href === '/austin-technical-seo') return 'Open pilot';
   if (href === '/viralbench-codex-agent-harness') return 'Read design';
   return 'Read article';
 }
@@ -248,7 +247,7 @@ export default function ResearchPage() {
       <section className="relative z-10 border-b border-current/12">
         <PageFrame className="py-16 xl:py-24">
           <SectionHeader eyebrow="Context" title="From research to implementation.">
-            Follow the evidence into the audit software, service process, local study, portfolio, or direct project brief it supports.
+            Follow the evidence into the dataset, audit software, canonical VOID implementation path, portfolio, or direct project brief it supports.
           </SectionHeader>
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
             {researchContextLinks.map(({ label, href, description }) => (

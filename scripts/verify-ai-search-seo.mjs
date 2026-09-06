@@ -210,14 +210,18 @@ for (const [pathname, file] of staticRoutes) {
   const html = read(file);
   const canonicalUrl = canonicalUrlFor(pathname);
   const isIndexable = sitemapPaths.has(pathname);
-  const expectedRobots = isIndexable ? 'index,follow' : 'noindex,nofollow';
+  const expectedRobots = isIndexable ? 'index,follow' : 'noindex,follow';
 
   assert(html.includes('<main class="seo-static-crawl-content">'), `${pathname}: static semantic main is missing`);
   assert(/<h1\b/i.test(html), `${pathname}: static H1 is missing`);
 
   const canonicalLinks = linkTags(html, 'canonical');
-  assert(canonicalLinks.length === 1, `${pathname}: expected exactly one canonical link`);
-  assert(attr(canonicalLinks[0], 'href') === canonicalUrl, `${pathname}: canonical link mismatch`);
+  if (pathname === '/404') {
+    assert(canonicalLinks.length === 0, `${pathname}: a true 404 must not claim a homepage canonical`);
+  } else {
+    assert(canonicalLinks.length === 1, `${pathname}: expected exactly one canonical link`);
+    assert(attr(canonicalLinks[0], 'href') === canonicalUrl, `${pathname}: canonical link mismatch`);
+  }
 
   const llmsAlternates = linkTags(html, 'alternate').filter((tag) => attr(tag, 'type') === 'text/plain');
   assert(
@@ -268,7 +272,11 @@ for (const [pathname, file] of staticRoutes) {
   assert(titles[0].length >= 10 && titles[0].length <= 70, `${pathname}: title length outside 10-70`);
 
   const ogUrls = metaTags(html, 'property', 'og:url');
-  assert(ogUrls.length === 1 && attr(ogUrls[0], 'content') === canonicalUrl, `${pathname}: og:url mismatch`);
+  if (pathname === '/404') {
+    assert(ogUrls.length === 0, `${pathname}: a true 404 must not publish og:url`);
+  } else {
+    assert(ogUrls.length === 1 && attr(ogUrls[0], 'content') === canonicalUrl, `${pathname}: og:url mismatch`);
+  }
 
   const scripts = jsonLdScripts(html);
   assert(scripts.length === 1, `${pathname}: expected exactly one JSON-LD script`);
@@ -341,8 +349,14 @@ for (const proof of ['/research/ai-systems/the-first-ai-managers', '/atlas', '/m
   assert(home.includes(`href="${proof}"`), `home: missing proof link ${proof}`);
 }
 assert(textFromHtml(home).includes('Technical SEO, AI product, systems, and investment research.'), 'home: missing positioning');
-assert(home.includes('href="/method">Technical SEO audit services</a>'), 'home: missing technical SEO audit services anchor');
-assert(home.includes('href="/austin-technical-seo">Austin technical SEO consultant</a>'), 'home: missing Austin technical SEO consultant anchor');
+assert(
+  home.includes('href="https://www.void-agency.com/tools/technical-seo-audit-checklist"'),
+  'home: missing consolidated VOID audit-kit destination',
+);
+assert(
+  home.includes('href="https://www.void-agency.com/services/technical-seo-ai-search-visibility"'),
+  'home: missing consolidated VOID service destination',
+);
 
 const resume = read('dist/resume/index.html');
 for (const fact of ['Bachelor of Business Administration in Finance', 'Bachelor of Arts in Music', 'Expected May 2028', 'AI Product Manager Intern', 'Confidential B2B manufacturer']) {
@@ -356,10 +370,8 @@ assert(fs.existsSync(path.resolve('public/Sulayman_Bowles_Resume.pdf')), 'public
 const about = read('dist/about/index.html');
 assert(textFromHtml(about).includes('current second degree'), 'about: music must be current, not historical');
 
-const austin = read('dist/austin-technical-seo/index.html');
-for (const expected of ['Austin Technical SEO Consultant', 'Crawlability and indexation audit', 'JavaScript rendering and templates', 'Structured data and AI search readiness']) {
-  assert(textFromHtml(austin).includes(expected), `Austin SEO: missing ${expected}`);
-}
+assert(!fs.existsSync(path.resolve('dist/austin-technical-seo/index.html')), 'Austin SEO: merged source emitted duplicate static HTML');
+assert(!fs.existsSync(path.resolve('dist/method/index.html')), 'Method: merged source emitted duplicate static HTML');
 
 const atlas = read('dist/atlas/sample-crawl/index.html');
 for (const expected of ['Atlas Open-Corpus Demonstration', 'raw-versus-rendered', 'Traceable Findings', 'Confidence', 'Download open-corpus CSV', 'Download capture manifest']) {
@@ -373,7 +385,8 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('28 Notes and Artifacts'), 'research: publication count is not derived as twenty-eight');
+assert(textFromHtml(research).includes('27 Notes and Artifacts'), 'research: expected 27 retained publications and artifacts');
+assert(research.includes('href="/research/data-systems/us-rare-earth-magnet-manufacturing-capacity"'), 'research: rare-earth capacity study must be linked from the archive');
 assert(textFromHtml(research).includes('The First AI Managers'), 'research: featured article missing');
 assert(textFromHtml(research).includes('Who Owns Austin’s Home-Service Companies?'), 'research: Austin home-service ownership article missing');
 assert(textFromHtml(research).includes('Who Funds Waymo’s Hardware?'), 'research: Waymo financing article missing');
@@ -549,10 +562,10 @@ for (const href of [
 const toll = read('dist/markets/who-owns-texas-toll-roads/index.html');
 assert(/<sup class="article-citation"><a href="#source-s1"/.test(toll), 'toll roads: citation markers are not linked superscripts');
 assert(!toll.includes('shareholders.S1S2S3'), 'toll roads: citation markers remain adjacent to prose');
-assert(toll.includes('<title>Who Owns Texas Toll Roads? Public Owners &amp; 4 Concessions</title>'), 'toll roads: gated title variant changed');
+assert(toll.includes('<title>Who Owns Texas Toll Roads? Owners, Operators &amp; Concessions</title>'), 'toll roads: ownership-tracker title changed');
 assert(
-  toll.includes('Most Texas toll roads are publicly owned. See the four major private concessions, who operates each road, who collects toll revenue, and where ownership ends.'),
-  'toll roads: approved description is missing',
+  toll.includes('Texas toll-road ownership tracker: compare public authorities, operators, private concessions, regions, billing agencies, and cited primary sources.'),
+  'toll roads: ownership-tracker description is missing',
 );
 assert(
   textFromHtml(toll).includes('Most Texas toll roads are publicly owned, not privately owned. TxDOT, counties, and public toll authorities own most roadways.'),
@@ -560,11 +573,19 @@ assert(
 );
 assert(toll.includes('id="ownership-lookup"'), 'toll roads: early ownership lookup is missing');
 assert(toll.includes('href="/research/texas-toll-road-ownership-2026.csv"'), 'toll roads: ownership CSV link is missing');
+assert(toll.includes('href="/research/texas-toll-road-ownership-2026.json"'), 'toll roads: ownership JSON link is missing');
 const tollGraph = graph(toll);
 assert(tollGraph.some((item) => item['@type'] === 'Article'), 'toll roads: Article schema is missing');
 assert(tollGraph.some((item) => item['@type'] === 'BreadcrumbList'), 'toll roads: Breadcrumb schema is missing');
 const tollCsv = read('public/research/texas-toll-road-ownership-2026.csv');
 assert(tollCsv.trim().split('\n').length === 10, 'toll roads: ownership CSV must contain one header and nine data rows');
+const tollDataset = JSON.parse(read('public/research/texas-toll-road-ownership-2026.json'));
+assert(tollDataset.schema_version === 'texas_toll_road_ownership_v1', 'toll roads: dataset schema version drifted');
+assert(tollDataset.records.length === 9, 'toll roads: JSON dataset must contain nine records');
+assert(
+  tollDataset.records.every((record) => record.facility && record.geography && record.authority && record.operator && record.primarySources.length > 0),
+  'toll roads: JSON records must carry facility, geography, authority, operator, and primary-source fields',
+);
 
 const publicData = read('dist/research/search-console/technical-seo-public-data-infrastructure/index.html');
 for (const expected of ['URL-to-evidence pipeline', 'Atlas demonstrates the pipeline on an open corpus', 'Minimum quality checks before a finding is publishable']) {
@@ -601,7 +622,11 @@ const redirectMap = new Map((vercel.routes ?? []).filter((route) => route.header
 for (const [source, destination] of [
   ['/simple', '/about'],
   ['/ai-information', '/about'],
-  ['/case-studies/technical-seo-audit', '/method'],
+  ['/case-studies/technical-seo-audit', 'https://www.void-agency.com/tools/technical-seo-audit-checklist'],
+  ['/technical-seo-case-study', 'https://www.void-agency.com/tools/technical-seo-audit-checklist'],
+  ['/austin-seo', 'https://www.void-agency.com/services/technical-seo-ai-search-visibility'],
+  ['/method', 'https://www.void-agency.com/tools/technical-seo-audit-checklist'],
+  ['/austin-technical-seo', 'https://www.void-agency.com/services/technical-seo-ai-search-visibility'],
   ['/void-agency', 'https://www.void-agency.com/'],
   ['/markets/network-monopolies', '/markets/archived-research-methodology'],
   ['/markets/computational-commodity-systems', '/markets/archived-research-methodology'],
