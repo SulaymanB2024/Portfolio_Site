@@ -1,6 +1,7 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { ALL_ARTICLES, getArticleAliases, getArticlePath } from '../src/content/articleRegistry';
+import { TECHNICAL_ARTICLE_SERIES } from '../src/content/technicalArticleSeries';
 import { getArticleSearchTarget } from '../src/seo/articleSearchTargets';
 
 const outputPath = path.resolve(process.cwd(), 'src/content/articleRouteMetadata.ts');
@@ -17,6 +18,18 @@ const rows = ALL_ARTICLES.map((article) => ({
   indexable: article.indexable !== false,
   staticSummary: `${getArticleSearchTarget(getArticlePath(article))?.directAnswer ?? ''} ${article.content[0]}`.trim(),
   image: article.artwork.kind === 'image' ? article.artwork.socialSrc : '/images/social/og-research.png',
+}));
+
+const technicalSeriesSlugs = new Set(TECHNICAL_ARTICLE_SERIES.map((article) => article.slug));
+const publicationRows = ALL_ARTICLES.map((article) => ({
+  slug: article.slug,
+  path: getArticlePath(article),
+  title: article.title,
+  subtitle: article.subtitle,
+  date: article.date,
+  dateModified: article.dateModified ?? article.date,
+  cluster: article.kind === 'research' ? article.cluster : undefined,
+  inTechnicalSeries: technicalSeriesSlugs.has(article.slug),
 }));
 
 const source = `export type ArticleRouteMetadata = {
@@ -36,6 +49,20 @@ const source = `export type ArticleRouteMetadata = {
 // Compact, browser-safe route metadata. The static route generator verifies this
 // manifest against the full article registry before a production build completes.
 export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = ${JSON.stringify(rows, null, 2)};
+
+export type PublicationRouteMetadata = {
+  slug: string;
+  path: string;
+  title: string;
+  subtitle: string;
+  date: string;
+  dateModified: string;
+  cluster?: string;
+  inTechnicalSeries: boolean;
+};
+
+// Archive lists must not pull complete article bodies into the client bundle.
+export const PUBLICATION_ROUTE_METADATA: PublicationRouteMetadata[] = ${JSON.stringify(publicationRows, null, 2)};
 `;
 
 await fs.writeFile(outputPath, source);
