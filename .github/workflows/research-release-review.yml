@@ -5,19 +5,22 @@ on:
     branches: [atlas/personal-site-audit-and-research-20260907]
   pull_request:
     paths:
-      - 'src/content/researchRelease/**'
-      - 'src/content/articleRegistry.ts'
-      - 'src/content/publicationIndex.ts'
-      - 'scripts/verify-research-release.ts'
+      - 'src/**'
+      - 'scripts/**'
+      - 'public/**'
       - '.github/workflows/research-release-review.yml'
 
 permissions:
   contents: read
 
+concurrency:
+  group: research-review-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   review:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
         with:
@@ -26,27 +29,27 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - name: Install locked dependencies
-        run: npm ci
-      - name: Validate research release
+      - run: npm ci
+      - name: Validate content, calculations and generated output
         run: |
-          if [ -f scripts/verify-research-release.ts ]; then
-            node --import tsx scripts/verify-research-release.ts
-          fi
+          npm run verify:generated
           npm run lint
           npm run build
-      - name: Package reproducible review inputs
-        if: always()
+          npm run verify:research-release
+          npm run verify:pseo
+          npm run verify:articles
+          npm run verify:seo
+          npm run verify:internal-links
+      - name: Install isolated browser test dependency
         run: |
-          mkdir -p /tmp/research-review
-          git archive --format=tar HEAD | tar -xf - -C /tmp/research-review
-          find /tmp/research-review -type f \( -iname '*.woff' -o -iname '*.woff2' -o -iname '*.ttf' -o -iname '*.otf' \) -delete
-          tar -czf research-review-source.tar.gz -C /tmp/research-review .
-          tar --exclude='*.woff' --exclude='*.woff2' --exclude='*.ttf' --exclude='*.otf' -czf research-review-dependencies.tar.gz node_modules
+          npm install --prefix /tmp/research-browser --no-audit --no-fund playwright@1.55.0
+          /tmp/research-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Exercise built pages in Chromium
+        run: node scripts/verify-research-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: research-review-${{ github.sha }}
-          path: research-review-*.tar.gz
+          name: research-browser-review-${{ github.sha }}
+          path: output/research-review
           retention-days: 7
-          if-no-files-found: error
+          if-no-files-found: warn
