@@ -42,10 +42,11 @@ jobs:
           git archive --format=tar HEAD | tar -xf - -C /tmp/research-review
           find /tmp/research-review -type f \( -iname '*.woff' -o -iname '*.woff2' -o -iname '*.ttf' -o -iname '*.otf' \) -delete
           tar -czf research-review-source.tar.gz -C /tmp/research-review .
+          tar --exclude='*.woff' --exclude='*.woff2' --exclude='*.ttf' --exclude='*.otf' -czf research-review-dependencies.tar.gz node_modules
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: research-review-${{ github.sha }}
-          path: research-review-source.tar.gz
+          path: research-review-*.tar.gz
           retention-days: 7
           if-no-files-found: error
