@@ -5,11 +5,21 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: generated-output-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v7
         with:
           node-version: 24
@@ -29,3 +39,18 @@ jobs:
       - run: npm run verify:reduction
       - run: npm run audit:style
       - run: npm run verify:security
+      - name: Package reproducible audit snapshot
+        if: always()
+        run: |
+          mkdir -p audit-artifact
+          git rev-parse HEAD > audit-artifact/commit.txt
+          git archive HEAD -o audit-artifact/repository.tar
+          if [ -d dist ]; then tar -cf audit-artifact/dist.tar dist; fi
+      - name: Retain audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-audit-${{ github.sha }}
+          path: audit-artifact/
+          retention-days: 3
+          if-no-files-found: error
