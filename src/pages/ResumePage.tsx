@@ -23,6 +23,7 @@ const supportingLinks = [
   { label: 'Atlas', href: '/atlas', meta: 'Product and public crawl evidence' },
   { label: 'Selected Work', href: '/work', meta: 'Six inspectable public records' },
   { label: 'Research', href: '/research', meta: 'Search, product, and markets notes' },
+  { label: 'Audit Method', href: '/method', meta: 'Technical SEO scope, evidence, acceptance checks, and reruns' },
   { label: 'GitHub', href: PROFILE_FACTS.canonicalLinks.github, meta: 'Public code profile' },
   { label: 'LinkedIn', href: PROFILE_FACTS.canonicalLinks.linkedin, meta: 'Professional profile' },
   { label: 'Contact', href: '/contact', meta: 'Direct email and profile links' },
@@ -57,6 +58,7 @@ export default function ResumePage() {
             <nav className="resume-visual__pathways" aria-label="Resume next steps">
               <a href="/work" data-portfolio-cta="resume_view_work">View selected work <span aria-hidden="true">↗</span></a>
               <a href="/research" data-portfolio-cta="resume_read_research">Read research <span aria-hidden="true">↗</span></a>
+              <a href="/method" data-portfolio-cta="resume_review_audit_method">Review audit method <span aria-hidden="true">↗</span></a>
             </nav>
           </div>
 
