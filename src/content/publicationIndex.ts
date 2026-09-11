@@ -1,4 +1,6 @@
+import { PROGRAMMATIC_SEO_HUBS } from './programmaticSeo';
 import { AI_MANAGERS_ARTICLE_PATH } from './aiManagersArticle';
+import { RARE_EARTH_MAGNET_BUILDOUT_ARTICLE } from './rareEarthMagnetBuildoutArticle';
 import { AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG } from './airlineLoyaltyFinancingArticle';
 import { AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE_SLUG } from './austinHomeServiceOwnershipArticle';
 import type { ResearchArticle } from './articleModels';
@@ -52,11 +54,18 @@ function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['cat
 
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
   {
+    category: 'Markets and investing',
+    title: RARE_EARTH_MAGNET_BUILDOUT_ARTICLE.title,
+    href: getArticlePath(RARE_EARTH_MAGNET_BUILDOUT_ARTICLE),
+    description: RARE_EARTH_MAGNET_BUILDOUT_ARTICLE.subtitle,
+    date: RARE_EARTH_MAGNET_BUILDOUT_ARTICLE.dateModified ?? RARE_EARTH_MAGNET_BUILDOUT_ARTICLE.date,
+  },
+  {
     category: 'Technical SEO',
     title: 'Technical SEO Diagnostic Library',
     href: '/research/technical-seo',
     description: 'Forty evidence-backed issue guides, platform playbooks, audit checklists, and collection routes with reproducible repair gates.',
-    date: '2026.07.20',
+    date: PROGRAMMATIC_SEO_HUBS[0].dateModified,
     featured: true,
   },
   ...TECHNICAL_ARTICLE_SERIES.map((articleItem) => ({
@@ -76,10 +85,10 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
   },
   {
     category: 'AI systems and products',
-    title: 'The First AI Managers',
+    title: article('the-first-ai-managers').title,
     href: AI_MANAGERS_ARTICLE_PATH,
     description: 'A 30-case review of AI-operated businesses that separates live operations, pilots, simulations, and vendor claims.',
-    date: '2026.07.14',
+    date: article('the-first-ai-managers').dateModified ?? article('the-first-ai-managers').date,
     featured: true,
   },
   {

@@ -1,3 +1,5 @@
+import { PROFILE_FACTS } from '../content/profileFacts';
+import { latestContentDate } from '../utils/publicationDate';
 import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from '../content/programmaticSeo';
 import { ARTICLE_ROUTE_METADATA } from '../content/articleRouteMetadata';
 import { TEXAS_TOLL_ARTICLE_SLUG } from '../content/texasTollRoadArticleMeta';
@@ -105,7 +107,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'website',
     priority: 1.0,
     includeInSitemap: true,
-    lastmod: KEYWORD_LASTMOD,
+    lastmod: latestContentDate([KEYWORD_LASTMOD, PROFILE_FACTS.lastReviewed]),
     staticSummary:
       'Technical SEO and AI systems builder working across crawl infrastructure, analytics, product workflows, and source-led investment research.',
     image: PROFILE_OG_IMAGE,
@@ -141,7 +143,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: KEYWORD_LASTMOD,
+    lastmod: latestContentDate([KEYWORD_LASTMOD, PROFILE_FACTS.lastReviewed]),
     staticSummary:
       'Sulayman Bowles connects technical SEO consulting, Atlas crawl software, AI product work, analytics, and source-led finance research.',
     image: PROFILE_OG_IMAGE,
@@ -213,7 +215,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'profile',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: METADATA_REFRESH_LASTMOD,
+    lastmod: latestContentDate([METADATA_REFRESH_LASTMOD, PROFILE_FACTS.lastReviewed]),
     staticSummary:
       'Stable resume and profile page for Sulayman Bowles with links to Atlas, technical SEO work, finance research, public code, LinkedIn, and contact paths.',
     image: PROFILE_OG_IMAGE,
@@ -231,7 +233,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'research',
     priority: 0.8,
     includeInSitemap: true,
-    lastmod: KEYWORD_LASTMOD,
+    lastmod: latestContentDate([KEYWORD_LASTMOD, ...ARTICLE_ROUTE_METADATA.filter((item) => item.indexable).map((item) => item.dateModified), ...PROGRAMMATIC_SEO_HUBS.map((item) => item.dateModified), VIRALBENCH_ARTICLE_MODIFIED_DATE]),
     staticSummary:
       'Technical SEO, AI search, crawlability, infrastructure, product, data, and markets research with visible sources and evidence limits.',
     image: RESEARCH_OG_IMAGE,
@@ -333,7 +335,7 @@ const CORE_ROUTES: SeoRoute[] = [
     pageType: 'research',
     priority: 0.7,
     includeInSitemap: true,
-    lastmod: METADATA_REFRESH_LASTMOD,
+    lastmod: latestContentDate([METADATA_REFRESH_LASTMOD, ...ARTICLE_ROUTE_METADATA.filter((item) => item.indexable && (item.path.startsWith('/markets/') || item.path.startsWith('/research/financial-systems/') || item.path.endsWith('/us-rare-earth-magnet-manufacturing-capacity'))).map((item) => item.dateModified)]),
     staticSummary:
       'A filtered finance and infrastructure-investing archive within the broader Research hub.',
     image: RESEARCH_OG_IMAGE,
@@ -428,12 +430,17 @@ const PROGRAMMATIC_PAGE_ROUTES: SeoRoute[] = PROGRAMMATIC_SEO_PAGES.map((page) =
   }),
 }));
 
-export const SEO_ROUTES: SeoRoute[] = [
+const ALL_SEO_ROUTES: SeoRoute[] = [
   ...CORE_ROUTES,
   ...ARTICLE_ROUTES,
   ...PROGRAMMATIC_HUB_ROUTES,
   ...PROGRAMMATIC_PAGE_ROUTES,
 ];
+
+export const SEO_ROUTES: SeoRoute[] = ALL_SEO_ROUTES.map((route) => route.path === '/sitemap'
+  ? { ...route, lastmod: latestContentDate(ALL_SEO_ROUTES.filter((item) => item.includeInSitemap && item.path !== '/sitemap')
+    .map((item) => item.lastmod ?? SITE_LASTMOD)) }
+  : route);
 
 export function normalizeInputPath(path: string) {
   const pathname = path.split(/[?#]/)[0] || '/';

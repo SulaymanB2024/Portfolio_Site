@@ -1,3 +1,5 @@
+import { DIAGNOSTIC_EXAMPLES } from './diagnosticExamples';
+import { latestContentDate } from '../utils/publicationDate';
 import type { ArticleCodeExample, ArticleSource, ArticleTable } from './articleModels';
 
 export type ProgrammaticPageFamily = 'issue' | 'platform' | 'checklist';
@@ -125,7 +127,7 @@ const SEEDS: PageSeed[] = [
   issue({ slug: 'redirect-chain', title: 'Redirect Chain: Diagnosis and Repair', primaryQuery: 'redirect chain SEO', supportingQueries: ['multiple redirect hops', 'fix redirect chain', '301 chain audit'], signal: 'a requested URL passes through two or more redirect responses before reaching content', mechanism: 'legacy migrations or competing rules compose into an unnecessary sequence', consequence: 'crawlers and users pay latency while link destinations become harder to govern', falsePositive: 'A single protocol or hostname normalization hop can be acceptable, though direct linking remains preferable.', repair: 'collapse each known source to the final destination and replace internal references to intermediate URLs', acceptance: 'every tested source reaches the intended 200 URL in one redirect or fewer', sources: ['redirects', 'links'], foundationalPath: '/research/technical-seo/canonicalization-graph-consistency' }),
   issue({ slug: 'redirect-loop', title: 'Redirect Loop: Diagnosis and Repair', primaryQuery: 'redirect loop SEO', supportingQueries: ['too many redirects SEO', 'redirect cycle fix', 'crawler redirect loop'], signal: 'redirect rules revisit a prior URL or alternate indefinitely between normalized variants', mechanism: 'host, path, locale, slash, or application rules apply in incompatible order', consequence: 'the resource is unreachable and its crawl signals cannot terminate at content', falsePositive: 'Cookie or geolocation behavior may look cyclic to one client; reproduce with a clean, stateless request before changing rules.', repair: 'identify the smallest cycle, establish one normalization order, and remove the reciprocal rule', acceptance: 'clean clients across HTTP and HTTPS reach one final 200 response with no repeated location', sources: ['redirects', 'links'], foundationalPath: '/research/technical-seo/canonicalization-graph-consistency' }),
   issue({ slug: 'soft-404', title: 'Soft 404: Diagnosis and Repair', primaryQuery: 'soft 404 SEO', supportingQueries: ['soft 404 error fix', 'Google soft 404', '200 page not found'], signal: 'a thin, empty, or error-like page returns 200 instead of an honest unavailable or useful response', mechanism: 'the application shell masks missing content while the transport layer reports success', consequence: 'search engines waste crawl effort and may exclude the URL as low value', falsePositive: 'A sparse utility page is not a soft 404 when it fulfills a clear intent and supplies substantive unique information.', repair: 'return 404 or 410 for missing resources, or rebuild the page with complete intent-matching content', acceptance: 'removed URLs return the intended error status and retained URLs pass a rendered-content usefulness review', sources: ['soft404', 'javascript'], foundationalPath: '/research/technical-seo/canonicalization-graph-consistency' }),
-  issue({ slug: 'robots-blocked-indexable-url', title: 'Robots-Blocked Indexable URL: Diagnosis and Repair', primaryQuery: 'robots blocked indexed page', supportingQueries: ['indexed though blocked by robots', 'robots.txt indexable URL', 'blocked page in Google'], signal: 'robots.txt prevents fetching a URL that remains discoverable and potentially indexable from external signals', mechanism: 'crawl control is being used as if it were an index-removal directive', consequence: 'search engines cannot see canonical or noindex changes and may retain a URL-only result', falsePositive: 'Blocking non-public crawl traps can be correct when those URLs are not linked, indexed, or expected to carry removal directives.', repair: 'allow crawling long enough to process noindex or return an appropriate status, then control future discovery', acceptance: 'the crawler can observe the intended exclusion response and the URL leaves index coverage without new variants', sources: ['robots', 'noindex'], foundationalPath: '/research/ai-crawlers/robots-txt-courtesy-not-access-control' }),
+  issue({ slug: 'robots-blocked-indexable-url', title: 'Robots-Blocked Indexable URL: Diagnosis and Repair', primaryQuery: 'robots blocked indexed page', supportingQueries: ['indexed though blocked by robots', 'robots.txt indexable URL', 'blocked page in Google'], signal: 'robots.txt prevents fetching a URL that remains discoverable and potentially indexable from external signals', mechanism: 'crawl control is being used as if it were an index-removal directive', consequence: 'search engines cannot see canonical or noindex changes and may retain a URL-only result', falsePositive: 'Blocking non-public crawl traps can be correct when those URLs are not linked, indexed, or expected to carry removal directives.', repair: 'remove an unintended block for a public page intended for search; for a page intended to leave search, instead permit the crawler to observe noindex or the removal status', acceptance: 'the crawler can fetch the response and observe the correct canonical and indexing directives for the documented publishing decision', sources: ['robots', 'noindex'], foundationalPath: '/research/ai-crawlers/robots-txt-courtesy-not-access-control' }),
   issue({ slug: 'noindex-in-sitemap', title: 'Noindex URL in Sitemap: Diagnosis and Repair', primaryQuery: 'noindex URL in sitemap', supportingQueries: ['sitemap contains noindex pages', 'XML sitemap indexability errors', 'remove noindex from sitemap'], signal: 'an XML sitemap lists a URL whose final response or rendered document declares noindex', mechanism: 'the discovery feed recommends crawling a page that the page itself rejects from indexing', consequence: 'coverage reporting becomes noisy and crawl attention is sent to excluded inventory', falsePositive: 'A very brief deployment transition can produce overlap, but recurring sitemap generations should never preserve it.', repair: 'derive sitemap membership from the same final indexability contract that emits page directives', acceptance: 'a regenerated sitemap contains only canonical 200 URLs and a recrawl finds no noindex members', sources: ['sitemaps', 'noindex'], foundationalPath: '/research/technical-seo/canonicalization-graph-consistency' }),
   issue({ slug: 'sitemap-redirects', title: 'Redirecting URLs in Sitemap: Diagnosis and Repair', primaryQuery: 'redirect URLs in sitemap', supportingQueries: ['sitemap contains redirects', '301 URL XML sitemap', 'sitemap redirect errors'], signal: 'an XML sitemap includes one or more URLs that return redirects', mechanism: 'the sitemap source lags behind routing, migration, or canonical changes', consequence: 'search engines receive stale discovery hints and must spend requests resolving them', falsePositive: 'Short-lived overlap during a cutover is tolerable only when the regenerated feed promptly converges on final URLs.', repair: 'replace every redirected entry with its canonical final destination and update the feed generator', acceptance: 'all sitemap members return 200 directly and match their own canonical declarations', sources: ['sitemaps', 'redirects'], foundationalPath: '/research/technical-seo/canonicalization-graph-consistency' }),
   issue({ slug: 'orphan-page', title: 'Orphan Page: Diagnosis and Repair', primaryQuery: 'orphan page SEO', supportingQueries: ['find orphan pages', 'page with no internal links', 'orphan URL audit'], signal: 'an indexable canonical page receives no crawlable internal link from another indexable page', mechanism: 'publishing, migration, or filtering creates inventory outside the governed navigation graph', consequence: 'discovery slows and the page receives no contextual internal authority', falsePositive: 'Private campaign or account pages may be intentionally unlinked, but those should not remain indexable search landing pages.', repair: 'add descriptive links from relevant hubs and peer content, or exclude the page if no durable user path exists', acceptance: 'the page has at least three contextual inbound links and remains within two clicks of the homepage', sources: ['links', 'sitemaps'], foundationalPath: '/research/technical-seo/internal-links-directed-retrieval-graph' }),
@@ -163,72 +165,51 @@ function capitalize(value: string) {
 }
 
 function buildSections(seed: PageSeed): ProgrammaticSeoSection[] {
+  const example = DIAGNOSTIC_EXAMPLES[seed.slug];
+  if (!example) throw new Error(`Missing worked diagnostic example: ${seed.slug}`);
   return [
     {
-      id: 'interpretation', title: 'What to establish first',
+      id: 'worked-example', title: example.title,
       paragraphs: [
-        `${capitalize(seed.signal)}. The underlying mechanism is that ${seed.mechanism}.`,
-        `${capitalize(seed.consequence)}. Record the affected URL, intended search state, and template before choosing a fix. A tool warning alone is not evidence that the page should change.`,
-      ],
-    },
-    {
-      id: 'evidence', title: 'Preserve a reproducible record',
-      paragraphs: [
-        `Use this fixture specification to investigate ${seed.primaryQuery}. It describes the fields to collect, not a completed client crawl or proof of a production defect. Keep missing observations empty and explain why they could not be collected.`,
+        'Illustrative worked example, not a client crawl or a measured search outcome.',
+        example.scenario,
+        example.decision,
       ],
       table: {
-        caption: 'Minimum evidence fields', columns: ['Field', 'Capture', 'Decision use'],
-        rows: [
-          ['Requested and final URL', 'Absolute addresses, response status, and every redirect hop', 'Separate the starting URL from the response actually inspected'],
-          ['Raw and rendered signals', 'HTML, canonical, robots, headings, links, and structured data', 'Identify differences introduced by browser execution'],
-          ['Discovery and time', 'Source page, anchor, sitemap or log reference, and observation timestamp', 'Make the request repeatable and expose stale observations'],
-          ['Control sample', 'A passing page from the same template and deployment', 'Test whether the problem is systemic or isolated'],
-        ],
+        caption: 'Example observations and intended state',
+        columns: ['Check', 'Observed example', 'Intended result'],
+        rows: example.checks,
       },
     },
     {
-      id: 'diagnosis', title: 'Reproduce the observed behavior',
+      id: 'diagnosis', title: 'Trace the cause before changing production',
       paragraphs: [
-        `Start with the page exhibiting ${seed.primaryQuery}, not a homepage proxy. Capture its first HTTP response before following redirects. Inspect the terminal document separately; saving a redirect body does not capture the destination page.`,
-        'Compare the saved server response with a browser-rendered capture at desktop and mobile widths. Record device, user agent, consent state, and deployment version. Retest a representative control under the same conditions before estimating how many pages are affected.',
-      ],
-      bullets: [
-        `Check the specific signal: ${seed.signal}.`,
-        'Trace the URL through contextual links, navigation, sitemaps, and canonical declarations.',
-        'Group the affected pages by template and intended indexability, not just URL count.',
-        'Retain the request and control records so another person can reproduce the finding.',
+        `${capitalize(seed.mechanism)}. The practical consequence is that ${seed.consequence}.`,
+        'Save the requested URL, final URL, response headers, redirect hops, raw HTML, rendered HTML, discovery source, and capture time. Compare a passing page from the same template. Missing evidence remains unknown; this fixture is a specification, not a completed production capture.',
       ],
       codeExamples: [{
-        title: 'Save the first response', language: 'shell',
-        description: 'Replace the example URL. This command deliberately does not follow redirects or execute JavaScript.',
+        title: 'Capture the first HTTP response', language: 'shell',
+        description: 'Replace the example URL. This bounded request does not follow redirects or run JavaScript; inspect each destination separately.',
         code: `curl --silent --show-error --max-time 30 \\\n  --header 'Cache-Control: no-cache' \\\n  --dump-header ${seed.slug}.headers.txt \\\n  --output ${seed.slug}.html \\\n  'https://example.com/page-to-check'\nrg -n 'canonical|noindex|href=|application/ld\\+json' ${seed.slug}.html`,
       }],
     },
     {
       id: 'false-positive-boundary', title: 'When the warning is not a defect',
-      paragraphs: [
-        seed.falsePositive,
-        'Check the intended outcome before changing production. Preview pages, private routes, intentional exclusions, and retired URLs do not share the same acceptance criteria as public landing pages. A difference caused by a deployment in progress requires another capture, not an immediate template rewrite.',
-      ],
+      paragraphs: [seed.falsePositive],
     },
     {
-      id: 'remediation', title: 'Change the system that owns the problem',
+      id: 'remediation', title: 'Make the intended state explicit',
       paragraphs: [
-        `The repair is to ${seed.repair}. Identify whether the authoritative value lives in routing, a CMS field, the page template, a server rule, or a discovery generator.`,
-        'Make the narrowest change that corrects the observed behavior, then regenerate dependent output. Changing only a crawler exclusion or a dashboard label can hide a symptom while leaving the underlying URL and user experience unchanged.',
+        `The repair is to ${seed.repair}.`,
+        'Change the source that owns this value, then regenerate dependent output. Keep a before-and-after record and a rollback condition. A dashboard suppression is not a repair to the delivered document.',
       ],
-      bullets: [
-        'Save a before-and-after sample and define a rollback condition.',
-        'Update links, metadata, structured data, and sitemap membership where the repair changes their intended values.',
-        'Check a passing peer for regressions; preserve intentional exclusions.',
-        'Keep the original failing example as a regression fixture.',
-      ],
+      bullets: example.checks.map(([field, , after]) => `${field}: ${after}.`),
     },
     {
       id: 'rerun-gate', title: 'Acceptance check',
       paragraphs: [
-        `Accept the repair when ${seed.acceptance}. Repeat the failing request and its control without relying on an earlier cached capture.`,
-        'Confirm that the intended indexability is preserved. An intentionally excluded URL should remain excluded; a public canonical page should resolve correctly and retain its expected discovery links. Passing this check establishes a technical state, not a promise of crawling, indexing, or rankings.',
+        `Accept the repair when ${seed.acceptance}.`,
+        'Repeat the failing request and its control, including the response headers and idle rendered page. Preserve intended exclusions and confirm that normal navigation reaches the canonical destination. A passing technical test establishes eligibility, not a guarantee that Google has crawled, indexed, or ranked the page.',
       ],
     },
   ];
@@ -291,7 +272,7 @@ function buildPage(seed: PageSeed): ProgrammaticSeoPage {
 
 export const PROGRAMMATIC_SEO_PAGES: readonly ProgrammaticSeoPage[] = SEEDS.map(buildPage);
 
-export const PROGRAMMATIC_SEO_HUBS: readonly ProgrammaticSeoHub[] = [
+const HUB_SEEDS: readonly ProgrammaticSeoHub[] = [
   {
     family: 'all',
     path: BASE,
@@ -341,6 +322,16 @@ export const PROGRAMMATIC_SEO_HUBS: readonly ProgrammaticSeoHub[] = [
     indexable: true,
   },
 ];
+
+// A collection changes when its displayed children change, not whenever a build runs.
+export const PROGRAMMATIC_SEO_HUBS: readonly ProgrammaticSeoHub[] = HUB_SEEDS.map((hub) => ({
+  ...hub,
+  dateModified: latestContentDate([
+    hub.dateModified,
+    ...PROGRAMMATIC_SEO_PAGES.filter((page) => hub.family === 'all' || page.family === hub.family)
+      .map((page) => page.dateModified),
+  ]),
+}));
 
 export function getProgrammaticSeoPage(path: string): ProgrammaticSeoPage | undefined {
   return PROGRAMMATIC_SEO_PAGES.find((page) => page.path === path);
