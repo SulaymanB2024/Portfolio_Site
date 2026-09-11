@@ -46,7 +46,8 @@
     "verify:site-integrity": "python3 scripts/site_integrity.py",
     "verify:static-idempotence": "node scripts/verify-static-idempotence.mjs",
     "test:site-integrity": "python3 scripts/test_site_integrity.py",
-    "test:site-behavior": "node --import tsx --test src/content/siteNavigation.test.ts src/utils/smoothScroll.test.ts src/content/searchQuality.test.ts"
+    "test:site-behavior": "node --import tsx --test src/content/siteNavigation.test.ts src/utils/smoothScroll.test.ts src/content/searchQuality.test.ts",
+    "test:indexability": "node --import tsx --test src/content/indexability.test.ts scripts/lib/live-indexability.test.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",

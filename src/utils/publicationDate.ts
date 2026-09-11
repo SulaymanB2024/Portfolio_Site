@@ -21,3 +21,17 @@ export function formatPublicationDate(value: string) {
     timeZone: 'UTC',
   }).format(date);
 }
+
+/** Latest declared content date, never the build clock. Reject malformed dates rather than advertising them. */
+export function latestContentDate(values: readonly string[]) {
+  if (!values.length) throw new Error('At least one content date is required.');
+  const dates = values.map(normalizePublicationDate);
+  for (const date of dates) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)
+      || !Number.isFinite(Date.parse(date))
+      || new Date(date).toISOString().slice(0, 10) !== date) {
+      throw new Error(`Invalid content date: ${date}`);
+    }
+  }
+  return dates.sort().at(-1)!;
+}

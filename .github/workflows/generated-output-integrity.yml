@@ -33,6 +33,7 @@ jobs:
       - run: npm run test:portfolio-analytics
       - run: npm run test:site-integrity
       - run: npm run test:site-behavior
+      - run: npm run test:indexability
       - run: npm run verify:profile
       - run: npm run test:seo-schema
       - run: npm run verify:bot-observer
@@ -43,6 +44,8 @@ jobs:
         run: python3 -m pip install playwright==1.57.0
       - name: Desktop, mobile, and live motion preferences
         run: python3 scripts/browser-smoke.py
+      - name: Readability when JavaScript is absent or fails
+        run: python3 scripts/browser-indexability.py
       - run: npm run verify:seo
       - run: npm run verify:vercel-seo
       - run: npm run verify:internal-links
@@ -67,4 +70,29 @@ jobs:
           name: site-audit-${{ github.sha }}
           path: audit-artifact/
           retention-days: 3
+          if-no-files-found: error
+
+  production-indexability:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Check actual production responses and discovery files
+        run: npm run verify:pseo-live
+      - name: Retain live response evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-indexability-${{ github.sha }}
+          path: audit-artifact/live-indexability.json
+          retention-days: 14
           if-no-files-found: error

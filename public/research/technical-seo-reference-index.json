@@ -13,28 +13,28 @@
       "url": "https://sulayman-bowles.dev/research/technical-seo",
       "title": "Technical SEO Diagnostic Library",
       "description": "Evidence-backed technical SEO issue guides, platform playbooks, and audit checklists with reproducible repair gates.",
-      "last_verified": "2026-07-20"
+      "last_verified": "2026-09-10"
     },
     {
       "family": "issue",
       "url": "https://sulayman-bowles.dev/research/technical-seo/issues",
       "title": "Technical SEO Issue Guides",
       "description": "Diagnose 24 common technical SEO issues with evidence fields, false-positive boundaries, repairs, and rerun checks.",
-      "last_verified": "2026-07-20"
+      "last_verified": "2026-09-10"
     },
     {
       "family": "platform",
       "url": "https://sulayman-bowles.dev/research/technical-seo/platforms",
       "title": "Technical SEO Platform Guides",
       "description": "Technical SEO implementation guides for Next.js, React/Vite, WordPress, Shopify, Webflow, Squarespace, Wix, and headless CMS stacks.",
-      "last_verified": "2026-07-20"
+      "last_verified": "2026-09-10"
     },
     {
       "family": "checklist",
       "url": "https://sulayman-bowles.dev/research/technical-seo/checklists",
       "title": "Technical SEO Audit Checklists",
       "description": "Evidence-driven JavaScript, ecommerce, SaaS, and local-business technical SEO audit checklists.",
-      "last_verified": "2026-07-20"
+      "last_verified": "2026-09-10"
     }
   ],
   "pages": [
@@ -545,7 +545,7 @@
         "robots.txt indexable URL",
         "blocked page in Google"
       ],
-      "direct_answer": "Robots.txt prevents fetching a URL that remains discoverable and potentially indexable from external signals. To address robots blocked indexed page, allow crawling long enough to process noindex or return an appropriate status, then control future discovery. The acceptance condition is that the crawler can observe the intended exclusion response and the URL leaves index coverage without new variants.",
+      "direct_answer": "Robots.txt prevents fetching a URL that remains discoverable and potentially indexable from external signals. To address robots blocked indexed page, remove an unintended block for a public page intended for search; for a page intended to leave search, instead permit the crawler to observe noindex or the removal status. The acceptance condition is that the crawler can fetch the response and observe the correct canonical and indexing directives for the documented publishing decision.",
       "evidence_artifact": {
         "label": "Robots-Blocked Indexable URL: Diagnosis and Repair evidence fixture",
         "kind": "atlas-compatible-fixture",
@@ -571,12 +571,12 @@
       "false_positive_boundary": "Blocking non-public crawl traps can be correct when those URLs are not linked, indexed, or expected to carry removal directives.",
       "repair_steps": [
         "Identify the authoritative route, content, or infrastructure owner.",
-        "Allow crawling long enough to process noindex or return an appropriate status, then control future discovery.",
+        "Remove an unintended block for a public page intended for search; for a page intended to leave search, instead permit the crawler to observe noindex or the removal status.",
         "Regenerate affected links, metadata, structured data, and sitemaps.",
         "Preserve the failure and a passing control as regression fixtures."
       ],
       "rerun_acceptance_check": [
-        "The crawler can observe the intended exclusion response and the URL leaves index coverage without new variants.",
+        "The crawler can fetch the response and observe the correct canonical and indexing directives for the documented publishing decision.",
         "Repeated uncached captures agree on the repaired behavior.",
         "The intended indexability and contextual discovery paths are preserved."
       ],
