@@ -5,13 +5,33 @@ import { RESEARCH_ARTICLES } from './researchArticles';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { THE_AI_MEGAWATT_ARTICLE } from './theAiMegawattArticle';
 
-export const ALL_ARTICLES: PublicArticle[] = [
+const ROBOTS_ACCESS_CONTROL_ARTICLE_SLUG = 'robots-txt-courtesy-not-access-control';
+const ROBOTS_ACCESS_CONTROL_CTR_TITLE = 'Robots.txt Is Not Access Control | RFC 9309 Authorization';
+
+const BASE_ARTICLES: PublicArticle[] = [
   THE_AI_MEGAWATT_ARTICLE,
   ...TECHNICAL_ARTICLE_SERIES,
   ...RESEARCH_ARTICLES,
   RARE_EARTH_MAGNET_BUILDOUT_ARTICLE,
   ...INVESTMENT_MEMOS,
 ];
+
+function applyMeasuredSearchSnippetExperiment(article: PublicArticle): PublicArticle {
+  if (
+    article.kind === 'research'
+    && article.cluster === 'ai-crawlers'
+    && article.slug === ROBOTS_ACCESS_CONTROL_ARTICLE_SLUG
+  ) {
+    return {
+      ...article,
+      seoTitle: ROBOTS_ACCESS_CONTROL_CTR_TITLE,
+    };
+  }
+
+  return article;
+}
+
+export const ALL_ARTICLES: PublicArticle[] = BASE_ARTICLES.map(applyMeasuredSearchSnippetExperiment);
 export const INDEXABLE_ARTICLES = ALL_ARTICLES.filter((article) => article.indexable !== false);
 
 export function getArticlePath(article: PublicArticle) {
