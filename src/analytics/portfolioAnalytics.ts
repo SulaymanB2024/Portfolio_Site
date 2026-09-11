@@ -44,6 +44,7 @@ export const PORTFOLIO_CTA_METADATA = {
   resume_email: { surface: 'resume', target: 'email', kind: 'email' },
   resume_view_work: { surface: 'resume', target: 'selected_work', kind: 'internal' },
   resume_read_research: { surface: 'resume', target: 'research', kind: 'internal' },
+  resume_review_audit_method: { surface: 'resume', target: 'audit_method', kind: 'internal' },
   resume_supporting_link: { surface: 'resume', target: 'supporting_record', kind: 'mixed' },
   research_view_work: { surface: 'research', target: 'selected_work', kind: 'internal' },
   research_markets: { surface: 'research', target: 'markets', kind: 'internal' },
