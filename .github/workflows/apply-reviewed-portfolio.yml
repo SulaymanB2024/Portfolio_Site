@@ -1,0 +1,83 @@
+name: Apply reviewed portfolio repair
+on:
+  push:
+    branches: [atlas/portfolio-substantive-fixes-2026-09-10]
+    paths:
+      - .github/workflows/apply-reviewed-portfolio.yml
+      - scripts/apply-reviewed-portfolio.py
+      - scripts/portfolio-repair-manifests/**
+permissions:
+  contents: read
+concurrency:
+  group: apply-reviewed-portfolio-repair
+  cancel-in-progress: false
+jobs:
+  apply:
+    if: github.repository == 'SulaymanB2024/Portfolio_Site' && github.ref == 'refs/heads/atlas/portfolio-substantive-fixes-2026-09-10'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Validate all hashes and apply the reviewed source changes
+        run: python3 scripts/apply-reviewed-portfolio.py
+      - run: npm ci
+      - run: python3 -m pip install reportlab==4.4.9 playwright==1.57.0
+      - run: npm run generate:resume
+      - run: npm run generate:article-routes && npm run generate:public
+      - name: Inspect dependency advisories
+        run: |
+          mkdir -p audit-artifact
+          npm audit --json > audit-artifact/npm-audit.json || true
+      - name: Test the repaired source
+        run: |
+          npm run test:bot-observer
+          npm run test:portfolio-analytics
+          npm run test:seo-schema
+          npm run test:site-integrity
+          npm run test:site-behavior
+          npm run verify:profile
+          npm run verify:bot-observer
+          npm run verify:generated
+          npm run lint
+          npm run build
+          npm run verify:seo
+          npm run verify:vercel-seo
+          npm run verify:internal-links
+          npm run verify:keywords
+          npm run verify:reduction
+          npm run audit:style
+          npm run verify:security
+          npm run verify:pseo
+          npm run verify:site-integrity
+          npm run verify:static-idempotence
+      - name: Browser checks on repaired source
+        run: python3 scripts/browser-smoke.py
+      - name: Commit only the tested source to the repair branch
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .gitignore README.md package.json public scripts src docs
+          git diff --cached --stat
+          git commit -m 'fix: restore content, profile, links, static output and regression coverage'
+          git push origin HEAD:refs/heads/atlas/portfolio-substantive-fixes-2026-09-10
+      - name: Retain actual workspace and test evidence
+        if: always()
+        run: |
+          mkdir -p audit-artifact
+          git rev-parse HEAD > audit-artifact/commit.txt
+          git diff > audit-artifact/workspace.diff
+          tar --exclude=node_modules --exclude=.git --exclude=audit-artifact -cf /tmp/repaired-workspace.tar .
+          mv /tmp/repaired-workspace.tar audit-artifact/repaired-workspace.tar
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: repaired-portfolio-${{ github.sha }}
+          path: audit-artifact/
+          retention-days: 1
