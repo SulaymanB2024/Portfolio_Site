@@ -25,6 +25,10 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Check dependency advisories
+        run: |
+          mkdir -p audit-artifact
+          npm audit --audit-level=high --json > audit-artifact/npm-audit.json
       - run: npm run test:bot-observer
       - run: npm run test:portfolio-analytics
       - run: npm run test:site-integrity
