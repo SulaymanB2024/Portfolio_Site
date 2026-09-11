@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 
 import {
   ArticleReader,
@@ -110,8 +110,69 @@ function TexasTollOwnershipLookup() {
         <li><strong>NTE 35W</strong><span>TxDOT pavement; private operating and revenue rights through 2061.</span></li>
         <li><strong>SH 130 Segments 5–6</strong><span>TxDOT pavement; private operating and revenue rights through 2062.</span></li>
       </ul>
+
+      {/* Mobile Expandable Facility Entries (<= 640px) */}
+      <div className="toll-mobile-facility-list md:hidden" aria-label="Facilities ownership disclosures">
+        {TEXAS_TOLL_OWNERSHIP_ROWS.map((row) => {
+          const isPrivate = row.privateRightsStatus.toLowerCase().startsWith('yes');
+          return (
+            <details key={row.facility} className="toll-mobile-facility-card">
+              <summary className="toll-mobile-facility-summary">
+                <div className="toll-mobile-facility-main">
+                  <span className="toll-mobile-facility-title">{row.facility}</span>
+                  <div className="toll-mobile-facility-meta">
+                    <span>{row.region}</span>
+                    <span className="toll-mobile-facility-status-tag" data-status={isPrivate ? 'private' : 'public'}>
+                      {isPrivate ? 'Private Concession' : 'Public System'}
+                    </span>
+                  </div>
+                </div>
+                <span className="toll-mobile-facility-toggle" aria-hidden="true">+</span>
+              </summary>
+              <dl className="toll-mobile-facility-details">
+                <div className="toll-mobile-facility-field">
+                  <dt>Physical owner</dt>
+                  <dd>{row.physicalOwner}</dd>
+                </div>
+                <div className="toll-mobile-facility-field">
+                  <dt>Operator / revenue claimant</dt>
+                  <dd>
+                    <strong>{row.operator}</strong>
+                    {row.tollRevenueClaimant && String(row.tollRevenueClaimant) !== String(row.operator) ? (
+                      <span className="block text-xs mt-0.5">{row.tollRevenueClaimant}</span>
+                    ) : null}
+                  </dd>
+                </div>
+                <div className="toll-mobile-facility-field">
+                  <dt>Private rights & term</dt>
+                  <dd>
+                    <span>{row.privateRightsStatus}</span>
+                    {row.term ? <span className="block text-xs mt-0.5">{row.term}</span> : null}
+                  </dd>
+                </div>
+                <div className="toll-mobile-facility-field">
+                  <dt>Billing agency</dt>
+                  <dd>{row.billingAgency}</dd>
+                </div>
+                <div className="toll-mobile-facility-field">
+                  <dt>Sources</dt>
+                  <dd className="toll-mobile-facility-sources">
+                    {row.sourceIds.map((sourceId) => (
+                      <a key={sourceId} href={`#source-${sourceId}`} className="text-xs uppercase font-medium">
+                        [{sourceId.toUpperCase()}]
+                      </a>
+                    ))}
+                  </dd>
+                </div>
+              </dl>
+            </details>
+          );
+        })}
+      </div>
+
+      {/* Desktop and Tablet Comparison Matrix (> 640px) */}
       <div
-        className="toll-ownership-lookup__scroll"
+        className="toll-ownership-lookup__scroll hidden md:block"
         role="region"
         aria-label="Texas toll-road ownership lookup. Scroll horizontally to inspect every field."
         tabIndex={0}
@@ -145,9 +206,9 @@ function TexasTollOwnershipLookup() {
                 <td data-label="Billing agency">
                   {row.billingAgency}
                   <span className="toll-ownership-lookup__sources">
-                    {row.sourceIds.map((sourceId, index) => (
+                    {row.sourceIds.map((sourceId, sIdx) => (
                       <Fragment key={sourceId}>
-                        {index > 0 ? ', ' : ''}
+                        {sIdx > 0 ? ', ' : ''}
                         <a href={`#source-${sourceId}`}>{sourceId.toUpperCase()}</a>
                       </Fragment>
                     ))}
@@ -528,6 +589,14 @@ function ArticleSection({
   );
 }
 
+const FACT_GAP_CATEGORIES: Record<string, string> = {
+  'Ownership figures that remain uncertain': 'Uncertain Data · Cap Table',
+  'Financial figures not located': 'Unlocated Records · Cash Flow & Debt',
+  'Documents unavailable or not fully retrievable': 'Document Gap · Court & Registers',
+  'Calculations based on inference': 'Model Inference · Multiples & Yields',
+  'Facts suited to a Texas Public Information Act request': 'TPIA Target · Public Records Request',
+};
+
 function FactGapLedger({ index }: { index: string }) {
   return (
     <section id="what-remains-unknown">
@@ -536,12 +605,16 @@ function FactGapLedger({ index }: { index: string }) {
         The public record is unusually rich, but it does not expose every cap-table right, distribution waterfall, operating subcontract, or current SH 130 financial statement. Those gaps are measurement limits—not evidence that the missing fact favors either side of the investment case.
       </p>
       <div className="toll-gap-grid">
-        {TEXAS_TOLL_ARTICLE_FACT_GAPS.map((group) => (
-          <article key={group.title}>
-            <h3>{group.title}</h3>
-            <ArticleMarkdown markdown={group.items.map((item) => `- ${item}`).join('\n')} />
-          </article>
-        ))}
+        {TEXAS_TOLL_ARTICLE_FACT_GAPS.map((group, gIdx) => {
+          const categoryBadge = FACT_GAP_CATEGORIES[group.title] ?? `Category ${String(gIdx + 1).padStart(2, '0')}`;
+          return (
+            <article key={group.title}>
+              <span className="toll-gap-badge">{categoryBadge}</span>
+              <h3>{group.title}</h3>
+              <ArticleMarkdown markdown={group.items.map((item) => `- ${item}`).join('\n')} />
+            </article>
+          );
+        })}
       </div>
     </section>
   );
@@ -564,6 +637,29 @@ function FrequentlyAskedQuestions({ index }: { index: string }) {
 }
 
 function SourceLedger({ index }: { index: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    const handleHashCheck = () => {
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#source-')) {
+        setIsExpanded(true);
+        setTimeout(() => {
+          const target = document.querySelector(hash);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 80);
+      }
+    };
+
+    handleHashCheck();
+    window.addEventListener('hashchange', handleHashCheck);
+    return () => window.removeEventListener('hashchange', handleHashCheck);
+  }, []);
+
+  const visibleSources = isExpanded ? TEXAS_TOLL_ARTICLE_SOURCES : TEXAS_TOLL_ARTICLE_SOURCES.slice(0, 6);
+
   return (
     <section id="source-ledger" className="toll-source-ledger">
       <ArticleSectionHeader index={index}>Source ledger</ArticleSectionHeader>
@@ -571,7 +667,7 @@ function SourceLedger({ index }: { index: string }) {
         Executed agreements, government records, audited statements, SEC-filed sponsor disclosures, and clearly labeled company or pension materials. Source dates and limitations are preserved in the text.
       </p>
       <ol>
-        {TEXAS_TOLL_ARTICLE_SOURCES.map((source) => (
+        {visibleSources.map((source) => (
           <li key={source.id} id={`source-${source.id}`}>
             <span className="toll-source-ledger__id">{source.id.toUpperCase()}</span>
             <div>
@@ -595,6 +691,18 @@ function SourceLedger({ index }: { index: string }) {
           </li>
         ))}
       </ol>
+      <div className="toll-source-ledger__controls mt-6">
+        <button
+          type="button"
+          className="toll-ownership-lookup__expand-btn"
+          onClick={() => setIsExpanded((prev) => !prev)}
+          aria-expanded={isExpanded}
+        >
+          {isExpanded
+            ? 'Collapse to primary sources'
+            : `Show all ${TEXAS_TOLL_ARTICLE_SOURCES.length} sources (+)`}
+        </button>
+      </div>
     </section>
   );
 }

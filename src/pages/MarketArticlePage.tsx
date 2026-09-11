@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import {
   ArticleReader,
   ArticleSectionHeader,
@@ -17,57 +15,10 @@ import {
 } from '../content/articleModels';
 import { getArticleRelatedLinkLabel, getArticleSearchTarget } from '../seo/articleSearchTargets';
 import { getSeoRoute, NOT_FOUND_ROUTE } from '../seo/routes';
+import { CodeBlockWithCopy } from '../utils/markdownToReact';
 import { formatPublicationDate, normalizePublicationDate } from '../utils/publicationDate';
 import { useSEO } from '../utils/seo';
 import NotFoundPage from './NotFoundPage';
-
-function ArticleCodeExample({
-  example,
-  index,
-}: {
-  key?: string;
-  example: NonNullable<ArticleSection['codeExamples']>[number];
-  index: number;
-}) {
-  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'failed'>('idle');
-
-  const copyCode = async () => {
-    try {
-      await navigator.clipboard.writeText(example.code);
-      setCopyStatus('copied');
-      window.setTimeout(() => setCopyStatus('idle'), 1800);
-    } catch {
-      setCopyStatus('failed');
-    }
-  };
-
-  return (
-    <figure className="research-guide-code">
-      <figcaption>
-        <span>Configuration {String(index + 1).padStart(2, '0')}</span>
-        <strong>{example.title}</strong>
-        <p>{example.description}</p>
-        <button
-          type="button"
-          className="article-reader__code-copy"
-          onClick={copyCode}
-          aria-label={`Copy ${example.title} code`}
-        >
-          {copyStatus === 'copied' ? 'Copied' : copyStatus === 'failed' ? 'Copy failed' : 'Copy code'}
-        </button>
-        <span className="sr-only" aria-live="polite">
-          {copyStatus === 'copied'
-            ? `${example.title} copied to the clipboard.`
-            : copyStatus === 'failed'
-              ? `${example.title} could not be copied.`
-              : ''}
-        </span>
-      </figcaption>
-      <pre tabIndex={0}><code>{example.code}</code></pre>
-      <p className="research-guide-code__format">Review before release · {example.language}</p>
-    </figure>
-  );
-}
 
 function StructuredArticleSections({
   sections,
@@ -149,7 +100,20 @@ function StructuredArticleSections({
           {section.codeExamples?.length ? (
             <div className="research-guide-code-list">
               {section.codeExamples.map((example, exampleIndex) => (
-                <ArticleCodeExample key={example.title} example={example} index={exampleIndex} />
+                <figure key={example.title} className="research-guide-code">
+                  <figcaption>
+                    <span>Configuration {String(exampleIndex + 1).padStart(2, '0')}</span>
+                    <strong>{example.title}</strong>
+                    <p>{example.description}</p>
+                  </figcaption>
+                  <CodeBlockWithCopy
+                    code={example.code}
+                    language={example.language}
+                    label={example.title}
+                    blockKey={`cfg-code-${exampleIndex}`}
+                  />
+                  <p className="research-guide-code__format">Review before release · {example.language}</p>
+                </figure>
               ))}
             </div>
           ) : null}
@@ -313,9 +277,13 @@ function GenericArticle({
   const callouts: NonNullable<ArticleReaderConfig['callouts']> = [];
 
   if (searchTarget) {
+    const formattedTitle = searchTarget.primaryQuery.toLowerCase() === 'can ai run a business'
+      ? 'Can AI Run a Business?'
+      : searchTarget.primaryQuery.charAt(0).toUpperCase() + searchTarget.primaryQuery.slice(1);
+
     callouts.push({
       label: 'Direct answer',
-      title: searchTarget.primaryQuery,
+      title: formattedTitle,
       content: (
         <>
           <p>{searchTarget.directAnswer}</p>

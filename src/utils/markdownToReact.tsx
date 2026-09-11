@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useState, useCallback, useRef, useEffect, type ReactNode } from 'react';
 
 function isSafeHref(value: string) {
   return value.startsWith('https://') || value.startsWith('http://') || value.startsWith('/') || value.startsWith('#');
@@ -20,6 +20,157 @@ type NoteReferenceState = {
   counts: Map<string, number>;
   references: Map<string, string[]>;
 };
+
+export function CodeBlockWithCopy({
+  code,
+  language,
+  blockKey,
+  label,
+}: {
+  code: string;
+  language?: string;
+  blockKey?: string;
+  label?: string;
+  key?: string;
+}) {
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const timerRef = useRef<number | undefined>(undefined);
+
+  useEffect(() => () => {
+    window.clearTimeout(timerRef.current);
+  }, []);
+
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopyStatus('copied');
+      window.clearTimeout(timerRef.current);
+      timerRef.current = window.setTimeout(() => setCopyStatus('idle'), 2000);
+    } catch {
+      setCopyStatus('failed');
+    }
+  }, [code]);
+
+  return (
+    <figure key={blockKey} className="article-code-plate">
+      <div className="article-code-plate__header">
+        <span className="article-code-plate__lang">{language || 'CODE'}</span>
+        <button
+          type="button"
+          className="article-code-plate__copy"
+          onClick={handleCopy}
+          aria-label={label ? `Copy ${label} code` : 'Copy code to clipboard'}
+        >
+          {copyStatus === 'copied' ? 'Copied' : copyStatus === 'failed' ? 'Copy failed' : 'Copy'}
+        </button>
+        <span className="sr-only" aria-live="polite">
+          {copyStatus === 'copied'
+            ? `${label || 'Code'} copied to the clipboard.`
+            : copyStatus === 'failed'
+              ? `${label || 'Code'} could not be copied.`
+              : ''}
+        </span>
+      </div>
+      <pre tabIndex={0}>
+        <code className={language ? `language-${language}` : undefined}>{code}</code>
+      </pre>
+    </figure>
+  );
+}
+
+function renderMathExpression(raw: string, key: string): ReactNode {
+  const cleaned = raw.trim();
+  const tokenRegex = /(\\text\{[^}]+\}|\b\w+\b|\\times|[=+\-*/–])/g;
+  const parts: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = tokenRegex.exec(cleaned)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(cleaned.slice(lastIndex, match.index));
+    }
+    const token = match[0];
+    if (token.startsWith('\\text{') && token.endsWith('}')) {
+      const textVal = token.slice(6, -1);
+      parts.push(
+        <span key={`${key}-${match.index}`} className="article-math-plate__var">
+          {textVal}
+        </span>
+      );
+    } else if (token === '\\times' || token === '*') {
+      parts.push(
+        <span key={`${key}-${match.index}`} className="article-math-plate__op" aria-label="multiplied by">
+          ×
+        </span>
+      );
+    } else if (token === '=') {
+      parts.push(
+        <span key={`${key}-${match.index}`} className="article-math-plate__op" aria-label="equals">
+          =
+        </span>
+      );
+    } else if (token === '+' || token === '-' || token === '–') {
+      parts.push(
+        <span key={`${key}-${match.index}`} className="article-math-plate__op">
+          {token}
+        </span>
+      );
+    } else {
+      parts.push(
+        <span key={`${key}-${match.index}`} className="article-math-plate__var">
+          {token}
+        </span>
+      );
+    }
+    lastIndex = tokenRegex.lastIndex;
+  }
+  if (lastIndex < cleaned.length) {
+    parts.push(cleaned.slice(lastIndex));
+  }
+
+  return (
+    <div key={key} className="article-math-plate" role="region" aria-label={`Formula: ${cleaned}`}>
+      <div className="article-math-plate__expression">{parts}</div>
+    </div>
+  );
+}
+
+function renderWaterfallBlock(lines: string[], key: string): ReactNode {
+  return (
+    <div key={key} className="article-math-waterfall" role="region" aria-label="Calculation waterfall">
+      <div className="article-math-waterfall__list">
+        {lines.map((line, lineIdx) => {
+          const trimmed = line.trim();
+          const isTotal = trimmed.startsWith('=');
+          const isSub = trimmed.startsWith('–') || trimmed.startsWith('-') || trimmed.startsWith('+');
+          let cleanText = trimmed;
+          let operator = '';
+          if (isTotal) {
+            operator = '=';
+            cleanText = trimmed.slice(1).trim();
+          } else if (isSub) {
+            operator = trimmed.charAt(0);
+            cleanText = trimmed.slice(1).trim();
+          }
+
+          return (
+            <div
+              key={`${key}-wf-${lineIdx}`}
+              className={`article-math-waterfall__row ${isTotal ? 'article-math-waterfall__row--total' : ''} ${isSub ? 'article-math-waterfall__row--sub' : ''}`}
+            >
+              {operator ? (
+                <span className="article-math-waterfall__op">{operator}</span>
+              ) : (
+                <span className="article-math-waterfall__op-placeholder" />
+              )}
+              <span className="article-math-waterfall__text">{cleanText}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 function renderInline(
   value: string,
@@ -193,10 +344,35 @@ export function markdownToReact(markdown: string): ReactNode[] {
         index += 1;
       }
       index += 1;
+      const fullCode = code.join('\n');
+      const lang = fence[1]?.toLowerCase() || '';
+
+      if (
+        lang === 'math' ||
+        lang === 'formula' ||
+        fullCode.includes('\\text{') ||
+        fullCode.includes('\\times')
+      ) {
+        blocks.push(renderMathExpression(fullCode, key));
+        continue;
+      }
+
+      if (
+        (lang === 'text' || lang === '') &&
+        code.some((l) => l.trim().startsWith('=')) &&
+        code.some((l) => l.trim().startsWith('–') || l.trim().startsWith('-') || l.trim().startsWith('+'))
+      ) {
+        blocks.push(renderWaterfallBlock(code, key));
+        continue;
+      }
+
       blocks.push(
-        <pre key={key}>
-          <code className={fence[1] ? `language-${fence[1]}` : undefined}>{code.join('\n')}</code>
-        </pre>,
+        <CodeBlockWithCopy
+          key={key}
+          code={fullCode}
+          language={fence[1]}
+          blockKey={key}
+        />,
       );
       continue;
     }

@@ -8,7 +8,6 @@ import { ScrollProgress } from './components/ScrollProgress';
 import { MagneticButton } from './components/MagneticButton';
 import { InternalHeader } from './components/InternalHeader';
 import { InternalFooter } from './components/InternalFooter';
-import { KineticTypography } from './components/KineticTypography';
 import { usePageTransitions } from './hooks/usePageTransitions';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
@@ -561,8 +560,8 @@ function HomePage() {
                     ))}
                   </nav>
                 </div>
-                <nav aria-label="Featured proof" className="grid self-end border border-ink bg-ink px-4 py-3 uppercase text-canvas md:px-5 md:py-4">
-                  <span className="mb-1 flex items-center justify-between text-[9px] tracking-[0.28em] text-canvas/66">
+                <nav aria-label="Featured proof" className="grid self-end uppercase text-ink">
+                  <span className="mb-1 flex items-center justify-between text-[9px] tracking-[0.28em] text-ink/58">
                     <span>Selected proof</span>
                     <span aria-hidden="true" className="font-serif text-sm italic tracking-normal">03</span>
                   </span>
@@ -571,10 +570,10 @@ function HomePage() {
                       key={item.href}
                       href={item.href}
                       data-portfolio-cta="home_open_proof"
-                      className="group grid min-h-12 grid-cols-[4.75rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-canvas/18 transition-colors hover:border-canvas/44 hover:bg-canvas/[0.035] md:grid-cols-[5.25rem_minmax(0,1fr)_auto]"
+                      className="group grid min-h-12 grid-cols-[4.75rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-ink/18 transition-colors hover:border-ink/44 md:grid-cols-[5.25rem_minmax(0,1fr)_auto]"
                     >
-                      <span className="text-[8px] tracking-[0.22em] text-canvas/66">{item.type}</span>
-                      <span className="text-[10px] font-medium tracking-[0.15em] text-canvas/90">{item.title}</span>
+                      <span className="text-[8px] tracking-[0.22em] text-ink/58">{item.type}</span>
+                      <span className="text-[10px] font-medium tracking-[0.15em] text-ink/90">{item.title}</span>
                       <span aria-hidden="true" className="text-xs transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
                     </a>
                   ))}
@@ -582,50 +581,6 @@ function HomePage() {
               </div>
             </div>
           </motion.div>
-        </section>
-
-        {/* INTRODUCTION — an evidence system, reduced to its essential logic */}
-        <section className="relative w-full border-y border-ink/12 bg-canvas px-4 py-24 text-ink md:px-16 md:py-36">
-          <div className="mx-auto w-full max-w-[1800px]">
-            <div className="flex items-center justify-between border-b border-ink/14 pb-5 text-[10px] uppercase tracking-[0.3em] text-ink/58">
-              <span>Working method</span>
-              <span aria-hidden="true" className="font-serif text-base italic tracking-normal">01 — 03</span>
-            </div>
-
-            <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-12 md:gap-8 md:py-24">
-              <div className="md:col-span-8">
-                <ScrollReveal blur={false}>
-                  <h2 className="max-w-[9ch] font-serif text-[4rem] font-light leading-[0.82] tracking-normal sm:text-7xl md:text-[6.8rem] lg:text-[7.625rem]">
-                    Evidence,
-                    <span className="block italic">before answers.</span>
-                  </h2>
-                </ScrollReveal>
-              </div>
-              <ScrollReveal delay={0.15} yOffset={12} blur={false} className="flex items-end md:col-span-4 md:pb-3">
-                <p className="max-w-md text-sm leading-[1.8] text-ink/66 md:text-base">
-                  I build <a href="/method" className="border-b border-ink/24 hover:border-ink">technical SEO audit services</a>, crawl evidence systems, and an <a href="/research/technical-seo" className="border-b border-ink/24 hover:border-ink">evidence-backed technical SEO diagnostic library</a> that preserve how a conclusion was produced. Atlas handles raw and rendered page data; the <a href="/austin-technical-seo" className="border-b border-ink/24 hover:border-ink">Austin technical SEO</a> practice turns that evidence into bounded implementation work.
-                </p>
-              </ScrollReveal>
-            </div>
-
-            <div className="grid border-y border-ink/14 md:grid-cols-3">
-              {[
-                ['01', 'Observe', 'Capture URL records, source and rendered states, links, directives, and provider failures without cleaning away the gaps.'],
-                ['02', 'Separate', 'Keep observations, derived findings, assumptions, and measurement gaps in distinct fields.'],
-                ['03', 'Ship', 'Export a decision with its source, owner, acceptance check, and rerun path.'],
-              ].map(([num, title, copy], index) => (
-                <div key={num} className="min-h-52 border-b border-ink/14 py-7 last:border-b-0 md:border-b-0 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0 md:last:pr-0">
-                  <ScrollReveal delay={index * 0.08} blur={false} className="grid h-full min-h-40 content-between">
-                    <span className="font-serif text-xl italic text-ink/46">{num}</span>
-                    <div>
-                      <h3 className="font-serif text-4xl font-light tracking-normal">{title}</h3>
-                      <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/62">{copy}</p>
-                    </div>
-                  </ScrollReveal>
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
 
         {/* TEXT MARQUEE */}
@@ -1285,11 +1240,6 @@ function HomePage() {
                </div>
             </div>
          </section>
-
-        {/* INTERSTITIAL SECTION — a quiet handoff into contact */}
-        <section className="relative w-full overflow-hidden border-y border-canvas/14 bg-ink text-canvas">
-           <KineticTypography />
-        </section>
 
         {/* CONTACT */}
         <footer id="contact" className="relative w-full overflow-hidden border-t border-ink/14 bg-canvas text-ink selection:bg-ink selection:text-canvas">
