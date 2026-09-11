@@ -6,8 +6,8 @@ import { PUBLICATION_INDEX } from './publicationIndex';
 import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from './programmaticSeo';
 import { DIAGNOSTIC_EXAMPLES } from './diagnosticExamples';
 import { PROFILE_FACTS } from './profileFacts';
-import { SEO_ROUTES, getSeoRoute } from '../seo/routes';
-import { buildRouteStaticHtml } from '../seo/staticContent';
+import { SEO_ROUTES, getSeoRoute, getCanonicalRoutes } from '../seo/routes';
+import { buildRouteStaticHtml, buildSitemapStaticHtml } from '../seo/staticContent';
 import { latestContentDate, normalizePublicationDate } from '../utils/publicationDate';
 
 const escape = (text: string) => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
@@ -62,4 +62,11 @@ test('the HTML generator never hides the server document merely because JavaScri
   assert.match(source, /app-mounted #seo-static-summary/);
   const app = fs.readFileSync('src/App.tsx', 'utf8');
   assert.match(app, /function RouteReady[\s\S]*?useLayoutEffect/);
+});
+
+test('canonical heading records match the server document on every published route', () => {
+  for (const route of getCanonicalRoutes()) {
+    const html = route.path === '/sitemap' ? buildSitemapStaticHtml(getCanonicalRoutes()) : route.staticHtml ?? buildRouteStaticHtml(route);
+    assert.ok(html.includes(`<h1>${escape(route.h1)}</h1>`), route.path);
+  }
 });

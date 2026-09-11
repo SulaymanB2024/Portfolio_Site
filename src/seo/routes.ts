@@ -173,7 +173,7 @@ const CORE_ROUTES: SeoRoute[] = [
     title: 'Atlas Open Corpus Demonstration | Crawl Evidence',
     description:
       'A dated Atlas demonstration showing source and render states, discovered paths, confidence, findings, and downloadable run artifacts from a bounded open corpus.',
-    h1: 'Atlas Open Corpus Demonstration',
+    h1: 'Atlas Open-Corpus Demonstration',
     displayH1: 'Open-corpus evidence.',
     section: 'project',
     pageType: 'project',
@@ -260,7 +260,7 @@ const CORE_ROUTES: SeoRoute[] = [
     title: 'Technical SEO Audit Services & Process | Void Agency',
     description:
       'Void Agency’s technical SEO audit method for crawl paths, indexation, internal links, structured data, analytics, and implementation priorities.',
-    h1: 'Void Agency Method',
+    h1: 'Technical SEO Audit Services',
     displayH1: 'Technical SEO audits, evidence first.',
     section: 'service',
     pageType: 'service',
@@ -296,7 +296,7 @@ const CORE_ROUTES: SeoRoute[] = [
     title: 'Austin Technical SEO Consultant & Audit Services',
     description:
       'Austin technical SEO for teams that need crawlability, indexation, structured data, page clarity, local context, and implementation guidance.',
-    h1: 'Austin Technical SEO',
+    h1: 'Austin Technical SEO Consultant',
     displayH1: 'Austin technical SEO consultant.',
     section: 'local-service',
     pageType: 'service',

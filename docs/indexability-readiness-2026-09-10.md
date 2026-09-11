@@ -31,6 +31,10 @@ Ten sitemap dates previously stuck in July now follow the actual public-profile,
 article, guide or collection records. These are content dates, not build dates.
 Unchanged article dates and historical source-verification cutoffs are preserved.
 
+Three route-heading records (Atlas sample crawl, audit method and Austin service)
+now match the existing server H1s. An all-route regression test prevents those
+records from silently disagreeing with the actual published documents.
+
 ## Exclusions and measurements
 
 The Celestial Parallax prototype and archived research-methodology page remain
@@ -46,7 +50,7 @@ here measures readiness, not a transition into Google's index.
 
 ## Reproduction
 
-- `npm run test:indexability`: 11 discovery, date, publishing-decision and live-response fixtures.
+- `npm run test:indexability`: 12 discovery, date, publishing-decision and live-response fixtures.
 - `python3 scripts/browser-indexability.py`: 22 desktop/mobile cases with JavaScript disabled, a failed entry script, or a failed route chunk. Failing modes must actually block the selected script. Initial main text, headings, links and canonical metadata must remain available without scrolling.
 - Existing browser smoke checks still test successful application rendering and live motion preferences.
 - `npm run verify:pseo-live`: direct production HTTP 200s, content types, initial metadata, HTML/HTTP exclusions, readable-document release marker, JSON-LD, exact sitemap and robots policy. Four concurrent requests, 20-second request limits, 4 MiB response limits; no cache-busting URL parameters. Writes `audit-artifact/live-indexability.json`.
