@@ -30,10 +30,12 @@ export function navItemId(prefix: string, item: SiteNavItem) {
 }
 
 export function isNavItemActive(activePath: string, href: string) {
-  if (href.includes('#')) {
-    return activePath === href;
-  }
-
-  const path = href.split('#')[0] || '/';
-  return activePath === path;
+  // Match whole path segments: /atlas/sample-crawl belongs to Atlas, /atlas-x does not.
+  if (!href.startsWith('/') || href.startsWith('//')) return false;
+  const normalize = (value: string) => value.split(/[?#]/)[0].replace(/\/+$/, '') || '/';
+  const current = normalize(activePath);
+  const target = normalize(href);
+  if (href.includes('#')) return activePath === href;
+  if (target === '/research' && (current === '/markets' || current.startsWith('/markets/'))) return true;
+  return current === target || (target !== '/' && current.startsWith(`${target}/`));
 }

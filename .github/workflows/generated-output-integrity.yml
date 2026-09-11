@@ -46,6 +46,8 @@ jobs:
           git rev-parse HEAD > audit-artifact/commit.txt
           git archive HEAD -o audit-artifact/repository.tar
           if [ -d dist ]; then tar -cf audit-artifact/dist.tar dist; fi
+          # Temporary dependency snapshot for the recovery review; removed before merge.
+          if [ -d node_modules ]; then tar -czf audit-artifact/node_modules.tar.gz node_modules; fi
       - name: Retain audit evidence
         if: always()
         uses: actions/upload-artifact@v4
