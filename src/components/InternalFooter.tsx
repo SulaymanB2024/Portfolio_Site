@@ -100,7 +100,21 @@ export function InternalFooter({ activePath, tone = 'light' }: InternalFooterPro
             <ArrowUp aria-hidden="true" className="relative h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" strokeWidth={1.5} />
           </a>
         </div>
-        <p className={`m-0 max-w-[92ch] border-t ${dividerClass} pt-3 text-[11px] normal-case leading-relaxed tracking-normal ${textMutedClass}`}>
+        {/* Mobile Disclosure (<= md) */}
+        <div className={`block md:hidden border-t ${dividerClass} pt-2.5`}>
+          <details className="group">
+            <summary className="flex items-center justify-between cursor-pointer py-1 text-[10px] tracking-[0.16em] uppercase font-medium">
+              <span>Analytics / measurement disclosure</span>
+              <span aria-hidden="true" className="text-xs transition-transform duration-200 group-open:rotate-45">+</span>
+            </summary>
+            <p className={`mt-2 text-[10px] normal-case leading-relaxed tracking-normal ${textMutedClass}`}>
+              Measurement disclosure: on an exact production host, this site may use Vercel Web Analytics, Vercel Speed Insights, and a shared Google Analytics 4 portfolio property to record page paths, fixed content-safe interaction labels, and aggregate performance or engagement. The site integration does not send typed content, names, email addresses, user IDs, URL query strings, or fragments. Google Signals and ad-personalization signals are disabled; the providers may still process standard device, network, cookie, performance, and referrer data. This configuration and wording require site-owner and privacy review and do not assert legal compliance.
+            </p>
+          </details>
+        </div>
+
+        {/* Desktop Open Paragraph (> md) */}
+        <p className={`hidden md:block m-0 max-w-[92ch] border-t ${dividerClass} pt-3 text-[11px] normal-case leading-relaxed tracking-normal ${textMutedClass}`}>
           Measurement disclosure: on an exact production host, this site may use Vercel Web Analytics, Vercel Speed Insights, and a shared Google Analytics 4 portfolio property to record page paths, fixed content-safe interaction labels, and aggregate performance or engagement. The site integration does not send typed content, names, email addresses, user IDs, URL query strings, or fragments. Google Signals and ad-personalization signals are disabled; the providers may still process standard device, network, cookie, performance, and referrer data. This configuration and wording require site-owner and privacy review and do not assert legal compliance.
         </p>
       </div>

@@ -18,9 +18,11 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   const activeItem = primaryNav.find((item) => isNavItemActive(activePath, item.href));
   const [routeNote, setRouteNote] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useRef<HTMLElement>(null);
   const mobileMenuScrollYRef = useRef(0);
+  const lastScrollYRef = useRef(0);
   const isFinalFrame = variant === 'final-frame';
   const isDark = tone === 'dark';
   const showRouteNote = variant !== 'home' && !isFinalFrame;
@@ -35,15 +37,48 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   const bgClass = isDark ? 'site-header-surface-dark' : 'site-header-surface-light';
   const menuBorderClass = isDark ? 'border-canvas/16' : 'border-ink/16';
   const surfaceClass = isFinalFrame ? 'relative z-[60]' : 'site-header relative z-[60]';
+  const isHidden = !headerVisible && !mobileMenuOpen && variant !== 'home';
   const shellClass = mobileMenuOpen || variant === 'home'
-    ? 'fixed inset-x-0 top-0 z-50 w-full'
-    : 'sticky top-0 z-50 w-full';
+    ? 'fixed inset-x-0 top-0 z-50 w-full transition-transform duration-300 ease-out'
+    : `sticky top-0 z-50 w-full transition-transform duration-300 ease-out ${isHidden ? '-translate-y-full xl:translate-y-0' : 'translate-y-0'}`;
+
   const toggleMobileMenu = () => {
     if (!mobileMenuOpen) {
       mobileMenuScrollYRef.current = window.scrollY;
     }
     setMobileMenuOpen((open) => !open);
   };
+
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        const delta = currentScrollY - lastScrollYRef.current;
+
+        if (currentScrollY < 80) {
+          setHeaderVisible(true);
+          document.documentElement.style.setProperty('--article-mobile-sticky-top', '4.5rem');
+        } else if (delta > 10 && currentScrollY > 120) {
+          // Scrolling downward into the article
+          setHeaderVisible(false);
+          document.documentElement.style.setProperty('--article-mobile-sticky-top', '0px');
+        } else if (delta < -12) {
+          // Deliberate upward scroll
+          setHeaderVisible(true);
+          document.documentElement.style.setProperty('--article-mobile-sticky-top', '4.5rem');
+        }
+
+        lastScrollYRef.current = currentScrollY;
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     setMobileMenuOpen(false);

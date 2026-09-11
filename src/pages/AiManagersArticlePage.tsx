@@ -513,7 +513,7 @@ export default function AiManagersArticlePage() {
     })),
     callouts: [{
       label: 'Direct answer',
-      title: SEARCH_TARGET.primaryQuery,
+      title: 'Can AI Run a Business?',
       content: (
         <>
           <p>{SEARCH_TARGET.directAnswer}</p>
