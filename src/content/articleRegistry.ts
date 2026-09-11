@@ -7,6 +7,8 @@ import { THE_AI_MEGAWATT_ARTICLE } from './theAiMegawattArticle';
 
 const ROBOTS_ACCESS_CONTROL_ARTICLE_SLUG = 'robots-txt-courtesy-not-access-control';
 const ROBOTS_ACCESS_CONTROL_CTR_TITLE = 'Robots.txt Is Not Access Control | RFC 9309 Authorization';
+const AI_CRAWLER_POLICY_ARTICLE_SLUG = 'ai-search-crawler-policy';
+const AI_CRAWLER_POLICY_CTR_TITLE = 'AI Crawler Robots.txt Guide | GPTBot, ClaudeBot & PerplexityBot';
 
 const BASE_ARTICLES: PublicArticle[] = [
   THE_AI_MEGAWATT_ARTICLE,
@@ -25,6 +27,17 @@ function applyMeasuredSearchSnippetExperiment(article: PublicArticle): PublicArt
     return {
       ...article,
       seoTitle: ROBOTS_ACCESS_CONTROL_CTR_TITLE,
+    };
+  }
+
+  if (
+    article.kind === 'research'
+    && article.cluster === 'ai-crawlers'
+    && article.slug === AI_CRAWLER_POLICY_ARTICLE_SLUG
+  ) {
+    return {
+      ...article,
+      seoTitle: AI_CRAWLER_POLICY_CTR_TITLE,
     };
   }
 
