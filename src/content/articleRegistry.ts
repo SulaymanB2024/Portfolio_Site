@@ -11,6 +11,8 @@ const AI_CRAWLER_POLICY_ARTICLE_SLUG = 'ai-search-crawler-policy';
 const AI_CRAWLER_POLICY_CTR_TITLE = 'AI Crawler Robots.txt Guide | GPTBot, ClaudeBot & PerplexityBot';
 const AI_MANAGERS_ARTICLE_SLUG = 'the-first-ai-managers';
 const AI_MANAGERS_CTR_TITLE = 'AI Managers: 30 AI Manager Cases Reviewed';
+const WAYMO_FINANCING_ARTICLE_SLUG = 'waymo-hardware-financing';
+const WAYMO_FINANCING_CTR_TITLE = 'Waymo Financing Structure: Who Funds the Hardware?';
 
 const BASE_ARTICLES: PublicArticle[] = [
   THE_AI_MEGAWATT_ARTICLE,
@@ -51,6 +53,17 @@ function applyMeasuredSearchSnippetExperiment(article: PublicArticle): PublicArt
     return {
       ...article,
       seoTitle: AI_MANAGERS_CTR_TITLE,
+    };
+  }
+
+  if (
+    article.kind === 'research'
+    && article.cluster === 'financial-systems'
+    && article.slug === WAYMO_FINANCING_ARTICLE_SLUG
+  ) {
+    return {
+      ...article,
+      seoTitle: WAYMO_FINANCING_CTR_TITLE,
     };
   }
 
