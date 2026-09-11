@@ -1,0 +1,2 @@
+# Generated documents are binary artifacts, not line-oriented source.
+*.pdf binary

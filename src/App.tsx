@@ -544,7 +544,7 @@ function HomePage() {
               <div className="mt-7 grid max-w-[1180px] gap-6 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.14fr)_minmax(340px,0.86fr)] md:gap-8">
                 <div>
                   <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">UT Austin student and AI Product Manager Intern at Chegg; technical SEO consultant through Void Agency, builder of Atlas, and publisher of source-led research.</p>
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">{PROFILE_FACTS.currentSummary}</p>
                   <nav className="home-cover__index mt-6" aria-label="Portfolio shortcuts">
                     {homeJourneyLinks.map((item) => (
                       <a

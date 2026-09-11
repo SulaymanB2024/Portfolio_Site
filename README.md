@@ -90,3 +90,34 @@ ad-personalization signals are disabled by the site configuration.
 - `npm run linkbuilding:export-publish` writes an ignored `output/link-building-publish/` bundle containing only publish-manifest files for application to a clean branch or worktree.
 - `npm run linkbuilding:scope-check` verifies that the current dirty worktree contains only files from the publish manifest before staging or deployment.
 - `npm run linkbuilding:live-check` verifies that the authority hub, raw assets, sitemap, and `llms.txt` are actually live on `https://sulayman-bowles.dev` before outreach or IndexNow submission.
+
+## Site-quality checks and résumé maintenance
+
+After `npm run build`, run `npm run verify:site-integrity` to check generated HTML,
+local destinations, fragments, assets, canonical/sitemap/noindex rules and flat/directory
+variants. It writes ignored `audit-artifact/site-integrity.json`.
+`npm run verify:static-idempotence` verifies that rerunning the static generator changes
+none of the built HTML. `test:site-integrity` and `test:site-behavior` cover intentional
+failures and lifecycle/content contracts. CI runs these alongside the existing gates.
+
+The public profile, résumé HTML, Person schema and `llms.txt` derive from
+`src/content/profileFacts.ts`. Following a confirmed public-profile edit:
+
+```sh
+# Optional authoring dependency, not a website/runtime requirement.
+python3 -m pip install reportlab==4.4.9
+npm run generate:resume
+npm run generate:public
+npm run verify:profile
+```
+
+Inspect the resulting one-page PDF before committing it. The manifest in
+`docs/resume-pdf-manifest.json` binds the PDF bytes to the serialized profile facts;
+this prevents silently stale downloads but does not externally verify employment claims.
+
+Optional browser smoke: install `playwright==1.57.0` and provide system Chrome (or set
+`BROWSER_EXECUTABLE`), then run `python3 scripts/browser-smoke.py` after building.
+Screenshots and results stay in `audit-artifact/browser`. This test aborts external
+requests and validates the built application, not production hosting.
+
+See `docs/sitewide-search-quality-2026-09-10.md` for the source-review scope and limits.

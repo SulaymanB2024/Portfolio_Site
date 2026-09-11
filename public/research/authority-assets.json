@@ -148,11 +148,11 @@
     },
     {
       "priority": 1,
-      "name": "The First AI Managers",
+      "name": "Can AI Run a Business? 30 AI Manager Cases",
       "url": "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
       "type": "source_led_article",
       "cluster": "ai-systems",
-      "preferred_anchor": "The First AI Managers",
+      "preferred_anchor": "Can AI Run a Business? 30 AI Manager Cases",
       "pitch_angle": "Separate live businesses, pilots, simulations, and vendor claims instead of treating every autonomy demonstration as equivalent evidence.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",
@@ -430,11 +430,11 @@
     },
     {
       "priority": 2,
-      "name": "Robots.txt Is a Courtesy Layer, Not Access Control",
+      "name": "Robots.txt Is Not Access Control: RFC 9309 Explained",
       "url": "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
       "type": "source_led_article",
       "cluster": "ai-crawlers",
-      "preferred_anchor": "Robots.txt Is a Courtesy Layer, Not Access Control",
+      "preferred_anchor": "Robots.txt Is Not Access Control: RFC 9309 Explained",
       "pitch_angle": "Show the complete control stack and failure modes instead of repeating that robots.txt is voluntary without an implementation boundary.",
       "supporting_assets": [
         "https://sulayman-bowles.dev/research/article-research-briefs.json",

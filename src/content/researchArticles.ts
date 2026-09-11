@@ -46,7 +46,7 @@ export const RESEARCH_ARTICLES: ResearchArticle[] = [
       caption: 'Model decisions remain nested inside human legal, financial, and physical control.',
     },
     date: '2026.07.14',
-    dateModified: '2026.07.19',
+    dateModified: '2026.09.10',
     lastVerified: '2026.07.19',
     readTime: AI_MANAGERS_ARTICLE_READ_TIME,
     author: 'SULAYMAN BOWLES',

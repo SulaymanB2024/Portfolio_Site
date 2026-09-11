@@ -84,11 +84,11 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "kind": "research",
     "path": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
     "aliases": [],
-    "title": "Robots.txt Is a Courtesy Layer, Not Access Control",
-    "seoTitle": "Is Robots.txt Access Control? RFC 9309 Says No",
+    "title": "Robots.txt Is Not Access Control: RFC 9309 Explained",
+    "seoTitle": "Robots.txt Is Not Access Control: RFC 9309 & Google Docs",
     "seoDescription": "RFC 9309 says robots.txt rules are not access authorization. Learn what robots.txt controls—and when to use noindex, authentication, authorization, or rate limits.",
     "date": "2026.07.19",
-    "dateModified": "2026.07.25",
+    "dateModified": "2026.09.10",
     "indexable": true,
     "staticSummary": "RFC 9309 states that robots.txt rules are not access authorization. The file is a publicly readable crawler-coordination protocol that cooperative agents may follow; authentication, authorization, network policy, and server-side response controls must protect material that cannot be publicly retrieved. RFC 9309 is explicit: robots.txt rules are not a form of access authorization. A robots.txt file is public text that asks automated clients how they may access paths on one service. It is valuable because cooperating crawlers can retrieve one predictable policy before requesting content. It is not a credential, firewall, authorization decision, encryption layer, or proof of the client behind a User-Agent string. Treating it as any of those creates a security boundary that an ordinary HTTP client can cross by ignoring the file.",
     "image": "/images/research/robots-policy-social.jpg"
@@ -163,7 +163,7 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "path": "/research/financial-systems/who-owns-austin-home-service-companies",
     "aliases": [],
     "title": "Who Owns Austin’s Home-Service Companies?",
-    "seoTitle": "Who Owns Austin Home-Service Companies?",
+    "seoTitle": "Who Owns Austin Home-Service Companies? 67 Brands Mapped",
     "seoDescription": "Who owns Austin home-service companies? Explore 67 HVAC, plumbing, roofing, foundation, and pest-control brands by parent, sponsor, franchise, and local owner.",
     "date": "2026.07.26",
     "dateModified": "2026.07.26",
@@ -276,11 +276,11 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "aliases": [
       "/markets/the-first-ai-managers"
     ],
-    "title": "The First AI Managers",
-    "seoTitle": "AI Managers: When AI Runs a Business",
-    "seoDescription": "Inside the first AI-operated shops, cafés, vending machines, and radio stations—and the gap between completing the next task and preserving a coherent business.",
+    "title": "Can AI Run a Business? 30 AI Manager Cases",
+    "seoTitle": "Can AI Run a Business? 30 AI Manager Cases Reviewed",
+    "seoDescription": "30 cases across live operations, pilots, narrow agents, simulations, and exclusions. What AI managers can do, and where humans still run the business.",
     "date": "2026.07.14",
-    "dateModified": "2026.07.19",
+    "dateModified": "2026.09.10",
     "indexable": true,
     "staticSummary": "AI can run bounded business actions such as scheduling, pricing, customer replies, purchasing, and promotion, but the strongest public cases still depend on humans for legal authority, capital, physical work, supervision, and recovery when state or policy fails. The first public AI-operated shops are not synthetic companies with software owners. They are bounded systems inside human institutions: a boutique, a café, vending machines, radio stations, production agents, and simulated markets.",
     "image": "/images/research/ai-managers-social.jpg"
@@ -340,9 +340,9 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "seoTitle": "U.S. Rare-Earth Magnet Capacity: Plant-by-Plant Buildout",
     "seoDescription": "Audit U.S. rare-earth magnet manufacturing capacity by plant maturity, product form, qualification status, upstream inputs, and realistic output scenarios.",
     "date": "2026.08.17",
-    "dateModified": "2026.08.17",
+    "dateModified": "2026.09.10",
     "indexable": true,
-    "staticSummary": "U.S. rare-earth magnet manufacturing capacity is growing, but announced nameplate, installed equipment, qualification, commercial shipments, and sustained saleable output are different maturity states. Bankable supply also depends on product mix, yield, qualified customers, imported inputs, and utilization rather than the sum of every announced project headline. The United States is no longer starting from zero in sintered neodymium-iron-boron magnets. A project-by-project audit produces 37,750 metric tonnes of disclosed firm-project nameplate. That figure is large enough to resemble published estimates of total U.S. magnet consumption, but the resemblance is misleading. Only 4,000 tonnes belongs to plants with both disclosed nameplate and commercial shipments. Another 3,600 tonnes sits in commissioning, ramp, or customer qualification. The remaining 30,150 tonnes is future capacity tied to construction, later phases, or announced production targets.",
+    "staticSummary": "U.S. rare-earth magnet manufacturing capacity is growing, but announced nameplate, installed equipment, qualification, commercial shipments, and sustained saleable output are different maturity states. Bankable supply also depends on product mix, yield, qualified customers, imported inputs, and utilization rather than the sum of every announced project headline. The United States is no longer starting from zero in sintered neodymium-iron-boron magnets. A project-by-project audit produces 37,750 stated units (37,584–38,048 normalized metric tonnes) of disclosed firm-project nameplate. That figure is large enough to resemble published estimates of total U.S. magnet consumption, but the resemblance is misleading. Only 4,000 stated units belong to plants with both disclosed nameplate and commercial shipments. Another 3,600 stated units sit in commissioning, ramp, or customer qualification. The remaining 30,150 stated units are future capacity tied to construction, later phases, or announced production targets.",
     "image": "/images/social/og-research.png"
   },
   {

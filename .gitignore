@@ -26,3 +26,7 @@ audits/
 *.zip
 !public/research/capital-stack-diagrams.zip
 .vercel
+
+# Generated verification evidence
+audit-artifact/
+__pycache__/

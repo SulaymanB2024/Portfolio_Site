@@ -16,7 +16,10 @@ export type ProfileSkillGroup = {
 export const PROFILE_FACTS = {
   name: 'Sulayman Bowles',
   currentSummary:
-    'Sulayman Bowles is a UT Austin student working in AI product at Chegg, building Atlas technical SEO software, running Void Agency, and publishing research on AI systems, crawlability, infrastructure, and investment questions.',
+    'Sulayman Bowles is a UT Austin finance student and Growth & Product Intern at Chegg. He builds Atlas technical SEO software, runs Void Agency, and publishes research on AI systems, infrastructure, and ownership.',
+  currentResearchWork: 'Growth and synthetic-research content work at Sapien, alongside source-led research on AI systems, infrastructure, and ownership.',
+  musicBackground: 'Classical bass and composition remain part of my background. My current degree is the BBA in Finance at McCombs.',
+  publicContact: { email: 'sulayman.bowles@gmail.com', phone: '512-827-9016' },
   positioning: 'Technical SEO, AI systems, and finance research.',
   education: {
     institution: 'The University of Texas at Austin',
@@ -25,19 +28,18 @@ export const PROFILE_FACTS = {
     expectedGraduation: 'May 2028',
     degrees: [
       { degree: 'Bachelor of Business Administration', field: 'Finance' },
-      { degree: 'Bachelor of Arts', field: 'Music' },
     ],
-    coursework: ['Business Analytics', 'Statistics', 'Data Science', 'Accounting', 'Finance', 'Program Management'],
+    coursework: ['Valuation', 'Investment Management', 'Intermediate Accounting', 'Business Analytics', 'Statistics'],
   },
   experience: [
     {
       organization: 'Chegg, Inc.',
       location: 'Austin, TX',
-      title: 'AI Product Manager Intern, Office of the Chief Product Officer',
-      dates: 'May 2026 — Aug 2026',
-      publicSummary: 'Supports AI product strategy, research, and discovery for student-facing education tools.',
+      title: 'Growth & Product Intern',
+      dates: 'May 2026 — Present',
+      publicSummary: 'Leads user-generated and scaled-content work, defining production priorities and growth experiments for student-facing products.',
       bullets: [
-        'Develops product briefs, competitive research, workflow analysis, and evaluation criteria for student experiences.',
+        'Builds content-intelligence workflows and prototypes voice-agent experiences with defined requirements, fallback behavior, and evaluation cases.',
       ],
       visibility: 'public',
     },
@@ -106,7 +108,7 @@ export const PROFILE_FACTS = {
       organization: 'Student Government',
       location: 'Austin, TX',
       title: 'University-Wide Representative',
-      dates: 'Sep 2024 — Present',
+      dates: 'Mar 2025 — Present',
       detail: 'Elected university-wide representative coordinating student input through surveys, town halls, and cross-college outreach.',
     },
     {
@@ -128,13 +130,13 @@ export const PROFILE_FACTS = {
   projects: [
     { name: 'Atlas SEO Audit Console', path: '/atlas', status: 'Implemented; public proof partial; active development' },
     { name: 'Void Agency', path: 'https://www.void-agency.com/', status: 'Operating' },
-    { name: 'The First AI Managers', path: '/research/ai-systems/the-first-ai-managers', status: 'Published July 14, 2026' },
+    { name: 'Can AI Run a Business? 30 AI Manager Cases', path: '/research/ai-systems/the-first-ai-managers', status: 'Published July 14, 2026' },
     { name: 'Texas toll-road ownership research', path: '/markets/who-owns-texas-toll-roads', status: 'Published July 11, 2026' },
   ],
   proofClaims: [
     { label: 'Atlas', claim: 'Crawl and evidence console with a reproducible public demonstration', asOf: '2026-07-16', publicSource: '/atlas/sample-crawl' },
     { label: 'Void Agency', claim: '$50K+ collected revenue — first-party claim; private invoices are not public', asOf: '2026-05-31', publicSource: null },
-    { label: 'Chegg', claim: 'AI Product Manager Intern, Office of the Chief Product Officer — role stated in this résumé; corroborating employer record is not linked', asOf: '2026-07-16', publicSource: null },
+    { label: 'Chegg', claim: 'Growth & Product Intern — role and continuing dates stated in the September 2026 résumé; corroborating employer record is not linked', asOf: '2026-09-01', publicSource: null },
     { label: 'Public research', claim: 'AI systems, infrastructure, and investment research with source-led analysis', asOf: '2026-07-16', publicSource: '/research' },
   ],
   canonicalLinks: {
@@ -149,8 +151,8 @@ export const PROFILE_FACTS = {
     github: 'https://github.com/SulaymanB2024',
     linkedin: 'https://www.linkedin.com/in/sulayman-bowles/',
   },
-  lastReviewed: '2026-07-18',
-  nextRoleReview: '2026-08-31',
+  lastReviewed: '2026-09-10',
+  nextRoleReview: '2026-10-01',
 } as const;
 
 export function formatIsoDate(isoDate: string) {

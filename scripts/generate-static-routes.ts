@@ -602,7 +602,15 @@ async function main() {
   verifyArticleRouteMetadata();
 
   const templatePath = path.join(DIST_DIR, 'index.html');
-  const template = await fs.readFile(templatePath, 'utf8');
+  const previousHtml = await fs.readFile(templatePath, 'utf8');
+  const fallbackStart = previousHtml.indexOf('<section id="seo-static-summary"');
+  const rootStart = previousHtml.indexOf('<div id="root"></div>');
+  if (rootStart < 0 || (fallbackStart >= 0 && rootStart < fallbackStart)) {
+    throw new Error('Static generation requires an empty root mount after the generated fallback.');
+  }
+  // The fallback includes nested sections; a first-closing-section regex would truncate it.
+  const template = fallbackStart < 0 ? previousHtml
+    : previousHtml.slice(0, fallbackStart) + previousHtml.slice(rootStart);
   const assetTags = extractAssetTags(extractHead(template));
 
   await Promise.all([

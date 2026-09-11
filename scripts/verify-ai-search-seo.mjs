@@ -30,7 +30,7 @@ const crawlerAgents = [
 
 const read = (file) => fs.readFileSync(path.resolve(file), 'utf8');
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
-const textFromHtml = (html) => html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+const textFromHtml = (html) => html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&#(?:39|x27);/gi, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
 const jsonLdScripts = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
 const graph = (html) => jsonLdScripts(html).flatMap((match) => {
   const value = JSON.parse(match[1]);
@@ -345,16 +345,17 @@ assert(home.includes('href="/method">Technical SEO audit services</a>'), 'home: 
 assert(home.includes('href="/austin-technical-seo">Austin technical SEO consultant</a>'), 'home: missing Austin technical SEO consultant anchor');
 
 const resume = read('dist/resume/index.html');
-for (const fact of ['Bachelor of Business Administration in Finance', 'Bachelor of Arts in Music', 'Expected May 2028', 'AI Product Manager Intern', 'Confidential B2B manufacturer']) {
+for (const fact of ['Bachelor of Business Administration in Finance', 'Expected May 2028', 'Growth & Product Intern', 'Confidential B2B manufacturer']) {
   assert(textFromHtml(resume).includes(fact), `resume: missing master-resume fact ${fact}`);
 }
-for (const stale of ['Expected May 2027', 'Incoming AI Product Manager', 'data labeling', 'annotation']) {
+for (const stale of ['Expected May 2027', 'Bachelor of Arts in Music', 'Incoming AI Product Manager', 'AI Product Manager Intern', 'data labeling', 'annotation']) {
   assert(!textFromHtml(resume).toLowerCase().includes(stale.toLowerCase()), `resume: stale fact ${stale}`);
 }
 assert(fs.existsSync(path.resolve('public/Sulayman_Bowles_Resume.pdf')), 'public master resume PDF missing');
 
 const about = read('dist/about/index.html');
-assert(textFromHtml(about).includes('current second degree'), 'about: music must be current, not historical');
+assert(!textFromHtml(about).includes('current second degree'), 'about: obsolete Music degree claim');
+assert(textFromHtml(about).includes('BBA in Finance at McCombs'), 'about: current Finance degree missing');
 
 const austin = read('dist/austin-technical-seo/index.html');
 for (const expected of ['Austin Technical SEO Consultant', 'Crawlability and indexation audit', 'JavaScript rendering and templates', 'Structured data and AI search readiness']) {
