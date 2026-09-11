@@ -30,7 +30,7 @@ const currentWork = [
   },
   {
     title: 'Product work',
-    copy: 'AI product research, competitive analysis, workflow mapping, and prototype review through Chegg’s Office of the Chief Product Officer.',
+    copy: PROFILE_FACTS.currentResearchWork,
     href: '/resume',
   },
   {
@@ -68,7 +68,7 @@ export default function AboutPage() {
                 I design and implement crawl, product, and research systems. Atlas is the clearest expression of that work: its public sample preserves bounded source capture, render-review states, traceable findings, and export artifacts, while additional product capabilities remain explicitly labeled by implementation and public-proof status.
               </p>
               <p>
-                My implementation work spans React and TypeScript interfaces, Python and SQLite workflows, CSV and JSON exports, analytics, and validation gates. At UT Austin, I am pursuing {formatEducation()} through McCombs and the music program. Music remains a live part of how I think about structure, iteration, and whether an underlying system holds together.
+                My implementation work spans React and TypeScript interfaces, Python and SQLite workflows, CSV and JSON exports, analytics, and validation gates. At UT Austin, I am pursuing {formatEducation()} through McCombs, with expected graduation in {PROFILE_FACTS.education.expectedGraduation}.
               </p>
               <p>
                 The work is inspectable rather than assertion-led: the relevant project pages attach sanitized crawl rows, source ledgers, method notes, system designs, public code, and explicit evidence limits.
@@ -159,12 +159,12 @@ export default function AboutPage() {
 
         <IndexedSection
           index="04 / Music"
-          title="Music is current work, too."
+          title="Music background"
           headingId="about-music"
           className="about-visual__music"
         >
           <p className="visual-lab-reading-measure">
-            I am completing a BA in Music alongside the BBA in Finance. Classical bass and composition inform the same questions that show up in product and systems work: how parts relate, how constraints create form, and why a convincing surface cannot substitute for a sound underlying structure.
+            {PROFILE_FACTS.musicBackground}
           </p>
         </IndexedSection>
 

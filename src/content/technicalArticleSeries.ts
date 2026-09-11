@@ -773,8 +773,8 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
     slug: 'robots-txt-courtesy-not-access-control',
     number: '09',
     category: 'CRAWLER POLICY',
-    title: 'Robots.txt Is a Courtesy Layer, Not Access Control',
-    seoTitle: 'Is Robots.txt Access Control? RFC 9309 Says No',
+    title: 'Robots.txt Is Not Access Control: RFC 9309 Explained',
+    seoTitle: 'Robots.txt Is Not Access Control: RFC 9309 & Google Docs',
     subtitle:
       'A precise model for separating crawler requests, indexing directives, authentication, authorization, rate controls, and evidence of enforcement.',
     seoDescription:
@@ -788,7 +788,7 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       caption: 'A published courtesy rule and a materially secured resource are different control layers.',
     },
     date: PUBLISHED,
-    dateModified: '2026.07.25',
+    dateModified: '2026.09.10',
     lastVerified: VERIFIED,
     readTime: '13 MIN',
     author: 'SULAYMAN BOWLES',
@@ -808,9 +808,9 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       { label: 'Primary artifact', value: 'POLICY MATRIX' },
     ],
     sources: [
-      ROBOTS_STANDARD,
+      { ...ROBOTS_STANDARD, href: 'https://www.rfc-editor.org/rfc/rfc9309.html#section-3', lastVerified: '2026.09.10' },
       HTTP_STANDARD,
-      GOOGLE_ROBOTS_INTRO,
+      { ...GOOGLE_ROBOTS_INTRO, lastVerified: '2026.09.10' },
       OWASP_AUTHORIZATION,
       source('OpenAI crawler documentation', 'https://developers.openai.com/api/docs/bots'),
     ],
@@ -819,6 +819,21 @@ export const TECHNICAL_ARTICLE_SERIES: ResearchArticle[] = [
       'A robust crawler policy uses separate controls for separate outcomes. Robots rules govern cooperating automated retrieval. Page-level robots directives express indexing and presentation preferences to supporting systems. Authentication establishes an identity; authorization decides whether that identity may access a resource. Edge and application controls protect capacity. Logging and verification provide evidence about what happened. The layers can support one policy, but none substitutes for the others.',
     ],
     sections: [
+      {
+        id: 'official-source-map',
+        title: 'Official sources and the boundaries they establish',
+        paragraphs: [
+          'This article interprets the protocol; it is not official provider documentation. Start with RFC 9309 section 3 and Google Search Central in the source ledger. Both were reread for this source map on September 10, 2026. The remaining source dates retain their original cutoffs.',
+        ],
+        table: {
+          caption: 'Primary documentation for crawler policy and access control',
+          columns: ['Official source', 'What it establishes', 'What it does not establish'],
+          rows: [
+            ['RFC 9309, section 3', 'Publishing robots rules does not secure a resource; use an application-layer security control.', 'That every client follows the rules or that paths in robots.txt are private.'],
+            ['Google Search Central: robots.txt introduction', 'Robots rules manage cooperative crawling; a blocked URL may still appear in search.', 'A guarantee of deindexing or confidentiality.'],
+          ],
+        },
+      },
       {
         id: 'six-control-layers',
         title: 'Name the six control layers before writing rules',

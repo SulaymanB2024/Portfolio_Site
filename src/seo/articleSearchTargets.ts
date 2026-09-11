@@ -1,3 +1,4 @@
+import { PROGRAMMATIC_SEO_PAGES } from '../content/programmaticSeo';
 import { TEXAS_TOLL_DIRECT_ANSWER } from '../content/texasTollRoadOwnership';
 
 export type ArticleSearchIntent =
@@ -667,7 +668,11 @@ export const ARTICLE_SEARCH_TARGETS = [
 ] as const satisfies readonly ArticleSearchTarget[];
 
 export function getArticleSearchTarget(path: string) {
-  return ARTICLE_SEARCH_TARGETS.find((target) => target.path === path);
+  const target = ARTICLE_SEARCH_TARGETS.find((target) => target.path === path);
+  if (!target) return undefined;
+  const applications = PROGRAMMATIC_SEO_PAGES.filter((page) => page.foundationalPath === path);
+  return { ...target, relatedPaths: [...new Set([...target.relatedPaths, ...applications.map((page) => page.path)])] };
+
 }
 
 export function getArticleRelatedLinkLabel(sourcePath: string, relatedPath: string) {
@@ -675,5 +680,7 @@ export function getArticleRelatedLinkLabel(sourcePath: string, relatedPath: stri
     return TEXAS_TOLL_RELATED_LABELS[sourcePath] ?? 'Texas toll-road ownership guide';
   }
 
-  return getArticleSearchTarget(relatedPath)?.primaryQuery ?? relatedPath;
+  return getArticleSearchTarget(relatedPath)?.primaryQuery
+    ?? PROGRAMMATIC_SEO_PAGES.find((page) => page.path === relatedPath)?.title
+    ?? relatedPath;
 }

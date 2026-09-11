@@ -1,12 +1,12 @@
 export const AI_MANAGERS_ARTICLE_SLUG = 'the-first-ai-managers';
 export const AI_MANAGERS_ARTICLE_PATH = `/research/ai-systems/${AI_MANAGERS_ARTICLE_SLUG}`;
-export const AI_MANAGERS_ARTICLE_TITLE = 'The First AI Managers';
-export const AI_MANAGERS_ARTICLE_DISPLAY_TITLE = 'The Shopkeeper in the Machine';
-export const AI_MANAGERS_ARTICLE_SEO_TITLE = 'AI Managers: When AI Runs a Business';
+export const AI_MANAGERS_ARTICLE_TITLE = 'Can AI Run a Business? 30 AI Manager Cases';
+export const AI_MANAGERS_ARTICLE_DISPLAY_TITLE = 'Can AI Run a Business?';
+export const AI_MANAGERS_ARTICLE_SEO_TITLE = 'Can AI Run a Business? 30 AI Manager Cases Reviewed';
 export const AI_MANAGERS_ARTICLE_DESCRIPTION =
-  'Inside the first AI-operated shops, cafés, vending machines, and radio stations—and the gap between completing the next task and preserving a coherent business.';
+  '30 cases across live operations, pilots, narrow agents, simulations, and exclusions. What AI managers can do, and where humans still run the business.';
 export const AI_MANAGERS_ARTICLE_DATE = '2026.07.14';
-export const AI_MANAGERS_ARTICLE_UPDATED = '2026.07.19';
+export const AI_MANAGERS_ARTICLE_UPDATED = '2026.09.10';
 export const AI_MANAGERS_ARTICLE_READ_TIME = '31 MIN';
 export const AI_MANAGERS_ARTICLE_WORD_COUNT = 6300;
 export const AI_MANAGERS_ARTICLE_CONCLUSION = {

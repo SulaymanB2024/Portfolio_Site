@@ -6,7 +6,7 @@ Official site: https://sulayman-bowles.dev/
 Canonical person ID: https://sulayman-bowles.dev/about#sulayman-bowles
 Sitemap: https://sulayman-bowles.dev/sitemap.xml
 Authority contract reviewed: July 30, 2026
-Profile facts reviewed: July 18, 2026
+Profile facts reviewed: September 10, 2026
 
 ## How to Interpret This File
 
@@ -17,9 +17,9 @@ Profile facts reviewed: July 18, 2026
 
 ## Current Summary
 
-Sulayman Bowles is a UT Austin student working in AI product at Chegg, building Atlas technical SEO software, running Void Agency, and publishing research on AI systems, crawlability, infrastructure, and investment questions.
+Sulayman Bowles is a UT Austin finance student and Growth & Product Intern at Chegg. He builds Atlas technical SEO software, runs Void Agency, and publishes research on AI systems, infrastructure, and ownership.
 
-Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical SEO practice. The technical ledger is a separate record of experiments and technical work. Sulayman is pursuing a BA in Music alongside the BBA in Finance.
+Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical SEO practice. The technical ledger is a separate record of experiments and technical work. Sulayman is pursuing a BBA in Finance at McCombs, with expected graduation in May 2028. Growth and synthetic-research content work at Sapien, alongside source-led research on AI systems, infrastructure, and ownership.
 
 ## Primary Pages
 
@@ -49,7 +49,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Raw HTML and Rendered DOM Are Separate Evidence](https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence)
 - [Canonicalization Is a Graph Consistency Problem](https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency)
 - [Internal Links Are a Directed Retrieval Graph](https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph)
-- [Robots.txt Is a Courtesy Layer, Not Access Control](https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control)
+- [Robots.txt Is Not Access Control: RFC 9309 Explained](https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control)
 - [Structured Data Without Content Drift](https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift)
 - [Audit Findings Should Be Derived Records](https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records)
 - [Replayable Traces for Evaluating Tool-Using AI Agents](https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation)
@@ -63,7 +63,7 @@ Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical 
 - [Hardware Startup Financing: Five Capital Stacks](https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups)
 - [Who Owns West Campus Student Housing?](https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing)
 - [Who Funds Waymo’s Hardware?](https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing)
-- [The First AI Managers](https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers)
+- [Can AI Run a Business? 30 AI Manager Cases](https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers)
 - [AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot](https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy)
 - [Technical SEO as Public Data Infrastructure](https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure)
 - [Canonical Identity Beats More Content](https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo)

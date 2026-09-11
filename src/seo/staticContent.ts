@@ -605,7 +605,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       `<section aria-labelledby="artifact-title">
         <h2 id="artifact-title">Atlas-compatible evidence fixture for ${escapeHtml(programmaticPage.primaryQuery)}</h2>
         <p><strong>${escapeHtml(programmaticPage.evidenceArtifact.label)}.</strong> ${escapeHtml(programmaticPage.evidenceArtifact.description)}</p>
-        <p>Fixture fields: ${escapeHtml(programmaticPage.evidenceArtifact.fields.map((field) => `${field} ${programmaticPage.slug.replaceAll('-', '').toUpperCase()}`).join(', '))}.</p>
+        <p>Fixture fields: ${escapeHtml(programmaticPage.evidenceArtifact.fields.join(', '))}.</p>
       </section>
       ${articleSectionsStaticHtml(programmaticPage.sections)}
       <section aria-labelledby="sources-title">
@@ -654,7 +654,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
       'Sulayman Bowles',
       'Technical SEO, AI product, systems, and source-led research from Sulayman Bowles.',
       `<h2>Technical SEO, AI product, systems, and investment research.</h2>
-        <p>UT Austin student working in AI product at Chegg, running technical SEO consulting through Void Agency, building Atlas audit software, and publishing source-led research.</p>
+        <p>${escapeHtml(PROFILE_FACTS.currentSummary)}</p>
         <h2>Start with the proof</h2>
         <h3><a href="/research/ai-systems/the-first-ai-managers">The First AI Managers</a></h3>
         <p>A source-led review of the operational realities behind businesses that claim AI management.</p>
@@ -929,7 +929,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         <h2>Operating Principles</h2>
         <p>Inspect the inputs. Separate fact from inference. Ship the review path.</p>
         <h2>Music</h2>
-        <p>Music is a current second degree, not a historical aside. Classical bass and composition inform how I think about structure, iteration, and whether an underlying system holds together.</p>`,
+        <p>${escapeHtml(PROFILE_FACTS.musicBackground)}</p>`,
     );
   }
 

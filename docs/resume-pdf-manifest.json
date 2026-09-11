@@ -1,0 +1,8 @@
+{
+  "source": "src/content/profileFacts.ts",
+  "generator": "scripts/generate-resume-pdf.py",
+  "profileReviewed": "2026-09-10",
+  "profileSha256": "32792437f898fcbc982e05571806a09e15530ba1a5f06e5440db54378880156e",
+  "pdfPath": "public/Sulayman_Bowles_Resume.pdf",
+  "pdfSha256": "50c8c749b49623a9eb9ca989705aa075ee0fe5ff28a3bce91b06eb2b5d6a44d2"
+}

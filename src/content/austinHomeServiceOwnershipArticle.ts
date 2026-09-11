@@ -12,9 +12,9 @@ export const AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE: ResearchArticle = {
   number: '20',
   category: 'FINANCIAL SYSTEMS',
   title: 'Who Owns Austin’s Home-Service Companies?',
-  seoTitle: 'Who Owns Austin Home-Service Companies?',
+  seoTitle: 'Who Owns Austin Home-Service Companies? 67 Brands Mapped',
   subtitle:
-    'A verified map of the parent companies, private-equity sponsors, public corporations, franchises, and local operators behind 67 home-service brands advertising across Austin.',
+    'A July 2026 ownership map of 67 Austin home-service brands, distinguishing supported parent and sponsor records from partial or unresolved ownership.',
   seoDescription:
     'Who owns Austin home-service companies? Explore 67 HVAC, plumbing, roofing, foundation, and pest-control brands by parent, sponsor, franchise, and local owner.',
   artwork: {
@@ -86,7 +86,7 @@ export const AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE: ResearchArticle = {
   content: [
     'Search for an Austin plumber, air-conditioning technician, roofer, foundation specialist, or pest-control company and the result can look intensely local: a familiar name, an Austin phone number, a decades-old founding story, and technicians dispatched from a nearby office. The legal and financial chain behind that name may be much larger. Radiant appears as an Austin brand inside T3 Services Group, which is a Riverside Company investment. Stan’s sits inside Master Trades Group, an L Catterton investment. Fox Service Company, Precision Heating & Air, and Daniel’s Plumbing & Air remain distinct customer-facing names while tracing to Southern Home Services and Gryphon Investors.',
     'That does not make the local identity fictitious. A company can keep its name, employees, managers, licenses, and service area after a transaction. Fox describes itself as locally managed and operated; Southern’s transaction history places Fox inside a larger platform. Both statements can be true. The ownership question is therefore not whether a company feels local. It is which brand the customer sees, which legal entity performs the work, which platform coordinates the business, and who holds the controlling or minority financial interest.',
-    'The audited publication universe contains 67 active Austin-facing brands across four sectors. Thirty-two are classified as founder, family, or locally owned; 14 belong to sponsor-backed platforms; four are public-company brands; five are local franchise operators; 11 are private businesses whose controlling owner remains unresolved; and one—Alta Pest Control—is founder-controlled with a documented minority investment. Those are shares of researched brand records, not shares of the Austin market.',
+    'The researched publication universe contains 67 active Austin-facing brands across four sectors. Thirty-two are classified as founder, family, or locally owned; 14 belong to sponsor-backed platforms; four are public-company brands; five are local franchise operators; 11 are private businesses whose controlling owner remains unresolved; and one—Alta Pest Control—is founder-controlled with a documented minority investment. Those are shares of researched brand records, not shares of the Austin market.',
   ],
   sections: [
     {

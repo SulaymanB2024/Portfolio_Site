@@ -15,7 +15,7 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
   title: 'The U.S. Rare-Earth Magnet Buildout Is Larger Than It Looks—and Less Mature',
   seoTitle: 'U.S. Rare-Earth Magnet Capacity: Plant-by-Plant Buildout',
   subtitle:
-    'A physical-capacity audit of U.S. NdFeB magnet projects: 37,750 tonnes of disclosed firm-project nameplate, only 4,000 tonnes in the commercial-shipment class, and a supply chain still constrained by qualification, product mix, and upstream material conversion.',
+    'A physical-capacity audit of U.S. NdFeB magnet projects: 37,750 stated units of disclosed firm-project nameplate, only 4,000 stated units in the commercial-shipment class, and a supply chain still constrained by qualification, product mix, and upstream material conversion.',
   seoDescription:
     'Audit U.S. rare-earth magnet manufacturing capacity by plant maturity, product form, qualification status, upstream inputs, and realistic output scenarios.',
   artwork: {
@@ -25,24 +25,24 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
     note: 'Nameplate, qualified output, and gross process flow are measured separately.',
   },
   date: '2026.08.17',
-  dateModified: '2026.08.17',
+  dateModified: '2026.09.10',
   lastVerified: '2026.08.17',
   readTime: '28 MIN',
   author: 'SULAYMAN BOWLES',
   thesis:
-    'The United States can now point to roughly 37,750 metric tonnes of disclosed firm-project NdFeB magnet capacity, but that total is not current supply. Commercial shipments, customer-qualified output, product geometry, heavy-rare-earth inputs, alloy and powder conversion, yield loss, and the demand denominator all reduce what the headline can support.',
+    'The United States can now point to roughly 37,750 stated units (37,584–38,048 normalized metric tonnes) of disclosed firm-project NdFeB magnet capacity, but that total is not current supply. Commercial shipments, customer-qualified output, product geometry, heavy-rare-earth inputs, alloy and powder conversion, yield loss, and the demand denominator all reduce what the headline can support.',
   conclusion: {
     title: 'Track qualified tonnes, not announced tonnes',
     content:
       'The buildout is real, but nameplate is the first line of the model rather than the answer. A useful domestic-capacity scorecard must report commercial shipments, qualified product families, input origin, yield, customer concentration, and sustained utilization. Until those measures rise together, the United States has a project pipeline and a smaller bankable supply base.',
   },
   evidenceBoundary:
-    'This investigation uses public project disclosures, government awards, company releases, filings, and technical references available through August 17, 2026. Capacity statements are not standardized: some refer to metric tonnes, some to tons, some to a facility phase, and some to a future platform. The 37,750-tonne headline is a stated-unit sum of firm projects in the audit; normalization produces a 37,584–38,048-tonne range. Operating status is classified from disclosed shipments, commissioning, qualification, construction, and target dates. The 2028 scenarios and material-flow ranges are derived illustrations, not company guidance, engineering guarantees, market forecasts, or investment recommendations.',
+    'This investigation uses public project disclosures, government awards, company releases, filings, and technical references available through August 17, 2026. Capacity statements are not standardized: some refer to metric tonnes, some to tons, some to a facility phase, and some to a future platform. The 37,750 stated-unit headline is a stated-unit sum of firm projects in the audit; normalization produces a 37,584–38,048-tonne range. Operating status is classified from disclosed shipments, commissioning, qualification, construction, and target dates. The 2028 scenarios and material-flow ranges are derived illustrations, not company guidance, engineering guarantees, market forecasts, or investment recommendations.',
   metrics: [
-    { label: 'Firm-project nameplate', value: '37,750 t' },
-    { label: 'Commercial-shipment class', value: '4,000 t' },
-    { label: 'Ramp / qualification class', value: '3,600 t' },
-    { label: 'Future-project class', value: '30,150 t' },
+    { label: 'Firm-project nameplate', value: '37,750 stated units' },
+    { label: 'Commercial-shipment class', value: '4,000 stated units' },
+    { label: 'Ramp / qualification class', value: '3,600 stated units' },
+    { label: 'Future-project class', value: '30,150 stated units' },
   ],
   resources: [
     {
@@ -68,33 +68,33 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
     },
   ],
   content: [
-    'The United States is no longer starting from zero in sintered neodymium-iron-boron magnets. A project-by-project audit produces 37,750 metric tonnes of disclosed firm-project nameplate. That figure is large enough to resemble published estimates of total U.S. magnet consumption, but the resemblance is misleading. Only 4,000 tonnes belongs to plants with both disclosed nameplate and commercial shipments. Another 3,600 tonnes sits in commissioning, ramp, or customer qualification. The remaining 30,150 tonnes is future capacity tied to construction, later phases, or announced production targets.',
+    'The United States is no longer starting from zero in sintered neodymium-iron-boron magnets. A project-by-project audit produces 37,750 stated units (37,584–38,048 normalized metric tonnes) of disclosed firm-project nameplate. That figure is large enough to resemble published estimates of total U.S. magnet consumption, but the resemblance is misleading. Only 4,000 stated units belong to plants with both disclosed nameplate and commercial shipments. Another 3,600 stated units sit in commissioning, ramp, or customer qualification. The remaining 30,150 stated units are future capacity tied to construction, later phases, or announced production targets.',
     'A magnet plant does not become substitutable supply when the press release is issued or when the first furnace is hot. Customers qualify an alloy recipe, magnetic grade, coating, geometry, dimensional tolerance, traceability system, and process window. An automotive traction-motor magnet is not interchangeable with a defense actuator magnet or a commodity bonded magnet. Even within sintered NdFeB, coercivity, temperature performance, heavy-rare-earth content, grain-boundary diffusion, corrosion protection, and machining loss can change the usable output of the same nominal tonne.',
     'The demand comparison is equally sensitive. The Commerce Department’s roughly 37,000-tonne U.S. demand frame includes magnets embedded in imported finished goods. A domestic magnet factory competes first for direct motor, component, and system orders placed into the U.S. supply chain. Treating embedded imports as an immediately contestable addressable market overstates both near-term demand and the utilization available to new plants.',
   ],
   sections: [
     {
       id: 'headline',
-      title: 'The 37,750-tonne headline is a project inventory, not current production',
+      title: 'The 37,750 stated-unit headline is a project inventory, not current production',
       paragraphs: [
         'The audit starts with disclosed firm projects rather than every aspirational target. A project enters the headline only when a company or government source identifies a U.S. manufacturing site or funded production line and provides a capacity figure. Exploration-stage concepts, upstream oxide projects without magnet conversion, and generic corporate ambitions are excluded.',
-        'The resulting total is 37,750 tonnes in the units used by project disclosures. Because public announcements do not always distinguish metric tonnes from U.S. short tons, the same ledger normalizes ambiguous rows both ways. That produces a range of 37,584 to 38,048 metric tonnes. The spread is small relative to the strategic claim, but preserving it prevents false precision.',
-        'The larger adjustment is maturity. Noveon and eVAC account for the 4,000-tonne commercial-shipment class in the audit. MP Materials’ disclosed 3,000-tonne line and the first 600 tonnes of USA Rare Earth’s staged buildout remain in commissioning, ramp, or qualification. JS Link America, HyProMag USA, Vulcan Elements, the balance of USA Rare Earth’s project, and other disclosed firm lines sit in the future bucket until operating evidence changes their status.',
+        'The resulting total is 37,750 stated units as reported in project disclosures. Because public announcements do not always distinguish metric tonnes from U.S. short tons, the same ledger normalizes ambiguous rows both ways. That produces a range of 37,584 to 38,048 metric tonnes. The spread is small relative to the strategic claim, but preserving it prevents false precision.',
+        'The larger adjustment is maturity. Noveon and eVAC account for the 4,000 stated-unit commercial-shipment class in the audit. MP Materials’ disclosed 3,000-tonne line and the first 600 tonnes of USA Rare Earth’s staged buildout remain in commissioning, ramp, or qualification. JS Link America, HyProMag USA, Vulcan Elements, the balance of USA Rare Earth’s project, and other disclosed firm lines sit in the future bucket until operating evidence changes their status.',
       ],
       table: {
         caption: 'U.S. NdFeB capacity stack used in this investigation',
         columns: ['Maturity class', 'Capacity', 'What the class requires', 'What it does not prove'],
         rows: [
-          ['Commercial shipments', '4,000 t', 'Disclosed nameplate plus evidence of commercial shipments', 'Full utilization, broad qualification, domestic inputs, or positive margins'],
-          ['Commissioning / ramp / qualification', '3,600 t', 'Installed or starting equipment with disclosed commissioning, first output, or customer qualification', 'Steady-state yield, recurring orders, or interchangeable product coverage'],
-          ['Future firm projects', '30,150 t', 'Named U.S. project or funded line with disclosed capacity', 'Completed construction, on-time startup, financing sufficiency, or customer acceptance'],
-          ['Firm-project total', '37,750 t', 'Arithmetic sum of the three maturity classes', 'Current domestic production'],
+          ['Commercial shipments', '4,000 stated units', 'Disclosed nameplate plus evidence of commercial shipments', 'Full utilization, broad qualification, domestic inputs, or positive margins'],
+          ['Commissioning / ramp / qualification', '3,600 stated units', 'Installed or starting equipment with disclosed commissioning, first output, or customer qualification', 'Steady-state yield, recurring orders, or interchangeable product coverage'],
+          ['Future firm projects', '30,150 stated units', 'Named U.S. project or funded line with disclosed capacity', 'Completed construction, on-time startup, financing sufficiency, or customer acceptance'],
+          ['Firm-project total', '37,750 stated units', 'Arithmetic sum of the three maturity classes', 'Current domestic production'],
         ],
       },
       figures: [
         {
           src: '/images/research/rare-earth-magnet-capacity-maturity.svg',
-          alt: 'Stacked bar separating 4,000 tonnes of commercial-shipment capacity, 3,600 tonnes in ramp or qualification, and 30,150 tonnes of future U.S. rare-earth magnet projects.',
+          alt: 'Stacked bar separating 4,000 stated units of commercial-shipment capacity, 3,600 in ramp or qualification, and 30,150 in future U.S. rare-earth magnet projects. Mixed source units normalize to 37,584–38,048 metric tonnes.',
           label: 'Figure 01 / Capacity by maturity',
           caption:
             'Eighty percent of the disclosed firm-project stack remains in the future-project class. Nameplate should not be read as current qualified output.',
@@ -129,7 +129,7 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
       id: 'demand-denominator',
       title: 'The 37,000-tonne demand comparison mixes direct demand with magnets hidden inside imports',
       paragraphs: [
-        'A recurring claim compares roughly 37,750 tonnes of announced U.S. capacity with a Commerce estimate near 37,000 tonnes of U.S. demand and concludes that the domestic shortfall is nearly solved. The numerator and denominator do not describe the same market boundary.',
+        'A recurring claim compares the 37,584–38,048 normalized metric-tonne range of announced U.S. capacity with a Commerce estimate near 37,000 tonnes of U.S. demand and concludes that the domestic shortfall is nearly solved. The numerator and denominator do not describe the same market boundary.',
         'The Commerce frame counts permanent magnets that reach the U.S. economy both directly and embedded inside imported finished goods. The embedded portion can sit inside a motor, vehicle, electronics assembly, appliance, industrial machine, or other product manufactured abroad. A new U.S. magnet plant cannot automatically sell into that volume. Capturing it may require relocating motor production, redesigning a component, changing a tier-one supplier, requalifying the entire system, or altering trade flows.',
         'Direct domestic magnet demand is therefore the near-term contestable denominator. Embedded-import demand is a broader system exposure and a long-run reshoring opportunity. Both matter, but dividing plant nameplate by the broader denominator makes the buildout look more complete than its immediate customer base supports.',
       ],
@@ -159,17 +159,17 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
       id: 'material-balance',
       title: 'Finished-magnet capacity requires 46,400 to 70,459 tonnes of gross process flow in the model',
       paragraphs: [
-        'The 37,750-tonne headline measures finished magnet nameplate. It should not be compared directly with every upstream tonnage disclosure. Oxide, metal, alloy, strip, powder, pressed compacts, sintered blocks, machined pieces, and finished coated magnets are different mass points in the process.',
-        'The model applies explicit ranges for alloy chemistry, conversion loss, process yield, machining loss, internal scrap recovery, and recycled-feed displacement. Under the central project stack, those assumptions imply 46,400 to 70,459 tonnes of gross process flow across the chain. That is not additional magnet demand and should not be added to the 37,750-tonne capacity figure. It is the upstream throughput needed to support the finished output under different yield and recycling cases.',
+        'The 37,750 stated-unit headline measures finished magnet nameplate. It should not be compared directly with every upstream tonnage disclosure. Oxide, metal, alloy, strip, powder, pressed compacts, sintered blocks, machined pieces, and finished coated magnets are different mass points in the process.',
+        'The model applies explicit ranges for alloy chemistry, conversion loss, process yield, machining loss, internal scrap recovery, and recycled-feed displacement. Under the central project stack, those assumptions imply 46,400 to 70,459 tonnes of gross process flow across the chain. That is not additional magnet demand and should not be added to the 37,750 stated-unit capacity figure. It is the upstream throughput needed to support the finished output under different yield and recycling cases.',
         'The distinction matters because a plant can announce finished-magnet nameplate without having secured the corresponding NdPr metal, heavy-rare-earth additives, alloy conversion, or recycling loop. Conversely, a metal or alloy plant’s tonnes cannot be counted as finished magnets. Capacity audits must preserve the unit, chemical form, product stage, and yield boundary of every disclosure.',
       ],
       table: {
         caption: 'Material-flow interpretation used in the workbook',
         columns: ['Measure', 'Modeled range', 'Interpretation'],
         rows: [
-          ['Finished magnet nameplate', '37,584–38,048 t', 'Normalized range around the 37,750-tonne stated-unit project sum'],
+          ['Finished magnet nameplate', '37,584–38,048 t', 'Normalized range around the 37,750 stated-unit project sum'],
           ['Gross process flow', '46,400–70,459 t', 'Cumulative material handled before saleable finished output under modeled yields and recycle loops'],
-          ['Commercial-shipment class', '4,000 t', 'Nameplate attached to plants with disclosed commercial shipments'],
+          ['Commercial-shipment class', '4,000 stated units', 'Nameplate attached to plants with disclosed commercial shipments'],
           ['Qualified output', 'Not publicly disclosed as a complete national total', 'Must be measured by customer-approved products and sustained shipments'],
         ],
       },
@@ -224,20 +224,20 @@ export const RARE_EARTH_MAGNET_BUILDOUT_ARTICLE: ResearchArticle = {
     },
     {
       id: 'scenario-model',
-      title: 'A maturity-adjusted 2028 model produces 8,000 to 28,000 tonnes—not 37,750 by default',
+      title: 'A maturity-adjusted 2028 model produces 8,000 to 28,000 stated units—not 37,750 by default',
       paragraphs: [
         'The model does not forecast individual companies. It applies utilization factors to the three maturity buckets to show how much the headline depends on execution. Commercial-shipment capacity is assigned the highest factor, ramp and qualification capacity a lower factor, and future projects the widest range.',
-        'The conservative case applies 85% to the commercial-shipment class, 45% to ramp and qualification, and 10% to future projects. It produces roughly 8,000 tonnes of saleable output. The base illustration applies 90%, 70%, and 35%, producing about 16,700 tonnes. The high-execution case applies 95%, 90%, and 70%, producing about 28,100 tonnes.',
-        'These figures are not demand forecasts or company guidance. They show why a physical-capacity model needs probability, schedule, yield, qualification, and utilization layers. Even the high case leaves a gap between nameplate and output because new plants rarely reach full, product-mix-adjusted utilization immediately.',
+        'The conservative case applies 85% to the commercial-shipment class, 45% to ramp and qualification, and 10% to future projects. It produces roughly 8,000 stated units of illustrative saleable output. The base illustration applies 90%, 70%, and 35%, producing about 16,700 stated units. The high-execution case applies 95%, 90%, and 70%, producing about 28,100 stated units.',
+        'These calculations retain the mixed-unit basis of the capacity inputs; they are not precise metric-tonne totals, demand forecasts, or company guidance. They show why a physical-capacity model needs probability, schedule, yield, qualification, and utilization layers. Even the high case leaves a gap between nameplate and output because new plants rarely reach full, product-mix-adjusted utilization immediately.',
       ],
       table: {
         caption: 'Illustrative maturity-adjusted output scenarios',
         columns: ['Case', 'Commercial shipments', 'Ramp / qualification', 'Future projects', 'Illustrative output'],
         rows: [
-          ['Conservative', '85%', '45%', '10%', '~8.0 kt'],
-          ['Base illustration', '90%', '70%', '35%', '~16.7 kt'],
-          ['High execution', '95%', '90%', '70%', '~28.1 kt'],
-          ['Headline nameplate', '100%', '100%', '100%', '37.75 kt'],
+          ['Conservative', '85%', '45%', '10%', '~8,000 stated units'],
+          ['Base illustration', '90%', '70%', '35%', '~16,700 stated units'],
+          ['High execution', '95%', '90%', '70%', '~28,100 stated units'],
+          ['Headline nameplate', '100%', '100%', '100%', '37,750 stated units'],
         ],
       },
     },

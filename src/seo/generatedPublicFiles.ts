@@ -125,7 +125,7 @@ ${LLMS_TXT_LIMITS.map((limit) => `- ${limit}`).join('\n')}
 
 ${PROFILE_FACTS.currentSummary}
 
-Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical SEO practice. The technical ledger is a separate record of experiments and technical work. Sulayman is pursuing a BA in Music alongside the BBA in Finance.
+Atlas is a crawl and evidence console. Void Agency is the fixed-scope technical SEO practice. The technical ledger is a separate record of experiments and technical work. Sulayman is pursuing a BBA in Finance at McCombs, with expected graduation in ${PROFILE_FACTS.education.expectedGraduation}. ${PROFILE_FACTS.currentResearchWork}
 
 ## Primary Pages
 

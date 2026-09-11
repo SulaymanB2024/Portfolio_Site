@@ -8,7 +8,7 @@ export interface ScrollEnvironment {
   matchMedia(query: string): MediaQueryList;
   requestAnimationFrame(callback: FrameRequestCallback): number;
   cancelAnimationFrame(id: number): void;
-  lenis?: SmoothScroller;
+  lenis?: unknown;
 }
 
 export function installSmoothScrolling(env: ScrollEnvironment, create: () => SmoothScroller) {

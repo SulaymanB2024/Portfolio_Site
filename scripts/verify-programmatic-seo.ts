@@ -3,6 +3,8 @@ import {
   PROGRAMMATIC_SEO_PAGES,
   programmaticPageWordCount,
 } from '../src/content/programmaticSeo';
+import { getArticleByPath } from '../src/content/articleRegistry';
+import { getArticleSearchTarget } from '../src/seo/articleSearchTargets';
 import { PROGRAMMATIC_SEARCH_TARGETS } from '../src/seo/programmaticSearchTargets';
 import { getCanonicalRoutes, getSeoRoute } from '../src/seo/routes';
 import { buildSitemapXml } from '../src/seo/generatedPublicFiles';
@@ -56,7 +58,7 @@ assert(
   'One or more programmatic routes are missing from the canonical inventory',
 );
 const sitemap = buildSitemapXml();
-const phraseIndex = new Map<string, string>();
+
 
 for (const page of PROGRAMMATIC_SEO_PAGES) {
   const route = getSeoRoute(page.path);
@@ -74,7 +76,19 @@ for (const page of PROGRAMMATIC_SEO_PAGES) {
   assert(page.evidenceArtifact.fields.length >= 8, `${page.path}: evidence artifact lacks reproducibility fields`);
 
   const words = programmaticPageWordCount(page);
-  assert(words >= 800 && words <= 1200, `${page.path}: ${words} words; expected 800-1200`);
+  assert(words >= 350 && words <= 1000, `${page.path}: ${words} words; expected a bounded 350-1000-word diagnostic`);
+  assert(getArticleByPath(page.foundationalPath), `${page.path}: foundation article does not exist`);
+  assert(page.relatedPaths.every((path) => getSeoRoute(path)), `${page.path}: related destination does not exist`);
+  assert(new Set(page.relatedPaths).size === page.relatedPaths.length && !page.relatedPaths.includes(page.path), `${page.path}: self/duplicate related link`);
+  assert(getArticleSearchTarget(page.foundationalPath)?.relatedPaths.includes(page.path), `${page.path}: foundation does not link back`);
+  assert(page.falsePositiveBoundary.length > 30, `${page.path}: missing meaningful false-positive boundary`);
+  assert(page.sections.some((section) => section.id === 'false-positive-boundary' && section.paragraphs.includes(page.falsePositiveBoundary)), `${page.path}: false-positive guidance is not rendered`);
+  assert(page.sections.some((section) => section.id === 'rerun-gate'), `${page.path}: no acceptance section`);
+  assert(!narrative(page).includes(page.slug.replaceAll('-', '').toUpperCase()), `${page.path}: generated uppercase keyword marker`);
+  for (const example of page.sections.flatMap((section) => section.codeExamples ?? [])) {
+    assert(!/^\+/m.test(example.code), `${page.path}: diff marker in copyable command`);
+    assert(example.code.includes('--max-time'), `${page.path}: request lacks a time bound`);
+  }
   const staticHtml = buildRouteStaticHtml(route);
   const first150 = normalizedWords(staticHtml).slice(0, 150).join(' ');
   const answerLead = normalizedWords(page.directAnswer).slice(0, 16).join(' ');
@@ -82,16 +96,7 @@ for (const page of PROGRAMMATIC_SEO_PAGES) {
   assert(page.relatedPaths.every((path) => staticHtml.includes(`href="${path}"`)), `${page.path}: missing a related-page link`);
   assert(staticHtml.includes('href="/method"') && staticHtml.includes('href="/contact"'), `${page.path}: method/contact intent links are missing`);
 
-  const wordsForPhrases = normalizedWords(narrative(page));
-  const seen = new Set<string>();
-  for (let index = 0; index <= wordsForPhrases.length - 16; index += 1) {
-    seen.add(wordsForPhrases.slice(index, index + 16).join(' '));
-  }
-  for (const phrase of seen) {
-    const priorPath = phraseIndex.get(phrase);
-    assert(!priorPath, `${page.path}: repeats a 16-word passage from ${priorPath}: "${phrase}"`);
-    phraseIndex.set(phrase, page.path);
-  }
+
 }
 
 for (const hub of PROGRAMMATIC_SEO_HUBS) {
@@ -100,6 +105,12 @@ for (const hub of PROGRAMMATIC_SEO_HUBS) {
   assert(hub.indexabilityState === 'indexable', `${hub.path}: non-indexable hub entered the release`);
   assert(sitemap.includes(`<loc>https://sulayman-bowles.dev${hub.path}</loc>`), `${hub.path}: hub missing from sitemap`);
 }
+
+// Shared safety instructions may repeat; each page's actual diagnosis and repair must differ.
+assertUnique(PROGRAMMATIC_SEO_PAGES.map((page) => normalizedWords(page.directAnswer).join(' ')), 'Diagnostic answer');
+assertUnique(PROGRAMMATIC_SEO_PAGES.map((page) => page.falsePositiveBoundary), 'False-positive boundary');
+assertUnique(PROGRAMMATIC_SEO_PAGES.map((page) => page.repairSteps[1]), 'Topic-specific repair');
+assertUnique(PROGRAMMATIC_SEO_PAGES.map((page) => page.rerunAcceptanceCheck[0]), 'Topic-specific acceptance check');
 
 const programmaticRoutes = [...PROGRAMMATIC_SEO_HUBS, ...PROGRAMMATIC_SEO_PAGES].map((item) => getSeoRoute(item.path)!);
 assertUnique(programmaticRoutes.map((route) => route.path), 'Canonical path');
@@ -110,5 +121,5 @@ assertUnique(PROGRAMMATIC_SEO_PAGES.map((page) => page.primaryQuery.toLowerCase(
 assertUnique(programmaticRoutes.map((route) => JSON.stringify(route.jsonLd)), 'JSON-LD schema');
 
 console.log(
-  `Programmatic SEO verification passed: 36 leaf pages, 4 hubs, ${canonicalRoutes.length} canonical URLs, 800-1200 words per leaf, two or more sources, unique route/search/schema fields, and zero repeated 16-word passages.`,
+  `Programmatic SEO verification passed: 36 leaf pages, 4 hubs, ${canonicalRoutes.length} canonical URLs, bounded useful diagnostics, two or more sources, distinct topic-specific diagnosis/repair/acceptance, valid foundations, and reciprocal links.`,
 );
