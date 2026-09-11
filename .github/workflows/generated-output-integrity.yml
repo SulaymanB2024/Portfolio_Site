@@ -86,6 +86,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Generate current article route metadata
+        run: npm run generate:article-routes
       - name: Check actual production responses and discovery files
         run: npm run verify:pseo-live
       - name: Retain live response evidence
