@@ -1,13 +1,17 @@
-import {StrictMode, useEffect} from 'react';
+import {StrictMode, Suspense, lazy, useEffect} from 'react';
 import {createRoot} from 'react-dom/client';
 import {Analytics} from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App.tsx';
 import './index.css';
 import './styles/article-reader.css';
+import './styles/work-studies.css';
 import Lenis from 'lenis';
 import { installSmoothScrolling } from './utils/smoothScroll';
 import { startPortfolioAnalytics, startPortfolioCtaTracking } from './analytics/portfolioAnalytics';
+import { findWorkStudy } from './content/workStudies';
+
+const WorkStudyPage = lazy(() => import('./pages/WorkStudyPage'));
 
 document.documentElement.classList.add('js');
 startPortfolioAnalytics();
@@ -33,7 +37,12 @@ function Root() {
     touchMultiplier: 2,
   })), []);
 
-  return <App />;
+  // Case-study links use native document navigation. This keeps history, deep links,
+  // no-JavaScript reading, and the existing portfolio router independent.
+  const study = findWorkStudy(window.location.pathname);
+  return study
+    ? <Suspense fallback={null}><WorkStudyPage study={study} /></Suspense>
+    : <App />;
 }
 
 createRoot(document.getElementById('root')!).render(

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { flushSync } from 'react-dom';
+import { findWorkStudy } from '../content/workStudies';
 
 type NormalizePath = (path: string) => string;
 
@@ -126,6 +127,7 @@ export function usePageTransitions({
 
       const url = new URL(href, window.location.href);
       if (url.origin !== window.location.origin || /\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
+      if (findWorkStudy(url.pathname)) return;
       preloadInBackground(`${normalizePath(url.pathname)}${url.search}${url.hash}`);
     };
 
@@ -157,6 +159,9 @@ export function usePageTransitions({
 
       const url = new URL(href, window.location.href);
       if (url.origin !== window.location.origin || /\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
+      // Project case studies have their own document entry in main.tsx. Let the
+      // browser load that document rather than handing it to the older SPA switch.
+      if (findWorkStudy(url.pathname)) return;
 
       const canonicalPath = normalizePath(url.pathname);
       const currentCanonicalPath = normalizePath(window.location.pathname);

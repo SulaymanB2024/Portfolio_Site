@@ -21,6 +21,7 @@ paths = [
     '/research/technical-seo/canonicalization-graph-consistency',
     '/markets/who-owns-texas-toll-roads',
 ]
+paths += ['/work'] + ['/work/' + slug for slug in ['internshipdeadlines', 'project-delta', 'payrollpro', 'no-limit-artemis', 'mandatearc', 'jane-street-puzzle', 'internship-aggregator-engine', '1-800-operator']]
 output = Path('audit-artifact/browser'); output.mkdir(parents=True, exist_ok=True)
 chrome = os.environ.get('BROWSER_EXECUTABLE') or shutil.which('google-chrome') or shutil.which('chromium')
 if not chrome: raise RuntimeError('System Chrome/Chromium is required for the browser smoke test.')
@@ -35,10 +36,11 @@ try:
             if route.request.url.startswith('http://127.0.0.1:4173/'):
                 route.continue_()
             else: route.abort()
-        for width in [1440, 390]:
+        for width in [1440, 390, 320]:
             context = browser.new_context(viewport={'width': width, 'height': 900}, reduced_motion='reduce')
             context.route('**/*', offline_external)
             for i, path in enumerate(paths):
+                if width == 320 and not path.startswith('/work'): continue
                 page = context.new_page(); errors = []
                 page.on('pageerror', lambda e: errors.append(str(e)))
                 response = page.goto('http://127.0.0.1:4173' + path, wait_until='networkidle', timeout=30000)
@@ -49,8 +51,21 @@ try:
                     'overflow': page.evaluate('document.documentElement.scrollWidth > innerWidth + 1'),
                     'errors': list(errors), 'native': page.evaluate('typeof window.lenis?.raf !== "function"'),
                 }
-                if i in [0, 1, 2, 6, 7]:
+                if i in [0, 1, 2, 6, 7] or path.startswith('/work'):
                     page.screenshot(path=str(output / f'{width}-{i}.png'), full_page=False, animations='disabled')
+                if path.startswith('/work/'):
+                    controls = page.locator('button[data-observation-button]')
+                    controls.nth(2).focus(); page.keyboard.press('Enter')
+                    assert controls.nth(2).get_attribute('aria-pressed') == 'true'
+                    assert page.locator('[data-observation="2"]').is_visible()
+                    assert not page.locator('[data-observation="0"]').is_visible()
+                    assert page.locator('main').count() == 1
+                if path == '/work':
+                    # Exercise the legacy SPA -> native case boundary, not just direct loads.
+                    page.locator('a.ws-card-link').first.click()
+                    page.wait_for_url('**/work/internshipdeadlines')
+                    page.wait_for_selector('#root h1', state='visible')
+                    assert page.locator('[data-work-study="internshipdeadlines"]').count() == 1
                 results.append(record); page.close()
             context.close()
         context = browser.new_context(viewport={'width': 1440, 'height': 900})
@@ -67,8 +82,8 @@ try:
 finally:
     server.terminate(); server.wait(timeout=10)
     (output / 'results.json').write_text(json.dumps({'pages': results, 'scrollStates': states}, indent=2) + '\n')
-assert len(results) == 20, results
+assert len(results) == len(paths) * 2 + 9, results
 for record in results:
     assert record['status'] == 200 and len(record['h1']) == 1 and not record['overflow'] and not record['errors'] and record['native'], record
 assert states == [True, False, True, False], states
-print('Browser smoke passed: 10 routes at desktop/mobile widths and live scroll-preference transitions.')
+print(f'Browser smoke passed: {len(paths)} routes at three widths, case-study controls, native navigation, and live scroll preferences.')
