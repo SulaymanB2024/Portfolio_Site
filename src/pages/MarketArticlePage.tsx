@@ -374,6 +374,7 @@ function GenericArticle({
               { href: '/research', label: 'Technical SEO research' },
               { href: '/atlas', label: 'Atlas technical SEO audit software' },
               { href: '/method', label: 'Technical SEO audit services' },
+              { href: '/contact', label: 'Contact Sulayman about technical SEO' },
               { href: '/about', label: 'About Sulayman Bowles' },
             ],
     },
