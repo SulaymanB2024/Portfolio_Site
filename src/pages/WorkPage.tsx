@@ -3,12 +3,14 @@ import { InternalHeader } from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { ScrollProgress } from '../components/ScrollProgress';
 import { WireframeGrid } from '../components/WireframeGrid';
+import { additionalWorkProofCards } from '../content/additionalWorkProofCards';
 import { buyerDecisionEvidence } from '../content/evidenceLists';
 import { workProofCards } from '../content/seoExpansion';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
 
 const WORK_SEO = getSeoRoute('/work')!;
+const allWorkProofCards = [...workProofCards, ...additionalWorkProofCards] as const;
 
 const supportingArtifacts = [
   {
@@ -48,7 +50,7 @@ export default function WorkPage() {
       <InternalHeader activePath="/work" tone="dark" />
 
       <section className="relative z-10 mx-auto grid min-h-[62vh] max-w-[1480px] content-end px-4 pb-16 pt-20 md:px-8 xl:px-10">
-        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Selected work / six public records</p>
+        <p className="mb-8 text-[10px] uppercase tracking-[0.34em] text-canvas/60">Selected work / {allWorkProofCards.length} public records</p>
         <h1 className="max-w-5xl font-serif text-[4rem] italic leading-[0.82] tracking-normal md:text-[7.5rem] xl:text-[10rem]">
           Systems I built. Evidence you can inspect.
         </h1>
@@ -58,12 +60,13 @@ export default function WorkPage() {
       </section>
 
       <section className="relative z-10 mx-auto grid max-w-[1480px] grid-cols-1 gap-px border-y border-canvas/14 bg-canvas/14 px-4 py-16 md:px-8 lg:grid-cols-2 xl:px-10">
-        {workProofCards.map((item, index) => {
+        {allWorkProofCards.map((item, index) => {
           const externalProject = item.href.startsWith('http');
-          const externalEvidence = item.evidenceHref.startsWith('http');
+          const externalEvidence = item.evidenceHref?.startsWith('http') ?? false;
+          const itemId = 'id' in item ? item.id : undefined;
 
           return (
-            <article key={item.title} className="group relative grid min-h-[610px] content-between gap-10 overflow-hidden bg-ink p-6 transition-colors duration-300 hover:bg-ink/94 md:p-8">
+            <article id={itemId} key={item.title} className="group relative grid min-h-[610px] scroll-mt-28 content-between gap-10 overflow-hidden bg-ink p-6 transition-colors duration-300 hover:bg-ink/94 md:p-8">
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-[0.24em] text-canvas/60">
                   <span>{String(index + 1).padStart(2, '0')} / {item.eyebrow}</span>
@@ -111,9 +114,11 @@ export default function WorkPage() {
                   <a href={item.href} data-portfolio-cta="work_open_project" target={externalProject ? '_blank' : undefined} rel={externalProject ? 'noreferrer' : undefined} className="inline-flex min-h-11 items-center border-b border-canvas/28 text-canvas/74 transition-colors hover:border-canvas hover:text-canvas">
                     {item.projectLabel}
                   </a>
-                  <a href={item.evidenceHref} data-portfolio-cta="work_open_evidence" target={externalEvidence ? '_blank' : undefined} rel={externalEvidence ? 'noreferrer' : undefined} className="inline-flex min-h-11 items-center border-b border-accent/40 text-accent transition-colors hover:border-canvas hover:text-canvas">
-                    {item.evidenceLabel}
-                  </a>
+                  {item.evidenceHref && item.evidenceLabel ? (
+                    <a href={item.evidenceHref} data-portfolio-cta="work_open_evidence" target={externalEvidence ? '_blank' : undefined} rel={externalEvidence ? 'noreferrer' : undefined} className="inline-flex min-h-11 items-center border-b border-accent/40 text-accent transition-colors hover:border-canvas hover:text-canvas">
+                      {item.evidenceLabel}
+                    </a>
+                  ) : null}
                 </div>
               </div>
             </article>
