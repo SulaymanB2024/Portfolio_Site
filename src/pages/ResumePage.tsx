@@ -21,7 +21,7 @@ const RESUME_PDF_PATH = '/Sulayman_Bowles_Resume.pdf';
 
 const supportingLinks = [
   { label: 'Atlas', href: '/atlas', meta: 'Product and public crawl evidence' },
-  { label: 'Selected Work', href: '/work', meta: 'Six inspectable public records' },
+  { label: 'Selected Work', href: '/work', meta: 'Expanded inspectable public work records' },
   { label: 'Research', href: '/research', meta: 'Search, product, and markets notes' },
   { label: 'Audit Method', href: '/method', meta: 'Technical SEO scope, evidence, acceptance checks, and reruns' },
   { label: 'GitHub', href: PROFILE_FACTS.canonicalLinks.github, meta: 'Public code profile' },
