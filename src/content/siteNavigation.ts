@@ -5,7 +5,7 @@ export type SiteNavItem = {
 };
 
 export const primaryNav: SiteNavItem[] = [
-  { label: 'Work', href: '/work', description: 'Six public records with ownership, system details, status, constraints, and supporting evidence.' },
+  { label: 'Work', href: '/work', description: 'Public work records with ownership, system details, status, constraints, and supporting evidence.' },
   { label: 'Atlas', href: '/atlas', description: 'An in-development crawl and evidence system with capability and public-proof status.' },
   { label: 'Research', href: '/research', description: 'Search, technical SEO, product, data, markets, and infrastructure research.' },
   { label: 'About', href: '/about', description: 'Technical practice, current work, experience, and operating principles.' },
