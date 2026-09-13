@@ -127,8 +127,9 @@ export function usePageTransitions({
 
       const url = new URL(href, window.location.href);
       if (url.origin !== window.location.origin || /\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
-      if (findWorkStudy(url.pathname)) return;
-      preloadInBackground(`${normalizePath(url.pathname)}${url.search}${url.hash}`);
+      const canonicalPath = normalizePath(url.pathname);
+      if (canonicalPath === '/work' || findWorkStudy(url.pathname)) return;
+      preloadInBackground(`${canonicalPath}${url.search}${url.hash}`);
     };
 
     const handlePopState = () => {
@@ -159,11 +160,11 @@ export function usePageTransitions({
 
       const url = new URL(href, window.location.href);
       if (url.origin !== window.location.origin || /\.[a-z0-9]{2,8}$/i.test(url.pathname)) return;
-      // Project case studies have their own document entry in main.tsx. Let the
-      // browser load that document rather than handing it to the older SPA switch.
-      if (findWorkStudy(url.pathname)) return;
-
       const canonicalPath = normalizePath(url.pathname);
+      // Authored Work routes keep their server document as the hydrated source.
+      // Let the browser load them instead of replacing them through the SPA switch.
+      if (canonicalPath === '/work' || findWorkStudy(url.pathname)) return;
+
       const currentCanonicalPath = normalizePath(window.location.pathname);
 
       if (canonicalPath === currentCanonicalPath && url.hash) {
