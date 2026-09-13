@@ -11,6 +11,7 @@ import { installSmoothScrolling } from './utils/smoothScroll';
 import { startPortfolioAnalytics, startPortfolioCtaTracking } from './analytics/portfolioAnalytics';
 import { findWorkStudy } from './content/workStudies';
 
+const WorkPage = lazy(() => import('./pages/WorkPage'));
 const WorkStudyPage = lazy(() => import('./pages/WorkStudyPage'));
 
 document.documentElement.classList.add('js');
@@ -37,12 +38,16 @@ function Root() {
     touchMultiplier: 2,
   })), []);
 
-  // Case-study links use native document navigation. This keeps history, deep links,
-  // no-JavaScript reading, and the existing portfolio router independent.
+  // Work documents are complete in the initial HTML. Keep them document-routed so
+  // crawlers, no-JavaScript readers, and hydrated visitors all receive one source.
   const study = findWorkStudy(window.location.pathname);
-  return study
-    ? <Suspense fallback={null}><WorkStudyPage study={study} /></Suspense>
-    : <App />;
+  if (study) {
+    return <Suspense fallback={null}><WorkStudyPage study={study} /></Suspense>;
+  }
+  if (window.location.pathname.replace(/\/+$/, '') === '/work') {
+    return <Suspense fallback={null}><WorkPage /></Suspense>;
+  }
+  return <App />;
 }
 
 createRoot(document.getElementById('root')!).render(
