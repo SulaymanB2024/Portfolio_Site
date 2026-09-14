@@ -6,6 +6,7 @@ import { PUBLICATION_INDEX } from './publicationIndex';
 import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from './programmaticSeo';
 import { DIAGNOSTIC_EXAMPLES } from './diagnosticExamples';
 import { PROFILE_FACTS } from './profileFacts';
+import { researchNav } from './siteNavigation';
 import { SEO_ROUTES, getSeoRoute, getCanonicalRoutes } from '../seo/routes';
 import { buildRouteStaticHtml, buildSitemapStaticHtml } from '../seo/staticContent';
 import { latestContentDate, normalizePublicationDate } from '../utils/publicationDate';
@@ -68,5 +69,22 @@ test('canonical heading records match the server document on every published rou
   for (const route of getCanonicalRoutes()) {
     const html = route.path === '/sitemap' ? buildSitemapStaticHtml(getCanonicalRoutes()) : route.staticHtml ?? buildRouteStaticHtml(route);
     assert.ok(html.includes(`<h1>${escape(route.h1)}</h1>`), route.path);
+  }
+});
+
+
+test('priority research is one native homepage link away in the initial document and browser navigation', () => {
+  const html = buildRouteStaticHtml(getSeoRoute('/')!);
+  const footer = fs.readFileSync('src/components/InternalFooter.tsx', 'utf8');
+  assert.match(footer, /items: utilityNav/);
+  assert.match(footer, /href=\{item\.href\}/);
+  assert.equal(new Set(researchNav.map((item) => item.href)).size, 3);
+  for (const item of researchNav) {
+    const route = getSeoRoute(item.href)!;
+    assert.ok(route?.includeInSitemap && !route.noindex, item.href);
+    assert.ok(PUBLICATION_INDEX.some((entry) => entry.href === item.href), item.href);
+    assert.ok(html.includes(`href="${item.href}"`), item.href);
+    assert.ok(html.includes(escape(item.label)), item.label);
+    assert.ok(html.includes(escape(item.description!)), item.description);
   }
 });
