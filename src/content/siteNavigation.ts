@@ -13,12 +13,19 @@ export const primaryNav: SiteNavItem[] = [
   { label: 'Contact', href: '/contact', description: 'Direct email and a short project brief.' },
 ];
 
+export const researchNav: SiteNavItem[] = [
+  { label: 'AI Power Model', href: '/research/ai-systems/the-ai-megawatt', description: 'A one-gigawatt capacity model with electrical boundaries, rack assumptions, sensitivity cases, and a source ledger.' },
+  { label: 'Magnet Capacity Study', href: '/research/data-systems/us-rare-earth-magnet-manufacturing-capacity', description: 'Project-level rare-earth magnet capacity records that separate announcements, qualification, and saleable output.' },
+  { label: 'Software Buyout Audit', href: '/research/financial-systems/software-buyout-boom-2020-2022-exit-audit', description: 'The 25-deal control inventory, with dated classifications, original downloads, and a clear boundary between liquidity and sponsor returns.' },
+];
+
 export const utilityNav: SiteNavItem[] = [
   { label: 'SEO Audit Method', href: '/method', description: 'Technical SEO audit services, process, deliverables, and rerun checks.' },
   { label: 'Austin Technical SEO', href: '/austin-technical-seo', description: 'Austin technical SEO consultant, crawlability pilot, and audit entry point.' },
   { label: 'Void Agency', href: 'https://www.void-agency.com/', description: 'External site for the fixed-scope technical SEO practice.' },
   { label: 'HTML Sitemap', href: '/sitemap', description: 'Plain links to every public canonical route.' },
   { label: 'Tech Ledger', href: 'https://sulayman-bowles.tech/', description: 'Technical projects, experiments, and project ledger.' },
+  ...researchNav,
 ];
 
 export function navLabel(item: SiteNavItem) {
