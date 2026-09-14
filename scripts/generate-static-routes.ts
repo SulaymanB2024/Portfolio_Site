@@ -105,7 +105,7 @@ function buildHead(route: SeoRoute, assetTags: string) {
     <style>
       /* The server document remains readable until RouteReady commits React.
          JavaScript support alone is not evidence that the route has loaded. */
-      #seo-static-summary {
+      #seo-static-summary:not([data-authored-layout]) {
         box-sizing: border-box;
         min-height: 100vh;
         overflow-wrap: anywhere;
@@ -114,7 +114,7 @@ function buildHead(route: SeoRoute, assetTags: string) {
         color: var(--color-${dark ? 'canvas' : 'ink'}, ${staticForeground});
         font-family: var(--font-sans, Inter, ui-sans-serif, system-ui, sans-serif);
       }
-      #seo-static-summary .seo-static-brand {
+      #seo-static-summary:not([data-authored-layout]) .seo-static-brand {
         display: grid;
         gap: 0.45rem;
         margin-bottom: clamp(3rem, 8vw, 7rem);
@@ -123,12 +123,12 @@ function buildHead(route: SeoRoute, assetTags: string) {
         color: inherit;
         text-decoration: none;
       }
-      #seo-static-summary .seo-static-brand span {
+      #seo-static-summary:not([data-authored-layout]) .seo-static-brand span {
         font-size: 0.68rem;
         font-weight: 600;
         letter-spacing: 0.3em;
       }
-      #seo-static-summary .seo-static-brand small {
+      #seo-static-summary:not([data-authored-layout]) .seo-static-brand small {
         font-family: var(--font-serif, "Cormorant Garamond", ui-serif, Georgia, serif);
         font-size: 0.82rem;
         font-style: italic;
@@ -136,7 +136,7 @@ function buildHead(route: SeoRoute, assetTags: string) {
         line-height: 1.15;
         opacity: 0.72;
       }
-      #seo-static-summary h1 {
+      #seo-static-summary:not([data-authored-layout]) h1 {
         max-width: 70rem;
         margin: 0 0 1rem;
         font-family: var(--font-serif, "Cormorant Garamond", ui-serif, Georgia, serif);
@@ -145,28 +145,28 @@ function buildHead(route: SeoRoute, assetTags: string) {
         line-height: 0.9;
       }
       @media (min-width: 768px) {
-        #seo-static-summary {
+        #seo-static-summary:not([data-authored-layout]) {
           padding: 4rem;
         }
-        #seo-static-summary h1 {
+        #seo-static-summary:not([data-authored-layout]) h1 {
           font-size: 5.5rem;
         }
       }
       @media (min-width: 1200px) {
-        #seo-static-summary {
+        #seo-static-summary:not([data-authored-layout]) {
           padding: 6rem;
         }
-        #seo-static-summary h1 {
+        #seo-static-summary:not([data-authored-layout]) h1 {
           font-size: 8rem;
         }
       }
-      #seo-static-summary p {
+      #seo-static-summary:not([data-authored-layout]) p {
         max-width: 42rem;
         margin: 0 0 2rem;
         font-size: 1rem;
         line-height: 1.7;
       }
-      #seo-static-summary nav {
+      #seo-static-summary:not([data-authored-layout]) nav {
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
@@ -174,30 +174,30 @@ function buildHead(route: SeoRoute, assetTags: string) {
         letter-spacing: 0.18em;
         text-transform: uppercase;
       }
-      #seo-static-summary article {
+      #seo-static-summary:not([data-authored-layout]) article {
         max-width: 62rem;
       }
-      #seo-static-summary h2 {
+      #seo-static-summary:not([data-authored-layout]) h2 {
         margin: 2.5rem 0 1rem;
         font-size: 1rem;
         letter-spacing: 0.14em;
         text-transform: uppercase;
       }
-      #seo-static-summary h3 {
+      #seo-static-summary:not([data-authored-layout]) h3 {
         margin: 1.5rem 0 0.5rem;
         font-size: 0.85rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
       }
-      #seo-static-summary ul {
+      #seo-static-summary:not([data-authored-layout]) ul {
         margin: 0 0 2rem;
         padding-left: 1.25rem;
         line-height: 1.7;
       }
-      #seo-static-summary a {
+      #seo-static-summary:not([data-authored-layout]) a {
         color: inherit;
       }
-      #seo-static-summary table {
+      #seo-static-summary:not([data-authored-layout]) table {
         display: block;
         max-width: 100%;
         overflow-x: auto;
@@ -207,27 +207,27 @@ function buildHead(route: SeoRoute, assetTags: string) {
         font-size: 0.78rem;
         line-height: 1.5;
       }
-      #seo-static-summary th,
-      #seo-static-summary td {
+      #seo-static-summary:not([data-authored-layout]) th,
+      #seo-static-summary:not([data-authored-layout]) td {
         border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
         padding: 0.65rem;
         text-align: left;
         vertical-align: top;
       }
-      #seo-static-summary th {
+      #seo-static-summary:not([data-authored-layout]) th {
         background: color-mix(in srgb, currentColor 8%, transparent);
         font-size: 0.68rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
       }
-      #seo-static-summary figure {
+      #seo-static-summary:not([data-authored-layout]) figure {
         margin: 1.5rem 0 2rem;
       }
-      #seo-static-summary figcaption {
+      #seo-static-summary:not([data-authored-layout]) figcaption {
         margin-bottom: 0.75rem;
         line-height: 1.6;
       }
-      #seo-static-summary pre {
+      #seo-static-summary:not([data-authored-layout]) pre {
         overflow-x: auto;
         padding: 1rem;
         border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
@@ -253,6 +253,10 @@ function buildStaticBrand() {
 
 function buildFallback(route: SeoRoute) {
   const staticHtml = route.path === '/sitemap' ? buildSitemapStaticHtml(getCanonicalRoutes()) : route.staticHtml ?? buildRouteStaticHtml(route);
+
+  if (route.staticHtml?.startsWith('<div class="work-studio')) {
+    return `<section id="seo-static-summary" data-authored-layout data-public-document="ready" aria-label="Static project content">${route.staticHtml}</section>`;
+  }
 
   if (staticHtml) {
     return `<section id="seo-static-summary" data-public-document="ready" aria-label="Static route content">

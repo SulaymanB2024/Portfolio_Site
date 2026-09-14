@@ -69,7 +69,12 @@ test('the HTML generator never hides the server document merely because JavaScri
 test('canonical heading records match the server document on every published route', () => {
   for (const route of getCanonicalRoutes()) {
     const html = route.path === '/sitemap' ? buildSitemapStaticHtml(getCanonicalRoutes()) : route.staticHtml ?? buildRouteStaticHtml(route);
-    assert.ok(html.includes(`<h1>${escape(route.h1)}</h1>`), route.path);
+    const headings = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
+    assert.equal(headings.length, 1, `${route.path}: exactly one primary heading`);
+    // Typography can contain emphasis and line breaks; compare rendered text,
+    // not the literal spelling of the opening tag.
+    const normalize = (value: string) => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    assert.equal(normalize(headings[0][1]), normalize(escape(route.h1)), route.path);
   }
 });
 

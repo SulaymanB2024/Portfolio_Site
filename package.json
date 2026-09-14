@@ -7,7 +7,7 @@
     "predev": "npm run generate:article-routes",
     "dev": "vite --port=3000 --host=127.0.0.1",
     "prebuild": "npm run generate:article-routes",
-    "build": "npm run generate:public && vite build && tsx scripts/generate-static-routes.ts",
+    "build": "npm run test:work-studies && npm run generate:public && vite build && tsx scripts/generate-static-routes.ts",
     "preview": "vite preview",
     "prelint": "npm run generate:article-routes",
     "report:article-rankings": "tsx scripts/report-article-rankings.ts",
@@ -47,7 +47,8 @@
     "verify:static-idempotence": "node scripts/verify-static-idempotence.mjs",
     "test:site-integrity": "python3 scripts/test_site_integrity.py",
     "test:site-behavior": "node --import tsx --test src/content/siteNavigation.test.ts src/utils/smoothScroll.test.ts src/content/searchQuality.test.ts",
-    "test:indexability": "node --import tsx --test src/content/indexability.test.ts scripts/lib/live-indexability.test.ts"
+    "test:indexability": "node --import tsx --test src/content/indexability.test.ts scripts/lib/live-indexability.test.ts",
+    "test:work-studies": "node --import tsx --test src/content/workStudies.test.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
