@@ -35,6 +35,13 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+      - name: Package runtime for local visual review
+        run: tar -czf /tmp/portfolio-runtime.tar.gz node_modules dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-runtime
+          path: /tmp/portfolio-runtime.tar.gz
+          retention-days: 1
       - name: Run editorial browser and crawl checks
         if: ${{ hashFiles('scripts/qa-the-moment.py') != '' }}
         run: |
