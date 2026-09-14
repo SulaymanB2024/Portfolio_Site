@@ -261,7 +261,7 @@ export const WORK_STUDIES: WorkStudy[] = [
     slug: 'internship-aggregator-engine', legacyId: 'internship-aggregator-engine', number: 'VII',
     name: 'Internship Aggregator Engine', discipline: 'Data / Infrastructure', status: 'Implemented · private', period: '2026 — ongoing',
     headline: ['A missing listing', 'is not a closed role.'],
-    description: 'An evidence-first internship ingestion system that separates raw evidence, scan completeness, canonical identity, and publication authority so transport failures do not become false job-state changes.',
+    description: 'An evidence-first internship ingestion system that keeps raw observations, scan completeness, canonical identity, and publication authority separate.',
     role: 'System architect & builder', medium: 'TypeScript · PostgreSQL · ATS adapters',
     premise: 'The hardest failure in a job aggregator is not a broken request. It is a broken request that looks like valid new information.',
     chapters: [
