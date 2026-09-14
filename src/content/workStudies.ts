@@ -261,36 +261,38 @@ export const WORK_STUDIES: WorkStudy[] = [
     slug: 'internship-aggregator-engine', legacyId: 'internship-aggregator-engine', number: 'VII',
     name: 'Internship Aggregator Engine', discipline: 'Data / Infrastructure', status: 'Implemented · private', period: '2026 — ongoing',
     headline: ['A missing listing', 'is not a closed role.'],
-    description: 'An evidence-first internship ingestion system with immutable observations, reversible identity decisions, and scan semantics that distinguish missing data from a real listing change.',
+    description: 'An evidence-first internship ingestion system that separates raw evidence, scan completeness, canonical identity, and publication authority so transport failures do not become false job-state changes.',
     role: 'System architect & builder', medium: 'TypeScript · PostgreSQL · ATS adapters',
     premise: 'The hardest failure in a job aggregator is not a broken request. It is a broken request that looks like valid new information.',
     chapters: [
       { title: 'Make incomplete scans harmless.', paragraphs: [
-        'An employer feed can stop halfway through pagination. A request can fail after some roles have been read. If the aggregator treats that partial result as the complete source, still-open roles can disappear from the directory.',
-        'I built the engine around a scan-commit boundary. Collection attempts and observations are retained, but a partial scan cannot establish absence, closure, or reopening. That distinction is part of the data model, not a note added after ingestion.'
+        'An employer feed can stop halfway through pagination, time out after several successful pages, or return an implausible empty result. If a collector treats that partial view as the complete source, still-open roles can be marked missing or closed even though the system never observed a complete board.',
+        'I built the engine around an atomic scan-commit boundary. Pages and seen-record identities are staged under a monotonic scan generation, but presence and absence change only after the page graph is complete and every required page succeeded. Failed or partial scans leave prior presence unchanged; suspicious zero-result scans are quarantined instead of mass-closing jobs.'
       ] },
-      { title: 'Keep identity reversible.', paragraphs: [
-        'Versioned adapters cover Greenhouse, Lever, Ashby, and generic JSON-LD sources. Immutable observations retain field-level provenance. Normalization and classification then feed canonical job records rather than erasing the source history.',
-        'Identity decisions can be reviewed and reversed. PostgreSQL remains authoritative, with transactional events and an outbox feeding search projections. Durable leases and backpressure keep scheduling separate from the meaning of the collected data.'
+      { title: 'Keep evidence and identity reversible.', paragraphs: [
+        'Versioned adapters cover Greenhouse, Lever, Ashby, and generic JSON-LD. Raw response bytes are content-addressed by hash, while each fetch attempt retains its own snapshot and body-free audit. Field-level provenance survives normalization, so a current canonical value can still be traced back to the observation and deterministic rule that produced it.',
+        'A vendor requisition ID is evidence, not unconditional identity. Source occurrence, canonical job, and job family remain separate records; incompatible title or location facts can create a reviewable duplicate state instead of an automatic merge. Identity decisions are immutable and supersedable, which makes a mistaken match correctable without deleting the underlying observations.'
       ] },
-      { title: 'Test the whole data path.', paragraphs: [
-        'A deterministic offline harness exercises fixtures through capture, parsing, scan finalization, freshness transitions, projection, search, API, and web rendering. The point is to test the consequences of data changes, not only whether each parser returns a value.',
-        'Live collection sits behind explicit controls. The architecture is a modular monolith: enough separation to reason about acquisition, scheduling, and publication without requiring a distributed platform before the core semantics work.'
+      { title: 'Separate authority, then test the whole state machine.', paragraphs: [
+        'The system gives each boundary less authority than the whole pipeline. Adapters transform supplied bytes but cannot fetch. The fetch gateway cannot declare source presence. Canonical projection writes job facts and transactional outbox events, while a separate idempotent projector rebuilds search documents. The public API serves only publication-eligible jobs whose exact serving source still has a current redistribution decision, through a source-safe listing contract that withholds acquisition evidence and direct destinations.',
+        'A deterministic offline harness drives fixtures through capture, parsing, scan finalization, freshness transitions, outbox projection, search, API, and server rendering. Live acquisition is a separate, bounded opt-in that fails closed when required source-policy evidence is absent or stale. The architecture remains a PostgreSQL-backed modular monolith: distributed infrastructure is deferred until a measured threshold or failure mode justifies the added system.'
       ] }
     ],
     decisions: [
-      { choice: 'Commit only complete scans', reason: 'A transport failure must not turn into a false closure signal.' },
-      { choice: 'Reversible canonical identity', reason: 'A mistaken duplicate decision should be correctable without losing the original observations.' },
-      { choice: 'One authoritative database', reason: 'Keep transactional guarantees local while separating worker and API responsibilities.' }
+      { choice: 'Commit only complete scans', reason: 'A transport or pagination failure must not turn into a false closure signal.' },
+      { choice: 'Quarantine suspicious zero-result scans', reason: 'An established source suddenly returning nothing is evidence of uncertainty before it is evidence that every role disappeared.' },
+      { choice: 'Reversible canonical identity', reason: 'A mistaken duplicate decision should be correctable without losing the original observations or provenance.' },
+      { choice: 'Source-safe publication boundary', reason: 'Public listing responses should expose approved job facts without leaking acquisition evidence, private workflow state, or source destinations.' },
+      { choice: 'Modular monolith before distributed infrastructure', reason: 'Keep transactional invariants in one authoritative PostgreSQL system until a measured bottleneck justifies another platform boundary.' }
     ],
-    result: 'An implemented private engine with fixture-backed adapters, provenance, canonical identity, durable workers, search APIs, and offline end-to-end test tooling.',
-    scope: 'Offline fixtures and synthetic capacity tests are not production throughput or verified internship coverage. This page does not assert that the engine is the deployed InternshipDeadlines backend. Source-policy records, acquisition data, and worker configuration remain private.',
+    result: 'An implemented private engine with versioned ATS adapters, immutable provenance, atomic scan semantics, reversible canonical identity, fenced workers, transactional outbox projection, source-safe listing APIs, and deterministic offline end-to-end verification.',
+    scope: 'Offline fixtures and synthetic capacity tooling are not production throughput or verified internship coverage. This page does not assert that the engine is the deployed InternshipDeadlines backend. Live acquisition in the project is separately bounded and opt-in; source-policy records, acquisition data, runtime credentials, and worker configuration remain private.',
     links: [], related: ['internshipdeadlines', 'mandatearc'], visual: 'ingestion',
     visualLabel: 'The point at which absence becomes evidence', visualCaption: 'Simplified scan-state model. It explains one invariant, not the full private implementation.',
     observations: [
-      { label: 'Collect', text: 'Retain observations and acquisition outcomes without assuming the scan is complete.' },
-      { label: 'Incomplete', text: 'A partial scan cannot establish that a previously seen role disappeared.' },
-      { label: 'Committed', text: 'Only a completed scan can support the next comparison and listing-state decision.' }
+      { label: 'Observe', text: 'Retain the fetched evidence, attempt state, and field provenance without assuming that a source enumeration completed.' },
+      { label: 'Quarantine', text: 'A partial, failed, stale, or suspiciously empty scan cannot establish absence; uncertainty remains explicit instead of becoming a bulk state change.' },
+      { label: 'Commit', text: 'Only a complete, current scan generation can atomically support presence or absence and the downstream canonical event.' }
     ]
   },
   {
