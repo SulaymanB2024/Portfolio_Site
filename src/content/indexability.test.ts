@@ -7,6 +7,7 @@ import { PROGRAMMATIC_SEO_HUBS, PROGRAMMATIC_SEO_PAGES } from './programmaticSeo
 import { DIAGNOSTIC_EXAMPLES } from './diagnosticExamples';
 import { PROFILE_FACTS } from './profileFacts';
 import { researchNav } from './siteNavigation';
+import { SOFTWARE_BUYOUT_COHORT_ARTICLE } from './softwareBuyoutCohortArticle';
 import { SEO_ROUTES, getSeoRoute, getCanonicalRoutes } from '../seo/routes';
 import { buildRouteStaticHtml, buildSitemapStaticHtml } from '../seo/staticContent';
 import { latestContentDate, normalizePublicationDate } from '../utils/publicationDate';
@@ -87,4 +88,27 @@ test('priority research is one native homepage link away in the initial document
     assert.ok(html.includes(escape(item.label)), item.label);
     assert.ok(html.includes(escape(item.description!)), item.description);
   }
+});
+
+test('the canonical buyout article exposes all dated CSV records without changing their evidence', () => {
+  const article = SOFTWARE_BUYOUT_COHORT_ARTICLE;
+  const section = article.sections!.find((section) => section.id === 'deal-by-deal-control-inventory')!;
+  const csv = fs.readFileSync('public/research/software-buyout-cohort-2020-2022.csv', 'utf8').trim();
+  // This fixture deliberately has no quoted fields. Reject a format change rather than misparse it.
+  assert.doesNotMatch(csv, /"/);
+  const [headers, ...records] = csv.split(/\r?\n/).map((line) => line.split(','));
+  assert.ok(records.every((record) => record.length === headers.length));
+  const fields = ['company', 'announcement_year', 'headline_transaction_value_usd_billions', 'sponsor_group', 'outcome_category', 'current_control_summary', 'classification_note'];
+  assert.ok(fields.every((field) => headers.includes(field)));
+  const expected = records.map((record) => fields.map((field) => record[headers.indexOf(field)]));
+  assert.deepEqual(section.table!.rows, expected);
+  assert.equal(expected.length, 25);
+  assert.equal(new Set(expected.map((row) => row[0])).size, 25);
+  assert.equal(expected.reduce((sum, row) => sum + Math.round(Number(row[2]) * 10), 0), 1712);
+  assert.equal(article.date, '2026.08.17');
+  assert.equal(article.lastVerified, '2026.08.17');
+  assert.match(section.paragraphs.join(' '), /not a new verification/);
+  const html = buildRouteStaticHtml(getSeoRoute('/research/financial-systems/software-buyout-boom-2020-2022-exit-audit')!);
+  for (const row of expected) for (const cell of row) assert.ok(html.includes(escape(cell)), cell);
+  assert.match(html, /The 25-deal control inventory/);
 });
