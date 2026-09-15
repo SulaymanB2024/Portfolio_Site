@@ -1,5 +1,6 @@
 import type { PublicArticle } from './articleModels';
 import { INVESTMENT_MEMOS } from './marketTheses';
+import { JANE_STREET_SOLVER_VERIFICATION_ARTICLE } from './janeStreetSolverVerificationArticle';
 import { RARE_EARTH_MAGNET_BUILDOUT_ARTICLE } from './rareEarthMagnetBuildoutArticle';
 import { RESEARCH_ARTICLES } from './researchArticles';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
@@ -19,6 +20,7 @@ const BASE_ARTICLES: PublicArticle[] = [
   ...TECHNICAL_ARTICLE_SERIES,
   ...RESEARCH_ARTICLES,
   RARE_EARTH_MAGNET_BUILDOUT_ARTICLE,
+  JANE_STREET_SOLVER_VERIFICATION_ARTICLE,
   ...INVESTMENT_MEMOS,
 ];
 
