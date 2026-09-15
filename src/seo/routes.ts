@@ -8,6 +8,7 @@ import {
   type RouteVisualMode,
   type RouteTone,
 } from './baseRouteCatalog';
+import { PUBLICATION_INDEX } from '../content/publicationIndex';
 import { latestContentDate } from '../utils/publicationDate';
 import { findWorkStudy } from '../content/workStudies';
 import { WORK_STUDY_ROUTES, withWorkIndexMetadata } from './workStudyRoutes';
@@ -16,8 +17,12 @@ export { SITE_LASTMOD, NOT_FOUND_ROUTE, normalizeInputPath } from './baseRouteCa
 export type { SeoRoute, RouteSection, RouteVisualMode, RouteTone } from './baseRouteCatalog';
 
 const composedRoutes: SeoRoute[] = [...BASE_ROUTES.map(withWorkIndexMetadata), ...WORK_STUDY_ROUTES];
-export const SEO_ROUTES: SeoRoute[] = composedRoutes.map(route => route.path === '/sitemap'
-  ? { ...route, lastmod: latestContentDate(composedRoutes.filter(item => item.includeInSitemap && item.path !== '/sitemap').map(item => item.lastmod ?? SITE_LASTMOD)) }
+const researchLastmod = latestContentDate(PUBLICATION_INDEX.map(item => item.date));
+const routesWithCollectionDates = composedRoutes.map(route => route.path === '/research'
+  ? { ...route, lastmod: researchLastmod }
+  : route);
+export const SEO_ROUTES: SeoRoute[] = routesWithCollectionDates.map(route => route.path === '/sitemap'
+  ? { ...route, lastmod: latestContentDate(routesWithCollectionDates.filter(item => item.includeInSitemap && item.path !== '/sitemap').map(item => item.lastmod ?? SITE_LASTMOD)) }
   : route);
 
 const STANDALONE_CANONICAL_ROUTES: SeoRoute[] = [
