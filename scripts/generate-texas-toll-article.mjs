@@ -44,6 +44,7 @@ article = article
     `<link rel="canonical" href="${canonicalUrl}" />`,
     `<link rel="canonical" href="${canonicalUrl}" />\n  <link rel="alternate" type="text/plain" title="LLMs text" href="/llms.txt" />`,
   )
+  .replace('<body>\n', '<body data-public-document="ready">\n')
   .replace('  <main>\n', '  <main class="seo-static-crawl-content">\n');
 
 const jsonLdPattern = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/;
