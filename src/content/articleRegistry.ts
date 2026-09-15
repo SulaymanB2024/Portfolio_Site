@@ -3,6 +3,7 @@ import { INVESTMENT_MEMOS } from './marketTheses';
 import { RARE_EARTH_MAGNET_BUILDOUT_ARTICLE } from './rareEarthMagnetBuildoutArticle';
 import { RESEARCH_ARTICLES } from './researchArticles';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
+import { TEXAS_TOLL_CASH_FLOW_ARTICLE } from './texasTollRoadCashFlowArticle';
 import { THE_AI_MEGAWATT_ARTICLE } from './theAiMegawattArticle';
 
 const ROBOTS_ACCESS_CONTROL_ARTICLE_SLUG = 'robots-txt-courtesy-not-access-control';
@@ -19,6 +20,7 @@ const BASE_ARTICLES: PublicArticle[] = [
   ...TECHNICAL_ARTICLE_SERIES,
   ...RESEARCH_ARTICLES,
   RARE_EARTH_MAGNET_BUILDOUT_ARTICLE,
+  TEXAS_TOLL_CASH_FLOW_ARTICLE,
   ...INVESTMENT_MEMOS,
 ];
 

@@ -10,6 +10,7 @@ import { INDEX_COMPANY_MATTERS_ARTICLE_SLUG } from './indexCompanyMattersArticle
 import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvestigationArticle';
 import { SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG } from './softwareBuyoutCohortArticle';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
+import { TEXAS_TOLL_CASH_FLOW_ARTICLE_SLUG } from './texasTollRoadCashFlowArticle';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
 import { THE_AI_MEGAWATT_ARTICLE_SLUG } from './theAiMegawattArticle';
 import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingArticle';
@@ -36,6 +37,7 @@ const austinHomeServiceOwnership = article(AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE
 const publicDataInfrastructure = article('technical-seo-public-data-infrastructure');
 const canonicalIdentity = article('canonical-identity-personal-seo');
 const texasTollRoads = article(TEXAS_TOLL_ARTICLE_SLUG);
+const texasTollCashFlow = article(TEXAS_TOLL_CASH_FLOW_ARTICLE_SLUG);
 const indexCompanyMatters = article(INDEX_COMPANY_MATTERS_ARTICLE_SLUG);
 const softwareBuyoutCohort = article(SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG);
 const airlineLoyaltyFinancing = article(AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG);
@@ -53,6 +55,14 @@ function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['cat
 }
 
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
+  {
+    category: 'Markets and investing',
+    title: texasTollCashFlow.title,
+    href: getArticlePath(texasTollCashFlow),
+    description: texasTollCashFlow.subtitle,
+    date: texasTollCashFlow.dateModified ?? texasTollCashFlow.date,
+    featured: true,
+  },
   {
     category: 'Markets and investing',
     title: RARE_EARTH_MAGNET_BUILDOUT_ARTICLE.title,
