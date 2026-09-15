@@ -374,7 +374,7 @@ const manifest = JSON.parse(read('public/research/atlas-open-corpus-run-2026-07-
 assert(manifest.run_id && manifest.capture_method && manifest.claim_limit, 'atlas demo: incomplete capture manifest');
 
 const research = read('dist/research/index.html');
-assert(textFromHtml(research).includes('30 Notes and Artifacts'), 'research: publication count must include the new toll-road cash-flow investigation');
+assert(textFromHtml(research).includes('31 Notes and Artifacts'), 'research: publication count must include the Jane Street solver verification case study');
 assert(textFromHtml(research).includes('Why Texas Toll Roads Stay Tolled: Where the Money Goes After Construction'), 'research: toll-road cash-flow investigation missing');
 assert(research.includes('/research/financial-systems/why-texas-toll-roads-stay-tolled'), 'research: toll-road cash-flow investigation link missing');
 assert(textFromHtml(research).includes('Can AI Run a Business? 30 AI Manager Cases'), 'research: featured article missing');
