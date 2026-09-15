@@ -184,7 +184,7 @@ export const WORK_STUDIES: WorkStudy[] = [
   },
   {
     slug: 'mandatearc', legacyId: 'mandatearc', number: 'V',
-    name: 'MandateArc', discipline: 'Enterprise / AI data', status: 'Private product build', period: '2026 — ongoing',
+    name: 'MandateArc', discipline: 'Enterprise / AI data', status: 'Live public product', period: '2026 — ongoing',
     headline: ['Qualify the opportunity.', 'Keep the data in place.'],
     description: 'An enterprise workflow-data origination product that qualifies buyer needs, ownership, and data rights before anyone transfers underlying records.',
     role: 'Product & systems builder', medium: 'Qualification workflows · Local decision tools',
@@ -195,12 +195,12 @@ export const WORK_STUDIES: WorkStudy[] = [
         'MandateArc gives that conversation structure. I built distinct paths for data owners and buyers, with qualification based on business-level metadata rather than raw record intake.'
       ] },
       { title: 'Translate interest into a mandate.', paragraphs: [
-        'Owner and buyer briefs capture workflow shape, rights posture, history, and outcome signals. Evidence maps connect industry contexts to the kind of material a buyer may need. Procurement, RFP, diligence, and licensing tools make the next questions concrete.',
-        'The local decision tools are designed to help someone prepare a useful handoff. They do not ask for customer records, employee messages, recordings, contracts, screenshots, credentials, or source code.'
+        'The live public build separates twenty industry playbooks from six evidence jobs, then routes owners and buyers into different preparation tools. The owner path asks for sixteen business-metadata fields; the buyer path asks for twenty-four mandate criteria. Neither path requests a file or automatically submits the brief over the network.',
+        'Procurement, RFP, diligence, and licensing surfaces make the next questions concrete without collapsing them into one form. A 28-point procurement checklist, a 40-requirement RFP ledger, and a 32-label diligence dossier are decision aids; they do not establish rights, demand, acceptance, or a transaction.'
       ] },
       { title: 'Put authority before custody.', paragraphs: [
         'The product’s central choice is to separate qualification from acquisition. A promising description does not establish the right to share a dataset, and a completed form does not complete legal or commercial diligence.',
-        'That boundary shapes the interface, the content architecture, and the operating workflow. The product can make the opportunity easier to evaluate while leaving the underlying records under the owner’s control.'
+        'That boundary shapes the interface, the content architecture, and the operating workflow. The public product can make the opportunity easier to evaluate while leaving the underlying records under the owner’s control.'
       ] }
     ],
     decisions: [
@@ -208,9 +208,12 @@ export const WORK_STUDIES: WorkStudy[] = [
       { choice: 'Separate owner and buyer briefs', reason: 'A supply description and a purchase mandate answer different questions.' },
       { choice: 'Deliberate handoff', reason: 'Preparation is not consent to transfer data or activate outreach.' }
     ],
-    result: 'A substantial private product build with owner and buyer workflows, local qualification tools, industry-specific content, and an operating control surface.',
-    scope: 'This is a public product summary. Private research, buyer and owner opportunities, operating procedures, and underlying records remain private. The page makes no claim of completed data transactions or verified commercial deployment.',
-    links: [], related: ['internship-aggregator-engine', '1-800-operator'], visual: 'mandate',
+    result: 'A live public product with separate owner and buyer workflows, twenty industry playbooks, six evidence-job routes, local qualification tools, and explicit no-data-custody boundaries.',
+    scope: 'The linked product is live and publicly inspectable. Private research, buyer and owner opportunities, operating procedures, and underlying records remain private. This case does not claim completed data transactions, current buyer mandates, accepted scope, revenue, or legal sufficiency.',
+    links: [
+      { label: 'Explore MandateArc', href: 'https://mandatearc.vercel.app/', note: 'Inspect the live public product, owner and buyer routes, evidence map, and no-data-custody boundary.' },
+      { label: 'Review the origination process', href: 'https://mandatearc.vercel.app/how-it-works/', note: 'Four public stages from metadata description through a consented handoff, with explicit stop conditions.' }
+    ], related: ['internship-aggregator-engine', '1-800-operator'], visual: 'mandate',
     visualLabel: 'The boundary is part of the product', visualCaption: 'High-level product boundary. No buyer, data owner, dataset, or confidential opportunity is represented.',
     observations: [
       { label: 'Owner', text: 'Describe workflow history and authority using business-level metadata, not underlying records.' },
