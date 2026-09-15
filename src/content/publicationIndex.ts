@@ -1,5 +1,6 @@
 import { PROGRAMMATIC_SEO_HUBS } from './programmaticSeo';
 import { AI_MANAGERS_ARTICLE_PATH } from './aiManagersArticle';
+import { JANE_STREET_SOLVER_VERIFICATION_ARTICLE } from './janeStreetSolverVerificationArticle';
 import { RARE_EARTH_MAGNET_BUILDOUT_ARTICLE } from './rareEarthMagnetBuildoutArticle';
 import { AIRLINE_LOYALTY_FINANCING_ARTICLE_SLUG } from './airlineLoyaltyFinancingArticle';
 import { AUSTIN_HOME_SERVICE_OWNERSHIP_ARTICLE_SLUG } from './austinHomeServiceOwnershipArticle';
@@ -16,7 +17,7 @@ import { WAYMO_HARDWARE_FINANCING_ARTICLE_SLUG } from './waymoHardwareFinancingA
 import { WEST_CAMPUS_STUDENT_HOUSING_ARTICLE_SLUG } from './westCampusStudentHousingArticle';
 
 export type PublicationIndexItem = {
-  category: 'AI systems and products' | 'Search systems' | 'Technical SEO' | 'Markets and investing';
+  category: 'AI systems and products' | 'Search systems' | 'Technical SEO' | 'Data & AI systems' | 'Markets and investing';
   title: string;
   href: string;
   description: string;
@@ -59,6 +60,14 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     href: '/research/financial-systems/why-texas-toll-roads-stay-tolled',
     description: 'A source-by-source investigation of debt, reserves, public transfers, concession rights, and the legal conditions that could remove a Texas toll.',
     date: '2026.09.02',
+    featured: true,
+  },
+  {
+    category: 'Data & AI systems',
+    title: JANE_STREET_SOLVER_VERIFICATION_ARTICLE.title,
+    href: getArticlePath(JANE_STREET_SOLVER_VERIFICATION_ARTICLE),
+    description: JANE_STREET_SOLVER_VERIFICATION_ARTICLE.subtitle,
+    date: JANE_STREET_SOLVER_VERIFICATION_ARTICLE.dateModified ?? JANE_STREET_SOLVER_VERIFICATION_ARTICLE.date,
     featured: true,
   },
   {
