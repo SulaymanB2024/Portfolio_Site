@@ -5,6 +5,7 @@ const root = process.cwd();
 const partsDirectory = path.join(root, 'src/content/texasTollRoadFinanceStatic');
 const outputDirectory = path.join(root, 'public/research/financial-systems');
 const outputPath = path.join(outputDirectory, 'why-texas-toll-roads-stay-tolled.html');
+const directoryOutputPath = path.join(outputDirectory, 'why-texas-toll-roads-stay-tolled', 'index.html');
 
 const partNames = (await readdir(partsDirectory))
   .filter((name) => /^\d{2}\.html$/.test(name))
@@ -33,5 +34,9 @@ for (const signal of requiredSignals) {
 }
 
 await mkdir(outputDirectory, { recursive: true });
-await writeFile(outputPath, article, 'utf8');
-console.log(`Generated ${path.relative(root, outputPath)} from ${partNames.length} reviewed fragments.`);
+await mkdir(path.dirname(directoryOutputPath), { recursive: true });
+await Promise.all([
+  writeFile(outputPath, article, 'utf8'),
+  writeFile(directoryOutputPath, article, 'utf8'),
+]);
+console.log(`Generated canonical flat/directory copies for ${path.relative(root, outputPath)} from ${partNames.length} reviewed fragments.`);
