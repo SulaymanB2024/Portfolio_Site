@@ -1,0 +1,35 @@
+{
+  "article_id": "A02",
+  "canonical_path": "/research/financial-systems/why-texas-toll-roads-stay-tolled",
+  "title": "Why Texas Toll Roads Stay Tolled: Where the Money Goes After Construction",
+  "evidence_cutoff": "2026-09-02",
+  "publication_status": "review branch; limitations disclosed",
+  "direct_answer": "Original construction cost, road-level debt, system debt, legal tolling authority, and private concession rights are separate. Texas tolls continue when any controlling system obligation, statute, board decision, reserve requirement, capital program, or contract term remains.",
+  "normalized_comparison": {
+    "included_systems": [
+      "Central Texas Turnpike System",
+      "Grand Parkway System"
+    ],
+    "reason": "same TxDOT FY2025 source, fiscal year, denominator, and category schedule",
+    "excluded": {
+      "NTTA": "gross Trust revenue includes investment and other non-toll revenue",
+      "HCTRA": "cash activity used several funding sources",
+      "CTRMA": "audit-to-monthly category bridge remains open",
+      "Fort Bend": "same-basis cash classification unavailable"
+    }
+  },
+  "headline_facts": {
+    "SH_288_termination_payment_usd": 1731730721,
+    "HCTRA_FY2025_mobility_transfer_usd_m": 398.6,
+    "NTTA_FY2025_long_term_debt_usd_m": 8519.0,
+    "private_texas_managed_lanes_FY2025_project_distributions_usd_m": 553.0,
+    "ferrovial_share_of_distributions_usd_m": 318.0,
+    "payments_to_TxDOT_usd_m": 46.7
+  },
+  "open_items": [
+    "Harris County final §284.008(d) order and project list",
+    "SH 130 ultimate-equity chain",
+    "CTRMA audit-to-monthly bridge",
+    "FBGPTRA exact page-level headline extraction"
+  ]
+}

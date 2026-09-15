@@ -55,6 +55,14 @@ function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['cat
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
   {
     category: 'Markets and investing',
+    title: 'Why Texas Toll Roads Stay Tolled: Where the Money Goes After Construction',
+    href: '/research/financial-systems/why-texas-toll-roads-stay-tolled',
+    description: 'A source-by-source investigation of debt, reserves, public transfers, concession rights, and the legal conditions that could remove a Texas toll.',
+    date: '2026.09.02',
+    featured: true,
+  },
+  {
+    category: 'Markets and investing',
     title: RARE_EARTH_MAGNET_BUILDOUT_ARTICLE.title,
     href: getArticlePath(RARE_EARTH_MAGNET_BUILDOUT_ARTICLE),
     description: RARE_EARTH_MAGNET_BUILDOUT_ARTICLE.subtitle,
