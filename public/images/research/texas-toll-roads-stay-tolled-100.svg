@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
+<title id="title">FY2025 recurring obligations per one hundred dollars of operating revenue for CTTS and Grand Parkway</title>
+<desc id="desc">Two horizontal stacked bars compare operations, repair and maintenance, debt service, and required reserves using the same TxDOT FY2025 reporting schedule.</desc>
+<rect width="1100" height="520" fill="#FFFFFF"/>
+<text x="35" y="48" font-size="29" font-weight="700">Same-basis comparison: two TxDOT systems</text>
+<text x="35" y="80" font-size="18" fill="#444444">Dollars per $100 of each system's FY2025 operating revenue</text>
+<text x="35" y="152" font-size="22" font-weight="700">CTTS</text>
+<rect x="210.00" y="125" width="229.30" height="52" fill="#111111" />
+<text x="324.65" y="158" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">30.2</text>
+<rect x="439.30" y="125" width="146.62" height="52" fill="#555555" />
+<text x="512.61" y="158" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">19.3</text>
+<rect x="585.93" y="125" width="360.91" height="52" fill="#999999" />
+<text x="766.38" y="158" text-anchor="middle" font-size="17" font-weight="700" fill="#111111">47.5</text>
+<rect x="946.84" y="125" width="23.16" height="52" fill="#D7D7D7" />
+<text x="35" y="252" font-size="22" font-weight="700">Grand Parkway</text>
+<rect x="210.00" y="225" width="114.22" height="52" fill="#111111" />
+<text x="267.11" y="258" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">15.0</text>
+<rect x="324.22" y="225" width="36.65" height="52" fill="#555555" />
+<rect x="360.87" y="225" width="338.88" height="52" fill="#999999" />
+<text x="530.31" y="258" text-anchor="middle" font-size="17" font-weight="700" fill="#111111">44.6</text>
+<rect x="699.75" y="225" width="270.25" height="52" fill="#D7D7D7" />
+<text x="834.88" y="258" text-anchor="middle" font-size="17" font-weight="700" fill="#111111">35.6</text>
+<rect x="70" y="327" width="26" height="26" fill="#111111" /><text x="108" y="347" font-size="18">Operations</text><rect x="520" y="327" width="26" height="26" fill="#555555" /><text x="558" y="347" font-size="18">Repair &amp; maintenance</text><rect x="70" y="369" width="26" height="26" fill="#999999" /><text x="108" y="389" font-size="18">Debt service</text><rect x="520" y="369" width="26" height="26" fill="#D7D7D7" /><text x="558" y="389" font-size="18">Required reserve</text>
+<line x1="210" y1="300" x2="970" y2="300" stroke="#111111" stroke-width="1"/>
+<text x="210" y="326" font-size="15">0</text><text x="580" y="326" font-size="15">50</text><text x="948" y="326" font-size="15">100</text>
+<text x="35" y="455" font-size="16" fill="#444444">Both rows use the same TxDOT FY2025 report, fiscal year, denominator and category schedule.</text>
+<text x="35" y="483" font-size="16" fill="#444444">This is not a statewide allocation and should not be combined with NTTA or HCTRA's different reporting bases.</text>
+</svg>
