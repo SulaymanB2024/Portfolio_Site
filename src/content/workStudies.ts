@@ -24,7 +24,7 @@ export interface WorkStudy {
   observations: { label: string; text: string }[];
 }
 
-export const WORK_STUDIES_UPDATED = '2026-09-15';
+export const WORK_STUDIES_UPDATED = '2026-09-16';
 export const WORK_STUDIES: WorkStudy[] = [
   {
     slug: 'internshipdeadlines', legacyId: 'internshipdeadlines', number: 'I',
@@ -266,8 +266,8 @@ export const WORK_STUDIES: WorkStudy[] = [
     slug: 'internship-aggregator-engine', legacyId: 'internship-aggregator-engine', number: 'VII',
     name: 'Internship Aggregator Engine', discipline: 'Data / Infrastructure', status: 'Implemented · private', period: '2026 — ongoing',
     headline: ['A missing listing', 'is not a closed role.'],
-    description: 'An evidence-first internship ingestion system that keeps raw observations, scan completeness, canonical identity, and publication authority separate.',
-    role: 'System architect & builder', medium: 'TypeScript · PostgreSQL · ATS adapters',
+    description: 'An evidence-first internship discovery and catalog system that separates source observation, validation, admission, canonical identity, and publication authority.',
+    role: 'System architect & builder', medium: 'Python · TypeScript · SQLite · PostgreSQL',
     premise: 'The hardest failure in a job aggregator is not a broken request. It is a broken request that looks like valid new information.',
     chapters: [
       { title: 'Make incomplete scans harmless.', paragraphs: [
@@ -278,9 +278,9 @@ export const WORK_STUDIES: WorkStudy[] = [
         'Versioned adapters cover Greenhouse, Lever, Ashby, and generic JSON-LD. Raw response bytes are content-addressed by hash, while each fetch attempt retains its own snapshot and body-free audit. Field-level provenance survives normalization, so a current canonical value can still be traced back to the observation and deterministic rule that produced it.',
         'A vendor requisition ID is evidence, not unconditional identity. Source occurrence, canonical job, and job family remain separate records; incompatible title or location facts can create a reviewable duplicate state instead of an automatic merge. Identity decisions are immutable and supersedable, which makes a mistaken match correctable without deleting the underlying observations.'
       ] },
-      { title: 'Separate authority, then test the whole state machine.', paragraphs: [
-        'The system gives each boundary less authority than the whole pipeline. Adapters transform supplied bytes but cannot fetch. The fetch gateway cannot declare source presence. Canonical projection writes job facts and transactional outbox events, while a separate idempotent projector rebuilds search documents. The public API serves only publication-eligible jobs whose exact serving source still has a current redistribution decision, through a source-safe listing contract that withholds acquisition evidence and direct destinations.',
-        'A deterministic offline harness drives fixtures through capture, parsing, scan finalization, freshness transitions, outbox projection, search, API, and server rendering. Live acquisition is a separate, bounded opt-in that fails closed when required source-policy evidence is absent or stale. The architecture remains a PostgreSQL-backed modular monolith: distributed infrastructure is deferred until a measured threshold or failure mode justifies the added system.'
+      { title: 'Separate discovery from admission, then test the bridge.', paragraphs: [
+        'The current system does not give source discovery direct authority over the canonical catalog. A bounded Python discovery and validation engine retains frontier state and source evidence locally, while the TypeScript and PostgreSQL catalog remains the authority for admitted internship records. A separate bridge compares fresh, hash-backed records with the catalog and writes only through an explicit dry-run and apply path.',
+        'That split makes failure domains visible. Source-policy and publisher receipts can hold a handoff without being bypassed, duplicate imports are rejected, and local learning remains advisory rather than acquisition authority. Reproducible checks cover crawler behavior, evidence transfer, import rollback, duplicate retry protection, corrupted evidence rejection, and the catalog-side build. The hosted website remains a separate publisher.'
       ] }
     ],
     decisions: [
@@ -288,10 +288,10 @@ export const WORK_STUDIES: WorkStudy[] = [
       { choice: 'Quarantine suspicious zero-result scans', reason: 'An established source suddenly returning nothing is evidence of uncertainty before it is evidence that every role disappeared.' },
       { choice: 'Reversible canonical identity', reason: 'A mistaken duplicate decision should be correctable without losing the original observations or provenance.' },
       { choice: 'Source-safe publication boundary', reason: 'Public listing responses should expose approved job facts without leaking acquisition evidence, private workflow state, or source destinations.' },
-      { choice: 'Modular monolith before distributed infrastructure', reason: 'Keep transactional invariants in one authoritative PostgreSQL system until a measured bottleneck justifies another platform boundary.' }
+      { choice: 'Separate discovery from catalog admission', reason: 'The crawler can validate source evidence without gaining authority to mutate or publish the canonical catalog; promotion crosses an explicit checked bridge.' }
     ],
-    result: 'An implemented private engine with versioned ATS adapters, immutable provenance, atomic scan semantics, reversible canonical identity, fenced workers, transactional outbox projection, source-safe listing APIs, and deterministic offline end-to-end verification.',
-    scope: 'Offline fixtures and synthetic capacity tooling are not production throughput or verified internship coverage. This page does not assert that the engine is the deployed InternshipDeadlines backend. Live acquisition in the project is separately bounded and opt-in; source-policy records, acquisition data, runtime credentials, and worker configuration remain private.',
+    result: 'A private two-system pipeline with a Python discovery and validation frontier, a TypeScript and PostgreSQL catalog, hash-verified evidence transfer, explicit dry-run and apply admission, reversible identity, and replayable verification.',
+    scope: 'Synthetic fixtures, test counts, and historical import receipts are not current production throughput or website coverage. The crawler does not itself publish InternshipDeadlines; the hosted publisher is a separate system. Source-policy records, acquisition evidence, runtime state, credentials, private counts, and worker configuration remain private.',
     links: [], related: ['internshipdeadlines', 'mandatearc'], visual: 'ingestion',
     visualLabel: 'The point at which absence becomes evidence', visualCaption: 'Simplified scan-state model. It explains one invariant, not the full private implementation.',
     observations: [
