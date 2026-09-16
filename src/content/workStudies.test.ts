@@ -6,13 +6,13 @@ import { getSeoRoute, getRouteTone, SEO_ROUTES } from '../seo/routes';
 import { buildRouteStaticHtml } from '../seo/staticContent';
 import { assertSeoAuthorityContract } from '../seo/machineReadableAuthority';
 
-const slugs = ['internshipdeadlines','project-delta','payrollpro','no-limit-artemis','mandatearc','jane-street-puzzle','internship-aggregator-engine','1-800-operator'];
+const slugs = ['internshipdeadlines','project-delta','payrollpro','no-limit-artemis','mandatearc','jane-street-puzzle','internship-aggregator-engine','1-800-operator','dropkit-sui-ticketing'];
 const count = (html: string, pattern: RegExp) => [...html.matchAll(pattern)].length;
 
-test('eight selected projects have unique first-class routes and no private repository links', () => {
+test('nine selected projects have unique first-class routes and no private repository links', () => {
   assert.deepEqual(WORK_STUDIES.map(s => s.slug), slugs);
-  assert.equal(new Set(WORK_STUDIES.map(s => s.legacyId)).size, 8);
-  assert.equal(new Set(WORK_STUDIES.map(s => s.visual)).size, 8);
+  assert.equal(new Set(WORK_STUDIES.map(s => s.legacyId)).size, 9);
+  assert.equal(new Set(WORK_STUDIES.map(s => s.visual)).size, 9);
   for (const study of WORK_STUDIES) {
     const path = workStudyPath(study), route = getSeoRoute(path)!;
     assert.ok(route?.includeInSitemap, path);
@@ -48,7 +48,7 @@ test('every case is one semantic document with valid section and control targets
   }
 });
 
-test('the work index links all eight cases and preserves all six earlier works', () => {
+test('the work index links all nine cases and preserves all six earlier works', () => {
   const html = renderWorkIndex();
   assert.equal(count(html, /<h1\b/g), 1);
   assert.equal(count(html, /<main\b/g), 1);
@@ -57,7 +57,7 @@ test('the work index links all eight cases and preserves all six earlier works',
     assert.ok(html.includes(`id="${study.legacyId}"`));
   }
   const list = workIndexJsonLd()['@graph'].find(n => n['@type'] === 'ItemList')!;
-  assert.equal(list.numberOfItems, 14);
+  assert.equal(list.numberOfItems, 15);
   assert.ok(html.includes('href="/method"'));
   assert.equal(buildRouteStaticHtml(getSeoRoute('/work')!), html);
 });
@@ -72,4 +72,6 @@ test('authored strings cannot inject markup; boundaries stay specific', () => {
   assert.match(WORK_STUDIES[0].scope, /validated catalog releases/i);
   assert.match(WORK_STUDIES[5].scope, /not claim.*fresh|not.*rerun|not.*execut/i);
   assert.match(WORK_STUDIES[7].scope, /private|internal/i);
+  assert.match(WORK_STUDIES[8].scope, /testnet/i);
+  assert.match(WORK_STUDIES[8].scope, /royalty-rule additions for later work/i);
 });
