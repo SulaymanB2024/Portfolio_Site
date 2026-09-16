@@ -74,5 +74,5 @@ try:
 finally:
     server.terminate(); server.wait(timeout=10)
     (output / 'results.json').write_text(json.dumps(results, indent=2) + '\n')
-assert len(results) == 80, results
-print('Passed 80 initial-document checks across desktop/mobile, no JavaScript, failed entry, and failed route chunks.')
+assert len(results) == 82, results
+print('Passed 82 initial-document checks across desktop/mobile, no JavaScript, failed entry, and failed route chunks.')
