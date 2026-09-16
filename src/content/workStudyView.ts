@@ -8,7 +8,7 @@ export const WORK_ARCHIVE = [
   { name: 'Void Agency', label: 'Operating practice', href: 'https://www.void-agency.com/', description: 'The technical SEO and web-systems practice behind my client delivery work.' },
   { name: 'Technical Ledger', label: 'Technical publication', href: 'https://sulayman-bowles.tech/', description: 'Longer engineering notes, graphics experiments, and competition records.' },
 ];
-export const WORK_INDEX_DESCRIPTION = 'Technical SEO portfolio, AI systems, graphics engineering, and investment research by Sulayman Bowles. Explore eight project case studies and six supporting works.';
+export const WORK_INDEX_DESCRIPTION = 'Technical SEO portfolio, AI systems, graphics engineering, and investment research by Sulayman Bowles. Explore nine project case studies and six supporting works.';
 export const WORK_INDEX_TITLE = 'Technical SEO Portfolio, Products & AI Systems | Sulayman Bowles';
 
 export function escapeHtml(value: string) {
@@ -59,6 +59,7 @@ function artwork(study: WorkStudy, compact: boolean) {
     case 'solver': return svg(`<g fill="none" stroke="currentColor" opacity=".25">${[0,1,2,3,4,5].map(i=>line(110+i*76,58,110+i*76,338)).join('')}${[0,1,2,3,4].map(i=>line(110,58+i*70,490,58+i*70)).join('')}</g><g fill="none" stroke="currentColor" stroke-width="2"><path d="M110 58 262 128 186 268 338 338 490 268 414 128" class="ws-art-accent"/>${[[110,58],[262,128],[186,268],[338,338],[490,268],[414,128]].map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="${i===5?12:6}" ${i===5?'':'fill="currentColor"'}/>`).join('')}</g>`);
     case 'ingestion': return svg(`<g fill="none" stroke="currentColor"><path d="M55 73h130v58H55ZM55 260h130v58H55ZM235 157h130v76H235ZM421 73h130v58H421ZM421 260h130v58H421Z"/><path d="M185 102h27v93h23M185 289h27v-94M365 195h28v-93h28"/><path d="M365 195h28v94h28" stroke-dasharray="5 5" opacity=".5"/><path d="m450 95 12 12 24-25" class="ws-art-accent" stroke-width="3"/><path d="M450 289h69" opacity=".55"/><path d="M79 95h77M79 111h54M79 282h77M79 298h54M260 183h80M260 202h54" opacity=".4"/></g>`);
     case 'operator': return svg(`<g fill="none" stroke="currentColor"><path d="M62 96h127v216H62ZM236 68h127v216H236ZM410 96h127v216H410Z"/><path d="M77 114h97v90H77ZM251 86h97v90H251ZM425 114h97v90H425Z" opacity=".4"/><circle cx="126" cy="159" r="28" class="ws-art-accent"/><path d="M271 151 296 109l32 42ZM440 182l33-47 33 47" class="ws-art-accent"/><path d="M78 230h95M78 249h64M78 279h82M252 203h95M252 222h64M252 252h82M426 230h95M426 249h64M426 279h82" opacity=".5"/><path d="M189 200h47M363 200h47" stroke-dasharray="4 5"/></g>`);
+    case 'ticket': return svg(`<g fill="none" stroke="currentColor"><path d="M65 95h146v202H65ZM389 95h146v202H389Z"/><path d="M211 196h55M334 196h55" stroke-width="2"/><path d="M266 141h68v110h-68Z" stroke-dasharray="6 6" opacity=".55"/><circle cx="300" cy="196" r="25" class="ws-art-accent" stroke-width="2"/><path d="m289 196 8 8 16-18" class="ws-art-accent" stroke-width="3"/><path d="M87 124h102M87 151h68M87 233h102M87 260h79M411 124h102M411 151h68M411 233h102M411 260h79" opacity=".4"/><path d="M117 81v28M159 81v28M441 81v28M483 81v28"/></g>`);
   }
 }
 export function workStudyArt(study: WorkStudy, compact = false) {
@@ -72,6 +73,7 @@ function specificPanel(study: WorkStudy) {
   if (study.visual === 'thesis') return `<div class="ws-thesis-strip"><span class="ws-kicker">Investment question</span><p>What is owned?<br>Who decides?<br>Who bears the risk?</p></div>`;
   if (study.visual === 'payroll') return `<div class="ws-state-strip"><div><span class="ws-kicker">Visibility</span><strong>Private compensation</strong></div><span class="ws-state-arrow" aria-hidden="true">≠</span><div><span class="ws-kicker">Authority</span><strong>Treasury approval</strong></div></div>`;
   if (study.visual === 'operator') return `<div class="ws-state-strip"><div><span class="ws-kicker">Artifact</span><strong>Prepared for review</strong></div><span class="ws-state-arrow" aria-hidden="true">≠</span><div><span class="ws-kicker">Action</span><strong>Published campaign</strong></div></div>`;
+  if (study.visual === 'ticket') return `<div class="ws-state-strip"><div><span class="ws-kicker">Authority</span><strong>Matching gate cap</strong></div><span class="ws-state-arrow" aria-hidden="true">→</span><div><span class="ws-kicker">State</span><strong>Unused → used</strong></div></div>`;
   return '';
 }
 
