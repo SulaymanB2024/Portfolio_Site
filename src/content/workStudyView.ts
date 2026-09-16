@@ -8,7 +8,7 @@ export const WORK_ARCHIVE = [
   { name: 'Void Agency', label: 'Operating practice', href: 'https://www.void-agency.com/', description: 'The technical SEO and web-systems practice behind my client delivery work.' },
   { name: 'Technical Ledger', label: 'Technical publication', href: 'https://sulayman-bowles.tech/', description: 'Longer engineering notes, graphics experiments, and competition records.' },
 ];
-export const WORK_INDEX_DESCRIPTION = 'Technical SEO portfolio, AI systems, graphics engineering, and investment research by Sulayman Bowles. Explore nine project case studies and six supporting works.';
+export const WORK_INDEX_DESCRIPTION = 'Technical SEO portfolio, AI systems, graphics engineering, and investment research by Sulayman Bowles. Explore ten project case studies and six supporting works.';
 export const WORK_INDEX_TITLE = 'Technical SEO Portfolio, Products & AI Systems | Sulayman Bowles';
 
 export function escapeHtml(value: string) {
@@ -118,6 +118,7 @@ export function workStudyJsonLd(study: WorkStudy) {
     ] }
   ] };
 }
+
 export function workIndexJsonLd() {
   const items = [...WORK_STUDIES.map(s=>({name:s.name,href:workStudyPath(s)})),...WORK_ARCHIVE];
   return { '@context': 'https://schema.org', '@graph': [

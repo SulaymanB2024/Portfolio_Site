@@ -376,6 +376,47 @@ export const WORK_STUDIES: WorkStudy[] = [
       { label: 'Issue', text: 'Mint a ticket that retains its event identity and starts with an unused check-in state.' },
       { label: 'Check in', text: 'Require a matching gate capability, mark the ticket used once, and reject a second use.' }
     ]
+  },
+  {
+    slug: 'sezzle-fundamental-model', legacyId: 'sezzle-fundamental-model', number: 'X',
+    name: 'Sezzle Fundamental Model', discipline: 'Equity Research / Credit', status: 'Public research model', period: 'June 2025 · historical model',
+    headline: ['Model the losses.', 'Then value the equity.'],
+    description: 'A public Sezzle research model linking filing ETL, credit-loss simulation, scenario forecasts, and DCF outputs so valuation assumptions can be inspected.',
+    role: 'Research model builder', medium: 'Python · Polars · Credit-loss modeling · DCF',
+    premise: 'A growth forecast is incomplete when credit losses, take rate, margins, and discount assumptions can move the answer just as much as revenue.',
+    chapters: [
+      { title: 'Connect the statements to the loss model.', paragraphs: [
+        'The public repository separates filing ETL, credit-loss modeling, scenario valuation, tests, configuration, and generated outputs. The valuation code loads normalized income-statement, balance-sheet, and cash-flow data, then reads the retained credit-loss results before building scenario forecasts.',
+        'That structure matters for a buy-now-pay-later business. Revenue growth can look attractive while deterioration in credit performance changes the economics underneath it. The model makes the loss estimate an input to the forecast rather than discussing credit risk only after a valuation has already been produced.'
+      ] },
+      { title: 'Put the assumptions where they can be challenged.', paragraphs: [
+        'The checked-in scenario file defines premium, base, and tail cases with explicit weights, GMV growth rates, loss multipliers, discount assumptions, and terminal growth. The base case carries half the scenario weight; premium and tail each carry one quarter. The valuation layer then produces five-year forecasts and a DCF from those inputs.',
+        'The code also exposes its simplifications. It starts from an assumed 10 percent take rate, applies a configured rebate adjustment, ramps operating margin from 10 to 25 percent, and treats capital expenditure and working-capital effects with a simple adjustment. Those are modeling choices to interrogate, not facts about Sezzle.'
+      ] },
+      { title: 'Keep the historical output in its proper place.', paragraphs: [
+        'The repository includes tests, loss-distribution artifacts, scenario outputs, an IC-memo artifact, and an executive-summary JSON file. The retained executive summary contains flat placeholder-looking valuation values, including enterprise-value fields fixed at 1.0 and zero sensitivity ranges, so I do not present that file as a usable current price target.',
+        'The useful proof of work is the research system itself: data preparation, a separate credit-loss layer, configurable scenarios, an explicit DCF path, and tests that exercise the pipeline. A current investment view would require refreshed filings, assumptions, market data, and a fresh execution rather than recycling a June 2025 model output.'
+      ] }
+    ],
+    decisions: [
+      { choice: 'Losses enter before valuation', reason: 'Credit performance changes forecast economics, so the loss model feeds the scenario forecasts instead of sitting in a separate risk paragraph.' },
+      { choice: 'Scenarios live in configuration', reason: 'Weights and operating assumptions are visible inputs that can be changed and debated without hiding them inside the narrative.' },
+      { choice: 'Expose simplifying assumptions', reason: 'A model is easier to trust when take-rate, margin, working-capital, and discount assumptions are visible enough to challenge.' },
+      { choice: 'Treat retained outputs as historical artifacts', reason: 'A checked-in file is evidence of the modeling workflow, not proof that the valuation remains current or decision-ready.' }
+    ],
+    result: 'A public research codebase with filing ETL, credit-loss simulation, three configured valuation scenarios, DCF logic, validation tests, and retained analytical outputs.',
+    scope: 'This is a historical June 2025 research model, not a current Sezzle valuation or investment recommendation. The repository received a documentation-only link update in June 2026, but the model is not represented here as freshly rerun. The checked-in executive summary contains placeholder-looking flat valuation values and is treated as an artifact, not a decision-ready output. No claim is made about forecast accuracy, audit status, a current price target, or a trading position.',
+    links: [
+      { label: 'Inspect the public model', href: 'https://github.com/SulaymanB2024/sezzle-fundamental-model', note: 'Public Python research code, tests, configurations, and retained output artifacts.' },
+      { label: 'Inspect the scenario assumptions', href: 'https://github.com/SulaymanB2024/sezzle-fundamental-model/blob/main/configs/scenarios.yml', note: 'Premium, base, and tail weights plus growth, loss, discount, and terminal assumptions.' }
+    ],
+    related: ['no-limit-artemis', 'jane-street-puzzle'], visual: 'thesis',
+    visualLabel: 'Scenario model, not a price target', visualCaption: 'Conceptual research plate. This page describes a historical model and does not display a live Sezzle valuation.',
+    observations: [
+      { label: 'Inputs', text: 'Normalize financial statements, then carry credit-loss results into the forecast rather than treating losses as an afterthought.' },
+      { label: 'Scenarios', text: 'Make the weights, growth rates, loss multipliers, and discount assumptions explicit enough to inspect and change.' },
+      { label: 'Boundary', text: 'Keep historical generated outputs separate from any claim about Sezzle’s current value or an investment recommendation.' }
+    ]
   }
 ];
 
