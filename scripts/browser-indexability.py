@@ -19,7 +19,7 @@ routes = {
     '/research/technical-seo/issues/canonical-noindex-conflict': 'ProgrammaticSeoPage-',
 }
 routes['/work'] = 'WorkPage-'
-for slug in ['internshipdeadlines', 'project-delta', 'payrollpro', 'no-limit-artemis', 'mandatearc', 'jane-street-puzzle', 'internship-aggregator-engine', '1-800-operator']:
+for slug in ['internshipdeadlines', 'project-delta', 'payrollpro', 'no-limit-artemis', 'mandatearc', 'jane-street-puzzle', 'internship-aggregator-engine', '1-800-operator', 'dropkit-sui-ticketing']:
     routes['/work/' + slug] = 'WorkStudyPage-'
 output = Path('audit-artifact/browser-indexability'); output.mkdir(parents=True, exist_ok=True)
 chrome = os.environ.get('BROWSER_EXECUTABLE') or shutil.which('google-chrome') or shutil.which('chromium')
@@ -74,5 +74,5 @@ try:
 finally:
     server.terminate(); server.wait(timeout=10)
     (output / 'results.json').write_text(json.dumps(results, indent=2) + '\n')
-assert len(results) == 76, results
-print('Passed 76 initial-document checks across desktop/mobile, no JavaScript, failed entry, and failed route chunks.')
+assert len(results) == 82, results
+print('Passed 82 initial-document checks across desktop/mobile, no JavaScript, failed entry, and failed route chunks.')

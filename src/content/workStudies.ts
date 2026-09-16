@@ -18,7 +18,7 @@ export interface WorkStudy {
   scope: string;
   links: { label: string; href: string; note: string }[];
   related: string[];
-  visual: 'discovery' | 'dither' | 'payroll' | 'thesis' | 'mandate' | 'solver' | 'ingestion' | 'operator';
+  visual: 'discovery' | 'dither' | 'payroll' | 'thesis' | 'mandate' | 'solver' | 'ingestion' | 'operator' | 'ticket';
   visualLabel: string;
   visualCaption: string;
   observations: { label: string; text: string }[];
@@ -334,6 +334,47 @@ export const WORK_STUDIES: WorkStudy[] = [
       { label: 'Observe', text: 'Retain a research example and distinguish what was observed from what was inferred.' },
       { label: 'Prepare', text: 'Use the research to prepare a grounded brief and a reviewable creative package.' },
       { label: 'Review', text: 'A person can inspect the output and the next boundary before spending or publishing.' }
+    ]
+  },
+  {
+    slug: 'dropkit-sui-ticketing', legacyId: 'dropkit-sui-ticketing', number: 'IX',
+    name: 'DropKit: Sui Ticketing', discipline: 'Sui / Ticketing', status: 'Cal Hacks 12.0 prototype', period: 'October 2025 · Cal Hacks 12.0',
+    headline: ['A ticket is', 'a state machine.'],
+    description: 'A Sui ticketing prototype that models event setup, payout splits, ticket ownership, and one-time check-in on-chain, with Kiosk and Transfer Policy as the resale path.',
+    role: 'Builder', medium: 'Sui Move · PTBs · Kiosk / Transfer Policy',
+    premise: 'Ticketing rules are easier to inspect when event state, sale configuration, and check-in authority are explicit objects instead of app-only assumptions.',
+    chapters: [
+      { title: 'Separate the pitch from the implementation.', paragraphs: [
+        'DropKit was submitted to Cal Hacks 12.0 as a Sui-native ticketing app for event-goers, artists, and operators. The public Devpost submission describes one-click transactions, Kiosk resale, Transfer Policy royalties, QR-based check-in, an attendance mint, and Walrus-hosted posters.',
+        'For this case study, I treat that submission and the retained source repository as separate evidence layers. The repository is explicitly testnet-oriented. Its strongest inspectable work is the on-chain event, payout, ticket, and check-in model; it should not be read as an audited mainnet ticketing service.'
+      ] },
+      { title: 'Put lifecycle rules in Move.', paragraphs: [
+        'The Event object records organizer, timing, location, supply, status, and a Walrus poster content identifier. The atomic setup path creates an event together with its payout configuration, activates a sales channel, and issues separate capabilities for event administration and gate check-in. Publication refuses to proceed until payouts and at least one channel exist.',
+        'Tickets retain their class, event, and used state. Check-in requires a GateKeeperCap bound to the same event and aborts when a ticket has already been used. The payout module independently validates one to four recipients, rejects duplicate addresses and basis-point totals above 100 percent, and can split SUI according to that configuration.'
+      ] },
+      { title: 'Keep unfinished enforcement visible.', paragraphs: [
+        'The repository also contains a TransferPolicy administrator that can create and share a TransferPolicy<Ticket> plus its capability. Its own source comments state that royalty-rule additions remain later work, because the current constructor does not directly implement the submission’s multi-recipient resale economics.',
+        'That distinction matters. The Devpost page records the intended anti-scalper and royalty product direction; the public code records which enforcement primitives are actually present. Preserving both makes the prototype more useful to inspect than collapsing the hackathon promise and the retained implementation into one claim.'
+      ] }
+    ],
+    decisions: [
+      { choice: 'Capabilities for authority', reason: 'Event management and gate check-in use separate capability objects rather than a UI-only role assumption.' },
+      { choice: 'Check-in fails closed', reason: 'The ticket must belong to the capability’s event, and a second check-in aborts instead of silently reusing the ticket.' },
+      { choice: 'Publish only after setup', reason: 'An event cannot become live until payout configuration and a sales channel are both present.' },
+      { choice: 'Source state over hackathon shorthand', reason: 'The page distinguishes the Devpost product promise from the resale enforcement that is actually visible in the retained repository.' }
+    ],
+    result: 'A public Cal Hacks 12.0 prototype with Move modules for event lifecycle, configurable payout splits, ticket minting and one-time check-in, plus a TransferPolicy scaffold and public Kiosk resale concept.',
+    scope: 'Devpost describes a progressive anti-scalper tax, QR operator flow, attendance mint, Kiosk resale royalties, and Walrus posters. The current public repository demonstrates part, not all, of that product promise. Its TransferPolicy module creates the policy and capability but explicitly leaves royalty-rule additions for later work. The repository targets Sui testnet and is not represented here as audited, mainnet, production ticketing infrastructure, or a hackathon award winner.',
+    links: [
+      { label: 'View the Cal Hacks submission', href: 'https://devpost.com/software/project-dropkit', note: 'Public product description, intended features, built-with record, and Cal Hacks 12.0 submission.' },
+      { label: 'Inspect the public source', href: 'https://github.com/sulaymanbowles-hash/SUI_CalHacks', note: 'Move modules, tests, setup documentation, and the retained testnet-oriented implementation.' }
+    ],
+    related: ['payrollpro', 'no-limit-artemis'], visual: 'ticket',
+    visualLabel: 'Check-in is a state transition, not a QR image', visualCaption: 'Conceptual event-to-ticket lifecycle based on the public Move model; it is not live chain state or a product screenshot.',
+    observations: [
+      { label: 'Configure', text: 'Create the event with payout rules and an active sales channel before publication is allowed.' },
+      { label: 'Issue', text: 'Mint a ticket that retains its event identity and starts with an unused check-in state.' },
+      { label: 'Check in', text: 'Require a matching gate capability, mark the ticket used once, and reject a second use.' }
     ]
   }
 ];
