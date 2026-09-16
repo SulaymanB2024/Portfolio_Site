@@ -21,7 +21,7 @@ paths = [
     '/research/technical-seo/canonicalization-graph-consistency',
     '/markets/who-owns-texas-toll-roads',
 ]
-paths += ['/work'] + ['/work/' + slug for slug in ['internshipdeadlines', 'project-delta', 'payrollpro', 'no-limit-artemis', 'mandatearc', 'jane-street-puzzle', 'internship-aggregator-engine', '1-800-operator']]
+paths += ['/work'] + ['/work/' + slug for slug in ['internshipdeadlines', 'project-delta', 'payrollpro', 'no-limit-artemis', 'mandatearc', 'jane-street-puzzle', 'internship-aggregator-engine', '1-800-operator', 'dropkit-sui-ticketing']]
 output = Path('audit-artifact/browser'); output.mkdir(parents=True, exist_ok=True)
 chrome = os.environ.get('BROWSER_EXECUTABLE') or shutil.which('google-chrome') or shutil.which('chromium')
 if not chrome: raise RuntimeError('System Chrome/Chromium is required for the browser smoke test.')
@@ -89,7 +89,7 @@ try:
 finally:
     server.terminate(); server.wait(timeout=10)
     (output / 'results.json').write_text(json.dumps({'pages': results, 'scrollStates': states}, indent=2) + '\n')
-assert len(results) == len(paths) * 2 + 9, results
+assert len(results) == len(paths) * 2 + 10, results
 for record in results:
     assert record['status'] == 200 and len(record['h1']) == 1 and not record['overflow'] and not record['errors'] and record['native'], record
 assert states == [True, False, True, False], states
