@@ -24,14 +24,14 @@ export interface WorkStudy {
   observations: { label: string; text: string }[];
 }
 
-export const WORK_STUDIES_UPDATED = '2026-09-12';
+export const WORK_STUDIES_UPDATED = '2026-09-15';
 export const WORK_STUDIES: WorkStudy[] = [
   {
     slug: 'internshipdeadlines', legacyId: 'internshipdeadlines', number: 'I',
     name: 'InternshipDeadlines', discipline: 'Product / Recruiting', status: 'Live product', period: '2026 — ongoing',
     headline: ['Find the role.', 'Know the next step.'],
-    description: 'An internship discovery product that brings role search, deadline context, comparison, and application planning into one student workflow.',
-    role: 'Founder & product owner', medium: 'Discovery product · Editorial systems',
+    description: 'An internship discovery product that combines source-backed role discovery, deadline context, comparison, and application planning in one student workflow.',
+    role: 'Founder & product owner', medium: 'Discovery product · Source-backed catalog · Editorial systems',
     premise: 'Finding an internship should not require rebuilding the same spreadsheet every time a new recruiting cycle opens.',
     chapters: [
       { title: 'The work starts after search.', paragraphs: [
@@ -39,29 +39,31 @@ export const WORK_STUDIES: WorkStudy[] = [
         'I built InternshipDeadlines around that whole sequence, rather than treating a larger list of links as the finished product. The site brings discovery, shortlisting, comparison, deadlines, and preparation resources into one place.'
       ] },
       { title: 'Give each decision a place.', paragraphs: [
-        'Search and filters help students narrow the field. Saved roles and notes preserve the shortlist in the browser. Comparison puts options beside one another. Published deadlines and calendar feeds help turn a promising role into a next action.',
-        'The editorial layer answers questions that a listing alone cannot: how to interpret a rolling process, compare the work behind similar titles, and use existing experience in an application. My work spans product direction, the student interface, content operations, and the systems that keep those surfaces useful.'
+        'Search and filters help students narrow the field. Saved roles and notes preserve the shortlist in the browser. Comparison puts options beside one another. Published deadlines, RSS, and calendar feeds help turn a promising role into a next action.',
+        'The public methodology keeps the complete collected-posting set separate from verified open roles. Collected records retain source dates and review status; verified open roles require source evidence, publication permission, an established employer identity, and a current verification. That distinction lets the product preserve useful history without presenting every retained record as a current vacancy.'
       ] },
       { title: 'Do not manufacture certainty.', paragraphs: [
-        'A collected posting is not automatically an open vacancy. A missing deadline is not permission to invent urgency. The product has to keep those distinctions visible, even when a cleaner-looking interface would be easier to build.',
-        'The next measure of quality is whether a student can make a better decision with less repeated research. Listing volume alone does not answer that question.'
+        'A collected posting is not automatically an open vacancy. A missing deadline is not permission to invent urgency. An unsuccessful scan cannot establish that a job closed. Active listings have a verification allowance of at most 24 hours before they leave active discovery, so freshness is treated as a state to prove rather than a label to assume.',
+        'Behind the student surface, KING MAKER supplies validated catalog releases to the live site. The publishing layer serves those releases while the acquisition and validation systems retain their own evidence and authority boundaries. That separation makes it possible to improve discovery without giving a partial scan, stale source, or missing field more certainty than the evidence supports.'
       ] }
     ],
     decisions: [
       { choice: 'A workflow, not just a directory', reason: 'Search, saved roles, comparison, and planning support different stages of the same decision.' },
+      { choice: 'Collected is not verified open', reason: 'Historical and review-needed records remain useful, but active discovery requires current source-backed verification.' },
       { choice: 'Unknown deadlines stay unknown', reason: 'Source gaps should prompt a check, not become invented application dates.' },
       { choice: 'Local shortlist storage', reason: 'The current product keeps saved roles and private notes in the student’s browser.' }
     ],
-    result: 'A live student-facing product with searchable postings, comparison, saved roles, deadline views, calendar feeds, and application guides.',
-    scope: 'The public product demonstrates the workflow, not independently verified vacancy coverage, placement results, or traffic growth. The separately documented Internship Aggregator Engine is an engineering project; this case does not claim it is the deployed backend.',
+    result: 'A live student-facing product with source-backed collected and verified-open views, searchable postings, comparison, saved roles, deadline views, RSS and calendar feeds, tools, and application guides.',
+    scope: 'The public product demonstrates the workflow and current listing methodology, not placement outcomes or traffic growth. The complete collection is not a count of unique open internships. KING MAKER supplies validated catalog releases to the site; private acquisition evidence, source-policy records, credentials, and operating configuration remain outside the public product.',
     links: [
-      { label: 'Visit InternshipDeadlines', href: 'https://internshipdeadlines.com/', note: 'Explore the live product and its current listing methodology.' }
+      { label: 'Visit InternshipDeadlines', href: 'https://internshipdeadlines.com/', note: 'Explore the live product, current catalog, decision tools, and student workflow.' },
+      { label: 'Read how listings work', href: 'https://internshipdeadlines.com/methodology', note: 'Public definitions for collected records, verified open roles, freshness, deadlines, missing fields, and shortlist privacy.' }
     ],
     related: ['internship-aggregator-engine', '1-800-operator'], visual: 'discovery',
     visualLabel: 'A decision, not another open tab', visualCaption: 'Product workflow study. The panels explain the experience; they are not live employer records.',
     observations: [
       { label: 'Find', text: 'Start with role, company, or location. Narrow the field before reading every posting.' },
-      { label: 'Compare', text: 'Bring requirements, work, location, and offer terms into the same decision.' },
+      { label: 'Verify', text: 'Treat source evidence, freshness, and open status as separate checks rather than assumptions attached to a collected record.' },
       { label: 'Act', text: 'Keep a shortlist and next step. Check the employer’s current posting before applying.' }
     ]
   },
