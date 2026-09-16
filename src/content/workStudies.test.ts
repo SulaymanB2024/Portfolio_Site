@@ -68,7 +68,8 @@ test('the expanded catalog preserves the canonical identity and indexing contrac
 
 test('authored strings cannot inject markup; boundaries stay specific', () => {
   assert.equal(escapeHtml('<script>"x" & y\'</script>'), '&lt;script&gt;&quot;x&quot; &amp; y&#39;&lt;/script&gt;');
-  assert.match(WORK_STUDIES[0].scope, /does not claim it is the deployed backend/);
+  assert.match(WORK_STUDIES[0].scope, /complete collection is not a count of unique open internships/i);
+  assert.match(WORK_STUDIES[0].scope, /KING MAKER supplies validated catalog releases/i);
   assert.match(WORK_STUDIES[5].scope, /not claim.*fresh|not.*rerun|not.*execut/i);
   assert.match(WORK_STUDIES[7].scope, /private|internal/i);
 });
