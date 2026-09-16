@@ -40,24 +40,24 @@ export const WORK_STUDIES: WorkStudy[] = [
       ] },
       { title: 'Give each decision a place.', paragraphs: [
         'Search and filters help students narrow the field. Saved roles and notes preserve the shortlist in the browser. Comparison puts options beside one another. Published deadlines, RSS, and calendar feeds help turn a promising role into a next action.',
-        'The public methodology keeps the complete collected-posting set separate from verified open roles. Collected records retain source dates and review status; verified open roles require source evidence, publication permission, an established employer identity, and a current verification. That distinction lets the product preserve useful history without presenting every retained record as a current vacancy.'
+        'The public methodology keeps the complete collected-posting set separate from the roles students should treat as available to apply. Older, closed, and unconfirmed records can remain searchable; source evidence and current availability are handled separately. That distinction preserves useful history without presenting every retained record as a current vacancy.'
       ] },
       { title: 'Do not manufacture certainty.', paragraphs: [
-        'A collected posting is not automatically an open vacancy. A missing deadline is not permission to invent urgency. An unsuccessful scan cannot establish that a job closed. Active listings have a verification allowance of at most 24 hours before they leave active discovery, so freshness is treated as a state to prove rather than a label to assume.',
-        'Behind the student surface, KING MAKER supplies validated catalog releases to the live site. The publishing layer serves those releases while the acquisition and validation systems retain their own evidence and authority boundaries. That separation makes it possible to improve discovery without giving a partial scan, stale source, or missing field more certainty than the evidence supports.'
+        'A collected posting is not automatically an open vacancy. A missing deadline is not permission to invent urgency. A temporary problem checking a source cannot establish that a job closed; closure or withdrawal must be confirmed, or a published deadline must pass. Freshness is treated as evidence to maintain, not a label to assume.',
+        'Behind the student surface, the production site serves validated catalog releases rather than publishing directly from a collection pass. Acquisition, validation, and publication keep separate authority boundaries, so a partial scan, stale source, or missing field cannot quietly become a public fact.'
       ] }
     ],
     decisions: [
       { choice: 'A workflow, not just a directory', reason: 'Search, saved roles, comparison, and planning support different stages of the same decision.' },
-      { choice: 'Collected is not verified open', reason: 'Historical and review-needed records remain useful, but active discovery requires current source-backed verification.' },
+      { choice: 'Collected is not necessarily open', reason: 'Historical, closed, and unconfirmed records remain useful, but availability has to follow current source evidence.' },
       { choice: 'Unknown deadlines stay unknown', reason: 'Source gaps should prompt a check, not become invented application dates.' },
       { choice: 'Local shortlist storage', reason: 'The current product keeps saved roles and private notes in the student’s browser.' }
     ],
-    result: 'A live student-facing product with source-backed collected and verified-open views, searchable postings, comparison, saved roles, deadline views, RSS and calendar feeds, tools, and application guides.',
-    scope: 'The public product demonstrates the workflow and current listing methodology, not placement outcomes or traffic growth. The complete collection is not a count of unique open internships. KING MAKER supplies validated catalog releases to the site; private acquisition evidence, source-policy records, credentials, and operating configuration remain outside the public product.',
+    result: 'A live student-facing product with a source-backed catalog, availability-aware search, comparison, saved roles, deadline views, RSS and calendar feeds, tools, and application guides.',
+    scope: 'The public product demonstrates the workflow and current listing methodology, not placement outcomes or traffic growth. The complete collection is not a count of open applications. The production site is supplied by validated catalog releases; private acquisition evidence, source-policy records, credentials, and operating configuration remain outside the public product.',
     links: [
       { label: 'Visit InternshipDeadlines', href: 'https://internshipdeadlines.com/', note: 'Explore the live product, current catalog, decision tools, and student workflow.' },
-      { label: 'Read how listings work', href: 'https://internshipdeadlines.com/methodology', note: 'Public definitions for collected records, verified open roles, freshness, deadlines, missing fields, and shortlist privacy.' }
+      { label: 'Read how listings work', href: 'https://internshipdeadlines.com/methodology', note: 'Public definitions for collected records, availability, deadlines, missing fields, feeds, and shortlist privacy.' }
     ],
     related: ['internship-aggregator-engine', '1-800-operator'], visual: 'discovery',
     visualLabel: 'A decision, not another open tab', visualCaption: 'Product workflow study. The panels explain the experience; they are not live employer records.',
