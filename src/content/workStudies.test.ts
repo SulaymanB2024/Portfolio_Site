@@ -6,12 +6,12 @@ import { getSeoRoute, getRouteTone, SEO_ROUTES } from '../seo/routes';
 import { buildRouteStaticHtml } from '../seo/staticContent';
 import { assertSeoAuthorityContract } from '../seo/machineReadableAuthority';
 
-const slugs = ['internshipdeadlines','project-delta','payrollpro','no-limit-artemis','mandatearc','jane-street-puzzle','internship-aggregator-engine','1-800-operator','dropkit-sui-ticketing','sezzle-fundamental-model'];
+const slugs = ['internshipdeadlines','project-delta','payrollpro','no-limit-artemis','mandatearc','jane-street-puzzle','internship-aggregator-engine','1-800-operator','dropkit-sui-ticketing','sezzle-fundamental-model','coal-price-forecasting-framework'];
 const count = (html: string, pattern: RegExp) => [...html.matchAll(pattern)].length;
 
-test('ten selected projects have unique first-class routes and no private repository links', () => {
+test('eleven selected projects have unique first-class routes and no private repository links', () => {
   assert.deepEqual(WORK_STUDIES.map(s => s.slug), slugs);
-  assert.equal(new Set(WORK_STUDIES.map(s => s.legacyId)).size, 10);
+  assert.equal(new Set(WORK_STUDIES.map(s => s.legacyId)).size, 11);
   assert.equal(new Set(WORK_STUDIES.map(s => s.visual)).size, 9);
   for (const study of WORK_STUDIES) {
     const path = workStudyPath(study), route = getSeoRoute(path)!;
@@ -48,7 +48,7 @@ test('every case is one semantic document with valid section and control targets
   }
 });
 
-test('the work index links all ten cases and preserves all six earlier works', () => {
+test('the work index links all eleven cases and preserves all six earlier works', () => {
   const html = renderWorkIndex();
   assert.equal(count(html, /<h1\b/g), 1);
   assert.equal(count(html, /<main\b/g), 1);
@@ -57,7 +57,7 @@ test('the work index links all ten cases and preserves all six earlier works', (
     assert.ok(html.includes(`id="${study.legacyId}"`));
   }
   const list = workIndexJsonLd()['@graph'].find(n => n['@type'] === 'ItemList')!;
-  assert.equal(list.numberOfItems, 16);
+  assert.equal(list.numberOfItems, 17);
   assert.ok(html.includes('href="/method"'));
   assert.equal(buildRouteStaticHtml(getSeoRoute('/work')!), html);
 });
@@ -76,4 +76,7 @@ test('authored strings cannot inject markup; boundaries stay specific', () => {
   assert.match(WORK_STUDIES[8].scope, /royalty-rule additions for later work/i);
   assert.match(WORK_STUDIES[9].scope, /historical June 2025 research model/i);
   assert.match(WORK_STUDIES[9].scope, /not a current Sezzle valuation or investment recommendation/i);
+  assert.match(WORK_STUDIES[10].scope, /historical April 2025 research project/i);
+  assert.match(WORK_STUDIES[10].scope, /not a current Newcastle coal forecast/i);
+  assert.match(WORK_STUDIES[10].scope, /does not claim forecast accuracy|not.*forecast accuracy/i);
 });
