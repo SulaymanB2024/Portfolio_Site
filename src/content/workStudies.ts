@@ -44,8 +44,58 @@ const coalForecastingStudy: WorkStudy = {
   ]
 };
 
+const raceCaseStudy: WorkStudy & { updated: string } = {
+  slug: 'race-the-case-decision-model', legacyId: 'race-the-case-decision-model', number: 'XII',
+  name: 'Race-the-Case Decision Model', discipline: 'Strategy / Capital Allocation', status: 'Historical competition model', period: 'April 2025 · historical project', updated: '2026-09-20',
+  headline: ['Turn choices', 'into constraints.'],
+  description: 'A historical Python competition model that turns strategic projects into explicit cost, timing, dependency, and capital-allocation decisions.',
+  role: 'Model builder', medium: 'Python · Scenario analysis · Capital allocation',
+  premise: 'A strategy recommendation becomes easier to inspect when each project has explicit costs, timing, dependencies, and a rule for what can fit inside the constraint set.',
+  chapters: [
+    { title: 'Make the project choices explicit.', paragraphs: [
+      'The public Race-the-Case archive models a fictional Beauty First Cosmetics scenario. Its Project structure records potential value, effort, time to implement, cost, dependencies, strategic priority, and risk. A viability pass can then remove projects that exceed configured time, cost, or effort limits before the framework compares what remains.',
+      'That changes the form of the recommendation. Instead of leaving candidate initiatives only in prose, the model turns them into inspectable assumptions that can be tested against the same constraint rules. The thresholds are scenario inputs, not facts about a real company, and their usefulness depends on the quality of the case data behind them.'
+    ] },
+    { title: 'Compare portfolios, not isolated ideas.', paragraphs: [
+      'The decision framework applies a deliberately simplified ROI score, then enumerates project combinations that fit inside a capital constraint. It also records project dependencies and simulates different ordering rules, including highest heuristic ROI first, lowest cost first, and quickest wins, subject to remaining capital and a time horizon.',
+      'The score is a decision aid rather than a valuation model. It gives potential-value bullets a fixed weight and subtracts penalties for effort, time, and cost. That makes the rule easy to inspect, but it also means the output should be read as a structured competition heuristic rather than an empirical estimate of return.'
+    ] },
+    { title: 'Keep scenario forecasts separate from observed results.', paragraphs: [
+      'A second part of the repository generates one-, five-, and ten-year forward 10-K-style reports from configured growth assumptions and a retained baseline. The reports include strategic recommendations, risk sections, and summarized financial projections for the fictional case company.',
+      'Those outputs are explicitly hypothetical. They are useful as a way to connect a strategic recommendation to a financial scenario, but they are not audited statements, forecasts of an actual company, or evidence that the recommended projects produced the projected results. The durable proof of work is the modeling structure and the boundaries around its assumptions.'
+    ] }
+  ],
+  decisions: [
+    { choice: 'Filter before ranking', reason: 'Remove options that violate explicit time, cost, or effort constraints before comparing relative attractiveness.' },
+    { choice: 'Model project combinations', reason: 'Capital allocation is a portfolio problem; combinations and dependencies matter more than a standalone score.' },
+    { choice: 'Keep the ROI rule inspectable', reason: 'The repository exposes a simple scoring heuristic rather than presenting it as a finance-grade return estimate.' },
+    { choice: 'Label forward reports as scenarios', reason: 'Hypothetical case assumptions should not be confused with audited reporting, realized results, or a real-company forecast.' }
+  ],
+  result: 'A public Python competition archive with project viability filtering, heuristic ROI scoring, capital-constrained portfolio analysis, dependency mapping, branching-path simulations, and hypothetical forward financial reports.',
+  scope: 'This is a historical April 2025 competition project built around a fictional Beauty First Cosmetics case. The linked public repository is the source record for this page. The simplified ROI score and forward 10-K-style outputs are scenario mechanics, not audited financial reporting, realized project returns, a current company forecast, or investment advice. No competition placement is claimed on this page.',
+  links: [
+    { label: 'Inspect the public project', href: 'https://github.com/SulaymanB2024/5-Race-the-Case-Competition', note: 'Public Python archive with the decision framework, report generator, assumptions, and strategic summary.' },
+    { label: 'Inspect the decision framework', href: 'https://github.com/SulaymanB2024/5-Race-the-Case-Competition/blob/main/decision_framework.py', note: 'Project constraints, viability filters, heuristic scoring, combinations, dependencies, and branching-path simulation.' }
+  ],
+  related: ['sezzle-fundamental-model', 'coal-price-forecasting-framework'], visual: 'discovery',
+  visualLabel: 'A portfolio of choices, not one score', visualCaption: 'Conceptual decision grid. It illustrates project-selection logic rather than a live company portfolio or an observed financial result.',
+  observations: [
+    { label: 'Filter', text: 'Reject projects that breach the scenario’s explicit time, cost, or effort limits before ranking anything.' },
+    { label: 'Combine', text: 'Test which project sets fit the capital constraint and preserve dependencies instead of treating every initiative in isolation.' },
+    { label: 'Scenario', text: 'Use forward financial reports to examine assumptions, not to imply audited statements, realized returns, or a real-company forecast.' }
+  ]
+};
+
 export const WORK_STUDIES_UPDATED = '2026-09-16';
-export const WORK_STUDIES: WorkStudy[] = [...BASE_WORK_STUDIES, coalForecastingStudy];
+export const WORK_STUDIES: WorkStudy[] = [...BASE_WORK_STUDIES, coalForecastingStudy, raceCaseStudy];
+
+export function workStudyUpdatedDate(study: WorkStudy) {
+  return (study as WorkStudy & { updated?: string }).updated ?? WORK_STUDIES_UPDATED;
+}
+export const WORK_STUDIES_LATEST_UPDATED = WORK_STUDIES.reduce((latest, study) => {
+  const updated = workStudyUpdatedDate(study);
+  return updated > latest ? updated : latest;
+}, WORK_STUDIES_UPDATED);
 
 export function workStudyPath(study: Pick<WorkStudy, 'slug'>) { return `/work/${study.slug}`; }
 export function findWorkStudy(path: string) {
