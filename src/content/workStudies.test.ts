@@ -1,21 +1,22 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { WORK_STUDIES, findWorkStudy, workStudyPath } from './workStudies';
-import { renderWorkStudy, renderWorkIndex, workIndexJsonLd, escapeHtml } from './workStudyView';
+import { WORK_STUDIES, findWorkStudy, workStudyPath, workStudyUpdatedDate } from './workStudies';
+import { renderWorkStudy, renderWorkIndex, workIndexJsonLd, escapeHtml, workStudyJsonLd } from './workStudyView';
 import { getSeoRoute, getRouteTone, SEO_ROUTES } from '../seo/routes';
 import { buildRouteStaticHtml } from '../seo/staticContent';
 import { assertSeoAuthorityContract } from '../seo/machineReadableAuthority';
 
-const slugs = ['internshipdeadlines','project-delta','payrollpro','no-limit-artemis','mandatearc','jane-street-puzzle','internship-aggregator-engine','1-800-operator','dropkit-sui-ticketing','sezzle-fundamental-model','coal-price-forecasting-framework'];
+const slugs = ['internshipdeadlines','project-delta','payrollpro','no-limit-artemis','mandatearc','jane-street-puzzle','internship-aggregator-engine','1-800-operator','dropkit-sui-ticketing','sezzle-fundamental-model','coal-price-forecasting-framework','race-the-case-decision-model'];
 const count = (html: string, pattern: RegExp) => [...html.matchAll(pattern)].length;
 
-test('eleven selected projects have unique first-class routes and no private repository links', () => {
+test('twelve selected projects have unique first-class routes and no private repository links', () => {
   assert.deepEqual(WORK_STUDIES.map(s => s.slug), slugs);
-  assert.equal(new Set(WORK_STUDIES.map(s => s.legacyId)).size, 11);
+  assert.equal(new Set(WORK_STUDIES.map(s => s.legacyId)).size, 12);
   assert.equal(new Set(WORK_STUDIES.map(s => s.visual)).size, 9);
   for (const study of WORK_STUDIES) {
     const path = workStudyPath(study), route = getSeoRoute(path)!;
     assert.ok(route?.includeInSitemap, path);
+    assert.equal(route.lastmod, workStudyUpdatedDate(study));
     assert.equal(getRouteTone(path), 'light');
     assert.equal(findWorkStudy(path + '/?ref=test#result')?.slug, study.slug);
     assert.ok(study.description.length >= 110 && study.description.length <= 190);
@@ -48,7 +49,7 @@ test('every case is one semantic document with valid section and control targets
   }
 });
 
-test('the work index links all eleven cases and preserves all six earlier works', () => {
+test('the work index links all twelve cases and preserves all six earlier works', () => {
   const html = renderWorkIndex();
   assert.equal(count(html, /<h1\b/g), 1);
   assert.equal(count(html, /<main\b/g), 1);
@@ -57,7 +58,7 @@ test('the work index links all eleven cases and preserves all six earlier works'
     assert.ok(html.includes(`id="${study.legacyId}"`));
   }
   const list = workIndexJsonLd()['@graph'].find(n => n['@type'] === 'ItemList')!;
-  assert.equal(list.numberOfItems, 17);
+  assert.equal(list.numberOfItems, 18);
   assert.ok(html.includes('href="/method"'));
   assert.equal(buildRouteStaticHtml(getSeoRoute('/work')!), html);
 });
@@ -79,4 +80,13 @@ test('authored strings cannot inject markup; boundaries stay specific', () => {
   assert.match(WORK_STUDIES[10].scope, /historical April 2025 research project/i);
   assert.match(WORK_STUDIES[10].scope, /not a current Newcastle coal forecast/i);
   assert.match(WORK_STUDIES[10].scope, /does not claim forecast accuracy|not.*forecast accuracy/i);
+  assert.match(WORK_STUDIES[11].scope, /historical April 2025 competition project/i);
+  assert.match(WORK_STUDIES[11].scope, /fictional Beauty First Cosmetics/i);
+  assert.match(WORK_STUDIES[11].scope, /not audited financial reporting/i);
+  assert.match(WORK_STUDIES[11].scope, /No competition placement is claimed/i);
+  const raceCaseHtml = renderWorkStudy(WORK_STUDIES[11]);
+  assert.match(raceCaseHtml, /Case study updated September 20, 2026\./);
+  const raceCaseGraph = workStudyJsonLd(WORK_STUDIES[11])['@graph'] as Array<Record<string, unknown>>;
+  assert.equal(raceCaseGraph.find(node => node['@type'] === 'WebPage')?.dateModified, '2026-09-20');
+  assert.equal(raceCaseGraph.find(node => node['@type'] === 'CreativeWork')?.dateModified, '2026-09-20');
 });
