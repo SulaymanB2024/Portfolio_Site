@@ -72,6 +72,21 @@ const dunesJaMar = {
   href: 'https://www.dunespointcapital.com/news/roofing-services-solutions-acquires-ja-mar-roofing-sheet-metal/',
   lastVerified: '2026.07.26',
 };
+const abacusWrench = {
+  label: 'Abacus — privacy policy identifying Wrench Group as parent',
+  href: 'https://www.abacusplumbing.com/privacy-policy/',
+  lastVerified: '2026.07.26',
+};
+const wrenchRecap = {
+  label: 'Wrench Group — Leonard Green, TSG Consumer and Oak Hill recapitalization',
+  href: 'https://www.wrenchgroup.com/articles/tsg-consumer-partners-and-oak-hill-partner-with-leonard-green-and-management-to-enhance-the-wrench-groups-next-phase-of-growth',
+  lastVerified: '2026.07.26',
+};
+const cortecGoettl = {
+  label: 'Cortec Group — Goettl investment portfolio evidence',
+  href: 'https://www.cortecgroup.com/',
+  lastVerified: '2026.07.26',
+};
 
 const airlineInvestigation = '/research/financial-systems/how-airlines-borrow-against-loyalty-programs';
 const american2025 = {
@@ -482,7 +497,7 @@ export const SYSTEMS_SEARCH_DEMAND_ARTICLES: ResearchArticle[] = [
         ],
       },
     ],
-    sources: [riversideT3, southernGryphon, lCattertonMasterTrades, giArs],
+    sources: [riversideT3, southernGryphon, lCattertonMasterTrades, giArs, abacusWrench, wrenchRecap, cortecGoettl],
   },
   {
     kind: 'research',
@@ -547,7 +562,7 @@ export const SYSTEMS_SEARCH_DEMAND_ARTICLES: ResearchArticle[] = [
         id: 'selected-chains',
         title: 'Selected plumbing and electrical ownership chains',
         paragraphs: [
-          'Radiant → T3 Services Group → The Riverside Company. Stan’s → Master Trades Group → L Catterton. Daniel’s → Southern Home Services → Gryphon Investors. Abacus → Wrench Group. Roger’s Plumbing sits inside SAS Service Partners, backed by Storr Group according to the underlying ownership package.',
+          'Radiant → T3 Services Group → The Riverside Company. Stan’s → Master Trades Group → L Catterton. Daniel’s → Southern Home Services → Gryphon Investors. Abacus → Wrench Group.',
           'These labels describe the supported current chain at the cutoff. They do not imply that every platform owner has 100% of every operating subsidiary or that a founder has no continuing role or rolled equity.',
         ],
       },
@@ -568,7 +583,7 @@ export const SYSTEMS_SEARCH_DEMAND_ARTICLES: ResearchArticle[] = [
         ],
       },
     ],
-    sources: [riversideT3, southernGryphon, lCattertonMasterTrades],
+    sources: [riversideT3, southernGryphon, lCattertonMasterTrades, abacusWrench, wrenchRecap],
   },
   {
     kind: 'research',
