@@ -1,5 +1,6 @@
 import ArrowUpRight from 'lucide-react/dist/esm/icons/arrow-up-right.js';
 import type { PortfolioCtaId } from '../analytics/portfolioAnalytics';
+import { InternalFooter } from '../components/InternalFooter';
 import { InternalHeader } from '../components/InternalHeader';
 import { getSeoRoute } from '../seo/routes';
 import { useSEO } from '../utils/seo';
@@ -99,6 +100,10 @@ export default function ContactPage() {
           </nav>
         </div>
       </section>
+
+      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-8 md:px-8 xl:px-10">
+        <InternalFooter activePath="/contact" tone="dark" />
+      </div>
     </main>
   );
 }
