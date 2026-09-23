@@ -609,7 +609,7 @@ export const ARTICLE_ROUTE_METADATA: ArticleRouteMetadata[] = [
     "aliases": [],
     "title": "How Airline Loyalty Programs Are Valued as Collateral",
     "seoTitle": "How Airline Loyalty Programs Are Valued as Collateral",
-    "seoDescription": "How are airline loyalty programs valued as collateral? Follow partner cash, co-brand contracts, AAdvantage collateral, coverage, program EBITDA and the difference between debt capacity and equity value.",
+    "seoDescription": "How are airline loyalty programs valued as collateral? Follow partner cash, co-brand contracts, pledged accounts, AAdvantage debt capacity and the gap between debt and equity value.",
     "date": "2026.09.23",
     "dateModified": "2026.09.23",
     "indexable": true,
