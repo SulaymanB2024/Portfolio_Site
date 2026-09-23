@@ -598,6 +598,19 @@ body {
   color: var(--color-canvas);
 }
 
+.site-header--scrolled .site-header-editorial {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.site-header--scrolled .site-header-surface-light {
+  background: var(--color-canvas);
+}
+
+.site-header--scrolled .site-header-surface-dark {
+  background: var(--color-ink);
+}
+
 .site-header-editorial::before {
   content: "";
   position: absolute;
