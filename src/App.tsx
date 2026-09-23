@@ -264,7 +264,7 @@ function SitemapPage() {
             HTML Sitemap
           </h1>
           <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink/64">
-            Plain links to every public page on sulayman-bowles.dev.
+            Canonical public page index for sulayman-bowles.dev.
           </p>
         </header>
 
@@ -484,7 +484,7 @@ function HomePage() {
     <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-clip selection:bg-ink selection:text-canvas" ref={containerRef}>
       {!prefersReducedMotion && <InkTrails />}
         
-      <InternalHeader activePath="/" tone={homeHeaderTone} variant="home" minimalBrand />
+      <InternalHeader activePath="/" tone={homeHeaderTone} variant="home" />
 
       {/* Grid Crosshairs */}
       <div className="fixed inset-0 pointer-events-none z-40 hidden md:block mix-blend-difference text-canvas select-none">
@@ -1242,7 +1242,7 @@ function HomePage() {
          </section>
 
         {/* CONTACT */}
-        <footer id="contact" className="relative w-full overflow-hidden border-t border-ink/14 bg-canvas text-ink selection:bg-ink selection:text-canvas">
+        <section id="contact" aria-label="Contact" className="relative w-full overflow-hidden border-t border-ink/14 bg-canvas text-ink selection:bg-ink selection:text-canvas">
           <div className="mx-auto grid min-h-[62vh] w-full max-w-[1800px] content-between px-4 py-16 md:px-16 md:py-24">
             <a
               href="mailto:sulayman.bowles@gmail.com"
@@ -1278,8 +1278,9 @@ function HomePage() {
               })}
             </nav>
           </div>
-        </footer>
+        </section>
       </main>
+      <InternalFooter activePath="/" tone="light" />
     </div>
   );
 }
