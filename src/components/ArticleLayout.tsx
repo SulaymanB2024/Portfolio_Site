@@ -270,7 +270,7 @@ function ArticlePage({
         Skip to article
       </a>
       <ScrollProgress tone="dark" />
-      <InternalHeader activePath={activePath} tone="light" minimalBrand />
+      <InternalHeader activePath={activePath} tone="light" />
       {children}
       <PageFrame className="article-reader__site-footer-frame pb-8">
         <InternalFooter activePath={activePath} tone="light" />
