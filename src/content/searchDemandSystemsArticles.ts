@@ -665,7 +665,7 @@ export const SYSTEMS_SEARCH_DEMAND_ARTICLES: ResearchArticle[] = [
     title: 'How Airline Loyalty Programs Are Valued as Collateral',
     seoTitle: 'How Airline Loyalty Programs Are Valued as Collateral',
     subtitle: 'Lenders value the recurring partner-cash system around a loyalty program—co-brand agreements, pledged accounts, IP, data rights, reserves, and cash-flow durability—not a pile of points.',
-    seoDescription: 'How are airline loyalty programs valued as collateral? Follow partner cash, co-brand contracts, AAdvantage collateral, coverage, program EBITDA and the difference between debt capacity and equity value.',
+    seoDescription: 'How are airline loyalty programs valued as collateral? Follow partner cash, co-brand contracts, pledged accounts, AAdvantage debt capacity and the gap between debt and equity value.',
     artwork: {
       kind: 'study',
       variant: 'triptych',
