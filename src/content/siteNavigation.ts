@@ -9,7 +9,7 @@ export const primaryNav: SiteNavItem[] = [
   { label: 'Atlas', href: '/atlas', description: 'An in-development crawl and evidence system with capability and public-proof status.' },
   { label: 'Research', href: '/research', description: 'Search, technical SEO, product, data, markets, and infrastructure research.' },
   { label: 'About', href: '/about', description: 'Technical practice, current work, experience, and operating principles.' },
-  { label: 'Resume', href: '/resume', description: 'Recruiter-ready experience, education, skills, and PDF.' },
+  { label: 'Résumé', href: '/resume', description: 'Recruiter-ready experience, education, skills, and PDF.' },
   { label: 'Contact', href: '/contact', description: 'Direct email and a short project brief.' },
 ];
 
