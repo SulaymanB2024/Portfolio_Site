@@ -487,7 +487,7 @@ export default function AtlasPage() {
             whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.24, margin: '-6% 0px -6% 0px' }}
             transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
-            className="border-y border-ink/12 py-5 md:col-start-3"
+            className="relative isolate border-y border-ink/12 bg-canvas/95 px-5 py-5 backdrop-blur-[2px] md:col-start-3"
           >
             <div className="mb-5 flex items-center justify-between text-[9px] uppercase tracking-[0.22em] text-ink/44">
               <span>Crawl ledger</span>

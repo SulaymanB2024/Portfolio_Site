@@ -828,7 +828,7 @@ export function buildRouteStaticHtml(route: SeoRoute) {
         ${linkList([
           { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sulayman-bowles/', description: 'Professional profile.' },
           { label: 'GitHub', href: 'https://github.com/SulaymanB2024', description: 'Public code profile.' },
-          { label: 'Resume', href: '/resume', description: 'Readable profile.' },
+          { label: 'Résumé', href: '/resume', description: 'Readable profile.' },
           { label: 'Tech Ledger', href: 'https://sulayman-bowles.tech/', description: 'Technical projects, experiments, and project ledger.' },
           { label: 'Public Site', href: '/', description: 'Home page.' },
         ])}

@@ -76,7 +76,7 @@ export default function AboutPage() {
             </div>
             <nav className="visual-lab-text-links" aria-label="About page actions">
               <a href="/work">Selected work</a>
-              <a href="/resume">Resume</a>
+              <a href="/resume">Résumé</a>
               <a href="/contact" className="text-accent">Contact</a>
             </nav>
           </div>

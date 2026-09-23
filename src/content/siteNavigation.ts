@@ -9,7 +9,7 @@ export const primaryNav: SiteNavItem[] = [
   { label: 'Atlas', href: '/atlas', description: 'An in-development crawl and evidence system with capability and public-proof status.' },
   { label: 'Research', href: '/research', description: 'Search, technical SEO, product, data, markets, and infrastructure research.' },
   { label: 'About', href: '/about', description: 'Technical practice, current work, experience, and operating principles.' },
-  { label: 'Resume', href: '/resume', description: 'Recruiter-ready experience, education, skills, and PDF.' },
+  { label: 'Résumé', href: '/resume', description: 'Recruiter-ready experience, education, skills, and PDF.' },
   { label: 'Contact', href: '/contact', description: 'Direct email and a short project brief.' },
 ];
 
@@ -33,7 +33,7 @@ export function navLabel(item: SiteNavItem) {
 }
 
 export function navItemId(prefix: string, item: SiteNavItem) {
-  return `${prefix}-${item.label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
+  return `${prefix}-${item.label.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
 }
 
 export function isNavItemActive(activePath: string, href: string) {

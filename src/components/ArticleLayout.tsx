@@ -270,7 +270,7 @@ function ArticlePage({
         Skip to article
       </a>
       <ScrollProgress tone="dark" />
-      <InternalHeader activePath={activePath} tone="light" minimalBrand />
+      <InternalHeader activePath={activePath} tone="light" />
       {children}
       <PageFrame className="article-reader__site-footer-frame pb-8">
         <InternalFooter activePath={activePath} tone="light" />
@@ -435,7 +435,7 @@ function ArticleImagePlaceholder({
     return (
       <div className="article-reader__image-placeholder article-reader__image-placeholder--identity" aria-hidden="true">
         <div className="article-reader__identity-node article-reader__identity-node--center">PERSON</div>
-        {['SITE', 'RESUME', 'GITHUB', 'LINKEDIN', 'HISTORY'].map((label) => (
+        {['SITE', 'RÉSUMÉ', 'GITHUB', 'LINKEDIN', 'HISTORY'].map((label) => (
           <div key={label} className="article-reader__identity-node">{label}</div>
         ))}
       </div>

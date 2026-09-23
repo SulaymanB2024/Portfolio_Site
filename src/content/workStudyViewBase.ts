@@ -1,3 +1,4 @@
+import { primaryNav, navLabel } from './siteNavigation';
 import { WORK_STUDIES, WORK_STUDIES_UPDATED, workStudyPath, type WorkStudy } from './workStudies';
 
 export const WORK_ARCHIVE = [
@@ -22,13 +23,29 @@ const workStudiesUpdatedLabel = new Date(`${WORK_STUDIES_UPDATED}T12:00:00Z`).to
 });
 
 function arrow() { return '<span aria-hidden="true" class="ws-arrow">↗</span>'; }
+const sharedWorkNav = primaryNav.map((item) =>
+  `<a href="${e(item.href)}" ${item.href === '/work' ? 'aria-current="page"' : ''}>${e(navLabel(item))}</a>`
+).join('');
 function header(detail = false) {
   return `<a class="ws-skip" href="#work-main">Skip to content</a>
-  <header class="ws-header"><a class="ws-brand" href="/" aria-label="Sulayman Bowles, home"><span class="ws-monogram" aria-hidden="true">SB</span><span>Sulayman<br>Bowles</span></a>
-  <nav aria-label="Main navigation"><a href="/work" ${detail ? '' : 'aria-current="page"'}>Work</a><a href="/research">Research</a><a href="/resume">Résumé</a><a href="/contact">Contact ${arrow()}</a></nav></header>`;
+  <header class="ws-header">
+    <a class="ws-brand" href="/" aria-label="Sulayman Bowles — Home">
+      <img src="/favicon.svg" width="36" height="36" alt="" aria-hidden="true" class="ws-brand-mark">
+      <span class="ws-brand-copy"><strong>SULAYMAN BOWLES</strong><small>Technical SEO · AI Systems · Finance Research</small></span>
+    </a>
+    <nav aria-label="${detail ? 'Case study' : 'Work'} navigation">${sharedWorkNav}</nav>
+  </header>`;
 }
 function footer() {
-  return `<footer class="ws-footer"><a href="/">Sulayman Bowles</a><p>Products, systems, and the decisions behind them.</p><a href="/work">Work index ${arrow()}</a><a href="#work-main">Back to top ↑</a></footer>`;
+  return `<footer class="ws-footer">
+    <a class="ws-footer-brand" href="/" aria-label="Sulayman Bowles — Home">
+      <img src="/favicon.svg" width="32" height="32" alt="" aria-hidden="true">
+      <span><strong>SULAYMAN BOWLES</strong><small>Technical SEO · AI Systems · Finance Research</small></span>
+    </a>
+    <nav aria-label="Footer navigation">${sharedWorkNav}</nav>
+    <div class="ws-footer-meta">© 2026 SULAYMAN BOWLES<br>ALL RIGHTS RESERVED</div>
+    <a class="ws-footer-top" href="#work-main">Back to top ↑</a>
+  </footer>`;
 }
 
 const svg = (body: string, extra = '') => `<svg viewBox="0 0 600 390" aria-hidden="true" focusable="false" ${extra}>${body}</svg>`;

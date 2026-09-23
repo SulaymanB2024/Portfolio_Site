@@ -279,7 +279,7 @@ ${route.staticHtml}
   const navLinks = [
     ['Home', '/'],
     ['About', '/about'],
-    ['Resume', '/resume'],
+    ['Résumé', '/resume'],
     ['Atlas', '/atlas'],
     ['Method', '/method'],
     ['Markets', '/markets'],

@@ -1,6 +1,7 @@
 import ArrowDown from 'lucide-react/dist/esm/icons/arrow-down.js';
 import { motion, useScroll, useTransform, type MotionValue } from 'motion/react';
 import { useRef, type CSSProperties } from 'react';
+import { InternalFooter } from '../components/InternalFooter';
 import InternalHeader from '../components/InternalHeader';
 import { PageTechnicalChrome } from '../components/PageTechnicalChrome';
 import { useReducedMotion } from '../hooks/useReducedMotion';
@@ -273,6 +274,10 @@ export default function AtlasCelestialParallaxPage() {
           />
         </div>
       </section>
+
+      <div className="relative z-10 mx-auto w-full max-w-[1480px] bg-canvas px-4 pb-8 md:px-8 xl:px-10">
+        <InternalFooter activePath="/atlas" tone="light" />
+      </div>
     </main>
   );
 }
