@@ -18,9 +18,14 @@ export type { SeoRoute, RouteSection, RouteVisualMode, RouteTone } from './baseR
 
 const composedRoutes: SeoRoute[] = [...BASE_ROUTES.map(withWorkIndexMetadata), ...WORK_STUDY_ROUTES];
 const researchLastmod = latestContentDate(PUBLICATION_INDEX.map(item => item.date));
-const routesWithCollectionDates = composedRoutes.map(route => route.path === '/research'
-  ? { ...route, lastmod: researchLastmod }
-  : route);
+const marketsLastmod = latestContentDate(
+  PUBLICATION_INDEX.filter(item => item.category === 'Markets and investing').map(item => item.date),
+);
+const routesWithCollectionDates = composedRoutes.map(route => {
+  if (route.path === '/research') return { ...route, lastmod: researchLastmod };
+  if (route.path === '/markets') return { ...route, lastmod: marketsLastmod };
+  return route;
+});
 export const SEO_ROUTES: SeoRoute[] = routesWithCollectionDates.map(route => route.path === '/sitemap'
   ? { ...route, lastmod: latestContentDate(routesWithCollectionDates.filter(item => item.includeInSitemap && item.path !== '/sitemap').map(item => item.lastmod ?? SITE_LASTMOD)) }
   : route);
