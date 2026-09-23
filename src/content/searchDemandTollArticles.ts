@@ -45,6 +45,16 @@ const fhwaP3Agreements = {
   href: 'https://www.fhwa.dot.gov/ipd/p3/p3_projects/agreements.aspx',
   lastVerified: DATE,
 };
+const ferrovialFactBook = {
+  label: 'Ferrovial — 2026 Fact Book, concession ownership and project economics',
+  href: 'https://www.sec.gov/Archives/edgar/data/1468522/000162828026032618/ferrovial-factbook2026_s.htm',
+  lastVerified: DATE,
+};
+const buildAmericaSh130 = {
+  label: 'U.S. DOT Build America — SH 130 Segments 5–6 financing and restructuring',
+  href: 'https://www.transportation.gov/buildamerica/projects/sh-130-segments-5-and-6',
+  lastVerified: DATE,
+};
 
 const commonResources = [
   {
@@ -352,7 +362,7 @@ export const TOLL_SEARCH_DEMAND_ARTICLES: ResearchArticle[] = [
         ],
       },
     ],
-    sources: [nteAgreement, txdotTollReport, fhwaP3],
+    sources: [nteAgreement, txdotTollReport, fhwaP3, ferrovialFactBook, buildAmericaSh130],
   },
   {
     kind: 'research',
