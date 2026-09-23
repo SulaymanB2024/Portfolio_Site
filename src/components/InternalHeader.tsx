@@ -19,6 +19,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   const [routeNote, setRouteNote] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(true);
+  const [headerScrolled, setHeaderScrolled] = useState(false);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useRef<HTMLElement>(null);
   const mobileMenuScrollYRef = useRef(0);
@@ -57,6 +58,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
       requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
         const delta = currentScrollY - lastScrollYRef.current;
+        setHeaderScrolled(currentScrollY > 12);
 
         if (currentScrollY < 80) {
           setHeaderVisible(true);
@@ -76,6 +78,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
       });
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -187,7 +190,7 @@ export function InternalHeader({ activePath, tone = 'light', variant = 'default'
   }, [mobileMenuOpen]);
 
   return (
-    <header className={shellClass}>
+    <header className={`${shellClass} ${headerScrolled ? 'site-header--scrolled' : ''}`}>
       {mobileMenuOpen && (
         <div
           aria-hidden="true"
