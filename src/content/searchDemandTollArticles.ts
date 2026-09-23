@@ -16,13 +16,13 @@ const nttaFinance = {
   lastVerified: DATE,
 };
 const hctraSource = {
-  label: 'HCTRA — authority background and Harris County enterprise-fund structure',
-  href: 'https://www.hctra.org/-/media/37ce944ba7d34453b0353f83613b9aef.ashx',
+  label: 'HCTRA — FY2025 Toll Road Authority Enterprise Fund financial statements',
+  href: 'https://www.hctra.org/-/media/2ba0076447b44da0948e12147ce7a26b.ashx',
   lastVerified: DATE,
 };
 const txdotTollReport = {
-  label: 'TxDOT — HB 803 Report on Toll Projects and CDA termination years',
-  href: 'https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy2023.pdf',
+  label: 'TxDOT — HB 803 Report on Toll Projects, FY2025',
+  href: 'https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf',
   lastVerified: DATE,
 };
 const nteAgreement = {
