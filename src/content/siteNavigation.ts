@@ -33,7 +33,7 @@ export function navLabel(item: SiteNavItem) {
 }
 
 export function navItemId(prefix: string, item: SiteNavItem) {
-  return `${prefix}-${item.label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
+  return `${prefix}-${item.label.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
 }
 
 export function isNavItemActive(activePath: string, href: string) {
