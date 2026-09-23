@@ -10,6 +10,9 @@ import { HIDDEN_FINANCING_HARDWARE_ARTICLE_SLUG } from './hiddenFinancingHardwar
 import { INDEX_COMPANY_MATTERS_ARTICLE_SLUG } from './indexCompanyMattersArticle';
 import { ONLINE_RETURNS_INVESTIGATION_ARTICLE_SLUG } from './onlineReturnsInvestigationArticle';
 import { SOFTWARE_BUYOUT_COHORT_ARTICLE_SLUG } from './softwareBuyoutCohortArticle';
+import { CRAWLER_SEARCH_DEMAND_ARTICLES } from './searchDemandCrawlerArticles';
+import { SYSTEMS_SEARCH_DEMAND_ARTICLES } from './searchDemandSystemsArticles';
+import { TOLL_SEARCH_DEMAND_ARTICLES } from './searchDemandTollArticles';
 import { TECHNICAL_ARTICLE_SERIES } from './technicalArticleSeries';
 import { TEXAS_TOLL_ARTICLE_SLUG } from './texasTollRoadArticleMeta';
 import { THE_AI_MEGAWATT_ARTICLE_SLUG } from './theAiMegawattArticle';
@@ -53,6 +56,24 @@ function seriesCategory(articleItem: ResearchArticle): PublicationIndexItem['cat
   return 'Technical SEO';
 }
 
+function searchDemandCategory(articleItem: ResearchArticle): PublicationIndexItem['category'] {
+  if (articleItem.cluster === 'financial-systems') return 'Markets and investing';
+  if (
+    articleItem.cluster === 'ai-crawlers'
+    || articleItem.cluster === 'crawler-engineering'
+    || articleItem.cluster === 'search-console'
+  ) return 'Search systems';
+  if (articleItem.cluster === 'ai-systems') return 'AI systems and products';
+  if (articleItem.cluster === 'data-systems') return 'Data & AI systems';
+  return 'Technical SEO';
+}
+
+const SEARCH_DEMAND_ARTICLES = [
+  ...TOLL_SEARCH_DEMAND_ARTICLES,
+  ...CRAWLER_SEARCH_DEMAND_ARTICLES,
+  ...SYSTEMS_SEARCH_DEMAND_ARTICLES,
+] as const;
+
 export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
   {
     category: 'Markets and investing',
@@ -85,6 +106,13 @@ export const PUBLICATION_INDEX: readonly PublicationIndexItem[] = [
     date: PROGRAMMATIC_SEO_HUBS[0].dateModified,
     featured: true,
   },
+  ...SEARCH_DEMAND_ARTICLES.map((articleItem) => ({
+    category: searchDemandCategory(articleItem),
+    title: articleItem.title,
+    href: getArticlePath(articleItem),
+    description: articleItem.subtitle,
+    date: articleItem.dateModified ?? articleItem.date,
+  })),
   ...TECHNICAL_ARTICLE_SERIES.map((articleItem) => ({
     category: seriesCategory(articleItem),
     title: articleItem.title,

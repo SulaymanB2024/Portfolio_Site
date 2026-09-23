@@ -32,12 +32,12 @@
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/research</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/sitemap</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
@@ -62,7 +62,7 @@
   </url>
   <url>
     <loc>https://sulayman-bowles.dev/markets</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -178,6 +178,121 @@
   <url>
     <loc>https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo</loc>
     <lastmod>2026-07-19</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/who-owns-ntta</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/texas-toll-roads-public-vs-private</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/who-owns-hctra-sam-houston-tollway</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/foreign-owned-texas-toll-roads</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/texas-private-toll-rate-controls</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/who-owns-us-toll-roads</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/texas-managed-lanes-ownership-operators</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/texas-private-toll-concession-expiration-dates</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/ai-crawlers/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/crawler-engineering/verify-ai-crawlers-server-logs</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/ai-crawlers/claude-crawlers-claudebot-searchbot-user</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/ai-crawlers/perplexitybot-vs-perplexity-user</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/ai-crawlers/google-extended-search-gemini-ai-overviews</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/ai-crawlers/ai-crawler-registry</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/search-console/search-console-query-vs-page-totals</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/search-console/search-console-data-pipeline</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/coreweave-ddtl-5-5</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/gpu-financing-ai-infrastructure</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-hvac-companies</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-plumbing-electrical-companies</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/private-equity-home-services-rollups</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/airline-loyalty-collateral-valuation</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sulayman-bowles.dev/research/financial-systems/humanoid-robot-startup-financing</loc>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
