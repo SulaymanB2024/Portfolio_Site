@@ -1,0 +1,209 @@
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
+import { Art } from './Art'
+import HomeWriting from './HomeWriting'
+import { HomeScene } from './HomeScene'
+import { ProjectTransitionProvider } from './ProjectTransition'
+import { contact, projects, type ArtKind } from './content'
+import { siteCopy, siteMetadata, withWritingCopy } from './site-copy'
+import { canonicalPath, siteOrigin } from './public-pages'
+import { SelectedWork, WorkPage } from './WorkCollection'
+import ProjectPage from './projects/ProjectNarrativePage'
+import catalog from './editorial/data/catalog.json'
+import { resolveRoute } from './editorial/routes'
+import { findCaseStudy } from './projects/case-studies'
+import { type ArticleSummary } from './editorial/types'
+import { ArtworkMotionProvider } from './editorial/ArtworkMotion'
+import WritingIndex from './editorial/WritingIndex'
+import ArticlePage from './editorial/ArticlePage'
+import { prepareArticle } from './editorial/article-cache'
+import { artworkTransitionName, galleryArticleJourney, startArtworkTransition, type ArtworkTransition } from './editorial/artwork-continuity'
+import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
+import './editorial/artwork-continuity.css'
+import './personal.css'
+import './editorial/editorial.css'
+
+const ResumePage = lazy(() => import('./editorial/ResumePage'))
+const CaseStudyPage = lazy(() => import('./projects/CaseStudyPage'))
+const AboutPage = lazy(() => import('./about/AboutPage'))
+const Contact = lazy(() => import('./contact/ContactPage'))
+const articles = (catalog as ArticleSummary[]).map(withWritingCopy)
+const navItems = [['Work', 'work'], ['Writing', 'writing'], ['About', 'about'], ['Résumé', 'resume'], ['Contact', 'contact']]
+const path = () => resolveRoute(location.hash, location.pathname, articles)
+
+function useRoute() {
+  const [route, setRoute] = useState(path)
+  const current = useRef(route)
+  useEffect(() => {
+    let sequence = 0
+    let active: ArtworkTransition | undefined
+    const change = async () => {
+      const next = path()
+      const ticket = ++sequence
+      active?.skipTransition()
+      if (next === current.current) {
+        document.documentElement.dataset.artTransition = 'idle'
+        return
+      }
+      const journey = galleryArticleJourney(current.current, next)
+      const canAnimate = journey && !matchMedia('(prefers-reduced-motion: reduce)').matches
+      const update = () => {
+        if (ticket !== sequence || path() !== next) return
+        current.current = next
+        flushSync(() => setRoute(next))
+        window.scrollTo({ top: 0, behavior: 'instant' })
+        if (next === 'writing') {
+          const selected = new URLSearchParams(location.hash.split('?')[1] || '').get('at')
+          const link = [...document.querySelectorAll<HTMLAnchorElement>('.writing-story')]
+            .find(item => item.dataset.slug === selected)
+          // Position the destination before the browser captures its new artwork box.
+          link?.scrollIntoView({ block: 'center', behavior: 'instant' })
+        }
+      }
+      if (!canAnimate) {
+        document.documentElement.dataset.artTransition = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'idle'
+        update()
+        return
+      }
+      document.documentElement.dataset.artTransition = 'running'
+      document.documentElement.dataset.artTransitionCount = String(Number(document.documentElement.dataset.artTransitionCount || 0) + 1)
+      const articleRoute = next.startsWith('writing/') ? next : current.current
+      const article = articles.find(item => `writing/${item.slug}` === articleRoute)
+      const name = article ? artworkTransitionName(getArticleGenerativeArtwork(article.path)) : ''
+      active = startArtworkTransition(name, async () => {
+        if (next.startsWith('writing/')) {
+          try { await prepareArticle(next.slice('writing/'.length)) }
+          catch { /* Normal routing will display the existing retry state. */ }
+        }
+        update()
+      })
+      void active.ready.catch(() => { /* Failed preparation must not break navigation. */ })
+      void active.finished.catch(() => {}).finally(() => {
+        if (ticket === sequence) document.documentElement.dataset.artTransition = 'idle'
+      })
+    }
+    window.addEventListener('hashchange', change)
+    return () => { sequence++; active?.skipTransition(); window.removeEventListener('hashchange', change) }
+  }, [])
+  useEffect(() => {
+    const project = projects.find(p => route === `work/${p.slug}`)
+    const article = articles.find(item => route === `writing/${item.slug}`)
+    const study = findCaseStudy(route)
+    const title = article?.displayTitle ?? article?.title ?? project?.name ?? study?.name ?? (route === 'resume' ? 'Résumé' : route === '' || route === 'home' ? siteMetadata.homeTitle : siteMetadata.pages[route] ? route[0].toUpperCase() + route.slice(1) : 'Page not found')
+    document.title = `${title} — Sulayman Bowles`
+    const description = article?.subtitle ?? project?.summary ?? study?.summary ?? siteMetadata.pages[route] ?? siteMetadata.description
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description)
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title)
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', description)
+    const canonical = canonicalPath(route)
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `${siteOrigin}${canonical || '/404'}`)
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', `${siteOrigin}${canonical || '/404'}`)
+    document.querySelector('meta[property="og:type"]')?.setAttribute('content', article ? 'article' : 'website')
+    const robots = document.querySelector('meta[name="robots"]')
+    robots?.setAttribute('content', canonical ? 'index, follow' : 'noindex, follow')
+    // Static route markup describes the initial document. Remove its schema
+    // after navigating to another page so it cannot describe the wrong content.
+    const schema = document.querySelector('#page-schema')
+    if (schema && schema.getAttribute('data-route') !== (route === 'home' ? '' : route)) schema.remove()
+  }, [route])
+  return route
+}
+
+function useAppearance() {
+  const [dark, setDark] = useState(() => {
+    try { return localStorage.getItem('sulayman-appearance') === 'dark' } catch { return false }
+  })
+  useEffect(() => {
+    try { localStorage.setItem('sulayman-appearance', dark ? 'dark' : 'light') } catch { /* Optional preference. */ }
+  }, [dark])
+  useEffect(() => {
+    const sync = (event: StorageEvent) => {
+      if (event.key === 'sulayman-appearance') setDark(event.newValue === 'dark')
+    }
+    window.addEventListener('storage', sync)
+    return () => window.removeEventListener('storage', sync)
+  }, [])
+  return { dark, setDark }
+}
+
+export default function PersonalSite() {
+  return <ArtworkMotionProvider><ProjectTransitionProvider><SitePages /></ProjectTransitionProvider></ArtworkMotionProvider>
+}
+
+function SitePages() {
+  const route = useRoute()
+  const { dark, setDark } = useAppearance()
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuButton = useRef<HTMLButtonElement>(null)
+  const main = useRef<HTMLElement>(null)
+  const initialRoute = useRef(true)
+  const project = projects.find(p => route === `work/${p.slug}`)
+  const article = articles.find(item => route === `writing/${item.slug}`)
+  const study = findCaseStudy(route)
+  const isDark = dark
+  const section = project || study ? 'work' : article ? 'writing' : route || 'home'
+  useEffect(() => { setMenuOpen(false) }, [route])
+  useEffect(() => {
+    if (initialRoute.current) { initialRoute.current = false; return }
+    main.current?.focus({ preventScroll: true })
+  }, [route])
+  useEffect(() => {
+    if (!menuOpen) return
+    const frame = requestAnimationFrame(() => document.querySelector<HTMLAnchorElement>('#main-navigation a')?.focus())
+    const escape = (event: KeyboardEvent) => { if (event.key === 'Escape') { setMenuOpen(false); menuButton.current?.focus() } }
+    window.addEventListener('keydown', escape)
+    return () => { cancelAnimationFrame(frame); window.removeEventListener('keydown', escape) }
+  }, [menuOpen])
+  useLayoutEffect(() => {
+    document.documentElement.dataset.appearance = isDark ? 'dark' : 'light'
+    document.documentElement.style.colorScheme = isDark ? 'dark' : 'light'
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#111210' : '#f5f2ea')
+  }, [isDark])
+  const art = new URLSearchParams(location.search).get('art') as ArtKind | null
+  if (import.meta.env.DEV && art && ['helmet', 'crystal', 'ribbon', 'globe', 'cross'].includes(art)) {
+    return <div className="art-export" data-appearance={dark ? 'dark' : 'light'}><Art kind={art} dark={dark} /><button className="export-theme" onClick={() => setDark(!dark)}>Change backdrop</button></div>
+  }
+  const isHome = route === '' || route === 'home'
+  return <div className={`personal-site ${project ? 'project-site' : ''} ${isHome ? 'home-site' : ''}`} data-appearance={isDark ? 'dark' : 'light'} data-section={section}>
+    {isHome && <div className="page-wash" aria-hidden="true" />}
+    <a className="skip-link" href="#main-content" onClick={e => { e.preventDefault(); document.getElementById('main-content')?.focus() }}>Skip to content</a>
+    <header className="personal-header">
+      <a href="#/" className="identity" aria-label="Sulayman Bowles — home"><span className="identity-name">Sulayman Bowles</span></a>
+      <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug], index) => <a key={slug} href={`#/${slug}`} aria-current={section === (slug || 'home') ? 'page' : undefined} onClick={() => setMenuOpen(false)}><span className="nav-number" aria-hidden="true">0{index + 1}</span>{item}</a>)}</nav>
+      <div className="header-end"><button className="appearance-toggle" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setDark(!dark)}><span aria-hidden="true">◐</span></button><button ref={menuButton} className="nav-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button></div>
+    </header>
+    <main ref={main} id="main-content" tabIndex={-1} key={route}>
+      <Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} /> : article ? <ArticlePage slug={article.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} /> : <NotFound />}</Suspense>
+    </main>
+    {route !== 'about' && <Footer closing={!article && route !== 'contact'} />}
+  </div>
+}
+
+function Crosshair({ className = '' }: { className?: string }) { return <span className={`crosshair ${className}`} aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1v7m0 8v7M1 12h7m8 0h7" /><circle cx="12" cy="12" r="4" /></svg></span> }
+function ArrowLink({ href, children, external = false }: { href: string; children: React.ReactNode; external?: boolean }) {
+  return <a className="arrow-link" href={href.startsWith('./') ? `${import.meta.env.BASE_URL}${href.slice(2)}` : href} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}>{children}<span aria-hidden="true">{external ? '↗' : '→'}</span></a>
+}
+function SectionLabel({ children, end }: { children: React.ReactNode; end?: React.ReactNode }) {
+  return <div className="section-label"><span>/ {children}</span><i />{end && <span>{end}</span>}</div>
+}
+
+function Home({ dark }: { dark: boolean }) {
+  return <>
+    <section className="home-scroll-stage" aria-labelledby="home-title"><div className="home-hero">
+      <div className="hero-copy">
+        <h1 id="home-title" aria-label={siteCopy.home.title}>{siteCopy.home.headline[0]}<br />{siteCopy.home.headline[1]}<br />{siteCopy.home.headline[2]}<span className="period">.</span></h1>
+        <p className="hero-description">{siteCopy.home.description}</p>
+        <ArrowLink href="#/work">{siteCopy.home.action}</ArrowLink>
+      </div>
+      <HomeScene dark={dark} />
+    </div></section>
+    <SelectedWork dark={dark} />
+    <HomeWriting />
+  </>
+}
+
+function NotFound() { return <section className="not-found"><span className="eyebrow">{siteCopy.notFound.kicker}</span><h1>{siteCopy.notFound.headline[0]}<br />{siteCopy.notFound.headline[1]}</h1><ArrowLink href="#/">{siteCopy.notFound.action}</ArrowLink></section> }
+
+function Footer({ closing }: { closing: boolean }) {
+  return <footer className="personal-footer">{closing && <div className="site-closing"><span className="eyebrow">{siteCopy.footer.kicker}</span><div className="site-closing-main"><h2>{siteCopy.footer.headline[0]}<br /><em>{siteCopy.footer.headline[1]}</em></h2><div className="site-closing-contact"><p>{siteCopy.footer.description}</p><a className="closing-email" href={`mailto:${contact.email}`}>{contact.email}<span aria-hidden="true">↗</span></a><a className="arrow-link" href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn<span aria-hidden="true">↗</span></a></div></div></div>}<div className="footer-baseline"><span className="mono">Sulayman Bowles / Austin, TX</span><details className="colophon"><summary className="mono">Colophon <span aria-hidden="true">+</span></summary><div><h2>Colophon</h2><p>{siteCopy.footer.colophon}</p><p><a href="https://sketchfab.com/3d-models/jousting-helmet-a4eea31d9d9441af9434a7da5ae46b54" target="_blank" rel="noreferrer">Jousting Helmet</a> by The Royal Armoury, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Dithering based on <a href="https://github.com/niccolofanton/dithering-shader" target="_blank" rel="noreferrer">Niccolò Fanton’s study</a> and <a href="https://www.shadertoy.com/view/ltSSzW" target="_blank" rel="noreferrer">Klems’ Bayer pattern</a>.</p><a className="mono" href={`${import.meta.env.BASE_URL}shader.html`}>Explore the original study ↗</a></div></details><a className="footer-top mono" href="#/" onClick={event => { if (location.hash === '#/' || !location.hash) { event.preventDefault(); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }) } }}>{siteCopy.footer.top} <span aria-hidden="true">↑</span></a></div></footer>
+}

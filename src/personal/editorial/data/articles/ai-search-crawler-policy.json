@@ -1,0 +1,294 @@
+{
+  "kind": "research",
+  "cluster": "ai-crawlers",
+  "slug": "ai-search-crawler-policy",
+  "number": "01",
+  "category": "CRAWLER POLICY",
+  "title": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
+  "seoTitle": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
+  "subtitle": "Copy-ready host rules for eight named product tokens, with exact Allow, Disallow, sitemap, and release checks.",
+  "seoDescription": "Compare OpenAI, Anthropic, and Perplexity crawler user agents, then copy robots.txt policies for allowing AI search, blocking training, or blocking named AI agents.",
+  "image": "/og-default.png",
+  "date": "2026.06.19",
+  "dateModified": "2026.07.14",
+  "lastVerified": "2026.07.14",
+  "readTime": "10 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Treat search crawlers, training crawlers, and user-triggered fetchers as separate policy choices, then verify observed traffic with server logs and provider-published IP ranges.",
+  "evidenceBoundary": "This guide documents published crawler controls as verified on July 14, 2026. A robots.txt rule expresses policy; it does not secure private content, authenticate a bot, or prove indexing, ranking, training exclusion, or answer-system citation.",
+  "metrics": [
+    {
+      "label": "Agents compared",
+      "value": "8 USER AGENTS"
+    },
+    {
+      "label": "Policies",
+      "value": "2 COPY-READY"
+    },
+    {
+      "label": "Last verified",
+      "value": "2026.07.14"
+    },
+    {
+      "label": "Primary artifact",
+      "value": "ROBOTS POLICY"
+    }
+  ],
+  "sources": [
+    {
+      "label": "OpenAI crawler documentation",
+      "href": "https://developers.openai.com/api/docs/bots",
+      "lastVerified": "2026.07.14"
+    },
+    {
+      "label": "Anthropic crawler guidance",
+      "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+      "lastVerified": "2026.07.14"
+    },
+    {
+      "label": "Perplexity crawler documentation",
+      "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
+      "lastVerified": "2026.07.14"
+    },
+    {
+      "label": "Google robots.txt introduction and limitations",
+      "href": "https://developers.google.com/search/docs/crawling-indexing/robots/intro",
+      "lastVerified": "2026.07.14"
+    },
+    {
+      "label": "OpenAI OAI-SearchBot IP ranges",
+      "href": "https://openai.com/searchbot.json",
+      "lastVerified": "2026.07.14"
+    },
+    {
+      "label": "OpenAI GPTBot IP ranges",
+      "href": "https://openai.com/gptbot.json",
+      "lastVerified": "2026.07.14"
+    },
+    {
+      "label": "OpenAI ChatGPT-User IP ranges",
+      "href": "https://openai.com/chatgpt-user.json",
+      "lastVerified": "2026.07.14"
+    },
+    {
+      "label": "Anthropic bot IP ranges",
+      "href": "https://claude.com/crawling/bots.json",
+      "lastVerified": "2026.07.14"
+    },
+    {
+      "label": "PerplexityBot IP ranges",
+      "href": "https://www.perplexity.ai/perplexitybot.json",
+      "lastVerified": "2026.07.14"
+    },
+    {
+      "label": "Perplexity-User IP ranges",
+      "href": "https://www.perplexity.ai/perplexity-user.json",
+      "lastVerified": "2026.07.14"
+    }
+  ],
+  "content": [
+    "/robots.txt is a host-scoped text file. Match the exact case-sensitive product token, then assign Allow: / or Disallow: /. Preserve the correct Sitemap line.",
+    "Release sequence: outcome → token → group → file merge → production fetch → access-log check."
+  ],
+  "sections": [
+    {
+      "id": "outcome-matrix",
+      "title": "Choose the policy outcome before choosing a user-agent",
+      "paragraphs": [
+        "Choose one row before editing the file."
+      ],
+      "table": {
+        "caption": "Outcome-to-user-agent decision matrix",
+        "columns": [
+          "Operator outcome",
+          "Token group",
+          "Rule",
+          "Release check"
+        ],
+        "rows": [
+          [
+            "AI answer discovery",
+            "OAI-SearchBot, Claude-SearchBot, PerplexityBot",
+            "Allow: /",
+            "/robots.txt returns the intended groups"
+          ],
+          [
+            "Model-development opt-out",
+            "GPTBot, ClaudeBot",
+            "Disallow: /",
+            "Release time and provider guidance saved"
+          ],
+          [
+            "User-opened URLs",
+            "ChatGPT-User, Claude-User, Perplexity-User",
+            "Provider-specific choice",
+            "Request type classified correctly"
+          ],
+          [
+            "Private files",
+            "Every client",
+            "Authentication or edge authorization",
+            "Unauthenticated request denied"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "crawler-comparison",
+      "title": "AI crawler comparison table",
+      "paragraphs": [
+        "Target the stable token, not a versioned HTTP header."
+      ],
+      "table": {
+        "caption": "Published AI crawler roles and robots.txt behavior, last verified July 14, 2026",
+        "columns": [
+          "Provider",
+          "Exact token",
+          "Mode",
+          "robots.txt",
+          "Operator note",
+          "Verified"
+        ],
+        "rows": [
+          [
+            "OpenAI",
+            "OAI-SearchBot",
+            "Search",
+            "Supported",
+            "Answer-discovery token",
+            "2026-07-14"
+          ],
+          [
+            "OpenAI",
+            "GPTBot",
+            "Model development",
+            "Supported",
+            "Training opt-out token",
+            "2026-07-14"
+          ],
+          [
+            "OpenAI",
+            "ChatGPT-User",
+            "User request",
+            "May not apply",
+            "Not an automatic-index token",
+            "2026-07-14"
+          ],
+          [
+            "Anthropic",
+            "Claude-SearchBot",
+            "Search",
+            "Honored",
+            "Claude search token",
+            "2026-07-14"
+          ],
+          [
+            "Anthropic",
+            "ClaudeBot",
+            "Model development",
+            "Honored",
+            "Training token",
+            "2026-07-14"
+          ],
+          [
+            "Anthropic",
+            "Claude-User",
+            "User request",
+            "Honored",
+            "User-opened URL token",
+            "2026-07-14"
+          ],
+          [
+            "Perplexity",
+            "PerplexityBot",
+            "Search",
+            "Supported",
+            "Search token; not training",
+            "2026-07-14"
+          ],
+          [
+            "Perplexity",
+            "Perplexity-User",
+            "User request",
+            "Generally ignored",
+            "User-requested fetch token",
+            "2026-07-14"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "robots-configurations",
+      "title": "Copy-and-paste robots.txt configurations",
+      "paragraphs": [
+        "Merge one template with the host’s existing search-engine, media, private-path, and sitemap groups. Replace the example sitemap hostname before release."
+      ],
+      "codeExamples": [
+        {
+          "title": "Allow AI search but block training",
+          "description": "Allows search-oriented and user-triggered access while blocking the two published training/model-development agents in this guide.",
+          "language": "robots.txt",
+          "code": "User-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: Claude-User\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Perplexity-User\nAllow: /\n\nSitemap: https://example.com/sitemap.xml"
+        },
+        {
+          "title": "Block all AI crawlers",
+          "description": "Blocks every AI-related agent named in this guide. No static list can cover every crawler, ChatGPT-User rules may not apply, and Perplexity-User generally ignores robots.txt, so enforce sensitive-content controls at authentication or the server edge.",
+          "language": "robots.txt",
+          "code": "User-agent: OAI-SearchBot\nDisallow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: ChatGPT-User\nDisallow: /\n\nUser-agent: Claude-SearchBot\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: Claude-User\nDisallow: /\n\nUser-agent: PerplexityBot\nDisallow: /\n\nUser-agent: Perplexity-User\nDisallow: /"
+        }
+      ]
+    },
+    {
+      "id": "server-log-verification",
+      "title": "Verify deployment with server logs",
+      "paragraphs": [
+        "Fetch each production /robots.txt endpoint and compare the returned group with the committed file. Then run the log filter below against current and rotated NGINX files. A matching token is only a claim, so check the address against the provider’s linked JSON range before attributing the request."
+      ],
+      "bullets": [
+        "Expected response: HTTP 200, text/plain, intended group, correct sitemap hostname.",
+        "Useful fields: timestamp, host, path, status, source address, complete User-Agent.",
+        "Interpretation rule: absence from the log does not prove a block succeeded."
+      ],
+      "codeExamples": [
+        {
+          "title": "Find the named agents in NGINX logs",
+          "description": "Adjust the log path for your server or CDN export. This reads current and rotated gzip logs without changing them.",
+          "language": "shell",
+          "code": "zgrep -hEi 'OAI-SearchBot|GPTBot|ChatGPT-User|ClaudeBot|Claude-SearchBot|Claude-User|PerplexityBot|Perplexity-User' /var/log/nginx/access.log*\n\ncurl -sS -D - https://example.com/robots.txt -o /dev/null"
+        }
+      ]
+    }
+  ],
+  "path": "/research/ai-crawlers/ai-search-crawler-policy",
+  "aliases": [
+    "/markets/ai-search-crawler-policy"
+  ],
+  "researchAssets": [
+    {
+      "priority": 1,
+      "name": "AI Crawler Robots.txt Guide",
+      "href": "/research/ai-crawlers/ai-search-crawler-policy",
+      "type": "research_note",
+      "preferredAnchor": "crawler policy for public websites",
+      "audiences": [
+        "technical SEO",
+        "search visibility",
+        "web developers",
+        "search policy writers"
+      ],
+      "pitchAngle": "Map of search, training, and user-requested crawler behavior with conservative visibility limits.",
+      "supportingAssets": [
+        {
+          "label": "Crawler policy sources",
+          "href": "/research/ai-search-crawler-policy-sources.csv"
+        }
+      ]
+    }
+  ],
+  "supportingAssets": [
+    {
+      "label": "Crawler policy sources",
+      "href": "/research/ai-search-crawler-policy-sources.csv"
+    }
+  ]
+}

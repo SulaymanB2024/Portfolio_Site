@@ -1,0 +1,7 @@
+@media (min-width: 1001px) { .personal-site .personal-header nav { position: relative; } }
+.nav-motion-marker { position: absolute; top: 0; left: 0; width: 1px; height: 1px; background: var(--ink); transform-origin: left; opacity: 0; pointer-events: none; }
+.personal-site[data-nav-motion-ready] .personal-header nav a[aria-current='page']::after { transform: scaleX(0); }
+.personal-site .personal-header .nav-number { transition: color 240ms ease; }
+.personal-site .personal-header nav a:is(:hover, :focus-visible) .nav-number { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .nav-motion-marker { animation: none !important; } }
+@media print { .nav-motion-marker { display: none; } }

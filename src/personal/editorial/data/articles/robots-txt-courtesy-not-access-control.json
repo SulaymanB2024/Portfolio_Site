@@ -1,0 +1,228 @@
+{
+  "kind": "research",
+  "cluster": "ai-crawlers",
+  "slug": "robots-txt-courtesy-not-access-control",
+  "number": "09",
+  "category": "CRAWLER POLICY",
+  "title": "Robots.txt Is a Courtesy Layer, Not Access Control",
+  "seoTitle": "Robots.txt Is Not Access Control: A Layered Crawler Policy",
+  "subtitle": "A precise model for separating crawler requests, indexing directives, authentication, authorization, rate controls, and evidence of enforcement.",
+  "seoDescription": "Separate robots.txt from authentication, authorization, indexing directives, rate limits, and bot verification with a layered crawler-control model and release checks.",
+  "image": "/og-default.png",
+  "date": "2026.07.19",
+  "dateModified": "2026.07.19",
+  "lastVerified": "2026.07.19",
+  "readTime": "13 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Robots.txt is a host-scoped request policy for cooperating crawlers; confidential or costly resources need enforceable server-side authorization and capacity controls that do not depend on a claimed user agent.",
+  "evidenceBoundary": "The controls in this article describe publisher-side policy and enforcement. A rule does not prove that every client complies, that a provider attributed a request the same way, or that an allowed page will be crawled, indexed, trained on, or cited.",
+  "metrics": [
+    {
+      "label": "Control layers",
+      "value": "06"
+    },
+    {
+      "label": "Security boundary",
+      "value": "SERVER"
+    },
+    {
+      "label": "Identity claim",
+      "value": "UNTRUSTED"
+    },
+    {
+      "label": "Primary artifact",
+      "value": "POLICY MATRIX"
+    }
+  ],
+  "sources": [
+    {
+      "label": "RFC 9309: Robots Exclusion Protocol",
+      "href": "https://www.rfc-editor.org/rfc/rfc9309.html",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "RFC 9110: HTTP Semantics",
+      "href": "https://www.rfc-editor.org/rfc/rfc9110.html",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "Google Search: introduction to robots.txt",
+      "href": "https://developers.google.com/search/docs/crawling-indexing/robots/intro",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "OWASP Authorization Cheat Sheet",
+      "href": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "OpenAI crawler documentation",
+      "href": "https://developers.openai.com/api/docs/bots",
+      "lastVerified": "2026.07.19"
+    }
+  ],
+  "content": [
+    "A robots.txt file is public text that asks automated clients how they may access paths on one service. It is valuable because cooperating crawlers can retrieve one predictable policy before requesting content. It is not a credential, firewall, authorization decision, encryption layer, or proof of the client behind a User-Agent string. Treating it as any of those creates a security boundary that an ordinary HTTP client can cross by ignoring the file.",
+    "A robust crawler policy uses separate controls for separate outcomes. Robots rules govern cooperating automated retrieval. Page-level robots directives express indexing and presentation preferences to supporting systems. Authentication establishes an identity; authorization decides whether that identity may access a resource. Edge and application controls protect capacity. Logging and verification provide evidence about what happened. The layers can support one policy, but none substitutes for the others."
+  ],
+  "sections": [
+    {
+      "id": "six-control-layers",
+      "title": "Name the six control layers before writing rules",
+      "paragraphs": [
+        "The first layer is discovery policy: robots.txt communicates path rules to crawlers that implement the protocol. The second is document processing policy: robots meta elements and response headers can ask supporting indexers not to index a fetched resource or not to expose certain features. The third and fourth are authentication and authorization, which establish who or what is making a request and whether that principal may perform the action.",
+        "The fifth layer protects service capacity with connection limits, rate limits, quotas, caching, circuit breakers, and workload isolation. The sixth is observation: logs, challenge outcomes, provider-published address ranges, and response evidence used to classify requests after or during access. Observation can inform an enforcement decision, but a log label alone does not protect a route.",
+        "Write the desired outcome first. “Do not spend crawler capacity on faceted combinations,” “do not expose this account document publicly,” “allow search discovery but decline a named model-development crawler,” and “keep the origin healthy under bursts” are different requirements. Each belongs to a different combination of layers."
+      ],
+      "table": {
+        "caption": "Crawler-control layers and their boundaries",
+        "columns": [
+          "Layer",
+          "Mechanism",
+          "Controls",
+          "Does not establish"
+        ],
+        "rows": [
+          [
+            "Discovery policy",
+            "/robots.txt",
+            "Cooperating crawler path access",
+            "Confidentiality or client identity"
+          ],
+          [
+            "Document policy",
+            "robots meta or X-Robots-Tag",
+            "Supporting indexer processing",
+            "Request denial"
+          ],
+          [
+            "Authentication",
+            "Session, token, certificate, signed request",
+            "Claimed principal",
+            "Permission by itself"
+          ],
+          [
+            "Authorization",
+            "Server or edge policy",
+            "Allowed action on resource",
+            "Crawler compliance"
+          ],
+          [
+            "Capacity",
+            "Rate, concurrency, quota, cache",
+            "Resource consumption",
+            "Content eligibility"
+          ],
+          [
+            "Observation",
+            "Logs, ranges, reverse verification, traces",
+            "Attribution evidence",
+            "Retroactive prevention"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "rep-semantics",
+      "title": "Implement robots semantics as a versioned policy parser",
+      "paragraphs": [
+        "RFC 9309 standardizes the Robots Exclusion Protocol, including user-agent matching, rule matching, access results, and caching. A production parser should be covered by fixtures for casing, group selection, percent-encoding, longest-match behavior, comments, empty rules, Unicode handling, and retrieval failure states. A hand-written substring test is not an adequate policy engine.",
+        "Policy is scoped to the service where the file is served. Hostname, scheme, and port distinctions matter operationally. Redirects and cache behavior must be recorded because a stale or cross-host file can produce a policy different from the one an operator inspected in source control. Store the retrieved bytes, effective URL, status, fetch time, parser version, selected group, and matched rule.",
+        "A missing, unreachable, or invalid file is not the same observation as an explicit Allow or Disallow. Preserve the protocol-derived result and any conservative local override as separate fields. That distinction lets operators change local risk posture without rewriting what the remote service published."
+      ],
+      "bullets": [
+        "Fetch the production file from every relevant scheme, host, and port combination.",
+        "Keep the raw policy artifact and its redirect chain.",
+        "Version parser fixtures against the standard and known edge cases.",
+        "Record the selected group and exact matching rule for each decision.",
+        "Expire cached policy deliberately and expose stale-policy state."
+      ]
+    },
+    {
+      "id": "protect-private-content",
+      "title": "Protect private content even when every crawler rule disappears",
+      "paragraphs": [
+        "The practical test for confidential content is simple: if robots.txt were deleted and the client changed its User-Agent, would the server still deny the request? If not, the content is public. Move the decision to an authorization layer that validates a principal and checks permission for the resource on every request. Default denial is appropriate when no rule grants access.",
+        "Do not publish sensitive paths in robots.txt as a substitute for protection. The file is public and can reveal route names. A disallowed URL can also be discovered from links, logs, referrers, sitemaps, or prior crawls. The response itself must avoid returning the protected representation to an unauthorized requester.",
+        "Choose HTTP responses according to the application and standard semantics, then test them at the boundary. The important invariant is not a specific status alone; it is that an unauthenticated or unauthorized request cannot obtain the representation through alternate methods, encodings, hosts, cache keys, file variants, or indirect endpoints."
+      ],
+      "table": {
+        "caption": "Outcome-to-control mapping",
+        "columns": [
+          "Requirement",
+          "Primary control",
+          "Supporting controls",
+          "Verification"
+        ],
+        "rows": [
+          [
+            "Keep account data private",
+            "Authorization",
+            "Authentication, cache isolation, audit log",
+            "Anonymous and wrong-principal requests denied"
+          ],
+          [
+            "Reduce duplicate crawling",
+            "Robots policy or URL inventory repair",
+            "Canonical routes, link cleanup",
+            "Production policy and request logs reviewed"
+          ],
+          [
+            "Remove a public page from an index",
+            "Page-level directive or removal workflow",
+            "Status and sitemap updates",
+            "Fetched response contains intended directive"
+          ],
+          [
+            "Protect origin capacity",
+            "Rate and concurrency controls",
+            "Caching, backoff, workload queues",
+            "Load and rejection behavior measured"
+          ],
+          [
+            "Classify a named provider bot",
+            "Multi-signal observation",
+            "Published ranges and reverse checks when available",
+            "Attribution confidence retained"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "bot-identity",
+      "title": "Treat User-Agent as a claim, not an identity",
+      "paragraphs": [
+        "Any client can send a familiar crawler token. The header is still useful for routing logs and selecting a robots group because the protocol depends on crawler identification, but it should not unlock privileged content or bypass expensive-request controls. Security decisions need a stronger authenticated signal or a policy that remains safe when identity is unknown.",
+        "Some providers publish address ranges or verification guidance. Use those records as dated attribution evidence, not as a timeless allowlist copied into application code. Retrieve the provider artifact securely, validate its format, record the version or hash, compare the observed address, and define what happens when the feed is stale or unavailable. Network ownership can support classification without proving the purpose of an individual request.",
+        "Separate observed, claimed, and attributed identity in logs. Observed fields include address, TLS and request properties, time, host, path, and complete User-Agent. Claimed identity is the token. Attributed identity is a derived conclusion with method and confidence. This prevents dashboards from turning a string match into a verified traffic count."
+      ],
+      "codeExamples": [
+        {
+          "title": "Verify policy and authorization as independent checks",
+          "description": "The public policy response and protected-resource denial should both be tested.",
+          "language": "shell",
+          "code": "curl -fsS -D robots.headers https://example.com/robots.txt -o robots.body\n\ncurl -sS -o /dev/null -w \"%{http_code}\\n\" \\\n  -A \"ExampleCrawler/1.0\" https://example.com/private/account\n\ncurl -sS -o /dev/null -w \"%{http_code}\\n\" \\\n  -A \"Mozilla/5.0\" https://example.com/private/account"
+        }
+      ]
+    },
+    {
+      "id": "release-evidence",
+      "title": "Release policy with an evidence matrix",
+      "paragraphs": [
+        "A crawler-policy change can affect discovery, indexing workflows, origin load, data use, and user-triggered retrieval. Review the exact user-agent groups, path rules, existing search-engine rules, sitemap declarations, and inherited edge controls before deployment. Generate the final file from structured policy when several hosts or environments must stay aligned.",
+        "After deployment, fetch the public file without relying on a local filesystem copy. Assert status, content type, expected group selection, sitemap hostname, redirect behavior, and cache headers. Exercise representative allowed and disallowed paths with the policy parser, then separately test authorization and rate-control boundaries. A robots test passing says nothing about the private-route test.",
+        "Monitor outcomes with bounded language. Logs can show requests carrying selected tokens, response statuses, and rate-control events. They cannot show requests that never reached the measured layer, prove full provider identity from a token, or prove downstream indexing or training decisions. A useful policy report includes those gaps instead of converting silence into compliance."
+      ],
+      "bullets": [
+        "Review every existing group before merging a new crawler policy.",
+        "Test the deployed file from outside the origin environment.",
+        "Run parser fixtures against representative site paths.",
+        "Test private resources with no credentials and wrong credentials.",
+        "Measure origin rejections and latency after capacity-policy changes.",
+        "Date every provider-specific identity source and attribution rule."
+      ]
+    }
+  ],
+  "path": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+  "aliases": []
+}

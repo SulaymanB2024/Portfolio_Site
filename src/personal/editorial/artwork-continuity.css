@@ -1,0 +1,16 @@
+/* A live drawing moves above persistent paper, with no whole-page snapshot or fade. */
+.artwork-travel {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  transform-origin: center;
+  background: transparent;
+  will-change: transform;
+}
+.artwork-travel > .animated-artwork,
+.artwork-travel .animated-artwork-canvas,
+.artwork-travel canvas { width: 100%; height: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .artwork-travel { display: none; }
+}

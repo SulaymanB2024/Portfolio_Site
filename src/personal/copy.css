@@ -1,0 +1,8 @@
+.writing-introduction {
+  max-width: 660px;
+  margin: 0 0 32px;
+  color: var(--muted);
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.6;
+  text-wrap: pretty;
+}

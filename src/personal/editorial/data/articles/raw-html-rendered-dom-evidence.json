@@ -1,0 +1,243 @@
+{
+  "kind": "research",
+  "cluster": "technical-seo",
+  "slug": "raw-html-rendered-dom-evidence",
+  "number": "06",
+  "category": "RENDERING EVIDENCE",
+  "title": "Raw HTML and Rendered DOM Are Separate Evidence",
+  "seoTitle": "Raw HTML vs Rendered DOM: A Technical SEO Evidence Contract",
+  "subtitle": "How to capture, compare, and qualify transport source, browser output, dependent requests, runtime failures, and render completeness without treating screenshots as data.",
+  "seoDescription": "Build a raw HTML versus rendered DOM evidence contract for JavaScript SEO, including capture fields, completeness states, DOM diffs, runtime failures, and triage.",
+  "image": "/og-default.png",
+  "date": "2026.07.19",
+  "dateModified": "2026.07.19",
+  "lastVerified": "2026.07.19",
+  "readTime": "14 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Raw source and browser-rendered output answer different questions, so a technical audit must preserve both artifacts and qualify the browser environment before interpreting their delta.",
+  "evidenceBoundary": "A controlled browser run describes the tested environment at a recorded time. It does not reproduce every search crawler, user device, cache state, geography, consent choice, or personalization path, and a successful local render does not prove indexing.",
+  "metrics": [
+    {
+      "label": "Evidence states",
+      "value": "SOURCE + DOM"
+    },
+    {
+      "label": "Completeness",
+      "value": "EXPLICIT"
+    },
+    {
+      "label": "Diff grain",
+      "value": "FIELD"
+    },
+    {
+      "label": "Primary artifact",
+      "value": "RENDER ENVELOPE"
+    }
+  ],
+  "sources": [
+    {
+      "label": "Google Search: JavaScript SEO basics",
+      "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "Google Crawling Infrastructure: HTTP status codes",
+      "href": "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "WHATWG DOM Standard",
+      "href": "https://dom.spec.whatwg.org/",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "Chrome DevTools Protocol",
+      "href": "https://chromedevtools.github.io/devtools-protocol/",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "RFC 9110: HTTP Semantics",
+      "href": "https://www.rfc-editor.org/rfc/rfc9110.html",
+      "lastVerified": "2026.07.19"
+    }
+  ],
+  "content": [
+    "Raw HTML is the response body delivered by the server for a request. The rendered DOM is a browser-created document state after parsing, script execution, network activity, and mutations. They are related artifacts, not competing screenshots of one truth. The source can contain meaningful content that JavaScript removes; the DOM can contain meaningful content that the source never delivered; either state can be incomplete for reasons unrelated to the page template.",
+    "A useful rendering audit records both sides of the transformation and the environment between them. That means request and response metadata, source bytes, browser identity, navigation timing, dependent-request outcomes, console errors, stop conditions, DOM serialization, and a completeness label. Only then can a reviewer distinguish an implementation defect from a blocked resource, consent branch, timeout, authentication boundary, or instrumentation failure."
+  ],
+  "sections": [
+    {
+      "id": "transport-artifact",
+      "title": "Capture the transport artifact before opening a browser",
+      "paragraphs": [
+        "Begin with a direct request whose target, headers, redirect chain, status, response headers, body hash, byte length, and timing are stored together. The requested URL and final URL must remain separate. A 200 response with an empty application shell is not equivalent to a 200 response containing the visible article, even though the status field matches.",
+        "Preserve the body rather than only extracted fields. Extraction rules change, and a later reviewer may need to establish whether a title, canonical, link, or structured record was absent from the response or missed by the parser. Content encoding and character decoding should also be recorded; replacement characters introduced during a bad decode can look like source defects.",
+        "HTTP state remains useful even when rendering is required. Redirects, cache headers, content type, robots directives, and transport failures exist before client execution. A browser screenshot cannot recover a lost redirect hop or prove which markup the origin returned."
+      ],
+      "table": {
+        "caption": "Minimum source-capture envelope",
+        "columns": [
+          "Layer",
+          "Required fields",
+          "Why it matters"
+        ],
+        "rows": [
+          [
+            "Request",
+            "requested URL, method, selected headers, timestamp",
+            "Defines the attempted observation"
+          ],
+          [
+            "Redirects",
+            "hop URL, status, location, elapsed time",
+            "Preserves routing and canonicalization evidence"
+          ],
+          [
+            "Response",
+            "final URL, status, headers, content type",
+            "Defines transport outcome"
+          ],
+          [
+            "Body",
+            "artifact reference, hash, bytes, decoded charset",
+            "Makes extraction reviewable"
+          ],
+          [
+            "Failure",
+            "error class, phase, retry state",
+            "Separates no response from an empty response"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "render-environment",
+      "title": "Treat the browser environment as part of the result",
+      "paragraphs": [
+        "A rendered DOM depends on the browser engine and version, viewport, locale, time zone, cookie jar, storage state, user agent, JavaScript policy, service workers, network interception, authentication, and consent choices. If those inputs are not named, two runs that disagree cannot be compared. A generic label such as desktop render is insufficient.",
+        "Isolate contexts between URLs unless the test intentionally models a continuing session. Persistent cookies can turn a public route into a personalized one; a service worker can serve a cached response that no longer matches the origin; shared local storage can suppress a modal or trigger a different application branch. Save the scenario name and state seed next to the artifact.",
+        "Browser instrumentation should observe navigation requests, subresource failures, console output, page exceptions, and redirects. It should not inject fixes that make the page succeed unless the intervention itself is the subject of a second experiment. Blocking analytics may be a reasonable privacy choice, but that modified network policy belongs in the evidence envelope."
+      ],
+      "bullets": [
+        "Pin browser family and exact version for comparable reruns.",
+        "Record viewport, locale, time zone, reduced-motion setting, and color preference.",
+        "Start from a named cookie and storage state.",
+        "Store failed requests and page exceptions with timestamps.",
+        "Mark every interception, mock, or blocked resource as an intervention."
+      ]
+    },
+    {
+      "id": "completion-contract",
+      "title": "Replace “network idle” with a page-specific completion contract",
+      "paragraphs": [
+        "Modern pages may keep telemetry, chat, streaming, or polling requests open indefinitely. Conversely, a quiet network does not prove that meaningful content appeared. A fixed sleep has the opposite problem: it can be too short under load and wasteful when the page is already complete. Completion should be a testable contract tied to the page type.",
+        "A product page might require one main heading, price text, primary image state, canonical link, product structured record, and no fatal application error. An article might require the title, body threshold, publication metadata, and internal navigation. Use a maximum wall-clock deadline around these conditions, then label the result complete, partial, timed out, blocked, or failed.",
+        "The label must survive downstream extraction. A parser can still emit fields from a partial DOM, but the record should carry the completeness state and missing conditions. Otherwise a half-rendered navigation can be converted into a false orphan-page finding or a missing-content claim."
+      ],
+      "table": {
+        "caption": "Render-completeness states",
+        "columns": [
+          "State",
+          "Meaning",
+          "Allowed interpretation"
+        ],
+        "rows": [
+          [
+            "complete",
+            "All required page-type conditions observed",
+            "Field comparison is supported for this scenario"
+          ],
+          [
+            "partial",
+            "Some required conditions observed before stop",
+            "Present fields are evidence; missing fields remain uncertain"
+          ],
+          [
+            "timed_out",
+            "Deadline reached before the contract resolved",
+            "No normal-health conclusion"
+          ],
+          [
+            "blocked",
+            "Challenge, authentication, or explicit denial prevented access",
+            "Coverage gap with visible boundary"
+          ],
+          [
+            "failed",
+            "Browser, navigation, or instrumentation error",
+            "Tool failure until reproduced otherwise"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "semantic-diff",
+      "title": "Diff semantic fields before diffing serialized markup",
+      "paragraphs": [
+        "A character-level diff between HTML strings is dominated by generated identifiers, attribute order, hydration markers, timestamps, and framework wrappers. Those changes may be irrelevant to discovery or understanding. Extract comparable semantic fields from source and DOM first: headings, visible text blocks, links, canonical, robots directives, language alternates, structured records, forms, media, and named page components.",
+        "For each field, classify added, removed, changed, or unchanged values and retain pointers to both artifacts. Links should be compared after resolution while preserving their original href and anchor text. Structured data should be compared as parsed records with stable identifiers, not as raw JSON key order. Text comparisons should report both normalized and exact states so normalization cannot hide a meaningful difference.",
+        "Serialized DOM remains valuable for debugging, especially when a field-level delta points to a component. The order matters: begin with a claim-relevant difference, then inspect the markup that produced it. This keeps a technical SEO report centered on operational consequences rather than on every mutation a framework performs."
+      ],
+      "codeExamples": [
+        {
+          "title": "A render envelope that keeps observation and interpretation apart",
+          "description": "The completeness result and artifact references travel with every extracted field.",
+          "language": "json",
+          "code": "{\n  \"run_id\": \"render-2026-07-19-001\",\n  \"requested_url\": \"https://example.com/article\",\n  \"source_artifact\": \"sha256:source-hash\",\n  \"dom_artifact\": \"sha256:dom-hash\",\n  \"browser\": { \"name\": \"chromium\", \"version\": \"pinned\" },\n  \"scenario\": \"anonymous-desktop\",\n  \"completion\": { \"state\": \"partial\", \"missing\": [\"article-body\"] },\n  \"failed_requests\": 2,\n  \"field_diff_ref\": \"artifact://field-diff.json\"\n}"
+        }
+      ]
+    },
+    {
+      "id": "triage-order",
+      "title": "Triage delivery, execution, extraction, and interpretation in order",
+      "paragraphs": [
+        "When a source field is absent and the DOM field is present, first ask whether client rendering is an intentional delivery choice and whether the render contract completed. When the source field is present and the DOM field is absent, inspect component logic, hydration, consent, and runtime failures. When both are present but an audit says missing, reproduce the extractor against the saved artifacts before changing the site.",
+        "Keep crawler accessibility separate from browser capability. Google documents a crawling, rendering, and indexing process for JavaScript pages, but a local Chromium run is not a Googlebot result. It is controlled implementation evidence. The audit can say that content depends on successful client execution in the tested scenario; it cannot infer that every downstream system failed to process it.",
+        "Close the loop with a focused rerun after a repair. Use the same request headers, browser version, scenario, completion contract, and field extractor. A passing rerun should show the expected delta and no new failure state. If the environment changed, treat it as a new comparison rather than silently declaring the old finding resolved."
+      ],
+      "table": {
+        "caption": "Source-to-DOM triage matrix",
+        "columns": [
+          "Source",
+          "DOM",
+          "First question",
+          "Claim boundary"
+        ],
+        "rows": [
+          [
+            "present",
+            "present",
+            "Did extraction or normalization fail?",
+            "Delivery is visible in both saved states"
+          ],
+          [
+            "absent",
+            "present",
+            "Did required client execution complete reliably?",
+            "Content depends on tested render path"
+          ],
+          [
+            "present",
+            "absent",
+            "What mutation removed or replaced it?",
+            "Client execution changed delivered content"
+          ],
+          [
+            "absent",
+            "absent",
+            "Was the page complete and was the right route captured?",
+            "Missing only if both observations are valid"
+          ],
+          [
+            "unknown",
+            "partial",
+            "Which completion condition failed?",
+            "Coverage gap, not confirmed absence"
+          ]
+        ]
+      }
+    }
+  ],
+  "path": "/research/technical-seo/raw-html-rendered-dom-evidence",
+  "aliases": []
+}

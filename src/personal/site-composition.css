@@ -1,0 +1,23 @@
+/* Secondary pages end with a small, useful address rather than another hero. */
+.personal-site:not(.home-site) .personal-footer { margin-top: 38px; }
+.personal-site:not(.home-site) .site-closing { padding: 30px 0 34px; }
+.personal-site:not(.home-site) .site-closing > .eyebrow { font-size: 9px; margin-bottom: 18px; }
+.personal-site:not(.home-site) .site-closing-main { grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.personal-site:not(.home-site) .site-closing h2 { font-size: clamp(28px, 2.8vw, 40px); line-height: 1.2; letter-spacing: -.035em; }
+.personal-site:not(.home-site) .site-closing h2 br { display: none; }
+.personal-site:not(.home-site) .site-closing h2 em { display: inline-block; margin-left: .22em; }
+.personal-site:not(.home-site) .site-closing-contact { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 26px; }
+.personal-site:not(.home-site) .site-closing-contact > p { flex-basis: 100%; max-width: 410px; font-size: 15px; line-height: 1.55; margin: 0; }
+.personal-site:not(.home-site) .closing-email { font-size: 18px; min-height: 44px; gap: 18px; padding: 3px 0; margin: 0; }
+.personal-site:not(.home-site) .closing-email > span { font-size: 18px; }
+.personal-site:not(.home-site) .site-closing-contact > .arrow-link { font-size: 10px; }
+.personal-site:not(.home-site) .footer-baseline { min-height: 78px; }
+@media (max-width: 760px) {
+  .personal-site:not(.home-site) .personal-footer { margin-top: 24px; }
+  .personal-site:not(.home-site) .site-closing { padding: 25px 0 30px; }
+  .personal-site:not(.home-site) .site-closing-main { display: block; }
+  .personal-site:not(.home-site) .site-closing h2 { font-size: 29px; }
+  .personal-site:not(.home-site) .site-closing-contact { margin-top: 22px; gap: 8px 24px; }
+  .personal-site:not(.home-site) .site-closing-contact > p { font-size: 15px; }
+  .personal-site:not(.home-site) .footer-baseline { gap: 10px 24px; }
+}

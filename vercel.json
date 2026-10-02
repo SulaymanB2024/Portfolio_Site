@@ -7,77 +7,484 @@
   "trailingSlash": false,
   "routes": [
     {
-      "src": "/Sulayman_Bowles_Resume_2025\\.pdf",
-      "has": [{ "type": "host", "value": "www.sulayman-bowles.dev" }],
-      "headers": { "Location": "https://sulayman-bowles.dev/resume" },
-      "status": 301
-    },
-    {
-      "src": "/",
-      "has": [{ "type": "host", "value": "www.sulayman-bowles.dev" }],
-      "headers": { "Location": "https://sulayman-bowles.dev/" },
-      "status": 301
-    },
-    {
       "src": "/(.*)",
-      "has": [{ "type": "host", "value": "www.sulayman-bowles.dev" }],
-      "headers": { "Location": "https://sulayman-bowles.dev/$1" },
-      "status": 301
+      "has": [
+        {
+          "type": "host",
+          "value": "www.sulayman-bowles.dev"
+        }
+      ],
+      "headers": {
+        "Location": "https://sulayman-bowles.dev/$1"
+      },
+      "status": 308
     },
     {
-      "src": "/Sulayman_Bowles_Resume_2025\\.pdf",
-      "headers": { "Location": "/resume" },
-      "status": 301
+      "src": "/research",
+      "headers": {
+        "Location": "/writing"
+      },
+      "status": 308
+    },
+    {
+      "src": "/markets",
+      "headers": {
+        "Location": "/writing"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research\\-assets",
+      "headers": {
+        "Location": "/writing"
+      },
+      "status": 308
+    },
+    {
+      "src": "/atlas",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
+    {
+      "src": "/projects/atlas",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
+    {
+      "src": "/atlas/sample\\-crawl",
+      "headers": {
+        "Location": "/work/atlas#study-section-3"
+      },
+      "status": 308
+    },
+    {
+      "src": "/atlas/sample\\-run",
+      "headers": {
+        "Location": "/work/atlas#study-section-3"
+      },
+      "status": 308
+    },
+    {
+      "src": "/atlas\\-animation",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
+    {
+      "src": "/atlas/celestial\\-parallax",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
+    {
+      "src": "/projects/markets",
+      "headers": {
+        "Location": "/work/investing-markets"
+      },
+      "status": 308
+    },
+    {
+      "src": "/projects",
+      "headers": {
+        "Location": "/work"
+      },
+      "status": 308
+    },
+    {
+      "src": "/cv",
+      "headers": {
+        "Location": "/resume"
+      },
+      "status": 308
+    },
+    {
+      "src": "/cv\\.html",
+      "headers": {
+        "Location": "/resume"
+      },
+      "status": 308
+    },
+    {
+      "src": "/resume\\.html",
+      "headers": {
+        "Location": "/resume"
+      },
+      "status": 308
     },
     {
       "src": "/resume\\.pdf",
-      "headers": { "Location": "/Sulayman_Bowles_Resume.pdf" },
-      "status": 301
+      "headers": {
+        "Location": "/Sulayman_Bowles_Resume.pdf"
+      },
+      "status": 308
     },
     {
-      "src": "/Sulayman_Bowles_Resume\\.pdf",
+      "src": "/Sulayman_Bowles_Resume_2025\\.pdf",
       "headers": {
-        "Link": "<https://sulayman-bowles.dev/resume>; rel=\"canonical\""
+        "Location": "/resume"
       },
-      "continue": true
+      "status": 308
     },
-    { "src": "/projects/atlas", "headers": { "Location": "/atlas" }, "status": 308 },
-    { "src": "/projects/markets", "headers": { "Location": "/markets" }, "status": 308 },
-    { "src": "/atlas/sample-run", "headers": { "Location": "/atlas/sample-crawl" }, "status": 308 },
-    { "src": "/atlas-animation", "headers": { "Location": "/atlas/celestial-parallax" }, "status": 308 },
-    { "src": "/audit-intake", "headers": { "Location": "/contact" }, "status": 308 },
-    { "src": "/austin-seo", "headers": { "Location": "/austin-technical-seo" }, "status": 308 },
-    { "src": "/technical-seo-case-study", "headers": { "Location": "/method" }, "status": 308 },
-    { "src": "/case-studies/technical-seo-audit", "headers": { "Location": "/method" }, "status": 308 },
-    { "src": "/book", "headers": { "Location": "/about" }, "status": 308 },
-    { "src": "/plain", "headers": { "Location": "/about" }, "status": 308 },
-    { "src": "/text", "headers": { "Location": "/about" }, "status": 308 },
-    { "src": "/simple", "headers": { "Location": "/about" }, "status": 308 },
-    { "src": "/cv", "headers": { "Location": "/resume" }, "status": 308 },
-    { "src": "/cv\\.html", "headers": { "Location": "/resume" }, "status": 308 },
-    { "src": "/resume\\.html", "headers": { "Location": "/resume" }, "status": 308 },
-    { "src": "/official-information", "headers": { "Location": "/about" }, "status": 308 },
-    { "src": "/entity-profile", "headers": { "Location": "/about" }, "status": 308 },
-    { "src": "/source-information", "headers": { "Location": "/about" }, "status": 308 },
-    { "src": "/ai-information", "headers": { "Location": "/about" }, "status": 308 },
-    { "src": "/void-agency", "headers": { "Location": "https://www.void-agency.com/" }, "status": 308 },
-    { "src": "/research-assets", "headers": { "Location": "/research" }, "status": 308 },
-    { "src": "/markets/the-first-ai-managers", "headers": { "Location": "/research/ai-systems/the-first-ai-managers" }, "status": 308 },
-    { "src": "/markets/ai-search-crawler-policy", "headers": { "Location": "/research/ai-crawlers/ai-search-crawler-policy" }, "status": 308 },
-    { "src": "/markets/technical-seo-public-data-infrastructure", "headers": { "Location": "/research/search-console/technical-seo-public-data-infrastructure" }, "status": 308 },
-    { "src": "/markets/canonical-identity-personal-seo", "headers": { "Location": "/research/personal-seo/canonical-identity-personal-seo" }, "status": 308 },
-    { "src": "/markets/what-happens-when-an-index-decides-a-company-matters", "headers": { "Location": "/research/financial-systems/what-happens-when-an-index-decides-a-company-matters" }, "status": 308 },
-    { "src": "/markets/how-airlines-borrow-against-loyalty-programs", "headers": { "Location": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs" }, "status": 308 },
-    { "src": "/markets/where-online-returns-actually-go", "headers": { "Location": "/research/financial-systems/where-online-returns-actually-go" }, "status": 308 },
-    { "src": "/markets/hidden-financing-hardware-startups", "headers": { "Location": "/research/financial-systems/hidden-financing-hardware-startups" }, "status": 308 },
-    { "src": "/markets/us-rare-earth-magnet-manufacturing-capacity", "headers": { "Location": "/research/data-systems/us-rare-earth-magnet-manufacturing-capacity" }, "status": 308 },
-    { "src": "/markets/network-monopolies", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
-    { "src": "/markets/computational-commodity-systems", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
-    { "src": "/markets/fiat-horizon", "headers": { "Location": "/markets/archived-research-methodology" }, "status": 308 },
+    {
+      "src": "/method",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
+    {
+      "src": "/austin\\-technical\\-seo",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
+    {
+      "src": "/austin\\-seo",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
+    {
+      "src": "/technical\\-seo\\-case\\-study",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
+    {
+      "src": "/case\\-studies/technical\\-seo\\-audit",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
+    {
+      "src": "/audit\\-intake",
+      "headers": {
+        "Location": "/contact"
+      },
+      "status": 308
+    },
+    {
+      "src": "/book",
+      "headers": {
+        "Location": "/about"
+      },
+      "status": 308
+    },
+    {
+      "src": "/plain",
+      "headers": {
+        "Location": "/about"
+      },
+      "status": 308
+    },
+    {
+      "src": "/text",
+      "headers": {
+        "Location": "/about"
+      },
+      "status": 308
+    },
+    {
+      "src": "/simple",
+      "headers": {
+        "Location": "/about"
+      },
+      "status": 308
+    },
+    {
+      "src": "/official\\-information",
+      "headers": {
+        "Location": "/about"
+      },
+      "status": 308
+    },
+    {
+      "src": "/entity\\-profile",
+      "headers": {
+        "Location": "/about"
+      },
+      "status": 308
+    },
+    {
+      "src": "/source\\-information",
+      "headers": {
+        "Location": "/about"
+      },
+      "status": 308
+    },
+    {
+      "src": "/ai\\-information",
+      "headers": {
+        "Location": "/about"
+      },
+      "status": 308
+    },
+    {
+      "src": "/void\\-agency",
+      "headers": {
+        "Location": "https://www.void-agency.com/"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/who\\-owns\\-texas\\-toll\\-roads",
+      "headers": {
+        "Location": "/markets/who-owns-texas-toll-roads"
+      },
+      "status": 308
+    },
+    {
+      "src": "/markets/the\\-first\\-ai\\-managers",
+      "headers": {
+        "Location": "/research/ai-systems/the-first-ai-managers"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/the\\-first\\-ai\\-managers",
+      "headers": {
+        "Location": "/research/ai-systems/the-first-ai-managers"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/viralbench\\-codex\\-agent\\-harness",
+      "headers": {
+        "Location": "/viralbench-codex-agent-harness"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/crawler\\-engineering/crawl\\-frontier\\-state\\-machine",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#capture"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/crawl\\-frontier\\-state\\-machine",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#capture"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/technical\\-seo/raw\\-html\\-rendered\\-dom\\-evidence",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#source-and-render"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/raw\\-html\\-rendered\\-dom\\-evidence",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#source-and-render"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/technical\\-seo/canonicalization\\-graph\\-consistency",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/canonicalization\\-graph\\-consistency",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/technical\\-seo/internal\\-links\\-directed\\-retrieval\\-graph",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/internal\\-links\\-directed\\-retrieval\\-graph",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/ai\\-crawlers/robots\\-txt\\-courtesy\\-not\\-access\\-control",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#capture"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/robots\\-txt\\-courtesy\\-not\\-access\\-control",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#capture"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/technical\\-seo/structured\\-data\\-without\\-content\\-drift",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/structured\\-data\\-without\\-content\\-drift",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/data\\-systems/audit\\-findings\\-derived\\-records",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/audit\\-findings\\-derived\\-records",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/ai\\-systems/replayable\\-traces\\-ai\\-agent\\-evaluation",
+      "headers": {
+        "Location": "/viralbench-codex-agent-harness"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/replayable\\-traces\\-ai\\-agent\\-evaluation",
+      "headers": {
+        "Location": "/viralbench-codex-agent-harness"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/data\\-systems/sqlite\\-crawl\\-pipelines",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#capture"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/sqlite\\-crawl\\-pipelines",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#capture"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/technical\\-seo/technical\\-seo\\-migration\\-release\\-gates",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#improvement-cycle"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/technical\\-seo\\-migration\\-release\\-gates",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#improvement-cycle"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/ai\\-crawlers/ai\\-search\\-crawler\\-policy",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#capture"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/ai\\-search\\-crawler\\-policy",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#capture"
+      },
+      "status": 308
+    },
+    {
+      "src": "/markets/ai\\-search\\-crawler\\-policy",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#capture"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/search\\-console/technical\\-seo\\-public\\-data\\-infrastructure",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#product"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/technical\\-seo\\-public\\-data\\-infrastructure",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#product"
+      },
+      "status": 308
+    },
+    {
+      "src": "/markets/technical\\-seo\\-public\\-data\\-infrastructure",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#product"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/personal\\-seo/canonical\\-identity\\-personal\\-seo",
+      "headers": {
+        "Location": "/writing"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/canonical\\-identity\\-personal\\-seo",
+      "headers": {
+        "Location": "/writing"
+      },
+      "status": 308
+    },
+    {
+      "src": "/markets/canonical\\-identity\\-personal\\-seo",
+      "headers": {
+        "Location": "/writing"
+      },
+      "status": 308
+    },
+    {
+      "src": "/atlas/(.*)",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/technical-seo/(.*)",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
+    },
     {
       "src": "/(.*)",
       "headers": {
-        "Content-Security-Policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests",
+        "Content-Security-Policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'wasm-unsafe-eval'; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' blob: data:; frame-src 'none'; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests",
         "Strict-Transport-Security": "max-age=31536000",
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
@@ -87,7 +494,20 @@
       },
       "continue": true
     },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "status": 404, "dest": "/404" }
+    {
+      "src": "/assets/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/404/index.html",
+      "status": 404
+    }
   ]
 }

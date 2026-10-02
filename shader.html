@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Dithering Shader — real-time Bayer dithering</title>
+    <meta
+      name="description"
+      content="Real-time ordered (Bayer) dithering as a post-processing pass over a 3D scene: a threshold matrix quantises every pixel, built with React Three Fiber." />
+    <meta name="keywords" content="dithering, bayer matrix, ordered dithering, shader, three.js, react three fiber, webgl, post-processing" />
+    <meta name="author" content="Niccolò Fanton" />
+    <link rel="author" href="https://niccolofanton.dev" />
+    <link rel="canonical" href="https://sulayman-bowles.dev/shader" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Niccolò Fanton" />
+    <meta property="og:url" content="https://sulayman-bowles.dev/shader" />
+    <meta property="og:title" content="Dithering Shader — real-time Bayer dithering" />
+    <meta
+      property="og:description"
+      content="Real-time ordered (Bayer) dithering as a post-processing pass over a 3D scene: a threshold matrix quantises every pixel, built with React Three Fiber." />
+    <meta property="og:image" content="https://sulayman-bowles.dev/og-default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A jousting helmet rendered in black-and-white ordered dithering on white" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dithering Shader — real-time Bayer dithering" />
+    <meta
+      name="twitter:description"
+      content="Real-time ordered (Bayer) dithering as a post-processing pass over a 3D scene: a threshold matrix quantises every pixel, built with React Three Fiber." />
+    <meta name="twitter:image" content="https://sulayman-bowles.dev/og-default.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Dithering Shader",
+        "description": "Real-time ordered (Bayer) dithering as a post-processing pass over a 3D scene: a threshold matrix quantises every pixel, built with React Three Fiber.",
+        "url": "https://sulayman-bowles.dev/shader",
+        "image": "https://sulayman-bowles.dev/og-default.png",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any browser with WebGL 2",
+        "codeRepository": "https://github.com/niccolofanton/dithering-shader",
+        "author": {
+          "@type": "Person",
+          "name": "Niccolò Fanton",
+          "url": "https://niccolofanton.dev",
+          "sameAs": ["https://github.com/niccolofanton"]
+        }
+      }
+    </script>
+
+    <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <div id="root"></div>
+
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>

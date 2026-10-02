@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "record_type": "self_authored_competition_packet",
+  "title": "PayrollPro — Code-derived payroll and transfer state record",
+  "verification_status": "self-authored / externally unverified",
+  "result_status": "self-reported win; a teammate public recap corroborates the team, product, and win, but no organizer result is included",
+  "artifact_status": "The state summary is derived from inspected authored program code at revision 9d38b02 plus public project material. It is not an execution trace.",
+  "problem": "Model private payroll-like settlement while keeping treasury approval and audit visibility explicit.",
+  "built": [
+    "Payroll escrow state summary",
+    "Confidential and reserve transfer operation summary",
+    "Implementation and test limitations"
+  ],
+  "sections": {
+    "payroll_states": {
+      "scheduled_frozen": "schedule_payroll records a batch id, Merkle root, release timestamp, total amount, and frozen=true.",
+      "thawed": "thaw_payroll requires the release timestamp to have passed before setting frozen=false.",
+      "amended": "amend_leaf can replace the Merkle root only while the batch remains frozen.",
+      "cancelled": "cancel_batch emits the cancelled batch id and amount."
+    },
+    "transfer_states": "The program exposes confidential deposit, transfer, and withdrawal instructions plus reserve deposit and redemption paths.",
+    "implementation_status": "The source explicitly marks confidential mint and burn behavior as simplified. The payroll test contains TODO comments and does not build or submit end-to-end transactions."
+  },
+  "source_basis": [
+    {
+      "source": "Teammate public recap",
+      "source_url": "https://www.linkedin.com/posts/aayush-baniya-a30551223_hackathon-web3-solana-activity-7346138271741071361-0JZz",
+      "supports": "Names Sulayman and the PayrollPro team, describes the win, and lists confidential transfers, multisig wallets, Solana Pay, private salary payments, QR payouts, Token-2022, and the implementation stack.",
+      "boundary": "It is third-party corroboration from a teammate, not an official organizer result."
+    },
+    {
+      "source": "Public Confidential Balances Cookbook fork",
+      "source_url": "https://github.com/SulaymanB2024/OnionDAO-Project",
+      "supports": "Inspectable Token-2022 confidential-transfer recipes and proof-of-concept boundaries.",
+      "boundary": "It is not the complete PayrollPro application."
+    },
+    {
+      "source": "Inspected local payroll program revision 9d38b02",
+      "supports": "The payroll batch states, transfer entry points, simplified-operation comments, and test skeleton summarized above.",
+      "boundary": "The complete local development repository is not published through this packet."
+    }
+  ],
+  "boundary": "This is a code-derived prototype record, not a transaction receipt, production release, complete public codebase, end-to-end test result, or official placement record."
+}

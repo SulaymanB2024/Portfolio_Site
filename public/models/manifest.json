@@ -1,0 +1,229 @@
+{
+  "models": [
+    {
+      "slug": "king-erik-xiv",
+      "name": "The Parade Armour of King Erik XIV of Sweden",
+      "viewerUrl": "https://sketchfab.com/3d-models/the-parade-armour-of-king-erik-xiv-of-sweden-bd189bba7d9e4924b12826a6d68200d9",
+      "creator": {
+        "displayName": "The Royal Armoury (Livrustkammaren)",
+        "username": "TheRoyalArmoury",
+        "profileUrl": "https://sketchfab.com/TheRoyalArmoury"
+      },
+      "license": {
+        "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+        "label": "CC Attribution",
+        "fullName": "Creative Commons Attribution",
+        "requirements": "Author must be credited. Commercial use is allowed.",
+        "url": "http://creativecommons.org/licenses/by/4.0/",
+        "slug": "by"
+      },
+      "profiles": {
+        "studio": {
+          "url": "models/king-erik-xiv-studio.glb",
+          "bytes": 13262392,
+          "sha256": "bb690bfd933518e442a716a13d881e193676b68d7610617811ccaebd186bb28b"
+        },
+        "balanced": {
+          "url": "models/king-erik-xiv-balanced.glb",
+          "bytes": 6383416,
+          "sha256": "7eb1f9dd516cf902cc5d1c68db7fddef559694c8986a4e54eaadc9f42cd77642"
+        }
+      }
+    },
+    {
+      "slug": "jousting-helmet",
+      "name": "Jousting Helmet",
+      "viewerUrl": "https://sketchfab.com/3d-models/jousting-helmet-a4eea31d9d9441af9434a7da5ae46b54",
+      "creator": {
+        "displayName": "The Royal Armoury (Livrustkammaren)",
+        "username": "TheRoyalArmoury",
+        "profileUrl": "https://sketchfab.com/TheRoyalArmoury"
+      },
+      "license": {
+        "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+        "label": "CC Attribution",
+        "fullName": "Creative Commons Attribution",
+        "requirements": "Author must be credited. Commercial use is allowed.",
+        "url": "http://creativecommons.org/licenses/by/4.0/",
+        "slug": "by"
+      },
+      "profiles": {
+        "studio": {
+          "url": "models/jousting-helmet-studio.glb",
+          "bytes": 9436544,
+          "sha256": "782056a9f0023232ec6c60398b3fd4c5fb10ea9d973d1d3d91333a1bf96fd4b1"
+        },
+        "balanced": {
+          "url": "models/jousting-helmet-balanced.glb",
+          "bytes": 4264148,
+          "sha256": "f024ed8ed6c93df57e71c8d8a21a569d7d09df1fbc3661556b1b696cc6680a6f"
+        }
+      }
+    },
+    {
+      "slug": "farnese-atlas",
+      "name": "Farnese Atlas, 2nd century",
+      "viewerUrl": "https://sketchfab.com/3d-models/farnese-atlas-2nd-century-fe4f1ebd0a1e45abb6ad9dd017b343d1",
+      "creator": {
+        "displayName": "ZeuxisVR",
+        "username": "zeuxisvr",
+        "profileUrl": "https://sketchfab.com/zeuxisvr"
+      },
+      "license": {
+        "uri": "https://api.sketchfab.com/v3/licenses/bbfe3f7dbcdd4122b966b85b9786a989",
+        "label": "CC Attribution-NonCommercial",
+        "fullName": "Creative Commons Attribution-NonCommercial",
+        "requirements": "Author must be credited. No commercial use.",
+        "url": "http://creativecommons.org/licenses/by-nc/4.0/",
+        "slug": "by-nc"
+      },
+      "profiles": {
+        "studio": {
+          "url": "models/farnese-atlas-studio.glb",
+          "bytes": 3627524,
+          "sha256": "29e03838a426f4910548752c937e4b3923482bc43991f5f0b9a0e5e2636b88c1"
+        },
+        "balanced": {
+          "url": "models/farnese-atlas-balanced.glb",
+          "bytes": 1575400,
+          "sha256": "9cc9c22d54fca38857a61fe8cb2731762dcce28d04d70d1750ce0370a8f8cfe5"
+        }
+      }
+    },
+    {
+      "slug": "headrest-three-lions",
+      "name": "2017.15 Headrest With Three Lions",
+      "viewerUrl": "https://sketchfab.com/3d-models/201715-headrest-with-three-lions-31a9a4ae69834c42a4869d0610f32515",
+      "creator": {
+        "displayName": "Cleveland Museum of Art",
+        "username": "clevelandart",
+        "profileUrl": "https://sketchfab.com/clevelandart"
+      },
+      "license": {
+        "uri": "https://api.sketchfab.com/v3/licenses/7c23a1ba438d4306920229c12afcb5f9",
+        "label": "CC0 Public Domain",
+        "fullName": "CC0 Public Domain",
+        "requirements": "Credit is not mandatory. Commercial use is allowed.",
+        "url": "http://creativecommons.org/publicdomain/zero/1.0/",
+        "slug": "cc0"
+      },
+      "profiles": {
+        "studio": {
+          "url": "models/headrest-three-lions-studio.glb",
+          "bytes": 20359668,
+          "sha256": "640284b892da1e3d8a41ce7f3fc75fa21d733b94845c31aa32f69e07420881c8"
+        },
+        "balanced": {
+          "url": "models/headrest-three-lions-balanced.glb",
+          "bytes": 6545728,
+          "sha256": "20a29d7d8f96e07a7382fafb641bc846bc07bd5a168fa00870241e39cbe25f58"
+        }
+      }
+    },
+    {
+      "slug": "henry-ii-armour",
+      "name": "Armour of Henry II, King of France, ca. 1550",
+      "viewerUrl": "https://sketchfab.com/3d-models/armour-of-henry-ii-king-of-france-ca-1550-62472669bd8449afadb735d9dce6e25c",
+      "creator": {
+        "displayName": "RealityShaper",
+        "username": "realityshaper",
+        "profileUrl": "https://sketchfab.com/realityshaper"
+      },
+      "license": {
+        "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+        "label": "CC Attribution",
+        "fullName": "Creative Commons Attribution",
+        "requirements": "Author must be credited. Commercial use is allowed.",
+        "url": "http://creativecommons.org/licenses/by/4.0/",
+        "slug": "by"
+      },
+      "profiles": {
+        "studio": {
+          "url": "models/henry-ii-armour-studio.glb",
+          "bytes": 8690932,
+          "sha256": "bc6d60f0399bbc3d6561825f25ec6f2ee375d8370c563e743fa5a2e40461d471"
+        },
+        "balanced": {
+          "url": "models/henry-ii-armour-balanced.glb",
+          "bytes": 3385052,
+          "sha256": "35ffdb8874e3d49da0975445f7617bc51d60d8d29bcc949c8dc528cacf2f89c2"
+        }
+      }
+    },
+    {
+      "slug": "crystal-cluster",
+      "name": "Crystal Cluster · Chrome",
+      "creator": {
+        "displayName": "Provided asset"
+      },
+      "license": {
+        "label": "License not supplied",
+        "slug": "unspecified"
+      },
+      "attribution": "",
+      "origin": "user-provided",
+      "profiles": {
+        "studio": {
+          "url": "models/crystal-cluster-studio.glb",
+          "bytes": 13232,
+          "sha256": "63d6501c292e5c964bf765f1bb2da0af185edd5774a22dbf34d609cd1da3e9dd"
+        },
+        "balanced": {
+          "url": "models/crystal-cluster-balanced.glb",
+          "bytes": 13232,
+          "sha256": "63d6501c292e5c964bf765f1bb2da0af185edd5774a22dbf34d609cd1da3e9dd"
+        }
+      }
+    },
+    {
+      "slug": "crystal-cluster-glass",
+      "name": "Crystal Cluster · Glass",
+      "creator": {
+        "displayName": "Provided asset"
+      },
+      "license": {
+        "label": "License not supplied",
+        "slug": "unspecified"
+      },
+      "attribution": "",
+      "origin": "user-provided",
+      "profiles": {
+        "studio": {
+          "url": "models/crystal-cluster-glass-studio.glb",
+          "bytes": 13496,
+          "sha256": "2de71d8083de8d155f9534fd5c71031ff62373a983bf64d1578c09312f9ee1c3"
+        },
+        "balanced": {
+          "url": "models/crystal-cluster-glass-balanced.glb",
+          "bytes": 13496,
+          "sha256": "2de71d8083de8d155f9534fd5c71031ff62373a983bf64d1578c09312f9ee1c3"
+        }
+      }
+    },
+    {
+      "slug": "wireframe-globe",
+      "name": "Wireframe Globe",
+      "creator": {
+        "displayName": "Provided asset"
+      },
+      "license": {
+        "label": "License not supplied",
+        "slug": "unspecified"
+      },
+      "attribution": "Coastlines & places: Natural Earth (public domain)",
+      "origin": "user-provided",
+      "profiles": {
+        "studio": {
+          "url": "models/wireframe-globe-studio.glb",
+          "bytes": 410052,
+          "sha256": "c4f7d6c9c204edfaf3258a896c1df41cab647ca604f03d88adb69bf90a2f892d"
+        },
+        "balanced": {
+          "url": "models/wireframe-globe-balanced.glb",
+          "bytes": 410052,
+          "sha256": "c4f7d6c9c204edfaf3258a896c1df41cab647ca604f03d88adb69bf90a2f892d"
+        }
+      }
+    }
+  ]
+}

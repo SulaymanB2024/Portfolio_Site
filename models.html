@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#202328" />
+    <title>The collection — asset library</title>
+  </head>
+  <body>
+    <header><a href="./">DITHER / shader study</a><span>Collection / 01—08</span></header>
+    <main>
+      <section class="viewer" aria-label="Interactive model preview">
+        <canvas tabindex="0" aria-label="3D model. Drag to orbit, scroll or pinch to zoom, right-drag to pan. Arrow keys pan." id="model-canvas"></canvas>
+        <p id="load-status" role="status">Loading the collection…</p>
+        <div class="viewer-tools">
+          <button id="reset">Reset view</button>
+          <button id="orbit" aria-pressed="false">Auto-orbit</button>
+          <button id="background" aria-pressed="false">Light backdrop</button>
+        </div>
+      </section>
+      <aside>
+        <p class="eyebrow">Objects, in a new light</p>
+        <h1>The collection<span>.</span></h1>
+        <label for="model">Explore an object</label>
+        <select id="model" disabled>
+          <option value="king-erik-xiv">King Erik XIV Parade Armour</option>
+          <option value="jousting-helmet">Jousting Helmet</option>
+          <option value="farnese-atlas">Farnese Atlas, 2nd century</option>
+          <option value="headrest-three-lions">Headrest With Three Lions</option>
+          <option value="henry-ii-armour">Armour of Henry II</option>
+          <option value="crystal-cluster">Crystal Cluster · Chrome</option>
+          <option value="crystal-cluster-glass">Crystal Cluster · Glass</option>
+          <option value="wireframe-globe">Wireframe Globe</option>
+        </select>
+        <label for="quality">Preview quality</label>
+        <select id="quality" disabled>
+          <option value="balanced">Balanced · lighter loading</option>
+          <option value="studio">Studio · full geometry</option>
+        </select>
+        <p id="quality-note">
+          Balanced uses textures up to 2K and lighter geometry for dense scans. Studio keeps the full geometry with textures up to 4K. Unmodified downloads are retained locally.
+        </p>
+        <div class="asset-details">
+          <h2 id="asset-title"></h2>
+          <p id="asset-stats"></p>
+          <p id="asset-credit"></p>
+          <p id="license-note"></p>
+        </div>
+        <a class="download-link" id="asset-download" download>Download this web GLB ↗</a>
+        <p class="hint">Drag to explore. Scroll to get closer.<br />Each object loads only when selected.</p>
+      </aside>
+    </main>
+    <script type="module" src="/src/model-library.ts"></script>
+  </body>
+</html>

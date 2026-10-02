@@ -1,1286 +1,266 @@
-import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef, useEffect, useLayoutEffect, useState, lazy, Suspense, type CSSProperties, type ReactNode } from 'react';
-import { InkTrails } from './components/InkTrails';
-import { RomanTogaReveal } from './components/RomanTogaReveal';
-import { ScrambleText } from './components/ScrambleText';
-import { ScrollReveal } from './components/ScrollReveal';
-import { ScrollProgress } from './components/ScrollProgress';
-import { MagneticButton } from './components/MagneticButton';
-import { InternalHeader } from './components/InternalHeader';
-import { InternalFooter } from './components/InternalFooter';
-import { usePageTransitions } from './hooks/usePageTransitions';
-import { useReducedMotion } from './hooks/useReducedMotion';
-import { useRouteBodyTheme } from './hooks/useRouteBodyTheme';
-import type { PortfolioCtaId } from './analytics/portfolioAnalytics';
-import { getCanonicalRoutes, getRouteTone, getSeoRoute, normalizePath } from './seo/routes';
-import { AI_MANAGERS_ARTICLE_PATH } from './content/aiManagersArticle';
-import { PROFILE_FACTS } from './content/profileFacts';
-import { TEXAS_TOLL_ARTICLE_SLUG } from './content/texasTollRoadArticleMeta';
-import { useSEO } from './utils/seo';
-import './styles/page-transitions.css';
-import { TextMarquee } from './components/TextMarquee';
-import { WireframeGrid } from './components/WireframeGrid';
-import NotFoundPage from './pages/NotFoundPage';
-
-const loadAtlasPage = () => import('./pages/AtlasPage');
-const loadAtlasCelestialParallaxPage = () => import('./pages/AtlasCelestialParallaxPage');
-const loadMethodPage = () => import('./pages/VoidAgencyMethodPage');
-const loadAboutPage = () => import('./pages/AboutPage');
-const loadResumePage = () => import('./pages/ResumePage');
-const loadResearchPage = () => import('./pages/ResearchPage');
-const loadMarketsPage = () => import('./pages/MarketsPage');
-const loadMarketArticlePage = () => import('./pages/MarketArticlePage');
-const loadViralBenchArticlePage = () => import('./pages/ViralBenchArticlePage');
-const loadTexasTollRoadArticlePage = () => import('./pages/TexasTollRoadArticlePage');
-const loadAiManagersArticlePage = () => import('./pages/AiManagersArticlePage');
-const loadWorkPage = () => import('./pages/WorkPage');
-const loadContactPage = () => import('./pages/ContactPage');
-const loadAtlasSampleCrawlPage = () => import('./pages/AtlasSampleCrawlPage');
-const loadAustinTechnicalSeoPage = () => import('./pages/AustinTechnicalSeoPage');
-const loadProgrammaticSeoPage = () => import('./pages/ProgrammaticSeoPage');
-const loadProgrammaticSeoHubPage = () => import('./pages/ProgrammaticSeoHubPage');
-
-const AtlasPage = lazy(loadAtlasPage);
-const AtlasCelestialParallaxPage = lazy(loadAtlasCelestialParallaxPage);
-const VoidAgencyMethodPage = lazy(loadMethodPage);
-const AboutPage = lazy(loadAboutPage);
-const ResumePage = lazy(loadResumePage);
-const ResearchPage = lazy(loadResearchPage);
-const MarketsPage = lazy(loadMarketsPage);
-const MarketArticlePage = lazy(loadMarketArticlePage);
-const ViralBenchArticlePage = lazy(loadViralBenchArticlePage);
-const TexasTollRoadArticlePage = lazy(loadTexasTollRoadArticlePage);
-const AiManagersArticlePage = lazy(loadAiManagersArticlePage);
-const WorkPage = lazy(loadWorkPage);
-const ContactPage = lazy(loadContactPage);
-const AtlasSampleCrawlPage = lazy(loadAtlasSampleCrawlPage);
-const AustinTechnicalSeoPage = lazy(loadAustinTechnicalSeoPage);
-const ProgrammaticSeoPage = lazy(loadProgrammaticSeoPage);
-const ProgrammaticSeoHubPage = lazy(loadProgrammaticSeoHubPage);
-const FlowField = lazy(() => import('./components/FlowField').then(m => ({ default: m.FlowField })));
-const CandlestickChart = lazy(() => import('./components/CandlestickChart').then(m => ({ default: m.default })));
-const AtmosphereCore = lazy(() => import('./components/AtmosphereCore').then(m => ({ default: m.default })));
-const GenerativeMesh = lazy(() => import('./components/GenerativeMesh').then(m => ({ default: m.GenerativeMesh })));
-const GeometricPattern = lazy(() => import('./components/GeometricPattern').then(m => ({ default: m.GeometricPattern })));
-
-const CONTACT_HASH = '#contact';
-const HOME_SEO = getSeoRoute('/')!;
-
-const homeDisciplineItems = [
-  {
-    num: '01',
-    title: 'Technical SEO',
-    desc: 'Crawl architecture, indexability, internal links, page templates, metadata, structured data, and issue logic built for diagnosis.',
-  },
-  {
-    num: '02',
-    title: 'Search Visibility',
-    desc: 'Crawler access, entity clarity, structured content, and pages that explain the work without forcing a reader to guess.',
-  },
-  {
-    num: '03',
-    title: 'Atlas / Crawl Evidence',
-    desc: 'URL discovery, rendered HTML, canonical state, internal-link maps, structured-data checks, and report-ready audit notes.',
-  },
-  {
-    num: '04',
-    title: 'Markets Research',
-    desc: 'Finance research, valuation assumptions, market structure, operating analysis, dashboards, and decision tools with inspectable assumptions.',
-  },
-];
-
-const homeProofItems = [
-  { type: 'Research', title: 'The First AI Managers', href: AI_MANAGERS_ARTICLE_PATH },
-  { type: 'Product', title: 'Atlas SEO Audit Software', href: '/atlas' },
-  { type: 'Markets', title: 'Texas Toll-Road Ownership', href: '/markets/who-owns-texas-toll-roads' },
-];
-
-const homeJourneyLinks = [
-  { index: '01', label: 'Selected work', href: '/work', ctaId: 'home_view_work', primary: true },
-  { index: '02', label: 'Résumé', href: '/resume', ctaId: 'home_resume', primary: false },
-  { index: '03', label: 'Research', href: '/research', ctaId: 'home_research', primary: false },
-  { index: '04', label: 'Contact', href: '/contact', ctaId: 'home_contact', primary: false },
-] satisfies ReadonlyArray<{
-  index: string;
-  label: string;
-  href: string;
-  ctaId: PortfolioCtaId;
-  primary: boolean;
-}>;
-
-const homeContactLinks = [
-  { label: 'LinkedIn', href: PROFILE_FACTS.canonicalLinks.linkedin, ctaId: 'home_linkedin' },
-  { label: 'Résumé', href: '/resume', ctaId: 'home_resume' },
-  { label: 'GitHub', href: PROFILE_FACTS.canonicalLinks.github, ctaId: 'home_github' },
-] satisfies ReadonlyArray<{ label: string; href: string; ctaId: PortfolioCtaId }>;
-
-function isDarkRoute(path: string) {
-  return getRouteTone(path) === 'dark';
-}
-
-async function preloadRoute(path: string) {
-  const route = getSeoRoute(path);
-
-  if (route?.path === '/atlas') {
-    await loadAtlasPage();
-  } else if (route?.path === '/atlas/celestial-parallax') {
-    await loadAtlasCelestialParallaxPage();
-  } else if (route?.path === '/method') {
-    await loadMethodPage();
-  } else if (route?.path === '/about') {
-    await loadAboutPage();
-  } else if (route?.path === '/work') {
-    await loadWorkPage();
-  } else if (route?.path === '/contact') {
-    await loadContactPage();
-  } else if (route?.path === '/atlas/sample-crawl') {
-    await loadAtlasSampleCrawlPage();
-  } else if (route?.path === '/austin-technical-seo') {
-    await loadAustinTechnicalSeoPage();
-  } else if (route?.path === '/resume') {
-    await loadResumePage();
-  } else if (route?.path === '/research') {
-    await loadResearchPage();
-  } else if (route?.section === 'technical-seo-hub') {
-    await loadProgrammaticSeoHubPage();
-  } else if (route?.section === 'technical-seo-guide') {
-    await loadProgrammaticSeoPage();
-  } else if (route?.path === '/markets') {
-    await loadMarketsPage();
-  } else if (route?.path === '/viralbench-codex-agent-harness') {
-    await loadViralBenchArticlePage();
-  } else if (route?.path === AI_MANAGERS_ARTICLE_PATH) {
-    await loadAiManagersArticlePage();
-  } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
-    await loadTexasTollRoadArticlePage();
-  } else if (route?.section === 'research-article') {
-    await loadMarketArticlePage();
-  }
-}
-
-function getCurrentCanonicalPath() {
-  const canonicalPath = normalizePath(window.location.pathname);
-  if (canonicalPath !== window.location.pathname) {
-    window.history.replaceState({}, '', `${canonicalPath}${window.location.search}${window.location.hash}`);
-  }
-  return `${canonicalPath}${window.location.search}${window.location.hash}`;
-}
-
-function RouteReady({ children }: { children: ReactNode }) {
-  useLayoutEffect(() => {
-    document.documentElement.classList.add('app-mounted');
-    document.documentElement.classList.remove('js-pending');
-    document.getElementById('seo-static-summary')?.remove();
-  }, []);
-
-  return children;
-}
-
+import { Component, Suspense, lazy, useCallback, useEffect, useState, type CSSProperties, type ReactNode } from 'react'
+import { Controls } from './Controls'
+import { defaults, type Preset } from './settings'
+import { useTheme } from './theme'
+import { stageColors } from './stage-colors'
+import { models } from './collection'
+import './styles.css'
+const Scene = lazy(() => import('./Scene'))
 export default function App() {
-  const [currentPath, setCurrentPath] = useState(getCurrentCanonicalPath);
-
-  usePageTransitions({
-    currentPath,
-    setCurrentPath,
-    normalizePath,
-    preloadPath: preloadRoute,
-    contactHash: CONTACT_HASH,
-    hashFocusSelector: '#footer-link-email',
-  });
-
-  useRouteBodyTheme({ currentPath, isDarkRoute });
-
-  const route = getSeoRoute(currentPath);
-  let page;
-
-  if (route?.path === '/atlas') {
-    page = <AtlasPage />;
-  } else if (route?.path === '/atlas/celestial-parallax') {
-    page = <AtlasCelestialParallaxPage />;
-  } else if (route?.path === '/method') {
-    page = <VoidAgencyMethodPage />;
-  } else if (route?.path === '/about') {
-    page = <AboutPage />;
-  } else if (route?.path === '/work') {
-    page = <WorkPage />;
-  } else if (route?.path === '/contact') {
-    page = <ContactPage />;
-  } else if (route?.path === '/atlas/sample-crawl') {
-    page = <AtlasSampleCrawlPage />;
-  } else if (route?.path === '/austin-technical-seo') {
-    page = <AustinTechnicalSeoPage />;
-  } else if (route?.path === '/resume') {
-    page = <ResumePage />;
-  } else if (route?.path === '/research') {
-    page = <ResearchPage />;
-  } else if (route?.section === 'technical-seo-hub') {
-    page = <ProgrammaticSeoHubPage path={route.path} />;
-  } else if (route?.section === 'technical-seo-guide') {
-    page = <ProgrammaticSeoPage path={route.path} />;
-  } else if (route?.path === '/sitemap') {
-    page = <SitemapPage />;
-  } else if (route?.path === '/viralbench-codex-agent-harness') {
-    page = <ViralBenchArticlePage />;
-  } else if (route?.path === AI_MANAGERS_ARTICLE_PATH) {
-    page = <AiManagersArticlePage />;
-  } else if (route?.path === `/markets/${TEXAS_TOLL_ARTICLE_SLUG}`) {
-    page = <TexasTollRoadArticlePage />;
-  } else if (route?.section === 'research-article') {
-    const slug = route.path.split('/').at(-1) ?? '';
-    page = <MarketArticlePage slug={slug} />;
-  } else if (route?.path === '/markets') {
-    page = <MarketsPage />;
-  } else if (route?.path === '/') {
-    page = <HomePage />;
-  } else {
-    page = <NotFoundPage />;
-  }
-
+  const { dark, preference, setPreference } = useTheme()
+  const [settings, setSettings] = useState(() => ({
+    ...defaults,
+    background: dark ? '#000000' : defaults.background,
+    motion: !matchMedia('(prefers-reduced-motion: reduce)').matches
+  }))
+  const [preset, setPreset] = useState<Preset | null>('original')
+  const [resetView, setResetView] = useState(0)
+  const [rotate, setRotate] = useState(false)
+  const [ready, setReady] = useState(false)
+  const [panelOpen, setPanelOpen] = useState(false)
+  const [credits, setCredits] = useState(false)
+  const [model, setModel] = useState('jousting-helmet')
+  const [loadError, setLoadError] = useState('')
+  const [retry, setRetry] = useState(0)
+  const selectedModel = models.find((asset) => asset.slug === model)!
+  const onReady = useCallback((value: boolean, error?: string) => {
+    setReady(value)
+    setLoadError(error ?? '')
+  }, [])
+  useEffect(() => {
+    setSettings((current) => ({ ...current, background: dark ? '#000000' : '#ffffff' }))
+  }, [dark])
+  useEffect(() => {
+    const query = matchMedia('(prefers-reduced-motion: reduce)')
+    const change = () => {
+      if (query.matches) setSettings((current) => ({ ...current, motion: false }))
+    }
+    query.addEventListener('change', change)
+    return () => query.removeEventListener('change', change)
+  }, [])
   return (
-    <Suspense fallback={<RouteFallback route={route} />}>
-      <RouteReady>{page}</RouteReady>
-    </Suspense>
-  );
-}
-
-function SitemapPage() {
-  const route = getSeoRoute('/sitemap')!;
-  const routes = getCanonicalRoutes();
-
-  useSEO(route);
-
-  return (
-    <main className="site-page site-page-light relative min-h-screen bg-canvas font-sans text-ink">
-      <Suspense fallback={null}>
-        <WireframeGrid tone="light" className="absolute inset-0 z-0 pointer-events-none opacity-40" />
-      </Suspense>
-      <InternalHeader activePath="/sitemap" tone="light" />
-      <div className="relative z-10 mx-auto w-full max-w-[1480px] px-4 pb-14 pt-6 md:px-8 md:pt-8 xl:px-10 xl:pb-20 xl:pt-10">
-        <header className="border-b border-ink/14 py-12 md:py-16 xl:py-20">
-          <p className="text-[10px] uppercase tracking-[0.28em] text-ink/58">
-            Sulayman Bowles / Sitemap
-          </p>
-          <h1 className="mt-10 font-serif text-[3.5rem] md:text-[5.5rem] xl:text-[8rem] italic leading-[0.86] tracking-normal">
-            HTML Sitemap
-          </h1>
-          <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink/64">
-            Canonical public page index for sulayman-bowles.dev.
-          </p>
-        </header>
-
-        <section className="py-10">
-          <h2 className="mb-5 text-[10px] uppercase tracking-[0.28em] text-ink/64">Pages</h2>
-          <ul className="grid gap-3">
-            {routes.map((item) => (
-              <li key={item.path}>
-                <a
-                  href={item.path}
-                  className="block border border-ink/14 px-5 py-4 transition-colors hover:bg-ink hover:text-canvas"
-                >
-                  <span className="block text-sm uppercase tracking-[0.18em]">{item.h1}</span>
-                  <span className="mt-2 block text-sm leading-relaxed opacity-65">{item.description}</span>
-                  <span className="mt-3 block text-[10px] uppercase tracking-[0.22em] opacity-60">{item.path}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-        <InternalFooter activePath="/sitemap" tone="light" />
-      </div>
-    </main>
-  );
-}
-
-function RouteFallback({ route }: { route?: ReturnType<typeof getSeoRoute> }) {
-  const dark = route ? isDarkRoute(route.path) : false;
-  const heading = route?.displayH1 ?? route?.h1 ?? HOME_SEO.h1;
-  const description = route?.description ?? HOME_SEO.description;
-
-  if (typeof document !== 'undefined' && document.getElementById('seo-static-summary')) {
-    return null;
-  }
-
-  return (
-    <main
-      aria-busy="true"
-      className={`site-page relative min-h-screen overflow-hidden font-sans ${
-        dark ? 'bg-ink text-canvas' : 'bg-canvas text-ink'
-      }`}
-    >
-      <InternalHeader activePath={route?.path ?? '/'} tone={dark ? 'dark' : 'light'} />
-      <section className="relative mx-auto grid min-h-[calc(100svh-4.5rem)] w-full max-w-[1480px] content-center px-4 py-20 md:px-8 xl:min-h-[calc(100svh-5.125rem)] xl:px-10">
-        <div className="border-t border-current/16 pt-6">
-          <p className="text-[10px] uppercase tracking-[0.32em] opacity-60">Opening the current route</p>
-          <h1 className="mt-8 max-w-[14ch] font-serif text-[3.4rem] italic font-light leading-[0.86] tracking-normal md:text-[5.75rem] xl:text-[8rem]">
-          {heading}
-          </h1>
-          <p className="mt-8 max-w-3xl text-sm leading-relaxed opacity-68 md:text-base">{description}</p>
-          <div aria-hidden="true" className="mt-10 h-px w-10 bg-current opacity-45" />
+    <div className="app-shell">
+      <header className="site-header">
+        <a href="#study" className="wordmark">
+          <span className="brand-mark" aria-hidden="true">
+            ▦
+          </span>{' '}
+          DITHER<span className="wordmark-sub"> / shader study</span>
+        </a>
+        <div className="header-actions">
+          <a className="collection-link" href={`${import.meta.env.BASE_URL}models.html`}>
+            Collection
+          </a>
+          <button className="text-button" onClick={() => setCredits((value) => !value)} aria-expanded={credits} aria-controls="credits">
+            About the study <span aria-hidden="true">↗</span>
+          </button>
+          <button className="theme-button" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setPreference(dark ? 'light' : 'dark')}>
+            {dark ? (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 15.2A9 9 0 018.8 4a9 9 0 1011.2 11.2z" />
+              </svg>
+            )}
+          </button>
         </div>
-      </section>
-    </main>
-  );
-}
-
-function HomePage() {
-  useSEO(HOME_SEO);
-  const prefersReducedMotion = useReducedMotion();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll();
-
-  const [homeHeaderTone, setHomeHeaderTone] = useState<'light' | 'dark'>('light');
-  const [activeSelectedWork, setActiveSelectedWork] = useState(0);
-  const selectedWorksGuideRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const guide = selectedWorksGuideRef.current;
-    if (!guide) return;
-
-    const mobileQuery = window.matchMedia('(max-width: 767px)');
-    let observer: IntersectionObserver | null = null;
-
-    const observeSteps = () => {
-      observer?.disconnect();
-      observer = null;
-
-      if (!mobileQuery.matches) {
-        setActiveSelectedWork(0);
-        return;
-      }
-
-      const steps = guide.querySelectorAll<HTMLElement>('[data-selected-work-step]');
-      observer = new IntersectionObserver((entries) => {
-        const activeEntry = entries
-          .filter((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.55)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        const nextStep = Number((activeEntry?.target as HTMLElement | undefined)?.dataset.selectedWorkStep);
-
-        if (Number.isInteger(nextStep)) {
-          setActiveSelectedWork((currentStep) => currentStep === nextStep ? currentStep : nextStep);
-        }
-      }, { root: guide, threshold: [0.55, 0.7] });
-
-      steps.forEach((step) => {
-        observer?.observe(step);
-      });
-    };
-
-    observeSteps();
-    mobileQuery.addEventListener('change', observeSteps);
-
-    return () => {
-      observer?.disconnect();
-      mobileQuery.removeEventListener('change', observeSteps);
-    };
-  }, []);
-
-  useEffect(() => {
-    let frameId = 0;
-    const darkBackgroundClasses = new Set(['bg-ink', 'site-page-dark']);
-    const toneIgnoreSelector = '[data-header-tone-ignore="true"]';
-
-    const isDarkBackground = (background: string) => {
-      const rgbMatch = background.match(/rgba?\(([^)]+)\)/);
-      if (rgbMatch) {
-        const [r = 0, g = 0, b = 0, alpha = 1] = rgbMatch[1]
-          .split(',')
-          .map((value) => Number.parseFloat(value.trim()));
-
-        if (!alpha) {
-          return false;
-        }
-
-        return 0.2126 * r + 0.7152 * g + 0.0722 * b < 40;
-      }
-
-      const srgbMatch = background.match(/color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/);
-      if (srgbMatch) {
-        const [, r, g, b, alpha = '1'] = srgbMatch;
-        if (Number.parseFloat(alpha) === 0) {
-          return false;
-        }
-
-        return (
-          0.2126 * Number.parseFloat(r) +
-            0.7152 * Number.parseFloat(g) +
-            0.0722 * Number.parseFloat(b) <
-          0.16
-        );
-      }
-
-      return false;
-    };
-
-    const elementNeedsDarkHeader = (element: Element) => {
-      const classNames = (element.getAttribute('class') ?? '').split(/\s+/);
-      return (
-        classNames.some((className) => darkBackgroundClasses.has(className)) ||
-        isDarkBackground(window.getComputedStyle(element).backgroundColor)
-      );
-    };
-
-    const updateHeaderTone = () => {
-      frameId = 0;
-
-      const header = document.querySelector('header');
-      const headerRect = header?.getBoundingClientRect();
-      const probeX = Math.round(window.innerWidth / 2);
-      const probeY = Math.min(
-        Math.max(Math.round((headerRect?.bottom ?? 96) + 10), 72),
-        window.innerHeight - 1,
-      );
-      const toneElements = document
-        .elementsFromPoint(probeX, probeY)
-        .filter((element) => {
-          if (header?.contains(element) || element.closest(toneIgnoreSelector)) {
-            return false;
-          }
-
-          return window.getComputedStyle(element).pointerEvents !== 'none';
-        });
-      const nextTone = toneElements.some(elementNeedsDarkHeader)
-        ? 'dark'
-        : 'light';
-
-      setHomeHeaderTone((currentTone) => (currentTone === nextTone ? currentTone : nextTone));
-    };
-
-    const scheduleHeaderToneUpdate = () => {
-      if (frameId) {
-        return;
-      }
-
-      frameId = window.requestAnimationFrame(updateHeaderTone);
-    };
-
-    scheduleHeaderToneUpdate();
-    const delayedChecks = [
-      window.setTimeout(scheduleHeaderToneUpdate, 80),
-      window.setTimeout(scheduleHeaderToneUpdate, 300),
-      window.setTimeout(scheduleHeaderToneUpdate, 800),
-    ];
-    window.addEventListener('scroll', scheduleHeaderToneUpdate, { passive: true });
-    window.addEventListener('resize', scheduleHeaderToneUpdate);
-    window.addEventListener('hashchange', scheduleHeaderToneUpdate);
-    window.addEventListener('popstate', scheduleHeaderToneUpdate);
-
-    return () => {
-      if (frameId) {
-        window.cancelAnimationFrame(frameId);
-      }
-
-      delayedChecks.forEach((timeoutId) => window.clearTimeout(timeoutId));
-      window.removeEventListener('scroll', scheduleHeaderToneUpdate);
-      window.removeEventListener('resize', scheduleHeaderToneUpdate);
-      window.removeEventListener('hashchange', scheduleHeaderToneUpdate);
-      window.removeEventListener('popstate', scheduleHeaderToneUpdate);
-    };
-  }, []);
-
-  const subY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-
-  return (
-    <div className="relative min-h-screen bg-canvas text-ink font-sans overflow-x-clip selection:bg-ink selection:text-canvas" ref={containerRef}>
-      {!prefersReducedMotion && <InkTrails />}
-        
-      <InternalHeader activePath="/" tone={homeHeaderTone} variant="home" />
-
-      {/* Grid Crosshairs */}
-      <div className="fixed inset-0 pointer-events-none z-40 hidden md:block mix-blend-difference text-canvas select-none">
-        {/* Top Left */}
-        <div className="absolute top-12 left-16 w-4 h-[1px] bg-canvas opacity-30" />
-        <div className="absolute top-8 left-12 w-[1px] h-4 bg-canvas opacity-30" />
-        
-        {/* Top Right */}
-        <div className="absolute top-12 right-16 w-4 h-[1px] bg-canvas opacity-30" />
-        <div className="absolute top-8 right-12 w-[1px] h-4 bg-canvas opacity-30" />
-        
-        {/* Bottom Left */}
-        <div className="absolute bottom-12 left-16 w-4 h-[1px] bg-canvas opacity-30" />
-        <div className="absolute bottom-8 left-12 w-[1px] h-4 bg-canvas opacity-30" />
-        
-        {/* Bottom Right */}
-        <div className="absolute bottom-12 right-16 w-4 h-[1px] bg-canvas opacity-30" />
-        <div className="absolute bottom-8 right-12 w-[1px] h-4 bg-canvas opacity-30" />
-      </div>
-
-      {/* Main Container */}
-      <main className="w-full" id="top">
-        {/* HERO SECTION — identity, current work, and three proof paths */}
-        <section className="home-cover relative flex min-h-[100svh] w-full overflow-hidden px-4 pb-8 pt-28 md:px-16 md:pb-12 md:pt-32">
-          {!prefersReducedMotion && (
-            <Suspense fallback={null}>
-              <FlowField className="pointer-events-none absolute inset-0 z-0 opacity-[0.07] mix-blend-multiply" density={25} />
-            </Suspense>
-          )}
-
-          <motion.div
-            style={{ opacity: titleOpacity }}
-            className="home-cover__figure pointer-events-none absolute inset-0 z-[1]"
-          >
-            <RomanTogaReveal
-              fit="cover"
-              focus="large-figure"
-              restOpacity={0.16}
-              revealOpacity={0.58}
-              className="h-full w-full"
-            />
-          </motion.div>
-
-          <motion.div
-            style={{ y: subY }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: prefersReducedMotion ? 0 : 0.45, delay: prefersReducedMotion ? 0 : 0.05 }}
-            className="relative z-10 flex w-full items-end"
-          >
-            <div className="w-full">
-              <h1 className="home-cover__title font-serif font-light tracking-normal text-ink">
-                <span className="block">Sulayman</span>
-                <span className="block italic">Bowles</span>
-              </h1>
-              <div className="mt-7 grid max-w-[1180px] gap-6 border-t border-ink/20 pt-5 md:grid-cols-[minmax(0,1.14fr)_minmax(340px,0.86fr)] md:gap-8">
-                <div>
-                  <p className="font-serif text-2xl italic leading-tight text-ink/84 md:text-3xl">{PROFILE_FACTS.positioning}</p>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/68">{PROFILE_FACTS.currentSummary}</p>
-                  <nav className="home-cover__index mt-6" aria-label="Portfolio shortcuts">
-                    {homeJourneyLinks.map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        id={item.primary ? 'home-primary-work-link' : undefined}
-                        data-portfolio-cta={item.ctaId}
-                        className={`home-cover__index-item group ${item.primary ? 'home-cover__index-item--primary' : ''}`}
-                      >
-                        <span aria-hidden="true" className="font-serif text-sm italic tracking-normal opacity-55">{item.index}</span>
-                        <span>{item.label}</span>
-                        <span aria-hidden="true" className="home-cover__index-arrow text-sm">↗</span>
-                      </a>
-                    ))}
-                  </nav>
-                </div>
-                <nav aria-label="Featured proof" className="grid self-end uppercase text-ink">
-                  <span className="mb-1 flex items-center justify-between text-[9px] tracking-[0.28em] text-ink/58">
-                    <span>Selected proof</span>
-                    <span aria-hidden="true" className="font-serif text-sm italic tracking-normal">03</span>
-                  </span>
-                  {homeProofItems.map((item) => (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      data-portfolio-cta="home_open_proof"
-                      className="group grid min-h-12 grid-cols-[4.75rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-ink/18 transition-colors hover:border-ink/44 md:grid-cols-[5.25rem_minmax(0,1fr)_auto]"
-                    >
-                      <span className="text-[8px] tracking-[0.22em] text-ink/58">{item.type}</span>
-                      <span className="text-[10px] font-medium tracking-[0.15em] text-ink/90">{item.title}</span>
-                      <span aria-hidden="true" className="text-xs transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
-                    </a>
-                  ))}
-                </nav>
-              </div>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* TEXT MARQUEE */}
-        <TextMarquee />
-
-         {/* SELECTED WORKS - EDITORIAL GRID */}
-        <section id="selected-works" className="relative flex w-full flex-col border-t border-canvas/10 bg-ink py-24 text-canvas selection:bg-canvas selection:text-ink md:py-28">
-           <div className="mx-auto mb-16 flex w-full max-w-[1800px] items-end justify-between border-b border-canvas/14 px-4 pb-8 md:mb-24 md:px-16">
-             <ScrollReveal blur={false}>
-               <div>
-                 <span className="mb-4 block font-serif text-xl italic text-canvas/42">01 — 03</span>
-                 <h3 className="font-serif text-5xl font-light leading-none tracking-normal text-canvas md:text-7xl">Selected work</h3>
-               </div>
-             </ScrollReveal>
-             <ScrollReveal blur={false} delay={0.2}>
-               <span className="font-sans text-[10px] uppercase tracking-[0.28em] text-canvas/45">2024 — 2026</span>
-             </ScrollReveal>
-           </div>
-           <div className="selected-works__guide-frame relative w-full">
-             <div
-               ref={selectedWorksGuideRef}
-               className="selected-works__guide flex w-full flex-col"
-               role="region"
-               aria-label="Selected work guided focus"
-               tabIndex={0}
-             >
-           {/* Project 01 */}
-           <div data-selected-work-step="0" className="selected-work-step relative order-1 mx-auto mb-0 w-full max-w-[1800px] px-4 pt-8 md:mb-40 md:px-16 md:pt-12">
-             <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
-               <div className="flex flex-col gap-1 text-[10px]">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 01</span>
-                  <span className="opacity-60">Technical SEO Audit Software</span>
-               </div>
-               <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT</span>
-                  <span className="opacity-60"><ScrambleText text="Atlas SEO Audit Console" trigger="once" /></span>
-               </div>
-             </div>
-             
-             <div className="grid grid-cols-1 items-stretch gap-0 pt-16 md:grid-cols-12 md:gap-8 md:pt-24">
-               
-               {/* Left Column Text */}
-               <div className="relative z-10 order-2 mt-6 flex flex-col pt-6 md:order-1 md:col-span-4 md:mt-0 md:pt-0 md:pr-8 lg:pr-16">
-                 
-                 <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start">
-                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6">( 01 )</span></ScrollReveal>
-                   
-                   <ScrollReveal delay={0.2} blur={false}>
-                     <p className="mb-8 max-w-sm font-serif text-xl italic leading-tight normal-case tracking-normal text-canvas/90 md:mb-0 md:text-3xl lg:text-4xl">
-		                       A crawl and evidence system that preserves raw and rendered pages, tests indexation, canonicals, links, and structured data, then exports reviewable findings.
-                     </p>
-                   </ScrollReveal>
-                   
-                   <div className="flex-grow"></div>
-                   
-                   <ScrollReveal delay={0.6}>
-                     <div className="flex flex-col border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:max-w-xs">
-                       <div className="flex justify-between">
-                         <span className="opacity-60">Role</span>
-                         <span className="text-canvas">Founder / Product / Engineering</span>
-                       </div>
-                       <div className="flex justify-between">
-                         <span className="opacity-60">Output</span>
-                         <span className="text-canvas">Crawl Records, Review, Exports</span>
-                       </div>
-                     </div>
-                   </ScrollReveal>
-                 </div>
-               </div>
-
-               {/* Right Column Canvas */}
-               <a href="/atlas" id="work-link-atlas" className="group/atlas relative order-1 block h-[42svh] min-h-72 origin-right overflow-hidden border border-canvas/20 md:order-2 md:col-span-8 md:h-[78vh]">
-                 <div className="hidden md:block absolute left-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
-                 
-                 {/* Corner brackets */}
-                 <div className="absolute top-4 left-4 text-canvas/50 text-[10px] pointer-events-none z-10">⌜</div>
-                 <div className="absolute top-4 right-4 text-canvas/50 text-[10px] pointer-events-none z-10">⌝</div>
-                 <div className="absolute bottom-4 left-4 text-canvas/50 text-[10px] pointer-events-none z-10">⌞</div>
-                 <div className="absolute bottom-4 right-4 text-canvas/50 text-[10px] pointer-events-none z-10">⌟</div>
-
-                 {!prefersReducedMotion && <Suspense fallback={null}>
-                   <FlowField className="absolute inset-0 w-full h-full opacity-90 mix-blend-screen" density={80} />
-                 </Suspense>}
-                 <div className="absolute left-6 bottom-6 z-20 flex items-center gap-4 text-[10px] uppercase tracking-[0.28em] text-canvas/70 transition-colors group-hover/atlas:text-canvas">
-                   <span className="h-8 w-8 rounded-full border border-canvas/30 transition-colors group-hover/atlas:bg-canvas group-hover/atlas:text-ink" />
-                   <span>Atlas SEO Audit Console</span>
-                   <span aria-hidden="true">↗</span>
-                 </div>
-                 
-                 {/* Title overlapping canvas */}
-                 <ScrollReveal delay={0.2} className="absolute bottom-8 right-4 pointer-events-none z-10 md:right-8 lg:right-10">
-                   <h4 
-	                      style={{ viewTransitionName: 'atlas-title' } as CSSProperties}
-                      className="text-[4rem] md:text-[6rem] lg:text-[7rem] font-serif text-canvas leading-[0.85] font-light uppercase tracking-normal text-right"
-                   >
-                     <span className="block"><ScrambleText text="AT" trigger="hover" /></span>
-                     <span className="block italic"><ScrambleText text="LAS" trigger="hover" /></span>
-                   </h4>
-                 </ScrollReveal>
-                 
-                 {/* VIEW Button */}
-               </a>
-               
-             </div>
-            </div>
-                    {/* PROJECT 03 - TEXAS TOLL-ROAD RESEARCH */}
-         <div data-selected-work-step="2" className="selected-work-step relative order-3 w-full bg-ink py-0 md:py-16" id="systems">
-            <div className="relative mx-auto mb-0 w-full max-w-[1800px] px-4 pt-8 md:mb-32 md:px-16 md:pt-12">
-             <div className="flex justify-between items-start w-full sticky top-32 z-20 px-0 font-sans uppercase tracking-widest text-canvas/50 pointer-events-none">
-               <div className="flex flex-col gap-1 text-[10px]">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PROJECT 03</span>
-                  <span className="opacity-60">Infrastructure Ownership Research</span>
-               </div>
-               <div className="hidden md:flex flex-col gap-1 text-[10px] text-right">
-                  <span className="text-canvas tracking-[0.3em] font-medium text-xs mb-1">PUBLISHED RESEARCH</span>
-                  <span className="opacity-60">Ownership, Operators, Economics</span>
-               </div>
-             </div>
-             
-             <div className="grid grid-cols-1 items-stretch gap-0 pb-0 pt-16 md:grid-cols-12 md:gap-8 md:pb-24 md:pt-20">
-               
-               {/* Left Column Canvas */}
-               <a href="/markets/who-owns-texas-toll-roads" id="work-link-markets" className="group relative block h-[42svh] min-h-72 origin-left overflow-hidden border border-canvas/20 md:col-span-8 md:h-[78vh]">
-                 <div className="hidden md:block absolute right-0 top-0 w-[1px] h-full bg-canvas/20 z-10" />
-                 
-                 {/* Corner markers */}
-                 <div className="absolute top-0 left-0 w-6 h-6 border-t border-l border-canvas/50 pointer-events-none z-10 m-4" />
-                 <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-canvas/50 pointer-events-none z-10 m-4" />
-
-                 <Suspense fallback={null}>
-                   <CandlestickChart className="absolute inset-0 w-full h-full transform transition-transform duration-[2000ms] group-hover:scale-105" />
-                 </Suspense>
-                 
-                 {/* Title overlapping canvas */}
-                 <ScrollReveal delay={0.2} className="absolute top-8 left-4 pointer-events-none z-10 text-canvas mix-blend-difference select-none md:left-8 lg:left-10">
-                   <h4 className="text-[4.5rem] md:text-[6rem] lg:text-[7rem] font-serif leading-[0.85] font-light uppercase tracking-normal text-left">
-                     <span className="block opacity-90"><ScrambleText text="TEXAS" trigger="hover" /></span>
-                     <span className="block italic opacity-70"><ScrambleText text="TOLLS" trigger="hover" /></span>
-                   </h4>
-                 </ScrollReveal>
-               </a>
-
-               <div className="flex flex-col justify-between pt-6 md:col-span-4 md:pt-0">
-                 <div className="flex flex-col text-xs font-sans tracking-widest uppercase text-canvas/60 h-full justify-start items-start md:items-end md:text-right">
-                   <ScrollReveal><span className="text-canvas text-xl font-serif italic mb-6 block">( 03 )</span></ScrollReveal>
-                   
-                   <ScrollReveal delay={0.2} blur={false}>
-                     <p className="mb-8 max-w-sm font-serif text-xl italic leading-tight normal-case tracking-normal text-canvas/90 md:mb-0 md:text-3xl lg:text-4xl">
-                        A source-led map of who owns Texas toll roads, who controls revenue, who gets paid first, and how finite concessions can be valued.
-                     </p>
-                   </ScrollReveal>
-                   
-                   <div className="flex-grow"></div>
-                   
-                   <ScrollReveal delay={0.4} className="w-full">
-                     <div className="flex flex-col md:items-end border-t border-canvas/20 pt-4 text-[10px] uppercase font-sans tracking-widest text-canvas/60 gap-4 w-full md:ml-auto md:max-w-xs">
-                        <div className="flex justify-between w-full">
-                          <span className="text-left opacity-60">Focus</span>
-                          <span className="text-right text-canvas">Infrastructure Ownership</span>
-                        </div>
-                        <div className="flex justify-between w-full">
-                          <span className="text-left opacity-60">Output</span>
-                          <span className="text-right text-canvas">Source Ledger, Tables, DCF</span>
-                        </div>
-                     </div>
-                   </ScrollReveal>
-                 </div>
-               </div>
-               
-             </div>
-           </div>
-         </div>
-           
-           {/* Project 02 - Void */}
-           <a href="/method" id="work-link-void" data-selected-work-step="1" className="selected-work-step group relative order-2 my-0 flex min-h-full w-full flex-col items-center justify-center overflow-hidden border-y border-canvas/10 bg-ink px-4 py-16 md:my-28 md:min-h-[68vh] md:px-0 md:py-28">
-              {!prefersReducedMotion && <Suspense fallback={null}><GeometricPattern /></Suspense>}
-              <div className="relative z-10 flex flex-col items-center">
-                <ScrollReveal>
-                  <span className="text-canvas font-serif italic text-2xl md:text-4xl mb-8 opacity-30 group-hover:opacity-100 transition-opacity duration-1000">( 02 )</span>
-                </ScrollReveal>
-                <ScrollReveal delay={0.2} blur={false}>
-                  <h4 
-	                    style={{ viewTransitionName: 'void-title' } as CSSProperties}
-                    className="text-[5rem] md:text-[8rem] lg:text-[10rem] leading-none font-serif tracking-normal uppercase text-canvas pb-8 opacity-90 transition-opacity duration-1000"
-                  >
-                    <ScrambleText text="VOID" trigger="hover" />
-                  </h4>
-                </ScrollReveal>
-                <ScrollReveal delay={0.4}>
-	                  <p className="font-sans text-xs uppercase tracking-widest max-w-sm text-center text-canvas/50 group-hover:text-canvas transition-colors duration-1000">I use Void Agency to turn crawl diagnostics into fixed-scope technical SEO audits: URL-level findings, implementation notes, analytics review, owners, and rerun checks.</p>
-                </ScrollReveal>
-                <ScrollReveal delay={0.6}>
-                  <MagneticButton className="mt-16">
-                    <span className="inline-block text-canvas border border-canvas/20 rounded-full px-8 py-4 uppercase font-sans text-xs tracking-widest group-hover:bg-canvas group-hover:text-ink transition-colors backdrop-blur-sm">Technical SEO Audit Services</span>
-                  </MagneticButton>
-                </ScrollReveal>
-              </div>
-           </a>
-             </div>
-
-             <div className="selected-works__guide-status md:hidden" aria-live="polite" aria-atomic="true">
-               <span>Guided focus</span>
-               <span className="selected-works__guide-count">{String(activeSelectedWork + 1).padStart(2, '0')} / 03</span>
-               <span className="selected-works__guide-dots" aria-hidden="true">
-                 {[0, 1, 2].map((step) => (
-                   <span key={step} className={step === activeSelectedWork ? 'is-active' : ''} />
-                 ))}
-               </span>
-             </div>
-           </div>
-        </section>
-
-        {/* EXPERTISE SECTION */}
-        <section className="py-32 md:py-48 px-4 md:px-16 bg-canvas text-ink border-t border-ink/10 relative">
-           <div className="max-w-[1800px] mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
-              <div className="md:col-span-3 sticky top-32">
-                <ScrollReveal blur={false}>
-                  <h3 className="font-sans text-xs uppercase tracking-[0.3em] mb-16 text-ink/50">Disciplines</h3>
-                </ScrollReveal>
-                <ScrollReveal delay={0.2} blur={false}>
-                  <p className="font-serif italic text-2xl md:text-3xl text-ink max-w-sm leading-snug">
-		                    Four lanes, one habit: inspect the source material before trusting the answer.
-                  </p>
-                </ScrollReveal>
-              </div>
-              <div className="md:col-span-9 flex flex-col w-full text-ink">
-                <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 md:gap-y-32 group">
-                 {homeDisciplineItems.map((item, i) => (
-                    <div key={item.num}>
-                      <ScrollReveal delay={i % 2 === 0 ? 0.2 : 0.4} blur={false}>
-                        <motion.div 
-                          initial="initial"
-                          whileHover="hover"
-                          className="relative overflow-hidden flex flex-col border-t border-ink/20 pt-8 transition-opacity duration-500 hover:!opacity-100 group-hover:opacity-20 group/discipline min-h-[220px]" 
-                          style={{ perspective: 1000 }}
-                        >
-                          <div className="relative z-10 flex flex-col pointer-events-none w-full">
-                            <span className="font-sans text-[10px] tracking-widest uppercase opacity-60 mb-6 md:mb-8">{item.num}</span>
-                            <h4 className="text-4xl md:text-4xl lg:text-5xl font-serif tracking-normal uppercase font-light leading-none mb-6 md:mb-8">
-                              {item.title}
-                            </h4>
-                            <p className="font-sans text-sm tracking-normal leading-relaxed opacity-[0.62] max-w-[90%] md:max-w-[78%]">
-                              {item.desc}
-                            </p>
-                          </div>
-
-                          {/* Interactive background SVGs based on card number */}
-                          {item.num === '01' && (
-                            <svg
-                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
-                              viewBox="0 0 200 200"
-                              fill="none"
-                            >
-                              {/* Connection Paths */}
-                              <motion.path
-                                d="M 30 100 L 80 60"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { pathLength: 0.3 },
-                                  hover: { pathLength: 1, transition: { duration: 0.8, ease: "easeInOut" } }
-                                }}
-                              />
-                              <motion.path
-                                d="M 30 100 L 80 140"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { pathLength: 0.3 },
-                                  hover: { pathLength: 1, transition: { duration: 0.8, ease: "easeInOut" } }
-                                }}
-                              />
-                              <motion.path
-                                d="M 80 60 L 140 40"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { pathLength: 0.1 },
-                                  hover: { pathLength: 1, transition: { duration: 1, ease: "easeInOut", delay: 0.1 } }
-                                }}
-                              />
-                              <motion.path
-                                d="M 80 60 L 140 80"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { pathLength: 0.1 },
-                                  hover: { pathLength: 1, transition: { duration: 1, ease: "easeInOut", delay: 0.1 } }
-                                }}
-                              />
-                              <motion.path
-                                d="M 80 140 L 140 120"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { pathLength: 0.1 },
-                                  hover: { pathLength: 1, transition: { duration: 1, ease: "easeInOut", delay: 0.1 } }
-                                }}
-                              />
-                              <motion.path
-                                d="M 80 140 L 140 160"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { pathLength: 0.1 },
-                                  hover: { pathLength: 1, transition: { duration: 1, ease: "easeInOut", delay: 0.1 } }
-                                }}
-                              />
-
-                              {/* Root Node */}
-                              <motion.circle
-                                cx="30"
-                                cy="100"
-                                r="6"
-                                className="fill-canvas stroke-ink/30"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { scale: 1 },
-                                  hover: { scale: 1.25, transition: { duration: 0.4 } }
-                                }}
-                              />
-
-                              {/* Mid Nodes */}
-                              <motion.circle
-                                cx="80"
-                                cy="60"
-                                r="5"
-                                className="fill-canvas stroke-ink/30"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { scale: 1 },
-                                  hover: { scale: [1, 1.2, 1], transition: { repeat: Infinity, duration: 2, delay: 0.1 } }
-                                }}
-                              />
-                              <motion.circle
-                                cx="80"
-                                cy="140"
-                                r="5"
-                                className="fill-canvas stroke-ink/30"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { scale: 1 },
-                                  hover: { scale: [1, 1.2, 1], transition: { repeat: Infinity, duration: 2, delay: 0.3 } }
-                                }}
-                              />
-
-                              {/* Leaf Nodes */}
-                              <motion.circle
-                                cx="140"
-                                cy="40"
-                                r="4"
-                                className="fill-canvas stroke-ink/20"
-                                strokeWidth="1"
-                                variants={{
-                                  initial: { scale: 1 },
-                                  hover: { scale: [1, 1.3, 1], transition: { repeat: Infinity, duration: 1.5, delay: 0.2 } }
-                                }}
-                              />
-                              <motion.circle
-                                cx="140"
-                                cy="80"
-                                r="4"
-                                className="fill-canvas stroke-ink/20"
-                                strokeWidth="1"
-                                variants={{
-                                  initial: { scale: 1 },
-                                  hover: { scale: [1, 1.3, 1], transition: { repeat: Infinity, duration: 1.5, delay: 0.4 } }
-                                }}
-                              />
-                              <motion.circle
-                                cx="140"
-                                cy="120"
-                                r="4"
-                                className="fill-canvas stroke-ink/20"
-                                strokeWidth="1"
-                                variants={{
-                                  initial: { scale: 1 },
-                                  hover: { scale: [1, 1.3, 1], transition: { repeat: Infinity, duration: 1.5, delay: 0.6 } }
-                                }}
-                              />
-                              <motion.circle
-                                cx="140"
-                                cy="160"
-                                r="4"
-                                className="fill-canvas stroke-ink/20"
-                                strokeWidth="1"
-                                variants={{
-                                  initial: { scale: 1 },
-                                  hover: { scale: [1, 1.3, 1], transition: { repeat: Infinity, duration: 1.5, delay: 0.8 } }
-                                }}
-                              />
-                            </svg>
-                          )}
-
-                          {item.num === '02' && (
-                            <svg
-                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
-                              viewBox="0 0 200 200"
-                              fill="none"
-                            >
-                              {/* Orbital Rings with motion.g to rotate them cleanly */}
-                              <motion.g
-                                variants={{
-                                  initial: { rotate: 0 },
-                                  hover: { rotate: 360, transition: { repeat: Infinity, duration: 15, ease: "linear" } }
-                                }}
-                                style={{ transformOrigin: "100px 100px" }}
-                              >
-                                <circle
-                                  cx="100"
-                                  cy="100"
-                                  r="35"
-                                  stroke="currentColor"
-                                  strokeWidth="1"
-                                  strokeDasharray="4 4"
-                                />
-                                <circle
-                                  cx="100"
-                                  cy="65"
-                                  r="3"
-                                  className="fill-canvas stroke-ink/30"
-                                  strokeWidth="1"
-                                />
-                              </motion.g>
-
-                              <motion.g
-                                variants={{
-                                  initial: { rotate: 0 },
-                                  hover: { rotate: -360, transition: { repeat: Infinity, duration: 20, ease: "linear" } }
-                                }}
-                                style={{ transformOrigin: "100px 100px" }}
-                              >
-                                <circle
-                                  cx="100"
-                                  cy="100"
-                                  r="60"
-                                  stroke="currentColor"
-                                  strokeWidth="1"
-                                  strokeDasharray="6 3"
-                                />
-                                <circle
-                                  cx="160"
-                                  cy="100"
-                                  r="3"
-                                  className="fill-canvas stroke-ink/30"
-                                  strokeWidth="1"
-                                />
-                              </motion.g>
-
-                              <motion.g
-                                variants={{
-                                  initial: { rotate: 0 },
-                                  hover: { rotate: 180, transition: { repeat: Infinity, duration: 25, ease: "linear" } }
-                                }}
-                                style={{ transformOrigin: "100px 100px" }}
-                              >
-                                <circle
-                                  cx="100"
-                                  cy="100"
-                                  r="80"
-                                  stroke="currentColor"
-                                  strokeWidth="1"
-                                  strokeDasharray="2 6"
-                                />
-                              </motion.g>
-
-                              {/* Central Citation Node */}
-                              <motion.circle
-                                cx="100"
-                                cy="100"
-                                r="10"
-                                className="fill-canvas stroke-ink/40"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { scale: 1, opacity: 0.7 },
-                                  hover: { scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7], transition: { repeat: Infinity, duration: 2, ease: "easeInOut" } }
-                                }}
-                              />
-
-                              {/* Micro labels */}
-                              <text x="115" y="103" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[ENTITY]</text>
-                              <text x="50" y="145" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[CONTEXT]</text>
-                              <text x="85" y="50" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[REF]</text>
-                            </svg>
-                          )}
-
-                          {item.num === '03' && (
-                            <svg
-                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
-                              viewBox="0 0 200 200"
-                              fill="none"
-                            >
-                              {/* Grid Lines */}
-                              <line x1="20" y1="160" x2="180" y2="160" stroke="currentColor" strokeWidth="1" />
-                              <line x1="20" y1="30" x2="20" y2="160" stroke="currentColor" strokeWidth="1" />
-                              <line x1="20" y1="120" x2="180" y2="120" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
-                              <line x1="20" y1="80" x2="180" y2="80" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
-                              <line x1="20" y1="40" x2="180" y2="40" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
-
-                              {/* Spline Curve */}
-                              <motion.path
-                                d="M 20 150 Q 60 130 90 90 T 170 50"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                variants={{
-                                  initial: { pathLength: 0 },
-                                  hover: { pathLength: 1, transition: { duration: 1.5, ease: "easeInOut" } }
-                                }}
-                              />
-
-                              {/* Candlestick 1 */}
-                              <g className="text-ink/40">
-                                {/* Wick */}
-                                <motion.line
-                                  x1="80"
-                                  y1="70"
-                                  x2="80"
-                                  y2="130"
-                                  stroke="currentColor"
-                                  strokeWidth="1"
-                                  variants={{
-                                    initial: { scaleY: 0 },
-                                    hover: { scaleY: 1, transition: { duration: 0.8, ease: "easeOut" } }
-                                  }}
-                                  style={{ transformOrigin: "80px 100px" }}
-                                />
-                                {/* Body (filled) */}
-                                <motion.rect
-                                  x="75"
-                                  y="85"
-                                  width="10"
-                                  height="30"
-                                  className="fill-ink/10 stroke-ink/30"
-                                  strokeWidth="1"
-                                  variants={{
-                                    initial: { scaleY: 0 },
-                                    hover: { scaleY: 1, transition: { duration: 1, ease: "easeOut", delay: 0.2 } }
-                                  }}
-                                  style={{ transformOrigin: "80px 115px" }}
-                                />
-                              </g>
-
-                              {/* Candlestick 2 */}
-                              <g className="text-ink/40">
-                                {/* Wick */}
-                                <motion.line
-                                  x1="130"
-                                  y1="40"
-                                  x2="130"
-                                  y2="110"
-                                  stroke="currentColor"
-                                  strokeWidth="1"
-                                  variants={{
-                                    initial: { scaleY: 0 },
-                                    hover: { scaleY: 1, transition: { duration: 0.8, ease: "easeOut" } }
-                                  }}
-                                  style={{ transformOrigin: "130px 75px" }}
-                                />
-                                {/* Body (hollow) */}
-                                <motion.rect
-                                  x="125"
-                                  y="55"
-                                  width="10"
-                                  height="35"
-                                  className="fill-canvas stroke-ink/30"
-                                  strokeWidth="1"
-                                  variants={{
-                                    initial: { scaleY: 0 },
-                                    hover: { scaleY: 1, transition: { duration: 1, ease: "easeOut", delay: 0.2 } }
-                                  }}
-                                  style={{ transformOrigin: "130px 90px" }}
-                                />
-                              </g>
-
-                              <text x="145" y="150" className="fill-ink/30 font-sans text-[7px] tracking-widest uppercase pointer-events-none select-none">[DATA_SET]</text>
-                            </svg>
-                          )}
-
-                          {item.num === '04' && (
-                            <svg
-                              className="hidden md:block absolute right-0 bottom-0 w-44 h-44 pointer-events-none z-0 text-ink/10 group-hover/discipline:text-ink/30 transition-colors duration-500"
-                              viewBox="0 0 200 200"
-                              fill="none"
-                            >
-                              {/* Browser Window mockup */}
-                              <motion.rect
-                                x="25"
-                                y="45"
-                                width="150"
-                                height="110"
-                                rx="3"
-                                stroke="currentColor"
-                                strokeWidth="1"
-                                variants={{
-                                  initial: { pathLength: 0.4 },
-                                  hover: { pathLength: 1, transition: { duration: 1, ease: "easeInOut" } }
-                                }}
-                              />
-                              {/* Title bar line */}
-                              <line x1="25" y1="58" x2="175" y2="58" stroke="currentColor" strokeWidth="0.8" />
-                              {/* Window buttons */}
-                              <circle cx="33" cy="51" r="2" stroke="currentColor" strokeWidth="0.5" />
-                              <circle cx="39" cy="51" r="2" stroke="currentColor" strokeWidth="0.5" />
-                              <circle cx="45" cy="51" r="2" stroke="currentColor" strokeWidth="0.5" />
-
-                              {/* Address bar */}
-                              <rect x="55" y="48" width="90" height="6" rx="1.5" stroke="currentColor" strokeWidth="0.5" />
-
-                              {/* Column layout guides inside window */}
-                              <motion.g
-                                variants={{
-                                  initial: { opacity: 0.2, y: 5 },
-                                  hover: { opacity: 0.6, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-                                }}
-                              >
-                                {/* Grid Content Blocks */}
-                                <rect x="35" y="68" width="40" height="35" rx="1" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 2" />
-                                <rect x="80" y="68" width="40" height="55" rx="1" stroke="currentColor" strokeWidth="0.8" />
-                                <rect x="125" y="68" width="40" height="25" rx="1" stroke="currentColor" strokeWidth="0.8" />
-                                
-                                <line x1="35" y1="110" x2="75" y2="110" stroke="currentColor" strokeWidth="0.8" />
-                                <line x1="35" y1="115" x2="60" y2="115" stroke="currentColor" strokeWidth="0.8" />
-                              </motion.g>
-
-                              {/* Crop marks (corners) */}
-                              <motion.path
-                                d="M 15 45 L 15 35 L 25 35 M 15 35 L 20 40"
-                                stroke="currentColor"
-                                strokeWidth="0.5"
-                                variants={{
-                                  initial: { x: 0, y: 0 },
-                                  hover: { x: -3, y: -3, transition: { duration: 0.5, ease: "easeOut" } }
-                                }}
-                              />
-                              <motion.path
-                                d="M 185 45 L 185 35 L 175 35 M 185 35 L 180 40"
-                                stroke="currentColor"
-                                strokeWidth="0.5"
-                                variants={{
-                                  initial: { x: 0, y: 0 },
-                                  hover: { x: 3, y: -3, transition: { duration: 0.5, ease: "easeOut" } }
-                                }}
-                              />
-
-                              {/* Pixel Resolution Label */}
-                              <text x="25" y="170" className="fill-ink/30 font-sans text-[6px] tracking-widest uppercase pointer-events-none select-none">[W:1920 PX | H:1080 PX]</text>
-                            </svg>
-                          )}
-                        </motion.div>
-                      </ScrollReveal>
-                    </div>
-                  ))}
-                            </div>
-                  <div className="pt-32 w-full flex justify-start md:justify-end">
-                    <a href="/work" id="discipline-view-work-link" data-portfolio-cta="home_view_work" className="inline-flex min-h-11 items-center border-b border-ink/30 text-[10px] font-sans uppercase tracking-widest text-ink transition-colors hover:border-ink">Explore all work ↗</a>
-                  </div>
-               </div>
-            </div>
-         </section>
-
-        {/* CONTACT */}
-        <section id="contact" aria-label="Contact" className="relative w-full overflow-hidden border-t border-ink/14 bg-canvas text-ink selection:bg-ink selection:text-canvas">
-          <div className="mx-auto grid min-h-[62vh] w-full max-w-[1800px] content-between px-4 py-16 md:px-16 md:py-24">
-            <a
-              href="mailto:sulayman.bowles@gmail.com"
-              id="footer-link-email"
-              data-portfolio-cta="home_email"
-              className="group inline-flex w-fit max-w-full items-end gap-4 font-serif text-6xl italic leading-[0.8] tracking-normal transition-colors duration-200 hover:text-ink/58 motion-reduce:transition-none sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[11rem]"
-            >
-              <span>Email.</span>
-              <span aria-hidden="true" className="mb-1 text-[0.28em] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none">↗</span>
-              <span className="sr-only">sulayman.bowles@gmail.com</span>
-            </a>
-
-            <nav className="mt-16 grid border-y border-ink/14 sm:grid-cols-3" aria-label="Contact links">
-              {homeContactLinks.map(({ label, href, ctaId }, index) => {
-                const external = href.startsWith('http');
-
-                return (
-                  <a
-                    key={href}
-                    href={href}
-                    data-portfolio-cta={ctaId}
-                    target={external ? '_blank' : undefined}
-                    rel={external ? 'noreferrer' : undefined}
-                    className="group flex min-h-20 items-center justify-between gap-5 border-b border-ink/14 px-4 text-[10px] uppercase tracking-[0.24em] text-ink/64 transition-colors duration-200 last:border-b-0 hover:bg-ink hover:text-canvas motion-reduce:transition-none sm:border-b-0 sm:border-r sm:last:border-r-0"
-                  >
-                    <span className="flex items-center gap-4">
-                      <span className="font-serif text-sm italic tracking-normal text-current/45">{String(index + 1).padStart(2, '0')}</span>
-                      {label}
-                    </span>
-                    <span aria-hidden="true" className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none">↗</span>
-                  </a>
-                );
-              })}
-            </nav>
+      </header>
+      {credits && (
+        <section className="credits" id="credits" aria-label="About the study">
+          <div>
+            <h2>An old technique, a new perspective.</h2>
+            <p>
+              Ordered dithering turns continuous shading into a pattern of dots. This study applies a 4 × 4 Bayer matrix to a real-time 3D scene. Change the light, explore the
+              texture, find your own composition.
+            </p>
+          </div>
+          <div>
+            <p>
+              Original demo by{' '}
+              <a href="https://niccolofanton.dev" target="_blank" rel="noreferrer">
+                Niccolò Fanton
+              </a>{' '}
+              ·{' '}
+              <a href="https://github.com/niccolofanton/dithering-shader" target="_blank" rel="noreferrer">
+                Source on GitHub
+              </a>
+            </p>
+            <p>
+              <a href="https://sketchfab.com/3d-models/jousting-helmet-a4eea31d9d9441af9434a7da5ae46b54" target="_blank" rel="noreferrer">
+                Jousting Helmet
+              </a>{' '}
+              by The Royal Armoury ·{' '}
+              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">
+                CC BY 4.0
+              </a>
+              .<br />
+              Pattern by{' '}
+              <a href="https://www.shadertoy.com/view/ltSSzW" target="_blank" rel="noreferrer">
+                Klems
+              </a>
+              . Lighting inspired by{' '}
+              <a href="https://x.com/0xca0a/status/1857444050707640651" target="_blank" rel="noreferrer">
+                @0xca0a
+              </a>
+              .
+            </p>
           </div>
         </section>
+      )}
+      <main className="workspace" id="study">
+        <section className="study-stage" aria-label={`Interactive ${selectedModel.name} study`} style={stageColors(settings.background) as CSSProperties}>
+          <div className="stage-meta">
+            <span>
+              <i className={ready ? 'live-dot ready' : 'live-dot'} />
+              {ready ? 'Live render' : 'Loading study'}
+            </span>
+            <span>WebGL / 4 × 4 Bayer</span>
+          </div>
+          <div
+            className="canvas-wrap"
+            tabIndex={0}
+            aria-label={`3D ${selectedModel.name}. Drag to orbit, scroll or pinch to zoom, right-drag to pan. Arrow keys orbit, plus and minus zoom, Home resets.`}>
+            <SceneBoundary>
+              <Suspense fallback={null}>
+                <Scene settings={settings} resetView={resetView} rotate={rotate} onReady={onReady} model={model} retry={retry} />
+              </Suspense>
+            </SceneBoundary>
+            {!ready && (
+              <div className="loading-message" role="status">
+                {loadError || 'Preparing the light & texture…'}
+                {loadError && <button onClick={() => setRetry((value) => value + 1)}>Retry object</button>}
+              </div>
+            )}
+          </div>
+          <div className="stage-title">
+            <span className="eyebrow">An experiment in light & texture</span>
+            <h1>
+              Dithering
+              <br />
+              Shader<span className="title-dot">.</span>
+            </h1>
+          </div>
+          <div className="stage-tools" aria-label="Scene controls">
+            <button aria-pressed={!settings.motion} onClick={() => setSettings((current) => ({ ...current, motion: !current.motion }))}>
+              {settings.motion ? 'Ⅱ Pause' : '▷ Play'}
+            </button>
+            <button
+              aria-pressed={rotate}
+              onClick={() => {
+                setRotate((value) => !value)
+                setSettings((current) => ({ ...current, motion: true }))
+              }}>
+              ↻ Auto-orbit
+            </button>
+            <button onClick={() => setResetView((value) => value + 1)}>↺ Reset view</button>
+            <button
+              className={!settings.dithering ? 'active' : ''}
+              aria-pressed={!settings.dithering}
+              onClick={() => setSettings((current) => ({ ...current, dithering: !current.dithering }))}>
+              {settings.dithering ? '◐ Compare original' : '▦ Back to dither'}
+            </button>
+          </div>
+          <div className="stage-footer">
+            <span>
+              Drag to explore <span aria-hidden="true">↔</span> Scroll to zoom
+            </span>
+            <span className="object-caption">
+              {selectedModel.name} / {model === 'jousting-helmet' ? 'The Royal Armoury' : selectedModel.creator.displayName}
+            </span>
+          </div>
+        </section>
+        <div className="mobile-panel-toggle">
+          <button aria-expanded={panelOpen} aria-controls="settings-panel" onClick={() => setPanelOpen((value) => !value)}>
+            The playground <span>{panelOpen ? '−' : '+'}</span>
+          </button>
+        </div>
+        <aside className={`settings-panel ${panelOpen ? 'is-open' : ''}`} id="settings-panel" aria-label="Shader settings">
+          <div className="object-picker">
+            <label className="select-field">
+              Study object
+              <select
+                value={model}
+                onChange={(event) => {
+                  const next = event.target.value
+                  onReady(false)
+                  setModel(next)
+                  setResetView((value) => value + 1)
+                  if (next === 'crystal-cluster-glass' || next === 'wireframe-globe') setSettings((current) => ({ ...current, background: '#202328' }))
+                }}>
+                {models.map((asset) => (
+                  <option key={asset.slug} value={asset.slug}>
+                    {asset.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <p className="object-credit">
+              {selectedModel.viewerUrl ? (
+                <a href={selectedModel.viewerUrl} target="_blank" rel="noreferrer">
+                  {selectedModel.creator.displayName}
+                </a>
+              ) : (
+                selectedModel.creator.displayName
+              )}
+              {' · '}
+              {selectedModel.license.url ? (
+                <a href={selectedModel.license.url} target="_blank" rel="noreferrer">
+                  {selectedModel.license.label}
+                </a>
+              ) : (
+                selectedModel.license.label
+              )}
+              {selectedModel.license.slug === 'by-nc' && <span> · Non-commercial use only.</span>}
+              {selectedModel.attribution && <span> · {selectedModel.attribution}</span>}
+            </p>
+          </div>
+          <Controls
+            settings={settings}
+            setSettings={setSettings}
+            preset={preset}
+            setPreset={setPreset}
+            theme={preference}
+            setTheme={setPreference}
+            onReset={() => {
+              setSettings({ ...defaults, background: dark ? '#000000' : '#ffffff', motion: !matchMedia('(prefers-reduced-motion: reduce)').matches })
+              setPreset('original')
+              setRotate(false)
+              if (model !== 'jousting-helmet') onReady(false)
+              setModel('jousting-helmet')
+              setResetView((value) => value + 1)
+            }}
+          />
+        </aside>
       </main>
-      <InternalFooter activePath="/" tone="light" />
+      <footer className="site-footer">
+        <span>
+          Made by{' '}
+          <a href="https://niccolofanton.dev" target="_blank" rel="noreferrer">
+            niccolofanton
+          </a>
+        </span>
+        <a href="https://github.com/niccolofanton/dithering-shader" target="_blank" rel="noreferrer">
+          Explore the source ↗
+        </a>
+      </footer>
     </div>
-  );
+  )
+}
+class SceneBoundary extends Component<{ children: ReactNode }, { error: boolean }> {
+  state = { error: false }
+  static getDerivedStateFromError() {
+    return { error: true }
+  }
+  render() {
+    if (this.state.error)
+      return (
+        <div className="scene-error" role="alert">
+          The 3D study couldn’t load. Check WebGL support and try again.<button onClick={() => location.reload()}>Reload study</button>
+        </div>
+      )
+    return this.props.children
+  }
 }

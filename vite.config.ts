@@ -1,30 +1,11 @@
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import { defineConfig } from 'vite';
-
-export default defineConfig(() => {
-  return {
-    plugins: [react(), tailwindcss()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
-    },
-    server: {
-      hmr: process.env.DISABLE_HMR !== 'true',
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
-    },
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ['react', 'react-dom'],
-            motion: ['motion/react'],
-            lenis: ['lenis']
-          }
-        }
-      }
-    }
-  };
-});
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import hosting from './vercel.json' with { type: 'json' }
+const previewHeaders = Object.fromEntries(Object.entries(hosting.routes.find(route => route.headers?.['Content-Security-Policy'])?.headers || {}).filter(([, value]) => typeof value === 'string')) as Record<string, string>
+export default defineConfig({
+  cacheDir: '.cache/vite',
+  plugins: [react()],
+  worker: { format: 'es' },
+  preview: { headers: previewHeaders },
+  build: { rolldownOptions: { input: { main: 'index.html', shader: 'shader.html', models: 'models.html' } } }
+})

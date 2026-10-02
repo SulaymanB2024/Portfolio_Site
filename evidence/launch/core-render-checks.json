@@ -1,0 +1,50 @@
+[
+  {
+    "canonical": "https://sulayman-bowles.dev/work",
+    "overflow": false,
+    "path": "/work",
+    "title": "Work"
+  },
+  {
+    "canonical": "https://sulayman-bowles.dev/work/internshipdeadlines",
+    "overflow": false,
+    "path": "/work/internshipdeadlines",
+    "title": "A clearer pathto the next step."
+  },
+  {
+    "canonical": "https://sulayman-bowles.dev/work/atlas",
+    "overflow": false,
+    "path": "/work/atlas",
+    "title": "Atlas."
+  },
+  {
+    "canonical": "https://sulayman-bowles.dev/about",
+    "overflow": false,
+    "path": "/about",
+    "title": "About Sulayman Bowles — personal interests"
+  },
+  {
+    "canonical": "https://sulayman-bowles.dev/contact",
+    "overflow": false,
+    "path": "/contact",
+    "title": "Contact"
+  },
+  {
+    "canonical": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+    "overflow": false,
+    "path": "/markets/who-owns-texas-toll-roads",
+    "title": "The state owns the pavement. Who owns the cash flow?"
+  },
+  {
+    "canonical": "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
+    "overflow": false,
+    "path": "/research/ai-systems/the-first-ai-managers",
+    "title": "The Shopkeeper in the Machine"
+  },
+  {
+    "canonical": "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+    "overflow": false,
+    "path": "/viralbench-codex-agent-harness",
+    "title": "A bounded outer loop for improving a live marketing agent."
+  }
+]

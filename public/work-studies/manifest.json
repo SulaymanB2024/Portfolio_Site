@@ -1,0 +1,427 @@
+{
+  "version": 4,
+  "generator": "tools/build-work-models.mjs",
+  "ownership": "Original procedural geometry created for Sulayman Bowles. No third-party model or texture inputs.",
+  "license": "LicenseRef-Site-Owner",
+  "licenseNote": "Original site assets. The site owner retains the rights; no third-party model or texture licenses apply.",
+  "unit": "Each sculpture is centered at the origin and normalized to a maximum span of 2 units.",
+  "material": "Four texture-free monochrome materials: satin silver, dark steel, graphite recesses and porcelain. Distinct coverage values retain detail through halftone.",
+  "geometryBudget": {
+    "maximumBytesPerModel": 1500000,
+    "maximumTrianglesPerModel": 60000,
+    "maximumMeshesPerModel": 12,
+    "compression": "Lossless bitwise vertex welding; no decoder required."
+  },
+  "animation": "Independent components named hover-* export centered local shaft/hinge pivots with unit articulationAxis vectors in GLTF node extras. Structural assemblies remain static. These support renderer-driven articulation. No embedded animation, extensions, textures or decoder required.",
+  "models": [
+    {
+      "id": "internshipdeadlines",
+      "project": "InternshipDeadlines",
+      "title": "Opportunity instrument",
+      "concept": "Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage. Flat beveled crescents, vernier marks, meshing gears, real standoffs and a hinged pendulum connect dates, data and opportunity.",
+      "path": "work-studies/internshipdeadlines.glb",
+      "bytes": 1107064,
+      "sha256": "c999e2b8256c05f4aa70df3ad0b4f867b06da1770cb7cfd3d3a5f76d1e8af39d",
+      "vertices": 38110,
+      "triangles": 30344,
+      "meshes": 10,
+      "materials": 4,
+      "articulation": [
+        {
+          "name": "hover-clock-machined-crescent",
+          "pivot": [
+            -0.00005102060628916277,
+            0.0282140183388119,
+            0.18266082369685302
+          ],
+          "axis": [
+            -0.33278818603996213,
+            -0.14786089807379071,
+            0.9313373062714947
+          ]
+        },
+        {
+          "name": "hover-register-rear-crescent",
+          "pivot": [
+            0.03709635266524844,
+            0.04285868533472167,
+            -0.0000068225734018377606
+          ],
+          "axis": [
+            -0.5892420236005301,
+            -0.35999588589103304,
+            0.7233234406299043
+          ]
+        },
+        {
+          "name": "hover-register-inner-index",
+          "pivot": [
+            -0.060700574562799585,
+            -0.0029697841768637967,
+            0.5506191269975723
+          ],
+          "axis": [
+            -0.03573211851499886,
+            0.019842718619731203,
+            0.9991643919917326
+          ]
+        },
+        {
+          "name": "hover-register-escapement-pendulum",
+          "pivot": [
+            0.1983749567261826,
+            -0.441317791983773,
+            0.5107431880069558
+          ],
+          "axis": [
+            -0.19866933079506127,
+            -0.07832172063759721,
+            0.9769320370823188
+          ]
+        },
+        {
+          "name": "hover-register-primary-gear",
+          "pivot": [
+            -0.4905399331069653,
+            -0.4952648590267612,
+            -0.09303032035246309
+          ],
+          "axis": [
+            -0.3035135754575507,
+            -0.14273453718964957,
+            0.942075560348654
+          ]
+        },
+        {
+          "name": "hover-register-transfer-gear",
+          "pivot": [
+            -0.22060502702482293,
+            -0.6359951507905194,
+            -0.049418741516290436
+          ],
+          "axis": [
+            -0.3035135754575507,
+            -0.14273453718964957,
+            0.942075560348654
+          ]
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.9235925664742091,
+          -0.9999999952766196,
+          -0.7140825071208261
+        ],
+        "max": [
+          0.9235925684134862,
+          1.0000000251136218,
+          0.7140824518330313
+        ]
+      },
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "degenerateTriangles": 0,
+        "minimumNormalLength": 0.9999999570200505,
+        "maximumNormalLength": 1.0000000389150936
+      }
+    },
+    {
+      "id": "sapien",
+      "project": "Sapien",
+      "title": "Synthetic mind",
+      "concept": "A sculpted face with recessed eyes, neutral lips, anatomical ears and a cutaway forehead opens into paired ridged cortical lobes. Thick meandering gyri surround a sparse relay network; a continuous cervical spine and attached brain stem connect the head to machined vertebral collars.",
+      "path": "work-studies/sapien.glb",
+      "bytes": 652732,
+      "sha256": "2918d66f9f120e9d3337d70fcccc0a520c91a7c1d0aa7538c09ddd36f8fbb219",
+      "vertices": 19094,
+      "triangles": 30940,
+      "meshes": 9,
+      "materials": 4,
+      "articulation": [
+        {
+          "name": "hover-sculpted-cortical-lobes",
+          "pivot": [
+            -0.016079739868177918,
+            0.6114611765698604,
+            -0.046304516696352487
+          ],
+          "axis": [
+            -0.01841999182329376,
+            0.9984678970276709,
+            0.05217818036660712
+          ]
+        },
+        {
+          "name": "hover-organic-cortical-gyri",
+          "pivot": [
+            -0.016079739868177918,
+            0.6114611765698604,
+            -0.046304516696352487
+          ],
+          "axis": [
+            -0.01841999182329376,
+            0.9984678970276709,
+            0.05217818036660712
+          ]
+        },
+        {
+          "name": "hover-subcortical-relay-points",
+          "pivot": [
+            -0.016079739868177918,
+            0.6114611765698604,
+            -0.046304516696352487
+          ],
+          "axis": [
+            -0.01841999182329376,
+            0.9984678970276709,
+            0.05217818036660712
+          ]
+        },
+        {
+          "name": "hover-subcortical-pathways",
+          "pivot": [
+            -0.016079739868177918,
+            0.6114611765698604,
+            -0.046304516696352487
+          ],
+          "axis": [
+            -0.01841999182329376,
+            0.9984678970276709,
+            0.05217818036660712
+          ]
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.5684042572975159,
+          -1,
+          -0.605432391166687
+        ],
+        "max": [
+          0.5684042572975159,
+          1.0000000140027216,
+          0.605432391166687
+        ]
+      },
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "degenerateTriangles": 0,
+        "minimumNormalLength": 0.9999999590869787,
+        "maximumNormalLength": 1.0000000405150073
+      }
+    },
+    {
+      "id": "investing-markets",
+      "project": "Investing & Markets",
+      "title": "Market observatory",
+      "concept": "Smooth continent reliefs, real coastal sidewalls and selective graticule sit on a continuous steel ocean shell. A beveled meridian yoke, stepped polar bearings, partial indexed vernier, six geographic hubs and four raised routes make a restrained market observatory.",
+      "path": "work-studies/investing-markets.glb",
+      "bytes": 1017832,
+      "sha256": "3151bb65ed0b131b458a8b35700f4c3255d1c23d7d61611a5cf6f34353410af7",
+      "vertices": 30856,
+      "triangles": 44432,
+      "meshes": 11,
+      "materials": 4,
+      "articulation": [
+        {
+          "name": "hover-observatory-meridian-yoke",
+          "pivot": [
+            0.005973331374493805,
+            -0.07406413262009229,
+            -0.0015533133895418057
+          ],
+          "axis": [
+            0.12854027594607756,
+            0.9824194461113819,
+            0.1353862229398244
+          ]
+        },
+        {
+          "name": "hover-observatory-equatorial-index",
+          "pivot": [
+            0.005973331374493805,
+            -0.07406413262009229,
+            -0.0015533133895418057
+          ],
+          "axis": [
+            0.03965189993449245,
+            -0.9926350808927329,
+            -0.11446974715034072
+          ]
+        },
+        {
+          "name": "hover-observatory-north-bearing",
+          "pivot": [
+            0.10850564728785761,
+            0.7095792839412667,
+            0.10643978743907649
+          ],
+          "axis": [
+            0.12854027594607756,
+            0.9824194461113819,
+            0.1353862229398244
+          ]
+        },
+        {
+          "name": "hover-observatory-south-bearing",
+          "pivot": [
+            -0.09655898453886999,
+            -0.8577075491814512,
+            -0.10954641421816011
+          ],
+          "axis": [
+            0.12854027594607756,
+            0.9824194461113819,
+            0.1353862229398244
+          ]
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.9999999403953552,
+          -0.9391374558699092,
+          -0.9539051815421602
+        ],
+        "max": [
+          0.9999999403953552,
+          0.9391374588012695,
+          0.95390514884877
+        ]
+      },
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "degenerateTriangles": 0,
+        "minimumNormalLength": 0.9999999579651973,
+        "maximumNormalLength": 1.000000041410936
+      }
+    },
+    {
+      "id": "miscellaneous",
+      "project": "Miscellaneous",
+      "title": "Unfinished mechanism",
+      "concept": "Five pierced folded sheets with inset triangular windows and return lips form an open mechanism. Crease-aligned shafts, fitted hinge knuckles, slotted fasteners, two tension springs and a meshing geared core give the experimental form a coherent construction.",
+      "path": "work-studies/miscellaneous.glb",
+      "bytes": 947736,
+      "sha256": "7e97440671b81ae4ae6566c9ee9055566c675f9a02bf881e0b262f67f526b30b",
+      "vertices": 32575,
+      "triangles": 25792,
+      "meshes": 11,
+      "materials": 4,
+      "articulation": [
+        {
+          "name": "hover-fold-hinge-wheel-1",
+          "pivot": [
+            -0.05286876850334824,
+            0.8874990372678524,
+            0.047742542546816195
+          ],
+          "axis": [
+            0.2735118842734388,
+            -0.9563381472407629,
+            -0.10299804509454576
+          ]
+        },
+        {
+          "name": "hover-fold-hinge-wheel-2",
+          "pivot": [
+            0.7979760236348524,
+            0.09399475144797033,
+            0.45189778172219414
+          ],
+          "axis": [
+            -0.8519194796760162,
+            -0.36934779637048715,
+            -0.3712349733858748
+          ]
+        },
+        {
+          "name": "hover-fold-hinge-wheel-3",
+          "pivot": [
+            0.44903801008905286,
+            -0.9010904398141691,
+            -0.2921012227145025
+          ],
+          "axis": [
+            -0.6056027002361255,
+            0.7708209437664866,
+            0.19768773891583877
+          ]
+        },
+        {
+          "name": "hover-fold-hinge-wheel-4",
+          "pivot": [
+            -0.8020510242846586,
+            -0.5137834256789384,
+            0.23570180984325295
+          ],
+          "axis": [
+            0.8024264677513272,
+            0.5699233417597671,
+            -0.17691565326309688
+          ]
+        },
+        {
+          "name": "hover-fold-hinge-wheel-5",
+          "pivot": [
+            -0.5280840681680492,
+            0.36884914152758036,
+            -0.5151758634426736
+          ],
+          "axis": [
+            0.7798058910337592,
+            -0.32871281222878107,
+            0.532776369019583
+          ]
+        },
+        {
+          "name": "hover-experimental-central-wheel",
+          "pivot": [
+            0.05319878802539106,
+            -0.06390854755194844,
+            -0.2046285043389805
+          ],
+          "axis": [
+            -0.012864120881124914,
+            -0.37038114728133414,
+            0.9287907838326771
+          ]
+        },
+        {
+          "name": "hover-experimental-transfer-wheel",
+          "pivot": [
+            0.4388216411967305,
+            -0.16891527040333956,
+            -0.24116182494775154
+          ],
+          "axis": [
+            -0.012864120881124914,
+            -0.37038114728133414,
+            0.9287907838326771
+          ]
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.9035313725471497,
+          -1,
+          -0.5918275713920593
+        ],
+        "max": [
+          0.9035313725471497,
+          1,
+          0.5918275713920593
+        ]
+      },
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "degenerateTriangles": 0,
+        "minimumNormalLength": 0.9999999561409901,
+        "maximumNormalLength": 1.000000042180086
+      }
+    }
+  ]
+}

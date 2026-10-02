@@ -1,0 +1,564 @@
+
+> sulayman-bowles-portfolio@2.0.0 test
+> node --experimental-strip-types --test tests/*.test.ts
+
+TAP version 13
+# (node:21763) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: closing or silencing an interest cancels audio waiting for browser activation
+ok 1 - closing or silencing an interest cancels audio waiting for browser activation
+  ---
+  duration_ms: 1.232458
+  ...
+# (node:21764) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: all board moves are legal, reversible L jumps without wrapping edges
+ok 2 - all board moves are legal, reversible L jumps without wrapping edges
+  ---
+  duration_ms: 7.980333
+  ...
+# Subtest: the six-move challenge is solvable and rejects illegal and late moves
+ok 3 - the six-move challenge is solvable and rejects illegal and late moves
+  ---
+  duration_ms: 0.175209
+  ...
+# Subtest: H8 cannot be reached in fewer than six moves
+ok 4 - H8 cannot be reached in fewer than six moves
+  ---
+  duration_ms: 0.205041
+  ...
+# (node:21765) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a live drawing survives source unmount and arrives without another renderer
+ok 5 - a live drawing survives source unmount and arrives without another renderer
+  ---
+  duration_ms: 0.769417
+  ...
+# Subtest: cancelling during preparation restores the original live placement
+ok 6 - cancelling during preparation restores the original live placement
+  ---
+  duration_ms: 0.067208
+  ...
+# Subtest: a route without a destination releases the retained renderer once
+ok 7 - a route without a destination releases the retained renderer once
+  ---
+  duration_ms: 0.058833
+  ...
+# Subtest: late source cleanup cannot retire an already adopted destination
+ok 8 - late source cleanup cannot retire an already adopted destination
+  ---
+  duration_ms: 0.060583
+  ...
+# Subtest: an older completion cannot end a newer flight of the same drawing
+ok 9 - an older completion cannot end a newer flight of the same drawing
+  ---
+  duration_ms: 0.063
+  ...
+# Subtest: normal placements dispose immediately and leave no retained drawing
+ok 10 - normal placements dispose immediately and leave no retained drawing
+  ---
+  duration_ms: 0.045708
+  ...
+# (node:21766) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: all artwork placements share one worker, transfer once, gate queued frames, and terminate after the last removal
+ok 11 - all artwork placements share one worker, transfer once, gate queued frames, and terminate after the last removal
+  ---
+  duration_ms: 1.082208
+  ...
+# Subtest: unsupported platforms stay native and a broken worker recovers every placement without replacement-worker loops
+ok 12 - unsupported platforms stay native and a broken worker recovers every placement without replacement-worker loops
+  ---
+  duration_ms: 0.149417
+  ...
+# Subtest: one source error isolates its canvas and transport failure during registration clears all ownership
+ok 13 - one source error isolates its canvas and transport failure during registration clears all ownership
+  ---
+  duration_ms: 0.331333
+  ...
+# Subtest: cancelled lazy imports and disposal cannot create canvases, callbacks, or late frames
+ok 14 - cancelled lazy imports and disposal cannot create canvases, callbacks, or late frames
+  ---
+  duration_ms: 1.329875
+  ...
+# Subtest: visibility and pause received during lazy loading control the shared worker without idle timers
+ok 15 - visibility and pause received during lazy loading control the shared worker without idle timers
+  ---
+  duration_ms: 0.487
+  ...
+# Subtest: loading and drawing errors recover only their sources while healthy jobs keep moving and dispose cleanly
+ok 16 - loading and drawing errors recover only their sources while healthy jobs keep moving and dispose cleanly
+  ---
+  duration_ms: 1.501708
+  ...
+# (node:21767) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: points remain individual round alpha composites, with grayscale and alpha clamped
+ok 17 - points remain individual round alpha composites, with grayscale and alpha clamped
+  ---
+  duration_ms: 0.963084
+  ...
+# Subtest: repeated normalized stroke weights avoid native assignments while radius changes preserve p5 defaults
+ok 18 - repeated normalized stroke weights avoid native assignments while radius changes preserve p5 defaults
+  ---
+  duration_ms: 0.187375
+  ...
+# Subtest: backgrounds and clear ignore transforms, translucent backgrounds retain trails, and frame transforms reset
+ok 19 - backgrounds and clear ignore transforms, translucent backgrounds retain trails, and frame transforms reset
+  ---
+  duration_ms: 0.311542
+  ...
+# Subtest: snapshot copies are independent and transformed image copies preserve the symmetry sketch contract
+ok 20 - snapshot copies are independent and transformed image copies preserve the symmetry sketch contract
+  ---
+  duration_ms: 0.1875
+  ...
+# Subtest: small previews retain 400-unit formulas while scaling transforms and snapshot copies to physical pixels
+ok 21 - small previews retain 400-unit formulas while scaling transforms and snapshot copies to physical pixels
+  ---
+  duration_ms: 0.406958
+  ...
+# Subtest: default circles, noStroke, fixed density and teardown remain usable without a scheduler
+ok 22 - default circles, noStroke, fixed density and teardown remain usable without a scheduler
+  ---
+  duration_ms: 0.253833
+  ...
+# Subtest: the injected offscreen surface preserves default 400px draw operations, alpha overlap, and snapshot transforms
+ok 23 - the injected offscreen surface preserves default 400px draw operations, alpha overlap, and snapshot transforms
+  ---
+  duration_ms: 3.052209
+  ...
+# Subtest: all 44 unchanged artist factories execute multiple frames through both DOM and offscreen surfaces
+ok 24 - all 44 unchanged artist factories execute multiple frames through both DOM and offscreen surfaces
+  ---
+  duration_ms: 1508.279708
+  ...
+# (node:21768) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: post-bloom keeps the legacy blur algorithm and default kernel after upgrade
+ok 25 - post-bloom keeps the legacy blur algorithm and default kernel after upgrade
+  ---
+  duration_ms: 7.724792
+  ...
+# Subtest: stage text contrasts against a custom background regardless of appearance
+ok 26 - stage text contrasts against a custom background regardless of appearance
+  ---
+  duration_ms: 0.494833
+  ...
+# (node:21769) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: every delisted path, alias and reader bookmark resolves to a retained destination
+ok 27 - every delisted path, alias and reader bookmark resolves to a retained destination
+  ---
+  duration_ms: 3.252791
+  ...
+# Subtest: old reader jumps canonicalize without trapping navigation at the consolidation section
+ok 28 - old reader jumps canonicalize without trapping navigation at the consolidation section
+  ---
+  duration_ms: 0.211708
+  ...
+# Subtest: discovery and related reading exclude all delisted notes
+ok 29 - discovery and related reading exclude all delisted notes
+  ---
+  duration_ms: 0.160959
+  ...
+# (node:21770) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: interactive adjustments retain the GPU effect and uniform objects
+ok 30 - interactive adjustments retain the GPU effect and uniform objects
+  ---
+  duration_ms: 0.533792
+  ...
+# Subtest: sampling tracks the physical target after a resize or DPR change
+ok 31 - sampling tracks the physical target after a resize or DPR change
+  ---
+  duration_ms: 0.599084
+  ...
+# Subtest: original defaults and comparison/color switches update shader flags
+ok 32 - original defaults and comparison/color switches update shader flags
+  ---
+  duration_ms: 0.134042
+  ...
+# (node:21771) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: existing public article paths, aliases and section URLs resolve alongside hash navigation
+ok 33 - existing public article paths, aliases and section URLs resolve alongside hash navigation
+  ---
+  duration_ms: 0.598417
+  ...
+# Subtest: legacy and canonical article links reach the new reader and retain section targets
+ok 34 - legacy and canonical article links reach the new reader and retain section targets
+  ---
+  duration_ms: 0.17275
+  ...
+# Subtest: downloads stay local while untransplanted pages and external citations retain their destinations
+ok 35 - downloads stay local while untransplanted pages and external citations retain their destinations
+  ---
+  duration_ms: 0.144833
+  ...
+# Subtest: article markup only accepts navigable web, local, mail and citation links
+ok 36 - article markup only accepts navigable web, local, mail and citation links
+  ---
+  duration_ms: 0.088041
+  ...
+# (node:21772) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: sticky-stage entry, midpoint, exit, and reverse scroll stay bounded
+ok 37 - sticky-stage entry, midpoint, exit, and reverse scroll stay bounded
+  ---
+  duration_ms: 0.852708
+  ...
+# Subtest: reduced motion preserves the complete model at every scroll position
+ok 38 - reduced motion preserves the complete model at every scroll position
+  ---
+  duration_ms: 0.09425
+  ...
+# Subtest: resizing to a stage shorter than the viewport never creates NaN or an unbounded progress
+ok 39 - resizing to a stage shorter than the viewport never creates NaN or an unbounded progress
+  ---
+  duration_ms: 0.089416
+  ...
+# Subtest: settling converges monotonically and does not overshoot a sudden reversal
+ok 40 - settling converges monotonically and does not overshoot a sudden reversal
+  ---
+  duration_ms: 0.145167
+  ...
+# Subtest: text release front crosses the entire block and returns cleanly after reversal
+ok 41 - text release front crosses the entire block and returns cleanly after reversal
+  ---
+  duration_ms: 0.064666
+  ...
+# (node:21773) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: GPU points retain independent alpha, ordering, normalized weights, and edge intersections
+ok 42 - GPU points retain independent alpha, ordering, normalized weights, and edge intersections
+  ---
+  duration_ms: 3.583208
+  ...
+# Subtest: trail backgrounds ignore transforms while each frame resets point transforms and preserves its texture
+ok 43 - trail backgrounds ignore transforms while each frame resets point transforms and preserves its texture
+  ---
+  duration_ms: 0.494291
+  ...
+# Subtest: snapshots flush prior points, remain independent within a frame, reuse bounded textures, and preserve transformed image copies
+ok 44 - snapshots flush prior points, remain independent within a frame, reuse bounded textures, and preserve transformed image copies
+  ---
+  duration_ms: 0.857459
+  ...
+# Subtest: all 44 untouched formulas produce the same ordered point geometry, sizes, and alpha through the GPU API
+ok 45 - all 44 untouched formulas produce the same ordered point geometry, sizes, and alpha through the GPU API
+  ---
+  duration_ms: 1512.192167
+  ...
+# Subtest: one actual GPU pool serves multiple display canvases and releases contexts, textures, buffers, and lost resources
+ok 46 - one actual GPU pool serves multiple display canvases and releases contexts, textures, buffers, and lost resources
+  ---
+  duration_ms: 1.451875
+  ...
+# (node:21774) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ink samples preserve the transformed surface and follow triangle area, without altering the original scan
+ok 47 - ink samples preserve the transformed surface and follow triangle area, without altering the original scan
+  ---
+  duration_ms: 34.835875
+  ...
+# Subtest: dispersion clamps, settles to a finite target, and jumps directly under reduced motion
+ok 48 - dispersion clamps, settles to a finite target, and jumps directly under reduced motion
+  ---
+  duration_ms: 30.720917
+  ...
+# Subtest: autoplay repeatedly dissolves and reforms, while pause, manual input and reduced motion freeze its clock
+ok 49 - autoplay repeatedly dissolves and reforms, while pause, manual input and reduced motion freeze its clock
+  ---
+  duration_ms: 24.806042
+  ...
+# (node:21775) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ordinary section activation animates, with modifiers and motion preferences preserving native navigation
+ok 50 - ordinary section activation animates, with modifiers and motion preferences preserving native navigation
+  ---
+  duration_ms: 0.787541
+  ...
+# Subtest: nested routes and article travel use their actual route instead of active navigation labels
+ok 51 - nested routes and article travel use their actual route instead of active navigation labels
+  ---
+  duration_ms: 0.069167
+  ...
+# Subtest: navigation ink follows the text rather than its number and stays inside the link
+ok 52 - navigation ink follows the text rather than its number and stays inside the link
+  ---
+  duration_ms: 0.361917
+  ...
+# (node:21776) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: round-robin scheduling gives every overloaded visible preview frames within the shared budget
+ok 53 - round-robin scheduling gives every overloaded visible preview frames within the shared budget
+  ---
+  duration_ms: 1.12825
+  ...
+# Subtest: pause and resume keep the source state while removing every idle scheduler callback
+ok 54 - pause and resume keep the source state while removing every idle scheduler callback
+  ---
+  duration_ms: 0.09725
+  ...
+# Subtest: expensive functioning sources adapt their rates and keep moving instead of becoming permanent posters
+ok 55 - expensive functioning sources adapt their rates and keep moving instead of becoming permanent posters
+  ---
+  duration_ms: 10.710459
+  ...
+# Subtest: a failed or removed source cannot stop the shared loop or retain a callback
+ok 56 - a failed or removed source cannot stop the shared loop or retain a callback
+  ---
+  duration_ms: 0.412583
+  ...
+# Subtest: cadence carries fractional intervals instead of rounding 18 Hz down to 15 Hz
+ok 57 - cadence carries fractional intervals instead of rounding 18 Hz down to 15 Hz
+  ---
+  duration_ms: 0.248875
+  ...
+# Subtest: GPU cohorts sustain 30Hz with a healthy 4ms study, instead of inheriting the slow native thresholds
+ok 58 - GPU cohorts sustain 30Hz with a healthy 4ms study, instead of inheriting the slow native thresholds
+  ---
+  duration_ms: 8.96125
+  ...
+# (node:21777) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CSS paper and ink round-trip through the linear shader working space in both themes
+ok 59 - CSS paper and ink round-trip through the linear shader working space in both themes
+  ---
+  duration_ms: 0.658375
+  ...
+# Subtest: falling strips update both colors in place when the theme changes
+ok 60 - falling strips update both colors in place when the theme changes
+  ---
+  duration_ms: 0.195583
+  ...
+# Subtest: fractional zoom densities cannot create fractional dot cells or exceed the raster budget
+ok 61 - fractional zoom densities cannot create fractional dot cells or exceed the raster budget
+  ---
+  duration_ms: 0.240625
+  ...
+# (node:21778) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: all print impressions remain inside their sheet with finite, visible dots
+ok 62 - all print impressions remain inside their sheet with finite, visible dots
+  ---
+  duration_ms: 57.2245
+  ...
+# Subtest: a downloaded print reproduces its displayed composition and is standalone SVG
+ok 63 - a downloaded print reproduces its displayed composition and is standalone SVG
+  ---
+  duration_ms: 7.916167
+  ...
+# Subtest: hidden words are bounded, case insensitive and reset after nonletter keys
+ok 64 - hidden words are bounded, case insensitive and reset after nonletter keys
+  ---
+  duration_ms: 0.155458
+  ...
+# (node:21779) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: case studies resolve from direct URLs and hash URLs, including retained Atlas links
+ok 65 - case studies resolve from direct URLs and hash URLs, including retained Atlas links
+  ---
+  duration_ms: 1.482917
+  ...
+# Subtest: sample inspector preserves unknown measurements and separates data from source markup
+ok 66 - sample inspector preserves unknown measurements and separates data from source markup
+  ---
+  duration_ms: 0.35375
+  ...
+# (node:21780) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: reader sections use the viewport threshold and preserve a fallback before the first heading
+ok 67 - reader sections use the viewport threshold and preserve a fallback before the first heading
+  ---
+  duration_ms: 0.717
+  ...
+# Subtest: reader tracking follows remeasured positions after disclosure or viewport changes
+ok 68 - reader tracking follows remeasured positions after disclosure or viewport changes
+  ---
+  duration_ms: 0.063667
+  ...
+# Subtest: reading progress stays finite and bounded for short, long, and moved articles
+ok 69 - reading progress stays finite and bounded for short, long, and moved articles
+  ---
+  duration_ms: 0.058208
+  ...
+# (node:21781) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a bookmarked archive retains search punctuation, category and the selected article
+ok 70 - a bookmarked archive retains search punctuation, category and the selected article
+  ---
+  duration_ms: 0.983875
+  ...
+# Subtest: return links accept only the archive and known selections
+ok 71 - return links accept only the archive and known selections
+  ---
+  duration_ms: 0.21175
+  ...
+# Subtest: section navigation preserves archive context and decodes a fragment only once
+ok 72 - section navigation preserves archive context and decodes a fragment only once
+  ---
+  duration_ms: 0.572875
+  ...
+# Subtest: related reading prefers a shared subject and excludes the current article or duplicate links
+ok 73 - related reading prefers a shared subject and excludes the current article or duplicate links
+  ---
+  duration_ms: 0.146334
+  ...
+# (node:21782) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: speculative warmup respects data saving and slow connections; deliberate activation proceeds
+ok 74 - speculative warmup respects data saving and slow connections; deliberate activation proceeds
+  ---
+  duration_ms: 0.88025
+  ...
+# Subtest: repeated intent shares one pending and completed load
+ok 75 - repeated intent shares one pending and completed load
+  ---
+  duration_ms: 0.113625
+  ...
+# Subtest: a failed warmup can retry without poisoning native navigation
+ok 76 - a failed warmup can retry without poisoning native navigation
+  ---
+  duration_ms: 0.791125
+  ...
+# (node:21783) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a single stationary sculpture click opens once after the double-click window
+ok 77 - a single stationary sculpture click opens once after the double-click window
+  ---
+  duration_ms: 0.545625
+  ...
+# Subtest: a second pointer press cancels navigation so double-click can reset the sculpture
+ok 78 - a second pointer press cancels navigation so double-click can reset the sculpture
+  ---
+  duration_ms: 0.143666
+  ...
+# Subtest: dragging blocks the following click even when the pointer returns to its starting point
+ok 79 - dragging blocks the following click even when the pointer returns to its starting point
+  ---
+  duration_ms: 0.071458
+  ...
+# Subtest: vertical touch scrolling, cancellation, and a renderer-started drag cannot open a project
+ok 80 - vertical touch scrolling, cancellation, and a renderer-started drag cannot open a project
+  ---
+  duration_ms: 0.070625
+  ...
+# Subtest: unrelated pointers do not cancel a tap and small touch jitter is tolerated
+ok 81 - unrelated pointers do not cancel a tap and small touch jitter is tolerated
+  ---
+  duration_ms: 0.11025
+  ...
+# Subtest: cleanup cancels a pending route change
+ok 82 - cleanup cancels a pending route change
+  ---
+  duration_ms: 0.049709
+  ...
+# (node:21784) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the expansion and docking join at the identical viewport and end at the actual slot
+ok 83 - the expansion and docking join at the identical viewport and end at the actual slot
+  ---
+  duration_ms: 1.112834
+  ...
+# Subtest: both legs ease monotonically without overshooting their screen bounds
+ok 84 - both legs ease monotonically without overshooting their screen bounds
+  ---
+  duration_ms: 0.338709
+  ...
+# Subtest: the join has zero endpoint velocity and suspended frames reach the exact destination
+ok 85 - the join has zero endpoint velocity and suspended frames reach the exact destination
+  ---
+  duration_ms: 0.075417
+  ...
+# Subtest: the dither accent leaves both endpoints untouched and cannot jump or exceed its budget
+ok 86 - the dither accent leaves both endpoints untouched and cannot jump or exceed its budget
+  ---
+  duration_ms: 0.158541
+  ...
+# (node:21785) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: detail docking starts at the collection camera and reaches its tighter resting frame
+ok 87 - detail docking starts at the collection camera and reaches its tighter resting frame
+  ---
+  duration_ms: 0.669292
+  ...
+# Subtest: every audited sculpture remains inside the detail frustum at full movement and bob
+ok 88 - every audited sculpture remains inside the detail frustum at full movement and bob
+  ---
+  duration_ms: 0.987542
+  ...
+# Subtest: collection framing stays fixed and invalid measurements remain finite and conservative
+ok 89 - collection framing stays fixed and invalid measurements remain finite and conservative
+  ---
+  duration_ms: 0.092542
+  ...
+# (node:21786) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: translation keeps the rotating sphere and hover articulation inside portrait and landscape slots
+ok 90 - translation keeps the rotating sphere and hover articulation inside portrait and landscape slots
+  ---
+  duration_ms: 1.8625
+  ...
+# Subtest: extreme and invalid movement inputs are bounded without poisoning the rendered pose
+ok 91 - extreme and invalid movement inputs are bounded without poisoning the rendered pose
+  ---
+  duration_ms: 0.29475
+  ...
+# Subtest: touch motion claims horizontal dragging while leaving vertical scrolling and ambiguous motion to the browser
+ok 92 - touch motion claims horizontal dragging while leaving vertical scrolling and ambiguous motion to the browser
+  ---
+  duration_ms: 0.270583
+  ...
+# (node:21787) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: work rendering stays inside its shared pixel budget on phone, Retina and ultrawide displays
+ok 93 - work rendering stays inside its shared pixel budget on phone, Retina and ultrawide displays
+  ---
+  duration_ms: 1.575334
+  ...
+# Subtest: transient invalid viewport measurements cannot allocate a huge or nonfinite target
+ok 94 - transient invalid viewport measurements cannot allocate a huge or nonfinite target
+  ---
+  duration_ms: 0.325667
+  ...
+# Subtest: scroll tracking is centered and bounded even far outside the viewport
+ok 95 - scroll tracking is centered and bounded even far outside the viewport
+  ---
+  duration_ms: 0.209083
+  ...
+# Subtest: scroll settling converges monotonically and ends, so paused studies do not retain a RAF
+ok 96 - scroll settling converges monotonically and ends, so paused studies do not retain a RAF
+  ---
+  duration_ms: 0.443375
+  ...
+# Subtest: a long suspension cannot fling scroll motion or overshoot the target
+ok 97 - a long suspension cannot fling scroll motion or overshoot the target
+  ---
+  duration_ms: 0.141792
+  ...
+# Subtest: scroll settling is independent of refresh cadence
+ok 98 - scroll settling is independent of refresh cadence
+  ---
+  duration_ms: 0.234458
+  ...
+# Subtest: idle and scroll poses cannot accumulate turns, large tilts or large translations
+ok 99 - idle and scroll poses cannot accumulate turns, large tilts or large translations
+  ---
+  duration_ms: 6.89375
+  ...
+# Subtest: reduced motion removes every time-dependent component while retaining bounded demand input
+ok 100 - reduced motion removes every time-dependent component while retaining bounded demand input
+  ---
+  duration_ms: 0.421166
+  ...
+1..100
+# tests 100
+# suites 0
+# pass 100
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1815.3265
