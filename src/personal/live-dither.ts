@@ -1,21 +1,60 @@
-import { Uniform } from 'three'
-import { DitheringEffect } from '../dithering-shader/DitheringEffect'
-import shader from '../dithering-shader/DitheringShader'
+import { Effect, EffectAttribute } from 'postprocessing'
+import { Color, Uniform, Vector2, type WebGLRenderer, type WebGLRenderTarget } from 'three'
+import { PORTFOLIO_DITHER_GLSL } from './dither-kernel.ts'
 
-/** Tiny grain variations animate the thresholds, without changing the source material. */
-export class LiveDitherEffect extends DitheringEffect {
-  constructor() {
-    super({ gridSize: 2, grayscaleOnly: true })
-    this.uniforms.set('liveDitherTime', new Uniform(0))
-    this.uniforms.set('liveDitherAmount', new Uniform(0))
-    this.setFragmentShader(`uniform float liveDitherTime;\nuniform float liveDitherAmount;\n${shader.replace(
-      'bool dithered = getValue(luminance, fragCoord);',
-      `float liveGrain = fract(sin(dot(floor(fragCoord), vec2(12.9898, 78.233)) + floor(liveDitherTime * 12.0) * .733) * 43758.5453);
-       bool dithered = getValue(luminance + (liveGrain - .5) * liveDitherAmount, fragCoord);`,
-    ).replace('vec3 ditherColor = dithered ? vec3(0.0) : baseColor;', 'vec3 ditherColor = dithered ? vec3(0.0) : vec3(1.0);')}`)
+const fragment = /* glsl */ `
+uniform vec2 printCssSize;
+uniform vec2 printBufferSize;
+uniform float printCellSize;
+uniform float printBinary;
+uniform float printClock;
+uniform float printGrain;
+uniform vec3 printInk;
+uniform vec3 printPaper;
+${PORTFOLIO_DITHER_GLSL}
+void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
+  if (inputColor.a < .0001) { outputColor = vec4(0.0); return; }
+  vec2 cell = floor(uv * printCssSize / printCellSize);
+  vec2 sampleUv = (cell + .5) * printCellSize / printCssSize;
+  vec2 halfTexel = .5 / printBufferSize;
+  vec4 surface = texture2D(inputBuffer, clamp(sampleUv, halfTexel, 1.0 - halfTexel));
+  // Weighted linear luminance retains the neutral scan's previous tonal gain.
+  float tone = clamp(portfolioLinearLuminance(surface.rgb) * 3.0, 0.0, 1.0);
+  float threshold = portfolioLiveThreshold(portfolioBayer4(cell), cell, printClock, printGrain);
+  float mark = step(threshold, tone);
+  float paper = mark * mix(tone, 1.0, printBinary);
+  outputColor = vec4(mix(printInk, printPaper, paper), min(inputColor.a, surface.a));
+}
+`
+
+/** Palette and dither share one pass. Grain has a stable spatial seed and visible clock. */
+export class LiveDitherEffect extends Effect {
+  constructor({ gridSize = 2, binary = true, live = true }: { gridSize?: number; binary?: boolean; live?: boolean } = {}) {
+    super('PortfolioDither', fragment, {
+      attributes: EffectAttribute.CONVOLUTION,
+      uniforms: new Map<string, Uniform>([
+        ['printCssSize', new Uniform(new Vector2(1, 1))],
+        ['printBufferSize', new Uniform(new Vector2(1, 1))],
+        ['printCellSize', new Uniform(Number.isFinite(gridSize) ? Math.max(1, gridSize) : 2)],
+        ['printBinary', new Uniform(Number(binary))],
+        ['printClock', new Uniform(0)],
+        ['printGrain', new Uniform(live ? .025 : 0)],
+        ['printInk', new Uniform(new Color('#191a17'))],
+        ['printPaper', new Uniform(new Color('#f3f3f0'))],
+      ]),
+    })
   }
-  setTime(time: number, moving: boolean) {
-    this.uniforms.get('liveDitherTime')!.value = time
-    this.uniforms.get('liveDitherAmount')!.value = moving ? .095 : 0
+  setTime(seconds: number, moving: boolean) {
+    if (moving && Number.isFinite(seconds)) this.uniforms.get('printClock')!.value = Math.max(0, seconds)
+  }
+  setView(width: number, height: number) {
+    this.uniforms.get('printCssSize')!.value.set(Number.isFinite(width) ? Math.max(1, width) : 1, Number.isFinite(height) ? Math.max(1, height) : 1)
+  }
+  setPalette(paper: Color, ink: Color) {
+    this.uniforms.get('printPaper')!.value.copy(paper)
+    this.uniforms.get('printInk')!.value.copy(ink)
+  }
+  update(_renderer: WebGLRenderer, buffer: WebGLRenderTarget) {
+    this.uniforms.get('printBufferSize')!.value.set(buffer.width, buffer.height)
   }
 }

@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { printPalette, printPixelRatio } from '../src/personal/print-palette.ts'
-import { WaterFlowEffect } from '../src/personal/water-flow.ts'
+import { LiveDitherEffect } from '../src/personal/live-dither.ts'
 
 test('CSS paper and ink round-trip through the linear shader working space in both themes', () => {
   for (const [paper, ink] of [['#f3f3f0', '#191a17'], ['#111210', '#efefe8']]) {
@@ -12,15 +12,15 @@ test('CSS paper and ink round-trip through the linear shader working space in bo
   }
 })
 
-test('falling strips update both colors in place when the theme changes', () => {
-  const effect = new WaterFlowEffect()
-  const paperUniform = effect.uniforms.get('flowPaper')!
-  const inkUniform = effect.uniforms.get('flowInk')!
+test('the upstream dither palette updates both colors in place for the falling strips', () => {
+  const effect = new LiveDitherEffect()
+  const paperUniform = effect.uniforms.get('printPaper')!
+  const inkUniform = effect.uniforms.get('printInk')!
   const paperColor = paperUniform.value
   const colors = printPalette('#111210', '#efefe8')
   effect.setPalette(colors.paper, colors.ink)
-  assert.equal(effect.uniforms.get('flowPaper'), paperUniform)
-  assert.equal(effect.uniforms.get('flowInk'), inkUniform)
+  assert.equal(effect.uniforms.get('printPaper'), paperUniform)
+  assert.equal(effect.uniforms.get('printInk'), inkUniform)
   assert.equal(paperUniform.value, paperColor)
   assert.equal(paperUniform.value.getHexString(), '111210')
   assert.equal(inkUniform.value.getHexString(), 'efefe8')

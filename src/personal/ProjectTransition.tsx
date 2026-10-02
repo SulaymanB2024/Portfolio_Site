@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { createPortal, flushSync } from 'react-dom'
+import { STUDY_DOCK_MS } from './work-study-flight'
 import type { WorkStudyFlight } from './work-study-renderer'
 import './project-transition.css'
 
@@ -51,12 +52,30 @@ export function ProjectTransitionProvider({ children }: { children: ReactNode })
     }
     const escape = (event: KeyboardEvent) => { if (event.key === 'Escape') recover() }
     const routeChanged = () => { if (location.hash !== arrival.href) recover() }
-    const timeout = window.setTimeout(recover, 2200)
+    // Match the renderer's visible clock: a background tab must not finish a
+    // half-formed sculpture or run down its recovery allowance.
+    let remaining = STUDY_DOCK_MS + 1800
+    let started = performance.now()
+    let timeout = 0
+    const visibility = () => {
+      window.clearTimeout(timeout)
+      if (timeout) remaining = Math.max(0, remaining - (performance.now() - started))
+      timeout = 0
+      const overlay = host.current?.parentElement
+      if (overlay) overlay.dataset.suspended = String(document.hidden)
+      if (!document.hidden) {
+        started = performance.now()
+        timeout = window.setTimeout(recover, remaining)
+      }
+    }
+    visibility()
     document.addEventListener('keydown', escape)
+    document.addEventListener('visibilitychange', visibility)
     window.addEventListener('hashchange', routeChanged)
     return () => {
       window.clearTimeout(timeout)
       document.removeEventListener('keydown', escape)
+      document.removeEventListener('visibilitychange', visibility)
       window.removeEventListener('hashchange', routeChanged)
       document.body.style.overflow = previousOverflow
     }
@@ -76,7 +95,7 @@ export function ProjectTransitionProvider({ children }: { children: ReactNode })
   const navigation = useMemo(() => ({ arrive, claim }), [arrive, claim])
 
   return <ProjectNavigation.Provider value={navigation}>{children}{arrival && createPortal(
-    <div className={`project-arrival ${docking ? 'is-docking' : ''}`} style={{ '--arrival-paper': arrival.paper, color: arrival.ink } as CSSProperties} aria-hidden="true"><div ref={host} className="project-arrival-image" /></div>, document.body,
+    <div className={`project-arrival ${docking ? 'is-docking' : ''}`} style={{ '--arrival-paper': arrival.paper, '--arrival-duration': `${STUDY_DOCK_MS}ms`, color: arrival.ink } as CSSProperties} aria-hidden="true"><div ref={host} className="project-arrival-sculpture" /></div>, document.body,
   )}</ProjectNavigation.Provider>
 }
 

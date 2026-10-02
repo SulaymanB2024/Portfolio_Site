@@ -1,0 +1,32 @@
+{
+  "capturedAt": "2026-10-02",
+  "atlas": {
+    "kind": "actual local interface",
+    "data": "synthetic example.com fixture; no client outcomes",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "sourceCommit": "669d9516b2816ca20ec5913f080fad5db417c7b5",
+    "workingTreeInterface": true,
+    "uiSha256": "19f70d666e00ea620780d4bc6e6801fa6a7d315369874dbfb9e71a0162b12e9e",
+    "fixture": "tests/test_dashboard.py:_seed_dashboard_db",
+    "route": "Pages / selected page",
+    "image": "images/projects/atlas-console.jpg",
+    "captureDimensions": {
+      "width": 1272,
+      "height": 716
+    }
+  },
+  "internship": {
+    "kind": "source-derived interactive excerpt; not a screenshot",
+    "data": "repository example offers, manually editable; no catalog or production connection",
+    "sourceCommit": "3da259a3b51bab3448e9b082dad69fac7cb2711f",
+    "sources": {
+      "components/tools/offer-model.ts": "fd1457b84f177a23ba35a8c8f6ea5d817dd6e884cf7da246c6abdd2675c76ba7",
+      "components/tools/budget-model.ts": "bb7ec399d877cd9729c12e40bc2cbc1d32281f23496d75a92ebd4640e22a6ba4",
+      "lib/tools/math.ts": "01af0badbcd9c1ca7e92ca2a7a3adb2cd57cea56104c10d3879881404a4b49ea"
+    },
+    "adaptation": "manual hourly examples only; original finite parsing, gross-income and balance arithmetic retained; no planning storage or employer import"
+  }
+}

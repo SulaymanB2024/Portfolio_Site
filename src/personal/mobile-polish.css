@@ -1,0 +1,130 @@
+/* Phone compositions share the desktop paper and ink, with their own rhythm. */
+@media screen and (max-width: 600px), screen and (max-width: 950px) and (max-height: 500px) {
+  .personal-site { padding-inline: 20px; }
+  .personal-site .personal-header { height: 72px; min-height: 72px; }
+  .personal-site .personal-header .appearance-toggle,
+  .personal-site .personal-header .nav-toggle { min-width: 44px; min-height: 44px; }
+  .personal-site .personal-header nav.is-open { padding: 12px 20px 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 20px; }
+  .personal-site .personal-header nav.is-open a { display: flex; align-items: center; min-height: 48px; font-size: 15px; }
+  .personal-site .personal-header nav.is-open .nav-number { display: none; }
+  .personal-site .personal-header nav.is-open a::after { left: 0; }
+
+  /* End the dissolution close to the next section, without a blank extra screen. */
+  .personal-site.home-site .home-scroll-stage { min-height: calc(100svh + min(35svh, 280px)); }
+  .personal-site.home-site .home-scroll-stage > .home-hero {
+    top: min(0px, calc(100svh - 620px));
+    height: max(620px, calc(100svh - 72px));
+    min-height: max(620px, calc(100svh - 72px));
+    padding-block: 12px 20px;
+  }
+  .personal-site.home-site .hero-copy h1 { font-size: clamp(38px, 11.5vw, 56px); line-height: 1.06; margin-bottom: 20px; }
+  .personal-site.home-site .hero-description { font-size: 18px; line-height: 1.5; max-width: 34ch; margin-bottom: 18px; }
+  .personal-site.home-site .home-flow-viewer .object-controls { font-size: 10px; gap: 8px; }
+  .personal-site.home-site .object-controls button { width: 44px; height: 44px; }
+
+  .personal-site .work-collection-intro { margin-bottom: 28px; }
+  .personal-site .work-collection-intro h2 { font-size: clamp(34px, 8.8vw, 46px); line-height: 1.12; }
+  .personal-site .work-study-tags { font-size: 11px; line-height: 1.6; }
+  .personal-site .work-study-text > p { font-size: 17px; line-height: 1.6; }
+  .personal-site .work-motion-control, .personal-site .work-study-controls .work-motion-control, .personal-site .work-study-controls > span { font-size: 11px; }
+  .personal-site .work-study-controls { flex-wrap: wrap; row-gap: 0; font-size: 10px; }
+
+  .personal-site .story-index > a, .personal-site .story-index > a > span { font-size: 11px; }
+  .personal-site .story-chapter-label, .personal-site .project-context dt, .personal-site .project-read, .personal-site .project-narrative .project-links .arrow-link { font-size: 11px; }
+
+  .personal-site .home-writing.home-journal { padding-block: 44px; }
+  .personal-site .journal-companion { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .personal-site .journal-companion h3 { font-size: 30px; line-height: 1.16; }
+  .personal-site .journal-companion .journal-deck { font-size: 17px; line-height: 1.6; }
+  .personal-site .journal-companion .journal-art { width: min(180px, 65%); justify-self: center; }
+  .personal-site .journal-companion .journal-read { grid-column: 1; }
+  .personal-site .writing-page .writing-search input { font-size: 16px; }
+
+  /* A readable list replaces the tiny two-column résumé map on phones. */
+  .personal-site .rx-header h1 { font-size: clamp(60px, 17vw, 76px); }
+  .personal-site .rx-map { position: relative; top: auto; height: auto; display: grid; grid-template-columns: minmax(0, 1fr); padding-block: 12px 24px; gap: 0; }
+  .personal-site .rx-connections { display: none; }
+  .personal-site .rx-roles { display: contents; }
+  .personal-site .rx-sculpture,
+  .personal-site .rx-stage.is-open .rx-sculpture { position: relative; width: 100%; left: auto; top: auto; order: -1; grid-column: 1; grid-row: auto; height: 210px; margin: 0 0 12px; }
+  .personal-site .rx-sculpture .object-controls button { width: 44px; height: 44px; }
+  .personal-site .rx-role,
+  .personal-site .rx-stage.is-open .rx-role {
+    position: static; transform: none; width: auto; max-width: none; background: transparent;
+    grid-column: 1; grid-row: auto; justify-self: stretch; min-width: 0;
+    display: grid; grid-template-columns: 28px minmax(0, 1fr) 24px; column-gap: 12px;
+    align-content: center; min-height: 86px; padding: 16px 0; text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+  .personal-site .rx-node-index { display: contents; }
+  .personal-site .rx-node-index > span:first-child { grid-column: 1; grid-row: 1 / 3; align-self: center; font: 11px/1.6 'Courier New', monospace; color: var(--muted); }
+  .personal-site .rx-node-index i { display: none; }
+  .personal-site .rx-node-index .rx-node-open { grid-column: 3; grid-row: 1 / 3; align-self: center; justify-self: end; margin: 0; font-size: 18px; }
+  .personal-site .rx-node-name,
+  .personal-site .rx-stage.is-open .rx-node-name { grid-column: 2; grid-row: 1; margin: 0; font-size: 25px; line-height: 1.18; }
+  .personal-site .rx-node-discipline,
+  .personal-site .rx-stage.is-open .rx-node-discipline { grid-column: 2; grid-row: 2; font-size: 11px; line-height: 1.6; margin-top: 4px; }
+  .personal-site .rx-world-label { font-size: 10px; }
+  .personal-site .rx-secondary small { font-size: 12px; }
+  .personal-site .rx-meta { font-size: 11px; }
+  .personal-site .rx-practice p, .personal-site .rx-detail > div { font-size: 16px; line-height: 1.7; }
+  .personal-site .rx-job-title { font-size: 16px; }
+  .personal-site .rx-detail summary, .personal-site .rx-evidence a { font-size: 11px; }
+  .personal-site .cv-mobile-nav nav { grid-template-columns: minmax(0, 1fr); }
+  .personal-site .cv-mobile-nav nav a { font-size: 12px; min-height: 48px; }
+  .personal-site .cv-entry-meta { font-size: 11px; }
+  .personal-site .rx-chapter h2 { font-size: clamp(30px, 8.4vw, 38px); }
+
+  .personal-site .lion-study-stage { margin-inline: -20px; }
+  .personal-site .lion-study-instructions { align-items: center; }
+  .personal-site .lion-study-field .mono { font-size: 11px; }
+  .personal-site .lion-contact-note > a { display: inline-flex; align-items: center; min-height: 44px; }
+  .personal-site .lion-study-instructions button,
+  .personal-site .lion-study-credit summary,
+  .personal-site .lion-study-reset { min-height: 44px; }
+  .personal-site .lion-study-explore { flex-wrap: wrap; gap: 8px 16px; }
+  .personal-site .lion-study-field { flex-basis: 100%; }
+  .personal-site .lion-study-field input { height: 44px; }
+  .personal-site .lion-study-reset { margin-left: auto; font-size: 10px; }
+  .personal-site .lion-study-credit .mono { font-size: 11px; }
+
+  .personal-site .about-object-selectors { gap: 8px; }
+  .personal-site .about-object-selectors > button { font-size: 15px; }
+  .personal-site .about-object-selectors .mono { font-size: 11px; }
+  .personal-site .about-objects-toolbar { font-size: 11px; }
+  .personal-site .about-editor-settings :is(input, select),
+  .personal-site .about-piece-controls :is(input, select) { font-size: 16px; }
+
+  .personal-site .footer-baseline { gap: 12px 22px; }
+  .personal-site .colophon summary { min-height: 44px; }
+}
+
+@media screen and (max-width: 370px) {
+  .personal-site.home-site .hero-copy h1 { font-size: 36px; }
+  .personal-site .lion-study-instructions { gap: 8px; }
+  .personal-site .lion-study-instructions > span { max-width: 140px; }
+}
+
+/* Landscape phones need space to scroll instead of a crushed fixed-height hero. */
+@media screen and (max-width: 950px) and (max-height: 500px) {
+  .personal-site.home-site .home-scroll-stage { min-height: calc(360px + 35svh); }
+  .personal-site.home-site .home-scroll-stage > .home-hero { top: min(0px, calc(100svh - 360px)); height: 360px; min-height: 360px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; align-items: start; gap: 24px; }
+  .personal-site.home-site .home-scroll-stage .hero-copy { grid-column: 1; grid-row: 1; }
+  .personal-site.home-site .home-scroll-stage .home-flow-scene { grid-column: 2; grid-row: 1; }
+  .personal-site.home-site .hero-copy h1 { font-size: clamp(32px, 5.2vw, 44px); }
+  .personal-site.home-site .hero-description { font-size: 17px; }
+  .personal-site.home-site .home-flow-scene .home-flow-viewer > canvas { height: 360px; }
+  .personal-site .rx-map { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
+  .personal-site .rx-role, .personal-site .rx-stage.is-open .rx-role { grid-column: auto; }
+  .personal-site .rx-sculpture, .personal-site .rx-stage.is-open .rx-sculpture { grid-column: 1 / -1; height: 180px; }
+  .personal-site .lion-contact { height: auto; min-height: 0; max-height: none; }
+  .personal-site .lion-study { grid-template-rows: 220px auto auto; }
+  .personal-site .lion-study-stage { min-height: 0; }
+}
+
+@media screen and (max-width: 600px) and (prefers-reduced-motion: reduce), screen and (max-width: 950px) and (max-height: 500px) and (prefers-reduced-motion: reduce) {
+  .personal-site.home-site .home-scroll-stage { min-height: 0; }
+  .personal-site.home-site .home-scroll-stage > .home-hero { top: auto; height: auto; min-height: 0; }
+  .personal-site.home-site .home-scroll-stage .home-flow-scene { height: 330px; max-height: none; }
+  .personal-site.home-site .home-flow-scene .home-flow-viewer > canvas { height: 100%; }
+}

@@ -7,8 +7,9 @@
 <style>
 :root { --paper: #f5f2ea; --ink: #24221e; background: var(--paper); color: var(--ink); color-scheme: light; }
 :root[data-appearance='dark'] { --paper: #111210; --ink: #efefe8; color-scheme: dark; }
+html[data-site-boot='pending'] #root > .static-site { display: none; }
 </style>
-<script type="module" src="/src/appearance.js"></script>
+<script src="%BASE_URL%site-startup.js"></script>
 <title>Sulayman Bowles — The frontier is all that matters</title>
 <meta name="description" content="Software, AI research, and markets. Selected work and writing by Sulayman Bowles, with a long view of what comes next." />
 <meta name="author" content="Sulayman Bowles" />

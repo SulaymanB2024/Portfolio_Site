@@ -1,5 +1,9 @@
 import * as THREE from 'three'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { PORTFOLIO_DITHER_GLSL } from '../dither-kernel'
+import { PortfolioRuntime } from '../portfolio-runtime'
+import { createPortfolioModelLoader } from '../portfolio-model-loader'
+import { portfolioAssetUrl } from '../portfolio-assets'
+import { disposeModel } from '../../model-resources'
 import { printPixelRatio, readPrintPalette } from '../print-palette'
 import type { InterestId } from './about-content'
 import type { PhraseNote } from './music-phrase'
@@ -25,13 +29,15 @@ type Specimen = { id: InterestId; group: THREE.Group; model: THREE.Group; pose: 
 const ids: InterestId[] = ['bass', 'score', 'knight']
 const VERTEX = 'varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.0,1.0); }'
 const FRAGMENT = `
-uniform sampler2D image; uniform vec3 ink; varying vec2 vUv;
-float bayer(vec2 p){return p.x*2.0+p.y*3.0-p.x*p.y*4.0;}
+uniform sampler2D image; uniform vec3 ink; uniform vec2 cssResolution; uniform float motionSeconds; varying vec2 vUv;
+${PORTFOLIO_DITHER_GLSL}
 void main(){
   vec4 model=texture2D(image,vUv);
-  vec2 pixel=mod(floor(gl_FragCoord.xy),4.0);
-  float threshold=(4.0*bayer(mod(pixel,2.0))+bayer(floor(pixel/2.0))+.5)/16.0;
-  float gray=pow(clamp(dot(model.rgb,vec3(.2126,.7152,.0722)),0.0,1.0),1.0/2.2);
+  vec2 pixel=floor(vUv*cssResolution);
+  float threshold=portfolioLiveThreshold(portfolioBayer4(pixel),pixel,motionSeconds,.025);
+  // NormalBlending into transparent black stores premultiplied target color.
+  vec3 straightColor=model.a>0.0001?model.rgb/model.a:vec3(0.0);
+  float gray=portfolioDisplayLuminance(straightColor);
   float shade=mix(1.0-gray,1.0-step(threshold,gray),.80);
   gl_FragColor=vec4(ink,model.a*shade);
   #include <colorspace_fragment>
@@ -53,7 +59,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   rim.position.set(4, 2, -3)
   scene.add(key, rim, new THREE.HemisphereLight(0xffffff, 0x444444, 1.3))
   const palette = readPrintPalette(canvas, dark)
-  const shader = new THREE.ShaderMaterial({ vertexShader: VERTEX, fragmentShader: FRAGMENT, transparent: true, depthTest: false, depthWrite: false, uniforms: { image: { value: target.texture }, ink: { value: palette.ink } } })
+  const shader = new THREE.ShaderMaterial({ vertexShader: VERTEX, fragmentShader: FRAGMENT, transparent: true, depthTest: false, depthWrite: false, toneMapped: false, uniforms: { image: { value: target.texture }, ink: { value: palette.ink }, cssResolution: { value: new THREE.Vector2(1, 1) }, motionSeconds: { value: 0 } } })
   const quadGeometry = new THREE.PlaneGeometry(2, 2)
   const post = new THREE.Scene()
   post.add(new THREE.Mesh(quadGeometry, shader))
@@ -61,7 +67,8 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   const raycaster = new THREE.Raycaster()
   const pointer = new THREE.Vector2()
   const specimens: Specimen[] = []
-  const loader = new GLTFLoader()
+  const loader = createPortfolioModelLoader()
+  const runtime = new PortfolioRuntime()
   const controller = new AbortController()
   const media = matchMedia('(prefers-reduced-motion: reduce)')
   const geometries = new Set<THREE.BufferGeometry>()
@@ -97,9 +104,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   let urgent = true
   let width = 1
   let height = 1
-  let lastTick = 0
-  let lastPaint = 0
-  let time = 0
+  let lastStats = -Infinity
   let frames = 0
   let settling = true
   let averageMs = 0
@@ -119,22 +124,26 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   let drag: { id: number; x: number; y: number; previousX: number; previousY: number; moved: boolean; intent: 'pending' | 'horizontal' | 'vertical' } | null = null
   canvas.dataset.state = 'loading'
   canvas.dataset.frames = '0'
+  canvas.dataset.effectPasses = '1'
+  canvas.dataset.renderPasses = '2'
 
   function active() { return !disposed && !lost && visible && !document.hidden }
   function wake() { urgent = true; if (active() && !raf) raf = requestAnimationFrame(render) }
-  function measure() {
+  function measure(shouldWake = true) {
     const rect = canvas.getBoundingClientRect()
     width = Math.max(1, rect.width); height = Math.max(1, rect.height)
-    const ratio = printPixelRatio(width, height, Math.min(devicePixelRatio || 1, 1.5))
+    const ratio = printPixelRatio(width, height, Math.min(devicePixelRatio || 1, 1.5)) * runtime.scale
     renderer.setPixelRatio(ratio)
     renderer.setSize(width, height, false)
     const pixels = renderer.getDrawingBufferSize(new THREE.Vector2())
     target.setSize(pixels.x, pixels.y)
+    shader.uniforms.cssResolution.value.set(width, height)
     camera.aspect = width / height
     camera.position.set(0, 0, width < 700 ? 8 : 6.5)
     camera.updateProjectionMatrix()
-    canvas.dataset.renderPixels = String(pixels.x * pixels.y)
-    settling = true; wake()
+    if (import.meta.env.DEV) canvas.dataset.renderPixels = String(pixels.x * pixels.y)
+    settling = true
+    if (shouldWake) wake()
   }
   function approach(value: number, goal: number, dt: number) {
     if (media.matches) return goal
@@ -185,13 +194,15 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   }
   function render(now: number) {
     raf = 0
-    if (!active()) return
-    if (!urgent && now - lastPaint < 1000 / 30 - 1) { raf = requestAnimationFrame(render); return }
+    if (!active()) { runtime.suspend(); stats(true); return }
+    if (!runtime.canPaint(now, urgent)) { raf = requestAnimationFrame(render); return }
     urgent = false
-    const renderStart = performance.now()
-    const dt = Math.min(.07, Math.max(0, (now - (lastTick || now)) / 1000))
-    lastTick = now
-    if (playing) time += dt
+    const live = playing && !media.matches && specimens.length > 0
+    if (runtime.advance(now, live, !!drag)) measure(false)
+    const renderStart = import.meta.env.DEV ? performance.now() : 0
+    const dt = runtime.delta
+    const time = runtime.seconds
+    shader.uniforms.motionSeconds.value = time
     settling = false
     const narrow = width < 700
     for (const item of specimens) {
@@ -270,7 +281,22 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     renderer.info.reset()
     renderer.setRenderTarget(target); renderer.clear(); renderer.render(scene, camera)
     renderer.setRenderTarget(null); renderer.clear(); renderer.render(post, postCamera)
-    frames++; lastPaint = now
+    frames++
+    if (import.meta.env.DEV) {
+      const duration = performance.now() - renderStart
+      averageMs = frames === 1 ? duration : averageMs * .94 + duration * .06
+    }
+    stats(frames === 1 || (!live && !settling))
+    if (live || settling) raf = requestAnimationFrame(render)
+    else runtime.suspend()
+  }
+
+  function stats(force = false) {
+    const now = performance.now()
+    if (!import.meta.env.DEV) return
+    if (force) canvas.dataset.liveMotion = String(active() && playing && !media.matches && specimens.length > 0)
+    if (now - lastStats < 750) return
+    lastStats = now
     canvas.dataset.frames = String(frames)
     canvas.dataset.drawCalls = String(renderer.info.render.calls)
     canvas.dataset.triangles = String(renderer.info.render.triangles)
@@ -288,10 +314,12 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     canvas.dataset.chessSelection = gameState?.selected ?? ''
     canvas.dataset.legalMoves = legal.join(',')
     canvas.dataset.legalMarkers = String(markers.filter(marker => marker.visible).length)
-    averageMs = averageMs * .94 + (performance.now() - renderStart) * .06
-    canvas.dataset.renderAverageMs = averageMs.toFixed(2)
-    if (playing || settling) raf = requestAnimationFrame(render)
-    else lastTick = 0
+    canvas.dataset.renderAverageMs = averageMs.toFixed(3)
+    canvas.dataset.cpuSubmissionMs = averageMs.toFixed(3)
+    canvas.dataset.frameAverageMs = runtime.averageFrameMs.toFixed(3)
+    canvas.dataset.fps = runtime.fps.toFixed(2)
+    canvas.dataset.resolutionScale = String(runtime.scale)
+    canvas.dataset.liveMotion = String(active() && playing && !media.matches && specimens.length > 0)
   }
 
   function intersections(event: PointerEvent) {
@@ -339,20 +367,20 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   }, { signal: controller.signal })
   canvas.addEventListener('pointerup', event => { if (!drag || event.pointerId !== drag.id) return; if (!drag.moved) interact(event); drag = null; if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId) }, { signal: controller.signal })
   canvas.addEventListener('pointercancel', event => { if (event.pointerId === drag?.id) drag = null }, { signal: controller.signal })
-  canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); lost = true; cancelAnimationFrame(raf); raf = 0; canvas.dataset.state = 'error'; status('error') }, { signal: controller.signal })
-  canvas.addEventListener('webglcontextrestored', () => { lost = false; status('ready'); canvas.dataset.state = 'ready'; wake() }, { signal: controller.signal })
-  document.addEventListener('visibilitychange', () => { lastTick = 0; if (document.hidden) { cancelAnimationFrame(raf); raf = 0 } else wake() }, { signal: controller.signal })
-  media.addEventListener('change', wake, { signal: controller.signal })
-  const resize = new ResizeObserver(measure)
+  canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); lost = true; runtime.suspend(); stats(true); cancelAnimationFrame(raf); raf = 0; canvas.dataset.state = 'error'; status('error') }, { signal: controller.signal })
+  canvas.addEventListener('webglcontextrestored', () => { lost = false; runtime.suspend(); status('ready'); canvas.dataset.state = 'ready'; wake() }, { signal: controller.signal })
+  document.addEventListener('visibilitychange', () => { runtime.suspend(); if (document.hidden) { cancelAnimationFrame(raf); raf = 0; stats(true) } else wake() }, { signal: controller.signal })
+  media.addEventListener('change', () => { runtime.suspend(); wake() }, { signal: controller.signal })
+  const resize = new ResizeObserver(() => measure())
   resize.observe(canvas)
-  const observer = new IntersectionObserver(entries => { visible = entries[0]?.isIntersecting ?? false; lastTick = 0; if (visible) wake(); else { cancelAnimationFrame(raf); raf = 0 } })
+  const observer = new IntersectionObserver(entries => { visible = entries[0]?.isIntersecting ?? false; runtime.suspend(); if (visible) wake(); else { cancelAnimationFrame(raf); raf = 0; stats(true) } })
   observer.observe(canvas)
   measure()
 
   let failed = 0
   for (const id of ids) {
-    loader.load(`${import.meta.env.BASE_URL}about-objects/${id}.glb`, gltf => {
-      if (disposed) { gltf.scene.traverse(node => { if (node instanceof THREE.Mesh) { node.geometry.dispose(); for (const material of Array.isArray(node.material) ? node.material : [node.material]) material.dispose() } }); return }
+    void loader.load(portfolioAssetUrl(`about-${id}`), controller.signal).then(gltf => {
+      if (disposed) { disposeModel(gltf.scene); return }
       const model = gltf.scene
       const bounds = new THREE.Box3().setFromObject(model)
       const center = bounds.getCenter(new THREE.Vector3())
@@ -380,6 +408,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
           const list = Array.isArray(node.material) ? node.material : [node.material]
           for (const material of list) {
             materials.add(material)
+            for (const value of Object.values(material)) if (value instanceof THREE.Texture) textures.add(value)
             if (material instanceof THREE.MeshStandardMaterial) { material.transparent = true; material.forceSinglePass = true; specimen.materials.push(material); if (onBoard) specimen.boardMaterials.push(material) }
           }
         }
@@ -422,7 +451,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       restoreMarkers(); settling = true; wake()
       canvas.dataset.loadedObjects = String(specimens.length)
       if (specimens.length + failed === ids.length) { canvas.dataset.state = failed ? 'error' : 'ready'; status(failed ? 'error' : 'ready') }
-    }, undefined, error => {
+    }).catch(error => {
       if (disposed) return
       failed++; console.warn(`Could not load personal object ${id}`, error)
       if (specimens.length + failed === ids.length) { canvas.dataset.state = 'error'; status('error') }
@@ -431,7 +460,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
 
   return {
     select(id) { selected = id; jumping = null; manualYaw = 0; manualPitch = 0; restoreMarkers(); settling = true; wake() },
-    setPlaying(value) { playing = value; lastTick = 0; wake() },
+    setPlaying(value) { if (playing === value) return; playing = value; runtime.suspend(); stats(true); wake() },
     setDark(value) { shader.uniforms.ink.value.copy(readPrintPalette(canvas, value).ink); wake() },
     pluck(index) { pulses[index] = .9; bassString = index; wake() },
     setNotes(notes) { noteSequence = notes; wake() },
@@ -446,10 +475,14 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     setGame(state) { gameState=state;const item=specimens.find(item=>item.id==='knight');if(state&&item?.knight){item.chess??=createChessSet(item.model,item.knight,item.tiles,geometries,materials);item.chess.update(state)}restoreMarkers();wake() },
     resetView() { manualYaw = 0; manualPitch = 0; wake() },
     dispose() {
-      disposed = true; cancelAnimationFrame(raf); controller.abort(); resize.disconnect(); observer.disconnect()
+      if (disposed) return
+      stats(true); disposed = true; runtime.suspend(); cancelAnimationFrame(raf); controller.abort(); loader.dispose(); resize.disconnect(); observer.disconnect()
       for (const geometry of geometries) geometry.dispose()
       for (const material of materials) material.dispose()
-      for (const texture of textures) texture.dispose()
+      for (const texture of textures) {
+        texture.dispose()
+        if (typeof ImageBitmap !== 'undefined' && texture.image instanceof ImageBitmap) texture.image.close()
+      }
       markerGeometry.dispose(); goalGeometry.dispose(); fingerGeometry.dispose(); markerMaterial.dispose(); lightMarkerMaterial.dispose(); target.dispose(); shader.dispose(); quadGeometry.dispose(); renderer.dispose()
       canvas.dataset.state = 'disposed'
     },

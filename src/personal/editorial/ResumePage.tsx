@@ -4,6 +4,7 @@ import { resumeProfile as profile, resumeReview } from '../profile-copy'
 import { resumeChapters as chapterById } from './resume-chapters'
 import ResumeDocument from './ResumeDocument'
 import { displayDate } from './types'
+import { resumeSectionFromHash, withoutResumeSection } from './resume-navigation'
 import './resume-explorer.css'
 
 const resumeChapters = [chapterById.chegg, chapterById.sapien, chapterById.void, chapterById['internship-deadlines'], chapterById['creative-trace'], chapterById['venture-labs'], chapterById['ai-venture']]
@@ -22,7 +23,9 @@ function ExternalLink({ href, children }: { href: string; children: string }) {
 
 export default function ResumePage({ dark }: { dark: boolean }) {
   const [selection, setSelection] = useState<Selection | null>(null)
-  const [documentOpen, setDocumentOpen] = useState(false)
+  const [requestedSection, setRequestedSection] = useState(() => resumeSectionFromHash(location.hash))
+  const [documentOpen, setDocumentOpen] = useState(() => !!resumeSectionFromHash(location.hash))
+  const documentToggle = useRef<HTMLButtonElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
   const documentSection = useRef<HTMLDivElement>(null)
   const focusOnOpen = useRef(false)
@@ -43,15 +46,36 @@ export default function ResumePage({ dark }: { dark: boolean }) {
   }, [selectionKey])
 
   useEffect(() => {
+    const reachSection = () => {
+      const section = resumeSectionFromHash(location.hash)
+      setRequestedSection(section)
+      if (section) setDocumentOpen(true)
+    }
+    window.addEventListener('hashchange', reachSection)
+    return () => window.removeEventListener('hashchange', reachSection)
+  }, [])
+
+  useEffect(() => {
     if (!documentOpen) return
     const frame = requestAnimationFrame(() => {
-      const section = documentSection.current
+      const section = requestedSection ? document.getElementById(`resume-${requestedSection}`) : documentSection.current
       if (!section) return
       section.focus({ preventScroll: true })
-      section.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+      section.scrollIntoView({ block: 'start', behavior: requestedSection || matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
     })
     return () => cancelAnimationFrame(frame)
-  }, [documentOpen])
+  }, [documentOpen, requestedSection])
+
+  function toggleDocument() {
+    const closing = documentOpen
+    setRequestedSection(null)
+    history.replaceState(history.state, '', withoutResumeSection(location.hash))
+    setDocumentOpen(!closing)
+    if (closing) requestAnimationFrame(() => {
+      documentToggle.current?.focus({ preventScroll: true })
+      documentToggle.current?.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+    })
+  }
 
   function choose(next: Selection, button?: HTMLButtonElement, focus = false) {
     focusOnOpen.current = focus || next.kind !== 'role'
@@ -81,7 +105,7 @@ export default function ResumePage({ dark }: { dark: boolean }) {
         <div><span className="eyebrow">Sulayman Bowles / Austin, Texas</span><h1 id="resume-explorer-title">Résumé<span className="period">.</span></h1></div>
         <div className="rx-header-deck"><p>{profile.positioning}</p><span>Follow a role. Open a chapter.</span></div>
       </header>
-      <div className="rx-document-bar"><button type="button" className="rx-document-toggle" aria-expanded={documentOpen} aria-controls="resume-document" onClick={() => setDocumentOpen(!documentOpen)}>Read the full résumé<span aria-hidden="true">{documentOpen ? '−' : '+'}</span></button><div><a href={`${import.meta.env.BASE_URL}Sulayman_Bowles_Resume.pdf`} download aria-describedby="rx-pdf-note">{resumeReview.pdfLabel}<span aria-hidden="true">↓</span></a><button type="button" onClick={() => window.print()}>Print<span aria-hidden="true">↗</span></button></div></div>
+      <div className="rx-document-bar"><button ref={documentToggle} type="button" className="rx-document-toggle" aria-expanded={documentOpen} aria-controls="resume-document" onClick={toggleDocument}>Read the full résumé<span aria-hidden="true">{documentOpen ? '−' : '+'}</span></button><div><a href={`${import.meta.env.BASE_URL}Sulayman_Bowles_Resume.pdf`} download aria-describedby="rx-pdf-note">{resumeReview.pdfLabel}<span aria-hidden="true">↓</span></a><button type="button" onClick={() => window.print()}>Print<span aria-hidden="true">↗</span></button></div></div>
       <div className="rx-notes"><p id="rx-pdf-note">{resumeReview.pdfNote}</p><p>Profile as of <time dateTime={profile.lastReviewed}>{displayDate(profile.lastReviewed)}</time></p></div>
       <section className="rx-world" aria-label="Explore my résumé" onKeyDown={onKeyDown}>
         <div className="rx-world-label"><span>01 / Experience</span><span>Choose a role to explore <span aria-hidden="true">↙</span></span></div>
@@ -143,6 +167,6 @@ export default function ResumePage({ dark }: { dark: boolean }) {
         <p className="sr-only" aria-live="polite" aria-atomic="true">{selection ? `${role?.organization ?? secondary.find(item => item.kind === selection.kind)?.label} chapter open.` : 'Résumé overview. Choose a role to explore.'}</p>
       </section>
     </div>
-    <div ref={documentSection} id="resume-document" className="rx-document" data-open={documentOpen} role="region" aria-labelledby="resume-name" tabIndex={-1}><ResumeDocument /></div>
+    <div ref={documentSection} id="resume-document" className="rx-document" data-open={documentOpen} role="region" aria-labelledby="resume-name" tabIndex={-1}><ResumeDocument /><button type="button" className="rx-document-return" onClick={toggleDocument}>Back to the résumé overview<span aria-hidden="true">↑</span></button></div>
   </article>
 }

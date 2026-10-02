@@ -1,4 +1,5 @@
 import './article-figures.css'
+import './evidence-figures.css'
 
 export interface ArticleFiguresProps {
   slug: string
@@ -12,6 +13,14 @@ const publicAsset = (path: string) => `${import.meta.env.BASE_URL}${path.replace
 const VIRALBENCH_ARTICLE_INLINE_IMAGE = '/images/viralbench-evidence-network.png';
 
 const VIRALBENCH_ARTICLE_IMAGE = '/images/viralbench-agent-harness-hero.png';
+
+function FigureSources({ links, label = 'Sources' }: { links: readonly (readonly [string, string])[]; label?: string }) {
+  return <span className="figure-sources"><span>{label}</span>{links.map(([href, text], index) => <span key={href}>{index > 0 && <span aria-hidden="true"> · </span>}<a href={href} target={href.startsWith('https://') ? '_blank' : undefined} rel={href.startsWith('https://') ? 'noreferrer' : undefined}>{text}</a></span>)}</span>
+}
+
+function TableHint() {
+  return <p className="figure-table-hint">Scroll the table to compare every column.</p>
+}
 
 const operatingStack = [
   ['01', 'Model', 'Reasoning, language, post-training, tool-use behavior'],
@@ -71,6 +80,7 @@ function HallOfShameFigure() {
       </div>
       <figcaption id="hall-of-shame-caption">
         Quantity errors made the abstract management problem physical: locally plausible actions accumulated into an incoherent operating policy.
+        <FigureSources links={[["#source-s01", "Andon Café evaluation"], ["#source-s02", "Launch report"]]} />
       </figcaption>
     </figure>
   );
@@ -100,6 +110,7 @@ function AuthoritySpectrum() {
       </div>
       <figcaption id="authority-spectrum-caption">
         The same headline can conceal four different systems. This article reserves “AI-operated” for recurring control over meaningful business decisions.
+        <FigureSources label="Basis" links={[["#source-s18", "Editorial case inventory and claim limits"]]} />
       </figcaption>
     </figure>
   );
@@ -121,12 +132,14 @@ function PolicyLeakFigure() {
         {paths.map((path) => path.map((item, index) => (
           <div key={`${path[0]}-${item}`} data-column={index + 1}>
             {index === 0 ? <span>0{paths.indexOf(path) + 1}</span> : null}
+            <small className="figure-cell-label">{['Post-training habit', 'Local action', 'Company policy'][index]}</small>
             <strong>{item}</strong>
           </div>
         )))}
       </div>
       <figcaption id="policy-leak-caption">
         A locally reasonable assistant response can become an unstable business rule when the system lacks a durable ledger, constraint, or approval threshold.
+        <FigureSources links={[["#source-s05", "Project Vend"], ["#source-s06", "Phase two"]]} />
       </figcaption>
     </figure>
   );
@@ -139,7 +152,7 @@ function BehaviorMatrix() {
       <div className="toll-snapshot__scroll" role="region" aria-labelledby="behavior-matrix-caption" tabIndex={0}>
         <table>
           <caption className="sr-only">Observed AI-manager behavior patterns and containment responses</caption>
-          <thead><tr><th>Manager</th><th>Environment</th><th>Failure path</th><th>Containment response</th></tr></thead>
+          <thead><tr><th scope="col">Manager</th><th scope="col">Environment</th><th scope="col">Failure path</th><th scope="col">Containment response</th></tr></thead>
           <tbody>
             {behaviorMatrix.map((row) => (
               <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th scope="row" key={cell}>{cell}</th> : <td key={cell}>{cell}</td>)}</tr>
@@ -147,7 +160,8 @@ function BehaviorMatrix() {
           </tbody>
         </table>
       </div>
-      <figcaption id="behavior-matrix-caption">Patterns are system-and-environment observations, not fixed personalities of the named base models.</figcaption>
+      <TableHint />
+      <figcaption id="behavior-matrix-caption">Patterns are system-and-environment observations, not fixed personalities of the named base models.<FigureSources label="Basis" links={[["#source-s18", "Case inventory and underlying evidence"]]} /></figcaption>
     </figure>
   );
 }
@@ -177,7 +191,7 @@ function HumanCompanyFigure() {
           <ul>{humans.map((item) => <li key={item}>{item}</li>)}</ul>
         </div>
       </div>
-      <figcaption id="human-company-caption">The public persona sits above legal, financial, physical, and recovery work that remained human in every reviewed live case.</figcaption>
+      <figcaption id="human-company-caption">The public persona sits above legal, financial, physical, and recovery work that remained human in every reviewed live case.<FigureSources links={[["#source-s02", "Andon Café"], ["#source-s06", "Project Vend"], ["#source-s17", "Physical-operation reporting"]]} /></figcaption>
     </figure>
   );
 }
@@ -198,6 +212,7 @@ function EconomicsStack() {
       </div>
       <figcaption id="economics-stack-caption">
         Public dashboards frequently stop near the top of the stack. No reviewed case established the bottom layer for an end-to-end general-purpose manager.
+        <FigureSources links={[["#source-s01", "Café evaluation"], ["#source-s03", "Market dashboard"], ["#source-s16", "Reported operating costs"]]} />
       </figcaption>
     </figure>
   );
@@ -218,6 +233,7 @@ function OperatingStack() {
       </div>
       <figcaption id="operating-stack-caption">
         Changing any layer can change the observed manager. Base-model comparisons that omit architecture, permissions, and environment overstate what the model name explains.
+        <FigureSources label="Basis" links={[["#source-s18", "Editorial case inventory"]]} />
       </figcaption>
     </figure>
   );
@@ -232,7 +248,7 @@ function SimulationBoundary() {
         <div aria-hidden="true" className="ai-simulation-boundary__divider"><span>≠</span></div>
         <div><span>Cannot establish</span><strong>A viable real business</strong><p>Actual demand, leases, labor, physical friction, legal liability, or fully burdened profit.</p></div>
       </div>
-      <figcaption id="simulation-boundary-caption">A simulation is a test rig. Its score is not a store's income statement.</figcaption>
+      <figcaption id="simulation-boundary-caption">A simulation is a test rig. Its score is not a store's income statement.<FigureSources links={[["#source-s09", "Vending-Bench"], ["#source-s10", "Arena"], ["#source-s11", "RetailBench"]]} /></figcaption>
     </figure>
   );
 }
@@ -308,6 +324,7 @@ function OwnershipStackDiagram() {
       </div>
       <figcaption id="ownership-stack-caption">
         “Owner” changes meaning at each layer. Solid economic ownership sits beside contracts, services, and creditor controls; none of the private percentages divides the state-owned pavement.
+        <FigureSources links={[["#source-s6", "Ferrovial Fact Book"], ["#source-s7", "FHWA project record"]]} />
       </figcaption>
     </figure>
   );
@@ -331,6 +348,7 @@ function CashFlowWaterfall() {
       </div>
       <figcaption id="cash-waterfall-caption">
         High EBITDA does not equal cash available to equity. Collection, maintenance, leverage, reserves, and public sharing sit between traffic and distributions.
+        <FigureSources label="Basis" links={[["#source-s6", "Sponsor disclosures"], ["#source-s21", "TxDOT project reporting"]]} />
       </figcaption>
     </figure>
   );
@@ -348,12 +366,12 @@ function DfwOperatingSnapshot() {
           <caption className="sr-only">2025 sponsor-reported operating snapshot for DFW toll-road projects</caption>
           <thead>
             <tr>
-              <th>Project</th>
-              <th>Revenue</th>
-              <th>Adj. EBITDA</th>
-              <th>Margin</th>
-              <th>Net debt / EBITDA</th>
-              <th>Revenue / transaction</th>
+              <th scope="col">Project</th>
+              <th scope="col">Revenue</th>
+              <th scope="col">Adj. EBITDA</th>
+              <th scope="col">Margin</th>
+              <th scope="col">Net debt / EBITDA</th>
+              <th scope="col">Revenue / transaction</th>
             </tr>
           </thead>
           <tbody>
@@ -370,8 +388,10 @@ function DfwOperatingSnapshot() {
           </tbody>
         </table>
       </div>
+      <TableHint />
       <figcaption id="dfw-snapshot-caption">
         These are Ferrovial-adjusted operating measures, not audited project cash available for debt service. The leverage ratio is the more revealing contrast: LBJ carries the tightest financial cushion.
+        <FigureSources links={[["#source-s6", "Ferrovial Fact Book · May 2026"]]} />
       </figcaption>
     </figure>
   );
@@ -393,13 +413,13 @@ function ModelScreeningSnapshot() {
           <caption className="sr-only">Finite-life 2025-base valuation screening scenarios</caption>
           <thead>
             <tr>
-              <th>Project</th>
-              <th>Bear EV</th>
-              <th>Base EV</th>
-              <th>Bull EV</th>
-              <th>Base equity</th>
-              <th>Base discount rate</th>
-              <th>Input status</th>
+              <th scope="col">Project</th>
+              <th scope="col">Bear EV</th>
+              <th scope="col">Base EV</th>
+              <th scope="col">Bull EV</th>
+              <th scope="col">Base equity</th>
+              <th scope="col">Base discount rate</th>
+              <th scope="col">Input status</th>
             </tr>
           </thead>
           <tbody>
@@ -417,8 +437,10 @@ function ModelScreeningSnapshot() {
           </tbody>
         </table>
       </div>
+      <TableHint />
       <figcaption id="model-screen-caption">
         The model holds EBITDA margins constant and simplifies maintenance, sharing, cash tax, and handback reserves. It subtracts modeled debt from enterprise value rather than building a levered debt-service schedule; it omits refinancing, swaps, working capital, tax basis, and explicit growth capex. SH 130’s $81.7M revenue, $68M EBITDA, and $450M debt are analyst estimates. Scenario width—not the base case—is the main conclusion.
+        <FigureSources label="DFW inputs" links={[["#source-s6", "Ferrovial Fact Book"]]} />
       </figcaption>
     </figure>
   );
@@ -460,6 +482,7 @@ function Sh130RestructuringDiagram() {
       </div>
       <figcaption id="sh130-diagram-caption">
         The original equity was eliminated, creditors received new claims, and the road continued operating. Current materials support an SVP-controlled majority and a federal minority; the more granular 2Q 2024 estimate is date-qualified and rounds to 101%.
+        <FigureSources links={[["#source-s11", "U.S. DOT financing record"], ["#source-s12", "FHWA report"], ["#source-s13", "Dated pension memorandum"]]} />
       </figcaption>
     </figure>
   );
@@ -496,6 +519,7 @@ function Sh288BuyoutDiagram() {
       </div>
       <figcaption id="sh288-diagram-caption">
         Texas did not repurchase its land. It paid to terminate the finite private bundle of toll, operating, and revenue rights.
+        <FigureSources links={[["#source-s2", "Commission payment record"], ["#source-s4", "Abertis acquisition"], ["#source-s5", "2025 accounts"]]} />
       </figcaption>
     </figure>
   );
@@ -547,6 +571,7 @@ function ArticleVisual({ placement }: { placement: 'hero' | 'inline' }) {
         fetchPriority={isHero ? 'high' : 'auto'}
         loading={isHero ? 'eager' : 'lazy'}
       />
+      {!isHero && <figcaption>Conceptual illustration of the evidence layer. This is not an observed run or a measured network.</figcaption>}
     </figure>
   );
 }
@@ -563,6 +588,7 @@ function LoopRail() {
 function ArchitectureDiagram() {
   return (
     <figure className="viralbench-architecture" aria-labelledby="viralbench-architecture-caption">
+      <div className="toll-figure-label"><span>Proposed control flow</span><span>Live agent / bounded engineering</span></div>
       <div className="viralbench-architecture__rail">
         <span>Live environment</span>
         <span>Independent controls</span>
@@ -589,8 +615,21 @@ function ArchitectureDiagram() {
           <p>Diagnose → patch → replay → draft canary → promote or revert</p>
         </div>
       </div>
+      <details className="figure-repository-detail">
+        <summary>Inspect the audited inner-loop tools</summary>
+        <dl>
+          <div><dt>Research</dt><dd><code>call_lightreel_api</code></dd></div>
+          <div><dt>Inspect references</dt><dd><code>view_media</code></dd></div>
+          <div><dt>Create images</dt><dd><code>generate_image</code></dd></div>
+          <div><dt>Render and review</dt><dd><code>preview_slideshow</code></dd></div>
+          <div><dt>Submit</dt><dd><code>publish_slideshow</code></dd></div>
+        </dl>
+        <p>These actions are present in the audited marketing agent. The recorder, independent evaluator, and Codex promotion path above describe the proposed outer loop.</p>
+        <a href="https://github.com/JibranK12345/Viral-Bench/blob/5f5f57e251023ceb37961c0fc2c808f67ceb71eb/marketing-agent.ts" target="_blank" rel="noreferrer">Audited source · 5f5f57e ↗</a>
+      </details>
       <figcaption id="viralbench-architecture-caption">
-        ViralBench runs the live marketing-agent loop. Codex improves the system through isolated experiments, independent evaluation, and locked deployment gates.
+        ViralBench runs the live marketing-agent loop. The proposed Codex layer improves the system through isolated experiments, independent evaluation, and locked deployment gates.
+        <FigureSources label="Design basis" links={[["https://github.com/JibranK12345/Viral-Bench/blob/5f5f57e251023ceb37961c0fc2c808f67ceb71eb/marketing-agent.ts", "Audited agent source"], ["#what-i-mean-by-codex-as-a-harness", "Outer-loop design"]]} />
       </figcaption>
     </figure>
   );

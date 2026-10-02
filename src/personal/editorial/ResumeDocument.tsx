@@ -1,15 +1,8 @@
 import type { MouseEvent } from 'react'
 import { resumeProfile as profile, resumeReview } from '../profile-copy'
 import { displayDate } from './types'
+import { resumeSections as sections, resumeSectionHref, type ResumeSection } from './resume-navigation'
 import './resume.css'
-
-const sections = [
-  ['experience', 'Experience'],
-  ['selected-work', 'Selected work'],
-  ['education', 'Education'],
-  ['recognition', 'Awards & leadership'],
-  ['skills', 'Skills & tools'],
-] as const
 
 const roleNotes: Record<string, { id: string; link?: [string, string] }> = {
   'Chegg, Inc.': { id: 'chegg' },
@@ -27,8 +20,10 @@ function roleNote(organization: string) {
   }
 }
 
-function jumpToSection(event: MouseEvent<HTMLAnchorElement>, id: string) {
-  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+function jumpToSection(event: MouseEvent<HTMLAnchorElement>, id: ResumeSection) {
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+  // A different URL is handled by the page's arrival effect, including new tabs.
+  if (location.hash !== event.currentTarget.hash) return
   event.preventDefault()
   const heading = document.getElementById(`resume-${id}`)
   heading?.focus({ preventScroll: true })
@@ -77,15 +72,15 @@ export default function ResumeDocument() {
         <div className="cv-rail-inner">
           <p className="cv-rail-label">Contents</p>
           <nav className="cv-desktop-nav" aria-label="Résumé sections">
-            {sections.map(([id, label], index) => <a key={id} href="#/resume" onClick={event => jumpToSection(event, id)}>
+            {sections.map(([id, label], index) => <a key={id} href={resumeSectionHref(id)} onClick={event => jumpToSection(event, id)}>
               <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{label}
             </a>)}
           </nav>
           <details className="cv-mobile-nav">
             <summary>Explore this résumé<span aria-hidden="true">+</span></summary>
             <nav aria-label="Résumé sections on mobile">
-              {sections.map(([id, label], index) => <a key={id} href="#/resume" onClick={event => {
-                if (!event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+              {sections.map(([id, label], index) => <a key={id} href={resumeSectionHref(id)} onClick={event => {
+                if (event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
                   event.currentTarget.closest('details')?.removeAttribute('open')
                 }
                 jumpToSection(event, id)

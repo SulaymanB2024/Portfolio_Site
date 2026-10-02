@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { Art } from './Art'
 import './home-flow.css'
-import { heroUiOpacity, scrollFlowProgress, settleFlow } from './flow-timing'
+import { heroUiOpacity, settleFlow } from './flow-timing'
+import { homeHeroProgress } from './home-scroll-timing'
 import { createTextFlow } from './text-flow'
 
 export function HomeScene({ dark }: { dark: boolean }) {
@@ -41,7 +42,7 @@ export function HomeScene({ dark }: { dark: boolean }) {
     }
     function measure() {
       const rect = stage!.getBoundingClientRect()
-      target = scrollFlowProgress(rect.top, rect.height, innerHeight, reduced.matches)
+      target = homeHeroProgress(rect.top, rect.height, innerHeight, reduced.matches)
       settlingUntil = performance.now() + 850
       request()
     }

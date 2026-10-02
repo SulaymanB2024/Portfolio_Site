@@ -101,3 +101,17 @@ test('autoplay repeatedly dissolves and reforms, while pause, manual input and r
   dispose(study.group)
   dispose(source)
 })
+
+test('phone detail reduces the retained point draw range without reallocating samples', () => {
+  const { source } = fixture()
+  const study = createLionStudy(source)
+  const points = study.group.children.find(node => node instanceof THREE.Points) as THREE.Points
+  const positions = points.geometry.getAttribute('position')
+  study.setDetail(true)
+  assert.equal(points.geometry.drawRange.count, 24000)
+  assert.equal(points.geometry.getAttribute('position'), positions)
+  study.setDetail(false)
+  assert.equal(points.geometry.drawRange.count, 42000)
+  assert.equal(positions.count, 42000)
+  dispose(study.group); dispose(source)
+})

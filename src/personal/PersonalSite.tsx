@@ -3,6 +3,7 @@ import { flushSync } from 'react-dom'
 import { Art } from './Art'
 import HomeWriting from './HomeWriting'
 import { HomeScene } from './HomeScene'
+import { installHomeScrollMotion } from './home-scroll-motion'
 import { ProjectTransitionProvider } from './ProjectTransition'
 import { contact, projects, type ArtKind } from './content'
 import { siteCopy, siteMetadata, withWritingCopy } from './site-copy'
@@ -22,6 +23,7 @@ import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
 import './editorial/artwork-continuity.css'
 import './personal.css'
 import './editorial/editorial.css'
+import './mobile-polish.css'
 
 const ResumePage = lazy(() => import('./editorial/ResumePage'))
 const CaseStudyPage = lazy(() => import('./projects/CaseStudyPage'))
@@ -169,7 +171,7 @@ function SitePages() {
     <a className="skip-link" href="#main-content" onClick={e => { e.preventDefault(); document.getElementById('main-content')?.focus() }}>Skip to content</a>
     <header className="personal-header">
       <a href="#/" className="identity" aria-label="Sulayman Bowles — home"><span className="identity-name">Sulayman Bowles</span></a>
-      <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug], index) => <a key={slug} href={`#/${slug}`} aria-current={section === (slug || 'home') ? 'page' : undefined} onClick={() => setMenuOpen(false)}><span className="nav-number" aria-hidden="true">0{index + 1}</span>{item}</a>)}</nav>
+      <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug], index) => <a key={slug} href={`#/${slug}`} aria-current={section === (slug || 'home') ? 'page' : undefined} onClick={event => { if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; setMenuOpen(false); if (menuOpen && route === slug) requestAnimationFrame(() => menuButton.current?.focus({ preventScroll: true })) }}><span className="nav-number" aria-hidden="true">0{index + 1}</span>{item}</a>)}</nav>
       <div className="header-end"><button className="appearance-toggle" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setDark(!dark)}><span aria-hidden="true">◐</span></button><button ref={menuButton} className="nav-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button></div>
     </header>
     <main ref={main} id="main-content" tabIndex={-1} key={route}>
@@ -188,8 +190,13 @@ function SectionLabel({ children, end }: { children: React.ReactNode; end?: Reac
 }
 
 function Home({ dark }: { dark: boolean }) {
+  const stage = useRef<HTMLElement>(null)
+  useLayoutEffect(() => {
+    const site = stage.current?.closest<HTMLElement>('.home-site')
+    if (site) return installHomeScrollMotion(site)
+  }, [])
   return <>
-    <section className="home-scroll-stage" aria-labelledby="home-title"><div className="home-hero">
+    <section ref={stage} className="home-scroll-stage" aria-labelledby="home-title"><div className="home-hero">
       <div className="hero-copy">
         <h1 id="home-title" aria-label={siteCopy.home.title}>{siteCopy.home.headline[0]}<br />{siteCopy.home.headline[1]}<br />{siteCopy.home.headline[2]}<span className="period">.</span></h1>
         <p className="hero-description">{siteCopy.home.description}</p>

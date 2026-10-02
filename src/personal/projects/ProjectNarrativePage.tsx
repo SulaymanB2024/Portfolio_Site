@@ -3,6 +3,7 @@ import { projects, type Project } from '../content'
 import { ProjectStudy } from '../WorkCollection'
 import { ProjectDiagram } from './ProjectDiagrams'
 import { workNarratives } from './work-narratives'
+import ProductEvidence from './ProductEvidence'
 import './project-narrative.css'
 
 function StoryLink({ href, children, className = '' }: { href: string; children: ReactNode; className?: string }) {
@@ -120,6 +121,7 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
       {index === 0 ? <div className="story-opening-layout"><div><h2 id={`${p.slug}-${chapter.id}-title`}>{chapter.title}</h2><p className="story-opening">{narrative.opening}</p></div><div className="story-prose">{chapter.body.map(text => <p key={text}>{text}</p>)}{chapter.note && <p className="story-note">{chapter.note}</p>}</div></div>
       : index === 1 ? <div className="story-system-layout"><div className="story-system-copy"><h2 id={`${p.slug}-${chapter.id}-title`}>{chapter.title}</h2><div className="story-prose">{chapter.body.map(text => <p key={text}>{text}</p>)}</div>{chapter.note && <p className="story-note">{chapter.note}</p>}</div><ProjectDiagram slug={p.slug} /></div>
       : <><div className="story-practice-intro"><div><h2 id={`${p.slug}-${chapter.id}-title`}>{chapter.title}</h2><WorkingArtifact slug={p.slug} /></div><div className="story-prose">{chapter.body.map(text => <p key={text}>{text}</p>)}{chapter.note && <p className="story-note">{chapter.note}</p>}</div></div><div className="story-decisions"><span className="mono story-decisions-label">A closer reading</span><div>{p.areas.map((area, i) => <details key={area.title} className="story-decision" open={i === 0}><summary><span className="mono" aria-hidden="true">0{i + 1}</span><h3>{area.title}</h3><span className="story-disclosure-glyph" aria-hidden="true">+</span></summary><p>{area.description}</p></details>)}</div></div></>}
+      {p.slug === 'internshipdeadlines' && index === 1 && <ProductEvidence kind="internshipdeadlines" />}
     </section>)}
     <section className="story-conclusion" aria-label="Perspective"><span className="mono">What I take forward</span><p>{narrative.takeaway}</p><div className="story-related"><span className="mono">Follow the thread</span><div>{narrative.links.map(link => <a key={link.href} href={link.href.startsWith('./') ? `${import.meta.env.BASE_URL}${link.href.slice(2)}` : link.href} {...(link.href.startsWith('http') ? { target: '_blank', rel: 'noreferrer' } : {})}><div><h3>{link.label}</h3><p>{link.description}</p></div><span aria-hidden="true">↗</span></a>)}</div></div></section>
     <div className="story-tail">

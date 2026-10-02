@@ -12,16 +12,16 @@
 .journal-lead .journal-essay-copy { grid-column: 1 / -1; }
 .journal-lead h3 { max-width: 600px; font-size: clamp(35px, 3.7vw, 51px); line-height: 1.12; }
 .journal-lead .journal-deck { max-width: 560px; font-size: 18px; line-height: 1.6; }
-.journal-art { aspect-ratio: 1; overflow: hidden; width: 120px; pointer-events: none; background: transparent; isolation: auto; }
-.journal-lead .journal-art { grid-column: 2; grid-row: 2; width: 100%; max-width: 280px; justify-self: end; }
+.journal-art { aspect-ratio: 1; overflow: hidden; width: 180px; pointer-events: none; background: transparent; isolation: auto; }
+.journal-lead .journal-art { grid-column: 1 / -1; grid-row: 2; width: min(100%, 340px); justify-self: end; }
 .journal-read { display: inline-flex; align-items: center; gap: 18px; width: fit-content; min-height: 44px; font-size: 11px; text-transform: uppercase; }
 .journal-read > span, .journal-all > span { display: inline-block; transition: transform .2s ease; font: 16px/1 Arial, sans-serif; }
 .journal-lead .journal-read { grid-column: 1 / -1; grid-row: 3; align-self: end; }
 .journal-essay:hover .journal-read > span { transform: translate(3px, -3px); }
 .journal-companions { display: grid; align-content: start; gap: 29px; }
-.journal-companion { display: grid; grid-template-columns: minmax(0, 1fr) 120px; align-items: start; gap: 14px 22px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.journal-companion { display: grid; grid-template-columns: minmax(0, 1fr) 180px; align-items: start; gap: 14px 22px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
 .journal-companion:last-child { border-bottom: 0; padding-bottom: 0; }
-.journal-companion .journal-deck { font-size: 14px; line-height: 1.6; margin-bottom: 15px; }
+.journal-companion .journal-deck { font-size: 16px; line-height: 1.6; margin-bottom: 15px; }
 .journal-companion h3 { font-size: clamp(24px, 2.2vw, 29px); }
 .journal-companion .journal-read { grid-column: 1; padding-top: 0; }
 .journal-all { display: flex; justify-content: space-between; align-items: center; min-height: 62px; margin-top: 38px; border-top: 1px solid var(--line); font-size: 11px; text-transform: uppercase; }
@@ -29,8 +29,8 @@
 @media (max-width: 1050px) {
   .journal-layout { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 30px; }
   .journal-lead { padding-right: 30px; grid-template-columns: minmax(0, 1fr) minmax(0, 220px); }
-  .journal-companion { grid-template-columns: minmax(0, 1fr) 90px; gap: 15px; }
-  .journal-companion .journal-art { width: 90px; }
+  .journal-companion { grid-template-columns: minmax(0, 1fr) 150px; gap: 15px; }
+  .journal-companion .journal-art { width: 150px; }
 }
 @media (max-width: 760px) {
   .home-writing.home-journal { padding: 60px 0 50px; }
@@ -39,19 +39,18 @@
   .journal-heading h2 { font-size: 43px; }
   .journal-layout { grid-template-columns: 1fr; gap: 34px; padding-top: 29px; }
   .journal-lead { padding: 0 0 30px; border-right: 0; border-bottom: 1px solid var(--line); grid-template-columns: 1fr; gap: 15px; }
-  .journal-lead .journal-art { grid-column: 1; grid-row: 2; width: min(220px, 100%); margin-top: 6px; }
+  .journal-lead .journal-art { grid-column: 1; grid-row: 2; width: min(320px, 100%); margin-top: 6px; }
   .journal-lead .journal-read { grid-column: 1; grid-row: 3; }
   .journal-lead h3 { font-size: clamp(32px, 6vw, 43px); }
   .journal-lead .journal-deck { font-size: 17px; }
-  .journal-companion { grid-template-columns: minmax(0, 1fr) 100px; gap: 15px 20px; }
-  .journal-companion .journal-art { width: 100px; }
+  .journal-companion { grid-template-columns: minmax(0, 1fr); gap: 15px; }
+  .personal-site .home-journal .journal-companion .journal-art { width: min(220px, 100%); justify-self: end; }
   .journal-companion h3 { font-size: 26px; }
-  .journal-companion .journal-deck { font-size: 15px; }
+  .journal-companion .journal-deck { font-size: 17px; }
   .journal-all { margin-top: 30px; }
 }
 @media (max-width: 370px) {
-  .journal-companion { grid-template-columns: minmax(0, 1fr) 78px; gap: 14px; }
-  .journal-companion .journal-art { width: 78px; }
+  .journal-companion { gap: 14px; }
   .journal-companion h3 { font-size: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { .journal-read > span, .journal-all > span { transition: none; } }

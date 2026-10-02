@@ -4,6 +4,7 @@ import { inlineText, markdownToReact } from './Markdown'
 import { articleHref } from './links'
 import ArtCube from './ArtCube'
 import AtlasFigure from './AtlasFigure'
+import ProductEvidence from '../projects/ProductEvidence'
 import { getArticleGenerativeArtwork } from './generative/manifest'
 import { articleReturnHref, articleSection, relatedArticles, sectionHref } from './library'
 import ReaderNavigation from './ReaderNavigation'
@@ -19,7 +20,8 @@ const ArticleFigures = lazy(() => import('./ArticleFigures').then(module => ({ d
 const sectionId = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
 function Figures({ slug, id, position }: { slug: string; id: string; position: 'before' | 'after' }) {
-  if (slug === 'atlas-building-an-evidence-console' && id === 'product' && position === 'after') return <AtlasFigure />
+  if (slug === 'atlas-building-an-evidence-console' && id === 'product' && position === 'after') return <ProductEvidence kind="atlas" />
+  if (slug === 'atlas-building-an-evidence-console' && id === 'source-and-render' && position === 'after') return <AtlasFigure />
   if (!['the-first-ai-managers', 'who-owns-texas-toll-roads', 'viralbench-codex-agent-harness'].includes(slug)) return null
   return <Suspense fallback={null}><ArticleFigures slug={slug} sectionId={id} position={position} /></Suspense>
 }
@@ -117,7 +119,7 @@ function Table({ table }: { table: ArticleTable }) {
 }
 
 function Section({ section, tables = [], slug }: { section: ArticleSection; tables?: ArticleTable[]; slug: string }) {
-  return <section id={section.id} className="reader-section"><h2>{section.title}</h2><Figures slug={slug} id={section.id} position="before" />{section.markdown && markdownToReact(section.markdown)}{section.blocks?.map((block, index) => block.kind === 'markdown' ? <div key={index}>{markdownToReact(block.markdown)}</div> : <Table key={index} table={tables.find(table => table.id === block.tableId)!} />)}{section.paragraphs?.map((paragraph, index) => <p key={index}>{inlineText(paragraph, `paragraph-${index}`)}</p>)}{section.bullets?.length ? <ul>{section.bullets.map((bullet, index) => <li key={index}>{inlineText(bullet, `bullet-${index}`)}</li>)}</ul> : null}{section.table && <Table table={section.table} />}{section.codeExamples?.map(example => <div className="reader-code" key={example.title}><h3>{example.title}</h3><p>{inlineText(example.description)}</p><pre><code className={`language-${example.language}`}>{example.code}</code></pre></div>)}<Figures slug={slug} id={section.id} position="after" /></section>
+  return <section id={section.id} className="reader-section"><h2>{section.title}</h2><Figures slug={slug} id={section.id} position="before" />{section.markdown && markdownToReact(section.markdown)}{section.blocks?.map((block, index) => block.kind === 'markdown' ? <div key={index}>{markdownToReact(block.markdown)}</div> : <Table key={index} table={tables.find(table => table.id === block.tableId)!} />)}{section.paragraphs?.map((paragraph, index) => <p key={index}>{inlineText(paragraph, `paragraph-${index}`)}</p>)}{section.bullets?.length ? <ul>{section.bullets.map((bullet, index) => <li key={index}>{inlineText(bullet, `bullet-${index}`)}</li>)}</ul> : null}{section.table && !(slug === 'atlas-building-an-evidence-console' && section.id === 'source-and-render') && <Table table={section.table} />}{section.codeExamples?.map(example => <div className="reader-code" key={example.title}><h3>{example.title}</h3><p>{inlineText(example.description)}</p><pre><code className={`language-${example.language}`}>{example.code}</code></pre></div>)}<Figures slug={slug} id={section.id} position="after" /></section>
 }
 
 function Cases({ cases, filters }: { cases: ArticleCase[]; filters?: { value: string; label: string }[] }) {

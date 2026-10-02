@@ -16,12 +16,11 @@ function JournalEssay({ article, lead = false }: { article: ArticleSummary; lead
   const artwork = getArticleGenerativeArtwork(article.path)
   return <a className={`journal-essay ${lead ? 'journal-lead' : 'journal-companion'}`} href={`#/writing/${article.slug}`}>
     <div className="journal-essay-copy">
-      <p className="journal-category mono">{article.category}</p>
       <h3>{article.displayTitle || article.title}</h3>
       <p className="journal-deck">{homeWritingDecks[article.slug] ?? article.subtitle}</p>
       <div className="journal-meta mono"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span>{article.readTime}</span></div>
     </div>
-    <div className="journal-art"><AnimatedArtwork artwork={artwork} size={lead ? 300 : 180} paused={paused} embedded decorative /></div>
+    <div className="journal-art"><AnimatedArtwork artwork={artwork} size={lead ? 400 : 240} paused={paused || !lead} embedded decorative /></div>
     <span className="journal-read mono">{siteCopy.writing.read}<span aria-hidden="true">↗</span></span>
   </a>
 }

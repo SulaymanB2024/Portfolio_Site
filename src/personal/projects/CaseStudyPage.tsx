@@ -3,6 +3,7 @@ import { caseStudies, chapterId, type CaseStudy } from './case-studies'
 import { StudyArtwork } from './StudyArtwork'
 import AtlasEvidence from './AtlasEvidence'
 import DecisionExplorer from './DecisionExplorer'
+import ProductEvidence from './ProductEvidence'
 import payrollRecord from '../../../public/research/payrollpro-system-record.json'
 import './case-studies.css'
 
@@ -26,7 +27,7 @@ function AtlasStory() {
       ['Connect', 'Map internal links and preserve crawl context in a SQLite-backed run.'],
       ['Review', 'Move from an observation to a finding with its supporting evidence still attached.'],
       ['Export', 'Carry that context into structured reports and implementation work.'],
-    ].map(([title,detail],index)=><li key={title}><span className="mono">0{index+1}</span><div><h3>{title}</h3><p>{detail}</p></div></li>)}</ol></Chapter>
+    ].map(([title,detail],index)=><li key={title}><span className="mono">0{index+1}</span><div><h3>{title}</h3><p>{detail}</p></div></li>)}</ol><ProductEvidence kind="atlas" /></Chapter>
     <Chapter index={2} label="Inspect the evidence"><h2>Same response code.<br /><em>Different content states.</em></h2><p>These two retained pages from Quotes to Scrape make the distinction tangible. Select a page to inspect what was actually present in its source.</p><AtlasEvidence /></Chapter>
     <Chapter index={3} label="Decisions & tradeoffs"><h2>The unknowns stay visible.</h2><div className="study-decisions"><div><h3>Separate observation from severity.</h3><p>A missing canonical tag is an observation. Its significance depends on the page and the site. The demonstration records the absence without assigning a defect.</p></div><div><h3>Keep source and rendered states distinct.</h3><p>The JavaScript sample contains data records without quote-card markup. That is a reason to render the page before judging coverage.</p></div><div><h3>Make a failed measurement inspectable.</h3><p>Provider gaps and failed fetches remain gaps. Keeping them separate from site findings makes the review more useful.</p></div></div><p className="study-status-note">Project record, July 2026: the core crawl and evidence workflow had shipped; provider integration and scoring policy remained in development.</p></Chapter>
     <Chapter index={4} label="Source material"><Source href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" title="The Atlas repository">The crawler, audit workflow, run persistence, and documented implementation limits.</Source><Source href={`${import.meta.env.BASE_URL}research/atlas-open-corpus-run-2026-07-16.json`} title="The retained sample" download>Two source captures from July 16, 2026. The data used in the explorer above.</Source><Source href="#/writing/atlas-building-an-evidence-console" title="Building Atlas">The product decisions and improvement cycle behind the console.</Source></Chapter>

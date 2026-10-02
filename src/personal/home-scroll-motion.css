@@ -1,0 +1,36 @@
+/* Small movements on native copy; the hero and shared sculpture surfaces keep their own timelines. */
+.home-site[data-home-scroll-motion] [data-home-reveal='heading'],
+.home-site[data-home-scroll-motion] [data-home-reveal='text'] {
+  opacity: calc(.76 + .24 * var(--home-reveal, 1));
+  translate: 0 calc((1 - var(--home-reveal, 1)) * 12px);
+}
+.home-site[data-home-scroll-motion] [data-home-reveal='heading'] {
+  translate: 0 calc((1 - var(--home-reveal, 1)) * 20px);
+}
+.home-site[data-home-scroll-motion] [data-home-reveal='art'] {
+  translate: 0 calc((1 - var(--home-reveal, 1)) * 18px);
+  scale: calc(.975 + .025 * var(--home-reveal, 1));
+  transform-origin: center;
+}
+.home-site[data-home-scroll-motion] [data-home-reveal='rule-top'] { border-top-color: transparent; }
+.home-site[data-home-scroll-motion] [data-home-reveal='rule-bottom'] { border-bottom-color: transparent; }
+.home-site[data-home-scroll-motion] [data-home-reveal^='rule-'] { position: relative; }
+.home-site[data-home-scroll-motion] [data-home-reveal^='rule-']::before {
+  content: ''; position: absolute; left: 0; right: 0; height: 1px;
+  background: var(--line); transform: scaleX(var(--home-reveal, 1)); transform-origin: left;
+  pointer-events: none;
+}
+.home-site[data-home-scroll-motion] [data-home-reveal='rule-top']::before { top: -1px; }
+.home-site[data-home-scroll-motion] [data-home-reveal='rule-bottom']::before { bottom: -1px; }
+.home-site[data-home-scroll-motion] :is(.work-section-label,.journal-heading,.personal-footer)[data-home-reveal]::before { background: var(--ink); }
+.home-site[data-home-scroll-motion] .journal-all[data-home-reveal] { position: relative; }
+.home-site[data-home-scroll-motion] [data-home-reveal]:focus-within { opacity: 1; translate: none; scale: none; }
+@media (max-width: 760px) {
+  .home-site[data-home-scroll-motion] [data-home-reveal='heading'] { translate: 0 calc((1 - var(--home-reveal, 1)) * 10px); }
+  .home-site[data-home-scroll-motion] [data-home-reveal='text'],
+  .home-site[data-home-scroll-motion] [data-home-reveal='art'] { translate: 0 calc((1 - var(--home-reveal, 1)) * 6px); }
+}
+@media (prefers-reduced-motion: reduce), print {
+  .home-site[data-home-scroll-motion] [data-home-reveal] { opacity: 1; translate: none; scale: none; }
+  .home-site[data-home-scroll-motion] [data-home-reveal^='rule-']::before { transform: none; }
+}

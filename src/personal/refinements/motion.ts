@@ -17,7 +17,7 @@ export function installTextArrivals(root: HTMLElement) {
       const element = entry.target as HTMLElement
       observer.unobserve(element)
       pending.delete(element)
-      if (preference.matches || document.hidden || document.documentElement.dataset.artTransition === 'running' || ['leaving', 'arriving'].includes(document.documentElement.dataset.navTransition || '') || root.querySelector('[data-project-opening="true"]')) continue
+      if (preference.matches || document.hidden || element.closest('[data-home-scroll-motion]') || document.documentElement.dataset.artTransition === 'running' || ['leaving', 'arriving'].includes(document.documentElement.dataset.navTransition || '') || root.querySelector('[data-project-opening="true"]')) continue
       // Shared renderers use DOM bounds: moving their containers would move the GPU view.
       if (!element.animate || element.closest('.article-page, .hero-copy') || getComputedStyle(element).viewTransitionName !== 'none') continue
       const animation = element.animate([

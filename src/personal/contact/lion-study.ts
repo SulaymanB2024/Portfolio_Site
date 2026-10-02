@@ -59,6 +59,7 @@ export function createLionStudy(source: THREE.Object3D) {
   let playing = true
   let target = rest
   let seed = 7183
+  const dustGeometries: THREE.BufferGeometry[] = []
   const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296 }
 
   source.traverse(node => {
@@ -71,7 +72,7 @@ export function createLionStudy(source: THREE.Object3D) {
     geometry.deleteAttribute('tangent')
     const original = Array.isArray(node.material) ? node.material[0] : node.material
     const material = original instanceof THREE.MeshStandardMaterial ? original.clone() : new THREE.MeshStandardMaterial()
-    material.color.multiplyScalar(.48)
+    material.color.multiplyScalar(.40)
     material.metalness = 0
     material.roughness = .92
     material.emissiveIntensity = 0
@@ -83,7 +84,9 @@ export function createLionStudy(source: THREE.Object3D) {
       shader.fragmentShader = `uniform float lionField;\nvarying vec3 vLionPosition;\n${grain}\n${shader.fragmentShader}`
         .replace('#include <clipping_planes_fragment>', `#include <clipping_planes_fragment>
           float release = lionRelease(vLionPosition, lionField);
-          if (lionField > .005 && release > lionHash(floor(vLionPosition * 460.0))) discard;
+          // A sparse etched remainder keeps the source silhouette legible
+          // while the released ink moves away from it.
+          if (lionField > .005 && release * .88 > lionHash(floor(vLionPosition * 460.0))) discard;
         `)
         .replace('#include <color_fragment>', `#include <color_fragment>
           float lines = (vLionPosition.y + vLionPosition.x * .18) * 96.0;
@@ -92,7 +95,7 @@ export function createLionStudy(source: THREE.Object3D) {
           diffuseColor.rgb *= 1.0 - hatch * .18;
         `)
     }
-    material.customProgramCacheKey = () => 'contact-lion-current-v2'
+    material.customProgramCacheKey = () => 'contact-lion-current-v3'
     group.add(new THREE.Mesh(geometry, material))
 
     // Area-weighted surface sampling keeps the ink density independent of scan topology.
@@ -133,6 +136,7 @@ export function createLionStudy(source: THREE.Object3D) {
       seeds[i] = random()
     }
     const dustGeometry = new THREE.BufferGeometry()
+    dustGeometries.push(dustGeometry)
     dustGeometry.setAttribute('position', new THREE.BufferAttribute(samples, 3))
     dustGeometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3))
     dustGeometry.setAttribute('seed', new THREE.BufferAttribute(seeds, 1))
@@ -162,7 +166,7 @@ export function createLionStudy(source: THREE.Object3D) {
             cos(seed * 31.0 + lionTime * .12), sin(seed * 19.0)) * .014 * spread;
           vec3 facing = normalize(normalMatrix * lionNormal(position, normal, lionField));
           float light = max(dot(facing, normalize(vec3(-.4, .8, .5))), 0.0);
-          vInk = facing.z > -.12 ? .08 + light * .30 : -1.0;
+          vInk = facing.z > -.12 ? .06 + light * .26 : -1.0;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(trace, 1.0);
           gl_PointSize = (1.55 + seed * .95) * pixelRatio;
         }
@@ -194,6 +198,9 @@ export function createLionStudy(source: THREE.Object3D) {
       } else target = field.value
     },
     setPixelRatio(value: number) { pixelRatio.value = value },
+    setDetail(narrow: boolean) {
+      for (const geometry of dustGeometries) geometry.setDrawRange(0, narrow ? 24000 : 42000)
+    },
     advance(delta: number, reducedMotion: boolean) {
       const step = Math.min(Math.max(delta, 0), .05)
       if (reducedMotion && playing) { playing = false; target = field.value }
