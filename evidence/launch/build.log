@@ -141,7 +141,7 @@ dist/assets/preload-helper-O_cJ1neM.js                      220.06 kB │ gzip: 
 dist/assets/Scene-ACmfnMGF.js                               282.29 kB │ gzip:  87.64 kB
 dist/assets/GLTFLoader-8RDXn2cv.js                          782.26 kB │ gzip: 199.87 kB
 
-✓ built in 1.22s
+✓ built in 779ms
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
@@ -156,7 +156,7 @@ transforming...
 ✓ 14 modules transformed.
 rendering chunks...
 computing gzip size...
-.cache/public-site/render-public-site.js  66.67 kB │ gzip: 19.29 kB
+.cache/public-site/render-public-site.js  66.79 kB │ gzip: 19.35 kB
 
-✓ built in 390ms
+✓ built in 248ms
 Generated 17 indexable pages, a 404, and discovery files.

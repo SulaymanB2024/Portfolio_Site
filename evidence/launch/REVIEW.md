@@ -10,5 +10,7 @@ Validation:
 - npm run verify:release:17 readable canonical documents,65 internal direct redirects,87 asset references, sitemap/robots/llms,404 and lockfile pass.
 - Built preview with production security headers: current homepage and ready 3D object; gallery search reduces toAtlas; gallery-to-reader opening preserves content and correct canonical;390px phone article and résumé have no horizontal overflow; phone menu opens and navigates; résumé PDF link is present; dark/light appearance switches. Fresh network/security event capture has no errors. An initial cached CSP blocked blob texture fetches; connect-src now permits only same-origin/blob/data, and the fresh-header check passes. No general script eval was enabled.
 - Browser viewport overrides reset. Local preview and cache override will be closed/reset at task completion.
+- All primary route render checks pass, and the toll-road article renders its complete text and four tables with JavaScript disabled. Clean URLs serve the corresponding static document. Supporting-material links follow the same deduplication as the interactive reader.
+- The first GitHub clean install rejected a manually combined lockfile. npm has now regenerated the lockfile against the official registry; clean-install CI will validate the corrected dependency graph.
 
 Pending at this checkpoint: GitHub clean-install/bot-observer gate, Vercel build, production cutover and live HTTP/render checks. These remain separate from local validation. Prior production rollback candidate:dpl_65FbkQ4N4aK2oPx1XKnPpJpfs8c5.

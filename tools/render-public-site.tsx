@@ -23,13 +23,14 @@ function Table({ table }: { table: any }) {
 
 function Article({ article }: { article: any }) {
   const markdown = article.markdown?.replace(/^# .+\n+/, '')
+  const downloads = [...(article.supportingAssets || []), ...(article.researchAssets || []).flatMap((asset: any) => asset.supportingAssets || [])].filter((asset: any, index: number, items: any[]) => items.findIndex(item => item.href === asset.href) === index)
   return <>
     {article.slug === 'viralbench-codex-agent-harness' && <p>This is a published engineering design for a proposed improvement harness. It does not establish a deployed improvement service.</p>}
     {markdown ? markdownToReact(markdown) : <>{paragraphs(article.content)}{article.evidenceBoundary && <p>{inlineText(article.evidenceBoundary)}</p>}{[...(article.sections || []), ...(article.markdownSections || [])].map((section: any) => <section key={section.id} id={section.id}><h2>{section.title}</h2>{section.markdown && markdownToReact(section.markdown)}{paragraphs(section.paragraphs)}{section.bullets && <ul>{section.bullets.map((b: string, i: number) => <li key={i}>{inlineText(b)}</li>)}</ul>}{section.table && <Table table={section.table} />}</section>)}</>}
     {article.cases && <section id="case-inventory"><h2>Case inventory</h2>{article.cases.map((item: any) => <details key={item.name}><summary>{item.name} — {item.grade}</summary><dl>{Object.entries(item).filter(([k]) => !['name', 'href'].includes(k)).map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{String(v)}</dd></div>)}</dl><a href={item.href}>Source</a></details>)}</section>}
     {article.sources?.length > 0 && <section id="sources"><h2>Sources</h2><ol>{article.sources.map((source: any, i: number) => <li key={i} id={`source-${source.id?.toLowerCase() || i + 1}`}>{(source.href ? [source.href] : source.hrefs || []).map((href: string, j: number) => <a key={j} href={href}>{j ? 'Additional source' : source.label}</a>)}{source.note && <p>{source.note}</p>}{source.limitation && <p>{source.limitation}</p>}</li>)}</ol></section>}
     {article.faqs && <section><h2>Questions</h2>{article.faqs.map((faq: any) => <details key={faq.question}><summary>{faq.question}</summary>{markdownToReact(faq.answer)}</details>)}</section>}
-    {[...(article.researchAssets || []), ...(article.supportingAssets || [])].length > 0 && <section><h2>Supporting material</h2><ul>{[...(article.researchAssets || []), ...(article.supportingAssets || [])].map((asset: any, i: number) => <li key={i}><a href={asset.href}>{asset.label}</a></li>)}</ul></section>}
+    {downloads.length > 0 && <section><h2>Supporting material</h2><ul>{downloads.map((asset: any, i: number) => <li key={i}><a href={asset.href}>{asset.label}</a></li>)}</ul></section>}
   </>
 }
 
