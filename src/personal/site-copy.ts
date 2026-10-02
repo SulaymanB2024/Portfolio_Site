@@ -5,17 +5,17 @@ export const siteCopy = {
   home: {
     title: 'The frontier is all that matters',
     headline: ['The frontier', 'is all that', 'matters'],
-    description: 'I build for what comes next: better tools, clearer decisions, and systems with a longer horizon.',
+    description: 'I build software, study AI and markets, and take a long view of what comes next.',
     action: 'Explore my work',
   },
   work: {
     selectedLabel: '01 / Selected work',
-    heading: ['Questions worth asking.', 'Things worth building.'],
-    introduction: 'Internship discovery, AI research, market analysis, and experiments that start with a question.',
+    heading: ['What I’m building.', 'What I’m studying.'],
+    introduction: 'Tools for students, research and positioning at Sapien, market analysis, and visual experiments.',
     kicker: 'Built, studied, and still evolving',
     title: 'Work, in practice',
     description: 'Products I build, research I contribute to, and ideas I test by making them real.',
-    explore: 'Explore the work',
+    explore: 'Read about the work',
     all: 'View all work',
   },
   about: {
@@ -40,14 +40,15 @@ export const siteCopy = {
     label: 'Start with a note',
   },
   footer: {
-    kicker: 'Keep the conversation going',
+    kicker: 'Get in touch',
     headline: ['What are you', 'working on?'],
-    description: 'A product idea, a research question, or a problem you haven’t quite defined yet—send it my way.',
-    colophon: 'Built by Sulayman Bowles. A place for useful work, careful research, and a little play.',
+    description: 'If something here connects with your work, I’d be glad to compare notes.',
+    colophon: 'I built this site with React, TypeScript, and Three.js to explore light, ordered dithering, and the feel of ink on paper.',
     top: 'Back to top',
   },
   writing: {
     homeKicker: '/ Selected writing',
+    read: 'Read essay',
     kicker: '/ Essays, research & working notes',
     introduction: 'Products I build, AI systems I study, and the contracts behind infrastructure. Four selected pieces, with sources you can follow.',
     all: 'Browse all writing',
@@ -72,7 +73,7 @@ export const siteCopy = {
 
 export const siteMetadata = {
   homeTitle: 'The frontier is all that matters',
-  description: 'Sulayman Bowles builds tools and studies systems for what comes next. Work, research, and experiments across technology, AI, and markets.',
+  description: 'Software, AI research, and markets. Selected work and writing by Sulayman Bowles, with a long view of what comes next.',
   pages: {
     work: 'Products, research, and experiments by Sulayman Bowles, including InternshipDeadlines, Sapien, Atlas, and independent market research.',
     writing: 'Essays and research by Sulayman Bowles on AI systems, the web, energy, infrastructure, and markets.',
@@ -80,6 +81,13 @@ export const siteMetadata = {
     resume: 'Experience, education, and selected work by Sulayman Bowles across Chegg, Sapien, VOID, and independent products.',
     contact: 'Contact Sulayman Bowles about product work, research, and collaborations.',
   } as Record<string, string>,
+}
+
+// Short homepage introductions; article titles, decks, and source records stay intact.
+export const homeWritingDecks: Record<string, string> = {
+  'who-owns-texas-toll-roads': 'How Texas toll road contracts divide ownership, revenue rights, and risk—and what that means for investors.',
+  'atlas-building-an-evidence-console': 'How I’m building a website audit console that keeps each finding connected to evidence you can inspect.',
+  'the-first-ai-managers': 'What happens when an AI agent runs a business—and must carry yesterday’s decisions into tomorrow.',
 }
 
 // These decks describe the existing essays; their bodies and titles stay sourced.

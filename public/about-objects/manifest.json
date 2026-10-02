@@ -260,12 +260,12 @@
     {
       "id": "knight",
       "title": "Knight and board",
-      "description": "Original fully rounded Staunton-inspired horse carving, swept ridged mane, ears, eyelid relief, muzzle and nostrils, on a turned pedestal. A separate raised 64-tile board exposes native algebraic square nodes and a movable A1 knight parent.",
+      "description": "Original Staunton-inspired knight with a closed continuous carved head and neck, recessed orbital and nostril anatomy, shaped muzzle and jaw, tapered ears with inset pinnae, scalloped dorsal mane and fine engravings, on a finely turned pedestal. The preserved raised 64-tile board exposes native algebraic square nodes and the original movable A1 knight parent.",
       "path": "about-objects/knight.glb",
-      "bytes": 934256,
-      "sha256": "960ab1e011b8b2295f37940327e63304af1967d55d979ffebbae3546384d4d16",
-      "vertices": 30028,
-      "triangles": 25020,
+      "bytes": 1192504,
+      "sha256": "73a2914d40b05d8024d8340c28c0ccb69cb53ccb0edf56ebb4312f04160a8fec",
+      "vertices": 37398,
+      "triangles": 38580,
       "meshes": 69,
       "bounds": {
         "min": [
@@ -275,7 +275,7 @@
         ],
         "max": [
           1.197505235671997,
-          0.653139591217041,
+          0.6540617942810059,
           1.202494802612449
         ]
       },
@@ -1827,8 +1827,8 @@
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.999999955864916,
-        "maximumNormalLength": 1.0000000374083127
+        "minimumNormalLength": 0.999999959821547,
+        "maximumNormalLength": 1.0000000404605254
       }
     },
     {

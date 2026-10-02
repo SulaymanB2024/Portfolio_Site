@@ -54,7 +54,7 @@ export default function ReaderNavigation({ sections }: { sections: { id: string;
     <div className="reader-progress" aria-hidden="true"><div ref={line} /></div>
     <details className="article-contents" open={open} onToggle={event => setOpen(event.currentTarget.open)}>
       <summary className="mono">Contents<span className="chapter-position" aria-hidden="true">{String(Math.max(0, sections.findIndex(section => section.id === active)) + 1).padStart(2, '0')} / {String(sections.length).padStart(2, '0')}</span><span aria-hidden="true">+</span></summary>
-      <nav aria-label="Article sections">{sections.map((section, index) => <a key={section.id} href={`#${section.id}`} aria-current={active === section.id ? 'location' : undefined} onClick={() => { setActive(section.id); if (matchMedia('(max-width: 760px)').matches) setOpen(false) }}><span className="mono">{String(index + 1).padStart(2, '0')}</span>{section.title}</a>)}</nav>
+      <nav aria-label="Article sections">{sections.map(section => <a key={section.id} href={`#${section.id}`} aria-current={active === section.id ? 'location' : undefined} onClick={() => { setActive(section.id); if (matchMedia('(max-width: 760px)').matches) setOpen(false) }}>{section.title}</a>)}</nav>
     </details>
   </aside>
 }

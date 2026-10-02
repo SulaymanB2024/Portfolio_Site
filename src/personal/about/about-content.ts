@@ -12,8 +12,8 @@ export const personalObjects: { id: InterestId; label: string; title: string; se
     id: 'score', label: 'Composition', title: 'A few notes.',
     sentence: 'I compose, too. Here, you can leave a little phrase of your own.',
     detailLabel: 'Beyond this page',
-    detail: 'My original music was performed through Golden Hornet’s Young Composer Program in 2020 and 2022.',
-    source: 'https://www.goldenhornet.org/calendar/young-composers-concert-2022', sourceLabel: 'Young Composers concert',
+    detail: 'Through Golden Hornet: “Unfolding of Night,” “Call of the Cavies,” “Melancholy,” and “The Beauty of Loss.” Four pieces, across 2020–2024.',
+    source: 'https://www.youtube.com/watch?v=qc6q_XkS0aE', sourceLabel: 'Hear “Unfolding of Night”',
   },
   {
     id: 'knight', label: 'Logic puzzles', title: 'One more move.',
@@ -25,6 +25,6 @@ export const personalObjects: { id: InterestId; label: string; title: string; se
 ]
 
 export const bassStrings = [
-  { label: 'E', frequency: 41.203 }, { label: 'A', frequency: 55 },
-  { label: 'D', frequency: 73.416 }, { label: 'G', frequency: 97.999 },
+  { label: 'E', midi: 28, frequency: 41.203, key: 'A' }, { label: 'A', midi: 33, frequency: 55, key: 'S' },
+  { label: 'D', midi: 38, frequency: 73.416, key: 'D' }, { label: 'G', midi: 43, frequency: 97.999, key: 'F' },
 ] as const

@@ -69,15 +69,17 @@ test('autoplay repeatedly dissolves and reforms, while pause, manual input and r
   const { source } = fixture()
   const study = createLionStudy(source)
   const samples: number[] = []
-  for (let i = 0; i < 32 * 30; i++) {
+  for (let i = 0; i < 36 * 30; i++) {
     assert.equal(study.advance(1 / 30, false), true)
     samples.push(study.value)
   }
-  assert.ok(Math.max(...samples) > .97)
-  assert.ok(Math.min(...samples) < .09)
-  assert.ok(samples[200] > samples[0])
-  assert.ok(samples[600] < samples[400])
-  assert.ok(samples[950] > samples[750])
+  assert.ok(Math.max(...samples) > .87 && Math.max(...samples) <= .880001)
+  assert.ok(Math.min(...samples) >= .059999 && Math.min(...samples) < .07)
+  assert.equal(samples[90], .06) // The opening holds long enough to read the form.
+  assert.ok(samples[400] > samples[200])
+  assert.equal(samples[540], .88)
+  assert.ok(samples[850] < samples[650])
+  assert.equal(samples[1050], .06)
   study.setPlaying(false)
   const paused = { value: study.value, time: study.elapsed }
   for (let i = 0; i < 90; i++) assert.equal(study.advance(1 / 30, false), false)

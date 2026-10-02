@@ -1,0 +1,22 @@
+{
+  "name": "chess.js",
+  "version": "1.4.0",
+  "license": "BSD-2-Clause",
+  "tarball": "https://registry.npmjs.org/chess.js/-/chess.js-1.4.0.tgz",
+  "integrity": "sha512-BBJgrrtKQOzFLonR0l+k64A98NLemPwNsCskwb+29bRwobUa4iTm51E1kwGPbWXAcfdDa18nad6vpPPKPWarqw==",
+  "upstream": "https://github.com/jhlywa/chess.js/releases/tag/v1.4.0",
+  "files": {
+    "chess.js": {
+      "bytes": 107019,
+      "sha256": "6ec742c5b513c309938634dbc29b7fa302b37da6e8adebcded0694290582a22a"
+    },
+    "chess.d.ts": {
+      "bytes": 9163,
+      "sha256": "29f09463bf7aedb31c93b4f692b9001eb5529b9dcc52829a1c0d5895e2f2e8f8"
+    },
+    "CHESS-LICENSE.txt": {
+      "bytes": 1315,
+      "sha256": "0b3a3c2b4432a26bb18f9d06f5bba4de015bcc980306b7db28b06025495e2186"
+    }
+  }
+}

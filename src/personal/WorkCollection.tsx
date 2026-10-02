@@ -135,7 +135,6 @@ function WorkSculpture({ project, motionControl = false, navigates = false }: { 
   const motion = useContext(StudyContext)!
   const activation = useMemo(() => createStudyActivationGate(), [])
   const [ready, setReady] = useState(false)
-  const [moving, setMoving] = useState(false)
   useEffect(() => { activation.cancel(); return () => activation.cancel() }, [activation, motion.identity, motion.playing, motion.reduced])
   useEffect(() => motion.registerActivation(activation.cancel), [activation, motion])
   useEffect(() => {
@@ -147,13 +146,12 @@ function WorkSculpture({ project, motionControl = false, navigates = false }: { 
     status()
     return () => observer.disconnect()
   }, [])
-  const label = `${project.name} sculpture. Drag or use arrow keys to ${moving ? 'move' : 'rotate'}. Home or double-click resets this object.`
+  const label = `${project.name} sculpture. Drag or use arrow keys to rotate. Home or double-click resets this object.`
   const slot = {
     ref: (node: HTMLElement | null) => { element.current = node },
     className: 'work-study-slot',
     'data-work-study': project.slug,
     'data-work-interactive': 'true',
-    'data-work-gesture': moving ? 'move' : 'rotate',
     'data-work-framing': motionControl ? 'detail' : 'collection',
     'data-state': 'loading',
     tabIndex: 0,
@@ -183,8 +181,7 @@ function WorkSculpture({ project, motionControl = false, navigates = false }: { 
       onDoubleClick={event => { event.preventDefault(); activation.cancel() }}
     >{failure}</a> : <div {...slot} role="group" aria-label={label}>{failure}</div>}
     <div className="work-study-controls" onClickCapture={() => activation.cancel()}>
-      <span>{moving ? 'Drag to move' : 'Drag to rotate'}</span>
-      <button className="work-gesture-control" disabled={!ready} aria-label={`Move ${project.name} sculpture`} aria-pressed={moving} title="Toggle between moving and rotating this object" onClick={() => setMoving(value => !value)}>Move</button>
+      <span>Drag to rotate</span>
       {motionControl && <WorkMotionControl />}
       <button disabled={!ready} aria-label={`Reset ${project.name} sculpture`} title="Reset this object" onClick={() => motion.reset(project.slug)}><span aria-hidden="true">↺</span></button>
     </div>

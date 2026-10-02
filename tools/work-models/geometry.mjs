@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js'
 
 const TAU = Math.PI * 2
 const Y = new THREE.Vector3(0, 1, 0)
@@ -65,21 +66,23 @@ function bevelBox(part, width, height, depth, position, rotation = [0,0,0], beve
   shape.lineTo(width/2,height/2-r);shape.quadraticCurveTo(width/2,height/2,width/2-r,height/2)
   shape.lineTo(-width/2+r,height/2);shape.quadraticCurveTo(-width/2,height/2,-width/2,height/2-r)
   shape.lineTo(-width/2,-height/2+r);shape.quadraticCurveTo(-width/2,-height/2,-width/2+r,-height/2)
-  const geometry=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:bevel,bevelThickness:bevel*.75,bevelSegments:1,curveSegments:2,steps:1})
+  const geometry=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:bevel,bevelThickness:bevel*.75,bevelSegments:2,curveSegments:4,steps:1})
   geometry.translate(0,0,-depth/2)
-  put(part,geometry,position,rotation)
+  put(part,finishBevel(geometry),position,rotation)
 }
 function gear(part, radius, teeth, depth, position, rotation = [0,0,0]) {
   const shape=new THREE.Shape()
-  for(let i=0;i<teeth*4;i++){
-    const a=i/(teeth*4)*TAU
-    const r=radius*(i%4===0||i%4===3?.87:1)
+  // Root, sloped shoulder and flat tooth crown read as cut metal, not a cog icon.
+  const toothProfile=[.87,.87,.952,1,1,.952]
+  for(let i=0;i<teeth*6;i++){
+    const a=i/(teeth*6)*TAU
+    const r=radius*toothProfile[i%6]
     if(i===0)shape.moveTo(r*Math.cos(a),r*Math.sin(a));else shape.lineTo(r*Math.cos(a),r*Math.sin(a))
   }
   shape.closePath()
   const hole=new THREE.Path();hole.absarc(0,0,radius*.43,0,TAU,true);shape.holes.push(hole)
-  const geometry=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:radius*.025,bevelThickness:radius*.025,bevelSegments:1,curveSegments:12,steps:1})
-  geometry.translate(0,0,-depth/2);put(part,geometry,position,rotation)
+  const geometry=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:radius*.019,bevelThickness:radius*.022,bevelSegments:2,curveSegments:12,steps:1})
+  geometry.translate(0,0,-depth/2);put(part,finishBevel(geometry),position,rotation)
   // Spokes and an axial collar remain distinct under rotation.
   const q=new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation))
   const at=(r,a,z=0)=>vec(r*Math.cos(a),r*Math.sin(a),z).applyQuaternion(q).add(position)
@@ -94,11 +97,35 @@ function bevelTriangle(part,a,b,c,thickness=.03){
   const shape=new THREE.Shape([new THREE.Vector2(0,0),new THREE.Vector2(a.distanceTo(b),0),new THREE.Vector2(relative.dot(tangent),relative.dot(bitangent))])
   const g=new THREE.ExtrudeGeometry(shape,{depth:thickness,bevelEnabled:true,bevelSize:.007,bevelThickness:.008,bevelSegments:2,curveSegments:1,steps:1})
   g.translate(0,0,-thickness/2)
-  g.applyMatrix4(new THREE.Matrix4().makeBasis(tangent,bitangent,normal));put(part,g,a)
+  g.applyMatrix4(new THREE.Matrix4().makeBasis(tangent,bitangent,normal));put(part,finishBevel(g),a)
 }
 
+/** Smooth small bevel/curve transitions while retaining broad planar shoulders. */
+function finishBevel(geometry) {
+  const finished=toCreasedNormals(geometry,Math.PI*2/9)
+  geometry.dispose()
+  return finished
+}
 
-export { TAU, Y, vec, materialStyles, group, shaftAxis, put, tube, arc, rod, box, jewel, edgesOf, trianglePlate, bevelBox, gear, bevelTriangle }
+/** A genuinely pierced service frame, with a recessed opening and round corners. */
+function bevelFrame(part,width,height,depth,openingWidth,openingHeight,position,rotation=[0,0,0],bevel=.005) {
+  const shape=new THREE.Shape()
+  const radius=Math.min(bevel*2,width/8,height/8)
+  shape.moveTo(-width/2+radius,-height/2)
+  shape.lineTo(width/2-radius,-height/2);shape.quadraticCurveTo(width/2,-height/2,width/2,-height/2+radius)
+  shape.lineTo(width/2,height/2-radius);shape.quadraticCurveTo(width/2,height/2,width/2-radius,height/2)
+  shape.lineTo(-width/2+radius,height/2);shape.quadraticCurveTo(-width/2,height/2,-width/2,height/2-radius)
+  shape.lineTo(-width/2,-height/2+radius);shape.quadraticCurveTo(-width/2,-height/2,-width/2+radius,-height/2)
+  const hole=new THREE.Path()
+  hole.moveTo(-openingWidth/2,-openingHeight/2);hole.lineTo(-openingWidth/2,openingHeight/2)
+  hole.lineTo(openingWidth/2,openingHeight/2);hole.lineTo(openingWidth/2,-openingHeight/2);hole.closePath()
+  shape.holes.push(hole)
+  const g=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:bevel,bevelThickness:bevel*.75,bevelSegments:2,curveSegments:3,steps:1})
+  g.translate(0,0,-depth/2)
+  put(part,finishBevel(g),position,rotation)
+}
+
+export { TAU, Y, vec, materialStyles, group, shaftAxis, put, tube, arc, rod, box, jewel, edgesOf, trianglePlate, bevelBox, gear, bevelTriangle, bevelFrame, finishBevel }
 
 /** Flat annular faces, small bevels and capped ends read as machined metal. */
 export function machinedRing(part, radius, width, depth, start = 0, length = TAU, position = vec(0,0,0), rotation = [0,0,0], segments = 96) {

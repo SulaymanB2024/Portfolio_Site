@@ -1,4 +1,4 @@
-import type { MouseEvent, ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { caseStudies, chapterId, type CaseStudy } from './case-studies'
 import { StudyArtwork } from './StudyArtwork'
 import AtlasEvidence from './AtlasEvidence'
@@ -6,14 +6,8 @@ import DecisionExplorer from './DecisionExplorer'
 import payrollRecord from '../../../public/research/payrollpro-system-record.json'
 import './case-studies.css'
 
-function JumpLink({ index, children }: { index: number; children: ReactNode }) {
-  function jump(event: MouseEvent<HTMLAnchorElement>) {
-    event.preventDefault()
-    const target = document.getElementById(chapterId(index))
-    target?.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
-    target?.focus({ preventScroll: true })
-  }
-  return <a href={`#${chapterId(index)}`} onClick={jump}><span className="mono">0{index+1}</span>{children}</a>
+function JumpLink({ slug, index, children }: { slug: string; index: number; children: ReactNode }) {
+  return <a href={`#/work/${slug}?chapter=${chapterId(index)}`}><span className="mono" aria-hidden="true">0{index+1}</span>{children}</a>
 }
 
 function Chapter({ index, label, children }: { index: number; label: string; children: ReactNode }) {
@@ -70,11 +64,27 @@ function ViralStory() {
 
 export default function CaseStudyPage({ study }: { study: CaseStudy }) {
   const next = caseStudies[(caseStudies.indexOf(study)+1)%caseStudies.length]
+  useEffect(() => {
+    let frame = 0
+    function reachChapter() {
+      const requested = new URLSearchParams(location.hash.split('?')[1] || '').get('chapter')
+      const target = study.chapters.map((_, index) => document.getElementById(chapterId(index))).find(element => element?.id === requested)
+      cancelAnimationFrame(frame)
+      if (!target) return
+      frame = requestAnimationFrame(() => {
+        target.scrollIntoView({ block: 'start', behavior: 'instant' })
+        target.focus({ preventScroll: true })
+      })
+    }
+    reachChapter()
+    window.addEventListener('hashchange', reachChapter)
+    return () => { cancelAnimationFrame(frame); window.removeEventListener('hashchange', reachChapter) }
+  }, [study])
   return <article className={`case-study case-study-${study.slug}`}>
     <a className="study-back mono" href="#/work">← All work</a>
-    <header className="study-hero"><div className="study-hero-copy"><span className="eyebrow">Project study {study.number} / {study.category}</span><h1>{study.slug==='viralbench' ? <>ViralBench<br /><em>+ Codex</em></> : study.name}<span className="period">.</span></h1><p className="study-title">{study.title}</p><p className="study-summary">{study.summary}</p><JumpLink index={study.slug==='atlas' ? 2 : 1}>{study.slug==='atlas' ? 'Inspect the sample' : 'Explore the design'}<span aria-hidden="true">↓</span></JumpLink></div><figure className="study-hero-figure"><StudyArtwork kind={study.slug} /><figcaption><span className="mono">Fig. {study.number}</span>{study.caption}</figcaption></figure></header>
+    <header className="study-hero"><div className="study-hero-copy"><span className="eyebrow">Project study {study.number} / {study.category}</span><h1>{study.slug==='viralbench' ? <>ViralBench<br /><em>+ Codex</em></> : study.name}<span className="period">.</span></h1><p className="study-title">{study.title}</p><p className="study-summary">{study.summary}</p><JumpLink slug={study.slug} index={study.slug==='atlas' ? 2 : 1}>{study.slug==='atlas' ? 'Inspect the sample' : 'Explore the design'}<span aria-hidden="true">↓</span></JumpLink></div><figure className="study-hero-figure"><StudyArtwork kind={study.slug} /><figcaption><span className="mono">Fig. {study.number}</span>{study.caption}</figcaption></figure></header>
     <dl className="study-facts">{[['My role',study.role],['Period',study.period],['Project state',study.status],['Medium',study.medium]].map(([label,value])=><div key={label}><dt className="mono">{label}</dt><dd>{value}</dd></div>)}</dl>
-    <div className="study-reading"><aside className="study-contents"><span className="eyebrow">In this study</span><nav aria-label="In this study">{study.chapters.map((chapter,index)=><JumpLink key={chapter} index={index}>{chapter}</JumpLink>)}</nav><a className="study-context-link mono" href="#/resume">View résumé ↗</a></aside><div className="study-prose">{study.slug==='atlas' ? <AtlasStory /> : study.slug==='payrollpro' ? <PayrollStory /> : <ViralStory />}</div></div>
+    <div className="study-reading"><aside className="study-contents"><span className="eyebrow">In this study</span><nav aria-label="In this study">{study.chapters.map((chapter,index)=><JumpLink key={chapter} slug={study.slug} index={index}>{chapter}</JumpLink>)}</nav><a className="study-context-link mono" href="#/resume">View résumé ↗</a></aside><div className="study-prose">{study.slug==='atlas' ? <AtlasStory /> : study.slug==='payrollpro' ? <PayrollStory /> : <ViralStory />}</div></div>
     <a className="study-next" href={`#/work/${next.slug}`}><div><span className="eyebrow">Next study / {next.category}</span><h2>{next.name}</h2></div><span aria-hidden="true">→</span></a>
   </article>
 }

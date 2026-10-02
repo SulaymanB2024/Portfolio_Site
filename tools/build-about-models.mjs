@@ -248,31 +248,57 @@ function doubleBass() {
   return { groups: [{ name: 'bass' }], parts: [body, back, ribs, fittings, ebony, bridge, binding, neck, scroll, ...strings, bow, bowHair, bowMetal], maxSpan: 3.2 }
 }
 
-function loft(profiles, segments = 36, rows = 36) {
-  const centerCurve = new THREE.CatmullRomCurve3(profiles.map(p => v(0, p[0], p[1])), false, 'centripetal')
-  const radiiCurve = new THREE.CatmullRomCurve3(profiles.map((p, i) => v(p[2], p[3], i / (profiles.length - 1))), false, 'centripetal')
-  const positions = [], indices = []
-  for (let row = 0; row <= rows; row++) {
-    const t = row / rows, center = centerCurve.getPoint(t), radii = radiiCurve.getPoint(t)
-    for (let col = 0; col <= segments; col++) {
-      const angle = col / segments * TAU
-      positions.push(Math.cos(angle) * radii.x, center.y, center.z + Math.sin(angle) * radii.y)
+// Shape-preserving cubic sections keep the horse's silhouette smooth without
+// Catmull-Rom overshoot at the brow, muzzle, or narrow poll.
+function knightSection(profiles, y) {
+  const last = profiles.length - 1
+  let i = 0
+  while (i < last - 1 && y > profiles[i + 1][0]) i++
+  const a = profiles[i], b = profiles[i + 1], span = b[0] - a[0]
+  const t = THREE.MathUtils.clamp((y - a[0]) / span, 0, 1)
+  return [y, ...a.slice(1).map((value, axis) => {
+    const k = axis + 1, slope = (b[k] - a[k]) / span
+    const tangent = row => {
+      if (row === 0) return (profiles[1][k] - profiles[0][k]) / (profiles[1][0] - profiles[0][0])
+      if (row === last) return (profiles[last][k] - profiles[last - 1][k]) / (profiles[last][0] - profiles[last - 1][0])
+      const left = (profiles[row][k] - profiles[row - 1][k]) / (profiles[row][0] - profiles[row - 1][0])
+      const right = (profiles[row + 1][k] - profiles[row][k]) / (profiles[row + 1][0] - profiles[row][0])
+      return left * right > 0 ? 2 * left * right / (left + right) : 0
     }
+    const m0 = slope === 0 ? 0 : tangent(i), m1 = slope === 0 ? 0 : tangent(i + 1)
+    return (2 * t ** 3 - 3 * t ** 2 + 1) * value + (t ** 3 - 2 * t ** 2 + t) * span * m0
+      + (-2 * t ** 3 + 3 * t ** 2) * b[k] + (t ** 3 - t ** 2) * span * m1
+  })]
+}
+function knightClosedSurface(sections, sample, segments = 48) {
+  const positions = [], indices = []
+  for (const section of sections) for (let col = 0; col < segments; col++) {
+    positions.push(...sample(section, col / segments * TAU).toArray())
   }
-  for (let row = 0; row < rows; row++) for (let col = 0; col < segments; col++) {
-    const a = row * (segments + 1) + col, b = a + 1, c = a + segments + 1, d = c + 1
+  for (let row = 0; row < sections.length - 1; row++) for (let col = 0; col < segments; col++) {
+    const a = row * segments + col, b = row * segments + (col + 1) % segments, c = a + segments, d = b + segments
     indices.push(a, c, b, b, c, d)
+  }
+  // Both ends are closed: there are no open loft rims under the pedestal or poll.
+  for (const row of [0, sections.length - 1]) {
+    const center = new THREE.Vector3()
+    for (let col = 0; col < segments; col++) center.add(v(...positions.slice((row * segments + col) * 3, (row * segments + col) * 3 + 3)))
+    const cap = positions.length / 3
+    positions.push(...center.multiplyScalar(1 / segments).toArray())
+    for (let col = 0; col < segments; col++) {
+      const a = row * segments + col, b = row * segments + (col + 1) % segments
+      if (row === 0) indices.push(cap, a, b); else indices.push(cap, b, a)
+    }
   }
   const g = new THREE.BufferGeometry()
   g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); g.setIndex(indices); g.computeVertexNormals()
-  // The seam shares the same normal despite the duplicated UV-style end vertices.
-  const n = g.getAttribute('normal')
-  for (let row = 0; row <= rows; row++) {
-    const a = row * (segments + 1), b = a + segments
-    const normal = v(n.getX(a) + n.getX(b), n.getY(a) + n.getY(b), n.getZ(a) + n.getZ(b)).normalize()
-    n.setXYZ(a, ...normal.toArray()); n.setXYZ(b, ...normal.toArray())
-  }
   return g
+}
+function knightSections(profiles, steps = 5) {
+  const sections = []
+  for (let i = 0; i < profiles.length - 1; i++) for (let j = 0; j < steps; j++) sections.push(knightSection(profiles, THREE.MathUtils.lerp(profiles[i][0], profiles[i + 1][0], j / steps)))
+  sections.push(profiles.at(-1))
+  return sections
 }
 function roundedTile(width, depth) {
   const half = width / 2, r = .004, shape = new THREE.Shape()
@@ -303,44 +329,109 @@ function chessKnight() {
   const horse = part('knight-carving', 'ivory', 'knight')
   const detail = part('knight-relief', 'graphite', 'knight')
   const trim = part('knight-base-trim', 'silver', 'knight')
+  // A denser turned profile gives the foot, scotia, bead and neck collar their
+  // own continuous curves rather than a stack of angular cylinders.
   const profile = [
-    [.022, .028], [.121, .028], [.137, .039], [.140, .052], [.135, .071],
-    [.117, .083], [.117, .090], [.128, .097], [.124, .109], [.096, .126], [.076, .151],
+    [.022, .028], [.116, .028], [.129, .032], [.137, .039], [.140, .047], [.139, .055], [.134, .066],
+    [.127, .074], [.117, .082], [.115, .087], [.119, .092], [.126, .098], [.127, .104], [.122, .112],
+    [.111, .119], [.096, .128], [.085, .139], [.076, .151], [.071, .157],
   ].map(p => new THREE.Vector2(...p))
-  put(horse, new THREE.LatheGeometry(profile, 48))
-  put(horse, new THREE.CylinderGeometry(.121, .121, .007, 40), v(0, .030, 0))
-  torus(trim, .130, .0034, v(0, .074, 0), [Math.PI / 2, 0, 0], 6, 48)
-  torus(detail, .119, .0022, v(0, .090, 0), [Math.PI / 2, 0, 0], 5, 40)
-  // A fully rounded sculptural neck, leaning forward into a broad jaw and muzzle.
-  put(horse, loft([
-    [.144, -.006, .078, .068], [.19, -.022, .075, .080], [.26, -.041, .070, .089],
-    [.34, -.045, .066, .094], [.415, -.022, .067, .096], [.48, .006, .069, .087],
-    [.535, .019, .061, .064], [.565, .016, .046, .048],
-  ], 40, 40))
-  ellipsoid(horse, v(0, .519, .069), [.068, .061, .099], 1, 28, 18)
-  ellipsoid(horse, v(0, .485, .146), [.060, .038, .079], 1, 28, 16)
-  ellipsoid(horse, v(0, .467, .116), [.054, .023, .085], 1, 24, 14)
-  for (const side of [-1, 1]) {
-    ellipsoid(horse, v(side * .053, .461, .063), [.022, .045, .060], 1, 20, 14)
-    const ear = loft([
-      [.552, -.006, .023, .029], [.590, -.003, .018, .022],
-      [.628, .001, .012, .014], [.659, .003, .002, .005],
-    ], 14, 12)
-    put(horse, ear, v(side * .038, 0, 0), [0, 0, side * -.12])
-    const innerEar = new THREE.Shape()
-    innerEar.moveTo(-.009, .594); innerEar.quadraticCurveTo(0, .583, .009, .594)
-    innerEar.quadraticCurveTo(.009, .618, 0, .647); innerEar.quadraticCurveTo(-.009, .618, -.009, .594)
-    put(detail, extrude(innerEar, .002, .001, 4), v(side * .038, 0, .017), [0, 0, side * -.12])
-    ellipsoid(detail, v(side * .064, .540, .070), [.003, .0075, .010], 1, 16, 10)
-    tube(horse, [v(side * .061, .537, .053), v(side * .070, .551, .067), v(side * .061, .542, .082)], .0038, 16, 6)
-    ellipsoid(detail, v(side * .052, .493, .180), [.003, .006, .010], 1, 16, 10)
-    tube(detail, [v(side * .025, .462, .207), v(side * .050, .460, .182), v(side * .054, .464, .146)], .0018, 18, 5)
+  put(horse, new THREE.LatheGeometry(profile, 72))
+  put(horse, new THREE.CylinderGeometry(.121, .121, .007, 64), v(0, .030, 0))
+  torus(trim, .130, .0034, v(0, .074, 0), [Math.PI / 2, 0, 0], 8, 72)
+  torus(detail, .119, .0022, v(0, .090, 0), [Math.PI / 2, 0, 0], 6, 64)
+  torus(horse, .077, .003, v(0, .147, 0), [Math.PI / 2, 0, 0], 6, 64)
+
+  // One closed carved head/neck surface includes the throat, cheek, jaw,
+  // muzzle, forehead and poll. Every profile lists y, back z, front z, width.
+  const anatomy = [
+    [.144, -.074, .062, .075], [.174, -.094, .060, .074], [.205, -.111, .056, .073],
+    [.245, -.127, .051, .070], [.290, -.134, .047, .067], [.340, -.136, .050, .064],
+    [.385, -.129, .058, .062], [.418, -.118, .076, .060], [.446, -.100, .133, .057],
+    [.465, -.084, .199, .059], [.483, -.073, .225, .062], [.498, -.063, .216, .066],
+    [.520, -.050, .177, .071], [.540, -.038, .136, .064], [.558, -.026, .101, .052],
+    [.574, -.021, .066, .036], [.583, -.017, .041, .024],
+    [.586, -.006, .028, .016], [.588, .004, .018, .007],
+  ]
+  const gaussian = (y, z, cy, cz, sy, sz) => Math.exp(-(((y - cy) / sy) ** 2) - ((z - cz) / sz) ** 2)
+  const cheekOffset = (y, z) =>
+    .0080 * gaussian(y, z, .481, .067, .031, .047)
+    - .0090 * gaussian(y, z, .539, .074, .011, .020)
+    - .0100 * gaussian(y, z, .495, .182, .009, .018)
+    - .0040 * gaussian(y, z, .463, .158, .0035, .039)
+    - .0025 * gaussian(y, z, .395, .018, .081, .033)
+  const bodySample = (section, angle) => {
+    const [y, back, front, width] = section
+    const z = (front + back) / 2 + Math.sin(angle) * (front - back) / 2
+    const radial = Math.cos(angle), x = radial * (width + cheekOffset(y, z))
+    return v(x, y, z)
   }
-  // Swept solid mane ridges, with shallow incisions that follow the carved neck.
-  for (let i = 0; i < 10; i++) {
-    const t = i / 9, y = .222 + t * .305, backZ = -.124 + t * .078
-    tube(horse, [v(-.043, y - .024, backZ + .019), v(-.027, y + .004, backZ - .012), v(0, y + .020, backZ - .019), v(.027, y + .004, backZ - .012), v(.043, y - .024, backZ + .019)], .009 - t * .003, 20, 7)
-    tube(detail, [v(-.031, y - .012, backZ - .004), v(0, y + .005, backZ - .023), v(.031, y - .012, backZ - .004)], .0015, 16, 5)
+  const sideSurface = (side, y, z, offset = 0) => {
+    const [, back, front, width] = knightSection(anatomy, y)
+    const t = THREE.MathUtils.clamp((2 * z - front - back) / (front - back), -.9999, .9999)
+    return v(side * ((width + cheekOffset(y, z)) * Math.sqrt(1 - t * t) + offset), y, z)
+  }
+  put(horse, knightClosedSurface(knightSections(anatomy, 4), bodySample, 60))
+  for (const side of [-1, 1]) {
+    // An inset eye within a real orbital depression, surrounded by carved lids.
+    const eye = sideSurface(side, .539, .074, -.0003)
+    ellipsoid(detail, eye, [.0027, .0043, .0070], 1, 20, 12)
+    tube(horse, [[.535, .054], [.547, .064], [.548, .078], [.541, .091]].map(([y, z]) => sideSurface(side, y, z, .0010)), .0025, 22, 7)
+    tube(horse, [[.535, .055], [.531, .074], [.536, .090]].map(([y, z]) => sideSurface(side, y, z, .0008)), .0017, 18, 6)
+    tube(horse, [[.550, .049], [.558, .064], [.553, .084]].map(([y, z]) => sideSurface(side, y, z, .0001)), .0020, 20, 6)
+    // Nostrils sink into the same muzzle instead of sitting on top of a sphere.
+    const nostril = sideSurface(side, .495, .182, -.0001)
+    ellipsoid(detail, nostril, [.0022, .0046, .0086], 1, 20, 12)
+    tube(horse, [[.490, .172], [.500, .173], [.501, .184], [.495, .192]].map(([y, z]) => sideSurface(side, y, z, .0005)), .0019, 22, 6)
+    // Fine mouth, jaw and tendon engravings follow the actual sculpted skin.
+    tube(detail, [[.464, .122], [.463, .148], [.463, .173], [.468, .204]].map(([y, z]) => sideSurface(side, y, z, -.0001)), .0011, 30, 5)
+    tube(horse, [[.445, .081], [.457, .109], [.453, .138]].map(([y, z]) => sideSurface(side, y, z, .0001)), .0016, 24, 6)
+    tube(horse, [[.228, .035], [.300, .030], [.378, .037], [.434, .062]].map(([y, z]) => sideSurface(side, y, z, -.0007)), .0024, 38, 6)
+
+    // Tapered, closed ears keep a sharp silhouette and a concave inset pinna.
+    const earProfiles = [
+      [.551, -.003, .023, .029], [.581, -.001, .020, .025], [.611, .002, .014, .018],
+      [.638, .004, .008, .010], [.656, .005, .0015, .003],
+    ]
+    const ear = knightClosedSurface(knightSections(earProfiles, 4), (p, angle) => {
+      const x = Math.cos(angle) * p[2], front = Math.max(0, Math.sin(angle))
+      return v(x, p[0], p[1] + Math.sin(angle) * p[3] - .004 * gaussian(p[0], x, .607, 0, .030, .012) * front ** 5)
+    }, 24)
+    // Rotate each ear about its attachment, so the pinna stays joined to the poll.
+    ear.translate(0, -.551, 0)
+    put(horse, ear, v(side * .038, .551, 0), [0, 0, side * -.12])
+    const innerEar = new THREE.Shape()
+    innerEar.moveTo(-.008, .590); innerEar.quadraticCurveTo(0, .584, .008, .590)
+    innerEar.quadraticCurveTo(.010, .615, 0, .641); innerEar.quadraticCurveTo(-.010, .615, -.008, .590)
+    const pinna = warpZ(extrude(innerEar, .0010, .0004, 8), (x, y) => {
+      const [, center, width, depth] = knightSection(earProfiles, y)
+      const front = Math.sqrt(Math.max(0, 1 - (x / width) ** 2))
+      return center + front * depth - .004 * gaussian(y, x, .607, 0, .030, .012) * front ** 5 + .0003
+    })
+    pinna.translate(0, -.551, 0)
+    put(detail, pinna, v(side * .038, .551, 0), [0, 0, side * -.12])
+  }
+  // A continuous dorsal mane with carved scallops. The pale crest and fine
+  // graphite incisions create detail at three-quarter angles without loose rods.
+  const maneSections = Array.from({ length: 85 }, (_, i) => {
+    const t = i / 84, y = .205 + t * .350, [, back] = knightSection(anatomy, y)
+    const width = .035 - .013 * t, depth = .016 - .004 * t
+    return [y, back + .004, width, depth, t]
+  })
+  put(horse, knightClosedSurface(maneSections, (p, angle) => {
+    const [y, center, width, depth, t] = p
+    const x = Math.cos(angle) * width, outward = Math.max(0, -Math.sin(angle))
+    const groove = .003 * Math.exp(-((Math.sin(t * Math.PI * 13 + (x / width) ** 2 * .42)) ** 2) / .050)
+    return v(x, y, center + Math.sin(angle) * (depth - groove * outward))
+  }, 28))
+  for (let i = 1; i <= 12; i++) {
+    const t = i / 13, y = .205 + t * .350, width = .035 - .013 * t
+    const ridge = Array.from({ length: 9 }, (_, j) => {
+      const x = (j / 8 * 2 - 1) * width * .90, yy = y - .0036 * (x / width) ** 2
+      const [, back] = knightSection(anatomy, yy), depth = .016 - .004 * t
+      return v(x, yy, back + .004 - Math.sqrt(1 - (x / width) ** 2) * (depth - .0024))
+    })
+    tube(detail, ridge, .00085, 20, 5)
   }
   // Geometries are placed at A1, then re-localized under the movable knight parent.
   for (const p of [horse, detail, trim]) for (const g of p.geometries) g.translate(a1.x, 0, a1.z)
@@ -596,7 +687,7 @@ async function inspect(path) {
 }
 const specimens = [
   { id: 'bass', title: 'Double bass and bow', make: doubleBass, description: 'Original curved carved double bass: arched front and back, actual front-only f-hole apertures, hollow ribs, ebony fingerboard, carved bridge, scroll, tuning pins, four separate strings and a nested bow assembly.' },
-  { id: 'knight', title: 'Knight and board', make: chessKnight, description: 'Original fully rounded Staunton-inspired horse carving, swept ridged mane, ears, eyelid relief, muzzle and nostrils, on a turned pedestal. A separate raised 64-tile board exposes native algebraic square nodes and a movable A1 knight parent.' },
+  { id: 'knight', title: 'Knight and board', make: chessKnight, description: 'Original Staunton-inspired knight with a closed continuous carved head and neck, recessed orbital and nostril anatomy, shaped muzzle and jaw, tapered ears with inset pinnae, scalloped dorsal mane and fine engravings, on a finely turned pedestal. The preserved raised 64-tile board exposes native algebraic square nodes and the original movable A1 knight parent.' },
   { id: 'score', title: 'Score page and pen', make: musicalScore, description: 'Original three-dimensional sheet with front and back surfaces, tangible edge thickness and a diagonally curled corner; embossed bass clefs, staves and generic musical notation. Four independent note nodes and a nib-pivot fountain pen support visitor-created phrase interactions. This is generic original geometry, not the site owner’s composition.' },
 ]
 const selected = new Set(process.argv.slice(2))

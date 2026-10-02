@@ -3,7 +3,7 @@ import AnimatedArtwork from './editorial/AnimatedArtwork'
 import { ArtworkMotionControl, useArtworkMotion } from './editorial/ArtworkMotion'
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
 import { displayDate, type ArticleSummary } from './editorial/types'
-import { siteCopy, withWritingCopy } from './site-copy'
+import { homeWritingDecks, siteCopy, withWritingCopy } from './site-copy'
 import './home-writing.css'
 
 const articles = (catalog as ArticleSummary[]).map(withWritingCopy)
@@ -18,11 +18,11 @@ function JournalEssay({ article, lead = false }: { article: ArticleSummary; lead
     <div className="journal-essay-copy">
       <p className="journal-category mono">{article.category}</p>
       <h3>{article.displayTitle || article.title}</h3>
-      <p className="journal-deck">{article.subtitle}</p>
+      <p className="journal-deck">{homeWritingDecks[article.slug] ?? article.subtitle}</p>
       <div className="journal-meta mono"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span>{article.readTime}</span></div>
     </div>
     <div className="journal-art"><AnimatedArtwork artwork={artwork} size={lead ? 300 : 180} paused={paused} embedded decorative /></div>
-    <span className="journal-read mono">{lead ? 'Read essay' : 'Read'}<span aria-hidden="true">↗</span></span>
+    <span className="journal-read mono">{siteCopy.writing.read}<span aria-hidden="true">↗</span></span>
   </a>
 }
 
