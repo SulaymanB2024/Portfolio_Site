@@ -59,6 +59,9 @@ for (const page of [...publicPages, { route: '404', path: '/404', title: 'Page n
   let html = template.replace(/<title>.*?<\/title>/, `<title>${escape(page.title)}</title>`).replace(/(<meta (?:name="description"|property="og:description") content=")[^"]*("\s*\/?>)/g, `$1${escape(page.description)}$2`).replace(/(<meta property="og:title" content=")[^"]*("\s*\/?>)/, `$1${escape(page.title)}$2`).replace(/(<meta property="og:type" content=")[^"]*("\s*\/?>)/, `$1${article ? 'article' : 'website'}$2`).replace('</head>', `${metadata}${fallbackStyle}</head>`).replace('<div id="root"></div>', `<div id="root">${body}</div>`)
   const destination = page.path === '/' ? join(dist, 'index.html') : join(dist, page.path.slice(1), 'index.html')
   await mkdir(join(destination, '..'), { recursive: true }); await writeFile(destination, html)
+  // Vercel clean URLs and its filesystem phase also resolve the .html form.
+  // Retain the directory form for ordinary static hosts.
+  if (page.path !== '/') await writeFile(join(dist, `${page.path.slice(1)}.html`), html)
 }
 await writeFile(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${publicPages.map(page => `<url><loc>${siteOrigin}${page.path}</loc></url>`).join('')}</urlset>\n`)
 await writeFile(join(dist, 'sitemap.html'), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>All pages — Sulayman Bowles</title><link rel="canonical" href="${siteOrigin}/sitemap">${fallbackStyle}</head><body>${renderToStaticMarkup(<main className="static-site"><h1>All pages</h1>{links(publicPages)}</main>)}</body></html>`)

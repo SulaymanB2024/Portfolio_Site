@@ -13,6 +13,7 @@ for (const url of urls) {
   assert.equal(url.origin, 'https://sulayman-bowles.dev')
   assert.equal(url.hash, '', 'Search discovery must use document paths')
   const html = await read(join('dist', url.pathname, 'index.html'))
+  if (url.pathname !== '/') assert.equal(await read(join('dist', `${url.pathname}.html`)), html, `Clean URL fallback drift: ${url.pathname}`)
   assert(html.includes(`<link rel="canonical" href="${url.href}"`), `Canonical drift: ${url.pathname}`)
   assert(html.includes('name="robots" content="index, follow"'))
   assert(/<div id="root"><div class="static-site">/.test(html), `Missing readable initial HTML: ${url.pathname}`)
