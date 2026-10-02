@@ -1,12 +1,49 @@
 import * as THREE from 'three'
 
+// Both materials use source-space coordinates, so ink separates from the actual
+// surface without a gap or a change in the travelling release front.
 const grain = /* glsl */ `
   float lionHash(vec3 p) { return fract(sin(dot(p, vec3(12.9898, 78.233, 43.231))) * 43758.5453); }
   float lionErosion(vec3 p) {
-    return (.355 - p.y) * .75 + abs(p.x) * .18
-      + lionHash(floor(p * 380.0)) * .09 + sin(p.x * 9.0) * .025;
+    return (.34 - p.y) * .78 + (p.x + 1.0) * .09
+      + sin(p.x * 3.5 + p.z * 4.0) * .055 + sin(p.y * 11.0 + p.z * 7.0) * .018
+      - exp(-p.x * p.x * 8.0 - pow((p.y + .1) * 4.0, 2.0)) * .22;
+  }
+  float lionRelease(vec3 p, float field) {
+    float front = .91 - field * .91;
+    return smoothstep(front - .055, front + .055, lionErosion(p));
+  }
+  vec3 lionWarp(vec3 p, float field) {
+    float bend = field * field * lionRelease(p, field);
+    return p + vec3(sin(p.y * 5.0 + p.z * 3.0) * .13,
+      sin(p.x * 3.0 - p.z * 2.0) * .09,
+      sin(p.y * 4.0 + p.x * 3.0) * .07) * bend;
+  }
+  vec3 lionNormal(vec3 p, vec3 n, float field) {
+    vec3 tangent = normalize(cross(n, abs(n.y) < .9 ? vec3(0, 1, 0) : vec3(1, 0, 0)));
+    vec3 bitangent = cross(n, tangent);
+    vec3 origin = lionWarp(p, field);
+    return normalize(cross(lionWarp(p + tangent * .001, field) - origin,
+      lionWarp(p + bitangent * .001, field) - origin));
   }
 `
+
+const rest = .06, crest = .88, cycle = 36
+const ease = (value: number) => value * value * (3 - 2 * value)
+function cycleField(seconds: number) {
+  // A readable form, a long release, a suspended field, then a slower return.
+  if (seconds < 4) return rest
+  if (seconds < 16) return rest + (crest - rest) * ease((seconds - 4) / 12)
+  if (seconds < 19) return crest
+  if (seconds < 33) return crest - (crest - rest) * ease((seconds - 19) / 14)
+  return rest
+}
+function phaseForField(value: number, returning: boolean) {
+  const fraction = THREE.MathUtils.clamp((value - rest) / (crest - rest), 0, 1)
+  // Analytic inverse of smoothstep keeps Play continuous after manual scrubbing.
+  const progress = .5 - Math.sin(Math.asin(1 - 2 * fraction) / 3)
+  return returning ? 33 - progress * 14 : 4 + progress * 12
+}
 
 /** Reinterpret the intact scan as an etched form and a field sampled from its surface. */
 export function createLionStudy(source: THREE.Object3D) {
@@ -15,13 +52,12 @@ export function createLionStudy(source: THREE.Object3D) {
   const center = bounds.getCenter(new THREE.Vector3())
   const scale = 2 / bounds.getSize(new THREE.Vector3()).x
   const group = new THREE.Group()
-  const field = new THREE.Uniform(.42)
+  const field = new THREE.Uniform(rest)
   const pixelRatio = new THREE.Uniform(1)
   const time = new THREE.Uniform(0)
-  const low = .08, high = .98, cycle = 32
-  let phase = Math.acos(1 - 2 * (.42 - low) / (high - low))
+  let phase = 0
   let playing = true
-  let target = .42
+  let target = rest
   let seed = 7183
   const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296 }
 
@@ -31,6 +67,8 @@ export function createLionStudy(source: THREE.Object3D) {
     geometry.translate(-center.x, -center.y, -center.z)
     geometry.scale(scale, scale, scale)
     if (!geometry.hasAttribute('normal')) geometry.computeVertexNormals()
+    // Let the normal map derive its tangent frame from the warped surface.
+    geometry.deleteAttribute('tangent')
     const original = Array.isArray(node.material) ? node.material[0] : node.material
     const material = original instanceof THREE.MeshStandardMaterial ? original.clone() : new THREE.MeshStandardMaterial()
     material.color.multiplyScalar(.48)
@@ -39,17 +77,22 @@ export function createLionStudy(source: THREE.Object3D) {
     material.emissiveIntensity = 0
     material.onBeforeCompile = shader => {
       shader.uniforms.lionField = field
-      shader.vertexShader = `varying vec3 vLionPosition;\n${shader.vertexShader}`.replace('#include <begin_vertex>', '#include <begin_vertex>\nvLionPosition = position;')
+      shader.vertexShader = `uniform float lionField;\nvarying vec3 vLionPosition;\n${grain}\n${shader.vertexShader}`
+        .replace('#include <beginnormal_vertex>', '#include <beginnormal_vertex>\nobjectNormal = lionNormal(position, normal, lionField);')
+        .replace('#include <begin_vertex>', '#include <begin_vertex>\nvLionPosition = position;\ntransformed = lionWarp(position, lionField);')
       shader.fragmentShader = `uniform float lionField;\nvarying vec3 vLionPosition;\n${grain}\n${shader.fragmentShader}`
         .replace('#include <clipping_planes_fragment>', `#include <clipping_planes_fragment>
-          if (lionField > .005 && lionErosion(vLionPosition) > 1.02 - lionField * .97) discard;
+          float release = lionRelease(vLionPosition, lionField);
+          if (lionField > .005 && release > lionHash(floor(vLionPosition * 460.0))) discard;
         `)
         .replace('#include <color_fragment>', `#include <color_fragment>
-          float hatch = step(.82, fract((vLionPosition.y + vLionPosition.x * .18) * 96.0));
-          diffuseColor.rgb *= 1.0 - hatch * .22;
+          float lines = (vLionPosition.y + vLionPosition.x * .18) * 96.0;
+          float edge = fwidth(lines);
+          float hatch = smoothstep(.79 - edge, .79 + edge, fract(lines));
+          diffuseColor.rgb *= 1.0 - hatch * .18;
         `)
     }
-    material.customProgramCacheKey = () => 'contact-lion-etch-v1'
+    material.customProgramCacheKey = () => 'contact-lion-current-v2'
     group.add(new THREE.Mesh(geometry, material))
 
     // Area-weighted surface sampling keeps the ink density independent of scan topology.
@@ -104,28 +147,32 @@ export function createLionStudy(source: THREE.Object3D) {
         varying float vInk;
         ${grain}
         void main() {
-          float threshold = 1.02 - lionField * .97;
-          float score = lionErosion(position);
-          float exposed = smoothstep(threshold - .018, threshold + .055, score);
+          float exposed = lionRelease(position, lionField);
           vVisible = exposed * step(.005, lionField);
           float spread = lionField * lionField * exposed;
-          vec3 trace = position;
-          trace.x += (sin(position.y * 10.0 + position.z * 5.0 + lionTime * .13) * .075 + (seed - .5) * .09) * spread;
-          trace.y -= (.025 + seed * .045 + sin(position.x * 5.0 + lionTime * .18) * .012) * spread;
-          trace.z += sin(seed * 57.0 + lionTime * .11) * .08 * spread;
-          vec3 facing = normalize(normalMatrix * normal);
+          vec3 trace = lionWarp(position, lionField);
+          // Neighbouring samples share a current. The small seed term gives the
+          // edges a fibrous texture without turning the sculpture into random dust.
+          float ribbon = position.y * 8.0 + position.z * 3.0;
+          float fibre = .65 + seed * .35;
+          trace.x += (sin(ribbon) * .20) * spread * fibre;
+          trace.y += (cos(position.x * 4.0 + position.z * 3.0) * .10 + .055) * spread * fibre;
+          trace.z += sin(position.x * 3.0 + position.y * 4.0) * .13 * spread * fibre;
+          trace += vec3(sin(seed * 57.0 + lionTime * .10),
+            cos(seed * 31.0 + lionTime * .12), sin(seed * 19.0)) * .014 * spread;
+          vec3 facing = normalize(normalMatrix * lionNormal(position, normal, lionField));
           float light = max(dot(facing, normalize(vec3(-.4, .8, .5))), 0.0);
-          vInk = step(0.0, facing.z) * step(light * .72, seed);
+          vInk = facing.z > -.12 ? .08 + light * .30 : -1.0;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(trace, 1.0);
-          gl_PointSize = (1.0 + seed * .65) * pixelRatio;
+          gl_PointSize = (1.55 + seed * .95) * pixelRatio;
         }
       `,
       fragmentShader: /* glsl */ `
         varying float vVisible;
         varying float vInk;
         void main() {
-          if (vVisible < .1 || vInk < .5 || distance(gl_PointCoord, vec2(.5)) > .48) discard;
-          gl_FragColor = vec4(vec3(0.0), 1.0);
+          if (vVisible < .04 || vInk < 0.0 || distance(gl_PointCoord, vec2(.5)) > .48) discard;
+          gl_FragColor = vec4(vec3(vInk), 1.0);
         }
       `,
     })
@@ -142,8 +189,8 @@ export function createLionStudy(source: THREE.Object3D) {
       if (value === playing) return
       playing = value
       if (playing) {
-        const next = Math.acos(1 - 2 * THREE.MathUtils.clamp((field.value - low) / (high - low), 0, 1))
-        phase = phase > Math.PI ? Math.PI * 2 - next : next
+        // Preserve the direction and pause position, including the two rests.
+        if (Math.abs(cycleField(phase) - field.value) > .002) phase = phaseForField(field.value, phase >= 19)
       } else target = field.value
     },
     setPixelRatio(value: number) { pixelRatio.value = value },
@@ -152,9 +199,9 @@ export function createLionStudy(source: THREE.Object3D) {
       if (reducedMotion && playing) { playing = false; target = field.value }
       if (playing) {
         // Accumulate visible playback time, so returning to the tab never skips ahead.
-        phase = (phase + step * Math.PI * 2 / cycle) % (Math.PI * 2)
+        phase = (phase + step) % cycle
         time.value += step
-        target = low + (high - low) * (.5 - .5 * Math.cos(phase))
+        target = cycleField(phase)
       }
       field.value = reducedMotion ? target : THREE.MathUtils.damp(field.value, target, 12, step)
       if (Math.abs(field.value - target) < .001) field.value = target

@@ -2,8 +2,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { clampStudy, settleWorkStudy, workStudyPose, workStudyRenderSize, workStudyScroll } from './work-study-motion'
 import type { WorkStudyPose } from './work-study-motion'
-import { boundedStudyInput, studyMoveBounds, studyTouchIntent, studyYaw } from './work-study-interaction'
-import type { StudyMoveBounds } from './work-study-interaction'
+import { createStudyOrbit, fitStudyOrbit, resetStudyOrbit, rotateStudyKey, rotateStudyPointer, studyTouchIntent } from './work-study-interaction'
 import { STUDY_DOCK_MS, STUDY_EXPAND_MS, studyFlightAccent, studyFlightProgress, studyFlightRect, type StudyRect } from './work-study-flight'
 import { workStudyCameraDistance, workStudyFraming } from './work-study-framing'
 
@@ -32,6 +31,7 @@ type Study = {
   slug: string
   scene: THREE.Scene
   camera: THREE.PerspectiveCamera
+  controls: ReturnType<typeof createStudyOrbit>
   object: THREE.Group | null
   source: THREE.Object3D | null
   materials: { material: THREE.Material; opacity: number }[]
@@ -49,12 +49,6 @@ type Study = {
   radius: number
   scroll: number
   scrollTarget: number
-  manualYaw: number
-  manualPitch: number
-  manualX: number
-  manualY: number
-  moveBounds: StudyMoveBounds
-  orbit: number
   spinning: boolean
   frames: number
   fadeStart: number
@@ -94,13 +88,16 @@ const FRAGMENT = /* glsl */ `
       if (gl_FragCoord.x >= r.x && gl_FragCoord.y >= r.y && gl_FragCoord.x < r.x + r.z && gl_FragCoord.y < r.y + r.w) { hover = studyHover[i]; burst = studyBursts[i]; }
     }
     vec2 pixel = floor(gl_FragCoord.xy);
-    vec2 cell = mod(pixel, 4.0);
-    float fine = (4.0 * bayer2(mod(cell, 2.0)) + bayer2(floor(cell / 2.0)) + .5) / 16.0;
+    vec2 cell = mod(pixel, 8.0);
+    float fine = (16.0 * bayer2(mod(cell, 2.0)) + 4.0 * bayer2(mod(floor(cell / 2.0), 2.0)) + bayer2(floor(cell / 4.0)) + .5) / 64.0;
     vec2 coarse = mod(floor(pixel / 2.0), 4.0);
     float dots = (4.0 * bayer2(mod(coarse, 2.0)) + bayer2(floor(coarse / 2.0)) + .5) / 16.0;
     float grain = fract(sin(dot(floor(pixel / 2.0), vec2(127.1, 311.7)) + floor(studyTime * 10.0)) * 43758.5453);
     float sweep = .5 + .5 * sin(studyUv.y * 12.0 - studyTime * 1.8);
-    float threshold = mix(fine, mix(dots, grain, .55), clamp(hover * (.7 + .3 * sweep) + studyOpening * .65, 0.0, 1.0));
+    // Wrap the ordered pattern during interaction to retain its tonal range.
+    // Blending threshold distributions makes bright bevels disappear on hover.
+    float hoverPattern = fract(fine + hover * (.24 + .08 * sweep) * (grain - .5));
+    float threshold = mix(hoverPattern, mix(dots, grain, .55), clamp(studyOpening * .65, 0.0, 1.0));
     float gray = pow(clamp(dot(model.rgb, vec3(.2126, .7152, .0722)), 0.0, 1.0), 1.0 / 2.2);
     float scatter = max(burst, studyOpening * .7);
     float coverage = model.a * (1.0 - step(threshold, gray)) * step(scatter * .45, grain);
@@ -218,13 +215,10 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       : 1
     const framing = workStudyFraming(study.element.dataset.workFraming === 'detail', dockProgress)
     const distance = workStudyCameraDistance(study.radius, study.camera.aspect, vertical, framing)
-    study.camera.position.set(0, 0, distance)
+    fitStudyOrbit(study.controls, distance)
     study.camera.near = Math.max(.01, distance - study.radius * 2)
     study.camera.far = distance + study.radius * 3
     study.camera.updateProjectionMatrix()
-    study.moveBounds = studyMoveBounds(study.radius + .16, distance, vertical, study.camera.aspect)
-    study.manualX = boundedStudyInput(study.manualX, study.moveBounds.x)
-    study.manualY = boundedStudyInput(study.manualY, study.moveBounds.y)
   }
 
   function measure(time = performance.now()) {
@@ -258,7 +252,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     study.loading = true
     try {
       const base = `${import.meta.env.BASE_URL}work-studies/`
-      const response = await fetch(`${base}${study.slug}.glb?v=4-refined`, { signal: controller.signal })
+      const response = await fetch(`${base}${study.slug}.glb?v=5-refined`, { signal: controller.signal })
       if (!response.ok) throw new Error(`Study request returned ${response.status}`)
       const gltf = await loader.parseAsync(await response.arrayBuffer(), base)
       if (disposed || !studies.includes(study)) { releaseObject(gltf.scene); return }
@@ -372,10 +366,11 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       }
       study.scroll = reducedMotion.matches ? 0 : settleWorkStudy(study.scroll, study.scrollTarget, elapsed)
       if (study.scroll !== study.scrollTarget) settling = true
-      if (live && study.spinning) study.orbit = (study.orbit + elapsed * .13) % (Math.PI * 2)
+      study.controls.autoRotate = live && study.spinning
+      study.controls.update(elapsed)
       workStudyPose(motionSeconds, study.definition.phase, study.scroll, !reducedMotion.matches, study.pose)
-      study.object.rotation.set(study.definition.pitch + study.pose.pitch + study.manualPitch, study.definition.yaw + study.pose.yaw + study.manualYaw + study.orbit, study.pose.roll)
-      study.object.position.set(study.manualX * study.moveBounds.worldWidth, study.pose.y - study.manualY * study.moveBounds.worldHeight, 0)
+      study.object.rotation.set(study.definition.pitch + study.pose.pitch, study.definition.yaw + study.pose.yaw, study.pose.roll)
+      study.object.position.set(0, study.pose.y, 0)
       const x = Math.round(study.left * size.scaleX)
       const y = Math.round((cssHeight - study.top - study.height) * size.scaleY)
       const width = Math.max(1, Math.round(study.width * size.scaleX))
@@ -476,7 +471,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       element.style.touchAction = previousTouchAction
       if (previousTabIndex === null) element.removeAttribute('tabindex')
     })
-    let drag: { id: number; x: number; y: number; yaw: number; pitch: number; offsetX: number; offsetY: number; move: boolean; started: boolean; touch: boolean } | null = null
+    let drag: { id: number; x: number; y: number; started: boolean; touch: boolean } | null = null
     function end() {
       if (drag && element.hasPointerCapture(drag.id)) element.releasePointerCapture(drag.id)
       drag = null
@@ -486,8 +481,8 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     bind(element, 'pointerdown', raw => {
       const event = raw as PointerEvent
       const control = event.target instanceof Element ? event.target.closest('a,button,input,textarea,select') : null
-      if (!event.isPrimary || event.button !== 0 || (control && control !== element)) return
-      drag = { id: event.pointerId, x: event.clientX, y: event.clientY, yaw: study.manualYaw, pitch: study.manualPitch, offsetX: study.manualX, offsetY: study.manualY, move: element.dataset.workGesture === 'move', started: false, touch: event.pointerType === 'touch' }
+      if (!event.isPrimary || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || (control && control !== element)) return
+      drag = { id: event.pointerId, x: event.clientX, y: event.clientY, started: false, touch: event.pointerType === 'touch' }
     })
     bind(element, 'pointermove', raw => {
       const event = raw as PointerEvent
@@ -508,13 +503,9 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
         element.dataset.spinning = 'false'
       }
       event.preventDefault()
-      if (drag.move) {
-        study.manualX = boundedStudyInput(drag.offsetX + dx / Math.max(1, study.width), study.moveBounds.x)
-        study.manualY = boundedStudyInput(drag.offsetY + dy / Math.max(1, study.height), study.moveBounds.y)
-      } else {
-        study.manualYaw = studyYaw(drag.yaw + dx * .007)
-        study.manualPitch = boundedStudyInput(drag.pitch + dy * .005, .55)
-      }
+      rotateStudyPointer(study.controls, dx, dy, element.clientHeight)
+      drag.x = event.clientX
+      drag.y = event.clientY
       inputStats(study)
       requestRender()
     }, { passive: false })
@@ -530,19 +521,10 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     })
     bind(element, 'keydown', raw => {
       const event = raw as KeyboardEvent
-      if (event.target !== element) return
+      if (event.target !== element || event.altKey || event.ctrlKey || event.metaKey) return
       if (event.key === 'Home') { event.preventDefault(); resetStudy(study); return }
-      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return
+      if (!rotateStudyKey(study.controls, event.key)) return
       event.preventDefault()
-      const dx = event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowRight' ? 1 : 0
-      const dy = event.key === 'ArrowUp' ? -1 : event.key === 'ArrowDown' ? 1 : 0
-      if (element.dataset.workGesture === 'move') {
-        study.manualX = boundedStudyInput(study.manualX + dx * .025, study.moveBounds.x)
-        study.manualY = boundedStudyInput(study.manualY + dy * .025, study.moveBounds.y)
-      } else {
-        study.manualYaw = studyYaw(study.manualYaw + dx * .12)
-        study.manualPitch = boundedStudyInput(study.manualPitch + dy * .08, .55)
-      }
       study.spinning = false
       element.dataset.spinning = 'false'
       inputStats(study)
@@ -551,20 +533,15 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   }
 
   function inputStats(study: Study) {
-    study.element.dataset.manualYaw = study.manualYaw.toFixed(4)
-    study.element.dataset.manualPitch = study.manualPitch.toFixed(4)
-    study.element.dataset.manualX = study.manualX.toFixed(4)
-    study.element.dataset.manualY = study.manualY.toFixed(4)
+    study.element.dataset.manualYaw = study.controls.getAzimuthalAngle().toFixed(4)
+    study.element.dataset.manualPitch = (study.controls.getPolarAngle() - Math.atan2(1, .04)).toFixed(4)
   }
 
   function resetStudy(study: Study) {
-    study.manualYaw = 0
-    study.manualPitch = 0
-    study.manualX = 0
-    study.manualY = 0
-    study.orbit = 0
     study.spinning = false
     study.element.dataset.spinning = 'false'
+    resetStudyOrbit(study.controls)
+    fit(study)
     inputStats(study)
     requestRender()
   }
@@ -582,6 +559,9 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     for (const study of studies) {
       for (const cleanup of study.inputCleanups) cleanup()
       study.inputCleanups.length = 0
+      // These controls never connect to DOM or allocate GPU resources. Three's
+      // disconnect assumes a non-null DOM element; there is nothing to detach.
+      if (study.controls.domElement) study.controls.dispose()
     }
     for (const study of studies) if (study.source) releaseObject(study.source)
     quad?.geometry.dispose()
@@ -701,10 +681,12 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       const rim = new THREE.DirectionalLight(0xffffff, 2.2)
       rim.position.set(2, 3, -4)
       scene.add(key, fill, rim, new THREE.HemisphereLight(0xffffff, 0x252525, .35))
+      const camera = new THREE.PerspectiveCamera(34, 1, .01, 20)
+      const controls = createStudyOrbit(camera)
       const study: Study = {
-        element, slug, scene, camera: new THREE.PerspectiveCamera(34, 1, .01, 20), object: null, source: null, materials: [], definition,
+        element, slug, scene, camera, controls, object: null, source: null, materials: [], definition,
         pose: { yaw: 0, pitch: 0, roll: 0, y: 0, idleYaw: 0 }, loading: false, failed: false, painted: false, visible: false, near: false,
-        top: 0, left: 0, width: 0, height: 0, radius: 1.2, scroll: 0, scrollTarget: 0, manualYaw: 0, manualPitch: 0, manualX: 0, manualY: 0, moveBounds: { x: 0, y: 0, worldWidth: 1, worldHeight: 1 }, orbit: 0, spinning: false, frames: 0, fadeStart: -1, hover: 0, hoverTarget: 0, hoverStart: -1e9, parts: [], inputCleanups: [],
+        top: 0, left: 0, width: 0, height: 0, radius: 1.2, scroll: 0, scrollTarget: 0, spinning: false, frames: 0, fadeStart: -1, hover: 0, hoverTarget: 0, hoverStart: -1e9, parts: [], inputCleanups: [],
       }
       studies.push(study)
       if (element.dataset.workInteractive === 'true') interactive(study)

@@ -29,16 +29,16 @@
     },
     {
       "id": "knight",
-      "sha256": "960ab1e011b8b2295f37940327e63304af1967d55d979ffebbae3546384d4d16",
+      "sha256": "73a2914d40b05d8024d8340c28c0ccb69cb53ccb0edf56ebb4312f04160a8fec",
       "deterministic": true,
-      "bytes": 934256,
-      "triangles": 25020,
+      "bytes": 1192504,
+      "triangles": 38580,
       "validation": {
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.999999955864916,
-        "maximumNormalLength": 1.0000000374083127
+        "minimumNormalLength": 0.999999959821547,
+        "maximumNormalLength": 1.0000000404605254
       }
     },
     {

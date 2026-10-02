@@ -1,4 +1,4 @@
-/** Original project instruments. Run: node tools/build-work-models.mjs [optional study IDs] */
+/** Reproducible original work sculptures. Run: node tools/build-work-models.mjs [study IDs] */
 import { createHash } from 'node:crypto'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
@@ -7,18 +7,18 @@ import { Document, NodeIO } from '@gltf-transform/core'
 import { getBounds, weld } from '@gltf-transform/functions'
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
 import validator from 'gltf-validator'
-
-const output = resolve(import.meta.dirname, '../public/work-studies')
-const io = new NodeIO()
 import { vec, materialStyles } from './work-models/geometry.mjs'
 import { opportunityInstrument, marketObservatory } from './work-models/instruments.mjs'
 import { syntheticMind, unfinishedMechanism } from './work-models/organic.mjs'
 
+const output = resolve(import.meta.dirname, '../public/work-studies')
+const io = new NodeIO()
+// These modules are the authoritative source; no legacy inline model builders.
 const studies = [
-  { id: 'internshipdeadlines', project: 'InternshipDeadlines', title: 'Opportunity instrument', concept: 'Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage. Flat beveled crescents, vernier marks, meshing gears, real standoffs and a hinged pendulum connect dates, data and opportunity.', rotation: [.08,-.20,-.12], make: opportunityInstrument },
-  { id: 'sapien', project: 'Sapien', title: 'Synthetic mind', concept: 'A sculpted face with recessed eyes, neutral lips, anatomical ears and a cutaway forehead opens into paired ridged cortical lobes. Thick meandering gyri surround a sparse relay network; a continuous cervical spine and attached brain stem connect the head to machined vertebral collars.', rotation: [.06,-.40,.02], make: syntheticMind },
-  { id: 'investing-markets', project: 'Investing & Markets', title: 'Market observatory', concept: 'Smooth continent reliefs, real coastal sidewalls and selective graticule sit on a continuous steel ocean shell. A beveled meridian yoke, stepped polar bearings, partial indexed vernier, six geographic hubs and four raised routes make a restrained market observatory.', rotation: [.12,-.13,-.13], make: marketObservatory },
-  { id: 'miscellaneous', project: 'Miscellaneous', title: 'Unfinished mechanism', concept: 'Five pierced folded sheets with inset triangular windows and return lips form an open mechanism. Crease-aligned shafts, fitted hinge knuckles, slotted fasteners, two tension springs and a meshing geared core give the experimental form a coherent construction.', rotation: [.08,-.21,.09], make: unfinishedMechanism },
+  { "id": "internshipdeadlines", "project": "InternshipDeadlines", "title": "Opportunity instrument", "concept": "Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage. Flat beveled crescents, vernier marks, meshing gears, real standoffs and a hinged pendulum connect dates, data and opportunity.", rotation: [0.08, -0.2, -0.12], make: opportunityInstrument },
+  { "id": "sapien", "project": "Sapien", "title": "Synthetic mind", "concept": "A sculpted face with recessed eyes, neutral lips, anatomical ears and a cutaway forehead opens into paired ridged cortical lobes. Thick meandering gyri surround a sparse relay network; a continuous cervical spine and attached brain stem connect the head to machined vertebral collars.", rotation: [0.06, -0.4, 0.02], make: syntheticMind },
+  { "id": "investing-markets", "project": "Investing & Markets", "title": "Market observatory", "concept": "Smooth continent reliefs, real coastal sidewalls and selective graticule sit on a continuous steel ocean shell. A beveled meridian yoke, stepped polar bearings, partial indexed vernier, six geographic hubs and four raised routes make a restrained market observatory.", rotation: [0.12, -0.13, -0.13], make: marketObservatory },
+  { "id": "miscellaneous", "project": "Miscellaneous", "title": "Unfinished mechanism", "concept": "Five pierced folded sheets with inset triangular windows and return lips form an open mechanism. Crease-aligned shafts, fitted hinge knuckles, slotted fasteners, two tension springs and a meshing geared core give the experimental form a coherent construction.", rotation: [0.08, -0.21, 0.09], make: unfinishedMechanism },
 ]
 
 function normalize(geometries, rotation) {
@@ -143,13 +143,14 @@ for (const id of selectedIds) {
 }
 await mkdir(output, { recursive: true })
 const manifest = {
-  version: 4,
+  version: 5,
   generator: 'tools/build-work-models.mjs',
   ownership: 'Original procedural geometry created for Sulayman Bowles. No third-party model or texture inputs.',
   license: 'LicenseRef-Site-Owner',
   licenseNote: 'Original site assets. The site owner retains the rights; no third-party model or texture licenses apply.',
   unit: 'Each sculpture is centered at the origin and normalized to a maximum span of 2 units.',
-  material: 'Four texture-free monochrome materials: satin silver, dark steel, graphite recesses and porcelain. Distinct coverage values retain detail through halftone.',
+  sources: ['tools/work-models/geometry.mjs', 'tools/work-models/instruments.mjs', 'tools/work-models/organic.mjs'],
+  material: 'Four texture-free monochrome materials: satin silver, dark steel, graphite inlays and pale porcelain. Smooth analytical surfaces, rounded machined bevels and recessed cavities retain readable construction through halftone.',
   geometryBudget: { maximumBytesPerModel: 1500000, maximumTrianglesPerModel: 60000, maximumMeshesPerModel: 12, compression: 'Lossless bitwise vertex welding; no decoder required.' },
   animation: 'Independent components named hover-* export centered local shaft/hinge pivots with unit articulationAxis vectors in GLTF node extras. Structural assemblies remain static. These support renderer-driven articulation. No embedded animation, extensions, textures or decoder required.',
   models: [],

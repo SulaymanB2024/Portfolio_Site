@@ -156,7 +156,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     canvas.dataset.effectPasses = '3'
     let object: THREE.Group | null = null
     let lionStudy: ReturnType<typeof createLionStudy> | null = null
-    let fieldTarget = .42
+    let fieldTarget = .06
     let fieldPlaying = true
     let frame = 0
     let printFrame = 0
@@ -437,7 +437,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
               lionStudy.setPixelRatio(renderer.getPixelRatio())
               group.add(lionStudy.group)
             } else group.add(gltf.scene)
-            group.rotation.set(kind === 'headrest' ? .16 : kind === 'crystal' ? 0.12 : 0, kind === 'headrest' ? -.45 : kind === 'crystal' ? 0.4 : -0.4, kind === 'headrest' ? -.04 : kind === 'crystal' ? -0.08 : 0.1)
+            group.rotation.set(kind === 'headrest' ? .04 : kind === 'crystal' ? 0.12 : 0, kind === 'headrest' ? -.32 : kind === 'crystal' ? 0.4 : -0.4, kind === 'headrest' ? -.04 : kind === 'crystal' ? -0.08 : 0.1)
           }
         }
         own(group)

@@ -14,7 +14,7 @@ export default function ArtCube({ artwork }: { artwork: GenerativeArtwork }) {
     else setPaused(true)
   }
   return <figure className="article-art-cube" data-sketch={artwork.sketchId} data-treatment={artwork.treatment} data-art-state={state} data-embedded="true">
-    <div className="art-cube-square"><AnimatedArtwork artwork={artwork} size={400} eager paused={stopped} embedded transitionName={artworkTransitionName(artwork)} onStateChange={setState} />{!motion.reduced && <button className="art-cube-control" aria-label={stopped ? 'Play artwork' : 'Pause artwork'} aria-pressed={!stopped} disabled={state === 'fallback'} onClick={toggle}><span aria-hidden="true">{stopped ? '▶' : 'Ⅱ'}</span></button>}</div>
-    <figcaption><span>{artwork.title}</span><a href={artwork.attribution.sourceUrl} target="_blank" rel="noreferrer" aria-label={`Original ${artwork.title} sketch by @yuruyurau`}>@yuruyurau ↗</a></figcaption>
+    <div className="art-cube-square"><AnimatedArtwork artwork={artwork} size={400} eager paused={stopped} embedded transitionName={artworkTransitionName(artwork)} onStateChange={setState} /></div>
+    <figcaption><div className="art-cube-credit"><span>{artwork.title}</span><a href={artwork.attribution.sourceUrl} target="_blank" rel="noreferrer" aria-label={`Original ${artwork.title} sketch by @yuruyurau`}>@yuruyurau ↗</a></div>{!motion.reduced && <button className="art-cube-control" aria-label={stopped ? 'Play artwork' : 'Pause artwork'} aria-pressed={!stopped} disabled={state === 'fallback'} onClick={toggle}><span aria-hidden="true">{stopped ? '▶' : 'Ⅱ'}</span>{stopped ? 'Play' : 'Pause'}</button>}</figcaption>
   </figure>
 }

@@ -22,7 +22,7 @@ export const projects: Project[] = [
   {
     slug: 'internshipdeadlines', number: '01', name: 'InternshipDeadlines', kind: 'crystal', category: 'Product',
     tags: ['Product', 'Search', 'Data systems'],
-    summary: 'I built a place to find internships, research employers, and plan what comes next.',
+    summary: 'I founded a platform to help students find internships, research employers, and plan applications.',
     headline: ['A clearer path', 'to the next step.'],
     overview: 'Internship recruiting is scattered across employer sites, job boards, and deadlines that are easy to miss. I founded InternshipDeadlines to bring that information into a useful workflow: discover roles, understand the requirements, build a shortlist, and prepare. Underneath the interface is a data pipeline for validating sources, organizing listings, and keeping a path back to the employer’s original posting.',
     areas: [
@@ -36,7 +36,7 @@ export const projects: Project[] = [
   {
     slug: 'sapien', number: '02', name: 'Sapien', kind: 'ribbon', category: 'AI',
     tags: ['AI research', 'Growth', 'Storytelling'],
-    summary: 'I lead growth at Sapien, helping people understand what simulated audiences can tell them.',
+    summary: 'I lead growth and positioning, showing how simulated audiences can inform product, pricing, and messaging decisions.',
     headline: ['From simulated choices', 'to useful questions.'],
     overview: 'Sapien uses synthetic populations to explore how people might respond to products, prices, and messages. My work is to make that capability understandable and useful: clarify the product’s positioning, develop buyer use cases, and turn research into articles, videos, and sales narratives. That means paying close attention to both the result and the claim it can support.',
     areas: [
@@ -50,7 +50,7 @@ export const projects: Project[] = [
   {
     slug: 'investing-markets', number: '03', name: 'Investing & Markets', kind: 'globe', category: 'Markets',
     tags: ['Finance', 'Energy', 'Research'],
-    summary: 'Following the incentives, contracts, and cash flows behind a market story.',
+    summary: 'I study the contracts, incentives, and cash flows behind infrastructure, energy markets, and digital assets.',
     headline: ['Follow the incentives.', 'Read the fine print.'],
     overview: 'I study finance at UT Austin and research markets through coursework, venture work, and independent writing. I’m interested in the mechanisms behind a thesis: who makes the decision, who receives the cash flow, and who bears the risk. My work ranges from Texas toll-road contracts to digital assets and energy markets, with a focus on the assumptions that can change the conclusion.',
     areas: [
@@ -63,7 +63,7 @@ export const projects: Project[] = [
   {
     slug: 'miscellaneous', number: '04', name: 'Experiments', kind: 'cross', category: 'Experiments',
     tags: ['Creative research', 'Graphics', 'Tools'],
-    summary: 'Small tools, moving images, and ideas I understand better by building them.',
+    summary: 'I build small tools and experiment with light, texture, and motion. This site is part of that practice.',
     headline: ['Try the idea.', 'See what happens.'],
     overview: 'Some projects start with a practical problem; others start with a texture, a pattern, or a question I can’t leave alone. This is where I explore creative research, interactive graphics, and small tools. The site itself is part of that practice: historical objects, ordered dithering, and generative artwork used to make a digital page feel more tactile.',
     areas: [

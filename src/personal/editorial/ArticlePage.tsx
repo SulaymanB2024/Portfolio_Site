@@ -3,6 +3,7 @@ import catalog from './data/catalog.json'
 import { inlineText, markdownToReact } from './Markdown'
 import { articleHref } from './links'
 import ArtCube from './ArtCube'
+import AtlasFigure from './AtlasFigure'
 import { getArticleGenerativeArtwork } from './generative/manifest'
 import { articleReturnHref, articleSection, relatedArticles, sectionHref } from './library'
 import ReaderNavigation from './ReaderNavigation'
@@ -18,6 +19,7 @@ const ArticleFigures = lazy(() => import('./ArticleFigures').then(module => ({ d
 const sectionId = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
 function Figures({ slug, id, position }: { slug: string; id: string; position: 'before' | 'after' }) {
+  if (slug === 'atlas-building-an-evidence-console' && id === 'product' && position === 'after') return <AtlasFigure />
   if (!['the-first-ai-managers', 'who-owns-texas-toll-roads', 'viralbench-codex-agent-harness'].includes(slug)) return null
   return <Suspense fallback={null}><ArticleFigures slug={slug} sectionId={id} position={position} /></Suspense>
 }
@@ -28,20 +30,36 @@ function StoryImage({ image, slug }: { image: NonNullable<StoryImageData>; slug:
   return <figure className="reader-hero-image"><img src={`${import.meta.env.BASE_URL}${image.src.replace(/^\//, '')}`} alt={image.alt} width={slug === 'viralbench-codex-agent-harness' ? 1672 : 1200} height={slug === 'viralbench-codex-agent-harness' ? 941 : 630} decoding="async" loading="lazy" />{image.caption && <figcaption>{image.caption}</figcaption>}</figure>
 }
 
-function markdownBody(markdown: string, slug: string, image?: StoryImageData) {
+function OpeningNotes({ article, boundary = false }: { article: WritingArticle; boundary?: boolean }) {
+  return <>{boundary && (article.pageContent?.boundary?.text || article.evidenceBoundary) && <p className="reader-evidence">{inlineText(article.pageContent?.boundary?.text || article.evidenceBoundary || '')}</p>}{article.pageContent?.callouts?.map(callout => <aside className="reader-callout" key={callout.title}><span className="eyebrow">{callout.label}</span><h2>{callout.title}</h2>{markdownToReact(callout.markdown)}</aside>)}{article.pageContent?.metrics?.length ? <dl className="reader-metrics">{article.pageContent.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd><dd className="reader-metric-note">{metric.note}</dd></div>)}</dl> : null}</>
+}
+
+function markdownBody(markdown: string, slug: string, image?: StoryImageData, article?: WritingArticle) {
   const blocks = markdownToReact(markdown.replace(/^# .+\n+/, ''))
   if (slug !== 'viralbench-codex-agent-harness') return blocks
   const result: ReactNode[] = []
   let current = ''
+  let harnessDiagramPlaced = false
+  const harnessSection = 'what-i-mean-by-codex-as-a-harness'
   blocks.forEach((block, index) => {
     if (isValidElement<{ id: string }>(block) && block.type === 'h2') {
-      if (!current && image) result.push(<StoryImage key="story-image" image={image} slug={slug} />)
-      if (current) result.push(<Figures key={`after-${index}`} slug={slug} id={current} position="after" />)
+      if (!current) {
+        if (article) result.push(<OpeningNotes key="opening-notes" article={article} boundary />)
+        if (image) result.push(<StoryImage key="story-image" image={image} slug={slug} />)
+      }
+      if (current && !(current === harnessSection && harnessDiagramPlaced)) result.push(<Figures key={`after-${index}`} slug={slug} id={current} position="after" />)
       current = block.props.id
       result.push(block, <Figures key={`before-${index}`} slug={slug} id={current} position="before" />)
-    } else result.push(block)
+    } else {
+      const code = isValidElement<{ children: ReactNode }>(block) && block.type === 'pre' ? block.props.children : null
+      const text = isValidElement<{ children: ReactNode }>(code) ? code.props.children : null
+      if (!harnessDiagramPlaced && current === harnessSection && typeof text === 'string' && text.includes('LIVE ENVIRONMENT') && text.includes('ViralBench agent') && text.includes('Codex worktree')) {
+        result.push(<Figures key="harness-diagram" slug={slug} id={current} position="after" />, <details key="harness-text-diagram" className="reader-disclosure reader-diagram-source"><summary><span>Text version of the proposed workflow</span><span aria-hidden="true">+</span></summary>{block}</details>)
+        harnessDiagramPlaced = true
+      } else result.push(block)
+    }
   })
-  if (current) result.push(<Figures key="final-figure" slug={slug} id={current} position="after" />)
+  if (current && !(current === harnessSection && harnessDiagramPlaced)) result.push(<Figures key="final-figure" slug={slug} id={current} position="after" />)
   return result
 }
 
@@ -135,7 +153,7 @@ export default function ArticlePage({ slug }: { slug: string }) {
     window.addEventListener('hashchange', navigate)
     return () => { cancelAnimationFrame(frame); window.removeEventListener('hashchange', navigate) }
   }, [article])
-  const body = useMemo(() => article?.markdown && !article.markdownSections ? markdownBody(article.markdown, article.slug, article.pageContent?.hero?.image) : null, [article])
+  const body = useMemo(() => article?.markdown && !article.markdownSections ? markdownBody(article.markdown, article.slug, article.pageContent?.hero?.image, article) : null, [article])
   const downloads = useMemo(() => [...(article?.supportingAssets || []), ...(article?.researchAssets || []).flatMap(asset => asset.supportingAssets || [])].filter((asset, index, items) => items.findIndex(item => item.href === asset.href) === index), [article])
   const headings = useMemo(() => {
     if (!article) return []
@@ -161,11 +179,9 @@ export default function ArticlePage({ slug }: { slug: string }) {
   const backHref = articleReturnHref(location.hash, articles)
   return <article className="article-page" data-story={article.slug} onClick={citationClick}>
     <a className="project-back mono" href={backHref}>← {siteCopy.reader.back}</a>
-    <header className="article-cover"><div className="reader-heading"><p className="eyebrow">{article.category}</p><h1>{article.displayTitle || article.title}</h1><p className="reader-subtitle">{copy.subtitle}</p><div className="reader-author">Sulayman Bowles</div><div className="reader-byline mono"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span>{article.readTime}</span>{article.dateModified && article.dateModified !== article.date && <span>Updated {displayDate(article.dateModified)}</span>}</div><ArticleUtilities /></div><ArtCube key={article.slug} artwork={artwork} /></header>
+    <header className="article-cover"><div className="reader-heading"><p className="eyebrow">{article.category}</p><h1>{article.displayTitle || article.title}</h1><p className="reader-subtitle">{copy.subtitle}</p><div className="reader-signature"><div className="reader-author">Sulayman Bowles</div><div className="reader-byline"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span>{article.readTime}</span>{article.dateModified && article.dateModified !== article.date && <span>Updated {displayDate(article.dateModified)}</span>}</div></div><ArticleUtilities /></div><ArtCube key={article.slug} artwork={artwork} /></header>
     <div className="reader-layout"><ReaderNavigation sections={headings} /><div className="reader-prose">
-      {article.pageContent?.callouts?.map(callout => <aside className="reader-callout" key={callout.title}><span className="eyebrow">{callout.label}</span><h2>{callout.title}</h2>{markdownToReact(callout.markdown)}</aside>)}
-      {article.pageContent?.metrics?.length ? <dl className="reader-metrics">{article.pageContent.metrics.map(metric => <div key={metric.label}><dd>{metric.value}</dd><dt>{metric.label}</dt><p>{metric.note}</p></div>)}</dl> : null}
-      {body || <><div className="article-lede">{(article.ledeMarkdown || article.lede) ? markdownToReact(article.ledeMarkdown || article.lede || '') : article.content?.map((paragraph, index) => <p key={index}>{inlineText(paragraph, `intro-${index}`)}</p>)}</div><Figures slug={article.slug} id="lede" position="after" />{article.thesis && <p className="reader-thesis">{inlineText(article.thesis)}</p>}{(article.pageContent?.boundary?.text || article.evidenceBoundary) && <p className="reader-evidence">{inlineText(article.pageContent?.boundary?.text || article.evidenceBoundary || '')}</p>}{heroImage && <StoryImage image={heroImage} slug={article.slug} />}{article.sections?.map(section => <Section key={section.id} section={section} slug={article.slug} />)}{article.markdownSections?.map(section => <Section key={section.id} section={section} tables={article.tables} slug={article.slug} />)}</>}
+      {body || <><div className="article-lede">{(article.ledeMarkdown || article.lede) ? markdownToReact(article.ledeMarkdown || article.lede || '') : article.content?.map((paragraph, index) => <p key={index}>{inlineText(paragraph, `intro-${index}`)}</p>)}</div><Figures slug={article.slug} id="lede" position="after" />{article.thesis && <p className="reader-thesis">{inlineText(article.thesis)}</p>}<OpeningNotes article={article} boundary />{heroImage && <StoryImage image={heroImage} slug={article.slug} />}{article.sections?.map(section => <Section key={section.id} section={section} slug={article.slug} />)}{article.markdownSections?.map(section => <Section key={section.id} section={section} tables={article.tables} slug={article.slug} />)}</>}
       {article.cases?.length ? <Cases cases={article.cases} filters={article.pageContent?.caseFilters} /> : null}
       {article.factGaps?.length ? <section id="fact-gaps" className="reader-section"><h2>What remains unknown</h2>{article.factGaps.map(gap => <div key={gap.title}><h3>{gap.title}</h3><ul>{gap.items.map((item, index) => <li key={index}>{inlineText(item)}</li>)}</ul></div>)}</section> : null}
       {article.openQuestions?.length ? <section id="open-questions" className="reader-section"><h2>Open questions</h2><ul>{article.openQuestions.map((question, index) => <li key={index}>{inlineText(question)}</li>)}</ul></section> : null}

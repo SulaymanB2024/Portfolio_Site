@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { TAU, Y, vec, group, shaftAxis, put, tube, rod, jewel, bevelBox, gear, bevelTriangle, machinedRing, bolt } from './geometry.mjs'
+import { TAU, Y, vec, group, shaftAxis, put, tube, rod, jewel, bevelBox, gear, bevelTriangle, machinedRing, bolt, finishBevel } from './geometry.mjs'
 
 function headPoint(theta, phi) {
   const y = Math.sin(phi) * .83 + .06
@@ -18,36 +18,54 @@ function headPoint(theta, phi) {
   return vec(x,y,z)
 }
 function headPatch(theta0, theta1, phi0, phi1, cols = 32, rows = 36, eyes = false) {
-  const positions = []
-  const indices = []
-  for (let row=0; row<=rows; row++) for(let col=0;col<=cols;col++) positions.push(...headPoint(theta0+(theta1-theta0)*col/cols,phi0+(phi1-phi0)*row/rows).toArray())
-  for (let row=0;row<rows;row++) for(let col=0;col<cols;col++) {
-    const a=row*(cols+1)+col, b=a+1, c=a+cols+1,d=c+1
-    const theta=theta0+(theta1-theta0)*(col+.5)/cols
-    const phi=phi0+(phi1-phi0)*(row+.5)/rows
+  return sampledSurface((u,v)=>headPoint(theta0+(theta1-theta0)*u,phi0+(phi1-phi0)*v),cols,rows,(u,v)=>{
+    const theta=theta0+(theta1-theta0)*u
+    const phi=phi0+(phi1-phi0)*v
     const eyeX=(Math.abs(theta)-.40)/.235
     const lidHeight=(phi>.17?.059:.036)*Math.max(0,1-eyeX*eyeX)
-    if(eyes&&Math.abs(eyeX)<1&&Math.abs(phi-.17)<lidHeight)continue
-    indices.push(a,b,d,a,d,c)
-  }
-  // Remove unreferenced vertices at the eye apertures before computing normals.
-  const used=[...new Set(indices)],remap=new Map(used.map((vertex,index)=>[vertex,index]))
-  const compact=used.flatMap(vertex=>positions.slice(vertex*3,vertex*3+3))
-  const g = new THREE.BufferGeometry()
-  g.setAttribute('position',new THREE.Float32BufferAttribute(compact,3));g.setIndex(indices.map(index=>remap.get(index)));g.computeVertexNormals();return g
+    return !(eyes&&Math.abs(eyeX)<1&&Math.abs(phi-.17)<lidHeight)
+  })
 }
 /** Compact a sampled surface so apertures cannot leave unused zero normals. */
-function sampledSurface(sample, columns, rows, retain = () => true) {
-  const positions=[],indices=[]
-  for(let row=0;row<=rows;row++)for(let col=0;col<=columns;col++)positions.push(...sample(col/columns,row/rows).toArray())
+function sampledSurface(sample, columns, rows, retain = () => true, windowDepth = 0) {
+  const positions=[],normals=[],indices=[]
+  const epsilon=.0001
+  for(let row=0;row<=rows;row++)for(let col=0;col<=columns;col++){
+    const u=col/columns,v=row/rows
+    const tangent=sample(u+epsilon,v).sub(sample(u-epsilon,v))
+    const bitangent=sample(u,Math.min(1,v+epsilon)).sub(sample(u,Math.max(0,v-epsilon)))
+    // Derivatives retain smooth anatomical and ridged-lobe lighting even at a
+    // cut-window boundary; triangle averages flatten those silhouettes.
+    const normal=tangent.cross(bitangent).normalize()
+    positions.push(...sample(u,v).toArray());normals.push(...normal.toArray())
+  }
   for(let row=0;row<rows;row++)for(let col=0;col<columns;col++)if(retain((col+.5)/columns,(row+.5)/rows)){
     const a=row*(columns+1)+col,b=a+1,c=a+columns+1,d=c+1
     indices.push(a,b,d,a,d,c)
   }
   const used=[...new Set(indices)],remap=new Map(used.map((vertex,index)=>[vertex,index]))
   const compact=used.flatMap(vertex=>positions.slice(vertex*3,vertex*3+3))
+  const compactNormals=used.flatMap(vertex=>normals.slice(vertex*3,vertex*3+3))
+  const compactIndices=indices.map(index=>remap.get(index))
+  if(windowDepth){
+    const edges=new Map()
+    for(let i=0;i<indices.length;i+=3)for(const[a,b]of[[indices[i],indices[i+1]],[indices[i+1],indices[i+2]],[indices[i+2],indices[i]]]){
+      const key=a<b?`${a}:${b}`:`${b}:${a}`
+      if(edges.has(key))edges.get(key).count++;else edges.set(key,{a,b,count:1})
+    }
+    for(const{a,b,count}of edges.values()){
+      const rowA=Math.floor(a/(columns+1)),rowB=Math.floor(b/(columns+1)),colA=a%(columns+1),colB=b%(columns+1)
+      if(count!==1||(rowA===rowB&&(rowA===0||rowA===rows))||(colA===colB&&(colA===0||colA===columns)))continue
+      const outerA=vec(...positions.slice(a*3,a*3+3)),outerB=vec(...positions.slice(b*3,b*3+3))
+      const innerA=outerA.clone().addScaledVector(vec(...normals.slice(a*3,a*3+3)),-windowDepth)
+      const innerB=outerB.clone().addScaledVector(vec(...normals.slice(b*3,b*3+3)),-windowDepth)
+      const normal=outerB.clone().sub(outerA).cross(innerA.clone().sub(outerA)).normalize(),base=compact.length/3
+      for(const point of[outerA,innerA,outerB,innerB]){compact.push(...point.toArray());compactNormals.push(...normal.toArray())}
+      compactIndices.push(base,base+2,base+1,base+2,base+3,base+1)
+    }
+  }
   const geometry=new THREE.BufferGeometry()
-  geometry.setAttribute('position',new THREE.Float32BufferAttribute(compact,3));geometry.setIndex(indices.map(index=>remap.get(index)));geometry.computeVertexNormals()
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(compact,3));geometry.setAttribute('normal',new THREE.Float32BufferAttribute(compactNormals,3));geometry.setIndex(compactIndices)
   return geometry
 }
 
@@ -61,7 +79,8 @@ function earShell(side) {
 const brainCenter=()=>vec(0,.585,-.018)
 function lobePoint(side,angle,latitude) {
   // Broad lobes have actual ridged volume; their sulci are not an outer wire cage.
-  const ridge=.017*Math.cos(angle*5+Math.sin(latitude*3)*1.20+side*.4)+.006*Math.sin(latitude*9+angle*2)
+  const phase=angle*5+Math.sin(latitude*3)*1.20+side*.4+.26*Math.sin(angle*2-latitude*3)
+  const ridge=.019*Math.cos(phase)+.006*Math.sin(latitude*9+angle*2)
   const radial=1+ridge/.24
   return vec(side*.215+Math.sin(angle)*Math.cos(latitude)*.205*radial,.585+Math.sin(latitude)*.355*radial,-.018+Math.cos(angle)*Math.cos(latitude)*.365*radial)
 }
@@ -70,7 +89,7 @@ function brainLobe(side) {
     const a=u*TAU,lat=-1.48+v*2.96
     // Intentional access windows reveal the sparse interior relay, not a noisy wire ball.
     return !((Math.abs(a-2.05)<.22&&Math.abs(lat-.03)<.27)||(Math.abs(a-4.56)<.18&&Math.abs(lat+.38)<.18))
-  })
+  },.021)
 }
 
 function syntheticMind() {
@@ -132,7 +151,7 @@ function syntheticMind() {
     // Thick meandering meridian gyri expose paired cortical lobes, not hairlike rings.
     for(let fold=0;fold<5;fold++)tube(gyri,Array.from({length:37},(_,i)=>{
       const latitude=-1.18+i/36*2.40
-      const a=fold/5*TAU+side*.14+(.12+.015*fold)*Math.sin(latitude*3.4+fold*.7)
+      const a=fold/5*TAU+side*.14+(.12+.015*fold)*Math.sin(latitude*3.4+fold*.7)+.065*Math.cos(latitude)*Math.sin(latitude*6.2-fold*.9)
       const p=lobePoint(side,a,latitude)
       return p.add(vec((p.x-side*.215)*.020,(p.y-.585)*.020,(p.z+.018)*.020))
     }),fold%2?.019:.024,36,8)
@@ -170,7 +189,7 @@ function piercedFold(part,a,b,c,depth=.034) {
   const inner=corners.map(p=>p.clone().sub(center).multiplyScalar(.40).add(center)).reverse()
   const hole=new THREE.Path(inner);hole.closePath();shape.holes.push(hole)
   const geometry=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:.007,bevelThickness:.008,bevelSegments:2,curveSegments:1,steps:1})
-  geometry.translate(0,0,-depth/2);geometry.applyMatrix4(new THREE.Matrix4().makeBasis(tangent,bitangent,normal));put(part,geometry,a)
+  geometry.translate(0,0,-depth/2);geometry.applyMatrix4(new THREE.Matrix4().makeBasis(tangent,bitangent,normal));put(part,finishBevel(geometry),a)
   return normal
 }
 

@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { TAU, Y, vec, group, shaftAxis, put, tube, arc, rod, box, bevelBox, gear, machinedRing, bolt } from './geometry.mjs'
+import { TAU, Y, vec, group, shaftAxis, put, tube, arc, rod, box, bevelBox, gear, machinedRing, bolt, bevelFrame, finishBevel } from './geometry.mjs'
 
 const ringPoint = (radius, angle, center, rotation, z = 0) => vec(radius * Math.cos(angle), radius * Math.sin(angle), z)
   .applyEuler(new THREE.Euler(...rotation)).add(center)
@@ -94,7 +94,9 @@ function opportunityInstrument() {
     machinedRing(chassis, .047, .018, .025, 0, TAU, position.clone().add(vec(0, 0, -.082)), driveRotation, 24)
     machinedRing(backing, radius + .024, .022, .028, .12, Math.PI * 1.34, position.clone().add(vec(0, 0, -.07)), driveRotation, 48)
   }
-  bevelBox(backing, .47, .056, .038, vec(-.345, -.68, -.338), [0, 0, -.33], .007)
+  // A service opening and stepped shoulders make the bridge visibly carry the
+  // shafts, while exposing the rear gear train instead of another solid bar.
+  bevelFrame(backing, .47, .095, .040, .34, .035, vec(-.345, -.68, -.338), [0, 0, -.33], .006)
   for (const x of [-.54, -.15]) bolt(chassis, recess, vec(x, -.62 + (x + .54) * -.3, -.30), .024, [0, Math.PI, 0])
   // The bob and stem share one real hinge and articulate together.
   rod(pendulum, pendulumPivot, vec(.34, -.91, .24), .016, 10)
@@ -163,14 +165,25 @@ function continent(part, outline, radius) {
   put(part, face)
   // Real relief sidewalls keep coastlines legible from an oblique angle.
   const coast = coastline(outline, radius), wall = [], index = []
-  for (const p of coast) wall.push(...p.toArray(), ...p.clone().multiplyScalar((radius - .022) / radius).toArray())
+  const clockwise=THREE.ShapeUtils.isClockWise(points)
+  for (let i=0;i<coast.length;i++) {
+    const p=coast[i],tangent=coast[(i+1)%coast.length].clone().sub(coast[(i+coast.length-1)%coast.length]).normalize()
+    const inward=p.clone().normalize().cross(tangent).normalize().multiplyScalar(clockwise?-1:1)
+    // A shallow beveled shoulder descends to a real relief wall. Coastline top
+    // positions stay unchanged; only the oblique construction becomes richer.
+    const shoulder=p.clone().multiplyScalar((radius-.007)/radius).addScaledVector(inward,-.003)
+    const base=p.clone().multiplyScalar((radius-.028)/radius).addScaledVector(inward,-.003)
+    wall.push(...p.toArray(),...shoulder.toArray(),...base.toArray())
+  }
   for (let i = 0; i < coast.length; i++) {
-    const a = i * 2, b = (i + 1) % coast.length * 2
-    index.push(a, a + 1, b, a + 1, b + 1, b)
+    for(let level=0;level<2;level++){
+      const a=i*3+level,b=(i+1)%coast.length*3+level
+      index.push(a,a+1,b,a+1,b+1,b)
+    }
   }
   const walls = new THREE.BufferGeometry()
   walls.setAttribute('position', new THREE.Float32BufferAttribute(wall, 3)); walls.setIndex(index); walls.computeVertexNormals()
-  put(part, walls)
+  put(part, finishBevel(walls))
 }
 
 function geographicPath(part, from, to, lift, radius = .004) {
@@ -221,6 +234,9 @@ function marketObservatory() {
     for (const [radius, width, depth, offset] of [[.060, .024, .029, 0], [.044, .017, .038, side * .028]]) {
       machinedRing(part, radius, width, depth, 0, TAU, position.clone().add(vec(0, offset, 0)), [Math.PI / 2, 0, 0], 28)
     }
+    // A flush end cap, bored center and fitted index pins close the bearing.
+    machinedRing(part,.033,.014,.021,0,TAU,position.clone().add(vec(0,side*.055,0)),[Math.PI/2,0,0],28)
+    for(const x of[-.041,.041])bolt(part,recess,position.clone().add(vec(x,side*.045,0)),.013,[side*Math.PI/2,0,0])
     machinedRing(recess, .042, .016, .048, 0, TAU, position, [Math.PI / 2, 0, 0], 24)
     for (let i = 0; i < 12; i++) {
       const a = i / 12 * TAU

@@ -1,11 +1,16 @@
 {
-  "version": 4,
+  "version": 5,
   "generator": "tools/build-work-models.mjs",
   "ownership": "Original procedural geometry created for Sulayman Bowles. No third-party model or texture inputs.",
   "license": "LicenseRef-Site-Owner",
   "licenseNote": "Original site assets. The site owner retains the rights; no third-party model or texture licenses apply.",
   "unit": "Each sculpture is centered at the origin and normalized to a maximum span of 2 units.",
-  "material": "Four texture-free monochrome materials: satin silver, dark steel, graphite recesses and porcelain. Distinct coverage values retain detail through halftone.",
+  "sources": [
+    "tools/work-models/geometry.mjs",
+    "tools/work-models/instruments.mjs",
+    "tools/work-models/organic.mjs"
+  ],
+  "material": "Four texture-free monochrome materials: satin silver, dark steel, graphite inlays and pale porcelain. Smooth analytical surfaces, rounded machined bevels and recessed cavities retain readable construction through halftone.",
   "geometryBudget": {
     "maximumBytesPerModel": 1500000,
     "maximumTrianglesPerModel": 60000,
@@ -20,19 +25,19 @@
       "title": "Opportunity instrument",
       "concept": "Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage. Flat beveled crescents, vernier marks, meshing gears, real standoffs and a hinged pendulum connect dates, data and opportunity.",
       "path": "work-studies/internshipdeadlines.glb",
-      "bytes": 1107064,
-      "sha256": "c999e2b8256c05f4aa70df3ad0b4f867b06da1770cb7cfd3d3a5f76d1e8af39d",
-      "vertices": 38110,
-      "triangles": 30344,
+      "bytes": 1120396,
+      "sha256": "90f5c1d3e4119aef1c81a153734534f382d910bdbea82287a05a8c68a3a38b92",
+      "vertices": 37012,
+      "triangles": 36956,
       "meshes": 10,
       "materials": 4,
       "articulation": [
         {
           "name": "hover-clock-machined-crescent",
           "pivot": [
-            -0.00005102060628916277,
-            0.0282140183388119,
-            0.18266082369685302
+            -0.00005100607078893454,
+            0.028490875012724532,
+            0.18260878459662191
           ],
           "axis": [
             -0.33278818603996213,
@@ -43,9 +48,9 @@
         {
           "name": "hover-register-rear-crescent",
           "pivot": [
-            0.03709635266524844,
-            0.04285868533472167,
-            -0.0000068225734018377606
+            0.03708578411105337,
+            0.04313136982065098,
+            -0.0000068206296868478316
           ],
           "axis": [
             -0.5892420236005301,
@@ -56,9 +61,9 @@
         {
           "name": "hover-register-inner-index",
           "pivot": [
-            -0.060700574562799585,
-            -0.0029697841768637967,
-            0.5506191269975723
+            -0.06068328129093193,
+            -0.0026840434029462637,
+            0.5504622585275902
           ],
           "axis": [
             -0.03573211851499886,
@@ -69,9 +74,9 @@
         {
           "name": "hover-register-escapement-pendulum",
           "pivot": [
-            0.1983749567261826,
-            -0.441317791983773,
-            0.5107431880069558
+            0.1983184407527654,
+            -0.44090716818648634,
+            0.510597679980576
           ],
           "axis": [
             -0.19866933079506127,
@@ -82,9 +87,9 @@
         {
           "name": "hover-register-primary-gear",
           "pivot": [
-            -0.4905399331069653,
-            -0.4952648590267612,
-            -0.09303032035246309
+            -0.49040018088079185,
+            -0.4948388659960931,
+            -0.09300381650742738
           ],
           "axis": [
             -0.3035135754575507,
@@ -95,9 +100,9 @@
         {
           "name": "hover-register-transfer-gear",
           "pivot": [
-            -0.22060502702482293,
-            -0.6359951507905194,
-            -0.049418741516290436
+            -0.22054217782223812,
+            -0.6355290644458585,
+            -0.04940466237884315
           ],
           "axis": [
             -0.3035135754575507,
@@ -108,21 +113,21 @@
       ],
       "bounds": {
         "min": [
-          -0.9235925664742091,
-          -0.9999999952766196,
-          -0.7140825071208261
+          -0.9233294570366702,
+          -0.9999999878771907,
+          -0.7138790745244927
         ],
         "max": [
-          0.9235925684134862,
-          1.0000000251136218,
-          0.7140824518330313
+          0.9233294880469479,
+          1.0000000183497038,
+          0.7138790231241279
         ]
       },
       "validation": {
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999570200505,
+        "minimumNormalLength": 0.9999999628087679,
         "maximumNormalLength": 1.0000000389150936
       }
     },
@@ -132,19 +137,19 @@
       "title": "Synthetic mind",
       "concept": "A sculpted face with recessed eyes, neutral lips, anatomical ears and a cutaway forehead opens into paired ridged cortical lobes. Thick meandering gyri surround a sparse relay network; a continuous cervical spine and attached brain stem connect the head to machined vertebral collars.",
       "path": "work-studies/sapien.glb",
-      "bytes": 652732,
-      "sha256": "2918d66f9f120e9d3337d70fcccc0a520c91a7c1d0aa7538c09ddd36f8fbb219",
-      "vertices": 19094,
-      "triangles": 30940,
+      "bytes": 659196,
+      "sha256": "6104cfe5cc4144139a81fdac34536d6aa6f8fdd33182de282bd1952c97761c33",
+      "vertices": 19224,
+      "triangles": 31500,
       "meshes": 9,
       "materials": 4,
       "articulation": [
         {
           "name": "hover-sculpted-cortical-lobes",
           "pivot": [
-            -0.016079739868177918,
-            0.6114611765698604,
-            -0.046304516696352487
+            -0.016061311554167613,
+            0.6096143486472263,
+            -0.04625144903600653
           ],
           "axis": [
             -0.01841999182329376,
@@ -155,9 +160,9 @@
         {
           "name": "hover-organic-cortical-gyri",
           "pivot": [
-            -0.016079739868177918,
-            0.6114611765698604,
-            -0.046304516696352487
+            -0.016061311554167613,
+            0.6096143486472263,
+            -0.04625144903600653
           ],
           "axis": [
             -0.01841999182329376,
@@ -168,9 +173,9 @@
         {
           "name": "hover-subcortical-relay-points",
           "pivot": [
-            -0.016079739868177918,
-            0.6114611765698604,
-            -0.046304516696352487
+            -0.016061311554167613,
+            0.6096143486472263,
+            -0.04625144903600653
           ],
           "axis": [
             -0.01841999182329376,
@@ -181,9 +186,9 @@
         {
           "name": "hover-subcortical-pathways",
           "pivot": [
-            -0.016079739868177918,
-            0.6114611765698604,
-            -0.046304516696352487
+            -0.016061311554167613,
+            0.6096143486472263,
+            -0.04625144903600653
           ],
           "axis": [
             -0.01841999182329376,
@@ -194,22 +199,22 @@
       ],
       "bounds": {
         "min": [
-          -0.5684042572975159,
+          -0.5677528381347656,
           -1,
-          -0.605432391166687
+          -0.6047385334968567
         ],
         "max": [
-          0.5684042572975159,
-          1.0000000140027216,
-          0.605432391166687
+          0.5677528381347656,
+          1.0000000061961307,
+          0.6047385334968567
         ]
       },
       "validation": {
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999590869787,
-        "maximumNormalLength": 1.0000000405150073
+        "minimumNormalLength": 0.9999999557629761,
+        "maximumNormalLength": 1.0000000441297017
       }
     },
     {
@@ -218,10 +223,10 @@
       "title": "Market observatory",
       "concept": "Smooth continent reliefs, real coastal sidewalls and selective graticule sit on a continuous steel ocean shell. A beveled meridian yoke, stepped polar bearings, partial indexed vernier, six geographic hubs and four raised routes make a restrained market observatory.",
       "path": "work-studies/investing-markets.glb",
-      "bytes": 1017832,
-      "sha256": "3151bb65ed0b131b458a8b35700f4c3255d1c23d7d61611a5cf6f34353410af7",
-      "vertices": 30856,
-      "triangles": 44432,
+      "bytes": 1107184,
+      "sha256": "84d17c642db082aa9c0eae2c6645db61ce376a5cdbd58e0f9be2d9cd88955ad6",
+      "vertices": 33814,
+      "triangles": 47492,
       "meshes": 11,
       "materials": 4,
       "articulation": [
@@ -294,7 +299,7 @@
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999579651973,
+        "minimumNormalLength": 0.9999999567386649,
         "maximumNormalLength": 1.000000041410936
       }
     },
@@ -304,10 +309,10 @@
       "title": "Unfinished mechanism",
       "concept": "Five pierced folded sheets with inset triangular windows and return lips form an open mechanism. Crease-aligned shafts, fitted hinge knuckles, slotted fasteners, two tension springs and a meshing geared core give the experimental form a coherent construction.",
       "path": "work-studies/miscellaneous.glb",
-      "bytes": 947736,
-      "sha256": "7e97440671b81ae4ae6566c9ee9055566c675f9a02bf881e0b262f67f526b30b",
-      "vertices": 32575,
-      "triangles": 25792,
+      "bytes": 931392,
+      "sha256": "8f4e376b60c785310136378e5a4d0c62ea71c2f11bb1eb6bc5eb76ecfa564277",
+      "vertices": 30466,
+      "triangles": 31504,
       "meshes": 11,
       "materials": 4,
       "articulation": [
@@ -419,8 +424,8 @@
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999561409901,
-        "maximumNormalLength": 1.000000042180086
+        "minimumNormalLength": 0.9999999554003985,
+        "maximumNormalLength": 1.0000000384404502
       }
     }
   ]
