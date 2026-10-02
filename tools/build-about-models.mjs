@@ -1,0 +1,626 @@
+/** Original personal-interest specimens. Run: node tools/build-about-models.mjs [bass|knight|score] */
+import { createHash } from 'node:crypto'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
+import * as THREE from 'three'
+import { Document, NodeIO } from '@gltf-transform/core'
+import { getBounds, weld } from '@gltf-transform/functions'
+import { mergeGeometries, mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js'
+import validator from 'gltf-validator'
+
+const output = resolve(import.meta.dirname, '../public/about-objects')
+const io = new NodeIO()
+const TAU = Math.PI * 2
+const Y = new THREE.Vector3(0, 1, 0)
+const v = (x, y, z) => new THREE.Vector3(x, y, z)
+const styles = {
+  ivory: { color: [.79, .77, .71, 1], metal: .06, roughness: .47 },
+  silver: { color: [.45, .46, .46, 1], metal: .55, roughness: .33 },
+  graphite: { color: [.13, .135, .14, 1], metal: .15, roughness: .49 },
+  ink: { color: [.028, .032, .035, 1], metal: .18, roughness: .40 },
+  paper: { color: [.88, .86, .80, 1], metal: .02, roughness: .71 },
+}
+function part(name, material = 'ivory', parent = null, pivot = null, extras = {}) {
+  return { name, material, parent, pivot, extras, geometries: [] }
+}
+function put(p, geometry, position = v(0, 0, 0), rotation = [0, 0, 0], scale = [1, 1, 1]) {
+  geometry.scale(...scale)
+  geometry.applyQuaternion(new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation)))
+  geometry.translate(position.x, position.y, position.z)
+  geometry.deleteAttribute('uv')
+  if (!geometry.index) geometry.setIndex(Array.from({ length: geometry.getAttribute('position').count }, (_, i) => i))
+  p.geometries.push(geometry)
+}
+function tube(p, points, radius = .005, segments = 48, sides = 8, closed = false) {
+  const curve = new THREE.CatmullRomCurve3(points, closed, 'centripetal')
+  put(p, new THREE.TubeGeometry(curve, segments, radius, sides, closed))
+}
+function rod(p, a, b, radius = .008, sides = 12) {
+  const delta = b.clone().sub(a)
+  const geometry = new THREE.CylinderGeometry(radius, radius, delta.length(), sides)
+  geometry.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(Y, delta.normalize()))
+  put(p, geometry, a.clone().add(b).multiplyScalar(.5))
+}
+function ellipsoid(p, position, scale, radius = 1, longitude = 24, latitude = 16) {
+  put(p, new THREE.SphereGeometry(radius, longitude, latitude), position, [0, 0, 0], scale)
+}
+function torus(p, radius, thickness, position, rotation = [0, 0, 0], sides = 8, segments = 48) {
+  put(p, new THREE.TorusGeometry(radius, thickness, sides, segments), position, rotation)
+}
+function box(p, dimensions, position, rotation = [0, 0, 0]) {
+  put(p, new THREE.BoxGeometry(...dimensions), position, rotation)
+}
+function extrude(shape, depth, bevel = .004, curveSegments = 18) {
+  const g = new THREE.ExtrudeGeometry(shape, {
+    depth, bevelEnabled: bevel > 0, bevelSize: bevel, bevelThickness: bevel,
+    bevelSegments: bevel > 0 ? 2 : 0, curveSegments, steps: 1,
+  })
+  g.translate(0, 0, -depth / 2)
+  return g
+}
+function warpZ(g, fn) {
+  const pos = g.getAttribute('position'), normal = g.getAttribute('normal')
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), y = pos.getY(i)
+    const dx = (fn(x + .00001, y) - fn(x - .00001, y)) / .00002
+    const dy = (fn(x, y + .00001) - fn(x, y - .00001)) / .00002
+    pos.setZ(i, pos.getZ(i) + fn(x, y))
+    const n = v(normal.getX(i) - dx * normal.getZ(i), normal.getY(i) - dy * normal.getZ(i), normal.getZ(i)).normalize()
+    normal.setXYZ(i, ...n.toArray())
+  }
+  return g
+}
+function bassOutline() {
+  const s = new THREE.Shape()
+  s.moveTo(0, .57)
+  s.bezierCurveTo(.18, .57, .20, .51, .27, .43)
+  s.bezierCurveTo(.30, .39, .42, .33, .435, .22)
+  s.bezierCurveTo(.448, .12, .39, .055, .385, .045)
+  s.lineTo(.405, .035)
+  s.bezierCurveTo(.29, .025, .244, -.035, .252, -.16)
+  s.bezierCurveTo(.257, -.25, .302, -.31, .405, -.32)
+  s.lineTo(.382, -.348)
+  s.bezierCurveTo(.465, -.40, .545, -.52, .55, -.70)
+  s.bezierCurveTo(.557, -.94, .435, -1.13, .245, -1.175)
+  s.bezierCurveTo(.17, -1.195, .07, -1.20, 0, -1.20)
+  s.bezierCurveTo(-.07, -1.20, -.17, -1.195, -.245, -1.175)
+  s.bezierCurveTo(-.435, -1.13, -.557, -.94, -.55, -.70)
+  s.bezierCurveTo(-.545, -.52, -.465, -.40, -.382, -.348)
+  s.lineTo(-.405, -.32)
+  s.bezierCurveTo(-.302, -.31, -.257, -.25, -.252, -.16)
+  s.bezierCurveTo(-.244, -.035, -.29, .025, -.405, .035)
+  s.lineTo(-.385, .045)
+  s.bezierCurveTo(-.39, .055, -.448, .12, -.435, .22)
+  s.bezierCurveTo(-.42, .33, -.30, .39, -.27, .43)
+  s.bezierCurveTo(-.20, .51, -.18, .57, 0, .57)
+  return s
+}
+function fHole(side) {
+  const path = new THREE.Path()
+  const M = (x, y) => path.moveTo(side * x, y)
+  const B = (...a) => path.bezierCurveTo(side * a[0], a[1], side * a[2], a[3], side * a[4], a[5])
+  M(.269, .139)
+  B(.221, .149, .220, .215, .268, .225)
+  B(.316, .233, .336, .173, .293, .145)
+  B(.241, .107, .205, -.019, .220, -.133)
+  B(.231, -.209, .264, -.275, .281, -.366)
+  B(.287, -.410, .275, -.451, .252, -.486)
+  B(.211, -.551, .244, -.603, .291, -.591)
+  B(.341, -.579, .336, -.513, .290, -.508)
+  B(.320, -.454, .326, -.390, .310, -.326)
+  B(.294, -.251, .257, -.177, .249, -.112)
+  B(.235, .020, .251, .092, .269, .139)
+  return path
+}
+function doubleBass() {
+  const body = part('bass-front', 'ivory', 'bass')
+  const back = part('bass-back', 'ivory', 'bass')
+  const ribs = part('bass-ribs', 'graphite', 'bass')
+  const fittings = part('bass-fittings', 'silver', 'bass')
+  const ebony = part('bass-ebony', 'ink', 'bass')
+  const bridge = part('bass-bridge', 'ivory', 'bass')
+  const binding = part('bass-purfling', 'ink', 'bass')
+  const neck = part('bass-neck', 'graphite', 'bass')
+  const outline = bassOutline(), samples = outline.getPoints(160)
+  const widthAt = y => {
+    let width = .01
+    for (let i = 1; i < samples.length; i++) {
+      const a = samples[i - 1], b = samples[i]
+      if ((a.y <= y && b.y >= y) || (b.y <= y && a.y >= y)) {
+        if (Math.abs(a.y - b.y) < 1e-10) continue
+        width = Math.max(width, Math.abs(a.x + (b.x - a.x) * (y - a.y) / (b.y - a.y)))
+      }
+    }
+    return width
+  }
+  const arch = (x, y) => {
+    const t = THREE.MathUtils.clamp((y + 1.20) / 1.77, 0, 1)
+    return .085 * Math.max(0, 1 - (x / widthAt(y)) ** 2) * Math.sin(Math.PI * t) ** .7
+  }
+  const face = bassOutline()
+  face.holes.push(fHole(1), fHole(-1))
+  put(body, warpZ(extrude(face, .017, .005, 10), arch), v(0, 0, .135))
+  put(back, warpZ(extrude(bassOutline(), .021, .006, 12), (x, y) => -arch(x, y) * .67), v(0, 0, -.135))
+  // A real hollow rib ring, with front-only sound holes and an interior shadow cavity.
+  const shell = bassOutline(), inner = new THREE.Path()
+  const innerPoints = bassOutline().getPoints(12).map(p => new THREE.Vector2(p.x * .971, (p.y + .315) * .976 - .315))
+  inner.moveTo(innerPoints[0].x, innerPoints[0].y)
+  for (const p of innerPoints.slice(1)) inner.lineTo(p.x, p.y)
+  shell.holes.push(inner)
+  put(ribs, extrude(shell, .252, .002, 10))
+  const innerCavity = bassOutline()
+  put(ebony, extrude(innerCavity, .004, 0, 10), v(0, 0, .025), [0, 0, 0], [.96, .96, 1])
+  const rim = bassOutline().getSpacedPoints(128).slice(0, -1)
+  for (const z of [.145, -.147]) tube(binding, rim.map(p => v(p.x * .965, (p.y + .315) * .973 - .315, z)), .0034, 128, 5, true)
+  for (const side of [-1, 1]) {
+    const notch = v(side * .247, -.205, .135 + arch(side * .247, -.205))
+    box(binding, [.022, .004, .005], notch, [0, 0, side * -.21])
+  }
+  // The neck slopes backward; its carved heel joins a cambered ebony fingerboard.
+  const neckShape = new THREE.Shape()
+  neckShape.moveTo(-.045, 1.315); neckShape.lineTo(.045, 1.315)
+  neckShape.lineTo(.072, .485); neckShape.quadraticCurveTo(.075, .325, 0, .345)
+  neckShape.quadraticCurveTo(-.075, .325, -.072, .485); neckShape.closePath()
+  put(neck, warpZ(extrude(neckShape, .064, .010, 12), (x, y) => .035 + (1.32 - y) * .15))
+  const finger = new THREE.Shape()
+  finger.moveTo(-.046, 1.29); finger.lineTo(.046, 1.29)
+  finger.lineTo(.074, -.405); finger.quadraticCurveTo(0, -.437, -.074, -.405); finger.closePath()
+  put(ebony, warpZ(extrude(finger, .025, .003, 12), (x, y) => .110 + (1.29 - y) * .108 + .011 * Math.max(0, 1 - (x / .08) ** 2)))
+  const heelShape = new THREE.Shape()
+  heelShape.moveTo(-.075, .51); heelShape.lineTo(.075, .51)
+  heelShape.lineTo(.064, .33); heelShape.quadraticCurveTo(0, .275, -.064, .33); heelShape.closePath()
+  put(neck, extrude(heelShape, .14, .012, 12), v(0, 0, -.012))
+  // Hollow pegbox with mechanical bass tuning pins and a three-dimensional scroll.
+  const pegBox = new THREE.Shape()
+  pegBox.moveTo(-.055, 1.27); pegBox.lineTo(.055, 1.27)
+  pegBox.lineTo(.063, 1.54); pegBox.quadraticCurveTo(0, 1.60, -.063, 1.54); pegBox.closePath()
+  const pegHole = new THREE.Path()
+  pegHole.moveTo(-.031, 1.315); pegHole.lineTo(.031, 1.315); pegHole.lineTo(.037, 1.49); pegHole.lineTo(-.037, 1.49); pegHole.closePath()
+  pegBox.holes.push(pegHole)
+  put(neck, extrude(pegBox, .115, .007, 12), v(0, 0, .065))
+  box(ebony, [.085, .20, .012], v(0, 1.405, .000))
+  for (let i = 0; i < 4; i++) {
+    const y = 1.322 + i * .045, side = i % 2 ? -1 : 1
+    rod(fittings, v(-.075, y, .067), v(.075, y, .067), .013, 12)
+    ellipsoid(fittings, v(side * .105, y, .067), [.021, .034, .012], 1, 16, 10)
+    box(fittings, [.018, .039, .070], v(side * .067, y, .065))
+    torus(fittings, .017, .003, v(side * .080, y, .067), [0, Math.PI / 2, 0], 6, 20)
+  }
+  const scroll = part('bass-scroll', 'ivory', 'bass')
+  for (const side of [-1, 1]) {
+    const points = []
+    for (let i = 0; i <= 100; i++) {
+      const t = i / 100, angle = -Math.PI * .7 + t * TAU * 1.35, r = .103 * (1 - t) + .016
+      points.push(v(side * (.038 + .01 * Math.sin(t * Math.PI)), 1.54 + r * Math.sin(angle), .065 + r * Math.cos(angle)))
+    }
+    tube(scroll, points, .014, 64, 8)
+    rod(scroll, v(-.048, 1.54, .066), v(.048, 1.54, .066), .025, 20)
+    ellipsoid(scroll, v(side * .049, 1.54, .066), [.008, .025, .025], 1, 20, 12)
+  }
+  // Carved bridge with two feet, arched openings and a rounded four-string crown.
+  const bridgeShape = new THREE.Shape()
+  bridgeShape.moveTo(-.126, -.478); bridgeShape.lineTo(-.126, -.407)
+  bridgeShape.bezierCurveTo(-.116, -.344, -.073, -.318, 0, -.314)
+  bridgeShape.bezierCurveTo(.073, -.318, .116, -.344, .126, -.407)
+  bridgeShape.lineTo(.126, -.478); bridgeShape.lineTo(.073, -.478)
+  bridgeShape.lineTo(.074, -.442); bridgeShape.quadraticCurveTo(0, -.389, -.074, -.442)
+  bridgeShape.lineTo(-.073, -.478); bridgeShape.closePath()
+  for (const side of [-1, 1]) {
+    const opening = new THREE.Path()
+    opening.moveTo(side * .085, -.405)
+    opening.bezierCurveTo(side * .035, -.399, side * .034, -.356, side * .069, -.350)
+    opening.bezierCurveTo(side * .089, -.348, side * .106, -.381, side * .085, -.405)
+    bridgeShape.holes.push(opening)
+  }
+  put(bridge, extrude(bridgeShape, .025, .003, 14), v(0, 0, .334))
+  for (const side of [-1, 1]) box(bridge, [.075, .018, .045], v(side * .097, -.484, .285))
+  const tail = new THREE.Shape()
+  tail.moveTo(-.105, -.75); tail.quadraticCurveTo(0, -.704, .105, -.75)
+  tail.lineTo(.055, -1.05); tail.quadraticCurveTo(0, -1.10, -.055, -1.05); tail.closePath()
+  put(ebony, extrude(tail, .038, .007, 12), v(0, 0, .257))
+  for (const side of [-1, 1]) tube(binding, [v(side * .035, -1.04, .262), v(side * .043, -1.16, .183), v(side * .028, -1.215, .112)], .007, 24, 8)
+  ellipsoid(fittings, v(0, -1.22, .020), [.038, .038, .038], 1, 20, 12)
+  rod(fittings, v(0, -1.225, .020), v(0, -1.570, .020), .012, 14)
+  ellipsoid(ebony, v(0, -1.572, .020), [.018, .022, .018], 1, 16, 10)
+  const strings = ['e', 'a', 'd', 'g'].map((name, i) => {
+    const x = (i - 1.5) * .041
+    const p = part(`string-${name}`, 'silver', 'bass', v(x, .38, .27), { stringIndex: i, articulation: 'lateral string displacement', articulationAxis: [0, 0, 1] })
+    const upperX = (i - 1.5) * .025
+    const points = [v(x * .90, -.805, .285), v(x * 1.10, -.329, .357 - Math.abs(i - 1.5) * .008), v(upperX, 1.280, .205), v(upperX, 1.325 + i * .041, .085)]
+    tube(p, points, [.0039, .0033, .0028, .0024][i], 48, 6)
+    ellipsoid(fittings, v(x * .90, -.805, .284), [.009, .009, .009], 1, 12, 8)
+    return p
+  })
+  // Bow hair crosses the bridge strings. The frog is the local animation pivot.
+  const bowPivot = v(.79, -.377, .383)
+  const bow = part('bow', 'graphite', 'bass', bowPivot, { articulation: 'bow stroke', articulationAxis: [0, 0, 1] })
+  const bowHair = part('bow-hair', 'ivory', 'bow')
+  const bowMetal = part('bow-metal', 'silver', 'bow')
+  tube(bow, [v(-.615, -.395, .387), v(-.49, -.354, .387), v(.05, -.340, .387), v(.57, -.345, .387), v(.85, -.361, .387)], .0095, 72, 8)
+  for (let i = 0; i < 5; i++) rod(bowHair, v(-.594, -.401, .379 + i * .003), v(.790, -.401, .379 + i * .003), .0019, 5)
+  const frog = new THREE.Shape()
+  frog.moveTo(.748, -.410); frog.lineTo(.841, -.410); frog.lineTo(.841, -.367); frog.quadraticCurveTo(.790, -.359, .748, -.367); frog.closePath()
+  put(bow, extrude(frog, .040, .003, 8), v(0, 0, .385))
+  ellipsoid(bowMetal, v(.790, -.386, .409), [.010, .010, .004], 1, 16, 8)
+  rod(bowMetal, v(.840, -.374, .385), v(.898, -.374, .385), .007, 12)
+  for (let i = 0; i < 14; i++) torus(bowMetal, .0105, .0018, v(.593 + i * .005, -.347, .387), [0, Math.PI / 2, 0], 5, 14)
+  // The nested bow materials share the frog transform rather than independent floating pivots.
+  return { groups: [{ name: 'bass' }], parts: [body, back, ribs, fittings, ebony, bridge, binding, neck, scroll, ...strings, bow, bowHair, bowMetal], maxSpan: 3.2 }
+}
+
+function loft(profiles, segments = 36, rows = 36) {
+  const centerCurve = new THREE.CatmullRomCurve3(profiles.map(p => v(0, p[0], p[1])), false, 'centripetal')
+  const radiiCurve = new THREE.CatmullRomCurve3(profiles.map((p, i) => v(p[2], p[3], i / (profiles.length - 1))), false, 'centripetal')
+  const positions = [], indices = []
+  for (let row = 0; row <= rows; row++) {
+    const t = row / rows, center = centerCurve.getPoint(t), radii = radiiCurve.getPoint(t)
+    for (let col = 0; col <= segments; col++) {
+      const angle = col / segments * TAU
+      positions.push(Math.cos(angle) * radii.x, center.y, center.z + Math.sin(angle) * radii.y)
+    }
+  }
+  for (let row = 0; row < rows; row++) for (let col = 0; col < segments; col++) {
+    const a = row * (segments + 1) + col, b = a + 1, c = a + segments + 1, d = c + 1
+    indices.push(a, c, b, b, c, d)
+  }
+  const g = new THREE.BufferGeometry()
+  g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); g.setIndex(indices); g.computeVertexNormals()
+  // The seam shares the same normal despite the duplicated UV-style end vertices.
+  const n = g.getAttribute('normal')
+  for (let row = 0; row <= rows; row++) {
+    const a = row * (segments + 1), b = a + segments
+    const normal = v(n.getX(a) + n.getX(b), n.getY(a) + n.getY(b), n.getZ(a) + n.getZ(b)).normalize()
+    n.setXYZ(a, ...normal.toArray()); n.setXYZ(b, ...normal.toArray())
+  }
+  return g
+}
+function roundedTile(width, depth) {
+  const half = width / 2, r = .004, shape = new THREE.Shape()
+  shape.moveTo(-half + r, -half); shape.lineTo(half - r, -half)
+  shape.quadraticCurveTo(half, -half, half, -half + r); shape.lineTo(half, half - r)
+  shape.quadraticCurveTo(half, half, half - r, half); shape.lineTo(-half + r, half)
+  shape.quadraticCurveTo(-half, half, -half, half - r); shape.lineTo(-half, -half + r)
+  shape.quadraticCurveTo(-half, -half, -half + r, -half)
+  return extrude(shape, depth, .002, 2)
+}
+function chessKnight() {
+  const spacing = .28, a1 = v(-3.5 * spacing, 0, 3.5 * spacing)
+  const board = part('board-frame', 'graphite', 'board')
+  const rim = part('board-rim', 'silver', 'board')
+  box(board, [2.4, .070, 2.4], v(0, -.040, 0))
+  for (const side of [-1, 1]) {
+    box(rim, [.015, .024, 2.38], v(side * 1.188, -.008, 0))
+    box(rim, [2.38, .024, .015], v(0, -.008, side * 1.188))
+  }
+  // Each tile is a native mesh node, with a local center and algebraic name.
+  const tiles = []
+  for (let rank = 0; rank < 8; rank++) for (let file = 0; file < 8; file++) {
+    const name = `tile-${'abcdefgh'[file]}${rank + 1}`, center = v((file - 3.5) * spacing, .014, (3.5 - rank) * spacing)
+    const tile = part(name, (file + rank) % 2 === 0 ? 'ink' : 'ivory', 'board', center, { square: name.slice(5), file, rank, center: center.toArray() })
+    put(tile, roundedTile(.274, .024), center, [-Math.PI / 2, 0, 0])
+    tiles.push(tile)
+  }
+  const horse = part('knight-carving', 'ivory', 'knight')
+  const detail = part('knight-relief', 'graphite', 'knight')
+  const trim = part('knight-base-trim', 'silver', 'knight')
+  const profile = [
+    [.022, .028], [.121, .028], [.137, .039], [.140, .052], [.135, .071],
+    [.117, .083], [.117, .090], [.128, .097], [.124, .109], [.096, .126], [.076, .151],
+  ].map(p => new THREE.Vector2(...p))
+  put(horse, new THREE.LatheGeometry(profile, 48))
+  put(horse, new THREE.CylinderGeometry(.121, .121, .007, 40), v(0, .030, 0))
+  torus(trim, .130, .0034, v(0, .074, 0), [Math.PI / 2, 0, 0], 6, 48)
+  torus(detail, .119, .0022, v(0, .090, 0), [Math.PI / 2, 0, 0], 5, 40)
+  // A fully rounded sculptural neck, leaning forward into a broad jaw and muzzle.
+  put(horse, loft([
+    [.144, -.006, .078, .068], [.19, -.022, .075, .080], [.26, -.041, .070, .089],
+    [.34, -.045, .066, .094], [.415, -.022, .067, .096], [.48, .006, .069, .087],
+    [.535, .019, .061, .064], [.565, .016, .046, .048],
+  ], 40, 40))
+  ellipsoid(horse, v(0, .519, .069), [.068, .061, .099], 1, 28, 18)
+  ellipsoid(horse, v(0, .485, .146), [.060, .038, .079], 1, 28, 16)
+  ellipsoid(horse, v(0, .467, .116), [.054, .023, .085], 1, 24, 14)
+  for (const side of [-1, 1]) {
+    ellipsoid(horse, v(side * .053, .461, .063), [.022, .045, .060], 1, 20, 14)
+    const ear = loft([
+      [.552, -.006, .023, .029], [.590, -.003, .018, .022],
+      [.628, .001, .012, .014], [.659, .003, .002, .005],
+    ], 14, 12)
+    put(horse, ear, v(side * .038, 0, 0), [0, 0, side * -.12])
+    const innerEar = new THREE.Shape()
+    innerEar.moveTo(-.009, .594); innerEar.quadraticCurveTo(0, .583, .009, .594)
+    innerEar.quadraticCurveTo(.009, .618, 0, .647); innerEar.quadraticCurveTo(-.009, .618, -.009, .594)
+    put(detail, extrude(innerEar, .002, .001, 4), v(side * .038, 0, .017), [0, 0, side * -.12])
+    ellipsoid(detail, v(side * .064, .540, .070), [.003, .0075, .010], 1, 16, 10)
+    tube(horse, [v(side * .061, .537, .053), v(side * .070, .551, .067), v(side * .061, .542, .082)], .0038, 16, 6)
+    ellipsoid(detail, v(side * .052, .493, .180), [.003, .006, .010], 1, 16, 10)
+    tube(detail, [v(side * .025, .462, .207), v(side * .050, .460, .182), v(side * .054, .464, .146)], .0018, 18, 5)
+  }
+  // Swept solid mane ridges, with shallow incisions that follow the carved neck.
+  for (let i = 0; i < 10; i++) {
+    const t = i / 9, y = .222 + t * .305, backZ = -.124 + t * .078
+    tube(horse, [v(-.043, y - .024, backZ + .019), v(-.027, y + .004, backZ - .012), v(0, y + .020, backZ - .019), v(.027, y + .004, backZ - .012), v(.043, y - .024, backZ + .019)], .009 - t * .003, 20, 7)
+    tube(detail, [v(-.031, y - .012, backZ - .004), v(0, y + .005, backZ - .023), v(.031, y - .012, backZ - .004)], .0015, 16, 5)
+  }
+  // Geometries are placed at A1, then re-localized under the movable knight parent.
+  for (const p of [horse, detail, trim]) for (const g of p.geometries) g.translate(a1.x, 0, a1.z)
+  return {
+    groups: [{ name: 'board', extras: { squareSize: spacing, files: 'abcdefgh', ranks: '12345678' } }, { name: 'knight', pivot: a1, extras: { initialSquare: 'a1', front: '+Z' } }],
+    parts: [board, rim, ...tiles, horse, detail, trim], maxSpan: 2.4,
+  }
+}
+
+function paperPoint(x, y, offset = 0) {
+  let px = x, py = y
+  let z = .033 * Math.cos(y * 2) + .036 * (x / .52) ** 2 + .033 * (y / .71) ** 2 + .028 * Math.sin(y * 3 + .3) * Math.sin(x * 2)
+  // The diagonal corner rolls forward through almost a quarter turn.
+  const distance = Math.max(0, (x + y - .83) / Math.SQRT2)
+  if (distance > 0) {
+    const radius = .19, angle = distance / radius, retreat = (distance - radius * Math.sin(angle)) / Math.SQRT2
+    px -= retreat; py -= retreat; z += radius * (1 - Math.cos(angle))
+  }
+  const base = v(px, py, z)
+  if (offset) base.add(paperNormal(x, y).multiplyScalar(offset))
+  return base
+}
+function paperNormal(x, y) {
+  const dx = paperPoint(x + .00001, y).sub(paperPoint(x - .00001, y))
+  const dy = paperPoint(x, y + .00001).sub(paperPoint(x, y - .00001))
+  return dx.cross(dy).normalize()
+}
+function sheetSurface(front, cols = 32, rows = 44) {
+  const positions = [], indices = []
+  for (let row = 0; row <= rows; row++) for (let col = 0; col <= cols; col++) {
+    const x = -.52 + col / cols * 1.04, y = -.71 + row / rows * 1.42
+    positions.push(...paperPoint(x, y, front ? .004 : -.004).toArray())
+  }
+  for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) {
+    const a = row * (cols + 1) + col, b = a + 1, c = a + cols + 1, d = c + 1
+    if (front) indices.push(a, b, d, a, d, c); else indices.push(a, d, b, a, c, d)
+  }
+  const g = new THREE.BufferGeometry()
+  g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); g.setIndex(indices); g.computeVertexNormals()
+  return g
+}
+function sheetEdge(cols = 32, rows = 44) {
+  const boundary = []
+  for (let i = 0; i < cols; i++) boundary.push([-.52 + i / cols * 1.04, -.71])
+  for (let i = 0; i < rows; i++) boundary.push([.52, -.71 + i / rows * 1.42])
+  for (let i = 0; i < cols; i++) boundary.push([.52 - i / cols * 1.04, .71])
+  for (let i = 0; i < rows; i++) boundary.push([-.52, .71 - i / rows * 1.42])
+  const positions = boundary.flatMap(([x, y]) => [...paperPoint(x, y, .004).toArray(), ...paperPoint(x, y, -.004).toArray()])
+  const indices = []
+  for (let i = 0; i < boundary.length; i++) {
+    const a = i * 2, b = ((i + 1) % boundary.length) * 2
+    indices.push(a, a + 1, b, b, a + 1, b + 1)
+  }
+  const g = new THREE.BufferGeometry()
+  g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); g.setIndex(indices); g.computeVertexNormals()
+  return g
+}
+function scoreTube(p, points, radius = .0024, segments = 28, sides = 5) {
+  tube(p, points.map(([x, y]) => paperPoint(x, y, .009)), radius, segments, sides)
+}
+function scoreGlyph(g) {
+  const pos = g.getAttribute('position'), normal = g.getAttribute('normal')
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i)
+    const surface = paperPoint(x, y, z + .009)
+    const dx = paperPoint(x + .00001, y).sub(paperPoint(x - .00001, y)).normalize()
+    const dy = paperPoint(x, y + .00001).sub(paperPoint(x, y - .00001)).normalize()
+    const n = paperNormal(x, y)
+    const transformedNormal = dx.multiplyScalar(normal.getX(i)).add(dy.multiplyScalar(normal.getY(i))).add(n.multiplyScalar(normal.getZ(i))).normalize()
+    pos.setXYZ(i, ...surface.toArray()); normal.setXYZ(i, ...transformedNormal.toArray())
+  }
+  return g
+}
+function embossedNote(p, x, y, stem = true, flag = false) {
+  const head = new THREE.SphereGeometry(1, 16, 10)
+  head.scale(.030, .019, .009)
+  head.rotateZ(.28)
+  head.translate(x, y, .005)
+  put(p, scoreGlyph(head))
+  if (stem) {
+    scoreTube(p, [[x + .024, y], [x + .024, y + .138]], .0024, 8, 5)
+    if (flag) scoreTube(p, [[x + .024, y + .139], [x + .057, y + .118], [x + .063, y + .077], [x + .047, y + .054]], .0035, 20, 5)
+  }
+}
+function musicalScore() {
+  const page = part('score-paper', 'paper', 'score')
+  const edge = part('score-paper-edge', 'ivory', 'score')
+  const notation = part('score-notation', 'ink', 'score')
+  put(page, sheetSurface(true)); put(page, sheetSurface(false)); put(edge, sheetEdge())
+  const centers = [.36, .00, -.36]
+  for (const cy of centers) {
+    for (let line = -2; line <= 2; line++) {
+      const y = cy + line * .036
+      scoreTube(notation, [[-.465, y], [-.31, y], [0, y], [.31, y], [.465, y]], .0021, 32, 5)
+    }
+    for (const x of [-.463, .456]) scoreTube(notation, [[x, cy - .073], [x, cy + .073]], .0028, 10, 5)
+    // Bass clef: a solid curved hook, large initial dot and paired small dots.
+    scoreTube(notation, [[-.436, cy + .030], [-.444, cy + .060], [-.420, cy + .080], [-.383, cy + .070], [-.379, cy + .025], [-.403, cy - .030], [-.438, cy - .063]], .0055, 36, 7)
+    const clefDot = new THREE.SphereGeometry(1, 14, 8)
+    clefDot.scale(.0105, .0105, .005); clefDot.translate(-.436, cy + .032, .002); put(notation, scoreGlyph(clefDot))
+    for (const dy of [.050, .014]) {
+      const dot = new THREE.SphereGeometry(1, 12, 8)
+      dot.scale(.0049, .0049, .004); dot.translate(-.355, cy + dy, .002); put(notation, scoreGlyph(dot))
+    }
+  }
+  const notes = [-.265, -.085, .095, .275].map((x, i) => {
+    const y = .36 + [-.054, -.018, .018, .071][i]
+    const p = part(`note-${i}`, 'ink', 'score', paperPoint(x, y, .014), { noteIndex: i, originalGenericNotation: true, articulation: 'note lift', articulationAxis: [0, 0, 1] })
+    embossedNote(p, x, y)
+    return p
+  })
+  const second = [[-.275, -.054], [-.155, -.018], [-.015, .018], [.125, .036], [.290, -.018]]
+  for (let i = 0; i < second.length; i++) embossedNote(notation, ...second[i], true, i === 0 || i === 3)
+  scoreTube(notation, [[-.131, .120], [.009, .156]], .005, 12, 6)
+  const third = [[-.275, -.36 + .054], [-.095, -.36 + .018], [.085, -.36 - .018], [.275, -.36 - .054]]
+  for (let i = 0; i < third.length; i++) embossedNote(notation, ...third[i], true, i === 1)
+  scoreTube(notation, [[.443, -.434], [.443, -.287]], .0042, 10, 6)
+  // A fountain pen rests alongside the page. Its nib is the renderer's pen pivot.
+  const penPivot = v(.564, -.638, .143)
+  const pen = part('pen', 'graphite', 'score', penPivot, { articulation: 'writing gesture', articulationAxis: [0, 0, 1] })
+  const metal = part('pen-metal', 'silver', 'pen')
+  const nib = part('pen-nib', 'silver', 'pen')
+  const low = v(.584, -.507, .150), high = v(.750, .482, .190), delta = high.clone().sub(low)
+  const barrel = new THREE.CylinderGeometry(.020, .025, delta.length(), 24)
+  barrel.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(Y, delta.clone().normalize()))
+  put(pen, barrel, low.clone().add(high).multiplyScalar(.5))
+  const nibVector = low.clone().sub(penPivot)
+  const nibGeometry = new THREE.CylinderGeometry(.023, .0006, nibVector.length(), 8, 1)
+  nibGeometry.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(Y, nibVector.clone().normalize()))
+  put(nib, nibGeometry, penPivot.clone().add(low).multiplyScalar(.5), [0, 0, 0], [1, 1, .36])
+  // A fine slit, an exposed collar, cap rings and a sprung clip retain pen-scale detail.
+  rod(pen, penPivot.clone().add(v(0, .005, .004)), low.clone().add(v(0, -.030, .011)), .0014, 5)
+  for (const t of [.035, .065, .84, .88, .94]) {
+    const point = low.clone().lerp(high, t)
+    const ring = new THREE.TorusGeometry(t > .8 ? .022 : .025, .0024, 6, 24)
+    ring.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(v(0, 0, 1), delta.clone().normalize()))
+    put(metal, ring, point)
+  }
+  const capBase = low.clone().lerp(high, .84)
+  rod(pen, capBase, high.clone().add(delta.clone().normalize().multiplyScalar(.037)), .0255, 24)
+  ellipsoid(metal, high.clone().add(delta.clone().normalize().multiplyScalar(.037)), [.021, .007, .022], 1, 18, 10)
+  tube(metal, [high.clone().add(v(0, .018, .026)), high.clone().add(v(.004, -.03, .037)), high.clone().add(v(-.020, -.17, .036)), high.clone().add(v(-.027, -.195, .029))], .004, 28, 7)
+  return { groups: [{ name: 'score', extras: { notation: 'Original generic notes for interaction; not a reproduction or attribution to the site owner.' } }], parts: [page, edge, notation, ...notes, pen, metal, nib], maxSpan: 1.6 }
+}
+
+function cleanGeometry(g) {
+  const pos = g.getAttribute('position'), indices = g.index.array
+  const valid = []
+  for (let i = 0; i < indices.length; i += 3) {
+    const [a, b, c] = [indices[i], indices[i + 1], indices[i + 2]].map(index => v(pos.getX(index), pos.getY(index), pos.getZ(index)))
+    if (b.sub(a).cross(c.sub(a)).lengthSq() > 1e-18) valid.push(indices[i], indices[i + 1], indices[i + 2])
+  }
+  g.setIndex(valid)
+  return g
+}
+function documentFor(specimen) {
+  const data = specimen.make()
+  const parts = data.parts
+  const geometries = parts.map(p => {
+    if (!p.geometries.length) throw new Error(`Empty component ${p.name}`)
+    const g = mergeGeometries(p.geometries, false)
+    for (const item of p.geometries) item.dispose()
+    if (!g) throw new Error(`Cannot merge ${p.name}`)
+    const cleaned = cleanGeometry(g)
+    const merged = mergeVertices(cleaned, .000001)
+    cleaned.dispose()
+    return merged
+  })
+  const bounds = new THREE.Box3()
+  for (const g of geometries) { g.computeBoundingBox(); bounds.union(g.boundingBox) }
+  const scale = data.maxSpan / Math.max(...bounds.getSize(new THREE.Vector3()).toArray())
+  // Keep the chessboard origin and instrument construction origins; bounds are documented.
+  const doc = new Document(), buffer = doc.createBuffer('Original personal interest specimens')
+  const scene = doc.createScene(specimen.title)
+  doc.getRoot().setDefaultScene(scene)
+  doc.getRoot().getAsset().generator = 'Sulayman Bowles · original personal-interest specimens'
+  const materials = Object.fromEntries(Object.entries(styles).map(([name, style]) => [name, doc.createMaterial(name).setBaseColorFactor(style.color).setMetallicFactor(style.metal).setRoughnessFactor(style.roughness).setDoubleSided(true)]))
+  const nodes = new Map()
+  const groupPivots = new Map(data.groups.map(group => [group.name, group.pivot ?? v(0, 0, 0)]))
+  for (const group of data.groups) {
+    const parentPivot = groupPivots.get(group.parent) ?? v(0, 0, 0)
+    nodes.set(group.name, doc.createNode(group.name).setTranslation((group.pivot ?? v(0, 0, 0)).clone().sub(parentPivot).multiplyScalar(scale).toArray()).setExtras(group.extras ?? {}))
+  }
+  for (const [i, g] of geometries.entries()) {
+    const p = parts[i], parentPivot = parts.find(item => item.name === p.parent)?.pivot ?? groupPivots.get(p.parent) ?? v(0, 0, 0)
+    const pivot = p.pivot?.clone() ?? parentPivot.clone()
+    g.translate(-pivot.x, -pivot.y, -pivot.z)
+    g.scale(scale, scale, scale)
+    const positions = doc.createAccessor(`${p.name} positions`).setType('VEC3').setArray(g.getAttribute('position').array).setBuffer(buffer)
+    const normals = doc.createAccessor(`${p.name} normals`).setType('VEC3').setArray(g.getAttribute('normal').array).setBuffer(buffer)
+    const indexArray = g.index.array
+    const indices = doc.createAccessor(`${p.name} indices`).setType('SCALAR').setArray(g.getAttribute('position').count > 65535 ? new Uint32Array(indexArray) : new Uint16Array(indexArray)).setBuffer(buffer)
+    const primitive = doc.createPrimitive().setAttribute('POSITION', positions).setAttribute('NORMAL', normals).setIndices(indices).setMaterial(materials[p.material])
+    const node = doc.createNode(p.name).setMesh(doc.createMesh(p.name).addPrimitive(primitive))
+    node.setTranslation(pivot.clone().sub(parentPivot).multiplyScalar(scale).toArray())
+    node.setExtras({ ...p.extras, ...(p.pivot ? { articulationPivot: pivot.clone().multiplyScalar(scale).toArray() } : {}) })
+    nodes.set(p.name, node)
+    g.dispose()
+  }
+  for (const group of data.groups) (group.parent ? nodes.get(group.parent) : scene).addChild(nodes.get(group.name))
+  for (const p of parts) (p.parent ? nodes.get(p.parent) : scene).addChild(nodes.get(p.name))
+  return doc
+}
+async function inspect(path) {
+  const bytes = await readFile(path)
+  const validation = await validator.validateBytes(new Uint8Array(bytes), { uri: path.split('/').pop(), maxIssues: 100 })
+  if (validation.issues.numErrors || validation.issues.numWarnings) throw new Error(`glTF validation failed: ${JSON.stringify(validation.issues)}`)
+  const document = await io.read(path)
+  let vertices = 0, triangles = 0, degenerateTriangles = 0, minimumNormalLength = Infinity, maximumNormalLength = 0
+  for (const mesh of document.getRoot().listMeshes()) for (const primitive of mesh.listPrimitives()) {
+    const positions = primitive.getAttribute('POSITION'), normals = primitive.getAttribute('NORMAL'), indices = primitive.getIndices()
+    if (!positions || !normals || !indices || positions.getCount() !== normals.getCount() || indices.getCount() % 3) throw new Error('Missing or mismatched triangle attributes')
+    const ps = positions.getArray(), ns = normals.getArray(), ids = indices.getArray()
+    if (![ps, ns, ids].every(array => array.every(Number.isFinite))) throw new Error('Non-finite mesh values')
+    if (!ids.every(id => Number.isInteger(id) && id >= 0 && id < positions.getCount())) throw new Error('Invalid mesh index')
+    vertices += positions.getCount(); triangles += indices.getCount() / 3
+    for (let i = 0; i < ns.length; i += 3) {
+      const length = Math.hypot(ns[i], ns[i + 1], ns[i + 2])
+      minimumNormalLength = Math.min(minimumNormalLength, length); maximumNormalLength = Math.max(maximumNormalLength, length)
+    }
+    for (let i = 0; i < ids.length; i += 3) {
+      const [a, b, c] = [ids[i], ids[i + 1], ids[i + 2]].map(id => v(ps[id * 3], ps[id * 3 + 1], ps[id * 3 + 2]))
+      if (b.sub(a).cross(c.sub(a)).lengthSq() < 1e-15) degenerateTriangles++
+    }
+  }
+  if (degenerateTriangles || minimumNormalLength < .999 || maximumNormalLength > 1.001) throw new Error('Invalid mesh normals or degenerate triangles')
+  if (bytes.byteLength >= 1500000 || triangles > 40000) throw new Error(`Asset exceeds 1.5 MB / 40,000 triangle budget: ${bytes.byteLength} bytes / ${triangles} triangles`)
+  if (document.getRoot().listTextures().length || document.getRoot().listExtensionsRequired().length) throw new Error('Unexpected texture or decoder dependency')
+  const byName = new Map(document.getRoot().listNodes().map(node => [node.getName(), node]))
+  const id = path.split('/').pop().replace('.glb', '')
+  const requireNames = names => { for (const name of names) if (!byName.has(name)) throw new Error(`Missing required node ${name}`) }
+  if (id === 'bass') {
+    requireNames(['bass', 'string-e', 'string-a', 'string-d', 'string-g', 'bow', 'bow-hair', 'bow-metal'])
+    if (byName.get('bow-hair').getParentNode() !== byName.get('bow') || byName.get('bow-metal').getParentNode() !== byName.get('bow')) throw new Error('Bow assembly has inconsistent parent transforms')
+  }
+  if (id === 'knight') {
+    requireNames(['board', 'knight', ...Array.from({ length: 64 }, (_, i) => `tile-${'abcdefgh'[i % 8]}${Math.floor(i / 8) + 1}`)])
+    const knight = byName.get('knight'), a1 = byName.get('tile-a1').getTranslation()
+    if (knight.getTranslation()[0] !== a1[0] || knight.getTranslation()[2] !== a1[2]) throw new Error('Knight initial position does not match A1')
+    if (Array.from(byName.values()).filter(n => n.getName().startsWith('tile-')).length !== 64) throw new Error('Board must have exactly 64 tiles')
+    for (const name of ['knight-carving', 'knight-relief', 'knight-base-trim']) if (byName.get(name).getParentNode() !== knight) throw new Error('Knight carving is not under its movable parent')
+  }
+  if (id === 'score') requireNames(['score', 'score-paper', 'note-0', 'note-1', 'note-2', 'note-3', 'pen'])
+  const bounds = getBounds(document.getRoot().listScenes()[0])
+  const spans = bounds.max.map((value, axis) => value - bounds.min[axis])
+  if (!spans.every(value => Number.isFinite(value) && value > 0) || Math.abs(Math.max(...spans) - (id === 'bass' ? 3.2 : id === 'knight' ? 2.4 : 1.6)) > .000001) throw new Error('Incorrect model scale or bounds')
+  return {
+    bytes: bytes.byteLength, sha256: createHash('sha256').update(bytes).digest('hex'), vertices, triangles,
+    meshes: document.getRoot().listMeshes().length, bounds,
+    nodes: document.getRoot().listNodes().map(n => ({ name: n.getName(), translation: n.getTranslation(), extras: n.getExtras() })),
+    validation: { errors: 0, warnings: 0, degenerateTriangles, minimumNormalLength, maximumNormalLength },
+  }
+}
+const specimens = [
+  { id: 'bass', title: 'Double bass and bow', make: doubleBass, description: 'Original curved carved double bass: arched front and back, actual front-only f-hole apertures, hollow ribs, ebony fingerboard, carved bridge, scroll, tuning pins, four separate strings and a nested bow assembly.' },
+  { id: 'knight', title: 'Knight and board', make: chessKnight, description: 'Original fully rounded Staunton-inspired horse carving, swept ridged mane, ears, eyelid relief, muzzle and nostrils, on a turned pedestal. A separate raised 64-tile board exposes native algebraic square nodes and a movable A1 knight parent.' },
+  { id: 'score', title: 'Score page and pen', make: musicalScore, description: 'Original three-dimensional sheet with front and back surfaces, tangible edge thickness and a diagonally curled corner; embossed bass clefs, staves and generic musical notation. Four independent note nodes and a nib-pivot fountain pen support visitor-created phrase interactions. This is generic original geometry, not the site owner’s composition.' },
+]
+const selected = new Set(process.argv.slice(2))
+for (const id of selected) if (!specimens.some(item => item.id === id)) throw new Error(`Unknown specimen ${id}`)
+await mkdir(output, { recursive: true })
+const manifestPath = resolve(output, 'manifest.json')
+let previous = null
+try { previous = JSON.parse(await readFile(manifestPath, 'utf8')) } catch {}
+const reports = new Map(previous?.models?.map(item => [item.id, item]) ?? [])
+for (const specimen of specimens) {
+  if (selected.size && !selected.has(specimen.id)) continue
+  const path = resolve(output, `${specimen.id}.glb`), document = documentFor(specimen)
+  await document.transform(weld())
+  await io.write(path, document)
+  const report = await inspect(path)
+  reports.set(specimen.id, { id: specimen.id, title: specimen.title, description: specimen.description, path: `about-objects/${specimen.id}.glb`, ...report })
+  console.log(`${specimen.id}: ${report.triangles} triangles, ${report.bytes} bytes; validator 0 errors / 0 warnings`)
+}
+await writeFile(manifestPath, JSON.stringify({
+  version: 1, generator: 'tools/build-about-models.mjs',
+  ownership: 'All geometry authored procedurally for the personal website; no external model, image or texture inputs.',
+  license: 'LicenseRef-Site-Owner', licenseNote: 'Original site assets; the site owner retains rights. No third-party geometry or texture licenses apply.',
+  orientation: 'Y up; instrument and score fronts face +Z. Chessboard spans X/Z with A1 at negative X / positive Z. Origins and node pivots are preserved and listed per model.',
+  material: 'Texture-free ivory, satin silver, graphite, ink and paper; monochrome tonal contrast survives print shading.',
+  animation: 'Renderer-driven articulated named nodes; no embedded animation, texture or decoder dependency. Bow-hair and bow-metal are nested under the frog-pivot bow node.',
+  models: [...reports.values()],
+}, null, 2) + '\n')

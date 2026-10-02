@@ -1,0 +1,59 @@
+{
+  "generator": "tools/build-about-models.mjs",
+  "checks": [
+    "glTF validator",
+    "finite positions and normals",
+    "valid triangle indices",
+    "normalized normals",
+    "no degenerate triangles",
+    "required interaction node contracts",
+    "bow and knight hierarchy",
+    "expected scale and bounds",
+    "texture-free and decoder-free",
+    "repeat generation byte identity"
+  ],
+  "models": [
+    {
+      "id": "bass",
+      "sha256": "9ab572688dc4268daf6e3fb8fc63cc852ec8d4b612a35618343d3b8a8041953a",
+      "deterministic": true,
+      "bytes": 1215324,
+      "triangles": 30324,
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "degenerateTriangles": 0,
+        "minimumNormalLength": 0.9999999614554685,
+        "maximumNormalLength": 1.000000038629771
+      }
+    },
+    {
+      "id": "knight",
+      "sha256": "960ab1e011b8b2295f37940327e63304af1967d55d979ffebbae3546384d4d16",
+      "deterministic": true,
+      "bytes": 934256,
+      "triangles": 25020,
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "degenerateTriangles": 0,
+        "minimumNormalLength": 0.999999955864916,
+        "maximumNormalLength": 1.0000000374083127
+      }
+    },
+    {
+      "id": "score",
+      "sha256": "8177b9d05c98c8a403eafc10872de9fc21cd8129cd57660ab17636d965cf6ad5",
+      "deterministic": true,
+      "bytes": 431052,
+      "triangles": 22492,
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "degenerateTriangles": 0,
+        "minimumNormalLength": 0.9999999620066299,
+        "maximumNormalLength": 1.000000039224852
+      }
+    }
+  ]
+}

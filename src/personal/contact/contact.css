@@ -1,0 +1,89 @@
+.lion-contact { position: relative; min-height: 780px; height: calc(100svh - 110px); margin: 0 -1.5vw; }
+.lion-contact :is(a, button, summary, canvas, input):focus-visible { outline: 1px solid var(--ink); outline-offset: 6px; }
+.lion-contact-heading { display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 2; padding: 35px 0 0; pointer-events: none; }
+.lion-contact-heading > div { display: flex; gap: 19px; align-items: baseline; }
+.lion-contact-heading > * { background: var(--paper); box-shadow: 0 0 0 8px var(--paper); }
+.lion-contact-heading h1 { font: normal 30px/1.2 Georgia, serif; letter-spacing: -.04em; margin: 0; }
+.lion-contact-heading .mono { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+.lion-study { position: absolute; inset: 40px -4vw 25px; margin: 0; }
+.lion-study-stage { position: absolute; inset: 0 0 70px; }
+.lion-study canvas { display: block; width: 100%; height: 100%; background: transparent !important; opacity: 0; cursor: grab; transition: opacity 500ms ease; }
+.lion-study canvas:active { cursor: grabbing; }
+.lion-study[data-status='ready'] canvas { opacity: 1; }
+.lion-study-status { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 11px; }
+.lion-contact-note { position: absolute; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.lion-contact-note > * { background: var(--paper); box-shadow: 0 0 0 5px var(--paper); }
+.lion-contact-note > .mono { font-size: 10px; color: var(--muted); }
+.lion-contact-note > a { font-size: 23px; letter-spacing: -.035em; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px; text-decoration-color: var(--line); }
+.lion-contact-note > a:hover { text-decoration-color: var(--ink); }
+.lion-contact-note > a > span { display: inline-block; margin-left: 13px; font-size: 18px; transition: transform 180ms ease; }
+.lion-contact-note > a:hover > span { transform: translate(2px, -2px); }
+.lion-contact-email { top: 12%; left: 1%; }
+.lion-contact-linkedin { top: 12%; right: 1%; }
+.lion-contact-copy { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; max-width: 250px; font-size: 9px; margin-top: 3px; }
+.lion-contact-copy button { color: var(--muted); background: none; border: none; font: inherit; padding: 8px 0; }
+.lion-contact-copy button:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.lion-contact-copy [role='status'] { color: var(--muted); }
+.lion-study-caption { position: absolute; bottom: 0; left: 4vw; right: 4vw; display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; }
+.lion-study-credit { position: relative; max-width: 400px; }
+.lion-study-credit summary { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; cursor: pointer; list-style: none; }
+.lion-study-credit summary::-webkit-details-marker { display: none; }
+.lion-study-title { font-size: 19px; font-style: italic; letter-spacing: -.03em; }
+.lion-study-credit .mono { font-size: 9px; color: var(--muted); }
+.lion-study-credit summary .mono > span { display: inline-block; margin-left: 8px; }
+.lion-study-credit[open] summary .mono > span { transform: rotate(45deg); }
+.lion-study-credit p { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(370px, 80vw); background: var(--paper); border: 1px solid var(--line); padding: 16px 20px; font: 10px/1.9 'Courier New', monospace; color: var(--muted); z-index: 3; }
+.lion-study-credit a { text-decoration: underline; text-underline-offset: 4px; }
+.lion-study-tools { width: 235px; flex-shrink: 0; }
+.lion-study-field { display: flex; align-items: center; gap: 13px; }
+.lion-study-field .mono { font-size: 9px; }
+.lion-study-field input { appearance: none; -webkit-appearance: none; background: transparent; height: 30px; width: 100%; min-width: 0; margin: 0; cursor: ew-resize; }
+.lion-study-field input::-webkit-slider-runnable-track { height: 1px; background: var(--muted); }
+.lion-study-field input::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; height: 9px; width: 9px; margin-top: -4px; border-radius: 50%; background: var(--ink); border: 2px solid var(--paper); outline: 1px solid var(--ink); }
+.lion-study-field input::-moz-range-track { height: 1px; background: var(--muted); }
+.lion-study-field input::-moz-range-thumb { height: 6px; width: 6px; border-radius: 50%; background: var(--ink); border: 2px solid var(--paper); outline: 1px solid var(--ink); }
+.lion-study-field input:disabled { cursor: default; opacity: .35; }
+.lion-study-instructions { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 9px; color: var(--muted); }
+.lion-study-instructions button { border: none; background: none; font: inherit; padding: 8px 0 8px 8px; }
+.lion-study-instructions button:hover { text-decoration: underline; text-underline-offset: 4px; }
+.lion-study-instructions button span { margin-left: 7px; }
+.lion-study-instructions > div { display: flex; gap: 12px; }
+@media (min-width: 1600px) { .lion-contact { max-height: 1120px; } }
+@media (max-width: 850px) {
+  .lion-contact { height: 800px; min-height: 0; margin: 0; }
+  .lion-contact-heading { padding-top: 25px; }
+  .lion-study { inset: 65px -6vw 20px; }
+  .lion-study-stage { bottom: 110px; }
+  .lion-contact-email { top: 14%; left: 0; }
+  .lion-contact-linkedin { top: 14%; right: 0; }
+  .lion-study-caption { left: 6vw; right: 6vw; }
+  .lion-study-credit { max-width: 250px; }
+}
+@media (max-width: 600px) {
+  .lion-contact { height: auto; min-height: 0; display: grid; grid-template-columns: 1fr auto; column-gap: 20px; padding-bottom: 36px; }
+  .lion-contact-heading { grid-column: 1 / -1; padding: 18px 0 0; }
+  .lion-contact-heading h1 { font-size: 27px; }
+  .lion-contact-heading > div { gap: 12px; }
+  .lion-contact-heading .mono { font-size: 9px; }
+  .lion-study { position: relative; inset: auto; grid-column: 1 / -1; grid-row: 2; width: calc(100% + 48px); margin: 0 -24px; padding-top: 340px; padding-bottom: 118px; }
+  .lion-study-stage { inset: 10px 0 118px; }
+  .lion-study-caption { bottom: 0; left: 24px; right: 24px; flex-direction: column; align-items: stretch; gap: 16px; }
+  .lion-study-credit { max-width: none; }
+  .lion-study-title { font-size: 16px; }
+  .lion-study-credit summary { gap: 6px; }
+  .lion-study-credit .mono { font-size: 8px; }
+  .lion-study-tools { width: 100%; max-width: 250px; align-self: center; }
+  .lion-contact-note { position: static; margin-top: 30px; gap: 9px; }
+  .lion-contact-note > a { font-size: 20px; }
+  .lion-contact-note > .mono { font-size: 8px; }
+  .lion-contact-note > a > span { margin-left: 5px; font-size: 15px; }
+  .lion-contact-copy { font-size: 8px; margin-top: 3px; }
+  .lion-contact-linkedin { align-items: flex-end; }
+}
+@media (max-width: 360px) {
+  .lion-study { padding-top: 315px; }
+  .lion-contact { column-gap: 10px; }
+  .lion-contact-note > a { font-size: 18px; }
+  .lion-contact-note > a > span { margin-left: 2px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .lion-contact * { transition: none !important; } }

@@ -1,0 +1,55 @@
+[
+  {
+    "slug": "who-owns-texas-toll-roads",
+    "path": "/markets/who-owns-texas-toll-roads",
+    "aliases": [],
+    "title": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
+    "category": "INFRASTRUCTURE INVESTING",
+    "subtitle": "The state usually owns the pavement. Contracts decide who controls toll revenue, who gets paid first, and who absorbs the loss.",
+    "date": "2026.07.11",
+    "readTime": "24 MIN",
+    "image": "/og-default.png",
+    "kind": "investment-memo",
+    "displayTitle": "The state owns the pavement. Who owns the cash flow?"
+  },
+  {
+    "slug": "atlas-building-an-evidence-console",
+    "path": "/writing/atlas-building-an-evidence-console",
+    "aliases": [],
+    "title": "Building Atlas: From a Crawl to a Defensible Decision",
+    "displayTitle": "Building Atlas",
+    "category": "PRODUCT & SYSTEMS",
+    "subtitle": "The product decisions behind my crawl and audit console—and the improvement cycle that keeps its findings connected to evidence.",
+    "date": "2026-10-01",
+    "readTime": "6 MIN",
+    "kind": "project-essay"
+  },
+  {
+    "slug": "the-first-ai-managers",
+    "path": "/research/ai-systems/the-first-ai-managers",
+    "aliases": [
+      "/markets/the-first-ai-managers"
+    ],
+    "title": "The First AI Managers",
+    "category": "AI SYSTEMS",
+    "subtitle": "Inside the first AI-operated shops, cafés, vending machines, and radio stations—and the gap between completing the next task and preserving a coherent business.",
+    "date": "2026.07.14",
+    "readTime": "31 MIN",
+    "image": "/images/social/og-research.png",
+    "kind": "research",
+    "displayTitle": "The Shopkeeper in the Machine"
+  },
+  {
+    "slug": "viralbench-codex-agent-harness",
+    "path": "/viralbench-codex-agent-harness",
+    "aliases": [],
+    "title": "Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench",
+    "category": "ViralBench / Codex / agent evaluation",
+    "subtitle": "How I’m turning ViralBench into a Codex-powered agent harness for replay, trace evaluation, controlled experiments, and safer marketing automation.",
+    "date": "2026-07-09",
+    "readTime": "32 min",
+    "image": "/images/viralbench-agent-harness-hero.png",
+    "kind": "research",
+    "displayTitle": "A bounded outer loop for improving a live marketing agent."
+  }
+]

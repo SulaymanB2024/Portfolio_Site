@@ -1,0 +1,30 @@
+.animated-artwork { position: relative; width: 100%; height: 100%; aspect-ratio: 1; overflow: hidden; isolation: isolate; background: #000; }
+.animated-artwork-poster, .animated-artwork-canvas { position: absolute; inset: 0; }
+.animated-artwork-poster { display: block; width: 100%; height: 100%; object-fit: contain; }
+.animated-artwork-canvas { opacity: 0; }
+.animated-artwork canvas { display: block; width: 100% !important; height: 100% !important; }
+.animated-artwork[data-art-state='running'] .animated-artwork-canvas,
+.animated-artwork[data-art-state='paused'] .animated-artwork-canvas { opacity: 1; }
+.animated-artwork[data-art-state='running'] .animated-artwork-poster,
+.animated-artwork[data-art-state='paused'] .animated-artwork-poster { visibility: hidden; }
+.animated-artwork[data-treatment='paper-field'] { background: var(--paper); }
+.animated-artwork[data-treatment='paper-field'] .animated-artwork-canvas,
+.animated-artwork[data-treatment='paper-field'] .animated-artwork-poster { filter: invert(1); mix-blend-mode: multiply; }
+[data-appearance='dark'] .animated-artwork[data-treatment='paper-field'] { background: #000; }
+[data-appearance='dark'] .animated-artwork[data-treatment='paper-field'] .animated-artwork-canvas,
+[data-appearance='dark'] .animated-artwork[data-treatment='paper-field'] .animated-artwork-poster { filter: none; mix-blend-mode: normal; }
+/* Convert the black buffer to real alpha; every placement uses the same ink mask. */
+.artwork-ink-definitions { position: absolute; pointer-events: none; overflow: hidden; }
+.animated-artwork[data-embedded='true'][data-treatment] { background: transparent; isolation: auto; filter: contrast(1.35) url("#artwork-ink"); mix-blend-mode: normal; }
+.animated-artwork[data-embedded='true'][data-treatment] > .animated-artwork-canvas,
+.animated-artwork[data-embedded='true'][data-treatment] > .animated-artwork-poster { filter: none; mix-blend-mode: normal; }
+[data-appearance='dark'] .animated-artwork[data-embedded='true'][data-treatment] { background: transparent; filter: contrast(1.35) url("#artwork-ink"); mix-blend-mode: normal; }
+.artwork-motion-control { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 0; border: 0; background: transparent; color: var(--muted); font-size: 9px; text-transform: uppercase; white-space: nowrap; cursor: pointer; }
+.artwork-motion-control > span { width: 9px; font: 9px/1 Arial, sans-serif; }
+.artwork-motion-control:hover { color: var(--ink); }
+.reader-further-actions { display: flex; align-items: center; gap: 28px; }
+@media (max-width: 760px) { .reader-further-actions { gap: 22px; } }
+@media print {
+  .artwork-motion-control, .animated-artwork-canvas { display: none !important; }
+  .animated-artwork-poster, .animated-artwork .art-cube-poster { visibility: visible !important; }
+}

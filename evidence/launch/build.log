@@ -1,0 +1,162 @@
+
+> sulayman-bowles-portfolio@2.0.0 build
+> tsc --noEmit && vite build && vite build --ssr tools/render-public-site.tsx --outDir .cache/public-site --emptyOutDir && node .cache/public-site/render-public-site.js
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./src/personal/public-pages" without a file extension (vite.config.ts:4:29). Add the file extension
+  - import "./editorial/types" without a file extension (src/personal/site-copy.ts:1:37). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 750 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/assets/yuru-20-CLQryEYv.js                               0.69 kB
+dist/assets/yuru-34-DPW3ihvJ.js                               0.69 kB
+dist/assets/yuru-04-Dwq1JoF3.js                               0.69 kB
+dist/assets/yuru-26-DXM0ppBX.js                               0.69 kB
+dist/assets/yuru-31-Du8pcdpV.js                               0.69 kB
+dist/assets/yuru-22-BvVbpTvm.js                               0.69 kB
+dist/assets/yuru-02-D0fqx_N5.js                               0.70 kB
+dist/assets/yuru-05-BjCA64pC.js                               0.70 kB
+dist/assets/yuru-19-B5qdVdD_.js                               0.70 kB
+dist/assets/yuru-25-BNlm6U-x.js                               0.70 kB
+dist/assets/yuru-27-Dl2IKx4i.js                               0.70 kB
+dist/assets/yuru-03-DswBxAkp.js                               0.70 kB
+dist/assets/yuru-07-DEwZujB0.js                               0.70 kB
+dist/assets/yuru-14-DiSUDzdk.js                               0.70 kB
+dist/assets/yuru-39-Bg03qsFb.js                               0.70 kB
+dist/assets/yuru-40-vX27RnHG.js                               0.70 kB
+dist/assets/yuru-01-D23jDTpi.js                               0.70 kB
+dist/assets/yuru-10-c1Q_Lt3W.js                               0.70 kB
+dist/assets/yuru-15-BoK7uY9M.js                               0.70 kB
+dist/assets/yuru-24-ZyHvE-jm.js                               0.70 kB
+dist/assets/yuru-33-D_qllzjq.js                               0.70 kB
+dist/assets/yuru-09-DSUG4JEv.js                               0.70 kB
+dist/assets/yuru-11-BNxV-b3j.js                               0.70 kB
+dist/assets/yuru-18-BYeBn4t4.js                               0.70 kB
+dist/assets/yuru-21-BLS5gMhn.js                               0.70 kB
+dist/assets/yuru-23-DTJweFQf.js                               0.70 kB
+dist/assets/yuru-37-DXljSumO.js                               0.70 kB
+dist/assets/yuru-42-CYnP88TR.js                               0.70 kB
+dist/assets/yuru-08-DIdwAjC4.js                               0.70 kB
+dist/assets/yuru-12-CLeXxedQ.js                               0.70 kB
+dist/assets/yuru-16-GklSAD5o.js                               0.70 kB
+dist/assets/yuru-17-CDf_Vw5f.js                               0.70 kB
+dist/assets/yuru-28-CjA90P9z.js                               0.70 kB
+dist/assets/yuru-29-COuEVO5K.js                               0.70 kB
+dist/assets/yuru-30-w2HUPPiQ.js                               0.70 kB
+dist/assets/yuru-32-_r0ohPs4.js                               0.70 kB
+dist/assets/yuru-38-CWmGT7iH.js                               0.70 kB
+dist/assets/yuru-44-DpRSczFL.js                               0.70 kB
+dist/assets/yuru-13-DnBDzZnM.js                               0.70 kB
+dist/assets/yuru-35-BreQMwNv.js                               0.70 kB
+dist/assets/yuru-43-B39KgsVK.js                               0.70 kB
+dist/assets/yuru-06-B0vFeBRC.js                               0.70 kB
+dist/assets/yuru-41-ChHOhoWs.js                               0.71 kB
+dist/assets/yuru-36-CfM4a_1B.js                               0.71 kB
+dist/index.html                                               1.75 kB │ gzip:   0.78 kB
+dist/models.html                                              3.16 kB │ gzip:   1.27 kB
+dist/shader.html                                              3.64 kB │ gzip:   1.17 kB
+dist/assets/artwork-worker-Vu7sbVY-.js                       26.82 kB
+dist/assets/draco_wasm_wrapper-fZCQGLGb.js                   58.45 kB
+dist/assets/draco_wasm_wrapper-DxJM36Ib.js                   58.76 kB
+dist/assets/draco_decoder-Z1_iN-Ht.wasm                     192.42 kB │ gzip:  64.11 kB
+dist/assets/draco_decoder-C32yEggz.wasm                     285.74 kB │ gzip:  89.66 kB
+dist/assets/draco_decoder-fzg4nYZr.js                       719.41 kB
+dist/assets/models-BCrzuuUP.css                               1.99 kB │ gzip:   0.91 kB
+dist/assets/AboutPage-BesEW8sW.css                            6.14 kB │ gzip:   1.76 kB
+dist/assets/ContactPage-Csx_aRDD.css                          6.25 kB │ gzip:   1.76 kB
+dist/assets/shader-Cxe6nerQ.css                              11.19 kB │ gzip:   3.04 kB
+dist/assets/CaseStudyPage-CmbX53uq.css                       15.59 kB │ gzip:   3.49 kB
+dist/assets/ArticleFigures-e152ow3K.css                      25.51 kB │ gzip:   3.83 kB
+dist/assets/ResumePage-Bis_0AQU.css                          30.03 kB │ gzip:   6.24 kB
+dist/assets/main-DZ2Lk1C1.css                               106.43 kB │ gzip:  20.22 kB
+dist/assets/print-palette-CNLv0WSo.js                         0.40 kB │ gzip:   0.27 kB
+dist/assets/yuru-20-CTsO7HX8.js                               0.69 kB │ gzip:   0.42 kB
+dist/assets/yuru-34-DU4utctg.js                               0.69 kB │ gzip:   0.42 kB
+dist/assets/yuru-04-DBsR3cSX.js                               0.69 kB │ gzip:   0.42 kB
+dist/assets/yuru-26-Dyb7iIkG.js                               0.69 kB │ gzip:   0.42 kB
+dist/assets/yuru-31-DmPEiBTW.js                               0.69 kB │ gzip:   0.42 kB
+dist/assets/yuru-22-ZH7zoTk5.js                               0.69 kB │ gzip:   0.42 kB
+dist/assets/yuru-02-2cppcWKU.js                               0.69 kB │ gzip:   0.42 kB
+dist/assets/yuru-05-DZjILtS8.js                               0.69 kB │ gzip:   0.43 kB
+dist/assets/yuru-19-RKUAY1-Q.js                               0.69 kB │ gzip:   0.42 kB
+dist/assets/yuru-25-DrsQT6xI.js                               0.69 kB │ gzip:   0.43 kB
+dist/assets/yuru-27-DN6Jmzy4.js                               0.69 kB │ gzip:   0.43 kB
+dist/assets/yuru-03-BiybWlhv.js                               0.69 kB │ gzip:   0.43 kB
+dist/assets/yuru-07-M4H4NX7t.js                               0.69 kB │ gzip:   0.43 kB
+dist/assets/yuru-14-DWeUFmKj.js                               0.69 kB │ gzip:   0.43 kB
+dist/assets/yuru-39-DBVsROK2.js                               0.69 kB │ gzip:   0.43 kB
+dist/assets/yuru-40-DblLw-uJ.js                               0.69 kB │ gzip:   0.43 kB
+dist/assets/yuru-01-BqIff9b9.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-10-BAqVISgm.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-15-DCYyQCIF.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-24-DWrbGziD.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-33-BE3nei8d.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-09-Y3GoMQlp.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-11-BhwCzTvd.js                               0.70 kB │ gzip:   0.42 kB
+dist/assets/yuru-18-DFDDt8nB.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-21-DdmI8RP-.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-23-D_yhoQK5.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-37-DaLqsdtJ.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-42-D5Qe31sp.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-08-DGIqLV37.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-12-BjpNw7SM.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-16-Ck_wRfnt.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-17-DbQEmn3f.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-28-DfTqS8fG.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-29-C7-Mg06F.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-30-CzpZFcVW.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-32-DfRP33nz.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-38-Dq_UPI3w.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-44-KyllWPb9.js                               0.70 kB │ gzip:   0.42 kB
+dist/assets/yuru-13-Bg9ccVhA.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-35-CzfGWDn4.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-43-NzQoCKEZ.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-06-BQB4r4cg.js                               0.70 kB │ gzip:   0.43 kB
+dist/assets/yuru-41-F0wdVCzn.js                               0.70 kB │ gzip:   0.44 kB
+dist/assets/yuru-36-CwVh8uW1.js                               0.71 kB │ gzip:   0.44 kB
+dist/assets/modulepreload-polyfill-BIgaVKhB.js                1.38 kB │ gzip:   0.75 kB
+dist/assets/PrintRoom-DNXU1po7.js                             3.63 kB │ gzip:   1.50 kB
+dist/assets/models-xLhJCM-S.js                                5.14 kB │ gzip:   2.46 kB
+dist/assets/ContactPage-R-pTvsnW.js                           6.07 kB │ gzip:   2.21 kB
+dist/assets/RoomEnvironment-5tiUwPGh.js                       9.26 kB │ gzip:   3.76 kB
+dist/assets/atlas-building-an-evidence-console-B1-KJ0bR.js   10.43 kB │ gzip:   4.28 kB
+dist/assets/interest-renderer-B_W53QJ9.js                    10.82 kB │ gzip:   4.69 kB
+dist/assets/AboutPage-22pDQNi1.js                            11.63 kB │ gzip:   4.29 kB
+dist/assets/work-study-renderer-BfTwL8Av.js                  19.66 kB │ gzip:   7.54 kB
+dist/assets/OrbitControls-DgcE2zAV.js                        19.85 kB │ gzip:   4.41 kB
+dist/assets/object-renderer-Cw9nqVhT.js                      20.94 kB │ gzip:   8.14 kB
+dist/assets/shader-B8qJZckL.js                               21.01 kB │ gzip:   6.72 kB
+dist/assets/CaseStudyPage-ThXVmKof.js                        26.54 kB │ gzip:   8.53 kB
+dist/assets/ArticleFigures-DOxUtj0g.js                       27.77 kB │ gzip:   8.07 kB
+dist/assets/ResumePage-42-acc42.js                           41.79 kB │ gzip:  11.09 kB
+dist/assets/viralbench-codex-agent-harness-CCfK7x0p.js       57.27 kB │ gzip:  20.55 kB
+dist/assets/DitheringEffect-BQ8kM7X0.js                      65.11 kB │ gzip:  15.33 kB
+dist/assets/the-first-ai-managers-CiXme9qt.js                91.91 kB │ gzip:  32.48 kB
+dist/assets/who-owns-texas-toll-roads-xpUptI0z.js           127.79 kB │ gzip:  44.57 kB
+dist/assets/main-CZMzMTXF.js                                177.71 kB │ gzip:  56.80 kB
+dist/assets/preload-helper-O_cJ1neM.js                      220.06 kB │ gzip:  68.74 kB
+dist/assets/Scene-ACmfnMGF.js                               282.29 kB │ gzip:  87.64 kB
+dist/assets/GLTFLoader-8RDXn2cv.js                          782.26 kB │ gzip: 199.87 kB
+
+✓ built in 779ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./src/personal/public-pages" without a file extension (vite.config.ts:4:29). Add the file extension
+  - import "./editorial/types" without a file extension (src/personal/site-copy.ts:1:37). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.3.1 building ssr environment for production...
+transforming...
+✓ 14 modules transformed.
+rendering chunks...
+computing gzip size...
+.cache/public-site/render-public-site.js  66.79 kB │ gzip: 19.35 kB
+
+✓ built in 248ms
+Generated 17 indexable pages, a 404, and discovery files.

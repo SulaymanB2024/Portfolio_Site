@@ -1,123 +1,29 @@
-# Sulayman Bowles Portfolio
+# Sulayman Bowles — personal site
 
-A Vite React portfolio and agency/research site for Sulayman Bowles. The app keeps the animated client experience, while the production build generates route-specific static HTML for crawlable metadata, summaries, canonical URLs, and JSON-LD.
+The source for [sulayman-bowles.dev](https://sulayman-bowles.dev): selected work, four curated essays, a current web résumé, personal interests, and interactive 3D and generative studies.
 
-Live site: [sulayman-bowles.dev](https://sulayman-bowles.dev/)
+## Development
 
-Key source surfaces: [AI information](https://sulayman-bowles.dev/ai-information) · [Research assets](https://sulayman-bowles.dev/research) · [authority asset index](https://sulayman-bowles.dev/research/authority-assets.json) · [AI crawler policy source map](https://sulayman-bowles.dev/research/ai-search-crawler-policy-sources.csv)
-
-## Routes
-
-- `/`
-- `/work`
-- `/atlas`
-- `/atlas/sample-crawl`
-- `/simple`
-- `/markets`
-- `/research/ai-crawlers/ai-search-crawler-policy`
-- `/research/search-console/technical-seo-public-data-infrastructure`
-- `/research/personal-seo/canonical-identity-personal-seo`
-- `/markets/who-owns-texas-toll-roads`
-- `/method`
-- `/void-agency`
-- `/austin-technical-seo`
-- `/case-studies/technical-seo-audit`
-- `/about`
-- `/resume`
-- `/contact`
-- `/ai-information`
-- `/research`
-- `/sitemap`
-- `/markets/network-monopolies`
-- `/markets/computational-commodity-systems`
-- `/markets/fiat-horizon`
-
-Aliases such as `/projects/atlas`, `/atlas/sample-run`, `/projects/markets`, `/audit-intake`, `/austin-seo`, `/technical-seo-case-study`, `/book`, `/plain`, `/text`, `/cv`, and `/resume.html` redirect or normalize to their canonical routes.
-
-## Local Development
-
-Prerequisite: Node.js.
-
-```bash
-npm ci
-npm run dev
-```
-
-## Verification
-
-```bash
-npm run lint
-npm run build
-```
-
-`npm run build` runs `vite build` and then `scripts/generate-static-routes.ts`, which writes canonical route HTML into `dist/`.
-
-## Portfolio analytics
-
-Portfolio measurement is disabled unless a valid public GA4 web-stream ID is
-provided at build time:
-
-```bash
-VITE_PORTFOLIO_GA_MEASUREMENT_ID=G-XXXXXXXXXX npm run build
-```
-
-The value is a public measurement identifier, not a credential. Do not enable
-it until the shared property, stream, disclosure, and deployment have received
-their separate approvals. The browser integration only activates on
-`https://sulayman-bowles.dev`, emits one explicit `page_view` for the initial
-route and each accepted path change, labels events with
-`portfolio_site=sulayman_bowles_dev`, and removes query strings and fragments.
-Preview, localhost, and lookalike hosts fail closed. Google Signals and
-ad-personalization signals are disabled by the site configuration.
-
-## Link-Building Authority Assets
-
-- `docs/link-building/authority-playbook.md` defines the DR/referring-domain strategy, campaign rules, measurement baseline, and completion criteria.
-- `docs/link-building/outreach-templates.md` contains manual outreach drafts for AI crawler policy, Atlas, Austin benchmark, profile reclamation, and public case-study collaboration.
-- `docs/link-building/prospect-tracker.csv` is the working tracker for owned profile updates, citation opportunities, outreach status, and verified outcomes.
-- `docs/link-building/live-prospect-evidence.csv` records live source checks for priority prospects and gates.
-- `docs/link-building/owned-profile-updates.md` contains copy-ready profile and repository update drafts.
-- `docs/link-building/launch-queue.csv` separates ready, gated, ready-after-publish, and research-only actions.
-- `docs/link-building/generated-launch-drafts.md` contains approval-ready draft payloads for viable pitches and community submissions.
-- `docs/link-building/outreach-outcome-log.csv` tracks submissions, published links, anchors, follow state, and verification evidence.
-- `docs/link-building/austin-benchmark-targets.csv` and `docs/link-building/austin-crawlability-benchmark.md` define the local benchmark input list and review summary.
-- `docs/link-building/publish-manifest.json` lists the files that belong to the authority-pack publish and excludes unrelated dirty worktree files.
-- `docs/link-building/publish-readiness.md` records the current local/live gate status and exact publish sequence.
-- `/research` is the public human-readable hub for citation-ready assets and supporting source files.
-- `public/research/authority-assets.json` is a public index of citation-worthy pages and claim boundaries.
-- `public/research/ai-search-crawler-policy-sources.csv` is a public source map for the AI-search crawler policy article.
-- `public/research/austin-crawlability-benchmark-pilot.csv` and `public/research/austin-crawlability-benchmark-summary.json` are the public Austin benchmark outputs.
-- `npm run linkbuilding:export-publish` writes an ignored `output/link-building-publish/` bundle containing only publish-manifest files for application to a clean branch or worktree.
-- `npm run linkbuilding:scope-check` verifies that the current dirty worktree contains only files from the publish manifest before staging or deployment.
-- `npm run linkbuilding:live-check` verifies that the authority hub, raw assets, sitemap, and `llms.txt` are actually live on `https://sulayman-bowles.dev` before outreach or IndexNow submission.
-
-## Site-quality checks and résumé maintenance
-
-After `npm run build`, run `npm run verify:site-integrity` to check generated HTML,
-local destinations, fragments, assets, canonical/sitemap/noindex rules and flat/directory
-variants. It writes ignored `audit-artifact/site-integrity.json`.
-`npm run verify:static-idempotence` verifies that rerunning the static generator changes
-none of the built HTML. `test:site-integrity` and `test:site-behavior` cover intentional
-failures and lifecycle/content contracts. CI runs these alongside the existing gates.
-
-The public profile, résumé HTML, Person schema and `llms.txt` derive from
-`src/content/profileFacts.ts`. Following a confirmed public-profile edit:
+Requires Node.js 24 (22.12 or later for the application).
 
 ```sh
-# Optional authoring dependency, not a website/runtime requirement.
-python3 -m pip install reportlab==4.4.9
-npm run generate:resume
-npm run generate:public
-npm run verify:profile
+npm ci
+npm run dev
+npm test
+npm run test:bot-observer
+npm run build
+npm run verify:release
+npm run preview
 ```
 
-Inspect the resulting one-page PDF before committing it. The manifest in
-`docs/resume-pdf-manifest.json` binds the PDF bytes to the serialized profile facts;
-this prevents silently stale downloads but does not externally verify employment claims.
+`build` creates the Vite application and 17 route-specific HTML documents using the same public copy and article records. Each document has readable initial content, canonical metadata, social metadata, and structured data. React mounts the interactive site; hash navigation and historical article bookmarks remain supported. `dist/sitemap.xml` uses the canonical document paths. Unknown paths return the site's 404 with a real HTTP 404 status. The original local shader and model collection are separate entry points.
 
-Optional browser smoke: install `playwright==1.57.0` and provide system Chrome (or set
-`BROWSER_EXECUTABLE`), then run `python3 scripts/browser-smoke.py` after building.
-Screenshots and results stay in `audit-artifact/browser`. This test aborts external
-requests and validates the built application, not production hosting.
+## Release
 
-See `docs/sitewide-search-quality-2026-09-10.md` for the source-review scope and limits.
+Vercel's existing `portfolio-site` project is linked to `SulaymanB2024/Portfolio_Site`; its production branch is `main`. Review branch CI and the Vercel build before merging. `vercel.json` retains canonical www redirection, historical URLs and downloads, security headers, local worker/WebAssembly permissions, and immutable caching for versioned bundles. Existing signed server-side bot observations remain in `middleware.ts` and `packages/bot-observer`; no new collector or account has been added.
+
+The delivered design was frozen from the user workspace into this release. Its file hashes and launch receipts are in `evidence/launch`. Ongoing local design chats and their previews were not overwritten. Earlier production code remains recoverable in Git history. Public source records and downloaded research assets remain available, including the visibly historical July résumé PDF; the web résumé reflects September 2026 sources.
+
+## Credits
+
+The original dithering study is by Niccolò Fanton. The Jousting Helmet is credited to The Royal Armoury under CC BY 4.0, and Klems' Bayer pattern is credited in the colophon. Original article-art formulas and artist assignments remain in the generative library. The site supports reduced motion, keyboard controls, static artwork fallbacks, and printable reading views.

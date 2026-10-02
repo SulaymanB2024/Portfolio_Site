@@ -1,0 +1,5 @@
+
+> sulayman-bowles-portfolio@2.0.0 verify:release
+> node tools/verify-release.mjs
+
+Release gate passed: 17 readable canonical documents, 65 direct legacy redirects, 87 asset references, worker CSP, 404, discovery, and lockfile.

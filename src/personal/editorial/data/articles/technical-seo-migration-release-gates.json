@@ -1,0 +1,265 @@
+{
+  "kind": "research",
+  "cluster": "technical-seo",
+  "slug": "technical-seo-migration-release-gates",
+  "number": "14",
+  "category": "SITE MIGRATIONS",
+  "title": "Technical SEO Migrations Need Executable Release Gates",
+  "seoTitle": "Technical SEO Migration Gates for URLs, Redirects, and Indexability",
+  "subtitle": "A fail-closed migration method for URL manifests, redirect graphs, canonical output, internal links, sitemaps, rendered content, launch sequencing, and post-release evidence.",
+  "seoDescription": "Build executable technical SEO migration gates for URL mappings, redirects, canonicals, internal links, sitemaps, rendered content, launch rollout, and monitoring.",
+  "image": "/og-default.png",
+  "date": "2026.07.19",
+  "dateModified": "2026.07.19",
+  "lastVerified": "2026.07.19",
+  "readTime": "16 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "A migration is ready when every important old URL has an approved terminal state, every new canonical route satisfies a page contract, and production evidence proves the mapping after the real edge and application stack.",
+  "evidenceBoundary": "Passing migration gates proves the tested publisher-controlled routing and page signals. It cannot guarantee unchanged rankings, traffic, crawling cadence, index consolidation, or behavior in untested caches, regions, clients, and external systems.",
+  "metrics": [
+    {
+      "label": "Source of truth",
+      "value": "URL MANIFEST"
+    },
+    {
+      "label": "Redirect policy",
+      "value": "ONE HOP"
+    },
+    {
+      "label": "Launch gate",
+      "value": "FAIL CLOSED"
+    },
+    {
+      "label": "Primary artifact",
+      "value": "EVIDENCE LEDGER"
+    }
+  ],
+  "sources": [
+    {
+      "label": "Google Search: site moves and URL migrations",
+      "href": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "Google Search: redirects and canonical signals",
+      "href": "https://developers.google.com/search/docs/crawling-indexing/301-redirects",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "Google Search: canonical URL consolidation",
+      "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "Google Search: build and submit a sitemap",
+      "href": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "Google Crawling Infrastructure: HTTP status codes",
+      "href": "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes",
+      "lastVerified": "2026.07.19"
+    },
+    {
+      "label": "RFC 9110: HTTP Semantics",
+      "href": "https://www.rfc-editor.org/rfc/rfc9110.html",
+      "lastVerified": "2026.07.19"
+    }
+  ],
+  "content": [
+    "A site migration changes an address system while users, crawlers, links, analytics, caches, and downstream indexes still refer to the old one. A visual review of the new templates cannot establish that old demand reaches the right destination, that retired URLs stop leaking into navigation, that canonical and sitemap signals agree, or that client-rendered content survived the move.",
+    "Treat the migration as a data contract and a release program. Inventory every meaningful old URL, assign one approved outcome, generate routing and metadata from the mapping, test the built site before launch, test the real production stack after launch, and monitor both traffic and coverage gaps. Release only when critical route classes converge; log accepted exceptions with owners and expiry dates."
+  ],
+  "sections": [
+    {
+      "id": "url-manifest",
+      "title": "Make the URL manifest the migration source of truth",
+      "paragraphs": [
+        "Begin with more than a crawl. Merge canonical sitemaps, internal crawl results, server logs, analytics landing pages, Search Console exports, backlink lists, CMS or database routes, feeds, campaign records, and known files. Each source has blind spots. Record where every old URL was observed and the latest meaningful activity so missing inventory remains visible.",
+        "Assign one disposition: keep at the same URL, move to an equivalent new URL, merge into a reviewed parent or successor, remove with a terminal not-found or gone response, retain temporarily with a sunset date, or exclude because it is non-public or invalid. A wildcard redirect to the homepage is not a mapping; it hides unresolved product decisions and produces poor destinations.",
+        "The manifest should carry content type, locale, template, indexability, canonical target, redirect status, priority, owner, validation contract, and exception rationale. Unique constraints must prevent one old URL from owning several outcomes and several new pages from accidentally claiming one route. Changes require review because the manifest drives public behavior."
+      ],
+      "table": {
+        "caption": "Migration URL-manifest fields",
+        "columns": [
+          "Field",
+          "Purpose",
+          "Gate"
+        ],
+        "rows": [
+          [
+            "old_url",
+            "Known pre-migration identity",
+            "Unique and source-attributed"
+          ],
+          [
+            "disposition",
+            "Keep, move, merge, remove, temporary, exclude",
+            "Allowed enum with rationale"
+          ],
+          [
+            "new_url",
+            "Approved destination when applicable",
+            "Canonical route exists"
+          ],
+          [
+            "response_contract",
+            "Expected status and hop behavior",
+            "Matches production"
+          ],
+          [
+            "page_contract",
+            "Required title, content, directives, schema",
+            "Built and rendered checks pass"
+          ],
+          [
+            "owner_and_expiry",
+            "Accountability for exception",
+            "No unowned permanent exception"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prelaunch-gates",
+      "title": "Validate route and page contracts before launch",
+      "paragraphs": [
+        "Generate the application route registry, redirect configuration, canonical metadata, sitemap, internal links, and where possible analytics mappings from the manifest. Static validation should reject duplicate destinations, alias collisions, redirect cycles, non-absolute canonical targets, staging hosts, malformed URLs, noindex pages in the canonical sitemap, and internal links that still target retired routes.",
+        "Build every priority template and parse its output. Assert one main heading, expected canonical, intended robots directives, meaningful visible content, status behavior, structured-data agreement, and required navigation. For JavaScript applications, compare raw source with a pinned browser render and enforce page-specific completion conditions. A screenshot is a supplementary review, not the route contract.",
+        "Sample size should follow risk and template coverage. Critical and high-traffic URLs deserve complete checks. Long-tail pages can be stratified by template, locale, disposition, depth, query behavior, and data source. Keep the full manifest count as the denominator and identify untested rows explicitly."
+      ],
+      "bullets": [
+        "Fail on unmapped priority URLs and duplicate old-route ownership.",
+        "Fail on redirect loops, chains beyond policy, and destinations that do not exist.",
+        "Fail on staging, preview, localhost, or alternate-host canonicals.",
+        "Fail on canonical sitemap rows that redirect, noindex, or canonicalize elsewhere.",
+        "Fail when required visible content or structured data disappears from a template.",
+        "Report untested manifest rows as coverage gaps."
+      ]
+    },
+    {
+      "id": "redirect-graph",
+      "title": "Compile redirects into a convergent graph",
+      "paragraphs": [
+        "Permanent server-side redirects are the clearest choice for URL moves when the change is intended to persist, and Google documents 301 and 308 as permanent redirect signals. Select the status according to application method semantics and platform support. Test with actual request methods where non-GET traffic matters; do not assume every redirect code preserves behavior identically.",
+        "Resolve the complete mapping graph before deployment. Every moved old URL should reach the exact approved new URL in one hop when possible. Existing redirects must be folded into the new map so historical aliases do not chain through an intermediate old route. Cycles, branches with conflicting destinations, and targets that redirect again should fail compilation.",
+        "Keep removed content honest. When no equivalent destination exists, a 404 or 410 can communicate removal more accurately than sending every retired article or product to a category or homepage. The product owner should decide equivalence; automated string similarity can identify candidates but should not silently merge user intent."
+      ],
+      "table": {
+        "caption": "Redirect-graph validation",
+        "columns": [
+          "Check",
+          "Expected result",
+          "Failure risk"
+        ],
+        "rows": [
+          [
+            "old to new",
+            "One permanent hop to approved equivalent",
+            "Slow convergence and fragile chains"
+          ],
+          [
+            "historical aliases",
+            "Point directly to current canonical",
+            "Layered migrations accumulate"
+          ],
+          [
+            "target status",
+            "Eligible final response",
+            "Redirect ends at error, noindex, or another redirect"
+          ],
+          [
+            "target content",
+            "Matches intended user purpose",
+            "Soft, misleading, or irrelevant destination"
+          ],
+          [
+            "cycle analysis",
+            "No strongly connected redirect component",
+            "Infinite or failed navigation"
+          ],
+          [
+            "method behavior",
+            "Documented for non-GET routes",
+            "Unexpected request transformation"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "launch-sequence",
+      "title": "Launch in a sequence that keeps evidence attributable",
+      "paragraphs": [
+        "Freeze manifest changes before the launch window and record the exact application, edge, redirect, sitemap, and analytics versions. Capture a prelaunch baseline of old URL responses, top templates, internal graph, sitemap counts, and relevant traffic. The baseline is not a promise that metrics remain constant; it is the reference needed to distinguish expected movement from implementation breakage.",
+        "Deploy the routing and new pages as one coordinated change or in an order that never leaves old URLs without their intended outcome. Purge or version caches deliberately. Fetch smoke routes from outside the origin network across the public hostname, because local application checks cannot prove CDN rules, platform redirects, TLS, host normalization, or middleware behavior.",
+        "Use a canary when the platform permits bounded route or traffic exposure, but ensure the canary is meaningful for crawlers and public URLs. Define rollback triggers for elevated 5xx responses, redirect loops, missing content, canonical-host corruption, analytics loss, or critical transaction failure. Rollback should restore a coherent route set, not only the visual frontend."
+      ],
+      "codeExamples": [
+        {
+          "title": "Check redirect hops and final canonical from the public edge",
+          "description": "Run against a reviewed manifest sample and save headers and bodies as launch evidence.",
+          "language": "shell",
+          "code": "curl -sS -D old.headers -o /dev/null https://old.example.com/priority-page\ncurl -sS -L --max-redirs 5 -D chain.headers \\\n  -o final.html https://old.example.com/priority-page\n\nrg -o '<link[^>]+rel=\"canonical\"[^>]+>' final.html\nrg -o '<meta[^>]+name=\"robots\"[^>]+>' final.html"
+        }
+      ]
+    },
+    {
+      "id": "postlaunch-evidence",
+      "title": "Monitor implementation health and external transition separately",
+      "paragraphs": [
+        "Implementation monitoring starts immediately: response distribution by old and new route class, redirect outcomes, 404 and 410 volume, server errors, latency, canonical mismatches, sitemap fetches, internal links to retired URLs, rendered-content failures, analytics continuity, and conversion-path health. These are publisher-controlled conditions with short feedback loops.",
+        "External transition monitoring has different timing and uncertainty: crawler requests, indexed URL examples, submitted versus discovered sitemap states, canonical selection reports, impressions, clicks, and landing-page movement. Google notes that site moves take time and crawl frequency is not fixed. Report changes with dates and denominators; do not convert a temporary traffic move into proof of a technical defect without route evidence.",
+        "Keep an incident ledger that links each anomaly to manifest rows, production captures, owner, decision, fix, and validating rerun. Maintain redirects long enough for users and systems that still reference old URLs, subject to current guidance and product constraints. Remove them only through another reviewed change, not because the launch window ended."
+      ],
+      "table": {
+        "caption": "Post-launch evidence lanes",
+        "columns": [
+          "Lane",
+          "Examples",
+          "Decision horizon",
+          "Claim boundary"
+        ],
+        "rows": [
+          [
+            "routing health",
+            "status, hop, loop, target",
+            "minutes to hours",
+            "Public edge behavior"
+          ],
+          [
+            "page integrity",
+            "canonical, directives, content, schema",
+            "minutes to days",
+            "Tested templates and routes"
+          ],
+          [
+            "discovery",
+            "sitemap fetches and crawler logs",
+            "days to weeks",
+            "Observed requests only"
+          ],
+          [
+            "external index",
+            "reported indexed and selected URLs",
+            "days to longer",
+            "Provider-reported samples and states"
+          ],
+          [
+            "search demand",
+            "impressions, clicks, landing pages",
+            "weeks with seasonality context",
+            "Observed performance, not sole causal proof"
+          ],
+          [
+            "business path",
+            "analytics and conversion events",
+            "immediate and ongoing",
+            "Measured implementation path"
+          ]
+        ]
+      }
+    }
+  ],
+  "path": "/research/technical-seo/technical-seo-migration-release-gates",
+  "aliases": []
+}

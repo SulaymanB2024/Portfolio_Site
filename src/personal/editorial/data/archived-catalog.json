@@ -1,0 +1,164 @@
+[
+  {
+    "slug": "crawl-frontier-state-machine",
+    "path": "/research/crawler-engineering/crawl-frontier-state-machine",
+    "aliases": [],
+    "title": "The Crawl Frontier Is a State Machine, Not a Queue",
+    "category": "CRAWLER ENGINEERING",
+    "subtitle": "A practical architecture for URL identity, admission control, host politeness, bounded retries, crawl traps, and evidence-preserving frontier transitions.",
+    "date": "2026.07.19",
+    "readTime": "15 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "raw-html-rendered-dom-evidence",
+    "path": "/research/technical-seo/raw-html-rendered-dom-evidence",
+    "aliases": [],
+    "title": "Raw HTML and Rendered DOM Are Separate Evidence",
+    "category": "RENDERING EVIDENCE",
+    "subtitle": "How to capture, compare, and qualify transport source, browser output, dependent requests, runtime failures, and render completeness without treating screenshots as data.",
+    "date": "2026.07.19",
+    "readTime": "14 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "canonicalization-graph-consistency",
+    "path": "/research/technical-seo/canonicalization-graph-consistency",
+    "aliases": [],
+    "title": "Canonicalization Is a Graph Consistency Problem",
+    "category": "TECHNICAL SEO",
+    "subtitle": "A systems method for finding conflicting canonicals, redirect chains, cycles, duplicate clusters, and sitemap disagreements before they become indexation ambiguity.",
+    "date": "2026.07.19",
+    "readTime": "14 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "internal-links-directed-retrieval-graph",
+    "path": "/research/technical-seo/internal-links-directed-retrieval-graph",
+    "aliases": [],
+    "title": "Internal Links Are a Directed Retrieval Graph",
+    "category": "SITE ARCHITECTURE",
+    "subtitle": "A graph-first method for crawlable links, reachability, depth, contextual edges, orphan diagnosis, and repair plans that preserve user intent.",
+    "date": "2026.07.19",
+    "readTime": "13 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "robots-txt-courtesy-not-access-control",
+    "path": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+    "aliases": [],
+    "title": "Robots.txt Is a Courtesy Layer, Not Access Control",
+    "category": "CRAWLER POLICY",
+    "subtitle": "A precise model for separating crawler requests, indexing directives, authentication, authorization, rate controls, and evidence of enforcement.",
+    "date": "2026.07.19",
+    "readTime": "13 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "structured-data-without-content-drift",
+    "path": "/research/technical-seo/structured-data-without-content-drift",
+    "aliases": [],
+    "title": "Structured Data Without Content Drift",
+    "category": "STRUCTURED DATA",
+    "subtitle": "A typed-content architecture for keeping visible pages, metadata, JSON-LD, sitemaps, and exports consistent through generation, invariants, and production tests.",
+    "date": "2026.07.19",
+    "readTime": "14 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "audit-findings-derived-records",
+    "path": "/research/data-systems/audit-findings-derived-records",
+    "aliases": [],
+    "title": "Audit Findings Should Be Derived Records",
+    "category": "EVIDENCE SYSTEMS",
+    "subtitle": "A data model that separates captured observations, artifacts, rule evaluations, findings, confidence, review state, and recommendations without losing lineage.",
+    "date": "2026.07.19",
+    "readTime": "15 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "replayable-traces-ai-agent-evaluation",
+    "path": "/research/ai-systems/replayable-traces-ai-agent-evaluation",
+    "aliases": [],
+    "title": "Replayable Traces for Evaluating Tool-Using AI Agents",
+    "category": "AI EVALUATION",
+    "subtitle": "An evaluation architecture for tasks, trials, observable trajectories, controlled environments, layered graders, repeated runs, and evidence-gated promotion.",
+    "date": "2026.07.19",
+    "readTime": "16 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "sqlite-crawl-pipelines",
+    "path": "/research/data-systems/sqlite-crawl-pipelines",
+    "aliases": [],
+    "title": "SQLite for Crawl Pipelines: Idempotency, WAL, and Bounded Concurrency",
+    "category": "DATA SYSTEMS",
+    "subtitle": "A storage architecture for URL identity, append-only attempts, transactional batches, upserts, one-writer discipline, WAL checkpoints, integrity checks, and portable exports.",
+    "date": "2026.07.19",
+    "readTime": "15 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "technical-seo-migration-release-gates",
+    "path": "/research/technical-seo/technical-seo-migration-release-gates",
+    "aliases": [],
+    "title": "Technical SEO Migrations Need Executable Release Gates",
+    "category": "SITE MIGRATIONS",
+    "subtitle": "A fail-closed migration method for URL manifests, redirect graphs, canonical output, internal links, sitemaps, rendered content, launch sequencing, and post-release evidence.",
+    "date": "2026.07.19",
+    "readTime": "16 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "ai-search-crawler-policy",
+    "path": "/research/ai-crawlers/ai-search-crawler-policy",
+    "aliases": [
+      "/markets/ai-search-crawler-policy"
+    ],
+    "title": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
+    "category": "CRAWLER POLICY",
+    "subtitle": "Copy-ready host rules for eight named product tokens, with exact Allow, Disallow, sitemap, and release checks.",
+    "date": "2026.06.19",
+    "readTime": "10 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "technical-seo-public-data-infrastructure",
+    "path": "/research/search-console/technical-seo-public-data-infrastructure",
+    "aliases": [
+      "/markets/technical-seo-public-data-infrastructure"
+    ],
+    "title": "Technical SEO as Public Data Infrastructure",
+    "category": "DATA INFRASTRUCTURE",
+    "subtitle": "A systems essay on how URLs become crawlable, renderable, attributable, and exportable public records.",
+    "date": "2026.06.19",
+    "readTime": "14 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  },
+  {
+    "slug": "canonical-identity-personal-seo",
+    "path": "/research/personal-seo/canonical-identity-personal-seo",
+    "aliases": [
+      "/markets/canonical-identity-personal-seo"
+    ],
+    "title": "Canonical Identity Beats More Content",
+    "category": "ENTITY CONSISTENCY",
+    "subtitle": "An operational playbook for reconciling domains, profile pages, resumes, sameAs links, and external biographies.",
+    "date": "2026.06.19",
+    "readTime": "12 MIN",
+    "image": "/og-default.png",
+    "kind": "research"
+  }
+]
