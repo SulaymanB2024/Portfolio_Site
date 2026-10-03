@@ -6,9 +6,10 @@ import { portfolioAssetUrl } from './portfolio-assets'
 import { clampStudy, settleWorkStudy, workStudyPose, workStudyRenderSize, workStudyScroll } from './work-study-motion'
 import type { WorkStudyPose } from './work-study-motion'
 import { createStudyOrbit, fitStudyOrbit, resetStudyOrbit, rotateStudyKey, rotateStudyPointer, studyTouchIntent } from './work-study-interaction'
-import { STUDY_DOCK_MS, STUDY_DEPART_MS, studyFlightProgress, studyFlightRect, studyFlightInkProgress, studyFlightInkStrength, studyFlightInkMotion, type StudyRect } from './work-study-flight'
+import { STUDY_DOCK_MS, STUDY_DEPART_MS, studyFlightProgress, studyFlightRect, studyFlightInkProgress, studyFlightInkStrength, type StudyRect } from './work-study-flight'
 import { workStudyCameraDistance, workStudyFraming } from './work-study-framing'
-import { createWorkStudyInk } from './work-study-ink'
+import { createWorkStudyInk, STUDY_INK_GLSL } from './work-study-ink'
+import { createStudyFrameReview } from './work-study-frame-review'
 
 export type WorkStudyFlight = { canvas: HTMLCanvasElement; handle: WorkStudyHandle; playing: boolean }
 
@@ -73,24 +74,18 @@ const VERTEX = /* glsl */ `
 
 const FRAGMENT = /* glsl */ `
   uniform sampler2D studyColor;
+  uniform sampler2D studySurface;
   uniform vec3 studyInk;
   uniform vec4 studyRegions[4];
   uniform vec4 studyHover;
   uniform vec4 studyBursts;
   uniform float studyTime;
   uniform vec2 studyFlight;
-  uniform float studyBody;
   uniform vec3 studyResolution;
   uniform vec2 studyCssResolution;
   varying vec2 studyUv;
   ${PORTFOLIO_DITHER_GLSL}
-  vec4 sampleInk(vec2 pixel, vec4 region) {
-    // A displaced sample may leave its sculpture, never wrap across the canvas.
-    vec2 low = max(region.xy, vec2(0.0));
-    vec2 high = min(region.xy + region.zw, studyResolution.xy);
-    if (any(lessThan(pixel, low)) || any(greaterThanEqual(pixel, high))) return vec4(0.0);
-    return texture2D(studyColor, pixel / studyResolution.xy);
-  }
+  ${STUDY_INK_GLSL}
   float inkTone(vec4 model) {
     return portfolioDisplayLuminance(model.rgb);
   }
@@ -120,17 +115,16 @@ const FRAGMENT = /* glsl */ `
     float gray = inkTone(model);
     float coverage = model.a * (1.0 - step(hoverPattern, gray)) * step(burst * .45, grain);
     if (studyFlight.y > 0.0 && region.z > 0.0) {
-      float strength = studyFlight.y;
-      // First expose the ordered marks, then lift their ink into the point field.
-      // The underlying target stays solid so the field always samples live ink.
-      float dotSize = 4.5 * studyResolution.z;
-      vec2 cell = floor((gl_FragCoord.xy - region.xy) / dotSize);
-      vec2 center = region.xy + (cell + .5) * dotSize;
-      vec4 coarse = sampleInk(center, region);
-      float scattered = coarse.a * (1.0 - step(portfolioBayer4(cell), inkTone(coarse)));
-      float mark = portfolioHash(cell);
-      float density = studyBody >= .9999 ? 1.0 : studyBody <= .0001 ? 0.0 : smoothstep(mark - .06, mark + .06, studyBody);
-      coverage = mix(coverage, scattered, strength) * density;
+      // A traveling band exposes coarse ink just before the surface releases it.
+      // Final pixels and landed grains exchange ownership without an opacity dip.
+      vec2 cell = floor((gl_FragCoord.xy - region.xy) / region.zw * inkGrid);
+      vec2 uv = (cell + .5) / inkGrid;
+      float mark = texture2D(studySurface, uv).a;
+      float lifted = inkLifted(inkJourney(uv, studyFlight.x));
+      float localGrain = inkEase((studyFlight.x - inkRelease(uv) + .045) / .045);
+      float resting = coverage;
+      coverage = mix(coverage, mark, localGrain) * (1.0 - lifted);
+      coverage = mix(coverage, resting, inkHandoff(gl_FragCoord.xy, studyFlight.x));
     }
     gl_FragColor = vec4(studyInk, coverage);
     #include <colorspace_fragment>
@@ -150,7 +144,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   let frames = 0
   let averageMs = 0
   let lastStats = -Infinity
-  let opening: { study: Study; start: number; phase: 'depart' | 'hold' | 'dock'; from: StudyRect; onDeparted: (flight: WorkStudyFlight) => void; onComplete?: () => void } | null = null
+  let opening: { study: Study; start: number; phase: 'depart' | 'hold' | 'dock'; from: StudyRect; distance: number; aspect: number; onDeparted: (flight: WorkStudyFlight) => void; onComplete?: () => void } | null = null
   const regions = Array.from({ length: 4 }, () => new THREE.Vector4())
   const hoverSignals = new THREE.Vector4()
   const burstSignals = new THREE.Vector4()
@@ -205,7 +199,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
 
   function resumeFlight() {
     if (flightSuspendedAt === null || document.hidden || contextLost) return
-    if (opening) opening.start += performance.now() - flightSuspendedAt
+    if (opening && !frameReview?.paused()) opening.start += performance.now() - flightSuspendedAt
     flightSuspendedAt = null
   }
 
@@ -255,14 +249,18 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     if (opening) {
       canvas.dataset.flightInk = String(dither?.uniforms.studyFlight.value.y ?? 0)
       canvas.dataset.flightProgress = String(dither?.uniforms.studyFlight.value.x ?? 0)
-      canvas.dataset.flightBody = String(dither?.uniforms.studyBody.value ?? 1)
       canvas.dataset.flightParticles = String(flightInk?.points.visible ?? false)
       canvas.dataset.flightRect = JSON.stringify({ left: opening.study.left, top: opening.study.top, width: opening.study.width, height: opening.study.height })
     }
   }
 
-  function fit(study: Study, time = performance.now()) {
+  const frameReview = (import.meta.env.DEV || import.meta.env.MODE === 'flight-review') ? createStudyFrameReview(() => requestRender()) : null
+
+  function fit(study: Study, time = frameReview?.now(performance.now()) ?? performance.now()) {
     if (study.width <= 0 || study.height <= 0) return
+    const flight = opening?.study === study ? opening : null
+    const inkProgress = flight ? studyFlightInkProgress(flight.phase, time - flight.start) : 1
+    const resolve = flight ? studyFlightProgress(inkProgress - .20, .45) : 1
     study.camera.aspect = study.width / study.height
     const vertical = THREE.MathUtils.degToRad(study.camera.fov) / 2
     const dockProgress = opening?.study === study
@@ -270,9 +268,10 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       : 1
     const framing = workStudyFraming(study.element.dataset.workFraming === 'detail', dockProgress)
     const distance = workStudyCameraDistance(study.radius, study.camera.aspect, vertical, framing)
-    fitStudyOrbit(study.controls, distance)
-    study.camera.near = Math.max(.01, distance - study.radius * 2)
-    study.camera.far = distance + study.radius * 3
+    const fittedDistance = flight ? flight.distance + (distance - flight.distance) * resolve : distance
+    fitStudyOrbit(study.controls, fittedDistance)
+    study.camera.near = Math.max(.01, fittedDistance - study.radius * 2)
+    study.camera.far = fittedDistance + study.radius * 3
     study.camera.updateProjectionMatrix()
   }
 
@@ -287,6 +286,18 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
         rect = opening.phase === 'dock'
           ? studyFlightRect(opening.from, targetRect, studyFlightProgress(time - opening.start, STUDY_DOCK_MS))
           : opening.from
+      }
+      if (opening?.study === study) {
+        const progress = studyFlightInkProgress(opening.phase, time - opening.start)
+        const resolve = studyFlightProgress(progress - .20, .45)
+        const width = Math.min(rect.width, rect.height * opening.aspect)
+        const height = width / opening.aspect
+        rect = {
+          left: rect.left + (rect.width - width) * .5 * (1 - resolve),
+          top: rect.top + (rect.height - height) * .5 * (1 - resolve),
+          width: width + (rect.width - width) * resolve,
+          height: height + (rect.height - height) * resolve,
+        }
       }
       study.top = rect.top
       study.left = rect.left
@@ -365,13 +376,14 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   }
 
   function render(time: number) {
+    time = frameReview?.now(time) ?? time
     raf = 0
     if (disposed || contextLost || document.hidden || !renderer || !target || !dither) return
     if (boundsDirty || opening) measure(time)
     let hasModels = false
     for (const study of studies) if (study.visible && study.object && !study.failed) { hasModels = true; break }
     if (!hasModels && !paintedSurface && !opening) { runtime.suspend(); stats(false, true); return }
-    if (!runtime.canPaint(time, urgent)) { requestRender(false); return }
+    if (!runtime.canPaint(time, urgent || !!frameReview?.paused())) { requestRender(false); return }
     urgent = false
     const live = hasModels && playing && !reducedMotion.matches && !opening
     const blocked = !!opening || studies.some(study => study.element.dataset.dragging === 'true')
@@ -394,10 +406,9 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     const inkProgress = opening && !reducedMotion.matches ? studyFlightInkProgress(opening.phase, time - opening.start) : 0
     const inkStrength = studyFlightInkStrength(inkProgress)
     dither.uniforms.studyFlight.value.set(inkProgress, inkStrength)
-    dither.uniforms.studyBody.value = opening ? studyFlightInkMotion(inkProgress).body : 1
     dither.uniforms.studyTime.value = motionSeconds
     for (const study of studies) {
-      if (!study.visible || !study.object || study.failed) continue
+      if ((!study.visible && opening?.study !== study) || !study.object || study.failed) continue
       if (study.fadeStart < 0) study.fadeStart = time
       const reveal = reducedMotion.matches ? 1 : clampStudy((time - study.fadeStart) / 300, 0, 1)
       const coverage = Math.max(.02, reveal * reveal * (3 - 2 * reveal))
@@ -433,6 +444,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       const height = Math.max(1, Math.round(study.height * size.scaleY))
       const index = studies.indexOf(study)
       if (index < 4) { regions[index].set(x, y, width, height); hoverSignals.setComponent(index, study.hover); burstSignals.setComponent(index, burst) }
+      if (!study.visible) continue
       const clipX = Math.max(0, x)
       const clipY = Math.max(0, y)
       const clipWidth = Math.max(0, Math.min(size.width, x + width) - clipX)
@@ -443,8 +455,16 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       renderer.render(study.scene, study.camera)
       study.frames++
     }
-    // The points borrow the completed live target and draw over the ink body.
-    flightInk?.update(inkProgress, opening ? regions[studies.indexOf(opening.study)] : undefined, size.width, size.height, size.scaleX)
+    // Capture actual surface positions once; moving marks keep their identity
+    // while the live GLB and camera continue into the destination framing.
+    if (opening?.study.object) {
+      const study = opening.study
+      const region = regions[studies.indexOf(study)]
+      const firstMaterial = study.materials.find(({ opacity }) => opacity > 0)
+      const reveal = firstMaterial ? firstMaterial.material.opacity / firstMaterial.opacity : 1
+      flightInk?.capture(study.scene, study.camera, study.object!.position, study.radius, region.z, region.w, reveal)
+    }
+    flightInk?.update(inkProgress, opening ? regions[studies.indexOf(opening.study)] : undefined, opening?.study.camera, size.width, size.height, size.scaleX)
     renderer.setRenderTarget(null)
     renderer.setScissorTest(false)
     renderer.setViewport(0, 0, size.width, size.height)
@@ -464,6 +484,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       firstPaint = true
     }
     stats(live, firstPaint || !hasModels || (!live && !settling && !fading))
+    frameReview?.painted(canvas, opening?.phase ?? 'rest', opening ? time - opening.start : 0, inkProgress)
     if (opening && openingProgress >= 1 && opening.phase !== 'hold') {
       if (opening.phase === 'depart') {
         opening.phase = 'hold'
@@ -483,6 +504,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
         requestRender()
       }
     }
+    if (frameReview?.paused()) return
     if (live || settling || fading || opening) requestRender(false)
     else runtime.suspend()
   }
@@ -616,6 +638,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   function dispose() {
     if (disposed) return
     disposed = true
+    frameReview?.dispose()
     opening = null
     stats(false, true)
     runtime.suspend()
@@ -664,8 +687,8 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     },
     beginTransition(slug, onDeparted) {
       const study = studies.find(study => study.slug === slug)
-      if (disposed || contextLost || reducedMotion.matches || opening || !study?.painted) return false
-      opening = { study, start: performance.now(), phase: 'depart', from: study.element.getBoundingClientRect(), onDeparted }
+      if (disposed || contextLost || reducedMotion.matches || opening || !study?.painted || !flightInk?.supported) return false
+      opening = { study, start: frameReview?.begin(performance.now()) ?? performance.now(), phase: 'depart', from: study.element.getBoundingClientRect(), distance: study.camera.position.distanceTo(study.controls.target), aspect: study.camera.aspect, onDeparted }
       canvas.dataset.flight = 'depart'
       requestRender()
       return true
@@ -699,7 +722,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       resizeObserver?.observe(root)
       resizeObserver?.observe(slot)
       opening.phase = 'dock'
-      opening.start = performance.now() - (reducedMotion.matches ? STUDY_DOCK_MS : 0)
+      opening.start = (frameReview?.now(performance.now()) ?? performance.now()) - (reducedMotion.matches ? STUDY_DOCK_MS : 0)
       flightSuspendedAt = document.hidden || contextLost ? performance.now() : null
       opening.onComplete = onComplete
       canvas.dataset.flight = 'dock'
@@ -711,7 +734,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       const complete = opening.onComplete
       opening = null
       flightInk?.clear()
-      if (dither) { dither.uniforms.studyFlight.value.set(0, 0); dither.uniforms.studyBody.value = 1 }
+      if (dither) { dither.uniforms.studyFlight.value.set(0, 0) }
       delete canvas.dataset.flight
       delete canvas.dataset.flightInk
       delete canvas.dataset.flightProgress
@@ -742,11 +765,12 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     renderer.toneMapping = THREE.ACESFilmicToneMapping
     renderer.toneMappingExposure = .95
     target = new THREE.WebGLRenderTarget(size.width, size.height, { depthBuffer: true, stencilBuffer: false, minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter })
-    dither = new THREE.ShaderMaterial({ vertexShader: VERTEX, fragmentShader: FRAGMENT, uniforms: { studyColor: { value: target.texture }, studyInk: { value: ink }, studyRegions: { value: regions }, studyHover: { value: hoverSignals }, studyBursts: { value: burstSignals }, studyTime: { value: 0 }, studyFlight: { value: new THREE.Vector2() }, studyBody: { value: 1 }, studyResolution: { value: new THREE.Vector3(size.width, size.height, size.scaleX) }, studyCssResolution: { value: new THREE.Vector2(cssWidth, cssHeight) } }, depthTest: false, depthWrite: false, toneMapped: false, blending: THREE.NoBlending })
+    dither = new THREE.ShaderMaterial({ vertexShader: VERTEX, fragmentShader: FRAGMENT, uniforms: { studyColor: { value: target.texture }, studySurface: { value: null }, studyInk: { value: ink }, studyRegions: { value: regions }, studyHover: { value: hoverSignals }, studyBursts: { value: burstSignals }, studyTime: { value: 0 }, studyFlight: { value: new THREE.Vector2() }, studyResolution: { value: new THREE.Vector3(size.width, size.height, size.scaleX) }, studyCssResolution: { value: new THREE.Vector2(cssWidth, cssHeight) } }, depthTest: false, depthWrite: false, toneMapped: false, blending: THREE.NoBlending })
     quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), dither)
     quad.frustumCulled = false
     postScene.add(quad)
-    flightInk = createWorkStudyInk(target.texture, ink)
+    flightInk = createWorkStudyInk(ink, renderer)
+    dither.uniforms.studySurface.value = flightInk.surfaceTexture
     postScene.add(flightInk.points)
     // Compile the transient field while assets load, before the first activation.
     void renderer.compileAsync(postScene, postCamera).catch(() => {})

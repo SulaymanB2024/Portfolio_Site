@@ -1,17 +1,17 @@
 .project-arrival{position:fixed;inset:0;z-index:1000;pointer-events:none}
 .project-arrival::before{content:'';position:absolute;inset:0;background:var(--arrival-paper);opacity:1}
-.project-arrival.is-docking::before{animation:project-paper-arrival var(--arrival-duration) ease both}
+.project-arrival.is-docking::before{animation:project-paper-arrival 300ms ease both}
 .project-arrival[data-suspended='true']::before{animation-play-state:paused}
 .project-arrival-sculpture{position:absolute;inset:0}
 .project-arrival-sculpture canvas{z-index:1}
 /* Keep the source still while its surrounding ink clears. */
 body:has(.work-stage[data-work-opening]){overflow:hidden}
 .work-studies-home:has([data-work-opening]),.work-studies-page:has([data-work-opening]){position:relative;z-index:50}
-.work-stage[data-work-opening]::before{content:'';position:fixed;inset:0;background:var(--paper);z-index:6;animation:project-paper-depart 420ms ease both;pointer-events:auto}
+.work-stage[data-work-opening]::before{content:'';position:fixed;inset:0;background:var(--paper);z-index:6;animation:project-paper-depart 160ms ease both;pointer-events:auto}
 .work-stage[data-work-opening] .work-stage-canvas{z-index:8}
 .work-stage[data-work-opening] .work-study-controls{visibility:hidden}
 .work-study-slot[data-expanding='true']{outline:none;pointer-events:none}
 /* Keep the ink transformation central, then let the destination emerge. */
 @keyframes project-paper-depart{from{opacity:0}to{opacity:1}}
-@keyframes project-paper-arrival{0%,54%{opacity:1}100%{opacity:0}}
+@keyframes project-paper-arrival{from{opacity:1}to{opacity:0}}
 @media(prefers-reduced-motion:reduce){.project-arrival.is-docking::before,.work-stage[data-work-opening]::before{animation:none}.project-arrival.is-docking::before{opacity:0}}

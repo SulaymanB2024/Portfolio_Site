@@ -1,7 +1,7 @@
 export type StudyRect = { left: number; top: number; width: number; height: number }
 
-export const STUDY_DEPART_MS = 420
-export const STUDY_DOCK_MS = 2780
+export const STUDY_DEPART_MS = 160
+export const STUDY_DOCK_MS = 1840
 
 /** One continuous, gently settling movement between the actual artwork slots. */
 export function studyFlightProgress(elapsed: number, duration: number) {
@@ -32,16 +32,5 @@ export function studyFlightInkProgress(phase: 'depart' | 'hold' | 'dock', elapse
 /** Gather the ink, hold its coarse structure, then resolve gently to exact rest. */
 export function studyFlightInkStrength(progress: number) {
   const p = Math.max(0, Math.min(1, Number.isFinite(progress) ? progress : 0))
-  return studyFlightProgress(p, .22) * (1 - studyFlightProgress(p - .72, .28))
-}
-
-/** Separate ink loss, circulation and return, with motionless exact endpoints. */
-export function studyFlightInkMotion(progress: number) {
-  const p = Math.max(0, Math.min(1, Number.isFinite(progress) ? progress : 0))
-  const release = studyFlightProgress(p - .12, .30)
-  const gather = studyFlightProgress(p - .55, .41)
-  const particles = studyFlightProgress(p - .08, .22) * (1 - studyFlightProgress(p - .80, .20))
-  const body = 1 - studyFlightProgress(p - .10, .29) * (1 - studyFlightProgress(p - .72, .27))
-  const turn = studyFlightProgress(p - .14, .78) * Math.PI * 1.8
-  return { release, gather, particles, body, turn }
+  return studyFlightProgress(p, .10) * (1 - studyFlightProgress(p - .86, .14))
 }

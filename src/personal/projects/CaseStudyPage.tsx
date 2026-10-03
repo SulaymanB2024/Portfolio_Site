@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { caseStudies, chapterId, type CaseStudy } from './case-studies'
 import { StudyArtwork } from './StudyArtwork'
 import AtlasEvidence from './AtlasEvidence'
@@ -6,9 +6,10 @@ import DecisionExplorer from './DecisionExplorer'
 import ProductEvidence from './ProductEvidence'
 import payrollRecord from '../../../public/research/payrollpro-system-record.json'
 import './case-studies.css'
+import { readerSection, type ReaderPosition } from '../editorial/reader-position'
 
-function JumpLink({ slug, index, children }: { slug: string; index: number; children: ReactNode }) {
-  return <a href={`#/work/${slug}?chapter=${chapterId(index)}`}><span className="mono" aria-hidden="true">0{index+1}</span>{children}</a>
+function JumpLink({ slug, index, children, current = false }: { slug: string; index: number; children: ReactNode; current?: boolean }) {
+  return <a href={`#/work/${slug}?chapter=${chapterId(index)}`} aria-current={current ? 'location' : undefined}><span className="mono" aria-hidden="true">0{index+1}</span>{children}</a>
 }
 
 function Chapter({ index, label, children }: { index: number; label: string; children: ReactNode }) {
@@ -64,6 +65,39 @@ function ViralStory() {
 }
 
 export default function CaseStudyPage({ study }: { study: CaseStudy }) {
+  const root = useRef<HTMLElement>(null)
+  const [active, setActive] = useState(chapterId(0))
+  useEffect(() => {
+    const prose = root.current?.querySelector('.study-prose')
+    const sections = [...(prose?.querySelectorAll<HTMLElement>('.study-chapter') || [])]
+    let positions: ReaderPosition[] = []
+    let dirty = true
+    let frame = 0
+    const update = () => {
+      frame = 0
+      if (dirty) {
+        positions = sections.map(section => ({ id: section.id, top: section.getBoundingClientRect().top + scrollY }))
+        dirty = false
+      }
+      const id = readerSection(positions, scrollY, innerHeight, chapterId(0))
+      if (id) setActive(previous => previous === id ? previous : id)
+    }
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update) }
+    const reflow = () => { dirty = true; schedule() }
+    const observer = new ResizeObserver(reflow)
+    if (prose) observer.observe(prose)
+    update()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', reflow)
+    document.fonts.addEventListener('loadingdone', reflow)
+    return () => {
+      cancelAnimationFrame(frame)
+      observer.disconnect()
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', reflow)
+      document.fonts.removeEventListener('loadingdone', reflow)
+    }
+  }, [study])
   const next = caseStudies[(caseStudies.indexOf(study)+1)%caseStudies.length]
   useEffect(() => {
     let frame = 0
@@ -81,11 +115,11 @@ export default function CaseStudyPage({ study }: { study: CaseStudy }) {
     window.addEventListener('hashchange', reachChapter)
     return () => { cancelAnimationFrame(frame); window.removeEventListener('hashchange', reachChapter) }
   }, [study])
-  return <article className={`case-study case-study-${study.slug}`}>
+  return <article ref={root} className={`case-study case-study-${study.slug}`}>
     <a className="study-back mono" href="#/work">← All work</a>
     <header className="study-hero"><div className="study-hero-copy"><span className="eyebrow">Project study {study.number} / {study.category}</span><h1>{study.slug==='viralbench' ? <>ViralBench<br /><em>+ Codex</em></> : study.name}<span className="period">.</span></h1><p className="study-title">{study.title}</p><p className="study-summary">{study.summary}</p><JumpLink slug={study.slug} index={study.slug==='atlas' ? 2 : 1}>{study.slug==='atlas' ? 'Inspect the sample' : 'Explore the design'}<span aria-hidden="true">↓</span></JumpLink></div><figure className="study-hero-figure"><StudyArtwork kind={study.slug} /><figcaption><span className="mono">Fig. {study.number}</span>{study.caption}</figcaption></figure></header>
     <dl className="study-facts">{[['My role',study.role],['Period',study.period],['Project state',study.status],['Medium',study.medium]].map(([label,value])=><div key={label}><dt className="mono">{label}</dt><dd>{value}</dd></div>)}</dl>
-    <div className="study-reading"><aside className="study-contents"><span className="eyebrow">In this study</span><nav aria-label="In this study">{study.chapters.map((chapter,index)=><JumpLink key={chapter} slug={study.slug} index={index}>{chapter}</JumpLink>)}</nav><a className="study-context-link mono" href="#/resume">View résumé ↗</a></aside><div className="study-prose">{study.slug==='atlas' ? <AtlasStory /> : study.slug==='payrollpro' ? <PayrollStory /> : <ViralStory />}</div></div>
+    <div className="study-reading"><aside className="study-contents"><span className="eyebrow">In this study</span><nav aria-label="In this study">{study.chapters.map((chapter,index)=><JumpLink key={chapter} slug={study.slug} index={index} current={active === chapterId(index)}>{chapter}</JumpLink>)}</nav><a className="study-context-link mono" href="#/resume">View résumé ↗</a></aside><div className="study-prose">{study.slug==='atlas' ? <AtlasStory /> : study.slug==='payrollpro' ? <PayrollStory /> : <ViralStory />}</div></div>
     <a className="study-next" href={`#/work/${next.slug}`}><div><span className="eyebrow">Next study / {next.category}</span><h2>{next.name}</h2></div><span aria-hidden="true">→</span></a>
   </article>
 }

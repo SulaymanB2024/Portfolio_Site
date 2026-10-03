@@ -70,6 +70,72 @@ function warpZ(g, fn) {
   }
   return g
 }
+// Split only long interior edges of the plate caps. Bevels, outline rims and
+// hole boundaries keep their original samples; adjacent caps share every split.
+// This gives the arch real interior geometry instead of warping a flat earcut fan.
+function plateCapGrid(geometry, maximumEdge = .12) {
+  geometry.deleteAttribute('uv')
+  const g = mergeVertices(geometry, .000001)
+  geometry.dispose()
+  const pos = g.getAttribute('position'), normal = g.getAttribute('normal')
+  const positions = Array.from(pos.array), normals = Array.from(normal.array), ids = Array.from(g.index.array)
+  const key = (a, b) => a < b ? `${a}:${b}` : `${b}:${a}`
+  const caps = new Set(), edges = new Map()
+  for (let i = 0; i < ids.length; i += 3) {
+    const triangle = ids.slice(i, i + 3)
+    if (!triangle.every(a => Math.abs(normal.getZ(a)) > .9999)) continue
+    caps.add(i)
+    for (let j = 0; j < 3; j++) {
+      const a = triangle[j], b = triangle[(j + 1) % 3], edge = key(a, b)
+      const old = edges.get(edge)
+      if (old) old.count++; else edges.set(edge, { a, b, count: 1 })
+    }
+  }
+  const midpoints = new Map()
+  for (const [edge, { a, b, count }] of edges) {
+    if (count !== 2 || v(pos.getX(a), pos.getY(a), pos.getZ(a)).distanceTo(v(pos.getX(b), pos.getY(b), pos.getZ(b))) <= maximumEdge) continue
+    const midpoint = positions.length / 3
+    for (let axis = 0; axis < 3; axis++) {
+      positions.push((positions[a * 3 + axis] + positions[b * 3 + axis]) / 2)
+      normals.push((normals[a * 3 + axis] + normals[b * 3 + axis]) / 2)
+    }
+    midpoints.set(edge, midpoint)
+  }
+  const triangles = []
+  for (let i = 0; i < ids.length; i += 3) {
+    const [a, b, c] = ids.slice(i, i + 3)
+    if (!caps.has(i)) { triangles.push(a, b, c); continue }
+    const ab = midpoints.get(key(a, b)), bc = midpoints.get(key(b, c)), ca = midpoints.get(key(c, a))
+    const mask = (ab === undefined ? 0 : 1) | (bc === undefined ? 0 : 2) | (ca === undefined ? 0 : 4)
+    if (mask === 0) triangles.push(a, b, c)
+    if (mask === 1) triangles.push(a, ab, c, ab, b, c)
+    if (mask === 2) triangles.push(a, b, bc, a, bc, c)
+    if (mask === 4) triangles.push(a, b, ca, ca, b, c)
+    if (mask === 3) triangles.push(a, ab, c, ab, bc, c, ab, b, bc)
+    if (mask === 5) triangles.push(a, ab, ca, ab, b, c, ab, c, ca)
+    if (mask === 6) triangles.push(a, b, ca, b, bc, ca, bc, c, ca)
+    if (mask === 7) triangles.push(a, ab, ca, ab, b, bc, ca, bc, c, ab, bc, ca)
+  }
+  const refined = new THREE.BufferGeometry()
+  refined.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
+  refined.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3))
+  refined.setIndex(triangles)
+  g.dispose()
+  return refined
+}
+function tuningGear() {
+  const shape = new THREE.Shape()
+  for (let i = 0; i < 48; i++) {
+    const angle = i / 48 * TAU, radius = i % 4 < 2 ? .023 : .0175
+    const x = Math.cos(angle) * radius, y = Math.sin(angle) * radius
+    if (i === 0) shape.moveTo(x, y); else shape.lineTo(x, y)
+  }
+  shape.closePath()
+  const axle = new THREE.Path()
+  axle.absarc(0, 0, .007, 0, TAU, true)
+  shape.holes.push(axle)
+  return extrude(shape, .005, .0007, 5)
+}
 function bassOutline() {
   const s = new THREE.Shape()
   s.moveTo(0, .57)
@@ -139,8 +205,8 @@ function doubleBass() {
   }
   const face = bassOutline()
   face.holes.push(fHole(1), fHole(-1))
-  put(body, warpZ(extrude(face, .017, .005, 10), arch), v(0, 0, .135))
-  put(back, warpZ(extrude(bassOutline(), .021, .006, 12), (x, y) => -arch(x, y) * .67), v(0, 0, -.135))
+  put(body, warpZ(plateCapGrid(extrude(face, .017, .005, 10)), arch), v(0, 0, .135))
+  put(back, warpZ(plateCapGrid(extrude(bassOutline(), .021, .006, 12)), (x, y) => -arch(x, y) * .67), v(0, 0, -.135))
   // A real hollow rib ring, with front-only sound holes and an interior shadow cavity.
   const shell = bassOutline(), inner = new THREE.Path()
   const innerPoints = bassOutline().getPoints(12).map(p => new THREE.Vector2(p.x * .971, (p.y + .315) * .976 - .315))
@@ -150,8 +216,17 @@ function doubleBass() {
   put(ribs, extrude(shell, .252, .002, 10))
   const innerCavity = bassOutline()
   put(ebony, extrude(innerCavity, .004, 0, 10), v(0, 0, .025), [0, 0, 0], [.96, .96, 1])
-  const rim = bassOutline().getSpacedPoints(128).slice(0, -1)
-  for (const z of [.145, -.147]) tube(binding, rim.map(p => v(p.x * .965, (p.y + .315) * .973 - .315, z)), .0034, 128, 5, true)
+  const rim = bassOutline().getSpacedPoints(96).slice(0, -1)
+  for (const inset of [.963, .951]) {
+    tube(binding, rim.map(p => {
+      const x = p.x * inset, y = (p.y + .315) * (inset + .008) - .315
+      return v(x, y, .147 + arch(x, y))
+    }), .0024, 96, 4, true)
+  }
+  tube(binding, rim.map(p => {
+    const x = p.x * .963, y = (p.y + .315) * .971 - .315
+    return v(x, y, -.150 - arch(x, y) * .67)
+  }), .0028, 96, 4, true)
   for (const side of [-1, 1]) {
     const notch = v(side * .247, -.205, .135 + arch(side * .247, -.205))
     box(binding, [.022, .004, .005], notch, [0, 0, side * -.21])
@@ -183,19 +258,22 @@ function doubleBass() {
     const y = 1.322 + i * .045, side = i % 2 ? -1 : 1
     rod(fittings, v(-.075, y, .067), v(.075, y, .067), .013, 12)
     ellipsoid(fittings, v(side * .105, y, .067), [.021, .034, .012], 1, 16, 10)
-    box(fittings, [.018, .039, .070], v(side * .067, y, .065))
-    torus(fittings, .017, .003, v(side * .080, y, .067), [0, Math.PI / 2, 0], 6, 20)
+    box(fittings, [.006, .046, .071], v(side * .066, y, .065))
+    put(fittings, tuningGear(), v(side * .080, y, .067), [0, Math.PI / 2, 0])
+    ellipsoid(ebony, v(side * .084, y, .067), [.0015, .004, .004], 1, 10, 6)
+    rod(fittings, v(side * .079, y + .028, .037), v(side * .100, y + .028, .037), .0035, 8)
   }
   const scroll = part('bass-scroll', 'ivory', 'bass')
+  // A solid volute carries the spiral carving, rather than two floating coils.
+  ellipsoid(scroll, v(0, 1.54, .065), [.043, .085, .083], 1, 24, 16)
   for (const side of [-1, 1]) {
     const points = []
     for (let i = 0; i <= 100; i++) {
-      const t = i / 100, angle = -Math.PI * .7 + t * TAU * 1.35, r = .103 * (1 - t) + .016
-      points.push(v(side * (.038 + .01 * Math.sin(t * Math.PI)), 1.54 + r * Math.sin(angle), .065 + r * Math.cos(angle)))
+      const t = i / 100, angle = -Math.PI * .7 + t * TAU * 1.35, r = .080 * (1 - t) + .009
+      points.push(v(side * (.040 + .009 * Math.sin(t * Math.PI)), 1.54 + r * Math.sin(angle), .065 + r * Math.cos(angle)))
     }
-    tube(scroll, points, .014, 64, 8)
-    rod(scroll, v(-.048, 1.54, .066), v(.048, 1.54, .066), .025, 20)
-    ellipsoid(scroll, v(side * .049, 1.54, .066), [.008, .025, .025], 1, 20, 12)
+    tube(scroll, points, .008, 64, 6)
+    ellipsoid(scroll, v(side * .048, 1.54, .066), [.006, .018, .018], 1, 16, 10)
   }
   // Carved bridge with two feet, arched openings and a rounded four-string crown.
   const bridgeShape = new THREE.Shape()
@@ -212,12 +290,25 @@ function doubleBass() {
     opening.bezierCurveTo(side * .089, -.348, side * .106, -.381, side * .085, -.405)
     bridgeShape.holes.push(opening)
   }
+  const heart = new THREE.Path()
+  heart.moveTo(0, -.383)
+  heart.bezierCurveTo(-.027, -.363, -.018, -.342, 0, -.354)
+  heart.bezierCurveTo(.018, -.342, .027, -.363, 0, -.383)
+  bridgeShape.holes.push(heart)
   put(bridge, extrude(bridgeShape, .025, .003, 14), v(0, 0, .334))
-  for (const side of [-1, 1]) box(bridge, [.075, .018, .045], v(side * .097, -.484, .285))
+  for (const side of [-1, 1]) {
+    const foot = new THREE.Shape()
+    foot.moveTo(-.039, -.008); foot.quadraticCurveTo(0, -.013, .039, -.008)
+    foot.lineTo(.030, .007); foot.quadraticCurveTo(0, .015, -.030, .007); foot.closePath()
+    put(bridge, extrude(foot, .045, .002, 7), v(side * .097, -.484, .285))
+  }
   const tail = new THREE.Shape()
   tail.moveTo(-.105, -.75); tail.quadraticCurveTo(0, -.704, .105, -.75)
   tail.lineTo(.055, -1.05); tail.quadraticCurveTo(0, -1.10, -.055, -1.05); tail.closePath()
   put(ebony, extrude(tail, .038, .007, 12), v(0, 0, .257))
+  // Raised saddle and nut give all four strings real bearing points.
+  box(ebony, [.09, .010, .029], v(0, 1.281, .192), [0, 0, 0])
+  box(ebony, [.105, .017, .023], v(0, -1.164, .181))
   for (const side of [-1, 1]) tube(binding, [v(side * .035, -1.04, .262), v(side * .043, -1.16, .183), v(side * .028, -1.215, .112)], .007, 24, 8)
   ellipsoid(fittings, v(0, -1.22, .020), [.038, .038, .038], 1, 20, 12)
   rod(fittings, v(0, -1.225, .020), v(0, -1.570, .020), .012, 14)
@@ -241,6 +332,11 @@ function doubleBass() {
   const frog = new THREE.Shape()
   frog.moveTo(.748, -.410); frog.lineTo(.841, -.410); frog.lineTo(.841, -.367); frog.quadraticCurveTo(.790, -.359, .748, -.367); frog.closePath()
   put(bow, extrude(frog, .040, .003, 8), v(0, 0, .385))
+  const tip = new THREE.Shape()
+  tip.moveTo(-.613, -.394); tip.lineTo(-.591, -.409); tip.lineTo(-.568, -.407)
+  tip.quadraticCurveTo(-.584, -.391, -.588, -.372); tip.quadraticCurveTo(-.608, -.376, -.613, -.394)
+  put(bowHair, extrude(tip, .021, .002, 7), v(0, 0, .386))
+  box(bowMetal, [.040, .012, .043], v(.766, -.407, .385))
   ellipsoid(bowMetal, v(.790, -.386, .409), [.010, .010, .004], 1, 16, 8)
   rod(bowMetal, v(.840, -.374, .385), v(.898, -.374, .385), .007, 12)
   for (let i = 0; i < 14; i++) torus(bowMetal, .0105, .0018, v(.593 + i * .005, -.347, .387), [0, Math.PI / 2, 0], 5, 14)
@@ -332,11 +428,11 @@ function chessKnight() {
   // A denser turned profile gives the foot, scotia, bead and neck collar their
   // own continuous curves rather than a stack of angular cylinders.
   const profile = [
-    [.022, .028], [.116, .028], [.129, .032], [.137, .039], [.140, .047], [.139, .055], [.134, .066],
-    [.127, .074], [.117, .082], [.115, .087], [.119, .092], [.126, .098], [.127, .104], [.122, .112],
-    [.111, .119], [.096, .128], [.085, .139], [.076, .151], [.071, .157],
+    [.022, .028], [.116, .028], [.131, .033], [.138, .039], [.140, .047], [.138, .056], [.133, .066],
+    [.125, .074], [.114, .082], [.113, .087], [.119, .092], [.126, .098], [.126, .104], [.120, .113],
+    [.108, .121], [.094, .130], [.083, .141], [.075, .152], [.071, .157],
   ].map(p => new THREE.Vector2(...p))
-  put(horse, new THREE.LatheGeometry(profile, 72))
+  put(horse, new THREE.LatheGeometry(profile, 64))
   put(horse, new THREE.CylinderGeometry(.121, .121, .007, 64), v(0, .030, 0))
   torus(trim, .130, .0034, v(0, .074, 0), [Math.PI / 2, 0, 0], 8, 72)
   torus(detail, .119, .0022, v(0, .090, 0), [Math.PI / 2, 0, 0], 6, 64)
@@ -345,21 +441,24 @@ function chessKnight() {
   // One closed carved head/neck surface includes the throat, cheek, jaw,
   // muzzle, forehead and poll. Every profile lists y, back z, front z, width.
   const anatomy = [
-    [.144, -.074, .062, .075], [.174, -.094, .060, .074], [.205, -.111, .056, .073],
-    [.245, -.127, .051, .070], [.290, -.134, .047, .067], [.340, -.136, .050, .064],
-    [.385, -.129, .058, .062], [.418, -.118, .076, .060], [.446, -.100, .133, .057],
-    [.465, -.084, .199, .059], [.483, -.073, .225, .062], [.498, -.063, .216, .066],
-    [.520, -.050, .177, .071], [.540, -.038, .136, .064], [.558, -.026, .101, .052],
+    [.144, -.074, .062, .075], [.174, -.095, .061, .075], [.205, -.113, .056, .073],
+    [.245, -.129, .048, .070], [.290, -.138, .043, .065], [.340, -.139, .047, .061],
+    [.385, -.130, .057, .060], [.418, -.118, .075, .060], [.446, -.100, .133, .058],
+    [.465, -.084, .201, .059], [.483, -.073, .226, .063], [.498, -.063, .218, .067],
+    [.520, -.050, .178, .071], [.540, -.038, .138, .064], [.558, -.026, .102, .052],
     [.574, -.021, .066, .036], [.583, -.017, .041, .024],
     [.586, -.006, .028, .016], [.588, .004, .018, .007],
   ]
   const gaussian = (y, z, cy, cz, sy, sz) => Math.exp(-(((y - cy) / sy) ** 2) - ((z - cz) / sz) ** 2)
   const cheekOffset = (y, z) =>
-    .0080 * gaussian(y, z, .481, .067, .031, .047)
-    - .0090 * gaussian(y, z, .539, .074, .011, .020)
-    - .0100 * gaussian(y, z, .495, .182, .009, .018)
-    - .0040 * gaussian(y, z, .463, .158, .0035, .039)
-    - .0025 * gaussian(y, z, .395, .018, .081, .033)
+    .0100 * gaussian(y, z, .481, .067, .029, .043)
+    + .0030 * gaussian(y, z, .552, .068, .008, .029)
+    - .0110 * gaussian(y, z, .539, .074, .010, .019)
+    - .0120 * gaussian(y, z, .495, .182, .008, .017)
+    - .0045 * gaussian(y, z, .464, .159, .0025, .040)
+    + .0028 * gaussian(y, z, .458, .168, .003, .032)
+    - .0035 * gaussian(y, z, .395, .018, .077, .026)
+    + .0020 * gaussian(y, z, .239, .032, .049, .020)
   const bodySample = (section, angle) => {
     const [y, back, front, width] = section
     const z = (front + back) / 2 + Math.sin(angle) * (front - back) / 2
@@ -371,11 +470,16 @@ function chessKnight() {
     const t = THREE.MathUtils.clamp((2 * z - front - back) / (front - back), -.9999, .9999)
     return v(side * ((width + cheekOffset(y, z)) * Math.sqrt(1 - t * t) + offset), y, z)
   }
-  put(horse, knightClosedSurface(knightSections(anatomy, 4), bodySample, 60))
+  // Extra rings are concentrated in the sculpted skin. The turned foot and
+  // dorsal crest give up redundant samples so this remains below the same cap.
+  put(horse, knightClosedSurface(knightSections(anatomy, 5), bodySample, 64))
   for (const side of [-1, 1]) {
     // An inset eye within a real orbital depression, surrounded by carved lids.
     const eye = sideSurface(side, .539, .074, -.0003)
     ellipsoid(detail, eye, [.0027, .0043, .0070], 1, 20, 12)
+    const iris = new THREE.TorusGeometry(.0054, .00075, 5, 16)
+    iris.scale(.68, 1, 1); iris.rotateY(Math.PI / 2)
+    put(horse, iris, eye.clone().add(v(side * .0027, 0, 0)))
     tube(horse, [[.535, .054], [.547, .064], [.548, .078], [.541, .091]].map(([y, z]) => sideSurface(side, y, z, .0010)), .0025, 22, 7)
     tube(horse, [[.535, .055], [.531, .074], [.536, .090]].map(([y, z]) => sideSurface(side, y, z, .0008)), .0017, 18, 6)
     tube(horse, [[.550, .049], [.558, .064], [.553, .084]].map(([y, z]) => sideSurface(side, y, z, .0001)), .0020, 20, 6)
@@ -413,17 +517,17 @@ function chessKnight() {
   }
   // A continuous dorsal mane with carved scallops. The pale crest and fine
   // graphite incisions create detail at three-quarter angles without loose rods.
-  const maneSections = Array.from({ length: 85 }, (_, i) => {
-    const t = i / 84, y = .205 + t * .350, [, back] = knightSection(anatomy, y)
+  const maneSections = Array.from({ length: 65 }, (_, i) => {
+    const t = i / 64, y = .205 + t * .350, [, back] = knightSection(anatomy, y)
     const width = .035 - .013 * t, depth = .016 - .004 * t
     return [y, back + .004, width, depth, t]
   })
   put(horse, knightClosedSurface(maneSections, (p, angle) => {
     const [y, center, width, depth, t] = p
     const x = Math.cos(angle) * width, outward = Math.max(0, -Math.sin(angle))
-    const groove = .003 * Math.exp(-((Math.sin(t * Math.PI * 13 + (x / width) ** 2 * .42)) ** 2) / .050)
+    const groove = .0038 * Math.exp(-((Math.sin(t * Math.PI * 13 + (x / width) ** 2 * .42)) ** 2) / .065)
     return v(x, y, center + Math.sin(angle) * (depth - groove * outward))
-  }, 28))
+  }, 24))
   for (let i = 1; i <= 12; i++) {
     const t = i / 13, y = .205 + t * .350, width = .035 - .013 * t
     const ridge = Array.from({ length: 9 }, (_, j) => {
@@ -459,11 +563,12 @@ function paperNormal(x, y) {
   const dy = paperPoint(x, y + .00001).sub(paperPoint(x, y - .00001))
   return dx.cross(dy).normalize()
 }
-function sheetSurface(front, cols = 32, rows = 44) {
+const paperHalfThickness = .0024
+function sheetSurface(front, cols = 40, rows = 56) {
   const positions = [], indices = []
   for (let row = 0; row <= rows; row++) for (let col = 0; col <= cols; col++) {
     const x = -.52 + col / cols * 1.04, y = -.71 + row / rows * 1.42
-    positions.push(...paperPoint(x, y, front ? .004 : -.004).toArray())
+    positions.push(...paperPoint(x, y, front ? paperHalfThickness : -paperHalfThickness).toArray())
   }
   for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) {
     const a = row * (cols + 1) + col, b = a + 1, c = a + cols + 1, d = c + 1
@@ -473,16 +578,21 @@ function sheetSurface(front, cols = 32, rows = 44) {
   g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); g.setIndex(indices); g.computeVertexNormals()
   return g
 }
-function sheetEdge(cols = 32, rows = 44) {
+function sheetEdge(cols = 40, rows = 56) {
   const boundary = []
   for (let i = 0; i < cols; i++) boundary.push([-.52 + i / cols * 1.04, -.71])
   for (let i = 0; i < rows; i++) boundary.push([.52, -.71 + i / rows * 1.42])
   for (let i = 0; i < cols; i++) boundary.push([.52 - i / cols * 1.04, .71])
   for (let i = 0; i < rows; i++) boundary.push([-.52, .71 - i / rows * 1.42])
-  const positions = boundary.flatMap(([x, y]) => [...paperPoint(x, y, .004).toArray(), ...paperPoint(x, y, -.004).toArray()])
+  // A tiny bevel has its own highlight rather than a thick rectangular slab.
+  const positions = boundary.flatMap(([x, y]) => [
+    ...paperPoint(x, y, paperHalfThickness).toArray(),
+    ...paperPoint(x + Math.sign(x) * .0004, y + Math.sign(y) * .0004).toArray(),
+    ...paperPoint(x, y, -paperHalfThickness).toArray(),
+  ])
   const indices = []
-  for (let i = 0; i < boundary.length; i++) {
-    const a = i * 2, b = ((i + 1) % boundary.length) * 2
+  for (let i = 0; i < boundary.length; i++) for (let bevel = 0; bevel < 2; bevel++) {
+    const a = i * 3 + bevel, b = ((i + 1) % boundary.length) * 3 + bevel
     indices.push(a, a + 1, b, b, a + 1, b + 1)
   }
   const g = new THREE.BufferGeometry()
@@ -491,6 +601,35 @@ function sheetEdge(cols = 32, rows = 44) {
 }
 function scoreTube(p, points, radius = .0024, segments = 28, sides = 5) {
   tube(p, points.map(([x, y]) => paperPoint(x, y, .009)), radius, segments, sides)
+}
+function scoreRibbon(p, points, halfWidth = .005, segments = 32) {
+  const curve = new THREE.CatmullRomCurve3(points.map(([x, y]) => v(x, y, 0)), false, 'centripetal')
+  const positions = [], indices = []
+  const section = [[1, 0], [.78, 1], [-.78, 1], [-1, 0], [-.78, -1], [.78, -1]]
+  for (let row = 0; row <= segments; row++) {
+    const t = row / segments, center = curve.getPoint(t), tangent = curve.getTangent(t)
+    const width = halfWidth * (.50 + .50 * Math.sin(Math.PI * t) ** .7)
+    for (const [across, depth] of section) {
+      const x = center.x - tangent.y * across * width, y = center.y + tangent.x * across * width
+      positions.push(...paperPoint(x, y, .009 + depth * .0018).toArray())
+    }
+  }
+  for (let row = 0; row < segments; row++) for (let col = 0; col < section.length; col++) {
+    const a = row * section.length + col, b = row * section.length + (col + 1) % section.length
+    const c = a + section.length, d = b + section.length
+    indices.push(a, b, c, b, d, c)
+  }
+  for (const row of [0, segments]) {
+    const center = curve.getPoint(row / segments), cap = positions.length / 3
+    positions.push(...paperPoint(center.x, center.y, .009).toArray())
+    for (let col = 0; col < section.length; col++) {
+      const a = row * section.length + col, b = row * section.length + (col + 1) % section.length
+      if (row === 0) indices.push(cap, b, a); else indices.push(cap, a, b)
+    }
+  }
+  const g = new THREE.BufferGeometry()
+  g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); g.setIndex(indices); g.computeVertexNormals()
+  put(p, g)
 }
 function scoreGlyph(g) {
   const pos = g.getAttribute('position'), normal = g.getAttribute('normal')
@@ -506,8 +645,14 @@ function scoreGlyph(g) {
   return g
 }
 function embossedNote(p, x, y, stem = true, flag = false) {
-  const head = new THREE.SphereGeometry(1, 16, 10)
-  head.scale(.030, .019, .009)
+  // A thin engraved almond has a precise slanted outline and beveled shoulders.
+  const outline = new THREE.Shape()
+  outline.moveTo(-.030, 0)
+  outline.bezierCurveTo(-.027, .015, -.010, .019, .011, .014)
+  outline.bezierCurveTo(.024, .011, .032, .003, .030, -.004)
+  outline.bezierCurveTo(.025, -.018, .008, -.020, -.011, -.014)
+  outline.bezierCurveTo(-.024, -.011, -.031, -.005, -.030, 0)
+  const head = extrude(outline, .0045, .0012, 7)
   head.rotateZ(.28)
   head.translate(x, y, .005)
   put(p, scoreGlyph(head))
@@ -529,7 +674,7 @@ function musicalScore() {
     }
     for (const x of [-.463, .456]) scoreTube(notation, [[x, cy - .073], [x, cy + .073]], .0028, 10, 5)
     // Bass clef: a solid curved hook, large initial dot and paired small dots.
-    scoreTube(notation, [[-.436, cy + .030], [-.444, cy + .060], [-.420, cy + .080], [-.383, cy + .070], [-.379, cy + .025], [-.403, cy - .030], [-.438, cy - .063]], .0055, 36, 7)
+    scoreRibbon(notation, [[-.436, cy + .030], [-.444, cy + .060], [-.420, cy + .080], [-.383, cy + .070], [-.379, cy + .025], [-.403, cy - .030], [-.438, cy - .063]], .0062, 36)
     const clefDot = new THREE.SphereGeometry(1, 14, 8)
     clefDot.scale(.0105, .0105, .005); clefDot.translate(-.436, cy + .032, .002); put(notation, scoreGlyph(clefDot))
     for (const dy of [.050, .014]) {
@@ -545,7 +690,7 @@ function musicalScore() {
   })
   const second = [[-.275, -.054], [-.155, -.018], [-.015, .018], [.125, .036], [.290, -.018]]
   for (let i = 0; i < second.length; i++) embossedNote(notation, ...second[i], true, i === 0 || i === 3)
-  scoreTube(notation, [[-.131, .120], [.009, .156]], .005, 12, 6)
+  scoreRibbon(notation, [[-.131, .120], [.009, .156]], .005, 12)
   const third = [[-.275, -.36 + .054], [-.095, -.36 + .018], [.085, -.36 - .018], [.275, -.36 - .054]]
   for (let i = 0; i < third.length; i++) embossedNote(notation, ...third[i], true, i === 1)
   scoreTube(notation, [[.443, -.434], [.443, -.287]], .0042, 10, 6)
@@ -555,15 +700,33 @@ function musicalScore() {
   const metal = part('pen-metal', 'silver', 'pen')
   const nib = part('pen-nib', 'silver', 'pen')
   const low = v(.584, -.507, .150), high = v(.750, .482, .190), delta = high.clone().sub(low)
-  const barrel = new THREE.CylinderGeometry(.020, .025, delta.length(), 24)
-  barrel.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(Y, delta.clone().normalize()))
-  put(pen, barrel, low.clone().add(high).multiplyScalar(.5))
+  const axis = delta.clone().normalize(), orientation = new THREE.Quaternion().setFromUnitVectors(Y, axis)
+  const length = delta.length()
+  const barrelProfile = [[.022, 0], [.025, .018], [.025, .073], [.022, .112], [.020, .185], [.021, .55], [.022, .80], [.023, .84], [.022, 1]].map(([r, t]) => new THREE.Vector2(r, t * length))
+  const barrel = new THREE.LatheGeometry(barrelProfile, 32)
+  barrel.applyQuaternion(orientation)
+  put(pen, barrel, low)
   const nibVector = low.clone().sub(penPivot)
-  const nibGeometry = new THREE.CylinderGeometry(.023, .0006, nibVector.length(), 8, 1)
-  nibGeometry.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(Y, nibVector.clone().normalize()))
-  put(nib, nibGeometry, penPivot.clone().add(low).multiplyScalar(.5), [0, 0, 0], [1, 1, .36])
-  // A fine slit, an exposed collar, cap rings and a sprung clip retain pen-scale detail.
-  rod(pen, penPivot.clone().add(v(0, .005, .004)), low.clone().add(v(0, -.030, .011)), .0014, 5)
+  const nibLength = nibVector.length(), nibOrientation = new THREE.Quaternion().setFromUnitVectors(Y, nibVector.clone().normalize())
+  const blank = new THREE.Shape()
+  blank.moveTo(0, 0)
+  blank.bezierCurveTo(-.008, .012, -.026, .065, -.024, nibLength * .80)
+  blank.lineTo(-.021, nibLength); blank.lineTo(.021, nibLength)
+  blank.lineTo(.024, nibLength * .80); blank.bezierCurveTo(.026, .065, .008, .012, 0, 0)
+  const vent = new THREE.Path(), ventY = nibLength * .66, ventRadius = .0042, slitHalfWidth = .0008
+  const ventAngle = Math.acos(slitHalfWidth / ventRadius)
+  vent.moveTo(slitHalfWidth, .005); vent.lineTo(slitHalfWidth, ventY - Math.sin(ventAngle) * ventRadius)
+  vent.absarc(0, ventY, ventRadius, -ventAngle, Math.PI + ventAngle, false)
+  vent.lineTo(-slitHalfWidth, .005); vent.closePath()
+  blank.holes.push(vent)
+  const nibGeometry = warpZ(plateCapGrid(extrude(blank, .0014, .00045, 10), .020), (x, y) =>
+    .004 * Math.max(0, 1 - (x / .025) ** 2) * Math.sin(Math.PI * y / nibLength))
+  nibGeometry.applyQuaternion(nibOrientation)
+  put(nib, nibGeometry, penPivot)
+  const nibPoint = (x, y, z = .0018) => v(x, y, z + .004 * Math.max(0, 1 - (x / .025) ** 2) * Math.sin(Math.PI * y / nibLength)).applyQuaternion(nibOrientation).add(penPivot)
+  // The actual split meets a pierced breather hole; paired engraving follows
+  // the tapered shoulders and the cap has a true rounded terminal.
+  for (const side of [-1, 1]) tube(pen, [nibPoint(side * .006, .040), nibPoint(side * .015, .072), nibPoint(side * .015, nibLength * .87)], .00065, 16, 5)
   for (const t of [.035, .065, .84, .88, .94]) {
     const point = low.clone().lerp(high, t)
     const ring = new THREE.TorusGeometry(t > .8 ? .022 : .025, .0024, 6, 24)
@@ -572,7 +735,9 @@ function musicalScore() {
   }
   const capBase = low.clone().lerp(high, .84)
   rod(pen, capBase, high.clone().add(delta.clone().normalize().multiplyScalar(.037)), .0255, 24)
-  ellipsoid(metal, high.clone().add(delta.clone().normalize().multiplyScalar(.037)), [.021, .007, .022], 1, 18, 10)
+  const capEnd = new THREE.SphereGeometry(1, 24, 12)
+  capEnd.scale(.0255, .008, .0255); capEnd.applyQuaternion(orientation)
+  put(metal, capEnd, high.clone().add(axis.clone().multiplyScalar(.037)))
   tube(metal, [high.clone().add(v(0, .018, .026)), high.clone().add(v(.004, -.03, .037)), high.clone().add(v(-.020, -.17, .036)), high.clone().add(v(-.027, -.195, .029))], .004, 28, 7)
   return { groups: [{ name: 'score', extras: { notation: 'Original generic notes for interaction; not a reproduction or attribution to the site owner.' } }], parts: [page, edge, notation, ...notes, pen, metal, nib], maxSpan: 1.6 }
 }
@@ -686,9 +851,9 @@ async function inspect(path) {
   }
 }
 const specimens = [
-  { id: 'bass', title: 'Double bass and bow', make: doubleBass, description: 'Original curved carved double bass: arched front and back, actual front-only f-hole apertures, hollow ribs, ebony fingerboard, carved bridge, scroll, tuning pins, four separate strings and a nested bow assembly.' },
-  { id: 'knight', title: 'Knight and board', make: chessKnight, description: 'Original Staunton-inspired knight with a closed continuous carved head and neck, recessed orbital and nostril anatomy, shaped muzzle and jaw, tapered ears with inset pinnae, scalloped dorsal mane and fine engravings, on a finely turned pedestal. The preserved raised 64-tile board exposes native algebraic square nodes and the original movable A1 knight parent.' },
-  { id: 'score', title: 'Score page and pen', make: musicalScore, description: 'Original three-dimensional sheet with front and back surfaces, tangible edge thickness and a diagonally curled corner; embossed bass clefs, staves and generic musical notation. Four independent note nodes and a nib-pivot fountain pen support visitor-created phrase interactions. This is generic original geometry, not the site owner’s composition.' },
+  { id: 'bass', title: 'Double bass and bow', make: doubleBass, description: 'Original carved double bass with conforming interior arch samples, front-only f-hole apertures, hollow ribs, double purfling, ebony bearing saddles, a heart-pierced bridge and curved feet, toothed mechanical tuners, a solid spiral-carved volute, four separate strings and a nested bow with carved ivory tip and metal ferrule.' },
+  { id: 'knight', title: 'Knight and board', make: chessKnight, description: 'Original Staunton-inspired knight with a continuously sampled carved head and neck: fuller cheekbones, recessed eye sockets with iris rings, shaped nasal and muzzle anatomy, a narrow incised mouth and raised lower lip, tapered inset ears, deeper scalloped mane, shoulder tendons and a finely turned pedestal. The preserved raised 64-tile board exposes native algebraic square nodes and the original movable A1 knight parent.' },
+  { id: 'score', title: 'Score page and pen', make: musicalScore, description: 'Original fine curved sheet with front and back surfaces, a thin beveled edge and a smoothly sampled diagonal corner roll; tapered embossed bass-clef strokes and engraved almond noteheads. Four independent note nodes and a nib-pivot fountain pen retain visitor-created phrase interactions. The turned pen has a curved beveled nib with a real slit and pierced breather hole, paired shoulder engraving, cap rings and a sprung clip. Generic original notation, not the site owner’s composition.' },
 ]
 const selected = new Set(process.argv.slice(2))
 for (const id of selected) if (!specimens.some(item => item.id === id)) throw new Error(`Unknown specimen ${id}`)

@@ -17,25 +17,28 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
   vec2 cell = floor(uv * printCssSize / printCellSize);
   vec2 sampleUv = (cell + .5) * printCellSize / printCssSize;
   vec2 halfTexel = .5 / printBufferSize;
-  vec4 surface = texture2D(inputBuffer, clamp(sampleUv, halfTexel, 1.0 - halfTexel));
+  vec4 center = texture2D(inputBuffer, clamp(sampleUv, halfTexel, 1.0 - halfTexel));
+  // Keep the CSS dot screen inside the form. At a partial or empty cell center,
+  // use this pixel's surface so a thin rim cannot disappear with its whole cell.
+  vec4 surface = center.a >= .9999 ? center : inputColor;
   // Weighted linear luminance retains the neutral scan's previous tonal gain.
-  float tone = clamp(portfolioLinearLuminance(surface.rgb) * 3.0, 0.0, 1.0);
-  float threshold = portfolioLiveThreshold(portfolioBayer4(cell), cell, printClock, printGrain);
+  float tone = clamp(portfolioLinearLuminance(portfolioStraightColor(surface)) * 3.0, 0.0, 1.0);
+  float threshold = portfolioLiveThreshold(portfolioBayer8(cell), cell, printClock, printGrain);
   float mark = step(threshold, tone);
   float paper = mark * mix(tone, 1.0, printBinary);
-  outputColor = vec4(mix(printInk, printPaper, paper), min(inputColor.a, surface.a));
+  outputColor = vec4(mix(printInk, printPaper, paper), inputColor.a);
 }
 `
 
 /** Palette and dither share one pass. Grain has a stable spatial seed and visible clock. */
 export class LiveDitherEffect extends Effect {
-  constructor({ gridSize = 2, binary = true, live = true }: { gridSize?: number; binary?: boolean; live?: boolean } = {}) {
+  constructor({ gridSize = 1, binary = true, live = true }: { gridSize?: number; binary?: boolean; live?: boolean } = {}) {
     super('PortfolioDither', fragment, {
       attributes: EffectAttribute.CONVOLUTION,
       uniforms: new Map<string, Uniform>([
         ['printCssSize', new Uniform(new Vector2(1, 1))],
         ['printBufferSize', new Uniform(new Vector2(1, 1))],
-        ['printCellSize', new Uniform(Number.isFinite(gridSize) ? Math.max(1, gridSize) : 2)],
+        ['printCellSize', new Uniform(Number.isFinite(gridSize) ? Math.max(1, gridSize) : 1)],
         ['printBinary', new Uniform(Number(binary))],
         ['printClock', new Uniform(0)],
         ['printGrain', new Uniform(live ? .025 : 0)],

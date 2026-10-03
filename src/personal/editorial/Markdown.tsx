@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { readerFragmentHref } from './library';
 import catalog from './data/catalog.json';
 import { articleHref, safeHref } from './links';
 import type { ArticleSummary } from './types';
@@ -62,7 +63,7 @@ function renderInline(value: string, keyPrefix: string, references = new Map<str
         const id = value.slice(start + 2, end);
         const occurrence = references.get(id) || 0;
         references.set(id, occurrence + 1);
-        nodes.push(<sup key={key} id={`note-ref-${id}${occurrence ? `-${occurrence + 1}` : ''}`} className="article-citation"><a href={`#note-${id}`} aria-label={`Note ${id}`}>{id}</a></sup>);
+        nodes.push(<sup key={key} id={`note-ref-${id}${occurrence ? `-${occurrence + 1}` : ''}`} className="article-citation"><a href={readerFragmentHref(typeof location === 'undefined' ? '' : location.hash, `#note-${id}`)} aria-label={`Note ${id}`}>{id}</a></sup>);
         cursor = end + 1;
         continue;
       }
@@ -80,8 +81,8 @@ function renderInline(value: string, keyPrefix: string, references = new Map<str
             const children = renderInline(label, `${key}-link`, references);
             nodes.push(
               /^S\d+$/.test(label) && href.startsWith('#source-')
-                ? <sup key={key} className="article-citation"><a href={href} aria-label={`Source ${label.slice(1)}`}>{children}</a></sup>
-                : <a key={key} href={articleHref(href, catalog as ArticleSummary[], import.meta.env.BASE_URL)}>{children}</a>,
+                ? <sup key={key} className="article-citation"><a href={readerFragmentHref(typeof location === 'undefined' ? '' : location.hash, href)} aria-label={`Source ${label.slice(1)}`}>{children}</a></sup>
+                : <a key={key} href={readerFragmentHref(typeof location === 'undefined' ? '' : location.hash, articleHref(href, catalog as ArticleSummary[], import.meta.env.BASE_URL))}>{children}</a>,
             );
             cursor = hrefEnd + 1;
             continue;
@@ -230,7 +231,7 @@ export function markdownToReact(markdown: string): ReactNode[] {
         {Array.from(notes, ([id, note]) => (
           <li key={id} id={`note-${id}`}>
             {renderInline(note, `note-${id}`, references)}{' '}
-            <a href={`#note-ref-${id}`} aria-label={`Back to reference ${id}`}>↩</a>
+            <a href={readerFragmentHref(typeof location === 'undefined' ? '' : location.hash, `#note-ref-${id}`)} aria-label={`Back to reference ${id}`}>↩</a>
           </li>
         ))}
       </ol>,

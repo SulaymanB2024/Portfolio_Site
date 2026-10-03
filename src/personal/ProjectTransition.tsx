@@ -63,7 +63,7 @@ export function ProjectTransitionProvider({ children }: { children: ReactNode })
       timeout = 0
       const overlay = host.current?.parentElement
       if (overlay) overlay.dataset.suspended = String(document.hidden)
-      if (!document.hidden) {
+      if (!document.hidden && !((import.meta.env.DEV || import.meta.env.MODE === 'flight-review') && new URLSearchParams(location.search).has('inspect-flight'))) {
         started = performance.now()
         timeout = window.setTimeout(recover, remaining)
       }

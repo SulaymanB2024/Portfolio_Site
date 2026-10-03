@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { GenerativeArtwork } from './generative/types';
 import { artworkPlayers, createArtworkPlayer, type ArtworkPlayer, type ArtworkPlayerStatus } from './artwork-player';
+import { createPreviewTelemetry } from './preview-scheduler';
 
 export type ArtworkState = 'poster' | 'running' | 'paused' | 'fallback';
 
@@ -92,25 +93,33 @@ export default function AnimatedArtwork({
     const current = artworkPlayers.acquire(transitionName, owner, host.current, () => createArtworkPlayer(artwork, physicalSize));
     player.current = current;
     current.setPlayback(visible && documentVisible, paused || reduced);
-    let wasPainted: boolean | undefined, wasFailed: boolean | undefined, lastRenderer: string | undefined;
-    const unsubscribe = current.subscribe((status: ArtworkPlayerStatus) => {
+    let wasPainted: boolean | undefined, wasFailed: boolean | undefined, lastActive: boolean | undefined;
+    let lastRenderer: string | undefined, lastEngine: string | undefined, lastJobs: number | undefined;
+    const telemetry = createPreviewTelemetry(() => {
       const target = root.current;
       if (target) {
-        const stats = status.stats;
-        target.dataset.player = String(status.id);
+        const stats = current.status.stats;
         target.dataset.frames = String(stats.frames);
         target.dataset.drawMs = stats.drawMs.toFixed(2);
         target.dataset.averageMs = stats.averageMs.toFixed(2);
         target.dataset.targetFps = String(stats.targetFps);
         target.dataset.observedFps = (stats.observedFps ?? 0).toFixed(1);
-        target.dataset.engine = stats.engine ?? 'canvas';
-        target.dataset.workerJobs = String(status.jobs);
+        target.dataset.workerJobs = String(current.status.jobs);
         target.dataset.formulaMs = (stats.formulaMs ?? 0).toFixed(2);
         target.dataset.submitMs = (stats.submitMs ?? 0).toFixed(2);
         target.dataset.presentMs = (stats.presentMs ?? 0).toFixed(2);
         target.dataset.points = String(stats.points ?? 0);
         target.dataset.drawCalls = String(stats.drawCalls ?? 0);
       }
+    }, import.meta.env.DEV);
+    const unsubscribe = current.subscribe((status: ArtworkPlayerStatus) => {
+      const changed = wasPainted !== status.painted || wasFailed !== status.failed || lastRenderer !== status.renderer || lastActive !== status.active || lastJobs !== status.jobs;
+      const target = root.current;
+      if (target && target.dataset.player !== String(status.id)) target.dataset.player = String(status.id);
+      const engine = status.stats.engine ?? 'canvas';
+      if (target && lastEngine !== engine) { lastEngine = engine; target.dataset.engine = engine; }
+      telemetry(performance.now(), changed);
+      lastActive = status.active; lastJobs = status.jobs;
       if (wasPainted !== status.painted) { wasPainted = status.painted; setPaintedSketch(status.painted ? artwork.sketchId : null); }
       if (wasFailed !== status.failed) { wasFailed = status.failed; setFailedSketch(status.failed ? artwork.sketchId : null); }
       if (lastRenderer !== status.renderer) { lastRenderer = status.renderer; setRenderer(status.renderer); }

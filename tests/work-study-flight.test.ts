@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { studyFlightProgress, studyFlightRect, studyFlightInkProgress, studyFlightInkStrength, studyFlightInkMotion, STUDY_DEPART_MS, STUDY_DOCK_MS } from '../src/personal/work-study-flight.ts'
+import { studyFlightProgress, studyFlightRect, studyFlightInkProgress, studyFlightInkStrength, STUDY_DEPART_MS, STUDY_DOCK_MS } from '../src/personal/work-study-flight.ts'
 
 const source = { left: 730, top: 241, width: 500, height: 390 }
 const destination = { left: 710, top: 156, width: 610, height: 550 }
@@ -51,27 +51,12 @@ test('ink remains continuous across departure, delayed handoff and docking', () 
   assert.ok(Math.abs(before - after) < 1e-12)
 })
 
-test('de-inking leaves time for a visible spiral before the exact model returns', () => {
-  assert.ok(STUDY_DEPART_MS + STUDY_DOCK_MS >= 3000)
-  const start = studyFlightInkMotion(0)
-  const dispersed = studyFlightInkMotion(.48)
-  const returning = studyFlightInkMotion(.78)
-  const end = studyFlightInkMotion(1)
-  assert.equal(start.body, 1)
-  assert.equal(start.particles, 0)
-  assert.equal(start.release, 0)
-  assert.ok(dispersed.body < .02 && dispersed.particles === 1)
-  assert.equal(dispersed.release, 1)
-  assert.equal(dispersed.gather, 0)
-  assert.ok(returning.gather > .5 && returning.body > dispersed.body)
-  assert.equal(end.body, 1)
-  assert.equal(end.particles, 0)
-  assert.equal(end.gather, 1)
-  assert.deepEqual(studyFlightInkMotion(NaN), start)
-  for (let i = 0; i <= 1000; i++) {
-    const motion = studyFlightInkMotion(i / 1000)
-    for (const key of ['release', 'gather', 'particles', 'body'] as const) assert.ok(motion[key] >= 0 && motion[key] <= 1)
-  }
+test('the ink pass remains active through release and reconstruction', () => {
+  assert.ok(STUDY_DEPART_MS <= 180)
+  assert.ok(STUDY_DEPART_MS + STUDY_DOCK_MS <= 2200)
+  assert.equal(studyFlightInkStrength(.12), 1)
+  assert.equal(studyFlightInkStrength(.83), 1)
+  assert.ok(studyFlightInkStrength(.93) > 0)
 })
 
 test('ink has a strong sustained peak but returns exactly to unchanged resting pixels', () => {
@@ -86,7 +71,7 @@ test('ink has a strong sustained peak but returns exactly to unchanged resting p
   for (let i = 0; i <= 1000; i++) {
     const strength = studyFlightInkStrength(i / 1000)
     assert.ok(strength >= 0 && strength <= 1)
-    assert.ok(Math.abs(strength - previous) < .009)
+    assert.ok(Math.abs(strength - previous) < .02)
     previous = strength
   }
 })

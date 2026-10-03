@@ -134,7 +134,8 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     }
     const composer = new EffectComposer(renderer, { multisampling: 0 })
     const animatedHelmet = kind === 'helmet'
-    const dither = new LiveDitherEffect({ gridSize: flowMode || animatedHelmet ? 2 : 1, binary: flowMode || animatedHelmet, live: flowMode || animatedHelmet })
+    // Fine print retains engraved edges without increasing the render target.
+    const dither = new LiveDitherEffect({ gridSize: 1, binary: flowMode || animatedHelmet, live: flowMode || animatedHelmet })
     composer.addPass(new RenderPass(scene, camera))
     // Palette mapping and dither share a pass; flow samples that processed output.
     composer.addPass(new EffectPass(camera, dither))
@@ -273,7 +274,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       canvas.dataset.renderPixels = String(canvas.width * canvas.height)
       dither.setView(width, height)
       flowEffect?.setResolution(width, height)
-      canvas.dataset.ditherGrid = flowMode || animatedHelmet ? '2' : '1'
+      canvas.dataset.ditherGrid = '1'
       canvas.dataset.pixelRatio = String(pixelRatio)
       if (qualityOnly) return
       const core = flowMode ? canvas.closest('.home-flow-scene')?.getBoundingClientRect() : null

@@ -16,6 +16,8 @@ const scheduler = createPreviewScheduler({
   now: () => performance.now(),
   requestFrame: callback => hasFrameApi ? scope.requestAnimationFrame(callback) : scope.setTimeout(() => callback(performance.now()), 16),
   cancelFrame: id => hasFrameApi ? scope.cancelAnimationFrame(id) : scope.clearTimeout(id),
+  setDelay: (callback, milliseconds) => scope.setTimeout(callback, milliseconds),
+  cancelDelay: id => scope.clearTimeout(id),
 }, 10);
 
 let gpu: GpuArtworkPool | null = null;

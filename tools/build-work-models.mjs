@@ -15,10 +15,10 @@ const output = resolve(import.meta.dirname, '../public/work-studies')
 const io = new NodeIO()
 // These modules are the authoritative source; no legacy inline model builders.
 const studies = [
-  { "id": "internshipdeadlines", "project": "InternshipDeadlines", "title": "Opportunity instrument", "concept": "Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage. Flat beveled crescents, vernier marks, meshing gears, real standoffs and a hinged pendulum connect dates, data and opportunity.", rotation: [0.08, -0.2, -0.12], make: opportunityInstrument },
-  { "id": "sapien", "project": "Sapien", "title": "Synthetic mind", "concept": "A sculpted face with recessed eyes, neutral lips, anatomical ears and a cutaway forehead opens into paired ridged cortical lobes. Thick meandering gyri surround a sparse relay network; a continuous cervical spine and attached brain stem connect the head to machined vertebral collars.", rotation: [0.06, -0.4, 0.02], make: syntheticMind },
-  { "id": "investing-markets", "project": "Investing & Markets", "title": "Market observatory", "concept": "Smooth continent reliefs, real coastal sidewalls and selective graticule sit on a continuous steel ocean shell. A beveled meridian yoke, stepped polar bearings, partial indexed vernier, six geographic hubs and four raised routes make a restrained market observatory.", rotation: [0.12, -0.13, -0.13], make: marketObservatory },
-  { "id": "miscellaneous", "project": "Miscellaneous", "title": "Unfinished mechanism", "concept": "Five pierced folded sheets with inset triangular windows and return lips form an open mechanism. Crease-aligned shafts, fitted hinge knuckles, slotted fasteners, two tension springs and a meshing geared core give the experimental form a coherent construction.", rotation: [0.08, -0.21, 0.09], make: unfinishedMechanism },
+  { "id": "internshipdeadlines", "project": "InternshipDeadlines", "title": "Opportunity instrument", "concept": "Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage with fitted retention shoes. Recessed annular rail channels, seated scale marks, tapered gear spokes, stepped bored hubs and a hinged pendulum connect dates, data and opportunity.", rotation: [0.08, -0.2, -0.12], make: opportunityInstrument },
+  { "id": "sapien", "project": "Sapien", "title": "Synthetic mind", "concept": "A sculpted face with recessed eyes, neutral lips, anatomical ears and a cutaway forehead opens into coherent paired cortical lobes with finer warped sulci. Short flattened meandering gyri follow frontal, temporal and parietal regions without projecting into tall columns. Access cavities reveal a sparse relay network; a continuous cervical spine and attached brain stem join machined vertebral collars.", rotation: [0.06, -0.4, 0.02], make: syntheticMind },
+  { "id": "investing-markets", "project": "Investing & Markets", "title": "Market observatory", "concept": "Smooth continent reliefs with coastal sidewalls, seventeen generalized land outlines, selected low terrain ranges and a sparse graticule sit on a continuous steel ocean shell. Grooved meridian and equatorial rails, stepped polar bearings, a partial indexed vernier and counterbored tapered geographic terminals carry four raised routes.", rotation: [0.12, -0.13, -0.13], make: marketObservatory },
+  { "id": "miscellaneous", "project": "Miscellaneous", "title": "Unfinished mechanism", "concept": "Five pierced folded sheets with rounded lightening windows and return lips form an open mechanism. Crease-aligned shafts, grooved hinge knuckles, slotted fasteners, two tension springs with fitted lead attachments and a geared core with tapered spokes and stepped bored hubs give the experimental form coherent construction.", rotation: [0.08, -0.21, 0.09], make: unfinishedMechanism },
 ]
 
 function normalize(geometries, rotation) {
@@ -73,6 +73,42 @@ function toDocument(study) {
     geometry.dispose()
   }
   return document
+}
+
+/** Exact vertex radii over the renderer's shaft-angle interval, plus safe burst. */
+function framingEnvelope(document,bounds) {
+  const center=vec(...bounds.min).add(vec(...bounds.max)).multiplyScalar(.5)
+  let rest=0,fullArticulation=0,fullArticulationPlusBurst=0,phaseIndex=0
+  const articulation=[]
+  for(const node of document.getRoot().getDefaultScene().listChildren()){
+    const mesh=node.getMesh()
+    if(!mesh)continue
+    const pivot=vec(...node.getTranslation()).sub(center),hover=node.getName().startsWith('hover-')
+    const axis=hover?vec(...node.getExtras().articulationAxis):null
+    let restRadius=0,articulatedRadius=0
+    for(const primitive of mesh.listPrimitives()){
+      const positions=primitive.getAttribute('POSITION').getArray()
+      for(let i=0;i<positions.length;i+=3){
+        const v=vec(...positions.slice(i,i+3)),radius=pivot.clone().add(v).length()
+        restRadius=Math.max(restRadius,radius)
+        if(!hover){articulatedRadius=Math.max(articulatedRadius,radius);continue}
+        const parallel=axis.clone().multiplyScalar(axis.dot(v)),perpendicular=v.clone().sub(parallel),cross=axis.clone().cross(v)
+        const a=pivot.dot(perpendicular),b=pivot.dot(cross)
+        const base=pivot.lengthSq()+v.lengthSq()+2*pivot.dot(parallel)
+        const peak=Math.atan2(b,a),angles=[-.18,.18]
+        if(peak>=-.18&&peak<=.18)angles.push(peak)
+        for(const angle of angles)articulatedRadius=Math.max(articulatedRadius,Math.sqrt(Math.max(0,base+2*(a*Math.cos(angle)+b*Math.sin(angle)))))
+      }
+    }
+    const burstTranslationBound=hover?Math.hypot(.07,.04*Math.sin(phaseIndex++*1.4*.6)):0
+    rest=Math.max(rest,restRadius)
+    fullArticulation=Math.max(fullArticulation,articulatedRadius)
+    fullArticulationPlusBurst=Math.max(fullArticulationPlusBurst,articulatedRadius+burstTranslationBound)
+    if(hover)articulation.push({name:node.getName(),restRadius,articulatedRadius,burstTranslationBound,articulatedPlusBurstRadius:articulatedRadius+burstTranslationBound})
+  }
+  const paddingRequired=Math.max(0,fullArticulationPlusBurst-rest)
+  if(paddingRequired>.16)throw new Error(`Articulated envelope requires ${paddingRequired} padding, beyond the renderer's .16 reserve`)
+  return{rest,fullArticulation,fullArticulationPlusBurst,paddingRequired,paddingSlackAtPoint16:.16-paddingRequired,articulation}
 }
 
 async function inspect(path) {
@@ -133,6 +169,7 @@ async function inspect(path) {
     materials: document.getRoot().listMaterials().length,
     articulation: document.getRoot().listNodes().filter(node=>node.getName().startsWith('hover-')).map(node=>({name:node.getName(),pivot:node.getTranslation(),axis:node.getExtras().articulationAxis})),
     bounds,
+    framing: framingEnvelope(document,bounds),
     validation: { errors: 0, warnings: 0, degenerateTriangles, minimumNormalLength, maximumNormalLength },
   }
 }
@@ -143,7 +180,7 @@ for (const id of selectedIds) {
 }
 await mkdir(output, { recursive: true })
 const manifest = {
-  version: 5,
+  version: 6,
   generator: 'tools/build-work-models.mjs',
   ownership: 'Original procedural geometry created for Sulayman Bowles. No third-party model or texture inputs.',
   license: 'LicenseRef-Site-Owner',

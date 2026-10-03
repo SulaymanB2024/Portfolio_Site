@@ -79,12 +79,16 @@ function jumpTo(id: string) {
 }
 
 function citationClick(event: MouseEvent<HTMLElement>) {
+  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
   const anchor = event.target instanceof Element ? event.target.closest('a') : null
   const href = anchor?.getAttribute('href')
-  if (!href?.startsWith('#') || href.startsWith('#/')) return
-  event.preventDefault()
+  if (!href?.startsWith('#') || anchor?.target || anchor?.hasAttribute('download')) return
+  // Article links remain native, including opening a citation in another tab.
+  // Intercept only a section in this reader, so selecting it again still scrolls.
+  if (href.startsWith('#/') && href.split('?')[0] !== location.hash.split('?')[0]) return
   const id = articleSection(href)
   if (!id) return
+  event.preventDefault()
   history.replaceState(history.state, '', `${location.pathname}${location.search}${sectionHref(location.hash, id)}`)
   requestAnimationFrame(() => jumpTo(id))
 }

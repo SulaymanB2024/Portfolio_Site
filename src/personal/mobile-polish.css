@@ -92,7 +92,6 @@
   .personal-site .about-object-selectors > button { font-size: 15px; }
   .personal-site .about-object-selectors .mono { font-size: 11px; }
   .personal-site .about-objects-toolbar { font-size: 11px; }
-  .personal-site .about-editor-settings :is(input, select),
   .personal-site .about-piece-controls :is(input, select) { font-size: 16px; }
 
   .personal-site .footer-baseline { gap: 12px 22px; }
@@ -127,4 +126,37 @@
   .personal-site.home-site .home-scroll-stage > .home-hero { top: auto; height: auto; min-height: 0; }
   .personal-site.home-site .home-scroll-stage .home-flow-scene { height: 330px; max-height: none; }
   .personal-site.home-site .home-flow-scene .home-flow-viewer > canvas { height: 100%; }
+}
+
+/* Touch layouts need a full reading column and comfortably sized form text. */
+@media screen and (max-width: 1100px), screen and (any-pointer: coarse) {
+  .personal-site .writing-search input,
+  .personal-site .writing-category select,
+  .personal-site .article-page .case-search,
+  .personal-site .article-page .case-toolbar select,
+  .personal-site .about-field :is(input:not([type='range']):not([type='text']), select) { font-size: 16px; }
+  .personal-site .article-page .reader-disclosure summary { min-height: 44px; align-items: center; gap: 12px; }
+  .personal-site .lion-study-instructions button,
+  .personal-site .lion-study-credit summary,
+  .personal-site .lion-study-reset { min-height: 44px; }
+  .personal-site .lion-study-field input { height: 44px; }
+  .personal-site .lion-study-instructions { align-items: center; font-size: 11px; }
+  .personal-site .lion-study-field .mono { font-size: 11px; }
+}
+
+/* Stack the selected object's controls before tablet columns become cramped. */
+@media screen and (min-width: 701px) and (max-width: 900px) {
+  .personal-site .about-objects:not([data-selected='collection']) .about-object-stage { display: block; height: auto; min-height: 0; padding: 0; }
+  .personal-site .about-objects:not([data-selected='collection']) .about-object-canvas { position: relative; inset: auto; height: min(53svh, 430px); min-height: 340px; max-height: none; }
+  .personal-site .about-object-reveal { grid-column: auto; max-width: 480px; margin: 0 auto; padding: 12px 0 32px; animation-delay: 0s; }
+  .personal-site :is(.about-piece-workspace, .about-composer-workspace, .about-puzzle-notebook-grid) { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .personal-site .about-piece-paper { position: relative; top: auto; max-width: 520px; width: 100%; margin: 0 auto; }
+  .personal-site .about-piece-controls { width: 100%; }
+}
+
+@media screen and (max-width: 900px), screen and (any-pointer: coarse) {
+  /* The full-size event list supplies touch editing without overlapping score marks. */
+  .personal-site .score-preview-selections { display: none; }
+  .personal-site :is(.about-interaction-note, .about-audio-status, .about-piece-count, .score-preview-caption, .about-objects-toolbar, .about-option-buttons, .about-play-actions.mono, .about-field.mono) { font-size: 11px; line-height: 1.7; }
+  .personal-site :is(.about-personal-detail, .about-library-credit, .about-puzzle-reason) > summary { font-size: 11px; }
 }

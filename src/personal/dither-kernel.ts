@@ -14,6 +14,10 @@ float portfolioBayer8(vec2 cell) {
 float portfolioLinearLuminance(vec3 rgb) {
   return dot(max(rgb, vec3(0.0)), vec3(.2126, .7152, .0722));
 }
+vec3 portfolioStraightColor(vec4 surface) {
+  // Filtering a silhouette against transparent black associates RGB with coverage.
+  return surface.a > .0001 ? surface.rgb / surface.a : vec3(0.0);
+}
 float portfolioDisplayLuminance(vec3 rgb) {
   float linear = clamp(portfolioLinearLuminance(rgb), 0.0, 1.0);
   return linear <= .0031308 ? linear * 12.92 : 1.055 * pow(linear, 1.0 / 2.4) - .055;
@@ -22,6 +26,7 @@ float portfolioHash(vec2 cell) {
   return fract(sin(dot(floor(cell), vec2(127.1, 311.7))) * 43758.5453);
 }
 float portfolioLiveThreshold(float threshold, vec2 cell, float seconds, float amount) {
+  if (amount <= 0.0) return threshold;
   // A fixed spatial seed and continuous clock replace periodic grain reshuffling.
   float phase = portfolioHash(cell) * 6.28318530718;
   return clamp(threshold + sin(seconds * .65 + phase) * amount, .0078125, .9921875);

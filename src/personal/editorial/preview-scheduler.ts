@@ -28,10 +28,22 @@ export type PreviewHandle = {
   getStats(): Readonly<PreviewFrameStats>;
 };
 
+/** Diagnostics follow existing frames; never add a telemetry timer or RAF. */
+export function createPreviewTelemetry(publish: () => void, enabled: boolean, intervalMs = 750) {
+  let nextAt = -Infinity;
+  return (now: number, force = false) => {
+    if (!enabled || !force && now < nextAt) return;
+    nextAt = now + intervalMs;
+    publish();
+  };
+}
+
 type FrameDriver = {
   now(): number;
   requestFrame(callback: (time: number) => void): number;
   cancelFrame(id: number): void;
+  setDelay?(callback: () => void, milliseconds: number): number;
+  cancelDelay?(id: number): void;
 };
 
 type Entry = PreviewFrameStats & {
@@ -50,6 +62,8 @@ const browserDriver: FrameDriver = {
   now: () => performance.now(),
   requestFrame: callback => requestAnimationFrame(callback),
   cancelFrame: id => cancelAnimationFrame(id),
+  setDelay: (callback, milliseconds) => globalThis.setTimeout(callback, milliseconds),
+  cancelDelay: id => globalThis.clearTimeout(id),
 };
 
 function snapshot(entry: Entry): PreviewFrameStats {
@@ -62,31 +76,78 @@ export function createPreviewScheduler(driver: FrameDriver = browserDriver, budg
   const entries = new Map<number, Entry>();
   let nextId = 1;
   let frame: number | null = null;
+  let wake: number | null = null;
+  let wakeDeadline = Infinity;
   let nextEntryId = 0;
   let disposed = false;
   let lastFrameDrawMs = 0;
   let worstFrameDrawMs = 0;
+  let frameCallbacks = 0;
+  let deadlineWakeups = 0;
+  let registryVersion = 0;
+  let listedVersion = -1;
+  let listed: Entry[] = [];
 
-  const hasActive = () => [...entries.values()].some(entry => entry.active && !entry.removed);
+  function nextDeadline() {
+    let next = Infinity;
+    for (const entry of entries.values()) if (entry.active && !entry.removed) {
+      next = Math.min(next, entry.lastAt + 1000 / entry.targetFps);
+    }
+    return next;
+  }
+
+  function cancelWake() {
+    if (wake !== null) driver.cancelDelay?.(wake);
+    wake = null;
+    wakeDeadline = Infinity;
+  }
 
   function reconcileFrame() {
-    if (disposed || !hasActive()) {
+    const deadline = nextDeadline();
+    if (disposed || deadline === Infinity) {
       if (frame !== null) driver.cancelFrame(frame);
       frame = null;
-    } else if (frame === null) frame = driver.requestFrame(tick);
+      cancelWake();
+    } else if (frame === null) {
+      // Leave one display interval for RAF alignment; preserve fractional cadence.
+      const delay = deadline - driver.now() - 1000 / 60;
+      if (delay > 1 && driver.setDelay && driver.cancelDelay) {
+        if (wake !== null && wakeDeadline <= deadline) return;
+        cancelWake();
+        wakeDeadline = deadline;
+        wake = driver.setDelay(() => {
+          wake = null;
+          wakeDeadline = Infinity;
+          deadlineWakeups++;
+          if (!disposed && nextDeadline() !== Infinity) frame = driver.requestFrame(tick);
+        }, delay);
+      } else {
+        cancelWake();
+        frame = driver.requestFrame(tick);
+      }
+    }
   }
 
   function forget(entry: Entry) {
+    if (entry.removed) return;
     entry.removed = true;
     entry.active = false;
     entries.delete(entry.id);
+    registryVersion++;
+    listed = [];
+    listedVersion = -1;
     reconcileFrame();
   }
 
   function tick(timestamp: number) {
     frame = null;
+    frameCallbacks++;
     const started = driver.now();
-    const list = [...entries.values()];
+    if (listedVersion !== registryVersion) {
+      listed = [...entries.values()];
+      listedVersion = registryVersion;
+    }
+    const list = listed;
     let index = Math.max(0, list.findIndex(entry => entry.id >= nextEntryId));
     let visited = 0;
     let drawn = 0;
@@ -117,9 +178,11 @@ export function createPreviewScheduler(driver: FrameDriver = browserDriver, budg
               }
               entry.lastPaintAt = timestamp;
               if (entry.maxFps > 18) {
-                const active = [...entries.values()].filter(candidate => candidate.active && !candidate.removed);
-                const gpuCost = active.filter(candidate => candidate.maxFps > 18).reduce((cost, candidate) => cost + (candidate.averageMs || 1), 0);
-                const otherDemand = active.filter(candidate => candidate.maxFps <= 18).reduce((cost, candidate) => cost + candidate.averageMs * candidate.targetFps, 0);
+                let gpuCost = 0, otherDemand = 0;
+                for (const candidate of entries.values()) if (candidate.active && !candidate.removed) {
+                  if (candidate.maxFps > 18) gpuCost += candidate.averageMs || 1;
+                  else otherDemand += candidate.averageMs * candidate.targetFps;
+                }
                 const rate = Math.floor((budgetMs * 60 * .9 - otherDemand) / Math.max(gpuCost, .001));
                 entry.targetFps = Math.max(entry.minFps, Math.min(entry.maxFps, rate));
               } else entry.targetFps = entry.averageMs > 6 ? 8 : entry.averageMs > 3 ? 10 : entry.averageMs > 1.5 ? 12 : 18;
@@ -152,6 +215,7 @@ export function createPreviewScheduler(driver: FrameDriver = browserDriver, budg
         frames: 0, drawMs: 0, averageMs: 0, targetFps: task.maxFps ?? 18, maxFps: task.maxFps ?? 18, minFps: task.minFps ?? 8,
       };
       entries.set(entry.id, entry);
+      registryVersion++;
       reconcileFrame();
       return {
         setActive(active) {
@@ -168,7 +232,8 @@ export function createPreviewScheduler(driver: FrameDriver = browserDriver, budg
       return {
         registered: entries.size,
         active: [...entries.values()].filter(entry => entry.active && !entry.removed).length,
-        pendingFrame: frame !== null,
+        pendingFrame: frame !== null || wake !== null,
+        frameCallbacks, deadlineWakeups,
         budgetMs, lastFrameDrawMs, worstFrameDrawMs,
       };
     },
@@ -176,6 +241,8 @@ export function createPreviewScheduler(driver: FrameDriver = browserDriver, budg
       disposed = true;
       for (const entry of entries.values()) { entry.removed = true; entry.active = false; }
       entries.clear();
+      listed = [];
+      registryVersion++;
       reconcileFrame();
     },
   };

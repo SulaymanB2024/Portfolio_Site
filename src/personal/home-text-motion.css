@@ -1,0 +1,39 @@
+.home-site .home-text-word { display: inline-block; position: relative; transform-origin: 50% 80%; }
+.home-site .home-text-label-run { font: inherit !important; letter-spacing: inherit; transform: none !important; transition: none !important; }
+/* Word baselines compose inside a stationary heading or native link. */
+.home-site[data-home-scroll-motion] [data-home-text]:is([data-home-reveal='heading'],[data-home-reveal='text'],[data-home-reveal='link']) {
+  opacity: 1; translate: none;
+}
+.home-site[data-home-scroll-motion] [data-home-text]:not([data-home-text='hero']) .home-text-word {
+  --home-word-reveal: clamp(0, calc((var(--home-reveal, 1) - var(--home-word-delay, 0)) * var(--home-word-rate, 1)), 1);
+  opacity: calc(.62 + .38 * var(--home-word-reveal));
+  translate: 0 calc((1 - var(--home-word-reveal)) * .32em);
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .home-site :is([data-home-text='heading'],[data-home-text='label']) .home-text-word {
+    transform: translateY(calc(var(--home-word-influence, 0) * -.065em));
+  }
+  .home-site [data-home-text='label'] .home-text-word {
+    transform: translateY(calc(var(--home-word-influence, 0) * -.16em));
+  }
+  /* Keep hero glyphs fixed so the shared ink snapshot always measures their true position. */
+  .home-site [data-home-text='hero']:not([data-text-flow-active='true']) [data-home-word-accent]::after {
+    content: ''; position: absolute; left: .03em; right: .03em; bottom: .02em; height: 1px;
+    background: currentColor; pointer-events: none;
+    opacity: calc(var(--home-word-influence, 0) * .5);
+    transform: scaleX(var(--home-word-influence, 0)); transform-origin: center;
+  }
+}
+.home-site :is(a:focus-visible,.work-study-entry:focus-within) .home-text-word,
+.home-site [data-home-reveal]:focus-within .home-text-word {
+  opacity: 1; translate: none !important; transform: none !important;
+}
+@media (max-width: 760px) {
+  .home-site[data-home-scroll-motion] [data-home-text]:not([data-home-text='hero']) .home-text-word {
+    translate: 0 calc((1 - var(--home-word-reveal)) * .18em);
+  }
+}
+@media (prefers-reduced-motion: reduce), print {
+  .home-site .home-text-word { opacity: 1 !important; translate: none !important; transform: none !important; }
+  .home-site [data-home-text='hero'] [data-home-word-accent]::after { display: none; }
+}

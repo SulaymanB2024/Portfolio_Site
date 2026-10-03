@@ -17,7 +17,6 @@
 .journal-read { display: inline-flex; align-items: center; gap: 18px; width: fit-content; min-height: 44px; font-size: 11px; text-transform: uppercase; }
 .journal-read > span, .journal-all > span { display: inline-block; transition: transform .2s ease; font: 16px/1 Arial, sans-serif; }
 .journal-lead .journal-read { grid-column: 1 / -1; grid-row: 3; align-self: end; }
-.journal-essay:hover .journal-read > span { transform: translate(3px, -3px); }
 .journal-companions { display: grid; align-content: start; gap: 29px; }
 .journal-companion { display: grid; grid-template-columns: minmax(0, 1fr) 180px; align-items: start; gap: 14px 22px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
 .journal-companion:last-child { border-bottom: 0; padding-bottom: 0; }
@@ -25,7 +24,10 @@
 .journal-companion h3 { font-size: clamp(24px, 2.2vw, 29px); }
 .journal-companion .journal-read { grid-column: 1; padding-top: 0; }
 .journal-all { display: flex; justify-content: space-between; align-items: center; min-height: 62px; margin-top: 38px; border-top: 1px solid var(--line); font-size: 11px; text-transform: uppercase; }
-.journal-all:hover > span { transform: translateX(4px); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .journal-essay:hover .journal-read > span { transform: translate(3px, -3px); }
+  .journal-all:hover > span { transform: translateX(4px); }
+}
 @media (max-width: 1050px) {
   .journal-layout { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 30px; }
   .journal-lead { padding-right: 30px; grid-template-columns: minmax(0, 1fr) minmax(0, 220px); }
@@ -53,5 +55,8 @@
   .journal-companion { gap: 14px; }
   .journal-companion h3 { font-size: 24px; }
 }
-@media (prefers-reduced-motion: reduce) { .journal-read > span, .journal-all > span { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .journal-read > span, .journal-all > span { transition: none; }
+  .journal-essay:hover .journal-read > span, .journal-all:hover > span { transform: none; }
+}
 @media print { .journal-layout { grid-template-columns: 1fr 1fr; } .journal-essay { break-inside: avoid; } }
