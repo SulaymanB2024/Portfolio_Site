@@ -14,6 +14,8 @@ type WorkerArtworkOptions = {
   sketchId: SketchId;
   physicalSize: number;
   active: boolean;
+  maxFps?: number;
+  minFps?: number;
   onFrame(stats: Readonly<PreviewFrameStats>): void;
   onError(error: unknown): void;
   onJobs?(count: number): void;
@@ -151,7 +153,11 @@ export function createArtworkWorkerBackend(createTransport = connect, isSupporte
       entries.set(entry.id, entry);
       options.host.appendChild(canvas);
       try {
-        transport!.post({ type: 'register', id: entry.id, sketchId: options.sketchId, canvas: offscreen, physicalSize: options.physicalSize, active: options.active }, [offscreen]);
+        const limits = {
+          ...(options.maxFps === undefined ? {} : { maxFps: options.maxFps }),
+          ...(options.minFps === undefined ? {} : { minFps: options.minFps }),
+        };
+        transport!.post({ type: 'register', id: entry.id, sketchId: options.sketchId, canvas: offscreen, physicalSize: options.physicalSize, active: options.active, ...limits }, [offscreen]);
       } catch (error) {
         failTransport(error);
         return null;

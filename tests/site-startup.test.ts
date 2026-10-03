@@ -8,6 +8,7 @@ const script = readFileSync(new URL('../public/site-startup.js', import.meta.url
 function startup(preference: string | null = null, blockedStorage = false) {
   const events = new Map<string, Set<(event: any) => void>>()
   const timers = new Map<number, { callback: () => void; delay: number }>()
+  let nextTimer = 1
   const page = { dataset: {} as Record<string, string>, style: {} as Record<string, string> }
   let themeColor = ''
   let hasRoot = false
@@ -42,7 +43,7 @@ function startup(preference: string | null = null, blockedStorage = false) {
     },
     window: target('window:'),
     localStorage: { getItem: () => { if (blockedStorage) throw new Error('Storage disabled'); return preference } },
-    setTimeout: (callback: () => void, delay: number) => { timers.set(1, { callback, delay }); return 1 },
+    setTimeout: (callback: () => void, delay: number) => { const id = nextTimer++; timers.set(id, { callback, delay }); return id },
     clearTimeout: (id: number) => timers.delete(id),
     queueMicrotask: (callback: () => void) => microtasks.push(callback),
     ErrorEvent: ScriptError, HTMLScriptElement: ScriptElement,
@@ -54,6 +55,11 @@ function startup(preference: string | null = null, blockedStorage = false) {
   })
   return {
     page, timers, themeColor,
+    fireTimer(delay: number) {
+      const timer = [...timers].find(([, item]) => item.delay === delay)
+      assert(timer, 'expected a pending deadline')
+      timers.delete(timer[0]); timer[1].callback()
+    },
     parsed(content = 'static-site') { hasRoot = true; app = content; staticAttached = content === 'static-site'; readyState = 'interactive'; this.emit('document:readystatechange'); this.emit('document:DOMContentLoaded') },
     mounted(content = 'personal-site') { app = content; staticAttached = false; if (!disconnected) observe?.() },
     cleared() { app = ''; staticAttached = false; if (!disconnected) observe?.() },
@@ -74,7 +80,7 @@ test('startup selects the saved palette and suppresses only the static document 
     assert.equal(state.page.style.colorScheme, appearance)
     assert.equal(state.themeColor, color)
     assert.equal(state.page.dataset.siteBoot, 'pending')
-    assert.equal(state.timers.size, 1)
+    assert.equal(state.timers.size, 2)
   }
 })
 
@@ -115,7 +121,7 @@ test('failed or stalled startup restores readable content without leaving a watc
     (state: ReturnType<typeof startup>) => state.scriptError(),
     (state: ReturnType<typeof startup>) => state.runtimeError(),
     (state: ReturnType<typeof startup>) => state.emit('window:unhandledrejection', { type: 'unhandledrejection' }),
-    (state: ReturnType<typeof startup>) => { const timer = [...state.timers.values()][0]; assert.equal(timer.delay, 12000); timer.callback() },
+    (state: ReturnType<typeof startup>) => state.fireTimer(12000),
   ]) {
     const state = startup()
     state.parsed()
@@ -140,6 +146,38 @@ test('an initial React failure restores the retained static DOM even if the cont
   assert.equal(state.timers.size, 0)
   assert.equal(state.observerDisconnected(), true)
   assert.equal(state.remainingListeners(), 0)
+})
+
+test('a slow module boot reveals readable text after one second while retaining late mount and failure recovery', () => {
+  for (const lateFailure of [false, true]) {
+    const state = startup('dark')
+    state.parsed(); state.fireTimer(1000)
+    assert.equal(state.page.dataset.siteBoot, 'waiting')
+    assert.equal(state.hasReadableFallback(), true)
+    assert.equal(state.observerDisconnected(), false)
+    assert.equal(state.timers.size, 1)
+    if (lateFailure) {
+      state.runtimeError(); state.cleared(); state.flushMicrotasks()
+      assert.equal(state.page.dataset.siteBoot, 'fallback')
+      assert.equal(state.hasReadableFallback(), true)
+    } else {
+      state.mounted()
+      assert.equal(state.page.dataset.siteBoot, 'ready')
+    }
+    assert.equal(state.timers.size, 0)
+    assert.equal(state.observerDisconnected(), true)
+    assert.equal(state.remainingListeners(), 0)
+  }
+})
+
+test('waiting can precede HTML parsing, and a completely stalled boot still ends its observer', () => {
+  const state = startup()
+  state.fireTimer(1000); state.parsed()
+  assert.equal(state.page.dataset.siteBoot, 'waiting')
+  state.fireTimer(12000)
+  assert.equal(state.page.dataset.siteBoot, 'fallback')
+  assert.equal(state.remainingListeners(), 0)
+  assert.equal(state.observerDisconnected(), true)
 })
 
 test('unrelated resource failures do not expose the fallback during startup', () => {

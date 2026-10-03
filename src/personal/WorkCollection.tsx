@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode, type MouseEvent } from 'react'
 import { projects, type Project } from './content'
 import type { WorkStudyHandle } from './work-study-renderer'
-import { useProjectArrival } from './ProjectTransition'
 import { siteCopy } from './site-copy'
 import { createStudyActivationGate } from './work-entry-activation'
-import ProductEvidence, { AtlasPortfolioFeature } from './projects/ProductEvidence'
+import { createWorkStageReadiness } from './work-stage-readiness'
+import { readPortfolioRenderPolicy } from './mobile-render-policy'
 import './work-studies.css'
 
 type StudyController = { identity: string; registerActivation(cancel: () => void): () => void; reset(slug: string): void; spin(slug: string, spinning: boolean): void; playing: boolean; reduced: boolean; toggle(): void; open(project: Project): void; explore(project: Project, event: MouseEvent<HTMLAnchorElement>): void }
@@ -14,11 +14,8 @@ function WorkStage({ children, dark, identity, className = '' }: { children: Rea
   const root = useRef<HTMLDivElement>(null)
   const canvas = useRef<HTMLCanvasElement>(null)
   const handle = useRef<WorkStudyHandle | null>(null)
-  const navigation = useProjectArrival()
-  const transferred = useRef(false)
-  const opening = useRef(false)
   const queuedActivations = useRef(new Set<() => void>())
-  const [playing, setPlaying] = useState(true)
+  const [playing, setPlaying] = useState(() => readPortfolioRenderPolicy().autoplay)
   const playingRef = useRef(playing)
   playingRef.current = playing
   const [reduced, setReduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches)
@@ -32,75 +29,50 @@ function WorkStage({ children, dark, identity, className = '' }: { children: Rea
     const element = root.current
     const surface = canvas.current
     if (!element || !surface) return
-    const site = element.closest<HTMLElement>('.personal-site')
     let cancelled = false
     let starting = false
-    const inherited = navigation.claim(element, identity)
-    if (inherited) {
-      surface.style.display = 'none'
-      handle.current = inherited.handle
-      playingRef.current = inherited.playing
-      setPlaying(inherited.playing)
-      return () => { handle.current?.dispose(); handle.current = null }
+    let mount: typeof import('./work-study-renderer').mountWorkStudies | null = null
+    const readiness = createWorkStageReadiness(() => {
+      if (cancelled || !mount) return
+      handle.current = mount(surface, element)
+      handle.current.setPlaying(playingRef.current)
+      observer.disconnect()
+      document.removeEventListener('visibilitychange', eligibility)
+    })
+    function eligibility() {
+      const rect = element!.getBoundingClientRect()
+      readiness.visible(!document.hidden && rect.width > 1 && rect.height > 1 && rect.bottom > -180 && rect.top < window.innerHeight + 180 && rect.right > -180 && rect.left < window.innerWidth + 180)
     }
     const escape = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return
-      queuedActivations.current.forEach(cancel => cancel())
-      if (!opening.current || transferred.current) return
-      handle.current?.finishTransition()
-      opening.current = false
-      delete element.dataset.workOpening
-      const slot = element.querySelector<HTMLElement>('[data-expanding]')
-      if (slot) delete slot.dataset.expanding
-      if (site) delete site.dataset.projectOpening
+      if (event.key === 'Escape') queuedActivations.current.forEach(cancel => cancel())
     }
     document.addEventListener('keydown', escape)
+    document.addEventListener('visibilitychange', eligibility)
     const observer = new IntersectionObserver(entries => {
+      eligibility()
       if (starting || !entries.some(entry => entry.isIntersecting)) return
       starting = true
-      observer.disconnect()
       import('./work-study-renderer').then(({ mountWorkStudies }) => {
         if (cancelled) return
-        handle.current = mountWorkStudies(surface, element)
-        handle.current.setPlaying(playingRef.current)
+        mount = mountWorkStudies
+        eligibility()
+        readiness.ready()
       }).catch(() => {
         if (cancelled) return
+        readiness.dispose()
+        observer.disconnect()
+        document.removeEventListener('visibilitychange', eligibility)
         surface.dataset.state = 'error'
         element.querySelectorAll<HTMLElement>('[data-work-study]').forEach(slot => { slot.dataset.state = 'error' })
       })
     }, { rootMargin: '180px' })
     observer.observe(element)
-    return () => { cancelled = true; observer.disconnect(); document.removeEventListener('keydown', escape); if (!transferred.current) handle.current?.dispose(); transferred.current = false; handle.current = null; opening.current = false; delete element.dataset.workOpening; delete site?.dataset.projectOpening }
+    return () => { cancelled = true; readiness.dispose(); observer.disconnect(); document.removeEventListener('visibilitychange', eligibility); document.removeEventListener('keydown', escape); handle.current?.dispose(); handle.current = null }
   }, [identity])
   useEffect(() => { handle.current?.setPlaying(playingRef.current) }, [playing])
   useEffect(() => { handle.current?.refresh() }, [dark])
   function open(project: Project) {
-    if (opening.current) return
-    const href = `#/work/${project.slug}`
-    const stage = root.current
-    const slot = stage?.querySelector<HTMLElement>(`[data-work-study="${project.slug}"]`)
-    if (reduced || !handle.current || !stage || !slot || slot.dataset.state !== 'ready') {
-      location.hash = href.slice(1)
-      return
-    }
-    opening.current = true
-    const appearance = getComputedStyle(stage)
-    const paper = appearance.getPropertyValue('--paper').trim()
-    const ink = appearance.getPropertyValue('--ink').trim()
-    const site = stage.closest<HTMLElement>('.personal-site')
-    if (site) site.dataset.projectOpening = 'true'
-    slot.dataset.expanding = 'true'
-    stage.dataset.workOpening = project.slug
-    if (!handle.current.beginTransition(project.slug, flight => {
-      transferred.current = true
-      navigation.arrive({ ...flight, href, slug: project.slug, paper, ink })
-    })) {
-      delete stage.dataset.workOpening
-      delete slot.dataset.expanding
-      if (site) delete site.dataset.projectOpening
-      opening.current = false
-      location.hash = href.slice(1)
-    }
+    location.hash = `/work/${project.slug}`
   }
   function explore(project: Project, event: MouseEvent<HTMLAnchorElement>) {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
@@ -252,11 +224,8 @@ export function WorkPage({ dark }: { dark: boolean }) {
       <div className="work-study-toolbar">
         <span>Selected work</span><WorkMotionControl />
       </div>
-      <ProjectEntries items={projects.slice(0, 1)} compact={false} />
-      <ProductEvidence kind="internshipdeadlines" />
-      <AtlasPortfolioFeature />
-      <div className="work-study-toolbar work-supporting-heading"><span>Research & experiments</span></div>
-      <ProjectEntries items={projects.slice(1)} compact supporting />
+      <ProjectEntries items={projects} compact={false} />
+      <div className="work-further" aria-label="More work"><a href="#/work/atlas"><span>Atlas</span><span aria-hidden="true">↗</span></a></div>
     </WorkStage>
   </section>
 }

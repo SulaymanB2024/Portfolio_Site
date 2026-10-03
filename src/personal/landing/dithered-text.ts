@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { CHAPTERS, textSequence, type LandingChapter } from './sequence.ts'
+import { isStackedLanding } from './mobile-layout.ts'
 import type { ScrollInkUniforms } from './scroll-dither.ts'
 export { textSequence } from './sequence.ts'
 export const HEADLINES = CHAPTERS.map(chapter => chapter.lines)
@@ -64,7 +65,7 @@ float printedHeading(vec2 local,vec2 state,vec2 measure,float row,float threshol
   if(state.x<.0001||state.y>.9999)return 0.;
   vec4 resting=textSample(local,row);
   // A held headline picks up moving ink without changing its silhouette.
-  if(state.x>.9999&&state.y<.0001)return resting.a*step(threshold,1.-scrollInk*.16);
+  if(state.x>.9999&&state.y<.0001)return resting.a*step(threshold,1.-scrollInk*.06);
   vec2 grainCell=floor(local*textPixels/3.);
   float grain=textHash(grainCell);
   float field=clamp(local.x/max(.001,measure.x),0.,1.)*.62+clamp((1.-local.y)/max(.001,measure.y),0.,1.)*.08+resting.r*.22+grain*.08;
@@ -86,7 +87,10 @@ float printedText(vec2 uv){
   if(local.x<0.||local.y<0.||local.x>1.||local.y>1.)return 0.;
   vec2 pixel=gl_FragCoord.xy;
   float threshold=clamp(mix(textBayer(pixel),textBayer(pixel/2.),scrollInk*.4)+inkWave(pixel)*scrollInk*.05,0.,1.),alpha=0.;
-  ${CHAPTERS.map((_,index)=>`alpha=max(alpha,printedHeading(local,textState[${index}],textMeasure[${index}],${index}.,threshold));`).join('\n  ')}
+  // The incoming ink belongs inside the GLB aperture; the rim occludes both titles.
+  float aperture=portalEnabled>.5?texture2D(portalMask,uv).r:0.;
+  float rim=portalEnabled>.5?texture2D(portalFrame,uv).a:0.;
+  ${CHAPTERS.map((_,index)=>`alpha=max(alpha,printedHeading(local,textState[${index}],textMeasure[${index}],${index}.,threshold)*(portalEnabled>.5?(${index}.>portalTextLeg+.5?aperture:1.-aperture):1.)*(1.-rim));`).join('\n  ')}
   return alpha;
 }`
 
@@ -94,14 +98,22 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
   const atlas = document.createElement('canvas')
   const context = atlas.getContext('2d', { willReadFrequently: true })
   if (!context) throw Error('Heading canvas is unavailable')
-  let texture: THREE.CanvasTexture | null = null, active = -1, lineHeight = 0, disposed = false
-  function resize() {
+  let texture: THREE.CanvasTexture | null = null, active = -1, lineHeight = 0, disposed = false, atlasKey = ''
+  function resize(force = false) {
     if (disposed || !isAlive()) return
     const style = getComputedStyle(headline), box = headline.getBoundingClientRect(), scene = stage.getBoundingClientRect()
     if (!box.width || !scene.width || !scene.height) return
     const ratio = pixelRatio(), fontSize = parseFloat(style.fontSize), pad = 20
     lineHeight = parseFloat(style.lineHeight) || fontSize * .98
     const frameHeight = Math.ceil((lineHeight * 3 + pad * 2) * ratio)
+    const key = [box.width, ratio, style.fontSize, style.fontWeight, style.fontFamily, style.letterSpacing, lineHeight].join('|')
+    if (!force && texture && key === atlasKey) {
+      uniforms.textBox.value.set((box.left - scene.left - pad) / scene.width, 1 - (box.top - scene.top - pad + frameHeight / ratio) / scene.height, atlas.width / ratio / scene.width, frameHeight / ratio / scene.height)
+      if (active >= 0) onChapter(CHAPTERS[active], active, lineHeight)
+      return
+    }
+    atlasKey = key
+    stage.dataset.atlasBuilds = String(Number(stage.dataset.atlasBuilds || 0) + 1)
     atlas.width = Math.ceil((box.width + pad * 2) * ratio)
     atlas.height = frameHeight * CHAPTERS.length
     context!.scale(ratio, ratio)
@@ -140,7 +152,7 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
     if (active >= 0) onChapter(CHAPTERS[active], active, lineHeight)
   }
   function update(progress: number, reduced: boolean) {
-    const sequence = textSequence(progress, 'threshold', reduced)
+    const sequence = textSequence(progress, 'threshold', reduced, isStackedLanding(stage.clientWidth, stage.clientHeight))
     if (disposed || !isAlive()) return sequence
     stage.dataset.textDither = 'ready'
     sequence.states.forEach((state, index) => uniforms.textState.value[index].set(state.reveal, state.erase))

@@ -1,15 +1,18 @@
 import * as THREE from 'three'
-import { PORTFOLIO_DITHER_GLSL } from './dither-kernel'
 import { PortfolioRuntime } from './portfolio-runtime'
 import { createPortfolioModelLoader } from './portfolio-model-loader'
 import { portfolioAssetUrl } from './portfolio-assets'
-import { clampStudy, settleWorkStudy, workStudyPose, workStudyRenderSize, workStudyScroll } from './work-study-motion'
+import { clampStudy, settleWorkStudy, workStudyPose, workStudyRenderSize } from './work-study-motion'
 import type { WorkStudyPose } from './work-study-motion'
 import { createStudyOrbit, fitStudyOrbit, resetStudyOrbit, rotateStudyKey, rotateStudyPointer, studyTouchIntent } from './work-study-interaction'
 import { STUDY_DOCK_MS, STUDY_DEPART_MS, studyFlightProgress, studyFlightRect, studyFlightInkProgress, studyFlightInkStrength, type StudyRect } from './work-study-flight'
 import { workStudyCameraDistance, workStudyFraming } from './work-study-framing'
-import { createWorkStudyInk, STUDY_INK_GLSL } from './work-study-ink'
+import { includeStudyScissor } from './work-study-composition'
+import { anchorWorkStudySurface } from './work-study-surface'
+import { createWorkStudyInk } from './work-study-ink'
+import { WORK_STUDY_VERTEX, WORK_STUDY_FRAGMENT } from './work-study-shader'
 import { createStudyFrameReview } from './work-study-frame-review'
+import { readPortfolioRenderPolicy } from './mobile-render-policy'
 
 export type WorkStudyFlight = { canvas: HTMLCanvasElement; handle: WorkStudyHandle; playing: boolean }
 
@@ -52,8 +55,6 @@ type Study = {
   width: number
   height: number
   radius: number
-  scroll: number
-  scrollTarget: number
   spinning: boolean
   frames: number
   fadeStart: number
@@ -64,79 +65,13 @@ type Study = {
   inputCleanups: (() => void)[]
 }
 
-const VERTEX = /* glsl */ `
-  varying vec2 studyUv;
-  void main() {
-    studyUv = uv;
-    gl_Position = vec4(position.xy, 0.0, 1.0);
-  }
-`
-
-const FRAGMENT = /* glsl */ `
-  uniform sampler2D studyColor;
-  uniform sampler2D studySurface;
-  uniform vec3 studyInk;
-  uniform vec4 studyRegions[4];
-  uniform vec4 studyHover;
-  uniform vec4 studyBursts;
-  uniform float studyTime;
-  uniform vec2 studyFlight;
-  uniform vec3 studyResolution;
-  uniform vec2 studyCssResolution;
-  varying vec2 studyUv;
-  ${PORTFOLIO_DITHER_GLSL}
-  ${STUDY_INK_GLSL}
-  float inkTone(vec4 model) {
-    return portfolioDisplayLuminance(model.rgb);
-  }
-  void main() {
-    vec4 model = texture2D(studyColor, studyUv);
-    // Preserve coarse silhouette samples during flight; empty resting paper
-    // needs neither ordered thresholds nor animated grain.
-    if (model.a <= .0001 && studyFlight.y <= 0.0) {
-      gl_FragColor = vec4(0.0);
-      return;
-    }
-    float hover = 0.0;
-    float burst = 0.0;
-    vec4 region = vec4(0.0);
-    for (int i = 0; i < 4; i++) {
-      vec4 r = studyRegions[i];
-      if (gl_FragCoord.x >= r.x && gl_FragCoord.y >= r.y && gl_FragCoord.x < r.x + r.z && gl_FragCoord.y < r.y + r.w) { hover = studyHover[i]; burst = studyBursts[i]; region = r; }
-    }
-    // The ordered grid is anchored to CSS pixels, independent of backing scale.
-    vec2 pixel = floor(studyUv * studyCssResolution);
-    float fine = portfolioLiveThreshold(portfolioBayer8(pixel), pixel, studyTime, .025);
-    float grain = portfolioHash(floor(pixel / 2.0));
-    float sweep = .5 + .5 * sin(studyUv.y * 12.0 - studyTime * 1.8);
-    // Wrap the ordered pattern during interaction to retain its tonal range.
-    // Blending threshold distributions makes bright bevels disappear on hover.
-    float hoverPattern = fract(fine + hover * (.24 + .08 * sweep) * (grain - .5));
-    float gray = inkTone(model);
-    float coverage = model.a * (1.0 - step(hoverPattern, gray)) * step(burst * .45, grain);
-    if (studyFlight.y > 0.0 && region.z > 0.0) {
-      // A traveling band exposes coarse ink just before the surface releases it.
-      // Final pixels and landed grains exchange ownership without an opacity dip.
-      vec2 cell = floor((gl_FragCoord.xy - region.xy) / region.zw * inkGrid);
-      vec2 uv = (cell + .5) / inkGrid;
-      float mark = texture2D(studySurface, uv).a;
-      float lifted = inkLifted(inkJourney(uv, studyFlight.x));
-      float localGrain = inkEase((studyFlight.x - inkRelease(uv) + .045) / .045);
-      float resting = coverage;
-      coverage = mix(coverage, mark, localGrain) * (1.0 - lifted);
-      coverage = mix(coverage, resting, inkHandoff(gl_FragCoord.xy, studyFlight.x));
-    }
-    gl_FragColor = vec4(studyInk, coverage);
-    #include <colorspace_fragment>
-  }
-`
-
 /** One context, one target and one scheduler for every model in the collection. */
 export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): WorkStudyHandle {
   let disposed = false
   let contextLost = false
   let playing = true
   let raf = 0
+  let wakeTimer = 0
   let urgent = true
   let boundsDirty = true
   const runtime = new PortfolioRuntime()
@@ -144,6 +79,8 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   let frames = 0
   let averageMs = 0
   let lastStats = -Infinity
+  let compositePixels = 0
+  const compositeBounds = { x: 0, y: 0, width: 0, height: 0 }
   let opening: { study: Study; start: number; phase: 'depart' | 'hold' | 'dock'; from: StudyRect; distance: number; aspect: number; onDeparted: (flight: WorkStudyFlight) => void; onComplete?: () => void } | null = null
   const regions = Array.from({ length: 4 }, () => new THREE.Vector4())
   const hoverSignals = new THREE.Vector4()
@@ -151,7 +88,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   let paintedSurface = false
   let cssWidth = Math.max(1, window.innerWidth)
   let cssHeight = Math.max(1, window.innerHeight)
-  let size = workStudyRenderSize(cssWidth, cssHeight, window.devicePixelRatio || 1)
+  let size = renderSize()
   let renderer: THREE.WebGLRenderer | null = null
   let target: THREE.WebGLRenderTarget | null = null
   let dither: THREE.ShaderMaterial | null = null
@@ -206,11 +143,28 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   function cancelFrame() {
     if (raf) cancelAnimationFrame(raf)
     raf = 0
+    window.clearTimeout(wakeTimer)
+    wakeTimer = 0
   }
 
   function requestRender(immediate = true) {
     urgent ||= immediate
-    if (!disposed && !contextLost && !document.hidden && !raf) raf = requestAnimationFrame(render)
+    if (disposed || contextLost || document.hidden || raf) return
+    if (urgent) { window.clearTimeout(wakeTimer); wakeTimer = 0 }
+    if (wakeTimer) return
+    const delay = urgent || frameReview?.paused() ? 0 : runtime.paintDelay(performance.now())
+    if (delay > 0) wakeTimer = window.setTimeout(() => {
+      wakeTimer = 0
+      if (!disposed && !contextLost && !document.hidden && !raf) raf = requestAnimationFrame(render)
+    }, delay)
+    else raf = requestAnimationFrame(render)
+  }
+
+  function renderSize() {
+    const policy = readPortfolioRenderPolicy()
+    const ratio = window.devicePixelRatio || 1
+    const budgetRatio = policy.mobile ? Math.min(ratio, policy.maxRatio, Math.sqrt(policy.pixels / (cssWidth * cssHeight))) : ratio
+    return workStudyRenderSize(cssWidth, cssHeight, budgetRatio, runtime.scale)
   }
 
   function stats(live = false, force = false) {
@@ -231,13 +185,13 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       study.element.dataset.renderFrames = String(study.frames)
       study.element.dataset.hover = study.hover.toFixed(3)
       study.element.dataset.idleYaw = study.pose.idleYaw.toFixed(4)
-      study.element.dataset.scrollProgress = ((study.scroll + 1) / 2).toFixed(4)
       inputStats(study)
     }
     canvas.dataset.frames = String(frames)
     canvas.dataset.loadedStudies = String(loaded)
     canvas.dataset.activeStudies = String(active)
     canvas.dataset.renderPixels = String(size.width * size.height)
+    canvas.dataset.compositePixels = String(compositePixels)
     canvas.dataset.drawCalls = String(renderer?.info.render.calls ?? 0)
     canvas.dataset.triangles = String(renderer?.info.render.triangles ?? 0)
     canvas.dataset.renderAverageMs = averageMs.toFixed(3)
@@ -305,7 +259,6 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       study.height = rect.height
       study.visible = (!opening || opening.study === study) && rect.width > 1 && rect.height > 1 && rect.top + rect.height > 0 && rect.top < cssHeight && rect.left + rect.width > 0 && rect.left < cssWidth
       study.near = rect.width > 1 && rect.height > 1 && rect.top + rect.height > -700 && rect.top < cssHeight + 700 && rect.left + rect.width > -300 && rect.left < cssWidth + 300
-      if (!opening) study.scrollTarget = reducedMotion.matches ? 0 : workStudyScroll(rect.top, rect.height, cssHeight)
       fit(study, time)
       if (study.near) void load(study)
     }
@@ -323,15 +276,16 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       // Measure the actual vertices once; this sphere remains valid at every rotation.
       gltf.scene.updateMatrixWorld(true)
       const point = new THREE.Vector3()
-      let radius = 0
+      let radiusSquared = 0
       gltf.scene.traverse(node => {
         if (!(node instanceof THREE.Mesh)) return
         const positions = node.geometry.getAttribute('position')
         for (let i = 0; i < positions.count; i++) {
           point.fromBufferAttribute(positions, i).applyMatrix4(node.matrixWorld).sub(center)
-          radius = Math.max(radius, point.length())
+          radiusSquared = Math.max(radiusSquared, point.lengthSq())
         }
       })
+      const radius = Math.sqrt(radiusSquared)
       if (!Number.isFinite(radius) || radius <= 0) { releaseObject(gltf.scene); throw new Error('Study has no usable bounds') }
       gltf.scene.position.sub(center)
       const materials = new Set<THREE.Material>()
@@ -379,11 +333,16 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     time = frameReview?.now(time) ?? time
     raf = 0
     if (disposed || contextLost || document.hidden || !renderer || !target || !dither) return
-    if (boundsDirty || opening) measure(time)
+    if (!runtime.canPaint(time, urgent || !!frameReview?.paused())) { requestRender(false); return }
+    // Re-anchor only when replacing the bitmap. Native scrolling carries the
+    // previous image with its slots between these bounded GPU paints.
+    if (boundsDirty || opening) {
+      anchorWorkStudySurface(canvas, !!opening, cssWidth, cssHeight)
+      measure(time)
+    }
     let hasModels = false
     for (const study of studies) if (study.visible && study.object && !study.failed) { hasModels = true; break }
     if (!hasModels && !paintedSurface && !opening) { runtime.suspend(); stats(false, true); return }
-    if (!runtime.canPaint(time, urgent || !!frameReview?.paused())) { requestRender(false); return }
     urgent = false
     const live = hasModels && playing && !reducedMotion.matches && !opening
     const blocked = !!opening || studies.some(study => study.element.dataset.dragging === 'true')
@@ -399,6 +358,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     renderer.setViewport(0, 0, size.width, size.height)
     renderer.clear(true, true, false)
     renderer.setScissorTest(true)
+    compositeBounds.width = compositeBounds.height = 0
     regions.forEach(region => region.set(0, 0, 0, 0))
     hoverSignals.set(0, 0, 0, 0)
     burstSignals.set(0, 0, 0, 0)
@@ -417,7 +377,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
         const nextOpacity = opacity * coverage
         if (material.opacity !== nextOpacity) material.opacity = nextOpacity
       }
-      if (!opening) study.hover = reducedMotion.matches ? study.hoverTarget : settleWorkStudy(study.hover, study.hoverTarget, elapsed)
+      if (!opening) study.hover = (!playing || reducedMotion.matches) ? study.hoverTarget : settleWorkStudy(study.hover, study.hoverTarget, elapsed)
       if (study.hover !== study.hoverTarget) settling = true
       const hoverAge = clampStudy((motionSeconds - study.hoverStart) / 1.1, 0, 1)
       const burst = reducedMotion.matches ? 0 : Math.sin(hoverAge * Math.PI) * study.hover
@@ -431,11 +391,9 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
         const articulationPhase = study.slug === 'sapien' ? study.definition.phase : part.phase
         part.node.rotateOnAxis(part.axis, study.hover * .18 * Math.sin(motionSeconds * .65 + articulationPhase))
       }
-      if (!opening) study.scroll = reducedMotion.matches ? 0 : settleWorkStudy(study.scroll, study.scrollTarget, elapsed)
-      if (study.scroll !== study.scrollTarget) settling = true
       study.controls.autoRotate = live && study.spinning
       study.controls.update(elapsed)
-      workStudyPose(motionSeconds, study.definition.phase, study.scroll, !reducedMotion.matches, study.pose)
+      workStudyPose(motionSeconds, study.definition.phase, 0, !reducedMotion.matches, study.pose)
       study.object.rotation.set(study.definition.pitch + study.pose.pitch, study.definition.yaw + study.pose.yaw, study.pose.roll)
       study.object.position.set(0, study.pose.y, 0)
       const x = Math.round(study.left * size.scaleX)
@@ -449,6 +407,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       const clipY = Math.max(0, y)
       const clipWidth = Math.max(0, Math.min(size.width, x + width) - clipX)
       const clipHeight = Math.max(0, Math.min(size.height, y + height) - clipY)
+      includeStudyScissor(compositeBounds, clipX, clipY, clipWidth, clipHeight)
       renderer.setViewport(x, y, width, height)
       renderer.setScissor(clipX, clipY, clipWidth, clipHeight)
       renderer.clearDepth()
@@ -469,7 +428,21 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     renderer.setScissorTest(false)
     renderer.setViewport(0, 0, size.width, size.height)
     renderer.clear(true, true, false)
-    renderer.render(postScene, postCamera)
+    if (opening) {
+      // Traveling ink can extend beyond the sculpture's original slot.
+      compositePixels = size.width * size.height
+      renderer.render(postScene, postCamera)
+    } else {
+      compositePixels = compositeBounds.width * compositeBounds.height
+      if (compositePixels > 0) {
+        // Keep the full viewport/UVs so grain stays fixed in CSS pixels; one
+        // scissor bounds every visible model and skips the surrounding paper.
+        renderer.setScissorTest(true)
+        renderer.setScissor(compositeBounds.x, compositeBounds.y, compositeBounds.width, compositeBounds.height)
+        renderer.render(postScene, postCamera)
+        renderer.setScissorTest(false)
+      }
+    }
     paintedSurface = hasModels
     frames++
     if (import.meta.env.DEV) {
@@ -501,19 +474,20 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
         delete canvas.dataset.flightParticles
         delete canvas.dataset.flightRect
         complete?.()
+        anchorWorkStudySurface(canvas, false, cssWidth, cssHeight)
         requestRender()
       }
     }
     if (frameReview?.paused()) return
     if (live || settling || fading || opening) requestRender(false)
-    else runtime.suspend()
+    // Retain the last deadline for event-driven scroll paints; idle queues no frame.
   }
 
   function resize() {
     if (disposed || !renderer || !target) return
     cssWidth = Math.max(1, window.innerWidth)
     cssHeight = Math.max(1, window.innerHeight)
-    size = workStudyRenderSize(cssWidth, cssHeight, window.devicePixelRatio || 1, runtime.scale)
+    size = renderSize()
     renderer.setSize(size.width, size.height, false)
     target.setSize(size.width, size.height)
     dither?.uniforms.studyResolution.value.set(size.width, size.height, size.scaleX)
@@ -557,7 +531,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     })
     const previousTouchAction = element.style.touchAction
     const previousTabIndex = element.getAttribute('tabindex')
-    element.style.touchAction = 'pan-y'
+    element.style.touchAction = 'pan-y pinch-zoom'
     if (previousTabIndex === null) element.tabIndex = 0
     study.inputCleanups.push(() => {
       element.style.touchAction = previousTouchAction
@@ -687,7 +661,13 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     },
     beginTransition(slug, onDeparted) {
       const study = studies.find(study => study.slug === slug)
-      if (disposed || contextLost || reducedMotion.matches || opening || !study?.painted || !flightInk?.supported) return false
+      if (disposed || contextLost || reducedMotion.matches || opening || !study?.painted || !renderer || !dither) return false
+      if (!renderer.extensions.has('EXT_color_buffer_float')) return false
+      if (!flightInk) {
+        flightInk = createWorkStudyInk(ink, renderer)
+        dither.uniforms.studySurface.value = flightInk.surfaceTexture
+        postScene.add(flightInk.points)
+      }
       opening = { study, start: frameReview?.begin(performance.now()) ?? performance.now(), phase: 'depart', from: study.element.getBoundingClientRect(), distance: study.camera.position.distanceTo(study.controls.target), aspect: study.camera.aspect, onDeparted }
       canvas.dataset.flight = 'depart'
       requestRender()
@@ -743,6 +723,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       delete canvas.dataset.flightRect
       boundsDirty = true
       complete?.()
+      anchorWorkStudySurface(canvas, false, cssWidth, cssHeight)
       requestRender()
     },
     refresh,
@@ -765,14 +746,12 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     renderer.toneMapping = THREE.ACESFilmicToneMapping
     renderer.toneMappingExposure = .95
     target = new THREE.WebGLRenderTarget(size.width, size.height, { depthBuffer: true, stencilBuffer: false, minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter })
-    dither = new THREE.ShaderMaterial({ vertexShader: VERTEX, fragmentShader: FRAGMENT, uniforms: { studyColor: { value: target.texture }, studySurface: { value: null }, studyInk: { value: ink }, studyRegions: { value: regions }, studyHover: { value: hoverSignals }, studyBursts: { value: burstSignals }, studyTime: { value: 0 }, studyFlight: { value: new THREE.Vector2() }, studyResolution: { value: new THREE.Vector3(size.width, size.height, size.scaleX) }, studyCssResolution: { value: new THREE.Vector2(cssWidth, cssHeight) } }, depthTest: false, depthWrite: false, toneMapped: false, blending: THREE.NoBlending })
+    dither = new THREE.ShaderMaterial({ vertexShader: WORK_STUDY_VERTEX, fragmentShader: WORK_STUDY_FRAGMENT, uniforms: { studyColor: { value: target.texture }, studySurface: { value: null }, studyInk: { value: ink }, studyRegions: { value: regions }, studyHover: { value: hoverSignals }, studyBursts: { value: burstSignals }, studyTime: { value: 0 }, studyFlight: { value: new THREE.Vector2() }, studyResolution: { value: new THREE.Vector3(size.width, size.height, size.scaleX) }, studyCssResolution: { value: new THREE.Vector2(cssWidth, cssHeight) } }, depthTest: false, depthWrite: false, toneMapped: false, blending: THREE.NoBlending })
     quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), dither)
     quad.frustumCulled = false
     postScene.add(quad)
-    flightInk = createWorkStudyInk(ink, renderer)
-    dither.uniforms.studySurface.value = flightInk.surfaceTexture
-    postScene.add(flightInk.points)
-    // Compile the transient field while assets load, before the first activation.
+    // Only the resting shader is needed by a normal collection. Allocate the
+    // particle field and its capture targets when a flight is actually used.
     void renderer.compileAsync(postScene, postCamera).catch(() => {})
     for (const element of root.querySelectorAll<HTMLElement>('[data-work-study]')) {
       const slug = element.dataset.workStudy || ''
@@ -793,12 +772,12 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       const study: Study = {
         element, slug, scene, camera, controls, object: null, source: null, materials: [], definition,
         pose: { yaw: 0, pitch: 0, roll: 0, y: 0, idleYaw: 0 }, loading: false, failed: false, painted: false, visible: false, near: false,
-        top: 0, left: 0, width: 0, height: 0, radius: 1.2, scroll: 0, scrollTarget: 0, spinning: false, frames: 0, fadeStart: -1, hover: 0, hoverTarget: 0, hoverStart: -1e9, parts: [], inputCleanups: [],
+        top: 0, left: 0, width: 0, height: 0, radius: 1.2, spinning: false, frames: 0, fadeStart: -1, hover: 0, hoverTarget: 0, hoverStart: -1e9, parts: [], inputCleanups: [],
       }
       studies.push(study)
       if (element.dataset.workInteractive === 'true') interactive(study)
     }
-    listen(window, 'scroll', () => { boundsDirty = true; requestRender() }, { passive: true, capture: true })
+    listen(window, 'scroll', () => { boundsDirty = true; requestRender(false) }, { passive: true, capture: true })
     listen(window, 'resize', resize)
     listen(document, 'visibilitychange', () => {
       cancelFrame()
@@ -867,6 +846,9 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     resize()
     refresh()
     measure()
+    // Preloading reads bounds before the first paint; that paint still needs
+    // to establish the document-attached canvas origin.
+    boundsDirty = true
     stats(false, true)
   } catch (error) {
     console.warn('Could not initialize work studies', error)

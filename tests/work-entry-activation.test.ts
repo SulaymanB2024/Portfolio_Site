@@ -41,6 +41,33 @@ test('a second pointer press cancels navigation so double-click can reset the sc
   }
 })
 
+test('a stationary touch activates immediately without a double-click timer', () => {
+  const f = fixture()
+  f.gate.start(2, 100, 100, 'touch')
+  f.gate.end(2, false)
+  // The stage cancels pending routes during click capture before the link queues.
+  f.gate.cancel()
+  f.gate.queue(f.navigate)
+  assert.equal(f.navigations, 1)
+  assert.equal(f.tasks.size, 0)
+  f.flush()
+  assert.equal(f.navigations, 1)
+})
+
+test('a mouse click following touch retains the complete double-click window', () => {
+  const f = fixture()
+  f.gate.start(2, 100, 100, 'touch')
+  f.gate.end(2, false)
+  f.gate.queue(f.navigate)
+  f.gate.start(3, 100, 100, 'mouse')
+  f.gate.end(3, false)
+  f.gate.queue(f.navigate)
+  f.advance(STUDY_CLICK_DELAY - 1)
+  assert.equal(f.navigations, 1)
+  f.advance(1)
+  assert.equal(f.navigations, 2)
+})
+
 test('dragging blocks the following click even when the pointer returns to its starting point', () => {
   const f = fixture()
   f.gate.start(3, 100, 100, 'mouse')
@@ -65,6 +92,8 @@ test('vertical touch scrolling, cancellation, and a renderer-started drag cannot
     if (action === 'cancel') f.gate.interrupt()
     f.gate.end(5, action === 'renderer')
     f.gate.queue(f.navigate)
+    assert.equal(f.navigations, 0, action)
+    assert.equal(f.tasks.size, 0, action)
     f.flush()
     assert.equal(f.navigations, 0, action)
   }
@@ -78,8 +107,21 @@ test('unrelated pointers do not cancel a tap and small touch jitter is tolerated
   f.gate.end(7, true)
   f.gate.end(6, false)
   f.gate.queue(f.navigate)
+  assert.equal(f.navigations, 1)
+  assert.equal(f.tasks.size, 0)
   f.flush()
   assert.equal(f.navigations, 1)
+})
+
+test('a touch that crosses the movement guard remains blocked after returning', () => {
+  const f = fixture()
+  f.gate.start(6, 100, 100, 'touch')
+  f.gate.move(6, 108, 100)
+  f.gate.move(6, 100, 100)
+  f.gate.end(6, false)
+  f.gate.queue(f.navigate)
+  assert.equal(f.navigations, 0)
+  assert.equal(f.tasks.size, 0)
 })
 
 test('cleanup cancels a pending route change', () => {

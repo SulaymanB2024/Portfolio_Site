@@ -119,6 +119,17 @@ test('unsupported platforms stay native and a broken worker recovers every place
   assert.equal(f.backend.getStats().disabled, true);
 });
 
+test('optional mobile frame limits cross registration without changing legacy commands', () => {
+  const f = bridgeFixture();
+  const options = { host: f.host, sketchId: 'yuru-01' as SketchId, physicalSize: 400, active: true, onFrame() {}, onError() {} };
+  f.backend.register({ ...options, maxFps: 12, minFps: 6 });
+  f.backend.register(options);
+  const commands = f.messages.map(item => item.command).filter(command => command.type === 'register');
+  assert.equal(commands[0].maxFps, 12); assert.equal(commands[0].minFps, 6);
+  assert.equal('maxFps' in commands[1], false); assert.equal('minFps' in commands[1], false);
+  f.backend.dispose();
+});
+
 test('one source error isolates its canvas and transport failure during registration clears all ownership', () => {
   const f = bridgeFixture();
   let errors = 0, frames = 0;
@@ -147,7 +158,7 @@ function deferred<T>() {
 
 async function settle() { for (let i = 0; i < 5; i++) await Promise.resolve(); }
 
-function workerFixture() {
+function workerFixture(engine?: 'gpu' | 'canvas') {
   let time = 0, nextFrame = 1, created = 0, removed = 0, draws = 0;
   const pending = new Map<number, (timestamp: number) => void>();
   const loads = new Map<SketchId, ReturnType<typeof deferred<{ default: P5SketchFactory }>>>();
@@ -159,15 +170,15 @@ function workerFixture() {
     load(id) { const loading = deferred<{ default: P5SketchFactory }>(); loads.set(id, loading); return loading.promise; },
     create(factory, canvas) {
       created++;
-      return { canvas, width: 400, height: 400,
+      return { canvas, width: 400, height: 400, engine,
         draw() { draws++; time += 2; if (factory !== source) throw new Error('bad draw'); return true; },
         remove() { removed++; canvas.width = canvas.height = 0; } };
     },
     send: reply => replies.push(reply),
   });
-  const register = (id: number, sketchId: SketchId, active = true) => {
+  const register = (id: number, sketchId: SketchId, active = true, limits: { maxFps?: number; minFps?: number } = {}) => {
     const canvas = { width: 400, height: 400 } as OffscreenCanvas;
-    host.receive({ type: 'register', id, sketchId, canvas, physicalSize: 400, active });
+    host.receive({ type: 'register', id, sketchId, canvas, physicalSize: 400, active, ...limits });
     return canvas;
   };
   return { host, scheduler, pending, loads, replies, register,
@@ -180,6 +191,29 @@ function workerFixture() {
     },
   };
 }
+
+test('worker jobs honor finite mobile caps while absent or malformed limits preserve bounded engine profiles', async () => {
+  for (const [limits, engine, expected] of [
+    [{ maxFps: 12, minFps: 6 }, 'gpu', 12],
+    [{ maxFps: 12 }, 'gpu', 12],
+    [{ maxFps: 10, minFps: 30 }, 'gpu', 10],
+    [{ maxFps: 120, minFps: 80 }, 'gpu', 60],
+    [{ maxFps: .2, minFps: -20 }, 'gpu', 1],
+    [{ maxFps: NaN, minFps: Infinity }, 'gpu', 30],
+    [{}, 'gpu', 30],
+    [{}, 'canvas', 12],
+  ] as const) {
+    const f = workerFixture(engine);
+    f.register(1, 'yuru-01', true, limits);
+    await settle(); f.loads.get('yuru-01')!.resolve({ default: source }); await settle();
+    for (let index = 0; index < 8; index++) f.step(index * 16);
+    const frames = f.replies.filter(reply => reply.type === 'frame');
+    assert(frames.length > 0);
+    assert(frames.every(reply => reply.stats.targetFps === expected), JSON.stringify({ limits, engine, expected, frames }));
+    assert.equal(f.created, 1);
+    f.host.dispose(); assert.equal(f.pending.size, 0); assert.equal(f.removed, 1);
+  }
+});
 
 test('cancelled lazy imports and disposal cannot create canvases, callbacks, or late frames', async () => {
   const f = workerFixture();

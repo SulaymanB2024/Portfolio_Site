@@ -6,11 +6,10 @@ export function printPalette(paper: string, ink: string) {
 }
 
 /** Match display pixels, or an integer subdivision of them, within the GPU budget. */
-export function printPixelRatio(width: number, height: number, deviceRatio: number) {
+export function printPixelRatio(width: number, height: number, deviceRatio: number, budget = 2_200_000, maxRatio = Infinity) {
   const area = Math.max(1, width*height)
-  const budget = 2_200_000
   const native = Math.max(.1, deviceRatio)
-  const subdivision = Math.max(1, Math.ceil(Math.sqrt(area*native*native/budget)))
+  const subdivision = Math.max(1, Math.ceil(native / maxRatio), Math.ceil(Math.sqrt(area*native*native/budget)))
   return native/subdivision
 }
 

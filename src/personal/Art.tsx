@@ -1,14 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import type { ArtKind } from './content'
 import type { mountObject } from './object-renderer'
+import { readPortfolioRenderPolicy } from './mobile-render-policy'
+import { waitForObjectView } from './object-visibility'
 
-export function Art({ kind, dark, className = '', flow = false, cameraDistanceScale = 1, onFlowReady, onRendered, onObjectStatus }: { kind: ArtKind; dark: boolean; className?: string; flow?: boolean; cameraDistanceScale?: number; onFlowReady?: (handler: (progress: number, drift: number) => void) => void; onRendered?: (time: number) => void; onObjectStatus?: (status: 'ready' | 'error') => void }) {
+export function Art({ kind, dark, className = '', flow = false, cameraDistanceScale = 1, idleMotion = true, deferUntilVisible = false, onFlowReady, onRendered, onObjectStatus }: { kind: ArtKind; dark: boolean; className?: string; flow?: boolean; cameraDistanceScale?: number; idleMotion?: boolean; deferUntilVisible?: boolean; onFlowReady?: (handler: (progress: number, drift: number) => void) => void; onRendered?: (time: number) => void; onObjectStatus?: (status: 'ready' | 'error') => void }) {
   const canvas = useRef<HTMLCanvasElement>(null)
   const handle = useRef<ReturnType<typeof mountObject> | null>(null)
   const darkRef = useRef(dark)
   darkRef.current = dark
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
   const [spinning, setSpinning] = useState(false)
+  const [entered, setEntered] = useState(!deferUntilVisible)
+  const [mobile] = useState(() => readPortfolioRenderPolicy().mobile)
   const [reducedMotion, setReducedMotion] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches)
   useEffect(() => {
     const query = matchMedia('(prefers-reduced-motion: reduce)')
@@ -17,6 +21,12 @@ export function Art({ kind, dark, className = '', flow = false, cameraDistanceSc
     return () => query.removeEventListener('change', change)
   }, [])
   useEffect(() => {
+    if (entered) return
+    if (!deferUntilVisible || !('IntersectionObserver' in window)) { setEntered(true); return }
+    if (canvas.current) return waitForObjectView(canvas.current, () => setEntered(true))
+  }, [entered, deferUntilVisible])
+  useEffect(() => {
+    if (!entered) return
     let cancelled = false
     let awaitingFirstPaint = false
     setStatus('loading')
@@ -39,18 +49,18 @@ export function Art({ kind, dark, className = '', flow = false, cameraDistanceSc
           onObjectStatus?.('ready')
         }
         onRendered?.(time)
-      }, flow, cameraDistanceScale)
+      }, flow, cameraDistanceScale, idleMotion)
       onFlowReady?.((progress, drift) => handle.current?.setFlow(progress, drift))
     }).catch(() => { if (!cancelled) { setStatus('error'); onObjectStatus?.('error') } })
     return () => { cancelled = true; handle.current?.dispose(); handle.current = null }
-  }, [kind, flow, cameraDistanceScale, onFlowReady, onRendered, onObjectStatus])
+  }, [entered, kind, flow, cameraDistanceScale, idleMotion, onFlowReady, onRendered, onObjectStatus])
   useEffect(() => { handle.current?.setDark(dark) }, [dark])
   return <div className={`art-viewer ${className}`} data-status={status} aria-busy={status === 'loading'}>
-    <canvas ref={canvas} tabIndex={status === 'ready' ? 0 : -1} aria-hidden={status !== 'ready'} aria-label={`${kind} sculpture. Drag or use arrow keys to rotate. Home resets the view.`} />
+    <canvas ref={canvas} tabIndex={status === 'ready' ? 0 : -1} aria-hidden={status !== 'ready'} aria-label={`${kind} sculpture. ${mobile ? 'Swipe sideways' : 'Drag'} or use arrow keys to rotate. Home resets the view.`} />
     {status === 'loading' && <span className="sr-only" role="status">Loading 3D model.</span>}
     {status === 'error' && <span className="sr-only" role="status">Interactive sculpture unavailable.</span>}
     <div className="object-controls" style={{ visibility: status === 'ready' ? undefined : 'hidden' }}>
-      <span>Drag to rotate</span>
+      <span>{mobile ? 'Swipe to turn' : 'Drag to rotate'}</span>
       <button disabled={status !== 'ready' || reducedMotion} aria-label={spinning ? 'Pause rotation' : 'Start rotation'} aria-pressed={spinning} title={reducedMotion ? 'Automatic rotation follows your reduced motion preference' : spinning ? 'Pause full rotation' : 'Play full rotation'} onClick={() => {
         handle.current?.setSpinning(!spinning); setSpinning(!spinning)
       }}><span aria-hidden="true">{spinning ? 'Ⅱ' : '▷'}</span></button>

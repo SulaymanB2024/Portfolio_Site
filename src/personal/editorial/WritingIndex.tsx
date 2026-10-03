@@ -7,12 +7,14 @@ import { readWritingFilters, writingHref, type WritingFilters } from './library'
 import { displayDate, type ArticleSummary } from './types'
 import './article-design.css'
 import './writing-gallery.css'
+import './writing-craft.css'
 import { artworkTransitionName } from './artwork-continuity'
 import { siteCopy, withWritingCopy } from '../site-copy'
 import '../copy.css'
 
 const articles = (catalog as ArticleSummary[]).map(withWritingCopy)
 const categories = ['All', ...new Set(articles.map(article => article.category))]
+const topicLabels: Record<string, string> = { All: 'All topics', 'INFRASTRUCTURE INVESTING': 'Infrastructure', 'PRODUCT & SYSTEMS': 'Product & systems', 'AI SYSTEMS': 'AI systems', 'ViralBench / Codex / agent evaluation': 'Agent evaluation' }
 
 export default function WritingIndex() {
   const { paused } = useArtworkMotion()
@@ -46,15 +48,15 @@ export default function WritingIndex() {
       <div className="writing-heading-copy"><h1 className="writing-heading">Writing<span className="period">.</span></h1><p className="writing-introduction">AI, infrastructure, and the systems we build.</p></div>
       <div className="writing-toolbar">
         <label className="writing-search"><span className="sr-only">Search writing</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></svg><input type="search" value={query} onChange={event => updateFilters({ ...filters, query: event.target.value })} placeholder="Search writing" /></label>
-        <div className="writing-search-options"><span className="writing-result-count" aria-hidden="true">{query.trim() || category !== 'All' ? `${visible.length} ${visible.length === 1 ? 'result' : 'results'}` : ''}</span><ArtworkMotionControl /></div>
-        {category !== 'All' && <div className="writing-legacy-filter"><span>{category}</span><button type="button" onClick={() => updateFilters({ ...filters, category: 'All' })}>Clear topic filter</button></div>}
+        <div className="writing-search-options"><label className="writing-topic"><span className="sr-only">Filter writing by topic</span><select value={category} onChange={event => updateFilters({ ...filters, category: event.target.value })}>{categories.map(value => <option key={value} value={value}>{topicLabels[value] || value}</option>)}</select><span aria-hidden="true">⌄</span></label><ArtworkMotionControl /></div>
+        {(query.trim() || category !== 'All') && <div className="writing-filter-status"><span>{visible.length} {visible.length === 1 ? 'essay' : 'essays'}</span><button type="button" onClick={() => updateFilters({ query: '', category: 'All' })}>Clear filters</button></div>}
       </div>
     </header>
     <div className="writing-gallery">{visible.map((article, index) => {
       const artwork = getArticleGenerativeArtwork(article.path)
       const layout = index === 0 && category === 'All' && !query.trim() ? 'feature' : 'entry'
       return <a className="writing-story" data-slug={article.slug} data-layout={layout} key={article.slug} href={`#/writing/${article.slug}?from=${encodeURIComponent(writingHref(filters, article.slug))}`} onClick={event => rememberArticle(event, article.slug)}>
-        <div className="writing-story-copy"><h2>{article.displayTitle || article.title}</h2><p className="writing-deck">{article.subtitle}</p><div className="writing-story-meta"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span>{article.readTime}</span><span className="writing-story-action" aria-hidden="true">Read essay <span className="writing-story-arrow">↗</span></span></div></div>
+        <div className="writing-story-copy"><span className="writing-story-topic">{topicLabels[article.category] || article.category}</span><h2>{article.displayTitle || article.title}</h2><p className="writing-deck">{article.subtitle}</p><div className="writing-story-meta"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span>{article.readTime}</span><span className="writing-story-action" aria-hidden="true">Read essay <span className="writing-story-arrow">↗</span></span></div></div>
         <div className="writing-art" data-treatment={artwork.treatment}><AnimatedArtwork artwork={artwork} size={400} paused={paused} eager={index === 0} embedded decorative transitionName={artworkTransitionName(artwork)} /></div>
       </a>
     })}</div>

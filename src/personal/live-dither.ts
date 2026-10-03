@@ -23,8 +23,7 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
   vec4 surface = center.a >= .9999 ? center : inputColor;
   // Weighted linear luminance retains the neutral scan's previous tonal gain.
   float tone = clamp(portfolioLinearLuminance(portfolioStraightColor(surface)) * 3.0, 0.0, 1.0);
-  float threshold = portfolioLiveThreshold(portfolioBayer8(cell), cell, printClock, printGrain);
-  float mark = step(threshold, tone);
+  float mark = portfolioDitherMark(tone, portfolioBayer8(cell), cell, printClock, printGrain);
   float paper = mark * mix(tone, 1.0, printBinary);
   outputColor = vec4(mix(printInk, printPaper, paper), inputColor.a);
 }

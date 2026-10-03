@@ -8,10 +8,12 @@ import ProductEvidence from '../projects/ProductEvidence'
 import { getArticleGenerativeArtwork } from './generative/manifest'
 import { articleReturnHref, articleSection, relatedArticles, sectionHref } from './library'
 import ReaderNavigation from './ReaderNavigation'
+import CitationPreview from './CitationPreview'
 import { StoryLink } from './StoryLink'
 import { ArtworkMotionControl } from './ArtworkMotion'
 import { displayDate, type ArticleCase, type ArticleSection, type ArticleSummary, type ArticleTable, type WritingArticle } from './types'
 import './article-design.css'
+import './reader-craft.css'
 import { cachedArticle, prepareArticle } from './article-cache'
 import { siteCopy, withWritingCopy } from '../site-copy'
 
@@ -115,7 +117,7 @@ function ArticleUtilities() {
     if (timer.current) clearTimeout(timer.current)
     timer.current = setTimeout(() => setCopy('Copy link'), 2000)
   }
-  return <div className="article-utilities" role="group" aria-label="Article utilities"><button onClick={copyLink}>{copy}</button><button onClick={() => window.print()}>Print / PDF</button><span className="sr-only" role="status">{copy === 'Copied' ? 'Article link copied.' : copy === 'Copy from address bar' ? 'Copy the article link from the address bar.' : ''}</span></div>
+  return <div className="article-utilities" role="group" aria-label="Article utilities"><a className="reader-start-link" href={sectionHref(location.hash, 'reader-start')}>Start reading <span aria-hidden="true">↓</span></a><button onClick={copyLink}>{copy}</button><button onClick={() => window.print()}>Print / PDF</button><span className="sr-only" role="status">{copy === 'Copied' ? 'Article link copied.' : copy === 'Copy from address bar' ? 'Copy the article link from the address bar.' : ''}</span></div>
 }
 
 function Table({ table }: { table: ArticleTable }) {
@@ -186,7 +188,7 @@ export default function ArticlePage({ slug }: { slug: string }) {
   return <article className="article-page" data-story={article.slug} onClick={citationClick}>
     <a className="project-back mono" href={backHref}>← {siteCopy.reader.back}</a>
     <header className="article-cover"><div className="reader-heading"><p className="eyebrow">{article.category}</p><h1>{article.displayTitle || article.title}</h1><p className="reader-subtitle">{copy.subtitle}</p><div className="reader-signature"><div className="reader-author">Sulayman Bowles</div><div className="reader-byline"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span>{article.readTime}</span>{article.dateModified && article.dateModified !== article.date && <span>Updated {displayDate(article.dateModified)}</span>}</div></div><ArticleUtilities /></div><ArtCube key={article.slug} artwork={artwork} /></header>
-    <div className="reader-layout"><ReaderNavigation sections={headings} /><div className="reader-prose">
+    <div className="reader-layout" id="reader-start"><ReaderNavigation sections={headings} /><div className="reader-prose">
       {body || <><div className="article-lede">{(article.ledeMarkdown || article.lede) ? markdownToReact(article.ledeMarkdown || article.lede || '') : article.content?.map((paragraph, index) => <p key={index}>{inlineText(paragraph, `intro-${index}`)}</p>)}</div><Figures slug={article.slug} id="lede" position="after" />{article.thesis && <p className="reader-thesis">{inlineText(article.thesis)}</p>}<OpeningNotes article={article} boundary />{heroImage && <StoryImage image={heroImage} slug={article.slug} />}{article.sections?.map(section => <Section key={section.id} section={section} slug={article.slug} />)}{article.markdownSections?.map(section => <Section key={section.id} section={section} tables={article.tables} slug={article.slug} />)}</>}
       {article.cases?.length ? <Cases cases={article.cases} filters={article.pageContent?.caseFilters} /> : null}
       {article.factGaps?.length ? <section id="fact-gaps" className="reader-section"><h2>What remains unknown</h2>{article.factGaps.map(gap => <div key={gap.title}><h3>{gap.title}</h3><ul>{gap.items.map((item, index) => <li key={index}>{inlineText(item)}</li>)}</ul></div>)}</section> : null}
@@ -201,5 +203,6 @@ export default function ArticlePage({ slug }: { slug: string }) {
       {article.pageContent?.endnotes?.map((note, index) => <footer className="reader-endnote" key={index}>{markdownToReact(note.markdown)}<nav aria-label="Related reading">{note.links.map(link => <a key={link.href} href={articleHref(link.href, articles, import.meta.env.BASE_URL)}>{link.label} ↗</a>)}</nav></footer>)}
     </div></div>
     <section className="reader-further"><div className="reader-further-heading"><h2>{siteCopy.reader.more}</h2><div className="reader-further-actions"><ArtworkMotionControl /><a className="arrow-link" href={backHref}>{siteCopy.reader.back}<span aria-hidden="true">→</span></a></div></div><nav aria-label="More articles">{relatedArticles(article, articles).map(item => <StoryLink key={item.slug} article={item} />)}</nav></section>
+    <CitationPreview key={article.slug} />
   </article>
 }

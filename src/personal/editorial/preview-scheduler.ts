@@ -185,7 +185,7 @@ export function createPreviewScheduler(driver: FrameDriver = browserDriver, budg
                 }
                 const rate = Math.floor((budgetMs * 60 * .9 - otherDemand) / Math.max(gpuCost, .001));
                 entry.targetFps = Math.max(entry.minFps, Math.min(entry.maxFps, rate));
-              } else entry.targetFps = entry.averageMs > 6 ? 8 : entry.averageMs > 3 ? 10 : entry.averageMs > 1.5 ? 12 : 18;
+              } else entry.targetFps = Math.max(entry.minFps, Math.min(entry.maxFps, entry.averageMs > 6 ? 8 : entry.averageMs > 3 ? 10 : entry.averageMs > 1.5 ? 12 : 18));
               // Carry the fractional interval without replaying missed frames.
               entry.lastAt = Number.isFinite(entry.lastAt) ? timestamp - (timestamp - entry.lastAt) % interval : timestamp;
               entry.task.onFrame?.(snapshot(entry));

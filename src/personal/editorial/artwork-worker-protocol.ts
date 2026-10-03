@@ -2,7 +2,7 @@ import type { PreviewFrameStats } from './preview-scheduler';
 import type { SketchId } from './generative/types';
 
 export type ArtworkWorkerCommand =
-  | { type: 'register'; id: number; sketchId: SketchId; canvas: OffscreenCanvas; physicalSize: number; active: boolean }
+  | { type: 'register'; id: number; sketchId: SketchId; canvas: OffscreenCanvas; physicalSize: number; active: boolean; maxFps?: number; minFps?: number }
   | { type: 'active'; id: number; active: boolean }
   | { type: 'remove'; id: number };
 

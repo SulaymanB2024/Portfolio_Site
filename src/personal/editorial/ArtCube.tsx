@@ -6,12 +6,11 @@ import { artworkTransitionName } from './artwork-continuity'
 
 export default function ArtCube({ artwork }: { artwork: GenerativeArtwork }) {
   const motion = useArtworkMotion()
-  const [paused, setPaused] = useState(false)
+  const [choice, setChoice] = useState<{ revision: number; paused: boolean } | null>(null)
   const [state, setState] = useState<'poster' | 'running' | 'paused' | 'fallback'>('poster')
-  const stopped = paused || motion.paused
+  const stopped = choice?.revision === motion.revision ? choice.paused : motion.paused
   function toggle() {
-    if (stopped) { setPaused(false); motion.setPaused(false) }
-    else setPaused(true)
+    setChoice({ revision: motion.revision, paused: !stopped })
   }
   return <figure className="article-art-cube" data-sketch={artwork.sketchId} data-treatment={artwork.treatment} data-art-state={state} data-embedded="true">
     <div className="art-cube-square"><AnimatedArtwork artwork={artwork} size={400} eager paused={stopped} embedded transitionName={artworkTransitionName(artwork)} onStateChange={setState} /></div>

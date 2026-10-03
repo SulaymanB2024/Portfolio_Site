@@ -1,0 +1,172 @@
+/* An instrument console and a manuscript share one workspace. All rules stay local. */
+.about-piece-editor {
+  --composer-rule: var(--line);
+  --composer-panel: var(--paper);
+  width: 100%;
+  min-width: 0;
+}
+.about-piece-editor button,
+.about-piece-editor input,
+.about-piece-editor summary { -webkit-tap-highlight-color: transparent; }
+.about-piece-editor button { color: var(--ink); cursor: pointer; }
+.about-piece-editor button:disabled { opacity: .35; cursor: default; }
+.about-piece-editor :is(button, input, summary):focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.about-piece-editor .composer-masthead { display: flex; justify-content: space-between; align-items: end; gap: 32px; border-top: 1px solid var(--ink); padding: 27px 0 30px; }
+.about-piece-editor .composer-title-block { min-width: 0; flex: 1; }
+.about-piece-editor .composer-title-label { display: block; }
+.about-piece-editor .composer-title-label > span { display: block; margin-bottom: 14px; color: var(--muted); font-size: 9px; letter-spacing: .035em; }
+.about-piece-editor .composer-title-label > input { display: block; width: 100%; min-width: 0; min-height: 56px; padding: 0 0 5px; border: 0; border-bottom: 1px solid transparent; background: transparent; color: var(--ink); font: 400 clamp(30px, 3.5vw, 47px)/1.2 Georgia, 'Times New Roman', serif; letter-spacing: -.035em; border-radius: 0; text-overflow: ellipsis; }
+.about-piece-editor .composer-title-label > input:hover { border-bottom-color: var(--line); }
+.about-piece-editor .composer-title-label > input:focus { border-bottom-color: var(--ink); }
+.about-piece-editor .composer-signature { display: flex; flex-wrap: wrap; gap: 9px 20px; font-size: 9px; color: var(--muted); margin: 14px 0 0; }
+.about-piece-editor .composer-transport { display: flex; align-items: center; gap: 7px; padding-bottom: 2px; }
+.about-piece-editor .composer-transport > button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border: 1px solid var(--line); padding: 10px 17px; background: transparent; font: 11px 'Courier New', monospace; }
+.about-piece-editor .composer-transport svg { width: 16px; height: 16px; }
+.about-piece-editor .composer-transport > .composer-play { background: var(--ink); color: var(--paper); border-color: var(--ink); min-width: 100px; }
+.about-piece-editor .composer-play:disabled { background: var(--soft); color: var(--muted); border-color: var(--line); opacity: 1; }
+.about-piece-editor .composer-stop:hover:not(:disabled) { border-color: var(--ink); }
+.about-piece-editor .composer-history-controls { display: flex; gap: 2px; margin-left: 8px; }
+.about-piece-editor .composer-history-controls > button { width: 44px; height: 48px; padding: 0; border: 0; background: transparent; font: 27px Georgia, serif; }
+.about-piece-editor .composer-history-controls > button:hover:not(:disabled) { background: var(--soft); }
+.about-piece-editor .composer-workspace { display: grid; grid-template-columns: minmax(0, 1.48fr) minmax(340px, .92fr); align-items: start; gap: 40px; padding-top: 8px; }
+.about-piece-editor .composer-paper { position: sticky; top: 24px; min-width: 0; }
+.about-piece-editor .composer-paper-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding-bottom: 8px; font-size: 9px; color: var(--muted); }
+.about-piece-editor .composer-paper-tools { display: flex; align-items: center; gap: 19px; }
+.about-piece-editor .composer-paper-tools > button { display: flex; align-items: center; gap: 10px; min-width: 44px; min-height: 44px; padding: 0; background: transparent; border: 0; font: inherit; }
+.about-piece-editor .composer-paper-tools > button:hover { text-decoration: underline; text-underline-offset: 4px; }
+.about-piece-editor .composer-paper-tools > button[aria-pressed='true'] { color: var(--ink); }
+.about-piece-editor .score-preview-sheet { background: var(--composer-panel); border: 1px solid var(--composer-rule); }
+.about-piece-editor .score-preview[data-readable='true'] .score-preview-sheet { max-height: min(72vh, 680px); overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.about-piece-editor .score-preview[data-readable='true'] .score-preview-canvas { min-width: 600px; width: max(125%,600px); }
+.about-piece-editor .score-preview-caption { font-size: 9px; padding-top: 13px; }
+.about-piece-editor .composer-pagination { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); margin-top: 17px; padding-top: 3px; font-size: 9px; color: var(--muted); }
+.about-piece-editor .composer-pagination > button { display: flex; align-items: center; gap: 12px; min-width: 44px; min-height: 44px; padding: 6px 0; background: transparent; border: 0; font: inherit; }
+.about-piece-editor .composer-pagination > button:not(:disabled):hover { color: var(--ink); }
+.about-piece-editor .composer-pagination > span { white-space: nowrap; }
+.about-piece-editor .composer-console { display: flex; flex-direction: column; gap: 0; min-width: 0; padding-top: 0; border-top: 1px solid var(--ink); }
+.about-piece-editor .composer-entry-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 20px 0 16px; }
+.about-piece-editor .composer-entry-heading > .mono { color: var(--muted); font-size: 9px; }
+.about-piece-editor .composer-entry-heading > span:last-child { font-size: 22px; line-height: 1; letter-spacing: -.025em; }
+.about-piece-editor .composer-entry-modes { display: flex; margin: 0 0 14px; border: 1px solid var(--line); font-size: 9px; }
+.about-piece-editor .composer-entry-modes > button { flex: 1; min-width: 0; min-height: 44px; padding: 9px 5px; border: 0; border-right: 1px solid var(--line); background: transparent; font: inherit; }
+.about-piece-editor .composer-entry-modes > button:last-child { border-right: 0; }
+.about-piece-editor .composer-entry-modes > button[aria-pressed='true'] { background: var(--soft); }
+.about-piece-editor .composer-register { display: flex; gap: 0; border-bottom: 1px solid var(--line); margin-bottom: 17px; }
+.about-piece-editor .composer-register > button { display: flex; flex: 1; flex-direction: column; gap: 8px; align-items: start; min-height: 57px; padding: 8px 4px 12px; border: 0; border-bottom: 1px solid transparent; background: transparent; font-size: 10px; text-align: left; }
+.about-piece-editor .composer-register > button[aria-pressed='true'] { border-bottom-color: var(--ink); }
+.about-piece-editor .composer-register > button > small { font-size: 8px; color: var(--muted); }
+.about-piece-editor .composer-register > button:hover > span { text-decoration: underline; text-underline-offset: 4px; }
+.about-piece-editor .composer-keyboard-window { overflow-x: auto; overscroll-behavior-inline: contain; padding: 4px 3px 9px; margin: 0 -3px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.about-piece-editor .composer-keyboard { position: relative; display: grid; grid-template-columns: repeat(var(--natural-count), minmax(44px, 1fr)); width: 100%; min-width: calc(var(--natural-count) * 44px); height: 154px; padding: 0; box-sizing: border-box; }
+.about-piece-editor .composer-keyboard[data-trailing-sharp='true'] { min-width: calc(var(--natural-count) * 44px + 22px); padding-right: 22px; }
+.about-piece-editor .composer-key { display: flex; flex-direction: column; align-items: center; justify-content: end; gap: 4px; padding: 0 0 14px; border-radius: 0; transition: background-color 130ms ease, color 130ms ease; }
+.about-piece-editor .composer-key > span { font-family: Georgia, serif; font-size: 16px; }
+.about-piece-editor .composer-key > small { font: 8px 'Courier New', monospace; }
+.about-piece-editor .composer-key-natural { position: relative; grid-row: 1; min-width: 44px; height: 150px; background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-right: 0; border-bottom: 3px solid var(--ink); }
+.about-piece-editor .composer-key-natural:last-of-type { border-right: 1px solid var(--line); }
+.about-piece-editor .composer-key-natural:is(:hover, [aria-pressed='true']) { background: var(--soft); }
+.about-piece-editor .composer-key-sharp { position: absolute; z-index: 1; top: 0; width: 44px; height: 89px; background: var(--ink); color: var(--paper); border: 1px solid var(--paper); border-top: 0; border-bottom: 3px solid var(--muted); }
+.about-piece-editor .composer-key-sharp > span { font-size: 12px; }
+.about-piece-editor .composer-key-sharp > small { opacity: .7; }
+.about-piece-editor .composer-key-sharp:is(:hover, [aria-pressed='true']) { border-bottom-color: var(--paper); }
+.about-piece-editor .composer-key[aria-pressed='true']::after { content: ''; position: absolute; left: calc(50% - 2px); bottom: 5px; width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
+.about-piece-editor .composer-key[data-playing='true'] { outline: 2px solid var(--muted); outline-offset: -5px; }
+.about-piece-editor .composer-key:focus-visible { z-index: 2; }
+.about-piece-editor .composer-duration { padding: 0; margin: 19px 0 0; border: 0; min-width: 0; }
+.about-piece-editor .composer-duration > legend { color: var(--muted); font-size: 9px; margin-bottom: 11px; padding: 0; }
+.about-piece-editor .composer-duration > div { display: grid; grid-template-columns: repeat(5, minmax(44px, 1fr)); }
+.about-piece-editor .composer-duration button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-height: 69px; padding: 5px 0 10px; background: transparent; border: 1px solid var(--line); border-right: 0; font: inherit; }
+.about-piece-editor .composer-duration button:last-child { border-right: 1px solid var(--line); }
+.about-piece-editor .composer-duration button[aria-pressed='true'] { background: var(--soft); box-shadow: inset 0 -2px 0 var(--ink); }
+.about-piece-editor .composer-duration button:hover { background: var(--soft); }
+.about-piece-editor .composer-duration svg { width: 24px; height: 29px; }
+.about-piece-editor .composer-duration button > span { font-size: 8px; }
+.about-piece-editor .composer-edit-actions { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 12px 0 0; font-size: 10px; }
+.about-piece-editor .composer-edit-actions > button { min-height: 44px; padding: 8px 0; background: transparent; border: 0; font: inherit; }
+.about-piece-editor .composer-edit-actions > button:hover:not(:disabled) { text-decoration: underline; text-underline-offset: 5px; }
+.about-piece-editor .composer-rest { display: flex; align-items: center; gap: 12px; }
+.about-piece-editor .composer-rest > svg { width: 21px; height: 28px; }
+.about-piece-editor .composer-feedback { min-height: 37px; margin: 15px 0 23px; color: var(--muted); font-size: 9px; line-height: 1.8; }
+.about-piece-editor .composer-feedback[data-error='true'] { color: var(--ink); }
+.about-piece-editor :is(.composer-settings, .composer-events, .composer-downloads, .composer-credit) { border-top: 1px solid var(--line); }
+.about-piece-editor :is(.composer-settings, .composer-events, .composer-downloads, .composer-credit) > summary { display: flex; align-items: center; gap: 12px; min-height: 53px; cursor: pointer; list-style: none; font: 10px 'Courier New', monospace; color: var(--ink); }
+.about-piece-editor summary::-webkit-details-marker { display: none; }
+.about-piece-editor .composer-summary-meta { margin-left: auto; color: var(--muted); font-size: 9px; }
+.about-piece-editor .composer-disclosure-mark { margin-left: auto; font: 18px Arial, sans-serif; transition: transform 140ms ease; }
+.about-piece-editor .composer-summary-meta + .composer-disclosure-mark { margin-left: 8px; }
+.about-piece-editor details[open] > summary > .composer-disclosure-mark { transform: rotate(45deg); }
+.about-piece-editor .composer-settings-body { padding: 6px 0 24px; }
+.about-piece-editor .composer-sound { display: flex; gap: 0; }
+.about-piece-editor .composer-sound > button { flex: 1; min-height: 44px; background: transparent; border: 1px solid var(--line); font: 11px 'Courier New', monospace; }
+.about-piece-editor .composer-sound > button + button { border-left: 0; }
+.about-piece-editor .composer-sound > button[aria-pressed='true'] { background: var(--soft); box-shadow: inset 0 -2px 0 var(--ink); }
+.about-piece-editor .composer-tempo { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px 12px; margin-top: 22px; color: var(--muted); font-size: 9px; }
+.about-piece-editor .composer-tempo > input { grid-column: 1 / -1; accent-color: var(--ink); width: 100%; min-width: 0; min-height: 44px; margin: 0; cursor: pointer; }
+.about-piece-editor .composer-document-footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid var(--line); padding: 15px 0 12px; margin-top: 33px; }
+.about-piece-editor .composer-capacity { display: flex; flex-wrap: wrap; gap: 6px 12px; color: var(--muted); font-size: 9px; line-height: 1.8; margin: 0; }
+.about-piece-editor .composer-clear { flex-shrink: 0; min-height: 44px; padding: 8px 0; background: transparent; border: 0; font-size: 9px; }
+.about-piece-editor .composer-clear:hover:not(:disabled) { text-decoration: underline; text-underline-offset: 5px; }
+.about-piece-editor .composer-event-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; list-style: none; padding: 0; margin: 2px 0 25px; max-height: 365px; overflow-y: auto; overscroll-behavior-block: contain; scrollbar-width: thin; }
+.about-piece-editor .composer-event-list > li { min-width: 0; }
+.about-piece-editor .composer-event-list button { display: flex; align-items: center; gap: 13px; width: 100%; min-height: 48px; padding: 8px 7px; border: 0; border-bottom: 1px solid var(--line); text-align: left; background: transparent; font-family: Georgia, serif; font-size: 17px; }
+.about-piece-editor .composer-event-list button:is(:hover, [aria-pressed='true'], [aria-current='step']) { background: var(--soft); }
+.about-piece-editor .composer-event-index { font-size: 8px; color: var(--muted); }
+.about-piece-editor .composer-event-duration { margin-left: auto; font-size: 8px; color: var(--muted); white-space: nowrap; }
+.about-piece-editor .composer-event-list button > span:last-child { font-size: 13px; color: var(--muted); }
+.about-piece-editor .composer-download-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 2px 0 23px; }
+.about-piece-editor .composer-download-actions > button { display: grid; grid-template-columns: 1fr auto; gap: 9px 16px; align-items: center; min-height: 74px; padding: 14px 0; background: transparent; border: 0; border-bottom: 1px solid var(--line); text-align: left; font: 22px Georgia, serif; }
+.about-piece-editor .composer-download-actions > button > .mono { grid-column: 1; font-size: 9px; color: var(--muted); }
+.about-piece-editor .composer-download-actions > button > span:last-child { grid-column: 2; grid-row: 1 / span 2; font-size: 24px; }
+.about-piece-editor .composer-download-actions > button:hover:not(:disabled) { border-color: var(--ink); }
+.about-piece-editor .composer-credit > div { max-width: 620px; padding: 0 0 22px; }
+.about-piece-editor .composer-credit p { color: var(--muted); font-size: 15px; line-height: 1.8; margin: 8px 0 18px; }
+.about-piece-editor .composer-credit a { display: inline-flex; align-items: center; gap: 24px; min-height: 44px; color: var(--ink); font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 1020px) {
+  .about-piece-editor .composer-workspace { grid-template-columns: minmax(0, 1fr) minmax(318px, .92fr); gap: 28px; }
+  .about-piece-editor .composer-event-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .about-piece-editor .composer-masthead { gap: 22px; }
+  .about-piece-editor .composer-transport > button { padding: 10px 12px; }
+  .about-piece-editor .composer-history-controls { margin-left: 2px; }
+}
+@media (max-width: 900px) {
+  .about-piece-editor .composer-masthead { align-items: start; flex-direction: column; gap: 23px; padding: 23px 0 25px; }
+  .about-piece-editor .composer-title-block { width: 100%; }
+  .about-piece-editor .composer-title-label > input { font-size: clamp(30px, 6vw, 44px); }
+  .about-piece-editor .composer-transport { width: 100%; }
+  .about-piece-editor .composer-transport > .composer-play { min-width: 115px; }
+  .about-piece-editor .composer-history-controls { margin-left: auto; }
+  .about-piece-editor .composer-workspace { grid-template-columns: minmax(0, 1fr); gap: 27px; }
+  .about-piece-editor .composer-paper { position: relative; top: auto; }
+  .about-piece-editor .composer-console { max-width: 560px; width: 100%; justify-self: center; }
+  .about-piece-editor .composer-register > button { padding-top: 7px; padding-bottom: 12px; }
+  .about-piece-editor .composer-document-footer { margin-top: 24px; }
+  .about-piece-editor .composer-signature,
+  .about-piece-editor .composer-feedback,
+  .about-piece-editor .composer-entry-heading > .mono,
+  .about-piece-editor .composer-settings > summary,
+  .about-piece-editor .composer-register > button > small,
+  .about-piece-editor .composer-pagination { font-size: 11px; }
+}
+@media (max-width: 480px) {
+  .about-piece-editor .composer-signature { gap: 9px 17px; }
+  .about-piece-editor .composer-masthead { padding-top: 21px; }
+  .about-piece-editor .composer-title-label > input { min-height: 48px; }
+  .about-piece-editor .composer-transport > button { min-height: 46px; padding: 9px 15px; }
+  .about-piece-editor .composer-history-controls > button { width: 44px; height: 46px; }
+  .about-piece-editor .composer-pagination { font-size: 11px; }
+  .about-piece-editor .composer-pagination > button { gap: 8px; }
+  .about-piece-editor .composer-keyboard { height: 146px; }
+  .about-piece-editor .composer-key-natural { height: 142px; }
+  .about-piece-editor .composer-key-sharp { height: 85px; }
+  .about-piece-editor .composer-event-list { grid-template-columns: minmax(0, 1fr); gap: 0; max-height: 300px; }
+  .about-piece-editor .composer-event-list button { padding: 9px 8px; font-size: 18px; }
+  .about-piece-editor .composer-event-duration { font-size: 9px; }
+  .about-piece-editor .composer-capacity { display: block; max-width: 205px; font-size: 8px; }
+  .about-piece-editor .composer-capacity > span { padding: 0 4px; }
+  .about-piece-editor .composer-download-actions { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .about-piece-editor .composer-download-actions > button { min-height: 73px; font-size: 23px; }
+  .about-piece-editor .composer-credit p { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-piece-editor *, .about-piece-editor *::before, .about-piece-editor *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}

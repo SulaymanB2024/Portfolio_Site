@@ -5,6 +5,7 @@ import { resumeChapters as chapterById } from './resume-chapters'
 import ResumeDocument from './ResumeDocument'
 import { displayDate } from './types'
 import { resumeSectionFromHash, withoutResumeSection } from './resume-navigation'
+import { createLatestFrame } from '../latest-frame'
 import './resume-explorer.css'
 
 const resumeChapters = [chapterById.chegg, chapterById.sapien, chapterById.void, chapterById['internship-deadlines'], chapterById['creative-trace'], chapterById['venture-labs'], chapterById['ai-venture']]
@@ -30,11 +31,18 @@ export default function ResumePage({ dark }: { dark: boolean }) {
   const documentSection = useRef<HTMLDivElement>(null)
   const focusOnOpen = useRef(false)
   const origin = useRef<HTMLButtonElement | null>(null)
+  const focusReturn = useRef<ReturnType<typeof createLatestFrame> | null>(null)
   const roleButtons = useRef<(HTMLButtonElement | null)[]>([])
   const selectedRole = selection?.kind === 'role' ? selection.index : -1
   const chapter = selectedRole >= 0 ? resumeChapters[selectedRole] : null
   const role = selectedRole >= 0 ? profile.experience[selectedRole] : null
   const selectionKey = selection?.kind === 'role' ? `role-${selection.index}` : selection?.kind
+
+  useEffect(() => {
+    const action = createLatestFrame()
+    focusReturn.current = action
+    return () => { action.dispose(); if (focusReturn.current === action) focusReturn.current = null }
+  }, [])
 
   useEffect(() => {
     if (!selection || (!matchMedia('(max-width: 900px)').matches && !focusOnOpen.current)) return
@@ -47,6 +55,7 @@ export default function ResumePage({ dark }: { dark: boolean }) {
 
   useEffect(() => {
     const reachSection = () => {
+      focusReturn.current?.cancel()
       const section = resumeSectionFromHash(location.hash)
       setRequestedSection(section)
       if (section) setDocumentOpen(true)
@@ -67,28 +76,34 @@ export default function ResumePage({ dark }: { dark: boolean }) {
   }, [documentOpen, requestedSection])
 
   function toggleDocument() {
+    focusReturn.current?.cancel()
     const closing = documentOpen
     setRequestedSection(null)
     history.replaceState(history.state, '', withoutResumeSection(location.hash))
     setDocumentOpen(!closing)
-    if (closing) requestAnimationFrame(() => {
-      documentToggle.current?.focus({ preventScroll: true })
-      documentToggle.current?.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+    const target = documentToggle.current
+    if (closing) focusReturn.current?.schedule(() => {
+      if (!target?.isConnected) return
+      target.focus({ preventScroll: true })
+      target.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
     })
   }
 
   function choose(next: Selection, button?: HTMLButtonElement, focus = false) {
+    focusReturn.current?.cancel()
     focusOnOpen.current = focus || next.kind !== 'role'
     if (button) origin.current = button
     setSelection(next)
   }
   function close() {
+    const target = origin.current
     setSelection(null)
-    requestAnimationFrame(() => {
-      origin.current?.focus({ preventScroll: true })
-      const bounds = origin.current?.getBoundingClientRect()
+    focusReturn.current?.schedule(() => {
+      if (!target?.isConnected) return
+      target.focus({ preventScroll: true })
+      const bounds = target.getBoundingClientRect()
       if (bounds && (matchMedia('(max-width: 900px)').matches || bounds.top < 0 || bounds.bottom > innerHeight)) {
-        origin.current?.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+        target.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
       }
     })
   }
@@ -122,7 +137,7 @@ export default function ResumePage({ dark }: { dark: boolean }) {
                 onClick={event => index === selectedRole ? close() : choose({ kind: 'role', index }, event.currentTarget, event.detail === 0)}>
                 <span className="rx-node-index"><span>{String(index + 1).padStart(2, '0')}</span><i /><span className="rx-node-open" aria-hidden="true">{index === selectedRole ? '−' : '+'}</span></span>
                 <span className="rx-node-name">{item.shortName}</span><span className="rx-node-discipline">{item.discipline}</span>
-              </button>{index === 1 && <div className="rx-sculpture"><Art kind="helmet" dark={dark} cameraDistanceScale={.72} /></div>}</Fragment>)}
+              </button>{index === 1 && <div className="rx-sculpture"><Art kind="helmet" dark={dark} cameraDistanceScale={.72} idleMotion={false} deferUntilVisible /></div>}</Fragment>)}
             </div>
           </div>
           <div className="rx-chapter-slot" id="resume-chapter">

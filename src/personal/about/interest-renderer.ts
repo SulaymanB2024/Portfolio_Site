@@ -4,7 +4,8 @@ import { PortfolioRuntime } from '../portfolio-runtime'
 import { createPortfolioModelLoader } from '../portfolio-model-loader'
 import { portfolioAssetUrl } from '../portfolio-assets'
 import { disposeModel } from '../../model-resources'
-import { printPixelRatio, readPrintPalette } from '../print-palette'
+import { readPrintPalette } from '../print-palette'
+import { interestFraming, interestPixelRatio } from './interest-layout'
 import type { InterestId } from './about-content'
 import type { PhraseNote } from './music-phrase'
 import type { ChessSceneState } from './ChessGame'
@@ -31,17 +32,23 @@ type Specimen = { id: InterestId; group: THREE.Group; model: THREE.Group; pose: 
 const ids: InterestId[] = ['bass', 'score', 'knight']
 const VERTEX = 'varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.0,1.0); }'
 const FRAGMENT = `
-uniform sampler2D image; uniform vec3 ink; uniform vec2 cssResolution; uniform float motionSeconds; varying vec2 vUv;
+uniform sampler2D image; uniform vec3 ink; uniform vec2 cssResolution; uniform float motionSeconds; uniform float chessPolarity; varying vec2 vUv;
 ${PORTFOLIO_DITHER_GLSL}
 void main(){
   vec4 model=texture2D(image,vUv);
   if(model.a<=.0001){gl_FragColor=vec4(0.0);return;}
   vec2 pixel=floor(vUv*cssResolution);
-  float threshold=portfolioLiveThreshold(portfolioBayer4(pixel),pixel,motionSeconds,.025);
+  float threshold=portfolioLiveThreshold(portfolioBayer4(pixel),pixel,motionSeconds,.008);
   // NormalBlending into transparent black stores premultiplied target color.
   vec3 straightColor=model.a>0.0001?model.rgb/model.a:vec3(0.0);
   float gray=portfolioDisplayLuminance(straightColor);
-  float shade=mix(1.0-gray,1.0-step(threshold,gray),.80);
+  // A playable board retains light/black piece identity in the dark palette.
+  gray=mix(gray,1.0-gray,chessPolarity);
+  // A continuous tonal curve carries the carving; grain recedes at fine highlights
+  // and dark edges, where binary coverage previously erased the surface detail.
+  float coverage=1.0-pow(clamp(gray,0.0,1.0),1.12);
+  float grain=.16*smoothstep(.025,.20,coverage)*(1.0-smoothstep(.75,.98,coverage));
+  float shade=mix(coverage,step(threshold,coverage),grain);
   gl_FragColor=vec4(ink,model.a*shade);
   #include <colorspace_fragment>
 }`
@@ -63,7 +70,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   // A quieter fill leaves carved recesses and embossed notation legible.
   scene.add(key, rim, new THREE.HemisphereLight(0xffffff, 0x444444, .65))
   const palette = readPrintPalette(canvas, dark)
-  const shader = new THREE.ShaderMaterial({ vertexShader: VERTEX, fragmentShader: FRAGMENT, transparent: true, depthTest: false, depthWrite: false, toneMapped: false, uniforms: { image: { value: target.texture }, ink: { value: palette.ink }, cssResolution: { value: new THREE.Vector2(1, 1) }, motionSeconds: { value: 0 } } })
+  const shader = new THREE.ShaderMaterial({ vertexShader: VERTEX, fragmentShader: FRAGMENT, transparent: true, depthTest: false, depthWrite: false, toneMapped: false, uniforms: { image: { value: target.texture }, ink: { value: palette.ink }, cssResolution: { value: new THREE.Vector2(1, 1) }, motionSeconds: { value: 0 }, chessPolarity: { value: 0 } } })
   const quadGeometry = new THREE.PlaneGeometry(2, 2)
   const post = new THREE.Scene()
   post.add(new THREE.Mesh(quadGeometry, shader))
@@ -77,6 +84,8 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   const runtime = new PortfolioRuntime()
   const controller = new AbortController()
   const media = matchMedia('(prefers-reduced-motion: reduce)')
+  const stackedMedia = matchMedia('(max-width: 900px)')
+  const touchMedia = matchMedia('(any-pointer: coarse), (max-width: 900px)')
   const geometries = new Set<THREE.BufferGeometry>()
   const materials = new Set<THREE.Material>()
   const textures = new Set<THREE.Texture>()
@@ -102,14 +111,17 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   const closureGeometry = new THREE.BoxGeometry(.12,.010,.013), checkpointGeometry = new THREE.TorusGeometry(.044,.006,6,20), trailGeometry = new THREE.SphereGeometry(.013,10,6)
   geometries.add(closureGeometry);geometries.add(checkpointGeometry);geometries.add(trailGeometry)
   let selected: InterestId | null = null
+  let darkTheme = dark
   let playing = !media.matches
   let disposed = false
   let lost = false
   let visible = true
   let raf = 0
+  let frameTimer = 0
   let urgent = true
   let width = 1
   let height = 1
+  let galleryHeight = 1
   let lastStats = -Infinity
   let frames = 0
   let settling = true
@@ -134,18 +146,27 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   canvas.dataset.renderPasses = '2'
 
   function active() { return !disposed && !lost && visible && !document.hidden }
-  function wake() { urgent = true; if (active() && !raf) raf = requestAnimationFrame(render) }
+  function idleCursor() { return !selected || selected === 'bass' || selected === 'knight' && gameState ? 'pointer' : 'grab' }
+  function schedule(now = performance.now()) {
+    if (!active() || raf || frameTimer) return
+    const delay = urgent ? 0 : runtime.paintDelay(now)
+    if (delay > 3) frameTimer = window.setTimeout(() => { frameTimer = 0; if (active()) raf = requestAnimationFrame(render) }, delay)
+    else raf = requestAnimationFrame(render)
+  }
+  function cancelFrame() { cancelAnimationFrame(raf); clearTimeout(frameTimer); raf = frameTimer = 0 }
+  function wake() { urgent = true; if (frameTimer) { clearTimeout(frameTimer); frameTimer = 0 } schedule() }
   function measure(shouldWake = true) {
     const rect = canvas.getBoundingClientRect()
     width = Math.max(1, rect.width); height = Math.max(1, rect.height)
-    const ratio = printPixelRatio(width, height, Math.min(devicePixelRatio || 1, 1.5)) * runtime.scale
+    if (!selected) galleryHeight = Math.max(1, canvas.parentElement?.clientHeight ?? height)
+    const ratio = interestPixelRatio(width, height, devicePixelRatio || 1, touchMedia.matches) * runtime.scale
     renderer.setPixelRatio(ratio)
     renderer.setSize(width, height, false)
     const pixels = renderer.getDrawingBufferSize(drawingSize)
     target.setSize(pixels.x, pixels.y)
     shader.uniforms.cssResolution.value.set(width, height)
     camera.aspect = width / height
-    camera.position.set(0, 0, width < 700 ? 8 : 6.5)
+    camera.position.set(0, 0, interestFraming(width, height, stackedMedia.matches, selected).cameraZ)
     camera.updateProjectionMatrix()
     if (import.meta.env.DEV) canvas.dataset.renderPixels = String(pixels.x * pixels.y)
     settling = true
@@ -199,7 +220,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   function render(now: number) {
     raf = 0
     if (!active()) { runtime.suspend(); stats(true); return }
-    if (!runtime.canPaint(now, urgent)) { raf = requestAnimationFrame(render); return }
+    if (!runtime.canPaint(now, urgent)) { schedule(now); return }
     urgent = false
     const live = playing && !media.matches && specimens.length > 0
     if (runtime.advance(now, live, !!drag)) measure(false)
@@ -208,15 +229,19 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     const time = runtime.seconds
     shader.uniforms.motionSeconds.value = time
     settling = false
-    const narrow = width < 700
+    shader.uniforms.chessPolarity.value = approach(shader.uniforms.chessPolarity.value, darkTheme && selected === 'knight' && gameState ? 1 : 0, dt)
+    const narrow = stackedMedia.matches
+    const framing = interestFraming(width, height, narrow, selected)
+    camera.position.z = approach(camera.position.z, framing.cameraZ, dt)
     for (const item of specimens) {
       const index = ids.indexOf(item.id)
       const focus = selected === item.id
       const hidden = selected !== null && !focus
-      const galleryX = narrow ? (index - 1) * 1.18 : (index - 1) * 2.0
-      const galleryY = item.id === 'bass' ? .16 : (narrow ? -.63 : -.20)
-      const desiredScale = hidden ? .42 : focus ? (item.id === 'knight' ? 1.24 : 1.10) : item.id === 'bass' ? 1 : (narrow ? .66 : .82)
-      const desiredX = hidden ? (index === 0 ? -4.8 : 4.8) : focus ? (narrow ? 0 : -.94) : galleryX
+      const galleryX = (index - 1) * framing.columnSpacing
+      const galleryY = item.id === 'bass' ? .08 : (narrow ? -.48 : -.04)
+      const galleryScale = (item.id === 'bass' ? framing.bassScale : item.id === 'score' ? framing.scoreScale : framing.knightScale) * Math.min(1,galleryHeight/height)
+      const desiredScale = hidden ? .42 : focus ? (item.id === 'knight' ? framing.focusedKnightScale : item.id === 'score' ? 1.38 : 1.10) : galleryScale
+      const desiredX = hidden ? (index === 0 ? -framing.columnSpacing*3 : framing.columnSpacing*3) : focus ? framing.focusX : galleryX
       const desiredY = focus ? .04 : galleryY
       item.group.position.x = approach(item.group.position.x, desiredX, dt)
       item.group.position.y = approach(item.group.position.y, desiredY, dt)
@@ -236,6 +261,8 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       const pitch = item.id === 'knight' ? (focus ? .67 + manualPitch : .02) : item.id === 'score' ? -.10 + (focus ? manualPitch : 0) : focus ? manualPitch : 0
       if (settleInterestView(item.view, baseYaw + (focus ? manualYaw : 0), pitch, dt, media.matches)) settling = true
       composeInterestView(item.view, index, time, media.matches, item.pose.rotation)
+      // A live game keeps its squares steady enough to target without losing idle motion.
+      if (focus && item.id === 'knight') item.pose.rotation.y = item.view.yaw + (item.pose.rotation.y - item.view.yaw) * .18
       item.pose.rotation.z = item.id === 'bass' ? -.055 : item.id === 'score' && !media.matches ? Math.sin(time * .44) * .025 : 0
       item.pose.position.y = item.id !== 'knight' && !media.matches ? Math.sin(time * .65 + index) * .035 : 0
       if (item.bow) item.bow.position.x = item.bowX + (!media.matches ? Math.sin(time * .9) * .10 : 0) + (bassArticulation === 'arco' && !media.matches ? Math.sin(time * 3.2) * Math.max(...pulses) * .18 : 0)
@@ -256,7 +283,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       if (item.pen) item.pen.rotation.z = !media.matches ? Math.sin(time * .8) * .045 : 0
       if (item.knight) {
         item.knight.visible = !focus || !gameState
-        if (item.chess) { item.chess.root.visible = focus && !!gameState; if (item.chess.root.visible && item.chess.tick(dt, media.matches)) settling = true }
+        if (item.chess) { item.chess.root.visible = focus && !!gameState; item.chess.setOpacity(item.opacity*item.boardOpacity); if (item.chess.root.visible && item.chess.tick(dt, media.matches)) settling = true }
         item.knight.scale.setScalar(approach(item.knight.scale.x, focus ? 1 : 3.1, dt))
         if (!focus) {
           item.knight.position.x = approach(item.knight.position.x, 0, dt)
@@ -293,7 +320,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       averageMs = frames === 1 ? duration : averageMs * .94 + duration * .06
     }
     stats(frames === 1 || (!live && !settling))
-    if (live || settling) raf = requestAnimationFrame(render)
+    if (live || settling) schedule(now)
     else runtime.suspend()
   }
 
@@ -359,10 +386,17 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
         node = node.parent
       }
     }
+    // Each gallery column is a target, including the breathing room around its object.
+    if (!selected) {
+      const rect = canvas.getBoundingClientRect()
+      const index = Math.max(0, Math.min(2, Math.floor((event.clientX - rect.left) / rect.width * 3)))
+      events.choose(ids[index])
+    }
   }
   canvas.addEventListener('pointerdown', event => { if (!event.isPrimary || event.button !== 0) return; drag = { id: event.pointerId, x: event.clientX, y: event.clientY, previousX: event.clientX, previousY: event.clientY, moved: false, intent: 'pending' } }, { signal: controller.signal })
   canvas.addEventListener('pointermove', event => {
-    if (!drag) { canvas.style.cursor = intersections(event).length ? 'pointer' : 'grab'; return }
+    // Hover only changes the cursor. Exact triangle picking is reserved for a click.
+    if (!drag) { canvas.style.cursor = idleCursor(); return }
     if (event.pointerId !== drag.id) return
     const dx = event.clientX - drag.x, dy = event.clientY - drag.y
     if (Math.hypot(dx, dy) > 7) {
@@ -371,21 +405,24 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     }
     if (drag.intent === 'horizontal' && selected) {
       canvas.setPointerCapture(event.pointerId)
+      canvas.style.cursor = 'grabbing'
       manualYaw = THREE.MathUtils.clamp(manualYaw + (event.clientX - drag.previousX) * .005, -.7, .7)
       manualPitch = THREE.MathUtils.clamp(manualPitch + (event.clientY - drag.previousY) * .003, -.16, .16)
       wake()
     }
     drag.previousX = event.clientX; drag.previousY = event.clientY
   }, { signal: controller.signal })
-  canvas.addEventListener('pointerup', event => { if (!drag || event.pointerId !== drag.id) return; if (!drag.moved) interact(event); drag = null; if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId) }, { signal: controller.signal })
-  canvas.addEventListener('pointercancel', event => { if (event.pointerId === drag?.id) drag = null }, { signal: controller.signal })
-  canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); lost = true; runtime.suspend(); stats(true); cancelAnimationFrame(raf); raf = 0; canvas.dataset.state = 'error'; status('error') }, { signal: controller.signal })
+  canvas.addEventListener('pointerup', event => { if (!drag || event.pointerId !== drag.id) return; if (!drag.moved) interact(event); drag = null; canvas.style.cursor = idleCursor(); if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId) }, { signal: controller.signal })
+  canvas.addEventListener('pointercancel', event => { if (event.pointerId === drag?.id) { drag = null; canvas.style.cursor = idleCursor() } }, { signal: controller.signal })
+  canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); lost = true; runtime.suspend(); stats(true); cancelFrame(); canvas.dataset.state = 'error'; status('error') }, { signal: controller.signal })
   canvas.addEventListener('webglcontextrestored', () => { lost = false; runtime.suspend(); status('ready'); canvas.dataset.state = 'ready'; wake() }, { signal: controller.signal })
-  document.addEventListener('visibilitychange', () => { runtime.suspend(); if (document.hidden) { cancelAnimationFrame(raf); raf = 0; stats(true) } else wake() }, { signal: controller.signal })
+  document.addEventListener('visibilitychange', () => { runtime.suspend(); if (document.hidden) { cancelFrame(); stats(true) } else wake() }, { signal: controller.signal })
   media.addEventListener('change', () => { runtime.suspend(); wake() }, { signal: controller.signal })
+  stackedMedia.addEventListener('change', () => measure(), { signal: controller.signal })
+  touchMedia.addEventListener('change', () => measure(), { signal: controller.signal })
   const resize = new ResizeObserver(() => measure())
   resize.observe(canvas)
-  const observer = new IntersectionObserver(entries => { visible = entries[0]?.isIntersecting ?? false; runtime.suspend(); if (visible) wake(); else { cancelAnimationFrame(raf); raf = 0; stats(true) } })
+  const observer = new IntersectionObserver(entries => { visible = entries[0]?.isIntersecting ?? false; runtime.suspend(); if (visible) wake(); else { cancelFrame(); stats(true) } })
   observer.observe(canvas)
   measure()
 
@@ -476,9 +513,9 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   }
 
   return {
-    select(id) { selected = id; jumping = null; manualYaw = 0; manualPitch = 0; restoreMarkers(); settling = true; wake() },
+    select(id) { selected = id; if(!id)galleryHeight=Math.max(1,canvas.parentElement?.clientHeight??height); jumping = null; manualYaw = 0; manualPitch = 0; canvas.style.cursor = idleCursor(); restoreMarkers(); settling = true; wake() },
     setPlaying(value) { if (playing === value) return; playing = value; runtime.suspend(); stats(true); wake() },
-    setDark(value) { shader.uniforms.ink.value.copy(readPrintPalette(canvas, value).ink); wake() },
+    setDark(value) { darkTheme = value; shader.uniforms.ink.value.copy(readPrintPalette(canvas, value).ink); wake() },
     pluck(index) { pulses[index] = .9; bassString = index; wake() },
     setNotes(notes) { noteSequence = notes; wake() },
     setPuzzle(next, moves, destination = 'h8', path = [], blocked = [], targets = []) {
@@ -493,7 +530,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     resetView() { manualYaw = 0; manualPitch = 0; wake() },
     dispose() {
       if (disposed) return
-      stats(true); disposed = true; runtime.suspend(); cancelAnimationFrame(raf); controller.abort(); loader.dispose(); resize.disconnect(); observer.disconnect()
+      stats(true); disposed = true; runtime.suspend(); cancelFrame(); controller.abort(); loader.dispose(); resize.disconnect(); observer.disconnect()
       for (const specimen of specimens) { specimen.boardBatch?.dispose(); specimen.boardLabels?.dispose() }
       for (const geometry of geometries) geometry.dispose()
       for (const material of materials) material.dispose()

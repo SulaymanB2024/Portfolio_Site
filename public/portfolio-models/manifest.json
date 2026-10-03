@@ -370,7 +370,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 2.5074205722504424e-7
+        "normalizedBoundsError": 2.5074205722504424e-07
       },
       "settings": {
         "geometry": "existing-balanced"
@@ -562,7 +562,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 0.0000015497207593351824
+        "normalizedBoundsError": 1.5497207593351824e-06
       },
       "settings": {
         "reorder": "performance",
@@ -577,34 +577,34 @@
       "reductionPercent": 85.76503323543052
     },
     "work-sapien": {
-      "url": "portfolio-models/work-sapien.glb?v=b1c9c11f84ea",
+      "url": "portfolio-models/work-sapien.glb?v=c774fc717926",
       "path": "public/portfolio-models/work-sapien.glb",
-      "bytes": 215952,
-      "sha256": "b1c9c11f84ead56d87a900ac0a45da0039f1abc19c3b4c1e6a4dd58da4506df5",
+      "bytes": 133440,
+      "sha256": "c774fc71792617459860135cff57338a39fb5e37e1730a14e325fa69ab422938",
       "strategy": "draco-only",
       "source": {
         "path": "public/work-studies/sapien.glb",
-        "bytes": 945796,
-        "sha256": "3a1592499415859f03dd3efe2107133b2cf821875e2e55d672ffd29b8f6bf0d2",
+        "bytes": 916920,
+        "sha256": "44ed8ea389281c61744a90d2d089d74ad5f2fabae32d9d843e9917966eefabcf",
         "stats": {
-          "triangles": 46832,
-          "vertices": 27332,
-          "primitives": 9,
-          "meshes": 9,
+          "triangles": 29256,
+          "vertices": 30526,
+          "primitives": 8,
+          "meshes": 8,
           "materials": 4,
-          "nodes": 9,
+          "nodes": 8,
           "animations": 0,
           "skins": 0,
           "bounds": {
             "min": [
-              -0.5780882239341736,
-              -1,
-              -0.6157472133636475
+              -0.7570917535622117,
+              -1.0000000486837406,
+              -0.7505081863952626
             ],
             "max": [
-              0.5780882239341736,
-              0.9999999923819486,
-              0.6157472133636475
+              0.7570917677085403,
+              1,
+              0.7505081920074473
             ]
           },
           "textures": [],
@@ -623,24 +623,24 @@
         }
       },
       "stats": {
-        "triangles": 46832,
-        "vertices": 27356,
-        "primitives": 9,
-        "meshes": 9,
+        "triangles": 29256,
+        "vertices": 30526,
+        "primitives": 8,
+        "meshes": 8,
         "materials": 4,
-        "nodes": 9,
+        "nodes": 8,
         "animations": 0,
         "skins": 0,
         "bounds": {
           "min": [
-            -0.5780882239341736,
-            -1,
-            -0.6157472133636475
+            -0.7570917535622117,
+            -1.0000000486837406,
+            -0.7505081863952626
           ],
           "max": [
-            0.5780882239341736,
-            0.999999485742468,
-            0.6157456636428833
+            0.7570885490577224,
+            1,
+            0.7505116490768443
           ]
         },
         "textures": [],
@@ -665,7 +665,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 7.748603850315412e-7
+        "normalizedBoundsError": 1.7285346564105617e-06
       },
       "settings": {
         "reorder": "performance",
@@ -677,7 +677,7 @@
         "quantizeTexcoord": 16,
         "simplification": false
       },
-      "reductionPercent": 77.16716924157006
+      "reductionPercent": 85.4469310299699
     },
     "work-investing-markets": {
       "url": "portfolio-models/work-investing-markets.glb?v=1674cef12e6c",
@@ -768,7 +768,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 8.940697249215677e-7
+        "normalizedBoundsError": 8.940697249215677e-07
       },
       "settings": {
         "reorder": "performance",
@@ -871,7 +871,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 0.0000016093254089355469
+        "normalizedBoundsError": 1.6093254089355469e-06
       },
       "settings": {
         "reorder": "performance",
@@ -974,7 +974,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 1.6880221413370647e-8
+        "normalizedBoundsError": 1.6880221413370647e-08
       },
       "settings": {
         "reorder": "performance",
@@ -1077,7 +1077,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 2.731879536500695e-7
+        "normalizedBoundsError": 2.731879536500695e-07
       },
       "settings": {
         "reorder": "performance",
@@ -1180,7 +1180,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 5.308538596204838e-7
+        "normalizedBoundsError": 5.308538596204838e-07
       },
       "settings": {
         "reorder": "performance",

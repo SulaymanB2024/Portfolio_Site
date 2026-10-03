@@ -13,6 +13,7 @@
 .atlas-portfolio-copy p { margin:0 0 24px; font:18px/1.65 Georgia,serif; max-width:340px; }
 .atlas-portfolio-copy>a { display:inline-flex; align-items:center; gap:32px; min-height:44px; border-bottom:1px solid var(--ink); font:12px/1.6 Arial,sans-serif; }
 .atlas-portfolio-feature .product-evidence { margin:0; }
+.atlas-portfolio-feature .atlas-product-sculpture { height:clamp(320px,36vw,460px); }
 .atlas-portfolio-feature figcaption { grid-template-columns:1fr; gap:6px; }
 .offer-example-heading { display:flex; justify-content:space-between; align-items:start; gap:24px; padding-top:24px; border-top:1px solid var(--ink); }
 .offer-example-heading>div>span { font:12px/1.6 Arial,sans-serif; color:var(--muted); }

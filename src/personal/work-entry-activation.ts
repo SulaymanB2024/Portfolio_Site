@@ -10,6 +10,7 @@ export function createStudyActivationGate(clock: ActivationClock = {
   let pending: number | null = null
   let pointer: { id: number; x: number; y: number; touch: boolean } | null = null
   let blocked = false
+  let stationaryTouch = false
   function cancel() {
     if (pending !== null) clock.clear(pending)
     pending = null
@@ -19,6 +20,7 @@ export function createStudyActivationGate(clock: ActivationClock = {
     start(id: number, x: number, y: number, type: string) {
       cancel()
       blocked = false
+      stationaryTouch = false
       pointer = { id, x, y, touch: type === 'touch' }
     },
     move(id: number, x: number, y: number) {
@@ -29,12 +31,14 @@ export function createStudyActivationGate(clock: ActivationClock = {
     end(id: number, dragging: boolean) {
       if (!pointer || pointer.id !== id) return
       blocked ||= dragging
+      stationaryTouch = pointer.touch && !blocked
       pointer = null
     },
-    interrupt() { cancel(); pointer = null; blocked = true },
+    interrupt() { cancel(); pointer = null; blocked = true; stationaryTouch = false },
     queue(activate: () => void) {
       cancel()
       if (blocked) return
+      if (stationaryTouch) { stationaryTouch = false; activate(); return }
       pending = clock.set(() => { pending = null; activate() }, STUDY_CLICK_DELAY)
     },
     cancel,

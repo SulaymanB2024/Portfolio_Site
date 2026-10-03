@@ -1,4 +1,7 @@
 const clamp = (value: number) => Number.isNaN(value) ? 0 : Math.max(0, Math.min(1, value))
+const sculptureDirections = [1, 1, .65, -.8, 1.05] as const
+const cameraDirections = [1, 1, -.55, -1, .85] as const
+const cameraLifts = [.02, .035, .09, -.015, .045] as const
 
 /** Zero velocity and acceleration at both ends preserve the study's reading hold. */
 export function easeBetween(value: number, start: number, end: number) {
@@ -8,28 +11,96 @@ export function easeBetween(value: number, start: number, end: number) {
 
 export function thresholdMotion(local: number) {
   return {
-    travel: easeBetween(local, .20, .80),
-    departure: easeBetween(local, .18, .68),
-    arrival: easeBetween(local, .34, .82),
-    outgoingLinks: 1 - easeBetween(local, .20, .31),
-    incomingLinks: easeBetween(local, .82, .90),
-    outgoingCategory: 1 - easeBetween(local, .31, .53),
-    incomingCategory: easeBetween(local, .59, .79),
+    travel: pacedTravel((local - .12) / .50),
+    departure: easeBetween(local, .10, .54),
+    arrival: easeBetween(local, .28, .68),
+    outgoingLinks: 1 - easeBetween(local, .10, .16),
+    incomingLinks: easeBetween(local, .69, .74),
+    outgoingCategory: 1 - easeBetween(local, .20, .34),
+    incomingCategory: easeBetween(local, .44, .62),
   }
 }
 
-export function sculpturePose(local: number, incoming: boolean) {
+export const MOBILE_TITLE_TIMING = { eraseStart: .26, eraseEnd: .43, switch: .46, revealStart: .50, revealEnd: .68 } as const
+
+export const TITLE_TIMING = { eraseStart: .20, eraseEnd: .35, switch: .38, revealStart: .44, revealEnd: .67 } as const
+
+/** Short acceleration ramps around a steady central expansion. */
+export function pacedTravel(value: number): number {
+  const t = clamp(value), ramp = .26, normalization = 1 - ramp
+  if (t < ramp) return (t / 2 - ramp * Math.sin(Math.PI * t / ramp) / (2 * Math.PI)) / normalization
+  if (t > 1 - ramp) return 1 - pacedTravel(1 - t)
+  return (t - ramp / 2) / normalization
+}
+
+export function sculpturePose(local: number, incoming: boolean, index = 0) {
   const motion = thresholdMotion(local)
   const amount = incoming ? 1 - motion.arrival : motion.departure
   if (amount === 0) return { scale: 1, yaw: 0, pitch: 0, roll: 0, x: 0, y: 0, articulation: 0 }
   return {
-    scale: incoming ? 1 - .06 * amount : 1 + .12 * amount,
-    yaw: (incoming ? -.12 : .16) * amount,
-    pitch: (incoming ? .025 : -.035) * amount,
-    roll: (incoming ? .02 : -.015) * amount,
-    x: (incoming ? .10 : .05) * amount,
-    y: (incoming ? -.04 : -.02) * amount,
-    articulation: (incoming ? -.06 : .14) * amount,
+    scale: 1 + (incoming ? .045 : .025) * amount,
+    yaw: (incoming ? -.16 : .14) * amount * sculptureDirections[index],
+    pitch: (incoming ? .018 : -.025) * amount,
+    roll: (incoming ? .006 : -.004) * amount,
+    x: 0,
+    y: 0,
+    articulation: (incoming ? -.06 : .10) * amount,
+  }
+}
+
+/** Camera and light share one authored, reversible scroll movement. */
+export function cinematicShot(local: number, incoming: boolean, mobile = false, index = 0) {
+  const motion = thresholdMotion(local), amount = incoming ? 1 - motion.arrival : motion.departure
+  const restraint = mobile ? .5 : 1
+  if (amount === 0) return { x: 0, y: 0, depth: 0, aimX: 0, aimY: 0, lightX: 0, lightY: 0 }
+  const direction = cameraDirections[index], lift = cameraLifts[index]
+  const x = (incoming ? -.13 : .20) * direction * amount
+  const y = (incoming ? -.5 : 1) * lift * amount + .018 * Math.sin(Math.PI * amount)
+  return {
+    x: x * restraint,
+    y: y * restraint,
+    depth: (incoming ? -.32 : -.28) * amount * restraint,
+    aimX: x * .22 * restraint,
+    aimY: y * .26 * restraint,
+    lightX: (incoming ? -.65 : 1.05) * direction * amount,
+    lightY: (incoming ? .15 : -.32) * amount,
+  }
+}
+
+/** A shallow optical turn resolves before the opening passes the screen edges. */
+export function portalPose(local: number, leg: number, mobile = false) {
+  const turn = 1 - easeBetween(local, .12, .48), restraint = mobile ? .55 : 1
+  const rolls = [-.035, .025, -.02, .018], directions = [1, -1, 1, -1]
+  return {
+    pitch: .06 * turn * restraint,
+    yaw: .24 * directions[leg % 4] * turn * restraint,
+    roll: rolls[leg % 4] * turn * restraint,
+    center: easeBetween(local, .20, .62),
+  }
+}
+
+export function cinematicPhase(local: number) {
+  return local <= .10 || local >= .74 ? 'held' : local < .28 ? 'approach' : local < .62 ? 'passage' : 'settle'
+}
+
+/** Re-time the authored GLB path by visible aperture area, avoiding its microscopic lead-in. */
+export function createApertureSampler(sample: ReturnType<typeof createScaleSampler>, duration: number, ratioX: number, ratioY: number) {
+  const extent = new Float64Array(257), scratch = new Float64Array(3)
+  // Smooth saturation avoids a speed kink when the wide aperture leaves one edge first.
+  const visible = (extent: number) => 1.8 * extent / (1.8 + extent)
+  const measure = () => Math.sqrt(visible(scratch[0] * ratioX) * visible(scratch[1] * ratioY))
+  for (let i = 0; i < extent.length; i++) { sample(duration * i / 256, scratch); extent[i] = measure() }
+  const start = extent[0], range = extent[256] - start
+  return <T extends ScaleValues>(progress: number, result: T): T => {
+    const p = clamp(progress)
+    if (p === 0 || p === 1 || range <= 0) return sample(p * duration, result)
+    const target = start + p * range
+    let low = 0, high = 256
+    while (high - low > 1) { const middle = (low + high) >> 1; if (extent[middle] < target) low = middle; else high = middle }
+    // Refine the inverse rather than approximating the GLB scale itself.
+    let left = low / 256, right = high / 256
+    for (let i = 0; i < 14; i++) { const middle = (left + right) / 2; sample(middle * duration, scratch); if (measure() < target) left = middle; else right = middle }
+    return sample((left + right) / 2 * duration, result)
   }
 }
 

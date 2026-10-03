@@ -31,4 +31,12 @@ float portfolioLiveThreshold(float threshold, vec2 cell, float seconds, float am
   float phase = portfolioHash(cell) * 6.28318530718;
   return clamp(threshold + sin(seconds * .65 + phase) * amount, .0078125, .9921875);
 }
+float portfolioDitherMark(float tone, float threshold, vec2 cell, float seconds, float amount) {
+  if (amount <= 0.0) return step(threshold, tone);
+  // Grain only changes a mark within its modulation range. Preserve the exact
+  // result while avoiding two sine evaluations in settled highlights/shadows.
+  if (tone < max(.0078125, threshold - amount)) return 0.0;
+  if (tone >= min(.9921875, threshold + amount)) return 1.0;
+  return step(portfolioLiveThreshold(threshold, cell, seconds, amount), tone);
+}
 `;

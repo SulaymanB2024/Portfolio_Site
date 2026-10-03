@@ -26,7 +26,7 @@ export default function AnimatedArtwork({
   const callback = useRef(onStateChange);
   const lastState = useRef<ArtworkState | undefined>(undefined);
   const [visible, setVisible] = useState(false);
-  const [entered, setEntered] = useState(false);
+  const [initializedSketch, setInitializedSketch] = useState<string | null>(null);
   const [documentVisible, setDocumentVisible] = useState(() => typeof document === 'undefined' || !document.hidden);
   const [reduced, setReduced] = useState(() => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [paintedSketch, setPaintedSketch] = useState<string | null>(null);
@@ -36,7 +36,9 @@ export default function AnimatedArtwork({
   const failed = failedSketch === artwork.sketchId;
   const ready = paintedSketch === artwork.sketchId;
   const allowed = visible && documentVisible && !reduced && !paused && !failed;
-  const canLoad = (entered || artworkPlayers.traveling(transitionName)) && !reduced && !failed;
+  // A cold paused poster needs no worker or sketch import. Once acquired, keep
+  // that player through Pause/offscreen changes and accept an existing flight.
+  const canLoad = (initializedSketch === artwork.sketchId || visible && documentVisible && !paused || artworkPlayers.traveling(transitionName)) && !reduced && !failed;
   const state: ArtworkState = failed ? 'fallback' : !ready || reduced ? 'poster' : allowed ? 'running' : 'paused';
 
   useEffect(() => { callback.current = onStateChange; }, [onStateChange]);
@@ -56,16 +58,20 @@ export default function AnimatedArtwork({
         const nextVisible = Boolean(entry?.isIntersecting && entry.intersectionRatio >= .15);
         if (!nextVisible) player.current?.setVisible(false);
         setVisible(nextVisible);
-        if (entry?.isIntersecting) setEntered(true);
       }, { threshold: [0, .15] });
       observer.observe(target);
     } else {
       setVisible(true);
-      setEntered(true);
     }
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
     const preference = () => {
-      if (query.matches) player.current?.setPlayback(false, true);
+      if (query.matches) {
+        player.current?.setPlayback(false, true);
+        // Reduced motion releases this placement; a later preference change
+        // must not treat that disposed player as a retained paused drawing.
+        setInitializedSketch(null);
+        setPaintedSketch(null);
+      }
       setReduced(query.matches);
     };
     const visibility = () => {
@@ -91,6 +97,7 @@ export default function AnimatedArtwork({
     if (!canLoad || !host.current) return;
     const owner = {};
     const current = artworkPlayers.acquire(transitionName, owner, host.current, () => createArtworkPlayer(artwork, physicalSize));
+    setInitializedSketch(artwork.sketchId);
     player.current = current;
     current.setPlayback(visible && documentVisible, paused || reduced);
     let wasPainted: boolean | undefined, wasFailed: boolean | undefined, lastActive: boolean | undefined;

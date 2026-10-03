@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Chess, gameCaption, pieceNames } from './chess-game'
 import type { Color, PieceSymbol, Square } from './vendor/chess.js'
+import './chess-interface.css'
 
 export type ChessSceneState = {
   pieces: { square: string; type: PieceSymbol; color: Color }[];
@@ -12,7 +13,7 @@ export default function ChessGame({ active, onScene, bindInteraction }: { active
   const engine = useRef(new Chess())
   const [revision, setRevision] = useState(0)
   const [selected, setSelected] = useState<Square | null>(null)
-  const [opponent, setOpponent] = useState<'local'|'computer'>('local')
+  const [opponent, setOpponent] = useState<'local'|'computer'>('computer')
   const [thinking, setThinking] = useState(false)
   const [promotion, setPromotion] = useState<{from:Square;to:Square}|null>(null)
   const [flipped, setFlipped] = useState(false)
@@ -26,6 +27,7 @@ export default function ChessGame({ active, onScene, bindInteraction }: { active
   const pieces = game.board().flat().filter(piece => piece !== null)
   const files = flipped ? 'hgfedcba' : 'abcdefgh'
   const ranks = flipped ? [1,2,3,4,5,6,7,8] : [8,7,6,5,4,3,2,1]
+  const movePairs = Array.from({length:Math.ceil(history.length/2)},(_,index)=>({number:index+1,white:history[index*2].san,black:history[index*2+1]?.san??'—'}))
   const update = useCallback(() => { setRevision(value => value+1); setSelected(null); setPromotion(null); setMessage('') }, [])
 
   useEffect(() => {
@@ -72,18 +74,19 @@ export default function ChessGame({ active, onScene, bindInteraction }: { active
     const url=URL.createObjectURL(blob), link=document.createElement('a'); link.href=url; link.download='personal-objects-chess.pgn'; link.click(); URL.revokeObjectURL(url)
   }
   return <div className="about-chess-game" hidden={!active}>
-    <div className="about-option-buttons mono" role="group" aria-label="Chess opponent"><button aria-pressed={opponent==='local'} onClick={()=>setOpponent('local')}>Two players</button><button aria-pressed={opponent==='computer'} onClick={()=>setOpponent('computer')}>Practice opponent</button></div>
-    <p className="about-chess-status" role="status">{thinking ? 'Black is thinking…' : gameCaption(game)}</p>
-    <p className="about-interaction-note mono">{promotion ? 'Choose the piece your pawn becomes.' : selected ? `${selected.toUpperCase()} · choose a marked square.` : 'Pick a piece on the board. The dots show legal moves.'}</p>
+    <div className="chess-opponent" role="group" aria-label="Chess opponent"><button aria-pressed={opponent==='computer'} onClick={()=>setOpponent('computer')}>Play the computer<span className="mono">You have white</span></button><button aria-pressed={opponent==='local'} onClick={()=>setOpponent('local')}>Two players<span className="mono">Share the board</span></button></div>
+    <div className="chess-turn" data-turn={game.turn()}><span aria-hidden="true" className="chess-turn-piece">{game.turn()==='w'?'♔':'♚'}</span><div><span className="mono">{thinking?'Considering the position':`Move ${game.moveNumber()}`}</span><p className="about-chess-status" role="status">{thinking ? 'Black is thinking…' : gameCaption(game)}</p></div></div>
+    <p className="about-interaction-note">{promotion ? 'Choose the piece your pawn becomes.' : selected ? `${selected.toUpperCase()} selected. Choose a marked square.` : `Choose a ${game.turn() === 'w' ? 'white' : 'black'} piece, then a marked square.`}</p>
     {promotion && <div className="about-promotion" role="group" aria-label="Promote your pawn">{(['q','r','b','n'] as const).map(type=><button key={type} onClick={()=>{game.move({...promotion,promotion:type});update()}}>{pieceNames[type]}</button>)}</div>}
     {!!selected && !promotion && <div className="about-move-buttons" aria-label="Legal chess moves">{[...new Set(legal.map(move=>move.to))].map(square=><button key={square} aria-label={`Play chess move to ${square.toUpperCase()}`} onClick={()=>pick(square)}>{square.toUpperCase()}</button>)}</div>}
-    <div className="about-play-actions mono"><button onClick={undo} disabled={!history.length}>Take back</button><button onClick={()=>{request.current++;worker.current?.terminate();setThinking(false);game.reset();update()}} disabled={!history.length&&!thinking}>New game</button></div>
-    <details className="about-personal-detail about-chess-detail"><summary>Board & move list<span aria-hidden="true">+</span></summary>
+    <div className="chess-game-actions mono"><button onClick={undo} disabled={!history.length}>← Take back</button><button onClick={()=>setFlipped(value=>!value)}>Turn board ↻</button><button onClick={()=>{request.current++;worker.current?.terminate();setThinking(false);game.reset();update()}} disabled={!history.length&&!thinking}>New game</button></div>
+    <div className="chess-recent-moves" aria-label="Recent moves"><div className="chess-ledger-heading mono"><span>Moves</span><span>White</span><span>Black</span></div>{movePairs.length?<ol className="about-chess-history mono">{movePairs.slice(-3).map(pair=><li key={pair.number}><span>{pair.number}.</span><span>{pair.white}</span><span>{pair.black}</span></li>)}</ol>:<p className="chess-opening-note">The board is yours.</p>}</div>
+    <details className="about-personal-detail about-chess-detail"><summary>Keyboard board & full game<span aria-hidden="true">+</span></summary>
       <div className="about-chess-board" role="group" aria-label="Accessible chess board">{ranks.flatMap(rank=>[...files].map(file=>{
         const square=`${file}${rank}` as Square, piece=game.get(square), available=legal.some(move=>move.to===square)
         return <button key={square} aria-label={`${square.toUpperCase()}${piece ? `, ${piece.color==='w'?'White':'Black'} ${pieceNames[piece.type]}` : ', empty'}`} aria-pressed={selected===square} data-dark={(file.charCodeAt(0)-97+rank-1)%2===0} data-legal={available} data-last={last?.from===square||last?.to===square} onClick={()=>pick(square)} disabled={thinking||!!promotion||game.isGameOver()}><span aria-hidden="true">{piece ? symbols[piece.color][piece.type] : available ? '·' : ''}</span><small aria-hidden="true">{square}</small></button>
       }))}</div>
-      <div className="about-play-actions mono"><button onClick={()=>setFlipped(value=>!value)}>Turn board</button><button onClick={downloadGame} disabled={!history.length}>Save PGN</button></div>
+      <div className="about-play-actions mono"><button onClick={downloadGame} disabled={!history.length}>Save PGN</button></div>
       <ol className="about-chess-history mono">{Array.from({length:Math.ceil(history.length/2)},(_,index)=><li key={index}><span>{index+1}.</span><span>{history[index*2].san}</span><span>{history[index*2+1]?.san??'·'}</span></li>)}</ol>
       {!history.length && <p>No moves yet.</p>}
     </details>

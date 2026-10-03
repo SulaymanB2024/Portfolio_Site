@@ -28,6 +28,11 @@ export class PortfolioRuntime {
     return true
   }
 
+  /** Sleep between paints, leaving a short lead for the next display frame. */
+  paintDelay(now: number) {
+    return Number.isFinite(now) ? Math.max(0, this.deadline - now - 8) : 0
+  }
+
   /** Call once per accepted frame. Returns true only when backing size changes. */
   advance(now: number, moving: boolean, blocked = false) {
     const raw = this.previous === null ? 0 : Math.max(0, now - this.previous)

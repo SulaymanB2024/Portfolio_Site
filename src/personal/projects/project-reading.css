@@ -1,0 +1,111 @@
+/* The reading furniture shares the site's thin rules, paper and serif scale. */
+.project-narrative .project-reading-bar,
+.case-dossier .project-reading-bar {
+  background: var(--paper);
+}
+@media (min-width: 1001px) {
+  .project-narrative .project-reading-bar,
+  .case-dossier .project-reading-bar {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    box-shadow: 0 -1px var(--paper);
+  }
+  .project-narrative .story-chapter,
+  .case-dossier .study-chapter {
+    scroll-margin-top: calc(var(--project-index-height, 74px) + 24px);
+  }
+}
+.project-endnav {
+  display: grid;
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 70px);
+  align-items: start;
+  border-top: 1px solid var(--ink);
+  padding: 32px 0 24px;
+  margin-top: 20px;
+}
+.project-return {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 44px;
+  width: fit-content;
+  color: var(--ink);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.project-return > span {
+  font:
+    22px Georgia,
+    serif;
+}
+.project-continue {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32px;
+  gap: 12px 20px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.project-continue > .mono {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.project-continue h2 {
+  font:
+    400 clamp(30px, 3.2vw, 46px)/1.12 Georgia,
+    serif;
+  letter-spacing: -0.035em;
+  margin: 0;
+  text-wrap: pretty;
+}
+.project-continue-arrow {
+  font:
+    30px Georgia,
+    serif;
+  align-self: center;
+  text-align: right;
+  transition: transform 180ms ease;
+}
+.project-continue:hover h2 {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+.project-continue:hover .project-continue-arrow {
+  transform: translateX(3px);
+}
+@media (max-width: 760px) {
+  .project-endnav {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-block: 24px;
+  }
+  .project-continue h2 {
+    font-size: clamp(30px, 8vw, 40px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-continue-arrow {
+    transition: none;
+  }
+  .project-continue:hover .project-continue-arrow {
+    transform: none;
+  }
+}
+@media print {
+  .project-endnav,
+  .project-narrative .project-reading-bar,
+  .case-dossier .project-reading-bar {
+    display: none;
+  }
+}
+
+.project-narrative .story-chapter:focus-visible .story-chapter-label > span:first-child,
+.case-dossier .study-chapter:focus-visible .study-chapter-label > span:first-child {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}

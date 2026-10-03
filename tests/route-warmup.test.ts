@@ -1,6 +1,21 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { allowsWarmup, createWarmCache } from '../src/personal/refinements/warmup-policy.ts'
+import { allowsWarmup, createWarmCache, focusWithoutWarmup, isPlacedFocus } from '../src/personal/refinements/warmup-policy.ts'
+
+test('automatic focus is marked only during placement, regardless of previous target', () => {
+  const target = { focus() { assert.equal(isPlacedFocus(this as unknown as EventTarget), true) } } as unknown as HTMLElement
+  assert.equal(isPlacedFocus(null), false)
+  assert.equal(isPlacedFocus(target), false)
+  focusWithoutWarmup(target)
+  assert.equal(isPlacedFocus(target), false)
+  focusWithoutWarmup(null)
+})
+
+test('failed focus placement clears its marker for later user focus', () => {
+  const target = { focus() { throw new Error('focus failed') } } as unknown as HTMLElement
+  assert.throws(() => focusWithoutWarmup(target), /focus failed/)
+  assert.equal(isPlacedFocus(target), false)
+})
 
 test('speculative warmup respects data saving and slow connections; deliberate activation proceeds', () => {
   assert.equal(allowsWarmup('hover'), true)
