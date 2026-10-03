@@ -1,7 +1,9 @@
 import { deferredPage } from './deferred-page'
+import { memo } from 'react'
+import HomePage from './HomePage'
 
 // Intent warmup, the shell and the mounted page share exactly one module request.
-export const homePage = deferredPage(() => import('./HomePage'))
+export const homePage = { Page: memo(HomePage), load: () => Promise.resolve({ default: HomePage }) }
 export const workPage = deferredPage<{ dark: boolean }>(() => import('./WorkCollection').then(module => ({ default: module.WorkPage })))
 export const writingPage = deferredPage(() => import('./editorial/WritingIndex'))
 export const articlePage = deferredPage(() => import('./editorial/ArticlePage'))

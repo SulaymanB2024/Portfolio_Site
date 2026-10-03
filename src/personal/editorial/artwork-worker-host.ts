@@ -49,10 +49,13 @@ export function createArtworkWorkerHost(dependencies: HostDependencies) {
     try {
       entry.sketch = dependencies.create(entry.factory, command.canvas, { physicalSize: command.physicalSize });
       entry.factory = null;
+      const boundedRate = (rate: number | undefined, fallback: number) => typeof rate === 'number' && Number.isFinite(rate) ? Math.max(1, Math.min(60, rate)) : fallback;
+      const maxFps = boundedRate(command.maxFps, entry.sketch.engine === 'gpu' ? 30 : 18);
+      const minFps = Math.min(maxFps, boundedRate(command.minFps, entry.sketch.engine === 'gpu' ? 24 : 8));
       entry.job = dependencies.scheduler.add({
         active: entry.active,
-        maxFps: entry.sketch.engine === 'gpu' ? 30 : 18,
-        minFps: entry.sketch.engine === 'gpu' ? 24 : 8,
+        maxFps,
+        minFps,
         draw: () => entry.sketch?.draw() ?? false,
         onFrame: stats => {
           if (!entry.cancelled && !disposed) dependencies.send({ type: 'frame', id: command.id, stats: { ...stats, ...entry.sketch?.getRenderStats?.(), engine: entry.sketch?.engine ?? 'canvas' } });

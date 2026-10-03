@@ -1,4 +1,16 @@
 export type WarmIntent = 'hover' | 'focus' | 'activate'
+const placedFocus = new WeakSet<EventTarget>()
+
+/** Accessibility focus placement does not imply a chosen route. */
+export function focusWithoutWarmup(target: HTMLElement | null) {
+  if (!target) return
+  placedFocus.add(target)
+  try { target.focus() } finally { placedFocus.delete(target) }
+}
+export function isPlacedFocus(target: EventTarget | null) {
+  return target !== null && placedFocus.has(target)
+}
+
 export function allowsWarmup(intent: WarmIntent, saveData = false, effectiveType = '') {
   return intent === 'activate' || (!saveData && effectiveType !== 'slow-2g' && effectiveType !== '2g')
 }

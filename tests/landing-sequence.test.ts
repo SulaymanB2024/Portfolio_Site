@@ -2,11 +2,15 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { Box3, Vector3 } from 'three'
 import { projects } from '../src/personal/content.ts'
-import { CHAPTERS, railProgress, sceneSequence, textSequence, advanceScrollMotion } from '../src/personal/landing/sequence.ts'
-import { thresholdMotion, sculpturePose, createScaleSampler } from '../src/personal/landing/motion-curves.ts'
+import { CHAPTERS, railProgress, sceneSequence, textSequence, advanceScrollMotion, requiredScene } from '../src/personal/landing/sequence.ts'
+import { thresholdMotion, sculpturePose, createScaleSampler, createApertureSampler, pacedTravel, cinematicShot, portalPose, cinematicPhase } from '../src/personal/landing/motion-curves.ts'
 import { scrollInkStrength } from '../src/personal/landing/scroll-dither.ts'
 import { isStackedLanding, mobileSculptureFrame } from '../src/personal/landing/mobile-layout.ts'
+
+import { landingRenderBudget } from '../src/personal/landing/render-budget.ts'
+import { desktopSculptureFrame } from '../src/personal/landing/art-direction.ts'
 
 const near = (a: number, b: number, tolerance = 1e-10) => assert.ok(Math.abs(a - b) <= tolerance, `${a} differs from ${b}`)
 
@@ -19,6 +23,12 @@ test('the homepage intro leads to About and all four chapters retain their real 
   for (const chapter of CHAPTERS) {
     const asset = await readFile(new URL(`../public/${chapter.asset}`, import.meta.url))
     assert.equal(asset.readUInt32LE(0), 0x46546c67)
+  }
+  const urls = JSON.parse(await readFile(new URL('../public/portfolio-models/urls.json', import.meta.url), 'utf8'))
+  for (const chapter of CHAPTERS) {
+    const optimized = await readFile(new URL(`../public/${urls[chapter.assetId].split('?')[0]}`, import.meta.url))
+    assert.equal(optimized.readUInt32LE(0), 0x46546c67)
+    assert.ok(optimized.length < (await readFile(new URL(`../public/${chapter.asset}`, import.meta.url))).length)
   }
 })
 
@@ -38,14 +48,41 @@ test('native progress completes the landing rail before Writing, independently o
 })
 
 test('links only appear with their matching readable title and chapter joins preserve the resting sculpture', () => {
-  for (let i = 0; i <= 4000; i++) {
-    const p = i / 4000, scene = sceneSequence(p), type = textSequence(p), motion = thresholdMotion(scene.local)
+  for (const mobile of [false, true]) for (let i = 0; i <= 4000; i++) {
+    const p = i / 4000, scene = sceneSequence(p), type = textSequence(p, 'threshold', false, mobile), motion = thresholdMotion(scene.local)
     const linkOpacity = type.active > scene.leg ? motion.incomingLinks : motion.outgoingLinks
     if (linkOpacity > 0) assert.deepEqual(type.states[type.active], { reveal: 1, erase: 0 })
     assert.ok(type.states.filter(state => state.reveal > 0 && state.erase < 1).length <= 1)
   }
   assert.deepEqual(sculpturePose(1, true), sculpturePose(0, false))
-  assert.deepEqual(sculpturePose(.85, true), sculpturePose(.15, false))
+  assert.deepEqual(sculpturePose(.85, true), sculpturePose(.04, false))
+})
+
+test('startup at a held chapter only requires that sculpture; transitions require the actual pair and visor', () => {
+  for (let index = 0; index < CHAPTERS.length; index++) {
+    assert.deepEqual(requiredScene(index / 4), { indexes: [index], portal: false })
+  }
+  for (let leg = 0; leg < 4; leg++) {
+    assert.deepEqual(requiredScene((leg + .5) / 4), { indexes: [leg, leg + 1], portal: true })
+    assert.deepEqual(requiredScene((leg + .85) / 4), { indexes: [leg + 1], portal: false })
+  }
+  assert.deepEqual(requiredScene(.6, true), { indexes: [3], portal: false })
+})
+
+test('short acceleration ramps join a steady travel rate and give the resolved chapter a reading hold', () => {
+  const derivative = (t: number) => (pacedTravel(t + 1e-5) - pacedTravel(t - 1e-5)) / 2e-5
+  near(derivative(.3), derivative(.7), 1e-8)
+  assert.ok(derivative(0) < 1e-7 && derivative(1) < 1e-7)
+  for (let i = 0; i <= 1000; i++) {
+    const t = i / 1000
+    near(pacedTravel(t), 1 - pacedTravel(1 - t))
+    assert.ok(pacedTravel(t) >= 0 && pacedTravel(t) <= 1)
+  }
+  for (const local of [.83, .9, 1]) {
+    assert.equal(thresholdMotion(local).travel, 1)
+    assert.equal(thresholdMotion(local).incomingLinks, 1)
+    assert.deepEqual(sculpturePose(local, true), sculpturePose(0, false))
+  }
 })
 
 test('reduced motion keeps one full title; reverse scroll and frame subdivision retain the same state', () => {
@@ -66,11 +103,13 @@ test('reduced motion keeps one full title; reverse scroll and frame subdivision 
   }
 })
 
-test('scroll impulses retain velocity through reversals and never pass their destination', () => {
+test('scroll following reverses immediately, settles quickly, and never overshoots its destination', () => {
   const first = advanceScrollMotion({ progress: 0, velocity: 0 }, .8, .02)
   assert.ok(first.progress > 0 && first.progress < .8 && first.velocity > 0)
   const reversal = advanceScrollMotion(first, 0, .000001)
-  assert.ok(Math.abs(reversal.velocity - first.velocity) < .001)
+  assert.ok(reversal.velocity < 0 && reversal.progress < first.progress)
+  assert.ok(advanceScrollMotion({ progress: 0, velocity: 0 }, 1, 1 / 60).progress > .59)
+  assert.ok(advanceScrollMotion({ progress: 0, velocity: 0 }, 1, .09).progress > .99)
   let motion = first
   for (let frame = 0; frame < 300; frame++) {
     motion = advanceScrollMotion(motion, .08, 1 / 60)
@@ -79,7 +118,8 @@ test('scroll impulses retain velocity through reversals and never pass their des
   }
   near(motion.progress, .08)
   near(motion.velocity, 0)
-  assert.deepEqual(advanceScrollMotion({ progress: .4, velocity: 8 }, .5, 1), { progress: .5, velocity: 0 })
+  const settled = advanceScrollMotion({ progress: .4, velocity: 8 }, .5, 1)
+  near(settled.progress, .5); near(settled.velocity, 0)
 })
 
 test('moving ink is bounded, direction-independent, quiet at rest, and disabled for reduced motion', () => {
@@ -89,13 +129,48 @@ test('moving ink is bounded, direction-independent, quiet at rest, and disabled 
   assert.equal(scrollInkStrength(1, 3000, 0), 0)
   near(scrollInkStrength(.2, 3000, 600), scrollInkStrength(-.2, 6000, 1200))
   assert.ok(scrollInkStrength(.08, 3000, 720) < scrollInkStrength(.3, 3000, 720))
-  assert.ok(scrollInkStrength(100, 3000, 720) < .85)
+  assert.ok(scrollInkStrength(100, 3000, 720) <= .3)
 })
 
-test('phone sculptures project inside the space between their actual title and links', () => {
+test('the actual visor aperture is visible early and expands at a consistent apparent rate across viewports', async () => {
+  const bytes = await readFile(new URL('../public/landing/threshold-lens.glb', import.meta.url))
+  const model = await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '')
+  const track = model.animations[0].tracks.find(track => track.name.endsWith('.scale'))!
+  const opening = model.scene.getObjectByName('Opening')!
+  const bounds = new Box3().setFromObject(opening), dimensions = bounds.getSize(new Vector3())
+  // The clip begins at .001 scale. Recover the authored mesh dimensions.
+  dimensions.divideScalar(track.values[0])
+  const raw = createScaleSampler(track.times, track.values), scale = new Float64Array(3)
+  for (const [width, height] of [[1280, 800], [1040, 977], [390, 844], [320, 568], [667, 375]]) {
+    const span = 2 * 5.9 * Math.tan(16 * Math.PI / 180), wrapperScale = isStackedLanding(width, height) ? .35 : .9
+    const ratioX = dimensions.x * wrapperScale / (span * width / height), ratioY = dimensions.y * wrapperScale / span
+    const sample = createApertureSampler(raw, 1, ratioX, ratioY)
+    const visible = (value: number) => 1.8 * value / (1.8 + value)
+    const extent = () => Math.sqrt(visible(scale[0] * ratioX) * visible(scale[1] * ratioY))
+    sample(0, scale); const start = extent()
+    sample(1, scale); const end = extent()
+    let previous = 0
+    for (let i = 0; i <= 100; i++) {
+      sample(i / 100, scale)
+      const actual = extent()
+      assert.ok(actual >= previous - 1e-8)
+      near(actual, start + (end - start) * i / 100, 2e-5)
+      previous = actual
+    }
+    sample(thresholdMotion(.20).travel, scale)
+    assert.ok(scale[0] * ratioX * width > 45, `Visor lead-in too small at ${width}×${height}`)
+    sample(1, scale)
+    assert.ok(scale[0] * ratioX > 1.3 && scale[1] * ratioY > 1.3, `Aperture does not cover viewport at ${width}×${height}`)
+    const ending = [...scale]
+    sample(1 - 1e-7, scale)
+    for (let axis = 0; axis < 3; axis++) near(scale[axis], ending[axis], .02)
+  }
+})
+
+test('phone sculptures project inside the space below their title and links', () => {
   for (const [width, height] of [[320, 568], [375, 667], [390, 844], [430, 932], [600, 900]]) {
-    const copyTop = Math.max(86, Math.min(128, height * .125))
-    const lineHeight = Math.max(36, Math.min(66, width * .138, height * .07))
+    const copyTop = Math.max(78, Math.min(120, height * .114))
+    const lineHeight = Math.max(34, Math.min(64, width * .134, height * .064))
     for (const chapter of CHAPTERS) for (const bounds of [{ x: 1.7, y: 2, z: 1.4 }, { x: 2, y: 1.2, z: 1.8 }]) {
       const frame = mobileSculptureFrame(width, height, copyTop, lineHeight, chapter.lines.length, chapter.article ? 2 : 1, bounds, 34)
       const focal = height / (2 * Math.tan(16 * Math.PI / 180))
@@ -116,7 +191,7 @@ test('phone sculptures project inside the space between their actual title and l
 })
 
 test('the production threshold assets retain smooth bounded interpolation through their actual GLB keys', async () => {
-  for (const name of ['threshold-iris.glb', 'threshold-visor.glb']) {
+  for (const name of ['threshold-iris.glb', 'threshold-visor.glb', 'threshold-lens.glb']) {
     const bytes = await readFile(new URL(`../public/landing/${name}`, import.meta.url))
     const model = await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '')
     const track = model.animations[0].tracks.find(track => track.name.endsWith('.scale'))!
@@ -135,4 +210,73 @@ test('the production threshold assets retain smooth bounded interpolation throug
       previous = [...value]
     }
   }
+})
+
+
+test('touch rendering bounds the costly buffers while preserving a sharper type pass', () => {
+  for (const [width, height, dpr, coarse] of [[390, 844, 3, true], [430, 932, 3, true], [667, 375, 2, true], [1280, 900, 2, false], [2560, 1440, 2, false]] as const) {
+    const budget = landingRenderBudget(width, height, dpr, coarse)
+    assert.ok(budget.sceneRatio <= budget.canvasRatio)
+    assert.ok(width * height * budget.sceneRatio ** 2 <= (budget.mobile ? 230000 : 1200000) + 1)
+    assert.ok(width * height * budget.canvasRatio ** 2 <= (budget.mobile ? 400000 : 2200000) + 1)
+    assert.ok(budget.canvasRatio > 0 && budget.canvasRatio <= 1.25)
+  }
+})
+
+test('each desktop sculpture fits its reserved editorial region without the footer or title overlap', () => {
+  for (const [width, height] of [[1040, 977], [1280, 800], [667, 375]]) {
+    for (let index = 1; index < 5; index++) {
+      const bounds = { x: 1.6, y: 2, z: 1.4 }, frame = desktopSculptureFrame(width, height, index, bounds)
+      const focal = height / (2 * Math.tan(16 * Math.PI / 180))
+      for (const sx of [-1, 1]) for (const sy of [-1, 1]) for (const sz of [-1, 1]) {
+        const depth = 5.9 - sz * bounds.z * frame.scale / 2
+        const x = width / 2 + focal * (frame.x + sx * bounds.x * frame.scale / 2) / depth
+        const y = height / 2 - focal * (frame.y + sy * bounds.y * frame.scale / 2) / depth
+        assert.ok(x > width * .51 && x < width * .98)
+        assert.ok(y > height * .12 && y < height * .88)
+      }
+    }
+  }
+})
+
+
+test('camera and light join the same rest shot with zero velocity, and mobile movement is restrained', () => {
+  const rest = cinematicShot(0, false)
+  assert.deepEqual(cinematicShot(1, true), rest)
+  assert.deepEqual(cinematicShot(.74, true), rest)
+  for (let index = 0; index < 5; index++) for (const incoming of [false, true]) {
+    const boundary = incoming ? .68 : .10
+    const a = cinematicShot(boundary - 1e-5, incoming, false, index), b = cinematicShot(boundary + 1e-5, incoming, false, index)
+    for (const key of Object.keys(a) as (keyof typeof a)[]) near((b[key] - a[key]) / 2e-5, 0, 1e-6)
+    for (let step = 0; step <= 100; step++) {
+      const local = step / 100, desktop = cinematicShot(local, incoming, false, index), phone = cinematicShot(local, incoming, true, index)
+      assert.ok(Math.abs(desktop.depth) <= .35 && Math.abs(phone.depth) <= .175)
+      for (const key of ['x', 'y', 'depth', 'aimX', 'aimY'] as const) near(phone[key], desktop[key] * .5)
+      assert.ok(Object.values(desktop).every(Number.isFinite))
+    }
+  }
+  const positions = Array.from({length:101}, (_,i)=>i/100)
+  for(const incoming of [false,true]) assert.deepEqual(positions.map(p=>cinematicShot(p,incoming)), [...positions].reverse().map(p=>cinematicShot(p,incoming)).reverse())
+})
+
+test('the optical turn resolves before the aperture clears, and links follow the settled camera', () => {
+  for (let leg = 0; leg < 4; leg++) {
+    for (const local of [.48, .62, 1]) {
+      const optical = portalPose(local, leg)
+      near(optical.pitch, 0); near(optical.yaw, 0); near(optical.roll, 0)
+    }
+    near(portalPose(.12, leg).center, 0)
+    near(portalPose(.62, leg).center, 1)
+  }
+  for (let step = 0; step <= 1000; step++) {
+    const local = step/1000, motion = thresholdMotion(local)
+    if(motion.incomingLinks > 0) {
+      assert.deepEqual(cinematicShot(local,true),cinematicShot(0,false))
+      assert.deepEqual(sculpturePose(local,true),sculpturePose(0,false))
+    }
+  }
+  assert.equal(cinematicPhase(.18),'approach')
+  assert.equal(cinematicPhase(.4),'passage')
+  assert.equal(cinematicPhase(.65),'settle')
+  assert.equal(cinematicPhase(.85),'held')
 })

@@ -8,7 +8,8 @@
   "sources": [
     "tools/work-models/geometry.mjs",
     "tools/work-models/instruments.mjs",
-    "tools/work-models/organic.mjs"
+    "tools/work-models/organic.mjs",
+    "tools/work-models/population.mjs"
   ],
   "material": "Four texture-free monochrome materials: satin silver, dark steel, graphite inlays and pale porcelain. Smooth analytical surfaces, rounded machined bevels and recessed cavities retain readable construction through halftone.",
   "geometryBudget": {
@@ -35,7 +36,7 @@
         {
           "name": "hover-clock-machined-crescent",
           "pivot": [
-            -0.00005111748834785159,
+            -5.111748834785159e-05,
             0.028490875012724532,
             0.18260878459662191
           ],
@@ -50,7 +51,7 @@
           "pivot": [
             0.037085672693494456,
             0.04313136982065098,
-            -0.0000068206296868478316
+            -6.8206296868478316e-06
           ],
           "axis": [
             -0.5892420236005301,
@@ -185,115 +186,155 @@
     {
       "id": "sapien",
       "project": "Sapien",
-      "title": "Synthetic mind",
-      "concept": "A sculpted face with recessed eyes, neutral lips, anatomical ears and a cutaway forehead opens into coherent paired cortical lobes with finer warped sulci. Short flattened meandering gyri follow frontal, temporal and parietal regions without projecting into tall columns. Access cavities reveal a sparse relay network; a continuous cervical spine and attached brain stem join machined vertebral collars.",
+      "title": "Paired population instrument",
+      "concept": "Two interleaved chamfered metal ribbons follow one continuous spindle. Flush indexed inserts, fine recessed tracers, return lips and seated terminal fittings give the paired population concept an abstract, non-anatomical form. Both bands articulate around the same supported shaft.",
       "path": "work-studies/sapien.glb",
-      "bytes": 945796,
-      "sha256": "3a1592499415859f03dd3efe2107133b2cf821875e2e55d672ffd29b8f6bf0d2",
-      "vertices": 27332,
-      "triangles": 46832,
-      "meshes": 9,
+      "bytes": 916920,
+      "sha256": "44ed8ea389281c61744a90d2d089d74ad5f2fabae32d9d843e9917966eefabcf",
+      "vertices": 30526,
+      "triangles": 29256,
+      "meshes": 8,
       "materials": 4,
       "articulation": [
         {
-          "name": "hover-sculpted-cortical-lobes",
+          "name": "hover-paired-population-band-1",
           "pivot": [
-            -0.016353692277811017,
-            0.6389158291930143,
-            -0.047093412165424474
+            0.02183420173335102,
+            0.016042660666845357,
+            -0.02119505124816794
           ],
           "axis": [
-            -0.01841999182329376,
-            0.9984678970276709,
-            0.05217818036660712
+            0.16510462292624153,
+            0.9769750386400963,
+            0.13513044572769667
           ]
         },
         {
-          "name": "hover-organic-cortical-gyri",
+          "name": "hover-population-index-inlays-1",
           "pivot": [
-            -0.016353692277811017,
-            0.6389158291930143,
-            -0.047093412165424474
+            0.02183420173335102,
+            0.016042660666845357,
+            -0.02119505124816794
           ],
           "axis": [
-            -0.01841999182329376,
-            0.9984678970276709,
-            0.05217818036660712
+            0.16510462292624153,
+            0.9769750386400963,
+            0.13513044572769667
           ]
         },
         {
-          "name": "hover-subcortical-relay-points",
+          "name": "hover-population-sample-inserts-1",
           "pivot": [
-            -0.016353692277811017,
-            0.6389158291930143,
-            -0.047093412165424474
+            0.02183420173335102,
+            0.016042660666845357,
+            -0.02119505124816794
           ],
           "axis": [
-            -0.01841999182329376,
-            0.9984678970276709,
-            0.05217818036660712
+            0.16510462292624153,
+            0.9769750386400963,
+            0.13513044572769667
           ]
         },
         {
-          "name": "hover-subcortical-pathways",
+          "name": "hover-paired-population-band-2",
           "pivot": [
-            -0.016353692277811017,
-            0.6389158291930143,
-            -0.047093412165424474
+            0.02183420173335102,
+            0.016042660666845357,
+            -0.02119505124816794
           ],
           "axis": [
-            -0.01841999182329376,
-            0.9984678970276709,
-            0.05217818036660712
+            0.16510462292624153,
+            0.9769750386400963,
+            0.13513044572769667
+          ]
+        },
+        {
+          "name": "hover-population-index-inlays-2",
+          "pivot": [
+            0.02183420173335102,
+            0.016042660666845357,
+            -0.02119505124816794
+          ],
+          "axis": [
+            0.16510462292624153,
+            0.9769750386400963,
+            0.13513044572769667
+          ]
+        },
+        {
+          "name": "hover-population-sample-inserts-2",
+          "pivot": [
+            0.02183420173335102,
+            0.016042660666845357,
+            -0.02119505124816794
+          ],
+          "axis": [
+            0.16510462292624153,
+            0.9769750386400963,
+            0.13513044572769667
           ]
         }
       ],
       "bounds": {
         "min": [
-          -0.5780882239341736,
-          -1,
-          -0.6157472133636475
+          -0.7570917535622117,
+          -1.0000000486837406,
+          -0.7505081863952626
         ],
         "max": [
-          0.5780882239341736,
-          0.9999999923819486,
-          0.6157472133636475
+          0.7570917677085403,
+          1,
+          0.7505081920074473
         ]
       },
       "framing": {
-        "rest": 1.0587384263721293,
-        "fullArticulation": 1.0587384263721293,
-        "fullArticulationPlusBurst": 1.1103540698742278,
-        "paddingRequired": 0.05161564350209846,
-        "paddingSlackAtPoint16": 0.10838435649790154,
+        "rest": 1.1454138727699923,
+        "fullArticulation": 1.1471018285370702,
+        "fullArticulationPlusBurst": 1.2208756340279097,
+        "paddingRequired": 0.07546176125791737,
+        "paddingSlackAtPoint16": 0.08453823874208263,
         "articulation": [
           {
-            "name": "hover-sculpted-cortical-lobes",
-            "restRadius": 1.0373560847676144,
-            "articulatedRadius": 1.0403540698742277,
+            "name": "hover-paired-population-band-1",
+            "restRadius": 1.1185588565192013,
+            "articulatedRadius": 1.1207256001370738,
             "burstTranslationBound": 0.07,
-            "articulatedPlusBurstRadius": 1.1103540698742278
+            "articulatedPlusBurstRadius": 1.1907256001370738
           },
           {
-            "name": "hover-organic-cortical-gyri",
-            "restRadius": 1.002602675890985,
-            "articulatedRadius": 1.0043947276292486,
+            "name": "hover-population-index-inlays-1",
+            "restRadius": 1.0663446132089458,
+            "articulatedRadius": 1.068881177389288,
             "burstTranslationBound": 0.07607357886803998,
-            "articulatedPlusBurstRadius": 1.0804683064972886
+            "articulatedPlusBurstRadius": 1.144954756257328
           },
           {
-            "name": "hover-subcortical-relay-points",
-            "restRadius": 0.7926648469497305,
-            "articulatedRadius": 0.7938593639785605,
+            "name": "hover-population-sample-inserts-1",
+            "restRadius": 1.0123810732847347,
+            "articulatedRadius": 1.0150709274085992,
             "burstTranslationBound": 0.08050462732376276,
-            "articulatedPlusBurstRadius": 0.8743639913023232
+            "articulatedPlusBurstRadius": 1.095575554732362
           },
           {
-            "name": "hover-subcortical-pathways",
-            "restRadius": 0.7811474443129809,
-            "articulatedRadius": 0.7822262986067245,
+            "name": "hover-paired-population-band-2",
+            "restRadius": 1.1454138727699923,
+            "articulatedRadius": 1.1471018285370702,
             "burstTranslationBound": 0.07377380549083952,
-            "articulatedPlusBurstRadius": 0.8560001040975641
+            "articulatedPlusBurstRadius": 1.2208756340279097
+          },
+          {
+            "name": "hover-population-index-inlays-2",
+            "restRadius": 1.0883329768073047,
+            "articulatedRadius": 1.0904674922996558,
+            "burstTranslationBound": 0.07053450889272148,
+            "articulatedPlusBurstRadius": 1.1610020011923772
+          },
+          {
+            "name": "hover-population-sample-inserts-2",
+            "restRadius": 1.0291170863508976,
+            "articulatedRadius": 1.0314957696506406,
+            "burstTranslationBound": 0.07820122072764178,
+            "articulatedPlusBurstRadius": 1.1096969903782823
           }
         ]
       },
@@ -301,8 +342,8 @@
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999603566335,
-        "maximumNormalLength": 1.0000000415640224
+        "minimumNormalLength": 0.9999999590666856,
+        "maximumNormalLength": 1.0000000401912172
       }
     },
     {

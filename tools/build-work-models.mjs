@@ -9,14 +9,16 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
 import validator from 'gltf-validator'
 import { vec, materialStyles } from './work-models/geometry.mjs'
 import { opportunityInstrument, marketObservatory } from './work-models/instruments.mjs'
-import { syntheticMind, unfinishedMechanism } from './work-models/organic.mjs'
+import { unfinishedMechanism } from './work-models/organic.mjs'
+
+import { pairedPopulation } from './work-models/population.mjs'
 
 const output = resolve(import.meta.dirname, '../public/work-studies')
 const io = new NodeIO()
 // These modules are the authoritative source; no legacy inline model builders.
 const studies = [
   { "id": "internshipdeadlines", "project": "InternshipDeadlines", "title": "Opportunity instrument", "concept": "Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage with fitted retention shoes. Recessed annular rail channels, seated scale marks, tapered gear spokes, stepped bored hubs and a hinged pendulum connect dates, data and opportunity.", rotation: [0.08, -0.2, -0.12], make: opportunityInstrument },
-  { "id": "sapien", "project": "Sapien", "title": "Synthetic mind", "concept": "A sculpted face with recessed eyes, neutral lips, anatomical ears and a cutaway forehead opens into coherent paired cortical lobes with finer warped sulci. Short flattened meandering gyri follow frontal, temporal and parietal regions without projecting into tall columns. Access cavities reveal a sparse relay network; a continuous cervical spine and attached brain stem join machined vertebral collars.", rotation: [0.06, -0.4, 0.02], make: syntheticMind },
+  { "id": "sapien", "project": "Sapien", "title": "Paired population instrument", "concept": "Two interleaved chamfered metal ribbons follow one continuous spindle. Flush indexed inserts, fine recessed tracers, return lips and seated terminal fittings give the paired population concept an abstract, non-anatomical form. Both bands articulate around the same supported shaft.", rotation: [0.10, -0.22, -0.17], make: pairedPopulation },
   { "id": "investing-markets", "project": "Investing & Markets", "title": "Market observatory", "concept": "Smooth continent reliefs with coastal sidewalls, seventeen generalized land outlines, selected low terrain ranges and a sparse graticule sit on a continuous steel ocean shell. Grooved meridian and equatorial rails, stepped polar bearings, a partial indexed vernier and counterbored tapered geographic terminals carry four raised routes.", rotation: [0.12, -0.13, -0.13], make: marketObservatory },
   { "id": "miscellaneous", "project": "Miscellaneous", "title": "Unfinished mechanism", "concept": "Five pierced folded sheets with rounded lightening windows and return lips form an open mechanism. Crease-aligned shafts, grooved hinge knuckles, slotted fasteners, two tension springs with fitted lead attachments and a geared core with tapered spokes and stepped bored hubs give the experimental form coherent construction.", rotation: [0.08, -0.21, 0.09], make: unfinishedMechanism },
 ]
@@ -186,7 +188,7 @@ const manifest = {
   license: 'LicenseRef-Site-Owner',
   licenseNote: 'Original site assets. The site owner retains the rights; no third-party model or texture licenses apply.',
   unit: 'Each sculpture is centered at the origin and normalized to a maximum span of 2 units.',
-  sources: ['tools/work-models/geometry.mjs', 'tools/work-models/instruments.mjs', 'tools/work-models/organic.mjs'],
+  sources: ['tools/work-models/geometry.mjs', 'tools/work-models/instruments.mjs', 'tools/work-models/organic.mjs', 'tools/work-models/population.mjs'],
   material: 'Four texture-free monochrome materials: satin silver, dark steel, graphite inlays and pale porcelain. Smooth analytical surfaces, rounded machined bevels and recessed cavities retain readable construction through halftone.',
   geometryBudget: { maximumBytesPerModel: 1500000, maximumTrianglesPerModel: 60000, maximumMeshesPerModel: 12, compression: 'Lossless bitwise vertex welding; no decoder required.' },
   animation: 'Independent components named hover-* export centered local shaft/hinge pivots with unit articulationAxis vectors in GLTF node extras. Structural assemblies remain static. These support renderer-driven articulation. No embedded animation, extensions, textures or decoder required.',

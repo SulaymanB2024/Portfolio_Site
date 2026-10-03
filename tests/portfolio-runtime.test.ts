@@ -29,6 +29,27 @@ test('deadline scheduling paints thirty frames per second at 60, 90, 120 and 144
   }
 })
 
+test('sleeping until a paint deadline preserves cadence and urgent input bypasses the sleep', () => {
+  for (const rate of [60, 90, 120, 144]) {
+    const runtime = new PortfolioRuntime()
+    let frames = 0, callbacks = 0, wakeAt = 0
+    for (let index = 0; index < rate * 10; index++) {
+      const now = index * 1000 / rate
+      if (now < wakeAt) continue
+      callbacks++
+      if (runtime.canPaint(now)) frames++
+      wakeAt = now + runtime.paintDelay(now)
+    }
+    assert.ok(Math.abs(frames - 300) <= 1, `${rate}Hz produced ${frames} paints`)
+    assert.ok(callbacks <= 600, `${rate}Hz produced ${callbacks} callbacks`)
+    assert.equal(runtime.canPaint(10_001, true), true)
+    assert.ok(runtime.paintDelay(10_001) > 0)
+    runtime.suspend()
+    assert.equal(runtime.paintDelay(10_001), 0)
+  }
+  assert.equal(new PortfolioRuntime().paintDelay(NaN), 0)
+})
+
 test('two bad windows reduce pixels and eight good seconds restore resolution', () => {
   const runtime = new PortfolioRuntime()
   runtime.advance(0, true)

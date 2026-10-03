@@ -50,6 +50,24 @@ test('ink samples preserve the transformed surface and follow triangle area, wit
   dispose(source)
 })
 
+test('a smaller mobile sample buffer preserves the deterministic surface prefix and bounds draw ranges', () => {
+  const { source } = fixture()
+  const full = createLionStudy(source)
+  const phone = createLionStudy(source, 12000)
+  const fullDust = full.group.children.find(node => node instanceof THREE.Points) as THREE.Points
+  const phoneDust = phone.group.children.find(node => node instanceof THREE.Points) as THREE.Points
+  for (const name of ['position', 'normal', 'seed']) {
+    const small = phoneDust.geometry.getAttribute(name)
+    assert.equal(small.count, 12000)
+    assert.deepEqual(Array.from(small.array), Array.from(fullDust.geometry.getAttribute(name).array).slice(0, small.array.length))
+  }
+  phone.setDetail(false)
+  assert.equal(phoneDust.geometry.drawRange.count, 12000)
+  phone.setDetail(true, .7)
+  assert.equal(phoneDust.geometry.drawRange.count, 11760)
+  dispose(full.group); dispose(phone.group); dispose(source)
+})
+
 test('dispersion clamps, settles to a finite target, and jumps directly under reduced motion', () => {
   const { source } = fixture()
   const study = createLionStudy(source)
@@ -74,12 +92,12 @@ test('autoplay repeatedly dissolves and reforms, while pause, manual input and r
     samples.push(study.value)
   }
   assert.ok(Math.max(...samples) > .87 && Math.max(...samples) <= .880001)
-  assert.ok(Math.min(...samples) >= .059999 && Math.min(...samples) < .07)
-  assert.equal(samples[90], .06) // The opening holds long enough to read the form.
+  assert.ok(Math.min(...samples) >= 0 && Math.min(...samples) < .01)
+  assert.equal(samples[90], 0) // Complete form, without an invisible grain draw.
   assert.ok(samples[400] > samples[200])
   assert.equal(samples[540], .88)
   assert.ok(samples[850] < samples[650])
-  assert.equal(samples[1050], .06)
+  assert.equal(samples[1050], 0)
   study.setPlaying(false)
   const paused = { value: study.value, time: study.elapsed }
   for (let i = 0; i < 90; i++) assert.equal(study.advance(1 / 30, false), false)
@@ -112,6 +130,30 @@ test('phone detail reduces the retained point draw range without reallocating sa
   assert.equal(points.geometry.getAttribute('position'), positions)
   study.setDetail(false)
   assert.equal(points.geometry.drawRange.count, 42000)
+  study.setDetail(false, .8)
+  assert.equal(points.geometry.drawRange.count, 26880)
+  study.setDetail(true, .8)
+  assert.equal(points.geometry.drawRange.count, 15360)
+  study.setDetail(false, NaN)
+  assert.equal(points.geometry.drawRange.count, 42000)
   assert.equal(positions.count, 42000)
+  dispose(study.group); dispose(source)
+})
+
+test('intact form skips only an entirely invisible grain draw and restores it on dispersion', () => {
+  const { source } = fixture()
+  const study = createLionStudy(source)
+  const points = study.group.children.find(node => node instanceof THREE.Points) as THREE.Points
+  const positions = points.geometry.getAttribute('position')
+  study.setField(0)
+  study.advance(0, true)
+  assert.equal(points.visible, false)
+  study.setField(1)
+  study.advance(0, true)
+  assert.equal(points.visible, true)
+  assert.equal(points.geometry.getAttribute('position'), positions)
+  study.setField(.06)
+  study.advance(0, true)
+  assert.equal(points.visible, false)
   dispose(study.group); dispose(source)
 })

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Portfolio canvas alpha verification</title>
+  <style>
+    body { margin: 24px; color: #191a17; background: #f3f3f0; font: 14px/1.5 monospace; }
+    #cases { display: grid; grid-template-columns: repeat(2, 320px); gap: 24px; }
+    section { padding: 16px; border: 1px solid #999; }
+    h2 { font: inherit; margin: 0 0 12px; }
+    canvas, .reference { display: block; width: 256px; height: 64px; }
+    .reference { display: flex; margin-top: 12px; }
+    .reference span { width: 64px; }
+    #result { white-space: pre-wrap; max-width: 1000px; }
+  </style>
+</head>
+<body><h1>Shader output → browser compositing</h1><div id="cases"></div><pre id="result">Checking light/dark partial coverage and flow…</pre><script type="module" src="/tests/portfolio-alpha-probe.ts"></script></body>
+</html>

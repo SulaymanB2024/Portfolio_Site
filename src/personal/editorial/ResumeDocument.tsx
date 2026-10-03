@@ -1,4 +1,4 @@
-import type { MouseEvent } from 'react'
+import { memo, type MouseEvent } from 'react'
 import { resumeProfile as profile, resumeReview } from '../profile-copy'
 import { displayDate } from './types'
 import { resumeSections as sections, resumeSectionHref, type ResumeSection } from './resume-navigation'
@@ -39,7 +39,7 @@ function SectionHeading({ id, number, children }: { id: string; number: string; 
   </h2>
 }
 
-export default function ResumeDocument() {
+function ResumeDocument() {
   const [firstName, ...lastName] = profile.name.split(' ')
   const awards = profile.awardsAndLeadership.slice(0, 4)
   const leadership = profile.awardsAndLeadership.slice(4)
@@ -181,3 +181,5 @@ export default function ResumeDocument() {
     </div>
   </article>
 }
+
+export default memo(ResumeDocument)

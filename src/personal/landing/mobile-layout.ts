@@ -4,9 +4,10 @@ export interface SculptureBounds { x: number; y: number; z: number }
 
 /** Reserve real space for the title and links, then fit the nearest 3D bounds. */
 export function mobileSculptureFrame(width: number, height: number, copyTop: number, lineHeight: number, lines: number, linkRows: number, bounds: SculptureBounds, safeBottom = 0) {
-  const top = copyTop + lines * lineHeight + 32
+  const linksTop = copyTop + lines * lineHeight + 16
   const linkHeight = linkRows * 44 + Math.max(0, linkRows - 1) * 12
-  const bottom = height - Math.max(58, safeBottom + 50) - linkHeight - 24
+  const top = linksTop + linkHeight + 26
+  const bottom = height - Math.max(60, safeBottom + 44)
   const availableHeight = Math.max(24, bottom - top), availableWidth = width * .88
   const cameraDepth = 6.1, span = 2 * cameraDepth * Math.tan(16 * Math.PI / 180)
   const focal = height / (2 * Math.tan(16 * Math.PI / 180))

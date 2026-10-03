@@ -14,6 +14,10 @@ import { prepareArticle } from './editorial/article-cache'
 import { homePage, workPage, writingPage, articlePage, projectPage, resumePage, caseStudyPage, aboutPage, contactPage, prepareRoutePage } from './route-pages'
 import { artworkTransitionName, galleryArticleJourney, startArtworkTransition, type ArtworkTransition } from './editorial/artwork-continuity'
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
+import { installMenuDismissal } from './refinements/menu-dismissal'
+import { focusWithoutWarmup } from './refinements/warmup-policy'
+import RouteBoundary from './RouteBoundary'
+import { prepareRouteResources } from './route-preparation'
 import './editorial/artwork-continuity.css'
 import './personal.css'
 import './editorial/editorial.css'
@@ -34,6 +38,7 @@ const path = () => resolveRoute(location.hash, location.pathname, articles)
 
 function useRoute() {
   const [route, setRoute] = useState(path)
+  const [pending, setPending] = useState(false)
   const current = useRef(route)
   useEffect(() => {
     let sequence = 0
@@ -43,16 +48,18 @@ function useRoute() {
       const ticket = ++sequence
       active?.skipTransition()
       if (next === current.current) {
+        setPending(false)
         document.documentElement.dataset.artTransition = 'idle'
         return
       }
-      const prepared = prepareRoutePage(next)
+      setPending(true)
+      const prepared = prepareRouteResources(next, prepareRoutePage, prepareArticle)
       const journey = galleryArticleJourney(current.current, next)
       const canAnimate = journey && !matchMedia('(prefers-reduced-motion: reduce)').matches
       const update = () => {
         if (ticket !== sequence || path() !== next) return
         current.current = next
-        flushSync(() => setRoute(next))
+        flushSync(() => { setRoute(next); setPending(false) })
         window.scrollTo({ top: 0, behavior: 'instant' })
         if (next === 'writing') {
           const selected = new URLSearchParams(location.hash.split('?')[1] || '').get('at')
@@ -64,7 +71,7 @@ function useRoute() {
       }
       if (!canAnimate) {
         document.documentElement.dataset.artTransition = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'idle'
-        try { await prepared } catch { /* The lazy page retains its normal load failure. */ }
+        await prepared
         update()
         return
       }
@@ -74,9 +81,8 @@ function useRoute() {
       const article = articles.find(item => `writing/${item.slug}` === articleRoute)
       const name = article ? artworkTransitionName(getArticleGenerativeArtwork(article.path)) : ''
       active = startArtworkTransition(name, async () => {
-        const data = next.startsWith('writing/') ? prepareArticle(next.slice('writing/'.length)) : Promise.resolve()
         // Keep the source's live canvas mounted until both page and article are ready.
-        await Promise.all([prepared.catch(() => {}), data.catch(() => {})])
+        await prepared
         update()
       })
       void active.ready.catch(() => { /* Failed preparation must not break navigation. */ })
@@ -110,7 +116,7 @@ function useRoute() {
     const schema = document.querySelector('#page-schema')
     if (schema && schema.getAttribute('data-route') !== (route === 'home' ? '' : route)) schema.remove()
   }, [route])
-  return route
+  return { route, pending }
 }
 
 function useAppearance() {
@@ -135,7 +141,7 @@ export default function PersonalSite() {
 }
 
 function SitePages() {
-  const route = useRoute()
+  const { route, pending } = useRoute()
   const { dark, setDark } = useAppearance()
   const [menuOpen, setMenuOpen] = useState(false)
   const [landingActive, setLandingActive] = useState(true)
@@ -154,10 +160,14 @@ function SitePages() {
   }, [route])
   useEffect(() => {
     if (!menuOpen) return
-    const frame = requestAnimationFrame(() => document.querySelector<HTMLAnchorElement>('#main-navigation a')?.focus())
-    const escape = (event: KeyboardEvent) => { if (event.key === 'Escape') { setMenuOpen(false); menuButton.current?.focus() } }
-    window.addEventListener('keydown', escape)
-    return () => { cancelAnimationFrame(frame); window.removeEventListener('keydown', escape) }
+    const header = menuButton.current?.closest('header')
+    if (!header) return
+    const frame = requestAnimationFrame(() => focusWithoutWarmup(document.querySelector<HTMLAnchorElement>('#main-navigation a')))
+    const dispose = installMenuDismissal(header, restoreFocus => {
+      setMenuOpen(false)
+      if (restoreFocus) menuButton.current?.focus({ preventScroll: true })
+    })
+    return () => { cancelAnimationFrame(frame); dispose() }
   }, [menuOpen])
   useLayoutEffect(() => {
     document.documentElement.dataset.appearance = isDark ? 'dark' : 'light'
@@ -177,8 +187,9 @@ function SitePages() {
       <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug], index) => <a key={slug} href={`#/${slug}`} aria-current={section === (slug || 'home') ? 'page' : undefined} onClick={event => { if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; setMenuOpen(false); if (menuOpen && route === slug) requestAnimationFrame(() => menuButton.current?.focus({ preventScroll: true })) }}><span className="nav-number" aria-hidden="true">0{index + 1}</span>{item}</a>)}</nav>
       <div className="header-end"><button className="appearance-toggle" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setDark(!dark)}><span aria-hidden="true">◐</span></button><button ref={menuButton} className="nav-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button></div>
     </header>
-    <main ref={main} id="main-content" tabIndex={-1} key={route}>
-      <Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} /> : article ? <ArticlePage slug={article.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} onLandingActiveChange={setLandingActive} /> : <NotFound />}</Suspense>
+    {pending && <p className="route-opening mono" role="status">Opening the page…</p>}
+    <main ref={main} id="main-content" tabIndex={-1} key={route} aria-busy={pending || undefined}>
+      <RouteBoundary homeRoute={isHome} onError={() => setLandingActive(false)}><Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} dark={isDark} /> : article ? <ArticlePage slug={article.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} onLandingActiveChange={setLandingActive} /> : <NotFound />}</Suspense></RouteBoundary>
     </main>
     {route !== 'about' && <Footer route={route} closing={!article && route !== 'contact'} />}
   </div>

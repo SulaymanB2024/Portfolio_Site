@@ -124,6 +124,20 @@ test('GPU cohorts sustain 30Hz with a healthy 4ms study, instead of inheriting t
   f.scheduler.dispose();
 });
 
+test('an explicit mobile ceiling and floor survive cheap and expensive adaptive draws', () => {
+  for (const [cost, maxFps, minFps, expected] of [[.5, 12, 6, 12], [4, 12, 6, 10], [18, 12, 9, 9]]) {
+    const f = fixture();
+    const handle = f.scheduler.add({ maxFps, minFps, draw() { f.spend(cost); } });
+    for (let refresh = 0; refresh <= 120; refresh++) {
+      f.step(refresh * 1000 / 60);
+      assert(handle.getStats().targetFps <= maxFps);
+      assert(handle.getStats().targetFps >= minFps);
+    }
+    assert.equal(handle.getStats().targetFps, expected);
+    f.scheduler.dispose(); assert.equal(f.pending.size, 0);
+  }
+});
+
 function deadlineFixture(sleeping: boolean) {
   let time = 0, next = 1, rafs = 0, timers = 0;
   const pending = new Map<number, { at: number; frame: boolean; callback: (time: number) => void }>();

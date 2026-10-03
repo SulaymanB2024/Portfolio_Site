@@ -61,20 +61,15 @@ function ResearchDiagram() {
   const arrow = `research-${useId().replace(/:/g, '')}`
   return <figure className="project-diagram project-diagram-research" aria-label="Explore how a synthetic research question is framed">
     <div className="project-diagram-kicker"><span>A question before a claim</span><span>Research schematic</span></div>
-    <svg className="project-diagram-art" viewBox="0 0 900 350" role="img" aria-label={`A ${selected.label.toLowerCase()} question passes through population assumptions and synthetic responses to ${lens ? 'a claim boundary' : 'an interpretation lens'}. No study results are displayed.`}>
-      <Arrow id={arrow} />
-      <text x="82" y="207" className="project-diagram-question-mark">?</text>
-      <path className="project-diagram-route is-selected" d="M167 176 H272" markerEnd={`url(#${arrow})`} />
-      <g className="project-diagram-response-field">
-        {[0, 1, 2, 3, 4].map(index => <path key={index} d={`M306 ${107 + index * 34} C367 ${49 + index * 52} 442 ${288 - index * 27} 526 ${110 + index * 31}`} />)}
-        <path d="M288 66 V290 M286 66 H302 M286 290 H302 M551 66 V290 M536 66 H552 M536 290 H552" />
-      </g>
-      <path className="project-diagram-route is-selected" d="M579 176 H666" markerEnd={`url(#${arrow})`} />
-      {lens === 0 ? <g className="project-diagram-research-lens"><path d="M709 113 C743 101 773 107 803 127 M709 176 C743 162 773 170 803 180 M709 239 C743 228 773 230 803 214" /><path d="M698 98 V256 M813 98 V256" /></g>
-        : <g className="project-diagram-research-lens"><circle cx="756" cy="176" r="69" /><path d="M715 217 797 135" /><text x="756" y="190" textAnchor="middle" className="project-diagram-boundary-symbol">…</text></g>}
-      <text x="108" y="327" textAnchor="middle" className="project-diagram-svg-label">QUESTION</text>
-      <text x="421" y="327" textAnchor="middle" className="project-diagram-svg-label">SYNTHETIC RESPONSES</text>
-      <text x="756" y="327" textAnchor="middle" className="project-diagram-svg-label">{lens === 0 ? 'INTERPRETATION' : 'CLAIM BOUNDARY'}</text>
+    <svg className="project-diagram-art research-print" viewBox="0 0 900 350" role="img" aria-label={`Illustrative printed response field for a ${selected.label.toLowerCase()} question. ${lens ? 'The outer marks indicate a claim boundary.' : 'The crossing line represents an interpretation lens.'} No study results are displayed.`}>
+      <defs>
+        <pattern id={`${arrow}-fine`} width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r=".95" fill="currentColor" /></pattern>
+        <pattern id={`${arrow}-dense`} width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.55" fill="currentColor" /></pattern>
+      </defs>
+      <path d="M70 246C144 302 224 286 294 222S401 66 473 58C541 49 594 139 643 182S760 251 839 184C788 307 691 324 609 283S475 115 402 139C305 171 246 354 70 246Z" fill={`url(#${arrow}-dense)`} />
+      <path d="M74 149C168 35 273 41 359 86S488 285 580 265C687 241 703 37 836 107C764 73 735 297 608 312C475 327 415 183 338 157S194 117 74 149Z" fill={`url(#${arrow}-fine)`} />
+      <path d="M74 149C168 35 273 41 359 86S488 285 580 265C687 241 703 37 836 107" fill="none" stroke="currentColor" strokeWidth=".8" />
+      {lens ? <path d="M42 77V36H86M814 36H858V77M42 274V316H86M814 316H858V274" fill="none" stroke="currentColor" strokeWidth="1.2" /> : <path d="M28 207C269 207 489 185 875 142" fill="none" stroke="currentColor" strokeWidth="1.2" />}
     </svg>
     <div className="project-diagram-sequence" aria-hidden="true"><span>Question</span><span>Synthetic response</span><span>{lens ? 'Claim boundary' : 'Interpretation'}</span></div>
     <Choices label="Choose a research question" items={researchQuestions.map(item => item.label)} value={question} onChange={setQuestion} />

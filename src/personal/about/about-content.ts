@@ -16,7 +16,7 @@ export const personalObjects: { id: InterestId; label: string; title: string; se
     source: 'https://www.youtube.com/watch?v=qc6q_XkS0aE', sourceLabel: 'Hear “Unfolding of Night”',
   },
   {
-    id: 'knight', label: 'Logic puzzles', title: 'One more move.',
+    id: 'knight', label: 'Chess & puzzles', title: 'One more move.',
     sentence: 'I enjoy logic puzzles. Try a small one: A1 to H8 in six knight moves.',
     detailLabel: 'A recent puzzle',
     detail: 'I solved Jane Street’s July 2026 puzzle, “Pent-up Frustration 3: Knight Moves 7.” This little board is a separate, original challenge.',

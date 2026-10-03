@@ -6,11 +6,12 @@ import type { GenerativeArtwork, P5SketchFactory } from '../src/personal/editori
 
 async function settle() { for (let turn = 0; turn < 8; turn++) await Promise.resolve() }
 
-function fixture() {
+function fixture(mobile = false) {
   const descriptors = new Map<string, PropertyDescriptor | undefined>()
   const pending = new Map<number, (time: number) => void>()
   const timers = new Map<number, { at: number; callback: () => void }>()
   const documentEvents = new Map<string, Set<() => void>>()
+  const windowEvents = new Map<string, Set<() => void>>()
   const mediaEvents = new Set<() => void>()
   const canvases: FakeCanvas[] = []
   const phases: number[] = []
@@ -50,9 +51,16 @@ function fixture() {
   install('cancelAnimationFrame', (id: number) => pending.delete(id))
   install('setTimeout', (callback: () => void, delay: number) => { const id = nextFrame++; timers.set(id, { at: time + delay, callback }); return id })
   install('clearTimeout', (id: number) => timers.delete(id))
+  install('window', {
+    innerWidth: mobile ? 390 : 1280, innerHeight: 844,
+    matchMedia: (query: string) => query === '(pointer: coarse)' ? { matches: mobile } : media,
+    setTimeout: globalThis.setTimeout, clearTimeout: globalThis.clearTimeout,
+    addEventListener(name: string, callback: () => void) { const listeners = windowEvents.get(name) ?? new Set(); listeners.add(callback); windowEvents.set(name, listeners) },
+    removeEventListener(name: string, callback: () => void) { windowEvents.get(name)?.delete(callback) },
+  })
   const source: P5SketchFactory = instance => { setups++; let phase = 0; instance.createCanvas(400, 400); instance.draw = () => phases.push(++phase) }
   const artwork = { sketchId: 'yuru-01', factory() { loads++; return loading } } as GenerativeArtwork
-  return { artwork, document, media, pending, timers, canvases, phases, documentEvents, mediaEvents,
+  return { artwork, document, media, pending, timers, canvases, phases, documentEvents, mediaEvents, windowEvents,
     host: () => new FakeNode() as unknown as HTMLElement,
     get loads() { return loads }, get setups() { return setups },
     resolve(factory = source) { resolve({ default: factory }) },
@@ -63,6 +71,7 @@ function fixture() {
       if (next) { pending.delete(next[0]); next[1](now) }
     },
     hidden(value: boolean) { document.hidden = value; for (const callback of documentEvents.get('visibilitychange') ?? []) callback() },
+    scroll() { for (const callback of windowEvents.get('scroll') ?? []) callback() },
     reduced(value: boolean) { media.matches = value; for (const callback of mediaEvents) callback() },
     restore() { for (const [name, descriptor] of descriptors) { if (descriptor) Object.defineProperty(globalThis, name, descriptor); else Reflect.deleteProperty(globalThis, name) } },
   }
@@ -139,4 +148,53 @@ test('an unresolved native import completing after route disposal cannot allocat
   player.dispose(); f.resolve(); await settle()
   assert.equal(f.setups, 0); assert.equal(f.canvases.length, 0); assert.equal(f.pending.size + f.timers.size, 0)
   assert.equal(f.documentEvents.get('visibilitychange')?.size, 0); assert.equal(f.mediaEvents.size, 0)
+})
+
+test('mobile native playback caps frames and resumes the retained phase160ms after the final scroll', async t => {
+  const f = fixture(true), player = createArtworkPlayer(f.artwork, 400)
+  t.after(() => { player.dispose(); f.restore() })
+  player.setPlayback(true, false); await settle(); f.resolve(); await settle(); f.step(0)
+  assert.equal(player.status.stats.targetFps, 12); assert.deepEqual(f.phases, [1])
+  assert.deepEqual([f.canvases[0].width, f.canvases[0].height], [400, 400])
+  f.scroll(); assert.equal(player.status.active, false); assert.equal(f.pending.size, 0)
+  f.step(159); assert.deepEqual(f.phases, [1])
+  f.scroll(); f.step(318); assert.deepEqual(f.phases, [1]); assert.equal(player.status.active, false)
+  f.step(319); assert.deepEqual(f.phases, [1, 2]); assert.equal(player.status.active, true)
+  assert.equal(f.setups, 1); assert.equal(f.canvases.length, 1)
+})
+
+test('scroll quiet periods cannot undo user pause, hidden state, or paused travel', async t => {
+  const f = fixture(true), player = createArtworkPlayer(f.artwork, 400)
+  t.after(() => { player.dispose(); f.restore() })
+  player.setPlayback(true, false); await settle(); f.resolve(); await settle(); f.step(0)
+  f.scroll(); player.setPlayback(true, true); f.step(160)
+  assert.equal(player.status.active, false); assert.deepEqual(f.phases, [1])
+  player.setTravel(true); player.setPlayback(false, false); f.scroll(); f.step(320)
+  assert.equal(player.status.active, false, 'travel must retain its explicit paused preference')
+  player.setTravel(false); player.setPlayback(true, false); f.step(400)
+  assert.deepEqual(f.phases, [1, 2])
+  f.scroll(); f.hidden(true)
+  assert.equal(f.timers.size + f.pending.size, 0)
+  f.step(1000); assert.deepEqual(f.phases, [1, 2])
+  f.hidden(false); f.step(1001)
+  assert.deepEqual(f.phases, [1, 2, 3]); assert.equal(f.setups, 1)
+})
+
+test('mobile disposal removes the scroll listener and pending quiet-period timer', async t => {
+  const f = fixture(true), player = createArtworkPlayer(f.artwork, 400)
+  t.after(() => { player.dispose(); f.restore() })
+  player.setPlayback(true, false); await settle(); f.resolve(); await settle(); f.step(0)
+  f.scroll(); assert.equal(f.timers.size, 1); assert.equal(f.windowEvents.get('scroll')?.size, 1)
+  player.dispose(); f.scroll(); f.step(1000)
+  assert.equal(f.windowEvents.get('scroll')?.size, 0)
+  assert.equal(f.timers.size + f.pending.size, 0); assert.deepEqual(f.phases, [1])
+})
+
+test('desktop playback retains its native profile without subscribing to scroll pauses', async t => {
+  const f = fixture(), player = createArtworkPlayer(f.artwork, 400)
+  t.after(() => { player.dispose(); f.restore() })
+  player.setPlayback(true, false); await settle(); f.resolve(); await settle(); f.step(0)
+  assert.equal(player.status.stats.targetFps, 18); assert.equal(f.windowEvents.get('scroll')?.size ?? 0, 0)
+  f.scroll(); assert.equal(player.status.active, true); f.step(60)
+  assert.deepEqual(f.phases, [1, 2]); assert.equal(f.setups, 1)
 })

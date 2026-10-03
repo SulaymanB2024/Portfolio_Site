@@ -49,7 +49,7 @@ export function installNavigationMotion(root: HTMLElement, nav: HTMLElement, mar
       inkAnimation = marker.animate([
         { transform: before === 'none' ? after : before, opacity: Number(visible) },
         { transform: after, opacity: 1 },
-      ], { duration: 360, easing: EASE })
+      ], { duration: 240, easing: EASE })
       void inkAnimation.finished.catch(() => {})
     }
   }
@@ -71,7 +71,7 @@ export function installNavigationMotion(root: HTMLElement, nav: HTMLElement, mar
     if (!heading?.animate) return
     journey.heading = heading
     // Headings move; shared WebGL parents keep their exact bounds.
-    const animation = heading.animate([{ transform: 'translateY(5px)' }, { transform: 'translateY(0)' }], { duration: 360, easing: EASE })
+    const animation = heading.animate([{ transform: 'translateY(3px)' }, { transform: 'translateY(0)' }], { duration: 220, easing: EASE })
     journey.headingAnimation = animation
     journey.animations.add(animation)
     void animation.finished.catch(() => {}).finally(() => {
@@ -97,7 +97,7 @@ export function installNavigationMotion(root: HTMLElement, nav: HTMLElement, mar
     animateHeading(journey, main)
     const footer = root.querySelector<HTMLElement>('.personal-footer')
     const arrivals = [main, footer].filter((element): element is HTMLElement => Boolean(element?.animate)).map(element => {
-      const animation = element.animate([{ opacity: .15 }, { opacity: 1 }], { duration: 260, easing: EASE })
+      const animation = element.animate([{ opacity: .65 }, { opacity: 1 }], { duration: 180, easing: EASE })
       journey.animations.add(animation)
       return animation.finished.catch(() => {})
     })
@@ -139,14 +139,8 @@ export function installNavigationMotion(root: HTMLElement, nav: HTMLElement, mar
     active = journey
     html.dataset.navTransition = 'leaving'
     html.dataset.navTransitionCount = String(Number(html.dataset.navTransitionCount || 0) + 1)
-    const footer = root.querySelector<HTMLElement>('.personal-footer')
-    const departures = [main, footer].filter((element): element is HTMLElement => Boolean(element?.animate)).map(element => {
-      const animation = element.animate([{ opacity: 1 }, { opacity: .15 }], { duration: 90, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' })
-      journey.animations.add(animation)
-      return animation.finished.catch(() => {})
-    })
-    journey.exitTimer = window.setTimeout(() => commit(journey), 110)
-    void Promise.all(departures).then(() => commit(journey))
+    // Route immediately; the traveling line and new heading carry the gesture.
+    commit(journey)
   }
 
   function hashChanged() {

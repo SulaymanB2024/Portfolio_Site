@@ -18,7 +18,7 @@ function surfaceBuffer(attribute: THREE.BufferAttribute | THREE.InterleavedBuffe
   return { array: attribute.array, count: attribute.count, stride: attribute.itemSize }
 }
 
-const rest = .06, crest = .88, cycle = 36
+const rest = 0, crest = .88, cycle = 36
 const ease = (value: number) => value * value * (3 - 2 * value)
 function cycleField(seconds: number) {
   // A readable form, a long release, a suspended field, then a slower return.
@@ -36,7 +36,8 @@ function phaseForField(value: number, returning: boolean) {
 }
 
 /** Reinterpret the intact scan as an etched form and a field sampled from its surface. */
-export function createLionStudy(source: THREE.Object3D) {
+export function createLionStudy(source: THREE.Object3D, sampleCount = 42000) {
+  const count = Number.isFinite(sampleCount) ? Math.max(1, Math.min(42000, Math.floor(sampleCount))) : 42000
   source.updateMatrixWorld(true)
   const bounds = new THREE.Box3().setFromObject(source)
   const center = bounds.getCenter(new THREE.Vector3())
@@ -50,6 +51,7 @@ export function createLionStudy(source: THREE.Object3D) {
   let target = rest
   let seed = 7183
   const dustGeometries: THREE.BufferGeometry[] = []
+  const dustBounds: { points: THREE.Points; erosionCeiling: number }[] = []
   const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296 }
 
   source.traverse(node => {
@@ -98,7 +100,7 @@ export function createLionStudy(source: THREE.Object3D) {
     const position = geometry.getAttribute('position')
     const normal = geometry.getAttribute('normal')
     const index = geometry.getIndex()
-    const { positions: samples, normals, seeds } = sampleSurface(surfaceBuffer(position), surfaceBuffer(normal), index?.array ?? null, 42000, random)
+    const { positions: samples, normals, seeds } = sampleSurface(surfaceBuffer(position), surfaceBuffer(normal), index?.array ?? null, count, random)
     const dustGeometry = new THREE.BufferGeometry()
     dustGeometries.push(dustGeometry)
     dustGeometry.setAttribute('position', new THREE.BufferAttribute(samples, 3))
@@ -150,7 +152,26 @@ export function createLionStudy(source: THREE.Object3D) {
     // The vertex shader moves ink beyond the source bounding sphere.
     dust.frustumCulled = false
     group.add(dust)
+    let erosionCeiling = -Infinity
+    for (let i = 0; i < samples.length; i += 3) {
+      const x = samples[i], y = samples[i + 1], z = samples[i + 2]
+      // Static sample coordinates give a tighter ceiling than a whole-model
+      // box. Omitting the subtracted Gaussian keeps this bound conservative.
+      erosionCeiling = Math.max(erosionCeiling, (.34 - y) * .78 + (x + 1) * .09
+        + Math.sin(x * 3.5 + z * 4) * .055 + Math.sin(y * 11 + z * 7) * .018)
+    }
+    dustBounds.push({ points: dust, erosionCeiling })
   })
+
+  function updateDustVisibility() {
+    const lower = .91 - field.value * .91 - .055
+    for (const { points, erosionCeiling } of dustBounds) {
+      // Only skip a complete draw when every sample is provably invisible.
+      // Margin retains boundary samples despite CPU/GPU float differences.
+      points.visible = field.value > .005 && erosionCeiling >= lower - .0001
+    }
+  }
+  updateDustVisibility()
 
   return {
     group,
@@ -164,8 +185,9 @@ export function createLionStudy(source: THREE.Object3D) {
       } else target = field.value
     },
     setPixelRatio(value: number) { pixelRatio.value = value },
-    setDetail(narrow: boolean) {
-      for (const geometry of dustGeometries) geometry.setDrawRange(0, narrow ? 24000 : 42000)
+    setDetail(narrow: boolean, quality = 1) {
+      const scale = Number.isFinite(quality) ? THREE.MathUtils.clamp(quality, .5, 1) : 1
+      for (const geometry of dustGeometries) geometry.setDrawRange(0, Math.min(count, Math.floor((narrow ? 24000 : 42000) * scale * scale)))
     },
     advance(delta: number, reducedMotion: boolean) {
       const step = Math.min(Math.max(delta, 0), .05)
@@ -178,6 +200,7 @@ export function createLionStudy(source: THREE.Object3D) {
       }
       field.value = reducedMotion ? target : THREE.MathUtils.damp(field.value, target, 12, step)
       if (Math.abs(field.value - target) < .001) field.value = target
+      updateDustVisibility()
       return playing || field.value !== target
     },
     get value() { return field.value },

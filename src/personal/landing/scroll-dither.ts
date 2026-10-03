@@ -7,7 +7,7 @@ export interface ScrollInkUniforms {
 export function scrollInkStrength(velocity: number, distance: number, viewport: number, reduced = false) {
   if (reduced || ![velocity, distance, viewport].every(Number.isFinite) || viewport <= 0) return 0
   const speed = Math.abs(velocity) * Math.max(0, distance) / viewport
-  return .82 * -Math.expm1(-speed * .8)
+  return .30 * -Math.expm1(-speed * .65)
 }
 
 /** Shared by sculpture, visor, and type. Phase comes from scroll, never a clock. */

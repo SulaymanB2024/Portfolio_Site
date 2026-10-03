@@ -36,7 +36,7 @@ export const definitions = [
 ]
 export const sha256 = bytes => createHash('sha256').update(bytes).digest('hex')
 
-function packGLB(json, binary) {
+export function packGLB(json, binary) {
   let encoded = Buffer.from(JSON.stringify(json))
   encoded = Buffer.concat([encoded, Buffer.alloc((4 - encoded.length % 4) % 4, 32)])
   const header = Buffer.alloc(20), binaryHeader = Buffer.alloc(8)
@@ -272,7 +272,7 @@ function settings(definition) {
   return { geometry: definition.mode }
 }
 
-async function record(definition, sourceBytes, outputBytes, io) {
+export async function record(definition, sourceBytes, outputBytes, io) {
   const source = await inspect(sourceBytes, io, definition.id), output = await inspect(outputBytes, io, definition.id)
   const preservation = assertPreserved(source, output, definition, sourceBytes, outputBytes)
   const hash = sha256(outputBytes)

@@ -2,14 +2,14 @@ import catalog from '../editorial/data/catalog.json'
 import { resolveRoute } from '../editorial/routes'
 import { prepareArticle } from '../editorial/article-cache'
 import type { ArticleSummary } from '../editorial/types'
-import { allowsWarmup, createWarmCache, type WarmIntent } from './warmup-policy'
+import { allowsWarmup, createWarmCache, isPlacedFocus, type WarmIntent } from './warmup-policy'
 import { prepareRoutePage } from '../route-pages'
 
 const articles = catalog as ArticleSummary[]
 const figures = new Set(['the-first-ai-managers', 'who-owns-texas-toll-roads', 'viralbench-codex-agent-harness'])
 const loadFigures = () => import('../editorial/ArticleFigures')
 
-/** A short hover dwell, immediate keyboard/touch intent, and no background crawl. */
+/** Warm a chosen destination; scrolling touches and menu autofocus are not intent. */
 export function installRouteWarmup(root: HTMLElement) {
   const warm = createWarmCache()
   let timer = 0
@@ -52,11 +52,18 @@ export function installRouteWarmup(root: HTMLElement) {
     if (hovered && event.relatedTarget instanceof Node && hovered.contains(event.relatedTarget)) return
     cancelHover()
   }
-  function focus(event: FocusEvent) { const link = linkFor(event.target); if (link) { cancelHover(); begin(link, 'focus') } }
+  function focus(event: FocusEvent) {
+    // Menu opening deliberately places focus on its first link for accessibility.
+    // Keep that focus placement without downloading a destination not chosen yet.
+    if (isPlacedFocus(event.target)) return
+    const link = linkFor(event.target)
+    if (link) { cancelHover(); begin(link, 'focus') }
+  }
   function activate(event: PointerEvent | MouseEvent) {
     if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    if (event.type === 'pointerdown' && (event as PointerEvent).pointerType !== 'mouse') return
     const link = linkFor(event.target)
-    // A touch may become a scroll. Data-saving connections wait for its click.
+    // A completed touch shares activation loading with navigation, including Save-Data.
     if (link) { cancelHover(); begin(link, event.type === 'click' ? 'activate' : 'focus') }
   }
   root.addEventListener('pointerover', over, { passive: true })

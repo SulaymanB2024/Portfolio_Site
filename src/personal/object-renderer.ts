@@ -9,6 +9,8 @@ import { createLionStudy } from './contact/lion-study'
 import { PortfolioRuntime } from './portfolio-runtime.ts'
 import { createPortfolioModelLoader } from './portfolio-model-loader.ts'
 import { portfolioAssetUrl } from './portfolio-assets.ts'
+import { readPortfolioRenderPolicy } from './mobile-render-policy.ts'
+import { installObjectTouchOrbit } from './object-touch-orbit.ts'
 
 export type ObjectKind = 'helmet' | 'crystal' | 'ribbon' | 'globe' | 'cross' | 'headrest'
 export interface ObjectHandle {
@@ -24,7 +26,7 @@ export interface ObjectHandle {
 }
 
 /** A single renderer; helmet studies animate only while their output is visible. */
-export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: boolean, onStatus: (status: 'ready' | 'error') => void, onRendered?: (time: number) => void, flowMode = false, cameraDistanceScale = 1): ObjectHandle {
+export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: boolean, onStatus: (status: 'ready' | 'error') => void, onRendered?: (time: number) => void, flowMode = false, cameraDistanceScale = 1, idleMotion = true): ObjectHandle {
   canvas.dataset.kind = kind
   canvas.dataset.state = 'loading'
   canvas.dataset.frames = '0'
@@ -82,7 +84,9 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       textures.clear()
     }
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'low-power' })
+    // The final dither/flow pass writes straight RGB and alpha with NoBlending.
+    // Match browser compositing so partial ink cannot turn into bright fringes.
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, premultipliedAlpha: false, powerPreference: 'low-power' })
     renderer.info.autoReset = false
     teardown = () => {
       releaseResources()
@@ -107,7 +111,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     controls.enableDamping = false
     controls.autoRotateSpeed = 0.7
     // Keep vertical touch scrolling available; horizontal dragging still orbits.
-    canvas.style.touchAction = 'pan-y'
+    canvas.style.touchAction = 'pan-y pinch-zoom'
     const room = new RoomEnvironment()
     const pmrem = new THREE.PMREMGenerator(renderer)
     let environment: THREE.WebGLRenderTarget
@@ -135,7 +139,8 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     const composer = new EffectComposer(renderer, { multisampling: 0 })
     const animatedHelmet = kind === 'helmet'
     // Fine print retains engraved edges without increasing the render target.
-    const dither = new LiveDitherEffect({ gridSize: 1, binary: flowMode || animatedHelmet, live: flowMode || animatedHelmet })
+    const dither = new LiveDitherEffect({ gridSize: 1, binary: flowMode || animatedHelmet || kind === 'headrest', live: flowMode || (animatedHelmet && idleMotion) })
+    canvas.dataset.ditherBinary = String(flowMode || animatedHelmet || kind === 'headrest')
     composer.addPass(new RenderPass(scene, camera))
     // Palette mapping and dither share a pass; flow samples that processed output.
     composer.addPass(new EffectPass(camera, dither))
@@ -145,11 +150,19 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     canvas.dataset.effectPasses = flowMode ? '3' : '2'
     let object: THREE.Group | null = null
     let lionStudy: ReturnType<typeof createLionStudy> | null = null
-    let fieldTarget = .06
+    let fieldTarget = 0
     let fieldPlaying = true
     let frame = 0
+    let wakeTimer = 0
+    let scrollTimer = 0
+    let scrolling = false
     let printFrame = 0
     let frames = 0
+    let frameCallbacks = 0
+    let backingResizes = 0
+    let backingWidth = 0
+    let backingHeight = 0
+    let backingRatio = 0
     const runtime = new PortfolioRuntime()
     let painting = false
     let dragging = false
@@ -164,29 +177,43 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     let contextLost = false
     let fitDistance = 4
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const mobilePolicy = readPortfolioRenderPolicy()
     canvas.dataset.spinning = 'false'
 
     function active() {
-      return !disposed && visible && !document.hidden && !contextLost && !loadFailed
+      return !disposed && visible && !document.hidden && !contextLost && !loadFailed && !scrolling
     }
     function requestRender(force: unknown = true) {
       urgent ||= !painting && Boolean(force)
-      if (active() && !frame) frame = requestAnimationFrame(render)
+      if (!active() || frame) return
+      if (urgent) { window.clearTimeout(wakeTimer); wakeTimer = 0 }
+      if (wakeTimer) return
+      const delay = urgent ? 0 : runtime.paintDelay(performance.now())
+      if (delay > 0) wakeTimer = window.setTimeout(() => {
+        wakeTimer = 0
+        if (active() && !frame) frame = requestAnimationFrame(render)
+      }, delay)
+      else frame = requestAnimationFrame(render)
     }
     function render(time: number) {
       frame = 0
       if (!active()) return
+      frameCallbacks++
+      // The scene is transparent until its model arrives; loading needs no loop.
+      if (!object) { runtime.suspend(); return }
       const flowComplete = flowMode && flowProgress >= .9999
-      const living = (flowMode || animatedHelmet) && !reducedMotion.matches && !flowComplete && !loadFailed
+      const living = (flowMode || (animatedHelmet && idleMotion && mobilePolicy.autoplay)) && !reducedMotion.matches && !flowComplete && !loadFailed
       const fieldMoving = Boolean(lionStudy?.playing) && !reducedMotion.matches
       if (!runtime.canPaint(time, urgent)) { requestRender(false); return }
+      const requested = urgent
       urgent = false
       painting = true
       controls.autoRotate = spinning && !reducedMotion.matches && !flowComplete
-      if (runtime.advance(time, living || fieldMoving || controls.autoRotate, dragging)) resize(true)
+      const qualityChanged = runtime.advance(time, living || fieldMoving || controls.autoRotate, dragging)
+      if (qualityChanged) resize(true)
       const delta = runtime.delta
       const seconds = runtime.seconds
-      if ((flowMode || animatedHelmet) && object) {
+      if ((flowMode || (animatedHelmet && idleMotion && mobilePolicy.autoplay)) && object) {
         object.rotation.x = reducedMotion.matches ? 0 : Math.sin(seconds * .55) * .075
         object.rotation.y = reducedMotion.matches ? 0 : Math.sin(seconds * .46) * .19
         object.rotation.z = reducedMotion.matches ? 0 : Math.sin(seconds * .38 + .7) * .035
@@ -194,17 +221,24 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       }
       dither.setTime(seconds, living)
       flowEffect?.setTime(seconds)
+      const previousField = lionStudy?.value
       const changingStudy = lionStudy?.advance(delta, reducedMotion.matches) ?? false
       controls.update(delta)
-      const started = import.meta.env.DEV ? performance.now() : 0
-      renderer.info.reset()
-      composer.render(delta)
-      onRendered?.(seconds * 1000)
-      if (import.meta.env.DEV) averageCpuMs = averageCpuMs * .94 + (performance.now() - started) * .06
-      frames++
+      // Keep the cycle clock advancing through its two complete-form holds,
+      // without repainting an identical sculpture. Input always paints at once.
+      const heldForm = Boolean(lionStudy && previousField === 0 && lionStudy.value === 0
+        && !requested && !qualityChanged && !controls.autoRotate && !dragging)
+      if (!heldForm) {
+        const started = import.meta.env.DEV ? performance.now() : 0
+        renderer.info.reset()
+        composer.render(delta)
+        onRendered?.(seconds * 1000)
+        if (import.meta.env.DEV) averageCpuMs = averageCpuMs * .94 + (performance.now() - started) * .06
+        frames++
+      }
       painting = false
       const live = controls.autoRotate || living || changingStudy
-      stats(live, frames === 1 || !live)
+      stats(live, (!heldForm && frames === 1) || !live)
       if (live) requestRender(false)
       else runtime.suspend()
     }
@@ -212,7 +246,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       if (!import.meta.env.DEV) return
       const now = performance.now()
       if (force) canvas.dataset.liveMotion = String(live)
-      if (now - lastStats < 750) return
+      if (!force && now - lastStats < 750) return
       lastStats = now
       canvas.dataset.renderAverageMs = averageCpuMs.toFixed(3)
       canvas.dataset.renderCpuMs = averageCpuMs.toFixed(3)
@@ -237,10 +271,14 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       canvas.dataset.azimuth = controls.getAzimuthalAngle().toFixed(4)
       canvas.dataset.polar = controls.getPolarAngle().toFixed(4)
       canvas.dataset.frames = String(frames)
+      canvas.dataset.frameCallbacks = String(frameCallbacks)
+      canvas.dataset.backingResizes = String(backingResizes)
     }
     function pause() {
       cancelAnimationFrame(frame)
       frame = 0
+      window.clearTimeout(wakeTimer)
+      wakeTimer = 0
       runtime.suspend()
       stats(false, true)
     }
@@ -265,12 +303,17 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       const height = Math.max(1, Math.round(rect.height))
       // A viewport-wide surface must not multiply the former sculpture's GPU allocation.
       // Integer display-pixel subdivisions avoid a fractionally resampled dot screen.
-      const pixelRatio = printPixelRatio(width, height, window.devicePixelRatio || 1) * runtime.scale
+      const policy = readPortfolioRenderPolicy()
+      const pixelRatio = printPixelRatio(width, height, window.devicePixelRatio || 1, policy.pixels, policy.maxRatio) * runtime.scale
       lionStudy?.setPixelRatio(pixelRatio)
-      lionStudy?.setDetail(width < 700)
-      if (renderer.getPixelRatio() !== pixelRatio) renderer.setPixelRatio(pixelRatio)
-      renderer.setSize(width, height, false)
-      composer.setSize(width, height)
+      lionStudy?.setDetail(policy.mobile || width < 700, runtime.scale * policy.pointScale)
+      if (width !== backingWidth || height !== backingHeight || pixelRatio !== backingRatio) {
+        if (renderer.getPixelRatio() !== pixelRatio) renderer.setPixelRatio(pixelRatio)
+        renderer.setSize(width, height, false)
+        composer.setSize(width, height)
+        backingWidth = width; backingHeight = height; backingRatio = pixelRatio
+        backingResizes++
+      }
       canvas.dataset.renderPixels = String(canvas.width * canvas.height)
       dither.setView(width, height)
       flowEffect?.setResolution(width, height)
@@ -313,6 +356,16 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
         runtime.suspend()
         requestRender()
       }
+    }
+    function onScroll() {
+      if (!mobilePolicy.mobile) return
+      if (!scrolling) { scrolling = true; pause() }
+      window.clearTimeout(scrollTimer)
+      scrollTimer = window.setTimeout(() => {
+        scrollTimer = 0
+        scrolling = false
+        requestRender()
+      }, 160)
     }
     function onAfterPrint() {
       cancelAnimationFrame(printFrame)
@@ -384,17 +437,24 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     controls.addEventListener('change', requestRender)
     const dragStart = () => { dragging = true }
     const dragEnd = () => { dragging = false; requestRender() }
+    const releaseTouchOrbit = installObjectTouchOrbit(canvas, controls, value => {
+      dragging = value
+      if (!value) requestRender()
+    })
     controls.addEventListener('start', dragStart)
     controls.addEventListener('end', dragEnd)
     canvas.addEventListener('keydown', onKey)
     canvas.addEventListener('webglcontextlost', onContextLost)
     canvas.addEventListener('webglcontextrestored', onContextRestored)
     document.addEventListener('visibilitychange', onVisibility)
+    window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('afterprint', onAfterPrint)
     reducedMotion.addEventListener('change', onMotionChange)
 
     teardown = () => {
       pause()
+      window.clearTimeout(scrollTimer)
+      releaseTouchOrbit()
       cancelAnimationFrame(printFrame)
       resizeObserver.disconnect()
       intersectionObserver.disconnect()
@@ -402,6 +462,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       canvas.removeEventListener('webglcontextlost', onContextLost)
       canvas.removeEventListener('webglcontextrestored', onContextRestored)
       document.removeEventListener('visibilitychange', onVisibility)
+      window.removeEventListener('scroll', onScroll)
       window.removeEventListener('afterprint', onAfterPrint)
       reducedMotion.removeEventListener('change', onMotionChange)
       controls.removeEventListener('change', requestRender)
@@ -448,11 +509,12 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
             group.rotation.set(0, -Math.PI / 3.5, -0.25)
           } else {
             if (kind === 'headrest') {
-              lionStudy = createLionStudy(gltf.scene)
+              lionStudy = createLionStudy(gltf.scene, mobilePolicy.mobile ? 12000 : 42000)
               lionStudy.setField(fieldTarget)
               lionStudy.setPlaying(fieldPlaying && !reducedMotion.matches)
               lionStudy.setPixelRatio(renderer.getPixelRatio())
-              lionStudy.setDetail(canvas.getBoundingClientRect().width < 700)
+              const policy = readPortfolioRenderPolicy()
+              lionStudy.setDetail(policy.mobile || canvas.getBoundingClientRect().width < 700, runtime.scale * policy.pointScale)
               group.add(lionStudy.group)
             } else group.add(gltf.scene)
             group.rotation.set(kind === 'headrest' ? .04 : kind === 'crystal' ? 0.12 : 0, kind === 'headrest' ? -.32 : kind === 'crystal' ? 0.4 : -0.4, kind === 'headrest' ? -.04 : kind === 'crystal' ? -0.08 : 0.1)

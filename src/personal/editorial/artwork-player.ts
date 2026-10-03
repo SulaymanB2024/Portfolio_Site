@@ -2,6 +2,7 @@ import { createCanvasSketch } from './generative/canvas-runtime.ts'
 import type { GenerativeArtwork } from './generative/types'
 import { artworkWorkerBackend } from './artwork-worker-backend.ts'
 import { previewScheduler, type PreviewFrameStats, type PreviewHandle } from './preview-scheduler.ts'
+import { readPortfolioRenderPolicy } from '../mobile-render-policy.ts'
 export { artworkPlayers } from './artwork-players.ts'
 
 export type ArtworkPlayerStatus = {
@@ -14,16 +15,19 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
   const surface = document.createElement('div')
   surface.style.width = surface.style.height = '100%'
   const listeners = new Set<(status: ArtworkPlayerStatus) => void>()
+  const mobile = readPortfolioRenderPolicy().mobile
+  const limits = mobile ? { maxFps: 12, minFps: 6 } : {}
   const status: ArtworkPlayerStatus = { id: nextPlayerId++, painted: false, failed: false, active: false, renderer: 'main', jobs: 0,
-    stats: { frames: 0, drawMs: 0, averageMs: 0, targetFps: 18 } }
+    stats: { frames: 0, drawMs: 0, averageMs: 0, targetFps: mobile ? 12 : 18 } }
   let job: PreviewHandle | null = null
   let worker: PreviewHandle | null = null
   let sketch: ReturnType<typeof createCanvasSketch> | null = null
   let mainFactory: Awaited<ReturnType<GenerativeArtwork['factory']>>['default'] | null = null
   let disposed = false, loadingMain = false, visible = false, paused = false, traveling = false, travelPaused = false
+  let scrolling = false, scrollResume = 0
   const motion = matchMedia('(prefers-reduced-motion: reduce)')
   const emit = () => listeners.forEach(listener => listener(status))
-  const active = () => !disposed && !status.failed && !paused && !(traveling && travelPaused) && !document.hidden && !motion.matches && (visible || traveling)
+  const active = () => !disposed && !status.failed && !paused && !scrolling && !(traveling && travelPaused) && !document.hidden && !motion.matches && (visible || traveling)
   const sync = () => {
     let next = active()
     if (next && mainFactory && !sketch) startMain()
@@ -41,6 +45,7 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
   }
   const fail = () => {
     if (disposed) return
+    clearScrollResume()
     job?.remove(); sketch?.remove(); job = null; sketch = null; mainFactory = null
     status.failed = true; status.active = false; emit()
   }
@@ -49,7 +54,7 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
     try {
       sketch = createCanvasSketch(mainFactory, surface, { physicalSize })
       mainFactory = null
-      job = previewScheduler.add({ active: true, draw: () => sketch?.draw() ?? false, onFrame: frame, onError: fail })
+      job = previewScheduler.add({ active: true, ...limits, draw: () => sketch?.draw() ?? false, onFrame: frame, onError: fail })
     } catch { fail() }
   }
   function main() {
@@ -62,10 +67,32 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
       sync()
     }).catch(fail)
   }
+  function clearScrollResume() {
+    if (scrollResume) window.clearTimeout(scrollResume)
+    scrollResume = 0
+    scrolling = false
+  }
+  function onScroll() {
+    if (disposed || document.hidden || status.failed) return
+    if (scrollResume) window.clearTimeout(scrollResume)
+    scrolling = true
+    sync()
+    scrollResume = window.setTimeout(() => {
+      scrollResume = 0
+      scrolling = false
+      if (!disposed) sync()
+    }, 160)
+  }
+  function visibility() {
+    if (document.hidden) clearScrollResume()
+    sync()
+  }
   worker = artworkWorkerBackend.register({ host: surface, sketchId: artwork.sketchId, physicalSize, active: false,
+    ...limits,
     onFrame: frame, onError: main, onJobs: count => { status.jobs = count; emit() } })
   if (worker) { job = worker; status.renderer = 'worker' } else main()
-  document.addEventListener('visibilitychange', sync)
+  document.addEventListener('visibilitychange', visibility)
+  if (mobile) window.addEventListener('scroll', onScroll, { passive: true, capture: true })
   motion.addEventListener('change', sync)
   return {
     get status() { return status },
@@ -76,8 +103,10 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
     subscribe(listener: (status: ArtworkPlayerStatus) => void) { listeners.add(listener); listener(status); return () => { listeners.delete(listener) } },
     dispose() {
       if (disposed) return
+      clearScrollResume()
       disposed = true; listeners.clear(); job?.remove(); worker?.remove(); sketch?.remove(); mainFactory = null; surface.remove()
-      document.removeEventListener('visibilitychange', sync); motion.removeEventListener('change', sync)
+      document.removeEventListener('visibilitychange', visibility); motion.removeEventListener('change', sync)
+      if (mobile) window.removeEventListener('scroll', onScroll, { capture: true })
     },
   }
 }

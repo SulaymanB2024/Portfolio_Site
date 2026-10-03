@@ -7,8 +7,9 @@ import { batchChessTemplate, bindChessBatchPicking } from './chess-batching.ts'
 export function createChessSet(parent: THREE.Group, knight: THREE.Object3D, tiles: Map<string,THREE.Vector3>, geometries: Set<THREE.BufferGeometry>, materials: Set<THREE.Material>) {
   const root=new THREE.Group(); root.name='complete-chess-set'; parent.add(root)
   const templates=new Map<string,THREE.Object3D>()
-  const white=new THREE.MeshStandardMaterial({color:0xbdb8aa,roughness:.58,metalness:.04})
-  const black=new THREE.MeshStandardMaterial({color:0x151515,roughness:.56,metalness:.04})
+  const white=new THREE.MeshStandardMaterial({color:0xbdb8aa,roughness:.48,metalness:.04})
+  const black=new THREE.MeshStandardMaterial({color:0x35322f,roughness:.44,metalness:.04})
+  const surfaces=new Set<THREE.Material>([white,black])
   materials.add(white);materials.add(black)
   function mesh(group:THREE.Group,geometry:THREE.BufferGeometry,material:THREE.Material,x=0,y=0,z=0){
     geometries.add(geometry);const node=new THREE.Mesh(geometry,material);node.position.set(x,y,z);group.add(node);return node
@@ -46,10 +47,13 @@ export function createChessSet(parent: THREE.Group, knight: THREE.Object3D, tile
     let object:THREE.Object3D
     if(type==='n'){
       object=knight.clone(true);object.position.set(0,0,0);object.scale.setScalar(.70);object.rotation.y=color==='w'?Math.PI:0
-      object.traverse(node=>{if(node instanceof THREE.Mesh){const original=Array.isArray(node.material)?node.material:[node.material];const next=original.map(material=>{const copy=material.clone() as THREE.MeshStandardMaterial;const detail=node.name.includes('relief');copy.color.setHex(color==='w'?(detail?0x282828:0xbdb8aa):(detail?0x757575:0x151515));copy.opacity=1;copy.transparent=false;materials.add(copy);return copy});node.material=Array.isArray(node.material)?next:next[0]}})
+      object.traverse(node=>{if(node instanceof THREE.Mesh){const original=Array.isArray(node.material)?node.material:[node.material];const next=original.map(material=>{const copy=material.clone() as THREE.MeshStandardMaterial;const detail=node.name.includes('relief');copy.color.setHex(color==='w'?(detail?0x282828:0xbdb8aa):(detail?0x757575:0x35322f));copy.opacity=1;copy.transparent=false;materials.add(copy);surfaces.add(copy);return copy});node.material=Array.isArray(node.material)?next:next[0]}})
     } else {object=turned(type,color);batchChessTemplate(object,geometries)}
     templates.set(`${color}${type}`,object)
   }
+  // Build opaque templates first so the existing exact-material batching is kept.
+  // Their shared finishes can then fade in one pass, including double-sided GLB parts.
+  for(const material of surfaces){material.transparent=true;material.forceSinglePass=true}
   type Entry={group:THREE.Group;kind:string;target:THREE.Vector3;from:THREE.Vector3;elapsed:number;release:()=>void}
   const entries=new Map<string,Entry>()
   let previousMove=''
@@ -77,5 +81,10 @@ export function createChessSet(parent: THREE.Group, knight: THREE.Object3D, tile
     }
     return moving
   }
-  return {root,update,tick}
+  let opacity=1
+  function setOpacity(value:number){
+    const next=Math.max(0,Math.min(1,value));if(opacity===next)return
+    opacity=next;for(const material of surfaces)material.opacity=next
+  }
+  return {root,update,tick,setOpacity}
 }

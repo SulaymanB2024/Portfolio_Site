@@ -12,14 +12,19 @@
   const appSelector = ':scope > .personal-site, :scope > .art-export'
   let observer
   let fallback
+  const reveal = setTimeout(() => {
+    if (page.dataset.siteBoot === 'pending') page.dataset.siteBoot = 'waiting'
+  }, 1000)
   const deadline = setTimeout(() => finish('fallback'), 12000)
+  const booting = () => page.dataset.siteBoot === 'pending' || page.dataset.siteBoot === 'waiting'
   function finish(state) {
-    if (page.dataset.siteBoot !== 'pending') return
+    if (!booting()) return
     const root = document.getElementById('root')
     // React can remove the original HTML before an initial render error is reported.
     if (state === 'fallback' && fallback && root && !root.querySelector(appSelector) && !root.contains(fallback)) root.replaceChildren(fallback)
     page.dataset.siteBoot = state
     fallback = undefined
+    clearTimeout(reveal)
     clearTimeout(deadline)
     observer?.disconnect()
     document.removeEventListener('readystatechange', observeMount)
@@ -32,7 +37,7 @@
     if (document.getElementById('root')?.querySelector(appSelector)) finish('ready')
   }
   function observeMount() {
-    if (document.readyState === 'loading' || page.dataset.siteBoot !== 'pending' || observer) return
+    if (document.readyState === 'loading' || !booting() || observer) return
     const root = document.getElementById('root')
     if (!root) { finish('fallback'); return }
     // Interactive fires before deferred modules run; retain the original DOM, without cloning it.
