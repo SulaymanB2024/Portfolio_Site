@@ -1,11 +1,17 @@
 import * as THREE from 'three'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { PORTFOLIO_DITHER_GLSL } from '../dither-kernel'
+import { PortfolioRuntime } from '../portfolio-runtime'
+import { createPortfolioModelLoader } from '../portfolio-model-loader'
+import { portfolioAssetUrl } from '../portfolio-assets'
+import { disposeModel } from '../../model-resources'
 import { printPixelRatio, readPrintPalette } from '../print-palette'
 import type { InterestId } from './about-content'
 import type { PhraseNote } from './music-phrase'
 import type { ChessSceneState } from './ChessGame'
 import { createChessSet } from './chess-scene'
 import { drawScoreCanvas } from './score-engraving'
+import { batchBoardTiles, createBoardLabels } from './board-batching'
+import { cloneInterestBoardMaterial, composeInterestView, settleInterestValue, settleInterestView, writeKnightDestination, type InterestView } from './interest-motion'
 
 export interface InterestScene {
   select(id: InterestId | null): void
@@ -21,17 +27,20 @@ export interface InterestScene {
   dispose(): void
 }
 
-type Specimen = { id: InterestId; group: THREE.Group; model: THREE.Group; pose: THREE.Group; bow?: THREE.Object3D; bowX: number; strings: THREE.Object3D[]; stringX: number[]; notes: THREE.Object3D[]; noteY: number[]; knight?: THREE.Object3D; knightStart?: THREE.Vector3; board?: THREE.Object3D; chess?: ReturnType<typeof createChessSet>; scoreOverlay?: THREE.Mesh; boardOpacity: number; boardMaterials: THREE.MeshStandardMaterial[]; tiles: Map<string, THREE.Vector3>; opacity: number; materials: THREE.MeshStandardMaterial[] }
+type Specimen = { id: InterestId; group: THREE.Group; model: THREE.Group; pose: THREE.Group; view: InterestView; bow?: THREE.Object3D; bowX: number; strings: THREE.Object3D[]; stringX: number[]; notes: THREE.Object3D[]; noteY: number[]; pen?: THREE.Object3D; notation?: THREE.Object3D; knight?: THREE.Object3D; knightStart?: THREE.Vector3; board?: THREE.Object3D; boardBatch?: ReturnType<typeof batchBoardTiles>; boardLabels?: ReturnType<typeof createBoardLabels>; chess?: ReturnType<typeof createChessSet>; scoreOverlay?: THREE.Mesh; boardOpacity: number; boardMaterials: THREE.MeshStandardMaterial[]; tiles: Map<string, THREE.Vector3>; opacity: number; materials: THREE.MeshStandardMaterial[] }
 const ids: InterestId[] = ['bass', 'score', 'knight']
 const VERTEX = 'varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.0,1.0); }'
 const FRAGMENT = `
-uniform sampler2D image; uniform vec3 ink; varying vec2 vUv;
-float bayer(vec2 p){return p.x*2.0+p.y*3.0-p.x*p.y*4.0;}
+uniform sampler2D image; uniform vec3 ink; uniform vec2 cssResolution; uniform float motionSeconds; varying vec2 vUv;
+${PORTFOLIO_DITHER_GLSL}
 void main(){
   vec4 model=texture2D(image,vUv);
-  vec2 pixel=mod(floor(gl_FragCoord.xy),4.0);
-  float threshold=(4.0*bayer(mod(pixel,2.0))+bayer(floor(pixel/2.0))+.5)/16.0;
-  float gray=pow(clamp(dot(model.rgb,vec3(.2126,.7152,.0722)),0.0,1.0),1.0/2.2);
+  if(model.a<=.0001){gl_FragColor=vec4(0.0);return;}
+  vec2 pixel=floor(vUv*cssResolution);
+  float threshold=portfolioLiveThreshold(portfolioBayer4(pixel),pixel,motionSeconds,.025);
+  // NormalBlending into transparent black stores premultiplied target color.
+  vec3 straightColor=model.a>0.0001?model.rgb/model.a:vec3(0.0);
+  float gray=portfolioDisplayLuminance(straightColor);
   float shade=mix(1.0-gray,1.0-step(threshold,gray),.80);
   gl_FragColor=vec4(ink,model.a*shade);
   #include <colorspace_fragment>
@@ -51,17 +60,21 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   key.position.set(-3, 5, 6)
   const rim = new THREE.DirectionalLight(0xffffff, 1.8)
   rim.position.set(4, 2, -3)
-  scene.add(key, rim, new THREE.HemisphereLight(0xffffff, 0x444444, 1.3))
+  // A quieter fill leaves carved recesses and embossed notation legible.
+  scene.add(key, rim, new THREE.HemisphereLight(0xffffff, 0x444444, .65))
   const palette = readPrintPalette(canvas, dark)
-  const shader = new THREE.ShaderMaterial({ vertexShader: VERTEX, fragmentShader: FRAGMENT, transparent: true, depthTest: false, depthWrite: false, uniforms: { image: { value: target.texture }, ink: { value: palette.ink } } })
+  const shader = new THREE.ShaderMaterial({ vertexShader: VERTEX, fragmentShader: FRAGMENT, transparent: true, depthTest: false, depthWrite: false, toneMapped: false, uniforms: { image: { value: target.texture }, ink: { value: palette.ink }, cssResolution: { value: new THREE.Vector2(1, 1) }, motionSeconds: { value: 0 } } })
   const quadGeometry = new THREE.PlaneGeometry(2, 2)
   const post = new THREE.Scene()
   post.add(new THREE.Mesh(quadGeometry, shader))
   const postCamera = new THREE.Camera()
   const raycaster = new THREE.Raycaster()
   const pointer = new THREE.Vector2()
+  const drawingSize = new THREE.Vector2()
+  const knightTarget = new THREE.Vector3()
   const specimens: Specimen[] = []
-  const loader = new GLTFLoader()
+  const loader = createPortfolioModelLoader()
+  const runtime = new PortfolioRuntime()
   const controller = new AbortController()
   const media = matchMedia('(prefers-reduced-motion: reduce)')
   const geometries = new Set<THREE.BufferGeometry>()
@@ -97,9 +110,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   let urgent = true
   let width = 1
   let height = 1
-  let lastTick = 0
-  let lastPaint = 0
-  let time = 0
+  let lastStats = -Infinity
   let frames = 0
   let settling = true
   let averageMs = 0
@@ -119,28 +130,30 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   let drag: { id: number; x: number; y: number; previousX: number; previousY: number; moved: boolean; intent: 'pending' | 'horizontal' | 'vertical' } | null = null
   canvas.dataset.state = 'loading'
   canvas.dataset.frames = '0'
+  canvas.dataset.effectPasses = '1'
+  canvas.dataset.renderPasses = '2'
 
   function active() { return !disposed && !lost && visible && !document.hidden }
   function wake() { urgent = true; if (active() && !raf) raf = requestAnimationFrame(render) }
-  function measure() {
+  function measure(shouldWake = true) {
     const rect = canvas.getBoundingClientRect()
     width = Math.max(1, rect.width); height = Math.max(1, rect.height)
-    const ratio = printPixelRatio(width, height, Math.min(devicePixelRatio || 1, 1.5))
+    const ratio = printPixelRatio(width, height, Math.min(devicePixelRatio || 1, 1.5)) * runtime.scale
     renderer.setPixelRatio(ratio)
     renderer.setSize(width, height, false)
-    const pixels = renderer.getDrawingBufferSize(new THREE.Vector2())
+    const pixels = renderer.getDrawingBufferSize(drawingSize)
     target.setSize(pixels.x, pixels.y)
+    shader.uniforms.cssResolution.value.set(width, height)
     camera.aspect = width / height
     camera.position.set(0, 0, width < 700 ? 8 : 6.5)
     camera.updateProjectionMatrix()
-    canvas.dataset.renderPixels = String(pixels.x * pixels.y)
-    settling = true; wake()
+    if (import.meta.env.DEV) canvas.dataset.renderPixels = String(pixels.x * pixels.y)
+    settling = true
+    if (shouldWake) wake()
   }
   function approach(value: number, goal: number, dt: number) {
-    if (media.matches) return goal
-    const next = THREE.MathUtils.lerp(value, goal, 1 - Math.exp(-dt * 7))
-    if (Math.abs(next - goal) < .0008) return goal
-    settling = true
+    const next = settleInterestValue(value, goal, dt, media.matches)
+    if (next !== goal) settling = true
     return next
   }
   function restoreMarkers() {
@@ -181,17 +194,19 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   }
   function knightDestination(specimen: Specimen, next: string) {
     const source = specimen.tiles.get('a1'), destination = specimen.tiles.get(next)
-    return source && destination && specimen.knightStart ? specimen.knightStart.clone().add(destination.clone().sub(source)) : null
+    return writeKnightDestination(specimen.knightStart, source, destination, knightTarget) ? knightTarget : null
   }
   function render(now: number) {
     raf = 0
-    if (!active()) return
-    if (!urgent && now - lastPaint < 1000 / 30 - 1) { raf = requestAnimationFrame(render); return }
+    if (!active()) { runtime.suspend(); stats(true); return }
+    if (!runtime.canPaint(now, urgent)) { raf = requestAnimationFrame(render); return }
     urgent = false
-    const renderStart = performance.now()
-    const dt = Math.min(.07, Math.max(0, (now - (lastTick || now)) / 1000))
-    lastTick = now
-    if (playing) time += dt
+    const live = playing && !media.matches && specimens.length > 0
+    if (runtime.advance(now, live, !!drag)) measure(false)
+    const renderStart = import.meta.env.DEV ? performance.now() : 0
+    const dt = runtime.delta
+    const time = runtime.seconds
+    shader.uniforms.motionSeconds.value = time
     settling = false
     const narrow = width < 700
     for (const item of specimens) {
@@ -207,19 +222,23 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       item.group.position.y = approach(item.group.position.y, desiredY, dt)
       const scale = approach(item.group.scale.x, desiredScale, dt)
       item.group.scale.setScalar(scale)
+      const previousOpacity = item.opacity
+      const previousBoardOpacity = item.boardOpacity
       item.opacity = approach(item.opacity, hidden ? 0 : 1, dt)
       item.group.visible = item.opacity > .005
-      for (const material of item.materials) material.opacity = item.opacity
+      if (item.opacity !== previousOpacity) for (const material of item.materials) material.opacity = item.opacity
       item.boardOpacity = approach(item.boardOpacity, focus ? 1 : 0, dt)
       if (item.board) item.board.visible = item.boardOpacity > .005
-      for (const material of item.boardMaterials) material.opacity = item.opacity * item.boardOpacity
+      if (item.opacity !== previousOpacity || item.boardOpacity !== previousBoardOpacity) {
+        for (const material of item.boardMaterials) material.opacity = item.opacity * item.boardOpacity
+      }
       const baseYaw = item.id === 'bass' ? -.24 : item.id === 'score' ? .18 : focus ? (gameState?.flipped?Math.PI-.22:-.22) : -.98
-      const yaw = baseYaw + (focus ? manualYaw : 0) + Math.sin(time * .32 + index) * .15
-      item.pose.rotation.y = approach(item.pose.rotation.y, yaw, dt)
-      item.pose.rotation.x = (item.id === 'knight' ? approach(item.pose.rotation.x, focus ? .67 + manualPitch : .02, dt) : item.id === 'score' ? -.10 + (focus ? manualPitch : 0) : focus ? manualPitch : 0)
-      item.pose.rotation.z = item.id === 'bass' ? -.055 : item.id === 'score' ? Math.sin(time * .44) * .025 : 0
-      item.pose.position.y = item.id !== 'knight' ? Math.sin(time * .65 + index) * .035 : 0
-      if (item.bow) item.bow.position.x = item.bowX + Math.sin(time * .9) * .10 + (bassArticulation === 'arco' && !media.matches ? Math.sin(time * 3.2) * Math.max(...pulses) * .18 : 0)
+      const pitch = item.id === 'knight' ? (focus ? .67 + manualPitch : .02) : item.id === 'score' ? -.10 + (focus ? manualPitch : 0) : focus ? manualPitch : 0
+      if (settleInterestView(item.view, baseYaw + (focus ? manualYaw : 0), pitch, dt, media.matches)) settling = true
+      composeInterestView(item.view, index, time, media.matches, item.pose.rotation)
+      item.pose.rotation.z = item.id === 'bass' ? -.055 : item.id === 'score' && !media.matches ? Math.sin(time * .44) * .025 : 0
+      item.pose.position.y = item.id !== 'knight' && !media.matches ? Math.sin(time * .65 + index) * .035 : 0
+      if (item.bow) item.bow.position.x = item.bowX + (!media.matches ? Math.sin(time * .9) * .10 : 0) + (bassArticulation === 'arco' && !media.matches ? Math.sin(time * 3.2) * Math.max(...pulses) * .18 : 0)
       if (item.id === 'bass') {
         finger.visible = focus && bassPosition > 0
         const fraction = 2 ** (-bassPosition / 12)
@@ -234,8 +253,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
         note.scale.setScalar(written ? 1.35 : 1)
         note.position.y = approach(note.position.y, written ? item.noteY[0] + [0, .036, .072, .125][noteSequence[index]] : item.noteY[index], dt)
       })
-      const pen = item.model.getObjectByName('pen')
-      if (pen) pen.rotation.z = Math.sin(time * .8) * .045
+      if (item.pen) item.pen.rotation.z = !media.matches ? Math.sin(time * .8) * .045 : 0
       if (item.knight) {
         item.knight.visible = !focus || !gameState
         if (item.chess) { item.chess.root.visible = focus && !!gameState; if (item.chess.root.visible && item.chess.tick(dt, media.matches)) settling = true }
@@ -250,8 +268,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
         }
       }
       if (item.id === 'score') {
-        const original = item.model.getObjectByName('score-notation')
-        if (original) original.visible = !focus
+        if (item.notation) item.notation.visible = !focus
         item.notes.forEach(note => { note.visible = !focus })
         if (item.scoreOverlay) item.scoreOverlay.visible = focus
         if (focus && scoreDirty) { drawScoreCanvas(scoreContext,scoreState.notes,scoreState);scoreTexture.needsUpdate=true;scoreDirty=false }
@@ -270,7 +287,22 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     renderer.info.reset()
     renderer.setRenderTarget(target); renderer.clear(); renderer.render(scene, camera)
     renderer.setRenderTarget(null); renderer.clear(); renderer.render(post, postCamera)
-    frames++; lastPaint = now
+    frames++
+    if (import.meta.env.DEV) {
+      const duration = performance.now() - renderStart
+      averageMs = frames === 1 ? duration : averageMs * .94 + duration * .06
+    }
+    stats(frames === 1 || (!live && !settling))
+    if (live || settling) raf = requestAnimationFrame(render)
+    else runtime.suspend()
+  }
+
+  function stats(force = false) {
+    const now = performance.now()
+    if (!import.meta.env.DEV) return
+    if (force) canvas.dataset.liveMotion = String(active() && playing && !media.matches && specimens.length > 0)
+    if (now - lastStats < 750) return
+    lastStats = now
     canvas.dataset.frames = String(frames)
     canvas.dataset.drawCalls = String(renderer.info.render.calls)
     canvas.dataset.triangles = String(renderer.info.render.triangles)
@@ -288,10 +320,18 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     canvas.dataset.chessSelection = gameState?.selected ?? ''
     canvas.dataset.legalMoves = legal.join(',')
     canvas.dataset.legalMarkers = String(markers.filter(marker => marker.visible).length)
-    averageMs = averageMs * .94 + (performance.now() - renderStart) * .06
-    canvas.dataset.renderAverageMs = averageMs.toFixed(2)
-    if (playing || settling) raf = requestAnimationFrame(render)
-    else lastTick = 0
+    const boardBatch = specimens.find(item => item.id === 'knight')?.boardBatch
+    if (boardBatch) {
+      canvas.dataset.boardTileCallsBefore = String(boardBatch.sourceCalls)
+      canvas.dataset.boardTileCalls = String(boardBatch.tileCalls)
+      canvas.dataset.boardLabelCalls = '1'
+    }
+    canvas.dataset.renderAverageMs = averageMs.toFixed(3)
+    canvas.dataset.cpuSubmissionMs = averageMs.toFixed(3)
+    canvas.dataset.frameAverageMs = runtime.averageFrameMs.toFixed(3)
+    canvas.dataset.fps = runtime.fps.toFixed(2)
+    canvas.dataset.resolutionScale = String(runtime.scale)
+    canvas.dataset.liveMotion = String(active() && playing && !media.matches && specimens.length > 0)
   }
 
   function intersections(event: PointerEvent) {
@@ -339,20 +379,20 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   }, { signal: controller.signal })
   canvas.addEventListener('pointerup', event => { if (!drag || event.pointerId !== drag.id) return; if (!drag.moved) interact(event); drag = null; if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId) }, { signal: controller.signal })
   canvas.addEventListener('pointercancel', event => { if (event.pointerId === drag?.id) drag = null }, { signal: controller.signal })
-  canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); lost = true; cancelAnimationFrame(raf); raf = 0; canvas.dataset.state = 'error'; status('error') }, { signal: controller.signal })
-  canvas.addEventListener('webglcontextrestored', () => { lost = false; status('ready'); canvas.dataset.state = 'ready'; wake() }, { signal: controller.signal })
-  document.addEventListener('visibilitychange', () => { lastTick = 0; if (document.hidden) { cancelAnimationFrame(raf); raf = 0 } else wake() }, { signal: controller.signal })
-  media.addEventListener('change', wake, { signal: controller.signal })
-  const resize = new ResizeObserver(measure)
+  canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); lost = true; runtime.suspend(); stats(true); cancelAnimationFrame(raf); raf = 0; canvas.dataset.state = 'error'; status('error') }, { signal: controller.signal })
+  canvas.addEventListener('webglcontextrestored', () => { lost = false; runtime.suspend(); status('ready'); canvas.dataset.state = 'ready'; wake() }, { signal: controller.signal })
+  document.addEventListener('visibilitychange', () => { runtime.suspend(); if (document.hidden) { cancelAnimationFrame(raf); raf = 0; stats(true) } else wake() }, { signal: controller.signal })
+  media.addEventListener('change', () => { runtime.suspend(); wake() }, { signal: controller.signal })
+  const resize = new ResizeObserver(() => measure())
   resize.observe(canvas)
-  const observer = new IntersectionObserver(entries => { visible = entries[0]?.isIntersecting ?? false; lastTick = 0; if (visible) wake(); else { cancelAnimationFrame(raf); raf = 0 } })
+  const observer = new IntersectionObserver(entries => { visible = entries[0]?.isIntersecting ?? false; runtime.suspend(); if (visible) wake(); else { cancelAnimationFrame(raf); raf = 0; stats(true) } })
   observer.observe(canvas)
   measure()
 
   let failed = 0
   for (const id of ids) {
-    loader.load(`${import.meta.env.BASE_URL}about-objects/${id}.glb`, gltf => {
-      if (disposed) { gltf.scene.traverse(node => { if (node instanceof THREE.Mesh) { node.geometry.dispose(); for (const material of Array.isArray(node.material) ? node.material : [node.material]) material.dispose() } }); return }
+    void loader.load(portfolioAssetUrl(`about-${id}`), controller.signal).then(gltf => {
+      if (disposed) { disposeModel(gltf.scene); return }
       const model = gltf.scene
       const bounds = new THREE.Box3().setFromObject(model)
       const center = bounds.getCenter(new THREE.Vector3())
@@ -364,8 +404,9 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       pose.add(model); group.add(pose); scene.add(group)
       group.userData.interest = id
       group.scale.setScalar(.01)
-      const specimen: Specimen = { id, group, model, pose, bowX: 0, strings: [], stringX: [], notes: [], noteY: [], tiles: new Map(), materials: [], boardMaterials: [], boardOpacity: 0, opacity: 1 }
+      const specimen: Specimen = { id, group, model, pose, view: { yaw: 0, pitch: 0 }, bowX: 0, strings: [], stringX: [], notes: [], noteY: [], tiles: new Map(), materials: [], boardMaterials: [], boardOpacity: 0, opacity: 1 }
       group.updateWorldMatrix(true, true)
+      const boardCopies = new Map<THREE.Material, THREE.Material>()
       model.traverse(node => {
         if (node instanceof THREE.Mesh) {
           geometries.add(node.geometry)
@@ -375,12 +416,13 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
           if (onBoard) {
             const original = Array.isArray(node.material) ? node.material : [node.material]
             original.forEach(material => materials.add(material))
-            node.material = Array.isArray(node.material) ? node.material.map(material => material.clone()) : node.material.clone()
+            node.material = Array.isArray(node.material) ? node.material.map(material => cloneInterestBoardMaterial(material, boardCopies)) : cloneInterestBoardMaterial(node.material, boardCopies)
           }
           const list = Array.isArray(node.material) ? node.material : [node.material]
           for (const material of list) {
             materials.add(material)
-            if (material instanceof THREE.MeshStandardMaterial) { material.transparent = true; material.forceSinglePass = true; specimen.materials.push(material); if (onBoard) specimen.boardMaterials.push(material) }
+            for (const value of Object.values(material)) if (value instanceof THREE.Texture) textures.add(value)
+            if (material instanceof THREE.MeshStandardMaterial) { material.transparent = true; material.forceSinglePass = true; material.opacity = onBoard ? 0 : 1; specimen.materials.push(material); if (onBoard) specimen.boardMaterials.push(material) }
           }
         }
         if (/^tile-[a-h][1-8]$/.test(node.name)) {
@@ -389,7 +431,10 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
           specimen.tiles.set(node.name.slice(5), model.worldToLocal(point))
         }
       })
-      specimen.materials = [...new Set(specimen.materials)]
+      specimen.boardMaterials = [...new Set(specimen.boardMaterials)]
+      specimen.materials = [...new Set(specimen.materials)].filter(material => !specimen.boardMaterials.includes(material))
+      specimen.pen = model.getObjectByName('pen')
+      specimen.notation = model.getObjectByName('score-notation')
       specimen.bow = model.getObjectByName('bow'); specimen.bowX = specimen.bow?.position.x ?? 0
       for (const letter of ['e', 'a', 'd', 'g']) { const string = model.getObjectByName(`string-${letter}`); if (string) { specimen.strings.push(string); specimen.stringX.push(string.position.x) } }
       for (let i = 0; i < 4; i++) { const note = model.getObjectByName(`note-${i}`); if (note) { specimen.notes.push(note); specimen.noteY.push(note.position.y) } }
@@ -398,9 +443,10 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       specimen.knightStart = specimen.knight?.position.clone()
       if (id === 'knight' && specimen.knight) {
         if(gameState){specimen.chess=createChessSet(model,specimen.knight,specimen.tiles,geometries,materials);specimen.chess.update(gameState)}
-        const labelGeometry=new THREE.PlaneGeometry(.075,.064);geometries.add(labelGeometry)
-        const addLabel=(text:string,x:number,z:number)=>{const surface=document.createElement('canvas');surface.width=64;surface.height=64;const ctx=surface.getContext('2d')!;ctx.fillStyle='#ffffff';ctx.font='38px Courier New';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,32,32);const texture=new THREE.CanvasTexture(surface);texture.colorSpace=THREE.SRGBColorSpace;textures.add(texture);const material=new THREE.MeshBasicMaterial({map:texture,transparent:true,side:THREE.DoubleSide,depthWrite:false});materials.add(material);const label=new THREE.Mesh(labelGeometry,material);label.position.set(x,.033,z);label.rotation.x=-Math.PI/2;specimen.board?.add(label)}
-        for(let index=0;index<8;index++){addLabel('ABCDEFGH'[index],(index-3.5)*.28,1.145);addLabel(String(index+1),-1.145,(3.5-index)*.28)}
+        if (specimen.board) {
+          specimen.boardBatch = batchBoardTiles(specimen.board)
+          specimen.boardLabels = createBoardLabels(specimen.board)
+        }
       }
       if (id === 'score') {
         const geometry = new THREE.PlaneGeometry(1.04,1.42,32,44)
@@ -422,7 +468,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       restoreMarkers(); settling = true; wake()
       canvas.dataset.loadedObjects = String(specimens.length)
       if (specimens.length + failed === ids.length) { canvas.dataset.state = failed ? 'error' : 'ready'; status(failed ? 'error' : 'ready') }
-    }, undefined, error => {
+    }).catch(error => {
       if (disposed) return
       failed++; console.warn(`Could not load personal object ${id}`, error)
       if (specimens.length + failed === ids.length) { canvas.dataset.state = 'error'; status('error') }
@@ -431,14 +477,14 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
 
   return {
     select(id) { selected = id; jumping = null; manualYaw = 0; manualPitch = 0; restoreMarkers(); settling = true; wake() },
-    setPlaying(value) { playing = value; lastTick = 0; wake() },
+    setPlaying(value) { if (playing === value) return; playing = value; runtime.suspend(); stats(true); wake() },
     setDark(value) { shader.uniforms.ink.value.copy(readPrintPalette(canvas, value).ink); wake() },
     pluck(index) { pulses[index] = .9; bassString = index; wake() },
     setNotes(notes) { noteSequence = notes; wake() },
     setPuzzle(next, moves, destination = 'h8', path = [], blocked = [], targets = []) {
       square = next; legal = moves; destinationSquare = destination; puzzlePath = path; blockedSquares=blocked;checkpoints=targets
       const specimen = specimens.find(item => item.id === 'knight')
-      if (specimen?.knight) { const to = knightDestination(specimen, next); if (to) jumping = { from: specimen.knight.position.clone(), to, elapsed: 0 } }
+      if (specimen?.knight) { const to = knightDestination(specimen, next); if (to) jumping = { from: specimen.knight.position.clone(), to: to.clone(), elapsed: 0 } }
       restoreMarkers(); wake()
     },
     setBass(articulation, position) { bassArticulation = articulation; bassPosition = position; wake() },
@@ -446,10 +492,15 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     setGame(state) { gameState=state;const item=specimens.find(item=>item.id==='knight');if(state&&item?.knight){item.chess??=createChessSet(item.model,item.knight,item.tiles,geometries,materials);item.chess.update(state)}restoreMarkers();wake() },
     resetView() { manualYaw = 0; manualPitch = 0; wake() },
     dispose() {
-      disposed = true; cancelAnimationFrame(raf); controller.abort(); resize.disconnect(); observer.disconnect()
+      if (disposed) return
+      stats(true); disposed = true; runtime.suspend(); cancelAnimationFrame(raf); controller.abort(); loader.dispose(); resize.disconnect(); observer.disconnect()
+      for (const specimen of specimens) { specimen.boardBatch?.dispose(); specimen.boardLabels?.dispose() }
       for (const geometry of geometries) geometry.dispose()
       for (const material of materials) material.dispose()
-      for (const texture of textures) texture.dispose()
+      for (const texture of textures) {
+        texture.dispose()
+        if (typeof ImageBitmap !== 'undefined' && texture.image instanceof ImageBitmap) texture.image.close()
+      }
       markerGeometry.dispose(); goalGeometry.dispose(); fingerGeometry.dispose(); markerMaterial.dispose(); lightMarkerMaterial.dispose(); target.dispose(); shader.dispose(); quadGeometry.dispose(); renderer.dispose()
       canvas.dataset.state = 'disposed'
     },

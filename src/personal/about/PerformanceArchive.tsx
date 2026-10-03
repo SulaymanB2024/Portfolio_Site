@@ -1,16 +1,15 @@
 import { useMemo, useState } from 'react'
+import type { Performance } from './performances'
 
-export type PerformanceEntry = {
-  id: string; title: string; date: string; displayDate: string; role: 'performer' | 'composer';
-  ensemble: string; repertoire: string[]; links: { label: string; href: string; kind: 'recording' | 'program' }[]
-}
+export type PerformanceEntry = Omit<Performance, 'sourceNotes'>
+type PerformanceFilter = 'all' | Performance['series']
 
-export default function PerformanceArchive({ entries, initialRole }: { entries: PerformanceEntry[]; initialRole: 'all' | 'performer' | 'composer' }) {
-  const [role, setRole] = useState(initialRole)
-  const visible = useMemo(() => entries.filter(entry => role === 'all' || entry.role === role), [entries, role])
+export default function PerformanceArchive({ entries }: { entries: PerformanceEntry[] }) {
+  const [filter, setFilter] = useState<PerformanceFilter>('all')
+  const visible = useMemo(() => entries.filter(entry => filter === 'all' || entry.series === filter), [entries, filter])
   return <div className="about-performance-archive">
     <div className="about-archive-filters mono" role="group" aria-label="Filter performances">
-      {([['all', 'All'], ['performer', 'Double bass'], ['composer', 'Composition']] as const).map(([value, label]) => <button key={value} aria-pressed={role === value} onClick={() => setRole(value)}>{label}<span>{entries.filter(entry => value === 'all' || entry.role === value).length}</span></button>)}
+      {([['all', 'All'], ['ut-austin', 'UT Austin'], ['all-state', 'All-State']] as const).map(([value, label]) => <button key={value} aria-pressed={filter === value} onClick={() => setFilter(value)}>{label}<span>{entries.filter(entry => value === 'all' || entry.series === value).length}</span></button>)}
     </div>
     <div className="about-performance-list">
       {visible.map(entry => <article className="about-performance" key={entry.id}>

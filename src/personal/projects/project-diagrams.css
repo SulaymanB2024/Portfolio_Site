@@ -1,8 +1,9 @@
 .project-diagram{margin:42px 0 0;min-width:0;color:var(--ink);background:transparent;isolation:isolate}
-.project-diagram-kicker{display:flex;justify-content:space-between;gap:20px;font:10px/1.6 'Courier New',monospace;letter-spacing:.055em;text-transform:uppercase;color:var(--muted);padding:0 0 14px;border-bottom:1px solid var(--line)}
+.project-diagram-kicker{display:flex;justify-content:space-between;gap:20px;font:11px/1.6 'Courier New',monospace;letter-spacing:.055em;text-transform:uppercase;color:var(--muted);padding:0 0 14px;border-bottom:1px solid var(--line)}
 .project-diagram-kicker>span:last-child{text-align:right}
 .project-diagram-art{display:block;width:100%;height:auto;overflow:visible;margin:26px 0 18px;color:var(--ink)}
-.project-diagram-mobile-sequence{display:none}
+.project-diagram-sequence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:0 0 26px;font:11px/1.6 'Courier New',monospace;color:var(--muted);text-align:center}
+.project-diagram-annotation{margin:0 0 22px;text-align:center;font:11px/1.6 'Courier New',monospace;letter-spacing:.04em;color:var(--muted)}
 .project-diagram-thread{fill:none;stroke:var(--line);stroke-width:1.15}
 .project-diagram-route{fill:none;stroke:var(--muted);stroke-width:1.4;opacity:.6}
 .project-diagram-route.is-selected{stroke:var(--ink);stroke-width:3.2;opacity:1}
@@ -11,8 +12,7 @@
 .project-diagram-station.is-selected circle{fill:var(--ink);stroke:var(--ink);stroke-width:2}
 .project-diagram-number{font:normal 78px/1 Georgia,serif;fill:var(--ink);letter-spacing:-.05em}
 .project-diagram-station.is-selected .project-diagram-number{font-style:italic;fill:var(--paper)}
-.project-diagram-svg-label{font:17px 'Courier New',monospace;letter-spacing:.025em;fill:var(--muted)}
-.project-diagram-flow-label{font:17px 'Courier New',monospace;letter-spacing:.025em;fill:var(--ink)}
+.project-diagram-svg-label{display:none}
 .project-diagram-source-lines{fill:none;stroke:var(--ink);stroke-width:1.4}
 .project-diagram-question-mark{font:italic 138px Georgia,serif;fill:var(--ink)}
 .project-diagram-response-field{fill:none;stroke:var(--ink);stroke-width:2.5}
@@ -20,40 +20,38 @@
 .project-diagram-research-lens{fill:none;stroke:var(--ink);stroke-width:2.8}
 .project-diagram-boundary-symbol{font:52px Georgia,serif;fill:var(--ink);stroke:none}
 .project-diagram-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;border-top:1px solid var(--line)}
-.project-diagram-choices button{display:flex;align-items:center;gap:12px;position:relative;min-width:0;min-height:60px;padding:13px 0;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font:15px/1.4 Georgia,serif;text-align:left;cursor:pointer}
+.project-diagram-choices button{display:flex;align-items:center;gap:12px;position:relative;min-width:0;min-height:60px;padding:13px 0;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font:18px/1.4 Georgia,serif;text-align:left;cursor:pointer}
 .project-diagram-choices button[aria-pressed='true']{border-bottom-color:var(--ink)}
-.project-diagram-choice-index{font:10px 'Courier New',monospace;color:var(--muted)}
-.project-diagram-choice-sign{margin-left:auto;font:17px 'Courier New',monospace}
 .project-diagram button:focus-visible,.project-diagram input:focus-visible{outline:2px solid var(--ink);outline-offset:5px}
 .project-diagram button:hover{color:var(--muted)}
-.project-diagram-detail{display:grid;grid-template-columns:1fr 1.15fr;align-items:start;gap:40px;margin:31px 0 28px}
-.project-diagram .project-diagram-detail h3{font:400 clamp(24px,2.6vw,35px)/1.22 Georgia,serif;letter-spacing:-.035em;margin:0;max-width:320px;color:var(--ink)}
-.project-diagram .project-diagram-detail p{font:16px/1.75 Georgia,serif;color:var(--muted);margin:0;max-width:480px}
-.project-diagram-label{display:block;font:10px/1.5 'Courier New',monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.project-diagram-detail{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:start;gap:40px;margin:31px 0 28px}
+.project-diagram .project-diagram-detail h3{font:400 clamp(24px,2.4vw,30px)/1.25 Georgia,serif;letter-spacing:-.035em;margin:0;max-width:400px;color:var(--ink)}
+.project-diagram .project-diagram-detail p{font:17px/1.7 Georgia,serif;color:var(--muted);margin:0;max-width:560px}
+.project-diagram-label{display:block;font:11px/1.5 'Courier New',monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .project-diagram-inline-choices{display:flex;flex-wrap:wrap;gap:10px 23px;margin-top:7px}
 .project-diagram-inline-choices button{border:0;border-bottom:1px solid transparent;background:transparent;color:var(--muted);font:12px/1.5 'Courier New',monospace;min-height:44px;padding:7px 0;text-align:left;cursor:pointer}
 .project-diagram-inline-choices button[aria-pressed='true']{color:var(--ink);border-bottom-color:var(--ink)}
-.project-diagram-date-test{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;border-top:1px solid var(--line);padding-top:20px}
+.project-diagram-date-test{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:40px;border-top:1px solid var(--line);padding-top:20px}
 .project-diagram-date-result{display:grid;gap:5px}
 .project-diagram-date-result strong{font:400 28px/1.25 Georgia,serif;letter-spacing:-.02em}
 .project-diagram-date-result>span:last-child{font:12px/1.6 'Courier New',monospace;color:var(--muted)}
 .project-diagram-lens{border-top:1px solid var(--line);padding-top:20px}
-.project-diagram .project-diagram-lens p{font:15px/1.75 Georgia,serif;color:var(--muted);max-width:680px;margin:18px 0 0}
+.project-diagram .project-diagram-lens p{font:17px/1.7 Georgia,serif;color:var(--muted);max-width:680px;margin:18px 0 0}
 .project-diagram figcaption{font:11px/1.65 'Courier New',monospace;color:var(--muted);margin-top:27px;max-width:690px}
 .project-diagram-dither-field{display:block;width:100%;height:auto;fill:var(--ink);margin:26px 0 23px}
 .project-diagram-dither-controls{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding-top:17px;border-top:1px solid var(--line)}
-.project-diagram-range label{display:flex;align-items:center;justify-content:space-between;gap:15px;font:10px/1.5 'Courier New',monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.project-diagram-range label{display:flex;align-items:center;justify-content:space-between;gap:15px;font:11px/1.5 'Courier New',monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .project-diagram-range output{font:18px Georgia,serif;color:var(--ink)}
 .project-diagram-range input{display:block;width:100%;margin:17px 0 11px;min-height:44px;accent-color:var(--ink);cursor:pointer}
-.project-diagram-range-ends{display:flex;justify-content:space-between;font:10px/1.4 'Courier New',monospace;color:var(--muted)}
+.project-diagram-range-ends{display:flex;justify-content:space-between;font:11px/1.4 'Courier New',monospace;color:var(--muted)}
 @media(max-width:760px){
- .project-diagram{margin-top:30px}.project-diagram-kicker{font-size:9px;gap:15px}.project-diagram-kicker>span{max-width:55%}
- .project-diagram-art{margin:17px 0 14px}.project-diagram-svg-label{display:none}.project-diagram-mobile-sequence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;font:10px/1.6 'Courier New',monospace;color:var(--muted);margin:-5px 0 22px}.project-diagram-mobile-sequence>span:nth-child(2){text-align:center}.project-diagram-mobile-sequence>span:last-child{text-align:right}.project-diagram-flow-label{font-size:15px;letter-spacing:0}
- .project-diagram-choices{gap:13px}.project-diagram-choices button{font-size:14px;gap:7px;min-height:56px}.project-diagram-choice-index{font-size:9px}.project-diagram-choice-sign{font-size:15px}
- .project-diagram-detail{grid-template-columns:1fr;gap:16px;margin:24px 0}.project-diagram .project-diagram-detail h3{font-size:28px;max-width:360px}.project-diagram .project-diagram-detail p{font-size:15px;line-height:1.8;max-width:none}
+ .project-diagram{margin-top:30px}.project-diagram-kicker{font-size:11px;gap:15px}.project-diagram-kicker>span{max-width:55%}
+ .project-diagram-art{margin:17px 0 10px}.project-diagram-sequence{gap:10px;font-size:11px;margin:0 0 22px}
+ .project-diagram-choices{gap:13px}.project-diagram-choices button{font-size:16px;min-height:56px}
+ .project-diagram-detail{grid-template-columns:1fr;gap:16px;margin:26px 0}.project-diagram .project-diagram-detail h3{font-size:28px;max-width:400px}.project-diagram .project-diagram-detail p{font-size:17px;line-height:1.7;max-width:none}
  .project-diagram-date-test{grid-template-columns:1fr;gap:20px}.project-diagram-date-result{border-left:1px solid var(--line);padding-left:17px}.project-diagram-lens{padding-top:18px}
- .project-diagram-inline-choices{gap:8px 22px}.project-diagram figcaption{font-size:10px;line-height:1.75;margin-top:23px}
- .project-diagram-dither-controls{grid-template-columns:1.2fr 1fr;gap:25px}.project-diagram-dither-field{margin:20px 0}.project-diagram-dither-controls .project-diagram-inline-choices{gap:7px 15px}
+ .project-diagram-inline-choices{gap:8px 22px}.project-diagram figcaption{font-size:11px;line-height:1.75;margin-top:23px}
+ .project-diagram-dither-controls{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:25px}.project-diagram-dither-field{margin:20px 0}.project-diagram-dither-controls .project-diagram-inline-choices{gap:7px 15px}
 }
-@media(max-width:380px){.project-diagram-choices{gap:9px}.project-diagram-choice-index{display:none}.project-diagram-choices button{font-size:13px}.project-diagram-dither-controls{grid-template-columns:1fr;gap:22px}.project-diagram-flow-label{font-size:13px}}
+@media(max-width:380px){.project-diagram-choices{gap:9px}.project-diagram-choices button{font-size:15px}.project-diagram-dither-controls{grid-template-columns:1fr;gap:22px}}
 @media(prefers-reduced-motion:reduce){.project-diagram *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

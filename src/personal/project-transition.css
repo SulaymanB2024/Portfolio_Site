@@ -1,14 +1,17 @@
 .project-arrival{position:fixed;inset:0;z-index:1000;pointer-events:none}
-.project-arrival::before{content:'';position:absolute;inset:0;background:var(--paper,var(--arrival-paper));opacity:1;transition:opacity 160ms ease 300ms}
-.project-arrival.is-docking::before{opacity:0}
-.project-arrival-image{position:absolute;inset:0}
-.project-arrival-image canvas{z-index:1}
-.personal-site[data-project-opening='true'] .personal-header{visibility:hidden}
+.project-arrival::before{content:'';position:absolute;inset:0;background:var(--arrival-paper);opacity:1}
+.project-arrival.is-docking::before{animation:project-paper-arrival 300ms ease both}
+.project-arrival[data-suspended='true']::before{animation-play-state:paused}
+.project-arrival-sculpture{position:absolute;inset:0}
+.project-arrival-sculpture canvas{z-index:1}
+/* Keep the source still while its surrounding ink clears. */
+body:has(.work-stage[data-work-opening]){overflow:hidden}
 .work-studies-home:has([data-work-opening]),.work-studies-page:has([data-work-opening]){position:relative;z-index:50}
-.work-stage[data-work-opening]::before{content:'';position:fixed;inset:0;background:var(--paper);z-index:6;animation:project-paper 560ms ease both;pointer-events:auto}
+.work-stage[data-work-opening]::before{content:'';position:fixed;inset:0;background:var(--paper);z-index:6;animation:project-paper-depart 160ms ease both;pointer-events:auto}
 .work-stage[data-work-opening] .work-stage-canvas{z-index:8}
-.work-stage[data-work-opening] .work-study-copy,.work-stage[data-work-opening] .work-study-controls,.work-stage[data-work-opening] .work-section-label,.work-stage[data-work-opening] .work-collection-intro,.work-stage[data-work-opening] .work-study-toolbar,.work-stage[data-work-opening] .section-tail{visibility:hidden}
-.work-stage[data-work-opening] .work-study-entry{border-color:transparent}
+.work-stage[data-work-opening] .work-study-controls{visibility:hidden}
 .work-study-slot[data-expanding='true']{outline:none;pointer-events:none}
-@keyframes project-paper{from{opacity:0}35%{opacity:.75}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){.project-arrival::before{transition:none}.work-stage[data-work-opening]::before{animation:none}}
+/* Keep the ink transformation central, then let the destination emerge. */
+@keyframes project-paper-depart{from{opacity:0}to{opacity:1}}
+@keyframes project-paper-arrival{from{opacity:1}to{opacity:0}}
+@media(prefers-reduced-motion:reduce){.project-arrival.is-docking::before,.work-stage[data-work-opening]::before{animation:none}.project-arrival.is-docking::before{opacity:0}}

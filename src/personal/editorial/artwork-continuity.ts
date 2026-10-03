@@ -1,5 +1,5 @@
 import type { GenerativeArtwork } from './generative/types'
-import { artworkPlayers } from './artwork-player'
+import { artworkPlayers } from './artwork-players'
 
 export const artworkTransitionName = (artwork: GenerativeArtwork) => `article-${artwork.sketchId}`
 export function galleryArticleJourney(from: string, to: string) {

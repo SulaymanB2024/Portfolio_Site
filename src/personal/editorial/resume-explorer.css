@@ -114,6 +114,9 @@
 .rx-document .cv-heading, .rx-document .cv-description { padding: 0; }
 .rx-document .cv-intro-text { max-width: 660px; }
 .rx-document .cv-actions, .rx-document .cv-pdf-note { display: none; }
+.rx-document-return { display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; min-height: 52px; margin-top: 24px; padding: 15px 0; border: 0; border-top: 1px solid var(--line); background: none; color: var(--ink); font: 10px/1.7 'Courier New',monospace; }
+.rx-document-return:hover { border-color: var(--ink); }
+.rx-document-return > span { font-size: 18px; }
 @media (min-width: 901px) and (max-width: 1100px) {
   .rx-stage.is-open { grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); column-gap: 28px; }
   .rx-stage.is-open .rx-node-name { font-size: 18px; }
@@ -181,6 +184,7 @@
   .resume-explorer *, .resume-explorer *::before, .resume-explorer *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 @media print {
+  .rx-document-return { display: none; }
   .resume-explorer { max-width: none; padding: 0; }
   .rx-screen { display: none !important; }
   .rx-document { display: block !important; margin: 0; border: 0; }

@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { TAU, Y, vec, group, shaftAxis, put, tube, rod, jewel, bevelBox, gear, bevelTriangle, machinedRing, bolt, finishBevel } from './geometry.mjs'
+import { TAU, Y, vec, group, shaftAxis, put, tube, rod, jewel, bevelBox, gear, bevelTriangle, machinedRing, channelRing, bolt, finishBevel } from './geometry.mjs'
 
 function headPoint(theta, phi) {
   const y = Math.sin(phi) * .83 + .06
@@ -78,18 +78,59 @@ function earShell(side) {
 
 const brainCenter=()=>vec(0,.585,-.018)
 function lobePoint(side,angle,latitude) {
-  // Broad lobes have actual ridged volume; their sulci are not an outer wire cage.
-  const phase=angle*5+Math.sin(latitude*3)*1.20+side*.4+.26*Math.sin(angle*2-latitude*3)
-  const ridge=.019*Math.cos(phase)+.006*Math.sin(latitude*9+angle*2)
-  const radial=1+ridge/.24
+  // Warped intersecting sulci create continuous cortical relief. Pole attenuation
+  // keeps both hemispheres coherent instead of terminating in upright fingers.
+  const phase=angle*10+1.6*Math.sin(latitude*4+side*.36)+.72*Math.sin(angle*3-latitude*5)
+  const crossFold=latitude*15+1.25*Math.sin(angle*3+latitude*2)
+  const ridge=(.010*Math.cos(phase)+.0045*Math.cos(crossFold))*Math.max(0,Math.cos(latitude))**1.35
+  const radial=1+ridge/.27
   return vec(side*.215+Math.sin(angle)*Math.cos(latitude)*.205*radial,.585+Math.sin(latitude)*.355*radial,-.018+Math.cos(angle)*Math.cos(latitude)*.365*radial)
 }
 function brainLobe(side) {
-  return sampledSurface((u,v)=>lobePoint(side,u*TAU,-1.48+v*2.96),48,32,(u,v)=>{
-    const a=u*TAU,lat=-1.48+v*2.96
+  return sampledSurface((u,v)=>lobePoint(side,u*TAU,-1.53+v*3.06),72,44,(u,v)=>{
+    const a=u*TAU,lat=-1.53+v*3.06
     // Intentional access windows reveal the sparse interior relay, not a noisy wire ball.
     return !((Math.abs(a-2.05)<.22&&Math.abs(lat-.03)<.27)||(Math.abs(a-4.56)<.18&&Math.abs(lat+.38)<.18))
   },.021)
+}
+
+function corticalPole(part,side,latitude) {
+  const positions=[side*.215,.585+Math.sign(latitude)*.355,-.018],normals=[0,Math.sign(latitude),0],indices=[]
+  const segments=72
+  for(let i=0;i<segments;i++){
+    const angle=i/segments*TAU,p=lobePoint(side,angle,latitude)
+    const normal=lobePoint(side,angle+.0001,latitude).sub(lobePoint(side,angle-.0001,latitude)).cross(lobePoint(side,angle,latitude+.0001).sub(lobePoint(side,angle,latitude-.0001))).normalize()
+    positions.push(...p.toArray());normals.push(...normal.toArray())
+    const a=i+1,b=(i+1)%segments+1
+    indices.push(...(latitude>0?[0,a,b]:[0,b,a]))
+  }
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));g.setIndex(indices);put(part,g)
+}
+
+/** Short, flattened organic crests embed into the cortex at both ends. */
+function corticalFold(part,side,parameters,width=.017) {
+  const curve=new THREE.CatmullRomCurve3(parameters.map(([angle,lat])=>vec(angle,lat,0)),false,'centripetal')
+  const segments=28,sides=8,positions=[],normals=[],indices=[]
+  for(let i=0;i<=segments;i++){
+    const t=i/segments,[angle,lat]=curve.getPoint(t).toArray()
+    const point=lobePoint(side,angle,lat)
+    const angleDerivative=lobePoint(side,angle+.0001,lat).sub(lobePoint(side,angle-.0001,lat))
+    const latitudeDerivative=lobePoint(side,angle,lat+.0001).sub(lobePoint(side,angle,lat-.0001))
+    const normal=angleDerivative.clone().cross(latitudeDerivative).normalize()
+    const velocity=curve.getTangent(t)
+    const tangent=angleDerivative.multiplyScalar(velocity.x).add(latitudeDerivative.multiplyScalar(velocity.y)).normalize()
+    const across=normal.clone().cross(tangent).normalize()
+    const taper=.12+.88*Math.sin(t*Math.PI)**.55,r=width*taper,h=.0105*taper
+    const center=point.addScaledVector(normal,-.007+.010*Math.sin(t*Math.PI))
+    for(let j=0;j<sides;j++){
+      const a=j/sides*TAU,cos=Math.cos(a),sin=Math.sin(a)
+      positions.push(...center.clone().addScaledVector(across,cos*r).addScaledVector(normal,sin*h).toArray())
+      normals.push(...across.clone().multiplyScalar(cos/r).addScaledVector(normal,sin/h).normalize().toArray())
+      if(i<segments){const n=(j+1)%sides,k=i*sides;indices.push(k+j,k+sides+n,k+sides+j,k+j,k+n,k+sides+n)}
+    }
+  }
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));g.setIndex(indices)
+  put(part,g)
 }
 
 function syntheticMind() {
@@ -148,14 +189,23 @@ function syntheticMind() {
   tube(sutures,Array.from({length:35},(_,i)=>headPoint(.89+i/34*(TAU-1.78),.43)),.014,44,8)
   for(const side of[-1,1]){
     put(lobes,brainLobe(side))
-    // Thick meandering meridian gyri expose paired cortical lobes, not hairlike rings.
-    for(let fold=0;fold<5;fold++)tube(gyri,Array.from({length:37},(_,i)=>{
-      const latitude=-1.18+i/36*2.40
-      const a=fold/5*TAU+side*.14+(.12+.015*fold)*Math.sin(latitude*3.4+fold*.7)+.065*Math.cos(latitude)*Math.sin(latitude*6.2-fold*.9)
-      const p=lobePoint(side,a,latitude)
-      return p.add(vec((p.x-side*.215)*.020,(p.y-.585)*.020,(p.z+.018)*.020))
-    }),fold%2?.019:.024,36,8)
-
+    for(const latitude of[-1.53,1.53])corticalPole(lobes,side,latitude)
+    // Short frontal, temporal and parietal runs change direction by region.
+    // None spans the hemisphere height or floats above its silhouette.
+    for(const angleCenter of[0,Math.PI])for(let fold=0;fold<4;fold++){
+      const latitude=-.80+fold*.47,phase=fold*.82+side*.24
+      corticalFold(gyri,side,Array.from({length:9},(_,i)=>{
+        const t=i/8,u=t*2-1
+        return[angleCenter+u*.82+.07*Math.sin(t*TAU+phase),latitude+.10*Math.sin(t*TAU+phase)+.05*Math.sin(t*TAU*2-phase)]
+      }),fold===3?.015:.017)
+    }
+    for(const angleCenter of[Math.PI/2,Math.PI*1.5])for(let fold=0;fold<4;fold++){
+      const latitude=-.71+fold*.44,phase=fold*.91+side*.35
+      corticalFold(gyri,side,Array.from({length:9},(_,i)=>{
+        const t=i/8,u=t*2-1
+        return[angleCenter+u*.46+.14*Math.sin(t*TAU+phase),latitude+u*.18+.12*Math.sin(t*TAU-phase)]
+      }),.016)
+    }
   }
   const relays=[]
   for(let i=0;i<18;i++){
@@ -187,8 +237,28 @@ function piercedFold(part,a,b,c,depth=.034) {
   const corners=[new THREE.Vector2(0,0),new THREE.Vector2(a.distanceTo(b),0),new THREE.Vector2(relative.dot(tangent),relative.dot(bitangent))]
   const shape=new THREE.Shape(corners),center=corners.reduce((sum,p)=>sum.add(p),new THREE.Vector2()).multiplyScalar(1/3)
   const inner=corners.map(p=>p.clone().sub(center).multiplyScalar(.40).add(center)).reverse()
-  const hole=new THREE.Path(inner);hole.closePath();shape.holes.push(hole)
-  const geometry=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:.007,bevelThickness:.008,bevelSegments:2,curveSegments:1,steps:1})
+  const hole=new THREE.Path(),fillets=inner.map((point,i)=>{
+    const previous=inner[(i+inner.length-1)%inner.length],next=inner[(i+1)%inner.length]
+    const radius=Math.min(.026,point.distanceTo(previous)*.18,point.distanceTo(next)*.18)
+    return{point,entry:point.clone().add(previous.clone().sub(point).normalize().multiplyScalar(radius)),exit:point.clone().add(next.clone().sub(point).normalize().multiplyScalar(radius))}
+  })
+  hole.moveTo(fillets[0].entry.x,fillets[0].entry.y)
+  for(let i=0;i<fillets.length;i++){
+    const{point,exit}=fillets[i],next=fillets[(i+1)%fillets.length]
+    hole.quadraticCurveTo(point.x,point.y,exit.x,exit.y);hole.lineTo(next.entry.x,next.entry.y)
+  }
+  hole.closePath();shape.holes.push(hole)
+  const geometry=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:.007,bevelThickness:.008,bevelSegments:2,curveSegments:4,steps:1})
+  // ExtrudeGeometry can emit microscopic cap slivers at a rounded aperture's
+  // acute return. Remove those zero-area remnants before crease smoothing.
+  const position=geometry.getAttribute('position'),valid=[]
+  for(let i=0;i<position.count;i+=3){
+    const p=vec(position.getX(i),position.getY(i),position.getZ(i))
+    const q=vec(position.getX(i+1),position.getY(i+1),position.getZ(i+1))
+    const r=vec(position.getX(i+2),position.getY(i+2),position.getZ(i+2))
+    if(q.sub(p).cross(r.sub(p)).lengthSq()>1e-14)valid.push(i,i+1,i+2)
+  }
+  geometry.setIndex(valid)
   geometry.translate(0,0,-depth/2);geometry.applyMatrix4(new THREE.Matrix4().makeBasis(tangent,bitangent,normal));put(part,finishBevel(geometry),a)
   return normal
 }
@@ -218,7 +288,7 @@ function unfinishedMechanism() {
     const wheel=group(`hover-fold-hinge-wheel-${i+1}`,'silver',pivot,axis.clone());gearing.push(wheel)
     gear(wheel,.071,14,.026,pivot,rotation)
     rod(structure,pivot.clone().addScaledVector(axis,-.11),pivot.clone().addScaledVector(axis,.11),.015,10)
-    for(const offset of[-.065,0,.065])machinedRing(fasteners,.036,.014,.033,0,TAU,pivot.clone().addScaledVector(axis,offset),rotation,20)
+    for(const offset of[-.065,0,.065])channelRing(fasteners,.036,.014,.033,0,TAU,pivot.clone().addScaledVector(axis,offset),rotation,20)
     for(const offset of[-.116,.116])bolt(fasteners,slots,pivot.clone().addScaledVector(axis,offset),.022,rotation)
     // Two flush bolts hold each plate at actual anchor points, including reverse-side shadows.
     for(const point of[a.clone().lerp(crease,.24),b.clone().lerp(crease,.24)]){
@@ -229,7 +299,20 @@ function unfinishedMechanism() {
     if(i===0||i===3){
       const anchor=inner.clone().addScaledVector(normal,.065),start=crease.clone().addScaledVector(normal,.065),springAxis=anchor.clone().sub(start).normalize()
       const side=springAxis.clone().cross(Math.abs(springAxis.y)<.8?Y:vec(1,0,0)).normalize(),up=springAxis.clone().cross(side).normalize()
-      tube(fasteners,Array.from({length:43},(_,k)=>start.clone().lerp(anchor,k/42).addScaledVector(side,.025*Math.cos(k/42*TAU*3)).addScaledVector(up,.025*Math.sin(k/42*TAU*3))),.0075,54,6)
+      const smooth=t=>{const x=THREE.MathUtils.clamp(t,0,1);return x*x*(3-2*x)}
+      tube(fasteners,Array.from({length:61},(_,k)=>{
+        const t=k/60,envelope=smooth((t-.05)/.13)*smooth((.95-t)/.13)
+        const phase=THREE.MathUtils.clamp((t-.16)/.68,0,1)*TAU*3
+        return start.clone().lerp(anchor,t).addScaledVector(side,.025*envelope*Math.cos(phase)).addScaledVector(up,.025*envelope*Math.sin(phase))
+      }),.0075,68,8)
+      const attachmentEuler=new THREE.Euler().setFromQuaternion(new THREE.Quaternion().setFromUnitVectors(vec(0,0,1),normal))
+      const attachmentRotation=[attachmentEuler.x,attachmentEuler.y,attachmentEuler.z]
+      for(const point of[start,anchor]){
+        // Fitted eyes, screws and short stems visibly attach both spring leads.
+        channelRing(fasteners,.023,.011,.018,0,TAU,point,attachmentRotation,20)
+        rod(fasteners,point.clone().addScaledVector(normal,-.035),point,.009,10)
+        bolt(fasteners,slots,point.clone().addScaledVector(normal,-.015),.017,attachmentRotation)
+      }
     }
   }
   const wheelCenter=vec(0,0,-.22),wheelRotation=[.32,.16,.18],shaft=shaftAxis(wheelRotation)
@@ -240,7 +323,7 @@ function unfinishedMechanism() {
   gear(centralGear,.30,36,.026,wheelCenter,wheelRotation)
   gear(transferGear,.14,20,.031,transferCenter,wheelRotation)
   machinedRing(structure,.312,.055,.044,0,TAU,wheelCenter.clone().addScaledVector(shaft,-.052),wheelRotation,64)
-  machinedRing(fasteners,.10,.025,.044,0,TAU,wheelCenter.clone().addScaledVector(shaft,.028),wheelRotation,40)
+  channelRing(fasteners,.10,.025,.044,0,TAU,wheelCenter.clone().addScaledVector(shaft,.028),wheelRotation,40)
   rod(structure,wheelCenter.clone().addScaledVector(shaft,-.10),wheelCenter.clone().addScaledVector(shaft,.083),.027,12)
   for(let i=0;i<4;i++){
     const a=i/4*TAU,point=vec(.34*Math.cos(a),.34*Math.sin(a),-.05).applyQuaternion(transform).add(wheelCenter)

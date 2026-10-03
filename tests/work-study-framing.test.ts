@@ -14,7 +14,8 @@ test('detail docking starts at the collection camera and reaches its tighter res
     assert.equal(start, collection, 'adopting the retained sculpture must not jump its camera')
     assert(finish < start, 'the detail object must occupy more of its available frame')
     let previous = start
-    for (let ms = 0; ms <= STUDY_DOCK_MS; ms += 8) {
+    for (let sample = 0; sample <= 100; sample++) {
+      const ms = STUDY_DOCK_MS * sample / 100
       const distance = workStudyCameraDistance(radius, aspect, vertical, workStudyFraming(true, studyFlightProgress(ms, STUDY_DOCK_MS)))
       assert(distance <= previous + 1e-12 && distance >= finish - 1e-12)
       previous = distance

@@ -1,9 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode, type MouseEvent } from 'react'
-import { projects, type Project, type ProjectCategory } from './content'
+import { projects, type Project } from './content'
 import type { WorkStudyHandle } from './work-study-renderer'
 import { useProjectArrival } from './ProjectTransition'
 import { siteCopy } from './site-copy'
 import { createStudyActivationGate } from './work-entry-activation'
+import ProductEvidence, { AtlasPortfolioFeature } from './projects/ProductEvidence'
 import './work-studies.css'
 
 type StudyController = { identity: string; registerActivation(cancel: () => void): () => void; reset(slug: string): void; spin(slug: string, spinning: boolean): void; playing: boolean; reduced: boolean; toggle(): void; open(project: Project): void; explore(project: Project, event: MouseEvent<HTMLAnchorElement>): void }
@@ -219,9 +220,8 @@ function ProjectEntry({ project }: { project: Project }) {
     <a ref={link} className="work-entry-area" href={`#/work/${project.slug}`} aria-labelledby={`work-${project.slug}-title`} draggable={false} onClick={event => motion.explore(project, event)} />
     <WorkSculpture project={project} navigates />
     <div className="work-study-copy">
-      <span className="work-study-number mono" aria-hidden="true">{project.number}</span>
       <div className="work-study-text">
-        <span className="work-study-tags mono">{project.tags.join(' / ')}</span>
+        <span className="work-study-tags">{project.category}</span>
         <h2 id={`work-${project.slug}-title`}>{project.slug === 'internshipdeadlines' ? <>Internship<wbr />Deadlines</> : project.name}</h2>
         <p>{project.summary}</p>
         <span className="work-study-link mono">{siteCopy.work.explore}<span aria-hidden="true">↗</span></span>
@@ -230,32 +230,33 @@ function ProjectEntry({ project }: { project: Project }) {
   </article>
 }
 
-function ProjectEntries({ items, compact }: { items: Project[]; compact: boolean }) {
-  return <div className={`work-study-list ${compact ? 'work-study-list-compact' : ''}`}>{items.map(project => <ProjectEntry key={project.slug} project={project} />)}</div>
+function ProjectEntries({ items, compact, supporting = false }: { items: Project[]; compact: boolean; supporting?: boolean }) {
+  return <div className={`work-study-list ${compact ? 'work-study-list-compact' : ''} ${supporting ? 'work-study-list-supporting' : ''}`}>{items.map(project => <ProjectEntry key={project.slug} project={project} />)}</div>
 }
 
 export function SelectedWork({ dark }: { dark: boolean }) {
   return <section className="selected-work work-studies-home" id="selected-work" aria-label="Selected work">
     <WorkStage dark={dark} identity="selected-work">
       <div className="work-section-label"><span className="mono">{siteCopy.work.selectedLabel}</span><WorkMotionControl /></div><div className="work-collection-intro"><h2>{siteCopy.work.heading[0]}<br /><em>{siteCopy.work.heading[1]}</em></h2><p>{siteCopy.work.introduction}</p></div>
-      <ProjectEntries items={projects} compact />
+      <ProjectEntries items={projects.slice(0, 2)} compact />
+      <div className="work-further" aria-label="More work">{projects.slice(2).map(project => <a key={project.slug} href={`#/work/${project.slug}`}><span>{project.name}</span><span aria-hidden="true">↗</span></a>)}</div>
       <div className="section-tail"><a className="arrow-link" href="#/work">{siteCopy.work.all}<span aria-hidden="true">→</span></a></div>
     </WorkStage>
   </section>
 }
 
 export function WorkPage({ dark }: { dark: boolean }) {
-  const [filter, setFilter] = useState<ProjectCategory | 'All'>('All')
-  const filters: (ProjectCategory | 'All')[] = ['All', 'Product', 'AI', 'Markets', 'Experiments']
-  const visible = projects.filter(project => filter === 'All' || project.category === filter)
   return <section className="work-page work-studies-page">
-    <h1 className="work-page-label">Work</h1>
-    <WorkStage dark={dark} identity={filter}>
+    <header className="work-page-intro"><h1>{siteCopy.work.title}</h1><p>{siteCopy.work.description}</p></header>
+    <WorkStage dark={dark} identity="work-collection">
       <div className="work-study-toolbar">
-        <div className="work-filters" role="group" aria-label="Filter work by category">{filters.map(item => <button key={item} aria-pressed={filter === item} onClick={() => setFilter(item)}>{item}</button>)}</div>
-        <div className="work-study-toolbar-end"><p className="work-count mono" role="status" aria-live="polite">{visible.length} {visible.length === 1 ? 'project' : 'projects'}</p><WorkMotionControl /></div>
+        <span>Selected work</span><WorkMotionControl />
       </div>
-      <ProjectEntries items={visible} compact={false} />
+      <ProjectEntries items={projects.slice(0, 1)} compact={false} />
+      <ProductEvidence kind="internshipdeadlines" />
+      <AtlasPortfolioFeature />
+      <div className="work-study-toolbar work-supporting-heading"><span>Research & experiments</span></div>
+      <ProjectEntries items={projects.slice(1)} compact supporting />
     </WorkStage>
   </section>
 }

@@ -210,9 +210,10 @@ test('visibility and pause received during lazy loading control the shared worke
   await settle();
   for (const loading of f.loads.values()) loading.resolve({ default: source });
   await settle();
-  assert.equal(f.created, 2); assert.equal(f.pending.size, 0);
+  assert.equal(f.created, 0, 'inactive imports must not set up GPU/Canvas factories'); assert.equal(f.pending.size, 0);
   f.host.receive({ type: 'active', id: 1, active: true });
   f.host.receive({ type: 'active', id: 2, active: true });
+  assert.equal(f.created, 2, 'first activation creates each ready factory once');
   f.step(0); f.step(16);
   assert.equal(f.draws, 2);
   assert.deepEqual(f.replies.map(reply => reply.id).sort(), [1, 2]);
@@ -223,6 +224,45 @@ test('visibility and pause received during lazy loading control the shared worke
   f.step(1000); assert.equal(f.draws, 2);
   f.host.dispose();
   assert.equal(f.removed, 2); assert.equal(f.pending.size, 0);
+});
+
+test('ready inactive factories release without renderer setup, while pause/resume retains one renderer and phase', async () => {
+  const f = workerFixture();
+  const unused = f.register(1, 'yuru-01', false);
+  f.register(2, 'yuru-02', false);
+  await settle();
+  for (const loading of f.loads.values()) loading.resolve({ default: source });
+  await settle();
+  assert.equal(f.created, 0); assert.equal(f.draws, 0); assert.equal(f.pending.size, 0);
+  f.host.receive({ type: 'remove', id: 1 });
+  assert.deepEqual([unused.width, unused.height], [0, 0]);
+  f.host.receive({ type: 'active', id: 1, active: true });
+  assert.equal(f.created, 0, 'removed cached factories cannot return');
+  f.host.receive({ type: 'active', id: 2, active: true });
+  f.step(0); assert.equal(f.created, 1); assert.equal(f.draws, 1);
+  f.host.receive({ type: 'active', id: 2, active: false });
+  assert.equal(f.pending.size, 0);
+  f.host.receive({ type: 'active', id: 2, active: true });
+  f.step(1000); assert.equal(f.created, 1); assert.equal(f.draws, 2);
+  f.register(3, 'yuru-03', false); await settle();
+  f.loads.get('yuru-03')!.resolve({ default: source }); await settle();
+  f.host.dispose();
+  f.host.receive({ type: 'active', id: 3, active: true });
+  assert.equal(f.created, 1); assert.equal(f.removed, 1); assert.equal(f.pending.size, 0);
+});
+
+test('superseded imports cannot create stale jobs after replacing an inactive placement', async () => {
+  const f = workerFixture();
+  const oldCanvas = f.register(1, 'yuru-01', false); await settle();
+  const old = f.loads.get('yuru-01')!;
+  f.register(1, 'yuru-02', false); await settle();
+  old.resolve({ default: source }); await settle();
+  assert.equal(f.created, 0); assert.deepEqual([oldCanvas.width, oldCanvas.height], [0, 0]);
+  f.loads.get('yuru-02')!.resolve({ default: source }); await settle();
+  assert.equal(f.created, 0);
+  f.host.receive({ type: 'active', id: 1, active: true });
+  f.step(0); assert.equal(f.created, 1); assert.equal(f.draws, 1);
+  f.host.dispose(); assert.equal(f.pending.size, 0);
 });
 
 test('loading and drawing errors recover only their sources while healthy jobs keep moving and dispose cleanly', async () => {

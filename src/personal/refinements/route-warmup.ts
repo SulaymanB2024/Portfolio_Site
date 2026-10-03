@@ -3,16 +3,11 @@ import { resolveRoute } from '../editorial/routes'
 import { prepareArticle } from '../editorial/article-cache'
 import type { ArticleSummary } from '../editorial/types'
 import { allowsWarmup, createWarmCache, type WarmIntent } from './warmup-policy'
+import { prepareRoutePage } from '../route-pages'
 
 const articles = catalog as ArticleSummary[]
 const figures = new Set(['the-first-ai-managers', 'who-owns-texas-toll-roads', 'viralbench-codex-agent-harness'])
-const studies = new Set(['work/atlas', 'work/payrollpro', 'work/viralbench'])
-const loaders = {
-  about: () => import('../about/AboutPage'),
-  resume: () => import('../editorial/ResumePage'),
-  study: () => import('../projects/CaseStudyPage'),
-  figures: () => import('../editorial/ArticleFigures'),
-}
+const loadFigures = () => import('../editorial/ArticleFigures')
 
 /** A short hover dwell, immediate keyboard/touch intent, and no background crawl. */
 export function installRouteWarmup(root: HTMLElement) {
@@ -36,13 +31,12 @@ export function installRouteWarmup(root: HTMLElement) {
         }
       }).catch(() => { /* Normal routing retains its retry behavior. */ })
     }
-    if (route === 'about' || route === 'resume') report(route, loaders[route])
-    if (studies.has(route)) report('study', loaders.study)
+    report(`page:${route || 'home'}`, () => prepareRoutePage(route))
     if (route.startsWith('writing/')) {
       const slug = route.slice('writing/'.length)
       if (!articles.some(article => article.slug === slug)) return
       report(`article:${slug}`, () => prepareArticle(slug))
-      if (figures.has(slug)) report('figures', loaders.figures)
+      if (figures.has(slug)) report('figures', loadFigures)
     }
   }
   function cancelHover() { window.clearTimeout(timer); timer = 0; hovered = null }

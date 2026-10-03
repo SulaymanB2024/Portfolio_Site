@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { articleReturnHref, articleSection, readWritingFilters, relatedArticles, sectionHref, writingHref } from '../src/personal/editorial/library.ts'
+import { articleReturnHref, articleSection, readWritingFilters, relatedArticles, readerFragmentHref, sectionHref, writingHref } from '../src/personal/editorial/library.ts'
 import type { ArticleSummary } from '../src/personal/editorial/types.ts'
 
 const catalog = [
@@ -40,4 +40,17 @@ test('section navigation preserves archive context and decodes a fragment only o
 test('related reading prefers a shared subject and excludes the current article or duplicate links', () => {
   assert.deepEqual(relatedArticles(catalog[0], [...catalog, catalog[1]]).map(article => article.slug), ['trace', 'crawl'])
   assert.deepEqual(relatedArticles(catalog[0], [catalog[0]]), [])
+})
+
+test('native citation links keep the reader and its archive context when copied or opened separately', () => {
+  const reader = '#/writing/authority?from=' + encodeURIComponent('#/writing?q=50%25&at=authority')
+  for (const fragment of ['#note-1', '#note-ref-1', '#source-12', '#margin-50%25-caf%C3%A9']) {
+    const href = readerFragmentHref(reader, fragment)
+    assert.equal(href.split('?')[0], '#/writing/authority')
+    assert.equal(articleSection(href), articleSection(fragment))
+    assert.equal(articleReturnHref(href, catalog), '#/writing?q=50%25&at=authority')
+  }
+  for (const href of ['https://example.org/#note-1', '#/writing/trace', '#invalid-%']) assert.equal(readerFragmentHref(reader, href), href)
+  assert.equal(readerFragmentHref('#/writing', '#note-1'), '#note-1')
+  assert.equal(readerFragmentHref('#section', '#note-1'), '#note-1')
 })

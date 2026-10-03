@@ -1,32 +1,33 @@
-import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
 import { Art } from './Art'
-import HomeWriting from './HomeWriting'
-import { HomeScene } from './HomeScene'
 import { ProjectTransitionProvider } from './ProjectTransition'
 import { contact, projects, type ArtKind } from './content'
 import { siteCopy, siteMetadata, withWritingCopy } from './site-copy'
 import { canonicalPath, siteOrigin } from './public-pages'
-import { SelectedWork, WorkPage } from './WorkCollection'
-import ProjectPage from './projects/ProjectNarrativePage'
 import catalog from './editorial/data/catalog.json'
 import { resolveRoute } from './editorial/routes'
 import { findCaseStudy } from './projects/case-studies'
 import { type ArticleSummary } from './editorial/types'
 import { ArtworkMotionProvider } from './editorial/ArtworkMotion'
-import WritingIndex from './editorial/WritingIndex'
-import ArticlePage from './editorial/ArticlePage'
 import { prepareArticle } from './editorial/article-cache'
+import { homePage, workPage, writingPage, articlePage, projectPage, resumePage, caseStudyPage, aboutPage, contactPage, prepareRoutePage } from './route-pages'
 import { artworkTransitionName, galleryArticleJourney, startArtworkTransition, type ArtworkTransition } from './editorial/artwork-continuity'
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
 import './editorial/artwork-continuity.css'
 import './personal.css'
 import './editorial/editorial.css'
+import './mobile-polish.css'
 
-const ResumePage = lazy(() => import('./editorial/ResumePage'))
-const CaseStudyPage = lazy(() => import('./projects/CaseStudyPage'))
-const AboutPage = lazy(() => import('./about/AboutPage'))
-const Contact = lazy(() => import('./contact/ContactPage'))
+const Home = homePage.Page
+const WorkPage = workPage.Page
+const WritingIndex = writingPage.Page
+const ArticlePage = articlePage.Page
+const ProjectPage = projectPage.Page
+const ResumePage = resumePage.Page
+const CaseStudyPage = caseStudyPage.Page
+const AboutPage = aboutPage.Page
+const Contact = contactPage.Page
 const articles = (catalog as ArticleSummary[]).map(withWritingCopy)
 const navItems = [['Work', 'work'], ['Writing', 'writing'], ['About', 'about'], ['Résumé', 'resume'], ['Contact', 'contact']]
 const path = () => resolveRoute(location.hash, location.pathname, articles)
@@ -45,6 +46,7 @@ function useRoute() {
         document.documentElement.dataset.artTransition = 'idle'
         return
       }
+      const prepared = prepareRoutePage(next)
       const journey = galleryArticleJourney(current.current, next)
       const canAnimate = journey && !matchMedia('(prefers-reduced-motion: reduce)').matches
       const update = () => {
@@ -62,6 +64,7 @@ function useRoute() {
       }
       if (!canAnimate) {
         document.documentElement.dataset.artTransition = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'idle'
+        try { await prepared } catch { /* The lazy page retains its normal load failure. */ }
         update()
         return
       }
@@ -71,10 +74,9 @@ function useRoute() {
       const article = articles.find(item => `writing/${item.slug}` === articleRoute)
       const name = article ? artworkTransitionName(getArticleGenerativeArtwork(article.path)) : ''
       active = startArtworkTransition(name, async () => {
-        if (next.startsWith('writing/')) {
-          try { await prepareArticle(next.slice('writing/'.length)) }
-          catch { /* Normal routing will display the existing retry state. */ }
-        }
+        const data = next.startsWith('writing/') ? prepareArticle(next.slice('writing/'.length)) : Promise.resolve()
+        // Keep the source's live canvas mounted until both page and article are ready.
+        await Promise.all([prepared.catch(() => {}), data.catch(() => {})])
         update()
       })
       void active.ready.catch(() => { /* Failed preparation must not break navigation. */ })
@@ -86,6 +88,8 @@ function useRoute() {
     return () => { sequence++; active?.skipTransition(); window.removeEventListener('hashchange', change) }
   }, [])
   useEffect(() => {
+    // Initial deep links prepare article data while its page chunk is loading.
+    if (route.startsWith('writing/')) void prepareArticle(route.slice('writing/'.length)).catch(() => {})
     const project = projects.find(p => route === `work/${p.slug}`)
     const article = articles.find(item => route === `writing/${item.slug}`)
     const study = findCaseStudy(route)
@@ -134,6 +138,7 @@ function SitePages() {
   const route = useRoute()
   const { dark, setDark } = useAppearance()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [landingActive, setLandingActive] = useState(true)
   const menuButton = useRef<HTMLButtonElement>(null)
   const main = useRef<HTMLElement>(null)
   const initialRoute = useRef(true)
@@ -164,16 +169,16 @@ function SitePages() {
     return <div className="art-export" data-appearance={dark ? 'dark' : 'light'}><Art kind={art} dark={dark} /><button className="export-theme" onClick={() => setDark(!dark)}>Change backdrop</button></div>
   }
   const isHome = route === '' || route === 'home'
-  return <div className={`personal-site ${project ? 'project-site' : ''} ${isHome ? 'home-site' : ''}`} data-appearance={isDark ? 'dark' : 'light'} data-section={section}>
+  return <div className={`personal-site ${project ? 'project-site' : ''} ${isHome ? 'home-site' : ''}`} data-appearance={isDark ? 'dark' : 'light'} data-section={section} data-landing-active={isHome ? String(landingActive) : undefined}>
     {isHome && <div className="page-wash" aria-hidden="true" />}
     <a className="skip-link" href="#main-content" onClick={e => { e.preventDefault(); document.getElementById('main-content')?.focus() }}>Skip to content</a>
-    <header className="personal-header">
-      <a href="#/" className="identity" aria-label="Sulayman Bowles — home"><span className="identity-name">Sulayman Bowles</span></a>
-      <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug], index) => <a key={slug} href={`#/${slug}`} aria-current={section === (slug || 'home') ? 'page' : undefined} onClick={() => setMenuOpen(false)}><span className="nav-number" aria-hidden="true">0{index + 1}</span>{item}</a>)}</nav>
+    <header className="personal-header" inert={isHome && landingActive} aria-hidden={isHome && landingActive ? true : undefined}>
+      <a href="#/" className="identity" aria-label="Sulayman Bowles — home" onClick={event => { if (!isHome || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); main.current?.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }) }}><span className="identity-name">Sulayman Bowles</span></a>
+      <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug], index) => <a key={slug} href={`#/${slug}`} aria-current={section === (slug || 'home') ? 'page' : undefined} onClick={event => { if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; setMenuOpen(false); if (menuOpen && route === slug) requestAnimationFrame(() => menuButton.current?.focus({ preventScroll: true })) }}><span className="nav-number" aria-hidden="true">0{index + 1}</span>{item}</a>)}</nav>
       <div className="header-end"><button className="appearance-toggle" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setDark(!dark)}><span aria-hidden="true">◐</span></button><button ref={menuButton} className="nav-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button></div>
     </header>
     <main ref={main} id="main-content" tabIndex={-1} key={route}>
-      <Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} /> : article ? <ArticlePage slug={article.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} /> : <NotFound />}</Suspense>
+      <Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} /> : article ? <ArticlePage slug={article.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} onLandingActiveChange={setLandingActive} /> : <NotFound />}</Suspense>
     </main>
     {route !== 'about' && <Footer route={route} closing={!article && route !== 'contact'} />}
   </div>
@@ -187,20 +192,6 @@ function SectionLabel({ children, end }: { children: React.ReactNode; end?: Reac
   return <div className="section-label"><span>/ {children}</span><i />{end && <span>{end}</span>}</div>
 }
 
-function Home({ dark }: { dark: boolean }) {
-  return <>
-    <section className="home-scroll-stage" aria-labelledby="home-title"><div className="home-hero">
-      <div className="hero-copy">
-        <h1 id="home-title" aria-label={siteCopy.home.title}>{siteCopy.home.headline[0]}<br />{siteCopy.home.headline[1]}<br />{siteCopy.home.headline[2]}<span className="period">.</span></h1>
-        <p className="hero-description">{siteCopy.home.description}</p>
-        <ArrowLink href="#/work">{siteCopy.home.action}</ArrowLink>
-      </div>
-      <HomeScene dark={dark} />
-    </div></section>
-    <SelectedWork dark={dark} />
-    <HomeWriting />
-  </>
-}
 
 function NotFound() { return <section className="not-found"><span className="eyebrow">{siteCopy.notFound.kicker}</span><h1>{siteCopy.notFound.headline[0]}<br />{siteCopy.notFound.headline[1]}</h1><ArrowLink href="#/">{siteCopy.notFound.action}</ArrowLink></section> }
 

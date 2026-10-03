@@ -45,7 +45,9 @@
     "optimize:model": "node tools/optimize-model.mjs",
     "prepare:assets": "node tools/prepare-assets.mjs",
     "test:bot-observer": "node --import tsx --test packages/bot-observer/tests/*.test.ts",
-    "verify:release": "node tools/verify-release.mjs"
+    "verify:release": "node tools/verify-release.mjs",
+    "optimize:portfolio": "node tools/optimize-portfolio-assets.mjs",
+    "verify:portfolio": "node tools/optimize-portfolio-assets.mjs --verify-only"
   },
   "browserslist": [
     ">1%",

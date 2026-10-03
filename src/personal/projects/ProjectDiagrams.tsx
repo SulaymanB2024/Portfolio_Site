@@ -5,7 +5,7 @@ const cx = (...names: (string | false)[]) => names.filter(Boolean).join(' ')
 
 function Choices({ label, items, value, onChange }: { label: string; items: string[]; value: number; onChange(value: number): void }) {
   return <div className="project-diagram-choices" role="group" aria-label={label}>{items.map((item, index) =>
-    <button type="button" key={item} aria-pressed={value === index} onClick={() => onChange(index)}><span className="project-diagram-choice-index" aria-hidden="true">0{index + 1}</span>{item}<span aria-hidden="true" className="project-diagram-choice-sign">{value === index ? '−' : '+'}</span></button>
+    <button type="button" key={item} aria-pressed={value === index} onClick={() => onChange(index)}>{item}</button>
   )}</div>
 }
 
@@ -37,6 +37,7 @@ function PipelineDiagram() {
       <text x="450" y="275" textAnchor="middle" className="project-diagram-svg-label">CONSISTENT RECORD</text>
       <text x="775" y="275" textAnchor="middle" className="project-diagram-svg-label">PERSONAL SHORTLIST</text>
     </svg>
+    <div className="project-diagram-sequence" aria-hidden="true"><span>Employer source</span><span>Consistent record</span><span>Personal shortlist</span></div>
     <Choices label="Select a workflow step" items={['Source', 'Record', 'Shortlist']} value={step} onChange={setStep} />
     <div className="project-diagram-detail" aria-live="polite" aria-atomic="true"><h3>{details[step][0]}</h3><p>{details[step][1]}</p></div>
     <div className="project-diagram-date-test">
@@ -75,7 +76,7 @@ function ResearchDiagram() {
       <text x="421" y="327" textAnchor="middle" className="project-diagram-svg-label">SYNTHETIC RESPONSES</text>
       <text x="756" y="327" textAnchor="middle" className="project-diagram-svg-label">{lens === 0 ? 'INTERPRETATION' : 'CLAIM BOUNDARY'}</text>
     </svg>
-    <div className="project-diagram-mobile-sequence" aria-hidden="true"><span>Question</span><span>Synthetic response</span><span>{lens ? 'Claim boundary' : 'Interpretation'}</span></div>
+    <div className="project-diagram-sequence" aria-hidden="true"><span>Question</span><span>Synthetic response</span><span>{lens ? 'Claim boundary' : 'Interpretation'}</span></div>
     <Choices label="Choose a research question" items={researchQuestions.map(item => item.label)} value={question} onChange={setQuestion} />
     <div className="project-diagram-detail" aria-live="polite" aria-atomic="true"><h3>{selected.question}</h3><p>{selected.assumption}</p></div>
     <div className="project-diagram-lens">
@@ -105,12 +106,12 @@ function MarketDiagram() {
       <path className={cx('project-diagram-route', 'is-selected', lens === 2 && 'is-risk')} d={selected.path} markerEnd={lens !== 2 ? `url(#${arrow})` : undefined} />
       <path className={cx('project-diagram-route', 'is-selected', lens === 2 && 'is-risk')} d={selected.second} markerEnd={lens !== 2 ? `url(#${arrow})` : undefined} />
       {[[125, 231, '01'], [451, 115, '02'], [791, 231, '03']].map(([x, y, label]) => <g key={label} className="project-diagram-station"><circle cx={x} cy={y} r="51" /><text x={x} y={Number(y) + 23} textAnchor="middle" className="project-diagram-number">{label}</text></g>)}
-      <text x="451" y="235" textAnchor="middle" className="project-diagram-flow-label">{selected.annotation}</text>
       <text x="125" y="335" textAnchor="middle" className="project-diagram-svg-label">CAPITAL PROVIDER</text>
       <text x="451" y="38" textAnchor="middle" className="project-diagram-svg-label">OPERATOR</text>
       <text x="791" y="335" textAnchor="middle" className="project-diagram-svg-label">SERVICE USERS</text>
     </svg>
-    <div className="project-diagram-mobile-sequence" aria-hidden="true"><span>01 / Capital provider</span><span>02 / Operator</span><span>03 / Service users</span></div>
+    <div className="project-diagram-sequence" aria-hidden="true"><span>01 / Capital provider</span><span>02 / Operator</span><span>03 / Service users</span></div>
+    <p className="project-diagram-annotation mono" aria-live="polite">{selected.annotation}</p>
     <Choices label="Select a relationship to trace" items={marketLenses.map(item => item.label)} value={lens} onChange={setLens} />
     <div className="project-diagram-detail" aria-live="polite" aria-atomic="true"><h3>{selected.title}</h3><p>{selected.detail}</p></div>
     <figcaption>Illustrative relationships; no investment data is shown.</figcaption>

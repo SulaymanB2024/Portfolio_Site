@@ -10,10 +10,10 @@ export function clampStudy(value: number, lower: number, upper: number) {
 }
 
 /** A fixed total pixel budget keeps large displays from multiplying render cost. */
-export function workStudyRenderSize(width: number, height: number, deviceRatio: number) {
+export function workStudyRenderSize(width: number, height: number, deviceRatio: number, qualityScale = 1) {
   const cssWidth = Math.max(1, Math.floor(finite(width, 1)))
   const cssHeight = Math.max(1, Math.floor(finite(height, 1)))
-  const ratio = Math.min(1.25, Math.max(.1, finite(deviceRatio, 1)), Math.sqrt(WORK_STUDY_PIXEL_BUDGET / (cssWidth * cssHeight)))
+  const ratio = Math.min(1.25, Math.max(.1, finite(deviceRatio, 1)), Math.sqrt(WORK_STUDY_PIXEL_BUDGET / (cssWidth * cssHeight))) * Math.min(1, Math.max(.1, finite(qualityScale, 1)))
   const renderWidth = Math.min(WORK_STUDY_PIXEL_BUDGET, Math.max(1, Math.floor(cssWidth * ratio)))
   const renderHeight = Math.min(Math.floor(WORK_STUDY_PIXEL_BUDGET / renderWidth), Math.max(1, Math.floor(cssHeight * ratio)))
   return { width: renderWidth, height: renderHeight, scaleX: renderWidth / cssWidth, scaleY: renderHeight / cssHeight }

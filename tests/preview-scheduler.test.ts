@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createPreviewScheduler } from '../src/personal/editorial/preview-scheduler.ts';
+import { createPreviewScheduler, createPreviewTelemetry } from '../src/personal/editorial/preview-scheduler.ts';
 
 function fixture(budget = 6) {
   let time = 0;
@@ -122,4 +122,103 @@ test('GPU cohorts sustain 30Hz with a healthy 4ms study, instead of inheriting t
   f.step(4000);
   assert(handles.every(handle => handle.getStats().observedFps === 0), 'resume should discard the idle gap from measured cadence');
   f.scheduler.dispose();
+});
+
+function deadlineFixture(sleeping: boolean) {
+  let time = 0, next = 1, rafs = 0, timers = 0;
+  const pending = new Map<number, { at: number; frame: boolean; callback: (time: number) => void }>();
+  const interval = 1000 / 60;
+  const delayDriver = sleeping ? {
+    setDelay(callback: () => void, milliseconds: number) {
+      const id = next++; pending.set(id, { at: time + milliseconds, frame: false, callback }); return id;
+    },
+    cancelDelay(id: number) { pending.delete(id); },
+  } : {};
+  const scheduler = createPreviewScheduler({
+    now: () => time,
+    requestFrame(callback) {
+      const id = next++; pending.set(id, { at: Math.ceil((time + 1e-7) / interval) * interval, frame: true, callback }); return id;
+    },
+    cancelFrame(id) { pending.delete(id); },
+    ...delayDriver,
+  }, 10);
+  return { scheduler, pending,
+    get rafs() { return rafs; }, get timers() { return timers; },
+    spend(milliseconds: number) { time += milliseconds; },
+    advance(end: number) {
+      while (pending.size) {
+        const [id, event] = [...pending].sort((a, b) => a[1].at - b[1].at)[0];
+        if (event.at > end) break;
+        pending.delete(id); time = Math.max(time, event.at);
+        if (event.frame) rafs++; else timers++;
+        event.callback(time);
+      }
+      time = Math.max(time, end);
+    },
+  };
+}
+
+test('deadline sleeps cut native8Hz callbacks while preserving exact fractional18Hz and30Hz cadence', t => {
+  for (const [cost, maxFps, expected] of [[.5, 18, 18], [8, 18, 8], [4, 30, 30]]) {
+    const baseline = deadlineFixture(false), sleeping = deadlineFixture(true);
+    const handles = [baseline, sleeping].map(f => f.scheduler.add({ maxFps, minFps: maxFps === 30 ? 24 : 8, draw() { f.spend(cost); } }));
+    baseline.advance(10000); sleeping.advance(10000);
+    assert.equal(handles[0].getStats().targetFps, expected);
+    assert.equal(handles[1].getStats().targetFps, expected);
+    assert(Math.abs(handles[0].getStats().frames - handles[1].getStats().frames) <= 1, `${expected}Hz must keep the same source phase`);
+    t.diagnostic(JSON.stringify({ fps: expected, baseline: { frames: handles[0].getStats().frames, rafs: baseline.rafs, timers: baseline.timers }, updated: { frames: handles[1].getStats().frames, rafs: sleeping.rafs, timers: sleeping.timers } }));
+    assert(sleeping.rafs <= baseline.rafs * .7, `RAF callbacks ${sleeping.rafs} versus ${baseline.rafs} at ${expected}Hz`);
+    if (expected === 8) assert(sleeping.rafs + sleeping.timers < (baseline.rafs + baseline.timers) * .55, 'expensive8Hz sources avoid both repeated scans and most event-loop wakeups');
+    handles.forEach(handle => handle.remove());
+    assert.equal(sleeping.pending.size, 0);
+    baseline.scheduler.dispose(); sleeping.scheduler.dispose();
+  }
+});
+
+test('activation interrupts an existing sleep immediately and pause/remove/dispose cancel every delayed callback', () => {
+  const f = deadlineFixture(true);
+  let first = 0, second = 0;
+  const active = f.scheduler.add({ draw() { first++; f.spend(8); } });
+  const dormant = f.scheduler.add({ active: false, draw() { second++; f.spend(.5); } });
+  f.advance(20);
+  assert.equal(first, 1); assert.equal(second, 0); assert.equal(f.pending.size, 1);
+  dormant.setActive(true);
+  f.advance(40);
+  assert.equal(second, 1, 'activation paints at the next display frame, without waiting for the sleeping study');
+  active.setActive(false); dormant.setActive(false);
+  assert.equal(f.pending.size, 0);
+  f.advance(1000); assert.equal(first, 1); assert.equal(second, 1);
+  active.setActive(true); f.advance(1020); assert.equal(first, 2);
+  assert.equal(active.getStats().observedFps, 0, 'a suspension gap never contaminates cadence');
+  active.remove(); dormant.remove(); assert.equal(f.pending.size, 0);
+  f.scheduler.add({ draw() { f.spend(8); } }); f.advance(1040);
+  f.scheduler.dispose(); f.scheduler.dispose(); assert.equal(f.pending.size, 0);
+});
+
+test('deadline sleeping keeps fair budget arbitration for an overloaded cohort', () => {
+  const f = deadlineFixture(true);
+  const baseline = deadlineFixture(false);
+  const baselineFrames = Array.from({ length: 12 }, () => 0);
+  const baselineHandles = baselineFrames.map((_, index) => baseline.scheduler.add({ draw() { baselineFrames[index]++; baseline.spend(4); } }));
+  const frames = Array.from({ length: 12 }, () => 0);
+  const handles = frames.map((_, index) => f.scheduler.add({ draw() { frames[index]++; f.spend(4); } }));
+  f.advance(2000); baseline.advance(2000);
+  assert(frames.every(count => count >= 8), String(frames));
+  assert.deepEqual(frames, baselineFrames, 'sleeping cannot change round-robin arbitration under continuous demand');
+  assert(Math.max(...frames) - Math.min(...frames) <= 2, String(frames));
+  assert(f.scheduler.getStats().worstFrameDrawMs <= 10);
+  handles.forEach(handle => handle.remove()); assert.equal(f.pending.size, 0);
+  baselineHandles.forEach(handle => handle.remove()); assert.equal(baseline.pending.size, 0);
+});
+
+test('diagnostics publish at750ms without timers, force final state updates, and do no production work', () => {
+  const published: number[] = [];
+  let frames = 0;
+  const telemetry = createPreviewTelemetry(() => published.push(frames), true);
+  for (let time = 0; time <= 3000; time += 25) { frames++; telemetry(time); }
+  assert.deepEqual(published, [1, 31, 61, 91, 121]);
+  frames++; telemetry(3020, true); assert.equal(published.at(-1), 122);
+  telemetry(3050); assert.equal(published.length, 6);
+  const production = createPreviewTelemetry(() => assert.fail('production diagnostics must not write'), false);
+  production(0); production(800); production(900, true);
 });

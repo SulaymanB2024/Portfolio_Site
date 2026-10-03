@@ -43,6 +43,13 @@ export function sectionHref(hash: string, id: string) {
   return `${canonical.split('?')[0]}?${params}`
 }
 
+/** Keep native section/citation links on the reader when the site uses hash routes. */
+export function readerFragmentHref(hash: string, href: string) {
+  if (!/^#\/writing\/[^?]+(?:\?|$)/.test(hash) || !href.startsWith('#') || href.startsWith('#/')) return href
+  const id = articleSection(href)
+  return id ? sectionHref(hash, id) : href
+}
+
 const connections: Record<string, string[]> = {
   'the-first-ai-managers': ['viralbench-codex-agent-harness', 'atlas-building-an-evidence-console'],
   'viralbench-codex-agent-harness': ['the-first-ai-managers', 'atlas-building-an-evidence-console'],

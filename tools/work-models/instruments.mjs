@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { TAU, Y, vec, group, shaftAxis, put, tube, arc, rod, box, bevelBox, gear, machinedRing, bolt, bevelFrame, finishBevel } from './geometry.mjs'
+import { TAU, Y, vec, group, shaftAxis, put, tube, arc, rod, box, bevelBox, gear, machinedRing, channelRing, bolt, bevelFrame, finishBevel } from './geometry.mjs'
 
 const ringPoint = (radius, angle, center, rotation, z = 0) => vec(radius * Math.cos(angle), radius * Math.sin(angle), z)
   .applyEuler(new THREE.Euler(...rotation)).add(center)
@@ -46,17 +46,20 @@ function opportunityInstrument() {
   const secondary = group('hover-register-transfer-gear', 'silver', secondaryPosition, shaftAxis(driveRotation))
 
   // Capped rectangular sections, flat front faces and fine chamfers replace tubes.
-  machinedRing(clock, .99, .103, .063, .03, TAU * .84, center, clockRotation, 128)
+  channelRing(clock, .99, .103, .063, .03, TAU * .84, center, clockRotation, 128)
   machinedRing(clock, .963, .013, .073, .09, TAU * .815, center, clockRotation, 112)
   machinedRing(orbital, 1.065, .055, .045, -.72, TAU * .74, orbitalCenter, orbitalRotation, 112)
-  machinedRing(dial, .838, .037, .026, .45, TAU * .67, dialCenter, dialRotation, 96)
+  channelRing(dial, .838, .037, .026, .45, TAU * .67, dialCenter, dialRotation, 96)
   for (let i = 0; i < 49; i++) {
     const angle = .16 + i / 48 * TAU * .79
     const major = i % 4 === 0
     const rotation = new THREE.Euler(...clockRotation)
     const q = new THREE.Quaternion().setFromEuler(rotation).multiply(new THREE.Quaternion().setFromAxisAngle(vec(0, 0, 1), angle))
     const e = new THREE.Euler().setFromQuaternion(q)
-    box(clock, [major ? .044 : .022, .007, .009], ringPoint(.99, angle, center, clockRotation, .035), [e.x, e.y, e.z])
+    // Inlaid radial scale strokes sit inside the cut channel rather than above
+    // an otherwise flat rail. A second short shoulder shows the major intervals.
+    box(clock, [major ? .043 : .020, .005, .007], ringPoint(.99, angle, center, clockRotation, .016), [e.x, e.y, e.z])
+    if(major)box(clock,[.009,.006,.008],ringPoint(1.030,angle,center,clockRotation,.031),[e.x,e.y,e.z])
   }
   // Three visible planes: the rear mechanism, open carriage, and readable tiles.
   for (const x of [-.443, .443]) {
@@ -66,6 +69,12 @@ function opportunityInstrument() {
   for (const y of [-.508, .558]) {
     bevelBox(chassis, .925, .061, .080, vec(0, y, -.17), [0, 0, 0], .008)
     for (const x of [-.409, .409]) bolt(chassis, recess, vec(x, y, -.118), .025)
+  }
+  // Four fitted retention shoes wrap the carriage corners. The well gaps and
+  // ordinal plates remain open while the layered register gains real joinery.
+  for(const x of[-.369,.369])for(const y of[-.380,.475]){
+    bevelFrame(chassis,.055,.068,.020,.021,.037,vec(x,y,.150),[0,0,x<0?-.08:.08],.0035)
+    bevelBox(backing,.058,.032,.15,vec(x,y,.035),[0,0,0],.0035)
   }
   for (let row = 0; row < 4; row++) {
     const y = .374 - row * .226
@@ -127,6 +136,10 @@ const continents = [
   [[95,5],[102,0],[106,-6],[103,-6],[98,-2]],
   [[109,7],[119,7],[118,-4],[112,-4]],
   [[166,-35],[173,-39],[177,-38],[178,-42],[169,-47],[166,-45],[171,-41]],
+  [[-10,51],[-6,51],[-6,55],[-8,56],[-10,54]],
+  [[80,10],[82,8],[82,6],[80,6],[79,8]],
+  [[131,-1],[139,-3],[149,-6],[151,-10],[144,-9],[138,-5],[132,-4]],
+  [[105,-6],[113,-7],[115,-9],[110,-9],[106,-8]],
 ]
 const geographic = (lon, lat, radius) => {
   const a = lon * Math.PI / 180, b = lat * Math.PI / 180
@@ -195,6 +208,25 @@ function geographicPath(part, from, to, lift, radius = .004) {
   tube(part, points, radius, 48, 6)
 }
 
+/** Broad, low terrain relief follows selected ranges without covering the map. */
+function terrainRange(part,coordinates,width,height) {
+  const curve=new THREE.CatmullRomCurve3(coordinates.map(([lon,lat])=>vec(lon,lat,0)),false,'centripetal')
+  const segments=32,across=6,positions=[],indices=[]
+  for(let i=0;i<=segments;i++){
+    const t=i/segments,center=curve.getPoint(t),tangent=curve.getTangent(t)
+    const cosLatitude=Math.max(.25,Math.cos(center.y*Math.PI/180))
+    const side=new THREE.Vector2(-tangent.y,tangent.x*cosLatitude).normalize()
+    for(let j=0;j<=across;j++){
+      const u=j/across*2-1
+      const lon=center.x+side.x*u*width/cosLatitude,lat=center.y+side.y*u*width
+      const rise=height*Math.cos(u*Math.PI/2)**2*Math.sin(t*Math.PI)**.65
+      positions.push(...geographic(lon,lat,.6974+rise).toArray())
+      if(i<segments&&j<across){const a=i*(across+1)+j,b=a+across+1;indices.push(a,b,b+1,a,b+1,a+1)}
+    }
+  }
+  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();put(part,geometry)
+}
+
 function marketObservatory() {
   const ocean = group('Continuous dark-steel ocean shell', 'steel')
   const land = group('Smooth geographic relief with coastal sidewalls', 'porcelain')
@@ -215,6 +247,16 @@ function marketObservatory() {
     const edge = coastline(outline, .700)
     tube(coast, edge, .0042, Math.max(24, edge.length * 2), 5, true)
   }
+  // Sculpted generalized ranges add a second scale of geographic construction;
+  // their finite tapered ends sink into the broad continent reliefs.
+  for(const[path,width,height]of[
+    [[[-72,-44],[-70,-26],[-76,-8],[-74,5]],1.6,.014],
+    [[[-128,54],[-121,45],[-113,36],[-108,30]],1.8,.012],
+    [[[73,35],[81,30],[89,28],[96,29]],1.8,.016],
+    [[[6,45],[10,47],[15,46]],1.0,.009],
+    [[[36,8],[37,-4],[32,-15]],1.6,.010],
+    [[[145,-18],[148,-28],[145,-36]],1.1,.009],
+  ])terrainRange(land,path,width,height)
   // The Antarctic cap makes the globe a whole Earth rather than disconnected plates.
   put(land, new THREE.SphereGeometry(.695, 48, 5, 0, TAU, Math.PI * .895, Math.PI * .105))
   for (const lat of [-35, 0, 35]) {
@@ -224,7 +266,7 @@ function marketObservatory() {
   for (const lon of [0, 60, 120]) arc(coast, .673, 0, TAU, vec(0, 0, 0), [0, lon * Math.PI / 180, 0], .0035, 96, 5)
 
   // The main hoop rotates around the north/south bearing axis, not an arbitrary pivot.
-  machinedRing(meridian, .842, .066, .046, 0, TAU, vec(0, 0, 0), [0, .20, 0], 112)
+  channelRing(meridian, .842, .066, .046, 0, TAU, vec(0, 0, 0), [0, .20, 0], 112)
   machinedRing(meridian, .855, .010, .057, .08, TAU * .95, vec(0, 0, 0), [0, .20, 0], 96)
   for (const side of [-1, 1]) {
     rod(meridian, vec(0, side * .683, 0), vec(0, side * .852, 0), .029, 14)
@@ -243,7 +285,7 @@ function marketObservatory() {
       box(part, [.008, .032, .010], position.clone().add(vec(.066 * Math.cos(a), 0, .066 * Math.sin(a))), [0, -a, 0])
     }
   }
-  machinedRing(latitude, .936, .055, .035, -.38, TAU * .80, vec(0, 0, 0), latitudeRotation, 112)
+  channelRing(latitude, .936, .055, .035, -.38, TAU * .80, vec(0, 0, 0), latitudeRotation, 112)
   // One partial fixed vernier leaves a large window into the continents.
   const scaleRotation = [.20, -.16, .10]
   machinedRing(scale, 1.038, .039, .030, .16, TAU * .53, vec(0, 0, 0), scaleRotation, 88)
@@ -261,9 +303,13 @@ function marketObservatory() {
     const p = geographic(lon, lat, .705), direction = p.clone().normalize()
     const e = new THREE.Euler().setFromQuaternion(new THREE.Quaternion().setFromUnitVectors(vec(0, 0, 1), direction))
     const rotation = [e.x, e.y, e.z]
-    machinedRing(recess, .019, .010, .011, 0, TAU, p, rotation, 16)
-    rod(markers, p, p.clone().addScaledVector(direction, .036), .009, 10)
-    machinedRing(markers, .015, .010, .011, 0, TAU, p.clone().addScaledVector(direction, .040), rotation, 16)
+    machinedRing(recess, .023, .013, .016, 0, TAU, p, rotation, 20)
+    const socket=new THREE.CylinderGeometry(.010,.018,.024,12,1)
+    socket.rotateX(Math.PI/2)
+    put(markers,socket,p.clone().addScaledVector(direction,.012),rotation)
+    channelRing(markers,.024,.011,.010,0,TAU,p.clone().addScaledVector(direction,.021),rotation,20)
+    rod(markers,p.clone().addScaledVector(direction,.021),p.clone().addScaledVector(direction,.042),.008,12)
+    machinedRing(markers,.013,.008,.009,0,TAU,p.clone().addScaledVector(direction,.044),rotation,20)
   }
   for (const [a, b, lift] of [[0, 1, .11], [1, 3, .12], [3, 2, .09], [3, 5, .10]]) geographicPath(routes, places[a], places[b], lift)
   return [ocean, land, coast, recess, meridian, latitude, scale, routes, markers, north, south]

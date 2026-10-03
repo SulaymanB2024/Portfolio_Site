@@ -13,7 +13,7 @@ export default function AtlasEvidence() {
       <div className="atlas-source-count"><span className="eyebrow">Quote cards in source HTML</span><strong>{row.source_quote_card_count.toString().padStart(2,'0')}</strong><div className="atlas-card-marks" aria-hidden="true">{Array.from({length:10},(_,i)=><i key={i} data-present={i<row.source_quote_card_count} />)}</div></div>
       <dl className="atlas-fields"><div><dt>Response</dt><dd>{row.status_code} OK</dd></div><div><dt>Embedded data records</dt><dd>{row.runtimeRecords ?? 'Not recorded'}</dd></div><div><dt>Canonical tag</dt><dd>{row.canonical}</dd></div><div><dt>Next page discovered</dt><dd>{new URL(row.discovered_next_url).pathname}</dd></div></dl>
     </div>
-    <div className="atlas-interpretation" aria-live="polite" aria-atomic="true"><h4>{selected===0 ? 'The content is in the response.' : 'The response is only the beginning.'}</h4><p>{row.explanation}</p><p className="atlas-next-step"><span className="mono">Next step</span>{row.nextStep}</p></div>
+    <div className="atlas-interpretation" aria-live="polite" aria-atomic="true"><h3>{selected===0 ? 'The content is in the response.' : 'The response is only the beginning.'}</h3><p>{row.explanation}</p><p className="atlas-next-step"><span className="mono">Next step</span>{row.nextStep}</p></div>
     <p className="atlas-sample-note">A saved source capture, not a live crawl or a rendered-page measurement. This sample makes no search-performance claim. <a href={`${import.meta.env.BASE_URL}research/atlas-open-corpus-run-2026-07-16.json`} download>Inspect JSON ↓</a><a href={`${import.meta.env.BASE_URL}research/atlas-open-corpus-run-2026-07-16.csv`} download>Download CSV ↓</a></p>
   </div>
 }

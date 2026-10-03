@@ -83,11 +83,22 @@ function gear(part, radius, teeth, depth, position, rotation = [0,0,0]) {
   const hole=new THREE.Path();hole.absarc(0,0,radius*.43,0,TAU,true);shape.holes.push(hole)
   const geometry=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:radius*.019,bevelThickness:radius*.022,bevelSegments:2,curveSegments:12,steps:1})
   geometry.translate(0,0,-depth/2);put(part,finishBevel(geometry),position,rotation)
-  // Spokes and an axial collar remain distinct under rotation.
+  // Tapered cut spokes carry load into a stepped, bored hub. The broad planar
+  // shoulders remain readable where cylindrical spokes previously looked thin.
   const q=new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation))
   const at=(r,a,z=0)=>vec(r*Math.cos(a),r*Math.sin(a),z).applyQuaternion(q).add(position)
-  for(let i=0;i<5;i++)rod(part,at(radius*.09,i/5*TAU),at(radius*.51,i/5*TAU),radius*.032,6)
-  arc(part,radius*.13,0,TAU,position,rotation,radius*.048,24,8)
+  for(let i=0;i<5;i++){
+    const spoke=new THREE.Shape([
+      new THREE.Vector2(radius*.105,-radius*.044),new THREE.Vector2(radius*.50,-radius*.026),
+      new THREE.Vector2(radius*.50,radius*.026),new THREE.Vector2(radius*.105,radius*.044),
+    ])
+    const cut=new THREE.ExtrudeGeometry(spoke,{depth:depth*.64,bevelEnabled:true,bevelSize:radius*.009,bevelThickness:radius*.010,bevelSegments:2,curveSegments:1,steps:1})
+    cut.translate(0,0,-depth*.32)
+    const e=new THREE.Euler().setFromQuaternion(q.clone().multiply(new THREE.Quaternion().setFromAxisAngle(vec(0,0,1),i/5*TAU)))
+    put(part,finishBevel(cut),position,[e.x,e.y,e.z])
+  }
+  channelRing(part,radius*.145,radius*.09,depth*1.12,0,TAU,position,rotation,24)
+  machinedRing(part,radius*.103,radius*.029,depth*.40,0,TAU,at(0,0,depth*.56),rotation,20)
 }
 function bevelTriangle(part,a,b,c,thickness=.03){
   const tangent=b.clone().sub(a).normalize()
@@ -131,6 +142,22 @@ export { TAU, Y, vec, materialStyles, group, shaftAxis, put, tube, arc, rod, box
 export function machinedRing(part, radius, width, depth, start = 0, length = TAU, position = vec(0,0,0), rotation = [0,0,0], segments = 96) {
   const b=Math.min(width,depth)*.22
   const profile=[[-width/2+b,-depth/2],[width/2-b,-depth/2],[width/2,-depth/2+b],[width/2,depth/2-b],[width/2-b,depth/2],[-width/2+b,depth/2],[-width/2,depth/2-b],[-width/2,-depth/2+b]]
+  sweepRingProfile(part,radius,profile,start,length,position,rotation,segments)
+}
+
+/** A real recessed annular channel, with broad lips and sloping cut shoulders. */
+export function channelRing(part,radius,width,depth,start=0,length=TAU,position=vec(0,0,0),rotation=[0,0,0],segments=96) {
+  const b=Math.min(width,depth)*.17,grooveDepth=depth*.30,halfGroove=width*.18
+  const profile=[
+    [-width/2+b,-depth/2],[width/2-b,-depth/2],[width/2,-depth/2+b],
+    [width/2,depth/2-b],[width/2-b,depth/2],[halfGroove,depth/2],
+    [halfGroove*.69,depth/2-grooveDepth],[-halfGroove*.69,depth/2-grooveDepth],
+    [-halfGroove,depth/2],[-width/2+b,depth/2],[-width/2,depth/2-b],[-width/2,-depth/2+b],
+  ]
+  sweepRingProfile(part,radius,profile,start,length,position,rotation,segments)
+}
+
+function sweepRingProfile(part,radius,profile,start,length,position,rotation,segments) {
   const positions=[],normals=[],indices=[]
   for(let edge=0;edge<profile.length;edge++){
     const a=profile[edge],c=profile[(edge+1)%profile.length]
@@ -142,10 +169,11 @@ export function machinedRing(part, radius, width, depth, start = 0, length = TAU
       if(i<segments){const k=base+i*2;indices.push(k,k+2,k+3,k,k+3,k+1)}
     }
   }
+  const capTriangles=THREE.ShapeUtils.triangulateShape(profile.map(([x,y])=>new THREE.Vector2(x,y)),[])
   if(length<TAU-1e-6)for(const end of[0,1]){
     const t=start+end*length,base=positions.length/3
     for(const p of profile){positions.push((radius+p[0])*Math.cos(t),(radius+p[0])*Math.sin(t),p[1]);normals.push((end?1:-1)*-Math.sin(t),(end?1:-1)*Math.cos(t),0)}
-    for(let i=1;i<profile.length-1;i++)indices.push(...(end?[base,base+i+1,base+i]:[base,base+i,base+i+1]))
+    for(const[a,b,c]of capTriangles)indices.push(...(end?[base+a,base+c,base+b]:[base+a,base+b,base+c]))
   }
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));g.setIndex(indices);put(part,g,position,rotation)
 }

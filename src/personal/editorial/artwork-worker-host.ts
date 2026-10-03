@@ -17,6 +17,7 @@ type Entry = {
   cancelled: boolean;
   sketch: OffscreenSketchController | null;
   job: PreviewHandle | null;
+  factory: Awaited<ReturnType<P5SketchLoader>>['default'] | null;
 };
 
 /** Worker lifecycle independent of transport so cancelled imports can be tested. */
@@ -28,6 +29,7 @@ export function createArtworkWorkerHost(dependencies: HostDependencies) {
     const entry = entries.get(id);
     if (!entry) return;
     entry.cancelled = true;
+    entry.factory = null;
     entry.job?.remove();
     entry.sketch?.remove();
     if (!entry.sketch) { entry.command.canvas.width = 0; entry.command.canvas.height = 0; }
@@ -41,13 +43,12 @@ export function createArtworkWorkerHost(dependencies: HostDependencies) {
     dependencies.send({ type: 'error', id, reason: error instanceof Error ? error.message : 'Artwork worker failed.' });
   }
 
-  function register(command: Extract<ArtworkWorkerCommand, { type: 'register' }>) {
-    remove(command.id);
-    const entry: Entry = { command, active: command.active, cancelled: false, sketch: null, job: null };
-    entries.set(command.id, entry);
-    Promise.resolve().then(() => dependencies.load(command.sketchId)).then(module => {
-      if (disposed || entry.cancelled || entries.get(command.id) !== entry) return;
-      entry.sketch = dependencies.create(module.default, command.canvas, { physicalSize: command.physicalSize });
+  function start(entry: Entry) {
+    if (!entry.factory || entry.sketch || !entry.active || disposed || entry.cancelled || entries.get(entry.command.id) !== entry) return;
+    const command = entry.command;
+    try {
+      entry.sketch = dependencies.create(entry.factory, command.canvas, { physicalSize: command.physicalSize });
+      entry.factory = null;
       entry.job = dependencies.scheduler.add({
         active: entry.active,
         maxFps: entry.sketch.engine === 'gpu' ? 30 : 18,
@@ -58,6 +59,17 @@ export function createArtworkWorkerHost(dependencies: HostDependencies) {
         },
         onError: error => fail(entry, error),
       });
+    } catch (error) { fail(entry, error); }
+  }
+
+  function register(command: Extract<ArtworkWorkerCommand, { type: 'register' }>) {
+    remove(command.id);
+    const entry: Entry = { command, active: command.active, cancelled: false, sketch: null, job: null, factory: null };
+    entries.set(command.id, entry);
+    Promise.resolve().then(() => disposed || entry.cancelled ? undefined : dependencies.load(command.sketchId)).then(module => {
+      if (!module || disposed || entry.cancelled || entries.get(command.id) !== entry) return;
+      entry.factory = module.default;
+      start(entry);
     }).catch(error => fail(entry, error));
   }
 
@@ -70,6 +82,7 @@ export function createArtworkWorkerHost(dependencies: HostDependencies) {
         const entry = entries.get(command.id);
         if (!entry) return;
         entry.active = command.active;
+        if (command.active) start(entry);
         entry.job?.setActive(command.active);
       }
     },

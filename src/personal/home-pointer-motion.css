@@ -1,0 +1,31 @@
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .home-site[data-home-pointer-motion='true'] [data-home-pointer-part='art'] {
+    transform: perspective(700px)
+      translate3d(clamp(-6px, calc(var(--home-pointer-x, 0) * 2.5%), 6px), clamp(-6px, calc(var(--home-pointer-y, 0) * 2.5%), 6px), 0)
+      rotateX(calc(var(--home-pointer-y, 0) * -3deg)) rotateY(calc(var(--home-pointer-x, 0) * 3deg));
+    transform-origin: center;
+  }
+  .home-site[data-home-pointer-motion='true'] [data-home-pointer-part='glyph'] {
+    /* Replace the older hover offset so the two effects cannot compound. */
+    transform: none !important;
+    transition: none;
+    translate: calc(var(--home-pointer-x, 0) * 5px) calc(var(--home-pointer-y, 0) * 3px);
+    scale: calc(1 + var(--home-pointer-engagement, 0) * .06);
+  }
+  .home-site [data-home-pointer-active='true'] { will-change: transform; }
+}
+@media (hover: none), (pointer: coarse) {
+  .home-site :is(.journal-read,.journal-all,.arrow-link,.work-study-link,.work-further a,.closing-email) > span[aria-hidden='true'] { transform: none !important; }
+}
+.home-site[data-home-pointer-artwork-paused='true'] .journal-art > .animated-artwork,
+.home-site .journal-essay:focus-visible .journal-art > .animated-artwork {
+  transform: none !important; translate: none !important; rotate: none !important; scale: none !important;
+}
+.home-site .journal-essay:focus-visible .journal-read > span,
+.home-site :is(.journal-all,.arrow-link,.work-further a,.site-closing a):focus-visible > span[aria-hidden='true'],
+.home-site .work-study-entry:focus-within .work-study-link > span {
+  transform: none !important; translate: none !important; scale: none !important;
+}
+@media (prefers-reduced-motion: reduce), print {
+  .home-site [data-home-pointer-part] { transform: none !important; translate: none !important; rotate: none !important; scale: none !important; will-change: auto; }
+}

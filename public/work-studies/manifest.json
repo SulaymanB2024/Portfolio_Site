@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "generator": "tools/build-work-models.mjs",
   "ownership": "Original procedural geometry created for Sulayman Bowles. No third-party model or texture inputs.",
   "license": "LicenseRef-Site-Owner",
@@ -23,19 +23,19 @@
       "id": "internshipdeadlines",
       "project": "InternshipDeadlines",
       "title": "Opportunity instrument",
-      "concept": "Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage. Flat beveled crescents, vernier marks, meshing gears, real standoffs and a hinged pendulum connect dates, data and opportunity.",
+      "concept": "Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage with fitted retention shoes. Recessed annular rail channels, seated scale marks, tapered gear spokes, stepped bored hubs and a hinged pendulum connect dates, data and opportunity.",
       "path": "work-studies/internshipdeadlines.glb",
-      "bytes": 1120396,
-      "sha256": "90f5c1d3e4119aef1c81a153734534f382d910bdbea82287a05a8c68a3a38b92",
-      "vertices": 37012,
-      "triangles": 36956,
+      "bytes": 1293800,
+      "sha256": "a3c77f84e99748028c46e32303a4368cc55676555f63b2277af1b881624f9c12",
+      "vertices": 42964,
+      "triangles": 42048,
       "meshes": 10,
       "materials": 4,
       "articulation": [
         {
           "name": "hover-clock-machined-crescent",
           "pivot": [
-            -0.00005100607078893454,
+            -0.00005111748834785159,
             0.028490875012724532,
             0.18260878459662191
           ],
@@ -48,7 +48,7 @@
         {
           "name": "hover-register-rear-crescent",
           "pivot": [
-            0.03708578411105337,
+            0.037085672693494456,
             0.04313136982065098,
             -0.0000068206296868478316
           ],
@@ -61,7 +61,7 @@
         {
           "name": "hover-register-inner-index",
           "pivot": [
-            -0.06068328129093193,
+            -0.060683392708490845,
             -0.0026840434029462637,
             0.5504622585275902
           ],
@@ -74,7 +74,7 @@
         {
           "name": "hover-register-escapement-pendulum",
           "pivot": [
-            0.1983184407527654,
+            0.1983183293352065,
             -0.44090716818648634,
             0.510597679980576
           ],
@@ -87,7 +87,7 @@
         {
           "name": "hover-register-primary-gear",
           "pivot": [
-            -0.49040018088079185,
+            -0.49040029229835075,
             -0.4948388659960931,
             -0.09300381650742738
           ],
@@ -100,7 +100,7 @@
         {
           "name": "hover-register-transfer-gear",
           "pivot": [
-            -0.22054217782223812,
+            -0.22054228923979702,
             -0.6355290644458585,
             -0.04940466237884315
           ],
@@ -113,14 +113,65 @@
       ],
       "bounds": {
         "min": [
-          -0.9233294570366702,
+          -0.9243092303957575,
           -0.9999999878771907,
           -0.7138790745244927
         ],
         "max": [
-          0.9233294880469479,
+          0.9243092769894964,
           1.0000000183497038,
           0.7138790231241279
+        ]
+      },
+      "framing": {
+        "rest": 1.1288410581212218,
+        "fullArticulation": 1.153202039890427,
+        "fullArticulationPlusBurst": 1.2269758453812665,
+        "paddingRequired": 0.09813478726004465,
+        "paddingSlackAtPoint16": 0.06186521273995535,
+        "articulation": [
+          {
+            "name": "hover-clock-machined-crescent",
+            "restRadius": 1.0710832659944187,
+            "articulatedRadius": 1.0710835706822763,
+            "burstTranslationBound": 0.07,
+            "articulatedPlusBurstRadius": 1.1410835706822764
+          },
+          {
+            "name": "hover-register-rear-crescent",
+            "restRadius": 1.0650980571249897,
+            "articulatedRadius": 1.0651000602233207,
+            "burstTranslationBound": 0.07607357886803998,
+            "articulatedPlusBurstRadius": 1.1411736390913607
+          },
+          {
+            "name": "hover-register-inner-index",
+            "restRadius": 1.0127046420991812,
+            "articulatedRadius": 1.0127112989535247,
+            "burstTranslationBound": 0.08050462732376276,
+            "articulatedPlusBurstRadius": 1.0932159262772876
+          },
+          {
+            "name": "hover-register-escapement-pendulum",
+            "restRadius": 1.1288410581212218,
+            "articulatedRadius": 1.153202039890427,
+            "burstTranslationBound": 0.07377380549083952,
+            "articulatedPlusBurstRadius": 1.2269758453812665
+          },
+          {
+            "name": "hover-register-primary-gear",
+            "restRadius": 0.9089313891250312,
+            "articulatedRadius": 0.9089491206242183,
+            "burstTranslationBound": 0.07053450889272148,
+            "articulatedPlusBurstRadius": 0.9794836295169398
+          },
+          {
+            "name": "hover-register-transfer-gear",
+            "restRadius": 0.7946962216965381,
+            "articulatedRadius": 0.7962258115953451,
+            "burstTranslationBound": 0.07820122072764178,
+            "articulatedPlusBurstRadius": 0.8744270323229869
+          }
         ]
       },
       "validation": {
@@ -135,21 +186,21 @@
       "id": "sapien",
       "project": "Sapien",
       "title": "Synthetic mind",
-      "concept": "A sculpted face with recessed eyes, neutral lips, anatomical ears and a cutaway forehead opens into paired ridged cortical lobes. Thick meandering gyri surround a sparse relay network; a continuous cervical spine and attached brain stem connect the head to machined vertebral collars.",
+      "concept": "A sculpted face with recessed eyes, neutral lips, anatomical ears and a cutaway forehead opens into coherent paired cortical lobes with finer warped sulci. Short flattened meandering gyri follow frontal, temporal and parietal regions without projecting into tall columns. Access cavities reveal a sparse relay network; a continuous cervical spine and attached brain stem join machined vertebral collars.",
       "path": "work-studies/sapien.glb",
-      "bytes": 659196,
-      "sha256": "6104cfe5cc4144139a81fdac34536d6aa6f8fdd33182de282bd1952c97761c33",
-      "vertices": 19224,
-      "triangles": 31500,
+      "bytes": 945796,
+      "sha256": "3a1592499415859f03dd3efe2107133b2cf821875e2e55d672ffd29b8f6bf0d2",
+      "vertices": 27332,
+      "triangles": 46832,
       "meshes": 9,
       "materials": 4,
       "articulation": [
         {
           "name": "hover-sculpted-cortical-lobes",
           "pivot": [
-            -0.016061311554167613,
-            0.6096143486472263,
-            -0.04625144903600653
+            -0.016353692277811017,
+            0.6389158291930143,
+            -0.047093412165424474
           ],
           "axis": [
             -0.01841999182329376,
@@ -160,9 +211,9 @@
         {
           "name": "hover-organic-cortical-gyri",
           "pivot": [
-            -0.016061311554167613,
-            0.6096143486472263,
-            -0.04625144903600653
+            -0.016353692277811017,
+            0.6389158291930143,
+            -0.047093412165424474
           ],
           "axis": [
             -0.01841999182329376,
@@ -173,9 +224,9 @@
         {
           "name": "hover-subcortical-relay-points",
           "pivot": [
-            -0.016061311554167613,
-            0.6096143486472263,
-            -0.04625144903600653
+            -0.016353692277811017,
+            0.6389158291930143,
+            -0.047093412165424474
           ],
           "axis": [
             -0.01841999182329376,
@@ -186,9 +237,9 @@
         {
           "name": "hover-subcortical-pathways",
           "pivot": [
-            -0.016061311554167613,
-            0.6096143486472263,
-            -0.04625144903600653
+            -0.016353692277811017,
+            0.6389158291930143,
+            -0.047093412165424474
           ],
           "axis": [
             -0.01841999182329376,
@@ -199,34 +250,71 @@
       ],
       "bounds": {
         "min": [
-          -0.5677528381347656,
+          -0.5780882239341736,
           -1,
-          -0.6047385334968567
+          -0.6157472133636475
         ],
         "max": [
-          0.5677528381347656,
-          1.0000000061961307,
-          0.6047385334968567
+          0.5780882239341736,
+          0.9999999923819486,
+          0.6157472133636475
+        ]
+      },
+      "framing": {
+        "rest": 1.0587384263721293,
+        "fullArticulation": 1.0587384263721293,
+        "fullArticulationPlusBurst": 1.1103540698742278,
+        "paddingRequired": 0.05161564350209846,
+        "paddingSlackAtPoint16": 0.10838435649790154,
+        "articulation": [
+          {
+            "name": "hover-sculpted-cortical-lobes",
+            "restRadius": 1.0373560847676144,
+            "articulatedRadius": 1.0403540698742277,
+            "burstTranslationBound": 0.07,
+            "articulatedPlusBurstRadius": 1.1103540698742278
+          },
+          {
+            "name": "hover-organic-cortical-gyri",
+            "restRadius": 1.002602675890985,
+            "articulatedRadius": 1.0043947276292486,
+            "burstTranslationBound": 0.07607357886803998,
+            "articulatedPlusBurstRadius": 1.0804683064972886
+          },
+          {
+            "name": "hover-subcortical-relay-points",
+            "restRadius": 0.7926648469497305,
+            "articulatedRadius": 0.7938593639785605,
+            "burstTranslationBound": 0.08050462732376276,
+            "articulatedPlusBurstRadius": 0.8743639913023232
+          },
+          {
+            "name": "hover-subcortical-pathways",
+            "restRadius": 0.7811474443129809,
+            "articulatedRadius": 0.7822262986067245,
+            "burstTranslationBound": 0.07377380549083952,
+            "articulatedPlusBurstRadius": 0.8560001040975641
+          }
         ]
       },
       "validation": {
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999557629761,
-        "maximumNormalLength": 1.0000000441297017
+        "minimumNormalLength": 0.9999999603566335,
+        "maximumNormalLength": 1.0000000415640224
       }
     },
     {
       "id": "investing-markets",
       "project": "Investing & Markets",
       "title": "Market observatory",
-      "concept": "Smooth continent reliefs, real coastal sidewalls and selective graticule sit on a continuous steel ocean shell. A beveled meridian yoke, stepped polar bearings, partial indexed vernier, six geographic hubs and four raised routes make a restrained market observatory.",
+      "concept": "Smooth continent reliefs with coastal sidewalls, seventeen generalized land outlines, selected low terrain ranges and a sparse graticule sit on a continuous steel ocean shell. Grooved meridian and equatorial rails, stepped polar bearings, a partial indexed vernier and counterbored tapered geographic terminals carry four raised routes.",
       "path": "work-studies/investing-markets.glb",
-      "bytes": 1107184,
-      "sha256": "84d17c642db082aa9c0eae2c6645db61ce376a5cdbd58e0f9be2d9cd88955ad6",
-      "vertices": 33814,
-      "triangles": 47492,
+      "bytes": 1356380,
+      "sha256": "3fbf9f0caf4c51fb1a1bff973e6f2503a63096ca2128b1702045575cde150f15",
+      "vertices": 41829,
+      "triangles": 56964,
       "meshes": 11,
       "materials": 4,
       "articulation": [
@@ -234,7 +322,7 @@
           "name": "hover-observatory-meridian-yoke",
           "pivot": [
             0.005973331374493805,
-            -0.07406413262009229,
+            -0.0738979046419564,
             -0.0015533133895418057
           ],
           "axis": [
@@ -247,7 +335,7 @@
           "name": "hover-observatory-equatorial-index",
           "pivot": [
             0.005973331374493805,
-            -0.07406413262009229,
+            -0.0738979046419564,
             -0.0015533133895418057
           ],
           "axis": [
@@ -260,7 +348,7 @@
           "name": "hover-observatory-north-bearing",
           "pivot": [
             0.10850564728785761,
-            0.7095792839412667,
+            0.7097455119194025,
             0.10643978743907649
           ],
           "axis": [
@@ -273,7 +361,7 @@
           "name": "hover-observatory-south-bearing",
           "pivot": [
             -0.09655898453886999,
-            -0.8577075491814512,
+            -0.8575413212033154,
             -0.10954641421816011
           ],
           "axis": [
@@ -286,20 +374,57 @@
       "bounds": {
         "min": [
           -0.9999999403953552,
-          -0.9391374558699092,
-          -0.9539051815421602
+          -0.9393036429956857,
+          -0.9541048571021578
         ],
         "max": [
           0.9999999403953552,
-          0.9391374588012695,
-          0.95390514884877
+          0.9393036365509033,
+          0.9541048244087675
+        ]
+      },
+      "framing": {
+        "rest": 1.0696393134901747,
+        "fullArticulation": 1.0696393134901747,
+        "fullArticulationPlusBurst": 1.0696393134901747,
+        "paddingRequired": 0,
+        "paddingSlackAtPoint16": 0.16,
+        "articulation": [
+          {
+            "name": "hover-observatory-meridian-yoke",
+            "restRadius": 0.9462865858554528,
+            "articulatedRadius": 0.946545157873583,
+            "burstTranslationBound": 0.07,
+            "articulatedPlusBurstRadius": 1.016545157873583
+          },
+          {
+            "name": "hover-observatory-equatorial-index",
+            "restRadius": 0.972002824336678,
+            "articulatedRadius": 0.972003796666749,
+            "burstTranslationBound": 0.07607357886803998,
+            "articulatedPlusBurstRadius": 1.048077375534789
+          },
+          {
+            "name": "hover-observatory-north-bearing",
+            "restRadius": 0.794790089851802,
+            "articulatedRadius": 0.7947921998962205,
+            "burstTranslationBound": 0.08050462732376276,
+            "articulatedPlusBurstRadius": 0.8752968272199833
+          },
+          {
+            "name": "hover-observatory-south-bearing",
+            "restRadius": 0.9385868562927892,
+            "articulatedRadius": 0.9385886430783894,
+            "burstTranslationBound": 0.07377380549083952,
+            "articulatedPlusBurstRadius": 1.0123624485692289
+          }
         ]
       },
       "validation": {
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999567386649,
+        "minimumNormalLength": 0.9999999564406882,
         "maximumNormalLength": 1.000000041410936
       }
     },
@@ -307,12 +432,12 @@
       "id": "miscellaneous",
       "project": "Miscellaneous",
       "title": "Unfinished mechanism",
-      "concept": "Five pierced folded sheets with inset triangular windows and return lips form an open mechanism. Crease-aligned shafts, fitted hinge knuckles, slotted fasteners, two tension springs and a meshing geared core give the experimental form a coherent construction.",
+      "concept": "Five pierced folded sheets with rounded lightening windows and return lips form an open mechanism. Crease-aligned shafts, grooved hinge knuckles, slotted fasteners, two tension springs with fitted lead attachments and a geared core with tapered spokes and stepped bored hubs give the experimental form coherent construction.",
       "path": "work-studies/miscellaneous.glb",
-      "bytes": 931392,
-      "sha256": "8f4e376b60c785310136378e5a4d0c62ea71c2f11bb1eb6bc5eb76ecfa564277",
-      "vertices": 30466,
-      "triangles": 31504,
+      "bytes": 1350084,
+      "sha256": "69d67f162023e833b2b3ea664b636c3be48ef6676a8f371a6edbe6ea5dd5d07f",
+      "vertices": 44745,
+      "triangles": 44168,
       "meshes": 11,
       "materials": 4,
       "articulation": [
@@ -420,12 +545,70 @@
           0.5918275713920593
         ]
       },
+      "framing": {
+        "rest": 1.1614697626754098,
+        "fullArticulation": 1.1614697626754098,
+        "fullArticulationPlusBurst": 1.1614697626754098,
+        "paddingRequired": 0,
+        "paddingSlackAtPoint16": 0.16,
+        "articulation": [
+          {
+            "name": "hover-fold-hinge-wheel-1",
+            "restRadius": 0.920224182437142,
+            "articulatedRadius": 0.9202342785918689,
+            "burstTranslationBound": 0.07,
+            "articulatedPlusBurstRadius": 0.990234278591869
+          },
+          {
+            "name": "hover-fold-hinge-wheel-2",
+            "restRadius": 0.9557197418043631,
+            "articulatedRadius": 0.9557522033230147,
+            "burstTranslationBound": 0.07607357886803998,
+            "articulatedPlusBurstRadius": 1.0318257821910546
+          },
+          {
+            "name": "hover-fold-hinge-wheel-3",
+            "restRadius": 1.0773083241722685,
+            "articulatedRadius": 1.0773161365529638,
+            "burstTranslationBound": 0.08050462732376276,
+            "articulatedPlusBurstRadius": 1.1578207638767266
+          },
+          {
+            "name": "hover-fold-hinge-wheel-4",
+            "restRadius": 1.0020141961955633,
+            "articulatedRadius": 1.0020674213355774,
+            "burstTranslationBound": 0.07377380549083952,
+            "articulatedPlusBurstRadius": 1.0758412268264168
+          },
+          {
+            "name": "hover-fold-hinge-wheel-5",
+            "restRadius": 0.853719252722637,
+            "articulatedRadius": 0.8537437057335853,
+            "burstTranslationBound": 0.07053450889272148,
+            "articulatedPlusBurstRadius": 0.9242782146263068
+          },
+          {
+            "name": "hover-experimental-central-wheel",
+            "restRadius": 0.4646203973635679,
+            "articulatedRadius": 0.46472184071324524,
+            "burstTranslationBound": 0.07820122072764178,
+            "articulatedPlusBurstRadius": 0.542923061440887
+          },
+          {
+            "name": "hover-experimental-transfer-wheel",
+            "restRadius": 0.659240822696715,
+            "articulatedRadius": 0.6593674397600103,
+            "burstTranslationBound": 0.07958850495544625,
+            "articulatedPlusBurstRadius": 0.7389559447154566
+          }
+        ]
+      },
       "validation": {
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
         "minimumNormalLength": 0.9999999554003985,
-        "maximumNormalLength": 1.0000000384404502
+        "maximumNormalLength": 1.0000000408278487
       }
     }
   ]

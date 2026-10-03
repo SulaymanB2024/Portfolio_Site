@@ -10,13 +10,14 @@ export interface Performance {
   date: string;
   displayDate: string;
   role: 'performer' | 'composer';
+  series: 'ut-austin' | 'all-state';
   ensemble: string;
   repertoire: string[];
   links: PerformanceLink[];
   sourceNotes: string;
 }
 
-/** Appearances supported by an explicit program credit or a credited recording. */
+/** Appearances supported by a named program credit or an official ensemble roster. */
 export const performances: Performance[] = [
   {
     id: 'ut-university-orchestra-2025-02-25',
@@ -24,6 +25,7 @@ export const performances: Performance[] = [
     date: '2025-02-25',
     displayDate: 'February 25, 2025',
     role: 'performer',
+    series: 'ut-austin',
     ensemble: 'The University of Texas at Austin · double bass',
     repertoire: [
       'Ludwig van Beethoven — Symphony No. 1 in C Major, Op. 21',
@@ -35,11 +37,31 @@ export const performances: Performance[] = [
     sourceNotes: 'The official concert program names Sulayman Bowles in the double bass section.',
   },
   {
+    id: 'ut-butler-holiday-concert-2024-12',
+    title: 'Butler Holiday Concert',
+    date: '2024-12-07',
+    displayDate: 'December 7–8, 2024',
+    role: 'performer',
+    series: 'ut-austin',
+    ensemble: 'UT Austin · Wind Ensemble & Combined Choirs',
+    repertoire: [
+      'Lara Hoggard — Personent Hodie',
+      'LeRoy Anderson — Christmas Festival; Sleigh Ride',
+      'Randol Alan Bass — Gloria',
+      'Robert Shaw, arr. Robert Russell Bennett — The Many Moods of Christmas',
+    ],
+    links: [
+      { label: 'Concert program', href: 'https://music.utexas.edu/events/4631-butler-holiday-concert', kind: 'program' },
+    ],
+    sourceNotes: 'The saved UT concert-program draft explicitly lists Bowles, Sulayman under Wind Ensemble double bass. The official event corroborates the December 7–8 dates and this ensemble’s program. Its former Vimeo stream is unavailable. The two performances share one archive entry.',
+  },
+  {
     id: 'ut-symphony-orchestra-2024-10-26',
     title: 'Symphony Orchestra',
     date: '2024-10-26',
     displayDate: 'October 26, 2024',
     role: 'performer',
+    series: 'ut-austin',
     ensemble: 'The University of Texas at Austin · double bass',
     repertoire: [
       'Giuseppe Verdi — Overture to La forza del destino',
@@ -58,6 +80,7 @@ export const performances: Performance[] = [
     date: '2024-09-29',
     displayDate: 'September 29, 2024',
     role: 'performer',
+    series: 'ut-austin',
     ensemble: 'The University of Texas at Austin · double bass',
     repertoire: [
       'Donald Grantham — Baron Cimetiere’s Mambo',
@@ -70,63 +93,47 @@ export const performances: Performance[] = [
     sourceNotes: 'The official concert program names Sulayman Bowles in the double bass section. Its former Vimeo stream is unavailable.',
   },
   {
-    id: 'golden-hornet-young-composers-2024',
-    title: 'The Beauty of Loss',
-    date: '2024-04-07',
-    displayDate: 'April 7, 2024',
-    role: 'composer',
-    ensemble: 'Golden Hornet Young Composers · professional chamber ensemble',
-    repertoire: ['Sulayman Bowles — The Beauty of Loss'],
-    links: [
-      { label: 'Full concert recording', href: 'https://www.youtube.com/watch?v=vQhobHt5g0k', kind: 'recording' },
-      { label: 'Concert program', href: 'https://drive.google.com/file/d/11SN3b9sfKPxgA7xHGOV-ob0U7xVu9sRg/view', kind: 'program' },
+    id: 'tmea-all-state-symphony-orchestra-2024',
+    title: 'Texas All-State Symphony Orchestra',
+    date: '2024-02-10',
+    displayDate: 'February 10, 2024',
+    role: 'performer',
+    series: 'all-state',
+    ensemble: 'TMEA · John Devlin, conductor · San Antonio',
+    repertoire: [
+      'Michael Daugherty — Red Cape Tango',
+      'Clarice Assad — Bonecos de Olinda',
+      'Richard Strauss — Till Eulenspiegels lustige Streiche',
+      'Arturo Márquez — Conga del Fuego Nuevo',
     ],
-    sourceNotes: 'The official recording links this publicly accessible program, which credits The Beauty of Loss to Sulayman Bowles. The program date is April 7, 2024.',
+    links: [
+      { label: 'Concert repertoire', href: 'https://www.tmea.org/all-state/performances/?organization=2024+Symphony+Orchestra&submit=Search', kind: 'program' },
+      { label: 'Concert recording', href: 'https://markcustom.com/markcustom_new/Menu2_ViewAlbum.asp?CDNum=57410-MCD', kind: 'recording' },
+      { label: 'TMEA roster', href: 'https://www.tmea.org/all-state/historical-rosters/?organization=2024+Symphony+Orchestra&instrument=String+Bass&school_op=eq&school=McCallum+HS&city_op=eq&city=Austin&submit=Search', kind: 'program' },
+    ],
+    sourceNotes: 'TMEA’s official historical roster credits Sulayman Bowles, McCallum HS, on string bass in the 2024 Symphony Orchestra. Its performance archive supplies the conductor and repertoire; Mark Custom is the official recording provider. The February 10 concert date is corroborated by contemporary school-district All-State announcements. No audition ranking is presented as a performance chair.',
   },
   {
-    id: 'golden-hornet-young-composers-2022',
-    title: 'Melancholy',
-    date: '2022-03-27',
-    displayDate: 'March 27, 2022',
-    role: 'composer',
-    ensemble: 'Golden Hornet Young Composers · professional chamber ensemble',
-    repertoire: ['Sulayman Bowles — Melancholy'],
-    links: [
-      { label: 'Full concert recording', href: 'https://www.youtube.com/watch?v=t3VP-lRlaZ4', kind: 'recording' },
-      { label: 'Concert details', href: 'https://www.goldenhornet.org/calendar/young-composers-concert-2022', kind: 'program' },
+    id: 'tmea-all-state-5a-symphonic-band-2023',
+    title: 'Texas All-State 5A Symphonic Band',
+    date: '2023-02-11',
+    displayDate: 'February 11, 2023',
+    role: 'performer',
+    series: 'all-state',
+    ensemble: 'TMEA · Dennis Llinás, conductor · San Antonio',
+    repertoire: [
+      'Kimberly Archer — Humoresque',
+      'Dennis Llinás — Un Cafecito',
+      'Richard Strauss, arr. Jimmie Howard Reynolds — Trio from Act III of Der Rosenkavalier',
+      'Gustav Holst, trans. Merlin Patterson — The Planets: Mars; Jupiter',
     ],
-    sourceNotes: 'The official event explicitly credits Sulayman Bowles as a composer. The title is corroborated by his concert-order and score archive; the recording is Golden Hornet’s full 2022 concert.',
-  },
-  {
-    id: 'golden-hornet-young-composers-2021',
-    title: 'Call of the Cavies',
-    date: '2021-04-18',
-    displayDate: 'April 18, 2021',
-    role: 'composer',
-    ensemble: 'Golden Hornet Young Composers Collaboration',
-    repertoire: ['Sulayman Bowles — Call of the Cavies'],
     links: [
-      { label: 'Piece recording', href: 'https://www.youtube.com/watch?v=GoZOo34NCQI', kind: 'recording' },
-      { label: 'Full concert recording', href: 'https://www.youtube.com/watch?v=dpunl4dcLno', kind: 'recording' },
-      { label: 'Concert program', href: 'https://drive.google.com/file/d/1yT4vg-dzHpGPDTCW5dIdquRG4WO18LFo/view', kind: 'program' },
+      { label: 'Concert repertoire', href: 'https://www.tmea.org/all-state/performances/?organization=2023+5A+Symphonic+Band&submit=Search', kind: 'program' },
+      { label: 'Concert recording', href: 'https://markcustom.com/markcustom_new/Menu2_ViewAlbum.asp?CDNum=56801-MCD', kind: 'recording' },
+      { label: 'TMEA roster', href: 'https://www.tmea.org/all-state/historical-rosters/?organization=2023+5A+Symphonic+Band&instrument=String+Bass&school_op=eq&school=McCallum+HS&city_op=eq&city=Austin&submit=Search', kind: 'program' },
     ],
-    sourceNotes: 'Golden Hornet’s individual recording credits the work to Sulayman Bowles. The event date is the virtual concert date; the individual recording was published in July 2021.',
-  },
-  {
-    id: 'golden-hornet-young-composers-2020',
-    title: 'Unfolding of Night',
-    date: '2020-08-23',
-    displayDate: 'August 23, 2020',
-    role: 'composer',
-    ensemble: 'Tetractys · Golden Hornet Young Composers',
-    repertoire: ['Sulayman Bowles — Unfolding of Night'],
-    links: [
-      { label: 'Piece recording', href: 'https://www.youtube.com/watch?v=qc6q_XkS0aE', kind: 'recording' },
-      { label: 'Full concert recording', href: 'https://www.youtube.com/watch?v=hoetkUVJrck', kind: 'recording' },
-      { label: 'Concert details', href: 'https://www.goldenhornet.org/calendar/young-composers-concert-2020', kind: 'program' },
-    ],
-    sourceNotes: 'Golden Hornet’s individual recording credits Sulayman Bowles as composer and Tetractys as performers. The event date is the virtual concert date; the individual recording was published in October 2020.',
+    sourceNotes: 'TMEA’s official historical roster credits Sulayman Bowles, McCallum HS, on string bass in the 2023 5A Symphonic Band. Its performance archive supplies the conductor, works and arrangers; the official recording is catalog 56801-MCD. The February 11 concert date is corroborated by contemporary school-district All-State announcements.',
   },
 ];
 
-export const performanceArchiveNote = 'An archive of performances confirmed in available programs and recordings.';
+export const performanceArchiveNote = 'Double bass · UT Austin & Texas All-State';

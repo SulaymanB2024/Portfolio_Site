@@ -1,14 +1,14 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
-import { Effect, EffectComposer, EffectPass, RenderPass } from 'postprocessing'
-import { DitheringEffect } from '../dithering-shader/DitheringEffect.ts'
+import { EffectComposer, EffectPass, RenderPass } from 'postprocessing'
 import { WaterFlowEffect } from './water-flow'
 import { LiveDitherEffect } from './live-dither'
 import { printPixelRatio, readPrintPalette } from './print-palette'
 import { createLionStudy } from './contact/lion-study'
+import { PortfolioRuntime } from './portfolio-runtime.ts'
+import { createPortfolioModelLoader } from './portfolio-model-loader.ts'
+import { portfolioAssetUrl } from './portfolio-assets.ts'
 
 export type ObjectKind = 'helmet' | 'crystal' | 'ribbon' | 'globe' | 'cross' | 'headrest'
 export interface ObjectHandle {
@@ -83,6 +83,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     }
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'low-power' })
+    renderer.info.autoReset = false
     teardown = () => {
       releaseResources()
       renderer.dispose()
@@ -121,39 +122,27 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     const keyLight = new THREE.DirectionalLight(0xffffff, kind === 'headrest' ? 2.2 : 3)
     keyLight.position.set(-3, 5, 4)
     scene.add(keyLight, new THREE.AmbientLight(0xffffff, 0.15))
-    const draco = new DRACOLoader().setDecoderPath(`${import.meta.env.BASE_URL}draco/`).setWorkerLimit(1)
+    const loader = createPortfolioModelLoader()
+    const requests = new AbortController()
     teardown = () => {
       controls.dispose()
-      draco.dispose()
+      requests.abort()
+      loader.dispose()
       environment.dispose()
       releaseResources()
       renderer.dispose()
     }
-    const loader = new GLTFLoader().setDRACOLoader(draco)
     const composer = new EffectComposer(renderer, { multisampling: 0 })
     const animatedHelmet = kind === 'helmet'
-    const dither = (flowMode || animatedHelmet) ? new LiveDitherEffect() : new DitheringEffect({ gridSize: 1, grayscaleOnly: true })
-    // Finish in the same ink and paper as the surrounding editorial layout.
-    const palette = new Effect(
-      'EditorialPalette',
-      /* glsl */ `
-      uniform vec3 printInk;
-      uniform vec3 printPaper;
-      void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
-        float tone = clamp(inputColor.r, 0.0, 1.0);
-        outputColor = vec4(mix(printInk, printPaper, tone), inputColor.a);
-      }
-    `,
-      { uniforms: new Map([['printInk', new THREE.Uniform(new THREE.Color())], ['printPaper', new THREE.Uniform(new THREE.Color())]]) }
-    )
+    // Fine print retains engraved edges without increasing the render target.
+    const dither = new LiveDitherEffect({ gridSize: 1, binary: flowMode || animatedHelmet, live: flowMode || animatedHelmet })
     composer.addPass(new RenderPass(scene, camera))
-    // Separate passes preserve the existing shader's monochrome output before palette mapping.
+    // Palette mapping and dither share a pass; flow samples that processed output.
     composer.addPass(new EffectPass(camera, dither))
     const flowEffect = flowMode ? new WaterFlowEffect() : null
-    // Fuse the flow with palette mapping: no extra full-screen pass or target allocation.
-    composer.addPass(new EffectPass(camera, palette, ...(flowEffect ? [flowEffect] : [])))
+    if (flowEffect) composer.addPass(new EffectPass(camera, flowEffect))
     canvas.dataset.flow = '0.0000'
-    canvas.dataset.effectPasses = '3'
+    canvas.dataset.effectPasses = flowMode ? '3' : '2'
     let object: THREE.Group | null = null
     let lionStudy: ReturnType<typeof createLionStudy> | null = null
     let fieldTarget = .06
@@ -161,8 +150,11 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     let frame = 0
     let printFrame = 0
     let frames = 0
-    let lastTime = 0
-    let lastPaint = 0
+    const runtime = new PortfolioRuntime()
+    let painting = false
+    let dragging = false
+    let lastStats = -Infinity
+    let averageCpuMs = 0
     let urgent = true
     let spinning = false
     let flowProgress = 0
@@ -171,7 +163,6 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     let visible = initialRect.bottom > 0 && initialRect.top < window.innerHeight && initialRect.right > 0 && initialRect.left < window.innerWidth
     let contextLost = false
     let fitDistance = 4
-    const renderTimes: number[] = []
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     canvas.dataset.spinning = 'false'
 
@@ -179,7 +170,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       return !disposed && visible && !document.hidden && !contextLost && !loadFailed
     }
     function requestRender(force: unknown = true) {
-      urgent = urgent || Boolean(force)
+      urgent ||= !painting && Boolean(force)
       if (active() && !frame) frame = requestAnimationFrame(render)
     }
     function render(time: number) {
@@ -188,51 +179,70 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       const flowComplete = flowMode && flowProgress >= .9999
       const living = (flowMode || animatedHelmet) && !reducedMotion.matches && !flowComplete && !loadFailed
       const fieldMoving = Boolean(lionStudy?.playing) && !reducedMotion.matches
-      // Continuous sculpture motion runs at 30 Hz; direct input can request an immediate frame.
-      // Allow sub-millisecond RAF jitter so a 60 Hz display does not skip a third refresh.
-      if ((living || fieldMoving) && !urgent && time - lastPaint < 1000 / 30 - 1) { requestRender(false); return }
+      if (!runtime.canPaint(time, urgent)) { requestRender(false); return }
       urgent = false
-      lastPaint = time
-      if ((flowMode || animatedHelmet) && object) {
-        object.rotation.x = living ? Math.sin(time * .00055) * .075 : 0
-        object.rotation.y = living ? Math.sin(time * .00046) * .19 : 0
-        object.rotation.z = living ? Math.sin(time * .00038 + .7) * .035 : 0
-        object.position.y = living ? Math.sin(time * .00085) * .052 : 0
-      }
-      if (dither instanceof LiveDitherEffect) dither.setTime(time / 1000, living)
-      flowEffect?.setTime(time / 1000)
+      painting = true
       controls.autoRotate = spinning && !reducedMotion.matches && !flowComplete
-      const delta = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 1 / 60
+      if (runtime.advance(time, living || fieldMoving || controls.autoRotate, dragging)) resize(true)
+      const delta = runtime.delta
+      const seconds = runtime.seconds
+      if ((flowMode || animatedHelmet) && object) {
+        object.rotation.x = reducedMotion.matches ? 0 : Math.sin(seconds * .55) * .075
+        object.rotation.y = reducedMotion.matches ? 0 : Math.sin(seconds * .46) * .19
+        object.rotation.z = reducedMotion.matches ? 0 : Math.sin(seconds * .38 + .7) * .035
+        object.position.y = reducedMotion.matches ? 0 : Math.sin(seconds * .85) * .052
+      }
+      dither.setTime(seconds, living)
+      flowEffect?.setTime(seconds)
       const changingStudy = lionStudy?.advance(delta, reducedMotion.matches) ?? false
+      controls.update(delta)
+      const started = import.meta.env.DEV ? performance.now() : 0
+      renderer.info.reset()
+      composer.render(delta)
+      onRendered?.(seconds * 1000)
+      if (import.meta.env.DEV) averageCpuMs = averageCpuMs * .94 + (performance.now() - started) * .06
+      frames++
+      painting = false
+      const live = controls.autoRotate || living || changingStudy
+      stats(live, frames === 1 || !live)
+      if (live) requestRender(false)
+      else runtime.suspend()
+    }
+    function stats(live: boolean, force = false) {
+      if (!import.meta.env.DEV) return
+      const now = performance.now()
+      if (force) canvas.dataset.liveMotion = String(live)
+      if (now - lastStats < 750) return
+      lastStats = now
+      canvas.dataset.renderAverageMs = averageCpuMs.toFixed(3)
+      canvas.dataset.renderCpuMs = averageCpuMs.toFixed(3)
+      canvas.dataset.frameAverageMs = runtime.averageFrameMs.toFixed(3)
+      canvas.dataset.fps = runtime.fps.toFixed(2)
+      canvas.dataset.motionSeconds = runtime.seconds.toFixed(4)
+      canvas.dataset.qualityScale = String(runtime.scale)
+      canvas.dataset.drawCalls = String(renderer.info.render.calls)
+      canvas.dataset.triangles = String(renderer.info.render.triangles)
+      canvas.dataset.points = String(renderer.info.render.points)
+      canvas.dataset.geometries = String(renderer.info.memory.geometries)
+      canvas.dataset.textures = String(renderer.info.memory.textures)
+      canvas.dataset.programs = String(renderer.info.programs?.length ?? 0)
+      canvas.dataset.liveMotion = String(live)
       if (lionStudy) {
         canvas.dataset.field = lionStudy.value.toFixed(3)
         canvas.dataset.fieldPlaying = String(lionStudy.playing)
       }
-      controls.update(lastTime ? delta : 0)
-      lastTime = time
-      const started = performance.now()
-      composer.render()
-      onRendered?.(time)
-      const duration = performance.now() - started
-      renderTimes.push(duration)
-      if (renderTimes.length > 120) renderTimes.shift()
-      canvas.dataset.renderCpuMs = duration.toFixed(3)
-      canvas.dataset.renderAverageMs = (renderTimes.reduce((a, b) => a + b, 0) / renderTimes.length).toFixed(3)
-      canvas.dataset.drawCalls = String(renderer.info.render.calls)
-      canvas.dataset.triangles = String(renderer.info.render.triangles)
-      canvas.dataset.liveMotion = String(living || fieldMoving)
       canvas.dataset.idleYaw = (object?.rotation.y || 0).toFixed(4)
       canvas.dataset.idlePitch = (object?.rotation.x || 0).toFixed(4)
       canvas.dataset.idleBob = (object?.position.y || 0).toFixed(4)
       canvas.dataset.azimuth = controls.getAzimuthalAngle().toFixed(4)
       canvas.dataset.polar = controls.getPolarAngle().toFixed(4)
-      canvas.dataset.frames = String(++frames)
-      if (controls.autoRotate || living || changingStudy) requestRender(false)
+      canvas.dataset.frames = String(frames)
     }
     function pause() {
       cancelAnimationFrame(frame)
       frame = 0
-      lastTime = 0
+      runtime.suspend()
+      stats(false, true)
     }
     function fittedDistance() {
       if (!object) return 4
@@ -248,21 +258,25 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       controls.update()
       requestRender()
     }
-    function resize() {
+    function resize(qualityOnly = false) {
       if (disposed) return
       const rect = canvas.getBoundingClientRect()
       const width = Math.max(1, Math.round(rect.width))
       const height = Math.max(1, Math.round(rect.height))
       // A viewport-wide surface must not multiply the former sculpture's GPU allocation.
       // Integer display-pixel subdivisions avoid a fractionally resampled dot screen.
-      const pixelRatio = printPixelRatio(width, height, window.devicePixelRatio || 1)
+      const pixelRatio = printPixelRatio(width, height, window.devicePixelRatio || 1) * runtime.scale
       lionStudy?.setPixelRatio(pixelRatio)
+      lionStudy?.setDetail(width < 700)
       if (renderer.getPixelRatio() !== pixelRatio) renderer.setPixelRatio(pixelRatio)
       renderer.setSize(width, height, false)
       composer.setSize(width, height)
       canvas.dataset.renderPixels = String(canvas.width * canvas.height)
-      canvas.dataset.ditherGrid = '2'
+      dither.setView(width, height)
+      flowEffect?.setResolution(width, height)
+      canvas.dataset.ditherGrid = '1'
       canvas.dataset.pixelRatio = String(pixelRatio)
+      if (qualityOnly) return
       const core = flowMode ? canvas.closest('.home-flow-scene')?.getBoundingClientRect() : null
       if (core) {
         camera.setViewOffset(core.width, core.height, rect.left - core.left, rect.top - core.top, width, height)
@@ -285,12 +299,10 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       if (disposed) return
       dark = value
       const colors = readPrintPalette(canvas, dark)
-      palette.uniforms.get('printInk')!.value.copy(colors.ink)
-      palette.uniforms.get('printPaper')!.value.copy(colors.paper)
-      flowEffect?.setPalette(colors.paper, colors.ink)
+      dither.setPalette(colors.paper, colors.ink)
       canvas.dataset.paper = `#${colors.paper.getHexString()}`
       canvas.dataset.ink = `#${colors.ink.getHexString()}`
-      canvas.style.backgroundColor = flowMode ? 'transparent' : dark ? '#111210' : '#f3f3f0'
+      canvas.style.backgroundColor = flowMode ? 'transparent' : `#${colors.paper.getHexString()}`
       canvas.dataset.dark = String(dark)
       // Lighting remains physical; only paper and ink swap with the CSS theme.
       requestRender()
@@ -298,7 +310,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     function onVisibility() {
       if (document.hidden) pause()
       else {
-        lastTime = 0
+        runtime.suspend()
         requestRender()
       }
     }
@@ -358,7 +370,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       if (object) onStatus('ready')
       requestRender()
     }
-    const resizeObserver = new ResizeObserver(resize)
+    const resizeObserver = new ResizeObserver(() => resize())
     resizeObserver.observe(canvas)
     // Copy reflow can change the model's grid cell without resizing the wide canvas.
     const framingCell = flowMode ? canvas.closest('.home-flow-scene') : null
@@ -370,6 +382,10 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     })
     intersectionObserver.observe(canvas)
     controls.addEventListener('change', requestRender)
+    const dragStart = () => { dragging = true }
+    const dragEnd = () => { dragging = false; requestRender() }
+    controls.addEventListener('start', dragStart)
+    controls.addEventListener('end', dragEnd)
     canvas.addEventListener('keydown', onKey)
     canvas.addEventListener('webglcontextlost', onContextLost)
     canvas.addEventListener('webglcontextrestored', onContextRestored)
@@ -389,11 +405,14 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       window.removeEventListener('afterprint', onAfterPrint)
       reducedMotion.removeEventListener('change', onMotionChange)
       controls.removeEventListener('change', requestRender)
+      controls.removeEventListener('start', dragStart)
+      controls.removeEventListener('end', dragEnd)
       controls.dispose()
       scene.clear()
       composer.dispose()
       environment.dispose()
-      draco.dispose()
+      requests.abort()
+      loader.dispose()
       releaseResources()
       renderer.renderLists.dispose()
       renderer.dispose()
@@ -409,9 +428,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
         if (kind === 'ribbon') group.add(createRibbon())
         else if (kind === 'cross') group.add(createCross())
         else {
-          const path = kind === 'helmet' ? 'helmet-balanced.glb' : kind === 'headrest' ? 'models/headrest-three-lions-balanced.glb' : `models/${kind === 'crystal' ? 'crystal-cluster' : 'wireframe-globe'}.glb`
-          const version = kind === 'helmet' ? '?v=4-surface' : ''
-          const gltf = await loader.loadAsync(`${import.meta.env.BASE_URL}${path}${version}`)
+          const gltf = await loader.load(portfolioAssetUrl(kind), requests.signal)
           if (disposed) {
             own(gltf.scene)
             releaseResources()
@@ -435,6 +452,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
               lionStudy.setField(fieldTarget)
               lionStudy.setPlaying(fieldPlaying && !reducedMotion.matches)
               lionStudy.setPixelRatio(renderer.getPixelRatio())
+              lionStudy.setDetail(canvas.getBoundingClientRect().width < 700)
               group.add(lionStudy.group)
             } else group.add(gltf.scene)
             group.rotation.set(kind === 'headrest' ? .04 : kind === 'crystal' ? 0.12 : 0, kind === 'headrest' ? -.32 : kind === 'crystal' ? 0.4 : -0.4, kind === 'headrest' ? -.04 : kind === 'crystal' ? -0.08 : 0.1)

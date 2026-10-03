@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import type { ChessSceneState } from './ChessGame'
 import type { PieceSymbol } from './vendor/chess.js'
+import { batchChessTemplate, bindChessBatchPicking } from './chess-batching.ts'
 
 /** Reuses the carved GLB knight; turned companions share bounded geometry. */
 export function createChessSet(parent: THREE.Group, knight: THREE.Object3D, tiles: Map<string,THREE.Vector3>, geometries: Set<THREE.BufferGeometry>, materials: Set<THREE.Material>) {
@@ -46,23 +47,23 @@ export function createChessSet(parent: THREE.Group, knight: THREE.Object3D, tile
     if(type==='n'){
       object=knight.clone(true);object.position.set(0,0,0);object.scale.setScalar(.70);object.rotation.y=color==='w'?Math.PI:0
       object.traverse(node=>{if(node instanceof THREE.Mesh){const original=Array.isArray(node.material)?node.material:[node.material];const next=original.map(material=>{const copy=material.clone() as THREE.MeshStandardMaterial;const detail=node.name.includes('relief');copy.color.setHex(color==='w'?(detail?0x282828:0xbdb8aa):(detail?0x757575:0x151515));copy.opacity=1;copy.transparent=false;materials.add(copy);return copy});node.material=Array.isArray(node.material)?next:next[0]}})
-    } else object=turned(type,color)
+    } else {object=turned(type,color);batchChessTemplate(object,geometries)}
     templates.set(`${color}${type}`,object)
   }
-  type Entry={group:THREE.Group;kind:string;target:THREE.Vector3;from:THREE.Vector3;elapsed:number}
+  type Entry={group:THREE.Group;kind:string;target:THREE.Vector3;from:THREE.Vector3;elapsed:number;release:()=>void}
   const entries=new Map<string,Entry>()
   let previousMove=''
   function update(state:ChessSceneState){
     const move=state.lastMove.join(',')
-    if(move&&move!==previousMove){const[from,to]=state.lastMove,entry=entries.get(from);if(entry){const captured=entries.get(to);if(captured)root.remove(captured.group);entries.delete(to);entries.delete(from);entries.set(to,entry);entry.from.copy(entry.group.position);entry.elapsed=0}}
+    if(move&&move!==previousMove){const[from,to]=state.lastMove,entry=entries.get(from);if(entry){const captured=entries.get(to);if(captured){captured.release();root.remove(captured.group)}entries.delete(to);entries.delete(from);entries.set(to,entry);entry.from.copy(entry.group.position);entry.elapsed=0}}
     previousMove=move
     const squares=new Set(state.pieces.map(piece=>piece.square))
-    for(const[square,entry]of entries)if(!squares.has(square)){root.remove(entry.group);entries.delete(square)}
+    for(const[square,entry]of entries)if(!squares.has(square)){entry.release();root.remove(entry.group);entries.delete(square)}
     for(const piece of state.pieces){
       const point=tiles.get(piece.square);if(!point)continue
       const kind=`${piece.color}${piece.type}`
       let entry=entries.get(piece.square)
-      if(entry?.kind!==kind){if(entry)root.remove(entry.group);const group=new THREE.Group();group.add(templates.get(kind)!.clone(true));group.position.copy(point);root.add(group);entry={group,kind,target:point.clone(),from:point.clone(),elapsed:1};entries.set(piece.square,entry)}
+      if(entry?.kind!==kind){if(entry){entry.release();root.remove(entry.group)}const group=new THREE.Group();group.add(templates.get(kind)!.clone(true));const release=bindChessBatchPicking(group);group.position.copy(point);root.add(group);entry={group,kind,target:point.clone(),from:point.clone(),elapsed:1,release};entries.set(piece.square,entry)}
       entry.target.copy(point);entry.group.userData.chessSquare=piece.square;entry.group.name=`chess-${piece.square}-${kind}`
     }
   }
