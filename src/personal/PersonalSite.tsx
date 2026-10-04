@@ -3,8 +3,8 @@ import { flushSync } from 'react-dom'
 import { Art } from './Art'
 import { ProjectTransitionProvider } from './ProjectTransition'
 import { contact, projects, type ArtKind } from './content'
-import { siteCopy, siteMetadata, withWritingCopy } from './site-copy'
-import { canonicalPath, siteOrigin } from './public-pages'
+import { siteCopy, withWritingCopy } from './site-copy'
+import { updateSearchHead } from './search-head'
 import catalog from './editorial/data/catalog.json'
 import { resolveRoute } from './editorial/routes'
 import { findCaseStudy } from './projects/case-studies'
@@ -96,25 +96,7 @@ function useRoute() {
   useEffect(() => {
     // Initial deep links prepare article data while its page chunk is loading.
     if (route.startsWith('writing/')) void prepareArticle(route.slice('writing/'.length)).catch(() => {})
-    const project = projects.find(p => route === `work/${p.slug}`)
-    const article = articles.find(item => route === `writing/${item.slug}`)
-    const study = findCaseStudy(route)
-    const title = article?.displayTitle ?? article?.title ?? project?.name ?? study?.name ?? (route === 'resume' ? 'Résumé' : route === '' || route === 'home' ? siteMetadata.homeTitle : siteMetadata.pages[route] ? route[0].toUpperCase() + route.slice(1) : 'Page not found')
-    document.title = `${title} — Sulayman Bowles`
-    const description = article?.subtitle ?? project?.summary ?? study?.summary ?? siteMetadata.pages[route] ?? siteMetadata.description
-    document.querySelector('meta[name="description"]')?.setAttribute('content', description)
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title)
-    document.querySelector('meta[property="og:description"]')?.setAttribute('content', description)
-    const canonical = canonicalPath(route)
-    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `${siteOrigin}${canonical || '/404'}`)
-    document.querySelector('meta[property="og:url"]')?.setAttribute('content', `${siteOrigin}${canonical || '/404'}`)
-    document.querySelector('meta[property="og:type"]')?.setAttribute('content', article ? 'article' : 'website')
-    const robots = document.querySelector('meta[name="robots"]')
-    robots?.setAttribute('content', canonical ? 'index, follow' : 'noindex, follow')
-    // Static route markup describes the initial document. Remove its schema
-    // after navigating to another page so it cannot describe the wrong content.
-    const schema = document.querySelector('#page-schema')
-    if (schema && schema.getAttribute('data-route') !== (route === 'home' ? '' : route)) schema.remove()
+    updateSearchHead(document, route)
   }, [route])
   return { route, pending }
 }
