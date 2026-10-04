@@ -7,7 +7,9 @@
 <style>
 :root { --paper: #f5f2ea; --ink: #24221e; background: var(--paper); color: var(--ink); color-scheme: light; }
 :root[data-appearance='dark'] { --paper: #111210; --ink: #efefe8; color-scheme: dark; }
-html[data-site-boot='pending'] #root > .static-site { display: none; }
+html:is([data-site-boot='pending'], [data-site-boot='waiting']) #root > .static-site { display: none; }
+.site-startup-status { display: none; }
+html[data-site-boot='waiting'] .site-startup-status { display: block; position: fixed; inset: 0; margin: 0; padding: 38px 5.5vw; background: var(--paper); color: var(--ink); font: 10px/1.6 'Courier New', monospace; letter-spacing: .07em; }
 </style>
 <script src="%BASE_URL%site-startup.js"></script>
 <title>Sulayman Bowles — The frontier is all that matters</title>
@@ -20,6 +22,7 @@ html[data-site-boot='pending'] #root > .static-site { display: none; }
 </head>
 <body>
 <noscript>Enable JavaScript to explore Sulayman Bowles’s work and writing. You can also <a href="mailto:sybatx@gmail.com">email Sulayman</a> or <a href="https://www.linkedin.com/in/sulayman-bowles/">find him on LinkedIn</a>.</noscript>
+<p class="site-startup-status" role="status">Opening the page…</p>
 <div id="root"></div>
 <script type="module" src="/src/personal-entry.tsx"></script>
 </body>
