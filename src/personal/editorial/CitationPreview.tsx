@@ -3,6 +3,7 @@ import { articleSection } from './library'
 
 type Citation = {
   label: string
+  kind: 'source' | 'note'
   title?: string
   text: string
   links: { href: string; label: string; external: boolean }[]
@@ -15,14 +16,17 @@ function useCitationPreview() {
   const [citation, setCitation] = useState<Citation | null>(null)
   const openCitation = useCallback((event: MouseEvent) => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false
-    const trigger = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('.article-citation a') : null
+    const trigger = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('.article-citation a, .reader-prose a') : null
     const href = trigger?.getAttribute('href')
     if (!trigger || !href || trigger.target || trigger.hasAttribute('download')) return false
+    // Bibliography links remain native. Named in-prose citations get the same
+    // preview as numbered citations, without confusing source-prefixed chapters.
+    if (trigger.closest('.reader-sources, .article-notes, .reader-source-preview')) return false
     if (href.startsWith('#/') && href.split('?')[0] !== location.hash.split('?')[0]) return false
     const id = articleSection(href)
     if (!id || !/^(source-|note-)/.test(id)) return false
     const source = document.getElementById(id)
-    if (!source || !source.closest('.reader-prose') || !('showPopover' in HTMLElement.prototype)) return false
+    if (!source || !source.closest('.reader-prose') || !source.closest('.reader-sources, .article-notes') || !('showPopover' in HTMLElement.prototype)) return false
     const copy = source.cloneNode(true) as HTMLElement
     // Footnote return arrows belong to the bibliography, not the source text.
     copy.querySelectorAll('a[aria-label^="Back to reference"]').forEach(link => link.remove())
@@ -33,7 +37,7 @@ function useCitationPreview() {
     const text = copy.textContent?.trim().replace(/\s+/g, ' ') || ''
     if (!text && !title) return false
     event.preventDefault()
-    setCitation({ label: trigger.getAttribute('aria-label') || 'Source note', title, text, links, href, trigger })
+    setCitation({ label: trigger.getAttribute('aria-label') || 'Source note', kind: id.startsWith('note-') ? 'note' : 'source', title, text, links, href, trigger })
     return true
   }, [])
   return { citation, openCitation, closeCitation: () => setCitation(null) }
@@ -77,6 +81,6 @@ export default function CitationPreview() {
     // Leave the note at its keyboard boundary and return to the cited passage.
     if (document.activeElement === (event.shiftKey ? controls[0] : controls.at(-1))) { event.preventDefault(); dismiss() }
   }}>
-    {citation && <><div className="reader-source-heading"><span id="reader-source-label">{citation.label}</span><button ref={closeButton} type="button" aria-label="Close source note" onClick={dismiss}>×</button></div>{citation.title && <h2>{citation.title}</h2>}{citation.text && <p>{citation.text}</p>}<nav aria-label="Source note links">{citation.links.map((link, index) => <a key={`${link.href}-${index}`} href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noreferrer' : undefined}>{citation.title && index === 0 ? 'Open source' : link.label}<span aria-hidden="true"> ↗</span></a>)}<a className="reader-source-full" href={citation.href} onClick={close}>In the bibliography <span aria-hidden="true">↓</span></a></nav></>}
+    {citation && <><div className="reader-source-heading"><span id="reader-source-label">{citation.label}</span><button ref={closeButton} type="button" aria-label="Close source note" onClick={dismiss}>×</button></div>{citation.title && <h2>{citation.title}</h2>}{citation.text && <p>{citation.text}</p>}<nav aria-label="Source note links">{citation.links.map((link, index) => <a key={`${link.href}-${index}`} href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noreferrer' : undefined}>{citation.title && index === 0 ? 'Open source' : link.label}<span aria-hidden="true"> {link.external ? '↗' : link.href.startsWith('#') ? '↓' : '→'}</span></a>)}<a className="reader-source-full" href={citation.href} onClick={close}>{citation.kind === 'note' ? 'In the notes' : 'In the bibliography'} <span aria-hidden="true">↓</span></a></nav></>}
   </div>
 }

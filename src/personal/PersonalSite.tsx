@@ -18,6 +18,7 @@ import { installMenuDismissal } from './refinements/menu-dismissal'
 import { focusWithoutWarmup } from './refinements/warmup-policy'
 import RouteBoundary from './RouteBoundary'
 import { prepareRouteResources } from './route-preparation'
+import { installRouteScroll } from './refinements/route-scroll'
 import './editorial/artwork-continuity.css'
 import './personal.css'
 import './editorial/editorial.css'
@@ -43,11 +44,14 @@ function useRoute() {
   useEffect(() => {
     let sequence = 0
     let active: ArtworkTransition | undefined
+    const scroll = installRouteScroll()
     const change = async () => {
       const next = path()
       const ticket = ++sequence
+      const arrival = scroll.begin()
       active?.skipTransition()
       if (next === current.current) {
+        scroll.samePage(arrival)
         setPending(false)
         document.documentElement.dataset.artTransition = 'idle'
         return
@@ -56,23 +60,23 @@ function useRoute() {
       const prepared = prepareRouteResources(next, prepareRoutePage, prepareArticle)
       const journey = galleryArticleJourney(current.current, next)
       const canAnimate = journey && !matchMedia('(prefers-reduced-motion: reduce)').matches
-      const update = () => {
+      const update = async () => {
         if (ticket !== sequence || path() !== next) return
         current.current = next
         flushSync(() => { setRoute(next); setPending(false) })
-        window.scrollTo({ top: 0, behavior: 'instant' })
-        if (next === 'writing') {
+        await scroll.commit(arrival, () => {
+          if (next !== 'writing') return
           const selected = new URLSearchParams(location.hash.split('?')[1] || '').get('at')
           const link = [...document.querySelectorAll<HTMLAnchorElement>('.writing-story')]
             .find(item => item.dataset.slug === selected)
           // Position the destination before the browser captures its new artwork box.
           link?.scrollIntoView({ block: 'center', behavior: 'instant' })
-        }
+        })
       }
       if (!canAnimate) {
         document.documentElement.dataset.artTransition = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'idle'
         await prepared
-        update()
+        await update()
         return
       }
       document.documentElement.dataset.artTransition = 'running'
@@ -83,7 +87,7 @@ function useRoute() {
       active = startArtworkTransition(name, async () => {
         // Keep the source's live canvas mounted until both page and article are ready.
         await prepared
-        update()
+        await update()
       })
       void active.ready.catch(() => { /* Failed preparation must not break navigation. */ })
       void active.finished.catch(() => {}).finally(() => {
@@ -91,7 +95,7 @@ function useRoute() {
       })
     }
     window.addEventListener('hashchange', change)
-    return () => { sequence++; active?.skipTransition(); window.removeEventListener('hashchange', change) }
+    return () => { sequence++; active?.skipTransition(); scroll.dispose(); window.removeEventListener('hashchange', change) }
   }, [])
   useEffect(() => {
     // Initial deep links prepare article data while its page chunk is loading.

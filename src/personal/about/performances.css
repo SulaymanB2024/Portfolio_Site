@@ -189,6 +189,16 @@
   font-style: normal;
 }
 
+.performance-programs .performance-recording-cue {
+  margin: 10px 44px 0 0;
+  color: var(--muted);
+  font: 10px/1.6 var(--performance-mono);
+}
+
+.performance-programs .performance-recording-cue > span {
+  margin-left: 6px;
+}
+
 .performance-programs .performance-program-panel[hidden] {
   display: none;
 }

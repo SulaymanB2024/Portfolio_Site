@@ -5,6 +5,7 @@
     "aliases": [],
     "title": "Who Owns the Toll Roads in Texas? Ownership, Operators, and Economics",
     "category": "INFRASTRUCTURE INVESTING",
+    "searchTerms": ["concessions", "finance", "investing"],
     "subtitle": "The state usually owns the pavement. Contracts decide who controls toll revenue, who gets paid first, and who absorbs the loss.",
     "date": "2026.07.11",
     "dateModified": "2026.07.11",
@@ -20,6 +21,7 @@
     "title": "Building Atlas: From a Crawl to a Defensible Decision",
     "displayTitle": "Building Atlas",
     "category": "PRODUCT & SYSTEMS",
+    "searchTerms": ["crawler", "technical SEO", "HTML", "SQLite", "canonical"],
     "subtitle": "The product decisions behind my crawl and audit console—and the improvement cycle that keeps its findings connected to evidence.",
     "date": "2026-10-01",
     "readTime": "6 MIN",
@@ -33,6 +35,7 @@
     ],
     "title": "The First AI Managers",
     "category": "AI SYSTEMS",
+    "searchTerms": ["AI agents", "retail", "autonomy", "memory", "operations"],
     "subtitle": "Inside the first AI-operated shops, cafés, vending machines, and radio stations—and the gap between completing the next task and preserving a coherent business.",
     "date": "2026.07.14",
     "dateModified": "2026.07.14",
@@ -47,12 +50,13 @@
     "aliases": [],
     "title": "Beyond the Leaderboard: Building a Codex-Powered Improvement Harness on ViralBench",
     "category": "ViralBench / Codex / agent evaluation",
+    "searchTerms": ["AI agents", "experiments", "trace review"],
     "subtitle": "How I’m turning ViralBench into a Codex-powered agent harness for replay, trace evaluation, controlled experiments, and safer marketing automation.",
     "date": "2026-07-09",
     "dateModified": "2026-07-14",
     "readTime": "32 min",
     "image": "/images/viralbench-agent-harness-hero.png",
     "kind": "research",
-    "displayTitle": "A bounded outer loop for improving a live marketing agent."
+    "displayTitle": "Beyond the Leaderboard"
   }
 ]

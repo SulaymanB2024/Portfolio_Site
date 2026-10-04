@@ -17,6 +17,7 @@ export default function ReaderNavigation({ sections }: { sections: { id: string;
     let dirty = true
     let top = 0
     let height = 0
+    let arrivalOffset = 0
     let positions: ReaderPosition[] = []
     const prose = aside.current?.parentElement?.querySelector<HTMLElement>('.reader-prose')
     const targets = sections.map(section => ({ id: section.id, element: document.getElementById(section.id) }))
@@ -29,9 +30,11 @@ export default function ReaderNavigation({ sections }: { sections: { id: string;
         top = bounds.top + scrollY
         height = bounds.height
         positions = targets.flatMap(target => target.element?.isConnected ? [{ id: target.id, top: target.element.getBoundingClientRect().top + scrollY }] : [])
+        const firstTarget = targets.find(target => target.element?.isConnected)?.element
+        arrivalOffset = firstTarget ? parseFloat(getComputedStyle(firstTarget).scrollMarginTop) || 0 : 0
       }
       const progress = readerProgress(top, height, scrollY, innerHeight)
-      const current = readerSection(positions, scrollY, innerHeight, sections[0]?.id)
+      const current = readerSection(positions, scrollY, innerHeight, sections[0]?.id, arrivalOffset)
       line.current.style.transform = `scaleX(${progress})`
       setActive(previous => previous === current ? previous : current)
     }

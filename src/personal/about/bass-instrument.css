@@ -1,0 +1,79 @@
+.bass-instrument { margin: 18px 0 20px; }
+.bass-solo-choice { display: flex; flex-direction: column; gap: 9px; font-size: 9px; color: var(--muted); }
+.bass-solo-choice > select { min-height: 44px; width: 100%; min-width: 0; padding: 10px 28px 10px 10px; border: 1px solid var(--line); border-radius: 0; background: var(--paper); color: var(--ink); font: 11px 'Courier New',monospace; }
+.bass-solo-composer { font-size: 10px; color: var(--muted); margin: 22px 0 7px; }
+.bass-repertoire h3 { font: 30px/1.15 Georgia,serif; letter-spacing: -.04em; margin: 0 0 9px; }
+.bass-solo-passage { font-size: 9px; color: var(--muted); line-height: 1.7; margin: 0 0 15px; }
+.bass-solo-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; font-size: 10px; }
+.bass-solo-play { display: flex; align-items: center; gap: 13px; min-height: 46px; padding: 9px 15px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); font: inherit; }
+.bass-solo-play > span { font: 14px Arial,sans-serif; }
+.bass-solo-actions > span { color: var(--muted); font-size: 9px; }
+.bass-solo-actions > span:last-child { margin-left: auto; white-space: nowrap; }
+.bass-recording-stop { border: 0; background: transparent; font: inherit; min-width: 44px; min-height: 44px; padding: 8px 0; }
+.bass-recording-seek { display: block; width: 100%; margin: 6px 0 0; min-height: 44px; accent-color: var(--ink); cursor: pointer; }
+.bass-recording-seek:disabled { opacity: .35; cursor: default; }
+.bass-recording-performer { font-size: 10px; color: var(--muted); margin: 0 0 8px; line-height: 1.6; }
+.bass-excerpt-source > a { margin-right: 16px; }
+.bass-solo-progress { height: 1px; background: var(--line); margin-top: 20px; }
+.bass-solo-progress > span { display: block; height: 1px; background: var(--ink); transition: width 120ms linear; }
+.bass-excerpt-source > summary,.bass-hands-on > summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; list-style: none; cursor: pointer; font-size: 10px; }
+.bass-excerpt-source > summary::-webkit-details-marker,.bass-hands-on > summary::-webkit-details-marker { display: none; }
+.bass-excerpt-source > summary > span,.bass-hands-on > summary > span { font: 18px Arial,sans-serif; }
+.bass-excerpt-source[open] > summary > span,.bass-hands-on[open] > summary > span { transform: rotate(45deg); }
+.bass-excerpt-source > summary { color: var(--muted); }
+.bass-excerpt-source > p { color: var(--muted); font: 14px/1.7 Georgia,serif; margin: 6px 0 14px; }
+.bass-excerpt-source > a { display: inline-flex; align-items: center; gap: 20px; min-height: 44px; font-size: 10px; text-decoration: underline; text-underline-offset: 4px; }
+.bass-hands-on { margin-top: 12px; border-top: 1px solid var(--line); }
+.bass-hands-on > summary { font-size: 11px; }
+.bass-hands-on[open] > summary { margin-bottom: 14px; }
+.bass-techniques { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 18px; font-size: 11px; }
+.bass-techniques > button { display: flex; flex-direction: column; align-items: start; gap: 6px; min-height: 52px; padding: 8px 0 11px; background: transparent; border: 0; border-bottom: 1px solid var(--line); font: inherit; }
+.bass-techniques > button > span { color: var(--muted); font-size: 9px; }
+.bass-techniques > button[aria-pressed='true'] { border-color: var(--ink); }
+.bass-strings { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; }
+.bass-strings > button { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; min-height: 94px; padding: 21px 1px 12px; background: transparent; border: 0; border-bottom: 1px solid var(--line); color: var(--ink); touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; transition: background 120ms ease, border-color 120ms ease; }
+.bass-string-line { position: absolute; top: 0; left: 50%; height: 13px; width: 1px; background: var(--muted); transform-origin: top; transition: height 120ms ease; }
+.bass-string-pitch { font: 28px/1 Georgia,serif; letter-spacing: -.04em; }
+.bass-strings kbd { font: 10px/1.5 'Courier New',monospace; color: var(--muted); }
+.bass-strings > button:is(:hover,:focus-visible) { border-color: var(--ink); }
+.bass-strings > button[data-sounding='true'] { background: var(--soft); border-color: var(--ink); }
+.bass-strings > button[data-sounding='true'] .bass-string-line { height: 19px; background: var(--ink); }
+.bass-strings > button[data-pending='true'] .bass-string-pitch { opacity: .55; }
+.bass-listening { display: flex; gap: 8px; align-items: center; min-height: 44px; font-size: 9px; color: var(--muted); border-bottom: 1px solid var(--line); }
+.bass-listening-dot { flex: 0 0 4px; height: 4px; border-radius: 50%; background: var(--line); }
+.bass-instrument[data-playing='true'] .bass-listening-dot { background: var(--ink); }
+.bass-pitch-reading { margin-left: auto; color: var(--ink); white-space: nowrap; }
+.bass-pitch-reading > span { color: var(--muted); margin-left: 5px; }
+.bass-listening > button { margin-left: auto; padding: 8px 0 8px 8px; min-height: 44px; min-width: 44px; background: transparent; border: 0; font: inherit; }
+.bass-listening > button:disabled { opacity: .35; }
+.bass-help { color: var(--muted); font-size: 10px; line-height: 1.7; margin: 10px 0 22px; }
+.bass-help > span { display: block; font-size: 9px; margin-top: 3px; }
+.bass-fingerboard > label { display: flex; justify-content: space-between; gap: 12px; font-size: 10px; color: var(--muted); }
+.bass-fingerboard > label > span { color: var(--ink); }
+.bass-fingerboard > input { display: block; width: 100%; min-height: 44px; accent-color: var(--ink); cursor: pointer; margin: 0; }
+.bass-landmarks { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); font-size: 9px; gap: 8px; }
+.bass-landmarks > button { display: flex; flex-direction: column; gap: 5px; align-items: center; min-height: 46px; padding: 6px 0; background: transparent; border: 0; border-top: 1px solid var(--line); font: inherit; }
+.bass-landmarks > button > span:last-child { color: var(--muted); font-size: 8px; }
+.bass-landmarks > button[aria-pressed='true'] { border-color: var(--ink); color: var(--ink); }
+.bass-library-status { color: var(--muted); font-size: 9px; line-height: 1.7; margin: 15px 0 0; }
+@media (max-width: 900px) {
+  section.about-objects[data-selected='bass'] .about-object-canvas { height: clamp(220px,38svh,350px); min-height: 220px; }
+  .about-objects[data-selected='bass'] .about-object-gesture { top: calc(clamp(220px,38svh,350px) - 20px); font-size: 9px; }
+  .about-objects[data-selected='bass'] .about-object-reveal { padding: 18px 0 28px; }
+  .about-objects[data-selected='bass'] .about-object-reveal h2 { font-size: 38px; margin: 3px 0 12px; }
+  .about-objects[data-selected='bass'] .about-object-sentence { font-size: 15px; line-height: 1.55; margin-bottom: 18px; }
+  .bass-instrument { margin-top: 12px; }
+  .bass-techniques { margin-bottom: 12px; }
+  .bass-strings > button { min-height: 80px; padding-top: 18px; gap: 9px; }
+}
+@media (max-height: 650px) and (max-width: 600px) {
+  section.about-objects[data-selected='bass'] .about-object-canvas { height: clamp(180px,32svh,220px); min-height: 180px; }
+  .about-objects[data-selected='bass'] .about-object-gesture { top: calc(clamp(180px,32svh,220px) - 20px); }
+  .about-objects[data-selected='bass'] .about-object-reveal { padding-top: 8px; }
+  .about-objects[data-selected='bass'] .about-object-reveal h2 { font-size: 32px; }
+  .about-objects[data-selected='bass'] .about-object-sentence { margin-bottom: 12px; }
+  .bass-techniques > button { min-height: 46px; padding-top: 4px; padding-bottom: 7px; }
+  .bass-solo-composer { margin-top: 16px; }
+  .bass-repertoire h3 { margin-bottom: 6px; font-size: 28px; }
+  .bass-solo-passage { margin-bottom: 10px; }
+}

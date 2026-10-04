@@ -6,6 +6,7 @@ export interface ArticleSummary {
   displayTitle?: string
   category: string
   subtitle: string
+  searchTerms?: string[]
   date: string
   dateModified?: string
   readTime: string

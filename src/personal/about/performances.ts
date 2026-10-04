@@ -8,6 +8,7 @@ export interface Performance {
   id: string;
   title: string;
   date: string;
+  endDate?: string;
   displayDate: string;
   role: 'performer' | 'composer';
   series: 'ut-austin' | 'all-state';
@@ -40,13 +41,15 @@ export const performances: Performance[] = [
     id: 'ut-butler-holiday-concert-2024-12',
     title: 'Butler Holiday Concert',
     date: '2024-12-07',
+    endDate: '2024-12-08',
     displayDate: 'December 7–8, 2024',
     role: 'performer',
     series: 'ut-austin',
     ensemble: 'UT Austin · Wind Ensemble & Combined Choirs',
     repertoire: [
       'Lara Hoggard — Personent Hodie',
-      'LeRoy Anderson — Christmas Festival; Sleigh Ride',
+      'LeRoy Anderson — Christmas Festival',
+      'LeRoy Anderson — Sleigh Ride',
       'Randol Alan Bass — Gloria',
       'Robert Shaw, arr. Robert Russell Bennett — The Many Moods of Christmas',
     ],
@@ -108,7 +111,7 @@ export const performances: Performance[] = [
     ],
     links: [
       { label: 'Concert repertoire', href: 'https://www.tmea.org/all-state/performances/?organization=2024+Symphony+Orchestra&submit=Search', kind: 'program' },
-      { label: 'Concert recording', href: 'https://markcustom.com/markcustom_new/Menu2_ViewAlbum.asp?CDNum=57410-MCD', kind: 'recording' },
+      { label: 'Recording · purchase', href: 'https://markcustom.com/markcustom_new/Menu2_ViewAlbum.asp?CDNum=57410-MCD', kind: 'recording' },
       { label: 'TMEA roster', href: 'https://www.tmea.org/all-state/historical-rosters/?organization=2024+Symphony+Orchestra&instrument=String+Bass&school_op=eq&school=McCallum+HS&city_op=eq&city=Austin&submit=Search', kind: 'program' },
     ],
     sourceNotes: 'TMEA’s official historical roster credits Sulayman Bowles, McCallum HS, on string bass in the 2024 Symphony Orchestra. Its performance archive supplies the conductor and repertoire; Mark Custom is the official recording provider. The February 10 concert date is corroborated by contemporary school-district All-State announcements. No audition ranking is presented as a performance chair.',
@@ -129,7 +132,7 @@ export const performances: Performance[] = [
     ],
     links: [
       { label: 'Concert repertoire', href: 'https://www.tmea.org/all-state/performances/?organization=2023+5A+Symphonic+Band&submit=Search', kind: 'program' },
-      { label: 'Concert recording', href: 'https://markcustom.com/markcustom_new/Menu2_ViewAlbum.asp?CDNum=56801-MCD', kind: 'recording' },
+      { label: 'Recording · purchase', href: 'https://markcustom.com/markcustom_new/Menu2_ViewAlbum.asp?CDNum=56801-MCD', kind: 'recording' },
       { label: 'TMEA roster', href: 'https://www.tmea.org/all-state/historical-rosters/?organization=2023+5A+Symphonic+Band&instrument=String+Bass&school_op=eq&school=McCallum+HS&city_op=eq&city=Austin&submit=Search', kind: 'program' },
     ],
     sourceNotes: 'TMEA’s official historical roster credits Sulayman Bowles, McCallum HS, on string bass in the 2023 5A Symphonic Band. Its performance archive supplies the conductor, works and arrangers; the official recording is catalog 56801-MCD. The February 11 concert date is corroborated by contemporary school-district All-State announcements.',
