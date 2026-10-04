@@ -14,6 +14,8 @@ import { searchMetadata, withSearchHead } from '../src/personal/search-metadata'
 import { PublicArticle } from './public-article'
 import { withDocumentLinks } from './public-document-links'
 import { discoveryText } from './search-discovery'
+import { PersonalProfile } from '../src/personal/PersonalProfile'
+import { writingFeed } from './search-feed'
 
 const dist = join(process.cwd(), 'dist')
 const template = await readFile(join(dist, 'index.html'), 'utf8')
@@ -32,11 +34,11 @@ function Body({ route }: { route: string }) {
   if (project) return <><p>{project.overview}</p>{project.areas.map(area => <section key={area.title}><h2>{area.title}</h2><p>{area.description}</p></section>)}{project.link && <a href={project.link.href}>{project.link.label}</a>}</>
   const study = caseStudies.find(study => route === `work/${study.slug}`)
   if (study) return <><p>{study.summary}</p><p>{study.role} · {study.period} · {study.status}</p><p>{study.caption}</p><a href={study.source.startsWith('#/writing/') ? publicPages.find(page => page.route === study.source.slice(2))!.path : study.source}>Source material</a></>
-  if (route === 'about') return <><p>{resumeProfile.currentSummary}</p>{personalObjects.map(object => <section key={object.id}><h2>{object.title}</h2><p>{object.sentence}</p><p>{object.detail}</p></section>)}</>
+  if (route === 'about') return <><PersonalProfile />{personalObjects.map(object => <section key={object.id}><h2>{object.title}</h2><p>{object.sentence}</p><p>{object.detail}</p></section>)}</>
   if (route === 'resume') return <><p>{resumeReview.introduction}</p><h2>Education</h2><p>{resumeProfile.education.institution} · {resumeProfile.education.degrees.map(degree => `${degree.degree}, ${degree.field}`).join('; ')} · {resumeProfile.education.expectedGraduation}</p><h2>Experience</h2>{resumeProfile.experience.map((job: any) => <section key={job.organization}><h3>{job.organization}</h3><p>{job.title} · {job.dates}</p><p>{job.publicSummary}</p><ul>{job.bullets.map((bullet: string, i: number) => <li key={i}>{bullet}</li>)}</ul></section>)}<h2>Awards and leadership</h2>{resumeProfile.awardsAndLeadership.map((award: any) => <section key={award.organization}><h3>{award.organization}</h3><p>{award.title} · {award.dates}</p><p>{award.detail}</p></section>)}<p>{resumeReview.pdfNote}</p><a href="/Sulayman_Bowles_Resume.pdf">{resumeReview.pdfLabel}</a></>
   if (route === 'contact') return <><p>{siteCopy.contact.description}</p><a href={`mailto:${contact.email}`}>{contact.email}</a><p><a href={contact.linkedin}>LinkedIn</a></p></>
   if (route === '404') return <p>This address does not exist. <a href="/">Return home</a>.</p>
-  return <><p>{siteCopy.home.description}</p><h2>Selected work</h2>{links(publicPages.filter(page => page.route.startsWith('work/')))}<h2>Selected writing</h2>{links(publicPages.filter(page => page.route.startsWith('writing/')))}<p><a href="/resume">Experience and education</a> · <a href="/about">About Sulayman</a> · <a href="/contact">Contact</a></p></>
+  return <><p>{siteCopy.home.description}</p><PersonalProfile compact /><h2>Selected work</h2>{links(publicPages.filter(page => page.route.startsWith('work/')))}<h2>Selected writing</h2>{links(publicPages.filter(page => page.route.startsWith('writing/')))}<p><a href="/resume">Experience and education</a> · <a href="/about">About Sulayman</a> · <a href="/contact">Contact</a></p></>
 }
 
 const fallbackStyle = `<style>.static-site{max-width:76rem;margin:0 auto;padding:2rem 5vw;font:1.05rem/1.65 Georgia,serif;overflow-wrap:anywhere}.static-site header{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;border-bottom:1px solid #b7b1a4;padding-bottom:1rem}.static-site nav{display:flex;flex-wrap:wrap;gap:1rem}.static-site main{max-width:52rem;margin:3rem auto}.static-site h1{font-size:clamp(2.5rem,7vw,5rem);line-height:1.08}.static-site h2{margin-top:2rem}.static-site a{color:inherit}.static-site table{border-collapse:collapse}.static-site td,.static-site th{padding:.5rem;border:1px solid #b7b1a4}.static-site img{max-width:100%;height:auto}.static-site pre{overflow:auto}.static-site li{margin:.6rem 0}.static-site footer{border-top:1px solid #b7b1a4;padding-top:1rem}</style>`
@@ -60,4 +62,5 @@ const evidenceNotes = discoverySource.split('## Evidence boundaries\n')[1]
 if (!evidenceNotes?.trim()) throw new Error('Missing discovery evidence boundaries')
 const roleNotes = discoverySource.match(/\n\n(Sapien work covers[^]*?)\n\n##/)?.[1]
 await writeFile(join(dist, 'llms.txt'), discoveryText(resumeProfile.currentSummary, resumeReview.asOf, [roleNotes, evidenceNotes].filter(Boolean).join('\n\n')))
+await writeFile(join(dist, 'feed.xml'), writingFeed(catalog))
 console.log(`Generated ${publicPages.length} indexable pages, a 404, and discovery files.`)

@@ -11,6 +11,7 @@ import ChessGame, { type ChessSceneState } from './ChessGame'
 import BassInstrument, { type BassInstrumentHandle } from './BassInstrument'
 import { performances, performanceArchiveNote } from './performances'
 import './about.css'
+import { PersonalProfile } from '../PersonalProfile'
 
 type Notebook = 'phrase' | 'puzzle'
 
@@ -212,7 +213,7 @@ export default function AboutPage({ dark }: { dark: boolean }) {
   }
   return <section className="about-objects" aria-labelledby="about-title" data-selected={selected ?? 'collection'} data-notebook={notebook ?? 'closed'} data-audio-state={audioState} data-phrase-playing={sequencePlaying}>
     <header className="about-intro">
-      <div><span className="eyebrow">About / off the screen</span><h1 id="about-title">Beyond the work.</h1></div>
+      <div><span className="eyebrow">About Sulayman Bowles / off the screen</span><h1 id="about-title">Beyond the work.</h1><a className="mono profile-biography-link" href="/about#about-biography-title" onClick={event => { if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); revealSection('about-biography-title') }}>Biography & work <span aria-hidden="true">↓</span></a></div>
       <button className="about-concert-entry" onClick={() => revealSection('about-performances-title')}><span className="mono">UT Austin & Texas All-State</span><span>Performances & repertoire <span aria-hidden="true">↓</span></span></button>
     </header>
     <div className="about-objects-toolbar mono">
@@ -269,6 +270,7 @@ export default function AboutPage({ dark }: { dark: boolean }) {
       <p className="about-archive-note mono">{performanceArchiveNote}</p><PerformanceArchive entries={performances} />
       <details className="about-library-credit"><summary>About the instrument sounds<span aria-hidden="true">+</span></summary><p>The playable bass uses recordings from <a href="https://versilian-studios.com/vsco-community/" target="_blank" rel="noreferrer">VSCO 2 Community Edition</a>, a CC0 sample library. These instrument samples are separate from the performance recordings linked above.</p></details>
     </section>
+    <PersonalProfile />
     <p className="sr-only" aria-live="polite">{notice}</p>
   </section>
 }

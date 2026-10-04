@@ -1,5 +1,6 @@
 import { markdownToReact, inlineText } from '../src/personal/editorial/Markdown'
 import { displayDate, type ArticleTable, type ArticleSection, type WritingArticle } from '../src/personal/editorial/types'
+import { AuthorNote } from '../src/personal/PersonalProfile'
 
 const paragraphs = (values: string[] = []) => values.map((value, index) => <p key={index}>{inlineText(value)}</p>)
 
@@ -70,6 +71,6 @@ export function PublicArticle({ article }: { article: WritingArticle }) {
     </li>)}</ol></section> : null}
     {downloads.length > 0 && <section id="reader-downloads"><h2>Supporting material</h2><ul>{downloads.map(asset => <li key={asset.href}><a href={asset.href}>{asset.label}</a></li>)}</ul></section>}
     {article.pageContent?.endnotes?.map((note, index) => <footer key={index}>{markdownToReact(note.markdown)}<nav aria-label="Related reading">{note.links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav></footer>)}
-    <p><a href="/writing">More writing by Sulayman Bowles</a></p>
+    <AuthorNote />
   </>
 }
