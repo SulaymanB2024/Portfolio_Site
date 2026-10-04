@@ -3,23 +3,23 @@ export type InterestId = 'bass' | 'score' | 'knight'
 export const personalObjects: { id: InterestId; label: string; title: string; sentence: string; detailLabel: string; detail: string; source: string; sourceLabel: string }[] = [
   {
     id: 'bass', label: 'Double bass', title: 'The low end.',
-    sentence: 'I play double bass. Four strings, a bow, and a lot of listening.',
+    sentence: 'Play the strings, or explore my performances below.',
     detailLabel: 'On the stand',
-    detail: 'With UT’s University Orchestra: Beethoven’s First Symphony and Florence Price’s Third, on the February 2025 program.',
+    detail: 'UT’s University Orchestra, February 2025: Beethoven’s First Symphony and Florence Price’s Third.',
     source: 'https://music.utexas.edu/events/4645-university-orchestra', sourceLabel: 'Concert program',
   },
   {
     id: 'score', label: 'Composition', title: 'A few notes.',
-    sentence: 'I compose, too. Here, you can leave a little phrase of your own.',
-    detailLabel: 'Beyond this page',
-    detail: 'Through Golden Hornet: “Unfolding of Night,” “Call of the Cavies,” “Melancholy,” and “The Beauty of Loss.” Four pieces, across 2020–2024.',
-    source: 'https://www.youtube.com/watch?v=qc6q_XkS0aE', sourceLabel: 'Hear “Unfolding of Night”',
+    sentence: 'Write a phrase. Play it. Explore the performances below.',
+    detailLabel: 'On stage',
+    detail: 'All-State and UT Austin performances, with repertoire and concert programs.',
+    source: 'https://music.utexas.edu/events/4645-university-orchestra', sourceLabel: 'UT Austin concert program',
   },
   {
     id: 'knight', label: 'Chess & puzzles', title: 'One more move.',
-    sentence: 'I enjoy logic puzzles. Try a small one: A1 to H8 in six knight moves.',
+    sentence: 'Play chess, or reach H8 from A1 in six knight moves.',
     detailLabel: 'A recent puzzle',
-    detail: 'I solved Jane Street’s July 2026 puzzle, “Pent-up Frustration 3: Knight Moves 7.” This little board is a separate, original challenge.',
+    detail: 'I solved Jane Street’s July 2026 “Pent-up Frustration 3: Knight Moves 7.” This board is a separate, original challenge.',
     source: 'https://www.janestreet.com/puzzles/pent-up-frustration-3-knight-moves-7-solution/', sourceLabel: 'The July puzzle',
   },
 ]

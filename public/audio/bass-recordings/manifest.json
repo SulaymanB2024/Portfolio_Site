@@ -1,0 +1,86 @@
+{
+  "recordingIdentity": "Guest musicians, not performances by Sulayman Bowles.",
+  "usage": "Koussevitzky and Bottesini retain their listed noncommercial/no-derivatives licenses. Whole audio files are unmodified.",
+  "totalBytes": 12928390,
+  "recordings": [
+    {
+      "file": "koussevitzky-allegro.mp3",
+      "downloadUrl": "https://archive.org/download/Koussevitzky_Concerto_Op.3_I.Allegro/01.koussevitzkyallegro.mp3",
+      "resolvedUrl": "https://dn710700.ca.archive.org/0/items/Koussevitzky_Concerto_Op.3_I.Allegro/01.koussevitzkyallegro.mp3",
+      "bytes": 4215849,
+      "sha256": "34251f99e0e3d4bc13e290b75b357b2bed7552e2d7fbe9fdd0324edc0ab7ed63",
+      "md5": "5e277490203734d255b51a7ccf879be4",
+      "contentType": "audio/mpeg",
+      "transformation": "None. Original MP3 bytes preserved.",
+      "id": "koussevitzky",
+      "performer": "Miguel Leiria Pereira",
+      "license": "CC BY-NC-ND 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "sourcePage": "https://archive.org/details/Koussevitzky_Concerto_Op.3_I.Allegro",
+      "licenseEvidence": "https://imslp.org/wiki/Double_Bass_Concerto,_Op.3_(Koussevitzky,_Serge)",
+      "licenseEvidenceBoundary": "IMSLP recording listing supplies the license; original Archive metadata has no license field.",
+      "credit": "Miguel Leiria Pereira, double bass; Butler University Symphony Orchestra; Stanley DeRusha, conductor. 1999.",
+      "durationSeconds": 351.251156462585,
+      "sampleRate": 44100,
+      "channels": 2,
+      "bitRate": 96000,
+      "decodeCheck": {
+        "codec": "Native macOS Core Audio decoded MP3 to PCM",
+        "peak": 0.6749267578125,
+        "rms": 0.06481643492719329
+      }
+    },
+    {
+      "file": "bottesini-allegro.mp3",
+      "downloadUrl": "https://archive.org/download/uso20090425/uso20090425-002-bottesini-concerto-I.mp3",
+      "resolvedUrl": "https://dn711008.ca.archive.org/0/items/uso20090425/uso20090425-002-bottesini-concerto-I.mp3",
+      "bytes": 7936512,
+      "sha256": "c982cef3bfb854b6b23d831dcb93dca862c2e94202bf2c535983c3388c60ac60",
+      "md5": "96b2b9c10cd6f86970b3dda9e6e696c9",
+      "contentType": "audio/mpeg",
+      "transformation": "None. Original MP3 bytes preserved.",
+      "id": "bottesini",
+      "performer": "Edgar Meyer",
+      "license": "CC BY-NC-ND 3.0 US",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-nd/3.0/us/",
+      "sourcePage": "https://archive.org/details/uso20090425",
+      "licenseEvidence": "https://archive.org/metadata/uso20090425",
+      "credit": "Edgar Meyer, double bass; University of Chicago Symphony Orchestra; Barbara Schubert, conductor. Mandel Hall, April 25, 2009. Recording by Eric Pancer.",
+      "durationSeconds": 358.50252083333334,
+      "sampleRate": 48000,
+      "channels": 2,
+      "bitRate": 177057,
+      "decodeCheck": {
+        "codec": "Native macOS Core Audio decoded MP3 to PCM",
+        "peak": 0.741943359375,
+        "rms": 0.04245030042009401
+      }
+    },
+    {
+      "file": "saint-saens-elephant.mp3",
+      "downloadUrl": "https://www.classicalmusicarchive.org/Classicals/Music/PG%20Archive/Saint-Saens%20-%20Carnival%20of%20the%20Animals/Saint-Saens%20-%20Carnival%20of%20the%20Animals%20-%2005%20-%20L'Elephant%20(The%20Elephant).mp3",
+      "resolvedUrl": "https://www.classicalmusicarchive.org/Classicals/Music/PG%20Archive/Saint-Saens%20-%20Carnival%20of%20the%20Animals/Saint-Saens%20-%20Carnival%20of%20the%20Animals%20-%2005%20-%20L'Elephant%20(The%20Elephant).mp3",
+      "bytes": 776029,
+      "sha256": "dc2a36fbadd91afb1c6c57cbc6f0d84513a6d69cf31dbf4e29f1007d0ada0c93",
+      "md5": "918f9f73ac123ec279d1bd1fd51d1556",
+      "contentType": "audio/mpeg",
+      "transformation": "None. Original MP3 bytes preserved.",
+      "id": "saint-saens",
+      "performer": "Seattle Youth Symphony",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourcePage": "https://www.classicals.de/saint-saens-carnival",
+      "licenseEvidence": "https://www.classicals.de/saint-saens-carnival",
+      "credit": "Seattle Youth Symphony; Vilem Sokol, conductor; Neal O\u2019Doan and Nancy O\u2019Doan, pianos. The Pandora / Goldstein Archive. Provided by Classicals.de.",
+      "durationSeconds": 89.42771875,
+      "sampleRate": 32000,
+      "channels": 2,
+      "bitRate": 69184,
+      "decodeCheck": {
+        "codec": "Native macOS Core Audio decoded MP3 to PCM",
+        "peak": 0.70709228515625,
+        "rms": 0.09192861204969548
+      }
+    }
+  ]
+}

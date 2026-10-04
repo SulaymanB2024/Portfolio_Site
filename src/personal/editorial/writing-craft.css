@@ -6,7 +6,14 @@
 .writing-filter-status button { min-height: 44px; padding: 8px 0; border: 0; background: transparent; color: var(--ink); font: inherit; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .writing-story-topic { display: block; margin: 0 0 20px; color: var(--muted); font: 11px/1.6 var(--editorial-mono); }
 .writing-story[data-layout='feature'] h2 { max-width: 23ch; }
+.writing-empty p { max-width: 52ch; overflow-wrap: anywhere; text-wrap: pretty; }
+.writing-empty button { min-height: 44px; cursor: pointer; }
 @media (max-width: 680px) {
+  .writing-page .writing-search input { font-size: 16px; }
+  .writing-story, .writing-story[data-layout='feature'] { gap: 20px; }
+  .writing-story .writing-deck, .writing-story[data-layout='feature'] .writing-deck { order: 1; }
+  .writing-story-meta { order: 2; }
+  .writing-story .writing-art { order: 3; width: min(100%, 240px); }
   .writing-story .writing-story-topic { order: -1; margin: 0 0 -10px; }
   .writing-topic select { font-size: 13px; }
 }

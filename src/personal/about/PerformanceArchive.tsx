@@ -1,9 +1,6 @@
 import { useId, useMemo, useState } from 'react'
-import type { Performance } from './performances'
+import { archiveEntries, repertoireComposers, splitWork, toggleProgram, type PerformanceEntry, type PerformanceFilter } from './performance-archive'
 import './performances.css'
-
-export type PerformanceEntry = Omit<Performance, 'sourceNotes'>
-type PerformanceFilter = 'all' | Performance['series']
 
 const filters = [
   ['all', 'All'],
@@ -11,34 +8,24 @@ const filters = [
   ['all-state', 'All-State'],
 ] as const
 
-function splitWork(work: string) {
-  const divider = work.indexOf(' — ')
-  return divider < 0
-    ? { composer: '', title: work }
-    : { composer: work.slice(0, divider), title: work.slice(divider + 3) }
-}
-
 function RepertoirePreview({ works }: { works: string[] }) {
-  const composers = [...new Set(works.map(work => splitWork(work).composer).filter(Boolean))]
+  const composers = repertoireComposers(works)
   if (!composers.length) return null
-  return <p className="performance-program-preview">
-    {composers.slice(0, 3).join(' · ')}
-    {composers.length > 3 && <span> +{composers.length - 3}</span>}
+  return <p className="performance-program-preview" aria-label={`Music by ${composers.map(composer => composer.name).join(', ')}`}>
+    {composers.map(composer => composer.short).join(' · ')}
   </p>
 }
 
 export default function PerformanceArchive({ entries }: { entries: PerformanceEntry[] }) {
   const archiveId = useId()
-  const chronological = useMemo(() => [...entries].sort((a, b) => b.date.localeCompare(a.date)), [entries])
   const [filter, setFilter] = useState<PerformanceFilter>('all')
-  const [expandedId, setExpandedId] = useState<string | null>(() => chronological[0]?.id ?? null)
-  const visible = useMemo(() => chronological.filter(entry => filter === 'all' || entry.series === filter), [chronological, filter])
+  const [openIds, setOpenIds] = useState<ReadonlySet<string>>(() => new Set())
+  const visible = useMemo(() => archiveEntries(entries, filter), [entries, filter])
   const years = useMemo(() => [...new Set(visible.map(entry => entry.date.slice(0, 4)))], [visible])
 
   const chooseFilter = (value: PerformanceFilter) => {
     if (value === filter) return
     setFilter(value)
-    setExpandedId(chronological.find(entry => value === 'all' || entry.series === value)?.id ?? null)
   }
 
   return <div className="performance-programs">
@@ -57,34 +44,37 @@ export default function PerformanceArchive({ entries }: { entries: PerformanceEn
         <h3 className="performance-year-label" id={`${archiveId}-${year}`}>{year}</h3>
         <div className="performance-year-programs">
           {visible.filter(entry => entry.date.startsWith(year)).map(entry => {
-            const expanded = expandedId === entry.id
+            const expanded = openIds.has(entry.id)
             const panelId = `${archiveId}-${entry.id}-program`
             const toggleId = `${archiveId}-${entry.id}-toggle`
             const titleId = `${toggleId}-title`
             return <article className="performance-program" key={entry.id} data-expanded={expanded}>
               <div className="performance-program-heading">
-                <time className="performance-program-date" dateTime={entry.date} aria-label={entry.displayDate}>
+                {entry.endDate ? <span className="performance-program-date">
+                  <time dateTime={entry.date}>{entry.displayDate.split('–')[0]}</time>–<time dateTime={entry.endDate}>{entry.displayDate.split('–')[1].replace(/, \d{4}$/, '')}</time>
+                </span> : <time className="performance-program-date" dateTime={entry.date} aria-label={entry.displayDate}>
                   {entry.displayDate.replace(/, \d{4}$/, '')}
-                </time>
+                </time>}
                 <div className="performance-program-identity">
                   <h4>
                     <button className="performance-program-toggle" type="button" id={toggleId}
                       aria-expanded={expanded} aria-controls={panelId}
                       aria-label={`${expanded ? 'Close' : 'Open'} ${entry.title} program, ${entry.displayDate}`}
-                      onClick={() => setExpandedId(expanded ? null : entry.id)}>
+                      onClick={() => setOpenIds(previous => toggleProgram(previous, entry.id))}>
                       <span className="performance-program-title" id={titleId}>{entry.title}</span>
                       <span className="performance-program-sign" aria-hidden="true"><i /><i /></span>
                     </button>
                   </h4>
                   <p className="performance-program-ensemble">{entry.ensemble}</p>
                   {!expanded && <RepertoirePreview works={entry.repertoire} />}
+                  {!expanded && entry.links.some(link => link.kind === 'recording') && <p className="performance-recording-cue">Recording release <span aria-hidden="true">↘</span></p>}
                 </div>
               </div>
 
               <div className="performance-program-panel" id={panelId} role="region" aria-labelledby={titleId} hidden={!expanded}>
                 <div className="performance-program-sheet">
                   <div className="performance-program-sheet-label">
-                    <span>Program</span><span>{entry.role === 'performer' ? 'Double bass' : 'Composer'}</span>
+                    <span>Repertoire</span><span>{entry.role === 'performer' ? 'Double bass' : 'Composer'}</span>
                   </div>
                   {entry.repertoire.length > 0 && <ol className="performance-program-repertoire" role="list" aria-label="Repertoire">
                     {entry.repertoire.map((work, index) => {
@@ -111,6 +101,6 @@ export default function PerformanceArchive({ entries }: { entries: PerformanceEn
       </section>)}
       {!visible.length && <p className="performance-program-empty">No performances in this series.</p>}
     </div>
-    <p className="performance-visually-hidden" role="status" aria-live="polite" aria-atomic="true">{visible.length} performances shown.</p>
+    <p className="performance-visually-hidden" role="status" aria-live="polite" aria-atomic="true">{visible.length} concert programs shown.</p>
   </div>
 }

@@ -1,8 +1,10 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { createInterestAudio, prepareSustainLoop, resolveBassSample } from '../src/personal/about/interest-audio.ts'
+import { createInterestAudio, prepareSustainLoop, resolveBassSample, resolveBassSoloSample } from '../src/personal/about/interest-audio.ts'
 import { phraseSchedule } from '../src/personal/about/music-phrase.ts'
 import { bassSamples } from '../src/personal/about/double-bass-samples.ts'
+import { bassSoloSamples } from '../src/personal/about/bass-solo-samples.ts'
+import { bassExcerptSchedule, bassRepertoire } from '../src/personal/about/bass-repertoire.ts'
 
 function deferred<T>() {
   let resolve!: (value: T) => void
@@ -139,6 +141,179 @@ test('closing or silencing an interest cancels audio waiting for browser activat
     assert.equal(requests.length, 0)
     assert.equal(context.closes, 1)
   }, context => { context.state = 'suspended'; context.resumeGate = deferred<void>() })
+})
+
+test('a released bow never starts after deferred activation or decoding', async () => {
+  await withAudio(async (context, requests) => {
+    const audio = createInterestAudio()
+    let starts = 0, ends = 0
+    const note = audio.playLive(55, 'arco', { sustain: true, onStart: () => starts++, onEnd: () => ends++ })
+    note.release()
+    note.release()
+    assert.equal(ends, 1)
+    context.resumeGate!.resolve()
+    await note.ready
+    assert.equal(starts, 0)
+    assert.equal(context.sources.length, 0)
+    assert.equal(requests.length, 0, 'releasing before activation must not start a download')
+    audio.dispose()
+  }, context => { context.state = 'suspended'; context.resumeGate = deferred<void>() })
+  await withAudio(async context => {
+    const audio = createInterestAudio()
+    let starts = 0, ends = 0
+    const note = audio.playLive(55, 'arco', { sustain: true, onStart: () => starts++, onEnd: () => ends++ })
+    await tick()
+    note.release()
+    context.decodeGate!.resolve()
+    await note.ready
+    assert.equal(starts, 0)
+    assert.equal(ends, 1)
+    assert.equal(context.sources.length, 0)
+    // Readiness is reusable; cancelling one gesture does not poison the library.
+    await audio.play(55)
+    assert.equal(context.sources.length, 1)
+    audio.dispose()
+  }, context => { context.decodeGate = deferred<void>() })
+})
+
+test('live feedback follows onset and natural end, with no callback after an early release', async () => {
+  await withAudio(async context => {
+    await withClock(context, async advance => {
+      const audio = createInterestAudio()
+      const seen: string[] = []
+      const note = audio.playLive(41.203, 'pizzicato', { onStart: () => seen.push('start'), onEnd: () => seen.push('end') })
+      await note.ready
+      assert.deepEqual(seen, [], 'queued audio is not yet sounding')
+      advance(13)
+      assert.deepEqual(seen, ['start'])
+      advance(3500)
+      assert.deepEqual(seen, ['start', 'end'])
+      note.release()
+      assert.deepEqual(seen, ['start', 'end'])
+      const cancelled = audio.playLive(55, 'arco', { onStart: () => seen.push('late start'), onEnd: () => seen.push('cancelled') })
+      await cancelled.ready
+      cancelled.release()
+      advance(20)
+      assert.deepEqual(seen, ['start', 'end', 'cancelled'])
+      audio.dispose()
+      assert.ok(context.sources.every(source => source.disconnected))
+    })
+  })
+})
+
+test('a held bow sustains beyond the recording and fades on release or the safety limit', async () => {
+  await withAudio(async context => {
+    await withClock(context, async advance => {
+      const audio = createInterestAudio()
+      let ends = 0
+      const note = audio.playLive(55, 'arco', { sustain: true, onEnd: () => ends++ })
+      await note.ready
+      const source = context.sources[0]
+      assert.equal(source.loop, true)
+      advance(6000)
+      assert.equal(ends, 0)
+      assert.equal(source.disconnected, false)
+      note.release()
+      assert(Math.abs(source.stops.at(-1)! - (context.currentTime + .03)) < 1e-10)
+      advance(31)
+      assert.equal(ends, 1)
+      assert.equal(source.disconnected, true)
+      const bounded = audio.playLive(55, 'arco', { sustain: true, onEnd: () => ends++ })
+      await bounded.ready
+      advance(12020)
+      assert.equal(ends, 2, 'a lost keyup cannot leave an indefinite voice')
+      bounded.release()
+      assert.equal(ends, 2)
+      audio.dispose()
+    })
+  })
+})
+
+test('silence and dispose cancel live feedback and pending gestures exactly once', async () => {
+  await withAudio(async context => {
+    await withClock(context, async advance => {
+      const audio = createInterestAudio()
+      let starts = 0, ends = 0
+      const first = audio.playLive(55, 'arco', { sustain: true, onStart: () => starts++, onEnd: () => ends++ })
+      await first.ready
+      audio.silence()
+      advance(20)
+      assert.equal(starts, 0)
+      assert.equal(ends, 1)
+      const second = audio.playLive(55, 'arco', { sustain: true, onStart: () => starts++, onEnd: () => ends++ })
+      await second.ready
+      advance(13)
+      assert.equal(starts, 1)
+      audio.dispose()
+      advance(100)
+      assert.equal(ends, 2)
+      assert.ok(context.sources.every(source => source.disconnected))
+    })
+  })
+})
+
+test('solo literature loads upper recordings on demand and keeps the composer register bounded', async () => {
+  await withAudio(async (context, requests) => {
+    const audio = createInterestAudio()
+    await audio.prepare()
+    assert.equal(requests.length, bassSamples.length)
+    const d4 = 440 * 2 ** ((62 - 69) / 12)
+    assert.throws(() => resolveBassSample(d4, 'arco'), RangeError)
+    const resolved = resolveBassSoloSample(d4)
+    assert.equal(resolved.sample.file, 'arco-B3.wav')
+    assert(Math.abs(12 * Math.log2(resolved.playbackRate)) < 3.1, 'preserve solo register with small tuning from a real upper sample')
+    await audio.playSoloSequence([{ frequency: d4, delay: 0, duration: 1 }])
+    assert.equal(requests.length, bassSamples.length + bassSoloSamples.length)
+    assert.equal(context.sources[0].buffer!.file, 'arco-B3.wav')
+    assert(Math.abs(context.sources[0].playbackRate.value - resolved.playbackRate) < 1e-10)
+    await audio.play(55)
+    assert.equal(requests.length, bassSamples.length + bassSoloSamples.length, 'base and solo recordings remain cached')
+    audio.dispose()
+  })
+})
+
+test('cancelling a solo download cannot start late notes or restart cancelled preparation', async () => {
+  await withAudio(async (context, requests) => {
+    const audio = createInterestAudio()
+    await audio.prepare()
+    context.decodeGate = deferred<void>()
+    const pending = audio.playSoloSequence([{ frequency: 293.6648, delay: 0, duration: 1 }])
+    await tick()
+    const alsoWaiting = audio.prepare(true)
+    audio.silence()
+    context.decodeGate.resolve()
+    await Promise.all([pending, alsoWaiting])
+    assert.equal(context.sources.length, 0)
+    assert.equal(requests.length, bassSamples.length + bassSoloSamples.length)
+    assert.ok(requests.slice(bassSamples.length).every(request => request.signal.aborted))
+    await audio.play(55)
+    assert.equal(context.sources.length, 1, 'cancelling solos retains the already-ready manual instrument')
+    audio.dispose()
+  })
+})
+
+test('Bottesini grace notes release at their 46.875 ms score timing rather than the manual-note floor', async () => {
+  await withAudio(async context => {
+    await withClock(context, async advance => {
+      const audio = createInterestAudio()
+      const events = bassExcerptSchedule(bassRepertoire.find(item => item.id === 'bottesini')!)
+      const seen: number[] = []
+      await audio.playSoloSequence(events, index => seen.push(index))
+      advance(5300)
+      for (const index of [10, 11]) {
+        const onset = 10.018 + events[index].delay
+        const voice = context.sources.find(source => Math.abs(source.startTime - onset) < 1e-9)!
+        assert.ok(voice, 'the short grace must not be dropped by lookahead scheduling')
+        assert.ok(Math.abs(voice.stops[0]! - voice.startTime - .046875) < 1e-9)
+      }
+      assert.ok(seen.includes(10) && seen.includes(11) && seen.includes(12))
+      audio.silence()
+      const before = context.sources.length
+      advance(13000)
+      assert.equal(context.sources.length, before, 'stopping cancels the remaining solo')
+      audio.dispose()
+    })
+  })
 })
 
 test('concurrent preparation and notes share one fetch/decode per actual sample', async () => {

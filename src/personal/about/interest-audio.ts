@@ -1,8 +1,11 @@
 import { bassSamples } from './double-bass-samples.ts'
+import { bassSoloSamples } from './bass-solo-samples.ts'
 
 export type AudioArticulation = 'pizzicato' | 'arco'
 export type AudioState = 'idle' | 'loading' | 'ready' | 'error'
 export type AudioSequenceEvent = { frequency: number | null; delay: number; duration?: number }
+export type LiveBassNote = { ready: Promise<void>; release(): void }
+export type LiveBassOptions = { sustain?: boolean; onStart?(): void; onEnd?(): void }
 
 /** Crossfade recorded sustain into itself; preserve attack and avoid a discontinuous loop. */
 export function prepareSustainLoop(buffer: AudioBuffer) {
@@ -29,7 +32,16 @@ export function resolveBassSample(frequency: number, articulation: AudioArticula
   return { sample, playbackRate: frequency / sample.frequency }
 }
 
-type Voice = { source: AudioBufferSourceNode; gain: GainNode; start: number }
+/** Solo literature keeps its true sounding register; the composer range stays E1–G3. */
+export function resolveBassSoloSample(frequency: number) {
+  const midi = 69 + 12 * Math.log2(frequency / 440)
+  if (!Number.isFinite(midi) || midi < 27.99 || midi > 62.01) throw new RangeError('Double-bass solo notes must lie between E1 and D4')
+  const available = [...bassSamples.filter(sample => sample.articulation === 'arco'), ...bassSoloSamples]
+  const sample = available.reduce((nearest, candidate) => Math.abs(candidate.midi - midi) < Math.abs(nearest.midi - midi) ? candidate : nearest)
+  return { sample, playbackRate: frequency / sample.frequency }
+}
+
+type Voice = { source: AudioBufferSourceNode; gain: GainNode; start: number; stopping?: boolean; startTimer?: ReturnType<typeof setTimeout>; onEnd?(): void }
 const MAX_VOICES = 12
 const baseUrl = (import.meta as ImportMeta & { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/'
 
@@ -48,6 +60,7 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
   const sustainLoops = new Map<string, { start: number; end: number }>()
   const voices = new Set<Voice>()
   const timers = new Set<ReturnType<typeof setTimeout>>()
+  const liveNotes = new Set<() => void>()
 
   function setState(next: AudioState) {
     if (stopped || state === next) return
@@ -71,10 +84,16 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
     catch (error) { setState('error'); throw error }
   }
 
-  async function prepare() {
+  async function prepare(solo = false) {
     if (stopped) return
-    if (buffers.size === bassSamples.length) { setState('ready'); return }
-    if (loading) return loading
+    const required = solo ? [...bassSamples, ...bassSoloSamples] : bassSamples
+    if (required.every(sample => buffers.has(sample.file))) { setState('ready'); return }
+    if (loading) {
+      const revision = loadRevision
+      await loading
+      if (stopped || revision !== loadRevision) return
+      return prepare(solo)
+    }
     const activeContext = audioContext()
     const revision = ++loadRevision
     const abort = new AbortController()
@@ -82,7 +101,7 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
     setState('loading')
     const request = (async () => {
       try {
-        await Promise.all(bassSamples.map(async sample => {
+        await Promise.all(required.map(async sample => {
           if (buffers.has(sample.file)) return
           const response = await fetch(`${baseUrl}audio/double-bass/${sample.file}`, { signal: abort.signal })
           if (!response.ok) throw new Error(`Double-bass sample could not be loaded (${response.status})`)
@@ -113,8 +132,8 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
     return request
   }
 
-  async function readyToPlay(request: number, needsSamples = true) {
-    if (stopped || request !== generation) return null
+  async function readyToPlay(request: number, needsSamples = true, cancelled: () => boolean = () => false, solo = false) {
+    if (stopped || request !== generation || cancelled()) return null
     const activeContext = audioContext()
     // resume() is requested synchronously from the click/key handler, before any fetch.
     if (activeContext.state === 'suspended') {
@@ -124,20 +143,25 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
         return null
       }
     }
-    if (stopped || request !== generation || context !== activeContext) return null
-    if (needsSamples) await prepare()
-    if (stopped || request !== generation || context !== activeContext || activeContext.state !== 'running') return null
+    if (stopped || request !== generation || context !== activeContext || cancelled()) return null
+    if (needsSamples) await prepare(solo)
+    if (stopped || request !== generation || context !== activeContext || activeContext.state !== 'running' || cancelled()) return null
     return activeContext
   }
 
   function release(voice: Voice) {
     if (!voices.delete(voice)) return
+    if (voice.startTimer !== undefined) { clearTimeout(voice.startTimer); timers.delete(voice.startTimer) }
     voice.source.onended = null
     voice.source.disconnect()
     voice.gain.disconnect()
+    voice.onEnd?.()
   }
 
   function stopVoice(voice: Voice, immediately = false) {
+    if (voice.stopping && !immediately) return
+    voice.stopping = true
+    if (voice.startTimer !== undefined) { clearTimeout(voice.startTimer); timers.delete(voice.startTimer) }
     const now = context?.currentTime ?? 0
     try {
       if (!immediately && voice.start <= now && context?.state === 'running') {
@@ -148,8 +172,8 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
     } catch { release(voice) }
   }
 
-  function schedule(activeContext: AudioContext, frequency: number, start: number, articulation: AudioArticulation, velocity: number, duration?: number) {
-    const { sample, playbackRate } = resolveBassSample(frequency, articulation)
+  function schedule(activeContext: AudioContext, frequency: number, start: number, articulation: AudioArticulation, velocity: number, duration?: number, onEnd?: () => void, solo = false) {
+    const { sample, playbackRate } = solo ? resolveBassSoloSample(frequency) : resolveBassSample(frequency, articulation)
     const buffer = buffers.get(sample.file)
     if (!buffer) return
     if (voices.size >= MAX_VOICES) stopVoice(voices.values().next().value!, true)
@@ -160,7 +184,7 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
     source.connect(gain).connect(limiter ?? activeContext.destination)
     const naturalDuration = buffer.duration / playbackRate
     const loop = sustainLoops.get(sample.file)
-    const requestedDuration = Math.max(.08, Math.min(12, duration ?? (articulation === 'arco' ? 2.2 : naturalDuration)))
+    const requestedDuration = Math.max(solo ? .025 : .08, Math.min(12, duration ?? (articulation === 'arco' ? 2.2 : naturalDuration)))
     const heldDuration = articulation === 'arco' && loop ? requestedDuration : Math.min(naturalDuration, requestedDuration)
     if (articulation === 'arco' && loop && heldDuration > naturalDuration) {
       source.loop = true
@@ -175,10 +199,11 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
     gain.gain.linearRampToValueAtTime(level, start + attack)
     gain.gain.setValueAtTime(level, end - releaseDuration)
     gain.gain.linearRampToValueAtTime(0, end)
-    const voice = { source, gain, start }
+    const voice: Voice = { source, gain, start, onEnd }
     voices.add(voice)
     source.onended = () => release(voice)
     try { source.start(start); source.stop(end) } catch (error) { release(voice); throw error }
+    return voice
   }
 
   async function play(frequency: number, delay = 0, articulation: AudioArticulation = 'pizzicato', velocity = .8, duration?: number) {
@@ -190,16 +215,55 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
     schedule(activeContext, frequency, activeContext.currentTime + Math.max(0, Math.min(120, delay)) + .012, articulation, velocity, duration)
   }
 
-  async function playSequence(events: AudioSequenceEvent[], articulation: AudioArticulation = 'pizzicato', velocity = .8, onNote?: (index: number) => void) {
+  /** A gesture can be released even while activation or sample decoding is pending. */
+  function playLive(frequency: number, articulation: AudioArticulation = 'pizzicato', options: LiveBassOptions = {}): LiveBassNote {
+    const request = generation
+    let voice: Voice | undefined
+    let cancelled = false
+    let ended = false
+    const finish = () => {
+      if (ended) return
+      ended = true
+      liveNotes.delete(cancel)
+      options.onEnd?.()
+    }
+    const cancel = () => {
+      if (cancelled || ended) return
+      cancelled = true
+      if (voice) stopVoice(voice)
+      else finish()
+    }
+    liveNotes.add(cancel)
+    const ready = (async () => {
+      try {
+        resolveBassSample(frequency, articulation)
+        const activeContext = await readyToPlay(request, true, () => cancelled)
+        if (!activeContext || cancelled || stopped || request !== generation) { finish(); return }
+        // A held bow uses the prepared sustain loop, with a twelve-second safety limit.
+        voice = schedule(activeContext, frequency, activeContext.currentTime + .012, articulation, .8, options.sustain && articulation === 'arco' ? 12 : undefined, finish)
+        if (!voice) { finish(); return }
+        const sounding = voice
+        const timer = setTimeout(() => {
+          timers.delete(timer)
+          if (!cancelled && !ended && !stopped && request === generation && voices.has(sounding)) options.onStart?.()
+        }, Math.max(0, (voice.start - activeContext.currentTime) * 1000))
+        voice.startTimer = timer
+        timers.add(timer)
+      } catch (error) { finish(); throw error }
+    })()
+    return { ready, release: cancel }
+  }
+
+  async function scheduleSequence(events: AudioSequenceEvent[], articulation: AudioArticulation = 'pizzicato', velocity = .8, onNote?: (index: number) => void, solo = false) {
     if (stopped || events.length === 0) return
     if (events.length > 64) throw new RangeError('A piece may contain at most 64 notes and rests')
     for (const event of events) {
-      if (event.frequency !== null) resolveBassSample(event.frequency, articulation)
+      if (event.frequency !== null) { if (solo) resolveBassSoloSample(event.frequency); else resolveBassSample(event.frequency, articulation) }
       if (!Number.isFinite(event.delay) || event.delay < 0 || event.delay > 192) throw new RangeError('Invalid note onset')
       if (event.duration !== undefined && (!Number.isFinite(event.duration) || event.duration <= 0 || event.duration > 12)) throw new RangeError('Invalid note duration')
     }
     const request = generation
-    const activeContext = await readyToPlay(request, events.some(event => event.frequency !== null))
+    const activeContext = await readyToPlay(request, events.some(event => event.frequency !== null), () => false, solo)
     if (!activeContext) return
     const start = activeContext.currentTime + .018
     const ordered = events.map((event, index) => ({ event, index })).sort((a, b) => a.event.delay - b.event.delay)
@@ -217,7 +281,7 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
         const onset = start + event.delay
         // A stalled or hidden page must not emit a burst of missed notes on return.
         if (onset + (event.duration ?? .2) < now) continue
-        if (event.frequency !== null) schedule(activeContext, event.frequency, Math.max(onset, now + .002), articulation, velocity, event.duration)
+        if (event.frequency !== null) schedule(activeContext, event.frequency, Math.max(onset, now + .002), articulation, velocity, event.duration, undefined, solo)
         if (onNote) later(() => { if (!stopped && request === generation) onNote(index) }, Math.max(0, (onset - activeContext.currentTime) * 1000))
       }
       if (next < ordered.length) later(pump, 25)
@@ -225,8 +289,16 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
     pump()
   }
 
+  function playSequence(events: AudioSequenceEvent[], articulation: AudioArticulation = 'pizzicato', velocity = .8, onNote?: (index: number) => void) {
+    return scheduleSequence(events, articulation, velocity, onNote)
+  }
+  function playSoloSequence(events: AudioSequenceEvent[], onNote?: (index: number) => void) {
+    return scheduleSequence(events, 'arco', .8, onNote, true)
+  }
+
   function silence() {
     generation++
+    for (const cancel of liveNotes) cancel()
     for (const timer of timers) clearTimeout(timer)
     timers.clear()
     for (const voice of voices) stopVoice(voice)
@@ -235,7 +307,7 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
       controller.abort()
       controller = null
       loading = null
-      setState(buffers.size === bassSamples.length ? 'ready' : 'idle')
+      setState(bassSamples.every(sample => buffers.has(sample.file)) ? 'ready' : 'idle')
     }
   }
 
@@ -254,5 +326,5 @@ export function createInterestAudio(onState?: (state: AudioState) => void) {
     void activeContext?.close().catch(() => { /* Already closing. */ })
   }
 
-  return { prepare, play, playSequence, silence, dispose }
+  return { prepare, play, playLive, playSequence, playSoloSequence, silence, dispose }
 }

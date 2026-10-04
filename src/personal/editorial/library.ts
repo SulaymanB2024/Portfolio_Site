@@ -3,6 +3,19 @@ import { consolidatedDestination, consolidatedHref } from './curation.ts'
 
 export type WritingFilters = { query: string; category: string }
 
+// Treat typographic punctuation and accents as their plain keyboard equivalents.
+const searchText = (value: string) => value.normalize('NFKD').replace(/\p{M}/gu, '')
+  .toLowerCase().replace(/['’]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
+
+export function filterWritingArticles(catalog: ArticleSummary[], filters: WritingFilters) {
+  const terms = searchText(filters.query).split(/\s+/).filter(Boolean)
+  return catalog.filter(article => {
+    if (filters.category !== 'All' && article.category !== filters.category) return false
+    const text = searchText(`${article.title} ${article.displayTitle || ''} ${article.subtitle} ${article.category} ${(article.searchTerms || []).join(' ')}`)
+    return terms.every(term => text.includes(term))
+  })
+}
+
 const parameters = (hash: string) => new URLSearchParams(hash.split('?').slice(1).join('?'))
 
 export function readWritingFilters(hash: string, categories: string[]): WritingFilters {

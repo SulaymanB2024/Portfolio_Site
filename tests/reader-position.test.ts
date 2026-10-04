@@ -23,3 +23,20 @@ test('reading progress stays finite and bounded for short, long, and moved artic
   assert.equal(readerProgress(400, 100, 500, 800), 1)
   assert.equal(readerProgress(400, 8000, 400, 800), readerProgress(900, 8000, 900, 800))
 })
+
+test('a native chapter arrival stays current below compact sticky contents', () => {
+  const positions = [{ id: 'opening', top: 400 }, { id: 'capture', top: 1000 }, { id: 'sources', top: 1600 }]
+  for (const height of [320, 390, 500, 568, 740, 844]) {
+    // The chapter stops 96px below the viewport top, including fractional scroll.
+    assert.equal(readerSection(positions, 903.6, height, 'opening', 96), 'capture', `${height}px viewport`)
+    assert.equal(readerSection(positions, 890, height, 'opening', 96), height > 680 ? 'capture' : 'opening')
+  }
+})
+
+test('remeasuring a chapter arrival offset follows responsive layout changes', () => {
+  const positions = [{ id: 'one', top: 400 }, { id: 'two', top: 1000 }]
+  assert.equal(readerSection(positions, 904, 390, 'one', 96), 'two')
+  assert.equal(readerSection(positions, 904, 390, 'one', 35), 'one')
+  assert.equal(readerSection(positions, 965, 900, 'one', 35), 'two')
+  assert.equal(readerSection([], 0, 390, undefined, 96), undefined)
+})

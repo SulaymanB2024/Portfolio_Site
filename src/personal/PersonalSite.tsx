@@ -3,8 +3,8 @@ import { flushSync } from 'react-dom'
 import { Art } from './Art'
 import { ProjectTransitionProvider } from './ProjectTransition'
 import { contact, projects, type ArtKind } from './content'
-import { siteCopy, siteMetadata, withWritingCopy } from './site-copy'
-import { canonicalPath, siteOrigin } from './public-pages'
+import { siteCopy, withWritingCopy } from './site-copy'
+import { updateSearchHead } from './search-head'
 import catalog from './editorial/data/catalog.json'
 import { resolveRoute } from './editorial/routes'
 import { findCaseStudy } from './projects/case-studies'
@@ -18,6 +18,7 @@ import { installMenuDismissal } from './refinements/menu-dismissal'
 import { focusWithoutWarmup } from './refinements/warmup-policy'
 import RouteBoundary from './RouteBoundary'
 import { prepareRouteResources } from './route-preparation'
+import { installRouteScroll } from './refinements/route-scroll'
 import './editorial/artwork-continuity.css'
 import './personal.css'
 import './editorial/editorial.css'
@@ -43,11 +44,14 @@ function useRoute() {
   useEffect(() => {
     let sequence = 0
     let active: ArtworkTransition | undefined
+    const scroll = installRouteScroll()
     const change = async () => {
       const next = path()
       const ticket = ++sequence
+      const arrival = scroll.begin()
       active?.skipTransition()
       if (next === current.current) {
+        scroll.samePage(arrival)
         setPending(false)
         document.documentElement.dataset.artTransition = 'idle'
         return
@@ -56,23 +60,23 @@ function useRoute() {
       const prepared = prepareRouteResources(next, prepareRoutePage, prepareArticle)
       const journey = galleryArticleJourney(current.current, next)
       const canAnimate = journey && !matchMedia('(prefers-reduced-motion: reduce)').matches
-      const update = () => {
+      const update = async () => {
         if (ticket !== sequence || path() !== next) return
         current.current = next
         flushSync(() => { setRoute(next); setPending(false) })
-        window.scrollTo({ top: 0, behavior: 'instant' })
-        if (next === 'writing') {
+        await scroll.commit(arrival, () => {
+          if (next !== 'writing') return
           const selected = new URLSearchParams(location.hash.split('?')[1] || '').get('at')
           const link = [...document.querySelectorAll<HTMLAnchorElement>('.writing-story')]
             .find(item => item.dataset.slug === selected)
           // Position the destination before the browser captures its new artwork box.
           link?.scrollIntoView({ block: 'center', behavior: 'instant' })
-        }
+        })
       }
       if (!canAnimate) {
         document.documentElement.dataset.artTransition = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'idle'
         await prepared
-        update()
+        await update()
         return
       }
       document.documentElement.dataset.artTransition = 'running'
@@ -83,7 +87,7 @@ function useRoute() {
       active = startArtworkTransition(name, async () => {
         // Keep the source's live canvas mounted until both page and article are ready.
         await prepared
-        update()
+        await update()
       })
       void active.ready.catch(() => { /* Failed preparation must not break navigation. */ })
       void active.finished.catch(() => {}).finally(() => {
@@ -91,30 +95,12 @@ function useRoute() {
       })
     }
     window.addEventListener('hashchange', change)
-    return () => { sequence++; active?.skipTransition(); window.removeEventListener('hashchange', change) }
+    return () => { sequence++; active?.skipTransition(); scroll.dispose(); window.removeEventListener('hashchange', change) }
   }, [])
   useEffect(() => {
     // Initial deep links prepare article data while its page chunk is loading.
     if (route.startsWith('writing/')) void prepareArticle(route.slice('writing/'.length)).catch(() => {})
-    const project = projects.find(p => route === `work/${p.slug}`)
-    const article = articles.find(item => route === `writing/${item.slug}`)
-    const study = findCaseStudy(route)
-    const title = article?.displayTitle ?? article?.title ?? project?.name ?? study?.name ?? (route === 'resume' ? 'Résumé' : route === '' || route === 'home' ? siteMetadata.homeTitle : siteMetadata.pages[route] ? route[0].toUpperCase() + route.slice(1) : 'Page not found')
-    document.title = `${title} — Sulayman Bowles`
-    const description = article?.subtitle ?? project?.summary ?? study?.summary ?? siteMetadata.pages[route] ?? siteMetadata.description
-    document.querySelector('meta[name="description"]')?.setAttribute('content', description)
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title)
-    document.querySelector('meta[property="og:description"]')?.setAttribute('content', description)
-    const canonical = canonicalPath(route)
-    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `${siteOrigin}${canonical || '/404'}`)
-    document.querySelector('meta[property="og:url"]')?.setAttribute('content', `${siteOrigin}${canonical || '/404'}`)
-    document.querySelector('meta[property="og:type"]')?.setAttribute('content', article ? 'article' : 'website')
-    const robots = document.querySelector('meta[name="robots"]')
-    robots?.setAttribute('content', canonical ? 'index, follow' : 'noindex, follow')
-    // Static route markup describes the initial document. Remove its schema
-    // after navigating to another page so it cannot describe the wrong content.
-    const schema = document.querySelector('#page-schema')
-    if (schema && schema.getAttribute('data-route') !== (route === 'home' ? '' : route)) schema.remove()
+    updateSearchHead(document, route)
   }, [route])
   return { route, pending }
 }
