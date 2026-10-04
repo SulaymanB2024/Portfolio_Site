@@ -22,6 +22,7 @@ export interface InterestScene {
   setNotes(notes: number[]): void
   setPuzzle(square: string, legal: string[], goal?: string, path?: string[], blocked?: readonly string[], checkpoints?: readonly string[]): void
   setBass(articulation: 'pizzicato' | 'arco', position: number): void
+  setBassSound(sounding: boolean): void
   setScore(notes: PhraseNote[], title: string, tempo: number, page: number, activeIndex: number | null): void
   setGame(state: ChessSceneState | null): void
   resetView(): void
@@ -131,6 +132,8 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   let square = 'a1'
   let destinationSquare = 'h8'
   let bassArticulation: 'pizzicato' | 'arco' = 'pizzicato'
+  let bassSounding = false
+  let bassBowEnergy = 0
   let bassPosition = 0
   let bassString = 0
   let puzzlePath: string[] = []
@@ -232,6 +235,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     shader.uniforms.chessPolarity.value = approach(shader.uniforms.chessPolarity.value, darkTheme && selected === 'knight' && gameState ? 1 : 0, dt)
     const narrow = stackedMedia.matches
     const framing = interestFraming(width, height, narrow, selected)
+    if (live) bassBowEnergy = approach(bassBowEnergy, selected === 'bass' && bassSounding ? 1 : 0, dt)
     camera.position.z = approach(camera.position.z, framing.cameraZ, dt)
     for (const item of specimens) {
       const index = ids.indexOf(item.id)
@@ -265,7 +269,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       if (focus && item.id === 'knight') item.pose.rotation.y = item.view.yaw + (item.pose.rotation.y - item.view.yaw) * .18
       item.pose.rotation.z = item.id === 'bass' ? -.055 : item.id === 'score' && !media.matches ? Math.sin(time * .44) * .025 : 0
       item.pose.position.y = item.id !== 'knight' && !media.matches ? Math.sin(time * .65 + index) * .035 : 0
-      if (item.bow) item.bow.position.x = item.bowX + (!media.matches ? Math.sin(time * .9) * .10 : 0) + (bassArticulation === 'arco' && !media.matches ? Math.sin(time * 3.2) * Math.max(...pulses) * .18 : 0)
+      if (item.bow) item.bow.position.x = item.bowX + (!media.matches ? Math.sin(time * .9) * .10 : 0) + (bassArticulation === 'arco' && !media.matches ? Math.sin(time * 3.2) * Math.max(bassBowEnergy, ...pulses) * .18 : 0)
       if (item.id === 'bass') {
         finger.visible = focus && bassPosition > 0
         const fraction = 2 ** (-bassPosition / 12)
@@ -339,6 +343,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     canvas.dataset.goal = destinationSquare
     canvas.dataset.route = puzzlePath.join(',')
     canvas.dataset.articulation = bassArticulation
+    canvas.dataset.bassSounding = String(bassSounding)
     canvas.dataset.bassPosition = String(bassPosition)
     canvas.dataset.scoreEvents = String(scoreState.notes.length)
     canvas.dataset.scorePage = String(scoreState.page)
@@ -525,6 +530,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       restoreMarkers(); wake()
     },
     setBass(articulation, position) { bassArticulation = articulation; bassPosition = position; wake() },
+    setBassSound(sounding) { if (bassSounding !== sounding) { bassSounding = sounding; wake() } },
     setScore(notes,title,tempo,page,activeIndex) { scoreState={notes,title,tempo,page,activeIndex};scoreDirty=true;wake() },
     setGame(state) { gameState=state;const item=specimens.find(item=>item.id==='knight');if(state&&item?.knight){item.chess??=createChessSet(item.model,item.knight,item.tiles,geometries,materials);item.chess.update(state)}restoreMarkers();wake() },
     resetView() { manualYaw = 0; manualPitch = 0; wake() },

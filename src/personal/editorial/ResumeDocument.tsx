@@ -22,9 +22,9 @@ function roleNote(organization: string) {
 
 function jumpToSection(event: MouseEvent<HTMLAnchorElement>, id: ResumeSection) {
   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-  // A different URL is handled by the page's arrival effect, including new tabs.
-  if (location.hash !== event.currentTarget.hash) return
-  event.preventDefault()
+  // The document is already mounted. Repeated section requests must still
+  // move focus after Back to top clears the URL without a hashchange event.
+  if (location.hash === event.currentTarget.hash) event.preventDefault()
   const heading = document.getElementById(`resume-${id}`)
   heading?.focus({ preventScroll: true })
   heading?.scrollIntoView({

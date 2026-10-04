@@ -118,7 +118,7 @@ export default function ResumePage({ dark }: { dark: boolean }) {
     <div className="rx-screen">
       <header className="rx-header">
         <div><span className="eyebrow">Sulayman Bowles / Austin, Texas</span><h1 id="resume-explorer-title">Résumé<span className="period">.</span></h1></div>
-        <div className="rx-header-deck"><p>{profile.positioning}</p><span>Follow a role. Open a chapter.</span></div>
+        <div className="rx-header-deck"><p>{profile.positioning}</p><span>Select a role to see the work.</span></div>
       </header>
       <div className="rx-document-bar"><button ref={documentToggle} type="button" className="rx-document-toggle" aria-expanded={documentOpen} aria-controls="resume-document" onClick={toggleDocument}>Read the full résumé<span aria-hidden="true">{documentOpen ? '−' : '+'}</span></button><div><a href={`${import.meta.env.BASE_URL}Sulayman_Bowles_Resume.pdf`} download aria-describedby="rx-pdf-note">{resumeReview.pdfLabel}<span aria-hidden="true">↓</span></a><button type="button" onClick={() => window.print()}>Print<span aria-hidden="true">↗</span></button></div></div>
       <div className="rx-notes"><p id="rx-pdf-note">{resumeReview.pdfNote}</p><p>Profile as of <time dateTime={profile.lastReviewed}>{displayDate(profile.lastReviewed)}</time></p></div>
@@ -159,17 +159,17 @@ export default function ResumePage({ dark }: { dark: boolean }) {
                     {selectedRole < resumeChapters.length - 1 ? <button onClick={() => moveRole(selectedRole + 1)}><span>Next →</span>{resumeChapters[selectedRole + 1].shortName}</button> : <span />}
                   </nav>
                 </> : selection.kind === 'education' ? <>
-                  <p className="rx-chapter-kicker">02 / Education</p><h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>A foundation.<br />An open curiosity.</h2>
+                  <p className="rx-chapter-kicker">02 / Education</p><h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>Finance at<br />UT Austin.</h2>
                   <p className="rx-lead">{profile.education.institution}<br />{profile.education.school}</p>
                   <div className="rx-education-degree">{profile.education.degrees.map(degree => <div key={degree.degree}><strong>{degree.field}</strong><p>{degree.degree}</p></div>)}<span className="rx-meta">Expected {profile.education.expectedGraduation} / {profile.education.location}</span></div>
                   <h3 className="rx-small-heading">In the classroom</h3><div className="rx-subjects">{profile.education.coursework.map((item, i) => <span key={item}><i aria-hidden="true">{String(i + 1).padStart(2, '0')}</i>{item}</span>)}</div>
                   <h3 className="rx-small-heading">Beyond the classroom</h3><ul className="rx-simple-list">{profile.certifications.map(item => <li key={item}>{item}</li>)}</ul>
                 </> : selection.kind === 'recognition' ? <>
-                  <p className="rx-chapter-kicker">03 / Awards & leadership</p><h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>Testing ideas.<br />Taking part.</h2>
+                  <p className="rx-chapter-kicker">03 / Awards & leadership</p><h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>Awards &<br />leadership.</h2>
                   <p className="rx-lead">Competitions, puzzles, research, and the communities I contribute to.</p>
                   <div className="rx-recognition">{profile.awardsAndLeadership.map((item, i) => <details key={item.organization}><summary><span className="rx-meta">{item.dates}</span><strong>{['Coinbase challenge','Jane Street puzzle','OnionDAO Hackathon','Artemis Researchathon','Student Government','Texas Blockchain','Energy Trading'][i]}</strong><span className="rx-recognition-role">{item.title}</span><span className="rx-plus" aria-hidden="true">+</span></summary><div><p>{item.detail}</p><span className="rx-meta">{item.organization}{item.location && ` / ${item.location}`}</span>{i === 2 && <div className="rx-evidence"><ExternalLink href="#/work/payrollpro">Explore PayrollPro</ExternalLink></div>}</div></details>)}</div>
                 </> : <>
-                  <p className="rx-chapter-kicker">04 / Skills & tools</p><h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>A toolkit that crosses disciplines.</h2>
+                  <p className="rx-chapter-kicker">04 / Skills & tools</p><h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>Skills & tools.</h2>
                   <p className="rx-lead">Code, commercial thinking, and research. Open a discipline to see the tools and methods behind the work.</p>
                   <div className="rx-toolkit">{profile.skillGroups.map((group, i) => <details key={group.label} open={i === 0}><summary><span className="rx-meta">0{i + 1}</span>{group.label}<span aria-hidden="true">+</span></summary><div>{group.items.map(item => <span key={item}>{item}</span>)}</div></details>)}</div>
                   <h3 className="rx-small-heading">Languages</h3><p className="rx-lead">{profile.languages.join(' · ')}</p>

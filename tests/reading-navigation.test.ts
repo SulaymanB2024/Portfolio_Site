@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { articleReturnHref, articleSection, readWritingFilters, relatedArticles, readerFragmentHref, sectionHref, writingHref } from '../src/personal/editorial/library.ts'
+import { articleReturnHref, articleSection, filterWritingArticles, readWritingFilters, relatedArticles, readerFragmentHref, sectionHref, writingHref } from '../src/personal/editorial/library.ts'
 import type { ArticleSummary } from '../src/personal/editorial/types.ts'
 
 const catalog = [
@@ -9,6 +9,22 @@ const catalog = [
   { slug: 'crawl', path: '/research/crawlers/crawl', category: 'CRAWLER ENGINEERING' },
 ] as ArticleSummary[]
 const categories = ['All', ...catalog.map(article => article.category)]
+
+test('writing search combines terms across titles and decks while respecting the selected topic', () => {
+  const essays = [
+    { slug: 'roads', title: 'Who owns Texas toll roads?', displayTitle: 'Who owns the cash flow?', subtitle: 'Contracts divide revenue and risk.', category: 'INFRASTRUCTURE' },
+    { slug: 'shops', title: 'The First AI Managers', displayTitle: 'The Shopkeeper in the Machine', subtitle: 'AI-operated cafés and yesterday’s decisions.', category: 'AI SYSTEMS' },
+  ] as ArticleSummary[]
+  const find = (query: string, category = 'All') => filterWritingArticles(essays, { query, category }).map(article => article.slug)
+  assert.deepEqual(find('revenue Texas'), ['roads'])
+  assert.deepEqual(find('  CASH   risk '), ['roads'])
+  assert.deepEqual(find('AI-operated cafes'), ['shops'])
+  assert.deepEqual(find("yesterday's decisions"), ['shops'])
+  assert.deepEqual(find('café missing'), [])
+  assert.deepEqual(find('Texas', 'AI SYSTEMS'), [])
+  assert.deepEqual(find('', 'AI SYSTEMS'), ['shops'])
+  assert.deepEqual(find('   '), ['roads', 'shops'])
+})
 
 test('a bookmarked archive retains search punctuation, category and the selected article', () => {
   const filters = { query: 'R&D + 50%? café', category: 'AI SYSTEMS' }
@@ -25,6 +41,20 @@ test('return links accept only the archive and known selections', () => {
   }
   assert.equal(articleReturnHref(`#/writing/authority?from=${encodeURIComponent('#/writing?at=unknown&q=trace')}`, catalog), '#/writing?q=trace')
   assert.equal(articleReturnHref('#/writing/authority', catalog), '#/writing')
+})
+
+test('search and return bookmarks round-trip literal URL syntax and Unicode without changing meaning', () => {
+  const queries = ['Café? #1 & 50% + tax', '日本語 / 東京', 'yesterday’s café', 'a=b?from=#/work', '<script>alert(1)</script>']
+  for (const query of queries) {
+    for (const category of categories) {
+      const filters = { query, category }
+      const archive = writingHref(filters, 'authority')
+      assert.deepEqual(readWritingFilters(archive, categories), filters)
+      const reader = `#/writing/authority?from=${encodeURIComponent(archive)}`
+      assert.equal(articleReturnHref(reader, catalog), archive)
+      assert.equal(articleReturnHref(sectionHref(reader, 'source-café?#1'), catalog), archive)
+    }
+  }
 })
 
 test('section navigation preserves archive context and decodes a fragment only once', () => {

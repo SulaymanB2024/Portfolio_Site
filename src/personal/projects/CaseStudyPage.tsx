@@ -74,18 +74,18 @@ function AtlasStory() {
         }
         copy={
           <>
-            <p>An audit produces findings. A useful product makes the next decision defensible.</p>
-            <p>I built Atlas to preserve each finding’s URL, page state and reasoning. Failed measurements remain visible gaps.</p>
+            <p>A reviewer needs to know why a warning was raised.</p>
+            <p>Atlas retains each finding’s URL, captured page state, and reasoning. Failed measurements stay visible.</p>
           </>
         }
       />
       <Chapter
         index={1}
         label="The system"
-        title={<>Follow the evidence all the way through.</>}
+        title={<>From page capture to review.</>}
         copy={
           <>
-            <p>My work spans architecture, crawler behavior, evidence policy and interface design. Observations stay attached from capture to export.</p>
+            <p>I designed the architecture, crawler behavior, evidence policy, and interface. Observations remain attached through export.</p>
           </>
         }>
         <ol className="study-process">
@@ -115,7 +115,7 @@ function AtlasStory() {
         }
         copy={
           <>
-            <p>Both returned 200 OK. Their source markup calls for different next steps.</p>
+            <p>Both returned 200 OK. Their source content requires different checks.</p>
           </>
         }>
         <AtlasSourceComparison />
@@ -167,7 +167,7 @@ function PayrollStory() {
         }
         copy={
           <>
-            <p>Private pay needs shared treasury control and a legible record.</p>
+            <p>Payroll needs confidential amounts, authorized transfers, and a record.</p>
             <p>
               I led a three-person team at the June 2025 OnionDAO Hackathon, combining Token-2022 confidential-transfer mechanics, multisig treasury control and audit visibility in
               a Solana prototype.
@@ -181,7 +181,7 @@ function PayrollStory() {
         title={<>A payment has a lifecycle.</>}
         copy={
           <>
-            <p>Inspect the frozen flag, release timestamp and documented operations.</p>
+            <p>Follow a batch through release, cancellation, and the checks governing each operation.</p>
           </>
         }>
         <PayrollLifecycle />
@@ -196,12 +196,12 @@ function PayrollStory() {
         }>
         <div className="study-decisions">
           <div>
-            <h3>The prototype demonstrated the idea.</h3>
-            <p>The teammate recap describes confidential transfers, multisig, Solana Pay and QR payouts. The record documents batch logic.</p>
+            <h3>What the retained record shows.</h3>
+            <p>The teammate recap describes confidential transfers, multisig, Solana Pay, and QR payouts; the state record documents batch logic.</p>
           </div>
           <div>
-            <h3>Production would require more proof.</h3>
-            <p>Simplified mint/burn behavior and a skeleton payroll test still need end-to-end testing and deployment documentation.</p>
+            <h3>What remains before production.</h3>
+            <p>Simplified mint/burn behavior and a skeleton payroll test require end-to-end testing and deployment documentation.</p>
           </div>
         </div>
         <p className="study-status-note">
@@ -216,7 +216,7 @@ function PayrollStory() {
           Payroll states, transfer operations, and implementation limits in a structured artifact.
         </Source>
         <Source href="https://github.com/SulaymanB2024/OnionDAO-Project" title="Confidential-transfer recipes">
-          The public cookbook fork used as related technical material. It is not the complete PayrollPro application.
+          A related cookbook fork, not the complete PayrollPro application.
         </Source>
       </Chapter>
     </>
@@ -232,9 +232,9 @@ function ViralStory() {
         title={<>What improved: the agent, or its luck?</>}
         copy={
           <>
-            <p>In a changing market, a strong post can be luck. More views alone do not establish a better agent.</p>
-            <p>I audited ViralBench and designed an outer engineering loop: trace, propose, replay and submit evidence for review.</p>
-            <p>The study builds on ViralBench, an existing open-source marketing agent.</p>
+            <p>More views can reflect luck rather than a better agent.</p>
+            <p>I audited ViralBench and designed an outer loop: inspect traces, propose changes, replay tasks, and submit evidence for review.</p>
+            <p>ViralBench is an existing open-source marketing agent.</p>
           </>
         }
       />
@@ -248,7 +248,7 @@ function ViralStory() {
         }
         copy={
           <>
-            <p>The candidate advances with evidence. Authority remains outside the proposing agent.</p>
+            <p>Codex would submit a patch and test results for independent evaluation before a live trial.</p>
           </>
         }>
         <ViralReviewLoop />
@@ -257,15 +257,15 @@ function ViralStory() {
         <div className="study-decisions">
           <div>
             <h3>Improve the system around the output.</h3>
-            <p>A better harness needs evidence across the research, creation, review and publishing workflow.</p>
+            <p>Inspect research, creation, review, and publishing decisions to locate the failure.</p>
           </div>
           <div>
-            <h3>Keep the comparison controlled.</h3>
-            <p>Replay and live trials answer different questions. Keep their evidence separate.</p>
+            <h3>Separate replay from live trials.</h3>
+            <p>Replay tests retained conditions; live trials test current conditions.</p>
           </div>
           <div>
-            <h3>Do not let the proposer become the judge.</h3>
-            <p>Submit a reviewable candidate. Keep evaluation and release outside the engineering agent’s authority.</p>
+            <h3>Require independent evaluation.</h3>
+            <p>The engineering agent proposes changes; others evaluate and approve release.</p>
           </div>
         </div>
         <p className="study-status-note">

@@ -222,7 +222,7 @@ export function WorkPage({ dark }: { dark: boolean }) {
     <header className="work-page-intro"><h1>{siteCopy.work.title}</h1><p>{siteCopy.work.description}</p></header>
     <WorkStage dark={dark} identity="work-collection">
       <div className="work-study-toolbar">
-        <span>Selected work</span><WorkMotionControl />
+        <span>Interactive studies</span><WorkMotionControl />
       </div>
       <ProjectEntries items={projects} compact={false} />
       <div className="work-further" aria-label="More work"><a href="#/work/atlas"><span>Atlas</span><span aria-hidden="true">↗</span></a></div>
