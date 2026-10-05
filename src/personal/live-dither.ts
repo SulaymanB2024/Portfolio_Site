@@ -9,15 +9,19 @@ uniform float printCellSize;
 uniform float printBinary;
 uniform float printClock;
 uniform float printGrain;
+uniform bool printDirectSample;
 uniform vec3 printInk;
 uniform vec3 printPaper;
 ${PORTFOLIO_DITHER_GLSL}
 void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
   if (inputColor.a < .0001) { outputColor = vec4(0.0); return; }
   vec2 cell = floor(uv * printCssSize / printCellSize);
-  vec2 sampleUv = (cell + .5) * printCellSize / printCssSize;
-  vec2 halfTexel = .5 / printBufferSize;
-  vec4 center = texture2D(inputBuffer, clamp(sampleUv, halfTexel, 1.0 - halfTexel));
+  vec4 center = inputColor;
+  if (!printDirectSample) {
+    vec2 sampleUv = (cell + .5) * printCellSize / printCssSize;
+    vec2 halfTexel = .5 / printBufferSize;
+    center = texture2D(inputBuffer, clamp(sampleUv, halfTexel, 1.0 - halfTexel));
+  }
   // Keep the CSS dot screen inside the form. At a partial or empty cell center,
   // use this pixel's surface so a thin rim cannot disappear with its whole cell.
   vec4 surface = center.a >= .9999 ? center : inputColor;
@@ -41,6 +45,7 @@ export class LiveDitherEffect extends Effect {
         ['printBinary', new Uniform(Number(binary))],
         ['printClock', new Uniform(0)],
         ['printGrain', new Uniform(live ? .025 : 0)],
+        ['printDirectSample', new Uniform(false)],
         ['printInk', new Uniform(new Color('#191a17'))],
         ['printPaper', new Uniform(new Color('#f3f3f0'))],
       ]),
@@ -58,5 +63,10 @@ export class LiveDitherEffect extends Effect {
   }
   update(_renderer: WebGLRenderer, buffer: WebGLRenderTarget) {
     this.uniforms.get('printBufferSize')!.value.set(buffer.width, buffer.height)
+    const css = this.uniforms.get('printCssSize')!.value as Vector2
+    // At a one-to-one grid, inputColor already samples the exact cell center.
+    // Higher DPR, coarse cells and adaptive resolution retain the full sampler.
+    this.uniforms.get('printDirectSample')!.value = this.uniforms.get('printCellSize')!.value === 1
+      && css.x === buffer.width && css.y === buffer.height
   }
 }

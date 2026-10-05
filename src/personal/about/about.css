@@ -218,3 +218,8 @@
   .about-concert-entry:is(:hover,:focus-visible) > span:last-child > span,
   .about-deeper-links > button:is(:hover,:focus-visible) > span:last-child { transform: none; }
 }
+
+/* The About opening exhibits only its three objects and their names. */
+.about-objects[data-selected="collection"] { padding-top: clamp(24px,5svh,56px); }
+.about-objects[data-selected="collection"] .about-objects-toolbar { border-top: 0; }
+.about-objects[data-selected="collection"] .about-object-selectors > button { min-height: 88px; }

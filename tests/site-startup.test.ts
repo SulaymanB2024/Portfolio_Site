@@ -148,7 +148,7 @@ test('an initial React failure restores the retained static DOM even if the cont
   assert.equal(state.remainingListeners(), 0)
 })
 
-test('a slow module boot reveals readable text after one second while retaining late mount and failure recovery', () => {
+test('a slow module boot shows waiting status while retaining late mount and failure recovery', () => {
   for (const lateFailure of [false, true]) {
     const state = startup('dark')
     state.parsed(); state.fireTimer(1000)
@@ -190,7 +190,9 @@ test('the gate is opt-in, runs before the document body, and remains compatible 
   const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8')
   const boot = html.indexOf('<script src="%BASE_URL%site-startup.js"></script>')
   assert(boot > 0 && boot < html.indexOf('<body>'))
-  assert(html.includes("html[data-site-boot='pending'] #root > .static-site { display: none; }"))
+  assert(html.includes("html:is([data-site-boot='pending'], [data-site-boot='waiting']) #root > .static-site { display: none; }"))
+  assert(html.includes("html[data-site-boot='waiting'] .site-startup-status"))
+  assert(html.includes('<p class="site-startup-status" role="status">'))
   assert(!/<html\b[^>]*data-site-boot/.test(html), 'JavaScript-disabled readers must not inherit the pending gate')
   assert(!/<script\b(?![^>]*\bsrc=)(?![^>]*type=["']application\/ld\+json["'])[^>]*>[\s\S]*?<\/script>/i.test(html))
 })

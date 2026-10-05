@@ -192,3 +192,143 @@
   .rx-document { display: block !important; margin: 0; border: 0; }
   .rx-document .cv-introduction h1 { font-size: 36px; }
 }
+
+/* Object first: a restrained map of work surrounding the original helmet. */
+.resume-explorer { padding-top: 24px; }
+.rx-world { border-top: 0; }
+.rx-map { height: clamp(510px,72svh,680px); }
+.rx-sculpture { width: 48%; left: 26%; top: 11%; height: 70%; }
+.rx-sculpture .object-controls { display: none; }
+.rx-document-bar { border-top: 1px solid var(--line); margin-top: 8px; }
+.rx-document-bar > a { display:flex;align-items:center;gap:22px;min-height:44px;font:10px monospace; }
+.rx-stage.is-open .rx-sculpture { width: 52%; left: 24%; }
+.rx-work-diagram { margin: 28px 0 25px; }
+.rx-work-diagram svg { width: 100%; height:auto; display:block; color:var(--ink); overflow:visible; }
+.rx-diagram-line { fill:none;stroke:var(--muted);stroke-width:.7; }
+.rx-diagram-paper { fill:var(--paper);stroke:var(--line);stroke-width:.6; }
+.rx-diagram-grain { opacity:.2; }
+.rx-diagram-symbol { stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;opacity:.38;transition:opacity .25s; }
+.rx-work-diagram .is-active .rx-diagram-symbol { opacity:1; }
+.rx-work-diagram .is-active .rx-diagram-paper { stroke:var(--ink); }
+.rx-work-diagram .is-active .rx-diagram-symbol path { stroke-dasharray:220;stroke-dashoffset:0;animation:rx-draw .8s ease-out; }
+@keyframes rx-draw { from { stroke-dashoffset:220; } to { stroke-dashoffset:0; } }
+.rx-diagram-steps { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px; }
+.rx-diagram-steps button { color:var(--muted);padding:12px 0;min-height:66px;text-align:left;background:none;border:0;border-top:1px solid var(--line);font:12px/1.4 Georgia,serif; }
+.rx-diagram-steps button span { display:block;font:8px monospace;margin-bottom:6px; }
+.rx-diagram-steps button[aria-pressed=true] { color:var(--ink);border-color:var(--ink); }
+.rx-diagram-description { min-height:60px;font:14px/1.65 Georgia,serif;color:var(--muted);margin:14px 0 0; }
+@media(max-width:600px){
+ .rx-map { height:auto; }
+ .rx-sculpture,.rx-stage.is-open .rx-sculpture { grid-row:1;height:330px;margin:0 0 16px;left:auto;top:auto;width:100%; }
+ .rx-role-0,.rx-role-1 { grid-row:2; }
+ .rx-role-2,.rx-role-3 { grid-row:3; }
+ .rx-role-4,.rx-role-5 { grid-row:4; }
+ .rx-role-6 { grid-row:5; }
+ .rx-secondary { grid-template-columns:repeat(3,minmax(0,1fr));gap:16px; }
+ .rx-secondary button { min-height:70px;border-bottom:0; }
+ .rx-secondary button > span { font-size:17px;gap:5px; }
+ .rx-document-bar { flex-direction:row;align-items:center; }
+ .rx-document-bar .rx-document-toggle { width:auto; }
+}
+
+/* The overview camera stays fixed; entering a role moves the entire scene. */
+.rx-stage,.rx-stage.is-open { display:block; }
+.rx-map { position:relative;top:auto;height:clamp(560px,calc(100svh - 140px),850px); }
+.rx-sculpture,.rx-stage.is-open .rx-sculpture { width:60%;left:20%;top:0;height:89%; }
+.rx-role,.rx-stage.is-open .rx-role { width:210px;max-width:23%;padding:12px 0;background:transparent; }
+.rx-node-name,.rx-stage.is-open .rx-node-name { font-size:clamp(19px,2.2vw,29px); }
+.rx-role-arrow { display:inline-block;font:17px Georgia,serif;margin-left:12px;opacity:0;transition:opacity .2s; }
+.rx-role:is(:hover,:focus-visible) .rx-role-arrow,.rx-role[aria-expanded=true] .rx-role-arrow { opacity:1; }
+.rx-chapter { max-width:720px;margin:45px auto 0;padding:30px 0 50px;border-top:1px solid var(--line); }
+.rx-chapter-body { animation:none; }
+.rx-art-credit { position:absolute;right:4px;bottom:12px;font:9px monospace;z-index:3; }
+.rx-art-credit summary { cursor:pointer;list-style:none;color:var(--muted);padding:10px; }
+.rx-art-credit p { padding:14px;max-width:260px;background:var(--paper);border:1px solid var(--line);font:10px/1.7 monospace; }
+.rx-work-diagram svg { max-width:620px;margin:0 auto; }
+.rx-diagram-symbol { stroke-width:.9;opacity:.65; }
+.rx-work-diagram .is-active .rx-diagram-symbol { stroke-width:1.3; }
+.rx-work-diagram .is-active .rx-diagram-symbol path { stroke-dasharray:none;animation:none; }
+.rx-diagram-steps button { font-size:15px; }
+.rx-diagram-description { font-size:16px;max-width:520px; }
+@media(max-width:600px){
+ .rx-map { height:auto; }
+ .rx-sculpture,.rx-stage.is-open .rx-sculpture { position:relative;width:100%;height:460px;left:auto;top:auto;grid-row:1; }
+ .rx-sculpture .art-viewer { max-width:none; }
+ .rx-role,.rx-stage.is-open .rx-role { max-width:none;width:auto;padding:16px 0; }
+ .rx-node-name,.rx-stage.is-open .rx-node-name { font-size:25px; }
+ .rx-role-arrow { opacity:1;font-size:14px; }
+ .rx-chapter { margin-top:30px; }
+ .rx-diagram-steps button { font-size:12px; }
+}
+.rx-work-objects { display:block;width:100%;height:auto;aspect-ratio:8/3.4;background:transparent; }
+
+/* The role occupies the same visual space; the overview remains mounted behind it. */
+.rx-focus-scene {
+  position:fixed;inset:0;width:100%;height:100dvh;max-width:none;max-height:none;
+  margin:0;padding:0;border:0;background:var(--paper);color:var(--ink);
+  overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;
+}
+.rx-focus-scene::backdrop { background:transparent; }
+.rx-focus-scene:not([open]) { display:none; }
+.rx-focus-scene .rx-chapter {
+  display:flex;flex-direction:column;width:min(100%,1360px);min-height:100%;max-width:none;
+  margin:0 auto;padding:clamp(20px,4vw,52px) clamp(20px,5vw,70px);border:0;
+}
+.rx-focus-bar { display:flex;align-items:center;justify-content:space-between;gap:24px;padding-bottom:22px; }
+.rx-focus-scene .rx-close { width:auto;min-height:44px;margin:0;padding:8px 0;border:0;gap:12px; }
+.rx-focus-scene .rx-close > span:last-child { margin:0;font-size:18px; }
+.rx-focus-scene .rx-close:is(:hover,:focus-visible) { text-decoration:underline;text-underline-offset:6px; }
+.rx-focus-count { color:var(--muted);font:9px/1.7 'Courier New',monospace;letter-spacing:.07em; }
+.rx-focus-content { display:flex;flex-direction:column;flex:1; }
+.rx-focus-layout {
+  flex:1;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr);
+  grid-template-areas:'intro work' 'support work';align-content:center;
+  column-gap:clamp(36px,6vw,88px);row-gap:24px;padding:20px 0 38px;
+}
+.rx-focus-intro { grid-area:intro;min-width:0;align-self:end; }
+.rx-focus-scene .rx-chapter-kicker { font-size:9px;margin-bottom:20px; }
+.rx-focus-scene h2 {
+  font-size:clamp(38px,4.5vw,64px);line-height:1.03;margin-bottom:24px;
+  transform-origin:0 0;letter-spacing:-.045em;overflow-wrap:normal;
+}
+.rx-focus-scene .rx-job-title { font-size:16px;margin-bottom:10px; }
+.rx-focus-scene .rx-meta { font-size:9px;line-height:1.8; }
+.rx-focus-scene .rx-proof { padding:16px 0 0;margin:23px 0 0;border:0; }
+.rx-focus-scene .rx-proof strong { font-size:44px; }
+.rx-focus-work { grid-area:work;min-width:0;align-self:center; }
+.rx-focus-scene .rx-work-diagram { margin:0; }
+.rx-focus-scene .rx-diagram-steps { gap:18px; }
+.rx-focus-scene .rx-diagram-steps button { font-size:14px;min-height:76px;padding:17px 0; }
+.rx-focus-scene .rx-diagram-description { font-size:17px;line-height:1.7;max-width:540px;min-height:88px;margin-top:16px; }
+.rx-focus-support { grid-area:support;align-self:start;min-width:0; }
+.rx-focus-scene .rx-detail summary { min-height:48px; }
+.rx-focus-scene .rx-evidence { margin-top:12px; }
+.rx-focus-scene .rx-sequence { margin:0;padding-top:18px;border-top:1px solid var(--line); }
+.rx-focus-scene .rx-sequence button { min-height:56px;font-size:16px; }
+.rx-focus-scene[data-phase='leaving'] .rx-chapter { pointer-events:none; }
+@media(max-width:760px) {
+  .rx-focus-scene .rx-chapter { padding:16px 24px 24px; }
+  .rx-focus-bar { padding-bottom:18px; }
+  .rx-focus-layout { display:flex;flex-direction:column;gap:0;padding:10px 0 30px; }
+  .rx-focus-intro,.rx-focus-work,.rx-focus-support { align-self:stretch; }
+  .rx-focus-scene .rx-chapter-kicker { margin-bottom:12px; }
+  .rx-focus-scene h2 { font-size:clamp(32px,8vw,48px);line-height:1.05;margin-bottom:14px; }
+  .rx-focus-scene .rx-job-title { font-size:14px;margin-bottom:7px; }
+  .rx-focus-scene .rx-proof { margin-top:14px;padding:0; }
+  .rx-focus-scene .rx-proof strong { font-size:34px; }
+  .rx-focus-work { margin-top:14px; }
+  .rx-focus-scene .rx-diagram-steps { gap:12px; }
+  .rx-focus-scene .rx-diagram-steps button { font-size:12px;min-height:65px;padding:12px 0; }
+  .rx-focus-scene .rx-diagram-description { font-size:15px;line-height:1.65;min-height:0;margin-top:12px; }
+  .rx-focus-support { margin-top:28px; }
+  .rx-focus-scene .rx-evidence a { min-height:44px; }
+  .rx-focus-scene .rx-sequence button { font-size:14px; }
+}
+@media(max-width:360px) {
+  .rx-focus-scene .rx-chapter { padding:12px 20px 20px; }
+  .rx-focus-bar { padding-bottom:10px; }
+  .rx-focus-scene .rx-chapter-kicker { font-size:8px;margin-bottom:10px; }
+  .rx-focus-scene h2 { font-size:32px; }
+  .rx-focus-scene .rx-diagram-description { font-size:14px; }
+}
+@media print { .rx-focus-scene { display:none!important; } }

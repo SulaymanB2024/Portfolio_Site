@@ -1,0 +1,5 @@
+.landing-helmet-control { position: absolute; z-index: 2; display: block; min-width: 44px; min-height: 44px; padding: 0; border: 0; border-radius: 3px; background: none; color: inherit; cursor: grab; touch-action: pan-y pinch-zoom; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+.landing-helmet-control[hidden] { display: none; }
+.landing-helmet-control[data-dragging='true'] { cursor: grabbing; }
+.landing-helmet-control:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+@media print { .landing-helmet-control { display: none; } }

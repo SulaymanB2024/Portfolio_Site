@@ -23,6 +23,44 @@
 .reader-source-preview nav a { display: inline-flex; gap: 7px; justify-content: space-between; align-items: baseline; padding: 9px 0; font: 12px/1.5 var(--editorial-sans); min-height: 44px; box-sizing: border-box; }
 .reader-source-preview .reader-source-full { border-top: 1px solid var(--line); margin-top: 6px; color: var(--muted); }
 .reader-source-preview a:focus-visible, .reader-source-preview button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+/* Keep the reading measure distinct from the wider evidence figures. */
+@media screen {
+  .article-page .reader-prose > p:not(.reader-thesis, .reader-evidence),
+  .article-page .reader-section > p,
+  .article-page .article-lede > p,
+  .article-page .reader-prose > :is(ul, ol),
+  .article-page .reader-section > :is(ul, ol) { max-width: min(65ch, 660px); }
+  .article-page .reader-prose > p:not(.reader-thesis, .reader-evidence),
+  .article-page .reader-section > p,
+  .article-page .article-lede > p { line-height: 1.75; margin-bottom: 1.35em; }
+  .article-page .article-lede > p:first-child,
+  .article-page .reader-prose > p:first-of-type { max-width: min(54ch, 660px); line-height: 1.6; }
+  .article-page .reader-section > :is(h2, h3, h4),
+  .article-page .reader-prose > :is(h2, h3, h4) { text-wrap: pretty; }
+  .article-page .reader-section > h2,
+  .article-page .reader-prose > h2 { max-width: 28ch; margin-bottom: 24px; }
+  .article-page .reader-section > h3,
+  .article-page .reader-prose > h3 { max-width: 36ch; margin-bottom: 16px; }
+  .article-page .reader-section > :is(ul, ol) > li + li,
+  .article-page .reader-prose > :is(ul, ol) > li + li { margin-top: 10px; }
+  .article-page .reader-section > :is(ul, ol) > li > p:last-child,
+  .article-page .reader-prose > :is(ul, ol) > li > p:last-child { margin-bottom: 0; }
+
+  .article-page .reader-prose .reader-table > figcaption { margin: 0; max-width: 65ch; font-weight: 500; color: var(--ink); }
+  .article-page .reader-table > .article-table-wrap { margin-top: 12px; margin-bottom: 16px; }
+  .article-page .reader-prose .reader-table-note { max-width: 72ch; margin-top: 12px; }
+  .article-page .reader-hero-image > figcaption { max-width: 72ch; padding-top: 12px; border-top: 1px solid var(--line); }
+  .article-page .reader-prose .article-original-figures figcaption { max-width: 78ch; }
+  .article-page .reader-prose pre code { font-size: 13px; line-height: 1.7; }
+  .article-page .article-table-wrap:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+  .article-page .article-contents summary:focus-visible,
+  .article-page .article-contents nav a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .article-page .article-contents nav a[aria-current='location'] > span:last-child { font-weight: 500; }
+  .article-page .article-contents .chapter-position { font-variant-numeric: tabular-nums; }
+  .article-page .reader-section:target > h2,
+  .article-page .reader-prose > h2:target { border-top-color: var(--ink); }
+}
 @media (max-width: 760px), (max-width: 950px) and (max-height: 500px) {
   .article-page .reader-aside { border-left: 0; padding-left: 0; }
   .article-page .article-contents nav { padding: 3px 5px 18px; margin-left: 0; max-height: min(55svh, 460px); }
@@ -34,6 +72,16 @@
   .article-page .article-contents nav a { min-height: 44px; align-items: center; grid-template-columns: 24px minmax(0, 1fr); }
   .article-page .article-contents nav a[aria-current='location']::before { left: -5px; width: 2px; }
   .reader-source-preview { inset: auto 16px 16px; width: auto; max-height: calc(100svh - 32px); padding: 16px 20px 20px; }
+}
+@media screen and (max-width: 760px) {
+  .article-page .reader-prose > p:not(.reader-thesis, .reader-evidence),
+  .article-page .reader-section > p,
+  .article-page .article-lede > p { margin-bottom: 1.2em; }
+  .article-page .reader-section > h2,
+  .article-page .reader-prose > h2 { margin-top: 52px; margin-bottom: 22px; }
+  .article-page .reader-prose .reader-table { margin: 36px 0; }
+  .article-page .reader-table > figcaption { line-height: 1.6; }
+  .article-page .reader-prose pre { padding: 18px; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .reader-source-preview:popover-open { animation: reader-note-enter 180ms ease-out; }

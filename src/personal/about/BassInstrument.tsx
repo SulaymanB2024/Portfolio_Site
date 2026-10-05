@@ -2,6 +2,7 @@ import { useCallback, useEffect, useImperativeHandle, useRef, useState, type Ref
 import { bassStrings } from './about-content'
 import { midiFrequency, midiLabel } from './music-phrase'
 import type { AudioArticulation, AudioState, createInterestAudio, LiveBassNote } from './interest-audio'
+import type { PerformanceBowingSource } from './performance-bowing'
 import BassRepertoirePlayer, { type BassRepertoireHandle } from './BassRepertoirePlayer'
 import './bass-instrument.css'
 
@@ -17,12 +18,13 @@ type Props = {
   onSound(index: number, midi: number): void
   onPlaying(sounding: boolean): void
   onRecordingStart(): void
+  onBowing(source: PerformanceBowingSource | null): void
   onError(): void
 }
 const landmarks = [{ position: 0, label: 'Open' }, { position: 5, label: 'Fourth' }, { position: 7, label: 'Fifth' }, { position: 12, label: 'Octave' }]
 const positionLabel = (position: number) => landmarks.find(item => item.position === position)?.label ?? `+${position} semitone${position === 1 ? '' : 's'}`
 
-export default function BassInstrument({ ref, articulation, position, audioState, getAudio, onTechnique, onPosition, onSound, onPlaying, onRecordingStart, onError }: Props) {
+export default function BassInstrument({ ref, articulation, position, audioState, getAudio, onTechnique, onPosition, onSound, onPlaying, onRecordingStart, onBowing, onError }: Props) {
   const [active, setActive] = useState<Set<number>>(() => new Set())
   const [pending, setPending] = useState<Set<number>>(() => new Set())
   const [lastPitch, setLastPitch] = useState<number | null>(null)
@@ -108,7 +110,7 @@ export default function BassInstrument({ ref, articulation, position, audioState
   useEffect(() => () => onPlaying(false), [onPlaying])
   const instruction = articulation === 'arco' ? 'Hold a string to bow. Release to lift the bow.' : 'Tap a string. Let it ring.'
   return <div className="bass-instrument" data-technique={articulation} data-playing={sounding}>
-    <BassRepertoirePlayer ref={repertoire} beforePlay={beforeRecording} onStart={onRecordingStart} onSounding={setSoloSounding}/>
+    <BassRepertoirePlayer ref={repertoire} beforePlay={beforeRecording} onStart={onRecordingStart} onSounding={setSoloSounding} onBowing={onBowing}/>
     <details className="bass-hands-on" open={manualOpen} onToggle={event => setManualOpen(event.currentTarget.open)}>
     <summary className="mono">Play the strings<span aria-hidden="true">+</span></summary>
     <div className="bass-techniques mono" role="group" aria-label="Bass playing technique">

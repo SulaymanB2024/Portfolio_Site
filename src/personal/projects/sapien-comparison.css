@@ -1,0 +1,266 @@
+.sapien-comparison {
+  --cohort-width: 150px;
+  --change-width: 140px;
+  --plot-gap: clamp(24px, 4vw, 56px);
+  margin: 36px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--ink);
+  color: var(--ink);
+}
+.sapien-comparison-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 30px 0;
+}
+.sapien-comparison h3 {
+  font:
+    400 clamp(27px, 2.8vw, 36px)/1.2 Georgia,
+    serif;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+.sapien-price-key {
+  display: flex;
+  gap: 25px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.sapien-price-key > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.sapien-price-symbol {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+}
+.sapien-price-symbol.is-filled {
+  background: var(--ink);
+}
+.sapien-comparison-unit {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.sapien-comparison-axis {
+  position: relative;
+  height: 24px;
+  margin-left: calc(var(--cohort-width) + var(--plot-gap));
+  margin-right: calc(var(--change-width) + var(--plot-gap));
+  font-size: 11px;
+  color: var(--muted);
+}
+.sapien-comparison-axis > span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+.sapien-comparison-row {
+  display: grid;
+  grid-template-columns: var(--cohort-width) minmax(0, 1fr) var(--change-width);
+  gap: var(--plot-gap);
+  align-items: center;
+  min-height: 132px;
+  border-bottom: 1px solid var(--line);
+}
+.sapien-comparison-cohort h4 {
+  font:
+    400 26px/1.2 Georgia,
+    serif;
+  letter-spacing: -0.025em;
+  margin: 0 0 9px;
+}
+.sapien-comparison-cohort > span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.sapien-comparison-plot {
+  position: relative;
+  height: 118px;
+}
+.sapien-comparison-grid {
+  position: absolute;
+  inset: 0;
+  border-inline: 1px solid var(--line);
+}
+.sapien-comparison-grid::before,
+.sapien-comparison-grid::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  border-left: 1px solid var(--line);
+}
+.sapien-comparison-grid::before {
+  left: 33.3333%;
+}
+.sapien-comparison-grid::after {
+  left: 66.6667%;
+}
+.sapien-comparison-range {
+  position: absolute;
+  top: 69px;
+  height: 10px;
+  left: var(--price-before);
+  width: calc(var(--price-after) - var(--price-before));
+  border-block: 1px solid var(--ink);
+  background-image: radial-gradient(var(--ink) 0.6px, transparent 0.85px);
+  background-size: 3px 3px;
+}
+.sapien-comparison-point {
+  position: absolute;
+  top: 31px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.sapien-comparison-point.is-before {
+  left: var(--price-before);
+}
+.sapien-comparison-point.is-after {
+  left: var(--price-after);
+}
+.sapien-comparison-point > span {
+  display: block;
+  font:
+    400 clamp(24px, 2.5vw, 34px)/1 Georgia,
+    serif;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.sapien-comparison-point small {
+  font-size: 0.55em;
+  margin-left: 2px;
+}
+.sapien-comparison-point > i {
+  display: block;
+  box-sizing: border-box;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  position: absolute;
+  top: 36.5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.sapien-comparison-point.is-after > i {
+  background: var(--ink);
+}
+.sapien-comparison-change {
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+}
+.sapien-comparison-change > small {
+  display: block;
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-top: 7px;
+}
+.sapien-comparison-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 30px;
+  align-items: start;
+  padding: 22px 0 0;
+}
+.sapien-comparison-foot p {
+  font:
+    14px/1.65 Georgia,
+    serif;
+  color: var(--muted);
+  max-width: 70ch;
+  margin: 0;
+}
+.sapien-comparison-foot .specimen-source {
+  margin: -8px 0 0;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .sapien-comparison {
+    --cohort-width: 120px;
+    --change-width: 110px;
+    --plot-gap: 24px;
+  }
+  .sapien-comparison-change {
+    font-size: 18px;
+  }
+}
+@media (max-width: 760px) {
+  .sapien-comparison {
+    margin-top: 28px;
+    padding-top: 18px;
+  }
+  .sapien-comparison .specimen-caption {
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+  .sapien-comparison-heading {
+    display: block;
+    margin: 25px 0;
+  }
+  .sapien-comparison h3 {
+    font-size: 30px;
+  }
+  .sapien-price-key {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+  .sapien-comparison-unit {
+    margin-bottom: 14px;
+  }
+  .sapien-comparison-axis {
+    margin-inline: 10px;
+  }
+  .sapien-comparison-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 20px;
+    padding-top: 22px;
+  }
+  .sapien-comparison-cohort h4 {
+    display: inline;
+    margin: 0 12px 0 0;
+    font-size: 24px;
+  }
+  .sapien-comparison-change {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+    font-size: 17px;
+  }
+  .sapien-comparison-change > small {
+    font-size: 9px;
+    margin-top: 3px;
+  }
+  .sapien-comparison-plot {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-inline: 10px;
+    height: 118px;
+  }
+  .sapien-comparison-point > span {
+    font-size: clamp(24px, 7vw, 30px);
+  }
+  .sapien-comparison-foot {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .sapien-comparison-foot .specimen-source {
+    margin: 0;
+  }
+}
+@media print {
+  .sapien-comparison {
+    break-inside: avoid;
+  }
+  .sapien-comparison-range {
+    print-color-adjust: exact;
+  }
+}

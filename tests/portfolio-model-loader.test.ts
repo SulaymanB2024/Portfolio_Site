@@ -4,6 +4,30 @@ import { BufferGeometry, Group, Mesh, MeshBasicMaterial } from 'three'
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js'
 import { createPortfolioModelLoader } from '../src/personal/portfolio-model-loader.ts'
 
+function glbHeader() {
+  const bytes = new Uint8Array(28), header = new DataView(bytes.buffer)
+  header.setUint32(0, 0x46546c67, true); header.setUint32(4, 2, true)
+  header.setUint32(8, bytes.length, true); header.setUint32(12, 8, true)
+  header.setUint32(16, 0x4e4f534a, true)
+  return bytes
+}
+
+test('non-GLB paths and invalid binary responses never reach the decoder', async context => {
+  let fetches = 0, parses = 0
+  let response = new Uint8Array(2)
+  context.mock.method(globalThis, 'fetch', async () => { fetches++; return new Response(response) })
+  context.mock.method(GLTFLoader.prototype, 'parseAsync', async () => { parses++; return {} as GLTF })
+  const loader = createPortfolioModelLoader('/')
+  await assert.rejects(loader.load('/model.gltf'), /must be GLB/)
+  assert.equal(fetches, 0)
+  await assert.rejects(loader.load('/model.glb?v=123'), /Truncated GLB/)
+  assert.equal(fetches, 1); assert.equal(parses, 0)
+  response = glbHeader(); response[0] = 0
+  await assert.rejects(loader.load('/model.glb?v=123'), /Invalid binary glTF/)
+  assert.equal(fetches, 2); assert.equal(parses, 0)
+  loader.dispose()
+})
+
 test('superseded fetches abort without starting a decode', async context => {
   let parses = 0
   context.mock.method(GLTFLoader.prototype, 'parseAsync', async () => { parses++; return {} as GLTF })
@@ -28,7 +52,7 @@ test('a decode completing after teardown releases shared resources exactly once'
   let finish!: (gltf: GLTF) => void
   let began!: () => void
   const started = new Promise<void>(resolve => { began = resolve })
-  context.mock.method(globalThis, 'fetch', async () => new Response(new Uint8Array(4)))
+  context.mock.method(globalThis, 'fetch', async () => new Response(glbHeader()))
   context.mock.method(GLTFLoader.prototype, 'parseAsync', () => { began(); return new Promise<GLTF>(resolve => { finish = resolve }) })
   const loader = createPortfolioModelLoader('/')
   const pending = loader.load('/test.glb')

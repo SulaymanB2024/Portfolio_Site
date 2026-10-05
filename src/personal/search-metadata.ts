@@ -1,7 +1,7 @@
 import catalog from './editorial/data/catalog.json' with { type: 'json' }
-import { contact } from './content.ts'
 import { publicPages, siteOrigin } from './public-pages.ts'
 import { siteMetadata } from './site-copy.ts'
+import { identity } from './identity.ts'
 import type { ArticleSummary } from './editorial/types.ts'
 
 export const personId = `${siteOrigin}/#person`
@@ -74,12 +74,16 @@ export function searchMetadata(route: string): SearchMetadata {
   const imageId = `${image.url}#image`
   const graph: SchemaNode[] = [
     {
-      '@type': 'Person', '@id': personId, name: 'Sulayman Bowles',
-      url: `${siteOrigin}/about`, description: siteMetadata.pages.about,
-      sameAs: [contact.linkedin, 'https://github.com/SulaymanB2024'],
+      '@type': 'Person', '@id': personId, name: identity.name,
+      givenName: identity.givenName, familyName: identity.familyName,
+      url: `${siteOrigin}/about`, mainEntityOfPage: `${siteOrigin}/about`,
+      description: normalized === '' ? identity.homeSummary : normalized === 'about' ? page.description : identity.summary,
+      sameAs: identity.profiles.map(profile => profile.href),
+      affiliation: { '@type': 'CollegeOrUniversity', name: identity.education.institution, url: 'https://www.utexas.edu/' },
     },
     {
       '@type': 'WebSite', '@id': websiteId, name: 'Sulayman Bowles',
+      alternateName: ['sulayman-bowles.dev'],
       url: `${siteOrigin}/`, description: siteMetadata.description,
       inLanguage: 'en-US', publisher: reference(personId),
     },
@@ -172,6 +176,7 @@ export function withSearchHead(template: string, metadata: SearchMetadata) {
   const tags = metadataTags(metadata).map(tag => `<meta ${tag.attribute}="${tag.key}" content="${escapeMetadata(tag.value)}" />`).join('\n')
   const schema = metadata.schema ? `<script id="page-schema" data-route="${escapeMetadata(metadata.route)}" type="application/ld+json">${serializeSchema(metadata.schema)}</script>` : ''
   return template
+    .replace(/<link\b[^>]*type=["']application\/atom\+xml["'][^>]*>/gi, '')
     .replace(/<title>[^]*?<\/title>/gi, '')
     .replace(/<meta\b[^>]*>/gi, tag => {
       const key = tag.match(/\b(?:name|property)\s*=\s*["']([^"']+)["']/i)?.[1]
@@ -179,5 +184,5 @@ export function withSearchHead(template: string, metadata: SearchMetadata) {
     })
     .replace(/<link\b[^>]*\brel=["']canonical["'][^>]*>/gi, '')
     .replace(/<script\b[^>]*\bid=["']page-schema["'][^>]*>[^]*?<\/script>/gi, '')
-    .replace('</head>', () => `<title>${escapeMetadata(metadata.title)}</title>\n<link rel="canonical" href="${escapeMetadata(metadata.canonical)}" />\n${tags}\n${schema}\n</head>`)
+    .replace('</head>', () => `<title>${escapeMetadata(metadata.title)}</title>\n<link rel="canonical" href="${escapeMetadata(metadata.canonical)}" />\n<link rel="alternate" type="application/atom+xml" title="Sulayman Bowles — Writing" href="${siteOrigin}/feed.xml" />\n${tags}\n${schema}\n</head>`)
 }

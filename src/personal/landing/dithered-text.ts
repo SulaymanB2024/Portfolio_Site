@@ -64,8 +64,8 @@ vec4 textSample(vec2 uv,float row){
 float printedHeading(vec2 local,vec2 state,vec2 measure,float row,float threshold){
   if(state.x<.0001||state.y>.9999)return 0.;
   vec4 resting=textSample(local,row);
-  // A held headline picks up moving ink without changing its silhouette.
-  if(state.x>.9999&&state.y<.0001)return resting.a*step(threshold,1.-scrollInk*.06);
+  // Keep reading holds fully inked, even while the adjacent sculpture responds.
+  if(state.x>.9999&&state.y<.0001)return resting.a;
   vec2 grainCell=floor(local*textPixels/3.);
   float grain=textHash(grainCell);
   float field=clamp(local.x/max(.001,measure.x),0.,1.)*.62+clamp((1.-local.y)/max(.001,measure.y),0.,1.)*.08+resting.r*.22+grain*.08;
@@ -75,7 +75,7 @@ float printedHeading(vec2 local,vec2 state,vec2 measure,float row,float threshol
   float looseness=max(1.-formed,released);
   float phase=max(1.-state.x,state.y),moving=4.*phase*(1.-phase);
   // Coherent grain paths depend only on scroll position, and retrace in reverse.
-  vec2 stream=vec2(9.+4.*sin(local.y*29.+scrollPhase*.04),2.*sin(local.x*24.+local.y*12.)+3.*(grain-.5));
+  vec2 stream=vec2(12.+4.*sin(local.y*29.+scrollPhase*.04),2.*sin(local.x*24.+local.y*12.)+2.*(grain-.5));
   vec2 source=local-stream/textPixels*looseness*moving;
   source.y+=sin(grainCell.x*.7+grainCell.y*.5)*1.5/textPixels.y*moving*looseness;
   vec4 ink=textSample(source,row);
@@ -86,10 +86,14 @@ float printedText(vec2 uv){
   vec2 local=(uv-textBox.xy)/textBox.zw;
   if(local.x<0.||local.y<0.||local.x>1.||local.y>1.)return 0.;
   vec2 pixel=gl_FragCoord.xy;
-  float threshold=clamp(mix(textBayer(pixel),textBayer(pixel/2.),scrollInk*.4)+inkWave(pixel)*scrollInk*.05,0.,1.),alpha=0.;
+  float threshold=textBayer(pixel),alpha=0.;
+  if(scrollInk>0.||scrollPassage>0.){
+    float movingInk=inkSweep(uv);
+    threshold=clamp(mix(threshold,textBayer(pixel/2.),movingInk*.42)+inkWave(pixel)*movingInk*.035,0.,1.);
+  }
   // The incoming ink belongs inside the GLB aperture; the rim occludes both titles.
   float aperture=portalEnabled>.5?texture2D(portalMask,uv).r:0.;
-  float rim=portalEnabled>.5?texture2D(portalFrame,uv).a:0.;
+  float rim=portalEnabled>.5?texture2D(portalFrame,uv).a*portalRim:0.;
   ${CHAPTERS.map((_,index)=>`alpha=max(alpha,printedHeading(local,textState[${index}],textMeasure[${index}],${index}.,threshold)*(portalEnabled>.5?(${index}.>portalTextLeg+.5?aperture:1.-aperture):1.)*(1.-rim));`).join('\n  ')}
   return alpha;
 }`

@@ -1,294 +1,32 @@
-import { useRef, type ReactNode } from 'react'
+import { useRef, type MouseEvent } from 'react'
 import { caseStudies, chapterId, type CaseStudy } from './case-studies'
+import { caseNarratives } from './case-narratives'
 import { CaseHeroArtwork } from './CaseHeroArtwork'
 import { AtlasSourceComparison, PayrollLifecycle, ViralReviewLoop } from './CaseDossierEvidence'
+import { WorkMaterials } from './WorkMaterials'
 import { Art } from '../Art'
-import payrollRecord from '../../../public/research/payrollpro-system-record.json'
 import './case-studies.css'
 import './case-dossier.css'
 import { useProjectReading } from './useProjectReading'
+import { projectChapterHref } from './project-reading-position'
 import { ProjectEndnav } from './ProjectEndnav'
 
-function JumpLink({ slug, index, children, current = false }: { slug: string; index: number; children: ReactNode; current?: boolean }) {
-  return (
-    <a href={`#/work/${slug}?chapter=${chapterId(index)}`} aria-current={current ? 'location' : undefined}>
-      <span className="mono" aria-hidden="true">
-        0{index + 1}
-      </span>
-      {children}
-    </a>
-  )
-}
-
-function Chapter({ index, label, title, copy, children }: { index: number; label: string; title: ReactNode; copy?: ReactNode; children?: ReactNode }) {
-  const kind =
-    label === 'Source material'
-      ? 'sources'
-      : index === 0
-        ? 'opening'
-        : index === 1
-          ? 'system'
-          : ['Decisions & tradeoffs', 'What the prototype establishes', 'Design boundaries'].includes(label)
-            ? 'decisions'
-            : 'evidence'
-  return (
-    <section className={`study-chapter study-chapter-${kind}`} id={chapterId(index)} tabIndex={-1} aria-labelledby={`${chapterId(index)}-title`}>
-      <div className="study-chapter-label">
-        <span className="mono">{label}</span>
-        <span className="mono" aria-hidden="true">
-          0{index + 1}
-        </span>
-      </div>
-      <header className="study-dossier-heading">
-        <h2 id={`${chapterId(index)}-title`}>{title}</h2>
-      </header>
-      {kind === 'opening' && copy && <div className="study-chapter-copy">{copy}</div>}
-      {children && <div className="study-dossier-body">{children}</div>}
-      {kind !== 'opening' && copy && <div className="study-chapter-copy">{copy}</div>}
-    </section>
-  )
-}
-
-function Source({ href, title, children, download = false }: { href: string; title: string; children: ReactNode; download?: boolean }) {
-  return (
-    <a className="study-source" href={href} {...(download ? { download: true } : href.startsWith('https:') ? { target: '_blank', rel: 'noreferrer' } : {})}>
-      <div>
-        <h3>{title}</h3>
-        <p>{children}</p>
-      </div>
-      <span aria-hidden="true">{download ? '↓' : href.startsWith('https:') ? '↗' : '→'}</span>
-    </a>
-  )
-}
-
-function AtlasStory() {
-  return (
-    <>
-      <Chapter
-        index={0}
-        label="The question"
-        title={
-          <>
-            What makes an audit <em>worth acting on?</em>
-          </>
-        }
-        copy={
-          <>
-            <p>A reviewer needs to know why a warning was raised.</p>
-            <p>Atlas retains each finding’s URL, captured page state, and reasoning. Failed measurements stay visible.</p>
-          </>
-        }
-      />
-      <Chapter
-        index={1}
-        label="The system"
-        title={<>From page capture to review.</>}
-        copy={
-          <>
-            <p>I designed the architecture, crawler behavior, evidence policy, and interface. Observations remain attached through export.</p>
-          </>
-        }>
-        <ol className="study-process">
-          {[
-            ['Capture', 'Retain the URL, response and observed state.'],
-            ['Connect', 'Map links and retain crawl context in SQLite.'],
-            ['Review', 'Keep supporting evidence attached to the finding.'],
-            ['Export', 'Carry context into structured reports.']
-          ].map(([title, detail], index) => (
-            <li key={title}>
-              <span className="mono">0{index + 1}</span>
-              <div>
-                <h3>{title}</h3>
-                <p>{detail}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </Chapter>
-      <Chapter
-        index={2}
-        label="Inspect the evidence"
-        title={
-          <>
-            Same response code. <em>Different content states.</em>
-          </>
-        }
-        copy={
-          <>
-            <p>Both returned 200 OK. Their source content requires different checks.</p>
-          </>
-        }>
-        <AtlasSourceComparison />
-      </Chapter>
-      <Chapter index={3} label="Decisions & tradeoffs" title={<>The unknowns stay visible.</>}>
-        <div className="study-decisions">
-          <div>
-            <h3>Separate observation from severity.</h3>
-            <p>A missing canonical is an observation. This sample assigns no defect or severity.</p>
-          </div>
-          <div>
-            <h3>Keep source and rendered states distinct.</h3>
-            <p>Embedded records need a rendering check before judging content coverage.</p>
-          </div>
-          <div>
-            <h3>Make a failed measurement inspectable.</h3>
-            <p>Failed fetches and provider gaps stay separate from site findings.</p>
-          </div>
-        </div>
-        <p className="study-status-note">
-          Project record, July 2026: the core crawl and evidence workflow had shipped; provider integration and scoring policy remained in development.
-        </p>
-      </Chapter>
-      <Chapter index={4} label="Source material" title="Go to the source.">
-        <Source href="https://github.com/SulaymanB2024/Thick-Scraper-VOID-" title="The Atlas repository">
-          The crawler, audit workflow, run persistence, and documented implementation limits.
-        </Source>
-        <Source href={`${import.meta.env.BASE_URL}research/atlas-open-corpus-run-2026-07-16.json`} title="The retained sample" download>
-          Two source captures from July 16, 2026. The data used in the comparison above.
-        </Source>
-        <Source href="#/writing/atlas-building-an-evidence-console" title="Building Atlas">
-          The product decisions and improvement cycle behind the console.
-        </Source>
-      </Chapter>
-    </>
-  )
-}
-
-function PayrollStory() {
-  return (
-    <>
-      <Chapter
-        index={0}
-        label="The question"
-        title={
-          <>
-            Privacy is only <em>part of the problem.</em>
-          </>
-        }
-        copy={
-          <>
-            <p>Payroll needs confidential amounts, authorized transfers, and a record.</p>
-            <p>
-              I led a three-person team at the June 2025 OnionDAO Hackathon, combining Token-2022 confidential-transfer mechanics, multisig treasury control and audit visibility in
-              a Solana prototype.
-            </p>
-          </>
-        }
-      />
-      <Chapter
-        index={1}
-        label="The architecture"
-        title={<>A payment has a lifecycle.</>}
-        copy={
-          <>
-            <p>Follow a batch through release, cancellation, and the checks governing each operation.</p>
-          </>
-        }>
-        <PayrollLifecycle />
-      </Chapter>
-      <Chapter
-        index={2}
-        label="What the prototype establishes"
-        title={
-          <>
-            Before production, prove <em>the whole path.</em>
-          </>
-        }>
-        <div className="study-decisions">
-          <div>
-            <h3>What the retained record shows.</h3>
-            <p>The teammate recap describes confidential transfers, multisig, Solana Pay, and QR payouts; the state record documents batch logic.</p>
-          </div>
-          <div>
-            <h3>What remains before production.</h3>
-            <p>Simplified mint/burn behavior and a skeleton payroll test require end-to-end testing and deployment documentation.</p>
-          </div>
-        </div>
-        <p className="study-status-note">
-          The résumé records first place. A teammate’s public recap corroborates a win; an organizer placement record is not included in the retained sources.
-        </p>
-      </Chapter>
-      <Chapter index={3} label="Source material" title="Go to the source.">
-        <Source href={payrollRecord.source_basis[0].source_url!} title="The teammate recap">
-          Aayush Baniya’s account of the team, the build, and the result.
-        </Source>
-        <Source href={`${import.meta.env.BASE_URL}research/payrollpro-system-record.json`} title="The prototype state record" download>
-          Payroll states, transfer operations, and implementation limits in a structured artifact.
-        </Source>
-        <Source href="https://github.com/SulaymanB2024/OnionDAO-Project" title="Confidential-transfer recipes">
-          A related cookbook fork, not the complete PayrollPro application.
-        </Source>
-      </Chapter>
-    </>
-  )
-}
-
-function ViralStory() {
-  return (
-    <>
-      <Chapter
-        index={0}
-        label="The question"
-        title={<>What improved: the agent, or its luck?</>}
-        copy={
-          <>
-            <p>More views can reflect luck rather than a better agent.</p>
-            <p>I audited ViralBench and designed an outer loop: inspect traces, propose changes, replay tasks, and submit evidence for review.</p>
-            <p>ViralBench is an existing open-source marketing agent.</p>
-          </>
-        }
-      />
-      <Chapter
-        index={1}
-        label="The improvement loop"
-        title={
-          <>
-            One change. <em>An inspectable experiment.</em>
-          </>
-        }
-        copy={
-          <>
-            <p>Codex would submit a patch and test results for independent evaluation before a live trial.</p>
-          </>
-        }>
-        <ViralReviewLoop />
-      </Chapter>
-      <Chapter index={2} label="Design boundaries" title={<>What would count as progress?</>}>
-        <div className="study-decisions">
-          <div>
-            <h3>Improve the system around the output.</h3>
-            <p>Inspect research, creation, review, and publishing decisions to locate the failure.</p>
-          </div>
-          <div>
-            <h3>Separate replay from live trials.</h3>
-            <p>Replay tests retained conditions; live trials test current conditions.</p>
-          </div>
-          <div>
-            <h3>Require independent evaluation.</h3>
-            <p>The engineering agent proposes changes; others evaluate and approve release.</p>
-          </div>
-        </div>
-        <p className="study-status-note">
-          Published July 2026 as an engineering design. The study distinguishes existing repository behavior from proposed harness work; no deployed evaluation service or measured
-          uplift is claimed.
-        </p>
-      </Chapter>
-      <Chapter index={3} label="Source material" title="Go to the source.">
-        <Source href="#/writing/viralbench-codex-agent-harness" title="The full engineering study">
-          The architecture, source analysis, proposed trace model, and experiment design.
-        </Source>
-        <Source href="https://github.com/JibranK12345/Viral-Bench/blob/5f5f57e251023ceb37961c0fc2c808f67ceb71eb/marketing-agent.ts" title="The audited agent revision">
-          The upstream implementation examined in the article, pinned to a specific revision.
-        </Source>
-      </Chapter>
-    </>
-  )
-}
-
 export default function CaseStudyPage({ study, dark }: { study: CaseStudy; dark: boolean }) {
+  const document = caseNarratives[study.slug]
   const root = useRef<HTMLElement>(null)
-  const [active] = useProjectReading(root, study.slug, '.study-chapter', chapterId(0))
+  const [active, setActive] = useProjectReading(root, study.slug, '.study-chapter', chapterId(0))
   const next = caseStudies[(caseStudies.indexOf(study) + 1) % caseStudies.length]
+  const chapterHref = (id: string) =>
+    typeof window === 'undefined' ? `#/work/${study.slug}?chapter=${id}` : projectChapterHref(location.hash, location.pathname, location.search, study.slug, id)
+  function jump(event: MouseEvent<HTMLAnchorElement>, id: string) {
+    if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    event.preventDefault()
+    const section = globalThis.document.getElementById(id)
+    section?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' })
+    section?.focus({ preventScroll: true })
+    setActive(id)
+    history.replaceState(history.state, '', projectChapterHref(location.hash, location.pathname, location.search, study.slug, id))
+  }
   return (
     <article ref={root} className={`case-study case-dossier case-study-${study.slug}`}>
       <a className="study-back mono" href="#/work">
@@ -297,13 +35,12 @@ export default function CaseStudyPage({ study, dark }: { study: CaseStudy; dark:
       <header className="study-hero">
         <div className="study-hero-copy">
           <span className="eyebrow">
-            Project study {study.number} / {study.category}
+            {study.category} / {study.period}
           </span>
           <h1>
             {study.slug === 'viralbench' ? (
               <>
-                ViralBench
-                <br />
+                ViralBench <br />
                 <em>+ Codex</em>
               </>
             ) : (
@@ -311,61 +48,53 @@ export default function CaseStudyPage({ study, dark }: { study: CaseStudy; dark:
             )}
             <span className="period">.</span>
           </h1>
-          <p className="study-title">{study.title}</p>
-          <p className="study-summary">{study.summary}</p>
-          <JumpLink slug={study.slug} index={study.slug === 'atlas' ? 2 : 1}>
-            {study.slug === 'atlas' ? 'Inspect the sample' : 'Explore the design'}
-            <span aria-hidden="true">↓</span>
-          </JumpLink>
-        </div>
-        <figure className="study-hero-figure">
-          {study.slug === 'atlas' ? (
-            <>
-              <Art kind="globe" dark={dark} className="study-glb" idleMotion={false} />
-              <figcaption>
-                <span className="mono">Fig. {study.number}</span>
-                {study.caption}
-              </figcaption>
-            </>
-          ) : (
-            <>
-              <CaseHeroArtwork kind={study.slug} />
-              <figcaption>
-                <span className="mono">Fig. {study.number}</span>
-                {study.caption}
-              </figcaption>
-            </>
-          )}
-        </figure>
-      </header>
-      <dl className="study-facts">
-        {[
-          ['My role', study.role],
-          ['Period', study.period],
-          ['Project state', study.status],
-          ['Medium', study.medium]
-        ].map(([label, value]) => (
-          <div key={label}>
-            <dt className="mono">{label}</dt>
-            <dd>{value}</dd>
-          </div>
-        ))}
-      </dl>
-      <div className="study-reading">
-        <aside className="study-contents project-reading-bar">
-          <span className="eyebrow">In this study</span>
-          <nav aria-label="In this study">
-            {study.chapters.map((chapter, index) => (
-              <JumpLink key={chapter} slug={study.slug} index={index} current={active === chapterId(index)}>
-                {chapter}
-              </JumpLink>
-            ))}
-          </nav>
-          <a className="study-context-link mono" href="#/resume">
-            View résumé →
+          <p className="study-title">{document.deck}</p>
+          <p className="study-summary">{document.summary}</p>
+          <a href={chapterHref(document.chapters[0].id)} onClick={(event) => jump(event, document.chapters[0].id)}>
+            Read the project <span aria-hidden="true">↓</span>
           </a>
-        </aside>
-        <div className="study-prose">{study.slug === 'atlas' ? <AtlasStory /> : study.slug === 'payrollpro' ? <PayrollStory /> : <ViralStory />}</div>
+        </div>
+        <div className="study-hero-figure">
+          {study.slug === 'atlas' ? <Art kind="globe" dark={dark} className="study-glb" idleMotion={false} /> : <CaseHeroArtwork kind={study.slug} />}
+        </div>
+      </header>
+      <div className="study-reading">
+        <nav className="study-contents project-reading-bar" aria-label="In this project">
+          {document.chapters.map((chapter, index) => (
+            <a key={chapter.id} href={chapterHref(chapter.id)} aria-current={active === chapter.id ? 'location' : undefined} onClick={(event) => jump(event, chapter.id)}>
+              <span className="mono" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              {chapter.label}
+            </a>
+          ))}
+        </nav>
+        <div className="study-prose">
+          {document.chapters.map((chapter, index) => (
+            <section className="study-chapter" id={chapter.id} key={chapter.id} tabIndex={-1} aria-labelledby={`${chapter.id}-title`}>
+              <div className="study-chapter-label">
+                <span className="mono">{chapter.label}</span>
+                <span className="mono" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')} / {String(document.chapters.length).padStart(2, '0')}
+                </span>
+              </div>
+              <div className="study-account">
+                <h2 id={`${chapter.id}-title`}>{chapter.title}</h2>
+                <div className="study-chapter-copy">
+                  {chapter.body.map((text) => (
+                    <p key={text}>{text}</p>
+                  ))}
+                </div>
+              </div>
+              {chapter.artifact && (
+                <div className="study-dossier-body">
+                  {chapter.artifact === 'atlas' ? <AtlasSourceComparison /> : chapter.artifact === 'payroll' ? <PayrollLifecycle /> : <ViralReviewLoop />}
+                </div>
+              )}
+              <WorkMaterials chapter={chapter} base={import.meta.env.BASE_URL} />
+            </section>
+          ))}
+        </div>
       </div>
       <ProjectEndnav next={next} />
     </article>

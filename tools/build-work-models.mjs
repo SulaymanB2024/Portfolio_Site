@@ -11,16 +11,17 @@ import { vec, materialStyles } from './work-models/geometry.mjs'
 import { opportunityInstrument, marketObservatory } from './work-models/instruments.mjs'
 import { unfinishedMechanism } from './work-models/organic.mjs'
 
-import { pairedPopulation } from './work-models/population.mjs'
+import { audienceTheatre } from './work-models/sapien.mjs'
+import { shaftVertexRadius } from './work-models/framing.mjs'
 
 const output = resolve(import.meta.dirname, '../public/work-studies')
 const io = new NodeIO()
 // These modules are the authoritative source; no legacy inline model builders.
 const studies = [
-  { "id": "internshipdeadlines", "project": "InternshipDeadlines", "title": "Opportunity instrument", "concept": "Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage with fitted retention shoes. Recessed annular rail channels, seated scale marks, tapered gear spokes, stepped bored hubs and a hinged pendulum connect dates, data and opportunity.", rotation: [0.08, -0.2, -0.12], make: opportunityInstrument },
-  { "id": "sapien", "project": "Sapien", "title": "Paired population instrument", "concept": "Two interleaved chamfered metal ribbons follow one continuous spindle. Flush indexed inserts, fine recessed tracers, return lips and seated terminal fittings give the paired population concept an abstract, non-anatomical form. Both bands articulate around the same supported shaft.", rotation: [0.10, -0.22, -0.17], make: pairedPopulation },
-  { "id": "investing-markets", "project": "Investing & Markets", "title": "Market observatory", "concept": "Smooth continent reliefs with coastal sidewalls, seventeen generalized land outlines, selected low terrain ranges and a sparse graticule sit on a continuous steel ocean shell. Grooved meridian and equatorial rails, stepped polar bearings, a partial indexed vernier and counterbored tapered geographic terminals carry four raised routes.", rotation: [0.12, -0.13, -0.13], make: marketObservatory },
-  { "id": "miscellaneous", "project": "Miscellaneous", "title": "Unfinished mechanism", "concept": "Five pierced folded sheets with rounded lightening windows and return lips form an open mechanism. Crease-aligned shafts, grooved hinge knuckles, slotted fasteners, two tension springs with fitted lead attachments and a geared core with tapered spokes and stepped bored hubs give the experimental form coherent construction.", rotation: [0.08, -0.21, 0.09], make: unfinishedMechanism },
+  { "id": "internshipdeadlines", "project": "InternshipDeadlines", "title": "Opportunity instrument", "concept": "Twelve broad forward-facing calendar plates carry enlarged graphite ordinals in recessed wells. Fitted retention shoes, a machined open carriage and thinner rear crescents give the dates a clear physical hierarchy. Binding eyes, index channels and an exposed escapement connect dates, data and opportunity.", rotation: [0.08, -0.2, -0.12], make: opportunityInstrument },
+  { "id": "sapien", "project": "Sapien", "title": "Audience comparison", "concept": "Five carved portrait busts form a crescent around two product prototypes, one oval and one softly faceted. Modeled noses, brows, eye sockets, cheeks and jaws give the audience a sculptural human presence. Neck and shoulder masses join a continuous carved base; the comparison vessels turn on integral vertical spigots inside fitted sockets. The audience and paired stimulus describe a tangible concept comparison.", rotation: [0.24, -0.12, 0], make: audienceTheatre },
+  { "id": "investing-markets", "project": "Investing & Markets", "title": "Market observatory", "concept": "A substantial Earth sits inside lighter armillary rails. Twenty-two generalized geographic outlines, connected Eurasia, adaptive spherical relief, fine coastal shoulders and sparse graticules distinguish land from the dark ocean shell. Fitted polar bearings, an indexed vernier and lower raised observation routes give the globe considered instrument construction.", rotation: [0.12, -0.13, -0.13], make: marketObservatory },
+  { "id": "miscellaneous", "project": "Miscellaneous", "title": "Open experimental mechanism", "concept": "Five exposed involute gears mesh on fixed supported shafts between three opened porcelain service shrouds. A shared tooth module and twenty-degree pressure angle establish exact signed drive ratios. Front retaining caps, separate rear bearings, a stepped structural spine and slotted fasteners give the machine clear depth and working construction.", rotation: [0.08, -0.21, 0.09], make: unfinishedMechanism },
 ]
 
 function normalize(geometries, rotation) {
@@ -70,14 +71,15 @@ function toDocument(study) {
     const indices=document.createAccessor(`${part.name} indices`).setType('SCALAR').setArray(geometry.getAttribute('position').count>65535?new Uint32Array(array):new Uint16Array(array)).setBuffer(buffer)
     const primitive=document.createPrimitive().setAttribute('POSITION',position).setAttribute('NORMAL',normal).setIndices(indices).setMaterial(materials[part.material])
     const node=document.createNode(part.name).setMesh(document.createMesh(part.name).addPrimitive(primitive))
-    if(pivot)node.setTranslation(pivot.toArray()).setExtras({articulationAxis:axis.toArray(),articulationPivot:pivot.toArray(),articulation:'shaft rotation'})
+    const motion=part.motion?{...part.motion,...(part.motion.module?{sourceModule:part.motion.module,module:part.motion.module*normalized.scale}:{})}:null
+    if(pivot)node.setTranslation(pivot.toArray()).setExtras({articulationAxis:axis.toArray(),articulationPivot:pivot.toArray(),articulation:'shaft rotation',...(motion?{articulationMotion:motion}:{})})
     scene.addChild(node)
     geometry.dispose()
   }
   return document
 }
 
-/** Exact vertex radii over the renderer's shaft-angle interval, plus safe burst. */
+/** Exact vertex radii for hover hinges or continuous shafts, plus safe burst. */
 function framingEnvelope(document,bounds) {
   const center=vec(...bounds.min).add(vec(...bounds.max)).multiplyScalar(.5)
   let rest=0,fullArticulation=0,fullArticulationPlusBurst=0,phaseIndex=0
@@ -94,19 +96,14 @@ function framingEnvelope(document,bounds) {
         const v=vec(...positions.slice(i,i+3)),radius=pivot.clone().add(v).length()
         restRadius=Math.max(restRadius,radius)
         if(!hover){articulatedRadius=Math.max(articulatedRadius,radius);continue}
-        const parallel=axis.clone().multiplyScalar(axis.dot(v)),perpendicular=v.clone().sub(parallel),cross=axis.clone().cross(v)
-        const a=pivot.dot(perpendicular),b=pivot.dot(cross)
-        const base=pivot.lengthSq()+v.lengthSq()+2*pivot.dot(parallel)
-        const peak=Math.atan2(b,a),angles=[-.18,.18]
-        if(peak>=-.18&&peak<=.18)angles.push(peak)
-        for(const angle of angles)articulatedRadius=Math.max(articulatedRadius,Math.sqrt(Math.max(0,base+2*(a*Math.cos(angle)+b*Math.sin(angle)))))
+        articulatedRadius=Math.max(articulatedRadius,shaftVertexRadius(v,pivot,axis,node.getExtras().articulationMotion?.kind==='continuous'))
       }
     }
     const burstTranslationBound=hover?Math.hypot(.07,.04*Math.sin(phaseIndex++*1.4*.6)):0
     rest=Math.max(rest,restRadius)
     fullArticulation=Math.max(fullArticulation,articulatedRadius)
     fullArticulationPlusBurst=Math.max(fullArticulationPlusBurst,articulatedRadius+burstTranslationBound)
-    if(hover)articulation.push({name:node.getName(),restRadius,articulatedRadius,burstTranslationBound,articulatedPlusBurstRadius:articulatedRadius+burstTranslationBound})
+    if(hover)articulation.push({name:node.getName(),range:node.getExtras().articulationMotion?.kind==='continuous'?'full rotation':'hover hinge',restRadius,articulatedRadius,burstTranslationBound,articulatedPlusBurstRadius:articulatedRadius+burstTranslationBound})
   }
   const paddingRequired=Math.max(0,fullArticulationPlusBurst-rest)
   if(paddingRequired>.16)throw new Error(`Articulated envelope requires ${paddingRequired} padding, beyond the renderer's .16 reserve`)
@@ -151,9 +148,18 @@ async function inspect(path) {
     }
   }
   for(const node of document.getRoot().listNodes()) if(node.getName().startsWith('hover-')){
-    const {articulationAxis:axis,articulationPivot:pivot}=node.getExtras()
+    const {articulationAxis:axis,articulationPivot:pivot,articulationMotion:motion}=node.getExtras()
     if(!Array.isArray(axis)||axis.length!==3||!axis.every(Number.isFinite)||Math.abs(Math.hypot(...axis)-1)>1e-6)throw new Error(`${path}: invalid articulation axis for ${node.getName()}`)
     if(!Array.isArray(pivot)||pivot.length!==3||!pivot.every(Number.isFinite)||pivot.some((value,i)=>Math.abs(value-node.getTranslation()[i])>1e-9))throw new Error(`${path}: missing or inconsistent articulation pivot for ${node.getName()}`)
+    if(motion){
+      if(motion.kind!=='continuous'||!Number.isFinite(motion.angularVelocity)||!Number.isFinite(motion.ratio)||!motion.ratio||Math.abs(motion.ratio)>10||Math.abs(motion.angularVelocity*motion.ratio)>2)throw new Error(`${path}: invalid continuous shaft motion for ${node.getName()}`)
+      if(motion.teeth&&(!Number.isInteger(motion.teeth)||motion.teeth<8||!Number.isFinite(motion.module)||motion.module<=0))throw new Error(`${path}: invalid gear dimensions for ${node.getName()}`)
+      if(motion.driver){
+        const driver=document.getRoot().listNodes().find(part=>part.getName()===motion.driver)
+        const driveMotion=driver?.getExtras().articulationMotion
+        if(!driveMotion||!Number.isFinite(driveMotion.angularVelocity)||Math.abs(driveMotion.angularVelocity-motion.angularVelocity)>1e-6||driveMotion.ratio!==1)throw new Error(`${path}: inconsistent shaft driver for ${node.getName()}`)
+      }
+    }
   }
   const bounds = getBounds(document.getRoot().listScenes()[0])
   const spans = bounds.max.map((value, axis) => value - bounds.min[axis])
@@ -169,7 +175,7 @@ async function inspect(path) {
     triangles,
     meshes: document.getRoot().listMeshes().length,
     materials: document.getRoot().listMaterials().length,
-    articulation: document.getRoot().listNodes().filter(node=>node.getName().startsWith('hover-')).map(node=>({name:node.getName(),pivot:node.getTranslation(),axis:node.getExtras().articulationAxis})),
+    articulation: document.getRoot().listNodes().filter(node=>node.getName().startsWith('hover-')).map(node=>({name:node.getName(),pivot:node.getTranslation(),axis:node.getExtras().articulationAxis,...(node.getExtras().articulationMotion?{motion:node.getExtras().articulationMotion}:{})})),
     bounds,
     framing: framingEnvelope(document,bounds),
     validation: { errors: 0, warnings: 0, degenerateTriangles, minimumNormalLength, maximumNormalLength },
@@ -182,16 +188,16 @@ for (const id of selectedIds) {
 }
 await mkdir(output, { recursive: true })
 const manifest = {
-  version: 6,
+  version: 7,
   generator: 'tools/build-work-models.mjs',
   ownership: 'Original procedural geometry created for Sulayman Bowles. No third-party model or texture inputs.',
   license: 'LicenseRef-Site-Owner',
   licenseNote: 'Original site assets. The site owner retains the rights; no third-party model or texture licenses apply.',
   unit: 'Each sculpture is centered at the origin and normalized to a maximum span of 2 units.',
-  sources: ['tools/work-models/geometry.mjs', 'tools/work-models/instruments.mjs', 'tools/work-models/organic.mjs', 'tools/work-models/population.mjs'],
+  sources: ['tools/work-models/geometry.mjs', 'tools/work-models/instruments.mjs', 'tools/work-models/organic.mjs', 'tools/work-models/sapien.mjs', 'tools/work-models/framing.mjs'],
   material: 'Four texture-free monochrome materials: satin silver, dark steel, graphite inlays and pale porcelain. Smooth analytical surfaces, rounded machined bevels and recessed cavities retain readable construction through halftone.',
   geometryBudget: { maximumBytesPerModel: 1500000, maximumTrianglesPerModel: 60000, maximumMeshesPerModel: 12, compression: 'Lossless bitwise vertex welding; no decoder required.' },
-  animation: 'Independent components named hover-* export centered local shaft/hinge pivots with unit articulationAxis vectors in GLTF node extras. Structural assemblies remain static. These support renderer-driven articulation. No embedded animation, extensions, textures or decoder required.',
+  animation: 'Independent components named hover-* export centered local shaft/hinge pivots with unit articulationAxis vectors in GLTF node extras. Continuous shafts also export articulationMotion: angularVelocity is the shared drive rate in radians/second, ratio is the signed shaft/drive ratio, and driver optionally names the main node. Angle = visible time * angularVelocity * ratio. Full-turn bounds are verified. Structural assemblies remain static. Renderer-driven motion; no embedded animation, extensions, textures or decoder required.',
   models: [],
 }
 for (const study of studies) {

@@ -1,4 +1,4 @@
-import originalProfile from './editorial/data/profile.json'
+import originalProfile from './editorial/data/profile.json' with { type: 'json' }
 
 // Public prose updated from the September 30, 2026 résumés. The original
 // profile/PDF remain historical source artifacts; private source links stay

@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { TAU, Y, vec, group, shaftAxis, put, tube, rod, jewel, bevelBox, gear, bevelTriangle, machinedRing, channelRing, bolt, finishBevel } from './geometry.mjs'
+import { TAU, Y, vec, group, shaftAxis, put, tube, rod, jewel, bevelBox, gear, bevelTriangle, bevelFrame, machinedRing, channelRing, bolt, finishBevel } from './geometry.mjs'
 
 function headPoint(theta, phi) {
   const y = Math.sin(phi) * .83 + .06
@@ -263,75 +263,117 @@ function piercedFold(part,a,b,c,depth=.034) {
   return normal
 }
 
+/** Involute teeth share a module and 20-degree pressure angle throughout the train. */
+function involuteWheel(part, teeth, module, depth, center, rotation, phase, spokes = 4) {
+  const pitch = teeth * module / 2, base = pitch * Math.cos(Math.PI/9)
+  const root = pitch - module * 1.25, tip = pitch + module
+  const involute = r => { const t = Math.sqrt(Math.max(0,(r/base)**2-1)); return t-Math.atan(t) }
+  // Tangential backlash and a small edge break leave running clearance at mesh.
+  const half = Math.PI/(2*teeth) - .00065/pitch
+  const atRadius = r => half + involute(pitch) - involute(Math.max(base,r))
+  const profile = [], polar = (r,a) => new THREE.Vector2(r*Math.cos(a),r*Math.sin(a))
+  for (let tooth=0; tooth<teeth; tooth++) {
+    const a=phase+tooth/teeth*TAU, step=TAU/teeth, low=Math.max(base,root)
+    profile.push(polar(root,a-step*.5),polar(root,a-atRadius(low)))
+    if (root<base) profile.push(polar(base,a-atRadius(base)))
+    for (let i=1; i<=5; i++) { const r=low+(tip-low)*i/5; profile.push(polar(r,a-atRadius(r))) }
+    for (let i=1; i<=3; i++) profile.push(polar(tip,a-atRadius(tip)+2*atRadius(tip)*i/3))
+    for (let i=4; i>=0; i--) { const r=low+(tip-low)*i/5; profile.push(polar(r,a+atRadius(r))) }
+    if (root<base) profile.push(polar(root,a+atRadius(base)))
+  }
+  const shape=new THREE.Shape(profile), opening=root*.62
+  const hole=new THREE.Path();hole.absarc(0,0,opening,0,TAU,true);shape.holes.push(hole)
+  const g=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:.0007,bevelThickness:.0012,bevelSegments:1,curveSegments:16,steps:1})
+  g.translate(0,0,-depth/2);put(part,finishBevel(g),center,rotation)
+  const q=new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation))
+  const hub=Math.max(.049,pitch*.21),bore=.0252
+  for (let i=0; i<spokes; i++) {
+    const spoke=new THREE.Shape([
+      new THREE.Vector2(bore+.004,-pitch*.073),new THREE.Vector2(opening+.006,-pitch*.039),
+      new THREE.Vector2(opening+.006,pitch*.039),new THREE.Vector2(bore+.004,pitch*.073),
+    ])
+    const strut=new THREE.ExtrudeGeometry(spoke,{depth:depth*.72,bevelEnabled:true,bevelSize:.002,bevelThickness:.002,bevelSegments:2,curveSegments:1,steps:1})
+    strut.translate(0,0,-depth*.36)
+    const e=new THREE.Euler().setFromQuaternion(q.clone().multiply(new THREE.Quaternion().setFromAxisAngle(vec(0,0,1),phase+i/spokes*TAU)))
+    put(part,finishBevel(strut),center,[e.x,e.y,e.z])
+  }
+  channelRing(part,(hub+bore)/2,hub-bore,depth*1.14,0,TAU,center,rotation,24)
+  const front=center.clone().addScaledVector(shaftAxis(rotation),depth*.58)
+  machinedRing(part,bore+.010,.014,.014,0,TAU,front,rotation,24)
+}
+
 function unfinishedMechanism() {
-  const folds=group('Pierced folded porcelain sheets','porcelain')
-  const structure=group('Fold returns and machined structural chassis','steel')
-  const slots=group('Recessed fastener and index slots','ink')
-  const fasteners=group('Hinge knuckles and fitted fasteners','silver')
-  const peaks=[vec(0,1.04,0),vec(.95,.12,.30),vec(.35,-.93,-.32),vec(-.84,-.35,.48),vec(-.66,.48,-.44)]
-  const gearing=[]
-  for(let i=0;i<peaks.length;i++){
-    const a=peaks[i],b=peaks[(i+1)%peaks.length]
-    const crease=a.clone().add(b).multiplyScalar(.42);crease.z+=(i%2?-.37:.40)
-    const inner=a.clone().add(b).multiplyScalar(.16);inner.z+=(i%2?.18:-.12)
-    const normal=piercedFold(folds,a,crease,inner,.040)
-    piercedFold(structure,b,inner,crease,.032)
-    // Two folded returns sit on the load-bearing crease rather than arbitrary struts.
-    const returnOffset=normal.clone().multiplyScalar(.045)
-    bevelTriangle(structure,a,crease,crease.clone().add(returnOffset),.018)
-    bevelTriangle(structure,a,crease.clone().add(returnOffset),a.clone().add(returnOffset),.018)
-    rod(structure,crease,inner,.018,8)
-    // The pivot's axis follows its folded crease; all wheel/knuckle parts share it.
-    const axis=inner.clone().sub(a).normalize()
-    const q=new THREE.Quaternion().setFromUnitVectors(vec(0,0,1),axis),euler=new THREE.Euler().setFromQuaternion(q),rotation=[euler.x,euler.y,euler.z]
-    const pivot=a.clone().addScaledVector(normal,.025)
-    const wheel=group(`hover-fold-hinge-wheel-${i+1}`,'silver',pivot,axis.clone());gearing.push(wheel)
-    gear(wheel,.071,14,.026,pivot,rotation)
-    rod(structure,pivot.clone().addScaledVector(axis,-.11),pivot.clone().addScaledVector(axis,.11),.015,10)
-    for(const offset of[-.065,0,.065])channelRing(fasteners,.036,.014,.033,0,TAU,pivot.clone().addScaledVector(axis,offset),rotation,20)
-    for(const offset of[-.116,.116])bolt(fasteners,slots,pivot.clone().addScaledVector(axis,offset),.022,rotation)
-    // Two flush bolts hold each plate at actual anchor points, including reverse-side shadows.
-    for(const point of[a.clone().lerp(crease,.24),b.clone().lerp(crease,.24)]){
-      const localRotation=new THREE.Euler().setFromQuaternion(new THREE.Quaternion().setFromUnitVectors(vec(0,0,1),normal))
-      bolt(fasteners,slots,point.addScaledVector(normal,.033),.018,[localRotation.x,localRotation.y,localRotation.z])
-    }
-    // Opposing tension springs have a mechanical purpose and do not fill every opening.
-    if(i===0||i===3){
-      const anchor=inner.clone().addScaledVector(normal,.065),start=crease.clone().addScaledVector(normal,.065),springAxis=anchor.clone().sub(start).normalize()
-      const side=springAxis.clone().cross(Math.abs(springAxis.y)<.8?Y:vec(1,0,0)).normalize(),up=springAxis.clone().cross(side).normalize()
-      const smooth=t=>{const x=THREE.MathUtils.clamp(t,0,1);return x*x*(3-2*x)}
-      tube(fasteners,Array.from({length:61},(_,k)=>{
-        const t=k/60,envelope=smooth((t-.05)/.13)*smooth((.95-t)/.13)
-        const phase=THREE.MathUtils.clamp((t-.16)/.68,0,1)*TAU*3
-        return start.clone().lerp(anchor,t).addScaledVector(side,.025*envelope*Math.cos(phase)).addScaledVector(up,.025*envelope*Math.sin(phase))
-      }),.0075,68,8)
-      const attachmentEuler=new THREE.Euler().setFromQuaternion(new THREE.Quaternion().setFromUnitVectors(vec(0,0,1),normal))
-      const attachmentRotation=[attachmentEuler.x,attachmentEuler.y,attachmentEuler.z]
-      for(const point of[start,anchor]){
-        // Fitted eyes, screws and short stems visibly attach both spring leads.
-        channelRing(fasteners,.023,.011,.018,0,TAU,point,attachmentRotation,20)
-        rod(fasteners,point.clone().addScaledVector(normal,-.035),point,.009,10)
-        bolt(fasteners,slots,point.clone().addScaledVector(normal,-.015),.017,attachmentRotation)
-      }
+  const folds=group('Opened porcelain service shrouds','porcelain')
+  const structure=group('Folded returns and pierced bearing chassis','steel')
+  const slots=group('Counterbored mountings and recessed witness marks','ink')
+  const fasteners=group('Stepped shaft collars and fitted service fasteners','silver')
+  const rotation=[.24,-.08,-.025],q=new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation))
+  const axis=shaftAxis(rotation).normalize(),at=(x,y,z)=>vec(x,y,z).applyQuaternion(q)
+  const module=.018,driver='hover-experimental-central-wheel',velocity=.46
+  const main={name:driver,teeth:36,point:vec(-.08,.035,.18),phase:.07,ratio:1,spokes:5,material:'silver'}
+  const children=[
+    {name:'hover-experimental-transfer-wheel',teeth:20,parent:main,direction:-.42,spokes:4,material:'steel'},
+    {name:'hover-fold-hinge-wheel-1',teeth:28,parent:null,direction:1.21,spokes:4,material:'silver'},
+    {name:'hover-fold-hinge-wheel-2',teeth:24,parent:main,direction:-2.69,spokes:4,material:'silver'},
+    {name:'hover-fold-hinge-wheel-3',teeth:16,parent:null,direction:1.94,spokes:3,material:'steel'},
+  ]
+  children[1].parent=children[0];children[3].parent=children[2]
+  for (const wheel of children) {
+    const parent=wheel.parent,distance=module*(parent.teeth+wheel.teeth)/2
+    wheel.point=parent.point.clone().add(vec(distance*Math.cos(wheel.direction),distance*Math.sin(wheel.direction),0))
+    // A tooth faces its neighbour's gap at rest. Signed speed then maintains
+    // that relationship through every full turn, rather than merely at one pose.
+    wheel.phase=wheel.direction+Math.PI-(Math.PI-parent.teeth*(wheel.direction-parent.phase))/wheel.teeth
+    wheel.ratio=-parent.ratio*parent.teeth/wheel.teeth
+  }
+  const wheels=[main,...children],gearing=[]
+  for (const wheel of wheels) {
+    const center=at(...wheel.point.toArray()),part=group(wheel.name,wheel.material,center,axis.clone())
+    part.motion={kind:'continuous',angularVelocity:velocity,ratio:wheel.ratio,driver,teeth:wheel.teeth,module}
+    involuteWheel(part,wheel.teeth,module,wheel===main?.045:.034,center,rotation,wheel.phase,wheel.spokes)
+    gearing.push(part)
+    // Each spinning hub clears a fixed shaft. Back bearings are seated on a real
+    // pierced block; the front retaining cap sits beyond the rotating faces.
+    const p=wheel.point,back=at(p.x,p.y,-.12),front=at(p.x,p.y,.239)
+    rod(structure,at(p.x,p.y,-.205),at(p.x,p.y,.237),.019,14)
+    bevelFrame(structure,wheel===main?.19:.142,wheel===main?.19:.142,.070,.049,.049,back,rotation,.006)
+    machinedRing(fasteners,.040,.017,.029,0,TAU,at(p.x,p.y,-.072),rotation,24)
+    machinedRing(slots,.031,.008,.008,0,TAU,at(p.x,p.y,-.053),rotation,20)
+    bolt(fasteners,slots,front,.029,rotation)
+    for (const side of [-1,1]) bolt(fasteners,slots,at(p.x+side*(wheel===main?.066:.045),p.y-.042,-.076),.012,rotation)
+  }
+  // Diagonal rear beams carry the five bearing blocks. Their whole depth stays
+  // behind the gear plane; full rotations cannot pass through a beam or panel.
+  for (const [from,to] of [[main,children[0]],[children[0],children[1]],[main,children[2]],[children[2],children[3]]]) {
+    const a=from.point,b=to.point,mid=a.clone().lerp(b,.5),angle=Math.atan2(b.y-a.y,b.x-a.x)
+    const e=new THREE.Euler().setFromQuaternion(q.clone().multiply(new THREE.Quaternion().setFromAxisAngle(vec(0,0,1),angle)))
+    bevelFrame(structure,a.distanceTo(b)+.15,.098,.070,a.distanceTo(b)-.05,.032,at(mid.x,mid.y,-.158),[e.x,e.y,e.z],.004)
+  }
+  // Three opened, folded service panels protect the back and reveal the working
+  // faces. Their calm asymmetry replaces the former five-point star silhouette.
+  const panels=[
+    [at(-.89,.60,-.23),at(-.39,.76,-.18),at(-.60,.20,-.21)],
+    [at(.83,.66,-.24),at(.31,.71,-.29),at(.73,.16,-.18)],
+    [at(-.64,-.60,-.24),at(.68,-.58,-.24),at(.06,-.80,-.10)],
+  ]
+  for (const [a,b,c] of panels) {
+    const normal=piercedFold(folds,a,b,c,.038),edge=b.clone().sub(a).normalize()
+    const returnA=a.clone().addScaledVector(normal,-.040),returnB=b.clone().addScaledVector(normal,-.040)
+    bevelTriangle(structure,a,b,returnB,.017);bevelTriangle(structure,a,returnB,returnA,.017)
+    const e=new THREE.Euler().setFromQuaternion(new THREE.Quaternion().setFromUnitVectors(vec(0,0,1),normal))
+    for (const t of [.16,.84]) bolt(fasteners,slots,a.clone().lerp(b,t).addScaledVector(normal,.028),.020,[e.x,e.y,e.z])
+    // Actual hinge barrels along the supported fold edge stay fixed with the shroud.
+    for (const t of [.25,.50,.75]) {
+      const center=a.clone().lerp(b,t).addScaledVector(normal,-.020)
+      rod(fasteners,center.clone().addScaledVector(edge,-.035),center.clone().addScaledVector(edge,.035),.019,12)
     }
   }
-  const wheelCenter=vec(0,0,-.22),wheelRotation=[.32,.16,.18],shaft=shaftAxis(wheelRotation)
-  const transform=new THREE.Quaternion().setFromEuler(new THREE.Euler(...wheelRotation))
-  const transferCenter=vec(.432*Math.cos(-.61),.432*Math.sin(-.61),0).applyQuaternion(transform).add(wheelCenter)
-  const centralGear=group('hover-experimental-central-wheel','silver',wheelCenter,shaft.clone())
-  const transferGear=group('hover-experimental-transfer-wheel','silver',transferCenter,shaft.clone())
-  gear(centralGear,.30,36,.026,wheelCenter,wheelRotation)
-  gear(transferGear,.14,20,.031,transferCenter,wheelRotation)
-  machinedRing(structure,.312,.055,.044,0,TAU,wheelCenter.clone().addScaledVector(shaft,-.052),wheelRotation,64)
-  channelRing(fasteners,.10,.025,.044,0,TAU,wheelCenter.clone().addScaledVector(shaft,.028),wheelRotation,40)
-  rod(structure,wheelCenter.clone().addScaledVector(shaft,-.10),wheelCenter.clone().addScaledVector(shaft,.083),.027,12)
-  for(let i=0;i<4;i++){
-    const a=i/4*TAU,point=vec(.34*Math.cos(a),.34*Math.sin(a),-.05).applyQuaternion(transform).add(wheelCenter)
-    bolt(fasteners,slots,point,.020,wheelRotation)
+  // Short rear stays join the bearing lattice to the service-sheet returns.
+  for (const [wheel,end] of [[children[3],[-.70,.51,-.22]],[children[1],[.61,.53,-.25]],[children[2],[-.43,-.59,-.23]],[children[0],[.43,-.59,-.23]]]) {
+    rod(structure,at(wheel.point.x,wheel.point.y,-.16),at(...end),.026,10)
+    bolt(fasteners,slots,at(...end).addScaledVector(axis,.025),.022,rotation)
   }
-  // Three deliberate mounting stays carry the central mechanism into the outer folds.
-  for(const i of[0,2,4])rod(structure,wheelCenter.clone().addScaledVector(shaft,-.075),peaks[i].clone().multiplyScalar(.48),.018,8)
-  return[folds,structure,slots,fasteners,...gearing,centralGear,transferGear]
+  return[folds,structure,slots,fasteners,...gearing]
 }
 
 export { syntheticMind, unfinishedMechanism }

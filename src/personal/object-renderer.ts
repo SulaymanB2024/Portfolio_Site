@@ -486,10 +486,9 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     async function load() {
       try {
         const group = new THREE.Group()
-        if (kind === 'ribbon') group.add(createRibbon())
-        else if (kind === 'cross') group.add(createCross())
-        else {
-          const gltf = await loader.load(portfolioAssetUrl(kind), requests.signal)
+        {
+          const assetId = kind === 'ribbon' ? 'work-sapien' : kind === 'cross' ? 'work-miscellaneous' : kind
+          const gltf = await loader.load(portfolioAssetUrl(assetId), requests.signal)
           if (disposed) {
             own(gltf.scene)
             releaseResources()
@@ -592,61 +591,4 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       }
     }
   }
-}
-
-function chromeMaterial() {
-  return new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 1, roughness: 0.2, envMapIntensity: 3, side: THREE.DoubleSide })
-}
-
-/** A broad strip with three open helical turns rather than a round tube. */
-function createRibbon(): THREE.Group {
-  const group = new THREE.Group()
-  const positions: number[] = []
-  const indices: number[] = []
-  const segments = 240
-  for (let i = 0; i <= segments; i++) {
-    const t = i / segments
-    const angle = t * Math.PI * 5.8
-    const radius = 0.65 + 0.09 * Math.sin(t * Math.PI)
-    const y = (t - 0.5) * 2.1
-    // A slight taper makes the loose ends read like cut metal.
-    const width = 0.51 * (0.85 + 0.15 * Math.sin(t * Math.PI))
-    for (const edge of [-1, 1]) {
-      const r = radius + edge * 0.045
-      positions.push(Math.cos(angle) * r, y + edge * width / 2, Math.sin(angle) * r)
-    }
-    if (i < segments) {
-      const a = i * 2
-      indices.push(a, a + 2, a + 1, a + 1, a + 2, a + 3)
-    }
-  }
-  const geometry = new THREE.BufferGeometry()
-  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
-  geometry.setIndex(indices)
-  geometry.computeVertexNormals()
-  group.add(new THREE.Mesh(geometry, chromeMaterial()))
-  group.rotation.set(0.18, -0.3, -0.32)
-  return group
-}
-
-function createCross(): THREE.Group {
-  const group = new THREE.Group()
-  const geometry = new THREE.BoxGeometry(0.62, 0.62, 0.62)
-  const material = chromeMaterial()
-  const cells = [
-    [0, 0, 0],
-    [-1, 0, 0],
-    [1, 0, 0],
-    [0, -1, 0],
-    [0, 1, 0],
-    [0, 0, -1],
-    [0, 0, 1]
-  ]
-  for (const [x, y, z] of cells) {
-    const cube = new THREE.Mesh(geometry, material)
-    cube.position.set(x * 0.615, y * 0.615, z * 0.615)
-    group.add(cube)
-  }
-  group.rotation.set(0.45, 0.63, -0.18)
-  return group
 }

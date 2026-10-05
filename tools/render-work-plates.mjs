@@ -16,8 +16,8 @@ if (!/^[a-z0-9-]+$/.test(evidenceName)) throw new Error('Invalid evidence direct
 const evidence = resolve(root, 'evidence', evidenceName)
 const width = 1400, height = 1400
 const allStudies = [
-  { id: 'internshipdeadlines', yaw: -.45, pitch: .18, roll: -.08 },
-  { id: 'sapien', yaw: -.56, pitch: -.07, roll: .04 },
+  { id: 'internshipdeadlines', yaw: .08, pitch: .07, roll: -.05 },
+  { id: 'sapien', yaw: -.10, pitch: .10, roll: .02 },
   { id: 'investing-markets', yaw: -.36, pitch: .14, roll: -.09 },
   { id: 'miscellaneous', yaw: .45, pitch: .12, roll: -.13 },
 ]
@@ -58,7 +58,7 @@ for (const study of studies) {
         p.push(point); n.push(normal); minimum.min(point); maximum.max(point)
       }
       vertices += p.length; triangles += indices.length / 3
-      geometry.push({ p, n, indices, color: color[0] * .2126 + color[1] * .7152 + color[2] * .0722, roughness })
+      geometry.push({ p, n, indices, color: color[0] * .2126 + color[1] * .7152 + color[2] * .0722, roughness, graphite: material?.getName() === 'ink' })
     }
   }
   const center = minimum.clone().add(maximum).multiplyScalar(.5)
@@ -90,7 +90,11 @@ for (const study of studies) {
         const reflected = Math.max(0, nx * fill.x + ny * fill.y + nz * fill.z)
         const specular = Math.pow(Math.max(0, nx * half.x + ny * half.y + nz * half.z), 22 + (1 - mesh.roughness) * 22)
         // A raking key reveals relief; the weaker fill preserves dark recesses.
-        tones[pixel] = Math.min(1, .09 + diffuse * .67 + reflected * .16 + specular * .48 + (mesh.color - .3) * .22)
+        // Graphite inserts absorb the key instead of acquiring the silver finish.
+        // Retain their authored contrast so the date glyphs survive the dot screen.
+        tones[pixel] = mesh.graphite
+          ? .035 + diffuse * .09 + reflected * .03 + specular * .04
+          : Math.min(1, .09 + diffuse * .67 + reflected * .16 + specular * .48 + (mesh.color - .3) * .22)
       }
     }
   }

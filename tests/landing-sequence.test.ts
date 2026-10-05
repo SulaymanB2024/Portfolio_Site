@@ -179,7 +179,7 @@ test('phone sculptures project inside the space below their title and links', ()
         const depth = 6.1 - sz * bounds.z * frame.scale / 2
         const x = width / 2 + focal * sx * bounds.x * frame.scale / 2 / depth
         const y = height / 2 - focal * (frame.y + sy * bounds.y * frame.scale / 2) / depth
-        assert.ok(x >= width * .06 && x <= width * .94, `Horizontal clipping at ${width}×${height}`)
+        assert.ok(x >= width * .02 && x <= width * .98, `Horizontal clipping at ${width}×${height}`)
         assert.ok(y >= frame.top && y <= frame.bottom, `Title/link overlap at ${width}×${height}`)
       }
     }
@@ -223,17 +223,17 @@ test('touch rendering bounds the costly buffers while preserving a sharper type 
   }
 })
 
-test('each desktop sculpture fits its reserved editorial region without the footer or title overlap', () => {
+test('enlarged desktop sculptures remain inside the viewport below the header', () => {
   for (const [width, height] of [[1040, 977], [1280, 800], [667, 375]]) {
-    for (let index = 1; index < 5; index++) {
+    for (let index = 0; index < 5; index++) {
       const bounds = { x: 1.6, y: 2, z: 1.4 }, frame = desktopSculptureFrame(width, height, index, bounds)
       const focal = height / (2 * Math.tan(16 * Math.PI / 180))
       for (const sx of [-1, 1]) for (const sy of [-1, 1]) for (const sz of [-1, 1]) {
         const depth = 5.9 - sz * bounds.z * frame.scale / 2
         const x = width / 2 + focal * (frame.x + sx * bounds.x * frame.scale / 2) / depth
         const y = height / 2 - focal * (frame.y + sy * bounds.y * frame.scale / 2) / depth
-        assert.ok(x > width * .51 && x < width * .98)
-        assert.ok(y > height * .12 && y < height * .88)
+        assert.ok(x > width * .44 && x <= width * .98 + 1e-7)
+        assert.ok(y >= Math.min(112, height * .22) - 1e-7 && y <= height - 20 + 1e-7)
       }
     }
   }

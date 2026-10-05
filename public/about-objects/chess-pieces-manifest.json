@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "generator": "tools/build-chess-pieces.mjs",
+  "ownership": "Original site-owned geometry; no external inputs.",
+  "models": [
+    {
+      "id": "chess-pieces",
+      "path": "about-objects/chess-pieces.glb",
+      "bytes": 244880,
+      "sha256": "20279e9302beafd4b3fdc574a98ee9cca12c9e6a6b014f83b3ca5702fead2d16",
+      "triangles": 12140,
+      "vertices": 6847,
+      "meshes": 10,
+      "bounds": {
+        "min": [
+          -0.10100000351667404,
+          0,
+          -0.10100000351667404
+        ],
+        "max": [
+          0.10100000351667404,
+          0.4749000072479248,
+          0.10100000351667404
+        ]
+      },
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "degenerateTriangles": 0
+      }
+    }
+  ]
+}

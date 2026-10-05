@@ -27,6 +27,9 @@ for (const url of urls) {
   const canonical = [...head.matchAll(/<link\b[^>]*>/g)].map(match => attributes(match[0])).filter(tag => tag.rel === 'canonical')
   assert.equal(canonical.length, 1, `Duplicate/missing canonical: ${url.pathname}`)
   assert.equal(canonical[0].href, url.href)
+  const feeds = [...head.matchAll(/<link\b[^>]*>/g)].map(match => attributes(match[0])).filter(tag => tag.type === 'application/atom+xml')
+  assert.equal(feeds.length, 1, `Missing/duplicate writing feed: ${url.pathname}`)
+  assert.equal(feeds[0].rel, 'alternate'); assert.equal(feeds[0].href, `${origin}/feed.xml`)
   const titleMatches = [...head.matchAll(/<title>([^]*?)<\/title>/g)]
   assert.equal(titleMatches.length, 1)
   const title = decode(titleMatches[0][1])
@@ -64,6 +67,9 @@ for (const url of urls) {
   assert.equal(person?.['@type'], 'Person'); assert.equal(person.name, 'Sulayman Bowles')
   assert.equal(person.url, `${origin}/about`)
   assert(person.sameAs.includes('https://github.com/SulaymanB2024'))
+  assert(person.sameAs.includes('https://sulayman-bowles.tech/'))
+  assert.equal(person.mainEntityOfPage, `${origin}/about`)
+  assert.equal(person.givenName, 'Sulayman'); assert.equal(person.familyName, 'Bowles')
   assert.equal(website?.['@type'], 'WebSite'); assert.equal(website.name, 'Sulayman Bowles')
   assert.equal(page?.url, url.href); assert.equal(page.description, meta.description)
   const checkReferences = value => {
@@ -81,6 +87,13 @@ for (const url of urls) {
   assert(!body.includes('href="#/'), `Fragment route in initial HTML: ${url.pathname}`)
   const links = new Set([...body.matchAll(/<a\b[^>]*>/g)].map(match => attributes(match[0]).href))
   const elementIds = new Set([...body.matchAll(/\bid="([^"]+)"/g)].map(match => decode(match[1])))
+  if (['/', '/about'].includes(url.pathname)) {
+    assert(decode(body).includes(person.description), `Visible biography/schema drift: ${url.pathname}`)
+    // Connected profiles are displayed on Home; About opens directly on the
+    // three-object collection, with the same verified identity in its schema.
+    if (url.pathname === '/') for (const href of person.sameAs) assert(links.has(href), `Profile is not visible: ${url.pathname} → ${href}`)
+    assert(links.has(url.pathname === '/' ? '/about' : '/resume'))
+  }
   for (const href of links) if (/^#(?:source-|note-)/.test(href)) {
     assert(elementIds.has(decodeURIComponent(href.slice(1))), `Missing citation target: ${url.pathname}${href}`)
   }
@@ -112,6 +125,8 @@ for (const url of urls) {
       }
     }
     assert(links.has('/about'), `Missing author profile link: ${article.slug}`)
+    assert(elementIds.has('author-note-title'), `Missing visible author biography: ${article.slug}`)
+    assert(links.has('/feed.xml'), `Missing author feed link: ${article.slug}`)
   } else {
     assert.equal(meta['og:type'], 'website')
     assert(!keys.some(key => key.startsWith('article:')), `Leaked article metadata: ${url.pathname}`)
@@ -121,6 +136,17 @@ for (const url of urls) {
     assert(list?.itemListElement.length, `Missing collection contents: ${url.pathname}`)
     for (const item of list.itemListElement) assert(links.has(new URL(item.url).pathname), `Collection item missing from HTML: ${item.url}`)
   }
+}
+const feed = await read('dist/feed.xml')
+assert(feed.includes('<feed xmlns="http://www.w3.org/2005/Atom"'))
+assert(feed.includes(`<name>Sulayman Bowles</name><uri>${origin}/about</uri>`))
+const entries = [...feed.matchAll(/<entry>([^]*?)<\/entry>/g)].map(match => match[1])
+assert.equal(entries.length, catalog.length)
+for (const article of catalog) {
+  const entry = entries.find(entry => entry.includes(`<id>${origin}${article.path}</id>`))
+  assert(entry, `Canonical essay missing from feed: ${article.slug}`)
+  assert(entry.includes(`<published>${article.date.replaceAll('.', '-')}T00:00:00Z</published>`))
+  assert(entry.includes(`<updated>${(article.dateModified || article.date).replaceAll('.', '-')}T00:00:00Z</updated>`))
 }
 const robots = await read('dist/robots.txt')
 for (const bot of ['Googlebot', 'Bingbot', 'OAI-SearchBot', 'Claude-SearchBot', 'PerplexityBot']) {
@@ -135,4 +161,4 @@ for (const path of ['/404/index.html', '/sitemap.html']) {
   assert(html.includes('name="robots" content="noindex, follow"'), `Utility indexing drift: ${path}`)
 }
 await stat('dist/Sulayman_Bowles_Resume.pdf')
-console.log(`Search gate passed: ${urls.length} unique canonical pages, coherent identity/social/schema metadata, ${citations} source citations, complete HTML sections, search crawler access, and generated discovery.`)
+console.log(`Search gate passed: ${urls.length} unique canonical pages, visible biographies/connected profiles, coherent identity/social/schema metadata, ${catalog.length} dated feed entries, ${citations} source citations, complete HTML sections, search crawler access, and generated discovery.`)

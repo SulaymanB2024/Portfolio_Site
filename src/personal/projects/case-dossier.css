@@ -1265,3 +1265,35 @@
 .case-dossier .study-chapter-sources h2 {
   font-size: 30px;
 }
+
+/* Keep headings and the actual account together; the material sits below. */
+.case-dossier .study-contents {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 30px;
+  padding: 14px 0;
+  border-top: 1px solid var(--ink);
+}
+.case-dossier .study-contents > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  color: var(--ink);
+  font: 12px/1.5 var(--study-mono);
+  text-transform: uppercase;
+  text-decoration: none;
+  text-underline-offset: 6px;
+}
+.case-dossier .study-contents > a > .mono { color: var(--muted); }
+.case-dossier .study-contents > a[aria-current], .case-dossier .study-contents > a:hover { text-decoration: underline; }
+.case-dossier .study-account { display: grid; grid-template-columns: minmax(0,.72fr) minmax(0,1.28fr); gap: clamp(35px,6vw,90px); align-items: start; }
+.case-dossier .study-account h2 { font-size: clamp(32px,3vw,43px); line-height: 1.14; max-width: 22ch; }
+.case-dossier .study-account .study-chapter-copy { margin: 0; max-width: 59ch; }
+@media(max-width:760px) {
+  .case-dossier .study-account { grid-template-columns: 1fr; gap: 23px; }
+  .case-dossier .study-account h2 { font-size: 33px; max-width: 25ch; }
+  .case-dossier .study-account .study-chapter-copy > p { font-size: 18px; line-height: 1.65; }
+  .case-dossier .study-contents { gap: 0 24px; }
+}

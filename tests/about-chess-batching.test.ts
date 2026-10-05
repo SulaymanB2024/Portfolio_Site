@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import * as THREE from 'three'
 import { batchChessTemplate, bindChessBatchPicking } from '../src/personal/about/chess-batching.ts'
 import { createChessSet } from '../src/personal/about/chess-scene.ts'
+import { chessModel } from './fixtures/chess-model.ts'
 import type { ChessSceneState } from '../src/personal/about/ChessGame.tsx'
 
 function meshes(root: THREE.Object3D) {
@@ -27,7 +28,7 @@ function startingPieces() {
   }
   return pieces
 }
-function setFixture() {
+async function setFixture() {
   const parent = new THREE.Group(), knight = new THREE.Group()
   const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>()
   for (let part = 0; part < 3; part++) {
@@ -41,28 +42,28 @@ function setFixture() {
   }
   const tiles = new Map<string, THREE.Vector3>()
   for (let rank = 0; rank < 8; rank++) for (let file = 0; file < 8; file++) tiles.set(`${'abcdefgh'[file]}${rank + 1}`, new THREE.Vector3((file - 3.5) * .28, .025, (3.5 - rank) * .28))
-  const set = createChessSet(parent, knight, tiles, geometries, materials)
+  const set = createChessSet(parent, knight, tiles, geometries, materials, await chessModel())
   return { parent, tiles, geometries, materials, set }
 }
 function rayAbove(point: THREE.Vector3) { return new THREE.Raycaster(point.clone().add(new THREE.Vector3(0, 3, 0)), new THREE.Vector3(0, -1, 0)) }
 
-test('starting chess position reduces150 component draws to68, keeping every triangle and shared template buffer', () => {
-  const { parent, set, geometries, materials } = setFixture()
+test('starting chess position clones the baked GLB into68 draws and shared template buffers', async () => {
+  const { parent, set, geometries, materials } = await setFixture()
   set.update(state(startingPieces()))
   parent.updateMatrixWorld(true)
   assert.equal(set.root.children.length, 32)
   const all = meshes(set.root)
   const sources = all.filter(mesh => !mesh.userData.chessBatchSourceIndices)
   const drawn = all.filter(mesh => mesh.layers.isEnabled(0))
-  assert.equal(sources.length, 150)
+  assert.equal(sources.length, 68)
   assert.equal(drawn.length, 68)
   assert.equal(drawn.reduce((sum, mesh) => sum + triangles(mesh), 0), sources.reduce((sum, mesh) => sum + triangles(mesh), 0))
   for (const group of set.root.children) {
     const kind = group.name.slice(-2)
     assert.equal(meshes(group).filter(mesh => mesh.layers.isEnabled(0)).length, kind[1] === 'n' ? 3 : 2)
   }
-  const pawnA = meshes(set.root.getObjectByName('chess-a2-wp')!).filter(mesh => mesh.userData.chessBatchSourceIndices)
-  const pawnB = meshes(set.root.getObjectByName('chess-b2-wp')!).filter(mesh => mesh.userData.chessBatchSourceIndices)
+  const pawnA = meshes(set.root.getObjectByName('chess-a2-wp')!)
+  const pawnB = meshes(set.root.getObjectByName('chess-b2-wp')!)
   assert.equal(pawnA[0].geometry, pawnB[0].geometry)
   assert.equal(pawnA[0].material, pawnB[0].material)
   assert(geometries.has(pawnA[0].geometry))
@@ -156,8 +157,8 @@ test('cloned batch picking returns the clone parts and exact original faces, eve
   assert(meshes(root).every(mesh => mesh.layers.isEnabled(0)))
 })
 
-test('captures, promotion, smooth movement and reduced-motion settling retain square picks without allocating buffers', () => {
-  const { parent, set, tiles, geometries } = setFixture()
+test('captures, promotion, smooth movement and reduced-motion settling retain square picks without allocating buffers', async () => {
+  const { parent, set, tiles, geometries } = await setFixture()
   set.update(state([{ square: 'a2', type: 'p', color: 'w' }, { square: 'b3', type: 'r', color: 'b' }, { square: 'g1', type: 'n', color: 'w' }]))
   const pawn = set.root.getObjectByName('chess-a2-wp')!
   const captured = set.root.getObjectByName('chess-b3-br')!

@@ -33,22 +33,23 @@ export function pacedTravel(value: number): number {
   return (t - ramp / 2) / normalization
 }
 
-export function sculpturePose(local: number, incoming: boolean, index = 0) {
+export function sculpturePose(local: number, incoming: boolean, index = 0, mobile = false) {
   const motion = thresholdMotion(local)
   const amount = incoming ? 1 - motion.arrival : motion.departure
   if (amount === 0) return { scale: 1, yaw: 0, pitch: 0, roll: 0, x: 0, y: 0, articulation: 0 }
+  const restraint = mobile ? .6 : 1
   return {
-    scale: 1 + (incoming ? .045 : .025) * amount,
-    yaw: (incoming ? -.16 : .14) * amount * sculptureDirections[index],
-    pitch: (incoming ? .018 : -.025) * amount,
-    roll: (incoming ? .006 : -.004) * amount,
+    scale: 1 + (incoming ? .025 : .015) * amount * restraint,
+    yaw: (incoming ? -.12 : .18) * amount * sculptureDirections[index] * restraint,
+    pitch: (incoming ? .018 : -.025) * amount * restraint,
+    roll: (incoming ? .006 : -.004) * amount * restraint,
     x: 0,
     y: 0,
-    articulation: (incoming ? -.06 : .10) * amount,
+    articulation: (incoming ? -.06 : .10) * amount * restraint,
   }
 }
 
-/** Camera and light share one authored, reversible scroll movement. */
+/** A shallow, reversible camera move retains stable engraved highlights. */
 export function cinematicShot(local: number, incoming: boolean, mobile = false, index = 0) {
   const motion = thresholdMotion(local), amount = incoming ? 1 - motion.arrival : motion.departure
   const restraint = mobile ? .5 : 1
@@ -59,11 +60,11 @@ export function cinematicShot(local: number, incoming: boolean, mobile = false, 
   return {
     x: x * restraint,
     y: y * restraint,
-    depth: (incoming ? -.32 : -.28) * amount * restraint,
+    depth: (incoming ? -.24 : -.18) * amount * restraint,
     aimX: x * .22 * restraint,
     aimY: y * .26 * restraint,
-    lightX: (incoming ? -.65 : 1.05) * direction * amount,
-    lightY: (incoming ? .15 : -.32) * amount,
+    lightX: 0,
+    lightY: 0,
   }
 }
 
@@ -81,6 +82,11 @@ export function portalPose(local: number, leg: number, mobile = false) {
 
 export function cinematicPhase(local: number) {
   return local <= .10 || local >= .74 ? 'held' : local < .28 ? 'approach' : local < .62 ? 'passage' : 'settle'
+}
+
+/** Let the optical rim disappear before it becomes a pair of screen-wide rails. */
+export function portalFrameOpacity(local: number) {
+  return .65 * (1 - easeBetween(local, .24, .42))
 }
 
 /** Re-time the authored GLB path by visible aperture area, avoiding its microscopic lead-in. */

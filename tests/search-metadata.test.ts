@@ -2,11 +2,13 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { searchMetadata, sourceDate, withSearchHead, serializeSchema, personId, websiteId } from '../src/personal/search-metadata.ts'
 import { documentHref, withDocumentLinks } from '../tools/public-document-links.ts'
+import { identity } from '../src/personal/identity.ts'
 
 test('homepage search identity is descriptive while the published headline stays separate', () => {
   const home = searchMetadata('home')
   assert.equal(home.title, 'Sulayman Bowles — Product, AI & Finance')
   assert.equal(home.canonical, 'https://sulayman-bowles.dev/')
+  assert.equal(home.schema!['@graph'].find(node => node['@type'] === 'Person')?.description, identity.homeSummary)
   assert.equal(home.schema!['@graph'].find(node => node['@type'] === 'WebPage')?.name, 'The frontier is all that matters — Sulayman Bowles')
 })
 
@@ -20,6 +22,19 @@ test('profile pages and articles share one author and website identity', () => {
   assert.equal(article.canonical, 'https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers')
   assert.equal(article.article?.published, '2026-07-14')
   assert.equal(article.image.url, 'https://sulayman-bowles.dev/images/social/og-research.png')
+})
+
+test('the person uses the reviewed biography and connected profiles without implying a completed degree', () => {
+  const person = searchMetadata('resume').schema!['@graph'].find(node => node['@type'] === 'Person')!
+  assert.equal(person.description, identity.summary)
+  assert.equal(person.mainEntityOfPage, 'https://sulayman-bowles.dev/about')
+  assert.deepEqual(person.sameAs, identity.profiles.map(profile => profile.href))
+  assert.equal((person.affiliation as any).name, 'The University of Texas at Austin')
+  assert.equal(person.alumniOf, undefined)
+  assert.equal(person.image, undefined)
+  assert.equal(person.jobTitle, undefined)
+  const about = searchMetadata('about')
+  assert.equal(about.schema!['@graph'].find(node => node['@type'] === 'Person')?.description, about.description)
 })
 
 test('invalid routes do not borrow the homepage identity or article fields', () => {
@@ -45,6 +60,7 @@ test('rebuilding a head removes stale article data, duplicate canonicals, and ol
   const html = withSearchHead(shell, searchMetadata('contact'))
   assert.equal((html.match(/rel="canonical"/g) || []).length, 1)
   assert.equal((html.match(/id="page-schema"/g) || []).length, 1)
+  assert.equal((html.match(/type="application\/atom\+xml"/g) || []).length, 1)
   assert.equal((html.match(/property="og:image"/g) || []).length, 1)
   assert(!html.includes('article:published_time'))
   assert(html.includes('<h1>Accepted headline</h1>'))

@@ -20,7 +20,7 @@ function JournalEssay({ article, lead = false }: { article: ArticleSummary; lead
       <p className="journal-deck">{homeWritingDecks[article.slug] ?? article.subtitle}</p>
       <div className="journal-meta mono"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span>{article.readTime}</span></div>
     </div>
-    <div className="journal-art"><AnimatedArtwork artwork={artwork} size={lead ? 400 : 240} paused={paused || !lead} embedded decorative /></div>
+    <div className="journal-art"><AnimatedArtwork artwork={artwork} size={lead ? 400 : 240} paused={paused} embedded decorative /></div>
     <span className="journal-read mono">{siteCopy.writing.read}<span aria-hidden="true">↗</span></span>
   </a>
 }

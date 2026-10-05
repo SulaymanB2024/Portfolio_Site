@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "generator": "tools/build-resume-models.mjs",
+  "ownership": "Original site-owned symbolic forms. Existing résumé construction preserved; no external inputs.",
+  "models": [
+    {
+      "id": "work-areas",
+      "path": "resume-objects/work-areas.glb",
+      "bytes": 925788,
+      "sha256": "4370f343ac91613b20bb655c5cc3cd7a8ee1d6890d5a40fa3cec6edbd1fee6b3",
+      "triangles": 16656,
+      "vertices": 33445,
+      "meshes": 30,
+      "forms": [
+        "records",
+        "cluster",
+        "dialogue",
+        "compare",
+        "report",
+        "plan",
+        "network",
+        "audit",
+        "search",
+        "calendar",
+        "film",
+        "frames",
+        "matrix",
+        "route",
+        "image"
+      ],
+      "bounds": {
+        "min": [
+          -0.7749999761581421,
+          -0.8449999690055847,
+          -0.28998619318008423
+        ],
+        "max": [
+          0.8550000190734863,
+          0.9549999833106995,
+          0.5600000023841858
+        ]
+      },
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "degenerateTriangles": 0
+      }
+    }
+  ]
+}

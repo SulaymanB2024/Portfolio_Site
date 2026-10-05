@@ -23,6 +23,7 @@ import './editorial/artwork-continuity.css'
 import './personal.css'
 import './editorial/editorial.css'
 import './mobile-polish.css'
+import './header-refinement.css'
 
 const Home = homePage.Page
 const WorkPage = workPage.Page
@@ -34,7 +35,7 @@ const CaseStudyPage = caseStudyPage.Page
 const AboutPage = aboutPage.Page
 const Contact = contactPage.Page
 const articles = (catalog as ArticleSummary[]).map(withWritingCopy)
-const navItems = [['Work', 'work'], ['Writing', 'writing'], ['About', 'about'], ['Résumé', 'resume'], ['Contact', 'contact']]
+const navItems = [['About', 'about'], ['Writing', 'writing'], ['Work', 'work'], ['Résumé', 'resume'], ['Contact', 'contact']]
 const path = () => resolveRoute(location.hash, location.pathname, articles)
 
 function useRoute() {
@@ -133,7 +134,7 @@ function SitePages() {
   const [landingActive, setLandingActive] = useState(true)
   const menuButton = useRef<HTMLButtonElement>(null)
   const main = useRef<HTMLElement>(null)
-  const initialRoute = useRef(true)
+  const focusedRoute = useRef(route)
   const project = projects.find(p => route === `work/${p.slug}`)
   const article = articles.find(item => route === `writing/${item.slug}`)
   const study = findCaseStudy(route)
@@ -141,7 +142,8 @@ function SitePages() {
   const section = project || study ? 'work' : article ? 'writing' : route || 'home'
   useEffect(() => { setMenuOpen(false) }, [route])
   useEffect(() => {
-    if (initialRoute.current) { initialRoute.current = false; return }
+    if (focusedRoute.current === route) return
+    focusedRoute.current = route
     main.current?.focus({ preventScroll: true })
   }, [route])
   useEffect(() => {
@@ -165,19 +167,24 @@ function SitePages() {
     return <div className="art-export" data-appearance={dark ? 'dark' : 'light'}><Art kind={art} dark={dark} /><button className="export-theme" onClick={() => setDark(!dark)}>Change backdrop</button></div>
   }
   const isHome = route === '' || route === 'home'
+  const compactNav = isHome && landingActive
   return <div className={`personal-site ${project ? 'project-site' : ''} ${isHome ? 'home-site' : ''}`} data-appearance={isDark ? 'dark' : 'light'} data-section={section} data-landing-active={isHome ? String(landingActive) : undefined}>
     {isHome && <div className="page-wash" aria-hidden="true" />}
     <a className="skip-link" href="#main-content" onClick={e => { e.preventDefault(); document.getElementById('main-content')?.focus() }}>Skip to content</a>
-    <header className="personal-header" inert={isHome && landingActive} aria-hidden={isHome && landingActive ? true : undefined}>
+    <header className="personal-header" data-nav-compact={compactNav}>
       <a href="#/" className="identity" aria-label="Sulayman Bowles — home" onClick={event => { if (!isHome || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); main.current?.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }) }}><span className="identity-name">Sulayman Bowles</span></a>
-      <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug], index) => <a key={slug} href={`#/${slug}`} aria-current={section === (slug || 'home') ? 'page' : undefined} onClick={event => { if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; setMenuOpen(false); if (menuOpen && route === slug) requestAnimationFrame(() => menuButton.current?.focus({ preventScroll: true })) }}><span className="nav-number" aria-hidden="true">0{index + 1}</span>{item}</a>)}</nav>
+      <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug]) => {
+        const extra = slug !== 'about' && slug !== 'writing'
+        const collapsed = compactNav && !menuOpen && extra
+        return <span key={slug} className={`nav-slot${extra ? ' nav-extra' : ''}`} inert={collapsed}><a href={`#/${slug}`} tabIndex={collapsed ? -1 : undefined} aria-current={section === slug ? 'page' : undefined} onClick={event => { if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; setMenuOpen(false); if (menuOpen && route === slug) requestAnimationFrame(() => menuButton.current?.focus({ preventScroll: true })) }}>{item}</a></span>
+      })}</nav>
       <div className="header-end"><button className="appearance-toggle" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setDark(!dark)}><span aria-hidden="true">◐</span></button><button ref={menuButton} className="nav-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button></div>
     </header>
     {pending && <p className="route-opening mono" role="status">Opening the page…</p>}
     <main ref={main} id="main-content" tabIndex={-1} key={route} aria-busy={pending || undefined}>
       <RouteBoundary homeRoute={isHome} onError={() => setLandingActive(false)}><Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} dark={isDark} /> : article ? <ArticlePage slug={article.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} onLandingActiveChange={setLandingActive} /> : <NotFound />}</Suspense></RouteBoundary>
     </main>
-    {route !== 'about' && <Footer route={route} closing={!article && route !== 'contact'} />}
+    {route !== 'about' && route !== 'resume' && <Footer route={route} closing={!article && route !== 'contact' && route !== 'resume'} />}
   </div>
 }
 

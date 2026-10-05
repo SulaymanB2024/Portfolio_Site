@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import type { ObjectHandle } from '../object-renderer'
 import { readPortfolioRenderPolicy } from '../mobile-render-policy'
+import { portfolioAssetUrl } from '../portfolio-assets'
 
 export default function ContactSculpture({ dark, children }: { dark: boolean; children: ReactNode }) {
   const canvas = useRef<HTMLCanvasElement>(null)
@@ -53,6 +54,7 @@ export default function ContactSculpture({ dark, children }: { dark: boolean; ch
   useEffect(() => { handle.current?.setFieldPlaying?.(playing) }, [playing])
 
   return <div className="lion-study" data-status={status} data-playing={playing}>
+    <link rel="preload" as="fetch" href={portfolioAssetUrl('headrest')} crossOrigin="anonymous" />
     <figure className="lion-study-stage" aria-busy={status === 'loading'}>
       <canvas ref={canvas} tabIndex={status === 'ready' ? 0 : -1} aria-hidden={status !== 'ready'} aria-label={`Three Lions, an etched 3D sculpture. ${mobile ? 'Swipe sideways' : 'Drag'} or use arrow keys to turn. Home resets the view.`} />
       {status !== 'ready' && <p className="lion-study-status mono" role="status">{status === 'loading' ? 'Gathering the ink…' : 'The sculpture is unavailable. Contact links are just below.'}</p>}

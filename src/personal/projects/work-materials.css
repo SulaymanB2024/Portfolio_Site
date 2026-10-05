@@ -1,0 +1,126 @@
+.work-table-wrap {
+  margin: 35px 0 0;
+  min-width: 0;
+  overflow-x: auto;
+}
+.work-table-wrap:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 5px;
+}
+.work-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.work-table caption {
+  text-align: left;
+  font:
+    18px/1.5 Georgia,
+    serif;
+  padding-bottom: 18px;
+  color: var(--ink);
+}
+.work-table thead {
+  border-top: 1px solid var(--ink);
+}
+.work-table th,
+.work-table td {
+  padding: 18px 24px 18px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.work-table thead th {
+  font:
+    11px/1.6 'Courier New',
+    monospace;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.work-table tbody th {
+  font:
+    400 19px/1.5 Georgia,
+    serif;
+  width: 24%;
+}
+.work-table td {
+  font:
+    16px/1.7 Georgia,
+    serif;
+  color: var(--ink);
+}
+.work-table tr > :last-child {
+  padding-right: 0;
+}
+.work-material-note {
+  font:
+    12px/1.75 'Courier New',
+    monospace;
+  color: var(--muted);
+  margin: 22px 0 0;
+  max-width: 100ch;
+}
+.work-sources {
+  margin-top: 28px;
+}
+.work-sources > a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px;
+  gap: 25px;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+.work-sources > a > div {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 30px;
+  align-items: baseline;
+}
+.work-sources h3 {
+  font:
+    400 23px/1.25 Georgia,
+    serif;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-wrap: pretty;
+}
+.work-sources p {
+  font:
+    16px/1.65 Georgia,
+    serif;
+  color: var(--muted);
+  margin: 0;
+}
+.work-sources > a > span {
+  font:
+    23px/1.2 Georgia,
+    serif;
+  text-align: right;
+}
+.work-sources > a:hover h3 {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+@media (max-width: 760px) {
+  .work-table th,
+  .work-table td {
+    padding: 15px 15px 15px 0;
+  }
+  .work-table tbody th {
+    font-size: 17px;
+    min-width: 95px;
+  }
+  .work-table td {
+    font-size: 15px;
+    min-width: 80px;
+  }
+  .work-sources > a > div {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .work-sources h3 {
+    font-size: 22px;
+  }
+}
