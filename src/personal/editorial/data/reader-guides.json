@@ -1,0 +1,1009 @@
+{
+  "ai-search-crawler-policy": {
+    "question": "Can I allow AI search discovery while blocking model-training crawlers?",
+    "answer": "Use separate rules for each provider’s documented search, model-development, and user-requested fetch mechanisms. A training-crawler block does not automatically block the other two. Start with the outcome you want, then merge the appropriate named groups into your existing robots.txt and verify the deployed response. The comparison here retains its July 2026 documentation cutoff; revisit provider definitions before changing policy. Permission to crawl does not guarantee indexing, training, or a citation.",
+    "paths": [
+      {
+        "label": "Choose the allowed use",
+        "section": "outcome-matrix",
+        "description": "Separate search, model development, and a user opening a URL."
+      },
+      {
+        "label": "Build the provider rules",
+        "section": "robots-configurations",
+        "description": "Merge named crawler groups without discarding existing site rules."
+      },
+      {
+        "label": "Check what reached the server",
+        "section": "server-log-verification",
+        "description": "Compare deployed policy with requests and provider identity evidence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "OpenAI bot documentation",
+        "href": "https://developers.openai.com/api/docs/bots"
+      },
+      {
+        "label": "Anthropic crawler guidance",
+        "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler"
+      },
+      {
+        "label": "Perplexity crawler documentation",
+        "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers"
+      }
+    ]
+  },
+  "atlas-building-an-evidence-console": {
+    "question": "How do I tell whether an audit finding is backed by captured evidence?",
+    "answer": "Follow the finding back to its captured artifact, retrieval conditions, interpretation, and review decision. Keep missing measurements visible: saved JavaScript data is not proof that a browser rendered it. Atlas illustrates that workflow with a bounded source sample and a pinned code revision. Its tests establish behavior at that revision; the retained two-page capture establishes only what those requests returned. Neither establishes coverage or outcomes for an entire site.",
+    "paths": [
+      {
+        "label": "Inspect the captured sample",
+        "section": "capture",
+        "description": "See the retained requests and the limits of the two-page corpus."
+      },
+      {
+        "label": "Separate source from rendering",
+        "section": "source-and-render",
+        "description": "Check which observations were measured and which were unavailable."
+      },
+      {
+        "label": "Trace a finding to a decision",
+        "section": "findings",
+        "description": "Follow evidence, rule evaluation, review, and export."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Atlas at the audited revision",
+        "href": "https://github.com/SulaymanB2024/Thick-Scraper-VOID-/blob/ef3bad25ea0f43f7b4a854fa56c74af5a50fc8db/README.md"
+      },
+      {
+        "label": "Retained capture manifest",
+        "href": "/research/atlas-open-corpus-run-2026-07-16.json"
+      },
+      {
+        "label": "Rendering and provenance tests",
+        "href": "https://github.com/SulaymanB2024/Thick-Scraper-VOID-/blob/ef3bad25ea0f43f7b4a854fa56c74af5a50fc8db/tests/test_js_render_pipeline.py"
+      }
+    ]
+  },
+  "audit-findings-derived-records": {
+    "question": "What must I save so another person can reproduce an audit finding?",
+    "answer": "Save the original artifact, a typed observation, the rule version and inputs, the scoped finding, and the reviewer’s decision as separate linked records. Give each layer a stable identifier and timestamp. A later rule or correction should append a new interpretation rather than overwrite what was captured. Keep confidence, unavailable evidence, and recommended actions explicit so an exported finding still explains how it was reached and what it cannot establish.",
+    "paths": [
+      {
+        "label": "Choose the record boundaries",
+        "section": "six-record-layers",
+        "description": "Separate captured facts, interpretations, decisions, and recommendations."
+      },
+      {
+        "label": "Make the rule reproducible",
+        "section": "versioned-rules",
+        "description": "Retain the exact evaluation inputs and rule version."
+      },
+      {
+        "label": "Preserve gaps through review",
+        "section": "review-and-export",
+        "description": "Export decisions with their evidence lineage and unresolved limits."
+      }
+    ],
+    "sources": [
+      {
+        "label": "W3C provenance model",
+        "href": "https://www.w3.org/TR/prov-o/"
+      },
+      {
+        "label": "OpenLineage API specification",
+        "href": "https://openlineage.io/apidocs/openapi/"
+      },
+      {
+        "label": "OpenLineage facets",
+        "href": "https://openlineage.io/docs/spec/facets/"
+      }
+    ]
+  },
+  "canonical-identity-personal-seo": {
+    "question": "How do I make my website, résumé, and public profiles describe the same person?",
+    "answer": "Inventory the profiles and documents people can actually find, then choose an authoritative homepage and current résumé. Reconcile names, roles, dates, and links against that record before adding more pages. Use sameAs for profiles representing the same identity, rather than every page that mentions you. Retain dated historical context where appropriate. Consistent publication signals help people and crawlers reconcile records; they do not give you control over a search engine’s identity presentation.",
+    "paths": [
+      {
+        "label": "Find conflicting records",
+        "section": "profile-inventory",
+        "description": "Inventory discoverable profiles, documents, names, and dated roles."
+      },
+      {
+        "label": "Choose identity links",
+        "section": "sameas-rubric",
+        "description": "Distinguish equivalent profiles from references and unrelated entities."
+      },
+      {
+        "label": "Set a résumé policy",
+        "section": "resume-policy",
+        "description": "Choose the current document and preserve useful historical context."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Google canonical guidance",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      },
+      {
+        "label": "Google ProfilePage guidance",
+        "href": "https://developers.google.com/search/docs/appearance/structured-data/profile-page"
+      },
+      {
+        "label": "Schema.org sameAs",
+        "href": "https://schema.org/sameAs"
+      }
+    ]
+  },
+  "canonicalization-graph-consistency": {
+    "question": "Why can a page have a canonical tag and still fail a migration audit?",
+    "answer": "A tag can point to one URL while redirects, internal links, and the sitemap point elsewhere. Model those signals together and test whether eligible duplicates converge on one stable, indexable representative. Look for loops, competing endpoints, and targets that redirect again or cannot be indexed. A canonical declaration expresses a preference; it does not override contradictory behavior. Run the same checks on captured production responses, because a correct template does not establish what the deployed route serves.",
+    "paths": [
+      {
+        "label": "Map conflicting signals",
+        "section": "typed-url-graph",
+        "description": "Represent redirects, canonicals, sitemap membership, and links together."
+      },
+      {
+        "label": "Find loops and competing targets",
+        "section": "cycles-and-components",
+        "description": "Identify paths that fail to reach one stable representative."
+      },
+      {
+        "label": "Verify the deployed migration",
+        "section": "release-gate",
+        "description": "Check the final responses and their aligned publication signals."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Google canonical guidance",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      },
+      {
+        "label": "Google redirect guidance",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/301-redirects"
+      },
+      {
+        "label": "RFC 6596 canonical relation",
+        "href": "https://www.rfc-editor.org/rfc/rfc6596.html"
+      }
+    ]
+  },
+  "crawl-frontier-state-machine": {
+    "question": "How do I keep a crawler from losing URLs, retrying forever, or overwhelming one host?",
+    "answer": "Treat every discovered URL as a tracked item with explicit admission, scheduling, fetch, retry, and completion states. Preserve the original URL separately from its comparison key, schedule work by origin, and bound retries and expansion into traps. Record why a URL was delayed, rejected, or abandoned. That makes an incomplete crawl explainable and replayable, while a queue containing only pending URLs cannot account for all the work that disappeared from it.",
+    "paths": [
+      {
+        "label": "Define URL identity",
+        "section": "identity-before-scheduling",
+        "description": "Keep discovery evidence separate from normalized comparison keys."
+      },
+      {
+        "label": "Schedule politely by origin",
+        "section": "origin-scheduling",
+        "description": "Apply host-level timing and capacity constraints before fetching."
+      },
+      {
+        "label": "Explain failures and omissions",
+        "section": "retry-and-replay",
+        "description": "Bound retries and retain the transitions needed to replay decisions."
+      }
+    ],
+    "sources": [
+      {
+        "label": "RFC 3986 URL syntax",
+        "href": "https://www.rfc-editor.org/rfc/rfc3986.html"
+      },
+      {
+        "label": "RFC 9309 crawler policy",
+        "href": "https://www.rfc-editor.org/rfc/rfc9309.html"
+      },
+      {
+        "label": "RFC 9110 HTTP semantics",
+        "href": "https://www.rfc-editor.org/rfc/rfc9110.html"
+      }
+    ]
+  },
+  "hidden-financing-hardware-startups": {
+    "question": "Who ultimately pays for a hardware startup’s fleet or factory?",
+    "answer": "Trace who supplies the cash, who owns the asset, who must repay or deliver, and who absorbs losses if utilization or resale value falls. Debt, leases, customer prepayments, and public support can reduce upfront equity needs while creating different obligations. The five dated cases here illustrate those structures rather than one universal funding model. A financing announcement alone cannot establish asset title, recourse, collateral value, or the amount of capital investors can safely recover.",
+    "paths": [
+      {
+        "label": "Separate the three capital stacks",
+        "section": "three-capital-stacks",
+        "description": "Distinguish company funding, physical assets, and project cash flows."
+      },
+      {
+        "label": "Compare actual financing mechanics",
+        "section": "financing-mechanics",
+        "description": "Identify repayment, rental, delivery, and conditional-support obligations."
+      },
+      {
+        "label": "Stress the loss allocation",
+        "section": "residual-value-and-utilization",
+        "description": "Ask what happens when assets sit idle or sell for less than expected."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Original comparative report",
+        "href": "/research/hidden-financing-report.pdf"
+      },
+      {
+        "label": "CoreWeave 2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000104/crwv-20251231.htm"
+      },
+      {
+        "label": "Serve Robotics 2024 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1832483/000183248325000010/patr-20241231.htm"
+      }
+    ]
+  },
+  "how-airlines-borrow-against-loyalty-programs": {
+    "question": "What does an airline actually pledge when it borrows against a loyalty program?",
+    "answer": "It pledges designated commercial receipts and related contractual rights, rather than treating members’ miles as bank deposits. Card partners pay for mileage credits and marketing benefits; cash collection, revenue recognition, award fulfillment, and debt repayment follow different clocks. In the documented AAdvantage structure, controlled collection accounts, collateral, and reserves protect lenders before surplus reaches the airline. Partner cash receipts, accounting revenue, and profit therefore cannot be substituted for one another when valuing the program or its debt.",
+    "paths": [
+      {
+        "label": "Follow the partner payment",
+        "section": "what-the-bank-buys",
+        "description": "See what card issuers purchase and which obligations the airline assumes."
+      },
+      {
+        "label": "Reconcile cash and revenue",
+        "section": "cash-is-not-revenue",
+        "description": "Separate immediate receipts from deferred travel awards and marketing revenue."
+      },
+      {
+        "label": "Read the lender’s claim",
+        "section": "loyalty-backed-debt",
+        "description": "Trace pledged receipts, collateral, reserves, and the payment waterfall."
+      }
+    ],
+    "sources": [
+      {
+        "label": "American 2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/6201/000119312526187124/d151029dars.pdf"
+      },
+      {
+        "label": "AAdvantage financing presentation",
+        "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000022/aainvestorpresentation.htm"
+      },
+      {
+        "label": "AAdvantage credit agreement",
+        "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000054/ex104q121aadvantagexcredit.htm"
+      }
+    ]
+  },
+  "internal-links-directed-retrieval-graph": {
+    "question": "How do I find important pages that internal links fail to reach?",
+    "answer": "Start with the intended entry pages and an independent inventory of the pages that should exist. Build a directed graph of crawlable links, retaining each link’s label, placement, and source or rendered state. Then examine unreachable pages, excessive depth, and routes dependent on a single parent. A page absent from one crawl is not automatically an orphan: scope and capture failures must be checked before recommending new links. Repairs should improve a reader’s route as well as graph reachability.",
+    "paths": [
+      {
+        "label": "Decide which links count",
+        "section": "edge-contract",
+        "description": "Retain crawlability, context, and the captured state of each edge."
+      },
+      {
+        "label": "Find unreachable pages",
+        "section": "components-and-orphans",
+        "description": "Compare graph coverage with an independently established page inventory."
+      },
+      {
+        "label": "Repair useful reading routes",
+        "section": "repair-and-rerun",
+        "description": "Add contextual paths and rerun the same scoped checks."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Google crawlable-link guidance",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+      },
+      {
+        "label": "Google sitemap guidance",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+      },
+      {
+        "label": "RFC 3986 URL syntax",
+        "href": "https://www.rfc-editor.org/rfc/rfc3986.html"
+      }
+    ]
+  },
+  "jane-street-exact-search-solver-verification": {
+    "question": "How do I check that a puzzle solver’s winning answer is valid?",
+    "answer": "Recompute the submitted route’s moves, clues, scoring, and constraints from the puzzle specification instead of trusting the search routine’s final score. In the retained July 2026 solve, arithmetic pruning reduced the schedule search before geometric segments were explored; the resulting 33,609 matched Jane Street’s published solution. The verifier still shares helpers with the solver, so agreement establishes a checked result within that implementation, rather than a fully independent proof of correctness.",
+    "paths": [
+      {
+        "label": "Reduce the search before geometry",
+        "section": "arithmetic-before-geometry",
+        "description": "Use schedule arithmetic to reject impossible candidates early."
+      },
+      {
+        "label": "Recheck every constraint",
+        "section": "verifier",
+        "description": "Recompute legality and scoring from the retained route."
+      },
+      {
+        "label": "Compare with the published result",
+        "section": "result",
+        "description": "Inspect the final certificate, score, and official solution."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Jane Street puzzle specification",
+        "href": "https://www.janestreet.com/puzzles/pent-up-frustration-3-knight-moves-7-index/"
+      },
+      {
+        "label": "Jane Street official solution",
+        "href": "https://www.janestreet.com/puzzles/pent-up-frustration-3-knight-moves-7-solution/"
+      }
+    ]
+  },
+  "raw-html-rendered-dom-evidence": {
+    "question": "Which version of a JavaScript page should an SEO audit trust?",
+    "answer": "Capture both the HTTP response and the rendered DOM, because they answer different questions and either can contain information the other lacks. Preserve the browser environment, requests, timing, errors, and completion rule with the rendered snapshot. When content differs, first distinguish an application defect from blocked resources, consent, authentication, timeout, or capture failure. A screenshot or empty source response alone cannot establish what a particular crawler successfully retrieved and processed.",
+    "paths": [
+      {
+        "label": "Inspect the original response",
+        "section": "transport-artifact",
+        "description": "Keep status, headers, bytes, and request conditions."
+      },
+      {
+        "label": "Define when rendering is complete",
+        "section": "completion-contract",
+        "description": "Record the stop condition and missing dependencies before extracting."
+      },
+      {
+        "label": "Triage a source–DOM difference",
+        "section": "triage-order",
+        "description": "Separate page behavior from environment and measurement failures."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Google JavaScript SEO guidance",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+      },
+      {
+        "label": "Chrome DevTools Protocol",
+        "href": "https://chromedevtools.github.io/devtools-protocol/"
+      },
+      {
+        "label": "RFC 9110 HTTP semantics",
+        "href": "https://www.rfc-editor.org/rfc/rfc9110.html"
+      }
+    ]
+  },
+  "replayable-traces-ai-agent-evaluation": {
+    "question": "How do I tell whether an agent improvement is reliable rather than a lucky run?",
+    "answer": "Define the task, initial environment, and success conditions before running the agent, then retain the actions and resulting state as a replayable trace. Grade the final outcome separately from the path: a correct answer can conceal an unacceptable action. Repeat comparable trials, record cost and failure patterns, and test regressions before promoting a change. One successful transcript cannot establish reliability, and a model-based grader needs its own validation against the behavior you intend to measure.",
+    "paths": [
+      {
+        "label": "Make trials comparable",
+        "section": "environment-control",
+        "description": "Control the starting state, tools, permissions, and reset behavior."
+      },
+      {
+        "label": "Grade outcome and behavior",
+        "section": "layered-graders",
+        "description": "Separate deterministic checks from judgments about the action trace."
+      },
+      {
+        "label": "Set a promotion threshold",
+        "section": "promotion-gate",
+        "description": "Review repeated results, regressions, costs, and unacceptable actions."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Anthropic agent-evaluation methods",
+        "href": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+      },
+      {
+        "label": "AgentRewardBench research",
+        "href": "https://arxiv.org/abs/2504.08942"
+      },
+      {
+        "label": "Anthropic statistical evaluation methods",
+        "href": "https://www.anthropic.com/research/statistical-approach-to-model-evals"
+      }
+    ]
+  },
+  "robots-txt-courtesy-not-access-control": {
+    "question": "Will robots.txt keep a private page out of search and prevent access?",
+    "answer": "No. Robots.txt asks cooperating crawlers which paths to request; it does not authenticate a visitor or deny access. Google can still list a disallowed URL discovered elsewhere. For a public page that should not be indexed, use a supported noindex instruction that the crawler can retrieve. For private content, enforce authentication and authorization at the server. Test those boundaries separately, and treat a claimed bot User-Agent as a claim rather than verified identity.",
+    "paths": [
+      {
+        "label": "Choose the right control",
+        "section": "six-control-layers",
+        "description": "Match crawling, indexing, privacy, and capacity to separate controls."
+      },
+      {
+        "label": "Test whether content is private",
+        "section": "protect-private-content",
+        "description": "Check access even when robots rules and client headers change."
+      },
+      {
+        "label": "Verify the bot’s identity",
+        "section": "bot-identity",
+        "description": "Distinguish a user-agent string from corroborated request evidence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "RFC 9309, security considerations",
+        "href": "https://www.rfc-editor.org/rfc/rfc9309.html#section-3"
+      },
+      {
+        "label": "Google robots.txt limitations",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/robots/intro"
+      },
+      {
+        "label": "OWASP authorization guidance",
+        "href": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ]
+  },
+  "software-buyout-boom-2020-2022-exit-audit": {
+    "question": "Did the 2020–2022 software buyouts fully exit, or just generate some liquidity?",
+    "answer": "Use a control-based test: identify who controls the company after the transaction, rather than counting every IPO, refinancing, or stake sale as an exit. In the August 17, 2026 audit, none of the 25 reviewed take-privates met the study’s clean-realization definition. That finding does not mean every investment lost money. Announcement values, enterprise value, sponsor equity invested, and cash returned measure different things; public evidence does not reconstruct a complete fund return.",
+    "paths": [
+      {
+        "label": "Inspect each deal’s status",
+        "section": "deal-by-deal-control-inventory",
+        "description": "Review the retained company-level classification and evidence."
+      },
+      {
+        "label": "Distinguish liquidity from exit",
+        "section": "liquidity-without-clean-exits",
+        "description": "Identify events that return cash while sponsor control continues."
+      },
+      {
+        "label": "Apply the same classification rule",
+        "section": "control-based-classification",
+        "description": "Check control, realization, and the audit’s dated cutoff."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Original cohort records",
+        "href": "https://sulayman-bowles.dev/research/software-buyout-cohort-2020-2022.csv"
+      },
+      {
+        "label": "Claim-by-claim evidence ledger",
+        "href": "https://sulayman-bowles.dev/research/software-buyout-cohort-claim-ledger.csv"
+      },
+      {
+        "label": "Classification methodology",
+        "href": "https://sulayman-bowles.dev/research/software-buyout-cohort-methodology.md"
+      }
+    ]
+  },
+  "sqlite-crawl-pipelines": {
+    "question": "How can concurrent crawl workers save results without losing the audit trail?",
+    "answer": "Keep each fetch attempt as an immutable record and serialize writes through a bounded transaction boundary. Acknowledge a result only after its transaction commits; use stable keys and idempotent writes to make retries safe. Separate attempts from the current-page projection so late renders or repeated requests do not erase history. WAL can help readers coexist with a writer, but it does not turn SQLite into a database with unrestricted concurrent writers.",
+    "paths": [
+      {
+        "label": "Choose the grain of each record",
+        "section": "schema-grain",
+        "description": "Separate crawl runs, attempts, artifacts, observations, and projections."
+      },
+      {
+        "label": "Commit and acknowledge safely",
+        "section": "transaction-boundary",
+        "description": "Bound writer work and avoid reporting success before durable storage."
+      },
+      {
+        "label": "Make retry writes idempotent",
+        "section": "idempotent-writes",
+        "description": "Use stable keys while retaining distinct attempts and their evidence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "SQLite transactions",
+        "href": "https://www.sqlite.org/lang_transaction.html"
+      },
+      {
+        "label": "SQLite UPSERT",
+        "href": "https://www.sqlite.org/lang_upsert.html"
+      },
+      {
+        "label": "SQLite WAL documentation",
+        "href": "https://www.sqlite.org/wal.html"
+      }
+    ]
+  },
+  "structured-data-without-content-drift": {
+    "question": "How do I stop JSON-LD, the visible page, and the sitemap from disagreeing?",
+    "answer": "Derive them from one typed publication record with stable identity, dates, and source provenance. Validate the meaning shared across those projections, not just whether each output parses. A valid JSON-LD object can still describe a different author, URL, or date from the visible page. Treat changes to that record as publication changes, regenerate every dependent output, and test the resulting agreements before release rather than repairing each representation independently.",
+    "paths": [
+      {
+        "label": "Define the authoritative record",
+        "section": "domain-record",
+        "description": "Choose the facts that all publication outputs derive from."
+      },
+      {
+        "label": "Set stable identifiers",
+        "section": "stable-identifiers",
+        "description": "Keep entity identity consistent across URLs and generated metadata."
+      },
+      {
+        "label": "Test semantic agreement",
+        "section": "semantic-invariants",
+        "description": "Compare visible content, JSON-LD, canonical URLs, and sitemap facts."
+      }
+    ],
+    "sources": [
+      {
+        "label": "W3C JSON-LD 1.1",
+        "href": "https://www.w3.org/TR/json-ld11/"
+      },
+      {
+        "label": "Google structured-data introduction",
+        "href": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data"
+      },
+      {
+        "label": "Google structured-data policies",
+        "href": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"
+      }
+    ]
+  },
+  "technical-seo-migration-release-gates": {
+    "question": "What should I verify before changing article URLs?",
+    "answer": "Inventory the meaningful old URLs and approve a specific outcome for each: retained content, an equivalent destination, or deliberate removal. Test redirects, final status, canonical URLs, indexability, internal links, and sitemap membership together. A successful build cannot establish that production serves those outcomes. Keep a launch baseline and repeat the checks against live responses so a routing defect can be distinguished from a later indexing transition or a change in search demand.",
+    "paths": [
+      {
+        "label": "Assign every old URL an outcome",
+        "section": "url-manifest",
+        "description": "Record the retained page, equivalent redirect, or intentional removal."
+      },
+      {
+        "label": "Check the redirect graph",
+        "section": "redirect-graph",
+        "description": "Find loops, chains, and destinations that fail the intended reader task."
+      },
+      {
+        "label": "Verify after launch",
+        "section": "postlaunch-evidence",
+        "description": "Capture production behavior and compare it with the approved manifest."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Google site-move guidance",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+      },
+      {
+        "label": "Google redirect guidance",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/301-redirects"
+      },
+      {
+        "label": "Google canonical guidance",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      }
+    ]
+  },
+  "technical-seo-public-data-infrastructure": {
+    "question": "Where should I look when a page is visible but downstream data is wrong?",
+    "answer": "Trace the publication pipeline one boundary at a time: route and HTTP response, browser rendering, semantic extraction, structured record, and exported result. Preserve the input, output, identity, and transformation at each boundary so you can locate where information changed or disappeared. Being visible in a browser does not prove an extractor or search system received the same record. Report unavailable measurements and freshness limits before presenting the downstream output as authoritative.",
+    "paths": [
+      {
+        "label": "Locate the failing stage",
+        "section": "public-record-pipeline",
+        "description": "Follow the record from public route to downstream export."
+      },
+      {
+        "label": "Compare source and rendered states",
+        "section": "raw-rendered-states",
+        "description": "Check what transport and browser evidence each actually establish."
+      },
+      {
+        "label": "Write a data-quality contract",
+        "section": "data-quality-contract",
+        "description": "Make coverage, grain, freshness, identity, and gaps explicit."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Google JavaScript SEO guidance",
+        "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+      },
+      {
+        "label": "Google structured-data introduction",
+        "href": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data"
+      },
+      {
+        "label": "SEC EDGAR data APIs",
+        "href": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces"
+      }
+    ]
+  },
+  "the-ai-megawatt": {
+    "question": "How many GPUs does a one-gigawatt AI data center contain?",
+    "answer": "There is no single conversion until you know whether the gigawatt means a grid request, facility capacity, IT power, or average consumption. The reference model here converts 1,000 MW of facility capacity into 402,574 B300 GPUs using its stated NVL72 rack assumptions, PUE of 1.145, and 10% external IT overhead. That is a scenario, not an observed fleet. Apply overhead at the correct boundary, then distinguish installed capacity from utilization and useful work.",
+    "paths": [
+      {
+        "label": "Identify what the megawatt measures",
+        "section": "capacity-dictionary",
+        "description": "Separate grid requests, facility power, IT load, and consumption."
+      },
+      {
+        "label": "Reproduce the facility conversion",
+        "section": "facility-conversion",
+        "description": "Apply the rack, PUE, and external-overhead assumptions once."
+      },
+      {
+        "label": "Separate capacity from useful work",
+        "section": "installed-vs-utilized",
+        "description": "Inspect utilization and workload limits before interpreting the GPU count."
+      }
+    ],
+    "sources": [
+      {
+        "label": "NVIDIA NVL72 components",
+        "href": "https://docs.nvidia.com/enterprise-reference-architectures/nvl72-ai-factory/latest/components.html"
+      },
+      {
+        "label": "NVIDIA network architecture",
+        "href": "https://docs.nvidia.com/enterprise-reference-architectures/nvl72-ai-factory/latest/network-logical-architecture.html"
+      },
+      {
+        "label": "2025 U.S. data-center energy report",
+        "href": "https://doi.org/10.71468/P1RP4F"
+      }
+    ]
+  },
+  "the-first-ai-managers": {
+    "question": "Has an AI-run shop demonstrated profit without hidden human support?",
+    "answer": "The July 2026 review documents agents making real operating decisions, but it does not establish audited, fully burdened profit from a general-purpose model running a business end to end. Compare the live shops with pilots and simulations separately. Include human staffing, setup, supplier assistance, rent, failures, and continuing intervention before treating reported revenue or operating surplus as autonomous profit. The useful question is which decisions the agent controls and which costs and responsibilities remain human.",
+    "paths": [
+      {
+        "label": "Define what the agent operates",
+        "section": "what-counts-as-an-ai-operated-business",
+        "description": "Distinguish live operations, supervised pilots, and simulations."
+      },
+      {
+        "label": "Reconstruct the economics",
+        "section": "economics",
+        "description": "Separate reported sales from costs, losses, and human support."
+      },
+      {
+        "label": "Check the evidence standard",
+        "section": "evidence-standard",
+        "description": "Identify the records needed to substantiate autonomy and profit."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Project Vend, phase one",
+        "href": "https://www.anthropic.com/research/project-vend-1"
+      },
+      {
+        "label": "Project Vend, phase two",
+        "href": "https://www.anthropic.com/research/project-vend-2"
+      },
+      {
+        "label": "Andon Café operating account",
+        "href": "https://andonlabs.com/blog/why-gemini-lost-money-andon-cafe"
+      }
+    ]
+  },
+  "us-rare-earth-magnet-manufacturing-capacity": {
+    "question": "Can announced U.S. rare-earth magnet capacity replace imports?",
+    "answer": "Only compare qualified output that can serve the relevant products with a demand denominator measured on the same basis. The August 2026 audit separates commercial shipments, ramping lines, construction, and future announcements rather than adding them all as available supply. Magnet grade, geometry, coating, qualification, and upstream material constraints affect what customers can actually buy. Nameplate tonnes alone therefore cannot establish import replacement, particularly when announcements describe different stages or products.",
+    "paths": [
+      {
+        "label": "Sort announcements by operating stage",
+        "section": "classification",
+        "description": "Separate shipments, ramping production, construction, and future plans."
+      },
+      {
+        "label": "Choose a comparable demand measure",
+        "section": "demand-denominator",
+        "description": "Match units and product coverage before calculating replacement."
+      },
+      {
+        "label": "Check product and qualification limits",
+        "section": "product-mix",
+        "description": "Identify grade, geometry, coating, and customer-specific constraints."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Original capacity and maturity model",
+        "href": "/research/us-rare-earth-magnet-capacity-model.csv"
+      },
+      {
+        "label": "Original definitions and methodology",
+        "href": "/research/us-rare-earth-magnet-methodology.md"
+      },
+      {
+        "label": "USGS rare-earth statistics",
+        "href": "https://www.usgs.gov/centers/national-minerals-information-center/rare-earths-statistics-and-information"
+      }
+    ]
+  },
+  "viralbench-codex-agent-harness": {
+    "question": "How should I improve a ViralBench agent without mistaking luck for a better system?",
+    "answer": "Retain the run’s state and action trace, reproduce failures offline, and give Codex a bounded engineering task with independent review. Reserve live comparisons for controlled experiments with defined measurement windows and uncertainty. A leaderboard result measures the configured system, including its tools, memory, budgets, and environment. This article proposes that harness from a code audit; it does not report a deployed harness or measured improvement, so the proposal itself is not evidence of performance gains.",
+    "paths": [
+      {
+        "label": "Capture evidence before changing code",
+        "section": "the-evidence-layer-comes-before-the-codex-layer",
+        "description": "Retain state, actions, constraints, failures, and measurement context."
+      },
+      {
+        "label": "Reproduce failures offline",
+        "section": "offline-replay-should-absorb-most-iteration",
+        "description": "Test bounded patches without spending a live trial on every iteration."
+      },
+      {
+        "label": "Design a live comparison",
+        "section": "live-evaluation-needs-experimental-discipline",
+        "description": "Control conditions and measurement windows before attributing gains."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Audited ViralBench agent code",
+        "href": "https://github.com/JibranK12345/Viral-Bench/blob/5f5f57e251023ceb37961c0fc2c808f67ceb71eb/marketing-agent.ts"
+      },
+      {
+        "label": "OpenAI agent-improvement loop",
+        "href": "https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop"
+      },
+      {
+        "label": "Microsoft experimentation methods",
+        "href": "https://www.microsoft.com/en-us/research/group/experimentation-platform-exp/articles/deep-dive-into-variance-reduction/"
+      }
+    ]
+  },
+  "waymo-hardware-financing": {
+    "question": "Does Waymo’s fundraising reveal who owns its vehicles or bears fleet losses?",
+    "answer": "No. The disclosed investment rounds establish company funding, while public disclosures leave important fleet-level title, lease, recourse, and residual-value questions unresolved. The article’s visible case is parent-supported, equity-heavy financing; its leasing and asset-backed structures are explicit counterfactual models. To assess fleet economics, identify who pays for vehicles and sensors, who controls utilization, and who absorbs idle capacity, repairs, or resale losses. Do not convert a fundraising total into a measured fleet balance sheet.",
+    "paths": [
+      {
+        "label": "Separate funding from asset ownership",
+        "section": "visible-rounds-invisible-assets",
+        "description": "See what the disclosed rounds establish and what remains unallocated."
+      },
+      {
+        "label": "Compare financing obligations",
+        "section": "hardware-financing-mechanics",
+        "description": "Identify title, payments, collateral, and recourse in each structure."
+      },
+      {
+        "label": "Stress utilization and losses",
+        "section": "utilization-downside",
+        "description": "Compare modeled outcomes when paid use falls below the base case."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Waymo February 2026 financing",
+        "href": "https://waymo.com/blog/2026/02/waymo-raises-usd16-billion-investment-round"
+      },
+      {
+        "label": "Alphabet 2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+      },
+      {
+        "label": "Waymo response to Senator Markey",
+        "href": "https://storage.googleapis.com/waymo-prod-cdn/uploads/680a27f89a3aae48977db655a5f45005-Sen._Markey_RA_Letter_Waymo__Response.pdf"
+      }
+    ]
+  },
+  "west-campus-student-housing": {
+    "question": "What should I compare before signing a West Campus housing contract?",
+    "answer": "Compare the whole contract term and included services, rather than treating a quoted installment as ordinary monthly rent. The study’s Callaway example has ten payments, with meals and furnishings changing the comparison; parking, insurance, guarantees, and reletting terms can add obligations. For the property’s economics, keep operating income separate from debt service and investor returns. A premium price or strong property-level margin does not establish who ultimately earns a profit after financing and acquisition costs.",
+    "paths": [
+      {
+        "label": "Calculate the full contract cost",
+        "section": "installment-contract",
+        "description": "Check payment count, included services, and extra obligations."
+      },
+      {
+        "label": "Compare six property structures",
+        "section": "six-properties",
+        "description": "Keep the property, service bundle, and ownership context together."
+      },
+      {
+        "label": "Follow financing priorities",
+        "section": "loss-allocation",
+        "description": "See why property income and investor outcomes can diverge."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Original West Campus report",
+        "href": "/research/west-campus-investigative-report.pdf"
+      },
+      {
+        "label": "SkyLoft financing term sheet",
+        "href": "https://www.sec.gov/Archives/edgar/data/1532799/000153949719000414/n1550_x2-ts.htm"
+      },
+      {
+        "label": "UT 2400 Nueces rates",
+        "href": "https://housing.utexas.edu/housing/2400-nueces-apartments/2400-nueces-rates"
+      }
+    ]
+  },
+  "what-happens-when-an-index-decides-a-company-matters": {
+    "question": "How much new buying does a company’s index inclusion actually cause?",
+    "answer": "Begin with the index’s eligibility rules, inclusion date, and target weight, then identify assets that actually replicate it. Benchmark-linked assets are not all forced buyers. Estimate the net ownership change after overlap, source-index selling, existing positions, and execution choices, rather than multiplying a headline AUM number by weight. Rebalancing can concentrate trading at the effective close, but inclusion alone does not establish a lasting price premium or a permanent reduction in capital costs.",
+    "paths": [
+      {
+        "label": "Check the provider’s inclusion rules",
+        "section": "four-rule-systems",
+        "description": "Compare committee decisions, rankings, screens, and buffers."
+      },
+      {
+        "label": "Translate weight into net trades",
+        "section": "rule-to-trade",
+        "description": "Distinguish replicating assets from benchmark comparisons and offsets."
+      },
+      {
+        "label": "Evaluate the price-effect evidence",
+        "section": "event-study-evidence",
+        "description": "Separate event-window returns from claims about permanent value."
+      }
+    ],
+    "sources": [
+      {
+        "label": "S&P U.S. methodology",
+        "href": "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-us-indices.pdf"
+      },
+      {
+        "label": "Nasdaq-100 methodology",
+        "href": "https://indexes.nasdaq.com/docs/Methodology_NDX.pdf"
+      },
+      {
+        "label": "S&P index-effect study",
+        "href": "https://www.spglobal.com/spdji/en/research/article/what-happened-to-the-index-effect-a-look-at-three-decades-of-sp-500-adds-and-drops/"
+      }
+    ]
+  },
+  "where-online-returns-actually-go": {
+    "question": "Why can a retailer refund me and still tell me to keep the item?",
+    "answer": "The refund decision and the decision to retrieve the product are separate. For an eligible item, retrieval only makes economic sense when the recoverable value exceeds shipping, handling, inspection, and other expected costs. A returned product may be restocked, sold open-box, refurbished, liquidated, donated, or disposed of depending on its condition and constraints. Positive recovery reduces a loss relative to abandonment; it does not mean the original sale remains profitable or that environmental reuse was verified.",
+    "paths": [
+      {
+        "label": "Separate the refund from the product",
+        "section": "refund-versus-product",
+        "description": "Follow customer reimbursement and physical disposition independently."
+      },
+      {
+        "label": "Compare retrieval economics",
+        "section": "return-decision-engine",
+        "description": "Evaluate recoverable value against processing and risk costs."
+      },
+      {
+        "label": "Follow the secondary-market route",
+        "section": "secondary-market",
+        "description": "See how grading, lots, and resale channels affect recovery."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Amazon 2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+      },
+      {
+        "label": "Walmart Keep It rules",
+        "href": "https://marketplacelearn.walmart.com/guides/Order%20management/Returns%20%26%20refunds/Add-a-Keep-It-Rule"
+      },
+      {
+        "label": "Original reverse-logistics investigation",
+        "href": "/research/where-online-return-actually-goes-report.pdf"
+      }
+    ]
+  },
+  "who-owns-austin-home-service-companies": {
+    "question": "How can I tell whether a local home-service brand has a private-equity owner?",
+    "answer": "Trace the brand to its legal operator, operating platform, and equity sponsor using acquisition announcements and current portfolio records at the study’s cutoff. A local office, founder’s name, or locally managed staff does not establish local equity ownership. In the July 2026 map, Radiant connects to T3 Services Group and Riverside. Keep those layers separate when comparing contractors, and leave the chain unresolved when a primary record does not support the next ownership step.",
+    "paths": [
+      {
+        "label": "Look up the ownership chain",
+        "section": "ownership-map",
+        "description": "Find the brand, platform, sponsor, and retained source trail."
+      },
+      {
+        "label": "Interpret “local” correctly",
+        "section": "meaning-of-local",
+        "description": "Separate local service and management from equity ownership."
+      },
+      {
+        "label": "Check the investigation method",
+        "section": "methodology",
+        "description": "Review primary-source matching, scope, and dated evidence limits."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Original Austin ownership dataset",
+        "href": "/research/austin-home-service-ownership-2026.csv"
+      },
+      {
+        "label": "Riverside T3 portfolio record",
+        "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group"
+      }
+    ]
+  },
+  "who-owns-texas-toll-roads": {
+    "question": "Who owns Texas toll roads, and is NTTA a private company?",
+    "answer": "NTTA is a public tollway authority. Texas toll roads can sit under a state agency, county, or public authority; some state-owned corridors grant a private company time-limited rights to operate and collect tolls. Keep the road’s title, concession rights, company shareholders, lenders, and billing agency separate. A private investor can own the concession company without owning Texas’s road. The July 2026 map distinguishes those claims and explains why a buyout or bankruptcy can change investors while the road remains open.",
+    "paths": [
+      {
+        "label": "Find the authority for your road",
+        "section": "the-texas-ownership-map",
+        "description": "Compare public systems with private concession corridors."
+      },
+      {
+        "label": "Follow where the toll money goes",
+        "section": "how-a-toll-road-turns-traffic-into-equity-cash",
+        "description": "Separate operating costs, debt claims, reserves, and equity cash."
+      },
+      {
+        "label": "Compare ownership and operating rights",
+        "section": "public-authority-or-private-concession",
+        "description": "See why public road title and private concession rights can coexist."
+      }
+    ],
+    "sources": [
+      {
+        "label": "NTTA 2025 financial report",
+        "href": "https://www.ntta.org/sites/default/files/2026-06/06-25-2026_Digital-Annual-Report_2025.pdf"
+      },
+      {
+        "label": "Federal SH 130 project record",
+        "href": "https://www.transportation.gov/buildamerica/projects/sh-130-segments-5-and-6"
+      },
+      {
+        "label": "TxDOT SH 288 agreements",
+        "href": "https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh288-toll-lanes/executed-agreements.html"
+      }
+    ]
+  },
+  "why-texas-toll-roads-stay-tolled": {
+    "question": "Why do tolls continue after a road’s construction cost has been paid?",
+    "answer": "Recovering construction cost is different from retiring a road’s debt, retiring a pooled system’s debt, or ending the legal power to charge tolls. Public systems may fund maintenance, reserves, and other roads through pooled revenue and financing commitments. A private concession has its own contractual term and termination rights. The SH 288 case shows that buying out the private operating contract can return control to TxDOT while tolls continue. Ask which obligation or decision would actually end collection.",
+    "paths": [
+      {
+        "label": "Separate the five payoff questions",
+        "section": "five-separate-questions",
+        "description": "Distinguish construction recovery, debt retirement, and authority to toll."
+      },
+      {
+        "label": "Understand pooled public debt",
+        "section": "ntta-pooled-trust",
+        "description": "Follow system-level obligations beyond a single road’s construction bill."
+      },
+      {
+        "label": "See what the SH 288 buyout changed",
+        "section": "sh-288-termination",
+        "description": "Separate termination of a private concession from ending public tolls."
+      }
+    ],
+    "sources": [
+      {
+        "label": "NTTA financial information",
+        "href": "https://www.ntta.org/about-us/financial-information"
+      },
+      {
+        "label": "TxDOT FY2025 toll-road report",
+        "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf"
+      },
+      {
+        "label": "TxDOT SH 288 agreements",
+        "href": "https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh288-toll-lanes/executed-agreements.html"
+      }
+    ]
+  }
+}

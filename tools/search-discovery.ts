@@ -29,6 +29,10 @@ ${list(publicPages.filter(page => page.route.startsWith('work/')))}
 
 ${list(publicPages.filter(page => page.route.startsWith('writing/')))}
 
+## Reading paths
+
+${list(publicPages.filter(page => page.route.startsWith('topics/')))}
+
 ## Supporting references
 
 - [Historical July 2026 résumé PDF](${siteOrigin}/Sulayman_Bowles_Resume.pdf): the web résumé reflects the September 2026 source snapshot.

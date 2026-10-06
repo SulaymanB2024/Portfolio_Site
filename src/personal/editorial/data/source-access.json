@@ -1,0 +1,191 @@
+{
+  "checkedAt": "2026-10-06",
+  "articles": {
+    "where-online-returns-actually-go": [
+      {
+        "href": "https://corporate.target.com/jobs/w43/09/reverse-logistics-expert",
+        "label": "Target — reverse logistics role",
+        "note": "The original job-posting URL returned 404. The linked Target posting describes the same role in a current vacancy; it is a reading alternative, not an archived copy of the July 2026 posting.",
+        "alternatives": [
+          {
+            "href": "https://corporate.target.com/jobs/w13/13/reverse-logistics-expert",
+            "label": "Target: another Reverse Logistics Expert posting"
+          }
+        ]
+      }
+    ],
+    "the-first-ai-managers": [
+      {
+        "href": "https://github.com/jotapee/thh",
+        "label": "The Hallucination Herald — source code",
+        "note": "The cited repository returned 404. No replacement public repository was verified. The case inventory preserves the original reported evidence and limitations; this access check does not provide a fresh code review.",
+        "alternatives": []
+      },
+      {
+        "href": "https://www.sensetime.com/cn/news-detail/51170659?categoryId=72",
+        "label": "SenseTime — SenseMartGo announcement",
+        "note": "The cited operator announcement returned 404, and an exact replacement was not verified. The case remains a historical, vendor-reported record with the article’s original unaudited-economics limitation; this access check does not independently refresh the operating or revenue claims.",
+        "alternatives": []
+      }
+    ],
+    "what-happens-when-an-index-decides-a-company-matters": [
+      {
+        "href": "https://ideas.repec.org/a/oup/rfinst/v28y2015i1p212-246.html",
+        "label": "Chang, Hong and Liskovich — Russell index assignment",
+        "note": "The RePEc record returned 404. The DOI identifies the same 2015 paper, “Regression Discontinuity and the Price Effects of Stock Market Indexing,” in The Review of Financial Studies 28(1), pages 212–246. Automated access to Oxford returned 403; publisher access may be limited. The retained evidence audit is the investigation, not a copy of the paper.",
+        "alternatives": [
+          {
+            "href": "https://doi.org/10.1093/rfs/hhu041",
+            "label": "Publisher DOI: the same 2015 paper (access may be limited)"
+          },
+          {
+            "href": "/research/index-company-matters-evidence-audit.pdf",
+            "label": "Retained July 2026 evidence audit"
+          }
+        ]
+      }
+    ],
+    "who-owns-austin-home-service-companies": [
+      {
+        "href": "https://t3servicesgroup.com/partners/",
+        "label": "T3 Services Group — partner directory",
+        "note": "The partner-directory URL returned 404. Riverside’s available T3 portfolio page provides related sponsor information, not a snapshot of the missing brand directory. The local dataset retains the July 26, 2026 ownership records and their evidence ratings.",
+        "alternatives": [
+          {
+            "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group",
+            "label": "Riverside: related T3 portfolio record"
+          },
+          {
+            "href": "/research/austin-home-service-ownership-2026.csv",
+            "label": "Retained July 2026 ownership dataset"
+          }
+        ]
+      },
+      {
+        "href": "https://www.dunespointcapital.com/news/roofing-services-solutions-acquires-ja-mar-roofing-sheet-metal/",
+        "label": "Dunes Point — Ja-Mar acquisition",
+        "note": "The shortened news URL returned 404. Dunes Point’s available announcement describes the same Roofing Services Solutions acquisition of Ja-Mar Roofing & Sheet Metal and is dated April 8, 2025.",
+        "alternatives": [
+          {
+            "href": "https://dunespointcapital.com/news/dunes-point-capital-lp-announces-roofing-services-solutions-acquisition-of-ja-mar-roofing-sheet-metal/",
+            "label": "Dunes Point: April 8, 2025 acquisition announcement"
+          }
+        ]
+      },
+      {
+        "href": "https://www.groundworks.com/resources/kkr-makes-significant-investment-in-groundworks/",
+        "label": "Groundworks — KKR investment",
+        "note": "The original resource URL returned 404. The available same-event Groundworks release names KKR as a strategic partner and says Cortec remains a shareholder. Its text is dated February 2, 2023; the retained ledger lists March 2023. Use the release for the announcement date. This note does not establish ownership changes since the July 2026 snapshot.",
+        "alternatives": [
+          {
+            "href": "https://www.groundworks.com/2023/02/03/groundworks-announces-kkr-as-a-new-strategic-partner-to-support-growth/",
+            "label": "Groundworks: dated KKR strategic-partnership release"
+          }
+        ]
+      },
+      {
+        "href": "https://www.kkr.com/newsroom/news/news-details/2021/kkr-completes-acquisition-neighborly",
+        "label": "KKR — Neighborly acquisition",
+        "note": "The cited acquisition-release URL returned 404, and an exact replacement was not verified. The local dataset retains the July 2026 ownership record and its source reference. It is not a publisher-page archive or confirmation of ownership after the research cutoff.",
+        "alternatives": [
+          {
+            "href": "/research/austin-home-service-ownership-2026.csv",
+            "label": "Retained July 2026 ownership dataset"
+          }
+        ]
+      },
+      {
+        "href": "https://www.riversidecompany.com/currents/riverside-s-latest-investment-is-a-royal-flush",
+        "label": "Riverside — Radiant investment",
+        "note": "The Radiant announcement URL returned 404. Riverside’s available T3 Services Group portfolio page records related platform investment history. It is a portfolio record, not an archived copy of the original Radiant announcement.",
+        "alternatives": [
+          {
+            "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group",
+            "label": "Riverside: T3 Services Group portfolio record"
+          }
+        ]
+      },
+      {
+        "href": "https://www.rollins.com/about-us/brands/default.aspx",
+        "label": "Rollins — brand portfolio",
+        "note": "The live brand-directory URL returned 404. Rollins’ 2025 annual report provides dated corporate information about Orkin and HomeTeam. It is a related company filing, not a current copy of the brand directory.",
+        "alternatives": [
+          {
+            "href": "https://www.rollins.com/investors/financial-information/sec-filings/content/0001539497-26-000933/0001539497-26-000933.pdf",
+            "label": "Rollins: 2025 annual report"
+          }
+        ]
+      },
+      {
+        "href": "https://www.trivest.com/news/trivest-partners-announces-investment-in-alta-pest-control/",
+        "label": "Trivest — Alta Pest Control investment",
+        "note": "The cited investment-release URL returned 404, and an exact replacement was not verified. The retained July 2026 dataset records the original ownership classification and evidence rating. It is compiled research, not an archived copy of Trivest’s announcement.",
+        "alternatives": [
+          {
+            "href": "/research/austin-home-service-ownership-2026.csv",
+            "label": "Retained July 2026 ownership dataset"
+          }
+        ]
+      }
+    ],
+    "us-rare-earth-magnet-manufacturing-capacity": [
+      {
+        "href": "https://www.bis.gov/press-release/department-commerce-releases-results-section-232-investigation-neodymium-iron-boron-permanent-magnets",
+        "label": "Commerce — NdFeB Section 232 investigation",
+        "note": "The cited Commerce/BIS release returned 404, and an exact replacement was not verified. The local source ledger preserves the investigation’s citation and methods. It is compiled research, not an archived copy of the government release.",
+        "alternatives": [
+          {
+            "href": "/research/us-rare-earth-magnet-source-ledger.csv",
+            "label": "Retained source ledger (compiled research)"
+          }
+        ]
+      },
+      {
+        "href": "https://www.cotec.ca/hypromag-usa",
+        "label": "CoTec — HyProMag USA",
+        "note": "The cited project URL returned 404. CoTec’s available HyProMag USA asset page describes the same project. It is a current publisher page, not a preserved capture of the original disclosure; the capacity model keeps its August 17, 2026 cutoff.",
+        "alternatives": [
+          {
+            "href": "https://cotec.ca/our-business/assets-technologies/assets/basic-industries-venture-fund-i-/",
+            "label": "CoTec: current HyProMag USA asset page"
+          }
+        ]
+      },
+      {
+        "href": "https://www.energy.gov/cmm/critical-materials-assessment",
+        "label": "Department of Energy — materials assessment",
+        "note": "The generic assessment URL returned 404. DOE’s available 2023 Critical Materials Assessment announcement provides dated background. The original citation did not identify a version, so this related official source is not presented as an identical replacement document.",
+        "alternatives": [
+          {
+            "href": "https://www.energy.gov/cmei/ammto/articles/2023-doe-critical-materials-assessment",
+            "label": "DOE: 2023 Critical Materials Assessment"
+          }
+        ]
+      },
+      {
+        "href": "https://www.gao.gov/critical-minerals",
+        "label": "GAO — critical minerals",
+        "note": "The generic topic URL returned 404. GAO-24-106395, published July 31, 2024, discusses recovery from nontraditional sources. It provides related background, rather than an archive of the missing topic page or an update to the capacity inventory.",
+        "alternatives": [
+          {
+            "href": "https://www.gao.gov/products/gao-24-106395",
+            "label": "GAO: July 31, 2024 critical-minerals report"
+          }
+        ]
+      }
+    ],
+    "hidden-financing-hardware-startups": [
+      {
+        "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000058/crwv-20260331.htm",
+        "label": "CoreWeave — first-quarter 2026 Form 10-Q",
+        "note": "The original link uses a different EDGAR accession and returned 404. The working filing is CoreWeave’s Form 10-Q for March 31, 2026, filed May 8, 2026, accession 0001769628-26-000222. This corrects access to the cited filing; the report’s quantities and research cutoff are retained.",
+        "alternatives": [
+          {
+            "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000222/crwv-20260331.htm",
+            "label": "EDGAR: CoreWeave Q1 2026 Form 10-Q"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -7,8 +7,10 @@ const config = JSON.parse(await read('vercel.json'))
 const sitemap = await read('dist/sitemap.xml')
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => new URL(match[1]))
 const catalog = JSON.parse(await read('src/personal/editorial/data/catalog.json'))
-assert.equal(urls.length, 13 + catalog.length, 'Every published article has a canonical document')
+const topics = (await import('../src/personal/editorial/topics.ts')).readingTopics
+assert.equal(urls.length, 13 + catalog.length + topics.length, 'Every published article and reading path has a canonical document')
 for (const article of catalog) assert(urls.some(url => url.pathname === article.path), `Missing original article URL: ${article.path}`)
+for (const topic of topics) assert(urls.some(url => url.pathname === `/topics/${topic.slug}`), `Missing reading path: ${topic.slug}`)
 assert.equal(new Set(urls.map(url => url.href)).size, urls.length)
 let checkedAssets = 0
 for (const url of urls) {

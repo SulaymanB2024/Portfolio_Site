@@ -2,11 +2,9 @@ import archived from './data/archived-catalog.json' with { type: 'json' }
 import published from './data/catalog.json' with { type: 'json' }
 
 const atlas = 'atlas-building-an-evidence-console'
-export const withdrawnArticleSlugs = [
-  'canonicalization-graph-consistency', 'internal-links-directed-retrieval-graph',
-  'robots-txt-courtesy-not-access-control', 'structured-data-without-content-drift',
-  'audit-findings-derived-records',
-]
+// Retain archived records as restoration provenance. Every retained manuscript
+// has its own reader again; a related project is not a replacement destination.
+export const withdrawnArticleSlugs: string[] = []
 const destinations: Record<string, { slug: string; section?: string }> = {
   'crawl-frontier-state-machine': { slug: atlas, section: 'capture' },
   'sqlite-crawl-pipelines': { slug: atlas, section: 'capture' },
