@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "date": "2026-10-06",
+  "purpose": "Record ten previously authored code-example label refinements without replacing frozen manuscript baselines or evidence hashes. Only the exact declared title/description pairs may normalize to their former labels for evidence comparison; reversing them must reconstruct each prior manuscript readback byte-for-byte. Code, language, data, citations, sources, publication cutoffs and all other manuscript fields remain protected.",
+  "records": [
+    {
+      "slug": "jane-street-exact-search-solver-verification",
+      "path": "src/personal/editorial/data/articles/jane-street-exact-search-solver-verification.json",
+      "priorCurrentSha256": "ec043c65b8429c25d009657f59e214d78c9979ed6938aab45ac294badf75e6f9",
+      "currentSha256": "8f7537ffc48d5198493caa6c8f0012d05aa91d52b01ce462a79523cdb60cf9b9",
+      "changes": [
+        {
+          "sectionId": "verifier",
+          "exampleIndex": 0,
+          "field": "title",
+          "before": "Retained solution summary",
+          "after": "Solution record"
+        },
+        {
+          "sectionId": "verifier",
+          "exampleIndex": 0,
+          "field": "description",
+          "before": "The small result surface I want a reviewer to be able to recompute from the path, not merely trust as program output.",
+          "after": "Retained solver output."
+        }
+      ]
+    },
+    {
+      "slug": "crawl-frontier-state-machine",
+      "path": "src/personal/editorial/data/articles/crawl-frontier-state-machine.json",
+      "priorCurrentSha256": "8598789b9206600d3c8c7ec8ab213d8f3dc6383da9bcc5bdaa7ea5f95a5e03d4",
+      "currentSha256": "930b8283a6af8eff9fc41e109bfc6ee7f05b748576d4e9777f4deec462081668",
+      "changes": [
+        {
+          "sectionId": "retry-and-replay",
+          "exampleIndex": 0,
+          "field": "title",
+          "before": "A typed transition rather than an in-place status update",
+          "after": "Transition event"
+        }
+      ]
+    },
+    {
+      "slug": "raw-html-rendered-dom-evidence",
+      "path": "src/personal/editorial/data/articles/raw-html-rendered-dom-evidence.json",
+      "priorCurrentSha256": "d0fc69b82e9d7d3e0ec6e0a0834f76f5c51696622010c2b217d7ebea3551307e",
+      "currentSha256": "12a83d4b08eee6e4cd176dc43b45910bf71dbce3834f76a6bfdb2ccba1a2aa64",
+      "changes": [
+        {
+          "sectionId": "semantic-diff",
+          "exampleIndex": 0,
+          "field": "title",
+          "before": "A render envelope that keeps observation and interpretation apart",
+          "after": "Render envelope"
+        }
+      ]
+    },
+    {
+      "slug": "replayable-traces-ai-agent-evaluation",
+      "path": "src/personal/editorial/data/articles/replayable-traces-ai-agent-evaluation.json",
+      "priorCurrentSha256": "dfa74b4b3170fd1ea9f46678feb432e716388586701acca2e3c50a39fbdc73e5",
+      "currentSha256": "cd30b81e7f6272c4895f322ea28b94f2da20f4891e87ff2fa672651ff86f0624",
+      "changes": [
+        {
+          "sectionId": "promotion-gate",
+          "exampleIndex": 0,
+          "field": "title",
+          "before": "A trial manifest that binds configuration to evidence",
+          "after": "Trial manifest"
+        }
+      ]
+    },
+    {
+      "slug": "sqlite-crawl-pipelines",
+      "path": "src/personal/editorial/data/articles/sqlite-crawl-pipelines.json",
+      "priorCurrentSha256": "75bad590badede428a01d8e9b2a5dad846567058bf4a4e08d7e1e34d4911c837",
+      "currentSha256": "f1a3ed5ca66be292a52dce18890d2fed438c6535a320c7394e52bc054dc8caf7",
+      "changes": [
+        {
+          "sectionId": "idempotent-writes",
+          "exampleIndex": 0,
+          "field": "title",
+          "before": "Append the attempt, then advance the current projection conditionally",
+          "after": "Append and project"
+        }
+      ]
+    },
+    {
+      "slug": "technical-seo-migration-release-gates",
+      "path": "src/personal/editorial/data/articles/technical-seo-migration-release-gates.json",
+      "priorCurrentSha256": "54ed6b8593ded9ebb4c1affdf0063a0c6ccea990dbe05b644c46b3cc259c189d",
+      "currentSha256": "007edb6ccb64ba46f0a411bca1cf66cf669bde5ae177ee46b61f446fef0b8916",
+      "changes": [
+        {
+          "sectionId": "launch-sequence",
+          "exampleIndex": 0,
+          "field": "title",
+          "before": "Check redirect hops and final canonical from the public edge",
+          "after": "Redirect checks"
+        }
+      ]
+    },
+    {
+      "slug": "ai-search-crawler-policy",
+      "path": "src/personal/editorial/data/articles/ai-search-crawler-policy.json",
+      "priorCurrentSha256": "cda99535e49fa874358aab9a14da23b52f2c577717d5cdd33e79ac482f69f11d",
+      "currentSha256": "e5e110a2cf03407015053ced8a2f6b393f74d792bce81ea6b337c321bf5412bc",
+      "changes": [
+        {
+          "sectionId": "robots-configurations",
+          "exampleIndex": 0,
+          "field": "title",
+          "before": "Allow AI search but block training",
+          "after": "Allow search, block training"
+        },
+        {
+          "sectionId": "robots-configurations",
+          "exampleIndex": 1,
+          "field": "title",
+          "before": "Block all AI crawlers",
+          "after": "Block listed AI agents"
+        },
+        {
+          "sectionId": "server-log-verification",
+          "exampleIndex": 0,
+          "field": "title",
+          "before": "Find the named agents in NGINX logs",
+          "after": "Find agents in access logs"
+        }
+      ]
+    }
+  ]
+}

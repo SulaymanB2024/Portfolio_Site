@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { qualityHash, protectedQualityEvidence, verifyQualityRevision } from './article-quality-integrity.mjs'
+import { verifyCodeLabelReadback } from './article-code-label-integrity.mjs'
 
 const json = path => JSON.parse(readFileSync(path, 'utf8'))
 const manifest = json('docs/article-quality-revisions.json')
@@ -13,6 +14,7 @@ const titles = new Set(), descriptions = new Set()
 let units = 0
 for (const record of manifest.records) {
   const baselineBytes = readFileSync(record.baselinePath), currentBytes = readFileSync(record.path)
+  verifyCodeLabelReadback(currentBytes)
   assert.equal(qualityHash(baselineBytes), record.baselineSha256, `Baseline drift: ${record.slug}`)
   assert.equal(qualityHash(currentBytes), record.currentSha256, `Unreviewed change: ${record.slug}`)
   const before = JSON.parse(baselineBytes), article = JSON.parse(currentBytes)

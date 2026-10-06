@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
 import assert from 'node:assert/strict'
+import { originalCodeLabels } from './article-code-label-integrity.mjs'
 
 export const qualityHash = value => createHash('sha256').update(value).digest('hex')
 const editorial = new Set(['title', 'displayTitle', 'subtitle', 'seoTitle', 'seoDescription', 'description', 'excerpt', 'readTime', 'wordCount', 'dateModified', 'openingPresentation', 'content', 'thesis', 'conclusion', 'lede', 'ledeMarkdown', 'markdown', 'htmlBody', 'outline', 'sections', 'markdownSections'])
@@ -9,6 +10,7 @@ const sectionEvidence = section => {
 }
 
 export function protectedQualityEvidence(article) {
+  article = originalCodeLabels(article)
   const fixed = Object.fromEntries(Object.entries(article).filter(([key]) => !editorial.has(key)))
   return { fixed, sections: (article.sections || []).map(sectionEvidence), markdownSections: (article.markdownSections || []).map(sectionEvidence),
     outlineIds: article.outline?.map(item => item.id),

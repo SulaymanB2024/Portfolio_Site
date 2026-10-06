@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { protectedQualityEvidence, qualityReadingMinutes, verifyQualityRevision } from '../tools/article-quality-integrity.mjs'
+import { codeLabelRevisions, originalCodeLabels, verifyCodeLabelReadback } from '../tools/article-code-label-integrity.mjs'
 import { searchMetadata } from '../src/personal/search-metadata.ts'
 import { relatedArticles } from '../src/personal/editorial/library.ts'
 import type { ArticleSummary } from '../src/personal/editorial/types.ts'
@@ -17,6 +18,7 @@ test('published and withdrawn manuscripts retain reviewed revisions and evidence
   assert.equal(manifest.records.length, retained.length)
   for (const item of manifest.records) {
     const before = json(item.baselinePath), article = json(item.path)
+    verifyCodeLabelReadback(readFileSync(new URL(`../${item.path}`, import.meta.url)))
     verifyQualityRevision(before, article, item, manifest.exceptions)
     assert(item.changedUnits.length > 0)
     assert.equal(article.date, before.date)
@@ -43,6 +45,38 @@ test('revision guards reject changed quantities, source links, code, publication
   const section = code.sections.find((section: any) => section.codeExamples?.length)
   section.codeExamples[0].code += '\nDELETE FROM crawl_run;'
   assert.notDeepEqual(protectedQualityEvidence(code), protectedQualityEvidence(original))
+})
+
+test('only exact reviewed code labels are permitted; code, language, targets and readbacks stay protected', () => {
+  assert.equal(codeLabelRevisions.length, 7)
+  assert.equal(codeLabelRevisions.flatMap((revision: any) => revision.changes).length, 10)
+  for (const revision of codeLabelRevisions) {
+    const item = record(revision.slug), before = json(item.baselinePath), article = json(item.path)
+    const bytes = readFileSync(new URL(`../${item.path}`, import.meta.url))
+    assert.equal(verifyCodeLabelReadback(bytes), revision.changes.length)
+    const untouched = structuredClone(article)
+    const normalized = originalCodeLabels(article)
+    assert.deepEqual(article, untouched, 'Label canonicalization must not mutate the manuscript')
+    assert.deepEqual(protectedQualityEvidence(normalized), protectedQualityEvidence(before))
+    for (const change of revision.changes) {
+      const altered = structuredClone(article)
+      const example = altered.sections.find((section: any) => section.id === change.sectionId).codeExamples[change.exampleIndex]
+      example[change.field] += ' An unreviewed label.'
+      assert.throws(() => verifyQualityRevision(before, altered, item, manifest.exceptions))
+    }
+    const first = revision.changes[0]
+    for (const mutate of [
+      (example: any) => { example.code += '\nChanged executable content' },
+      (example: any) => { example.language = 'changed-language' },
+    ]) {
+      const altered = structuredClone(article)
+      mutate(altered.sections.find((section: any) => section.id === first.sectionId).codeExamples[first.exampleIndex])
+      assert.throws(() => verifyQualityRevision(before, altered, item, manifest.exceptions))
+    }
+    const altered = structuredClone(article)
+    altered.subtitle += ' Unrecorded prose.'
+    assert.throws(() => verifyCodeLabelReadback(Buffer.from(JSON.stringify(altered, null, 2) + '\n')))
+  }
 })
 
 test('the protocol correction permits only its declared primary citation', () => {

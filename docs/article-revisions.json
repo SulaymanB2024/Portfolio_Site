@@ -34,7 +34,7 @@
       "slug": "crawl-frontier-state-machine",
       "originalPath": "docs/article-originals/crawl-frontier-state-machine.json",
       "originalSha256": "54f89d5b0bc5f407fcef7fa96110d0bd0baf4628d8b408a429e44d2930f56cac",
-      "currentSha256": "8598789b9206600d3c8c7ec8ab213d8f3dc6383da9bcc5bdaa7ea5f95a5e03d4",
+      "currentSha256": "930b8283a6af8eff9fc41e109bfc6ee7f05b748576d4e9777f4deec462081668",
       "evidenceSha256": "db801ed90bb6a09bbfd102214302ba9d938730c2307913356e6686daa363dfa3",
       "proseWords": {
         "before": 1274,
@@ -47,7 +47,7 @@
       "slug": "raw-html-rendered-dom-evidence",
       "originalPath": "docs/article-originals/raw-html-rendered-dom-evidence.json",
       "originalSha256": "0a0768f5bfc1e166536b609a82573e64f2caac09b795a177b61994b77d6e4e5d",
-      "currentSha256": "d0fc69b82e9d7d3e0ec6e0a0834f76f5c51696622010c2b217d7ebea3551307e",
+      "currentSha256": "12a83d4b08eee6e4cd176dc43b45910bf71dbce3834f76a6bfdb2ccba1a2aa64",
       "evidenceSha256": "bf8186aa27acf8c2b596d026cba93c49bdb68f678c1b63d87ee276daaf3208ed",
       "proseWords": {
         "before": 1160,
@@ -125,7 +125,7 @@
       "slug": "replayable-traces-ai-agent-evaluation",
       "originalPath": "docs/article-originals/replayable-traces-ai-agent-evaluation.json",
       "originalSha256": "944ed03665a1f81bf5aca8f0ffcd2ad8005e692552e29c239b787424157c5e8e",
-      "currentSha256": "dfa74b4b3170fd1ea9f46678feb432e716388586701acca2e3c50a39fbdc73e5",
+      "currentSha256": "cd30b81e7f6272c4895f322ea28b94f2da20f4891e87ff2fa672651ff86f0624",
       "evidenceSha256": "90469c1553be71ae6454067f819a27cdd870956bd8cddc8186c7dc626da7e719",
       "proseWords": {
         "before": 1231,
@@ -138,7 +138,7 @@
       "slug": "sqlite-crawl-pipelines",
       "originalPath": "docs/article-originals/sqlite-crawl-pipelines.json",
       "originalSha256": "6ef09f3345e283be1864f6d3401914e16585919b6494d9611236595b7cc4c194",
-      "currentSha256": "75bad590badede428a01d8e9b2a5dad846567058bf4a4e08d7e1e34d4911c837",
+      "currentSha256": "f1a3ed5ca66be292a52dce18890d2fed438c6535a320c7394e52bc054dc8caf7",
       "evidenceSha256": "8df1bab38445906cb7424069401d45ed16022e755b26cfe548ade65431b029ad",
       "proseWords": {
         "before": 1268,
@@ -151,7 +151,7 @@
       "slug": "technical-seo-migration-release-gates",
       "originalPath": "docs/article-originals/technical-seo-migration-release-gates.json",
       "originalSha256": "5089ce408f640215db06a99e4e62ae1316fd8cae993a600585f578b93c202319",
-      "currentSha256": "54ed6b8593ded9ebb4c1affdf0063a0c6ccea990dbe05b644c46b3cc259c189d",
+      "currentSha256": "007edb6ccb64ba46f0a411bca1cf66cf669bde5ae177ee46b61f446fef0b8916",
       "evidenceSha256": "967770886ae566c47486f0b5d7ff461225c93ebf7e9c33eb9dd867b88ab271c6",
       "proseWords": {
         "before": 1147,
@@ -320,7 +320,7 @@
       "slug": "ai-search-crawler-policy",
       "originalPath": "docs/article-originals/ai-search-crawler-policy.json",
       "originalSha256": "2de76f226cad21220b4340a2189c6c71a1ac521ac7d6abb7dc51eb50291142de",
-      "currentSha256": "cda99535e49fa874358aab9a14da23b52f2c577717d5cdd33e79ac482f69f11d",
+      "currentSha256": "e5e110a2cf03407015053ced8a2f6b393f74d792bce81ea6b337c321bf5412bc",
       "evidenceSha256": "c7226c8face2d3a899ed3415411dee677bdafac93ce9937e12ad5864c2a4c802",
       "proseWords": {
         "before": 293,
@@ -372,7 +372,7 @@
       "slug": "jane-street-exact-search-solver-verification",
       "originalPath": "docs/article-originals/jane-street-exact-search-solver-verification.json",
       "originalSha256": "291fd1ecc855748c30784f70a9e0e6244c83c35beb4504ad43fcf1614bef3bc4",
-      "currentSha256": "ec043c65b8429c25d009657f59e214d78c9979ed6938aab45ac294badf75e6f9",
+      "currentSha256": "8f7537ffc48d5198493caa6c8f0012d05aa91d52b01ce462a79523cdb60cf9b9",
       "evidenceSha256": "bec9cff62beb4f3cec9ae370fb1be5d2e0b632d42d2a1ca62e072f6b02b7b451",
       "proseWords": {
         "before": 1493,
@@ -381,5 +381,6 @@
       },
       "readTime": "8 MIN"
     }
-  ]
+  ],
+  "codeLabelRevisionReceipt": "docs/article-code-label-revisions.json"
 }

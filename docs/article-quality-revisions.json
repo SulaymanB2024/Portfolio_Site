@@ -48,7 +48,7 @@
       "path": "src/personal/editorial/data/articles/jane-street-exact-search-solver-verification.json",
       "baselinePath": "docs/article-quality-baselines/jane-street-exact-search-solver-verification.json",
       "baselineSha256": "0b98e15dec9b4db5fd354e5c993fb03fff19fbe09fd838158e4b72e44d6bdc62",
-      "currentSha256": "ec043c65b8429c25d009657f59e214d78c9979ed6938aab45ac294badf75e6f9",
+      "currentSha256": "8f7537ffc48d5198493caa6c8f0012d05aa91d52b01ce462a79523cdb60cf9b9",
       "evidenceSha256": "954b4f6be2469698a4dc3b7001625a75ac672f6aa2aaff5bb14e68f8f0133ae4",
       "proseWords": {
         "before": 1398,
@@ -400,7 +400,7 @@
       "path": "src/personal/editorial/data/articles/crawl-frontier-state-machine.json",
       "baselinePath": "docs/article-quality-baselines/crawl-frontier-state-machine.json",
       "baselineSha256": "198194de76e3ecb8e66e088aae9c9b110791cbe7de17edff484b050d41b0ca64",
-      "currentSha256": "8598789b9206600d3c8c7ec8ab213d8f3dc6383da9bcc5bdaa7ea5f95a5e03d4",
+      "currentSha256": "930b8283a6af8eff9fc41e109bfc6ee7f05b748576d4e9777f4deec462081668",
       "evidenceSha256": "2506551998180f78a40a776fd5a4f05fef6c0ed6661e9d1ae36347a153b52df4",
       "proseWords": {
         "before": 1224,
@@ -426,7 +426,7 @@
       "path": "src/personal/editorial/data/articles/raw-html-rendered-dom-evidence.json",
       "baselinePath": "docs/article-quality-baselines/raw-html-rendered-dom-evidence.json",
       "baselineSha256": "346de5916c924b0d6816a2bf334b406756de66f1f2e70ce2f91bb6f961db144a",
-      "currentSha256": "d0fc69b82e9d7d3e0ec6e0a0834f76f5c51696622010c2b217d7ebea3551307e",
+      "currentSha256": "12a83d4b08eee6e4cd176dc43b45910bf71dbce3834f76a6bfdb2ccba1a2aa64",
       "evidenceSha256": "1c6bced004a611265630654f5ba755f32d80e7d961e667cb2972ec5e2a844e1e",
       "proseWords": {
         "before": 1100,
@@ -583,7 +583,7 @@
       "path": "src/personal/editorial/data/articles/replayable-traces-ai-agent-evaluation.json",
       "baselinePath": "docs/article-quality-baselines/replayable-traces-ai-agent-evaluation.json",
       "baselineSha256": "3759714f1bf0f487dcda4c6c0a561fc70db7a8c77d1c6ae1d54b6d05c1a3897e",
-      "currentSha256": "dfa74b4b3170fd1ea9f46678feb432e716388586701acca2e3c50a39fbdc73e5",
+      "currentSha256": "cd30b81e7f6272c4895f322ea28b94f2da20f4891e87ff2fa672651ff86f0624",
       "evidenceSha256": "78d519db1b3ec6825598e0ce681638af8175c7b3e607e7264b28e9c888d79ad1",
       "proseWords": {
         "before": 1177,
@@ -609,7 +609,7 @@
       "path": "src/personal/editorial/data/articles/sqlite-crawl-pipelines.json",
       "baselinePath": "docs/article-quality-baselines/sqlite-crawl-pipelines.json",
       "baselineSha256": "8973b9d62559b17159fd5e9d56d4e7ff8c8d9e92737885d75e647b88888e16cc",
-      "currentSha256": "75bad590badede428a01d8e9b2a5dad846567058bf4a4e08d7e1e34d4911c837",
+      "currentSha256": "f1a3ed5ca66be292a52dce18890d2fed438c6535a320c7394e52bc054dc8caf7",
       "evidenceSha256": "f8d7269058a53d254050b73713f15753bd474aaaf357a55d531710614f074f42",
       "proseWords": {
         "before": 1218,
@@ -635,7 +635,7 @@
       "path": "src/personal/editorial/data/articles/technical-seo-migration-release-gates.json",
       "baselinePath": "docs/article-quality-baselines/technical-seo-migration-release-gates.json",
       "baselineSha256": "03ca663c1fbdc90319ae84a557a10bcb8d48ea4ce91fd4c9a1a65bc45b972d1b",
-      "currentSha256": "54ed6b8593ded9ebb4c1affdf0063a0c6ccea990dbe05b644c46b3cc259c189d",
+      "currentSha256": "007edb6ccb64ba46f0a411bca1cf66cf669bde5ae177ee46b61f446fef0b8916",
       "evidenceSha256": "cc693a995ea73745661126f8caa1c6f0abc4924c9e5637b25e1a45a364cdca0f",
       "proseWords": {
         "before": 1095,
@@ -740,7 +740,7 @@
       "path": "src/personal/editorial/data/articles/ai-search-crawler-policy.json",
       "baselinePath": "docs/article-quality-baselines/ai-search-crawler-policy.json",
       "baselineSha256": "25e634c39fefbf8051c0c09b570d0ad23360a1d162bb6b413bd37498e69b511c",
-      "currentSha256": "cda99535e49fa874358aab9a14da23b52f2c577717d5cdd33e79ac482f69f11d",
+      "currentSha256": "e5e110a2cf03407015053ced8a2f6b393f74d792bce81ea6b337c321bf5412bc",
       "evidenceSha256": "a8402d34f4014a5d22460408a8c2c15cfd67d3b0227817257ee53e2fb38a8e9d",
       "proseWords": {
         "before": 242,
@@ -814,5 +814,6 @@
         "conclusion"
       ]
     }
-  ]
+  ],
+  "codeLabelRevisionReceipt": "docs/article-code-label-revisions.json"
 }

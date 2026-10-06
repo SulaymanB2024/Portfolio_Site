@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { sha256, protectedArticleEvidence, articleProseWords } from '../tools/article-revision-integrity.mjs'
 import type { ArticleSummary } from '../src/personal/editorial/types.ts'
 import { qualityReadingMinutes } from '../tools/article-quality-integrity.mjs'
+import { verifyCodeLabelReadback } from '../tools/article-code-label-integrity.mjs'
 
 const load = (path: string) => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'))
 const revisions = load('../docs/article-revisions.json').records
@@ -17,6 +18,7 @@ test('recovered-source revisions are bound to readbacks and main-manuscript read
     const file = `../src/personal/editorial/data/articles/${revision.slug}.json`
     const article = load(file)
     const original = load(`../${revision.originalPath}`)
+    verifyCodeLabelReadback(readFileSync(new URL(file, import.meta.url)))
     assert.equal(sha256(readFileSync(new URL(file, import.meta.url))), revision.currentSha256, revision.slug)
     assert.equal(articleProseWords(original), revision.proseWords.before)
     assert.equal(articleProseWords(article), revision.proseWords.after)
