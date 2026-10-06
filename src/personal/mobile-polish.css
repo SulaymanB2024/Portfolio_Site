@@ -94,8 +94,15 @@
   .personal-site .about-objects-toolbar { font-size: 11px; }
   .personal-site .about-piece-controls :is(input, select) { font-size: 16px; }
 
-  .personal-site .footer-baseline { gap: 12px 22px; }
+  .personal-site .footer-baseline { flex-wrap: wrap; gap: 12px 22px; }
   .personal-site .colophon summary { min-height: 44px; }
+  /* Expanded credits stay reachable by scrolling, including on short screens. */
+  .personal-site .colophon[open] { flex-basis: 100%; }
+  .personal-site .colophon > div {
+    position: static; width: auto; max-width: 600px; padding: 12px 0 20px;
+    border: 0; box-shadow: none;
+  }
+  .personal-site .colophon > div > p { font-size: 14px; line-height: 1.75; }
 }
 
 @media screen and (max-width: 370px) {
