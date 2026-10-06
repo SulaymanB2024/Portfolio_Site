@@ -42,7 +42,7 @@ export const siteCopy = {
   footer: {
     title: 'Get in touch.',
     description: 'For product work, research, or collaboration, send me a note.',
-    colophon: 'React, TypeScript, and Three.js. Light and motion, rendered as ink on paper.',
+    colophon: 'Set in Syne and Newsreader. React, TypeScript, and Three.js. Light and motion, rendered as ink on paper.',
     top: 'Back to top',
   },
   writing: {
