@@ -88,7 +88,7 @@ const payrollSteps = [
     key: 'schedule',
     label: 'Schedule',
     condition: 'Record the batch',
-    title: 'Start with a frozen definition.',
+    title: 'Scheduled batch',
     detail: 'The schedule records a batch identifier, a Merkle root, a release timestamp and the total amount. The frozen flag makes the condition for later changes explicit.',
     record: payrollRecord.sections.payroll_states.scheduled_frozen
   },
@@ -96,7 +96,7 @@ const payrollSteps = [
     key: 'amend',
     label: 'Amend',
     condition: 'While frozen',
-    title: 'Change the root, under a condition.',
+    title: 'Amend while frozen',
     detail: 'An amendment replaces the batch’s Merkle root only while the frozen condition still holds. This is a guard in the inspected code, not an unrestricted edit.',
     record: payrollRecord.sections.payroll_states.amended
   },
@@ -104,7 +104,7 @@ const payrollSteps = [
     key: 'thaw',
     label: 'Thaw',
     condition: 'After release time',
-    title: 'Time changes what is permitted.',
+    title: 'Thaw after the release time',
     detail:
       'The thaw operation requires the release timestamp to have passed before it clears the frozen flag. Thawing is a state change; this record does not establish that a salary payment completed.',
     record: payrollRecord.sections.payroll_states.thawed
@@ -113,7 +113,7 @@ const payrollSteps = [
     key: 'cancel',
     label: 'Cancel',
     condition: 'Emit an audit event',
-    title: 'Retain the cancellation record.',
+    title: 'Cancellation event',
     detail:
       'The documented cancellation operation emits the batch identifier and amount. The retained summary establishes the event; it does not describe an additional cancellation guard or a completed refund.',
     record: payrollRecord.sections.payroll_states.cancelled
@@ -127,7 +127,7 @@ export function PayrollLifecycle() {
   return (
     <figure className="dossier-lifecycle">
       <figcaption className="dossier-figure-heading">
-        <span>A frozen batch, and the operations around it.</span>
+        <span>Payroll batch operations</span>
         <span className="mono">Code-derived prototype / 9d38b02</span>
       </figcaption>
       <div className="dossier-payroll-map dossier-operation-strip" role="group" aria-label="Inspect a documented payroll operation">
@@ -157,9 +157,7 @@ export function PayrollLifecycle() {
           </a>
         </div>
       </div>
-      <p className="dossier-method-note">
-        Select an operation to read its conditions. The operations describe the retained code, not a chronological transaction trace. This does not execute a payment.
-      </p>
+      <p className="dossier-method-note">Select an operation to inspect its recorded condition. Code summary at revision 9d38b02.</p>
     </figure>
   )
 }
@@ -168,28 +166,28 @@ const reviewSteps = [
   {
     label: 'Trace',
     verb: 'Observe',
-    title: 'Reconstruct the decision.',
+    title: 'Recorded run evidence',
     detail: 'Retain the tool calls, inputs, outputs, artifacts and failure context needed to understand a run. Start with what the agent actually observed.',
     output: 'A trace and a narrow failure hypothesis.'
   },
   {
     label: 'Propose',
     verb: 'Change',
-    title: 'Bound the engineering task.',
+    title: 'Patch and experiment manifest',
     detail: 'Ask Codex to improve a defined part of the harness. The candidate includes a reviewable patch, the experiment and its assumptions.',
     output: 'A patch, its scope and a testable expectation.'
   },
   {
     label: 'Replay',
     verb: 'Compare',
-    title: 'Return to retained conditions.',
+    title: 'Baseline replay and regression checks',
     detail: 'Replay past inputs to inspect behavioral changes and regressions before considering a controlled live trial. Offline evidence stays distinct from market results.',
     output: 'A baseline comparison and a record of regressions.'
   },
   {
     label: 'Review',
     verb: 'Decide',
-    title: 'The proposer does not become the judge.',
+    title: 'Independent evaluation and release',
     detail:
       'The engineering agent submits its candidate with the evidence. Evaluation and release gates sit outside its authority; it cannot grade its own patch or grant itself permission to deploy.',
     output: 'An accept, reject or revise decision outside the proposing agent.'
@@ -203,7 +201,7 @@ export function ViralReviewLoop() {
   return (
     <figure className="dossier-review-loop">
       <figcaption className="dossier-figure-heading">
-        <span>The candidate travels. Authority stays separate.</span>
+        <span>Proposed engineering and review stages</span>
         <span className="mono">Published design / JUL 2026</span>
       </figcaption>
       <div className="dossier-review-map dossier-review-strip" role="group" aria-label="Inspect a stage of the proposed engineering loop">
@@ -237,16 +235,14 @@ export function ViralReviewLoop() {
           <p>{step.detail}</p>
         </div>
         <div className="dossier-record">
-          <span className="mono">Expected output</span>
+          <span className="mono">Proposed output</span>
           <p>{step.output}</p>
           <a href="#/writing/viralbench-codex-agent-harness">
             Read the engineering design <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
-      <p className="dossier-method-note">
-        A visual explanation of the published proposal. No running agent, deployed evaluation service, completed trial or measured uplift is presented.
-      </p>
+      <p className="dossier-method-note">Published engineering proposal, July 2026.</p>
     </figure>
   )
 }

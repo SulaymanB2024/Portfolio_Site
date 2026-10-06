@@ -1,0 +1,579 @@
+{
+  "kind": "research",
+  "cluster": "ai-systems",
+  "slug": "the-ai-megawatt",
+  "number": "16",
+  "category": "AI INFRASTRUCTURE",
+  "title": "The AI Megawatt Is Not a Megawatt",
+  "seoTitle": "What 1 GW of AI Data Center Power Actually Means",
+  "subtitle": "What a 1 GW data center means from grid interconnection to GB300 rack capacity.",
+  "seoDescription": "A current GB300 model translating a 1 GW data-center claim across grid interconnection, facility power, PUE, network overhead, rack capacity, installed GPUs, and utilization.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Grid / facility / compute",
+    "note": "A capacity ladder from electrical boundary to installed and utilized accelerators."
+  },
+  "date": "2026.08.16",
+  "lastVerified": "2026.08.16",
+  "readTime": "28 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "A bare 1 GW claim is not convertible into GPUs until its electrical boundary, status, and time basis are known; under an explicit 1 GW facility-nameplate reference design, the result is about 403,000 installed B300 GPUs, not a universal ratio.",
+  "conclusion": {
+    "title": "Define the boundary before dividing by the rack",
+    "content": "For a GB300 reference design, 1 GW of total-facility nameplate supports about 402,574 installed B300 GPUs in the reference case, versus roughly 355,819–434,856 across engineering sensitivities. Requested interconnection capacity alone supports no defensible fleet estimate. Keep grid, facility, IT, rack, installed fleet, average draw, computational utilization, and commercial utilization separate."
+  },
+  "evidenceBoundary": "This is a homogeneous GB300 reference conversion, not a forecast of any named data center. The 142 kW rack value is an “up to” specification; PUE and external-IT factors are scenarios; the 50% interconnection-utilization example is illustrative; network power is incomplete beyond the documented eight-SU design; computational utilization does not equal useful work or revenue utilization.",
+  "metrics": [
+    {
+      "label": "Reference fleet",
+      "value": "402,574 B300s"
+    },
+    {
+      "label": "Facility sensitivity",
+      "value": "356K–435K B300s"
+    },
+    {
+      "label": "1 GW IT boundary",
+      "value": "461K B300s"
+    },
+    {
+      "label": "Research cutoff",
+      "value": "2026.08.16"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Capacity conversion model",
+      "href": "/research/the-ai-megawatt-model.xlsx",
+      "description": "Formula-driven facility, IT, rack, network, utilization, and sensitivity workbook.",
+      "format": "XLSX"
+    },
+    {
+      "label": "Source ledger",
+      "href": "/research/the-ai-megawatt-source-ledger.csv",
+      "description": "Primary and secondary sources with claims, definitions, limitations, and provenance.",
+      "format": "CSV"
+    },
+    {
+      "label": "Claim ledger",
+      "href": "/research/the-ai-megawatt-claim-ledger.csv",
+      "description": "Load-bearing claims classified as observed, derived, scenario, or interpretation.",
+      "format": "CSV"
+    },
+    {
+      "label": "Methodology appendix",
+      "href": "/research/the-ai-megawatt-methodology.md",
+      "description": "Research contract, definitions, formulas, provenance, contradictions, and calculation checks.",
+      "format": "MD"
+    },
+    {
+      "label": "Sensitivity data",
+      "href": "/research/the-ai-megawatt-sensitivity.csv",
+      "description": "PUE-by-external-IT-overhead matrix for installed B300 GPU equivalents.",
+      "format": "CSV"
+    }
+  ],
+  "content": [
+    "A one-gigawatt AI data center can mean at least four different things. It may be a requested grid interconnection, a total facility nameplate, an IT nameplate, or an average electrical draw. Those quantities are related, but they are not interchangeable. A bare “1 GW” claim therefore does not identify a GPU fleet.",
+    "Under one explicit reference design—1,000 MW of total facility nameplate, PUE 1.145, 10% external IT overhead, and homogeneous NVIDIA GB300 NVL72 racks—the arithmetic supports about 5,591 rack equivalents and 402,574 installed B300 GPUs. Moving the facility and IT-overhead assumptions produces a scenario band of roughly 355,819 to 434,856 GPUs. The range is an engineering sensitivity, not a confidence interval.",
+    "Change the boundary and the result changes before any hardware assumption does. If “1 GW” means IT nameplate, the same 10% external-IT allowance supports about 460,948 GPUs. If it means a grid interconnection request operating at an illustrative 50% average utilization, it implies 500 MW of average facility demand and 4.38 TWh per year, but installed GPU count remains underdetermined.",
+    "The article builds a conversion contract rather than a universal answer. It begins with the electrical boundary, follows power through PUE and non-rack IT, uses the current GB300 rack and network reference architecture, and then separates installed accelerators from annual computational utilization. When a disclosure lacks the fields needed for that chain, the model stops instead of inventing precision."
+  ],
+  "sections": [
+    {
+      "id": "capacity-dictionary",
+      "title": "One gigawatt names several different assets",
+      "paragraphs": [
+        "The same unit appears in utility filings, construction announcements, hardware plans, and investor models, but the numerator changes. An interconnection request is a right or request at the grid boundary. Facility nameplate includes cooling, power conversion, lighting, and other infrastructure. IT nameplate excludes that facility layer. Rack nameplate excludes much of the network, storage, and control plane. Average demand is a time-weighted flow. None is a synonym for the others.",
+        "LBNL explicitly warns that annual energy, average demand, maximum demand, facility nameplate, and requested interconnection capacity are difficult to convert without project-specific relationships. Its glossary defines grid interconnection capacity as the maximum power requested at the connection point, including total facility needs and design margins. It also estimates current interconnection utilization around 50% because of redundancy and maintenance, while stressing that the value is not well documented. That estimate is useful for a worked example, not a universal ratio. [S8]",
+        "This creates a strict stopping rule: the source must state boundary, status, and time basis. “Announced 1 GW” is weaker than “1 GW requested.” Requested is weaker than firm. Firm is weaker than energized. Energized is weaker than commissioned and occupied. An installed fleet can be smaller still when the site is phased or reserves space and power for later equipment."
+      ],
+      "table": {
+        "caption": "Capacity dictionary: what a 1 GW statement can and cannot establish",
+        "columns": [
+          "Term",
+          "Boundary or state",
+          "What can be calculated",
+          "What remains unknown"
+        ],
+        "rows": [
+          [
+            "Announced program capacity",
+            "Corporate plan; may combine sites and phases",
+            "Nothing mechanical without further disclosure",
+            "Site, timing, boundary, firmness, equipment"
+          ],
+          [
+            "Requested interconnection",
+            "Maximum requested at grid point, including margins",
+            "Illustrative annual energy if average utilization is assumed",
+            "Firmness, energization, facility design, installed fleet"
+          ],
+          [
+            "Firm / energized interconnection",
+            "Contracted or physically available grid capacity",
+            "Upper electrical envelope at that boundary",
+            "Average draw, PUE, occupancy, rack mix"
+          ],
+          [
+            "Facility nameplate",
+            "Whole-building maximum electrical capacity",
+            "IT capacity after PUE; rack capacity after external IT allowance",
+            "Actual average draw and utilization"
+          ],
+          [
+            "IT nameplate",
+            "Servers, network, storage, and support IT",
+            "Rack capacity after external IT allowance",
+            "Facility draw unless PUE is known"
+          ],
+          [
+            "Compute-rack nameplate",
+            "GB300 rack “up to” requirements",
+            "Rack and installed-GPU equivalents",
+            "Actual workload draw and useful work"
+          ],
+          [
+            "Average facility demand",
+            "Time-weighted facility power",
+            "Annual MWh/TWh",
+            "Installed fleet without nameplate and utilization"
+          ],
+          [
+            "Full-load-equivalent compute",
+            "Installed fleet × computational utilization × time",
+            "Comparable accelerator-hours within a defined generation",
+            "Useful work, service quality, and revenue"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "research-contract",
+      "title": "The conversion contract",
+      "paragraphs": [
+        "The unit of analysis is one nominal “1 GW” statement. The primary reference case treats it as 1,000 MW of total facility nameplate. That choice is not a claim about how most announcements are written. It is a controlled starting point that permits PUE to be applied exactly once.",
+        "The hardware population is homogeneous GB300 NVL72. Real campuses mix accelerators, CPU fleets, storage systems, network generations, development clusters, spares, and partially occupied halls. Homogeneity is useful because it isolates the boundary problem. It is not a forecast of a specific company’s asset register.",
+        "The model has three explicit transformations. First, facility MW becomes IT MW by dividing by PUE. Second, IT MW becomes compute-rack MW by reserving an external-IT allowance for scale-out network, storage, support servers, and management. Third, compute-rack MW becomes rack equivalents and installed GPUs using NVIDIA’s rack specification. Every result is therefore conditional on the stated boundary and factors."
+      ],
+      "table": {
+        "caption": "Reference formulas and units",
+        "columns": [
+          "Step",
+          "Formula",
+          "Reference input",
+          "Reference output"
+        ],
+        "rows": [
+          [
+            "Facility → IT",
+            "IT MW = facility MW ÷ PUE",
+            "1,000 MW ÷ 1.145",
+            "873.36 MW"
+          ],
+          [
+            "IT → compute racks",
+            "Rack MW = IT MW ÷ (1 + external IT overhead)",
+            "873.36 MW ÷ 1.10",
+            "793.97 MW"
+          ],
+          [
+            "Rack MW → racks",
+            "Racks = rack MW × 1,000 ÷ 142 kW",
+            "793.97 MW",
+            "5,591.31 rack equivalents"
+          ],
+          [
+            "Racks → GPUs",
+            "GPUs = racks × 72",
+            "5,591.31 × 72",
+            "402,574 B300 GPUs"
+          ],
+          [
+            "Fleet → FLE hours",
+            "FLE = GPUs × 8,760 × utilization",
+            "80% training utilization",
+            "2.82B GPU-hours/year"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "start-at-the-rack",
+      "title": "Start at the rack, not the GPU TDP",
+      "paragraphs": [
+        "NVIDIA’s current enterprise reference architecture defines one GB300 NVL72 scalable unit as one liquid-cooled rack with 18 compute trays, 72 B300 GPUs, and 36 Grace CPUs. The full rack can require up to 142 kW. Each tray contains four B300 GPUs, two Grace CPUs, ConnectX-8 adapters, a BlueField DPU, boot storage, and local cache. The rack boundary already includes far more than accelerator silicon. [S1][S2]",
+        "This is why dividing one gigawatt by a per-GPU thermal design figure is structurally wrong. The electrical system serves CPUs, memory, NVLink, local storage, network adapters, management hardware, and power-conversion losses inside the rack before it serves anything outside the cabinet. Rack density is the appropriate first hardware unit for this model.",
+        "The phrase “up to 142 kW” also matters. It is a nameplate or maximum requirement, not an assertion that every occupied rack draws 142 kW every hour. Using it for installed-fleet capacity is conservative with respect to rack count at a fixed compute-rack nameplate. Using it for annual energy without a utilization model would be wrong."
+      ],
+      "table": {
+        "caption": "GB300 NVL72 reference unit used in the model",
+        "columns": [
+          "Element",
+          "Quantity",
+          "Power or role",
+          "Treatment"
+        ],
+        "rows": [
+          [
+            "GB300 rack / scalable unit",
+            "1",
+            "Up to 142 kW",
+            "Compute-rack nameplate denominator"
+          ],
+          [
+            "Compute trays",
+            "18",
+            "4 B300 + 2 Grace per tray",
+            "Node count and internal system boundary"
+          ],
+          [
+            "B300 GPUs",
+            "72",
+            "Accelerators in one NVLink domain",
+            "Installed fleet output"
+          ],
+          [
+            "Grace CPUs",
+            "36",
+            "Host compute and memory",
+            "Included inside rack nameplate"
+          ],
+          [
+            "In-rack management switches",
+            "2 SN2201",
+            "OOB access; DC busbar",
+            "Included inside rack specification"
+          ],
+          [
+            "External fabrics",
+            "Compute, converged, storage/customer, support, OOB",
+            "Scale-out and operations",
+            "Reserved in external-IT overhead"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "network-overhead",
+      "title": "The external network is not a rounding error",
+      "paragraphs": [
+        "NVIDIA’s eight-SU bill of materials provides a rare public anchor. Eight racks contain 576 GPUs and require 44 compute-core switches, 11 converged-core switches, and 16 OOB management switches. Applying NVIDIA’s stated typical power gives 53.27 kW for the high-speed switches at the SN5600 passive-cable figure plus the SN2201 units. That is 4.69% of the eight racks’ combined 1.136 MW nameplate before storage systems, support servers, customer-edge equipment, and additional network tiers. [S3][S6][S7]",
+        "The documentation contains a material inconsistency. The BOM and logical-architecture tables name SN5600. The networking-hardware page names SN5610. The SN5610 specification lists 900 W with passive cables and 2.08 kW with 64 optical modules. Substituting the optical figure for the 55 high-speed switches raises the comparator to 115.97 kW, or 10.21% of rack nameplate. That is not a claim that every port is populated. It shows why chassis-only figures and optical population cannot be collapsed into one silent assumption. [S3][S5][S6]",
+        "The small-cluster BOM cannot simply be multiplied by hundreds. NVIDIA says larger designs use separate fabrics and introduces a super-spine around 1,024 nodes. It also identifies storage, customer, support-server, and management networks outside the compute fabric. A one-gigawatt homogeneous reference fleet would contain roughly 100,000 compute trays, far beyond the tested eight-SU design point. The external-IT allowance must therefore be a range, not an eight-rack extrapolation. [S4]",
+        "The model uses 6%, 10%, and 14%. Six percent sits just above the documented passive-switch floor. Ten percent is close to the optical-switch comparator before unquantified support equipment. Fourteen percent matches the total-IT/server overhead factor in a GB200-era Epoch decomposition and serves as an external magnitude check, not a GB300 measurement. [S9]"
+      ],
+      "table": {
+        "caption": "Eight-SU network-power reconstruction; calculated from vendor counts and typical-power specifications",
+        "columns": [
+          "Component",
+          "Count",
+          "Lower typical power",
+          "Optical comparator",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "Compute-core high-speed switches",
+            "44",
+            "41.36 kW",
+            "91.52 kW",
+            "BOM says SN5600; comparator uses SN5610 with 64 optical modules"
+          ],
+          [
+            "Converged-core high-speed switches",
+            "11",
+            "10.34 kW",
+            "22.88 kW",
+            "Same model-name contradiction"
+          ],
+          [
+            "OOB switches",
+            "16",
+            "1.57 kW",
+            "1.57 kW",
+            "SN2201 at 98 W typical"
+          ],
+          [
+            "Total external switches",
+            "71",
+            "53.27 kW",
+            "115.97 kW",
+            "Excludes support servers, storage, super-spine, and facility infrastructure"
+          ],
+          [
+            "Share of eight-rack nameplate",
+            "8 × 142 kW",
+            "4.69%",
+            "10.21%",
+            "Denominator is compute-rack nameplate"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "facility-conversion",
+      "title": "A 1 GW facility supports about 356,000 to 435,000 B300 GPUs in the model",
+      "paragraphs": [
+        "LBNL estimates an average PUE of 1.145 in 2024 for facilities serving AI equipment. PUE is total facility energy divided by IT energy. In the reference case, dividing 1,000 MW by 1.145 leaves 873.36 MW for all IT. Reserving 10% on top of compute-rack nameplate for external IT leaves 793.97 MW for GB300 racks. At 142 kW per rack and 72 GPUs per rack, the result is 5,591.31 rack equivalents and 402,574 installed B300 GPUs. [S1][S8]",
+        "The efficient case uses PUE 1.10 and 6% external IT overhead. It produces 434,856 GPUs. The conservative case uses PUE 1.25 and 14% external IT overhead. It produces 355,819. These endpoints are not statistical confidence bounds. They show how two engineering choices move the installed fleet while the facility headline stays fixed.",
+        "The sensitivity is economically large. The 79,037-GPU spread between the endpoints is equivalent to about 1,098 GB300 racks. Yet it is still smaller than the definitional error produced by treating a grid request as IT capacity or by applying PUE to a number that already sits at the IT boundary."
+      ],
+      "table": {
+        "caption": "1 GW total-facility-nameplate scenarios; all values calculated",
+        "columns": [
+          "Scenario",
+          "PUE",
+          "External IT overhead",
+          "IT MW",
+          "GB300 rack MW",
+          "Rack equivalents",
+          "Installed B300 GPUs"
+        ],
+        "rows": [
+          [
+            "Efficient",
+            "1.1",
+            "6%",
+            "909.09",
+            "857.63",
+            "6,040",
+            "434,856"
+          ],
+          [
+            "Reference",
+            "1.145",
+            "10%",
+            "873.36",
+            "793.97",
+            "5,591",
+            "402,574"
+          ],
+          [
+            "Conservative",
+            "1.25",
+            "14%",
+            "800.00",
+            "701.75",
+            "4,942",
+            "355,819"
+          ]
+        ]
+      },
+      "figures": [
+        {
+          "src": "/images/research/the-ai-megawatt-power-ladder.svg",
+          "alt": "Bar chart converting a one-gigawatt total facility nameplate into 873 megawatts of IT nameplate and 794 megawatts of GB300 rack nameplate in the reference case.",
+          "label": "Reference capacity ladder",
+          "caption": "Calculated: 1,000 MW facility ÷ 1.145 PUE ÷ 1.10 external-IT factor. The figure is a nameplate conversion, not annual average draw.",
+          "width": 2200,
+          "height": 1232
+        },
+        {
+          "src": "/images/research/the-ai-megawatt-sensitivity.svg",
+          "alt": "Line chart showing installed B300 GPU capacity declining as PUE and external IT overhead increase.",
+          "label": "PUE and external-IT sensitivity",
+          "caption": "Calculated for a 1,000 MW total facility nameplate, 142 kW per GB300 rack, and 72 B300 GPUs per rack.",
+          "width": 2200,
+          "height": 1320
+        }
+      ]
+    },
+    {
+      "id": "boundary-tests",
+      "title": "The same “1 GW” headline can imply 461,000 GPUs—or no GPU estimate at all",
+      "paragraphs": [
+        "Epoch’s current one-gigawatt cost model defines its site as 1 GW of IT nameplate, then separately applies PUE and utilization to estimate operating energy. Under this article’s 10% external-IT allowance, 1 GW at the IT boundary leaves 909.09 MW for compute racks and supports about 460,948 B300 GPUs. That is roughly 58,000 more than the reference facility-nameplate result because facility overhead sits outside the named gigawatt. [S10]",
+        "At the other extreme, a 1 GW interconnection request does not reveal installed fleet. Applying LBNL’s illustrative 50% average utilization produces 500 MW of average facility draw and 4.38 TWh per year. It does not reveal whether the site has 1 GW of facility nameplate, 700 MW, 500 MW, or a staged set of halls with future reserved capacity. It also does not reveal PUE, external-IT share, rack density, or occupancy. [S8]",
+        "A completed campus claim can still be temporally ambiguous. Epoch’s Frontier Data Centers Hub notes that large campuses come online in stages and that companies do not always clarify incremental timelines. The model therefore treats announced, under-construction, energized, commissioned, and occupied capacity as different states. [S11]"
+      ],
+      "table": {
+        "caption": "Boundary tests for a nominal 1 GW statement",
+        "columns": [
+          "What 1 GW means",
+          "Immediate implication",
+          "Reference arithmetic",
+          "Installed GPU inference"
+        ],
+        "rows": [
+          [
+            "Total facility nameplate",
+            "Whole-building maximum capacity",
+            "873.36 IT MW after PUE",
+            "≈ 402,574 GPUs with 10% external IT overhead"
+          ],
+          [
+            "IT nameplate",
+            "Servers + external network/storage/support IT",
+            "909.09 compute-rack MW after 10% allowance",
+            "≈ 460,948 GPUs"
+          ],
+          [
+            "Interconnection request",
+            "Maximum requested at grid point, including margins",
+            "500 MW average and 4.38 TWh/year at 50%",
+            "Not identifiable from the request alone"
+          ],
+          [
+            "Average facility draw",
+            "Time-weighted whole-building power",
+            "8.76 TWh/year at 1 GW average",
+            "Not identifiable without nameplate, PUE, and loading"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "installed-vs-utilized",
+      "title": "Installed accelerators are not annual compute output",
+      "paragraphs": [
+        "The reference fleet contains 402,574 installed B300 GPUs. If they remain powered on for a full year, that is 3.53 billion powered-on GPU-hours. This number still says nothing about computational intensity. It counts time, not work.",
+        "LBNL defines utilization as average computational intensity relative to maximum. Its reference assumption is 80% for training, with a 75%–85% uncertainty range, and 20% for inference by 2030 with a 30% high-inference case. Applying those values to the same installed fleet produces 2.64–3.00 billion training full-load-equivalent GPU-hours, 0.705 billion at 20% inference utilization, and 1.06 billion at 30%. [S8]",
+        "Full-load-equivalent GPU-hours are still not useful-work units. They do not capture model architecture, precision, sparsity, communication overhead, checkpointing, failed jobs, software quality, thermal throttling, or generation-to-generation performance. They are best used to prevent an installed-fleet number from being mistaken for an annual output number.",
+        "They are even farther from revenue. Paid utilization depends on reservations, service-level obligations, internal workloads, customer mix, pricing, credits, and whether idle capacity is economically necessary to meet peak demand. Public engineering documentation does not answer those questions."
+      ],
+      "table": {
+        "caption": "Reference installed fleet under LBNL computational-utilization scenarios",
+        "columns": [
+          "Workload case",
+          "Computational utilization",
+          "FLE B300 GPU-hours/year",
+          "Average rated-power fraction at 20% idle"
+        ],
+        "rows": [
+          [
+            "Training low",
+            "75%",
+            "2.645B",
+            "80.0%"
+          ],
+          [
+            "Training reference",
+            "80%",
+            "2.821B",
+            "84.0%"
+          ],
+          [
+            "Training high",
+            "85%",
+            "2.998B",
+            "88.0%"
+          ],
+          [
+            "Inference reference",
+            "20%",
+            "0.705B",
+            "36.0%"
+          ],
+          [
+            "Inference high",
+            "30%",
+            "1.058B",
+            "44.0%"
+          ]
+        ]
+      },
+      "figures": [
+        {
+          "src": "/images/research/the-ai-megawatt-utilization.svg",
+          "alt": "Bar chart showing full-load-equivalent B300 GPU-hours under training and inference utilization scenarios for the same installed fleet.",
+          "label": "Installed fleet versus annual computational utilization",
+          "caption": "Calculated from 402,574 installed B300 GPUs and 8,760 hours/year. Utilization scenarios come from LBNL; they are not revenue-utilization estimates.",
+          "width": 2200,
+          "height": 1232
+        }
+      ]
+    },
+    {
+      "id": "disclosure-standard",
+      "title": "A minimum disclosure standard for every AI-capacity claim",
+      "paragraphs": [
+        "A credible capacity statement should be reconstructable without private interpretation. The first field is the electrical boundary. The second is status. The third is time. Hardware, facility, and utilization fields follow. Without them, comparisons reward whoever uses the most expansive boundary.",
+        "For investors, the distinction changes capex intensity, commissioning risk, time to revenue, depreciation, and the meaning of utilization. For utilities, it changes load forecasts and reserve requirements. For operators, it changes whether a constraint sits in grid interconnection, mechanical plant, white space, power delivery, network fabric, storage, or workload scheduling.",
+        "The proposed standard is intentionally strict. A company can disclose ranges or mark fields unknown. It should not compress requested power, energized power, installed IT, and active compute into one promotional number."
+      ],
+      "bullets": [
+        "Boundary: interconnection, facility, IT, rack, or average draw.",
+        "Status: announced, requested, firm, energized, commissioned, occupied, or active.",
+        "Time basis: current, phase date, full-build date, peak, or annual average.",
+        "Redundancy and margin: what is reserved and why.",
+        "PUE: value, period, load point, and measurement boundary.",
+        "IT allocation: server/rack, network, storage, support, and management shares.",
+        "Hardware: accelerator generation, rack architecture, quantity, and mix.",
+        "Utilization: computational, electrical, scheduling, and paid utilization kept separate.",
+        "Staging: phase-by-phase energized and occupied capacity.",
+        "Source: utility filing, one-line, vendor order, asset register, or management estimate."
+      ]
+    },
+    {
+      "id": "limits",
+      "title": "What the model does not know",
+      "paragraphs": [
+        "The model does not estimate a specific hyperscaler campus. It does not know the project’s firm interconnection, topology, PUE curve, cooling design, storage system, network port population, spares, power caps, rack-loading distribution, accelerator mix, occupancy, workload schedule, or customer bookings.",
+        "The 142 kW rack figure is a nameplate input. A site can install more racks than the nameplate arithmetic suggests if average or capped draw is lower, provided its electrical and thermal design permits that operating policy. The reverse can also occur when redundancy, stranded capacity, maintenance, or topology prevents full occupancy.",
+        "The external-IT range is not measured at gigawatt scale. It is bounded by a documented eight-SU switch reconstruction, an optics comparator, architecture requirements, and an external GB200-era sense-check. Storage and support infrastructure remain unquantified.",
+        "The final uncertainty is semantic. A “GPU” is not a stable performance unit across generations, precisions, models, software stacks, and workloads. This article therefore reports physical B300 units and B300 GPU-hours only. It does not convert them into H100-equivalents, FLOP/s, tokens, training runs, or revenue."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "System Hardware & Components — NVIDIA NVL72 AI Factory",
+      "href": "https://docs.nvidia.com/enterprise-reference-architectures/nvl72-ai-factory/latest/components.html",
+      "lastVerified": "2026.08.16"
+    },
+    {
+      "label": "Overview — NVIDIA NVL72 AI Factory",
+      "href": "https://docs.nvidia.com/enterprise-reference-architectures/nvl72-ai-factory/latest/overview.html",
+      "lastVerified": "2026.08.16"
+    },
+    {
+      "label": "Appendix B – Node Configurations — NVIDIA NVL72 AI Factory",
+      "href": "https://docs.nvidia.com/enterprise-reference-architectures/nvl72-ai-factory/latest/appendix-node-configurations.html",
+      "lastVerified": "2026.08.16"
+    },
+    {
+      "label": "Network Logical Architecture — NVIDIA NVL72 AI Factory",
+      "href": "https://docs.nvidia.com/enterprise-reference-architectures/nvl72-ai-factory/latest/network-logical-architecture.html",
+      "lastVerified": "2026.08.16"
+    },
+    {
+      "label": "Networking Hardware — NVIDIA NVL72 AI Factory",
+      "href": "https://docs.nvidia.com/enterprise-reference-architectures/nvl72-ai-factory/latest/networking-hardware.html",
+      "lastVerified": "2026.08.16"
+    },
+    {
+      "label": "Spectrum-4 SN5000 Switch Systems Specifications",
+      "href": "https://networking-docs.nvidia.com/sn5000hw/specifications",
+      "lastVerified": "2026.08.16"
+    },
+    {
+      "label": "SN2201 and SN2201_M Specifications",
+      "href": "https://networking-docs.nvidia.com/sn2201hw/specifications",
+      "lastVerified": "2026.08.16"
+    },
+    {
+      "label": "United States Data Center Energy Usage Report: 2025 Update",
+      "href": "https://doi.org/10.71468/P1RP4F",
+      "lastVerified": "2026.08.16"
+    },
+    {
+      "label": "GPUs account for about 40% of power usage in AI data centers",
+      "href": "https://epoch.ai/data-insights/gpus-power-usage-in-ai-data-centers",
+      "lastVerified": "2026.08.16"
+    },
+    {
+      "label": "Total cost of ownership of a one-gigawatt AI data center",
+      "href": "https://epoch.ai/data-insights/ai-datacenter-cost-breakdown",
+      "lastVerified": "2026.08.16"
+    },
+    {
+      "label": "Introducing the Frontier Data Centers Hub",
+      "href": "https://epoch.ai/latest/introducing-the-frontier-data-centers-hub",
+      "lastVerified": "2026.08.16"
+    }
+  ],
+  "path": "/research/ai-systems/the-ai-megawatt",
+  "aliases": []
+}

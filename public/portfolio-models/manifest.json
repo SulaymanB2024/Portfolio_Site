@@ -127,10 +127,10 @@
       "reductionPercent": 21.88235752985561
     },
     "headrest": {
-      "url": "portfolio-models/headrest.glb?v=2edea73a4c59",
+      "url": "portfolio-models/headrest.glb?v=52f20eae8145",
       "path": "public/portfolio-models/headrest.glb",
-      "bytes": 3339408,
-      "sha256": "2edea73a4c59842c4ef125c4654fd3d9d7e8fa2fbc1870d89bdb62bb8e2d9e3a",
+      "bytes": 2613616,
+      "sha256": "52f20eae814557d2dc2fb2884216ba126777f61e9cdcfe0868ea6ee9106973e2",
       "strategy": "texture-only",
       "source": {
         "path": "public/models/headrest-three-lions-balanced.glb",
@@ -224,24 +224,24 @@
             "mimeType": "image/webp",
             "width": 1024,
             "height": 1024,
-            "bytes": 1134950,
-            "sha256": "85bc1533d3ca0c6ecd0100521b8cf56f8844159b48d799824bcd04f7ad4fd7e4"
+            "bytes": 419848,
+            "sha256": "bee4d506d01b8ffac3dff0035dc02af31ce737710b91395bc72703b88c3a53a3"
           },
           {
             "name": "",
             "mimeType": "image/webp",
             "width": 1024,
             "height": 1024,
-            "bytes": 335672,
-            "sha256": "ea011d91f447a9b045206a889a9670024413770c072d62877d22010993587240"
+            "bytes": 328674,
+            "sha256": "0d5b360b8adde40c291c2e2827d02832737d203a942ec10914a84362fb81f33d"
           },
           {
             "name": "",
             "mimeType": "image/webp",
             "width": 1024,
             "height": 1024,
-            "bytes": 888872,
-            "sha256": "1d98561f73ddc0f447c4aa1cfffdf684ce16ce625b63fbeb44c99ddde9abdf0f"
+            "bytes": 885182,
+            "sha256": "7f7896da8e274fe10d8b905c052e273a7a19a8e0c887e645b15ecc4bca196a71"
           }
         ],
         "textureBytesRGBA": 12582912,
@@ -270,8 +270,11 @@
       "settings": {
         "textureMaxDimension": 1024,
         "format": "webp",
-        "lossless": true,
-        "effort": 4,
+        "lossless": false,
+        "effort": 6,
+        "baseColorQuality": 98,
+        "smartSubsample": true,
+        "nonColorMaps": "lossless",
         "baseColorDetail": {
           "sigma": 0.55,
           "m1": 0.35,
@@ -279,7 +282,7 @@
         },
         "geometry": "original compressed buffers"
       },
-      "reductionPercent": 48.98339802692687
+      "reductionPercent": 60.07142368274392
     },
     "globe": {
       "url": "models/wireframe-globe-balanced.glb?v=c4f7d6c9c204",
@@ -370,7 +373,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 2.5074205722504424e-07
+        "normalizedBoundsError": 2.5074205722504424e-7
       },
       "settings": {
         "geometry": "existing-balanced"
@@ -474,34 +477,343 @@
       "reductionPercent": 0
     },
     "work-internshipdeadlines": {
-      "url": "portfolio-models/work-internshipdeadlines.glb?v=4a7bf7521d41",
+      "url": "portfolio-models/work-internshipdeadlines.glb?v=cbc544a04c3e",
       "path": "public/portfolio-models/work-internshipdeadlines.glb",
-      "bytes": 184172,
-      "sha256": "4a7bf7521d41aa0933f821586e9c0e6652844179ed69f8f886888bd65de5ffc6",
+      "bytes": 464088,
+      "sha256": "cbc544a04c3eaadd3b96fe3a1788b280a4a68c0acf332734d42ca528c2741781",
       "strategy": "draco-only",
       "source": {
         "path": "public/work-studies/internshipdeadlines.glb",
-        "bytes": 1293800,
-        "sha256": "a3c77f84e99748028c46e32303a4368cc55676555f63b2277af1b881624f9c12",
+        "bytes": 2773396,
+        "sha256": "e8c76730aef8c7659dd05bd2347f5cd30f2721b562596d795ca6b56294a5db83",
         "stats": {
-          "triangles": 42048,
-          "vertices": 42964,
+          "triangles": 75412,
+          "vertices": 82364,
+          "primitives": 12,
+          "meshes": 12,
+          "materials": 5,
+          "nodes": 12,
+          "animations": 0,
+          "skins": 0,
+          "bounds": {
+            "min": [
+              -0.8964921534199951,
+              -0.9999999964169448,
+              -0.4264605641365051
+            ],
+            "max": [
+              0.896492212996936,
+              1.0000000071218753,
+              0.426460564368175
+            ]
+          },
+          "textures": [],
+          "textureBytesRGBA": 0,
+          "textureBytesWithMipmapsEstimate": 0
+        },
+        "validation": {
+          "compressed": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "decoded": {
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      },
+      "stats": {
+        "triangles": 75412,
+        "vertices": 83170,
+        "primitives": 12,
+        "meshes": 12,
+        "materials": 5,
+        "nodes": 12,
+        "animations": 0,
+        "skins": 0,
+        "bounds": {
+          "min": [
+            -0.8964921534199951,
+            -0.9999999964169448,
+            -0.4264605641365051
+          ],
+          "max": [
+            0.8964897096018555,
+            1.0000000071218753,
+            0.4264610412053332
+          ]
+        },
+        "textures": [],
+        "textureBytesRGBA": 0,
+        "textureBytesWithMipmapsEstimate": 0
+      },
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "preservation": {
+        "hierarchy": true,
+        "localTransforms": true,
+        "nodeNamesAndExtras": true,
+        "attributionAndAllExtras": true,
+        "materialBindings": true,
+        "triangleCounts": true,
+        "compressedGeometryBytes": false,
+        "normalizedBoundsError": 0.000001251697538068437
+      },
+      "settings": {
+        "reorder": "performance",
+        "method": "edgebreaker",
+        "encodeSpeed": 5,
+        "decodeSpeed": 5,
+        "quantizePosition": 18,
+        "quantizeNormal": 14,
+        "quantizeTexcoord": 16,
+        "simplification": false
+      },
+      "reductionPercent": 83.2664358064986
+    },
+    "work-sapien": {
+      "url": "portfolio-models/work-sapien.glb?v=77f0c2f6b828",
+      "path": "public/portfolio-models/work-sapien.glb",
+      "bytes": 462488,
+      "sha256": "77f0c2f6b82838c854f827e8571ccfbc96f9c0c8160af25234077e8bc716c7ca",
+      "strategy": "draco-only",
+      "source": {
+        "path": "public/work-studies/sapien.glb",
+        "bytes": 2405584,
+        "sha256": "d5c3b29276cbaca3e1ed6e2b0f10c0c3c3ad2b6713b42b63e51b238e134ebb3f",
+        "stats": {
+          "triangles": 116448,
+          "vertices": 60594,
+          "primitives": 9,
+          "meshes": 9,
+          "materials": 5,
+          "nodes": 9,
+          "animations": 0,
+          "skins": 0,
+          "bounds": {
+            "min": [
+              -1,
+              -0.6532791256904602,
+              -0.6404062509536743
+            ],
+            "max": [
+              1,
+              0.6532791256904602,
+              0.6404062509536743
+            ]
+          },
+          "textures": [],
+          "textureBytesRGBA": 0,
+          "textureBytesWithMipmapsEstimate": 0
+        },
+        "validation": {
+          "compressed": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "decoded": {
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      },
+      "stats": {
+        "triangles": 116448,
+        "vertices": 61246,
+        "primitives": 9,
+        "meshes": 9,
+        "materials": 5,
+        "nodes": 9,
+        "animations": 0,
+        "skins": 0,
+        "bounds": {
+          "min": [
+            -1,
+            -0.6532791256904602,
+            -0.6404062509536743
+          ],
+          "max": [
+            1,
+            0.6532775163650513,
+            0.6404061317443848
+          ]
+        },
+        "textures": [],
+        "textureBytesRGBA": 0,
+        "textureBytesWithMipmapsEstimate": 0
+      },
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "preservation": {
+        "hierarchy": true,
+        "localTransforms": true,
+        "nodeNamesAndExtras": true,
+        "attributionAndAllExtras": true,
+        "materialBindings": true,
+        "triangleCounts": true,
+        "compressedGeometryBytes": false,
+        "normalizedBoundsError": 8.046627044677734e-7
+      },
+      "settings": {
+        "reorder": "performance",
+        "method": "edgebreaker",
+        "encodeSpeed": 5,
+        "decodeSpeed": 5,
+        "quantizePosition": 18,
+        "quantizeNormal": 14,
+        "quantizeTexcoord": 16,
+        "simplification": false
+      },
+      "reductionPercent": 80.77439823344352
+    },
+    "work-investing-markets": {
+      "url": "portfolio-models/work-investing-markets.glb?v=b0bbd6ef138f",
+      "path": "public/portfolio-models/work-investing-markets.glb",
+      "bytes": 573888,
+      "sha256": "b0bbd6ef138fcd05c80e2d101970a51147a87422d53346bdb408622ad72f90c0",
+      "strategy": "draco-only",
+      "source": {
+        "path": "public/work-studies/investing-markets.glb",
+        "bytes": 3247364,
+        "sha256": "e038ce3301c56b4421d500162c8e318b4cd13818e3a14f8633e6b4fa24f45031",
+        "stats": {
+          "triangles": 110612,
+          "vertices": 91763,
+          "primitives": 12,
+          "meshes": 12,
+          "materials": 5,
+          "nodes": 12,
+          "animations": 0,
+          "skins": 0,
+          "bounds": {
+            "min": [
+              -0.984005727367481,
+              -1,
+              -0.9857949393626319
+            ],
+            "max": [
+              0.9840057710837519,
+              1.0000000006624228,
+              0.9857949835423364
+            ]
+          },
+          "textures": [],
+          "textureBytesRGBA": 0,
+          "textureBytesWithMipmapsEstimate": 0
+        },
+        "validation": {
+          "compressed": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "decoded": {
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      },
+      "stats": {
+        "triangles": 110612,
+        "vertices": 92743,
+        "primitives": 12,
+        "meshes": 12,
+        "materials": 5,
+        "nodes": 12,
+        "animations": 0,
+        "skins": 0,
+        "bounds": {
+          "min": [
+            -0.984005727367481,
+            -1,
+            -0.9857949393626319
+          ],
+          "max": [
+            0.9840042213629877,
+            1.0000000006624228,
+            0.9857949835423364
+          ]
+        },
+        "textures": [],
+        "textureBytesRGBA": 0,
+        "textureBytesWithMipmapsEstimate": 0
+      },
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "preservation": {
+        "hierarchy": true,
+        "localTransforms": true,
+        "nodeNamesAndExtras": true,
+        "attributionAndAllExtras": true,
+        "materialBindings": true,
+        "triangleCounts": true,
+        "compressedGeometryBytes": false,
+        "normalizedBoundsError": 7.748603818234355e-7
+      },
+      "settings": {
+        "reorder": "performance",
+        "method": "edgebreaker",
+        "encodeSpeed": 5,
+        "decodeSpeed": 5,
+        "quantizePosition": 18,
+        "quantizeNormal": 14,
+        "quantizeTexcoord": 16,
+        "simplification": false
+      },
+      "reductionPercent": 82.32757399540058
+    },
+    "work-miscellaneous": {
+      "url": "portfolio-models/work-miscellaneous.glb?v=a8f3fb94615e",
+      "path": "public/portfolio-models/work-miscellaneous.glb",
+      "bytes": 542804,
+      "sha256": "a8f3fb94615e0cd8475b5553318e0110399b5db9f19e14ed89fe1c4cb8ceada6",
+      "strategy": "draco-only",
+      "source": {
+        "path": "public/work-studies/miscellaneous.glb",
+        "bytes": 2948148,
+        "sha256": "8f673fae44ddbf01758a4224831f73ab747e3f29068932a3bcf5e075c7acaab0",
+        "stats": {
+          "triangles": 99490,
+          "vertices": 83492,
           "primitives": 10,
           "meshes": 10,
-          "materials": 4,
+          "materials": 5,
           "nodes": 10,
           "animations": 0,
           "skins": 0,
           "bounds": {
             "min": [
-              -0.9243092303957575,
-              -0.9999999878771907,
-              -0.7138790745244927
+              -1.0000000011558279,
+              -0.9259778261184692,
+              -0.716029703617096
             ],
             "max": [
-              0.9243092769894964,
-              1.0000000183497038,
-              0.7138790231241279
+              1,
+              0.9259778261184692,
+              0.7160297010444998
             ]
           },
           "textures": [],
@@ -520,24 +832,24 @@
         }
       },
       "stats": {
-        "triangles": 42048,
-        "vertices": 43084,
+        "triangles": 99490,
+        "vertices": 84781,
         "primitives": 10,
         "meshes": 10,
-        "materials": 4,
+        "materials": 5,
         "nodes": 10,
         "animations": 0,
         "skins": 0,
         "bounds": {
           "min": [
-            -0.9243092303957575,
-            -0.9999999878771907,
-            -0.7138790745244927
+            -1.0000000011558279,
+            -0.9259778261184692,
+            -0.716029703617096
           ],
           "max": [
-            0.9243073696408636,
-            1.0000000183497038,
-            0.7138821225656562
+            0.9999999403953552,
+            0.9259809255599976,
+            0.7160289559864401
           ]
         },
         "textures": [],
@@ -562,7 +874,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 1.5497207593351824e-06
+        "normalizedBoundsError": 0.000001549720763264551
       },
       "settings": {
         "reorder": "performance",
@@ -574,330 +886,21 @@
         "quantizeTexcoord": 16,
         "simplification": false
       },
-      "reductionPercent": 85.76503323543052
-    },
-    "work-sapien": {
-      "url": "portfolio-models/work-sapien.glb?v=c774fc717926",
-      "path": "public/portfolio-models/work-sapien.glb",
-      "bytes": 133440,
-      "sha256": "c774fc71792617459860135cff57338a39fb5e37e1730a14e325fa69ab422938",
-      "strategy": "draco-only",
-      "source": {
-        "path": "public/work-studies/sapien.glb",
-        "bytes": 916920,
-        "sha256": "44ed8ea389281c61744a90d2d089d74ad5f2fabae32d9d843e9917966eefabcf",
-        "stats": {
-          "triangles": 29256,
-          "vertices": 30526,
-          "primitives": 8,
-          "meshes": 8,
-          "materials": 4,
-          "nodes": 8,
-          "animations": 0,
-          "skins": 0,
-          "bounds": {
-            "min": [
-              -0.7570917535622117,
-              -1.0000000486837406,
-              -0.7505081863952626
-            ],
-            "max": [
-              0.7570917677085403,
-              1,
-              0.7505081920074473
-            ]
-          },
-          "textures": [],
-          "textureBytesRGBA": 0,
-          "textureBytesWithMipmapsEstimate": 0
-        },
-        "validation": {
-          "compressed": {
-            "errors": 0,
-            "warnings": 0
-          },
-          "decoded": {
-            "errors": 0,
-            "warnings": 0
-          }
-        }
-      },
-      "stats": {
-        "triangles": 29256,
-        "vertices": 30526,
-        "primitives": 8,
-        "meshes": 8,
-        "materials": 4,
-        "nodes": 8,
-        "animations": 0,
-        "skins": 0,
-        "bounds": {
-          "min": [
-            -0.7570917535622117,
-            -1.0000000486837406,
-            -0.7505081863952626
-          ],
-          "max": [
-            0.7570885490577224,
-            1,
-            0.7505116490768443
-          ]
-        },
-        "textures": [],
-        "textureBytesRGBA": 0,
-        "textureBytesWithMipmapsEstimate": 0
-      },
-      "validation": {
-        "compressed": {
-          "errors": 0,
-          "warnings": 0
-        },
-        "decoded": {
-          "errors": 0,
-          "warnings": 0
-        }
-      },
-      "preservation": {
-        "hierarchy": true,
-        "localTransforms": true,
-        "nodeNamesAndExtras": true,
-        "attributionAndAllExtras": true,
-        "materialBindings": true,
-        "triangleCounts": true,
-        "compressedGeometryBytes": false,
-        "normalizedBoundsError": 1.7285346564105617e-06
-      },
-      "settings": {
-        "reorder": "performance",
-        "method": "edgebreaker",
-        "encodeSpeed": 5,
-        "decodeSpeed": 5,
-        "quantizePosition": 18,
-        "quantizeNormal": 14,
-        "quantizeTexcoord": 16,
-        "simplification": false
-      },
-      "reductionPercent": 85.4469310299699
-    },
-    "work-investing-markets": {
-      "url": "portfolio-models/work-investing-markets.glb?v=1674cef12e6c",
-      "path": "public/portfolio-models/work-investing-markets.glb",
-      "bytes": 238272,
-      "sha256": "1674cef12e6cc7e6ccae280e7b1e68e904ce230a4fb0a8e9e972e868fb9d6511",
-      "strategy": "draco-only",
-      "source": {
-        "path": "public/work-studies/investing-markets.glb",
-        "bytes": 1356380,
-        "sha256": "3fbf9f0caf4c51fb1a1bff973e6f2503a63096ca2128b1702045575cde150f15",
-        "stats": {
-          "triangles": 56964,
-          "vertices": 41829,
-          "primitives": 11,
-          "meshes": 11,
-          "materials": 4,
-          "nodes": 11,
-          "animations": 0,
-          "skins": 0,
-          "bounds": {
-            "min": [
-              -0.9999999403953552,
-              -0.9393036429956857,
-              -0.9541048571021578
-            ],
-            "max": [
-              0.9999999403953552,
-              0.9393036365509033,
-              0.9541048244087675
-            ]
-          },
-          "textures": [],
-          "textureBytesRGBA": 0,
-          "textureBytesWithMipmapsEstimate": 0
-        },
-        "validation": {
-          "compressed": {
-            "errors": 0,
-            "warnings": 0
-          },
-          "decoded": {
-            "errors": 0,
-            "warnings": 0
-          }
-        }
-      },
-      "stats": {
-        "triangles": 56964,
-        "vertices": 42162,
-        "primitives": 11,
-        "meshes": 11,
-        "materials": 4,
-        "nodes": 11,
-        "animations": 0,
-        "skins": 0,
-        "bounds": {
-          "min": [
-            -0.9999999403953552,
-            -0.9393036429956857,
-            -0.9541048571021578
-          ],
-          "max": [
-            1,
-            0.9393025636672974,
-            0.9541030362694243
-          ]
-        },
-        "textures": [],
-        "textureBytesRGBA": 0,
-        "textureBytesWithMipmapsEstimate": 0
-      },
-      "validation": {
-        "compressed": {
-          "errors": 0,
-          "warnings": 0
-        },
-        "decoded": {
-          "errors": 0,
-          "warnings": 0
-        }
-      },
-      "preservation": {
-        "hierarchy": true,
-        "localTransforms": true,
-        "nodeNamesAndExtras": true,
-        "attributionAndAllExtras": true,
-        "materialBindings": true,
-        "triangleCounts": true,
-        "compressedGeometryBytes": false,
-        "normalizedBoundsError": 8.940697249215677e-07
-      },
-      "settings": {
-        "reorder": "performance",
-        "method": "edgebreaker",
-        "encodeSpeed": 5,
-        "decodeSpeed": 5,
-        "quantizePosition": 18,
-        "quantizeNormal": 14,
-        "quantizeTexcoord": 16,
-        "simplification": false
-      },
-      "reductionPercent": 82.43324142202037
-    },
-    "work-miscellaneous": {
-      "url": "portfolio-models/work-miscellaneous.glb?v=6552787969b4",
-      "path": "public/portfolio-models/work-miscellaneous.glb",
-      "bytes": 213492,
-      "sha256": "6552787969b409145ab2e849f56fdd8707b30ed119277b8331895bdb553a9b00",
-      "strategy": "draco-only",
-      "source": {
-        "path": "public/work-studies/miscellaneous.glb",
-        "bytes": 1350084,
-        "sha256": "69d67f162023e833b2b3ea664b636c3be48ef6676a8f371a6edbe6ea5dd5d07f",
-        "stats": {
-          "triangles": 44168,
-          "vertices": 44745,
-          "primitives": 11,
-          "meshes": 11,
-          "materials": 4,
-          "nodes": 11,
-          "animations": 0,
-          "skins": 0,
-          "bounds": {
-            "min": [
-              -0.9035313725471497,
-              -1,
-              -0.5918275713920593
-            ],
-            "max": [
-              0.9035313725471497,
-              1,
-              0.5918275713920593
-            ]
-          },
-          "textures": [],
-          "textureBytesRGBA": 0,
-          "textureBytesWithMipmapsEstimate": 0
-        },
-        "validation": {
-          "compressed": {
-            "errors": 0,
-            "warnings": 0
-          },
-          "decoded": {
-            "errors": 0,
-            "warnings": 0
-          }
-        }
-      },
-      "stats": {
-        "triangles": 44168,
-        "vertices": 45079,
-        "primitives": 11,
-        "meshes": 11,
-        "materials": 4,
-        "nodes": 11,
-        "animations": 0,
-        "skins": 0,
-        "bounds": {
-          "min": [
-            -0.9035313725471497,
-            -1,
-            -0.5918275713920593
-          ],
-          "max": [
-            0.9035281538963318,
-            1,
-            0.5918302536010742
-          ]
-        },
-        "textures": [],
-        "textureBytesRGBA": 0,
-        "textureBytesWithMipmapsEstimate": 0
-      },
-      "validation": {
-        "compressed": {
-          "errors": 0,
-          "warnings": 0
-        },
-        "decoded": {
-          "errors": 0,
-          "warnings": 0
-        }
-      },
-      "preservation": {
-        "hierarchy": true,
-        "localTransforms": true,
-        "nodeNamesAndExtras": true,
-        "attributionAndAllExtras": true,
-        "materialBindings": true,
-        "triangleCounts": true,
-        "compressedGeometryBytes": false,
-        "normalizedBoundsError": 1.6093254089355469e-06
-      },
-      "settings": {
-        "reorder": "performance",
-        "method": "edgebreaker",
-        "encodeSpeed": 5,
-        "decodeSpeed": 5,
-        "quantizePosition": 18,
-        "quantizeNormal": 14,
-        "quantizeTexcoord": 16,
-        "simplification": false
-      },
-      "reductionPercent": 84.18676171260455
+      "reductionPercent": 81.58830560745254
     },
     "about-bass": {
-      "url": "portfolio-models/about-bass.glb?v=466d54ace851",
+      "url": "portfolio-models/about-bass.glb?v=0ef2a84d530f",
       "path": "public/portfolio-models/about-bass.glb",
-      "bytes": 185480,
-      "sha256": "466d54ace8513cef91635738659985ed88a45d60d56ddad9480a5deee3ff2f6e",
+      "bytes": 202528,
+      "sha256": "0ef2a84d530f56ada42e83bc967cc7a23559fe1d0f55b14215296577acf67f7b",
       "strategy": "draco-only",
       "source": {
         "path": "public/about-objects/bass.glb",
-        "bytes": 1435128,
-        "sha256": "d355f915b185c086f7435a00ddc7db98feb24ca695291abbb495bec2f0f8bab1",
+        "bytes": 1454684,
+        "sha256": "433c628dca5d6ac8a8653c9d99e7cb159d1eb944c45fa37844b8cd4356a4c785",
         "stats": {
-          "triangles": 34060,
-          "vertices": 50734,
+          "triangles": 37300,
+          "vertices": 50739,
           "primitives": 16,
           "meshes": 16,
           "materials": 5,
@@ -908,7 +911,7 @@
             "min": [
               -0.6143139849478194,
               -1.5845915079116821,
-              -0.20541773736476898
+              -0.20611068606376648
             ],
             "max": [
               0.8926996041959336,
@@ -932,8 +935,8 @@
         }
       },
       "stats": {
-        "triangles": 34060,
-        "vertices": 50880,
+        "triangles": 37300,
+        "vertices": 50887,
         "primitives": 16,
         "meshes": 16,
         "materials": 5,
@@ -944,12 +947,12 @@
           "min": [
             -0.6143139849478194,
             -1.5845915079116821,
-            -0.20541773736476898
+            -0.20611068606376648
           ],
           "max": [
-            0.8926996041959336,
+            0.8926996190970948,
             1.6154085397720337,
-            0.41056222210600474
+            0.41056239719464876
           ]
         },
         "textures": [],
@@ -974,7 +977,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 1.6880221413370647e-08
+        "normalizedBoundsError": 3.783497902996869e-8
       },
       "settings": {
         "reorder": "performance",
@@ -986,21 +989,21 @@
         "quantizeTexcoord": 16,
         "simplification": false
       },
-      "reductionPercent": 87.07571728793529
+      "reductionPercent": 86.07752611563748
     },
     "about-knight": {
-      "url": "portfolio-models/about-knight.glb?v=85a9ec515af8",
+      "url": "portfolio-models/about-knight.glb?v=33fb2db410b1",
       "path": "public/portfolio-models/about-knight.glb",
-      "bytes": 237088,
-      "sha256": "85a9ec515af886b91708f87bfe9f2a54b52fbe1ffefe7b23bb86568ea0b6bfea",
+      "bytes": 228564,
+      "sha256": "33fb2db410b11863528ebde62b61d1fe535b56f07a6dd0dd30071be95360eb1f",
       "strategy": "draco-only",
       "source": {
         "path": "public/about-objects/knight.glb",
-        "bytes": 1215284,
-        "sha256": "f9c5c3bf0d2ea1f1684048ef0c28c805db44b084d7895dfaba7bee134a8d3c6f",
+        "bytes": 1024240,
+        "sha256": "38526699f03a698840fd64cb6229587fdf2f1fed07ab98faebd6c886c06add4b",
         "stats": {
-          "triangles": 39860,
-          "vertices": 38030,
+          "triangles": 37988,
+          "vertices": 30538,
           "primitives": 69,
           "meshes": 69,
           "materials": 5,
@@ -1035,8 +1038,8 @@
         }
       },
       "stats": {
-        "triangles": 39860,
-        "vertices": 38038,
+        "triangles": 37988,
+        "vertices": 30546,
         "primitives": 69,
         "meshes": 69,
         "materials": 5,
@@ -1077,7 +1080,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 2.731879536500695e-07
+        "normalizedBoundsError": 2.731879536500695e-7
       },
       "settings": {
         "reorder": "performance",
@@ -1089,21 +1092,21 @@
         "quantizeTexcoord": 16,
         "simplification": false
       },
-      "reductionPercent": 80.49114445676895
+      "reductionPercent": 77.68452706396938
     },
     "about-score": {
-      "url": "portfolio-models/about-score.glb?v=05597d6eb3f3",
+      "url": "portfolio-models/about-score.glb?v=3724670c49d9",
       "path": "public/portfolio-models/about-score.glb",
-      "bytes": 135944,
-      "sha256": "05597d6eb3f355001b8cea8bfc52db73a2d06e1bbfd736d818b0794256dfb119",
+      "bytes": 150160,
+      "sha256": "3724670c49d983c096328535995bad8056d3b5a0e766bc5366db45726f2dd550",
       "strategy": "draco-only",
       "source": {
         "path": "public/about-objects/score.glb",
-        "bytes": 733064,
-        "sha256": "dbf80f8421f50d12a935fb1034baba596aa81c4a2303c10dc19fe5f914c83251",
+        "bytes": 813372,
+        "sha256": "8653df9dac501709c8550e30f153c50a24515f2078e155ca7a78f071cc810899",
         "stats": {
-          "triangles": 28288,
-          "vertices": 23087,
+          "triangles": 32544,
+          "vertices": 25369,
           "primitives": 10,
           "meshes": 10,
           "materials": 5,
@@ -1138,8 +1141,8 @@
         }
       },
       "stats": {
-        "triangles": 28288,
-        "vertices": 23528,
+        "triangles": 32544,
+        "vertices": 25810,
         "primitives": 10,
         "meshes": 10,
         "materials": 5,
@@ -1180,7 +1183,7 @@
         "materialBindings": true,
         "triangleCounts": true,
         "compressedGeometryBytes": false,
-        "normalizedBoundsError": 5.308538596204838e-07
+        "normalizedBoundsError": 5.308538596204838e-7
       },
       "settings": {
         "reorder": "performance",
@@ -1192,7 +1195,213 @@
         "quantizeTexcoord": 16,
         "simplification": false
       },
-      "reductionPercent": 81.45537088166927
+      "reductionPercent": 81.53858259197514
+    },
+    "about-chess-pieces": {
+      "url": "portfolio-models/about-chess-pieces.glb?v=0f4996f7c64e",
+      "path": "public/portfolio-models/about-chess-pieces.glb",
+      "bytes": 95244,
+      "sha256": "0f4996f7c64e11b61b29ff8544cf259d916244f712e074b44446bd0816b65030",
+      "strategy": "draco-only",
+      "source": {
+        "path": "public/about-objects/chess-pieces.glb",
+        "bytes": 498712,
+        "sha256": "4e393f1f7bd9641b42e9a5d32cb66a9c4aa34b4e8ed7291d4244a021ccba3d13",
+        "stats": {
+          "triangles": 18808,
+          "vertices": 15756,
+          "primitives": 10,
+          "meshes": 10,
+          "materials": 2,
+          "nodes": 15,
+          "animations": 0,
+          "skins": 0,
+          "bounds": {
+            "min": [
+              -0.10100000351667404,
+              0,
+              -0.10100000351667404
+            ],
+            "max": [
+              0.10100000351667404,
+              0.4767000079154968,
+              0.10100000351667404
+            ]
+          },
+          "textures": [],
+          "textureBytesRGBA": 0,
+          "textureBytesWithMipmapsEstimate": 0
+        },
+        "validation": {
+          "compressed": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "decoded": {
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      },
+      "stats": {
+        "triangles": 18808,
+        "vertices": 15764,
+        "primitives": 10,
+        "meshes": 10,
+        "materials": 2,
+        "nodes": 15,
+        "animations": 0,
+        "skins": 0,
+        "bounds": {
+          "min": [
+            -0.10100000351667404,
+            0,
+            -0.10100000351667404
+          ],
+          "max": [
+            0.10100028663873672,
+            0.4767000079154968,
+            0.10100028663873672
+          ]
+        },
+        "textures": [],
+        "textureBytesRGBA": 0,
+        "textureBytesWithMipmapsEstimate": 0
+      },
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "preservation": {
+        "hierarchy": true,
+        "localTransforms": true,
+        "nodeNamesAndExtras": true,
+        "attributionAndAllExtras": true,
+        "materialBindings": true,
+        "triangleCounts": true,
+        "compressedGeometryBytes": false,
+        "normalizedBoundsError": 5.939208264777157e-7
+      },
+      "settings": {
+        "reorder": "performance",
+        "method": "edgebreaker",
+        "encodeSpeed": 5,
+        "decodeSpeed": 5,
+        "quantizePosition": 18,
+        "quantizeNormal": 14,
+        "quantizeTexcoord": 16,
+        "simplification": false
+      },
+      "reductionPercent": 80.90200356117359
+    },
+    "resume-work-areas": {
+      "url": "portfolio-models/resume-work-areas.glb?v=1324ef148b94",
+      "path": "public/portfolio-models/resume-work-areas.glb",
+      "bytes": 96432,
+      "sha256": "1324ef148b9447b561abd8e731f05ec84567f71e990f51563220f33467805a12",
+      "strategy": "draco-only",
+      "source": {
+        "path": "public/resume-objects/work-areas.glb",
+        "bytes": 925788,
+        "sha256": "4370f343ac91613b20bb655c5cc3cd7a8ee1d6890d5a40fa3cec6edbd1fee6b3",
+        "stats": {
+          "triangles": 16656,
+          "vertices": 33445,
+          "primitives": 30,
+          "meshes": 30,
+          "materials": 2,
+          "nodes": 45,
+          "animations": 0,
+          "skins": 0,
+          "bounds": {
+            "min": [
+              -0.7749999761581421,
+              -0.8449999690055847,
+              -0.28998619318008423
+            ],
+            "max": [
+              0.8550000190734863,
+              0.9549999833106995,
+              0.5600000023841858
+            ]
+          },
+          "textures": [],
+          "textureBytesRGBA": 0,
+          "textureBytesWithMipmapsEstimate": 0
+        },
+        "validation": {
+          "compressed": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "decoded": {
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      },
+      "stats": {
+        "triangles": 16656,
+        "vertices": 33465,
+        "primitives": 30,
+        "meshes": 30,
+        "materials": 2,
+        "nodes": 45,
+        "animations": 0,
+        "skins": 0,
+        "bounds": {
+          "min": [
+            -0.7749999761581421,
+            -0.8449999690055847,
+            -0.28998619318008423
+          ],
+          "max": [
+            0.8549973964691162,
+            0.9549999833106995,
+            0.5600003004074097
+          ]
+        },
+        "textures": [],
+        "textureBytesRGBA": 0,
+        "textureBytesWithMipmapsEstimate": 0
+      },
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "preservation": {
+        "hierarchy": true,
+        "localTransforms": true,
+        "nodeNamesAndExtras": true,
+        "attributionAndAllExtras": true,
+        "materialBindings": true,
+        "triangleCounts": true,
+        "compressedGeometryBytes": false,
+        "normalizedBoundsError": 0.0000014570024664402662
+      },
+      "settings": {
+        "reorder": "performance",
+        "method": "edgebreaker",
+        "encodeSpeed": 5,
+        "decodeSpeed": 5,
+        "quantizePosition": 18,
+        "quantizeNormal": 14,
+        "quantizeTexcoord": 16,
+        "simplification": false
+      },
+      "reductionPercent": 89.58379240171615
     }
   }
 }

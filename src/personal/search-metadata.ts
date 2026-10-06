@@ -57,6 +57,7 @@ export function searchMetadata(route: string): SearchMetadata {
     schema: null,
   }
   const article = (catalog as ArticleSummary[]).find(article => page.route === `writing/${article.slug}`)
+  const description = article?.seoDescription || page.description
   const canonical = `${siteOrigin}${page.path}`
   const imagePath = article?.image || '/og-personal.png'
   const size = imageSizes[imagePath]
@@ -77,7 +78,7 @@ export function searchMetadata(route: string): SearchMetadata {
       '@type': 'Person', '@id': personId, name: identity.name,
       givenName: identity.givenName, familyName: identity.familyName,
       url: `${siteOrigin}/about`, mainEntityOfPage: `${siteOrigin}/about`,
-      description: identity.summary,
+      description: normalized === '' ? identity.homeSummary : normalized === 'about' ? page.description : identity.summary,
       sameAs: identity.profiles.map(profile => profile.href),
       affiliation: { '@type': 'CollegeOrUniversity', name: identity.education.institution, url: 'https://www.utexas.edu/' },
     },
@@ -90,7 +91,7 @@ export function searchMetadata(route: string): SearchMetadata {
     {
       '@type': profile ? 'ProfilePage' : collection ? 'CollectionPage' : normalized === 'contact' ? 'ContactPage' : 'WebPage',
       '@id': webpageId, url: canonical, name: page.title,
-      description: page.description, inLanguage: 'en-US', isPartOf: reference(websiteId),
+      description, inLanguage: 'en-US', isPartOf: reference(websiteId),
       primaryImageOfPage: reference(imageId),
       ...(profile ? { mainEntity: reference(personId) } : {}),
       ...(article ? { mainEntity: reference(`${canonical}#article`) } : {}),
@@ -104,7 +105,7 @@ export function searchMetadata(route: string): SearchMetadata {
   ]
   if (article) graph.push({
     '@type': 'Article', '@id': `${canonical}#article`, url: canonical,
-    headline: article.displayTitle || article.title, description: page.description,
+    headline: article.displayTitle || article.title, description,
     author: reference(personId), publisher: reference(personId),
     mainEntityOfPage: reference(webpageId), isPartOf: reference(websiteId),
     image: reference(imageId), inLanguage: 'en-US', articleSection: article.category,
@@ -120,8 +121,8 @@ export function searchMetadata(route: string): SearchMetadata {
   })
   return {
     route: normalized,
-    title: pageTitles[normalized] || (article ? `${article.title} — Sulayman Bowles` : page.title),
-    description: page.description, canonical, robots: indexRobots, image,
+    title: pageTitles[normalized] || (article ? `${article.seoTitle || article.title} — Sulayman Bowles` : page.title),
+    description, canonical, robots: indexRobots, image,
     ...(article && published ? { article: { published, ...(modified ? { modified } : {}), section: article.category } } : {}),
     schema: { '@context': 'https://schema.org', '@graph': graph },
   }

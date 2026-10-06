@@ -1,13 +1,15 @@
 {
   "helmet": "portfolio-models/helmet.glb?v=676a60e268e5",
-  "headrest": "portfolio-models/headrest.glb?v=2edea73a4c59",
+  "headrest": "portfolio-models/headrest.glb?v=52f20eae8145",
   "globe": "models/wireframe-globe-balanced.glb?v=c4f7d6c9c204",
   "crystal": "models/crystal-cluster.glb?v=4b8cadbed788",
-  "work-internshipdeadlines": "portfolio-models/work-internshipdeadlines.glb?v=4a7bf7521d41",
-  "work-sapien": "portfolio-models/work-sapien.glb?v=c774fc717926",
-  "work-investing-markets": "portfolio-models/work-investing-markets.glb?v=1674cef12e6c",
-  "work-miscellaneous": "portfolio-models/work-miscellaneous.glb?v=6552787969b4",
-  "about-bass": "portfolio-models/about-bass.glb?v=466d54ace851",
-  "about-knight": "portfolio-models/about-knight.glb?v=85a9ec515af8",
-  "about-score": "portfolio-models/about-score.glb?v=05597d6eb3f3"
+  "work-internshipdeadlines": "portfolio-models/work-internshipdeadlines.glb?v=cbc544a04c3e",
+  "work-sapien": "portfolio-models/work-sapien.glb?v=77f0c2f6b828",
+  "work-investing-markets": "portfolio-models/work-investing-markets.glb?v=b0bbd6ef138f",
+  "work-miscellaneous": "portfolio-models/work-miscellaneous.glb?v=a8f3fb94615e",
+  "about-bass": "portfolio-models/about-bass.glb?v=0ef2a84d530f",
+  "about-knight": "portfolio-models/about-knight.glb?v=33fb2db410b1",
+  "about-score": "portfolio-models/about-score.glb?v=3724670c49d9",
+  "about-chess-pieces": "portfolio-models/about-chess-pieces.glb?v=0f4996f7c64e",
+  "resume-work-areas": "portfolio-models/resume-work-areas.glb?v=1324ef148b94"
 }

@@ -26,3 +26,33 @@
   .profile-actions, .profile-links { column-gap: 22px; }
   .author-note { margin-top: 36px; }
 }
+
+/* A personal interlude between the project sequence and selected writing. */
+.home-context {
+  display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.1fr);column-gap:9%;
+  border-top:1px solid var(--line);padding:44px 0 26px;margin-top:28px;
+}
+.home-context-intro { align-self:center;padding-bottom:32px;min-width:0; }
+.home-context h2 { font:400 clamp(40px,4.5vw,72px)/1.05 Georgia,'Times New Roman',serif;letter-spacing:-.045em;margin:0 0 28px; }
+.home-context h2:focus { outline:none; }
+.home-context-summary { font:clamp(18px,1.65vw,24px)/1.6 Georgia,'Times New Roman',serif;max-width:480px;margin:0;text-wrap:pretty; }
+.home-context-interests { min-width:0; }
+.home-context-stage { display:block;position:relative;height:clamp(400px,42vw,580px);cursor:pointer; }
+.home-context-stage canvas { display:block;width:100%;height:100%;background:transparent;touch-action:pan-y;cursor:pointer; }
+.home-context-stage canvas:active { cursor:grabbing; }
+.home-context-error { position:absolute;inset:auto 24px 30%;font-size:17px;line-height:1.6;color:var(--muted); }
+.home-context-caption { max-width:510px;margin:12px 0 0;color:var(--muted);font:16px/1.65 Georgia,'Times New Roman',serif;text-wrap:pretty; }
+.home-context :is(a,button):focus-visible { outline:1px solid var(--ink);outline-offset:5px; }
+@media(max-width:760px) {
+  .home-context { grid-template-columns:1fr;padding-top:32px;margin-top:16px; }
+  .home-context-intro { padding-bottom:24px; }
+  .home-context h2 { font-size:clamp(38px,8vw,56px);margin-bottom:21px; }
+  .home-context-summary { font-size:19px;line-height:1.55;max-width:500px; }
+  .home-context-stage { height:420px;margin-top:5px; }
+  .home-context-caption { font-size:15px; }
+}
+@media(max-width:360px) {
+  .home-context-summary { font-size:18px; }
+  .home-context-stage { height:380px; }
+}
+@media(prefers-reduced-motion:reduce) { .home-context *, .home-context *::before, .home-context *::after { animation:none!important;transition:none!important; } }

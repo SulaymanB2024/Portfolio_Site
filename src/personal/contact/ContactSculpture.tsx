@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import type { ObjectHandle } from '../object-renderer'
 import { readPortfolioRenderPolicy } from '../mobile-render-policy'
+import { portfolioAssetUrl } from '../portfolio-assets'
 
 export default function ContactSculpture({ dark, children }: { dark: boolean; children: ReactNode }) {
   const canvas = useRef<HTMLCanvasElement>(null)
@@ -53,6 +54,7 @@ export default function ContactSculpture({ dark, children }: { dark: boolean; ch
   useEffect(() => { handle.current?.setFieldPlaying?.(playing) }, [playing])
 
   return <div className="lion-study" data-status={status} data-playing={playing}>
+    <link rel="preload" as="fetch" href={portfolioAssetUrl('headrest')} crossOrigin="anonymous" />
     <figure className="lion-study-stage" aria-busy={status === 'loading'}>
       <canvas ref={canvas} tabIndex={status === 'ready' ? 0 : -1} aria-hidden={status !== 'ready'} aria-label={`Three Lions, an etched 3D sculpture. ${mobile ? 'Swipe sideways' : 'Drag'} or use arrow keys to turn. Home resets the view.`} />
       {status !== 'ready' && <p className="lion-study-status mono" role="status">{status === 'loading' ? 'Gathering the ink…' : 'The sculpture is unavailable. Contact links are just below.'}</p>}
@@ -60,7 +62,7 @@ export default function ContactSculpture({ dark, children }: { dark: boolean; ch
     </figure>
     {children}
     <div className="lion-study-caption">
-      <details className="lion-study-credit"><summary><span className="lion-study-title">Three lions, in ink.</span><span className="mono">About the study <span aria-hidden="true">+</span></span></summary><p><a href="https://sketchfab.com/3d-models/201715-headrest-with-three-lions-31a9a4ae69834c42a4869d0610f32515" target="_blank" rel="noreferrer">Headrest with Three Lions ↗</a><br />Cleveland Museum of Art. A public-domain scan reworked as an etched surface and 42,000 grains of ink.<br /><a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer">Original scan: CC0 · Public domain</a></p></details>
+      <details className="lion-study-credit"><summary><span className="lion-study-title">Three lions, in ink.</span><span className="mono">About the study <span aria-hidden="true">+</span></span></summary><p><a href="https://sketchfab.com/3d-models/201715-headrest-with-three-lions-31a9a4ae69834c42a4869d0610f32515" target="_blank" rel="noreferrer">Headrest with Three Lions ↗</a><br />Cleveland Museum of Art. A public-domain scan reworked as an etched surface and grains of ink.<br /><a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer">Original scan: CC0 · Public domain</a></p></details>
       <div className="lion-study-tools">
         <div className="lion-study-instructions mono"><span>{mobile ? 'Swipe sideways to turn' : playing ? 'Drag to turn' : 'Drag or use arrow keys to turn'}</span><button type="button" disabled={status !== 'ready' || reducedMotion} aria-label={playing ? 'Pause to explore the sculpture' : reducedMotion ? 'Motion off for reduced motion' : 'Play sculpture animation'} aria-expanded={!playing} aria-controls="lion-explore" title={reducedMotion ? 'Automatic motion is off for reduced motion' : undefined} onClick={() => setPlaying(!playing)}><span aria-hidden="true">{playing ? 'Ⅱ' : '▷'}</span> {playing ? 'Pause to explore' : reducedMotion ? 'Motion off' : 'Play animation'}</button></div>
         <div id="lion-explore" className="lion-study-explore" hidden={playing}>

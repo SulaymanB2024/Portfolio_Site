@@ -1,3 +1,4 @@
+import { decoderPath } from './portfolio-decoder-path.ts'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
@@ -44,7 +45,7 @@ function initializeLibrary() {
   room.dispose()
   pmrem.dispose()
   scene.environment = environment.texture
-  const draco = new DRACOLoader().setDecoderPath(`${import.meta.env.BASE_URL}draco/`)
+  const draco = new DRACOLoader().setDecoderPath(`${import.meta.env.BASE_URL}${decoderPath}`)
   draco.setWorkerLimit(2)
   const loader = new GLTFLoader().setDRACOLoader(draco)
   let current: THREE.Group | null = null

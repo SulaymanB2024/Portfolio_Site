@@ -1,0 +1,445 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "who-owns-austin-home-service-companies",
+  "number": "20",
+  "category": "FINANCIAL SYSTEMS",
+  "title": "Who Owns Austin’s Home-Service Companies?",
+  "seoTitle": "Who Owns Austin Home-Service Companies? 67 Brands",
+  "subtitle": "A July ownership map follows 67 Austin-facing brands through local operators, platforms, sponsors, and franchises, leaving unsupported control claims unresolved.",
+  "seoDescription": "A July 2026 map traces 67 Austin home-service brands through owners, sponsors and franchise relationships, with unresolved control kept visible.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/austin-home-services-ownership-reader-hero.jpg",
+    "socialSrc": "/images/research/austin-home-services-ownership-social.jpg",
+    "alt": "Monochrome editorial map connecting Austin houses and service vehicles to layered company, platform, and investment-firm nodes.",
+    "label": "Austin home services / brand-to-owner map",
+    "caption": "The name on a truck can sit several layers below the legal entity, operating platform, and investor that ultimately controls the business.",
+    "objectPosition": "50% 50%"
+  },
+  "date": "2026.07.26",
+  "lastVerified": "2026.07.26",
+  "readTime": "11 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Distinct customer-facing brands can share a platform or financial owner. Dated ownership evidence separates those relationships from local management, family origins, franchise contracts, and minority investments; none alone establishes service quality or market share.",
+  "conclusion": {
+    "title": "Identify the owner without inferring the service outcome",
+    "content": "The map connects supported brand, operator, platform, sponsor, and franchise relationships while preserving unresolved control. Those links establish ownership at the cutoff. Price, service quality, employment, and market share require different evidence."
+  },
+  "evidenceBoundary": "This is a July 26, 2026 snapshot of 67 active consumer-facing brand records reconstructed from a larger audit package. Brand counts are not revenue, customer, job, permit, or market share. An A or B rating means the current ownership structure is supported well enough for publication; C and D records preserve partial or unresolved evidence. Sponsor investments, sale processes, franchise operators, legal entities, and consumer brands are kept separate. Ownership can change after the cutoff, and no claim here attributes price, service, or employment outcomes to an ownership type.",
+  "metrics": [
+    {
+      "label": "Active brands",
+      "value": "67"
+    },
+    {
+      "label": "A/B ownership records",
+      "value": "48"
+    },
+    {
+      "label": "Sponsor-backed brands",
+      "value": "14"
+    },
+    {
+      "label": "Source records",
+      "value": "130"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Complete publication package",
+      "href": "/research/austin-home-service-ownership-publication-package.zip",
+      "description": "Article, datasets, graph files, interactive tools, source ledger, methods, correction system, scripts, and QA records.",
+      "format": "ZIP"
+    },
+    {
+      "label": "Austin ownership brand table",
+      "href": "/research/austin-home-service-ownership-2026.csv",
+      "description": "The normalized brand-level table behind the 67-brand snapshot, including owner type, chain, evidence rating, and Austin footprint.",
+      "format": "CSV"
+    },
+    {
+      "label": "Machine-readable ownership dataset",
+      "href": "/research/austin-home-service-ownership-2026.json",
+      "description": "Brands, entities, relationships, transactions, evidence references, conflicts, and unresolved records in JSON.",
+      "format": "JSON"
+    },
+    {
+      "label": "Full article in Markdown",
+      "href": "/research/austin-home-service-ownership-article.md",
+      "description": "The complete 4,255-word source-linked article from the audited publication package.",
+      "format": "MD"
+    },
+    {
+      "label": "Formatted ownership report",
+      "href": "/research/austin-home-service-ownership-report.docx",
+      "description": "The complete formatted publication report, including findings, source register, methods, and publication assets.",
+      "format": "DOCX"
+    }
+  ],
+  "content": [
+    "The July research snapshot contains 67 active Austin-facing home-service brands, including 14 in sponsor-backed platforms. Radiant traces through T3 Services Group to Riverside; Stan’s through Master Trades Group to L Catterton. Fox Service Company, Precision Heating & Air, and Daniel’s Plumbing & Air remain separate customer names while their ownership chains converge at Southern Home Services and Gryphon Investors.",
+    "A retained local identity can be accurate after an acquisition. A business may keep its name, staff, managers, licenses, and service area while equity control changes. Fox’s description as locally managed and operated answers a different question from Southern’s acquisition history. The map distinguishes the consumer brand, legal operator, platform, and financial owner.",
+    "Thirty-two records are founder, family, or locally owned; four are public-company brands; five are local franchise operators; 11 are private businesses with unresolved controlling owners. Alta Pest Control is the remaining founder-controlled brand with a documented minority investment. These counts describe the researched universe across four sectors, not Austin market share."
+  ],
+  "sections": [
+    {
+      "id": "ownership-map",
+      "title": "Follow the brand through separate ownership relationships",
+      "paragraphs": [
+        "Start with the consumer-facing brand, then follow independently sourced relationships through its DBA or operator, parent, platform, holding company, and controller or investor. Franchise contracts and minority investments describe different rights from parent ownership. A locally managed platform may have equity held elsewhere.",
+        "Fourteen brand records in the July snapshot belong to sponsor-backed platforms. The table below summarizes the most visible chains and preserves uncertainty where a percentage or pending transaction was not established. The downloadable dataset contains the full 67-brand table, dated evidence IDs, and unresolved fields."
+      ],
+      "table": {
+        "caption": "Selected current sponsor-backed Austin-facing ownership chains",
+        "columns": [
+          "Consumer brand",
+          "Operating platform",
+          "Ultimate owner or sponsor",
+          "Published relationship",
+          "Rating"
+        ],
+        "rows": [
+          [
+            "Abacus Plumbing, Air Conditioning & Electrical",
+            "Wrench Group, LLC",
+            "Leonard Green & Partners and management; TSG Consumer Partners and Oak Hill minority",
+            "Wholly owned Wrench subsidiary; investor interests separately described",
+            "A"
+          ],
+          [
+            "Aptive Environmental",
+            "Aptive Environmental",
+            "Citation Capital; management retains a significant interest",
+            "Citation majority; management minority",
+            "A"
+          ],
+          [
+            "ARS/Rescue Rooter Austin",
+            "American Residential Services, LLC",
+            "GI Partners; Charlesbank and management retain interests",
+            "GI lead/majority; sale process reported in March 2026",
+            "A"
+          ],
+          [
+            "Austin Air Conditioning",
+            "SAS Service Partners",
+            "Storr Group",
+            "Storr-backed platform; seller rollover documented",
+            "A"
+          ],
+          [
+            "Daniel’s Plumbing & Air Conditioning",
+            "Southern Home Services",
+            "Gryphon Investors through North American Essential Home Services",
+            "Gryphon majority; management minority at holding-company level",
+            "A"
+          ],
+          [
+            "Fox Service Company",
+            "Southern Home Services",
+            "Gryphon Investors through North American Essential Home Services",
+            "Acquired brand; current locally managed wording retained",
+            "A"
+          ],
+          [
+            "Goettl Air Conditioning & Plumbing",
+            "Goettl Air Conditioning & Plumbing",
+            "Cortec Group",
+            "Sponsor investment; control percentage not publicly specified",
+            "B"
+          ],
+          [
+            "Groundworks",
+            "Groundworks Companies, LLC",
+            "KKR; Cortec retains minority positions",
+            "KKR controlling investment; Cortec retained interests; Foundation Support Specialists retained as a historical record",
+            "A"
+          ],
+          [
+            "Ja-Mar Roofing & Sheet Metal",
+            "Roofing Services Solutions",
+            "Dunes Point Capital",
+            "Acquired by sponsor-backed roofing platform",
+            "A"
+          ],
+          [
+            "Precision Heating & Air",
+            "Southern Home Services",
+            "Gryphon Investors through North American Essential Home Services",
+            "Acquired brand inside the Austin cluster",
+            "A"
+          ],
+          [
+            "Radiant Plumbing, Air Conditioning & Electrical",
+            "T3 Services Group",
+            "The Riverside Company",
+            "Current T3 partner and Riverside investment; percentage undisclosed",
+            "A"
+          ],
+          [
+            "Roger’s Plumbing",
+            "SAS Service Partners",
+            "Storr Group",
+            "Platform partnership; founder joined platform",
+            "A"
+          ],
+          [
+            "Service Wizard Heating & Air Conditioning",
+            "Champions Group Holdings",
+            "Sponsor transfer unresolved at cutoff",
+            "Platform acquisition verified; Blackstone transaction announced but not treated as closed",
+            "B"
+          ],
+          [
+            "Stan’s Heating, Air, Plumbing & Electrical",
+            "The Master Trades Group",
+            "L Catterton",
+            "Master Trades acquisition; L Catterton current investment",
+            "A"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "what-the-counts-show",
+      "title": "The 67-brand denominator counts names, not market share",
+      "paragraphs": [
+        "The 67 records comprise 26 HVAC, plumbing, and electrical brands; nine roofing and exterior brands; 12 foundation-repair brands; and 20 pest-control brands. Forty-eight of the 67 have supported A or B ownership structures at the cutoff and are not unresolved. Eleven keep an established customer name after an acquisition or platform transaction.",
+        "The largest classification remains founder, family, or local ownership: 32 brands, or 47.8% of the researched universe. Sponsor-backed platforms account for 14 records, or 20.9%. Public-company ownership accounts for four, local franchise operators five, unresolved private control 11, and a founder-controlled company with a minority investor one. The denominator is the 67 qualifying brand records, including unresolved records; percentages may differ slightly because of rounding.",
+        "Each brand counts once, whether it is a one-truck business or part of a multistate platform. Reviews, search positions, permits, licenses, locations, and advertising can show footprint but cannot independently establish revenue or customers. The dataset does not measure market share, rank business size, or attribute price and service outcomes to an owner type."
+      ],
+      "table": {
+        "caption": "Ownership classification across the 67 active brand records",
+        "columns": [
+          "Classification",
+          "Brands",
+          "Share",
+          "Interpretation boundary"
+        ],
+        "rows": [
+          [
+            "Founder, family, or local ownership",
+            "32",
+            "47.8%",
+            "Includes current self-reported local claims with evidence ratings; exact cap tables are not always public"
+          ],
+          [
+            "Sponsor-backed platform",
+            "14",
+            "20.9%",
+            "Control and minority interests are described separately where disclosed"
+          ],
+          [
+            "Public-company owned",
+            "4",
+            "6.0%",
+            "Consumer brand ultimately traces to a listed corporate parent"
+          ],
+          [
+            "Local franchise operator",
+            "5",
+            "7.5%",
+            "Local franchisee is separate from the franchisor and its investor"
+          ],
+          [
+            "Private, controlling owner unresolved",
+            "11",
+            "16.4%",
+            "Active operator verified; current controller not established well enough for publication"
+          ],
+          [
+            "Minority-invested, founder-controlled",
+            "1",
+            "1.5%",
+            "Alta’s Trivest relationship is a non-control minority investment"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "mechanical-trades",
+      "title": "Several Austin trade names converge above the operating brand",
+      "paragraphs": [
+        "The mechanical trades contain the clearest multi-brand clusters. Southern Home Services bought Fox Service Company and Precision Heating & Air in 2020 and Daniel’s Plumbing & Air in 2022. Gryphon Investors announced a majority investment in Southern’s holding structure in 2021 while management retained a meaningful interest. A homeowner can therefore encounter three Austin-facing names that compete for attention while the ownership chain converges above them.",
+        "Riverside announced its Austin-company investment in 2021, and T3 Services Group listed Radiant as an Austin partner at the cutoff. This supports Radiant → T3 → Riverside, but not an undisclosed ownership percentage.",
+        "Treaty Oak Equity announced the sale of Stan’s to Master Trades Group in March 2024. At the cutoff, L Catterton listed Master Trades, formerly LTP Home Services Group, as an investment. Stan’s local history describes the consumer identity; those records establish the platform and financial layers.",
+        "Abacus’s own privacy material calls the company a wholly owned subsidiary of Wrench Group. Investor reporting around Wrench describes Leonard Green and management as the majority interests and TSG Consumer Partners and Oak Hill as significant minority investors. Those are different claims at different layers: Wrench owns the brand company; multiple investors hold interests in Wrench.",
+        "ARS/Rescue Rooter requires a dated reading. GI Partners listed American Residential Services as a portfolio company and lead investment from October 2020. Reuters reported a possible sale on March 23, 2026, with Charlesbank and management still invested. The July snapshot retains GI as lead owner because a reported process is not a completed sale."
+      ]
+    },
+    {
+      "id": "roofing-foundation-pest",
+      "title": "Buyouts, minority stakes, and franchises need different labels",
+      "paragraphs": [
+        "In roofing, Ja-Mar Roofing & Sheet Metal was acquired in April 2025 by Roofing Services Solutions, a Dunes Point Capital portfolio company. Ja-Mar remains an active retained Austin-facing brand. The transaction record supplies the ownership layer even though the company’s local name, staff, and operating history remain part of the customer experience.",
+        "Foundation repair is less uniformly consolidated in the published universe. Groundworks acquired Foundation Support Specialists in 2022. KKR announced a significant Groundworks investment in 2023 while Cortec remained a shareholder. Other Austin-facing foundation companies are documented as family or locally owned, while several active operators remain unresolved because legal control at the cutoff could not be established from satisfactory sources. Preserving “unresolved” is more accurate than treating the absence of an acquisition release as proof of independence.",
+        "Pest control contains almost every ownership form in one sector. HomeTeam Pest Defense and Orkin trace to Rollins. Terminix traces through Rentokil North America to Rentokil Initial plc. Aptive is a Citation Capital majority investment with management retaining a significant interest. Alta accepted a non-control Trivest investment while its founders retained operational and financial control. Aire Serv and other franchise systems require a further split: the local franchisee owns or operates the local business under a contract, while a separate parent can own the franchisor.",
+        "“Private-equity backed” can describe platform control, a minority growth investment, ownership of a franchisor, or a pending transaction. Each has different legal consequences. The map records those relationships separately instead of assigning the same ownership label."
+      ]
+    },
+    {
+      "id": "meaning-of-local",
+      "title": "Local management does not establish local equity control",
+      "paragraphs": [
+        "Locally owned describes equity control. Locally managed describes who runs day-to-day operations. Locally operated can describe employees, dispatch, licenses, and service delivery. Family founded is historical. Founder led describes an operating role. Franchise owned identifies the local franchisee, not the franchisor. A company may satisfy several of these descriptions at once.",
+        "At the cutoff, Fox’s site described local management and operations. Southern’s acquisition history and Gryphon’s investment record placed it within a sponsored platform. Both can be accurate: neither makes the local operating claim false, and that claim does not establish local equity control.",
+        "Founders can remain after selling control, roll equity into the buyer, sit on a board, or continue as president. None of those facts alone establishes continuing control. Conversely, a minority investor can provide growth capital without becoming the controlling owner. Alta’s Trivest announcement explicitly describes a non-control investment and continued founder control, so the map does not label Alta as bought out.",
+        "A franchisor licenses its name and operating system to a separate local business. A sponsor owning the franchisor does not therefore own every franchisee. The dataset records the franchise relationship and the local operator’s ownership evidence separately."
+      ],
+      "bullets": [
+        "Do not infer equity ownership from “locally managed” or “locally operated.”",
+        "Do not infer independence from silence or from the absence of an acquisition announcement.",
+        "Do not treat a franchise contract as a parent-subsidiary relationship.",
+        "Do not turn a minority investment into a control claim.",
+        "Do not report an announced sale as completed until closing is documented."
+      ]
+    },
+    {
+      "id": "methodology",
+      "title": "Date each relationship and retain contrary evidence",
+      "paragraphs": [
+        "Government records, securities filings, sponsor pages, buyer and seller announcements, legal terms, platform lists, and licenses provide the main ownership evidence. Adviser, lender, and law-firm announcements corroborate transactions; established reporting adds context. Directories, reviews, jobs, social accounts, and shared web infrastructure provide leads, not final proof.",
+        "An A or verified claim normally requires two independent sources including a primary source, or a definitive government or securities filing applicable at the cutoff. A B or strongly supported claim can rely on one primary source applicable at the cutoff with no credible contrary evidence. C records are partial or probable and retain explicit limitations. D records are unresolved because the evidence is stale, conflicting, ambiguous, or insufficient.",
+        "Each acquisition was checked for subsequent sales, recapitalizations, mergers, investments, or pending processes. An old announcement proves the closing, not ownership at the cutoff. Syndicated copies counted as one source group, and conflicting evidence remained visible.",
+        "The full package documents 75 brand records including historical or excluded rows, 170 entities, 102 sourced ownership and operating relationships, 29 transactions, 130 evidence records, 75 footprint records, 20 conflicts, and 25 unresolved research questions. It also contains the reproducibility scripts and QA evidence used to reconcile denominators, graph endpoints, source references, JSON, interactive assets, and the formatted report."
+      ]
+    },
+    {
+      "id": "limitations-corrections",
+      "title": "Update the disputed relationship, not the whole history",
+      "paragraphs": [
+        "The census is broad but not a state registry of every company capable of taking an Austin job. It includes brands with an office at the census cutoff, dedicated service-area evidence, applicable permit or licensing evidence, or active dispatch and advertising across the defined Austin metro. It excludes lead-generation sites, directories, manufacturers, purely commercial contractors, inactive listings, and companies whose only Austin connection is an unverified directory entry.",
+        "Private cap tables may remain unavailable even where company statements support family or local ownership. If evidence identifies the operator but not its controller, the record stays unresolved. Paid filings, company confirmation, or later transactions may change that classification.",
+        "A correction should identify the brand, field, effective date, source, and relationship being changed: name, operator, platform, investor, franchisee, or local operating status. Dated records allow that link to be corrected without erasing prior transactions. ARS’s reported 2026 sale process illustrates why ownership claims can become stale."
+      ]
+    },
+    {
+      "id": "ownership-faq",
+      "title": "Questions the ownership map can and cannot answer",
+      "paragraphs": [
+        "Do private-equity firms own most Austin home-service brands? Not in this 67-brand census. Fourteen records, or 20.9%, are classified as sponsor-backed platforms. Another record has a documented non-control minority investor. The largest classification is founder, family, or local ownership, but the census is a brand count rather than market share.",
+        "Does a local name mean the company is locally owned? No. A retained name can coexist with platform ownership, and locally managed or operated does not establish equity ownership. The ownership chain and the operating claim need separate evidence.",
+        "Are franchises owned by their national brand? Usually not. A local franchisee operates under a contract with the franchisor. The franchisor’s parent or sponsor is a separate layer and should not be presented as the direct owner of the local franchisee without evidence.",
+        "Can this map compare prices or service quality? No. Ownership records do not establish causal effects on price, service, employment, or customer outcomes. Those questions require comparable data and a research design built for them."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "T3 Services Group — current partner brands, including Radiant Austin",
+      "href": "https://t3servicesgroup.com/partners/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "The Riverside Company — T3 Services Group portfolio entry",
+      "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "The Riverside Company — investment in Radiant Plumbing & Air Conditioning",
+      "href": "https://www.riversidecompany.com/currents/riverside-s-latest-investment-is-a-royal-flush",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Treaty Oak Equity — sale of Stan’s to Master Trades Group",
+      "href": "https://www.businesswire.com/news/home/20240329645925/en/Treaty-Oak-Equity-Sells-Stans-Home-Services-Holdings-to-The-Master-Trades-Group",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "L Catterton — current Master Trades Group investment",
+      "href": "https://www.lcatterton.com/investments.html",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Southern Home Services — acquisition of Daniel’s Plumbing & Air",
+      "href": "https://www.southernhomeservices.com/blog/2022/april/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Gryphon Investors — majority investment in Southern and NAEHS",
+      "href": "https://www.gryphon-inv.com/news/gryphon-investors-completes-majority-investment-in-southern-hvac-and-announces-new-home-services-holding-company/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Fox Service Company — locally managed and operated statement",
+      "href": "https://www.foxservice.com/about-us/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Abacus — Wrench Group subsidiary disclosure",
+      "href": "https://www.abacusplumbing.com/privacy-policy/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "GI Partners — current American Residential Services portfolio entry",
+      "href": "https://www.gipartners.com/private-equity/portfolio/american-residential-services",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Reuters — reported ARS sale exploration, March 23, 2026",
+      "href": "https://www.tradingview.com/news/reuters.com%2C2026%3Anewsml_L6N4071F9%3A0-american-residential-services-explores-3-5-billion-plus-sale-sources-say/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Dunes Point Capital — Roofing Services Solutions acquisition of Ja-Mar",
+      "href": "https://www.dunespointcapital.com/news/roofing-services-solutions-acquires-ja-mar-roofing-sheet-metal/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Groundworks — KKR strategic investment with Cortec retained",
+      "href": "https://www.groundworks.com/resources/kkr-makes-significant-investment-in-groundworks/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Citation Capital — majority investment in Aptive Environmental",
+      "href": "https://www.citationcapital.com/news/citation-capital-invests-in-aptive-environmental",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Trivest Partners — minority investment in Alta Pest Control",
+      "href": "https://www.trivest.com/news/trivest-partners-announces-investment-in-alta-pest-control/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Brookfield Infrastructure — completed Enercare and Service Experts acquisition",
+      "href": "https://bip.brookfield.com/press-releases/bip/brookfield-infrastructure-completes-c43-billion-acquisition-enercare-inc",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "KKR — completed acquisition of Neighborly",
+      "href": "https://www.kkr.com/newsroom/news/news-details/2021/kkr-completes-acquisition-neighborly",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Rollins — current brand portfolio including Orkin and HomeTeam",
+      "href": "https://www.rollins.com/about-us/brands/default.aspx",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Rentokil Initial — completed Terminix acquisition",
+      "href": "https://www.rentokil-initial.com/media/news-releases/news-2022/terminix_completion.aspx",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "City of Austin Open Data — issued construction permits",
+      "href": "https://data.austintexas.gov/Building-and-Development/Issued-Construction-Permits/3syk-w9eu",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Texas Department of Agriculture — structural pest-control license reports",
+      "href": "https://texasagriculture.gov/Regulatory-Programs/Pesticides/Structural-Pest-Control-Service/Structural-Pest-Control-Reports-Current-Licenses",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "label": "Texas State Board of Plumbing Examiners — licensee lists",
+      "href": "https://tsbpe.texas.gov/free-licensee-list/",
+      "lastVerified": "2026.07.26"
+    }
+  ],
+  "path": "/research/financial-systems/who-owns-austin-home-service-companies",
+  "aliases": [],
+  "image": "/images/research/austin-home-services-ownership-social.jpg",
+  "displayTitle": "Who owns Austin’s home-service companies?",
+  "dateModified": "2026-10-05"
+}

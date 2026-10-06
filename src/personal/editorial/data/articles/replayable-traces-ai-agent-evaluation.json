@@ -5,16 +5,27 @@
   "number": "12",
   "category": "AI EVALUATION",
   "title": "Replayable Traces for Evaluating Tool-Using AI Agents",
-  "seoTitle": "Replayable Traces for AI Agent Evaluation",
-  "subtitle": "An evaluation architecture for tasks, trials, observable trajectories, controlled environments, layered graders, repeated runs, and evidence-gated promotion.",
-  "seoDescription": "Evaluate tool-using AI agents with replayable observable traces, controlled environments, layered graders, repeated trials, side-effect checks, and promotion gates.",
-  "image": "/og-default.png",
+  "seoTitle": "AI Agent Evaluation with Replayable Tool-Use Traces",
+  "subtitle": "Evaluate the execution and its effects, not just the final answer.",
+  "seoDescription": "Evaluate tool-using agents with isolated trials, observable traces and layered graders. Measure outcomes, policy, side effects, cost and repeated-run variance.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/replayable-traces-editorial.webp",
+    "socialSrc": "/images/research/replayable-traces-social.jpg",
+    "alt": "A looping monochrome agent trajectory repeatedly crosses tools, observations, records, and graders.",
+    "label": "Agent evaluation / replay loop",
+    "caption": "Repeated trajectories preserve tools, observations, side effects, and grader evidence as one inspectable loop."
+  },
   "date": "2026.07.19",
-  "dateModified": "2026.07.19",
+  "dateModified": "2026-10-05",
   "lastVerified": "2026.07.19",
-  "readTime": "16 MIN",
+  "readTime": "6 MIN",
   "author": "SULAYMAN BOWLES",
-  "thesis": "An agent score is meaningful only when the task, environment, observable trajectory, side effects, grader versions, and repeated-trial distribution are preserved well enough to inspect and reproduce.",
+  "thesis": "Agent scores need a recoverable task, environment, observable execution, side-effect record, grader versions, and repeated-trial distribution. Without them, the number cannot explain reliability or failure.",
+  "conclusion": {
+    "title": "Promote the recorded configuration",
+    "content": "Keep tasks, configuration, traces, side effects, graders, and repeated results together. Passing supports the tested bundle on the recorded distribution; replaying its evidence cannot promise that a stochastic model will take the same path again."
+  },
   "evidenceBoundary": "A replay can reproduce recorded inputs or simulate an environment boundary; it cannot prove that a stochastic model will emit the same trajectory. Evaluation results apply to the tested agent, tools, models, policies, graders, and environment versions.",
   "metrics": [
     {
@@ -62,17 +73,17 @@
     }
   ],
   "content": [
-    "A tool-using agent can reach the right final answer through an unsafe path, fail after making a useful partial change, or appear successful because the grader inspected the agent response rather than the external state. Multi-step execution creates more evidence than a prompt and output pair: tool calls, observations, state mutations, retries, costs, policy decisions, and the final environment all matter.",
-    "The evaluation system should preserve that observable trajectory as a first-class artifact. Define a task with an initial state and success contract; execute one or more trials in isolated environments; record messages, tool inputs and outputs, state changes, timing, and errors; apply deterministic and model-based graders with versions; and promote changes only when the trial distribution improves without crossing safety, cost, or regression bounds."
+    "An agent can give the right answer after an unsafe action, fail after a useful partial change, or pass because its grader believed the final message instead of inspecting the world. Tool calls, observations, mutations, retries, costs, policy decisions, and final state are part of the result.",
+    "Define an initial state and success contract, run isolated trials, and capture observable messages, tool inputs and outputs, state changes, timing, and errors. Combine versioned deterministic and model-based graders. Promote improvements only when repeated outcomes satisfy safety, cost, and regression bounds."
   ],
   "sections": [
     {
       "id": "task-trial-trace",
-      "title": "Separate the task, trial, and observable trace",
+      "title": "Define the task, attempt, and evidence",
       "paragraphs": [
-        "A task is the reusable test case: instructions, fixtures, initial environment, permitted actions, success criteria, side-effect limits, budgets, and stop conditions. A trial is one attempt by a specific agent configuration. The trace is the ordered record of observable events produced during that trial. Anthropic uses similar distinctions between task, trial, grader, and transcript in its agent-evaluation guidance.",
-        "Give each layer an identifier. A task version changes when fixtures or success criteria change. A trial ID identifies one stochastic attempt with model, prompt, tool, and policy versions. Trace events carry sequence, parent event, time, actor, input reference, output reference, status, and state-delta reference. Correlation IDs can follow calls across services, while trial IDs preserve the evaluation domain.",
-        "Capture observable inputs and outputs; do not make hidden chain-of-thought a dependency. Useful evidence includes instructions delivered to the agent, model responses available to the harness, tool schemas, tool calls, tool results, file or database diffs, browser states, policy decisions, errors, tokens, latency, and cost. Sensitive data should be redacted or represented by secure references before traces enter general analytics."
+        "The task specifies instructions, fixtures, initial environment, permitted actions, success, side-effect limits, budgets, and stopping conditions. A trial is one attempt by a particular configuration; its trace orders the observable events. Anthropic’s guidance uses comparable task, trial, grader, and transcript distinctions.",
+        "Version tasks when fixtures or criteria change. Identify each stochastic trial with model, prompt, tool, and policy versions. Events retain sequence, parent, time, actor, input and output references, status, and state-delta reference. Correlation IDs connect service calls; trial IDs identify the evaluation attempt.",
+        "Use observable evidence rather than hidden chain-of-thought: delivered instructions, harness-visible responses, tool schemas, calls and results, file or database diffs, browser states, policy decisions, errors, tokens, latency, and cost. Redact sensitive data or use secure references before general analytics."
       ],
       "table": {
         "caption": "Agent-evaluation record hierarchy",
@@ -118,11 +129,11 @@
     },
     {
       "id": "environment-control",
-      "title": "Control the environment or declare what cannot be replayed",
+      "title": "Reset state and label live dependencies",
       "paragraphs": [
-        "A trial depends on more than the agent. APIs change, web pages update, clocks advance, search results move, credentials differ, and shared state leaks between attempts. Isolate each trial in a resettable workspace or account when possible. Seed databases and files from versioned fixtures, freeze or record time inputs, and provide fake external services for deterministic contract tests.",
-        "For live dependencies, record the request and response boundary subject to privacy and licensing constraints. A replay can then return the captured response to the same tool call or expose a controlled divergence. This tests harness behavior and downstream decisions, not whether the model will reproduce the same call. Mark live, recorded, simulated, and unavailable dependencies in the trial manifest.",
-        "State cleanup is part of correctness. A failed agent may leave a draft, reservation, branch, browser session, or partial database mutation. The harness should snapshot before and after, attribute changes to events, and restore or discard the environment. If cleanup cannot be guaranteed, run in a disposable boundary and treat escape as a critical failure."
+        "APIs, pages, time, search results, credentials, and shared state can change between trials. Where possible, isolate resettable workspaces or accounts; seed versioned databases and files; freeze or record time; and simulate services for deterministic contract tests.",
+        "For live dependencies, capture request and response boundaries within privacy and licensing limits. Replay can supply those responses or controlled divergences to test the harness and later decisions, not guarantee identical model calls. Label live, recorded, simulated, and unavailable dependencies in the manifest.",
+        "Failed agents can leave drafts, reservations, branches, sessions, or partial database writes. Snapshot before and after, attribute changes to events, and restore or discard state. If cleanup is uncertain, use disposable isolation and treat an escape as critical failure."
       ],
       "bullets": [
         "Create one isolated state namespace per trial.",
@@ -135,11 +146,11 @@
     },
     {
       "id": "layered-graders",
-      "title": "Grade outcomes, process, policy, and side effects separately",
+      "title": "Grade external state and the path separately",
       "paragraphs": [
-        "A final-answer grader cannot establish that an external action succeeded. Begin with deterministic state graders where the domain permits them: tests pass, expected rows exist, files match a schema, the correct calendar event was created, or no unauthorized message was sent. Add process graders for required or prohibited actions, policy graders for permission boundaries, and resource graders for cost and latency.",
-        "Model-based graders are useful when success is semantic or several valid paths exist, but their output is another derived record. Store the grader model, prompt or rubric, evidence supplied, output, and confidence. Calibrate against expert-labeled trajectories and inspect disagreement. AgentRewardBench reports that no single evaluated language-model judge excelled across all included web-agent benchmarks, which is a reason to combine graders rather than appoint one universal judge.",
-        "Allow partial and invalid states. A trial can complete the main task but cause an unacceptable side effect; it can fail the outcome because the environment broke; or it can be ungradeable because the trace is incomplete. One scalar score hides those distinctions. Use a result object with outcome, policy, side effects, efficiency, trace integrity, and environment validity."
+        "Start with deterministic state checks where possible: passing tests, expected rows, valid files, the intended calendar event, or no unauthorized message. Then evaluate required and prohibited steps, permission boundaries, cost, and latency. A final-answer grader cannot establish external success.",
+        "Semantic tasks may need model-based graders, whose grades are themselves derived records. Retain model, prompt or rubric, evidence, output, and confidence; calibrate against expert-labeled traces and review disagreement. AgentRewardBench found no evaluated language-model judge excelled across all included web-agent benchmarks, supporting combined graders rather than a universal judge.",
+        "Distinguish completion with unacceptable side effects, outcome failure caused by a broken environment, and ungradeable trials with missing traces. Report outcome, policy, side effects, efficiency, trace integrity, and environment validity rather than collapsing them into one scalar."
       ],
       "table": {
         "caption": "Layered agent graders",
@@ -191,11 +202,11 @@
     },
     {
       "id": "repeated-trials",
-      "title": "Report distributions across repeated trials",
+      "title": "Measure reliability over repeated attempts",
       "paragraphs": [
-        "Model outputs and agent paths vary. One passing demonstration is evidence that success is possible, not an estimate of reliability. Run repeated trials for representative tasks, keep the fixture and configuration fixed, and report pass counts with denominators. Stratify by task family and risk so a large set of easy cases does not hide a failure on the consequential path.",
-        "Pair baseline and candidate trials when practical by using the same task versions and environment seeds. Report changes in outcome, policy violations, side effects, cost, and latency. Confidence intervals or resampling can communicate uncertainty, but no statistical method repairs a benchmark whose tasks are ambiguous, contaminated, or graded incorrectly.",
-        "Inspect traces behind aggregate movement. A candidate can improve a score by exploiting a grader, skipping an expensive safety check, repeating until a flaky state passes, or shifting failure into an unmeasured side effect. Promotion review should sample wins, losses, disagreements, and unusually cheap or expensive trials."
+        "One successful demonstration establishes possibility, not reliability. Repeat representative tasks with fixed fixtures and configurations, reporting passes and denominators. Stratify task families and risk so many easy successes cannot conceal a consequential failure.",
+        "Where practical, pair baseline and candidate task versions and seeds. Compare outcomes, policy violations, side effects, cost, and latency. Intervals or resampling can express uncertainty, but cannot repair ambiguous, contaminated, or incorrectly graded tasks.",
+        "Inspect the traces behind score changes. Grader exploitation, skipped safety checks, retries until a flaky state passes, or unmeasured side effects can inflate a result. Review wins, losses, disagreements, and unusually cheap or costly attempts before promotion."
       ],
       "bullets": [
         "Predefine the primary metric and non-negotiable safety metrics.",
@@ -208,15 +219,15 @@
     },
     {
       "id": "promotion-gate",
-      "title": "Promote the system, not a leaderboard number",
+      "title": "Promote the whole agent configuration",
       "paragraphs": [
-        "An agent configuration includes model, prompts, tool contracts, retrieval, memory, policies, budgets, and harness code. Promote that versioned bundle. A model upgrade can regress because a tool description no longer elicits the intended call; a prompt improvement can increase cost; a stricter policy can reduce nominal success while preventing unsafe completion. The evaluation must preserve those tradeoffs.",
-        "Use a staged gate: deterministic contract tests, replay against recorded dependencies, repeated trials in isolated environments, adversarial or policy cases, and a bounded canary where external effects are reversible and observable. Define rollback conditions before the canary. A high average score should never override a critical authorization or destructive-action failure.",
-        "The final evidence package should include task manifest, configuration manifest, trial ledger, grade records, aggregate report, selected traces, known gaps, and promotion decision. This makes later debugging possible when production behavior differs. It also keeps the claim narrow: the candidate met the documented gate on the tested distribution at the recorded cutoff."
+        "Version model, prompts, tool contracts, retrieval, memory, policies, budgets, and harness code together. A model change may alter tool use; a prompt change may raise cost; stricter policy may lower nominal success while preventing unsafe completion. Keep these tradeoffs visible.",
+        "Stage deterministic contract tests, recorded-dependency replay, isolated repeated trials, adversarial or policy cases, and a bounded canary with reversible, observable external effects. Set rollback conditions beforehand. Average scores cannot override critical authorization or destructive-action failures.",
+        "Retain task and configuration manifests, trial ledger, grades, aggregate report, selected traces, gaps, and promotion decision. This supports later production diagnosis and a bounded claim: the candidate met that gate on that distribution at the recorded cutoff."
       ],
       "codeExamples": [
         {
-          "title": "A trial manifest that binds configuration to evidence",
+          "title": "Trial manifest",
           "description": "Every aggregate row can resolve to one task, configuration, trace, and grader set.",
           "language": "json",
           "code": "{\n  \"trial_id\": \"trial-0184\",\n  \"task\": { \"id\": \"publish-draft\", \"version\": \"3\" },\n  \"configuration\": { \"id\": \"agent-candidate\", \"version\": \"7\" },\n  \"environment\": { \"fixture\": \"workspace@sha256:...\", \"network\": \"recorded\" },\n  \"trace\": { \"id\": \"trace-0184\", \"integrity\": \"complete\" },\n  \"graders\": [\"outcome@2\", \"policy@5\", \"side-effects@3\"],\n  \"result\": { \"outcome\": \"pass\", \"policy\": \"pass\", \"side_effects\": \"pass\" },\n  \"cost_usd\": 0.42,\n  \"duration_ms\": 18420\n}"
@@ -225,5 +236,7 @@
     }
   ],
   "path": "/research/ai-systems/replayable-traces-ai-agent-evaluation",
-  "aliases": []
+  "aliases": [],
+  "image": "/images/research/replayable-traces-social.jpg",
+  "displayTitle": "Replayable traces for AI agents."
 }

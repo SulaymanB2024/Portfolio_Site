@@ -1,0 +1,538 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "how-airlines-borrow-against-loyalty-programs",
+  "aliases": [
+    "/markets/how-airlines-borrow-against-loyalty-programs"
+  ],
+  "number": "18",
+  "category": "FINANCIAL SYSTEMS",
+  "title": "How Airlines Borrow Against Loyalty Programs",
+  "seoTitle": "How Airlines Borrow Against Loyalty Programs",
+  "subtitle": "The contracts and cash controls that turn bank payments into collateral.",
+  "seoDescription": "How airlines borrow against loyalty programs: follow bank cash, deferred revenue, pledged accounts, loyalty-backed debt, and the lender waterfall.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/airline-loyalty-financing-reader-hero.webp",
+    "socialSrc": "/images/research/airline-loyalty-financing-social.jpg",
+    "alt": "A monochrome airline financing system linking aircraft operations, loyalty value, bank cash, and secured collateral channels.",
+    "label": "Airline loyalty financing / AAdvantage primary case",
+    "caption": "The card purchase, bank payment, future award, and lender claim are separate transactions. The financing only works after designated loyalty cash is routed into controlled accounts.",
+    "objectPosition": "50% 48%"
+  },
+  "date": "2026.07.23",
+  "lastVerified": "2026.07.23",
+  "readTime": "10 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Airlines borrow against recurring partner receipts and the contracts, accounts, intellectual property, data rights, reserves, and intercompany payments that secure them. Miles are not customer deposits.",
+  "conclusion": {
+    "title": "Follow the pledged cash",
+    "content": "Stress the collections, contracts, accounts, IP, reserves, and intercompany controls lenders actually claim. Modeled point economics cannot substitute for undisclosed contract terms."
+  },
+  "evidenceBoundary": "This web edition reformats the supplied July 23, 2026 investigation and its embedded exhibits. The underlying sources were not independently refreshed for publication. Reported values retain the source package’s evidence cutoff; derived, estimated, management-defined, and pro forma values remain labeled. Point prices, revenue allocations, redemption costs, valuation ranges, and stress cases are analytical estimates—not disclosed contract terms, forecasts, covenant calculations, appraisals, or investment recommendations.",
+  "metrics": [
+    {
+      "label": "American 2025 partner cash",
+      "value": "$6.2B"
+    },
+    {
+      "label": "American 2025 loyalty liability",
+      "value": "$10.564B"
+    },
+    {
+      "label": "Initial AAdvantage financing",
+      "value": "$10.0B"
+    },
+    {
+      "label": "Targeted direct deposits",
+      "value": "≥90%"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Full airline loyalty financing investigation",
+      "href": "/research/airline-loyalty-financing-report.pdf",
+      "description": "The complete 22-page report covering partner cash, accounting, fulfillment, loyalty-backed debt, valuation, issuer risk, methodology, and the source ledger.",
+      "format": "PDF"
+    },
+    {
+      "label": "Editable investigation",
+      "href": "/research/airline-loyalty-financing-report.docx",
+      "description": "The supplied editable report used as the source document for this web edition.",
+      "format": "DOCX"
+    },
+    {
+      "label": "Loyalty parties and money map",
+      "href": "/images/research/airline-loyalty-parties-money.png",
+      "description": "A downloadable map separating the cardholder, merchant, issuer, airline, loyalty vehicle, award claim, and lender-controlled cash flow.",
+      "format": "PNG"
+    }
+  ],
+  "content": [
+    "Airlines borrow against partner cash, not miles held as customer deposits. A card issuer pays under a commercial agreement; the airline recognizes some revenue and defers the award obligation. A separate financing structure can give lenders first claim on designated partner and intercompany collections, secured by contracts, controlled accounts, loyalty intellectual property, data rights, reserves, and special-purpose-vehicle equity.",
+    "Cash, revenue, fulfillment, and debt service run on different clocks. Bank cash can arrive within weeks; awards can be claimed years later or never. Lenders can trap debt service and reserves before excess cash reaches the airline.",
+    "American AAdvantage is the primary case, alongside Delta SkyMiles, United MileagePlus, and Air Canada Aeroplan. The 22-page investigation, nine exhibits, point-level cash model, and lender waterfall distinguish operating float, explicit partner prepayments, and secured debt."
+  ],
+  "sections": [
+    {
+      "id": "four-clocks",
+      "title": "One point, four clocks",
+      "paragraphs": [
+        "A $1,000 hotel purchase on an AAdvantage card settles among the cardholder, merchant, acquirer, network, and issuer—not American. Separately, the issuer calculates the account’s miles and pays the airline or loyalty vehicle under the co-brand agreement.",
+        "The model assumes 1,000 points yield $12 of partner cash, or 1.2 cents per point. Filings disclose the bundle and settlement cadence, but not the current net point price after fixed payments, benefits, volume terms, and other contract economics.",
+        "The member receives 1,000 miles; the issuer incurs a reward cost and gains a retention asset. The airline receives cash with current performance obligations and a future award claim. A secured lender may receive the same cash in a pledged account. These clocks remain separate."
+      ],
+      "figures": [
+        {
+          "src": "/images/research/airline-loyalty-cash-conversion-cycle.png",
+          "alt": "Matrix tracing cash, accounting, fulfillment, and financing from card purchase through issuer payment, redemption, breakage, or early amortization.",
+          "label": "Figure 01 / One point’s cash conversion cycle",
+          "caption": "The same 1,000-point issuance follows four clocks. The base model is estimated where contracts are opaque.",
+          "width": 2056,
+          "height": 1452
+        }
+      ]
+    },
+    {
+      "id": "what-the-bank-buys",
+      "title": "What the bank buys",
+      "paragraphs": [
+        "Co-brand agreements bundle miles with brand rights, customer access, card acquisition, exclusivity, marketing inventory, airport and in-flight placements, and benefits such as checked bags, priority boarding, upgrades, and lounge access. Points measure the bundle; they are not the whole product.",
+        "Dividing $12 by 1,000 points combines brand, acquisition, benefits, data access, and the award obligation. Public filings identify those components without enough detail to isolate a current net bank price per mile.",
+        "Monthly point sales also differ from partner prepayments. Aeroplan’s acquisition materials disclosed C$1.212 billion of deferred partner consideration for long-term agreements and C$400 million of bank prepayments against future mile purchases: future participation and services versus purchase credits."
+      ],
+      "table": {
+        "caption": "Three mechanisms that are often incorrectly described as the same financing",
+        "columns": [
+          "Mechanism",
+          "What creates cash today",
+          "Accounting",
+          "Provider claim"
+        ],
+        "rows": [
+          [
+            "Operating float",
+            "Recurring point sales and co-brand consideration",
+            "Current revenue plus contract liability",
+            "Commercial rights; no principal-and-interest claim"
+          ],
+          [
+            "Explicit partner prepayment",
+            "Upfront renewal, exclusivity, transition, or future-purchase money",
+            "Deferred and amortized or applied against later purchases",
+            "Future services or contractual purchase credits"
+          ],
+          [
+            "Loyalty-backed debt",
+            "Loan or note proceeds",
+            "Financial debt with interest, maturity, and covenants",
+            "Liens on contracts, IP, accounts, reserves, and SPV equity"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "cash-is-not-revenue",
+      "title": "Cash, revenue, and deferred awards",
+      "paragraphs": [
+        "The model allocates the $12 receipt for 1,000 points 40% to current marketing and benefits and 60% to future awards: $4.80 of revenue and $7.20 of contract liability. This split is estimated. Filings disclose relative-standalone-selling-price methods, expected redemption, equivalent-ticket values, breakage, and brand valuation inputs—not the current contract-specific allocation.",
+        "American reported $6.2 billion of 2025 co-brand and other partner cash. Loyalty-liability additions were $4.445 billion, releases $3.935 billion, and the ending balance $10.564 billion. Marketing-services revenue was $3.511 billion; loyalty travel revenue, including prior-cohort releases, was $4.036 billion. These figures are not interchangeable.",
+        "Delta and United show the same timing mismatch. A contract liability measures consideration allocated to future performance, not expected award cash cost. It normally settles through service, with no conventional coupon or principal maturity."
+      ],
+      "table": {
+        "caption": "Fiscal 2025 loyalty-program balance sheets; reported categories are similar but not identical",
+        "columns": [
+          "Program",
+          "Ending liability",
+          "Annual additions",
+          "Annual releases",
+          "Current / partner-related revenue"
+        ],
+        "rows": [
+          [
+            "American AAdvantage",
+            "$10.564B",
+            "$4.445B",
+            "$3.935B",
+            "$3.511B marketing services; $4.036B loyalty travel"
+          ],
+          [
+            "Delta SkyMiles",
+            "$9.262B",
+            "$4.892B",
+            "$4.456B total",
+            "$3.362B other-revenue loyalty; $4.237B award travel"
+          ],
+          [
+            "United MileagePlus",
+            "$7.777B",
+            "$3.883B",
+            "$3.547B total",
+            "$3.2B marketing, advertising, non-travel, and benefits"
+          ]
+        ]
+      },
+      "figures": [
+        {
+          "src": "/images/research/airline-loyalty-cash-not-revenue.png",
+          "alt": "Accounting and cash bridge showing a modeled 12 dollar partner receipt split into immediate revenue and deferred liability, then reduced by redemption cash and program expense.",
+          "label": "Figure 02 / Cash is not revenue",
+          "caption": "The accounting bridge and the cash-contribution bridge use the same modeled receipt but answer different questions.",
+          "width": 2380,
+          "height": 1291
+        },
+        {
+          "src": "/images/research/airline-loyalty-balance-sheets.png",
+          "alt": "Grouped bars comparing 2025 ending loyalty liabilities, annual additions, and annual releases for American, Delta, and United.",
+          "label": "Figure 03 / Loyalty-program balance sheets",
+          "caption": "Ending liabilities are roughly two years of annual release at Delta and United and 2.7 years at American, whose balance includes upfront Citi consideration.",
+          "width": 2472,
+          "height": 1270
+        }
+      ]
+    },
+    {
+      "id": "float-breakage-award-cost",
+      "title": "Float, breakage, and award cost",
+      "paragraphs": [
+        "The issuance-to-redemption delay creates operating float. Delta and United say most new miles are redeemed within two years. The cohort model assigns 25% to Year 0, 35% to Year 1, 20% to Year 2, 8% later, and 12% to expected breakage. Conditional on redemption, the expected wait is about 1.7 years.",
+        "Breakage estimates nonredemption, not legal expiration; even a no-expiration program can recognize it proportionally from account behavior and expected redemption. Longer waits extend cash use. A confidence shock can reverse that benefit with a redemption wave during weak partner spending or constrained seat inventory.",
+        "Bank bundle price, accounting allocation, member avoided fare, airline incremental cash cost, and displaced-passenger opportunity cost can differ by multiples. An empty off-peak seat can cost little incremental cash; a scarce premium award can displace thousands of dollars of fare contribution."
+      ],
+      "figures": [
+        {
+          "src": "/images/research/airline-loyalty-point-values.png",
+          "alt": "Range plot distinguishing modeled bank bundle payment, accounting allocation, consumer value, airline incremental cost, and airline opportunity cost per point.",
+          "label": "Figure 04 / What one point is worth to each party",
+          "caption": "These ranges answer different questions and should not be compared as though they were one observable market price.",
+          "width": 2470,
+          "height": 1277
+        }
+      ]
+    },
+    {
+      "id": "loyalty-backed-debt",
+      "title": "The lender’s cash waterfall",
+      "paragraphs": [
+        "Secured debt adds a legal claim to operating float. American and United placed loyalty rights and payment paths in bankruptcy-remote structures, contributed or licensed IP and data rights, pledged collection and reserve accounts, and protected partner and intercompany agreements.",
+        "American targeted direct deposit of at least 90% of quarterly AAdvantage revenue, with off-account receipts swept in. Fees, interest, required principal, and reserves preceded releases to the airline. Coverage or reserve failures could trigger early amortization and faster cash trapping.",
+        "Lenders claim defined collections, contracts, accounts, IP, reserves, and SPV equity. That can protect cash through restructuring without making the program independent of the airline’s routes, seats, employees, airports, or brand experience."
+      ],
+      "figures": [
+        {
+          "src": "/images/research/airline-loyalty-backed-financing.png",
+          "alt": "Side-by-side American AAdvantage and United MileagePlus loyalty-backed financing waterfalls from co-brand agreements through controlled accounts, debt service, reserves, and excess cash.",
+          "label": "Figure 05 / Loyalty-backed financing structures",
+          "caption": "American and United used the same design logic: isolate assets, direct collections, service debt, fund reserves, then release excess cash.",
+          "width": 2056,
+          "height": 1267
+        }
+      ]
+    },
+    {
+      "id": "american-united-debt",
+      "title": "American kept the channel; United repaid it",
+      "paragraphs": [
+        "American raised $10.0 billion in 2021: $3.5 billion of 5.50% notes, $3.0 billion of 5.75% notes, and a $3.5 billion term loan. A $1.0 billion incremental term loan followed in 2025. Disclosed balances across the two note series and two loans totaled about $6.543 billion at March 31, 2026.",
+        "United raised $6.8 billion in 2020: $3.8 billion of 6.50% notes and a $3.0 billion term loan. It prepaid the loan in July 2024 and redeemed the remaining $1.52 billion of notes in July 2025, ending that debt’s claim on MileagePlus assets.",
+        "Partner cash and card spending proved more resilient than flying during the pandemic; legal controls limited leakage. Borrowing capacity establishes what designated cash flows supported under reserves and covenants, not the program’s value."
+      ],
+      "table": {
+        "caption": "Reported loyalty-backed financing structures and later status",
+        "columns": [
+          "Program",
+          "Initial financing",
+          "Core controls",
+          "Status in supplied evidence"
+        ],
+        "rows": [
+          [
+            "American AAdvantage",
+            "$10.0B in 2021; $1.0B incremental term loan in 2025",
+            "≥90% direct-deposit target; collection and reserve accounts; coverage test up to 2.0×",
+            "Approximately $6.543B visible at March 31, 2026"
+          ],
+          [
+            "United MileagePlus",
+            "$6.8B in 2020",
+            "90% collections; daily sweep; coverage test up to 2.0×; intercompany restrictions",
+            "Term loan repaid July 2024; remaining notes redeemed July 2025"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "program-valuation",
+      "title": "Program value versus airline equity",
+      "paragraphs": [
+        "American’s March 2021 presentation reported $49.521 billion of airline enterprise value, $14.182 billion of equity market capitalization, and $2.911 billion of 2019 pro forma AAdvantage adjusted EBITDA. An estimated 7× to 10× multiple gives gross program value of $20.4 billion to $29.1 billion.",
+        "That is 41% to 59% of matching-date airline enterprise value, but 1.44× to 2.05× its equity value. “Worth more than the airline” compares gross program enterprise value with distressed airline equity—different claims on the same system.",
+        "The DCF estimates $22.9 billion to $34.9 billion. Both methods depend on durable card spending, partner concentration, pricing, member behavior, and the airline platform. Deduct loyalty-backed debt to reach program equity value."
+      ],
+      "figures": [
+        {
+          "src": "/images/research/airline-loyalty-program-value.png",
+          "alt": "Comparison of American enterprise value, AAdvantage multiple and DCF value ranges, American equity market capitalization, and 2021 loyalty debt capacity.",
+          "label": "Figure 06 / Loyalty value versus airline value",
+          "caption": "Only the airline enterprise-value and market-cap bars share the March 2021 date; the program ranges derive from 2019 pro forma economics.",
+          "width": 2469,
+          "height": 1350
+        }
+      ]
+    },
+    {
+      "id": "partner-failure",
+      "title": "Cash can stop while awards remain owed",
+      "paragraphs": [
+        "Air Canada announced plans to leave externally owned Aeroplan, then bought it back for cash consideration and assumption of roughly C$1.9 billion of redemption liability. Bank and network partners supplied long-term agreement consideration and future-mile prepayments to preserve continuity.",
+        "An outgoing issuer can stop new cash before the last funded point is redeemed. The airline may own the loyalty brand while the bank owns or services the card portfolio. Points remain owed, and the airline controls much high-value award inventory.",
+        "The mechanical American stress test uses $6.2 billion of 2025 partner cash and a visible peak quarterly debt-service proxy, not contractual DSCR. A modeled 60% partner-cash reduction takes gross coverage from 4.4× to 1.7× and modeled program cash contribution below zero, while ending loyalty liability remains $7.82 billion."
+      ],
+      "table": {
+        "caption": "Modeled partnership-loss scenario; pro forma outputs, not company guidance or contractual covenant calculations",
+        "columns": [
+          "Scenario",
+          "Partner cash",
+          "Gross coverage proxy",
+          "Program cash contribution",
+          "Ending loyalty liability"
+        ],
+        "rows": [
+          [
+            "Base",
+            "$6.20B",
+            "4.4×",
+            "$3.30B",
+            "$11.07B"
+          ],
+          [
+            "Recession",
+            "$4.96B",
+            "3.5×",
+            "$1.79B",
+            "$9.79B"
+          ],
+          [
+            "Severe spend shock",
+            "$3.72B",
+            "2.6×",
+            "$0.50B",
+            "$8.82B"
+          ],
+          [
+            "Issuer disruption",
+            "$2.48B",
+            "1.7×",
+            "−$0.82B",
+            "$7.82B"
+          ],
+          [
+            "Near-termination",
+            "$1.86B",
+            "1.3×",
+            "−$1.58B",
+            "$7.18B"
+          ]
+        ]
+      },
+      "figures": [
+        {
+          "src": "/images/research/airline-loyalty-partner-stress.png",
+          "alt": "Line chart showing a modeled American gross coverage proxy declining below a 2.0 times threshold between 40 and 60 percent partner-cash loss.",
+          "label": "Figure 07 / Partnership-termination stress test",
+          "caption": "The coverage proxy crosses below 2.0× between a 40% and 60% loss of the $6.2 billion partner-cash anchor.",
+          "width": 2472,
+          "height": 1301
+        }
+      ]
+    },
+    {
+      "id": "profit-from-points",
+      "title": "How much profit comes from points?",
+      "paragraphs": [
+        "No single percentage is defensible. American’s $6.2 billion of 2025 partner cash was 11.3% of operating revenue, but can be deferred. Its $3.511 billion of marketing revenue exceeded operating income, but revenue is not profit. Its $4.036 billion of award-travel revenue released prior liabilities, not fresh bank cash.",
+        "The 2021 presentation reported $2.911 billion of 2019 AAdvantage adjusted EBITDA and $3.145 billion of net operating cash. These management-defined, pro forma measures depend on intercompany mechanics. They aid financing analysis without isolating the consolidated profit American would lose without AAdvantage.",
+        "The model estimates $6.38 of contribution per 1,000 points sold for $12—not profit from points. Full attribution requires confidential issuer pricing, current allocation, flight and partner mix, seat displacement, acquisition and benefit costs, incremental ticket demand, transfer pricing, breakage, and corporate overhead."
+      ],
+      "figures": [
+        {
+          "src": "/images/research/airline-loyalty-profit-bridge.png",
+          "alt": "Two-panel chart separating the 2019 AAdvantage pro forma cash bridge from four non-additive American 2025 cash, revenue, and operating-income measures.",
+          "label": "Figure 08 / Profit-attribution bridge",
+          "caption": "Cash receipts, marketing revenue, deferred-revenue release, and consolidated operating profit answer different questions and cannot be added.",
+          "width": 2659,
+          "height": 1341
+        }
+      ]
+    },
+    {
+      "id": "airline-loyalty-financing-faq",
+      "title": "Key distinctions",
+      "paragraphs": [
+        "Assign each number to its cash clock, contract, and claimant."
+      ],
+      "table": {
+        "caption": "Direct answers to the search questions this investigation is designed to resolve",
+        "columns": [
+          "Question",
+          "Direct answer"
+        ],
+        "rows": [
+          [
+            "Airline loyalty program financing",
+            "A commercial partner first creates recurring cash. A separate secured structure can then pledge designated collections, contracts, accounts, reserves, loyalty IP, data rights, intercompany payments, and SPV equity to lenders."
+          ],
+          [
+            "Airline loyalty-backed debt",
+            "Debt service, principal, and reserves are paid through controlled accounts before excess loyalty cash is released to the airline; coverage or reserve failures can trigger early amortization."
+          ],
+          [
+            "How do airlines make money from loyalty programs?",
+            "Airlines sell a commercial bundle to banks and partners, recognize some consideration for current services, defer the award obligation, benefit from timing and breakage, and often fulfill awards below the member’s perceived value."
+          ],
+          [
+            "Are airline miles a liability?",
+            "The airline records allocated consideration for expected future awards as a loyalty contract liability. Miles are not generally a fixed-dollar customer deposit and the liability is not conventional financial debt."
+          ],
+          [
+            "Are airline loyalty programs worth more than airlines?",
+            "A gross loyalty-program enterprise value can exceed distressed airline equity while remaining below total airline enterprise value. The dates, definitions, and debt deductions must match before making the comparison."
+          ],
+          [
+            "Airline loyalty program securitization",
+            "The pandemic-era structures isolated loyalty assets and cash paths in special-purpose entities, pledged controlled accounts and contracts, and imposed debt-service coverage, reserve, and early-amortization protections."
+          ]
+        ]
+      }
+    },
+    {
+      "id": "methodology",
+      "title": "Method and evidence limits",
+      "paragraphs": [
+        "The record comprises the executive memo, dossiers, financing documents, audited reports, quarterly filings, transaction materials, and reconstructed point model. Investor-presentation measures retain their management-defined and pro forma labels.",
+        "The labels below distinguish disclosed facts, arithmetic, estimates, inferences, pro forma outputs, and management definitions.",
+        "Material unknowns include current net bank point prices, fixed payments, minimum purchases, escalators, termination thresholds, breakage rates, route-level seat costs, displacement curves, partner reimbursements, and allocation percentages. The model leaves these gaps explicit."
+      ],
+      "table": {
+        "caption": "Evidence labels used throughout the supplied investigation",
+        "columns": [
+          "Label",
+          "Meaning"
+        ],
+        "rows": [
+          [
+            "Reported [R]",
+            "Directly disclosed in an audited filing, transaction document, or company record"
+          ],
+          [
+            "Derived [D]",
+            "Arithmetic using reported inputs"
+          ],
+          [
+            "Estimated [E]",
+            "Model input or range used because public disclosure is unavailable"
+          ],
+          [
+            "Inferred [I]",
+            "Conclusion drawn from the interaction of disclosed facts and stated as an inference"
+          ],
+          [
+            "Pro forma [PF]",
+            "Scenario output or company presentation adjusted outside audited consolidated results"
+          ],
+          [
+            "Management-defined [M]",
+            "Company metric, valuation, or presentation definition that is not an independent market measure"
+          ]
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "label": "American Airlines 2025 Form 10-K",
+      "href": "https://www.sec.gov/Archives/edgar/data/6201/000119312526187124/d151029dars.pdf",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "American Airlines Form 10-Q for the quarter ended March 31, 2026",
+      "href": "https://www.sec.gov/Archives/edgar/data/6201/000000620126000032/aal-20260331.htm",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "AAdvantage Financing Investor Presentation, March 2021",
+      "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000022/aainvestorpresentation.htm",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "AAdvantage 2021 Term Loan Credit Agreement",
+      "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000054/ex104q121aadvantagexcredit.htm",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "American Airlines 2019 Form 10-K",
+      "href": "https://www.sec.gov/Archives/edgar/data/6201/000000620120000023/a10k123119.htm",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "American and Citi exclusive co-brand agreement announcement",
+      "href": "https://americanairlines.gcs-web.com/static-files/aa971970-8330-4eb3-b7fb-97c6cd6060e9",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "AAdvantage terms and conditions",
+      "href": "https://www.aa.com/i18n/aadvantage-program/aadvantage-terms-and-conditions.jsp",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "Delta Air Lines 2025 Form 10-K",
+      "href": "https://www.sec.gov/Archives/edgar/data/27904/000002790426000013/dal-20251231.htm",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "American Express 2025 Annual Report",
+      "href": "https://www.sec.gov/Archives/edgar/data/4962/000110465926034161/tm265890d2_ars.pdf",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "United Airlines 2025 Form 10-K",
+      "href": "https://www.sec.gov/Archives/edgar/data/319687/000010051726000023/ual-20251231.htm",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "United MileagePlus Financing Form 8-K and investor materials",
+      "href": "https://www.sec.gov/Archives/edgar/data/100517/000110465920080673/tm2024018-1_8k.htm",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "United MileagePlus Credit Agreement",
+      "href": "https://www.sec.gov/Archives/edgar/data/100517/000110465920080673/tm2024018d1_ex10-1.htm",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "Air Canada Aeroplan acquisition accounting presentation",
+      "href": "https://www.aircanada.com/content/dam/aircanada/portal/documents/PDF/speeches-presentations/en/Aeroplan-Acquisition-en.pdf",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "Air Canada loyalty-program transition announcement",
+      "href": "https://www.newswire.ca/news-releases/air-canada-to-launch-its-own-loyalty-program-in-2020-621967683.html",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "Aimia and Air Canada definitive Aeroplan sale agreement",
+      "href": "https://www.aimia.com/aimia-and-air-canada-enter-into-definitive-agreement-for-purchase-of-the-aeroplan-loyalty-business/",
+      "lastVerified": "2026.07.23"
+    },
+    {
+      "label": "Air Canada 2020 Annual Report",
+      "href": "https://www.aircanada.com/content/dam/aircanada/portal/documents/PDF/en/annual-report/2020_ar.pdf",
+      "lastVerified": "2026.07.23"
+    }
+  ],
+  "indexable": true,
+  "path": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+  "image": "/images/research/airline-loyalty-financing-social.jpg",
+  "displayTitle": "How airlines borrow against loyalty programs.",
+  "openingPresentation": "integrated"
+}

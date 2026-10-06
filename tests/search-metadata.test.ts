@@ -8,6 +8,7 @@ test('homepage search identity is descriptive while the published headline stays
   const home = searchMetadata('home')
   assert.equal(home.title, 'Sulayman Bowles — Product, AI & Finance')
   assert.equal(home.canonical, 'https://sulayman-bowles.dev/')
+  assert.equal(home.schema!['@graph'].find(node => node['@type'] === 'Person')?.description, identity.homeSummary)
   assert.equal(home.schema!['@graph'].find(node => node['@type'] === 'WebPage')?.name, 'The frontier is all that matters — Sulayman Bowles')
 })
 
@@ -24,7 +25,7 @@ test('profile pages and articles share one author and website identity', () => {
 })
 
 test('the person uses the reviewed biography and connected profiles without implying a completed degree', () => {
-  const person = searchMetadata('about').schema!['@graph'].find(node => node['@type'] === 'Person')!
+  const person = searchMetadata('resume').schema!['@graph'].find(node => node['@type'] === 'Person')!
   assert.equal(person.description, identity.summary)
   assert.equal(person.mainEntityOfPage, 'https://sulayman-bowles.dev/about')
   assert.deepEqual(person.sameAs, identity.profiles.map(profile => profile.href))
@@ -32,6 +33,8 @@ test('the person uses the reviewed biography and connected profiles without impl
   assert.equal(person.alumniOf, undefined)
   assert.equal(person.image, undefined)
   assert.equal(person.jobTitle, undefined)
+  const about = searchMetadata('about')
+  assert.equal(about.schema!['@graph'].find(node => node['@type'] === 'Person')?.description, about.description)
 })
 
 test('invalid routes do not borrow the homepage identity or article fields', () => {
@@ -48,8 +51,8 @@ test('source dates normalize real dates without inventing freshness', () => {
   assert.equal(sourceDate('2026-13-01'), undefined)
   assert.equal(sourceDate('today'), undefined)
   assert.equal(sourceDate(), undefined)
-  assert.equal(searchMetadata('writing/atlas-building-an-evidence-console').article?.modified, undefined)
-  assert.equal(searchMetadata('writing/viralbench-codex-agent-harness').article?.modified, '2026-07-14')
+  assert.equal(searchMetadata('writing/atlas-building-an-evidence-console').article?.modified, '2026-10-05')
+  assert.equal(searchMetadata('writing/viralbench-codex-agent-harness').article?.modified, '2026-10-05')
 })
 
 test('rebuilding a head removes stale article data, duplicate canonicals, and old schema', () => {

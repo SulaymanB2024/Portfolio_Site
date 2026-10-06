@@ -6,9 +6,9 @@ import type { ArticleSummary } from '../src/personal/editorial/types.ts'
 
 test('feed uses canonical essay identities, real source dates, and the public author', () => {
   const feed = writingFeed(catalog)
-  assert.equal((feed.match(/<entry>/g) || []).length, 4)
+  assert.equal((feed.match(/<entry>/g) || []).length, catalog.length)
   assert(feed.includes('<name>Sulayman Bowles</name><uri>https://sulayman-bowles.dev/about</uri>'))
-  assert(feed.includes('<updated>2026-10-01T00:00:00Z</updated>'))
+  assert(feed.includes('<updated>2026-10-05T00:00:00Z</updated>'))
   for (const article of catalog) assert(feed.includes(`<id>https://sulayman-bowles.dev${article.path}</id>`))
   assert(!feed.includes('#/'))
   assert(feed.indexOf('/writing/atlas-building-an-evidence-console</id>') < feed.indexOf('/markets/who-owns-texas-toll-roads</id>'))

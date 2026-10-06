@@ -24,7 +24,7 @@ export const dracoSettings = {
 const baseColorDetail = { sigma: .55, m1: .35, m2: .7 }
 export const definitions = [
   { id: 'helmet', source: 'public/helmet-balanced.glb', path: 'public/portfolio-models/helmet.glb', mode: 'texture-only', size: 2048, lossless: false, baseColorDetail },
-  { id: 'headrest', source: 'public/models/headrest-three-lions-balanced.glb', path: 'public/portfolio-models/headrest.glb', mode: 'texture-only', size: 1024, lossless: true, baseColorDetail },
+  { id: 'headrest', source: 'public/models/headrest-three-lions-balanced.glb', path: 'public/portfolio-models/headrest.glb', mode: 'texture-only', size: 1024, lossless: true, baseColorDetail, baseColorQuality: 98, textureEffort: 6 },
   { id: 'globe', source: 'public/models/wireframe-globe.glb', path: 'public/models/wireframe-globe-balanced.glb', mode: 'existing-balanced' },
   { id: 'crystal', source: 'public/models/crystal-cluster.glb', path: 'public/models/crystal-cluster.glb', mode: 'unchanged' },
   ...['internshipdeadlines', 'sapien', 'investing-markets', 'miscellaneous'].map(id => ({
@@ -33,6 +33,8 @@ export const definitions = [
   ...['bass', 'knight', 'score'].map(id => ({
     id: `about-${id}`, source: `public/about-objects/${id}.glb`, path: `public/portfolio-models/about-${id}.glb`, mode: 'draco-only',
   })),
+  { id: 'about-chess-pieces', source: 'public/about-objects/chess-pieces.glb', path: 'public/portfolio-models/about-chess-pieces.glb', mode: 'draco-only' },
+  { id: 'resume-work-areas', source: 'public/resume-objects/work-areas.glb', path: 'public/portfolio-models/resume-work-areas.glb', mode: 'draco-only' },
 ]
 export const sha256 = bytes => createHash('sha256').update(bytes).digest('hex')
 
@@ -154,8 +156,12 @@ async function resizeTextures(bytes, definition) {
     const resized = sharp(binary.subarray(view.byteOffset ?? 0, (view.byteOffset ?? 0) + view.byteLength))
       .resize({ width: definition.size, height: definition.size, fit: 'inside', withoutEnlargement: true })
     if (definition.baseColorDetail && colorImages.has(index)) resized.sharpen(definition.baseColorDetail)
+    // Preserve the normal/roughness maps exactly; compression of scan color
+    // does not change its dimensions, mesh detail, or material bindings.
+    const quality = colorImages.has(index) ? definition.baseColorQuality : undefined
+    const effort = definition.textureEffort ?? 4
     const encoded = await resized
-      .webp(definition.lossless ? { lossless: true, effort: 4 } : { quality: 90, effort: 4 })
+      .webp(quality ? { quality, effort, smartSubsample: true } : definition.lossless ? { lossless: true, effort } : { quality: 90, effort })
       .toBuffer()
     replacements.set(image.bufferView, encoded)
   }
@@ -204,6 +210,8 @@ function assertInteractionNodes(document, id) {
     for (const name of ['knight-carving', 'knight-relief', 'knight-base-trim']) assert.equal(nodes.get(name).getParentNode(), knight, `${id}: changed movable knight hierarchy`)
   }
   if (id === 'about-score') require(['score', 'score-paper', 'note-0', 'note-1', 'note-2', 'note-3', 'pen'])
+  if (id === 'about-chess-pieces') require(['p', 'b', 'r', 'q', 'k'].flatMap(piece => [`piece-template-${piece}`, `piece-${piece}-body`, `piece-${piece}-contrast`]))
+  if (id === 'resume-work-areas') require(['records','cluster','dialogue','compare','report','plan','network','audit','search','calendar','film','frames','matrix','route','image'].map(form => `resume-form-${form}`))
 }
 
 async function inspect(bytes, io, id) {
@@ -267,7 +275,7 @@ function assertPreserved(source, output, definition, sourceBytes, outputBytes) {
 }
 
 function settings(definition) {
-  if (definition.mode === 'texture-only') return { textureMaxDimension: definition.size, format: 'webp', lossless: definition.lossless, ...(definition.lossless ? {} : { quality: 90 }), effort: 4, ...(definition.baseColorDetail ? { baseColorDetail: definition.baseColorDetail } : {}), geometry: 'original compressed buffers' }
+  if (definition.mode === 'texture-only') return { textureMaxDimension: definition.size, format: 'webp', lossless: definition.lossless && !definition.baseColorQuality, ...(definition.lossless ? {} : { quality: 90 }), effort: definition.textureEffort ?? 4, ...(definition.baseColorQuality ? { baseColorQuality: definition.baseColorQuality, smartSubsample: true, nonColorMaps: 'lossless' } : {}), ...(definition.baseColorDetail ? { baseColorDetail: definition.baseColorDetail } : {}), geometry: 'original compressed buffers' }
   if (definition.mode === 'draco-only') return { reorder: 'performance', ...dracoSettings, simplification: false }
   return { geometry: definition.mode }
 }
@@ -286,11 +294,13 @@ export async function record(definition, sourceBytes, outputBytes, io) {
 }
 
 /** Refresh only original, validated specimens from their authoritative builders. */
-export function authoredSourceHashes(work, about) {
+export function authoredSourceHashes(work, about, chess, resume) {
   const sources = new Map()
   for (const [manifest, directory, ids, generator] of [
     [work, 'work-studies', ['internshipdeadlines', 'sapien', 'investing-markets', 'miscellaneous'], 'tools/build-work-models.mjs'],
     [about, 'about-objects', ['bass', 'knight', 'score'], 'tools/build-about-models.mjs'],
+    [chess, 'about-objects', ['chess-pieces'], 'tools/build-chess-pieces.mjs'],
+    [resume, 'resume-objects', ['work-areas'], 'tools/build-resume-models.mjs'],
   ]) {
     assert.equal(manifest.generator, generator, 'Unexpected authored asset generator')
     assert.deepEqual(manifest.models.map(model => model.id).sort(), [...ids].sort(), 'Authored asset set changed')
@@ -307,8 +317,18 @@ export function authoredSourceHashes(work, about) {
   return sources
 }
 
-export async function run({ verifyOnly = false, refreshAuthored = false } = {}) {
+/** Only an explicit authored refresh may introduce a new validated source. */
+export function assertAssetSet(previous, refreshAuthored) {
+  const expected = definitions.map(definition => definition.id).sort(), actual = Object.keys(previous.assets).sort()
+  const additions = expected.filter(id => !actual.includes(id))
+  assert.ok(actual.every(id => expected.includes(id)), 'Portfolio manifest has unknown assets')
+  if (!refreshAuthored || additions.length === 0) assert.deepEqual(actual, expected, 'Portfolio manifest asset set changed')
+  else assert.ok(additions.every(id => ['about-chess-pieces', 'resume-work-areas'].includes(id)), 'Unexpected authored asset addition')
+}
+
+export async function run({ verifyOnly = false, refreshAuthored = false, only = [] } = {}) {
   assert.ok(!(verifyOnly && refreshAuthored), 'Verify-only cannot refresh authored sources')
+  assert.ok(only.every(id => definitions.some(definition => definition.id === id)), 'Unknown selected portfolio asset')
   sharp.concurrency(1)
   await MeshoptEncoder.ready
   const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
@@ -321,8 +341,9 @@ export async function run({ verifyOnly = false, refreshAuthored = false } = {}) 
   }
   if (previous) {
     assert.equal(previous.version, 1, 'Unknown portfolio manifest version')
-    assert.deepEqual(Object.keys(previous.assets).sort(), definitions.map(definition => definition.id).sort(), 'Portfolio manifest asset set changed')
+    assertAssetSet(previous, refreshAuthored)
   }
+  assert.ok(previous || !only.length, 'Selected optimization requires an existing manifest')
   const baseline = JSON.parse(await readFile(resolve(root, 'evidence/portfolio-rendering/baseline.json'), 'utf8').catch(error => {
     if (error.code !== 'ENOENT') throw error
     return '{"files":[]}'
@@ -331,27 +352,36 @@ export async function run({ verifyOnly = false, refreshAuthored = false } = {}) 
   const authored = refreshAuthored ? authoredSourceHashes(
     JSON.parse(await readFile(resolve(root, 'public/work-studies/manifest.json'), 'utf8')),
     JSON.parse(await readFile(resolve(root, 'public/about-objects/manifest.json'), 'utf8')),
+    JSON.parse(await readFile(resolve(root, 'public/about-objects/chess-pieces-manifest.json'), 'utf8')),
+    JSON.parse(await readFile(resolve(root, 'public/resume-objects/manifest.json'), 'utf8')),
   ) : new Map()
+  if (refreshAuthored) for (const id of only) {
+    const definition = definitions.find(definition => definition.id === id)
+    assert.ok(authored.has(definition.source), `${id}: selected authored refresh requires an original validated specimen`)
+  }
   const sources = new Map()
   // Fail before writing if any source drifted from the recorded baseline or manifest.
   for (const definition of definitions) {
     const bytes = await readFile(resolve(root, definition.source)), hash = sha256(bytes)
-    const authoredRefresh = authored.has(definition.source)
+    const authoredRefresh = authored.has(definition.source) && (!only.length || only.includes(definition.id))
     const originalSpecimen = definition.mode === 'draco-only'
     if (authoredRefresh) assert.equal(hash, authored.get(definition.source), `${definition.id}: source differs from authored manifest`)
     // Historical captures protect imported scans. Refined original specimens
     // are pinned by the current derivative manifest after an explicit refresh.
     if (!authoredRefresh && (!originalSpecimen || !previous) && baselineHashes.has(definition.source)) assert.equal(hash, baselineHashes.get(definition.source), `${definition.id}: source changed from baseline`)
-    if (!authoredRefresh && previous) assert.equal(hash, previous.assets[definition.id].source.sha256, `${definition.id}: source hash changed`)
-    if (!verifyOnly && previous) assert.equal(sha256(await readFile(resolve(root, definition.path))), previous.assets[definition.id].sha256, `${definition.id}: derivative changed before processing`)
+    const previousAsset = previous?.assets[definition.id]
+    if (!authoredRefresh && previousAsset) assert.equal(hash, previousAsset.source.sha256, `${definition.id}: source hash changed`)
+    if (!verifyOnly && previousAsset) assert.equal(sha256(await readFile(resolve(root, definition.path))), previousAsset.sha256, `${definition.id}: derivative changed before processing`)
     sources.set(definition.id, bytes)
   }
   const assets = {}
   const outputs = new Map()
   for (const definition of definitions) {
     const source = sources.get(definition.id)
+    const current = previous?.assets[definition.id]
+    const retained = refreshAuthored && current && current.source.sha256 === sha256(source)
     let output
-    if (verifyOnly || definition.mode === 'unchanged' || definition.mode === 'existing-balanced') output = await readFile(resolve(root, definition.path))
+    if (verifyOnly || retained || (only.length && !only.includes(definition.id)) || definition.mode === 'unchanged' || definition.mode === 'existing-balanced') output = await readFile(resolve(root, definition.path))
     else if (definition.mode === 'texture-only') output = await resizeTextures(source, definition)
     else {
       const document = await io.readBinary(new Uint8Array(source))
@@ -363,8 +393,8 @@ export async function run({ verifyOnly = false, refreshAuthored = false } = {}) 
       output = packGLB(encoded.json, encoded.binary)
     }
     const entry = await record(definition, source, output, io)
-    if (verifyOnly) assert.deepEqual(entry, previous.assets[definition.id], `${definition.id}: file or manifest verification failed`)
-    else if (definition.mode === 'texture-only' || definition.mode === 'draco-only') outputs.set(definition.path, output)
+    if (verifyOnly || (only.length && !only.includes(definition.id))) assert.deepEqual(entry, previous.assets[definition.id], `${definition.id}: file or manifest verification failed`)
+    else if ((definition.mode === 'texture-only' || definition.mode === 'draco-only') && entry.sha256 !== current?.sha256) outputs.set(definition.path, output)
     assets[definition.id] = entry
     console.log(`${verifyOnly ? 'verified' : 'prepared'} ${definition.id}: ${entry.bytes.toLocaleString()} bytes, ${entry.stats.triangles.toLocaleString()} triangles, ${entry.reductionPercent.toFixed(1)}% reduction; validation 0 errors / 0 warnings`)
   }
@@ -373,6 +403,11 @@ export async function run({ verifyOnly = false, refreshAuthored = false } = {}) 
   const urls = Object.fromEntries(Object.entries(assets).map(([id, entry]) => [id, entry.url]))
   if (verifyOnly) assert.deepEqual(JSON.parse(await readFile(resolve(root, urlsPath), 'utf8')), urls, 'Portfolio URL map verification failed')
   if (!verifyOnly) {
+    if (previous) assert.deepEqual(JSON.parse(await readFile(resolve(root, manifestPath), 'utf8')), previous, 'Portfolio manifest changed during processing')
+    for (const [path] of outputs) {
+      const current = Object.values(previous?.assets ?? {}).find(asset => asset.path === path)
+      if (current) assert.equal(sha256(await readFile(resolve(root, path))), current.sha256, 'Portfolio derivative changed during processing')
+    }
     // Complete validation before replacing any live derivative. A browser can
     // then request either complete version, never a partially written GLB.
     for (const [path, bytes] of outputs) {
@@ -391,6 +426,6 @@ export async function run({ verifyOnly = false, refreshAuthored = false } = {}) 
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  assert.ok(process.argv.slice(2).every(argument => ['--verify-only', '--refresh-authored'].includes(argument)), 'Usage: node tools/optimize-portfolio-assets.mjs [--verify-only | --refresh-authored]')
-  await run({ verifyOnly: process.argv.includes('--verify-only'), refreshAuthored: process.argv.includes('--refresh-authored') })
+  assert.ok(process.argv.slice(2).every(argument => ['--verify-only', '--refresh-authored'].includes(argument) || /^--only=[a-z-]+$/.test(argument)), 'Usage: node tools/optimize-portfolio-assets.mjs [--verify-only | --refresh-authored | --only=asset-id]')
+  await run({ verifyOnly: process.argv.includes('--verify-only'), refreshAuthored: process.argv.includes('--refresh-authored'), only: process.argv.slice(2).filter(argument => argument.startsWith('--only=')).map(argument => argument.slice(7)) })
 }

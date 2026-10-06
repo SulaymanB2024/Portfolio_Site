@@ -1,10 +1,12 @@
+import { decoderPath } from '../portfolio-decoder-path.ts'
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js'
 import { disposeModel } from '../model-resources.ts'
+import { requireGLBBytes, requireGLBPath } from './model-asset.ts'
 
 /** One decoder worker per owned renderer; fetches abort, late parses release their scene. */
 export function createPortfolioModelLoader(base = import.meta.env.BASE_URL) {
-  const decoder = new DRACOLoader().setDecoderPath(`${base}draco/`).setWorkerLimit(1)
+  const decoder = new DRACOLoader().setDecoderPath(`${base}${decoderPath}`).setWorkerLimit(1)
   const loader = new GLTFLoader().setDRACOLoader(decoder)
   const requests = new Set<AbortController>()
   let disposed = false
@@ -13,6 +15,7 @@ export function createPortfolioModelLoader(base = import.meta.env.BASE_URL) {
   return {
     async load(url: string, signal?: AbortSignal): Promise<GLTF> {
       if (disposed || signal?.aborted) throw aborted()
+      requireGLBPath(url)
       const request = new AbortController()
       const cancel = () => request.abort()
       signal?.addEventListener('abort', cancel, { once: true })
@@ -23,6 +26,7 @@ export function createPortfolioModelLoader(base = import.meta.env.BASE_URL) {
         if (!response.ok) throw new Error(`Model response: ${response.status}`)
         const bytes = await response.arrayBuffer()
         if (disposed || request.signal.aborted) throw aborted()
+        requireGLBBytes(bytes)
         const model = await loader.parseAsync(bytes, url.slice(0, url.lastIndexOf('/') + 1))
         if (disposed || request.signal.aborted) { disposeModel(model.scene); throw aborted() }
         return model

@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { projectReaderSection } from '../src/personal/projects/project-reading-position.ts'
+import { projectReaderSection, requestedProjectChapter, projectChapterHref } from '../src/personal/projects/project-reading-position.ts'
 
 const chapters = [
   { id: 'question', top: 900 },
@@ -27,4 +27,19 @@ test('backward navigation and measured reflow replace stale chapter state', () =
   const moved = chapters.map((c) => ({ ...c, top: c.top + 200 }))
   assert.equal(projectReaderSection(moved, 2210, 900, 66, 'question'), 'system')
   assert.equal(projectReaderSection([], 2210, 900, 66, 'question'), 'question')
+})
+
+test('public path bookmarks and hash bookmarks reach the same project chapter', () => {
+  assert.equal(requestedProjectChapter('', '/work/sapien', '?chapter=system', 'sapien'), 'system')
+  assert.equal(requestedProjectChapter('', '/work/sapien/', '?chapter=practice', 'sapien'), 'practice')
+  assert.equal(requestedProjectChapter('#/work/sapien?chapter=question', '/work/atlas', '?chapter=system', 'sapien'), 'question')
+  assert.equal(requestedProjectChapter('#/work/atlas?chapter=system', '/work/sapien', '?chapter=question', 'sapien'), null)
+  assert.equal(requestedProjectChapter('', '/work/sapien-elsewhere', '?chapter=system', 'sapien'), null)
+  assert.equal(requestedProjectChapter('#main-content', '/work/sapien', '?chapter=system', 'sapien'), null)
+})
+
+test('chapter selection retains bookmark context without borrowing another project’s query', () => {
+  assert.equal(projectChapterHref('#/work/sapien?from=resume&chapter=question', '/', '', 'sapien', 'system'), '#/work/sapien?from=resume&chapter=system')
+  assert.equal(projectChapterHref('', '/work/sapien', '?from=resume&chapter=question', 'sapien', 'system'), '/work/sapien?from=resume&chapter=system')
+  assert.equal(projectChapterHref('#/work/atlas?from=resume', '/work/sapien', '?from=other', 'sapien', 'practice'), '#/work/sapien?chapter=practice')
 })

@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { Chess, computerMove, gameCaption } from '../src/personal/about/chess-game.ts'
+import { Chess, gameCaption } from '../src/personal/about/chess-game.ts'
 
 test('full game enforces check, castling, en passant and all four promotions', () => {
   const pinned = new Chess('4r1k1/8/8/8/8/8/4R3/4K3 w - - 0 1')
@@ -18,9 +18,10 @@ test('game status distinguishes mate and stalemate; undo restores a played move'
   assert.equal(gameCaption(game), 'Checkmate. Black wins.')
   assert.equal(gameCaption(new Chess('7k/5Q2/6K1/8/8/8/8/8 b - - 0 1')), 'Stalemate. A draw.')
 })
-test('the bounded local opponent returns a legal move without changing its input', () => {
-  const game = new Chess(); game.move('e4'); const fen = game.fen()
-  const move = computerMove(fen,2,600)
-  assert.ok(move); assert.doesNotThrow(()=>new Chess(fen).move(move!)); assert.equal(game.fen(),fen)
-  assert.equal(computerMove('7k/5Q2/6K1/8/8/8/8/8 b - - 0 1'),null)
+test('full game preserves repetition history and exports it after taking back a move', () => {
+  const game = new Chess()
+  for (const move of ['Nf3','Nf6','Ng1','Ng8','Nf3','Nf6','Ng1','Ng8']) game.move(move)
+  assert.equal(gameCaption(game), 'Draw by repetition.')
+  game.undo(); assert.equal(game.isThreefoldRepetition(), false)
+  assert.match(game.pgn(), /1\. Nf3 Nf6 2\. Ng1 Ng8/)
 })

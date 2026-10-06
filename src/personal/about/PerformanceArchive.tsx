@@ -19,7 +19,10 @@ function RepertoirePreview({ works }: { works: string[] }) {
 export default function PerformanceArchive({ entries }: { entries: PerformanceEntry[] }) {
   const archiveId = useId()
   const [filter, setFilter] = useState<PerformanceFilter>('all')
-  const [openIds, setOpenIds] = useState<ReadonlySet<string>>(() => new Set())
+  const [openIds, setOpenIds] = useState<ReadonlySet<string>>(() => {
+    const latest = archiveEntries(entries, 'all')[0]
+    return new Set(latest ? [latest.id] : [])
+  })
   const visible = useMemo(() => archiveEntries(entries, filter), [entries, filter])
   const years = useMemo(() => [...new Set(visible.map(entry => entry.date.slice(0, 4)))], [visible])
 
@@ -62,14 +65,25 @@ export default function PerformanceArchive({ entries }: { entries: PerformanceEn
                       aria-label={`${expanded ? 'Close' : 'Open'} ${entry.title} program, ${entry.displayDate}`}
                       onClick={() => setOpenIds(previous => toggleProgram(previous, entry.id))}>
                       <span className="performance-program-title" id={titleId}>{entry.title}</span>
-                      <span className="performance-program-sign" aria-hidden="true"><i /><i /></span>
+                      <span className="performance-program-disclosure" aria-hidden="true">
+                        <span>{expanded ? 'Close' : 'Program'}</span>
+                        <span className="performance-program-sign"><i /><i /></span>
+                      </span>
                     </button>
                   </h4>
                   <p className="performance-program-ensemble">{entry.ensemble}</p>
                   {!expanded && <RepertoirePreview works={entry.repertoire} />}
-                  {!expanded && entry.links.some(link => link.kind === 'recording') && <p className="performance-recording-cue">Recording release <span aria-hidden="true">↘</span></p>}
                 </div>
               </div>
+
+              {entry.links.some(link => link.kind === 'recording') && <nav className="performance-program-recordings"
+                aria-label={`Recordings of ${entry.title}, ${entry.displayDate}`}>
+                {entry.links.filter(link => link.kind === 'recording').map(link => <a key={link.href}
+                  href={link.href} target="_blank" rel="noreferrer">
+                  <span>{link.label}</span><span className="performance-source-arrow" aria-hidden="true">↗</span>
+                  <span className="performance-visually-hidden"> (opens in a new tab)</span>
+                </a>)}
+              </nav>}
 
               <div className="performance-program-panel" id={panelId} role="region" aria-labelledby={titleId} hidden={!expanded}>
                 <div className="performance-program-sheet">
@@ -88,7 +102,7 @@ export default function PerformanceArchive({ entries }: { entries: PerformanceEn
                     })}
                   </ol>}
                   <nav className="performance-program-sources" aria-label={`Sources for ${entry.title}, ${entry.displayDate}`}>
-                    {entry.links.map(link => <a key={link.href} href={link.href} target="_blank" rel="noreferrer" data-kind={link.kind}>
+                    {entry.links.filter(link => link.kind !== 'recording').map(link => <a key={link.href} href={link.href} target="_blank" rel="noreferrer" data-kind={link.kind}>
                       <span>{link.label}</span><span className="performance-source-arrow" aria-hidden="true">↗</span>
                       <span className="performance-visually-hidden"> (opens in a new tab)</span>
                     </a>)}

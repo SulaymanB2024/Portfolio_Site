@@ -8,7 +8,19 @@
 .writing-story[data-layout='feature'] h2 { max-width: 23ch; }
 .writing-empty p { max-width: 52ch; overflow-wrap: anywhere; text-wrap: pretty; }
 .writing-empty button { min-height: 44px; cursor: pointer; }
+.writing-page .writing-header { grid-template-columns: minmax(0, 1fr); gap: 28px; margin-bottom: 28px; }
+.writing-page .writing-introduction { max-width: 54ch; font-size: clamp(18px, 2vw, 22px); }
+.writing-tools { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.writing-discovery { min-width: 0; width: min(100%, 390px); }
+.writing-discovery > summary { display: inline-flex; align-items: center; gap: 30px; min-height: 44px; cursor: pointer; font: 12px/1.5 var(--editorial-mono); list-style: none; }
+.writing-discovery > summary::-webkit-details-marker { display: none; }
+.writing-discovery > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.writing-discovery .writing-toolbar { padding: 12px 0 0; }
+.writing-story-topic { font-size: 12px; }
 @media (max-width: 680px) {
+  .writing-tools { gap: 18px; }
+  .writing-discovery { flex: 1; }
+  .writing-tools > .artwork-motion-control { flex: none; }
   .writing-page .writing-search input { font-size: 16px; }
   .writing-story, .writing-story[data-layout='feature'] { gap: 20px; }
   .writing-story .writing-deck, .writing-story[data-layout='feature'] .writing-deck { order: 1; }

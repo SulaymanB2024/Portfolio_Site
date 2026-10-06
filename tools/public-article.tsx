@@ -1,6 +1,14 @@
 import { markdownToReact, inlineText } from '../src/personal/editorial/Markdown'
 import { displayDate, type ArticleTable, type ArticleSection, type WritingArticle } from '../src/personal/editorial/types'
 import { AuthorNote } from '../src/personal/PersonalProfile'
+import ResearchFigure from '../src/personal/editorial/ResearchFigure'
+import RestoredArticleBody from '../src/personal/editorial/RestoredArticleBody'
+import { articleDownloads, sourceAnchor } from '../src/personal/editorial/article-content'
+import ArticleOpening, { ArticleMetrics, OpeningNotes } from '../src/personal/editorial/ArticleOpening'
+import { relatedArticles } from '../src/personal/editorial/library'
+import catalog from '../src/personal/editorial/data/catalog.json'
+import { siteCopy } from '../src/personal/site-copy'
+import ArticleStudyFigure from '../src/personal/editorial/ArticleStudyFigure'
 
 const paragraphs = (values: string[] = []) => values.map((value, index) => <p key={index}>{inlineText(value)}</p>)
 
@@ -15,7 +23,7 @@ function Table({ table }: { table: ArticleTable }) {
   </figure>
 }
 
-function Section({ section, tables = [] }: { section: ArticleSection; tables?: ArticleTable[] }) {
+function Section({ section, tables = [], article }: { section: ArticleSection; tables?: ArticleTable[]; article?: WritingArticle }) {
   return <section id={section.id}>
     <h2>{section.title}</h2>
     {section.markdown && markdownToReact(section.markdown)}
@@ -27,10 +35,14 @@ function Section({ section, tables = [] }: { section: ArticleSection; tables?: A
     })}
     {paragraphs(section.paragraphs)}
     {section.bullets && <ul>{section.bullets.map((bullet, index) => <li key={index}>{inlineText(bullet)}</li>)}</ul>}
+    {article?.metricSection === section.id && <ArticleMetrics article={article} />}
+    {article && <ArticleStudyFigure article={article} section={section} />}
+    {section.figuresPosition === 'before-table' && section.figures?.map(figure => <ResearchFigure key={figure.src} figure={figure} />)}
     {section.table && <Table table={section.table} />}
-    {section.codeExamples?.map(example => <div key={example.title}>
-      <h3>{example.title}</h3><p>{example.description}</p><pre><code className={`language-${example.language}`}>{example.code}</code></pre>
-    </div>)}
+    {section.figuresPosition !== 'before-table' && section.figures?.map(figure => <ResearchFigure key={figure.src} figure={figure} />)}
+    {section.codeExamples?.map(example => <figure className="reader-code" key={example.title}>
+      <figcaption>{example.title}</figcaption><p>{inlineText(example.description)}</p><pre><code className={`language-${example.language}`}>{example.code}</code></pre>
+    </figure>)}
   </section>
 }
 
@@ -38,23 +50,18 @@ function Section({ section, tables = [] }: { section: ArticleSection; tables?: A
 // This document is delivered identically to visitors and crawlers.
 export function PublicArticle({ article }: { article: WritingArticle }) {
   const markdown = article.markdown && !article.markdownSections ? article.markdown.replace(/^# .+\n+/, '') : undefined
-  const boundary = article.pageContent?.boundary?.text || article.evidenceBoundary
   const image = article.pageContent?.hero?.image
-  const downloads = [...(article.supportingAssets || []), ...(article.researchAssets || []).flatMap(asset => asset.supportingAssets || [])]
-    .filter((asset, index, items) => items.findIndex(item => item.href === asset.href) === index)
+  const downloads = articleDownloads(article)
   return <>
     <p><a href="/about" rel="author">Sulayman Bowles</a> · <time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time>
       {article.dateModified && article.dateModified !== article.date && <> · Updated <time dateTime={article.dateModified.replaceAll('.', '-')}>{displayDate(article.dateModified)}</time></>}
     </p>
-    {boundary && <p>{inlineText(boundary)}</p>}
     {image && <figure><img src={image.src} alt={image.alt} loading="lazy" />{image.caption && <figcaption>{image.caption}</figcaption>}</figure>}
-    {article.pageContent?.callouts?.map(callout => <aside key={callout.title}><h2>{callout.title}</h2>{markdownToReact(callout.markdown)}</aside>)}
-    {article.pageContent?.metrics?.length ? <dl>{article.pageContent.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd><dd>{metric.note}</dd></div>)}</dl> : null}
-    {markdown ? markdownToReact(markdown) : <>
-      {article.ledeMarkdown || article.lede ? markdownToReact(article.ledeMarkdown || article.lede || '') : paragraphs(article.content)}
-      {article.thesis && <p>{inlineText(article.thesis)}</p>}
-      {[...(article.sections || []), ...(article.markdownSections || [])].map(section => <Section key={section.id} section={section} tables={article.tables} />)}
+    {article.htmlBody ? <><OpeningNotes article={article} boundary /><RestoredArticleBody html={article.htmlBody} /></> : markdown ? <>{markdownToReact(markdown)}<OpeningNotes article={article} boundary /></> : <>
+      <ArticleOpening article={article} />
+      {[...(article.sections || []), ...(article.markdownSections || [])].map(section => <Section key={section.id} section={section} tables={article.tables} article={article} />)}
     </>}
+    {article.conclusion && <Section section={{ id: 'conclusion', title: article.conclusion.title, paragraphs: [article.conclusion.content] }} />}
     {article.cases && <section id="case-inventory"><h2>Case inventory</h2>{article.cases.map(item => <details key={item.name}><summary>{item.name} — {item.grade}</summary><dl>{Object.entries(item).filter(([key]) => !['name', 'href'].includes(key)).map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{String(value)}</dd></div>)}</dl><a href={item.href}>Source</a></details>)}</section>}
     {article.factGaps && <section id="fact-gaps"><h2>What remains unknown</h2>{article.factGaps.map(gap => <div key={gap.title}><h3>{gap.title}</h3><ul>{gap.items.map(item => <li key={item}>{inlineText(item)}</li>)}</ul></div>)}</section>}
     {article.openQuestions && <section id="open-questions"><h2>Open questions</h2><ul>{article.openQuestions.map(question => <li key={question}>{inlineText(question)}</li>)}</ul></section>}
@@ -64,13 +71,18 @@ export function PublicArticle({ article }: { article: WritingArticle }) {
     {article.recommendationBoundary && <p>{inlineText(article.recommendationBoundary)}</p>}
     {article.faqs && <section id="questions"><h2>Questions</h2>{article.faqs.map(faq => <details key={faq.question}><summary>{faq.question}</summary>{markdownToReact(faq.answer)}</details>)}</section>}
     {/* Markdown essays already include their own sources and footnote targets. */}
-    {article.sources?.length && !markdown ? <section id="sources"><h2>Sources</h2><ol>{article.sources.map((source, index) => <li key={index} id={`source-${source.id?.toLowerCase() || index + 1}`}>
+    {article.sources?.length && !article.htmlBody && !markdown ? <section id="sources"><h2>Sources</h2><ol>{article.sources.map((source, index) => <li key={index} id={sourceAnchor(source, index)}>
+      {!source.id && <span id={`source-${index + 1}`} />}
       {source.markdown ? markdownToReact(source.markdown) : (source.href ? [source.href] : source.hrefs || []).map((href, hrefIndex) => <a key={href} href={href}>{hrefIndex ? `Additional source ${hrefIndex + 1}` : source.label}</a>)}
       {(source.publisher || source.date || source.type) && <p>{[source.publisher, source.date, source.type].filter(Boolean).join(' · ')}</p>}
+      {source.lastVerified && <p>Verified {displayDate(source.lastVerified)}</p>}
       {source.note && <p>{inlineText(source.note)}</p>}{source.limitation && <p>{inlineText(source.limitation)}</p>}
     </li>)}</ol></section> : null}
-    {downloads.length > 0 && <section id="reader-downloads"><h2>Supporting material</h2><ul>{downloads.map(asset => <li key={asset.href}><a href={asset.href}>{asset.label}</a></li>)}</ul></section>}
+    {downloads.length > 0 && !article.htmlBody && <section id="reader-downloads"><h2>Supporting material</h2><ul>{downloads.map(asset => <li key={asset.href}><a href={asset.href}>{asset.label}</a>{'description' in asset && asset.description && <p>{asset.description}</p>}</li>)}</ul></section>}
     {article.pageContent?.endnotes?.map((note, index) => <footer key={index}>{markdownToReact(note.markdown)}<nav aria-label="Related reading">{note.links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav></footer>)}
     <AuthorNote />
+    <section><h2>{siteCopy.reader.more}</h2><nav aria-label="More articles">
+      {relatedArticles(article, catalog).map(item => <div key={item.slug}><a href={item.path}>{item.displayTitle || item.title}</a><p>{item.subtitle}</p></div>)}
+    </nav></section>
   </>
 }

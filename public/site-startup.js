@@ -12,6 +12,7 @@
   const appSelector = ':scope > .personal-site, :scope > .art-export'
   let observer
   let fallback
+  // A slow boot gets a quiet status, never a differently styled document.
   const reveal = setTimeout(() => {
     if (page.dataset.siteBoot === 'pending') page.dataset.siteBoot = 'waiting'
   }, 1000)

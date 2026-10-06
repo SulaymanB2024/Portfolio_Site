@@ -39,6 +39,28 @@ test('pause freezes grain phase and theme changes retain palette uniform ownersh
   effect.dispose(); still.dispose()
 })
 
+test('direct sampling is limited to exact one-to-one cells and follows resize', () => {
+  const effect = new LiveDitherEffect()
+  const target = new WebGLRenderTarget(390, 844)
+  effect.setView(390, 844)
+  effect.update({} as WebGLRenderer, target)
+  assert.equal(effect.uniforms.get('printDirectSample')!.value, true)
+  target.setSize(780, 1688)
+  effect.update({} as WebGLRenderer, target)
+  assert.equal(effect.uniforms.get('printDirectSample')!.value, false)
+  target.setSize(312, 675)
+  effect.update({} as WebGLRenderer, target)
+  assert.equal(effect.uniforms.get('printDirectSample')!.value, false)
+  target.setSize(390, 844)
+  effect.update({} as WebGLRenderer, target)
+  assert.equal(effect.uniforms.get('printDirectSample')!.value, true)
+  const coarse = new LiveDitherEffect({ gridSize: 2 })
+  coarse.setView(390, 844)
+  coarse.update({} as WebGLRenderer, target)
+  assert.equal(coarse.uniforms.get('printDirectSample')!.value, false)
+  effect.dispose(); coarse.dispose(); target.dispose()
+})
+
 test('flow coverage retains CSS density when backing resolution changes', () => {
   const flow = new WaterFlowEffect()
   flow.setResolution(390, 844)

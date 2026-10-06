@@ -1,43 +1,25 @@
-import { useRef, type MouseEvent, type ReactNode } from 'react'
+import { useRef, type MouseEvent } from 'react'
 import { projects, type Project } from '../content'
 import { ProjectStudy } from '../WorkCollection'
-import { NarrativePractice, NarrativeSystem } from './NarrativeEvidence'
+import { NarrativeSystem } from './NarrativeEvidence'
+import { WorkMaterials, WorkSources } from './WorkMaterials'
 import { WorkPlate } from './WorkPlate'
 import { workNarratives } from './work-narratives'
 import { useProjectReading } from './useProjectReading'
+import { projectChapterHref } from './project-reading-position'
 import { ProjectEndnav } from './ProjectEndnav'
+import { InternshipProductPath, ProjectContribution } from './ProjectContribution'
+import { curatedNextProject } from './work-curation'
+import { DestinationLink } from '../DestinationLink'
 import './project-narrative.css'
-
-function StoryLink({ href, children, className = '' }: { href: string; children: ReactNode; className?: string }) {
-  const external = href.startsWith('http')
-  return (
-    <a
-      className={`arrow-link ${className}`}
-      href={href.startsWith('./') ? `${import.meta.env.BASE_URL}${href.slice(2)}` : href}
-      {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}>
-      {children}
-      <span aria-hidden="true">{external ? '↗' : '→'}</span>
-    </a>
-  )
-}
 
 export default function ProjectNarrativePage({ project: p, dark }: { project: Project; dark: boolean }) {
   const narrative = workNarratives[p.slug]
-  const chapterLabels: Record<string, string[]> = {
-    internshipdeadlines: ['The question', 'The workflow', 'The plan'],
-    sapien: ['Buyer questions', 'Research', 'Communication'],
-    'investing-markets': ['Ownership', 'Cash flow', 'Assumptions'],
-    miscellaneous: ['The idea', 'Ink & paper', 'Iteration']
-  }
-  const sectionTitles: Record<string, string[]> = {
-    internshipdeadlines: ['From finding a role to applying for it.', 'A record you can trace.', 'A shortlist with a next step.'],
-    sapien: ['Start with a buyer’s question.', 'How the comparison works.', 'From research to published work.'],
-    'investing-markets': ['Separate the road from the rights.', 'Who gets paid first.', 'The research in full.'],
-    miscellaneous: ['Form, light, and movement.', 'A working material study.', 'Refining the construction.']
-  }
-  const next = projects[(projects.indexOf(p) + 1) % projects.length]
+  const next = curatedNextProject(p.slug) ?? projects[(projects.indexOf(p) + 1) % projects.length]
   const root = useRef<HTMLElement>(null)
   const [active, setActive] = useProjectReading(root, p.slug, '[data-story-chapter]', 'question')
+  const chapterHref = (id: string) =>
+    typeof window === 'undefined' ? `#/work/${p.slug}?chapter=${id}` : projectChapterHref(location.hash, location.pathname, location.search, p.slug, id)
   function jump(event: MouseEvent<HTMLAnchorElement>, id: string) {
     if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
     event.preventDefault()
@@ -45,15 +27,11 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
     section?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' })
     section?.focus({ preventScroll: true })
     setActive(id)
-    const address = new URL(location.href)
-    address.hash = `/work/${p.slug}?chapter=${id}`
-    history.replaceState(history.state, '', address)
+    history.replaceState(history.state, '', projectChapterHref(location.hash, location.pathname, location.search, p.slug, id))
   }
   return (
     <article ref={root} className={`project-page project-narrative project-narrative-${p.slug}`}>
-      <a className="project-back mono" href="#/work">
-        ← All work
-      </a>
+      <DestinationLink className="project-back mono" href="#/work" direction="left">All work</DestinationLink>
       <section className="project-hero">
         <div className="project-copy">
           <span className="eyebrow">
@@ -73,11 +51,12 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
             )}
             <span className="period">.</span>
           </h1>
-          <p className="project-deck">{p.headline.join(' ')}</p>
-          <p className="project-summary">{p.summary}</p>
+          <p className="project-deck">{narrative.deck}</p>
+          <p className="project-summary">{narrative.summary}</p>
+          <ProjectContribution slug={p.slug} />
           <div className="project-links">
-            {p.link && <StoryLink href={p.link.href}>{p.link.label}</StoryLink>}
-            <a className="project-read mono" href={`#/work/${p.slug}?chapter=question`} onClick={(event) => jump(event, 'question')}>
+            {p.link && <DestinationLink className="arrow-link" href={p.link.href}>{p.link.label}</DestinationLink>}
+            <a className="project-read mono" href={chapterHref('question')} onClick={(event) => jump(event, 'question')}>
               Read the project<span aria-hidden="true">↓</span>
             </a>
           </div>
@@ -93,26 +72,12 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
           </span>
         </div>
       </section>
-      <dl className="project-context">
-        <div>
-          <dt>My role</dt>
-          <dd>{narrative.role}</dd>
-        </div>
-        <div>
-          <dt>Approach</dt>
-          <dd>{narrative.lens}</dd>
-        </div>
-      </dl>
+      {p.slug === 'internshipdeadlines' && <InternshipProductPath />}
       <nav className="story-index project-reading-bar" aria-label="In this project">
-        <span className="mono">Inside the work</span>
         {narrative.chapters.map((chapter, i) => (
-          <a
-            key={chapter.id}
-            href={`#/work/${p.slug}?chapter=${chapter.id}`}
-            aria-current={active === chapter.id ? 'location' : undefined}
-            onClick={(event) => jump(event, chapter.id)}>
-            <span aria-hidden="true">0{i + 1}</span>
-            {chapterLabels[p.slug][i]}
+          <a key={chapter.id} href={chapterHref(chapter.id)} aria-current={active === chapter.id ? 'location' : undefined} onClick={(event) => jump(event, chapter.id)}>
+            <span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            {chapter.label}
           </a>
         ))}
       </nav>
@@ -125,68 +90,30 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
           tabIndex={-1}
           aria-labelledby={`${p.slug}-${chapter.id}-title`}>
           <div className="story-chapter-label mono">
-            <span>{chapter.kicker}</span>
-            <span aria-hidden="true">0{index + 1} / 03</span>
+            <span>{chapter.label}</span>
+            <span aria-hidden="true">
+              {String(index + 1).padStart(2, '0')} / {String(narrative.chapters.length).padStart(2, '0')}
+            </span>
           </div>
-          {index === 0 ? (
-            <div className="story-opening-layout">
-              <h2 id={`${p.slug}-${chapter.id}-title`}>{sectionTitles[p.slug][index]}</h2>
-              <div className="story-prose">
-                {chapter.body.map((text) => (
-                  <p key={text}>{text}</p>
-                ))}
-              </div>
+          <div className="story-opening-layout">
+            <h2 id={`${p.slug}-${chapter.id}-title`}>{chapter.title}</h2>
+            <div className="story-prose">
+              {(chapter.artifact ? chapter.body.slice(0, 1) : chapter.body).map((text) => (
+                <p key={text}>{text}</p>
+              ))}
             </div>
-          ) : index === 1 ? (
-            <>
-              <div className="story-system-layout">
-                <div className="story-system-heading">
-                  <h2 id={`${p.slug}-${chapter.id}-title`}>{sectionTitles[p.slug][index]}</h2>
-                </div>
-                <div className="story-prose">
-                  {(p.slug === 'miscellaneous' ? chapter.body : chapter.body.slice(0, 1)).map((text) => (
-                    <p key={text}>{text}</p>
-                  ))}
-                </div>
-              </div>
+          </div>
+          {chapter.artifact === 'system' && (
+            <div className="story-artifact">
               <NarrativeSystem slug={p.slug} />
-              {chapter.note && <p className="story-note">{chapter.note}</p>}
-            </>
-          ) : (
-            <>
-              <div className="story-practice-account">
-                <h2 id={`${p.slug}-${chapter.id}-title`}>{sectionTitles[p.slug][index]}</h2>
-                <div className="story-prose">
-                  {chapter.body.map((text) => (
-                    <p key={text}>{text}</p>
-                  ))}
-                </div>
-              </div>
-              <NarrativePractice slug={p.slug} />
-              {chapter.note && <p className="story-note">{chapter.note}</p>}
-            </>
+            </div>
           )}
+          {chapter.artifact && chapter.body.length > 1 && <div className="story-opening-layout story-prose-continuation"><div aria-hidden="true" /><div className="story-prose">{chapter.body.slice(1).map(text => <p key={text}>{text}</p>)}</div></div>}
+          <WorkMaterials chapter={chapter} base={import.meta.env.BASE_URL} />
         </section>
       ))}
-      <section className="story-conclusion" aria-label="References and further reading">
-        <span className="mono">Sources & further reading</span>
-        <div className="story-related">
-          {narrative.links.map((link, i) => (
-            <a
-              key={link.href}
-              href={link.href.startsWith('./') ? `${import.meta.env.BASE_URL}${link.href.slice(2)}` : link.href}
-              {...(link.href.startsWith('http') ? { target: '_blank', rel: 'noreferrer' } : {})}>
-              <span className="mono" aria-hidden="true">
-                0{i + 1}
-              </span>
-              <div>
-                <h3>{link.label}</h3>
-                <p>{link.description}</p>
-              </div>
-              <span aria-hidden="true">{link.href.startsWith('http') ? '↗' : '→'}</span>
-            </a>
-          ))}
-        </div>
+      <section className="story-conclusion" aria-label="Further work">
+        <WorkSources links={narrative.links} base={import.meta.env.BASE_URL} />
       </section>
       <ProjectEndnav next={next} />
     </article>

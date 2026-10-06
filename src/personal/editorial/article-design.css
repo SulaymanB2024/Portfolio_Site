@@ -55,7 +55,10 @@
 .article-page .article-table-wrap { margin: 28px 0 36px; }
 .article-page .article-table-wrap th { padding-top: 18px; font: 500 12px/1.6 var(--editorial-sans); color: var(--ink); }
 .article-page .article-table-wrap td { padding-top: 18px; padding-bottom: 18px; font: 14px/1.65 var(--editorial-sans); }
-.article-page .reader-prose pre { border: 0; border-left: 2px solid #818b78; background: var(--soft); padding: 24px; }
+.article-page .reader-prose pre { border: 0; border-block: 1px solid var(--line); background: transparent; padding: 20px 0; font: 13px/1.75 var(--editorial-mono); }
+.article-page .reader-code { margin: 32px 0; }
+.article-page .reader-code > figcaption { font: 500 13px/1.6 var(--editorial-sans); margin: 0 0 10px; }
+.article-page .reader-code > p { font: 13px/1.65 var(--editorial-sans); color: var(--muted); max-width: 68ch; margin-bottom: 16px; }
 .article-page .reader-disclosure summary { font: 500 19px/1.5 var(--editorial-sans); letter-spacing: -.015em; }
 .article-page .reader-disclosure summary .mono { font-size: 11px; letter-spacing: 0; }
 .article-page .reader-disclosure dt { font: 12px/1.7 var(--editorial-sans); }

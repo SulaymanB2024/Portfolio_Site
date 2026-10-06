@@ -24,7 +24,14 @@ const scene = new THREE.Scene()
 scene.add(new THREE.Mesh(geometry, material))
 const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, .1, 10)
 camera.position.z = 1
-const dither = new LiveDitherEffect({ gridSize: 1, binary: true, live: false })
+class ProbeDither extends LiveDitherEffect {
+  reference = false
+  override update(renderer: THREE.WebGLRenderer, buffer: THREE.WebGLRenderTarget) {
+    super.update(renderer, buffer)
+    if (this.reference) this.uniforms.get('printDirectSample')!.value = false
+  }
+}
+const dither = new ProbeDither({ gridSize: 1, binary: true, live: false })
 dither.setView(width, height)
 dither.setPalette(new THREE.Color('#ffffff'), new THREE.Color('#000000'))
 const composer = new EffectComposer(renderer, { multisampling: 0 })
@@ -39,6 +46,8 @@ function probe(ratio: number) {
   const gl = renderer.getContext()
   const coverage: number[] = []
   let transparent = 0, invalidAlpha = 0, transparentRGB = 0
+  let samplerMismatch = 0
+  const referencePixels = new Uint8Array(pixels.length)
   // Uniform fields measure tonal coverage on the same spatial grid. Small
   // adjacent strips otherwise compare different Bayer phases after resampling.
   for (let tone = 0; tone < 16; tone++) {
@@ -46,6 +55,11 @@ function probe(ratio: number) {
     texture.needsUpdate = true
     composer.render()
     gl.readPixels(0, 0, size.x, size.y, gl.RGBA, gl.UNSIGNED_BYTE, pixels)
+    dither.reference = true
+    composer.render()
+    gl.readPixels(0, 0, size.x, size.y, gl.RGBA, gl.UNSIGNED_BYTE, referencePixels)
+    for (let i = 0; i < pixels.length; i++) if (pixels[i] !== referencePixels[i]) samplerMismatch++
+    dither.reference = false
     let white = 0
     // Read corresponding CSS pixel centers to compare density across DPR changes.
     for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
@@ -65,16 +79,38 @@ function probe(ratio: number) {
     monotonic: coverage.every((value, i) => i === 0 || value >= coverage[i - 1]),
     black: coverage[0] === 0, white: coverage[15] === width * 28,
     transparent: transparent === width * 4 * 16, transparentRGB: transparentRGB === width * 4 * 16,
-    validAlpha: invalidAlpha === 0, glError: gl.getError(),
+    validAlpha: invalidAlpha === 0, samplerMismatch, glError: gl.getError(),
   }
 }
 const probes = [1, 2, .8].map(probe)
+// Nonuniform tones, live grain and partial coverage exercise the thin-rim path.
+function edgeProbe(ratio: number, time: number) {
+  renderer.setPixelRatio(ratio); renderer.setSize(width, height); composer.setSize(width, height)
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const i = (y * width + x) * 4, alpha = [0, .125, .5, 1][(x + y) % 4]
+    const tone = ((x * 7 + y * 13) % 97) / 288
+    data[i] = tone * alpha; data[i + 1] = tone * .7 * alpha; data[i + 2] = tone * .3 * alpha; data[i + 3] = alpha
+  }
+  texture.needsUpdate = true
+  dither.uniforms.get('printGrain')!.value = .025
+  dither.setTime(time, true)
+  const size = renderer.getDrawingBufferSize(new THREE.Vector2()), gl = renderer.getContext()
+  const actual = new Uint8Array(size.x * size.y * 4), reference = new Uint8Array(actual.length)
+  dither.reference = false; composer.render(); gl.readPixels(0, 0, size.x, size.y, gl.RGBA, gl.UNSIGNED_BYTE, actual)
+  dither.reference = true; composer.render(); gl.readPixels(0, 0, size.x, size.y, gl.RGBA, gl.UNSIGNED_BYTE, reference)
+  dither.reference = false
+  let mismatch = 0
+  for (let i = 0; i < actual.length; i++) if (actual[i] !== reference[i]) mismatch++
+  return { ratio, time, mismatch, glError: gl.getError() }
+}
+const edges = [1, 2, .8].flatMap(ratio => [0, 4, 18].map(time => edgeProbe(ratio, time)))
 const result = {
-  probes,
+  probes, edges,
   cssDensityStableAtDpr2: JSON.stringify(probes[0].coverage) === JSON.stringify(probes[1].coverage),
-  passed: probes.every(p => p.monotonic && p.black && p.white && p.transparent && p.transparentRGB && p.validAlpha && p.glError === 0),
+  passed: probes.every(p => p.monotonic && p.black && p.white && p.transparent && p.transparentRGB && p.validAlpha && p.samplerMismatch === 0 && p.glError === 0),
 }
 result.passed &&= result.cssDensityStableAtDpr2
+result.passed &&= edges.every(edge => edge.mismatch === 0 && edge.glError === 0)
 document.getElementById('result')!.textContent = JSON.stringify(result)
 document.body.dataset.passed = String(result.passed)
 composer.dispose(); geometry.dispose(); material.dispose(); texture.dispose(); renderer.dispose()

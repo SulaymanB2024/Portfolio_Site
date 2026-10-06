@@ -4,7 +4,33 @@ import { readFile, readdir, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
-import { assertTextureOnlyChange, definitions, readGLB, replaceBufferViews, root, sha256 } from '../tools/optimize-portfolio-assets.mjs'
+import sharp from 'sharp'
+import { assertAssetSet, assertTextureOnlyChange, definitions, readGLB, replaceBufferViews, root, sha256 } from '../tools/optimize-portfolio-assets.mjs'
+
+test('headrest delivery preserves carved geometry, texture resolution and exact non-color maps', async () => {
+  const definition = definitions.find(definition => definition.id === 'headrest')!
+  const source = await readFile(resolve(root, definition.source))
+  const output = await readFile(resolve(root, definition.path))
+  assertTextureOnlyChange(source, output)
+  const original = readGLB(source), shipped = readGLB(output)
+  const image = (parsed: ReturnType<typeof readGLB>, index: number) => {
+    const view = parsed.json.bufferViews[parsed.json.images[index].bufferView]
+    return parsed.binary.subarray(view.byteOffset ?? 0, (view.byteOffset ?? 0) + view.byteLength)
+  }
+  const material = shipped.json.materials[0]
+  const textureImage = (index: number) => shipped.json.textures[index].extensions?.EXT_texture_webp?.source ?? shipped.json.textures[index].source
+  for (const index of [material.normalTexture.index, material.pbrMetallicRoughness.metallicRoughnessTexture.index]) {
+    const imageIndex = textureImage(index)
+    const expected = await sharp(image(original, imageIndex)).resize({ width: 1024, height: 1024, fit: 'inside', withoutEnlargement: true }).ensureAlpha().raw().toBuffer()
+    const actual = await sharp(image(shipped, imageIndex)).ensureAlpha().raw().toBuffer()
+    assert.deepEqual(actual, expected, 'Compressed delivery changed a shading map')
+  }
+  for (let index = 0; index < shipped.json.images.length; index++) {
+    const metadata = await sharp(image(shipped, index)).metadata()
+    assert.equal(metadata.width, 1024)
+    assert.equal(metadata.height, 1024)
+  }
+})
 
 function fixture() {
   const json = Buffer.from(JSON.stringify({
@@ -80,7 +106,9 @@ test('verify-only validates shipped models without changing sources, assets, man
   assert.match(stdout, /verified about-score:/)
   const manifest = JSON.parse(await readFile(resolve(root, 'public/portfolio-models/manifest.json'), 'utf8'))
   assert.deepEqual(await snapshot(), before)
-  assert.equal(Object.keys(manifest.assets).length, 11)
+  assert.equal(Object.keys(manifest.assets).length, definitions.length)
+  assert.ok(manifest.assets['about-chess-pieces'].bytes < 100_000)
+  assert.ok(manifest.assets['resume-work-areas'].bytes < 100_000)
   assert.ok(manifest.assets.helmet.bytes < 1_900_000)
   assert.equal(manifest.assets.helmet.stats.textureBytesRGBA, 2048 * 2048 * 4)
   assert.ok(manifest.assets.headrest.bytes < 3_500_000)
@@ -88,11 +116,50 @@ test('verify-only validates shipped models without changing sources, assets, man
   assert.equal(manifest.assets.globe.path, 'public/models/wireframe-globe-balanced.glb')
   for (const [id, entry] of Object.entries(manifest.assets) as [string, any][]) {
     assert.match(entry.url, new RegExp(`\\?v=${entry.sha256.slice(0, 12)}$`))
-    if (id.startsWith('work-') || id.startsWith('about-')) assert.ok(entry.bytes < entry.source.bytes, `${id}: compression must reduce transfer bytes`)
+    if (entry.strategy === 'draco-only') assert.ok(entry.bytes < entry.source.bytes, `${id}: compression must reduce transfer bytes`)
     assert.deepEqual(entry.validation, { compressed: { errors: 0, warnings: 0 }, decoded: { errors: 0, warnings: 0 } })
     assert.equal(entry.preservation.attributionAndAllExtras, true)
     if (entry.strategy !== 'existing-balanced') {
       assert.deepEqual(readGLB(await readFile(resolve(root, entry.path))).json.asset, readGLB(await readFile(resolve(root, entry.source.path))).json.asset)
     }
   }
+})
+
+test('a selected authored refresh preserves every unselected model and registry entry', async () => {
+  const before = await snapshot()
+  const beforeManifest = JSON.parse(await readFile(resolve(root, 'public/portfolio-models/manifest.json'), 'utf8'))
+  const { stdout } = await promisify(execFile)(process.execPath, ['tools/optimize-portfolio-assets.mjs', '--refresh-authored', '--only=about-score'], { cwd: root, timeout: 300_000 })
+  assert.match(stdout, /prepared about-score:/)
+  const after = await snapshot()
+  const afterManifest = JSON.parse(await readFile(resolve(root, 'public/portfolio-models/manifest.json'), 'utf8'))
+  assert.deepEqual(afterManifest, beforeManifest, 'A current selected source should need no registry changes')
+  for (const definition of definitions) {
+    assert.deepEqual(after[definition.source], before[definition.source], `${definition.id}: authored source changed`)
+    assert.deepEqual(after[definition.path], before[definition.path], `${definition.id}: current derivative was rewritten`)
+    if (definition.id !== 'about-score') assert.deepEqual(afterManifest.assets[definition.id], beforeManifest.assets[definition.id], `${definition.id}: unrelated registry entry changed`)
+  }
+})
+
+test('a selected authored refresh rejects imported scans before writing files', async () => {
+  const before = await snapshot()
+  await assert.rejects(
+    promisify(execFile)(process.execPath, ['tools/optimize-portfolio-assets.mjs', '--refresh-authored', '--only=helmet'], { cwd: root, timeout: 300_000 }),
+    /selected authored refresh requires an original validated specimen/,
+  )
+  assert.deepEqual(await snapshot(), before)
+})
+
+test('only an authored refresh may add chess and résumé templates; other registry drift fails', () => {
+  const current = { assets: Object.fromEntries(definitions.map(({ id }) => [id, {}])) }
+  const previous = structuredClone(current)
+  delete previous.assets['about-chess-pieces']
+  assert.throws(() => assertAssetSet(previous, false), /asset set changed/)
+  assert.doesNotThrow(() => assertAssetSet(previous, true))
+  delete previous.assets['resume-work-areas']
+  assert.throws(() => assertAssetSet(previous, false), /asset set changed/)
+  assert.doesNotThrow(() => assertAssetSet(previous, true))
+  delete previous.assets['work-sapien']
+  assert.throws(() => assertAssetSet(previous, true), /Unexpected authored asset addition/)
+  current.assets.unknown = {}
+  assert.throws(() => assertAssetSet(current, true), /unknown assets/)
 })

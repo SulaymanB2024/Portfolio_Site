@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { TAU, Y, vec, group, shaftAxis, put, tube, rod, jewel, bevelBox, gear, bevelTriangle, machinedRing, channelRing, bolt, finishBevel } from './geometry.mjs'
+import { TAU, Y, vec, group, shaftAxis, put, tube, rod, box, jewel, bevelBox, gear, bevelTriangle, bevelFrame, machinedRing, channelRing, bolt, finishBevel } from './geometry.mjs'
 
 function headPoint(theta, phi) {
   const y = Math.sin(phi) * .83 + .06
@@ -263,75 +263,265 @@ function piercedFold(part,a,b,c,depth=.034) {
   return normal
 }
 
+/** Involute teeth share a module and 20-degree pressure angle throughout the train. */
+function involuteWheel(part, teeth, module, depth, center, rotation, phase, spokes = 4) {
+  const pitch = teeth * module / 2, base = pitch * Math.cos(Math.PI/9)
+  const root = pitch - module * 1.25, tip = pitch + module
+  const involute = r => { const t = Math.sqrt(Math.max(0,(r/base)**2-1)); return t-Math.atan(t) }
+  // Tangential backlash and a small edge break leave running clearance at mesh.
+  const half = Math.PI/(2*teeth) - .00065/pitch
+  const atRadius = r => half + involute(pitch) - involute(Math.max(base,r))
+  const profile = [], polar = (r,a) => new THREE.Vector2(r*Math.cos(a),r*Math.sin(a))
+  for (let tooth=0; tooth<teeth; tooth++) {
+    const a=phase+tooth/teeth*TAU, step=TAU/teeth, low=Math.max(base,root)
+    profile.push(polar(root,a-step*.5),polar(root,a-atRadius(low)))
+    if (root<base) profile.push(polar(base,a-atRadius(base)))
+    for (let i=1; i<=5; i++) { const r=low+(tip-low)*i/5; profile.push(polar(r,a-atRadius(r))) }
+    for (let i=1; i<=3; i++) profile.push(polar(tip,a-atRadius(tip)+2*atRadius(tip)*i/3))
+    for (let i=4; i>=0; i--) { const r=low+(tip-low)*i/5; profile.push(polar(r,a+atRadius(r))) }
+    if (root<base) profile.push(polar(root,a+atRadius(base)))
+  }
+  const shape=new THREE.Shape(profile), opening=root*.62
+  const hole=new THREE.Path();hole.absarc(0,0,opening,0,TAU,true);shape.holes.push(hole)
+  const g=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSize:.0007,bevelThickness:.0012,bevelSegments:1,curveSegments:16,steps:1})
+  g.translate(0,0,-depth/2);put(part,finishBevel(g),center,rotation)
+  const q=new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation))
+  const hub=Math.max(.049,pitch*.21),bore=.0252
+  for (let i=0; i<spokes; i++) {
+    // Broad curved roots flow from the hub into the wheel. The curved sides
+    // leave lens-shaped openings, rather than the same straight-spoke icon.
+    const spoke=new THREE.Shape()
+    spoke.moveTo(bore+.004,-pitch*.083)
+    spoke.bezierCurveTo(pitch*.29,-pitch*.097,pitch*.41,-pitch*.026,opening+.009,-pitch*.037)
+    spoke.lineTo(opening+.009,pitch*.037)
+    spoke.bezierCurveTo(pitch*.37,pitch*.047,pitch*.30,pitch*.116,bore+.004,pitch*.083)
+    spoke.closePath()
+    const strut=new THREE.ExtrudeGeometry(spoke,{depth:depth*.72,bevelEnabled:true,bevelSize:.003,bevelThickness:.0025,bevelSegments:3,curveSegments:7,steps:1})
+    strut.translate(0,0,-depth*.36)
+    const e=new THREE.Euler().setFromQuaternion(q.clone().multiply(new THREE.Quaternion().setFromAxisAngle(vec(0,0,1),phase+i/spokes*TAU)))
+    put(part,finishBevel(strut),center,[e.x,e.y,e.z])
+  }
+  channelRing(part,(hub+bore)/2,hub-bore,depth*1.14,0,TAU,center,rotation,24)
+  const front=center.clone().addScaledVector(shaftAxis(rotation),depth*.58)
+  machinedRing(part,bore+.010,.014,.014,0,TAU,front,rotation,24)
+}
+
+/** Subdivide the casting face before swelling it; the silhouette stays fitted. */
+function crownCasting(source, crown, limit = .062) {
+  const values=source.getAttribute('position'),index=source.index?.array
+  const positions=[]
+  const point=i=>vec(values.getX(i),values.getY(i),values.getZ(i))
+  function triangle(a,b,c,depth=0) {
+    const lengths=[a.distanceToSquared(b),b.distanceToSquared(c),c.distanceToSquared(a)]
+    const longest=lengths.indexOf(Math.max(...lengths))
+    if(lengths[longest]>limit*limit&&depth<8) {
+      if(longest===0){const m=a.clone().add(b).multiplyScalar(.5);triangle(a,m,c,depth+1);triangle(m,b,c,depth+1)}
+      else if(longest===1){const m=b.clone().add(c).multiplyScalar(.5);triangle(a,b,m,depth+1);triangle(a,m,c,depth+1)}
+      else {const m=c.clone().add(a).multiplyScalar(.5);triangle(a,b,m,depth+1);triangle(m,b,c,depth+1)}
+      return
+    }
+    for(const p of[a,b,c]){const rolled=p.clone();rolled.z+=Math.sign(rolled.z)*crown(rolled.x,rolled.y);positions.push(...rolled.toArray())}
+  }
+  for(let i=0;i<(index?.length??values.count);i+=3)triangle(...[0,1,2].map(j=>point(index?index[i+j]:i+j)))
+  source.dispose()
+  const surface=new THREE.BufferGeometry()
+  surface.setAttribute('position',new THREE.Float32BufferAttribute(positions,3))
+  surface.computeVertexNormals()
+  return finishBevel(surface)
+}
+
+/** Swelled cast shoulders with rolled ends and a deep, shaped service aperture. */
+function serviceShoulder(part, seams, center, rotation, mirror = 1) {
+  const shape = new THREE.Shape()
+  // The cheek descends all the way to the base. Its narrow waist and rolled
+  // arch carry a bearing, rather than ending in an unsupported decorative curl.
+  shape.moveTo(-.235,-.902)
+  shape.lineTo(-.066,-.902)
+  shape.quadraticCurveTo(-.045,-.866,-.083,-.802)
+  shape.bezierCurveTo(-.180,-.582,-.232,-.252,-.142,.051)
+  shape.bezierCurveTo(-.094,.220,.045,.273,.215,.252)
+  shape.quadraticCurveTo(.310,.238,.270,.329)
+  shape.bezierCurveTo(.114,.474,-.094,.445,-.220,.321)
+  shape.bezierCurveTo(-.390,.137,-.332,-.328,-.247,-.646)
+  shape.quadraticCurveTo(-.200,-.821,-.235,-.902)
+  const aperture = new THREE.Path()
+  aperture.moveTo(-.237,-.491)
+  aperture.bezierCurveTo(-.294,-.187,-.277,.162,-.155,.280)
+  aperture.bezierCurveTo(-.079,.356,.042,.376,.149,.322)
+  aperture.quadraticCurveTo(.185,.296,.111,.303)
+  aperture.bezierCurveTo(-.062,.327,-.185,.181,-.204,.023)
+  aperture.bezierCurveTo(-.236,-.174,-.196,-.381,-.181,-.511)
+  aperture.quadraticCurveTo(-.198,-.559,-.237,-.491)
+  shape.holes.push(aperture)
+  const blank=new THREE.ExtrudeGeometry(shape,{depth:.116,bevelEnabled:true,bevelSize:.013,bevelThickness:.010,bevelSegments:4,curveSegments:16,steps:1})
+  blank.translate(0,0,-.058)
+  const shell=crownCasting(blank,(x,y)=>.018*Math.exp(-(((x+.16)/.24)**2)-(((y+.05)/.64)**2)),.078)
+  shell.scale(mirror,1,1)
+  // Reflection reverses winding. Explicitly restore it before exporting.
+  if(mirror<0){const p=shell.getAttribute('position'),n=shell.getAttribute('normal');for(let i=0;i<p.count;i+=3)for(const attribute of[p,n]){const a=[attribute.getX(i+1),attribute.getY(i+1),attribute.getZ(i+1)];attribute.setXYZ(i+1,attribute.getX(i+2),attribute.getY(i+2),attribute.getZ(i+2));attribute.setXYZ(i+2,...a)}}
+  put(part,finishBevel(shell),center,rotation)
+  const q=new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation))
+  const at=(x,y,z)=>vec(x*mirror,y,z).applyQuaternion(q).add(center)
+  // One hairline incised border follows the shoulder; the main face stays calm.
+  tube(seams,[at(-.186,-.83,.067),at(-.265,-.38,.071),at(-.285,.055,.075),at(-.20,.28,.074),at(-.03,.39,.068),at(.19,.33,.062)],.0032,64,6)
+  // A rear return explains the depth of the casting when the assembly turns.
+  tube(part,[at(-.174,-.88,-.066),at(-.25,-.45,-.078),at(-.282,.04,-.078),at(-.18,.28,-.075),at(.035,.385,-.064),at(.19,.306,-.062)],.012,56,10)
+}
+
+function lowerCradle(part, seams, center, rotation) {
+  const shape=new THREE.Shape()
+  shape.moveTo(-.75,.07)
+  shape.bezierCurveTo(-.51,-.03,.44,-.065,.74,.045)
+  shape.quadraticCurveTo(.76,-.01,.65,-.105)
+  shape.bezierCurveTo(.34,-.27,-.43,-.28,-.70,-.10)
+  shape.quadraticCurveTo(-.78,-.035,-.75,.07)
+  for(const[x,w]of[[-.40,.24],[0,.31],[.39,.24]]){
+    const hole=new THREE.Path()
+    hole.absellipse(x,-.107,w/2,.037,0,TAU,true,0)
+    shape.holes.push(hole)
+  }
+  const blank=new THREE.ExtrudeGeometry(shape,{depth:.112,bevelEnabled:true,bevelSize:.013,bevelThickness:.012,bevelSegments:4,curveSegments:16,steps:2})
+  blank.translate(0,0,-.056)
+  const g=crownCasting(blank,(x,y)=>.024*Math.max(0,1-(x/.79)**2)*Math.exp(-(((y+.10)/.16)**2)))
+  put(part,g,center,rotation)
+  const q=new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation))
+  tube(seams,[vec(-.64,-.092,.073),vec(-.38,-.19,.076),vec(0,-.22,.074),vec(.38,-.19,.076),vec(.63,-.092,.073)].map(p=>p.applyQuaternion(q).add(center)),.0035,64,6)
+}
+
+/** A fitted upper crossmember joins the two service cheeks into one frame. */
+function upperServiceBridge(part, seams, fasteners, center, rotation) {
+  const shape = new THREE.Shape()
+  shape.moveTo(-.600,.770)
+  shape.bezierCurveTo(-.430,.835,-.240,.850,-.010,.850)
+  shape.bezierCurveTo(.230,.850,.400,.835,.580,.770)
+  shape.lineTo(.570,.690)
+  shape.bezierCurveTo(.280,.738,.090,.751,-.010,.751)
+  shape.bezierCurveTo(-.130,.751,-.330,.738,-.590,.690)
+  shape.closePath()
+  const window = new THREE.Path()
+  window.absellipse(-.010,.799,.230,.012,0,TAU,true,0)
+  shape.holes.push(window)
+  const crown = (x,y) => .010*Math.exp(-(((x+.01)/.46)**2)-(((y-.799)/.11)**2))
+  const blank = new THREE.ExtrudeGeometry(shape,{depth:.090,bevelEnabled:true,bevelSize:.007,bevelThickness:.010,bevelSegments:4,curveSegments:16,steps:1})
+  blank.translate(0,0,-.045)
+  put(part,crownCasting(blank,crown,.072),center,rotation)
+  const q = new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation))
+  const at = (x,y,z) => vec(x,y,z).applyQuaternion(q).add(center)
+  // A single shallow witness cut follows the curved face. The member stays
+  // behind the gear plane, and its two end screws seat in the existing cheeks.
+  const line = [[-.540,.785],[-.360,.820],[-.180,.832],[-.010,.835],[.160,.832],[.340,.820],[.520,.785]]
+  tube(seams,line.map(([x,y])=>at(x,y,.055+crown(x,y)+.0008)),.0022,64,6)
+  for (const x of [-.445,.425]) {
+    const y=.745,z=.055+crown(x,y)
+    machinedRing(seams,.0185,.0055,.005,0,TAU,at(x,y,z+.0015),rotation,32)
+    bolt(fasteners,seams,at(x,y,z+.007),.014,rotation)
+  }
+}
+
+function turnedBearing(part, position, rotation) {
+  // A broad mounting flange, a concave waist and a proud rounded oil shoulder.
+  // The bore continues through the casting and clears the rotating axle.
+  const profile=[[.027,-.039],[.060,-.039],[.066,-.032],[.066,-.021],
+    [.052,-.014],[.046,-.004],[.046,.011],[.052,.017],[.053,.026],
+    [.044,.036],[.032,.039],[.027,.039],[.027,-.039]]
+  const body=new THREE.LatheGeometry(profile.map(([r,y])=>new THREE.Vector2(r,y)),40)
+  body.rotateX(Math.PI/2)
+  put(part,body,position,rotation)
+}
+
 function unfinishedMechanism() {
-  const folds=group('Pierced folded porcelain sheets','porcelain')
-  const structure=group('Fold returns and machined structural chassis','steel')
-  const slots=group('Recessed fastener and index slots','ink')
-  const fasteners=group('Hinge knuckles and fitted fasteners','silver')
-  const peaks=[vec(0,1.04,0),vec(.95,.12,.30),vec(.35,-.93,-.32),vec(-.84,-.35,.48),vec(-.66,.48,-.44)]
-  const gearing=[]
-  for(let i=0;i<peaks.length;i++){
-    const a=peaks[i],b=peaks[(i+1)%peaks.length]
-    const crease=a.clone().add(b).multiplyScalar(.42);crease.z+=(i%2?-.37:.40)
-    const inner=a.clone().add(b).multiplyScalar(.16);inner.z+=(i%2?.18:-.12)
-    const normal=piercedFold(folds,a,crease,inner,.040)
-    piercedFold(structure,b,inner,crease,.032)
-    // Two folded returns sit on the load-bearing crease rather than arbitrary struts.
-    const returnOffset=normal.clone().multiplyScalar(.045)
-    bevelTriangle(structure,a,crease,crease.clone().add(returnOffset),.018)
-    bevelTriangle(structure,a,crease.clone().add(returnOffset),a.clone().add(returnOffset),.018)
-    rod(structure,crease,inner,.018,8)
-    // The pivot's axis follows its folded crease; all wheel/knuckle parts share it.
-    const axis=inner.clone().sub(a).normalize()
-    const q=new THREE.Quaternion().setFromUnitVectors(vec(0,0,1),axis),euler=new THREE.Euler().setFromQuaternion(q),rotation=[euler.x,euler.y,euler.z]
-    const pivot=a.clone().addScaledVector(normal,.025)
-    const wheel=group(`hover-fold-hinge-wheel-${i+1}`,'silver',pivot,axis.clone());gearing.push(wheel)
-    gear(wheel,.071,14,.026,pivot,rotation)
-    rod(structure,pivot.clone().addScaledVector(axis,-.11),pivot.clone().addScaledVector(axis,.11),.015,10)
-    for(const offset of[-.065,0,.065])channelRing(fasteners,.036,.014,.033,0,TAU,pivot.clone().addScaledVector(axis,offset),rotation,20)
-    for(const offset of[-.116,.116])bolt(fasteners,slots,pivot.clone().addScaledVector(axis,offset),.022,rotation)
-    // Two flush bolts hold each plate at actual anchor points, including reverse-side shadows.
-    for(const point of[a.clone().lerp(crease,.24),b.clone().lerp(crease,.24)]){
-      const localRotation=new THREE.Euler().setFromQuaternion(new THREE.Quaternion().setFromUnitVectors(vec(0,0,1),normal))
-      bolt(fasteners,slots,point.addScaledVector(normal,.033),.018,[localRotation.x,localRotation.y,localRotation.z])
-    }
-    // Opposing tension springs have a mechanical purpose and do not fill every opening.
-    if(i===0||i===3){
-      const anchor=inner.clone().addScaledVector(normal,.065),start=crease.clone().addScaledVector(normal,.065),springAxis=anchor.clone().sub(start).normalize()
-      const side=springAxis.clone().cross(Math.abs(springAxis.y)<.8?Y:vec(1,0,0)).normalize(),up=springAxis.clone().cross(side).normalize()
-      const smooth=t=>{const x=THREE.MathUtils.clamp(t,0,1);return x*x*(3-2*x)}
-      tube(fasteners,Array.from({length:61},(_,k)=>{
-        const t=k/60,envelope=smooth((t-.05)/.13)*smooth((.95-t)/.13)
-        const phase=THREE.MathUtils.clamp((t-.16)/.68,0,1)*TAU*3
-        return start.clone().lerp(anchor,t).addScaledVector(side,.025*envelope*Math.cos(phase)).addScaledVector(up,.025*envelope*Math.sin(phase))
-      }),.0075,68,8)
-      const attachmentEuler=new THREE.Euler().setFromQuaternion(new THREE.Quaternion().setFromUnitVectors(vec(0,0,1),normal))
-      const attachmentRotation=[attachmentEuler.x,attachmentEuler.y,attachmentEuler.z]
-      for(const point of[start,anchor]){
-        // Fitted eyes, screws and short stems visibly attach both spring leads.
-        channelRing(fasteners,.023,.011,.018,0,TAU,point,attachmentRotation,20)
-        rod(fasteners,point.clone().addScaledVector(normal,-.035),point,.009,10)
-        bolt(fasteners,slots,point.clone().addScaledVector(normal,-.015),.017,attachmentRotation)
-      }
+  const folds=group('Swelled pewter service castings with rolled rear returns','pewter')
+  const structure=group('Folded returns and pierced bearing chassis','steel')
+  const slots=group('Counterbored mountings and recessed witness marks','ink')
+  const fasteners=group('Stepped shaft collars and fitted service fasteners','silver')
+  const rotation=[.24,-.08,-.025],q=new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation))
+  const axis=shaftAxis(rotation).normalize(),at=(x,y,z)=>vec(x,y,z).applyQuaternion(q)
+  const module=.018,driver='hover-experimental-central-wheel',velocity=.46
+  const main={name:driver,teeth:36,point:vec(-.08,.035,.18),phase:.07,ratio:1,spokes:5,material:'silver'}
+  const children=[
+    {name:'hover-experimental-transfer-wheel',teeth:20,parent:main,direction:-.42,spokes:4,material:'steel'},
+    {name:'hover-fold-hinge-wheel-1',teeth:28,parent:null,direction:1.21,spokes:4,material:'silver'},
+    {name:'hover-fold-hinge-wheel-2',teeth:24,parent:main,direction:-2.69,spokes:4,material:'silver'},
+    {name:'hover-fold-hinge-wheel-3',teeth:16,parent:null,direction:1.94,spokes:3,material:'steel'},
+  ]
+  children[1].parent=children[0];children[3].parent=children[2]
+  for (const wheel of children) {
+    const parent=wheel.parent,distance=module*(parent.teeth+wheel.teeth)/2
+    wheel.point=parent.point.clone().add(vec(distance*Math.cos(wheel.direction),distance*Math.sin(wheel.direction),0))
+    // A tooth faces its neighbour's gap at rest. Signed speed then maintains
+    // that relationship through every full turn, rather than merely at one pose.
+    wheel.phase=wheel.direction+Math.PI-(Math.PI-parent.teeth*(wheel.direction-parent.phase))/wheel.teeth
+    wheel.ratio=-parent.ratio*parent.teeth/wheel.teeth
+  }
+  const wheels=[main,...children],gearing=[]
+  for (const wheel of wheels) {
+    const center=at(...wheel.point.toArray()),part=group(wheel.name,wheel.material,center,axis.clone())
+    part.motion={kind:'continuous',angularVelocity:velocity,ratio:wheel.ratio,driver,teeth:wheel.teeth,module}
+    involuteWheel(part,wheel.teeth,module,wheel===main?.066:.052,center,rotation,wheel.phase,wheel.spokes)
+    gearing.push(part)
+    // Each spinning hub clears a fixed shaft. Back bearings are seated on a real
+    // pierced block; the front retaining cap sits beyond the rotating faces.
+    const p=wheel.point,back=at(p.x,p.y,-.12),front=at(p.x,p.y,.264)
+    rod(structure,at(p.x,p.y,-.205),at(p.x,p.y,.262),.019,20)
+    bevelFrame(structure,wheel===main?.19:.142,wheel===main?.19:.142,.070,.049,.049,back,rotation,.006)
+    turnedBearing(folds,at(p.x,p.y,-.072),rotation)
+    machinedRing(fasteners,.040,.017,.029,0,TAU,at(p.x,p.y,-.037),rotation,40)
+    machinedRing(slots,.031,.008,.008,0,TAU,at(p.x,p.y,-.053),rotation,20)
+    bolt(fasteners,slots,front,.029,rotation)
+    // A fitted retention washer and a recessed circular seat give the front
+    // shaft an assembly order that remains readable in a side view.
+    machinedRing(fasteners,.045,.013,.016,0,TAU,at(p.x,p.y,.249),rotation,40)
+    machinedRing(slots,.034,.0028,.0025,0,TAU,at(p.x,p.y,.260),rotation,32)
+    for (const side of [-1,1]) bolt(fasteners,slots,at(p.x+side*(wheel===main?.066:.045),p.y-.042,-.076),.012,rotation)
+  }
+  // Diagonal rear beams carry the five bearing blocks. Their whole depth stays
+  // behind the gear plane; full rotations cannot pass through a beam or panel.
+  for (const [from,to] of [[main,children[0]],[children[0],children[1]],[main,children[2]],[children[2],children[3]]]) {
+    const a=from.point,b=to.point,mid=a.clone().lerp(b,.5),angle=Math.atan2(b.y-a.y,b.x-a.x)
+    const e=new THREE.Euler().setFromQuaternion(q.clone().multiply(new THREE.Quaternion().setFromAxisAngle(vec(0,0,1),angle)))
+    bevelFrame(structure,a.distanceTo(b)+.15,.098,.070,a.distanceTo(b)-.05,.032,at(mid.x,mid.y,-.158),[e.x,e.y,e.z],.004)
+  }
+  // The rounded casting faces have real transverse curvature and depth. Rear
+  // returns, stepped bearings and feet make the assembly a supported object.
+  serviceShoulder(folds,slots,at(-.55,.35,-.23),rotation,1)
+  serviceShoulder(folds,slots,at(.53,.35,-.25),rotation,-1)
+  upperServiceBridge(folds,slots,fasteners,at(0,0,-.23),rotation)
+  lowerCradle(folds,slots,at(0,-.55,-.24),rotation)
+  for(const[x,y,z]of[[-.78,.52,-.15],[-.57,.66,-.15],[.77,.51,-.17],[.53,.67,-.17],[-.60,-.60,-.15],[.60,-.60,-.15]]){
+    machinedRing(structure,.037,.012,.028,0,TAU,at(x,y,z-.014),rotation,24)
+    bolt(fasteners,slots,at(x,y,z+.019),.023,rotation)
+  }
+  for(const x of[-.51,.51]){
+    bevelBox(folds,.183,.068,.229,at(x,-.779,-.260),rotation,.018)
+    bevelBox(structure,.158,.021,.195,at(x,-.814,-.260),rotation,.006)
+    rod(structure,at(x,-.733,-.302),at(x,-.594,-.306),.035,24)
+  }
+  // The long cheeks are mortised into the lower cradle with broad transverse
+  // feet, each held by a pair of counterbored fixings. No free-standing horns.
+  for(const x of[-.705,.685]){
+    bevelBox(folds,.150,.074,.166,at(x,-.566,-.238),rotation,.012)
+    for(const dx of[-.043,.043]){
+      machinedRing(slots,.016,.005,.005,0,TAU,at(x+dx,-.567,-.149),rotation,24)
+      bolt(fasteners,slots,at(x+dx,-.567,-.143),.014,rotation)
     }
   }
-  const wheelCenter=vec(0,0,-.22),wheelRotation=[.32,.16,.18],shaft=shaftAxis(wheelRotation)
-  const transform=new THREE.Quaternion().setFromEuler(new THREE.Euler(...wheelRotation))
-  const transferCenter=vec(.432*Math.cos(-.61),.432*Math.sin(-.61),0).applyQuaternion(transform).add(wheelCenter)
-  const centralGear=group('hover-experimental-central-wheel','silver',wheelCenter,shaft.clone())
-  const transferGear=group('hover-experimental-transfer-wheel','silver',transferCenter,shaft.clone())
-  gear(centralGear,.30,36,.026,wheelCenter,wheelRotation)
-  gear(transferGear,.14,20,.031,transferCenter,wheelRotation)
-  machinedRing(structure,.312,.055,.044,0,TAU,wheelCenter.clone().addScaledVector(shaft,-.052),wheelRotation,64)
-  channelRing(fasteners,.10,.025,.044,0,TAU,wheelCenter.clone().addScaledVector(shaft,.028),wheelRotation,40)
-  rod(structure,wheelCenter.clone().addScaledVector(shaft,-.10),wheelCenter.clone().addScaledVector(shaft,.083),.027,12)
-  for(let i=0;i<4;i++){
-    const a=i/4*TAU,point=vec(.34*Math.cos(a),.34*Math.sin(a),-.05).applyQuaternion(transform).add(wheelCenter)
-    bolt(fasteners,slots,point,.020,wheelRotation)
+  // A fine graduation and turned concentric cut sit on the main wheel face.
+  // This ink insert rotates with its own wheel, with the exact same driver rate.
+  const center=at(...main.point.toArray()),engraving=group('hover-experimental-wheel-engraving','ink',center,axis.clone())
+  engraving.motion={kind:'continuous',angularVelocity:velocity,ratio:1,driver}
+  for(let i=0;i<36;i++){
+    const angle=main.phase+i/36*TAU,p=main.point.clone().add(vec(.273*Math.cos(angle),.273*Math.sin(angle),.037))
+    const e=new THREE.Euler().setFromQuaternion(q.clone().multiply(new THREE.Quaternion().setFromAxisAngle(vec(0,0,1),angle)))
+    box(engraving,[i%3===0?.016:.008,.0025,.0019],at(...p.toArray()),[e.x,e.y,e.z])
   }
-  // Three deliberate mounting stays carry the central mechanism into the outer folds.
-  for(const i of[0,2,4])rod(structure,wheelCenter.clone().addScaledVector(shaft,-.075),peaks[i].clone().multiplyScalar(.48),.018,8)
-  return[folds,structure,slots,fasteners,...gearing,centralGear,transferGear]
+  machinedRing(engraving,.261,.0023,.0018,0,TAU,center.clone().addScaledVector(axis,.037),rotation,96)
+  machinedRing(engraving,.300,.0019,.0018,0,TAU,center.clone().addScaledVector(axis,.037),rotation,112)
+  // Short rear stays join the bearing lattice to the service-sheet returns.
+  for (const [wheel,end] of [[children[3],[-.70,.51,-.22]],[children[1],[.61,.53,-.25]],[children[2],[-.43,-.59,-.23]],[children[0],[.43,-.59,-.23]]]) {
+    rod(structure,at(wheel.point.x,wheel.point.y,-.16),at(...end),.026,10)
+    bolt(fasteners,slots,at(...end).addScaledVector(axis,.025),.022,rotation)
+  }
+  return[folds,structure,slots,fasteners,...gearing,engraving]
 }
 
 export { syntheticMind, unfinishedMechanism }

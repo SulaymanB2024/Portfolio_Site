@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { contact } from '../content'
 import ContactSculpture from './ContactSculpture'
+import { siteCopy } from '../site-copy'
+import { DestinationLink } from '../DestinationLink'
 import './contact.css'
 
 export default function ContactPage({ dark }: { dark: boolean }) {
@@ -27,14 +29,15 @@ export default function ContactPage({ dark }: { dark: boolean }) {
   }
 
   return <section className="lion-contact" aria-labelledby="lion-contact-title">
-    <header className="lion-contact-heading"><div><span className="mono">05 /</span><h1 id="lion-contact-title">Contact</h1></div><span className="mono">Austin, Texas</span></header>
+    <header className="lion-contact-heading"><div><h1 id="lion-contact-title">Contact</h1></div><span className="mono">Austin, Texas</span></header>
+    <p className="lion-contact-introduction">{siteCopy.contact.description}</p>
     <ContactSculpture dark={dark}>
     <div className="lion-contact-rail" aria-label="Contact links">
     <div className="lion-contact-note lion-contact-email">
-      <a href={`mailto:${contact.email}`}>{contact.email} <span aria-hidden="true">↗</span></a>
+      <DestinationLink href={`mailto:${contact.email}`} direction="external" emphasis="contact">{contact.email}</DestinationLink>
       <div className="lion-contact-copy mono"><button type="button" onClick={copyAddress}>Copy address</button><span role="status">{copyStatus}</span></div>
     </div>
-    <div className="lion-contact-note lion-contact-linkedin"><a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></div>
+    <div className="lion-contact-note lion-contact-linkedin"><DestinationLink href={contact.linkedin}>LinkedIn</DestinationLink></div>
     </div>
     </ContactSculpture>
   </section>

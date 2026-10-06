@@ -7,6 +7,7 @@ export const identity = {
   givenName: 'Sulayman',
   familyName: 'Bowles',
   summary: resumeProfile.currentSummary,
+  homeSummary: 'I study finance at UT Austin, work in product and growth, and build independent software.',
   authorDescription: 'Sulayman Bowles studies finance at UT Austin and writes about software, AI systems, and markets.',
   reviewed: resumeReview.asOf,
   education: resumeProfile.education,

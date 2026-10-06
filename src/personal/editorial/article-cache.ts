@@ -1,11 +1,8 @@
 import type { WritingArticle } from './types'
+import catalog from './data/catalog.json'
 
-const loaders = import.meta.glob<{ default: WritingArticle }>([
-  './data/articles/atlas-building-an-evidence-console.json',
-  './data/articles/who-owns-texas-toll-roads.json',
-  './data/articles/the-first-ai-managers.json',
-  './data/articles/viralbench-codex-agent-harness.json',
-])
+const loaders = import.meta.glob<{ default: WritingArticle }>('./data/articles/*.json')
+const published = new Set(catalog.map(article => article.slug))
 const articles = new Map<string, WritingArticle>()
 const requests = new Map<string, Promise<WritingArticle>>()
 
@@ -20,23 +17,14 @@ export function prepareArticle(slug: string) {
   const pending = requests.get(slug)
   if (pending) return pending
   const load = loaders[`./data/articles/${slug}.json`]
-  if (!load) return Promise.reject(new Error('Article not found'))
+  if (!load || !published.has(slug)) return Promise.reject(new Error('Article not found'))
   const request = load().then(module => {
     const article = module.default
-    const reviewed: WritingArticle = slug === 'viralbench-codex-agent-harness' ? {
-      ...article,
-      pageContent: {
-        ...article.pageContent,
-        callouts: [{
-          label: 'Project status / July 2026',
-          title: 'Code audit and proposed improvement harness',
-          markdown: 'This study audits a pinned upstream agent and proposes an outer loop for traces, replay, bounded changes, and independent release decisions. Its forward-looking build language describes that design. The public record does not establish a deployed harness or measured improvement in agent performance.',
-        }, ...(article.pageContent?.callouts || [])],
-      },
-    } : article
-    articles.set(slug, reviewed)
+    // Project status and research qualifications live in the reviewed source,
+    // shared by the interactive reader and the generated document.
+    articles.set(slug, article)
     requests.delete(slug)
-    return reviewed
+    return article
   }, error => {
     requests.delete(slug)
     throw error

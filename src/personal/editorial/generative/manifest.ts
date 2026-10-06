@@ -82,6 +82,7 @@ export const ARTICLE_GENERATIVE_ART_ASSIGNMENTS = {
   '/research/search-console/technical-seo-public-data-infrastructure': 'yuru-12',
   '/research/personal-seo/canonical-identity-personal-seo': 'yuru-37',
   '/research/data-systems/us-rare-earth-magnet-manufacturing-capacity': 'yuru-20',
+  '/research/data-systems/jane-street-exact-search-solver-verification': 'yuru-17',
   '/markets/archived-research-methodology': 'yuru-39',
   '/markets/who-owns-us-toll-roads': 'yuru-18',
   '/markets/who-owns-texas-toll-roads': 'yuru-32',

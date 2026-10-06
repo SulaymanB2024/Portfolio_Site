@@ -1,6 +1,6 @@
 import { useEffect, useState, type RefObject } from 'react'
 import type { ReaderPosition } from '../editorial/reader-position'
-import { projectReaderSection } from './project-reading-position'
+import { projectReaderSection, requestedProjectChapter } from './project-reading-position'
 
 /** Keep chapter position, direct links and the printed reading bar in agreement. */
 export function useProjectReading(root: RefObject<HTMLElement | null>, slug: string, sectionSelector: string, first: string) {
@@ -37,9 +37,7 @@ export function useProjectReading(root: RefObject<HTMLElement | null>, slug: str
     function reachRequestedChapter() {
       cancelAnimationFrame(requestedFrame)
       requestedFrame = 0
-      const [address, query] = location.hash.split('?')
-      if (address !== `#/work/${slug}`) return
-      const requested = new URLSearchParams(query || '').get('chapter')
+      const requested = requestedProjectChapter(location.hash, location.pathname, location.search, slug)
       const destination = sections.find((section) => (section.dataset.storyChapter ?? section.id) === requested)
       if (!destination) return
       // Allow the router's scroll reset to finish before a direct chapter arrival.
@@ -61,6 +59,7 @@ export function useProjectReading(root: RefObject<HTMLElement | null>, slug: str
     window.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', reflow)
     window.addEventListener('hashchange', reachRequestedChapter)
+    window.addEventListener('popstate', reachRequestedChapter)
     document.fonts.addEventListener('loadingdone', reflow)
     read()
     reachRequestedChapter()
@@ -71,6 +70,7 @@ export function useProjectReading(root: RefObject<HTMLElement | null>, slug: str
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', reflow)
       window.removeEventListener('hashchange', reachRequestedChapter)
+      window.removeEventListener('popstate', reachRequestedChapter)
       document.fonts.removeEventListener('loadingdone', reflow)
       element.style.removeProperty('--project-index-height')
     }

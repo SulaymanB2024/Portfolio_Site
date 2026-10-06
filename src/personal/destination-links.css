@@ -1,0 +1,83 @@
+/* A link has a small typographic signature; the surrounding copy sets its scale. */
+@media screen {
+  .personal-site[data-section][data-appearance] :is(.destination-link.destination-link, .entry-link.entry-link) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    width: fit-content;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding-block: 8px;
+    border: 0;
+    color: inherit;
+    font: 400 14px/1.5 var(--type-interface, Arial, Helvetica, sans-serif);
+    letter-spacing: 0;
+    text-transform: none;
+    text-decoration: none;
+  }
+  .personal-site[data-section][data-appearance] .destination-link[hidden] { display: none; }
+
+  .personal-site[data-section][data-appearance] :is(.destination-link, .entry-link) > .destination-link-label {
+    display: inline;
+    margin: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    transform: none;
+    transition: text-decoration-color 180ms ease;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    text-underline-offset: 6px;
+    text-decoration-skip-ink: auto;
+  }
+
+  .personal-site[data-section][data-appearance] .link-arrow.link-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    line-height: 1;
+    transform: none;
+    transition: transform 180ms ease;
+  }
+  .personal-site .link-arrow > svg { display: block; width: 100%; height: 100%; }
+
+  .personal-site[data-section][data-appearance] .destination-link--contact.destination-link--contact {
+    font: 400 clamp(17px, 2vw, 20px)/1.5 var(--type-reading, Georgia, 'Times New Roman', serif);
+    letter-spacing: -.02em;
+  }
+
+  .personal-site .destination-link:focus-visible { outline: 1px solid currentColor; outline-offset: 5px; }
+  .personal-site :is(.destination-link, .journal-essay, .writing-story, .work-study-entry, .work-curated-atlas-link):is(:hover, :focus-visible, :focus-within) .destination-link-label {
+    text-decoration-color: currentColor;
+  }
+
+  .personal-site .journal-all.destination-link { margin-top: 28px; }
+  .personal-site .home-context-about.destination-link { margin-top: 24px; }
+  .personal-site .landing-story-links .destination-link { color: inherit; }
+  .personal-site.home-site .site-closing-contact { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+  .personal-site.home-site .site-closing-contact > p { margin-bottom: 12px; }
+  .personal-site.home-site .closing-email.destination-link { margin-bottom: 0; }
+
+  @media (max-width: 760px) {
+    .personal-site[data-section][data-appearance] .cv-rail-contact.destination-link { display: none; }
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .personal-site[data-section][data-appearance] :is(.destination-link, .journal-essay, .writing-story, .work-study-entry, .work-curated-atlas-link, .story-link, .project-continue):hover .link-arrow { transform: translateX(3px); }
+    .personal-site[data-section][data-appearance] .destination-link:hover .link-arrow[data-direction='left'] { transform: translateX(-3px); }
+    .personal-site[data-section][data-appearance] .destination-link:hover .link-arrow[data-direction='up'] { transform: translateY(-3px); }
+    .personal-site[data-section][data-appearance] .destination-link:hover .link-arrow[data-direction='down'] { transform: translateY(3px); }
+    .personal-site[data-section][data-appearance] .destination-link:hover .link-arrow[data-direction='external'] { transform: translate(2px, -2px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .personal-site[data-section][data-appearance] :is(.link-arrow, .destination-link-label) { transition: none; }
+  }
+}

@@ -1,0 +1,22 @@
+/* Source canvases share the site's paper and ink. Native diagrams retain
+   readable labels; original source figures remain available at full size. */
+.reader-research-figure { isolation: isolate; }
+.reader-figure-viewport { background: var(--paper, #f5f2ea); isolation: isolate; }
+.reader-figure-viewport:focus-visible { outline: 2px solid var(--ink, #24221e); outline-offset: 5px; }
+.reader-research-figure .reader-figure-link { display: block; background: var(--paper, #f5f2ea); isolation: isolate; cursor: zoom-in; }
+.reader-research-figure .reader-figure-link:focus-visible { outline: 2px solid var(--ink, #24221e); outline-offset: 5px; }
+.reader-research-figure img { display: block; width: 100%; height: auto; background: transparent; border: 0; filter: grayscale(1); mix-blend-mode: multiply; }
+[data-appearance='dark'] .reader-research-figure img { filter: invert(1) grayscale(1); mix-blend-mode: screen; }
+.reader-original-figure { display: block; width: fit-content; margin-top: 8px; font: 12px/1.6 var(--editorial-sans); text-underline-offset: 3px; }
+
+@media screen and (max-width: 760px) {
+  .reader-figure-viewport { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--muted) var(--paper); }
+  .reader-figure-viewport .reader-figure-link, .reader-figure-viewport img { min-width: 0; }
+  /* Retain label size in the few detailed source plots awaiting reconstruction. */
+  .reader-research-figure[data-density='dense'] .reader-figure-link { min-width: 560px; }
+}
+
+@media print {
+  .reader-research-figure img, [data-appearance='dark'] .reader-research-figure img { filter: none; mix-blend-mode: normal; background: white; }
+  .reader-research-figure .reader-figure-link { background: white; }
+}

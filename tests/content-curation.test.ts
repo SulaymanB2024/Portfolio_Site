@@ -1,7 +1,8 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { consolidatedDestination, consolidatedHref } from '../src/personal/editorial/curation.ts'
+import { consolidatedDestination, withdrawnArticleSlugs } from '../src/personal/editorial/curation.ts'
+import { writingSelection } from '../src/personal/editorial/writing-selection.ts'
 import { resolveRoute } from '../src/personal/editorial/routes.ts'
 import { articleHref } from '../src/personal/editorial/links.ts'
 import { articleSection, sectionHref, relatedArticles, filterWritingArticles } from '../src/personal/editorial/library.ts'
@@ -12,25 +13,19 @@ import { publicPages } from '../src/personal/public-pages.ts'
 const load = (path: string) => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'))
 const catalog: ArticleSummary[] = load('../src/personal/editorial/data/catalog.json')
 const archived: ArticleSummary[] = load('../src/personal/editorial/data/archived-catalog.json')
+const hosting = load('../vercel.json')
 
-test('curated subject searches find the retained essays without importing article bodies', () => {
+test('subject searches include the original essays through lightweight catalog metadata', () => {
   const essays = catalog.map(withWritingCopy)
-  const cases: [string, string[]][] = [
-    ['SEO', ['atlas-building-an-evidence-console']],
-    ['sqlite canonical', ['atlas-building-an-evidence-console']],
-    ['AI', ['the-first-ai-managers', 'viralbench-codex-agent-harness']],
-    ['memory retail', ['the-first-ai-managers']],
-    ['finance concessions', ['who-owns-texas-toll-roads']],
-    ['independent replay', ['viralbench-codex-agent-harness']],
-    ['SEO memory', []],
-  ]
-  for (const [query, expected] of cases) {
-    assert.deepEqual(filterWritingArticles(essays, { query, category: 'All' }).map(article => article.slug), expected, query)
-  }
-  assert.deepEqual(filterWritingArticles(essays, { query: 'AI', category: 'PRODUCT & SYSTEMS' }), [])
+  for (const [query, slug] of [
+    ['sqlite', 'sqlite-crawl-pipelines'], ['loyalty', 'how-airlines-borrow-against-loyalty-programs'],
+    ['hardware startup', 'hidden-financing-hardware-startups'], ['megawatt', 'the-ai-megawatt'],
+    ['austin home', 'who-owns-austin-home-service-companies'], ['toll roads', 'why-texas-toll-roads-stay-tolled'],
+  ]) assert(filterWritingArticles(essays, { query, category: 'All' }).some(article => article.slug === slug), query)
+  assert.deepEqual(filterWritingArticles(essays, { query: 'loyalty', category: 'AI INFRASTRUCTURE' }), [])
 })
 
-test('essay discovery, reader covers, and public metadata describe the same retained pieces', () => {
+test('discovery, reader covers and public metadata describe the same manuscripts', () => {
   for (const summary of catalog) {
     const article = load(`../src/personal/editorial/data/articles/${summary.slug}.json`)
     const card = withWritingCopy(summary)
@@ -47,41 +42,68 @@ test('essay discovery, reader covers, and public metadata describe the same reta
   }
 })
 
-test('every delisted path, alias and reader bookmark resolves to a retained destination', () => {
-  for (const article of archived) {
-    const destination = consolidatedDestination(article.path)!
-    assert.ok(destination)
-    assert.ok(!destination.slug || catalog.some(item => item.slug === destination.slug))
-    const route = destination.slug ? `writing/${destination.slug}` : 'writing'
-    for (const url of [article.path, ...(article.aliases || []), `/writing/${article.slug}`]) {
-      assert.equal(resolveRoute('', url, catalog), route)
-      assert.equal(resolveRoute(`#${url}?from=%23%2Fwriting`, '/', catalog), route)
-      assert.equal(articleHref(`https://sulayman-bowles.dev${url}`, catalog), consolidatedHref(url))
+test('every original path, alias and reader bookmark opens its own article', () => {
+  for (const article of catalog) for (const url of [article.path, ...(article.aliases || []), `/writing/${article.slug}`]) {
+    const route = `writing/${article.slug}`
+    assert.equal(consolidatedDestination(url), undefined)
+    assert.equal(resolveRoute('', url, catalog), route)
+    assert.equal(resolveRoute(`#${url}?from=%23%2Fwriting`, '/', catalog), route)
+    if (url !== `/writing/${article.slug}`) assert.equal(articleHref(`https://sulayman-bowles.dev${url}`, catalog), `#/${route}`)
+  }
+  assert(archived.every(article => catalog.some(item => item.slug === article.slug) || withdrawnArticleSlugs.includes(article.slug)))
+})
+
+test('withdrawn notes leave discovery and route their old URLs directly to the surviving explanation', () => {
+  assert.equal(withdrawnArticleSlugs.length, 5)
+  for (const slug of withdrawnArticleSlugs) {
+    assert(!catalog.some(item => item.slug === slug))
+    assert(!publicPages.some(page => page.route === `writing/${slug}`))
+    const retained = archived.find(item => item.slug === slug)!
+    assert(retained)
+    for (const path of [retained.path, ...(retained.aliases || []), `/writing/${slug}`]) {
+      assert.equal(resolveRoute('', path, catalog), 'writing/atlas-building-an-evidence-console')
+      assert.equal(resolveRoute(`#${path}`, '/', catalog), 'writing/atlas-building-an-evidence-console')
+      assert(['findings', 'capture'].includes(consolidatedDestination(path)!.section!))
+      assert.equal(articleSection(`#${path}?section=withdrawn-target`), consolidatedDestination(path)!.section)
+      const redirects = hosting.routes.slice(0, hosting.routes.findIndex((route: any) => route.handle === 'filesystem'))
+      const redirect = redirects.find((route: any) => !route.has && route.headers?.Location && new RegExp(`^(?:${route.src})$`).test(path))
+      assert.equal(redirect?.headers.Location, `/writing/atlas-building-an-evidence-console#${consolidatedDestination(path)!.section}`)
     }
-    if (destination.section) {
-      const target = load(`../src/personal/editorial/data/articles/${destination.slug}.json`)
-      assert.ok(target.sections.some((section: { id: string }) => section.id === destination.section))
-    }
+    assert(readFileSync(new URL(`../src/personal/editorial/data/articles/${slug}.json`, import.meta.url)).length > 0)
   }
 })
 
-test('old reader jumps canonicalize without trapping navigation at the consolidation section', () => {
+test('the curated collection leads with Shopkeeper and separates substantial essays from implementation notes', () => {
+  const selection = writingSelection(catalog)
+  assert.equal(selection.selected[0].slug, 'the-first-ai-managers')
+  assert.equal(selection.selected.length, 7)
+  assert(!selection.selected.some(article => article.slug === 'canonical-identity-personal-seo'))
+  const all = [...selection.selected, ...selection.more, ...selection.notes]
+  assert.equal(all.length, catalog.length)
+  assert.equal(new Set(all.map(article => article.slug)).size, catalog.length)
+  assert(selection.more.some(article => article.slug === 'viralbench-codex-agent-harness'))
+  assert(selection.notes.some(article => article.slug === 'ai-search-crawler-policy'))
+  const filtered = writingSelection(filterWritingArticles(catalog, { query: 'loyalty', category: 'All' }))
+  assert.equal(filtered.selected.length, 1)
+  assert.equal(filtered.selected[0].slug, 'how-airlines-borrow-against-loyalty-programs')
+})
+
+test('old reader section targets stay on the recovered manuscript', () => {
   const old = '#/writing/raw-html-rendered-dom-evidence?from=%23%2Fwriting'
-  assert.equal(articleSection(old), 'source-and-render')
-  assert.equal(articleSection('', '/research/technical-seo/raw-html-rendered-dom-evidence'), 'source-and-render')
-  const next = sectionHref(old, 'improvement-cycle')
-  assert.ok(next.startsWith('#/writing/atlas-building-an-evidence-console?'))
-  assert.equal(articleSection(next), 'improvement-cycle')
+  assert.equal(articleSection(old), null)
+  assert.equal(articleSection('#sources', '/research/technical-seo/raw-html-rendered-dom-evidence'), 'sources')
+  const next = sectionHref(old, 'conclusion')
+  assert.ok(next.startsWith('#/writing/raw-html-rendered-dom-evidence?'))
+  assert.equal(articleSection(next), 'conclusion')
   assert.equal(new URLSearchParams(next.split('?')[1]).get('from'), '#/writing')
 })
 
-test('discovery and related reading exclude all delisted notes', () => {
-  assert.equal(catalog.length, 4)
-  assert.ok(catalog.some(item => item.slug === 'who-owns-texas-toll-roads'))
-  const retired = new Set(archived.map(item => item.slug))
-  for (const article of catalog) {
-    assert.ok(!retired.has(article.slug))
-    for (const related of relatedArticles(article, catalog)) assert.ok(!retired.has(related.slug))
+test('related reading only links routed articles, with siblings preferred for restored research', () => {
+  for (const article of catalog) for (const related of relatedArticles(article, catalog)) {
+    assert.notEqual(related.slug, article.slug)
+    assert(catalog.some(item => item.slug === related.slug))
   }
+  const waymo = catalog.find(item => item.slug === 'waymo-hardware-financing')!
+  assert(relatedArticles(waymo, catalog).every(item => item.path.startsWith('/research/financial-systems/')))
   assert.equal(articleHref('https://example.org/research/technical-seo/raw-html-rendered-dom-evidence', catalog), 'https://example.org/research/technical-seo/raw-html-rendered-dom-evidence')
 })

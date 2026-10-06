@@ -1,5 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 import { STUDY_PAN_LIMIT, workStudyCameraDistance, workStudyFraming } from '../src/personal/work-study-framing.ts'
 import { studyMoveBounds } from '../src/personal/work-study-interaction.ts'
 import { studyFlightProgress, STUDY_DOCK_MS } from '../src/personal/work-study-flight.ts'
@@ -28,10 +29,13 @@ test('detail docking starts at the collection camera and reaches its tighter res
   }
 })
 
-test('every audited sculpture remains inside the detail frustum at full movement and bob', () => {
-  // Conservative rest radii from all vertices of the four v5 GLBs. The extra
-  // .16 sphere margin also contains their complete articulation/hover burst.
-  const radii = [1.128842, 1.056262, 1.069691, 1.161470]
+test('every audited sculpture remains inside the detail frustum at full movement and bob', async () => {
+  const manifest = JSON.parse(await readFile(new URL('../public/work-studies/manifest.json', import.meta.url), 'utf8'))
+  // Read the actual generated envelopes, including continuous gear shafts.
+  const radii = manifest.models.map(model => {
+    assert(model.framing.paddingRequired <= .16)
+    return model.framing.rest
+  })
   const vertical = 34 * Math.PI / 360
   for (const radius of radii) for (const aspect of [.5, .8, 1, 1.8, 2.4]) {
     for (const progress of [0, .25, .5, .75, 1]) {

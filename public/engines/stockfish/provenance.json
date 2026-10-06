@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "engine": "Stockfish 19 WASM",
+  "npmPackage": "stockfish",
+  "npmVersion": "19.0.0",
+  "variant": "full-single-threaded NNUE",
+  "checkedAt": "2026-10-06T03:36:12.662692+00:00",
+  "upstreamRepository": "https://github.com/nmrugg/stockfish.js",
+  "upstreamRelease": {
+    "tag": "v19.0.0",
+    "url": "https://github.com/nmrugg/stockfish.js/releases/tag/v19.0.0",
+    "publishedAt": "2026-09-15T19:07:56Z",
+    "commit": "9cb3e5066d48f1a35d792afeda36eff37ae60570",
+    "prerelease": false
+  },
+  "source": {
+    "npmGitHead": "54fde71d90c7c403964f6cacef48f7bbec495df1",
+    "treeSha1": "b86a9b4ce4d5754a8130c65940c998ef1b719a2a",
+    "sourceUrl": "https://github.com/nmrugg/stockfish.js/tree/54fde71d90c7c403964f6cacef48f7bbec495df1",
+    "upstreamArchiveUrl": "https://codeload.github.com/nmrugg/stockfish.js/tar.gz/54fde71d90c7c403964f6cacef48f7bbec495df1",
+    "upstreamArchiveSha256": "ff4955eb2b2c6e49152dee875b28794be58cf52a8f019bcb230251207dbdce09",
+    "sameOriginArchive": "source/stockfish-19.0.0-source.zip",
+    "buildCommand": "node build.js --single-threaded --no-split --force",
+    "expectedEmscriptenVersion": "3.1.7",
+    "engineCodeModified": false,
+    "localBitForBitRebuildPerformed": false,
+    "archiveFormat": "ZIP",
+    "archiveCompression": "DEFLATE"
+  },
+  "npmDistribution": {
+    "metadataUrl": "https://registry.npmjs.org/stockfish/19.0.0",
+    "tarballUrl": "https://registry.npmjs.org/stockfish/-/stockfish-19.0.0.tgz",
+    "integrity": "sha512-jDyYLbqNpboQcMs5HodTHI2CrKL74zkQWb1+sgoNXw5HI6avTblW4G0X7afFt3BBOc6VbTSkOV64EUxm/DWSpg==",
+    "sha1": "88db50693ea779c8f4a3a4c1171250b3d5654bb7",
+    "sha256": "b1579b00ca456768c637bd5e5313830fb535ade04e87a5da53182c0a5eb6e05d"
+  },
+  "nnueNetwork": {
+    "filename": "nn-1a298aa575a0.nnue",
+    "bytes": 98511183,
+    "sha256": "1a298aa575a085434d29027978dc36867fe9c5bcea9376654b7a8eba1e52dfc2",
+    "sourceUrl": "https://tests.stockfishchess.org/api/nn/nn-1a298aa575a0.nnue",
+    "license": "CC0-1.0",
+    "licenseReference": "https://github.com/official-stockfish/networks/blob/8e436631308477638970ec6aaeb2bf27cf87e480/LICENSE",
+    "embeddedInRuntimeWasm": true
+  },
+  "license": {
+    "identifier": "GPL-3.0-or-later",
+    "file": "Copying.txt",
+    "authors": "AUTHORS",
+    "sourceArchive": "source/stockfish-19.0.0-source.zip"
+  },
+  "runtime": {
+    "workerUrl": "stockfish-19-single.js",
+    "workerType": "classic",
+    "wasmUrl": "stockfish-19-single.wasm",
+    "runtimePayloadBytes": 99124108,
+    "requiresSharedArrayBuffer": false,
+    "requiresCrossOriginIsolation": false,
+    "requiredWasmContentType": "application/wasm",
+    "requiredFeatures": [
+      "Web Workers",
+      "WebAssembly",
+      "WebAssembly SIMD",
+      "fetch",
+      "ReadableStream",
+      "WebAssembly.instantiateStreaming"
+    ],
+    "threadsMaximum": 1,
+    "wasmInitialMemoryBytes": 134217728,
+    "wasmMaximumMemoryBytes": 2147483648,
+    "fullStrengthOptions": {
+      "Skill Level": 20,
+      "UCI_LimitStrength": false,
+      "MultiPV": 1
+    }
+  },
+  "verification": {
+    "npmRegistryIntegrityVerified": true,
+    "githubReleaseAssetDigestsVerified": true,
+    "npmAndReleaseTagSourceTreesIdentical": true,
+    "unchangedUpstreamSourceFilesVerified": 160,
+    "sourceArchiveFormat": "ZIP (DEFLATE)",
+    "sourceArchiveCrcVerified": true,
+    "networkSha256": "1a298aa575a085434d29027978dc36867fe9c5bcea9376654b7a8eba1e52dfc2",
+    "embeddedNetworkExactBytesVerified": true,
+    "embeddedNetworkMemoryOffset": 36144,
+    "wasmDataSegmentCount": 9350,
+    "wasmInitialMemoryBytes": 134217728,
+    "wasmMaximumMemoryBytes": 2147483648
+  },
+  "files": {
+    "AUTHORS": {
+      "bytes": 6881,
+      "sha256": "f81e7d74c350626766382ec67fa262c38cda00cb8b501790f95cdebb526006c1",
+      "sourceUrl": "https://raw.githubusercontent.com/nmrugg/stockfish.js/54fde71d90c7c403964f6cacef48f7bbec495df1/AUTHORS"
+    },
+    "Copying.txt": {
+      "bytes": 35821,
+      "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b",
+      "npmMember": "package/Copying.txt"
+    },
+    "LICENSE-NETWORK-CC0.txt": {
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "sourceUrl": "https://raw.githubusercontent.com/official-stockfish/networks/8e436631308477638970ec6aaeb2bf27cf87e480/LICENSE"
+    },
+    "README.md": {
+      "bytes": 1285,
+      "sha256": "3ab360ea5c9bf3c3d792f3e88a3994f69e38033be60e1b298612eb892e5e7a40",
+      "origin": "Local distribution notice, no upstream engine modifications"
+    },
+    "README.upstream.md": {
+      "bytes": 5576,
+      "sha256": "06dd16ff7cd369c38e96f00dc8462245832083facac574ce663b612ea73cd625",
+      "npmMember": "package/README.md"
+    },
+    "source/stockfish-19.0.0-source.zip": {
+      "bytes": 79803900,
+      "sha256": "07b6926ba6e40e777fc0d0dede7c3940b8ff1aba6bd328974f3d33ac356780db",
+      "origin": "Complete pinned upstream source tree plus exact NNUE, network licensing materials and SOURCE-BUILD.md"
+    },
+    "stockfish-19-single.js": {
+      "bytes": 21315,
+      "sha256": "72772f8bdd7353e4e24245d946bb831f56bcccf02fa16a779c1b92a6c00e5cc2",
+      "npmMember": "package/bin/stockfish-19-single.js",
+      "releaseUrl": "https://github.com/nmrugg/stockfish.js/releases/download/v19.0.0/stockfish-19-single.js"
+    },
+    "stockfish-19-single.wasm": {
+      "bytes": 99102793,
+      "sha256": "8725c26572762617fd96b2ea83ff130e6640b85815890d682bf8c49db0820721",
+      "npmMember": "package/bin/stockfish-19-single.wasm",
+      "releaseUrl": "https://github.com/nmrugg/stockfish.js/releases/download/v19.0.0/stockfish-19-single.wasm"
+    }
+  }
+}

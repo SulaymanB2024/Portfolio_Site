@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 11,
   "generator": "tools/build-work-models.mjs",
   "ownership": "Original procedural geometry created for Sulayman Bowles. No third-party model or texture inputs.",
   "license": "LicenseRef-Site-Owner",
@@ -9,75 +9,77 @@
     "tools/work-models/geometry.mjs",
     "tools/work-models/instruments.mjs",
     "tools/work-models/organic.mjs",
-    "tools/work-models/population.mjs"
+    "tools/work-models/sapien.mjs",
+    "tools/work-models/framing.mjs",
+    "tools/work-models/surface-finish.mjs"
   ],
-  "material": "Four texture-free monochrome materials: satin silver, dark steel, graphite inlays and pale porcelain. Smooth analytical surfaces, rounded machined bevels and recessed cavities retain readable construction through halftone.",
+  "material": "Five original texture-free materials: polished silver, dark machined steel, cast pewter, graphite engraving and glazed enamel. Restrained continuous vertex patina and normal grain follow the physical surface. Rounded cast profiles, sculpted portrait planes, broad connected terrain, fitted curved inlays, recessed scales and complete physical joints supply visible detail.",
   "geometryBudget": {
-    "maximumBytesPerModel": 1500000,
-    "maximumTrianglesPerModel": 60000,
+    "maximumBytesPerModel": 5000000,
+    "maximumTrianglesPerModel": 125000,
     "maximumMeshesPerModel": 12,
-    "compression": "Lossless bitwise vertex welding; no decoder required."
+    "compression": "Lossless bitwise vertex welding; no decoder required for originals. Runtime copies use Draco."
   },
-  "animation": "Independent components named hover-* export centered local shaft/hinge pivots with unit articulationAxis vectors in GLTF node extras. Structural assemblies remain static. These support renderer-driven articulation. No embedded animation, extensions, textures or decoder required.",
+  "animation": "Independent components named hover-* export centered local shaft/hinge pivots with unit articulationAxis vectors in GLTF node extras. Continuous shafts also export articulationMotion: angularVelocity is the shared drive rate in radians/second, ratio is the signed shaft/drive ratio, and driver optionally names the main node. Angle = visible time * angularVelocity * ratio. Full-turn bounds are verified. Structural assemblies remain static. Renderer-driven motion; no embedded animation, extensions, textures or decoder required.",
   "models": [
     {
       "id": "internshipdeadlines",
       "project": "InternshipDeadlines",
       "title": "Opportunity instrument",
-      "concept": "Twelve chamfered calendar plates with graphite ordinal inlays, binding eyes and recessed wells sit in an open carriage with fitted retention shoes. Recessed annular rail channels, seated scale marks, tapered gear spokes, stepped bored hubs and a hinged pendulum connect dates, data and opportunity.",
+      "concept": "A dished enamel perpetual-calendar chapter carries thirty-one original serif dates fitted to its curved face inside a deep profiled barrel. A broad seated Roman bezel, fitted seven-day enamel insert and dark steel leaf hand establish a clear working face. An open three-foot movement casting reveals seated wheels beneath the register. A stepped arbor, fitted winding crowns, rear service windows and pear pendulum complete the horological instrument. Engraved case and index details inherit their mechanical parent motion.",
       "path": "work-studies/internshipdeadlines.glb",
-      "bytes": 1293800,
-      "sha256": "a3c77f84e99748028c46e32303a4368cc55676555f63b2277af1b881624f9c12",
-      "vertices": 42964,
-      "triangles": 42048,
-      "meshes": 10,
-      "materials": 4,
+      "bytes": 2773396,
+      "sha256": "e8c76730aef8c7659dd05bd2347f5cd30f2721b562596d795ca6b56294a5db83",
+      "vertices": 82364,
+      "triangles": 75412,
+      "meshes": 12,
+      "materials": 5,
       "articulation": [
         {
           "name": "hover-clock-machined-crescent",
           "pivot": [
-            -5.111748834785159e-05,
-            0.028490875012724532,
-            0.18260878459662191
+            0.02969631551311034,
+            0.06372667071135288,
+            -0.05856755352695135
           ],
           "axis": [
-            -0.33278818603996213,
-            -0.14786089807379071,
-            0.9313373062714947
+            -0.3009351203345308,
+            -0.11835257784587354,
+            0.9462720119851786
           ]
         },
         {
           "name": "hover-register-rear-crescent",
           "pivot": [
-            0.037085672693494456,
-            0.04313136982065098,
-            -6.8206296868478316e-06
+            0.059975364455625124,
+            0.07566362747743832,
+            -0.20746105835704634
           ],
           "axis": [
-            -0.5892420236005301,
-            -0.35999588589103304,
-            0.7233234406299043
+            -0.5095370614014119,
+            -0.29042690859523196,
+            0.8099532047113776
           ]
         },
         {
           "name": "hover-register-inner-index",
           "pivot": [
-            -0.060683392708490845,
-            -0.0026840434029462637,
-            0.5504622585275902
+            0.021836097987621667,
+            0.05321674207580334,
+            0.051122193016332286
           ],
           "axis": [
-            -0.03573211851499886,
-            0.019842718619731203,
-            0.9991643919917326
+            -0.09318114693630804,
+            -0.03234436135978872,
+            0.9951236687687927
           ]
         },
         {
           "name": "hover-register-escapement-pendulum",
           "pivot": [
-            0.1983183293352065,
-            -0.44090716818648634,
-            0.510597679980576
+            0.258169911962023,
+            -0.4379745685986464,
+            0.3766951731182416
           ],
           "axis": [
             -0.19866933079506127,
@@ -88,9 +90,9 @@
         {
           "name": "hover-register-primary-gear",
           "pivot": [
-            -0.49040029229835075,
-            -0.4948388659960931,
-            -0.09300381650742738
+            -0.48529811595559547,
+            -0.5254278929871743,
+            -0.24953223707035146
           ],
           "axis": [
             -0.3035135754575507,
@@ -101,9 +103,9 @@
         {
           "name": "hover-register-transfer-gear",
           "pivot": [
-            -0.22054228923979702,
-            -0.6355290644458585,
-            -0.04940466237884315
+            -0.22879568453038243,
+            -0.6749786340932833,
+            -0.18955200126383115
           ],
           "axis": [
             -0.3035135754575507,
@@ -114,64 +116,70 @@
       ],
       "bounds": {
         "min": [
-          -0.9243092303957575,
-          -0.9999999878771907,
-          -0.7138790745244927
+          -0.8964921534199951,
+          -0.9999999964169448,
+          -0.4264605641365051
         ],
         "max": [
-          0.9243092769894964,
-          1.0000000183497038,
-          0.7138790231241279
+          0.896492212996936,
+          1.0000000071218753,
+          0.426460564368175
         ]
       },
       "framing": {
-        "rest": 1.1288410581212218,
-        "fullArticulation": 1.153202039890427,
-        "fullArticulationPlusBurst": 1.2269758453812665,
-        "paddingRequired": 0.09813478726004465,
-        "paddingSlackAtPoint16": 0.06186521273995535,
+        "rest": 1.0693176601361833,
+        "fullArticulation": 1.101461616219571,
+        "fullArticulationPlusBurst": 1.1752354217104104,
+        "paddingRequired": 0.10591776157422705,
+        "paddingSlackAtPoint16": 0.05408223842577295,
         "articulation": [
           {
             "name": "hover-clock-machined-crescent",
-            "restRadius": 1.0710832659944187,
-            "articulatedRadius": 1.0710835706822763,
+            "range": "hover hinge",
+            "restRadius": 1.007089345770532,
+            "articulatedRadius": 1.0079806105894649,
             "burstTranslationBound": 0.07,
-            "articulatedPlusBurstRadius": 1.1410835706822764
+            "articulatedPlusBurstRadius": 1.077980610589465
           },
           {
             "name": "hover-register-rear-crescent",
-            "restRadius": 1.0650980571249897,
-            "articulatedRadius": 1.0651000602233207,
+            "range": "hover hinge",
+            "restRadius": 0.8934069272048057,
+            "articulatedRadius": 0.9025816432328347,
             "burstTranslationBound": 0.07607357886803998,
-            "articulatedPlusBurstRadius": 1.1411736390913607
+            "articulatedPlusBurstRadius": 0.9786552221008747
           },
           {
             "name": "hover-register-inner-index",
-            "restRadius": 1.0127046420991812,
-            "articulatedRadius": 1.0127112989535247,
+            "range": "hover hinge",
+            "restRadius": 0.6737328769480189,
+            "articulatedRadius": 0.6809935138102128,
             "burstTranslationBound": 0.08050462732376276,
-            "articulatedPlusBurstRadius": 1.0932159262772876
+            "articulatedPlusBurstRadius": 0.7614981411339755
           },
           {
             "name": "hover-register-escapement-pendulum",
-            "restRadius": 1.1288410581212218,
-            "articulatedRadius": 1.153202039890427,
+            "range": "hover hinge",
+            "restRadius": 1.0693176601361833,
+            "articulatedRadius": 1.101461616219571,
             "burstTranslationBound": 0.07377380549083952,
-            "articulatedPlusBurstRadius": 1.2269758453812665
+            "articulatedPlusBurstRadius": 1.1752354217104104
           },
           {
             "name": "hover-register-primary-gear",
-            "restRadius": 0.9089313891250312,
-            "articulatedRadius": 0.9089491206242183,
+            "range": "hover hinge",
+            "restRadius": 0.9668997810039827,
+            "articulatedRadius": 0.9669486472800201,
             "burstTranslationBound": 0.07053450889272148,
-            "articulatedPlusBurstRadius": 0.9794836295169398
+            "articulatedPlusBurstRadius": 1.0374831561727416
           },
           {
             "name": "hover-register-transfer-gear",
-            "restRadius": 0.7946962216965381,
-            "articulatedRadius": 0.7962258115953451,
+            "range": "hover hinge",
+            "restRadius": 0.858635382677753,
+            "articulatedRadius": 0.8596125910407413,
             "burstTranslationBound": 0.07820122072764178,
-            "articulatedPlusBurstRadius": 0.8744270323229869
+            "articulatedPlusBurstRadius": 0.9378138117683831
           }
         ]
       },
@@ -179,162 +187,84 @@
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999628087679,
-        "maximumNormalLength": 1.0000000389150936
+        "minimumNormalLength": 0.9999999525339501,
+        "maximumNormalLength": 1.0000000487575587
       }
     },
     {
       "id": "sapien",
       "project": "Sapien",
-      "title": "Paired population instrument",
-      "concept": "Two interleaved chamfered metal ribbons follow one continuous spindle. Flush indexed inserts, fine recessed tracers, return lips and seated terminal fittings give the paired population concept an abstract, non-anatomical form. Both bands articulate around the same supported shaft.",
+      "title": "Audience comparison",
+      "concept": "Three cast pewter portraits with a dominant central sitter attend to two A/B product specimens. Individual jaw and maxillary profiles, connected nasal and cheek planes, tapered brow support, asymmetric carved lids and recessed lip cavities give each sitter distinct anatomy. Broad crowns and swept integral hair join an oblique mantle, open V drape and folded cowl above one inset plinth. Cap fluting, incised letters and seams inherit their specimen parent motion.",
       "path": "work-studies/sapien.glb",
-      "bytes": 916920,
-      "sha256": "44ed8ea389281c61744a90d2d089d74ad5f2fabae32d9d843e9917966eefabcf",
-      "vertices": 30526,
-      "triangles": 29256,
-      "meshes": 8,
-      "materials": 4,
+      "bytes": 2405584,
+      "sha256": "d5c3b29276cbaca3e1ed6e2b0f10c0c3c3ad2b6713b42b63e51b238e134ebb3f",
+      "vertices": 60594,
+      "triangles": 116448,
+      "meshes": 9,
+      "materials": 5,
       "articulation": [
         {
-          "name": "hover-paired-population-band-1",
+          "name": "hover-oval-product-prototype",
           "pivot": [
-            0.02183420173335102,
-            0.016042660666845357,
-            -0.02119505124816794
+            -0.21991746387651473,
+            -0.33822820842239393,
+            0.3516210503165608
           ],
           "axis": [
-            0.16510462292624153,
-            0.9769750386400963,
-            0.13513044572769667
+            -1.734723475976807e-18,
+            0.9713379748520297,
+            0.2377026264271346
           ]
         },
         {
-          "name": "hover-population-index-inlays-1",
+          "name": "hover-faceted-product-prototype",
           "pivot": [
-            0.02183420173335102,
-            0.016042660666845357,
-            -0.02119505124816794
+            0.17604757606781632,
+            -0.3495773683549954,
+            0.39799777820931814
           ],
           "axis": [
-            0.16510462292624153,
-            0.9769750386400963,
-            0.13513044572769667
-          ]
-        },
-        {
-          "name": "hover-population-sample-inserts-1",
-          "pivot": [
-            0.02183420173335102,
-            0.016042660666845357,
-            -0.02119505124816794
-          ],
-          "axis": [
-            0.16510462292624153,
-            0.9769750386400963,
-            0.13513044572769667
-          ]
-        },
-        {
-          "name": "hover-paired-population-band-2",
-          "pivot": [
-            0.02183420173335102,
-            0.016042660666845357,
-            -0.02119505124816794
-          ],
-          "axis": [
-            0.16510462292624153,
-            0.9769750386400963,
-            0.13513044572769667
-          ]
-        },
-        {
-          "name": "hover-population-index-inlays-2",
-          "pivot": [
-            0.02183420173335102,
-            0.016042660666845357,
-            -0.02119505124816794
-          ],
-          "axis": [
-            0.16510462292624153,
-            0.9769750386400963,
-            0.13513044572769667
-          ]
-        },
-        {
-          "name": "hover-population-sample-inserts-2",
-          "pivot": [
-            0.02183420173335102,
-            0.016042660666845357,
-            -0.02119505124816794
-          ],
-          "axis": [
-            0.16510462292624153,
-            0.9769750386400963,
-            0.13513044572769667
+            -1.734723475976807e-18,
+            0.9713379748520297,
+            0.2377026264271346
           ]
         }
       ],
       "bounds": {
         "min": [
-          -0.7570917535622117,
-          -1.0000000486837406,
-          -0.7505081863952626
+          -1,
+          -0.6532791256904602,
+          -0.6404062509536743
         ],
         "max": [
-          0.7570917677085403,
           1,
-          0.7505081920074473
+          0.6532791256904602,
+          0.6404062509536743
         ]
       },
       "framing": {
-        "rest": 1.1454138727699923,
-        "fullArticulation": 1.1471018285370702,
-        "fullArticulationPlusBurst": 1.2208756340279097,
-        "paddingRequired": 0.07546176125791737,
-        "paddingSlackAtPoint16": 0.08453823874208263,
+        "rest": 1.1891841282388553,
+        "fullArticulation": 1.1891841282388553,
+        "fullArticulationPlusBurst": 1.1891841282388553,
+        "paddingRequired": 0,
+        "paddingSlackAtPoint16": 0.16,
         "articulation": [
           {
-            "name": "hover-paired-population-band-1",
-            "restRadius": 1.1185588565192013,
-            "articulatedRadius": 1.1207256001370738,
+            "name": "hover-oval-product-prototype",
+            "range": "hover hinge",
+            "restRadius": 0.6196639263981343,
+            "articulatedRadius": 0.6273587896244471,
             "burstTranslationBound": 0.07,
-            "articulatedPlusBurstRadius": 1.1907256001370738
+            "articulatedPlusBurstRadius": 0.6973587896244471
           },
           {
-            "name": "hover-population-index-inlays-1",
-            "restRadius": 1.0663446132089458,
-            "articulatedRadius": 1.068881177389288,
+            "name": "hover-faceted-product-prototype",
+            "range": "hover hinge",
+            "restRadius": 0.6686082650503297,
+            "articulatedRadius": 0.6766264174763797,
             "burstTranslationBound": 0.07607357886803998,
-            "articulatedPlusBurstRadius": 1.144954756257328
-          },
-          {
-            "name": "hover-population-sample-inserts-1",
-            "restRadius": 1.0123810732847347,
-            "articulatedRadius": 1.0150709274085992,
-            "burstTranslationBound": 0.08050462732376276,
-            "articulatedPlusBurstRadius": 1.095575554732362
-          },
-          {
-            "name": "hover-paired-population-band-2",
-            "restRadius": 1.1454138727699923,
-            "articulatedRadius": 1.1471018285370702,
-            "burstTranslationBound": 0.07377380549083952,
-            "articulatedPlusBurstRadius": 1.2208756340279097
-          },
-          {
-            "name": "hover-population-index-inlays-2",
-            "restRadius": 1.0883329768073047,
-            "articulatedRadius": 1.0904674922996558,
-            "burstTranslationBound": 0.07053450889272148,
-            "articulatedPlusBurstRadius": 1.1610020011923772
-          },
-          {
-            "name": "hover-population-sample-inserts-2",
-            "restRadius": 1.0291170863508976,
-            "articulatedRadius": 1.0314957696506406,
-            "burstTranslationBound": 0.07820122072764178,
-            "articulatedPlusBurstRadius": 1.1096969903782823
+            "articulatedPlusBurstRadius": 0.7526999963444198
           }
         ]
       },
@@ -342,29 +272,29 @@
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999590666856,
-        "maximumNormalLength": 1.0000000401912172
+        "minimumNormalLength": 0.9999999539509837,
+        "maximumNormalLength": 1.0000000454949154
       }
     },
     {
       "id": "investing-markets",
       "project": "Investing & Markets",
       "title": "Market observatory",
-      "concept": "Smooth continent reliefs with coastal sidewalls, seventeen generalized land outlines, selected low terrain ranges and a sparse graticule sit on a continuous steel ocean shell. Grooved meridian and equatorial rails, stepped polar bearings, a partial indexed vernier and counterbored tapered geographic terminals carry four raised routes.",
+      "concept": "Light cast continental massifs, connected watersheds and basins taper into coastal shoulders above a darker steel ocean. Quiet flush pewter routes and map inlays follow the relief, with selected inland-water cutouts. Polished degree scales belong to a fitted meridian yoke and horizon cradle, joined by bored saddles and fuller polar bearings. Swelled cast fork supports descend into a profiled oval foot, completing the generalized cartographic instrument.",
       "path": "work-studies/investing-markets.glb",
-      "bytes": 1356380,
-      "sha256": "3fbf9f0caf4c51fb1a1bff973e6f2503a63096ca2128b1702045575cde150f15",
-      "vertices": 41829,
-      "triangles": 56964,
-      "meshes": 11,
-      "materials": 4,
+      "bytes": 3247364,
+      "sha256": "e038ce3301c56b4421d500162c8e318b4cd13818e3a14f8633e6b4fa24f45031",
+      "vertices": 91763,
+      "triangles": 110612,
+      "meshes": 12,
+      "materials": 5,
       "articulation": [
         {
           "name": "hover-observatory-meridian-yoke",
           "pivot": [
-            0.005973331374493805,
-            -0.0738979046419564,
-            -0.0015533133895418057
+            0.00005366603843328025,
+            0.07975594730141056,
+            0.006036303675545598
           ],
           "axis": [
             0.12854027594607756,
@@ -375,9 +305,9 @@
         {
           "name": "hover-observatory-equatorial-index",
           "pivot": [
-            0.005973331374493805,
-            -0.0738979046419564,
-            -0.0015533133895418057
+            0.00005366603843328025,
+            0.07975594730141056,
+            0.006036303675545598
           ],
           "axis": [
             0.03965189993449245,
@@ -388,9 +318,9 @@
         {
           "name": "hover-observatory-north-bearing",
           "pivot": [
-            0.10850564728785761,
-            0.7097455119194025,
-            0.10643978743907649
+            0.10712673107111567,
+            0.898103818959809,
+            0.11881199010278025
           ],
           "axis": [
             0.12854027594607756,
@@ -401,9 +331,9 @@
         {
           "name": "hover-observatory-south-bearing",
           "pivot": [
-            -0.09655898453886999,
-            -0.8575413212033154,
-            -0.10954641421816011
+            -0.10701939899424912,
+            -0.7385919243569878,
+            -0.10673938275168905
           ],
           "axis": [
             0.12854027594607756,
@@ -414,50 +344,54 @@
       ],
       "bounds": {
         "min": [
-          -0.9999999403953552,
-          -0.9393036429956857,
-          -0.9541048571021578
+          -0.984005727367481,
+          -1,
+          -0.9857949393626319
         ],
         "max": [
-          0.9999999403953552,
-          0.9393036365509033,
-          0.9541048244087675
+          0.9840057710837519,
+          1.0000000006624228,
+          0.9857949835423364
         ]
       },
       "framing": {
-        "rest": 1.0696393134901747,
-        "fullArticulation": 1.0696393134901747,
-        "fullArticulationPlusBurst": 1.0696393134901747,
-        "paddingRequired": 0,
-        "paddingSlackAtPoint16": 0.16,
+        "rest": 1.0265798823727108,
+        "fullArticulation": 1.0265798823727108,
+        "fullArticulationPlusBurst": 1.0931817549146523,
+        "paddingRequired": 0.0666018725419415,
+        "paddingSlackAtPoint16": 0.0933981274580585,
         "articulation": [
           {
             "name": "hover-observatory-meridian-yoke",
-            "restRadius": 0.9462865858554528,
-            "articulatedRadius": 0.946545157873583,
+            "range": "hover hinge",
+            "restRadius": 1.006687971453605,
+            "articulatedRadius": 1.0066879725849365,
             "burstTranslationBound": 0.07,
-            "articulatedPlusBurstRadius": 1.016545157873583
+            "articulatedPlusBurstRadius": 1.0766879725849365
           },
           {
             "name": "hover-observatory-equatorial-index",
-            "restRadius": 0.972002824336678,
-            "articulatedRadius": 0.972003796666749,
+            "range": "hover hinge",
+            "restRadius": 1.0087797996810832,
+            "articulatedRadius": 1.0089611006258115,
             "burstTranslationBound": 0.07607357886803998,
-            "articulatedPlusBurstRadius": 1.048077375534789
+            "articulatedPlusBurstRadius": 1.0850346794938515
           },
           {
             "name": "hover-observatory-north-bearing",
-            "restRadius": 0.794790089851802,
-            "articulatedRadius": 0.7947921998962205,
+            "range": "hover hinge",
+            "restRadius": 1.0126771192960864,
+            "articulatedRadius": 1.0126771275908895,
             "burstTranslationBound": 0.08050462732376276,
-            "articulatedPlusBurstRadius": 0.8752968272199833
+            "articulatedPlusBurstRadius": 1.0931817549146523
           },
           {
             "name": "hover-observatory-south-bearing",
-            "restRadius": 0.9385868562927892,
-            "articulatedRadius": 0.9385886430783894,
+            "range": "hover hinge",
+            "restRadius": 0.7964738673158226,
+            "articulatedRadius": 0.7964744117566567,
             "burstTranslationBound": 0.07377380549083952,
-            "articulatedPlusBurstRadius": 1.0123624485692289
+            "articulatedPlusBurstRadius": 0.8702482172474962
           }
         ]
       },
@@ -465,182 +399,219 @@
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999564406882,
-        "maximumNormalLength": 1.000000041410936
+        "minimumNormalLength": 0.9999999549267383,
+        "maximumNormalLength": 1.0000000473019834
       }
     },
     {
       "id": "miscellaneous",
       "project": "Miscellaneous",
-      "title": "Unfinished mechanism",
-      "concept": "Five pierced folded sheets with rounded lightening windows and return lips form an open mechanism. Crease-aligned shafts, grooved hinge knuckles, slotted fasteners, two tension springs with fitted lead attachments and a geared core with tapered spokes and stepped bored hubs give the experimental form coherent construction.",
+      "title": "Open experimental mechanism",
+      "concept": "Five thick involute gears with flowing curved spokes mesh on seated shafts inside pierced pewter uprights mortised into a lower cradle. A fitted curved crossmember joins the upper cheeks into one continuous frame. Swelled castings, rolled rear returns, flanged oil-shoulder bearings, front retention washers, counterbored foot fixings and graduated wheel cuts establish the physical assembly. The shared tooth module, twenty-degree pressure angle and original signed drive ratios remain intact.",
       "path": "work-studies/miscellaneous.glb",
-      "bytes": 1350084,
-      "sha256": "69d67f162023e833b2b3ea664b636c3be48ef6676a8f371a6edbe6ea5dd5d07f",
-      "vertices": 44745,
-      "triangles": 44168,
-      "meshes": 11,
-      "materials": 4,
+      "bytes": 2948148,
+      "sha256": "8f673fae44ddbf01758a4224831f73ab747e3f29068932a3bcf5e075c7acaab0",
+      "vertices": 83492,
+      "triangles": 99490,
+      "meshes": 10,
+      "materials": 5,
       "articulation": [
-        {
-          "name": "hover-fold-hinge-wheel-1",
-          "pivot": [
-            -0.05286876850334824,
-            0.8874990372678524,
-            0.047742542546816195
-          ],
-          "axis": [
-            0.2735118842734388,
-            -0.9563381472407629,
-            -0.10299804509454576
-          ]
-        },
-        {
-          "name": "hover-fold-hinge-wheel-2",
-          "pivot": [
-            0.7979760236348524,
-            0.09399475144797033,
-            0.45189778172219414
-          ],
-          "axis": [
-            -0.8519194796760162,
-            -0.36934779637048715,
-            -0.3712349733858748
-          ]
-        },
-        {
-          "name": "hover-fold-hinge-wheel-3",
-          "pivot": [
-            0.44903801008905286,
-            -0.9010904398141691,
-            -0.2921012227145025
-          ],
-          "axis": [
-            -0.6056027002361255,
-            0.7708209437664866,
-            0.19768773891583877
-          ]
-        },
-        {
-          "name": "hover-fold-hinge-wheel-4",
-          "pivot": [
-            -0.8020510242846586,
-            -0.5137834256789384,
-            0.23570180984325295
-          ],
-          "axis": [
-            0.8024264677513272,
-            0.5699233417597671,
-            -0.17691565326309688
-          ]
-        },
-        {
-          "name": "hover-fold-hinge-wheel-5",
-          "pivot": [
-            -0.5280840681680492,
-            0.36884914152758036,
-            -0.5151758634426736
-          ],
-          "axis": [
-            0.7798058910337592,
-            -0.32871281222878107,
-            0.532776369019583
-          ]
-        },
         {
           "name": "hover-experimental-central-wheel",
           "pivot": [
-            0.05319878802539106,
-            -0.06390854755194844,
-            -0.2046285043389805
+            -0.1459309187865462,
+            -0.11135355430281077,
+            0.3072055405682634
           ],
           "axis": [
-            -0.012864120881124914,
-            -0.37038114728133414,
-            0.9287907838326771
-          ]
+            -0.25885193792100447,
+            -0.31709320836659916,
+            0.9123856484197442
+          ],
+          "motion": {
+            "kind": "continuous",
+            "angularVelocity": 0.46,
+            "ratio": 1,
+            "driver": "hover-experimental-central-wheel",
+            "teeth": 36,
+            "module": 0.020083562922080682,
+            "sourceModule": 0.018
+          }
         },
         {
           "name": "hover-experimental-transfer-wheel",
           "pivot": [
-            0.4388216411967305,
-            -0.16891527040333956,
-            -0.24116182494775154
+            0.37219889452210875,
+            -0.31636524696338747,
+            0.3829532148229876
           ],
           "axis": [
-            -0.012864120881124914,
-            -0.37038114728133414,
-            0.9287907838326771
-          ]
+            -0.25885193792100447,
+            -0.31709320836659916,
+            0.9123856484197442
+          ],
+          "motion": {
+            "kind": "continuous",
+            "angularVelocity": 0.46,
+            "ratio": -1.8,
+            "driver": "hover-experimental-central-wheel",
+            "teeth": 20,
+            "module": 0.020083562922080682,
+            "sourceModule": 0.018
+          }
+        },
+        {
+          "name": "hover-fold-hinge-wheel-1",
+          "pivot": [
+            0.48541696400052514,
+            0.1152999520474154,
+            0.5650963906549811
+          ],
+          "axis": [
+            -0.25885193792100447,
+            -0.31709320836659916,
+            0.9123856484197442
+          ],
+          "motion": {
+            "kind": "continuous",
+            "angularVelocity": 0.46,
+            "ratio": 1.2857142857142858,
+            "driver": "hover-experimental-central-wheel",
+            "teeth": 28,
+            "module": 0.020083562922080682,
+            "sourceModule": 0.018
+          }
+        },
+        {
+          "name": "hover-fold-hinge-wheel-2",
+          "pivot": [
+            -0.6369120197708845,
+            -0.37371304674660905,
+            0.07672863308836889
+          ],
+          "axis": [
+            -0.25885193792100447,
+            -0.31709320836659916,
+            0.9123856484197442
+          ],
+          "motion": {
+            "kind": "continuous",
+            "angularVelocity": 0.46,
+            "ratio": -1.5,
+            "driver": "hover-experimental-central-wheel",
+            "teeth": 24,
+            "module": 0.020083562922080682,
+            "sourceModule": 0.018
+          }
+        },
+        {
+          "name": "hover-fold-hinge-wheel-3",
+          "pivot": [
+            -0.8175721180076344,
+            -0.022051244153648644,
+            0.14769133709707508
+          ],
+          "axis": [
+            -0.25885193792100447,
+            -0.31709320836659916,
+            0.9123856484197442
+          ],
+          "motion": {
+            "kind": "continuous",
+            "angularVelocity": 0.46,
+            "ratio": 2.25,
+            "driver": "hover-experimental-central-wheel",
+            "teeth": 16,
+            "module": 0.020083562922080682,
+            "sourceModule": 0.018
+          }
+        },
+        {
+          "name": "hover-experimental-wheel-engraving",
+          "pivot": [
+            -0.1459309187865462,
+            -0.11135355430281077,
+            0.3072055405682634
+          ],
+          "axis": [
+            -0.25885193792100447,
+            -0.31709320836659916,
+            0.9123856484197442
+          ],
+          "motion": {
+            "kind": "continuous",
+            "angularVelocity": 0.46,
+            "ratio": 1,
+            "driver": "hover-experimental-central-wheel"
+          }
         }
       ],
       "bounds": {
         "min": [
-          -0.9035313725471497,
-          -1,
-          -0.5918275713920593
+          -1.0000000011558279,
+          -0.9259778261184692,
+          -0.716029703617096
         ],
         "max": [
-          0.9035313725471497,
           1,
-          0.5918275713920593
+          0.9259778261184692,
+          0.7160297010444998
         ]
       },
       "framing": {
-        "rest": 1.1614697626754098,
-        "fullArticulation": 1.1614697626754098,
-        "fullArticulationPlusBurst": 1.1614697626754098,
+        "rest": 1.2218513660059542,
+        "fullArticulation": 1.2218513660059542,
+        "fullArticulationPlusBurst": 1.2218513660059542,
         "paddingRequired": 0,
         "paddingSlackAtPoint16": 0.16,
         "articulation": [
           {
-            "name": "hover-fold-hinge-wheel-1",
-            "restRadius": 0.920224182437142,
-            "articulatedRadius": 0.9202342785918689,
-            "burstTranslationBound": 0.07,
-            "articulatedPlusBurstRadius": 0.990234278591869
-          },
-          {
-            "name": "hover-fold-hinge-wheel-2",
-            "restRadius": 0.9557197418043631,
-            "articulatedRadius": 0.9557522033230147,
-            "burstTranslationBound": 0.07607357886803998,
-            "articulatedPlusBurstRadius": 1.0318257821910546
-          },
-          {
-            "name": "hover-fold-hinge-wheel-3",
-            "restRadius": 1.0773083241722685,
-            "articulatedRadius": 1.0773161365529638,
-            "burstTranslationBound": 0.08050462732376276,
-            "articulatedPlusBurstRadius": 1.1578207638767266
-          },
-          {
-            "name": "hover-fold-hinge-wheel-4",
-            "restRadius": 1.0020141961955633,
-            "articulatedRadius": 1.0020674213355774,
-            "burstTranslationBound": 0.07377380549083952,
-            "articulatedPlusBurstRadius": 1.0758412268264168
-          },
-          {
-            "name": "hover-fold-hinge-wheel-5",
-            "restRadius": 0.853719252722637,
-            "articulatedRadius": 0.8537437057335853,
-            "burstTranslationBound": 0.07053450889272148,
-            "articulatedPlusBurstRadius": 0.9242782146263068
-          },
-          {
             "name": "hover-experimental-central-wheel",
-            "restRadius": 0.4646203973635679,
-            "articulatedRadius": 0.46472184071324524,
-            "burstTranslationBound": 0.07820122072764178,
-            "articulatedPlusBurstRadius": 0.542923061440887
+            "range": "full rotation",
+            "restRadius": 0.5875455830100128,
+            "articulatedRadius": 0.5875883654221935,
+            "burstTranslationBound": 0.07,
+            "articulatedPlusBurstRadius": 0.6575883654221935
           },
           {
             "name": "hover-experimental-transfer-wheel",
-            "restRadius": 0.659240822696715,
-            "articulatedRadius": 0.6593674397600103,
-            "burstTranslationBound": 0.07958850495544625,
-            "articulatedPlusBurstRadius": 0.7389559447154566
+            "range": "full rotation",
+            "restRadius": 0.8258122126708191,
+            "articulatedRadius": 0.8258561428460551,
+            "burstTranslationBound": 0.07607357886803998,
+            "articulatedPlusBurstRadius": 0.9019297217140951
+          },
+          {
+            "name": "hover-fold-hinge-wheel-1",
+            "range": "full rotation",
+            "restRadius": 1.0406983789553708,
+            "articulatedRadius": 1.040704684900639,
+            "burstTranslationBound": 0.08050462732376276,
+            "articulatedPlusBurstRadius": 1.1212093122244018
+          },
+          {
+            "name": "hover-fold-hinge-wheel-2",
+            "range": "full rotation",
+            "restRadius": 0.9914945121335496,
+            "articulatedRadius": 0.9915140618142129,
+            "burstTranslationBound": 0.07377380549083952,
+            "articulatedPlusBurstRadius": 1.0652878673050523
+          },
+          {
+            "name": "hover-fold-hinge-wheel-3",
+            "range": "full rotation",
+            "restRadius": 1.0089537670585642,
+            "articulatedRadius": 1.009029590223403,
+            "burstTranslationBound": 0.07053450889272148,
+            "articulatedPlusBurstRadius": 1.0795640991161244
+          },
+          {
+            "name": "hover-experimental-wheel-engraving",
+            "range": "full rotation",
+            "restRadius": 0.5568846844434454,
+            "articulatedRadius": 0.5568900386642033,
+            "burstTranslationBound": 0.07820122072764178,
+            "articulatedPlusBurstRadius": 0.6350912593918451
           }
         ]
       },
@@ -648,8 +619,8 @@
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999554003985,
-        "maximumNormalLength": 1.0000000408278487
+        "minimumNormalLength": 0.9999999562375032,
+        "maximumNormalLength": 1.000000046239763
       }
     }
   ]

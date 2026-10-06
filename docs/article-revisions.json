@@ -1,0 +1,386 @@
+{
+  "version": 2,
+  "date": "2026-10-05",
+  "purpose": "Authorized revision for concise prose and clearer structure; original research cutoff and evidence retained.",
+  "readingTimeBasis": "See article-quality-revisions.json for the main-manuscript reading estimate.",
+  "records": [
+    {
+      "slug": "the-ai-megawatt",
+      "originalPath": "docs/article-originals/the-ai-megawatt.json",
+      "originalSha256": "538fa985eeec5f390fe951177e522babda6995323999cbfc30ba3b1a66a597e7",
+      "currentSha256": "613478c181edf154d04d8a4882ebf3e25e04ea09b3ef9318d7356dfc0cb8f480",
+      "evidenceSha256": "9822d1917999782a36bd1504f0fc8d8f66eb9cd1a8b1607610d3eb5eec479a12",
+      "proseWords": {
+        "before": 2200,
+        "after": 1562,
+        "reductionPercent": 29
+      },
+      "readTime": "11 MIN",
+      "priorRevision": {
+        "slug": "the-ai-megawatt",
+        "originalPath": "docs/article-originals/the-ai-megawatt.json",
+        "originalSha256": "538fa985eeec5f390fe951177e522babda6995323999cbfc30ba3b1a66a597e7",
+        "currentSha256": "ca6752b25b0198625a665ab490c47f70711cf66806fa9b53f822b789237b3d52",
+        "evidenceSha256": "333ea7b5181ff4994e3e09af10596cfcb3278824174d0e50f3a279531a357648",
+        "proseWords": {
+          "before": 2200,
+          "after": 1519,
+          "reductionPercent": 31
+        },
+        "readTime": "10 MIN"
+      }
+    },
+    {
+      "slug": "crawl-frontier-state-machine",
+      "originalPath": "docs/article-originals/crawl-frontier-state-machine.json",
+      "originalSha256": "54f89d5b0bc5f407fcef7fa96110d0bd0baf4628d8b408a429e44d2930f56cac",
+      "currentSha256": "930b8283a6af8eff9fc41e109bfc6ee7f05b748576d4e9777f4deec462081668",
+      "evidenceSha256": "db801ed90bb6a09bbfd102214302ba9d938730c2307913356e6686daa363dfa3",
+      "proseWords": {
+        "before": 1274,
+        "after": 900,
+        "reductionPercent": 29
+      },
+      "readTime": "6 MIN"
+    },
+    {
+      "slug": "raw-html-rendered-dom-evidence",
+      "originalPath": "docs/article-originals/raw-html-rendered-dom-evidence.json",
+      "originalSha256": "0a0768f5bfc1e166536b609a82573e64f2caac09b795a177b61994b77d6e4e5d",
+      "currentSha256": "12a83d4b08eee6e4cd176dc43b45910bf71dbce3834f76a6bfdb2ccba1a2aa64",
+      "evidenceSha256": "bf8186aa27acf8c2b596d026cba93c49bdb68f678c1b63d87ee276daaf3208ed",
+      "proseWords": {
+        "before": 1160,
+        "after": 862,
+        "reductionPercent": 26
+      },
+      "readTime": "6 MIN"
+    },
+    {
+      "slug": "canonicalization-graph-consistency",
+      "originalPath": "docs/article-originals/canonicalization-graph-consistency.json",
+      "originalSha256": "dc8eb0612e583ccf79c83c305e1d9b9d5b1ff723235672e362d46dbb2d77b3eb",
+      "currentSha256": "60a96ffa87f7d0e3dd1a01ca0cea41117babf9bb89bd0654c2156bea26dcb86a",
+      "evidenceSha256": "c7579d9d4f04db11d11e6932f13c8620e50761fbaaab226c7ef211ba0c9a8409",
+      "proseWords": {
+        "before": 1236,
+        "after": 906,
+        "reductionPercent": 27
+      },
+      "readTime": "6 MIN"
+    },
+    {
+      "slug": "internal-links-directed-retrieval-graph",
+      "originalPath": "docs/article-originals/internal-links-directed-retrieval-graph.json",
+      "originalSha256": "4fe5987c158849e12619904dd126c3badd6b132514e5b8b560b9fb7352c9689b",
+      "currentSha256": "e33ad150634f43bf655341551ee402d12652316c0c2338e1deba1781df87ea87",
+      "evidenceSha256": "51cfd0c36913fb23613d20bdfef37741342bb6cbb7a896d8d181b5a2d3b22659",
+      "proseWords": {
+        "before": 1163,
+        "after": 886,
+        "reductionPercent": 24
+      },
+      "readTime": "6 MIN"
+    },
+    {
+      "slug": "robots-txt-courtesy-not-access-control",
+      "originalPath": "docs/article-originals/robots-txt-courtesy-not-access-control.json",
+      "originalSha256": "2a382f1076426a33d273f89583e42e13282195dfdf42179ab9ca4dfa61678650",
+      "currentSha256": "02c87c4ee2be8d704469c1ee9f93a843d30d8c843aedd68b03ac7187a0e713a7",
+      "evidenceSha256": "410fe426d356b464698eb214edad96c89ae902e9c0d925cd05bb34d19741b0e2",
+      "proseWords": {
+        "before": 1316,
+        "after": 984,
+        "reductionPercent": 25
+      },
+      "readTime": "6 MIN"
+    },
+    {
+      "slug": "structured-data-without-content-drift",
+      "originalPath": "docs/article-originals/structured-data-without-content-drift.json",
+      "originalSha256": "0228b4d2235e3edc6dad9d151917efe0391d9628d48c05893bc9497242a4ecdc",
+      "currentSha256": "9185d3cc67273b3fd46e259d2216218432fd326897fbc8d3976350d5805376fd",
+      "evidenceSha256": "24eaa70c1a2c404092b375c9ee4a902af0d07172e9d1d497f733becb05c5f2a0",
+      "proseWords": {
+        "before": 1128,
+        "after": 824,
+        "reductionPercent": 27
+      },
+      "readTime": "5 MIN"
+    },
+    {
+      "slug": "audit-findings-derived-records",
+      "originalPath": "docs/article-originals/audit-findings-derived-records.json",
+      "originalSha256": "f3994e1908a17f1a038d74f8b940bf599ec393ad6ad4f78afdcf58fab872bdcb",
+      "currentSha256": "56f78b5d85a5954f7f79911ad6bba3baeec5f9d8a725ec8194517374d997b335",
+      "evidenceSha256": "6ea1ca3355355fe5c906c147af0a22959bd5df768011c2a14be2ee823b8770cb",
+      "proseWords": {
+        "before": 1181,
+        "after": 854,
+        "reductionPercent": 28
+      },
+      "readTime": "6 MIN"
+    },
+    {
+      "slug": "replayable-traces-ai-agent-evaluation",
+      "originalPath": "docs/article-originals/replayable-traces-ai-agent-evaluation.json",
+      "originalSha256": "944ed03665a1f81bf5aca8f0ffcd2ad8005e692552e29c239b787424157c5e8e",
+      "currentSha256": "cd30b81e7f6272c4895f322ea28b94f2da20f4891e87ff2fa672651ff86f0624",
+      "evidenceSha256": "90469c1553be71ae6454067f819a27cdd870956bd8cddc8186c7dc626da7e719",
+      "proseWords": {
+        "before": 1231,
+        "after": 913,
+        "reductionPercent": 26
+      },
+      "readTime": "6 MIN"
+    },
+    {
+      "slug": "sqlite-crawl-pipelines",
+      "originalPath": "docs/article-originals/sqlite-crawl-pipelines.json",
+      "originalSha256": "6ef09f3345e283be1864f6d3401914e16585919b6494d9611236595b7cc4c194",
+      "currentSha256": "f1a3ed5ca66be292a52dce18890d2fed438c6535a320c7394e52bc054dc8caf7",
+      "evidenceSha256": "8df1bab38445906cb7424069401d45ed16022e755b26cfe548ade65431b029ad",
+      "proseWords": {
+        "before": 1268,
+        "after": 914,
+        "reductionPercent": 28
+      },
+      "readTime": "6 MIN"
+    },
+    {
+      "slug": "technical-seo-migration-release-gates",
+      "originalPath": "docs/article-originals/technical-seo-migration-release-gates.json",
+      "originalSha256": "5089ce408f640215db06a99e4e62ae1316fd8cae993a600585f578b93c202319",
+      "currentSha256": "007edb6ccb64ba46f0a411bca1cf66cf669bde5ae177ee46b61f446fef0b8916",
+      "evidenceSha256": "967770886ae566c47486f0b5d7ff461225c93ebf7e9c33eb9dd867b88ab271c6",
+      "proseWords": {
+        "before": 1147,
+        "after": 854,
+        "reductionPercent": 26
+      },
+      "readTime": "6 MIN"
+    },
+    {
+      "slug": "who-owns-austin-home-service-companies",
+      "originalPath": "docs/article-originals/who-owns-austin-home-service-companies.json",
+      "originalSha256": "bf4860028a5f5f5463ce477fa026bea80f27c4e15d8247bb6c58c959ed04cffc",
+      "currentSha256": "51fea94a03de9a44667557d0c5b62773337b8351f5798d637c363a9da9113ac6",
+      "evidenceSha256": "166a3b1e2a161c657243eab057d7a0265dabc7e9e2675d85590d1575b8b6c9ee",
+      "proseWords": {
+        "before": 2229,
+        "after": 1954,
+        "reductionPercent": 12
+      },
+      "readTime": "11 MIN"
+    },
+    {
+      "slug": "what-happens-when-an-index-decides-a-company-matters",
+      "originalPath": "docs/article-originals/what-happens-when-an-index-decides-a-company-matters.json",
+      "originalSha256": "c871b5a9236aed2700a1db0b5be563388a57bcdc08f27e765830ec13d7ade685",
+      "currentSha256": "802ab80c7c2460905ba5a428dc745aa6bcdea350cb08729ec7336b2d8c1965d8",
+      "evidenceSha256": "45dfb8ad6e0865a58fe46f5f21ab9dec5b716da9ab6ebd68c654447b0617e83a",
+      "proseWords": {
+        "before": 1931,
+        "after": 1877,
+        "reductionPercent": 3
+      },
+      "readTime": "11 MIN"
+    },
+    {
+      "slug": "software-buyout-boom-2020-2022-exit-audit",
+      "originalPath": "docs/article-originals/software-buyout-boom-2020-2022-exit-audit.json",
+      "originalSha256": "04a524eb6bcd9a570e4f6019b0940571e9947ce002aa70a2c9c06e2f6644ac99",
+      "currentSha256": "673bb7e16695b6683e77615b4e0bff173eef0f7cec23bad29dd9352f54c2d725",
+      "evidenceSha256": "185870342e44d711d529a9541203e8314e4bd3b19fab25550243bfc5bb044018",
+      "proseWords": {
+        "before": 837,
+        "after": 815,
+        "reductionPercent": 3
+      },
+      "readTime": "7 MIN"
+    },
+    {
+      "slug": "how-airlines-borrow-against-loyalty-programs",
+      "originalPath": "docs/article-originals/how-airlines-borrow-against-loyalty-programs.json",
+      "originalSha256": "b4fea8ce7267cd56c428a54186d828ec26cb91aafbb3b20a5174f94f59246d18",
+      "currentSha256": "ad5569981ea1491a1368a5a87a70e976d819a02fbc7bd1c254e1e76100ed4a33",
+      "evidenceSha256": "29d91c887e7fc1612277e65260f60b5222541c894d12192c859449a2162cd252",
+      "proseWords": {
+        "before": 2026,
+        "after": 1579,
+        "reductionPercent": 22
+      },
+      "readTime": "11 MIN",
+      "priorRevision": {
+        "slug": "how-airlines-borrow-against-loyalty-programs",
+        "originalPath": "docs/article-originals/how-airlines-borrow-against-loyalty-programs.json",
+        "originalSha256": "b4fea8ce7267cd56c428a54186d828ec26cb91aafbb3b20a5174f94f59246d18",
+        "currentSha256": "c179061a8b07a9791f6e2560ec2028c18130632d95f6dae9546791a64235695d",
+        "evidenceSha256": "6eae29106754460a5782dd09600c20ef410c27aa4f2eba6da2b5bdeb0c1bce87",
+        "proseWords": {
+          "before": 2026,
+          "after": 1494,
+          "reductionPercent": 26
+        },
+        "readTime": "10 MIN"
+      }
+    },
+    {
+      "slug": "where-online-returns-actually-go",
+      "originalPath": "docs/article-originals/where-online-returns-actually-go.json",
+      "originalSha256": "eb3dd0f52bb7be554d97b24ed9ebba3239ee4608fa3589f0149780ab47e4d8a4",
+      "currentSha256": "2eb44b48a74a45579b24dbb95456790185c43c0d25b7ca152469e39f26b27866",
+      "evidenceSha256": "b18f507c019cd5d05eae91357123c2021299cbd57440a75a289ad1b0ab49179d",
+      "proseWords": {
+        "before": 1781,
+        "after": 1345,
+        "reductionPercent": 24
+      },
+      "readTime": "9 MIN",
+      "priorRevision": {
+        "slug": "where-online-returns-actually-go",
+        "originalPath": "docs/article-originals/where-online-returns-actually-go.json",
+        "originalSha256": "eb3dd0f52bb7be554d97b24ed9ebba3239ee4608fa3589f0149780ab47e4d8a4",
+        "currentSha256": "36256ffd8b5202abf529a6eca9d065b5f970ff143ea305c78921444545c7328b",
+        "evidenceSha256": "b05268b9570a4eb77f2b1e6d1f5fd3993764e4499b9ccb91bf43c2c2e6c1a05d",
+        "proseWords": {
+          "before": 1781,
+          "after": 1276,
+          "reductionPercent": 28
+        },
+        "readTime": "9 MIN"
+      }
+    },
+    {
+      "slug": "hidden-financing-hardware-startups",
+      "originalPath": "docs/article-originals/hidden-financing-hardware-startups.json",
+      "originalSha256": "b0e4af6d58184043c4331efbbb51e6e19704b784acd7c5918e2456ff94c108bc",
+      "currentSha256": "22e6ee482efe561a585371e322ec2a490272a7c142ad0e776927ce40f31f7994",
+      "evidenceSha256": "425ec06eb3989819812fd2fceffbb30a138d2dd272aa2e16103dc6198b8713c1",
+      "proseWords": {
+        "before": 2567,
+        "after": 1766,
+        "reductionPercent": 31
+      },
+      "readTime": "13 MIN",
+      "priorRevision": {
+        "slug": "hidden-financing-hardware-startups",
+        "originalPath": "docs/article-originals/hidden-financing-hardware-startups.json",
+        "originalSha256": "b0e4af6d58184043c4331efbbb51e6e19704b784acd7c5918e2456ff94c108bc",
+        "currentSha256": "dd91bced257622cb346b3855d97f340a32e454167f4e9d4ddca5260e220d8cb6",
+        "evidenceSha256": "66d82fa349848b9e53aa38713f34c258d295355d01ee997d857618a086551417",
+        "proseWords": {
+          "before": 2567,
+          "after": 1686,
+          "reductionPercent": 34
+        },
+        "readTime": "12 MIN"
+      }
+    },
+    {
+      "slug": "west-campus-student-housing",
+      "originalPath": "docs/article-originals/west-campus-student-housing.json",
+      "originalSha256": "de0d24315cfbef1ebbd5318fdf3c74a0f7f60dd06193bb638adea378acb1988a",
+      "currentSha256": "af5ca3da0d87307e00f6ff3b6fc2a268ca8da9a6c1fc7c507e2492f50a284e9e",
+      "evidenceSha256": "9e22316cfcae9bd16bc52ff112159088dae93e32ddce29975c677843f918c1b4",
+      "proseWords": {
+        "before": 2606,
+        "after": 2449,
+        "reductionPercent": 6
+      },
+      "readTime": "14 MIN"
+    },
+    {
+      "slug": "waymo-hardware-financing",
+      "originalPath": "docs/article-originals/waymo-hardware-financing.json",
+      "originalSha256": "6bf8685183e54f204b7e518c0772f750ffd94314e93b83e30be1935c24b8c3e6",
+      "currentSha256": "b7605d8b1e2dd26c088f681d797186321459ac93f42db9245638cfb1dfcf773f",
+      "evidenceSha256": "d8869fa6f6c0f08d12dde5ef80473944ea78d8ff380113f91a21ddfd3770f6ee",
+      "proseWords": {
+        "before": 2198,
+        "after": 1583,
+        "reductionPercent": 28
+      },
+      "readTime": "11 MIN",
+      "priorRevision": {
+        "slug": "waymo-hardware-financing",
+        "originalPath": "docs/article-originals/waymo-hardware-financing.json",
+        "originalSha256": "6bf8685183e54f204b7e518c0772f750ffd94314e93b83e30be1935c24b8c3e6",
+        "currentSha256": "9970acf9759ba7ccffe281fbcef67dae9ef80512ce73e22df06c9a615d601427",
+        "evidenceSha256": "3dbf5e48674f275154d619e302994bcd991171465c7293c0363b2dcf26e4375b",
+        "proseWords": {
+          "before": 2198,
+          "after": 1514,
+          "reductionPercent": 31
+        },
+        "readTime": "11 MIN"
+      }
+    },
+    {
+      "slug": "ai-search-crawler-policy",
+      "originalPath": "docs/article-originals/ai-search-crawler-policy.json",
+      "originalSha256": "2de76f226cad21220b4340a2189c6c71a1ac521ac7d6abb7dc51eb50291142de",
+      "currentSha256": "e5e110a2cf03407015053ced8a2f6b393f74d792bce81ea6b337c321bf5412bc",
+      "evidenceSha256": "c7226c8face2d3a899ed3415411dee677bdafac93ce9937e12ad5864c2a4c802",
+      "proseWords": {
+        "before": 293,
+        "after": 467,
+        "reductionPercent": -59
+      },
+      "readTime": "4 MIN"
+    },
+    {
+      "slug": "technical-seo-public-data-infrastructure",
+      "originalPath": "docs/article-originals/technical-seo-public-data-infrastructure.json",
+      "originalSha256": "389d5ea3124b420d58a7a98470bc72f309b9badb96d172b943c3381615872182",
+      "currentSha256": "345e22a3f642fd3e1f1bb5f6030be40069d0836f72e7ee6368a2133df84bd911",
+      "evidenceSha256": "72f44ece96803e708597d14929467ebb77df27297418d1fd4d8745aa071e16ec",
+      "proseWords": {
+        "before": 1111,
+        "after": 832,
+        "reductionPercent": 25
+      },
+      "readTime": "5 MIN"
+    },
+    {
+      "slug": "canonical-identity-personal-seo",
+      "originalPath": "docs/article-originals/canonical-identity-personal-seo.json",
+      "originalSha256": "893241df5e6116e05b430003ddeb26f351153429916b5fbadee7cf132bcf6a42",
+      "currentSha256": "0912ee708429f41b3e41213169a459232609ebacc8fcd4e7c7f444ec98a71bff",
+      "evidenceSha256": "6a8d47a0e1e8cc3bb37616cf77687f6a8d4f377c2f443c1f03e8b20027320bca",
+      "proseWords": {
+        "before": 766,
+        "after": 716,
+        "reductionPercent": 7
+      },
+      "readTime": "5 MIN"
+    },
+    {
+      "slug": "us-rare-earth-magnet-manufacturing-capacity",
+      "originalPath": "docs/article-originals/us-rare-earth-magnet-manufacturing-capacity.json",
+      "originalSha256": "80af15aae60667c43981bc7e9c6b94147753bf49847091a9a51c308beab9c908",
+      "currentSha256": "dd8b279fc25858c166da18f90126a5c8457b1e04e54589f782f63bf16e1c2f32",
+      "evidenceSha256": "e067c6dd1cf90c76076b2933ce4eeb8ccd60d8704005e331a557332b123d0e0f",
+      "proseWords": {
+        "before": 2284,
+        "after": 2017,
+        "reductionPercent": 12
+      },
+      "readTime": "13 MIN"
+    },
+    {
+      "slug": "jane-street-exact-search-solver-verification",
+      "originalPath": "docs/article-originals/jane-street-exact-search-solver-verification.json",
+      "originalSha256": "291fd1ecc855748c30784f70a9e0e6244c83c35beb4504ad43fcf1614bef3bc4",
+      "currentSha256": "8f7537ffc48d5198493caa6c8f0012d05aa91d52b01ce462a79523cdb60cf9b9",
+      "evidenceSha256": "bec9cff62beb4f3cec9ae370fb1be5d2e0b632d42d2a1ca62e072f6b02b7b451",
+      "proseWords": {
+        "before": 1493,
+        "after": 1315,
+        "reductionPercent": 12
+      },
+      "readTime": "8 MIN"
+    }
+  ],
+  "codeLabelRevisionReceipt": "docs/article-code-label-revisions.json"
+}

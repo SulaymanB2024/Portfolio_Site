@@ -1,0 +1,819 @@
+{
+  "version": 1,
+  "date": "2026-10-05",
+  "purpose": "Editorial improvements to all published articles, authored search metadata, and consistent discovery output. Research cutoffs and original evidence are retained.",
+  "readingTimeBasis": "220 words per minute for the main manuscript, evidence tables, code and captions; separate source ledgers, expandable registries, and downloads excluded.",
+  "exceptions": [
+    {
+      "slug": "ai-search-crawler-policy",
+      "unit": "opening",
+      "reason": "Corrected product-token group matching to case-insensitive; path matching SHOULD be case sensitive. Added the primary protocol citation.",
+      "addedNumbers": [
+        "2.2.1"
+      ],
+      "addedLinks": [
+        "https://www.rfc-editor.org/rfc/rfc9309.html#section-2.2.1"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "slug": "atlas-building-an-evidence-console",
+      "path": "src/personal/editorial/data/articles/atlas-building-an-evidence-console.json",
+      "baselinePath": "docs/article-quality-baselines/atlas-building-an-evidence-console.json",
+      "baselineSha256": "8952b17b4ac19abb13583ab01cd4377b3e3d0dabb8b20d2c3f286da1d3812b5b",
+      "currentSha256": "07457aba1750fc7bd005eeb683be50c9f8fa08a63d957c99e5bf2d6a2191e697",
+      "evidenceSha256": "0de64f930d4f800ab3d85368dd2dc5f900dc42012acf9902d619bb527c6d247c",
+      "proseWords": {
+        "before": 822,
+        "after": 764
+      },
+      "readTime": "4 MIN",
+      "datePublished": "2026-10-01",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Atlas Website Audit Console: Captures and Findings",
+      "seoDescription": "How Atlas links website audit findings to captured pages, rendered facts, and reviewable evidence, with a retained sample and code-level checks.",
+      "changedUnits": [
+        "opening",
+        "product",
+        "capture",
+        "source-and-render",
+        "findings",
+        "improvement-cycle",
+        "limits"
+      ]
+    },
+    {
+      "slug": "jane-street-exact-search-solver-verification",
+      "path": "src/personal/editorial/data/articles/jane-street-exact-search-solver-verification.json",
+      "baselinePath": "docs/article-quality-baselines/jane-street-exact-search-solver-verification.json",
+      "baselineSha256": "0b98e15dec9b4db5fd354e5c993fb03fff19fbe09fd838158e4b72e44d6bdc62",
+      "currentSha256": "8f7537ffc48d5198493caa6c8f0012d05aa91d52b01ce462a79523cdb60cf9b9",
+      "evidenceSha256": "954b4f6be2469698a4dc3b7001625a75ac672f6aa2aaff5bb14e68f8f0133ae4",
+      "proseWords": {
+        "before": 1398,
+        "after": 1224
+      },
+      "readTime": "8 MIN",
+      "datePublished": "2026.09.15",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Jane Street Puzzle Solver: Search and Verification",
+      "seoDescription": "A 54-move Jane Street puzzle case study: infer the score schedule, prune exact path searches, and verify the route without trusting the solver’s output.",
+      "changedUnits": [
+        "opening",
+        "state-problem",
+        "arithmetic-before-geometry",
+        "segment-search",
+        "verifier",
+        "result",
+        "production-proof",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "why-texas-toll-roads-stay-tolled",
+      "path": "src/personal/editorial/data/articles/why-texas-toll-roads-stay-tolled.json",
+      "baselinePath": "docs/article-quality-baselines/why-texas-toll-roads-stay-tolled.json",
+      "baselineSha256": "8596d8aeb9d42378267937d4a9ea48d9f5605ccef5ca4e9b1c4c342123fd0ba9",
+      "currentSha256": "dab2e5849c89f33e5f5b1f994839de9682971f7879d20e4537c6320c8df06f0c",
+      "evidenceSha256": "864ca18ac450508e7bdca93c35f23700c51f238596a2ad764df05bece1a95272",
+      "proseWords": {
+        "before": 2334,
+        "after": 2063
+      },
+      "readTime": "13 MIN",
+      "datePublished": "2026.09.02",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Why Texas Toll Roads Stay Tolled After Construction",
+      "seoDescription": "Follow Texas toll revenue through debt, reserves, public transfers, and private concessions, using FY2025 accounts and the SH 288 termination.",
+      "changedUnits": [
+        "html"
+      ]
+    },
+    {
+      "slug": "software-buyout-boom-2020-2022-exit-audit",
+      "path": "src/personal/editorial/data/articles/software-buyout-boom-2020-2022-exit-audit.json",
+      "baselinePath": "docs/article-quality-baselines/software-buyout-boom-2020-2022-exit-audit.json",
+      "baselineSha256": "42d8f69c7c9b45c6efe4e5c7a1e9a83cb3476ed32c1a42dee12aa4a41ef29fa3",
+      "currentSha256": "673bb7e16695b6683e77615b4e0bff173eef0f7cec23bad29dd9352f54c2d725",
+      "evidenceSha256": "881b2cab898874474b2d494da1037d894a32da782794c7f012cf43dc316748fb",
+      "proseWords": {
+        "before": 769,
+        "after": 745
+      },
+      "readTime": "7 MIN",
+      "datePublished": "2026.08.17",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Software Buyouts, 2020–2022: Control and Exit Audit",
+      "seoDescription": "An August 2026 audit of 25 software take-privates separates control exits, partial liquidity and creditor transfers without treating them as investment returns.",
+      "changedUnits": [
+        "opening",
+        "four-quantities-stay-separate",
+        "deal-by-deal-control-inventory",
+        "liquidity-without-clean-exits",
+        "control-based-classification",
+        "cohort-not-fully-seasoned",
+        "public-evidence-limit",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "us-rare-earth-magnet-manufacturing-capacity",
+      "path": "src/personal/editorial/data/articles/us-rare-earth-magnet-manufacturing-capacity.json",
+      "baselinePath": "docs/article-quality-baselines/us-rare-earth-magnet-manufacturing-capacity.json",
+      "baselineSha256": "0aad3f95a042a3521ecae8aac46edbc25f4e8ad29886b26b8b7650d016356973",
+      "currentSha256": "dd8b279fc25858c166da18f90126a5c8457b1e04e54589f782f63bf16e1c2f32",
+      "evidenceSha256": "86476dc2e520528e1a2efaae336f7f29ee189448e79ca48df9bbc11bf0125500",
+      "proseWords": {
+        "before": 2153,
+        "after": 1901
+      },
+      "readTime": "13 MIN",
+      "datePublished": "2026.08.17",
+      "dateModified": "2026-10-05",
+      "seoTitle": "U.S. Rare-Earth Magnets: Capacity and Qualified Supply",
+      "seoDescription": "An August 2026 audit separates U.S. NdFeB magnet nameplate from shipments, qualification and future projects, with explicit units and output scenarios.",
+      "changedUnits": [
+        "opening",
+        "headline",
+        "classification",
+        "demand-denominator",
+        "material-balance",
+        "product-mix",
+        "upstream",
+        "scenario-model",
+        "economics",
+        "scorecard",
+        "methodology",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "the-ai-megawatt",
+      "path": "src/personal/editorial/data/articles/the-ai-megawatt.json",
+      "baselinePath": "docs/article-quality-baselines/the-ai-megawatt.json",
+      "baselineSha256": "ca6752b25b0198625a665ab490c47f70711cf66806fa9b53f822b789237b3d52",
+      "currentSha256": "613478c181edf154d04d8a4882ebf3e25e04ea09b3ef9318d7356dfc0cb8f480",
+      "evidenceSha256": "c7209563d143307fbc61b6f4450d6f943e10f49a85b0fb6cfe6fa6e0b8fb6190",
+      "proseWords": {
+        "before": 1420,
+        "after": 1458
+      },
+      "readTime": "11 MIN",
+      "datePublished": "2026.08.16",
+      "dateModified": "2026-10-05",
+      "seoTitle": "AI Data Center Power: What 1 GW Means for GPUs",
+      "seoDescription": "A GB300 reference model translates 1 GW of facility power into installed GPUs, separating grid requests, PUE, network overhead and computational utilization.",
+      "changedUnits": [
+        "opening",
+        "capacity-dictionary",
+        "research-contract",
+        "network-overhead",
+        "facility-conversion",
+        "boundary-tests",
+        "installed-vs-utilized",
+        "disclosure-standard",
+        "limits",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "who-owns-austin-home-service-companies",
+      "path": "src/personal/editorial/data/articles/who-owns-austin-home-service-companies.json",
+      "baselinePath": "docs/article-quality-baselines/who-owns-austin-home-service-companies.json",
+      "baselineSha256": "df8f204d25ae945ad01fb9ab78b34db0ed807bb3af280f1a381343744480c06f",
+      "currentSha256": "51fea94a03de9a44667557d0c5b62773337b8351f5798d637c363a9da9113ac6",
+      "evidenceSha256": "1eb5d1755dcd4aefd1d7d36f46fc94161f1c7b6d450fb1ebf33d7d8b188f6f5b",
+      "proseWords": {
+        "before": 2119,
+        "after": 1845
+      },
+      "readTime": "11 MIN",
+      "datePublished": "2026.07.26",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Who Owns Austin Home-Service Companies? 67 Brands",
+      "seoDescription": "A July 2026 map traces 67 Austin home-service brands through owners, sponsors and franchise relationships, with unresolved control kept visible.",
+      "changedUnits": [
+        "opening",
+        "ownership-map",
+        "what-the-counts-show",
+        "mechanical-trades",
+        "roofing-foundation-pest",
+        "meaning-of-local",
+        "methodology",
+        "limitations-corrections",
+        "ownership-faq",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "what-happens-when-an-index-decides-a-company-matters",
+      "path": "src/personal/editorial/data/articles/what-happens-when-an-index-decides-a-company-matters.json",
+      "baselinePath": "docs/article-quality-baselines/what-happens-when-an-index-decides-a-company-matters.json",
+      "baselineSha256": "c27c759f240cfb9ca4ae01a8f6e20fd0f5fa0e1164572f9bdffbe4c2d1f7743b",
+      "currentSha256": "802ab80c7c2460905ba5a428dc745aa6bcdea350cb08729ec7336b2d8c1965d8",
+      "evidenceSha256": "85fed929a96728b85066504b0da1058d81c5f895601d4be9d7ea91e13049cdbc",
+      "proseWords": {
+        "before": 1845,
+        "after": 1790
+      },
+      "readTime": "11 MIN",
+      "datePublished": "2026.07.23",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Index Inclusion: Fund Flows, Auctions and Price Effects",
+      "seoDescription": "Follow index inclusion from provider rules to fund orders, using Tesla and event-study evidence to distinguish trading demand from lasting valuation effects.",
+      "changedUnits": [
+        "opening",
+        "effective-close",
+        "four-rule-systems",
+        "provider-commercial-machine",
+        "company-trying-to-qualify",
+        "rule-to-trade",
+        "event-study-evidence",
+        "who-earns-transfer",
+        "governance-conflicts",
+        "cost-of-capital",
+        "index-inclusion-questions",
+        "methodology-limits",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "how-airlines-borrow-against-loyalty-programs",
+      "path": "src/personal/editorial/data/articles/how-airlines-borrow-against-loyalty-programs.json",
+      "baselinePath": "docs/article-quality-baselines/how-airlines-borrow-against-loyalty-programs.json",
+      "baselineSha256": "c179061a8b07a9791f6e2560ec2028c18130632d95f6dae9546791a64235695d",
+      "currentSha256": "ad5569981ea1491a1368a5a87a70e976d819a02fbc7bd1c254e1e76100ed4a33",
+      "evidenceSha256": "738d6de93bf82cf736a2826f0cc028c7f164bc0b93b3f0397cf07187532e24c3",
+      "proseWords": {
+        "before": 1393,
+        "after": 1464
+      },
+      "readTime": "11 MIN",
+      "datePublished": "2026.07.23",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Airline Loyalty Financing: Cash, Collateral and Debt",
+      "seoDescription": "Trace airline loyalty financing through bank payments, deferred awards and pledged accounts, with American AAdvantage debt and modeled point economics.",
+      "changedUnits": [
+        "opening",
+        "four-clocks",
+        "what-the-bank-buys",
+        "cash-is-not-revenue",
+        "float-breakage-award-cost",
+        "loyalty-backed-debt",
+        "american-united-debt",
+        "program-valuation",
+        "partner-failure",
+        "profit-from-points",
+        "airline-loyalty-financing-faq",
+        "methodology",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "where-online-returns-actually-go",
+      "path": "src/personal/editorial/data/articles/where-online-returns-actually-go.json",
+      "baselinePath": "docs/article-quality-baselines/where-online-returns-actually-go.json",
+      "baselineSha256": "36256ffd8b5202abf529a6eca9d065b5f970ff143ea305c78921444545c7328b",
+      "currentSha256": "2eb44b48a74a45579b24dbb95456790185c43c0d25b7ca152469e39f26b27866",
+      "evidenceSha256": "0df653cc1283143c324a7bb6f520170f4830a2d944774490f80ad9569d0913c4",
+      "proseWords": {
+        "before": 1190,
+        "after": 1244
+      },
+      "readTime": "9 MIN",
+      "datePublished": "2026.07.22",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Online Returns: Recovery Costs and Reverse Logistics",
+      "seoDescription": "A nine-product model follows online returns through retrieval, inspection, restocking and liquidation, separating recovery value from unobserved outcomes.",
+      "changedUnits": [
+        "opening",
+        "refund-versus-product",
+        "return-decision-engine",
+        "return-center",
+        "nine-product-grid",
+        "value-density",
+        "secondary-market",
+        "fraud-controls",
+        "environmental-boundary",
+        "online-returns-questions",
+        "method-and-limitations",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "hidden-financing-hardware-startups",
+      "path": "src/personal/editorial/data/articles/hidden-financing-hardware-startups.json",
+      "baselinePath": "docs/article-quality-baselines/hidden-financing-hardware-startups.json",
+      "baselineSha256": "dd91bced257622cb346b3855d97f340a32e454167f4e9d4ddca5260e220d8cb6",
+      "currentSha256": "22e6ee482efe561a585371e322ec2a490272a7c142ad0e776927ce40f31f7994",
+      "evidenceSha256": "a15d531f70040b96317b55d639ce488a6c76dc90c882c6f87b896c41560377e4",
+      "proseWords": {
+        "before": 1580,
+        "after": 1654
+      },
+      "readTime": "13 MIN",
+      "datePublished": "2026.07.22",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Hardware Startup Financing: Five Companies Compared",
+      "seoDescription": "Compare five hardware capital stacks across equity, equipment finance, leases, customer funding and public support, tracing repayment and residual risk.",
+      "changedUnits": [
+        "opening",
+        "three-capital-stacks",
+        "financing-mechanics",
+        "waymo-parent-funded",
+        "serve-equipment-finance",
+        "coreweave-asset-finance",
+        "anduril-public-support",
+        "northvolt-project-finance",
+        "residual-value-and-utilization",
+        "structures-that-scale",
+        "hardware-financing-questions",
+        "findings-hierarchy",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "west-campus-student-housing",
+      "path": "src/personal/editorial/data/articles/west-campus-student-housing.json",
+      "baselinePath": "docs/article-quality-baselines/west-campus-student-housing.json",
+      "baselineSha256": "bfd8d8181554041a007af80923547abe398ddaba932e1e1d6f7431d9b3316c55",
+      "currentSha256": "af5ca3da0d87307e00f6ff3b6fc2a268ca8da9a6c1fc7c507e2492f50a284e9e",
+      "evidenceSha256": "e438a31a882b1f9facac65978075fef4388bf3fc85111b9efae64b6aa178df72",
+      "proseWords": {
+        "before": 2495,
+        "after": 2345
+      },
+      "readTime": "14 MIN",
+      "datePublished": "2026.07.22",
+      "dateModified": "2026-10-05",
+      "seoTitle": "West Campus Housing: Ownership, Rent and Financing",
+      "seoDescription": "A six-property July 2026 West Campus study traces lease lock-in, modeled NOI, capital stacks and refinancing stress without claiming market-wide returns.",
+      "changedUnits": [
+        "opening",
+        "installment-contract",
+        "six-properties",
+        "property-statement",
+        "skyloft-stack",
+        "public-and-entitlement",
+        "basis-divides-outcomes",
+        "premium-and-preleasing",
+        "what-breaks",
+        "loss-allocation",
+        "unknowns",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "waymo-hardware-financing",
+      "path": "src/personal/editorial/data/articles/waymo-hardware-financing.json",
+      "baselinePath": "docs/article-quality-baselines/waymo-hardware-financing.json",
+      "baselineSha256": "9970acf9759ba7ccffe281fbcef67dae9ef80512ce73e22df06c9a615d601427",
+      "currentSha256": "b7605d8b1e2dd26c088f681d797186321459ac93f42db9245638cfb1dfcf773f",
+      "evidenceSha256": "b22ae3c455d2862596c1259556d89f10f5f0dd40579eb4f47ce22e042ec0c6a2",
+      "proseWords": {
+        "before": 1396,
+        "after": 1463
+      },
+      "readTime": "11 MIN",
+      "datePublished": "2026.07.22",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Waymo Hardware Financing: Equity, Assets and Risk",
+      "seoDescription": "A June 2026 source record and July model trace Waymo equity, fleet capital and residual risk, keeping estimates distinct from undisclosed financing terms.",
+      "changedUnits": [
+        "opening",
+        "visible-rounds-invisible-assets",
+        "hardware-financing-mechanics",
+        "parent-funded-model",
+        "leased-fleet-model",
+        "asset-backed-spv-model",
+        "customer-funded-model",
+        "government-supported-model",
+        "residual-value",
+        "utilization-downside",
+        "structures-that-scale",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "crawl-frontier-state-machine",
+      "path": "src/personal/editorial/data/articles/crawl-frontier-state-machine.json",
+      "baselinePath": "docs/article-quality-baselines/crawl-frontier-state-machine.json",
+      "baselineSha256": "198194de76e3ecb8e66e088aae9c9b110791cbe7de17edff484b050d41b0ca64",
+      "currentSha256": "930b8283a6af8eff9fc41e109bfc6ee7f05b748576d4e9777f4deec462081668",
+      "evidenceSha256": "2506551998180f78a40a776fd5a4f05fef6c0ed6661e9d1ae36347a153b52df4",
+      "proseWords": {
+        "before": 1224,
+        "after": 859
+      },
+      "readTime": "6 MIN",
+      "datePublished": "2026.07.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Reliable Crawl Frontiers: Identity, States and Retries",
+      "seoDescription": "Design a crawler frontier with explicit URL identity, origin scheduling, bounded retries and crawl-trap controls that leave omissions and failures auditable.",
+      "changedUnits": [
+        "opening",
+        "identity-before-scheduling",
+        "frontier-states",
+        "origin-scheduling",
+        "crawl-traps",
+        "retry-and-replay",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "raw-html-rendered-dom-evidence",
+      "path": "src/personal/editorial/data/articles/raw-html-rendered-dom-evidence.json",
+      "baselinePath": "docs/article-quality-baselines/raw-html-rendered-dom-evidence.json",
+      "baselineSha256": "346de5916c924b0d6816a2bf334b406756de66f1f2e70ce2f91bb6f961db144a",
+      "currentSha256": "12a83d4b08eee6e4cd176dc43b45910bf71dbce3834f76a6bfdb2ccba1a2aa64",
+      "evidenceSha256": "1c6bced004a611265630654f5ba755f32d80e7d961e667cb2972ec5e2a844e1e",
+      "proseWords": {
+        "before": 1100,
+        "after": 814
+      },
+      "readTime": "6 MIN",
+      "datePublished": "2026.07.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Raw HTML vs Rendered DOM: Capture and Compare Evidence",
+      "seoDescription": "Compare server HTML with browser-rendered DOM using saved artifacts, explicit completion conditions and field-level diffs to diagnose JavaScript SEO failures.",
+      "changedUnits": [
+        "opening",
+        "transport-artifact",
+        "render-environment",
+        "completion-contract",
+        "semantic-diff",
+        "triage-order",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "canonicalization-graph-consistency",
+      "path": "src/personal/editorial/data/articles/canonicalization-graph-consistency.json",
+      "baselinePath": "docs/article-quality-baselines/canonicalization-graph-consistency.json",
+      "baselineSha256": "d78e76e3e20b4ce49e12cf64bda438176559308f780daf7aa7e9e85e1b93fca6",
+      "currentSha256": "60a96ffa87f7d0e3dd1a01ca0cea41117babf9bb89bd0654c2156bea26dcb86a",
+      "evidenceSha256": "59fefb57ec2d6321439d03eeef62abbf96a9e2b42ab0f1ec0e140a4b1ca83605",
+      "proseWords": {
+        "before": 1180,
+        "after": 862
+      },
+      "readTime": "6 MIN",
+      "datePublished": "2026.07.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Canonical URL Audits: Find Conflicts, Chains and Loops",
+      "seoDescription": "Audit canonical URLs as a graph of redirects, annotations, links and sitemap entries. Find cycles, conflicting targets and duplicate clusters before release.",
+      "changedUnits": [
+        "opening",
+        "typed-url-graph",
+        "convergence-invariant",
+        "cycles-and-components",
+        "signal-alignment",
+        "release-gate",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "internal-links-directed-retrieval-graph",
+      "path": "src/personal/editorial/data/articles/internal-links-directed-retrieval-graph.json",
+      "baselinePath": "docs/article-quality-baselines/internal-links-directed-retrieval-graph.json",
+      "baselineSha256": "d25ea14233838ffbcb5bc6c2abfeb5f330633766fe8a003aa7f58f5539b20c07",
+      "currentSha256": "e33ad150634f43bf655341551ee402d12652316c0c2338e1deba1781df87ea87",
+      "evidenceSha256": "a9ac240441fa96b851d3809cf4332d41ec916d6237baa0bc5707fec468e78d16",
+      "proseWords": {
+        "before": 1112,
+        "after": 841
+      },
+      "readTime": "6 MIN",
+      "datePublished": "2026.07.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Internal Link Audits: Reachability, Context and Orphans",
+      "seoDescription": "Map internal links with source context, canonical destinations and entry paths. Diagnose orphan states and validate repairs without assuming ranking gains.",
+      "changedUnits": [
+        "opening",
+        "edge-contract",
+        "reachability",
+        "components-and-orphans",
+        "context-and-concentration",
+        "repair-and-rerun",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "robots-txt-courtesy-not-access-control",
+      "path": "src/personal/editorial/data/articles/robots-txt-courtesy-not-access-control.json",
+      "baselinePath": "docs/article-quality-baselines/robots-txt-courtesy-not-access-control.json",
+      "baselineSha256": "8574db1539a4d65fd3ea6cace019b8312668a082dc7252c8d96664ac9a3f0f1c",
+      "currentSha256": "02c87c4ee2be8d704469c1ee9f93a843d30d8c843aedd68b03ac7187a0e713a7",
+      "evidenceSha256": "10986f18bcd02a95f787b1fe532c575dbabdbe884f73012c39a4ac01ae0d9c11",
+      "proseWords": {
+        "before": 1258,
+        "after": 934
+      },
+      "readTime": "6 MIN",
+      "datePublished": "2026.07.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Robots.txt, Noindex and Access Control: RFC 9309",
+      "seoDescription": "Separate robots.txt from noindex, authentication, authorization and rate limits. Test deployed policy without treating bot headers as verified identity.",
+      "changedUnits": [
+        "opening",
+        "official-source-map",
+        "six-control-layers",
+        "rep-semantics",
+        "protect-private-content",
+        "bot-identity",
+        "release-evidence",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "structured-data-without-content-drift",
+      "path": "src/personal/editorial/data/articles/structured-data-without-content-drift.json",
+      "baselinePath": "docs/article-quality-baselines/structured-data-without-content-drift.json",
+      "baselineSha256": "c0401e2f39a72f5a235b0365fb571d89def5e74e694db4a0e2f9bc365f6dee61",
+      "currentSha256": "9185d3cc67273b3fd46e259d2216218432fd326897fbc8d3976350d5805376fd",
+      "evidenceSha256": "71d6e0ce6c756d548860821f3d1d545d1ce476ad93190175cf4fe8747fa1dffd",
+      "proseWords": {
+        "before": 1080,
+        "after": 784
+      },
+      "readTime": "5 MIN",
+      "datePublished": "2026.07.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Prevent JSON-LD Drift with a Shared Content Model",
+      "seoDescription": "Generate visible HTML, metadata, JSON-LD and sitemaps from one content record. Test dates, URLs, entities and images for agreement beyond schema syntax.",
+      "changedUnits": [
+        "opening",
+        "domain-record",
+        "stable-identifiers",
+        "projection-boundary",
+        "semantic-invariants",
+        "change-management",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "audit-findings-derived-records",
+      "path": "src/personal/editorial/data/articles/audit-findings-derived-records.json",
+      "baselinePath": "docs/article-quality-baselines/audit-findings-derived-records.json",
+      "baselineSha256": "f5909051d85431e09ffb8c357b520532a883ea9e4b8d5374b5d17165f93edb04",
+      "currentSha256": "56f78b5d85a5954f7f79911ad6bba3baeec5f9d8a725ec8194517374d997b335",
+      "evidenceSha256": "edb1fd51634c286b3e9ba895091963e7b47003e02c70f0f0dd894005ac808738",
+      "proseWords": {
+        "before": 1133,
+        "after": 815
+      },
+      "readTime": "6 MIN",
+      "datePublished": "2026.07.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Reproducible Audit Findings: Evidence, Rules and Review",
+      "seoDescription": "Trace audit findings from saved captures through observations, versioned rules and review. Preserve gaps and verify resolution across the agreed scope.",
+      "changedUnits": [
+        "opening",
+        "six-record-layers",
+        "lineage-identifiers",
+        "versioned-rules",
+        "gaps-and-confidence",
+        "review-and-export",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "replayable-traces-ai-agent-evaluation",
+      "path": "src/personal/editorial/data/articles/replayable-traces-ai-agent-evaluation.json",
+      "baselinePath": "docs/article-quality-baselines/replayable-traces-ai-agent-evaluation.json",
+      "baselineSha256": "3759714f1bf0f487dcda4c6c0a561fc70db7a8c77d1c6ae1d54b6d05c1a3897e",
+      "currentSha256": "cd30b81e7f6272c4895f322ea28b94f2da20f4891e87ff2fa672651ff86f0624",
+      "evidenceSha256": "78d519db1b3ec6825598e0ce681638af8175c7b3e607e7264b28e9c888d79ad1",
+      "proseWords": {
+        "before": 1177,
+        "after": 865
+      },
+      "readTime": "6 MIN",
+      "datePublished": "2026.07.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "AI Agent Evaluation with Replayable Tool-Use Traces",
+      "seoDescription": "Evaluate tool-using agents with isolated trials, observable traces and layered graders. Measure outcomes, policy, side effects, cost and repeated-run variance.",
+      "changedUnits": [
+        "opening",
+        "task-trial-trace",
+        "environment-control",
+        "layered-graders",
+        "repeated-trials",
+        "promotion-gate",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "sqlite-crawl-pipelines",
+      "path": "src/personal/editorial/data/articles/sqlite-crawl-pipelines.json",
+      "baselinePath": "docs/article-quality-baselines/sqlite-crawl-pipelines.json",
+      "baselineSha256": "8973b9d62559b17159fd5e9d56d4e7ff8c8d9e92737885d75e647b88888e16cc",
+      "currentSha256": "f1a3ed5ca66be292a52dce18890d2fed438c6535a320c7394e52bc054dc8caf7",
+      "evidenceSha256": "f8d7269058a53d254050b73713f15753bd474aaaf357a55d531710614f074f42",
+      "proseWords": {
+        "before": 1218,
+        "after": 875
+      },
+      "readTime": "6 MIN",
+      "datePublished": "2026.07.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "SQLite Crawl Pipelines: Idempotent Writes and WAL",
+      "seoDescription": "Design SQLite crawl storage around one writer, stable keys and append-only attempts. Bound transactions, manage WAL checkpoints and test backup restoration.",
+      "changedUnits": [
+        "opening",
+        "schema-grain",
+        "transaction-boundary",
+        "idempotent-writes",
+        "wal-concurrency",
+        "integrity-and-recovery",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "technical-seo-migration-release-gates",
+      "path": "src/personal/editorial/data/articles/technical-seo-migration-release-gates.json",
+      "baselinePath": "docs/article-quality-baselines/technical-seo-migration-release-gates.json",
+      "baselineSha256": "03ca663c1fbdc90319ae84a557a10bcb8d48ea4ce91fd4c9a1a65bc45b972d1b",
+      "currentSha256": "007edb6ccb64ba46f0a411bca1cf66cf669bde5ae177ee46b61f446fef0b8916",
+      "evidenceSha256": "cc693a995ea73745661126f8caa1c6f0abc4924c9e5637b25e1a45a364cdca0f",
+      "proseWords": {
+        "before": 1095,
+        "after": 813
+      },
+      "readTime": "6 MIN",
+      "datePublished": "2026.07.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Technical SEO Migrations: URL Maps and Release Gates",
+      "seoDescription": "Plan SEO migrations with a URL manifest, redirect-graph checks and page contracts. Test the public edge and separate implementation defects from index changes.",
+      "changedUnits": [
+        "opening",
+        "url-manifest",
+        "prelaunch-gates",
+        "redirect-graph",
+        "launch-sequence",
+        "postlaunch-evidence",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "the-first-ai-managers",
+      "path": "src/personal/editorial/data/articles/the-first-ai-managers.json",
+      "baselinePath": "docs/article-quality-baselines/the-first-ai-managers.json",
+      "baselineSha256": "3414ab5496682a905b3c97de9e8d8eeed7b7baac55349ad85e0bf54c89347a1c",
+      "currentSha256": "35e1c3ee4e2d8bd7cc56c69e51c25bb03fdc8358bf8f14f6ea42e2d5f5f9770a",
+      "evidenceSha256": "45bafb181730f2a19b9b543cd76185c811470a34f642f65c295cf3648a233acf",
+      "proseWords": {
+        "before": 3782,
+        "after": 2979
+      },
+      "readTime": "14 MIN",
+      "datePublished": "2026.07.14",
+      "dateModified": "2026-10-05",
+      "seoTitle": "AI-Operated Businesses: What the First Managers Reveal",
+      "seoDescription": "Examine 30 AI-operated business cases, from cafés to vending machines, separating delegated decisions from human support and unproven profitability.",
+      "changedUnits": [
+        "opening",
+        "what-counts-as-an-ai-operated-business",
+        "project-vend",
+        "four-live-managers",
+        "human-company",
+        "economics",
+        "operating-stack",
+        "simulations",
+        "field-map",
+        "evidence-standard",
+        "closing"
+      ]
+    },
+    {
+      "slug": "who-owns-texas-toll-roads",
+      "path": "src/personal/editorial/data/articles/who-owns-texas-toll-roads.json",
+      "baselinePath": "docs/article-quality-baselines/who-owns-texas-toll-roads.json",
+      "baselineSha256": "73e9e7ee152028b36a3f0636428337b5786efc5d22530fbc632739b1540c74c1",
+      "currentSha256": "c3cb578d8ee0d1c58398b424275cbe5628babf8356dd6814d07fe46f9186152c",
+      "evidenceSha256": "b2e2f92861f3ef4080dcb9b35d9da518df4d8f192e7067ee2096e60c5cfeb1ad",
+      "proseWords": {
+        "before": 5450,
+        "after": 4594
+      },
+      "readTime": "28 MIN",
+      "datePublished": "2026.07.11",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Who Owns Texas Toll Roads? Rights, Debt and Revenue",
+      "seoDescription": "Map Texas toll-road ownership across public authorities and private concessions, then trace revenue, lender priority, SH 130’s bankruptcy, and SH 288’s buyout.",
+      "changedUnits": [
+        "opening",
+        "a-road-can-have-seven-different-owners",
+        "how-a-toll-road-turns-traffic-into-equity-cash",
+        "the-texas-ownership-map",
+        "sh-130-the-danger-of-believing-the-traffic-model",
+        "sh-288-the-value-of-a-termination-clause",
+        "public-authority-or-private-concession",
+        "what-makes-a-texas-toll-road-valuable",
+        "can-an-investor-actually-buy-one",
+        "closing"
+      ]
+    },
+    {
+      "slug": "viralbench-codex-agent-harness",
+      "path": "src/personal/editorial/data/articles/viralbench-codex-agent-harness.json",
+      "baselinePath": "docs/article-quality-baselines/viralbench-codex-agent-harness.json",
+      "baselineSha256": "cb4b95dbb8c3823df4399c6d7a297eb90608be070b7294f24c552c218ff259f0",
+      "currentSha256": "78466bdb7efa1ca4685c12aba3f4892d2d1f6ab3ff1e2a94a1738633d8c29e4c",
+      "evidenceSha256": "bd95963b26ecbfbe23ddd1380e5234405ba6814c42212cd92a1b10876ebe3ebb",
+      "proseWords": {
+        "before": 5281,
+        "after": 5027
+      },
+      "readTime": "23 MIN",
+      "datePublished": "2026-07-09",
+      "dateModified": "2026-10-05",
+      "seoTitle": "ViralBench Agent Harness: Code Audit and Evaluation",
+      "seoDescription": "A code audit of ViralBench and a proposed improvement harness using replay, bounded engineering tasks, and independent evaluation before live release.",
+      "changedUnits": [
+        "markdown"
+      ]
+    },
+    {
+      "slug": "ai-search-crawler-policy",
+      "path": "src/personal/editorial/data/articles/ai-search-crawler-policy.json",
+      "baselinePath": "docs/article-quality-baselines/ai-search-crawler-policy.json",
+      "baselineSha256": "25e634c39fefbf8051c0c09b570d0ad23360a1d162bb6b413bd37498e69b511c",
+      "currentSha256": "e5e110a2cf03407015053ced8a2f6b393f74d792bce81ea6b337c321bf5412bc",
+      "evidenceSha256": "a8402d34f4014a5d22460408a8c2c15cfd67d3b0227817257ee53e2fb38a8e9d",
+      "proseWords": {
+        "before": 242,
+        "after": 420
+      },
+      "readTime": "4 MIN",
+      "datePublished": "2026.06.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "AI Crawler Robots.txt: Search, Training and User Fetches",
+      "seoDescription": "Choose robots.txt policies for AI search, model development and user-triggered fetches. Compare named bots, then check deployed groups and observed requests.",
+      "changedUnits": [
+        "opening",
+        "outcome-matrix",
+        "crawler-comparison",
+        "robots-configurations",
+        "server-log-verification",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "technical-seo-public-data-infrastructure",
+      "path": "src/personal/editorial/data/articles/technical-seo-public-data-infrastructure.json",
+      "baselinePath": "docs/article-quality-baselines/technical-seo-public-data-infrastructure.json",
+      "baselineSha256": "73f3ccbf935017a6612b3b1859f7ddd8f6e3d0e71f0ad4215373606877fcdd79",
+      "currentSha256": "345e22a3f642fd3e1f1bb5f6030be40069d0836f72e7ee6368a2133df84bd911",
+      "evidenceSha256": "054825f589eb7c3ec75b7d92aa65a2212e9892919b651242558f36ee35d45bdd",
+      "proseWords": {
+        "before": 1071,
+        "after": 793
+      },
+      "readTime": "5 MIN",
+      "datePublished": "2026.06.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Technical SEO Data Pipelines: Capture, Trace and Export",
+      "seoDescription": "Treat technical SEO as a traceable data pipeline from URL discovery to source, rendered state and exports, with explicit quality checks and measurement limits.",
+      "changedUnits": [
+        "opening",
+        "public-record-pipeline",
+        "raw-rendered-states",
+        "structured-records",
+        "atlas-case-study",
+        "data-quality-contract",
+        "publication-standard",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "canonical-identity-personal-seo",
+      "path": "src/personal/editorial/data/articles/canonical-identity-personal-seo.json",
+      "baselinePath": "docs/article-quality-baselines/canonical-identity-personal-seo.json",
+      "baselineSha256": "b415b8de68d400e041b90b43cfba9fb6b47c1c9f0f865723a6af25e62dfc63eb",
+      "currentSha256": "0912ee708429f41b3e41213169a459232609ebacc8fcd4e7c7f444ec98a71bff",
+      "evidenceSha256": "3fdd9dc4a2b63273f6096c10fba6481245d983475ec3a59990e7ecc9dffc2f8a",
+      "proseWords": {
+        "before": 724,
+        "after": 681
+      },
+      "readTime": "5 MIN",
+      "datePublished": "2026.06.19",
+      "dateModified": "2026-10-05",
+      "seoTitle": "Personal SEO: Reconcile Profiles, Domains and Résumés",
+      "seoDescription": "Align your canonical website, résumé and public profiles using a reconciliation log, clear sameAs criteria and dated historical records that remain accurate.",
+      "changedUnits": [
+        "opening",
+        "profile-inventory",
+        "canonical-host",
+        "sameas-rubric",
+        "resume-policy",
+        "external-reconciliation",
+        "maintenance-cadence",
+        "conclusion"
+      ]
+    }
+  ],
+  "codeLabelRevisionReceipt": "docs/article-code-label-revisions.json"
+}

@@ -5,16 +5,27 @@
   "number": "11",
   "category": "EVIDENCE SYSTEMS",
   "title": "Audit Findings Should Be Derived Records",
-  "seoTitle": "Audit Findings as Derived Records: Provenance for Technical SEO",
-  "subtitle": "A data model that separates captured observations, artifacts, rule evaluations, findings, confidence, review state, and recommendations without losing lineage.",
-  "seoDescription": "Model technical SEO audit findings as derived records with observation lineage, immutable artifacts, versioned rules, explicit gaps, confidence, review, and reproducible exports.",
-  "image": "/og-default.png",
+  "seoTitle": "Reproducible Audit Findings: Evidence, Rules and Review",
+  "subtitle": "Keep the evidence and reasoning behind each audit claim recoverable.",
+  "seoDescription": "Trace audit findings from saved captures through observations, versioned rules and review. Preserve gaps and verify resolution across the agreed scope.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/audit-findings-editorial.webp",
+    "socialSrc": "/images/research/audit-findings-social.jpg",
+    "alt": "Captured evidence passes through transparent rule plates into a sealed monochrome finding record.",
+    "label": "Audit lineage / sealed findings",
+    "caption": "Artifacts pass through versioned rules before becoming traceable, reviewable finding records."
+  },
   "date": "2026.07.19",
-  "dateModified": "2026.07.19",
+  "dateModified": "2026-10-05",
   "lastVerified": "2026.07.19",
-  "readTime": "15 MIN",
+  "readTime": "6 MIN",
   "author": "SULAYMAN BOWLES",
-  "thesis": "An audit finding is defensible only when it can be regenerated from named observations and a versioned rule while preserving uncertainty, reviewer decisions, and the exact evidence used.",
+  "thesis": "A defensible finding names the observations and rule that produced it. Preserve their versions, gaps, and review decisions so an amended claim can be explained rather than merely overwritten.",
+  "conclusion": {
+    "title": "Require evidence of the changed condition",
+    "content": "A merged repair is implementation evidence. Resolution needs a new evaluation across the agreed scope, connected to the accepted finding and disclosing new gaps. Keep the earlier evidence and interpretation available for comparison."
+  },
   "evidenceBoundary": "Provenance makes derivation inspectable; it does not make the observation complete or the rule correct. Findings still require scope, data-quality checks, domain review, and explicit treatment of measurement gaps.",
   "metrics": [
     {
@@ -62,17 +73,17 @@
     }
   ],
   "content": [
-    "A technical audit often jumps from a crawl table to a sentence: “these pages have missing canonicals,” “this template is orphaned,” or “JavaScript hides the content.” The sentence may be right, but the system has compressed several steps into one label. It observed a response, parsed an artifact, normalized fields, applied a rule, grouped URLs, interpreted impact, and proposed an action. When those layers are not stored separately, the conclusion cannot be reproduced or safely revised.",
-    "Treat a finding as a derived record. Captured artifacts remain immutable. Observations point to fields inside those artifacts. A versioned rule consumes observations and emits an evaluation. A finding groups evaluations into an operator-facing claim with scope, confidence, and gap states. Review events approve, reject, amend, or supersede that claim. Recommendations remain a final planning layer rather than being embedded in the observation."
+    "“Missing canonicals” is the end of a pipeline, not an observation. The audit first captured a response, extracted fields, normalized them, applied a rule, grouped URLs, assessed impact, and proposed a change. Collapsing those steps into a label makes the conclusion difficult to reproduce or revise.",
+    "Keep artifacts immutable and observations tied to their fields. Versioned rules produce evaluations; findings group them into scoped claims with confidence and gaps. Append review decisions, then keep recommendations as proposals rather than facts inside the observation."
   ],
   "sections": [
     {
       "id": "six-record-layers",
-      "title": "Separate the six records an audit usually collapses",
+      "title": "Separate capture, interpretation, and action",
       "paragraphs": [
-        "The artifact is the captured object: response headers and body, rendered DOM, screenshot, log slice, sitemap, configuration, or analytics export. An observation is a typed fact extracted from an artifact, such as status 200, canonical absent in source, or three crawlable inlinks. The observation should retain the artifact pointer, extractor version, capture time, and completeness state.",
-        "A rule evaluation records the rule ID and version, input observations, outcome, and parameters. A finding turns one or more evaluations into a scoped claim such as “the product template emits conflicting source and rendered canonicals on 184 reviewed URLs.” Review state records human or automated decisions without overwriting the claim. A recommendation proposes a change, owner, risk, and acceptance test.",
-        "These layers have different truth conditions. An artifact can be authentic while incomplete. An observation can correctly describe the artifact while the capture scenario is unrepresentative. A rule can run deterministically and still encode the wrong requirement. A recommendation can be impractical even when the finding is sound. Keeping the layers visible makes disagreement productive."
+        "An artifact is a response, DOM, screenshot, log slice, sitemap, configuration, or analytics export. An observation extracts a typed fact: status 200, no source canonical, or three crawlable inlinks. Retain its artifact pointer, extractor version, capture time, and completeness.",
+        "Evaluations record rule identity and version, inputs, parameters, and outcome. A finding can then claim that a template emits conflicting source and DOM canonicals on 184 reviewed URLs. Reviews preserve decisions without overwriting it; recommendations name a change, owner, risk, and acceptance test.",
+        "Each layer can fail differently. Authentic captures may be incomplete; correct extraction may describe an unrepresentative scenario; deterministic rules may encode the wrong requirement; sound findings may lead to impractical recommendations. Separation lets reviewers locate their disagreement."
       ],
       "table": {
         "caption": "Six-layer audit record model",
@@ -124,11 +135,11 @@
     },
     {
       "id": "lineage-identifiers",
-      "title": "Give every run, artifact, rule, and claim a stable identifier",
+      "title": "Identify inputs, activities, and revisions",
       "paragraphs": [
-        "W3C PROV distinguishes entities, activities, and agents; OpenLineage similarly represents runs, jobs, inputs, outputs, and event state. A technical audit does not need to reproduce either vocabulary completely to benefit from the structure. The core requirement is that a derived record names the input entities, generating activity, responsible software or reviewer, and time.",
-        "Use run IDs for bounded executions, artifact IDs derived from content hashes plus storage identity, observation IDs tied to artifact location and extractor version, and rule IDs separated from rule versions. A finding ID should represent the continuing issue identity while each revision receives a distinct version. This supports comparison without pretending that amended claims are the same record.",
-        "Propagate a correlation identifier through fetch, render, extract, evaluate, review, and export events. W3C Trace Context offers a standard mechanism for distributed request correlation, but audit lineage also needs durable domain IDs because a trace may be sampled, short-lived, or split across asynchronous work. Correlation helps locate events; provenance defines what was derived from what."
+        "W3C PROV distinguishes entities, activities, and agents; OpenLineage tracks runs, jobs, inputs, outputs, and event state. An audit need not adopt either whole vocabulary. It needs input identities, the generating activity, responsible software or reviewer, and time.",
+        "Identify bounded runs, artifacts by hash and storage identity, and observations by location and extractor version. Separate rule IDs from their versions. Let a finding retain its issue ID while each claim revision receives a distinct version, making amendment visible.",
+        "Propagate correlation through fetch, render, extract, evaluate, review, and export. Trace Context can connect distributed requests, but sampled, short-lived, or asynchronous traces still need durable domain IDs. Correlation locates events; provenance records derivation."
       ],
       "bullets": [
         "Do not use mutable filenames as the only artifact identity.",
@@ -141,11 +152,11 @@
     },
     {
       "id": "versioned-rules",
-      "title": "Make rule evaluation deterministic and versioned",
+      "title": "Test prerequisites before the finding",
       "paragraphs": [
-        "A rule should declare required input fields, eligibility conditions, parameters, outcomes, and gap behavior. “Missing title” is incomplete if the parser failed, the response was not HTML, the render timed out, or the route intentionally returns no document. Evaluate prerequisites first and return not-applicable or insufficient-evidence when they are not satisfied.",
-        "Version a rule whenever its logic, threshold, normalization, or required inputs change. Store a human-readable summary and a machine-executable implementation reference. Re-running old artifacts through a new rule should create new evaluations rather than mutating historical results. This makes changes in issue counts explainable.",
-        "Determinism requires controlled inputs. Time-dependent checks need a recorded evaluation time. External lookups need captured responses or versioned datasets. Machine-learned classification needs model and prompt or feature versions, confidence, and a review threshold. If the same inputs can produce materially different results, the evaluation must store the trial or sampling contract."
+        "Rules need required fields, eligibility, parameters, outcomes, and gap behavior. A failed parser, non-HTML response, incomplete render, or intentionally documentless route cannot automatically become “missing title.” Check prerequisites and return not-applicable or insufficient-evidence when they fail.",
+        "Version logic, thresholds, normalization, and required-input changes. Keep a readable summary and executable reference. New rules applied to old artifacts create new evaluations, leaving historical issue counts explainable.",
+        "Record evaluation time for clock-dependent checks and captures or dataset versions for external lookups. Learned classification needs model, prompt or feature versions, confidence, and review thresholds. Materially variable results require an explicit trial or sampling contract."
       ],
       "codeExamples": [
         {
@@ -158,11 +169,11 @@
     },
     {
       "id": "gaps-and-confidence",
-      "title": "Represent gaps and confidence without turning them into scores",
+      "title": "Keep gaps in the denominator",
       "paragraphs": [
-        "A missing observation is data. The fetch may have been blocked, the render may have timed out, the parser may not support the content type, the route may require authentication, or the source inventory may be incomplete. Give those states codes and evidence. Do not convert every gap into a failing finding or exclude it from the denominator without disclosure.",
-        "Confidence should explain which uncertainty it summarizes. Observation confidence can describe parser certainty; rule confidence can describe classification strength; coverage confidence can describe whether the affected set is complete; recommendation confidence can describe implementation assumptions. One unlabeled percentage collapses those distinct questions.",
-        "Use counts with denominators and eligibility definitions. “184 of 210 eligible product URLs failed; 17 additional URLs had incomplete renders” is more useful than “87.6% issue confidence.” The first statement lets a reviewer locate both evidence and gaps. The second sounds precise while hiding what was measured."
+        "Blocked fetches, timed-out renders, unsupported formats, authentication, and incomplete inventories are observations about coverage. Give them codes and evidence. Do not turn every gap into failure or quietly remove it from the denominator.",
+        "Name the uncertainty behind confidence: parser certainty, classification strength, affected-set coverage, or implementation assumptions. One unlabeled percentage cannot answer all four questions.",
+        "“184 of 210 eligible product URLs failed; 17 additional URLs had incomplete renders” states the counted population and separate gap. “87.6% issue confidence” hides what was measured. Preserve counts, eligibility, and denominators so the reviewer can inspect both."
       ],
       "table": {
         "caption": "Gap states that should survive into the report",
@@ -208,11 +219,11 @@
     },
     {
       "id": "review-and-export",
-      "title": "Make review and export lossless",
+      "title": "Preserve review history through export",
       "paragraphs": [
-        "Review should append a decision to a finding version: accepted, rejected, needs evidence, duplicate, risk reclassified, scope amended, or recommendation changed. The reviewer needs the claim, affected set, representative examples, gap counts, rule definition, and direct artifact links. A dashboard that shows only the final label forces trust in the pipeline it is supposed to expose.",
-        "Exports should preserve stable IDs, not flatten everything into prose. A CSV can carry finding ID, version, rule, affected URL, outcome, confidence class, gap state, artifact reference, review state, owner, and acceptance test. JSON can preserve nested lineage. An executive summary can remain readable while linking back to those records.",
-        "A post-fix rerun should generate a new run and new evaluations, then relate them to the accepted finding. Resolution requires both implementation evidence and the affected rule passing across the agreed scope, with new gaps disclosed. Closing a ticket because code merged is a workflow event, not proof that the observed condition changed."
+        "Append acceptance, rejection, evidence requests, duplicate decisions, risk changes, scope amendments, and revised recommendations to a finding version. Show reviewers the claim, affected set, examples, gaps, rule, and artifact links. A final label alone conceals the pipeline under review.",
+        "Keep stable IDs in exports. CSV can carry finding and rule versions, URL, outcome, confidence class, gap, evidence reference, review state, owner, and acceptance test; JSON can retain nested lineage. Link readable executive summaries to those underlying records.",
+        "After repair, create a fresh run and evaluations linked to the accepted finding. Require implementation evidence and the affected rule passing over the agreed scope, with new gaps disclosed. Ticket closure or merged code does not establish that the condition changed."
       ],
       "bullets": [
         "Never overwrite the evidence set after a finding enters review.",
@@ -225,5 +236,7 @@
     }
   ],
   "path": "/research/data-systems/audit-findings-derived-records",
-  "aliases": []
+  "aliases": [],
+  "image": "/images/research/audit-findings-social.jpg",
+  "displayTitle": "Audit findings are derived records."
 }
