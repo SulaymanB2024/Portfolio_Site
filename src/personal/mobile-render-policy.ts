@@ -3,7 +3,7 @@ export function portfolioRenderPolicy(width: number, height: number, coarse: boo
   const mobile = coarse || width <= 600 || (width <= 950 && height <= 500)
   return {
     mobile,
-    autoplay: !mobile,
+    autoplay: true,
     pixels: mobile ? 400_000 : 2_200_000,
     maxRatio: mobile ? 1.5 : Infinity,
     pointScale: mobile ? .7 : 1,
