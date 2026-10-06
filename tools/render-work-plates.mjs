@@ -51,14 +51,17 @@ for (const study of studies) {
       const material = primitive.getMaterial()
       const color = material?.getBaseColorFactor() ?? [.5, .5, .5, 1]
       const roughness = material?.getRoughnessFactor() ?? .45
-      const p = [], n = []
+      const p = [], n = [], tint = []
+      const surfaceColor = primitive.getAttribute('COLOR_0'), rgb = []
       for (let i = 0; i < positions.getCount(); i++) {
         const point = new Vector3().fromArray(positions.getArray(), i * 3).applyMatrix4(transform)
         const normal = normals ? new Vector3().fromArray(normals.getArray(), i * 3).applyMatrix3(normalTransform).normalize() : new Vector3(0, 0, 1)
         p.push(point); n.push(normal); minimum.min(point); maximum.max(point)
+        if (surfaceColor) { surfaceColor.getElement(i, rgb); tint.push(rgb[0] * .2126 + rgb[1] * .7152 + rgb[2] * .0722) }
+        else tint.push(1)
       }
       vertices += p.length; triangles += indices.length / 3
-      geometry.push({ p, n, indices, color: color[0] * .2126 + color[1] * .7152 + color[2] * .0722, roughness, graphite: material?.getName() === 'ink' })
+      geometry.push({ p, n, tint, indices, color: color[0] * .2126 + color[1] * .7152 + color[2] * .0722, roughness, graphite: material?.getName() === 'ink' })
     }
   }
   const center = minimum.clone().add(maximum).multiplyScalar(.5)
@@ -89,12 +92,13 @@ for (const study of studies) {
         const diffuse = Math.max(0, nx * key.x + ny * key.y + nz * key.z)
         const reflected = Math.max(0, nx * fill.x + ny * fill.y + nz * fill.z)
         const specular = Math.pow(Math.max(0, nx * half.x + ny * half.y + nz * half.z), 22 + (1 - mesh.roughness) * 22)
+        const surfaceTint = mesh.tint[ia] * u + mesh.tint[ib] * v + mesh.tint[ic] * w
         // A raking key reveals relief; the weaker fill preserves dark recesses.
         // Graphite inserts absorb the key instead of acquiring the silver finish.
         // Retain their authored contrast so the date glyphs survive the dot screen.
         tones[pixel] = mesh.graphite
           ? .035 + diffuse * .09 + reflected * .03 + specular * .04
-          : Math.min(1, .09 + diffuse * .67 + reflected * .16 + specular * .48 + (mesh.color - .3) * .22)
+          : Math.min(1, (.09 + diffuse * .67 + reflected * .16 + (mesh.color - .3) * .22) * surfaceTint + specular * .48)
       }
     }
   }
@@ -123,7 +127,7 @@ for (const study of studies) {
   proofs.push(proof)
   console.log(JSON.stringify(proof))
 }
-await writeFile(resolve(evidence, 'plates-proof.json'), JSON.stringify({ method: 'Offline orthographic triangle z-buffer, actual GLB world transforms and interpolated surface normals, raking key/fill/specular lighting, antialiased 15-degree dot screen, pure black alpha mask. No shadows/AO/texture sampling; no geometry modification.', generatedAt: new Date().toISOString(), plates: proofs }, null, 2) + '\n')
+await writeFile(resolve(evidence, 'plates-proof.json'), JSON.stringify({ method: 'Offline orthographic triangle z-buffer, actual GLB world transforms, interpolated normals and vertex surface patina, raking key/fill/specular lighting, antialiased 15-degree dot screen, pure black alpha mask. No shadows/AO/texture sampling; no geometry modification.', generatedAt: new Date().toISOString(), plates: proofs }, null, 2) + '\n')
 const columns = Math.min(studies.length, 2)
 const rows = Math.ceil(studies.length / columns)
 const tiles = await Promise.all(studies.map(async (study, i) => ({ input: await sharp(resolve(output, `${study.id}.webp`)).resize(600, 600).flatten({ background: '#f5f2ea' }).png().toBuffer(), left: (i % columns) * 600, top: Math.floor(i / columns) * 600 })))

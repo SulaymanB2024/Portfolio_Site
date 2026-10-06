@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { portfolioRuntimeAssets } from './tools/portfolio-runtime-assets.mjs'
 import hosting from './vercel.json' with { type: 'json' }
 import { publicPages } from './src/personal/public-pages'
 const previewHeaders = Object.fromEntries(Object.entries(hosting.routes.find(route => route.headers?.['Content-Security-Policy'])?.headers || {}).filter(([, value]) => typeof value === 'string')) as Record<string, string>
 export default defineConfig({
   cacheDir: '.cache/vite',
-  plugins: [react(), {
+  plugins: [react(), portfolioRuntimeAssets(), {
     name: 'preview-canonical-documents',
     configurePreviewServer(server) {
       const pages = new Set(publicPages.map(page => page.path))

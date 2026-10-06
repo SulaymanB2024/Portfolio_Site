@@ -5,43 +5,43 @@
   "title": "Building Atlas: From a Crawl to a Defensible Decision",
   "displayTitle": "Building Atlas",
   "category": "PRODUCT & SYSTEMS",
-  "subtitle": "The product decisions behind my crawl and audit console—and the improvement cycle that keeps its findings connected to evidence.",
+  "subtitle": "How I built a website audit console that carries captured evidence into review and export.",
   "date": "2026-10-01",
-  "readTime": "6 MIN",
+  "readTime": "4 MIN",
   "kind": "project-essay",
   "author": "SULAYMAN BOWLES",
   "content": [
-    "I built Atlas through VOID to make website audits actionable. When a tool flags a problem, can the reviewer inspect the evidence, understand its limits, and decide what to change?",
-    "That question governs the workflow: capture the page, retain the record, and carry its evidence into review and export. Follow one finding through Atlas to see the decisions behind it."
+    "I built Atlas through VOID to make website audits easier to act on. A warning should let its reviewer inspect the evidence, understand what it establishes, and decide whether to change the site.",
+    "Atlas carries a captured page through interpretation, review, and export. Following one finding through that workflow explains the product decisions behind the console."
   ],
   "evidenceBoundary": "The July demonstration below is a retained two-page source capture. The implementation references are pinned to the repository revision reviewed on October 1, 2026. Neither establishes client outcomes, search rankings, production coverage, or measured performance gains.",
   "sections": [
     {
       "id": "product",
-      "title": "Start with the decision someone needs to make",
+      "title": "Make the finding useful",
       "paragraphs": [
-        "A long list of warnings can leave its reader with more work. A missing heading, a conflicting canonical, and an unavailable performance measurement each need an explanation before anyone can prioritize them.",
-        "My work spans Atlas’s product architecture, crawler, evidence policy, review workflow, and interface. Atlas captures a site, connects its pages, produces findings, and preserves their context through review and export. The public repository documents a local audit console, not a hosted commercial service. [Repository scope](#source-scope).",
-        "Each recommendation should lead back to its URL, captured state, and rule. Provenance belongs in the interface, where the reviewer makes a decision."
+        "A missing heading, a conflicting canonical, and an unavailable performance measurement require different responses. A warning count cannot tell a reviewer which deserves attention.",
+        "My work covers Atlas’s product architecture, crawler, evidence policy, review workflow, and interface. The console captures pages, connects them, and retains the context behind its findings. The public repository documents a local audit console rather than a hosted commercial service. [Repository scope](#source-scope).",
+        "A recommendation should lead back to its URL, captured state, and rule. The reviewer needs that connection at the point of decision."
       ]
     },
     {
       "id": "capture",
-      "title": "Capture enough to explain what happened",
+      "title": "Retain the conditions of capture",
       "paragraphs": [
-        "URL identity, scheduling, retries, and storage affect the evidence. Duplicate addresses can inflate finding counts. Partial runs can make reachable pages look absent; failed fetches can look like empty pages. Each can mislead a reviewer.",
-        "Atlas must retain measurement conditions alongside results. Crawl policy and collection limits define the sample. SQLite preserves a local run for inspection and export; a bounded crawl still cannot describe an entire site.",
-        "What can a repeated crawl safely reuse? The incremental-crawl tests check reuse after a 304 response and an unchanged 200 response, then check re-parsing when the artifact version changes. Unchanged content may need a new interpretation. These are code-level checks, not a throughput benchmark. [Incremental-crawl tests](#source-incremental)."
+        "Collection choices affect the findings. Duplicate addresses inflate counts; partial runs can make reachable pages appear absent; a failed fetch can resemble an empty page. The record must distinguish these states.",
+        "Atlas retains measurement conditions alongside results. Crawl policy and collection limits define the sample; SQLite preserves the local run for inspection and export. A bounded crawl cannot describe the whole site.",
+        "The incremental-crawl tests check reuse after a 304 response and an unchanged 200 response, then require re-parsing when the artifact version changes. The content can stay the same while its interpretation changes. These are code-level checks, not a throughput benchmark. [Incremental-crawl tests](#source-incremental)."
       ]
     },
     {
       "id": "source-and-render",
-      "title": "One successful response can contain two different stories",
+      "title": "Separate the response from the rendered page",
       "paragraphs": [
-        "The retained July 16 sample shows why response status is insufficient. Both Quotes to Scrape pages returned HTTP 200. The ordinary page’s source contained ten quote cards. The JavaScript page contained zero quote-card elements but ten runtime data records. The capture also retained next-page addresses. [Capture manifest](#source-sample).",
-        "Response success does not establish source-content completeness. This capture contains no measured browser render, proves nothing about indexing, and does not establish a broken corpus. A browser render is needed to assess the JavaScript page’s visible coverage.",
-        "The render-pipeline tests preserve this distinction when generating issues. One fixture lacks a heading in raw HTML but includes it in effective rendered facts. The expected result retains the raw-only observation without flagging a missing heading on the effective page. It also separates raw canonical mismatch from effective canonical state. [Render-pipeline tests](#source-render).",
-        "The interface should identify which state produced a finding and explain why the raw response and effective page disagree."
+        "In the retained July 16 sample, both Quotes to Scrape pages returned HTTP 200. The ordinary page’s source contained ten quote cards. The JavaScript page contained zero quote-card elements but ten runtime data records. The capture also retained next-page addresses. [Capture manifest](#source-sample).",
+        "A successful response does not establish content completeness. This sample contains no measured browser render and establishes nothing about indexing or a broken corpus. Assessing the JavaScript page’s visible coverage requires a browser render.",
+        "The render-pipeline tests carry that distinction into issue generation. A fixture lacks a heading in raw HTML but includes it in effective rendered facts. The expected result retains the raw-only observation without flagging a missing heading on the effective page. It also separates a raw canonical mismatch from the effective canonical state. [Render-pipeline tests](#source-render).",
+        "The interface should show which state produced the finding and why the raw response and effective page disagree."
       ],
       "table": {
         "columns": [
@@ -71,31 +71,31 @@
     },
     {
       "id": "findings",
-      "title": "Keep a finding separate from a measurement gap",
+      "title": "Distinguish a finding from missing evidence",
       "paragraphs": [
-        "The public sample records an absent canonical tag without assigning severity. Page purpose, duplication, redirects, and other signals determine whether that absence needs action. The report should expose the reasoning behind its judgment.",
-        "Optional providers require the same distinction. A missing key or unavailable measurement leaves an evidence gap. The provider-reconciliation tests include an explicit skipped-missing-key state; missing provider data should never become a bad website score. [Provider tests](#source-provider).",
-        "Link graphs, canonicals, structured data, and derived findings raise related questions: do addresses agree, is the page reachable, does visible content support the structured claim, and can each finding be traced to an observation? These are review criteria; the pinned implementation and retained artifacts determine which answers Atlas can support."
+        "The public sample records an absent canonical tag without assigning severity. Page purpose, duplication, redirects, and other signals determine whether that absence warrants a change. The report needs to show how it reached that judgment.",
+        "An unavailable provider measurement is an evidence gap. The provider-reconciliation tests include a skipped-missing-key state; missing data should never become a bad website score. [Provider tests](#source-provider).",
+        "Link graphs, canonicals, structured data, and derived findings ask related questions: do the addresses agree, can the page be reached, does visible content support the structured claim, and can the finding be traced to an observation? The pinned implementation and retained artifacts determine which answers Atlas can support."
       ]
     },
     {
       "id": "improvement-cycle",
-      "title": "Improve the system by returning to the evidence",
+      "title": "Use an unexplained finding to improve the system",
       "paragraphs": [
-        "I want Atlas’s improvement cycle to start with an unexplained finding or a run that obscures a missing measurement. The change should address that case and preserve the context needed to evaluate it.",
-        "Retain a small example. Locate the error in capture, interpretation, or presentation. Write a regression check, rerun the example, and compare the finding with its record. Clearer presentation cannot rescue an unsupported interpretation.",
-        "The cache-version and rendered-facts tests already encode parts of this method. They leave further questions: which artifacts need reconsideration when a rule changes? What can an incomplete browser measurement establish? Where does a bounded run disclose its limits?",
-        "These tests document development practices. They do not establish an autonomous improvement service, a measured reduction in audit time, or a completed validation program."
+        "I want the improvement cycle to start with a finding that cannot be explained, or a run that hides a missing measurement. The change should address that case and retain enough context to evaluate the result.",
+        "Keep a small example. Locate the error in capture, interpretation, or presentation. Write a regression check, rerun the example, and compare the finding with its record. Presentation cannot repair an unsupported interpretation.",
+        "The cache-version and rendered-facts tests encode parts of this method. Open questions remain: which artifacts need reinterpretation after a rule changes? What can an incomplete browser measurement establish? Where does a bounded run disclose its limits?",
+        "These tests document development practices. An autonomous improvement service, reduced audit time, and a completed validation program remain unestablished."
       ]
     },
     {
       "id": "limits",
-      "title": "What comes next for Atlas",
+      "title": "Compare the causes of a changed finding",
       "paragraphs": [
-        "The next iteration should improve comparison. A changed finding may reflect a changed page, a revised rule, a different collection limit, or a newly available provider. Reviewers need to distinguish these causes before crediting a fix.",
-        "I would judge that iteration by its explanations, visible uncertainty, comparisons, and exports that lead back to observations. More information earns its place only when it improves a decision.",
-        "The repository excludes rank tracking, GA4 integration, hosted dashboard delivery, and distributed crawling. These are current limits, not promised features. [Repository scope](#source-scope).",
-        "[Open the Atlas case study](#/work/atlas) to inspect the retained pages and source facts behind these decisions."
+        "The next iteration should help reviewers compare runs. A changed finding may reflect a changed page, a revised rule, a different collection limit, or a newly available provider. These causes must be separated before crediting a fix.",
+        "I would judge that work by the quality of its explanations, visible uncertainty, comparisons, and traceable exports. More information earns its place when it improves a decision.",
+        "The repository excludes rank tracking, GA4 integration, hosted dashboard delivery, and distributed crawling. These remain limits of the reviewed implementation. [Repository scope](#source-scope).",
+        "[Open the Atlas case study](#/work/atlas) to inspect the retained pages and source facts."
       ]
     }
   ],
@@ -132,5 +132,8 @@
       "href": "https://github.com/SulaymanB2024/Thick-Scraper-VOID-/blob/ef3bad25ea0f43f7b4a854fa56c74af5a50fc8db/tests/test_provider_reconcile.py",
       "note": "Includes skipped-missing-key behavior. Test inspection is not a fresh execution of the Atlas test suite."
     }
-  ]
+  ],
+  "seoTitle": "Atlas Website Audit Console: Captures and Findings",
+  "seoDescription": "How Atlas links website audit findings to captured pages, rendered facts, and reviewable evidence, with a retained sample and code-level checks.",
+  "dateModified": "2026-10-05"
 }

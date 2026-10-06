@@ -5,7 +5,12 @@ import { siteCopy } from './site-copy'
 import { createStudyActivationGate } from './work-entry-activation'
 import { createWorkStageReadiness } from './work-stage-readiness'
 import { readPortfolioRenderPolicy } from './mobile-render-policy'
+import { caseStudies } from './projects/case-studies'
+import { describeAtlasRow } from './projects/atlas-evidence'
+import { workContributions } from './projects/work-curation'
+import { DestinationCue, DestinationLink, LinkArrow } from './DestinationLink'
 import './work-studies.css'
+import './work-curation.css'
 
 type StudyController = { identity: string; registerActivation(cancel: () => void): () => void; reset(slug: string): void; spin(slug: string, spinning: boolean): void; playing: boolean; reduced: boolean; toggle(): void; open(project: Project): void; explore(project: Project, event: MouseEvent<HTMLAnchorElement>): void }
 const StudyContext = createContext<StudyController | null>(null)
@@ -156,12 +161,12 @@ function WorkSculpture({ project, motionControl = false, navigates = false }: { 
     <div className="work-study-controls" onClickCapture={() => activation.cancel()}>
       <span>Drag to rotate</span>
       {motionControl && <WorkMotionControl />}
-      <button disabled={!ready} aria-label={`Reset ${project.name} sculpture`} title="Reset this object" onClick={() => motion.reset(project.slug)}><span aria-hidden="true">↺</span></button>
+      <button disabled={!ready} aria-label={`Reset ${project.name} sculpture`} title="Reset this object" onClick={() => motion.reset(project.slug)}>Reset</button>
     </div>
   </div>
 }
 
-function ProjectEntry({ project }: { project: Project }) {
+function ProjectEntry({ project, featured = false }: { project: Project; featured?: boolean }) {
   const motion = useContext(StudyContext)!
   const link = useRef<HTMLAnchorElement>(null)
   const activation = useMemo(() => createStudyActivationGate(), [])
@@ -196,9 +201,41 @@ function ProjectEntry({ project }: { project: Project }) {
         <span className="work-study-tags">{project.category}</span>
         <h2 id={`work-${project.slug}-title`}>{project.slug === 'internshipdeadlines' ? <>Internship<wbr />Deadlines</> : project.name}</h2>
         <p>{project.summary}</p>
-        <span className="work-study-link mono">{siteCopy.work.explore}<span aria-hidden="true">↗</span></span>
+        {featured && <p className="work-study-role">{workContributions[project.slug]?.role}</p>}
+        <DestinationCue className="work-study-link mono">{siteCopy.work.explore}</DestinationCue>
       </div>
     </div>
+  </article>
+}
+
+function AtlasEntry() {
+  const atlas = caseStudies.find(study => study.slug === 'atlas')!
+  return <article className="work-curated-atlas">
+    <a className="work-curated-atlas-link" href="#/work/atlas" aria-labelledby="work-atlas-title">
+      <div className="work-study-text">
+        <span className="work-study-tags">{atlas.category}</span>
+        <h2 id="work-atlas-title">Atlas</h2>
+        <p>I built a website crawler and local console for tracing findings back to their evidence.</p>
+        <p className="work-study-role">{workContributions.atlas.role}</p>
+        <DestinationCue className="work-study-link mono">{siteCopy.work.explore}</DestinationCue>
+      </div>
+      <figure className="work-atlas-preview">
+        <figcaption><span>Two source captures</span><span>16 July 2026</span></figcaption>
+        <div className="work-atlas-captures">
+          {[0, 1].map(index => {
+            const row = describeAtlasRow(index)
+            return <div key={row.url}>
+              <span className="mono">{index === 0 ? 'Static HTML' : 'JavaScript source'}</span>
+              <strong>{String(row.source_quote_card_count).padStart(2, '0')}</strong>
+              <p>Quote cards in source</p>
+              <span className="work-atlas-response mono">{row.status_code} OK</span>
+            </div>
+          })}
+        </div>
+        <p>Both requests succeeded. Their captured content calls for different next steps.</p>
+        <small>Retained HTML from Quotes to Scrape; this sample does not measure the rendered page.</small>
+      </figure>
+    </a>
   </article>
 }
 
@@ -211,21 +248,31 @@ export function SelectedWork({ dark }: { dark: boolean }) {
     <WorkStage dark={dark} identity="selected-work">
       <div className="work-section-label"><span className="mono">{siteCopy.work.selectedLabel}</span><WorkMotionControl /></div><div className="work-collection-intro"><h2>{siteCopy.work.heading[0]}<br /><em>{siteCopy.work.heading[1]}</em></h2><p>{siteCopy.work.introduction}</p></div>
       <ProjectEntries items={projects.slice(0, 2)} compact />
-      <div className="work-further" aria-label="More work">{projects.slice(2).map(project => <a key={project.slug} href={`#/work/${project.slug}`}><span>{project.name}</span><span aria-hidden="true">↗</span></a>)}</div>
-      <div className="section-tail"><a className="arrow-link" href="#/work">{siteCopy.work.all}<span aria-hidden="true">→</span></a></div>
+      <div className="work-further" aria-label="More work">{projects.slice(2).map(project => <a key={project.slug} href={`#/work/${project.slug}`}><span>{project.name}</span><LinkArrow /></a>)}</div>
+      <div className="section-tail"><DestinationLink className="arrow-link" href="#/work">{siteCopy.work.all}</DestinationLink></div>
     </WorkStage>
   </section>
 }
 
 export function WorkPage({ dark }: { dark: boolean }) {
+  const internship = projects.find(project => project.slug === 'internshipdeadlines')!
+  const sapien = projects.find(project => project.slug === 'sapien')!
+  const supporting = projects.filter(project => !['internshipdeadlines', 'sapien'].includes(project.slug))
   return <section className="work-page work-studies-page">
-    <header className="work-page-intro"><h1>{siteCopy.work.title}</h1><p>{siteCopy.work.description}</p></header>
+    <header className="work-page-intro"><h1>{siteCopy.work.title}</h1><p>Selected contributions in product, engineering, and growth.</p></header>
     <WorkStage dark={dark} identity="work-collection">
       <div className="work-study-toolbar">
-        <span>Interactive studies</span><WorkMotionControl />
+        <WorkMotionControl />
       </div>
-      <ProjectEntries items={projects} compact={false} />
-      <div className="work-further" aria-label="More work"><a href="#/work/atlas"><span>Atlas</span><span aria-hidden="true">↗</span></a></div>
+      <div className="work-study-list work-curated-featured" aria-label="Featured projects">
+        <ProjectEntry project={internship} featured />
+        <AtlasEntry />
+        <ProjectEntry project={sapien} featured />
+      </div>
+      <section className="work-curated-supporting" aria-labelledby="supporting-work-title">
+        <header><h2 id="supporting-work-title">Studies & experiments</h2><p>Research in contracts and cash flows, and the graphics behind this site.</p></header>
+        <ProjectEntries items={supporting} compact supporting />
+      </section>
     </WorkStage>
   </section>
 }

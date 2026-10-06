@@ -3,6 +3,8 @@ export interface ArticleSummary {
   path: string
   aliases?: string[]
   title: string
+  seoTitle?: string
+  seoDescription?: string
   displayTitle?: string
   category: string
   subtitle: string
@@ -15,6 +17,7 @@ export interface ArticleSummary {
 }
 
 export interface ArticleSource {
+  lastVerified?: string
   id?: string
   label?: string
   href?: string
@@ -36,6 +39,15 @@ export interface ArticleTable {
   note?: string
 }
 
+export interface ArticleFigure {
+  src: string
+  alt: string
+  label?: string
+  caption: string
+  width: number
+  height: number
+}
+
 export interface ArticleSection {
   id: string
   title: string
@@ -43,6 +55,8 @@ export interface ArticleSection {
   bullets?: string[]
   markdown?: string
   table?: ArticleTable
+  figures?: ArticleFigure[]
+  figuresPosition?: 'before-table'
   codeExamples?: { title: string; description: string; language: string; code: string }[]
   blocks?: ({ kind: 'markdown'; markdown: string } | { kind: 'table'; tableId: string })[]
 }
@@ -61,6 +75,13 @@ export interface ArticleCase {
 }
 
 export interface WritingArticle extends ArticleSummary {
+  openingPresentation?: 'integrated'
+  metricSection?: string
+  htmlBody?: string
+  outline?: { id: string; title: string }[]
+  conclusion?: { title: string; content: string }
+  metrics?: { label: string; value: string; note?: string }[]
+  resources?: { label: string; href: string; description?: string; format?: string }[]
   author?: string
   content?: string[]
   sections?: ArticleSection[]

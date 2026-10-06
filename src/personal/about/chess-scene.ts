@@ -13,7 +13,9 @@ export function createChessSet(parent: THREE.Group, knight: THREE.Object3D, tile
   for(const color of ['w','b'] as const)for(const type of ['p','n','b','r','q','k'] as const){
     let object:THREE.Object3D
     if(type==='n'){
-      object=knight.clone(true);object.position.set(0,0,0);object.scale.setScalar(.70);object.rotation.y=color==='w'?Math.PI:0
+      // The gallery knight is hidden while the game is shown. Its four playable
+      // clones must own visibility rather than inherit that presentation state.
+      object=knight.clone(true);object.visible=true;object.position.set(0,0,0);object.scale.setScalar(.70);object.rotation.y=color==='w'?Math.PI:0
       object.traverse(node=>{if(node instanceof THREE.Mesh){const original=Array.isArray(node.material)?node.material:[node.material];const next=original.map(material=>{const copy=material.clone() as THREE.MeshStandardMaterial;const detail=node.name.includes('relief');copy.color.setHex(color==='w'?(detail?0x282828:0xbdb8aa):(detail?0x757575:0x35322f));copy.opacity=1;copy.transparent=false;materials.add(copy);surfaces.add(copy);return copy});node.material=Array.isArray(node.material)?next:next[0]}})
     } else {
       const source=pieces.getObjectByName(`piece-template-${type}`)

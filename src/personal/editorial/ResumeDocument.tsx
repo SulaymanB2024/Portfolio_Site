@@ -1,6 +1,7 @@
 import { memo, type MouseEvent } from 'react'
 import { resumeProfile as profile, resumeReview } from '../profile-copy'
 import { displayDate } from './types'
+import { DestinationLink, LinkArrow } from '../DestinationLink'
 import { resumeSections as sections, resumeSectionHref, type ResumeSection } from './resume-navigation'
 import './resume.css'
 
@@ -87,7 +88,7 @@ function ResumeDocument() {
               }}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{label}</a>)}
             </nav>
           </details>
-          <a className="cv-rail-contact" href="#/contact">Get in touch<span aria-hidden="true">↗</span></a>
+          <DestinationLink className="cv-rail-contact" href="#/contact">Get in touch</DestinationLink>
         </div>
       </aside>
 
@@ -107,7 +108,7 @@ function ResumeDocument() {
                 </div>
                 <p className="cv-summary">{item.publicSummary}</p>
                 <ul>{item.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul>
-                {note.link && <a className="cv-entry-link" href={note.link[0]} {...(note.link[0].startsWith('https:') ? { target: '_blank', rel: 'noreferrer' } : {})}>{note.link[1]}<span aria-hidden="true">↗</span></a>}
+                {note.link && <DestinationLink className="cv-entry-link" href={note.link[0]}>{note.link[1]}</DestinationLink>}
               </div>
             </div>
           })}
@@ -120,15 +121,15 @@ function ResumeDocument() {
             <a className="cv-work-link" href="#/work/atlas">
               <span className="cv-work-type">Python &amp; SQLite<br />Technical SEO</span>
               <div><h3>Atlas</h3><p>Website crawling, internal-link mapping, and a path from every finding to its evidence.</p><span className="cv-work-read">Read the case study</span></div>
-              <span className="cv-work-arrow" aria-hidden="true">↗</span>
+              <LinkArrow className="cv-work-arrow" />
             </a>
             <a className="cv-work-link" href="#/work/payrollpro">
               <span className="cv-work-type">Solana<br />Hackathon prototype</span>
               <div><h3>PayrollPro</h3><p>Confidential payroll transfers, shared treasury controls, and the boundaries of a prototype.</p><span className="cv-work-read">Read the case study</span></div>
-              <span className="cv-work-arrow" aria-hidden="true">↗</span>
+              <LinkArrow className="cv-work-arrow" />
             </a>
           </div>
-          <div className="cv-further-links"><a href="#/work">All projects<span aria-hidden="true">→</span></a><a href="#/writing">Research &amp; writing<span aria-hidden="true">→</span></a></div>
+          <div className="cv-further-links"><DestinationLink href="#/work">All projects</DestinationLink><DestinationLink href="#/writing">Research &amp; writing</DestinationLink></div>
         </section>
 
         <section className="cv-section" aria-labelledby="resume-education">
@@ -173,9 +174,9 @@ function ResumeDocument() {
         </section>
 
         <nav className="resume-bottom-links cv-bottom-links" aria-label="Professional profiles">
-          <a className="arrow-link" href={profile.canonicalLinks.github} target="_blank" rel="noreferrer">GitHub<span aria-hidden="true">↗</span></a>
-          <a className="arrow-link" href={profile.canonicalLinks.linkedin} target="_blank" rel="noreferrer">LinkedIn<span aria-hidden="true">↗</span></a>
-          <a className="arrow-link" href="#/contact">Contact<span aria-hidden="true">→</span></a>
+          <DestinationLink className="arrow-link" href={profile.canonicalLinks.github}>GitHub</DestinationLink>
+          <DestinationLink className="arrow-link" href={profile.canonicalLinks.linkedin}>LinkedIn</DestinationLink>
+          <DestinationLink className="arrow-link" href="#/contact">Contact</DestinationLink>
         </nav>
       </div>
     </div>

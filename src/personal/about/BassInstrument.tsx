@@ -28,7 +28,7 @@ export default function BassInstrument({ ref, articulation, position, audioState
   const [active, setActive] = useState<Set<number>>(() => new Set())
   const [pending, setPending] = useState<Set<number>>(() => new Set())
   const [lastPitch, setLastPitch] = useState<number | null>(null)
-  const [manualOpen, setManualOpen] = useState(false)
+  const [mode, setMode] = useState<'play' | 'listen'>('play')
   const [soloSounding, setSoloSounding] = useState(false)
   const repertoire = useRef<BassRepertoireHandle>(null)
   const notes = useRef(new Map<number, { id: number; note?: LiveBassNote }>())
@@ -44,8 +44,8 @@ export default function BassInstrument({ ref, articulation, position, audioState
   }, [])
   const play = useCallback((index: number, sustain = false, token?: string) => {
     if (!bassStrings[index]) return
-    repertoire.current?.stop()
-    setManualOpen(true)
+    repertoire.current?.pause()
+    setMode('play')
     const previous = notes.current.get(index)
     const id = ++serial.current
     notes.current.set(index, { id })
@@ -109,13 +109,24 @@ export default function BassInstrument({ ref, articulation, position, audioState
   useEffect(() => { onPlaying(sounding || soloSounding) }, [sounding, soloSounding, onPlaying])
   useEffect(() => () => onPlaying(false), [onPlaying])
   const instruction = articulation === 'arco' ? 'Hold a string to bow. Release to lift the bow.' : 'Tap a string. Let it ring.'
-  return <div className="bass-instrument" data-technique={articulation} data-playing={sounding}>
-    <BassRepertoirePlayer ref={repertoire} beforePlay={beforeRecording} onStart={onRecordingStart} onSounding={setSoloSounding} onBowing={onBowing}/>
-    <details className="bass-hands-on" open={manualOpen} onToggle={event => setManualOpen(event.currentTarget.open)}>
-    <summary className="mono">Play the strings<span aria-hidden="true">+</span></summary>
+  function chooseMode(next: 'play' | 'listen') {
+    if (next === mode) return
+    stop()
+    if (next === 'play') repertoire.current?.pause()
+    setMode(next)
+  }
+  return <div className="bass-instrument" data-technique={articulation} data-playing={sounding} data-mode={mode}>
+    <div className="bass-mode-switch mono" role="group" aria-label="Explore the double bass">
+      <button aria-pressed={mode === 'play'} aria-controls="bass-play-panel" onClick={() => chooseMode('play')}>Play<span>The four strings</span></button>
+      <button aria-pressed={mode === 'listen'} aria-controls="bass-listen-panel" onClick={() => chooseMode('listen')}>Listen<span>Concert recordings</span></button>
+    </div>
+    <div id="bass-listen-panel" hidden={mode !== 'listen'}>
+      <BassRepertoirePlayer ref={repertoire} beforePlay={beforeRecording} onStart={onRecordingStart} onSounding={setSoloSounding} onBowing={onBowing}/>
+    </div>
+    <div id="bass-play-panel" className="bass-hands-on" hidden={mode !== 'play'}>
     <div className="bass-techniques mono" role="group" aria-label="Bass playing technique">
-      <button aria-pressed={articulation === 'pizzicato'} onClick={() => { repertoire.current?.stop(); stop(); onTechnique('pizzicato') }}>Pizzicato<span>Pluck & release</span></button>
-      <button aria-pressed={articulation === 'arco'} onClick={() => { repertoire.current?.stop(); stop(); onTechnique('arco') }}>Arco<span>Hold to bow</span></button>
+      <button aria-pressed={articulation === 'pizzicato'} onClick={() => { repertoire.current?.pause(); stop(); onTechnique('pizzicato') }}><span className="bass-technique-name">Pizzicato</span><span>Pluck & release</span></button>
+      <button aria-pressed={articulation === 'arco'} onClick={() => { repertoire.current?.pause(); stop(); onTechnique('arco') }}><span className="bass-technique-name">Arco</span><span>Hold to bow</span></button>
     </div>
     <div className="bass-strings" role="group" aria-label="Play a bass string" aria-describedby="bass-playing-help">
       {bassStrings.map((string, index) => <button key={string.label} aria-label={`${articulation === 'arco' ? 'Bow' : 'Pluck'} ${string.label} string, ${midiLabel(string.midi + position)}`} data-string={index} data-sounding={active.has(index)} data-pending={pending.has(index)}
@@ -139,10 +150,10 @@ export default function BassInstrument({ ref, articulation, position, audioState
     <p id="bass-playing-help" className="bass-help mono">{instruction}<span>{articulation === 'arco' ? 'Hold' : 'Keys'} A · S · D · F</span>{articulation === 'arco' && <span className="sr-only">Enter or Space on a string plays a short bow.</span>}</p>
     <div className="bass-fingerboard">
       <label htmlFor="bass-finger-position" className="mono">Fingerboard<span>{position === 0 ? 'Open strings' : positionLabel(position)}</span></label>
-      <input id="bass-finger-position" aria-label="Bass finger position" aria-valuetext={position === 0 ? 'Open strings' : `${positionLabel(position)}, ${position} semitones above the open strings`} type="range" min={0} max={12} step={1} value={position} onChange={event => { repertoire.current?.stop(); stop(); onPosition(Number(event.target.value)) }}/>
-      <div className="bass-landmarks mono" role="group" aria-label="Choose an interval above the open strings">{landmarks.map(item => <button key={item.position} aria-pressed={position === item.position} aria-label={item.position === 0 ? 'Use open strings' : `Move ${item.position === 12 ? 'an octave' : `a perfect ${item.label.toLowerCase()}`} above the open strings`} onClick={() => { repertoire.current?.stop(); stop(); onPosition(item.position) }}><span>{item.label}</span><span aria-hidden="true">{item.position === 0 ? '0' : `+${item.position}`}</span></button>)}</div>
+      <input id="bass-finger-position" aria-label="Bass finger position" aria-valuetext={position === 0 ? 'Open strings' : `${positionLabel(position)}, ${position} semitones above the open strings`} type="range" min={0} max={12} step={1} value={position} onChange={event => { repertoire.current?.pause(); stop(); onPosition(Number(event.target.value)) }}/>
+      <div className="bass-landmarks mono" role="group" aria-label="Choose an interval above the open strings">{landmarks.map(item => <button key={item.position} aria-pressed={position === item.position} aria-label={item.position === 0 ? 'Use open strings' : `Move ${item.position === 12 ? 'an octave' : `a perfect ${item.label.toLowerCase()}`} above the open strings`} onClick={() => { repertoire.current?.pause(); stop(); onPosition(item.position) }}><span>{item.label}</span><span aria-hidden="true">{item.position === 0 ? '0' : `+${item.position}`}</span></button>)}</div>
     </div>
     <p className="bass-library-status mono" role="status">{audioState === 'loading' ? 'Loading recorded double bass…' : audioState === 'error' ? 'Sound couldn’t load. Play a string to retry.' : 'Recorded double bass · headphones welcome'}</p>
-    </details>
+    </div>
   </div>
 }

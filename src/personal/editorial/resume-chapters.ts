@@ -15,10 +15,11 @@ export interface ResumePracticeItem {
 export interface ResumeChapter {
   id: ResumeChapterId
   shortName: string
+  indexLabel: string
   discipline: string
   headline: string
   introduction: string
-  practice: readonly [ResumePracticeItem, ResumePracticeItem, ResumePracticeItem]
+  practice: readonly ResumePracticeItem[]
   links: readonly { label: string; href: string }[]
   proof?: { value: string; label: string }
 }
@@ -29,26 +30,28 @@ export const resumeChapters: { [Id in ResumeChapterId]: ResumeChapter & { id: Id
   chegg: {
     id: 'chegg',
     shortName: 'Chegg',
+    indexLabel: 'Product Intern · Internships.com',
     discipline: 'Product & growth',
-    headline: 'Internship search and AI tools.',
-    introduction: 'At Chegg, I build internship-search workflows and AI tools with product, engineering, data science, and marketing teams.',
+    headline: 'Internship search and interview practice.',
+    introduction: 'Internships.com is Chegg’s internship-search platform. I work there as a product intern on growth, developing workflows and AI tools for students.',
     practice: [
-      { label: 'Recruiting data', text: 'I build and validate recruiting-data pipelines with product, engineering, data science, and marketing teams, connecting the data work to internship-search workflows.' },
-      { label: 'Student research', text: 'I analyze public social posts with embeddings and machine learning, using the patterns to inform growth experiments aimed at students.' },
-      { label: 'Interview practice', text: 'I built an AI mock interviewer that remembers the conversation, asks adaptive follow-ups, recovers from failures, and gives feedback after the interview.' },
+      { label: 'Recruiting data', text: 'Build and validate recruiting-data pipelines with product, engineering, data science, and marketing teams for Internships.com’s internship-search workflows.' },
+      { label: 'Growth experiments', text: 'Analyze public social posts with embeddings and machine learning, using recurring patterns to inform growth experiments focused on students.' },
+      { label: 'Interview practice', text: 'Built an AI mock interviewer with adaptive follow-ups, conversation memory, failure recovery, and feedback after the session.' },
     ],
     links: [],
   },
   sapien: {
     id: 'sapien',
     shortName: 'Sapien',
+    indexLabel: 'Growth Manager',
     discipline: 'Research & positioning',
-    headline: 'Positioning an AI research platform.',
-    introduction: 'I lead growth and positioning for a market research platform using simulated audiences.',
+    headline: 'Buyer use cases for simulated research.',
+    introduction: 'At Sapien, I lead growth and positioning for a market research platform that uses simulated audiences.',
     practice: [
-      { label: 'Buyer use cases', text: 'I turn pricing, concept-testing, and messaging questions into examples that show a buyer how simulated-audience research could be used.' },
-      { label: 'Research synthesis', text: 'I review research and validation studies before explaining a finding, preserving the audience, comparison, and limits of what the results support.' },
-      { label: 'Content function', text: 'I built Sapien’s SEO and content function: articles, category pages, ad creative, and sales material explaining the platform’s research applications.' },
+      { label: 'Buyer questions', text: 'Develop buyer use cases around pricing decisions, concept testing, messaging, and consumer research for the simulated-audience platform.' },
+      { label: 'Editorial & SEO', text: 'Built the SEO and content function, including articles, category pages, ad creative, and sales material explaining the platform’s applications.' },
+      { label: 'Evidence review', text: 'Review research and validation studies to explain use cases, specific findings, and the limits of what the evidence supports.' },
     ],
     links: [
       { label: 'My work at Sapien', href: '#/work/sapien' },
@@ -58,13 +61,14 @@ export const resumeChapters: { [Id in ResumeChapterId]: ResumeChapter & { id: Id
   void: {
     id: 'void',
     shortName: 'VOID',
+    indexLabel: 'Founder',
     discipline: 'Consulting & systems',
-    headline: 'Growth strategy, analysis, and software.',
-    introduction: 'I founded a consulting practice for small businesses and technology clients.',
+    headline: 'Growth strategy, from plan to software.',
+    introduction: 'VOID is my consulting practice for small businesses and technology clients.',
     practice: [
-      { label: 'Operating plans', text: 'I turn growth strategy and financial analysis into operating plans for small businesses and technology clients.' },
-      { label: 'Website systems', text: 'I build web systems and AI workflows for client operations. My consulting work spans the business analysis and the software itself.' },
-      { label: 'Atlas console', text: 'I built Atlas in Python and SQLite. Website crawls, internal-link maps, and audit findings stay connected to evidence that can be inspected.' },
+      { label: 'Operating plans', text: 'Develop operating plans for small businesses and technology clients, with work spanning growth strategy and financial analysis.' },
+      { label: 'Web & AI systems', text: 'Build software tools, web systems, and AI workflows for small-business operations and technology clients.' },
+      { label: 'Atlas', text: 'Built Atlas, a Python and SQLite console for website crawls, audit findings, and the evidence associated with them.' },
     ],
     links: [
       { label: 'Explore Atlas', href: '#/work/atlas' },
@@ -75,13 +79,14 @@ export const resumeChapters: { [Id in ResumeChapterId]: ResumeChapter & { id: Id
   'internship-deadlines': {
     id: 'internship-deadlines',
     shortName: 'Internship Deadlines',
+    indexLabel: 'Founder & Product Lead',
     discipline: 'Product & search',
-    headline: 'Find internships. Plan applications.',
-    introduction: 'I founded and launched InternshipDeadlines, from the recruiting-data pipeline to the student interface.',
+    headline: 'From internship search to application planning.',
+    introduction: 'I founded and launched InternshipDeadlines, a student product for internship search and application planning.',
     practice: [
-      { label: 'Source validation', text: 'I validate sources, standardize listings, and remove duplicates while retaining provenance. Historical records, unconfirmed details, and recent source checks remain distinguishable.' },
-      { label: 'Role search', text: 'I combine local language models for classification and query understanding with search ranking, matching a student’s search to roles, employers, and locations.' },
-      { label: 'Application planning', text: 'I connect each saved role to a next action, personal target date, and notes. Employer research, preparation, and offer comparisons support the next decision.' },
+      { label: 'Recruiting records', text: 'Designed a recruiting-data pipeline with source validation, listing normalization, deduplication, and provenance retained for the collected records.' },
+      { label: 'Search & classification', text: 'Combine local language models for role classification and query understanding with search ranking across roles, employers, and locations.' },
+      { label: 'Application decisions', text: 'The product includes employer research, application preparation, and cost and offer comparisons alongside internship search and planning.' },
     ],
     links: [
       { label: 'Read the project story', href: '#/work/internshipdeadlines' },
@@ -91,13 +96,13 @@ export const resumeChapters: { [Id in ResumeChapterId]: ResumeChapter & { id: Id
   'creative-trace': {
     id: 'creative-trace',
     shortName: 'CreativeTrace',
+    indexLabel: 'Creator · AI experimentation',
     discipline: 'Creative experimentation',
-    headline: 'From observed patterns to creative concepts.',
-    introduction: 'I use public posts and video to develop creative hypotheses, retaining the sources for review.',
+    headline: 'Creative ideas grounded in source material.',
+    introduction: 'I use public posts and video as reference material for AI creative experiments.',
     practice: [
-      { label: 'Post analysis', text: 'I examine public posts and video for recurring creative and engagement patterns, retaining the source material for review.' },
-      { label: 'Pattern grouping', text: 'I group recurring observations into creative hypotheses, making the connection between an observed pattern and a proposed concept explicit.' },
-      { label: 'Concept development', text: 'I develop draft creative concepts linked to their sources, so the reference material remains available alongside the idea.' },
+      { label: 'Observe patterns', text: 'Analyze public posts and video, looking for recurring patterns in creative choices and audience engagement.' },
+      { label: 'Develop concepts', text: 'Develop hypotheses and draft concepts linked to their source posts and video, retaining the reference material alongside each proposed idea.' },
     ],
     links: [
       { label: 'Explore creative experiments', href: '#/work/miscellaneous' },
@@ -106,13 +111,13 @@ export const resumeChapters: { [Id in ResumeChapterId]: ResumeChapter & { id: Id
   'venture-labs': {
     id: 'venture-labs',
     shortName: 'Texas Venture Labs',
+    indexLabel: 'Student Associate',
     discipline: 'Commercial research',
-    headline: 'Market research for early-stage companies.',
-    introduction: 'At Texas Venture Labs, I research commercial questions for early-stage companies.',
+    headline: 'Markets, pricing, and routes to market.',
+    introduction: 'As a student associate at Texas Venture Labs, I research markets, pricing, and unit economics for early-stage companies.',
     practice: [
-      { label: 'Market research', text: 'I investigate markets for early-stage companies and assess how each company could position itself.' },
-      { label: 'Pricing models', text: 'I build pricing and financial models, using unit economics to examine the business behind a proposed offering.' },
-      { label: 'Founder recommendations', text: 'I bring the market, pricing, and financial work together into recommendations on positioning and routes to market.' },
+      { label: 'Market & positioning', text: 'Research markets and build models for early-stage companies, using the findings to recommend positioning and routes to market.' },
+      { label: 'Pricing & unit economics', text: 'Build pricing and financial models for early-stage companies, including analysis of unit economics for the proposed offering.' },
     ],
     links: [
       { label: 'Related markets research', href: '#/work/investing-markets' },
@@ -121,13 +126,13 @@ export const resumeChapters: { [Id in ResumeChapterId]: ResumeChapter & { id: Id
   'ai-venture': {
     id: 'ai-venture',
     shortName: 'AI Image Venture',
+    indexLabel: 'Co-founder · Product & launch',
     discipline: 'Product & launch',
     headline: 'An image-generation venture on Bittensor.',
-    introduction: 'I co-founded the venture and owned its product and launch strategy.',
+    introduction: 'I co-founded the venture and owned its product and go-to-market work.',
     practice: [
-      { label: 'Product requirements', text: 'I co-founded an image-generation venture on Bittensor. I defined product requirements and owned the product and launch strategy.' },
-      { label: 'Technical architecture', text: 'I owned the venture’s technical architecture, alongside product requirements, pricing, and go-to-market materials.' },
-      { label: 'Pricing and launch', text: 'I developed pricing and go-to-market materials for the launch. The venture grew to $100K in revenue during my time as co-founder.' },
+      { label: 'Product & architecture', text: 'Defined product requirements and owned the technical architecture for the image-generation venture on Bittensor.' },
+      { label: 'Pricing & launch', text: 'Developed pricing and go-to-market materials for the launch.' },
     ],
     links: [],
     proof: { value: '$100K', label: 'Revenue' },

@@ -2,9 +2,11 @@ import { createRoot } from 'react-dom/client'
 import PersonalSite from './personal/PersonalSite'
 import SiteRefinements from './personal/refinements/SiteRefinements'
 import './personal/site-composition.css'
+import './personal/structure-typography.css'
+import './personal/text-placement.css'
 import { prepareRouteResources } from './personal/route-preparation'
 import { prepareRoutePage } from './personal/route-pages'
-import { prepareArticle } from './personal/editorial/article-cache'
+import { prepareArticleArrival } from './personal/editorial/article-arrival'
 import { resolveRoute } from './personal/editorial/routes'
 import catalog from './personal/editorial/data/catalog.json'
 import type { ArticleSummary } from './personal/editorial/types'
@@ -22,6 +24,6 @@ const initialPath = () => resolveRoute(location.hash, location.pathname, catalog
 let initialRoute: string
 do {
   initialRoute = initialPath()
-  await prepareRouteResources(initialRoute, prepareRoutePage, prepareArticle)
+  await prepareRouteResources(initialRoute, prepareRoutePage, slug => prepareArticleArrival(slug, location.hash, location.pathname))
 } while (initialPath() !== initialRoute)
 createRoot(root).render(<><PersonalSite /><SiteRefinements /></>)

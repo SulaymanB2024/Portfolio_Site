@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "records": [
+    {
+      "sourcePath": "public/images/research/the-ai-megawatt-power-ladder.svg",
+      "outputPath": "public/images/research/reader/the-ai-megawatt-power-ladder.svg",
+      "sourceSha256": "aba6cfb9af1f3d4254a1936ea0bd5a113b9a0b2b3fb904ecad0976072d238ad8",
+      "outputSha256": "7b63776395aac62a5f4a4aee0496734ce477f8ce42a23fac16b5b5ebd5d27f26"
+    },
+    {
+      "sourcePath": "public/images/research/the-ai-megawatt-utilization.svg",
+      "outputPath": "public/images/research/reader/the-ai-megawatt-utilization.svg",
+      "sourceSha256": "d5c35e6088a213a1b5029d9ecfb7942a7e9cd45d331f86b5b47985efead5d4d7",
+      "outputSha256": "6b06aecb784ab14b4daac712be738eaae6363a5543d92285a25573144fdcff8b"
+    },
+    {
+      "sourcePath": "public/images/research/the-ai-megawatt-sensitivity.svg",
+      "outputPath": "public/images/research/reader/the-ai-megawatt-sensitivity.svg",
+      "sourceSha256": "63379ffae1d76be342b7f2e4e649b7166af651ecb4f12ce2a852932c3be24ae6",
+      "outputSha256": "3fc2e7db98ad767b51f671c088c0c7ab99e207900b0270e170d3e03e9e9b8242"
+    }
+  ]
+}

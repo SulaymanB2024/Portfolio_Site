@@ -40,8 +40,7 @@ export const siteCopy = {
     label: 'Start with a note',
   },
   footer: {
-    kicker: 'Get in touch',
-    headline: ['What are you', 'working on?'],
+    title: 'Get in touch.',
     description: 'For product work, research, or collaboration, send me a note.',
     colophon: 'React, TypeScript, and Three.js. Light and motion, rendered as ink on paper.',
     top: 'Back to top',
@@ -50,7 +49,7 @@ export const siteCopy = {
     homeKicker: '/ Selected writing',
     read: 'Read essay',
     kicker: '/ Essays, research & working notes',
-    introduction: 'Software, AI agents, and infrastructure economics.',
+    introduction: 'How software behaves, how businesses make decisions, and how infrastructure gets financed.',
     all: 'All writing',
     search: 'Search essays',
     empty: 'No matching essays.',
@@ -90,28 +89,8 @@ export const homeWritingDecks: Record<string, string> = {
   'the-first-ai-managers': 'Can an AI manager keep a business on course?',
 }
 
-// These decks describe the existing essays; their bodies and titles stay sourced.
-export const writingDecks: Record<string, string> = {
-  'atlas-building-an-evidence-console': 'Building a website audit console that keeps findings traceable.',
-  'crawl-frontier-state-machine': 'What makes a crawler dependable: deciding which URLs to visit, when to wait, when to retry, and what to record.',
-  'raw-html-rendered-dom-evidence': 'The page a server sends and the page a browser builds can tell different stories. Here’s how to keep both.',
-  'canonicalization-graph-consistency': 'Canonicals, redirects, and sitemaps can disagree about which page counts. A method for finding and resolving those conflicts.',
-  'internal-links-directed-retrieval-graph': 'A website’s links shape what people and crawlers can find. Follow the paths, identify the gaps, and plan the repairs.',
-  'robots-txt-courtesy-not-access-control': 'What robots.txt asks crawlers to do, what indexing rules control, and where access protection has to begin.',
-  'structured-data-without-content-drift': 'Keep what a page says consistent with its metadata, structured data, sitemap, and exports—even as the site changes.',
-  'audit-findings-derived-records': 'An audit finding should trace back to an observation. A practical way to connect the evidence, the rule, and the recommendation.',
-  'replayable-traces-ai-agent-evaluation': 'To evaluate an agent, keep more than its final answer. Record the actions, replay the task, and test the result.',
-  'sqlite-crawl-pipelines': 'A practical guide to keeping crawl data consistent in SQLite, from URL identity and write transactions to checkpoints and exports.',
-  'technical-seo-migration-release-gates': 'A site migration changes more than URLs. Turn redirects, canonicals, links, and rendered content into checks that can block a bad release.',
-  'the-first-ai-managers': 'AI-operated businesses test memory, judgment, and responsibility.',
-  'ai-search-crawler-policy': 'Understand the rules for eight AI crawler tokens, then check what your robots.txt actually permits.',
-  'technical-seo-public-data-infrastructure': 'A URL is more than an address. How crawlability, rendering, attribution, and exports make the web’s records usable.',
-  'canonical-identity-personal-seo': 'Make your domains, biographies, résumé, and profiles tell a consistent story about who you are and where your work lives.',
-  'who-owns-texas-toll-roads': 'The contracts separating ownership, toll revenue, and risk.',
-  'viralbench-codex-agent-harness': 'A proposed Codex workflow for improving ViralBench agents through replay and independent evaluation.',
-}
-
+// Reader and discovery copy share the reviewed article record. Keep this adapter
+// for existing callers; separate overlays must not hide later editorial edits.
 export function withWritingCopy<T extends ArticleSummary>(article: T): T {
-  const subtitle = writingDecks[article.slug]
-  return subtitle ? { ...article, subtitle } : article
+  return article
 }

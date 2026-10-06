@@ -4,6 +4,7 @@ import { ArtworkMotionControl, useArtworkMotion } from './editorial/ArtworkMotio
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
 import { displayDate, type ArticleSummary } from './editorial/types'
 import { homeWritingDecks, siteCopy, withWritingCopy } from './site-copy'
+import { DestinationCue, DestinationLink } from './DestinationLink'
 import './home-writing.css'
 
 const articles = (catalog as ArticleSummary[]).map(withWritingCopy)
@@ -18,10 +19,10 @@ function JournalEssay({ article, lead = false }: { article: ArticleSummary; lead
     <div className="journal-essay-copy">
       <h3>{article.displayTitle || article.title}</h3>
       <p className="journal-deck">{homeWritingDecks[article.slug] ?? article.subtitle}</p>
-      <div className="journal-meta mono"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span>{article.readTime}</span></div>
+      <div className="journal-meta mono"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time></div>
     </div>
     <div className="journal-art"><AnimatedArtwork artwork={artwork} size={lead ? 400 : 240} paused={paused} embedded decorative /></div>
-    <span className="journal-read mono">{siteCopy.writing.read}<span aria-hidden="true">↗</span></span>
+    <DestinationCue className="journal-read mono">{siteCopy.writing.read}</DestinationCue>
   </a>
 }
 
@@ -33,7 +34,7 @@ export function HomeWriting() {
       {lead && <JournalEssay article={lead} lead />}
       <div className="journal-companions">{companions.map(article => <JournalEssay key={article.slug} article={article} />)}</div>
     </div>
-    <a className="journal-all mono" href="#/writing">{siteCopy.writing.all}<span aria-hidden="true">→</span></a>
+    <DestinationLink className="journal-all mono" href="#/writing">{siteCopy.writing.all}</DestinationLink>
   </section>
 }
 

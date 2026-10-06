@@ -10,13 +10,17 @@ import { resolveRoute } from './editorial/routes'
 import { findCaseStudy } from './projects/case-studies'
 import { type ArticleSummary } from './editorial/types'
 import { ArtworkMotionProvider } from './editorial/ArtworkMotion'
-import { prepareArticle } from './editorial/article-cache'
+import { prepareArticleArrival } from './editorial/article-arrival'
+import { articleSection } from './editorial/library'
+import { jumpToArticleSection } from './editorial/reader-jump'
 import { homePage, workPage, writingPage, articlePage, projectPage, resumePage, caseStudyPage, aboutPage, contactPage, prepareRoutePage } from './route-pages'
 import { artworkTransitionName, galleryArticleJourney, startArtworkTransition, type ArtworkTransition } from './editorial/artwork-continuity'
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
 import { installMenuDismissal } from './refinements/menu-dismissal'
 import { focusWithoutWarmup } from './refinements/warmup-policy'
 import RouteBoundary from './RouteBoundary'
+import BrandIdentity from './BrandIdentity'
+import { DestinationLink } from './DestinationLink'
 import { prepareRouteResources } from './route-preparation'
 import { installRouteScroll } from './refinements/route-scroll'
 import './editorial/artwork-continuity.css'
@@ -24,6 +28,7 @@ import './personal.css'
 import './editorial/editorial.css'
 import './mobile-polish.css'
 import './header-refinement.css'
+import './visual-restraint.css'
 
 const Home = homePage.Page
 const WorkPage = workPage.Page
@@ -58,7 +63,7 @@ function useRoute() {
         return
       }
       setPending(true)
-      const prepared = prepareRouteResources(next, prepareRoutePage, prepareArticle)
+      const prepared = prepareRouteResources(next, prepareRoutePage, slug => prepareArticleArrival(slug, location.hash, location.pathname))
       const journey = galleryArticleJourney(current.current, next)
       const canAnimate = journey && !matchMedia('(prefers-reduced-motion: reduce)').matches
       const update = async () => {
@@ -66,6 +71,11 @@ function useRoute() {
         current.current = next
         flushSync(() => { setRoute(next); setPending(false) })
         await scroll.commit(arrival, () => {
+          if (next.startsWith('writing/')) {
+            const section = articleSection(location.hash, location.pathname)
+            if (section) jumpToArticleSection(section, 'instant')
+            return
+          }
           if (next !== 'writing') return
           const selected = new URLSearchParams(location.hash.split('?')[1] || '').get('at')
           const link = [...document.querySelectorAll<HTMLAnchorElement>('.writing-story')]
@@ -100,7 +110,7 @@ function useRoute() {
   }, [])
   useEffect(() => {
     // Initial deep links prepare article data while its page chunk is loading.
-    if (route.startsWith('writing/')) void prepareArticle(route.slice('writing/'.length)).catch(() => {})
+    if (route.startsWith('writing/')) void prepareArticleArrival(route.slice('writing/'.length), location.hash, location.pathname).catch(() => {})
     updateSearchHead(document, route)
   }, [route])
   return { route, pending }
@@ -172,7 +182,7 @@ function SitePages() {
     {isHome && <div className="page-wash" aria-hidden="true" />}
     <a className="skip-link" href="#main-content" onClick={e => { e.preventDefault(); document.getElementById('main-content')?.focus() }}>Skip to content</a>
     <header className="personal-header" data-nav-compact={compactNav}>
-      <a href="#/" className="identity" aria-label="Sulayman Bowles — home" onClick={event => { if (!isHome || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); main.current?.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }) }}><span className="identity-name">Sulayman Bowles</span></a>
+      <a href="#/" className="identity" aria-label="Sulayman Bowles — home" onClick={event => { if (!isHome || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); main.current?.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }) }}><BrandIdentity /></a>
       <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug]) => {
         const extra = slug !== 'about' && slug !== 'writing'
         const collapsed = compactNav && !menuOpen && extra
@@ -189,16 +199,13 @@ function SitePages() {
 }
 
 function Crosshair({ className = '' }: { className?: string }) { return <span className={`crosshair ${className}`} aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1v7m0 8v7M1 12h7m8 0h7" /><circle cx="12" cy="12" r="4" /></svg></span> }
-function ArrowLink({ href, children, external = false }: { href: string; children: React.ReactNode; external?: boolean }) {
-  return <a className="arrow-link" href={href.startsWith('./') ? `${import.meta.env.BASE_URL}${href.slice(2)}` : href} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}>{children}<span aria-hidden="true">{external ? '↗' : '→'}</span></a>
-}
 function SectionLabel({ children, end }: { children: React.ReactNode; end?: React.ReactNode }) {
   return <div className="section-label"><span>/ {children}</span><i />{end && <span>{end}</span>}</div>
 }
 
 
-function NotFound() { return <section className="not-found"><span className="eyebrow">{siteCopy.notFound.kicker}</span><h1>{siteCopy.notFound.headline[0]}<br />{siteCopy.notFound.headline[1]}</h1><ArrowLink href="#/">{siteCopy.notFound.action}</ArrowLink></section> }
+function NotFound() { return <section className="not-found"><span className="eyebrow">{siteCopy.notFound.kicker}</span><h1>{siteCopy.notFound.headline[0]}<br />{siteCopy.notFound.headline[1]}</h1><DestinationLink className="arrow-link" href="#/">{siteCopy.notFound.action}</DestinationLink></section> }
 
 function Footer({ closing, route }: { closing: boolean; route: string }) {
-  return <footer className="personal-footer">{closing && <div className="site-closing"><span className="eyebrow">{siteCopy.footer.kicker}</span><div className="site-closing-main"><h2>{siteCopy.footer.headline[0]}<br /><em>{siteCopy.footer.headline[1]}</em></h2><div className="site-closing-contact"><p>{siteCopy.footer.description}</p><a className="closing-email" href={`mailto:${contact.email}`}>{contact.email}<span aria-hidden="true">↗</span></a><a className="arrow-link" href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn<span aria-hidden="true">↗</span></a></div></div></div>}<div className="footer-baseline"><span className="mono">Sulayman Bowles</span><details className="colophon"><summary className="mono">Colophon <span aria-hidden="true">+</span></summary><div><h2>Colophon</h2><p>{siteCopy.footer.colophon}</p><p><a href="https://sketchfab.com/3d-models/jousting-helmet-a4eea31d9d9441af9434a7da5ae46b54" target="_blank" rel="noreferrer">Jousting Helmet</a> by The Royal Armoury, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Dithering based on <a href="https://github.com/niccolofanton/dithering-shader" target="_blank" rel="noreferrer">Niccolò Fanton’s study</a> and <a href="https://www.shadertoy.com/view/ltSSzW" target="_blank" rel="noreferrer">Klems’ Bayer pattern</a>.</p><a className="mono" href={`${import.meta.env.BASE_URL}shader.html`}>Explore the original study ↗</a></div></details><a className="footer-top mono" href={`#/${route}`} onClick={event => { if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); const query = new URLSearchParams(location.hash.split('?')[1] || ''); query.delete('chapter'); query.delete('section'); history.replaceState(history.state, '', `#/${route}${query.size ? `?${query}` : ''}`); document.getElementById('main-content')?.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }) }}>{siteCopy.footer.top} <span aria-hidden="true">↑</span></a></div></footer>
+  return <footer className="personal-footer">{closing && <div className="site-closing"><div className="site-closing-main"><h2>{siteCopy.footer.title}</h2><div className="site-closing-contact"><p>{siteCopy.footer.description}</p><DestinationLink className="closing-email" href={`mailto:${contact.email}`} direction="external" emphasis="contact">{contact.email}</DestinationLink><DestinationLink className="arrow-link" href={contact.linkedin}>LinkedIn</DestinationLink></div></div></div>}<div className="footer-baseline"><span className="mono">Sulayman Bowles</span><details className="colophon"><summary className="mono">Colophon <span aria-hidden="true">+</span></summary><div><h2>Colophon</h2><p>{siteCopy.footer.colophon}</p><p><a href="https://sketchfab.com/3d-models/jousting-helmet-a4eea31d9d9441af9434a7da5ae46b54" target="_blank" rel="noreferrer">Jousting Helmet</a> by The Royal Armoury, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Dithering based on <a href="https://github.com/niccolofanton/dithering-shader" target="_blank" rel="noreferrer">Niccolò Fanton’s study</a> and <a href="https://www.shadertoy.com/view/ltSSzW" target="_blank" rel="noreferrer">Klems’ Bayer pattern</a>.</p><a className="mono" href={`${import.meta.env.BASE_URL}shader.html`}>Explore the original study ↗</a></div></details><a className="footer-top mono" href={`#/${route}`} onClick={event => { if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); const query = new URLSearchParams(location.hash.split('?')[1] || ''); query.delete('chapter'); query.delete('section'); history.replaceState(history.state, '', `#/${route}${query.size ? `?${query}` : ''}`); document.getElementById('main-content')?.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }) }}>{siteCopy.footer.top} <span aria-hidden="true">↑</span></a></div></footer>
 }

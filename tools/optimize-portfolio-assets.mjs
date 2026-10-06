@@ -329,7 +329,6 @@ export function assertAssetSet(previous, refreshAuthored) {
 export async function run({ verifyOnly = false, refreshAuthored = false, only = [] } = {}) {
   assert.ok(!(verifyOnly && refreshAuthored), 'Verify-only cannot refresh authored sources')
   assert.ok(only.every(id => definitions.some(definition => definition.id === id)), 'Unknown selected portfolio asset')
-  assert.ok(!only.length || !refreshAuthored, 'Selected optimization cannot refresh authored sources')
   sharp.concurrency(1)
   await MeshoptEncoder.ready
   const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
@@ -356,11 +355,15 @@ export async function run({ verifyOnly = false, refreshAuthored = false, only = 
     JSON.parse(await readFile(resolve(root, 'public/about-objects/chess-pieces-manifest.json'), 'utf8')),
     JSON.parse(await readFile(resolve(root, 'public/resume-objects/manifest.json'), 'utf8')),
   ) : new Map()
+  if (refreshAuthored) for (const id of only) {
+    const definition = definitions.find(definition => definition.id === id)
+    assert.ok(authored.has(definition.source), `${id}: selected authored refresh requires an original validated specimen`)
+  }
   const sources = new Map()
   // Fail before writing if any source drifted from the recorded baseline or manifest.
   for (const definition of definitions) {
     const bytes = await readFile(resolve(root, definition.source)), hash = sha256(bytes)
-    const authoredRefresh = authored.has(definition.source)
+    const authoredRefresh = authored.has(definition.source) && (!only.length || only.includes(definition.id))
     const originalSpecimen = definition.mode === 'draco-only'
     if (authoredRefresh) assert.equal(hash, authored.get(definition.source), `${definition.id}: source differs from authored manifest`)
     // Historical captures protect imported scans. Refined original specimens

@@ -1,0 +1,191 @@
+/* Placement for the accepted Structure type. Keep this screen-only so the
+   document résumé retains its own page geometry. Specific shell selectors also
+   keep these relationships stable when a route's stylesheet loads later. */
+@media screen {
+  .personal-site[data-section][data-appearance] {
+    --placement-column-gap: clamp(32px, 6.25vw, 80px);
+    --placement-chapter-gap: clamp(32px, 6vw, 80px);
+    --placement-prose-width: 660px;
+  }
+
+  .personal-site.home-site .landing-copy { padding-inline: var(--home-gutter); }
+
+  /* An introduction has one title axis and one reading axis. */
+  .personal-site.personal-site[data-section][data-appearance] :is(.work-page-intro, .about-introduction, .rx-introduction, .writing-heading-copy) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--placement-column-gap);
+    align-items: start;
+  }
+  .personal-site.personal-site[data-section][data-appearance] :is(.work-page-intro, .about-introduction, .rx-introduction, .writing-heading-copy) h1 { margin: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .work-page-intro { padding-block: 32px 40px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-header { margin-block: 32px 24px; gap: 24px; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.about-objects, .resume-explorer) { padding-top: 28px; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.work-page-intro > p, .writing-introduction, .about-biography, .rx-intro-copy) {
+    margin-top: 4px;
+    max-inline-size: 44ch;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .work-page-intro > p { margin-bottom: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .rx-introduction {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+    column-gap: clamp(36px, 5.5vw, 80px);
+  }
+  .personal-site.personal-site[data-section][data-appearance] .rx-entry-actions { margin-top: 16px; }
+
+  /* The biography precedes its navigation when the columns become one. */
+  .personal-site.personal-site[data-section][data-appearance] .about-introduction {
+    grid-template-areas: 'title biography' 'links biography';
+    grid-template-rows: min-content 1fr;
+    row-gap: 16px;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .about-introduction h1 { grid-area: title; }
+  .personal-site.personal-site[data-section][data-appearance] .about-biography { grid-area: biography; }
+  .personal-site.personal-site[data-section][data-appearance] .about-biography-links { grid-area: links; margin: 0; }
+
+  /* Anchor the interlude independently of the sculpture's changing height. */
+  .personal-site.personal-site[data-section][data-appearance] .home-context-intro {
+    align-self: start;
+    padding-block: clamp(48px, 6vw, 80px) 0;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .home-context-intro h2 { margin-block: 0 24px; }
+  .personal-site.personal-site[data-section][data-appearance] .home-context-summary { max-inline-size: 38ch; margin-bottom: 20px; }
+  .personal-site.personal-site[data-section][data-appearance] .home-context-about { margin-top: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .home-context-caption { max-inline-size: 54ch; }
+
+  /* Date and destination stay with the description, ahead of the artwork. */
+  .personal-site.personal-site[data-section][data-appearance] .journal-lead { row-gap: 12px; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-lead .journal-read { grid-row: 2; align-self: start; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-lead .journal-art { grid-row: 3; margin-top: 8px; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-companion .journal-essay-copy { grid-column: 1 / -1; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-companion .journal-read { grid-column: 1; grid-row: 2; align-self: start; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-companion .journal-art { grid-column: 2; grid-row: 2; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-essay h3 { max-inline-size: 24ch; text-wrap: balance; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-deck { max-inline-size: 46ch; margin-bottom: 16px; }
+
+  /* Preserve lead, paired, report and note compositions; give their text a
+     finite measure and remove the automatic push to the far edge. */
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story h2 { max-inline-size: 23ch; text-wrap: balance; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='lead'] h2 { max-inline-size: 18ch; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story-topic { margin-bottom: 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story .writing-deck { margin-bottom: 18px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story-meta { justify-content: flex-start; align-items: center; gap: 8px 24px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story-action { margin-left: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='note'] .writing-story-copy {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    column-gap: 32px;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='note'] .writing-deck { margin: 0; }
+
+  .personal-site.personal-site[data-section][data-appearance] .work-study-text h2 { margin-block: 16px 18px; text-wrap: balance; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.work-study-tags, .project-contribution dt, .project-contribution > p > span) {
+    font: 400 13px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .work-study-link { margin-top: 24px; }
+  .personal-site.personal-site[data-section][data-appearance] .work-curated-supporting > header { align-items: start; column-gap: var(--placement-column-gap); }
+
+  /* Top-align cover copy to its illustration instead of lowering the title
+     according to the illustration height. Retain form-specific column order. */
+  .personal-site.personal-site[data-section][data-appearance] .article-page .article-cover {
+    align-items: start;
+    margin-block: 24px 48px;
+    padding-bottom: 40px;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .article-cover .reader-heading { padding-top: 8px; }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .reader-heading > .eyebrow { margin-bottom: 18px; }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .article-cover h1 { margin-bottom: 22px; }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .reader-subtitle { margin-bottom: 24px; max-inline-size: 44ch; }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .reader-prose :is(h2, h3, h4) {
+    max-inline-size: min(100%, var(--placement-prose-width));
+    text-wrap: balance;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .reader-section > h2 { margin-bottom: 22px; }
+
+  /* Project accounts use the same heading/prose relationship throughout. */
+  .personal-site.personal-site[data-section][data-appearance] .project-narrative .project-copy .project-name { margin-block: 18px 18px; text-wrap: balance; }
+  .personal-site.personal-site[data-section][data-appearance] .project-narrative .project-copy .project-deck { margin-bottom: 20px; }
+  .personal-site.personal-site[data-section][data-appearance] .project-narrative .project-contribution { margin-top: 20px; }
+  .personal-site.personal-site[data-section][data-appearance] .project-narrative .project-contribution > p { margin-top: 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .project-narrative .project-links { margin-top: 20px; gap: 8px 24px; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.story-opening-layout, .story-system-layout, .story-practice-account, .study-account) {
+    grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+    gap: var(--placement-chapter-gap);
+    align-items: start;
+  }
+  .personal-site.personal-site[data-section][data-appearance] :is(.story-chapter, .study-account) h2 {
+    max-inline-size: 100%;
+    margin-top: 0;
+    text-wrap: balance;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .case-dossier .study-hero h1 { max-inline-size: 18ch; margin-block: 18px 22px; text-wrap: balance; }
+  .personal-site.personal-site[data-section][data-appearance] .case-dossier .study-title { max-inline-size: 40ch; }
+
+  /* The title shares the introduction's left edge; the address and its
+     utility stay together. */
+  .personal-site.personal-site[data-section][data-appearance] .lion-contact-heading { gap: 16px 32px; padding-top: 32px; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-contact-introduction { margin-block: 20px 12px; max-inline-size: 44ch; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-contact-email { flex-wrap: wrap; gap: 8px 28px; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-study-credit p { max-inline-size: 44ch; }
+  .personal-site.personal-site[data-section][data-appearance] .site-closing-main { align-items: start; gap: 24px var(--placement-column-gap); }
+  .personal-site.personal-site[data-section][data-appearance] .site-closing h2 { margin: 0; max-inline-size: 18ch; }
+  .personal-site.personal-site[data-section][data-appearance] .site-closing-contact > p { max-inline-size: 42ch; }
+}
+
+@media screen and (max-width: 760px) {
+  .personal-site.personal-site.home-site[data-section][data-appearance] { --home-gutter: 25px; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.work-page-intro, .rx-introduction, .writing-heading-copy) {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 18px;
+  }
+  .personal-site.personal-site[data-section][data-appearance] :is(.work-page-intro > p, .writing-introduction, .about-biography, .rx-intro-copy) { margin-top: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .work-page-intro { padding-block: 25px 32px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-header { margin-block: 25px 16px; gap: 20px; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.about-objects, .resume-explorer) { padding-top: 21px; }
+  .personal-site.personal-site[data-section][data-appearance] .about-introduction {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'title' 'biography' 'links';
+    grid-template-rows: auto;
+    row-gap: 18px;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .home-context-intro { padding-block: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .home-context-intro h2 { margin-bottom: 20px; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-companion .journal-art { grid-column: 1; grid-row: 3; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-essay h3 { max-inline-size: 100%; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.story-opening-layout, .story-system-layout, .story-practice-account, .study-account) { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .article-cover { margin-block: 24px 32px; padding-bottom: 28px; }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .article-cover .reader-heading { padding-top: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .reader-heading > .eyebrow { margin-bottom: 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .reader-subtitle { margin-bottom: 20px; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-contact-heading { padding-top: 25px; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-contact-introduction { margin-block: 18px 12px; }
+  .personal-site.personal-site[data-section][data-appearance] .site-closing-contact { margin-top: 20px; }
+}
+
+@media screen and (max-width: 700px) and (max-aspect-ratio: 1/1) {
+  .personal-site.home-site .landing-copy-content { width: 100%; }
+}
+
+@media screen and (max-width: 680px) {
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story .writing-story-copy { display: block; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story h2 { max-inline-size: 100%; margin-bottom: 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='lead'] h2 { max-inline-size: 100%; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='note'] .writing-story-copy { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='note'] h2 { margin: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='note'] .writing-story-meta { grid-column: 1; grid-row: 3; justify-content: start; }
+}
+
+@media screen and (max-width: 600px) {
+  .personal-site.personal-site.home-site[data-section][data-appearance] { --home-gutter: 20px; }
+  .personal-site.personal-site[data-section][data-appearance] .about-explore-heading { flex-direction: column; align-items: start; gap: 4px; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-contact-heading { flex-direction: column; align-items: start; gap: 10px; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-contact-rail { flex-direction: column; flex-wrap: nowrap; align-items: start; gap: 8px; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-contact-email { flex-basis: auto; flex-wrap: nowrap; gap: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-contact-linkedin { padding-top: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-study-credit { width: 100%; }
+  .personal-site.personal-site[data-section][data-appearance] .lion-study-credit p { position: static; width: 100%; margin: 12px 0 0; padding: 16px; font: 12px/1.7 var(--type-interface); }
+}
+
+@media screen and (max-width: 950px) and (max-height: 500px) {
+  .personal-site.personal-site.home-site[data-section][data-appearance] { --home-gutter: 20px; }
+}

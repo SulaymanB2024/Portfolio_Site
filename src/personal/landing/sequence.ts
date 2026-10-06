@@ -14,7 +14,7 @@ export interface LandingChapter {
 
 /** The approved study's opening and four project chapters, in site order. */
 export const CHAPTERS: readonly LandingChapter[] = [
-  { id: 'helmet', lines: ['The frontier', 'is all that', 'matters.'], label: 'Sulayman Bowles', category: '', asset: 'helmet-balanced.glb', assetId: 'helmet', href: '#/about', linkLabel: 'About me' },
+  { id: 'helmet', lines: ['The frontier', 'is all that', 'matters.'], label: 'Sulayman Bowles', category: '', asset: 'helmet-balanced.glb', assetId: 'helmet', href: '#/work', linkLabel: 'Selected work', article: { label: 'About me', href: '#/about' } },
   { id: 'product', lines: ['Internship', 'Deadlines.'], label: 'InternshipDeadlines', category: 'Product', asset: 'work-studies/internshipdeadlines.glb', assetId: 'work-internshipdeadlines', href: '#/work/internshipdeadlines', linkLabel: 'Explore project' },
   { id: 'sapien', lines: ['Sapien.'], label: 'Sapien', category: 'AI', asset: 'work-studies/sapien.glb', assetId: 'work-sapien', href: '#/work/sapien', linkLabel: 'Explore project' },
   { id: 'markets', lines: ['Investing', '& Markets.'], label: 'Investing & Markets', category: 'Markets', asset: 'work-studies/investing-markets.glb', assetId: 'work-investing-markets', href: '#/work/investing-markets', linkLabel: 'Explore project', article: { label: 'Who owns Texas toll roads?', href: '#/writing/who-owns-texas-toll-roads' } },

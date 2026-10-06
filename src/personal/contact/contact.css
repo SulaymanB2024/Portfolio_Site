@@ -3,6 +3,7 @@
 .lion-contact-heading { display: flex; align-items: baseline; justify-content: space-between; padding-top: 25px; }
 .lion-contact-heading > div { display: flex; gap: 18px; align-items: baseline; }
 .lion-contact-heading h1 { font: normal 28px/1.2 Georgia, serif; letter-spacing: -.04em; margin: 0; }
+.lion-contact-introduction { margin: 14px 0 8px; max-width: 52ch; color: var(--muted); font: 16px/1.6 Georgia, serif; text-wrap: pretty; }
 .lion-contact-heading .mono { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
 .lion-study { flex: 1; min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto auto; }
 .lion-study-stage { position: relative; margin: 0 -3vw; min-height: 320px; }

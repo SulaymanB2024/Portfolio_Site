@@ -5,16 +5,27 @@
   "number": "05",
   "category": "CRAWLER ENGINEERING",
   "title": "The Crawl Frontier Is a State Machine, Not a Queue",
-  "seoTitle": "Crawl Frontier Design: URL Identity, States, and Retries",
-  "subtitle": "A practical architecture for URL identity, admission control, host politeness, bounded retries, crawl traps, and evidence-preserving frontier transitions.",
-  "seoDescription": "Design a reliable web-crawler frontier with explicit URL identity, state transitions, per-origin scheduling, retry policy, crawl-trap controls, and reproducible evidence.",
-  "image": "/og-default.png",
+  "seoTitle": "Reliable Crawl Frontiers: Identity, States and Retries",
+  "subtitle": "Make every URL admission, fetch, retry, and omission explainable.",
+  "seoDescription": "Design a crawler frontier with explicit URL identity, origin scheduling, bounded retries and crawl-trap controls that leave omissions and failures auditable.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/crawl-frontier-editorial.webp",
+    "socialSrc": "/images/research/crawl-frontier-social.jpg",
+    "alt": "A monochrome mechanical switchyard routes URL records through explicit crawler states.",
+    "label": "Crawler lifecycle / state study",
+    "caption": "Branching tracks make scheduling, retries, completion, and terminal states visible as separate transitions."
+  },
   "date": "2026.07.19",
-  "dateModified": "2026.07.19",
+  "dateModified": "2026-10-05",
   "lastVerified": "2026.07.19",
-  "readTime": "15 MIN",
+  "readTime": "6 MIN",
   "author": "SULAYMAN BOWLES",
-  "thesis": "A crawler becomes trustworthy when every URL transition is explicit, replayable, and bounded; a fast queue without an identity and state contract only processes ambiguity faster.",
+  "thesis": "A reliable frontier records how each URL enters scope, waits, fetches, retries, and finishes. Explicit identity and bounded transitions make both results and omissions replayable.",
+  "conclusion": {
+    "title": "Reconcile every admitted URL",
+    "content": "Before making a site-wide claim, trace every admitted URL to a terminal result or an explicit unresolved state. Throughput becomes useful once identity, host capacity, retries, and recorded transitions make that coverage defensible."
+  },
   "evidenceBoundary": "This architecture describes an operator-controlled crawler. It does not predict how any search engine schedules a site, and provider crawl-budget guidance is used only to distinguish host capacity, demand, and URL-inventory concerns.",
   "metrics": [
     {
@@ -62,17 +73,17 @@
     }
   ],
   "content": [
-    "A crawl frontier is often introduced as a queue of URLs waiting to be fetched. That description is convenient and incomplete. Before a URL reaches a network client, the crawler has already made decisions about identity, scope, priority, policy, host capacity, and prior attempts. After the request, the address may redirect, retry, fail permanently, produce new links, or remain unresolved. Those decisions form a state machine whether the implementation acknowledges them or not.",
-    "The reliable design makes the machine visible. It stores the submitted address separately from its normalized comparison key, records why the address entered scope, schedules by origin rather than global arrival order, and emits one transition record for every admission, deferral, fetch, retry, suppression, and completion. The result is not merely a crawl that finishes. It is a crawl whose omissions and repeated work can be explained."
+    "A queue tells you what to fetch next. It cannot explain why a URL was admitted, why its host must wait, or whether a failed request should return. Those decisions already form a state machine; leaving them implicit makes recovery and coverage hard to verify.",
+    "Store the discovered address separately from its comparison key, schedule capacity by origin, and record every admission, deferral, fetch, retry, suppression, and completion. Then a finished crawl can explain its repeated work and omissions—not just report the pages that happened to arrive."
   ],
   "sections": [
     {
       "id": "identity-before-scheduling",
-      "title": "Define URL identity before scheduling work",
+      "title": "Decide what counts as the same URL",
       "paragraphs": [
-        "The first frontier decision is not priority; it is whether two references identify the same work item for this crawler. RFC 3986 permits syntax-based normalization such as lowercasing the scheme and host, normalizing percent-encoding for unreserved characters, and removing dot segments. It does not authorize arbitrary product decisions such as deleting query parameters, lowercasing a case-sensitive path, or treating a trailing slash as equivalent on every server.",
-        "Keep three fields instead of collapsing them into one string: the discovered reference exactly as observed, the absolute resolved URL used for the request, and a comparison key produced by documented crawler rules. This preserves evidence when an aggressive rule proves wrong. A parameter classifier can later mark a key as tracking-only, order-sensitive, content-bearing, or unknown without rewriting the captured source.",
-        "Fragments usually do not cause a new HTTP retrieval, but the fragment can still matter as evidence about in-page navigation. Store it on the discovered edge while excluding it from the fetch key. User information, unsupported schemes, malformed ports, and out-of-scope hosts should produce named rejection states rather than disappearing during parsing."
+        "URL identity comes before priority. RFC 3986 permits syntax normalization such as lowercasing schemes and hosts, normalizing percent-encoding of unreserved characters, and removing dot segments. It does not make query parameters disposable, paths case-insensitive, or trailing slashes equivalent on every server.",
+        "Keep the observed reference, the absolute resolved request URL, and a comparison key generated by documented rules. If a normalization rule later proves wrong, the source survives. Classify parameters as tracking-only, order-sensitive, content-bearing, or unknown without rewriting that observation.",
+        "Fragments usually do not trigger another HTTP retrieval, but still describe in-page navigation. Keep them on discovery edges, outside fetch keys. Reject user information, unsupported schemes, malformed ports, and out-of-scope hosts with named states rather than silently dropping them during parsing."
       ],
       "table": {
         "caption": "URL identity record",
@@ -112,11 +123,11 @@
     },
     {
       "id": "frontier-states",
-      "title": "Model lifecycle states, not queue positions",
+      "title": "Record transitions, not queue positions",
       "paragraphs": [
-        "A single pending flag cannot distinguish a URL that is waiting for its host window from one paused by robots policy, one awaiting a retry, and one rejected by scope. Use named lifecycle states such as discovered, admitted, scheduled, fetching, fetched, retryable, suppressed, and terminal. The exact vocabulary can differ, but every state needs an entry condition, an allowed successor set, and an invariant that can be checked.",
-        "Transitions should be append-only events keyed by run, URL identity, attempt, and timestamp. The materialized current state is a projection that can be rebuilt. This protects the crawler from the common failure where a worker crashes between updating a row and recording the response artifact. It also makes recovery conservative: a stale fetching lease can return to scheduled while a terminal response cannot be fetched again without an explicit new attempt or run.",
-        "Use leases rather than permanent ownership. A worker claims a scheduled item until a deadline and renews only while it is doing useful work. If the process disappears, the frontier can reclaim the item and retain the abandoned attempt. The record then shows that two attempts occurred instead of pretending that one continuous request existed."
+        "A pending flag hides the difference between a host delay, robots pause, retry, and scope rejection. Named states—discovered, admitted, scheduled, fetching, fetched, retryable, suppressed, and terminal—need entry conditions, allowed successors, and checkable invariants. The vocabulary can vary; the contract cannot be implicit.",
+        "Append transitions keyed by run, URL identity, attempt, and time. Rebuild current state from those events rather than trusting an overwritten status row. If a worker crashes between a row update and response capture, the record must expose that gap. A stale fetching lease can return to scheduled; a terminal response requires an explicit new attempt or run.",
+        "Give workers expiring leases, renewed only during useful work. Reclaim abandoned items without erasing their attempts. If another worker takes over, record two attempts rather than inventing one continuous request."
       ],
       "table": {
         "caption": "Minimal crawl-frontier transition contract",
@@ -174,11 +185,11 @@
     },
     {
       "id": "origin-scheduling",
-      "title": "Schedule capacity at the origin boundary",
+      "title": "Allocate capacity by origin",
       "paragraphs": [
-        "A global FIFO queue lets one large host dominate workers and makes politeness an afterthought. Partition eligible work by origin, where origin includes scheme, host, and port. Give each partition a concurrency ceiling, minimum interval, next-eligible time, and recent response-health record. A global scheduler can then select among origins while the origin scheduler selects the next URL.",
-        "Rate is only one dimension. A host returning fast successful responses may tolerate more concurrency than one returning timeouts or server errors, but an adaptive controller should move slowly and remain bounded. Apply backoff to the origin after transport failures, 429 responses, or repeated 5xx responses; do not punish unrelated origins. Persist the decision inputs so the same response history can reproduce the scheduling decision.",
-        "Robots policy belongs before dispatch, not inside the response parser. Cache the host-scoped policy with retrieval time, status, expiry, and parser version. RFC 9309 defines protocol behavior, including handling of access failures and caching, but an operator may choose a more conservative local policy. Record that choice separately from the standard-derived parse result."
+        "Global FIFO can let a large host occupy the workers. Partition eligible work by scheme, host, and port, with concurrency limits, minimum intervals, next-eligible times, and recent response health. The global scheduler chooses an origin; its local scheduler chooses a URL.",
+        "Fast successful responses may support more concurrency than timeouts or server errors. Adapt slowly within fixed limits. Back off the affected origin after transport failures, 429 responses, or repeated 5xx responses; unrelated origins keep their capacity. Persist the response history and controller inputs so the decision can be reproduced.",
+        "Evaluate robots policy before dispatch. Cache retrieval time, status, expiry, and parser version. RFC 9309 defines access-failure and caching behavior; a more conservative operator policy remains a separate decision from the protocol-derived parse result."
       ],
       "bullets": [
         "Use a fair origin selector so a deep host cannot starve smaller hosts.",
@@ -190,11 +201,11 @@
     },
     {
       "id": "crawl-traps",
-      "title": "Bound the address space before it becomes a crawl trap",
+      "title": "Bound discovery before it runs away",
       "paragraphs": [
-        "The web graph can be finite in content and effectively infinite in URLs. Calendars can generate one month forever; faceted navigation can permute filters; sort orders can multiply equivalent inventories; session identifiers can create a new address per visit; and internal search can expose an unbounded query space. A crawler that discovers until the queue is empty has no meaningful stop condition in those environments.",
-        "Set independent budgets for total accepted URLs, depth, query-key combinations, path patterns, per-host pages, redirect hops, response bytes, render time, and wall-clock duration. A budget breach should produce a gap record containing the rule, affected pattern, first example, and count suppressed. This is materially different from silently truncating the crawl and later describing the sampled set as the site.",
-        "Trap detection is a classification problem with asymmetric costs. An overbroad rule can erase a valid product dimension; an underbroad rule can consume the run. Begin with reversible deferral, group candidates by structural signature, and promote a rule only after examples show which address components change content. Keep allow exceptions narrower and more explicit than the rule they override."
+        "Finite content can generate an effectively infinite address space: endless calendars, facet permutations, sort orders, session IDs, and internal-search queries. Waiting for the queue to empty is not a stopping rule for such sites.",
+        "Budget accepted URLs, depth, query combinations, path patterns, per-host pages, redirects, response bytes, render time, and run duration independently. A breach must record the rule, affected pattern, first example, and suppressed count. Otherwise a truncated sample can be mistaken for the site.",
+        "Trap rules have unequal failure costs: broad rules hide valid content; narrow rules can exhaust the run. Start with reversible deferral, group structural signatures, and inspect examples to learn which URL components change content. Allow exceptions should be narrower and more explicit than their parent rule."
       ],
       "table": {
         "caption": "Crawl-bound controls and their failure states",
@@ -234,15 +245,15 @@
     },
     {
       "id": "retry-and-replay",
-      "title": "Retry only when the next attempt can mean something",
+      "title": "Give retries a reason and a limit",
       "paragraphs": [
-        "A retry policy should answer three questions: is the failure plausibly transient, when is the next attempt eligible, and how many attempts can still occur? DNS timeouts, connection resets, 429 responses, and many 5xx responses can be retryable. A stable 404, a scope rejection, or a robots denial generally needs a new run or policy change rather than immediate repetition. Preserve the original response and error even when a later attempt succeeds.",
-        "Use exponential backoff with bounded jitter and a maximum delay. Honor an applicable Retry-After value within local safety limits. Store the classification rule and the computed next time, because a timestamp without its reasoning is not replayable. When the attempt budget is exhausted, transition to a terminal failure that remains visible in coverage reports.",
-        "The frontier is complete when every admitted item is terminal or represented by an explicit unresolved state, not when no worker is busy. A run summary should reconcile counts across discovery, deduplication, suppression, fetch, retry, and failure states. That accounting identity is the crawler equivalent of balancing a ledger: if accepted URLs cannot be traced to final states, the crawl report is not ready to support a site-wide claim."
+        "For each failure, decide whether it is plausibly transient, when another attempt is eligible, and how many attempts remain. DNS timeouts, resets, 429 responses, and many 5xx responses can justify retries. Stable 404s, scope rejections, and robots denials generally require a new run or policy change. Preserve earlier responses and errors even after success.",
+        "Use exponential backoff, bounded jitter, and a maximum delay. Honor applicable Retry-After values within local safety limits. Save the classification rule with the computed next time: the time alone cannot explain the decision. Exhausted attempts become visible terminal failures in coverage reports.",
+        "Idle workers do not prove completion. Reconcile discovery, deduplication, suppression, fetches, retries, and failures until every admitted item is terminal or explicitly unresolved. An unreconciled frontier cannot support a site-wide conclusion."
       ],
       "codeExamples": [
         {
-          "title": "A typed transition rather than an in-place status update",
+          "title": "Transition event",
           "description": "The event stores both the decision and the inputs needed to review it later.",
           "language": "typescript",
           "code": "type FrontierTransition = {\n  runId: string;\n  fetchKey: string;\n  attemptId: string;\n  from: FrontierState;\n  event: string;\n  to: FrontierState;\n  occurredAt: string;\n  policyVersion: string;\n  evidenceRef?: string;\n  reason: string;\n};"
@@ -251,5 +262,7 @@
     }
   ],
   "path": "/research/crawler-engineering/crawl-frontier-state-machine",
-  "aliases": []
+  "aliases": [],
+  "image": "/images/research/crawl-frontier-social.jpg",
+  "displayTitle": "The crawl frontier is a state machine."
 }

@@ -51,8 +51,8 @@ test('source dates normalize real dates without inventing freshness', () => {
   assert.equal(sourceDate('2026-13-01'), undefined)
   assert.equal(sourceDate('today'), undefined)
   assert.equal(sourceDate(), undefined)
-  assert.equal(searchMetadata('writing/atlas-building-an-evidence-console').article?.modified, undefined)
-  assert.equal(searchMetadata('writing/viralbench-codex-agent-harness').article?.modified, '2026-07-14')
+  assert.equal(searchMetadata('writing/atlas-building-an-evidence-console').article?.modified, '2026-10-05')
+  assert.equal(searchMetadata('writing/viralbench-codex-agent-harness').article?.modified, '2026-10-05')
 })
 
 test('rebuilding a head removes stale article data, duplicate canonicals, and old schema', () => {

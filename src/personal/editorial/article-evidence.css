@@ -1,0 +1,53 @@
+/* Navigation belongs to the article, without a second scrolling surface. */
+.article-page .reader-layout { display: block; max-width: 760px; margin-inline: auto; }
+.reader-navigation { margin: 0 0 32px; }
+.reader-index > summary { display: flex; align-items: center; gap: 16px; width: fit-content; min-height: 44px; list-style: none; cursor: pointer; font: 13px/1.6 var(--editorial-sans); color: var(--muted); }
+.reader-index > summary::-webkit-details-marker { display: none; }
+.reader-index > summary > span { font: 18px/1 Arial, sans-serif; }
+.reader-index[open] > summary > span { transform: rotate(45deg); }
+.reader-index > nav { padding: 12px 0 20px; border-block: 1px solid var(--line); }
+.reader-index ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; padding: 0; margin: 0; list-style: none; }
+.reader-index li { min-width: 0; }
+.reader-index a { display: block; padding: 12px 0; font: 14px/1.55 var(--editorial-sans); text-decoration: none; color: var(--ink); }
+.reader-index a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.reader-index :is(summary, a):focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.article-page[data-story] .reader-prose [id] { scroll-margin-top: 24px; }
+.article-page .reader-section > :is(.reader-table, .reader-research-figure) { width: 100%; max-width: 100%; }
+
+/* Quiet figure furniture; the subject and its evidence supply the hierarchy. */
+.article-page .reader-research-figure { padding-top: 0; border-top: 0; }
+.article-page .reader-research-figure > .eyebrow { display: none; }
+.article-page .reader-prose .article-original-figures figure:not(.viralbench-page-visual) { padding-top: 0; border-top: 0; }
+.article-page .article-original-figures .toll-figure-label { justify-content: flex-start; gap: 0; margin-bottom: 18px; }
+.article-page .article-original-figures .toll-figure-label > .figure-number { display: none; }
+.article-page .article-original-figures .ai-authority-spectrum__track { display: none; }
+.article-page .article-original-figures .figure-table-hint { display: none; }
+.article-page .article-study strong { overflow-wrap: break-word; }
+.article-page .article-study small { font-size: 12px; }
+.article-page .study-company { font-size: 12px; line-height: 1.5; }
+.article-page .study-cohort-key li { font-size: 12px; }
+.article-page .study-pipeline strong { font-size: 21px; }
+.article-page .study-policy strong { font-size: 21px; }
+.article-page .study-policy > div { border-color: var(--line); }
+.article-page .reader-equation { padding: 20px 0; border-block: 1px solid var(--line); font: 18px/1.6 Georgia, serif; }
+.article-page .reader-workflow { margin: 32px 0; }
+.article-page .reader-workflow ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; padding-left: 28px; list-style: decimal-leading-zero; max-width: none; }
+.article-page .reader-workflow li { padding: 12px 0 12px 6px; margin: 0; font: 15px/1.6 var(--editorial-sans); border-bottom: 1px solid var(--line); }
+.article-page .reader-workflow li::marker { color: var(--muted); font: 11px var(--editorial-mono); }
+.article-page .reader-lineage { margin: 32px 0; }
+.article-page .reader-lineage > figcaption { color: var(--ink); font: 18px/1.5 Georgia, serif; margin-bottom: 18px; }
+.article-page .reader-lineage ul { padding: 0 0 0 20px; list-style: none; max-width: none; border-left: 1px solid var(--line); }
+.article-page .reader-lineage li { padding: 8px 0; margin: 0; font: 14px/1.65 var(--editorial-sans); }
+.article-page .reader-lineage li > ul { margin: 10px 0 0; color: var(--muted); }
+
+@media screen and (max-width: 760px) {
+  .reader-navigation { margin-bottom: 24px; }
+  .reader-index ol { grid-template-columns: 1fr; }
+  .article-page .reader-section > :is(.reader-table, .reader-research-figure) { max-width: 100%; }
+  .article-page .reader-prose pre { padding-inline: 0; }
+  .article-page .study-cohort-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .article-page .study-projection-outputs { grid-template-columns: 1fr; }
+  .article-page .reader-workflow ol { grid-template-columns: 1fr; }
+  .article-page .article-original-figures .ai-authority-spectrum__grid > div { border-top: 1px solid var(--line); }
+}
+@media print { .reader-navigation { display: none; } }

@@ -161,7 +161,7 @@ test('atlas keeps the sixteen original glyph pixels, UV orientation and plane pl
   assert.equal(labels.mesh.parent, null)
 })
 
-test('the actual decoded portfolio knight board batches64 tiles into2 draws without losing its8960 triangles', async () => {
+test('the decoded portfolio knight board batches64 tiles into2 draws without losing source triangles', async () => {
   const { NodeIO } = await import('@gltf-transform/core')
   const { ALL_EXTENSIONS } = await import('@gltf-transform/extensions')
   const { default: draco } = await import('draco3dgltf')
@@ -190,10 +190,12 @@ test('the actual decoded portfolio knight board batches64 tiles into2 draws with
     mesh.scale.fromArray(node.getScale())
     board.add(mesh)
   }
+  const sourceTriangles = board.children.reduce((sum, node) => sum + (node instanceof THREE.Mesh ? triangles(node.geometry) : 0), 0)
   const batch = batchBoardTiles(board)
   assert.equal(batch.sourceCalls, 64)
   assert.equal(batch.tileCalls, 2)
-  assert.equal(batch.meshes.reduce((sum, mesh) => sum + triangles(mesh.geometry), 0), 8960)
+  assert(sourceTriangles > 0)
+  assert.equal(batch.meshes.reduce((sum, mesh) => sum + triangles(mesh.geometry), 0), sourceTriangles)
   assert.equal(board.getObjectByName('tile-a1')?.userData.square, 'a1')
   assert.equal(board.getObjectByName('tile-h8')?.userData.square, 'h8')
   batch.dispose()

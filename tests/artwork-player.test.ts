@@ -13,6 +13,9 @@ function fixture(mobile = false) {
   const documentEvents = new Map<string, Set<() => void>>()
   const windowEvents = new Map<string, Set<() => void>>()
   const mediaEvents = new Set<() => void>()
+  const menuObservers = new Set<() => void>()
+  let menuOpen = false
+  const navigation = { classList: { contains: () => menuOpen } }
   const canvases: FakeCanvas[] = []
   const phases: number[] = []
   let time = 0, nextFrame = 1, loads = 0, setups = 0
@@ -34,6 +37,7 @@ function fixture(mobile = false) {
   }
   const document = {
     hidden: false,
+    getElementById: () => navigation,
     createElement(tag: string) { const node = tag === 'canvas' ? new FakeCanvas() : new FakeNode(); if (node instanceof FakeCanvas) canvases.push(node); return node },
     addEventListener(name: string, callback: () => void) { const listeners = documentEvents.get(name) ?? new Set(); listeners.add(callback); documentEvents.set(name, listeners) },
     removeEventListener(name: string, callback: () => void) { documentEvents.get(name)?.delete(callback) },
@@ -45,6 +49,12 @@ function fixture(mobile = false) {
   }
   function install(name: string, value: unknown) { descriptors.set(name, Object.getOwnPropertyDescriptor(globalThis, name)); Object.defineProperty(globalThis, name, { configurable: true, writable: true, value }) }
   install('document', document)
+  install('MutationObserver', class {
+    private notify: () => void
+    constructor(notify: () => void) { this.notify = notify }
+    observe() { menuObservers.add(this.notify) }
+    disconnect() { menuObservers.delete(this.notify) }
+  })
   install('matchMedia', () => media)
   install('performance', { now: () => time })
   install('requestAnimationFrame', (callback: (time: number) => void) => { const id = nextFrame++; pending.set(id, callback); return id })
@@ -60,7 +70,7 @@ function fixture(mobile = false) {
   })
   const source: P5SketchFactory = instance => { setups++; let phase = 0; instance.createCanvas(400, 400); instance.draw = () => phases.push(++phase) }
   const artwork = { sketchId: 'yuru-01', factory() { loads++; return loading } } as GenerativeArtwork
-  return { artwork, document, media, pending, timers, canvases, phases, documentEvents, mediaEvents, windowEvents,
+  return { artwork, document, media, pending, timers, canvases, phases, documentEvents, mediaEvents, windowEvents, menuObservers,
     host: () => new FakeNode() as unknown as HTMLElement,
     get loads() { return loads }, get setups() { return setups },
     resolve(factory = source) { resolve({ default: factory }) },
@@ -72,6 +82,7 @@ function fixture(mobile = false) {
     },
     hidden(value: boolean) { document.hidden = value; for (const callback of documentEvents.get('visibilitychange') ?? []) callback() },
     scroll() { for (const callback of windowEvents.get('scroll') ?? []) callback() },
+    menu(value: boolean) { menuOpen = value; for (const callback of menuObservers) callback() },
     reduced(value: boolean) { media.matches = value; for (const callback of mediaEvents) callback() },
     restore() { for (const [name, descriptor] of descriptors) { if (descriptor) Object.defineProperty(globalThis, name, descriptor); else Reflect.deleteProperty(globalThis, name) } },
   }
@@ -197,4 +208,18 @@ test('desktop playback retains its native profile without subscribing to scroll 
   assert.equal(player.status.stats.targetFps, 18); assert.equal(f.windowEvents.get('scroll')?.size ?? 0, 0)
   f.scroll(); assert.equal(player.status.active, true); f.step(60)
   assert.deepEqual(f.phases, [1, 2]); assert.equal(f.setups, 1)
+})
+
+test('the menu suspends a live preview without resetting phase or overriding explicit pause', async t => {
+  const f = fixture(true), player = createArtworkPlayer(f.artwork, 400)
+  t.after(() => { player.dispose(); f.restore() })
+  player.setPlayback(true, false); await settle(); f.resolve(); await settle(); f.step(0)
+  f.menu(true); f.step(1000)
+  assert.equal(player.status.active, false); assert.equal(f.pending.size, 0)
+  assert.deepEqual(f.phases, [1])
+  f.menu(false); f.step(1100)
+  assert.equal(player.status.active, true); assert.deepEqual(f.phases, [1, 2]); assert.equal(f.setups, 1)
+  player.setPlayback(true, true); f.menu(true); f.menu(false); f.step(2000)
+  assert.equal(player.status.active, false); assert.deepEqual(f.phases, [1, 2])
+  player.dispose(); assert.equal(f.menuObservers.size, 0)
 })

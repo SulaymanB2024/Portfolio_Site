@@ -50,10 +50,10 @@ function torus(p, radius, thickness, position, rotation = [0, 0, 0], sides = 8, 
 function box(p, dimensions, position, rotation = [0, 0, 0]) {
   put(p, new THREE.BoxGeometry(...dimensions), position, rotation)
 }
-function extrude(shape, depth, bevel = .004, curveSegments = 18) {
+function extrude(shape, depth, bevel = .004, curveSegments = 18, bevelSegments = 2) {
   const g = new THREE.ExtrudeGeometry(shape, {
     depth, bevelEnabled: bevel > 0, bevelSize: bevel, bevelThickness: bevel,
-    bevelSegments: bevel > 0 ? 2 : 0, curveSegments, steps: 1,
+    bevelSegments: bevel > 0 ? bevelSegments : 0, curveSegments, steps: 1,
   })
   g.translate(0, 0, -depth / 2)
   return g
@@ -73,7 +73,7 @@ function warpZ(g, fn) {
 // Split only long interior edges of the plate caps. Bevels, outline rims and
 // hole boundaries keep their original samples; adjacent caps share every split.
 // This gives the arch real interior geometry instead of warping a flat earcut fan.
-function plateCapGrid(geometry, maximumEdge = .12) {
+function plateCapGrid(geometry, maximumEdge = .12, passes = 1) {
   geometry.deleteAttribute('uv')
   const g = mergeVertices(geometry, .000001)
   geometry.dispose()
@@ -121,7 +121,7 @@ function plateCapGrid(geometry, maximumEdge = .12) {
   refined.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3))
   refined.setIndex(triangles)
   g.dispose()
-  return refined
+  return passes > 1 ? plateCapGrid(refined, maximumEdge, passes - 1) : refined
 }
 function tuningGear() {
   const shape = new THREE.Shape()
@@ -205,15 +205,17 @@ function doubleBass() {
   }
   const face = bassOutline()
   face.holes.push(fHole(1), fHole(-1))
-  put(body, warpZ(plateCapGrid(extrude(face, .017, .005, 10)), arch), v(0, 0, .135))
-  put(back, warpZ(plateCapGrid(extrude(bassOutline(), .021, .006, 12)), (x, y) => -arch(x, y) * .67), v(0, 0, -.135))
+  // A second adaptive pass resolves the broad plate's camber between the
+  // sound holes. The edge samples and real apertures stay untouched.
+  put(body, warpZ(plateCapGrid(extrude(face, .017, .005, 10), .105, 2), arch), v(0, 0, .135))
+  put(back, warpZ(plateCapGrid(extrude(bassOutline(), .021, .006, 12), .120, 2), (x, y) => -arch(x, y) * .67), v(0, 0, -.135))
   // A real hollow rib ring, with front-only sound holes and an interior shadow cavity.
   const shell = bassOutline(), inner = new THREE.Path()
-  const innerPoints = bassOutline().getPoints(12).map(p => new THREE.Vector2(p.x * .971, (p.y + .315) * .976 - .315))
+  const innerPoints = bassOutline().getPoints(8).map(p => new THREE.Vector2(p.x * .971, (p.y + .315) * .976 - .315))
   inner.moveTo(innerPoints[0].x, innerPoints[0].y)
   for (const p of innerPoints.slice(1)) inner.lineTo(p.x, p.y)
   shell.holes.push(inner)
-  put(ribs, extrude(shell, .252, .002, 10))
+  put(ribs, extrude(shell, .252, .002, 8))
   const innerCavity = bassOutline()
   put(ebony, extrude(innerCavity, .004, 0, 10), v(0, 0, .025), [0, 0, 0], [.96, .96, 1])
   const rim = bassOutline().getSpacedPoints(96).slice(0, -1)
@@ -227,6 +229,14 @@ function doubleBass() {
     const x = p.x * .963, y = (p.y + .315) * .971 - .315
     return v(x, y, -.150 - arch(x, y) * .67)
   }), .0028, 96, 4, true)
+  // Plate overhangs sit proud of the dark rib wall. The end-block seams and
+  // bottom saddle are physical joinery rather than lines painted on a plate.
+  for (const z of [-.130, .130]) tube(body, rim.map(p => v(p.x * .992, p.y, z)), .0041, 96, 5, true)
+  box(binding, [.0028, .15, .240], v(0, -1.159, 0))
+  const backButton = new THREE.Shape()
+  backButton.moveTo(-.048, .500); backButton.quadraticCurveTo(-.052, .605, 0, .612)
+  backButton.quadraticCurveTo(.052, .605, .048, .500); backButton.closePath()
+  put(back, extrude(backButton, .028, .005, 10), v(0, 0, -.142))
   for (const side of [-1, 1]) {
     const notch = v(side * .247, -.205, .135 + arch(side * .247, -.205))
     box(binding, [.022, .004, .005], notch, [0, 0, side * -.21])
@@ -262,6 +272,11 @@ function doubleBass() {
     put(fittings, tuningGear(), v(side * .080, y, .067), [0, Math.PI / 2, 0])
     ellipsoid(ebony, v(side * .084, y, .067), [.0015, .004, .004], 1, 10, 6)
     rod(fittings, v(side * .079, y + .028, .037), v(side * .100, y + .028, .037), .0035, 8)
+    // Slotted mounting screws, a worm cylinder and a recessed geared axle.
+    for (const yy of [-.016, .016]) {
+      ellipsoid(fittings, v(side * .070, y + yy, .091), [.004, .004, .002], 1, 10, 6)
+      box(ebony, [.0035, .0009, .0007], v(side * .070, y + yy, .093))
+    }
   }
   const scroll = part('bass-scroll', 'ivory', 'bass')
   // A solid volute carries the spiral carving, rather than two floating coils.
@@ -339,7 +354,7 @@ function doubleBass() {
   box(bowMetal, [.040, .012, .043], v(.766, -.407, .385))
   ellipsoid(bowMetal, v(.790, -.386, .409), [.010, .010, .004], 1, 16, 8)
   rod(bowMetal, v(.840, -.374, .385), v(.898, -.374, .385), .007, 12)
-  for (let i = 0; i < 14; i++) torus(bowMetal, .0105, .0018, v(.593 + i * .005, -.347, .387), [0, Math.PI / 2, 0], 5, 14)
+  for (let i = 0; i < 14; i++) torus(bowMetal, .0105, .0018, v(.593 + i * .005, -.347, .387), [0, Math.PI / 2, 0], 4, 10)
   // The nested bow materials share the frog transform rather than independent floating pivots.
   return { groups: [{ name: 'bass' }], parts: [body, back, ribs, fittings, ebony, bridge, binding, neck, scroll, ...strings, bow, bowHair, bowMetal], maxSpan: 3.2 }
 }
@@ -403,7 +418,7 @@ function roundedTile(width, depth) {
   shape.quadraticCurveTo(half, half, half - r, half); shape.lineTo(-half + r, half)
   shape.quadraticCurveTo(-half, half, -half, half - r); shape.lineTo(-half, -half + r)
   shape.quadraticCurveTo(-half, -half, -half + r, -half)
-  return extrude(shape, depth, .002, 2)
+  return extrude(shape, depth, .002, 2, 1)
 }
 function chessKnight() {
   const spacing = .28, a1 = v(-3.5 * spacing, 0, 3.5 * spacing)
@@ -413,6 +428,8 @@ function chessKnight() {
   for (const side of [-1, 1]) {
     box(rim, [.015, .024, 2.38], v(side * 1.188, -.008, 0))
     box(rim, [2.38, .024, .015], v(0, -.008, side * 1.188))
+    box(board, [.005, .003, 2.30], v(side * 1.153, -.003, 0))
+    box(board, [2.30, .003, .005], v(0, -.003, side * 1.153))
   }
   // Each tile is a native mesh node, with a local center and algebraic name.
   const tiles = []
@@ -451,14 +468,16 @@ function chessKnight() {
   ]
   const gaussian = (y, z, cy, cz, sy, sz) => Math.exp(-(((y - cy) / sy) ** 2) - ((z - cz) / sz) ** 2)
   const cheekOffset = (y, z) =>
-    .0100 * gaussian(y, z, .481, .067, .029, .043)
+    .0120 * gaussian(y, z, .481, .067, .029, .043)
     + .0030 * gaussian(y, z, .552, .068, .008, .029)
-    - .0110 * gaussian(y, z, .539, .074, .010, .019)
-    - .0120 * gaussian(y, z, .495, .182, .008, .017)
+    - .0140 * gaussian(y, z, .539, .074, .010, .019)
+    - .0140 * gaussian(y, z, .495, .182, .008, .017)
     - .0045 * gaussian(y, z, .464, .159, .0025, .040)
     + .0028 * gaussian(y, z, .458, .168, .003, .032)
     - .0035 * gaussian(y, z, .395, .018, .077, .026)
     + .0020 * gaussian(y, z, .239, .032, .049, .020)
+    - .0032 * gaussian(y, z, .453, .079, .009, .024)
+    + .0024 * gaussian(y, z, .519, .123, .018, .025)
   const bodySample = (section, angle) => {
     const [y, back, front, width] = section
     const z = (front + back) / 2 + Math.sin(angle) * (front - back) / 2
@@ -472,7 +491,15 @@ function chessKnight() {
   }
   // Extra rings are concentrated in the sculpted skin. The turned foot and
   // dorsal crest give up redundant samples so this remains below the same cap.
-  put(horse, knightClosedSurface(knightSections(anatomy, 5), bodySample, 64))
+  // Allocate the same ring budget to the face: eye sockets, nostril wings and
+  // lower lip get their exact relief centers; the broad neck needs fewer rings.
+  const bodyRows = new Set()
+  for (let i = 0; i < anatomy.length - 1; i++) {
+    const steps = anatomy[i][0] < .418 ? 3 : 6
+    for (let j = 0; j < steps; j++) bodyRows.add(THREE.MathUtils.lerp(anatomy[i][0], anatomy[i + 1][0], j / steps))
+  }
+  for (const y of [.453, .458, .463, .464, .481, .490, .495, .500, .531, .535, .539, .547, .552, .558, .588]) bodyRows.add(y)
+  put(horse, knightClosedSurface([...bodyRows].sort((a, b) => a - b).map(y => knightSection(anatomy, y)), bodySample, 64))
   for (const side of [-1, 1]) {
     // An inset eye within a real orbital depression, surrounded by carved lids.
     const eye = sideSurface(side, .539, .074, -.0003)
@@ -491,6 +518,9 @@ function chessKnight() {
     tube(detail, [[.464, .122], [.463, .148], [.463, .173], [.468, .204]].map(([y, z]) => sideSurface(side, y, z, -.0001)), .0011, 30, 5)
     tube(horse, [[.445, .081], [.457, .109], [.453, .138]].map(([y, z]) => sideSurface(side, y, z, .0001)), .0016, 24, 6)
     tube(horse, [[.228, .035], [.300, .030], [.378, .037], [.434, .062]].map(([y, z]) => sideSurface(side, y, z, -.0007)), .0024, 38, 6)
+    // A softly raised masseter and cheek crease describe the jaw at oblique
+    // angles; the crease terminates in the carved mouth rather than floating.
+    tube(detail, [[.520, .070], [.501, .064], [.481, .083], [.465, .114]].map(([y, z]) => sideSurface(side, y, z, -.001)), .0009, 22, 5)
 
     // Tapered, closed ears keep a sharp silhouette and a concave inset pinna.
     const earProfiles = [
@@ -517,8 +547,8 @@ function chessKnight() {
   }
   // A continuous dorsal mane with carved scallops. The pale crest and fine
   // graphite incisions create detail at three-quarter angles without loose rods.
-  const maneSections = Array.from({ length: 65 }, (_, i) => {
-    const t = i / 64, y = .205 + t * .350, [, back] = knightSection(anatomy, y)
+  const maneSections = Array.from({ length: 49 }, (_, i) => {
+    const t = i / 48, y = .205 + t * .350, [, back] = knightSection(anatomy, y)
     const width = .035 - .013 * t, depth = .016 - .004 * t
     return [y, back + .004, width, depth, t]
   })
@@ -527,7 +557,7 @@ function chessKnight() {
     const x = Math.cos(angle) * width, outward = Math.max(0, -Math.sin(angle))
     const groove = .0038 * Math.exp(-((Math.sin(t * Math.PI * 13 + (x / width) ** 2 * .42)) ** 2) / .065)
     return v(x, y, center + Math.sin(angle) * (depth - groove * outward))
-  }, 24))
+  }, 20))
   for (let i = 1; i <= 12; i++) {
     const t = i / 13, y = .205 + t * .350, width = .035 - .013 * t
     const ridge = Array.from({ length: 9 }, (_, j) => {
@@ -536,6 +566,11 @@ function chessKnight() {
       return v(x, yy, back + .004 - Math.sqrt(1 - (x / width) ** 2) * (depth - .0024))
     })
     tube(detail, ridge, .00085, 20, 5)
+  }
+  // Three overlapping locks tie the mane into the poll and forehead. Their
+  // flattened carved shoulders read as a forelock, not separate metal wires.
+  for (const side of [-1, 0, 1]) {
+    tube(horse, [v(side * .020, .575, .042), v(side * .023, .571, .070), v(side * .014, .552, .105), v(side * .010, .540, .120)], .0037, 20, 6)
   }
   // Geometries are placed at A1, then re-localized under the movable knight parent.
   for (const p of [horse, detail, trim]) for (const g of p.geometries) g.translate(a1.x, 0, a1.z)
@@ -693,6 +728,14 @@ function musicalScore() {
   scoreRibbon(notation, [[-.131, .120], [.009, .156]], .005, 12)
   const third = [[-.275, -.36 + .054], [-.095, -.36 + .018], [.085, -.36 - .018], [.275, -.36 - .054]]
   for (let i = 0; i < third.length; i++) embossedNote(notation, ...third[i], true, i === 1)
+  // Phrase marks and a tied pair give the generic notation musical structure.
+  // Each thin stroke is laid onto the curved paper instead of hovering above it.
+  scoreRibbon(notation, [[-.290, .247], [-.140, .222], [.10, .228], [.291, .278]], .0021, 28)
+  scoreRibbon(notation, [[-.274, -.302], [-.213, -.282], [-.149, -.291], [-.100, -.328]], .0019, 20)
+  scoreRibbon(notation, [[.018, -.524], [.139, -.502], [.268, -.516]], .0018, 20)
+  for (const [x, y] of [[-.275, -.082], [.125, .008]]) {
+    scoreRibbon(notation, [[x - .014, y], [x + .009, y + .008], [x - .014, y + .017]], .0022, 12)
+  }
   scoreTube(notation, [[.443, -.434], [.443, -.287]], .0042, 10, 6)
   // A fountain pen rests alongside the page. Its nib is the renderer's pen pivot.
   const penPivot = v(.564, -.638, .143)
@@ -702,8 +745,8 @@ function musicalScore() {
   const low = v(.584, -.507, .150), high = v(.750, .482, .190), delta = high.clone().sub(low)
   const axis = delta.clone().normalize(), orientation = new THREE.Quaternion().setFromUnitVectors(Y, axis)
   const length = delta.length()
-  const barrelProfile = [[.022, 0], [.025, .018], [.025, .073], [.022, .112], [.020, .185], [.021, .55], [.022, .80], [.023, .84], [.022, 1]].map(([r, t]) => new THREE.Vector2(r, t * length))
-  const barrel = new THREE.LatheGeometry(barrelProfile, 32)
+  const barrelProfile = [[.022, 0], [.024, .009], [.025, .018], [.025, .057], [.0245, .073], [.023, .098], [.022, .112], [.020, .185], [.0204, .28], [.021, .55], [.022, .80], [.023, .84], [.022, 1]].map(([r, t]) => new THREE.Vector2(r, t * length))
+  const barrel = new THREE.LatheGeometry(barrelProfile, 48)
   barrel.applyQuaternion(orientation)
   put(pen, barrel, low)
   const nibVector = low.clone().sub(penPivot)
@@ -727,7 +770,17 @@ function musicalScore() {
   // The actual split meets a pierced breather hole; paired engraving follows
   // the tapered shoulders and the cap has a true rounded terminal.
   for (const side of [-1, 1]) tube(pen, [nibPoint(side * .006, .040), nibPoint(side * .015, .072), nibPoint(side * .015, nibLength * .87)], .00065, 16, 5)
-  for (const t of [.035, .065, .84, .88, .94]) {
+  // Recessed grip rings and a combed feed sit behind the split metal nib.
+  for (let i = 0; i < 7; i++) {
+    const point = low.clone().lerp(high, .104 + i * .012)
+    const grip = new THREE.TorusGeometry(.0223 - i * .00025, .00065, 4, 32)
+    grip.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(v(0, 0, 1), axis))
+    put(metal, grip, point)
+    const feed = new THREE.BoxGeometry(.023 - i * .0012, .0015, .0032)
+    feed.applyQuaternion(nibOrientation)
+    put(pen, feed, nibPoint(0, nibLength * .52 + i * .007, -.0038))
+  }
+  for (const t of [.035, .065, .84, .86, .88, .94]) {
     const point = low.clone().lerp(high, t)
     const ring = new THREE.TorusGeometry(t > .8 ? .022 : .025, .0024, 6, 24)
     ring.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(v(0, 0, 1), delta.clone().normalize()))
@@ -739,6 +792,7 @@ function musicalScore() {
   capEnd.scale(.0255, .008, .0255); capEnd.applyQuaternion(orientation)
   put(metal, capEnd, high.clone().add(axis.clone().multiplyScalar(.037)))
   tube(metal, [high.clone().add(v(0, .018, .026)), high.clone().add(v(.004, -.03, .037)), high.clone().add(v(-.020, -.17, .036)), high.clone().add(v(-.027, -.195, .029))], .004, 28, 7)
+  ellipsoid(metal, high.clone().add(v(-.026, -.188, .033)), [.006, .012, .0035], 1, 16, 10)
   return { groups: [{ name: 'score', extras: { notation: 'Original generic notes for interaction; not a reproduction or attribution to the site owner.' } }], parts: [page, edge, notation, ...notes, pen, metal, nib], maxSpan: 1.6 }
 }
 
@@ -851,9 +905,9 @@ async function inspect(path) {
   }
 }
 const specimens = [
-  { id: 'bass', title: 'Double bass and bow', make: doubleBass, description: 'Original carved double bass with conforming interior arch samples, front-only f-hole apertures, hollow ribs, double purfling, ebony bearing saddles, a heart-pierced bridge and curved feet, toothed mechanical tuners, a solid spiral-carved volute, four separate strings and a nested bow with carved ivory tip and metal ferrule.' },
-  { id: 'knight', title: 'Knight and board', make: chessKnight, description: 'Original Staunton-inspired knight with a continuously sampled carved head and neck: fuller cheekbones, recessed eye sockets with iris rings, shaped nasal and muzzle anatomy, a narrow incised mouth and raised lower lip, tapered inset ears, deeper scalloped mane, shoulder tendons and a finely turned pedestal. The preserved raised 64-tile board exposes native algebraic square nodes and the original movable A1 knight parent.' },
-  { id: 'score', title: 'Score page and pen', make: musicalScore, description: 'Original fine curved sheet with front and back surfaces, a thin beveled edge and a smoothly sampled diagonal corner roll; tapered embossed bass-clef strokes and engraved almond noteheads. Four independent note nodes and a nib-pivot fountain pen retain visitor-created phrase interactions. The turned pen has a curved beveled nib with a real slit and pierced breather hole, paired shoulder engraving, cap rings and a sprung clip. Generic original notation, not the site owner’s composition.' },
+  { id: 'bass', title: 'Double bass and bow', make: doubleBass, description: 'Original carved double bass with twice-refined interior plate arches, raised plate overhangs, a carved back button, front-only f-hole apertures, hollow ribs, double purfling, ebony bearing saddles, a heart-pierced bridge and curved feet, toothed tuners with slotted mounting screws, a solid spiral-carved volute, four separate strings and a nested bow with carved ivory tip and metal ferrule.' },
+  { id: 'knight', title: 'Knight and board', make: chessKnight, description: 'Original Staunton-inspired knight with sampling concentrated in its carved face: fuller cheekbones, deeper orbital and nostril cavities, iris rings, a cheek crease, shaped nasal anatomy, incised mouth and lower lip, tapered inset ears, a scalloped mane joined to a layered forelock, shoulder tendons and a turned pedestal. The raised 64-tile board retains native algebraic square nodes and its movable A1 knight parent.' },
+  { id: 'score', title: 'Score page and pen', make: musicalScore, description: 'Original curved sheet with front and back surfaces, a thin beveled edge, a diagonal corner roll, embossed bass-clef strokes, almond noteheads, ties and phrase marks. Four independent note nodes and a nib-pivot fountain pen retain visitor-created phrase interactions. The smoothly turned pen has a beveled split nib and breather hole, shoulder engraving, recessed grip rings, a combed feed, cap rings and a sprung clip. Generic original notation, not the site owner’s composition.' },
 ]
 const selected = new Set(process.argv.slice(2))
 for (const id of selected) if (!specimens.some(item => item.id === id)) throw new Error(`Unknown specimen ${id}`)

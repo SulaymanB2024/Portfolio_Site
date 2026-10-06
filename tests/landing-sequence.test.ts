@@ -14,9 +14,10 @@ import { desktopSculptureFrame } from '../src/personal/landing/art-direction.ts'
 
 const near = (a: number, b: number, tolerance = 1e-10) => assert.ok(Math.abs(a - b) <= tolerance, `${a} differs from ${b}`)
 
-test('the homepage intro leads to About and all four chapters retain their real project routes and assets', async () => {
-  assert.equal(CHAPTERS[0].href, '#/about')
-  assert.equal(CHAPTERS[0].linkLabel, 'About me')
+test('the homepage intro offers Work and About while all four chapters retain their real project routes and assets', async () => {
+  assert.equal(CHAPTERS[0].href, '#/work')
+  assert.equal(CHAPTERS[0].linkLabel, 'Selected work')
+  assert.deepEqual(CHAPTERS[0].article, { label: 'About me', href: '#/about' })
   assert.deepEqual(CHAPTERS.slice(1).map(chapter => chapter.href), projects.map(project => `#/work/${project.slug}`))
   assert.deepEqual(CHAPTERS.slice(1).map(chapter => chapter.label), projects.map(project => project.name))
   assert.equal(CHAPTERS[3].article?.href, '#/writing/who-owns-texas-toll-roads')

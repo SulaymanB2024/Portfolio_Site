@@ -1,0 +1,22 @@
+{
+  "path": "resume-knight/knight-cf6755a48863.glb",
+  "sha256": "cf6755a4886382a581bc5cbe2881329081eb176e1df101e6b2cbd2f29b200705",
+  "bytes": 1661532,
+  "source": "public/portfolio-models/helmet.glb",
+  "sourceSha256": "676a60e268e5a984953efedc29eb7cafe55e6acf0913ea080fb674173159b025",
+  "credit": "Jousting Helmet by The Royal Armoury, CC BY 4.0. Display pose and idle animation added; source engraving and textures retained.",
+  "clips": [
+    {
+      "name": "idle",
+      "duration": 10.8,
+      "articulatedNodes": [
+        "knight-inspection-joint"
+      ]
+    }
+  ],
+  "validation": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "sourcePreserved": true
+}

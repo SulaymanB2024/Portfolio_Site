@@ -1,0 +1,1835 @@
+{
+  "sourceRef": "dbf20b13ce818df171c04c03820ae7db02722c83",
+  "restoredCount": 25,
+  "records": [
+    {
+      "slug": "the-ai-megawatt",
+      "path": "/research/ai-systems/the-ai-megawatt",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "resources",
+        "content",
+        "sections",
+        "sources",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "538fa985eeec5f390fe951177e522babda6995323999cbfc30ba3b1a66a597e7",
+      "sections": 9,
+      "figures": 3,
+      "sources": 11,
+      "resources": 5
+    },
+    {
+      "slug": "crawl-frontier-state-machine",
+      "path": "/research/crawler-engineering/crawl-frontier-state-machine",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "54f89d5b0bc5f407fcef7fa96110d0bd0baf4628d8b408a429e44d2930f56cac",
+      "sections": 5,
+      "figures": 0,
+      "sources": 5,
+      "resources": 0
+    },
+    {
+      "slug": "raw-html-rendered-dom-evidence",
+      "path": "/research/technical-seo/raw-html-rendered-dom-evidence",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "0a0768f5bfc1e166536b609a82573e64f2caac09b795a177b61994b77d6e4e5d",
+      "sections": 5,
+      "figures": 0,
+      "sources": 5,
+      "resources": 0
+    },
+    {
+      "slug": "canonicalization-graph-consistency",
+      "path": "/research/technical-seo/canonicalization-graph-consistency",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "dc8eb0612e583ccf79c83c305e1d9b9d5b1ff723235672e362d46dbb2d77b3eb",
+      "sections": 5,
+      "figures": 0,
+      "sources": 6,
+      "resources": 0
+    },
+    {
+      "slug": "internal-links-directed-retrieval-graph",
+      "path": "/research/technical-seo/internal-links-directed-retrieval-graph",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "4fe5987c158849e12619904dd126c3badd6b132514e5b8b560b9fb7352c9689b",
+      "sections": 5,
+      "figures": 0,
+      "sources": 5,
+      "resources": 0
+    },
+    {
+      "slug": "robots-txt-courtesy-not-access-control",
+      "path": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "2a382f1076426a33d273f89583e42e13282195dfdf42179ab9ca4dfa61678650",
+      "sections": 6,
+      "figures": 0,
+      "sources": 5,
+      "resources": 0
+    },
+    {
+      "slug": "structured-data-without-content-drift",
+      "path": "/research/technical-seo/structured-data-without-content-drift",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "0228b4d2235e3edc6dad9d151917efe0391d9628d48c05893bc9497242a4ecdc",
+      "sections": 5,
+      "figures": 0,
+      "sources": 5,
+      "resources": 0
+    },
+    {
+      "slug": "audit-findings-derived-records",
+      "path": "/research/data-systems/audit-findings-derived-records",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "f3994e1908a17f1a038d74f8b940bf599ec393ad6ad4f78afdcf58fab872bdcb",
+      "sections": 5,
+      "figures": 0,
+      "sources": 5,
+      "resources": 0
+    },
+    {
+      "slug": "replayable-traces-ai-agent-evaluation",
+      "path": "/research/ai-systems/replayable-traces-ai-agent-evaluation",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "944ed03665a1f81bf5aca8f0ffcd2ad8005e692552e29c239b787424157c5e8e",
+      "sections": 5,
+      "figures": 0,
+      "sources": 5,
+      "resources": 0
+    },
+    {
+      "slug": "sqlite-crawl-pipelines",
+      "path": "/research/data-systems/sqlite-crawl-pipelines",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "6ef09f3345e283be1864f6d3401914e16585919b6494d9611236595b7cc4c194",
+      "sections": 5,
+      "figures": 0,
+      "sources": 5,
+      "resources": 0
+    },
+    {
+      "slug": "technical-seo-migration-release-gates",
+      "path": "/research/technical-seo/technical-seo-migration-release-gates",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "5089ce408f640215db06a99e4e62ae1316fd8cae993a600585f578b93c202319",
+      "sections": 5,
+      "figures": 0,
+      "sources": 6,
+      "resources": 0
+    },
+    {
+      "slug": "who-owns-austin-home-service-companies",
+      "path": "/research/financial-systems/who-owns-austin-home-service-companies",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "resources",
+        "content",
+        "sections",
+        "sources",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "bf4860028a5f5f5463ce477fa026bea80f27c4e15d8247bb6c58c959ed04cffc",
+      "sections": 8,
+      "figures": 0,
+      "sources": 22,
+      "resources": 5
+    },
+    {
+      "slug": "what-happens-when-an-index-decides-a-company-matters",
+      "path": "/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "aliases",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "resources",
+        "content",
+        "sections",
+        "sources",
+        "path"
+      ],
+      "originalSha256": "c871b5a9236aed2700a1db0b5be563388a57bcdc08f27e765830ec13d7ade685",
+      "sections": 11,
+      "figures": 4,
+      "sources": 14,
+      "resources": 2
+    },
+    {
+      "slug": "software-buyout-boom-2020-2022-exit-audit",
+      "path": "/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "aliases",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "content",
+        "sections",
+        "resources",
+        "sources",
+        "path"
+      ],
+      "originalSha256": "04a524eb6bcd9a570e4f6019b0940571e9947ce002aa70a2c9c06e2f6644ac99",
+      "sections": 6,
+      "figures": 0,
+      "sources": 4,
+      "resources": 5
+    },
+    {
+      "slug": "how-airlines-borrow-against-loyalty-programs",
+      "path": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "aliases",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "resources",
+        "content",
+        "sections",
+        "sources",
+        "indexable",
+        "path"
+      ],
+      "originalSha256": "b4fea8ce7267cd56c428a54186d828ec26cb91aafbb3b20a5174f94f59246d18",
+      "sections": 11,
+      "figures": 8,
+      "sources": 16,
+      "resources": 3
+    },
+    {
+      "slug": "where-online-returns-actually-go",
+      "path": "/research/financial-systems/where-online-returns-actually-go",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "aliases",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "resources",
+        "content",
+        "sections",
+        "sources",
+        "path"
+      ],
+      "originalSha256": "eb3dd0f52bb7be554d97b24ed9ebba3239ee4608fa3589f0149780ab47e4d8a4",
+      "sections": 10,
+      "figures": 8,
+      "sources": 20,
+      "resources": 4
+    },
+    {
+      "slug": "hidden-financing-hardware-startups",
+      "path": "/research/financial-systems/hidden-financing-hardware-startups",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "aliases",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "resources",
+        "content",
+        "sections",
+        "sources",
+        "path"
+      ],
+      "originalSha256": "b0e4af6d58184043c4331efbbb51e6e19704b784acd7c5918e2456ff94c108bc",
+      "sections": 11,
+      "figures": 5,
+      "sources": 9,
+      "resources": 9
+    },
+    {
+      "slug": "west-campus-student-housing",
+      "path": "/research/financial-systems/west-campus-student-housing",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "resources",
+        "content",
+        "sections",
+        "sources",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "de0d24315cfbef1ebbd5318fdf3c74a0f7f60dd06193bb638adea378acb1988a",
+      "sections": 10,
+      "figures": 7,
+      "sources": 13,
+      "resources": 5
+    },
+    {
+      "slug": "waymo-hardware-financing",
+      "path": "/research/financial-systems/waymo-hardware-financing",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "resources",
+        "content",
+        "sections",
+        "sources",
+        "path",
+        "aliases"
+      ],
+      "originalSha256": "6bf8685183e54f204b7e518c0772f750ffd94314e93b83e30be1935c24b8c3e6",
+      "sections": 10,
+      "figures": 1,
+      "sources": 20,
+      "resources": 5
+    },
+    {
+      "slug": "ai-search-crawler-policy",
+      "path": "/research/ai-crawlers/ai-search-crawler-policy",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "aliases",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path"
+      ],
+      "originalSha256": "2de76f226cad21220b4340a2189c6c71a1ac521ac7d6abb7dc51eb50291142de",
+      "sections": 4,
+      "figures": 0,
+      "sources": 10,
+      "resources": 0
+    },
+    {
+      "slug": "technical-seo-public-data-infrastructure",
+      "path": "/research/search-console/technical-seo-public-data-infrastructure",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "aliases",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path"
+      ],
+      "originalSha256": "389d5ea3124b420d58a7a98470bc72f309b9badb96d172b943c3381615872182",
+      "sections": 6,
+      "figures": 0,
+      "sources": 6,
+      "resources": 0
+    },
+    {
+      "slug": "canonical-identity-personal-seo",
+      "path": "/research/personal-seo/canonical-identity-personal-seo",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "aliases",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "sources",
+        "content",
+        "sections",
+        "path"
+      ],
+      "originalSha256": "893241df5e6116e05b430003ddeb26f351153429916b5fbadee7cf132bcf6a42",
+      "sections": 6,
+      "figures": 0,
+      "sources": 6,
+      "resources": 0
+    },
+    {
+      "slug": "us-rare-earth-magnet-manufacturing-capacity",
+      "path": "/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "aliases",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "dateModified",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "resources",
+        "content",
+        "sections",
+        "sources",
+        "path"
+      ],
+      "originalSha256": "80af15aae60667c43981bc7e9c6b94147753bf49847091a9a51c308beab9c908",
+      "sections": 10,
+      "figures": 3,
+      "sources": 20,
+      "resources": 3
+    },
+    {
+      "slug": "jane-street-exact-search-solver-verification",
+      "path": "/research/data-systems/jane-street-exact-search-solver-verification",
+      "sourceKeys": [
+        "kind",
+        "cluster",
+        "slug",
+        "aliases",
+        "number",
+        "category",
+        "title",
+        "seoTitle",
+        "subtitle",
+        "seoDescription",
+        "artwork",
+        "date",
+        "lastVerified",
+        "readTime",
+        "author",
+        "thesis",
+        "conclusion",
+        "evidenceBoundary",
+        "metrics",
+        "resources",
+        "content",
+        "sections",
+        "sources",
+        "path"
+      ],
+      "originalSha256": "291fd1ecc855748c30784f70a9e0e6244c83c35beb4504ad43fcf1614bef3bc4",
+      "sections": 6,
+      "figures": 0,
+      "sources": 3,
+      "resources": 4
+    }
+  ],
+  "html": {
+    "slug": "why-texas-toll-roads-stay-tolled",
+    "sourceFragments": [
+      "src/content/texasTollRoadFinanceStatic/00.html",
+      "src/content/texasTollRoadFinanceStatic/01.html",
+      "src/content/texasTollRoadFinanceStatic/02.html",
+      "src/content/texasTollRoadFinanceStatic/03.html",
+      "src/content/texasTollRoadFinanceStatic/04.html",
+      "src/content/texasTollRoadFinanceStatic/05.html",
+      "src/content/texasTollRoadFinanceStatic/06.html",
+      "src/content/texasTollRoadFinanceStatic/07.html"
+    ],
+    "sha256": "dd907dee91b63c0b888f3a79a338837610351000d955515bfad61d8fd0d1d076",
+    "words": 3274,
+    "ids": [
+      "five-separate-questions",
+      "five-separate-questions-title",
+      "same-basis-comparison",
+      "same-basis-comparison-title",
+      "hctra-multi-source-cash",
+      "hctra-multi-source-cash-title",
+      "public-system-comparison",
+      "public-system-comparison-title",
+      "construction-cost-versus-debt",
+      "construction-cost-versus-debt-title",
+      "ntta-pooled-trust",
+      "ntta-pooled-trust-title",
+      "hctra-county-mobility",
+      "hctra-county-mobility-title",
+      "txdot-reserve-structure",
+      "txdot-reserve-structure-title",
+      "ctrma-and-fort-bend",
+      "ctrma-and-fort-bend-title",
+      "private-concession-cash",
+      "private-concession-cash-title",
+      "sh-130-restructuring",
+      "sh-130-restructuring-title",
+      "sh-288-termination",
+      "sh-288-termination-title",
+      "can-tolls-end",
+      "can-tolls-end-title",
+      "who-decides",
+      "who-decides-title",
+      "method-and-limits",
+      "method-and-limits-title",
+      "faq-better-questions",
+      "faq-better-questions-title",
+      "downloads",
+      "downloads-title",
+      "source-ledger",
+      "sources-title",
+      "related-title"
+    ],
+    "figures": 3,
+    "tables": 4,
+    "sources": 17,
+    "downloads": 5
+  },
+  "retained": [
+    {
+      "slug": "viralbench-codex-agent-harness",
+      "sha256": "cb4b95dbb8c3823df4399c6d7a297eb90608be070b7294f24c552c218ff259f0"
+    },
+    {
+      "slug": "the-first-ai-managers",
+      "sha256": "3414ab5496682a905b3c97de9e8d8eeed7b7baac55349ad85e0bf54c89347a1c"
+    },
+    {
+      "slug": "atlas-building-an-evidence-console",
+      "sha256": "8952b17b4ac19abb13583ab01cd4377b3e3d0dabb8b20d2c3f286da1d3812b5b"
+    },
+    {
+      "slug": "who-owns-texas-toll-roads",
+      "sha256": "73e9e7ee152028b36a3f0636428337b5786efc5d22530fbc632739b1540c74c1"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "src/content/additionalWorkProofCards.ts",
+      "sha256": "6a0753d5eff1af5fa9cde70c7555659b833bdb44b7c151a1822ba0029aacfa5c"
+    },
+    {
+      "path": "src/content/aiManagersArticle.ts",
+      "sha256": "2d15882cc0eb05a95ceeca83c73a85f3d2de46006a1473b5ea4ceee160d80ad1"
+    },
+    {
+      "path": "src/content/airlineLoyaltyFinancingArticle.ts",
+      "sha256": "0ec2c625fddc805e5022b1924995f53135d7c582b77a645ff3ee9c57fc828ffe"
+    },
+    {
+      "path": "src/content/articleModels.ts",
+      "sha256": "5b104fa4583d590db6cdd4bfaa0cad5fe2d9bd497c581879fe4bed318f185cc3"
+    },
+    {
+      "path": "src/content/articleRegistry.ts",
+      "sha256": "ccc081e00c17366b8d85904730908eebdbac358ac23637fc0dbdb2908aa30848"
+    },
+    {
+      "path": "src/content/articleRouteMetadata.ts",
+      "sha256": "0a9e3ee5a6d756e142638a6e8422097edcd15e5d67b85963295f6371b773a5d8"
+    },
+    {
+      "path": "src/content/atlasOpenCorpus.ts",
+      "sha256": "0b833fa91a24cb89a25d92f7023fb31acea9831a1b8769448e7379413f488450"
+    },
+    {
+      "path": "src/content/austinHomeServiceOwnershipArticle.ts",
+      "sha256": "f13714c162941531ee9aeafcb7f2ea817017527c6ec5b20f9b0172830b3fe8bc"
+    },
+    {
+      "path": "src/content/canonicalExternalLinks.ts",
+      "sha256": "c2a32c95e3f0dc2aad8cb794eec6903beecea9b8059a07df164ada258c35b2d3"
+    },
+    {
+      "path": "src/content/diagnosticExamples.ts",
+      "sha256": "6ab4582c65ab951c4fc14c0f0567b930a02d2abf20427fcdeefe58b8873c204c"
+    },
+    {
+      "path": "src/content/evidenceLists.ts",
+      "sha256": "a7df6ac2296e7c6da1bbc96d41c63446d6f9b19a48ed80eeb0595d30a93638c6"
+    },
+    {
+      "path": "src/content/hiddenFinancingHardwareArticle.ts",
+      "sha256": "ccec302530e77009e985d8e7e020326d34f43ae329cb7a7d980f20b395491a51"
+    },
+    {
+      "path": "src/content/indexCompanyMattersArticle.ts",
+      "sha256": "36f7b42ccb2f4b7303e1154e3cfe9f94eb98a53e7acbe3e2c764246c0abb3770"
+    },
+    {
+      "path": "src/content/indexability.test.ts",
+      "sha256": "8ad866fb90196732a8f43a1818212c737199d4c1dab38e52f63874d8e89af47c"
+    },
+    {
+      "path": "src/content/janeStreetSolverVerificationArticle.ts",
+      "sha256": "4b67ad29a2e92928843d9532d98d1f8179a94437852a781275120f9cdce67fc5"
+    },
+    {
+      "path": "src/content/marketTheses.ts",
+      "sha256": "57d66a736762b890e09dafa8307c4ba3909322375ddbba1cf793fb45a6b96842"
+    },
+    {
+      "path": "src/content/onlineReturnsInvestigationArticle.ts",
+      "sha256": "c80786381581c2cc41504c3d5add63d782528eb359f2d168ceb9809434f8b32d"
+    },
+    {
+      "path": "src/content/profileFacts.ts",
+      "sha256": "781c7d67e56e27b0afce6c3998f7e90e8ef782457c29180d79d5057c3a3ebe1e"
+    },
+    {
+      "path": "src/content/programmaticSeo.ts",
+      "sha256": "9592bdaa83e66607839c179720fd6f79cbc34e441a40acc054185bd23340fc4e"
+    },
+    {
+      "path": "src/content/publicationIndex.ts",
+      "sha256": "fc774d828476c91fe590d4c914d9504c35704bac8e4c4199666aee867ecb37eb"
+    },
+    {
+      "path": "src/content/rareEarthMagnetBuildoutArticle.ts",
+      "sha256": "3cc29350dee06a6e1e7e81fccb1a40e5218e0d6c9c4842d4401ffd01d2a1480e"
+    },
+    {
+      "path": "src/content/researchArticles.ts",
+      "sha256": "ebf36e639a5c9d9935a3e56b70449cd830d97b591a5b26cb197292669e606663"
+    },
+    {
+      "path": "src/content/researchAssets.ts",
+      "sha256": "2c82409b76387e1521faf30dc6f885861eed9a07be9166370a522199fbc4ad85"
+    },
+    {
+      "path": "src/content/searchQuality.test.ts",
+      "sha256": "1f5422d3210ff2d0c6658cae93f70047bd86749eb8292d816380732a63c2d436"
+    },
+    {
+      "path": "src/content/seoExpansion.ts",
+      "sha256": "fadda2cbf8b8d3bbda2a275874f2d9b89db9663e24c98f013cb882b87063aacf"
+    },
+    {
+      "path": "src/content/siteNavigation.test.ts",
+      "sha256": "e855c12c811c5e9a95d1f8e61d04a6a9394da89af01082044feee71913b487fe"
+    },
+    {
+      "path": "src/content/siteNavigation.ts",
+      "sha256": "c1d1977501a77db40a44fb458c6b0e7103b87a7fd7b728f799dbf9a36221e46c"
+    },
+    {
+      "path": "src/content/softwareBuyoutCohortArticle.ts",
+      "sha256": "a499af1512b2e44e920b1ed038a4c347690e4cdf4cbf5e0922f9c5252281b9d1"
+    },
+    {
+      "path": "src/content/technicalArticleSeries.ts",
+      "sha256": "f7277cfb3b95e934569cfebb0be512fd47117082bf5a6e5517301ac0856d9b02"
+    },
+    {
+      "path": "src/content/texasTollRoadArticle.ts",
+      "sha256": "f0757d8c9a5eaac3dcc8fbba02e81f2154941a29a52203e6dfb89cf06d29f144"
+    },
+    {
+      "path": "src/content/texasTollRoadArticleMeta.ts",
+      "sha256": "a80fa9d99a4e1f75ccf55362e526ccd6b3281c960eb28a770450797a600d472d"
+    },
+    {
+      "path": "src/content/texasTollRoadFinanceStatic/00.html",
+      "sha256": "d86d8dfeca1114097ffb9d4f3a280099ac843dd1378a00a2e13fba7c6f2d33cf"
+    },
+    {
+      "path": "src/content/texasTollRoadFinanceStatic/01.html",
+      "sha256": "783c3b9e199e831e99b39c590a54d6c19ade44ed0fe93fff12d05e0f85ff3901"
+    },
+    {
+      "path": "src/content/texasTollRoadFinanceStatic/02.html",
+      "sha256": "892411f31bb89bc546ce2bb19596c3182ede13c9d473f2787c07fc4c66813be3"
+    },
+    {
+      "path": "src/content/texasTollRoadFinanceStatic/03.html",
+      "sha256": "71a9978f78d879e9c0f6444855cac18f1e0762f54e32beef2020e73d672c2fe9"
+    },
+    {
+      "path": "src/content/texasTollRoadFinanceStatic/04.html",
+      "sha256": "66407352f23c8121dfff2654dd3467d44cc4164f5afe35c2c8cd889ef673fbfa"
+    },
+    {
+      "path": "src/content/texasTollRoadFinanceStatic/05.html",
+      "sha256": "d2d706bfc7e0a5455ea298fe8c25133ed792c21af716cb2913facac1c1644b51"
+    },
+    {
+      "path": "src/content/texasTollRoadFinanceStatic/06.html",
+      "sha256": "ddc1c914fcee5113285877be50b8472f29e13f5e4e5b359483e24edf1e994758"
+    },
+    {
+      "path": "src/content/texasTollRoadFinanceStatic/07.html",
+      "sha256": "5e3b5dcdc81274872e541ccdd915f77b745308b0c4a6598656aa8ab372eb0f5d"
+    },
+    {
+      "path": "src/content/texasTollRoadOwnership.ts",
+      "sha256": "25f08cc2295064abd6e8419a8a49ef25b6d80e0c04125e37fd126e8cdc6c4756"
+    },
+    {
+      "path": "src/content/theAiMegawattArticle.ts",
+      "sha256": "2de668069ff5835b28586f46b773c12b49d7ca24d40f80e6593e3ef2d18849f6"
+    },
+    {
+      "path": "src/content/theAiMegawattCapacitySections.ts",
+      "sha256": "d45a1bb13eb67169a949306519643f782083601c950db9cdea3007b6126d9f45"
+    },
+    {
+      "path": "src/content/theAiMegawattModelSections.ts",
+      "sha256": "bb0678156e452bf818d4d086aa3deafb45968920b9b05dcf106752fba4808a64"
+    },
+    {
+      "path": "src/content/theAiMegawattOutputSections.ts",
+      "sha256": "45267ccc5269845fa95cf20a0a21ec1c8dd84aea7965ecb1614531faa5868bd7"
+    },
+    {
+      "path": "src/content/theAiMegawattSources.ts",
+      "sha256": "b1200edfac51f539aa5d154bdcaeb806d6dab0d0887d22137e10f5f07f72a984"
+    },
+    {
+      "path": "src/content/viralBenchArticle.ts",
+      "sha256": "55b7af782f3e7da70d9343d35f55480055cf3071ba2ee67f743593e79d4d278b"
+    },
+    {
+      "path": "src/content/viralBenchArticleMeta.ts",
+      "sha256": "7eceed65952b542526f5f5890b71daa036b3ff26566a0ad58698134f1f3b972a"
+    },
+    {
+      "path": "src/content/waymoHardwareFinancingArticle.ts",
+      "sha256": "af2fa9d17f88e478bf9ff4407a9614d931db834bfccf65229d7c035e945cdfae"
+    },
+    {
+      "path": "src/content/westCampusStudentHousingArticle.ts",
+      "sha256": "f5dcbb94255c58a1fc4347bc493eff1cbcdb51f1687135c313f6a2932404fea3"
+    },
+    {
+      "path": "src/content/workStudies.test.ts",
+      "sha256": "63a453047bff1f3143f391f0585bb29f3f25329835a485bf3feb8ca8cd1b53aa"
+    },
+    {
+      "path": "src/content/workStudies.ts",
+      "sha256": "16a1968cc708ecad9271c639ef28b167d820260d24786722a402c6381bcadb8c"
+    },
+    {
+      "path": "src/content/workStudiesBase.ts",
+      "sha256": "c63c3d3b67c60414b3de0b890a71de041a99495d6a45df3aa9168e6dffac5829"
+    },
+    {
+      "path": "src/content/workStudyInteractions.ts",
+      "sha256": "7348b68dec1b74770907842b220b85130d167366a865720a39f5552bb1d80cef"
+    },
+    {
+      "path": "src/content/workStudyView.ts",
+      "sha256": "2247e209b42deb102589a57d423204358cdd88e01662e97d853d5064e6ab5cfb"
+    },
+    {
+      "path": "src/content/workStudyViewBase.ts",
+      "sha256": "630de11a0e6f899dda0f4ce6fa7da9b1e9418d347d50dc2325b16c305cb2b72e"
+    }
+  ],
+  "assets": [
+    {
+      "href": "/images/research/texas-toll-roads-stay-tolled-100.svg",
+      "sha256": "2a0b87af854b37822007fdefa677234b281a87876a88852ace69deeee05ac943",
+      "bytes": 3063
+    },
+    {
+      "href": "/images/research/texas-toll-roads-stay-tolled-five-questions.svg",
+      "sha256": "55082498da685426b204ef18a61583c25ba377a1ca7a0c9f4a0cfae5a22b28ee",
+      "bytes": 2546
+    },
+    {
+      "href": "/images/research/texas-toll-roads-stay-tolled-hctra-cash.svg",
+      "sha256": "b09429dde187a173e963dbf45996dd452f50a212458107b90afc1accf47e74cf",
+      "bytes": 2061
+    },
+    {
+      "href": "/research/texas-toll-roads-stay-tolled-claim-ledger.csv",
+      "sha256": "10a744a9dc367729c4b64f46bca117e6fbfb3d7bc15c96f878469c7c697a2f93",
+      "bytes": 2404
+    },
+    {
+      "href": "/research/texas-toll-roads-stay-tolled-financial-model-2025.xlsx",
+      "sha256": "f575030c1f836a29c10d0fc84a5ba2715e5399e17355abde0f43d4fb19c360f2",
+      "bytes": 7557
+    },
+    {
+      "href": "/research/texas-toll-roads-stay-tolled-methodology.md",
+      "sha256": "c185369c3b642c59fd9d16f83acede505865384c7fe5f4f1d428c5c5769fb45a",
+      "bytes": 2387
+    },
+    {
+      "href": "/research/texas-toll-roads-stay-tolled-summary.json",
+      "sha256": "5d4285406a108be6830c74eab8febe7465a685948a4d6eba242d1486ea49fbd3",
+      "bytes": 1667
+    },
+    {
+      "href": "/research/texas-toll-roads-stay-tolled-system-comparison.csv",
+      "sha256": "62639279e3eafb7241ab4552e93e7ef9a398cc6b55a02a3d51dad0084c4cd4c1",
+      "bytes": 1734
+    },
+    {
+      "href": "/images/research/the-ai-megawatt-power-ladder.svg",
+      "sha256": "aba6cfb9af1f3d4254a1936ea0bd5a113b9a0b2b3fb904ecad0976072d238ad8",
+      "bytes": 6993
+    },
+    {
+      "href": "/images/research/the-ai-megawatt-sensitivity.svg",
+      "sha256": "63379ffae1d76be342b7f2e4e649b7166af651ecb4f12ce2a852932c3be24ae6",
+      "bytes": 14933
+    },
+    {
+      "href": "/images/research/the-ai-megawatt-utilization.svg",
+      "sha256": "d5c35e6088a213a1b5029d9ecfb7942a7e9cd45d331f86b5b47985efead5d4d7",
+      "bytes": 9353
+    },
+    {
+      "href": "/research/the-ai-megawatt-claim-ledger.csv",
+      "sha256": "2fe39295211e29c538c6dde1bdf99a343b0f5cf0d77d0e7370f90f3f7dc9d805",
+      "bytes": 3724
+    },
+    {
+      "href": "/research/the-ai-megawatt-methodology.md",
+      "sha256": "d7a952de3e84d0e38f7cd53e09bda8304fbcc3173941694c882ec3e8c49f9eac",
+      "bytes": 5536
+    },
+    {
+      "href": "/research/the-ai-megawatt-model.xlsx",
+      "sha256": "c9ea537f315d61b5d8c1bc2a81fcd6cac4c4473786d155795b654ba1120c05bf",
+      "bytes": 10425
+    },
+    {
+      "href": "/research/the-ai-megawatt-sensitivity.csv",
+      "sha256": "0e66addae012f89967693bfcacfc92ccaced2ec59908e5262f51426f6605d7b6",
+      "bytes": 325
+    },
+    {
+      "href": "/research/the-ai-megawatt-source-ledger.csv",
+      "sha256": "3979330534dd8afcd22895816bae8b48c15504a02c4261243e1c275aefce49f7",
+      "bytes": 5826
+    },
+    {
+      "href": "/images/research/crawl-frontier-editorial.webp",
+      "sha256": "4e1dcfd7588a7074706db1bc10d4fbd2ae611f0b50bec12cbea20cc764b1379b",
+      "bytes": 270884
+    },
+    {
+      "href": "/images/research/crawl-frontier-social.jpg",
+      "sha256": "a5dcecb1fd8b122e7b4b49d40cece629d49bcf3194e4a495ee5e541d338331fa",
+      "bytes": 158986
+    },
+    {
+      "href": "/images/research/raw-html-rendered-dom-editorial.webp",
+      "sha256": "d52238c196f8a8cd7019443fb01fc04a013822a70bf383cc659aad6c21aff7a5",
+      "bytes": 302092
+    },
+    {
+      "href": "/images/research/raw-html-rendered-dom-social.jpg",
+      "sha256": "61cd8e27ec940bc02ce78c354e149dc9962039a0ef8010b82872263d5fbe33d4",
+      "bytes": 177940
+    },
+    {
+      "href": "/images/research/canonicalization-editorial.webp",
+      "sha256": "1475a926c4bbe8ea394d7b54fee1a65f8b3990d3421a000cf8fcf6f2489c1ec7",
+      "bytes": 430478
+    },
+    {
+      "href": "/images/research/canonicalization-social.jpg",
+      "sha256": "140a424e86d675f5f041c458c5051cba69bb32cacfa77d13a435fa3218e6adfd",
+      "bytes": 231815
+    },
+    {
+      "href": "/images/research/internal-links-editorial.webp",
+      "sha256": "cd1fa8302973bae32fadc625866f063520e58a72224490ff6503bf6020f94e85",
+      "bytes": 309618
+    },
+    {
+      "href": "/images/research/internal-links-social.jpg",
+      "sha256": "72a570bfad488cf2951d061c2fb5395edfab8a062df8e54b789cb10c8a9bc9fd",
+      "bytes": 190315
+    },
+    {
+      "href": "/images/research/robots-policy-editorial.webp",
+      "sha256": "c7d9a7dc756ca5b885f995a6b5779bb71892f33eb63f9d222d2f7b5f7ed09c5e",
+      "bytes": 280030
+    },
+    {
+      "href": "/images/research/robots-policy-social.jpg",
+      "sha256": "6f32ac0f807352993fd83fd58f7b795fa95cc68e110aaf6232b1c8a53345037b",
+      "bytes": 154330
+    },
+    {
+      "href": "/images/research/structured-data-editorial.webp",
+      "sha256": "4bc47c1e96ab559c0c4807c32d47c0da2b2861202b663c0be90dbdee09b4568e",
+      "bytes": 340278
+    },
+    {
+      "href": "/images/research/structured-data-social.jpg",
+      "sha256": "acf012ce0a765d0d77cfdc7d1bcab70b5debd8994ea83db79a0335af49c6cfdf",
+      "bytes": 177085
+    },
+    {
+      "href": "/images/research/audit-findings-editorial.webp",
+      "sha256": "3eaad7db1cf6dfe95eb2bd95dce8c4d1f897a90b9d9c353560db06f085be5b63",
+      "bytes": 240930
+    },
+    {
+      "href": "/images/research/audit-findings-social.jpg",
+      "sha256": "e61cb919a27ed7711cae6ce481e2f0c2e247a59c6d7c71017faa75043f360891",
+      "bytes": 155242
+    },
+    {
+      "href": "/images/research/replayable-traces-editorial.webp",
+      "sha256": "65b430d658798f8b21a0a0ef337524f960b5bbc7f5a84b9714a30ee99017448e",
+      "bytes": 281392
+    },
+    {
+      "href": "/images/research/replayable-traces-social.jpg",
+      "sha256": "7eeb9c4c721c738363fa6a3a70f93a7627f5609903b11febd810996024e9f5a7",
+      "bytes": 170458
+    },
+    {
+      "href": "/images/research/sqlite-pipelines-editorial.webp",
+      "sha256": "ceb310cce2f38ef0ad2d5f4aa092e6676d3ed44ca28630de73a91f27a31c99da",
+      "bytes": 296098
+    },
+    {
+      "href": "/images/research/sqlite-pipelines-social.jpg",
+      "sha256": "e6bf4b8e502ae7d9f5bd43001198bf8b8cc98a7effdb9dd9fc9296af07d7723e",
+      "bytes": 170383
+    },
+    {
+      "href": "/images/research/migration-gates-editorial.webp",
+      "sha256": "0fb7522ff9f4e02c4859f5cb09bd58685defa383627eede9e88ceab4dc98d772",
+      "bytes": 300898
+    },
+    {
+      "href": "/images/research/migration-gates-social.jpg",
+      "sha256": "16a0db34d4f1a96c65cae98118fc98626c872d507bc1fe069967c2855a7d6a7e",
+      "bytes": 160161
+    },
+    {
+      "href": "/images/research/austin-home-services-ownership-reader-hero.jpg",
+      "sha256": "5be03a7d3fa99e70df0c5f6e18f03dedb475d3ed1c94162dcbd48c568a3e9c29",
+      "bytes": 493120
+    },
+    {
+      "href": "/images/research/austin-home-services-ownership-social.jpg",
+      "sha256": "2191c7e45eb6687f5e883c6d3b247056a274ed8d57fb961e801925101456e357",
+      "bytes": 271279
+    },
+    {
+      "href": "/research/austin-home-service-ownership-2026.csv",
+      "sha256": "08113f7031ee63350c2a2cabcf41e7f359fb5c5a5982d7dde5778768b74366cf",
+      "bytes": 29162
+    },
+    {
+      "href": "/research/austin-home-service-ownership-2026.json",
+      "sha256": "da5cfac202aa64c914154902a982e1747aba839a283206adf55a172945d9c5da",
+      "bytes": 371008
+    },
+    {
+      "href": "/research/austin-home-service-ownership-article.md",
+      "sha256": "04912617868e84cbdaaf27598fbd0ea6e9bf86e6ab3d385ff49f32e43b2165a2",
+      "bytes": 40790
+    },
+    {
+      "href": "/research/austin-home-service-ownership-publication-package.zip",
+      "sha256": "4292ef39d151f312593e4a555b35f55d0decd5d9e383413479bf955c90be841f",
+      "bytes": 415986
+    },
+    {
+      "href": "/research/austin-home-service-ownership-report.docx",
+      "sha256": "2262ef82b99389e1764a8d2a0e02f9901278c5204821a497c132d543f5a7dd13",
+      "bytes": 75210
+    },
+    {
+      "href": "/images/research/index-company-reader-hero.jpg",
+      "sha256": "9c962400d4a8c830344ed8b885ffdee8be8fe456a4eb578a2e31a04f9472bfbf",
+      "bytes": 640013
+    },
+    {
+      "href": "/images/research/index-company-social.jpg",
+      "sha256": "e00ff65918e9f529325992db6125960f5fcbbc14ad1175ae86e6ba7dac59b6a4",
+      "bytes": 249517
+    },
+    {
+      "href": "/images/research/index-effect-by-era.png",
+      "sha256": "43fd20b8da0256c35b6a872030105889192e3eeb8b43a75830ad9ddf1a69f640",
+      "bytes": 87386
+    },
+    {
+      "href": "/images/research/index-migration-net-demand.png",
+      "sha256": "5463774d239b3c42721854a54f45634b66b685b9f861c351c11db973d1f5d84b",
+      "bytes": 45154
+    },
+    {
+      "href": "/images/research/index-provider-revenue-mix.png",
+      "sha256": "1e72c92c11c41d7fde611efa56b26788932046f0e73637c766567e3672441bf5",
+      "bytes": 53980
+    },
+    {
+      "href": "/images/research/tesla-sp500-inclusion-price-path.png",
+      "sha256": "56f63c375bd9135be856a2c9328dfe9ea753ae0fe18268be6cfa931962c7ece3",
+      "bytes": 74063
+    },
+    {
+      "href": "/research/index-company-matters-evidence-audit.docx",
+      "sha256": "78ed0cd068ceadebcba832650946dc290c5b282923b8ff30a52dcbfe445123f9",
+      "bytes": 341981
+    },
+    {
+      "href": "/research/index-company-matters-evidence-audit.pdf",
+      "sha256": "fe4906fd6fd2646a26d5e5844db44001100c8d17cd5aa9d5f9addf9b2cf56d4e",
+      "bytes": 1286257
+    },
+    {
+      "href": "/research/software-buyout-cohort-2020-2022.csv",
+      "sha256": "3e4e921aa2dc4a60200dcbb6a215272349722e97d0f7f231df7349ff103e4feb",
+      "bytes": 4176
+    },
+    {
+      "href": "/research/software-buyout-cohort-claim-ledger.csv",
+      "sha256": "1f9540ba4fa8a9be860eb379d7a00d35cf68b5eaf58dd7688e80d5e4d61e9781",
+      "bytes": 1503
+    },
+    {
+      "href": "/research/software-buyout-cohort-methodology.md",
+      "sha256": "51763f5a1e976e372ac12c3ca7e6619e192b9cd63308308b646dec12de2741f8",
+      "bytes": 2464
+    },
+    {
+      "href": "/research/software-buyout-cohort-summary.json",
+      "sha256": "ebb42d07e631336f665730e248434a840a3b43d09b34c041328679dadbe5649c",
+      "bytes": 1689
+    },
+    {
+      "href": "/images/research/airline-loyalty-backed-financing.png",
+      "sha256": "1064277ca79e617e144ce0ffa6bb76024f45b85b67f3c9b4b1382d047137d8de",
+      "bytes": 237966
+    },
+    {
+      "href": "/images/research/airline-loyalty-balance-sheets.png",
+      "sha256": "d0e8dd3fb358006912a3dca03489128cbd04f055b8d5977dbc227b3627682335",
+      "bytes": 131794
+    },
+    {
+      "href": "/images/research/airline-loyalty-cash-conversion-cycle.png",
+      "sha256": "275d67eca25036e2a9b1b8f850ac3cc6cb49f9ef835ea990ebe1556409775eb0",
+      "bytes": 236743
+    },
+    {
+      "href": "/images/research/airline-loyalty-cash-not-revenue.png",
+      "sha256": "b4f96c37c4f0b5fc4fa7dd55cd13c5329272f4bdf90eead22c5efb351fe38edb",
+      "bytes": 174241
+    },
+    {
+      "href": "/images/research/airline-loyalty-financing-reader-hero.webp",
+      "sha256": "ddd159df4ed229de2464f0c4728e764e5fab93c8bd66a58febf72728ed622142",
+      "bytes": 348956
+    },
+    {
+      "href": "/images/research/airline-loyalty-financing-social.jpg",
+      "sha256": "a77538cb07d18cbc0e8e2101280c6c699823ac8ee0484f2e4238d9ea4c1ea7d1",
+      "bytes": 241212
+    },
+    {
+      "href": "/images/research/airline-loyalty-parties-money.png",
+      "sha256": "265e7fd71d00cf2533d3171d9017729c3ea467cbe52a306c745a33fa5d14fa76",
+      "bytes": 303279
+    },
+    {
+      "href": "/images/research/airline-loyalty-partner-stress.png",
+      "sha256": "e21a08a2108d27c7e423944966e1ace93ac5405d5b0f8fe26f827eac3af38272",
+      "bytes": 187696
+    },
+    {
+      "href": "/images/research/airline-loyalty-point-values.png",
+      "sha256": "9b3adf164195982d9416858d82eb5cd39ac4c07a5ff988f3557adabe9e7349a3",
+      "bytes": 168507
+    },
+    {
+      "href": "/images/research/airline-loyalty-profit-bridge.png",
+      "sha256": "e46785ff3f9fcb5a82bf4951afbb76b9c5f44a4c363e499b0191d2acfe4006b6",
+      "bytes": 174577
+    },
+    {
+      "href": "/images/research/airline-loyalty-program-value.png",
+      "sha256": "67246764a7b9a6a85372fcba358f928ad95c475d61e1943e2e50a016e16b30e5",
+      "bytes": 179689
+    },
+    {
+      "href": "/research/airline-loyalty-financing-report.docx",
+      "sha256": "5308ccbd7e277e3089b4a7334bb281c20ae342eb6fc3a9107c2259403a139f19",
+      "bytes": 1668390
+    },
+    {
+      "href": "/research/airline-loyalty-financing-report.pdf",
+      "sha256": "f4c8bf7aa589095bfc2088256efd735cc096d89d2dae430389961c8c4d9e9606",
+      "bytes": 1850116
+    },
+    {
+      "href": "/images/research/online-returns-auction-recovery.png",
+      "sha256": "224e4bb345d0cf86f6a44b22a878f5beaca0e7e6a02112c2485390a87c3b35cd",
+      "bytes": 155676
+    },
+    {
+      "href": "/images/research/online-returns-disposition-decision-tree.png",
+      "sha256": "78c919db3c2cd01bbe758a856339554b59f89bcd92097550659fddeb634e2180",
+      "bytes": 60483
+    },
+    {
+      "href": "/images/research/online-returns-environmental-routes.png",
+      "sha256": "3576c4d67466645ecca395d8de302ced0d0b3e71e6c0b5a1b7abeba7c53252c1",
+      "bytes": 187981
+    },
+    {
+      "href": "/images/research/online-returns-fraud-loss.png",
+      "sha256": "b2cea9db5f56c5df2b119019da8a0f15734c357140203886030023568d18fbb5",
+      "bytes": 199565
+    },
+    {
+      "href": "/images/research/online-returns-freight-burden.png",
+      "sha256": "deee0c7ed78ae19a91aef2654d9e840ab754e6d6835e6fec28265450ad9eca62",
+      "bytes": 205709
+    },
+    {
+      "href": "/images/research/online-returns-furniture-waterfall.png",
+      "sha256": "3b3dd59f854d3c0e696ace48f5c5816eea2f4b12920cb44480ab85265f17b4c6",
+      "bytes": 255465
+    },
+    {
+      "href": "/images/research/online-returns-headphones-waterfall.png",
+      "sha256": "b15fb33d00c4a0186c46de9b78ebe5594176f78f6de638286adf1ca0b1cca5f2",
+      "bytes": 260031
+    },
+    {
+      "href": "/images/research/online-returns-reader-hero.webp",
+      "sha256": "1276b47d154aeb283352e4aa38c01c1c017441bcf5c3f9d4002f576f33d12744",
+      "bytes": 339852
+    },
+    {
+      "href": "/images/research/online-returns-retailer-reseller-waterfall.png",
+      "sha256": "689b6ae22e52941c3eb91daf99b7d37489d9bb5c1bbf09a3b88aa69b81bb60a7",
+      "bytes": 231535
+    },
+    {
+      "href": "/images/research/online-returns-retrieval-decision.png",
+      "sha256": "2aedadd15e2af7e7988667ae581b47f9cc89fbaceac9f333d290478dad8eb336",
+      "bytes": 181421
+    },
+    {
+      "href": "/images/research/online-returns-social.jpg",
+      "sha256": "647a5627ac13a61ccef6f43ae93784727f774c65fa29643077af39d1e623a155",
+      "bytes": 239978
+    },
+    {
+      "href": "/research/reverse-logistics-tax-model.xlsx",
+      "sha256": "d80cc0ecb5a4101a8c3075d97e0514ae04ca233996b1d0c3c122f4f076e497d1",
+      "bytes": 357063
+    },
+    {
+      "href": "/research/where-online-return-actually-goes-report.docx",
+      "sha256": "2f242f6c016e9ce9a886803b04a5432cf73a3a6ff71d7110088f4b4f88401814",
+      "bytes": 2385989
+    },
+    {
+      "href": "/research/where-online-return-actually-goes-report.pdf",
+      "sha256": "fd6c1cb97576836092c206ee738b1ac3fe75bdd0e8611a334d1a8ccbe0ce1d18",
+      "bytes": 3649291
+    },
+    {
+      "href": "/images/research/hidden-financing-anduril-capital-stack.png",
+      "sha256": "4b3954dedf027ba7cfe9aa030edb7cdbc6ad3afefc08c0a37cf60685cbcc4069",
+      "bytes": 636358
+    },
+    {
+      "href": "/images/research/hidden-financing-coreweave-capital-stack.png",
+      "sha256": "479f5f3e36ccbfdd94ef909015dc42db25cd271d51c74ebd23ecf84984e7179a",
+      "bytes": 972787
+    },
+    {
+      "href": "/images/research/hidden-financing-northvolt-capital-stack.png",
+      "sha256": "5702d0dbb080b980496a1f01a02dc4a52df9865c125bb89d4ed545389a2c45c8",
+      "bytes": 626694
+    },
+    {
+      "href": "/images/research/hidden-financing-serve-capital-stack.png",
+      "sha256": "feb9a8c2283f2e35839f7580864ecdcf217bc89142053613ec8139eeeb8f96be",
+      "bytes": 490420
+    },
+    {
+      "href": "/images/research/hidden-financing-waymo-capital-stack.png",
+      "sha256": "c1674f5737207537bcfcea0f1c912dafad8c33e9ae85f52f9dd0e19f201eb7ef",
+      "bytes": 495367
+    },
+    {
+      "href": "/images/research/hidden-hardware-financing-reader-hero.webp",
+      "sha256": "22d2998d0f61247f436a86adb3bc2f0098775de9163cace8c7f237ea7a40b9cf",
+      "bytes": 401692
+    },
+    {
+      "href": "/images/research/hidden-hardware-financing-social.jpg",
+      "sha256": "f8acc7b2dfdf5af4ecd68e66ff48d28c870514bd256a71066f057fcdb6c305a9",
+      "bytes": 263844
+    },
+    {
+      "href": "/research/capital-stack-diagrams.zip",
+      "sha256": "8a05f9038f556ac507efc802a7bed71cba8f2f2a40772ca8e258971f2aaf85e2",
+      "bytes": 3012442
+    },
+    {
+      "href": "/research/hidden-financing-model.xlsx",
+      "sha256": "ccef921e780857209872db630bae3b1b49811f1e49f4bf3e6a187fcb3d23f9d8",
+      "bytes": 251565
+    },
+    {
+      "href": "/research/hidden-financing-report.docx",
+      "sha256": "180e6a9a2f8a7ce77e7127f908b16b4b131ea9ab8be9f8fa01d8618e30801638",
+      "bytes": 3093661
+    },
+    {
+      "href": "/research/hidden-financing-report.pdf",
+      "sha256": "16172ef7d86ba0a872a5c542d9d9561dcbacf8ead3957a9bb991c8845fd96905",
+      "bytes": 1384769
+    },
+    {
+      "href": "/images/research/waterloo-development-stress.png",
+      "sha256": "112ad62fab6dac798b987e3bb6a760b961258c075ab0f419bfa8a6e5711f7936",
+      "bytes": 98365
+    },
+    {
+      "href": "/images/research/waterloo-residual-land-value.png",
+      "sha256": "085db889a5b039dd3940bc07a83b02f802d61211b96790cdad87738f32bbab61",
+      "bytes": 95777
+    },
+    {
+      "href": "/images/research/west-campus-capital-stack.png",
+      "sha256": "0d1bad9ca8920d9e84fd245e0ec23fb1da9886beb3bdf0da1d7611619e06c9cd",
+      "bytes": 154892
+    },
+    {
+      "href": "/images/research/west-campus-equity-stress.png",
+      "sha256": "b9474558b3a9901be3f63b22bf9dd6ed5de1f72098947b7fa4c4aae0349f9bed",
+      "bytes": 88143
+    },
+    {
+      "href": "/images/research/west-campus-noi-margin.png",
+      "sha256": "d86a17b8304579a9b11ffc2664d3c9d34c8ed62d97fecf0936d533f4d69202cc",
+      "bytes": 95185
+    },
+    {
+      "href": "/images/research/west-campus-prelease-points.png",
+      "sha256": "bda5e87ab442cd4a2f1b5a8e4d0383fc81c20e0b6667d6324a56f56f189f7916",
+      "bytes": 98008
+    },
+    {
+      "href": "/images/research/west-campus-properties-map.png",
+      "sha256": "be8cc1f86dddb2fb228e092eccbaf9c7112f1cf2faee75291d4dcfdc2e9527a3",
+      "bytes": 120021
+    },
+    {
+      "href": "/images/research/west-campus-reader-hero.jpg",
+      "sha256": "c73e3dfbf490d3e1a6f3da4c1be9f739717813e4d9e2fcd11435600b60882067",
+      "bytes": 557742
+    },
+    {
+      "href": "/images/research/west-campus-social.jpg",
+      "sha256": "a2e408bb00e29dd7ab7eb8875211bfdf3ffaf38b165e9a989b78e2cf47111d2a",
+      "bytes": 212522
+    },
+    {
+      "href": "/research/west-campus-dossiers-methodology-claims.docx",
+      "sha256": "0a965ad139e8c47ac52860f52559e849e6bf260ab1f1d83a101687e73961cfc8",
+      "bytes": 54316
+    },
+    {
+      "href": "/research/west-campus-executive-analytical-memo.docx",
+      "sha256": "435f6699d279cca00ffaa27163657c26c821e5e0e669b91daf05dedce3f10f6c",
+      "bytes": 42470
+    },
+    {
+      "href": "/research/west-campus-investigative-report.docx",
+      "sha256": "b91eae20f85e0d7a6d8a80a4bf6281e9e3878b7f16ded0fb423baf5ce81e5aea",
+      "bytes": 851677
+    },
+    {
+      "href": "/research/west-campus-investigative-report.pdf",
+      "sha256": "df652dc1dd3665b7ea84ead12ecac5ff4501fcbeb2815f7e6f13c1671ef4721c",
+      "bytes": 1316197
+    },
+    {
+      "href": "/research/west-campus-property-models.xlsx",
+      "sha256": "8732a70bc1fa6444bcd52348b04fc2b94b351863e330ba8c5a94e9b62421549d",
+      "bytes": 167388
+    },
+    {
+      "href": "/images/research/waymo-capital-stack.png",
+      "sha256": "3efe05b76fd8fcd1763117f1ab2467669572f0c03130e77b1e3d07f4e7c45c36",
+      "bytes": 517089
+    },
+    {
+      "href": "/images/research/waymo-downside-waterfall.png",
+      "sha256": "7fdabb5d8728126d283c449024d3c2e7e4d3060ee126af7ba390a1967b9917bb",
+      "bytes": 407882
+    },
+    {
+      "href": "/images/research/waymo-financing-reader-hero.webp",
+      "sha256": "c40cf7f7257388aa0883c1feaa60276694f4b12ef777555985a05a1e0f90522e",
+      "bytes": 373386
+    },
+    {
+      "href": "/images/research/waymo-financing-social.jpg",
+      "sha256": "84974c6ade0fa9f03b0827b07dc53bd8595f9202a564716fa904d925cfdd7395",
+      "bytes": 261497
+    },
+    {
+      "href": "/research/waymo-hardware-financing-model.xlsx",
+      "sha256": "1babf363992e49ad2fc1802a3d01fdd96016f987eca846a5d9be9e6c915e412e",
+      "bytes": 63101
+    },
+    {
+      "href": "/research/waymo-hardware-financing-report.docx",
+      "sha256": "3c78d3bc2f49f31d0a7c36a8ecee7bdf292aa85938e1a62aa16bf8be76c65477",
+      "bytes": 935302
+    },
+    {
+      "href": "/research/waymo-hardware-financing-report.pdf",
+      "sha256": "f4787746d4d24576b348a169a8f552b98b0172fa559c03326b83cea77bd5a412",
+      "bytes": 976304
+    },
+    {
+      "href": "/images/research/ai-managers-reader-hero.webp",
+      "sha256": "259dc9a104f9c4ca6a32a97b4483431728c00284cb58d06f3663f3abb9823c9f",
+      "bytes": 291294
+    },
+    {
+      "href": "/images/research/ai-managers-social.jpg",
+      "sha256": "c634d91b34d85f82c8407685051d89992614586357fa7e37f4d56aafd2ecd859",
+      "bytes": 160893
+    },
+    {
+      "href": "/images/research/ai-crawler-policy-reader-hero.webp",
+      "sha256": "867c7b448c7ecd26f5194bc6c49ba2a864e920ca69a0b6ecac3f4f79af3015cb",
+      "bytes": 287572
+    },
+    {
+      "href": "/images/research/ai-crawler-policy-social.jpg",
+      "sha256": "990f3a6cf6c5746a723ebdd727ec67feb17e8d48ad669b17039e11fd61358a36",
+      "bytes": 152412
+    },
+    {
+      "href": "/images/research/public-data-infrastructure-reader-hero.webp",
+      "sha256": "e99ae4ecbc525d03b2d62bcf5313fbd45800a35da7c8a341519c7c31028937ab",
+      "bytes": 275840
+    },
+    {
+      "href": "/images/research/public-data-infrastructure-social.jpg",
+      "sha256": "7d932756b802bddf647012c1b26a7230774443e98e687c0116bf703366857731",
+      "bytes": 159799
+    },
+    {
+      "href": "/images/research/canonical-identity-reader-hero.webp",
+      "sha256": "7cc7f06a87321cfe44d9c535314fff573bfb260b3c50430e22487539df3dd38e",
+      "bytes": 220704
+    },
+    {
+      "href": "/images/research/canonical-identity-social.jpg",
+      "sha256": "d45571da296dbc55de98f80f592c1748d05f27d792e20b7edfb0d8c49702b4ff",
+      "bytes": 139949
+    },
+    {
+      "href": "/images/research/rare-earth-magnet-capacity-maturity.svg",
+      "sha256": "ac5304119ef2f6eb46fdfb721d21b27ee6d27d148ebab0f783d16e4fbd09984b",
+      "bytes": 3483
+    },
+    {
+      "href": "/images/research/rare-earth-magnet-demand-denominators.svg",
+      "sha256": "c83fdf128d2c9594711d55590cc3ad3397fff936cda0155be4b278612d9da835",
+      "bytes": 3680
+    },
+    {
+      "href": "/images/research/rare-earth-magnet-material-flow.svg",
+      "sha256": "2fa80d6de69a911be29b8d703c4b01479ce3c98b3bea1270f5bf182e88edb1c1",
+      "bytes": 4469
+    },
+    {
+      "href": "/research/us-rare-earth-magnet-capacity-model.csv",
+      "sha256": "9c2d58784c8af70774c084580d184c94ca9797d76b32c8a56d677d3e9e5fa7a9",
+      "bytes": 1740
+    },
+    {
+      "href": "/research/us-rare-earth-magnet-methodology.md",
+      "sha256": "27b778d6d0687c1322d67f06d6a0bda737910d9a4f39a031e0d816e8f020f018",
+      "bytes": 4398
+    },
+    {
+      "href": "/research/us-rare-earth-magnet-source-ledger.csv",
+      "sha256": "929f3442753adc7f4572fcd7f2f0b61aecf2cd2856a25d22a265eec21e0ec848",
+      "bytes": 4125
+    },
+    {
+      "href": "/images/research/texas-toll-roads-reader-hero.webp",
+      "sha256": "161c8eb0776831ba03212c1cf99d526a2b0985b92c493ef98d45f85c4ef9ef23",
+      "bytes": 39592
+    },
+    {
+      "href": "/images/research/texas-toll-roads-social.jpg",
+      "sha256": "a4ea5052351ccf22f875b53ff0f18f3b743ed35a8ad393bc8bff5e7aa302c1ba",
+      "bytes": 48102
+    }
+  ],
+  "excluded": [
+    {
+      "slug": "archived-research-methodology",
+      "reason": "Original indexable:false historical record"
+    },
+    {
+      "slug": "ethereum-blobspace-measurement-audit",
+      "path": "/research/financial-systems/ethereum-blobspace-measurement-audit",
+      "reason": "Separate unmerged candidate branch; prior publication unverified"
+    },
+    {
+      "slug": "uni-burn-supply-accounting",
+      "path": "/research/financial-systems/uni-burn-supply-accounting",
+      "reason": "Separate unmerged candidate branch; prior publication unverified"
+    },
+    {
+      "slug": "us-solid-rocket-motor-capacity-audit",
+      "path": "/research/financial-systems/us-solid-rocket-motor-capacity-audit",
+      "reason": "Separate unmerged candidate branch; prior publication unverified"
+    },
+    {
+      "slug": "when-does-a-data-center-become-infrastructure",
+      "path": "/markets/when-does-a-data-center-become-infrastructure",
+      "reason": "Separate unmerged candidate branch; prior publication unverified"
+    },
+    {
+      "slug": "independent-app-income-distribution",
+      "path": "/research/app-economics/independent-app-income-distribution",
+      "reason": "Separate unmerged candidate branch; prior publication unverified"
+    },
+    {
+      "slug": "who-owns-us-toll-roads",
+      "path": "/markets/who-owns-us-toll-roads",
+      "reason": "Separate unmerged candidate branch; prior publication unverified"
+    }
+  ]
+}

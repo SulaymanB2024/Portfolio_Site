@@ -1,0 +1,253 @@
+{
+  "kind": "research",
+  "cluster": "search-console",
+  "slug": "technical-seo-public-data-infrastructure",
+  "aliases": [
+    "/markets/technical-seo-public-data-infrastructure"
+  ],
+  "number": "02",
+  "category": "DATA INFRASTRUCTURE",
+  "title": "Technical SEO as Public Data Infrastructure",
+  "seoTitle": "SEO Data Pipeline as Public Infrastructure",
+  "subtitle": "A systems essay on how URLs become crawlable, renderable, attributable, and exportable public records.",
+  "seoDescription": "A systems essay by Sulayman Bowles on URL discovery, crawling, rendering, structured records, provenance, crawl evidence, and durable technical SEO exports.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/public-data-infrastructure-reader-hero.webp",
+    "socialSrc": "/images/research/public-data-infrastructure-social.jpg",
+    "alt": "Monochrome editorial artwork showing public web evidence flowing through a layered data pipeline.",
+    "label": "Public data / evidence pipeline",
+    "caption": "Crawl, render, normalize, and export remain traceable layers in one evidence system."
+  },
+  "date": "2026.06.19",
+  "dateModified": "2026.07.16",
+  "lastVerified": "2026.07.16",
+  "readTime": "14 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Technical SEO becomes infrastructure when every important URL can move through a traceable pipeline from discovery to rendered evidence and reusable output.",
+  "conclusion": {
+    "title": "Build a traceable public record",
+    "content": "Technical SEO becomes infrastructure when discovery, transport, rendering, extraction, interpretation, and publication remain connected by reviewable evidence. That makes site state easier to operate and defend, while distribution remains an external outcome."
+  },
+  "evidenceBoundary": "The data-infrastructure comparison describes operating discipline. It does not make a website equivalent to a regulated filing system or guarantee crawling, indexing, ranking, citation, or traffic.",
+  "metrics": [
+    {
+      "label": "Pipeline stages",
+      "value": "05"
+    },
+    {
+      "label": "Observed states",
+      "value": "RAW + RENDERED"
+    },
+    {
+      "label": "Primary artifact",
+      "value": "DATA CONTRACT"
+    }
+  ],
+  "sources": [
+    {
+      "label": "Google crawling and indexing overview",
+      "href": "https://developers.google.com/search/docs/crawling-indexing",
+      "lastVerified": "2026.07.16"
+    },
+    {
+      "label": "Google JavaScript SEO basics",
+      "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
+      "lastVerified": "2026.07.16"
+    },
+    {
+      "label": "Google structured data introduction",
+      "href": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data",
+      "lastVerified": "2026.07.16"
+    },
+    {
+      "label": "Google sitemap construction guidance",
+      "href": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+      "lastVerified": "2026.07.16"
+    },
+    {
+      "label": "SEC EDGAR public data APIs",
+      "href": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "lastVerified": "2026.07.16"
+    },
+    {
+      "label": "Atlas open-corpus demonstration",
+      "href": "/atlas/sample-crawl",
+      "lastVerified": "2026.07.16"
+    }
+  ],
+  "content": [
+    "A publication system produces addressable records. DNS and routing assign an address; the server emits a source snapshot; browser execution may create another state; extractors normalize fields; and exports carry those fields into review tools. Calling every state “the page” hides where information changed or disappeared.",
+    "Technical SEO becomes a data-infrastructure problem when each transformation has an input, output, timestamp, identifier, and owner. The useful question is whether a public claim can move from nominated address to captured artifact without losing its lineage. That frame turns an ambiguous visibility complaint into a diagnosable record-flow failure."
+  ],
+  "sections": [
+    {
+      "id": "public-record-pipeline",
+      "title": "The public-record pipeline has five distinct stages",
+      "paragraphs": [
+        "Nomination is the entry condition. An internal relation, sitemap row, external reference, feed item, redirect target, or earlier run can place an address into scope. Store that origin as data. It explains why one route entered the inventory and another did not; a sitemap declaration alone does not establish architectural reachability.",
+        "Capture creates a transport artifact containing the requested and resolved addresses, status, headers, body, timing, and failure state. Browser execution creates a related artifact rather than silently replacing the first one. Assets, APIs, consent layers, and runtime capabilities can all change the second state.",
+        "Normalization and export come last. Directives, links, headings, typed metadata, and visible claims must retain the artifact and rule from which they were derived. A review table is trustworthy only when a reader can move from a labeled row back to the captured input."
+      ],
+      "table": {
+        "caption": "URL-to-evidence pipeline",
+        "columns": [
+          "Stage",
+          "Minimum record",
+          "Failure question"
+        ],
+        "rows": [
+          [
+            "URL",
+            "Normalized address and discovery source",
+            "Was the intended route ever nominated or linked?"
+          ],
+          [
+            "Crawl",
+            "Status, headers, source body, timestamp, fetch state",
+            "Did the server return a usable public document?"
+          ],
+          [
+            "Render",
+            "Rendered DOM, discovered links, asset and console state",
+            "Did client execution materially change the record?"
+          ],
+          [
+            "Structure",
+            "Directives, metadata, headings, schema, content fields",
+            "Do machine-readable claims match visible content?"
+          ],
+          [
+            "Evidence export",
+            "Observation, derivation, confidence, route, run, artifact",
+            "Can another reviewer reproduce the finding?"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "raw-rendered-states",
+      "title": "Raw source and rendered output answer different questions",
+      "paragraphs": [
+        "The source snapshot is the transport ledger: status, headers, redirects, markup, and server-provided content at a recorded time. It is the correct artifact for diagnosing delivery failures and fields that existed before any client execution.",
+        "The executed snapshot records the document after scripts and dependent requests settle in a named environment. Google describes rendering as a separate processing stage for JavaScript pages. The useful measurement is therefore the delta between snapshots: added and removed links, headings, claims, directives, fields, and errors.",
+        "A screenshot is not that delta. The execution record also needs browser version, timeout, console state, failed dependencies, and completeness status. Otherwise a partial render can be mistaken for a complete public record."
+      ]
+    },
+    {
+      "id": "structured-records",
+      "title": "Structured data is a typed view of visible evidence",
+      "paragraphs": [
+        "Structured data serializes selected page fields into a predictable shape. A Dataset record can expose distribution formats, measurement dates, and licensing; a SoftwareApplication record can declare operating context and category. The serialization should be generated from the same fields that produce the visible table or product description.",
+        "Typed output also forces decisions about units, enumerations, identifiers, and missing values. SEC data APIs offer a useful analogy because extracted XBRL facts remain tied to a filing period and unit. A website has no comparable regulatory status, but its exports still benefit from explicit grain and machine-checkable field definitions.",
+        "Mismatch is more dangerous than omission. If the JSON-LD, visible table, CSV, and route metadata disagree on a date, count, unit, or identifier, downstream consumers receive competing values. Repair the shared source field and regenerate every representation rather than patching each output independently."
+      ]
+    },
+    {
+      "id": "atlas-case-study",
+      "title": "Atlas demonstrates the pipeline on an open corpus",
+      "paragraphs": [
+        "The Atlas open-corpus demonstration uses run ID quotes-to-scrape-2026-07-16 and two declared seeds: the static Quotes to Scrape route and its JavaScript variant. The JSON manifest records the capture time, bounded direct-HTTPS method, claim limit, and row payload. The CSV repeats the address-level fields in a form that can be filtered without discarding the manifest.",
+        "Both responses returned status 200, but they exposed different source states. The static route contained ten quote cards in its captured markup. The JavaScript route contained zero source quote cards and ten embedded runtime data records used by a client-side loop. Each row also retains the next-page address, canonical state, confidence, and a note explaining the count.",
+        "Those values support a narrow comparison of delivery states; they do not establish search performance or a defect in the corpus. The row can be reproduced from its seed, capture time, and method, while any later label remains a separate interpretation. This is the practical value of lineage: a reviewer can disagree with the finding without losing the underlying artifact."
+      ],
+      "table": {
+        "caption": "Atlas open-corpus record: observation versus derivation",
+        "columns": [
+          "Layer",
+          "Example field",
+          "Allowed conclusion"
+        ],
+        "rows": [
+          [
+            "Captured source",
+            "HTTP status, source body, response time",
+            "What the fetch returned at the recorded time"
+          ],
+          [
+            "Rendered state",
+            "DOM delta, discovered paths, browser errors",
+            "What changed in the tested browser environment"
+          ],
+          [
+            "Derived review",
+            "Finding label, confidence, affected route",
+            "A versioned interpretation of captured fields"
+          ],
+          [
+            "Artifact",
+            "Run ID, CSV row, JSON manifest, capture method",
+            "How the reviewer can locate and reproduce the record"
+          ],
+          [
+            "Gap state",
+            "Skipped provider, challenge page, failed render",
+            "Coverage is incomplete; no normal health claim follows"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "data-quality-contract",
+      "title": "A technical audit needs a data-quality contract",
+      "paragraphs": [
+        "Before scoring a site, the audit should define its grain and completeness rules. One row might represent a requested URL, a final response, a rendered page, or a normalized canonical document. Mixing those grains creates duplicate counts, broken joins, and misleading percentages. Required fields should be named, and absent values should distinguish not observed, not applicable, blocked, failed, and truly empty.",
+        "Freshness also belongs in the contract. A sitemap captured today and a rendered page from last month should not silently appear in one current-state table. Timestamps, run identifiers, model or renderer versions, and source hashes make drift visible. Reproducible output is less about freezing the web than about declaring exactly which version of the web the report describes."
+      ],
+      "table": {
+        "caption": "Minimum quality checks before a finding is publishable",
+        "columns": [
+          "Quality dimension",
+          "Check",
+          "Unsafe shortcut"
+        ],
+        "rows": [
+          [
+            "Completeness",
+            "Required capture fields and explicit gap states",
+            "Treating null as proof that a feature is absent"
+          ],
+          [
+            "Uniqueness",
+            "One declared row grain with duplicate-key checks",
+            "Counting requested, redirected, and canonical URLs as peers"
+          ],
+          [
+            "Consistency",
+            "Visible content, metadata, schema, and exports agree",
+            "Validating each representation in isolation"
+          ],
+          [
+            "Freshness",
+            "Capture time, run ID, hashes, and tool version retained",
+            "Combining observations from different collection windows"
+          ],
+          [
+            "Integrity",
+            "Every finding links back to supporting observations",
+            "Publishing labels without reproducible source rows"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "publication-standard",
+      "title": "The deliverable is a reviewable public record",
+      "paragraphs": [
+        "The strongest technical SEO output is not the largest issue list. It is a compact system in which priority pages are reachable, raw and rendered states are inspectable, machine-readable fields agree with visible content, and every recommendation can be traced to a captured observation. That operating standard supports engineering handoff because developers can verify the same conditions after a repair ships.",
+        "Distribution remains downstream. A clean pipeline can make information eligible to be processed and easier to audit; it cannot force an index, ranking system, or answer product to use the page. The value of the infrastructure frame is narrower and more practical: it makes the site less ambiguous to operate and makes claims about its state easier to defend."
+      ],
+      "bullets": [
+        "Nominate important routes through crawlable internal links and a canonical sitemap.",
+        "Capture transport and rendered states separately, with timestamps and failure reasons.",
+        "Generate metadata and structured records from the same visible source fields.",
+        "Keep observations, derived findings, confidence, and measurement gaps in separate columns.",
+        "Ship CSV or JSON artifacts that retain route, run, source, and calculation lineage.",
+        "Rerun the same checks after implementation before declaring the repair complete."
+      ]
+    }
+  ],
+  "path": "/research/search-console/technical-seo-public-data-infrastructure",
+  "image": "/images/research/public-data-infrastructure-social.jpg",
+  "displayTitle": "Technical SEO as public data infrastructure."
+}

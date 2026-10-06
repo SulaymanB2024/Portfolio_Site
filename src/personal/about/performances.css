@@ -88,6 +88,7 @@
 }
 
 .performance-programs .performance-program-heading {
+  position: relative;
   display: grid;
   grid-template-columns: var(--performance-date-width) minmax(0, 1fr);
   gap: var(--performance-column-gap);
@@ -113,7 +114,7 @@
 
 .performance-programs .performance-program-toggle {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 44px;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 18px;
   width: 100%;
@@ -123,6 +124,22 @@
   background: transparent;
   color: var(--ink);
   text-align: left;
+}
+
+/* The heading has one action. Its date and ensemble share the same hit area. */
+.performance-programs .performance-program-toggle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.performance-programs .performance-program-disclosure {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--muted);
+  font: 10px/1.5 var(--performance-mono);
 }
 
 .performance-programs .performance-program-title {
@@ -162,11 +179,16 @@
   color: var(--ink);
 }
 
-.performance-programs .performance-program-toggle:focus-visible,
+.performance-programs .performance-program-heading:has(.performance-program-toggle:focus-visible),
 .performance-programs .performance-program-filters > button:focus-visible,
+.performance-programs .performance-program-recordings > a:focus-visible,
 .performance-programs .performance-program-sources > a:focus-visible {
   outline: 1px solid var(--ink);
   outline-offset: 5px;
+}
+
+.performance-programs .performance-program-toggle:focus-visible {
+  outline: none;
 }
 
 .performance-programs .performance-program-ensemble {
@@ -189,14 +211,11 @@
   font-style: normal;
 }
 
-.performance-programs .performance-recording-cue {
-  margin: 10px 44px 0 0;
-  color: var(--muted);
-  font: 10px/1.6 var(--performance-mono);
-}
-
-.performance-programs .performance-recording-cue > span {
-  margin-left: 6px;
+.performance-programs .performance-program-recordings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 26px;
+  margin: 9px 0 0 calc(var(--performance-date-width) + var(--performance-column-gap));
 }
 
 .performance-programs .performance-program-panel[hidden] {
@@ -262,7 +281,8 @@
   border-top: 1px solid var(--line);
 }
 
-.performance-programs .performance-program-sources > a {
+.performance-programs .performance-program-sources > a,
+.performance-programs .performance-program-recordings > a {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -282,11 +302,13 @@
   transition: transform 160ms ease;
 }
 
-.performance-programs .performance-program-sources > a:is(:hover, :focus-visible) {
+.performance-programs .performance-program-sources > a:is(:hover, :focus-visible),
+.performance-programs .performance-program-recordings > a:is(:hover, :focus-visible) {
   text-decoration-color: var(--ink);
 }
 
-.performance-programs .performance-program-sources > a:is(:hover, :focus-visible) .performance-source-arrow {
+.performance-programs .performance-program-sources > a:is(:hover, :focus-visible) .performance-source-arrow,
+.performance-programs .performance-program-recordings > a:is(:hover, :focus-visible) .performance-source-arrow {
   transform: translate(1px, -1px);
 }
 
@@ -389,6 +411,10 @@
 
   .performance-programs .performance-program-sheet {
     margin: 24px 0 0;
+  }
+
+  .performance-programs .performance-program-recordings {
+    margin: 9px 0 0;
   }
 
   .performance-programs .performance-program-repertoire > li {

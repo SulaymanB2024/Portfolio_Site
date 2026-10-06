@@ -11,6 +11,7 @@ export const workNarratives: Record<string, WorkDocument> = {
         id: 'question',
         label: 'Source pipeline',
         title: 'Building the recruiting record',
+        artifact: 'system',
         body: [
           'A job can appear on an employer site, a job board, and a program page with different titles or dates. My pipeline validates the source, standardizes the company, role, and location, and merges duplicates only when the evidence identifies the same job. The original employer link remains attached.',
           'The directory distinguishes historical coverage from verified availability. A recent check needs employer evidence and a valid application state; visiting a listing does not renew that check. First seen, program term, application deadline, and verification time are stored as separate facts.'
@@ -41,7 +42,6 @@ export const workNarratives: Record<string, WorkDocument> = {
           'I use local language models for role classification and query understanding alongside search ranking. Role, employer, and location fields support discovery; the result sends applicants back to the employer’s requirements and application.',
           'NVIDIA’s Spring 2027 Developer and Performance Technology listing shows how this information fits together: the program term and Santa Clara location are recorded, the employer link is retained, and the deadline remains unconfirmed. Its dated history is evidence of a past check, rather than a claim that it is open today.'
         ],
-        artifact: 'system',
         links: [
           {
             label: 'Inspect the NVIDIA listing',
@@ -103,6 +103,8 @@ export const workNarratives: Record<string, WorkDocument> = {
         id: 'question',
         label: 'Content function',
         title: 'Articles, category pages, and sales material',
+        artifact: 'system',
+        note: 'Study: Sapien Team. Portfolio contribution: content, research review, and growth.',
         body: [
           'My work connects pricing, concept testing, messaging, and consumer-research use cases to the material a buyer needs to evaluate the product. I develop articles and category pages for search, then use the research in explainers, creative briefs, ad concepts, and sales material.',
           'A services comparison needs to distinguish the research question, evidence source, delivery model, and deliverable. A pricing buyer needs tested offers and assumptions; a concept buyer needs comparative responses and a revision brief. Those distinctions give the content its structure.'
@@ -131,9 +133,7 @@ export const workNarratives: Record<string, WorkDocument> = {
         body: [
           'The published AI-tools guide includes a matched comparison of 256GB offers at $1,999 and $1,599. Within each cohort, the same assigned profiles considered both prices. Keeping the audience fixed makes the change in modeled qualification legible.',
           'Qualification rises from 5.52% to 11.27% in the core cohort and from 6.18% to 12.50% in the expansion cohort. The lower offer also gives up $400 per sale. The result alone cannot select the better margin: that needs costs, realized demand, and the rest of the offer.'
-        ],
-        artifact: 'system',
-        note: 'Study: Sapien Team. Portfolio contribution: content, research review, and growth.'
+        ]
       },
       {
         id: 'practice',
@@ -327,7 +327,7 @@ export const workNarratives: Record<string, WorkDocument> = {
         title: 'Modeling a surface that survives halftone',
         body: [
           'The sculptures are built offline from modeled relief, cut openings, rounded shoulders, bearings, and separate moving parts. Bevels give lighting a wide enough transition to survive a binary threshold; recessed channels keep details readable at phone scale.',
-          'The forms include twelve calendar plates and an escapement, portrait busts arranged around prototypes, a relief globe within armillary rails, and five meshing gears under open shrouds. Geometry is merged by material and part, centered, and exported with named pivots. The browser loads these files rather than rebuilding them every frame.'
+          'The forms include an engraved calendar and an escapement, portrait busts arranged around prototypes, a relief globe within armillary rails, and five meshing gears under open shrouds. Geometry is merged by material and part, centered, and exported with named pivots. The browser loads these files rather than rebuilding them every frame.'
         ],
         links: [
           {
@@ -382,7 +382,7 @@ export const workNarratives: Record<string, WorkDocument> = {
             ['Helmet', '2.26 → 1.76 MB', '299,992'],
             ['Contact sculpture', '6.55 → 2.61 MB', '119,244'],
             ['Globe', '1.64 → 0.41 MB', '78,130'],
-            ['Gear mechanism', '1.14 → 0.17 MB', '39,116']
+            ['Gear mechanism', '2.95 → 0.54 MB', '99,490']
           ],
           note: 'Sizes are from the asset manifest. Draco quantizes attributes; unchanged triangle counts do not mean bit-identical geometry.'
         }

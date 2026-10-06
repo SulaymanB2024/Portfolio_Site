@@ -6,6 +6,7 @@ export function galleryArticleJourney(from: string, to: string) {
   return (from === 'writing' && to.startsWith('writing/')) || (from.startsWith('writing/') && to === 'writing')
 }
 export type ArtworkTransition = { ready: Promise<void>; finished: Promise<void>; skipTransition: () => void }
+const preparationTimeout = 4000
 const duration = 520
 const easing = 'cubic-bezier(.24,.76,.2,1)'
 const findArtwork = (name: string) => [...document.querySelectorAll<HTMLElement>('.animated-artwork')]
@@ -46,6 +47,7 @@ export function startArtworkTransition(name: string, update: () => void | Promis
   let destination: HTMLElement | undefined
   let destinationOpacity = ''
   let cancelled = false, cleaned = false
+  let preparationTimer: ReturnType<typeof setTimeout> | undefined
   let travel: Animation | undefined
   const animations: Animation[] = []
   const place = (rect: DOMRect) => Object.assign(overlay.style, {
@@ -64,6 +66,8 @@ export function startArtworkTransition(name: string, update: () => void | Promis
   function clean() {
     if (cleaned) return
     cleaned = true
+    if (preparationTimer !== undefined) clearTimeout(preparationTimer)
+    preparationTimer = undefined
     animations.forEach(animation => animation.cancel())
     handoff?.finish()
     unsubscribe?.()
@@ -88,8 +92,13 @@ export function startArtworkTransition(name: string, update: () => void | Promis
   window.addEventListener('keydown', key)
   preference.addEventListener('change', reduced)
   document.documentElement.dataset.artTransitionEngine = handoff ? 'live-canvas' : 'poster'
+  // A stalled destination must release the lifted drawing and its listeners.
+  // Resource loading continues; late arrival still commits through the route owner.
+  preparationTimer = setTimeout(skip, preparationTimeout)
   const ready = (async () => {
     await update()
+    if (preparationTimer !== undefined) clearTimeout(preparationTimer)
+    preparationTimer = undefined
     if (cancelled) return
     destination = findArtwork(name)
     if (!destination || destination === source) return

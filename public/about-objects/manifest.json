@@ -11,18 +11,18 @@
     {
       "id": "bass",
       "title": "Double bass and bow",
-      "description": "Original carved double bass with conforming interior arch samples, front-only f-hole apertures, hollow ribs, double purfling, ebony bearing saddles, a heart-pierced bridge and curved feet, toothed mechanical tuners, a solid spiral-carved volute, four separate strings and a nested bow with carved ivory tip and metal ferrule.",
+      "description": "Original carved double bass with twice-refined interior plate arches, raised plate overhangs, a carved back button, front-only f-hole apertures, hollow ribs, double purfling, ebony bearing saddles, a heart-pierced bridge and curved feet, toothed tuners with slotted mounting screws, a solid spiral-carved volute, four separate strings and a nested bow with carved ivory tip and metal ferrule.",
       "path": "about-objects/bass.glb",
-      "bytes": 1435128,
-      "sha256": "d355f915b185c086f7435a00ddc7db98feb24ca695291abbb495bec2f0f8bab1",
-      "vertices": 50734,
-      "triangles": 34060,
+      "bytes": 1454684,
+      "sha256": "433c628dca5d6ac8a8653c9d99e7cb159d1eb944c45fa37844b8cd4356a4c785",
+      "vertices": 50739,
+      "triangles": 37300,
       "meshes": 16,
       "bounds": {
         "min": [
           -0.6143139849478194,
           -1.5845915079116821,
-          -0.20541773736476898
+          -0.20611068606376648
         ],
         "max": [
           0.8926996041959336,
@@ -253,19 +253,19 @@
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999614554685,
+        "minimumNormalLength": 0.9999999630308535,
         "maximumNormalLength": 1.000000038629771
       }
     },
     {
       "id": "knight",
       "title": "Knight and board",
-      "description": "Original Staunton-inspired knight with a continuously sampled carved head and neck: fuller cheekbones, recessed eye sockets with iris rings, shaped nasal and muzzle anatomy, a narrow incised mouth and raised lower lip, tapered inset ears, deeper scalloped mane, shoulder tendons and a finely turned pedestal. The preserved raised 64-tile board exposes native algebraic square nodes and the original movable A1 knight parent.",
+      "description": "Original Staunton-inspired knight with sampling concentrated in its carved face: fuller cheekbones, deeper orbital and nostril cavities, iris rings, a cheek crease, shaped nasal anatomy, incised mouth and lower lip, tapered inset ears, a scalloped mane joined to a layered forelock, shoulder tendons and a turned pedestal. The raised 64-tile board retains native algebraic square nodes and its movable A1 knight parent.",
       "path": "about-objects/knight.glb",
-      "bytes": 1215284,
-      "sha256": "f9c5c3bf0d2ea1f1684048ef0c28c805db44b084d7895dfaba7bee134a8d3c6f",
-      "vertices": 38030,
-      "triangles": 39860,
+      "bytes": 1024240,
+      "sha256": "38526699f03a698840fd64cb6229587fdf2f1fed07ab98faebd6c886c06add4b",
+      "vertices": 30538,
+      "triangles": 37988,
       "meshes": 69,
       "bounds": {
         "min": [
@@ -1827,19 +1827,19 @@
         "errors": 0,
         "warnings": 0,
         "degenerateTriangles": 0,
-        "minimumNormalLength": 0.9999999588073535,
+        "minimumNormalLength": 0.9999999613334395,
         "maximumNormalLength": 1.000000043812956
       }
     },
     {
       "id": "score",
       "title": "Score page and pen",
-      "description": "Original fine curved sheet with front and back surfaces, a thin beveled edge and a smoothly sampled diagonal corner roll; tapered embossed bass-clef strokes and engraved almond noteheads. Four independent note nodes and a nib-pivot fountain pen retain visitor-created phrase interactions. The turned pen has a curved beveled nib with a real slit and pierced breather hole, paired shoulder engraving, cap rings and a sprung clip. Generic original notation, not the site owner’s composition.",
+      "description": "Original curved sheet with front and back surfaces, a thin beveled edge, a diagonal corner roll, embossed bass-clef strokes, almond noteheads, ties and phrase marks. Four independent note nodes and a nib-pivot fountain pen retain visitor-created phrase interactions. The smoothly turned pen has a beveled split nib and breather hole, shoulder engraving, recessed grip rings, a combed feed, cap rings and a sprung clip. Generic original notation, not the site owner’s composition.",
       "path": "about-objects/score.glb",
-      "bytes": 733064,
-      "sha256": "dbf80f8421f50d12a935fb1034baba596aa81c4a2303c10dc19fe5f914c83251",
-      "vertices": 23087,
-      "triangles": 28288,
+      "bytes": 813372,
+      "sha256": "8653df9dac501709c8550e30f153c50a24515f2078e155ca7a78f071cc810899",
+      "vertices": 25369,
+      "triangles": 32544,
       "meshes": 10,
       "bounds": {
         "min": [

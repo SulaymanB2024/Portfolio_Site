@@ -10,6 +10,18 @@ export function midiFrequency(midi: number) { return 440 * 2 ** ((midi - 69) / 1
 export function midiLabel(midi: number | null) { return midi === null ? 'Rest' : `${noteNames[((midi % 12) + 12) % 12]}${Math.floor(midi / 12) - 1}` }
 
 export function totalPhraseBeats(notes: readonly PhraseNote[]) { return notes.reduce((beats, note) => beats + note.beats, 0) }
+
+/** Retain the crossing event so the engraver can draw its outgoing tie. */
+export function firstMeasurePhrase(notes: readonly PhraseNote[]): PhraseNote[] {
+  let beats = 0
+  const opening: PhraseNote[] = []
+  for (const note of notes) {
+    if (beats >= BEATS_PER_MEASURE) break
+    opening.push(note)
+    beats += note.beats
+  }
+  return opening
+}
 export function clampedPhraseTempo(tempo: number) { return Math.max(40, Math.min(180, Number.isFinite(tempo) ? tempo : 88)) }
 
 export function isPhraseNote(note: PhraseNote) {

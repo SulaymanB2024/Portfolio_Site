@@ -5,16 +5,27 @@
   "number": "13",
   "category": "DATA SYSTEMS",
   "title": "SQLite for Crawl Pipelines: Idempotency, WAL, and Bounded Concurrency",
-  "seoTitle": "SQLite for Crawl Pipelines: Idempotency, WAL, and Concurrency",
-  "subtitle": "A storage architecture for URL identity, append-only attempts, transactional batches, upserts, one-writer discipline, WAL checkpoints, integrity checks, and portable exports.",
-  "seoDescription": "Build reliable SQLite crawl pipelines with stable keys, idempotent writes, append-only attempts, bounded transactions, WAL-aware concurrency, checkpoints, and recovery checks.",
-  "image": "/og-default.png",
+  "seoTitle": "SQLite Crawl Pipelines: Idempotent Writes and WAL",
+  "subtitle": "Serialize writes without losing attempts, evidence, or recovery paths.",
+  "seoDescription": "Design SQLite crawl storage around one writer, stable keys and append-only attempts. Bound transactions, manage WAL checkpoints and test backup restoration.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/sqlite-pipelines-editorial.webp",
+    "socialSrc": "/images/research/sqlite-pipelines-social.jpg",
+    "alt": "Parallel monochrome data streams converge through a single writer into concentric WAL-like records.",
+    "label": "Data systems / single-writer study",
+    "caption": "Bounded workers converge on one durable writer while layered records preserve recovery and replay."
+  },
   "date": "2026.07.19",
-  "dateModified": "2026.07.19",
+  "dateModified": "2026-10-05",
   "lastVerified": "2026.07.19",
-  "readTime": "15 MIN",
+  "readTime": "6 MIN",
   "author": "SULAYMAN BOWLES",
-  "thesis": "SQLite works well for bounded crawl and audit systems when the design accepts one-writer semantics, makes every write idempotent, separates immutable attempts from current projections, and operates WAL and checkpoints deliberately.",
+  "thesis": "SQLite suits bounded crawls when writes are idempotent, attempts remain immutable, and current-state projections cannot move backwards. Accept one-writer semantics and operate WAL, checkpoints, and recovery deliberately.",
+  "conclusion": {
+    "title": "Prove the database can be restored",
+    "content": "Idempotent writes and ordered projections protect collection; short transactions and deliberate checkpoints protect operation. Complete the storage contract with integrity checks, stable exports, and a restoration that reproduces run counts and report results."
+  },
   "evidenceBoundary": "SQLite behavior depends on the linked library version, VFS, filesystem, durability settings, connection pattern, and workload. Official documentation should be rechecked before deployment; WAL is not a shared-database design for independent hosts or a substitute for backups.",
   "metrics": [
     {
@@ -62,17 +73,17 @@
     }
   ],
   "content": [
-    "A crawl workload looks hostile to a small embedded database: many workers finish at unpredictable times, every response creates related rows, retries duplicate logical work, render artifacts arrive later than source artifacts, and reporting queries run while collection continues. The pressure often leads to shared connections, row-by-row commits, replace-style writes, and a current-state table that destroys attempt history.",
-    "SQLite can support the workload when the architecture narrows the write boundary. Workers produce immutable result messages. One writer or a small serialized writer service validates those messages, writes bounded transactions, and acknowledges durable commit. Stable uniqueness keys make delivery idempotent. Append-only attempt tables retain what happened; materialized current tables and views make reporting convenient without becoming the only record."
+    "Crawler workers finish out of order. Retries redeliver results, browser artifacts arrive after source captures, and reports read while collection continues. Shared connections, per-row commits, replacement writes, and overwritten status tables can turn that concurrency into duplicate work or lost history.",
+    "Narrow the write boundary instead. Workers emit immutable result messages; a single writer or serialized writer service validates and commits bounded batches before acknowledging them. Stable keys make redelivery safe, append-only attempts keep history, and rebuildable projections serve reporting."
   ],
   "sections": [
     {
       "id": "schema-grain",
-      "title": "Define table grain and identity before tuning the database",
+      "title": "Define what each row represents",
       "paragraphs": [
-        "Each table needs one sentence that defines a row. A crawl_run row is one bounded execution. A url_identity row is one comparison identity under a normalizer version. A discovery_edge row is one observed relation from a source artifact. A fetch_attempt row is one network attempt. A response_artifact row identifies one saved payload. A rule_evaluation row is one rule version applied to one input set. If a table mixes several grains, uniqueness and retries become ambiguous.",
-        "Use surrogate IDs for local joins where helpful, but enforce domain uniqueness with explicit constraints. A fetch attempt might be unique on run, URL identity, and attempt number or on a generated attempt ID whose creation is idempotent at the scheduler. An artifact can use a content hash plus storage namespace. A link edge needs source artifact and node identity so repeated template edges remain explainable.",
-        "Store normalized fields for queries and immutable raw values for evidence. The normalized canonical target supports grouping; the observed href supports debugging. The parsed status is an integer; response headers can also remain as a hashed raw artifact. Do not rely on a JSON blob for every core relation, and do not discard the JSON when it is the faithful captured form."
+        "Give every table one grain: crawl_run is a bounded execution; url_identity a comparison key under a normalizer version; discovery_edge an observed source relation; fetch_attempt a request attempt; response_artifact a saved payload; rule_evaluation a rule version on an input set. Mixed grains make retries and uniqueness ambiguous.",
+        "Use local surrogate IDs where helpful, but constrain domain identity explicitly. Attempts can be unique by run, URL, and sequence, or by a scheduler-generated idempotent attempt ID. Artifacts need hash plus storage namespace; link edges need source artifact and node identity to retain repeated-template context.",
+        "Keep normalized query fields alongside immutable evidence. A normalized canonical groups pages while the observed href explains it; integer statuses support queries while raw headers remain hashed artifacts. Model core relations explicitly without discarding JSON when it faithfully captures the source."
       ],
       "table": {
         "caption": "Recommended crawl-storage grains",
@@ -117,11 +128,11 @@
     },
     {
       "id": "transaction-boundary",
-      "title": "Make the transaction match the durable unit of work",
+      "title": "Commit the durable result as one unit",
       "paragraphs": [
-        "SQLite automatically starts transactions, but a crawl writer should define them explicitly. One completed fetch commonly creates an attempt update, response metadata, artifact reference, extracted observations, discovered edges, and frontier transitions. If those records describe one durable result, commit them together or design a resumable sequence whose intermediate states are valid.",
-        "Avoid one transaction per individual row; it amplifies synchronization overhead. Avoid unbounded transactions for an entire crawl; they hold the writer, grow recovery work, delay visibility, and make failure expensive. Batch by a bounded number of result messages, bytes, or time while retaining a checkpoint that identifies which messages were committed.",
-        "Keep database transactions free of network and filesystem work when possible. Store the artifact durably first, then write its immutable reference in a short transaction. If artifact storage fails, the result remains retryable. If the database commit fails, redelivery can safely repeat the message because uniqueness keys prevent duplicate logical records."
+        "A completed fetch can produce attempt state, response metadata, artifact references, observations, edges, and frontier transitions. Explicitly commit the records forming one durable result together, or define a resumable sequence with valid intermediate states.",
+        "Per-row transactions amplify synchronization overhead; whole-crawl transactions hold the writer, defer visibility, enlarge recovery, and make failure costly. Bound batches by messages, bytes, or time and checkpoint which messages committed.",
+        "Avoid network and filesystem waits inside transactions. Persist the artifact first, then commit its immutable reference briefly. Storage failure leaves the result retryable; commit failure permits redelivery because uniqueness prevents duplicate logical records."
       ],
       "bullets": [
         "Begin and end transactions in the writer, not inside unrelated helper functions.",
@@ -134,15 +145,15 @@
     },
     {
       "id": "idempotent-writes",
-      "title": "Use upserts to converge, not to erase history",
+      "title": "Advance projections without replacing evidence",
       "paragraphs": [
-        "Idempotency means that redelivering the same logical result produces the same durable state. Define a unique key for the message or domain row and use INSERT with ON CONFLICT DO NOTHING when the first committed record must remain immutable. Use DO UPDATE only for a current projection whose update policy is explicit.",
-        "Avoid INSERT OR REPLACE for evidence records. Replace behavior can delete and recreate a row, interact with foreign keys, change row identity, and overwrite the first observation. An upsert with a named conflict target and selected columns states which conflict is expected and which values may change.",
-        "Guard current-state updates with monotonic conditions. A late attempt should not overwrite a newer terminal attempt merely because its message arrived last. Compare attempt sequence, event time under a documented clock policy, or explicit state version in the update WHERE clause. Keep every attempt row even when the projection rejects it."
+        "Redelivering a logical result should converge on the same durable state. Use a unique message or domain key with INSERT and ON CONFLICT DO NOTHING for immutable first commits. Reserve DO UPDATE for projections with explicit update policies.",
+        "INSERT OR REPLACE can delete and recreate rows, affect foreign keys, change identity, and erase first observations. Named conflict targets and selected update columns state which collision is expected and which values may change.",
+        "Late messages must not overwrite newer terminal attempts. Guard updates with sequence, event time under a documented clock policy, or state version in the WHERE clause. Retain each attempt even when it cannot advance the projection."
       ],
       "codeExamples": [
         {
-          "title": "Append the attempt, then advance the current projection conditionally",
+          "title": "Append and project",
           "description": "Duplicate result delivery becomes a no-op, and late attempts cannot move current state backward.",
           "language": "sql",
           "code": "BEGIN IMMEDIATE;\n\nINSERT INTO fetch_attempt (attempt_id, run_id, url_id, sequence, status, artifact_id)\nVALUES (:attempt_id, :run_id, :url_id, :sequence, :status, :artifact_id)\nON CONFLICT(attempt_id) DO NOTHING;\n\nINSERT INTO url_current (run_id, url_id, sequence, status, attempt_id)\nVALUES (:run_id, :url_id, :sequence, :status, :attempt_id)\nON CONFLICT(run_id, url_id) DO UPDATE SET\n  sequence = excluded.sequence,\n  status = excluded.status,\n  attempt_id = excluded.attempt_id\nWHERE excluded.sequence > url_current.sequence;\n\nCOMMIT;"
@@ -151,11 +162,11 @@
     },
     {
       "id": "wal-concurrency",
-      "title": "Use WAL with an explicit concurrency and checkpoint model",
+      "title": "Control the writer and long-lived readers",
       "paragraphs": [
-        "SQLite WAL mode lets readers continue while a writer appends committed changes, but there is still one writer at a time. That is a feature to design around, not a limit to disguise with many competing write connections. Funnel worker results through a writer queue, keep transactions short, set a bounded busy timeout or retry policy, and expose queue age as backpressure.",
-        "Readers see a consistent snapshot for their transaction. A long-running report can therefore prevent checkpoint progress and allow the WAL file to grow. Close read transactions promptly, paginate large exports against a deliberate snapshot, and monitor WAL pages plus checkpoint results. The official WAL documentation describes automatic checkpoint behavior and the tradeoff between write latency, read performance, and durability settings.",
-        "WAL requires processes sharing a database to operate on the same host because of its shared-memory design; the official documentation warns against using it across a network filesystem. If independent machines need concurrent writes, move the write authority behind a service or use a server database. Copying only the main database while live WAL state exists can also lose committed data, so backup and archive workflows must understand the journal mode."
+        "WAL lets readers continue while a writer appends commits, but still permits one writer at a time. Serialize worker results, keep transactions short, bound busy waits or retries, and expose queue age to apply backpressure rather than adding competing writers.",
+        "Readers retain transaction snapshots. Long reports can prevent checkpoint progress and grow WAL. Close reads promptly, paginate exports against deliberate snapshots, and monitor WAL pages and checkpoint results. SQLite’s documentation explains automatic checkpoints and the write-latency, read-performance, and durability tradeoffs.",
+        "WAL’s shared-memory design requires participating processes on the same host; its documentation warns against network filesystems. For independent machines, put write authority behind a service or use a server database. Copying the main file alone during live WAL can omit committed data: backup and archive procedures must respect journal mode."
       ],
       "table": {
         "caption": "SQLite crawl concurrency responsibilities",
@@ -201,11 +212,11 @@
     },
     {
       "id": "integrity-and-recovery",
-      "title": "Operate recovery, integrity, and export as first-class paths",
+      "title": "Test interruption, export, and restoration",
       "paragraphs": [
-        "Test interruption at every boundary: before artifact storage, after artifact storage but before database commit, during a batch, after commit but before acknowledgment, and during reporting. The expected result should be either no committed logical change or one complete idempotent result. A recovery test is stronger evidence than assuming atomic commit from ordinary runs.",
-        "Run quick or full integrity checks at a cadence appropriate to the workload and before important archives. Verify foreign-key consistency separately when foreign keys are part of the contract. Back up through a supported SQLite backup mechanism or a controlled closed/checkpointed state rather than copying an actively changing file set casually.",
-        "Produce stable exports with explicit ordering, schema version, run manifest, row counts, hashes, and gap states. A SQL dump can preserve relational content; CSV and JSON can serve review workflows. Validate that a restored database reproduces the same run counts and key report queries. The archive is complete only when restoration has been exercised."
+        "Interrupt before artifact storage, between storage and commit, during a batch, between commit and acknowledgment, and during reporting. Expect either no committed logical change or one complete idempotent result. Normal runs cannot demonstrate those recovery boundaries.",
+        "Schedule quick or full integrity checks for the workload and important archives; check foreign keys separately where used. Back up with a supported SQLite mechanism or controlled closed/checkpointed state, not an informal copy of changing files.",
+        "Order exports explicitly and include schema version, run manifest, counts, hashes, and gaps. SQL dumps preserve relations; CSV and JSON support review. Restore the archive and compare run counts and key report queries before declaring it complete."
       ],
       "bullets": [
         "Pin or inventory the actual SQLite library version used in production.",
@@ -218,5 +229,7 @@
     }
   ],
   "path": "/research/data-systems/sqlite-crawl-pipelines",
-  "aliases": []
+  "aliases": [],
+  "image": "/images/research/sqlite-pipelines-social.jpg",
+  "displayTitle": "SQLite for crawl pipelines."
 }

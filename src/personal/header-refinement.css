@@ -1,10 +1,10 @@
 /* One header survives the landing rail; its extra links open in place. */
 .personal-site .personal-header { grid-template-columns: 1fr auto auto; gap: 26px; }
 .personal-site .personal-header .identity-name,
-.personal-site .personal-header nav a { font: 400 10px/1.4 'Courier New', monospace; letter-spacing: .1em; text-transform: uppercase; }
+.personal-site .personal-header nav a { font: 400 11px/1.4 'Courier New', monospace; letter-spacing: .08em; text-transform: uppercase; }
 .personal-site .personal-header .identity-name { font-size: 11px; }
 .personal-site .personal-header nav { gap: 0; }
-.personal-header .nav-slot { display: grid; max-width: 140px; margin-left: 27px; overflow: hidden; transition: max-width 420ms cubic-bezier(.22,1,.36,1), margin-left 420ms cubic-bezier(.22,1,.36,1), opacity 240ms ease, transform 420ms cubic-bezier(.22,1,.36,1); }
+.personal-header .nav-slot { display: grid; max-width: 140px; margin-left: 27px; overflow: hidden; transition: max-width 300ms cubic-bezier(.22,1,.36,1), margin-left 300ms cubic-bezier(.22,1,.36,1), opacity 180ms ease, transform 300ms cubic-bezier(.22,1,.36,1); }
 .personal-header .nav-slot:first-child { margin-left: 0; }
 .personal-header .nav-slot > a { min-width: 0; white-space: nowrap; min-height: 44px; align-items: center; }
 .personal-site .personal-header nav a::after { left: 0; }
