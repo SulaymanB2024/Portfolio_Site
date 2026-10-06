@@ -66,7 +66,7 @@ export default function WritingIndex() {
     const artwork = getArticleGenerativeArtwork(article.path)
     return <a className="writing-story" aria-labelledby={`writing-title-${article.slug}`} aria-describedby={`writing-deck-${article.slug}`} data-slug={article.slug} data-layout={layout} key={article.slug} href={`#/writing/${article.slug}?from=${encodeURIComponent(writingHref(filters, article.slug))}`} onClick={event => rememberArticle(event, article.slug)}>
       <div className="writing-story-copy"><span className="writing-story-topic">{topicLabels[article.category] || article.category}</span><h2 id={`writing-title-${article.slug}`}>{article.displayTitle || article.title}</h2><p id={`writing-deck-${article.slug}`} className="writing-deck">{article.subtitle}</p><div className="writing-story-meta"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><DestinationCue className="writing-story-action" decorative>Read essay</DestinationCue></div></div>
-      {layout !== 'note' && <div className="writing-art" data-treatment={artwork.treatment}><AnimatedArtwork artwork={artwork} size={layout === 'compact' ? 120 : 480} paused={paused} eager={index === 0} embedded decorative transitionName={artworkTransitionName(artwork)} /></div>}
+      <div className="writing-art" data-treatment={artwork.treatment}><AnimatedArtwork artwork={artwork} size={layout === 'compact' || layout === 'note' ? 120 : 480} paused={paused} eager={index === 0} embedded decorative transitionName={artworkTransitionName(artwork)} /></div>
     </a>
   }
 
@@ -81,9 +81,9 @@ export default function WritingIndex() {
         {(query.trim() || category !== 'All') && <div className="writing-filter-status"><span>{visible.length} {visible.length === 1 ? 'essay' : 'essays'}</span><button type="button" onClick={clearFilters}>Clear filters</button></div>}
       </div></details><ArtworkMotionControl /></div>
     </header>
-    {!searching && <ReadingPaths interactive />}
     {searching ? <div className="writing-gallery writing-results">{visible.map((article, index) => story(article, 'compact', index))}</div> : <>
       <div className="writing-gallery writing-selected">{selection.selected.map((article, index) => story(article, index === 0 ? 'lead' : index === 3 || index === 4 ? 'report' : 'selected', index))}</div>
+      <section className="writing-secondary" aria-labelledby="writing-paths"><h2 id="writing-paths">Reading paths</h2><ReadingPaths interactive /></section>
       {selection.more.length > 0 && <section className="writing-secondary" aria-labelledby="writing-more"><h2 id="writing-more">Further reading</h2><div className="writing-gallery">{selection.more.map((article, index) => story(article, 'compact', index + 7))}</div></section>}
       {selection.notes.length > 0 && <section className="writing-secondary writing-notes" aria-labelledby="writing-notes"><h2 id="writing-notes">Notes</h2><div className="writing-gallery">{selection.notes.map((article, index) => story(article, 'note', index + 16))}</div></section>}
     </>}

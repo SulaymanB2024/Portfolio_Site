@@ -15,6 +15,8 @@ import { WorkMaterials, WorkSources } from '../src/personal/projects/WorkMateria
 import type { WorkDocument } from '../src/personal/projects/work-document'
 import { searchMetadata, withSearchHead } from '../src/personal/search-metadata'
 import { PublicArticle } from './public-article'
+import { PublicWritingStories } from './public-writing'
+import ArtworkInkDefinitions from '../src/personal/editorial/ArtworkInk'
 import { withDocumentLinks } from './public-document-links'
 import { discoveryText } from './search-discovery'
 import { PersonalProfile } from '../src/personal/PersonalProfile'
@@ -28,6 +30,7 @@ import researchDiagramStyle from '../src/personal/editorial/research-diagrams.cs
 import researchComparisonStyle from '../src/personal/editorial/research-comparison.css?raw'
 import researchProcessStyle from '../src/personal/editorial/research-process.css?raw'
 import readingGuideStyle from '../src/personal/editorial/reading-guides.css?raw'
+import publicCoverStyle from '../src/personal/editorial/public-covers.css?raw'
 
 const dist = join(process.cwd(), 'dist')
 const template = await readFile(join(dist, 'index.html'), 'utf8')
@@ -54,8 +57,7 @@ function Body({ route }: { route: string }) {
   if (route.startsWith('writing/') && article) return <PublicArticle article={article} />
   if (route === 'writing') {
     const selection = writingSelection(catalog)
-    const pages = (items: { slug: string }[]) => items.map(article => publicPages.find(page => page.route === `writing/${article.slug}`)!)
-    return <><p>{siteCopy.writing.introduction}</p><ReadingPaths />{links(pages(selection.selected))}<h2>Further reading</h2>{links(pages(selection.more))}<h2>Notes</h2>{links(pages(selection.notes))}</>
+    return <><p>{siteCopy.writing.introduction}</p><PublicWritingStories articles={selection.selected} eagerFirst /><h2>Reading paths</h2><ReadingPaths /><h2>Further reading</h2><PublicWritingStories articles={selection.more} /><h2>Notes</h2><PublicWritingStories articles={selection.notes} /></>
   }
   if (route === 'work') {
     const workPages = publicPages.filter(page => page.route.startsWith('work/'))
@@ -75,7 +77,7 @@ function Body({ route }: { route: string }) {
 }
 
 const fallbackStyle = `<style>.static-site{max-width:76rem;margin:0 auto;padding:2rem 5vw;font:1.05rem/1.65 Georgia,serif;overflow-wrap:anywhere}.static-site header{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;border-bottom:1px solid #b7b1a4;padding-bottom:1rem}.static-site nav{display:flex;flex-wrap:wrap;gap:1rem}.static-site main{max-width:52rem;margin:3rem auto}.static-site h1{font-size:clamp(2.5rem,7vw,5rem);line-height:1.08}.static-site h2{margin-top:2rem}.static-site a{color:inherit}.static-site table{border-collapse:collapse}.static-site td,.static-site th{padding:.5rem;border:1px solid #b7b1a4}.static-site img{max-width:100%;height:auto}.static-site pre{overflow:auto}.static-site li{margin:.6rem 0}.static-site footer{border-top:1px solid #b7b1a4;padding-top:1rem}</style>`
-const readingFallbackStyle = `<style>.static-site{--ink:#24221e;--muted:#68665e;--line:#b7b1a4;--editorial-sans:Arial,sans-serif;--editorial-mono:monospace}${readingGuideStyle}.static-site .reading-paths,.static-site .reader-guide-paths{display:grid}</style>`
+const readingFallbackStyle = `<style>.static-site{--ink:#24221e;--muted:#68665e;--line:#b7b1a4;--editorial-sans:Arial,sans-serif;--editorial-mono:monospace}${readingGuideStyle}${publicCoverStyle}.static-site .reading-paths,.static-site .reader-guide-paths{display:grid}</style>`
 
 // Keep the two responsive rulers mutually exclusive before the reader mounts,
 // and when JavaScript is unavailable. Scope these rules to the static document.
@@ -98,9 +100,13 @@ ${researchComparisonStyle.replaceAll('.article-page .reader-prose', '.static-sit
 </style>`
 
 for (const page of [...publicPages, { route: '404', path: '/404', title: 'Page not found — Sulayman Bowles', description: 'This address does not exist.' }]) {
-  const body = withDocumentLinks(renderToStaticMarkup(<div className="static-site"><header><a href="/">Sulayman Bowles</a><nav aria-label="Main navigation">{publicPages.filter(p => !p.route.includes('/') && p.route).map(p => <a key={p.path} href={p.path}>{p.title.replace(' — Sulayman Bowles', '')}</a>)}</nav></header><main><h1>{page.route === '' ? siteCopy.home.title : page.title.replace(' — Sulayman Bowles', '')}</h1><p>{page.description}</p><Body route={page.route} /></main><footer><a href={`mailto:${contact.email}`}>{contact.email}</a> · <a href="/sitemap">All pages</a></footer></div>))
+  const rendered = renderToStaticMarkup(<div className="static-site">{(page.route === 'writing' || page.route.startsWith('writing/')) && <ArtworkInkDefinitions />}<header><a href="/">Sulayman Bowles</a><nav aria-label="Main navigation">{publicPages.filter(p => !p.route.includes('/') && p.route).map(p => <a key={p.path} href={p.path}>{p.title.replace(' — Sulayman Bowles', '')}</a>)}</nav></header><main><h1>{page.route === '' ? siteCopy.home.title : page.title.replace(' — Sulayman Bowles', '')}</h1><p>{page.description}</p><Body route={page.route} /></main><footer><a href={`mailto:${contact.email}`}>{contact.email}</a> · <a href="/sitemap">All pages</a></footer></div>)
+  // React emits image resource hints before the rendered root. Keep the first
+  // readable element in #root and place those hints in the document head.
+  const imageHints = rendered.match(/^(?:<link rel="preload" as="image"[^>]*\/>)+/)?.[0] || ''
+  const body = withDocumentLinks(rendered.slice(imageHints.length))
   const html = withSearchHead(template, searchMetadata(page.route))
-    .replace('</head>', () => `${fallbackStyle}${readingFallbackStyle}${page.route.startsWith('writing/') ? studyFallbackStyle : ''}</head>`)
+    .replace('</head>', () => `${imageHints}${fallbackStyle}${readingFallbackStyle}${page.route.startsWith('writing/') ? studyFallbackStyle : ''}</head>`)
     .replace('<div id="root"></div>', () => `<div id="root">${body}</div>`)
   const destination = page.path === '/' ? join(dist, 'index.html') : join(dist, page.path.slice(1), 'index.html')
   await mkdir(join(destination, '..'), { recursive: true }); await writeFile(destination, html)

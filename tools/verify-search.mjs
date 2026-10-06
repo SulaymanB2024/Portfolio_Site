@@ -17,6 +17,14 @@ const attributes = tag => Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*
 const catalog = JSON.parse(await read('src/personal/editorial/data/catalog.json'))
 const guides = JSON.parse(await read('src/personal/editorial/data/reader-guides.json'))
 const sourceAccess = JSON.parse(await read('src/personal/editorial/data/source-access.json'))
+const artworkSource = await read('src/personal/editorial/generative/manifest.ts')
+const artworkAssignments = new Map([...artworkSource.matchAll(/'([^']+)': '(yuru-\d+)'/g)].map(match => [match[1], match[2]]))
+const artworkCredits = new Map([...artworkSource.matchAll(/\['(yuru-\d+)', '[^']+', '(\d+)'\]/g)].map(match => [match[1], `https://x.com/yuruyurau/status/${match[2]}`]))
+const coverPoster = article => {
+  const sketch = artworkAssignments.get(article.path)
+  assert(sketch, `Missing assigned cover: ${article.slug}`)
+  return `/images/generative-art/${sketch}.webp`
+}
 assert.deepEqual(Object.keys(guides).sort(), catalog.map(article => article.slug).sort(), 'Every essay has one reading guide')
 assert(Object.keys(sourceAccess.articles).every(slug => catalog.some(article => article.slug === slug)), 'Source access notes belong to published essays')
 const sitemap = await read('dist/sitemap.xml')
@@ -100,6 +108,25 @@ for (const url of urls) {
   assert(!body.includes('href="#/'), `Fragment route in initial HTML: ${url.pathname}`)
   const links = new Set([...body.matchAll(/<a\b[^>]*>/g)].map(match => attributes(match[0]).href))
   const elementIds = new Set([...body.matchAll(/\bid="([^"]+)"/g)].map(match => decode(match[1])))
+  if (article || url.pathname === '/writing') assert(elementIds.has('artwork-ink'), `Missing shared cover ink treatment: ${url.pathname}`)
+  if (url.pathname === '/writing') {
+    const cards = [...body.matchAll(/<a\b[^>]*class="public-writing-story"[^>]*>[^]*?<\/a>/g)].map(match => match[0])
+    assert.equal(cards.length, catalog.length, 'Every writing entry must retain its cover card')
+    const seen = new Set()
+    for (const card of cards) {
+      const tag = attributes(card.match(/^<a\b[^>]*>/)[0])
+      const entry = catalog.find(article => article.slug === tag['data-slug'])
+      assert(entry && !seen.has(entry.slug), `Unknown/duplicate writing card: ${tag['data-slug']}`)
+      seen.add(entry.slug)
+      assert.equal(tag.href, entry.path, `Cover must open its own essay: ${entry.slug}`)
+      const posters = [...card.matchAll(/<img\b[^>]*>/g)].map(match => attributes(match[0]))
+      assert.equal(posters.length, 1, `Missing/duplicate writing cover: ${entry.slug}`)
+      assert.equal(posters[0].src, coverPoster(entry), `Writing cover assignment drift: ${entry.slug}`)
+      assert.equal(posters[0].alt, '', 'Card text names the decorative cover')
+      assert.equal(posters[0].width, '400'); assert.equal(posters[0].height, '400')
+    }
+    assert(body.indexOf('class="public-writing-story"') < body.indexOf('aria-label="Reading paths"'), 'Featured covers must precede reading paths')
+  }
   if (['/', '/about'].includes(url.pathname)) {
     assert(decode(body).includes(person.description), `Visible biography/schema drift: ${url.pathname}`)
     // Verified profiles remain in the identity schema; the homepage intentionally
@@ -111,6 +138,16 @@ for (const url of urls) {
   }
   if (article) {
     const source = JSON.parse(await read(`src/personal/editorial/data/articles/${article.slug}.json`))
+    const cover = body.match(/<figure\b[^>]*class="public-article-cover"[^>]*>([^]*?)<\/figure>/)
+    assert(cover, `Article cover absent from initial HTML: ${article.slug}`)
+    assert.equal(attributes(cover[0].match(/^<figure\b[^>]*>/)[0])['data-sketch'], artworkAssignments.get(article.path))
+    const poster = attributes(cover[1].match(/<img\b[^>]*>/)?.[0] || '')
+    assert.equal(poster.src, coverPoster(article), `Article cover assignment drift: ${article.slug}`)
+    assert(poster.alt?.trim(), `Article cover needs a description: ${article.slug}`)
+    assert.equal(poster.width, '400'); assert.equal(poster.height, '400'); assert.equal(poster.loading, 'eager')
+    const posterMetadata = await sharp(join('dist', poster.src)).metadata()
+    assert.equal(posterMetadata.width, 400); assert.equal(posterMetadata.height, 400)
+    assert(cover[1].includes(artworkCredits.get(artworkAssignments.get(article.path))), `Original artwork credit missing: ${article.slug}`)
     const guide = guides[article.slug]
     assert(decode(body).includes(guide.question) && decode(body).includes(guide.answer), `Guide absent from initial response: ${article.slug}`)
     assert.equal(new Set(guide.paths.map(path => path.section)).size, 3, `Distinct reading tasks: ${article.slug}`)

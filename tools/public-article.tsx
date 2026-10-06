@@ -13,6 +13,8 @@ import ReaderGuide from '../src/personal/editorial/ReaderGuide'
 import SourceAccessNotes from '../src/personal/editorial/SourceAccessNotes'
 import AnswerNotes from '../src/personal/editorial/AnswerNotes'
 import { readerModifiedDate, questionAnchor } from '../src/personal/editorial/answer-notes'
+import { ArtPoster } from '../src/personal/editorial/ArtPoster'
+import { getArticleGenerativeArtwork } from '../src/personal/editorial/generative/manifest'
 
 const paragraphs = (values: string[] = []) => values.map((value, index) => <p key={index}>{inlineText(value)}</p>)
 
@@ -57,10 +59,15 @@ export function PublicArticle({ article }: { article: WritingArticle }) {
   const image = article.pageContent?.hero?.image
   const downloads = articleDownloads(article)
   const modified = readerModifiedDate(article.slug, article.dateModified)
+  const artwork = getArticleGenerativeArtwork(article.path)
   return <>
     <p><a href="/about" rel="author">Sulayman Bowles</a> · <time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time>
       {modified && modified !== article.date.replaceAll('.', '-') && <> · Updated <time dateTime={modified}>{displayDate(modified)}</time></>}
     </p>
+    <figure className="public-article-cover" data-sketch={artwork.sketchId}>
+      <ArtPoster artwork={artwork} eager baseURL="/" />
+      <figcaption>{artwork.title} · <a href={artwork.attribution.sourceUrl} target="_blank" rel="noreferrer" aria-label={`Original ${artwork.title} sketch by @yuruyurau`}>@yuruyurau ↗</a></figcaption>
+    </figure>
     {image && <figure><img src={image.src} alt={image.alt} loading="lazy" />{image.caption && <figcaption>{image.caption}</figcaption>}</figure>}
     <ReaderGuide slug={article.slug} />
     {article.htmlBody ? <><OpeningNotes article={article} boundary /><RestoredArticleBody html={article.htmlBody} /></> : markdown ? <>{markdownToReact(markdown)}<OpeningNotes article={article} boundary /></> : <>
