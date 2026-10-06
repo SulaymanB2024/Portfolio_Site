@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { readFile, mkdir, mkdtemp, writeFile, rm } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { tmpdir } from 'node:os'
 import { portfolioRuntimeAssets } from '../tools/portfolio-runtime-assets.mjs'
 
 const root = resolve(import.meta.dirname, '..')
@@ -48,7 +49,7 @@ test('development and server rendering retain canonical paths without emitting m
 
 
 test('a stale validation hash blocks production delivery before model emission', async () => {
-  const temporary = await mkdtemp(resolve(root, '.cache/stale-runtime-'))
+  const temporary = await mkdtemp(resolve(tmpdir(), 'portfolio-stale-runtime-'))
   try {
     await mkdir(resolve(temporary, 'public/portfolio-models'), { recursive: true })
     await writeFile(resolve(temporary, 'public/portfolio-models/helmet.glb'), 'changed bytes')
