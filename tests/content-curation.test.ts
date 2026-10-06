@@ -53,21 +53,23 @@ test('every original path, alias and reader bookmark opens its own article', () 
   assert(archived.every(article => catalog.some(item => item.slug === article.slug) || withdrawnArticleSlugs.includes(article.slug)))
 })
 
-test('withdrawn notes leave discovery and route their old URLs directly to the surviving explanation', () => {
-  assert.equal(withdrawnArticleSlugs.length, 5)
-  for (const slug of withdrawnArticleSlugs) {
-    assert(!catalog.some(item => item.slug === slug))
-    assert(!publicPages.some(page => page.route === `writing/${slug}`))
+test('previously withdrawn manuscripts keep their own canonical response and bookmarks', () => {
+  assert.equal(withdrawnArticleSlugs.length, 0)
+  for (const slug of ['canonicalization-graph-consistency', 'internal-links-directed-retrieval-graph', 'robots-txt-courtesy-not-access-control', 'structured-data-without-content-drift', 'audit-findings-derived-records']) {
+    const article = catalog.find(item => item.slug === slug)!
+    assert(article)
+    assert(publicPages.some(page => page.route === `writing/${slug}`))
     const retained = archived.find(item => item.slug === slug)!
     assert(retained)
     for (const path of [retained.path, ...(retained.aliases || []), `/writing/${slug}`]) {
-      assert.equal(resolveRoute('', path, catalog), 'writing/atlas-building-an-evidence-console')
-      assert.equal(resolveRoute(`#${path}`, '/', catalog), 'writing/atlas-building-an-evidence-console')
-      assert(['findings', 'capture'].includes(consolidatedDestination(path)!.section!))
-      assert.equal(articleSection(`#${path}?section=withdrawn-target`), consolidatedDestination(path)!.section)
+      assert.equal(resolveRoute('', path, catalog), `writing/${slug}`)
+      assert.equal(resolveRoute(`#${path}`, '/', catalog), `writing/${slug}`)
+      assert.equal(consolidatedDestination(path), undefined)
+      assert.equal(articleSection(`#${path}?section=reader-target`), 'reader-target')
       const redirects = hosting.routes.slice(0, hosting.routes.findIndex((route: any) => route.handle === 'filesystem'))
       const redirect = redirects.find((route: any) => !route.has && route.headers?.Location && new RegExp(`^(?:${route.src})$`).test(path))
-      assert.equal(redirect?.headers.Location, `/writing/atlas-building-an-evidence-console#${consolidatedDestination(path)!.section}`)
+      if (path === article.path) assert.equal(redirect, undefined, 'Canonical article must reach the filesystem')
+      else assert.equal(redirect?.headers.Location, article.path, 'Alias redirects directly to its own article')
     }
     assert(readFileSync(new URL(`../src/personal/editorial/data/articles/${slug}.json`, import.meta.url)).length > 0)
   }

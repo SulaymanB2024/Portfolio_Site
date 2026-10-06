@@ -1,0 +1,15 @@
+# Personal-site analytics
+
+The public site uses the native Google tag for measurement ID `G-9VQ15148TG`. `src/personal/analytics.ts` loads it asynchronously only on HTTPS `sulayman-bowles.dev` and `www.sulayman-bowles.dev`. Local and Vercel preview hosts do not initialize tracking.
+
+The route effect records a manual `page_view` after `updateSearchHead` updates the title and canonical. The event location is a known public canonical path, including for hash navigation. Repeated route effects and changes to article sections do not create views; returning to an earlier page does. Virtual referrers use the preceding canonical page. Incoming external referrers retain only their origin; searches, hashes, credentials and arbitrary paths are excluded. No click, form or personal-data events are added by this integration.
+
+The tag uses `send_page_view: false` on every configuration call, disables Google signals and advertising personalization, and uses denied advertising consent. Subsequent configurations use `update: true` to associate engagement with the new virtual page. The implementation queues commands without awaiting the remote tag and catches analytics errors so navigation remains available.
+
+GA4 Enhanced Measurement has an independent **Page changes based on browser history events** setting. Google documents that `send_page_view: false` does not disable that setting. Before publication, an authorized account owner must disable that one history setting in the web stream, while retaining Page loads and other enhanced measurements. This repository does not change account settings or bypass them; local deduplication cannot suppress provider-generated history events. The code installs no additional history or hash listeners.
+
+After publication, verify one initial view and one view per distinct canonical navigation in Realtime or DebugView, including a direct article entry, a hash route, back navigation and an article section change. Confirm the expected canonical location, title and preceding-page referrer, and check the browser for CSP errors. Local checks verify queued commands and policy configuration; they do not establish delivery to Google.
+
+The CSP allows the exact loader host `www.googletagmanager.com` and collection hosts `www.google-analytics.com` and `region1.google-analytics.com`, plus connections to the loader host. Scripts retain same-origin execution, the existing WASM permission, and no inline/event-handler permission. It adds no wildcard Google, advertising, Tag Manager preview or third-party frame access. Native requests to any other endpoint remain blocked and must be verified before expanding this policy.
+
+Sources: [manual pageviews and history measurement](https://developers.google.com/analytics/devguides/collection/ga4/views), [SPA referrers and validation](https://developers.google.com/analytics/devguides/collection/ga4/single-page-applications), [configuration reference](https://developers.google.com/analytics/devguides/collection/ga4/reference/config), [Google tag CSP guidance without advertising features](https://developers.google.com/tag-platform/security/guides/csp).

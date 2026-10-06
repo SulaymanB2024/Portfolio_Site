@@ -12,6 +12,10 @@ const decode = text => text.replace(/&(amp|quot|apos|lt|gt|#\d+|#x[\da-f]+);/gi,
 })
 const attributes = tag => Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map(match => [match[1], decode(match[2])]))
 const catalog = JSON.parse(await read('src/personal/editorial/data/catalog.json'))
+const guides = JSON.parse(await read('src/personal/editorial/data/reader-guides.json'))
+const sourceAccess = JSON.parse(await read('src/personal/editorial/data/source-access.json'))
+assert.deepEqual(Object.keys(guides).sort(), catalog.map(article => article.slug).sort(), 'Every essay has one reading guide')
+assert(Object.keys(sourceAccess.articles).every(slug => catalog.some(article => article.slug === slug)), 'Source access notes belong to published essays')
 const sitemap = await read('dist/sitemap.xml')
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => new URL(decode(match[1])))
 assert.equal(new Set(urls.map(url => url.href)).size, urls.length, 'Duplicate sitemap entries')
@@ -99,6 +103,23 @@ for (const url of urls) {
   const article = catalog.find(article => article.path === url.pathname)
   if (article) {
     const source = JSON.parse(await read(`src/personal/editorial/data/articles/${article.slug}.json`))
+    const guide = guides[article.slug]
+    assert(decode(body).includes(guide.question) && decode(body).includes(guide.answer), `Guide absent from initial response: ${article.slug}`)
+    assert.equal(new Set(guide.paths.map(path => path.section)).size, 3, `Distinct reading tasks: ${article.slug}`)
+    for (const path of guide.paths) {
+      assert(elementIds.has(path.section), `Broken guide destination: ${article.slug}#${path.section}`)
+      assert(links.has(`#${encodeURIComponent(path.section)}`), `Missing guide link: ${article.slug}#${path.section}`)
+    }
+    for (const evidence of guide.sources) {
+      assert(links.has(evidence.href), `Missing guide source: ${article.slug}`)
+      assert(JSON.stringify(source).includes(evidence.href), `Guide introduces an unreviewed source: ${article.slug}`)
+    }
+    for (const note of sourceAccess.articles[article.slug] || []) {
+      assert(JSON.stringify(source).includes(note.href), `Access note must preserve an actual original citation: ${article.slug}`)
+      assert(elementIds.has('source-access-notes') && links.has('#source-access-notes'), `Access alternatives are not reachable: ${article.slug}`)
+      assert(links.has(note.href) && decode(body).includes(note.note), `Historical citation/access note missing: ${article.slug}`)
+      for (const alternative of note.alternatives) assert(links.has(alternative.href), `Missing source access alternative: ${article.slug}`)
+    }
     const node = graph.find(node => node['@type'] === 'Article')
     assert(node, `Missing article entity: ${article.slug}`)
     assert.equal(node.headline, decode(h1[0][1]))
@@ -132,7 +153,7 @@ for (const url of urls) {
     assert.equal(meta['og:type'], 'website')
     assert(!keys.some(key => key.startsWith('article:')), `Leaked article metadata: ${url.pathname}`)
   }
-  if (['/work', '/writing'].includes(url.pathname)) {
+  if (['/work', '/writing'].includes(url.pathname) || url.pathname.startsWith('/topics/')) {
     const list = graph.find(node => node['@type'] === 'ItemList')
     assert(list?.itemListElement.length, `Missing collection contents: ${url.pathname}`)
     for (const item of list.itemListElement) assert(links.has(new URL(item.url).pathname), `Collection item missing from HTML: ${item.url}`)

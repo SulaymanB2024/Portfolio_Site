@@ -82,7 +82,7 @@ test('metadata treats markup and replacement tokens as literal text', () => {
 
 test('initial article links resolve to real documents and retain section targets', () => {
   assert.equal(documentHref('#/writing/the-first-ai-managers?section=case-inventory&from=%23%2Fwriting'), '/research/ai-systems/the-first-ai-managers#case-inventory')
-  assert.equal(documentHref('#/writing/structured-data-without-content-drift'), '/writing/atlas-building-an-evidence-console#findings')
+  assert.equal(documentHref('#/writing/structured-data-without-content-drift'), '/research/technical-seo/structured-data-without-content-drift')
   assert.equal(documentHref('#source-s1'), '#source-s1')
   assert.equal(withDocumentLinks('<a href="#/writing/the-first-ai-managers?section=case-inventory&amp;from=other">Study</a>'), '<a href="/research/ai-systems/the-first-ai-managers#case-inventory">Study</a>')
   assert.throws(() => documentHref('#/missing-page'), /Unresolved public link/)

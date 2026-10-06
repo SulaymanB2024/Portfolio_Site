@@ -1,0 +1,33 @@
+import { findReadingTopic, readingTopics, topicReadings } from './topics'
+import './reading-guides.css'
+
+export function ReadingPaths({ interactive = false }: { interactive?: boolean }) {
+  return <nav className="reading-paths" aria-label="Reading paths">
+    {readingTopics.map(topic => <a key={topic.slug} href={`${interactive ? '#' : ''}/topics/${topic.slug}`}>
+      <span className="eyebrow">{topic.readings.length} essays</span>
+      <h2>{topic.title}</h2><p>{topic.description}</p><span className="reading-path-action">Explore the reading path <span aria-hidden="true">↗</span></span>
+    </a>)}
+  </nav>
+}
+
+export function TopicBody({ slug, interactive = false }: { slug: string; interactive?: boolean }) {
+  const topic = findReadingTopic(slug)
+  if (!topic) return null
+  return <>
+    <div className="topic-introduction">{topic.introduction.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
+    <ol className="topic-readings">{topicReadings(topic).map(({ article, reason }, index) => <li key={article.slug}>
+      <span className="reading-step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+      <div><h2><a href={interactive ? `#/writing/${article.slug}` : article.path}>{article.displayTitle || article.title}</a></h2><p>{reason}</p><span className="reading-duration">{article.readTime}</span></div>
+    </li>)}</ol>
+    <p className="topic-return"><a href={interactive ? '#/writing' : '/writing'}>Browse all writing <span aria-hidden="true">↗</span></a></p>
+  </>
+}
+
+export default function TopicPage({ slug }: { slug: string }) {
+  const topic = findReadingTopic(slug)
+  if (!topic) return <section className="topic-page"><h1>Reading path not found</h1><a href="#/writing">Browse writing</a></section>
+  return <section className="topic-page">
+    <header><a className="eyebrow" href="#/writing">Writing / Reading paths</a><h1>{topic.title}</h1><p className="topic-deck">{topic.description}</p></header>
+    <TopicBody slug={slug} interactive />
+  </section>
+}

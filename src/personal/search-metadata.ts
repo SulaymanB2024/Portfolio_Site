@@ -3,6 +3,7 @@ import { publicPages, siteOrigin } from './public-pages.ts'
 import { siteMetadata } from './site-copy.ts'
 import { identity } from './identity.ts'
 import type { ArticleSummary } from './editorial/types.ts'
+import { findReadingTopic, topicReadings } from './editorial/topics.ts'
 
 export const personId = `${siteOrigin}/#person`
 export const websiteId = `${siteOrigin}/#website`
@@ -70,7 +71,8 @@ export function searchMetadata(route: string): SearchMetadata {
   const modified = sourceDate(article?.dateModified)
   const reference = (id: string) => ({ '@id': id })
   const profile = normalized === 'about' || normalized === 'resume'
-  const collection = normalized === 'writing' || normalized === 'work'
+  const topic = normalized.startsWith('topics/') ? findReadingTopic(normalized.slice('topics/'.length)) : undefined
+  const collection = normalized === 'writing' || normalized === 'work' || Boolean(topic)
   const webpageId = `${canonical}#webpage`
   const imageId = `${image.url}#image`
   const graph: SchemaNode[] = [
@@ -114,7 +116,7 @@ export function searchMetadata(route: string): SearchMetadata {
   })
   if (collection) graph.push({
     '@type': 'ItemList', '@id': `${canonical}#list`,
-    itemListElement: publicPages.filter(item => item.route.startsWith(`${normalized}/`)).map((item, index) => ({
+    itemListElement: (topic ? topicReadings(topic).map(({ article }) => ({ path: article.path, title: article.displayTitle || article.title })) : publicPages.filter(item => item.route.startsWith(`${normalized}/`))).map((item, index) => ({
       '@type': 'ListItem', position: index + 1, url: `${siteOrigin}${item.path}`,
       name: item.title.replace(' — Sulayman Bowles', ''),
     })),
