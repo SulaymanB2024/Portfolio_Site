@@ -179,6 +179,7 @@ export function withSearchHead(template: string, metadata: SearchMetadata) {
   const tags = metadataTags(metadata).map(tag => `<meta ${tag.attribute}="${tag.key}" content="${escapeMetadata(tag.value)}" />`).join('\n')
   const schema = metadata.schema ? `<script id="page-schema" data-route="${escapeMetadata(metadata.route)}" type="application/ld+json">${serializeSchema(metadata.schema)}</script>` : ''
   return template
+    .replace(/<link\b[^>]*\bdata-machine-discovery(?:=["'][^"']*["'])?[^>]*>/gi, '')
     .replace(/<link\b[^>]*type=["']application\/atom\+xml["'][^>]*>/gi, '')
     .replace(/<title>[^]*?<\/title>/gi, '')
     .replace(/<meta\b[^>]*>/gi, tag => {
@@ -187,5 +188,5 @@ export function withSearchHead(template: string, metadata: SearchMetadata) {
     })
     .replace(/<link\b[^>]*\brel=["']canonical["'][^>]*>/gi, '')
     .replace(/<script\b[^>]*\bid=["']page-schema["'][^>]*>[^]*?<\/script>/gi, '')
-    .replace('</head>', () => `<title>${escapeMetadata(metadata.title)}</title>\n<link rel="canonical" href="${escapeMetadata(metadata.canonical)}" />\n<link rel="alternate" type="application/atom+xml" title="Sulayman Bowles — Writing" href="${siteOrigin}/feed.xml" />\n${tags}\n${schema}\n</head>`)
+    .replace('</head>', () => `<title>${escapeMetadata(metadata.title)}</title>\n<link rel="canonical" href="${escapeMetadata(metadata.canonical)}" />\n<link rel="alternate" type="application/atom+xml" title="Sulayman Bowles — Writing" href="${siteOrigin}/feed.xml" />\n<link data-machine-discovery="directory" rel="describedby" type="text/plain" href="${siteOrigin}/llms.txt" />\n<link data-machine-discovery="profile" rel="describedby" type="application/json" href="${siteOrigin}/machine/profile.json" />\n${tags}\n${schema}\n</head>`)
 }

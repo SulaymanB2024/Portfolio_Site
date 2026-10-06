@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-07-20",
   "canonical_host": "https://sulayman-bowles.dev",
-  "objective": "Evidence-backed technical SEO diagnostic references for issue, platform, and audit-checklist queries.",
+  "objective": "Historical snapshot of technical SEO diagnostic references and illustrative fixtures.",
   "claim_boundaries": [
     "Fixtures are illustrative and Atlas-compatible; they are not client crawl evidence or claims about a live third-party site.",
     "Publication and discovery do not guarantee indexation, rankings, impressions, clicks, backlinks, leads, or revenue.",
@@ -2594,5 +2594,8 @@
       "indexable": true,
       "last_verified": "2026-09-10"
     }
-  ]
+  ],
+  "status": "historical",
+  "currentReferenceIndex": "https://sulayman-bowles.dev/machine/references.json",
+  "historicalNote": "Preserved source snapshot. Listed routes and verification dates describe the historical publication, not the current website. Some routes now redirect or are retired; use the current reference index for available canonical documents."
 }
