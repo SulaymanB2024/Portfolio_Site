@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const HOST = 'sulayman-bowles.dev';
 const SITE_URL = `https://${HOST}`;
@@ -16,11 +17,12 @@ function extractSitemapUrls(xml) {
   return Array.from(xml.matchAll(/<loc>([^<]+)<\/loc>/g), (match) => match[1].trim());
 }
 
-function validateUrlList(urls) {
+export function validateUrlList(urls) {
+  if (!urls.length || urls.length > 10_000) throw new Error('IndexNow requires 1–10,000 URLs.');
   for (const value of urls) {
     const url = new URL(value);
-    if (url.hostname !== HOST) {
-      throw new Error(`IndexNow URL must belong to ${HOST}: ${value}`);
+    if (url.origin !== SITE_URL || url.username || url.password || url.search || url.hash) {
+      throw new Error(`IndexNow URL must use a canonical HTTPS path on ${HOST}: ${value}`);
     }
   }
 }
@@ -37,24 +39,17 @@ async function readHostedKey() {
 }
 
 async function readDefaultUrlList() {
-  let sitemapXml;
-  try {
-    sitemapXml = await readTextFile(path.join('dist', 'sitemap.xml'));
-  } catch {
-    sitemapXml = await readTextFile(path.join('public', 'sitemap.xml'));
-  }
-
+  // The checked-in sitemap is a historical input. Submit the current build's
+  // canonical URLs, never retired redirects from the old research catalog.
+  const sitemapXml = await readTextFile(path.join('dist', 'sitemap.xml'));
   const sitemapUrls = extractSitemapUrls(sitemapXml);
 
   return uniqueUrls([
     ...sitemapUrls,
     `${SITE_URL}/llms.txt`,
-    `${SITE_URL}/research`,
-    `${SITE_URL}/research/authority-assets.json`,
-    `${SITE_URL}/research/article-research-briefs.json`,
-    `${SITE_URL}/research/ai-search-crawler-policy-sources.csv`,
-    `${SITE_URL}/research/austin-crawlability-benchmark-pilot.csv`,
-    `${SITE_URL}/research/austin-crawlability-benchmark-summary.json`,
+    `${SITE_URL}/llms-full.txt`,
+    `${SITE_URL}/machine/profile.json`,
+    `${SITE_URL}/machine/references.json`,
   ]);
 }
 
@@ -84,8 +79,14 @@ async function main() {
     return;
   }
 
+  const hostedKey = await fetch(KEY_LOCATION, { redirect: 'error', signal: AbortSignal.timeout(15_000) });
+  if (!hostedKey.ok || (await hostedKey.text()).trim() !== KEY) {
+    throw new Error('Production IndexNow ownership file is missing or mismatched.');
+  }
+
   const response = await fetch(ENDPOINT, {
     method: 'POST',
+    signal: AbortSignal.timeout(30_000),
     headers: {
       'content-type': 'application/json; charset=utf-8',
     },
@@ -115,7 +116,9 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exitCode = 1;
+  });
+}
