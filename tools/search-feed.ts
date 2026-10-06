@@ -3,6 +3,7 @@ import { sourceDate } from '../src/personal/search-metadata.ts'
 import { identity } from '../src/personal/identity.ts'
 import { withWritingCopy } from '../src/personal/site-copy.ts'
 import type { ArticleSummary } from '../src/personal/editorial/types.ts'
+import { readerModifiedDate } from '../src/personal/editorial/answer-notes.ts'
 
 const xml = (value: string) => value.replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[character]!))
 const timestamp = (value: string) => {
@@ -16,7 +17,7 @@ export function writingFeed(articles: ArticleSummary[]) {
   if (!articles.length) throw new Error('A writing feed needs published articles')
   const entries = articles.map(withWritingCopy).map(article => {
     const published = timestamp(article.date)
-    const updated = timestamp(article.dateModified || article.date)
+    const updated = timestamp(readerModifiedDate(article.slug, article.dateModified) || article.date)
     if (updated < published) throw new Error(`Feed modification predates publication: ${article.slug}`)
     const url = new URL(article.path, siteOrigin)
     if (url.origin !== siteOrigin || url.search || url.hash) throw new Error(`Invalid canonical feed path: ${article.path}`)

@@ -19,6 +19,7 @@ import { withDocumentLinks } from './public-document-links'
 import { discoveryText } from './search-discovery'
 import { PersonalProfile } from '../src/personal/PersonalProfile'
 import { writingFeed } from './search-feed'
+import { searchSitemap } from './search-sitemap'
 import { featuredWorkSlugs } from '../src/personal/projects/work-curation'
 import { writingSelection } from '../src/personal/editorial/writing-selection'
 import { ReadingPaths, TopicBody } from '../src/personal/editorial/TopicPage'
@@ -107,7 +108,7 @@ for (const page of [...publicPages, { route: '404', path: '/404', title: 'Page n
   // Retain the directory form for ordinary static hosts.
   if (page.path !== '/') await writeFile(join(dist, `${page.path.slice(1)}.html`), html)
 }
-await writeFile(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${publicPages.map(page => `<url><loc>${siteOrigin}${page.path}</loc></url>`).join('')}</urlset>\n`)
+await writeFile(join(dist, 'sitemap.xml'), searchSitemap())
 const sitemapHead = { ...searchMetadata('404'), route: 'sitemap', title: 'All pages — Sulayman Bowles', description: 'Work, writing, biography, résumé, and contact pages by Sulayman Bowles.', canonical: `${siteOrigin}/sitemap` }
 await writeFile(join(dist, 'sitemap.html'), withSearchHead(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">${fallbackStyle}</head><body>${renderToStaticMarkup(<main className="static-site"><h1>All pages</h1>{links(publicPages)}</main>)}</body></html>`, sitemapHead))
 const discoverySource = await readFile(join(process.cwd(), 'public/llms.txt'), 'utf8')

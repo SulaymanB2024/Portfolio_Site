@@ -1,9 +1,11 @@
 import catalog from './editorial/data/catalog.json' with { type: 'json' }
+import readerGuides from './editorial/data/reader-guides.json' with { type: 'json' }
 import { publicPages, siteOrigin } from './public-pages.ts'
 import { siteMetadata } from './site-copy.ts'
 import { identity } from './identity.ts'
 import type { ArticleSummary } from './editorial/types.ts'
-import { findReadingTopic, topicReadings } from './editorial/topics.ts'
+import { articleTopic, findReadingTopic, topicReadings } from './editorial/topics.ts'
+import { answerNotes, readerModifiedDate } from './editorial/answer-notes.ts'
 
 export const personId = `${siteOrigin}/#person`
 export const websiteId = `${siteOrigin}/#website`
@@ -47,6 +49,12 @@ export function sourceDate(value?: string) {
   return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === date ? date : undefined
 }
 
+function readerCitations(slug: string) {
+  const guideSources = (readerGuides as Record<string, { sources: { href: string }[] }>)[slug]?.sources || []
+  const noteSources = answerNotes(slug)?.questions.flatMap(note => note.sources) || []
+  return [...new Set([...guideSources, ...noteSources].map(({ href }) => href.startsWith('/') ? new URL(href, siteOrigin).href : href))]
+}
+
 export function searchMetadata(route: string): SearchMetadata {
   const normalized = route === 'home' ? '' : route
   const page = publicPages.find(page => page.route === normalized)
@@ -68,7 +76,7 @@ export function searchMetadata(route: string): SearchMetadata {
     ...(size ? { width: size[0], height: size[1] } : {}),
   }
   const published = sourceDate(article?.date)
-  const modified = sourceDate(article?.dateModified)
+  const modified = article ? sourceDate(readerModifiedDate(article.slug, article.dateModified)) : undefined
   const reference = (id: string) => ({ '@id': id })
   const profile = normalized === 'about' || normalized === 'resume'
   const topic = normalized.startsWith('topics/') ? findReadingTopic(normalized.slice('topics/'.length)) : undefined
@@ -98,6 +106,7 @@ export function searchMetadata(route: string): SearchMetadata {
       ...(profile ? { mainEntity: reference(personId) } : {}),
       ...(article ? { mainEntity: reference(`${canonical}#article`) } : {}),
       ...(collection ? { mainEntity: reference(`${canonical}#list`) } : {}),
+      ...(topic ? { dateModified: sourceDate(topic.questionsUpdated) } : {}),
     },
     {
       '@type': 'ImageObject', '@id': imageId, url: image.url,
@@ -105,15 +114,29 @@ export function searchMetadata(route: string): SearchMetadata {
       ...(size ? { width: size[0], height: size[1] } : {}),
     },
   ]
-  if (article) graph.push({
-    '@type': 'Article', '@id': `${canonical}#article`, url: canonical,
-    headline: article.displayTitle || article.title, description,
-    author: reference(personId), publisher: reference(personId),
-    mainEntityOfPage: reference(webpageId), isPartOf: reference(websiteId),
-    image: reference(imageId), inLanguage: 'en-US', articleSection: article.category,
-    ...(published ? { datePublished: published } : {}),
-    ...(modified ? { dateModified: modified } : {}),
-  })
+  if (article) {
+    const parent = articleTopic(article.slug)
+    const parentUrl = parent ? `${siteOrigin}/topics/${parent.slug}` : undefined
+    const parentId = parentUrl ? `${parentUrl}#webpage` : undefined
+    if (parent && parentId) graph.push({
+      '@type': 'CollectionPage', '@id': parentId, url: parentUrl,
+      name: `${parent.title} — Sulayman Bowles`, description: parent.description,
+      inLanguage: 'en-US', isPartOf: reference(websiteId),
+      dateModified: sourceDate(parent.questionsUpdated),
+    })
+    const citation = readerCitations(article.slug)
+    graph.push({
+      '@type': 'Article', '@id': `${canonical}#article`, url: canonical,
+      headline: article.displayTitle || article.title, description,
+      author: reference(personId), publisher: reference(personId),
+      mainEntityOfPage: reference(webpageId),
+      isPartOf: parentId ? [reference(websiteId), reference(parentId)] : reference(websiteId),
+      image: reference(imageId), inLanguage: 'en-US', articleSection: article.category,
+      ...(citation.length ? { citation } : {}),
+      ...(published ? { datePublished: published } : {}),
+      ...(modified ? { dateModified: modified } : {}),
+    })
+  }
   if (collection) graph.push({
     '@type': 'ItemList', '@id': `${canonical}#list`,
     itemListElement: (topic ? topicReadings(topic).map(({ article }) => ({ path: article.path, title: article.displayTitle || article.title })) : publicPages.filter(item => item.route.startsWith(`${normalized}/`))).map((item, index) => ({
@@ -123,7 +146,7 @@ export function searchMetadata(route: string): SearchMetadata {
   })
   return {
     route: normalized,
-    title: pageTitles[normalized] || (article ? `${article.seoTitle || article.title} — Sulayman Bowles` : page.title),
+    title: pageTitles[normalized] || (article ? `${article.seoTitle || article.title} — Sulayman Bowles` : topic ? `${topic.seoTitle} — Sulayman Bowles` : page.title),
     description, canonical, robots: indexRobots, image,
     ...(article && published ? { article: { published, ...(modified ? { modified } : {}), section: article.category } } : {}),
     schema: { '@context': 'https://schema.org', '@graph': graph },

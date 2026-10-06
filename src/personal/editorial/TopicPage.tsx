@@ -1,4 +1,6 @@
-import { findReadingTopic, readingTopics, topicReadings } from './topics'
+import { findReadingTopic, readingTopics, topicReadings, topicQuestions } from './topics'
+import { sectionHref } from './library'
+import { displayDate } from './types'
 import './reading-guides.css'
 
 export function ReadingPaths({ interactive = false }: { interactive?: boolean }) {
@@ -15,6 +17,8 @@ export function TopicBody({ slug, interactive = false }: { slug: string; interac
   if (!topic) return null
   return <>
     <div className="topic-introduction">{topic.introduction.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
+    <nav className="topic-questions" aria-labelledby="topic-questions-title"><h2 id="topic-questions-title">Start with a question</h2><ul>{topicQuestions(topic).map(({ question, section, article }) => <li key={question}><a href={interactive ? sectionHref(`#/writing/${article.slug}`, section) : `${article.path}#${encodeURIComponent(section)}`}>{question}</a></li>)}</ul></nav>
+    <p className="reading-duration">Question paths added <time dateTime={topic.questionsUpdated}>{displayDate(topic.questionsUpdated)}</time>.</p>
     <ol className="topic-readings">{topicReadings(topic).map(({ article, reason }, index) => <li key={article.slug}>
       <span className="reading-step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
       <div><h2><a href={interactive ? `#/writing/${article.slug}` : article.path}>{article.displayTitle || article.title}</a></h2><p>{reason}</p><span className="reading-duration">{article.readTime}</span></div>
