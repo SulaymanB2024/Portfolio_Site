@@ -17,6 +17,7 @@ import { sculptureRestWeight, sculptureLivingPose, sculptureAnimationActive, mec
 import { PortfolioRuntime } from '../portfolio-runtime.ts'
 import { dragHelmet, helmetGesture, helmetKey, settleHelmet, type HelmetTurn, type HelmetGesture } from './helmet-interaction.ts'
 import { setDestinationLabel } from '../link-arrow.ts'
+import { PORTFOLIO_DITHER_GLSL } from '../dither-kernel.ts'
 
 export interface LandingElements {
   rail: HTMLElement
@@ -48,7 +49,8 @@ type Portal = {
 const rotations = LANDING_ART.map(art => art.rotation)
 const screenFragmentShader = `
 uniform sampler2D a;uniform sampler2D b;uniform sampler2D portalMask;uniform sampler2D portalFrame;uniform float portalEnabled;uniform float portalTextLeg;uniform float portalRim;uniform vec3 framePaper;uniform vec3 frameInk;
-uniform vec2 scenePixels;uniform float outputRatio;uniform float sculptureReveal;uniform vec3 paperA;uniform vec3 inkA;uniform vec3 paperB;uniform vec3 inkB;uniform float exposureA;uniform float exposureB;uniform float darkA;uniform float darkB;varying vec2 vUv;
+uniform vec2 scenePixels;uniform float outputRatio;uniform float sculptureReveal;uniform float sculptureSeconds;uniform float sculptureGrain;uniform vec3 paperA;uniform vec3 inkA;uniform vec3 paperB;uniform vec3 inkB;uniform float exposureA;uniform float exposureB;uniform float darkA;uniform float darkB;varying vec2 vUv;
+${PORTFOLIO_DITHER_GLSL}
 ${scrollInkShader}
 ${textDitherShader}
 float bayer2(vec2 p){vec2 q=mod(p,2.);return q.x*2.+q.y*3.-q.x*q.y*4.;}
@@ -56,7 +58,7 @@ vec3 printedSculpture(sampler2D source,vec2 uv,vec3 paper,vec3 ink,float exposur
   vec2 pixel=floor(uv*scenePixels);
   vec4 sampleColor=texture2D(source,(pixel+.5)/scenePixels);
   if(sampleColor.a<.0001)return paper;
-  float threshold=sculptureThreshold(pixel,uv);
+  float threshold=portfolioLiveThreshold(sculptureThreshold(pixel,uv),pixel,sculptureSeconds,sculptureGrain);
   float mark;
   if(exposure<0.){
     // Keep the approved opening's engraved chrome treatment.
@@ -326,7 +328,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       a: { value: targetA.texture }, b: { value: targetB.texture }, portalMask: { value: targetMask.texture }, portalFrame: { value: targetFrame.texture },
       portalEnabled: { value: 0 }, portalTextLeg: { value: 0 }, portalRim: { value: 0 }, framePaper: { value: paper.value }, frameInk: { value: ink.value },
       exposureA: { value: -1 }, exposureB: { value: -1 }, darkA: { value: 0 }, darkB: { value: 0 },
-      outputRatio: { value: 1 }, sculptureReveal: { value: 0 }, scenePixels: { value: new THREE.Vector2(1, 1) }, paperA: { value: paper.value.clone() }, inkA: { value: ink.value.clone() },
+      outputRatio: { value: 1 }, sculptureReveal: { value: 0 }, sculptureSeconds: { value: 0 }, sculptureGrain: { value: 0 }, scenePixels: { value: new THREE.Vector2(1, 1) }, paperA: { value: paper.value.clone() }, inkA: { value: ink.value.clone() },
       paperB: { value: paper.value.clone() }, inkB: { value: ink.value.clone() }, ...textUniforms,
     }
     const screenScene = new THREE.Scene(), screenCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
@@ -630,6 +632,8 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       if (!alive() || !ready || !visible || !width || !height || document.hidden) return
       if (!ensure(reduced.matches ? targetProgress : progress)) return
       const { mobile, leg, local, motion } = pose()
+      screenUniforms.sculptureSeconds.value = openingRuntime.seconds
+      screenUniforms.sculptureGrain.value = reduced.matches ? 0 : .025
       if (reduced.matches) {
         for (const object of actors) if (object) object.visible = false
         const index = textSequence(targetProgress, 'threshold', true).active

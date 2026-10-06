@@ -24,12 +24,16 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
   const themeRoot = canvas.closest('[data-appearance]') ?? document.documentElement
   const palette = () => readPrintPalette(canvas, themeRoot.getAttribute('data-appearance') === 'dark')
   const shader = new THREE.ShaderMaterial({ transparent: true, depthTest: false, depthWrite: false, toneMapped: false,
-    uniforms: { image: { value: target.texture }, ink: { value: palette().ink }, cssSize: { value: new THREE.Vector2(1, 1) }, reveal: { value: 1 } },
+    uniforms: { image: { value: target.texture }, ink: { value: palette().ink }, cssSize: { value: new THREE.Vector2(1, 1) }, reveal: { value: 1 }, motionSeconds: { value: 0 } },
     vertexShader: 'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
-    fragmentShader: `uniform sampler2D image;uniform vec3 ink;uniform vec2 cssSize;uniform float reveal;varying vec2 vUv;
+    fragmentShader: `uniform sampler2D image;uniform vec3 ink;uniform vec2 cssSize;uniform float reveal;uniform float motionSeconds;varying vec2 vUv;
       ${PORTFOLIO_DITHER_GLSL}
       void main(){vec4 s=texture2D(image,vUv);if(s.a<.0001){gl_FragColor=vec4(0.);return;}
-      float tone=portfolioDisplayLuminance(portfolioStraightColor(s));float printTone=mix(1.,tone,reveal);float a=s.a*(1.-step(portfolioBayer8(floor(vUv*cssSize)),printTone));gl_FragColor=vec4(ink,a);
+      float tone=portfolioDisplayLuminance(portfolioStraightColor(s));float printTone=mix(1.,tone,reveal);
+      vec2 pixel=floor(vUv*cssSize);
+      float marks=1.-portfolioDitherMark(printTone,portfolioBayer8(pixel),pixel,motionSeconds,.025);
+      // Fine moving grain sits over continuous carving, preserving strings and highlights.
+      float coverage=mix(marks,1.-printTone,.58);gl_FragColor=vec4(ink,s.a*coverage);
       #include <colorspace_fragment>
       }`,
   })
@@ -74,7 +78,7 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
     // Fit each sculpture's proportions instead of shrinking a tall bass to a cube on phones.
     const fit = size ? Math.max(size.y / 2.8, Math.hypot(size.x, size.z) / (2.8 * camera.aspect)) : Math.max(1, 1 / camera.aspect)
     camera.position.set(0, 0, 5.4 * fit); camera.updateProjectionMatrix()
-    shader.uniforms.cssSize.value.set(width, height); canvas.dataset.renderPixels = String(renderer.domElement.width * renderer.domElement.height)
+    shader.uniforms.cssSize.value.set(renderer.domElement.width, renderer.domElement.height); canvas.dataset.renderPixels = String(renderer.domElement.width * renderer.domElement.height)
     wake()
   }
   function load(id: InterestId) {
@@ -100,6 +104,7 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
     const live = playing && !media.matches && transition.shown !== null
     if (runtime.advance(now, live, !!drag || transition.phase !== 'hold')) measure()
     const dt = runtime.delta || 1 / 30, time = runtime.seconds
+    shader.uniforms.motionSeconds.value = time
     const previous = transition.shown
     transition = advanceContextTransition(transition, dt, media.matches)
     if (previous !== transition.shown) measure()
@@ -115,6 +120,7 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
     const current = transition.shown ? specimens.get(transition.shown) : null
     canvas.dataset.frames = String(++frames); canvas.dataset.yaw = String(current?.yaw ?? 0); canvas.dataset.pitch = String(current?.pitch ?? 0)
     canvas.dataset.liveMotion = String(live); canvas.dataset.selection = selected
+    canvas.dataset.grainSeconds = String(time)
     canvas.dataset.transitionPhase = transition.phase; canvas.dataset.inkReveal = String(transition.reveal)
     canvas.dataset.shownSelection = transition.shown ?? ''; canvas.dataset.visibleModels = String([...specimens.values()].filter(item => item.group.visible).length)
     if (transition.shown) canvas.dataset.modelAsset = portfolioAssetUrl('about-' + transition.shown)

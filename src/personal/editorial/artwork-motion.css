@@ -19,12 +19,9 @@
 .animated-artwork[data-embedded='true'][data-treatment] > .animated-artwork-canvas,
 .animated-artwork[data-embedded='true'][data-treatment] > .animated-artwork-poster { filter: none; mix-blend-mode: normal; }
 [data-appearance='dark'] .animated-artwork[data-embedded='true'][data-treatment] { background: transparent; filter: contrast(1.35) url("#artwork-ink"); mix-blend-mode: normal; }
-.artwork-motion-control { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 0; border: 0; background: transparent; color: var(--muted); font-size: 9px; text-transform: uppercase; white-space: nowrap; cursor: pointer; }
-.artwork-motion-control > span { width: 9px; font: 9px/1 Arial, sans-serif; }
-.artwork-motion-control:hover { color: var(--ink); }
 .reader-further-actions { display: flex; align-items: center; gap: 28px; }
 @media (max-width: 760px) { .reader-further-actions { gap: 22px; } }
 @media print {
-  .artwork-motion-control, .animated-artwork-canvas { display: none !important; }
+  .animated-artwork-canvas { display: none !important; }
   .animated-artwork-poster, .animated-artwork .art-cube-poster { visibility: visible !important; }
 }

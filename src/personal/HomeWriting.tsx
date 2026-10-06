@@ -1,6 +1,6 @@
 import catalog from './editorial/data/catalog.json'
 import AnimatedArtwork from './editorial/AnimatedArtwork'
-import { ArtworkMotionControl, useArtworkMotion } from './editorial/ArtworkMotion'
+import { useArtworkMotion } from './editorial/ArtworkMotion'
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
 import { displayDate, type ArticleSummary } from './editorial/types'
 import { homeWritingDecks, siteCopy, withWritingCopy } from './site-copy'
@@ -29,7 +29,7 @@ function JournalEssay({ article, lead = false }: { article: ArticleSummary; lead
 export function HomeWriting() {
   const [lead, ...companions] = featured
   return <section className="home-writing home-journal" aria-labelledby="home-writing-title">
-    <div className="journal-heading"><div><span className="journal-kicker mono">{siteCopy.writing.homeKicker}</span><h2 id="home-writing-title">Writing<span className="period">.</span></h2></div><ArtworkMotionControl /></div>
+    <div className="journal-heading"><h2 id="home-writing-title">Writing<span className="period">.</span></h2></div>
     <div className="journal-layout">
       {lead && <JournalEssay article={lead} lead />}
       <div className="journal-companions">{companions.map(article => <JournalEssay key={article.slug} article={article} />)}</div>

@@ -20,7 +20,6 @@ import ArticleOpening, { ArticleMetrics, OpeningNotes } from './ArticleOpening'
 import ReaderGuide from './ReaderGuide'
 import SourceAccessNotes, { sourceAccessNotes } from './SourceAccessNotes'
 import { StoryLink } from './StoryLink'
-import { ArtworkMotionControl } from './ArtworkMotion'
 import { displayDate, type ArticleCase, type ArticleSection, type ArticleSummary, type ArticleTable, type WritingArticle } from './types'
 import './article-design.css'
 import './reader-craft.css'
@@ -214,7 +213,7 @@ export default function ArticlePage({ slug }: { slug: string }) {
       <SourceAccessNotes slug={article.slug} />
       <AuthorNote />
     </div></div>
-    <section className="reader-further"><div className="reader-further-heading"><h2>{siteCopy.reader.more}</h2><div className="reader-further-actions"><ArtworkMotionControl /><DestinationLink className="arrow-link" href={backHref} direction="left">{siteCopy.reader.back}</DestinationLink></div></div><nav aria-label="More articles">{relatedArticles(article, articles).map(item => <StoryLink key={item.slug} article={item} />)}</nav></section>
+    <section className="reader-further"><div className="reader-further-heading"><h2>{siteCopy.reader.more}</h2><div className="reader-further-actions"><DestinationLink className="arrow-link" href={backHref} direction="left">{siteCopy.reader.back}</DestinationLink></div></div><nav aria-label="More articles">{relatedArticles(article, articles).map(item => <StoryLink key={item.slug} article={item} />)}</nav></section>
     <CitationPreview key={article.slug} />
   </article>
 }

@@ -3,10 +3,10 @@ import assert from 'node:assert/strict'
 import { portfolioRenderPolicy, touchOrbitIntent } from '../src/personal/mobile-render-policy.ts'
 import { printPixelRatio } from '../src/personal/print-palette.ts'
 
-test('phone portrait, landscape and coarse tablets start with bounded optional motion', () => {
+test('phone portrait, landscape and coarse tablets autoplay within their pixel budgets', () => {
   for (const [width, height, coarse] of [[390,844,true], [320,568,false], [932,430,false], [1024,1366,true]] as const) {
     const policy = portfolioRenderPolicy(width, height, coarse)
-    assert.equal(policy.autoplay, false)
+    assert.equal(policy.autoplay, true)
     for (const dpr of [1, 2, 3, 4]) {
       const ratio = printPixelRatio(width, height, dpr, policy.pixels, policy.maxRatio)
       assert.ok(width * height * ratio * ratio <= 400_000)

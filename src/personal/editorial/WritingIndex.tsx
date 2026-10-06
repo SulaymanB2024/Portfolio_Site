@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from 'react'
 import catalog from './data/catalog.json'
 import AnimatedArtwork from './AnimatedArtwork'
-import { ArtworkMotionControl, useArtworkMotion } from './ArtworkMotion'
+import { useArtworkMotion } from './ArtworkMotion'
 import { getArticleGenerativeArtwork } from './generative/manifest'
 import { filterWritingArticles, readWritingFilters, writingHref, type WritingFilters } from './library'
 import { displayDate, type ArticleSummary } from './types'
@@ -79,7 +79,7 @@ export default function WritingIndex() {
         <label className="writing-search"><span className="sr-only">Search writing</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></svg><input ref={searchInput} type="search" value={query} onChange={event => updateFilters({ ...filters, query: event.target.value })} placeholder="Search writing" /></label>
         <div className="writing-search-options"><label className="writing-topic"><span className="sr-only">Filter writing by topic</span><select value={category} onChange={event => updateFilters({ ...filters, category: event.target.value })}>{categories.map(value => <option key={value} value={value}>{topicLabels[value] || value}</option>)}</select><span aria-hidden="true">⌄</span></label></div>
         {(query.trim() || category !== 'All') && <div className="writing-filter-status"><span>{visible.length} {visible.length === 1 ? 'essay' : 'essays'}</span><button type="button" onClick={clearFilters}>Clear filters</button></div>}
-      </div></details><ArtworkMotionControl /></div>
+      </div></details></div>
     </header>
     {!searching && <ReadingPaths interactive />}
     {searching ? <div className="writing-gallery writing-results">{visible.map((article, index) => story(article, 'compact', index))}</div> : <>

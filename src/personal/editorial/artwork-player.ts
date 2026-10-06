@@ -17,19 +17,18 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
   surface.style.width = surface.style.height = '100%'
   const listeners = new Set<(status: ArtworkPlayerStatus) => void>()
   const mobile = readPortfolioRenderPolicy().mobile
-  const limits = mobile ? { maxFps: 12, minFps: 6 } : {}
+  const limits = mobile ? { maxFps: 24, minFps: 12 } : {}
   const status: ArtworkPlayerStatus = { id: nextPlayerId++, painted: false, failed: false, active: false, renderer: 'main', jobs: 0,
-    stats: { frames: 0, drawMs: 0, averageMs: 0, targetFps: mobile ? 12 : 18 } }
+    stats: { frames: 0, drawMs: 0, averageMs: 0, targetFps: mobile ? 24 : 18 } }
   let job: PreviewHandle | null = null
   let worker: PreviewHandle | null = null
   let sketch: ReturnType<typeof createCanvasSketch> | null = null
   let mainFactory: Awaited<ReturnType<GenerativeArtwork['factory']>>['default'] | null = null
   let disposed = false, loadingMain = false, visible = false, paused = false, traveling = false, travelPaused = false
-  let scrolling = false, scrollResume = 0
   let menuOpen = false
   const motion = matchMedia('(prefers-reduced-motion: reduce)')
   const emit = () => listeners.forEach(listener => listener(status))
-  const active = () => !disposed && !status.failed && !paused && !scrolling && !menuOpen && !(traveling && travelPaused) && !document.hidden && !motion.matches && (visible || traveling)
+  const active = () => !disposed && !status.failed && !paused && !menuOpen && !(traveling && travelPaused) && !document.hidden && !motion.matches && (visible || traveling)
   const sync = () => {
     let next = active()
     if (next && mainFactory && !sketch) startMain()
@@ -47,7 +46,6 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
   }
   const fail = () => {
     if (disposed) return
-    clearScrollResume()
     job?.remove(); sketch?.remove(); job = null; sketch = null; mainFactory = null
     status.failed = true; status.active = false; emit()
   }
@@ -69,32 +67,11 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
       sync()
     }).catch(fail)
   }
-  function clearScrollResume() {
-    if (scrollResume) window.clearTimeout(scrollResume)
-    scrollResume = 0
-    scrolling = false
-  }
-  function onScroll() {
-    if (disposed || document.hidden || status.failed) return
-    if (scrollResume) window.clearTimeout(scrollResume)
-    scrolling = true
-    sync()
-    scrollResume = window.setTimeout(() => {
-      scrollResume = 0
-      scrolling = false
-      if (!disposed) sync()
-    }, 160)
-  }
-  function visibility() {
-    if (document.hidden) clearScrollResume()
-    sync()
-  }
   worker = artworkWorkerBackend.register({ host: surface, sketchId: artwork.sketchId, physicalSize, active: false,
     ...limits,
     onFrame: frame, onError: main, onJobs: count => { status.jobs = count; emit() } })
   if (worker) { job = worker; status.renderer = 'worker' } else main()
-  document.addEventListener('visibilitychange', visibility)
-  if (mobile) window.addEventListener('scroll', onScroll, { passive: true, capture: true })
+  document.addEventListener('visibilitychange', sync)
   motion.addEventListener('change', sync)
   const stopMenu = subscribeMenuMotion(open => { menuOpen = open; sync() })
   return {
@@ -106,11 +83,9 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
     subscribe(listener: (status: ArtworkPlayerStatus) => void) { listeners.add(listener); listener(status); return () => { listeners.delete(listener) } },
     dispose() {
       if (disposed) return
-      clearScrollResume()
       disposed = true; listeners.clear(); job?.remove(); worker?.remove(); sketch?.remove(); mainFactory = null; surface.remove()
       stopMenu()
-      document.removeEventListener('visibilitychange', visibility); motion.removeEventListener('change', sync)
-      if (mobile) window.removeEventListener('scroll', onScroll, { capture: true })
+      document.removeEventListener('visibilitychange', sync); motion.removeEventListener('change', sync)
     },
   }
 }
