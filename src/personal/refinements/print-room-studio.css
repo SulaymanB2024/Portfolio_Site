@@ -1,0 +1,54 @@
+.print-room-studio { width: min(1100px, calc(100vw - 48px)); padding: 22px 32px; }
+.print-room-studio .print-room-header { position: sticky; top: -22px; z-index: 2; padding-top: 10px; background: var(--paper); }
+.print-room-studio .print-room-layout { grid-template-columns: minmax(0, 1.5fr) minmax(250px, .9fr); align-items: start; gap: 36px; padding: 30px 0; }
+.print-room-studio .print-room-mono { font: 400 11px/1.6 var(--type-interface, Arial, sans-serif); letter-spacing: .03em; text-transform: none; }
+.print-room-studio .print-room-copy h2 { font: 400 clamp(42px, 5vw, 65px)/1.04 var(--type-reading, Georgia, serif); }
+.print-room-studio .print-room-copy p { font: 400 18px/1.55 var(--type-reading, Georgia, serif); max-width: 30ch; margin-bottom: 15px; }
+.print-room-studio .print-room-shapes { gap: 24px; margin-bottom: 14px; }
+.print-room-studio .print-room-shapes button,
+.print-room-studio .print-room-recompose,
+.print-room-studio .print-room-footer > button { font: 400 13px/1.5 var(--type-interface, Arial, sans-serif); text-transform: none; letter-spacing: 0; }
+.print-room-studio .print-room-shapes button { min-width: 44px; text-align: left; text-transform: capitalize; }
+.print-instrument-stage { position: relative; aspect-ratio: 1; overflow: hidden; border: 1px solid var(--line); touch-action: pan-y; cursor: grab; background: #f3f3f0; color: #696c64; }
+.print-instrument-stage[data-tone='ink'] { background: #111210; color: #a5a89c; }
+.print-instrument-stage:active { cursor: grabbing; }
+.print-instrument-stage:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.print-instrument-stage canvas { display: block; width: 100%; height: 100%; }
+.print-instrument-corner, .print-instrument-state { position: absolute; bottom: 16px; font: 400 11px/1.5 var(--type-interface, Arial, sans-serif); pointer-events: none; }
+.print-instrument-corner { left: 18px; text-transform: capitalize; }
+.print-instrument-state { right: 18px; }
+.print-room-studio .print-room-art figcaption { display: flex; flex-direction: column; gap: 6px; text-align: left; margin-top: 15px; }
+.print-room-studio .print-room-art figcaption > span:first-child { font: italic 400 20px/1.4 var(--type-reading, Georgia, serif); }
+.print-room-studio .print-room-art figcaption > span:last-child { font: 400 12px/1.6 var(--type-interface, Arial, sans-serif); color: var(--muted); }
+.print-instrument-sliders { display: grid; gap: 6px; }
+.print-instrument-sliders label { min-width: 0; }
+.print-instrument-sliders label > span { display: flex; justify-content: space-between; font: 400 13px/1.6 var(--type-interface, Arial, sans-serif); }
+.print-instrument-sliders output { color: var(--muted); font-variant-numeric: tabular-nums; }
+.print-instrument-sliders input { display: block; width: 100%; height: 38px; margin: 0; accent-color: var(--ink); cursor: pointer; }
+.print-instrument-pose { display: flex; justify-content: space-between; gap: 18px; margin: 4px 0 12px; }
+.print-instrument-pose > div { display: flex; gap: 15px; }
+.print-instrument-pose > div button { min-width: 44px; text-align: left; }
+.print-instrument-pose button { min-height: 44px; padding: 8px 0; background: transparent; border: 0; font: 400 12px/1.5 var(--type-interface, Arial, sans-serif); color: var(--muted); }
+.print-instrument-pose button[aria-pressed='true'] { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; }
+.print-instrument-pose button:disabled { opacity: .55; cursor: default; }
+.print-instrument-export { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.print-instrument-export button { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 12px 0; background: none; border: 0; border-bottom: 1px solid var(--ink); font: 400 13px/1.5 var(--type-interface, Arial, sans-serif); }
+.print-instrument-export button:disabled { opacity: .6; cursor: wait; }
+.print-instrument-export button > span { font-size: 18px; }
+.print-room-studio .print-room-saved { min-height: 36px; font: 400 12px/1.5 var(--type-interface, Arial, sans-serif); }
+.print-instrument-share { width: 100%; padding: 10px; color: var(--ink); background: var(--paper); border: 1px solid var(--line); font: 12px/1.5 var(--type-interface, Arial, sans-serif); }
+.print-studio-invitation { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 26px 0; margin: 0 0 32px; }
+.print-studio-invitation p { font: italic 400 24px/1.4 var(--type-reading, Georgia, serif); margin: 0; max-width: 28ch; }
+.print-studio-invitation button { display: flex; align-items: center; gap: 26px; min-height: 44px; padding: 8px 0; background: transparent; border: 0; font: 400 14px/1.5 var(--type-interface, Arial, sans-serif); }
+.print-studio-invitation button > span { font-size: 20px; }
+@media (max-width: 640px) {
+  .print-room-studio { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); padding: 14px 18px; }
+  .print-room-studio .print-room-header { top: -14px; }
+  .print-room-studio .print-room-layout { grid-template-columns: 1fr; padding: 20px 0; gap: 30px; }
+  .print-room-studio .print-room-copy h2 { font-size: 42px; margin-bottom: 12px; }
+  .print-room-studio .print-room-copy p { max-width: none; font-size: 18px; }
+  .print-room-studio .print-room-art figcaption { margin-top: 12px; }
+  .print-room-studio .print-room-footer { flex-wrap: wrap; gap: 0 20px; }
+  .print-room-studio .print-room-footer > .print-room-mono { max-width: none; }
+}
+@media print { .print-studio-invitation { display: none; } }

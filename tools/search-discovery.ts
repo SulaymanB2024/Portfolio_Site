@@ -4,6 +4,7 @@ import { resumeProfile, resumeReview } from '../src/personal/profile-copy.ts'
 import { sourceDate, personId } from '../src/personal/search-metadata.ts'
 import { readingTopics, topicReadings } from '../src/personal/editorial/topics.ts'
 import type { WritingArticle } from '../src/personal/editorial/types.ts'
+import { answerNotes, answerNotesUpdated, readerModifiedDate } from '../src/personal/editorial/answer-notes.ts'
 
 const machinePaths = {
   profile: '/machine/profile.json',
@@ -62,8 +63,19 @@ export function machineReferences(articles: WritingArticle[], evidenceNotes: str
     articles: articles.map(article => ({
       url: `${siteOrigin}${article.path}`, title: article.displayTitle || article.title,
       description: article.subtitle, author: personId, category: article.category,
-      datePublished: sourceDate(article.date), dateModified: sourceDate(article.dateModified),
+      datePublished: sourceDate(article.date), dateModified: readerModifiedDate(article.slug, article.dateModified),
+      manuscriptDateModified: sourceDate(article.dateModified),
       evidenceBoundary: article.pageContent?.boundary?.text || article.evidenceBoundary,
+      // Reader additions are visible on the page, with their own dated scope;
+      // they do not revise the manuscript's research cutoff or source ledger.
+      ...(answerNotes(article.slug) ? { readerNotes: {
+        dateAdded: answerNotesUpdated,
+        evidenceBoundary: answerNotes(article.slug)!.boundary,
+        questions: answerNotes(article.slug)!.questions.map(note => ({
+          url: `${siteOrigin}${article.path}#${note.id}`, question: note.question,
+          sources: note.sources.map(source => ({ label: source.label, url: new URL(source.href, siteOrigin).href })),
+        })),
+      } } : {}),
       sources: (article.sources || []).map(source => ({
         label: source.label, publisher: source.publisher, date: source.date,
         lastVerified: source.lastVerified, note: source.note, limitation: source.limitation,

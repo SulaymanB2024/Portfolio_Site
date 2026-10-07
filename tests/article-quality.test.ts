@@ -5,6 +5,7 @@ import { protectedQualityEvidence, qualityReadingMinutes, verifyQualityRevision 
 import { codeLabelRevisions, originalCodeLabels, verifyCodeLabelReadback } from '../tools/article-code-label-integrity.mjs'
 import { searchMetadata } from '../src/personal/search-metadata.ts'
 import { relatedArticles } from '../src/personal/editorial/library.ts'
+import { readerModifiedDate } from '../src/personal/editorial/answer-notes.ts'
 import type { ArticleSummary } from '../src/personal/editorial/types.ts'
 
 const json = (path: string) => JSON.parse(readFileSync(new URL(`../${path}`, import.meta.url), 'utf8'))
@@ -121,7 +122,7 @@ test('search and social metadata use authored search copy while schema keeps the
     assert.equal(node.headline, article.displayTitle || article.title)
     assert.equal(node.description, article.seoDescription)
     assert.equal(node.datePublished, article.date.replaceAll('.', '-'))
-    assert.equal(node.dateModified, '2026-10-05')
+    assert.equal(node.dateModified, readerModifiedDate(summary.slug, article.dateModified))
     assert(!titles.has(article.seoTitle)); titles.add(article.seoTitle)
     assert(!descriptions.has(article.seoDescription)); descriptions.add(article.seoDescription)
   }

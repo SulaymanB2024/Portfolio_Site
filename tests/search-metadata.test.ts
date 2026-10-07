@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { searchMetadata, sourceDate, withSearchHead, serializeSchema, personId, websiteId } from '../src/personal/search-metadata.ts'
+import { searchMetadata, sourceDate, metadataTags, withSearchHead, serializeSchema, personId, websiteId } from '../src/personal/search-metadata.ts'
 import { documentHref, withDocumentLinks } from '../tools/public-document-links.ts'
 import { identity } from '../src/personal/identity.ts'
 
@@ -18,10 +18,48 @@ test('profile pages and articles share one author and website identity', () => {
   const article = searchMetadata('writing/the-first-ai-managers')
   const node = article.schema!['@graph'].find(node => node['@type'] === 'Article')!
   assert.equal((node.author as any)['@id'], personId)
-  assert.equal((node.isPartOf as any)['@id'], websiteId)
+  assert.deepEqual(node.isPartOf, [{ '@id': websiteId }, { '@id': 'https://sulayman-bowles.dev/topics/ai-and-verification#webpage' }])
+  const parent = article.schema!['@graph'].find(node => node['@id'] === 'https://sulayman-bowles.dev/topics/ai-and-verification#webpage')!
+  assert.equal(parent['@type'], 'CollectionPage')
+  assert.equal(parent.name, 'Make AI results inspectable — Sulayman Bowles')
+  assert.deepEqual(parent.isPartOf, { '@id': websiteId })
   assert.equal(article.canonical, 'https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers')
   assert.equal(article.article?.published, '2026-07-14')
   assert.equal(article.image.url, 'https://sulayman-bowles.dev/images/social/og-research.png')
+})
+
+test('topic search titles describe the subject while schema preserves the visible collection heading', () => {
+  const topic = searchMetadata('topics/financial-systems')
+  assert.equal(topic.title, 'Texas Toll-Road & Airline Loyalty Research — Sulayman Bowles')
+  const page = topic.schema!['@graph'].find(node => node['@id'] === `${topic.canonical}#webpage`)!
+  assert.equal(page['@type'], 'CollectionPage')
+  assert.equal(page.name, 'Who owns the cash flow? — Sulayman Bowles')
+  assert.equal(page.datePublished, undefined)
+  assert.equal(page.dateModified, '2026-10-06')
+  assert.equal(topic.article, undefined)
+})
+
+test('article citations include visible guide and answer-note evidence once per exact URL', () => {
+  const article = searchMetadata('writing/why-texas-toll-roads-stay-tolled').schema!['@graph'].find(node => node['@type'] === 'Article')!
+  assert.deepEqual(article.citation, [
+    'https://www.ntta.org/about-us/financial-information',
+    'https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf',
+    'https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh288-toll-lanes/executed-agreements.html',
+    'https://auditor.harriscountytx.gov/Reports/Annual-Comprehensive-Financial-Report-Harris-County',
+    'https://www.transportation.gov/buildamerica/projects/sh-130-segments-5-and-6',
+    'https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh130/executed-agreements.html',
+  ])
+  assert(searchMetadata('contact').schema!['@graph'].every(node => node.citation === undefined))
+})
+
+test('citations resolve local evidence on the canonical origin and retain source fragments', () => {
+  const hardware = searchMetadata('writing/hidden-financing-hardware-startups').schema!['@graph'].find(node => node['@type'] === 'Article')!
+  assert((hardware.citation as string[]).includes('https://sulayman-bowles.dev/research/hidden-financing-report.pdf'))
+  const robots = searchMetadata('writing/robots-txt-courtesy-not-access-control').schema!['@graph'].find(node => node['@type'] === 'Article')!
+  assert((robots.citation as string[]).includes('https://www.rfc-editor.org/rfc/rfc9309.html#section-3'))
+  assert((robots.citation as string[]).includes('https://developers.openai.com/api/docs/bots'))
+  assert((robots.citation as string[]).includes('https://developers.google.com/crawling/docs/crawlers-fetchers/verify-google-requests'))
+  assert.equal(new Set(robots.citation as string[]).size, (robots.citation as string[]).length)
 })
 
 test('the person uses the reviewed biography and connected profiles without implying a completed degree', () => {
@@ -53,6 +91,17 @@ test('source dates normalize real dates without inventing freshness', () => {
   assert.equal(sourceDate(), undefined)
   assert.equal(searchMetadata('writing/atlas-building-an-evidence-console').article?.modified, '2026-10-05')
   assert.equal(searchMetadata('writing/viralbench-codex-agent-harness').article?.modified, '2026-10-05')
+})
+
+test('actual answer-note editions update article and social dates without changing publication dates', () => {
+  const article = searchMetadata('writing/why-texas-toll-roads-stay-tolled')
+  assert.equal(article.article?.published, '2026-09-02')
+  assert.equal(article.article?.modified, '2026-10-06')
+  const node = article.schema!['@graph'].find(node => node['@type'] === 'Article')!
+  assert.equal(node.datePublished, '2026-09-02')
+  assert.equal(node.dateModified, '2026-10-06')
+  assert.equal(metadataTags(article).find(tag => tag.key === 'article:modified_time')?.value, '2026-10-06')
+  assert.equal(searchMetadata('writing/hidden-financing-hardware-startups').article?.modified, '2026-10-05')
 })
 
 test('rebuilding a head removes stale article data, duplicate canonicals, and old schema', () => {

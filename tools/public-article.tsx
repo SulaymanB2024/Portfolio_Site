@@ -11,6 +11,10 @@ import { siteCopy } from '../src/personal/site-copy'
 import ArticleStudyFigure from '../src/personal/editorial/ArticleStudyFigure'
 import ReaderGuide from '../src/personal/editorial/ReaderGuide'
 import SourceAccessNotes from '../src/personal/editorial/SourceAccessNotes'
+import AnswerNotes from '../src/personal/editorial/AnswerNotes'
+import { readerModifiedDate, questionAnchor } from '../src/personal/editorial/answer-notes'
+import { ArtPoster } from '../src/personal/editorial/ArtPoster'
+import { getArticleGenerativeArtwork } from '../src/personal/editorial/generative/manifest'
 
 const paragraphs = (values: string[] = []) => values.map((value, index) => <p key={index}>{inlineText(value)}</p>)
 
@@ -54,10 +58,16 @@ export function PublicArticle({ article }: { article: WritingArticle }) {
   const markdown = article.markdown && !article.markdownSections ? article.markdown.replace(/^# .+\n+/, '') : undefined
   const image = article.pageContent?.hero?.image
   const downloads = articleDownloads(article)
+  const modified = readerModifiedDate(article.slug, article.dateModified)
+  const artwork = getArticleGenerativeArtwork(article.path)
   return <>
     <p><a href="/about" rel="author">Sulayman Bowles</a> · <time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time>
-      {article.dateModified && article.dateModified !== article.date && <> · Updated <time dateTime={article.dateModified.replaceAll('.', '-')}>{displayDate(article.dateModified)}</time></>}
+      {modified && modified !== article.date.replaceAll('.', '-') && <> · Updated <time dateTime={modified}>{displayDate(modified)}</time></>}
     </p>
+    <figure className="public-article-cover" data-sketch={artwork.sketchId}>
+      <ArtPoster artwork={artwork} eager baseURL="/" />
+      <figcaption>{artwork.title} · <a href={artwork.attribution.sourceUrl} target="_blank" rel="noreferrer" aria-label={`Original ${artwork.title} sketch by @yuruyurau`}>@yuruyurau ↗</a></figcaption>
+    </figure>
     {image && <figure><img src={image.src} alt={image.alt} loading="lazy" />{image.caption && <figcaption>{image.caption}</figcaption>}</figure>}
     <ReaderGuide slug={article.slug} />
     {article.htmlBody ? <><OpeningNotes article={article} boundary /><RestoredArticleBody html={article.htmlBody} /></> : markdown ? <>{markdownToReact(markdown)}<OpeningNotes article={article} boundary /></> : <>
@@ -65,6 +75,7 @@ export function PublicArticle({ article }: { article: WritingArticle }) {
       {[...(article.sections || []), ...(article.markdownSections || [])].map(section => <Section key={section.id} section={section} tables={article.tables} article={article} />)}
     </>}
     {article.conclusion && <Section section={{ id: 'conclusion', title: article.conclusion.title, paragraphs: [article.conclusion.content] }} />}
+    <AnswerNotes slug={article.slug} />
     {article.cases && <section id="case-inventory"><h2>Case inventory</h2>{article.cases.map(item => <details key={item.name}><summary>{item.name} — {item.grade}</summary><dl>{Object.entries(item).filter(([key]) => !['name', 'href'].includes(key)).map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{String(value)}</dd></div>)}</dl><a href={item.href}>Source</a></details>)}</section>}
     {article.factGaps && <section id="fact-gaps"><h2>What remains unknown</h2>{article.factGaps.map(gap => <div key={gap.title}><h3>{gap.title}</h3><ul>{gap.items.map(item => <li key={item}>{inlineText(item)}</li>)}</ul></div>)}</section>}
     {article.openQuestions && <section id="open-questions"><h2>Open questions</h2><ul>{article.openQuestions.map(question => <li key={question}>{inlineText(question)}</li>)}</ul></section>}
@@ -72,7 +83,7 @@ export function PublicArticle({ article }: { article: WritingArticle }) {
     {article.valuationFrame && <section id="reader-valuation"><h2>Valuation</h2><p>{inlineText(article.valuationFrame)}</p></section>}
     {article.risks && <section id="reader-risks"><h2>Risks</h2><p>{inlineText(article.risks)}</p></section>}
     {article.recommendationBoundary && <p>{inlineText(article.recommendationBoundary)}</p>}
-    {article.faqs && <section id="questions"><h2>Questions</h2>{article.faqs.map(faq => <details key={faq.question}><summary>{faq.question}</summary>{markdownToReact(faq.answer)}</details>)}</section>}
+    {article.faqs && <section id="questions"><h2>Questions</h2><nav className="question-links" aria-label="Questions in this essay">{article.faqs.map(faq => <a key={faq.question} href={`#${questionAnchor(faq.question)}`}>{faq.question}</a>)}</nav>{article.faqs.map(faq => <div key={faq.question}><details><summary id={questionAnchor(faq.question)}>{faq.question}</summary>{markdownToReact(faq.answer)}</details><a className="question-permalink" href={`#${questionAnchor(faq.question)}`}>Link to this question</a></div>)}</section>}
     {/* Markdown essays already include their own sources and footnote targets. */}
     {article.sources?.length && !article.htmlBody && !markdown ? <section id="sources"><h2>Sources</h2><ol>{article.sources.map((source, index) => <li key={index} id={sourceAnchor(source, index)}>
       {!source.id && <span id={`source-${index + 1}`} />}

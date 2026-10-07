@@ -1,5 +1,5 @@
 import type { MouseEvent } from 'react'
-import { sectionHref } from './library'
+import { readerSectionTitle, sectionHref } from './library'
 
 function closeAfterSelection(event: MouseEvent<HTMLAnchorElement>) {
   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
@@ -15,7 +15,7 @@ export default function ReaderNavigation({ sections, href }: {
     <details className="reader-index">
       <summary>Contents <span aria-hidden="true">+</span></summary>
       <nav aria-label="Article sections"><ol>{sections.map(section => <li key={section.id}>
-        <a href={sectionHref(href, section.id)} onClick={closeAfterSelection}>{section.title.replace(/^(?:[IVXLCDM]+|\d+)[.)]\s+/, '')}</a>
+        <a href={sectionHref(href, section.id)} onClick={closeAfterSelection}>{readerSectionTitle(section.title)}</a>
       </li>)}</ol></nav>
     </details>
   </aside>

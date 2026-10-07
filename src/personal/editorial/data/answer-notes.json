@@ -1,0 +1,593 @@
+{
+  "updated": "2026-10-06",
+  "articles": {
+    "why-texas-toll-roads-stay-tolled": {
+      "boundary": "These reading notes summarize the article’s dated financial records. Reporting bases differ between systems; they do not establish a statewide revenue total or a current legal entitlement to toll removal.",
+      "questions": [
+        {
+          "id": "answer-paid-off-road",
+          "question": "Does paying off one road’s construction cost mean its tolls end?",
+          "answer": "Construction-cost recovery and repayment of outstanding system debt are different tests. A road can belong to a pooled system whose tolls support other debt, reserves, maintenance, and projects. Identify the pledged system, remaining obligations, governing agreement, and applicable removal provision before treating a construction-cost comparison as a toll-ending trigger.",
+          "section": "construction-cost-versus-debt",
+          "sources": [
+            {
+              "label": "NTTA financial records",
+              "href": "https://www.ntta.org/about-us/financial-information"
+            },
+            {
+              "label": "TxDOT FY2025 toll-project report",
+              "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf"
+            }
+          ],
+          "related": {
+            "slug": "who-owns-texas-toll-roads",
+            "section": "the-texas-ownership-map",
+            "label": "Identify the public system or concession first"
+          }
+        },
+        {
+          "id": "answer-toll-revenue-profit",
+          "question": "Is toll revenue the same as money available to the owner?",
+          "answer": "No. Gross collections precede operating costs, maintenance, debt service, reserves, and any permitted transfers or distributions. The sequence and accounting basis matter: a public-system cash use, an accounting expense, and a concession’s equity distribution measure different things. Compare like periods and categories before calculating a residual.",
+          "section": "same-basis-comparison",
+          "sources": [
+            {
+              "label": "NTTA financial records",
+              "href": "https://www.ntta.org/about-us/financial-information"
+            },
+            {
+              "label": "Harris County financial reports",
+              "href": "https://auditor.harriscountytx.gov/Reports/Annual-Comprehensive-Financial-Report-Harris-County"
+            }
+          ],
+          "related": {
+            "slug": "who-owns-texas-toll-roads",
+            "section": "how-a-toll-road-turns-traffic-into-equity-cash",
+            "label": "Trace the collection-to-equity waterfall"
+          }
+        },
+        {
+          "id": "answer-bankruptcy-tolls",
+          "question": "Why did SH 130 keep charging tolls after bankruptcy?",
+          "answer": "The financing restructuring changed creditor and equity claims while the road and its concession continued. Bankruptcy of a concession company does not by itself erase the contractual toll right, make the public asset disappear, or establish a toll-removal trigger. Separate the roadway’s title, the operating agreement, and the reorganized capital stack.",
+          "section": "sh-130-restructuring",
+          "sources": [
+            {
+              "label": "U.S. DOT SH 130 project record",
+              "href": "https://www.transportation.gov/buildamerica/projects/sh-130-segments-5-and-6"
+            },
+            {
+              "label": "SH 130 executed agreements",
+              "href": "https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh130/executed-agreements.html"
+            }
+          ],
+          "related": {
+            "slug": "who-owns-texas-toll-roads",
+            "section": "sh-130-the-danger-of-believing-the-traffic-model",
+            "label": "Read the ownership and creditor-recovery case"
+          }
+        }
+      ]
+    },
+    "robots-txt-courtesy-not-access-control": {
+      "boundary": "These are protocol and control distinctions. A robots rule is crawler guidance; private-access and capacity protection require separate enforcement.",
+      "questions": [
+        {
+          "id": "answer-robots-private",
+          "question": "Does Disallow in robots.txt make a document private?",
+          "answer": "No. The Robots Exclusion Protocol asks cooperating crawlers to avoid requests; it does not authorize users or deny access at the server. A public robots file can also expose the paths it lists. Protect private documents with authentication and resource-level authorization, then test that an unauthorized request cannot receive the representation.",
+          "section": "protect-private-content",
+          "sources": [
+            {
+              "label": "RFC 9309, security considerations",
+              "href": "https://www.rfc-editor.org/rfc/rfc9309.html#section-3"
+            },
+            {
+              "label": "OWASP authorization guidance",
+              "href": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+            }
+          ],
+          "related": {
+            "slug": "ai-search-crawler-policy",
+            "section": "outcome-matrix",
+            "label": "Separate access protection from provider-use policy"
+          }
+        },
+        {
+          "id": "answer-robots-noindex",
+          "question": "Can a robots-blocked URL still appear in Google Search?",
+          "answer": "Yes. Google may learn about a blocked URL from links even when it cannot crawl the page’s content. A noindex directive works only when Google can fetch and read it. For a public page you want excluded, distinguish crawl permission from indexing instructions; for private information, enforce access regardless of crawler cooperation.",
+          "section": "six-control-layers",
+          "sources": [
+            {
+              "label": "Google’s robots.txt limitations",
+              "href": "https://developers.google.com/search/docs/crawling-indexing/robots/intro"
+            }
+          ],
+          "related": {
+            "slug": "raw-html-rendered-dom-evidence",
+            "section": "transport-artifact",
+            "label": "Check what response a client actually receives"
+          }
+        },
+        {
+          "id": "answer-user-agent-identity",
+          "question": "Does a Googlebot or AI-bot user-agent prove who made a request?",
+          "answer": "No. A client can send a familiar token. Retain the observed address and full request separately from an attributed identity, then apply the provider’s verification method and dated address evidence. A token match is useful for routing observations; it should not become permission to read private data or a verified count of that provider’s visits.",
+          "section": "bot-identity",
+          "sources": [
+            {
+              "label": "OpenAI crawler and address documentation",
+              "href": "https://developers.openai.com/api/docs/bots"
+            },
+            {
+              "label": "Google crawler verification",
+              "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/verify-google-requests"
+            }
+          ],
+          "related": {
+            "slug": "ai-search-crawler-policy",
+            "section": "server-log-verification",
+            "label": "Keep attribution uncertainty in the log review"
+          }
+        }
+      ]
+    },
+    "ai-search-crawler-policy": {
+      "boundary": "The provider comparison retains its July 14, 2026 documentation cutoff. The Google/OpenAI control distinction below was checked against official documentation on October 6, 2026. Consult current provider definitions before deploying a policy; these notes do not verify any host’s live crawler settings.",
+      "questions": [
+        {
+          "id": "answer-search-versus-training",
+          "question": "Can I allow ChatGPT search discovery while blocking GPTBot?",
+          "answer": "The documented mechanisms have separate purposes: OAI-SearchBot serves search discovery, while GPTBot concerns model development. Their named robots groups can express separate choices. Merge those groups into the existing host policy, preserve path restrictions, and verify the deployed file. Search permission is an eligibility input; it does not establish that your page will be indexed or cited.",
+          "section": "crawler-comparison",
+          "sources": [
+            {
+              "label": "OpenAI’s crawler definitions",
+              "href": "https://developers.openai.com/api/docs/bots"
+            }
+          ],
+          "related": {
+            "slug": "robots-txt-courtesy-not-access-control",
+            "section": "release-evidence",
+            "label": "Test the deployed policy and separate controls"
+          }
+        },
+        {
+          "id": "answer-user-fetch-control",
+          "question": "Will a training-crawler block stop a user asking an AI assistant to open a URL?",
+          "answer": "Do not assume so. User-requested retrieval is a separate mechanism with provider-specific behavior; OpenAI states that robots.txt rules may not apply to ChatGPT-User requests. Blocking a model-development token is therefore not a general access barrier. If the content must be private, require authorization for every client rather than relying on a crawler-purpose label.",
+          "section": "outcome-matrix",
+          "sources": [
+            {
+              "label": "OpenAI’s ChatGPT-User explanation",
+              "href": "https://developers.openai.com/api/docs/bots"
+            },
+            {
+              "label": "Google’s robots.txt limitations",
+              "href": "https://developers.google.com/search/docs/crawling-indexing/robots/intro"
+            }
+          ],
+          "related": {
+            "slug": "robots-txt-courtesy-not-access-control",
+            "section": "protect-private-content",
+            "label": "Protect the resource independently of robots rules"
+          }
+        },
+        {
+          "id": "answer-crawl-not-citation",
+          "question": "What does an AI crawler visit prove about search visibility?",
+          "answer": "A retained request can establish that a client reached the measured layer and received a particular response at a particular time. It does not establish indexing, model training, answer selection, a citation, or a human referral. Keep observed requests, attributed identities, and downstream search outcomes as separate measurements; absence from one log is not proof of absence everywhere.",
+          "section": "server-log-verification",
+          "sources": [
+            {
+              "label": "OpenAI search-crawler documentation",
+              "href": "https://developers.openai.com/api/docs/bots"
+            }
+          ],
+          "related": {
+            "slug": "raw-html-rendered-dom-evidence",
+            "section": "render-environment",
+            "label": "Record the environment and scope of a capture"
+          }
+        },
+        {
+          "id": "answer-google-extended-search",
+          "question": "Does blocking Google-Extended block Google's AI search answers?",
+          "answer": "No. Googlebot controls crawling for Google Search, including AI Overviews and AI Mode. Google-Extended controls specified Gemini training and grounding uses; it does not change Search inclusion or rankings and has no separate HTTP request user agent. To limit content shown in Search, use Google's documented snippet or noindex controls. OpenAI separately defines OAI-SearchBot for ChatGPT search and GPTBot for possible model training. Express each purpose-specific choice in the appropriate robots group, preserving existing path restrictions. Crawl permission does not establish indexing or citation.",
+          "section": "crawler-comparison",
+          "sources": [
+            {
+              "label": "Google's common crawler and Google-Extended definitions",
+              "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers"
+            },
+            {
+              "label": "Google's controls for AI features in Search",
+              "href": "https://developers.google.com/search/docs/appearance/ai-features"
+            },
+            {
+              "label": "OpenAI's crawler definitions",
+              "href": "https://developers.openai.com/api/docs/bots"
+            }
+          ],
+          "related": {
+            "slug": "robots-txt-courtesy-not-access-control",
+            "section": "six-control-layers",
+            "label": "Match each intended outcome to its control"
+          }
+        }
+      ]
+    },
+    "canonicalization-graph-consistency": {
+      "boundary": "The graph checks consistency within the site. Search engines still decide which URL to index and select as canonical.",
+      "questions": [
+        {
+          "id": "answer-canonical-hint",
+          "question": "Does rel=canonical force Google to index the URL I choose?",
+          "answer": "No. Canonical annotations express a preference, alongside signals such as redirects and sitemap inclusion. Build a consistent set of signals around an accessible preferred document, then use Search Console to examine Google’s selection. A correct tag in a local build is evidence about your declaration, not proof of the search engine’s final decision.",
+          "section": "convergence-invariant",
+          "sources": [
+            {
+              "label": "Google’s canonicalization guidance",
+              "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+            },
+            {
+              "label": "RFC 6596 canonical link relation",
+              "href": "https://www.rfc-editor.org/rfc/rfc6596.html"
+            }
+          ],
+          "related": {
+            "slug": "raw-html-rendered-dom-evidence",
+            "section": "triage-order",
+            "label": "Check transport and rendering before indexing conclusions"
+          }
+        },
+        {
+          "id": "answer-canonical-target",
+          "question": "What should happen when a canonical target redirects or returns 404?",
+          "answer": "Follow the target’s actual response rather than stopping at the tag. A redirect can add a competing edge; a missing target cannot serve the intended document. Resolve the chain, compare it with the intended endpoint, and check whether links, sitemap entries, and canonical declarations converge on the final accessible URL. Flag loops and contradictory destinations explicitly.",
+          "section": "cycles-and-components",
+          "sources": [
+            {
+              "label": "Google’s redirects and canonical signals",
+              "href": "https://developers.google.com/search/docs/crawling-indexing/301-redirects"
+            },
+            {
+              "label": "Google’s canonicalization guidance",
+              "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+            }
+          ],
+          "related": {
+            "slug": "raw-html-rendered-dom-evidence",
+            "section": "transport-artifact",
+            "label": "Retain status, final URL, and response bytes"
+          }
+        },
+        {
+          "id": "answer-canonical-consistency",
+          "question": "Should internal links and the sitemap use the canonical URL?",
+          "answer": "Use the preferred document URL consistently. Generating links, sitemap entries, redirects, and canonical declarations from one route record reduces contradictory signals and unnecessary intermediate requests. Check the built outputs and live responses as separate evidence: a registry can be internally correct while production routing serves a different result.",
+          "section": "signal-alignment",
+          "sources": [
+            {
+              "label": "Google’s canonicalization guidance",
+              "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+            },
+            {
+              "label": "Google’s sitemap guidance",
+              "href": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+            }
+          ],
+          "related": {
+            "slug": "structured-data-without-content-drift",
+            "section": "semantic-invariants",
+            "label": "Check other projections of the same publication record"
+          }
+        }
+      ]
+    },
+    "raw-html-rendered-dom-evidence": {
+      "boundary": "A browser capture describes the recorded environment. It does not reproduce every crawler or establish indexing.",
+      "questions": [
+        {
+          "id": "answer-source-versus-dom",
+          "question": "Why can View Source and the browser show different titles or content?",
+          "answer": "View Source describes the response body; the rendered DOM describes the document after the browser parses it and scripts run. Save both observations with URL, time, and environment. Compare title, canonical, headings, content, and links by meaning. A JavaScript change can fix or introduce a discrepancy, so neither observation should silently replace the other.",
+          "section": "semantic-diff",
+          "sources": [
+            {
+              "label": "Google’s JavaScript SEO basics",
+              "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+            },
+            {
+              "label": "WHATWG DOM standard",
+              "href": "https://dom.spec.whatwg.org/"
+            }
+          ],
+          "related": {
+            "slug": "structured-data-without-content-drift",
+            "section": "semantic-invariants",
+            "label": "Compare visible and machine-readable claims too"
+          }
+        },
+        {
+          "id": "answer-render-complete",
+          "question": "Is waiting for network idle enough to prove an article rendered?",
+          "answer": "No. A completion condition should refer to the page you need: the expected article, heading, body, and relevant links. Background requests may never settle, while a quiet network can leave a loading shell or failed component. Record the wait condition and check the resulting document, with explicit limits for missing or unavailable observations.",
+          "section": "completion-contract",
+          "sources": [
+            {
+              "label": "Google’s JavaScript rendering guidance",
+              "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+            },
+            {
+              "label": "Chrome DevTools Protocol",
+              "href": "https://chromedevtools.github.io/devtools-protocol/"
+            }
+          ],
+          "related": {
+            "slug": "canonicalization-graph-consistency",
+            "section": "release-gate",
+            "label": "Include rendered evidence in the route check"
+          }
+        },
+        {
+          "id": "answer-http-200-indexed",
+          "question": "Does a 200 response mean Google indexed the page?",
+          "answer": "No. A successful response establishes transport behavior for the request, not indexing. Inspect whether it contains the expected document or a shell, error, or alternate page; then inspect rendering and indexing directives. Google’s crawl, canonical selection, and index state are separate observations. Avoid diagnosing a ranking loss from an HTTP status alone.",
+          "section": "triage-order",
+          "sources": [
+            {
+              "label": "Google’s HTTP-status guidance",
+              "href": "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes"
+            },
+            {
+              "label": "Google’s JavaScript SEO basics",
+              "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+            }
+          ],
+          "related": {
+            "slug": "canonicalization-graph-consistency",
+            "section": "convergence-invariant",
+            "label": "Separate the preferred URL from Google’s selection"
+          }
+        }
+      ]
+    },
+    "structured-data-without-content-drift": {
+      "boundary": "These are publication-consistency checks. Valid markup does not promise a rich result, ranking gain, or AI citation.",
+      "questions": [
+        {
+          "id": "answer-json-ld-valid",
+          "question": "Is valid JSON-LD enough to make structured data correct?",
+          "answer": "No. Syntax is only one boundary. Entity identity, URLs, types, dates, and claims also need to describe the visible page and follow the consuming system’s policies. Compare the graph with the publication record and rendered output. A parser accepting JSON cannot establish that a hidden claim is true or eligible for a search feature.",
+          "section": "semantic-invariants",
+          "sources": [
+            {
+              "label": "Google’s structured-data policies",
+              "href": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"
+            },
+            {
+              "label": "W3C JSON-LD 1.1",
+              "href": "https://www.w3.org/TR/json-ld11/"
+            }
+          ],
+          "related": {
+            "slug": "raw-html-rendered-dom-evidence",
+            "section": "semantic-diff",
+            "label": "Compare the page visitors can actually read"
+          }
+        },
+        {
+          "id": "answer-stable-entity-id",
+          "question": "How should an article link to its author and website in structured data?",
+          "answer": "Give shared entities stable identifiers, then reference them consistently from each article. Keep the visible author, profile URL, website, and canonical article record aligned. Different pages about the same author should not manufacture unrelated identities. A stable identifier makes your graph coherent; it does not force another system to adopt your identity interpretation.",
+          "section": "stable-identifiers",
+          "sources": [
+            {
+              "label": "W3C JSON-LD node identifiers",
+              "href": "https://www.w3.org/TR/json-ld11/"
+            },
+            {
+              "label": "Schema.org documentation",
+              "href": "https://schema.org/docs/documents.html"
+            }
+          ],
+          "related": {
+            "slug": "canonicalization-graph-consistency",
+            "section": "signal-alignment",
+            "label": "Use one authoritative route record across outputs"
+          }
+        },
+        {
+          "id": "answer-schema-freshness",
+          "question": "Should a rebuild change an article’s publication or research date?",
+          "answer": "No. Publication, a substantive reader revision, and verification of the underlying sources are different events. Preserve the original publication date and research cutoff; record actual editorial changes without presenting old evidence as newly verified. Generate the visible dates and machine-readable dates from the same dated records so a routine build cannot invent freshness.",
+          "section": "domain-record",
+          "sources": [
+            {
+              "label": "Google’s structured-data policies",
+              "href": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"
+            },
+            {
+              "label": "Google’s structured-data introduction",
+              "href": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data"
+            }
+          ],
+          "related": {
+            "slug": "raw-html-rendered-dom-evidence",
+            "section": "transport-artifact",
+            "label": "Retain dated evidence separately from interpretation"
+          }
+        }
+      ]
+    },
+    "how-airlines-borrow-against-loyalty-programs": {
+      "boundary": "These notes summarize the article’s July 23, 2026 source package. Company balances and agreements remain dated; a program valuation, partner receipt, and accounting liability are different measures.",
+      "questions": [
+        {
+          "id": "answer-miles-bank-deposit",
+          "question": "Are airline miles equivalent to money deposited in a bank?",
+          "answer": "No. Cardholders’ borrowing is with the card issuer; an airline’s partner receipt is another transaction. Miles represent a program’s award obligation under its terms, not a customer cash deposit. Trace who pays, who owes an award, and what can be redeemed before describing the airline as holding the cardholder’s money.",
+          "section": "four-clocks",
+          "sources": [
+            {
+              "label": "American Airlines 2025 Form 10-K",
+              "href": "https://www.sec.gov/Archives/edgar/data/6201/000119312526187124/d151029dars.pdf"
+            },
+            {
+              "label": "AAdvantage terms",
+              "href": "https://www.aa.com/i18n/aadvantage-program/aadvantage-terms-and-conditions.jsp"
+            }
+          ],
+          "related": {
+            "slug": "hidden-financing-hardware-startups",
+            "section": "three-capital-stacks",
+            "label": "Identify each party’s distinct financing claim"
+          }
+        },
+        {
+          "id": "answer-mile-sale-revenue",
+          "question": "Does selling miles turn all partner cash immediately into airline revenue?",
+          "answer": "No. Receipt, revenue recognition, and award redemption occur on different clocks. Partner consideration can relate to travel awards and other contractual benefits, with allocation and deferral governed by the agreement and accounting treatment. A large partner cash receipt is therefore not interchangeable with recognized revenue or profit attributable to the program.",
+          "section": "cash-is-not-revenue",
+          "sources": [
+            {
+              "label": "American Airlines 2025 Form 10-K",
+              "href": "https://www.sec.gov/Archives/edgar/data/6201/000119312526187124/d151029dars.pdf"
+            },
+            {
+              "label": "Delta Air Lines 2025 Form 10-K",
+              "href": "https://www.sec.gov/Archives/edgar/data/27904/000002790426000013/dal-20251231.htm"
+            }
+          ],
+          "related": {
+            "slug": "hidden-financing-hardware-startups",
+            "section": "financing-mechanics",
+            "label": "Follow when cash arrives and fixed claims become due"
+          }
+        },
+        {
+          "id": "answer-loyalty-collateral",
+          "question": "What is pledged when an airline borrows against its loyalty program?",
+          "answer": "Read the particular debt agreement. The article’s loyalty financings involve specified assets, rights, and collections, with lender controls and payment priorities. They are not a generic mortgage on customers’ point balances. Trace the borrower, collateral, collection accounts, permitted uses, and waterfall before comparing a financing amount with a headline program valuation.",
+          "section": "loyalty-backed-debt",
+          "sources": [
+            {
+              "label": "AAdvantage 2021 credit agreement",
+              "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000054/ex104q121aadvantagexcredit.htm"
+            },
+            {
+              "label": "MileagePlus credit agreement",
+              "href": "https://www.sec.gov/Archives/edgar/data/100517/000110465920080673/tm2024018d1_ex10-1.htm"
+            }
+          ],
+          "related": {
+            "slug": "who-owns-texas-toll-roads",
+            "section": "how-a-toll-road-turns-traffic-into-equity-cash",
+            "label": "Compare a different contract-controlled cash waterfall"
+          }
+        },
+        {
+          "id": "answer-loyalty-diagram-check",
+          "question": "How should I check a loyalty-financing diagram against the debt agreement?",
+          "answer": "Treat each arrow as a claim to verify. Identify the borrowers and pledged rights, eligible receipts, collection sweeps, reserves, payment priorities, release conditions, and early-amortization triggers. The AAdvantage agreement separates collections from the payment account and conditions cash release. Figure 05 summarizes this structure; it cannot establish every covenant, current amendment, or undisclosed partner term. Check the particular dated agreement rather than treating every program as identical collateral.",
+          "section": "loyalty-backed-debt",
+          "sources": [
+            {
+              "label": "AAdvantage credit agreement, March 24, 2021",
+              "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000054/ex104q121aadvantagexcredit.htm"
+            }
+          ],
+          "related": {
+            "slug": "who-owns-texas-toll-roads",
+            "section": "how-a-toll-road-turns-traffic-into-equity-cash",
+            "label": "Compare another contract-controlled cash waterfall"
+          }
+        }
+      ]
+    },
+    "who-owns-austin-home-service-companies": {
+      "boundary": "These notes retain the July 2026 ownership-census cutoff. The dataset counts qualifying brands; it does not measure market share or establish effects on prices or service quality.",
+      "questions": [
+        {
+          "id": "answer-different-brands-owner",
+          "question": "Can three different contractor names lead to the same investment platform?",
+          "answer": "Yes. Distinct consumer brands can share a parent or investment platform. Follow each brand through its operator, parent, and controlling investor using dated relationship evidence. The Austin census shows such clusters, but shared ownership does not mean quotes are identical or prove coordination. Compare the actual contracting parties and scope alongside the ownership chain.",
+          "section": "mechanical-trades",
+          "sources": [
+            {
+              "label": "Published Austin ownership dataset",
+              "href": "/research/austin-home-service-ownership-2026.json"
+            }
+          ],
+          "related": {
+            "slug": "who-owns-texas-toll-roads",
+            "section": "a-road-can-have-seven-different-owners",
+            "label": "Separate title, operation, and financial claims"
+          }
+        },
+        {
+          "id": "answer-local-management-owner",
+          "question": "Does locally managed mean the company is locally owned?",
+          "answer": "No. Management describes an operating role; ownership describes an equity relationship or control. A founder can keep a title after selling control, while a minority investment can leave founder control intact. Record the source for each relationship instead of treating a local history, retained name, or management statement as proof of present equity ownership.",
+          "section": "meaning-of-local",
+          "sources": [
+            {
+              "label": "Published Austin ownership dataset",
+              "href": "/research/austin-home-service-ownership-2026.json"
+            }
+          ],
+          "related": {
+            "slug": "who-owns-texas-toll-roads",
+            "section": "a-road-can-have-seven-different-owners",
+            "label": "Specify which ownership right the claim describes"
+          }
+        },
+        {
+          "id": "answer-franchise-ownership",
+          "question": "Does an investor in a franchisor own every local franchise business?",
+          "answer": "A franchise agreement and a parent-subsidiary ownership relationship are different. The local franchisee and the franchisor’s owner need separate records; do not infer one from the other. The census also distinguishes minority investments and announced transactions from completed changes of control. Where the applicable ownership evidence is missing or conflicting, keep the result unresolved.",
+          "section": "meaning-of-local",
+          "sources": [
+            {
+              "label": "Published Austin ownership dataset",
+              "href": "/research/austin-home-service-ownership-2026.json"
+            }
+          ],
+          "related": {
+            "slug": "who-owns-texas-toll-roads",
+            "section": "public-authority-or-private-concession",
+            "label": "Compare contractual rights with legal ownership"
+          }
+        }
+      ]
+    },
+    "who-owns-texas-toll-roads": {
+      "boundary": "These notes follow the article’s dated ownership and concession evidence. Collection responsibilities, roadway title, revenue rights, and equity ownership are separate relationships; a billing name does not establish a current cap table.",
+      "questions": [
+        {
+          "id": "answer-toll-biller-owner",
+          "question": "Does the agency on a toll bill own the road or its concession?",
+          "answer": "The bill identifies a collection arrangement, which can sit with a different party from roadway title or concession rights. In the article's DFW example, NTTA bills and collects on behalf of the NTE, LBJ, and NTE 35W concession companies; TxDOT remits the project payments under the disclosed arrangement. That does not make NTTA the owner of those concession companies. Identify the facility, its public title and governing agreement, then trace revenue rights and equity separately. A tag or billing brand alone cannot establish that chain.",
+          "section": "a-road-can-have-seven-different-owners",
+          "sources": [
+            {
+              "label": "Ferrovial May 2026 Fact Book, DFW collection arrangement",
+              "href": "https://www.sec.gov/Archives/edgar/data/1468522/000162828026032618/ferrovial-factbook2026_s.htm"
+            },
+            {
+              "label": "FHWA LBJ Express project and toll-collection profile",
+              "href": "https://www.fhwa.dot.gov/ipd/project_profiles/tx_lbj_express.aspx"
+            }
+          ],
+          "related": {
+            "slug": "why-texas-toll-roads-stay-tolled",
+            "section": "five-separate-questions",
+            "label": "Separate construction recovery from debt and revenue rights"
+          }
+        }
+      ]
+    }
+  }
+}

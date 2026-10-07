@@ -1,4 +1,3 @@
-import { topicLabel } from './topic-label'
 import { isValidElement, lazy, Suspense, useEffect, useMemo, useRef, useState, type MouseEvent, type ReactNode } from 'react'
 import catalog from './data/catalog.json'
 import { inlineText, markdownToReact } from './Markdown'
@@ -9,7 +8,8 @@ import ArtCube from './ArtCube'
 import AtlasFigure from './AtlasFigure'
 import ProductEvidence from '../projects/ProductEvidence'
 import { getArticleGenerativeArtwork } from './generative/manifest'
-import { articleReturnHref, articleSection, relatedArticles, sectionHref } from './library'
+import { articleReturnHref, articleSection, relatedArticles, sectionHref, readingPathHref } from './library'
+import { findReadingTopic, nextTopicReading, readingTopics } from './topics'
 import { jumpToArticleSection as jumpTo } from './reader-jump'
 import { hasArticleFigures, loadArticleFigures, preparedArticleFigures } from './article-arrival'
 import ReaderNavigation from './ReaderNavigation'
@@ -21,7 +21,9 @@ import ArticleOpening, { ArticleMetrics, OpeningNotes } from './ArticleOpening'
 import { StoryLink } from './StoryLink'
 import ReaderGuide from './ReaderGuide'
 import SourceAccessNotes, { sourceAccessNotes } from './SourceAccessNotes'
-import { displayDate, type ArticleCase, type ArticleSection, type ArticleSummary, type ArticleTable, type WritingArticle } from './types'
+import AnswerNotes from './AnswerNotes'
+import { answerNotes, readerModifiedDate, questionAnchor } from './answer-notes'
+import { displayDate, displayReadTime, displayWritingTopic, type ArticleCase, type ArticleSection, type ArticleSummary, type ArticleTable, type WritingArticle } from './types'
 import './article-design.css'
 import './reader-craft.css'
 import './restored-articles.css'
@@ -191,6 +193,7 @@ export default function ArticlePage({ slug }: { slug: string }) {
       ? [...article.markdown.matchAll(/^## (.+)$/gm)].map(match => ({ title: match[1], id: sectionId(match[1]) }))
       : [...(article.sections || []), ...(article.markdownSections || [])].map(section => ({ id: section.id, title: section.title }))
     if (article.conclusion) items.push({ id: 'conclusion', title: article.conclusion.title })
+    if (answerNotes(article.slug)) items.push({ id: 'answer-notes', title: 'Questions, with evidence' })
     if (article.cases?.length) items.push({ id: 'case-inventory', title: 'Case inventory' })
     if (article.factGaps?.length) items.push({ id: 'fact-gaps', title: 'What remains unknown' })
     if (article.openQuestions?.length) items.push({ id: 'open-questions', title: 'Open questions' })
@@ -203,20 +206,25 @@ export default function ArticlePage({ slug }: { slug: string }) {
     if (downloads.length && !article.htmlBody) items.push({ id: 'reader-downloads', title: 'Supporting material' })
     return items
   }, [article, downloads])
-  if (error) return <section className="reader-loading"><p>{siteCopy.reader.error}</p><button className="text-button" onClick={() => setAttempt(attempt + 1)}>{siteCopy.reader.retry}</button><a href="#/writing">{siteCopy.reader.back} →</a></section>
+  const backHref = articleReturnHref(location.hash, articles, readingTopics)
+  const readingPath = backHref.startsWith('#/topics/') ? findReadingTopic(backHref.slice('#/topics/'.length).split('?')[0]) : undefined
+  const backLabel = readingPath ? 'Back to reading path' : siteCopy.reader.back
+  if (error) return <section className="reader-loading"><p>{siteCopy.reader.error}</p><button className="text-button" onClick={() => setAttempt(attempt + 1)}>{siteCopy.reader.retry}</button><a href={backHref}>{backLabel} →</a></section>
   if (!article) return <p className="reader-loading mono" role="status">{siteCopy.reader.loading}</p>
   const copy = withWritingCopy(article)
   const presentation = articlePresentation(article)
   const artwork = getArticleGenerativeArtwork(article.path)
   const heroImage = article.pageContent?.hero?.image
-  const backHref = articleReturnHref(location.hash, articles)
+  const modified = readerModifiedDate(article.slug, article.dateModified)
+  const nextReading = readingPath ? nextTopicReading(readingPath, article.slug) : undefined
   return <article className="article-page" data-story={article.slug} data-form={presentation.form} onClick={citationClick}>
-    <DestinationLink className="project-back mono" href={backHref} direction="left">{siteCopy.reader.back}</DestinationLink>
-    <header className="article-cover"><div className="reader-heading"><p className="eyebrow">{topicLabel(article.category)}</p><h1><ArticleTitle article={article} /></h1><p className="reader-subtitle">{copy.subtitle}</p><div className="reader-signature"><a className="reader-author" href="/about" rel="author">Sulayman Bowles</a><div className="reader-byline"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time>{article.dateModified && article.dateModified !== article.date && <span>Updated {displayDate(article.dateModified)}</span>}</div></div><ArticleUtilities /></div><ArtCube key={article.slug} artwork={artwork} /></header>
+    <DestinationLink className="project-back mono" href={backHref} direction="left">{backLabel}</DestinationLink>
+    <header className="article-cover"><div className="reader-heading"><p className="eyebrow">{displayWritingTopic(article.category)}</p><h1><ArticleTitle article={article} /></h1><p className="reader-subtitle">{copy.subtitle}</p><div className="reader-signature"><a className="reader-author" href="/about" rel="author">Sulayman Bowles</a><div className="reader-byline"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span className="writing-story-readtime">{displayReadTime(article.readTime)}</span>{modified && modified !== article.date.replaceAll('.', '-') && <span>Updated <time dateTime={modified}>{displayDate(modified)}</time></span>}</div></div><ArticleUtilities /></div><ArtCube key={article.slug} artwork={artwork} /></header>
     <div className="reader-layout" id="reader-start"><ReaderNavigation key={article.slug} sections={headings} href={location.hash} /><div className="reader-prose">
       <ReaderGuide slug={article.slug} hash={location.hash} />
       {body || <><ArticleOpening article={article}><Figures slug={article.slug} id="lede" position="after" /></ArticleOpening>{heroImage && <StoryImage image={heroImage} slug={article.slug} />}{article.sections?.map(section => <Section key={section.id} section={section} slug={article.slug} article={article} />)}{article.markdownSections?.map(section => <Section key={section.id} section={section} tables={article.tables} slug={article.slug} article={article} />)}</>}
       {article.conclusion && <Section section={{ id: 'conclusion', title: article.conclusion.title, paragraphs: [article.conclusion.content] }} slug={article.slug} />}
+      <AnswerNotes slug={article.slug} hash={location.hash} />
       {article.cases?.length ? <Cases cases={article.cases} filters={article.pageContent?.caseFilters} /> : null}
       {article.factGaps?.length ? <section id="fact-gaps" className="reader-section"><h2>What remains unknown</h2>{article.factGaps.map(gap => <div key={gap.title}><h3>{gap.title}</h3><ul>{gap.items.map((item, index) => <li key={index}>{inlineText(item)}</li>)}</ul></div>)}</section> : null}
       {article.openQuestions?.length ? <section id="open-questions" className="reader-section"><h2>Open questions</h2><ul>{article.openQuestions.map((question, index) => <li key={index}>{inlineText(question)}</li>)}</ul></section> : null}
@@ -224,14 +232,14 @@ export default function ArticlePage({ slug }: { slug: string }) {
       {article.valuationFrame && <section id="reader-valuation" className="reader-section"><h2>Valuation</h2><p>{inlineText(article.valuationFrame)}</p></section>}
       {article.risks && <section id="reader-risks" className="reader-section"><h2>Risks</h2><p>{inlineText(article.risks)}</p></section>}
       {article.recommendationBoundary && <p className="reader-evidence">{inlineText(article.recommendationBoundary)}</p>}
-      {article.faqs?.length ? <section id="questions" className="reader-section"><h2>Questions</h2>{article.faqs.map(faq => <details className="reader-disclosure reader-faq" key={faq.question}><summary><span>{faq.question}</span><span aria-hidden="true">+</span></summary>{markdownToReact(faq.answer)}</details>)}</section> : null}
+      {article.faqs?.length ? <section id="questions" className="reader-section"><h2>Questions</h2><nav className="question-links" aria-label="Questions in this essay">{article.faqs.map(faq => <a key={faq.question} href={sectionHref(location.hash, questionAnchor(faq.question))}>{faq.question}</a>)}</nav>{article.faqs.map(faq => <div key={faq.question}><details className="reader-disclosure reader-faq"><summary id={questionAnchor(faq.question)}><span>{faq.question}</span><span aria-hidden="true">+</span></summary>{markdownToReact(faq.answer)}</details><a className="question-permalink" href={sectionHref(location.hash, questionAnchor(faq.question))}>Link to this question</a></div>)}</section> : null}
       {article.sources?.length && !article.htmlBody && (!article.markdown || article.markdownSections) ? <section id="sources" className="reader-section reader-sources"><h2>Sources</h2><ol>{article.sources.map((source, index) => <li id={sourceAnchor(source, index)} key={`${source.id}-${index}`}>{!source.id && <span id={`source-${index + 1}`} />}{(source.href ? [source.href] : source.hrefs || []).map((href, hrefIndex) => <a className="source-link" key={href} href={articleHref(href, articles, import.meta.env.BASE_URL)} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noreferrer' : undefined}>{hrefIndex === 0 ? source.label : `Additional source ${hrefIndex + 1}`}<span aria-hidden="true"> ↗</span></a>)}{(source.publisher || source.date || source.type) && <span className="source-publisher">{[source.publisher, source.date, source.type].filter(Boolean).join(" · ")}</span>}{source.lastVerified && <span className="source-publisher">Verified {displayDate(source.lastVerified)}</span>}{source.note && <p>{source.note}</p>}{source.limitation && <p>{source.limitation}</p>}</li>)}</ol></section> : null}
       {downloads.length > 0 && !article.htmlBody && <section id="reader-downloads" className="reader-section reader-downloads"><h2>Supporting material</h2><ul>{downloads.map(asset => <li key={asset.href}><a href={articleHref(asset.href, articles, import.meta.env.BASE_URL)}>{asset.label} ↗</a>{'description' in asset && asset.description && <span className="reader-resource-description">{asset.description}</span>}</li>)}</ul></section>}
       {article.pageContent?.endnotes?.map((note, index) => <footer className="reader-endnote" key={index}>{markdownToReact(note.markdown)}<nav aria-label="Related reading">{note.links.map(link => <a key={link.href} href={articleHref(link.href, articles, import.meta.env.BASE_URL)}>{link.label} ↗</a>)}</nav></footer>)}
       <SourceAccessNotes slug={article.slug} />
       <AuthorNote />
     </div></div>
-    <section className="reader-further"><div className="reader-further-heading"><h2>{siteCopy.reader.more}</h2><div className="reader-further-actions"><DestinationLink className="arrow-link" href={backHref} direction="left">{siteCopy.reader.back}</DestinationLink></div></div><nav aria-label="More articles">{relatedArticles(article, articles).map(item => <StoryLink key={item.slug} article={item} />)}</nav></section>
+    <section className="reader-further"><div className="reader-further-heading"><h2>{nextReading ? 'Next in this reading path' : siteCopy.reader.more}</h2><div className="reader-further-actions"><DestinationLink className="arrow-link" href={backHref} direction="left">{backLabel}</DestinationLink></div></div><nav aria-label={nextReading ? 'Continue reading path' : 'More articles'}>{nextReading && readingPath ? <StoryLink article={withWritingCopy(nextReading.article)} description={nextReading.reason} position={`Essay ${nextReading.position} of ${nextReading.total}`} href={`#/writing/${nextReading.article.slug}?from=${encodeURIComponent(readingPathHref(readingPath.slug, nextReading.article.slug))}`} /> : relatedArticles(article, articles).map(item => <StoryLink key={item.slug} article={item} />)}</nav></section>
     <CitationPreview key={article.slug} />
   </article>
 }

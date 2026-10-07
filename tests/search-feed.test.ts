@@ -8,10 +8,10 @@ test('feed uses canonical essay identities, real source dates, and the public au
   const feed = writingFeed(catalog)
   assert.equal((feed.match(/<entry>/g) || []).length, catalog.length)
   assert(feed.includes('<name>Sulayman Bowles</name><uri>https://sulayman-bowles.dev/about</uri>'))
-  assert(feed.includes('<updated>2026-10-05T00:00:00Z</updated>'))
+  assert(feed.includes('<updated>2026-10-06T00:00:00Z</updated>'))
   for (const article of catalog) assert(feed.includes(`<id>https://sulayman-bowles.dev${article.path}</id>`))
   assert(!feed.includes('#/'))
-  assert(feed.indexOf('/writing/atlas-building-an-evidence-console</id>') < feed.indexOf('/markets/who-owns-texas-toll-roads</id>'))
+  assert(feed.indexOf('/markets/who-owns-texas-toll-roads</id>') < feed.indexOf('/writing/atlas-building-an-evidence-console</id>'), 'A real Oct 6 addition belongs ahead of an unchanged Oct 5 edition')
   assert.equal(writingFeed(catalog), writingFeed([...catalog].reverse()))
 })
 

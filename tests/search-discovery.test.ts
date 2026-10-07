@@ -5,7 +5,8 @@ import { machineProfile, machineReferences, documentText, fullDiscoveryText, dis
 import { resumeProfile, resumeReview } from '../src/personal/profile-copy.ts'
 import { publicPages, siteOrigin } from '../src/personal/public-pages.ts'
 import { identity } from '../src/personal/identity.ts'
-import { personId } from '../src/personal/search-metadata.ts'
+import { personId, searchMetadata } from '../src/personal/search-metadata.ts'
+import { answerNotes, answerNotesUpdated } from '../src/personal/editorial/answer-notes.ts'
 import catalog from '../src/personal/editorial/data/catalog.json' with { type: 'json' }
 import type { WritingArticle } from '../src/personal/editorial/types.ts'
 
@@ -40,13 +41,24 @@ test('machine references cover current canonical documents, real dates and exact
     assert.equal(record.author, personId)
     assert.equal(record.url, `${siteOrigin}${source.path}`)
     assert.equal(record.datePublished, source.date.replaceAll('.', '-'))
-    assert.equal(record.dateModified, source.dateModified?.replaceAll('.', '-'))
+    const articleNode = searchMetadata(`writing/${source.slug}`).schema!['@graph'].find(node => node['@type'] === 'Article')!
+    assert.equal(record.dateModified, articleNode.dateModified, 'Machine references must describe the same reader edition as the document')
+    assert.equal(record.manuscriptDateModified, source.dateModified?.replaceAll('.', '-'))
     assert.equal(record.evidenceBoundary, source.pageContent?.boundary?.text || source.evidenceBoundary)
     for (const citation of record.sources) for (const url of citation.urls) {
       assert(new URL(url).protocol.startsWith('http'))
       const original = url.startsWith(`${siteOrigin}/`) ? new URL(url).pathname : url
       assert(JSON.stringify(source.sources).includes(original), `Unpublished citation: ${url}`)
     }
+    const notes = answerNotes(source.slug)
+    if (notes) {
+      assert.equal(record.readerNotes!.dateAdded, answerNotesUpdated)
+      assert.equal(record.readerNotes!.evidenceBoundary, notes.boundary)
+      assert.deepEqual(record.readerNotes!.questions.map(question => question.url), notes.questions.map(note => `${siteOrigin}${source.path}#${note.id}`))
+      for (const question of record.readerNotes!.questions) for (const citation of question.sources) {
+        assert(articleNode.citation.includes(citation.url), `Reader citation missing from document metadata: ${citation.url}`)
+      }
+    } else assert(!record.readerNotes)
   }
   for (const topic of references.readingPaths) for (const reading of topic.readings) assert(references.articles.some(article => article.url === reading.url))
   assert.deepEqual(machineReferences(articles, boundaries), references)
