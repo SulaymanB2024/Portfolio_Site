@@ -30,6 +30,11 @@ export const articlePresentations: Record<string, ArticlePresentation> = {
   'ai-search-crawler-policy': { form: 'notebook', lines: ['AI crawlers: search,', 'training, and access.'] },
   'technical-seo-public-data-infrastructure': { form: 'notebook', lines: ['Technical SEO', 'as public data infrastructure.'] },
   'canonical-identity-personal-seo': { form: 'notebook', lines: ['Canonical identity', 'beats more content.'] },
+  'canonicalization-graph-consistency': { form: 'notebook', lines: ['Canonicalization', 'is a graph problem.'] },
+  'internal-links-directed-retrieval-graph': { form: 'notebook', lines: ['Internal links', 'are a retrieval graph.'] },
+  'robots-txt-courtesy-not-access-control': { form: 'notebook', lines: ['Robots.txt', 'is not access control.'] },
+  'structured-data-without-content-drift': { form: 'notebook', lines: ['Structured data', 'without content drift.'] },
+  'audit-findings-derived-records': { form: 'notebook', lines: ['Audit findings', 'are derived records.'] },
 }
 
 export function articlePresentation(article: Pick<ArticleSummary, 'slug' | 'title' | 'displayTitle'>): ArticlePresentation {

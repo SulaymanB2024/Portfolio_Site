@@ -83,16 +83,23 @@ test('idle clips move actual articulated surfaces and return seamlessly while th
       const framePose = frame.matrixWorld.clone()
       const samples: { name: string; mesh: Mesh; vertices: Vector3[]; baseline?: Vector3[]; moved: boolean }[] = []
       for (const track of clip.tracks) {
-        assert(track.name.endsWith('.quaternion'), 'articulation uses standard node rotation')
+        const translation = track.name.endsWith('.position')
+        assert(translation || track.name.endsWith('.quaternion'), 'physical parts use standard node translation or rotation')
         const name = track.name.slice(0, track.name.lastIndexOf('.'))
         const part = gltf.scene.getObjectByName(name)!
         assert(part && part !== frame && part.parent, 'clip must target a part rather than the root')
         assert(record.clips[0].articulatedNodes.includes(name))
         assert(track.times[0] === 0 && track.times.at(-1) === clip.duration)
         const values = track.values
-        const first = new Quaternion().fromArray(values, 0).normalize(), last = new Quaternion().fromArray(values, values.length - 4).normalize()
-        assert(first.angleTo(last) < 1e-6, record.id + ' loop endpoint continuity')
-        for (let i = 0; i < values.length; i += 4) assert(Math.abs(new Quaternion().fromArray(values, i).length() - 1) < 1e-5)
+        assert(values.every(Number.isFinite), record.id + ' finite motion')
+        if (translation) {
+          const first = new Vector3().fromArray(values, 0), last = new Vector3().fromArray(values, values.length - 3)
+          assert(first.distanceTo(last) < 1e-6, record.id + ' translation loop endpoint continuity')
+        } else {
+          const first = new Quaternion().fromArray(values, 0).normalize(), last = new Quaternion().fromArray(values, values.length - 4).normalize()
+          assert(first.angleTo(last) < 1e-6, record.id + ' rotation loop endpoint continuity')
+          for (let i = 0; i < values.length; i += 4) assert(Math.abs(new Quaternion().fromArray(values, i).length() - 1) < 1e-5)
+        }
         let surface: Mesh | undefined
         part.traverse(node => { if (!surface && node instanceof Mesh) surface = node })
         assert(surface, name + ' must contain a rendered surface')
@@ -101,7 +108,9 @@ test('idle clips move actual articulated surfaces and return seamlessly while th
         samples.push({ name, mesh: surface!, vertices, moved: false })
       }
       mixer.clipAction(clip).play()
-      for (const fraction of [0, .17, .39, .71]) {
+      // Sample the full clip so brief physical actions, such as a shutter press,
+      // cannot be missed by a few arbitrary poses.
+      for (const fraction of Array.from({ length: 65 }, (_, i) => i / 64)) {
         mixer.setTime(clip.duration * fraction); gltf.scene.updateMatrixWorld(true)
         assert.deepEqual(frame.matrixWorld.toArray(), framePose.toArray(), record.id + ' frame cannot spin as a substitute for articulation')
         for (const sample of samples) {

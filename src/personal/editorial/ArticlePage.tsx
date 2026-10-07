@@ -1,3 +1,4 @@
+import { topicLabel } from './topic-label'
 import { isValidElement, lazy, Suspense, useEffect, useMemo, useRef, useState, type MouseEvent, type ReactNode } from 'react'
 import catalog from './data/catalog.json'
 import { inlineText, markdownToReact } from './Markdown'
@@ -17,9 +18,9 @@ import ResearchFigure from './ResearchFigure'
 import RestoredArticleBody from './RestoredArticleBody'
 import { articleDownloads, sourceAnchor } from './article-content'
 import ArticleOpening, { ArticleMetrics, OpeningNotes } from './ArticleOpening'
+import { StoryLink } from './StoryLink'
 import ReaderGuide from './ReaderGuide'
 import SourceAccessNotes, { sourceAccessNotes } from './SourceAccessNotes'
-import { StoryLink } from './StoryLink'
 import { displayDate, type ArticleCase, type ArticleSection, type ArticleSummary, type ArticleTable, type WritingArticle } from './types'
 import './article-design.css'
 import './reader-craft.css'
@@ -136,7 +137,24 @@ function Cases({ cases, filters }: { cases: ArticleCase[]; filters?: { value: st
   const categories = filters || [{ value: 'all', label: 'All' }, { value: 'live', label: 'Live operations' }, { value: 'bounded', label: 'Bounded pilots' }, { value: 'narrow', label: 'Production agents' }, { value: 'simulation', label: 'Simulations' }, { value: 'excluded', label: 'Comparators' }]
   const visible = cases.filter(item => (filter === 'all' || item.kind === filter) && (grade === 'all' || item.grade === grade) && Object.values(item).join(' ').toLowerCase().includes(query.trim().toLowerCase()))
   const fields: [keyof ArticleCase, string][] = [['form', 'Business'], ['geography', 'Location'], ['authority', 'AI authority'], ['humanLayer', 'Human role'], ['economics', 'Economics'], ['caveat', 'Evidence limits']]
-  return <section id="case-inventory" className="reader-section"><h2>Case inventory</h2><div className="case-toolbar"><label className="case-query"><span className="sr-only">Search AI business cases</span><input className="case-search" type="search" placeholder="Search cases" value={query} onChange={event => setQuery(event.target.value)} /></label><label className="writing-category"><span className="sr-only">Evidence grade</span><select value={grade} onChange={event => setGrade(event.target.value)}><option value="all">All evidence grades</option>{[...new Set(cases.map(item => item.grade))].map(value => <option key={value} value={value}>{value === 'Excluded' ? 'Comparators' : `Grade ${value}`}</option>)}</select></label></div><div className="case-filters" role="group" aria-label="Filter AI business cases">{categories.map(({ value, label }) => <button key={value} aria-pressed={filter === value} onClick={() => setFilter(value)}>{label}</button>)}</div><p className="case-count mono" role="status">{visible.length} {visible.length === 1 ? 'case' : 'cases'}</p>{!visible.length && <button className="text-button" onClick={() => { setFilter('all'); setGrade('all'); setQuery('') }}>Clear filters</button>}<div className="case-list">{visible.map((item, index) => <details key={item.name} className="reader-disclosure" open={index === 0 && filter !== "all"}><summary><span>{item.name}</span><span className="mono">{item.grade === 'Excluded' ? 'Comparator' : `Grade ${item.grade}`}</span><span aria-hidden="true">+</span></summary><dl>{fields.map(([field, label]) => <div key={field}><dt>{label}</dt><dd>{inlineText(item[field] || '')}</dd></div>)}</dl><a href={item.href} target="_blank" rel="noreferrer">Source ↗</a></details>)}</div></section>
+  return <section id="case-inventory" className="reader-section">
+    <h2>Case inventory</h2>
+    <div className="case-toolbar">
+      <label className="case-query"><span className="sr-only">Search AI business cases</span><input className="case-search" type="search" placeholder="Search cases" value={query} onChange={event => setQuery(event.target.value)} /></label>
+      <label className="writing-category"><span className="sr-only">Evidence grade</span><select value={grade} onChange={event => setGrade(event.target.value)}><option value="all">All evidence grades</option>{[...new Set(cases.map(item => item.grade))].map(value => <option key={value} value={value}>{value === 'Excluded' ? 'Comparators' : `Grade ${value}`}</option>)}</select></label>
+    </div>
+    <div className="case-filters" role="group" aria-label="Filter AI business cases">{categories.map(({ value, label }) => <button key={value} aria-pressed={filter === value} onClick={() => setFilter(value)}>{label}</button>)}</div>
+    <p className="case-count mono" role="status">{visible.length} of {cases.length} {cases.length === 1 ? 'case' : 'cases'}</p>
+    <p className="case-print-summary">Complete inventory: {cases.length} {cases.length === 1 ? 'case' : 'cases'}.</p>
+    {!visible.length && <button className="text-button case-clear" onClick={() => { setFilter('all'); setGrade('all'); setQuery('') }}>Clear filters</button>}
+    {/* Keep evidence mounted so beforeprint can expand the complete inventory.
+        Screen filtering uses native hidden semantics and survives afterprint. */}
+    <div className="case-list">{cases.map(item => <details key={item.name} className="reader-disclosure" hidden={!visible.includes(item)} open={item === visible[0] && filter !== 'all'}>
+      <summary><span>{item.name}</span><span className="mono">{item.grade === 'Excluded' ? 'Comparator' : `Grade ${item.grade}`}</span><span aria-hidden="true">+</span></summary>
+      <dl>{fields.map(([field, label]) => <div key={field}><dt>{label}</dt><dd>{inlineText(item[field] || '')}</dd></div>)}</dl>
+      <a href={item.href} target="_blank" rel="noreferrer">Source ↗</a>
+    </details>)}</div>
+  </section>
 }
 
 export default function ArticlePage({ slug }: { slug: string }) {
@@ -194,7 +212,7 @@ export default function ArticlePage({ slug }: { slug: string }) {
   const backHref = articleReturnHref(location.hash, articles)
   return <article className="article-page" data-story={article.slug} data-form={presentation.form} onClick={citationClick}>
     <DestinationLink className="project-back mono" href={backHref} direction="left">{siteCopy.reader.back}</DestinationLink>
-    <header className="article-cover"><div className="reader-heading"><p className="eyebrow">{article.category}</p><h1><ArticleTitle article={article} /></h1><p className="reader-subtitle">{copy.subtitle}</p><div className="reader-signature"><a className="reader-author" href="/about" rel="author">Sulayman Bowles</a><div className="reader-byline"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time>{article.dateModified && article.dateModified !== article.date && <span>Updated {displayDate(article.dateModified)}</span>}</div></div><ArticleUtilities /></div><ArtCube key={article.slug} artwork={artwork} /></header>
+    <header className="article-cover"><div className="reader-heading"><p className="eyebrow">{topicLabel(article.category)}</p><h1><ArticleTitle article={article} /></h1><p className="reader-subtitle">{copy.subtitle}</p><div className="reader-signature"><a className="reader-author" href="/about" rel="author">Sulayman Bowles</a><div className="reader-byline"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time>{article.dateModified && article.dateModified !== article.date && <span>Updated {displayDate(article.dateModified)}</span>}</div></div><ArticleUtilities /></div><ArtCube key={article.slug} artwork={artwork} /></header>
     <div className="reader-layout" id="reader-start"><ReaderNavigation key={article.slug} sections={headings} href={location.hash} /><div className="reader-prose">
       <ReaderGuide slug={article.slug} hash={location.hash} />
       {body || <><ArticleOpening article={article}><Figures slug={article.slug} id="lede" position="after" /></ArticleOpening>{heroImage && <StoryImage image={heroImage} slug={article.slug} />}{article.sections?.map(section => <Section key={section.id} section={section} slug={article.slug} article={article} />)}{article.markdownSections?.map(section => <Section key={section.id} section={section} tables={article.tables} slug={article.slug} article={article} />)}</>}

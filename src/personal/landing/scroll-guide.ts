@@ -6,13 +6,14 @@ export const READING_STOPS = [0, .21, .46, .71, .96] as const
 
 export function nextReadingStop(progress: number): number | null {
   const { leg, local } = sceneSequence(progress)
-  const next = leg + (local >= .74 ? 2 : 1)
+  const next = leg + (local >= .83 ? 2 : 1)
   return READING_STOPS[next] ?? null
 }
 
 /** A small alignment after native scrolling; the whole transition stays freely scrubbable. */
 export function nearbyReadingStop(progress: number, distance: number): number | null {
   if (!Number.isFinite(progress) || !Number.isFinite(distance) || distance <= 0) return null
+  if (thresholdMotion(sceneSequence(progress).local).incomingLinks !== 1) return null
   const stop = READING_STOPS.slice(1).find(value => Math.abs(value - progress) * distance <= Math.min(48, distance * .009))
   return stop !== undefined && Math.abs(stop - progress) * distance > 1 ? stop : null
 }

@@ -12,6 +12,7 @@ const load = (path: string) => JSON.parse(readFileSync(new URL(path, import.meta
 const catalog: ArticleSummary[] = load('../src/personal/editorial/data/catalog.json')
 const manifest = load('../docs/article-restoration.json')
 const revisions = load('../docs/article-revisions.json').records
+const qualityExceptions = load('../docs/article-quality-revisions.json').exceptions
 const article = (slug: string): WritingArticle => load(`../src/personal/editorial/data/articles/${slug}.json`)
 
 test('original recoveries remain frozen; recorded editorial revisions preserve their research evidence', () => {
@@ -20,7 +21,7 @@ test('original recoveries remain frozen; recorded editorial revisions preserve t
     const revision = revisions.find((item: any) => item.slug === record.slug)
     const original = revision ? load(`../${revision.originalPath}`) : data
     assert.equal(createHash('sha256').update(JSON.stringify(originalFields(original, record.sourceKeys))).digest('hex'), record.originalSha256, record.slug)
-    if (revision) assert.deepEqual(protectedArticleEvidence(data, record.sourceKeys), protectedArticleEvidence(original, record.sourceKeys), record.slug)
+    if (revision) assert.deepEqual(protectedArticleEvidence(data, record.sourceKeys), protectedArticleEvidence(original, record.sourceKeys, qualityExceptions), record.slug)
     for (const figure of data.sections?.flatMap(section => section.figures || []) || []) {
       assert(figure.alt && figure.caption && figure.width > 0 && figure.height > 0)
       assert(readFileSync(new URL(`../public${figure.src}`, import.meta.url)).length > 0)
@@ -51,7 +52,8 @@ test('original resources are available, deduplicated and respect a subdirectory 
     const data = article(record.slug)
     const downloads = articleDownloads(data)
     assert.equal(new Set(downloads.map(item => item.href)).size, downloads.length)
-    assert.equal(downloads.length, record.resources)
+    const removals = qualityExceptions.filter((exception: any) => exception.slug === record.slug && exception.removedResource)
+    assert.equal(downloads.length, record.resources - removals.length)
     for (const resource of downloads.filter(item => /\.[a-z]+$/i.test(item.href))) {
       assert(readFileSync(new URL(`../public${resource.href}`, import.meta.url)).length > 0)
       assert.equal(articleHref(resource.href, catalog, '/portfolio/'), `/portfolio${resource.href}`)

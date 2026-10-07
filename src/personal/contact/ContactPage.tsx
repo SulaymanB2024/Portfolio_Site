@@ -35,7 +35,7 @@ export default function ContactPage({ dark }: { dark: boolean }) {
     <div className="lion-contact-rail" aria-label="Contact links">
     <div className="lion-contact-note lion-contact-email">
       <DestinationLink href={`mailto:${contact.email}`} direction="external" emphasis="contact">{contact.email}</DestinationLink>
-      <div className="lion-contact-copy mono"><button type="button" onClick={copyAddress}>Copy address</button><span role="status">{copyStatus}</span></div>
+      <div className="lion-contact-copy mono"><button type="button" onClick={copyAddress} data-copied={copyStatus === 'Copied'}>{copyStatus === 'Copied' ? 'Copied' : 'Copy address'}</button><span className={copyStatus === 'Copied' ? 'sr-only' : undefined} role="status">{copyStatus === 'Copied' ? 'Address copied.' : copyStatus}</span></div>
     </div>
     <div className="lion-contact-note lion-contact-linkedin"><DestinationLink href={contact.linkedin}>LinkedIn</DestinationLink></div>
     </div>

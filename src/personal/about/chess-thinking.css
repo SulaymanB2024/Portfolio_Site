@@ -1,0 +1,78 @@
+.chess-thinking {
+  container: chess-thinking / inline-size;
+  --thinking-ink: var(--ink, #24221e);
+  --thinking-muted: var(--muted, #625f56);
+  --thinking-paper: var(--paper, #f5f2ea);
+  --thinking-prior: var(--thinking-muted);
+  --thinking-route: color-mix(in srgb, var(--thinking-ink) 52%, var(--thinking-paper));
+  --thinking-accent: #7e6841;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 0 10px;
+  border-top: 1px solid var(--thinking-ink);
+  border-bottom: 1px solid var(--line, #d9d4c9);
+  color: var(--thinking-ink);
+  font-family: 'Courier New', monospace;
+  font-variant-numeric: tabular-nums;
+  pointer-events: auto;
+}
+[data-appearance='dark'] .chess-thinking { --thinking-accent: #c8b688; }
+.chess-thinking-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.chess-thinking-heading h3 { margin: 0; font: 400 22px/1 Georgia, 'Times New Roman', serif; letter-spacing: -.035em; }
+.chess-thinking-heading > div > span { display: block; margin-top: 7px; color: var(--thinking-muted); font-size: 11px; line-height: 1.4; letter-spacing: .02em; }
+.chess-thinking-status { color: var(--thinking-muted); font-size: 11px; line-height: 1.4; white-space: nowrap; }
+.chess-thinking[data-state='searching'] .chess-thinking-status { color: var(--thinking-accent); }
+.chess-thinking-diagram { margin: 14px 0 7px; min-width: 0; }
+.chess-thinking-graph { display: block; width: 100%; height: auto; overflow: visible; }
+.chess-thinking-graph-compact { display: none; }
+.chess-thinking-column { font: 10px 'Courier New', monospace; fill: var(--thinking-muted); }
+.chess-thinking-route { fill: none; stroke: var(--thinking-route); stroke-width: .8; stroke-linecap: square; vector-effect: non-scaling-stroke; transition: stroke 180ms linear; }
+.chess-thinking-route[data-current='true'] { stroke: var(--thinking-ink); stroke-width: 1; }
+.chess-thinking-label-ground { fill: var(--thinking-paper); }
+.chess-thinking-san { font: 14px 'Courier New', monospace; letter-spacing: -.025em; fill: var(--thinking-prior); }
+.chess-thinking-node[data-current='true'] .chess-thinking-san { fill: var(--thinking-ink); font-weight: bold; }
+.chess-thinking-report-depth { font: 9px 'Courier New', monospace; fill: var(--thinking-muted); }
+.chess-thinking-continuation { font: 12px 'Courier New', monospace; fill: var(--thinking-muted); }
+.chess-thinking-activity { fill: none; stroke: var(--thinking-accent); stroke-width: 2.4; stroke-linecap: square; vector-effect: non-scaling-stroke; stroke-dasharray: .12 .88; opacity: 0; }
+.chess-thinking[data-motion='true'] .chess-thinking-activity { opacity: 1; animation: chess-thinking-activity 1800ms linear infinite; }
+.chess-thinking-visit { fill: var(--thinking-accent); opacity: 0; }
+.chess-thinking[data-motion='true'] .chess-thinking-visit { animation: chess-thinking-visit 900ms ease-out both; }
+.chess-thinking[data-motion='true'] .chess-thinking-node { animation: chess-thinking-node-arrive 260ms ease-out both; }
+.chess-thinking[data-motion='true'] .chess-thinking-route { animation: chess-thinking-route-arrive 260ms ease-out both; }
+.chess-thinking[data-motion='false'] .chess-thinking-activity { animation: none; opacity: 0; }
+.chess-thinking[data-motion='false'] .chess-thinking-node,
+.chess-thinking[data-motion='false'] .chess-thinking-route { animation: none; transition: none; }
+.chess-thinking[data-motion='false'] .chess-thinking-visit { animation: none; opacity: 0; }
+.chess-thinking-empty { display: flex; align-items: center; gap: 14px; min-height: 70px; color: var(--thinking-muted); font-size: 10px; }
+.chess-thinking-download { flex: 1; height: 1px; background: var(--line, #d9d4c9); }
+.chess-thinking-download > span { display: block; height: 1px; background: var(--thinking-ink); }
+.chess-thinking-percent { font-size: 9px; }
+.chess-thinking-footer { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 24px; padding-top: 8px; border-top: 1px solid var(--line, #d9d4c9); font-size: 11px; line-height: 1.4; }
+.chess-thinking-move, .chess-thinking-score { display: inline-flex; align-items: baseline; gap: 9px; }
+.chess-thinking-move > span, .chess-thinking-score > span, .chess-thinking-statistics { color: var(--thinking-muted); }
+.chess-thinking-move > strong, .chess-thinking-score > strong { color: var(--thinking-ink); font: 400 19px/1 Georgia, 'Times New Roman', serif; letter-spacing: -.035em; }
+.chess-thinking-statistics { display: inline-flex; gap: 15px; flex-wrap: wrap; }
+.chess-thinking-statistics b { color: var(--thinking-ink); font-weight: 400; }
+@keyframes chess-thinking-activity { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes chess-thinking-visit { 0% { opacity: 0; transform: scaleX(.2); } 18% { opacity: .9; transform: scaleX(1); } 100% { opacity: 0; transform: scaleX(1); } }
+@keyframes chess-thinking-node-arrive { from { opacity: .15; } to { opacity: 1; } }
+@keyframes chess-thinking-route-arrive { from { opacity: .15; } to { opacity: 1; } }
+@container chess-thinking (max-width: 500px) {
+  .chess-thinking-graph-wide { display: none; }
+  .chess-thinking-graph-compact { display: block; }
+  .chess-thinking-heading h3 { font-size: 21px; }
+  .chess-thinking-footer { gap: 10px 18px; }
+  .chess-thinking-statistics { gap: 13px; }
+}
+@supports not (container-type: inline-size) {
+  @media (max-width: 600px) {
+    .chess-thinking-graph-wide { display: none; }
+    .chess-thinking-graph-compact { display: block; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chess-thinking .chess-thinking-activity { animation: none !important; opacity: 0 !important; }
+  .chess-thinking .chess-thinking-visit { animation: none !important; opacity: 0 !important; }
+  .chess-thinking .chess-thinking-node, .chess-thinking .chess-thinking-route { animation: none !important; transition: none !important; }
+}

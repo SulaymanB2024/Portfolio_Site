@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { BufferGeometry, Group, Mesh, MeshBasicMaterial } from 'three'
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 import { createPortfolioModelLoader } from '../src/personal/portfolio-model-loader.ts'
 
 function glbHeader() {
@@ -41,6 +42,52 @@ test('superseded fetches abort without starting a decode', async context => {
   await assert.rejects(pending, { name: 'AbortError' })
   assert.equal(parses, 0)
   loader.dispose()
+})
+
+test('renderer disposal aborts the download and rejects a response arriving afterward', async context => {
+  let respond!: (response: Response) => void
+  let signal!: AbortSignal
+  let parses = 0, decoderDisposals = 0
+  context.mock.method(globalThis, 'fetch', (_url: string, init: RequestInit) => {
+    signal = init.signal!
+    // Simulate a response already queued when the renderer leaves the page.
+    return new Promise<Response>(resolve => { respond = resolve })
+  })
+  context.mock.method(GLTFLoader.prototype, 'parseAsync', async () => { parses++; return {} as GLTF })
+  context.mock.method(DRACOLoader.prototype, 'dispose', () => { decoderDisposals++ })
+  const loader = createPortfolioModelLoader('/')
+  const pending = loader.load('/helmet.glb')
+  loader.dispose()
+  assert.equal(signal.aborted, true)
+  respond(new Response(glbHeader()))
+  await assert.rejects(pending, { name: 'AbortError' })
+  assert.equal(parses, 0)
+  assert.equal(decoderDisposals, 1)
+  loader.dispose()
+  assert.equal(decoderDisposals, 1)
+})
+
+test('a decoder is released only after all active parses settle during departure', async context => {
+  const finish: ((model: GLTF) => void)[] = []
+  let ready!: () => void, decoderDisposals = 0
+  const bothParsing = new Promise<void>(resolve => { ready = resolve })
+  context.mock.method(globalThis, 'fetch', async () => new Response(glbHeader()))
+  context.mock.method(GLTFLoader.prototype, 'parseAsync', () => new Promise<GLTF>(resolve => {
+    finish.push(resolve)
+    if (finish.length === 2) ready()
+  }))
+  context.mock.method(DRACOLoader.prototype, 'dispose', () => { decoderDisposals++ })
+  const loader = createPortfolioModelLoader('/')
+  const helmet = loader.load('/helmet.glb'), portal = loader.load('/portal.glb')
+  await bothParsing
+  loader.dispose()
+  assert.equal(decoderDisposals, 0)
+  finish[0]({ scene: new Group() } as GLTF)
+  await assert.rejects(helmet, { name: 'AbortError' })
+  assert.equal(decoderDisposals, 0)
+  finish[1]({ scene: new Group() } as GLTF)
+  await assert.rejects(portal, { name: 'AbortError' })
+  assert.equal(decoderDisposals, 1)
 })
 
 test('a decode completing after teardown releases shared resources exactly once', async context => {

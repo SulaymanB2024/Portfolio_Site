@@ -11,9 +11,11 @@ import type { InterestId } from './about-content'
 import type { PhraseNote } from './music-phrase'
 import type { ChessSceneState } from './ChessGame'
 import { createChessSet } from './chess-scene'
+import { createChessSearchArrow } from './chess-search-arrow'
 import { drawScoreCanvas } from './score-engraving'
 import { batchBoardTiles, createBoardLabels } from './board-batching'
 import { cloneInterestBoardMaterial, composeInterestView, settleInterestValue, settleInterestView, writeKnightDestination, type InterestView } from './interest-motion'
+import { chessDragIntent, chessOrbitTarget, turnChessOrbit } from './chess-orbit'
 
 export interface InterestScene {
   select(id: InterestId | null): void
@@ -113,6 +115,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   goal.visible = false
   const markers: THREE.Mesh[] = []
   const puzzleOverlay = new THREE.Group()
+  const searchArrow = createChessSearchArrow(geometries, materials)
   const closureGeometry = new THREE.BoxGeometry(.12,.010,.013), checkpointGeometry = new THREE.TorusGeometry(.044,.006,6,20), trailGeometry = new THREE.SphereGeometry(.013,10,6)
   geometries.add(closureGeometry);geometries.add(checkpointGeometry);geometries.add(trailGeometry)
   let selected: InterestId | null = null
@@ -167,12 +170,13 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   function cancelFrame() { cancelAnimationFrame(raf); clearTimeout(frameTimer); raf = frameTimer = 0 }
   function wake() { urgent = true; if (frameTimer) { clearTimeout(frameTimer); frameTimer = 0 } schedule() }
   function turn(yaw: number, pitch: number) {
-    // A game board needs a stable targeting plane. The instrument and pen can
-    // turn all the way round so their back, fittings and edge work are visible.
-    const yawLimit = selected === 'knight' ? .7 : Math.PI
-    const pitchLimit = selected === 'knight' ? .16 : .28
-    manualYaw = THREE.MathUtils.clamp(manualYaw + yaw, -yawLimit, yawLimit)
-    manualPitch = THREE.MathUtils.clamp(manualPitch + pitch, -pitchLimit, pitchLimit)
+    if (selected === 'knight') {
+      const next = turnChessOrbit({ yaw: manualYaw, pitch: manualPitch }, yaw, pitch)
+      manualYaw = next.yaw; manualPitch = next.pitch
+    } else {
+      manualYaw = THREE.MathUtils.clamp(manualYaw + yaw, -Math.PI, Math.PI)
+      manualPitch = THREE.MathUtils.clamp(manualPitch + pitch, -.28, .28)
+    }
     wake()
   }
   function measure(shouldWake = true) {
@@ -202,6 +206,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     return next
   }
   function restoreMarkers() {
+    searchArrow.group.visible = false
     for (const marker of markers) marker.visible = false
     goal.visible = false
     puzzleOverlay.clear()
@@ -209,6 +214,8 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     if (!specimen || selected !== 'knight') return
     if (!puzzleOverlay.parent) specimen.model.add(puzzleOverlay)
     if (gameState) {
+      if (!searchArrow.group.parent) specimen.model.add(searchArrow.group)
+      searchArrow.update(gameState.candidate, specimen.tiles)
       gameState.legal.forEach((tile,index)=>{
         let marker=markers[index]
         if(!marker){marker=new THREE.Mesh(markerGeometry,markerMaterial);markers.push(marker);specimen.model.add(marker)}
@@ -253,10 +260,17 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     const time = runtime.seconds
     shader.uniforms.motionSeconds.value = time
     settling = false
-    shader.uniforms.chessPolarity.value = approach(shader.uniforms.chessPolarity.value, darkTheme && selected === 'knight' && gameState ? 1 : 0, dt)
+    if (searchArrow.tick(dt, media.matches)) settling = true
+    // Theme changes must never pass through an inverted, grey playing position.
+    shader.uniforms.chessPolarity.value = darkTheme && selected === 'knight' && gameState ? 1 : 0
     shader.uniforms.detailTone.value = approach(shader.uniforms.detailTone.value, selected ? .82 : .56, dt)
     const narrow = stackedMedia.matches
-    const framing = interestFraming(width, height, narrow, selected, !!gameState)
+    const boardView = specimens.find(item => item.id === 'knight')?.view
+    const framing = interestFraming(width, height, narrow, selected, !!gameState, boardView)
+    if (selected === 'knight' && gameState) {
+      const targetView = { yaw: (gameState.flipped ? Math.PI - .22 : -.22) + manualYaw, pitch: .67 + manualPitch }
+      framing.focusedKnightScale = Math.min(framing.focusedKnightScale,interestFraming(width,height,narrow,selected,true,targetView).focusedKnightScale)
+    }
     const bowingSample = selected === 'bass' ? bassPerformance?.() : undefined
     if (live) { performanceOffset = bowingSample?.offset ?? 0; performanceEnergy = bowingSample?.energy ?? 0 }
     if (live) bassBowEnergy = approach(bassBowEnergy, selected === 'bass' && bassSounding ? 1 : 0, dt)
@@ -273,7 +287,8 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       const desiredY = focus ? framing.focusY : galleryY
       item.group.position.x = approach(item.group.position.x, desiredX, dt)
       item.group.position.y = approach(item.group.position.y, desiredY, dt)
-      const scale = approach(item.group.scale.x, desiredScale, dt)
+      // Orbit fitting releases space immediately; enlargement settles gently.
+      const scale = focus && item.id === 'knight' && gameState && desiredScale < item.group.scale.x ? desiredScale : approach(item.group.scale.x, desiredScale, dt)
       item.group.scale.setScalar(scale)
       const previousOpacity = item.opacity
       const previousBoardOpacity = item.boardOpacity
@@ -287,12 +302,21 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
       }
       const baseYaw = item.id === 'bass' ? -.24 : item.id === 'score' ? .18 : focus ? (gameState?.flipped?Math.PI-.22:-.22) : -.98
       const pitch = item.id === 'knight' ? (focus ? .67 + manualPitch : .02) : item.id === 'score' ? -.10 + (focus ? manualPitch : 0) : focus ? manualPitch : 0
-      if (settleInterestView(item.view, baseYaw + (focus ? manualYaw : 0), pitch, dt, media.matches)) settling = true
+      const yawTarget = baseYaw + (focus ? manualYaw : 0)
+      if (settleInterestView(item.view, item.id === 'knight' ? chessOrbitTarget(yawTarget, item.view.yaw) : yawTarget, pitch, dt, media.matches)) settling = true
       composeInterestView(item.view, index, time, media.matches, item.pose.rotation)
       // A live game keeps its squares steady enough to target without losing idle motion.
       if (focus && item.id === 'knight') item.pose.rotation.y = item.view.yaw + (item.pose.rotation.y - item.view.yaw) * .18
       item.pose.rotation.z = item.id === 'bass' ? -.055 : item.id === 'score' && !media.matches ? Math.sin(time * .44) * .025 : 0
-      item.pose.position.y = item.id !== 'knight' && !media.matches ? Math.sin(time * .65 + index) * .035 : 0
+      // Float the standalone knight; settle to a fixed targeting plane when opened.
+      if (item.id === 'knight') {
+        const floating = !focus && !hidden && !media.matches
+        const idleX = floating ? Math.sin(time * .38 + index) * .035 : 0
+        const idleY = floating ? Math.sin(time * .65 + index) * .075 : 0
+        item.pose.position.x = approach(item.pose.position.x, idleX, dt)
+        item.pose.position.y = approach(item.pose.position.y, idleY, dt)
+        if (item.pose.position.x !== idleX || item.pose.position.y !== idleY) settling = true
+      } else item.pose.position.y = !media.matches ? Math.sin(time * .65 + index) * .035 : 0
       if (item.bow) item.bow.position.x = item.bowX + (!media.matches ? bowingSample && (bowingSample.active || !bassSounding) ? performanceOffset : bassArticulation === 'arco' ? Math.sin(time * 3.2) * Math.max(bassBowEnergy, ...pulses) * .18 : 0 : 0)
       if (item.id === 'bass') {
         finger.visible = focus && bassPosition > 0
@@ -376,6 +400,9 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     canvas.dataset.chessMode = gameState ? 'game' : 'puzzle'
     canvas.dataset.chessPieces = String(gameState?.pieces.length ?? 0)
     canvas.dataset.chessSelection = gameState?.selected ?? ''
+    const boardPose = specimens.find(item => item.id === 'knight')?.pose.rotation
+    canvas.dataset.boardYaw = boardPose?.y.toFixed(4) ?? ''
+    canvas.dataset.boardPitch = boardPose?.x.toFixed(4) ?? ''
     canvas.dataset.legalMoves = legal.join(',')
     canvas.dataset.legalMarkers = String(markers.filter(marker => marker.visible).length)
     const boardBatch = specimens.find(item => item.id === 'knight')?.boardBatch
@@ -432,7 +459,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     const dx = event.clientX - drag.x, dy = event.clientY - drag.y
     if (Math.hypot(dx, dy) > 7) {
       drag.moved = true
-      if (drag.intent === 'pending') drag.intent = event.pointerType !== 'touch' || Math.abs(dx) > Math.abs(dy) * 1.2 ? 'horizontal' : 'vertical'
+      if (drag.intent === 'pending') drag.intent = chessDragIntent(event.pointerType, selected === 'knight' && !!gameState, dx, dy)
     }
     if (drag.intent === 'horizontal' && selected) {
       canvas.setPointerCapture(event.pointerId)
@@ -596,7 +623,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     setBassPerformance(source) { bassPerformance = source; performanceOffset = performanceEnergy = 0; wake() },
     setBassSound(sounding) { if (bassSounding !== sounding) { bassSounding = sounding; wake() } },
     setScore(notes,title,tempo,page,activeIndex) { scoreState={notes,title,tempo,page,activeIndex};scoreDirty=true;wake() },
-    setGame(state) { gameState=state;syncChessSet();restoreMarkers();wake() },
+    setGame(state) { gameState=state;if(!state)for(const item of specimens)item.chess?.finishMotion();syncChessSet();restoreMarkers();wake() },
     turnView(yaw, pitch) {
       turn(yaw, pitch)
     },

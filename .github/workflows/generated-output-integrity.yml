@@ -19,6 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          # Manuscript provenance is verified against its original Git revision.
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v7
         with:
@@ -29,5 +31,10 @@ jobs:
         run: npm audit --audit-level=high
       - run: npm test
       - run: npm run test:bot-observer
+      - name: Check article presentation and manuscript integrity
+        run: |
+          node tools/test-article-opening.mjs
+          node tools/verify-article-quality.mjs
+          node tools/verify-restored-articles.mjs
       - run: npm run build
       - run: npm run verify:release

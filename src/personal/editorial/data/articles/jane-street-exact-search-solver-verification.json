@@ -45,12 +45,6 @@
   ],
   "resources": [
     {
-      "label": "Portfolio case study",
-      "href": "/work/jane-street-puzzle",
-      "description": "The shorter project view: problem framing, design decisions, retained result, and source boundaries.",
-      "format": "CASE"
-    },
-    {
       "label": "Jane Street July 2026 puzzle",
       "href": "https://www.janestreet.com/puzzles/pent-up-frustration-3-knight-moves-7-index/",
       "description": "The original puzzle statement, including the 13 regions, towers, three-dimensional knight moves, scoring rules, and changing clue schedule.",

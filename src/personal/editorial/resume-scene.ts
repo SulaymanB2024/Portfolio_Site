@@ -7,7 +7,7 @@ import { readPrintPalette, printPixelRatio } from '../print-palette'
 import { readPortfolioRenderPolicy, touchOrbitIntent } from '../mobile-render-policy'
 import { disposeModel, frameModel } from '../../model-resources'
 import { createResumeTransition } from './resume-scene-transition'
-import { createResumeSurfaceSampler, resumeMorphPhase } from './resume-surface'
+import { createResumeSurfaceSampler, orderResumeSurface, RESUME_DITHER_SIZE, resumeDitherTile, resumeMorphPhase } from './resume-surface'
 import { resumeSculptureAssets } from './resume-sculpture-assets'
 import { resumeKnightAsset } from './resume-knight-asset'
 import type { ResumeChapterId } from './resume-chapters'
@@ -21,19 +21,29 @@ type Sculpture = {
   fitPoints: Float32Array
   seconds: number
   sample: ReturnType<typeof createResumeSurfaceSampler>
+  arrivals: Map<number, ReturnType<typeof orderResumeSurface>>
+  arrivalFit: { aspect: number; distance: number } | null
 }
 
 const printedFragment = /* glsl */ `
 uniform sampler2D image;
-uniform vec2 cssSize;
+uniform sampler2D printThresholds;
 uniform vec3 ink;
+uniform float dark;
 varying vec2 vUv;
 ${PORTFOLIO_DITHER_GLSL}
 void main() {
   vec4 surface = texture2D(image, vUv);
-  float tone = portfolioDisplayLuminance(portfolioStraightColor(surface));
-  float alpha = surface.a * (1.0 - step(portfolioBayer8(floor(vUv * cssSize)), tone));
-  gl_FragColor = vec4(ink, alpha);
+  vec3 color = portfolioStraightColor(surface);
+  // Every sculpture uses the opening helmet's screen and chrome response.
+  // Partial coverage preserves lit metal between marks instead of reducing
+  // entire cast surfaces to the binary grey screen used by the Work studies.
+  vec2 cell = (mod(floor(gl_FragCoord.xy), vec2(${RESUME_DITHER_SIZE}.0)) + .5) / ${RESUME_DITHER_SIZE}.0;
+  float threshold = texture2D(printThresholds, cell).r;
+  float luminance = dot(color, vec3(1.0));
+  float chrome = 1.0 - step(threshold, luminance) * clamp(luminance, 0.0, 1.0);
+  chrome = mix(chrome, 1.0 - chrome, dark);
+  gl_FragColor = vec4(ink, surface.a * chrome);
   #include <colorspace_fragment>
 }
 `
@@ -48,17 +58,18 @@ uniform float pointRatio;
 varying float shade;
 varying float opacity;
 void main() {
-  float t = smoothstep(0.0, 1.0, clamp((travel - seed * .07) / .93, 0.0, 1.0));
+  float local = clamp((travel - seed * .08) / .92, 0.0, 1.0);
+  float t = local * local * local * (local * (local * 6.0 - 15.0) + 10.0);
   float arch = sin(t * 3.14159265);
-  float angle = seed * 6.2831853 + t * 2.1;
-  vec3 drift = vec3(cos(angle) * .20, sin(angle) * .26, .16 + seed * .20);
+  float angle = seed * 6.2831853 + t * .65;
+  vec3 drift = vec3(cos(angle) * .035, sin(angle) * .04, .03 + seed * .04);
   vec3 point = mix(position, destination, t) + drift * arch;
   vec3 direction = normalize(mix(normal, targetNormal, t));
-  shade = .20 + .42 * max(0.0, dot(direction, normalize(vec3(-.5, .8, 1.0))));
+  shade = .14 + .36 * max(0.0, dot(direction, normalize(vec3(-.5, .8, 1.0))));
   opacity = amount;
   vec4 view = modelViewMatrix * vec4(point, 1.0);
   gl_Position = projectionMatrix * view;
-  gl_PointSize = pointRatio * (1.4 + seed * 1.2);
+  gl_PointSize = pointRatio * (.85 + seed * .55);
 }
 `
 
@@ -69,24 +80,27 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   renderer.toneMapping = THREE.ACESFilmicToneMapping
   renderer.toneMappingExposure = .95
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(34, 1, .01, 100)
-  const keyLight = new THREE.DirectionalLight(0xffffff, 3)
-  keyLight.position.set(-3, 5, 4)
-  scene.add(keyLight, new THREE.AmbientLight(0xffffff, .2))
+  const keyLight = new THREE.DirectionalLight(0xffffff, 3), fillLight = new THREE.DirectionalLight(0xffffff, .65)
+  keyLight.position.set(-3, 5, 5); fillLight.position.set(5, 2, -3)
+  scene.add(keyLight, fillLight, new THREE.AmbientLight(0xffffff, .2))
   function createEnvironment() {
     const room = new RoomEnvironment()
     let pmrem: THREE.PMREMGenerator | null = null
-    try { pmrem = new THREE.PMREMGenerator(renderer); return pmrem.fromScene(room, .04) }
+    try { pmrem = new THREE.PMREMGenerator(renderer); return pmrem.fromScene(room) }
     finally { room.dispose(); pmrem?.dispose() }
   }
   let environment: THREE.WebGLRenderTarget
   try { environment = createEnvironment() }
   catch (error) { renderer.dispose(); canvas.dataset.state = 'error'; throw error }
-  scene.environment = environment.texture; scene.environmentIntensity = .9
+  scene.environment = environment.texture; scene.environmentIntensity = 1.05
   const target = new THREE.WebGLRenderTarget(1, 1)
+  const printThresholds = new THREE.DataTexture(resumeDitherTile(), RESUME_DITHER_SIZE, RESUME_DITHER_SIZE, THREE.RedFormat)
+  printThresholds.minFilter = THREE.NearestFilter; printThresholds.magFilter = THREE.NearestFilter
+  printThresholds.generateMipmaps = false; printThresholds.needsUpdate = true
   const post = new THREE.Scene(), postCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
   const material = new THREE.ShaderMaterial({
     blending: THREE.NoBlending, depthTest: false, depthWrite: false,
-    uniforms: { image: { value: target.texture }, cssSize: { value: new THREE.Vector2(1, 1) }, ink: { value: readPrintPalette(canvas, initialDark).ink } },
+    uniforms: { image: { value: target.texture }, printThresholds: { value: printThresholds }, ink: { value: readPrintPalette(canvas, initialDark).ink }, dark: { value: Number(initialDark) } },
     vertexShader: 'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}', fragmentShader: printedFragment,
   })
   const quad = new THREE.PlaneGeometry(2, 2)
@@ -134,6 +148,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   }
   function dissolveFinish(original: THREE.Material, cut: { value: number }) {
     const finish = original.clone(); finishes.add(finish)
+    finish.toneMapped = false
     finish.onBeforeCompile = shader => {
       shader.uniforms.resumeCut = cut
       shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 resumePosition;')
@@ -141,13 +156,13 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
       shader.fragmentShader = shader.fragmentShader.replace('#include <common>', '#include <common>\nuniform float resumeCut;varying vec3 resumePosition;')
         .replace('#include <dithering_fragment>', `#include <dithering_fragment>
           if (resumeCut > 0.0) {
-            vec3 cell = floor(resumePosition * 34.0);
+            vec3 cell = floor(resumePosition * 82.0);
             float noise = fract(sin(dot(cell, vec3(12.9898, 78.233, 37.719))) * 43758.5453);
             float sweep = clamp((resumePosition.y + 1.5) / 3.0, 0.0, 1.0);
             if (resumeCut > noise * .55 + sweep * .45) discard;
           }`)
     }
-    finish.customProgramCacheKey = () => 'resume-spatial-dissolve-v2'
+    finish.customProgramCacheKey = () => 'resume-chrome-dissolve-v5'
     return finish
   }
   function model(key: SceneKey): Promise<Sculpture> {
@@ -155,7 +170,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
     if (cached) return Promise.resolve(cached)
     const loading = pending.get(key)
     if (loading) return loading
-    const promise = source(key).then(gltf => {
+    const promise = source(key).then(async gltf => {
       if (disposed) throw new DOMException('Disposed', 'AbortError')
       const display = new THREE.Group()
       const animated = gltf.scene.clone(true)
@@ -165,7 +180,9 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
         if (!(node instanceof THREE.Mesh)) return
         const original = Array.isArray(node.material) ? node.material : [node.material]
         const copies = original.map(finish => dissolveFinish(finish, cut))
-        if (key === 'knight') for (const finish of copies) if (finish instanceof THREE.MeshStandardMaterial) finish.roughness = .32
+        for (const finish of copies) if (finish instanceof THREE.MeshStandardMaterial) {
+          if (key === 'knight') finish.roughness = .23
+        }
         node.material = Array.isArray(node.material) ? copies : copies[0]
       })
       const group = frameModel(display, 2.7)
@@ -173,17 +190,43 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
       const clips = gltf.animations
       if (!clips.length) throw new Error('Sculpture GLB has no animation')
       const mixer = clips.length ? new THREE.AnimationMixer(animated) : null
-      for (const clip of clips) mixer!.clipAction(clip).play()
+      for (const clip of clips) {
+        const action = mixer!.clipAction(clip)
+        // The engraved opening makes a slow, shallow inspection turn.
+        if (key === 'knight') action.setEffectiveWeight(.38)
+        action.play()
+      }
       const duration = Math.max(0, ...clips.map(clip => clip.duration))
       const sample = createResumeSurfaceSampler(group)
       const fitPoints = new Float32Array(1800 * 13 * 3)
+      const yieldPreparation = async () => {
+        await new Promise<void>(resolve => setTimeout(resolve, 0))
+        if (disposed) throw new DOMException('Disposed', 'AbortError')
+      }
+      await yieldPreparation()
       for (let step = 0; step <= 12; step++) {
         mixer?.setTime(duration * step / 12)
         group.rotation.set(0, 0, 0)
         fitPoints.set(sample(1800, 429).points, step * 1800 * 3)
+        // Keep the visible knight responsive while a role's envelope is built.
+        if (step % 2 === 1) await yieldPreparation()
       }
       mixer?.setTime(0); group.rotation.set(0, 0, 0)
-      const record = { group, mixer, clips, cut, fitPoints, seconds: 0, sample }
+      if (key !== 'knight') {
+        // Center the complete physical action once. A developing print or an
+        // opening page should use the canvas, without making the camera chase it.
+        const center = new THREE.Box3().setFromArray(fitPoints).getCenter(new THREE.Vector3())
+        group.children[0].position.addScaledVector(center, -1 / group.scale.x)
+        for (let offset = 0; offset < fitPoints.length; offset += 3) {
+          fitPoints[offset] -= center.x; fitPoints[offset + 1] -= center.y; fitPoints[offset + 2] -= center.z
+        }
+      }
+      await yieldPreparation()
+      // Assemble the canonical arrival while the asset is loading. The animated
+      // departure still samples its live pose when the visible dissolve starts.
+      const count = readPortfolioRenderPolicy().mobile ? 4000 : 8000
+      const arrivals = new Map([[count, orderResumeSurface(sample(count, 719))]])
+      const record: Sculpture = { group, mixer, clips, cut, fitPoints, seconds: 0, sample, arrivals, arrivalFit: null }
       sculptures.set(key, record); return record
     })
     pending.set(key, promise)
@@ -211,29 +254,34 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
     if (import.meta.env.DEV) for (const field of ['visibleFps', 'visibleMaxGap', 'visibleMaxDraw', 'visibleModel']) delete canvas.dataset[field]
     const departing = sculptures.get(from)!, arriving = sculptures.get(to)!
     arriving.seconds = 0; arriving.mixer?.setTime(0); arriving.group.rotation.set(0, 0, 0)
-    const count = readPortfolioRenderPolicy().mobile ? 6000 : 12000
-    const a = departing.sample(count, 107), b = arriving.sample(count, 719)
+    const count = readPortfolioRenderPolicy().mobile ? 4000 : 8000
+    const a = orderResumeSurface(departing.sample(count, 107))
+    let b = arriving.arrivals.get(count)
+    if (!b) { b = orderResumeSurface(arriving.sample(count, 719)); arriving.arrivals.set(count, b) }
     const seeds = new Float32Array(count)
     for (let i = 0; i < count; i++) seeds[i] = (Math.imul(i + 1, 2654435761) >>> 0) / 4294967296
     const next = new THREE.BufferGeometry()
     next.setAttribute('position', new THREE.BufferAttribute(a.points, 3)); next.setAttribute('normal', new THREE.BufferAttribute(a.normals, 3))
     next.setAttribute('destination', new THREE.BufferAttribute(b.points, 3)); next.setAttribute('targetNormal', new THREE.BufferAttribute(b.normals, 3)); next.setAttribute('seed', new THREE.BufferAttribute(seeds, 1))
     cloud.geometry = next; cloudGeometry.dispose(); cloudGeometry = next
-    morph = { from, to, fromDistance: cameraDistance, toDistance: fit(arriving), distance: Math.max(cameraDistance, fit(departing), fit(arriving)) + .25 }
+    const toDistance = arriving.arrivalFit?.aspect === camera.aspect ? arriving.arrivalFit.distance : fit(arriving)
+    morph = { from, to, fromDistance: cameraDistance, toDistance, distance: Math.max(cameraDistance, toDistance) + .08 }
     canvas.dataset.particleCount = String(count)
     yaw = 0; pitch = 0; manual = false
   }
   function updateIdle(key: SceneKey, delta: number) {
     const record = sculptures.get(key)!
     if (playing && !motion.matches && !pointer) {
-      record.seconds += delta / 1000; record.mixer?.update(delta / 1000)
+      record.seconds += delta / 1000
+      record.mixer?.update(delta / 1000 * THREE.MathUtils.smoothstep(record.seconds, 0, key === 'knight' ? .9 : .32) * (key === 'knight' ? .42 : .72))
     }
     const t = record.seconds
-    const ambient = !manual && !motion.matches
-    record.group.rotation.set(pitch + (ambient ? Math.sin(t * .55) * .018 : 0), yaw + (ambient ? Math.sin(t * .35) * .07 : 0), ambient ? Math.sin(t * .42) * .009 : 0)
+    // Authored joints own the movement. The stage stays still until the user
+    // rotates it, so a page turn or iris opening reads as a deliberate action.
+    record.group.rotation.set(pitch, yaw, 0)
     record.cut.value = 0; show([key]); cloud.visible = false
     if (fitDirty) { cameraDistance = fit(record); fitDirty = false }
-    if (import.meta.env.DEV) { canvas.dataset.clipTime = t.toFixed(3); canvas.dataset.animationClips = record.clips.map(clip => clip.name).join(',') }
+    if (import.meta.env.DEV) { canvas.dataset.clipTime = (record.mixer?.time ?? t).toFixed(3); canvas.dataset.animationClips = record.clips.map(clip => clip.name).join(',') }
   }
   function draw() {
     if (import.meta.env.DEV) canvas.dataset.cameraDistance = cameraDistance.toFixed(3)
@@ -253,7 +301,12 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
       if (disposed) throw new DOMException('Disposed', 'AbortError')
       const warmup = new THREE.WebGLRenderTarget(canvas.width, canvas.height)
       const savedDistance = cameraDistance
-      try { show([key]); cameraDistance = fit(record); camera.position.set(0, 0, cameraDistance); camera.lookAt(0, 0, 0); renderer.setRenderTarget(warmup); renderer.clear(); renderer.render(scene, camera) }
+      try {
+        show([key]); cameraDistance = fit(record)
+        record.arrivalFit = { aspect: camera.aspect, distance: cameraDistance }
+        camera.position.set(0, 0, cameraDistance); camera.lookAt(0, 0, 0)
+        renderer.setRenderTarget(warmup); renderer.clear(); renderer.render(scene, camera)
+      }
       finally { cameraDistance = savedDistance; renderer.setRenderTarget(null); warmup.dispose(); for (const [item, visibility] of before) item.group.visible = visibility }
     })()
     primed.set(key, prepare)
@@ -277,8 +330,8 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
       const stage = resumeMorphPhase(state.progress), from = sculptures.get(state.from)!, to = sculptures.get(state.to)!
       show([state.from, state.to]); from.cut.value = stage.outgoingCut; to.cut.value = stage.incomingCut
       cloud.visible = stage.particles > .01; cloudMaterial.uniforms.travel.value = stage.travel; cloudMaterial.uniforms.amount.value = stage.particles
-      const start = THREE.MathUtils.smoothstep(state.progress, 0, .24), end = THREE.MathUtils.smoothstep(state.progress, .78, 1)
-      cameraDistance = THREE.MathUtils.lerp(THREE.MathUtils.lerp(morph!.fromDistance, morph!.distance, start), morph!.toDistance, end)
+      const distance = THREE.MathUtils.lerp(morph!.fromDistance, morph!.toDistance, THREE.MathUtils.smoothstep(state.progress, 0, 1))
+      cameraDistance = THREE.MathUtils.lerp(distance, morph!.distance, stage.pullback)
       canvas.dataset.transitionPhase = state.progress < .42 ? 'dissolving' : state.progress < .65 ? 'transferring' : 'forming'
     } else {
       if (morph) { morph = null; fitDirty = true }
@@ -318,11 +371,13 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
     if (disposed || lost) return
     cadenceStats = { frames: 0, elapsed: 0, maxGap: 0, maxDraw: 0 }
     const width = Math.max(1, canvas.clientWidth), height = Math.max(1, canvas.clientHeight), policy = readPortfolioRenderPolicy()
-    const ratio = printPixelRatio(width, height, devicePixelRatio, Math.min(policy.pixels, 850_000), Math.min(policy.maxRatio, 1.5))
+    // Match Home's display scale, keeping the print sharp without spending
+    // four times the fragment work on a retina idle frame.
+    const ratio = Math.min(1.25, printPixelRatio(width, height, devicePixelRatio, Math.min(policy.pixels, 1_200_000), Math.min(policy.maxRatio, 2)))
     renderer.setSize(Math.round(width * ratio), Math.round(height * ratio), false); target.setSize(canvas.width, canvas.height)
-    material.uniforms.cssSize.value.set(width, height); cloudMaterial.uniforms.pointRatio.value = ratio
+    cloudMaterial.uniforms.pointRatio.value = ratio
     camera.aspect = width / height; camera.updateProjectionMatrix(); fitDirty = true
-    if (morph) { morph.fromDistance = fit(sculptures.get(morph.from)!); morph.toDistance = fit(sculptures.get(morph.to)!); morph.distance = Math.max(morph.fromDistance, morph.toDistance) + .25 }
+    if (morph) { morph.fromDistance = fit(sculptures.get(morph.from)!); morph.toDistance = fit(sculptures.get(morph.to)!); morph.distance = Math.max(morph.fromDistance, morph.toDistance) + .08 }
     wake()
   }
   const sizeObserver = new ResizeObserver(resize); sizeObserver.observe(canvas)
@@ -400,7 +455,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
         wake()
       }).catch(error => { if (!disposed && selectedGeneration === generation && error?.name !== 'AbortError') { canvas.dataset.state = 'error'; status('error') } })
     },
-    setDark(dark: boolean) { material.uniforms.ink.value.copy(readPrintPalette(canvas, dark).ink); wake() },
+    setDark(dark: boolean) { material.uniforms.ink.value.copy(readPrintPalette(canvas, dark).ink); material.uniforms.dark.value = Number(dark); wake() },
     setPlaying(next: boolean) { playing = next; last = null; nextPaint = null; wake() },
     dispose() {
       if (disposed) return
@@ -414,7 +469,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
       for (const asset of owned) disposeModel(asset)
       for (const finish of finishes) finish.dispose()
       sculptures.clear(); owned.clear(); sources.clear(); pending.clear(); primed.clear(); finishes.clear()
-      target.dispose(); environment.dispose(); material.dispose(); quad.dispose(); cloudGeometry.dispose(); cloudMaterial.dispose(); renderer.dispose()
+      target.dispose(); environment.dispose(); printThresholds.dispose(); material.dispose(); quad.dispose(); cloudGeometry.dispose(); cloudMaterial.dispose(); renderer.dispose()
       canvas.dataset.state = 'disposed'
     },
   }

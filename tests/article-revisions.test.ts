@@ -70,3 +70,16 @@ test('the AI capacity edit retains the numeric bases and separates scenarios fro
   assert.equal(contract.figuresPosition, 'before-table')
   assert.equal(contract.figures[0].src, '/images/research/the-ai-megawatt-power-ladder.svg')
 })
+
+test('the resource correction permits only the entire declared original object', () => {
+  const jane = load('../docs/article-originals/jane-street-exact-search-solver-verification.json')
+  const janeKeys = originals.find((item: any) => item.slug === jane.slug).sourceKeys
+  const exceptions = load('../docs/article-quality-revisions.json').exceptions
+  const removed = exceptions.find((item: any) => item.removedResource)
+  const next = structuredClone(jane)
+  next.resources = next.resources.filter((item: any) => JSON.stringify(item) !== JSON.stringify(removed.removedResource))
+  assert.deepEqual(protectedArticleEvidence(next, janeKeys), protectedArticleEvidence(jane, janeKeys, exceptions))
+  assert.throws(() => protectedArticleEvidence(jane, janeKeys, [{ ...removed, removedResource: { href: removed.removedResource.href } }]))
+  next.resources.pop()
+  assert.notDeepEqual(protectedArticleEvidence(next, janeKeys), protectedArticleEvidence(jane, janeKeys, exceptions))
+})

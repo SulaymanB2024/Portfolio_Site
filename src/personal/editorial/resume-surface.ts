@@ -1,5 +1,43 @@
 import { Matrix3, Mesh, Object3D, Vector3 } from 'three'
 
+export const RESUME_DITHER_SIZE = 4
+// The opening helmet's authored 4×4 print screen, encoded exactly in a byte.
+// 255 / 17 = 15: sampling this texture recovers each original rank / 17.
+const printTile = new Uint8Array([16, 8, 14, 6, 5, 12, 2, 10, 13, 4, 15, 7, 1, 9, 3, 11].map(rank => rank * 15))
+
+/** Keep the résumé's printing aligned with the engraved helmet on Home. */
+export function resumeDitherTile() { return printTile }
+
+/** Match coarse surface regions so a transfer keeps its volume instead of crossing its center. */
+export function orderResumeSurface(surface: { points: Float32Array; normals: Float32Array }) {
+  const count = surface.points.length / 3
+  let minX = Infinity, minY = Infinity, minZ = Infinity, maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity
+  for (let source = 0; source < surface.points.length; source += 3) {
+    const x = surface.points[source], y = surface.points[source + 1], z = surface.points[source + 2]
+    if (x < minX) minX = x; if (x > maxX) maxX = x
+    if (y < minY) minY = y; if (y > maxY) maxY = y
+    if (z < minZ) minZ = z; if (z > maxZ) maxZ = z
+  }
+  const scaleX = 8 / Math.max(1e-6, maxX - minX), scaleY = 8 / Math.max(1e-6, maxY - minY), scaleZ = 8 / Math.max(1e-6, maxZ - minZ)
+  const bins = new Uint16Array(count), counts = new Uint32Array(512), offsets = new Uint32Array(512)
+  for (let point = 0; point < count; point++) {
+    const source = point * 3
+    const x = Math.min(7, Math.floor((surface.points[source] - minX) * scaleX))
+    const y = Math.min(7, Math.floor((surface.points[source + 1] - minY) * scaleY))
+    const z = Math.min(7, Math.floor((surface.points[source + 2] - minZ) * scaleZ))
+    const bin = y * 64 + x * 8 + z
+    bins[point] = bin; counts[bin]++
+  }
+  for (let bin = 1; bin < counts.length; bin++) offsets[bin] = offsets[bin - 1] + counts[bin - 1]
+  const points = new Float32Array(surface.points.length), normals = new Float32Array(surface.normals.length)
+  for (let point = 0; point < count; point++) {
+    const target = offsets[bins[point]]++ * 3, source = point * 3
+    points[target] = surface.points[source]; points[target + 1] = surface.points[source + 1]; points[target + 2] = surface.points[source + 2]
+    normals[target] = surface.normals[source]; normals[target + 1] = surface.normals[source + 1]; normals[target + 2] = surface.normals[source + 2]
+  }
+  return { points, normals }
+}
+
 /** Rigid GLB joints keep their triangle areas; prepare the table before painting. */
 export function createResumeSurfaceSampler(root: Object3D) {
   root.updateWorldMatrix(true, true)
@@ -62,10 +100,11 @@ const smooth = (low: number, high: number, value: number) => { const t = Math.ma
 export function resumeMorphPhase(progress: number) {
   const p = Math.max(0, Math.min(1, Number.isFinite(progress) ? progress : 0))
   return {
-    outgoingCut: smooth(.08, .46, p),
-    incomingCut: 1 - smooth(.56, .94, p),
-    particles: smooth(.08, .25, p) * (1 - smooth(.76, .96, p)),
-    travel: smooth(.15, .84, p),
-    pullback: Math.sin(p * Math.PI),
+    outgoingCut: smooth(.02, .50, p),
+    incomingCut: 1 - smooth(.34, .93, p),
+    particles: .8 * smooth(.03, .21, p) * (1 - smooth(.66, .94, p)),
+    // The vertex shader eases each staggered journey once, including its arrival.
+    travel: Math.max(0, Math.min(1, (p - .06) / .82)),
+    pullback: smooth(0, .22, p) * (1 - smooth(.64, 1, p)),
   }
 }

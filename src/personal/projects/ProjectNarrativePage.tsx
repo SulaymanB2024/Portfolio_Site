@@ -56,9 +56,9 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
           <ProjectContribution slug={p.slug} />
           <div className="project-links">
             {p.link && <DestinationLink className="arrow-link" href={p.link.href}>{p.link.label}</DestinationLink>}
-            <a className="project-read mono" href={chapterHref('question')} onClick={(event) => jump(event, 'question')}>
-              Read the project<span aria-hidden="true">↓</span>
-            </a>
+            <DestinationLink className="project-reading-action" href={chapterHref('question')} direction="down" onClick={(event) => jump(event, 'question')}>
+              Read the project
+            </DestinationLink>
           </div>
         </div>
         <div className="project-object">

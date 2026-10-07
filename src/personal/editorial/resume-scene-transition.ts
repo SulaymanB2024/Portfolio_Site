@@ -1,4 +1,4 @@
-export const RESUME_DISSOLVE_MS = 2300
+export const RESUME_DISSOLVE_MS = 1600
 
 /** Finish the visible dissolve, then take the latest loaded selection. */
 export function createResumeTransition<Key>(initial: Key, initialReady = true) {

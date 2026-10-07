@@ -1,0 +1,128 @@
+.texas-toll-figure { min-width: 0; color: var(--ink); }
+.article-page .reader-prose .texas-toll-figure h3 {
+  margin: 0 0 12px;
+  font: 600 clamp(20px, 2.3vw, 25px)/1.3 var(--type-display, 'Syne', Arial, sans-serif);
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.article-page .reader-prose .texas-toll-figure :is(p, ul, ol, dl, dd) { max-width: none; }
+.article-page .reader-prose .texas-toll-figure p {
+  margin: 0;
+  color: var(--muted);
+  font: 400 14px/1.65 var(--type-interface, Arial, sans-serif);
+}
+.article-page .reader-prose .texas-toll-figure .texas-toll-introduction { margin-bottom: 24px; }
+.article-page .reader-prose .texas-toll-figure .texas-toll-boundary {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.article-page .reader-prose .texas-toll-figure .texas-toll-boundary-continuation {
+  margin-top: 8px;
+  padding-top: 0;
+  border: 0;
+}
+.article-page .reader-prose .texas-toll-questions {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.article-page .reader-prose .texas-toll-questions > li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 18px;
+  margin: 0;
+  padding-block: 18px;
+  border-top: 1px solid var(--line);
+}
+.texas-toll-question-number { padding-top: 2px; color: var(--muted); font: 400 13px/1.5 var(--type-interface, Arial, sans-serif); }
+.texas-toll-questions strong {
+  display: block;
+  margin-bottom: 7px;
+  font: 600 18px/1.4 var(--type-display, 'Syne', Arial, sans-serif);
+  letter-spacing: -.02em;
+}
+.article-page .reader-prose .texas-toll-key {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 24px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+.article-page .reader-prose .texas-toll-key > li {
+  display: flex;
+  align-items: start;
+  gap: 9px;
+  margin: 0;
+  color: var(--muted);
+  font: 400 13px/1.6 var(--type-interface, Arial, sans-serif);
+}
+.texas-toll-swatch { display: inline-block; flex: 0 0 16px; width: 16px; height: 16px; margin-top: 2px; box-sizing: border-box; }
+.texas-toll-layer-0 { background: var(--ink); }
+.texas-toll-layer-1 { background: repeating-linear-gradient(135deg, var(--ink) 0 1px, var(--paper) 1px 5px); }
+.texas-toll-layer-2 { background: radial-gradient(var(--ink) 1px, transparent 1.2px) 0 0 / 4px 4px; }
+.texas-toll-layer-3 { background: var(--paper); border: 1px solid var(--ink); }
+.texas-toll-system + .texas-toll-system { margin-top: 30px; }
+.article-page .reader-prose .texas-toll-system h4 {
+  margin: 0 0 14px;
+  font: 600 18px/1.4 var(--type-display, 'Syne', Arial, sans-serif);
+  letter-spacing: -.02em;
+}
+.texas-toll-stacked-bar { display: flex; width: 100%; height: 28px; }
+.texas-toll-stacked-bar > span { box-sizing: border-box; border-inline-end: 1px solid var(--paper); }
+.texas-toll-stacked-bar > .texas-toll-layer-3 { border: 1px solid var(--ink); }
+.texas-toll-axis { display: flex; justify-content: space-between; margin-top: 6px; color: var(--muted); font: 400 13px/1.5 var(--type-interface, Arial, sans-serif); }
+.article-page .reader-prose .texas-toll-system-values {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  margin: 14px 0 0;
+}
+.texas-toll-system-values > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: baseline;
+  gap: 12px;
+  padding-block: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.texas-toll-system-values dt { display: flex; align-items: start; gap: 9px; font: 400 13px/1.6 var(--type-interface, Arial, sans-serif); }
+.texas-toll-system-values dd { margin: 0; font: 400 22px/1.3 var(--type-reading, Georgia, serif); font-variant-numeric: tabular-nums; }
+.article-page .reader-prose .texas-toll-cash-reference {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 20px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed var(--ink);
+  font-size: 13px;
+}
+.texas-toll-cash-reference strong { color: var(--ink); font: 400 25px/1.3 var(--type-reading, Georgia, serif); font-variant-numeric: tabular-nums; }
+.article-page .reader-prose .texas-toll-cash-rows { margin: 0; }
+.texas-toll-cash-rows > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 8px 16px;
+  align-items: baseline;
+  padding-block: 15px;
+}
+.texas-toll-cash-rows dt { font: 600 16px/1.5 var(--type-display, 'Syne', Arial, sans-serif); letter-spacing: -.015em; }
+.texas-toll-cash-rows dd { margin: 0; font: 400 24px/1.3 var(--type-reading, Georgia, serif); font-variant-numeric: tabular-nums; }
+.texas-toll-cash-bar { display: block; grid-column: 1 / -1; overflow: visible; fill: var(--ink); }
+.texas-toll-cash-bar line { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 3; }
+
+@media screen and (max-width: 560px) {
+  .article-page .reader-prose .texas-toll-key { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .article-page .reader-prose .texas-toll-system-values { grid-template-columns: minmax(0, 1fr); }
+  .article-page .reader-prose .texas-toll-questions > li { grid-template-columns: 24px minmax(0, 1fr); gap: 12px; padding-block: 16px; }
+  .texas-toll-cash-rows dt { font-size: 15px; }
+  .texas-toll-cash-rows dd { font-size: 22px; }
+}
+@media print {
+  .texas-toll-questions > li, .texas-toll-system, .texas-toll-cash-rows > div { break-inside: avoid; }
+  .texas-toll-layer-1, .texas-toll-layer-2, .texas-toll-layer-3 { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}

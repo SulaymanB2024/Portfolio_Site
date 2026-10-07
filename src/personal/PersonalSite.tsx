@@ -25,6 +25,7 @@ import BrandIdentity from './BrandIdentity'
 import { DestinationLink } from './DestinationLink'
 import { prepareRouteResources } from './route-preparation'
 import { installRouteScroll } from './refinements/route-scroll'
+import { installTableOverflowHints } from './refinements/table-overflow'
 import './editorial/artwork-continuity.css'
 import './personal.css'
 import './editorial/editorial.css'
@@ -155,6 +156,9 @@ function SitePages() {
   const study = findCaseStudy(route)
   const isDark = dark
   const section = project || study ? 'work' : article || topic ? 'writing' : route || 'home'
+  useLayoutEffect(() => {
+    if (main.current && (article || project || study)) return installTableOverflowHints(main.current)
+  }, [route, article, project, study])
   useEffect(() => { setMenuOpen(false) }, [route])
   useEffect(() => {
     if (focusedRoute.current === route) return

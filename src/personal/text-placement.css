@@ -8,6 +8,9 @@
     --placement-prose-width: 660px;
   }
 
+  /* Keep the brand and navigation on the same baseline on every route. */
+  .personal-site[data-section][data-appearance] > .personal-header { height: 76px; min-height: 76px; }
+
   .personal-site.home-site .landing-copy { padding-inline: var(--home-gutter); }
 
   /* An introduction has one title axis and one reading axis. */
@@ -45,22 +48,12 @@
   /* Anchor the interlude independently of the sculpture's changing height. */
   .personal-site.personal-site[data-section][data-appearance] .home-context-intro {
     align-self: start;
-    padding-block: clamp(48px, 6vw, 80px) 0;
+    padding-block: clamp(8px, 1.5vw, 20px) 0;
   }
   .personal-site.personal-site[data-section][data-appearance] .home-context-intro h2 { margin-block: 0 24px; }
   .personal-site.personal-site[data-section][data-appearance] .home-context-summary { max-inline-size: 38ch; margin-bottom: 20px; }
   .personal-site.personal-site[data-section][data-appearance] .home-context-about { margin-top: 0; }
   .personal-site.personal-site[data-section][data-appearance] .home-context-caption { max-inline-size: 54ch; }
-
-  /* Date and destination stay with the description, ahead of the artwork. */
-  .personal-site.personal-site[data-section][data-appearance] .journal-lead { row-gap: 12px; }
-  .personal-site.personal-site[data-section][data-appearance] .journal-lead .journal-read { grid-row: 2; align-self: start; }
-  .personal-site.personal-site[data-section][data-appearance] .journal-lead .journal-art { grid-row: 3; margin-top: 8px; }
-  .personal-site.personal-site[data-section][data-appearance] .journal-companion .journal-essay-copy { grid-column: 1 / -1; }
-  .personal-site.personal-site[data-section][data-appearance] .journal-companion .journal-read { grid-column: 1; grid-row: 2; align-self: start; }
-  .personal-site.personal-site[data-section][data-appearance] .journal-companion .journal-art { grid-column: 2; grid-row: 2; }
-  .personal-site.personal-site[data-section][data-appearance] .journal-essay h3 { max-inline-size: 24ch; text-wrap: balance; }
-  .personal-site.personal-site[data-section][data-appearance] .journal-deck { max-inline-size: 46ch; margin-bottom: 16px; }
 
   /* Preserve lead, paired, report and note compositions; give their text a
      finite measure and remove the automatic push to the far edge. */
@@ -132,6 +125,14 @@
   .personal-site.personal-site[data-section][data-appearance] .site-closing-contact > p { max-inline-size: 42ch; }
 }
 
+@media screen and (min-width: 901px) {
+  /* Preserve the accepted page-opening position below the shorter header. */
+  .personal-site[data-section][data-appearance]:not(.home-site) > main { padding-top: 22px; }
+}
+@media screen and (min-width: 761px) and (max-width: 900px) {
+  .personal-site[data-section][data-appearance]:not(.home-site) > main { padding-top: 6px; }
+}
+
 @media screen and (max-width: 760px) {
   .personal-site.personal-site.home-site[data-section][data-appearance] { --home-gutter: 25px; }
   .personal-site.personal-site[data-section][data-appearance] :is(.work-page-intro, .rx-introduction, .writing-heading-copy) {
@@ -150,8 +151,6 @@
   }
   .personal-site.personal-site[data-section][data-appearance] .home-context-intro { padding-block: 0; }
   .personal-site.personal-site[data-section][data-appearance] .home-context-intro h2 { margin-bottom: 20px; }
-  .personal-site.personal-site[data-section][data-appearance] .journal-companion .journal-art { grid-column: 1; grid-row: 3; }
-  .personal-site.personal-site[data-section][data-appearance] .journal-essay h3 { max-inline-size: 100%; }
   .personal-site.personal-site[data-section][data-appearance] :is(.story-opening-layout, .story-system-layout, .story-practice-account, .study-account) { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .personal-site.personal-site[data-section][data-appearance] .article-page .article-cover { margin-block: 24px 32px; padding-bottom: 28px; }
   .personal-site.personal-site[data-section][data-appearance] .article-page .article-cover .reader-heading { padding-top: 0; }

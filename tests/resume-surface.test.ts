@@ -1,7 +1,33 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { BufferGeometry, Float32BufferAttribute, Group, Mesh, MeshBasicMaterial } from 'three'
-import { createResumeSurfaceSampler, sampleResumeSurface, resumeMorphPhase } from '../src/personal/editorial/resume-surface.ts'
+import { createResumeSurfaceSampler, orderResumeSurface, RESUME_DITHER_SIZE, resumeDitherTile, sampleResumeSurface, resumeMorphPhase } from '../src/personal/editorial/resume-surface.ts'
+
+test('the engraved print screen retains balanced coverage without changing between scenes', () => {
+  const tile = resumeDitherTile()
+  assert.equal(tile.length, RESUME_DITHER_SIZE * RESUME_DITHER_SIZE)
+  assert.deepEqual(resumeDitherTile(), tile)
+  const ranks = [...tile].map(value => value / 15).sort((a, b) => a - b)
+  assert.deepEqual(ranks, Array.from({ length: 16 }, (_, i) => i + 1))
+  // Mid-grey must retain equal ink and paper coverage rather than biasing a tone.
+  assert.equal(tile.filter(threshold => threshold < 128).length, tile.length / 2)
+  for (let y = 0; y < RESUME_DITHER_SIZE; y++) {
+    assert.equal(tile.subarray(y * RESUME_DITHER_SIZE, (y + 1) * RESUME_DITHER_SIZE).filter(value => value < 128).length, 2)
+  }
+})
+
+test('spatial transfer ordering preserves every sample with its own surface normal', () => {
+  const points = new Float32Array([2, 3, -1, -4, 0, 2, 0, 7, 1, 5, -2, 0, 0, 0, 0])
+  const normals = new Float32Array([1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0, 0, -1, 0])
+  const beforePoints = points.slice(), beforeNormals = normals.slice()
+  const ordered = orderResumeSurface({ points, normals })
+  const pairs = (p: Float32Array, n: Float32Array) => Array.from({ length: p.length / 3 }, (_, i) => [...p.subarray(i * 3, i * 3 + 3), ...n.subarray(i * 3, i * 3 + 3)].join(',')).sort()
+  assert.deepEqual(pairs(ordered.points, ordered.normals), pairs(points, normals))
+  assert.deepEqual(points, beforePoints); assert.deepEqual(normals, beforeNormals)
+  const flat = orderResumeSurface({ points: new Float32Array([1, 1, 1, 1, 1, 1]), normals: new Float32Array([0, 1, 0, 0, 0, 1]) })
+  assert.deepEqual(Array.from(flat.points), [1, 1, 1, 1, 1, 1])
+  assert.deepEqual(Array.from(flat.normals), [0, 1, 0, 0, 0, 1])
+})
 
 test('surface samples honor the current GLB hierarchy and triangle area', () => {
   const root = new Group(), small = new BufferGeometry(), large = new BufferGeometry()

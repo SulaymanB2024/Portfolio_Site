@@ -52,9 +52,9 @@ export default function CaseStudyPage({ study, dark }: { study: CaseStudy; dark:
           <p className="study-title">{document.deck}</p>
           <p className="study-summary">{document.summary}</p>
           <ProjectContribution slug={study.slug} />
-          <a href={chapterHref(document.chapters[0].id)} onClick={(event) => jump(event, document.chapters[0].id)}>
-            Read the project <span aria-hidden="true">↓</span>
-          </a>
+          <DestinationLink className="project-reading-action" href={chapterHref(document.chapters[0].id)} direction="down" onClick={(event) => jump(event, document.chapters[0].id)}>
+            Read the project
+          </DestinationLink>
         </div>
         <div className="study-hero-figure">
           {study.slug === 'atlas' ? <Art kind="globe" dark={dark} className="study-glb" idleMotion={false} /> : <CaseHeroArtwork kind={study.slug} />}

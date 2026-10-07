@@ -14,16 +14,16 @@ export function thresholdMotion(local: number) {
     travel: pacedTravel((local - .12) / .50),
     departure: easeBetween(local, .10, .54),
     arrival: easeBetween(local, .28, .68),
-    outgoingLinks: 1 - easeBetween(local, .10, .16),
-    incomingLinks: easeBetween(local, .69, .74),
+    outgoingLinks: 1 - easeBetween(local, .08, .17),
+    incomingLinks: easeBetween(local, .75, .83),
     outgoingCategory: 1 - easeBetween(local, .20, .34),
-    incomingCategory: easeBetween(local, .44, .62),
+    incomingCategory: easeBetween(local, .44, .70),
   }
 }
 
-export const MOBILE_TITLE_TIMING = { eraseStart: .26, eraseEnd: .43, switch: .46, revealStart: .50, revealEnd: .68 } as const
+export const MOBILE_TITLE_TIMING = { eraseStart: .24, eraseEnd: .43, switch: .46, revealStart: .48, revealEnd: .74 } as const
 
-export const TITLE_TIMING = { eraseStart: .20, eraseEnd: .35, switch: .38, revealStart: .44, revealEnd: .67 } as const
+export const TITLE_TIMING = { eraseStart: .18, eraseEnd: .38, switch: .41, revealStart: .44, revealEnd: .74 } as const
 
 /** Short acceleration ramps around a steady central expansion. */
 export function pacedTravel(value: number): number {
@@ -81,12 +81,12 @@ export function portalPose(local: number, leg: number, mobile = false) {
 }
 
 export function cinematicPhase(local: number) {
-  return local <= .10 || local >= .74 ? 'held' : local < .28 ? 'approach' : local < .62 ? 'passage' : 'settle'
+  return local <= .08 || local >= .83 ? 'held' : local < .28 ? 'approach' : local < .62 ? 'passage' : 'settle'
 }
 
 /** Let the optical rim disappear before it becomes a pair of screen-wide rails. */
 export function portalFrameOpacity(local: number) {
-  return .65 * (1 - easeBetween(local, .24, .42))
+  return .65 * (1 - easeBetween(local, .20, .32))
 }
 
 /** Re-time the authored GLB path by visible aperture area, avoiding its microscopic lead-in. */

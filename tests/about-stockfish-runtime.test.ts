@@ -77,7 +77,19 @@ async function probe() {
       await command(position);
       searches.push(await command('go movetime 500', line => line.startsWith('bestmove ')));
     }
-    return { uci, searches };
+    await command('ucinewgame');
+    await command('isready', line => line === 'readyok');
+    await command('position startpos moves e2e4');
+    const stopStarted = Date.now();
+    const active = command('go movetime 60000', line => line.startsWith('bestmove '));
+    await new Promise(resolve => setTimeout(resolve, 250));
+    engine.ccall('command', null, ['string'], ['stop']);
+    const stopped = await active;
+    const stopDuration = Date.now() - stopStarted;
+    // The same instance must remain usable, retaining its hash between turns.
+    await command('position startpos moves d2d4');
+    const afterStop = await command('go movetime 500', line => line.startsWith('bestmove '));
+    return { uci, searches, stopped, stopDuration, afterStop };
   } finally {
     waiting = undefined;
     if (engine) {
@@ -114,7 +126,7 @@ test('vendored full NNUE Stockfish plays legal moves, mating tactics and promoti
   const { stdout } = await promisify(execFile)(process.execPath,
     ['--input-type=commonjs', '--eval', runtimeProbe, enginePath, JSON.stringify(positions)],
     { timeout: 20_000, killSignal: 'SIGKILL', maxBuffer: 1024 * 1024 })
-  const { uci, searches } = JSON.parse(stdout) as { uci: string[], searches: string[][] }
+  const { uci, searches, stopped, stopDuration, afterStop } = JSON.parse(stdout) as { uci: string[], searches: string[][], stopped: string[], stopDuration: number, afterStop: string[] }
   assert.ok(uci.includes('id name Stockfish 19 WASM'))
   assert.ok(uci.includes('option name Threads type spin default 1 min 1 max 1'))
   assert.ok(uci.includes('option name Skill Level type spin default 20 min 0 max 20'))
@@ -140,4 +152,10 @@ test('vendored full NNUE Stockfish plays legal moves, mating tactics and promoti
   const promoted = playUci(promotion, bestmove(searches[3]))
   assert.ok(promoted.promotion, 'engine must include the promotion piece in its UCI move')
   assert.equal(promotion.isCheckmate(), true)
+
+  assert.ok(stopDuration < 5000, 'UCI stop must finish the actual long search early')
+  const interrupted = new Chess(); interrupted.move('e4')
+  assert.ok(playUci(interrupted, bestmove(stopped)))
+  const warm = new Chess(); warm.move('d4')
+  assert.ok(playUci(warm, bestmove(afterStop)), 'the real engine must remain usable after stop')
 })

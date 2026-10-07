@@ -6,8 +6,8 @@
     {
       "slug": "jane-street-exact-search-solver-verification",
       "path": "src/personal/editorial/data/articles/jane-street-exact-search-solver-verification.json",
-      "priorCurrentSha256": "ec043c65b8429c25d009657f59e214d78c9979ed6938aab45ac294badf75e6f9",
-      "currentSha256": "8f7537ffc48d5198493caa6c8f0012d05aa91d52b01ce462a79523cdb60cf9b9",
+      "priorCurrentSha256": "df2281e08d97c89158906cf1e39221b5be5607b535ba200051ea247cc1125b22",
+      "currentSha256": "0226d91d28777302a3f0252560767d739d584584b5504deb57bc14b47b2bc268",
       "changes": [
         {
           "sectionId": "verifier",

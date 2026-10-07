@@ -49,7 +49,7 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
   let backingWidth = 0, backingHeight = 0, backingRatio = 0
   let menuOpen = false
   let drag: { id: number; x: number; y: number; previousX: number; previousY: number; intent: 'pending' | 'horizontal' | 'vertical' } | null = null
-  canvas.dataset.assets = 'glb'; canvas.dataset.state = 'loading'
+  canvas.dataset.assets = 'glb'; canvas.dataset.state = 'loading'; canvas.dataset.interacting = 'false'
   const active = () => !disposed && visible && !lost && !document.hidden && !menuOpen
   function cancel() { cancelAnimationFrame(raf); clearTimeout(timer); raf = timer = 0; runtime.suspend(); canvas.dataset.liveMotion = 'false' }
   function schedule(now = performance.now()) {
@@ -136,18 +136,18 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
   media.addEventListener('change', () => { cancel(); wake() }, { signal: abort.signal })
   canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); lost = true; cancel(); canvas.dataset.state = 'context-lost'; status('error') }, { signal: abort.signal })
   canvas.addEventListener('webglcontextrestored', () => { lost = false; canvas.dataset.state = 'loading'; wake() }, { signal: abort.signal })
-  controls.addEventListener('pointerdown', event => { if (event.isPrimary && event.button === 0) { activation.start(event.pointerId, event.clientX, event.clientY, event.pointerType); drag = { id: event.pointerId, x: event.clientX, y: event.clientY, previousX: event.clientX, previousY: event.clientY, intent: 'pending' } } }, { signal: abort.signal })
+  controls.addEventListener('pointerdown', event => { if (event.isPrimary && event.button === 0) { activation.start(event.pointerId, event.clientX, event.clientY, event.pointerType); drag = event.target === canvas ? { id: event.pointerId, x: event.clientX, y: event.clientY, previousX: event.clientX, previousY: event.clientY, intent: 'pending' } : null } }, { signal: abort.signal })
   controls.addEventListener('pointermove', event => {
-    if (!drag || drag.id !== event.pointerId) return
     activation.move(event.pointerId, event.clientX, event.clientY)
+    if (!drag || drag.id !== event.pointerId) return
     const current = transition.shown ? specimens.get(transition.shown) : null
     if (!current || transition.phase !== 'hold') return
     const dx = event.clientX - drag.x, dy = event.clientY - drag.y
     if (drag.intent === 'pending' && Math.hypot(dx, dy) > 7) drag.intent = event.pointerType !== 'touch' || Math.abs(dx) > Math.abs(dy) * 1.2 ? 'horizontal' : 'vertical'
-    if (drag.intent === 'horizontal') { canvas.setPointerCapture(event.pointerId); current.yaw = THREE.MathUtils.clamp(current.yaw + (event.clientX - drag.previousX) * .005, -.8, .8); current.pitch = THREE.MathUtils.clamp(current.pitch + (event.clientY - drag.previousY) * .003, -.15, .15); wake() }
+    if (drag.intent === 'horizontal') { if (canvas.dataset.interacting !== 'true') canvas.dataset.interacting = 'true'; canvas.setPointerCapture(event.pointerId); current.yaw = THREE.MathUtils.clamp(current.yaw + (event.clientX - drag.previousX) * .005, -.8, .8); current.pitch = THREE.MathUtils.clamp(current.pitch + (event.clientY - drag.previousY) * .003, -.15, .15); wake() }
     drag.previousX = event.clientX; drag.previousY = event.clientY
   }, { signal: abort.signal })
-  const release = (event: PointerEvent) => { if (drag?.id !== event.pointerId) return; if (event.type === 'pointerup') activation.end(event.pointerId, drag.intent === 'horizontal'); else activation.interrupt(); drag = null; if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId); wake() }
+  const release = (event: PointerEvent) => { if (drag?.id !== event.pointerId) { if (event.type === 'pointerup') activation.end(event.pointerId, false); return } if (event.type === 'pointerup') activation.end(event.pointerId, drag.intent === 'horizontal'); else activation.interrupt(); drag = null; canvas.dataset.interacting = 'false'; if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId); wake() }
   controls.addEventListener('pointerup', release, { signal: abort.signal }); controls.addEventListener('pointercancel', release, { signal: abort.signal }); controls.addEventListener('lostpointercapture', release, { signal: abort.signal })
   controls.addEventListener('click', event => { if (event.detail > 0 && activation.blocked) event.preventDefault() }, { signal: abort.signal })
   controls.addEventListener('keydown', event => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home'].includes(event.key)) { event.preventDefault(); const current = transition.shown ? specimens.get(transition.shown) : null; if (!current || transition.phase !== 'hold') return; if (event.key === 'Home') current.yaw = current.pitch = 0; else { current.yaw = THREE.MathUtils.clamp(current.yaw + (event.key === 'ArrowLeft' ? -.1 : event.key === 'ArrowRight' ? .1 : 0), -.8, .8); current.pitch = THREE.MathUtils.clamp(current.pitch + (event.key === 'ArrowUp' ? -.04 : event.key === 'ArrowDown' ? .04 : 0), -.15, .15) } wake() } }, { signal: abort.signal })
