@@ -64,9 +64,10 @@ export default function HomeContext() {
           <canvas key={attempt} ref={canvas} aria-hidden="true" />
         </span>
         <span className="home-context-cues" aria-hidden="true">
-          <span>{status === 'ready' ? 'Drag to turn' : status === 'loading' ? 'Opening sculpture…' : 'Double bass'}</span>
+          <span className="home-context-study-title">{interest.label}</span>
           <DestinationCue decorative>Explore music</DestinationCue>
         </span>
+        <span className="home-context-instruction" aria-hidden="true">{status === 'ready' ? 'Drag to turn' : status === 'loading' ? 'Opening sculpture…' : 'Sculpture unavailable'}</span>
         <span id="home-sculpture-instructions" className="sr-only">Explore double bass on my About page. Drag horizontally or use arrow keys to rotate the sculpture; Home resets it.</span>
         <span className="sr-only" role="status">{status === 'loading' ? 'Opening double bass sculpture.' : status === 'error' ? 'The sculpture is unavailable. The About links still work.' : ''}</span>
       </a>

@@ -13,7 +13,7 @@
 .journal-lead h3 { max-width: 600px; font-size: clamp(35px, 3.7vw, 51px); line-height: 1.12; }
 .journal-lead .journal-deck { max-width: 560px; font-size: 18px; line-height: 1.6; }
 .journal-art { aspect-ratio: 1; overflow: hidden; width: 180px; pointer-events: none; background: transparent; isolation: auto; }
-.journal-lead .journal-art { grid-column: 1 / -1; grid-row: 2; width: min(100%, 340px); justify-self: end; }
+.journal-lead .journal-art { grid-column: 1 / -1; grid-row: 2; width: min(100%, 400px); justify-self: end; }
 .journal-read { display: inline-flex; align-items: center; gap: 18px; width: fit-content; min-height: 44px; font-size: 11px; text-transform: uppercase; }
 .journal-read > span, .journal-all > span { display: inline-block; transition: transform .2s ease; font: 16px/1 Arial, sans-serif; }
 .journal-lead .journal-read { grid-column: 1 / -1; grid-row: 3; align-self: end; }

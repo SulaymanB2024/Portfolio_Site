@@ -245,7 +245,10 @@
     line-height: 1.15;
     letter-spacing: -.015em;
   }
-  .personal-site.personal-site[data-section][data-appearance] .journal-essay h3 { font-size: clamp(32px, 3.3vw, 44px); }
+  .personal-site.personal-site[data-section][data-appearance] .journal-lead h3 { font-size: clamp(40px, 4.25vw, 56px); line-height: 1.08; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-companion h3 { font-size: clamp(28px, 2.65vw, 34px); }
+  .personal-site.personal-site[data-section][data-appearance] .journal-category { font: 400 12px/1.6 var(--type-interface); color: var(--muted); letter-spacing: .015em; text-transform: none; margin: 0 0 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-companion .journal-deck { font-size: 18px; }
   .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='lead'] h2 { font-size: clamp(36px, 4vw, 48px); line-height: 1.1; }
   .personal-site.personal-site[data-section][data-appearance] .reading-paths h2 { font-size: 30px; margin-block: 12px; }
   .personal-site.personal-site[data-section][data-appearance] .reading-paths p { font: 400 18px/1.55 var(--type-reading); max-width: 44ch; }
@@ -314,6 +317,14 @@
     font-variant-numeric: tabular-nums;
   }
   .personal-site.personal-site[data-section][data-appearance] .lion-study-title { font: italic 400 20px/1.4 var(--type-reading); letter-spacing: -.01em; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.art-cube-credit > span, .home-context-study-title) { font: italic 400 20px/1.4 var(--type-reading); color: var(--ink); letter-spacing: -.01em; }
+  .personal-site.personal-site[data-section][data-appearance] .article-art-cube > figcaption { display: grid; grid-template-columns: minmax(0, 1fr) max-content; align-items: start; border-top: 1px solid var(--line); padding-top: 12px; }
+  .personal-site.personal-site[data-section][data-appearance] .art-cube-credit { flex-direction: column; align-items: start; gap: 0; min-width: 0; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.art-cube-credit > a, .art-cube-control) { font: 400 12px/1.6 var(--type-interface); min-height: 44px; }
+  .personal-site.personal-site[data-section][data-appearance] .art-cube-credit > a { display: inline-flex; align-items: center; }
+  .personal-site.personal-site[data-section][data-appearance] .art-cube-control { align-self: end; }
+  .personal-site.personal-site[data-section][data-appearance] .home-context-cues { border-top: 1px solid var(--line); padding-top: 12px; }
+  .personal-site.personal-site[data-section][data-appearance] .home-context-instruction { display: block; color: var(--muted); font: 400 12px/1.6 var(--type-interface); }
   .personal-site.personal-site[data-section][data-appearance] .lion-study-credit .mono { font: 400 12px/1.6 var(--type-interface); }
   .personal-site.personal-site[data-section][data-appearance] .lion-study-credit p { font: 400 14px/1.65 var(--type-interface); }
   .personal-site.personal-site[data-section][data-appearance] .colophon p { font-size: 15px; line-height: 1.65; }
@@ -343,6 +354,8 @@
   .personal-site[data-section][data-appearance] .article-page .article-lede > p:first-child { font-size: 23px; }
   .personal-site.personal-site[data-section][data-appearance] .article-page .article-cover h1 { font-size: clamp(38px, 10vw, 48px); }
   .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='lead'] h2 { font-size: 36px; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-lead h3 { font-size: clamp(34px, 9.8vw, 40px); }
+  .personal-site.personal-site[data-section][data-appearance] .journal-companion h3 { font-size: 28px; }
   .personal-site.personal-site[data-section][data-appearance] .reading-paths h2 { font-size: 28px; }
 }
 
