@@ -20,10 +20,12 @@ function JournalEssay({ article, lead = false }: { article: ArticleSummary; lead
       <p className="journal-category">{displayWritingTopic(article.category)}</p>
       <h3 id={`journal-title-${article.slug}`}>{article.displayTitle || article.title}</h3>
       <p id={`journal-deck-${article.slug}`} className="journal-deck">{homeWritingDecks[article.slug] ?? article.subtitle}</p>
-      <div className="journal-meta mono"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span className="writing-story-readtime">{displayReadTime(article.readTime)}</span></div>
+      <div className="journal-essay-footer">
+        <div className="journal-meta mono"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span className="writing-story-readtime">{displayReadTime(article.readTime)}</span></div>
+        <DestinationCue className="journal-read mono">{siteCopy.writing.read}</DestinationCue>
+      </div>
     </div>
     <div className="journal-art"><AnimatedArtwork artwork={artwork} size={lead ? 400 : 240} paused={paused} embedded decorative /></div>
-    <DestinationCue className="journal-read mono">{siteCopy.writing.read}</DestinationCue>
   </a>
 }
 

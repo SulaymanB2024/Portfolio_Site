@@ -57,7 +57,11 @@ test('only exact reviewed code labels are permitted; code, language, targets and
     const untouched = structuredClone(article)
     const normalized = originalCodeLabels(article)
     assert.deepEqual(article, untouched, 'Label canonicalization must not mutate the manuscript')
-    assert.deepEqual(protectedQualityEvidence(normalized), protectedQualityEvidence(before))
+    const expectedEvidence = protectedQualityEvidence(before)
+    for (const correction of manifest.exceptions.filter((item: any) => item.slug === revision.slug && item.removedResource)) {
+      expectedEvidence.fixed.resources = expectedEvidence.fixed.resources.filter((resource: any) => JSON.stringify(resource) !== JSON.stringify(correction.removedResource))
+    }
+    assert.deepEqual(protectedQualityEvidence(normalized), expectedEvidence)
     for (const change of revision.changes) {
       const altered = structuredClone(article)
       const example = altered.sections.find((section: any) => section.id === change.sectionId).codeExamples[change.exampleIndex]
@@ -86,6 +90,17 @@ test('the protocol correction permits only its declared primary citation', () =>
   const changed = structuredClone(article); changed.content[1] += ' The guarantee lasts 99 days.'
   assert.throws(() => verifyQualityRevision(before, changed, item, manifest.exceptions))
   assert(article.content[1].includes('case-insensitive product-token group matching'))
+})
+
+test('the broken-route correction preserves every remaining resource and code caption quantity', () => {
+  const item = record('jane-street-exact-search-solver-verification')
+  const before = json(item.baselinePath), article = json(item.path)
+  verifyQualityRevision(before, article, item, manifest.exceptions)
+  assert.throws(() => verifyQualityRevision(before, article, item, []))
+  const missing = structuredClone(article); missing.resources.pop()
+  assert.throws(() => verifyQualityRevision(before, missing, item, manifest.exceptions))
+  const caption = structuredClone(article); caption.sections[3].codeExamples[0].description += ' Verified in 999 runs.'
+  assert.throws(() => verifyQualityRevision(before, caption, item, manifest.exceptions))
 })
 
 test('HTML revisions preserve original markup, tables, figures, and sources', () => {

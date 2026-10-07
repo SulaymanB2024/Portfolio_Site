@@ -32,22 +32,18 @@
   display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.1fr);column-gap:9%;
   border-top:1px solid var(--line);padding:44px 0 26px;margin-top:28px;
 }
+.personal-site.home-site .home-context {
+  border-block:1px solid var(--line);padding-block:clamp(28px,3vw,44px);margin-top:0;
+}
 .home-context-intro { align-self:center;padding-bottom:32px;min-width:0; }
 .home-context h2 { font:400 clamp(40px,4.5vw,72px)/1.05 Georgia,'Times New Roman',serif;letter-spacing:-.045em;margin:0 0 28px; }
 .home-context h2:focus { outline:none; }
 .home-context-summary { font:clamp(18px,1.65vw,24px)/1.6 Georgia,'Times New Roman',serif;max-width:480px;margin:0;text-wrap:pretty; }
 .home-context-interests { min-width:0; }
-.home-context-stage { display:block;position:relative;cursor:pointer; }
-.home-context-frame { display:block;position:relative;height:clamp(400px,42vw,580px); }
-.home-context-poster { position:absolute;inset:0;background:var(--ink);mask:url('/art/bass-ink.webp') center / auto 100% no-repeat;-webkit-mask:url('/art/bass-ink.webp') center / auto 100% no-repeat;pointer-events:none;transition:opacity 220ms ease; }
-.home-context-stage canvas { display:block;width:100%;height:100%;background:transparent;touch-action:pan-y;cursor:pointer;opacity:0;transition:opacity 220ms ease; }
-.home-context-stage[data-state="ready"] canvas { opacity:1; }
-.home-context-stage[data-state="ready"] .home-context-poster { opacity:0; }
+.home-context-stage { display:block;position:relative;height:clamp(340px,min(34vw,56svh),480px);cursor:pointer; }
+.home-context-stage canvas { display:block;width:100%;height:100%;background:transparent;touch-action:pan-y;cursor:pointer; }
 .home-context-stage canvas:active { cursor:grabbing; }
-.home-context-cues { display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;color:var(--muted);font:12px/1.5 var(--type-interface,Arial,Helvetica,sans-serif); }
-.home-context-recovery { display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--muted);font-size:13px;line-height:1.5; }
-.home-context-recovery p { margin:0; }
-.home-context-recovery button { flex-shrink:0;min-height:44px;padding:8px 0;background:transparent;border:0;text-decoration:underline;text-underline-offset:4px; }
+.home-context-error { position:absolute;inset:auto 24px 30%;font-size:17px;line-height:1.6;color:var(--muted); }
 .home-context-caption { max-width:510px;margin:12px 0 0;color:var(--muted);font:16px/1.65 Georgia,'Times New Roman',serif;text-wrap:pretty; }
 .home-context :is(a,button):focus-visible { outline:1px solid var(--ink);outline-offset:5px; }
 @media(max-width:760px) {
@@ -55,12 +51,83 @@
   .home-context-intro { padding-bottom:24px; }
   .home-context h2 { font-size:clamp(38px,8vw,56px);margin-bottom:21px; }
   .home-context-summary { font-size:19px;line-height:1.55;max-width:500px; }
-  .home-context-stage { margin-top:5px; }
-  .home-context-frame { height:420px; }
+  .home-context-stage { height:clamp(300px,44svh,380px);margin-top:0; }
   .home-context-caption { font-size:15px; }
 }
 @media(max-width:360px) {
   .home-context-summary { font-size:18px; }
-  .home-context-frame { height:380px; }
+  .home-context-stage { height:clamp(280px,44svh,340px); }
 }
 @media(prefers-reduced-motion:reduce) { .home-context *, .home-context *::before, .home-context *::after { animation:none!important;transition:none!important; } }
+
+@media screen {
+  .personal-site.home-site[data-section][data-appearance] .home-context-intro h2 {
+    font-size: clamp(44px, 5vw, 72px); line-height: 1.1; margin-bottom: 26px;
+  }
+  .home-context-greeting { display: block; font-size: .52em; line-height: 1.5; letter-spacing: -.035em; }
+  .home-context-name { display: block; }
+  .home-context-music { position: relative; color: inherit; text-decoration: none; }
+  .personal-site.home-site[data-section][data-appearance] .home-context-music:focus-visible { outline: none; }
+  .home-context-music:focus-visible::after {
+    content: ''; position: absolute; inset: -6px; pointer-events: none;
+    background:
+      linear-gradient(var(--ink), var(--ink)) left top / 18px 1px no-repeat,
+      linear-gradient(var(--ink), var(--ink)) left top / 1px 18px no-repeat,
+      linear-gradient(var(--ink), var(--ink)) right bottom / 18px 1px no-repeat,
+      linear-gradient(var(--ink), var(--ink)) right bottom / 1px 18px no-repeat;
+  }
+  .home-context-music-link { margin-top: 8px; }
+  .personal-site.home-site[data-section][data-appearance] .home-context-stage[data-state='ready'] canvas { cursor: grab; }
+  .personal-site.home-site[data-section][data-appearance] .home-context-stage canvas[data-interacting='true'] { cursor: grabbing; }
+  .home-context-gesture {
+    position: absolute; right: 4px; bottom: 6px; display: inline-flex; align-items: center; gap: 9px;
+    color: var(--muted); font: 500 11px/1.5 var(--type-display); pointer-events: none;
+    opacity: 0; transform: translateY(4px);
+  }
+  .home-context-gesture svg { width: 24px; height: 12px; flex: none; }
+  .home-context-gesture-touch, .home-context-gesture-keyboard { display: none; }
+  .home-context-stage[data-state='ready']:is(:hover, :has(canvas[data-interacting='true'])) .home-context-gesture,
+  .home-context-music:focus-visible .home-context-stage[data-state='ready'] .home-context-gesture {
+    opacity: 1; transform: none;
+  }
+  .home-context-music:focus-visible .home-context-gesture-pointer,
+  .home-context-music:focus-visible .home-context-gesture-touch { display: none; }
+  .home-context-music:focus-visible .home-context-gesture-keyboard { display: inline; }
+  .home-context-stage:has(canvas[data-interacting='true']) .home-context-gesture { color: var(--ink); }
+  .personal-site.home-site[data-section][data-appearance] .home-context-music:is(:hover, :focus-visible) .destination-link-label { text-decoration-color: currentColor; }
+  .personal-site.home-site[data-section][data-appearance] .home-context-stage { height: clamp(320px, min(32vw, 52svh), 440px); }
+}
+@media screen and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .home-context-gesture { transition: opacity 150ms ease-out, transform 220ms cubic-bezier(.22,.61,.36,1), color 150ms ease-out; }
+  .personal-site.home-site[data-section][data-appearance] .home-context-music:is(:hover, :focus-visible) .link-arrow { transform: translateX(3px); }
+}
+@media screen and (hover: none) and (pointer: coarse) {
+  .home-context-stage { margin-bottom: 26px; }
+  .home-context-gesture { bottom: -20px; }
+  .home-context-stage[data-state='ready'] .home-context-gesture { opacity: 1; transform: none; }
+  .home-context-gesture-pointer { display: none; }
+  .home-context-gesture-touch { display: inline; }
+}
+@media screen and (max-width: 760px) {
+  .personal-site.home-site[data-section][data-appearance] .home-context-intro h2 { font-size: clamp(38px, 9.5vw, 56px); }
+  .personal-site.home-site[data-section][data-appearance] .home-context-stage { height: clamp(290px, 42svh, 350px); }
+}
+@media screen and (forced-colors: active) {
+  .personal-site.home-site[data-section][data-appearance] .home-context-music:focus-visible {
+    outline: 2px solid Highlight; outline-offset: 6px;
+  }
+  .home-context-music:focus-visible::after { display: none; }
+}
+@media print { .home-context-gesture { display: none; } }
+
+/* Keep the loading silhouette and retry path inside the compact music entry. */
+.home-context-music { display:block; }
+.home-context-frame { display:block; position:relative; height:100%; }
+.home-context-poster { position:absolute; inset:0; background:var(--ink); mask:url('/art/bass-ink.webp') center / auto 100% no-repeat; -webkit-mask:url('/art/bass-ink.webp') center / auto 100% no-repeat; pointer-events:none; transition:opacity 220ms ease; }
+.home-context-stage canvas { opacity:0; transition:opacity 220ms ease; }
+.home-context-stage[data-state='ready'] canvas { opacity:1; }
+.home-context-stage[data-state='ready'] .home-context-poster { opacity:0; }
+.home-context-recovery { display:flex; align-items:center; justify-content:space-between; gap:16px; color:var(--muted); font-size:13px; line-height:1.5; }
+.home-context-recovery p { margin:0; }
+.home-context-recovery button { flex-shrink:0; min-height:44px; padding:8px 0; background:transparent; border:0; text-decoration:underline; text-underline-offset:4px; }
+@media (prefers-reduced-motion:reduce) { .home-context-poster, .home-context-stage canvas { transition:none; } }

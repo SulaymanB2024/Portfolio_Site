@@ -84,8 +84,8 @@ export const siteMetadata = {
 
 // Short homepage introductions; article titles, decks, and source records stay intact.
 export const homeWritingDecks: Record<string, string> = {
-  'who-owns-texas-toll-roads': 'Who owns the pavement, who collects the tolls, and who gets paid first?',
-  'atlas-building-an-evidence-console': 'Building a website audit console, from capture to review.',
+  'who-owns-texas-toll-roads': 'The contracts and cash flows behind Texas toll roads.',
+  'atlas-building-an-evidence-console': 'A website audit console built around captured evidence.',
   'the-first-ai-managers': 'Can an AI manager keep a business on course?',
 }
 

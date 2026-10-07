@@ -10,7 +10,7 @@
 .study-hero h1 em { font-weight: 400; }
 .study-title { font-size: clamp(24px,2.45vw,34px); line-height: 1.3; letter-spacing: -.027em; max-width: 510px; margin: 0 0 22px; text-wrap: pretty; }
 .study-summary { max-width: 480px; font-size: 18px; line-height: 1.7; color: var(--muted); margin: 0 0 30px; }
-.study-hero-copy > a { font: 11px/1.6 var(--study-mono); display: flex; align-items: center; justify-content: space-between; gap: 25px; width: fit-content; min-height: 44px; border-bottom: 1px solid var(--ink); text-transform: uppercase; }
+.study-hero-copy > a:not(.destination-link) { font: 11px/1.6 var(--study-mono); display: flex; align-items: center; justify-content: space-between; gap: 25px; width: fit-content; min-height: 44px; border-bottom: 1px solid var(--ink); text-transform: uppercase; }
 .study-hero-copy > a > .mono { display: none; }
 .study-hero-figure { margin: 0; min-width: 0; }
 .study-hero-figure .study-glb { height: clamp(320px, 36vw, 460px); }

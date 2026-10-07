@@ -8,15 +8,33 @@
 .reader-research-figure img { display: block; width: 100%; height: auto; background: transparent; border: 0; filter: grayscale(1); mix-blend-mode: multiply; }
 [data-appearance='dark'] .reader-research-figure img { filter: invert(1) grayscale(1); mix-blend-mode: screen; }
 .reader-original-figure { display: block; width: fit-content; margin-top: 8px; font: 12px/1.6 var(--editorial-sans); text-underline-offset: 3px; }
+.reader-figure-scroll-cue { display: none; }
 
 @media screen and (max-width: 760px) {
   .reader-figure-viewport { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--muted) var(--paper); }
-  .reader-figure-viewport .reader-figure-link, .reader-figure-viewport img { min-width: 0; }
-  /* Retain label size in the few detailed source plots awaiting reconstruction. */
-  .reader-research-figure[data-density='dense'] .reader-figure-link { min-width: 560px; }
+  /* Keep source-chart labels at the same scale as the desktop reading column. */
+  .reader-figure-viewport .reader-figure-link, .reader-figure-viewport img { min-width: 760px; }
+  .reader-research-figure .reader-figure-scroll-cue {
+    display: block;
+    margin: 0 0 12px;
+    color: var(--muted);
+    font: 400 12px/1.6 var(--type-interface, Arial, Helvetica, sans-serif);
+  }
+  .reader-restored-html .reader-figure-viewport::before {
+    content: 'Scroll horizontally to inspect the figure →';
+    position: sticky;
+    left: 0;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: 12px;
+    color: var(--muted);
+    font: 400 12px/1.6 var(--type-interface, Arial, Helvetica, sans-serif);
+  }
 }
 
 @media print {
   .reader-research-figure img, [data-appearance='dark'] .reader-research-figure img { filter: none; mix-blend-mode: normal; background: white; }
   .reader-research-figure .reader-figure-link { background: white; }
+  .reader-figure-scroll-cue { display: none; }
 }

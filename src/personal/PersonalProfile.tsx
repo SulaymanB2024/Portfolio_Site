@@ -32,7 +32,7 @@ export function PersonalProfile({ compact = false }: { compact?: boolean }) {
 export function AuthorNote() {
   return <aside className="author-note" aria-labelledby="author-note-title">
     <span className="eyebrow" id="author-note-title">About the author</span>
-    <p><a className="author-name" href="/about" rel="author">{identity.name}</a></p>
+    <p><a className="author-name" href="#/about" rel="author">{identity.name}</a></p>
     <p>{identity.authorDescription}</p>
     <nav className="profile-actions mono" aria-label="More from the author"><DestinationLink href="/about">Biography</DestinationLink><DestinationLink href="/writing">More writing</DestinationLink><DestinationLink href="/feed.xml">Writing feed</DestinationLink></nav>
   </aside>

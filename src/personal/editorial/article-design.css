@@ -63,7 +63,10 @@
 .article-page .reader-disclosure summary .mono { font-size: 11px; letter-spacing: 0; }
 .article-page .reader-disclosure dt { font: 12px/1.7 var(--editorial-sans); }
 .article-page .reader-disclosure > a { font-size: 12px; }
-.article-page .case-filters button, .article-page .case-count, .article-page .case-toolbar select { font-size: 11px; }
+.article-page .case-filters button, .article-page .case-count, .article-page .case-toolbar select { font-size: 12px; }
+.article-page .case-filters button, .article-page .case-toolbar select { font-family: var(--editorial-sans); }
+.article-page .case-filters button { min-height: 44px; }
+.case-print-summary { display: none; }
 .article-page .reader-sources li, .article-page .article-notes { font: 14px/1.75 var(--editorial-sans); }
 .article-page .reader-sources li { padding: 4px 0 18px 6px; margin-bottom: 12px; border-bottom: 1px solid var(--line); }
 .article-page .reader-sources li::marker { font: 11px var(--editorial-sans); color: var(--muted); }
@@ -134,6 +137,20 @@
   .article-page .reader-metrics dd:not(.reader-metric-note) { font-size: 26px; }
 }
 @media print {
+  .article-page { padding-bottom: 0; }
+  .article-page .article-table-wrap { overflow: visible; }
+  .article-page .article-table-wrap :is(th, td) { min-width: 0; padding: 6px; font: 10px/1.5 var(--editorial-sans); overflow-wrap: anywhere; }
+  .article-page .article-table-wrap th { font-weight: 600; }
+  .article-page .article-table-wrap tr { break-inside: avoid; }
+  .article-page .reader-table > figcaption { break-after: avoid; }
+  .article-page :is(.case-toolbar, .case-filters, .case-count, .case-clear) { display: none; }
+  .article-page .case-print-summary { display: block; font: 10px/1.6 var(--editorial-sans); }
+  .article-page .case-list > .reader-disclosure[hidden] { display: block; }
+  .article-page .reader-disclosure summary { font-size: 13px; break-after: avoid; }
+  .article-page .reader-disclosure summary > [aria-hidden='true'] { display: none; }
+  .article-page .reader-disclosure :is(dt, dd) { font-size: 10px; line-height: 1.6; }
+  .article-page .reader-disclosure dl > div { break-inside: avoid; }
+  .article-page .reader-disclosure > a { font-size: 10px; }
   .article-cover { grid-template-columns: minmax(0, 1fr) 150px; gap: 30px; margin: 0 0 28px; padding-bottom: 20px; break-inside: avoid; }
   .article-page .article-cover h1 { font-size: 32px; line-height: 1.08; }
   .article-cover .reader-subtitle { font-size: 12px; }
@@ -144,10 +161,22 @@
   .article-lede > p:first-child, .article-page .reader-prose > p:first-of-type { font-size: 14px; }
   .article-page .reader-section > h2, .article-page .reader-prose > h2 { font-size: 23px; margin-top: 30px; break-after: avoid; }
   .article-page .reader-prose h3 { font-size: 17px; }
+  .article-page .reader-prose :is(h3, h4) { break-after: avoid; }
   .article-page .reader-callout p, .article-page .reader-sources li, .article-page .article-notes { font-size: 11px; }
+  .article-page .reader-sources li { break-inside: avoid; padding-block: 4px 8px; margin-bottom: 8px; }
+  .article-page .reader-sources li :is(.source-publisher, p) { font-size: 10px; line-height: 1.6; }
+  .article-page .reader-endnote { font-size: 10px; line-height: 1.6; margin-top: 18px; }
+  .article-page .reader-endnote p { font-size: 10px; line-height: 1.6; margin-bottom: 0; }
+  .article-page .reader-endnote nav { display: none; }
   .article-page .reader-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
   .article-page .reader-metrics dd:not(.reader-metric-note) { font-size: 24px; }
   .article-page .reader-metrics dt, .article-page .reader-metrics .reader-metric-note { font-size: 10px; }
   .article-page .atlas-evidence-figure ol { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .article-page .reader-prose .article-original-figures figcaption { font-size: 10px; }
+  .article-page .article-original-figures .toll-snapshot__scroll :is(th, td) { font-size: 10px !important; line-height: 1.5; }
+  .article-page .author-note { margin-top: 20px; padding: 12px 0 0; break-inside: avoid; }
+  .article-page .author-note > p { margin: 6px 0 0; font-size: 10px; line-height: 1.6; }
+  .article-page .author-note .author-name { font-size: 17px; line-height: 1.25; }
+  .article-page .author-note .eyebrow { font-size: 10px; }
+  .article-page .author-note .profile-actions { display: none; }
 }

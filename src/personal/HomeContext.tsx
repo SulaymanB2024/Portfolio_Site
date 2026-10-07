@@ -53,29 +53,33 @@ export default function HomeContext() {
 
   return <section className="home-context" id="home-profile" aria-labelledby="home-profile-title">
     <div className="home-context-intro">
-      <h2 id="home-profile-title" tabIndex={-1}>I’m Sulayman<span aria-hidden="true">.</span></h2>
+      <h2 id="home-profile-title" tabIndex={-1}><span className="home-context-greeting">I’m</span>{' '}<span className="home-context-name">Sulayman<span aria-hidden="true">.</span></span></h2>
       <p className="home-context-summary">{identity.homeSummary}</p>
       <DestinationLink className="home-context-about" href="#/about">About me</DestinationLink>
     </div>
     <div className="home-context-interests">
-      <a ref={stage} className="home-context-stage" data-state={status} href={interestHref(interest.id)} aria-label={`Explore ${interest.label}`} aria-describedby="home-sculpture-instructions" draggable={false}>
+    <a ref={stage} className="home-context-music" href={interestHref(interest.id)} aria-label={`Explore music — ${interest.label.toLowerCase()}`} aria-describedby="home-sculpture-instructions" draggable={false}>
+      <div className="home-context-stage" data-state={status}>
         <span className="home-context-frame">
           <span className="home-context-poster" aria-hidden="true" />
           <canvas key={attempt} ref={canvas} aria-hidden="true" />
         </span>
-        <span className="home-context-cues" aria-hidden="true">
-          <span className="home-context-study-title">{interest.label}</span>
-          <DestinationCue decorative>Explore music</DestinationCue>
+        <span className="home-context-gesture" aria-hidden="true">
+          <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18M7 2 3 6l4 4M17 2l4 4-4 4" /></svg>
+          <span className="home-context-gesture-pointer">Drag to turn</span>
+          <span className="home-context-gesture-touch">Swipe sideways to turn</span>
+          <span className="home-context-gesture-keyboard">Arrow keys to turn</span>
         </span>
-        <span className="home-context-instruction" aria-hidden="true">{status === 'ready' ? 'Drag to turn' : status === 'loading' ? 'Opening sculpture…' : 'Sculpture unavailable'}</span>
         <span id="home-sculpture-instructions" className="sr-only">Explore double bass on my About page. Drag horizontally or use arrow keys to rotate the sculpture; Home resets it.</span>
         <span className="sr-only" role="status">{status === 'loading' ? 'Opening double bass sculpture.' : status === 'error' ? 'The sculpture is unavailable. The About links still work.' : ''}</span>
-      </a>
-      {status === 'error' && <div className="home-context-recovery">
-        <p>The moving sculpture couldn’t load.</p>
-        <button type="button" onClick={retry} aria-label={reloadRequired ? 'Reload page to retry double bass sculpture' : 'Retry double bass sculpture'}>{reloadRequired ? 'Reload page' : 'Try again'}</button>
-      </div>}
+      </div>
       <p className="home-context-caption">{interest.description}</p>
+      <DestinationCue className="home-context-music-link">Explore music</DestinationCue>
+    </a>
+    {status === 'error' && <div className="home-context-recovery">
+      <p>The moving sculpture couldn’t load.</p>
+      <button type="button" onClick={retry} aria-label={reloadRequired ? 'Reload page to retry double bass sculpture' : 'Retry double bass sculpture'}>{reloadRequired ? 'Reload page' : 'Try again'}</button>
+    </div>}
     </div>
   </section>
 }

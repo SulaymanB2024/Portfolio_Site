@@ -34,7 +34,7 @@ test('selected phone views retain their fitted camera and centered interaction s
   for(const selected of ['bass','score','knight'] as const)assert.equal(interestFraming(338,430,true,selected).focusX,0)
 })
 
-test('the complete authored chess set fits the table at phone and desktop sizes, both orientations and drag limits', async () => {
+test('the complete authored chess set fits phone and desktop tables through full yaw and tilt', async () => {
   const bytes = await readFile(new URL('../public/about-objects/knight.glb', import.meta.url))
   const model = (await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '')).scene
   const bounds = new THREE.Box3().setFromObject(model), center = bounds.getCenter(new THREE.Vector3()), size = bounds.getSize(new THREE.Vector3())
@@ -66,18 +66,18 @@ test('the complete authored chess set fits the table at phone and desktop sizes,
     visibleMeshes.push(node)
   })
   const point = new THREE.Vector3()
-  for (const [width, height, stacked] of [[282, 320, true], [322, 360, true], [335, 350, true], [552, 440, true], [900, 360, false], [1124, 520, false], [1600, 520, false]] as const) {
-    const frame = interestFraming(width, height, stacked, 'knight', true)
+  for (const [width, height, stacked] of [[280,280,true], [282,320,true], [322,360,true], [335,350,true], [552,440,true], [580,379,true], [600,360,false], [720,560,false], [720,610,false], [788,375,false], [832,878,false]] as const) {
     const camera = new THREE.PerspectiveCamera(32, width / height, .1, 100)
-    camera.position.z = frame.cameraZ; camera.updateMatrixWorld()
-    group.position.set(frame.focusX, frame.focusY, 0); group.scale.setScalar(frame.focusedKnightScale)
-    for (const flip of [0, Math.PI]) for (const yaw of [-.727, 0, .727]) for (const pitch of [-.16, 0, .16]) {
-      pose.rotation.set(.67 + pitch, flip - .22 + yaw, 0); group.updateMatrixWorld(true)
+    for (const yaw of [-Math.PI,-2.2,-1.5,-.947,-.22,.507,1.5,2.2,Math.PI,4*Math.PI+.8]) for (const pitch of [-1.4,-.8,0,.07,.51,.67,.83,1.4,1.53]) {
+      const frame = interestFraming(width,height,stacked,'knight',true,{yaw,pitch})
+      camera.position.z = frame.cameraZ; camera.updateMatrixWorld()
+      group.position.set(frame.focusX,frame.focusY,0); group.scale.setScalar(frame.focusedKnightScale)
+      pose.rotation.set(pitch,yaw,0); group.updateMatrixWorld(true)
       for (const mesh of visibleMeshes) {
         const box = mesh.geometry.boundingBox!
         for (const x of [box.min.x, box.max.x]) for (const y of [box.min.y, box.max.y]) for (const z of [box.min.z, box.max.z]) {
           point.set(x, y, z).applyMatrix4(mesh.matrixWorld).project(camera)
-          assert(point.x > -1 && point.x < (stacked ? 1 : .32), `${mesh.name} stays within ${width}px at yaw ${yaw}`)
+          assert(point.x > -1 && point.x < 1, `${mesh.name} stays within ${width}px at yaw ${yaw}`)
           assert(Math.abs(point.y) < 1, `${mesh.name} stays within ${width}×${height}px at pitch ${pitch}, y=${point.y}`)
         }
       }

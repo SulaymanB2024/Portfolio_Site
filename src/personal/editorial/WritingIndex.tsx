@@ -22,6 +22,7 @@ const categories = ['All', ...new Set(articles.map(article => article.category))
 export default function WritingIndex() {
   const { paused } = useArtworkMotion()
   const searchInput = useRef<HTMLInputElement>(null)
+  const discoveryToggle = useRef<HTMLElement>(null)
   const focusAfterReset = useRef(false)
   const [{ category, query }, setFilters] = useState(() => readWritingFilters(location.hash, categories))
   const [toolsOpen, setToolsOpen] = useState(() => Boolean(query.trim() || category !== 'All'))
@@ -72,8 +73,8 @@ export default function WritingIndex() {
   return <section className="writing-page">
     <header className="writing-header">
       <div className="writing-heading-copy"><h1 className="writing-heading">Writing<span className="period">.</span></h1><p className="writing-introduction">{siteCopy.writing.introduction}</p></div>
-      <div className="writing-tools"><details className="writing-discovery" open={toolsOpen} onToggle={event => setToolsOpen(event.currentTarget.open)}>
-      <summary>Find an essay<span aria-hidden="true">{toolsOpen ? '−' : '+'}</span></summary>
+      <div className="writing-tools"><details className="writing-discovery" open={toolsOpen} onToggle={event => setToolsOpen(event.currentTarget.open)} onKeyDown={event => { if (event.key === 'Escape' && !event.defaultPrevented && !event.nativeEvent.isComposing && toolsOpen) { event.preventDefault(); setToolsOpen(false); discoveryToggle.current?.focus({ preventScroll: true }) } }}>
+      <summary ref={discoveryToggle}>Find an essay<span aria-hidden="true">{toolsOpen ? '−' : '+'}</span></summary>
       <div className="writing-toolbar">
         <label className="writing-search"><span className="sr-only">Search writing</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></svg><input ref={searchInput} type="search" value={query} onChange={event => updateFilters({ ...filters, query: event.target.value })} placeholder="Search writing" /></label>
         <div className="writing-search-options"><label className="writing-topic"><span className="sr-only">Filter writing by topic</span><select value={category} onChange={event => updateFilters({ ...filters, category: event.target.value })}>{categories.map(value => <option key={value} value={value}>{displayWritingTopic(value)}</option>)}</select><span aria-hidden="true">⌄</span></label></div>

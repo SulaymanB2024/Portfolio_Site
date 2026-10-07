@@ -8,7 +8,7 @@ type Reveal = { element: HTMLElement; stagger: number; target: number; current: 
 type Group = { anchor: HTMLElement; reveals: Reveal[]; done: boolean }
 
 /** A short scroll-driven composition, followed by a still reading surface. */
-export function installHomeScrollMotion(site: HTMLElement) {
+export function installHomeScrollMotion(site: HTMLElement, options: { text?: boolean; pointer?: boolean } = {}) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)')
   const groups: Group[] = []
   const owned = new Set<HTMLElement>()
@@ -16,8 +16,8 @@ export function installHomeScrollMotion(site: HTMLElement) {
   const observed = new Map<HTMLElement, Group>()
   let frame = 0, previousTime = 0, frames = 0, disposed = false
   site.dataset.homeScrollMotion = 'true'
-  const disposeText = installHomeTextMotion(site)
-  const disposePointer = installHomePointerMotion(site)
+  const disposeText = options.text === false ? () => {} : installHomeTextMotion(site)
+  const disposePointer = options.pointer === false ? () => {} : installHomePointerMotion(site)
 
   function request() {
     if (!disposed && active.size && !frame && !document.hidden && !reduced.matches) frame = requestAnimationFrame(paint)
@@ -93,6 +93,8 @@ export function installHomeScrollMotion(site: HTMLElement) {
     copy('.work-collection-intro', 'h2,p')
     copy('.work-study-copy', '.work-study-number,.work-study-tags,h2,.work-study-text > p,.work-study-link')
     copy('.work-further a', ':scope > span:first-child')
+    copy('.home-context-intro', 'h2,.home-context-summary,.home-context-about')
+    site.querySelectorAll<HTMLElement>('.home-context-caption').forEach(element => add(element, [[element, 'text', 0]]))
     copy('.journal-heading', '.journal-kicker,h2')
     copy('.journal-essay-copy', '.journal-category,h3,.journal-deck,.journal-meta')
     site.querySelectorAll<HTMLElement>('.journal-essay').forEach(essay => {

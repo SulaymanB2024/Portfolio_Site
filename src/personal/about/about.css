@@ -39,7 +39,7 @@
 .about-object-reveal { position: relative; grid-column: 2; width: 100%; }
 .about-reveal-top { display: flex; align-items: center; justify-content: space-between; color: var(--muted); text-transform: uppercase; font-size: 10px; }
 .about-reveal-top > button { border: 0; background: transparent; font: 24px Arial,sans-serif; width: 44px; height: 44px; padding: 0; margin-right: -12px; }
-.about-object-reveal h2 { font-size: clamp(38px,4vw,56px); font-weight: 400; letter-spacing: -.05em; line-height: 1.05; margin: 8px 0 18px; }
+.about-object-reveal h1 { font-size: clamp(38px,4vw,56px); font-weight: 400; letter-spacing: -.05em; line-height: 1.05; margin: 8px 0 18px; }
 .about-object-sentence { font-size: 17px; color: var(--muted); line-height: 1.65; margin: 0 0 24px; }
 .about-interest-play { margin: 14px 0 22px; }
 .about-string-buttons { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
@@ -206,7 +206,7 @@
   .about-objects[data-selected='collection'] .about-object-canvas { transform: translateY(calc((320px - max(340px,min(53svh,430px))) / 2)); }
   .about-gallery-guides { inset: 30px 0; }
   .about-reveal-top > button { margin-right: 0; }
-  .about-object-reveal h2 { font-size: 44px; }
+  .about-object-reveal h1 { font-size: 44px; }
   .about-object-selectors { gap: 14px; }
   .about-object-selectors > button { flex-wrap: wrap; align-content: start; gap: 0 7px; min-height: 102px; padding: 17px 0; font-size: 16px; line-height: 1.35; }
   .about-object-selectors > button > .mono { width: 100%; margin-bottom: 6px; padding-top: 0; }
@@ -242,10 +242,6 @@
 .about-biography-links { display: flex; flex-wrap: wrap; gap: 26px; margin-top: 12px; font-size: 11px; }
 .about-biography-links a { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; }
 .about-biography-links a:is(:hover,:focus-visible) { text-decoration: underline; text-underline-offset: 5px; }
-.about-explore-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 10px 0; border-top: 1px solid var(--line); }
-.about-explore-heading p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
-.about-explore-heading > button { display: inline-flex; align-items: center; gap: 24px; min-height: 44px; padding: 0; border: 0; background: transparent; font-size: 11px; white-space: nowrap; }
-.about-explore-heading > button:is(:hover,:focus-visible) { text-decoration: underline; text-underline-offset: 5px; }
 .about-object-canvas:focus-visible { outline: 1px solid var(--ink); outline-offset: -3px; }
 .about-object-selectors > button[aria-pressed='true'] .about-selector-copy > span:first-child { text-decoration: underline; text-underline-offset: 8px; text-decoration-thickness: 1px; }
 .about-performance-archive { margin-top: 72px; padding-top: 44px; border-top: 1px solid var(--line); }
@@ -255,15 +251,11 @@
 @media (max-width: 700px) {
   .about-introduction { gap: 18px; padding-bottom: 28px; }
   .about-biography-links { margin-top: 10px; }
-  .about-explore-heading { align-items: center; gap: 18px; }
-  .about-explore-heading p { max-width: 28ch; font-size: 14px; }
-  .about-explore-heading > button { gap: 10px; font-size: 10px; }
   .about-performance-archive { margin-top: 48px; padding-top: 32px; }
   .about-archive-introduction { font-size: 16px; }
 }
 .about-object-stage { scroll-margin-top: 24px; }
 .about-introduction { padding-bottom: 24px; }
-.about-explore-heading { padding: 4px 0; }
 @media (min-width: 901px) {
   .about-objects[data-selected='collection'] .about-object-stage { height: clamp(280px,40svh,400px); }
   .about-objects[data-selected='collection'] .about-object-canvas { transform: translateY(calc((clamp(280px,40svh,400px) - clamp(520px,calc(100svh - 200px),640px)) / 2)); }
@@ -310,30 +302,37 @@
   .about-objects[data-selected='knight'] .about-object-gesture { top: calc(clamp(320px,43svh,360px) - 44px); }
 }
 
-/* Chess gets a full table rather than the narrower object-inspection column. */
-.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-stage { display: block; min-height: 0; padding: 24px 1% 30px 0; }
-.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-reveal { position: relative; z-index: 1; pointer-events: none; }
-.about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading { display: grid; grid-template-columns: minmax(0,1fr) minmax(290px,31.5%); column-gap: 5%; padding-bottom: 20px; pointer-events: auto; }
-.about-objects[data-selected='knight'][data-board-mode='game'] .about-reveal-top { grid-column: 1 / -1; }
-.about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading h2 { margin: 0; font-size: clamp(40px,4.5vw,60px); }
-.about-objects[data-selected='knight'][data-board-mode='game'] .about-board-mode { align-self: end; margin: 0; }
-.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-canvas { top: var(--chess-board-top,229px); height: var(--chess-board-height,clamp(360px,calc(100svh - 300px),520px)); max-height: none; clip-path: inset(0 34% 0 0); transition: none; }
+/* A centered chess study; the canvas follows the measured board surface. */
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-stage { display: block; min-height: 0; padding: 24px 0 30px; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-reveal { position: relative; z-index: 1; pointer-events: none; width: 100%; max-width: none; padding: 0; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading { position: relative; display: flex; align-items: center; gap: 32px; width: min(100%,720px); margin: 0 auto; padding: 0 0 16px; pointer-events: auto; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-reveal-top { order: 3; margin-left: auto; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-reveal-top > span { display: none; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading h1 { margin: 0; font: 400 clamp(34px,3.5vw,42px)/1.05 Georgia,serif; letter-spacing: -.05em; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-board-mode { justify-content: center; margin: 0; border: 0; gap: 32px; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-board-mode > button { flex: 0 1 auto; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-canvas { position: absolute; top: var(--chess-board-top,210px); left: 50%; right: auto; width: min(100%,720px); height: var(--chess-board-height,clamp(360px,calc(100svh - 330px),540px)); max-height: none; clip-path: none; transform: translateX(-50%); transition: none; }
 .about-objects[data-selected='knight'][data-board-mode='game'][data-board-view='2d'] .about-object-canvas { visibility: hidden; pointer-events: none; }
 .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-reveal > .about-deeper-links { display: none; }
-.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-reveal > .about-personal-detail { width: 31.5%; margin: 10px 0 0 auto; pointer-events: auto; }
-@media (max-width: 900px) {
-  .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-stage { padding: 16px 0 28px; }
-  .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-reveal { padding: 0; max-width: none; }
-  .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading { position: relative; grid-template-columns: minmax(0,1fr); gap: 8px; padding-bottom: 16px; max-width: 540px; margin: 0 auto; }
-  .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading h2 { font-size: 42px; }
-  .about-objects[data-selected='knight'][data-board-mode='game'] .about-board-mode { gap: 12px; }
-  .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-canvas { position: absolute; top: var(--chess-board-top,275px); height: var(--chess-board-height,min(calc(100vw - 40px),440px)); min-height: 0; clip-path: none; }
-  .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-reveal > .about-personal-detail { width: 100%; max-width: 540px; margin: 10px auto 0; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-reveal > .about-personal-detail { width: min(100%,720px); margin: 24px auto 0; pointer-events: auto; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-status { top: calc(var(--chess-board-top,210px) + var(--chess-board-height,420px) / 2); left: 50%; }
+/* Inside a study, the object index becomes a quiet way to switch disciplines. */
+.about-objects:not([data-selected='collection']) .about-object-selectors { margin-top: 20px; }
+.about-objects:not([data-selected='collection']) .about-object-selectors > button { min-height: 68px; align-items: center; font-size: 18px; }
+.about-objects:not([data-selected='collection']) .about-selector-copy > .mono { display: none; }
+.about-objects:not([data-selected='collection']) .about-object-selectors > button > .mono { padding-top: 0; }
+@media (max-width: 600px) {
+  .about-objects:not([data-selected='collection']) .about-object-selectors > button { font-size: 15px; padding: 15px 0; }
 }
-
-.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-status { top: calc(var(--chess-board-top,229px) + var(--chess-board-height,420px) / 2); left: 33.5%; }
 @media (max-width: 900px) {
-  .about-objects[data-selected='knight'][data-board-mode='game'] .about-reveal-top { position: absolute; top: 0; right: 0; }
-  .about-objects[data-selected='knight'][data-board-mode='game'] .about-reveal-top > span { display: none; }
-  .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-status { left: 50%; }
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-stage { padding: 12px 0 28px; }
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading { width: min(100%,540px); padding-bottom: 10px; }
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-canvas { width: min(100%,540px); height: var(--chess-board-height,min(calc(100vw - 40px),480px)); min-height: 0; }
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-reveal > .about-personal-detail { width: min(100%,540px); }
+}
+@media (max-width: 600px) {
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; }
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-reveal-top { grid-column: 2; grid-row: 1; }
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading h1 { grid-column: 1; grid-row: 1; }
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-board-mode { grid-column: 1 / -1; }
 }

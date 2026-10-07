@@ -184,22 +184,23 @@
     max-width: 48ch;
     text-wrap: pretty;
   }
-  .personal-site[data-section][data-appearance] :is(.journal-deck, .writing-deck, .work-study-text > p) {
+  .personal-site[data-section][data-appearance] :is(.journal-deck, .writing-deck, .work-study-text > p:not(.work-study-role)) {
     font: 400 20px/1.6 var(--type-reading);
     text-wrap: pretty;
   }
+  .personal-site[data-section][data-appearance] .work-study-role { font: 400 13px/1.6 var(--type-interface); }
   .personal-site[data-section][data-appearance] .article-page .reader-prose {
     font: 400 21px/1.65 var(--type-reading);
   }
-  .personal-site[data-section][data-appearance] .article-page .reader-section > div > :is(p, ul, ol) { max-width: min(65ch, 660px); }
+  .personal-site[data-section][data-appearance] .article-page :is(.reader-section > p, .reader-section > ul, .reader-section > ol, .reader-section > div > p, .reader-section > div > ul, .reader-section > div > ol, .reader-restored-html .prose) { max-width: min(65ch, 660px); }
   .personal-site[data-section][data-appearance] .article-page .reader-section > p,
   .personal-site[data-section][data-appearance] .article-page .reader-section > div > p { line-height: 1.65; }
   .personal-site[data-section][data-appearance] .article-page .reader-section > div > p { margin-bottom: 1.35em; }
-  .personal-site[data-section][data-appearance] .article-page .reader-prose :is(.reader-section > h2, h3, h4) {
+  .personal-site[data-section][data-appearance] .article-page .reader-prose :is(h2, h3, h4) {
     line-height: 1.2;
     letter-spacing: -.035em;
   }
-  .personal-site[data-section][data-appearance] .article-page .reader-section > h2 { font-size: 32px; }
+  .personal-site[data-section][data-appearance] .article-page :is(.reader-section > h2, .reader-prose > h2) { font-size: 32px; }
   .personal-site[data-section][data-appearance] .article-page .article-lede > p:first-child { font-size: 25px; line-height: 1.5; }
   .personal-site[data-section][data-appearance] .article-page[data-form='essay'] .article-lede > p:first-child::first-letter {
     float: left;
@@ -216,6 +217,56 @@
     font-family: var(--type-interface);
     font-size: 13px;
     line-height: 1.6;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site[data-section][data-appearance] .project-reading-bar :is(a, a > .mono) {
+    font: 400 13px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site[data-section][data-appearance] .project-diagram :is(.project-diagram-kicker,
+    .project-diagram-sequence, .project-diagram-annotation, .project-diagram-label,
+    .project-diagram-inline-choices button, .project-diagram-range label,
+    .project-diagram-range-ends, .project-diagram-date-result > span:last-child, figcaption) {
+    font: 400 13px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site[data-section][data-appearance] .case-dossier :is(.dossier-node-copy small,
+    .dossier-review-stage > small, .dossier-operation-reading .mono, .dossier-map-label,
+    .dossier-source-fields dt, .dossier-source-measure > span, .dossier-source-next .mono, .dossier-record a,
+    .dossier-evidence-foot a) {
+    font: 400 13px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site[data-section][data-appearance] .case-dossier :is(.dossier-method-note,
+    .dossier-evidence-foot p) {
+    font: 400 12px/1.7 var(--type-interface);
+    letter-spacing: 0;
+  }
+  .personal-site[data-section][data-appearance] .article-original-figures :is(small,
+    .ai-hall-of-shame__grid span, .toll-figure-label, .figure-sources, .figure-table-hint, figcaption) {
+    font: 400 12px/1.7 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site[data-section][data-appearance] .author-note .author-name {
+    font: 600 24px/1.2 var(--type-display);
+    letter-spacing: -.035em;
+  }
+  .personal-site[data-section][data-appearance] .cv-page :is(.cv-kicker, .cv-review-date,
+    .cv-entry-meta, .cv-award-date, .cv-section-number, .cv-work-type) {
+    font: 400 12px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .personal-site[data-section][data-appearance] .cv-page :is(.cv-rail-label,
+    .cv-mobile-nav summary, .cv-rail nav a, .cv-rail nav a > span, .cv-rail-contact,
+    .cv-coursework > span, .cv-subheading, .cv-skills dt) {
+    font: 400 13px/1.6 var(--type-interface);
     letter-spacing: 0;
     text-transform: none;
   }
@@ -348,9 +399,9 @@
   .personal-site[data-section][data-appearance] .writing-story[data-layout='note'] h2 { font-size: 23px; }
   .personal-site[data-section][data-appearance] .writing-story[data-layout='compact'] h2 { font-size: 26px; }
   .personal-site[data-section][data-appearance] :is(.home-context-summary, .writing-introduction, .work-page-intro > p, .reader-subtitle, .about-biography p, .rx-introduction > p, .lion-contact-introduction) { font-size: 20px; line-height: 1.55; }
-  .personal-site[data-section][data-appearance] :is(.journal-deck, .writing-deck, .work-study-text > p) { font-size: 19px; }
+  .personal-site[data-section][data-appearance] :is(.journal-deck, .writing-deck, .work-study-text > p:not(.work-study-role)) { font-size: 19px; }
   .personal-site[data-section][data-appearance] .article-page .reader-prose { font-size: 19px; line-height: 1.65; }
-  .personal-site[data-section][data-appearance] .article-page .reader-section > h2 { font-size: 28px; }
+  .personal-site[data-section][data-appearance] .article-page :is(.reader-section > h2, .reader-prose > h2) { font-size: 28px; }
   .personal-site[data-section][data-appearance] .article-page .article-lede > p:first-child { font-size: 23px; }
   .personal-site.personal-site[data-section][data-appearance] .article-page .article-cover h1 { font-size: clamp(38px, 10vw, 48px); }
   .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='lead'] h2 { font-size: 36px; }

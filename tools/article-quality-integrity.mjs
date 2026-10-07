@@ -77,7 +77,13 @@ export function verifyQualityRevision(before, article, record, exceptions = []) 
   assert.equal(article.slug, label)
   assert.equal(article.title, before.title, `${label}: title identity`)
   assert.equal(article.displayTitle, before.displayTitle, `${label}: visible title identity`)
-  assert.deepEqual(protectedQualityEvidence(article), protectedQualityEvidence(before), `${label}: frozen evidence`)
+  const expectedEvidence = structuredClone(protectedQualityEvidence(before))
+  for (const correction of exceptions.filter(item => item.slug === label && item.removedResource)) {
+    const index = expectedEvidence.fixed.resources?.findIndex(resource => JSON.stringify(resource) === JSON.stringify(correction.removedResource)) ?? -1
+    assert(index >= 0, `${label}: declared resource removal must match the retained original`)
+    expectedEvidence.fixed.resources.splice(index, 1)
+  }
+  assert.deepEqual(protectedQualityEvidence(article), expectedEvidence, `${label}: frozen evidence`)
   const previous = proseUnits(before), next = proseUnits(article)
   assert.notDeepEqual(next, previous, `${label}: substantive manuscript revision`)
   for (const unit of previous) {

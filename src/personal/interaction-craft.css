@@ -1,0 +1,97 @@
+/* Small feedback, shared across routes. No additional animation loop. */
+@media screen {
+  .personal-site[data-section][data-appearance] .personal-header nav a {
+    transition: color 150ms ease;
+  }
+  .personal-site .personal-header .nav-slot:not([inert]):focus-within { overflow: visible; }
+  .personal-site[data-section][data-appearance] .nav-toggle {
+    min-width: 84px;
+    justify-content: space-between;
+  }
+  .personal-site[data-section][data-appearance] .nav-toggle > span {
+    display: inline-grid;
+    place-items: center;
+    width: 14px;
+    flex: 0 0 14px;
+  }
+
+  .personal-site[data-section][data-appearance] :is(.writing-story h2, .journal-essay h3, .story-link h2, .project-continue h2, .work-study-entry h2, .work-curated-atlas-link h2) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
+    text-underline-offset: .13em;
+    text-decoration-skip-ink: auto;
+    transition: text-decoration-color 180ms ease;
+  }
+  .personal-site[data-section][data-appearance] :is(.writing-story, .journal-essay, .story-link, .project-continue, .work-study-entry, .work-curated-atlas-link):is(:hover, :focus-visible, :focus-within) :is(h2, h3) {
+    text-decoration-color: currentColor;
+  }
+  .personal-site[data-section][data-appearance] :is(.writing-discovery > summary, .colophon > summary, .footer-top, .lion-study-credit > summary) {
+    transition: color 150ms ease, text-decoration-color 150ms ease;
+  }
+  .personal-site[data-section][data-appearance] :is(.colophon > summary > span, .footer-top > span, .lion-study-credit summary .mono > span) {
+    transition: transform 180ms cubic-bezier(.22, 1, .36, 1);
+  }
+  .personal-site[data-section][data-appearance] .colophon[open] > div {
+    animation-duration: 180ms;
+  }
+  .personal-site[data-section][data-appearance] .colophon > div {
+    max-height: calc(100dvh - 144px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .personal-site[data-section][data-appearance] .writing-discovery > summary > span {
+    display: inline-grid;
+    place-items: center;
+    width: 14px;
+    flex: 0 0 14px;
+  }
+  .personal-site[data-section][data-appearance] .writing-search { transition: border-color 160ms ease; }
+  .personal-site[data-section][data-appearance] .writing-search:focus-within { border-color: var(--ink); }
+  .personal-site[data-section][data-appearance] .writing-search:has(input:focus-visible) { box-shadow: 0 1px 0 var(--ink); }
+  .personal-site[data-section][data-appearance] .writing-search input:focus-visible {
+    outline: none;
+  }
+  .personal-site[data-section][data-appearance] .writing-topic select:focus-visible {
+    outline: 1px solid var(--ink);
+    outline-offset: 4px;
+  }
+  .personal-site[data-section][data-appearance] :is(.writing-filter-status button, .lion-contact-copy button) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 150ms ease;
+  }
+  .personal-site[data-section][data-appearance] :is(.writing-filter-status button, .lion-contact-copy button):is(:hover, :focus-visible),
+  .personal-site[data-section][data-appearance] .lion-contact-copy button[data-copied='true'] {
+    text-decoration-color: currentColor;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .personal-site[data-section][data-appearance] .writing-discovery[open] .writing-toolbar {
+      animation: interaction-arrival 160ms cubic-bezier(.22, 1, .36, 1);
+    }
+    .personal-site[data-section][data-appearance] :is(.destination-link, .journal-essay, .writing-story, .work-study-entry, .work-curated-atlas-link, .story-link, .project-continue):is(:focus-visible, :focus-within) .link-arrow { transform: translateX(3px); }
+    .personal-site[data-section][data-appearance] .destination-link:is(:focus-visible, :focus-within) .link-arrow[data-direction='left'] { transform: translateX(-3px); }
+    .personal-site[data-section][data-appearance] .destination-link:is(:focus-visible, :focus-within) .link-arrow[data-direction='up'] { transform: translateY(-3px); }
+    .personal-site[data-section][data-appearance] .destination-link:is(:focus-visible, :focus-within) .link-arrow[data-direction='down'] { transform: translateY(3px); }
+    .personal-site[data-section][data-appearance] .destination-link:is(:focus-visible, :focus-within) .link-arrow[data-direction='external'] { transform: translate(2px, -2px); }
+    @media (max-width: 1000px) {
+      .personal-site[data-section][data-appearance] .personal-header nav.is-open {
+        animation: interaction-arrival 180ms cubic-bezier(.22, 1, .36, 1);
+      }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .personal-site[data-section][data-appearance] :is(.nav-toggle, .personal-header nav, .writing-toolbar, .writing-search, .writing-topic, .colophon, .footer-top, .lion-contact-copy) * {
+      animation: none !important;
+      transition: none !important;
+    }
+    .personal-site[data-section][data-appearance] :is(.writing-story, .journal-essay, .story-link, .project-continue, .work-study-entry, .work-curated-atlas-link) :is(h2, h3) { transition: none; }
+  }
+}
+@keyframes interaction-arrival {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

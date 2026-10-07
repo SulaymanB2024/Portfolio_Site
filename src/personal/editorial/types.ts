@@ -1,3 +1,4 @@
+import { topicLabel } from './topic-label'
 export interface ArticleSummary {
   slug: string
   path: string
@@ -136,5 +137,5 @@ const writingTopicLabels: Record<string, string> = {
 }
 
 export function displayWritingTopic(value: string) {
-  return writingTopicLabels[value] || value
+  return writingTopicLabels[value] || topicLabel(value)
 }

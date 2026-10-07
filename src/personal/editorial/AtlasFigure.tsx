@@ -1,4 +1,5 @@
 import capture from '../../../public/research/atlas-open-corpus-run-2026-07-16.json'
+import { readerFragmentHref } from './library'
 import './evidence-figures.css'
 
 const manifestHref = `${import.meta.env.BASE_URL}research/atlas-open-corpus-run-2026-07-16.json`
@@ -24,7 +25,7 @@ export default function AtlasFigure() {
         <div><dt>Raw HTML</dt><dd><strong>0</strong> H1 headings<span>Raw-only missing-H1 observation retained.</span></dd></div>
         <div><dt>Effective rendered state</dt><dd><strong>1</strong> H1 heading<span>Missing-H1 finding is not raised against the effective page.</span></dd></div>
       </dl>
-      <a href="#source-render">Render-pipeline fixture and provenance tests ↗</a>
+      <a href={readerFragmentHref(typeof location === 'undefined' ? '' : location.hash, '#source-render')}>Render-pipeline fixture and provenance tests ↗</a>
     </details>
     <figcaption id="atlas-evidence-caption">Source capture, July 16, 2026. These are retained observations; this figure does not report browser-rendered quote counts. The demonstration does not establish indexing or search performance. <a href={manifestHref}>Retained capture manifest ↗</a></figcaption>
   </figure>

@@ -1,0 +1,78 @@
+/* Play first. Optional tools do not reserve a column or change the board size. */
+.about-objects .about-chess-game.chess-focused {
+  --chess-surface-height: clamp(260px,calc(100svh - 350px),700px);
+  display: block; position: relative; width: 100%; max-width: 1000px; margin-inline: auto;
+}
+.about-objects .about-chess-game.chess-focused[hidden] { display: none; }
+.about-objects .chess-focused .chess-table { display: block; }
+.about-objects .chess-focused .chess-flat-board { width: min(100%,var(--chess-surface-height)); grid-template-rows: minmax(0,1fr) 17px; }
+.about-objects .chess-focused .chess-rank-labels { min-height: 0; grid-template-rows: repeat(8,minmax(0,1fr)); line-height: 1; }
+.about-objects .chess-focused .chess-file-labels { min-height: 0; line-height: 1; }
+.about-objects .chess-focused .chess-board-column { display: grid; }
+.about-objects .chess-focused .chess-board-surface { grid-row: 2; }
+.about-objects .chess-focused .chess-promotion-choices { grid-row: 3; }
+.about-objects .chess-focused .chess-table-tools { grid-row: 4; }
+.about-objects .chess-focused .chess-legal-moves { grid-row: 5; }
+.chess-board-toolbar { display: flex; justify-content: space-between; align-items: center; min-height: 48px; gap: 16px; pointer-events: auto; }
+.chess-board-label { font: 500 12px/1.4 var(--chess-ui); color: var(--muted); }
+.chess-launch-tools { display: flex; gap: 12px; }
+.chess-launch-tools > button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 8px; border: 0; background: transparent; color: var(--ink); font: 500 12px/1.4 var(--chess-ui); }
+.chess-launch-tools > button > svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.chess-launch-tools > button:is(:hover,:focus-visible), .chess-launch-tools > button[aria-expanded='true'] { background: var(--soft); }
+.about-objects .chess-focused .chess-options-panel {
+  display: block; position: absolute; grid-area: auto; z-index: 8; top: 52px; right: 0;
+  width: min(380px,100%); max-height: min(640px,calc(100svh - 210px));
+  overflow: auto; overscroll-behavior: contain; padding: 18px 22px 22px;
+  border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+  pointer-events: auto; scrollbar-width: thin;
+}
+.about-objects .chess-focused .chess-options-panel[hidden] { display: none; }
+.chess-options-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.chess-options-heading > h2 { margin: 0; font: 600 19px/1.3 var(--type-display,var(--chess-ui)); letter-spacing: -.035em; }
+.chess-options-close { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: var(--ink); font: 24px/1 var(--chess-ui); }
+.chess-options-close:is(:hover,:focus-visible) { background: var(--soft); }
+.chess-options-setup { display: grid; gap: 16px; margin: 12px 0 18px; }
+.chess-options-setup .chess-view-switch { width: fit-content; }
+.chess-options-setup .chess-view-switch > button { font: 500 12px/1.4 var(--chess-ui); }
+.chess-options-setup .chess-opponent { font: 500 13px/1.4 var(--chess-ui); }
+.about-objects .chess-focused .chess-options-panel .chess-thinking { display: block; height: auto; overflow: visible; margin: 0; padding: 0; border: 0; }
+.about-objects .chess-focused .chess-options-panel .chess-game-panel { display: grid; grid-template-columns: minmax(0,1fr); gap: 0; }
+.about-objects .chess-focused .chess-board-actions > .chess-quick-play { margin: 0 8px 0 0; padding: 9px 12px; border: 1px solid var(--line); font: 500 12px/1.2 var(--chess-ui); white-space: nowrap; }
+
+/* Let the optional panel extend beyond the board without clipping its tools. */
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-stage:not([data-chess-expanded]):has(.chess-options-panel:not([hidden])) { overflow: visible; z-index: 2; }
+
+/* Fullscreen contains the same renderer, piece controls and game instance. */
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-stage[data-chess-expanded] {
+  position: fixed; inset: 0; z-index: 100; display: block;
+  width: 100%; height: 100dvh; min-height: 0; max-height: none;
+  padding: max(16px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));
+  overflow: auto; overscroll-behavior: contain; background: var(--paper); color: var(--ink);
+}
+.about-object-stage[data-chess-expanded]::backdrop { background: var(--paper); }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-stage[data-chess-expanded] .about-interest-heading { display: none; }
+.about-objects .about-object-stage[data-chess-expanded] .about-object-reveal { width: 100%; max-width: none; padding: 0; margin: 0; animation: none; }
+.about-objects .about-object-stage[data-chess-expanded] .chess-focused {
+  --chess-surface-height: max(100px,calc(100dvh - 195px)); max-width: 1200px;
+}
+.about-objects .about-object-stage[data-chess-expanded] .chess-options-panel { max-height: calc(100dvh - 110px); }
+.about-objects .about-object-stage[data-chess-expanded] .chess-board-toolbar { min-height: 48px; }
+
+@media (max-width: 900px) {
+  .about-objects .about-chess-game.chess-focused { --chess-surface-height: min(calc(100vw - 40px),520px); max-width: 600px; }
+  .about-objects .chess-focused .chess-options-panel { max-height: min(600px,calc(100svh - 190px)); padding: 14px 18px 18px; }
+  .chess-launch-tools { gap: 4px; }
+  .about-objects .chess-focused .chess-board-actions:has(.chess-quick-play) { flex-wrap: wrap; }
+  .about-objects .chess-focused .chess-board-actions > .chess-quick-play { margin: 0; }
+  .about-objects .about-object-stage[data-chess-expanded] .chess-focused { --chess-surface-height: max(100px,min(calc(100dvh - 190px),calc(100vw - 40px))); }
+}
+@media (max-width: 360px) {
+  .chess-board-toolbar { gap: 8px; }
+  .chess-launch-tools > button { gap: 6px; padding-inline: 6px; }
+  .chess-launch-tools > button > span { font-size: 11px; }
+}
+
+@media (max-height: 450px) and (min-aspect-ratio: 4/3) {
+  .about-objects .about-object-stage[data-chess-expanded] .chess-seat-pair { display: none; }
+  .about-objects .about-object-stage[data-chess-expanded] .chess-focused { --chess-surface-height: max(100px,min(calc(100dvh - 140px),calc(100vw - 40px))); }
+}
