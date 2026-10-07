@@ -219,10 +219,11 @@
     letter-spacing: 0;
     text-transform: none;
   }
-  .personal-site[data-section][data-appearance] :is(.journal-meta, .writing-story-meta, .reader-byline, .rx-chronology-dates) {
+  .personal-site[data-section][data-appearance] :is(.journal-meta, .writing-story-meta, .story-link-meta, .reader-byline, .rx-chronology-dates) {
     font: 400 12px/1.6 var(--type-interface);
     font-variant-numeric: tabular-nums;
   }
+  .personal-site[data-section][data-appearance] .writing-story-readtime { white-space: nowrap; }
   .personal-site[data-section][data-appearance] .site-closing h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.2; }
   .personal-site[data-section][data-appearance] .lion-contact-heading h1 { margin-bottom: 0; }
   .personal-site[data-section][data-appearance] .home-context-choices button { font: 400 16px/1.5 var(--type-interface); letter-spacing: 0; }
@@ -238,7 +239,7 @@
   .personal-site .article-citation { font-family: var(--editorial-mono, 'Courier New', monospace); }
 
   /* Story titles have their own reading voice; the mastheads retain Syne. */
-  .personal-site.personal-site[data-section][data-appearance] :is(.journal-essay h3, .writing-story h2, .reading-paths h2, .topic-readings h2) {
+  .personal-site.personal-site[data-section][data-appearance] :is(.journal-essay h3, .writing-story h2, .story-link h2, .reading-paths h2, .topic-readings h2) {
     font-family: var(--type-reading);
     font-weight: 450;
     line-height: 1.15;
@@ -334,6 +335,7 @@
   .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-header h1,
   .personal-site[data-section][data-appearance] .cv-introduction h1 { font-size: clamp(36px, 9.7vw, 44px); }
   .personal-site[data-section][data-appearance] .writing-story[data-layout='note'] h2 { font-size: 23px; }
+  .personal-site[data-section][data-appearance] .writing-story[data-layout='compact'] h2 { font-size: 26px; }
   .personal-site[data-section][data-appearance] :is(.home-context-summary, .writing-introduction, .work-page-intro > p, .reader-subtitle, .about-biography p, .rx-introduction > p, .lion-contact-introduction) { font-size: 20px; line-height: 1.55; }
   .personal-site[data-section][data-appearance] :is(.journal-deck, .writing-deck, .work-study-text > p) { font-size: 19px; }
   .personal-site[data-section][data-appearance] .article-page .reader-prose { font-size: 19px; line-height: 1.65; }

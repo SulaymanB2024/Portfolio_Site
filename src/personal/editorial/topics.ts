@@ -96,3 +96,9 @@ export function topicReadings(topic: ReadingTopic, articles: ArticleSummary[] = 
 export function articleTopic(slug: string) {
   return readingTopics.find(topic => topic.readings.some(reading => reading.slug === slug))
 }
+
+export function nextTopicReading(topic: ReadingTopic, slug: string) {
+  const index = topic.readings.findIndex(reading => reading.slug === slug)
+  if (index < 0 || index === topic.readings.length - 1) return undefined
+  return { ...topicReadings(topic)[index + 1], position: index + 2, total: topic.readings.length }
+}

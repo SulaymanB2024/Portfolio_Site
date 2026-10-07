@@ -50,6 +50,7 @@
   .writing-story[data-layout='compact'] h2 { font-size: 25px; margin-bottom: 10px; }
   .writing-story[data-layout='compact'] .writing-art { width: 70px; }
   .writing-story[data-layout='compact'] .writing-story-action { margin-left: 0; }
-  .writing-story[data-layout='note'] .writing-story-copy { grid-template-columns: minmax(0, 1fr) 48px; gap: 8px 16px; }
+  .writing-story[data-layout='note'] .writing-story-copy { grid-template-columns: minmax(0, 1fr); gap: 8px 16px; }
   .writing-story[data-layout='note'] h2 { font-size: 21px; }
+  .writing-story[data-layout='note'] .writing-story-meta { grid-column: 1 / -1; grid-row: 3; justify-content: space-between; margin-top: 4px; }
 }

@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import catalog from '../src/personal/editorial/data/catalog.json' with { type: 'json' }
-import { readingTopics, topicReadings, articleTopic } from '../src/personal/editorial/topics.ts'
+import { readingTopics, topicReadings, articleTopic, nextTopicReading } from '../src/personal/editorial/topics.ts'
 import { resolveRoute } from '../src/personal/editorial/routes.ts'
 import { canonicalPath } from '../src/personal/public-pages.ts'
 import { searchMetadata } from '../src/personal/search-metadata.ts'
@@ -12,6 +12,21 @@ test('reading paths connect the entire restored catalog without stranded or dupl
   assert.equal(new Set(assigned).size, assigned.length)
   assert.deepEqual([...assigned].sort(), catalog.map(article => article.slug).sort())
   for (const article of catalog) assert(articleTopic(article.slug))
+})
+
+test('continuing a reading path follows its authored sequence and stops at its last essay', () => {
+  for (const topic of readingTopics) {
+    const readings = topicReadings(topic)
+    for (let index = 0; index < readings.length - 1; index++) {
+      const next = nextTopicReading(topic, readings[index].slug)!
+      assert.equal(next.article.slug, readings[index + 1].slug)
+      assert.equal(next.reason, readings[index + 1].reason)
+      assert.equal(next.position, index + 2)
+      assert.equal(next.total, readings.length)
+    }
+    assert.equal(nextTopicReading(topic, readings.at(-1)!.slug), undefined)
+    assert.equal(nextTopicReading(topic, 'not-in-this-path'), undefined)
+  }
 })
 
 test('topic deep links and client routes identify the same canonical collection and ordered readings', () => {

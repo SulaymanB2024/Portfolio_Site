@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { articleReturnHref, articleSection, filterWritingArticles, readWritingFilters, relatedArticles, readerFragmentHref, sectionHref, writingHref } from '../src/personal/editorial/library.ts'
+import { articleReturnHref, articleSection, filterWritingArticles, readWritingFilters, relatedArticles, readerFragmentHref, sectionHref, writingHref, readingPathHref, readerSectionTitle } from '../src/personal/editorial/library.ts'
 import type { ArticleSummary } from '../src/personal/editorial/types.ts'
 
 const catalog = [
@@ -41,6 +41,35 @@ test('return links accept only the archive and known selections', () => {
   }
   assert.equal(articleReturnHref(`#/writing/authority?from=${encodeURIComponent('#/writing?at=unknown&q=trace')}`, catalog), '#/writing?q=trace')
   assert.equal(articleReturnHref('#/writing/authority', catalog), '#/writing')
+})
+
+test('a reading-path return retains its selected essay through chapter and citation navigation', () => {
+  const topics = [{ slug: 'ai-evidence', readings: [{ slug: 'authority' }, { slug: 'trace' }] }]
+  const from = readingPathHref('ai-evidence', 'trace')
+  const reader = `#/writing/trace?from=${encodeURIComponent(from)}`
+  for (const href of [reader, sectionHref(reader, 'source-café?#1'), readerFragmentHref(reader, '#source-12')]) {
+    assert.equal(articleReturnHref(href, catalog, topics), from)
+  }
+  assert.equal(articleReturnHref(`#/writing/trace?from=${encodeURIComponent('#/topics/ai-evidence?at=unknown')}`, catalog, topics), '#/topics/ai-evidence')
+  assert.equal(articleReturnHref(`#/writing/trace?from=${encodeURIComponent('#/topics/ai-evidence?at=crawl')}`, catalog, topics), '#/topics/ai-evidence')
+  assert.equal(articleReturnHref(`#/writing/trace?from=${encodeURIComponent('#/topics/ai-evidence?at=trace&section=wrong&q=extra')}`, catalog, topics), from)
+})
+
+test('reading-path returns reject unknown collections, extra route segments and external destinations', () => {
+  const topics = [{ slug: 'ai-evidence', readings: [{ slug: 'authority' }] }]
+  for (const from of ['#/topics/unknown', '#/topics/ai-evidence/other', '#/topics/ai-evidence-more', '#/topics/ai-evidence#other', '#/topics/ai-evidence%2Fother', 'https://example.org/topics/ai-evidence', '//example.org/topics/ai-evidence']) {
+    assert.equal(articleReturnHref(`#/writing/authority?from=${encodeURIComponent(from)}`, catalog, topics), '#/writing')
+  }
+  const unpublished = [{ slug: 'ai-evidence', readings: [{ slug: 'missing' }] }]
+  assert.equal(articleReturnHref(`#/writing/authority?from=${encodeURIComponent(readingPathHref('ai-evidence', 'missing'))}`, catalog, unpublished), '#/topics/ai-evidence')
+})
+
+test('restored section labels display encoded punctuation as plain text', () => {
+  assert.equal(readerSectionTitle('Harris County: cash uses exceed one year&#x27;s toll revenue'), "Harris County: cash uses exceed one year's toll revenue")
+  assert.equal(readerSectionTitle('IV. Contracts &amp; cash &#8212; &quot;paid off&quot;'), 'Contracts & cash — "paid off"')
+  assert.equal(readerSectionTitle('2) Source &lt;h1&gt;'), 'Source <h1>')
+  assert.equal(readerSectionTitle('A literal &amp;#39; example'), 'A literal &#39; example')
+  assert.equal(readerSectionTitle('Unresolved &#1114112; &unknown;'), 'Unresolved &#1114112; &unknown;')
 })
 
 test('search and return bookmarks round-trip literal URL syntax and Unicode without changing meaning', () => {
