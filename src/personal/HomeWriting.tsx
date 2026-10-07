@@ -32,7 +32,7 @@ function JournalEssay({ article, lead = false }: { article: ArticleSummary; lead
 export function HomeWriting() {
   const [lead, ...companions] = featured
   return <section className="home-writing home-journal" aria-labelledby="home-writing-title">
-    <div className="journal-heading"><h2 id="home-writing-title">Writing<span className="period">.</span></h2><ArtworkMotionControl /></div>
+    <div className="journal-heading"><h2 id="home-writing-title">Writing<span className="period">.</span></h2></div>
     <div className="journal-layout">
       {lead && <JournalEssay article={lead} lead />}
       <div className="journal-companions">{companions.map(article => <JournalEssay key={article.slug} article={article} />)}</div>
