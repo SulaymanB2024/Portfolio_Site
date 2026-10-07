@@ -3,6 +3,7 @@
   --chess-surface-height: clamp(260px,calc(100svh - 350px),700px);
   display: block; position: relative; width: 100%; max-width: 1000px; margin-inline: auto;
 }
+.about-objects .about-chess-game.chess-focused[hidden] { display: none; }
 .about-objects .chess-focused .chess-table { display: block; }
 .about-objects .chess-focused .chess-flat-board { width: min(100%,var(--chess-surface-height)); grid-template-rows: minmax(0,1fr) 17px; }
 .about-objects .chess-focused .chess-rank-labels { min-height: 0; grid-template-rows: repeat(8,minmax(0,1fr)); line-height: 1; }
