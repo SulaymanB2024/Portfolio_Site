@@ -1,0 +1,110 @@
+/* One quiet physical palette, independent of the page's light/dark appearance. */
+.chess-focused {
+  --chess-tile-light: #e3e2dc;
+  --chess-tile-dark: #555651;
+  --chess-piece-light: #f5f2ea;
+  --chess-piece-dark: #24221e;
+  --chess-grain-dark: #24221e24;
+  --chess-grain-light: #f5f2ea28;
+}
+.about-objects .about-chess-game.chess-focused {
+  --chess-surface-height: clamp(260px,calc(100svh - 345px),610px);
+}
+.about-objects .chess-focused .chess-table {
+  grid-template-columns: minmax(0,1fr) minmax(260px,28%);
+  gap: 32px;
+}
+.about-objects .chess-focused .chess-options-panel {
+  right: calc(max(260px,28%) + 32px);
+}
+.chess-focused .chess-primary-view {
+  flex: none;
+  gap: 0;
+  width: fit-content;
+  border: 0;
+  pointer-events: auto;
+}
+.chess-focused .chess-primary-view > button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font: 500 12px/1.4 var(--chess-ui);
+}
+.chess-focused .chess-primary-view > button[aria-pressed='true'] {
+  background: transparent;
+  border-bottom-color: var(--ink);
+  color: var(--ink);
+}
+.chess-focused .chess-primary-view > button:is(:hover,:focus-visible) {
+  color: var(--ink);
+  background: var(--soft);
+}
+.chess-focused .chess-launch-tools > button { font-size: 13px; }
+.chess-print-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.chess-flat-print { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.chess-focused .chess-flat-board .about-chess-board > button { z-index: 1; background: transparent; }
+.chess-focused .chess-flat-board .about-chess-board > button[data-travelling='true'] { z-index: 3; }
+.about-objects .chess-focused .chess-flat-board {
+  grid-template-columns: 22px minmax(0,1fr);
+  grid-template-rows: minmax(0,1fr) 22px;
+}
+.chess-focused :is(.chess-rank-labels,.chess-file-labels) { font-size: 11px; }
+.chess-focused .chess-table-tools .chess-board-feedback > strong {
+  font: 500 15px/1.4 var(--chess-ui);
+  letter-spacing: 0;
+}
+.chess-focused .chess-table-tools .chess-board-feedback > span { font-size: 12px; }
+.about-objects .chess-focused .chess-table-tools .chess-board-feedback {
+  position: static; width: auto; height: auto; overflow: visible; clip-path: none;
+}
+.about-objects .chess-focused .chess-table-tools .chess-board-feedback > :not(.chess-mobile-notice) { display: block; }
+.about-objects .chess-focused .chess-table-tools .chess-board-feedback > .chess-mobile-notice { display: none; }
+.personal-site[data-section='about'] .chess-focused .chess-telemetry-heading > h2 {
+  font-size: 19px;
+  letter-spacing: -.035em;
+}
+.chess-focused .chess-telemetry-heading > span { font-size: 11px; }
+.chess-focused .chess-telemetry-spatial { padding-top: 8px; gap: 20px; }
+.chess-focused .chess-telemetry-values { gap: 20px 14px; }
+.chess-focused .chess-telemetry-values dt { font-size: 12px; line-height: 1.45; }
+.chess-focused .chess-telemetry-values dd { font-size: 17px; }
+.chess-focused .chess-telemetry-values .chess-telemetry-eval dd { font-size: 30px; }
+.chess-focused .chess-telemetry-depth > span { font-size: 12px; }
+.chess-focused .chess-telemetry-caption,
+.chess-focused .chess-telemetry-notice { font-size: 12px; }
+
+@media (max-width: 900px) {
+  .about-objects .about-chess-game.chess-focused {
+    --chess-surface-height: min(calc(100vw - 40px),500px,max(240px,calc(100svh - 345px)));
+  }
+  .about-objects .chess-focused .chess-table { grid-template-columns: minmax(0,1fr); gap: 28px; }
+  .about-objects .chess-focused .chess-options-panel { right: 0; }
+  .chess-focused .chess-telemetry-values dd { font-size: 16px; }
+}
+@media (max-width: 600px) {
+  .chess-focused .chess-table-tools { flex-wrap: wrap; gap: 4px 12px; padding-block: 12px 4px; }
+  .about-objects .chess-focused .chess-table-tools .chess-board-feedback { flex-basis: 100%; padding-bottom: 6px; }
+  .about-objects .chess-focused .chess-table-tools > .chess-board-actions { width: 100%; justify-content: space-between; gap: 0; flex-wrap: wrap; }
+  .about-objects .chess-focused .chess-table-tools .chess-board-actions > button { width: auto; min-width: 44px; padding-inline: 6px; font-size: 12px; }
+  .about-objects .chess-focused .chess-table-tools .chess-board-actions > button > span { display: inline; }
+  .chess-focused .chess-table-tools .chess-board-actions > .chess-new-game { margin-left: 0; padding-inline: 10px; }
+  .chess-focused .chess-telemetry-values { gap: 20px 16px; }
+}
+@media (max-width: 430px) {
+  .chess-focused .chess-launch-tools { gap: 2px; }
+  .chess-focused .chess-launch-tools > [data-chess-fullscreen] > span { display: none; }
+  .chess-focused .chess-continuation-line { font-size: 12px; }
+}
+@media (max-height: 450px) and (min-aspect-ratio: 4/3) {
+  .about-objects .about-object-stage[data-chess-expanded] .chess-focused {
+    --chess-surface-height: max(220px,min(calc(100dvh - 140px),calc(100vw - 40px)));
+  }
+  .about-objects .about-object-stage[data-chess-expanded] .chess-focused .chess-table {
+    grid-template-columns: minmax(0,1fr) minmax(210px,36%);
+    gap: 20px;
+  }
+}

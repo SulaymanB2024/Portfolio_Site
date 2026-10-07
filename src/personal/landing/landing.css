@@ -1,12 +1,21 @@
 /* The approved full-viewport threshold sequence precedes the ordinary site. */
 .personal-site.home-site { --home-gutter: clamp(26px, 5.5vw, 100px); max-width: none; padding: 0; }
 .home-site[data-appearance='light'] { --paper: #eeeadd; --ink: #24241f; }
-.home-site .home-standard-content { max-width: 1800px; margin: 0 auto; padding: clamp(40px, 5vw, 64px) var(--home-gutter) 0; }
+.home-site .home-standard-content { max-width: 1800px; margin: 0 auto; padding: 0 var(--home-gutter); }
+.personal-site.home-site .home-standard-content .home-writing { padding-top: clamp(36px, 4vw, 64px); }
 .home-site > .personal-footer { width: min(calc(100% - 2 * var(--home-gutter)), 1600px); margin-inline: auto; }
 .home-site[data-landing-active='true']::before { opacity: 0; }
 .home-standard-content .home-writing { scroll-margin-top: 110px; }
 
-.landing-rail { position: relative; height: calc(100svh + clamp(1600px, 340svh, 3600px)); }
+/* The next heading enters the desktop reading hold before the last frame leaves. */
+@media screen and (min-width: 761px) and (min-aspect-ratio: 1/1) {
+  .home-site .home-standard-content {
+    position: relative; z-index: 1; margin-top: calc(-1 * min(12svh, 120px)); background: var(--paper);
+  }
+}
+
+/* Give each passage room to unfold at ordinary trackpad/swipe speed. */
+.landing-rail { position: relative; height: calc(100svh + clamp(2000px, 560svh, 5600px)); }
 .landing-stage { height: 100svh; position: sticky; top: 0; overflow: hidden; isolation: isolate; background: #eeeadd; color: #24241f; }
 [data-appearance='dark'] .landing-stage { background: #111210; color: #efefe8; }
 .landing-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; touch-action: pan-y; }
@@ -34,7 +43,7 @@
 .landing-stage:has(.landing-canvas[data-state='error']) .landing-loading { top: 27%; left: auto; right: 5vw; width: 32vw; }
 
 @media (max-width: 700px) {
-  .landing-copy { display: block; padding: clamp(112px, 13.3svh, 132px) 6vw 0; }
+  .landing-copy { display: block; padding: clamp(96px, 11.5svh, 112px) 6vw 0; }
   .landing-copy-content { position: relative; width: 88vw; }
   .landing-copy h1 { min-height: 3em; font-size: clamp(34px, min(13.4vw, 6.4svh), 64px); line-height: 1; }
   .landing-category { top: -26px; left: 0; font-size: 8px; }

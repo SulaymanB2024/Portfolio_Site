@@ -1,3 +1,4 @@
+import { topicLabel } from './topic-label'
 export interface ArticleSummary {
   slug: string
   path: string
@@ -117,4 +118,24 @@ export interface WritingArticle extends ArticleSummary {
 export function displayDate(value: string) {
   const date = new Date(`${value.replaceAll('.', '-')}T12:00:00Z`)
   return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+}
+
+export function displayReadTime(value: string) {
+  return value.replace(/\bMIN$/i, 'min read')
+}
+
+const writingTopicLabels: Record<string, string> = {
+  All: 'All topics', 'PRODUCT & SYSTEMS': 'Product & systems',
+  'ALGORITHMS / VERIFICATION': 'Algorithms & verification', 'FINANCIAL SYSTEMS': 'Financial systems',
+  'PRIVATE EQUITY': 'Private equity', 'INDUSTRIAL SYSTEMS': 'Industrial systems', 'AI INFRASTRUCTURE': 'AI infrastructure',
+  'CRAWLER ENGINEERING': 'Crawler engineering', 'RENDERING EVIDENCE': 'Rendering evidence', 'AI EVALUATION': 'AI evaluation',
+  'DATA SYSTEMS': 'Data systems', 'SITE MIGRATIONS': 'Site migrations', 'AI SYSTEMS': 'AI systems',
+  'INFRASTRUCTURE INVESTING': 'Infrastructure', 'ViralBench / Codex / agent evaluation': 'Agent evaluation',
+  'CRAWLER POLICY': 'Crawler policy', 'DATA INFRASTRUCTURE': 'Data infrastructure', 'ENTITY CONSISTENCY': 'Entity consistency',
+  'TECHNICAL SEO': 'Technical SEO', 'SITE ARCHITECTURE': 'Site architecture', 'STRUCTURED DATA': 'Structured data',
+  'EVIDENCE SYSTEMS': 'Evidence systems',
+}
+
+export function displayWritingTopic(value: string) {
+  return writingTopicLabels[value] || topicLabel(value)
 }

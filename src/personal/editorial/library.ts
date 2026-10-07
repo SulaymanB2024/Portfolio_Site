@@ -2,6 +2,7 @@ import type { ArticleSummary } from './types.ts'
 import { consolidatedDestination, consolidatedHref } from './curation.ts'
 
 export type WritingFilters = { query: string; category: string }
+type ReadingPathTarget = { slug: string; readings: readonly { slug: string }[] }
 
 // Treat typographic punctuation and accents as their plain keyboard equivalents.
 const searchText = (value: string) => value.normalize('NFKD').replace(/\p{M}/gu, '')
@@ -32,8 +33,21 @@ export function writingHref(filters: WritingFilters, selected?: string) {
   return `#/writing${params.size ? `?${params}` : ''}`
 }
 
-export function articleReturnHref(hash: string, catalog: ArticleSummary[]) {
+export function readingPathHref(slug: string, selected?: string) {
+  const params = new URLSearchParams()
+  if (selected) params.set('at', selected)
+  return `#/topics/${encodeURIComponent(slug)}${params.size ? `?${params}` : ''}`
+}
+
+export function articleReturnHref(hash: string, catalog: ArticleSummary[], topics: readonly ReadingPathTarget[] = []) {
   const from = parameters(hash).get('from') || ''
+  const topicSlug = /^#\/topics\/([a-z0-9-]+)(?:\?|$)/.exec(from)?.[1]
+  const topic = topics.find(item => item.slug === topicSlug)
+  if (topic) {
+    const selected = parameters(from).get('at') || ''
+    const known = topic.readings.some(reading => reading.slug === selected) && catalog.some(article => article.slug === selected)
+    return readingPathHref(topic.slug, known ? selected : undefined)
+  }
   if (!/^#\/writing(?:\?|$)/.test(from)) return '#/writing'
   const filters = readWritingFilters(from, ['All', ...catalog.map(article => article.category)])
   const selected = parameters(from).get('at') || ''
@@ -56,11 +70,32 @@ export function sectionHref(hash: string, id: string) {
   return `${canonical.split('?')[0]}?${params}`
 }
 
+/** Connected answers retain a validated reader context without a document reload. */
+export function linkedArticleSectionHref(hash: string, target: ArticleSummary, id: string, catalog: ArticleSummary[], topics: readonly ReadingPathTarget[] = []) {
+  if (!hash.startsWith('#/')) return `${target.path}#${encodeURIComponent(id)}`
+  const back = articleReturnHref(hash, catalog, topics)
+  const topic = topics.find(item => readingPathHref(item.slug) === back.split('?')[0])
+  const from = topic
+    ? topic.readings.some(reading => reading.slug === target.slug) ? readingPathHref(topic.slug, target.slug) : undefined
+    : writingHref(readWritingFilters(back, ['All', ...catalog.map(article => article.category)]), target.slug)
+  return sectionHref(`#/writing/${target.slug}${from ? `?from=${encodeURIComponent(from)}` : ''}`, id)
+}
+
 /** Keep native section/citation links on the reader when the site uses hash routes. */
 export function readerFragmentHref(hash: string, href: string) {
   if (!/^#\/writing\/[^?]+(?:\?|$)/.test(hash) || !href.startsWith('#') || href.startsWith('#/')) return href
   const id = articleSection(href)
   return id ? sectionHref(hash, id) : href
+}
+
+/** Restored HTML outlines carry encoded text; render it as text, never markup. */
+export function readerSectionTitle(value: string) {
+  const named: Record<string, string> = { amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', nbsp: '\u00a0', ndash: '–', mdash: '—', hellip: '…' }
+  return value.replace(/^(?:[IVXLCDM]+|\d+)[.)]\s+/, '').replace(/&(#x[\da-f]+|#\d+|amp|quot|apos|lt|gt|nbsp|ndash|mdash|hellip);/gi, (entity, code: string) => {
+    if (!code.startsWith('#')) return named[code.toLowerCase()] || entity
+    const point = code[1].toLowerCase() === 'x' ? parseInt(code.slice(2), 16) : parseInt(code.slice(1), 10)
+    return point > 0 && point <= 0x10ffff && !(point >= 0xd800 && point <= 0xdfff) ? String.fromCodePoint(point) : entity
+  })
 }
 
 const connections: Record<string, string[]> = {

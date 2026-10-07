@@ -5,6 +5,16 @@
   "readingTimeBasis": "220 words per minute for the main manuscript, evidence tables, code and captions; separate source ledgers, expandable registries, and downloads excluded.",
   "exceptions": [
     {
+      "slug": "jane-street-exact-search-solver-verification",
+      "reason": "Remove the nonexistent portfolio case-study route. The published puzzle, solution, and technical competition dossier remain available.",
+      "removedResource": {
+        "label": "Portfolio case study",
+        "href": "/work/jane-street-puzzle",
+        "description": "The shorter project view: problem framing, design decisions, retained result, and source boundaries.",
+        "format": "CASE"
+      }
+    },
+    {
       "slug": "ai-search-crawler-policy",
       "unit": "opening",
       "reason": "Corrected product-token group matching to case-insensitive; path matching SHOULD be case sensitive. Added the primary protocol citation.",
@@ -48,8 +58,8 @@
       "path": "src/personal/editorial/data/articles/jane-street-exact-search-solver-verification.json",
       "baselinePath": "docs/article-quality-baselines/jane-street-exact-search-solver-verification.json",
       "baselineSha256": "0b98e15dec9b4db5fd354e5c993fb03fff19fbe09fd838158e4b72e44d6bdc62",
-      "currentSha256": "8f7537ffc48d5198493caa6c8f0012d05aa91d52b01ce462a79523cdb60cf9b9",
-      "evidenceSha256": "954b4f6be2469698a4dc3b7001625a75ac672f6aa2aaff5bb14e68f8f0133ae4",
+      "currentSha256": "0226d91d28777302a3f0252560767d739d584584b5504deb57bc14b47b2bc268",
+      "evidenceSha256": "856a7f7c0d3ae50999732dc119a065a88b352da671ac69dbec738a271fc5f0a1",
       "proseWords": {
         "before": 1398,
         "after": 1224

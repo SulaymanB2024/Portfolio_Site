@@ -1,8 +1,6 @@
-import { decoderPath } from '../../portfolio-decoder-path.ts'
 import { createPortalMaskTarget } from './portal-mask.ts'
 import * as THREE from 'three'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
+import { createPortfolioModelLoader } from '../portfolio-model-loader.ts'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
 import { CHAPTERS, sceneSequence, textSequence, advanceScrollMotion, railProgress, requiredScene, type LandingChapter, type TextSequence } from './sequence.ts'
 import { thresholdMotion, sculpturePose, cinematicShot, portalPose, cinematicPhase, portalFrameOpacity, createScaleSampler, createApertureSampler } from './motion-curves.ts'
@@ -17,6 +15,8 @@ import { sculptureRestWeight, sculptureLivingPose, sculptureAnimationActive, mec
 import { PortfolioRuntime } from '../portfolio-runtime.ts'
 import { dragHelmet, helmetGesture, helmetKey, settleHelmet, type HelmetTurn, type HelmetGesture } from './helmet-interaction.ts'
 import { setDestinationLabel } from '../link-arrow.ts'
+import { openingInkReveal } from './opening-motion.ts'
+import { PORTFOLIO_DITHER_GLSL } from '../dither-kernel.ts'
 
 export interface LandingElements {
   rail: HTMLElement
@@ -48,7 +48,8 @@ type Portal = {
 const rotations = LANDING_ART.map(art => art.rotation)
 const screenFragmentShader = `
 uniform sampler2D a;uniform sampler2D b;uniform sampler2D portalMask;uniform sampler2D portalFrame;uniform float portalEnabled;uniform float portalTextLeg;uniform float portalRim;uniform vec3 framePaper;uniform vec3 frameInk;
-uniform vec2 scenePixels;uniform float outputRatio;uniform float sculptureReveal;uniform vec3 paperA;uniform vec3 inkA;uniform vec3 paperB;uniform vec3 inkB;uniform float exposureA;uniform float exposureB;uniform float darkA;uniform float darkB;varying vec2 vUv;
+uniform vec2 scenePixels;uniform float outputRatio;uniform float sculptureReveal;uniform float sculptureSeconds;uniform float sculptureGrain;uniform vec3 paperA;uniform vec3 inkA;uniform vec3 paperB;uniform vec3 inkB;uniform float exposureA;uniform float exposureB;uniform float darkA;uniform float darkB;varying vec2 vUv;
+${PORTFOLIO_DITHER_GLSL}
 ${scrollInkShader}
 ${textDitherShader}
 float bayer2(vec2 p){vec2 q=mod(p,2.);return q.x*2.+q.y*3.-q.x*q.y*4.;}
@@ -56,7 +57,7 @@ vec3 printedSculpture(sampler2D source,vec2 uv,vec3 paper,vec3 ink,float exposur
   vec2 pixel=floor(uv*scenePixels);
   vec4 sampleColor=texture2D(source,(pixel+.5)/scenePixels);
   if(sampleColor.a<.0001)return paper;
-  float threshold=sculptureThreshold(pixel,uv);
+  float threshold=portfolioLiveThreshold(sculptureThreshold(pixel,uv),pixel,sculptureSeconds,sculptureGrain);
   float mark;
   if(exposure<0.){
     // Keep the approved opening's engraved chrome treatment.
@@ -93,6 +94,9 @@ void main(){
 /** The approved visor Threshold study, bounded to its own scroll rail. */
 export function mountLandingSequence(elements: LandingElements): () => void {
   const { rail, stage, canvas, helmetControl, headline, loading, copyContent, title, links, project, article, category } = elements
+  // An opaque context has an unpainted black buffer during setup and decoding.
+  // Keep native copy on the stage paper until a complete composite is ready.
+  canvas.hidden = true
   const resources = new Set<Disposable>(), observers: { disconnect(): void }[] = []
   const openingRuntime = new PortfolioRuntime()
   const events = new AbortController()
@@ -105,6 +109,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
   const actorBounds = new Map<THREE.Object3D, { size: THREE.Vector3; center: THREE.Vector3 }>()
   let frame = 0, wakeTimer = 0, last = 0, frames = 0, disposed = false, failed = false, ready = false, visible = true
   let progress = 0, velocity = 0, targetProgress = 0, scrollDistance = 1, width = 0, height = 0
+  let recovering = false
   let movingInk = 0
   let pixelRatio = 0, sceneRatio = 0
   const headerNav = stage.closest('.personal-site')?.querySelector<HTMLElement>('.personal-header nav')
@@ -326,7 +331,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       a: { value: targetA.texture }, b: { value: targetB.texture }, portalMask: { value: targetMask.texture }, portalFrame: { value: targetFrame.texture },
       portalEnabled: { value: 0 }, portalTextLeg: { value: 0 }, portalRim: { value: 0 }, framePaper: { value: paper.value }, frameInk: { value: ink.value },
       exposureA: { value: -1 }, exposureB: { value: -1 }, darkA: { value: 0 }, darkB: { value: 0 },
-      outputRatio: { value: 1 }, sculptureReveal: { value: 0 }, scenePixels: { value: new THREE.Vector2(1, 1) }, paperA: { value: paper.value.clone() }, inkA: { value: ink.value.clone() },
+      outputRatio: { value: 1 }, sculptureReveal: { value: 0 }, sculptureSeconds: { value: 0 }, sculptureGrain: { value: 0 }, scenePixels: { value: new THREE.Vector2(1, 1) }, paperA: { value: paper.value.clone() }, inkA: { value: ink.value.clone() },
       paperB: { value: paper.value.clone() }, inkB: { value: ink.value.clone() }, ...textUniforms,
     }
     const screenScene = new THREE.Scene(), screenCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
@@ -334,8 +339,9 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     const screenGeometry = manage(new THREE.PlaneGeometry(2, 2))
     screenScene.add(new THREE.Mesh(screenGeometry, screenMaterial))
     const printed = manage(createDitheredText({ headline, stage, uniforms: textUniforms, pixelRatio: () => renderer.getPixelRatio(), onChapter: showChapter, isAlive: alive }))
-    const loader = new GLTFLoader(), draco = manage(new DRACOLoader().setDecoderPath(assetUrl(decoderPath)).setWorkerLimit(1))
-    loader.setDRACOLoader(draco)
+    // Abort unfinished downloads on departure and let an active decode settle
+    // before terminating its worker. A late response must not restart Draco.
+    const loader = manage(createPortfolioModelLoader())
     canvas.hidden = true
     canvas.dataset.state = stage.dataset.state = 'loading'
     stage.dataset.mode = 'threshold'
@@ -343,7 +349,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
 
     async function asset(chapter: LandingChapter) {
       const sourceUrl = portfolioAssetUrl(chapter.assetId)
-      const gltf = await loader.loadAsync(sourceUrl)
+      const gltf = await loader.load(sourceUrl, events.signal)
       if (!alive()) { releaseLate(gltf.scene); return }
       own(gltf.scene)
       const group = new THREE.Group()
@@ -366,7 +372,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       assetSources.set(chapter.id, sourceUrl)
     }
     async function loadPortal(): Promise<Portal | null> {
-      const gltf = await loader.loadAsync(assetUrl('landing/threshold-lens.glb'))
+      const gltf = await loader.load(assetUrl('landing/threshold-lens.glb'), events.signal)
       if (!alive()) { releaseLate(gltf.scene); return null }
       own(gltf.scene)
       const frames: THREE.Mesh[] = [], openings: THREE.Mesh[] = [], clip = gltf.animations.find(animation => animation.name === 'Open')
@@ -578,6 +584,8 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       object.rotation.x += living.pitch
       object.rotation.y += living.yaw
       object.rotation.z += living.roll
+      object.position.x += living.x
+      object.position.y += living.y
       articulate(object, pose.articulation * art.turn)
     }
     function prepareShot(object: THREE.Group, index: number, local: number, mobile: boolean, incoming = false) {
@@ -630,6 +638,8 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       if (!alive() || !ready || !visible || !width || !height || document.hidden) return
       if (!ensure(reduced.matches ? targetProgress : progress)) return
       const { mobile, leg, local, motion } = pose()
+      screenUniforms.sculptureSeconds.value = openingRuntime.seconds
+      screenUniforms.sculptureGrain.value = reduced.matches ? 0 : .025
       if (reduced.matches) {
         for (const object of actors) if (object) object.visible = false
         const index = textSequence(targetProgress, 'threshold', true).active
@@ -671,10 +681,10 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       canvas.dataset.mechanicalParts = String((parts.get(actors[interactionIndex]!) ?? []).filter(part => part.motion).length)
       canvas.dataset.sculptureMotion = reduced.matches ? 'reduced' : animated ? 'playing' : 'paused'
       canvas.dataset.scrollFrames = String(++frames)
-      prefetch()
+      if (screenUniforms.sculptureReveal.value === 1) prefetch()
     }
     function request(delay = 0) {
-      if (!alive() || !ready || !visible || document.hidden || frame) return
+      if (!alive() || !ready || !visible || document.hidden || stage.dataset.covered === 'true' || frame) return
       if (wakeTimer) {
         if (delay > 0) return
         clearTimeout(wakeTimer); wakeTimer = 0
@@ -684,12 +694,18 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     }
     function tick(time: number) {
       frame = 0
+      if (stage.dataset.covered === 'true') { stop(); return }
       if (!alive() || !ready || !visible || document.hidden) return
       const seconds = last ? (time - last) / 1000 : 1 / 60
       last = time
-      const motion = advanceScrollMotion({ progress, velocity }, targetProgress, seconds, reduced.matches)
-      progress = motion.progress; velocity = motion.velocity
-      if (Math.abs(progress - targetProgress) * scrollDistance < .1 && Math.abs(velocity) * scrollDistance < 2) { progress = targetProgress; velocity = 0 }
+      let motion = advanceScrollMotion({ progress, velocity }, targetProgress, seconds, reduced.matches, recovering ? height / scrollDistance * 1.25 : Infinity)
+      if (Math.abs(motion.progress - targetProgress) * scrollDistance < .1 && Math.abs(motion.velocity) * scrollDistance < 2) motion = { progress: targetProgress, velocity: 0 }
+      // Demand-load first; retain a living, fully painted scene while decoding.
+      // A late asset must not consume the passage and appear at its final frame.
+      const waiting = !ensure(reduced.matches ? targetProgress : motion.progress)
+      if (!waiting) { progress = motion.progress; velocity = motion.velocity }
+      else { velocity = 0; recovering = true }
+      if (reduced.matches || Math.abs(progress - targetProgress) * scrollDistance < 2) recovering = false
       const scrolling = progress !== targetProgress || velocity !== 0
       movingInk = advanceScrollInk(movingInk, scrollInkStrength(velocity, scrollDistance, height, reduced.matches), seconds, reduced.matches)
       const inking = movingInk > 0
@@ -701,15 +717,16 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       const sceneReady = ensure(reduced.matches ? targetProgress : progress)
       const living = sculptureAnimationActive(reduced.matches, visible, menuOpen, !!pointer, keyboardFocus, stage.dataset.motionPlaying !== 'false', sceneReady)
       if (!sceneReady) openingRuntime.suspend()
-      revealStarted ??= time
-      screenUniforms.sculptureReveal.value = reduced.matches ? 1 : THREE.MathUtils.smoothstep((time - revealStarted) / 140, 0, 1)
+      if (sceneReady) revealStarted ??= time
+      screenUniforms.sculptureReveal.value = openingInkReveal(revealStarted === undefined ? 0 : time - revealStarted, reduced.matches)
       const revealing = screenUniforms.sculptureReveal.value < 1
       // Keep native scroll responsive. Only the idle sculpture uses the shared 30 Hz budget.
-      if (openingRuntime.canPaint(time, scrolling || inking || interacting || !!pointer || !living)) {
-        if (sceneReady && openingRuntime.advance(time, living, scrolling || inking || interacting || !!pointer)) size()
+      if (openingRuntime.canPaint(time, scrolling && !waiting || inking || interacting || revealing || !!pointer || !living)) {
+        if (sceneReady && openingRuntime.advance(time, living, scrolling && !waiting || inking || interacting || revealing || !!pointer)) size()
         try { draw() } catch { fail(); return }
       }
-      if (scrolling || inking || interacting || revealing) request()
+      if (waiting && !inking && !interacting && !revealing) request(openingRuntime.paintDelay(time))
+      else if (scrolling || inking || interacting || revealing) request()
       else if (living) request(openingRuntime.paintDelay(time))
       else { last = 0; openingRuntime.suspend() }
     }
@@ -717,6 +734,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       if (!alive()) return
       scrollDistance = Math.max(1, rail.clientHeight - stage.clientHeight)
       targetProgress = railProgress(scrollY, rail.getBoundingClientRect().top + scrollY, rail.clientHeight, stage.clientHeight)
+      if (stage.dataset.covered === 'true') { stop(); hideHelmetControl(); return }
       if (!helmetControl.hidden && sculptureRestWeight(targetProgress, interactionIndex, reduced.matches) < .05) hideHelmetControl(true)
       if (targetProgress > 0 && !portal && !reduced.matches) void requestPortal()
       ensure(targetProgress)

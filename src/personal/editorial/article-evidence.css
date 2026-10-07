@@ -18,7 +18,7 @@
 .article-page .reader-research-figure { padding-top: 0; border-top: 0; }
 .article-page .reader-research-figure > .eyebrow { display: none; }
 .article-page .reader-prose .article-original-figures figure:not(.viralbench-page-visual) { padding-top: 0; border-top: 0; }
-.article-page .article-original-figures .toll-figure-label { justify-content: flex-start; gap: 0; margin-bottom: 18px; }
+.article-page .article-original-figures .toll-figure-label { justify-content: flex-start; gap: 8px 18px; margin-bottom: 18px; }
 .article-page .article-original-figures .toll-figure-label > .figure-number { display: none; }
 .article-page .article-original-figures .ai-authority-spectrum__track { display: none; }
 .article-page .article-original-figures .figure-table-hint { display: none; }

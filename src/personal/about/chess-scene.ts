@@ -30,9 +30,31 @@ export function createChessSet(parent: THREE.Group, knight: THREE.Object3D, tile
   type Entry={group:THREE.Group;kind:string;target:THREE.Vector3;from:THREE.Vector3;elapsed:number;release:()=>void}
   const entries=new Map<string,Entry>()
   let previousMove=''
+  function moveEntry(from:string,to:string){
+    const entry=entries.get(from);if(!entry)return
+    const captured=entries.get(to);if(captured){captured.release();root.remove(captured.group)}
+    entries.delete(to);entries.delete(from);entries.set(to,entry)
+    entry.from.copy(entry.group.position);entry.elapsed=0
+  }
   function update(state:ChessSceneState){
     const move=state.lastMove.join(',')
-    if(move&&move!==previousMove){const[from,to]=state.lastMove,entry=entries.get(from);if(entry){const captured=entries.get(to);if(captured){captured.release();root.remove(captured.group)}entries.delete(to);entries.delete(from);entries.set(to,entry);entry.from.copy(entry.group.position);entry.elapsed=0}}
+    if(move!==previousMove)finishMotion()
+    if(move&&move!==previousMove){
+      const[from,to]=state.lastMove,entry=entries.get(from)
+      const color=entry?.kind[0],rank=color==='w'?'1':'8'
+      const castling=entry?.kind===`${color}k`&&from===`e${rank}`&&(to===`g${rank}`||to===`c${rank}`)
+      if(castling){
+        const kingSide=to[0]==='g',rookFrom=`${kingSide?'h':'a'}${rank}`,rookTo=`${kingSide?'f':'d'}${rank}`
+        const clear=(kingSide?['f','g']:['b','c','d']).every(file=>!entries.has(`${file}${rank}`))
+        // The legal game supplies lastMove. Require its complete rook transition
+        // as well as the king's home-rank move before remapping the rook motion.
+        if(clear&&entries.get(rookFrom)?.kind===`${color}r`
+          &&!state.pieces.some(piece=>piece.square===rookFrom||piece.square===from)
+          &&state.pieces.some(piece=>piece.square===rookTo&&piece.type==='r'&&piece.color===color)
+          &&state.pieces.some(piece=>piece.square===to&&piece.type==='k'&&piece.color===color))moveEntry(rookFrom,rookTo)
+      }
+      moveEntry(from,to)
+    }
     previousMove=move
     const squares=new Set(state.pieces.map(piece=>piece.square))
     for(const[square,entry]of entries)if(!squares.has(square)){entry.release();root.remove(entry.group);entries.delete(square)}
@@ -40,24 +62,25 @@ export function createChessSet(parent: THREE.Group, knight: THREE.Object3D, tile
       const point=tiles.get(piece.square);if(!point)continue
       const kind=`${piece.color}${piece.type}`
       let entry=entries.get(piece.square)
-      if(entry?.kind!==kind){if(entry){entry.release();root.remove(entry.group)}const group=new THREE.Group();group.add(templates.get(kind)!.clone(true));const release=bindChessBatchPicking(group);group.position.copy(point);root.add(group);entry={group,kind,target:point.clone(),from:point.clone(),elapsed:1,release};entries.set(piece.square,entry)}
+      if(entry?.kind!==kind){const motion=entry&&{from:entry.from.clone(),elapsed:entry.elapsed};if(entry){entry.release();root.remove(entry.group)}const group=new THREE.Group();group.add(templates.get(kind)!.clone(true));const release=bindChessBatchPicking(group);group.position.copy(point);root.add(group);entry={group,kind,target:point.clone(),from:motion?.from??point.clone(),elapsed:motion?.elapsed??1,release};entries.set(piece.square,entry)}
       entry.target.copy(point);entry.group.userData.chessSquare=piece.square;entry.group.name=`chess-${piece.square}-${kind}`
     }
   }
   function tick(dt:number,reduced:boolean){
     let moving=false
     for(const entry of entries.values()){
-      entry.elapsed=reduced?1:Math.min(1,entry.elapsed+dt/.36)
+      entry.elapsed=reduced?1:Math.min(1,entry.elapsed+Math.max(0,dt)/.36)
       const t=entry.elapsed,smooth=t*t*(3-2*t);entry.group.position.lerpVectors(entry.from,entry.target,smooth)
       if(entry.kind[1]==='n'&&t<1)entry.group.position.y+=Math.sin(t*Math.PI)*.14
       if(t<1)moving=true
     }
     return moving
   }
+  function finishMotion(){for(const entry of entries.values()){entry.elapsed=1;entry.group.position.copy(entry.target)}}
   let opacity=1
   function setOpacity(value:number){
     const next=Math.max(0,Math.min(1,value));if(opacity===next)return
     opacity=next;for(const material of surfaces)material.opacity=next
   }
-  return {root,update,tick,setOpacity}
+  return {root,update,tick,setOpacity,finishMotion}
 }

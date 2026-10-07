@@ -27,6 +27,7 @@
 }
 .home-site[data-home-scroll-motion] [data-home-reveal='rule-top']::before { top: -1px; }
 .home-site[data-home-scroll-motion] [data-home-reveal='rule-bottom']::before { bottom: -1px; }
+.personal-site.home-site[data-home-scroll-motion] [data-home-reveal^='rule-']::before { content: none; }
 .home-site[data-home-scroll-motion] :is(.work-section-label,.journal-heading,.personal-footer)[data-home-reveal]::before { background: var(--ink); }
 .home-site[data-home-scroll-motion] .journal-all[data-home-reveal] { position: relative; }
 .home-site[data-home-scroll-motion] [data-home-reveal]:focus-within { opacity: 1; translate: none; scale: none; }

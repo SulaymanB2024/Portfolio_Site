@@ -1,0 +1,78 @@
+/* Text stays native-sized; only the capacity marks scale with the column. */
+.personal-site[data-section] .rare-earth-figure { color: var(--ink); min-width: 0; overflow-wrap: break-word; }
+.personal-site[data-section] .rare-earth-figure :is(p, ol, dl, dd) { margin: 0; }
+.personal-site[data-section] .rare-earth-figure p { font: 400 13px/1.65 var(--type-interface, Arial, Helvetica, sans-serif); max-width: none; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-heading { margin-bottom: 24px; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-kicker { margin-bottom: 12px; color: var(--muted); }
+.personal-site[data-section] .rare-earth-figure .rare-earth-heading h3 { margin: 0 0 12px; font: 600 clamp(22px, 3.1vw, 28px)/1.2 var(--type-display, Syne, sans-serif); text-wrap: balance; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-heading > p:last-child { color: var(--muted); }
+.personal-site[data-section] .rare-earth-figure .rare-earth-number { font-family: var(--type-reading, Georgia, 'Times New Roman', serif); font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-stage-label { display: block; font: 400 13px/1.6 var(--type-interface, Arial, Helvetica, sans-serif); color: var(--muted); }
+.rare-earth-capacity-bar { display: block; width: 100%; height: 42px; margin-bottom: 18px; }
+.rare-earth-bar-shipping { fill: var(--ink); }
+.rare-earth-bar-ramp { fill: var(--muted); }
+.rare-earth-bar-future { fill: var(--line); }
+.rare-earth-bar-divider { stroke: var(--paper); stroke-width: 2; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-capacity-rows { margin: 0; }
+.rare-earth-capacity-rows > div { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.6fr); gap: 16px 24px; padding: 17px 0; border-top: 1px solid var(--line); }
+.rare-earth-capacity-rows dt { padding-left: 16px; border-left: 3px solid var(--ink); font: 600 17px/1.35 var(--type-display, Syne, sans-serif); }
+.rare-earth-capacity-rows [data-maturity='ramp'] dt { border-color: var(--muted); }
+.rare-earth-capacity-rows [data-maturity='future'] dt { border-color: var(--line); }
+.rare-earth-capacity-rows .rare-earth-stage-label { margin-bottom: 5px; }
+.rare-earth-capacity-rows dd { display: grid; grid-template-columns: minmax(78px, .55fr) minmax(0, 1.45fr); align-items: start; gap: 16px; }
+.rare-earth-capacity-rows dd > strong { font-size: 27px; line-height: 1.25; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-boundary { margin-top: 6px; color: var(--muted); }
+.personal-site[data-section] .rare-earth-figure .rare-earth-note { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); }
+.rare-earth-demand-main { display: grid; grid-template-columns: minmax(0, 1fr) 68px minmax(0, 1.35fr); gap: 16px; }
+.rare-earth-demand-main > section { min-width: 0; padding: 20px; background: var(--soft); }
+.rare-earth-demand-main .rare-earth-demand-near { background: var(--ink); color: var(--paper); }
+.personal-site[data-section] .rare-earth-demand-near .rare-earth-stage-label { color: inherit; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-demand-main h4 { font: 600 20px/1.3 var(--type-display, Syne, sans-serif); margin: 12px 0 14px; text-wrap: balance; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-demand-bridge { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin: 0; color: var(--muted); text-align: center; }
+.rare-earth-demand-bridge svg { width: 50px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.25; flex: none; }
+.rare-earth-demand-branches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.rare-earth-demand-branches > section { min-width: 0; padding-top: 16px; border-top: 1px solid var(--line); }
+.personal-site[data-section] .rare-earth-figure .rare-earth-demand-branches h4 { font: 600 18px/1.35 var(--type-display, Syne, sans-serif); margin: 0 0 10px; text-wrap: balance; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-flow-stages { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; padding: 0; gap: 18px; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-flow-stages > li { position: relative; min-width: 0; margin: 0; padding: 16px 0 0; border-top: 2px solid var(--line); }
+.rare-earth-flow-stages > li:not(:last-child)::after { content: '→'; position: absolute; top: -12px; right: -15px; color: var(--muted); font: 15px/1 var(--type-interface, Arial, sans-serif); background: var(--paper); }
+.personal-site[data-section] .rare-earth-figure .rare-earth-flow-stages h4 { min-height: 2.7em; font: 600 17px/1.35 var(--type-display, Syne, sans-serif); margin: 0 0 13px; text-wrap: balance; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-flow-stages p + p { margin-top: 8px; color: var(--muted); }
+.rare-earth-flow-stages .rare-earth-number { display: block; font-size: 23px; line-height: 1.3; margin-bottom: 8px; }
+.rare-earth-scrap-note { margin-top: 24px; padding: 0 0 0 16px; border-left: 2px dashed var(--muted); }
+.personal-site[data-section] .rare-earth-figure .rare-earth-scrap-note h4 { margin: 0 0 6px; font: 600 17px/1.35 var(--type-display, Syne, sans-serif); }
+.personal-site[data-section] .rare-earth-figure .rare-earth-scrap-note p { color: var(--muted); }
+.rare-earth-gross-flow { margin-top: 24px; padding: 18px 20px; background: var(--soft); }
+.personal-site[data-section] .rare-earth-figure .rare-earth-gross-flow > p:first-child { font-size: 15px; line-height: 1.5; }
+.rare-earth-gross-flow .rare-earth-number { font-size: 26px; }
+.personal-site[data-section] .rare-earth-figure .rare-earth-gross-flow > p + p { margin-top: 8px; color: var(--muted); }
+
+@media screen and (max-width: 760px) {
+  .rare-earth-capacity-rows > div { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 16px; }
+  .rare-earth-capacity-rows dd { display: block; }
+  .rare-earth-capacity-rows dd > strong { display: block; margin-bottom: 8px; }
+  .rare-earth-demand-main { gap: 16px; }
+  .rare-earth-demand-main > section { padding: 17px; }
+  .personal-site[data-section] .rare-earth-figure .rare-earth-flow-stages { gap: 14px; }
+  .rare-earth-flow-stages > li:not(:last-child)::after { right: -13px; }
+}
+@media screen and (max-width: 600px) {
+  .personal-site[data-section] .rare-earth-figure .rare-earth-heading { margin-bottom: 20px; }
+  .rare-earth-capacity-rows > div { grid-template-columns: 1fr; gap: 12px; }
+  .rare-earth-capacity-rows dd { padding-left: 16px; }
+  .rare-earth-demand-main, .rare-earth-demand-branches { grid-template-columns: 1fr; gap: 18px; }
+  .personal-site[data-section] .rare-earth-figure .rare-earth-demand-bridge { flex-direction: row; min-height: 52px; gap: 20px; }
+  .rare-earth-demand-bridge svg { transform: rotate(90deg); }
+  .personal-site[data-section] .rare-earth-figure .rare-earth-flow-stages { grid-template-columns: 1fr; gap: 22px; }
+  .personal-site[data-section] .rare-earth-figure .rare-earth-flow-stages > li { padding: 14px 0 0 16px; border-top: 1px solid var(--line); border-left: 2px solid var(--line); }
+  .rare-earth-flow-stages > li:not(:last-child)::after { content: '↓'; right: auto; top: auto; bottom: -20px; left: 10px; }
+  .personal-site[data-section] .rare-earth-figure .rare-earth-flow-stages h4 { min-height: 0; margin-bottom: 9px; font-size: 18px; }
+  .personal-site[data-section] .rare-earth-figure .rare-earth-flow-stages p { font-size: 14px; }
+  .rare-earth-gross-flow { padding-inline: 16px; }
+}
+@media print {
+  /* Native text remains readable when the printer omits background graphics. */
+  .rare-earth-demand-main > section { background: transparent; border: 1px solid var(--line); }
+  .rare-earth-demand-main .rare-earth-demand-near { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .rare-earth-capacity-rows > div, .rare-earth-demand-main > section, .rare-earth-demand-branches > section, .rare-earth-flow-stages > li, .rare-earth-gross-flow { break-inside: avoid; }
+}

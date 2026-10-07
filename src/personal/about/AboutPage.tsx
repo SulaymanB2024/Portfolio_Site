@@ -15,6 +15,7 @@ import { performances } from './performances'
 import { interestFromHash } from './interest-route'
 import { DestinationLink } from '../DestinationLink'
 import './about.css'
+import './about-study-design.css'
 
 type Notebook = 'phrase' | 'puzzle'
 
@@ -163,12 +164,14 @@ export default function AboutPage({ dark }: { dark: boolean }) {
     const align = () => {
       const frame = stage.getBoundingClientRect(), board = surface.getBoundingClientRect()
       stage.style.setProperty('--chess-board-top', `${board.top - frame.top}px`)
+      stage.style.setProperty('--chess-board-left', `${board.left - frame.left}px`)
+      stage.style.setProperty('--chess-board-width', `${board.width}px`)
       stage.style.setProperty('--chess-board-height', `${board.height}px`)
     }
     align()
     const observer = new ResizeObserver(align)
     observer.observe(surface); observer.observe(heading); observer.observe(stage)
-    return () => { observer.disconnect(); stage.style.removeProperty('--chess-board-top'); stage.style.removeProperty('--chess-board-height') }
+    return () => { observer.disconnect(); for (const name of ['top','left','width','height']) stage.style.removeProperty(`--chess-board-${name}`) }
   }, [selected, boardMode])
   useEffect(() => { scene.current?.select(selected) }, [selected, status])
   useEffect(() => { scene.current?.setEnabled(!(selected === 'knight' && boardMode === 'game' && boardView === '2d')) }, [selected, boardMode, boardView, status])
@@ -185,13 +188,12 @@ export default function AboutPage({ dark }: { dark: boolean }) {
   useEffect(() => {
     if (!selected) return
     document.getElementById('about-interest-title')?.focus({ preventScroll: true })
-    // The selector row sits beneath the models. Bring the enlarged object and
-    // its controls into view together instead of leaving their heading above the viewport.
-    document.querySelector('.about-object-stage')?.scrollIntoView({ block: 'start', behavior: reduced ? 'instant' : 'smooth' })
+    // An object replaces the introduction, so its study begins below the site header.
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [selected])
   useEffect(() => {
     if (!selected) return
-    const escape = (event: KeyboardEvent) => { if (event.key === 'Escape') { event.preventDefault(); if (notebook) closeNotebook(); else close() } }
+    const escape = (event: KeyboardEvent) => { if (event.key === 'Escape' && !event.defaultPrevented && !document.fullscreenElement && !(event.target as Element | null)?.closest?.('[data-chess-expanded]')) { event.preventDefault(); if (notebook) closeNotebook(); else close() } }
     window.addEventListener('keydown', escape)
     return () => window.removeEventListener('keydown', escape)
   }, [selected, close, notebook])
@@ -252,15 +254,14 @@ export default function AboutPage({ dark }: { dark: boolean }) {
     }).catch(() => { if (request === epoch.current && mounted.current) { setAudioState('error'); setSequencePlaying(false) } })
     setNotice('Playing your phrase.')
   }
-  return <section className="about-objects" aria-labelledby="about-title" data-selected={selected ?? 'collection'} data-board-mode={boardMode} data-board-view={boardView} data-notebook={notebook ?? 'closed'} data-audio-state={audioState} data-phrase-playing={sequencePlaying} data-motion={playing ? 'playing' : 'paused'}>
-    <header className="about-introduction">
+  return <section className="about-objects" aria-labelledby={selected ? 'about-interest-title' : 'about-title'} data-selected={selected ?? 'collection'} data-board-mode={boardMode} data-board-view={boardView} data-notebook={notebook ?? 'closed'} data-audio-state={audioState} data-phrase-playing={sequencePlaying} data-motion={playing ? 'playing' : 'paused'}>
+    {!selected && <header className="about-introduction">
       <h1 id="about-title">About.</h1>
       <div className="about-biography"><p>I’m Sulayman, a finance student at UT Austin. I build software and work in product and growth.</p><p>I founded <a href="#/work/internshipdeadlines">InternshipDeadlines</a> and lead growth at <a href="#/work/sapien">Sapien</a>.</p></div>
       <nav className="about-biography-links mono" aria-label="More about my work"><DestinationLink href="#/work">Selected work</DestinationLink><DestinationLink href="#/resume">Résumé</DestinationLink></nav>
-    </header>
-    <div className="about-explore-heading"><p>Double bass, composition, chess. Choose an object to begin.</p><button className="mono" onClick={() => revealSection('about-performances-title')}>Performances <span aria-hidden="true">↓</span></button></div>
+    </header>}
     <div className="about-object-stage">
-      <canvas ref={canvas} className="about-object-canvas" aria-label={selected === 'knight' && boardMode === 'game' ? 'Playable three-dimensional chess board. Click a piece, then a marked square. Choose the 2D board for keyboard play.' : selected === 'bass' ? 'Interactive three-dimensional double bass. Drag to rotate. Play a string using the string buttons or A, S, D, F.' : selected === 'score' ? 'Interactive three-dimensional score. Drag to rotate. Use the score editor below to compose.' : selected === 'knight' ? 'Interactive knight puzzle. Choose a marked square or use the legal move buttons.' : 'Three-dimensional double bass, score, and chess knight. Choose an object or its interest button to explore.'} role="img" aria-hidden={selected === 'knight' && boardMode === 'game' && boardView === '2d'} tabIndex={selected && !(selected === 'knight' && boardMode === 'game' && boardView === '2d') ? 0 : -1} aria-describedby={selected === 'knight' && boardMode === 'game' ? undefined : selected ? 'about-view-instructions' : undefined} onKeyDown={event => {
+      <canvas ref={canvas} className="about-object-canvas" aria-label={selected === 'knight' && boardMode === 'game' ? 'Playable three-dimensional chess board. Click a piece, then a marked square. Drag in any direction to orbit; arrow keys rotate and tilt, Home resets the view. Choose 2D in the board toolbar for keyboard play.' : selected === 'bass' ? 'Interactive three-dimensional double bass. Drag to rotate. Play a string using the string buttons or A, S, D, F.' : selected === 'score' ? 'Interactive three-dimensional score. Drag to rotate. Use the score editor below to compose.' : selected === 'knight' ? 'Interactive knight puzzle. Choose a marked square or use the legal move buttons.' : 'Three-dimensional double bass, score, and chess knight. Choose an object or its interest button to explore.'} role="img" aria-hidden={selected === 'knight' && boardMode === 'game' && boardView === '2d'} tabIndex={selected && !(selected === 'knight' && boardMode === 'game' && boardView === '2d') ? 0 : -1} aria-describedby={selected === 'knight' && boardMode === 'game' ? undefined : selected ? 'about-view-instructions' : undefined} onKeyDown={event => {
         const direction = { ArrowLeft: [-.08, 0], ArrowRight: [.08, 0], ArrowUp: [0, -.04], ArrowDown: [0, .04] }[event.key]
         if (direction && !event.altKey && !event.ctrlKey && !event.metaKey) { event.preventDefault(); scene.current?.turnView(direction[0], direction[1]) }
         if (event.key === 'Home') { event.preventDefault(); scene.current?.resetView() }
@@ -272,20 +273,19 @@ export default function AboutPage({ dark }: { dark: boolean }) {
       <aside className="about-object-reveal" hidden={!object} role="region" aria-labelledby="about-interest-title">
         {object && <>
         <div className="about-interest-heading"><div className="about-reveal-top mono"><span>{selected === 'bass' ? '01 / The instrument' : selected === 'score' ? '02 / The manuscript' : '03 / The board'}</span><button onClick={close} aria-label="Return to all objects">×</button></div>
-        <h2 id="about-interest-title" tabIndex={-1}>{selected === 'knight' ? 'Chess.' : object.label}</h2>
-        {(selected !== 'knight' || boardMode==='puzzle') && <p className="about-object-sentence">{selected === 'bass' ? 'Four strings. Play by ear.' : selected === 'score' ? 'A phrase for double bass.' : challenge.checkpoints?.length?'Collect C4 and F6, then reach H8 in ten knight moves.':challenge.blocked?.length?'Six moves to H8, with the center squares closed.':`A1 to ${challenge.goal.toUpperCase()} in ${challenge.limit} knight moves.`}</p>}
-        {selected==='knight'&&<div className="about-option-buttons about-board-mode mono" role="group" aria-label="Choose board mode"><button aria-pressed={boardMode==='game'} onClick={()=>{setBoardMode('game');setNotebook(null)}}>Play chess</button><button aria-pressed={boardMode==='puzzle'} onClick={()=>{setBoardMode('puzzle');setNotebook(null)}}>Knight puzzles</button></div>}
+        <h1 id="about-interest-title" tabIndex={-1}>{selected === 'knight' ? 'Chess.' : object.label}</h1>
+        {(selected === 'score' || selected === 'knight' && boardMode==='puzzle') && <p className="about-object-sentence">{selected === 'score' ? 'A phrase for double bass.' : challenge.checkpoints?.length?'Collect C4 and F6, then reach H8 in ten knight moves.':challenge.blocked?.length?'Six moves to H8, with the center squares closed.':`A1 to ${challenge.goal.toUpperCase()} in ${challenge.limit} knight moves.`}</p>}
+        {selected==='knight'&&<div className="about-option-buttons about-board-mode mono" role="group" aria-label="Choose board mode"><button aria-label="Play chess" aria-pressed={boardMode==='game'} onClick={()=>{setBoardMode('game');setNotebook(null)}}>Play</button><button aria-label="Knight puzzles" aria-pressed={boardMode==='puzzle'} onClick={()=>{setBoardMode('puzzle');setNotebook(null)}}>Puzzles</button></div>}
         </div>
         {selected === 'bass' && <BassInstrument ref={bassInput} articulation={articulation} position={position} audioState={audioState} getAudio={getAudio} onTechnique={value => { silence(); setArticulation(value) }} onPosition={value => { silence(); setPosition(value) }} onSound={bassSound} onPlaying={bassMotion} onRecordingStart={recordingStart} onBowing={bindBowing} onError={bassError}/>}
         {selected === 'score' && <div className="about-interest-play">
-          <div className="about-phrase-heading mono"><span>First measure</span><span>4/4 · {tempo} BPM</span></div>
           <ScorePhrasePreview notes={phrase} tempo={tempo} activeIndex={activeNote}/>
           <div className="about-note-buttons" aria-label="Choose a note">{bassStrings.map((note, index) => <button key={note.label} onClick={() => addNote(index)} disabled={phrase.length >= 4} aria-label={`Add ${note.label} note`}><span className="mono" aria-hidden="true">+</span><span>{midiLabel(note.midi)}</span></button>)}</div>
           <div className="about-play-actions mono"><button onClick={playPhrase} disabled={!phrase.length}>▷ Hear it</button><button onClick={silence} disabled={!sequencePlaying}>Stop</button><button onClick={() => editPhrase([])} disabled={!phrase.length}>Start again</button></div>
           <p className="about-interaction-note mono">{phrase.length ? phraseCaption : 'Choose a pitch to begin.'}</p>
         </div>}
         {selected === 'score' && <div className="about-deeper-links mono"><button className="about-primary-descent" onClick={event => openNotebook('phrase', event.currentTarget)} aria-controls="about-notebook"><span className="about-descent-copy">Continue composing<span className="mono">Rhythm, rests & the written score</span></span><span aria-hidden="true">↓</span></button></div>}
-        {selected === 'score' && <p className="about-audio-status mono" role="status">{audioState === 'loading' ? 'Loading the double bass…' : audioState === 'error' ? 'The sound library couldn’t load. Try another note to retry.' : 'Recorded double bass · sound on click'}</p>}
+        {selected === 'score' && (audioState === 'loading' || audioState === 'error') && <p className="about-audio-status mono" role="status">{audioState === 'loading' ? 'Loading the double bass…' : 'The sound library couldn’t load. Try another note to retry.'}</p>}
         {selected === 'knight' && boardMode==='puzzle' && <div className="about-interest-play">
           <div className="about-puzzle-position"><span>{current.toUpperCase()}</span><span className="mono">{path.length - 1} / {challenge.limit} moves</span></div>
           <p className="about-puzzle-caption">{result === 'solved' ? 'You found a route.' : result === 'finished' ? `${challenge.limit} moves. Another route?` : 'Two squares, then one across.'}</p>
@@ -300,7 +300,7 @@ export default function AboutPage({ dark }: { dark: boolean }) {
           {selected !== 'knight' && <button onClick={() => revealSection('about-performances-title')}>{selected === 'score' ? 'Double bass performances' : 'View performances'}<span aria-hidden="true">↓</span></button>}
           {selected === 'knight' && boardMode==='puzzle' && <button onClick={event => openNotebook('puzzle', event.currentTarget)} aria-controls="about-notebook">More routes & the reasoning<span aria-hidden="true">↓</span></button>}
         </div>
-        <details className="about-personal-detail"><summary>{object.detailLabel}<span aria-hidden="true">+</span></summary><p>{object.detail}</p><a href={object.source} target="_blank" rel="noreferrer">{object.sourceLabel} <span aria-hidden="true">↗</span></a></details>
+        {(selected !== 'knight' || boardMode === 'puzzle') && <details className="about-personal-detail"><summary>{object.detailLabel}<span aria-hidden="true">+</span></summary><p>{object.detail}</p><a href={object.source} target="_blank" rel="noreferrer">{object.sourceLabel} <span aria-hidden="true">↗</span></a></details>}
         </>}
       </aside>
     </div>
@@ -310,7 +310,7 @@ export default function AboutPage({ dark }: { dark: boolean }) {
       {notebook === 'phrase' && <PhraseEditor notes={phrase} onChange={editPhrase} tempo={tempo} onTempo={value => { silence(); setTempo(value) }} title={pieceTitle} onTitle={setPieceTitle} page={scorePage} onPage={setScorePage} articulation={articulation} onArticulation={value => { silence(); setArticulation(value) }} onPlay={playPhrase} onStop={silence} onPreview={midi => preview(midi)} activeNote={activeNote} onUndo={()=>undoPiece()} onRedo={()=>undoPiece(true)} canUndo={notesHistory.current.undo.length>0} canRedo={notesHistory.current.redo.length>0}/>}
       {notebook === 'puzzle' && <PuzzleNotebook challenge={challenge} onChallenge={id => { setChallengeId(id); setPath(['a1']); setNotice('New route. Knight on A1.') }} path={path} onMove={move} onReset={() => setPath(['a1'])} onUndo={() => setPath(previous => previous.slice(0, -1))} onBoard={returnToBoard} />}
     </section>}</div>
-    <section id="about-performances" className="about-notebook about-performance-archive" aria-labelledby="about-performances-title">
+    <section id="about-performances" className="about-notebook about-performance-archive" aria-labelledby="about-performances-title" hidden={selected === 'knight'}>
       <div className="about-notebook-heading"><div><span className="mono">Music / on the stage</span><h2 id="about-performances-title" tabIndex={-1}>Performances & repertoire.</h2></div><span className="about-performance-count mono">{String(performances.length).padStart(2, '0')} programs</span></div>
       <p className="about-archive-introduction">Double bass at UT Austin and Texas All-State.</p><PerformanceArchive entries={performances} />
       <details className="about-library-credit"><summary>About the instrument sounds<span aria-hidden="true">+</span></summary><p>The playable bass uses recordings from <a href="https://versilian-studios.com/vsco-community/" target="_blank" rel="noreferrer">VSCO 2 Community Edition</a>, a CC0 sample library. These instrument samples are separate from the performance recordings linked above.</p></details>

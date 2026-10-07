@@ -74,6 +74,19 @@ input:focus-visible, select:focus-visible, .article-table-wrap:focus-visible { o
 .article-table-wrap th { font: 10px/1.6 'Courier New', monospace; color: var(--muted); font-weight: 400; }
 .article-table-wrap tr:last-child td { border-bottom: 0; }
 .article-table-wrap td:first-child { color: var(--ink); }
+@media screen {
+  [data-table-overflow='true']::before {
+    content: 'Scroll horizontally to compare columns →';
+    display: block;
+    position: sticky;
+    left: 0;
+    padding-block: 10px;
+    color: var(--muted);
+    font: 400 12px/1.6 var(--type-interface, Arial, sans-serif);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+}
 .reader-prose pre { max-width: 100%; overflow: auto; margin: 28px 0; padding: 22px; background: var(--soft); border: 1px solid var(--line); white-space: pre; }
 .reader-prose code { font: 12px/1.8 'Courier New', monospace; }
 .reader-prose p code, .reader-prose li code { padding: 2px 4px; background: var(--soft); overflow-wrap: anywhere; }
@@ -199,8 +212,8 @@ input:focus-visible, select:focus-visible, .article-table-wrap:focus-visible { o
   .reader-disclosure summary > .mono { font-size: 7px; }.reader-prose { font-size: 15px; }
 }
 @media print {
-  :root, body, .personal-site { background: white !important; color: black !important; }
-  .personal-site { padding: 0; max-width: none; overflow: visible; --ink: black; --muted: #333; --line: #bbb; --soft: #eee; }
+  :root, body, .personal-site { background: white !important; color: black !important; --paper: white; --ink: black; --muted: #333; --line: #bbb; --soft: #eee; }
+  .personal-site { padding: 0; max-width: none; overflow: visible; }
   .personal-site::before, .personal-header, .personal-footer, .skip-link, .resume-actions, .resume-bottom-links, .reader-aside, .project-back, .reader-return, .article-utilities, .reader-progress { display: none !important; }
   .resume-page { padding: 0; }.resume-heading { padding: 0 0 22px; }.resume-heading h1 { font-size: 40px; }
   .resume-section { grid-template-columns: 130px 1fr; gap: 25px; padding: 22px 0; }.resume-section h2 { font-size: 21px; }

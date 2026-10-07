@@ -1,0 +1,398 @@
+/* A working instrument beside each object: one typographic voice and fewer rules. */
+.personal-site[data-section='about'][data-appearance] .about-objects .about-interest-heading h1 {
+  font-family: Georgia,'Times New Roman',serif; font-weight: 400; letter-spacing: -.055em;
+}
+.personal-site[data-section='about'][data-appearance] .about-objects :is(.about-reveal-top,.about-personal-detail > summary,.bass-instrument .mono,.music-manuscript-heading) {
+  font-family: 'Courier New',monospace; font-size: 11px; line-height: 1.5; letter-spacing: .01em;
+}
+.personal-site[data-section='about'][data-appearance] .bass-repertoire h3 { font-family: Georgia,serif; font-weight: 400; }
+.personal-site[data-section='about'][data-appearance] .bass-techniques > button > .bass-technique-name { font: 14px/1.3 Georgia,serif; }
+.personal-site[data-section='about'][data-appearance] :is(.bass-help > span,.bass-strings kbd) { font: 10px/1.4 'Courier New',monospace; }
+.personal-site[data-section='about'][data-appearance] .about-objects .bass-instrument .bass-solo-choice > select { font: 14px/1.5 Georgia,serif; }
+.personal-site[data-section='about'][data-appearance] .about-objects .bass-instrument .bass-solo-passage { font: 14px/1.5 Georgia,serif; }
+.about-objects:is([data-selected='bass'],[data-selected='score']) .about-interest-heading h1 {
+  font: 400 clamp(42px,4.4vw,60px)/1.02 Georgia,'Times New Roman',serif;
+  letter-spacing: -.055em; margin: 3px 0 24px;
+}
+.about-objects:is([data-selected='bass'],[data-selected='score']) .about-reveal-top { font: 10px/1.4 'Courier New',monospace; letter-spacing: .06em; }
+.about-objects:is([data-selected='bass'],[data-selected='score']) .about-object-sentence { font: 16px/1.5 Georgia,serif; margin: -8px 0 25px; }
+.about-objects:is([data-selected='bass'],[data-selected='score']) .about-personal-detail { margin-top: 8px; border: 0; }
+.about-objects:is([data-selected='bass'],[data-selected='score']) .about-personal-detail > summary { font: 11px/1.4 'Courier New',monospace; }
+.about-objects:is([data-selected='bass'],[data-selected='score']) .about-deeper-links { margin-top: 25px; }
+.about-objects:is([data-selected='bass'],[data-selected='score']) .about-deeper-links > button { border: 0; min-height: 44px; font: 15px/1.4 Georgia,serif; }
+
+.bass-instrument { margin: 0 0 15px; }
+.bass-mode-switch { display: flex; gap: 32px; margin: 0 0 19px; border-bottom: 1px solid var(--ink); }
+.bass-mode-switch > button { display: block; flex: 0 0 auto; min-height: 44px; margin: 0; padding: 5px 0 14px; border: 0; font: 17px/1.2 Georgia,serif; }
+.bass-mode-switch > button[aria-pressed='true']::after { content: ''; position: absolute; inset: auto 0 -2px; height: 3px; background: var(--ink); }
+.bass-mode-switch > button > .sr-only, .bass-techniques > button > .sr-only { position: absolute; }
+.bass-hands-on { display: grid; }
+.bass-techniques { display: flex; align-items: center; gap: 23px; margin: 0 0 13px; }
+.bass-technique-label { margin-right: auto; font: 10px/1.4 'Courier New',monospace; letter-spacing: .03em; color: var(--muted); }
+.bass-technique-label { font-size: 12px; color: var(--ink); }
+.bass-techniques > button { display: block; min-height: 44px; padding: 8px 0; font: 14px/1.3 Georgia,serif; }
+.bass-techniques > button > .bass-technique-name { font: inherit; }
+.bass-techniques > button[aria-pressed='true'] > .bass-technique-name { text-underline-offset: 6px; }
+.bass-strings { position: relative; gap: 0; padding: 0; border: 0; }
+.bass-bridge-study { position: absolute; inset: 17px 0 auto; width: 100%; height: 208px; fill: none; stroke: var(--ink); stroke-width: .6; opacity: .32; pointer-events: none; }
+.bass-strings > button { min-height: 271px; gap: 0; padding: 0 4px 16px; border: 0; }
+.bass-string-number { font: 9px/1.4 'Courier New',monospace; letter-spacing: .05em; color: var(--muted); margin-bottom: 5px; }
+.bass-string-number { font-size: 11px; color: var(--ink); }
+.bass-string-study { height: 189px; width: 100%; }
+.bass-string-anchor { opacity: 0; }
+.bass-string-core { opacity: .48; }
+.bass-string-pitch { font: 29px/1.05 Georgia,serif; margin: 9px 0 7px; }
+.bass-strings kbd { min-height: 16px; padding: 0; border: 0; font: 9px/1.2 'Courier New',monospace; color: var(--muted); }
+.bass-strings > button:is(:hover,:focus-visible), .bass-strings > button[data-sounding='true'] { background: color-mix(in srgb,var(--ink) 3%,transparent); }
+.bass-strings > button[data-sounding='true'] .bass-string-pitch { color: var(--ink); }
+.bass-listening { min-height: 44px; gap: 7px; border-top: 1px solid var(--line); border-bottom: 0; font: 10px/1.4 'Courier New',monospace; }
+.bass-listening > button { color: var(--ink); }
+.bass-pitch-reading > span { font-size: 9px; }
+.bass-fingerboard { order: 3; margin-top: 15px; }
+.bass-fingerboard > label { font: 10px/1.4 'Courier New',monospace; letter-spacing: .015em; }
+.bass-fingerboard > input, .bass-recording-seek { -webkit-appearance: none; appearance: none; height: 44px; background: transparent; }
+:is(.bass-fingerboard > input,.bass-recording-seek)::-webkit-slider-runnable-track { height: 1px; background: var(--line); }
+:is(.bass-fingerboard > input,.bass-recording-seek)::-webkit-slider-thumb { -webkit-appearance: none; width: 9px; height: 9px; margin-top: -4px; border: 0; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 4px var(--paper); }
+:is(.bass-fingerboard > input,.bass-recording-seek)::-moz-range-track { height: 1px; background: var(--line); }
+:is(.bass-fingerboard > input,.bass-recording-seek)::-moz-range-thumb { width: 9px; height: 9px; border: 0; background: var(--ink); }
+.bass-landmarks { display: flex; justify-content: space-between; gap: 8px; margin-top: -7px; }
+.bass-landmarks > button { display: block; min-height: 44px; border: 0; padding: 4px 0; color: var(--muted); font: 10px/1.3 'Courier New',monospace; }
+.bass-landmarks > button > span:last-child { display: none; }
+.bass-landmarks > button[aria-pressed='true'] { text-decoration: underline; text-underline-offset: 5px; }
+.bass-help { order: 4; display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 12px; margin: 15px 0 0; font: 12px/1.5 Georgia,serif; }
+.bass-help > span { display: inline; margin: 0 0 0 auto; font: 9px/1.4 'Courier New',monospace; }
+.bass-library-status { order: 5; }
+.bass-solo-choice { font: 10px/1.5 'Courier New',monospace; }
+.bass-solo-choice > select { font: 12px/1.4 Georgia,serif; background: transparent; padding-block: 8px; border-color: var(--line); }
+.bass-recording-heading { padding: 15px 0 2px; }
+.bass-repertoire h3 { font: 400 36px/1.08 Georgia,serif; letter-spacing: -.035em; margin: 7px 0 8px; }
+.bass-solo-composer { margin: 10px 0 0; font: 10px/1.4 'Courier New',monospace; }
+.bass-solo-passage { font: 12px/1.5 Georgia,serif; }
+.bass-solo-play { padding: 8px 0; gap: 12px; border: 0; background: transparent; color: var(--ink); font: 16px/1.3 Georgia,serif; }
+.bass-solo-play > span { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 50%; font: 15px/1 Arial,sans-serif; }
+.bass-solo-play:is(:hover,:focus-visible) > span { border-color: var(--ink); }
+.bass-recording-study > figcaption, .bass-recording-performer { font: 10px/1.5 'Courier New',monospace; }
+.bass-recording-study { margin: 8px 0 20px; }
+.bass-recording-study > svg { max-height: 100px; }
+.bass-excerpt-source { margin-top: 10px; }
+
+.music-manuscript { background: transparent; border: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); padding: 16px 0 17px; }
+.music-manuscript-heading { font: 10px/1.4 'Courier New',monospace; }
+.music-manuscript-score { margin-top: 17px; }
+.music-measure-beats { margin-bottom: 2px; font: 9px/1.4 'Courier New',monospace; }
+.music-phrase-study > .about-phrase { margin-top: 17px; gap: 13px; }
+.music-phrase-study > .about-phrase > span { padding-bottom: 10px; font-size: 17px; }
+.about-objects[data-selected='score'] .about-note-buttons > button { justify-content: center; border: 0; min-height: 44px; font: 17px/1.4 Georgia,serif; }
+.about-objects[data-selected='score'] .about-note-buttons > button > .mono { font: 11px/1.4 'Courier New',monospace; }
+.about-objects[data-selected='score'] .about-play-actions { justify-content: space-between; margin-top: 9px; font: 13px/1.4 Georgia,serif; }
+.about-objects[data-selected='score'] .about-interaction-note { font: 10px/1.5 'Courier New',monospace; margin-top: 6px; }
+.about-objects[data-selected='score'] .about-primary-descent { padding: 17px 0 13px; border-top: 1px solid var(--line); }
+.about-objects[data-selected='score'] .about-primary-descent .about-descent-copy { font-size: 22px; gap: 7px; }
+.about-objects[data-selected='score'] .about-primary-descent .about-descent-copy > .mono { font: 10px/1.4 'Courier New',monospace; }
+
+/* One chess surface: display title, practical controls, and reported continuations. */
+.personal-site[data-section='about'][data-appearance] .about-objects[data-selected='knight'][data-board-mode='game'] { padding-top: 0; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-stage { padding-top: 12px; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading { width: 100%; gap: 36px; padding-bottom: 22px; }
+.personal-site[data-section='about'][data-appearance] .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading h1 { font: 500 46px/1.1 var(--type-display,Arial,sans-serif); letter-spacing: -.045em; }
+.personal-site[data-section='about'][data-appearance] .about-objects .about-board-mode { font: 13px/1.4 var(--type-interface,Arial,sans-serif); letter-spacing: 0; gap: 24px; margin: 0; }
+.about-objects[data-selected='knight'] .about-board-mode > button { min-height: 44px; padding: 10px 0; color: var(--muted); font: inherit; transition: color 160ms ease,border-color 160ms ease; }
+.about-objects[data-selected='knight'] .about-board-mode > button[aria-pressed='true'] { color: var(--ink); border-bottom-width: 2px; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-reveal-top button { display: grid; place-items: center; min-width: 44px; min-height: 44px; margin: -12px -12px 0 0; font: 26px/1 var(--type-interface,Arial,sans-serif); color: var(--muted); }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-reveal-top button:is(:hover,:focus-visible) { color: var(--ink); background: var(--soft); }
+.about-chess-game { --chess-surface-height: clamp(330px,calc(100svh - 350px),560px); --chess-ui: var(--type-interface,Arial,Helvetica,sans-serif); --chess-notation: ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace; width: 100%; }
+.chess-table { display: grid; grid-template-columns: minmax(0,1fr) minmax(300px,30%); gap: 0 44px; align-items: start; }
+.chess-board-column { grid-column: 1; grid-row: 1; display: grid; grid-template-columns: minmax(0,1fr); min-width: 0; align-items: start; }
+.chess-table-top { grid-column: 1; grid-row: 1; display: grid; min-width: 0; border-top: 1px solid var(--line); }
+.chess-table-heading { min-height: 48px; border: 0; }
+.chess-seat-pair { min-width: 0; }
+.chess-board-surface { grid-column: 1; grid-row: 2; }
+.chess-promotion-choices { grid-column: 1; grid-row: 3; }
+.chess-table-tools { grid-column: 1; grid-row: 4; }
+.chess-legal-moves { grid-column: 1; grid-row: 5; }
+.chess-sidebar { grid-column: 2; grid-row: 1; min-width: 0; padding-left: 24px; border-left: 1px solid var(--line); pointer-events: auto; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-canvas { left: var(--chess-board-left,0px); width: var(--chess-board-width,65%); transform: none; }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-status { left: calc(var(--chess-board-left,0px) + var(--chess-board-width,65%) / 2); }
+.personal-site[data-section='about'][data-appearance] .about-chess-game .chess-table-heading { font: 13px/1.4 var(--chess-ui); letter-spacing: 0; }
+.chess-view-switch { gap: 0; border: 1px solid var(--line); }
+.chess-view-switch > button { min-width: 62px; padding: 9px 11px; border: 0; color: var(--muted); transition: background-color 160ms ease,color 160ms ease; }
+.chess-view-switch > button[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+.chess-view-switch > button[aria-pressed='true']:is(:hover,:focus-visible) { color: var(--paper); }
+.chess-opponent { gap: 23px; }
+.chess-opponent > button { font-weight: 500; }
+.chess-opponent > button[aria-pressed='true'] { border-bottom-width: 2px; }
+.chess-seat-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 5px 0 8px; border-bottom: 1px solid var(--line); }
+.chess-seat-pair .chess-player { min-width: 0; min-height: 38px; flex-wrap: wrap; gap: 4px 9px; }
+.chess-seat-pair .chess-player:last-child { justify-content: end; }
+.chess-seat-pair .chess-player:last-child .chess-player-piece { order: 3; }
+.chess-seat-pair .chess-player-piece { width: 18px; height: 23px; }
+.chess-seat-pair .chess-player-name { font: 500 14px/1.3 var(--chess-ui); letter-spacing: 0; }
+.personal-site[data-section='about'][data-appearance] .about-chess-game .chess-player-state { margin-left: 0; font: 12px/1.4 var(--chess-ui); letter-spacing: 0; }
+.chess-seat-pair .chess-player[data-machine='true'] .chess-player-state { width: 6px; }
+.chess-seat-pair .chess-player[data-machine='true'] .chess-player-state::before { margin-right: 0; }
+.chess-seat-pair .chess-player[data-machine='true'] .chess-player-state > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.chess-seat-pair .chess-player-captures { max-width: 100%; flex-basis: 100%; }
+.chess-seat-pair .chess-player:last-child .chess-player-captures { justify-content: end; }
+.chess-seat-pair .chess-player-captures > svg { width: 13px; height: 16px; }
+.chess-table-tools { min-height: 58px; padding: 5px 0; border-top: 1px solid var(--line); gap: 16px; }
+.chess-board-feedback { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; padding: 0; }
+.chess-board-feedback > strong { font: 500 18px/1.25 var(--chess-notation); letter-spacing: -.03em; }
+.chess-board-feedback > span { color: var(--muted); font: 11px/1.4 var(--chess-notation); }
+.chess-table-tools > .chess-board-actions { gap: 4px; align-items: center; }
+.chess-table-tools .chess-board-actions > button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 9px; color: var(--ink); font: 500 13px/1.2 var(--chess-ui); transition: background-color 150ms ease,color 150ms ease; }
+.chess-table-tools .chess-board-actions > button > svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.chess-mobile-notice { display: none; }
+.chess-table-tools .chess-board-actions > button:is(:hover,:focus-visible):not(:disabled) { background: var(--soft); }
+.chess-table-tools .chess-board-actions > button:disabled { opacity: .4; cursor: default; }
+.chess-table-tools .chess-board-actions > .chess-new-game { background: transparent; color: var(--ink); border: 1px solid var(--line); margin-left: 12px; padding: 9px 15px; font: 500 13px/1.2 var(--chess-ui); }
+.chess-table-tools .chess-board-actions > .chess-new-game:is(:hover,:focus-visible):not(:disabled) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chess-legal-moves { font-family: var(--chess-ui); }
+.chess-legal-moves .about-move-buttons > button { font-family: var(--chess-notation); }
+.chess-game-panel { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 24px; margin-top: 20px; border-top: 1px solid var(--line); }
+.chess-game-panel > details { display: block; border: 0; }
+.personal-site[data-section='about'][data-appearance] .about-chess-game .chess-game-panel > details > summary { min-width: 0; min-height: 46px; width: auto; padding-right: 5px; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); font: 500 13px/1.4 var(--chess-ui); letter-spacing: 0; color: var(--ink); }
+.chess-game-panel > details > summary:hover { background: color-mix(in srgb,var(--ink) 3%,transparent); }
+.chess-game-panel > details > summary span[aria-hidden] { display: grid; place-items: center; width: 16px; height: 16px; flex: none; margin-left: 0; font: 16px/1 var(--chess-ui); color: var(--muted); }
+.chess-disclosure-meta { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); }
+.chess-game-panel > details[open] { grid-column: 1 / -1; }
+.chess-game-panel > details[open] > :not(summary) { min-width: 0; }
+.chess-game-panel > details[open] > summary { border-bottom-color: var(--ink); }
+.chess-game-panel .chess-search { border: 0; margin-top: 15px; }
+.chess-game-panel > details > p { margin: 10px 0 14px; font: 13px/1.65 var(--chess-ui); }
+.chess-engine-settings { padding-top: 12px; font-family: var(--chess-ui); }
+.chess-engine-credit { padding-top: 12px; font: 11px/1.5 var(--chess-ui); }
+.chess-record { padding-top: 10px; }
+.chess-record-title { font: 12px/1.5 var(--chess-ui); }
+.chess-ledger-heading { font: 11px/1.5 var(--chess-ui); }
+.chess-record .about-chess-history > li { font-family: var(--chess-notation); }
+.chess-thinking { border: 0; padding: 6px 0 0; font-family: var(--chess-ui); }
+.personal-site[data-section='about'][data-appearance] .chess-thinking-heading h3 { font: 600 17px/1.3 var(--type-display,Arial,sans-serif); letter-spacing: -.035em; }
+.chess-thinking-heading { min-height: 44px; align-items: center; }
+.chess-thinking-controls { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.chess-thinking-heading .chess-thinking-controls > .chess-thinking-status { margin: 0; font: 12px/1.4 var(--chess-ui); }
+.chess-play-now { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 9px 10px; border: 1px solid var(--line); color: var(--ink); background: transparent; font: 500 12px/1.2 var(--chess-ui); white-space: nowrap; transition: border-color 150ms ease,background-color 150ms ease; }
+.chess-play-now > svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; transition: transform 150ms ease; }
+.chess-play-now:is(:hover,:focus-visible):not(:disabled) { border-color: var(--thinking-accent); background: color-mix(in srgb,var(--thinking-accent) 7%,transparent); }
+.chess-play-now:is(:hover,:focus-visible):not(:disabled) > svg { transform: translateX(2px); }
+.chess-play-now:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.chess-play-now:disabled { opacity: .45; cursor: default; }
+.chess-thinking-status { min-width: 48px; font: 12px/1.4 var(--chess-ui); letter-spacing: 0; text-align: right; }
+.chess-thinking[data-state='searching'] .chess-thinking-status::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--thinking-accent); margin-right: 7px; }
+.chess-thinking-diagram { margin: 18px 0 0; }
+.chess-thinking-instruction { max-width: 27ch; margin: 0; color: var(--ink); }
+.chess-thinking-instruction > strong { display: block; font: 500 28px/1.2 var(--type-display,Arial,sans-serif); letter-spacing: -.04em; }
+.chess-thinking-instruction > span { display: block; margin-top: 10px; color: var(--muted); font: 14px/1.65 var(--chess-ui); }
+.chess-thinking-empty { min-height: 146px; align-items: start; align-content: center; padding-top: 8px; flex-wrap: wrap; font: 13px/1.55 var(--chess-ui); }
+.chess-thinking[data-state='loading'] .chess-thinking-empty > span:first-child { flex-basis: 100%; color: var(--ink); }
+.chess-thinking-download { flex-basis: 75%; margin-block: 8px; height: 2px; }
+.chess-thinking-download > span { height: 2px; transition: width 180ms ease-out; }
+.chess-thinking-percent { font: 11px/1.5 var(--chess-notation); }
+.chess-thinking-footer { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: start; margin-top: 12px; gap: 12px 20px; padding: 0; border: 0; font: 12px/1.4 var(--chess-ui); }
+.chess-thinking-move, .chess-thinking-score { display: flex; flex-direction: column; align-items: start; gap: 6px; }
+.chess-thinking-score { align-items: end; }
+.chess-thinking-move > strong { font: 550 36px/1.12 var(--type-display,Arial,sans-serif); letter-spacing: -.045em; }
+.chess-thinking-score > strong { font: 500 26px/1.55 var(--chess-notation); letter-spacing: -.06em; white-space: nowrap; }
+.chess-thinking-statistics { grid-column: 1 / -1; display: flex; flex-wrap: nowrap; justify-content: space-between; gap: 16px; padding-top: 0; font: 11px/1.4 var(--chess-ui); color: var(--muted); }
+.chess-thinking-statistics b { font-family: var(--chess-notation); }
+.chess-thinking-time { margin-left: auto; white-space: nowrap; font-family: var(--chess-notation); }
+.chess-iterations { grid-column: 1 / -1; margin: -2px 0 0; }
+.chess-iterations > svg { display: block; width: 100%; height: 38px; overflow: visible; }
+.chess-iterations-zero { fill: none; stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.chess-iterations-line { fill: none; stroke: var(--thinking-accent); stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+.chess-iterations-point { fill: var(--thinking-accent); }
+.chess-iterations-baseline { font: 16px var(--chess-notation); fill: var(--muted); }
+.chess-iterations-unscored { stroke: var(--muted); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.chess-iterations-report { fill: var(--thinking-accent); opacity: 0; }
+.chess-thinking[data-motion='true'] .chess-iterations-report { animation: chess-iteration-arrival 500ms ease-out 1; }
+.chess-thinking[data-motion='true'] .chess-thinking-move > strong { animation: chess-candidate-arrival 200ms ease-out 1; }
+.chess-iterations > figcaption { display: flex; justify-content: space-between; margin-top: -1px; font: 11px/1.5 var(--chess-notation); color: var(--muted); }
+@keyframes chess-iteration-arrival { from { opacity: .6; transform: scale(1.6); transform-origin: center; transform-box: fill-box; } to { opacity: 0; transform: scale(1); transform-origin: center; transform-box: fill-box; } }
+@keyframes chess-candidate-arrival { from { opacity: .3; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+.chess-table .chess-worlds-heading { display: none; }
+.chess-worlds { font-family: var(--chess-ui); }
+.chess-world[data-primary='true'] { grid-template-columns: 148px minmax(0,1fr); gap: 12px; padding: 10px; border: 1px solid var(--line); border-top-color: color-mix(in srgb,var(--ink) 46%,var(--paper)); background: color-mix(in srgb,var(--ink) 2%,transparent); }
+.chess-world[data-primary='true'] .chess-world-board { width: 148px; border-color: var(--line); }
+.chess-worlds-track { gap: 16px; }
+.chess-worlds-previous { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px 18px; }
+.chess-worlds-prior-heading { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; color: var(--muted); font: 11px/1.5 var(--chess-ui); }
+.chess-worlds-prior-heading::after { content: ''; height: 1px; background: var(--line); flex: 1; }
+.chess-worlds-previous .chess-world-board { width: 88px; }
+.chess-worlds-previous .chess-world-caption > span:first-child { display: none; }
+.chess-worlds-previous .chess-world-caption { justify-content: start; max-width: 88px; }
+.chess-world-caption, .chess-world[data-primary='true'] .chess-world-caption { font: 500 12px/1.4 var(--chess-ui); letter-spacing: 0; gap: 8px; }
+.chess-world:not([data-current='true']) .chess-world-board { opacity: .9; }
+[data-appearance='dark'] .chess-world:not([data-current='true']) .chess-world-board { opacity: .85; }
+.chess-world-depth { font: 11px/1.5 var(--chess-notation); font-weight: 400; color: var(--muted); }
+.chess-world[data-primary='true'] .chess-world-caption { padding-bottom: 8px; font-size: 11px; }
+.chess-world[data-primary='true'] .chess-world-line { display: flex; flex-wrap: wrap; align-content: start; gap: 7px 8px; margin-top: 10px; font: 12px/1.7 var(--chess-notation); letter-spacing: -.015em; }
+.chess-world[data-primary='true'] .chess-world-ply:first-child > b { font-weight: 650; }
+.chess-world:not([data-primary='true']) .chess-world-line { display: none; }
+.chess-world-ply { position: relative; display: inline-flex; gap: 5px; white-space: nowrap; }
+.chess-world-ply > b { font-weight: 500; }
+.chess-world-number, .chess-world-continuation { color: var(--muted); }
+.chess-world-ply::after { content: ''; position: absolute; height: 1px; bottom: 1px; left: 0; right: 0; background: var(--ink); opacity: 0; }
+.chess-world[data-play='true'] .chess-world-ply::after { animation: var(--world-highlight) var(--world-duration) steps(1,end) 1 both; }
+.chess-world-board { display: block; min-height: 0; min-width: 0; padding: 0; border-radius: 0; background: transparent; color: inherit; cursor: pointer; touch-action: manipulation; transition: border-color 150ms ease,box-shadow 150ms ease; }
+.chess-world-board:is(:hover,:focus-visible):not(:disabled), .chess-world[data-replaying='true'] .chess-world-board { border-color: var(--thinking-accent); box-shadow: 0 0 0 1px var(--thinking-accent); }
+.chess-world-board:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.chess-world-board:disabled { cursor: default; opacity: 1; }
+.chess-world-depth::after { content: ' ↻'; color: var(--thinking-accent); font-size: 12px; }
+.chess-world:has(.chess-world-board:disabled) .chess-world-depth::after { display: none; }
+.chess-reported-lines { --thinking-ink: var(--ink); --thinking-muted: var(--muted); --thinking-paper: var(--paper); --thinking-prior: var(--muted); --thinking-route: color-mix(in srgb,var(--ink) 48%,var(--paper)); --thinking-accent: #7e6841; container: chess-thinking / inline-size; margin: 16px 0 20px; min-width: 0; padding-inline: 8px; }
+[data-appearance='dark'] .chess-reported-lines { --thinking-accent: #c8b688; }
+.chess-reported-lines > figcaption { font: 12px/1.5 var(--chess-ui); color: var(--muted); margin-bottom: 12px; }
+.chess-sidebar .chess-search-body { grid-template-columns: 70px minmax(0,1fr); gap: 16px; }
+.chess-sidebar .chess-search-chart { grid-column: 1 / -1; }
+.chess-sidebar .chess-search-chart > svg { height: 60px; }
+.chess-sidebar .chess-search-stats { flex-wrap: wrap; gap: 12px; }
+.chess-sidebar .chess-search-line > p { -webkit-line-clamp: unset; font-family: var(--chess-notation); }
+.chess-sidebar .chess-search-heading, .chess-sidebar .chess-search-stats { font-family: var(--chess-ui); }
+.chess-sidebar .chess-search-evaluation > strong { font-family: var(--chess-notation); }
+.chess-sidebar .chess-thinking-san { font-family: var(--chess-notation); }
+.chess-sidebar .chess-thinking-column, .chess-sidebar .chess-thinking-report-depth { font-family: var(--chess-ui); }
+.chess-sidebar .search-ribbon-main { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px 18px; }
+.chess-sidebar .search-ribbon-stats { grid-column: 1 / -1; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.chess-sidebar .search-ribbon-stats > div { display: block; }
+.chess-sidebar .search-ribbon-stats dd { margin-top: 7px; font: 13px/1.4 var(--chess-notation); letter-spacing: 0; }
+.chess-sidebar .search-ribbon-move strong, .chess-sidebar .search-ribbon-evaluation strong { font: 500 23px/1.2 var(--chess-notation); letter-spacing: -.045em; }
+.chess-sidebar .search-ribbon-move { margin-top: 8px; min-height: 40px; }
+.chess-sidebar .search-ribbon-coordinates { font: 11px/1.4 var(--chess-notation); }
+.chess-sidebar .search-ribbon-line { display: block; }
+.chess-sidebar .search-ribbon-pv { margin-top: 7px; font: 12px/1.6 var(--chess-notation); gap: 6px 12px; }
+.personal-site[data-section='about'][data-appearance] .chess-sidebar :is(.search-ribbon-heading,.search-ribbon-label,.search-ribbon-stats dt,.search-ribbon-plot figcaption,.search-ribbon-bound) { font: 12px/1.5 var(--chess-ui); letter-spacing: 0; text-transform: none; }
+.chess-sidebar :is(.search-ribbon-engine,.search-ribbon-status) { font-size: 12px; letter-spacing: 0; text-transform: none; }
+
+@media (min-width: 901px) and (max-height: 800px) {
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-stage { padding-top: 6px; }
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading { padding-bottom: 8px; }
+  .personal-site[data-section='about'][data-appearance] .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading h1 { font-size: 40px; }
+  .chess-world[data-primary='true'] { grid-template-columns: 128px minmax(0,1fr); gap: 12px; }
+  .chess-world[data-primary='true'] .chess-world-board { width: 128px; }
+  .chess-worlds-previous .chess-world-board { width: 76px; }
+  .chess-worlds-track { gap: 8px; }
+  .chess-thinking-diagram { margin-top: 8px; }
+  .chess-thinking-footer { margin-top: 6px; gap: 8px 20px; }
+  .chess-thinking-move > strong { font-size: 30px; }
+  .chess-iterations > svg { height: 24px; }
+  .chess-worlds-previous .chess-world-board { width: 62px; }
+  .chess-world[data-primary='true'] { padding: 8px; }
+  .chess-game-panel { margin-top: 10px; }
+  .personal-site[data-section='about'][data-appearance] .about-chess-game .chess-game-panel > details > summary { min-height: 44px; }
+}
+@media (max-width: 1100px) and (min-width: 901px) {
+  .chess-table { column-gap: 30px; grid-template-columns: minmax(0,1fr) minmax(280px,30%); }
+  .chess-world[data-primary='true'] { grid-template-columns: 118px minmax(0,1fr); gap: 10px; padding: 8px; }
+  .chess-world[data-primary='true'] .chess-world-board { width: 118px; }
+  .chess-world[data-primary='true'] .chess-world-line { gap: 4px 8px; font-size: 11px; }
+  .chess-world-caption, .chess-world[data-primary='true'] .chess-world-caption { font-size: 11px; }
+  .chess-board-feedback { gap: 3px 8px; }
+  .chess-table-tools .chess-board-actions > button { padding-inline: 7px; gap: 4px; }
+  .chess-table-tools .chess-board-actions > .chess-new-game { margin-left: 5px; padding-inline: 10px; }
+}
+@media (max-width: 900px) {
+  .personal-site[data-section='about'][data-appearance] .about-objects[data-selected='knight'][data-board-mode='game'] { padding-top: 0; }
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-object-stage { padding-top: 0; }
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading { width: min(100%,540px); display: flex; gap: 24px; padding-bottom: 8px; }
+  .personal-site[data-section='about'][data-appearance] .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading h1 { font-size: 36px; }
+  .personal-site[data-section='about'][data-appearance] .about-objects .about-board-mode { font-size: 13px; gap: 18px; }
+  .about-chess-game { --chess-surface-height: max(220px,min(calc(100vw - 40px),calc(100svh - 410px),420px)); width: min(100%,540px); }
+  .chess-table { grid-template-columns: minmax(0,1fr); }
+  .chess-sidebar, .chess-board-column { display: contents; }
+  .chess-sidebar > .chess-thinking { grid-column: 1; grid-row: 2; height: 174px; margin: 8px 0; padding: 9px 0 0; overflow: hidden; border-top: 1px solid var(--line); }
+  .chess-sidebar > .chess-game-panel { grid-column: 1; grid-row: 6; margin-top: 12px; }
+  .chess-board-surface { grid-row: 3; }
+  .chess-promotion-choices { grid-row: 4; }
+  .chess-table-tools { grid-row: 5; min-height: 50px; padding: 3px 0; }
+  .chess-legal-moves { grid-row: 7; }
+  .chess-table-top { border-top: 0; }
+  .chess-table-heading { min-height: 46px; }
+  .chess-view-switch > button { min-width: 44px; padding: 8px 10px; }
+  .chess-opponent { gap: 18px; }
+  .chess-seat-pair { gap: 10px; padding: 0 0 5px; }
+  .chess-seat-pair .chess-player-name { font-size: 13px; }
+  .chess-seat-pair .chess-player { gap: 4px 6px; }
+  .chess-seat-pair .chess-player-state { min-height: 16px; font-size: 11px; }
+  .chess-sidebar .chess-thinking-heading { min-height: 44px; }
+  .personal-site[data-section='about'][data-appearance] .chess-thinking-heading h3 { font-size: 14px; }
+  .chess-thinking-status { font-size: 11px; }
+  .chess-thinking-heading .chess-thinking-controls > .chess-thinking-status { font-size: 11px; }
+  .chess-thinking-controls { gap: 8px; }
+  .chess-play-now { font-size: 11px; padding-inline: 9px; gap: 6px; }
+  .chess-thinking-diagram { margin-top: 2px; }
+  .chess-thinking-empty { min-height: 90px; padding-top: 3px; }
+  .chess-thinking-instruction { max-width: none; }
+  .chess-thinking-instruction > strong { font-size: 22px; }
+  .chess-thinking-instruction > span { margin-top: 6px; font-size: 13px; }
+  .chess-worlds-track { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+  .chess-world[data-primary='true'] { display: block; grid-column: auto; padding: 0; border: 0; background: transparent; }
+  .chess-worlds-previous { display: contents; }
+  .chess-worlds-prior-heading { display: none; }
+  .chess-worlds-previous .chess-world-caption > span:first-child { display: inline; }
+  .chess-worlds-previous .chess-world-caption { justify-content: space-between; }
+  .chess-worlds-previous .chess-world-board { width: min(100%,65px); }
+  .chess-world[data-primary='true'] .chess-world-board { width: min(100%,78px); border-color: var(--ink); }
+  .chess-world[data-primary='true'] .chess-world-caption { font-weight: 600; }
+  .chess-worlds-previous .chess-world-caption { font-weight: 400; }
+  .chess-world-board { width: min(100%,65px); }
+  .chess-world-caption, .chess-world[data-primary='true'] .chess-world-caption { max-width: none; margin-top: 4px; padding: 0; border: 0; font-size: 11px; gap: 4px; }
+  .chess-world-depth { font-size: 10px; }
+  .chess-world-caption > span:first-child { white-space: nowrap; }
+  .chess-world-line-word { display: none; }
+  .chess-sidebar .chess-world .chess-world-line, .chess-sidebar .chess-world[data-primary='true'] .chess-world-line { display: none; }
+  .chess-thinking-footer { display: flex; align-items: baseline; justify-content: space-between; margin-top: 0; padding: 0; font-size: 11px; flex-wrap: nowrap; gap: 9px; }
+  .chess-iterations { display: none; }
+  .chess-thinking-move, .chess-thinking-score { display: inline-flex; flex-direction: row; align-items: baseline; gap: 5px; }
+  .chess-thinking-move > strong, .chess-thinking-score > strong { font-size: 15px; letter-spacing: -.055em; }
+  .chess-thinking-score > strong { line-height: 1.2; }
+  .chess-thinking[data-state='searching'] .chess-thinking-move > span, .chess-evaluation-label-prefix { display: none; }
+  .chess-thinking-statistics { display: flex; grid-column: auto; flex-basis: auto; gap: 9px; font-size: 10px; padding: 0; }
+  .chess-thinking-statistics > span:nth-child(2), .chess-thinking-statistics[data-has-time='true'] > span:first-child { display: none; }
+  .chess-thinking-time { display: inline-flex; margin-left: 0; font-size: 10px; }
+  .chess-board-feedback { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .chess-table-tools > .chess-board-actions { width: 100%; justify-content: start; gap: 8px; }
+  .chess-table-tools .chess-board-actions > button { padding-inline: 7px; }
+  .chess-table-tools .chess-board-actions > .chess-new-game { margin-left: auto; padding-inline: 12px; }
+  .chess-table-tools[data-notice='true'] { gap: 10px; }
+  .chess-table-tools[data-notice='true'] .chess-board-feedback { position: static; flex: 1; min-width: 0; width: auto; height: auto; clip-path: none; overflow: visible; padding: 0; }
+  .chess-table-tools[data-notice='true'] .chess-board-feedback > :not(.chess-mobile-notice) { display: none; }
+  .chess-table-tools[data-notice='true'] .chess-mobile-notice { display: block; font: 500 11px/1.3 var(--chess-ui); color: var(--ink); }
+  .chess-table-tools[data-notice='true'] .chess-board-actions { width: auto; flex: none; gap: 0; }
+  .chess-table-tools[data-notice='true'] .chess-board-actions > button { width: 44px; min-width: 44px; padding: 9px; }
+  .chess-table-tools[data-notice='true'] .chess-board-actions > button > span { display: none; }
+  .chess-table-tools[data-notice='true'] .chess-board-actions > .chess-new-game { width: auto; margin-left: 4px; }
+  .chess-table-tools[data-notice='true'] .chess-board-actions > .chess-new-game > span { display: inline; }
+  .chess-game-panel { gap: 0 24px; }
+}
+@media (max-width: 360px) {
+  .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading { gap: 20px; }
+  .personal-site[data-section='about'][data-appearance] .about-objects[data-selected='knight'][data-board-mode='game'] .about-interest-heading h1 { font-size: 32px; }
+  .personal-site[data-section='about'][data-appearance] .about-objects .about-board-mode { gap: 14px; font-size: 12px; }
+  .chess-table-heading { font-size: 12px; }
+  .chess-opponent { gap: 13px; }
+  .chess-seat-pair .chess-player-name { font-size: 12px; }
+  .chess-world-caption > span:first-child { font-size: 11px; }
+  .chess-table-tools > .chess-board-actions { gap: 3px; }
+  .chess-table-tools .chess-board-actions > button { padding-inline: 5px; gap: 4px; font-size: 11px; }
+  .chess-table-tools .chess-board-actions > .chess-new-game { padding-inline: 9px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chess-thinking-download > span, .chess-view-switch > button, .chess-board-actions > button, .chess-play-now, .chess-play-now > svg, .chess-world-board, .about-objects[data-selected='knight'] .about-board-mode > button { transition: none; }
+  .chess-world-ply::after, .chess-iterations-report, .chess-thinking-move > strong { animation: none !important; }
+}
+
+@media (max-width: 900px) {
+  .about-objects:is([data-selected='bass'],[data-selected='score']) .about-interest-heading h1 { font-size: 46px; margin-bottom: 24px; }
+  .bass-strings > button { min-height: 255px; }
+  .bass-string-study { height: 174px; }
+  .bass-bridge-study { height: 194px; }
+}
+@media (max-width: 360px) {
+  .about-objects:is([data-selected='bass'],[data-selected='score']) .about-interest-heading h1 { font-size: 42px; }
+  .bass-strings > button { min-height: 235px; padding-inline: 1px; }
+  .bass-string-study { height: 159px; }
+  .bass-bridge-study { height: 180px; }
+  .bass-string-pitch { font-size: 27px; }
+  .bass-techniques { gap: 18px; }
+  .bass-help { gap: 5px 12px; }
+  .bass-repertoire h3 { font-size: 32px; }
+}

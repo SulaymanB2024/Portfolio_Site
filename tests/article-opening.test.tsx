@@ -245,5 +245,7 @@ test('every study is attached to a real section and appears in the initial docum
     }
     studies += placed.length
   }
-  assert.equal(studies, 12)
+  // Main restored five manuscripts with their own studies alongside the twelve
+  // already published when this presentation suite was introduced.
+  assert.equal(studies, 17)
 })

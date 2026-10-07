@@ -6,10 +6,16 @@ export const originalFields = (article, keys) => Object.fromEntries(keys.map(key
 
 // Editorial revisions may change prose and move a figure. Freeze the underlying
 // evidence independently: identity, research scope, sources, data, and downloads.
-export function protectedArticleEvidence(article, keys) {
+export function protectedArticleEvidence(article, keys, exceptions = []) {
   article = originalCodeLabels(article)
   const prose = new Set(['subtitle', 'seoTitle', 'seoDescription', 'description', 'excerpt', 'dateModified', 'thesis', 'conclusion', 'content', 'sections', 'readTime', 'wordCount'])
   const identity = Object.fromEntries(keys.filter(key => !prose.has(key)).map(key => [key, article[key]]))
+  for (const exception of exceptions.filter(item => item.slug === article.slug && item.removedResource)) {
+    const resources = identity.resources || []
+    const index = resources.findIndex(resource => JSON.stringify(resource) === JSON.stringify(exception.removedResource))
+    if (index < 0) throw new Error(`Declared removed resource does not match the original: ${article.slug}`)
+    identity.resources = resources.filter((_, resourceIndex) => resourceIndex !== index)
+  }
   const sections = (article.sections || []).map(section => {
     const { title, paragraphs, figures, figuresPosition, ...evidence } = section
     return evidence

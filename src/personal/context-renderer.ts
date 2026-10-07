@@ -24,12 +24,16 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
   const themeRoot = canvas.closest('[data-appearance]') ?? document.documentElement
   const palette = () => readPrintPalette(canvas, themeRoot.getAttribute('data-appearance') === 'dark')
   const shader = new THREE.ShaderMaterial({ transparent: true, depthTest: false, depthWrite: false, toneMapped: false,
-    uniforms: { image: { value: target.texture }, ink: { value: palette().ink }, cssSize: { value: new THREE.Vector2(1, 1) }, reveal: { value: 1 } },
+    uniforms: { image: { value: target.texture }, ink: { value: palette().ink }, cssSize: { value: new THREE.Vector2(1, 1) }, reveal: { value: 1 }, motionSeconds: { value: 0 } },
     vertexShader: 'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
-    fragmentShader: `uniform sampler2D image;uniform vec3 ink;uniform vec2 cssSize;uniform float reveal;varying vec2 vUv;
+    fragmentShader: `uniform sampler2D image;uniform vec3 ink;uniform vec2 cssSize;uniform float reveal;uniform float motionSeconds;varying vec2 vUv;
       ${PORTFOLIO_DITHER_GLSL}
       void main(){vec4 s=texture2D(image,vUv);if(s.a<.0001){gl_FragColor=vec4(0.);return;}
-      float tone=portfolioDisplayLuminance(portfolioStraightColor(s));float printTone=mix(1.,tone,reveal);float a=s.a*(1.-step(portfolioBayer8(floor(vUv*cssSize)),printTone));gl_FragColor=vec4(ink,a);
+      float tone=portfolioDisplayLuminance(portfolioStraightColor(s));float printTone=mix(1.,tone,reveal);
+      vec2 pixel=floor(vUv*cssSize);
+      float marks=1.-portfolioDitherMark(printTone,portfolioBayer8(pixel),pixel,motionSeconds,.025);
+      // Fine moving grain sits over continuous carving, preserving strings and highlights.
+      float coverage=mix(marks,1.-printTone,.58);gl_FragColor=vec4(ink,s.a*coverage);
       #include <colorspace_fragment>
       }`,
   })
@@ -45,7 +49,7 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
   let backingWidth = 0, backingHeight = 0, backingRatio = 0
   let menuOpen = false
   let drag: { id: number; x: number; y: number; previousX: number; previousY: number; intent: 'pending' | 'horizontal' | 'vertical' } | null = null
-  canvas.dataset.assets = 'glb'; canvas.dataset.state = 'loading'
+  canvas.dataset.assets = 'glb'; canvas.dataset.state = 'loading'; canvas.dataset.interacting = 'false'
   const active = () => !disposed && visible && !lost && !document.hidden && !menuOpen
   function cancel() { cancelAnimationFrame(raf); clearTimeout(timer); raf = timer = 0; runtime.suspend(); canvas.dataset.liveMotion = 'false' }
   function schedule(now = performance.now()) {
@@ -74,7 +78,7 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
     // Fit each sculpture's proportions instead of shrinking a tall bass to a cube on phones.
     const fit = size ? Math.max(size.y / 2.8, Math.hypot(size.x, size.z) / (2.8 * camera.aspect)) : Math.max(1, 1 / camera.aspect)
     camera.position.set(0, 0, 5.4 * fit); camera.updateProjectionMatrix()
-    shader.uniforms.cssSize.value.set(width, height); canvas.dataset.renderPixels = String(renderer.domElement.width * renderer.domElement.height)
+    shader.uniforms.cssSize.value.set(renderer.domElement.width, renderer.domElement.height); canvas.dataset.renderPixels = String(renderer.domElement.width * renderer.domElement.height)
     wake()
   }
   function load(id: InterestId) {
@@ -100,6 +104,7 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
     const live = playing && !media.matches && transition.shown !== null
     if (runtime.advance(now, live, !!drag || transition.phase !== 'hold')) measure()
     const dt = runtime.delta || 1 / 30, time = runtime.seconds
+    shader.uniforms.motionSeconds.value = time
     const previous = transition.shown
     transition = advanceContextTransition(transition, dt, media.matches)
     if (previous !== transition.shown) measure()
@@ -115,6 +120,7 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
     const current = transition.shown ? specimens.get(transition.shown) : null
     canvas.dataset.frames = String(++frames); canvas.dataset.yaw = String(current?.yaw ?? 0); canvas.dataset.pitch = String(current?.pitch ?? 0)
     canvas.dataset.liveMotion = String(live); canvas.dataset.selection = selected
+    canvas.dataset.grainSeconds = String(time)
     canvas.dataset.transitionPhase = transition.phase; canvas.dataset.inkReveal = String(transition.reveal)
     canvas.dataset.shownSelection = transition.shown ?? ''; canvas.dataset.visibleModels = String([...specimens.values()].filter(item => item.group.visible).length)
     if (transition.shown) canvas.dataset.modelAsset = portfolioAssetUrl('about-' + transition.shown)
@@ -130,18 +136,18 @@ export function mountContextObject(canvas: HTMLCanvasElement, status: (value: 'l
   media.addEventListener('change', () => { cancel(); wake() }, { signal: abort.signal })
   canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); lost = true; cancel(); canvas.dataset.state = 'context-lost'; status('error') }, { signal: abort.signal })
   canvas.addEventListener('webglcontextrestored', () => { lost = false; canvas.dataset.state = 'loading'; wake() }, { signal: abort.signal })
-  controls.addEventListener('pointerdown', event => { if (event.isPrimary && event.button === 0) { activation.start(event.pointerId, event.clientX, event.clientY, event.pointerType); drag = { id: event.pointerId, x: event.clientX, y: event.clientY, previousX: event.clientX, previousY: event.clientY, intent: 'pending' } } }, { signal: abort.signal })
+  controls.addEventListener('pointerdown', event => { if (event.isPrimary && event.button === 0) { activation.start(event.pointerId, event.clientX, event.clientY, event.pointerType); drag = event.target === canvas ? { id: event.pointerId, x: event.clientX, y: event.clientY, previousX: event.clientX, previousY: event.clientY, intent: 'pending' } : null } }, { signal: abort.signal })
   controls.addEventListener('pointermove', event => {
-    if (!drag || drag.id !== event.pointerId) return
     activation.move(event.pointerId, event.clientX, event.clientY)
+    if (!drag || drag.id !== event.pointerId) return
     const current = transition.shown ? specimens.get(transition.shown) : null
     if (!current || transition.phase !== 'hold') return
     const dx = event.clientX - drag.x, dy = event.clientY - drag.y
     if (drag.intent === 'pending' && Math.hypot(dx, dy) > 7) drag.intent = event.pointerType !== 'touch' || Math.abs(dx) > Math.abs(dy) * 1.2 ? 'horizontal' : 'vertical'
-    if (drag.intent === 'horizontal') { canvas.setPointerCapture(event.pointerId); current.yaw = THREE.MathUtils.clamp(current.yaw + (event.clientX - drag.previousX) * .005, -.8, .8); current.pitch = THREE.MathUtils.clamp(current.pitch + (event.clientY - drag.previousY) * .003, -.15, .15); wake() }
+    if (drag.intent === 'horizontal') { if (canvas.dataset.interacting !== 'true') canvas.dataset.interacting = 'true'; canvas.setPointerCapture(event.pointerId); current.yaw = THREE.MathUtils.clamp(current.yaw + (event.clientX - drag.previousX) * .005, -.8, .8); current.pitch = THREE.MathUtils.clamp(current.pitch + (event.clientY - drag.previousY) * .003, -.15, .15); wake() }
     drag.previousX = event.clientX; drag.previousY = event.clientY
   }, { signal: abort.signal })
-  const release = (event: PointerEvent) => { if (drag?.id !== event.pointerId) return; if (event.type === 'pointerup') activation.end(event.pointerId, drag.intent === 'horizontal'); else activation.interrupt(); drag = null; if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId); wake() }
+  const release = (event: PointerEvent) => { if (drag?.id !== event.pointerId) { if (event.type === 'pointerup') activation.end(event.pointerId, false); return } if (event.type === 'pointerup') activation.end(event.pointerId, drag.intent === 'horizontal'); else activation.interrupt(); drag = null; canvas.dataset.interacting = 'false'; if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId); wake() }
   controls.addEventListener('pointerup', release, { signal: abort.signal }); controls.addEventListener('pointercancel', release, { signal: abort.signal }); controls.addEventListener('lostpointercapture', release, { signal: abort.signal })
   controls.addEventListener('click', event => { if (event.detail > 0 && activation.blocked) event.preventDefault() }, { signal: abort.signal })
   controls.addEventListener('keydown', event => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home'].includes(event.key)) { event.preventDefault(); const current = transition.shown ? specimens.get(transition.shown) : null; if (!current || transition.phase !== 'hold') return; if (event.key === 'Home') current.yaw = current.pitch = 0; else { current.yaw = THREE.MathUtils.clamp(current.yaw + (event.key === 'ArrowLeft' ? -.1 : event.key === 'ArrowRight' ? .1 : 0), -.8, .8); current.pitch = THREE.MathUtils.clamp(current.pitch + (event.key === 'ArrowUp' ? -.04 : event.key === 'ArrowDown' ? .04 : 0), -.15, .15) } wake() } }, { signal: abort.signal })

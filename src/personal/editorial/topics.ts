@@ -139,3 +139,9 @@ export function topicQuestions(topic: ReadingTopic, articles: ArticleSummary[] =
     return { ...question, article }
   })
 }
+
+export function nextTopicReading(topic: ReadingTopic, slug: string) {
+  const index = topic.readings.findIndex(reading => reading.slug === slug)
+  if (index < 0 || index === topic.readings.length - 1) return undefined
+  return { ...topicReadings(topic)[index + 1], position: index + 2, total: topic.readings.length }
+}

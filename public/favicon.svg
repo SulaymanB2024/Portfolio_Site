@@ -1,11 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="favicon-title">
-  <title id="favicon-title">Sulayman Bowles armillary mark</title>
-  <rect width="64" height="64" rx="8" fill="#080807"/>
-  <g fill="none" stroke="#f1efe8" stroke-width="2.8" stroke-linecap="round">
-    <circle cx="32" cy="32" r="20.5"/>
-    <ellipse cx="32" cy="32" rx="20.5" ry="7.5" transform="rotate(-13 32 32)"/>
-    <ellipse cx="32" cy="32" rx="7.5" ry="20.5" transform="rotate(28 32 32)"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" style="color:#24241f" role="img" aria-labelledby="favicon-title">
+  <title id="favicon-title">Sulayman Bowles</title>
+  <style>
+    @media (prefers-color-scheme:dark) {
+      svg { color:#efefe8 !important; }
+      .paper { fill:#111210; }
+    }
+  </style>
+  <rect class="paper" width="96" height="96" rx="18" fill="#eeeadd" />
+  <g transform="translate(3 9)" fill="none">
+    <path d="M34 17C26 9 10 14 10 25C10 35 32 35 32 48C32 62 14 67 5 55M34 17V27M5 55V45" stroke="currentColor" stroke-width="2.7" />
+    <path d="M14 18C8 27 22 30 28 33C36 38 37 49 32 56C30 42 16 41 9 35C4 29 7 22 14 18Z" fill="currentColor" />
+    <path d="M44 14H59C74 14 80 21 78 29C77 35 71 38 63 39C75 39 85 45 83 54C81 65 70 65 59 65H41M48 14V65M40 14H55M41 65H57" stroke="currentColor" stroke-width="2.3" />
+    <path d="M47 14H53V65H47ZM64 15C79 18 75 34 63 38C70 34 74 23 64 15ZM65 40C81 42 83 59 67 63C77 57 76 46 65 40Z" fill="currentColor" />
+    <path d="M26 66C36 71 45 69 52 65" stroke="currentColor" stroke-width="2" />
   </g>
-  <path d="M9 32h46" fill="none" stroke="#f1efe8" stroke-opacity=".34" stroke-width="1"/>
-  <circle cx="44.5" cy="22.5" r="3" fill="#f1efe8"/>
 </svg>

@@ -18,7 +18,7 @@ import { PublicArticle } from './public-article'
 import { PublicWritingStories } from './public-writing'
 import ArtworkInkDefinitions from '../src/personal/editorial/ArtworkInk'
 import { withDocumentLinks } from './public-document-links'
-import { discoveryText } from './search-discovery'
+import { discoveryText, machineProfile, machineReferences, documentText, fullDiscoveryText } from './search-discovery'
 import { PersonalProfile } from '../src/personal/PersonalProfile'
 import { writingFeed } from './search-feed'
 import { searchSitemap } from './search-sitemap'
@@ -37,6 +37,7 @@ const template = await readFile(join(dist, 'index.html'), 'utf8')
 const paragraphs = (values: string[] = []) => values.map((value, i) => <p key={i}>{inlineText(value)}</p>)
 const links = (pages: typeof publicPages) => <ul>{pages.map(page => <li key={page.path}><a href={page.path}>{page.title.replace(' — Sulayman Bowles', '')}</a><p>{page.description}</p></li>)}</ul>
 const articleData = new Map(await Promise.all(catalog.map(async summary => [summary.slug, JSON.parse(await readFile(join(process.cwd(), 'src/personal/editorial/data/articles', `${summary.slug}.json`), 'utf8'))] as const)))
+const machineDocuments: { url: string; text: string }[] = []
 
 function ProjectDocument({ document, slug, caseStudy = false }: { document: WorkDocument; slug: string; caseStudy?: boolean }) {
   const sectionId = (id: string) => caseStudy ? id : `${slug}-${id}`
@@ -105,6 +106,10 @@ for (const page of [...publicPages, { route: '404', path: '/404', title: 'Page n
   // readable element in #root and place those hints in the document head.
   const imageHints = rendered.match(/^(?:<link rel="preload" as="image"[^>]*\/>)+/)?.[0] || ''
   const body = withDocumentLinks(rendered.slice(imageHints.length))
+  if (page.route !== '404') machineDocuments.push({
+    url: `${siteOrigin}${page.path}`,
+    text: documentText(body.match(/<main>([^]*?)<\/main>/)![1], `${siteOrigin}${page.path}`),
+  })
   const html = withSearchHead(template, searchMetadata(page.route))
     .replace('</head>', () => `${imageHints}${fallbackStyle}${readingFallbackStyle}${page.route.startsWith('writing/') ? studyFallbackStyle : ''}</head>`)
     .replace('<div id="root"></div>', () => `<div id="root">${body}</div>`)
@@ -121,6 +126,12 @@ const discoverySource = await readFile(join(process.cwd(), 'public/llms.txt'), '
 const evidenceNotes = discoverySource.split('## Evidence boundaries\n')[1]
 if (!evidenceNotes?.trim()) throw new Error('Missing discovery evidence boundaries')
 const roleNotes = discoverySource.match(/\n\n(Sapien work covers[^]*?)\n\n##/)?.[1]
-await writeFile(join(dist, 'llms.txt'), discoveryText(resumeProfile.currentSummary, resumeReview.asOf, [roleNotes, evidenceNotes].filter(Boolean).join('\n\n')))
+const machineEvidence = [roleNotes, evidenceNotes].filter(Boolean).join('\n\n')
+const profile = machineProfile(machineEvidence)
+await mkdir(join(dist, 'machine'), { recursive: true })
+await writeFile(join(dist, 'machine/profile.json'), `${JSON.stringify(profile, null, 2)}\n`)
+await writeFile(join(dist, 'machine/references.json'), `${JSON.stringify(machineReferences([...articleData.values()], machineEvidence), null, 2)}\n`)
+await writeFile(join(dist, 'llms-full.txt'), fullDiscoveryText(profile, machineDocuments))
+await writeFile(join(dist, 'llms.txt'), discoveryText(resumeProfile.currentSummary, resumeReview.asOf, machineEvidence))
 await writeFile(join(dist, 'feed.xml'), writingFeed(catalog))
 console.log(`Generated ${publicPages.length} indexable pages, a 404, and discovery files.`)

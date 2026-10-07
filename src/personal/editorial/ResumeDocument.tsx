@@ -23,9 +23,10 @@ function roleNote(organization: string) {
 
 function jumpToSection(event: MouseEvent<HTMLAnchorElement>, id: ResumeSection) {
   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-  // The document is already mounted. Repeated section requests must still
-  // move focus after Back to top clears the URL without a hashchange event.
-  if (location.hash === event.currentTarget.hash) event.preventDefault()
+  // The mounted document owns this movement. A native hashchange would make
+  // the arrival handler cancel it with a second, instant scroll.
+  event.preventDefault()
+  history.replaceState(history.state, '', event.currentTarget.href)
   const heading = document.getElementById(`resume-${id}`)
   heading?.focus({ preventScroll: true })
   heading?.scrollIntoView({

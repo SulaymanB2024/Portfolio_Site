@@ -1,8 +1,8 @@
 import catalog from './editorial/data/catalog.json'
 import AnimatedArtwork from './editorial/AnimatedArtwork'
-import { ArtworkMotionControl, useArtworkMotion } from './editorial/ArtworkMotion'
+import { useArtworkMotion } from './editorial/ArtworkMotion'
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
-import { displayDate, type ArticleSummary } from './editorial/types'
+import { displayDate, displayReadTime, displayWritingTopic, type ArticleSummary } from './editorial/types'
 import { homeWritingDecks, siteCopy, withWritingCopy } from './site-copy'
 import { DestinationCue, DestinationLink } from './DestinationLink'
 import './home-writing.css'
@@ -15,21 +15,24 @@ const featured = ['who-owns-texas-toll-roads', 'atlas-building-an-evidence-conso
 function JournalEssay({ article, lead = false }: { article: ArticleSummary; lead?: boolean }) {
   const { paused } = useArtworkMotion()
   const artwork = getArticleGenerativeArtwork(article.path)
-  return <a className={`journal-essay ${lead ? 'journal-lead' : 'journal-companion'}`} href={`#/writing/${article.slug}`}>
+  return <a className={`journal-essay ${lead ? 'journal-lead' : 'journal-companion'}`} href={`#/writing/${article.slug}`} aria-labelledby={`journal-title-${article.slug}`} aria-describedby={`journal-deck-${article.slug}`}>
     <div className="journal-essay-copy">
-      <h3>{article.displayTitle || article.title}</h3>
-      <p className="journal-deck">{homeWritingDecks[article.slug] ?? article.subtitle}</p>
-      <div className="journal-meta mono"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time></div>
+      <p className="journal-category">{displayWritingTopic(article.category)}</p>
+      <h3 id={`journal-title-${article.slug}`}>{article.displayTitle || article.title}</h3>
+      <p id={`journal-deck-${article.slug}`} className="journal-deck">{homeWritingDecks[article.slug] ?? article.subtitle}</p>
+      <div className="journal-essay-footer">
+        <div className="journal-meta mono"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span className="writing-story-readtime">{displayReadTime(article.readTime)}</span></div>
+        <DestinationCue className="journal-read mono">{siteCopy.writing.read}</DestinationCue>
+      </div>
     </div>
     <div className="journal-art"><AnimatedArtwork artwork={artwork} size={lead ? 400 : 240} paused={paused} embedded decorative /></div>
-    <DestinationCue className="journal-read mono">{siteCopy.writing.read}</DestinationCue>
   </a>
 }
 
 export function HomeWriting() {
   const [lead, ...companions] = featured
   return <section className="home-writing home-journal" aria-labelledby="home-writing-title">
-    <div className="journal-heading"><div><span className="journal-kicker mono">{siteCopy.writing.homeKicker}</span><h2 id="home-writing-title">Writing<span className="period">.</span></h2></div><ArtworkMotionControl /></div>
+    <div className="journal-heading"><h2 id="home-writing-title">Writing<span className="period">.</span></h2></div>
     <div className="journal-layout">
       {lead && <JournalEssay article={lead} lead />}
       <div className="journal-companions">{companions.map(article => <JournalEssay key={article.slug} article={article} />)}</div>

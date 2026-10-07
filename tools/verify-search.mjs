@@ -51,6 +51,11 @@ for (const url of urls) {
   const feeds = [...head.matchAll(/<link\b[^>]*>/g)].map(match => attributes(match[0])).filter(tag => tag.type === 'application/atom+xml')
   assert.equal(feeds.length, 1, `Missing/duplicate writing feed: ${url.pathname}`)
   assert.equal(feeds[0].rel, 'alternate'); assert.equal(feeds[0].href, `${origin}/feed.xml`)
+  const machineLinks = [...head.matchAll(/<link\b[^>]*>/g)].map(match => attributes(match[0])).filter(tag => tag['data-machine-discovery'])
+  assert.deepEqual(machineLinks.map(tag => [tag.rel, tag.type, tag.href]), [
+    ['describedby', 'text/plain', `${origin}/llms.txt`],
+    ['describedby', 'application/json', `${origin}/machine/profile.json`],
+  ], `Missing/duplicate machine discovery: ${url.pathname}`)
   const titleMatches = [...head.matchAll(/<title>([^]*?)<\/title>/g)]
   assert.equal(titleMatches.length, 1)
   const title = decode(titleMatches[0][1])
@@ -247,6 +252,22 @@ assert(robots.includes(`Sitemap: ${origin}/sitemap.xml`))
 const discovery = await read('dist/llms.txt')
 for (const url of urls) assert(discovery.includes(`](${url.href})`), `Discovery record missing: ${url.pathname}`)
 assert(!discovery.includes('/#/'))
+const profile = JSON.parse(await read('dist/machine/profile.json'))
+const references = JSON.parse(await read('dist/machine/references.json'))
+const fullText = await read('dist/llms-full.txt')
+assert.equal(profile.id, `${origin}/#person`)
+assert.equal(profile.name, 'Sulayman Bowles')
+assert.deepEqual(references.pages.map(page => page.url), urls.map(url => url.href))
+assert.equal(references.articles.length, catalog.length)
+assert.equal(new Set(references.pages.map(page => page.url)).size, urls.length)
+assert(fullText.includes(profile.evidenceBoundaries))
+for (const url of urls) assert(fullText.includes(`Canonical source: ${url.href}\n`), `Full text missing: ${url.pathname}`)
+for (const path of ['/machine/profile.json', '/machine/references.json', '/llms-full.txt']) assert(discovery.includes(`](${origin}${path})`))
+for (const path of ['authority-assets.json', 'technical-seo-reference-index.json']) {
+  const historical = JSON.parse(await read(`dist/research/${path}`))
+  assert.equal(historical.status, 'historical')
+  assert.equal(historical.currentReferenceIndex, `${origin}/machine/references.json`)
+}
 for (const path of ['/404/index.html', '/sitemap.html']) {
   const html = await read(join('dist', path))
   assert(html.includes('name="robots" content="noindex, follow"'), `Utility indexing drift: ${path}`)

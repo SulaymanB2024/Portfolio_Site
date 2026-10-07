@@ -2,7 +2,7 @@
    and the evidence inside a figure, table, or interactive tool. */
 @media screen {
   .personal-site {
-    --quiet-ui: Arial, Helvetica, sans-serif;
+    --quiet-ui: var(--type-interface);
     --section-space: clamp(56px, 7vw, 96px);
   }
 

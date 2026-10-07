@@ -11,15 +11,21 @@ import { ProjectEndnav } from './ProjectEndnav'
 import { InternshipProductPath, ProjectContribution } from './ProjectContribution'
 import { curatedNextProject } from './work-curation'
 import { DestinationLink } from '../DestinationLink'
+import { closePrintUrl } from '../refinements/print-instrument'
 import './project-narrative.css'
+import '../refinements/print-room-studio.css'
 
 export default function ProjectNarrativePage({ project: p, dark }: { project: Project; dark: boolean }) {
   const narrative = workNarratives[p.slug]
   const next = curatedNextProject(p.slug) ?? projects[(projects.indexOf(p) + 1) % projects.length]
   const root = useRef<HTMLElement>(null)
   const [active, setActive] = useProjectReading(root, p.slug, '[data-story-chapter]', 'question')
-  const chapterHref = (id: string) =>
-    typeof window === 'undefined' ? `#/work/${p.slug}?chapter=${id}` : projectChapterHref(location.hash, location.pathname, location.search, p.slug, id)
+  function chapterHref(id: string) {
+    if (typeof window === 'undefined') return `#/work/${p.slug}?chapter=${id}`
+    // A shared print is an arrival, not part of a bookmark for the project text.
+    const address = new URL(closePrintUrl(location.href))
+    return projectChapterHref(address.hash, address.pathname, address.search, p.slug, id)
+  }
   function jump(event: MouseEvent<HTMLAnchorElement>, id: string) {
     if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
     event.preventDefault()
@@ -56,9 +62,9 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
           <ProjectContribution slug={p.slug} />
           <div className="project-links">
             {p.link && <DestinationLink className="arrow-link" href={p.link.href}>{p.link.label}</DestinationLink>}
-            <a className="project-read mono" href={chapterHref('question')} onClick={(event) => jump(event, 'question')}>
-              Read the project<span aria-hidden="true">↓</span>
-            </a>
+            <DestinationLink className="project-reading-action" href={chapterHref('question')} direction="down" onClick={(event) => jump(event, 'question')}>
+              Read the project
+            </DestinationLink>
           </div>
         </div>
         <div className="project-object">
@@ -73,6 +79,7 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
         </div>
       </section>
       {p.slug === 'internshipdeadlines' && <InternshipProductPath />}
+      {p.slug === 'miscellaneous' && <aside className="print-studio-invitation" aria-label="Make an original print"><p>A little room for making things.</p><button type="button" data-open-print-room>Enter the print room<span aria-hidden="true">↗</span></button></aside>}
       <nav className="story-index project-reading-bar" aria-label="In this project">
         {narrative.chapters.map((chapter, i) => (
           <a key={chapter.id} href={chapterHref(chapter.id)} aria-current={active === chapter.id ? 'location' : undefined} onClick={(event) => jump(event, chapter.id)}>

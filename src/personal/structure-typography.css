@@ -6,17 +6,46 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader/newsreader-latin-variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader/newsreader-latin-italic-variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --type-display: 'Syne', Arial, Helvetica, sans-serif;
-  --type-reading: Georgia, 'Times New Roman', serif;
-  --type-interface: Arial, Helvetica, sans-serif;
-  --type-display-tracking: -.055em;
+  --type-reading: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --type-interface: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --type-display-tracking: -.04em;
+  --type-heading-tracking: -.02em;
 }
 
 /* Structure: broad display forms, a literary reader, quiet practical labels.
    Route styles are lazy-loaded; these role selectors must also survive arrival
    from another route. Screen scope preserves the printable résumé document. */
 @media screen {
+  .static-site.static-site,
+  .personal-site.personal-site[data-section][data-appearance] {
+    font-family: var(--type-reading);
+    font-optical-sizing: auto;
+  }
+  .personal-site.personal-site[data-section][data-appearance] :is(.article-page, .writing-page, .topic-page) {
+    --editorial-serif: var(--type-reading);
+    --editorial-sans: var(--type-interface);
+  }
+  .personal-site.personal-site[data-section][data-appearance] .cv-page { --cv-serif: var(--type-reading); }
   .static-site.static-site :is(h1, h2, h3) { font-family: var(--type-display); font-weight: 600; letter-spacing: -.035em; }
   .static-site.static-site header, .static-site.static-site nav { font: 400 13px/1.6 var(--type-interface); }
   .personal-site.personal-site[data-section][data-appearance] :is(h1, h2, h3, h4) {
@@ -24,6 +53,10 @@
     font-weight: 600;
     font-synthesis: none;
     letter-spacing: var(--type-display-tracking);
+  }
+  .personal-site.personal-site[data-section][data-appearance] :is(h2, h3, h4) {
+    font-weight: 500;
+    letter-spacing: var(--type-heading-tracking);
   }
 
   .personal-site[data-section][data-appearance] .personal-header .identity {
@@ -88,9 +121,12 @@
     text-wrap: balance;
   }
   .personal-site[data-section][data-appearance] .article-page .article-cover h1 {
-    font-size: clamp(40px, 5.3vw, 66px);
-    line-height: 1.1;
-    max-width: 24ch;
+    font-family: var(--type-reading);
+    font-weight: 400;
+    font-size: clamp(44px, 6vw, 76px);
+    line-height: 1.06;
+    letter-spacing: -.025em;
+    max-width: 22ch;
     text-wrap: balance;
   }
   .personal-site .article-title-line { display: inline; }
@@ -103,6 +139,7 @@
     font-size: clamp(48px, 7.2vw, 108px);
     line-height: 1.01;
     min-height: 3.686em;
+    letter-spacing: -.055em;
   }
   .landing-title-line { display: block; white-space: nowrap; }
   .landing-title-line[data-quiet] { font-size: .49em; line-height: 1.7; }
@@ -138,31 +175,36 @@
     font-weight: 600;
     letter-spacing: -.035em;
   }
+  .personal-site[data-section][data-appearance] :is(.rx-node-name, .performance-program-title, .performance-work-title) {
+    font-weight: 500;
+    letter-spacing: var(--type-heading-tracking);
+  }
   .personal-site[data-section][data-appearance] :is(.home-context-summary, .writing-introduction, .work-page-intro > p, .reader-subtitle, .about-biography p, .rx-introduction > p, .lion-contact-introduction) {
-    font: 400 20px/1.65 var(--type-reading);
+    font: 400 22px/1.55 var(--type-reading);
     max-width: 48ch;
     text-wrap: pretty;
   }
-  .personal-site[data-section][data-appearance] :is(.journal-deck, .writing-deck, .work-study-text > p) {
-    font: 400 18px/1.65 var(--type-reading);
+  .personal-site[data-section][data-appearance] :is(.journal-deck, .writing-deck, .work-study-text > p:not(.work-study-role)) {
+    font: 400 20px/1.6 var(--type-reading);
     text-wrap: pretty;
   }
+  .personal-site[data-section][data-appearance] .work-study-role { font: 400 13px/1.6 var(--type-interface); }
   .personal-site[data-section][data-appearance] .article-page .reader-prose {
-    font: 400 20px/1.7 var(--type-reading);
+    font: 400 21px/1.65 var(--type-reading);
   }
-  .personal-site[data-section][data-appearance] .article-page .reader-section > div > :is(p, ul, ol) { max-width: min(65ch, 660px); }
+  .personal-site[data-section][data-appearance] .article-page :is(.reader-section > p, .reader-section > ul, .reader-section > ol, .reader-section > div > p, .reader-section > div > ul, .reader-section > div > ol, .reader-restored-html .prose) { max-width: min(65ch, 660px); }
   .personal-site[data-section][data-appearance] .article-page .reader-section > p,
-  .personal-site[data-section][data-appearance] .article-page .reader-section > div > p { line-height: 1.7; }
+  .personal-site[data-section][data-appearance] .article-page .reader-section > div > p { line-height: 1.65; }
   .personal-site[data-section][data-appearance] .article-page .reader-section > div > p { margin-bottom: 1.35em; }
-  .personal-site[data-section][data-appearance] .article-page .reader-prose :is(.reader-section > h2, h3, h4) {
+  .personal-site[data-section][data-appearance] .article-page .reader-prose :is(h2, h3, h4) {
     line-height: 1.2;
     letter-spacing: -.035em;
   }
-  .personal-site[data-section][data-appearance] .article-page .reader-section > h2 { font-size: 32px; }
-  .personal-site[data-section][data-appearance] .article-page .article-lede > p:first-child { font-size: 23px; line-height: 1.55; }
+  .personal-site[data-section][data-appearance] .article-page :is(.reader-section > h2, .reader-prose > h2) { font-size: 32px; }
+  .personal-site[data-section][data-appearance] .article-page .article-lede > p:first-child { font-size: 25px; line-height: 1.5; }
   .personal-site[data-section][data-appearance] .article-page[data-form='essay'] .article-lede > p:first-child::first-letter {
     float: left;
-    font: 600 3.2em/.9 var(--type-display);
+    font: 450 3.2em/.9 var(--type-reading);
     margin: 4px 10px 0 0;
   }
 
@@ -178,10 +220,61 @@
     letter-spacing: 0;
     text-transform: none;
   }
-  .personal-site[data-section][data-appearance] :is(.journal-meta, .writing-story-meta, .reader-byline, .rx-chronology-dates) {
+  .personal-site[data-section][data-appearance] .project-reading-bar :is(a, a > .mono) {
+    font: 400 13px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site[data-section][data-appearance] .project-diagram :is(.project-diagram-kicker,
+    .project-diagram-sequence, .project-diagram-annotation, .project-diagram-label,
+    .project-diagram-inline-choices button, .project-diagram-range label,
+    .project-diagram-range-ends, .project-diagram-date-result > span:last-child, figcaption) {
+    font: 400 13px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site[data-section][data-appearance] .case-dossier :is(.dossier-node-copy small,
+    .dossier-review-stage > small, .dossier-operation-reading .mono, .dossier-map-label,
+    .dossier-source-fields dt, .dossier-source-measure > span, .dossier-source-next .mono, .dossier-record a,
+    .dossier-evidence-foot a) {
+    font: 400 13px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site[data-section][data-appearance] .case-dossier :is(.dossier-method-note,
+    .dossier-evidence-foot p) {
+    font: 400 12px/1.7 var(--type-interface);
+    letter-spacing: 0;
+  }
+  .personal-site[data-section][data-appearance] .article-original-figures :is(small,
+    .ai-hall-of-shame__grid span, .toll-figure-label, .figure-sources, .figure-table-hint, figcaption) {
+    font: 400 12px/1.7 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site[data-section][data-appearance] .author-note .author-name {
+    font: 600 24px/1.2 var(--type-display);
+    letter-spacing: -.035em;
+  }
+  .personal-site[data-section][data-appearance] .cv-page :is(.cv-kicker, .cv-review-date,
+    .cv-entry-meta, .cv-award-date, .cv-section-number, .cv-work-type) {
+    font: 400 12px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .personal-site[data-section][data-appearance] .cv-page :is(.cv-rail-label,
+    .cv-mobile-nav summary, .cv-rail nav a, .cv-rail nav a > span, .cv-rail-contact,
+    .cv-coursework > span, .cv-subheading, .cv-skills dt) {
+    font: 400 13px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site[data-section][data-appearance] :is(.journal-meta, .writing-story-meta, .story-link-meta, .reader-byline, .rx-chronology-dates) {
     font: 400 12px/1.6 var(--type-interface);
     font-variant-numeric: tabular-nums;
   }
+  .personal-site[data-section][data-appearance] .writing-story-readtime { white-space: nowrap; }
   .personal-site[data-section][data-appearance] .site-closing h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.2; }
   .personal-site[data-section][data-appearance] .lion-contact-heading h1 { margin-bottom: 0; }
   .personal-site[data-section][data-appearance] .home-context-choices button { font: 400 16px/1.5 var(--type-interface); letter-spacing: 0; }
@@ -195,10 +288,104 @@
   .personal-site[data-section][data-appearance] .cv-introduction h1 { font-size: clamp(40px, 5.3vw, 66px); line-height: 1.1; }
   .personal-site .reader-prose :is(pre, code),
   .personal-site .article-citation { font-family: var(--editorial-mono, 'Courier New', monospace); }
+
+  /* Story titles have their own reading voice; the mastheads retain Syne. */
+  .personal-site.personal-site[data-section][data-appearance] :is(.journal-essay h3, .writing-story h2, .story-link h2, .reading-paths h2, .topic-readings h2) {
+    font-family: var(--type-reading);
+    font-weight: 450;
+    line-height: 1.15;
+    letter-spacing: -.015em;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .journal-lead h3 { font-size: clamp(40px, 4.25vw, 56px); line-height: 1.08; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-companion h3 { font-size: clamp(28px, 2.65vw, 34px); }
+  .personal-site.personal-site[data-section][data-appearance] .journal-category { font: 400 12px/1.6 var(--type-interface); color: var(--muted); letter-spacing: .015em; text-transform: none; margin: 0 0 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-companion .journal-deck { font-size: 18px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='lead'] h2 { font-size: clamp(36px, 4vw, 48px); line-height: 1.1; }
+  .personal-site.personal-site[data-section][data-appearance] .reading-paths h2 { font-size: 30px; margin-block: 12px; }
+  .personal-site.personal-site[data-section][data-appearance] .reading-paths p { font: 400 18px/1.55 var(--type-reading); max-width: 44ch; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.reading-path-action, .reading-duration, .reading-step) {
+    font: 400 12px/1.6 var(--type-interface);
+    letter-spacing: .01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .reading-path-action { display: inline-flex; align-items: baseline; gap: 8px; padding-top: 4px; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.topic-deck, .topic-introduction) { font: 400 21px/1.6 var(--type-reading); }
+  .personal-site.personal-site[data-section][data-appearance] .topic-readings p { font: 400 19px/1.6 var(--type-reading); }
+
+  .personal-site.personal-site[data-section][data-appearance] .article-page .reader-prose :is(.reader-section > h2, .reader-callout h2) {
+    font-family: var(--type-reading);
+    font-weight: 450;
+    letter-spacing: -.015em;
+    line-height: 1.2;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .reader-prose :is(h3, h4) {
+    font-family: var(--type-interface);
+    letter-spacing: -.01em;
+    line-height: 1.35;
+  }
+
+  /* Cover route-local Georgia declarations without changing their compositions. */
+  .personal-site.personal-site[data-section][data-appearance] :is(.project-deck, .project-summary, .story-prose > p,
+    .study-title, .study-summary, .study-chapter-copy > p, .project-contribution dd, .project-contribution > p,
+    .project-product-path p, .about-object-sentence, .about-personal-detail > p, .about-program-note p,
+    .about-selector-copy > .mono, .home-context-caption, .site-closing-contact > p, .colophon p) {
+    font-family: var(--type-reading);
+    font-optical-sizing: auto;
+  }
+  .personal-site.personal-site[data-section][data-appearance] :is(.project-deck, .study-title) { line-height: 1.5; text-wrap: pretty; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.story-prose > p, .study-chapter-copy > p) { line-height: 1.65; }
+  .personal-site.personal-site[data-section][data-appearance] .work-study-text .work-study-role {
+    font: 400 13px/1.6 var(--type-interface);
+    letter-spacing: 0;
+  }
+  .personal-site.personal-site[data-section][data-appearance] :is(.project-read, .study-hero-copy > a, .project-reading-bar > a) {
+    font: 400 13px/1.6 var(--type-interface);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .project-reading-bar > a > .mono { font-size: 12px; font-variant-numeric: tabular-nums; }
+  .personal-site.personal-site[data-section][data-appearance] .project-contribution dl { gap: 20px 32px; }
+  .personal-site.personal-site[data-section][data-appearance] .project-contribution dt,
+  .personal-site.personal-site[data-section][data-appearance] .project-contribution > p > span {
+    font: 400 11px/1.6 var(--type-interface);
+    letter-spacing: .045em;
+    margin-bottom: 8px;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .project-contribution dd { font-size: 18px; line-height: 1.4; }
+  .personal-site.personal-site[data-section][data-appearance] .project-contribution > p { font-size: 19px; line-height: 1.55; margin-top: 24px; }
+  .personal-site.personal-site[data-section][data-appearance] .rx-role-summary { font-size: 20px; line-height: 1.6; }
+  .personal-site.personal-site[data-section][data-appearance] .rx-contributions dd { font-size: 18px; line-height: 1.65; }
+
+  /* Caption language stays distinct from source dates and interface furniture. */
+  .personal-site.personal-site[data-section][data-appearance] :is(.specimen-caption, .dossier-figure-heading, .product-evidence figcaption) { text-transform: none; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.specimen-caption > span:first-child, .dossier-figure-heading > span:first-child, .product-evidence figcaption strong) {
+    font: 400 19px/1.4 var(--type-reading);
+    letter-spacing: -.01em;
+  }
+  .personal-site.personal-site[data-section][data-appearance] :is(.specimen-caption > span:last-child:not(:first-child), .dossier-figure-heading > .mono, .product-evidence figcaption > span) {
+    font: 400 12px/1.65 var(--type-interface);
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .lion-study-title { font: italic 400 20px/1.4 var(--type-reading); letter-spacing: -.01em; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.art-cube-credit > span, .home-context-study-title) { font: italic 400 20px/1.4 var(--type-reading); color: var(--ink); letter-spacing: -.01em; }
+  .personal-site.personal-site[data-section][data-appearance] .article-art-cube > figcaption { display: grid; grid-template-columns: minmax(0, 1fr) max-content; align-items: start; border-top: 1px solid var(--line); padding-top: 12px; }
+  .personal-site.personal-site[data-section][data-appearance] .art-cube-credit { flex-direction: column; align-items: start; gap: 0; min-width: 0; }
+  .personal-site.personal-site[data-section][data-appearance] :is(.art-cube-credit > a, .art-cube-control) { font: 400 12px/1.6 var(--type-interface); min-height: 44px; }
+  .personal-site.personal-site[data-section][data-appearance] .art-cube-credit > a { display: inline-flex; align-items: center; }
+  .personal-site.personal-site[data-section][data-appearance] .art-cube-control { align-self: end; }
+  .personal-site.personal-site[data-section][data-appearance] .home-context-cues { border-top: 1px solid var(--line); padding-top: 12px; }
+  .personal-site.personal-site[data-section][data-appearance] .home-context-instruction { display: block; color: var(--muted); font: 400 12px/1.6 var(--type-interface); }
+  .personal-site.personal-site[data-section][data-appearance] .lion-study-credit .mono { font: 400 12px/1.6 var(--type-interface); }
+  .personal-site.personal-site[data-section][data-appearance] .lion-study-credit p { font: 400 14px/1.65 var(--type-interface); }
+  .personal-site.personal-site[data-section][data-appearance] .colophon p { font-size: 15px; line-height: 1.65; }
+  .print-room .print-room-copy h2 { font-family: var(--type-reading); font-weight: 400; letter-spacing: -.025em; }
+  .print-room .print-room-copy p { font: 400 18px/1.55 var(--type-reading); }
+  .print-room .print-room-saved { font-family: var(--type-interface); }
 }
 
 @media screen and (max-width: 760px) {
-  .personal-site { --type-display-tracking: -.035em; }
+  .personal-site { --type-display-tracking: -.03em; }
   .personal-site[data-section][data-appearance] .personal-header .identity { gap: 10px; }
   .personal-site[data-section][data-appearance] .personal-header .identity .identity-name { font-size: 14px; }
   .identity-lettermark { width: 34px; height: 34px; }
@@ -210,11 +397,33 @@
   .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-header h1,
   .personal-site[data-section][data-appearance] .cv-introduction h1 { font-size: clamp(36px, 9.7vw, 44px); }
   .personal-site[data-section][data-appearance] .writing-story[data-layout='note'] h2 { font-size: 23px; }
-  .personal-site[data-section][data-appearance] :is(.home-context-summary, .writing-introduction, .work-page-intro > p, .reader-subtitle, .about-biography p, .rx-introduction > p, .lion-contact-introduction) { font-size: 18px; line-height: 1.65; }
-  .personal-site[data-section][data-appearance] :is(.journal-deck, .writing-deck, .work-study-text > p) { font-size: 17px; }
-  .personal-site[data-section][data-appearance] .article-page .reader-prose { font-size: 18px; line-height: 1.7; }
-  .personal-site[data-section][data-appearance] .article-page .reader-section > h2 { font-size: 28px; }
-  .personal-site[data-section][data-appearance] .article-page .article-lede > p:first-child { font-size: 21px; }
+  .personal-site[data-section][data-appearance] .writing-story[data-layout='compact'] h2 { font-size: 26px; }
+  .personal-site[data-section][data-appearance] :is(.home-context-summary, .writing-introduction, .work-page-intro > p, .reader-subtitle, .about-biography p, .rx-introduction > p, .lion-contact-introduction) { font-size: 20px; line-height: 1.55; }
+  .personal-site[data-section][data-appearance] :is(.journal-deck, .writing-deck, .work-study-text > p:not(.work-study-role)) { font-size: 19px; }
+  .personal-site[data-section][data-appearance] .article-page .reader-prose { font-size: 19px; line-height: 1.65; }
+  .personal-site[data-section][data-appearance] .article-page :is(.reader-section > h2, .reader-prose > h2) { font-size: 28px; }
+  .personal-site[data-section][data-appearance] .article-page .article-lede > p:first-child { font-size: 23px; }
+  .personal-site.personal-site[data-section][data-appearance] .article-page .article-cover h1 { font-size: clamp(38px, 10vw, 48px); }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-story[data-layout='lead'] h2 { font-size: 36px; }
+  .personal-site.personal-site[data-section][data-appearance] .journal-lead h3 { font-size: clamp(34px, 9.8vw, 40px); }
+  .personal-site.personal-site[data-section][data-appearance] .journal-companion h3 { font-size: 28px; }
+  .personal-site.personal-site[data-section][data-appearance] .reading-paths h2 { font-size: 28px; }
+}
+
+@media screen and (max-width: 760px), screen and (max-width: 950px) and (max-height: 500px) {
+  .personal-site.personal-site[data-section][data-appearance] .lion-study-credit summary {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 18px;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .lion-study-credit p {
+    position: static;
+    width: auto;
+    margin: 8px 0 0;
+    padding: 12px 0;
+    border: 0;
+  }
 }
 
 @media screen and (max-width: 1000px) {

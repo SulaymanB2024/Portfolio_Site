@@ -25,6 +25,7 @@ import BrandIdentity from './BrandIdentity'
 import { DestinationLink } from './DestinationLink'
 import { prepareRouteResources } from './route-preparation'
 import { installRouteScroll } from './refinements/route-scroll'
+import { installTableOverflowHints } from './refinements/table-overflow'
 import './editorial/artwork-continuity.css'
 import './personal.css'
 import './editorial/editorial.css'
@@ -79,9 +80,10 @@ function useRoute() {
             if (section) jumpToArticleSection(section, 'instant')
             return
           }
-          if (next !== 'writing') return
+          if (next !== 'writing' && !next.startsWith('topics/')) return
           const selected = new URLSearchParams(location.hash.split('?')[1] || '').get('at')
-          const link = [...document.querySelectorAll<HTMLAnchorElement>('.writing-story')]
+          const selector = next === 'writing' ? '.writing-story' : '.topic-readings h2 a'
+          const link = [...document.querySelectorAll<HTMLAnchorElement>(selector)]
             .find(item => item.dataset.slug === selected)
           // Position the destination before the browser captures its new artwork box.
           link?.scrollIntoView({ block: 'center', behavior: 'instant' })
@@ -155,6 +157,9 @@ function SitePages() {
   const study = findCaseStudy(route)
   const isDark = dark
   const section = project || study ? 'work' : article || topic ? 'writing' : route || 'home'
+  useLayoutEffect(() => {
+    if (main.current && (article || project || study)) return installTableOverflowHints(main.current)
+  }, [route, article, project, study])
   useEffect(() => { setMenuOpen(false) }, [route])
   useEffect(() => {
     if (focusedRoute.current === route) return
