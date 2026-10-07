@@ -80,9 +80,10 @@ function useRoute() {
             if (section) jumpToArticleSection(section, 'instant')
             return
           }
-          if (next !== 'writing') return
+          if (next !== 'writing' && !next.startsWith('topics/')) return
           const selected = new URLSearchParams(location.hash.split('?')[1] || '').get('at')
-          const link = [...document.querySelectorAll<HTMLAnchorElement>('.writing-story')]
+          const selector = next === 'writing' ? '.writing-story' : '.topic-readings h2 a'
+          const link = [...document.querySelectorAll<HTMLAnchorElement>(selector)]
             .find(item => item.dataset.slug === selected)
           // Position the destination before the browser captures its new artwork box.
           link?.scrollIntoView({ block: 'center', behavior: 'instant' })

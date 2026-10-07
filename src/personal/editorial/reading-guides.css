@@ -14,7 +14,7 @@
 .topic-readings li{display:grid;grid-template-columns:2.5rem 1fr;gap:1rem;padding:1.8rem 0;border-top:1px solid var(--line)}
 .reading-step{font:400 .8rem/1.5 var(--editorial-mono,monospace);color:var(--muted);padding-top:.3rem}
 .topic-readings h2{font:400 clamp(1.5rem,3vw,2.2rem)/1.2 var(--editorial-serif,Georgia,serif);letter-spacing:-.02em;margin:0}
-.topic-readings h2 a{color:inherit;text-decoration:none}
+.topic-readings h2 a{display:block;color:inherit;text-decoration:none}
 .topic-readings p{max-width:58ch;line-height:1.6;color:var(--muted);margin:.8rem 0}
 .topic-return{border-top:1px solid var(--line);padding-top:1.5rem;margin-top:2rem}
 .topic-return a,.topic-page .eyebrow{color:inherit;text-underline-offset:.2em}
