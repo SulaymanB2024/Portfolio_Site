@@ -1,11 +1,12 @@
+import { createPortalMaskTarget } from './portal-mask.ts'
 import * as THREE from 'three'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
+import { createPortfolioModelLoader } from '../portfolio-model-loader.ts'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
 import { CHAPTERS, sceneSequence, textSequence, advanceScrollMotion, railProgress, requiredScene, type LandingChapter, type TextSequence } from './sequence.ts'
 import { thresholdMotion, sculpturePose, cinematicShot, portalPose, cinematicPhase, portalFrameOpacity, createScaleSampler, createApertureSampler } from './motion-curves.ts'
 import { portfolioAssetUrl } from '../portfolio-assets.ts'
 import { createDitheredText, textDitherShader, type DitheredTextUniforms } from './dithered-text.ts'
+import { HEADING_RESERVE_EM, layoutHeading, renderHeading } from './heading-typography.ts'
 import { scrollInkShader, scrollInkStrength, advanceScrollInk, scrollDitherPassage } from './scroll-dither.ts'
 import { isStackedLanding, mobileSculptureFrame } from './mobile-layout.ts'
 import { landingRenderBudget } from './render-budget.ts'
@@ -13,6 +14,8 @@ import { LANDING_ART, desktopSculptureFrame } from './art-direction.ts'
 import { sculptureRestWeight, sculptureLivingPose, sculptureAnimationActive, mechanicalMotion, mechanicalAngle, type MechanicalMotion } from './chapter-motion.ts'
 import { PortfolioRuntime } from '../portfolio-runtime.ts'
 import { dragHelmet, helmetGesture, helmetKey, settleHelmet, type HelmetTurn, type HelmetGesture } from './helmet-interaction.ts'
+import { setDestinationLabel } from '../link-arrow.ts'
+import { openingInkReveal } from './opening-motion.ts'
 
 export interface LandingElements {
   rail: HTMLElement
@@ -89,9 +92,13 @@ void main(){
 /** The approved visor Threshold study, bounded to its own scroll rail. */
 export function mountLandingSequence(elements: LandingElements): () => void {
   const { rail, stage, canvas, helmetControl, headline, loading, copyContent, title, links, project, article, category } = elements
+  // An opaque context has an unpainted black buffer during setup and decoding.
+  // Keep native copy on the stage paper until a complete composite is ready.
+  canvas.hidden = true
   const resources = new Set<Disposable>(), observers: { disconnect(): void }[] = []
   const openingRuntime = new PortfolioRuntime()
   const events = new AbortController()
+  const fallbackEvents = new AbortController()
   const reduced = matchMedia('(prefers-reduced-motion: reduce)')
   let dark = document.documentElement.dataset.appearance === 'dark'
   const assets = new Map<LandingChapter['id'], THREE.Group>(), actors: (THREE.Group | undefined)[] = []
@@ -100,11 +107,12 @@ export function mountLandingSequence(elements: LandingElements): () => void {
   const actorBounds = new Map<THREE.Object3D, { size: THREE.Vector3; center: THREE.Vector3 }>()
   let frame = 0, wakeTimer = 0, last = 0, frames = 0, disposed = false, failed = false, ready = false, visible = true
   let progress = 0, velocity = 0, targetProgress = 0, scrollDistance = 1, width = 0, height = 0
+  let recovering = false
   let movingInk = 0
   let pixelRatio = 0, sceneRatio = 0
   const headerNav = stage.closest('.personal-site')?.querySelector<HTMLElement>('.personal-header nav')
   let menuOpen = headerNav?.classList.contains('is-open') ?? false
-  let copyTop = 0, copyLineHeight = 0, safeBottom = 0
+  let copyTop = 0, safeBottom = 0
   let lastCategory = '', lastLinks = '', lastUsable: boolean | null = null
   const turns: HelmetTurn[] = CHAPTERS.map(() => ({ yaw: 0, pitch: 0 }))
   const targetTurns: HelmetTurn[] = CHAPTERS.map(() => ({ yaw: 0, pitch: 0 }))
@@ -155,8 +163,17 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     for (const resource of [...resources].reverse()) { try { release(resource) } catch { /* Complete remaining cleanup after a lost context. */ } }
     resources.clear(); assets.clear(); assetSources.clear(); actors.length = 0; parts.clear(); actorBounds.clear()
   }
-  function showChapter(chapter: LandingChapter, index: number, lineHeight: number) {
+  function releaseCopyFocus() {
+    const focused = document.activeElement
+    if (!(focused instanceof HTMLElement) || !links.contains(focused) && !title.contains(focused)) return
+    focused.blur()
+    if (!document.hidden) stage.closest<HTMLElement>('main')?.focus({ preventScroll: true })
+  }
+  function showChapter(chapter: LandingChapter, index: number, headingHeight: number) {
     if (disposed || !stage.isConnected) return
+    // A focused destination must not change underneath a keyboard user,
+    // including when reduced motion or the fallback skips the transition.
+    if (stage.dataset.chapter !== chapter.id) releaseCopyFocus()
     lastUsable = null
     stage.dataset.chapter = chapter.id
     canvas.dataset.chapter = chapter.id
@@ -174,27 +191,33 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     }
     project.href = chapter.href
     project.setAttribute('aria-label', chapter.id === 'helmet' ? chapter.linkLabel : `Explore ${chapter.label}`)
-    const arrow = document.createElement('span')
-    arrow.textContent = '↗'
-    arrow.setAttribute('aria-hidden', 'true')
-    project.replaceChildren(document.createTextNode(chapter.linkLabel), arrow)
+    setDestinationLabel(project, chapter.linkLabel)
     article.hidden = !chapter.article
     if (chapter.article) {
       article.href = chapter.article.href
-      article.textContent = `${chapter.article.label} ↗`
+      setDestinationLabel(article, chapter.article.label)
     } else article.removeAttribute('href')
     // Keep the composition steady while the title's focus/click box follows
     // its actual lines rather than covering the links underneath.
-    copyContent.style.minHeight = `${3 * lineHeight}px`
-    headline.style.minHeight = `${chapter.lines.length * lineHeight}px`
-    copyContent.style.setProperty('--links-y', `${chapter.lines.length * lineHeight + (isStackedLanding(stage.clientWidth, stage.clientHeight) ? 16 : 28)}px`)
+    copyContent.style.minHeight = `${parseFloat(getComputedStyle(headline).fontSize) * HEADING_RESERVE_EM}px`
+    headline.style.minHeight = `${headingHeight}px`
+    copyContent.style.setProperty('--links-y', `${headingHeight + (isStackedLanding(stage.clientWidth, stage.clientHeight) ? 16 : 28)}px`)
   }
+  const headingMeasure = document.createElement('canvas').getContext('2d')
   function staticCopy() {
     if (disposed || !stage.isConnected) return
     const index = textSequence(targetProgress, 'threshold', true).active, chapter = CHAPTERS[index]
-    headline.replaceChildren(...chapter.lines.flatMap((line, row) => row ? [document.createElement('br'), document.createTextNode(line)] : [document.createTextNode(line)]))
     const style = getComputedStyle(headline)
-    showChapter(chapter, index, parseFloat(style.lineHeight) || parseFloat(style.fontSize) * .98)
+    const fontSize = parseFloat(style.fontSize), tracking = parseFloat(style.letterSpacing) || 0
+    const layout = layoutHeading(chapter, fontSize, headline.getBoundingClientRect().width, row => {
+      if (!headingMeasure) return 0
+      headingMeasure.font = `${style.fontWeight} ${fontSize * row.scale}px ${style.fontFamily}`
+      const tracked = 'letterSpacing' in headingMeasure
+      if (tracked) headingMeasure.letterSpacing = `${row.scale < 1 ? 0 : tracking}px`
+      return headingMeasure.measureText(row.text).width + (tracked || row.scale < 1 ? 0 : (row.text.length - 1) * tracking)
+    })
+    renderHeading(headline, layout)
+    showChapter(chapter, index, layout.height)
     category.style.opacity = links.style.opacity = '1'
     links.style.transform = 'none'
     links.style.pointerEvents = 'auto'
@@ -205,7 +228,21 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     title.tabIndex = chapter.id === 'helmet' ? -1 : 0
     delete stage.dataset.textDither
     delete stage.dataset.textPhase
+    delete stage.dataset.textSurface
   }
+  let fallbackKey = ''
+  function refreshFallback() {
+    if (disposed || !stage.isConnected) return
+    targetProgress = railProgress(scrollY, rail.getBoundingClientRect().top + scrollY, rail.clientHeight, stage.clientHeight)
+    const style = getComputedStyle(headline)
+    const key = [textSequence(targetProgress, 'threshold', true).active, headline.clientWidth,
+      style.fontSize, style.fontWeight, style.fontFamily, style.letterSpacing,
+      isStackedLanding(stage.clientWidth, stage.clientHeight)].join('|')
+    if (key === fallbackKey) return
+    fallbackKey = key
+    staticCopy()
+  }
+  function refreshFallbackFont() { fallbackKey = ''; refreshFallback() }
   function fail() {
     if (disposed || failed) return
     failed = true; ready = false; teardown()
@@ -214,13 +251,19 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     canvas.dataset.state = stage.dataset.state = 'error'
     loading.textContent = 'Sculpture unavailable'
     loading.hidden = false
-    staticCopy()
+    // GPU resources and their listeners are gone, but readable chapter links
+    // still follow scrolling, font arrival and a change in viewport width.
+    window.addEventListener('scroll', refreshFallback, { passive: true, signal: fallbackEvents.signal })
+    window.addEventListener('resize', refreshFallback, { passive: true, signal: fallbackEvents.signal })
+    document.fonts.addEventListener('loadingdone', refreshFallbackFont, { signal: fallbackEvents.signal })
+    void document.fonts.ready.then(() => { if (!disposed) refreshFallbackFont() }).catch(() => {})
+    refreshFallback()
   }
   function dispose() {
     if (disposed) return
-    disposed = true; teardown()
+    disposed = true; fallbackEvents.abort(); teardown()
     if (!stage.isConnected) return
-    for (const name of ['renderPixels', 'canvasPixels', 'renderScale', 'textDither', 'textPhase', 'mode', 'motionVariant', 'chapter', 'position', 'motionPhase', 'animatedActors', 'inkMotion', 'inkPassage', 'inkSweep', 'layout', 'state', 'atlasBuilds']) delete stage.dataset[name]
+    for (const name of ['renderPixels', 'canvasPixels', 'renderScale', 'textDither', 'textPhase', 'textSurface', 'mode', 'motionVariant', 'chapter', 'position', 'motionPhase', 'animatedActors', 'inkMotion', 'inkPassage', 'inkSweep', 'layout', 'state', 'atlasBuilds']) delete stage.dataset[name]
     for (const name of ['appearance', 'state', 'assets', 'assetCount', 'activeAsset', 'chapter', 'scrollFrames', 'firstPaintPosition', 'openingAsset', 'openingMotion', 'openingSeconds', 'helmetYaw', 'helmetPitch', 'helmetDither', 'sculptureYaw', 'sculpturePitch', 'mechanicalParts', 'sculptureMotion']) delete canvas.dataset[name]
   }
   const positionKey = 'personal-site:landing-scroll:v1'
@@ -267,7 +310,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     // Match the former composer's color-managed scene buffers. Dither, palette,
     // portal composition and type now share one final pass instead of six copies.
     for (const target of [targetA, targetB]) target.texture.colorSpace = THREE.SRGBColorSpace
-    const targetMask = manage(new THREE.WebGLRenderTarget(1, 1)), targetFrame = manage(new THREE.WebGLRenderTarget(1, 1))
+    const targetMask = manage(createPortalMaskTarget(1, 1)), targetFrame = manage(new THREE.WebGLRenderTarget(1, 1))
     const portalScene = new THREE.Scene(), portalCamera = new THREE.PerspectiveCamera(32, 1, .05, 90)
     portalCamera.position.set(0, 0, 5.9); portalCamera.lookAt(0, 0, 0)
     portalScene.environment = environment.texture
@@ -277,14 +320,14 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     const openingMaterial = manage(new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide, toneMapped: false }))
     let portal: Portal | null = null
     const textUniforms: DitheredTextUniforms = {
-      textAtlas: { value: null }, textBox: { value: new THREE.Vector4() },
+      textEnabled: { value: 0 }, textAtlas: { value: null }, textBox: { value: new THREE.Vector4() },
       textState: { value: CHAPTERS.map(() => new THREE.Vector2()) }, textMeasure: { value: CHAPTERS.map(() => new THREE.Vector2()) },
       textPixels: { value: new THREE.Vector2() }, textGrid: { value: 1 },
       scrollInk: { value: 0 }, scrollPhase: { value: 0 }, scrollPassage: { value: 0 }, scrollSweep: { value: 0 },
     }
     const screenUniforms = {
       a: { value: targetA.texture }, b: { value: targetB.texture }, portalMask: { value: targetMask.texture }, portalFrame: { value: targetFrame.texture },
-      portalEnabled: { value: 0 }, portalTextLeg: { value: 0 }, portalRim: { value: 0 }, framePaper: { value: paper.value }, frameInk: { value: ink.value }, textEnabled: { value: 0 },
+      portalEnabled: { value: 0 }, portalTextLeg: { value: 0 }, portalRim: { value: 0 }, framePaper: { value: paper.value }, frameInk: { value: ink.value },
       exposureA: { value: -1 }, exposureB: { value: -1 }, darkA: { value: 0 }, darkB: { value: 0 },
       outputRatio: { value: 1 }, sculptureReveal: { value: 0 }, scenePixels: { value: new THREE.Vector2(1, 1) }, paperA: { value: paper.value.clone() }, inkA: { value: ink.value.clone() },
       paperB: { value: paper.value.clone() }, inkB: { value: ink.value.clone() }, ...textUniforms,
@@ -294,8 +337,9 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     const screenGeometry = manage(new THREE.PlaneGeometry(2, 2))
     screenScene.add(new THREE.Mesh(screenGeometry, screenMaterial))
     const printed = manage(createDitheredText({ headline, stage, uniforms: textUniforms, pixelRatio: () => renderer.getPixelRatio(), onChapter: showChapter, isAlive: alive }))
-    const loader = new GLTFLoader(), draco = manage(new DRACOLoader().setDecoderPath(assetUrl('draco/')).setWorkerLimit(1))
-    loader.setDRACOLoader(draco)
+    // Abort unfinished downloads on departure and let an active decode settle
+    // before terminating its worker. A late response must not restart Draco.
+    const loader = manage(createPortfolioModelLoader())
     canvas.hidden = true
     canvas.dataset.state = stage.dataset.state = 'loading'
     stage.dataset.mode = 'threshold'
@@ -303,7 +347,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
 
     async function asset(chapter: LandingChapter) {
       const sourceUrl = portfolioAssetUrl(chapter.assetId)
-      const gltf = await loader.loadAsync(sourceUrl)
+      const gltf = await loader.load(sourceUrl, events.signal)
       if (!alive()) { releaseLate(gltf.scene); return }
       own(gltf.scene)
       const group = new THREE.Group()
@@ -326,7 +370,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       assetSources.set(chapter.id, sourceUrl)
     }
     async function loadPortal(): Promise<Portal | null> {
-      const gltf = await loader.loadAsync(assetUrl('landing/threshold-lens.glb'))
+      const gltf = await loader.load(assetUrl('landing/threshold-lens.glb'), events.signal)
       if (!alive()) { releaseLate(gltf.scene); return null }
       own(gltf.scene)
       const frames: THREE.Mesh[] = [], openings: THREE.Mesh[] = [], clip = gltf.animations.find(animation => animation.name === 'Open')
@@ -453,6 +497,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       if (categoryValue !== lastCategory) { category.style.opacity = categoryValue; lastCategory = categoryValue }
       if (linkValue !== lastLinks) { links.style.opacity = linkValue; links.style.transform = `translateY(${((1 - linksAlpha) * 3).toFixed(2)}px)`; lastLinks = linkValue }
       if (usable !== lastUsable) {
+        if (!usable) releaseCopyFocus()
         links.style.pointerEvents = usable ? 'auto' : 'none'
         links.setAttribute('aria-hidden', String(!usable))
         project.tabIndex = usable ? 0 : -1
@@ -488,7 +533,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       screenUniforms.a.value = screenUniforms.b.value = screenUniforms.portalMask.value = screenUniforms.portalFrame.value = texture
       screenUniforms.paperA.value.copy(paper.value); screenUniforms.inkA.value.copy(ink.value)
       screenUniforms.exposureA.value = LANDING_ART[index].exposure; screenUniforms.darkA.value = Number(dark)
-      screenUniforms.portalEnabled.value = 0; screenUniforms.textEnabled.value = 1
+      screenUniforms.portalEnabled.value = 0; printed.surface(false)
       renderer.render(screenScene, screenCamera); renderer.setRenderTarget(null)
     }
     function renderTo(target: THREE.WebGLRenderTarget) { renderer.setRenderTarget(target); renderer.render(scene, camera); renderer.setRenderTarget(null) }
@@ -505,14 +550,14 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       portal.wrapper.scale.setScalar(isStackedLanding(width, height) ? .35 : .9)
       for (const mesh of portal.frames) mesh.visible = false
       for (const mesh of portal.openings) mesh.visible = true
-      renderer.setClearColor(0x000000, 1); renderer.setRenderTarget(targetMask); renderer.clear(); renderer.render(portalScene, portalCamera); renderer.setRenderTarget(null)
+      renderer.setClearColor(0x000000, 1); renderer.setRenderTarget(targetMask); renderer.render(portalScene, portalCamera); renderer.setRenderTarget(null)
       for (const mesh of portal.frames) mesh.visible = true
       for (const mesh of portal.openings) mesh.visible = false
       colors()
-      renderer.setClearColor('#eeeadd', 0); renderer.setRenderTarget(targetFrame); renderer.clear(); renderer.render(portalScene, portalCamera); renderer.setRenderTarget(null); renderer.setClearColor('#eeeadd', 0)
+      renderer.setClearColor('#eeeadd', 0); renderer.setRenderTarget(targetFrame); renderer.render(portalScene, portalCamera); renderer.setRenderTarget(null); renderer.setClearColor('#eeeadd', 0)
       screenUniforms.a.value = targetA.texture; screenUniforms.b.value = targetB.texture
       screenUniforms.portalMask.value = targetMask.texture; screenUniforms.portalFrame.value = targetFrame.texture
-      screenUniforms.portalEnabled.value = 1; screenUniforms.textEnabled.value = 1
+      screenUniforms.portalEnabled.value = 1; printed.surface(true)
       screenUniforms.portalRim.value = portalFrameOpacity(local)
       renderer.setRenderTarget(null); renderer.render(screenScene, screenCamera)
     }
@@ -521,7 +566,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       const bounds = actorBounds.get(object)!
       if (mobile) {
         const chapter = CHAPTERS[index]
-        const frame = mobileSculptureFrame(width, height, copyTop, copyLineHeight, chapter.lines.length, chapter.article ? 2 : 1, bounds.size, safeBottom)
+        const frame = mobileSculptureFrame(width, height, copyTop, printed.blockHeight(chapter), 1, chapter.id !== 'helmet' && chapter.article ? 2 : 1, bounds.size, safeBottom)
         object.position.set(frame.x - bounds.center.x * frame.scale + pose.x, frame.y - bounds.center.y * frame.scale + pose.y, -bounds.center.z * frame.scale)
         object.scale.setScalar(frame.scale * pose.scale)
       } else {
@@ -537,6 +582,8 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       object.rotation.x += living.pitch
       object.rotation.y += living.yaw
       object.rotation.z += living.roll
+      object.position.x += living.x
+      object.position.y += living.y
       articulate(object, pose.articulation * art.turn)
     }
     function prepareShot(object: THREE.Group, index: number, local: number, mobile: boolean, incoming = false) {
@@ -566,7 +613,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       let left: number, top: number, right: number, bottom: number
       if (mobile) {
         const chapter = CHAPTERS[index]
-        const fit = mobileSculptureFrame(width, height, copyTop, copyLineHeight, chapter.lines.length, chapter.article ? 2 : 1, bounds.size, safeBottom)
+        const fit = mobileSculptureFrame(width, height, copyTop, printed.blockHeight(chapter), 1, chapter.id !== 'helmet' && chapter.article ? 2 : 1, bounds.size, safeBottom)
         left = width * .02; right = width * .98; top = fit.top; bottom = fit.bottom
       } else {
         const fit = desktopSculptureFrame(width, height, index, bounds.size)
@@ -630,10 +677,10 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       canvas.dataset.mechanicalParts = String((parts.get(actors[interactionIndex]!) ?? []).filter(part => part.motion).length)
       canvas.dataset.sculptureMotion = reduced.matches ? 'reduced' : animated ? 'playing' : 'paused'
       canvas.dataset.scrollFrames = String(++frames)
-      prefetch()
+      if (screenUniforms.sculptureReveal.value === 1) prefetch()
     }
     function request(delay = 0) {
-      if (!alive() || !ready || !visible || document.hidden || frame) return
+      if (!alive() || !ready || !visible || document.hidden || stage.dataset.covered === 'true' || frame) return
       if (wakeTimer) {
         if (delay > 0) return
         clearTimeout(wakeTimer); wakeTimer = 0
@@ -643,12 +690,18 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     }
     function tick(time: number) {
       frame = 0
+      if (stage.dataset.covered === 'true') { stop(); return }
       if (!alive() || !ready || !visible || document.hidden) return
       const seconds = last ? (time - last) / 1000 : 1 / 60
       last = time
-      const motion = advanceScrollMotion({ progress, velocity }, targetProgress, seconds, reduced.matches)
-      progress = motion.progress; velocity = motion.velocity
-      if (Math.abs(progress - targetProgress) * scrollDistance < .1 && Math.abs(velocity) * scrollDistance < 2) { progress = targetProgress; velocity = 0 }
+      let motion = advanceScrollMotion({ progress, velocity }, targetProgress, seconds, reduced.matches, recovering ? height / scrollDistance * 1.25 : Infinity)
+      if (Math.abs(motion.progress - targetProgress) * scrollDistance < .1 && Math.abs(motion.velocity) * scrollDistance < 2) motion = { progress: targetProgress, velocity: 0 }
+      // Demand-load first; retain a living, fully painted scene while decoding.
+      // A late asset must not consume the passage and appear at its final frame.
+      const waiting = !ensure(reduced.matches ? targetProgress : motion.progress)
+      if (!waiting) { progress = motion.progress; velocity = motion.velocity }
+      else { velocity = 0; recovering = true }
+      if (reduced.matches || Math.abs(progress - targetProgress) * scrollDistance < 2) recovering = false
       const scrolling = progress !== targetProgress || velocity !== 0
       movingInk = advanceScrollInk(movingInk, scrollInkStrength(velocity, scrollDistance, height, reduced.matches), seconds, reduced.matches)
       const inking = movingInk > 0
@@ -660,15 +713,16 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       const sceneReady = ensure(reduced.matches ? targetProgress : progress)
       const living = sculptureAnimationActive(reduced.matches, visible, menuOpen, !!pointer, keyboardFocus, stage.dataset.motionPlaying !== 'false', sceneReady)
       if (!sceneReady) openingRuntime.suspend()
-      revealStarted ??= time
-      screenUniforms.sculptureReveal.value = reduced.matches ? 1 : THREE.MathUtils.smoothstep((time - revealStarted) / 140, 0, 1)
+      if (sceneReady) revealStarted ??= time
+      screenUniforms.sculptureReveal.value = openingInkReveal(revealStarted === undefined ? 0 : time - revealStarted, reduced.matches)
       const revealing = screenUniforms.sculptureReveal.value < 1
       // Keep native scroll responsive. Only the idle sculpture uses the shared 30 Hz budget.
-      if (openingRuntime.canPaint(time, scrolling || inking || interacting || !!pointer || !living)) {
-        if (sceneReady && openingRuntime.advance(time, living, scrolling || inking || interacting || !!pointer)) size()
+      if (openingRuntime.canPaint(time, scrolling && !waiting || inking || interacting || revealing || !!pointer || !living)) {
+        if (sceneReady && openingRuntime.advance(time, living, scrolling && !waiting || inking || interacting || revealing || !!pointer)) size()
         try { draw() } catch { fail(); return }
       }
-      if (scrolling || inking || interacting || revealing) request()
+      if (waiting && !inking && !interacting && !revealing) request(openingRuntime.paintDelay(time))
+      else if (scrolling || inking || interacting || revealing) request()
       else if (living) request(openingRuntime.paintDelay(time))
       else { last = 0; openingRuntime.suspend() }
     }
@@ -676,6 +730,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       if (!alive()) return
       scrollDistance = Math.max(1, rail.clientHeight - stage.clientHeight)
       targetProgress = railProgress(scrollY, rail.getBoundingClientRect().top + scrollY, rail.clientHeight, stage.clientHeight)
+      if (stage.dataset.covered === 'true') { stop(); hideHelmetControl(); return }
       if (!helmetControl.hidden && sculptureRestWeight(targetProgress, interactionIndex, reduced.matches) < .05) hideHelmetControl(true)
       if (targetProgress > 0 && !portal && !reduced.matches) void requestPortal()
       ensure(targetProgress)
@@ -707,9 +762,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
           for (const target of [targetB, targetMask, targetFrame]) target.setSize(targetA.width, targetA.height)
           stage.dataset.renderScale = String(budget.resolutionScale)
         }
-        const style = getComputedStyle(headline)
         copyTop = headline.getBoundingClientRect().top - stage.getBoundingClientRect().top
-        copyLineHeight = parseFloat(style.lineHeight) || parseFloat(style.fontSize)
         const linkBottom = parseFloat(getComputedStyle(links).bottom)
         safeBottom = Number.isFinite(linkBottom) ? Math.max(0, linkBottom - 50) : 0
         printed.resize(); measure()

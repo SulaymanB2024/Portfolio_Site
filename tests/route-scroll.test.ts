@@ -79,6 +79,26 @@ test('same-page contents navigation remains with its reader and keeps later scro
   f.scroll.dispose()
 })
 
+test('a fresh section arrival runs after the top reset, while history retains the reading position', () => {
+  const f = fixture()
+  f.move(420)
+  let arrivals = 0
+  const reachSection = () => {
+    arrivals++
+    f.host.scrollTo({ top: 55000, behavior: 'instant' })
+  }
+  f.scroll.commit(f.push(), reachSection); f.paint()
+  assert.equal(f.host.scrollY, 55000)
+  assert.equal(arrivals, 1)
+  f.move(55780)
+  f.scroll.commit(f.back(), reachSection); f.paint()
+  assert.equal(f.host.scrollY, 420)
+  f.scroll.commit(f.forward(), reachSection); f.paint()
+  assert.equal(f.host.scrollY, 55780)
+  assert.equal(arrivals, 1)
+  f.scroll.dispose()
+})
+
 test('disposal restores native policy and removes pending frames and event work', () => {
   const f = fixture()
   assert.equal(f.history.scrollRestoration, 'manual')

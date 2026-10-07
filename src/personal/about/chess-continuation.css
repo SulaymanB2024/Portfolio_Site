@@ -1,0 +1,165 @@
+.chess-continuation {
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  --continuation-light: var(--chess-piece-light);
+  --continuation-dark: var(--chess-piece-dark);
+}
+.chess-continuation-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  margin: 0 0 8px;
+  color: var(--muted);
+  font: 12px/1.5 var(--chess-ui);
+}
+.chess-continuation-replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 0 8px 10px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+}
+.chess-continuation-replay:disabled { color: var(--muted); }
+.chess-continuation-replay:is(:hover,:focus-visible):not(:disabled) {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.chess-continuation-board {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  touch-action: manipulation;
+}
+.chess-continuation-board > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.chess-continuation-board:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.chess-continuation-board:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 5px;
+}
+.chess-continuation-edge {
+  fill: none;
+  stroke: var(--chess-tile-dark);
+  stroke-width: 1.4;
+}
+.chess-continuation-grid {
+  fill: none;
+  stroke: var(--chess-tile-dark);
+  stroke-width: 0.5;
+}
+.chess-continuation-axis {
+  fill: var(--muted);
+  font: 16px var(--chess-notation);
+}
+.chess-continuation .chess-piece {
+  width: 48px;
+  height: 48px;
+}
+.chess-continuation .chess-piece[data-color='w'] {
+  fill: var(--continuation-white-fill);
+  stroke: var(--continuation-dark);
+}
+.chess-continuation .chess-piece[data-color='b'] {
+  fill: var(--continuation-black-fill);
+  stroke: var(--continuation-light);
+}
+.chess-continuation .chess-piece[data-color='w'] .chess-piece-eye {
+  fill: var(--continuation-dark);
+}
+.chess-continuation .chess-piece[data-color='b'] .chess-piece-eye {
+  fill: var(--continuation-light);
+}
+.chess-continuation-piece {
+  transform-box: view-box;
+}
+.chess-continuation-original {
+  opacity: calc(1 - var(--continuation-promoted, 0));
+}
+.chess-continuation-upgraded {
+  opacity: var(--continuation-promoted, 0);
+}
+.chess-continuation-marker {
+  opacity: 0;
+  fill: none;
+  stroke: var(--chess-piece-light);
+  stroke-width: 3;
+  filter: drop-shadow(0 0 1px var(--chess-piece-dark));
+}
+.chess-continuation-final {
+  fill: none;
+  stroke: var(--chess-piece-light);
+  stroke-width: 3;
+  filter: drop-shadow(0 0 1px var(--chess-piece-dark));
+}
+.chess-continuation[data-has-line='true'] .chess-continuation-plane {
+  animation: var(--continuation-cycle) var(--continuation-duration) linear infinite both;
+}
+.chess-continuation[data-has-line='true'] .chess-continuation-piece[data-moving='true'] {
+  animation: var(--continuation-animation) var(--continuation-duration) ease-in-out infinite both;
+}
+.chess-continuation[data-has-line='true'] .chess-continuation-marker,
+.chess-continuation[data-has-line='true'] .chess-continuation-ply-ink {
+  animation: var(--continuation-highlight) var(--continuation-duration) steps(1, end) infinite both;
+}
+.chess-continuation[data-has-line='true'] .chess-continuation-final {
+  display: none;
+}
+.chess-continuation[data-motion='false'] :is(.chess-continuation-plane, .chess-continuation-piece, .chess-continuation-marker, .chess-continuation-ply-ink) {
+  animation-play-state: paused;
+}
+.chess-continuation-line {
+  margin: 12px 0 0;
+  color: var(--ink);
+  font: 13px/1.8 var(--chess-notation);
+  text-wrap: pretty;
+}
+.chess-continuation-line > span {
+  position: relative;
+  display: inline-block;
+  margin-right: 7px;
+}
+.chess-continuation-line b {
+  font-weight: 500;
+}
+.chess-continuation-line small {
+  color: var(--muted);
+  font-size: 11px;
+}
+.chess-continuation-ply-ink {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--ink);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .chess-continuation :is(.chess-continuation-plane, .chess-continuation-piece, .chess-continuation-marker, .chess-continuation-ply-ink) {
+    animation: none !important;
+  }
+  .chess-continuation-plane {
+    opacity: 1;
+  }
+  .chess-continuation[data-has-line='true'] .chess-continuation-final {
+    display: block;
+  }
+}

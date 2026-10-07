@@ -31,10 +31,9 @@
 }
 .work-table thead th {
   font:
-    11px/1.6 'Courier New',
-    monospace;
+    500 12px/1.6 var(--type-interface, Arial, sans-serif);
   color: var(--muted);
-  text-transform: uppercase;
+  text-transform: none;
 }
 .work-table tbody th {
   font:
@@ -53,8 +52,7 @@
 }
 .work-material-note {
   font:
-    12px/1.75 'Courier New',
-    monospace;
+    12px/1.7 var(--type-interface, Arial, sans-serif);
   color: var(--muted);
   margin: 22px 0 0;
   max-width: 100ch;

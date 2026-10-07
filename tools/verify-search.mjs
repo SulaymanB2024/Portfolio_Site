@@ -89,9 +89,8 @@ for (const url of urls) {
   const elementIds = new Set([...body.matchAll(/\bid="([^"]+)"/g)].map(match => decode(match[1])))
   if (['/', '/about'].includes(url.pathname)) {
     assert(decode(body).includes(person.description), `Visible biography/schema drift: ${url.pathname}`)
-    // Connected profiles are displayed on Home; About opens directly on the
-    // three-object collection, with the same verified identity in its schema.
-    if (url.pathname === '/') for (const href of person.sameAs) assert(links.has(href), `Profile is not visible: ${url.pathname} → ${href}`)
+    // Verified profiles remain in the identity schema; the homepage intentionally
+    // omits the separate social navigation, while About opens on the collection.
     assert(links.has(url.pathname === '/' ? '/about' : '/resume'))
   }
   for (const href of links) if (/^#(?:source-|note-)/.test(href)) {
@@ -103,6 +102,8 @@ for (const url of urls) {
     const node = graph.find(node => node['@type'] === 'Article')
     assert(node, `Missing article entity: ${article.slug}`)
     assert.equal(node.headline, decode(h1[0][1]))
+    assert.equal(title, `${source.seoTitle || source.title} — Sulayman Bowles`)
+    assert.equal(meta.description, source.seoDescription || source.subtitle)
     assert.equal(node.mainEntityOfPage['@id'], page['@id'])
     assert.equal(node.author['@id'], person['@id'])
     assert.equal(node.datePublished, source.date.replaceAll('.', '-'))
@@ -161,4 +162,4 @@ for (const path of ['/404/index.html', '/sitemap.html']) {
   assert(html.includes('name="robots" content="noindex, follow"'), `Utility indexing drift: ${path}`)
 }
 await stat('dist/Sulayman_Bowles_Resume.pdf')
-console.log(`Search gate passed: ${urls.length} unique canonical pages, visible biographies/connected profiles, coherent identity/social/schema metadata, ${catalog.length} dated feed entries, ${citations} source citations, complete HTML sections, search crawler access, and generated discovery.`)
+console.log(`Search gate passed: ${urls.length} unique canonical pages, visible biographies, coherent identity/social/schema metadata, ${catalog.length} dated feed entries, ${citations} source citations, complete HTML sections, search crawler access, and generated discovery.`)

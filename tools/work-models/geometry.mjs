@@ -7,10 +7,11 @@ const vec = (x, y, z) => new THREE.Vector3(x, y, z)
 
 // Every source is built here from geometry; there are no external model inputs.
 const materialStyles = {
-  silver: { color: [.48, .47, .45, 1], metal: .38, roughness: .38 },
-  steel: { color: [.29, .29, .275, 1], metal: .46, roughness: .42 },
-  ink: { color: [.095, .10, .105, 1], metal: .25, roughness: .49 },
-  porcelain: { color: [.57, .56, .53, 1], metal: .12, roughness: .45 },
+  silver: { color: [.56, .535, .49, 1], metal: .92, roughness: .23 },
+  steel: { color: [.285, .285, .27, 1], metal: .84, roughness: .36 },
+  pewter: { color: [.38, .365, .34, 1], metal: .88, roughness: .34 },
+  ink: { color: [.085, .085, .080, 1], metal: .16, roughness: .78 },
+  porcelain: { color: [.57, .555, .52, 1], metal: .025, roughness: .40 },
 }
 function group(name, material, pivot = null, axis = Y.clone()) { return { name, material, geometries: [], pivot, axis } }
 const shaftAxis = rotation => vec(0,0,1).applyQuaternion(new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation)))

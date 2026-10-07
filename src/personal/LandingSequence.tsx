@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { projects } from './content'
 import { portfolioAssetUrl } from './portfolio-assets'
+import { DestinationLink, LinkArrow } from './DestinationLink'
 import './landing/landing.css'
 import './landing/opening-motion.css'
 
@@ -23,7 +24,12 @@ export default function LandingSequence({ onActiveChange }: { onActiveChange: (a
     if (!element) return
     let previous: boolean | undefined
     function update() {
-      const active = element!.getBoundingClientRect().bottom > innerHeight - 60
+      const continuation = element!.nextElementSibling
+      const top = continuation instanceof HTMLElement && continuation.classList.contains('home-standard-content')
+        ? continuation.getBoundingClientRect().top : element!.getBoundingClientRect().bottom
+      const covered = String(top <= 0)
+      if (stage.current && stage.current.dataset.covered !== covered) stage.current.dataset.covered = covered
+      const active = top > innerHeight - 60
       if (active !== previous) { previous = active; onActiveChange(active) }
     }
     window.addEventListener('scroll', update, { passive: true })
@@ -53,13 +59,13 @@ export default function LandingSequence({ onActiveChange }: { onActiveChange: (a
   return <section ref={rail} className="landing-rail" aria-label="Selected work scroll sequence">
     <link rel="preload" as="fetch" href={portfolioAssetUrl('helmet')} crossOrigin="anonymous" />
     <div ref={stage} className="landing-stage">
-      <canvas ref={canvas} className="landing-canvas" aria-hidden="true" />
+      <canvas ref={canvas} className="landing-canvas" aria-hidden="true" hidden />
       <div className="landing-copy"><div ref={copyContent} className="landing-copy-content">
         <span ref={category} className="landing-category" />
-        <a ref={title} className="landing-title-target" tabIndex={-1}><h1 ref={headline} id="landing-title">The frontier<br />is all that<br />matters.</h1></a>
+        <a ref={title} className="landing-title-target" tabIndex={-1}><h1 ref={headline} id="landing-title"><span className="landing-title-line" data-quiet>The</span>{' '}<span className="landing-title-line">frontier</span>{' '}<span className="landing-title-line" data-quiet>is all that</span>{' '}<span className="landing-title-line">matters.</span></h1></a>
         <div ref={links} className="landing-story-links">
-          <a ref={project} href="#/about">About me <span aria-hidden="true">↗</span></a>
-          <a ref={article} hidden />
+          <a ref={project} className="destination-link" href="#/work"><span className="destination-link-label">Selected work</span><LinkArrow /></a>
+          <a ref={article} className="destination-link" href="#/about"><span className="destination-link-label">About me</span><LinkArrow /></a>
         </div>
       </div></div>
       <button ref={helmetControl} type="button" className="landing-helmet-control" aria-label="Rotate helmet" aria-describedby="sculpture-instructions" hidden>
@@ -67,8 +73,8 @@ export default function LandingSequence({ onActiveChange }: { onActiveChange: (a
       </button>
       <p ref={loading} className="landing-loading" role="status" hidden>Loading sculpture</p>
       <nav className="landing-fallback-nav" aria-label="Project pages">
-        {projects.map(item => <a key={item.slug} href={`#/work/${item.slug}`}>{item.name}<span aria-hidden="true">↗</span></a>)}
-        <a href="#/writing">Writing<span aria-hidden="true">↗</span></a>
+        {projects.map(item => <DestinationLink key={item.slug} href={`#/work/${item.slug}`}>{item.name}</DestinationLink>)}
+        <DestinationLink href="#/writing">Writing</DestinationLink>
       </nav>
     </div>
     <nav className="landing-screen-reader-nav" aria-label="All selected projects">

@@ -5,16 +5,27 @@
   "number": "10",
   "category": "STRUCTURED DATA",
   "title": "Structured Data Without Content Drift",
-  "seoTitle": "Structured Data Without Drift: One Source for HTML and JSON-LD",
-  "subtitle": "A typed-content architecture for keeping visible pages, metadata, JSON-LD, sitemaps, and exports consistent through generation, invariants, and production tests.",
-  "seoDescription": "Prevent structured-data drift by generating HTML, metadata, JSON-LD, sitemaps, and exports from one typed content model with semantic invariants and release checks.",
-  "image": "/og-default.png",
+  "seoTitle": "Prevent JSON-LD Drift with a Shared Content Model",
+  "subtitle": "Keep the page and its machine-readable claims on the same record.",
+  "seoDescription": "Generate visible HTML, metadata, JSON-LD and sitemaps from one content record. Test dates, URLs, entities and images for agreement beyond schema syntax.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/structured-data-editorial.webp",
+    "socialSrc": "/images/research/structured-data-social.jpg",
+    "alt": "Two synchronized monochrome ledgers run in parallel while one translucent layer begins to drift.",
+    "label": "Structured data / synchronized ledgers",
+    "caption": "Visible content and machine-readable projections stay aligned until an unmanaged shadow layer separates."
+  },
   "date": "2026.07.19",
-  "dateModified": "2026.07.19",
+  "dateModified": "2026-10-05",
   "lastVerified": "2026.07.19",
-  "readTime": "14 MIN",
+  "readTime": "5 MIN",
   "author": "SULAYMAN BOWLES",
-  "thesis": "Structured data is trustworthy when it is a typed projection of the same maintained record that renders the page, and release gates test semantic agreement rather than syntax alone.",
+  "thesis": "Generate structured data from the maintained record that renders the page. Validate both its shape and agreement with visible content; correct syntax cannot reconcile contradictory facts.",
+  "conclusion": {
+    "title": "Test agreement, not just valid syntax",
+    "content": "One maintained record reduces independent copies of facts. Compare its visible and machine-readable outputs after delivery as well as at build time. Coherence and feature eligibility do not promise a rich result, ranking change, or indexing outcome."
+  },
   "evidenceBoundary": "Valid JSON-LD and policy-aligned page content can establish internal consistency and eligibility conditions. They do not guarantee a rich result, ranking change, indexation, citation, or any particular downstream interpretation.",
   "metrics": [
     {
@@ -62,17 +73,17 @@
     }
   ],
   "content": [
-    "Structured data drifts when it is maintained as a second copy of the page. A title changes in the component but not in JSON-LD; a publication date updates in the sitemap but not the article record; an offer expires while a cached schema block still marks it available; a profile page names a current role that the visible biography no longer supports. Every representation can be syntactically valid and collectively contradictory.",
-    "The durable fix is architectural. Define one typed domain record with stable identifiers, validated fields, provenance, and explicit optionality. Render visible HTML, head metadata, JSON-LD, sitemap rows, feeds, and exports as projections of that record. Then test both the schema shape and the agreement between machine-readable values and the page a person can inspect."
+    "A valid schema block can still describe the wrong page. Titles drift between components and JSON-LD, dates between articles and sitemaps, availability between offers and caches, and roles between profiles and biographies. Separate copies allow every representation to pass syntax checks while disagreeing.",
+    "Maintain one typed record with stable identifiers, validated fields, provenance, and explicit optionality. Generate HTML, head metadata, JSON-LD, sitemaps, feeds, and exports from it. Then compare their meanings, not just whether each output parses."
   ],
   "sections": [
     {
       "id": "domain-record",
-      "title": "Start with a domain record, not a schema-shaped object",
+      "title": "Model the publication before the vocabulary",
       "paragraphs": [
-        "The content model should describe the product or publication, not the vocabulary of one consumer. An Article record might own canonical path, headline, description, author reference, publication time, modification time, image asset, body, evidence boundary, and indexability. A Product record might own identity, offer state, price amount and currency, availability source, and review policy. JSON-LD is one serialization of those facts.",
-        "Validate the domain record at ingestion or build time. Dates should be parseable and ordered, money should carry currency, canonical paths should be unique, referenced assets should exist, and identifiers should be stable across deployments. Optional fields should reflect genuinely absent facts rather than a renderer failing to locate them.",
-        "Keep editorial language and normalized values together. The page may display “Updated July 19, 2026” while the machine value is an ISO timestamp. Both should derive from the same instant. If two teams maintain the human and machine forms separately, a formatting change can become a factual disagreement."
+        "Describe the domain rather than one consumer’s schema. An Article owns canonical path, headline, description, author, publication and modification times, image, body, evidence boundary, and indexability. A Product owns identity, offer state, price and currency, availability source, and review policy. JSON-LD serializes those facts.",
+        "Validate at ingestion or build: parse and order dates, pair amounts with currency, enforce unique canonical paths, check assets, and retain stable identifiers across deployments. Optional fields should mean absent facts, not missing data in a renderer.",
+        "Derive editorial displays and normalized values together. “Updated July 19, 2026” and its ISO timestamp should represent the same instant. Separate ownership can turn a formatting edit into a factual conflict."
       ],
       "table": {
         "caption": "Domain field to public projection",
@@ -124,11 +135,11 @@
     },
     {
       "id": "stable-identifiers",
-      "title": "Use stable identifiers to connect page entities",
+      "title": "Give shared entities stable identities",
       "paragraphs": [
-        "JSON-LD can represent several related entities: the WebPage, its main Article or Product, the author, publisher, organization, breadcrumb, image, and dataset. Stable absolute identifiers let those nodes refer to one another without copying full records into every page. A profile can own the Person node while articles refer to its identifier.",
-        "An identifier is a public contract. Avoid build hashes, deployment URLs, random values, and environment-specific hosts. Define identifiers from the canonical production origin and stable fragments or routes. If a domain changes, migrate identifiers deliberately and preserve equivalent public relationships where appropriate.",
-        "Do not create identity connections merely because two labels resemble each other. A sameAs relation, author reference, or organization membership should be supported by the maintained domain record and visible content. Stronger graph connectivity is not useful when the edges are unreviewed assertions."
+        "A page graph can connect WebPage, Article or Product, author, publisher, organization, breadcrumb, image, and dataset. Stable absolute IDs let those entities reference each other without divergent copies. A profile can maintain the Person while articles point to it.",
+        "Base IDs on the production origin and enduring routes or fragments—not hashes, random values, preview deployments, or environment-specific hosts. Domain changes need deliberate identity migration and, where appropriate, preserved equivalent public relationships.",
+        "Similar labels do not establish sameAs, authorship, or membership. Support those connections with maintained records and visible content. Extra connectivity cannot compensate for unreviewed assertions."
       ],
       "bullets": [
         "Use canonical absolute URLs for public entity identifiers.",
@@ -140,28 +151,28 @@
     },
     {
       "id": "projection-boundary",
-      "title": "Generate JSON-LD at the projection boundary",
+      "title": "Generate schema from validated records",
       "paragraphs": [
-        "Place schema generation near the code that converts a validated domain record into page output, not inside a presentation component that receives fragments of data. The generator should be a pure function: the same input record and site configuration produce the same JSON-compatible object. That makes snapshots, property tests, and cross-output comparisons possible.",
-        "Select the most specific applicable type only after the page purpose is clear. A page can contain several entities, but the main entity should match what a reader sees. Google structured-data guidance emphasizes visible, representative, current content. A richly populated object describing hidden or unrelated material is a quality defect even if a validator accepts every property.",
-        "Treat consumer-specific requirements as adapters. The JSON-LD standard defines a serialization model; schema.org defines vocabulary; individual search features impose additional eligibility rules. Keep those layers distinguishable so a change in one consumer does not corrupt the underlying domain record."
+        "Generate schema where validated records become public output, rather than inside a component with only fragments of the data. A pure function of record and site configuration produces a repeatable JSON-compatible object for snapshots, property tests, and output comparisons.",
+        "Choose the most specific applicable type after defining the page’s purpose. Its main entity should match visible, representative, current content, consistent with Google’s guidance. Hidden or unrelated claims remain defects even when a validator accepts their properties.",
+        "Keep consumer adapters separate. JSON-LD supplies serialization, schema.org supplies vocabulary, and individual search features impose eligibility rules. A consumer change should update its adapter without corrupting the domain record."
       ],
       "codeExamples": [
         {
           "title": "Generate Article JSON-LD from the maintained record",
           "description": "The function receives validated content and emits no independently maintained facts.",
           "language": "typescript",
-          "code": "function articleJsonLd(article: ArticleRecord, site: SiteConfig) {\n  const url = new URL(article.canonicalPath, site.origin).href;\n  return {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"Article\",\n    \"@id\": `${url}#article`,\n    mainEntityOfPage: { \"@id\": url },\n    headline: article.headline,\n    description: article.description,\n    datePublished: article.publishedAt,\n    dateModified: article.modifiedAt,\n    author: { \"@id\": `${site.origin}/about#person` },\n    image: new URL(article.image.path, site.origin).href,\n  };\n}"
+          "code": "function articleJsonLd(article: ArticleRecord, site: SiteConfig) {\n  const url = new URL(article.canonicalPath, site.origin).href;\n  return {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"Article\",\n    \"@id\": `${url}#article`,\n    mainEntityOfPage: { \"@id\": url },\n    headline: article.headline,\n    description: article.description,\n    datePublished: article.publishedAt,\n    dateModified: article.modifiedAt,\n    author: { \"@id\": `${site.origin}/about#person` },\n    image: new URL(article.artwork.socialSrc, site.origin).href,\n  };\n}"
         }
       ]
     },
     {
       "id": "semantic-invariants",
-      "title": "Test semantic invariants across outputs",
+      "title": "Compare the built outputs",
       "paragraphs": [
-        "A schema validator answers whether an object satisfies a vocabulary or feature shape. It may not know that the page h1 says one thing while the headline property says another, that the declared image returns 404, or that a sitemap modification date changes on every build. Add site-specific invariants that compare generated outputs against the domain record.",
-        "Parse the built HTML rather than searching source strings. Extract the canonical, visible heading, relevant date labels, image references, and embedded JSON-LD. Resolve URLs against the production origin, locate the main entity, and compare normalized values. Fetch or file-check referenced assets in the appropriate validation stage.",
-        "Test negative cases. A missing required field should fail before emission; a future publication time should be rejected unless scheduled publishing is a supported state; a noindex route should not enter the canonical sitemap; and two pages should not claim the same unique entity identifier unless they intentionally describe one entity."
+        "Vocabulary validation may miss an h1/headline mismatch, an image returning 404, or sitemap dates changing on every build. Add invariants that compare generated outputs with their source record.",
+        "Parse built HTML to extract canonical, visible heading, date labels, image references, and JSON-LD. Resolve URLs against production, locate the main entity, and compare normalized values. File-check or fetch assets at the appropriate stage.",
+        "Test failure cases too: reject missing requirements before emission and future publication times unless scheduling is supported. Keep noindex routes outside the canonical sitemap. Reject shared unique entity IDs unless the pages intentionally describe the same entity."
       ],
       "table": {
         "caption": "Semantic release invariants",
@@ -206,11 +217,11 @@
     },
     {
       "id": "change-management",
-      "title": "Version the contract and make drift observable",
+      "title": "Trace warnings back to the owning record",
       "paragraphs": [
-        "Vocabulary and consumer documentation evolve. Record the date and source used for feature-specific fields, then isolate changes in a schema adapter with focused tests. Do not rewrite historical publication facts to make markup look fresh. Modification dates should represent significant changes to the page or structured record according to a documented policy.",
-        "Add a production smoke check because middleware, caches, tag managers, and client code can change the delivered document after the build passes. Fetch representative routes, parse the final head and body, verify JSON-LD once, and compare the public sitemap. If client rendering mutates structured data, capture source and DOM values separately and fail on contradictions.",
-        "Monitor errors as evidence, not as an automatic editing feed. A consumer warning may be optional, page-type specific, or based on stale retrieval. Reproduce it against the current public response, map it to the maintained domain field, and change the source record or adapter once. The objective is one coherent public fact graph, not a validator with zero yellow icons."
+        "Date feature guidance and isolate vocabulary or consumer changes in tested adapters. Do not refresh historical publication facts to make markup look current. Apply a documented significant-change policy to modification dates.",
+        "Fetch representative production routes after middleware, caching, tag managers, and client execution can alter them. Parse delivered head and body, verify JSON-LD, and compare the public sitemap. If rendering changes schema, preserve source and DOM separately and reject contradictions.",
+        "Reproduce consumer warnings before editing. They may reflect optional fields, page types, or stale retrieval. Map a current warning to its domain field and change the source or adapter once. Agreement matters more than eliminating every validator warning."
       ],
       "bullets": [
         "Document which changes qualify as dateModified and sitemap lastmod updates.",
@@ -223,5 +234,7 @@
     }
   ],
   "path": "/research/technical-seo/structured-data-without-content-drift",
-  "aliases": []
+  "aliases": [],
+  "image": "/images/research/structured-data-social.jpg",
+  "displayTitle": "Structured data without content drift."
 }

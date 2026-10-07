@@ -125,6 +125,30 @@ test('verify-only validates shipped models without changing sources, assets, man
   }
 })
 
+test('a selected authored refresh preserves every unselected model and registry entry', async () => {
+  const before = await snapshot()
+  const beforeManifest = JSON.parse(await readFile(resolve(root, 'public/portfolio-models/manifest.json'), 'utf8'))
+  const { stdout } = await promisify(execFile)(process.execPath, ['tools/optimize-portfolio-assets.mjs', '--refresh-authored', '--only=about-score'], { cwd: root, timeout: 300_000 })
+  assert.match(stdout, /prepared about-score:/)
+  const after = await snapshot()
+  const afterManifest = JSON.parse(await readFile(resolve(root, 'public/portfolio-models/manifest.json'), 'utf8'))
+  assert.deepEqual(afterManifest, beforeManifest, 'A current selected source should need no registry changes')
+  for (const definition of definitions) {
+    assert.deepEqual(after[definition.source], before[definition.source], `${definition.id}: authored source changed`)
+    assert.deepEqual(after[definition.path], before[definition.path], `${definition.id}: current derivative was rewritten`)
+    if (definition.id !== 'about-score') assert.deepEqual(afterManifest.assets[definition.id], beforeManifest.assets[definition.id], `${definition.id}: unrelated registry entry changed`)
+  }
+})
+
+test('a selected authored refresh rejects imported scans before writing files', async () => {
+  const before = await snapshot()
+  await assert.rejects(
+    promisify(execFile)(process.execPath, ['tools/optimize-portfolio-assets.mjs', '--refresh-authored', '--only=helmet'], { cwd: root, timeout: 300_000 }),
+    /selected authored refresh requires an original validated specimen/,
+  )
+  assert.deepEqual(await snapshot(), before)
+})
+
 test('only an authored refresh may add chess and résumé templates; other registry drift fails', () => {
   const current = { assets: Object.fromEntries(definitions.map(({ id }) => [id, {}])) }
   const previous = structuredClone(current)

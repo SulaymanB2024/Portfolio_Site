@@ -265,49 +265,21 @@
       "status": 308
     },
     {
-      "src": "/research/crawler\\-engineering/crawl\\-frontier\\-state\\-machine",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#capture"
-      },
-      "status": 308
-    },
-    {
       "src": "/writing/crawl\\-frontier\\-state\\-machine",
       "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#capture"
-      },
-      "status": 308
-    },
-    {
-      "src": "/research/technical\\-seo/raw\\-html\\-rendered\\-dom\\-evidence",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#source-and-render"
+        "Location": "/research/crawler-engineering/crawl-frontier-state-machine"
       },
       "status": 308
     },
     {
       "src": "/writing/raw\\-html\\-rendered\\-dom\\-evidence",
       "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#source-and-render"
-      },
-      "status": 308
-    },
-    {
-      "src": "/research/technical\\-seo/canonicalization\\-graph\\-consistency",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#findings"
+        "Location": "/research/technical-seo/raw-html-rendered-dom-evidence"
       },
       "status": 308
     },
     {
       "src": "/writing/canonicalization\\-graph\\-consistency",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#findings"
-      },
-      "status": 308
-    },
-    {
-      "src": "/research/technical\\-seo/internal\\-links\\-directed\\-retrieval\\-graph",
       "headers": {
         "Location": "/writing/atlas-building-an-evidence-console#findings"
       },
@@ -321,13 +293,6 @@
       "status": 308
     },
     {
-      "src": "/research/ai\\-crawlers/robots\\-txt\\-courtesy\\-not\\-access\\-control",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#capture"
-      },
-      "status": 308
-    },
-    {
       "src": "/writing/robots\\-txt\\-courtesy\\-not\\-access\\-control",
       "headers": {
         "Location": "/writing/atlas-building-an-evidence-console#capture"
@@ -335,21 +300,7 @@
       "status": 308
     },
     {
-      "src": "/research/technical\\-seo/structured\\-data\\-without\\-content\\-drift",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#findings"
-      },
-      "status": 308
-    },
-    {
       "src": "/writing/structured\\-data\\-without\\-content\\-drift",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#findings"
-      },
-      "status": 308
-    },
-    {
-      "src": "/research/data\\-systems/audit\\-findings\\-derived\\-records",
       "headers": {
         "Location": "/writing/atlas-building-an-evidence-console#findings"
       },
@@ -363,107 +314,65 @@
       "status": 308
     },
     {
-      "src": "/research/ai\\-systems/replayable\\-traces\\-ai\\-agent\\-evaluation",
-      "headers": {
-        "Location": "/viralbench-codex-agent-harness"
-      },
-      "status": 308
-    },
-    {
       "src": "/writing/replayable\\-traces\\-ai\\-agent\\-evaluation",
       "headers": {
-        "Location": "/viralbench-codex-agent-harness"
-      },
-      "status": 308
-    },
-    {
-      "src": "/research/data\\-systems/sqlite\\-crawl\\-pipelines",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#capture"
+        "Location": "/research/ai-systems/replayable-traces-ai-agent-evaluation"
       },
       "status": 308
     },
     {
       "src": "/writing/sqlite\\-crawl\\-pipelines",
       "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#capture"
-      },
-      "status": 308
-    },
-    {
-      "src": "/research/technical\\-seo/technical\\-seo\\-migration\\-release\\-gates",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#improvement-cycle"
+        "Location": "/research/data-systems/sqlite-crawl-pipelines"
       },
       "status": 308
     },
     {
       "src": "/writing/technical\\-seo\\-migration\\-release\\-gates",
       "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#improvement-cycle"
-      },
-      "status": 308
-    },
-    {
-      "src": "/research/ai\\-crawlers/ai\\-search\\-crawler\\-policy",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#capture"
+        "Location": "/research/technical-seo/technical-seo-migration-release-gates"
       },
       "status": 308
     },
     {
       "src": "/writing/ai\\-search\\-crawler\\-policy",
       "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#capture"
+        "Location": "/research/ai-crawlers/ai-search-crawler-policy"
       },
       "status": 308
     },
     {
       "src": "/markets/ai\\-search\\-crawler\\-policy",
       "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#capture"
-      },
-      "status": 308
-    },
-    {
-      "src": "/research/search\\-console/technical\\-seo\\-public\\-data\\-infrastructure",
-      "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#product"
+        "Location": "/research/ai-crawlers/ai-search-crawler-policy"
       },
       "status": 308
     },
     {
       "src": "/writing/technical\\-seo\\-public\\-data\\-infrastructure",
       "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#product"
+        "Location": "/research/search-console/technical-seo-public-data-infrastructure"
       },
       "status": 308
     },
     {
       "src": "/markets/technical\\-seo\\-public\\-data\\-infrastructure",
       "headers": {
-        "Location": "/writing/atlas-building-an-evidence-console#product"
-      },
-      "status": 308
-    },
-    {
-      "src": "/research/personal\\-seo/canonical\\-identity\\-personal\\-seo",
-      "headers": {
-        "Location": "/writing"
+        "Location": "/research/search-console/technical-seo-public-data-infrastructure"
       },
       "status": 308
     },
     {
       "src": "/writing/canonical\\-identity\\-personal\\-seo",
       "headers": {
-        "Location": "/writing"
+        "Location": "/research/personal-seo/canonical-identity-personal-seo"
       },
       "status": 308
     },
     {
       "src": "/markets/canonical\\-identity\\-personal\\-seo",
       "headers": {
-        "Location": "/writing"
+        "Location": "/research/personal-seo/canonical-identity-personal-seo"
       },
       "status": 308
     },
@@ -475,9 +384,121 @@
       "status": 308
     },
     {
-      "src": "/research/technical-seo/(.*)",
+      "src": "/writing/jane\\-street\\-exact\\-search\\-solver\\-verification",
       "headers": {
-        "Location": "/work/atlas"
+        "Location": "/research/data-systems/jane-street-exact-search-solver-verification"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/why\\-texas\\-toll\\-roads\\-stay\\-tolled",
+      "headers": {
+        "Location": "/research/financial-systems/why-texas-toll-roads-stay-tolled"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/software\\-buyout\\-boom\\-2020\\-2022\\-exit\\-audit",
+      "headers": {
+        "Location": "/research/financial-systems/software-buyout-boom-2020-2022-exit-audit"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/us\\-rare\\-earth\\-magnet\\-manufacturing\\-capacity",
+      "headers": {
+        "Location": "/research/data-systems/us-rare-earth-magnet-manufacturing-capacity"
+      },
+      "status": 308
+    },
+    {
+      "src": "/markets/us\\-rare\\-earth\\-magnet\\-manufacturing\\-capacity",
+      "headers": {
+        "Location": "/research/data-systems/us-rare-earth-magnet-manufacturing-capacity"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/the\\-ai\\-megawatt",
+      "headers": {
+        "Location": "/research/ai-systems/the-ai-megawatt"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/who\\-owns\\-austin\\-home\\-service\\-companies",
+      "headers": {
+        "Location": "/research/financial-systems/who-owns-austin-home-service-companies"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/what\\-happens\\-when\\-an\\-index\\-decides\\-a\\-company\\-matters",
+      "headers": {
+        "Location": "/research/financial-systems/what-happens-when-an-index-decides-a-company-matters"
+      },
+      "status": 308
+    },
+    {
+      "src": "/markets/what\\-happens\\-when\\-an\\-index\\-decides\\-a\\-company\\-matters",
+      "headers": {
+        "Location": "/research/financial-systems/what-happens-when-an-index-decides-a-company-matters"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/how\\-airlines\\-borrow\\-against\\-loyalty\\-programs",
+      "headers": {
+        "Location": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+      },
+      "status": 308
+    },
+    {
+      "src": "/markets/how\\-airlines\\-borrow\\-against\\-loyalty\\-programs",
+      "headers": {
+        "Location": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/where\\-online\\-returns\\-actually\\-go",
+      "headers": {
+        "Location": "/research/financial-systems/where-online-returns-actually-go"
+      },
+      "status": 308
+    },
+    {
+      "src": "/markets/where\\-online\\-returns\\-actually\\-go",
+      "headers": {
+        "Location": "/research/financial-systems/where-online-returns-actually-go"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/hidden\\-financing\\-hardware\\-startups",
+      "headers": {
+        "Location": "/research/financial-systems/hidden-financing-hardware-startups"
+      },
+      "status": 308
+    },
+    {
+      "src": "/markets/hidden\\-financing\\-hardware\\-startups",
+      "headers": {
+        "Location": "/research/financial-systems/hidden-financing-hardware-startups"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/west\\-campus\\-student\\-housing",
+      "headers": {
+        "Location": "/research/financial-systems/west-campus-student-housing"
+      },
+      "status": 308
+    },
+    {
+      "src": "/writing/waymo\\-hardware\\-financing",
+      "headers": {
+        "Location": "/research/financial-systems/waymo-hardware-financing"
       },
       "status": 308
     },
@@ -502,7 +523,49 @@
       "continue": true
     },
     {
+      "src": "/research/ai\\-crawlers/robots\\-txt\\-courtesy\\-not\\-access\\-control",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#capture"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/data\\-systems/audit\\-findings\\-derived\\-records",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/technical\\-seo/canonicalization\\-graph\\-consistency",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/technical\\-seo/internal\\-links\\-directed\\-retrieval\\-graph",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
+      "src": "/research/technical\\-seo/structured\\-data\\-without\\-content\\-drift",
+      "headers": {
+        "Location": "/writing/atlas-building-an-evidence-console#findings"
+      },
+      "status": 308
+    },
+    {
       "handle": "filesystem"
+    },
+    {
+      "src": "/research/technical-seo/(.*)",
+      "headers": {
+        "Location": "/work/atlas"
+      },
+      "status": 308
     },
     {
       "src": "/(.*)",

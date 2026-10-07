@@ -79,7 +79,7 @@ function HallOfShameFigure() {
         ))}
       </div>
       <figcaption id="hall-of-shame-caption">
-        Quantity errors made the abstract management problem physical: locally plausible actions accumulated into an incoherent operating policy.
+        Plausible individual orders added up to an incoherent inventory policy.
         <FigureSources links={[["#source-s01", "Andon Café evaluation"], ["#source-s02", "Launch report"]]} />
       </figcaption>
     </figure>
@@ -96,7 +96,7 @@ function AuthoritySpectrum() {
 
   return (
     <figure className="ai-authority-spectrum" aria-labelledby="authority-spectrum-caption">
-      <div className="toll-figure-label"><span>Figure 01</span><span>Authority is not ownership</span></div>
+      <div className="toll-figure-label"><span className="figure-number">Figure 01</span><span>Authority is not ownership</span></div>
       <div className="ai-authority-spectrum__track" aria-hidden="true"><span /><span /><span /><span /></div>
       <div className="ai-authority-spectrum__grid">
         {categories.map(([title, action, boundary], index) => (
@@ -109,7 +109,7 @@ function AuthoritySpectrum() {
         ))}
       </div>
       <figcaption id="authority-spectrum-caption">
-        The same headline can conceal four different systems. This article reserves “AI-operated” for recurring control over meaningful business decisions.
+        “AI-operated” means recurring control over meaningful business decisions.
         <FigureSources label="Basis" links={[["#source-s18", "Editorial case inventory and claim limits"]]} />
       </figcaption>
     </figure>
@@ -126,7 +126,7 @@ function PolicyLeakFigure() {
 
   return (
     <figure className="ai-policy-leak" aria-labelledby="policy-leak-caption">
-      <div className="toll-figure-label"><span>Figure 02</span><span>Assistant tendency → operating consequence</span></div>
+      <div className="toll-figure-label"><span className="figure-number">Figure 02</span><span>Assistant tendency → operating consequence</span></div>
       <div className="ai-policy-leak__labels"><span>Post-training habit</span><span>Local action</span><span>Company policy</span></div>
       <div className="ai-policy-leak__grid">
         {paths.map((path) => path.map((item, index) => (
@@ -148,7 +148,7 @@ function PolicyLeakFigure() {
 function BehaviorMatrix() {
   return (
     <figure className="toll-snapshot ai-behavior-matrix" aria-labelledby="behavior-matrix-caption">
-      <div className="toll-figure-label"><span>Figure 03</span><span>Observed pattern / containment</span></div>
+      <div className="toll-figure-label"><span className="figure-number">Figure 03</span><span>Observed pattern / containment</span></div>
       <div className="toll-snapshot__scroll" role="region" aria-labelledby="behavior-matrix-caption" tabIndex={0}>
         <table>
           <caption className="sr-only">Observed AI-manager behavior patterns and containment responses</caption>
@@ -173,7 +173,7 @@ function HumanCompanyFigure() {
 
   return (
     <figure className="ai-human-company" aria-labelledby="human-company-caption">
-      <div className="toll-figure-label"><span>Figure 04</span><span>The visible manager / the hidden substrate</span></div>
+      <div className="toll-figure-label"><span className="figure-number">Figure 04</span><span>The visible manager / the hidden substrate</span></div>
       <div className="ai-human-company__grid">
         <div>
           <span>Agent authority</span>
@@ -199,7 +199,7 @@ function HumanCompanyFigure() {
 function EconomicsStack() {
   return (
     <figure className="ai-economics-stack" aria-labelledby="economics-stack-caption">
-      <div className="toll-figure-label"><span>Figure 05</span><span>From headline number to business result</span></div>
+      <div className="toll-figure-label"><span className="figure-number">Figure 05</span><span>From headline number to business result</span></div>
       <div className="ai-economics-stack__grid">
         {economicsLayers.map(([label, definition, status], index) => (
           <div key={label}>
@@ -221,7 +221,7 @@ function EconomicsStack() {
 function OperatingStack() {
   return (
     <figure className="ai-operating-stack" aria-labelledby="operating-stack-caption">
-      <div className="toll-figure-label"><span>Figure 06</span><span>The manager is the operating stack</span></div>
+      <div className="toll-figure-label"><span className="figure-number">Figure 06</span><span>The manager is the operating stack</span></div>
       <div className="ai-operating-stack__grid">
         {operatingStack.map(([index, title, detail]) => (
           <div key={title}>
@@ -242,7 +242,7 @@ function OperatingStack() {
 function SimulationBoundary() {
   return (
     <figure className="ai-simulation-boundary" aria-labelledby="simulation-boundary-caption">
-      <div className="toll-figure-label"><span>Figure 07</span><span>Controlled evidence / external-validity boundary</span></div>
+      <div className="toll-figure-label"><span className="figure-number">Figure 07</span><span>Controlled evidence / external-validity boundary</span></div>
       <div className="ai-simulation-boundary__grid">
         <div><span>Can reveal</span><strong>Policy under repeated decisions</strong><p>Model variance, memory failures, incentive response, collusion attempts, and recovery behavior.</p></div>
         <div aria-hidden="true" className="ai-simulation-boundary__divider"><span>≠</span></div>
@@ -309,7 +309,7 @@ function OwnershipStackDiagram() {
   return (
     <figure className="toll-ownership-stack" aria-labelledby="ownership-stack-caption">
       <div className="toll-figure-label">
-        <span>Figure 01</span>
+        <span className="figure-number">Figure 01</span>
         <span>North Tarrant Express / claim stack</span>
       </div>
       <div className="toll-ownership-stack__grid">
@@ -334,7 +334,7 @@ function CashFlowWaterfall() {
   return (
     <figure className="toll-cash-waterfall" aria-labelledby="cash-waterfall-caption">
       <div className="toll-figure-label">
-        <span>Figure 02</span>
+        <span className="figure-number">Figure 02</span>
         <span>From toll bill to residual cash</span>
       </div>
       <div className="toll-cash-waterfall__grid">
@@ -541,7 +541,7 @@ function InstrumentRoutes() {
 }
 
 function tollSectionFigure({ sectionId, position }: { sectionId: string; position: 'before' | 'after' }) {
-  if (sectionId === 'a-road-can-have-seven-different-owners' && position === 'after') return <OwnershipStackDiagram />;
+  if (sectionId === 'lede' && position === 'after') return <OwnershipStackDiagram />;
   if (sectionId === 'how-a-toll-road-turns-traffic-into-equity-cash' && position === 'before') return <CashFlowWaterfall />;
   if (sectionId === 'how-a-toll-road-turns-traffic-into-equity-cash' && position === 'after') return <DfwOperatingSnapshot />;
   if (sectionId === 'sh-130-the-danger-of-believing-the-traffic-model' && position === 'before') return <Sh130RestructuringDiagram />;
@@ -571,7 +571,7 @@ function ArticleVisual({ placement }: { placement: 'hero' | 'inline' }) {
         fetchPriority={isHero ? 'high' : 'auto'}
         loading={isHero ? 'eager' : 'lazy'}
       />
-      {!isHero && <figcaption>Conceptual illustration of the evidence layer. This is not an observed run or a measured network.</figcaption>}
+      {!isHero && <figcaption>Conceptual illustration; not an observed run or measured network.</figcaption>}
     </figure>
   );
 }

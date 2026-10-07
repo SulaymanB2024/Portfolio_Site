@@ -41,9 +41,10 @@ test('both visible GLBs keep moving through all four transitions on one retained
 test('living poses stay bounded on phones, and suspending the clock preserves the resume pose', () => {
   for (let index = 0; index < 5; index++) for (let seconds = 0; seconds < 180; seconds += .1) {
     const desktop = sculptureLivingPose(seconds, index), phone = sculptureLivingPose(seconds, index, true)
-    assert.ok(Math.abs(desktop.yaw) <= .1 && Math.abs(desktop.pitch) <= .018 && Math.abs(desktop.roll) <= .005)
-    for (const axis of ['yaw', 'pitch', 'roll'] as const) assert.ok(Math.abs(phone[axis]) <= Math.abs(desktop[axis]))
-    assert.deepEqual(sculptureLivingPose(seconds, index, false, true), { yaw: 0, pitch: 0, roll: 0 })
+    assert.ok(Math.abs(desktop.yaw) <= .16 && Math.abs(desktop.pitch) <= .027 && Math.abs(desktop.roll) <= .008)
+    assert.ok(Math.abs(desktop.x) <= .025 && Math.abs(desktop.y) <= .055)
+    for (const axis of ['yaw', 'pitch', 'roll', 'x', 'y'] as const) assert.ok(Math.abs(phone[axis]) <= Math.abs(desktop[axis]))
+    assert.deepEqual(sculptureLivingPose(seconds, index, false, true), { yaw: 0, pitch: 0, roll: 0, x: 0, y: 0 })
   }
   for (const flags of [[true,true,false,false,false,true], [false,false,false,false,false,true], [false,true,true,false,false,true], [false,true,false,true,false,true], [false,true,false,false,true,true], [false,true,false,false,false,false]]) {
     assert.equal(sculptureAnimationActive(...flags as [boolean,boolean,boolean,boolean,boolean,boolean]), false)

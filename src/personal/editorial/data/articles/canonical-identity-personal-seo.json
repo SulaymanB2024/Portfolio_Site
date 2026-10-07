@@ -2,19 +2,33 @@
   "kind": "research",
   "cluster": "personal-seo",
   "slug": "canonical-identity-personal-seo",
+  "aliases": [
+    "/markets/canonical-identity-personal-seo"
+  ],
   "number": "03",
   "category": "ENTITY CONSISTENCY",
   "title": "Canonical Identity Beats More Content",
-  "seoTitle": "Canonical Identity for Personal SEO",
-  "subtitle": "An operational playbook for reconciling domains, profile pages, resumes, sameAs links, and external biographies.",
-  "seoDescription": "A practical personal-identity reconciliation playbook covering canonical hosts, ProfilePage schema, sameAs eligibility, resume PDFs, and external profile maintenance.",
-  "image": "/og-default.png",
+  "seoTitle": "Personal SEO: Reconcile Profiles, Domains and Résumés",
+  "subtitle": "Resolve conflicting biographies before publishing another version.",
+  "seoDescription": "Align your canonical website, résumé and public profiles using a reconciliation log, clear sameAs criteria and dated historical records that remain accurate.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/canonical-identity-reader-hero.webp",
+    "socialSrc": "/images/research/canonical-identity-social.jpg",
+    "alt": "Monochrome editorial artwork showing one canonical identity connected to controlled public records.",
+    "label": "Canonical identity / entity graph",
+    "caption": "A maintained person record aligns the site, resume, profiles, and historical references."
+  },
   "date": "2026.06.19",
-  "dateModified": "2026.07.16",
-  "lastVerified": "2026.07.16",
-  "readTime": "12 MIN",
+  "dateModified": "2026-10-05",
+  "lastVerified": "2026.07.19",
+  "readTime": "5 MIN",
   "author": "SULAYMAN BOWLES",
-  "thesis": "A personal identity graph becomes trustworthy when one profile record owns each fact and every external reference either agrees with it or clearly represents history.",
+  "thesis": "Assign one maintained profile as the source of current facts. Controlled pages should agree with it; historical records should remain clearly dated rather than being rewritten as present-day biographies.",
+  "conclusion": {
+    "title": "Maintain the facts, not more copies",
+    "content": "Measure agreement across important, controllable records and their links to the maintained profile. Keep accurate history dated and third-party discrepancies visible. Consistency does not force another platform to update or a search system to accept an identity claim."
+  },
   "evidenceBoundary": "This playbook improves consistency among controlled and observable profiles. It cannot force third-party platforms to update, remain public, or be interpreted as identity evidence by a search system.",
   "metrics": [
     {
@@ -63,16 +77,16 @@
     }
   ],
   "content": [
-    "Personal SEO often fails when biographies disagree. A portfolio, resume PDF, university page, GitHub profile, LinkedIn page, competition account, old domain, and copied speaker bio can name different titles, employers, graduation dates, projects, or official websites.",
-    "The remedy is reconciliation. Designate which controlled profile owns the current biography, experience, and education; classify outside profiles by role; and decide what should happen to stale URLs. Publish more only after the identity surface has one clear authority."
+    "Your portfolio, résumé PDF, university biography, GitHub, LinkedIn, competition account, old domain, and copied speaker bio can describe different versions of you. Conflicting roles, employers, dates, project ownership, and official websites leave the identity unclear.",
+    "Reconcile these records before expanding them. Choose which controlled profile owns the current biography, experience, and education; classify supporting and historical pages; then decide how to repair stale URLs. More copies cannot settle an unresolved source of truth."
   ],
   "sections": [
     {
       "id": "profile-inventory",
-      "title": "Map the biographies before writing another one",
+      "title": "Inventory the identities already in public",
       "paragraphs": [
-        "Collect the preferred website, HTML resume, public PDF, GitHub, LinkedIn, portfolio accounts, institutional biographies, event programs, press mentions, and abandoned domains. Compare the displayed name, headline, employer, education date, project ownership, and preferred homepage.",
-        "Label each item by purpose. The canonical biography states the present; supporting profiles corroborate it; historical pages document dated events; and stale controlled pages need repair. Private, deleted, or weakly matching profiles stay unresolved."
+        "Collect the preferred site, HTML résumé, public PDF, GitHub, LinkedIn, portfolio accounts, institutional biographies, programs, press, and abandoned domains. Compare name, headline, employer, education dates, project ownership, and preferred homepage.",
+        "Assign a role: canonical biography for the present, supporting profile for corroboration, historical page for a dated event, or stale controlled page needing repair. Private, deleted, and weakly matching profiles remain unresolved rather than assumed equivalent."
       ],
       "table": {
         "caption": "Profile inventory fields",
@@ -112,10 +126,10 @@
     },
     {
       "id": "canonical-host",
-      "title": "Select one host and one current profile thesis",
+      "title": "Align the host and the current facts",
       "paragraphs": [
-        "The preferred domain should resolve consistently across protocol and hostname variants. Permanently redirect duplicate hosts and retired controlled routes when they have one destination. Align redirects, canonical annotations, sitemaps, and internal links instead of asking one signal to overrule a contradictory site.",
-        "The canonical thesis is the approved set of current facts from which the homepage, about page, resume, and metadata draw: what the person does, which projects or institutions matter, and where proof can be inspected. It need not be copied word for word."
+        "Resolve protocol and hostname variants consistently. Permanently redirect duplicate hosts and retired controlled routes with clear destinations. Align redirects, canonicals, sitemaps, and internal links so one signal is not asked to overcome contradictory routing.",
+        "Maintain an approved set of facts for home, About, résumé, and metadata: current work, relevant projects and institutions, and inspectable proof. Wording can vary; identity and factual meaning should agree."
       ],
       "table": {
         "caption": "Canonical-host decision tree",
@@ -150,10 +164,10 @@
     },
     {
       "id": "sameas-rubric",
-      "title": "Use sameAs only for unambiguous identity matches",
+      "title": "Check identity before adding sameAs",
       "paragraphs": [
-        "Treat sameAs as an identity-equivalence assertion: the destination represents this person, functions as that person’s profile or homepage, is publicly inspectable, and contains no material contradiction. All four conditions should be true before the URL enters Person markup.",
-        "A page that merely mentions the person fails the profile-function test. Articles, programs, employer pages, repositories, and schedules belong in visible citations, subjectOf relationships, project markup, or editorial context instead."
+        "Use four core checks: the destination unambiguously represents this person, functions as their profile or homepage, is publicly inspectable, and contains no material contradiction. Apply this rubric before adding a URL to Person markup, then keep it maintained.",
+        "A mention is not a profile. Articles, programs, employer pages, repositories, and schedules can support visible citations, subjectOf relationships, project markup, or editorial context without asserting identity equivalence."
       ],
       "table": {
         "caption": "sameAs eligibility rubric",
@@ -193,10 +207,10 @@
     },
     {
       "id": "resume-policy",
-      "title": "Make HTML the maintained resume and PDF the portable copy",
+      "title": "Maintain HTML and reconcile the portable PDF",
       "paragraphs": [
-        "An HTML resume is easier to update, link, and connect to the site. Semantic headings, current project links, profile information, and a modification date make it the maintained record for website readers.",
-        "The PDF remains useful for applications and offline sharing. Give the current file one stable URL, redirect obsolete controlled filenames, and avoid leaving dated PDFs public with incompatible facts."
+        "Use the HTML résumé as the maintainable website record. Semantic headings, current project links, profile details, and a modification date make it easier to update and connect to the rest of the site.",
+        "Keep PDF for applications and offline sharing, with one stable public URL. Redirect obsolete controlled filenames and reconcile visible facts before leaving another dated copy publicly available."
       ],
       "bullets": [
         "Treat the HTML route as the current, maintainable experience and education record.",
@@ -208,10 +222,10 @@
     },
     {
       "id": "external-reconciliation",
-      "title": "Reconcile external profiles by priority and controllability",
+      "title": "Prioritize the records you can change",
       "paragraphs": [
-        "Update controlled profiles in the order reviewers are likely to encounter them: preferred website, LinkedIn, GitHub, then major portfolio accounts. Institutional and event pages may require another owner; record the request date, and preserve accurate historical context.",
-        "When a platform cannot be changed, log the discrepancy. A stale third-party title is a maintenance dependency; the same title on the canonical site is a controlled inconsistency. They are not equally actionable."
+        "Start with likely reviewer touchpoints: preferred website, LinkedIn, GitHub, then major portfolio accounts. Institutional and event records may belong to another owner. Log correction requests and preserve accurate historical context.",
+        "Track uneditable discrepancies rather than pretending they are fixed. A stale third-party title is a dependency; the same stale title on your site is directly repairable. Ownership determines the next action."
       ],
       "table": {
         "caption": "External-profile reconciliation queue",
@@ -257,10 +271,10 @@
     },
     {
       "id": "maintenance-cadence",
-      "title": "Maintain a small identity surface on a fixed cadence",
+      "title": "Reconcile after changes and each quarter",
       "paragraphs": [
-        "Reconcile after role or graduation changes, major launches, domain migrations, and public resume revisions. A quarterly review catches expired links, copied biographies, changed usernames, and newly indexed files. Record the observation and action instead of marking a profile “done.”",
-        "Success is the share of important, controllable records that agree on the current identity and point to the same maintained source. Historical evidence can remain diverse because it documents a specific time."
+        "Review after roles, graduation, launches, domain moves, and public résumé revisions. Quarterly checks catch expired links, copied biographies, renamed accounts, and newly indexed files. Record observations and actions instead of giving a profile permanent “done” status.",
+        "Measure the share of important controlled records that agree on current identity and reference the maintained source. Historical descriptions may differ because they document other times; accurate history is not an inconsistency to erase."
       ],
       "bullets": [
         "Review controlled profile pages and the public PDF every quarter.",
@@ -272,25 +286,6 @@
     }
   ],
   "path": "/research/personal-seo/canonical-identity-personal-seo",
-  "aliases": [
-    "/markets/canonical-identity-personal-seo"
-  ],
-  "researchAssets": [
-    {
-      "priority": 2,
-      "name": "Canonical Identity for Personal SEO",
-      "href": "/research/personal-seo/canonical-identity-personal-seo",
-      "type": "research_note",
-      "preferredAnchor": "canonical identity for personal SEO",
-      "audiences": [
-        "personal SEO",
-        "founder profiles",
-        "structured data",
-        "profile cleanup"
-      ],
-      "pitchAngle": "Reconciliation checklist for profile pages, stale PDFs, sameAs links, source pages, and external bio consistency.",
-      "supportingAssets": []
-    }
-  ],
-  "supportingAssets": []
+  "image": "/images/research/canonical-identity-social.jpg",
+  "displayTitle": "Canonical identity beats more content."
 }

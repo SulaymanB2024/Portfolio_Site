@@ -13,9 +13,9 @@ export function articleHref(href: string, catalog: ArticleSummary[], baseUrl = '
   if (consolidated) return consolidated
   const article = catalog.find(item => item.path === path || item.aliases?.includes(path))
   if (article) return `#/writing/${article.slug}${url.hash ? `?section=${encodeURIComponent(url.hash.slice(1))}` : ''}`
-  const routes: Record<string, string> = { '/': '', '/work': 'work', '/about': 'about', '/contact': 'contact', '/resume': 'resume', '/research': 'writing', '/markets': 'writing' }
+  const routes: Record<string, string> = { '/': '', '/work': 'work', '/about': 'about', '/contact': 'contact', '/resume': 'resume', '/research': 'writing', '/markets': 'writing', '/atlas': 'work/atlas', '/atlas/sample-crawl': 'work/atlas' }
   if (path in routes) return `#/${routes[path]}`
-  if (/\.(?:pdf|csv|json|xlsx|docx|md|webp|png|jpe?g|svg)$/i.test(path)) return `${baseUrl}${path.slice(1)}${url.search}${url.hash}`
+  if (/\.(?:pdf|csv|json|xlsx|docx|md|zip|webp|png|jpe?g|svg)$/i.test(path)) return `${baseUrl}${path.slice(1)}${url.search}${url.hash}`
   return url.href
 }
 

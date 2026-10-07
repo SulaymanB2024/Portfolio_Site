@@ -1,20 +1,30 @@
 /* The approved full-viewport threshold sequence precedes the ordinary site. */
 .personal-site.home-site { --home-gutter: clamp(26px, 5.5vw, 100px); max-width: none; padding: 0; }
 .home-site[data-appearance='light'] { --paper: #eeeadd; --ink: #24241f; }
-.home-site .home-standard-content { max-width: 1800px; margin: 0 auto; padding: clamp(40px, 5vw, 64px) var(--home-gutter) 0; }
+.home-site .home-standard-content { max-width: 1800px; margin: 0 auto; padding: 0 var(--home-gutter); }
+.personal-site.home-site .home-standard-content .home-writing { padding-top: clamp(36px, 4vw, 64px); }
 .home-site > .personal-footer { width: min(calc(100% - 2 * var(--home-gutter)), 1600px); margin-inline: auto; }
 .home-site[data-landing-active='true']::before { opacity: 0; }
 .home-standard-content .home-writing { scroll-margin-top: 110px; }
 
-.landing-rail { position: relative; height: calc(100svh + clamp(2400px, 520svh, 4800px)); }
+/* The next heading enters the desktop reading hold before the last frame leaves. */
+@media screen and (min-width: 761px) and (min-aspect-ratio: 1/1) {
+  .home-site .home-standard-content {
+    position: relative; z-index: 1; margin-top: calc(-1 * min(12svh, 120px)); background: var(--paper);
+  }
+}
+
+/* Give each passage room to unfold at ordinary trackpad/swipe speed. */
+.landing-rail { position: relative; height: calc(100svh + clamp(2000px, 560svh, 5600px)); }
 .landing-stage { height: 100svh; position: sticky; top: 0; overflow: hidden; isolation: isolate; background: #eeeadd; color: #24241f; }
 [data-appearance='dark'] .landing-stage { background: #111210; color: #efefe8; }
 .landing-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; touch-action: pan-y; }
 .landing-canvas[hidden] { display: none; }
+.landing-stage:not([data-chapter]) .landing-story-links, .landing-stage[data-chapter='helmet'] .landing-story-links { flex-direction: row; gap: 26px; }
 .landing-copy { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; padding: 0 5vw 35px; color: white; mix-blend-mode: difference; }
 .landing-copy-content { position: relative; width: 53vw; }
 .landing-copy h1 { width: 100%; min-height: 2.94em; font: 400 clamp(56px, 7.8vw, 140px)/.98 Georgia, 'Times New Roman', serif; letter-spacing: -.058em; margin: 0; }
-.landing-stage[data-text-dither='ready'] .landing-copy h1 { opacity: 0; }
+.landing-stage[data-text-dither='ready'][data-text-surface='shader'] .landing-copy h1 { opacity: 0; }
 .landing-title-target { display: block; color: inherit; text-decoration: none; cursor: default; }
 .landing-title-target[data-linked] { pointer-events: auto; cursor: pointer; }
 .landing-title-target:focus-visible { outline: 1px solid white; outline-offset: 12px; }

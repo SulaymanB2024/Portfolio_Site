@@ -14,9 +14,10 @@ import { desktopSculptureFrame } from '../src/personal/landing/art-direction.ts'
 
 const near = (a: number, b: number, tolerance = 1e-10) => assert.ok(Math.abs(a - b) <= tolerance, `${a} differs from ${b}`)
 
-test('the homepage intro leads to About and all four chapters retain their real project routes and assets', async () => {
-  assert.equal(CHAPTERS[0].href, '#/about')
-  assert.equal(CHAPTERS[0].linkLabel, 'About me')
+test('the homepage intro offers Work and About while all four chapters retain their real project routes and assets', async () => {
+  assert.equal(CHAPTERS[0].href, '#/work')
+  assert.equal(CHAPTERS[0].linkLabel, 'Selected work')
+  assert.deepEqual(CHAPTERS[0].article, { label: 'About me', href: '#/about' })
   assert.deepEqual(CHAPTERS.slice(1).map(chapter => chapter.href), projects.map(project => `#/work/${project.slug}`))
   assert.deepEqual(CHAPTERS.slice(1).map(chapter => chapter.label), projects.map(project => project.name))
   assert.equal(CHAPTERS[3].article?.href, '#/writing/who-owns-texas-toll-roads')
@@ -108,8 +109,10 @@ test('scroll following reverses immediately, settles quickly, and never overshoo
   assert.ok(first.progress > 0 && first.progress < .8 && first.velocity > 0)
   const reversal = advanceScrollMotion(first, 0, .000001)
   assert.ok(reversal.velocity < 0 && reversal.progress < first.progress)
-  assert.ok(advanceScrollMotion({ progress: 0, velocity: 0 }, 1, 1 / 60).progress > .59)
-  assert.ok(advanceScrollMotion({ progress: 0, velocity: 0 }, 1, .09).progress > .99)
+  // Small scroll steps get multiple intermediate frames, without a long tail.
+  assert.ok(advanceScrollMotion({ progress: 0, velocity: 0 }, 1, 1 / 60).progress < .5)
+  assert.ok(advanceScrollMotion({ progress: 0, velocity: 0 }, 1, .09).progress < .95)
+  assert.ok(advanceScrollMotion({ progress: 0, velocity: 0 }, 1, .18).progress > .99)
   let motion = first
   for (let frame = 0; frame < 300; frame++) {
     motion = advanceScrollMotion(motion, .08, 1 / 60)
@@ -130,6 +133,27 @@ test('moving ink is bounded, direction-independent, quiet at rest, and disabled 
   near(scrollInkStrength(.2, 3000, 600), scrollInkStrength(-.2, 6000, 1200))
   assert.ok(scrollInkStrength(.08, 3000, 720) < scrollInkStrength(.3, 3000, 720))
   assert.ok(scrollInkStrength(100, 3000, 720) <= .3)
+})
+
+test('late-asset recovery preserves intermediate passage frames and responds to reversal', () => {
+  for (const fps of [30, 60, 120]) {
+    let motion = { progress: .5297, velocity: 0 }
+    const visited = new Set<number>()
+    for (let frame = 0; frame < fps * 3; frame++) {
+      const next = advanceScrollMotion(motion, .94, 1 / fps, false, .22)
+      assert.ok(next.progress >= motion.progress && next.progress - motion.progress <= .22 / fps + 1e-10)
+      const scene = sceneSequence(next.progress)
+      if (thresholdMotion(scene.local).travel > 0 && thresholdMotion(scene.local).travel < 1) visited.add(scene.leg)
+      motion = next
+    }
+    assert.ok(visited.has(2) && visited.has(3), 'both late passages must remain visible')
+    near(motion.progress, .94)
+    const reverse = advanceScrollMotion(motion, .25, 1 / fps, false, .22)
+    assert.ok(reverse.progress < motion.progress && reverse.velocity < 0)
+  }
+  assert.deepEqual(advanceScrollMotion({ progress: .5, velocity: 0 }, .9, 1 / 60, true, .22), { progress: .9, velocity: 0 })
+  const stalled = advanceScrollMotion({ progress: .5297, velocity: 0 }, .94, .6, false, .22)
+  assert.ok(stalled.progress - .5297 <= .22 * .05 + 1e-10, 'decode stalls must not consume a whole passage')
 })
 
 test('the actual visor aperture is visible early and expands at a consistent apparent rate across viewports', async () => {

@@ -21,7 +21,7 @@ export function writingFeed(articles: ArticleSummary[]) {
     const url = new URL(article.path, siteOrigin)
     if (url.origin !== siteOrigin || url.search || url.hash) throw new Error(`Invalid canonical feed path: ${article.path}`)
     return { article, published, updated, url: url.href }
-  }).sort((a, b) => b.updated.localeCompare(a.updated) || a.url.localeCompare(b.url))
+  }).sort((a, b) => b.updated.localeCompare(a.updated) || b.published.localeCompare(a.published) || a.url.localeCompare(b.url))
   if (new Set(entries.map(entry => entry.url)).size !== entries.length) throw new Error('Duplicate feed entry')
   return `<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">

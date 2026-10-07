@@ -72,6 +72,13 @@ function renderInline(value: string, keyPrefix: string, references = new Map<str
     if (value[start] === '[') {
       const labelEnd = value.indexOf(']', start + 1);
       const hrefStart = labelEnd === -1 ? -1 : labelEnd + 1;
+      const source = labelEnd === -1 ? '' : value.slice(start + 1, labelEnd);
+      if (/^S\d+$/.test(source) && value[hrefStart] !== '(') {
+        const href = `#source-${source.toLowerCase()}`;
+        nodes.push(<sup key={key} className="article-citation"><a href={readerFragmentHref(typeof location === 'undefined' ? '' : location.hash, href)} aria-label={`Source ${source.slice(1)}`}>{source}</a></sup>);
+        cursor = labelEnd + 1;
+        continue;
+      }
       if (labelEnd !== -1 && value[hrefStart] === '(') {
         const hrefEnd = value.indexOf(')', hrefStart + 1);
         if (hrefEnd !== -1) {
@@ -106,6 +113,36 @@ function tableCells(line: string) {
   return line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => cell.trim());
 }
 
+function textExhibit(code: string, key: string): ReactNode | null {
+  const lines = code.split('\n').map(line => line.trimEnd()).filter(line => line.trim())
+  // Only the supplied simple text equations are converted. Unknown TeX remains
+  // literal, rather than silently dropping a command or changing its meaning.
+  if (lines.length === 1 && code.includes('\\text{') && code.includes('\\times')) {
+    const expression = code.replace(/\\text\{([^{}]+)\}/g, '$1').replace(/\\times\b/g, '×')
+    if (!expression.includes('\\')) return <p key={key} className="reader-equation">{expression}</p>
+  }
+  if (lines.length >= 5 && lines.length % 2 === 1 && lines.every((line, index) => index % 2 === 0 ? line.trim() !== '↓' : line.trim() === '↓')) {
+    return <figure key={key} className="reader-workflow"><ol>{lines.filter((_, index) => index % 2 === 0).map((line, index) => <li key={index}>{line.trim()}</li>)}</ol></figure>
+  }
+  const branches = lines.slice(1).map(line => line.match(/^([│\s]*)(?:├|└)──\s+(.+)$/))
+  if (branches.length && branches.every(Boolean)) {
+    type Branch = { text: string; children: Branch[] }
+    const root: Branch = { text: lines[0], children: [] }, parents = [root]
+    const levels = [...new Set(branches.map(branch => branch![1].length))].sort((a, b) => a - b)
+    for (const branch of branches) {
+      const depth = levels.indexOf(branch![1].length) + 1
+      if (depth > parents.length) return null
+      const node: Branch = { text: branch![2], children: [] }
+      parents[depth - 1].children.push(node)
+      parents[depth] = node
+      parents.length = depth + 1
+    }
+    const tree = (nodes: Branch[]): ReactNode => <ul>{nodes.map((node, index) => <li key={index}><span>{node.text}</span>{node.children.length > 0 && tree(node.children)}</li>)}</ul>
+    return <figure key={key} className="reader-lineage"><figcaption>{root.text}</figcaption>{tree(root.children)}</figure>
+  }
+  return null
+}
+
 export function markdownToReact(markdown: string): ReactNode[] {
   const references = new Map<string, number>();
   const notes = new Map<string, string>();
@@ -136,11 +173,12 @@ export function markdownToReact(markdown: string): ReactNode[] {
         index += 1;
       }
       index += 1;
-      blocks.push(
+      const exhibit = fence[1] === 'text' ? textExhibit(code.join('\n'), key) : null
+      blocks.push(exhibit || (
         <pre key={key}>
           <code className={fence[1] ? `language-${fence[1]}` : undefined}>{code.join('\n')}</code>
-        </pre>,
-      );
+        </pre>
+      ));
       continue;
     }
 

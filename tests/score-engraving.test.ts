@@ -1,7 +1,22 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { buildScoreEngraving, drawScoreCanvas, scorePageCount, type ScoreCommand } from '../src/personal/about/score-engraving.ts'
-import type { PhraseNote } from '../src/personal/about/music-phrase.ts'
+import { firstMeasurePhrase, type PhraseNote } from '../src/personal/about/music-phrase.ts'
+
+test('the opening preview shows a complete bar of short notes and retains a crossing tie', () => {
+  const short: PhraseNote[] = Array.from({ length: 16 }, (_, index) => ({ midi: index % 4 === 0 ? null : 43, beats: .25 }))
+  const piece = [...short, { midi: 28, beats: 4 }]
+  const opening = buildScoreEngraving(firstMeasurePhrase(piece), { activeIndex: 15 })
+  assert.deepEqual(opening.hitTargets.filter(target => target.measure === 0), buildScoreEngraving(piece, { activeIndex: 15 }).hitTargets.filter(target => target.measure === 0))
+  assert.equal(opening.hitTargets.length, 16, 'all sixteen events fit in the first bar')
+  assert.ok(opening.commands.some(command => command.role === 'playback-highlight' && command.sourceIndex === 15))
+  assert.ok(!opening.commands.some(command => command.sourceIndex === 16), 'later bars add no SVG commands to the small preview')
+  const crossing: PhraseNote[] = [{ midi: null, beats: 2 }, { midi: 28, beats: 1 }, { midi: 28, beats: .5 }, { midi: 43, beats: 4 }, { midi: 55, beats: 1 }]
+  const engraved = buildScoreEngraving(firstMeasurePhrase(crossing))
+  assert.deepEqual(engraved.hitTargets.filter(target => target.measure === 0), buildScoreEngraving(crossing).hitTargets.filter(target => target.measure === 0))
+  assert.ok(engraved.commands.some(command => command.role === 'tie' && command.sourceIndex === 3))
+  assert.deepEqual(firstMeasurePhrase([]), [])
+})
 
 test('the blank manuscript has four vector bass-clef staves and eight numbered 4/4 measures', () => {
   const engraving = buildScoreEngraving([], { title: 'A study', tempo: 88 })

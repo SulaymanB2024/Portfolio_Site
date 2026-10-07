@@ -1,0 +1,33 @@
+.music-phrase-study { margin: 14px 0 0; }
+.music-manuscript { padding: 16px 12px 13px; border: 1px solid var(--line); background: color-mix(in srgb,var(--paper) 96%,var(--ink)); color: var(--ink); }
+.music-manuscript-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; color: var(--muted); font-size: 9px; letter-spacing: .025em; }
+.music-manuscript-heading > span:last-child { white-space: nowrap; }
+.music-manuscript-score { display: block; width: 100%; height: auto; overflow: hidden; margin: 6px 0 0; }
+.music-score-mark[data-role='staff'] { opacity: .63; }
+.music-score-mark[data-role='playback-highlight'] { animation: music-note-arrival 240ms ease-out both; transform-box: fill-box; transform-origin: center; }
+.music-score-cursor { opacity: .52; animation: music-cursor-arrival 220ms ease-out both; }
+.music-measure-beats { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); margin: 0 8.036% 0 32.738%; font-size: 8px; color: var(--muted); }
+.music-measure-beats > span { display: flex; align-items: center; gap: 5px; padding-right: 6px; }
+.music-measure-beats i { display: block; flex: 1; height: 1px; background: var(--line); transition: background 140ms ease; }
+.music-measure-beats > span[data-current='true'] { color: var(--ink); }
+.music-measure-beats > span[data-current='true'] i { background: var(--ink); }
+.music-phrase-study > .about-phrase { gap: 10px; margin: 15px 0 17px; }
+.music-phrase-study > .about-phrase > span { position: relative; align-items: baseline; gap: 8px; min-height: 38px; padding: 4px 0 13px; border-bottom-color: var(--line); font: 18px/1.3 Georgia,serif; }
+.music-phrase-study > .about-phrase > span[data-filled='true'] { border-bottom-color: var(--line); }
+.music-phrase-study > .about-phrase > span[data-playing='true'] { border-bottom-color: var(--ink); border-bottom-width: 1px; }
+.music-phrase-study > .about-phrase > span[data-playing='true']::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 4px; height: 4px; border-radius: 50%; background: var(--ink); animation: music-note-arrival 240ms ease-out both; }
+.music-phrase-study .about-phrase-index { font: 8px/1.3 'Courier New',monospace; }
+@keyframes music-note-arrival { from { opacity: .2; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes music-cursor-arrival { from { opacity: 0; } to { opacity: .52; } }
+@media (max-width: 360px) {
+  .music-manuscript { padding: 12px 8px 11px; }
+  .music-manuscript-heading { font-size: 8px; }
+  .music-measure-beats > span { gap: 4px; padding-right: 4px; }
+  .music-phrase-study > .about-phrase > span { gap: 6px; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .music-phrase-study .music-score-mark,
+  .music-phrase-study .music-score-cursor,
+  .music-phrase-study .about-phrase > span::after { animation: none; }
+  .music-measure-beats i { transition: none; }
+}

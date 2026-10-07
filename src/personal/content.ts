@@ -14,7 +14,7 @@ export interface Project {
   link?: { label: string; href: string }
 }
 export const contact = {
-  email: 'sybatx@gmail.com',
+  email: 'sulayman.bowles@gmail.com',
   linkedin: 'https://www.linkedin.com/in/sulayman-bowles',
   location: 'Austin, TX',
 }

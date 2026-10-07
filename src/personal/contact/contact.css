@@ -3,6 +3,7 @@
 .lion-contact-heading { display: flex; align-items: baseline; justify-content: space-between; padding-top: 25px; }
 .lion-contact-heading > div { display: flex; gap: 18px; align-items: baseline; }
 .lion-contact-heading h1 { font: normal 28px/1.2 Georgia, serif; letter-spacing: -.04em; margin: 0; }
+.lion-contact-introduction { margin: 14px 0 8px; max-width: 52ch; color: var(--muted); font: 16px/1.6 Georgia, serif; text-wrap: pretty; }
 .lion-contact-heading .mono { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
 .lion-study { flex: 1; min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto auto; }
 .lion-study-stage { position: relative; margin: 0 -3vw; min-height: 320px; }
@@ -20,9 +21,10 @@
 .lion-contact-linkedin > a { font-size: 17px; letter-spacing: -.02em; }
 .lion-contact-linkedin > a > span { margin-left: 10px; font-size: 14px; }
 .lion-contact-copy { display: flex; align-items: center; gap: 12px; font-size: 11px; }
-.lion-contact-copy button { color: var(--ink); background: none; border: none; font: inherit; min-height: 44px; padding: 12px 0; white-space: nowrap; }
+.lion-contact-copy button { color: var(--ink); background: none; border: none; font: inherit; min-height: 44px; min-width: 96px; padding: 12px 0; text-align: left; white-space: nowrap; }
 .lion-contact-copy button:is(:hover, :focus-visible) { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 .lion-contact-copy [role='status'] { color: var(--muted); }
+.lion-contact-copy [role='status']:not(.sr-only) { max-width: 22ch; }
 .lion-contact-copy [role='status']:empty { display: none; }
 .lion-study-caption { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 0 24px; min-height: 88px; }
 .lion-study-credit { position: relative; }
@@ -32,7 +34,7 @@
 .lion-study-credit .mono { font-size: 11px; color: var(--muted); }
 .lion-study-credit summary .mono > span { display: inline-block; margin-left: 6px; }
 .lion-study-credit[open] summary .mono > span { transform: rotate(45deg); }
-.lion-study-credit p { position: absolute; bottom: calc(100% + 14px); left: 0; width: min(355px, 80vw); background: var(--paper); border: 1px solid var(--line); padding: 16px 20px; font: 10px/1.9 'Courier New', monospace; color: var(--muted); z-index: 3; }
+.lion-study-credit p { position: absolute; bottom: calc(100% + 14px); left: 0; width: min(355px, 80vw); background: var(--paper); border: 1px solid var(--line); padding: 16px 20px; font: 12px/1.7 var(--type-interface, Arial, sans-serif); color: var(--muted); z-index: 3; }
 .lion-study-credit a { text-decoration: underline; text-underline-offset: 4px; }
 .lion-study-tools { width: 380px; flex-shrink: 0; }
 .lion-study-instructions { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 11px; }

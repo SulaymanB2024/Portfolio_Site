@@ -1,48 +1,38 @@
-import { Fragment, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react'
-import { Art } from '../Art'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { resumeProfile as profile, resumeReview } from '../profile-copy'
 import { resumeChapters as chapterById } from './resume-chapters'
 import ResumeDocument from './ResumeDocument'
-import ResumeWorkDiagram from './ResumeWorkDiagram'
+import ResumeSculpture from './ResumeSculpture'
 import { resumeSectionFromHash, withoutResumeSection } from './resume-navigation'
 import { createLatestFrame } from '../latest-frame'
-import { createResumeFocus, resumeTitleOrigin } from './resume-focus'
+import { DestinationLink, LinkArrow } from '../DestinationLink'
 import './resume-explorer.css'
 
-const resumeChapters = [chapterById.chegg, chapterById.sapien, chapterById.void, chapterById['internship-deadlines'], chapterById['creative-trace'], chapterById['venture-labs'], chapterById['ai-venture']]
-
-type Selection = { kind: 'role'; index: number } | { kind: 'education' | 'recognition' | 'skills' }
-const positions = [[12, 15], [88, 15], [11, 48], [89, 48], [13, 79], [87, 79], [50, 95]]
-const secondary = [
-  { kind: 'education', label: 'Education', note: 'UT Austin & beyond' },
-  { kind: 'recognition', label: 'Awards & leadership', note: 'Competitions & campus' },
-  { kind: 'skills', label: 'Skills & tools', note: 'What I work with' },
-] as const
-
-function ExternalLink({ href, children }: { href: string; children: string }) {
-  return <a href={href} {...(href.startsWith('https:') ? { target: '_blank', rel: 'noreferrer' } : {})}>{children}<span aria-hidden="true">↗</span></a>
+const chapters = [chapterById.chegg, chapterById.sapien, chapterById.void, chapterById['internship-deadlines'], chapterById['creative-trace'], chapterById['venture-labs'], chapterById['ai-venture']]
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+function roleStart(dates: string) {
+  const [month, year] = dates.split(' ')
+  return Number(year) * 12 + months.indexOf(month)
 }
+const chronology = profile.experience.map((role, index) => ({ role, chapter: chapters[index], index }))
+  .sort((a, b) => roleStart(b.role.dates) - roleStart(a.role.dates))
 
 export default function ResumePage({ dark }: { dark: boolean }) {
-  const [narrow, setNarrow] = useState(() => matchMedia('(max-width: 600px)').matches)
-  useEffect(() => { const media = matchMedia('(max-width: 600px)'); const change = () => setNarrow(media.matches); media.addEventListener('change', change); return () => media.removeEventListener('change', change) }, [])
-  const [selection, setSelection] = useState<Selection | null>(null)
+  const [selected, setSelected] = useState<number | null>(null)
   const [requestedSection, setRequestedSection] = useState(() => resumeSectionFromHash(location.hash))
   const [documentOpen, setDocumentOpen] = useState(() => !!resumeSectionFromHash(location.hash))
   const documentToggle = useRef<HTMLButtonElement>(null)
-  const heading = useRef<HTMLHeadingElement>(null)
   const documentSection = useRef<HTMLDivElement>(null)
-  const origin = useRef<HTMLButtonElement | null>(null)
-  const openingOrigin = useRef<ReturnType<typeof resumeTitleOrigin>>(null)
-  const dialog = useRef<HTMLDialogElement>(null)
-  const map = useRef<HTMLDivElement>(null)
-  const focusScene = useRef<ReturnType<typeof createResumeFocus> | null>(null)
-  const direction = useRef(0)
+  const heading = useRef<HTMLHeadingElement>(null)
+  const origin = useRef<number | null>(null)
+  const roleButtons = useRef<(HTMLButtonElement | null)[]>([])
+  const readingStart = useRef<HTMLElement>(null)
   const focusReturn = useRef<ReturnType<typeof createLatestFrame> | null>(null)
-  const selectedRole = selection?.kind === 'role' ? selection.index : -1
-  const chapter = selectedRole >= 0 ? resumeChapters[selectedRole] : null
-  const role = selectedRole >= 0 ? profile.experience[selectedRole] : null
-  const selectionKey = selection?.kind === 'role' ? `role-${selection.index}` : selection?.kind
+  const chapter = selected === null ? null : chapters[selected]
+  const role = selected === null ? null : profile.experience[selected]
+  const selectedPosition = chronology.findIndex(item => item.index === selected)
+  const previous = chronology[selectedPosition - 1]
+  const next = selectedPosition >= 0 ? chronology[selectedPosition + 1] : undefined
 
   useEffect(() => {
     const action = createLatestFrame()
@@ -51,14 +41,13 @@ export default function ResumePage({ dark }: { dark: boolean }) {
   }, [])
 
   useLayoutEffect(() => {
-    if (!dialog.current || !map.current) return
-    const scene = createResumeFocus(dialog.current, map.current)
-    focusScene.current = scene
-    return () => { scene.dispose(); if (focusScene.current === scene) focusScene.current = null }
-  }, [])
-  useLayoutEffect(() => {
-    if (selection && heading.current) focusScene.current?.enter(heading.current, openingOrigin.current, direction.current)
-  }, [selectionKey])
+    if (selected === null) return
+    heading.current?.focus({ preventScroll: true })
+    const bounds = readingStart.current?.getBoundingClientRect()
+    if (matchMedia('(max-width: 760px)').matches || (bounds && (bounds.top < 0 || bounds.top > innerHeight - 160))) {
+      readingStart.current?.scrollIntoView({ block: 'start', behavior: 'instant' })
+    }
+  }, [selected])
 
   useEffect(() => {
     const reachSection = () => {
@@ -96,95 +85,80 @@ export default function ResumePage({ dark }: { dark: boolean }) {
     })
   }
 
-  function choose(next: Selection, button?: HTMLButtonElement) {
-    if (dialog.current?.dataset.phase === 'leaving') return
+  function choose(index: number, button?: HTMLButtonElement) {
     focusReturn.current?.cancel()
-    if (!selection && button) {
-      origin.current = button
-      openingOrigin.current = resumeTitleOrigin(button.querySelector<HTMLElement>('.rx-node-name'))
-    }
-    direction.current = next.kind === 'role' && selection?.kind === 'role' ? Math.sign(next.index - selection.index) : 0
-    setSelection(next)
+    if (button) origin.current = index
+    setSelected(index)
+    if (selected === null && matchMedia('(min-width: 761px)').matches) window.scrollTo({ top: 0, behavior: 'instant' })
   }
+
   function close() {
-    const target = origin.current
-    focusScene.current?.exit(heading.current, target?.querySelector<HTMLElement>('.rx-node-name') ?? null, () => {
-      setSelection(null)
-      focusReturn.current?.schedule(() => { if (target?.isConnected) target.focus({ preventScroll: true }) })
+    setSelected(null)
+    const index = origin.current
+    focusReturn.current?.schedule(() => {
+      const button = index === null ? null : roleButtons.current[index]
+      button?.focus({ preventScroll: true })
+      button?.scrollIntoView({ block: 'nearest', behavior: 'instant' })
     })
   }
-  function moveRole(index: number) {
-    choose({ kind: 'role', index })
-  }
-  function keepFocusInScene(event: KeyboardEvent<HTMLDialogElement>) {
-    if (event.key !== 'Tab') return
-    const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('button:not(:disabled),a[href],summary,[tabindex="0"]')]
-      .filter(element => element.getClientRects().length > 0)
-    const first = controls[0], last = controls.at(-1)
-    if (!first || !last) return
-    const active = document.activeElement
-    if (event.shiftKey && (active === first || active === heading.current)) { event.preventDefault(); last.focus() }
-    else if (!event.shiftKey && active === last) { event.preventDefault(); first.focus() }
-  }
 
-  return <article className="resume-explorer" aria-labelledby="resume-explorer-title">
-    <div className="rx-screen">
-      <h1 id="resume-explorer-title" className="sr-only">Résumé</h1>
-      <section className="rx-world" aria-label="Explore my résumé">
-        <div className={`rx-stage ${selection ? 'is-open' : ''}`}>
-          <div ref={map} className="rx-map">
-            <div className="rx-roles" role="group" aria-label="Experience">
-              {resumeChapters.map((item, index) => <Fragment key={item.id}><button type="button"
-                className={`rx-role rx-role-${index}`} style={{ '--x': `${positions[index][0]}%`, '--y': `${positions[index][1]}%` } as CSSProperties}
-                aria-expanded={index === selectedRole} aria-controls="resume-chapter" aria-label={`Explore ${item.shortName}`}
-                onClick={event => choose({ kind: 'role', index }, event.currentTarget)}>
-
-                <span className="rx-node-name">{item.shortName}<span className="rx-role-arrow" aria-hidden="true">↗</span></span>
-              </button>{index === 1 && <div className="rx-sculpture"><Art kind="helmet" dark={dark} cameraDistanceScale={narrow ? .52 : .68} idleMotion deferUntilVisible /><details className="rx-art-credit"><summary aria-label="Sculpture attribution">©</summary><p><a href="https://sketchfab.com/3d-models/jousting-helmet-a4eea31d9d9441af9434a7da5ae46b54" target="_blank" rel="noreferrer">Jousting Helmet</a> · The Royal Armoury · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a></p></details></div>}</Fragment>)}
-            </div>
+  return <article className="resume-explorer" data-view={chapter ? 'experience' : 'overview'} aria-labelledby="resume-explorer-title">
+    <div className="rx-screen" onKeyDown={event => { if (event.key === 'Escape' && !event.defaultPrevented && selected !== null) { event.preventDefault(); close() } }}>
+      <div id="resume-experiences" className="rx-layout" data-selected={chapter?.id ?? 'overview'}>
+        <header className="rx-title-actions">
+          <h1 id="resume-explorer-title">Résumé.</h1>
+          <div className="rx-entry-actions">
+            <button ref={documentToggle} type="button" className="rx-document-toggle" aria-expanded={documentOpen} aria-controls="resume-document" onClick={toggleDocument}>{documentOpen ? 'Close full résumé' : 'Full résumé'}<span aria-hidden="true">{documentOpen ? '−' : '+'}</span></button>
+            <a className="rx-download" href={`${import.meta.env.BASE_URL}Sulayman_Bowles_Resume.pdf`} download title={resumeReview.pdfNote} aria-describedby="resume-overview-pdf-note">July 2026 PDF<LinkArrow direction="down" /></a>
+            <span className="sr-only" id="resume-overview-pdf-note">{resumeReview.pdfNote}</span>
           </div>
-          <dialog ref={dialog} className="rx-focus-scene" id="resume-chapter" aria-labelledby="resume-chapter-title" onKeyDown={keepFocusInScene} onCancel={event => { event.preventDefault(); close() }}>
-            {selection && <section className="rx-chapter">
-              <div className="rx-focus-bar"><button type="button" className="rx-close" onClick={close}><span aria-hidden="true">↖</span> Back to overview</button><span className="rx-focus-count">{String(selectedRole + 1).padStart(2, '0')} / {String(resumeChapters.length).padStart(2, '0')}</span></div>
-              <div key={selectionKey} className="rx-chapter-body rx-focus-content">
-                {chapter && role ? <>
-                  <div className="rx-focus-layout"><header className="rx-focus-intro">
-                  <p className="rx-chapter-kicker">{role.organization}</p>
-                  <h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>{chapter.shortName}</h2>
-                  <p className="rx-job-title">{role.title}</p>
-                  <div className="rx-meta"><span>{role.dates}</span><span>{role.location}</span></div>
-                  {chapter.proof && <div className="rx-proof"><strong>{chapter.proof.value}</strong><span>{chapter.proof.label}</span></div>}
-                  </header><div className="rx-focus-work"><ResumeWorkDiagram key={chapter.id} chapter={chapter} /></div>
-                  <div className="rx-focus-support">
-                  <details className="rx-detail"><summary>Responsibilities & detail<span aria-hidden="true">+</span></summary><div><p>{role.publicSummary}</p><ul>{role.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul></div></details>
-                  {chapter.links.length > 0 && <nav className="rx-evidence" aria-label={`Work related to ${role.organization}`}>{chapter.links.map(link => <ExternalLink key={link.href} href={link.href}>{link.label}</ExternalLink>)}</nav>}
-                  </div></div>
-                  <nav className="rx-sequence" aria-label="Explore another role">
-                    {selectedRole > 0 ? <button onClick={() => moveRole(selectedRole - 1)}><span>← Previous</span>{resumeChapters[selectedRole - 1].shortName}</button> : <span />}
-                    {selectedRole < resumeChapters.length - 1 ? <button onClick={() => moveRole(selectedRole + 1)}><span>Next →</span>{resumeChapters[selectedRole + 1].shortName}</button> : <span />}
-                  </nav>
-                </> : selection.kind === 'education' ? <>
-                  <p className="rx-chapter-kicker">02 / Education</p><h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>Finance at<br />UT Austin.</h2>
-                  <p className="rx-lead">{profile.education.institution}<br />{profile.education.school}</p>
-                  <div className="rx-education-degree">{profile.education.degrees.map(degree => <div key={degree.degree}><strong>{degree.field}</strong><p>{degree.degree}</p></div>)}<span className="rx-meta">Expected {profile.education.expectedGraduation} / {profile.education.location}</span></div>
-                  <h3 className="rx-small-heading">In the classroom</h3><div className="rx-subjects">{profile.education.coursework.map((item, i) => <span key={item}><i aria-hidden="true">{String(i + 1).padStart(2, '0')}</i>{item}</span>)}</div>
-                  <h3 className="rx-small-heading">Beyond the classroom</h3><ul className="rx-simple-list">{profile.certifications.map(item => <li key={item}>{item}</li>)}</ul>
-                </> : selection.kind === 'recognition' ? <>
-                  <p className="rx-chapter-kicker">03 / Awards & leadership</p><h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>Awards &<br />leadership.</h2>
-                  <div className="rx-recognition">{profile.awardsAndLeadership.map((item, i) => <details key={item.organization}><summary><span className="rx-meta">{item.dates}</span><strong>{['Coinbase challenge','Jane Street puzzle','OnionDAO Hackathon','Artemis Researchathon','Student Government','Texas Blockchain','Energy Trading'][i]}</strong><span className="rx-recognition-role">{item.title}</span><span className="rx-plus" aria-hidden="true">+</span></summary><div><p>{item.detail}</p><span className="rx-meta">{item.organization}{item.location && ` / ${item.location}`}</span>{i === 2 && <div className="rx-evidence"><ExternalLink href="#/work/payrollpro">Explore PayrollPro</ExternalLink></div>}</div></details>)}</div>
-                </> : <>
-                  <p className="rx-chapter-kicker">04 / Skills & tools</p><h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>Skills & tools.</h2>
-                  <p className="rx-lead">Code, commercial thinking, and research. Open a discipline to see the tools and methods behind the work.</p>
-                  <div className="rx-toolkit">{profile.skillGroups.map((group, i) => <details key={group.label} open={i === 0}><summary><span className="rx-meta">0{i + 1}</span>{group.label}<span aria-hidden="true">+</span></summary><div>{group.items.map(item => <span key={item}>{item}</span>)}</div></details>)}</div>
-                  <h3 className="rx-small-heading">Languages</h3><p className="rx-lead">{profile.languages.join(' · ')}</p>
-                </>}
-              </div>
+        </header>
+        {chapter && role ?
+            <header ref={readingStart} key={`heading:${chapter.id}`} className="rx-chapter-heading">
+              <nav className="rx-chapter-nav" aria-label="Experience navigation">
+                <button type="button" className="rx-close" onClick={close}><LinkArrow direction="left" /> All experience</button>
+                <div className="rx-page-controls" role="group" aria-label={`Experience ${selectedPosition + 1} of ${chronology.length}`}>
+                  <button type="button" disabled={!previous} onClick={() => previous && choose(previous.index)} aria-label={previous ? `Previous experience: ${previous.chapter.shortName}` : 'Previous experience'}><LinkArrow direction="left" /></button>
+                  <span className="rx-page-position" aria-hidden="true">{String(selectedPosition + 1).padStart(2, '0')} / {String(chronology.length).padStart(2, '0')}</span>
+                  <button type="button" disabled={!next} onClick={() => next && choose(next.index)} aria-label={next ? `Next experience: ${next.chapter.shortName}` : 'Next experience'}><LinkArrow /></button>
+                </div>
+              </nav>
+              <h2 ref={heading} id="resume-chapter-title" tabIndex={-1}>{chapter.shortName}</h2>
+              <p className="rx-job-title">{role.title}</p>
+              <p className="rx-meta"><span>{role.dates}</span>{role.location && <>{' '}<span>{role.location}</span></>}</p>
+              {role.organization !== chapter.shortName && <span className="sr-only">{role.organization}</span>}
+            </header> : <div className="rx-overview-copy">
+              <header className="rx-index-heading" aria-hidden="true"><span>Experience</span><span>2025 — Present</span></header>
+              <p className="rx-education">Finance at UT Austin · BBA expected 2028</p>
+            </div>}
+        <section className="rx-world" aria-label={chapter ? `${chapter.shortName} sculpture` : 'Knight sculpture'}>
+          <ResumeSculpture chapter={chapter?.id ?? null} dark={dark} />
+        </section>
+        {chapter && role ? <section key={`body:${chapter.id}`} className="rx-selected" id="resume-chapter" aria-labelledby="resume-chapter-title">
+              <p className="rx-role-summary">{chapter.introduction}</p>
+              {chapter.proof && <p className="rx-proof"><strong>{chapter.proof.value}</strong><span>{chapter.proof.label}</span></p>}
+              <dl className="rx-contributions">{chapter.practice.map(item => <div key={item.label}><dt>{item.label}</dt><dd>{item.text}</dd></div>)}</dl>
+              {chapter.links.length > 0 && <nav className="rx-evidence" aria-label={`Work related to ${role.organization}`}>{chapter.links.map(link => <DestinationLink key={link.href} href={link.href}>{link.label}</DestinationLink>)}</nav>}
+              <nav className="rx-sequence" aria-label="Continue exploring">
+                {next ? <button type="button" onClick={() => choose(next.index)}><span><span className="rx-sequence-label">Next experience</span><span className="rx-sequence-name">{next.chapter.shortName}</span></span><LinkArrow /></button> : <button type="button" onClick={close}><span><span className="rx-sequence-label">Back to the index</span><span className="rx-sequence-name">All experience</span></span><LinkArrow direction="up" /></button>}
+              </nav>
+            </section> : <section className="rx-chronology" aria-labelledby="resume-chronology-title">
+              <header className="rx-index-heading rx-list-heading"><h2 id="resume-chronology-title">Experience</h2><span aria-hidden="true">2025 — Present</span></header>
+              <ol>{chronology.map(({ role, chapter: item, index }, position) => {
+                const year = role.dates.split(' ')[1]
+                const beginsYear = position === 0 || chronology[position - 1].role.dates.split(' ')[1] !== year
+                return <li key={item.id} data-year-start={beginsYear}>
+                  <button ref={button => { roleButtons.current[index] = button }} type="button" aria-label={`${item.shortName}, ${role.title}, ${role.dates}`} aria-controls="resume-experiences" onClick={event => choose(index, event.currentTarget)}>
+                    <span className="rx-node-year" aria-hidden="true">{beginsYear ? year : ''}</span>
+                    <span className="rx-node-copy"><span className="rx-node-name">{item.shortName}</span><span className="rx-role-label">{item.indexLabel}</span></span>
+                    <LinkArrow className="rx-chronology-arrow" />
+                  </button>
+                </li>
+              })}</ol>
             </section>}
-          </dialog>
-        </div>
-        <p className="sr-only" aria-live="polite" aria-atomic="true">{selection ? `${role?.organization ?? secondary.find(item => item.kind === selection.kind)?.label} chapter open.` : 'Résumé overview. Choose a role to explore.'}</p>
-      </section>
+      </div>
+      <p className="sr-only" aria-live="polite" aria-atomic="true">{chapter ? `${role?.organization} experience selected.` : 'Résumé overview. Choose an experience to explore.'}</p>
     </div>
-    <div ref={documentSection} id="resume-document" className="rx-document" data-open={documentOpen} role="region" aria-labelledby="resume-name" tabIndex={-1}><ResumeDocument /><button type="button" className="rx-document-return" onClick={toggleDocument}>Back to the résumé overview<span aria-hidden="true">↑</span></button></div>
+    <div ref={documentSection} id="resume-document" className="rx-document" data-open={documentOpen} hidden={!documentOpen} role="region" aria-labelledby="resume-name" tabIndex={-1}><ResumeDocument /><button type="button" className="rx-document-return" onClick={toggleDocument}>Back to résumé<LinkArrow direction="up" /></button></div>
   </article>
 }

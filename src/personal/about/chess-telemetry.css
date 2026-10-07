@@ -1,0 +1,61 @@
+/* Real UCI reports surround the playing surface. No second renderer or polling loop. */
+.about-objects .chess-focused .chess-table { display: grid; grid-template-columns: minmax(0,1fr) minmax(270px,30%); align-items: start; gap: 32px; }
+.about-objects .about-chess-game.chess-focused { max-width: 1200px; }
+.about-objects .chess-focused .chess-options-panel { right: calc(max(270px,30%) + 32px); }
+.about-objects[data-selected='knight'][data-board-mode='game'] .about-object-canvas { touch-action: none; }
+/* Captures stay below the name and king instead of splitting their first row. */
+.chess-focused .chess-seat-pair .chess-player-captures { order: 4; }
+.about-objects .chess-focused .chess-telemetry {
+  grid-column: 2; grid-row: 1; min-width: 0; padding: 0 0 0 24px; margin: 0;
+  border: 0; border-left: 1px solid var(--line); color: var(--ink); pointer-events: auto;
+  font-family: var(--chess-ui); --thinking-ink: var(--ink); --thinking-muted: var(--muted); --thinking-paper: var(--paper); --thinking-accent: var(--ink);
+}
+.chess-telemetry-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; min-height: 48px; padding-top: 12px; }
+.personal-site[data-section='about'] .chess-telemetry-heading > h2 { margin: 0; font: 600 17px/1.35 var(--type-display); letter-spacing: -.04em; }
+.chess-telemetry-heading > span { color: var(--muted); font-size: 10px; white-space: nowrap; }
+.chess-telemetry[data-state='searching'] .chess-telemetry-heading > span { color: var(--thinking-accent); }
+.chess-telemetry-spatial { display: grid; grid-template-columns: minmax(0,1fr); gap: 24px; padding: 16px 0 24px; }
+.chess-telemetry-values { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px 16px; margin: 0; font-variant-numeric: tabular-nums; }
+.chess-telemetry-values dt { margin-bottom: 4px; font-size: 10px; line-height: 1.4; color: var(--muted); }
+.chess-telemetry-values dd { margin: 0; font: 500 16px/1.2 var(--chess-notation); }
+.chess-telemetry-values .chess-telemetry-eval dd { font: 600 30px/1.15 var(--type-display); letter-spacing: -.055em; white-space: nowrap; }
+.chess-telemetry-depth { padding: 16px 0 12px; border-block: 1px solid var(--line); }
+.chess-telemetry-depth > span, .chess-telemetry .chess-reported-lines > figcaption { font: 500 11px/1.5 var(--chess-ui); color: var(--muted); }
+.chess-telemetry .chess-iterations { display: block; margin: 14px 0 0; width: 100%; }
+.chess-telemetry .chess-iterations > svg { height: 60px; }
+.chess-telemetry .chess-iterations > figcaption { font-family: var(--chess-ui); }
+.chess-telemetry-empty-chart { height: 92px; background: linear-gradient(var(--line),var(--line)) center / 100% 1px no-repeat; }
+.chess-telemetry .chess-iterations-line { stroke: var(--ink); }
+.chess-telemetry-notice, .chess-telemetry .chess-telemetry-caption { font: 11px/1.7 var(--chess-ui); color: var(--muted); margin: 16px 0 0; text-wrap: pretty; }
+.chess-telemetry .chess-telemetry-caption { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 18px; }
+.chess-telemetry-caption strong { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 900px) {
+  .about-objects .chess-focused .chess-options-panel { right: 0; }
+  .about-objects .chess-focused .chess-table { grid-template-columns: minmax(0,1fr); gap: 24px; }
+  .about-objects .chess-focused .chess-telemetry { grid-column: 1; grid-row: auto; border-left: 0; border-top: 1px solid var(--line); padding: 8px 0 0; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 0 24px; }
+  .chess-telemetry-heading { grid-column: 1 / -1; }
+  .chess-telemetry-spatial { grid-row: span 2; gap: 24px; padding-top: 12px; }
+  .chess-telemetry-values { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px 10px; }
+  .chess-telemetry-values .chess-telemetry-eval dd { font-size: 23px; }
+  .chess-telemetry-values dd { font-size: 14px; }
+  .chess-telemetry-depth { align-self: start; border-top: 0; padding-top: 12px; }
+  .chess-telemetry .chess-telemetry-caption { grid-column: 1 / -1; margin-top: 4px; }
+}
+@media (max-width: 400px) {
+  .about-objects .chess-focused .chess-telemetry { gap: 0 12px; }
+  .chess-telemetry-values dt { font-size: 9px; }
+}
+@media (max-width: 600px) and (min-height: 451px) {
+  .about-objects .chess-focused .chess-telemetry { grid-template-columns: minmax(0,1fr); }
+  .chess-telemetry-spatial { grid-row: auto; gap: 24px; padding-bottom: 24px; }
+  .chess-telemetry-values { gap: 20px 16px; }
+  .chess-telemetry-values .chess-telemetry-eval dd { font-size: 28px; }
+  .chess-telemetry-depth { border-top: 1px solid var(--line); padding-top: 16px; }
+}
+@media (max-height: 450px) and (min-aspect-ratio: 4/3) {
+  .about-objects .about-object-stage[data-chess-expanded] .chess-focused { --chess-surface-height: max(220px,min(calc(100dvh - 140px),calc(100vw - 40px))); }
+  .about-objects .about-object-stage[data-chess-expanded] .chess-focused .chess-table { grid-template-columns: minmax(0,1fr) minmax(210px,36%); gap: 20px; }
+  .about-objects .about-object-stage[data-chess-expanded] .chess-telemetry { grid-column: 2; grid-row: 1; display: block; border-top: 0; border-left: 1px solid var(--line); padding-left: 16px; }
+  .about-object-stage[data-chess-expanded] .chess-telemetry-values { gap: 16px 10px; }
+}

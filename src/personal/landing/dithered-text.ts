@@ -1,11 +1,14 @@
 import * as THREE from 'three'
-import { CHAPTERS, textSequence, type LandingChapter } from './sequence.ts'
+import { CHAPTERS, textSequence, type LandingChapter, type TextSequence } from './sequence.ts'
+import { headingSurface } from './heading-surface.ts'
 import { isStackedLanding } from './mobile-layout.ts'
 import type { ScrollInkUniforms } from './scroll-dither.ts'
+import { HEADING_RESERVE_EM, layoutHeading, renderHeading, type HeadingLayout } from './heading-typography.ts'
 export { textSequence } from './sequence.ts'
 export const HEADLINES = CHAPTERS.map(chapter => chapter.lines)
 
 export interface DitheredTextUniforms extends ScrollInkUniforms {
+  textEnabled: { value: number }
   textAtlas: { value: THREE.Texture | null }
   textBox: { value: THREE.Vector4 }
   textPixels: { value: THREE.Vector2 }
@@ -18,7 +21,7 @@ export interface DitheredTextOptions {
   stage: HTMLElement
   uniforms: DitheredTextUniforms
   pixelRatio(): number
-  onChapter(chapter: LandingChapter, index: number, lineHeight: number): void
+  onChapter(chapter: LandingChapter, index: number, height: number): void
   isAlive(): boolean
 }
 
@@ -102,18 +105,19 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
   const atlas = document.createElement('canvas')
   const context = atlas.getContext('2d', { willReadFrequently: true })
   if (!context) throw Error('Heading canvas is unavailable')
-  let texture: THREE.CanvasTexture | null = null, active = -1, lineHeight = 0, disposed = false, atlasKey = ''
+  let texture: THREE.CanvasTexture | null = null, active = -1, disposed = false, atlasKey = ''
+  let layouts: HeadingLayout[] = []
+  let currentSequence: TextSequence | undefined
   function resize(force = false) {
     if (disposed || !isAlive()) return
     const style = getComputedStyle(headline), box = headline.getBoundingClientRect(), scene = stage.getBoundingClientRect()
     if (!box.width || !scene.width || !scene.height) return
     const ratio = pixelRatio(), fontSize = parseFloat(style.fontSize), pad = 20
-    lineHeight = parseFloat(style.lineHeight) || fontSize * .98
-    const frameHeight = Math.ceil((lineHeight * 3 + pad * 2) * ratio)
-    const key = [box.width, ratio, style.fontSize, style.fontWeight, style.fontFamily, style.letterSpacing, lineHeight].join('|')
+    const frameHeight = Math.ceil((fontSize * HEADING_RESERVE_EM + pad * 2) * ratio)
+    const key = [box.width, ratio, style.fontSize, style.fontWeight, style.fontFamily, style.letterSpacing].join('|')
     if (!force && texture && key === atlasKey) {
       uniforms.textBox.value.set((box.left - scene.left - pad) / scene.width, 1 - (box.top - scene.top - pad + frameHeight / ratio) / scene.height, atlas.width / ratio / scene.width, frameHeight / ratio / scene.height)
-      if (active >= 0) onChapter(CHAPTERS[active], active, lineHeight)
+      if (active >= 0) onChapter(CHAPTERS[active], active, layouts[active].height)
       return
     }
     atlasKey = key
@@ -122,22 +126,32 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
     atlas.height = frameHeight * CHAPTERS.length
     context!.scale(ratio, ratio)
     context!.fillStyle = 'white'
-    context!.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`
     context!.textBaseline = 'alphabetic'
     context!.fontKerning = 'normal'
     const tracking = parseFloat(style.letterSpacing) || 0, tracked = 'letterSpacing' in context!
-    if (tracked) context!.letterSpacing = style.letterSpacing
-    const metrics = context!.measureText('Mg'), ascent = metrics.fontBoundingBoxAscent ?? fontSize * .9, descent = metrics.fontBoundingBoxDescent ?? fontSize * .25
-    const baseline = (lineHeight - ascent - descent) / 2 + ascent
+    const setFont = (scale: number, fit = 1) => {
+      context!.font = `${style.fontWeight} ${fontSize * scale * fit}px ${style.fontFamily}`
+      if (tracked) context!.letterSpacing = `${scale < 1 ? 0 : tracking * fit}px`
+    }
+    layouts = CHAPTERS.map(chapter => layoutHeading(chapter, fontSize, box.width, row => {
+      setFont(row.scale)
+      return context!.measureText(row.text).width + (tracked || row.scale < 1 ? 0 : (row.text.length - 1) * tracking)
+    }))
     CHAPTERS.forEach((chapter, index) => {
-      let longest = 0
-      chapter.lines.forEach((line, row) => {
-        const y = index * frameHeight / ratio + pad + baseline + row * lineHeight
-        longest = Math.max(longest, context!.measureText(line).width + (tracked ? 0 : (line.length - 1) * tracking))
+      const layout = layouts[index]
+      let longest = 0, rowTop = 0
+      layout.rows.forEach(row => {
+        setFont(row.scale, layout.fit)
+        const line = row.text, size = fontSize * row.scale * layout.fit, height = size * row.leading
+        const metrics = context!.measureText('Mg'), ascent = metrics.fontBoundingBoxAscent ?? size * .9, descent = metrics.fontBoundingBoxDescent ?? size * .25
+        const y = index * frameHeight / ratio + pad + rowTop + (height - ascent - descent) / 2 + ascent
+        const rowTracking = row.scale < 1 ? 0 : tracking * layout.fit
+        longest = Math.max(longest, context!.measureText(line).width + (tracked ? 0 : (line.length - 1) * rowTracking))
         if (tracked) context!.fillText(line, pad, y)
-        else for (let i = 0; i < line.length; i++) context!.fillText(line[i], pad + context!.measureText(line.slice(0, i)).width + i * tracking, y)
+        else for (let i = 0; i < line.length; i++) context!.fillText(line[i], pad + context!.measureText(line.slice(0, i)).width + i * rowTracking, y)
+        rowTop += height
       })
-      uniforms.textMeasure.value[index].set((longest + pad) / (atlas.width / ratio), (chapter.lines.length * lineHeight + pad) / (frameHeight / ratio))
+      uniforms.textMeasure.value[index].set((longest + pad) / (atlas.width / ratio), (layout.height + pad) / (frameHeight / ratio))
     })
     const pixels = context!.getImageData(0, 0, atlas.width, atlas.height)
     encodeStrokeDepth(pixels.data, atlas.width, atlas.height, fontSize * .065 * ratio)
@@ -153,21 +167,30 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
     uniforms.textBox.value.set((box.left - scene.left - pad) / scene.width, 1 - (box.top - scene.top - pad + frameHeight / ratio) / scene.height, atlas.width / ratio / scene.width, frameHeight / ratio / scene.height)
     uniforms.textPixels.value.set(atlas.width / ratio, frameHeight / ratio)
     uniforms.textGrid.value = ratio * .9
-    if (active >= 0) onChapter(CHAPTERS[active], active, lineHeight)
+    if (active >= 0) {
+      renderHeading(headline, layouts[active])
+      onChapter(CHAPTERS[active], active, layouts[active].height)
+    }
   }
   function update(progress: number, reduced: boolean) {
     const sequence = textSequence(progress, 'threshold', reduced, isStackedLanding(stage.clientWidth, stage.clientHeight))
     if (disposed || !isAlive()) return sequence
+    currentSequence = sequence
     stage.dataset.textDither = 'ready'
     sequence.states.forEach((state, index) => uniforms.textState.value[index].set(state.reveal, state.erase))
     if (sequence.active !== active) {
       active = sequence.active
-      headline.replaceChildren(...CHAPTERS[active].lines.flatMap((line, index) => index ? [document.createElement('br'), document.createTextNode(line)] : [document.createTextNode(line)]))
-      onChapter(CHAPTERS[active], active, lineHeight)
+      renderHeading(headline, layouts[active])
+      onChapter(CHAPTERS[active], active, layouts[active].height)
     }
     const state = sequence.states[active], phase = state.reveal < 1 ? 'printing' : state.erase > 0 ? 'dissolving' : 'held'
     if (stage.dataset.textPhase !== phase) stage.dataset.textPhase = phase
     return sequence
+  }
+  function surface(portal: boolean) {
+    const value = currentSequence ? headingSurface(currentSequence, portal) : 'shader'
+    if (stage.dataset.textSurface !== value) stage.dataset.textSurface = value
+    uniforms.textEnabled.value = Number(value === 'shader')
   }
   function dispose() {
     if (disposed) return
@@ -177,5 +200,8 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
     uniforms.textAtlas.value = null
     atlas.width = atlas.height = 0
   }
-  return { resize, update, dispose }
+  function blockHeight(chapter: LandingChapter) {
+    return layouts[CHAPTERS.indexOf(chapter)]?.height ?? parseFloat(getComputedStyle(headline).fontSize) * HEADING_RESERVE_EM
+  }
+  return { resize, update, surface, dispose, blockHeight }
 }

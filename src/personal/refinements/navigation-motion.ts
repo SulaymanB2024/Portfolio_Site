@@ -49,7 +49,7 @@ export function installNavigationMotion(root: HTMLElement, nav: HTMLElement, mar
       inkAnimation = marker.animate([
         { transform: before === 'none' ? after : before, opacity: Number(visible) },
         { transform: after, opacity: 1 },
-      ], { duration: 240, easing: EASE })
+      ], { duration: 400, easing: EASE })
       void inkAnimation.finished.catch(() => {})
     }
   }
@@ -71,7 +71,7 @@ export function installNavigationMotion(root: HTMLElement, nav: HTMLElement, mar
     if (!heading?.animate) return
     journey.heading = heading
     // Headings move; shared WebGL parents keep their exact bounds.
-    const animation = heading.animate([{ transform: 'translateY(3px)' }, { transform: 'translateY(0)' }], { duration: 220, easing: EASE })
+    const animation = heading.animate([{ transform: 'translateY(3px)' }, { transform: 'translateY(0)' }], { duration: 480, easing: EASE })
     journey.headingAnimation = animation
     journey.animations.add(animation)
     void animation.finished.catch(() => {}).finally(() => {
@@ -97,7 +97,7 @@ export function installNavigationMotion(root: HTMLElement, nav: HTMLElement, mar
     animateHeading(journey, main)
     const footer = root.querySelector<HTMLElement>('.personal-footer')
     const arrivals = [main, footer].filter((element): element is HTMLElement => Boolean(element?.animate)).map(element => {
-      const animation = element.animate([{ opacity: .65 }, { opacity: 1 }], { duration: 180, easing: EASE })
+      const animation = element.animate([{ opacity: .82 }, { opacity: 1 }], { duration: 360, easing: EASE })
       journey.animations.add(animation)
       return animation.finished.catch(() => {})
     })

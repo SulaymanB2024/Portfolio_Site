@@ -1297,3 +1297,61 @@
   .case-dossier .study-account .study-chapter-copy > p { font-size: 18px; line-height: 1.65; }
   .case-dossier .study-contents { gap: 0 24px; }
 }
+
+/* Print follows the reading order instead of carrying screen-scale grids and floats. */
+@media print {
+  .case-dossier .study-hero { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 24px; align-items: start; padding-bottom: 16px; break-inside: avoid; }
+  .case-dossier .study-hero-figure { width: auto; float: none; margin: 0; }
+  .case-dossier .study-hero-figure .study-glb { height: 150px; }
+  .case-dossier .study-hero-figure .object-controls { display: none; }
+  .case-dossier .study-hero h1,
+  .case-dossier.case-study-payrollpro .study-hero h1,
+  .case-dossier.case-study-viralbench .study-hero h1 { font-size: 34px; margin: 10px 0 12px; }
+  .case-dossier .study-title { font-size: 16px; margin-bottom: 10px; }
+  .case-dossier .study-summary { font-size: 11px; line-height: 1.65; margin-bottom: 12px; }
+  .case-dossier .project-contribution { margin-top: 12px; max-width: none; }
+  .case-dossier .project-contribution dl { gap: 8px 20px; }
+  .case-dossier .project-contribution :is(dt, p > span) { font-size: 9px; }
+  .case-dossier .project-contribution dd { font-size: 11px; }
+  .case-dossier .project-contribution > p { font-size: 11px; margin-top: 10px; }
+  .case-dossier .study-chapter { padding-block: 20px; }
+  .case-dossier .study-chapter-label { margin-bottom: 12px; break-after: avoid; }
+  .case-dossier .study-account { display: block; }
+  .case-dossier .study-account h2 { max-width: none; font-size: 23px; margin: 0 0 10px; break-after: avoid; }
+  .case-dossier .study-account .study-chapter-copy { max-width: none; }
+  .case-dossier .study-account .study-chapter-copy > p { font-size: 11px; line-height: 1.65; margin: 0 0 12px; }
+  .case-dossier .study-dossier-body { margin-top: 20px; }
+  .case-dossier .study-prose-continuation { margin-top: 18px; }
+  .case-dossier .work-table-wrap { overflow: visible; margin-top: 20px; }
+  .case-dossier .work-table caption { font-size: 12px; padding-bottom: 8px; break-after: avoid; }
+  .case-dossier .work-table :is(th, td) { min-width: 0; padding: 6px; font: 10px/1.5 var(--type-interface, Arial, sans-serif); overflow-wrap: anywhere; }
+  .case-dossier .work-table tbody th { width: auto; }
+  .case-dossier .work-table tr { break-inside: avoid; }
+  .case-dossier .work-material-note { font-size: 9px; margin-top: 8px; }
+  .case-dossier .work-sources { margin-top: 16px; }
+  .case-dossier .work-sources > a { padding: 12px 0; break-inside: avoid; }
+  .case-dossier .work-sources > a > div { display: block; }
+  .case-dossier .work-sources h3 { font-size: 14px; }
+  .case-dossier .work-sources p { font-size: 10px; margin-top: 4px; }
+  .dossier-source-comparison, .dossier-lifecycle, .dossier-review-loop { break-inside: avoid; }
+  .dossier-figure-heading { font-size: 13px; padding-block: 12px; break-after: avoid; }
+  .dossier-specimen { padding: 16px 16px 16px 0; }
+  .dossier-specimen + .dossier-specimen { padding-left: 16px; }
+  .dossier-specimen h3 { font-size: 17px; }
+  .dossier-source-path { min-height: 0; margin-top: 8px; font-size: 9px; }
+  .dossier-source-measure { margin: 12px 0; }
+  .dossier-source-measure strong { font-size: 40px; }
+  .dossier-source-measure > span { font-size: 9px; }
+  .dossier-source-marks { max-width: 160px; gap: 5px; margin: 12px 0; }
+  .dossier-source-fields > div { padding-block: 6px; gap: 10px; }
+  .dossier-source-fields dt { font-size: 9px; }
+  .dossier-source-fields dd { font-size: 10px; }
+  .dossier-source-reading, .dossier-source-next { font-size: 11px; line-height: 1.6; margin-block: 12px; }
+  .dossier-evidence-foot { display: block; padding-top: 12px; break-inside: avoid; }
+  .dossier-evidence-foot p { font-size: 9px; max-width: none; }
+  .dossier-evidence-foot > div { margin-top: 8px; }
+  .dossier-evidence-foot a { min-height: 0; font-size: 9px; }
+  .case-dossier :is(.dossier-record, .dossier-review-strip) { background: transparent; color: var(--ink); border: 1px solid var(--line); padding: 12px; }
+  .case-dossier .dossier-record > p { font-size: 10px; line-height: 1.6; }
+  .case-dossier .dossier-review-strip .dossier-review-stage > strong { font-size: 17px; }
+}

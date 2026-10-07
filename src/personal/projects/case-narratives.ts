@@ -13,6 +13,7 @@ export const caseNarratives: Record<string, WorkDocument> = {
         id: 'study-section-1',
         label: 'Crawler & records',
         title: 'The crawl and its retained record',
+        artifact: 'atlas',
         body: [
           'Atlas normalizes URLs, deduplicates requests, handles robots and sitemaps, and records a bounded crawl. A failed fetch stays distinguishable from a successfully fetched page with no extractable content. Run limits remain part of the context when reviewing coverage.',
           'The Python console combines raw HTML extraction, optional browser rendering, link-graph calculations, and provider collection. Reviewers can filter local runs, compare them, inspect findings, and export reports. The shipped local workflow does not include distributed crawling, hosted delivery, rank tracking, or GA4 integration.'
@@ -56,7 +57,6 @@ export const caseNarratives: Record<string, WorkDocument> = {
           'The retained July 16 sample compares two successful responses. The static page contains ten quote cards; the JavaScript page contains no source quote cards but embeds ten runtime records. Both retain pagination addresses and lack a source canonical. That evidence calls for a render check before judging visible content.',
           'A separate implementation test exercises an empty raw H1 and an incorrect raw canonical. Rendering supplies one effective H1 and a corrected canonical. Atlas keeps the raw-only findings while avoiding missing-H1, thin-content, and canonical-mismatch findings against the effective page.'
         ],
-        artifact: 'atlas',
         links: [
           {
             label: 'Rendered-page tests',

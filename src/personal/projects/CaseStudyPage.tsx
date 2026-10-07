@@ -10,12 +10,15 @@ import './case-dossier.css'
 import { useProjectReading } from './useProjectReading'
 import { projectChapterHref } from './project-reading-position'
 import { ProjectEndnav } from './ProjectEndnav'
+import { DestinationLink } from '../DestinationLink'
+import { ProjectContribution } from './ProjectContribution'
+import { curatedNextProject } from './work-curation'
 
 export default function CaseStudyPage({ study, dark }: { study: CaseStudy; dark: boolean }) {
   const document = caseNarratives[study.slug]
   const root = useRef<HTMLElement>(null)
   const [active, setActive] = useProjectReading(root, study.slug, '.study-chapter', chapterId(0))
-  const next = caseStudies[(caseStudies.indexOf(study) + 1) % caseStudies.length]
+  const next = curatedNextProject(study.slug) ?? caseStudies[(caseStudies.indexOf(study) + 1) % caseStudies.length]
   const chapterHref = (id: string) =>
     typeof window === 'undefined' ? `#/work/${study.slug}?chapter=${id}` : projectChapterHref(location.hash, location.pathname, location.search, study.slug, id)
   function jump(event: MouseEvent<HTMLAnchorElement>, id: string) {
@@ -29,9 +32,7 @@ export default function CaseStudyPage({ study, dark }: { study: CaseStudy; dark:
   }
   return (
     <article ref={root} className={`case-study case-dossier case-study-${study.slug}`}>
-      <a className="study-back mono" href="#/work">
-        ← All work
-      </a>
+      <DestinationLink className="study-back mono" href="#/work" direction="left">All work</DestinationLink>
       <header className="study-hero">
         <div className="study-hero-copy">
           <span className="eyebrow">
@@ -50,9 +51,10 @@ export default function CaseStudyPage({ study, dark }: { study: CaseStudy; dark:
           </h1>
           <p className="study-title">{document.deck}</p>
           <p className="study-summary">{document.summary}</p>
-          <a href={chapterHref(document.chapters[0].id)} onClick={(event) => jump(event, document.chapters[0].id)}>
-            Read the project <span aria-hidden="true">↓</span>
-          </a>
+          <ProjectContribution slug={study.slug} />
+          <DestinationLink className="project-reading-action" href={chapterHref(document.chapters[0].id)} direction="down" onClick={(event) => jump(event, document.chapters[0].id)}>
+            Read the project
+          </DestinationLink>
         </div>
         <div className="study-hero-figure">
           {study.slug === 'atlas' ? <Art kind="globe" dark={dark} className="study-glb" idleMotion={false} /> : <CaseHeroArtwork kind={study.slug} />}
@@ -81,7 +83,7 @@ export default function CaseStudyPage({ study, dark }: { study: CaseStudy; dark:
               <div className="study-account">
                 <h2 id={`${chapter.id}-title`}>{chapter.title}</h2>
                 <div className="study-chapter-copy">
-                  {chapter.body.map((text) => (
+                  {(chapter.artifact ? chapter.body.slice(0, 1) : chapter.body).map((text) => (
                     <p key={text}>{text}</p>
                   ))}
                 </div>
@@ -91,6 +93,7 @@ export default function CaseStudyPage({ study, dark }: { study: CaseStudy; dark:
                   {chapter.artifact === 'atlas' ? <AtlasSourceComparison /> : chapter.artifact === 'payroll' ? <PayrollLifecycle /> : <ViralReviewLoop />}
                 </div>
               )}
+              {chapter.artifact && chapter.body.length > 1 && <div className="study-account study-prose-continuation"><div aria-hidden="true" /><div className="study-chapter-copy">{chapter.body.slice(1).map(text => <p key={text}>{text}</p>)}</div></div>}
               <WorkMaterials chapter={chapter} base={import.meta.env.BASE_URL} />
             </section>
           ))}

@@ -5,16 +5,27 @@
   "number": "08",
   "category": "SITE ARCHITECTURE",
   "title": "Internal Links Are a Directed Retrieval Graph",
-  "seoTitle": "Internal Linking as a Directed Retrieval Graph",
-  "subtitle": "A graph-first method for crawlable links, reachability, depth, contextual edges, orphan diagnosis, and repair plans that preserve user intent.",
-  "seoDescription": "Analyze internal links as a directed graph using reachability, depth, components, edge context, orphan states, and executable validation instead of raw link counts.",
-  "image": "/og-default.png",
+  "seoTitle": "Internal Link Audits: Reachability, Context and Orphans",
+  "subtitle": "Measure the paths to useful pages, not just the links pointing at them.",
+  "seoDescription": "Map internal links with source context, canonical destinations and entry paths. Diagnose orphan states and validate repairs without assuming ranking gains.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/internal-links-editorial.webp",
+    "socialSrc": "/images/research/internal-links-social.jpg",
+    "alt": "A deep monochrome architectural lattice connects chambers with directed paths.",
+    "label": "Internal retrieval / directed lattice",
+    "caption": "Reachability emerges from directed pathways between entry points, hubs, and isolated chambers."
+  },
   "date": "2026.07.19",
-  "dateModified": "2026.07.19",
+  "dateModified": "2026-10-05",
   "lastVerified": "2026.07.19",
-  "readTime": "13 MIN",
+  "readTime": "6 MIN",
   "author": "SULAYMAN BOWLES",
-  "thesis": "Internal-link quality is the ability of people and crawlers to reach the right canonical pages through meaningful, crawlable paths—not the number of links a template can emit.",
+  "thesis": "Internal links work when people and crawlers can reach the right canonical pages through meaningful paths. Preserve edge context and entry points before using counts to judge the architecture.",
+  "conclusion": {
+    "title": "Validate the path after the repair",
+    "content": "Give priority pages meaningful, crawlable paths from their intended entry points. Keep the graph versioned and test reachability and parent diversity after route or template changes; a one-time link score cannot protect those journeys."
+  },
   "evidenceBoundary": "Graph metrics describe the captured internal architecture and help prioritize review. They do not measure proprietary ranking weights, guarantee crawling or indexing, or prove that adding a link will improve search performance.",
   "metrics": [
     {
@@ -62,17 +73,17 @@
     }
   ],
   "content": [
-    "An internal link is a directed edge from one document to another, observed in a particular source or rendered state with anchor text, placement, and crawlability conditions. Reducing that edge to a destination count discards the information needed to explain architecture. A global navigation link, an editorial citation, a related-product card, a pagination control, and a hidden script route can all point to the same URL while serving different retrieval functions.",
-    "The graph-first approach preserves node identity and edge context, then asks reachable questions: which canonical pages can be reached from approved entry points, how many hops are required, which components are disconnected, where do redirects consume edges, and which important pages depend on one fragile source? Metrics narrow the review set. They do not replace the product judgment that determines which paths should exist."
+    "A navigation item, editorial citation, product card, pagination control, and scripted route can all point at the same URL. Counting them as equivalent links hides how a reader or crawler could actually reach it. Each edge needs its source or rendered state, label, placement, and crawlability conditions.",
+    "With that context intact, a directed graph can answer practical questions: which canonical pages are reachable from intended entries, how deep their paths run, where redirects intervene, and which important routes depend on one fragile parent. Metrics narrow the review; product judgment decides which paths belong."
   ],
   "sections": [
     {
       "id": "edge-contract",
-      "title": "Store a link edge with enough context to review it",
+      "title": "Keep enough context to explain each link",
       "paragraphs": [
-        "The minimum edge has a source URL, observed href, resolved destination, anchor or accessible name, DOM or source location, link type, discovery state, and artifact reference. Preserve whether the element was an anchor with an href because Google documents that form as the generally crawlable link pattern. A click handler on a div may support a user interaction while remaining a different technical object.",
-        "Normalize the source and destination against the same route-identity contract used by the crawl frontier, but retain the observed href. Relative paths, fragments, alternate hosts, tracking parameters, and redirects can then be diagnosed without losing evidence. Classify the destination after resolution as canonical, alias, external, asset, non-HTTP, malformed, or unknown.",
-        "Placement should be derived cautiously. Header, primary navigation, breadcrumb, main content, related content, pagination, filter, and footer are useful classes when the DOM structure supports them. Do not infer importance from CSS coordinates alone. The important point is that a repeated template edge and a unique editorial edge remain distinguishable."
+        "Store source URL, observed href, resolved destination, anchor or accessible name, source or DOM location, link type, discovery state, and artifact reference. Identify anchor elements with hrefs, the pattern Google generally describes as crawlable. A div click handler may serve users while remaining a different discovery mechanism.",
+        "Use the frontier’s route-identity rules for both endpoints, while retaining the original href. That preserves relative paths, fragments, alternate hosts, parameters, and redirects for diagnosis. Classify resolved destinations as canonical, alias, external, asset, non-HTTP, malformed, or unknown.",
+        "Infer placement only where document structure supports header, navigation, breadcrumb, main, related, pagination, filter, or footer classes. Coordinates alone cannot establish importance. Preserve the distinction between repeated template links and unique editorial relationships."
       ],
       "table": {
         "caption": "Internal-link edge contract",
@@ -117,11 +128,11 @@
     },
     {
       "id": "reachability",
-      "title": "Measure reachability from real entry points",
+      "title": "Start from the intended entry points",
       "paragraphs": [
-        "A page is structurally reachable when a directed path exists from an approved entry set through crawlable internal edges. The homepage is one entry, not the only one. Category hubs, section roots, locale roots, authenticated application shells, and feed or campaign landings can represent different user journeys. Define the entry set before calculating depth.",
-        "Run breadth-first search on canonical destinations after resolving known redirects. Report shortest depth and at least one path, but also count independent parent sources. A priority page reachable in two hops through one soon-to-be-retired article is more fragile than a page with several relevant parents. Path diversity is not a ranking metric; it is an architecture resilience measure.",
-        "Keep source and rendered graphs separate when client execution adds navigation. If the source graph cannot reach an article but the rendered graph can, the finding is dependency on the tested client path, not absolute orphaning. If neither graph reaches it but a sitemap lists it, label it sitemap-only. Each state implies a different repair."
+        "Reachability means a directed path exists from an approved entry through crawlable internal edges. Define that entry set first. Home, categories, section and locale roots, authenticated shells, and feed or campaign landings can support different journeys.",
+        "After resolving redirects to canonical destinations, run breadth-first search. Report shortest depth, a sample path, and independent parent sources. A page reachable in two hops through one soon-to-retire article can be more fragile than one with several relevant parents. Path diversity measures resilience, not ranking weight.",
+        "Keep source and rendered graphs separate. A route reachable only after client execution depends on the tested render path; it is not absolutely orphaned. If neither graph reaches it but a sitemap nominates it, record sitemap-only status. Those states need different repairs."
       ],
       "table": {
         "caption": "Reachability states for a public canonical page",
@@ -161,11 +172,11 @@
     },
     {
       "id": "components-and-orphans",
-      "title": "Diagnose components before labeling orphan pages",
+      "title": "Verify the inventory before calling a page orphaned",
       "paragraphs": [
-        "A directed graph can contain weakly connected groups that are isolated from the primary site and strongly connected groups that circulate internally without a path from an entry. These components often reveal retired subdirectories, alternate hosts, faceted islands, staging remnants, or microsites imported without navigation. Inspect representative URLs and edge classes before assigning one site-wide remedy.",
-        "An orphan label needs an inventory source. A page discovered only through a database export, analytics, log file, external backlink, or sitemap is not equivalent to a page discovered during the internal crawl. Record the source that proves the node exists. Without that, the absence of inlinks may simply mean the crawler never knew the URL.",
-        "Not every zero-inlink URL needs a new link. Redirect targets, campaign pages, utility endpoints, legal notices, feed documents, and intentionally private states may have special entry paths or should leave the indexable inventory. The decision should be keep and link, consolidate and redirect, retain with bounded reachability, noindex, or remove—not add links everywhere."
+        "Weakly connected groups may sit outside the main site; strongly connected groups may circulate without any path from an entry. Retired directories, alternate hosts, facet islands, staging remnants, and imported microsites can produce these structures. Inspect examples and relationship types before applying a common remedy.",
+        "An orphan diagnosis needs evidence that the page exists. Preserve the database export, analytics, logs, backlink, or sitemap that supplied it. No observed inlinks may otherwise mean the crawler never knew the URL.",
+        "Zero inlinks do not always require a new link. Redirect targets, campaigns, utilities, legal notices, feeds, and private states may have special entries or belong outside the indexable inventory. Choose deliberately among linking, consolidation and redirect, bounded reachability, noindex, or removal."
       ],
       "bullets": [
         "Compare crawl nodes with sitemap, analytics, logs, CMS exports, and approved route registries.",
@@ -177,11 +188,11 @@
     },
     {
       "id": "context-and-concentration",
-      "title": "Use graph metrics to find questions, not to manufacture importance",
+      "title": "Use metrics to locate the review",
       "paragraphs": [
-        "In-degree identifies destinations receiving many captured edges; out-degree identifies sources that distribute many. Depth exposes long retrieval paths. Betweenness can identify bridge pages whose removal disconnects routes. Strong components expose circulation. Edge concentration shows whether most paths depend on one template. These measures are useful because they reveal structures worth reviewing.",
-        "Raw PageRank or similar centrality scores can be calculated on an internal graph, but the score is a model of the captured link network, not a disclosed search-engine value. Results are sensitive to which nodes and edges were included, how redirects were resolved, whether repeated links were collapsed, and how dangling nodes were handled. Store those choices next to the output.",
-        "Anchor text and surrounding context answer a different question: whether the relationship is legible. Repeated exact-match anchors are not automatically better, and generic labels are not automatically wrong. Review whether the phrase helps a reader understand the destination, fits the sentence or component, and distinguishes nearby links."
+        "In-degree shows destinations receiving edges; out-degree shows distributing sources. Depth reveals long paths, betweenness can locate bridges, strong components expose circulation, and edge concentration shows dependence on templates. Each is a structural prompt for review.",
+        "Internal PageRank and similar centrality scores model the captured graph, not disclosed search-engine values. Inventory, redirect resolution, repeated-edge treatment, and dangling-node handling can change the result. Keep those modeling choices with the output.",
+        "Labels and surrounding text test whether a relationship makes sense to a reader. Exact-match repetition is not automatically better, nor are generic anchors automatically wrong. Ask whether the wording predicts the destination, fits its sentence or component, and distinguishes nearby links."
       ],
       "table": {
         "caption": "Graph metrics as diagnostic prompts",
@@ -221,11 +232,11 @@
     },
     {
       "id": "repair-and-rerun",
-      "title": "Repair journeys, then rerun the same graph contract",
+      "title": "Specify the journey the repair should create",
       "paragraphs": [
-        "A link plan should name the source page, destination canonical, placement, intended reader question, anchor or component label, owner, and expected graph change. This prevents the recommendation “add more internal links” from becoming a site-wide template block. The strongest repairs usually connect an existing explanatory page to the next useful artifact or decision.",
-        "After implementation, crawl the same scope and rebuild both source and rendered edge tables. Assert that the new edge is a crawlable anchor, reaches the canonical destination without an avoidable redirect, appears in the intended component, and does not create broken or duplicate links. Recalculate reachability and depth only after the edge-level checks pass.",
-        "Monitor for regressions when templates or route registries change. A page can return to sitemap-only status when a collection stops rendering, a navigation key changes, or a canonical path is renamed without updating contextual links. The durable artifact is therefore not a one-time score; it is a versioned graph and a small set of architecture invariants."
+        "Name the source, destination canonical, placement, reader question, label, owner, and expected graph change. That turns “add internal links” into a reviewable repair instead of another blanket template block. Existing explanatory pages often provide the most useful path to a next artifact or decision.",
+        "Crawl the same scope after implementation and rebuild source and rendered edge tables. Confirm a crawlable anchor reaches the canonical without avoidable redirects, appears in its intended component, and creates no broken or duplicate links. Only then recalculate depth and reachability.",
+        "Repeat these checks after template or registry changes. Collection rendering, navigation keys, and renamed canonicals can leave a page sitemap-only again. Versioned graphs and a few architecture invariants expose that regression more clearly than a permanent score."
       ],
       "codeExamples": [
         {
@@ -238,5 +249,7 @@
     }
   ],
   "path": "/research/technical-seo/internal-links-directed-retrieval-graph",
-  "aliases": []
+  "aliases": [],
+  "image": "/images/research/internal-links-social.jpg",
+  "displayTitle": "Internal links are a retrieval graph."
 }

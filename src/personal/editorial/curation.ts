@@ -1,6 +1,12 @@
 import archived from './data/archived-catalog.json' with { type: 'json' }
+import published from './data/catalog.json' with { type: 'json' }
 
 const atlas = 'atlas-building-an-evidence-console'
+export const withdrawnArticleSlugs = [
+  'canonicalization-graph-consistency', 'internal-links-directed-retrieval-graph',
+  'robots-txt-courtesy-not-access-control', 'structured-data-without-content-drift',
+  'audit-findings-derived-records',
+]
 const destinations: Record<string, { slug: string; section?: string }> = {
   'crawl-frontier-state-machine': { slug: atlas, section: 'capture' },
   'sqlite-crawl-pipelines': { slug: atlas, section: 'capture' },
@@ -17,11 +23,11 @@ const destinations: Record<string, { slug: string; section?: string }> = {
   'canonical-identity-personal-seo': { slug: '' },
 }
 
-/** Retain incoming URLs while removing superseded notes from public discovery. */
+/** Consolidate only notes that do not have their own published reader. */
 export function consolidatedDestination(raw: string) {
   const path = raw.replace(/^#/, '').split(/[?#]/)[0].replace(/^\/+|\/+$/g, '')
   const record = archived.find(article => path === `writing/${article.slug}` || path === article.path.slice(1) || article.aliases?.some(alias => path === alias.slice(1)))
-  return record ? destinations[record.slug] : undefined
+  return record && !published.some(article => article.slug === record.slug) ? destinations[record.slug] : undefined
 }
 
 export function consolidatedHref(raw: string) {

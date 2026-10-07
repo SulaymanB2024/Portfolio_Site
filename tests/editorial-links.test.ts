@@ -25,9 +25,18 @@ test('legacy and canonical article links reach the new reader and retain section
 
 test('downloads stay local while untransplanted pages and external citations retain their destinations', () => {
   assert.equal(articleHref('/research/evidence.csv', catalog, '/portfolio/'), '/portfolio/research/evidence.csv')
-  assert.equal(articleHref('/atlas/sample-crawl', catalog), 'https://sulayman-bowles.dev/atlas/sample-crawl')
+  assert.equal(articleHref('/untransplanted-page', catalog), 'https://sulayman-bowles.dev/untransplanted-page')
   assert.equal(articleHref('https://example.org/source#table', catalog), 'https://example.org/source#table')
   assert.equal(articleHref('mailto:sybatx@gmail.com', catalog), 'mailto:sybatx@gmail.com')
+})
+
+test('Atlas citations stay in the portfolio and agree with the public route aliases', () => {
+  for (const path of ['/atlas', '/atlas/sample-crawl']) {
+    const href = articleHref(path, catalog)
+    assert.equal(href, '#/work/atlas')
+    assert.equal(resolveRoute(href, '/', catalog), resolveRoute('', path, catalog))
+    assert.equal(articleHref(`https://sulayman-bowles.dev${path}`, catalog), href)
+  }
 })
 
 test('article markup only accepts navigable web, local, mail and citation links', () => {

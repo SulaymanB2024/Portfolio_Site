@@ -2,19 +2,33 @@
   "kind": "research",
   "cluster": "ai-crawlers",
   "slug": "ai-search-crawler-policy",
+  "aliases": [
+    "/markets/ai-search-crawler-policy"
+  ],
   "number": "01",
   "category": "CRAWLER POLICY",
   "title": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
-  "seoTitle": "AI Crawler Robots.txt Guide: GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot",
-  "subtitle": "Copy-ready host rules for eight named product tokens, with exact Allow, Disallow, sitemap, and release checks.",
-  "seoDescription": "Compare OpenAI, Anthropic, and Perplexity crawler user agents, then copy robots.txt policies for allowing AI search, blocking training, or blocking named AI agents.",
-  "image": "/og-default.png",
+  "seoTitle": "AI Crawler Robots.txt: Search, Training and User Fetches",
+  "subtitle": "Choose crawler access by purpose, then test the policy you actually deployed.",
+  "seoDescription": "Choose robots.txt policies for AI search, model development and user-triggered fetches. Compare named bots, then check deployed groups and observed requests.",
+  "artwork": {
+    "kind": "image",
+    "heroSrc": "/images/research/ai-crawler-policy-reader-hero.webp",
+    "socialSrc": "/images/research/ai-crawler-policy-social.jpg",
+    "alt": "Monochrome editorial artwork showing crawler pathways meeting policy and access-control boundaries.",
+    "label": "Crawler policy / control map",
+    "caption": "Named crawler rules express policy; authentication and edge controls protect private resources."
+  },
   "date": "2026.06.19",
-  "dateModified": "2026.07.14",
-  "lastVerified": "2026.07.14",
-  "readTime": "10 MIN",
+  "dateModified": "2026-10-05",
+  "lastVerified": "2026.07.19",
+  "readTime": "4 MIN",
   "author": "SULAYMAN BOWLES",
-  "thesis": "Treat search crawlers, training crawlers, and user-triggered fetchers as separate policy choices, then verify observed traffic with server logs and provider-published IP ranges.",
+  "thesis": "Separate search discovery, model development, and user-triggered fetching before selecting agent groups. Deployed rules express policy; logs and dated provider ranges support attribution, not proof of downstream use.",
+  "conclusion": {
+    "title": "Keep the policy claim narrower than the evidence",
+    "content": "Test the deployed groups and classify observed traffic with provider-specific guidance and dated ranges. A named-agent rule does not cover every client, prove compliance, or establish indexing, training exclusion, or citation."
+  },
   "evidenceBoundary": "This guide documents published crawler controls as verified on July 14, 2026. A robots.txt rule expresses policy; it does not secure private content, authenticate a bot, or prove indexing, ranking, training exclusion, or answer-system citation.",
   "metrics": [
     {
@@ -87,15 +101,16 @@
     }
   ],
   "content": [
-    "/robots.txt is a host-scoped text file. Match the exact case-sensitive product token, then assign Allow: / or Disallow: /. Preserve the correct Sitemap line.",
-    "Release sequence: outcome → token → group → file merge → production fetch → access-log check."
+    "AI search, model development, and user-opened URLs need separate decisions. Blocking a training token does not by itself block a provider’s search crawler or user-requested fetcher. The dated comparison below preserves the provider guidance reviewed for this guide; it is not a newly verified inventory.",
+    "Publish each named product token in its own intended /robots.txt group with Allow: / or Disallow: /, and retain the correct Sitemap line. [The protocol](https://www.rfc-editor.org/rfc/rfc9309.html#section-2.2.1) requires case-insensitive product-token group matching; it separately says path matching should be case sensitive. Use the documented branded spellings without treating token casing as an access boundary.",
+    "Choose the outcome, select the groups, merge the existing file, and fetch production before inspecting logs. Robots rules guide cooperating clients; protect private files with authentication or server-side authorization regardless of those rules."
   ],
   "sections": [
     {
       "id": "outcome-matrix",
-      "title": "Choose the policy outcome before choosing a user-agent",
+      "title": "Separate search, training, and user requests",
       "paragraphs": [
-        "Choose one row before editing the file."
+        "Choose the intended outcome before copying a rule. Search discovery and model-development opt-out target different agents; user-requested fetching follows provider-specific behavior. Private files require an enforceable access boundary for every client, not another robots group."
       ],
       "table": {
         "caption": "Outcome-to-user-agent decision matrix",
@@ -135,9 +150,9 @@
     },
     {
       "id": "crawler-comparison",
-      "title": "AI crawler comparison table",
+      "title": "Compare purposes before tokens",
       "paragraphs": [
-        "Target the stable token, not a versioned HTTP header."
+        "Use the named product token rather than a versioned HTTP header. The table distinguishes search, model-development, and user-request roles at its stated verification date. In particular, user-triggered access may follow different robots behavior; do not infer compliance merely from the provider name."
       ],
       "table": {
         "caption": "Published AI crawler roles and robots.txt behavior, last verified July 14, 2026",
@@ -219,19 +234,19 @@
     },
     {
       "id": "robots-configurations",
-      "title": "Copy-and-paste robots.txt configurations",
+      "title": "Merge the example with the host’s policy",
       "paragraphs": [
-        "Merge one template with the host’s existing search-engine, media, private-path, and sitemap groups. Replace the example sitemap hostname before release."
+        "Choose a template, then reconcile it with existing search-engine, media, path, and sitemap rules. Replace the example sitemap hostname. The broad block names only this guide’s agents; its user-fetch exceptions remain important, and private-path rules do not secure the underlying content."
       ],
       "codeExamples": [
         {
-          "title": "Allow AI search but block training",
+          "title": "Allow search, block training",
           "description": "Allows search-oriented and user-triggered access while blocking the two published training/model-development agents in this guide.",
           "language": "robots.txt",
           "code": "User-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: Claude-User\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Perplexity-User\nAllow: /\n\nSitemap: https://example.com/sitemap.xml"
         },
         {
-          "title": "Block all AI crawlers",
+          "title": "Block listed AI agents",
           "description": "Blocks every AI-related agent named in this guide. No static list can cover every crawler, ChatGPT-User rules may not apply, and Perplexity-User generally ignores robots.txt, so enforce sensitive-content controls at authentication or the server edge.",
           "language": "robots.txt",
           "code": "User-agent: OAI-SearchBot\nDisallow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: ChatGPT-User\nDisallow: /\n\nUser-agent: Claude-SearchBot\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: Claude-User\nDisallow: /\n\nUser-agent: PerplexityBot\nDisallow: /\n\nUser-agent: Perplexity-User\nDisallow: /"
@@ -240,9 +255,9 @@
     },
     {
       "id": "server-log-verification",
-      "title": "Verify deployment with server logs",
+      "title": "Check production and retain attribution uncertainty",
       "paragraphs": [
-        "Fetch each production /robots.txt endpoint and compare the returned group with the committed file. Then run the log filter below against current and rotated NGINX files. A matching token is only a claim, so check the address against the provider’s linked JSON range before attributing the request."
+        "Fetch every production /robots.txt endpoint and compare its returned groups with the committed file. Inspect current and rotated NGINX logs using the filter below. A token match records a claim; check its address against the provider’s dated JSON ranges before attributing traffic, and retain uncertainty when the evidence is insufficient."
       ],
       "bullets": [
         "Expected response: HTTP 200, text/plain, intended group, correct sitemap hostname.",
@@ -251,7 +266,7 @@
       ],
       "codeExamples": [
         {
-          "title": "Find the named agents in NGINX logs",
+          "title": "Find agents in access logs",
           "description": "Adjust the log path for your server or CDN export. This reads current and rotated gzip logs without changing them.",
           "language": "shell",
           "code": "zgrep -hEi 'OAI-SearchBot|GPTBot|ChatGPT-User|ClaudeBot|Claude-SearchBot|Claude-User|PerplexityBot|Perplexity-User' /var/log/nginx/access.log*\n\ncurl -sS -D - https://example.com/robots.txt -o /dev/null"
@@ -260,35 +275,6 @@
     }
   ],
   "path": "/research/ai-crawlers/ai-search-crawler-policy",
-  "aliases": [
-    "/markets/ai-search-crawler-policy"
-  ],
-  "researchAssets": [
-    {
-      "priority": 1,
-      "name": "AI Crawler Robots.txt Guide",
-      "href": "/research/ai-crawlers/ai-search-crawler-policy",
-      "type": "research_note",
-      "preferredAnchor": "crawler policy for public websites",
-      "audiences": [
-        "technical SEO",
-        "search visibility",
-        "web developers",
-        "search policy writers"
-      ],
-      "pitchAngle": "Map of search, training, and user-requested crawler behavior with conservative visibility limits.",
-      "supportingAssets": [
-        {
-          "label": "Crawler policy sources",
-          "href": "/research/ai-search-crawler-policy-sources.csv"
-        }
-      ]
-    }
-  ],
-  "supportingAssets": [
-    {
-      "label": "Crawler policy sources",
-      "href": "/research/ai-search-crawler-policy-sources.csv"
-    }
-  ]
+  "image": "/images/research/ai-crawler-policy-social.jpg",
+  "displayTitle": "AI crawlers: search, training, and access."
 }

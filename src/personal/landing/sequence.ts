@@ -14,7 +14,7 @@ export interface LandingChapter {
 
 /** The approved study's opening and four project chapters, in site order. */
 export const CHAPTERS: readonly LandingChapter[] = [
-  { id: 'helmet', lines: ['The frontier', 'is all that', 'matters.'], label: 'Sulayman Bowles', category: '', asset: 'helmet-balanced.glb', assetId: 'helmet', href: '#/about', linkLabel: 'About me' },
+  { id: 'helmet', lines: ['The frontier', 'is all that', 'matters.'], label: 'Sulayman Bowles', category: '', asset: 'helmet-balanced.glb', assetId: 'helmet', href: '#/work', linkLabel: 'Selected work', article: { label: 'About me', href: '#/about' } },
   { id: 'product', lines: ['Internship', 'Deadlines.'], label: 'InternshipDeadlines', category: 'Product', asset: 'work-studies/internshipdeadlines.glb', assetId: 'work-internshipdeadlines', href: '#/work/internshipdeadlines', linkLabel: 'Explore project' },
   { id: 'sapien', lines: ['Sapien.'], label: 'Sapien', category: 'AI', asset: 'work-studies/sapien.glb', assetId: 'work-sapien', href: '#/work/sapien', linkLabel: 'Explore project' },
   { id: 'markets', lines: ['Investing', '& Markets.'], label: 'Investing & Markets', category: 'Markets', asset: 'work-studies/investing-markets.glb', assetId: 'work-investing-markets', href: '#/work/investing-markets', linkLabel: 'Explore project', article: { label: 'Who owns Texas toll roads?', href: '#/writing/who-owns-texas-toll-roads' } },
@@ -51,7 +51,8 @@ export interface TextSequence { states: TextState[]; active: number }
 export function textSequence(progress: number, _mode: 'threshold' = 'threshold', reduced = false, mobile = false): TextSequence {
   const p = clampProgress(progress)
   const timing = mobile && !reduced ? MOBILE_TITLE_TIMING : TITLE_TIMING
-  const boundaries = Array.from({ length: legs }, (_, index) => (index + timing.switch) / legs)
+  // Reduced motion retains its original instant chapter boundaries.
+  const boundaries = Array.from({ length: legs }, (_, index) => (index + (reduced ? .38 : timing.switch)) / legs)
   const active = boundaries.reduce((index, boundary) => index + Number(p >= boundary), 0)
   const states = CHAPTERS.map(() => ({ reveal: 0, erase: 0 }))
   if (reduced) {
@@ -67,12 +68,20 @@ export function textSequence(progress: number, _mode: 'threshold' = 'threshold',
 
 export interface ScrollMotion { progress: number; velocity: number }
 
-/** A short exact settle follows native scroll without a second momentum system. */
-export function advanceScrollMotion(current: ScrollMotion, target: number, seconds: number, reduced = false): ScrollMotion {
+/** A brief visual settle absorbs scroll steps; native page scrolling stays immediate. */
+export function advanceScrollMotion(current: ScrollMotion, target: number, seconds: number, reduced = false, maxRate = Infinity): ScrollMotion {
   const from = clampProgress(current.progress), to = clampProgress(target)
   if (reduced) return { progress: to, velocity: 0 }
-  const elapsed = Number.isFinite(seconds) ? Math.max(0, seconds) : 0
+  const bounded = Number.isFinite(maxRate) && maxRate > 0
+  // A decode/main-thread gap is not visible animation time.
+  const elapsed = Number.isFinite(seconds) ? Math.min(Math.max(0, seconds), bounded ? .05 : Infinity) : 0
   if (!elapsed) return { progress: from, velocity: 0 }
-  const rate = 55, error = to - from, decay = Math.exp(-rate * elapsed)
+  const rate = 32, error = to - from, decay = Math.exp(-rate * elapsed)
+  const step = error * (1 - decay)
+  // Only asset recovery supplies a speed bound. Ordinary native scroll keeps
+  // its brief settle; a decoded chapter cannot leap across the whole passage.
+  if (bounded && Math.abs(step) > maxRate * elapsed) {
+    return { progress: from + Math.sign(error) * maxRate * elapsed, velocity: Math.sign(error) * maxRate }
+  }
   return { progress: to - error * decay, velocity: rate * error * decay }
 }

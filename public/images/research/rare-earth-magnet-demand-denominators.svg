@@ -10,29 +10,29 @@
   <text x="90" y="165" font-family="Arial,Helvetica,sans-serif" font-size="54" font-weight="700" fill="#171715">“U.S. demand” is not one addressable market</text>
   <text x="90" y="215" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="#565650">Strategic exposure is broader than the orders immediately available to a domestic magnet plant</text>
   <g font-family="Arial,Helvetica,sans-serif">
-    <rect x="90" y="310" width="520" height="235" rx="12" fill="#20201e"/>
+    <rect x="90" y="310" width="520" height="265" rx="12" fill="#20201e"/>
     <text x="125" y="365" font-size="21" letter-spacing="2" fill="#d9d8d1">NEAR-TERM CONTESTABLE</text>
-    <text x="125" y="425" font-size="36" font-weight="700" fill="#ffffff">Direct domestic magnet demand</text>
-    <text x="125" y="468" font-size="21" fill="#eeeeea">Magnets purchased by U.S. motor, component,</text>
-    <text x="125" y="500" font-size="21" fill="#eeeeea">and system manufacturers.</text>
+    <text x="125" y="412" font-size="36" font-weight="700" fill="#ffffff"><tspan x="125">Direct domestic </tspan><tspan x="125" dy="43">magnet demand</tspan></text>
+    <text x="125" y="503" font-size="21" fill="#eeeeea">Magnets purchased by U.S. motor, component,</text>
+    <text x="125" y="537" font-size="21" fill="#eeeeea">and system manufacturers.</text>
 
-    <rect x="690" y="310" width="820" height="235" rx="12" fill="#cecdc6" stroke="#171715" stroke-width="2"/>
+    <rect x="690" y="310" width="820" height="265" rx="12" fill="#cecdc6" stroke="#171715" stroke-width="2"/>
     <text x="725" y="365" font-size="21" letter-spacing="2" fill="#4d4d48">STRATEGIC EXPOSURE / LONG-RUN RESHORING</text>
-    <text x="725" y="425" font-size="36" font-weight="700" fill="#171715">Magnets embedded in imported finished goods</text>
-    <text x="725" y="468" font-size="21" fill="#44443f">Capturing this volume may require relocating motor production,</text>
-    <text x="725" y="500" font-size="21" fill="#44443f">redesigning components, or requalifying a complete system.</text>
+    <text x="725" y="412" font-size="36" font-weight="700" fill="#171715"><tspan x="725">Magnets embedded in </tspan><tspan x="725" dy="43">imported finished goods</tspan></text>
+    <text x="725" y="503" font-size="21" fill="#44443f">Capturing this volume may require relocating motor production,</text>
+    <text x="725" y="537" font-size="21" fill="#44443f">redesigning components, or requalifying a complete system.</text>
 
-    <rect x="90" y="610" width="680" height="120" rx="10" fill="#e5e4de" stroke="#75756f" stroke-width="2"/>
-    <text x="125" y="658" font-size="26" font-weight="700" fill="#20201e">Replacement / aftermarket demand</text>
-    <text x="125" y="695" font-size="19" fill="#55554f">Fragmented, geometry-specific, and often tied to installed equipment.</text>
+    <rect x="90" y="620" width="680" height="130" rx="10" fill="#e5e4de" stroke="#75756f" stroke-width="2"/>
+    <text x="125" y="662" font-size="26" font-weight="700" fill="#20201e">Replacement / aftermarket demand</text>
+    <text x="125" y="696" font-size="22" fill="#55554f"><tspan x="125">Fragmented, geometry-specific, and often tied </tspan><tspan x="125" dy="32">to installed equipment.</tspan></text>
 
-    <rect x="830" y="610" width="680" height="120" rx="10" fill="#e5e4de" stroke="#75756f" stroke-width="2"/>
-    <text x="865" y="658" font-size="26" font-weight="700" fill="#20201e">Export demand</text>
-    <text x="865" y="695" font-size="19" fill="#55554f">Potential utilization subject to qualification, cost, logistics, and trade rules.</text>
+    <rect x="830" y="620" width="680" height="130" rx="10" fill="#e5e4de" stroke="#75756f" stroke-width="2"/>
+    <text x="865" y="662" font-size="26" font-weight="700" fill="#20201e">Export demand</text>
+    <text x="865" y="696" font-size="22" fill="#55554f"><tspan x="865">Potential utilization subject to qualification, </tspan><tspan x="865" dy="32">cost, logistics, and trade rules.</tspan></text>
   </g>
-  <path d="M610 428H665" stroke="#171715" stroke-width="4"/>
-  <path d="M654 416L670 428 654 440" fill="none" stroke="#171715" stroke-width="4"/>
-  <text x="622" y="395" font-family="Arial,Helvetica,sans-serif" font-size="17" fill="#4d4d48">not automatic</text>
-  <line x1="90" y1="775" x2="1510" y2="775" stroke="#171715" stroke-width="2"/>
+  <path d="M610 452H665" stroke="#171715" stroke-width="4"/>
+  <path d="M654 440L670 452 654 464" fill="none" stroke="#171715" stroke-width="4"/>
+  <text x="650" y="402" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="17" fill="#4d4d48"><tspan x="650">not </tspan><tspan x="650" dy="25">automatic</tspan></text>
+  <line x1="90" y1="785" x2="1510" y2="785" stroke="#171715" stroke-width="2"/>
   <text x="90" y="817" font-family="Arial,Helvetica,sans-serif" font-size="20" fill="#4d4d48">Do not divide announced domestic nameplate by an embedded-import denominator and call the supply gap closed.</text>
 </svg>

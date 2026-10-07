@@ -2,10 +2,10 @@ import { LANDING_SCULPTURE_SCALE, type SculptureBounds } from './mobile-layout.t
 
 export const LANDING_ART = [
   { rotation: [0, -.12, 0], exposure: -1, turn: 1 },
-  { rotation: [.09, -.19, -.04], exposure: .65, turn: 1.4 },
-  { rotation: [-.02, .32, -.06], exposure: .70, turn: .6 },
-  { rotation: [.06, -.12, 0], exposure: .65, turn: .8 },
-  { rotation: [.04, .24, -.02], exposure: .75, turn: 1.2 },
+  { rotation: [.09, -.19, -.04], exposure: .96, turn: 1.4 },
+  { rotation: [-.02, .32, -.06], exposure: .96, turn: .6 },
+  { rotation: [.06, -.12, 0], exposure: .92, turn: .8 },
+  { rotation: [.04, .24, -.02], exposure: 1.02, turn: 1.2 },
 ] as const
 
 /** Enlarge the authored framing and keep the silhouette inside the viewport. */

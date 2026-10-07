@@ -3,6 +3,7 @@ import type { GenerativeArtwork } from './generative/types'
 import { artworkWorkerBackend } from './artwork-worker-backend.ts'
 import { previewScheduler, type PreviewFrameStats, type PreviewHandle } from './preview-scheduler.ts'
 import { readPortfolioRenderPolicy } from '../mobile-render-policy.ts'
+import { subscribeMenuMotion } from '../menu-motion.ts'
 export { artworkPlayers } from './artwork-players.ts'
 
 export type ArtworkPlayerStatus = {
@@ -25,9 +26,10 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
   let mainFactory: Awaited<ReturnType<GenerativeArtwork['factory']>>['default'] | null = null
   let disposed = false, loadingMain = false, visible = false, paused = false, traveling = false, travelPaused = false
   let scrolling = false, scrollResume = 0
+  let menuOpen = false
   const motion = matchMedia('(prefers-reduced-motion: reduce)')
   const emit = () => listeners.forEach(listener => listener(status))
-  const active = () => !disposed && !status.failed && !paused && !scrolling && !(traveling && travelPaused) && !document.hidden && !motion.matches && (visible || traveling)
+  const active = () => !disposed && !status.failed && !paused && !scrolling && !menuOpen && !(traveling && travelPaused) && !document.hidden && !motion.matches && (visible || traveling)
   const sync = () => {
     let next = active()
     if (next && mainFactory && !sketch) startMain()
@@ -94,6 +96,7 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
   document.addEventListener('visibilitychange', visibility)
   if (mobile) window.addEventListener('scroll', onScroll, { passive: true, capture: true })
   motion.addEventListener('change', sync)
+  const stopMenu = subscribeMenuMotion(open => { menuOpen = open; sync() })
   return {
     get status() { return status },
     moveTo(host: HTMLElement) { if (!disposed) host.replaceChildren(surface) },
@@ -105,6 +108,7 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
       if (disposed) return
       clearScrollResume()
       disposed = true; listeners.clear(); job?.remove(); worker?.remove(); sketch?.remove(); mainFactory = null; surface.remove()
+      stopMenu()
       document.removeEventListener('visibilitychange', visibility); motion.removeEventListener('change', sync)
       if (mobile) window.removeEventListener('scroll', onScroll, { capture: true })
     },

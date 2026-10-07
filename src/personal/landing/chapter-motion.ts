@@ -4,11 +4,11 @@ import { openingSculpturePose } from './opening-motion.ts'
 
 /** Each GLB retains its living pose on both sides of the optical passage. */
 export function sculptureLivingPose(seconds: number, index: number, mobile = false, reduced = false) {
-  const neutral = { yaw: 0, pitch: 0, roll: 0 }
+  const neutral = { yaw: 0, pitch: 0, roll: 0, x: 0, y: 0 }
   if (reduced || !Number.isFinite(seconds) || !Number.isInteger(index) || index < 0 || index > 4) return neutral
   if (index === 0) {
-    const { yaw, pitch, roll } = openingSculpturePose(seconds, 0, mobile)
-    return { yaw, pitch, roll }
+    const { yaw, pitch, roll, x, y } = openingSculpturePose(seconds, 0, mobile)
+    return { yaw, pitch, roll, x, y }
   }
   const time = Math.max(0, seconds), restraint = mobile ? .65 : 1
   const direction = index === 3 ? -1 : 1
@@ -16,6 +16,8 @@ export function sculptureLivingPose(seconds: number, index: number, mobile = fal
     yaw: Math.sin(time * (index === 3 ? .16 : .22)) * (index === 3 ? .09 : .065) * direction * restraint,
     pitch: Math.sin(time * .17) * (index === 2 ? .018 : .012) * restraint,
     roll: Math.sin(time * .13) * .004 * direction * restraint,
+    x: 0,
+    y: 0,
   }
 }
 

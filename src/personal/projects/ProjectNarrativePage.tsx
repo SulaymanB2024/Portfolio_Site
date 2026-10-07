@@ -1,4 +1,4 @@
-import { useRef, type MouseEvent, type ReactNode } from 'react'
+import { useRef, type MouseEvent } from 'react'
 import { projects, type Project } from '../content'
 import { ProjectStudy } from '../WorkCollection'
 import { NarrativeSystem } from './NarrativeEvidence'
@@ -8,24 +8,14 @@ import { workNarratives } from './work-narratives'
 import { useProjectReading } from './useProjectReading'
 import { projectChapterHref } from './project-reading-position'
 import { ProjectEndnav } from './ProjectEndnav'
+import { InternshipProductPath, ProjectContribution } from './ProjectContribution'
+import { curatedNextProject } from './work-curation'
+import { DestinationLink } from '../DestinationLink'
 import './project-narrative.css'
-
-function StoryLink({ href, children, className = '' }: { href: string; children: ReactNode; className?: string }) {
-  const external = href.startsWith('http')
-  return (
-    <a
-      className={`arrow-link ${className}`}
-      href={href.startsWith('./') ? `${import.meta.env.BASE_URL}${href.slice(2)}` : href}
-      {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}>
-      {children}
-      <span aria-hidden="true">{external ? '↗' : '→'}</span>
-    </a>
-  )
-}
 
 export default function ProjectNarrativePage({ project: p, dark }: { project: Project; dark: boolean }) {
   const narrative = workNarratives[p.slug]
-  const next = projects[(projects.indexOf(p) + 1) % projects.length]
+  const next = curatedNextProject(p.slug) ?? projects[(projects.indexOf(p) + 1) % projects.length]
   const root = useRef<HTMLElement>(null)
   const [active, setActive] = useProjectReading(root, p.slug, '[data-story-chapter]', 'question')
   const chapterHref = (id: string) =>
@@ -41,9 +31,7 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
   }
   return (
     <article ref={root} className={`project-page project-narrative project-narrative-${p.slug}`}>
-      <a className="project-back mono" href="#/work">
-        ← All work
-      </a>
+      <DestinationLink className="project-back mono" href="#/work" direction="left">All work</DestinationLink>
       <section className="project-hero">
         <div className="project-copy">
           <span className="eyebrow">
@@ -65,11 +53,12 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
           </h1>
           <p className="project-deck">{narrative.deck}</p>
           <p className="project-summary">{narrative.summary}</p>
+          <ProjectContribution slug={p.slug} />
           <div className="project-links">
-            {p.link && <StoryLink href={p.link.href}>{p.link.label}</StoryLink>}
-            <a className="project-read mono" href={chapterHref('question')} onClick={(event) => jump(event, 'question')}>
-              Read the project<span aria-hidden="true">↓</span>
-            </a>
+            {p.link && <DestinationLink className="arrow-link" href={p.link.href}>{p.link.label}</DestinationLink>}
+            <DestinationLink className="project-reading-action" href={chapterHref('question')} direction="down" onClick={(event) => jump(event, 'question')}>
+              Read the project
+            </DestinationLink>
           </div>
         </div>
         <div className="project-object">
@@ -83,6 +72,7 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
           </span>
         </div>
       </section>
+      {p.slug === 'internshipdeadlines' && <InternshipProductPath />}
       <nav className="story-index project-reading-bar" aria-label="In this project">
         {narrative.chapters.map((chapter, i) => (
           <a key={chapter.id} href={chapterHref(chapter.id)} aria-current={active === chapter.id ? 'location' : undefined} onClick={(event) => jump(event, chapter.id)}>
@@ -108,7 +98,7 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
           <div className="story-opening-layout">
             <h2 id={`${p.slug}-${chapter.id}-title`}>{chapter.title}</h2>
             <div className="story-prose">
-              {chapter.body.map((text) => (
+              {(chapter.artifact ? chapter.body.slice(0, 1) : chapter.body).map((text) => (
                 <p key={text}>{text}</p>
               ))}
             </div>
@@ -118,6 +108,7 @@ export default function ProjectNarrativePage({ project: p, dark }: { project: Pr
               <NarrativeSystem slug={p.slug} />
             </div>
           )}
+          {chapter.artifact && chapter.body.length > 1 && <div className="story-opening-layout story-prose-continuation"><div aria-hidden="true" /><div className="story-prose">{chapter.body.slice(1).map(text => <p key={text}>{text}</p>)}</div></div>}
           <WorkMaterials chapter={chapter} base={import.meta.env.BASE_URL} />
         </section>
       ))}
