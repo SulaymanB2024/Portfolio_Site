@@ -19,6 +19,7 @@ import { findReadingTopic } from './editorial/topics'
 import { artworkTransitionName, galleryArticleJourney, startArtworkTransition, type ArtworkTransition } from './editorial/artwork-continuity'
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
 import { installMenuDismissal } from './refinements/menu-dismissal'
+import { activateMenuLink } from './refinements/menu-activation'
 import { focusWithoutWarmup } from './refinements/warmup-policy'
 import RouteBoundary from './RouteBoundary'
 import BrandIdentity from './BrandIdentity'
@@ -149,6 +150,7 @@ function SitePages() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [landingActive, setLandingActive] = useState(true)
   const menuButton = useRef<HTMLButtonElement>(null)
+  const focusMenuOnOpen = useRef(false)
   const main = useRef<HTMLElement>(null)
   const focusedRoute = useRef(route)
   const project = projects.find(p => route === `work/${p.slug}`)
@@ -170,7 +172,9 @@ function SitePages() {
     if (!menuOpen) return
     const header = menuButton.current?.closest('header')
     if (!header) return
-    const frame = requestAnimationFrame(() => focusWithoutWarmup(document.querySelector<HTMLAnchorElement>('#main-navigation a')))
+    // Keyboard and assistive activation enter the menu. A touch keeps its
+    // native focus sequence instead of moving focus before the next tap.
+    const frame = focusMenuOnOpen.current ? requestAnimationFrame(() => focusWithoutWarmup(document.querySelector<HTMLAnchorElement>('#main-navigation a'))) : 0
     const dispose = installMenuDismissal(header, restoreFocus => {
       setMenuOpen(false)
       if (restoreFocus) menuButton.current?.focus({ preventScroll: true })
@@ -196,9 +200,9 @@ function SitePages() {
       <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug]) => {
         const extra = slug !== 'about' && slug !== 'writing'
         const collapsed = compactNav && !menuOpen && extra
-        return <span key={slug} className={`nav-slot${extra ? ' nav-extra' : ''}`} inert={collapsed}><a href={`#/${slug}`} tabIndex={collapsed ? -1 : undefined} aria-current={section === slug ? 'page' : undefined} onClick={event => { if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; setMenuOpen(false); if (menuOpen && route === slug) requestAnimationFrame(() => menuButton.current?.focus({ preventScroll: true })) }}>{item}</a></span>
+        return <span key={slug} className={`nav-slot${extra ? ' nav-extra' : ''}`} inert={collapsed}><a href={`#/${slug}`} tabIndex={collapsed ? -1 : undefined} aria-current={section === slug ? 'page' : undefined} onClick={event => { if (!activateMenuLink(event, () => setMenuOpen(false))) return; if (menuOpen && route === slug) requestAnimationFrame(() => menuButton.current?.focus({ preventScroll: true })) }}>{item}</a></span>
       })}</nav>
-      <div className="header-end"><button className="appearance-toggle" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setDark(!dark)}><span aria-hidden="true">◐</span></button><button ref={menuButton} className="nav-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button></div>
+      <div className="header-end"><button className="appearance-toggle" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setDark(!dark)}><span aria-hidden="true">◐</span></button><button ref={menuButton} className="nav-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={event => { focusMenuOnOpen.current = event.detail === 0; setMenuOpen(!menuOpen) }}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button></div>
     </header>
     {pending && <p className="route-opening mono" role="status">Opening the page…</p>}
     <main ref={main} id="main-content" tabIndex={-1} key={route} aria-busy={pending || undefined}>
