@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { sha256, protectedArticleEvidence, articleProseWords } from '../tools/article-revision-integrity.mjs'
 import type { ArticleSummary } from '../src/personal/editorial/types.ts'
 import { qualityReadingMinutes } from '../tools/article-quality-integrity.mjs'
+import { verifyCodeLabelReadback } from '../tools/article-code-label-integrity.mjs'
 
 const load = (path: string) => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'))
 const revisions = load('../docs/article-revisions.json').records
@@ -17,6 +18,7 @@ test('recovered-source revisions are bound to readbacks and main-manuscript read
     const file = `../src/personal/editorial/data/articles/${revision.slug}.json`
     const article = load(file)
     const original = load(`../${revision.originalPath}`)
+    verifyCodeLabelReadback(readFileSync(new URL(file, import.meta.url)))
     assert.equal(sha256(readFileSync(new URL(file, import.meta.url))), revision.currentSha256, revision.slug)
     assert.equal(articleProseWords(original), revision.proseWords.before)
     assert.equal(articleProseWords(article), revision.proseWords.after)
@@ -69,16 +71,7 @@ test('the AI capacity edit retains the numeric bases and separates scenarios fro
   assert.equal(contract.figures[0].src, '/images/research/the-ai-megawatt-power-ladder.svg')
 })
 
-test('shorter code captions retain executable evidence, and a resource exception matches the entire original object', () => {
-  const original = load('../docs/article-originals/crawl-frontier-state-machine.json')
-  const keys = originals.find((item: any) => item.slug === original.slug).sourceKeys
-  const revised = structuredClone(original)
-  const example = revised.sections.find((section: any) => section.codeExamples?.length).codeExamples[0]
-  example.title = 'Transition event'
-  example.description = 'A shorter caption.'
-  assert.deepEqual(protectedArticleEvidence(revised, keys), protectedArticleEvidence(original, keys))
-  example.code += '\nthrow new Error("changed");'
-  assert.notDeepEqual(protectedArticleEvidence(revised, keys), protectedArticleEvidence(original, keys))
+test('the resource correction permits only the entire declared original object', () => {
   const jane = load('../docs/article-originals/jane-street-exact-search-solver-verification.json')
   const janeKeys = originals.find((item: any) => item.slug === jane.slug).sourceKeys
   const exceptions = load('../docs/article-quality-revisions.json').exceptions

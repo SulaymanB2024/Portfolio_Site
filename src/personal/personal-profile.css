@@ -119,3 +119,15 @@
   .home-context-music:focus-visible::after { display: none; }
 }
 @media print { .home-context-gesture { display: none; } }
+
+/* Keep the loading silhouette and retry path inside the compact music entry. */
+.home-context-music { display:block; }
+.home-context-frame { display:block; position:relative; height:100%; }
+.home-context-poster { position:absolute; inset:0; background:var(--ink); mask:url('/art/bass-ink.webp') center / auto 100% no-repeat; -webkit-mask:url('/art/bass-ink.webp') center / auto 100% no-repeat; pointer-events:none; transition:opacity 220ms ease; }
+.home-context-stage canvas { opacity:0; transition:opacity 220ms ease; }
+.home-context-stage[data-state='ready'] canvas { opacity:1; }
+.home-context-stage[data-state='ready'] .home-context-poster { opacity:0; }
+.home-context-recovery { display:flex; align-items:center; justify-content:space-between; gap:16px; color:var(--muted); font-size:13px; line-height:1.5; }
+.home-context-recovery p { margin:0; }
+.home-context-recovery button { flex-shrink:0; min-height:44px; padding:8px 0; background:transparent; border:0; text-decoration:underline; text-underline-offset:4px; }
+@media (prefers-reduced-motion:reduce) { .home-context-poster, .home-context-stage canvas { transition:none; } }

@@ -1,6 +1,6 @@
 import catalog from './editorial/data/catalog.json'
 import AnimatedArtwork from './editorial/AnimatedArtwork'
-import { ArtworkMotionControl, useArtworkMotion } from './editorial/ArtworkMotion'
+import { useArtworkMotion } from './editorial/ArtworkMotion'
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
 import { displayDate, type ArticleSummary } from './editorial/types'
 import { homeWritingDecks, siteCopy, withWritingCopy } from './site-copy'

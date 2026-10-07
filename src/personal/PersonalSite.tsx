@@ -5,6 +5,7 @@ import { ProjectTransitionProvider } from './ProjectTransition'
 import { contact, projects, type ArtKind } from './content'
 import { siteCopy, withWritingCopy } from './site-copy'
 import { updateSearchHead } from './search-head'
+import { recordPersonalPageView } from './analytics'
 import catalog from './editorial/data/catalog.json'
 import { resolveRoute } from './editorial/routes'
 import { findCaseStudy } from './projects/case-studies'
@@ -13,7 +14,8 @@ import { ArtworkMotionProvider } from './editorial/ArtworkMotion'
 import { prepareArticleArrival } from './editorial/article-arrival'
 import { articleSection } from './editorial/library'
 import { jumpToArticleSection } from './editorial/reader-jump'
-import { homePage, workPage, writingPage, articlePage, projectPage, resumePage, caseStudyPage, aboutPage, contactPage, prepareRoutePage } from './route-pages'
+import { homePage, workPage, writingPage, topicPage, articlePage, projectPage, resumePage, caseStudyPage, aboutPage, contactPage, prepareRoutePage } from './route-pages'
+import { findReadingTopic } from './editorial/topics'
 import { artworkTransitionName, galleryArticleJourney, startArtworkTransition, type ArtworkTransition } from './editorial/artwork-continuity'
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
 import { installMenuDismissal } from './refinements/menu-dismissal'
@@ -34,6 +36,7 @@ import './visual-restraint.css'
 const Home = homePage.Page
 const WorkPage = workPage.Page
 const WritingIndex = writingPage.Page
+const TopicPage = topicPage.Page
 const ArticlePage = articlePage.Page
 const ProjectPage = projectPage.Page
 const ResumePage = resumePage.Page
@@ -113,6 +116,7 @@ function useRoute() {
     // Initial deep links prepare article data while its page chunk is loading.
     if (route.startsWith('writing/')) void prepareArticleArrival(route.slice('writing/'.length), location.hash, location.pathname).catch(() => {})
     updateSearchHead(document, route)
+    recordPersonalPageView(document, window)
   }, [route])
   return { route, pending }
 }
@@ -148,9 +152,10 @@ function SitePages() {
   const focusedRoute = useRef(route)
   const project = projects.find(p => route === `work/${p.slug}`)
   const article = articles.find(item => route === `writing/${item.slug}`)
+  const topic = route.startsWith('topics/') ? findReadingTopic(route.slice('topics/'.length)) : undefined
   const study = findCaseStudy(route)
   const isDark = dark
-  const section = project || study ? 'work' : article ? 'writing' : route || 'home'
+  const section = project || study ? 'work' : article || topic ? 'writing' : route || 'home'
   useLayoutEffect(() => {
     if (main.current && (article || project || study)) return installTableOverflowHints(main.current)
   }, [route, article, project, study])
@@ -196,7 +201,7 @@ function SitePages() {
     </header>
     {pending && <p className="route-opening mono" role="status">Opening the page…</p>}
     <main ref={main} id="main-content" tabIndex={-1} key={route} aria-busy={pending || undefined}>
-      <RouteBoundary homeRoute={isHome} onError={() => setLandingActive(false)}><Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} dark={isDark} /> : article ? <ArticlePage slug={article.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} onLandingActiveChange={setLandingActive} /> : <NotFound />}</Suspense></RouteBoundary>
+      <RouteBoundary homeRoute={isHome} onError={() => setLandingActive(false)}><Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} dark={isDark} /> : article ? <ArticlePage slug={article.slug} /> : topic ? <TopicPage slug={topic.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} onLandingActiveChange={setLandingActive} /> : <NotFound />}</Suspense></RouteBoundary>
     </main>
     {route !== 'about' && route !== 'resume' && <Footer route={route} closing={!article && route !== 'contact' && route !== 'resume'} />}
   </div>

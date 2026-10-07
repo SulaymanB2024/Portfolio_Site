@@ -59,7 +59,7 @@
       "baselinePath": "docs/article-quality-baselines/jane-street-exact-search-solver-verification.json",
       "baselineSha256": "0b98e15dec9b4db5fd354e5c993fb03fff19fbe09fd838158e4b72e44d6bdc62",
       "currentSha256": "0226d91d28777302a3f0252560767d739d584584b5504deb57bc14b47b2bc268",
-      "evidenceSha256": "5851d78e9dae9d10b8547d3b7878e7538d503e26429ad9d59e60a85bdfd8e2ff",
+      "evidenceSha256": "856a7f7c0d3ae50999732dc119a065a88b352da671ac69dbec738a271fc5f0a1",
       "proseWords": {
         "before": 1398,
         "after": 1224
@@ -411,7 +411,7 @@
       "baselinePath": "docs/article-quality-baselines/crawl-frontier-state-machine.json",
       "baselineSha256": "198194de76e3ecb8e66e088aae9c9b110791cbe7de17edff484b050d41b0ca64",
       "currentSha256": "930b8283a6af8eff9fc41e109bfc6ee7f05b748576d4e9777f4deec462081668",
-      "evidenceSha256": "7612df80100c1c0822b2d96dde39a7c825686bbd288495a0a7a94948f4e4509a",
+      "evidenceSha256": "2506551998180f78a40a776fd5a4f05fef6c0ed6661e9d1ae36347a153b52df4",
       "proseWords": {
         "before": 1224,
         "after": 859
@@ -437,7 +437,7 @@
       "baselinePath": "docs/article-quality-baselines/raw-html-rendered-dom-evidence.json",
       "baselineSha256": "346de5916c924b0d6816a2bf334b406756de66f1f2e70ce2f91bb6f961db144a",
       "currentSha256": "12a83d4b08eee6e4cd176dc43b45910bf71dbce3834f76a6bfdb2ccba1a2aa64",
-      "evidenceSha256": "6348bfaf0796836c31c7421f7ad12546bc204de3168776c7e585032d25960753",
+      "evidenceSha256": "1c6bced004a611265630654f5ba755f32d80e7d961e667cb2972ec5e2a844e1e",
       "proseWords": {
         "before": 1100,
         "after": 814
@@ -463,7 +463,7 @@
       "baselinePath": "docs/article-quality-baselines/canonicalization-graph-consistency.json",
       "baselineSha256": "d78e76e3e20b4ce49e12cf64bda438176559308f780daf7aa7e9e85e1b93fca6",
       "currentSha256": "60a96ffa87f7d0e3dd1a01ca0cea41117babf9bb89bd0654c2156bea26dcb86a",
-      "evidenceSha256": "cb1e53c7f7633143a66900635eb81893bbcce9910d1e492fe0ab2f7c078c97e8",
+      "evidenceSha256": "59fefb57ec2d6321439d03eeef62abbf96a9e2b42ab0f1ec0e140a4b1ca83605",
       "proseWords": {
         "before": 1180,
         "after": 862
@@ -489,7 +489,7 @@
       "baselinePath": "docs/article-quality-baselines/internal-links-directed-retrieval-graph.json",
       "baselineSha256": "d25ea14233838ffbcb5bc6c2abfeb5f330633766fe8a003aa7f58f5539b20c07",
       "currentSha256": "e33ad150634f43bf655341551ee402d12652316c0c2338e1deba1781df87ea87",
-      "evidenceSha256": "c7925f0d8ccd16b8587d2504cbf20e8031cba7697edc9635586807324e889b24",
+      "evidenceSha256": "a9ac240441fa96b851d3809cf4332d41ec916d6237baa0bc5707fec468e78d16",
       "proseWords": {
         "before": 1112,
         "after": 841
@@ -515,7 +515,7 @@
       "baselinePath": "docs/article-quality-baselines/robots-txt-courtesy-not-access-control.json",
       "baselineSha256": "8574db1539a4d65fd3ea6cace019b8312668a082dc7252c8d96664ac9a3f0f1c",
       "currentSha256": "02c87c4ee2be8d704469c1ee9f93a843d30d8c843aedd68b03ac7187a0e713a7",
-      "evidenceSha256": "e890e3b3e7b2fe448ed19cd9fce730758ff7c0d2ca524bfca2664f499d9caa6d",
+      "evidenceSha256": "10986f18bcd02a95f787b1fe532c575dbabdbe884f73012c39a4ac01ae0d9c11",
       "proseWords": {
         "before": 1258,
         "after": 934
@@ -542,7 +542,7 @@
       "baselinePath": "docs/article-quality-baselines/structured-data-without-content-drift.json",
       "baselineSha256": "c0401e2f39a72f5a235b0365fb571d89def5e74e694db4a0e2f9bc365f6dee61",
       "currentSha256": "9185d3cc67273b3fd46e259d2216218432fd326897fbc8d3976350d5805376fd",
-      "evidenceSha256": "6d8a72b9022fc7949a77fabf0127b3a6e9cebcc32766341f42386c73b553daf4",
+      "evidenceSha256": "71d6e0ce6c756d548860821f3d1d545d1ce476ad93190175cf4fe8747fa1dffd",
       "proseWords": {
         "before": 1080,
         "after": 784
@@ -568,7 +568,7 @@
       "baselinePath": "docs/article-quality-baselines/audit-findings-derived-records.json",
       "baselineSha256": "f5909051d85431e09ffb8c357b520532a883ea9e4b8d5374b5d17165f93edb04",
       "currentSha256": "56f78b5d85a5954f7f79911ad6bba3baeec5f9d8a725ec8194517374d997b335",
-      "evidenceSha256": "14f4997ec13ae87666f5e25c8528951683c2a3c80327803848e5426bf093040a",
+      "evidenceSha256": "edb1fd51634c286b3e9ba895091963e7b47003e02c70f0f0dd894005ac808738",
       "proseWords": {
         "before": 1133,
         "after": 815
@@ -594,7 +594,7 @@
       "baselinePath": "docs/article-quality-baselines/replayable-traces-ai-agent-evaluation.json",
       "baselineSha256": "3759714f1bf0f487dcda4c6c0a561fc70db7a8c77d1c6ae1d54b6d05c1a3897e",
       "currentSha256": "cd30b81e7f6272c4895f322ea28b94f2da20f4891e87ff2fa672651ff86f0624",
-      "evidenceSha256": "c185d325dee600b2468e09f0012c61929c71623bd18c7b9cbcfc3a8811900111",
+      "evidenceSha256": "78d519db1b3ec6825598e0ce681638af8175c7b3e607e7264b28e9c888d79ad1",
       "proseWords": {
         "before": 1177,
         "after": 865
@@ -620,7 +620,7 @@
       "baselinePath": "docs/article-quality-baselines/sqlite-crawl-pipelines.json",
       "baselineSha256": "8973b9d62559b17159fd5e9d56d4e7ff8c8d9e92737885d75e647b88888e16cc",
       "currentSha256": "f1a3ed5ca66be292a52dce18890d2fed438c6535a320c7394e52bc054dc8caf7",
-      "evidenceSha256": "048ce7059f42cea972dc2bdb03330bcc80af3f4f88a4c65ce25b3d1cf51cae3e",
+      "evidenceSha256": "f8d7269058a53d254050b73713f15753bd474aaaf357a55d531710614f074f42",
       "proseWords": {
         "before": 1218,
         "after": 875
@@ -646,7 +646,7 @@
       "baselinePath": "docs/article-quality-baselines/technical-seo-migration-release-gates.json",
       "baselineSha256": "03ca663c1fbdc90319ae84a557a10bcb8d48ea4ce91fd4c9a1a65bc45b972d1b",
       "currentSha256": "007edb6ccb64ba46f0a411bca1cf66cf669bde5ae177ee46b61f446fef0b8916",
-      "evidenceSha256": "3af135f091b41de145e05295bacb84fcef67c3258fedc0d8dbd08fd5fba7de83",
+      "evidenceSha256": "cc693a995ea73745661126f8caa1c6f0abc4924c9e5637b25e1a45a364cdca0f",
       "proseWords": {
         "before": 1095,
         "after": 813
@@ -751,7 +751,7 @@
       "baselinePath": "docs/article-quality-baselines/ai-search-crawler-policy.json",
       "baselineSha256": "25e634c39fefbf8051c0c09b570d0ad23360a1d162bb6b413bd37498e69b511c",
       "currentSha256": "e5e110a2cf03407015053ced8a2f6b393f74d792bce81ea6b337c321bf5412bc",
-      "evidenceSha256": "421efac989b4ecf46cd4d5015f53f4cb6fc518a44eeddf93239cc1507a0bb6cd",
+      "evidenceSha256": "a8402d34f4014a5d22460408a8c2c15cfd67d3b0227817257ee53e2fb38a8e9d",
       "proseWords": {
         "before": 242,
         "after": 420
@@ -824,5 +824,6 @@
         "conclusion"
       ]
     }
-  ]
+  ],
+  "codeLabelRevisionReceipt": "docs/article-code-label-revisions.json"
 }

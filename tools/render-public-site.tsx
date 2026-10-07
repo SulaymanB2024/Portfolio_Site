@@ -16,21 +16,24 @@ import type { WorkDocument } from '../src/personal/projects/work-document'
 import { searchMetadata, withSearchHead } from '../src/personal/search-metadata'
 import { PublicArticle } from './public-article'
 import { withDocumentLinks } from './public-document-links'
-import { discoveryText } from './search-discovery'
+import { discoveryText, machineProfile, machineReferences, documentText, fullDiscoveryText } from './search-discovery'
 import { PersonalProfile } from '../src/personal/PersonalProfile'
 import { writingFeed } from './search-feed'
 import { featuredWorkSlugs } from '../src/personal/projects/work-curation'
 import { writingSelection } from '../src/personal/editorial/writing-selection'
+import { ReadingPaths, TopicBody } from '../src/personal/editorial/TopicPage'
 import { ProjectContribution, InternshipProductPath } from '../src/personal/projects/ProjectContribution'
 import researchDiagramStyle from '../src/personal/editorial/research-diagrams.css?raw'
 import researchComparisonStyle from '../src/personal/editorial/research-comparison.css?raw'
 import researchProcessStyle from '../src/personal/editorial/research-process.css?raw'
+import readingGuideStyle from '../src/personal/editorial/reading-guides.css?raw'
 
 const dist = join(process.cwd(), 'dist')
 const template = await readFile(join(dist, 'index.html'), 'utf8')
 const paragraphs = (values: string[] = []) => values.map((value, i) => <p key={i}>{inlineText(value)}</p>)
 const links = (pages: typeof publicPages) => <ul>{pages.map(page => <li key={page.path}><a href={page.path}>{page.title.replace(' — Sulayman Bowles', '')}</a><p>{page.description}</p></li>)}</ul>
 const articleData = new Map(await Promise.all(catalog.map(async summary => [summary.slug, JSON.parse(await readFile(join(process.cwd(), 'src/personal/editorial/data/articles', `${summary.slug}.json`), 'utf8'))] as const)))
+const machineDocuments: { url: string; text: string }[] = []
 
 function ProjectDocument({ document, slug, caseStudy = false }: { document: WorkDocument; slug: string; caseStudy?: boolean }) {
   const sectionId = (id: string) => caseStudy ? id : `${slug}-${id}`
@@ -47,11 +50,12 @@ function ProjectDocument({ document, slug, caseStudy = false }: { document: Work
 
 function Body({ route }: { route: string }) {
   const article = articleData.get(route.slice('writing/'.length))
+  if (route.startsWith('topics/')) return <TopicBody slug={route.slice('topics/'.length)} />
   if (route.startsWith('writing/') && article) return <PublicArticle article={article} />
   if (route === 'writing') {
     const selection = writingSelection(catalog)
     const pages = (items: { slug: string }[]) => items.map(article => publicPages.find(page => page.route === `writing/${article.slug}`)!)
-    return <><p>{siteCopy.writing.introduction}</p>{links(pages(selection.selected))}<h2>Further reading</h2>{links(pages(selection.more))}<h2>Notes</h2>{links(pages(selection.notes))}</>
+    return <><p>{siteCopy.writing.introduction}</p><ReadingPaths />{links(pages(selection.selected))}<h2>Further reading</h2>{links(pages(selection.more))}<h2>Notes</h2>{links(pages(selection.notes))}</>
   }
   if (route === 'work') {
     const workPages = publicPages.filter(page => page.route.startsWith('work/'))
@@ -71,6 +75,7 @@ function Body({ route }: { route: string }) {
 }
 
 const fallbackStyle = `<style>.static-site{max-width:76rem;margin:0 auto;padding:2rem 5vw;font:1.05rem/1.65 Georgia,serif;overflow-wrap:anywhere}.static-site header{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;border-bottom:1px solid #b7b1a4;padding-bottom:1rem}.static-site nav{display:flex;flex-wrap:wrap;gap:1rem}.static-site main{max-width:52rem;margin:3rem auto}.static-site h1{font-size:clamp(2.5rem,7vw,5rem);line-height:1.08}.static-site h2{margin-top:2rem}.static-site a{color:inherit}.static-site table{border-collapse:collapse}.static-site td,.static-site th{padding:.5rem;border:1px solid #b7b1a4}.static-site img{max-width:100%;height:auto}.static-site pre{overflow:auto}.static-site li{margin:.6rem 0}.static-site footer{border-top:1px solid #b7b1a4;padding-top:1rem}</style>`
+const readingFallbackStyle = `<style>.static-site{--ink:#24221e;--muted:#68665e;--line:#b7b1a4;--editorial-sans:Arial,sans-serif;--editorial-mono:monospace}${readingGuideStyle}.static-site .reading-paths,.static-site .reader-guide-paths{display:grid}</style>`
 
 // Keep the two responsive rulers mutually exclusive before the reader mounts,
 // and when JavaScript is unavailable. Scope these rules to the static document.
@@ -94,8 +99,12 @@ ${researchComparisonStyle.replaceAll('.article-page .reader-prose', '.static-sit
 
 for (const page of [...publicPages, { route: '404', path: '/404', title: 'Page not found — Sulayman Bowles', description: 'This address does not exist.' }]) {
   const body = withDocumentLinks(renderToStaticMarkup(<div className="static-site"><header><a href="/">Sulayman Bowles</a><nav aria-label="Main navigation">{publicPages.filter(p => !p.route.includes('/') && p.route).map(p => <a key={p.path} href={p.path}>{p.title.replace(' — Sulayman Bowles', '')}</a>)}</nav></header><main><h1>{page.route === '' ? siteCopy.home.title : page.title.replace(' — Sulayman Bowles', '')}</h1><p>{page.description}</p><Body route={page.route} /></main><footer><a href={`mailto:${contact.email}`}>{contact.email}</a> · <a href="/sitemap">All pages</a></footer></div>))
+  if (page.route !== '404') machineDocuments.push({
+    url: `${siteOrigin}${page.path}`,
+    text: documentText(body.match(/<main>([^]*?)<\/main>/)![1], `${siteOrigin}${page.path}`),
+  })
   const html = withSearchHead(template, searchMetadata(page.route))
-    .replace('</head>', () => `${fallbackStyle}${page.route.startsWith('writing/') ? studyFallbackStyle : ''}</head>`)
+    .replace('</head>', () => `${fallbackStyle}${readingFallbackStyle}${page.route.startsWith('writing/') ? studyFallbackStyle : ''}</head>`)
     .replace('<div id="root"></div>', () => `<div id="root">${body}</div>`)
   const destination = page.path === '/' ? join(dist, 'index.html') : join(dist, page.path.slice(1), 'index.html')
   await mkdir(join(destination, '..'), { recursive: true }); await writeFile(destination, html)
@@ -110,6 +119,12 @@ const discoverySource = await readFile(join(process.cwd(), 'public/llms.txt'), '
 const evidenceNotes = discoverySource.split('## Evidence boundaries\n')[1]
 if (!evidenceNotes?.trim()) throw new Error('Missing discovery evidence boundaries')
 const roleNotes = discoverySource.match(/\n\n(Sapien work covers[^]*?)\n\n##/)?.[1]
-await writeFile(join(dist, 'llms.txt'), discoveryText(resumeProfile.currentSummary, resumeReview.asOf, [roleNotes, evidenceNotes].filter(Boolean).join('\n\n')))
+const machineEvidence = [roleNotes, evidenceNotes].filter(Boolean).join('\n\n')
+const profile = machineProfile(machineEvidence)
+await mkdir(join(dist, 'machine'), { recursive: true })
+await writeFile(join(dist, 'machine/profile.json'), `${JSON.stringify(profile, null, 2)}\n`)
+await writeFile(join(dist, 'machine/references.json'), `${JSON.stringify(machineReferences([...articleData.values()], machineEvidence), null, 2)}\n`)
+await writeFile(join(dist, 'llms-full.txt'), fullDiscoveryText(profile, machineDocuments))
+await writeFile(join(dist, 'llms.txt'), discoveryText(resumeProfile.currentSummary, resumeReview.asOf, machineEvidence))
 await writeFile(join(dist, 'feed.xml'), writingFeed(catalog))
 console.log(`Generated ${publicPages.length} indexable pages, a 404, and discovery files.`)

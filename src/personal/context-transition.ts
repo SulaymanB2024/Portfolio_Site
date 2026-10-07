@@ -15,7 +15,8 @@ export function emptyContextTransition(): ContextTransition {
 
 /** Only call when the target GLB is decoded. Keep the old object while loading. */
 export function changeContextObject(state: ContextTransition, target: InterestId, reduced = false): ContextTransition {
-  if (!state.shown || reduced) return { shown: target, target, phase: 'hold', reveal: 1, from: 1, elapsed: 0 }
+  if (reduced) return { shown: target, target, phase: 'hold', reveal: 1, from: 1, elapsed: 0 }
+  if (!state.shown) return { shown: target, target, phase: 'in', reveal: 0, from: 0, elapsed: 0 }
   if (state.target === target) return state
   return { ...state, target, phase: state.shown === target ? 'in' : 'out', from: state.reveal, elapsed: 0 }
 }

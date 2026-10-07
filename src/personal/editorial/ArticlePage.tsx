@@ -20,6 +20,8 @@ import { articleDownloads, sourceAnchor } from './article-content'
 import ArticleOpening, { ArticleMetrics, OpeningNotes } from './ArticleOpening'
 import { StoryLink } from './StoryLink'
 import { ArtworkMotionControl } from './ArtworkMotion'
+import ReaderGuide from './ReaderGuide'
+import SourceAccessNotes, { sourceAccessNotes } from './SourceAccessNotes'
 import { displayDate, type ArticleCase, type ArticleSection, type ArticleSummary, type ArticleTable, type WritingArticle } from './types'
 import './article-design.css'
 import './reader-craft.css'
@@ -197,6 +199,7 @@ export default function ArticlePage({ slug }: { slug: string }) {
     if (article.valuationFrame) items.push({ id: 'reader-valuation', title: 'Valuation' })
     if (article.risks) items.push({ id: 'reader-risks', title: 'Risks' })
     if (article.faqs?.length) items.push({ id: 'questions', title: 'Questions' })
+    if (sourceAccessNotes(article.slug).length) items.push({ id: 'source-access-notes', title: 'Source access notes' })
     if (article.sources?.length && !article.htmlBody && (!article.markdown || article.markdownSections)) items.push({ id: 'sources', title: 'Sources' })
     if (downloads.length && !article.htmlBody) items.push({ id: 'reader-downloads', title: 'Supporting material' })
     return items
@@ -210,8 +213,9 @@ export default function ArticlePage({ slug }: { slug: string }) {
   const backHref = articleReturnHref(location.hash, articles)
   return <article className="article-page" data-story={article.slug} data-form={presentation.form} onClick={citationClick}>
     <DestinationLink className="project-back mono" href={backHref} direction="left">{siteCopy.reader.back}</DestinationLink>
-    <header className="article-cover"><div className="reader-heading"><p className="eyebrow">{topicLabel(article.category)}</p><h1><ArticleTitle article={article} /></h1><p className="reader-subtitle">{copy.subtitle}</p><div className="reader-signature"><a className="reader-author" href="#/about" rel="author">Sulayman Bowles</a><div className="reader-byline"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time>{article.dateModified && article.dateModified !== article.date && <span>Updated {displayDate(article.dateModified)}</span>}</div></div><ArticleUtilities /></div><ArtCube key={article.slug} artwork={artwork} /></header>
+    <header className="article-cover"><div className="reader-heading"><p className="eyebrow">{topicLabel(article.category)}</p><h1><ArticleTitle article={article} /></h1><p className="reader-subtitle">{copy.subtitle}</p><div className="reader-signature"><a className="reader-author" href="/about" rel="author">Sulayman Bowles</a><div className="reader-byline"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time>{article.dateModified && article.dateModified !== article.date && <span>Updated {displayDate(article.dateModified)}</span>}</div></div><ArticleUtilities /></div><ArtCube key={article.slug} artwork={artwork} /></header>
     <div className="reader-layout" id="reader-start"><ReaderNavigation key={article.slug} sections={headings} href={location.hash} /><div className="reader-prose">
+      <ReaderGuide slug={article.slug} hash={location.hash} />
       {body || <><ArticleOpening article={article}><Figures slug={article.slug} id="lede" position="after" /></ArticleOpening>{heroImage && <StoryImage image={heroImage} slug={article.slug} />}{article.sections?.map(section => <Section key={section.id} section={section} slug={article.slug} article={article} />)}{article.markdownSections?.map(section => <Section key={section.id} section={section} tables={article.tables} slug={article.slug} article={article} />)}</>}
       {article.conclusion && <Section section={{ id: 'conclusion', title: article.conclusion.title, paragraphs: [article.conclusion.content] }} slug={article.slug} />}
       {article.cases?.length ? <Cases cases={article.cases} filters={article.pageContent?.caseFilters} /> : null}
@@ -225,6 +229,7 @@ export default function ArticlePage({ slug }: { slug: string }) {
       {article.sources?.length && !article.htmlBody && (!article.markdown || article.markdownSections) ? <section id="sources" className="reader-section reader-sources"><h2>Sources</h2><ol>{article.sources.map((source, index) => <li id={sourceAnchor(source, index)} key={`${source.id}-${index}`}>{!source.id && <span id={`source-${index + 1}`} />}{(source.href ? [source.href] : source.hrefs || []).map((href, hrefIndex) => <a className="source-link" key={href} href={articleHref(href, articles, import.meta.env.BASE_URL)} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noreferrer' : undefined}>{hrefIndex === 0 ? source.label : `Additional source ${hrefIndex + 1}`}<span aria-hidden="true"> ↗</span></a>)}{(source.publisher || source.date || source.type) && <span className="source-publisher">{[source.publisher, source.date, source.type].filter(Boolean).join(" · ")}</span>}{source.lastVerified && <span className="source-publisher">Verified {displayDate(source.lastVerified)}</span>}{source.note && <p>{source.note}</p>}{source.limitation && <p>{source.limitation}</p>}</li>)}</ol></section> : null}
       {downloads.length > 0 && !article.htmlBody && <section id="reader-downloads" className="reader-section reader-downloads"><h2>Supporting material</h2><ul>{downloads.map(asset => <li key={asset.href}><a href={articleHref(asset.href, articles, import.meta.env.BASE_URL)}>{asset.label} ↗</a>{'description' in asset && asset.description && <span className="reader-resource-description">{asset.description}</span>}</li>)}</ul></section>}
       {article.pageContent?.endnotes?.map((note, index) => <footer className="reader-endnote" key={index}>{markdownToReact(note.markdown)}<nav aria-label="Related reading">{note.links.map(link => <a key={link.href} href={articleHref(link.href, articles, import.meta.env.BASE_URL)}>{link.label} ↗</a>)}</nav></footer>)}
+      <SourceAccessNotes slug={article.slug} />
       <AuthorNote />
     </div></div>
     <section className="reader-further"><div className="reader-further-heading"><h2>{siteCopy.reader.more}</h2><div className="reader-further-actions"><ArtworkMotionControl /><DestinationLink className="arrow-link" href={backHref} direction="left">{siteCopy.reader.back}</DestinationLink></div></div><nav aria-label="More articles">{relatedArticles(article, articles).map(item => <StoryLink key={item.slug} article={item} />)}</nav></section>

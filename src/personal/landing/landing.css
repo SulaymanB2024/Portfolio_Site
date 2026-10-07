@@ -43,7 +43,7 @@
 .landing-stage:has(.landing-canvas[data-state='error']) .landing-loading { top: 27%; left: auto; right: 5vw; width: 32vw; }
 
 @media (max-width: 700px) {
-  .landing-copy { display: block; padding: clamp(112px, 13.3svh, 132px) 6vw 0; }
+  .landing-copy { display: block; padding: clamp(96px, 11.5svh, 112px) 6vw 0; }
   .landing-copy-content { position: relative; width: 88vw; }
   .landing-copy h1 { min-height: 3em; font-size: clamp(34px, min(13.4vw, 6.4svh), 64px); line-height: 1; }
   .landing-category { top: -26px; left: 0; font-size: 8px; }

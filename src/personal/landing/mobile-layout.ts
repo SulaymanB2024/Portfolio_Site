@@ -18,7 +18,7 @@ export function mobileSculptureFrame(width: number, height: number, copyTop: num
   const previousFitY = previousHeight * cameraDepth / (focal * (bounds.y + Math.abs(previousY) * bounds.z / cameraDepth) + previousHeight * bounds.z / 2)
   const enlarged = Math.min(previousFitX, previousFitY) * .9 * LANDING_SCULPTURE_SCALE
   const top = linksTop + linkHeight + 14
-  const bottom = height - Math.max(16, safeBottom + 12)
+  const bottom = height - Math.max(28, safeBottom + 20)
   const availableHeight = Math.max(24, bottom - top), availableWidth = width * .96
   const centerY = top + availableHeight / 2, y = (.5 - centerY / height) * span
   const fitX = availableWidth * cameraDepth / (focal * bounds.x + availableWidth * bounds.z / 2)

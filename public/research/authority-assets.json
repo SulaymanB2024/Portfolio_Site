@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-07-16",
   "canonical_host": "https://sulayman-bowles.dev",
-  "objective": "Public index of current portfolio pages and research artifacts.",
+  "objective": "Historical snapshot of portfolio pages and research artifacts.",
   "limits": [
     "This file does not claim rankings, indexing, traffic movement, revenue impact, or AI citations.",
     "Private client names and private outcomes are intentionally excluded.",
@@ -39,5 +39,8 @@
       "type": "profile_page",
       "supporting_assets": ["https://sulayman-bowles.dev/resume", "https://sulayman-bowles.dev/llms.txt"]
     }
-  ]
+  ],
+  "status": "historical",
+  "currentReferenceIndex": "https://sulayman-bowles.dev/machine/references.json",
+  "historicalNote": "Preserved source snapshot. Listed routes and verification dates describe the historical publication, not the current website. Some routes now redirect or are retired; use the current reference index for available canonical documents."
 }

@@ -35,7 +35,7 @@
       "originalPath": "docs/article-originals/crawl-frontier-state-machine.json",
       "originalSha256": "54f89d5b0bc5f407fcef7fa96110d0bd0baf4628d8b408a429e44d2930f56cac",
       "currentSha256": "930b8283a6af8eff9fc41e109bfc6ee7f05b748576d4e9777f4deec462081668",
-      "evidenceSha256": "0bb8edcda94f9b4d509a612f1915a016a4f0191a7eac14313c8457c181a80c8f",
+      "evidenceSha256": "db801ed90bb6a09bbfd102214302ba9d938730c2307913356e6686daa363dfa3",
       "proseWords": {
         "before": 1274,
         "after": 900,
@@ -48,7 +48,7 @@
       "originalPath": "docs/article-originals/raw-html-rendered-dom-evidence.json",
       "originalSha256": "0a0768f5bfc1e166536b609a82573e64f2caac09b795a177b61994b77d6e4e5d",
       "currentSha256": "12a83d4b08eee6e4cd176dc43b45910bf71dbce3834f76a6bfdb2ccba1a2aa64",
-      "evidenceSha256": "898d7914304d1722fd144abac55fcd9cf61029506b831b4f25bd03d1d2f97a3b",
+      "evidenceSha256": "bf8186aa27acf8c2b596d026cba93c49bdb68f678c1b63d87ee276daaf3208ed",
       "proseWords": {
         "before": 1160,
         "after": 862,
@@ -61,7 +61,7 @@
       "originalPath": "docs/article-originals/canonicalization-graph-consistency.json",
       "originalSha256": "dc8eb0612e583ccf79c83c305e1d9b9d5b1ff723235672e362d46dbb2d77b3eb",
       "currentSha256": "60a96ffa87f7d0e3dd1a01ca0cea41117babf9bb89bd0654c2156bea26dcb86a",
-      "evidenceSha256": "82a81d72b424ad9696a25da33fa3646b4fcb1385fb7d9f9ea8c13a89873d4781",
+      "evidenceSha256": "c7579d9d4f04db11d11e6932f13c8620e50761fbaaab226c7ef211ba0c9a8409",
       "proseWords": {
         "before": 1236,
         "after": 906,
@@ -74,7 +74,7 @@
       "originalPath": "docs/article-originals/internal-links-directed-retrieval-graph.json",
       "originalSha256": "4fe5987c158849e12619904dd126c3badd6b132514e5b8b560b9fb7352c9689b",
       "currentSha256": "e33ad150634f43bf655341551ee402d12652316c0c2338e1deba1781df87ea87",
-      "evidenceSha256": "6c5da0bcf967b8d552f4b9d8302c3bff568ec59b0e1d7a8ff2cd1d9a178644ee",
+      "evidenceSha256": "51cfd0c36913fb23613d20bdfef37741342bb6cbb7a896d8d181b5a2d3b22659",
       "proseWords": {
         "before": 1163,
         "after": 886,
@@ -87,7 +87,7 @@
       "originalPath": "docs/article-originals/robots-txt-courtesy-not-access-control.json",
       "originalSha256": "2a382f1076426a33d273f89583e42e13282195dfdf42179ab9ca4dfa61678650",
       "currentSha256": "02c87c4ee2be8d704469c1ee9f93a843d30d8c843aedd68b03ac7187a0e713a7",
-      "evidenceSha256": "a09aa282f2f309d9b4e610d1c63d1b2dfbccd0c98cd0b661a7ae569c0bb83081",
+      "evidenceSha256": "410fe426d356b464698eb214edad96c89ae902e9c0d925cd05bb34d19741b0e2",
       "proseWords": {
         "before": 1316,
         "after": 984,
@@ -100,7 +100,7 @@
       "originalPath": "docs/article-originals/structured-data-without-content-drift.json",
       "originalSha256": "0228b4d2235e3edc6dad9d151917efe0391d9628d48c05893bc9497242a4ecdc",
       "currentSha256": "9185d3cc67273b3fd46e259d2216218432fd326897fbc8d3976350d5805376fd",
-      "evidenceSha256": "a873940e026b3082811cbdef7ff5103906d0a92d1ac009a502ed7d9a05c5ff07",
+      "evidenceSha256": "24eaa70c1a2c404092b375c9ee4a902af0d07172e9d1d497f733becb05c5f2a0",
       "proseWords": {
         "before": 1128,
         "after": 824,
@@ -113,7 +113,7 @@
       "originalPath": "docs/article-originals/audit-findings-derived-records.json",
       "originalSha256": "f3994e1908a17f1a038d74f8b940bf599ec393ad6ad4f78afdcf58fab872bdcb",
       "currentSha256": "56f78b5d85a5954f7f79911ad6bba3baeec5f9d8a725ec8194517374d997b335",
-      "evidenceSha256": "e1242e48b8ee09cecf7efb8420e858e4eafa4ce30592eb8223ac9564e4aabfa2",
+      "evidenceSha256": "6ea1ca3355355fe5c906c147af0a22959bd5df768011c2a14be2ee823b8770cb",
       "proseWords": {
         "before": 1181,
         "after": 854,
@@ -126,7 +126,7 @@
       "originalPath": "docs/article-originals/replayable-traces-ai-agent-evaluation.json",
       "originalSha256": "944ed03665a1f81bf5aca8f0ffcd2ad8005e692552e29c239b787424157c5e8e",
       "currentSha256": "cd30b81e7f6272c4895f322ea28b94f2da20f4891e87ff2fa672651ff86f0624",
-      "evidenceSha256": "1f699e352975b664a869f5d97bfd992bbe18e474953c86fd31caf382c5727d73",
+      "evidenceSha256": "90469c1553be71ae6454067f819a27cdd870956bd8cddc8186c7dc626da7e719",
       "proseWords": {
         "before": 1231,
         "after": 913,
@@ -139,7 +139,7 @@
       "originalPath": "docs/article-originals/sqlite-crawl-pipelines.json",
       "originalSha256": "6ef09f3345e283be1864f6d3401914e16585919b6494d9611236595b7cc4c194",
       "currentSha256": "f1a3ed5ca66be292a52dce18890d2fed438c6535a320c7394e52bc054dc8caf7",
-      "evidenceSha256": "769b8b7fc2a4e7f474b94d2a0520d9f3ad28890ccc56e2d6750eafd95d12ce95",
+      "evidenceSha256": "8df1bab38445906cb7424069401d45ed16022e755b26cfe548ade65431b029ad",
       "proseWords": {
         "before": 1268,
         "after": 914,
@@ -152,7 +152,7 @@
       "originalPath": "docs/article-originals/technical-seo-migration-release-gates.json",
       "originalSha256": "5089ce408f640215db06a99e4e62ae1316fd8cae993a600585f578b93c202319",
       "currentSha256": "007edb6ccb64ba46f0a411bca1cf66cf669bde5ae177ee46b61f446fef0b8916",
-      "evidenceSha256": "597550cd69f90de75202f14737c2abd1e78e45c27b04c0ef74ffe4ae358a3a05",
+      "evidenceSha256": "967770886ae566c47486f0b5d7ff461225c93ebf7e9c33eb9dd867b88ab271c6",
       "proseWords": {
         "before": 1147,
         "after": 854,
@@ -321,7 +321,7 @@
       "originalPath": "docs/article-originals/ai-search-crawler-policy.json",
       "originalSha256": "2de76f226cad21220b4340a2189c6c71a1ac521ac7d6abb7dc51eb50291142de",
       "currentSha256": "e5e110a2cf03407015053ced8a2f6b393f74d792bce81ea6b337c321bf5412bc",
-      "evidenceSha256": "1636bcd1d5ccb9153aff7e50aa42562cb07cd8ac0fbbda7996ebc5881e2b54c4",
+      "evidenceSha256": "c7226c8face2d3a899ed3415411dee677bdafac93ce9937e12ad5864c2a4c802",
       "proseWords": {
         "before": 293,
         "after": 467,
@@ -373,7 +373,7 @@
       "originalPath": "docs/article-originals/jane-street-exact-search-solver-verification.json",
       "originalSha256": "291fd1ecc855748c30784f70a9e0e6244c83c35beb4504ad43fcf1614bef3bc4",
       "currentSha256": "0226d91d28777302a3f0252560767d739d584584b5504deb57bc14b47b2bc268",
-      "evidenceSha256": "914b304679a3801150239cb4fece2426a94171315d01db74b1a18b34674e47bf",
+      "evidenceSha256": "91dfade3bb1afc37c57cfb77d2eb8c71e15ac999901338351bf5a148a8609650",
       "proseWords": {
         "before": 1493,
         "after": 1315,
@@ -381,5 +381,6 @@
       },
       "readTime": "8 MIN"
     }
-  ]
+  ],
+  "codeLabelRevisionReceipt": "docs/article-code-label-revisions.json"
 }

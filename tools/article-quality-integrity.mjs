@@ -1,16 +1,16 @@
 import { createHash } from 'node:crypto'
 import assert from 'node:assert/strict'
+import { originalCodeLabels } from './article-code-label-integrity.mjs'
 
 export const qualityHash = value => createHash('sha256').update(value).digest('hex')
 const editorial = new Set(['title', 'displayTitle', 'subtitle', 'seoTitle', 'seoDescription', 'description', 'excerpt', 'readTime', 'wordCount', 'dateModified', 'openingPresentation', 'content', 'thesis', 'conclusion', 'lede', 'ledeMarkdown', 'markdown', 'htmlBody', 'outline', 'sections', 'markdownSections'])
 const sectionEvidence = section => {
   const { title, paragraphs, markdown, blocks, ...fixed } = section
-  return { ...fixed,
-    ...(section.codeExamples ? { codeExamples: section.codeExamples.map(({ title, description, ...example }) => example) } : {}),
-    ...(blocks ? { blocks: blocks.map(block => block.kind === 'markdown' ? { kind: block.kind } : block) } : {}) }
+  return { ...fixed, ...(blocks ? { blocks: blocks.map(block => block.kind === 'markdown' ? { kind: block.kind } : block) } : {}) }
 }
 
 export function protectedQualityEvidence(article) {
+  article = originalCodeLabels(article)
   const fixed = Object.fromEntries(Object.entries(article).filter(([key]) => !editorial.has(key)))
   return { fixed, sections: (article.sections || []).map(sectionEvidence), markdownSections: (article.markdownSections || []).map(sectionEvidence),
     outlineIds: article.outline?.map(item => item.id),
@@ -26,7 +26,7 @@ export function protectedQualityEvidence(article) {
 export function proseUnits(article) {
   return [
     { id: 'opening', text: [article.ledeMarkdown || article.lede || (article.content || []).join('\n\n'), article.thesis].filter(Boolean).join('\n') },
-    ...[...(article.sections || []), ...(article.markdownSections || [])].map(section => ({ id: section.id, text: [section.title, ...(section.paragraphs || []), section.markdown, ...(section.blocks || []).filter(block => block.kind === 'markdown').map(block => block.markdown), ...(section.codeExamples || []).flatMap(example => [example.title, example.description])].filter(Boolean).join('\n') })),
+    ...[...(article.sections || []), ...(article.markdownSections || [])].map(section => ({ id: section.id, text: [section.title, ...(section.paragraphs || []), section.markdown, ...(section.blocks || []).filter(block => block.kind === 'markdown').map(block => block.markdown)].filter(Boolean).join('\n') })),
     ...(article.markdown && !article.markdownSections ? [{ id: 'markdown', text: article.markdown }] : []),
     ...(article.htmlBody ? [{ id: 'html', text: article.htmlBody }] : []),
     ...(article.conclusion ? [{ id: 'conclusion', text: `${article.conclusion.title}\n${article.conclusion.content}` }] : []),

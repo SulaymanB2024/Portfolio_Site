@@ -15,6 +15,7 @@ import { writingSelection } from './writing-selection'
 import { DestinationCue } from '../DestinationLink'
 import './writing-selection.css'
 import { topicLabel } from './topic-label'
+import { ReadingPaths } from './TopicPage'
 
 const articles = (catalog as ArticleSummary[]).map(withWritingCopy)
 const categories = ['All', ...new Set(articles.map(article => article.category))]
@@ -81,6 +82,7 @@ export default function WritingIndex() {
         {(query.trim() || category !== 'All') && <div className="writing-filter-status"><span>{visible.length} {visible.length === 1 ? 'essay' : 'essays'}</span><button type="button" onClick={clearFilters}>Clear filters</button></div>}
       </div></details><ArtworkMotionControl /></div>
     </header>
+    {!searching && <ReadingPaths interactive />}
     {searching ? <div className="writing-gallery writing-results">{visible.map((article, index) => story(article, 'compact', index))}</div> : <>
       <div className="writing-gallery writing-selected">{selection.selected.map((article, index) => story(article, index === 0 ? 'lead' : index === 3 || index === 4 ? 'report' : 'selected', index))}</div>
       {selection.more.length > 0 && <section className="writing-secondary" aria-labelledby="writing-more"><h2 id="writing-more">Further reading</h2><div className="writing-gallery">{selection.more.map((article, index) => story(article, 'compact', index + 7))}</div></section>}

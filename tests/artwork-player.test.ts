@@ -161,20 +161,20 @@ test('an unresolved native import completing after route disposal cannot allocat
   assert.equal(f.documentEvents.get('visibilitychange')?.size, 0); assert.equal(f.mediaEvents.size, 0)
 })
 
-test('mobile native playback caps frames and resumes the retained phase160ms after the final scroll', async t => {
+test('mobile drawings keep their bounded cadence and retained phase while scrolling', async t => {
   const f = fixture(true), player = createArtworkPlayer(f.artwork, 400)
   t.after(() => { player.dispose(); f.restore() })
   player.setPlayback(true, false); await settle(); f.resolve(); await settle(); f.step(0)
-  assert.equal(player.status.stats.targetFps, 12); assert.deepEqual(f.phases, [1])
+  assert.equal(player.status.stats.targetFps, 24); assert.deepEqual(f.phases, [1])
   assert.deepEqual([f.canvases[0].width, f.canvases[0].height], [400, 400])
-  f.scroll(); assert.equal(player.status.active, false); assert.equal(f.pending.size, 0)
-  f.step(159); assert.deepEqual(f.phases, [1])
-  f.scroll(); f.step(318); assert.deepEqual(f.phases, [1]); assert.equal(player.status.active, false)
-  f.step(319); assert.deepEqual(f.phases, [1, 2]); assert.equal(player.status.active, true)
+  f.scroll(); assert.equal(player.status.active, true)
+  f.step(50); assert.deepEqual(f.phases, [1, 2])
+  f.scroll(); f.step(100); assert.deepEqual(f.phases, [1, 2, 3])
   assert.equal(f.setups, 1); assert.equal(f.canvases.length, 1)
+  assert.equal(f.windowEvents.get('scroll')?.size ?? 0, 0)
 })
 
-test('scroll quiet periods cannot undo user pause, hidden state, or paused travel', async t => {
+test('scrolling cannot undo user pause, hidden state, or paused travel', async t => {
   const f = fixture(true), player = createArtworkPlayer(f.artwork, 400)
   t.after(() => { player.dispose(); f.restore() })
   player.setPlayback(true, false); await settle(); f.resolve(); await settle(); f.step(0)
@@ -191,14 +191,15 @@ test('scroll quiet periods cannot undo user pause, hidden state, or paused trave
   assert.deepEqual(f.phases, [1, 2, 3]); assert.equal(f.setups, 1)
 })
 
-test('mobile disposal removes the scroll listener and pending quiet-period timer', async t => {
+test('mobile disposal releases playback without allocating scroll listeners or resume timers', async t => {
   const f = fixture(true), player = createArtworkPlayer(f.artwork, 400)
   t.after(() => { player.dispose(); f.restore() })
   player.setPlayback(true, false); await settle(); f.resolve(); await settle(); f.step(0)
-  f.scroll(); assert.equal(f.timers.size, 1); assert.equal(f.windowEvents.get('scroll')?.size, 1)
+  const drawingTimers = f.timers.size
+  f.scroll(); assert.equal(f.timers.size, drawingTimers); assert.equal(f.windowEvents.get('scroll')?.size ?? 0, 0)
   player.dispose(); f.scroll(); f.step(1000)
-  assert.equal(f.windowEvents.get('scroll')?.size, 0)
   assert.equal(f.timers.size + f.pending.size, 0); assert.deepEqual(f.phases, [1])
+  assert.equal(f.documentEvents.get('visibilitychange')?.size, 0); assert.equal(f.mediaEvents.size, 0)
 })
 
 test('desktop playback retains its native profile without subscribing to scroll pauses', async t => {

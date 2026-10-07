@@ -9,6 +9,8 @@ import { relatedArticles } from '../src/personal/editorial/library'
 import catalog from '../src/personal/editorial/data/catalog.json'
 import { siteCopy } from '../src/personal/site-copy'
 import ArticleStudyFigure from '../src/personal/editorial/ArticleStudyFigure'
+import ReaderGuide from '../src/personal/editorial/ReaderGuide'
+import SourceAccessNotes from '../src/personal/editorial/SourceAccessNotes'
 
 const paragraphs = (values: string[] = []) => values.map((value, index) => <p key={index}>{inlineText(value)}</p>)
 
@@ -57,6 +59,7 @@ export function PublicArticle({ article }: { article: WritingArticle }) {
       {article.dateModified && article.dateModified !== article.date && <> · Updated <time dateTime={article.dateModified.replaceAll('.', '-')}>{displayDate(article.dateModified)}</time></>}
     </p>
     {image && <figure><img src={image.src} alt={image.alt} loading="lazy" />{image.caption && <figcaption>{image.caption}</figcaption>}</figure>}
+    <ReaderGuide slug={article.slug} />
     {article.htmlBody ? <><OpeningNotes article={article} boundary /><RestoredArticleBody html={article.htmlBody} /></> : markdown ? <>{markdownToReact(markdown)}<OpeningNotes article={article} boundary /></> : <>
       <ArticleOpening article={article} />
       {[...(article.sections || []), ...(article.markdownSections || [])].map(section => <Section key={section.id} section={section} tables={article.tables} article={article} />)}
@@ -80,6 +83,7 @@ export function PublicArticle({ article }: { article: WritingArticle }) {
     </li>)}</ol></section> : null}
     {downloads.length > 0 && !article.htmlBody && <section id="reader-downloads"><h2>Supporting material</h2><ul>{downloads.map(asset => <li key={asset.href}><a href={asset.href}>{asset.label}</a>{'description' in asset && asset.description && <p>{asset.description}</p>}</li>)}</ul></section>}
     {article.pageContent?.endnotes?.map((note, index) => <footer key={index}>{markdownToReact(note.markdown)}<nav aria-label="Related reading">{note.links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav></footer>)}
+    <SourceAccessNotes slug={article.slug} />
     <AuthorNote />
     <section><h2>{siteCopy.reader.more}</h2><nav aria-label="More articles">
       {relatedArticles(article, catalog).map(item => <div key={item.slug}><a href={item.path}>{item.displayTitle || item.title}</a><p>{item.subtitle}</p></div>)}

@@ -61,6 +61,10 @@ test('rebuilding a head removes stale article data, duplicate canonicals, and ol
   assert.equal((html.match(/rel="canonical"/g) || []).length, 1)
   assert.equal((html.match(/id="page-schema"/g) || []).length, 1)
   assert.equal((html.match(/type="application\/atom\+xml"/g) || []).length, 1)
+  assert.equal((html.match(/data-machine-discovery=/g) || []).length, 2)
+  assert(html.includes('rel="describedby" type="text/plain" href="https://sulayman-bowles.dev/llms.txt"'))
+  assert(html.includes('rel="describedby" type="application/json" href="https://sulayman-bowles.dev/machine/profile.json"'))
+  assert.equal(html.match(/<body>([^]*?)<\/body>/)![1], shell.match(/<body>([^]*?)<\/body>/)![1])
   assert.equal((html.match(/property="og:image"/g) || []).length, 1)
   assert(!html.includes('article:published_time'))
   assert(html.includes('<h1>Accepted headline</h1>'))
@@ -82,7 +86,7 @@ test('metadata treats markup and replacement tokens as literal text', () => {
 
 test('initial article links resolve to real documents and retain section targets', () => {
   assert.equal(documentHref('#/writing/the-first-ai-managers?section=case-inventory&from=%23%2Fwriting'), '/research/ai-systems/the-first-ai-managers#case-inventory')
-  assert.equal(documentHref('#/writing/structured-data-without-content-drift'), '/writing/atlas-building-an-evidence-console#findings')
+  assert.equal(documentHref('#/writing/structured-data-without-content-drift'), '/research/technical-seo/structured-data-without-content-drift')
   assert.equal(documentHref('#source-s1'), '#source-s1')
   assert.equal(withDocumentLinks('<a href="#/writing/the-first-ai-managers?section=case-inventory&amp;from=other">Study</a>'), '<a href="/research/ai-systems/the-first-ai-managers#case-inventory">Study</a>')
   assert.throws(() => documentHref('#/missing-page'), /Unresolved public link/)

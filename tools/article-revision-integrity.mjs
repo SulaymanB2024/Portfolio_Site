@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto'
+import { originalCodeLabels } from './article-code-label-integrity.mjs'
 
 export const sha256 = value => createHash('sha256').update(value).digest('hex')
 export const originalFields = (article, keys) => Object.fromEntries(keys.map(key => [key, article[key]]))
@@ -6,6 +7,7 @@ export const originalFields = (article, keys) => Object.fromEntries(keys.map(key
 // Editorial revisions may change prose and move a figure. Freeze the underlying
 // evidence independently: identity, research scope, sources, data, and downloads.
 export function protectedArticleEvidence(article, keys, exceptions = []) {
+  article = originalCodeLabels(article)
   const prose = new Set(['subtitle', 'seoTitle', 'seoDescription', 'description', 'excerpt', 'dateModified', 'thesis', 'conclusion', 'content', 'sections', 'readTime', 'wordCount'])
   const identity = Object.fromEntries(keys.filter(key => !prose.has(key)).map(key => [key, article[key]]))
   for (const exception of exceptions.filter(item => item.slug === article.slug && item.removedResource)) {
@@ -15,10 +17,7 @@ export function protectedArticleEvidence(article, keys, exceptions = []) {
     identity.resources = resources.filter((_, resourceIndex) => resourceIndex !== index)
   }
   const sections = (article.sections || []).map(section => {
-    const { title, paragraphs, figures, figuresPosition, codeExamples, ...evidence } = section
-    // Caption prose is quantity/citation-checked by article-quality-integrity.
-    // Freeze the actual executable examples here independently of those labels.
-    if (codeExamples) evidence.codeExamples = codeExamples.map(({ title, description, ...example }) => example)
+    const { title, paragraphs, figures, figuresPosition, ...evidence } = section
     return evidence
   })
   const figures = (article.sections || []).flatMap(section => section.figures || []).sort((a, b) => a.src.localeCompare(b.src))

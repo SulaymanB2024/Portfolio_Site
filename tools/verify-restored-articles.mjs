@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { originalFields, protectedArticleEvidence } from './article-revision-integrity.mjs'
+import { verifyCodeLabelReadback } from './article-code-label-integrity.mjs'
 
 const read = path => readFileSync(path, 'utf8')
 const hash = value => createHash('sha256').update(value).digest('hex')
@@ -11,12 +12,15 @@ const catalog = JSON.parse(read('src/personal/editorial/data/catalog.json'))
 const archived = JSON.parse(read('src/personal/editorial/data/archived-catalog.json'))
 const retained = [...catalog, ...archived.filter(item => !catalog.some(active => active.slug === item.slug))]
 const revisions = JSON.parse(read('docs/article-revisions.json')).records
-const quality = JSON.parse(read('docs/article-quality-revisions.json')).records
+const qualityManifest = JSON.parse(read('docs/article-quality-revisions.json'))
+const quality = qualityManifest.records
 for (const file of manifest.sourceFiles) {
   assert.equal(hash(execFileSync('git', ['show', `${manifest.sourceRef}:${file.path}`], { maxBuffer: 4 * 1024 * 1024 })), file.sha256, `Original source drift: ${file.path}`)
 }
 for (const record of manifest.records) {
-  const article = JSON.parse(read(`src/personal/editorial/data/articles/${record.slug}.json`))
+  const bytes = readFileSync(`src/personal/editorial/data/articles/${record.slug}.json`)
+  verifyCodeLabelReadback(bytes)
+  const article = JSON.parse(bytes)
   const revision = revisions.find(item => item.slug === record.slug)
   const original = revision ? JSON.parse(read(revision.originalPath)) : article
   assert.equal(hash(JSON.stringify(originalFields(original, record.sourceKeys))), record.originalSha256, `Original manuscript drift: ${record.slug}`)
@@ -24,7 +28,7 @@ for (const record of manifest.records) {
     assert.equal(revision.originalSha256, record.originalSha256, `Unbound editorial revision: ${record.slug}`)
     assert.equal(hash(readFileSync(`src/personal/editorial/data/articles/${record.slug}.json`)), revision.currentSha256, `Unrecorded editorial change: ${record.slug}`)
     assert.equal(hash(JSON.stringify(protectedArticleEvidence(article, record.sourceKeys))), revision.evidenceSha256, `Edited evidence drift: ${record.slug}`)
-    assert.deepEqual(protectedArticleEvidence(article, record.sourceKeys), protectedArticleEvidence(original, record.sourceKeys), `Original evidence changed: ${record.slug}`)
+    assert.deepEqual(protectedArticleEvidence(article, record.sourceKeys), protectedArticleEvidence(original, record.sourceKeys, qualityManifest.exceptions), `Original evidence changed: ${record.slug}`)
   }
   assert(retained.some(item => item.slug === record.slug && item.path === record.path), `Missing recovered record: ${record.slug}`)
 }
