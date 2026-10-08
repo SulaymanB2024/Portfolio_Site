@@ -1,4 +1,5 @@
 import { publicPages, siteOrigin } from './public-pages.ts'
+import { approvedOutreachSlug, documentOutreachSlug } from './outreach-context.ts'
 
 export const personalMeasurementId = 'G-9VQ15148TG'
 const scriptId = 'personal-ga4-script'
@@ -7,7 +8,7 @@ const knownLocations = new Set([...publicPages.map(page => `${siteOrigin}${page.
 
 type Gtag = (...parameters: unknown[]) => void
 export interface AnalyticsWindow {
-  location: Pick<Location, 'hostname' | 'protocol'>
+  location: Pick<Location, 'hostname' | 'protocol'> & Partial<Pick<Location, 'pathname'>>
   dataLayer?: unknown[]
   gtag?: Gtag
 }
@@ -35,9 +36,11 @@ export function analyticsReferrer(value: string): string {
 }
 
 /** One tracker per document. A→B→A is three views; section/title-only changes are not. */
-export function createPersonalAnalytics(browser: AnalyticsWindow, document: AnalyticsDocument) {
+export function createPersonalAnalytics(browser: AnalyticsWindow, document: AnalyticsDocument, arrivalSlug?: string) {
   let initialized = false
   let previousLocation = ''
+  let outreachRecorded = false
+  const outreachCompany = approvedOutreachSlug(arrivalSlug, browser.location.pathname || '')
   return (page: AnalyticsPage): boolean => {
     if (browser.location.protocol !== 'https:' || !productionHosts.has(browser.location.hostname)) return false
     const pageLocation = analyticsPageLocation(page.canonical)
@@ -77,6 +80,10 @@ export function createPersonalAnalytics(browser: AnalyticsWindow, document: Anal
       }
       browser.gtag!('event', 'page_view', { send_to: personalMeasurementId, ...fields })
       previousLocation = pageLocation
+      if (outreachCompany && !outreachRecorded) {
+        outreachRecorded = true
+        try { browser.gtag!('event', 'outreach_visit', { send_to: personalMeasurementId, outreach_company: outreachCompany }) } catch { /* Optional arrival measurement. */ }
+      }
       return true
     } catch {
       // A blocked tag, storage failure or unavailable analytics must not affect navigation.
@@ -93,7 +100,10 @@ export function recordPersonalPageView(document: Document, browser: AnalyticsWin
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href
     if (!canonical) return false
     let tracker = trackers.get(browser)
-    if (!tracker) { tracker = createPersonalAnalytics(browser, document); trackers.set(browser, tracker) }
+    if (!tracker) {
+      tracker = createPersonalAnalytics(browser, document, documentOutreachSlug(document, browser.location.pathname || ''))
+      trackers.set(browser, tracker)
+    }
     return tracker({ canonical, title: document.title })
   } catch { return false }
 }
