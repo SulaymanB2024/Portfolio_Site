@@ -62,8 +62,8 @@ const browserDriver: FrameDriver = {
   now: () => performance.now(),
   requestFrame: callback => requestAnimationFrame(callback),
   cancelFrame: id => cancelAnimationFrame(id),
-  setDelay: (callback, milliseconds) => globalThis.setTimeout(callback, milliseconds),
-  cancelDelay: id => globalThis.clearTimeout(id),
+  setDelay: (callback, milliseconds) => window.setTimeout(callback, milliseconds),
+  cancelDelay: id => window.clearTimeout(id),
 };
 
 function snapshot(entry: Entry): PreviewFrameStats {

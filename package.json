@@ -15,7 +15,8 @@
     "react-dom": "19.3.0",
     "three": "0.186.1",
     "@vercel/functions": "3.7.5",
-    "isbot": "5.2.0"
+    "isbot": "5.2.0",
+    "@vercel/global-config": "1.5.1"
   },
   "devDependencies": {
     "@gltf-transform/core": "^4.5.1",
@@ -32,14 +33,15 @@
     "vite": "8.3.1",
     "gltf-validator": "2.0.0-dev.3.10",
     "sharp": "0.35.5",
-    "tsx": "4.21.0"
+    "tsx": "4.21.0",
+    "@types/node": "24.19.1"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "start": "vite --host 127.0.0.1",
-    "build": "tsc --noEmit && vite build && vite build --ssr tools/render-public-site.tsx --outDir .cache/public-site --emptyOutDir && node .cache/public-site/render-public-site.js",
+    "build": "npm run typecheck && vite build && vite build --ssr tools/render-public-site.tsx --outDir .cache/public-site --emptyOutDir && node .cache/public-site/render-public-site.js",
     "preview": "vite preview --host 127.0.0.1",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.api.json",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "format": "prettier --write src tests tools index.html vite.config.ts tsconfig.json package.json",
     "optimize:model": "node tools/optimize-model.mjs",

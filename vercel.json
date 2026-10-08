@@ -637,9 +637,18 @@
       "status": 308
     },
     {
+      "src": "/([a-z0-9]+(?:-[a-z0-9]+)*)",
+      "dest": "/api/outreach-home"
+    },
+    {
       "src": "/(.*)",
       "dest": "/404/index.html",
       "status": 404
     }
-  ]
+  ],
+  "functions": {
+    "api/outreach-home.ts": {
+      "includeFiles": "dist/{index.html,404/index.html}"
+    }
+  }
 }

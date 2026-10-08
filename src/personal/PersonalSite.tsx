@@ -6,6 +6,7 @@ import { contact, projects, type ArtKind } from './content'
 import { siteCopy, withWritingCopy } from './site-copy'
 import { updateSearchHead } from './search-head'
 import { recordPersonalPageView } from './analytics'
+import { documentOutreachSlug } from './outreach-context'
 import catalog from './editorial/data/catalog.json'
 import { resolveRoute } from './editorial/routes'
 import { findCaseStudy } from './projects/case-studies'
@@ -46,7 +47,7 @@ const AboutPage = aboutPage.Page
 const Contact = contactPage.Page
 const articles = (catalog as ArticleSummary[]).map(withWritingCopy)
 const navItems = [['About', 'about'], ['Writing', 'writing'], ['Work', 'work'], ['Résumé', 'resume'], ['Contact', 'contact']]
-const path = () => resolveRoute(location.hash, location.pathname, articles)
+const path = () => resolveRoute(location.hash, location.pathname, articles, documentOutreachSlug(document, location.pathname))
 
 function useRoute() {
   const [route, setRoute] = useState(path)
