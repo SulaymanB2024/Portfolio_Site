@@ -1,5 +1,6 @@
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import { parseRegistry, reconcileCompanies, validateCompanies, type OutreachRegistry } from './registry.ts'
+import { RegistryRequestError } from './store.ts'
 
 export const outreachSpreadsheetId = '1WDUFFDYgXqCXGwglBDpr2qB6pUtVpcJw04lMMQohuFA'
 export interface RegistryStore {
@@ -31,10 +32,11 @@ export function createSyncHandler(store: RegistryStore, reserved: Set<string>, s
       const result = reconcileCompanies(parseRegistry(await store.read()), rows, reserved)
       if (result.changed) await store.write(result.registry)
       return json({ revision: result.registry.revision, changed: result.changed, links: result.links })
-    } catch {
+    } catch (error) {
       // No payloads, upstream response bodies, tokens or company contacts in logs.
-      console.warn('[outreach] registry synchronization failed')
-      return json({ error: 'Registry update failed; check the Vercel writer token and Global Config limits. Existing links are retained; scheduled sync will retry.' }, 503)
+      const failure = error instanceof RegistryRequestError ? error.message : 'Registry update failed'
+      console.warn('[outreach] registry synchronization failed', failure)
+      return json({ error: `${failure}. Check the Vercel writer token, team scope and Global Config limits. Published links are retained; scheduled sync will retry.` }, 503)
     }
   }
 }
