@@ -139,7 +139,6 @@ test('the dynamic handler follows redirects and filesystem resolution and the in
   assert(dynamic>hosting.routes.findIndex((route:any)=>route.handle==='filesystem'))
   assert(dynamic<hosting.routes.findIndex((route:any)=>route.status===404))
   assert.equal(hosting.routes[dynamic].dest, '/api/outreach-home')
-  assert.deepEqual(hosting.routes[dynamic].transforms, [{type:'request.path',op:'set',args:'/$1'}])
   const names=JSON.parse(readFileSync(new URL('../tools/outreach/seed.json',import.meta.url),'utf8')) as string[]
   assert.equal(new Set(names).size,50)
   const links=reconcileCompanies(emptyRegistry(),names.map(name=>row(name)),reservedOutreachSlugs()).links

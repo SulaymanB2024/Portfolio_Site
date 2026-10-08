@@ -638,10 +638,7 @@
     },
     {
       "src": "/([a-z0-9]+(?:-[a-z0-9]+)*)",
-      "dest": "/api/outreach-home",
-      "transforms": [
-        { "type": "request.path", "op": "set", "args": "/$1" }
-      ]
+      "dest": "/api/outreach-home"
     },
     {
       "src": "/(.*)",
