@@ -9,7 +9,7 @@ export function outreachDocument(html: string, slug: string, name: string) {
   if (!html.includes('</head>') || !html.includes('<!--public-page:start-->') || !html.includes('<!--public-page:end-->')) throw new Error('Homepage template is unavailable')
   const company = { slug, name }
   return withSearchHead(html, recruiterMetadata(company))
-    .replace(/<!--public-page:start-->[^]*?<!--public-page:end-->/, () => `<!--public-page:start-->${renderRecruiterDocument(company)}<!--public-page:end-->`)
+    .replace(/<!--public-page:start-->([^]*?)<!--public-page:end-->/, (_, body: string) => `<!--public-page:start-->${renderRecruiterDocument(body, company)}<!--public-page:end-->`)
     .replace('</head>', () => `<meta name="${outreachMetaName}" content="${slug}"><meta name="${outreachNameMeta}" content="${escapeMetadata(name)}"></head>`)
 }
 

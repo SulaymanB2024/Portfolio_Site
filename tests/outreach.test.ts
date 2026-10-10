@@ -8,13 +8,16 @@ import { createSyncHandler, outreachSpreadsheetId, validSyncSignature } from '..
 import { createOutreachHomeHandler, outreachDocument } from '../lib/outreach/home.ts'
 import { approvedOutreachSlug, documentOutreachCompany } from '../src/personal/outreach-context.ts'
 import { recruiterCompanyProfiles } from '../src/personal/recruiter/company-profiles.ts'
-import { recruiterMetadata, renderRecruiterLanding } from '../src/personal/recruiter/landing.ts'
+import { recruiterMetadata, recruiterOpening, renderRecruiterDocument } from '../src/personal/recruiter/landing.ts'
+import { withLandingOpening } from '../src/personal/landing/opening-copy.ts'
+import { CHAPTERS } from '../src/personal/landing/sequence.ts'
+import { headingRows } from '../src/personal/landing/heading-typography.ts'
 import { escapeMetadata } from '../src/personal/search-metadata.ts'
-import { publicPages } from '../src/personal/public-pages.ts'
 import { resolveRoute } from '../src/personal/editorial/routes.ts'
 import { createPersonalAnalytics, type AnalyticsWindow } from '../src/personal/analytics.ts'
 
 const row = (company: string, recordId = randomUUID()) => ({ company, recordId })
+const homepage = '<html><head><title>Home</title><link rel="canonical" href="https://sulayman-bowles.dev/"></head><body><div id="root"><!--public-page:start--><div class="static-site"><header>Standard navigation</header><main><h1>Generic opening</h1><p>Generic introduction</p><div class="home-standard-content">Original profile, work and writing</div></main><footer>Standard footer</footer></div><!--public-page:end--></div></body></html>'
 
 test('company slugs are readable, normalized and respect the six initial overrides', () => {
   for (const [name, slug] of [['Base Power Company', 'base-power'], ['Anduril Industries', 'anduril'], ['JPMorganChase', 'jpmorgan'], ['McKinsey & Company', 'mckinsey'], ['Bain & Company', 'bain'], ['Boston Consulting Group', 'bcg'], ['D. E. Shaw', 'd-e-shaw'], ['Café & Co.', 'cafe-and-co'], ['Constructor', 'constructor']]) assert.equal(companySlug(name), slug)
@@ -95,7 +98,6 @@ test('failed writes retain the previous registry; an automatic retry allocates t
 
 test('runtime registry activates new company documents without changing the application build', async () => {
   let registry = emptyRegistry()
-  const homepage = '<html><head><title>Home</title><link rel="canonical" href="https://sulayman-bowles.dev/"></head><body><div id="root"><!--public-page:start--><div class="static-site">Generic Home</div><!--public-page:end--></div></body></html>'
   const handler = createOutreachHomeHandler(async () => registry, async missing => missing ? '<html>Page not found</html>' : homepage)
   const request = () => new Request('https://sulayman-bowles.dev/base-power')
   assert.equal((await handler(request())).status, 404)
@@ -106,10 +108,13 @@ test('runtime registry activates new company documents without changing the appl
   assert(!response.headers.has('Location'))
   const html = await response.text()
   assert.equal(html, outreachDocument(homepage, 'base-power', 'Base Power Company'))
-  assert(html.includes('For the team at <strong>Base Power Company</strong>'))
-  assert(html.includes('data-recruiter-company="base-power"'))
-  assert(!html.includes('Generic Home'))
-  assert(html.includes('<title>For Base Power Company — Sulayman Bowles</title>'))
+  assert(html.includes('<h1>Base Power Company</h1>'))
+  assert(html.includes('name="outreach-company" content="base-power"'))
+  assert(!html.includes('Generic opening'))
+  assert(html.includes('Original profile, work and writing'))
+  assert(html.includes('<header>Standard navigation</header>'))
+  assert(html.includes('<footer>Standard footer</footer>'))
+  assert(html.includes('<title>Base Power Company — Sulayman Bowles</title>'))
   assert(html.includes('name="robots" content="noindex, follow"'))
   assert.equal((await handler(new Request('https://example.test/not-a-company'))).status, 404)
   assert.equal((await handler(new Request('https://example.test/base-power', {method:'HEAD'}))).status, 200)
@@ -118,13 +123,13 @@ test('runtime registry activates new company documents without changing the appl
   assert.equal((await handler(new Request('https://example.test/base-power?slug=unknown&slug=base-power'))).status, 200)
 })
 
-test('company landing survives Home navigation and deep hashes while root and unknown paths retain their routes', () => {
+test('only the company arrival is tailored; Home and deep hashes use the standard site', () => {
   assert.equal(approvedOutreachSlug('base-power', '/base-power'), 'base-power')
   assert.equal(approvedOutreachSlug('base-power', '/unknown'), undefined)
   assert.equal(approvedOutreachSlug('person@example.com', '/person@example.com'), undefined)
   assert.equal(resolveRoute('', '/base-power', [], 'base-power'), 'recruiter')
-  assert.equal(resolveRoute('#/', '/base-power', [], 'base-power'), 'recruiter')
-  assert.equal(resolveRoute('#/home', '/base-power', [], 'base-power'), 'recruiter')
+  assert.equal(resolveRoute('#/', '/base-power', [], 'base-power'), '')
+  assert.equal(resolveRoute('#/home', '/base-power', [], 'base-power'), 'home')
   assert.equal(resolveRoute('#/work', '/base-power', [], 'base-power'), 'work')
   assert.equal(resolveRoute('#/resume', '/base-power', [], 'base-power'), 'resume')
   assert.equal(resolveRoute('#/work/atlas', '/base-power', [], 'base-power'), 'work/atlas')
@@ -141,36 +146,52 @@ test('public company context needs a name and exact arrival path; query paramete
   assert.equal(documentOutreachCompany(document('bcg', 'private@example.com'), '/bcg'), undefined)
 })
 
-test('every registered company has a complete tailored landing with public destinations and reviewed experience', () => {
+test('all registered companies supply short first-chapter copy and standard destinations', () => {
   const companies = JSON.parse(readFileSync(new URL('../tools/outreach/recruiter-companies.json',import.meta.url),'utf8')) as {slug:string;name:string}[]
-  const headlines = new Set<string>(), introductions = new Set<string>()
+  const messages = new Set<string>()
   assert.equal(companies.length,80)
   assert.equal(Object.keys(recruiterCompanyProfiles).length,80)
   for (const company of companies) {
     const profile = recruiterCompanyProfiles[company.slug]
-    assert(profile, `${company.slug}: missing curated profile`)
-    headlines.add(profile.headline.join(' ')); introductions.add(profile.introduction)
-    const html = renderRecruiterLanding(company,'document')
-    assert(html.includes(escapeMetadata(company.name)), `${company.slug}: missing company`)
-    assert.equal((html.match(/<h1\b/g)||[]).length,1)
-    assert.equal((html.match(/class="recruiter-work-entry"/g)||[]).length,3)
-    assert.equal((html.match(/class="recruiter-experience-entry"/g)||[]).length,3)
-    assert.equal((html.match(/class="recruiter-reading-entry"/g)||[]).length,2)
-    for (const match of html.matchAll(/href="(\/[^"?#]*)"/g)) {
-      const route = match[1]
-      assert(route === '/' || publicPages.some(page => page.path === route), `${company.slug}: unknown destination ${route}`)
-    }
+    assert(profile, `${company.slug}: missing curated copy`)
+    assert.equal(profile.lines.length,4)
+    const message=profile.lines.join(' ')
+    messages.add(message)
+    assert(message.split(/\s+/).length <= 30, `${company.slug}: opening exceeds the original screen's short headline`)
+    const opening=recruiterOpening(company)
+    assert.equal(opening.category,'')
+    assert.equal(opening.href,'/resume')
+    assert.equal(opening.linkLabel,'Résumé')
+    assert.deepEqual(opening.article,{label:'Explore the site',href:'/'})
+    const html=renderRecruiterDocument(homepage,company)
+    assert(html.includes(escapeMetadata(message)))
+    assert(html.includes('<header>Standard navigation</header>'))
+    assert(html.includes('Original profile, work and writing'))
+    assert(html.includes('<footer>Standard footer</footer>'))
   }
-  assert.equal(introductions.size,80, 'Each company needs its own introduction')
-  assert(headlines.size > 50, 'Companies must differ beyond their names')
-  assert.notDeepEqual(recruiterCompanyProfiles.google.work, recruiterCompanyProfiles['base-power'].work)
-  assert.notDeepEqual(recruiterCompanyProfiles.google.reading, recruiterCompanyProfiles.bcg.reading)
+  assert.equal(messages.size,80, 'Each company needs a specific interest and relevance message')
 })
 
-test('new companies receive a full named landing, safe HTML and metadata without a new build', async () => {
+test('company copy retains the original sculpture, motion and every later chapter', () => {
+  assert.strictEqual(withLandingOpening(),CHAPTERS)
+  const opening=recruiterOpening({slug:'bcg',name:'Boston Consulting Group'})
+  const chapters=withLandingOpening(opening)
+  assert.equal(chapters.length,CHAPTERS.length)
+  const {lines:_,category:__,href:___,linkLabel:____,article:_____,...original}=CHAPTERS[0]
+  const {lines,category,href,linkLabel,article,...tailored}=chapters[0]
+  assert.deepEqual(tailored,original)
+  for(let index=1;index<CHAPTERS.length;index++)assert.strictEqual(chapters[index],CHAPTERS[index])
+  assert.deepEqual(headingRows(chapters[0]).map(({scale,leading})=>({scale,leading})),headingRows(CHAPTERS[0]).map(({scale,leading})=>({scale,leading})))
+  assert.deepEqual(headingRows(chapters[0]).map(row=>row.text),opening.lines)
+  assert.equal(category,opening.category)
+  assert.equal(href,'/resume')
+  assert.equal(linkLabel,'Résumé')
+  assert.equal(article?.href,'/')
+})
+
+test('future companies get a safe opening while preserving standard homepage content', async () => {
   let registry=emptyRegistry()
-  const template='<html><head><title>Home</title></head><body><div id="root"><!--public-page:start-->Generic<!--public-page:end--></div></body></html>'
-  const handler=createOutreachHomeHandler(async()=>registry,async missing=>missing?'Missing':template)
+  const handler=createOutreachHomeHandler(async()=>registry,async missing=>missing?'Missing':homepage)
   const name='New & Future <Team> $& Co.'
   registry=reconcileCompanies(registry,[row(name)],reservedOutreachSlugs()).registry
   const slug=Object.keys(registry.companies)[0]
@@ -179,12 +200,15 @@ test('new companies receive a full named landing, safe HTML and metadata without
   const html=await response.text()
   assert(html.includes('New &amp; Future &lt;Team&gt; $&amp; Co.'))
   assert(!html.includes('<Team>'))
-  assert(!html.includes('Generic'))
-  assert.equal((html.match(/recruiter-work-entry/g)||[]).length,3)
+  assert(!html.includes('Generic opening'))
+  assert(html.includes('Original profile, work and writing'))
+  assert(html.includes('<header>Standard navigation</header>'))
+  assert(html.includes('<footer>Standard footer</footer>'))
   assert.throws(()=>outreachDocument('<html><head></head><body>wrong template</body></html>',slug,name))
-  assert.throws(()=>outreachDocument(template,'google','private@example.com'))
+  assert.throws(()=>outreachDocument(homepage,'google','private@example.com'))
+  assert.throws(()=>outreachDocument(homepage.replace('<main>','<article>'),'google','Google'))
   const metadata=recruiterMetadata({slug:'bcg',name:'Boston Consulting Group'})
-  assert.equal(metadata.title,'For Boston Consulting Group — Sulayman Bowles')
+  assert.equal(metadata.title,'Boston Consulting Group — Sulayman Bowles')
   assert.equal(metadata.robots,'noindex, follow')
   assert.equal(recruiterMetadata({slug:'bcg',name:'Boston Consulting Group'},'resume').robots,'noindex, follow')
   assert.equal(metadata.schema,null)

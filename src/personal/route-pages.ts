@@ -3,7 +3,7 @@ import type { OutreachCompanyContext } from './outreach-context'
 
 // Intent warmup, the shell and the mounted page share exactly one module request.
 export const homePage = deferredPage<{ dark: boolean; onLandingActiveChange: (active: boolean) => void }>(() => import('./HomePage'))
-export const recruiterPage = deferredPage<{ company: OutreachCompanyContext }>(() => import('./recruiter/RecruiterLandingPage'))
+export const recruiterPage = deferredPage<{ company: OutreachCompanyContext; dark: boolean; onLandingActiveChange: (active: boolean) => void }>(() => import('./recruiter/RecruiterLandingPage'))
 export const workPage = deferredPage<{ dark: boolean }>(() => import('./WorkCollection').then(module => ({ default: module.WorkPage })))
 export const writingPage = deferredPage(() => import('./editorial/WritingIndex'))
 export const topicPage = deferredPage<{ slug: string }>(() => import('./editorial/TopicPage'))
