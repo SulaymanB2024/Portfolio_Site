@@ -9,6 +9,7 @@ import { prepareRouteResources } from './personal/route-preparation'
 import { prepareRoutePage } from './personal/route-pages'
 import { prepareArticleArrival } from './personal/editorial/article-arrival'
 import { resolveRoute } from './personal/editorial/routes'
+import { documentOutreachCompany } from './personal/outreach-context'
 import catalog from './personal/editorial/data/catalog.json'
 import type { ArticleSummary } from './personal/editorial/types'
 const root = document.getElementById('root')
@@ -21,7 +22,7 @@ if (import.meta.env.DEV && new URLSearchParams(location.search).has('fluidity-pr
 // Prepare only the requested destination before mounting the shell. Its CSS and
 // manuscript arrive together, so a deep link cannot flash a footer or empty reader.
 // Failed resources still reach the route boundary or the article's retry UI.
-const initialPath = () => resolveRoute(location.hash, location.pathname, catalog as ArticleSummary[])
+const initialPath = () => resolveRoute(location.hash, location.pathname, catalog as ArticleSummary[], documentOutreachCompany(document, location.pathname)?.slug)
 let initialRoute: string
 do {
   initialRoute = initialPath()

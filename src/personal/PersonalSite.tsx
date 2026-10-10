@@ -6,7 +6,7 @@ import { contact, projects, type ArtKind } from './content'
 import { siteCopy, withWritingCopy } from './site-copy'
 import { updateSearchHead } from './search-head'
 import { recordPersonalPageView } from './analytics'
-import { documentOutreachSlug } from './outreach-context'
+import { documentOutreachCompany } from './outreach-context'
 import catalog from './editorial/data/catalog.json'
 import { resolveRoute } from './editorial/routes'
 import { findCaseStudy } from './projects/case-studies'
@@ -15,7 +15,7 @@ import { ArtworkMotionProvider } from './editorial/ArtworkMotion'
 import { prepareArticleArrival } from './editorial/article-arrival'
 import { articleSection } from './editorial/library'
 import { jumpToArticleSection } from './editorial/reader-jump'
-import { homePage, workPage, writingPage, topicPage, articlePage, projectPage, resumePage, caseStudyPage, aboutPage, contactPage, prepareRoutePage } from './route-pages'
+import { homePage, recruiterPage, workPage, writingPage, topicPage, articlePage, projectPage, resumePage, caseStudyPage, aboutPage, contactPage, prepareRoutePage } from './route-pages'
 import { findReadingTopic } from './editorial/topics'
 import { artworkTransitionName, galleryArticleJourney, startArtworkTransition, type ArtworkTransition } from './editorial/artwork-continuity'
 import { getArticleGenerativeArtwork } from './editorial/generative/manifest'
@@ -34,8 +34,10 @@ import './editorial/editorial.css'
 import './mobile-polish.css'
 import './header-refinement.css'
 import './visual-restraint.css'
+import './recruiter/recruiter-landing.css'
 
 const Home = homePage.Page
+const RecruiterLandingPage = recruiterPage.Page
 const WorkPage = workPage.Page
 const WritingIndex = writingPage.Page
 const TopicPage = topicPage.Page
@@ -47,7 +49,7 @@ const AboutPage = aboutPage.Page
 const Contact = contactPage.Page
 const articles = (catalog as ArticleSummary[]).map(withWritingCopy)
 const navItems = [['About', 'about'], ['Writing', 'writing'], ['Work', 'work'], ['Résumé', 'resume'], ['Contact', 'contact']]
-const path = () => resolveRoute(location.hash, location.pathname, articles, documentOutreachSlug(document, location.pathname))
+const path = () => resolveRoute(location.hash, location.pathname, articles, documentOutreachCompany(document, location.pathname)?.slug)
 
 function useRoute() {
   const [route, setRoute] = useState(path)
@@ -147,6 +149,7 @@ export default function PersonalSite() {
 
 function SitePages() {
   const { route, pending } = useRoute()
+  const company = documentOutreachCompany(document, location.pathname)
   const { dark, setDark } = useAppearance()
   const [menuOpen, setMenuOpen] = useState(false)
   const [landingActive, setLandingActive] = useState(true)
@@ -191,9 +194,10 @@ function SitePages() {
   if (import.meta.env.DEV && art && ['helmet', 'crystal', 'ribbon', 'globe', 'cross'].includes(art)) {
     return <div className="art-export" data-appearance={dark ? 'dark' : 'light'}><Art kind={art} dark={dark} /><button className="export-theme" onClick={() => setDark(!dark)}>Change backdrop</button></div>
   }
+  const isRecruiter = route === 'recruiter' && Boolean(company)
   const isHome = route === '' || route === 'home'
   const compactNav = isHome && landingActive
-  return <div className={`personal-site ${project ? 'project-site' : ''} ${isHome ? 'home-site' : ''}`} data-appearance={isDark ? 'dark' : 'light'} data-section={section} data-landing-active={isHome ? String(landingActive) : undefined}>
+  return <div className={`personal-site ${project ? 'project-site' : ''} ${isHome ? 'home-site' : ''} ${isRecruiter ? 'recruiter-site' : ''}`} data-appearance={isDark ? 'dark' : 'light'} data-section={section} data-landing-active={isHome ? String(landingActive) : undefined}>
     {isHome && <div className="page-wash" aria-hidden="true" />}
     <a className="skip-link" href="#main-content" onClick={e => { e.preventDefault(); document.getElementById('main-content')?.focus() }}>Skip to content</a>
     <header className="personal-header" data-nav-compact={compactNav}>
@@ -207,9 +211,9 @@ function SitePages() {
     </header>
     {pending && <p className="route-opening mono" role="status">Opening the page…</p>}
     <main ref={main} id="main-content" tabIndex={-1} key={route} aria-busy={pending || undefined}>
-      <RouteBoundary homeRoute={isHome} onError={() => setLandingActive(false)}><Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} dark={isDark} /> : article ? <ArticlePage slug={article.slug} /> : topic ? <TopicPage slug={topic.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} onLandingActiveChange={setLandingActive} /> : <NotFound />}</Suspense></RouteBoundary>
+      <RouteBoundary homeRoute={isHome || isRecruiter} onError={() => setLandingActive(false)}><Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{isRecruiter && company ? <RecruiterLandingPage company={company} /> : project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} dark={isDark} /> : article ? <ArticlePage slug={article.slug} /> : topic ? <TopicPage slug={topic.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} onLandingActiveChange={setLandingActive} /> : <NotFound />}</Suspense></RouteBoundary>
     </main>
-    {route !== 'about' && route !== 'resume' && <Footer route={route} closing={!article && route !== 'contact' && route !== 'resume'} />}
+    {route !== 'about' && route !== 'resume' && <Footer route={isRecruiter ? '' : route} closing={!isRecruiter && !article && route !== 'contact' && route !== 'resume'} />}
   </div>
 }
 

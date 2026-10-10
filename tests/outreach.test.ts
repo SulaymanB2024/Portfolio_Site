@@ -6,7 +6,11 @@ import { companySlug, emptyRegistry, parseRegistry, reconcileCompanies, validate
 import { reservedOutreachSlugs } from '../lib/outreach/reserved.ts'
 import { createSyncHandler, outreachSpreadsheetId, validSyncSignature } from '../lib/outreach/sync.ts'
 import { createOutreachHomeHandler, outreachDocument } from '../lib/outreach/home.ts'
-import { approvedOutreachSlug } from '../src/personal/outreach-context.ts'
+import { approvedOutreachSlug, documentOutreachCompany } from '../src/personal/outreach-context.ts'
+import { recruiterCompanyProfiles } from '../src/personal/recruiter/company-profiles.ts'
+import { recruiterMetadata, renderRecruiterLanding } from '../src/personal/recruiter/landing.ts'
+import { escapeMetadata } from '../src/personal/search-metadata.ts'
+import { publicPages } from '../src/personal/public-pages.ts'
 import { resolveRoute } from '../src/personal/editorial/routes.ts'
 import { createPersonalAnalytics, type AnalyticsWindow } from '../src/personal/analytics.ts'
 
@@ -91,7 +95,7 @@ test('failed writes retain the previous registry; an automatic retry allocates t
 
 test('runtime registry activates new company documents without changing the application build', async () => {
   let registry = emptyRegistry()
-  const homepage = '<html><head><link rel="canonical" href="https://sulayman-bowles.dev/"></head><body>Home</body></html>'
+  const homepage = '<html><head><title>Home</title><link rel="canonical" href="https://sulayman-bowles.dev/"></head><body><div id="root"><!--public-page:start--><div class="static-site">Generic Home</div><!--public-page:end--></div></body></html>'
   const handler = createOutreachHomeHandler(async () => registry, async missing => missing ? '<html>Page not found</html>' : homepage)
   const request = () => new Request('https://sulayman-bowles.dev/base-power')
   assert.equal((await handler(request())).status, 404)
@@ -100,7 +104,13 @@ test('runtime registry activates new company documents without changing the appl
   assert.equal(response.status, 200)
   assert.equal(response.headers.get('X-Robots-Tag'), 'noindex, follow')
   assert(!response.headers.has('Location'))
-  assert.equal(await response.text(), outreachDocument(homepage, 'base-power'))
+  const html = await response.text()
+  assert.equal(html, outreachDocument(homepage, 'base-power', 'Base Power Company'))
+  assert(html.includes('For the team at <strong>Base Power Company</strong>'))
+  assert(html.includes('data-recruiter-company="base-power"'))
+  assert(!html.includes('Generic Home'))
+  assert(html.includes('<title>For Base Power Company — Sulayman Bowles</title>'))
+  assert(html.includes('name="robots" content="noindex, follow"'))
   assert.equal((await handler(new Request('https://example.test/not-a-company'))).status, 404)
   assert.equal((await handler(new Request('https://example.test/base-power', {method:'HEAD'}))).status, 200)
   assert.equal((await handler(new Request('https://example.test/api/outreach-home?slug=base-power'))).status, 404)
@@ -108,13 +118,76 @@ test('runtime registry activates new company documents without changing the appl
   assert.equal((await handler(new Request('https://example.test/base-power?slug=unknown&slug=base-power'))).status, 200)
 })
 
-test('only matching approved metadata resolves to Home; hash navigation keeps precedence', () => {
+test('company landing survives Home navigation and deep hashes while root and unknown paths retain their routes', () => {
   assert.equal(approvedOutreachSlug('base-power', '/base-power'), 'base-power')
   assert.equal(approvedOutreachSlug('base-power', '/unknown'), undefined)
   assert.equal(approvedOutreachSlug('person@example.com', '/person@example.com'), undefined)
-  assert.equal(resolveRoute('', '/base-power', [], 'base-power'), '')
+  assert.equal(resolveRoute('', '/base-power', [], 'base-power'), 'recruiter')
+  assert.equal(resolveRoute('#/', '/base-power', [], 'base-power'), 'recruiter')
+  assert.equal(resolveRoute('#/home', '/base-power', [], 'base-power'), 'recruiter')
   assert.equal(resolveRoute('#/work', '/base-power', [], 'base-power'), 'work')
+  assert.equal(resolveRoute('#/resume', '/base-power', [], 'base-power'), 'resume')
+  assert.equal(resolveRoute('#/work/atlas', '/base-power', [], 'base-power'), 'work/atlas')
+  assert.equal(resolveRoute('', '/', []), '')
+  assert.equal(resolveRoute('#/home', '/', []), 'home')
   assert.equal(resolveRoute('', '/unknown', []), 'unknown')
+})
+
+test('public company context needs a name and exact arrival path; query parameters never approve a company', () => {
+  const document = (slug: string, name?: string) => ({ querySelector: (selector: string) => ({ content: selector.includes('company-name') ? name : slug }) }) as unknown as Document
+  assert.deepEqual(documentOutreachCompany(document('bcg', 'Boston Consulting Group'), '/bcg'), {slug:'bcg',name:'Boston Consulting Group'})
+  assert.equal(documentOutreachCompany(document('bcg', 'Boston Consulting Group'), '/unknown'), undefined)
+  assert.equal(documentOutreachCompany(document('bcg'), '/bcg'), undefined)
+  assert.equal(documentOutreachCompany(document('bcg', 'private@example.com'), '/bcg'), undefined)
+})
+
+test('every registered company has a complete tailored landing with public destinations and reviewed experience', () => {
+  const companies = JSON.parse(readFileSync(new URL('../tools/outreach/recruiter-companies.json',import.meta.url),'utf8')) as {slug:string;name:string}[]
+  const headlines = new Set<string>(), introductions = new Set<string>()
+  assert.equal(companies.length,80)
+  assert.equal(Object.keys(recruiterCompanyProfiles).length,80)
+  for (const company of companies) {
+    const profile = recruiterCompanyProfiles[company.slug]
+    assert(profile, `${company.slug}: missing curated profile`)
+    headlines.add(profile.headline.join(' ')); introductions.add(profile.introduction)
+    const html = renderRecruiterLanding(company,'document')
+    assert(html.includes(escapeMetadata(company.name)), `${company.slug}: missing company`)
+    assert.equal((html.match(/<h1\b/g)||[]).length,1)
+    assert.equal((html.match(/class="recruiter-work-entry"/g)||[]).length,3)
+    assert.equal((html.match(/class="recruiter-experience-entry"/g)||[]).length,3)
+    assert.equal((html.match(/class="recruiter-reading-entry"/g)||[]).length,2)
+    for (const match of html.matchAll(/href="(\/[^"?#]*)"/g)) {
+      const route = match[1]
+      assert(route === '/' || publicPages.some(page => page.path === route), `${company.slug}: unknown destination ${route}`)
+    }
+  }
+  assert.equal(introductions.size,80, 'Each company needs its own introduction')
+  assert(headlines.size > 50, 'Companies must differ beyond their names')
+  assert.notDeepEqual(recruiterCompanyProfiles.google.work, recruiterCompanyProfiles['base-power'].work)
+  assert.notDeepEqual(recruiterCompanyProfiles.google.reading, recruiterCompanyProfiles.bcg.reading)
+})
+
+test('new companies receive a full named landing, safe HTML and metadata without a new build', async () => {
+  let registry=emptyRegistry()
+  const template='<html><head><title>Home</title></head><body><div id="root"><!--public-page:start-->Generic<!--public-page:end--></div></body></html>'
+  const handler=createOutreachHomeHandler(async()=>registry,async missing=>missing?'Missing':template)
+  const name='New & Future <Team> $& Co.'
+  registry=reconcileCompanies(registry,[row(name)],reservedOutreachSlugs()).registry
+  const slug=Object.keys(registry.companies)[0]
+  const response=await handler(new Request(`https://sulayman-bowles.dev/${slug}`))
+  assert.equal(response.status,200)
+  const html=await response.text()
+  assert(html.includes('New &amp; Future &lt;Team&gt; $&amp; Co.'))
+  assert(!html.includes('<Team>'))
+  assert(!html.includes('Generic'))
+  assert.equal((html.match(/recruiter-work-entry/g)||[]).length,3)
+  assert.throws(()=>outreachDocument('<html><head></head><body>wrong template</body></html>',slug,name))
+  assert.throws(()=>outreachDocument(template,'google','private@example.com'))
+  const metadata=recruiterMetadata({slug:'bcg',name:'Boston Consulting Group'})
+  assert.equal(metadata.title,'For Boston Consulting Group — Sulayman Bowles')
+  assert.equal(metadata.robots,'noindex, follow')
+  assert.equal(recruiterMetadata({slug:'bcg',name:'Boston Consulting Group'},'resume').robots,'noindex, follow')
+  assert.equal(metadata.schema,null)
 })
 
 test('outreach arrival is counted once alongside canonical A→B→A views; preview and arbitrary slugs collect nothing', () => {
