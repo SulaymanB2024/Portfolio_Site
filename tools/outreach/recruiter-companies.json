@@ -1,0 +1,322 @@
+[
+  {
+    "slug": "google",
+    "name": "Google"
+  },
+  {
+    "slug": "microsoft",
+    "name": "Microsoft"
+  },
+  {
+    "slug": "meta",
+    "name": "Meta"
+  },
+  {
+    "slug": "amazon",
+    "name": "Amazon"
+  },
+  {
+    "slug": "adobe",
+    "name": "Adobe"
+  },
+  {
+    "slug": "salesforce",
+    "name": "Salesforce"
+  },
+  {
+    "slug": "servicenow",
+    "name": "ServiceNow"
+  },
+  {
+    "slug": "intuit",
+    "name": "Intuit"
+  },
+  {
+    "slug": "atlassian",
+    "name": "Atlassian"
+  },
+  {
+    "slug": "figma",
+    "name": "Figma"
+  },
+  {
+    "slug": "notion",
+    "name": "Notion"
+  },
+  {
+    "slug": "databricks",
+    "name": "Databricks"
+  },
+  {
+    "slug": "datadog",
+    "name": "Datadog"
+  },
+  {
+    "slug": "cloudflare",
+    "name": "Cloudflare"
+  },
+  {
+    "slug": "duolingo",
+    "name": "Duolingo"
+  },
+  {
+    "slug": "roblox",
+    "name": "Roblox"
+  },
+  {
+    "slug": "harvey",
+    "name": "Harvey"
+  },
+  {
+    "slug": "together-ai",
+    "name": "Together AI"
+  },
+  {
+    "slug": "lindy",
+    "name": "Lindy"
+  },
+  {
+    "slug": "gumloop",
+    "name": "Gumloop"
+  },
+  {
+    "slug": "rippling",
+    "name": "Rippling"
+  },
+  {
+    "slug": "stripe",
+    "name": "Stripe"
+  },
+  {
+    "slug": "ramp",
+    "name": "Ramp"
+  },
+  {
+    "slug": "coinbase",
+    "name": "Coinbase"
+  },
+  {
+    "slug": "robinhood",
+    "name": "Robinhood"
+  },
+  {
+    "slug": "base-power",
+    "name": "Base Power Company"
+  },
+  {
+    "slug": "anduril",
+    "name": "Anduril Industries"
+  },
+  {
+    "slug": "tesla",
+    "name": "Tesla"
+  },
+  {
+    "slug": "waymo",
+    "name": "Waymo"
+  },
+  {
+    "slug": "skydio",
+    "name": "Skydio"
+  },
+  {
+    "slug": "zipline",
+    "name": "Zipline"
+  },
+  {
+    "slug": "ge-vernova",
+    "name": "GE Vernova"
+  },
+  {
+    "slug": "texas-instruments",
+    "name": "Texas Instruments"
+  },
+  {
+    "slug": "amd",
+    "name": "AMD"
+  },
+  {
+    "slug": "vertiv",
+    "name": "Vertiv"
+  },
+  {
+    "slug": "goldman-sachs",
+    "name": "Goldman Sachs"
+  },
+  {
+    "slug": "jpmorgan",
+    "name": "JPMorganChase"
+  },
+  {
+    "slug": "capital-one",
+    "name": "Capital One"
+  },
+  {
+    "slug": "blackrock",
+    "name": "BlackRock"
+  },
+  {
+    "slug": "blackstone",
+    "name": "Blackstone"
+  },
+  {
+    "slug": "kkr",
+    "name": "KKR"
+  },
+  {
+    "slug": "apollo",
+    "name": "Apollo"
+  },
+  {
+    "slug": "jane-street",
+    "name": "Jane Street"
+  },
+  {
+    "slug": "citadel-securities",
+    "name": "Citadel Securities"
+  },
+  {
+    "slug": "d-e-shaw",
+    "name": "D. E. Shaw"
+  },
+  {
+    "slug": "bridgewater-associates",
+    "name": "Bridgewater Associates"
+  },
+  {
+    "slug": "vanguard",
+    "name": "Vanguard"
+  },
+  {
+    "slug": "mckinsey",
+    "name": "McKinsey & Company"
+  },
+  {
+    "slug": "bain",
+    "name": "Bain & Company"
+  },
+  {
+    "slug": "k1-investment-management",
+    "name": "K1 Investment Management"
+  },
+  {
+    "slug": "hq-capital",
+    "name": "HQ Capital"
+  },
+  {
+    "slug": "riveron",
+    "name": "Riveron"
+  },
+  {
+    "slug": "pzena-investment-management",
+    "name": "Pzena Investment Management"
+  },
+  {
+    "slug": "massmutual",
+    "name": "MassMutual"
+  },
+  {
+    "slug": "plante-moran",
+    "name": "Plante Moran"
+  },
+  {
+    "slug": "northwood-space",
+    "name": "Northwood Space"
+  },
+  {
+    "slug": "dalio-family-office",
+    "name": "Dalio Family Office"
+  },
+  {
+    "slug": "muon-space",
+    "name": "Muon Space"
+  },
+  {
+    "slug": "amca",
+    "name": "Amca"
+  },
+  {
+    "slug": "k2-space",
+    "name": "K2 Space"
+  },
+  {
+    "slug": "charles-river-associates",
+    "name": "Charles River Associates"
+  },
+  {
+    "slug": "precision-aq-precision-medicine-group",
+    "name": "Precision AQ (Precision Medicine Group)"
+  },
+  {
+    "slug": "link-logistics",
+    "name": "Link Logistics"
+  },
+  {
+    "slug": "related-companies",
+    "name": "Related Companies"
+  },
+  {
+    "slug": "alvarez-and-marsal",
+    "name": "Alvarez & Marsal"
+  },
+  {
+    "slug": "greystar",
+    "name": "Greystar"
+  },
+  {
+    "slug": "berrydunn",
+    "name": "BerryDunn"
+  },
+  {
+    "slug": "bwxt",
+    "name": "BWXT"
+  },
+  {
+    "slug": "keurig-dr-pepper",
+    "name": "Keurig Dr Pepper"
+  },
+  {
+    "slug": "moet-hennessy-usa-lvmh",
+    "name": "Moët Hennessy USA (LVMH)"
+  },
+  {
+    "slug": "bcg",
+    "name": "Boston Consulting Group"
+  },
+  {
+    "slug": "state-farm",
+    "name": "State Farm"
+  },
+  {
+    "slug": "ghj",
+    "name": "GHJ"
+  },
+  {
+    "slug": "kyndryl",
+    "name": "Kyndryl"
+  },
+  {
+    "slug": "berkeley-research-group-brg",
+    "name": "Berkeley Research Group (BRG)"
+  },
+  {
+    "slug": "js-held-ocean-tomo",
+    "name": "J.S. Held / Ocean Tomo"
+  },
+  {
+    "slug": "trumid",
+    "name": "Trumid"
+  },
+  {
+    "slug": "parametric-morgan-stanley-investment-management",
+    "name": "Parametric (Morgan Stanley Investment Management)"
+  },
+  {
+    "slug": "impulse-space",
+    "name": "Impulse Space"
+  },
+  {
+    "slug": "bpm-llp",
+    "name": "BPM LLP"
+  }
+]

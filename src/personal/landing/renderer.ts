@@ -1,8 +1,9 @@
+import { withLandingOpening, type LandingOpeningCopy } from './opening-copy.ts'
 import { createPortalMaskTarget } from './portal-mask.ts'
 import * as THREE from 'three'
 import { createPortfolioModelLoader } from '../portfolio-model-loader.ts'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
-import { CHAPTERS, sceneSequence, textSequence, advanceScrollMotion, railProgress, requiredScene, type LandingChapter, type TextSequence } from './sequence.ts'
+import { sceneSequence, textSequence, advanceScrollMotion, railProgress, requiredScene, type LandingChapter, type TextSequence } from './sequence.ts'
 import { thresholdMotion, sculpturePose, cinematicShot, portalPose, cinematicPhase, portalFrameOpacity, createScaleSampler, createApertureSampler } from './motion-curves.ts'
 import { portfolioAssetUrl } from '../portfolio-assets.ts'
 import { createDitheredText, textDitherShader, type DitheredTextUniforms } from './dithered-text.ts'
@@ -92,7 +93,8 @@ void main(){
 }`
 
 /** The approved visor Threshold study, bounded to its own scroll rail. */
-export function mountLandingSequence(elements: LandingElements): () => void {
+export function mountLandingSequence(elements: LandingElements, opening?: LandingOpeningCopy): () => void {
+  const chapters = withLandingOpening(opening)
   const { rail, stage, canvas, helmetControl, headline, loading, copyContent, title, links, project, article, category } = elements
   // An opaque context has an unpainted black buffer during setup and decoding.
   // Keep native copy on the stage paper until a complete composite is ready.
@@ -116,8 +118,8 @@ export function mountLandingSequence(elements: LandingElements): () => void {
   let menuOpen = headerNav?.classList.contains('is-open') ?? false
   let copyTop = 0, safeBottom = 0
   let lastCategory = '', lastLinks = '', lastUsable: boolean | null = null
-  const turns: HelmetTurn[] = CHAPTERS.map(() => ({ yaw: 0, pitch: 0 }))
-  const targetTurns: HelmetTurn[] = CHAPTERS.map(() => ({ yaw: 0, pitch: 0 }))
+  const turns: HelmetTurn[] = chapters.map(() => ({ yaw: 0, pitch: 0 }))
+  const targetTurns: HelmetTurn[] = chapters.map(() => ({ yaw: 0, pitch: 0 }))
   let interactionIndex = 0, revealStarted: number | undefined
   let keyboardFocus = false, suppressClick = false
   let pointer: { id: number; index: number; x: number; y: number; width: number; start: HelmetTurn; touch: boolean; gesture: HelmetGesture } | null = null
@@ -208,7 +210,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
   const headingMeasure = document.createElement('canvas').getContext('2d')
   function staticCopy() {
     if (disposed || !stage.isConnected) return
-    const index = textSequence(targetProgress, 'threshold', true).active, chapter = CHAPTERS[index]
+    const index = textSequence(targetProgress, 'threshold', true).active, chapter = chapters[index]
     const style = getComputedStyle(headline)
     const fontSize = parseFloat(style.fontSize), tracking = parseFloat(style.letterSpacing) || 0
     const layout = layoutHeading(chapter, fontSize, headline.getBoundingClientRect().width, row => {
@@ -323,7 +325,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     let portal: Portal | null = null
     const textUniforms: DitheredTextUniforms = {
       textEnabled: { value: 0 }, textAtlas: { value: null }, textBox: { value: new THREE.Vector4() },
-      textState: { value: CHAPTERS.map(() => new THREE.Vector2()) }, textMeasure: { value: CHAPTERS.map(() => new THREE.Vector2()) },
+      textState: { value: chapters.map(() => new THREE.Vector2()) }, textMeasure: { value: chapters.map(() => new THREE.Vector2()) },
       textPixels: { value: new THREE.Vector2() }, textGrid: { value: 1 },
       scrollInk: { value: 0 }, scrollPhase: { value: 0 }, scrollPassage: { value: 0 }, scrollSweep: { value: 0 },
     }
@@ -338,7 +340,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     const screenMaterial = manage(new THREE.ShaderMaterial({ depthTest: false, depthWrite: false, uniforms: screenUniforms, vertexShader: 'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}', fragmentShader: screenFragmentShader }))
     const screenGeometry = manage(new THREE.PlaneGeometry(2, 2))
     screenScene.add(new THREE.Mesh(screenGeometry, screenMaterial))
-    const printed = manage(createDitheredText({ headline, stage, uniforms: textUniforms, pixelRatio: () => renderer.getPixelRatio(), onChapter: showChapter, isAlive: alive }))
+    const printed = manage(createDitheredText({ chapters, headline, stage, uniforms: textUniforms, pixelRatio: () => renderer.getPixelRatio(), onChapter: showChapter, isAlive: alive }))
     // Abort unfinished downloads on departure and let an active decode settle
     // before terminating its worker. A late response must not restart Draco.
     const loader = manage(createPortfolioModelLoader())
@@ -427,9 +429,9 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     function load(index: number): Promise<void> {
       const pending = inFlight.get(index)
       if (pending) return pending
-      const promise = asset(CHAPTERS[index]).then(async () => {
+      const promise = asset(chapters[index]).then(async () => {
         if (!alive()) return
-        const object = actor(CHAPTERS[index], index)
+        const object = actor(chapters[index], index)
         for (const resource of objectResources(object)) if (resource instanceof THREE.Texture) renderer.initTexture(resource)
         await compileTo(object, camera, scene, targetA)
         if (!alive()) return
@@ -470,7 +472,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
     function prefetch() {
       const { local } = sceneSequence(progress), travel = thresholdMotion(local).travel
       if (!reduced.matches && travel !== 0 && travel !== 1) return
-      const index = Math.min(textSequence(targetProgress, 'threshold', true).active + 1, CHAPTERS.length - 1)
+      const index = Math.min(textSequence(targetProgress, 'threshold', true).active + 1, chapters.length - 1)
       if (index === prefetchIndex) return
       prefetchIndex = index
       // Prepare one adjacent chapter, without decoding the entire collection at the opening.
@@ -494,7 +496,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       const categoryAlpha = reduced.matches ? 1 : incoming ? motion.incomingCategory : motion.outgoingCategory
       const linksAlpha = reduced.matches ? 1 : incoming ? motion.incomingLinks : motion.outgoingLinks
       const readable = state.reveal > .999 && state.erase < .001
-      const usable = readable && linksAlpha > .98, titleUsable = usable && CHAPTERS[sequence.active].id !== 'helmet'
+      const usable = readable && linksAlpha > .98, titleUsable = usable && chapters[sequence.active].id !== 'helmet'
       const categoryValue = categoryAlpha.toFixed(3), linkValue = linksAlpha.toFixed(3)
       if (categoryValue !== lastCategory) { category.style.opacity = categoryValue; lastCategory = categoryValue }
       if (linkValue !== lastLinks) { links.style.opacity = linkValue; links.style.transform = `translateY(${((1 - linksAlpha) * 3).toFixed(2)}px)`; lastLinks = linkValue }
@@ -567,7 +569,7 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       const pose = sculpturePose(local, incoming, index, mobile), rotation = rotations[index], art = LANDING_ART[index]
       const bounds = actorBounds.get(object)!
       if (mobile) {
-        const chapter = CHAPTERS[index]
+        const chapter = chapters[index]
         const frame = mobileSculptureFrame(width, height, copyTop, printed.blockHeight(chapter), 1, chapter.id !== 'helmet' && chapter.article ? 2 : 1, bounds.size, safeBottom)
         object.position.set(frame.x - bounds.center.x * frame.scale + pose.x, frame.y - bounds.center.y * frame.scale + pose.y, -bounds.center.z * frame.scale)
         object.scale.setScalar(frame.scale * pose.scale)
@@ -610,11 +612,11 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       const object = actors[index], bounds = object && actorBounds.get(object)
       if (!bounds) { hideHelmetControl(); return }
       if (index !== interactionIndex) { hideHelmetControl(true); interactionIndex = index }
-      helmetControl.setAttribute('aria-label', index === 0 ? 'Rotate helmet' : `Rotate ${CHAPTERS[index].label} sculpture`)
-      helmetControl.dataset.chapter = CHAPTERS[index].id
+      helmetControl.setAttribute('aria-label', index === 0 ? 'Rotate helmet' : `Rotate ${chapters[index].label} sculpture`)
+      helmetControl.dataset.chapter = chapters[index].id
       let left: number, top: number, right: number, bottom: number
       if (mobile) {
-        const chapter = CHAPTERS[index]
+        const chapter = chapters[index]
         const fit = mobileSculptureFrame(width, height, copyTop, printed.blockHeight(chapter), 1, chapter.id !== 'helmet' && chapter.article ? 2 : 1, bounds.size, safeBottom)
         left = width * .02; right = width * .98; top = fit.top; bottom = fit.bottom
       } else {
@@ -669,13 +671,13 @@ export function mountLandingSequence(elements: LandingElements): () => void {
       canvas.dataset.openingSeconds = openingRuntime.seconds.toFixed(4)
       const visibleIndexes = requiredScene(reduced.matches ? targetProgress : progress, reduced.matches).indexes
       const animated = sculptureAnimationActive(reduced.matches, visible, menuOpen, !!pointer, keyboardFocus, stage.dataset.motionPlaying !== 'false')
-      stage.dataset.animatedActors = animated ? visibleIndexes.map(index => CHAPTERS[index].id).join(',') : ''
+      stage.dataset.animatedActors = animated ? visibleIndexes.map(index => chapters[index].id).join(',') : ''
       canvas.dataset.openingMotion = reduced.matches ? 'reduced' : !visibleIndexes.includes(0) ? 'inactive' : animated ? 'playing' : 'paused'
       canvas.dataset.helmetYaw = turns[0].yaw.toFixed(4)
       canvas.dataset.helmetPitch = turns[0].pitch.toFixed(4)
       canvas.dataset.helmetDither = 'engraved-live'
       interactionRegion(mobile)
-      canvas.dataset.activeAsset = assetSources.get(CHAPTERS[interactionIndex].id)!
+      canvas.dataset.activeAsset = assetSources.get(chapters[interactionIndex].id)!
       canvas.dataset.sculptureYaw = turns[interactionIndex].yaw.toFixed(4)
       canvas.dataset.sculpturePitch = turns[interactionIndex].pitch.toFixed(4)
       canvas.dataset.mechanicalParts = String((parts.get(actors[interactionIndex]!) ?? []).filter(part => part.motion).length)

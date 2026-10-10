@@ -1,11 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { Fragment, useEffect, useRef } from 'react'
 import { projects } from './content'
 import { portfolioAssetUrl } from './portfolio-assets'
 import { DestinationLink, LinkArrow } from './DestinationLink'
+import type { LandingOpeningCopy } from './landing/opening-copy'
 import './landing/landing.css'
 import './landing/opening-motion.css'
 
-export default function LandingSequence({ onActiveChange }: { onActiveChange: (active: boolean) => void }) {
+export default function LandingSequence({ onActiveChange, opening }: { onActiveChange: (active: boolean) => void; opening?: LandingOpeningCopy }) {
   const rail = useRef<HTMLElement>(null)
   const stage = useRef<HTMLDivElement>(null)
   const canvas = useRef<HTMLCanvasElement>(null)
@@ -46,7 +47,7 @@ export default function LandingSequence({ onActiveChange }: { onActiveChange: (a
     let dispose: (() => void) | undefined
     void import('./landing/renderer').then(({ mountLandingSequence }) => {
       if (!mounted || !rail.current || !stage.current || !canvas.current || !helmetControl.current || !headline.current || !loading.current || !copyContent.current || !title.current || !links.current || !project.current || !article.current || !category.current) return
-      dispose = mountLandingSequence({ rail: rail.current, stage: stage.current, canvas: canvas.current, helmetControl: helmetControl.current, headline: headline.current, loading: loading.current, copyContent: copyContent.current, title: title.current, links: links.current, project: project.current, article: article.current, category: category.current })
+      dispose = mountLandingSequence({ rail: rail.current, stage: stage.current, canvas: canvas.current, helmetControl: helmetControl.current, headline: headline.current, loading: loading.current, copyContent: copyContent.current, title: title.current, links: links.current, project: project.current, article: article.current, category: category.current }, opening)
     }).catch(() => {
       if (!mounted) return
       if (canvas.current) canvas.current.dataset.state = 'error'
@@ -54,18 +55,18 @@ export default function LandingSequence({ onActiveChange }: { onActiveChange: (a
       if (loading.current) { loading.current.textContent = 'Explore the projects below.'; loading.current.hidden = false }
     })
     return () => { mounted = false; dispose?.() }
-  }, [])
+  }, [opening])
 
   return <section ref={rail} className="landing-rail" aria-label="Selected work scroll sequence">
     <link rel="preload" as="fetch" href={portfolioAssetUrl('helmet')} crossOrigin="anonymous" />
     <div ref={stage} className="landing-stage">
       <canvas ref={canvas} className="landing-canvas" aria-hidden="true" hidden />
       <div className="landing-copy"><div ref={copyContent} className="landing-copy-content">
-        <span ref={category} className="landing-category" />
-        <a ref={title} className="landing-title-target" tabIndex={-1}><h1 ref={headline} id="landing-title"><span className="landing-title-line" data-quiet>The</span>{' '}<span className="landing-title-line">frontier</span>{' '}<span className="landing-title-line" data-quiet>is all that</span>{' '}<span className="landing-title-line">matters.</span></h1></a>
+        <span ref={category} className="landing-category">{opening?.category}</span>
+        <a ref={title} className="landing-title-target" tabIndex={-1}><h1 ref={headline} id="landing-title">{opening ? opening.lines.map((line, index) => <Fragment key={index}><span className="landing-title-line" data-quiet={index % 2 === 0 ? '' : undefined}>{line}</span>{index < 3 ? ' ' : ''}</Fragment>) : <><span className="landing-title-line" data-quiet>The</span>{' '}<span className="landing-title-line">frontier</span>{' '}<span className="landing-title-line" data-quiet>is all that</span>{' '}<span className="landing-title-line">matters.</span></>}</h1></a>
         <div ref={links} className="landing-story-links">
-          <a ref={project} className="destination-link" href="#/work"><span className="destination-link-label">Selected work</span><LinkArrow /></a>
-          <a ref={article} className="destination-link" href="#/about"><span className="destination-link-label">About me</span><LinkArrow /></a>
+          <a ref={project} className="destination-link" href={opening?.href || '#/work'}><span className="destination-link-label">{opening?.linkLabel || 'Selected work'}</span><LinkArrow /></a>
+          <a ref={article} className="destination-link" href={opening?.article.href || '#/about'}><span className="destination-link-label">{opening?.article.label || 'About me'}</span><LinkArrow /></a>
         </div>
       </div></div>
       <button ref={helmetControl} type="button" className="landing-helmet-control" aria-label="Rotate helmet" aria-describedby="sculpture-instructions" hidden>

@@ -1,10 +1,16 @@
-import { outreachMetaName, outreachSlugPattern } from '../../src/personal/outreach-context.ts'
+import { outreachMetaName, outreachNameMeta, outreachSlugPattern, validOutreachCompanyName } from '../../src/personal/outreach-context.ts'
+import { escapeMetadata, withSearchHead } from '../../src/personal/search-metadata.ts'
+import { recruiterMetadata, renderRecruiterDocument } from '../../src/personal/recruiter/landing.ts'
 import { parseRegistry, type OutreachRegistry } from './registry.ts'
 
-export function outreachDocument(html: string, slug: string) {
+export function outreachDocument(html: string, slug: string, name: string) {
   if (!outreachSlugPattern.test(slug) || slug.length > 96) throw new Error('Invalid document context')
-  if (!html.includes('</head>')) throw new Error('Homepage template is unavailable')
-  return html.replace('</head>', `<meta name="${outreachMetaName}" content="${slug}"></head>`)
+  if (!validOutreachCompanyName(name)) throw new Error('Invalid company label')
+  if (!html.includes('</head>') || !html.includes('<!--public-page:start-->') || !html.includes('<!--public-page:end-->')) throw new Error('Homepage template is unavailable')
+  const company = { slug, name }
+  return withSearchHead(html, recruiterMetadata(company))
+    .replace(/<!--public-page:start-->([^]*?)<!--public-page:end-->/, (_, body: string) => `<!--public-page:start-->${renderRecruiterDocument(body, company)}<!--public-page:end-->`)
+    .replace('</head>', () => `<meta name="${outreachMetaName}" content="${slug}"><meta name="${outreachNameMeta}" content="${escapeMetadata(name)}"></head>`)
 }
 
 export function createOutreachHomeHandler(read: () => Promise<OutreachRegistry>, document: (notFound: boolean) => Promise<string>) {
@@ -17,7 +23,7 @@ export function createOutreachHomeHandler(read: () => Promise<OutreachRegistry>,
     try {
       const registry = parseRegistry(await read())
       const found = Object.hasOwn(registry.companies, slug)
-      const html = found ? outreachDocument(await document(false), slug) : await document(true)
+      const html = found ? outreachDocument(await document(false), slug, registry.companies[slug].name) : await document(true)
       return new Response(request.method === 'HEAD' ? null : html, { status: found ? 200 : 404, headers })
     } catch {
       console.warn('[outreach] company document is temporarily unavailable')

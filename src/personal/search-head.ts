@@ -1,7 +1,10 @@
 import { metadataTags, ownsMetadataKey, searchMetadata, serializeSchema } from './search-metadata.ts'
+import { documentOutreachCompany } from './outreach-context.ts'
+import { recruiterMetadata } from './recruiter/landing.ts'
 
 export function updateSearchHead(document: Document, route: string) {
-  const metadata = searchMetadata(route)
+  const company = documentOutreachCompany(document, document.location?.pathname || '/')
+  const metadata = company ? recruiterMetadata(company, route) : searchMetadata(route)
   document.title = metadata.title
   const wanted = metadataTags(metadata)
   // Reuse head elements and discard superseded article fields and duplicates.

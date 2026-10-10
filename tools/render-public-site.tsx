@@ -112,7 +112,7 @@ for (const page of [...publicPages, { route: '404', path: '/404', title: 'Page n
   })
   const html = withSearchHead(template, searchMetadata(page.route))
     .replace('</head>', () => `${imageHints}${fallbackStyle}${readingFallbackStyle}${page.route.startsWith('writing/') ? studyFallbackStyle : ''}</head>`)
-    .replace('<div id="root"></div>', () => `<div id="root">${body}</div>`)
+    .replace('<div id="root"></div>', () => `<div id="root"><!--public-page:start-->${body}<!--public-page:end--></div>`)
   const destination = page.path === '/' ? join(dist, 'index.html') : join(dist, page.path.slice(1), 'index.html')
   await mkdir(join(destination, '..'), { recursive: true }); await writeFile(destination, html)
   // Vercel clean URLs and its filesystem phase also resolve the .html form.
