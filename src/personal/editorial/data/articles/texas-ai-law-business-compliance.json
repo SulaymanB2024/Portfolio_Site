@@ -1,0 +1,304 @@
+{
+  "slug": "texas-ai-law-business-compliance",
+  "path": "/research/texas/texas-ai-law-business-compliance",
+  "title": "Texas’s AI Law: What a Business Should Resolve Before Deployment",
+  "displayTitle": "Texas’s AI Law: Before Deployment",
+  "seoTitle": "Texas AI Law: HB149 TRAIGA Business Compliance in 2026",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "Who must disclose AI use, how privacy obligations follow the data, and what an operator should request from a vendor.",
+  "seoDescription": "Texas HB149 and TRAIGA business requirements in 2026: private, government and healthcare duties, TDPSA privacy rules, vendor diligence and enforcement.",
+  "searchTerms": [
+    "Texas business AI law HB149 TRAIGA compliance TDPSA privacy procurement healthcare"
+  ],
+  "date": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "11 MIN",
+  "openingPresentation": "integrated",
+  "content": [
+    "Buying an AI system puts a Texas business in charge of decisions the vendor cannot make for it: which information enters the tool, what the output can influence, and who responds when it goes wrong. Texas’s AI law makes those choices more consequential, but the duties depend on the operator and the use.",
+    "The Texas Responsible Artificial Intelligence Governance Act, or TRAIGA, took effect January 1, 2026. House Bill 149 establishes prohibited uses, disclosure duties in government and healthcare, enforcement procedures, and a regulatory sandbox framework. It also changes Texas’s biometric law and a processor duty under the Texas Data Privacy and Security Act. Use the enrolled version; introduced bills and committee substitutes are historical proposals. [Enacted HB149](#source-hb149).",
+    "The useful operating question is what evidence should exist before deployment. A business should be able to describe its use, justify its data handling, and identify who can investigate and correct a problem. That is the basis for the procurement approach below."
+  ],
+  "sections": [
+    {
+      "id": "scope",
+      "title": "Start with the actual system and Texas connection",
+      "paragraphs": [
+        "TRAIGA’s definition reaches a machine-based system that infers from inputs how to generate content, decisions, predictions, or recommendations that can influence physical or virtual environments. The applicability provision covers a person promoting, advertising, or conducting business in Texas; producing a product or service used by Texas residents; or developing or deploying an AI system in Texas. Headquarters location is therefore an incomplete screening question. [Chapter 551](#source-scope).",
+        "Record the particular deployment: a support assistant, an applicant-ranking feature, a fraud detector, or a clinical tool. The law defines a developer by the system it develops and provides in Texas, and a deployer by deployment for use in Texas. A company’s role can differ between products. [Developer and deployer definitions](#source-ai-protection).",
+        "The statutory definition of consumer excludes someone acting in a commercial or employment context. That qualification matters for consumer-facing provisions; it does not turn every employee-facing deployment into an exemption from prohibitions written to apply to a person. Keep the provision’s wording attached to the use being assessed. [Scope and definitions](#source-scope)."
+      ]
+    },
+    {
+      "id": "duties-by-operator",
+      "title": "Disclosure duties change with the operator",
+      "paragraphs": [
+        "Section 552.051 requires a governmental agency offering an AI system intended to interact with consumers to disclose that interaction before or when it happens. The notice must be clear, conspicuous, in plain language, and free of dark patterns, even when the AI interaction is obvious. A hyperlink may provide the disclosure. [Disclosure requirements](#source-ai-protection).",
+        "The healthcare clause separately requires the provider to disclose AI used in relation to a service or treatment to the recipient or personal representative by the first service or treatment date. In an emergency, disclosure is required as soon as reasonably possible. A HIPAA-based TDPSA exclusion does not remove this separate duty, also identified in the Attorney General’s guidance. [Official healthcare guidance](#source-ag-ai).",
+        "These provisions do not establish a general HB149 requirement for every private company to label every chatbot. A private operator should still evaluate representations, privacy notices, sector rules, and contractual commitments. The table separates the HB149 provisions that are most easily conflated. [Enacted duties](#source-ai-protection)."
+      ],
+      "table": {
+        "caption": "Which HB149 duty attaches to which use?",
+        "columns": [
+          "Operator or use",
+          "Relevant requirement",
+          "Operating consequence"
+        ],
+        "rows": [
+          [
+            "Ordinary private business",
+            "Specified prohibited uses; applicable biometric and privacy duties",
+            "Review purpose, data, safeguards and decision authority"
+          ],
+          [
+            "Government consumer interaction",
+            "Clear AI disclosure before or at interaction",
+            "Place notice in the actual service journey"
+          ],
+          [
+            "Healthcare service or treatment",
+            "Provider disclosure by first service; emergency exception",
+            "Assign delivery and retain evidence of the notice"
+          ],
+          [
+            "Government social scoring or biometric gathering",
+            "Additional prohibitions in §§552.053–.054",
+            "Review the specific classification or identification use"
+          ]
+        ],
+        "note": "Requirements can overlap. This is a comparison of HB149 provisions, not an exemption from other applicable laws."
+      }
+    },
+    {
+      "id": "prohibited-uses",
+      "title": "Preserve the law’s intent thresholds",
+      "paragraphs": [
+        "TRAIGA prohibits development or deployment intentionally aimed at encouraging physical self-harm, harm to another person, or criminal activity. Its constitutional-rights provision uses a sole-intent threshold. The unlawful-discrimination provision requires intent to discriminate unlawfully against a protected class; disparate impact alone is insufficient to demonstrate that intent under this section. [Sections 552.052, .055 and .056](#source-ai-protection).",
+        "That last rule cannot establish that a discriminatory outcome is lawful under every other statute. The TDPSA separately prohibits covered controllers from processing personal data in violation of state and federal discrimination laws, and requires assessments for certain profiling risks, including unlawful disparate impact. The obligations answer different questions. [Privacy duties and assessments](#source-privacy).",
+        "Government social scoring and certain biometric identification or media-gathering practices have their own provisions. Section 552.057 also addresses specified illegal sexual material and systems intentionally impersonating minors in explicit text conversations. Insurance and federally insured financial institutions receive specific treatment under the discrimination section, rather than a blanket exemption from TRAIGA. Read the enacted text when classifying a use. [Specific prohibitions and sector treatment](#source-ai-protection). For the governmental-entity provisions, the Chapter 552 definition excludes hospital districts and institutions of higher education. That definition does not erase the separately worded healthcare-provider disclosure duty. [Entity definition](#source-ai-protection)."
+      ]
+    },
+    {
+      "id": "privacy-and-biometrics",
+      "title": "Privacy obligations follow the data",
+      "paragraphs": [
+        "The TDPSA generally applies to businesses with a Texas connection that process or sell personal data and are not small businesses as defined by the Small Business Administration. A small business still needs prior consumer consent to sell sensitive personal data. Entity and information exemptions include specified financial institutions, HIPAA-covered entities and business associates, nonprofits, higher education, utility entities, and employment-context data. Assess scope before assuming every AI workflow requires the same privacy program. [Sections 541.002–.003 and .107](#source-privacy).",
+        "For a covered controller, the existing work includes appropriate security, collection limits, disclosed purposes, sensitive-data consent, consumer rights, and a privacy notice. Consumers can opt out of targeted advertising, data sales, and profiling in furtherance of decisions with legal or similarly significant effects. Profiling here means solely automated processing to evaluate or predict personal aspects. [Definitions and controller duties](#source-privacy).",
+        "Data protection assessments cover targeted advertising, sales, sensitive-data processing, certain risky profiling, and other processing presenting heightened consumer harm. HB149 expressly extends a processor’s security-assistance language to personal data collected, stored, and processed by an AI system. The amendment reinforces the data-processing relationship; it does not create a universal assessment mandate for every AI purchase. [Sections 541.104–.105](#source-privacy).",
+        "Biometrics require a separate analysis. Amended §503.001 exempts specified AI development and training activities unless the system is used or deployed to uniquely identify a specific individual, and provides separate security and fraud-related exclusions. Subsequent non-exempt commercial use can trigger possession, destruction, and penalty provisions. Its public-media clause limits inferred notice and consent, with an exception for media made public by the individual. Avoid treating a training exception as unrestricted identification permission. [Biometric statute](#source-biometrics). A §503.001 violation also violates §552.054(c). [TRAIGA linkage](#source-ai-protection)."
+      ]
+    },
+    {
+      "id": "procurement",
+      "title": "Translate the requirements into a usable vendor review",
+      "paragraphs": [
+        "My procurement recommendation is to make the review specific to the deployed workflow. Request the model’s limitations, data routes, subcontractors, evaluation results, and change controls, then document the business’s own intended use and escalation process. A generic compliance assertion supplies little evidence about those facts.",
+        "Where the TDPSA controller–processor relationship applies, the contract must address instructions, purpose, data types, duration, confidentiality, deletion or return, compliance information, assessments, and subcontractor obligations. Whether a vendor is a processor or controller is a fact-based determination. Independent training uses deserve particular scrutiny when determining who chooses the purposes of processing. [Processor and contract provisions](#source-privacy).",
+        "The following allocation is a recommended operating arrangement. Its contract row reflects statutory requirements where applicable; the remaining rows help the buyer collect evidence and govern the use. They are not five universal filing obligations."
+      ],
+      "table": {
+        "caption": "Give each procurement question an owner",
+        "columns": [
+          "Question",
+          "Buyer owns",
+          "Vendor supplies"
+        ],
+        "rows": [
+          [
+            "What can this system decide?",
+            "Permitted uses and human escalation",
+            "Capabilities, limitations and tested failure modes"
+          ],
+          [
+            "Where does personal data go?",
+            "Purpose, scope and consent decisions",
+            "Retention, training use, subprocessors and security evidence"
+          ],
+          [
+            "What belongs in the contract?",
+            "Applicable instructions and assessment requirements",
+            "Binding processing terms and cooperation commitments"
+          ],
+          [
+            "How will a problem be investigated?",
+            "Complaint owner and correction process",
+            "Available logs, incident support and relevant documentation"
+          ],
+          [
+            "What changes after an upgrade?",
+            "Approval of changed uses and safeguards",
+            "Material model, feature and data-handling changes"
+          ]
+        ],
+        "note": "Retain enough information to explain the deployed version. Collecting more personal data merely to document a system can itself create risk."
+      }
+    },
+    {
+      "id": "worked-example",
+      "title": "A support assistant becomes a financing decision",
+      "paragraphs": [
+        "Consider a hypothetical Texas retailer that falls within TDPSA scope. It buys an assistant to draft answers about delivery delays. Staff approve replies; the tool receives order details, and the vendor proposes retaining conversations for its own product improvement. The first review should resolve permitted data use, access, retention, processor terms, and whether that additional purpose changes the relationship.",
+        "Three months later, a team proposes using the same assistant to recommend which customers should be offered financing. This changes the review even though the software subscription stays the same. A solely automated assessment of personal aspects could fall within profiling; profiling in furtherance of a significant financial or lending decision connects to the statutory opt-out right. Risky profiling can also require a data protection assessment. [Profiling and assessments](#source-privacy).",
+        "An operator should map exactly how the recommendation reaches a decision, document meaningful staff authority, assess the data and affected customers, and approve the changed use before launch. Adding a human click is insufficient evidence of what the workflow actually does. These are governance recommendations for the hypothetical retailer, not a determination that every financing assistant has the same legal classification. The operational insight is that a changed business purpose can matter more than a changed model name."
+      ]
+    },
+    {
+      "id": "enforcement",
+      "title": "Prepare for an investigation and a documented cure",
+      "paragraphs": [
+        "The Attorney General principally enforces TRAIGA, and the law creates no private right of action. A complaint can lead to a civil investigative demand for descriptions of purpose, training and input data, outputs, evaluation metrics, known limitations, monitoring, safeguards, and other relevant documentation. Those categories explain why an operator needs more than a purchase receipt. [Sections 552.101–.103](#source-ai-protection).",
+        "Written notice identifies the alleged violation. The Attorney General cannot bring the action before the 60th day after notice, and a cure before the 60th day, with the required written statement, supporting documentation, and necessary policy changes prevents that action under §552.104. Uncured violations carry court-determined penalties of $10,000–$12,000 for each curable violation or breach of the statement; $80,000–$200,000 for each uncurable violation; and $2,000–$40,000 per day for a continued violation. Injunctions, fees, and expenses are also possible. [Notice and penalties](#source-ai-protection).",
+        "Section 552.105 contains liability protections tied to another person’s prohibited use and discovery through specified feedback, testing, guidelines, or qualifying internal review. Its internal-review route requires substantial compliance with the latest NIST Generative Artificial Intelligence Profile or another nationally or internationally recognized AI risk-management framework. The defendant must discover the violation through that process; adopting a policy alone does not establish the protection. Civil-penalty actions under this section cannot target an undeployed system. Licensing-agency sanctions, including penalties up to $100,000, require a violation finding and AG recommendation. Separately, TDPSA enforcement uses a 30-day cure process and penalties up to $7,500 per violation. That cure process includes notifying affected consumers when their contact information is available. Keep the procedures distinct. [TRAIGA protections](#source-ai-protection); [TDPSA enforcement](#source-privacy)."
+      ]
+    },
+    {
+      "id": "implementation",
+      "title": "Separate an enacted program from available participation",
+      "paragraphs": [
+        "HB149’s regulatory sandbox requires approval from DIR and applicable agencies before testing. It provides for participation up to 36 months, possible extension for good cause, and quarterly reports. The Chapter 552 prohibited-use and disclosure requirements cannot be waived; applicable federal law remains relevant. A business needs an actual approval and an identified waiver before relying on sandbox protection. [Chapter 553](#source-sandbox).",
+        "Texas also has a public-sector AI framework under separate legislation. DIR’s August 14, 2026 implementation update reports adoption of Chapter 219 and describes government governance resources. Its current public-sector sandbox page says participation and submission details will be published when available. That page concerns government organizations under SB1964; it does not establish that a private business has access to HB149’s sandbox. Business-sandbox intake was not verified in this review. [DIR implementation](#source-dir-implementation); [public-sector sandbox](#source-dir-public-sandbox).",
+        "Federal developments need the same discipline. The White House’s March 20, 2026 framework calls on Congress to act and describes turning recommendations into legislation. That announcement establishes a policy proposal, not a Texas-specific exemption. A procurement review should distinguish proposals from an applicable enacted statute, final rule, or court order. This article does not make a comprehensive determination of federal preemption or pending litigation. [Federal legislative framework](#source-federal-framework)."
+      ]
+    },
+    {
+      "id": "decisions",
+      "title": "What to resolve before approving the deployment",
+      "paragraphs": [
+        "An approval should leave an inspectable record of the use and its boundaries. For an acquisition, request that record alongside the system inventory: it helps distinguish an established process from undocumented exposure. My recommended decision sequence is:"
+      ],
+      "bullets": [
+        "Identify the deployed use, developer and deployer, Texas connection, and government or healthcare involvement.",
+        "Determine the applicable privacy and biometric provisions from the actual data and processing relationship.",
+        "Resolve required disclosures, consent, rights handling, assessments and processing terms where applicable.",
+        "Assign responsibility for complaints, investigation support, corrective changes and deployment upgrades.",
+        "Record assumptions and revisit them when the use, data, vendor terms, or governing requirements change."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Must every Texas business disclose that its chatbot uses AI?",
+      "answer": "HB149’s general consumer-interaction disclosure applies to governmental agencies. A separate clause covers AI used in relation to healthcare services or treatment. The law does not impose that same blanket notice requirement on every ordinary private chatbot; other applicable rules and representations still require review. [Disclosure provisions](#source-ai-protection)."
+    },
+    {
+      "question": "Does a small-business privacy exemption also exempt the company from TRAIGA?",
+      "answer": "TRAIGA’s applicability provision does not contain the TDPSA’s SBA small-business threshold. The privacy law separately retains a consent requirement for a small business’s sale of sensitive personal data. Evaluate each law’s scope rather than carrying an exemption from one into the other. [TRAIGA scope](#source-scope); [TDPSA scope](#source-privacy)."
+    },
+    {
+      "question": "Does following NIST automatically prevent a Texas AI penalty?",
+      "answer": "Section 552.105(e) connects substantial compliance with the latest NIST Generative AI Profile or another recognized AI risk-management framework to an internal review process through which the defendant discovers a violation. A framework policy alone does not establish that statutory condition or compliance with every other obligation. Preserve evidence of the actual review and discovery process. [Liability provisions](#source-ai-protection)."
+    },
+    {
+      "question": "Can an AI vendor take over all of the buyer’s privacy responsibilities?",
+      "answer": "A vendor can assist, but the TDPSA does not relieve controllers or processors of liabilities imposed by their respective roles. Its required processing contract should support instructions, security, consumer rights and assessments. The buyer still needs to understand and govern its processing purpose. [Controller–processor relationship](#source-privacy)."
+    }
+  ],
+  "conclusion": {
+    "title": "Bring the deployment record to the legal review",
+    "content": "For a specific deployment, have qualified counsel interpret the relevant provisions using the documented workflow, data, contracts and sector context. The operational value of this preparation is a concrete decision about a real system."
+  },
+  "sources": [
+    {
+      "id": "hb149",
+      "label": "HB149, enacted enrolled text",
+      "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm",
+      "publisher": "Texas Legislature",
+      "date": "2025-06-22",
+      "lastVerified": "2026-10-12",
+      "note": "Enacted text; §10 sets January 1, 2026 effectiveness. Sections 2–3 amend biometric and processor-security provisions. Earlier introduced and committee versions are not the enacted authority."
+    },
+    {
+      "id": "scope",
+      "label": "Business & Commerce Code Chapter 551: definitions and applicability",
+      "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.551.htm",
+      "publisher": "Texas Legislature",
+      "date": "Effective 2026-01-01",
+      "lastVerified": "2026-10-12",
+      "note": "Current codified text of §§551.001–.003. Source date denotes effectiveness, not the date this live code page was published."
+    },
+    {
+      "id": "ai-protection",
+      "label": "Business & Commerce Code Chapter 552: duties, prohibitions and enforcement",
+      "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+      "publisher": "Texas Legislature",
+      "date": "Effective 2026-01-01",
+      "lastVerified": "2026-10-12",
+      "note": "Statutory thresholds, operator distinctions, disclosure timing, investigative powers, cure, penalties and liability provisions. Does not establish a judicial interpretation of contested terms."
+    },
+    {
+      "id": "privacy",
+      "label": "Business & Commerce Code Chapter 541: Texas Data Privacy and Security Act",
+      "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
+      "publisher": "Texas Legislature",
+      "date": "Effective 2024-07-01; AI amendment effective 2026-01-01",
+      "lastVerified": "2026-10-12",
+      "note": "Current codified scope, definitions, rights, controller and processor duties, contract terms, assessments, exemptions and enforcement. HB149 amended §541.104(a)."
+    },
+    {
+      "id": "biometrics",
+      "label": "Business & Commerce Code §503.001: biometric identifiers",
+      "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.503.htm",
+      "publisher": "Texas Legislature",
+      "date": "AI amendments effective 2026-01-01",
+      "lastVerified": "2026-10-12",
+      "note": "Commercial capture, notice and consent, retention, penalties, AI training and security exclusions, and subsequent non-exempt commercial use. Biometric identifier differs from the biometric data definition in Chapters 541 and 552."
+    },
+    {
+      "id": "sandbox",
+      "label": "Business & Commerce Code Chapter 553: AI regulatory sandbox",
+      "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.553.htm",
+      "publisher": "Texas Legislature",
+      "date": "Effective 2026-01-01",
+      "lastVerified": "2026-10-12",
+      "note": "Statutory program framework, agency approvals, duration, reporting and limits on waivers. An enacted framework does not establish that intake is currently available."
+    },
+    {
+      "id": "ag-ai",
+      "label": "Consumer AI Rights: official TRAIGA overview",
+      "href": "https://www.texasattorneygeneral.gov/consumer-protection/file-consumer-complaint/consumer-ai-rights",
+      "publisher": "Texas Office of the Attorney General",
+      "date": "Undated current guidance",
+      "lastVerified": "2026-10-12",
+      "note": "Current public guidance and complaint route, including explicit healthcare-provider disclosure and government-only social-scoring and biometric provisions. Statutory text controls precise thresholds."
+    },
+    {
+      "id": "dir-implementation",
+      "label": "AI in Texas: implementation of the 89th Legislature’s laws",
+      "href": "https://dir.texas.gov/news/ai-texas-dir-implementation-laws-89th-legislature",
+      "publisher": "Texas Department of Information Resources",
+      "date": "2026-08-14",
+      "lastVerified": "2026-10-12",
+      "note": "Official implementation update distinguishing HB149, SB1964, HB2818 and HB3512; reports Chapter 219 adoption and government governance resources."
+    },
+    {
+      "id": "dir-public-sandbox",
+      "label": "Public Sector AI Sandbox Program: current participation notice",
+      "href": "https://dir.texas.gov/ai-and-innovation/public-sector-ai-sandbox-program",
+      "publisher": "Texas Department of Information Resources",
+      "date": "Undated current program page",
+      "lastVerified": "2026-10-12",
+      "note": "SB1964 public-sector program. At review, the page states participation and submission details will be published when available. This observation does not establish HB149 business-sandbox intake status."
+    },
+    {
+      "id": "federal-framework",
+      "label": "National AI legislative framework announcement",
+      "href": "https://www.whitehouse.gov/releases/2026/03/president-donald-j-trump-unveils-national-ai-legislative-framework/",
+      "publisher": "The White House",
+      "date": "2026-03-20",
+      "lastVerified": "2026-10-12",
+      "note": "Primary announcement of recommendations to Congress. The announcement itself is not an enacted preemption statute, final rule or Texas-specific court order."
+    }
+  ],
+  "image": "/images/social/texas-ai-law-business-compliance.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-business-research-2026-10-12.json",
+      "description": "Primary-source claims, research dates, update triggers, and decision checklists for this edition.",
+      "format": "JSON"
+    }
+  ],
+  "evidenceBoundary": "Enacted and current codified Texas law and official implementation guidance checked October 12, 2026. The retailer example is hypothetical. HB149 business-sandbox intake was not verified; the federal-policy discussion is not a comprehensive preemption or litigation review."
+}

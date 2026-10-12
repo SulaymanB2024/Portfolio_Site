@@ -10,9 +10,35 @@ export interface ReadingTopic {
   readings: { slug: string; reason: string }[]
   questions: { question: string; slug: string; section: string }[]
   questionsUpdated: string
+  relatedTopics?: string[]
 }
 
 export const readingTopics: ReadingTopic[] = [
+  {
+    slug: 'texas-business', title: 'Texas business: what changes the decision?',
+    seoTitle: 'Texas Business Research: Power, AI Law & Commercial Contracts',
+    questionsUpdated: '2026-10-12',
+    description: 'Deep research on Texas developments that change operating costs, investment timing, compliance, and commercial risk.',
+    introduction: [
+      'A Texas development matters when it changes a business decision. An available power connection can determine whether a site is financeable. An AI rule can change procurement and operating responsibilities. A contract or counterclaim can change what a commercial dispute is worth and where it belongs.',
+      'These investigations start with primary legislation, agency records, and published decisions, then work through the commercial consequences. Each preserves its research cutoff, separates adopted requirements from pending implementation, and gives the reader a concrete comparison or decision checklist. Start with the risk closest to your next commitment.',
+      'The opening edition was researched on October 12, 2026. For related Texas investigations, the financial-systems reading path also contains the original toll-road ownership and financing research, Austin home-service ownership, and West Campus housing. Those manuscripts retain their own evidence dates.',
+    ],
+    questions: [
+      { question: 'What evidence makes a Texas power commitment financeable?', slug: 'texas-power-large-load-business-diligence', section: 'investment-decision' },
+      { question: 'Which Texas AI-law duties apply to a private business?', slug: 'texas-ai-law-business-compliance', section: 'duties-by-operator' },
+      { question: 'Does a $5 million contract automatically qualify for the Texas Business Court?', slug: 'texas-business-court-contract-decisions', section: 'two-thresholds' },
+      { question: 'How can counterclaims change the forum for a Texas dispute?', slug: 'texas-business-court-contract-decisions', section: 'counterclaims-clock' },
+      { question: 'Which audit and permit conditions can change a Texas facility opening?', slug: 'texas-power-large-load-business-diligence', section: 'audits-and-permits' },
+      { question: 'What evidence belongs in a Texas AI vendor review?', slug: 'texas-ai-law-business-compliance', section: 'procurement' },
+    ],
+    readings: [
+      { slug: 'texas-power-large-load-business-diligence', reason: 'Assess connection evidence, the October large-load rules, financial security, and interruption exposure before committing capital.' },
+      { slug: 'texas-ai-law-business-compliance', reason: 'Separate private-business, government, healthcare, and privacy duties, then turn them into an AI procurement review.' },
+      { slug: 'texas-business-court-contract-decisions', reason: 'Use September court decisions to distinguish transaction value, pleaded claims, and the promises preserved in signed contracts.' },
+    ],
+    relatedTopics: ['financial-systems', 'industrial-capacity'],
+  },
   {
     slug: 'financial-systems', title: 'Who owns the cash flow?',
     seoTitle: 'Texas Toll-Road & Airline Loyalty Research',

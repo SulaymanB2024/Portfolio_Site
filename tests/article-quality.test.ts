@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { protectedQualityEvidence, qualityReadingMinutes, verifyQualityRevision } from '../tools/article-quality-integrity.mjs'
+import { verifyInitialPublication } from '../tools/article-publication-integrity.mjs'
 import { codeLabelRevisions, originalCodeLabels, verifyCodeLabelReadback } from '../tools/article-code-label-integrity.mjs'
 import { searchMetadata } from '../src/personal/search-metadata.ts'
 import { relatedArticles } from '../src/personal/editorial/library.ts'
@@ -10,13 +11,15 @@ import type { ArticleSummary } from '../src/personal/editorial/types.ts'
 
 const json = (path: string) => JSON.parse(readFileSync(new URL(`../${path}`, import.meta.url), 'utf8'))
 const manifest = json('docs/article-quality-revisions.json')
+const publications = json('docs/article-publications.json').records
 const catalog: ArticleSummary[] = json('src/personal/editorial/data/catalog.json')
 const archived = json('src/personal/editorial/data/archived-catalog.json')
 const retained = [...catalog, ...archived.filter((item: ArticleSummary) => !catalog.some((active: ArticleSummary) => active.slug === item.slug))]
 const record = (slug: string) => manifest.records.find((item: any) => item.slug === slug)
 
 test('published and withdrawn manuscripts retain reviewed revisions and evidence', () => {
-  assert.equal(manifest.records.length, retained.length)
+  assert.equal(manifest.records.length + publications.length, retained.length)
+  assert.deepEqual([...manifest.records, ...publications].map((item: any) => item.slug).sort(), retained.map(item => item.slug).sort())
   for (const item of manifest.records) {
     const before = json(item.baselinePath), article = json(item.path)
     verifyCodeLabelReadback(readFileSync(new URL(`../${item.path}`, import.meta.url)))
@@ -25,6 +28,17 @@ test('published and withdrawn manuscripts retain reviewed revisions and evidence
     assert.equal(article.date, before.date)
     assert.equal(article.lastVerified, before.lastVerified)
     assert.equal(retained.find(summary => summary.slug === item.slug)?.readTime, article.readTime)
+  }
+  for (const item of publications) verifyInitialPublication(readFileSync(new URL(`../${item.path}`, import.meta.url)), item)
+})
+
+test('initial editions reject silent manuscript drift and cannot replace historical provenance', () => {
+  for (const item of publications) {
+    const bytes = readFileSync(new URL(`../${item.path}`, import.meta.url))
+    const article = JSON.parse(bytes.toString())
+    article.sources[0].href = 'https://invalid.test/replaced-authority'
+    assert.throws(() => verifyInitialPublication(Buffer.from(JSON.stringify(article)), item))
+    assert(!manifest.records.some((revision: any) => revision.slug === item.slug))
   }
 })
 

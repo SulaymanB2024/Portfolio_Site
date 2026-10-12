@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "purpose": "Bind newly researched initial editions without inventing historical restoration or revision provenance.",
+  "records": [
+    {
+      "slug": "texas-power-large-load-business-diligence",
+      "path": "src/personal/editorial/data/articles/texas-power-large-load-business-diligence.json",
+      "canonicalPath": "/research/texas/texas-power-large-load-business-diligence",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "54f54c7057e6308b0b6c142f21557397cd6f59cb046d5c054914664d8c921fcd",
+      "proseWords": 2089,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/power-claims.json"
+    },
+    {
+      "slug": "texas-ai-law-business-compliance",
+      "path": "src/personal/editorial/data/articles/texas-ai-law-business-compliance.json",
+      "canonicalPath": "/research/texas/texas-ai-law-business-compliance",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "b89e9e26bd5de3b53abed9b11b9ee721059e84b631b762a13db70313d5656193",
+      "proseWords": 1971,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/ai-law-claims.json"
+    },
+    {
+      "slug": "texas-business-court-contract-decisions",
+      "path": "src/personal/editorial/data/articles/texas-business-court-contract-decisions.json",
+      "canonicalPath": "/research/texas/texas-business-court-contract-decisions",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "f47b40378d3982e466c0417b0bc905f9a3c560723b2141e224e31c0d093119c4",
+      "proseWords": 1753,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/business-court-claims.json"
+    }
+  ]
+}

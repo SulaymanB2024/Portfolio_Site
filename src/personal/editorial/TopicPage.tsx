@@ -28,6 +28,11 @@ export function TopicBody({ slug, interactive = false }: { slug: string; interac
       <span className="reading-step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
       <div><h2><a data-slug={article.slug} href={interactive ? `#/writing/${article.slug}?from=${encodeURIComponent(readingPathHref(slug, article.slug))}` : article.path} onClick={interactive ? event => rememberReading(event, article.slug) : undefined}>{article.displayTitle || article.title}</a></h2><p>{reason}</p><span className="reading-duration">{displayReadTime(article.readTime)}</span></div>
     </li>)}</ol>
+    {topic.relatedTopics?.length ? <nav className="topic-return" aria-label="Related research"><p>Continue with {topic.relatedTopics.map((slug, index) => {
+      const related = findReadingTopic(slug)
+      if (!related) throw new Error(`Missing related topic: ${slug}`)
+      return <span key={slug}>{index > 0 ? ' · ' : ''}<a href={`${interactive ? '#' : ''}/topics/${slug}`}>{related.title}</a></span>
+    })}.</p></nav> : null}
     <p className="topic-return"><a href={interactive ? '#/writing' : '/writing'}>Browse all writing <span aria-hidden="true">↗</span></a></p>
   </>
 }

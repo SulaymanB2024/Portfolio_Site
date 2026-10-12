@@ -1,5 +1,60 @@
 [
   {
+    "slug": "texas-power-large-load-business-diligence",
+    "path": "/research/texas/texas-power-large-load-business-diligence",
+    "aliases": [],
+    "title": "Secure the Power Before Committing the Site",
+    "seoTitle": "Texas Power Availability: ERCOT, SB6 and Large Load Diligence",
+    "seoDescription": "Assess Texas power availability under ERCOT and SB6: large-load rules, conditional connections, financial security, data-center audits and site diligence.",
+    "displayTitle": "Power Before Property",
+    "category": "TEXAS BUSINESS",
+    "subtitle": "A business guide to usable megawatts, connection evidence, capital commitments and interruption risk under Texas’s changing large-load framework.",
+    "searchTerms": [
+      "Texas business electricity ERCOT SB6 large load interconnection data center power site selection Batch Zero"
+    ],
+    "date": "2026-10-12",
+    "dateModified": "2026-10-12",
+    "readTime": "11 MIN",
+    "image": "/images/social/texas-power-large-load-business-diligence.png",
+    "kind": "research"
+  },
+  {
+    "slug": "texas-ai-law-business-compliance",
+    "path": "/research/texas/texas-ai-law-business-compliance",
+    "title": "Texas’s AI Law: What a Business Should Resolve Before Deployment",
+    "seoTitle": "Texas AI Law: HB149 TRAIGA Business Compliance in 2026",
+    "seoDescription": "Texas HB149 and TRAIGA business requirements in 2026: private, government and healthcare duties, TDPSA privacy rules, vendor diligence and enforcement.",
+    "displayTitle": "Texas’s AI Law: Before Deployment",
+    "category": "TEXAS BUSINESS",
+    "subtitle": "Who must disclose AI use, how privacy obligations follow the data, and what an operator should request from a vendor.",
+    "searchTerms": [
+      "Texas business AI law HB149 TRAIGA compliance TDPSA privacy procurement healthcare"
+    ],
+    "date": "2026-10-12",
+    "dateModified": "2026-10-12",
+    "readTime": "11 MIN",
+    "image": "/images/social/texas-ai-law-business-compliance.png",
+    "kind": "research"
+  },
+  {
+    "slug": "texas-business-court-contract-decisions",
+    "path": "/research/texas/texas-business-court-contract-decisions",
+    "title": "Texas business contracts need a litigation plan",
+    "seoTitle": "Texas Business Court 2026: HB40, Contracts & the $5M Test",
+    "seoDescription": "Texas Business Court research for business leaders: HB40's $5 million thresholds, September 2026 decisions, contract diligence, and a worked dispute example.",
+    "displayTitle": "Texas business contracts need a litigation plan",
+    "category": "TEXAS BUSINESS",
+    "subtitle": "Two September decisions show why deal value, pleaded claims, and the promises preserved in a signed agreement deserve separate reviews.",
+    "searchTerms": [
+      "Texas Business Court HB40 five million jurisdiction contracts counterclaims Beard Perot Naterra"
+    ],
+    "date": "2026-10-12",
+    "dateModified": "2026-10-12",
+    "readTime": "10 MIN",
+    "image": "/images/social/texas-business-court-contract-decisions.png",
+    "kind": "research"
+  },
+  {
     "slug": "atlas-building-an-evidence-console",
     "path": "/writing/atlas-building-an-evidence-console",
     "aliases": [],

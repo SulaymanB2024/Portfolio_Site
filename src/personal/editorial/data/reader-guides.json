@@ -1005,5 +1005,110 @@
         "href": "https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh288-toll-lanes/executed-agreements.html"
       }
     ]
+  },
+  "texas-power-large-load-business-diligence": {
+    "question": "What makes a Texas power commitment financeable?",
+    "answer": "For an ERCOT site, obtain a documented allocation, phase dates, conditions, and operating restrictions; model fees, security, construction payments, and delay exposure separately. The standards effective October 8, 2026 and the conditional Batch Zero process change what a request or agreement establishes. A power price and a large request alone do not resolve the opening date.",
+    "paths": [
+      {
+        "label": "Verify the connection evidence",
+        "section": "connection-evidence",
+        "description": "Follow classification, verification, studies and approval."
+      },
+      {
+        "label": "Compare capital commitments",
+        "section": "capital-commitments",
+        "description": "Distinguish security from construction and electricity expense."
+      },
+      {
+        "label": "Make the investment decision",
+        "section": "investment-decision",
+        "description": "Tie commitments to capacity and operating evidence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Adopted 16 TAC §25.194: Large Load Interconnection Standards",
+        "href": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html"
+      },
+      {
+        "label": "M-A080326-04: Batch Zero conditional classifications",
+        "href": "https://www.ercot.com/services/comm/mkt_notices/M-A080326-04"
+      },
+      {
+        "label": "M-B091426-01: Data Center State and Community Impact RFI",
+        "href": "https://www.ercot.com/services/comm/mkt_notices/M-B091426-01"
+      }
+    ]
+  },
+  "texas-ai-law-business-compliance": {
+    "question": "What should a Texas business resolve before deploying AI?",
+    "answer": "Identify the deployed use and operator, then determine which AI, privacy, and biometric duties attach. HB149 has distinct government and healthcare disclosure provisions; ordinary private businesses need a use-specific review of prohibited conduct and applicable data responsibilities. Record vendor terms, oversight, complaint handling, and change approvals. This edition uses enacted and current primary sources checked October 12, 2026.",
+    "paths": [
+      {
+        "label": "Identify the applicable duties",
+        "section": "duties-by-operator",
+        "description": "Separate private, government and healthcare requirements."
+      },
+      {
+        "label": "Trace personal and biometric data",
+        "section": "privacy-and-biometrics",
+        "description": "Check the actual processing relationship and statutory scope."
+      },
+      {
+        "label": "Review the procurement",
+        "section": "procurement",
+        "description": "Assign responsibilities and request usable evidence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "HB149, enacted enrolled text",
+        "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm"
+      },
+      {
+        "label": "Business & Commerce Code Chapter 552: duties, prohibitions and enforcement",
+        "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm"
+      },
+      {
+        "label": "Business & Commerce Code Chapter 541: Texas Data Privacy and Security Act",
+        "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm"
+      }
+    ]
+  },
+  "texas-business-court-contract-decisions": {
+    "question": "What should change in a Texas business contract review?",
+    "answer": "Preserve material promises in the signed documents, separate transaction consideration from qualifying pleaded claims, and keep a dated dispute chronology. HB40 uses distinct monetary screens; September 2026 opinions show why counterclaims and reliance language matter. Ask counsel to map the actual agreement, venue, and dispute to the governing route.",
+    "paths": [
+      {
+        "label": "Separate the monetary tests",
+        "section": "two-thresholds",
+        "description": "A contract value is different from the amount in dispute."
+      },
+      {
+        "label": "Preserve the economic bargain",
+        "section": "preserve-bargain",
+        "description": "Reconcile material commitments with the signed package."
+      },
+      {
+        "label": "Work the downside",
+        "section": "worked-dispute",
+        "description": "Compare a declared hypothetical against the commercial-action test."
+      }
+    ],
+    "sources": [
+      {
+        "label": "HB40 enrolled text, particularly sections 43, 45, 56, and 72",
+        "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm"
+      },
+      {
+        "label": "The Bakery v. Naterra International, 2026 Tex. Bus. 64",
+        "href": "https://www.txcourts.gov/media/1463334/26-bc03a-0027-the-bakery-v-naterra-intl-2026-tex-bus-64.pdf"
+      },
+      {
+        "label": "Beard v. Perot, 2026 Tex. Bus. 65",
+        "href": "https://www.txcourts.gov/media/1463368/26-bc01b-0018-beard-v-perot-2026-tex-bus-65.pdf"
+      }
+    ]
   }
 }
