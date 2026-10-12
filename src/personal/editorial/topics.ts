@@ -15,7 +15,7 @@ export interface ReadingTopic {
 
 export const readingTopics: ReadingTopic[] = [
   {
-    slug: 'texas-business', title: 'Texas business: what changes the decision?',
+    slug: 'texas-business', title: 'Texas business research.',
     seoTitle: 'Texas Business Research: Power, AI Law & Commercial Contracts',
     questionsUpdated: '2026-10-12',
     description: 'Deep research on Texas developments that change operating costs, investment timing, compliance, and commercial risk.',
