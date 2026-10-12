@@ -1,4 +1,6 @@
 import { outreachSlugPattern } from '../../src/personal/outreach-context.ts'
+import { personalizedOpeningIdPattern, validOpeningLines } from '../../src/personal/recruiter/personalized-copy.ts'
+import type { PublishedOpening } from './openings.ts'
 
 export interface CompanyInput { recordId: string; company: string }
 export interface OutreachCompany { name: string; identity: string }
@@ -7,6 +9,7 @@ export interface OutreachRegistry {
   revision: number
   records: Record<string, string>
   companies: Record<string, OutreachCompany>
+  openings?: Record<string, PublishedOpening>
 }
 export interface CompanyLink { recordId: string; company: string; slug: string; url: string }
 export const outreachOrigin = 'https://sulayman-bowles.dev'
@@ -58,6 +61,13 @@ export function parseRegistry(value: unknown): OutreachRegistry {
     if (!outreachSlugPattern.test(slug) || slug.length > 96 || typeof company?.name !== 'string' || typeof company?.identity !== 'string') throw new Error('Invalid company registry')
   }
   for (const slug of Object.values(data.records)) if (typeof slug !== 'string' || !Object.hasOwn(data.companies, slug)) throw new Error('Invalid record mapping')
+  if (data.openings !== undefined) {
+    if (!data.openings || typeof data.openings !== 'object' || Array.isArray(data.openings)) throw new Error('Invalid opening registry')
+    for (const [id, opening] of Object.entries(data.openings)) {
+      if (!personalizedOpeningIdPattern.test(id) || !opening || typeof opening.companySlug !== 'string' || !Object.hasOwn(data.companies, opening.companySlug)
+        || typeof opening.enabled !== 'boolean' || !validOpeningLines(opening.lines)) throw new Error('Invalid published opening')
+    }
+  }
   return structuredClone(data)
 }
 

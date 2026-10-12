@@ -1,6 +1,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import { parseRegistry, reconcileCompanies, validateCompanies, type OutreachRegistry } from './registry.ts'
 import { RegistryRequestError } from './store.ts'
+import { reconcileOpenings, validateOpenings } from './openings.ts'
 
 export const outreachSpreadsheetId = '1WDUFFDYgXqCXGwglBDpr2qB6pUtVpcJw04lMMQohuFA'
 export interface RegistryStore {
@@ -22,14 +23,19 @@ export function createSyncHandler(store: RegistryStore, reserved: Set<string>, s
     const body = await request.text()
     if (Buffer.byteLength(body) > 500_000) return json({ error: 'Company batch is too large' }, 413)
     if (!validSyncSignature(body, request.headers.get('x-outreach-timestamp') || '', request.headers.get('x-outreach-signature') || '', secret)) return json({ error: 'Unauthorized' }, 401)
-    let rows
+    let source: 'Portfolio Links' | 'Personalized Openings'
+    let rows: ReturnType<typeof validateCompanies> | ReturnType<typeof validateOpenings>
     try {
       const input = JSON.parse(body)
-      if (input.spreadsheetId !== outreachSpreadsheetId || input.sheet !== 'Portfolio Links') throw new Error('Unexpected publication source')
-      rows = validateCompanies(input.companies)
+      if (input.spreadsheetId !== outreachSpreadsheetId || !['Portfolio Links', 'Personalized Openings'].includes(input.sheet)) throw new Error('Unexpected publication source')
+      source = input.sheet
+      rows = source === 'Portfolio Links' ? validateCompanies(input.companies) : validateOpenings(input.openings)
     } catch (error) { return json({ error: error instanceof Error ? error.message : 'Invalid company rows' }, 400) }
     try {
-      const result = reconcileCompanies(parseRegistry(await store.read()), rows, reserved)
+      const previous = parseRegistry(await store.read())
+      const result = source === 'Portfolio Links'
+        ? reconcileCompanies(previous, rows as ReturnType<typeof validateCompanies>, reserved)
+        : reconcileOpenings(previous, rows as ReturnType<typeof validateOpenings>, reserved)
       if (result.changed) await store.write(result.registry)
       return json({ revision: result.registry.revision, changed: result.changed, links: result.links })
     } catch (error) {

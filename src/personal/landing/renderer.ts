@@ -17,6 +17,7 @@ import { PortfolioRuntime } from '../portfolio-runtime.ts'
 import { dragHelmet, helmetGesture, helmetKey, settleHelmet, type HelmetTurn, type HelmetGesture } from './helmet-interaction.ts'
 import { setDestinationLabel } from '../link-arrow.ts'
 import { openingInkReveal } from './opening-motion.ts'
+import { copyLinksUsable } from './copy-actions.ts'
 import { PORTFOLIO_DITHER_GLSL } from '../dither-kernel.ts'
 
 export interface LandingElements {
@@ -492,11 +493,10 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
       }
     }
     function copyPresentation(sequence: TextSequence, motion: ReturnType<typeof thresholdMotion>, leg: number) {
-      const incoming = sequence.active > leg, state = sequence.states[sequence.active]
+      const incoming = sequence.active > leg
       const categoryAlpha = reduced.matches ? 1 : incoming ? motion.incomingCategory : motion.outgoingCategory
       const linksAlpha = reduced.matches ? 1 : incoming ? motion.incomingLinks : motion.outgoingLinks
-      const readable = state.reveal > .999 && state.erase < .001
-      const usable = readable && linksAlpha > .98, titleUsable = usable && chapters[sequence.active].id !== 'helmet'
+      const usable = copyLinksUsable(sequence, linksAlpha), titleUsable = usable && chapters[sequence.active].id !== 'helmet'
       const categoryValue = categoryAlpha.toFixed(3), linkValue = linksAlpha.toFixed(3)
       if (categoryValue !== lastCategory) { category.style.opacity = categoryValue; lastCategory = categoryValue }
       if (linkValue !== lastLinks) { links.style.opacity = linkValue; links.style.transform = `translateY(${((1 - linksAlpha) * 3).toFixed(2)}px)`; lastLinks = linkValue }

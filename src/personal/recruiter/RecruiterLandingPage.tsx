@@ -4,6 +4,6 @@ import type { OutreachCompanyContext } from '../outreach-context'
 import { recruiterOpening } from './landing'
 
 export default function RecruiterLandingPage({ company, dark, onLandingActiveChange }: { company: OutreachCompanyContext; dark: boolean; onLandingActiveChange: (active: boolean) => void }) {
-  const opening = useMemo(() => recruiterOpening(company), [company.slug, company.name])
+  const opening = useMemo(() => recruiterOpening(company), [company.slug, company.name, company.opening?.id, company.opening?.lines.join('\n')])
   return <HomePage dark={dark} onLandingActiveChange={onLandingActiveChange} opening={opening} />
 }

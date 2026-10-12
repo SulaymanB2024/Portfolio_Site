@@ -6,7 +6,7 @@ import { recruiterCompanyProfile } from './company-profiles.ts'
 export function recruiterOpening(company: OutreachCompanyContext): LandingOpeningCopy {
   const profile = recruiterCompanyProfile(company.slug, company.name)
   return {
-    lines: profile.lines,
+    lines: company.opening?.lines || profile.lines,
     category: '',
     href: '/resume',
     linkLabel: 'Résumé',
