@@ -637,6 +637,10 @@
       "status": 308
     },
     {
+      "src": "/for/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})",
+      "dest": "/api/outreach-home"
+    },
+    {
       "src": "/([a-z0-9]+(?:-[a-z0-9]+)*)",
       "dest": "/api/outreach-home"
     },

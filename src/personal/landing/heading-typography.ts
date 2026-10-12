@@ -6,10 +6,10 @@ export interface HeadingLayout { rows: HeadingRow[]; fit: number; height: number
 export function headingRows(chapter: LandingChapter): HeadingRow[] {
   return chapter.id === 'helmet'
     ? [
-        { text: 'The', scale: .49, leading: 1.7 },
-        { text: 'frontier', scale: 1, leading: 1.01 },
-        { text: 'is all that', scale: .49, leading: 1.7 },
-        { text: 'matters.', scale: 1, leading: 1.01 },
+        { text: chapter.lines.length === 4 ? chapter.lines[0] : 'The', scale: .49, leading: 1.7 },
+        { text: chapter.lines.length === 4 ? chapter.lines[1] : 'frontier', scale: 1, leading: 1.01 },
+        { text: chapter.lines.length === 4 ? chapter.lines[2] : 'is all that', scale: .49, leading: 1.7 },
+        { text: chapter.lines.length === 4 ? chapter.lines[3] : 'matters.', scale: 1, leading: 1.01 },
       ]
     : chapter.lines.map(text => ({ text, scale: 1, leading: 1.01 }))
 }

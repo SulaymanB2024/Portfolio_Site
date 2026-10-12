@@ -1,5 +1,5 @@
 import { publicPages, siteOrigin } from './public-pages.ts'
-import { approvedOutreachSlug, documentOutreachSlug } from './outreach-context.ts'
+import { approvedOutreachSlug, documentOutreachSlug, documentOutreachOpening } from './outreach-context.ts'
 import { contact } from './content.ts'
 
 export const personalMeasurementId = 'G-9VQ15148TG'
@@ -43,11 +43,11 @@ export function analyticsReferrer(value: string): string {
 }
 
 /** One tracker per document. A→B→A is three views; section/title-only changes are not. */
-export function createPersonalAnalytics(browser: AnalyticsWindow, document: AnalyticsDocument, arrivalSlug?: string) {
+export function createPersonalAnalytics(browser: AnalyticsWindow, document: AnalyticsDocument, arrivalSlug?: string, arrivalOpeningId?: string) {
   let initialized = false
   let previousLocation = ''
   let outreachRecorded = false
-  const outreachCompany = approvedOutreachSlug(arrivalSlug, browser.location.pathname || '')
+  const outreachCompany = approvedOutreachSlug(arrivalSlug, browser.location.pathname || '', arrivalOpeningId)
   return (page: AnalyticsPage): boolean => {
     if (!isProduction(browser)) return false
     const pageLocation = analyticsPageLocation(page.canonical)
@@ -108,7 +108,7 @@ export function recordPersonalPageView(document: Document, browser: AnalyticsWin
     if (!canonical) return false
     let tracker = trackers.get(browser)
     if (!tracker) {
-      tracker = createPersonalAnalytics(browser, document, documentOutreachSlug(document, browser.location.pathname || ''))
+      tracker = createPersonalAnalytics(browser, document, documentOutreachSlug(document, browser.location.pathname || ''), documentOutreachOpening(document, browser.location.pathname || '')?.id)
       trackers.set(browser, tracker)
     }
     return tracker({ canonical, title: document.title })

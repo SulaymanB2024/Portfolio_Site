@@ -1,0 +1,5 @@
+/* The homepage main is full width; its error state needs the same page inset. */
+.personal-site.home-site .route-error.route-recovery {
+  margin-inline: var(--home-gutter, 20px);
+  padding-block-start: 76px;
+}

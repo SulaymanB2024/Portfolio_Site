@@ -17,6 +17,7 @@ export interface DitheredTextUniforms extends ScrollInkUniforms {
   textGrid: { value: number }
 }
 export interface DitheredTextOptions {
+  chapters?: readonly LandingChapter[]
   headline: HTMLHeadingElement
   stage: HTMLElement
   uniforms: DitheredTextUniforms
@@ -101,7 +102,7 @@ float printedText(vec2 uv){
   return alpha;
 }`
 
-export function createDitheredText({ headline, stage, uniforms, pixelRatio, onChapter, isAlive }: DitheredTextOptions) {
+export function createDitheredText({ chapters = CHAPTERS, headline, stage, uniforms, pixelRatio, onChapter, isAlive }: DitheredTextOptions) {
   const atlas = document.createElement('canvas')
   const context = atlas.getContext('2d', { willReadFrequently: true })
   if (!context) throw Error('Heading canvas is unavailable')
@@ -117,13 +118,13 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
     const key = [box.width, ratio, style.fontSize, style.fontWeight, style.fontFamily, style.letterSpacing].join('|')
     if (!force && texture && key === atlasKey) {
       uniforms.textBox.value.set((box.left - scene.left - pad) / scene.width, 1 - (box.top - scene.top - pad + frameHeight / ratio) / scene.height, atlas.width / ratio / scene.width, frameHeight / ratio / scene.height)
-      if (active >= 0) onChapter(CHAPTERS[active], active, layouts[active].height)
+      if (active >= 0) onChapter(chapters[active], active, layouts[active].height)
       return
     }
     atlasKey = key
     stage.dataset.atlasBuilds = String(Number(stage.dataset.atlasBuilds || 0) + 1)
     atlas.width = Math.ceil((box.width + pad * 2) * ratio)
-    atlas.height = frameHeight * CHAPTERS.length
+    atlas.height = frameHeight * chapters.length
     context!.scale(ratio, ratio)
     context!.fillStyle = 'white'
     context!.textBaseline = 'alphabetic'
@@ -133,11 +134,11 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
       context!.font = `${style.fontWeight} ${fontSize * scale * fit}px ${style.fontFamily}`
       if (tracked) context!.letterSpacing = `${scale < 1 ? 0 : tracking * fit}px`
     }
-    layouts = CHAPTERS.map(chapter => layoutHeading(chapter, fontSize, box.width, row => {
+    layouts = chapters.map(chapter => layoutHeading(chapter, fontSize, box.width, row => {
       setFont(row.scale)
       return context!.measureText(row.text).width + (tracked || row.scale < 1 ? 0 : (row.text.length - 1) * tracking)
     }))
-    CHAPTERS.forEach((chapter, index) => {
+    chapters.forEach((chapter, index) => {
       const layout = layouts[index]
       let longest = 0, rowTop = 0
       layout.rows.forEach(row => {
@@ -169,7 +170,7 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
     uniforms.textGrid.value = ratio * .9
     if (active >= 0) {
       renderHeading(headline, layouts[active])
-      onChapter(CHAPTERS[active], active, layouts[active].height)
+      onChapter(chapters[active], active, layouts[active].height)
     }
   }
   function update(progress: number, reduced: boolean) {
@@ -181,7 +182,7 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
     if (sequence.active !== active) {
       active = sequence.active
       renderHeading(headline, layouts[active])
-      onChapter(CHAPTERS[active], active, layouts[active].height)
+      onChapter(chapters[active], active, layouts[active].height)
     }
     const state = sequence.states[active], phase = state.reveal < 1 ? 'printing' : state.erase > 0 ? 'dissolving' : 'held'
     if (stage.dataset.textPhase !== phase) stage.dataset.textPhase = phase
@@ -201,7 +202,7 @@ export function createDitheredText({ headline, stage, uniforms, pixelRatio, onCh
     atlas.width = atlas.height = 0
   }
   function blockHeight(chapter: LandingChapter) {
-    return layouts[CHAPTERS.indexOf(chapter)]?.height ?? parseFloat(getComputedStyle(headline).fontSize) * HEADING_RESERVE_EM
+    return layouts[chapters.indexOf(chapter)]?.height ?? parseFloat(getComputedStyle(headline).fontSize) * HEADING_RESERVE_EM
   }
   return { resize, update, surface, dispose, blockHeight }
 }

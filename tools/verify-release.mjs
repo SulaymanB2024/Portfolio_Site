@@ -20,7 +20,7 @@ for (const url of urls) {
   if (url.pathname !== '/') assert.equal(await read(join('dist', `${url.pathname}.html`)), html, `Clean URL fallback drift: ${url.pathname}`)
   assert(html.includes(`<link rel="canonical" href="${url.href}"`), `Canonical drift: ${url.pathname}`)
   assert(/name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/.test(html))
-  assert(/<div id="root"><div class="static-site">/.test(html), `Missing readable initial HTML: ${url.pathname}`)
+  assert(/<div id="root"><!--public-page:start--><div class="static-site">/.test(html), `Missing readable initial HTML: ${url.pathname}`)
   assert(/<main><h1>[^<]+<\/h1>/.test(html), `Missing page identity: ${url.pathname}`)
   const schema = html.match(/<script id="page-schema"[^>]*>(.*?)<\/script>/s)
   assert(schema, `Missing schema: ${url.pathname}`); JSON.parse(schema[1])
