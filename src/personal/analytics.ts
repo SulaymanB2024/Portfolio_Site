@@ -1,10 +1,13 @@
 import { publicPages, siteOrigin } from './public-pages.ts'
 import { approvedOutreachSlug, documentOutreachSlug, documentOutreachOpening } from './outreach-context.ts'
+import { contact } from './content.ts'
 
 export const personalMeasurementId = 'G-9VQ15148TG'
 const scriptId = 'personal-ga4-script'
 const productionHosts = new Set(['sulayman-bowles.dev', 'www.sulayman-bowles.dev'])
 const knownLocations = new Set([...publicPages.map(page => `${siteOrigin}${page.path}`), `${siteOrigin}/404`])
+export type PortfolioAction = 'resume_download' | 'email_click' | 'linkedin_click'
+const portfolioActions = new Set<PortfolioAction>(['resume_download', 'email_click', 'linkedin_click'])
 
 type Gtag = (...parameters: unknown[]) => void
 export interface AnalyticsWindow {
@@ -14,6 +17,10 @@ export interface AnalyticsWindow {
 }
 type AnalyticsDocument = Pick<Document, 'referrer' | 'createElement' | 'getElementById' | 'head'>
 export interface AnalyticsPage { canonical: string; title: string }
+
+function isProduction(browser: AnalyticsWindow): boolean {
+  return browser.location.protocol === 'https:' && productionHosts.has(browser.location.hostname)
+}
 
 /** Accept only public route identities; never send URL searches or hash parameters. */
 export function analyticsPageLocation(value: string): string | undefined {
@@ -42,7 +49,7 @@ export function createPersonalAnalytics(browser: AnalyticsWindow, document: Anal
   let outreachRecorded = false
   const outreachCompany = approvedOutreachSlug(arrivalSlug, browser.location.pathname || '', arrivalOpeningId)
   return (page: AnalyticsPage): boolean => {
-    if (browser.location.protocol !== 'https:' || !productionHosts.has(browser.location.hostname)) return false
+    if (!isProduction(browser)) return false
     const pageLocation = analyticsPageLocation(page.canonical)
     if (!pageLocation || pageLocation === previousLocation) return false
     const fields = {
@@ -106,4 +113,63 @@ export function recordPersonalPageView(document: Document, browser: AnalyticsWin
     }
     return tracker({ canonical, title: document.title })
   } catch { return false }
+}
+
+/** Match only the existing public destinations; destination text never enters an event. */
+export function portfolioActionForHref(value: string): PortfolioAction | undefined {
+  try {
+    const url = new URL(value, `${siteOrigin}/`)
+    if (url.username || url.password || url.search || url.hash) return undefined
+    if (url.protocol === 'mailto:' && url.pathname === contact.email) return 'email_click'
+    if (url.href.replace(/\/$/, '') === contact.linkedin.replace(/\/$/, '')) return 'linkedin_click'
+    if (url.protocol === 'https:' && productionHosts.has(url.hostname) && !url.port && url.pathname === '/Sulayman_Bowles_Resume.pdf') return 'resume_download'
+  } catch { /* Malformed or unsupported destinations remain ordinary links. */ }
+  return undefined
+}
+
+/** Use the committed route identity, including root canonicals on recruiter arrivals. */
+export function recordPortfolioAction(document: Document, browser: AnalyticsWindow, action: PortfolioAction): boolean {
+  try {
+    if (!isProduction(browser) || !portfolioActions.has(action) || !browser.gtag) return false
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href
+    const pageLocation = canonical && analyticsPageLocation(canonical)
+    if (!pageLocation) return false
+    browser.gtag('event', 'portfolio_action', { send_to: personalMeasurementId, action, page_location: pageLocation })
+    return true
+  } catch { return false }
+}
+
+const actionListeners = new WeakMap<Document, { listener: (event: MouseEvent) => void; references: number }>()
+
+/** One delegated listener survives route changes; each installation has an idempotent cleanup. */
+export function installPortfolioActionTracking(document: Document, browser: AnalyticsWindow): () => void {
+  try {
+    if (!isProduction(browser)) return () => {}
+    let registration = actionListeners.get(document)
+    if (!registration) {
+      const listener = (event: MouseEvent) => {
+        try {
+          if (event.defaultPrevented || event.button !== 0) return
+          const target = event.target as Element | null
+          if (!target || typeof target.closest !== 'function') return
+          const link = target.closest<HTMLAnchorElement>('a[href]')
+          const action = link && portfolioActionForHref(link.href)
+          if (action) recordPortfolioAction(document, browser, action)
+        } catch { /* Measurement must not interrupt the link's native behavior. */ }
+      }
+      registration = { listener, references: 0 }
+      document.addEventListener('click', listener)
+      actionListeners.set(document, registration)
+    }
+    registration.references++
+    const active = registration
+    let released = false
+    return () => {
+      if (released) return
+      released = true
+      if (--active.references) return
+      try { document.removeEventListener('click', active.listener) } catch { /* Optional measurement cleanup. */ }
+      actionListeners.delete(document)
+    }
+  } catch { return () => {} }
 }

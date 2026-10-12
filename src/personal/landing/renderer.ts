@@ -97,6 +97,14 @@ void main(){
 export function mountLandingSequence(elements: LandingElements, opening?: LandingOpeningCopy): () => void {
   const chapters = withLandingOpening(opening)
   const { rail, stage, canvas, helmetControl, headline, loading, copyContent, title, links, project, article, category } = elements
+  const openingActions = [...links.querySelectorAll<HTMLAnchorElement>('[data-opening-action]')]
+  function openingActionsUsable(usable: boolean) {
+    for (const action of openingActions) {
+      action.hidden = stage.dataset.chapter !== 'helmet'
+      action.tabIndex = usable && !action.hidden ? 0 : -1
+    }
+  }
+  const openingCopyExtra = (chapter: LandingChapter) => chapter.id === 'helmet' ? Math.max(0, links.getBoundingClientRect().height - 44) : 0
   // An opaque context has an unpainted black buffer during setup and decoding.
   // Keep native copy on the stage paper until a complete composite is ready.
   canvas.hidden = true
@@ -185,6 +193,7 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
     category.textContent = chapter.category
     links.hidden = false
     const linkedTitle = chapter.id !== 'helmet'
+    openingActionsUsable(false)
     title.toggleAttribute('data-linked', linkedTitle)
     title.tabIndex = linkedTitle ? 0 : -1
     if (linkedTitle) {
@@ -206,7 +215,8 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
     // its actual lines rather than covering the links underneath.
     copyContent.style.minHeight = `${parseFloat(getComputedStyle(headline).fontSize) * HEADING_RESERVE_EM}px`
     headline.style.minHeight = `${headingHeight}px`
-    copyContent.style.setProperty('--links-y', `${headingHeight + (isStackedLanding(stage.clientWidth, stage.clientHeight) ? 16 : 28)}px`)
+    const copyGap = isStackedLanding(stage.clientWidth, stage.clientHeight) ? 16 : chapter.id === 'helmet' ? 24 : 28
+    copyContent.style.setProperty('--links-y', `${headingHeight + copyGap}px`)
   }
   const headingMeasure = document.createElement('canvas').getContext('2d')
   function staticCopy() {
@@ -229,6 +239,7 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
     links.setAttribute('aria-hidden', 'false')
     project.tabIndex = 0
     article.tabIndex = article.hidden ? -1 : 0
+    openingActionsUsable(true)
     title.style.pointerEvents = chapter.id === 'helmet' ? 'none' : 'auto'
     title.tabIndex = chapter.id === 'helmet' ? -1 : 0
     delete stage.dataset.textDither
@@ -506,6 +517,7 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
         links.setAttribute('aria-hidden', String(!usable))
         project.tabIndex = usable ? 0 : -1
         article.tabIndex = usable && !article.hidden ? 0 : -1
+        openingActionsUsable(usable)
         title.style.pointerEvents = titleUsable ? 'auto' : 'none'
         title.tabIndex = titleUsable ? 0 : -1
         lastUsable = usable
@@ -570,7 +582,7 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
       const bounds = actorBounds.get(object)!
       if (mobile) {
         const chapter = chapters[index]
-        const frame = mobileSculptureFrame(width, height, copyTop, printed.blockHeight(chapter), 1, chapter.id !== 'helmet' && chapter.article ? 2 : 1, bounds.size, safeBottom)
+        const frame = mobileSculptureFrame(width, height, copyTop, printed.blockHeight(chapter), 1, chapter.id !== 'helmet' && chapter.article ? 2 : 1, bounds.size, safeBottom, openingCopyExtra(chapter))
         object.position.set(frame.x - bounds.center.x * frame.scale + pose.x, frame.y - bounds.center.y * frame.scale + pose.y, -bounds.center.z * frame.scale)
         object.scale.setScalar(frame.scale * pose.scale)
       } else {
@@ -617,7 +629,7 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
       let left: number, top: number, right: number, bottom: number
       if (mobile) {
         const chapter = chapters[index]
-        const fit = mobileSculptureFrame(width, height, copyTop, printed.blockHeight(chapter), 1, chapter.id !== 'helmet' && chapter.article ? 2 : 1, bounds.size, safeBottom)
+        const fit = mobileSculptureFrame(width, height, copyTop, printed.blockHeight(chapter), 1, chapter.id !== 'helmet' && chapter.article ? 2 : 1, bounds.size, safeBottom, openingCopyExtra(chapter))
         left = width * .02; right = width * .98; top = fit.top; bottom = fit.bottom
       } else {
         const fit = desktopSculptureFrame(width, height, index, bounds.size)

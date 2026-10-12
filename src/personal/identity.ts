@@ -1,5 +1,6 @@
 import { resumeProfile, resumeReview } from './profile-copy.ts'
 import { contact } from './content.ts'
+import { recruiterCopy } from './recruiter-copy.ts'
 
 // Public identity follows the reviewed biography, rather than historical PDFs.
 export const identity = {
@@ -7,7 +8,7 @@ export const identity = {
   givenName: 'Sulayman',
   familyName: 'Bowles',
   summary: resumeProfile.currentSummary,
-  homeSummary: 'I study finance at UT Austin, work in product and growth, and build independent software.',
+  homeSummary: recruiterCopy.summary,
   authorDescription: 'Sulayman Bowles studies finance at UT Austin and writes about software, AI systems, and markets.',
   reviewed: resumeReview.asOf,
   education: resumeProfile.education,

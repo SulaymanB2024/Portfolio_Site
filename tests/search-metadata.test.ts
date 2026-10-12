@@ -3,10 +3,39 @@ import assert from 'node:assert/strict'
 import { searchMetadata, sourceDate, metadataTags, withSearchHead, serializeSchema, personId, websiteId } from '../src/personal/search-metadata.ts'
 import { documentHref, withDocumentLinks } from '../tools/public-document-links.ts'
 import { identity } from '../src/personal/identity.ts'
+import { recruiterCopy } from '../src/personal/recruiter-copy.ts'
+
+test('recruiter positioning reaches search and social previews without replacing the headline', () => {
+  const home = searchMetadata('home')
+  assert.equal(home.description, recruiterCopy.description)
+  const tags = metadataTags(home)
+  for (const key of ['og:title', 'twitter:title']) assert.equal(tags.find(tag => tag.key === key)?.value, recruiterCopy.title)
+  for (const key of ['og:description', 'twitter:description']) assert.equal(tags.find(tag => tag.key === key)?.value, recruiterCopy.description)
+  assert.match(searchMetadata('about').description, /Chegg and Sapien/)
+})
+
+test('project search titles describe demonstrated skills while page identity retains the project name', () => {
+  const cases = [
+    ['internshipdeadlines', /AI Product & Search/, 'InternshipDeadlines'],
+    ['sapien', /Growth & AI Market Research/, 'Sapien'],
+    ['atlas', /Python & SQLite/, 'Atlas'],
+  ] as const
+  const titles = []
+  for (const [slug, skills, name] of cases) {
+    const metadata = searchMetadata(`work/${slug}`)
+    assert.match(metadata.title, skills)
+    assert.equal(metadata.canonical, `https://sulayman-bowles.dev/work/${slug}`)
+    assert.equal(metadata.schema!['@graph'].find(node => node['@id'] === `${metadata.canonical}#webpage`)?.name, `${name} — Sulayman Bowles`)
+    assert.equal(metadata.article, undefined)
+    titles.push(metadata.title)
+  }
+  assert.equal(new Set(titles).size, 3)
+  assert.match(searchMetadata('work/atlas').description, /local Python and SQLite/)
+})
 
 test('homepage search identity is descriptive while the published headline stays separate', () => {
   const home = searchMetadata('home')
-  assert.equal(home.title, 'Sulayman Bowles — Product, AI & Finance')
+  assert.equal(home.title, 'Sulayman Bowles — Product, Growth & AI')
   assert.equal(home.canonical, 'https://sulayman-bowles.dev/')
   assert.equal(home.schema!['@graph'].find(node => node['@type'] === 'Person')?.description, identity.homeSummary)
   assert.equal(home.schema!['@graph'].find(node => node['@type'] === 'WebPage')?.name, 'The frontier is all that matters — Sulayman Bowles')

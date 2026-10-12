@@ -6,6 +6,8 @@ import { identity } from './identity.ts'
 import type { ArticleSummary } from './editorial/types.ts'
 import { articleTopic, findReadingTopic, topicReadings } from './editorial/topics.ts'
 import { answerNotes, readerModifiedDate } from './editorial/answer-notes.ts'
+import { recruiterCopy } from './recruiter-copy.ts'
+import { workContributions } from './projects/work-curation.ts'
 
 export const personId = `${siteOrigin}/#person`
 export const websiteId = `${siteOrigin}/#website`
@@ -25,11 +27,11 @@ export interface SearchMetadata {
 
 // Search titles explain the page; editorial headlines remain in publicPages.
 const pageTitles: Record<string, string> = {
-  '': 'Sulayman Bowles — Product, AI & Finance',
-  work: 'Work & Projects — Sulayman Bowles',
+  '': recruiterCopy.title,
+  work: 'Product, Growth & AI Projects — Sulayman Bowles',
   writing: 'Writing on AI, Software & Markets — Sulayman Bowles',
-  about: 'About Sulayman Bowles — Product, Growth & Finance',
-  resume: 'Sulayman Bowles Résumé — Experience & Education',
+  about: 'About Sulayman Bowles — Product, Growth & AI',
+  resume: 'Sulayman Bowles Résumé — Product, Growth & AI',
   contact: 'Contact Sulayman Bowles',
 }
 
@@ -146,7 +148,7 @@ export function searchMetadata(route: string): SearchMetadata {
   })
   return {
     route: normalized,
-    title: pageTitles[normalized] || (article ? `${article.seoTitle || article.title} — Sulayman Bowles` : topic ? `${topic.seoTitle} — Sulayman Bowles` : page.title),
+    title: pageTitles[normalized] || (normalized.startsWith('work/') ? workContributions[normalized.slice(5)]?.searchTitle : undefined) || (article ? `${article.seoTitle || article.title} — Sulayman Bowles` : topic ? `${topic.seoTitle} — Sulayman Bowles` : page.title),
     description, canonical, robots: indexRobots, image,
     ...(article && published ? { article: { published, ...(modified ? { modified } : {}), section: article.category } } : {}),
     schema: { '@context': 'https://schema.org', '@graph': graph },

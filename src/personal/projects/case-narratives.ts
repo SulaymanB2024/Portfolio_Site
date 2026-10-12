@@ -1,4 +1,5 @@
 import type { WorkDocument } from './work-document'
+import { workContributions } from './work-curation.ts'
 
 const atlasRevision = 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-/blob/ef3bad25ea0f43f7b4a854fa56c74af5a50fc8db'
 
@@ -6,8 +7,8 @@ const atlasRevision = 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-/blob
 export const caseNarratives: Record<string, WorkDocument> = {
   atlas: {
     role: 'Founder · Product & engineering',
-    deck: 'A local website crawler and evidence console.',
-    summary: 'I built Atlas’s crawler, evidence model, review workflow, and interface through VOID. Runs are stored in SQLite, with page, link, finding, and measurement exports.',
+    deck: 'A Python and SQLite website audit console.',
+    summary: workContributions.atlas.summary,
     chapters: [
       {
         id: 'study-section-1',

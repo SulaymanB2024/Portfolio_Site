@@ -22,7 +22,7 @@ if (import.meta.env.DEV && new URLSearchParams(location.search).has('fluidity-pr
 // Prepare only the requested destination before mounting the shell. Its CSS and
 // manuscript arrive together, so a deep link cannot flash a footer or empty reader.
 // Failed resources still reach the route boundary or the article's retry UI.
-const initialPath = () => resolveRoute(location.hash, location.pathname, catalog as ArticleSummary[], documentOutreachCompany(document, location.pathname)?.slug)
+const initialPath = () => resolveRoute(location.hash, location.pathname, catalog as ArticleSummary[], documentOutreachCompany(document, location.pathname) ? location.pathname.replace(/^\/+|\/+$/g, '') : undefined)
 let initialRoute: string
 do {
   initialRoute = initialPath()

@@ -40,6 +40,7 @@
 .home-context h2:focus { outline:none; }
 .home-context-summary { font:clamp(18px,1.65vw,24px)/1.6 Georgia,'Times New Roman',serif;max-width:480px;margin:0;text-wrap:pretty; }
 .home-context-interests { min-width:0; }
+.home-context-actions { display:flex; flex-wrap:wrap; gap:8px 28px; }
 .home-context-stage { display:block;position:relative;height:clamp(340px,min(34vw,56svh),480px);cursor:pointer; }
 .home-context-stage canvas { display:block;width:100%;height:100%;background:transparent;touch-action:pan-y;cursor:pointer; }
 .home-context-stage canvas:active { cursor:grabbing; }
@@ -62,10 +63,15 @@
 
 @media screen {
   .personal-site.home-site[data-section][data-appearance] .home-context-intro h2 {
-    font-size: clamp(44px, 5vw, 72px); line-height: 1.1; margin-bottom: 26px;
+    font-size: 44px; line-height: 1.12; margin-bottom: 22px;
   }
-  .home-context-greeting { display: block; font-size: .52em; line-height: 1.5; letter-spacing: -.035em; }
-  .home-context-name { display: block; }
+  .personal-site.home-site[data-section][data-appearance] :is(.home-context-summary, .home-context-projects) {
+    max-inline-size: 38ch; margin: 0;
+    font: 400 22px/1.55 var(--type-reading, Georgia, serif); text-wrap: pretty;
+  }
+  .personal-site.home-site[data-section][data-appearance] .home-context-projects { margin-top: 12px; }
+  .home-context-projects a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .home-context-actions { margin-top: 20px; }
   .home-context-music { position: relative; color: inherit; text-decoration: none; }
   .personal-site.home-site[data-section][data-appearance] .home-context-music:focus-visible { outline: none; }
   .home-context-music:focus-visible::after {
@@ -96,6 +102,10 @@
   .home-context-stage:has(canvas[data-interacting='true']) .home-context-gesture { color: var(--ink); }
   .personal-site.home-site[data-section][data-appearance] .home-context-music:is(:hover, :focus-visible) .destination-link-label { text-decoration-color: currentColor; }
   .personal-site.home-site[data-section][data-appearance] .home-context-stage { height: clamp(320px, min(32vw, 52svh), 440px); }
+}
+@media screen and (max-width: 760px) {
+  .personal-site.home-site[data-section][data-appearance] .home-context-intro h2 { font-size: 36px; }
+  .personal-site.home-site[data-section][data-appearance] :is(.home-context-summary, .home-context-projects) { font-size: 20px; }
 }
 @media screen and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .home-context-gesture { transition: opacity 150ms ease-out, transform 220ms cubic-bezier(.22,.61,.36,1), color 150ms ease-out; }

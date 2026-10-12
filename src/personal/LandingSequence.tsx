@@ -3,6 +3,7 @@ import { projects } from './content'
 import { portfolioAssetUrl } from './portfolio-assets'
 import { DestinationLink, LinkArrow } from './DestinationLink'
 import type { LandingOpeningCopy } from './landing/opening-copy'
+import { recruiterCopy } from './recruiter-copy'
 import './landing/landing.css'
 import './landing/opening-motion.css'
 
@@ -65,8 +66,12 @@ export default function LandingSequence({ onActiveChange, opening }: { onActiveC
         <span ref={category} className="landing-category">{opening?.category}</span>
         <a ref={title} className="landing-title-target" tabIndex={-1}><h1 ref={headline} id="landing-title">{opening ? opening.lines.map((line, index) => <Fragment key={index}><span className="landing-title-line" data-quiet={index % 2 === 0 ? '' : undefined}>{line}</span>{index < 3 ? ' ' : ''}</Fragment>) : <><span className="landing-title-line" data-quiet>The</span>{' '}<span className="landing-title-line">frontier</span>{' '}<span className="landing-title-line" data-quiet>is all that</span>{' '}<span className="landing-title-line">matters.</span></>}</h1></a>
         <div ref={links} className="landing-story-links">
-          <a ref={project} className="destination-link" href={opening?.href || '#/work'}><span className="destination-link-label">{opening?.linkLabel || 'Selected work'}</span><LinkArrow /></a>
+          {!opening && <p className="landing-recruiter-intro">{recruiterCopy.opening}</p>}
+          <div className="landing-destinations">
+          <a ref={project} className="destination-link" href={opening?.href || '#/work'}><span className="destination-link-label">{opening?.linkLabel || 'Work'}</span><LinkArrow /></a>
           <a ref={article} className="destination-link" href={opening?.article.href || '#/about'}><span className="destination-link-label">{opening?.article.label || 'About me'}</span><LinkArrow /></a>
+          {!opening && <DestinationLink href="#/resume" data-opening-action>Résumé</DestinationLink>}
+          </div>
         </div>
       </div></div>
       <button ref={helmetControl} type="button" className="landing-helmet-control" aria-label="Rotate helmet" aria-describedby="sculpture-instructions" hidden>
