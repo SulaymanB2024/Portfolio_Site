@@ -1,5 +1,6 @@
 import { workContributions } from './work-curation'
 import './project-contribution.css'
+import { DestinationLink } from '../DestinationLink'
 
 export function ProjectContribution({ slug, compact = false }: { slug: string; compact?: boolean }) {
   const contribution = workContributions[slug]
@@ -10,6 +11,9 @@ export function ProjectContribution({ slug, compact = false }: { slug: string; c
       <div><dt>Status</dt><dd>{contribution.status}</dd></div>
     </dl>
     <p><span>Key decision</span>{contribution.decision}</p>
+    <nav className="project-proof-links" aria-label="Project evidence">
+      {contribution.proofs.map(proof => <DestinationLink key={proof.href} href={proof.href}>{proof.label}</DestinationLink>)}
+    </nav>
   </div>
 }
 

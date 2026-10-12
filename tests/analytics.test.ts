@@ -1,25 +1,44 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { analyticsPageLocation, analyticsReferrer, createPersonalAnalytics, personalMeasurementId, recordPersonalPageView, type AnalyticsWindow } from '../src/personal/analytics.ts'
+import { analyticsPageLocation, analyticsReferrer, createPersonalAnalytics, installPortfolioActionTracking, personalMeasurementId, portfolioActionForHref, recordPersonalPageView, recordPortfolioAction, type AnalyticsWindow, type PortfolioAction } from '../src/personal/analytics.ts'
+import { contact } from '../src/personal/content.ts'
 import { searchMetadata } from '../src/personal/search-metadata.ts'
 
-function fixture(hostname = 'sulayman-bowles.dev', protocol = 'https:') {
+function fixture(hostname = 'sulayman-bowles.dev', protocol = 'https:', pathname = '/', outreachSlug?: string) {
   const scripts: HTMLScriptElement[] = []
-  const browser: AnalyticsWindow = { location: { hostname, protocol } }
+  const listeners = new Set<EventListener>()
+  const browser: AnalyticsWindow = { location: { hostname, protocol, pathname } }
   let page = searchMetadata('home')
+  let canonical = page.canonical
   const document = {
     title: page.title,
     referrer: 'https://www.google.com/search?q=private+search&email=person%40example.com',
     createElement: () => ({} as HTMLScriptElement),
     getElementById: (id: string) => scripts.find(script => script.id === id) || null,
     head: { append: (script: HTMLScriptElement) => scripts.push(script) },
-    querySelector: () => ({ href: page.canonical }),
+    querySelector: (selector: string) => selector === 'link[rel="canonical"]' ? { href: canonical } : selector === 'meta[name="outreach-company"]' ? { content: outreachSlug } : null,
+    addEventListener: (type: string, listener: EventListener) => { if (type === 'click') listeners.add(listener) },
+    removeEventListener: (type: string, listener: EventListener) => { if (type === 'click') listeners.delete(listener) },
   } as unknown as Document
-  const route = (value: string) => { page = searchMetadata(value); document.title = page.title }
+  const route = (value: string) => { page = searchMetadata(value); canonical = page.canonical; document.title = page.title }
+  const setCanonical = (value: string) => { canonical = value }
   const commands = () => (browser.dataLayer || []).map(command => Array.from(command as ArrayLike<unknown>))
   const views = () => commands().filter(command => command[0] === 'event' && command[1] === 'page_view').map(command => command[2] as Record<string, unknown>)
-  return { browser, document, scripts, route, commands, views }
+  const actions = () => commands().filter(command => command[0] === 'event' && command[1] === 'portfolio_action').map(command => command[2] as Record<string, unknown>)
+  const click = (href?: string, overrides: Partial<MouseEvent> = {}) => {
+    let prevented = false, stopped = false
+    const event = {
+      button: 0, defaultPrevented: false,
+      // A nested label/arrow resolves to its containing anchor.
+      target: href ? { closest: () => ({ href }) } : null,
+      preventDefault: () => { prevented = true }, stopPropagation: () => { stopped = true },
+      ...overrides,
+    } as unknown as MouseEvent
+    for (const listener of [...listeners]) listener(event)
+    return { prevented, stopped }
+  }
+  return { browser, document, scripts, listeners, route, setCanonical, commands, views, actions, click }
 }
 
 test('the initial production view is manual, sanitized and loads one asynchronous native tag', () => {
@@ -133,9 +152,180 @@ test('the deployed CSP permits the native loader and collection without broadeni
   assert.deepEqual(directives.get('script-src-attr'), ["'none'"])
 })
 
-test('the route effect records metadata only after the title and canonical are updated', () => {
+test('the route effect records committed metadata and analytics adds no history listeners', () => {
   const source = readFileSync(new URL('../src/personal/PersonalSite.tsx', import.meta.url), 'utf8')
   assert.match(source, /updateSearchHead\(document, route\)\s+recordPersonalPageView\(document, window\)/)
   const analytics = readFileSync(new URL('../src/personal/analytics.ts', import.meta.url), 'utf8')
-  assert(!analytics.includes('addEventListener('))
+  assert(!/addEventListener\(['"](?:hashchange|popstate)['"]/.test(analytics))
+})
+
+test('public recruiting links send bounded actions without another page view or configuration', () => {
+  const f = fixture()
+  f.route('resume')
+  Object.assign(f.browser.location, { search: '?recipient=person@example.com', hash: '#/resume?role=private-role' })
+  recordPersonalPageView(f.document, f.browser)
+  const dispose = installPortfolioActionTracking(f.document, f.browser)
+  for (const href of ['/Sulayman_Bowles_Resume.pdf', `mailto:${contact.email}`, `${contact.linkedin}/`]) {
+    assert.deepEqual(f.click(href), { prevented: false, stopped: false })
+  }
+  assert.deepEqual(f.actions(), ['resume_download', 'email_click', 'linkedin_click'].map(action => ({
+    send_to: personalMeasurementId, action, page_location: 'https://sulayman-bowles.dev/resume',
+  })))
+  assert.equal(f.views().length, 1)
+  assert.equal(f.commands().filter(command => command[0] === 'config').length, 1)
+  assert.equal(f.scripts.length, 1)
+  const payloads = JSON.stringify(f.actions())
+  for (const privateValue of [contact.email, contact.linkedin, 'Sulayman_Bowles_Resume.pdf', 'person@example.com', 'private-role', '?', '#']) assert(!payloads.includes(privateValue))
+  dispose()
+})
+
+test('actions use the latest committed canonical for direct and hash routes rather than physical URLs', () => {
+  for (const pathname of ['/', '/resume']) {
+    const f = fixture('sulayman-bowles.dev', 'https:', pathname)
+    Object.assign(f.browser.location, { hash: '#/resume?recipient=person@example.com' })
+    f.route('resume')
+    recordPersonalPageView(f.document, f.browser)
+    const dispose = installPortfolioActionTracking(f.document, f.browser)
+    f.click('/Sulayman_Bowles_Resume.pdf')
+    f.route('contact')
+    recordPersonalPageView(f.document, f.browser)
+    f.click(`mailto:${contact.email}`)
+    assert.deepEqual(f.actions().map(action => action.page_location), ['https://sulayman-bowles.dev/resume', 'https://sulayman-bowles.dev/contact'])
+    assert.equal(f.views().length, 2)
+    dispose()
+  }
+})
+
+test('registered recruiter actions retain root canonicals and separate once-only outreach attribution', () => {
+  const f = fixture('sulayman-bowles.dev', 'https:', '/base-power', 'base-power')
+  Object.assign(f.browser.location, { search: '?recipient=person@example.com&role=private-role' })
+  recordPersonalPageView(f.document, f.browser)
+  const dispose = installPortfolioActionTracking(f.document, f.browser)
+  f.click(`mailto:${contact.email}`)
+  f.route('resume'); recordPersonalPageView(f.document, f.browser)
+  f.click('/Sulayman_Bowles_Resume.pdf')
+  f.route('home'); recordPersonalPageView(f.document, f.browser)
+  f.click(contact.linkedin)
+  assert.deepEqual(f.actions().map(action => action.page_location), ['https://sulayman-bowles.dev/', 'https://sulayman-bowles.dev/resume', 'https://sulayman-bowles.dev/'])
+  assert.deepEqual(f.commands().filter(command => command[1] === 'outreach_visit').map(command => command[2]), [{ send_to: personalMeasurementId, outreach_company: 'base-power' }])
+  assert.equal(f.views().length, 3)
+  for (const value of ['base-power', 'outreach_company', 'recipient', 'role', 'person@example.com']) assert(!JSON.stringify(f.actions()).includes(value))
+  dispose()
+})
+
+test('delegated tracking shares one listener and releases it correctly across cleanup and remount', () => {
+  const f = fixture()
+  recordPersonalPageView(f.document, f.browser)
+  const first = installPortfolioActionTracking(f.document, f.browser)
+  const second = installPortfolioActionTracking(f.document, f.browser)
+  assert.equal(f.listeners.size, 1)
+  f.click(contact.linkedin)
+  assert.equal(f.actions().length, 1)
+  first(); first()
+  assert.equal(f.listeners.size, 1)
+  f.click(contact.linkedin)
+  assert.equal(f.actions().length, 2)
+  second(); second()
+  assert.equal(f.listeners.size, 0)
+  f.click(contact.linkedin)
+  assert.equal(f.actions().length, 2)
+  const remounted = installPortfolioActionTracking(f.document, f.browser)
+  f.click(contact.linkedin)
+  assert.equal(f.actions().length, 3)
+  assert.equal(f.views().length, 1)
+  remounted()
+  assert.equal(f.listeners.size, 0)
+})
+
+test('prevented and non-primary activations are excluded while keyboard and modified primary clicks work', () => {
+  const f = fixture()
+  recordPersonalPageView(f.document, f.browser)
+  const dispose = installPortfolioActionTracking(f.document, f.browser)
+  f.click(contact.linkedin, { button: 1 })
+  f.click(contact.linkedin, { button: 2 })
+  f.click(contact.linkedin, { defaultPrevented: true })
+  f.click()
+  assert.equal(f.actions().length, 0)
+  f.click(contact.linkedin, { detail: 0 })
+  f.click(contact.linkedin, { metaKey: true })
+  assert.equal(f.actions().length, 2)
+  dispose()
+})
+
+test('destination allowlists exclude personal context, arbitrary profiles, PDF files and unsupported origins', () => {
+  assert.equal(portfolioActionForHref('https://www.sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf'), 'resume_download')
+  const unsupported = [
+    `mailto:${contact.email}?subject=private-role&cc=person@example.com`, `mailto:${contact.email}#private`, 'mailto:person@example.com',
+    `${contact.linkedin}?recipient=person@example.com`, `${contact.linkedin}#private`, `${contact.linkedin}-other`,
+    'https://www.linkedin.com/in/person-example/', 'http://www.linkedin.com/in/sulayman-bowles',
+    'https://www.linkedin.com.evil.test/in/sulayman-bowles', 'https://person:password@www.linkedin.com/in/sulayman-bowles',
+    '/Sulayman_Bowles_Resume.pdf?recipient=person@example.com', '/Sulayman_Bowles_Resume.pdf#private', '/research/other-resume.pdf',
+    'https://evil.test/Sulayman_Bowles_Resume.pdf', 'https://preview.sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf',
+    'https://sulayman-bowles.dev.evil.test/Sulayman_Bowles_Resume.pdf', 'https://sulayman-bowles.dev:8443/Sulayman_Bowles_Resume.pdf',
+    'http://sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf', 'https://person:password@sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf',
+    'javascript:alert(1)', 'data:text/plain,private', '#/resume', '/resume',
+  ]
+  const f = fixture()
+  recordPersonalPageView(f.document, f.browser)
+  const dispose = installPortfolioActionTracking(f.document, f.browser)
+  for (const href of unsupported) {
+    assert.equal(portfolioActionForHref(href), undefined, href)
+    f.click(href)
+  }
+  assert.equal(f.actions().length, 0)
+  assert.equal(recordPortfolioAction(f.document, f.browser, 'person@example.com' as PortfolioAction), false)
+  for (const canonical of ['https://sulayman-bowles.dev/person@example.com', 'https://evil.test/resume', 'https://person:password@sulayman-bowles.dev/resume']) {
+    f.setCanonical(canonical)
+    assert.equal(recordPortfolioAction(f.document, f.browser, 'email_click'), false)
+    f.click(`mailto:${contact.email}`)
+  }
+  assert.equal(f.actions().length, 0)
+  f.setCanonical('https://sulayman-bowles.dev/resume?recipient=person@example.com#private')
+  f.click('/Sulayman_Bowles_Resume.pdf')
+  assert.deepEqual(f.actions(), [{ send_to: personalMeasurementId, action: 'resume_download', page_location: 'https://sulayman-bowles.dev/resume' }])
+  dispose()
+})
+
+test('local, preview, lookalike and HTTP pages never install action tracking or emit with an existing tag', () => {
+  for (const [hostname, protocol] of [
+    ['localhost', 'http:'], ['127.0.0.1', 'http:'], ['portfolio-site-sample.vercel.app', 'https:'],
+    ['sulayman-bowles.dev.evil.test', 'https:'], ['preview.sulayman-bowles.dev', 'https:'], ['sulayman-bowles.dev', 'http:'],
+  ]) {
+    const f = fixture(hostname, protocol)
+    const received: unknown[] = []
+    f.browser.gtag = (...parameters: unknown[]) => { received.push(parameters) }
+    const dispose = installPortfolioActionTracking(f.document, f.browser)
+    assert.equal(f.listeners.size, 0)
+    assert.equal(recordPortfolioAction(f.document, f.browser, 'email_click'), false)
+    f.click(`mailto:${contact.email}`)
+    assert.deepEqual(received, [])
+    assert.equal(f.browser.dataLayer, undefined)
+    assert.equal(f.scripts.length, 0)
+    dispose()
+  }
+  const www = fixture('www.sulayman-bowles.dev')
+  recordPersonalPageView(www.document, www.browser)
+  const dispose = installPortfolioActionTracking(www.document, www.browser)
+  www.click(contact.linkedin)
+  assert.equal(www.actions()[0].page_location, 'https://sulayman-bowles.dev/')
+  dispose()
+})
+
+test('missing tags, analytics errors and unavailable document APIs leave links and cleanup available', () => {
+  const f = fixture()
+  const dispose = installPortfolioActionTracking(f.document, f.browser)
+  f.click(contact.linkedin)
+  assert.equal(f.browser.gtag, undefined)
+  assert.equal(f.browser.dataLayer, undefined)
+  assert.equal(f.scripts.length, 0)
+  recordPersonalPageView(f.document, f.browser)
+  f.browser.gtag = () => { throw new Error('Tag blocked') }
+  assert.deepEqual(f.click(contact.linkedin), { prevented: false, stopped: false })
+  assert.equal(recordPortfolioAction(f.document, f.browser, 'linkedin_click'), false)
+  f.document.querySelector = () => { throw new Error('Head unavailable') }
+  assert.deepEqual(f.click(contact.linkedin), { prevented: false, stopped: false })
+  dispose()
+  assert.equal(f.listeners.size, 0)
+  f.document.addEventListener = () => { throw new Error('Listener unavailable') }
+  assert.doesNotThrow(() => installPortfolioActionTracking(f.document, f.browser)())
 })

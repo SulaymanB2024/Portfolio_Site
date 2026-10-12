@@ -6,6 +6,8 @@
 .project-contribution>p{font:17px/1.6 Georgia,serif;margin:19px 0 0;text-wrap:pretty}
 .project-contribution-compact{margin-top:23px;max-width:40ch}
 .project-contribution-compact>p{font-size:16px}
+.project-proof-links{display:flex;flex-wrap:wrap;gap:4px 24px;margin-top:12px}
+.project-proof-links .destination-link{font-size:14px}
 .project-product-path{padding:28px 0 34px;border-top:1px solid var(--line)}
 .product-path-intro{display:flex;justify-content:space-between;align-items:baseline;gap:25px;margin-bottom:20px}
 .product-path-intro>.mono{font-size:11px;text-transform:uppercase;color:var(--muted)}

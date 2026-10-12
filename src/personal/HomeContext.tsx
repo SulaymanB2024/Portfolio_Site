@@ -53,9 +53,13 @@ export default function HomeContext() {
 
   return <section className="home-context" id="home-profile" aria-labelledby="home-profile-title">
     <div className="home-context-intro">
-      <h2 id="home-profile-title" tabIndex={-1}><span className="home-context-greeting">I’m</span>{' '}<span className="home-context-name">Sulayman<span aria-hidden="true">.</span></span></h2>
+      <h2 id="home-profile-title" tabIndex={-1}>I’m Sulayman<span aria-hidden="true">.</span></h2>
       <p className="home-context-summary">{identity.homeSummary}</p>
-      <DestinationLink className="home-context-about" href="#/about">About me</DestinationLink>
+      <p className="home-context-projects">I built <a href="#/work/internshipdeadlines">InternshipDeadlines</a> to organize internship search and application planning, and <a href="#/work/atlas">Atlas</a> to ground website audits in captured evidence.</p>
+      <nav className="home-context-actions" aria-label="Biography and contact">
+        <DestinationLink className="home-context-about" href="#/about">About me</DestinationLink>
+        <DestinationLink className="home-context-about" href="#/contact">Contact</DestinationLink>
+      </nav>
     </div>
     <div className="home-context-interests">
     <a ref={stage} className="home-context-music" href={interestHref(interest.id)} aria-label={`Explore music — ${interest.label.toLowerCase()}`} aria-describedby="home-sculpture-instructions" draggable={false}>

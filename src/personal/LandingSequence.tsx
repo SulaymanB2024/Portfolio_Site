@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { projects } from './content'
 import { portfolioAssetUrl } from './portfolio-assets'
 import { DestinationLink, LinkArrow } from './DestinationLink'
+import { recruiterCopy } from './recruiter-copy'
 import './landing/landing.css'
 import './landing/opening-motion.css'
 
@@ -64,8 +65,12 @@ export default function LandingSequence({ onActiveChange }: { onActiveChange: (a
         <span ref={category} className="landing-category" />
         <a ref={title} className="landing-title-target" tabIndex={-1}><h1 ref={headline} id="landing-title"><span className="landing-title-line" data-quiet>The</span>{' '}<span className="landing-title-line">frontier</span>{' '}<span className="landing-title-line" data-quiet>is all that</span>{' '}<span className="landing-title-line">matters.</span></h1></a>
         <div ref={links} className="landing-story-links">
-          <a ref={project} className="destination-link" href="#/work"><span className="destination-link-label">Selected work</span><LinkArrow /></a>
+          <p className="landing-recruiter-intro">{recruiterCopy.opening}</p>
+          <div className="landing-destinations">
+          <a ref={project} className="destination-link" href="#/work"><span className="destination-link-label">Work</span><LinkArrow /></a>
           <a ref={article} className="destination-link" href="#/about"><span className="destination-link-label">About me</span><LinkArrow /></a>
+          <DestinationLink href="#/resume" data-opening-action>Résumé</DestinationLink>
+          </div>
         </div>
       </div></div>
       <button ref={helmetControl} type="button" className="landing-helmet-control" aria-label="Rotate helmet" aria-describedby="sculpture-instructions" hidden>

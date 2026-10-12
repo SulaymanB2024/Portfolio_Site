@@ -14,6 +14,8 @@ import BassInstrument, { type BassInstrumentHandle } from './BassInstrument'
 import { performances } from './performances'
 import { interestFromHash } from './interest-route'
 import { DestinationLink } from '../DestinationLink'
+import { PersonalProfile } from '../PersonalProfile'
+import { recruiterCopy } from '../recruiter-copy'
 import './about.css'
 import './about-study-design.css'
 
@@ -257,7 +259,7 @@ export default function AboutPage({ dark }: { dark: boolean }) {
   return <section className="about-objects" aria-labelledby={selected ? 'about-interest-title' : 'about-title'} data-selected={selected ?? 'collection'} data-board-mode={boardMode} data-board-view={boardView} data-notebook={notebook ?? 'closed'} data-audio-state={audioState} data-phrase-playing={sequencePlaying} data-motion={playing ? 'playing' : 'paused'}>
     {!selected && <header className="about-introduction">
       <h1 id="about-title">About.</h1>
-      <div className="about-biography"><p>I’m Sulayman, a finance student at UT Austin. I build software and work in product and growth.</p><p>I founded <a href="#/work/internshipdeadlines">InternshipDeadlines</a> and lead growth at <a href="#/work/sapien">Sapien</a>.</p></div>
+      <div className="about-biography"><p>{recruiterCopy.summary}</p><p>I founded <a href="#/work/internshipdeadlines">InternshipDeadlines</a> and built <a href="#/work/atlas">Atlas</a>.</p></div>
       <nav className="about-biography-links mono" aria-label="More about my work"><DestinationLink href="#/work">Selected work</DestinationLink><DestinationLink href="#/resume">Résumé</DestinationLink></nav>
     </header>}
     <div className="about-object-stage">
@@ -315,6 +317,7 @@ export default function AboutPage({ dark }: { dark: boolean }) {
       <p className="about-archive-introduction">Double bass at UT Austin and Texas All-State.</p><PerformanceArchive entries={performances} />
       <details className="about-library-credit"><summary>About the instrument sounds<span aria-hidden="true">+</span></summary><p>The playable bass uses recordings from <a href="https://versilian-studios.com/vsco-community/" target="_blank" rel="noreferrer">VSCO 2 Community Edition</a>, a CC0 sample library. These instrument samples are separate from the performance recordings linked above.</p></details>
     </section>
+    {!selected && <PersonalProfile />}
     <p className="sr-only" aria-live="polite">{notice}</p>
   </section>
 }

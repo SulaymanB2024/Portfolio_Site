@@ -4,6 +4,16 @@
 .home-site .home-standard-content { max-width: 1800px; margin: 0 auto; padding: 0 var(--home-gutter); }
 .personal-site.home-site .home-standard-content .home-writing { padding-top: clamp(36px, 4vw, 64px); }
 .home-site > .personal-footer { width: min(calc(100% - 2 * var(--home-gutter)), 1600px); margin-inline: auto; }
+@media screen {
+  .home-site[data-section][data-appearance] .site-closing h2 { font-size: 44px; line-height: 1.12; }
+  .home-site[data-section][data-appearance] .site-closing-contact > p {
+    font: 400 22px/1.55 var(--type-reading, Georgia, serif); max-width: 34ch;
+  }
+}
+@media screen and (max-width: 760px) {
+  .home-site[data-section][data-appearance] .site-closing h2 { font-size: 36px; }
+  .home-site[data-section][data-appearance] .site-closing-contact > p { font-size: 20px; }
+}
 .home-site[data-landing-active='true']::before { opacity: 0; }
 .home-standard-content .home-writing { scroll-margin-top: 110px; }
 
@@ -74,4 +84,41 @@
   .landing-copy h1 { opacity: 1 !important; font-size: 45px; }
   .landing-story-links { position: static; color: black; opacity: 1 !important; }
   .landing-fallback-nav { display: flex; flex-wrap: wrap; gap: 20px; padding-top: 30px; }
+}
+
+/* The reading deck gives the opening a voice; destinations follow on one axis. */
+.landing-destinations { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+.landing-stage:not([data-chapter]) .landing-story-links,
+.landing-stage[data-chapter='helmet'] .landing-story-links { flex-direction: column; gap: 16px; }
+.landing-stage:not([data-chapter]) .landing-destinations,
+.landing-stage[data-chapter='helmet'] .landing-destinations { flex-direction: row; flex-wrap: wrap; gap: 0 26px; }
+.landing-recruiter-intro {
+  margin: 0; max-width: 32ch;
+  font: 400 22px/1.4 var(--type-reading, Georgia, serif);
+  font-optical-sizing: auto; letter-spacing: -.01em; text-wrap: pretty;
+}
+.landing-stage[data-chapter]:not([data-chapter='helmet']) .landing-recruiter-intro { display: none; }
+@media screen and (min-width: 701px) and (min-height: 541px) {
+  /* Center the reading composition optically, including the deck and links. */
+  .personal-site.home-site .landing-copy { padding-bottom: clamp(110px, 18svh, 172px); }
+}
+@media screen and (max-width: 700px) {
+  .landing-recruiter-intro { font-size: 20px; max-width: 36ch; }
+  .landing-destinations { gap: 12px; }
+  .landing-stage:not([data-chapter]) .landing-destinations,
+  .landing-stage[data-chapter='helmet'] .landing-destinations { gap: 0 18px; }
+}
+@media screen and (max-width:360px) and (max-height:650px) and (orientation:portrait) {
+  .personal-site[data-section][data-appearance] .landing-copy { padding-top: 84px; }
+  .landing-recruiter-intro { font-size: 18px; max-width: 26ch; }
+  .landing-stage:not([data-chapter]) .landing-destinations,
+  .landing-stage[data-chapter='helmet'] .landing-destinations { gap: 0 12px; }
+}
+@media screen and (max-height: 540px) and (min-aspect-ratio: 4/3) {
+  .personal-site.home-site[data-section][data-appearance] .landing-copy { padding-top: 90px; }
+  .personal-site.home-site[data-section][data-appearance] .landing-copy h1 { font-size: clamp(24px, 8.2svh, 42px); }
+  .landing-recruiter-intro { font-size: 18px; }
+}
+@media screen and (max-height: 320px) and (min-aspect-ratio: 4/3) {
+  .personal-site.home-site[data-section][data-appearance] .landing-copy { padding-top: 84px; }
 }
