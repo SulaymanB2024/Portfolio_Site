@@ -1,11 +1,13 @@
 import type { ArticleSummary } from './editorial/types'
+import { recruiterCopy } from './recruiter-copy.ts'
 
 // Page copy lives separately from the published research and its source records.
 export const siteCopy = {
   home: {
     title: 'The frontier is all that matters',
     headline: ['The frontier', 'is all that', 'matters'],
-    description: 'I build software and study AI and markets.',
+    description: recruiterCopy.opening,
+    contact: 'I’m open to internships and full-time roles in product, growth and AI. Send me a note.',
     action: 'Explore my work',
   },
   work: {
@@ -20,7 +22,7 @@ export const siteCopy = {
   },
   about: {
     paragraphs: [
-      'I’m Sulayman, a finance student at UT Austin. I build software and write about AI and markets.',
+      recruiterCopy.introduction,
       'I founded InternshipDeadlines for internship search and application planning. At Chegg, I work on Internships.com, student research, and AI tools. I lead growth and positioning at Sapien, which uses simulated audiences for market research.',
       'I run VOID, a consultancy for growth strategy, financial analysis, AI workflows, and web development. I also built Atlas, a website audit console that traces findings to captured pages.',
       'I compose and play double bass, with performances at UT Austin and Texas All-State.',
@@ -36,12 +38,12 @@ export const siteCopy = {
   },
   contact: {
     headline: ['Have a question', 'worth working', 'on?'],
-    description: 'For product work, research, or collaboration, send me a note.',
+    description: recruiterCopy.contact,
     label: 'Start with a note',
   },
   footer: {
     title: 'Get in touch.',
-    description: 'For product work, research, or collaboration, send me a note.',
+    description: recruiterCopy.contact,
     colophon: 'Set in Syne and Newsreader. React, TypeScript, and Three.js. Light and motion, rendered as ink on paper.',
     top: 'Back to top',
   },
@@ -72,13 +74,13 @@ export const siteCopy = {
 
 export const siteMetadata = {
   homeTitle: 'The frontier is all that matters',
-  description: 'Software, AI, and markets by Sulayman Bowles, a finance student at UT Austin.',
+  description: recruiterCopy.description,
   pages: {
     work: 'Products, research, and experiments by Sulayman Bowles, including InternshipDeadlines, Sapien, Atlas, and independent market research.',
     writing: 'Selected essays by Sulayman Bowles on AI-operated businesses, agent evaluation, website audits, and Texas toll road economics.',
-    about: 'Sulayman Bowles is a finance student at UT Austin working in software, product, and growth. He also composes and plays double bass.',
+    about: 'Sulayman Bowles studies finance at UT Austin, works in product and growth at Chegg and Sapien, and builds AI tools, InternshipDeadlines and Atlas.',
     resume: 'Experience, education, and selected work by Sulayman Bowles across Chegg, Sapien, VOID, and independent products.',
-    contact: 'Contact Sulayman Bowles about product work, research, and collaborations.',
+    contact: 'Contact Sulayman Bowles about product, growth and AI internships, full-time roles, research and collaborations.',
   } as Record<string, string>,
 }
 

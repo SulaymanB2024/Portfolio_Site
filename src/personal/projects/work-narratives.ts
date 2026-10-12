@@ -1,11 +1,12 @@
 import type { WorkDocument } from './work-document'
+import { workContributions } from './work-curation.ts'
 
 /** Sources and editorial decisions: .cache/work-material-20261004/source-products.md and source-engineering.md. */
 export const workNarratives: Record<string, WorkDocument> = {
   internshipdeadlines: {
     role: 'Founder & product lead',
-    deck: 'Internship search, source records, and application planning.',
-    summary: 'I built the recruiting data pipeline and student product, from listing classification and search ranking to saved applications and preparation guides.',
+    deck: 'AI-assisted internship search and application planning.',
+    summary: workContributions.internshipdeadlines.summary,
     chapters: [
       {
         id: 'question',
@@ -96,8 +97,7 @@ export const workNarratives: Record<string, WorkDocument> = {
   sapien: {
     role: 'Growth Manager',
     deck: 'Research content, buyer guides, and product positioning.',
-    summary:
-      'I built Sapien’s SEO and content function: editorial, category pages, ad creative, recorded explainers, and sales material for a simulated-audience research platform.',
+    summary: workContributions.sapien.summary,
     chapters: [
       {
         id: 'question',

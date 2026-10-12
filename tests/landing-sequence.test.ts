@@ -16,7 +16,7 @@ const near = (a: number, b: number, tolerance = 1e-10) => assert.ok(Math.abs(a -
 
 test('the homepage intro offers Work and About while all four chapters retain their real project routes and assets', async () => {
   assert.equal(CHAPTERS[0].href, '#/work')
-  assert.equal(CHAPTERS[0].linkLabel, 'Selected work')
+  assert.equal(CHAPTERS[0].linkLabel, 'Work')
   assert.deepEqual(CHAPTERS[0].article, { label: 'About me', href: '#/about' })
   assert.deepEqual(CHAPTERS.slice(1).map(chapter => chapter.href), projects.map(project => `#/work/${project.slug}`))
   assert.deepEqual(CHAPTERS.slice(1).map(chapter => chapter.label), projects.map(project => project.name))
@@ -212,6 +212,22 @@ test('phone sculptures project inside the space below their title and links', ()
   assert.equal(isStackedLanding(667, 375), false)
   assert.equal(isStackedLanding(700, 700), false)
   assert.equal(isStackedLanding(701, 1000), false)
+})
+
+test('opening recruiting copy reserves phone sculpture clearance without changing later chapters', () => {
+  for (const [width, height] of [[320, 568], [390, 844], [430, 932]]) {
+    const bounds = { x: 1.7, y: 2, z: 1.4 }
+    const baseline = mobileSculptureFrame(width, height, 96, 180, 1, 1, bounds, 34)
+    const recruiting = mobileSculptureFrame(width, height, 96, 180, 1, 1, bounds, 34, 100)
+    assert.ok(recruiting.top > baseline.top)
+    assert.ok(recruiting.scale > 0 && Number.isFinite(recruiting.y))
+    const focal = height / (2 * Math.tan(16 * Math.PI / 180))
+    for (const sy of [-1, 1]) for (const sz of [-1, 1]) {
+      const depth = 6.1 - sz * bounds.z * recruiting.scale / 2
+      const y = height / 2 - focal * (recruiting.y + sy * bounds.y * recruiting.scale / 2) / depth
+      assert.ok(y >= recruiting.top && y <= recruiting.bottom)
+    }
+  }
 })
 
 test('the production threshold assets retain smooth bounded interpolation through their actual GLB keys', async () => {

@@ -273,4 +273,19 @@ for (const path of ['/404/index.html', '/sitemap.html']) {
   assert(html.includes('name="robots" content="noindex, follow"'), `Utility indexing drift: ${path}`)
 }
 await stat('dist/Sulayman_Bowles_Resume.pdf')
+const homeHtml = await read('dist/index.html')
+assert(homeHtml.includes('Sulayman Bowles — Product, Growth &amp; AI'), 'Recruiter search title is missing')
+for (const fact of ['I build AI tools', 'work in product at Chegg', 'lead growth at Sapien', 'finance at UT Austin']) assert(homeHtml.includes(fact), `Initial homepage lacks recruiting context: ${fact}`)
+assert(homeHtml.includes('The frontier is all that matters'), 'Accepted homepage headline changed')
+const aboutHtml = await read('dist/about/index.html')
+for (const fact of ['Chegg', 'Sapien', 'VOID', 'InternshipDeadlines', 'Atlas']) assert(aboutHtml.includes(fact), `Initial biography lacks ${fact}`)
+for (const path of ['/work/internshipdeadlines', '/work/atlas', '/resume']) assert(aboutHtml.includes(`href="${path}"`), `Biography lacks ${path}`)
+const resumeHtml = await read('dist/resume/index.html')
+for (const skill of ['Skills &amp; tools', 'Python', 'SQL', 'TypeScript', 'Growth strategy', 'Product positioning', 'AI workflows']) assert(resumeHtml.includes(skill), `Initial résumé lacks ${skill}`)
+assert(resumeHtml.includes('July 2026 PDF'), 'Historical PDF label changed')
+for (const slug of ['internshipdeadlines', 'sapien', 'atlas']) {
+  const html = await read(`dist/work/${slug}/index.html`)
+  assert(html.includes('aria-label="Project evidence"'), `${slug}: opening lacks proof destinations`)
+  assert(html.includes('Key decision'), `${slug}: opening lost contribution context`)
+}
 console.log(`Search gate passed: ${urls.length} unique canonical pages, visible biographies, coherent identity/social/schema metadata, ${catalog.length} dated feed entries, ${citations} source citations, complete HTML sections, search crawler access, and generated discovery.`)
