@@ -1,0 +1,58 @@
+PAGE 1
+                                 Dropbox Q3 2026 and Fiscal 2026 Guidance
+                                                          As of August 6, 2026
+                                                          (In millions, except percentages)
+
+                                                                                                Q3 2026                               Fiscal 2026
+GAAP revenue (1)                                                                              $627 - $630                           $2,513 - $2,523
+Constant currency revenue (2)                                                                 $621 - $624                           $2,482 - $2,492
+Non-GAAP gross margin (3)                                                                                                                ~81.5%
+Non-GAAP operating margin (4)                                                                   ~38.5%                              40.0% - 40.5%
+Capital expenditures                                                                                                                   $20 - $25
+Unlevered free cash flow (5)                                                                                                      at or above $1,070
+Diluted weighted average shares outstanding                                                    223 - 228                               226 - 231
+
+
+(1) Currency exchange rates assumed in this guidance are based on applying actual exchange rates at the time of booking to current
+deferred revenue and applying recent average exchange rates to future deferred revenue.
+(2) Currency exchange rates assumed in this guidance are based on applying prior period weighted average exchange rates to
+actual results, where applicable, and to estimated future results.
+(3) A reconciliation of our forward-looking guidance for non-GAAP gross margin with our forward-looking GAAP gross margin is
+not available without unreasonable efforts as the quantification of stock-based compensation expense, which is excluded from our
+non-GAAP gross margin and will have a significant impact on our GAAP gross margin, requires additional inputs that are
+difficult to predict and subject to change.
+
+(4) A reconciliation of our forward-looking guidance for non-GAAP operating margin with our forward-looking GAAP operating
+margin is not available without unreasonable efforts as the quantification of stock-based compensation expense, which is
+excluded from our non-GAAP operating margin and will have a significant impact on our GAAP operating margin, requires
+additional inputs that are difficult to predict and subject to change. Our forward-looking guidance for non-GAAP operating
+margin also excludes $8 million of expenses related to the portion of the acquisition purchase price for certain executives that is
+being earned over three years if they remain employed; and amortization of acquired intangible assets, which are subject to
+valuation efforts.
+(5) We define unlevered free cash flow as GAAP net cash provided by operating activities less capital expenditures of
+approximately $20 - $25 million and also exclude the impact of interest payments associated with our amended credit agreement,
+net of their associated tax benefit.
+
+
+
+
+Forward-Looking Statements
+These supplemental investor materials contain forward-looking statements within the meaning of the Private Securities Litigation
+Reform Act of 1995, including statements regarding Dropbox's future financial performance and guidance for Q3 2026 and FY
+2026. We have based these forward-looking statements largely on our current expectations and projections about future events
+and financial trends that we believe may affect our business, financial condition and results of operations. These forward-looking
+statements speak only as of the date these supplemental investor materials are first posted to Dropbox’s investor relations website
+and are subject to risks, uncertainties, and assumptions, including, but not limited to, our expectations regarding general
+economic, political, and market trends and their respective impacts on our business, and our future financial performance,
+including trends in revenue, costs of revenues, gross profit or gross margin, operating expenses, paying users, free cash flow, and
+unlevered free cash flow. Further information on risks that could affect Dropbox’s results is included in our filings with the
+Securities and Exchange Commission (SEC), including our quarterly report on Form 10-Q for the quarter ended March 31, 2026
+that we filed with the SEC on May 8, 2026. Additional information will be made available in our quarterly report on Form 10-Q
+for the quarter ended June 30, 2026 and in other reports that we may file with the SEC from time to time, which could cause
+actual results to vary from expectations. If the risks materialize or assumptions prove incorrect, actual results could differ
+materially from the results implied by these forward-looking statements. Dropbox assumes no obligation to, and does not
+currently intend to, update any such forward-looking statements after the date these supplemental investor materials are first
+posted to Dropbox’s investor relations website, except as required by applicable law.
+
+Additional information on our non-GAAP measures is included in our earnings release, which was furnished with our Form 8-K
+filed with the SEC on August 6, 2026.

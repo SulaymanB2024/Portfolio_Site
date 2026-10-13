@@ -1,0 +1,5264 @@
+{
+  "review_date": "2026-10-13",
+  "coverage": {
+    "root_files_pinned": {
+      "models.py": {
+        "sha256": "bf2141ebf31fbc1448efc0f074ba25795f9e7f53644ab85ec7005e00499c6eee",
+        "bytes": 10485
+      },
+      "build_inputs.py": {
+        "sha256": "7e560d3145a6daece1007f5156dfde8bbd39ac2a34049800b48144577c1a8f86",
+        "bytes": 8421
+      },
+      "inputs.json": {
+        "sha256": "11ca6cc7ed5db6a858aa6b2a9b1218f23464a1bd69fc3edc616236b1ca04beec",
+        "bytes": 17591
+      },
+      "outputs/model-results.json": {
+        "sha256": "2d5644bf1b8c22963a222c54dbb4ea676b91a97b9493bc0c253a4f08ab0242fb",
+        "bytes": 41859
+      },
+      "evaluate_forecasts.py": {
+        "sha256": "9a2ac91a19e145c175aeec5e2ef8de5233e9f2d6b751da49fc81f565013320b5",
+        "bytes": 5885
+      }
+    },
+    "source_financial_fields_checked": 93,
+    "source_financial_fields_passed": 93,
+    "company_ttm_coverage": "All4 selected companies",
+    "scenario_coverage": "All12 bear/base/bull paths and cash constraints, plus Crocs additional cash stress. Growth/multiple grid not fully recomputed.",
+    "evaluator_coverage": "Explicit synthetic split, zero delisting, missing company, incomplete dividend data, horizon and invalid numeric inputs. No actual future outcome claimed."
+  },
+  "primitive_source_checks": [
+    {
+      "symbol": "ADBE",
+      "period": "annual_previous",
+      "field": "revenue",
+      "source": "adbe-fy-2025",
+      "end": "2025-11-28",
+      "expected_usd": 23769000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:Revenues"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "annual_previous",
+      "field": "net_income",
+      "source": "adbe-fy-2025",
+      "end": "2025-11-28",
+      "expected_usd": 7130000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:NetIncomeLoss"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "annual_previous",
+      "field": "cfo",
+      "source": "adbe-fy-2025",
+      "end": "2025-11-28",
+      "expected_usd": 10031000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "annual_previous",
+      "field": "capex",
+      "source": "adbe-fy-2025",
+      "end": "2025-11-28",
+      "expected_usd": 179000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "annual_previous",
+      "field": "sbc",
+      "source": "adbe-fy-2025",
+      "end": "2025-11-28",
+      "expected_usd": 1942000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "annual_previous",
+      "field": "buybacks",
+      "source": "adbe-fy-2025",
+      "end": "2025-11-28",
+      "expected_usd": 11281000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_previous",
+      "field": "revenue",
+      "source": "adbe-q3-2026",
+      "end": "2025-08-29",
+      "expected_usd": 17575000000.0,
+      "pass": true,
+      "context": "c-19",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:Revenues"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_previous",
+      "field": "net_income",
+      "source": "adbe-q3-2026",
+      "end": "2025-08-29",
+      "expected_usd": 5274000000.0,
+      "pass": true,
+      "context": "c-19",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:NetIncomeLoss"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_previous",
+      "field": "cfo",
+      "source": "adbe-q3-2026",
+      "end": "2025-08-29",
+      "expected_usd": 6871000000.0,
+      "pass": true,
+      "context": "c-19",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_previous",
+      "field": "capex",
+      "source": "adbe-q3-2026",
+      "end": "2025-08-29",
+      "expected_usd": 145000000.0,
+      "pass": true,
+      "context": "c-19",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_previous",
+      "field": "sbc",
+      "source": "adbe-q3-2026",
+      "end": "2025-08-29",
+      "expected_usd": 1453000000.0,
+      "pass": true,
+      "context": "c-19",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_previous",
+      "field": "buybacks",
+      "source": "adbe-q3-2026",
+      "end": "2025-08-29",
+      "expected_usd": 8807000000.0,
+      "pass": true,
+      "context": "c-19",
+      "source_start": "2024-11-30",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_current",
+      "field": "revenue",
+      "source": "adbe-q3-2026",
+      "end": "2026-08-28",
+      "expected_usd": 19776000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-11-29",
+      "concept": "us-gaap:Revenues"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_current",
+      "field": "net_income",
+      "source": "adbe-q3-2026",
+      "end": "2026-08-28",
+      "expected_usd": 5428000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-11-29",
+      "concept": "us-gaap:NetIncomeLoss"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_current",
+      "field": "cfo",
+      "source": "adbe-q3-2026",
+      "end": "2026-08-28",
+      "expected_usd": 7646000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-11-29",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_current",
+      "field": "capex",
+      "source": "adbe-q3-2026",
+      "end": "2026-08-28",
+      "expected_usd": 180000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-11-29",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_current",
+      "field": "sbc",
+      "source": "adbe-q3-2026",
+      "end": "2026-08-28",
+      "expected_usd": 1582000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-11-29",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "ADBE",
+      "period": "interim_current",
+      "field": "buybacks",
+      "source": "adbe-q3-2026",
+      "end": "2026-08-28",
+      "expected_usd": 6821000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-11-29",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "annual_previous",
+      "field": "revenue",
+      "source": "pypl-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 33172000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:Revenues"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "annual_previous",
+      "field": "net_income",
+      "source": "pypl-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 5233000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:NetIncomeLoss"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "annual_previous",
+      "field": "cfo",
+      "source": "pypl-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 6416000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "annual_previous",
+      "field": "capex",
+      "source": "pypl-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 852000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "annual_previous",
+      "field": "sbc",
+      "source": "pypl-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 1002000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "annual_previous",
+      "field": "buybacks",
+      "source": "pypl-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 6052000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_previous",
+      "field": "revenue",
+      "source": "pypl-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 16079000000.0,
+      "pass": true,
+      "context": "c-7",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:Revenues"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_previous",
+      "field": "net_income",
+      "source": "pypl-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 2548000000.0,
+      "pass": true,
+      "context": "c-7",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:NetIncomeLoss"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_previous",
+      "field": "cfo",
+      "source": "pypl-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 2058000000.0,
+      "pass": true,
+      "context": "c-7",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_previous",
+      "field": "capex",
+      "source": "pypl-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 402000000.0,
+      "pass": true,
+      "context": "c-7",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_previous",
+      "field": "sbc",
+      "source": "pypl-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 535000000.0,
+      "pass": true,
+      "context": "c-7",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_previous",
+      "field": "buybacks",
+      "source": "pypl-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 3051000000.0,
+      "pass": true,
+      "context": "c-7",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_current",
+      "field": "revenue",
+      "source": "pypl-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 17035000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:Revenues"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_current",
+      "field": "net_income",
+      "source": "pypl-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 2217000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:NetIncomeLoss"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_current",
+      "field": "cfo",
+      "source": "pypl-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 3117000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_current",
+      "field": "capex",
+      "source": "pypl-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 439000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_current",
+      "field": "sbc",
+      "source": "pypl-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 534000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_current",
+      "field": "buybacks",
+      "source": "pypl-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 3052000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "PYPL",
+      "period": "annual_previous",
+      "field": "sbc_capitalized",
+      "source": "pypl-fy-2025",
+      "end": "2025-12-31",
+      "expected_cash_statement_usd": 134000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:EmployeeServiceShareBasedCompensationAllocationOfRecognizedPeriodCostsCapitalizedAmount",
+      "source_start": "2025-01-01",
+      "context": "c-1",
+      "xbrl_amount": 134000000.0
+    },
+    {
+      "symbol": "PYPL",
+      "period": "annual_previous",
+      "field": "retained_loan_originations_investing",
+      "source": "pypl-fy-2025",
+      "end": "2025-12-31",
+      "expected_cash_statement_usd": 20190000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "pypl:PurchasesAndPaymentsForOriginationsOfLoansReceivable",
+      "source_start": "2025-01-01",
+      "context": "c-1",
+      "xbrl_amount": 20190000000.0
+    },
+    {
+      "symbol": "PYPL",
+      "period": "annual_previous",
+      "field": "retained_loan_repayments_sales_investing",
+      "source": "pypl-fy-2025",
+      "end": "2025-12-31",
+      "expected_cash_statement_usd": 19688000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:ProceedsFromSaleAndCollectionOfLoansReceivable",
+      "source_start": "2025-01-01",
+      "context": "c-1",
+      "xbrl_amount": 19688000000.0
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_previous",
+      "field": "sbc_capitalized",
+      "source": "pypl-q2-2026",
+      "end": "2025-06-30",
+      "expected_cash_statement_usd": 68000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:EmployeeServiceShareBasedCompensationAllocationOfRecognizedPeriodCostsCapitalizedAmount",
+      "source_start": "2025-01-01",
+      "context": "c-7",
+      "xbrl_amount": 68000000.0
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_previous",
+      "field": "retained_loan_originations_investing",
+      "source": "pypl-q2-2026",
+      "end": "2025-06-30",
+      "expected_cash_statement_usd": 11490000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "pypl:PurchasesAndPaymentsForOriginationsOfLoansReceivable",
+      "source_start": "2025-01-01",
+      "context": "c-7",
+      "xbrl_amount": 11490000000.0
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_previous",
+      "field": "retained_loan_repayments_sales_investing",
+      "source": "pypl-q2-2026",
+      "end": "2025-06-30",
+      "expected_cash_statement_usd": 11210000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:ProceedsFromSaleAndCollectionOfLoansReceivable",
+      "source_start": "2025-01-01",
+      "context": "c-7",
+      "xbrl_amount": 11210000000.0
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_current",
+      "field": "sbc_capitalized",
+      "source": "pypl-q2-2026",
+      "end": "2026-06-30",
+      "expected_cash_statement_usd": 62000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:EmployeeServiceShareBasedCompensationAllocationOfRecognizedPeriodCostsCapitalizedAmount",
+      "source_start": "2026-01-01",
+      "context": "c-1",
+      "xbrl_amount": 62000000.0
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_current",
+      "field": "retained_loan_originations_investing",
+      "source": "pypl-q2-2026",
+      "end": "2026-06-30",
+      "expected_cash_statement_usd": 8026000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "pypl:PurchasesAndPaymentsForOriginationsOfLoansReceivable",
+      "source_start": "2026-01-01",
+      "context": "c-1",
+      "xbrl_amount": 8026000000.0
+    },
+    {
+      "symbol": "PYPL",
+      "period": "interim_current",
+      "field": "retained_loan_repayments_sales_investing",
+      "source": "pypl-q2-2026",
+      "end": "2026-06-30",
+      "expected_cash_statement_usd": 7595000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:ProceedsFromSaleAndCollectionOfLoansReceivable",
+      "source_start": "2026-01-01",
+      "context": "c-1",
+      "xbrl_amount": 7595000000.0
+    },
+    {
+      "symbol": "CROX",
+      "period": "annual_previous",
+      "field": "revenue",
+      "source": "CROX-K25",
+      "end": "2025-12-31",
+      "expected_usd": 4040647000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+    },
+    {
+      "symbol": "CROX",
+      "period": "annual_previous",
+      "field": "net_income",
+      "source": "CROX-K25",
+      "end": "2025-12-31",
+      "expected_usd": -81198000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:NetIncomeLoss"
+    },
+    {
+      "symbol": "CROX",
+      "period": "annual_previous",
+      "field": "cfo",
+      "source": "CROX-K25",
+      "end": "2025-12-31",
+      "expected_usd": 710431000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "CROX",
+      "period": "annual_previous",
+      "field": "capex",
+      "source": "CROX-K25",
+      "end": "2025-12-31",
+      "expected_usd": 51231000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "CROX",
+      "period": "annual_previous",
+      "field": "sbc",
+      "source": "CROX-K25",
+      "end": "2025-12-31",
+      "expected_usd": 36701000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "CROX",
+      "period": "annual_previous",
+      "field": "buybacks",
+      "source": "CROX-K25",
+      "end": "2025-12-31",
+      "expected_usd": 582320000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_previous",
+      "field": "revenue",
+      "source": "CROX-Q226",
+      "end": "2025-06-30",
+      "expected_usd": 2086706000.0000002,
+      "pass": true,
+      "context": "c-5",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_previous",
+      "field": "net_income",
+      "source": "CROX-Q226",
+      "end": "2025-06-30",
+      "expected_usd": -332179000.0,
+      "pass": true,
+      "context": "c-5",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:NetIncomeLoss"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_previous",
+      "field": "cfo",
+      "source": "CROX-Q226",
+      "end": "2025-06-30",
+      "expected_usd": 218565000.0,
+      "pass": true,
+      "context": "c-5",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_previous",
+      "field": "capex",
+      "source": "CROX-Q226",
+      "end": "2025-06-30",
+      "expected_usd": 31946000.0,
+      "pass": true,
+      "context": "c-5",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_previous",
+      "field": "sbc",
+      "source": "CROX-Q226",
+      "end": "2025-06-30",
+      "expected_usd": 20036000.0,
+      "pass": true,
+      "context": "c-5",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_previous",
+      "field": "buybacks",
+      "source": "CROX-Q226",
+      "end": "2025-06-30",
+      "expected_usd": 194137000.0,
+      "pass": true,
+      "context": "c-5",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_current",
+      "field": "revenue",
+      "source": "CROX-Q226",
+      "end": "2026-06-30",
+      "expected_usd": 2100925000.0000002,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_current",
+      "field": "net_income",
+      "source": "CROX-Q226",
+      "end": "2026-06-30",
+      "expected_usd": 342443000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:NetIncomeLoss"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_current",
+      "field": "cfo",
+      "source": "CROX-Q226",
+      "end": "2026-06-30",
+      "expected_usd": 270768000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_current",
+      "field": "capex",
+      "source": "CROX-Q226",
+      "end": "2026-06-30",
+      "expected_usd": 38729000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_current",
+      "field": "sbc",
+      "source": "CROX-Q226",
+      "end": "2026-06-30",
+      "expected_usd": 24852000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "CROX",
+      "period": "interim_current",
+      "field": "buybacks",
+      "source": "CROX-Q226",
+      "end": "2026-06-30",
+      "expected_usd": 256156999.99999997,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "annual_previous",
+      "field": "revenue",
+      "source": "expe-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 14733000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "annual_previous",
+      "field": "net_income",
+      "source": "expe-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 1301000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:ProfitLoss"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "annual_previous",
+      "field": "cfo",
+      "source": "expe-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 3880000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "annual_previous",
+      "field": "capex",
+      "source": "expe-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 770000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "annual_previous",
+      "field": "sbc",
+      "source": "expe-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 398000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "annual_previous",
+      "field": "buybacks",
+      "source": "expe-fy-2025",
+      "end": "2025-12-31",
+      "expected_usd": 1930000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_previous",
+      "field": "revenue",
+      "source": "expe-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 6774000000.0,
+      "pass": true,
+      "context": "c-6",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_previous",
+      "field": "net_income",
+      "source": "expe-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 125000000.0,
+      "pass": true,
+      "context": "c-6",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:ProfitLoss"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_previous",
+      "field": "cfo",
+      "source": "expe-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 4073000000.0,
+      "pass": true,
+      "context": "c-6",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_previous",
+      "field": "capex",
+      "source": "expe-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 396000000.0,
+      "pass": true,
+      "context": "c-6",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_previous",
+      "field": "sbc",
+      "source": "expe-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 203000000.0,
+      "pass": true,
+      "context": "c-6",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_previous",
+      "field": "buybacks",
+      "source": "expe-q2-2026",
+      "end": "2025-06-30",
+      "expected_usd": 1072000000.0,
+      "pass": true,
+      "context": "c-6",
+      "source_start": "2025-01-01",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_current",
+      "field": "revenue",
+      "source": "expe-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 7741000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_current",
+      "field": "net_income",
+      "source": "expe-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 863000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:ProfitLoss"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_current",
+      "field": "cfo",
+      "source": "expe-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 5409000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_current",
+      "field": "capex",
+      "source": "expe-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 383000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_current",
+      "field": "sbc",
+      "source": "expe-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 217000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:ShareBasedCompensation"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_current",
+      "field": "buybacks",
+      "source": "expe-q2-2026",
+      "end": "2026-06-30",
+      "expected_usd": 1058000000.0,
+      "pass": true,
+      "context": "c-1",
+      "source_start": "2026-01-01",
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+    },
+    {
+      "symbol": "EXPE",
+      "period": "annual_previous",
+      "field": "deferred_merchant_bookings_cash_change",
+      "source": "expe-fy-2025",
+      "end": "2025-12-31",
+      "expected_cash_statement_usd": 1858000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "expe:IncreaseDecreaseInDeferredMerchantBookings",
+      "source_start": "2025-01-01",
+      "context": "c-1",
+      "xbrl_amount": 1858000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "annual_previous",
+      "field": "merchant_payables_cash_change",
+      "source": "expe-fy-2025",
+      "end": "2025-12-31",
+      "expected_cash_statement_usd": 155000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "expe:IncreaseDecreaseInAccountsPayableMerchant",
+      "source_start": "2025-01-01",
+      "context": "c-1",
+      "xbrl_amount": 155000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "annual_previous",
+      "field": "accounts_receivable_cash_change",
+      "source": "expe-fy-2025",
+      "end": "2025-12-31",
+      "expected_cash_statement_usd": -983000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:IncreaseDecreaseInAccountsReceivable",
+      "source_start": "2025-01-01",
+      "context": "c-1",
+      "xbrl_amount": 983000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "annual_previous",
+      "field": "sbc_equity_book",
+      "source": "expe-fy-2025",
+      "end": "2025-12-31",
+      "expected_cash_statement_usd": 488000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+      "source_start": "2025-01-01",
+      "context": "c-1",
+      "xbrl_amount": 488000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_previous",
+      "field": "deferred_merchant_bookings_cash_change",
+      "source": "expe-q2-2026",
+      "end": "2025-06-30",
+      "expected_cash_statement_usd": 4898000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "expe:IncreaseDecreaseInDeferredMerchantBookings",
+      "source_start": "2025-01-01",
+      "context": "c-6",
+      "xbrl_amount": 4898000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_previous",
+      "field": "merchant_payables_cash_change",
+      "source": "expe-q2-2026",
+      "end": "2025-06-30",
+      "expected_cash_statement_usd": 119000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "expe:IncreaseDecreaseInAccountsPayableMerchant",
+      "source_start": "2025-01-01",
+      "context": "c-6",
+      "xbrl_amount": 119000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_previous",
+      "field": "accounts_receivable_cash_change",
+      "source": "expe-q2-2026",
+      "end": "2025-06-30",
+      "expected_cash_statement_usd": -1759000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:IncreaseDecreaseInAccountsReceivable",
+      "source_start": "2025-01-01",
+      "context": "c-6",
+      "xbrl_amount": 1759000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_previous",
+      "field": "sbc_equity_book",
+      "source": "expe-q2-2026",
+      "end": "2025-06-30",
+      "expected_cash_statement_usd": 248000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+      "source_start": "2025-01-01",
+      "context": "c-6",
+      "xbrl_amount": 248000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_current",
+      "field": "deferred_merchant_bookings_cash_change",
+      "source": "expe-q2-2026",
+      "end": "2026-06-30",
+      "expected_cash_statement_usd": 4998000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "expe:IncreaseDecreaseInDeferredMerchantBookings",
+      "source_start": "2026-01-01",
+      "context": "c-1",
+      "xbrl_amount": 4998000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_current",
+      "field": "merchant_payables_cash_change",
+      "source": "expe-q2-2026",
+      "end": "2026-06-30",
+      "expected_cash_statement_usd": 283000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "expe:IncreaseDecreaseInAccountsPayableMerchant",
+      "source_start": "2026-01-01",
+      "context": "c-1",
+      "xbrl_amount": 283000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_current",
+      "field": "accounts_receivable_cash_change",
+      "source": "expe-q2-2026",
+      "end": "2026-06-30",
+      "expected_cash_statement_usd": -1654000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:IncreaseDecreaseInAccountsReceivable",
+      "source_start": "2026-01-01",
+      "context": "c-1",
+      "xbrl_amount": 1654000000.0
+    },
+    {
+      "symbol": "EXPE",
+      "period": "interim_current",
+      "field": "sbc_equity_book",
+      "source": "expe-q2-2026",
+      "end": "2026-06-30",
+      "expected_cash_statement_usd": 262000000.0,
+      "pass": true,
+      "validation": "Magnitude and relevant inline-XBRL concept. Cash-flow orientation follows the readable statement; taxonomy sign can encode increase rather than cash outflow.",
+      "concept": "us-gaap:AdjustmentsToAdditionalPaidInCapitalSharebasedCompensationRequisiteServicePeriodRecognitionValue",
+      "source_start": "2026-01-01",
+      "context": "c-1",
+      "xbrl_amount": 262000000.0
+    }
+  ],
+  "financial_arithmetic_checks": [
+    {
+      "check": "Benchmark frozen entry close",
+      "observed": 778.1,
+      "independent_expected": 778.1,
+      "pass": true
+    },
+    {
+      "check": "ADBE frozen entry close",
+      "observed": 238.14,
+      "independent_expected": 238.14,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding annual_previous revenue",
+      "observed": 23769,
+      "independent_expected": 23769,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding annual_previous net_income",
+      "observed": 7130,
+      "independent_expected": 7130,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding annual_previous cfo",
+      "observed": 10031,
+      "independent_expected": 10031,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding annual_previous capex",
+      "observed": 179,
+      "independent_expected": 179,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding annual_previous sbc",
+      "observed": 1942,
+      "independent_expected": 1942,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding annual_previous buybacks",
+      "observed": 11281,
+      "independent_expected": 11281,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_previous revenue",
+      "observed": 17575,
+      "independent_expected": 17575,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_previous net_income",
+      "observed": 5274,
+      "independent_expected": 5274,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_previous cfo",
+      "observed": 6871,
+      "independent_expected": 6871,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_previous capex",
+      "observed": 145,
+      "independent_expected": 145,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_previous sbc",
+      "observed": 1453,
+      "independent_expected": 1453,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_previous buybacks",
+      "observed": 8807,
+      "independent_expected": 8807,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_current revenue",
+      "observed": 19776,
+      "independent_expected": 19776,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_current net_income",
+      "observed": 5428,
+      "independent_expected": 5428,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_current cfo",
+      "observed": 7646,
+      "independent_expected": 7646,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_current capex",
+      "observed": 180,
+      "independent_expected": 180,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_current sbc",
+      "observed": 1582,
+      "independent_expected": 1582,
+      "pass": true
+    },
+    {
+      "check": "ADBE binding interim_current buybacks",
+      "observed": 6821,
+      "independent_expected": 6821,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM revenue",
+      "observed": 25970.0,
+      "independent_expected": 25970,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM net_income",
+      "observed": 7284.0,
+      "independent_expected": 7284,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM cfo",
+      "observed": 10806.0,
+      "independent_expected": 10806,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM capex",
+      "observed": 214.0,
+      "independent_expected": 214,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM sbc",
+      "observed": 2071.0,
+      "independent_expected": 2071,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM buybacks",
+      "observed": 9295.0,
+      "independent_expected": 9295,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM fcf",
+      "observed": 10592.0,
+      "independent_expected": 10592,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM reported_cash_less_sbc_proxy",
+      "observed": 8521.0,
+      "independent_expected": 8521,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM owner_cash_proxy",
+      "observed": 8521.0,
+      "independent_expected": 8521,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM estimated_equity_value",
+      "observed": 92684.088,
+      "independent_expected": 92684.08799999999,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM owner_cash_yield",
+      "observed": 0.09193595345082319,
+      "independent_expected": 0.0919359534508232,
+      "pass": true
+    },
+    {
+      "check": "ADBE TTM entry_owner_cash_multiple",
+      "observed": 10.877137425184838,
+      "independent_expected": 10.877137425184836,
+      "pass": true
+    },
+    {
+      "check": "ADBE segment anchors sum to TTM revenue",
+      "observed": 25970,
+      "independent_expected": 25970,
+      "pass": true
+    },
+    {
+      "check": "ADBE cover share count/date",
+      "observed": 389.2,
+      "independent_expected": 389.2,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 revenue",
+      "observed": 24931.2,
+      "independent_expected": 24931.2,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 owner_cash",
+      "observed": 6232.8,
+      "independent_expected": 6232.8,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 opening_shares_m",
+      "observed": 389.2,
+      "independent_expected": 389.2,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 ending_shares_m",
+      "observed": 389.2,
+      "independent_expected": 389.2,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 net_buyback_spend",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 cash_commitments",
+      "observed": 1340.0,
+      "independent_expected": 1340,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 sbc_replacement_proxy",
+      "observed": 2119.152,
+      "independent_expected": 2119.152,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 cash_retained_after_allocations",
+      "observed": 4892.8,
+      "independent_expected": 4892.8,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 revenue",
+      "observed": 23933.952,
+      "independent_expected": 23933.952,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 owner_cash",
+      "observed": 5983.488,
+      "independent_expected": 5983.488,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 opening_shares_m",
+      "observed": 389.2,
+      "independent_expected": 389.2,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 ending_shares_m",
+      "observed": 389.2,
+      "independent_expected": 389.2,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 net_buyback_spend",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 cash_commitments",
+      "observed": 1000.0,
+      "independent_expected": 1000,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 sbc_replacement_proxy",
+      "observed": 2034.38592,
+      "independent_expected": 2034.3859200000002,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 cash_retained_after_allocations",
+      "observed": 4983.488,
+      "independent_expected": 4983.488,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear ending_owner_cash_per_share",
+      "observed": 15.373812949640287,
+      "independent_expected": 15.373812949640289,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear terminal_price",
+      "observed": 138.36431654676258,
+      "independent_expected": 138.3643165467626,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear rounded_price_forecast",
+      "observed": 140.0,
+      "independent_expected": 140,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear cash_required_for_10_percent_annual_price_return",
+      "observed": 12460.86072,
+      "independent_expected": 12460.860719999999,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear fixed_entry_multiple_terminal_price",
+      "observed": 167.22307620232368,
+      "independent_expected": 167.22307620232365,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear price_return",
+      "observed": -0.4189791024323398,
+      "independent_expected": -0.4189791024323397,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear annualized_price_return",
+      "observed": -0.23775273200380695,
+      "independent_expected": -0.23775273200380687,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bear total_net_share_retirement_percent",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 revenue",
+      "observed": 28047.6,
+      "independent_expected": 28047.600000000002,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 owner_cash",
+      "observed": 8694.756,
+      "independent_expected": 8694.756000000001,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 opening_shares_m",
+      "observed": 389.2,
+      "independent_expected": 389.2,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 ending_shares_m",
+      "observed": 373.632,
+      "independent_expected": 373.632,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 net_buyback_spend",
+      "observed": 4436.88,
+      "independent_expected": 4436.88,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 cash_commitments",
+      "observed": 1340.0,
+      "independent_expected": 1340,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 sbc_replacement_proxy",
+      "observed": 2299.9032,
+      "independent_expected": 2299.9032,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 cash_retained_after_allocations",
+      "observed": 2917.876,
+      "independent_expected": 2917.876000000001,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 revenue",
+      "observed": 30291.408,
+      "independent_expected": 30291.408000000003,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 owner_cash",
+      "observed": 9390.33648,
+      "independent_expected": 9390.336480000002,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 opening_shares_m",
+      "observed": 373.632,
+      "independent_expected": 373.632,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 ending_shares_m",
+      "observed": 358.68672,
+      "independent_expected": 358.68672,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 net_buyback_spend",
+      "observed": 4931.9424,
+      "independent_expected": 4931.9424,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 cash_commitments",
+      "observed": 1000.0,
+      "independent_expected": 1000,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 sbc_replacement_proxy",
+      "observed": 2483.895456,
+      "independent_expected": 2483.895456,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 cash_retained_after_allocations",
+      "observed": 3458.39408,
+      "independent_expected": 3458.394080000002,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base ending_owner_cash_per_share",
+      "observed": 26.17977180755396,
+      "independent_expected": 26.179771807553962,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base terminal_price",
+      "observed": 366.5168053057554,
+      "independent_expected": 366.5168053057555,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base rounded_price_forecast",
+      "observed": 365.0,
+      "independent_expected": 365,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base cash_required_for_10_percent_annual_price_return",
+      "observed": 7382.525939712,
+      "independent_expected": 7382.525939711998,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base fixed_entry_multiple_terminal_price",
+      "observed": 284.76097571074405,
+      "independent_expected": 284.76097571074405,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base price_return",
+      "observed": 0.5390812350119905,
+      "independent_expected": 0.5390812350119909,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base annualized_price_return",
+      "observed": 0.24059712840711928,
+      "independent_expected": 0.24059712840711955,
+      "pass": true
+    },
+    {
+      "check": "ADBE Base total_net_share_retirement_percent",
+      "observed": 7.84,
+      "independent_expected": 7.8400000000000025,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 revenue",
+      "observed": 29086.4,
+      "independent_expected": 29086.4,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 owner_cash",
+      "observed": 9598.512,
+      "independent_expected": 9598.512,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 opening_shares_m",
+      "observed": 389.2,
+      "independent_expected": 389.2,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 ending_shares_m",
+      "observed": 365.848,
+      "independent_expected": 365.848,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 net_buyback_spend",
+      "observed": 7706.16,
+      "independent_expected": 7706.159999999999,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 cash_commitments",
+      "observed": 1340.0,
+      "independent_expected": 1340,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 sbc_replacement_proxy",
+      "observed": 2385.0848,
+      "independent_expected": 2385.0848,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 cash_retained_after_allocations",
+      "observed": 552.352,
+      "independent_expected": 552.3520000000017,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 revenue",
+      "observed": 32576.768,
+      "independent_expected": 32576.768000000004,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 owner_cash",
+      "observed": 10750.33344,
+      "independent_expected": 10750.333440000002,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 opening_shares_m",
+      "observed": 365.848,
+      "independent_expected": 365.848,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 ending_shares_m",
+      "observed": 343.89712,
+      "independent_expected": 343.89712000000003,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 net_buyback_spend",
+      "observed": 9219.3696,
+      "independent_expected": 9219.3696,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 cash_commitments",
+      "observed": 1000.0,
+      "independent_expected": 1000,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 sbc_replacement_proxy",
+      "observed": 2671.294976,
+      "independent_expected": 2671.2949760000006,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 cash_retained_after_allocations",
+      "observed": 530.96384,
+      "independent_expected": 530.9638400000022,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull ending_owner_cash_per_share",
+      "observed": 31.26031831845524,
+      "independent_expected": 31.260318318455244,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull terminal_price",
+      "observed": 531.4254114137391,
+      "independent_expected": 531.4254114137392,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull rounded_price_forecast",
+      "observed": 530.0,
+      "independent_expected": 530,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull cash_required_for_10_percent_annual_price_return",
+      "observed": 5829.044046454588,
+      "independent_expected": 5829.044046454588,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull fixed_entry_multiple_terminal_price",
+      "observed": 340.02277830486065,
+      "independent_expected": 340.02277830486065,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull price_return",
+      "observed": 1.2315671933053627,
+      "independent_expected": 1.2315671933053634,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull annualized_price_return",
+      "observed": 0.49384309527652964,
+      "independent_expected": 0.4938430952765298,
+      "pass": true
+    },
+    {
+      "check": "ADBE Bull total_net_share_retirement_percent",
+      "observed": 11.64,
+      "independent_expected": 11.639999999999995,
+      "pass": true
+    },
+    {
+      "check": "PYPL frozen entry close",
+      "observed": 56.05,
+      "independent_expected": 56.05,
+      "pass": true
+    },
+    {
+      "check": "PYPL capitalized SBC normalization",
+      "observed": 128,
+      "independent_expected": 128,
+      "pass": true
+    },
+    {
+      "check": "PYPL retained loan investing normalization",
+      "observed": 653,
+      "independent_expected": 653,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding annual_previous revenue",
+      "observed": 33172,
+      "independent_expected": 33172,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding annual_previous net_income",
+      "observed": 5233,
+      "independent_expected": 5233,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding annual_previous cfo",
+      "observed": 6416,
+      "independent_expected": 6416,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding annual_previous capex",
+      "observed": 852,
+      "independent_expected": 852,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding annual_previous sbc",
+      "observed": 1002,
+      "independent_expected": 1002,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding annual_previous buybacks",
+      "observed": 6052,
+      "independent_expected": 6052,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_previous revenue",
+      "observed": 16079,
+      "independent_expected": 16079,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_previous net_income",
+      "observed": 2548,
+      "independent_expected": 2548,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_previous cfo",
+      "observed": 2058,
+      "independent_expected": 2058,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_previous capex",
+      "observed": 402,
+      "independent_expected": 402,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_previous sbc",
+      "observed": 535,
+      "independent_expected": 535,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_previous buybacks",
+      "observed": 3051,
+      "independent_expected": 3051,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_current revenue",
+      "observed": 17035,
+      "independent_expected": 17035,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_current net_income",
+      "observed": 2217,
+      "independent_expected": 2217,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_current cfo",
+      "observed": 3117,
+      "independent_expected": 3117,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_current capex",
+      "observed": 439,
+      "independent_expected": 439,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_current sbc",
+      "observed": 534,
+      "independent_expected": 534,
+      "pass": true
+    },
+    {
+      "check": "PYPL binding interim_current buybacks",
+      "observed": 3052,
+      "independent_expected": 3052,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM revenue",
+      "observed": 34128.0,
+      "independent_expected": 34128,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM net_income",
+      "observed": 4902.0,
+      "independent_expected": 4902,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM cfo",
+      "observed": 7475.0,
+      "independent_expected": 7475,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM capex",
+      "observed": 889.0,
+      "independent_expected": 889,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM sbc",
+      "observed": 1001.0,
+      "independent_expected": 1001,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM buybacks",
+      "observed": 6053.0,
+      "independent_expected": 6053,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM fcf",
+      "observed": 6586.0,
+      "independent_expected": 6586,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM reported_cash_less_sbc_proxy",
+      "observed": 5585.0,
+      "independent_expected": 5585,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM owner_cash_proxy",
+      "observed": 4804.0,
+      "independent_expected": 4804,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM estimated_equity_value",
+      "observed": 47948.5819877,
+      "independent_expected": 47948.581987699996,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM owner_cash_yield",
+      "observed": 0.1001906584272366,
+      "independent_expected": 0.10019065842723661,
+      "pass": true
+    },
+    {
+      "check": "PYPL TTM entry_owner_cash_multiple",
+      "observed": 9.98097043873855,
+      "independent_expected": 9.98097043873855,
+      "pass": true
+    },
+    {
+      "check": "PYPL segment anchors sum to TTM revenue",
+      "observed": 34128,
+      "independent_expected": 34128,
+      "pass": true
+    },
+    {
+      "check": "PYPL cover share count/date",
+      "observed": 855.460874,
+      "independent_expected": 855.460874,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 revenue",
+      "observed": 33445.44,
+      "independent_expected": 33445.44,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 owner_cash",
+      "observed": 3511.7712,
+      "independent_expected": 3511.7712,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 opening_shares_m",
+      "observed": 855.460874,
+      "independent_expected": 855.460874,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 ending_shares_m",
+      "observed": 846.90626526,
+      "independent_expected": 846.9062652599999,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 net_buyback_spend",
+      "observed": 427.730437,
+      "independent_expected": 427.73043700000005,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 dividend_cash_budget",
+      "observed": 479.05808944,
+      "independent_expected": 479.05808944000006,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 cash_commitments",
+      "observed": 300.0,
+      "independent_expected": 300,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 sbc_replacement_proxy",
+      "observed": 1170.5904,
+      "independent_expected": 1170.5904000000003,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 cash_retained_after_allocations",
+      "observed": 2304.98267356,
+      "independent_expected": 2304.98267356,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 revenue",
+      "observed": 32776.5312,
+      "independent_expected": 32776.531200000005,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 owner_cash",
+      "observed": 3441.535776,
+      "independent_expected": 3441.535776,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 opening_shares_m",
+      "observed": 846.90626526,
+      "independent_expected": 846.9062652599999,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 ending_shares_m",
+      "observed": 838.4372026074,
+      "independent_expected": 838.4372026074,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 net_buyback_spend",
+      "observed": 423.45313263,
+      "independent_expected": 423.45313262999997,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 dividend_cash_budget",
+      "observed": 474.2675085456,
+      "independent_expected": 474.26750854560004,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 cash_commitments",
+      "observed": 300.0,
+      "independent_expected": 300,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 sbc_replacement_proxy",
+      "observed": 1147.178592,
+      "independent_expected": 1147.1785920000002,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 cash_retained_after_allocations",
+      "observed": 2243.8151348244,
+      "independent_expected": 2243.8151348244005,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear ending_owner_cash_per_share",
+      "observed": 4.104703089626029,
+      "independent_expected": 4.10470308962603,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear terminal_price",
+      "observed": 32.83762471700823,
+      "independent_expected": 32.83762471700824,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear rounded_price_forecast",
+      "observed": 35.0,
+      "independent_expected": 35,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear cash_required_for_10_percent_annual_price_return",
+      "observed": 7107.903787429396,
+      "independent_expected": 7107.903787429395,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear fixed_entry_multiple_terminal_price",
+      "observed": 40.9689201973562,
+      "independent_expected": 40.9689201973562,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear price_return",
+      "observed": -0.41413693636024557,
+      "independent_expected": -0.4141369363602455,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear annualized_price_return",
+      "observed": -0.23458307855146393,
+      "independent_expected": -0.23458307855146387,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bear total_net_share_retirement_percent",
+      "observed": 1.99,
+      "independent_expected": 1.9900000000000029,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 revenue",
+      "observed": 35493.12,
+      "independent_expected": 35493.12,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 owner_cash",
+      "observed": 5146.5024,
+      "independent_expected": 5146.5024,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 opening_shares_m",
+      "observed": 855.460874,
+      "independent_expected": 855.460874,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 ending_shares_m",
+      "observed": 812.6878303,
+      "independent_expected": 812.6878303,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 net_buyback_spend",
+      "observed": 2780.2478405,
+      "independent_expected": 2780.2478405,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 dividend_cash_budget",
+      "observed": 479.05808944,
+      "independent_expected": 479.05808944000006,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 cash_commitments",
+      "observed": 300.0,
+      "independent_expected": 300,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 sbc_replacement_proxy",
+      "observed": 1171.27296,
+      "independent_expected": 1171.2729600000002,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 cash_retained_after_allocations",
+      "observed": 1587.19647006,
+      "independent_expected": 1587.1964700600001,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 revenue",
+      "observed": 36912.8448,
+      "independent_expected": 36912.844800000006,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 owner_cash",
+      "observed": 5352.362496,
+      "independent_expected": 5352.362496000001,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 opening_shares_m",
+      "observed": 812.6878303,
+      "independent_expected": 812.6878303,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 ending_shares_m",
+      "observed": 772.053438785,
+      "independent_expected": 772.053438785,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 net_buyback_spend",
+      "observed": 3047.579363625,
+      "independent_expected": 3047.5793636250005,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 dividend_cash_budget",
+      "observed": 455.105184968,
+      "independent_expected": 455.105184968,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 cash_commitments",
+      "observed": 300.0,
+      "independent_expected": 300,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 sbc_replacement_proxy",
+      "observed": 1218.1238784,
+      "independent_expected": 1218.1238784000002,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 cash_retained_after_allocations",
+      "observed": 1549.677947407,
+      "independent_expected": 1549.6779474070004,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base ending_owner_cash_per_share",
+      "observed": 6.932632156166739,
+      "independent_expected": 6.93263215616674,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base terminal_price",
+      "observed": 83.19158587400086,
+      "independent_expected": 83.19158587400088,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base rounded_price_forecast",
+      "observed": 85.0,
+      "independent_expected": 85,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base cash_required_for_10_percent_annual_price_return",
+      "observed": 4363.420853759841,
+      "independent_expected": 4363.420853759841,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base fixed_entry_multiple_terminal_price",
+      "observed": 69.19439661334853,
+      "independent_expected": 69.19439661334853,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base price_return",
+      "observed": 0.48423882023195125,
+      "independent_expected": 0.4842388202319514,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base annualized_price_return",
+      "observed": 0.21829340482165924,
+      "independent_expected": 0.21829340482165938,
+      "pass": true
+    },
+    {
+      "check": "PYPL Base total_net_share_retirement_percent",
+      "observed": 9.75,
+      "independent_expected": 9.749999999999993,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 revenue",
+      "observed": 36175.68,
+      "independent_expected": 36175.68,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 owner_cash",
+      "observed": 5788.1088,
+      "independent_expected": 5788.1088,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 opening_shares_m",
+      "observed": 855.460874,
+      "independent_expected": 855.460874,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 ending_shares_m",
+      "observed": 804.13322156,
+      "independent_expected": 804.13322156,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 net_buyback_spend",
+      "observed": 3849.573933,
+      "independent_expected": 3849.5739329999997,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 dividend_cash_budget",
+      "observed": 479.05808944,
+      "independent_expected": 479.05808944000006,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 cash_commitments",
+      "observed": 300.0,
+      "independent_expected": 300,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 sbc_replacement_proxy",
+      "observed": 1157.62176,
+      "independent_expected": 1157.62176,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 cash_retained_after_allocations",
+      "observed": 1159.47677756,
+      "independent_expected": 1159.4767775600003,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 revenue",
+      "observed": 38346.2208,
+      "independent_expected": 38346.2208,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 owner_cash",
+      "observed": 6135.395328,
+      "independent_expected": 6135.3953280000005,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 opening_shares_m",
+      "observed": 804.13322156,
+      "independent_expected": 804.13322156,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 ending_shares_m",
+      "observed": 755.8852282664,
+      "independent_expected": 755.8852282664001,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 net_buyback_spend",
+      "observed": 4583.559362892,
+      "independent_expected": 4583.5593628920005,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 dividend_cash_budget",
+      "observed": 450.3146040736,
+      "independent_expected": 450.31460407360004,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 cash_commitments",
+      "observed": 300.0,
+      "independent_expected": 300,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 sbc_replacement_proxy",
+      "observed": 1227.0790656,
+      "independent_expected": 1227.0790656000001,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 cash_retained_after_allocations",
+      "observed": 801.5213610344,
+      "independent_expected": 801.5213610343999,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull ending_owner_cash_per_share",
+      "observed": 8.116834538586426,
+      "independent_expected": 8.116834538586426,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull terminal_price",
+      "observed": 113.63568354020997,
+      "independent_expected": 113.63568354020997,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull rounded_price_forecast",
+      "observed": 115.0,
+      "independent_expected": 115,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull cash_required_for_10_percent_annual_price_return",
+      "observed": 3661.751008831527,
+      "independent_expected": 3661.7510088315275,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull fixed_entry_multiple_terminal_price",
+      "observed": 81.01388558576319,
+      "independent_expected": 81.01388558576318,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull price_return",
+      "observed": 1.0273984574524524,
+      "independent_expected": 1.0273984574524526,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull annualized_price_return",
+      "observed": 0.42386742973229513,
+      "independent_expected": 0.4238674297322953,
+      "pass": true
+    },
+    {
+      "check": "PYPL Bull total_net_share_retirement_percent",
+      "observed": 11.64,
+      "independent_expected": 11.639999999999995,
+      "pass": true
+    },
+    {
+      "check": "CROX frozen entry close",
+      "observed": 116.9,
+      "independent_expected": 116.9,
+      "pass": true
+    },
+    {
+      "check": "CROX binding annual_previous revenue",
+      "observed": 4040.647,
+      "independent_expected": 4040.647,
+      "pass": true
+    },
+    {
+      "check": "CROX binding annual_previous net_income",
+      "observed": -81.198,
+      "independent_expected": -81.198,
+      "pass": true
+    },
+    {
+      "check": "CROX binding annual_previous cfo",
+      "observed": 710.431,
+      "independent_expected": 710.431,
+      "pass": true
+    },
+    {
+      "check": "CROX binding annual_previous capex",
+      "observed": 51.231,
+      "independent_expected": 51.231,
+      "pass": true
+    },
+    {
+      "check": "CROX binding annual_previous sbc",
+      "observed": 36.701,
+      "independent_expected": 36.701,
+      "pass": true
+    },
+    {
+      "check": "CROX binding annual_previous buybacks",
+      "observed": 582.32,
+      "independent_expected": 582.32,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_previous revenue",
+      "observed": 2086.706,
+      "independent_expected": 2086.706,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_previous net_income",
+      "observed": -332.179,
+      "independent_expected": -332.179,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_previous cfo",
+      "observed": 218.565,
+      "independent_expected": 218.565,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_previous capex",
+      "observed": 31.946,
+      "independent_expected": 31.946,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_previous sbc",
+      "observed": 20.036,
+      "independent_expected": 20.036,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_previous buybacks",
+      "observed": 194.137,
+      "independent_expected": 194.137,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_current revenue",
+      "observed": 2100.925,
+      "independent_expected": 2100.925,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_current net_income",
+      "observed": 342.443,
+      "independent_expected": 342.443,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_current cfo",
+      "observed": 270.768,
+      "independent_expected": 270.768,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_current capex",
+      "observed": 38.729,
+      "independent_expected": 38.729,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_current sbc",
+      "observed": 24.852,
+      "independent_expected": 24.852,
+      "pass": true
+    },
+    {
+      "check": "CROX binding interim_current buybacks",
+      "observed": 256.157,
+      "independent_expected": 256.157,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM revenue",
+      "observed": 4054.866,
+      "independent_expected": 4054.866,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM net_income",
+      "observed": 593.424,
+      "independent_expected": 593.424,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM cfo",
+      "observed": 762.634,
+      "independent_expected": 762.634,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM capex",
+      "observed": 58.014,
+      "independent_expected": 58.01400000000001,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM sbc",
+      "observed": 41.517,
+      "independent_expected": 41.516999999999996,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM buybacks",
+      "observed": 644.34,
+      "independent_expected": 644.3400000000001,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM fcf",
+      "observed": 704.62,
+      "independent_expected": 704.62,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM reported_cash_less_sbc_proxy",
+      "observed": 663.103,
+      "independent_expected": 663.1030000000001,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM owner_cash_proxy",
+      "observed": 600.0,
+      "independent_expected": 600.0,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM estimated_equity_value",
+      "observed": 5604.7792675,
+      "independent_expected": 5604.779267500001,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM owner_cash_yield",
+      "observed": 0.10705149504801618,
+      "independent_expected": 0.10705149504801616,
+      "pass": true
+    },
+    {
+      "check": "CROX TTM entry_owner_cash_multiple",
+      "observed": 9.341298779166667,
+      "independent_expected": 9.341298779166669,
+      "pass": true
+    },
+    {
+      "check": "CROX segment anchors sum to TTM revenue",
+      "observed": 4054.866,
+      "independent_expected": 4054.866,
+      "pass": true
+    },
+    {
+      "check": "CROX cover share count/date",
+      "observed": 47.945075,
+      "independent_expected": 47.945075,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 revenue",
+      "observed": 3818.00245,
+      "independent_expected": 3818.0024499999995,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 owner_cash",
+      "observed": 419.9802695,
+      "independent_expected": 419.98026949999996,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 opening_shares_m",
+      "observed": 47.945075,
+      "independent_expected": 47.945075,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 ending_shares_m",
+      "observed": 47.945075,
+      "independent_expected": 47.945075,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 net_buyback_spend",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 cash_commitments",
+      "observed": 150.0,
+      "independent_expected": 150,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 sbc_replacement_proxy",
+      "observed": 53.4520343,
+      "independent_expected": 53.452034299999994,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 cash_retained_after_allocations",
+      "observed": 269.9802695,
+      "independent_expected": 269.98026949999996,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 revenue",
+      "observed": 3596.3941025,
+      "independent_expected": 3596.3941024999995,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 owner_cash",
+      "observed": 395.603351275,
+      "independent_expected": 395.60335127499997,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 opening_shares_m",
+      "observed": 47.945075,
+      "independent_expected": 47.945075,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 ending_shares_m",
+      "observed": 47.945075,
+      "independent_expected": 47.945075,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 net_buyback_spend",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 cash_commitments",
+      "observed": 150.0,
+      "independent_expected": 150,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 sbc_replacement_proxy",
+      "observed": 50.349517435,
+      "independent_expected": 50.349517434999996,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 cash_retained_after_allocations",
+      "observed": 245.603351275,
+      "independent_expected": 245.60335127499997,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear ending_owner_cash_per_share",
+      "observed": 8.251178067298882,
+      "independent_expected": 8.251178067298882,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear terminal_price",
+      "observed": 66.00942453839106,
+      "independent_expected": 66.00942453839106,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear rounded_price_forecast",
+      "observed": 65.0,
+      "independent_expected": 65,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear cash_required_for_10_percent_annual_price_return",
+      "observed": 847.722864209375,
+      "independent_expected": 847.7228642093751,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear fixed_entry_multiple_terminal_price",
+      "observed": 77.07671960674584,
+      "independent_expected": 77.07671960674584,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear price_return",
+      "observed": -0.4353342640000764,
+      "independent_expected": -0.43533426400007647,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear annualized_price_return",
+      "observed": -0.24855756308289084,
+      "independent_expected": -0.2485575630828909,
+      "pass": true
+    },
+    {
+      "check": "CROX Bear total_net_share_retirement_percent",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 revenue",
+      "observed": 4176.11634,
+      "independent_expected": 4176.11634,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 owner_cash",
+      "observed": 626.417451,
+      "independent_expected": 626.4174509999999,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 opening_shares_m",
+      "observed": 47.945075,
+      "independent_expected": 47.945075,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 ending_shares_m",
+      "observed": 45.349092579310344,
+      "independent_expected": 45.34909257931035,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 net_buyback_spend",
+      "observed": 376.417451,
+      "independent_expected": 376.4174509999999,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 cash_commitments",
+      "observed": 250.0,
+      "independent_expected": 250,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 sbc_replacement_proxy",
+      "observed": 50.11339608,
+      "independent_expected": 50.113396079999994,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 cash_retained_after_allocations",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 revenue",
+      "observed": 4303.0355796,
+      "independent_expected": 4303.0355796,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 owner_cash",
+      "observed": 645.45533694,
+      "independent_expected": 645.45533694,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 opening_shares_m",
+      "observed": 45.349092579310344,
+      "independent_expected": 45.34909257931035,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 ending_shares_m",
+      "observed": 42.95239356755277,
+      "independent_expected": 42.952393567552775,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 net_buyback_spend",
+      "observed": 395.45533694,
+      "independent_expected": 395.45533694000005,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 cash_commitments",
+      "observed": 250.0,
+      "independent_expected": 250,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 sbc_replacement_proxy",
+      "observed": 51.6364269552,
+      "independent_expected": 51.63642695520001,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 cash_retained_after_allocations",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Base year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Base ending_owner_cash_per_share",
+      "observed": 15.027226269122098,
+      "independent_expected": 15.027226269122098,
+      "pass": true
+    },
+    {
+      "check": "CROX Base terminal_price",
+      "observed": 165.29948896034307,
+      "independent_expected": 165.29948896034307,
+      "pass": true
+    },
+    {
+      "check": "CROX Base rounded_price_forecast",
+      "observed": 165.0,
+      "independent_expected": 165,
+      "pass": true
+    },
+    {
+      "check": "CROX Base cash_required_for_10_percent_annual_price_return",
+      "observed": 552.3248288851611,
+      "independent_expected": 552.3248288851612,
+      "pass": true
+    },
+    {
+      "check": "CROX Base fixed_entry_multiple_terminal_price",
+      "observed": 140.37381040201151,
+      "independent_expected": 140.37381040201154,
+      "pass": true
+    },
+    {
+      "check": "CROX Base price_return",
+      "observed": 0.41402471309104427,
+      "independent_expected": 0.41402471309104416,
+      "pass": true
+    },
+    {
+      "check": "CROX Base annualized_price_return",
+      "observed": 0.18912771100964773,
+      "independent_expected": 0.18912771100964765,
+      "pass": true
+    },
+    {
+      "check": "CROX Base total_net_share_retirement_percent",
+      "observed": 10.413335326823935,
+      "independent_expected": 10.413335326823924,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 revenue",
+      "observed": 4270.86176,
+      "independent_expected": 4270.86176,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 owner_cash",
+      "observed": 768.7551168,
+      "independent_expected": 768.7551167999999,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 opening_shares_m",
+      "observed": 47.945075,
+      "independent_expected": 47.945075,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 ending_shares_m",
+      "observed": 44.40933147542857,
+      "independent_expected": 44.40933147542857,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 net_buyback_spend",
+      "observed": 618.7551168,
+      "independent_expected": 618.7551167999999,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 cash_commitments",
+      "observed": 150.0,
+      "independent_expected": 150,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 sbc_replacement_proxy",
+      "observed": 51.25034112,
+      "independent_expected": 51.25034112,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 cash_retained_after_allocations",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 revenue",
+      "observed": 4499.2713416,
+      "independent_expected": 4499.271341600001,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 owner_cash",
+      "observed": 809.868841488,
+      "independent_expected": 809.868841488,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 opening_shares_m",
+      "observed": 44.40933147542857,
+      "independent_expected": 44.40933147542857,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 ending_shares_m",
+      "observed": 41.476581068815236,
+      "independent_expected": 41.476581068815236,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 net_buyback_spend",
+      "observed": 659.868841488,
+      "independent_expected": 659.868841488,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 dividend_cash_budget",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 cash_commitments",
+      "observed": 150.0,
+      "independent_expected": 150,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 sbc_replacement_proxy",
+      "observed": 53.9912560992,
+      "independent_expected": 53.99125609920001,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 cash_retained_after_allocations",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull ending_owner_cash_per_share",
+      "observed": 19.525930552094408,
+      "independent_expected": 19.52593055209441,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull terminal_price",
+      "observed": 273.3630277293217,
+      "independent_expected": 273.36302772932174,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull rounded_price_forecast",
+      "observed": 275.0,
+      "independent_expected": 275,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull cash_required_for_10_percent_annual_price_return",
+      "observed": 419.05863682877475,
+      "independent_expected": 419.0586368287748,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull fixed_entry_multiple_terminal_price",
+      "observed": 182.3975512283726,
+      "independent_expected": 182.3975512283727,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull price_return",
+      "observed": 1.338434796658013,
+      "independent_expected": 1.3384347966580132,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull annualized_price_return",
+      "observed": 0.5291941657807921,
+      "independent_expected": 0.5291941657807924,
+      "pass": true
+    },
+    {
+      "check": "CROX Bull total_net_share_retirement_percent",
+      "observed": 13.491466915391753,
+      "independent_expected": 13.491466915391758,
+      "pass": true
+    },
+    {
+      "check": "EXPE frozen entry close",
+      "observed": 268.47,
+      "independent_expected": 268.47,
+      "pass": true
+    },
+    {
+      "check": "EXPE equity-book SBC extra sensitivity",
+      "observed": 90,
+      "independent_expected": 90,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding annual_previous revenue",
+      "observed": 14733,
+      "independent_expected": 14733,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding annual_previous net_income",
+      "observed": 1301,
+      "independent_expected": 1301,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding annual_previous cfo",
+      "observed": 3880,
+      "independent_expected": 3880,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding annual_previous capex",
+      "observed": 770,
+      "independent_expected": 770,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding annual_previous sbc",
+      "observed": 398,
+      "independent_expected": 398,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding annual_previous buybacks",
+      "observed": 1930,
+      "independent_expected": 1930,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_previous revenue",
+      "observed": 6774,
+      "independent_expected": 6774,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_previous net_income",
+      "observed": 125,
+      "independent_expected": 125,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_previous cfo",
+      "observed": 4073,
+      "independent_expected": 4073,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_previous capex",
+      "observed": 396,
+      "independent_expected": 396,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_previous sbc",
+      "observed": 203,
+      "independent_expected": 203,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_previous buybacks",
+      "observed": 1072,
+      "independent_expected": 1072,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_current revenue",
+      "observed": 7741,
+      "independent_expected": 7741,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_current net_income",
+      "observed": 863,
+      "independent_expected": 863,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_current cfo",
+      "observed": 5409,
+      "independent_expected": 5409,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_current capex",
+      "observed": 383,
+      "independent_expected": 383,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_current sbc",
+      "observed": 217,
+      "independent_expected": 217,
+      "pass": true
+    },
+    {
+      "check": "EXPE binding interim_current buybacks",
+      "observed": 1058,
+      "independent_expected": 1058,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM revenue",
+      "observed": 15700.0,
+      "independent_expected": 15700,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM net_income",
+      "observed": 2039.0,
+      "independent_expected": 2039,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM cfo",
+      "observed": 5216.0,
+      "independent_expected": 5216,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM capex",
+      "observed": 757.0,
+      "independent_expected": 757,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM sbc",
+      "observed": 412.0,
+      "independent_expected": 412,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM buybacks",
+      "observed": 1916.0,
+      "independent_expected": 1916,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM fcf",
+      "observed": 4459.0,
+      "independent_expected": 4459,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM reported_cash_less_sbc_proxy",
+      "observed": 4047.0,
+      "independent_expected": 4047,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM owner_cash_proxy",
+      "observed": 2648.0,
+      "independent_expected": 2648,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM estimated_equity_value",
+      "observed": 32221.59301521,
+      "independent_expected": 32221.593015210005,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM owner_cash_yield",
+      "observed": 0.08218091510093956,
+      "independent_expected": 0.08218091510093954,
+      "pass": true
+    },
+    {
+      "check": "EXPE TTM entry_owner_cash_multiple",
+      "observed": 12.168275307858762,
+      "independent_expected": 12.168275307858764,
+      "pass": true
+    },
+    {
+      "check": "EXPE segment anchors sum to TTM revenue",
+      "observed": 15700,
+      "independent_expected": 15700,
+      "pass": true
+    },
+    {
+      "check": "EXPE cover share count/date",
+      "observed": 120.019343,
+      "independent_expected": 120.019343,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 revenue",
+      "observed": 15818.82,
+      "independent_expected": 15818.82,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 owner_cash",
+      "observed": 2056.4466,
+      "independent_expected": 2056.4466,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 opening_shares_m",
+      "observed": 120.019343,
+      "independent_expected": 120.019343,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 ending_shares_m",
+      "observed": 120.019343,
+      "independent_expected": 120.019343,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 net_buyback_spend",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 dividend_cash_budget",
+      "observed": 230.43713856,
+      "independent_expected": 230.43713856,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 cash_commitments",
+      "observed": 250.0,
+      "independent_expected": 250,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 sbc_replacement_proxy",
+      "observed": 522.02106,
+      "independent_expected": 522.02106,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 cash_retained_after_allocations",
+      "observed": 1576.00946144,
+      "independent_expected": 1576.0094614400002,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 revenue",
+      "observed": 15981.261,
+      "independent_expected": 15981.260999999999,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 owner_cash",
+      "observed": 2077.56393,
+      "independent_expected": 2077.56393,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 opening_shares_m",
+      "observed": 120.019343,
+      "independent_expected": 120.019343,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 ending_shares_m",
+      "observed": 120.019343,
+      "independent_expected": 120.019343,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 net_buyback_spend",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 dividend_cash_budget",
+      "observed": 230.43713856,
+      "independent_expected": 230.43713856,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 cash_commitments",
+      "observed": 250.0,
+      "independent_expected": 250,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 sbc_replacement_proxy",
+      "observed": 527.381613,
+      "independent_expected": 527.381613,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 cash_retained_after_allocations",
+      "observed": 1597.12679144,
+      "independent_expected": 1597.1267914399998,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear ending_owner_cash_per_share",
+      "observed": 17.310242483163734,
+      "independent_expected": 17.310242483163734,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear terminal_price",
+      "observed": 173.10242483163734,
+      "independent_expected": 173.10242483163734,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear rounded_price_forecast",
+      "observed": 175.0,
+      "independent_expected": 175,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear cash_required_for_10_percent_annual_price_return",
+      "observed": 3898.81275484041,
+      "independent_expected": 3898.8127548404104,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear fixed_entry_multiple_terminal_price",
+      "observed": 210.635796180929,
+      "independent_expected": 210.63579618092902,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear price_return",
+      "observed": -0.3552261897730199,
+      "independent_expected": -0.35522618977302,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear annualized_price_return",
+      "observed": -0.19702191173919317,
+      "independent_expected": -0.19702191173919326,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bear total_net_share_retirement_percent",
+      "observed": 0.0,
+      "independent_expected": 0.0,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 revenue",
+      "observed": 16996.0,
+      "independent_expected": 16996.0,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 owner_cash",
+      "observed": 2889.32,
+      "independent_expected": 2889.32,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 opening_shares_m",
+      "observed": 120.019343,
+      "independent_expected": 120.019343,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 ending_shares_m",
+      "observed": 116.41876271,
+      "independent_expected": 116.41876271000001,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 net_buyback_spend",
+      "observed": 1044.1682841,
+      "independent_expected": 1044.1682841,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 dividend_cash_budget",
+      "observed": 230.43713856,
+      "independent_expected": 230.43713856,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 cash_commitments",
+      "observed": 250.0,
+      "independent_expected": 250,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 sbc_replacement_proxy",
+      "observed": 543.872,
+      "independent_expected": 543.872,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 cash_retained_after_allocations",
+      "observed": 1364.71457734,
+      "independent_expected": 1364.71457734,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 revenue",
+      "observed": 18437.23,
+      "independent_expected": 18437.23,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 owner_cash",
+      "observed": 3134.3291,
+      "independent_expected": 3134.3291,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 opening_shares_m",
+      "observed": 116.41876271,
+      "independent_expected": 116.41876271000001,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 ending_shares_m",
+      "observed": 112.9261998287,
+      "independent_expected": 112.9261998287,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 net_buyback_spend",
+      "observed": 1135.0829364225,
+      "independent_expected": 1135.0829364225,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 dividend_cash_budget",
+      "observed": 223.5240244032,
+      "independent_expected": 223.5240244032,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 cash_commitments",
+      "observed": 250.0,
+      "independent_expected": 250,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 sbc_replacement_proxy",
+      "observed": 589.99136,
+      "independent_expected": 589.99136,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 cash_retained_after_allocations",
+      "observed": 1525.7221391743,
+      "independent_expected": 1525.7221391742996,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base ending_owner_cash_per_share",
+      "observed": 27.755552783627948,
+      "independent_expected": 27.755552783627945,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base terminal_price",
+      "observed": 360.8221861871633,
+      "independent_expected": 360.82218618716325,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base rounded_price_forecast",
+      "observed": 360.0,
+      "independent_expected": 360,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base cash_required_for_10_percent_annual_price_return",
+      "observed": 2821.840708484109,
+      "independent_expected": 2821.840708484109,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base fixed_entry_multiple_terminal_price",
+      "observed": 337.73720759299044,
+      "independent_expected": 337.7372075929905,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base price_return",
+      "observed": 0.34399443582956496,
+      "independent_expected": 0.34399443582956457,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base annualized_price_return",
+      "observed": 0.1593077399161816,
+      "independent_expected": 0.15930773991618152,
+      "pass": true
+    },
+    {
+      "check": "EXPE Base total_net_share_retirement_percent",
+      "observed": 5.91,
+      "independent_expected": 5.910000000000004,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 revenue",
+      "observed": 17574.24,
+      "independent_expected": 17574.24,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 owner_cash",
+      "observed": 3251.2344,
+      "independent_expected": 3251.2344000000003,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 opening_shares_m",
+      "observed": 120.019343,
+      "independent_expected": 120.019343,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 ending_shares_m",
+      "observed": 115.21856928,
+      "independent_expected": 115.21856928000001,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 net_buyback_spend",
+      "observed": 1632.2630648,
+      "independent_expected": 1632.2630648000002,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 dividend_cash_budget",
+      "observed": 230.43713856,
+      "independent_expected": 230.43713856,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 cash_commitments",
+      "observed": 250.0,
+      "independent_expected": 250,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 sbc_replacement_proxy",
+      "observed": 544.80144,
+      "independent_expected": 544.8014400000001,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 cash_retained_after_allocations",
+      "observed": 1138.53419664,
+      "independent_expected": 1138.5341966400003,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year1 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 revenue",
+      "observed": 19726.3512,
+      "independent_expected": 19726.3512,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 owner_cash",
+      "observed": 3649.374972,
+      "independent_expected": 3649.374972,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 opening_shares_m",
+      "observed": 115.21856928,
+      "independent_expected": 115.21856928000001,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 ending_shares_m",
+      "observed": 110.6098265088,
+      "independent_expected": 110.60982650880001,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 net_buyback_spend",
+      "observed": 1935.671963904,
+      "independent_expected": 1935.671963904,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 dividend_cash_budget",
+      "observed": 221.2196530176,
+      "independent_expected": 221.21965301760002,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 cash_commitments",
+      "observed": 250.0,
+      "independent_expected": 250,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 sbc_replacement_proxy",
+      "observed": 611.5168872,
+      "independent_expected": 611.5168872,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 cash_retained_after_allocations",
+      "observed": 1242.4833550784,
+      "independent_expected": 1242.4833550783999,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 cash_shortfall_before_buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 cash-constrained spending",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull year2 gross budget fits pre-SBC proxy",
+      "observed": true,
+      "independent_expected": true,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull ending_owner_cash_per_share",
+      "observed": 32.99322571227123,
+      "independent_expected": 32.993225712271226,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull terminal_price",
+      "observed": 494.89838568406844,
+      "independent_expected": 494.8983856840684,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull rounded_price_forecast",
+      "observed": 495.0,
+      "independent_expected": 495,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull cash_required_for_10_percent_annual_price_return",
+      "observed": 2395.430556573948,
+      "independent_expected": 2395.4305565739483,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull fixed_entry_multiple_terminal_price",
+      "observed": 401.4706537612408,
+      "independent_expected": 401.47065376124084,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull price_return",
+      "observed": 0.8434029339742558,
+      "independent_expected": 0.8434029339742553,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull annualized_price_return",
+      "observed": 0.35771975531560113,
+      "independent_expected": 0.35771975531560085,
+      "pass": true
+    },
+    {
+      "check": "EXPE Bull total_net_share_retirement_percent",
+      "observed": 7.84,
+      "independent_expected": 7.839999999999991,
+      "pass": true
+    },
+    {
+      "check": "CROX base annual debt plus protected tax budget",
+      "observed": [
+        250,
+        250
+      ],
+      "independent_expected": [
+        250,
+        250
+      ],
+      "pass": true
+    },
+    {
+      "check": "CROX tax stress replaces protected year1 budget",
+      "observed": [
+        500,
+        0
+      ],
+      "independent_expected": [
+        500,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "check": "CROX stress additional commitment",
+      "observed": 750.0,
+      "independent_expected": 750,
+      "pass": true
+    },
+    {
+      "check": "CROX stress first-year shortfall",
+      "observed": 123.582549,
+      "independent_expected": 123.58254900000009,
+      "pass": true
+    },
+    {
+      "check": "CROX stress no first-year net buybacks",
+      "observed": 0.0,
+      "independent_expected": 0,
+      "pass": true
+    },
+    {
+      "check": "CROX stress year1 shares unchanged",
+      "observed": 47.945075,
+      "independent_expected": 47.945075,
+      "pass": true
+    },
+    {
+      "check": "CROX stress year2 shares",
+      "observed": 45.54837598824243,
+      "independent_expected": 45.54837598824243,
+      "pass": true
+    },
+    {
+      "check": "CROX stress terminal price",
+      "observed": 155.8784161299791,
+      "independent_expected": 155.8784161299791,
+      "pass": true
+    },
+    {
+      "check": "ADBE coupled reverse hits1.21 entry",
+      "observed": 288.14939999999996,
+      "independent_expected": 288.14939999999996,
+      "pass": true
+    },
+    {
+      "check": "ADBE coupled reverse cash",
+      "observed": 7382.525939712,
+      "independent_expected": 7382.525939711998,
+      "pass": true
+    },
+    {
+      "check": "ADBE coupled reverse shares",
+      "observed": 358.68672,
+      "independent_expected": 358.68672,
+      "pass": true
+    },
+    {
+      "check": "ADBE coupled reverse anchor change",
+      "observed": -0.1336080343020772,
+      "independent_expected": -0.13360803430207746,
+      "pass": true
+    },
+    {
+      "check": "ADBE reverse desired shares affordable year1",
+      "observed": 4436.88,
+      "independent_expected": 4436.88,
+      "pass": true
+    },
+    {
+      "check": "ADBE reverse desired shares affordable year2",
+      "observed": 4931.9424,
+      "independent_expected": 4931.9424,
+      "pass": true
+    },
+    {
+      "check": "PYPL coupled reverse hits1.21 entry",
+      "observed": 67.8205,
+      "independent_expected": 67.8205,
+      "pass": true
+    },
+    {
+      "check": "PYPL coupled reverse cash",
+      "observed": 4363.420853759841,
+      "independent_expected": 4363.420853759841,
+      "pass": true
+    },
+    {
+      "check": "PYPL coupled reverse shares",
+      "observed": 772.053438785,
+      "independent_expected": 772.053438785,
+      "pass": true
+    },
+    {
+      "check": "PYPL coupled reverse anchor change",
+      "observed": -0.0917108963863778,
+      "independent_expected": -0.09171089638637786,
+      "pass": true
+    },
+    {
+      "check": "PYPL reverse desired shares affordable year1",
+      "observed": 2780.2478405,
+      "independent_expected": 2780.2478405,
+      "pass": true
+    },
+    {
+      "check": "PYPL reverse desired shares affordable year2",
+      "observed": 3047.5793636250005,
+      "independent_expected": 3047.5793636250005,
+      "pass": true
+    },
+    {
+      "check": "CROX coupled reverse hits1.21 entry",
+      "observed": 141.449,
+      "independent_expected": 141.449,
+      "pass": true
+    },
+    {
+      "check": "CROX coupled reverse cash",
+      "observed": 565.4463347755045,
+      "independent_expected": 565.4463347755046,
+      "pass": true
+    },
+    {
+      "check": "CROX coupled reverse shares",
+      "observed": 43.97280774364293,
+      "independent_expected": 43.97280774364294,
+      "pass": true
+    },
+    {
+      "check": "CROX coupled reverse anchor change",
+      "observed": -0.05758944204082585,
+      "independent_expected": -0.05758944204082561,
+      "pass": true
+    },
+    {
+      "check": "CROX reverse year1 cash constraint binds",
+      "observed": 298.7683367629978,
+      "independent_expected": 298.7683367629978,
+      "pass": true
+    },
+    {
+      "check": "CROX reverse year2 cash constraint binds",
+      "observed": 315.4463347755046,
+      "independent_expected": 315.4463347755046,
+      "pass": true
+    },
+    {
+      "check": "EXPE coupled reverse hits1.21 entry",
+      "observed": 324.8487,
+      "independent_expected": 324.8487,
+      "pass": true
+    },
+    {
+      "check": "EXPE coupled reverse cash",
+      "observed": 2821.840708484109,
+      "independent_expected": 2821.840708484109,
+      "pass": true
+    },
+    {
+      "check": "EXPE coupled reverse shares",
+      "observed": 112.9261998287,
+      "independent_expected": 112.9261998287,
+      "pass": true
+    },
+    {
+      "check": "EXPE coupled reverse anchor change",
+      "observed": 0.06564981438221641,
+      "independent_expected": 0.0656498143822164,
+      "pass": true
+    },
+    {
+      "check": "EXPE reverse desired shares affordable year1",
+      "observed": 1044.1682841,
+      "independent_expected": 1044.1682841,
+      "pass": true
+    },
+    {
+      "check": "EXPE reverse desired shares affordable year2",
+      "observed": 1135.0829364225,
+      "independent_expected": 1135.0829364225,
+      "pass": true
+    }
+  ],
+  "independent_results": {
+    "ADBE": {
+      "ttm": {
+        "revenue": 25970,
+        "net_income": 7284,
+        "cfo": 10806,
+        "capex": 214,
+        "sbc": 2071,
+        "buybacks": 9295,
+        "fcf": 10592,
+        "reported_cash_less_sbc_proxy": 8521,
+        "owner_cash_proxy": 8521,
+        "estimated_equity_value": 92684.08799999999,
+        "owner_cash_yield": 0.0919359534508232,
+        "entry_owner_cash_multiple": 10.877137425184836
+      },
+      "scenarios": {
+        "Bear": {
+          "years": [
+            {
+              "revenue": 24931.2,
+              "owner_cash": 6232.8,
+              "opening_shares_m": 389.2,
+              "ending_shares_m": 389.2,
+              "net_buyback_spend": 0.0,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 1340,
+              "sbc_replacement_proxy": 2119.152,
+              "cash_retained_after_allocations": 4892.8,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 23933.952,
+              "owner_cash": 5983.488,
+              "opening_shares_m": 389.2,
+              "ending_shares_m": 389.2,
+              "net_buyback_spend": 0.0,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 1000,
+              "sbc_replacement_proxy": 2034.3859200000002,
+              "cash_retained_after_allocations": 4983.488,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 15.373812949640289,
+          "terminal_price": 138.3643165467626,
+          "rounded_price_forecast": 140,
+          "cash_required_for_10_percent_annual_price_return": 12460.860719999999,
+          "fixed_entry_multiple_terminal_price": 167.22307620232365,
+          "price_return": -0.4189791024323397,
+          "annualized_price_return": -0.23775273200380687,
+          "total_net_share_retirement_percent": 0.0
+        },
+        "Base": {
+          "years": [
+            {
+              "revenue": 28047.600000000002,
+              "owner_cash": 8694.756000000001,
+              "opening_shares_m": 389.2,
+              "ending_shares_m": 373.632,
+              "net_buyback_spend": 4436.88,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 1340,
+              "sbc_replacement_proxy": 2299.9032,
+              "cash_retained_after_allocations": 2917.876000000001,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 30291.408000000003,
+              "owner_cash": 9390.336480000002,
+              "opening_shares_m": 373.632,
+              "ending_shares_m": 358.68672,
+              "net_buyback_spend": 4931.9424,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 1000,
+              "sbc_replacement_proxy": 2483.895456,
+              "cash_retained_after_allocations": 3458.394080000002,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 26.179771807553962,
+          "terminal_price": 366.5168053057555,
+          "rounded_price_forecast": 365,
+          "cash_required_for_10_percent_annual_price_return": 7382.525939711998,
+          "fixed_entry_multiple_terminal_price": 284.76097571074405,
+          "price_return": 0.5390812350119909,
+          "annualized_price_return": 0.24059712840711955,
+          "total_net_share_retirement_percent": 7.8400000000000025
+        },
+        "Bull": {
+          "years": [
+            {
+              "revenue": 29086.4,
+              "owner_cash": 9598.512,
+              "opening_shares_m": 389.2,
+              "ending_shares_m": 365.848,
+              "net_buyback_spend": 7706.159999999999,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 1340,
+              "sbc_replacement_proxy": 2385.0848,
+              "cash_retained_after_allocations": 552.3520000000017,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 32576.768000000004,
+              "owner_cash": 10750.333440000002,
+              "opening_shares_m": 365.848,
+              "ending_shares_m": 343.89712000000003,
+              "net_buyback_spend": 9219.3696,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 1000,
+              "sbc_replacement_proxy": 2671.2949760000006,
+              "cash_retained_after_allocations": 530.9638400000022,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 31.260318318455244,
+          "terminal_price": 531.4254114137392,
+          "rounded_price_forecast": 530,
+          "cash_required_for_10_percent_annual_price_return": 5829.044046454588,
+          "fixed_entry_multiple_terminal_price": 340.02277830486065,
+          "price_return": 1.2315671933053634,
+          "annualized_price_return": 0.4938430952765298,
+          "total_net_share_retirement_percent": 11.639999999999995
+        }
+      },
+      "share_count_date": "2026-09-18",
+      "balance_period_end": "2026-08-28",
+      "coupled_reverse_independent": {
+        "scale": 0.7861833231892875,
+        "year2_owner_cash_required": 7382.525939711998,
+        "ending_shares_m": 358.68672,
+        "terminal_price": 288.14939999999996,
+        "years": [
+          {
+            "owner_cash": 6835.672166399998,
+            "shares": 373.632,
+            "funds": 5495.672166399998,
+            "desired": 4436.88,
+            "spent": 4436.88
+          },
+          {
+            "owner_cash": 7382.525939711998,
+            "shares": 358.68672,
+            "funds": 6382.525939711998,
+            "desired": 4931.9424,
+            "spent": 4931.9424
+          }
+        ],
+        "method": "Closed-form from cash-funded share equation for CROX; fixed fully funded desired-share path for other3, then independently checked funding."
+      }
+    },
+    "PYPL": {
+      "ttm": {
+        "revenue": 34128,
+        "net_income": 4902,
+        "cfo": 7475,
+        "capex": 889,
+        "sbc": 1001,
+        "buybacks": 6053,
+        "fcf": 6586,
+        "reported_cash_less_sbc_proxy": 5585,
+        "owner_cash_proxy": 4804,
+        "estimated_equity_value": 47948.581987699996,
+        "owner_cash_yield": 0.10019065842723661,
+        "entry_owner_cash_multiple": 9.98097043873855
+      },
+      "scenarios": {
+        "Bear": {
+          "years": [
+            {
+              "revenue": 33445.44,
+              "owner_cash": 3511.7712,
+              "opening_shares_m": 855.460874,
+              "ending_shares_m": 846.9062652599999,
+              "net_buyback_spend": 427.73043700000005,
+              "dividend_cash_budget": 479.05808944000006,
+              "cash_commitments": 300,
+              "sbc_replacement_proxy": 1170.5904000000003,
+              "cash_retained_after_allocations": 2304.98267356,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 32776.531200000005,
+              "owner_cash": 3441.535776,
+              "opening_shares_m": 846.9062652599999,
+              "ending_shares_m": 838.4372026074,
+              "net_buyback_spend": 423.45313262999997,
+              "dividend_cash_budget": 474.26750854560004,
+              "cash_commitments": 300,
+              "sbc_replacement_proxy": 1147.1785920000002,
+              "cash_retained_after_allocations": 2243.8151348244005,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 4.10470308962603,
+          "terminal_price": 32.83762471700824,
+          "rounded_price_forecast": 35,
+          "cash_required_for_10_percent_annual_price_return": 7107.903787429395,
+          "fixed_entry_multiple_terminal_price": 40.9689201973562,
+          "price_return": -0.4141369363602455,
+          "annualized_price_return": -0.23458307855146387,
+          "total_net_share_retirement_percent": 1.9900000000000029
+        },
+        "Base": {
+          "years": [
+            {
+              "revenue": 35493.12,
+              "owner_cash": 5146.5024,
+              "opening_shares_m": 855.460874,
+              "ending_shares_m": 812.6878303,
+              "net_buyback_spend": 2780.2478405,
+              "dividend_cash_budget": 479.05808944000006,
+              "cash_commitments": 300,
+              "sbc_replacement_proxy": 1171.2729600000002,
+              "cash_retained_after_allocations": 1587.1964700600001,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 36912.844800000006,
+              "owner_cash": 5352.362496000001,
+              "opening_shares_m": 812.6878303,
+              "ending_shares_m": 772.053438785,
+              "net_buyback_spend": 3047.5793636250005,
+              "dividend_cash_budget": 455.105184968,
+              "cash_commitments": 300,
+              "sbc_replacement_proxy": 1218.1238784000002,
+              "cash_retained_after_allocations": 1549.6779474070004,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 6.93263215616674,
+          "terminal_price": 83.19158587400088,
+          "rounded_price_forecast": 85,
+          "cash_required_for_10_percent_annual_price_return": 4363.420853759841,
+          "fixed_entry_multiple_terminal_price": 69.19439661334853,
+          "price_return": 0.4842388202319514,
+          "annualized_price_return": 0.21829340482165938,
+          "total_net_share_retirement_percent": 9.749999999999993
+        },
+        "Bull": {
+          "years": [
+            {
+              "revenue": 36175.68,
+              "owner_cash": 5788.1088,
+              "opening_shares_m": 855.460874,
+              "ending_shares_m": 804.13322156,
+              "net_buyback_spend": 3849.5739329999997,
+              "dividend_cash_budget": 479.05808944000006,
+              "cash_commitments": 300,
+              "sbc_replacement_proxy": 1157.62176,
+              "cash_retained_after_allocations": 1159.4767775600003,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 38346.2208,
+              "owner_cash": 6135.3953280000005,
+              "opening_shares_m": 804.13322156,
+              "ending_shares_m": 755.8852282664001,
+              "net_buyback_spend": 4583.5593628920005,
+              "dividend_cash_budget": 450.31460407360004,
+              "cash_commitments": 300,
+              "sbc_replacement_proxy": 1227.0790656000001,
+              "cash_retained_after_allocations": 801.5213610343999,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 8.116834538586426,
+          "terminal_price": 113.63568354020997,
+          "rounded_price_forecast": 115,
+          "cash_required_for_10_percent_annual_price_return": 3661.7510088315275,
+          "fixed_entry_multiple_terminal_price": 81.01388558576318,
+          "price_return": 1.0273984574524526,
+          "annualized_price_return": 0.4238674297322953,
+          "total_net_share_retirement_percent": 11.639999999999995
+        }
+      },
+      "share_count_date": "2026-07-22",
+      "balance_period_end": "2026-06-30",
+      "coupled_reverse_independent": {
+        "scale": 0.8152326859439679,
+        "year2_owner_cash_required": 4363.420853759841,
+        "ending_shares_m": 772.053438785,
+        "terminal_price": 67.8205,
+        "years": [
+          {
+            "owner_cash": 4195.596974769077,
+            "shares": 812.6878303,
+            "funds": 3416.538885329077,
+            "desired": 2780.2478405,
+            "spent": 2780.2478405
+          },
+          {
+            "owner_cash": 4363.420853759841,
+            "shares": 772.053438785,
+            "funds": 3608.315668791841,
+            "desired": 3047.5793636250005,
+            "spent": 3047.5793636250005
+          }
+        ],
+        "method": "Closed-form from cash-funded share equation for CROX; fixed fully funded desired-share path for other3, then independently checked funding."
+      }
+    },
+    "CROX": {
+      "ttm": {
+        "revenue": 4054.866,
+        "net_income": 593.424,
+        "cfo": 762.634,
+        "capex": 58.01400000000001,
+        "sbc": 41.516999999999996,
+        "buybacks": 644.3400000000001,
+        "fcf": 704.62,
+        "reported_cash_less_sbc_proxy": 663.1030000000001,
+        "owner_cash_proxy": 600.0,
+        "estimated_equity_value": 5604.779267500001,
+        "owner_cash_yield": 0.10705149504801616,
+        "entry_owner_cash_multiple": 9.341298779166669
+      },
+      "scenarios": {
+        "Bear": {
+          "years": [
+            {
+              "revenue": 3818.0024499999995,
+              "owner_cash": 419.98026949999996,
+              "opening_shares_m": 47.945075,
+              "ending_shares_m": 47.945075,
+              "net_buyback_spend": 0.0,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 150,
+              "sbc_replacement_proxy": 53.452034299999994,
+              "cash_retained_after_allocations": 269.98026949999996,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 3596.3941024999995,
+              "owner_cash": 395.60335127499997,
+              "opening_shares_m": 47.945075,
+              "ending_shares_m": 47.945075,
+              "net_buyback_spend": 0.0,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 150,
+              "sbc_replacement_proxy": 50.349517434999996,
+              "cash_retained_after_allocations": 245.60335127499997,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 8.251178067298882,
+          "terminal_price": 66.00942453839106,
+          "rounded_price_forecast": 65,
+          "cash_required_for_10_percent_annual_price_return": 847.7228642093751,
+          "fixed_entry_multiple_terminal_price": 77.07671960674584,
+          "price_return": -0.43533426400007647,
+          "annualized_price_return": -0.2485575630828909,
+          "total_net_share_retirement_percent": 0.0
+        },
+        "Base": {
+          "years": [
+            {
+              "revenue": 4176.11634,
+              "owner_cash": 626.4174509999999,
+              "opening_shares_m": 47.945075,
+              "ending_shares_m": 45.34909257931035,
+              "net_buyback_spend": 376.4174509999999,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 250,
+              "sbc_replacement_proxy": 50.113396079999994,
+              "cash_retained_after_allocations": 0.0,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 4303.0355796,
+              "owner_cash": 645.45533694,
+              "opening_shares_m": 45.34909257931035,
+              "ending_shares_m": 42.952393567552775,
+              "net_buyback_spend": 395.45533694000005,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 250,
+              "sbc_replacement_proxy": 51.63642695520001,
+              "cash_retained_after_allocations": 0.0,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 15.027226269122098,
+          "terminal_price": 165.29948896034307,
+          "rounded_price_forecast": 165,
+          "cash_required_for_10_percent_annual_price_return": 552.3248288851612,
+          "fixed_entry_multiple_terminal_price": 140.37381040201154,
+          "price_return": 0.41402471309104416,
+          "annualized_price_return": 0.18912771100964765,
+          "total_net_share_retirement_percent": 10.413335326823924
+        },
+        "Bull": {
+          "years": [
+            {
+              "revenue": 4270.86176,
+              "owner_cash": 768.7551167999999,
+              "opening_shares_m": 47.945075,
+              "ending_shares_m": 44.40933147542857,
+              "net_buyback_spend": 618.7551167999999,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 150,
+              "sbc_replacement_proxy": 51.25034112,
+              "cash_retained_after_allocations": 0.0,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 4499.271341600001,
+              "owner_cash": 809.868841488,
+              "opening_shares_m": 44.40933147542857,
+              "ending_shares_m": 41.476581068815236,
+              "net_buyback_spend": 659.868841488,
+              "dividend_cash_budget": 0.0,
+              "cash_commitments": 150,
+              "sbc_replacement_proxy": 53.99125609920001,
+              "cash_retained_after_allocations": 0.0,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 19.52593055209441,
+          "terminal_price": 273.36302772932174,
+          "rounded_price_forecast": 275,
+          "cash_required_for_10_percent_annual_price_return": 419.0586368287748,
+          "fixed_entry_multiple_terminal_price": 182.3975512283727,
+          "price_return": 1.3384347966580132,
+          "annualized_price_return": 0.5291941657807924,
+          "total_net_share_retirement_percent": 13.491466915391758
+        }
+      },
+      "share_count_date": "2026-07-23",
+      "balance_period_end": "2026-06-30",
+      "coupled_reverse_independent": {
+        "scale": 0.8760425430149741,
+        "year2_owner_cash_required": 565.4463347755046,
+        "ending_shares_m": 43.97280774364294,
+        "terminal_price": 141.449,
+        "years": [
+          {
+            "owner_cash": 548.7683367629978,
+            "shares": 45.88460371197933,
+            "funds": 298.7683367629978,
+            "desired": 486.6425112500001,
+            "spent": 298.7683367629978
+          },
+          {
+            "owner_cash": 565.4463347755046,
+            "shares": 43.97280774364294,
+            "funds": 315.4463347755046,
+            "desired": 529.9671728733613,
+            "spent": 315.4463347755046
+          }
+        ],
+        "method": "Closed-form from cash-funded share equation for CROX; fixed fully funded desired-share path for other3, then independently checked funding."
+      }
+    },
+    "EXPE": {
+      "ttm": {
+        "revenue": 15700,
+        "net_income": 2039,
+        "cfo": 5216,
+        "capex": 757,
+        "sbc": 412,
+        "buybacks": 1916,
+        "fcf": 4459,
+        "reported_cash_less_sbc_proxy": 4047,
+        "owner_cash_proxy": 2648,
+        "estimated_equity_value": 32221.593015210005,
+        "owner_cash_yield": 0.08218091510093954,
+        "entry_owner_cash_multiple": 12.168275307858764
+      },
+      "scenarios": {
+        "Bear": {
+          "years": [
+            {
+              "revenue": 15818.82,
+              "owner_cash": 2056.4466,
+              "opening_shares_m": 120.019343,
+              "ending_shares_m": 120.019343,
+              "net_buyback_spend": 0.0,
+              "dividend_cash_budget": 230.43713856,
+              "cash_commitments": 250,
+              "sbc_replacement_proxy": 522.02106,
+              "cash_retained_after_allocations": 1576.0094614400002,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 15981.260999999999,
+              "owner_cash": 2077.56393,
+              "opening_shares_m": 120.019343,
+              "ending_shares_m": 120.019343,
+              "net_buyback_spend": 0.0,
+              "dividend_cash_budget": 230.43713856,
+              "cash_commitments": 250,
+              "sbc_replacement_proxy": 527.381613,
+              "cash_retained_after_allocations": 1597.1267914399998,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 17.310242483163734,
+          "terminal_price": 173.10242483163734,
+          "rounded_price_forecast": 175,
+          "cash_required_for_10_percent_annual_price_return": 3898.8127548404104,
+          "fixed_entry_multiple_terminal_price": 210.63579618092902,
+          "price_return": -0.35522618977302,
+          "annualized_price_return": -0.19702191173919326,
+          "total_net_share_retirement_percent": 0.0
+        },
+        "Base": {
+          "years": [
+            {
+              "revenue": 16996.0,
+              "owner_cash": 2889.32,
+              "opening_shares_m": 120.019343,
+              "ending_shares_m": 116.41876271000001,
+              "net_buyback_spend": 1044.1682841,
+              "dividend_cash_budget": 230.43713856,
+              "cash_commitments": 250,
+              "sbc_replacement_proxy": 543.872,
+              "cash_retained_after_allocations": 1364.71457734,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 18437.23,
+              "owner_cash": 3134.3291,
+              "opening_shares_m": 116.41876271000001,
+              "ending_shares_m": 112.9261998287,
+              "net_buyback_spend": 1135.0829364225,
+              "dividend_cash_budget": 223.5240244032,
+              "cash_commitments": 250,
+              "sbc_replacement_proxy": 589.99136,
+              "cash_retained_after_allocations": 1525.7221391742996,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 27.755552783627945,
+          "terminal_price": 360.82218618716325,
+          "rounded_price_forecast": 360,
+          "cash_required_for_10_percent_annual_price_return": 2821.840708484109,
+          "fixed_entry_multiple_terminal_price": 337.7372075929905,
+          "price_return": 0.34399443582956457,
+          "annualized_price_return": 0.15930773991618152,
+          "total_net_share_retirement_percent": 5.910000000000004
+        },
+        "Bull": {
+          "years": [
+            {
+              "revenue": 17574.24,
+              "owner_cash": 3251.2344000000003,
+              "opening_shares_m": 120.019343,
+              "ending_shares_m": 115.21856928000001,
+              "net_buyback_spend": 1632.2630648000002,
+              "dividend_cash_budget": 230.43713856,
+              "cash_commitments": 250,
+              "sbc_replacement_proxy": 544.8014400000001,
+              "cash_retained_after_allocations": 1138.5341966400003,
+              "cash_shortfall_before_buybacks": 0
+            },
+            {
+              "revenue": 19726.3512,
+              "owner_cash": 3649.374972,
+              "opening_shares_m": 115.21856928000001,
+              "ending_shares_m": 110.60982650880001,
+              "net_buyback_spend": 1935.671963904,
+              "dividend_cash_budget": 221.21965301760002,
+              "cash_commitments": 250,
+              "sbc_replacement_proxy": 611.5168872,
+              "cash_retained_after_allocations": 1242.4833550783999,
+              "cash_shortfall_before_buybacks": 0
+            }
+          ],
+          "ending_owner_cash_per_share": 32.993225712271226,
+          "terminal_price": 494.8983856840684,
+          "rounded_price_forecast": 495,
+          "cash_required_for_10_percent_annual_price_return": 2395.4305565739483,
+          "fixed_entry_multiple_terminal_price": 401.47065376124084,
+          "price_return": 0.8434029339742553,
+          "annualized_price_return": 0.35771975531560085,
+          "total_net_share_retirement_percent": 7.839999999999991
+        }
+      },
+      "share_count_date": "2026-07-24",
+      "balance_period_end": "2026-06-30",
+      "coupled_reverse_independent": {
+        "scale": 0.900301346302183,
+        "year2_owner_cash_required": 2821.840708484109,
+        "ending_shares_m": 112.9261998287,
+        "terminal_price": 324.8487,
+        "years": [
+          {
+            "owner_cash": 2601.2586858978234,
+            "shares": 116.41876271000001,
+            "funds": 2120.821547337823,
+            "desired": 1044.1682841,
+            "spent": 1044.1682841
+          },
+          {
+            "owner_cash": 2821.840708484109,
+            "shares": 112.9261998287,
+            "funds": 2348.316684080909,
+            "desired": 1135.0829364225,
+            "spent": 1135.0829364225
+          }
+        ],
+        "method": "Closed-form from cash-funded share equation for CROX; fixed fully funded desired-share path for other3, then independently checked funding."
+      }
+    }
+  },
+  "crocs_stress_funding": {
+    "required_cash_use_million": 123.58254900000009,
+    "june_historical_unrestricted_cash_million": 170.276,
+    "hypothetical_june_cash_remaining_million": 46.693450999999925,
+    "status": "Not a current cash balance or a fully funded forecast. Conditional historical reference only; no minimum operating cash or interim cash changes asserted."
+  },
+  "interpretation_concerns": [
+    {
+      "severity": "interpretation",
+      "topic": "reverse cash hurdle",
+      "reported_conditional_cash_million": 552.3248288851612,
+      "cash_million_when_recomputing_second_year_cash_funded_buybacks": 559.0580569089169,
+      "correction": "Legacy conditional field holds terminal shares fixed. Root added a coupled_reverse diagnostic for publication; independently verified below."
+    }
+  ],
+  "synthetic_evaluator_checks": [
+    {
+      "name": "2-for-1 split uses original-share value",
+      "status": "returned",
+      "pass": true
+    },
+    {
+      "name": "delisting at zero remains in denominator",
+      "status": "returned",
+      "pass": true
+    },
+    {
+      "name": "missing company rejected",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Include every forecast and benchmark; do not drop failed companies.",
+      "pass": true
+    },
+    {
+      "name": "incomplete dividend data keeps all price results and omits all cash returns",
+      "status": "returned",
+      "pass": true
+    },
+    {
+      "name": "fixed date rejects 2028-10-11",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Use the frozen evaluation session; a later date changes the prediction horizon.",
+      "pass": true
+    },
+    {
+      "name": "fixed date rejects 2028-10-13",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Use the frozen evaluation session; a later date changes the prediction horizon.",
+      "pass": true
+    },
+    {
+      "name": "fixed date rejects 2030-10-12",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Use the frozen evaluation session; a later date changes the prediction horizon.",
+      "pass": true
+    },
+    {
+      "name": "invalid distribution nan",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Stock distributions must be finite and nonnegative.",
+      "pass": true
+    },
+    {
+      "name": "invalid distribution inf",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Stock distributions must be finite and nonnegative.",
+      "pass": true
+    },
+    {
+      "name": "invalid distribution -1",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Stock distributions must be finite and nonnegative.",
+      "pass": true
+    },
+    {
+      "name": "invalid distribution True",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Stock distributions must be a number, not a boolean.",
+      "pass": true
+    },
+    {
+      "name": "invalid entry 0",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Stock entry must be finite and positive.",
+      "pass": true
+    },
+    {
+      "name": "invalid entry nan",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Stock entry must be finite and positive.",
+      "pass": true
+    },
+    {
+      "name": "invalid entry inf",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Stock entry must be finite and positive.",
+      "pass": true
+    },
+    {
+      "name": "invalid entry True",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Stock entry must be a number, not a boolean.",
+      "pass": true
+    },
+    {
+      "name": "unreconciled actions rejected",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Reconcile corporate actions before evaluation.",
+      "pass": true
+    },
+    {
+      "name": "duplicate forecast symbol rejected",
+      "status": "rejected",
+      "exception": "ValueError",
+      "error": "Registry symbols must be unique.",
+      "pass": true
+    }
+  ],
+  "arithmetic_failures": [],
+  "source_failures": [],
+  "status": "passed_with_interpretation_limits",
+  "still_matches_root": {
+    "models.py": true,
+    "build_inputs.py": true,
+    "inputs.json": true,
+    "outputs/model-results.json": true,
+    "evaluate_forecasts.py": true
+  }
+}

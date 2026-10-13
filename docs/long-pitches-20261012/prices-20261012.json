@@ -1,0 +1,31 @@
+{
+  "provider": "Alpaca Markets",
+  "tool": "alpaca_get_stock_bars",
+  "feed": "sip",
+  "currency": "USD",
+  "request": {
+    "symbol": ["CHGG", "ADBE", "PYPL", "QCOM", "EXPE", "CROX", "DBX", "HCA", "WCC", "SPY"],
+    "start": "2026-10-12T00:00:00-04:00",
+    "end": "2026-10-13T00:00:00-04:00",
+    "timeframe": "1Day",
+    "feed": "sip",
+    "limit": 20,
+    "sort": "asc"
+  },
+  "observation_date": "2026-10-12",
+  "daily_bar_timestamp": "2026-10-12T04:00:00+00:00",
+  "timestamp_note": "Daily bar timestamp denotes the New York calendar date, not the time of an intraday quote. Close is used as the entry-price convention.",
+  "adjustment_note": "The connected tool exposes no adjustment parameter. No historical total-return adjustment is inferred. Future comparison must reconcile splits and separately identify dividends.",
+  "bars": [
+    {"symbol":"CHGG","open":0.7362,"high":0.7362,"low":0.6779,"close":0.711,"volume":557468,"trade_count":1613,"vwap":0.702393},
+    {"symbol":"ADBE","open":234.625,"high":242.46,"low":232.85,"close":238.14,"volume":4534495,"trade_count":106442,"vwap":238.257888},
+    {"symbol":"PYPL","open":55.63,"high":56.21,"low":55.35,"close":56.05,"volume":8713172,"trade_count":79121,"vwap":55.966197},
+    {"symbol":"QCOM","open":175.185,"high":175.23,"low":172.1601,"close":174.43,"volume":6926357,"trade_count":107846,"vwap":174.033864},
+    {"symbol":"EXPE","open":272.47,"high":276.59,"low":267.28,"close":268.47,"volume":1244992,"trade_count":31966,"vwap":269.282164},
+    {"symbol":"CROX","open":114.87,"high":118.33,"low":114.33,"close":116.9,"volume":988025,"trade_count":20451,"vwap":116.836921},
+    {"symbol":"DBX","open":34.61,"high":35.2129,"low":34.53,"close":34.87,"volume":3043062,"trade_count":35296,"vwap":34.958529},
+    {"symbol":"HCA","open":450.58,"high":460.28,"low":444.81,"close":458.6,"volume":1152709,"trade_count":39538,"vwap":457.872668},
+    {"symbol":"WCC","open":366.63,"high":369.22,"low":360.51,"close":361.34,"volume":549922,"trade_count":20590,"vwap":363.314233},
+    {"symbol":"SPY","open":778.78,"high":779.397,"low":777.05,"close":778.1,"volume":18774730,"trade_count":358050,"vwap":778.0766}
+  ]
+}

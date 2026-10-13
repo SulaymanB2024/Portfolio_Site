@@ -1,0 +1,26 @@
+"""Execute a portable notebook and keep all twelve original figure outputs."""
+from pathlib import Path
+import json
+import nbformat
+from nbclient import NotebookClient
+
+ROOT=Path(__file__).resolve().parent
+md=nbformat.v4.new_markdown_cell;code=nbformat.v4.new_code_cell
+nb=nbformat.v4.new_notebook()
+nb['metadata']={'kernelspec':{'name':'python3','display_name':'Python 3','language':'python'},'language_info':{'name':'python'}}
+nb['cells']=[md('# Four longs, with forecasts that can be judged\n\n## tl;dr\n\nAt the October 12, 2026 closes, the author forecasts for October 12, 2028 are Adobe $365, PayPal $85, Crocs $165 and Expedia $360. Recurring cash and affordable share reduction support the cases; terminal multiples and operating conditions remain explicit judgments. Future prediction accuracy is unobserved.'),
+md('## Context & Methods\n\nInformation cutoff October 12, 2026; authored October 13. USD millions and millions of shares. The native articles contain the full argument. This is a rerunnable companion, with frozen facts and scenario assumptions.\n\n### Key Assumptions\n\nTTM uses annual plus comparable current interim minus previous interim. Employee equity is charged economically. PayPal retained-loan investment, Crocs tax/liquidity protection and Expedia travel-WC sensitivity receive separate treatment. Net repurchases fit inside cash budgets; retained cash receives no terminal bonus. Scenarios have no probability weights.'),
+code("from models import load_inputs, write_outputs\nfrom figures import build_figures\nfrom pathlib import Path\nfrom IPython.display import display, Markdown, Image\nimport json\ninputs=load_inputs()\noutput=write_outputs(inputs)\nbuild_figures()"),
+md('## Data\n\nPrimary source ledgers bind dates and measure definitions; the daily-bar snapshot preserves the actual entry convention. No live data is fetched when these cells run.'),
+code("ledger=json.loads(Path('source-register.json').read_text())\nfor symbol, sources in ledger['articles'].items():\n    display(Markdown('### '+symbol+' sources\\n'+ '\\n'.join('- ['+s['label']+']('+s['href']+') · '+s['date'] for s in sources)))"),
+md('## Results\n\nThe cash figures are author sensitivities, not interchangeable company-reported metrics. Share dates, cash transformations and uncertainty are retained in each article and the input file.'),
+code("rows=['|Company|Entry USD|Underwriting cash $m|Base model USD|Rounded forecast USD|','|---|---:|---:|---:|---:|']\nfor company in inputs['companies']:\n    data=output['companies'][company['symbol']]\n    base=next(s for s in data['scenarios'] if s['name']=='Base')\n    rows.append(f\"|{company['symbol']}|{company['entry_close']:.2f}|{data['ttm']['owner_cash_proxy']:,.3f}|{base['terminal_price']:.2f}|{base['rounded_price_forecast']:.0f}|\")\ndisplay(Markdown('\\n'.join(rows)))")]
+for name,symbol in [('adobe','ADBE'),('paypal','PYPL'),('crocs','CROX'),('expedia','EXPE')]:
+    nb['cells'].append(md('### '+symbol+' · evidence, cash and prospective prices\n\nOperating figures use matching reported periods. Cash bridges preserve company-specific deductions. Price cases are modeled alternatives, not intervals or probabilities.'))
+    nb['cells'].append(code("names="+repr([name+'-'+{'adobe':'growth-quality','paypal':'transaction-economics','crocs':'profit-and-shares','expedia':'segment-conversion'}[name],name+'-cash-underwriting',name+'-price-scenarios'])+"\nfor name in names:\n    display(Image(filename='figures/'+name+'.png'))\nbase=next(s for s in output['companies']['"+symbol+"']['scenarios'] if s['name']=='Base')\ndisplay(Markdown(f\"Second-year cash: ${base['years'][-1]['owner_cash']:,.1f}m. Ending shares: {base['years'][-1]['ending_shares_m']:,.3f}m. These are author assumptions/results, not reported outcomes.\"))"))
+nb['cells'] += [md('### Coupled reverse hurdles\n\nCash margins scale together and affordable share reductions are recalculated. Revenue growth, terminal multiples, capital budgets and average purchase prices stay at their base assumptions. The 10% annual hurdle is an author choice, not a prediction for SPY.'),
+code("rows=['|Company|Required year 2 cash $m|Ending shares m|Hurdle price USD|','|---|---:|---:|---:|']\nfor symbol,data in output['companies'].items():\n    r=data['coupled_reverse']\n    rows.append(f\"|{symbol}|{r['year2_owner_cash_required']:,.3f}|{r['ending_shares_m']:,.3f}|{r['hurdle_price']:.2f}|\")\ndisplay(Markdown('\\n'.join(rows)))"),
+md('## Takeaways\n\nAll four longs can be challenged through actual operating results and a frozen price-return comparison with SPY. Crocs’ severe tax-payment stress has a funding gap and is not a fully funded stock-price outcome. Expedia’s travel receivables attribution and alternative SBC measure remain sensitivities. Adobe paid growth and PayPal transaction economics must support the assumed cash margins. Preserve the original registry when writing later updates; synthetic evaluator fixtures are not future performance evidence.')]
+NotebookClient(nb,timeout=120,kernel_name='python3',resources={'metadata':{'path':str(ROOT)}}).execute()
+nbformat.write(nb,ROOT/'worked-model.ipynb')
+print('Executed',sum(c.cell_type=='code' for c in nb.cells),'code cells;12 embedded figures.')

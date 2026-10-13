@@ -1,0 +1,6 @@
+# Original snapshots and renderer exports retain their acquired byte identity.
+research/*/sources/** -whitespace linguist-generated=true
+figures/*.svg -whitespace linguist-generated=true
+outputs/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol linguist-generated=true
+evidence/*.log -whitespace linguist-generated=true
+worked-model.ipynb linguist-generated=true

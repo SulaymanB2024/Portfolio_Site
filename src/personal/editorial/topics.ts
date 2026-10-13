@@ -16,11 +16,12 @@ export const readingTopics: ReadingTopic[] = [
   {
     slug: 'financial-systems', title: 'Who owns the cash flow?',
     seoTitle: 'Texas Toll-Road & Airline Loyalty Research',
-    questionsUpdated: '2026-10-06',
+    questionsUpdated: '2026-10-13',
     description: 'Toll roads, airline miles, software buyouts and other businesses where title, control and cash belong to different people.',
     introduction: [
       'Start with the right being sold. Owning a road, collecting its tolls, lending to its operator and sending a bill are different positions. The same distinction appears in airline loyalty programs, hardware financing and private equity.',
       'These investigations trace contracts and payment obligations before drawing conclusions from an ownership label. Read the toll-road pair together, then follow the financing structure into a different industry. Each essay retains its source dates, disclosed figures and unresolved questions.',
+      'The public-company longs begin with reported cash, charge for employee equity and capital demands, then turn that cash into conditional forecasts. Each separates the operating thesis from the valuation needed to support it.',
     ],
     questions: [
       { question: 'Who owns Texas toll roads?', slug: 'who-owns-texas-toll-roads', section: 'question-who-owns-the-toll-roads-in-texas' },
@@ -29,6 +30,10 @@ export const readingTopics: ReadingTopic[] = [
       { question: 'Can different Austin contractor brands share an investment platform?', slug: 'who-owns-austin-home-service-companies', section: 'answer-different-brands-owner' },
     ],
     readings: [
+      { slug: 'adobe-paid-workflows', reason: 'Test whether paid creative and document demand can fund reinvestment and affordable share reduction at Adobe’s entry valuation.' },
+      { slug: 'paypal-margin-dollar-recovery', reason: 'Follow transaction-margin dollars and credit reinvestment before valuing PayPal’s recovery and capital returns.' },
+      { slug: 'crocs-cash-and-brand-test', reason: 'Separate brand demand from per-share growth, then protect the cash budget against debt and tax claims.' },
+      { slug: 'expedia-network-and-cash', reason: 'Remove travel-deposit financing and compare consumer and partner economics before making a dated price forecast.' },
       { slug: 'chegg-cash-flow-turnaround', reason: 'Reconcile Chegg’s cash-flow improvement and test whether legacy cash generation can finance a skilling transition.' },
       { slug: 'who-owns-texas-toll-roads', reason: 'Separate public title, concession rights, shareholders, creditors and toll collection. Start here for the ownership question.' },
       { slug: 'why-texas-toll-roads-stay-tolled', reason: 'Follow the pledged system and its obligations to understand why repaying one road does not necessarily end its tolls.' },

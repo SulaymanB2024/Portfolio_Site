@@ -1007,8 +1007,8 @@
     ]
   },
   "chegg-cash-flow-turnaround": {
-    "question": "Can Chegg’s cash-flow improvement finance its skilling transition?",
-    "answer": "Debt retirement and lower investment buy time, but do not by themselves establish a durable recovery. H1 2026 free cash flow improved because a capex reduction exceeded the decline in operating cash flow. The case measures how much new revenue and contribution would need to replace the contracting academic business, then tests liquidity under declared assumptions. June pro forma cash after debt repayment is kept distinct from actual current cash.",
+    "question": "Why do I believe in Chegg’s reinvention?",
+    "answer": "I believe in Chegg because it has made tangible progress: retiring its remaining debt, generating operating cash through restructuring and building its skilling business. Those actions provide a foundation for a more focused company. The case explains that progress and the disciplined investment that can support the next stage, using reported results and clearly labeled assumptions.",
     "paths": [
       {
         "label": "Explain the cash improvement",
@@ -1034,6 +1034,130 @@
       {
         "label": "Chegg announces full repayment of convertible notes",
         "href": "https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Announces-Full-Repayment-of-Convertible-Notes/default.aspx"
+      }
+    ]
+  },
+  "adobe-paid-workflows": {
+    "question": "How much paid growth does this entry price need?",
+    "answer": "The base-case valuation and capital budget need about $7.38bn of annual cash at the horizon to support a 10% annual price return. That is below the $8.52bn trailing cash-after-compensation proxy, but it depends on durable paid demand, affordable share reduction and a higher cash multiple.",
+    "paths": [
+      {
+        "label": "Read the paid-demand evidence",
+        "section": "the-paid-business-is-still-growing",
+        "description": "Compare subscriptions, recurring revenue and contracted obligations."
+      },
+      {
+        "label": "Reconcile the cash anchor",
+        "section": "the-cash-bridge-makes-the-entry-attractive",
+        "description": "Charge employee equity before valuing distributable cash."
+      },
+      {
+        "label": "Separate growth from revaluation",
+        "section": "how-i-get-to-365",
+        "description": "Compare the forecast with a constant entry multiple."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Adobe FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/adbe-20251128.htm"
+      },
+      {
+        "label": "Adobe Q3FY2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000156/adbe-20260828.htm"
+      }
+    ]
+  },
+  "paypal-margin-dollar-recovery": {
+    "question": "Which measure would show the recovery is real?",
+    "answer": "Watch transaction-margin dollars excluding customer interest alongside the cost budget. In Q2, that contribution grew 2.6% in reported dollars while adjusted non-transaction costs grew 8.8%. The long needs better retained economics as well as affordable share reduction.",
+    "paths": [
+      {
+        "label": "Follow the transaction-margin bridge",
+        "section": "the-quarter-explains-why-the-valuation-stays-demanding",
+        "description": "See where additional revenue went after transaction costs and losses."
+      },
+      {
+        "label": "Value cash after credit reinvestment",
+        "section": "the-cash-i-am-willing-to-value",
+        "description": "Keep the loan-funding and equity-compensation charges visible."
+      },
+      {
+        "label": "Test the capital-return budget",
+        "section": "a-modest-recovery-can-fund-meaningful-net-retirement",
+        "description": "Fund fewer shares after dividends and liquidity needs."
+      }
+    ],
+    "sources": [
+      {
+        "label": "PayPal FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm"
+      },
+      {
+        "label": "PayPal Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000082/pypl-20260630.htm"
+      }
+    ]
+  },
+  "crocs-cash-and-brand-test": {
+    "question": "Can Crocs fund growth without a HEYDUDE rebound?",
+    "answer": "The base case grows Crocs brand sales 4% annually while HEYDUDE falls 2%, and protects $250m annually for debt, tax or liquidity needs before net share purchases. A large early tax payment would interrupt those purchases and change the capital plan.",
+    "paths": [
+      {
+        "label": "Compare the two brands",
+        "section": "the-profitable-brand-is-larger-than-the-failed-acquisition-story",
+        "description": "Separate the profitable franchise from the smaller declining business."
+      },
+      {
+        "label": "Reconcile cash quality",
+        "section": "the-cash-exists-but-its-recent-increase-is-not-all-operating-progress",
+        "description": "Distinguish tax timing from recurring cash earning power."
+      },
+      {
+        "label": "Stress the tax cash claim",
+        "section": "the-tax-balance-is-the-strongest-reason-to-keep-a-reserve",
+        "description": "See why a cheap multiple still needs a protected cash budget."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Crocs FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000006/crox-20251231.htm"
+      },
+      {
+        "label": "Crocs Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000052/crox-20260630.htm"
+      }
+    ]
+  },
+  "expedia-network-and-cash": {
+    "question": "What cash remains after the travel-deposit cycle?",
+    "answer": "Trailing reported FCF of $4.459bn falls to a $2.648bn underwriting sensitivity after removing $1.399bn of net travel working-capital financing and $412m of compensation. Receivables are an imperfect proxy; the long must work from recurring economics after customer obligations.",
+    "paths": [
+      {
+        "label": "Compare consumer and partner conversion",
+        "section": "the-fastest-growing-business-is-not-producing-the-fastest-profit-growth",
+        "description": "Keep B2C and B2B margins distinct."
+      },
+      {
+        "label": "Remove the deposit financing",
+        "section": "remove-the-deposit-financing-before-deciding-what-to-pay",
+        "description": "Reconcile bookings, payables and receivables across a full year."
+      },
+      {
+        "label": "Read the price assumptions",
+        "section": "a-360-forecast-with-visible-valuation-dependence",
+        "description": "Compare operational upside with the part requiring revaluation."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Expedia FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000008/expe-20251231.htm"
+      },
+      {
+        "label": "Expedia Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000053/expe-20260630.htm"
       }
     ]
   }

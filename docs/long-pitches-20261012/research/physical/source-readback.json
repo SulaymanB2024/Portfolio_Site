@@ -1,0 +1,1209 @@
+{
+  "method": "Independent raw source inline-XBRL parse; exclude dimensioned facts, match report end and expected amount. Review custom concepts and signs using readable cash statements.",
+  "exact_matches": 80,
+  "value_matches_custom_or_other_label": 0,
+  "checks": [
+    {
+      "symbol": "CROX",
+      "period_label": "FY2024",
+      "field": "net_income_consolidated",
+      "source_id": "CROX-K25",
+      "expected_usd": 950071000.0,
+      "observed_usd": 950071000.0,
+      "xbrl_name": "us-gaap:NetIncomeLoss",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "c-5",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "FY2024",
+      "field": "cfo",
+      "source_id": "CROX-K25",
+      "expected_usd": 992486000.0,
+      "observed_usd": 992486000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "c-5",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "FY2024",
+      "field": "capex_cash_outflow",
+      "source_id": "CROX-K25",
+      "expected_usd": 69347000.0,
+      "observed_usd": 69347000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "c-5",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "FY2024",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "CROX-K25",
+      "expected_usd": 33052999.999999996,
+      "observed_usd": 33053000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "c-5",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "FY2024",
+      "field": "repurchase_cash_outflow",
+      "source_id": "CROX-K25",
+      "expected_usd": 552451000.0,
+      "observed_usd": 552451000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "c-5",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "FY2025",
+      "field": "net_income_consolidated",
+      "source_id": "CROX-K25",
+      "expected_usd": -81198000.0,
+      "observed_usd": -81198000.0,
+      "xbrl_name": "us-gaap:NetIncomeLoss",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "FY2025",
+      "field": "cfo",
+      "source_id": "CROX-K25",
+      "expected_usd": 710431000.0,
+      "observed_usd": 710431000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "FY2025",
+      "field": "capex_cash_outflow",
+      "source_id": "CROX-K25",
+      "expected_usd": 51231000.0,
+      "observed_usd": 51231000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "FY2025",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "CROX-K25",
+      "expected_usd": 36701000.0,
+      "observed_usd": 36701000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "FY2025",
+      "field": "repurchase_cash_outflow",
+      "source_id": "CROX-K25",
+      "expected_usd": 582320000.0,
+      "observed_usd": 582320000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "H1_2025",
+      "field": "net_income_consolidated",
+      "source_id": "CROX-Q226",
+      "expected_usd": -332179000.0,
+      "observed_usd": -332179000.0,
+      "xbrl_name": "us-gaap:NetIncomeLoss",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "c-5",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "H1_2025",
+      "field": "cfo",
+      "source_id": "CROX-Q226",
+      "expected_usd": 218565000.0,
+      "observed_usd": 218565000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "c-5",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "H1_2025",
+      "field": "capex_cash_outflow",
+      "source_id": "CROX-Q226",
+      "expected_usd": 31946000.0,
+      "observed_usd": 31946000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "c-5",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "H1_2025",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "CROX-Q226",
+      "expected_usd": 20036000.0,
+      "observed_usd": 20036000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "c-5",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "H1_2025",
+      "field": "repurchase_cash_outflow",
+      "source_id": "CROX-Q226",
+      "expected_usd": 194137000.0,
+      "observed_usd": 194137000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "c-5",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "H1_2026",
+      "field": "net_income_consolidated",
+      "source_id": "CROX-Q226",
+      "expected_usd": 342443000.0,
+      "observed_usd": 342443000.0,
+      "xbrl_name": "us-gaap:NetIncomeLoss",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "H1_2026",
+      "field": "cfo",
+      "source_id": "CROX-Q226",
+      "expected_usd": 270768000.0,
+      "observed_usd": 270768000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "H1_2026",
+      "field": "capex_cash_outflow",
+      "source_id": "CROX-Q226",
+      "expected_usd": 38729000.0,
+      "observed_usd": 38729000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "H1_2026",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "CROX-Q226",
+      "expected_usd": 24852000.0,
+      "observed_usd": 24852000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "CROX",
+      "period_label": "H1_2026",
+      "field": "repurchase_cash_outflow",
+      "source_id": "CROX-Q226",
+      "expected_usd": 256156999.99999997,
+      "observed_usd": 256157000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "FY2024",
+      "field": "net_income_consolidated",
+      "source_id": "QCOM-K25",
+      "expected_usd": 10142000000.0,
+      "observed_usd": 10142000000.0,
+      "xbrl_name": "us-gaap:NetIncomeLoss",
+      "source_period": [
+        "2023-09-25",
+        "2024-09-29"
+      ],
+      "context": "c-9",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "FY2024",
+      "field": "cfo",
+      "source_id": "QCOM-K25",
+      "expected_usd": 12202000000.0,
+      "observed_usd": 12202000000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2023-09-25",
+        "2024-09-29"
+      ],
+      "context": "c-9",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "FY2024",
+      "field": "capex_cash_outflow",
+      "source_id": "QCOM-K25",
+      "expected_usd": 1041000000.0,
+      "observed_usd": 1041000000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquireProductiveAssets",
+      "source_period": [
+        "2023-09-25",
+        "2024-09-29"
+      ],
+      "context": "c-9",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "FY2024",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "QCOM-K25",
+      "expected_usd": 2648000000.0,
+      "observed_usd": 2648000000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2023-09-25",
+        "2024-09-29"
+      ],
+      "context": "c-9",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "FY2024",
+      "field": "repurchase_cash_outflow",
+      "source_id": "QCOM-K25",
+      "expected_usd": 4121000000.0,
+      "observed_usd": 4121000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2023-09-25",
+        "2024-09-29"
+      ],
+      "context": "c-9",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "FY2025",
+      "field": "net_income_consolidated",
+      "source_id": "QCOM-K25",
+      "expected_usd": 5541000000.0,
+      "observed_usd": 5541000000.0,
+      "xbrl_name": "us-gaap:NetIncomeLoss",
+      "source_period": [
+        "2024-09-30",
+        "2025-09-28"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "FY2025",
+      "field": "cfo",
+      "source_id": "QCOM-K25",
+      "expected_usd": 14012000000.0,
+      "observed_usd": 14012000000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2024-09-30",
+        "2025-09-28"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "FY2025",
+      "field": "capex_cash_outflow",
+      "source_id": "QCOM-K25",
+      "expected_usd": 1192000000.0,
+      "observed_usd": 1192000000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquireProductiveAssets",
+      "source_period": [
+        "2024-09-30",
+        "2025-09-28"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "FY2025",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "QCOM-K25",
+      "expected_usd": 2783000000.0,
+      "observed_usd": 2783000000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2024-09-30",
+        "2025-09-28"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "FY2025",
+      "field": "repurchase_cash_outflow",
+      "source_id": "QCOM-K25",
+      "expected_usd": 8791000000.0,
+      "observed_usd": 8791000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2024-09-30",
+        "2025-09-28"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "9M_2025",
+      "field": "net_income_consolidated",
+      "source_id": "QCOM-Q326",
+      "expected_usd": 8658000000.0,
+      "observed_usd": 8658000000.0,
+      "xbrl_name": "us-gaap:NetIncomeLoss",
+      "source_period": [
+        "2024-09-30",
+        "2025-06-29"
+      ],
+      "context": "c-7",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "9M_2025",
+      "field": "cfo",
+      "source_id": "QCOM-Q326",
+      "expected_usd": 10016000000.0,
+      "observed_usd": 10016000000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2024-09-30",
+        "2025-06-29"
+      ],
+      "context": "c-7",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "9M_2025",
+      "field": "capex_cash_outflow",
+      "source_id": "QCOM-Q326",
+      "expected_usd": 785000000.0,
+      "observed_usd": 785000000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquireProductiveAssets",
+      "source_period": [
+        "2024-09-30",
+        "2025-06-29"
+      ],
+      "context": "c-7",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "9M_2025",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "QCOM-Q326",
+      "expected_usd": 2120000000.0,
+      "observed_usd": 2120000000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2024-09-30",
+        "2025-06-29"
+      ],
+      "context": "c-7",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "9M_2025",
+      "field": "repurchase_cash_outflow",
+      "source_id": "QCOM-Q326",
+      "expected_usd": 6347000000.0,
+      "observed_usd": 6347000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2024-09-30",
+        "2025-06-29"
+      ],
+      "context": "c-7",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "9M_2026",
+      "field": "net_income_consolidated",
+      "source_id": "QCOM-Q326",
+      "expected_usd": 12377000000.0,
+      "observed_usd": 12377000000.0,
+      "xbrl_name": "us-gaap:NetIncomeLoss",
+      "source_period": [
+        "2025-09-29",
+        "2026-06-28"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "9M_2026",
+      "field": "cfo",
+      "source_id": "QCOM-Q326",
+      "expected_usd": 8405000000.0,
+      "observed_usd": 8405000000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2025-09-29",
+        "2026-06-28"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "9M_2026",
+      "field": "capex_cash_outflow",
+      "source_id": "QCOM-Q326",
+      "expected_usd": 1578000000.0,
+      "observed_usd": 1578000000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquireProductiveAssets",
+      "source_period": [
+        "2025-09-29",
+        "2026-06-28"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "9M_2026",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "QCOM-Q326",
+      "expected_usd": 2579000000.0,
+      "observed_usd": 2579000000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2025-09-29",
+        "2026-06-28"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "QCOM",
+      "period_label": "9M_2026",
+      "field": "repurchase_cash_outflow",
+      "source_id": "QCOM-Q326",
+      "expected_usd": 6806000000.0,
+      "observed_usd": 6806000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2025-09-29",
+        "2026-06-28"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "FY2024",
+      "field": "net_income_consolidated",
+      "source_id": "HCA-K25",
+      "expected_usd": 6657000000.0,
+      "observed_usd": 6657000000.0,
+      "xbrl_name": "us-gaap:ProfitLoss",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "C_58b102a0-d5cb-4d4e-87d4-438b0cbbce0d",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "FY2024",
+      "field": "cfo",
+      "source_id": "HCA-K25",
+      "expected_usd": 10514000000.0,
+      "observed_usd": 10514000000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "C_58b102a0-d5cb-4d4e-87d4-438b0cbbce0d",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "FY2024",
+      "field": "capex_cash_outflow",
+      "source_id": "HCA-K25",
+      "expected_usd": 4875000000.0,
+      "observed_usd": 4875000000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "C_58b102a0-d5cb-4d4e-87d4-438b0cbbce0d",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "FY2024",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "HCA-K25",
+      "expected_usd": 360000000.0,
+      "observed_usd": 360000000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "C_58b102a0-d5cb-4d4e-87d4-438b0cbbce0d",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "FY2024",
+      "field": "repurchase_cash_outflow",
+      "source_id": "HCA-K25",
+      "expected_usd": 6042000000.0,
+      "observed_usd": 6042000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "C_58b102a0-d5cb-4d4e-87d4-438b0cbbce0d",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "FY2025",
+      "field": "net_income_consolidated",
+      "source_id": "HCA-K25",
+      "expected_usd": 7782000000.0,
+      "observed_usd": 7782000000.0,
+      "xbrl_name": "us-gaap:ProfitLoss",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "C_e2e8a5e6-0d91-460d-8083-0007985249b9",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "FY2025",
+      "field": "cfo",
+      "source_id": "HCA-K25",
+      "expected_usd": 12636000000.0,
+      "observed_usd": 12636000000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "C_e2e8a5e6-0d91-460d-8083-0007985249b9",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "FY2025",
+      "field": "capex_cash_outflow",
+      "source_id": "HCA-K25",
+      "expected_usd": 4944000000.0,
+      "observed_usd": 4944000000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "C_e2e8a5e6-0d91-460d-8083-0007985249b9",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "FY2025",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "HCA-K25",
+      "expected_usd": 401000000.0,
+      "observed_usd": 401000000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "C_e2e8a5e6-0d91-460d-8083-0007985249b9",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "FY2025",
+      "field": "repurchase_cash_outflow",
+      "source_id": "HCA-K25",
+      "expected_usd": 10067000000.0,
+      "observed_usd": 10067000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "C_e2e8a5e6-0d91-460d-8083-0007985249b9",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "H1_2025",
+      "field": "net_income_consolidated",
+      "source_id": "HCA-Q226",
+      "expected_usd": 3716000000.0,
+      "observed_usd": 3716000000.0,
+      "xbrl_name": "us-gaap:ProfitLoss",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "C_1557a577-d969-4725-be9d-71a28d68c5e6",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "H1_2025",
+      "field": "cfo",
+      "source_id": "HCA-Q226",
+      "expected_usd": 5861000000.0,
+      "observed_usd": 5861000000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "C_1557a577-d969-4725-be9d-71a28d68c5e6",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "H1_2025",
+      "field": "capex_cash_outflow",
+      "source_id": "HCA-Q226",
+      "expected_usd": 2167000000.0,
+      "observed_usd": 2167000000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "C_1557a577-d969-4725-be9d-71a28d68c5e6",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "H1_2025",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "HCA-Q226",
+      "expected_usd": 197000000.0,
+      "observed_usd": 197000000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "C_1557a577-d969-4725-be9d-71a28d68c5e6",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "H1_2025",
+      "field": "repurchase_cash_outflow",
+      "source_id": "HCA-Q226",
+      "expected_usd": 5011000000.0,
+      "observed_usd": 5011000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "C_1557a577-d969-4725-be9d-71a28d68c5e6",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "H1_2026",
+      "field": "net_income_consolidated",
+      "source_id": "HCA-Q226",
+      "expected_usd": 3787000000.0,
+      "observed_usd": 3787000000.0,
+      "xbrl_name": "us-gaap:ProfitLoss",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "C_04e5c5c7-7ae5-4f03-80e9-e0717a5c867a",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "H1_2026",
+      "field": "cfo",
+      "source_id": "HCA-Q226",
+      "expected_usd": 4349000000.0,
+      "observed_usd": 4349000000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "C_04e5c5c7-7ae5-4f03-80e9-e0717a5c867a",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "H1_2026",
+      "field": "capex_cash_outflow",
+      "source_id": "HCA-Q226",
+      "expected_usd": 2350000000.0,
+      "observed_usd": 2350000000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "C_04e5c5c7-7ae5-4f03-80e9-e0717a5c867a",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "H1_2026",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "HCA-Q226",
+      "expected_usd": 171000000.0,
+      "observed_usd": 171000000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "C_04e5c5c7-7ae5-4f03-80e9-e0717a5c867a",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "HCA",
+      "period_label": "H1_2026",
+      "field": "repurchase_cash_outflow",
+      "source_id": "HCA-Q226",
+      "expected_usd": 3635000000.0,
+      "observed_usd": 3635000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "C_04e5c5c7-7ae5-4f03-80e9-e0717a5c867a",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "FY2024",
+      "field": "net_income_consolidated",
+      "source_id": "WCC-K25",
+      "expected_usd": 719400000.0,
+      "observed_usd": 719400000.0,
+      "xbrl_name": "us-gaap:ProfitLoss",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "c-14",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "FY2024",
+      "field": "cfo",
+      "source_id": "WCC-K25",
+      "expected_usd": 1101200000.0,
+      "observed_usd": 1101200000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "c-14",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "FY2024",
+      "field": "capex_cash_outflow",
+      "source_id": "WCC-K25",
+      "expected_usd": 94700000.0,
+      "observed_usd": 94700000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquireProductiveAssets",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "c-14",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "FY2024",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "WCC-K25",
+      "expected_usd": 28900000.0,
+      "observed_usd": 28900000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "c-14",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "FY2024",
+      "field": "repurchase_cash_outflow",
+      "source_id": "WCC-K25",
+      "expected_usd": 425000000.0,
+      "observed_usd": 425000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "context": "c-14",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "FY2025",
+      "field": "net_income_consolidated",
+      "source_id": "WCC-K25",
+      "expected_usd": 642500000.0,
+      "observed_usd": 642500000.0,
+      "xbrl_name": "us-gaap:ProfitLoss",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "FY2025",
+      "field": "cfo",
+      "source_id": "WCC-K25",
+      "expected_usd": 125000000.0,
+      "observed_usd": 125000000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "FY2025",
+      "field": "capex_cash_outflow",
+      "source_id": "WCC-K25",
+      "expected_usd": 99800000.0,
+      "observed_usd": 99800000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquireProductiveAssets",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "FY2025",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "WCC-K25",
+      "expected_usd": 40500000.0,
+      "observed_usd": 40500000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "FY2025",
+      "field": "repurchase_cash_outflow",
+      "source_id": "WCC-K25",
+      "expected_usd": 75000000.0,
+      "observed_usd": 75000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "H1_2025",
+      "field": "net_income_consolidated",
+      "source_id": "WCC-Q226",
+      "expected_usd": 293100000.0,
+      "observed_usd": 293100000.0,
+      "xbrl_name": "us-gaap:ProfitLoss",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "c-13",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "H1_2025",
+      "field": "cfo",
+      "source_id": "WCC-Q226",
+      "expected_usd": 135800000.0,
+      "observed_usd": 135800000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "c-13",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "H1_2025",
+      "field": "capex_cash_outflow",
+      "source_id": "WCC-Q226",
+      "expected_usd": 42200000.0,
+      "observed_usd": 42200000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquireProductiveAssets",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "c-13",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "H1_2025",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "WCC-Q226",
+      "expected_usd": 18600000.0,
+      "observed_usd": 18600000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "c-13",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "H1_2025",
+      "field": "repurchase_cash_outflow",
+      "source_id": "WCC-Q226",
+      "expected_usd": 50000000.0,
+      "observed_usd": 50000000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2025-01-01",
+        "2025-06-30"
+      ],
+      "context": "c-13",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "H1_2026",
+      "field": "net_income_consolidated",
+      "source_id": "WCC-Q226",
+      "expected_usd": 363700000.0,
+      "observed_usd": 363700000.0,
+      "xbrl_name": "us-gaap:ProfitLoss",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "H1_2026",
+      "field": "cfo",
+      "source_id": "WCC-Q226",
+      "expected_usd": 275100000.0,
+      "observed_usd": 275100000.0,
+      "xbrl_name": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "H1_2026",
+      "field": "capex_cash_outflow",
+      "source_id": "WCC-Q226",
+      "expected_usd": 51600000.0,
+      "observed_usd": 51600000.0,
+      "xbrl_name": "us-gaap:PaymentsToAcquireProductiveAssets",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "H1_2026",
+      "field": "sbc_cash_flow_addback",
+      "source_id": "WCC-Q226",
+      "expected_usd": 35200000.0,
+      "observed_usd": 35200000.0,
+      "xbrl_name": "us-gaap:ShareBasedCompensation",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    },
+    {
+      "symbol": "WCC",
+      "period_label": "H1_2026",
+      "field": "repurchase_cash_outflow",
+      "source_id": "WCC-Q226",
+      "expected_usd": 39900000.0,
+      "observed_usd": 39900000.0,
+      "xbrl_name": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "context": "c-1",
+      "status": "exact_match"
+    }
+  ],
+  "unmatched": [],
+  "limitations": "Source_end+value match alone does not prove duration; source_period is retained for root inspection."
+}
