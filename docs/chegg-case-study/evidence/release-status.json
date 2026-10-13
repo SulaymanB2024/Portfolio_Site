@@ -43,6 +43,7 @@
     "sources": 9,
     "financial_model": "unchanged / verification passed",
     "native_visual_review": "desktop and phone passed",
-    "publication": "local reviewed extension; positive PR91 still OPEN; no production claim"
+    "publication": "local reviewed extension; positive PR91 still OPEN; no production claim",
+    "submission_pr": "https://github.com/SulaymanB2024/Portfolio_Site/pull/94"
   }
 }
