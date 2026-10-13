@@ -47,7 +47,7 @@ export function createArtworkWorkerHost(dependencies: HostDependencies) {
     if (!entry.factory || entry.sketch || !entry.active || disposed || entry.cancelled || entries.get(entry.command.id) !== entry) return;
     const command = entry.command;
     try {
-      entry.sketch = dependencies.create(entry.factory, command.canvas, { physicalSize: command.physicalSize });
+      entry.sketch = dependencies.create(entry.factory, command.canvas, { physicalSize: command.physicalSize, ...(command.inkColor ? { inkColor: command.inkColor } : {}) });
       entry.factory = null;
       const boundedRate = (rate: number | undefined, fallback: number) => typeof rate === 'number' && Number.isFinite(rate) ? Math.max(1, Math.min(60, rate)) : fallback;
       const maxFps = boundedRate(command.maxFps, entry.sketch.engine === 'gpu' ? 30 : 18);
@@ -81,6 +81,10 @@ export function createArtworkWorkerHost(dependencies: HostDependencies) {
       if (disposed) return;
       if (command.type === 'register') register(command);
       else if (command.type === 'remove') remove(command.id);
+      else if (command.type === 'ink') {
+        const entry = entries.get(command.id);
+        if (entry) { entry.command.inkColor = command.inkColor; entry.sketch?.setInkColor?.(command.inkColor); }
+      }
       else {
         const entry = entries.get(command.id);
         if (!entry) return;

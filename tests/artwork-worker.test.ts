@@ -130,6 +130,19 @@ test('optional mobile frame limits cross registration without changing legacy co
   f.backend.dispose();
 });
 
+test('palette ink crosses the worker boundary without activating a paused placement', () => {
+  const f = bridgeFixture();
+  const job = f.backend.register({ host: f.host, sketchId: 'yuru-01', physicalSize: 400, active: false, inkColor: [36, 34, 30], onFrame() {}, onError() {} });
+  assert(job);
+  assert.deepEqual(f.messages[0].command, { type: 'register', id: 1, sketchId: 'yuru-01', canvas: f.messages[0].transfer[0], physicalSize: 400, active: false, inkColor: [36, 34, 30] });
+  job.setInkColor([239, 239, 232]);
+  assert.deepEqual(f.messages.at(-1)?.command, { type: 'ink', id: 1, inkColor: [239, 239, 232] });
+  assert.equal(f.messages.filter(message => message.command.type === 'active').length, 0);
+  job.remove(); const count = f.messages.length;
+  job.setInkColor([36, 34, 30]); assert.equal(f.messages.length, count);
+  f.backend.dispose();
+})
+
 test('one source error isolates its canvas and transport failure during registration clears all ownership', () => {
   const f = bridgeFixture();
   let errors = 0, frames = 0;

@@ -6,6 +6,7 @@ import { GENERATED_SKETCH_LOADERS } from './generative/generatedSketchLoaders';
 import type { P5SketchLoader } from './generative/types';
 import type { ArtworkWorkerCommand } from './artwork-worker-protocol';
 import { createPreviewScheduler } from './preview-scheduler';
+import { inkOffscreenSketch } from './artwork-ink-pixels';
 
 const scope = globalThis as unknown as DedicatedWorkerGlobalScope;
 // Original factories only read window.devicePixelRatio in their creation prelude.
@@ -41,6 +42,10 @@ const host = createArtworkWorkerHost({
         if (gpu?.unavailable) gpu.dispose();
       }
     }
+    if (options.inkColor) {
+      const source = createOffscreenCanvasSketch(factory, new OffscreenCanvas(canvas.width, canvas.height), options);
+      return inkOffscreenSketch(source, canvas, options.inkColor);
+    }
     return createOffscreenCanvasSketch(factory, canvas, options);
   },
   send: reply => scope.postMessage(reply),
@@ -49,5 +54,5 @@ const host = createArtworkWorkerHost({
 scope.addEventListener('message', (event: MessageEvent<ArtworkWorkerCommand>) => {
   const command = event.data;
   if (!command || !Number.isSafeInteger(command.id) || command.id < 1) return;
-  if (command.type === 'register' || command.type === 'active' || command.type === 'remove') host.receive(command);
+  if (command.type === 'register' || command.type === 'active' || command.type === 'remove' || command.type === 'ink') host.receive(command);
 });

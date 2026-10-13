@@ -26,10 +26,26 @@ function fixture() {
     background: (target, gray, alpha) => record('background', target, gray, alpha),
     clear: target => record('clear', target), copy: (source, destination) => record('copy', source, destination),
     image: (target, source, rectangle, transform, logical) => record('image', target, source, [...rectangle], [...transform], [...logical]),
-    present: target => record('present', target), retain() { leases++; }, release() { leases--; },
+    present: (target, _context, ink) => record('present', target, ink), retain() { leases++; }, release() { leases--; },
   };
   return { surface, targets, batches, events, get leases() { return leases; }, canvas: new DisplayCanvas() as unknown as OffscreenCanvas };
 }
+
+test('native ink changes only presentation and recolors a paused surface without resetting source phase', () => {
+  const f = fixture(), sketch = new GpuSketch(f.canvas, f.surface, { inkColor: [36, 34, 30] });
+  let phase = 0;
+  sketch.createCanvas(400, 400);
+  sketch.draw = () => { phase++; sketch.background(0).stroke(255, 128).point(20, 20); };
+  sketch.renderFrame();
+  assert.deepEqual(f.events.filter(event => event.kind === 'present').at(-1)?.args[1], [36, 34, 30]);
+  const targetCount = f.targets.size;
+  sketch.setInkColor([239, 239, 232]);
+  assert.equal(phase, 1); assert.equal(f.targets.size, targetCount);
+  assert.deepEqual(f.events.filter(event => event.kind === 'present').at(-1)?.args[1], [239, 239, 232]);
+  assert.deepEqual(Array.from(f.batches[0].slice(4, 6)), Array.from(new Float32Array([1, 128 / 255])), 'source grayscale and independent point alpha stay untouched');
+  sketch.renderFrame(); assert.equal(phase, 2);
+  sketch.remove(); assert.equal(f.targets.size, 0);
+})
 
 test('GPU points retain independent alpha, ordering, normalized weights, and edge intersections', () => {
   const f = fixture(), sketch = new GpuSketch(f.canvas, f.surface);

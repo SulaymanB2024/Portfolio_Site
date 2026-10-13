@@ -5,6 +5,7 @@ import sharp from 'sharp'
 import { answerNotes, readerModifiedDate, questionAnchor } from '../src/personal/editorial/answer-notes.ts'
 import { documentModifiedDate } from './search-sitemap.ts'
 import { findReadingTopic, topicQuestions } from '../src/personal/editorial/topics.ts'
+import { nativeArtworkPosterSource } from '../src/personal/editorial/artwork-poster-source.ts'
 
 const origin = 'https://sulayman-bowles.dev'
 const read = path => readFile(path, 'utf8')
@@ -23,7 +24,7 @@ const artworkCredits = new Map([...artworkSource.matchAll(/\['(yuru-\d+)', '[^']
 const coverPoster = article => {
   const sketch = artworkAssignments.get(article.path)
   assert(sketch, `Missing assigned cover: ${article.slug}`)
-  return `/images/generative-art/${sketch}.webp`
+  return nativeArtworkPosterSource(sketch)
 }
 assert.deepEqual(Object.keys(guides).sort(), catalog.map(article => article.slug).sort(), 'Every essay has one reading guide')
 assert(Object.keys(sourceAccess.articles).every(slug => catalog.some(article => article.slug === slug)), 'Source access notes belong to published essays')
@@ -113,7 +114,7 @@ for (const url of urls) {
   assert(!body.includes('href="#/'), `Fragment route in initial HTML: ${url.pathname}`)
   const links = new Set([...body.matchAll(/<a\b[^>]*>/g)].map(match => attributes(match[0]).href))
   const elementIds = new Set([...body.matchAll(/\bid="([^"]+)"/g)].map(match => decode(match[1])))
-  if (article || url.pathname === '/writing') assert(elementIds.has('artwork-ink'), `Missing shared cover ink treatment: ${url.pathname}`)
+  if (article || url.pathname === '/writing') assert(!/filter:\s*contrast\(1\.35\)\s+url\(["']?#artwork-ink/.test(body), `Public covers must not rely on a CSS reference filter: ${url.pathname}`)
   if (url.pathname === '/writing') {
     const cards = [...body.matchAll(/<a\b[^>]*class="public-writing-story"[^>]*>[^]*?<\/a>/g)].map(match => match[0])
     assert.equal(cards.length, catalog.length, 'Every writing entry must retain its cover card')
@@ -127,6 +128,7 @@ for (const url of urls) {
       const posters = [...card.matchAll(/<img\b[^>]*>/g)].map(match => attributes(match[0]))
       assert.equal(posters.length, 1, `Missing/duplicate writing cover: ${entry.slug}`)
       assert.equal(posters[0].src, coverPoster(entry), `Writing cover assignment drift: ${entry.slug}`)
+      assert.equal(posters[0]['data-source-poster'], `/images/generative-art/${artworkAssignments.get(entry.path)}.webp`, `Writing source artwork drift: ${entry.slug}`)
       assert.equal(posters[0].alt, '', 'Card text names the decorative cover')
       assert.equal(posters[0].width, '400'); assert.equal(posters[0].height, '400')
     }
@@ -148,10 +150,12 @@ for (const url of urls) {
     assert.equal(attributes(cover[0].match(/^<figure\b[^>]*>/)[0])['data-sketch'], artworkAssignments.get(article.path))
     const poster = attributes(cover[1].match(/<img\b[^>]*>/)?.[0] || '')
     assert.equal(poster.src, coverPoster(article), `Article cover assignment drift: ${article.slug}`)
+    assert.equal(poster['data-source-poster'], `/images/generative-art/${artworkAssignments.get(article.path)}.webp`, `Article source artwork drift: ${article.slug}`)
     assert(poster.alt?.trim(), `Article cover needs a description: ${article.slug}`)
     assert.equal(poster.width, '400'); assert.equal(poster.height, '400'); assert.equal(poster.loading, 'eager')
     const posterMetadata = await sharp(join('dist', poster.src)).metadata()
     assert.equal(posterMetadata.width, 400); assert.equal(posterMetadata.height, 400)
+    assert.equal(posterMetadata.hasAlpha, true, `Public cover must carry native transparency: ${article.slug}`)
     assert(cover[1].includes(artworkCredits.get(artworkAssignments.get(article.path))), `Original artwork credit missing: ${article.slug}`)
     const guide = guides[article.slug]
     assert(decode(body).includes(guide.question) && decode(body).includes(guide.answer), `Guide absent from initial response: ${article.slug}`)

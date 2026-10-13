@@ -27,3 +27,33 @@ test('crossing the phone boundary changes the fit allowance used by both text ca
   assert.equal(headingFitWidth(opening, 371, 700), 371)
   assert.equal(headingFitWidth(opening, 371, 701), 315.45)
 })
+
+test('a long display row leaves readable supporting copy on a narrow phone', () => {
+  const widths = [240, 600, 480, 500]
+  const layout = layoutHeading(opening, 50, 280, row => widths[opening.lines.indexOf(row.text)])
+  const pixels = layout.rows.map(row => 50 * layout.fit * row.scale)
+  assert(Math.abs(pixels[0] - 14) < 1e-9)
+  assert(Math.abs(pixels[2] - 14) < 1e-9)
+  assert(pixels[1] > pixels[0])
+  assert(pixels[3] > pixels[2])
+  for (const [index, row] of layout.rows.entries()) {
+    const originalScale = index % 2 === 0 ? .49 : 1
+    assert(widths[index] * row.scale / originalScale * layout.fit <= 278 + 1e-9)
+  }
+  assert.deepEqual(layout.rows.map(row => row.text), opening.lines)
+})
+
+test('a long supporting sentence does not shrink shorter display rows', () => {
+  const widths = [200, 250, 800, 270]
+  const layout = layoutHeading(opening, 60, 320, row => widths[opening.lines.indexOf(row.text)])
+  assert.equal(layout.fit, 1)
+  assert.equal(layout.rows[1].scale, 1)
+  assert.equal(layout.rows[3].scale, 1)
+  assert(widths[2] * layout.rows[2].scale / .49 <= 318 + 1e-9)
+})
+
+test('standard-home typography retains the shared original fit', () => {
+  const layout = layoutHeading(CHAPTERS[0], 60, 320, () => 600)
+  assert.equal(layout.fit, 318 / 600)
+  assert.deepEqual(layout.rows.map(row => row.scale), [.49, 1, .49, 1])
+})
