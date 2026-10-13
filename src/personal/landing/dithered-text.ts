@@ -115,7 +115,7 @@ export function createDitheredText({ chapters = CHAPTERS, headline, stage, unifo
     if (!box.width || !scene.width || !scene.height) return
     const ratio = pixelRatio(), fontSize = parseFloat(style.fontSize), pad = 20
     const frameHeight = Math.ceil((fontSize * HEADING_RESERVE_EM + pad * 2) * ratio)
-    const key = [box.width, headingFitWidth(chapters[0], box.width, scene.width, scene.height), ratio, style.fontSize, style.fontWeight, style.fontFamily, style.letterSpacing].join('|')
+    const key = [box.width, headingFitWidth(chapters[0], box.width, scene.width), ratio, style.fontSize, style.fontWeight, style.fontFamily, style.letterSpacing].join('|')
     if (!force && texture && key === atlasKey) {
       uniforms.textBox.value.set((box.left - scene.left - pad) / scene.width, 1 - (box.top - scene.top - pad + frameHeight / ratio) / scene.height, atlas.width / ratio / scene.width, frameHeight / ratio / scene.height)
       if (active >= 0) onChapter(chapters[active], active, layouts[active].height)
@@ -134,7 +134,7 @@ export function createDitheredText({ chapters = CHAPTERS, headline, stage, unifo
       context!.font = `${style.fontWeight} ${fontSize * scale * fit}px ${style.fontFamily}`
       if (tracked) context!.letterSpacing = `${scale < 1 ? 0 : tracking * fit}px`
     }
-    layouts = chapters.map(chapter => layoutHeading(chapter, fontSize, headingFitWidth(chapter, box.width, scene.width, scene.height), row => {
+    layouts = chapters.map(chapter => layoutHeading(chapter, fontSize, headingFitWidth(chapter, box.width, scene.width), row => {
       setFont(row.scale)
       return context!.measureText(row.text).width + (tracked || row.scale < 1 ? 0 : (row.text.length - 1) * tracking)
     }))
