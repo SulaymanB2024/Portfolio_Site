@@ -3,11 +3,19 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { qualityHash } from '../tools/article-quality-integrity.mjs'
 import { publicationReceipt, verifyInitialPublication } from '../tools/article-publication-integrity.mjs'
-import { publicClaims, reviewQueue, reviewedUpdate } from '../tools/texas-editorial.mjs'
+import { publicClaims, publicationBundlePath, reviewQueue, reviewedUpdate } from '../tools/texas-editorial.mjs'
 
 const publications = JSON.parse(readFileSync(new URL('../docs/article-publications.json', import.meta.url), 'utf8'))
 const original = publications.records.find((record: any) => record.slug === 'texas-business-court-contract-decisions')
 const article = JSON.parse(readFileSync(new URL(`../${original.path}`, import.meta.url), 'utf8'))
+
+test('a new library edition preserves the legacy download and scopes writes to research JSON', () => {
+  assert.equal(publicationBundlePath({}), 'public/research/texas-business-library-2026-10-12.json')
+  assert.equal(publicationBundlePath({ bundlePath: 'public/research/texas-autonomy-library-2026-10-13.json' }), 'public/research/texas-autonomy-library-2026-10-13.json')
+  for (const path of ['docs/private.json', 'public/research/../private.json', 'public/research/index.html', '/public/research/library.json']) {
+    assert.throws(() => publicationBundlePath({ bundlePath: path }))
+  }
+})
 
 test('manual review queue treats dates as reminders and rejects impossible dates', () => {
   const library = { articles: [{ slug: 'one', pillar: 'Infrastructure', reviewBy: '2026-10-19', triggers: ['New order'] }] }

@@ -1,0 +1,129 @@
+{
+  "article": "texas-robotaxi-business-service-map",
+  "checkedAt": "2026-10-13",
+  "claims": [
+    {
+      "id": "avmap-1",
+      "claim": "Waymo Dallas/Houston public-access openings were dated August 4/August 20, 2026; Austin channel and San Antonio admission need current guidance.",
+      "status": "current/dates preserved",
+      "qualification": "A city-level opening is not an individual trip guarantee.",
+      "sources": [
+        {
+          "url": "https://blog.waymo.com/blog/shorts/dallas-open-to-all/",
+          "date": "2026-08-04",
+          "pinpoint": "Dated public-access announcement. Love Field and freeway statements were testing/future plans at that date; do not silently treat them as current passenger availability."
+        },
+        {
+          "url": "https://blog.waymo.com/blog/shorts/houston-open-to-all/",
+          "date": "2026-08-20",
+          "pinpoint": "Dated open-public-access announcement; not a guarantee of any address or individual trip."
+        },
+        {
+          "url": "https://support.google.com/waymo/answer/9059119?hl=en",
+          "date": "Undated current support page",
+          "pinpoint": "Current guidance distinguishes Austin via Uber and gradual rider admission in San Antonio. Areas/access change; use the app for the actual request."
+        },
+        {
+          "url": "https://support.google.com/waymo/answer/16011725?hl=en",
+          "date": "Undated current support page",
+          "pinpoint": "Eligible Uber ride request, preference and matched offer differ from guaranteed vehicle selection."
+        }
+      ],
+      "recheck": "Relevant provider access/role/domain change, official record change or actual pilot evidence"
+    },
+    {
+      "id": "avmap-2",
+      "claim": "Zoox Austin current page remains coming-soon/waitlist; September 1 Houston announcement begins with manual mapping/test fleet.",
+      "status": "current access/announced sequence",
+      "qualification": "No general-public Texas booking or purpose-built deployment completion inferred.",
+      "sources": [
+        {
+          "url": "https://zoox.com/austin",
+          "date": "Undated current city page",
+          "pinpoint": "Full rendered body says coming soon and invites app waitlist entry. A city name/menu entry alone does not establish bookable public rides."
+        },
+        {
+          "url": "https://zoox.com/journal/zoox-now-testing-houston-san-diego",
+          "date": "2026-09-01",
+          "pinpoint": "Retrofitted test fleet/manual mapping first; autonomous testing and purpose-built vehicles are later stages. Twelve-location presence is not twelve open ride-hail markets."
+        }
+      ],
+      "recheck": "Relevant provider access/role/domain change, official record change or actual pilot evidence"
+    },
+    {
+      "id": "avmap-3",
+      "claim": "Tesla current Robotaxi support lists limited Austin/Dallas/Houston service and self-booking; FSD (Supervised) requires a driver.",
+      "status": "operator guidance",
+      "qualification": "No citywide coverage, assigned platform or corporate-dispatch permission assumed.",
+      "sources": [
+        {
+          "url": "https://www.tesla.com/support/robotaxi",
+          "date": "Undated current support page",
+          "pinpoint": "Lists limited Austin, Dallas, Houston service areas, self-booking, vehicle-specific rules and app fare estimates. Does not establish a citywide service guarantee or trip-level vehicle assignment."
+        },
+        {
+          "url": "https://www.tesla.com/support/fsd",
+          "date": "Undated current support page; official indexed body checked2026-10-12",
+          "pinpoint": "Official support states active driver supervision and that the feature does not make the vehicle autonomous. Direct retrieval encountered protection/timeout; indexed official text supplies this narrow distinction, not comparative collision-rate evidence."
+        }
+      ],
+      "recheck": "Relevant provider access/role/domain change, official record change or actual pilot evidence"
+    },
+    {
+      "id": "avmap-4",
+      "claim": "Current Uber Dallas guidance identifies Avride service north of Trinity River, an onboard specialist able to take control and three rear-seat riders; May’s reviewed Arlington evidence leaves public access unresolved.",
+      "status": "current issuer guidance plus unresolved May access",
+      "qualification": "Historical nine-square-mile launch area is separate. Qualifying request and match still need verification; omission from May’s list does not prove no activity.",
+      "sources": [
+        {
+          "url": "https://www.uber.com/us/en/newsroom/avride-on-uber/",
+          "date": "2025-12-03",
+          "pinpoint": "Launch described nine square miles and an onboard specialist behind the wheel, with future driverless operation. Those are dated launch conditions, not an assertion of unchanged October coverage or onboard mode."
+        },
+        {
+          "url": "https://www.uber.com/us/en/r/autonomous/dallas-tx-us/",
+          "date": "Undated current service page; checked 2026-10-13",
+          "pinpoint": "Eligible opt-in matching; Central Dallas north of Trinity River; specialist behind the wheel; three rear-seat riders and seven-minute boarding window"
+        },
+        {
+          "url": "https://maymobility.com/posts/may-mobility-launches-new-av-architecture/",
+          "date": "2026-05-20",
+          "pinpoint": "Release describes Arlington Uber deployment as upcoming. Issuer-wide rides/miles are not used as Texas-only or driverless-only metrics."
+        },
+        {
+          "url": "https://maymobility.com/locations/",
+          "date": "Undated current locations page",
+          "pinpoint": "Current active list read at review includes Atlanta, Grand Rapids and Eden Prairie, without an Arlington public-booking listing. That absence warrants confirmation; it does not independently prove no Texas operations."
+        }
+      ],
+      "recheck": "Relevant provider access/role/domain change, official record change or actual pilot evidence"
+    },
+    {
+      "id": "avmap-5",
+      "claim": "Federal raw crash counts are not exposure-normalized; DPS responder catalog is not an open-service census.",
+      "status": "agency evidence and interpretation",
+      "qualification": "No comparative safety ranking, exhaustiveness or permit status inferred.",
+      "sources": [
+        {
+          "url": "https://www.dps.texas.gov/section/cav/connected-autonomous-vehicles",
+          "date": "Page labeled2026-02-27; current catalog checked2026-10-12",
+          "pinpoint": "Includes multiple passenger/freight platforms. Posting is not an operator census, authorization finding or commercial-booking map."
+        },
+        {
+          "url": "https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting",
+          "date": "2025 amendment effective2025-06-16; current data through2026-08-17",
+          "pinpoint": "Different reporting conditions and exposure denominators prevent a valid simple ranking from raw counts; information can be incomplete and updated."
+        }
+      ],
+      "recheck": "Relevant provider access/role/domain change, official record change or actual pilot evidence"
+    },
+    {
+      "id": "avmap-6",
+      "claim": "Declared 200-trip model leaves 120 eligible AV trips, baseline $5,600 versus mix $4,640; 10$48 exceptions yield $5,120 and 20 yield $5,600.",
+      "status": "declared hypothetical",
+      "qualification": "No actual quote, exception rate or vendor choice; original AV charge retained and refunds separate. Fare cash and allocated exception time are shown separately; normal trip time is excluded/held equal.",
+      "sources": [],
+      "recheck": "Relevant provider access/role/domain change, official record change or actual pilot evidence"
+    }
+  ]
+}

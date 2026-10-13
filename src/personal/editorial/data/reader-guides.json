@@ -1425,5 +1425,215 @@
         "href": "https://www.tdi.texas.gov/submissions/indextwia.html"
       }
     ]
+  },
+  "texas-robotaxi-business-service-map": {
+    "question": "Which Texas robotaxi service can support a business trip?",
+    "answer": "Start with the admitted rider, actual booking channel, supported endpoints and disclosed onboard role. Waymo access differs across its Texas markets; Zoox’s reviewed Austin invitation is a waitlist; Tesla and Avride have service-specific rules; the May Arlington evidence leaves current access unresolved. Compare usable trips and fallback costs rather than city announcements or unnormalized crash totals.",
+    "paths": [
+      {
+        "label": "Compare rider access",
+        "section": "operating-evidence",
+        "description": "Read dated openings and current guidance within their scope."
+      },
+      {
+        "label": "Price eligible trips",
+        "section": "worked-trip-budget",
+        "description": "Keep fare cash and valued exception time separate."
+      },
+      {
+        "label": "Prepare the pilot",
+        "section": "buyer-checklist",
+        "description": "Verify booking, payment, support and the actual journey."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Waymo service areas and rider admission",
+        "href": "https://support.google.com/waymo/answer/9059119?hl=en"
+      },
+      {
+        "label": "Avride on Uber: current Dallas rider guidance",
+        "href": "https://www.uber.com/us/en/r/autonomous/dallas-tx-us/"
+      },
+      {
+        "label": "Tesla Robotaxi rider support",
+        "href": "https://www.tesla.com/support/robotaxi"
+      }
+    ]
+  },
+  "texas-waymo-business-travel": {
+    "question": "When should a Texas business use Waymo for employee travel?",
+    "answer": "Approve the actual journey through the correct market and booking channel. Dallas and Houston have open-access announcements, Austin uses optional Uber matching and San Antonio guidance describes gradual admission. Check the airport leg and payment program separately. A lower fare can be outweighed by walking, waiting or fallback work; the declared scenario measures those boundaries without predicting failure frequency.",
+    "paths": [
+      {
+        "label": "Verify Texas access",
+        "section": "texas-access",
+        "description": "Distinguish rider admission from a trip or vehicle guarantee."
+      },
+      {
+        "label": "Check the airport leg",
+        "section": "airport-and-route",
+        "description": "Use documented terminal and route evidence."
+      },
+      {
+        "label": "Compare fare and time",
+        "section": "fare-and-time",
+        "description": "Apply the declared comparison to the actual cohort."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Current service areas and rider access",
+        "href": "https://support.google.com/waymo/answer/9059119?hl=en"
+      },
+      {
+        "label": "Austin and Atlanta: Waymo rides on Uber",
+        "href": "https://support.google.com/waymo/answer/16011725?hl=en"
+      },
+      {
+        "label": "Airport service and San Antonio rider eligibility",
+        "href": "https://support.google.com/waymo/answer/14298153?hl=en"
+      }
+    ]
+  },
+  "texas-zoox-market-entry-business": {
+    "question": "What can a business infer from Zoox’s arrival in Texas?",
+    "answer": "Match the commitment to the documented stage. Austin’s reviewed invitation remains coming soon; Dallas and Houston announcements describe testing sequences. The conditional federal commercial exemption is a separate milestone. Property, supply and passenger programs each need their own project and access evidence. The fleet calculation shows utilization sensitivity using hypothetical inputs, not actual Zoox costs or demand.",
+    "paths": [
+      {
+        "label": "Read the local stage",
+        "section": "texas-stages",
+        "description": "Keep testing, restricted access and public service distinct."
+      },
+      {
+        "label": "Scope the exemption",
+        "section": "commercial-path",
+        "description": "Separate introduction limits from operating authorizations."
+      },
+      {
+        "label": "Model completed trips",
+        "section": "depot-to-trip",
+        "description": "Work declared vehicle hours through availability and occupancy."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Austin: current public rider invitation",
+        "href": "https://zoox.com/austin"
+      },
+      {
+        "label": "NHTSA grant: conditions for commercial deployment",
+        "href": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm"
+      },
+      {
+        "label": "Houston and San Diego testing expansion",
+        "href": "https://zoox.com/journal/zoox-now-testing-houston-san-diego"
+      }
+    ]
+  },
+  "texas-autonomous-trucking-operators": {
+    "question": "Which Texas autonomous trucking program fits the freight job?",
+    "answer": "Shortlist by the documented job and operating role. Aurora, Gatik, Bot Auto and Kodiak’s industrial program report driverless work in different domains; other reviewed Texas programs retain onboard personnel or describe future launches. A dated load or driverless mile total does not reserve capacity. Confirm equipment, endpoints, current human roles, accepted loads and recovery responsibilities in a buyer-specific proposal.",
+    "paths": [
+      {
+        "label": "Compare current programs",
+        "section": "operating-comparison",
+        "description": "Read selected operator evidence with its dates and domain."
+      },
+      {
+        "label": "Separate Kodiak’s programs",
+        "section": "kodiak",
+        "description": "Distinguish industrial operation from highway launch preparation."
+      },
+      {
+        "label": "Qualify a service commitment",
+        "section": "maturity-gates",
+        "description": "Require the next evidence for the actual freight purchase."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Aurora second-generation driverless launch: operating and purchase model",
+        "href": "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered"
+      },
+      {
+        "label": "Kodiak and Charger Dallas–Laredo customer operation",
+        "href": "https://kodiak.ai/news/kodiak-charger-usa-autonomous-trucking-dallas-laredo"
+      },
+      {
+        "label": "Volvo and Waabi begin Warp customer operations in Texas",
+        "href": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp"
+      }
+    ]
+  },
+  "texas-driverless-freight-route-economics": {
+    "question": "When does a driverless freight quote improve the complete route?",
+    "answer": "Compare one completed delivery unit using the same cost boundary. Price direct and transfer designs separately, retain rejected loads and backup capacity, and assign warehouse, inspection, setup and recovery work once. The hypothetical 1,000-load model saves $98,400 in its direct base case, but less acceptance or unpriced interruption can reverse it. Actual quotes and trial evidence must replace the assumptions.",
+    "paths": [
+      {
+        "label": "Build the price stack",
+        "section": "quote-comparison",
+        "description": "Include loading, local moves and release work consistently."
+      },
+      {
+        "label": "Stress acceptance and recovery",
+        "section": "exception-economics",
+        "description": "Keep requested loads and incremental exceptions visible."
+      },
+      {
+        "label": "Set the buying threshold",
+        "section": "decision-thresholds",
+        "description": "Translate the scenario into load and price headroom."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Aurora second-quarter 2026 shareholder letter",
+        "href": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000075/aurora26q2shareholderlet.htm"
+      },
+      {
+        "label": "Volvo and Waabi begin Warp customer operations in Texas",
+        "href": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp"
+      },
+      {
+        "label": "FMCSA operating-authority insurance filing requirements",
+        "href": "https://www.fmcsa.dot.gov/registration/insurance-filing-requirements"
+      }
+    ]
+  },
+  "texas-automated-vehicle-authorization": {
+    "question": "What does a Texas commercial driverless authorization establish?",
+    "answer": "The commercial authorization gate became enforceable May 28, 2026. Match the actual legal holder and vehicle record to the offered route, operating conditions, responder plan and contract. Nonexpiry does not remove the 30-day material-information duty; administrative enforcement and on-road duties remain distinct. The declared pilot model prices preparedness and replacement work without estimating a regulatory interruption rate.",
+    "paths": [
+      {
+        "label": "Classify the operation",
+        "section": "commercial-scope",
+        "description": "Apply the statutory scope and human-driver definition."
+      },
+      {
+        "label": "Match the holder and vehicle",
+        "section": "holder-and-vehicle",
+        "description": "Reconcile current records and contracting roles."
+      },
+      {
+        "label": "Price continuity work",
+        "section": "worked-continuity-case",
+        "description": "Separate free application from commercial operating costs."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas Transportation Code Chapter 545, Subchapter J",
+        "href": "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm"
+      },
+      {
+        "label": "TxDMV Automated Vehicles Regulatory Program",
+        "href": "https://www.txdmv.gov/AVprogram"
+      },
+      {
+        "label": "Texas begins enforcement of commercial automated-vehicle requirements",
+        "href": "https://www.txdmv.gov/sites/default/files/body-files/2026-06-02_Automated_Vehicle_Enforcement_System.pdf"
+      }
+    ]
   }
 }

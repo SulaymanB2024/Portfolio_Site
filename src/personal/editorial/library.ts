@@ -99,6 +99,13 @@ export function readerSectionTitle(value: string) {
 }
 
 const connections: Record<string, string[]> = {
+  'texas-robotaxi-business-service-map': ["texas-waymo-business-travel", "texas-zoox-market-entry-business"],
+  'texas-waymo-business-travel': ["texas-robotaxi-business-service-map", "waymo-hardware-financing"],
+  'texas-zoox-market-entry-business': ["texas-robotaxi-business-service-map", "texas-power-large-load-business-diligence"],
+  'texas-autonomous-trucking-operators': ["texas-driverless-freight-route-economics", "texas-automated-vehicle-authorization"],
+  'texas-driverless-freight-route-economics': ["texas-autonomous-trucking-operators", "texas-cross-border-logistics-business-planning"],
+  'texas-automated-vehicle-authorization': ["texas-autonomous-trucking-operators", "texas-robotaxi-business-service-map"],
+
   'texas-power-large-load-business-diligence': ['texas-water-facility-site-diligence', 'texas-data-center-sales-tax-project-economics'],
   'texas-water-facility-site-diligence': ['texas-power-large-load-business-diligence', 'texas-commercial-property-insurance-diligence'],
   'texas-property-tax-business-underwriting': ['texas-jeti-incentives-project-underwriting', 'texas-franchise-tax-reporting-business-decisions'],
@@ -118,7 +125,7 @@ const connections: Record<string, string[]> = {
   'why-texas-toll-roads-stay-tolled': ['who-owns-texas-toll-roads', 'how-airlines-borrow-against-loyalty-programs'],
   'how-airlines-borrow-against-loyalty-programs': ['hidden-financing-hardware-startups', 'waymo-hardware-financing'],
   'hidden-financing-hardware-startups': ['waymo-hardware-financing', 'how-airlines-borrow-against-loyalty-programs'],
-  'waymo-hardware-financing': ['hidden-financing-hardware-startups', 'how-airlines-borrow-against-loyalty-programs'],
+  'waymo-hardware-financing': ['texas-waymo-business-travel', 'texas-zoox-market-entry-business'],
   'what-happens-when-an-index-decides-a-company-matters': ['software-buyout-boom-2020-2022-exit-audit', 'how-airlines-borrow-against-loyalty-programs'],
   'software-buyout-boom-2020-2022-exit-audit': ['what-happens-when-an-index-decides-a-company-matters', 'who-owns-austin-home-service-companies'],
   'where-online-returns-actually-go': ['hidden-financing-hardware-startups', 'us-rare-earth-magnet-manufacturing-capacity'],

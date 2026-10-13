@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "article": "texas-zoox-market-entry-business",
+  "articleSlug": "texas-zoox-market-entry-business",
+  "checkedAt": "2026-10-12",
+  "researchCutoff": "2026-10-12",
+  "sourcePolicy": "Current rendered Zoox city/app/map pages, dated Texas expansion disclosures and NHTSA's Federal Register grant. Company stage and design descriptions remain issuer-reported; no live rides, depot agreement, fleet allocation or operating dataset supplied.",
+  "claims": [
+    {
+      "id": "zoox-01",
+      "claim": "Austin's current city page says coming soon and directs users to a waitlist.",
+      "status": "current rendered issuer invitation",
+      "qualification": "Does not establish general public booking. The page has no publication date.",
+      "sources": [
+        {
+          "sourceId": "austin-current",
+          "url": "https://zoox.com/austin",
+          "date": "Undated current city page",
+          "pinpoint": "Zoox is coming soon; app/waitlist invitation"
+        }
+      ],
+      "recheck": "Current admission page or actual local rider access changes."
+    },
+    {
+      "id": "zoox-02",
+      "claim": "March 25 Austin purpose-built rollout began with employees/family/friends; later-year Explorers access was planned.",
+      "status": "dated issuer rollout with future plan",
+      "qualification": "No completion of that future admission milestone inferred.",
+      "sources": [
+        {
+          "sourceId": "austin-rollout",
+          "url": "https://zoox.com/journal/zoox-robotaxi-is-now-in-austin",
+          "date": "2026-03-25",
+          "pinpoint": "The journey so far"
+        }
+      ],
+      "recheck": "A later dated source verifies a new admission or service stage."
+    },
+    {
+      "id": "zoox-03",
+      "claim": "March 9 Dallas notice describes retrofitted SUV mapping/testing and planned depots.",
+      "status": "dated issuer testing expansion",
+      "qualification": "Future purpose-built testing is not a public ride commitment or delivered fleet count.",
+      "sources": [
+        {
+          "sourceId": "dallas-testing",
+          "url": "https://zoox.com/journal/zoox-expanding-testing-dallas-phoenix",
+          "date": "2026-03-09",
+          "pinpoint": "Deploying our Zoox Testing Fleet; opening expansion"
+        }
+      ],
+      "recheck": "Current vehicle stage, public booking or executed facility evidence changes."
+    },
+    {
+      "id": "zoox-04",
+      "claim": "September 1 Houston announcement begins with manual mapping and later test/robotaxi stages.",
+      "status": "dated issuer testing expansion",
+      "qualification": "Depots and local hiring remain plans; no ready passenger fleet inferred.",
+      "sources": [
+        {
+          "sourceId": "houston-testing",
+          "url": "https://zoox.com/journal/zoox-now-testing-houston-san-diego",
+          "date": "2026-09-01",
+          "pinpoint": "Opening; operations will begin; physical operations plans"
+        }
+      ],
+      "recheck": "Later Houston stage or actual facility commitment is documented."
+    },
+    {
+      "id": "zoox-05",
+      "claim": "Testing SUVs have safety drivers; Zoox says no plans for public rides or driverless operation of that fleet.",
+      "status": "issuer testing methodology",
+      "qualification": "March revision's location list predates September Houston addition; no comparative safety metric inferred.",
+      "sources": [
+        {
+          "sourceId": "test-fleet",
+          "url": "https://zoox.com/journal/autonomous-zoox-testing-vehicle",
+          "date": "2023-10-18; revised 2026-03",
+          "pinpoint": "Safety is foundational to testing; no plans paragraph"
+        }
+      ],
+      "recheck": "Testing-fleet role or methodology changes."
+    },
+    {
+      "id": "zoox-06",
+      "claim": "Operating maps include robotaxi testing areas.",
+      "status": "current rendered issuer map explanation",
+      "qualification": "Map presence is not a public rider-admission guarantee.",
+      "sources": [
+        {
+          "sourceId": "operating-areas",
+          "url": "https://zoox.com/zoox-operating-areas",
+          "date": "Undated current map page",
+          "pinpoint": "Opening explanation"
+        }
+      ],
+      "recheck": "Map scope or service admission changes."
+    },
+    {
+      "id": "zoox-07",
+      "claim": "Zoox app distribution is stated as US App Store/Google Play.",
+      "status": "current rendered issuer app instructions",
+      "qualification": "App installation does not create local rider access; international-device eligibility not tested.",
+      "sources": [
+        {
+          "sourceId": "app-access",
+          "url": "https://zoox.com/app",
+          "date": "Undated current app page",
+          "pinpoint": "App availability statement"
+        }
+      ],
+      "recheck": "Store distribution or account/booking requirements change."
+    },
+    {
+      "id": "zoox-08",
+      "claim": "Vehicle page describes bidirectional design, four-wheel steering and live assistance.",
+      "status": "current issuer design/support description",
+      "qualification": "No measured Texas pickup or support-response guarantee.",
+      "sources": [
+        {
+          "sourceId": "vehicle-and-support",
+          "url": "https://zoox.com/know-your-ride",
+          "date": "Undated current vehicle page",
+          "pinpoint": "A smooth operator; Support when you need it"
+        }
+      ],
+      "recheck": "Vehicle generation, boarding or rider support changes."
+    },
+    {
+      "id": "zoox-09",
+      "claim": "Commercial grant runs July 31 2026–July 31 2028; ≤2,500 commercial introductions per 12 months.",
+      "status": "official grant",
+      "qualification": "Separate Operational Authorizations limit simultaneous operations; no Texas allocation inferred.",
+      "sources": [
+        {
+          "sourceId": "commercial-grant",
+          "url": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm",
+          "date": "2026-07-31",
+          "pinpoint": "DATES; Executive Summary; VIII.D (1)–(2)"
+        }
+      ],
+      "recheck": "Grant or Operational Authorization changes."
+    },
+    {
+      "id": "zoox-10",
+      "claim": "NHTSA's safety-equivalence analysis covers specific exempted FMVSS requirements.",
+      "status": "official scope qualification",
+      "qualification": "No blanket comparative ADS safety conclusion.",
+      "sources": [
+        {
+          "sourceId": "commercial-grant",
+          "url": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm",
+          "date": "2026-07-31",
+          "pinpoint": "Executive Summary, safety-equivalency scope paragraphs"
+        }
+      ],
+      "recheck": "Grant analysis or relevant official finding changes."
+    },
+    {
+      "id": "zoox-11",
+      "claim": "Grant records Zoox retaining fleet ownership/operations and up to four passengers.",
+      "status": "issuer model described in official notice",
+      "qualification": "No private allocation or four-passenger average occupancy inferred.",
+      "sources": [
+        {
+          "sourceId": "commercial-grant",
+          "url": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm",
+          "date": "2026-07-31",
+          "pinpoint": "Executive Summary; III Zoox's Application"
+        }
+      ],
+      "recheck": "Ownership, vehicle or service model changes."
+    },
+    {
+      "id": "zoox-12",
+      "claim": "July 30 company notice distinguishes demonstration and commercial paths.",
+      "status": "dated issuer transition notice",
+      "qualification": "Further existing-market state requirements described; no Texas fare launch asserted.",
+      "sources": [
+        {
+          "sourceId": "commercial-transition",
+          "url": "https://zoox.com/journal/zoox-nhtsa-part-555-commercial-exemption",
+          "date": "2026-07-30",
+          "pinpoint": "The exemption process"
+        }
+      ],
+      "recheck": "New commercial market, fare or authorization evidence."
+    },
+    {
+      "id": "zoox-13",
+      "claim": "Declared fleet example yields 704 trips and $17.05 allocated cost per trip; lower occupied share yields 512 and $23.44.",
+      "status": "calculated hypothetical",
+      "qualification": "No actual Zoox fleet count, tariff, utilization, cost or profit estimate; vehicle trips are not unique riders or automatic four-person journeys.",
+      "sources": [],
+      "recheck": "Actual contracted scope, available service-hours, occupied share, trip duration and cost evidence changes inputs."
+    }
+  ],
+  "calculations": [
+    {
+      "id": "fleet-service-throughput",
+      "status": "declared hypothetical",
+      "inputs": {
+        "fleetVehicles": 40,
+        "scheduledHoursPerVehicleDay": 16,
+        "availableShare": 0.8,
+        "occupiedShare": 0.55,
+        "sensitivityOccupiedShare": 0.4,
+        "occupiedTripMinutes": 24,
+        "allocatedCostPerVehicleDayUSD": 250,
+        "dailyFleetOverheadUSD": 2000
+      },
+      "formulas": [
+        "scheduledVehicleHours = fleetVehicles × scheduledHoursPerVehicleDay",
+        "availableServiceHours = scheduledVehicleHours × availableShare",
+        "occupiedVehicleHours = availableServiceHours × occupiedShare",
+        "vehicleTrips = occupiedVehicleHours ÷ (occupiedTripMinutes ÷ 60)",
+        "dailyAllocatedCost = fleetVehicles × allocatedCostPerVehicleDayUSD + dailyFleetOverheadUSD",
+        "allocatedCostPerTrip = dailyAllocatedCost ÷ vehicleTrips",
+        "costPerTripIncreasePercent = (baseTrips ÷ sensitivityTrips − 1) × 100"
+      ],
+      "results": {
+        "scheduledVehicleHours": 640,
+        "availableServiceHours": 512,
+        "occupiedVehicleHours": 281.6,
+        "occupiedTripHours": 0.4,
+        "vehicleTrips": 704,
+        "dailyAllocatedCostUSD": 12000,
+        "allocatedCostPerTripUSD": 17.045454545454547,
+        "sensitivityOccupiedVehicleHours": 204.8,
+        "sensitivityVehicleTrips": 512,
+        "sensitivityAllocatedCostPerTripUSD": 23.4375,
+        "vehicleTripDecrease": 192,
+        "costPerTripIncreasePercent": 37.5
+      },
+      "boundaries": [
+        "All vehicles and hours are invented model inputs, not a Texas deployment estimate.",
+        "Available hours exclude assumed downtime; occupied share is the part carrying passengers; remaining available hours include unoccupied activity.",
+        "Trip duration held constant; actual peak demand, repositioning, route/ODD constraints and support events could change output.",
+        "Allocated cost pool has only declared vehicle-day and overhead inputs; no complete profitability or fare projection.",
+        "Trip is a completed occupied vehicle trip; no occupancy, passenger-journey or unique-user multiplication assumed."
+      ]
+    }
+  ],
+  "updateTriggers": [
+    "Austin current admission or Explorers access changes; a new dated service milestone replaces a plan.",
+    "Dallas or Houston reports a changed local vehicle/test/public-service stage.",
+    "Current Federal Register grant or Operational Authorization conditions change.",
+    "Actual local depot scope, lease, charging/power readiness, vendor contract or fleet allocation becomes available.",
+    "Current app distribution, service area, operating hours, fares or rider support changes.",
+    "Observed or contracted fleet hours, occupied share, trip durations, demand and costs replace hypothetical inputs."
+  ]
+}

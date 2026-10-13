@@ -1,20 +1,243 @@
 {
-  "version":1,
-  "editionDate":"2026-10-12",
-  "owner":"Sulayman Bowles",
-  "purpose":"An evidence-led Texas business research library. Review dates are editorial reminders, not legal deadlines or scheduled jobs.",
-  "articles":[
-    {"slug":"texas-power-large-load-business-diligence","pillar":"Infrastructure","reader":"Site-selection and finance teams","decision":"Commit capital against usable power and operating conditions","claimsPath":"docs/texas-business/research/power-claims.json","reviewBy":"2026-10-19","triggers":["New ERCOT allocation, batch or energization notice","PUCT implementation order or rule","TCEQ audit update and facility permitting change"]},
-    {"slug":"texas-water-facility-site-diligence","pillar":"Infrastructure","reader":"Facility developers and operating teams","decision":"Choose supply and cooling arrangements that meet peak demand","claimsPath":"docs/texas-business/research/water-claims.json","reviewBy":"2026-12-01","triggers":["TWDB adoption or amendment status changes","Supplier drought stage, contract or delivery evidence changes","Local well, reuse or discharge authority changes"]},
-    {"slug":"texas-property-tax-business-underwriting","pillar":"Taxes and incentives","reader":"Buyers, tenants and finance teams","decision":"Budget ownership, improvements and lease tax exposure","claimsPath":"docs/texas-business/research/property-tax-claims.json","reviewBy":"2026-12-01","triggers":["Circuit-breaker expiry or amendment","Adopted rate or appraisal notice","Asset situs, ownership, lease or exemption eligibility changes"]},
-    {"slug":"texas-data-center-sales-tax-project-economics","pillar":"Taxes and incentives","reader":"Data-center finance and procurement teams","decision":"Underwrite route-specific tax savings and repayment exposure","claimsPath":"docs/texas-business/research/data-center-tax-claims.json","reviewBy":"2026-11-12","triggers":["Agency form or statutory investment-clock clarification","Certification, registered purchaser or schedule changes","New audit, job, investment or metering evidence"]},
-    {"slug":"texas-jeti-incentives-project-underwriting","pillar":"Taxes and incentives","reader":"Industrial finance and site-selection teams","decision":"Price an incentive together with its continuing obligations","claimsPath":"docs/texas-business/research/jeti-claims.json","reviewBy":"2026-11-12","triggers":["Eligibility rule or statutory amendment","Signed agreement, valuation or adopted-rate change","New project reporting or enforcement evidence"]},
-    {"slug":"texas-franchise-tax-reporting-business-decisions","pillar":"Taxes and incentives","reader":"Founders, acquisition and finance teams","decision":"Choose supported filing and computation treatment","claimsPath":"docs/texas-business/research/franchise-tax-claims.json","reviewBy":"2026-11-02","triggers":["Report-year instructions or credit guidance change","Accounting period, group structure or entity status changes","New notice, acceptance or extension evidence"]},
-    {"slug":"texas-hiring-labor-cost-planning","pillar":"Hiring","reader":"Employers planning a production ramp","decision":"Price role-specific recruiting, compensation and delay","claimsPath":"docs/texas-business/research/hiring-claims.json","reviewBy":"2026-10-16","triggers":["Next TWC observation or statistical revision","New BLS occupational wage reference period","Actual recruiting, training or retention results diverge"]},
-    {"slug":"texas-cross-border-logistics-business-planning","pillar":"Trade","reader":"Texas buyers sourcing across the Mexico border","decision":"Qualify landed cost, customs and usable receipt","claimsPath":"docs/texas-business/research/logistics-claims.json","reviewBy":"2026-11-12","triggers":["Bridge hours, fees, customs or commodity rules change","Comparable BTS data observation or correction","Carrier quote, receiving performance or backup-route changes"]},
-    {"slug":"texas-manufacturing-capacity-procurement","pillar":"Industry","reader":"Buyers and investors assessing Texas manufacturing","decision":"Distinguish announcements from buyer-usable qualified output","claimsPath":"docs/texas-business/research/manufacturing-claims.json","reviewBy":"2026-11-12","triggers":["Company commissioning, earnings or qualification disclosure","Permitting, award or project-schedule change","New customer allocation or acceptance evidence"]},
-    {"slug":"texas-commercial-property-insurance-diligence","pillar":"Commercial risk","reader":"Business owners choosing facility coverage","decision":"Match insured perils and claims terms to cash-at-risk","claimsPath":"docs/texas-business/research/insurance-claims.json","reviewBy":"2026-11-12","triggers":["TDI or TWIA filing, endorsement or rate effective date","Actual quote, policy, exclusions or valuation changes","Exposure, lender requirement or loss-prevention design changes"]},
-    {"slug":"texas-ai-law-business-compliance","pillar":"Technology","reader":"Private employers and AI procurement teams","decision":"Identify applicable AI, privacy and biometric duties","claimsPath":"docs/texas-business/research/ai-law-claims.json","reviewBy":"2026-11-12","triggers":["Enforcement or governing legal change","Business sandbox intake evidence","Vendor, deployed use, processing relationship or data change"]},
-    {"slug":"texas-business-court-contract-decisions","pillar":"Commercial risk","reader":"Deal, procurement and finance teams","decision":"Preserve the bargain and underwrite the dispute scenario","claimsPath":"docs/texas-business/research/business-court-claims.json","reviewBy":"2026-11-12","triggers":["Appellate treatment or governing procedural change","New contract, release, claim or counterclaim","Official operating division or court reporting update"]}
-  ]
+  "version": 1,
+  "editionDate": "2026-10-13",
+  "owner": "Sulayman Bowles",
+  "purpose": "An evidence-led Texas business research library. Review dates are editorial reminders, not legal deadlines or scheduled jobs.",
+  "articles": [
+    {
+      "slug": "texas-power-large-load-business-diligence",
+      "pillar": "Infrastructure",
+      "reader": "Site-selection and finance teams",
+      "decision": "Commit capital against usable power and operating conditions",
+      "claimsPath": "docs/texas-business/research/power-claims.json",
+      "reviewBy": "2026-10-19",
+      "triggers": [
+        "New ERCOT allocation, batch or energization notice",
+        "PUCT implementation order or rule",
+        "TCEQ audit update and facility permitting change"
+      ]
+    },
+    {
+      "slug": "texas-water-facility-site-diligence",
+      "pillar": "Infrastructure",
+      "reader": "Facility developers and operating teams",
+      "decision": "Choose supply and cooling arrangements that meet peak demand",
+      "claimsPath": "docs/texas-business/research/water-claims.json",
+      "reviewBy": "2026-12-01",
+      "triggers": [
+        "TWDB adoption or amendment status changes",
+        "Supplier drought stage, contract or delivery evidence changes",
+        "Local well, reuse or discharge authority changes"
+      ]
+    },
+    {
+      "slug": "texas-property-tax-business-underwriting",
+      "pillar": "Taxes and incentives",
+      "reader": "Buyers, tenants and finance teams",
+      "decision": "Budget ownership, improvements and lease tax exposure",
+      "claimsPath": "docs/texas-business/research/property-tax-claims.json",
+      "reviewBy": "2026-12-01",
+      "triggers": [
+        "Circuit-breaker expiry or amendment",
+        "Adopted rate or appraisal notice",
+        "Asset situs, ownership, lease or exemption eligibility changes"
+      ]
+    },
+    {
+      "slug": "texas-data-center-sales-tax-project-economics",
+      "pillar": "Taxes and incentives",
+      "reader": "Data-center finance and procurement teams",
+      "decision": "Underwrite route-specific tax savings and repayment exposure",
+      "claimsPath": "docs/texas-business/research/data-center-tax-claims.json",
+      "reviewBy": "2026-11-12",
+      "triggers": [
+        "Agency form or statutory investment-clock clarification",
+        "Certification, registered purchaser or schedule changes",
+        "New audit, job, investment or metering evidence"
+      ]
+    },
+    {
+      "slug": "texas-jeti-incentives-project-underwriting",
+      "pillar": "Taxes and incentives",
+      "reader": "Industrial finance and site-selection teams",
+      "decision": "Price an incentive together with its continuing obligations",
+      "claimsPath": "docs/texas-business/research/jeti-claims.json",
+      "reviewBy": "2026-11-12",
+      "triggers": [
+        "Eligibility rule or statutory amendment",
+        "Signed agreement, valuation or adopted-rate change",
+        "New project reporting or enforcement evidence"
+      ]
+    },
+    {
+      "slug": "texas-franchise-tax-reporting-business-decisions",
+      "pillar": "Taxes and incentives",
+      "reader": "Founders, acquisition and finance teams",
+      "decision": "Choose supported filing and computation treatment",
+      "claimsPath": "docs/texas-business/research/franchise-tax-claims.json",
+      "reviewBy": "2026-11-02",
+      "triggers": [
+        "Report-year instructions or credit guidance change",
+        "Accounting period, group structure or entity status changes",
+        "New notice, acceptance or extension evidence"
+      ]
+    },
+    {
+      "slug": "texas-hiring-labor-cost-planning",
+      "pillar": "Hiring",
+      "reader": "Employers planning a production ramp",
+      "decision": "Price role-specific recruiting, compensation and delay",
+      "claimsPath": "docs/texas-business/research/hiring-claims.json",
+      "reviewBy": "2026-10-16",
+      "triggers": [
+        "Next TWC observation or statistical revision",
+        "New BLS occupational wage reference period",
+        "Actual recruiting, training or retention results diverge"
+      ]
+    },
+    {
+      "slug": "texas-cross-border-logistics-business-planning",
+      "pillar": "Trade",
+      "reader": "Texas buyers sourcing across the Mexico border",
+      "decision": "Qualify landed cost, customs and usable receipt",
+      "claimsPath": "docs/texas-business/research/logistics-claims.json",
+      "reviewBy": "2026-11-12",
+      "triggers": [
+        "Bridge hours, fees, customs or commodity rules change",
+        "Comparable BTS data observation or correction",
+        "Carrier quote, receiving performance or backup-route changes"
+      ]
+    },
+    {
+      "slug": "texas-manufacturing-capacity-procurement",
+      "pillar": "Industry",
+      "reader": "Buyers and investors assessing Texas manufacturing",
+      "decision": "Distinguish announcements from buyer-usable qualified output",
+      "claimsPath": "docs/texas-business/research/manufacturing-claims.json",
+      "reviewBy": "2026-11-12",
+      "triggers": [
+        "Company commissioning, earnings or qualification disclosure",
+        "Permitting, award or project-schedule change",
+        "New customer allocation or acceptance evidence"
+      ]
+    },
+    {
+      "slug": "texas-commercial-property-insurance-diligence",
+      "pillar": "Commercial risk",
+      "reader": "Business owners choosing facility coverage",
+      "decision": "Match insured perils and claims terms to cash-at-risk",
+      "claimsPath": "docs/texas-business/research/insurance-claims.json",
+      "reviewBy": "2026-11-12",
+      "triggers": [
+        "TDI or TWIA filing, endorsement or rate effective date",
+        "Actual quote, policy, exclusions or valuation changes",
+        "Exposure, lender requirement or loss-prevention design changes"
+      ]
+    },
+    {
+      "slug": "texas-ai-law-business-compliance",
+      "pillar": "Technology",
+      "reader": "Private employers and AI procurement teams",
+      "decision": "Identify applicable AI, privacy and biometric duties",
+      "claimsPath": "docs/texas-business/research/ai-law-claims.json",
+      "reviewBy": "2026-11-12",
+      "triggers": [
+        "Enforcement or governing legal change",
+        "Business sandbox intake evidence",
+        "Vendor, deployed use, processing relationship or data change"
+      ]
+    },
+    {
+      "slug": "texas-business-court-contract-decisions",
+      "pillar": "Commercial risk",
+      "reader": "Deal, procurement and finance teams",
+      "decision": "Preserve the bargain and underwrite the dispute scenario",
+      "claimsPath": "docs/texas-business/research/business-court-claims.json",
+      "reviewBy": "2026-11-12",
+      "triggers": [
+        "Appellate treatment or governing procedural change",
+        "New contract, release, claim or counterclaim",
+        "Official operating division or court reporting update"
+      ]
+    },
+    {
+      "slug": "texas-robotaxi-business-service-map",
+      "pillar": "Autonomous mobility and freight",
+      "reader": "Travel managers and guest-service teams",
+      "decision": "Choose a usable passenger AV channel and fallback",
+      "claimsPath": "docs/texas-business/research/robotaxi-map-claims.json",
+      "reviewBy": "2026-10-20",
+      "triggers": [
+        "Provider rider admission, booking rules or service area changes",
+        "Onboard role, platform or business payment program changes",
+        "Actual trip costs and exception evidence diverge"
+      ]
+    },
+    {
+      "slug": "texas-waymo-business-travel",
+      "pillar": "Autonomous mobility and freight",
+      "reader": "Employers and travel-policy owners",
+      "decision": "Approve a journey and compare fare with employee time",
+      "claimsPath": "docs/texas-business/research/waymo-claims.json",
+      "reviewBy": "2026-10-20",
+      "triggers": [
+        "Waymo rider admission, airport or pickup guidance changes",
+        "Uber matching or business payment availability changes",
+        "Actual travel cohort or fallback evidence changes"
+      ]
+    },
+    {
+      "slug": "texas-zoox-market-entry-business",
+      "pillar": "Autonomous mobility and freight",
+      "reader": "Property, supplier and transport teams",
+      "decision": "Match a commercial commitment to the local fleet stage",
+      "claimsPath": "docs/texas-business/research/zoox-claims.json",
+      "reviewBy": "2026-10-20",
+      "triggers": [
+        "Zoox Texas rider admission or vehicle stage advances",
+        "Federal Operational Authorization or exemption conditions change",
+        "Executed depot, charging, supplier or service evidence arrives"
+      ]
+    },
+    {
+      "slug": "texas-autonomous-trucking-operators",
+      "pillar": "Autonomous mobility and freight",
+      "reader": "Shippers, carriers and procurement teams",
+      "decision": "Shortlist the operator for a defined freight job",
+      "claimsPath": "docs/texas-business/research/autonomous-trucking-claims.json",
+      "reviewBy": "2026-10-20",
+      "triggers": [
+        "A driver-out launch, onboard role or accepted endpoint changes",
+        "Operator disclosures revise the program stage or metric definitions",
+        "Current buyer-specific capacity or recovery evidence changes"
+      ]
+    },
+    {
+      "slug": "texas-driverless-freight-route-economics",
+      "pillar": "Autonomous mobility and freight",
+      "reader": "Freight buyers and finance teams",
+      "decision": "Buy a complete route with priced recovery and backup",
+      "claimsPath": "docs/texas-business/research/driverless-freight-claims.json",
+      "reviewBy": "2026-11-13",
+      "triggers": [
+        "Quoted inclusions, price, acceptance or support arrangements change",
+        "Actual trial completion, exception and interruption evidence changes",
+        "Carrier records or insurance evidence change"
+      ]
+    },
+    {
+      "slug": "texas-automated-vehicle-authorization",
+      "pillar": "Autonomous mobility and freight",
+      "reader": "Fleet customers and operating teams",
+      "decision": "Verify operating authority and preserve service continuity",
+      "claimsPath": "docs/texas-business/research/av-authorization-claims.json",
+      "reviewBy": "2026-11-13",
+      "triggers": [
+        "Governing law, agency rules or enforcement guidance changes",
+        "Holder, fleet, responder plan or operating domain changes",
+        "Actual interruption, replacement and restart evidence changes"
+      ]
+    }
+  ],
+  "bundlePath": "public/research/texas-autonomy-library-2026-10-13.json"
 }

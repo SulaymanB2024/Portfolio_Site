@@ -16,8 +16,14 @@ The publication's promise: explain a Texas development well enough that an opera
 - Cross-border logistics: matching denominators, customs, commercial schedules and full-route economics.
 - Manufacturing: company-reported stages translated into buyer-specific qualification and allocation questions.
 - Commercial insurance: perils, settlement, dollar retention and the business-income recovery case.
+- Robotaxi comparison: current passenger access, onboard roles, booking workflows and paid exceptions.
+- Waymo travel: Texas admission channels, the airport leg, business payment and employee time.
+- Zoox market entry: local fleet stages, conditional federal permission, depot dependencies and utilization.
+- Trucking operators: selected industrial, regional and highway programs, human roles and usable capacity.
+- Freight route economics: direct service versus transfers, accepted loads, setup, recovery and backup.
+- AV authorization: holder and vehicle records, responder plans, continuing duties and service continuity.
 
-Canonical collection: `/topics/texas-business`. New articles use `/research/texas/SLUG`. Existing toll-road, Austin ownership, and housing manuscripts retain their URLs, research cutoffs, and financial-systems collection.
+Canonical collections: `/topics/texas-business` for the twelve core investigations and `/topics/texas-autonomy` for six mobility and freight investigations. Each article has one primary reading path. New articles use `/research/texas/SLUG`. Existing toll-road, Austin ownership, housing and Waymo hardware-financing manuscripts retain their URLs, research cutoffs and primary collection.
 
 ## Commissioning standard
 
@@ -35,7 +41,7 @@ Google's current [AI optimization guide](https://developers.google.com/search/do
 
 ## Next research queue
 
-The table preserves the original commissioning questions; the twelve-article library now answers many of them at the stated cutoff. Future briefs should extend unresolved questions or reconcile material new evidence into the existing answer. They are not measured keyword opportunities. Breadth follows usefulness; there is no daily article quota.
+The table preserves the original commissioning questions; the eighteen-article library now answers many of them at the stated cutoff. Future briefs should extend unresolved questions or reconcile material new evidence into the existing answer. They are not measured keyword opportunities. Breadth follows usefulness; there is no daily article quota.
 
 | Question to resolve | Business decision | Primary evidence to acquire |
 | --- | --- | --- |

@@ -22,6 +22,7 @@ export function TopicBody({ slug, interactive = false }: { slug: string; interac
   }
   return <>
     <div className="topic-introduction">{topic.introduction.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
+    {topic.featuredPath ? <p className="topic-return"><a href={`${interactive ? '#' : ''}/topics/${topic.featuredPath.slug}`}>{topic.featuredPath.label} <span aria-hidden="true">↗</span></a></p> : null}
     {topic.sourceDownload ? <p className="topic-return"><a href={topic.sourceDownload.href} download>{topic.sourceDownload.label} <span aria-hidden="true">↗</span></a></p> : null}
     <nav className="topic-questions" aria-labelledby="topic-questions-title"><h2 id="topic-questions-title">Start with a question</h2><ul>{topicQuestions(topic).map(({ question, section, article }) => <li key={question}><a href={interactive ? sectionHref(`#/writing/${article.slug}?from=${encodeURIComponent(readingPathHref(slug, article.slug))}`, section) : `${article.path}#${encodeURIComponent(section)}`} onClick={interactive ? event => rememberReading(event, article.slug) : undefined}>{question}</a></li>)}</ul></nav>
     <p className="reading-duration">Question paths added <time dateTime={topic.questionsUpdated}>{displayDate(topic.questionsUpdated)}</time>.</p>

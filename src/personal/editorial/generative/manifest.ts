@@ -52,6 +52,13 @@ const SKETCH_DETAILS = [
 ] as const satisfies readonly [SketchId, string, string][];
 
 export const ARTICLE_GENERATIVE_ART_ASSIGNMENTS = {
+  '/research/texas/texas-robotaxi-business-service-map': 'yuru-24',
+  '/research/texas/texas-waymo-business-travel': 'yuru-02',
+  '/research/texas/texas-zoox-market-entry-business': 'yuru-11',
+  '/research/texas/texas-autonomous-trucking-operators': 'yuru-16',
+  '/research/texas/texas-driverless-freight-route-economics': 'yuru-21',
+  '/research/texas/texas-automated-vehicle-authorization': 'yuru-27',
+
   '/research/texas/texas-water-facility-site-diligence': 'yuru-22',
   '/research/texas/texas-property-tax-business-underwriting': 'yuru-26',
   '/research/texas/texas-data-center-sales-tax-project-economics': 'yuru-28',

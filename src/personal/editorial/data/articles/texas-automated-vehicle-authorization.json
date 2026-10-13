@@ -1,0 +1,296 @@
+{
+  "slug": "texas-automated-vehicle-authorization",
+  "path": "/research/texas/texas-automated-vehicle-authorization",
+  "aliases": [],
+  "title": "What a Texas AV Authorization Actually Lets a Business Rely On",
+  "displayTitle": "The Permit Behind the Ride",
+  "seoTitle": "Texas AV Law 2026: Driverless Commercial Authorization",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "Texas now requires commercial driverless authorization. Verify the holder, vehicle, operating conditions and response plan before relying on the service.",
+  "seoDescription": "Texas AV authorization after May 28, 2026: SB 2807, TxDMV records, responder plans, 30-day updates, enforcement and commercial procurement responsibilities.",
+  "searchTerms": [
+    "Texas autonomous vehicle law 2026",
+    "Texas driverless vehicle authorization",
+    "SB 2807 commercial AV",
+    "TxDMV robotaxi permit",
+    "autonomous truck authorization Texas"
+  ],
+  "date": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "10 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Public-source research checked October 12, 2026. This is a business diligence framework, not an operator-specific approval, civil-liability determination or fleet inspection. The pilot costs and interruption inputs are hypothetical.",
+  "content": [
+    "A Texas robotaxi company and a driverless freight carrier can both hold automated-vehicle authorization while offering very different services. The useful procurement question is which legal entity, vehicles and operating conditions support the commitment the business is about to make. Put those facts in the file before signing a transport agreement or building a schedule around the fleet.",
+    "This is a current operating requirement. TxDMV’s June 2, 2026 announcement confirms that commercial automated-vehicle authorization requirements became enforceable May 28 and that a public complaint process is available. A 2025 legislative summary or an earlier 2026 implementation forecast is no longer enough to describe the regime. [Implemented enforcement](#source-enforcement).",
+    "The commercial consequence extends beyond the application: a nonexpiring authorization needs current supporting information, an actual vehicle association and a workable response to a service restriction. Separate the state authorization, technical operating conditions and customer agreement so that a change in one reaches the teams relying on the others."
+  ],
+  "sections": [
+    {
+      "id": "commercial-scope",
+      "title": "Identify the operation that needs the authorization",
+      "paragraphs": [
+        "The governing test concerns transporting passengers or property in furtherance of a commercial enterprise on Texas highways or streets without a human driver. The code distinguishes an automated motor vehicle capable of Level 4 or Level 5 operation from an automated driving system that can perform the driving task at Levels 3–5. Read the vehicle, engaged feature and human role together. [Definitions and scope](#source-code).",
+        "Section 545.451(7) defines a human driver as an onboard natural person controlling all or part of the dynamic driving task. Mere observer presence does not establish that role. For procurement, ask who performs steering, braking, roadway monitoring and tactical decisions on the actual service. A safety driver, a non-driving observer, remote assistance and roadside support represent different responsibilities. Obtain the written operation description and evidence relevant to the trip being purchased. [Human-driver definition](#source-code).",
+        "A fleet’s commercial driverless service also differs from an employee using a driver-assistance feature in a personally owned car. TxDMV’s guidance excludes individually owned vehicles operated for personal use from this authorization requirement. That distinction does not supply an exemption for every business transport arrangement; classify the proposed operation from its facts. [Agency scope](#source-program)."
+      ]
+    },
+    {
+      "id": "enforcement-clock",
+      "title": "Use the implemented date",
+      "paragraphs": [
+        "SB 2807 became effective September 1, 2025, while its implementation provisions delayed the new compliance requirements until after agency rules. TxDMV identifies February 27, 2026 as the latest rule-effective date and May 28 as the enforcement date. The June announcement reports an operating authorization and complaints system. Preserve those separate dates in diligence. [Enrolled implementation provisions](#source-sb2807); [current program](#source-program); [June confirmation](#source-enforcement).",
+        "This matters when reviewing a supplier’s older presentation. A statement that Texas allows driverless operation can describe the general legal environment while omitting the later commercial authorization gate. A board slide describing planned system availability can explain implementation history while failing to establish present compliance. Ask for the current record rather than rejecting or accepting the supplier from an old headline.",
+        "In an acquisition or fleet expansion, inventory the operations that rely on the authorization. Name the business unit, vehicle platform, route, commercial purpose and contracted service. An old approval retained in a folder is useful history; the launch decision needs the current holder and the operation that will actually run."
+      ]
+    },
+    {
+      "id": "holder-and-vehicle",
+      "title": "Match the holder and the vehicle",
+      "paragraphs": [
+        "Section 545.456 requires applicant information, vehicle-related acknowledgments and certification that DPS has received the responder plan. After a compliant application, TxDMV issues a unique operating number. The agency says approved applicants can maintain their active vehicle listing by adding or deleting specific vehicles. These records connect the authorization to an accountable entity and fleet. [Application and fleet maintenance](#source-code); [program process](#source-program).",
+        "Use the current public Truck Stop portal to check the legal counterparty, authorization status and relevant vehicle record. The rendered portal links to searches for motor carriers and AV operators and to public complaints. Older indexed lookup URLs can persist after the application moves; the current agency link is the better starting point. This article does not report an exhaustive company or vehicle audit. [Current lookup](#source-lookup).",
+        "A buyer should reconcile that result with the contracting arrangement. A booking platform, technology developer, vehicle owner and transport operator may have different roles. Require the supplier to identify which entity holds the relevant authorization and who must notify the customer if the operating record changes. Keep the live result and the supplier’s explanation together, dated to the decision."
+      ]
+    },
+    {
+      "id": "operating-file",
+      "title": "Build a file that connects authority to service",
+      "paragraphs": [
+        "State authorization is one item in a commercial launch file. The operational design domain defines where and under which conditions the system is designed to function; the contract defines what the supplier promises the customer. The code’s definition expressly includes geography, environmental conditions and time-of-day restrictions. A statewide authorization number therefore needs a separate answer about a particular route. [Operating-domain definition](#source-code).",
+        "Use the table as a procurement framework. It does not imply that the state supplies every commercial assurance in the final column. The buyer should obtain the relevant evidence from the party that owns it and identify the team responsible for acting on a change."
+      ],
+      "table": {
+        "caption": "The evidence behind a Texas commercial AV commitment",
+        "columns": [
+          "Evidence",
+          "What it establishes",
+          "Buyer decision"
+        ],
+        "rows": [
+          [
+            "Current holder/vehicle record",
+            "Observed authorization status and fleet association",
+            "Match the transport counterparty and actual platform"
+          ],
+          [
+            "Operating-domain and service description",
+            "The route, conditions, mode and human roles offered",
+            "Check whether the requested work fits"
+          ],
+          [
+            "Platform-specific responder plan",
+            "How responders and fleet support interact",
+            "Assign local incident contacts and recovery"
+          ],
+          [
+            "Insurance and commercial agreement",
+            "The documented coverage and allocation of obligations",
+            "Review relevant limits, exclusions and remedies"
+          ],
+          [
+            "Change and interruption procedure",
+            "Who notifies, pauses, restores and supplies alternatives",
+            "Protect the receiving or passenger schedule"
+          ]
+        ],
+        "note": "Recommended diligence categories. Public authorization does not independently validate private coverage terms, a service-level guarantee or route availability."
+      }
+    },
+    {
+      "id": "responder-plan",
+      "title": "Plan the stopped vehicle as carefully as the moving one",
+      "paragraphs": [
+        "The statutory responder plan must address contact with fleet support during operation, safe removal and towing, recognizing whether the system is engaged, and relevant hazards. DPS publishes plans for specific platforms, including separate Tesla Model Y/Cybercab and Zoox robotaxi/test-fleet entries. Choose the plan for the actual vehicle; a company-wide logo is too broad. [Required plan subjects](#source-code); [published plans](#source-plans).",
+        "Translate the relevant plan into an operating interface at the site. Who receives a stopped truck? Who contacts fleet support? Which person controls access to a loading bay or campus curb? How does a security team distinguish a vehicle that should wait from one that needs emergency assistance? These are commercial coordination questions derived from the response requirement, not instructions for untrained personnel to tow or manipulate a vehicle.",
+        "Before a pilot, run a documented tabletop exercise with the supplier and the staff who will encounter the service. Use the published platform instructions and the site’s own emergency procedures. Record contacts, escalation and boundaries of responsibility. A recoverable vehicle can still interrupt a customer schedule if nobody owns the communication with the receiving team."
+      ]
+    },
+    {
+      "id": "maintain-the-record",
+      "title": "A nonexpiring authorization still changes",
+      "paragraphs": [
+        "The authorization does not expire, but section 545.456 requires updated material information within 30 days after a change. The department may act immediately for failures to update or respond to requests for current documents; the statute also describes rescission on receipt of the requested information. Treat maintenance as an owned workflow rather than an annual certificate-renewal assumption. [Continuing information duties](#source-code).",
+        "The buyer can request a contractual notification process for changes affecting the purchased service: holder, vehicles, operating domain, responder arrangements, coverage or restrictions. Separate the supplier’s state deadline from the notice the customer needs. A distribution center may need same-day operational notice even when a document update has a different legal timetable.",
+        "Assign a named owner to reconcile the record at launch and after material changes. Maintain the prior version, current version, decision date and explanation of what changed. A software or platform update should reach the operating file when it changes a condition on which the site relies. Updating every slide deck is less useful than updating the controlling service assumption and the people using it."
+      ]
+    },
+    {
+      "id": "enforcement-and-continuity",
+      "title": "Separate administrative restriction from on-road enforcement",
+      "paragraphs": [
+        "TxDMV administers authorization compliance; DPS and local law enforcement retain on-road traffic authority. The agency’s serious-public-safety administrative route and the code’s document-maintenance route are distinct. A customer should ask which notice or action applies and which vehicles or conditions it affects. [Agency responsibilities](#source-enforcement); [administrative process](#source-program).",
+        "For the unsafe-operation process, section 545.459 describes a notice, a reasonable correction period and review steps. It does not create a universal 30-day cure period for every service interruption. The separate 30-day rule concerns updating changed material information. Keep those clocks out of each other’s spreadsheet cells. [Enforcement and updates](#source-code).",
+        "Continuity terms should specify how a supplier communicates a pause, which conventional or alternate capacity can replace it and what evidence supports restarting. Separate an operational recovery from the legal status of an authorization. For a buyer, the material exposure is often the lost receiving window or an unavailable passenger transfer while the parties resolve the underlying issue."
+      ]
+    },
+    {
+      "id": "worked-continuity-case",
+      "title": "Price the work around a free authorization",
+      "paragraphs": [
+        "TxDMV states that the authorization has no fee. The buyer’s commercial diligence and continuity work can still consume resources. Consider a hypothetical six-week distribution pilot with 60 loads per week. Assume 360 base loads at $900 each, unchanged across the scenarios. The following comparison concerns additional preparedness and interruption costs, excluding that $324,000 base freight spend. No figure is a vendor quote or legally prescribed budget. [Authorization fee](#source-program).",
+        "Assume 12 hours of record and contract reconciliation at $125 an hour, 16 hours of responder/site coordination at $100 an hour, and a $400 weekly backup-capacity reservation for six weeks. These inputs total $5,500. The reservation pays for priority access only; replacement loads still cost an additional assumed $120 each above the base service.",
+        "A five-operating-day interruption affecting all 60 loads in one week adds $7,200 of incremental replacement freight. Total preparedness plus interruption cost becomes $12,700. This is a declared stress case, not an estimated frequency of government action or supplier failure. Replace its duration, affected loads, reservation treatment and incremental price with the actual arrangement."
+      ],
+      "table": {
+        "caption": "Declared six-week pilot: costs above unchanged base freight",
+        "columns": [
+          "Item",
+          "Assumption and calculation",
+          "Incremental cost"
+        ],
+        "rows": [
+          [
+            "Record/contract reconciliation",
+            "12 hours × $125",
+            "$1,500"
+          ],
+          [
+            "Responder/site coordination",
+            "16 hours × $100",
+            "$1,600"
+          ],
+          [
+            "Backup reservation",
+            "6 weeks × $400",
+            "$2,400"
+          ],
+          [
+            "Preparedness total",
+            "Three declared cost items",
+            "$5,500"
+          ],
+          [
+            "One-week replacement exposure",
+            "60 loads × additional $120",
+            "$7,200"
+          ],
+          [
+            "Preparedness plus stress case",
+            "$5,500 + $7,200",
+            "$12,700"
+          ]
+        ],
+        "note": "Hypothetical inputs. Base freight 360 × $900 = $324,000 is common to both cases and excluded. No probability, actual interruption, penalty or insurance recovery is inferred."
+      }
+    },
+    {
+      "id": "responsibilities-and-checklist",
+      "title": "Preserve the responsibilities that automation leaves",
+      "paragraphs": [
+        "When the system is engaged, the code assigns the operator role to it and directs traffic citations to the owner or applicable authorization holder. Collision duties still apply, and commercial-vehicle laws continue except for provisions that reasonably apply only to a human driver. A buyer should therefore inspect the whole transport responsibility, including vehicle condition, loading and customer handoff. [Operators, collisions and commercial laws](#source-code).",
+        "The citation rule does not itself settle a private civil claim or every contract remedy. Preserve the relevant insurance evidence, service terms, incident records and notice obligations. Ask the supplier to identify the party handling each practical event rather than place all confidence in the word autonomous."
+      ],
+      "bullets": [
+        "Match the legal holder, current authorization, actual vehicle platform and transport counterparty.",
+        "Check the route, operating conditions and precise role of any onboard or remote staff.",
+        "Obtain the applicable responder plan and agree on site contacts and recovery boundaries.",
+        "Review actual insurance evidence, applicable carrier duties, service terms and change notices.",
+        "Keep the 30-day material-information duty separate from private notice requirements and other enforcement clocks.",
+        "Price documented alternate capacity and receiving consequences; retain the actual restart evidence."
+      ]
+    },
+    {
+      "id": "update-triggers",
+      "title": "Recheck the gate when the operation changes",
+      "paragraphs": [
+        "Update this analysis when the governing law, agency rules, lookup route or enforcement guidance materially changes. For a specific purchase, recheck the holder and vehicle record before launch and when the supplier changes the platform, service domain or status. A posted responder plan is a source for coordination; it is not a permanent commercial availability certificate.",
+        "Use actual incident and delivery records to revise the continuity model. Reconcile scheduled loads, accepted loads, exceptions, replacement costs and receiving delays against the same period. Government incident data can add context, but NHTSA warns that its reporting conditions vary and crash counts are not exposure-normalized. A buyer needs comparable evidence before ranking suppliers by safety or reliability. [Federal reporting limitations](#source-crash-data)."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "When did Texas commercial driverless authorization become enforceable?",
+      "answer": "TxDMV identifies May 28, 2026; its June 2 announcement confirms enforcement and public complaints are implemented. The bill’s September 2025 effective date and the later rules/compliance clock are separate. [Program](#source-program); [implementation confirmation](#source-enforcement)."
+    },
+    {
+      "question": "Does a Texas AV authorization expire every year?",
+      "answer": "Section 545.456 says it does not expire and stays active unless suspended, revoked or canceled. Material information must be updated within 30 days after it changes, and active vehicle records still need maintenance. [Governing code](#source-code); [agency process](#source-program)."
+    },
+    {
+      "question": "Does a posted first-responder plan prove that I can book the service?",
+      "answer": "It establishes a published response plan for that platform. Verify current authorization separately and obtain actual service-domain and customer-access evidence. DPS’s catalog is not a booking map. [Responder catalog](#source-plans); [current lookup](#source-lookup)."
+    },
+    {
+      "question": "Does driverless operation remove commercial vehicle responsibilities?",
+      "answer": "Section 545.458 preserves applicable commercial-vehicle law except provisions that by their nature reasonably apply only to a human driver. Collision duties and the authorization-holder citation rule also remain relevant. [Code §§545.454,545.457–545.458](#source-code)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "code",
+      "label": "Texas Transportation Code Chapter 545, Subchapter J",
+      "href": "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm",
+      "publisher": "Texas Legislature",
+      "date": "Current code; SB2807 amendments effective 2025-09-01",
+      "lastVerified": "2026-10-12",
+      "note": "Sections 545.451–545.459. Governing definitions, authorization, maintenance, collision and commercial-vehicle duties; agency implementation dates are separately verified."
+    },
+    {
+      "id": "program",
+      "label": "TxDMV Automated Vehicles Regulatory Program",
+      "href": "https://www.txdmv.gov/AVprogram",
+      "publisher": "Texas Department of Motor Vehicles",
+      "date": "Undated current program page",
+      "lastVerified": "2026-10-12",
+      "note": "Reports May 28, 2026 enforcement, application process, no authorization fee, continuing updates and the current Truck Stop lookup/complaint route. Read with the statute."
+    },
+    {
+      "id": "enforcement",
+      "label": "Texas begins enforcement of commercial automated-vehicle requirements",
+      "href": "https://www.txdmv.gov/sites/default/files/body-files/2026-06-02_Automated_Vehicle_Enforcement_System.pdf",
+      "publisher": "Texas Department of Motor Vehicles",
+      "date": "2026-06-02",
+      "lastVerified": "2026-10-12",
+      "note": "One-page announcement confirms enforcement and public complaints are implemented; not merely a projected board timetable."
+    },
+    {
+      "id": "plans",
+      "label": "DPS Connected Autonomous Vehicles and responder plans",
+      "href": "https://www.dps.texas.gov/section/cav/connected-autonomous-vehicles",
+      "publisher": "Texas Department of Public Safety",
+      "date": "Page labeled 2026-02-27; current linked catalog checked 2026-10-12",
+      "lastVerified": "2026-10-12",
+      "note": "Publishes platform-specific first-responder interaction plans. Listing establishes a posted plan, not current authorization, commercial scale or rider access."
+    },
+    {
+      "id": "lookup",
+      "label": "TxMCCS Truck Stop: motor-carrier and AV-operator lookup",
+      "href": "https://txmccs.txdmv.gov/truckstop",
+      "publisher": "Texas Department of Motor Vehicles",
+      "date": "Undated current public portal",
+      "lastVerified": "2026-10-12",
+      "note": "Actual rendered portal verified with search and complaint links. Old /automated-vehicles/operators URL returned a rendered 404; no exhaustive search or fleet-level approval audit was performed."
+    },
+    {
+      "id": "sb2807",
+      "label": "SB 2807 enrolled text and implementation provisions",
+      "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB02807F.HTM",
+      "publisher": "Texas Legislature",
+      "date": "2025 session; effective 2025-09-01",
+      "lastVerified": "2026-10-12",
+      "note": "Section 12 separates initial law effectiveness from compliance after agency rules; current agency announcement supplies the implemented May 28 date."
+    },
+    {
+      "id": "crash-data",
+      "label": "NHTSA Standing General Order: reporting and data limitations",
+      "href": "https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting",
+      "publisher": "National Highway Traffic Safety Administration",
+      "date": "2025 amendment effective 2025-06-16; current release through 2026-08-17",
+      "lastVerified": "2026-10-12",
+      "note": "ADS and Level 2 ADAS reporting conditions differ. Incident counts are not exposure-normalized, may have incomplete information and need careful entity/deduplication treatment."
+    }
+  ],
+  "image": "/images/social/texas-automated-vehicle-authorization.png",
+  "resources": [
+    {
+      "label": "Texas autonomy source and decision ledger",
+      "href": "/research/texas-autonomy-library-2026-10-13.json",
+      "description": "Primary records, declared comparisons and update triggers for autonomous mobility, freight and the Texas business library.",
+      "format": "JSON"
+    }
+  ]
+}
