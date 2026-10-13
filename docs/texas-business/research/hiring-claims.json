@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "articleSlug": "texas-hiring-labor-cost-planning",
+  "researchCutoff": "2026-10-12",
+  "status": "released to root after scoped checks",
+  "sourcePolicy": "Primary TWC/BLS releases and definitions; recommendation and hypothetical scenario explicitly separated. No causality, candidate supply or observed hiring outcomes inferred from industry aggregates.",
+  "observations": {
+    "twcAugust2026": {
+      "seasonallyAdjustedNonfarmJobs": 14469300,
+      "monthlyJobChange": 5600,
+      "annualJobChange": 159400,
+      "seasonallyAdjustedUnemploymentPercent": 4.4,
+      "unadjustedMetroUnemploymentPercent": {
+        "Austin": 3.9,
+        "DFW": 4.4,
+        "Houston": 5.0
+      },
+      "statewideOnlineAdsGeneralMaintenanceAndRepair": 8972
+    },
+    "blsAugust2026Manufacturing": {
+      "unit": "jobs; source thousands multiplied by 1000",
+      "adjustment": "not seasonally adjusted",
+      "status": "preliminary",
+      "Austin": {
+        "jobs": 87800,
+        "annualPercentChange": 2.9
+      },
+      "DFW": {
+        "jobs": 312700,
+        "annualPercentChange": -0.5
+      },
+      "Houston": {
+        "jobs": 240400,
+        "annualPercentChange": -0.2
+      }
+    },
+    "blsMay2025HourlyMeanUSD": {
+      "DFW": {
+        "production": 23.83,
+        "allOccupations": 33.96
+      },
+      "Houston": {
+        "production": 25.52,
+        "allOccupations": 32.51
+      }
+    }
+  },
+  "claims": [
+    {
+      "id": "hiring-01",
+      "claim": "August statewide jobs, monthly change and unemployment; metro unadjusted unemployment; maintenance advertisements",
+      "sourceId": "twc-review",
+      "primaryUrl": "https://texaslmi.com/api/GetHomeLinks/TLMR",
+      "sourceDate": "2026-09",
+      "referencePeriod": "2026-08",
+      "pinpoint": "PDF pages 2, 5, 6, 8",
+      "status": "agency reported estimates; revised/preliminary as applicable",
+      "qualification": "SA state unemployment differs in adjustment basis from NSA metro rates; jobs are not people, ads are not hires."
+    },
+    {
+      "id": "hiring-02",
+      "claim": "September reference-month release is scheduled October 16 after cutoff",
+      "sourceId": "release-schedule",
+      "primaryUrl": "https://texaslmi.com/api/GetHomeLinks/ReleaseSchedule",
+      "sourceDate": "2026-03-03",
+      "pinpoint": "Page 1",
+      "status": "published schedule, future release not guaranteed"
+    },
+    {
+      "id": "hiring-03",
+      "claim": "DFW August manufacturing 312.7 thousand and −0.5% annual",
+      "sourceId": "dallas-jobs",
+      "primaryUrl": "https://www.bls.gov/eag/eag.tx_dallas_msa.htm",
+      "referencePeriod": "2026-08",
+      "pinpoint": "Manufacturing row, annual change row and footnotes",
+      "status": "preliminary NSA jobs",
+      "qualification": "All industry jobs, not qualified worker availability."
+    },
+    {
+      "id": "hiring-04",
+      "claim": "Houston August manufacturing 240.4 thousand and −0.2% annual",
+      "sourceId": "houston-jobs",
+      "primaryUrl": "https://www.bls.gov/eag/eag.tx_houston_msa.htm",
+      "referencePeriod": "2026-08",
+      "pinpoint": "Manufacturing row and footnotes",
+      "status": "preliminary NSA jobs"
+    },
+    {
+      "id": "hiring-05",
+      "claim": "Austin August manufacturing 87.8 thousand and +2.9% annual",
+      "sourceId": "austin-jobs",
+      "primaryUrl": "https://www.bls.gov/eag/eag.tx_austin_msa.htm",
+      "referencePeriod": "2026-08",
+      "pinpoint": "Manufacturing row and footnotes",
+      "status": "preliminary NSA jobs"
+    },
+    {
+      "id": "hiring-06",
+      "claim": "DFW wage means and May 2025 reference lag",
+      "sourceId": "dallas-wages",
+      "primaryUrl": "https://www.bls.gov/regions/southwest/news-release/occupationalemploymentandwages_dallasfortworth.htm",
+      "sourceDate": "2026-08-13",
+      "referencePeriod": "2025-05",
+      "pinpoint": "Table A",
+      "status": "published survey estimate",
+      "qualification": "Major-group composition differs across metros; not matching-role offer data."
+    },
+    {
+      "id": "hiring-07",
+      "claim": "Houston wage means and May 2025 reference lag",
+      "sourceId": "houston-wages",
+      "primaryUrl": "https://www.bls.gov/regions/southwest/news-release/OccupationalEmploymentandWages_Houston.htm",
+      "sourceDate": "2026-08-13",
+      "referencePeriod": "2025-05",
+      "pinpoint": "Table A",
+      "status": "published survey estimate"
+    },
+    {
+      "id": "hiring-08",
+      "claim": "OEWS uses six panels and excludes specified employer costs/premiums",
+      "sourceId": "wage-method",
+      "primaryUrl": "https://www.bls.gov/oes/current/oes_tec.htm",
+      "referencePeriod": "2025-05",
+      "pinpoint": "Scope, Concepts and Estimation methodology",
+      "status": "official method",
+      "qualification": "Wages from earlier panels are adjusted to the reference period; estimates do not constitute historical unadjusted panel averages."
+    },
+    {
+      "id": "hiring-09",
+      "claim": "Unemployment is not a qualification, commute or willingness screen",
+      "sourceId": "unemployment-definition",
+      "primaryUrl": "https://www.bls.gov/cps/definitions.htm",
+      "pinpoint": "Unemployed and Civilian labor force definitions",
+      "status": "official definition; role-availability implication is interpretation"
+    }
+  ],
+  "calculations": [
+    {
+      "id": "twenty-person-payroll",
+      "status": "declared hypothetical, not observed business result",
+      "inputs": {
+        "people": 20,
+        "paidHoursPerPersonYear": 2080,
+        "hourlyBaseUSD": [
+          30,
+          32
+        ],
+        "burdenFraction": 0.25,
+        "lostContributionUSDPerBusinessDay": 5000
+      },
+      "formulas": [
+        "base=people*paidHours*hourlyBase",
+        "loaded=base*(1+burdenFraction)",
+        "incrementalLoaded=1664000-1560000=104000",
+        "equivalentDelayDays=104000/5000=20.8"
+      ],
+      "results": {
+        "baseUSD": [
+          1248000,
+          1331200
+        ],
+        "burdenUSD": [
+          312000,
+          332800
+        ],
+        "loadedUSD": [
+          1560000,
+          1664000
+        ],
+        "incrementalUSD": 104000,
+        "equivalentDelayDays": 20.8
+      },
+      "qualification": "No recruiting response to pay assumed. Loss applies only if staffing gap binds production; contribution excludes avoidable costs; recurring annual pay and scenario delay are distinguished."
+    }
+  ],
+  "updateTriggers": [
+    "Next TWC release or revision; preserve original and revised observation",
+    "New BLS OEWS reference year or methods",
+    "Local relevant-employer hiring change with primary evidence",
+    "Observed role-level acceptance, start, training or retention divergence"
+  ],
+  "remainingUncertainty": [
+    "No October role-specific offer or candidate-availability observations were supplied or invented.",
+    "No pay-to-hiring causal effect is established.",
+    "Live TWC/BLS endpoints can advance or revise; retained observations identify the cutoff."
+  ]
+}

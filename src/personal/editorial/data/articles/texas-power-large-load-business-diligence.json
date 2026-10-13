@@ -1,0 +1,337 @@
+{
+  "slug": "texas-power-large-load-business-diligence",
+  "path": "/research/texas/texas-power-large-load-business-diligence",
+  "aliases": [],
+  "title": "Secure the Power Before Committing the Site",
+  "displayTitle": "Power Before Property",
+  "seoTitle": "Texas Power Availability: ERCOT, SB6 and Large Load Diligence",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "A business guide to usable megawatts, connection evidence, capital commitments and interruption risk under Texas’s changing large-load framework.",
+  "seoDescription": "Assess Texas power availability under ERCOT and SB6: large-load rules, conditional connections, financial security, data-center audits and site diligence.",
+  "searchTerms": [
+    "Texas business electricity ERCOT SB6 large load interconnection data center power site selection Batch Zero"
+  ],
+  "date": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "11 MIN",
+  "openingPresentation": "integrated",
+  "content": [
+    "A Texas site can have attractive land, a negotiated electricity price and an ambitious power request while its operating date remains unresolved. Each document answers a different question. A business committing to a factory, data center or major expansion needs evidence that the right quantity of power can reach the facility when the business needs it.",
+    "The distinction became more consequential on October 8, 2026, when Texas’s large-load interconnection standards took effect. Meanwhile, ERCOT’s September classifications remained conditional, with verification still required. Treating either an old utility agreement or a place in the connection process as finished diligence can put the real estate, equipment and customer schedule ahead of the power. [Effective standards](#source-interconnection-rule); [conditional classifications](#source-conditional-classification).",
+    "This investigation explains how to assess an ERCOT-connected site as of October 12, 2026. The practical objective is an investment case built around documented capacity, dated conditions, financial exposure and an operating plan for interruptions. The public record supports those questions. It does not establish a particular site’s connection date or future electricity bill."
+  ],
+  "sections": [
+    {
+      "id": "request-versus-availability",
+      "title": "The queue describes interest; the site needs an allocation",
+      "paragraphs": [
+        "ERCOT’s July 29 presentation reported approximately 474 GW of large loads seeking interconnection, using June 2026 information; about 90% were data centers. These are requested gigawatts across the large-load pipeline. They are not operating demand, verified construction, or capacity promised to businesses. A request total should therefore retain its date and status whenever it appears in a market presentation. [ERCOT grid assessment, page 6](#source-grid-assessment).",
+        "ERCOT made the same distinction in its April preliminary forecast. The agency reported approximately 367,790 MW of demand by 2032, said the figure was higher than expected future growth, and expressly distinguished the planning snapshot from a prediction of what would be built. That April forecast and June queue describe different populations and times. Subtracting one from the other would not measure spare power. [Preliminary forecast](#source-preliminary-forecast).",
+        "For a site decision, replace the statewide headline with a dated account of the facility’s own path. Identify its delivery provider, transmission provider, connection point, requested peak demand, phased allocation and remaining prerequisites. Confirm the power region first: this article concerns ERCOT and the ERCOT provisions of SB6. A location elsewhere in Texas needs its own utility and regional analysis. [SB6 geographic scope](#source-sb6-text).",
+        "An electricity supply agreement also needs to be read alongside the delivery evidence. A commercial price can make a project attractive without resolving whether the necessary network facilities or energization approvals are ready. The business case needs both. For the separate engineering question of what a facility megawatt says about computing capacity, see [The AI Megawatt Is Not a Megawatt](/research/ai-systems/the-ai-megawatt)."
+      ]
+    },
+    {
+      "id": "current-rules",
+      "title": "Identify which requirements actually govern the project",
+      "paragraphs": [
+        "SB6 was signed and became effective on June 20, 2025. The statute directed the Public Utility Commission of Texas to develop several distinct mechanisms. Passage of the law did not mean every rule, agreement and ERCOT operating process was available that day. [Legislative history](#source-sb6-history).",
+        "The adopted §25.194 standards took effect October 8, 2026. They cover qualifying loads that had not energized: a new single-site connection of at least 75 MW; an expansion reaching 75 MW for the first time; an existing larger site adding at least 75 MW; and covered co-location. For expansions, the rule applies to the incremental addition. Read the actual applicability provision against the project’s configuration. [§25.194(b)](#source-interconnection-rule).",
+        "Earlier agreements deserve scrutiny. Batch Zero’s transitional provisions include credits for prior payments and limited direct-interconnection-cost treatment for specified older agreements. Reconcile the documents clause by clause. A seller’s statement that a site is grandfathered needs a written explanation of which obligation is covered and which survives. [§25.194(h)](#source-interconnection-rule)."
+      ]
+    },
+    {
+      "id": "connection-evidence",
+      "title": "Follow the evidence through each connection stage",
+      "paragraphs": [
+        "On August 3, ERCOT paused the Batch Zero study process and delayed final classifications; it also paused energization approvals for data centers and cryptocurrency facilities of at least 75 MW. Its August 20 presentation described verification and additional information gathering, with the eligibility report planned for December 10. Those dates describe the agency’s stated process, not a promise that every qualifying site will be ready then. [Audit presentation, pages 2 and 10](#source-audit-process).",
+        "The next important observation is more precise than a general claim that Texas stopped all development. ERCOT issued provisional classifications on September 3. Inclusion could depend on passing verification, curing dynamic-model deficiencies or obtaining a good-cause exception. Missing an applicable condition could disqualify a load. A conditional classification therefore advances the record while leaving material questions open. [September 3 notice](#source-conditional-classification).",
+        "Use the following comparison when evaluating a broker’s package, a development partner’s update or an internal investment memo. The right-hand column is a suggested diligence request, not a claim that any one document automatically authorizes operation. Keep the evidence tied to the exact facility and phase."
+      ],
+      "table": {
+        "caption": "What a power document establishes—and the next evidence to request",
+        "columns": [
+          "Evidence presented",
+          "What it establishes",
+          "Next diligence request"
+        ],
+        "rows": [
+          [
+            "Large-load request",
+            "Demand the applicant wants studied",
+            "Serial number, site boundary, phase dates and current classification"
+          ],
+          [
+            "Conditional Batch Zero classification",
+            "A provisional route with outstanding conditions",
+            "Verification outcome and a list of uncured conditions"
+          ],
+          [
+            "Interconnection study",
+            "Results for the studied configuration and assumptions",
+            "Allocated MW by year, limiting facilities and dependencies"
+          ],
+          [
+            "Funded utility agreement",
+            "Defined commercial commitments",
+            "Capacity schedule, remedies, withdrawal terms and unresolved approvals"
+          ],
+          [
+            "Energization approval",
+            "Permission under the relevant approval’s scope",
+            "Approved quantity, operating restrictions and commissioning prerequisites"
+          ],
+          [
+            "Commissioned facility",
+            "Equipment has reached a defined operating stage",
+            "Measured performance, redundancy tests and business-service acceptance"
+          ]
+        ],
+        "note": "The distinction between conditional classification and completed verification comes from ERCOT’s September notices. The remaining requests are an analytical framework; actual documents and sequencing depend on the project."
+      }
+    },
+    {
+      "id": "capital-commitments",
+      "title": "Model committed capital separately from electricity expense",
+      "paragraphs": [
+        "Under §25.194, the intermediate agreement carries a $100,000 study fee and $50,000/MW of requested peak demand in security. At the standard large-load interconnection agreement, security becomes the greater of $50,000/MW of contracted demand or allocated system-upgrade costs. Direct interconnection costs are paid through nonrefundable cash contribution in aid of construction, or CIAC. [§25.194(d), (f)](#source-interconnection-rule).",
+        "A model should keep four accounts: study expenditure, security, construction contributions and the recurring electricity bill. Security restricts financial capacity and may be supplied through an eligible instrument; it does not become electricity expense simply because it is expressed per megawatt. Cash construction payments and their recovery terms need their own treatment. Ask the finance team to model when each commitment is required, what can be credited and what is exposed if the development changes.",
+        "Consider two hypothetical sites for the same business. Assume the study allocates 80 MW to each; all security is posted as cash; no outstanding obligations complicate credits; and the listed upgrade and direct-connection costs are estimates supplied for this illustration. The figures below apply the rule’s security formula to those assumed inputs. They are not utility quotations or observed project outcomes."
+      ],
+      "table": {
+        "caption": "Illustrative comparison: the larger request does not produce more allocated capacity",
+        "columns": [
+          "Assumed or calculated item",
+          "Site A",
+          "Site B"
+        ],
+        "rows": [
+          [
+            "Requested peak demand: assumption",
+            "100 MW",
+            "80 MW"
+          ],
+          [
+            "Allocated contracted demand: assumption",
+            "80 MW",
+            "80 MW"
+          ],
+          [
+            "Intermediate security: requested MW × $50,000",
+            "$5.0 million",
+            "$4.0 million"
+          ],
+          [
+            "Allocated system-upgrade costs: assumption",
+            "$6.0 million",
+            "$3.0 million"
+          ],
+          [
+            "Agreement security: greater of 80 × $50,000 or upgrade costs",
+            "$6.0 million",
+            "$4.0 million"
+          ],
+          [
+            "Direct interconnection CIAC: assumption",
+            "$3.0 million",
+            "$4.2 million"
+          ],
+          [
+            "Study fee under the stated rule",
+            "$100,000",
+            "$100,000"
+          ]
+        ],
+        "note": "Calculated illustration, not an estimate of Texas market costs. Earlier security is assumed to be credited toward the later requirement, so the two security rows are not added together. Instrument costs, additional obligations, unused study-fee returns and project-specific terms are omitted."
+      }
+    },
+    {
+      "id": "compare-whole-project",
+      "title": "Compare the whole operating case",
+      "paragraphs": [
+        "Site B has the same assumed allocation, $2 million less agreement-stage security and $1.2 million more direct-connection CIAC. That does not identify a winner: liquidity, irreversible expenditure, credit support, timing and withdrawal exposure can change the comparison.",
+        "Now add the revenue schedule. Assume, solely for sensitivity analysis, that a delayed opening costs the business $150,000 per month in carrying expenses and unavailable contribution. An 18-month delay is $2.7 million: $150,000 multiplied by 18. That assumed exposure exceeds the example’s CIAC difference. The point is to obtain a defensible date range and price the dependency before purchasing long-lead equipment or promising a customer launch.",
+        "Operating expenditure needs its own boundary. At an assumed 80 MW allocation and 70% average load, annual energy is 490,560 MWh: 80 × 0.70 × 8,760. Applying an assumed $65/MWh supply price gives $31.89 million annually. This is arithmetic for a non-leap year, not a Texas price forecast or a total delivered bill; it excludes delivery charges, losses, contract adjustments and other costs.",
+        "Test a lower utilization case, a later ramp, an outage case and the exact tariff treatment. SB6 also required a review of transmission-cost recovery, with rule changes due by December 31, 2026. That statutory deadline does not establish the final charges a particular buyer will pay. Keep any assumed savings dependent on an identified, effective tariff or contract term. [SB6, section 6](#source-sb6-text)."
+      ]
+    },
+    {
+      "id": "audits-and-permits",
+      "title": "Keep the two RFIs and the permitting path distinct",
+      "paragraphs": [
+        "ERCOT’s September 9 Batch Zero verification RFI asked for project-eligibility evidence through its RIOO platform. Responses, documents and notarized attestations were due within ten business days of issuance, with an extension request of no more than five business days. Failure to complete verification could exclude the load from Batch Zero. The deadline belongs to the individual RFI, not to a single statewide filing date. [Verification notice](#source-verification-rfi).",
+        "The September 14 State and Community Impact RFI was a separate exercise. It covered specified conditionally classified Batch Zero data centers and specified substantiated facilities requesting at least 25 MW and less than 75 MW. The notice set October 12, 2026, at 5 p.m. Central Prevailing Time as the response deadline. ERCOT expected the resulting report by December 10. Those are a submission deadline and a planned report date; neither is an energization date. [Impact notice](#source-community-rfi).",
+        "The water questions were issued in partnership with the Texas Water Development Board. The notice states that incomplete responses to that section may carry consequences under the Water Code, including potential criminal penalties. Other nonresponse is reported to the PUCT and governor’s office. That difference makes careful evidence ownership consequential: a developer should know who supplied each number, its measurement boundary and the documents supporting it. [Water and response provisions](#source-community-rfi).",
+        "On September 21, the governor directed TCEQ to halt permits sought by data centers until ERCOT completed its audit, and requested a compliance update by October 19. This source records a governmental directive. It does not establish that a particular application has been released, denied or approved. A business using on-site generation to manage grid risk must therefore verify the environmental and water path alongside the electrical path. [Permit-halt directive](#source-permit-directive).",
+        "Build one consistent evidence package for the project’s load ramp, power supply, cooling, water, ownership and development schedule. Reconcile it with every relevant submission. A change in cooling technology can affect water assumptions; a different generation plan can affect permits; a changed phase date can alter the commercial case. The operating team needs a change process that reaches each responsible adviser and counterparty."
+      ]
+    },
+    {
+      "id": "interruption-and-generation",
+      "title": "Design for the interruption obligation before selling uptime",
+      "paragraphs": [
+        "SB6 contains distinct interruption mechanisms. It directs protocols for firm load shed for transmission-voltage loads interconnected after December 31, 2025, with statutory exceptions for critical industrial loads and designated critical natural-gas facilities. Separately, it directs a reliability service procuring reductions from loads of at least 75 MW, with at least 24-hour notice. The service’s notice requirement should not be read as a promise of 24 hours before every grid interruption. [§39.170 in SB6](#source-sb6-text).",
+        "The implementation distinction matters to revenue projections. The August 14 publication of §25.521 was a proposal. ERCOT’s September implementation report still described the demand-management work as in progress. These materials do not establish an operating service available to this hypothetical facility. This article therefore assigns no revenue to that program. A final rule and current participation instructions must be verified before changing that assumption. [Proposed service](#source-demand-service-proposal); [September implementation status](#source-implementation-status).",
+        "Evaluate which operations can stop safely, their restart time and the business loss if an interruption occurs at an awkward moment. An interruption-tolerant batch workload and a continuous manufacturing process may assign different values to the same available megawatts. Customer commitments should reflect the operating restrictions that the facility can actually satisfy. Test the transition, communications and restart sequence against the proposed service level.",
+        "Self-supply also needs a precise description. A generator next to a facility can have a different connection arrangement from non-exporting backup. SB6’s existing-generator provisions address the effect on the wider grid; ERCOT’s July example distinguished existing generation from a new generator with a co-located load. Match the diagram, agreements and approvals, then test usable output, startup time, fuel and permitted operating hours. [Existing-generation provisions](#source-sb6-text); [ERCOT example, page 2](#source-grid-assessment)."
+      ]
+    },
+    {
+      "id": "investment-decision",
+      "title": "Make the commitment conditional on usable evidence",
+      "paragraphs": [
+        "Attach each spending commitment to evidence. Where commercially available, preserve an option while capacity is unresolved and tie construction obligations to defined milestones. Align equipment delivery with the documented commissioning sequence. These are proposed controls; their availability and enforceability depend on the transaction.",
+        "The public evidence also supplies a useful counterweight to alarmist conclusions. A huge requested-load pipeline is not a forecast of guaranteed construction. Conditional classifications show that the process continues while projects are tested. The new standards aim to make commitments more concrete. None of those observations establishes abundant power at every site, inevitable shortages, or a universal increase in electricity prices.",
+        "The unresolved facts are local: allocated MW and years, study assumptions, the facilities on the critical path, approval conditions, security and construction exposure, tariff terms, and the operations that can tolerate an interruption. Obtain those facts before ranking locations. A larger request or a lower headline price can win a presentation while a smaller, better documented allocation wins the business case."
+      ],
+      "bullets": [
+        "Confirm the power region and the exact delivery and transmission counterparties.",
+        "Request the project’s current classification, verification conditions and phase-specific capacity evidence.",
+        "Reconcile power, water, generation and permitting assumptions across the project’s submissions.",
+        "Model fees, security, construction payments, recurring charges and delay exposure separately.",
+        "Test interruption, backup and restart against the customer promise.",
+        "Record the conditions that justify each irreversible commitment, and the next source update that could change them."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "sb6-history",
+      "label": "SB6 legislative history, 89th Regular Session",
+      "href": "https://capitol.texas.gov/billlookup/History.aspx?Bill=SB6&LegSess=89R",
+      "publisher": "Texas Legislature Online",
+      "date": "2025-06-20",
+      "lastVerified": "2026-10-12",
+      "note": "Records the governor’s signature and immediate effective date."
+    },
+    {
+      "id": "sb6-text",
+      "label": "SB6 enrolled text",
+      "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00006F.HTM",
+      "publisher": "Texas Legislature Online",
+      "date": "2025-05-30",
+      "lastVerified": "2026-10-12",
+      "note": "Final enrolled text, not an earlier committee substitute. Sections 2, 4 and 6 establish the statutory scope, interruption mechanisms, co-location provisions and cost-recovery review."
+    },
+    {
+      "id": "interconnection-rule",
+      "label": "Adopted 16 TAC §25.194: Large Load Interconnection Standards",
+      "href": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+      "publisher": "Texas Secretary of State / Public Utility Commission of Texas",
+      "date": "2026-10-02",
+      "lastVerified": "2026-10-12",
+      "note": "Filed September 18; effective October 8, 2026. Applicability and transitional treatment must be read against the specific project and its prior agreements."
+    },
+    {
+      "id": "grid-assessment",
+      "label": "ERCOT Senate grid assessment",
+      "href": "https://www.ercot.com/files/docs/2026/07/29/ERCOT-Senate-July-29-Panel-1-Assessing-The-Grid.pdf",
+      "publisher": "ERCOT",
+      "date": "2026-07-29",
+      "lastVerified": "2026-10-12",
+      "note": "Page 6 reports June 2026 large-load requests; page 2 illustrates existing-generation co-location. Request capacity is not operating demand."
+    },
+    {
+      "id": "preliminary-forecast",
+      "label": "Preliminary Long-Term Load Forecast, 2026–2032",
+      "href": "https://www.ercot.com/news/release/04152026-ercot-releases-preliminary",
+      "publisher": "ERCOT",
+      "date": "2026-04-15",
+      "lastVerified": "2026-10-12",
+      "note": "A dated preliminary planning snapshot. ERCOT expressly distinguished it from a prediction of what would be built; it is not presented here as the latest forecast."
+    },
+    {
+      "id": "audit-process",
+      "label": "Batch Zero verification and audit presentation",
+      "href": "https://www.ercot.com/files/docs/2026/08/20/Batch-Zero-Verification-and-Audit-PUCT-Presentation.pdf",
+      "publisher": "ERCOT",
+      "date": "2026-08-20",
+      "lastVerified": "2026-10-12",
+      "note": "Pages 2 and 10 describe the August pause and planned eligibility-verification report. Subsequent September notices establish classifications and actual RFI issuance."
+    },
+    {
+      "id": "conditional-classification",
+      "label": "M-A080326-04: Batch Zero conditional classifications",
+      "href": "https://www.ercot.com/services/comm/mkt_notices/M-A080326-04",
+      "publisher": "ERCOT",
+      "date": "2026-09-03",
+      "lastVerified": "2026-10-12",
+      "note": "Provisional classifications subject to verification, model-data cures or specified exceptions; this notice is not an energization approval."
+    },
+    {
+      "id": "verification-rfi",
+      "label": "M-A090926-01: Batch Zero verification RFI",
+      "href": "https://www.ercot.com/services/comm/mkt_notices/M-A090926-01",
+      "publisher": "ERCOT",
+      "date": "2026-09-09",
+      "lastVerified": "2026-10-12",
+      "note": "Separate eligibility RFI; response timing runs from issuance to each recipient."
+    },
+    {
+      "id": "community-rfi",
+      "label": "M-B091426-01: Data Center State and Community Impact RFI",
+      "href": "https://www.ercot.com/services/comm/mkt_notices/M-B091426-01",
+      "publisher": "ERCOT",
+      "date": "2026-09-14",
+      "lastVerified": "2026-10-12",
+      "note": "Defines covered projects, October 12 response deadline, TWDB water-question partnership and expected December 10 report. Separate from eligibility verification."
+    },
+    {
+      "id": "permit-directive",
+      "label": "Governor’s directive to halt TCEQ data-center permits",
+      "href": "https://gov.texas.gov/news/post/governor-abbott-directs-tceq-to-halt-data-center-permits",
+      "publisher": "Office of the Texas Governor",
+      "date": "2026-09-21",
+      "lastVerified": "2026-10-12",
+      "note": "Evidence of the directive and requested October 19 update; not evidence of a project-specific permit outcome or the audit’s completion."
+    },
+    {
+      "id": "demand-service-proposal",
+      "label": "Proposed 16 TAC §25.521: Large Load Demand Management Service",
+      "href": "https://www.sos.texas.gov/texreg/archive/August142026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html",
+      "publisher": "Texas Secretary of State / Public Utility Commission of Texas",
+      "date": "2026-08-14",
+      "lastVerified": "2026-10-12",
+      "note": "Proposal filed July 30, 2026. Proposed program parameters are not modeled as effective commercial terms."
+    },
+    {
+      "id": "implementation-status",
+      "label": "89th Legislative Session: ERCOT implementation status, September 2026",
+      "href": "https://www.ercot.com/files/docs/2025/09/15/89th-Legislative-Session-PPTX-ERCOT-Status-September-2026.pdf",
+      "publisher": "ERCOT",
+      "date": "2026-09-15",
+      "lastVerified": "2026-10-12",
+      "note": "The cover and current index identify September 2026 despite the URL directory. Pages 10–12 record demand-management implementation in progress; this dated status does not establish later final adoption."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Does a place in ERCOT’s large-load queue guarantee power for a Texas site?",
+      "answer": "No. ERCOT’s September 3 classifications were provisional and could depend on verification, model-data corrections or a good-cause exception. Ask for the facility’s allocation, remaining conditions and energization evidence. [Classification notice](#source-conditional-classification)."
+    },
+    {
+      "question": "What should a Texas business budget beyond its electricity price?",
+      "answer": "Separate study fees, financial security, construction contributions, delivery and tariff charges, and delay exposure. The effective interconnection rule establishes security and direct-connection obligations; the project’s actual agreements establish its amounts and timing. [§25.194](#source-interconnection-rule)."
+    },
+    {
+      "question": "Does SB6 guarantee 24 hours’ warning before every power interruption?",
+      "answer": "No. The 24-hour provision concerns the statutory large-load demand-management service. Firm load shed and other project operating restrictions need separate analysis. Verify the applicable protocols and the facility’s interruption plan. [SB6, §39.170](#source-sb6-text)."
+    },
+    {
+      "question": "Are ERCOT’s eligibility audit and community-impact RFI the same filing?",
+      "answer": "No. The eligibility RFI issued September 9 and the impact RFI issued September 14 require separate responses. The impact notice set October 12, 2026, at 5 p.m. CPT as its response deadline; the eligibility deadline runs from individual issuance. [Eligibility RFI](#source-verification-rfi); [impact RFI](#source-community-rfi)."
+    }
+  ],
+  "image": "/images/social/texas-power-large-load-business-diligence.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-business-research-2026-10-12.json",
+      "description": "Primary-source claims, research dates, update triggers, and decision checklists for this edition.",
+      "format": "JSON"
+    }
+  ],
+  "evidenceBoundary": "ERCOT-region legislation, adopted standards, and published agency notices checked October 12, 2026. Queue and forecast figures retain their own observation dates. Site comparisons, energy prices, and delay costs are declared illustrative assumptions; actual allocation, energization, tariffs, and permits require project documents."
+}

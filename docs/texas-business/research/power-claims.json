@@ -1,0 +1,185 @@
+{
+  "articleSlug": "texas-power-large-load-business-diligence",
+  "articlePath": "/research/texas/texas-power-large-load-business-diligence",
+  "cutoff": "2026-10-12",
+  "sourcePolicy": "Primary public sources only; retain source date, scope, denominator, implementation state and project-specific unknowns.",
+  "claims": [
+    {
+      "id": "enactment",
+      "claim": "SB6 was signed and became effective June 20, 2025.",
+      "sources": [
+        {
+          "url": "https://capitol.texas.gov/billlookup/History.aspx?Bill=SB6&LegSess=89R",
+          "date": "2025-06-20",
+          "status": "enacted; effective immediately"
+        }
+      ],
+      "recheckTrigger": "Amending legislation or a change in the operative statutory provisions."
+    },
+    {
+      "id": "interconnection-rule-status-and-scope",
+      "claim": "Adopted §25.194 was filed September 18, published October 2 and effective October 8, 2026. Applicability covers specified non-energized single-site new loads, expansions and co-location; incremental additions are the relevant expansion scope.",
+      "sources": [
+        {
+          "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+          "date": "2026-10-02",
+          "status": "adopted; effective 2026-10-08",
+          "locator": "§25.194(b), (h), and effective-date notice"
+        }
+      ],
+      "recheckTrigger": "Amendment, litigation affecting applicability, or transaction-specific grandfathering claim. Do not reuse March 2026 proposal thresholds or fee structure."
+    },
+    {
+      "id": "financial-commitments",
+      "claim": "Intermediate study fee $100,000; intermediate security $50,000/MW requested or incremental demand. SLLIA security is greater of $50,000/MW contracted demand or allocated system-upgrade costs. Direct-interconnection costs use cash CIAC; prior security may be credited under the rule.",
+      "sources": [
+        {
+          "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+          "date": "2026-10-02",
+          "status": "effective rule",
+          "locator": "§25.194(d)(2), (d)(3), (f)(2), (h)"
+        }
+      ],
+      "recheckTrigger": "Rule inflation adjustments, subsequent tariff/cost-allocation rules, SLLIA adoption, or actual project agreements and credit instruments."
+    },
+    {
+      "id": "large-load-request-total",
+      "claim": "ERCOT reported approximately 474 GW of large-load interconnection requests using June 2026 information; about 90% data centers. These are requests, not operational power or guaranteed construction.",
+      "sources": [
+        {
+          "url": "https://www.ercot.com/files/docs/2026/07/29/ERCOT-Senate-July-29-Panel-1-Assessing-The-Grid.pdf",
+          "date": "2026-07-29",
+          "status": "dated reported request snapshot",
+          "locator": "Page 6"
+        }
+      ],
+      "units": "GW requested; percent of large-load request capacity by project type",
+      "recheckTrigger": "New ERCOT request, verification, allocation or realized-load report. Do not label this October 2026 operating demand."
+    },
+    {
+      "id": "preliminary-forecast-boundary",
+      "claim": "April 15 preliminary forecast reported approximately 367,790 MW demand by 2032. ERCOT described it as higher than expected future growth and not a prediction of what would be built.",
+      "sources": [
+        {
+          "url": "https://www.ercot.com/news/release/04152026-ercot-releases-preliminary",
+          "date": "2026-04-15",
+          "status": "preliminary planning snapshot; expressly not latest forecast in article"
+        }
+      ],
+      "units": "MW demand in the ERCOT region by forecast year 2032",
+      "recheckTrigger": "Verified revised long-term forecast. Do not subtract a queue snapshot from forecast demand to estimate spare capacity."
+    },
+    {
+      "id": "audit-and-classification-sequence",
+      "claim": "ERCOT described an August 3 Batch Zero pause and delayed final classification, then issued conditional classifications September 3 subject to verification/model cures/possible exceptions. December 10 was the August presentation’s planned eligibility-report date.",
+      "sources": [
+        {
+          "url": "https://www.ercot.com/files/docs/2026/08/20/Batch-Zero-Verification-and-Audit-PUCT-Presentation.pdf",
+          "date": "2026-08-20",
+          "status": "agency process update; future dates are planned",
+          "locator": "Pages 2 and 10"
+        },
+        {
+          "url": "https://www.ercot.com/services/comm/mkt_notices/M-A080326-04",
+          "date": "2026-09-03",
+          "status": "conditional classifications issued; not energization approval"
+        }
+      ],
+      "recheckTrigger": "Final eligibility report, project condition resolution, new exception or energization notice."
+    },
+    {
+      "id": "eligibility-rfi",
+      "claim": "September 9 eligibility RFI required complete responses within 10 business days of individual issuance; extension request no more than 5 business days. Failed or incomplete verification can exclude a load from Batch Zero.",
+      "sources": [
+        {
+          "url": "https://www.ercot.com/services/comm/mkt_notices/M-A090926-01",
+          "date": "2026-09-09",
+          "status": "RFI issued; recipient-specific response deadlines"
+        }
+      ],
+      "recheckTrigger": "Supplemental RFIs, extension confirmation, verification outcome or a new notice changing the deadline."
+    },
+    {
+      "id": "community-rfi",
+      "claim": "Separate September 14 RFI covered specified conditional Batch Zero data centers and specified substantiated 25-to-under-75-MW facilities. Responses due October 12 at 5 p.m. CPT; report expected no later than December 10. Section C water questions issued for TWDB may carry Water Code consequences for incomplete responses.",
+      "sources": [
+        {
+          "url": "https://www.ercot.com/services/comm/mkt_notices/M-B091426-01",
+          "date": "2026-09-14",
+          "status": "RFI issued; deadline stated; report planned"
+        }
+      ],
+      "recheckTrigger": "Deadline extension or subsequent notice, new classifications, December report or agency Water Code interpretation. Do not turn expected report publication into a connection approval."
+    },
+    {
+      "id": "tceq-directive",
+      "claim": "Governor directed TCEQ September 21 to halt data-center permits until ERCOT audit completion and requested a compliance update by October 19.",
+      "sources": [
+        {
+          "url": "https://gov.texas.gov/news/post/governor-abbott-directs-tceq-to-halt-data-center-permits",
+          "date": "2026-09-21",
+          "status": "governmental directive; no project outcome established"
+        }
+      ],
+      "recheckTrigger": "October 19 compliance update, audit completion, directive amendment, TCEQ implementation or a specific permit decision."
+    },
+    {
+      "id": "curtailment-and-program-state",
+      "claim": "SB6 distinguishes post-December-31-2025 transmission-voltage firm-load-shed protocols with critical-load exceptions from a >=75-MW demand-management service with a 24-hour notice provision. §25.521 published August 14 was proposed; September ERCOT report described implementation as in progress. No service revenue is assumed.",
+      "sources": [
+        {
+          "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00006F.HTM",
+          "date": "2025-05-30",
+          "status": "enrolled statutory requirements",
+          "locator": "§39.170"
+        },
+        {
+          "url": "https://www.sos.texas.gov/texreg/archive/August142026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html",
+          "date": "2026-08-14",
+          "status": "proposed §25.521; not treated as effective terms"
+        },
+        {
+          "url": "https://www.ercot.com/files/docs/2025/09/15/89th-Legislative-Session-PPTX-ERCOT-Status-September-2026.pdf",
+          "date": "2026-09-15",
+          "status": "dated implementation-in-progress report",
+          "locator": "Pages 10–12"
+        }
+      ],
+      "recheckTrigger": "Final adoption and effective date, implemented ERCOT protocols and actual program participation/procurement notices. Public retrieval of the PUCT project page failed; do not claim final adoption was exhaustively ruled out."
+    },
+    {
+      "id": "generation-and-cost-recovery",
+      "claim": "SB6 addresses new co-located loads at specified existing stand-alone generators; ERCOT’s July example distinguishes existing from new co-located generation. SB6 section 6 required transmission-cost-recovery review and rules by December 31, 2026; this deadline does not determine a buyer’s tariff.",
+      "sources": [
+        {
+          "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00006F.HTM",
+          "date": "2025-05-30",
+          "status": "enrolled statutory provisions",
+          "locator": "§39.169 and section 6"
+        },
+        {
+          "url": "https://www.ercot.com/files/docs/2026/07/29/ERCOT-Senate-July-29-Panel-1-Assessing-The-Grid.pdf",
+          "date": "2026-07-29",
+          "status": "agency example",
+          "locator": "Page 2"
+        }
+      ],
+      "recheckTrigger": "Co-location decision for the actual project, amended rules, December cost-recovery rules, current utility tariffs."
+    },
+    {
+      "id": "illustrative-calculations",
+      "claim": "Two hypothetical 80-MW allocations: Site A requests 100 MW, gives $5m intermediate security and $6m SLLIA security on assumed $6m upgrades; Site B requests 80 MW, gives $4m intermediate and SLLIA security on assumed $3m upgrades. Assumed CIAC $3m/$4.2m. 18 months × $150k = $2.7m delay sensitivity. 80 MW × 70% × 8,760 h = 490,560 MWh; × assumed $65/MWh = $31,886,400 supply expense.",
+      "sources": [
+        {
+          "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+          "date": "2026-10-02",
+          "status": "formula source only; every project and price input explicitly illustrative",
+          "locator": "§25.194(d), (f)"
+        }
+      ],
+      "status": "calculated illustration, not observed project data or tariff forecast",
+      "recheckTrigger": "Any changed rule formula or input. Preserve explicit assumptions, do not add intermediate and SLLIA security, and do not label supply-only calculation total delivered cost."
+    }
+  ],
+  "remainingBoundary": "Root must integrate the article, validate rendered anchors and tables, inspect desktop and phone presentation, and verify publication separately. No actual site contract, utility study, permit file, operational program participation or future bill has been verified."
+}

@@ -1,0 +1,306 @@
+{
+  "slug": "texas-water-facility-site-diligence",
+  "path": "/research/texas/texas-water-facility-site-diligence",
+  "aliases": [],
+  "title": "Will the Water Reach the Facility When It Matters?",
+  "displayTitle": "Water at the Point of Use",
+  "seoTitle": "Texas Water Availability: Facility Site and Supply Diligence",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "Read the water right, supply contract, delivery system and drought obligations before turning a Texas location into an operating commitment.",
+  "seoDescription": "Assess Texas facility water supply: the 2027 State Water Plan, water rights, supplier contracts, groundwater rules, reuse, peak demand and drought exposure.",
+  "searchTerms": [
+    "Texas facility water supply",
+    "Texas water availability",
+    "industrial water contract Texas",
+    "2027 State Water Plan",
+    "Texas groundwater permit",
+    "water site selection"
+  ],
+  "date": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "10 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Public-source research verified October 12, 2026. No particular facility’s water right, supplier commitment, well performance, treatment design or permit outcome was verified. Site comparisons and financial inputs are explicitly hypothetical.",
+  "content": [
+    "An annual water allocation can look sufficient while a factory cannot run through its busiest day. A nearby reservoir can look reassuring while the supplier lacks the right, treatment capacity or contractual obligation to deliver the facility’s requirement. Water diligence has to follow the supply all the way to the process that consumes it.",
+    "Texas adopted the initial 2027 State Water Plan on July 23, 2026. Its enhanced amendment remained proposed at this review: comments closed September 25, and consideration of adoption was tentatively scheduled for December. That distinction matters when a business cites a planning project as support for a near-term opening. A strategy in the plan is useful evidence to investigate, but it is not a completed supply commitment. [Current plan status](#source-plan-status).",
+    "For a Texas manufacturing, computing or other water-dependent facility, the decision is whether the full supply arrangement can support the operating plan under ordinary conditions and the relevant shortage scenario. Start with the legal source, then test the contract, physical delivery, quality and interruption consequences."
+  ],
+  "sections": [
+    {
+      "id": "planning-and-delivery",
+      "title": "Use the state plan to find dependencies",
+      "paragraphs": [
+        "TWDB’s adoption announcement projects a 6% increase in total statewide water demand and a 10% decline in existing drought-reliable supplies between 2030 and 2080. These are long-horizon planning estimates across Texas, not a forecast of a particular supplier’s next-year shortage. The plan’s roughly 3,000 recommended projects are proposals for meeting needs, with sponsors, costs and dates to investigate. [July adoption announcement](#source-plan-adoption).",
+        "Locate the relevant water user group and supplier in the current plan and approved regional material. Trace the proposed source, conveyance, treatment and sponsor. Ask whether the facility’s opening depends on a project that is funded, permitted, under construction or still recommended. Record each stage separately and obtain the supplier’s current evidence before relying on its planning date.",
+        "The adopted plan’s website explicitly cautions that mapped proposed reservoir locations can be hypothetical for planning costs; actual siting depends on later studies, design and negotiations. A map is therefore a starting point for questions about a physical route. It cannot establish an easement, a construction schedule or water at the property line. [Plan maps and limitations](#source-plan-status).",
+        "A useful investment memo connects its water assumption to named assets and accountable counterparties. It should show which infrastructure exists today, which requires another entity’s work, and what happens if a phase slips. That lets the business compare a lower land price with the cost of carrying a facility that cannot yet operate."
+      ]
+    },
+    {
+      "id": "legal-source",
+      "title": "Identify who can supply which water",
+      "paragraphs": [
+        "Texas surface water is generally state water administered through water rights. TCEQ explains that rights have priority dates and that senior rights can take precedence during drought. Its definition of state water excludes percolating groundwater and specified runoff before it reaches a watercourse. The physical appearance of a source does not settle the legal category. [Surface-water guidance](#source-surface-rights).",
+        "When buying state water directly from a water-right holder, match the intended use and quantity to the underlying right. TCEQ describes submission of a qualifying supply contract, a new right using the contract as an alternate source, or an amendment by the holder, with specified exemptions. Do not treat that guidance as a requirement that every ordinary retail utility customer file a water-right contract. [Water supply contracts](#source-contracts).",
+        "Groundwater needs a different review. TWDB explains that groundwater conservation districts can regulate non-exempt well production and spacing, and each district has its own rules. Ownership of land and a productive-looking well do not establish permission for an industrial pumping schedule. Verify district boundaries, the actual permit, permitted use, production conditions and any proposed change. [Groundwater guidance](#source-groundwater).",
+        "Retain the chain between source authority and delivery. A supplier may buy from another supplier; a property may require a transferred agreement; a well may sit on land controlled by a different entity. Ask who has authority to commit the water and whether the transaction preserves the documents needed for the proposed facility."
+      ]
+    },
+    {
+      "id": "supplier-contract",
+      "title": "Turn a willingness to serve into defined obligations",
+      "paragraphs": [
+        "A statement that service is available should lead to specific questions: how much, at which delivery point, at what quality and pressure, from which date, for how long, and subject to which conditions? The responses need to match the design basis. An annual volume and a daily delivery limit are different commitments even if both are expressed as water supply.",
+        "TCEQ’s state-water contract guidance identifies the base right, parties, contract dates, annual acre-foot quantity, type of use and price as submission information. Those fields help establish the authorization record. An operator still needs commercial and engineering terms for its actual delivery, interruption rights, facilities, maintenance and remedies. [Contract information](#source-contracts).",
+        "The following review is a proposed diligence framework, not a universal list of terms Texas law guarantees. Have the supplier identify the operative document for each answer. Distinguish a binding commitment from an estimate and a proposed negotiation point."
+      ],
+      "table": {
+        "caption": "The question behind each water-supply document",
+        "columns": [
+          "Document or claim",
+          "What to verify",
+          "Business consequence"
+        ],
+        "rows": [
+          [
+            "Water right or well permit",
+            "Authorized holder, use, volume and conditions",
+            "A change in use may need additional authority"
+          ],
+          [
+            "Supply agreement",
+            "Term, daily limits, shortage allocation and transfer",
+            "Capacity and interruption exposure follow the agreement"
+          ],
+          [
+            "System capacity statement",
+            "Treatment, pipeline, pump and delivery-point limits",
+            "Source volume may exceed deliverable flow"
+          ],
+          [
+            "Drought contingency plan",
+            "Triggers, customer categories and required reductions",
+            "Operations need a defined shortage response"
+          ],
+          [
+            "Reuse or wastewater authorization",
+            "Allowed source, use and disposal path",
+            "Cooling design can depend on another approval"
+          ],
+          [
+            "Recommended planning project",
+            "Sponsor, approvals, finance and construction status",
+            "A planning date needs an executable dependency"
+          ]
+        ],
+        "note": "Analytical comparison. Obtain the actual local rules, permits and contracts; none of these generic document labels establishes a site’s approval."
+      }
+    },
+    {
+      "id": "peak-and-storage",
+      "title": "Calculate average, peak and recoverable storage separately",
+      "paragraphs": [
+        "Consider a hypothetical facility averaging 300,000 gallons a day over a 365-day year, with a peak-day requirement of 600,000 gallons. Annual use is 109.5 million gallons. Assume that two suppliers offer the annual quantities and daily limits below, both at the quality the process requires. The limits, prices and storage are invented comparison inputs, not quotations from Texas utilities.",
+        "Both annual offers exceed the assumed annual requirement. Site A’s assumed daily delivery falls 200,000 gallons short on a peak day. With 400,000 gallons of usable storage dedicated to that gap, it could cover two consecutive such days if delivery continues at 400,000 gallons per day. That calculation does not establish fire reserve, pressure, pump capacity, treatment losses or recovery time.",
+        "If demand returns to 300,000 gallons per day while delivery stays at 400,000, the depleted 400,000-gallon reserve takes four days to refill. A second peak arriving earlier changes the outcome. Write the sequence into the operating case rather than treating tank nameplate as permanent additional supply."
+      ],
+      "table": {
+        "caption": "Illustrative annual sufficiency can conceal a daily constraint",
+        "columns": [
+          "Assumed or calculated item",
+          "Site A",
+          "Site B"
+        ],
+        "rows": [
+          [
+            "Annual available volume: assumption",
+            "150 million gallons",
+            "120 million gallons"
+          ],
+          [
+            "Daily delivery limit: assumption",
+            "400,000 gallons",
+            "650,000 gallons"
+          ],
+          [
+            "Annual facility use: 300,000 × 365",
+            "109.5 million gallons",
+            "109.5 million gallons"
+          ],
+          [
+            "Peak-day requirement: assumption",
+            "600,000 gallons",
+            "600,000 gallons"
+          ],
+          [
+            "Daily gap at peak",
+            "200,000 gallons",
+            "No gap under stated assumptions"
+          ],
+          [
+            "Supply-only price: assumption",
+            "$4.00 per 1,000 gallons",
+            "$4.75 per 1,000 gallons"
+          ],
+          [
+            "Annual supply-only charge",
+            "$438,000",
+            "$520,125"
+          ]
+        ],
+        "note": "Calculated hypothetical. Charges exclude wastewater, fixed and demand charges, treatment, storage capital and financing. The same annual consumption is used at each site. Daily figures do not establish instantaneous flow."
+      }
+    },
+    {
+      "id": "drought-and-resilience",
+      "title": "Test a shortage against the production schedule",
+      "paragraphs": [
+        "TWDB describes drought contingency plans as supplier responses to drought or temporary shortage, separate from long-term planning. A facility should read the current supplier’s plan and its own contract together, then ask which restrictions apply to its customer category. A statewide planning assumption cannot answer that local operational question. [Drought planning](#source-drought).",
+        "Run a concrete interruption case: the delivered amount falls, the process slows, a batch must finish safely, and the facility restarts. Identify essential sanitary, process, cooling and fire requirements. Ask engineering which requirements can be reduced without creating another failure. Those dependencies make a percentage curtailment meaningful in dollars, product and time.",
+        "For an illustrative sensitivity, assume ten lost production days reduce contribution by $60,000 per day. The resulting $600,000 exposure is more than seven times the example’s $82,125 annual supply-price difference. It is not an expected loss; no outage probability has been estimated. It shows why a water-price comparison needs the consequence of interruption beside it.",
+        "A second supplier or well is useful only to the extent it survives the same event. Investigate shared reservoirs, aquifers, power supply, treatment assets and pipeline routes. Backup that depends on the same failed pump or depleted source may change the paperwork more than the operating outcome. Connect the water case to the facility’s [power-availability diligence](/research/texas/texas-power-large-load-business-diligence)."
+      ]
+    },
+    {
+      "id": "quality-reuse-disposal",
+      "title": "Complete the path through treatment and discharge",
+      "paragraphs": [
+        "A supply can be legally available and physically deliverable while requiring treatment to meet the process specification. Ask engineering to identify the relevant water-quality parameters, seasonal variation, testing evidence and treatment losses. Water taken from the supplier, water consumed in production and water returned are different quantities; the financial and environmental model should retain those boundaries.",
+        "Reclaimed water can change the source mix, but its authorization depends on source and use. TCEQ identifies cooling-tower makeup as a Type II municipal reclaimed-water use and requires written approval before providing municipal reclaimed water to another party. Its industrial rules have different levels and on-site or off-site treatment. Avoid assuming a closed-loop design or a reuse label removes all authorization requirements. [Reclaimed-water guidance](#source-reuse).",
+        "The wastewater side can also limit the facility. TCEQ states that industrial or commercial discharges into state waters, or covered land disposal adjacent to them, require authorization through a rule, commission order or general or individual permit. A discharge into a sewer instead needs its own receiving-system and applicable pretreatment review; this article has not verified any particular receiver’s conditions. [Industrial wastewater](#source-wastewater).",
+        "Tie the mass balance to the actual arrangement. Reducing withdrawal may increase the concentration of blowdown; changing treatment may change residual disposal; using another source may affect corrosion or production quality. Evaluate the full design before assigning water savings to the investment case. A lower purchased volume is useful only if the revised process remains operable and authorized."
+      ]
+    },
+    {
+      "id": "reporting-and-investment",
+      "title": "Make the operating record reproducible",
+      "paragraphs": [
+        "A current 2026 development illustrates why boundaries matter. TWDB’s digital-infrastructure survey guidance requires recipients that operated during any part of 2025 to report that year’s operational water use in the 2026 survey. It excludes construction water and tells non-operating recipients to contact the team. The reporting year is not the observation year, and a proposed facility’s future requirement is not measured prior-year use. [2026 survey guidance](#source-survey).",
+        "For every water number in the investment case, retain its source, period, unit, location and status. Separate purchased volume from consumption, peak from average, current operation from full buildout, and measured use from an engineering estimate. Those distinctions help finance, engineering, suppliers and regulators work from the same project description.",
+        "The decision record should identify the conditions that justify acquiring the property and committing to equipment. Where available in the transaction, use defined milestones for authority, supplier agreement, delivery infrastructure and required approvals. The proposed controls do not guarantee that a counterparty will accept them. They make the dependency visible before capital becomes difficult to recover.",
+        "The public sources establish a framework and current planning status. They do not identify the cheapest dependable site, guarantee a well’s future yield, or prove a particular contract survives drought. The stronger business case is the one whose local documents and engineering evidence support its operating schedule."
+      ],
+      "bullets": [
+        "Identify the source, authority holder and every supplier in the delivery chain.",
+        "Reconcile annual, peak-day and instantaneous requirements with the actual commitment.",
+        "Obtain the supplier’s drought terms and model a safe reduction and restart.",
+        "Verify treatment, reuse and wastewater arrangements as part of the same design.",
+        "Price storage, infrastructure, recurring charges and interruption consequences separately.",
+        "Recheck after the proposed state-plan amendment, local drought-stage changes, permit or contract amendments, new well evidence, and any change in the process or cooling design."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "plan-status",
+      "label": "2027 State Water Plan: adoption and proposed amendment",
+      "href": "https://www.twdb.texas.gov/waterplanning/swp/2027/index.asp",
+      "publisher": "Texas Water Development Board",
+      "date": "Phase I adopted 2026-07-23; amendment status reviewed 2026-10-12",
+      "lastVerified": "2026-10-12",
+      "note": "Phase II remained proposed after September 25 comment close; December meeting tentative. Recommended reservoir maps may be conceptual."
+    },
+    {
+      "id": "plan-adoption",
+      "label": "TWDB adopts the 2027 State Water Plan",
+      "href": "https://texaswaternewsroom.org/pressreleases/2026-7-23_2027_swp_approved.html",
+      "publisher": "Texas Water Development Board",
+      "date": "2026-07-23",
+      "lastVerified": "2026-10-12",
+      "note": "Statewide projections for 2030–2080; recommended projects do not establish completion or a facility allocation."
+    },
+    {
+      "id": "surface-rights",
+      "label": "Water rights in Texas: state water and priority",
+      "href": "https://www.tceq.texas.gov/permitting/water_rights/wr-permitting/wr_amiregulated.html",
+      "publisher": "Texas Commission on Environmental Quality",
+      "date": "Undated current guidance",
+      "lastVerified": "2026-10-12",
+      "note": "General surface-water definitions, priority and authorization; a specific right and its conditions must be inspected."
+    },
+    {
+      "id": "contracts",
+      "label": "Water supply contracts and underlying water rights",
+      "href": "https://www.tceq.texas.gov/permitting/water_rights/watersupplycontracts",
+      "publisher": "Texas Commission on Environmental Quality",
+      "date": "Undated current guidance",
+      "lastVerified": "2026-10-12",
+      "note": "Contracts with state-water right holders, authorization options, required submission information and rule exemptions; not a blanket retail-customer filing rule."
+    },
+    {
+      "id": "groundwater",
+      "label": "Groundwater regulation and private-well guidance",
+      "href": "https://www.twdb.texas.gov/groundwater/faq/faqgwm.asp",
+      "publisher": "Texas Water Development Board",
+      "date": "Undated current guidance",
+      "lastVerified": "2026-10-12",
+      "note": "District production and spacing authority; local district rules and the actual permit control specific pumping. Residential sections are not used to infer industrial well capacity."
+    },
+    {
+      "id": "drought",
+      "label": "Planning for drought and drought contingency plans",
+      "href": "https://www.twdb.texas.gov/drought/planning/index.asp",
+      "publisher": "Texas Water Development Board",
+      "date": "Undated current guidance",
+      "lastVerified": "2026-10-12",
+      "note": "Distinguishes supply planning from temporary-shortage response; no particular supplier’s curtailment terms verified."
+    },
+    {
+      "id": "reuse",
+      "label": "Requirements for reclaimed water",
+      "href": "https://www.tceq.texas.gov/assistance/water/reclaimed_water.html",
+      "publisher": "Texas Commission on Environmental Quality",
+      "date": "Undated current guidance",
+      "lastVerified": "2026-10-12",
+      "note": "Municipal Type I/II and industrial Level I/II uses and approvals differ; cite the relevant arrangement."
+    },
+    {
+      "id": "wastewater",
+      "label": "Industrial wastewater: authorization requirements",
+      "href": "https://www.tceq.texas.gov/permitting/wastewater/industrial/",
+      "publisher": "Texas Commission on Environmental Quality",
+      "date": "Page modified 2026-03-02",
+      "lastVerified": "2026-10-12",
+      "note": "Covered direct discharges and land disposal require authorization through a rule, order or permit; no site’s permit result established."
+    },
+    {
+      "id": "survey",
+      "label": "Digital infrastructure: 2026 Water Use Survey",
+      "href": "https://www.twdb.texas.gov/waterplanning/waterusesurvey/digitalinfrastructure.asp",
+      "publisher": "Texas Water Development Board",
+      "date": "2026 survey; 2025 observation year",
+      "lastVerified": "2026-10-12",
+      "note": "Recipients’ operational 2025 use; construction excluded and non-operating recipients directed to contact TWDB. Does not establish a future facility’s demand."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Does inclusion in Texas’s state water plan guarantee water for a facility?",
+      "answer": "No. The plan identifies strategies, sponsors and proposed projects. Obtain the supplier’s actual authority, contract and delivery evidence. Phase I was adopted in July 2026; its enhanced amendment remained proposed at this review. [Plan status](#source-plan-status)."
+    },
+    {
+      "question": "Does owning a Texas property give a business unrestricted groundwater use?",
+      "answer": "No. Groundwater conservation districts can regulate non-exempt production and spacing. Confirm the local district, permit and proposed use before relying on a well for industrial operation. [Groundwater guidance](#source-groundwater)."
+    },
+    {
+      "question": "Is a sufficient annual water volume enough for site approval?",
+      "answer": "It does not establish peak flow, quality, delivery infrastructure or shortage terms. Compare the actual contract and engineering limits with the facility’s operating profile. TCEQ’s contract guidance distinguishes annual authorization information from the underlying permitted use. [Supply contracts](#source-contracts)."
+    },
+    {
+      "question": "Can a facility use reclaimed water without additional approval?",
+      "answer": "The answer depends on source, use and location. TCEQ treats municipal and industrial reuse differently, with specific approval requirements and limited on-site exceptions. Verify the proposed arrangement instead of applying a general reuse exemption. [Reclaimed water](#source-reuse)."
+    }
+  ],
+  "image": "/images/social/texas-water-facility-site-diligence.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-business-library-2026-10-12.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business library.",
+      "format": "JSON"
+    }
+  ]
+}

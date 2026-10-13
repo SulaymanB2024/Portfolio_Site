@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "purpose": "Bind newly researched initial editions without inventing historical restoration or revision provenance.",
+  "records": [
+    {
+      "slug": "texas-power-large-load-business-diligence",
+      "path": "src/personal/editorial/data/articles/texas-power-large-load-business-diligence.json",
+      "canonicalPath": "/research/texas/texas-power-large-load-business-diligence",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "54f54c7057e6308b0b6c142f21557397cd6f59cb046d5c054914664d8c921fcd",
+      "proseWords": 2089,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/power-claims.json"
+    },
+    {
+      "slug": "texas-ai-law-business-compliance",
+      "path": "src/personal/editorial/data/articles/texas-ai-law-business-compliance.json",
+      "canonicalPath": "/research/texas/texas-ai-law-business-compliance",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "b89e9e26bd5de3b53abed9b11b9ee721059e84b631b762a13db70313d5656193",
+      "proseWords": 1971,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/ai-law-claims.json"
+    },
+    {
+      "slug": "texas-business-court-contract-decisions",
+      "path": "src/personal/editorial/data/articles/texas-business-court-contract-decisions.json",
+      "canonicalPath": "/research/texas/texas-business-court-contract-decisions",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "f47b40378d3982e466c0417b0bc905f9a3c560723b2141e224e31c0d093119c4",
+      "proseWords": 1753,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/business-court-claims.json"
+    },
+    {
+      "slug": "texas-water-facility-site-diligence",
+      "path": "src/personal/editorial/data/articles/texas-water-facility-site-diligence.json",
+      "canonicalPath": "/research/texas/texas-water-facility-site-diligence",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "2cc33ce8d2a21b3b3ce23a34e751450985aaf22300f5cce80e70224c6d7d62b6",
+      "proseWords": 1746,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/water-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://www.twdb.texas.gov/waterplanning/swp/2027/index.asp"
+        ]
+      }
+    },
+    {
+      "slug": "texas-property-tax-business-underwriting",
+      "path": "src/personal/editorial/data/articles/texas-property-tax-business-underwriting.json",
+      "canonicalPath": "/research/texas/texas-property-tax-business-underwriting",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "58928a9f723a1404386593f901fa1e76b024d3604f596ef5a16fea23241a1afb",
+      "proseWords": 1897,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/property-tax-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://comptroller.texas.gov/taxes/property-tax/index.php"
+        ]
+      }
+    },
+    {
+      "slug": "texas-data-center-sales-tax-project-economics",
+      "path": "src/personal/editorial/data/articles/texas-data-center-sales-tax-project-economics.json",
+      "canonicalPath": "/research/texas/texas-data-center-sales-tax-project-economics",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "15bb478d47071ebc6b54a73b46f1678f66058e9d5b0cb891540c86250209fadd",
+      "proseWords": 1899,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/data-center-tax-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "15bb478d47071ebc6b54a73b46f1678f66058e9d5b0cb891540c86250209fadd",
+          "articleSha256": "fac0c56b5677cb8257d888201393fbfd1ad654b42426c5bf789b0d707f931f4b",
+          "dateModified": "2026-10-12",
+          "reason": "Improve readable spacing in rendered tax-table labels and unit references after phone inspection; preserve all verified numbers, qualifications and evidence.",
+          "evidence": [
+            "https://comptroller.texas.gov/forms/ap-236.pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-jeti-incentives-project-underwriting",
+      "path": "src/personal/editorial/data/articles/texas-jeti-incentives-project-underwriting.json",
+      "canonicalPath": "/research/texas/texas-jeti-incentives-project-underwriting",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "d53cae962d8eae965f7cfa86564f668f06092747c6459baa701d65032472b177",
+      "proseWords": 1930,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/jeti-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm"
+        ]
+      }
+    },
+    {
+      "slug": "texas-franchise-tax-reporting-business-decisions",
+      "path": "src/personal/editorial/data/articles/texas-franchise-tax-reporting-business-decisions.json",
+      "canonicalPath": "/research/texas/texas-franchise-tax-reporting-business-decisions",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "7d6cd81f6e5914e253594827e5bddc78e6e60b2f1b10300f205b3a32f2ff4d59",
+      "proseWords": 1818,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/franchise-tax-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://comptroller.texas.gov/taxes/franchise/"
+        ]
+      }
+    },
+    {
+      "slug": "texas-hiring-labor-cost-planning",
+      "path": "src/personal/editorial/data/articles/texas-hiring-labor-cost-planning.json",
+      "canonicalPath": "/research/texas/texas-hiring-labor-cost-planning",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "a9cfc72dca9c3a81684cdafb9efd2fb24a9cc4ff820984f5f471a91f2934767a",
+      "proseWords": 1566,
+      "readTime": "9 MIN",
+      "claimsPath": "docs/texas-business/research/hiring-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://texaslmi.com/api/GetHomeLinks/TLMR"
+        ]
+      }
+    },
+    {
+      "slug": "texas-cross-border-logistics-business-planning",
+      "path": "src/personal/editorial/data/articles/texas-cross-border-logistics-business-planning.json",
+      "canonicalPath": "/research/texas/texas-cross-border-logistics-business-planning",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "7fa07a7c5ec9ed27f66e1496050348ec2e937bc51814894d952dd209a72fabf8",
+      "proseWords": 1609,
+      "readTime": "9 MIN",
+      "claimsPath": "docs/texas-business/research/logistics-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://www.bts.gov/newsroom/north-american-transborder-freight-valued-1576-billion-july-2026-188-july-2025"
+        ]
+      }
+    },
+    {
+      "slug": "texas-manufacturing-capacity-procurement",
+      "path": "src/personal/editorial/data/articles/texas-manufacturing-capacity-procurement.json",
+      "canonicalPath": "/research/texas/texas-manufacturing-capacity-procurement",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "c252ccdd2c04031ea7535ac0a873c70338917bdd327440111cafad6dc40169fc",
+      "proseWords": 1669,
+      "readTime": "9 MIN",
+      "claimsPath": "docs/texas-business/research/manufacturing-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://www.ti.com/about-ti/newsroom/news-releases/2025/texas-instruments-begins-production-at-its-newest-300mm-semiconductor-manufacturing-facility-in-sherman-texas.html"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "c252ccdd2c04031ea7535ac0a873c70338917bdd327440111cafad6dc40169fc",
+          "articleSha256": "6a8c31874db9403fe120f18e445295f42ebdae133c8ef7ccb0f79bca9225e7a4",
+          "dateModified": "2026-10-12",
+          "reason": "Shorten the visible headline after desktop inspection exposed four lines; retain the precise semiconductor search title and all source-backed supply analysis.",
+          "evidence": [
+            "https://www.ti.com/about-ti/newsroom/news-releases/2025/texas-instruments-begins-production-at-its-newest-300mm-semiconductor-manufacturing-facility-in-sherman-texas.html"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-commercial-property-insurance-diligence",
+      "path": "src/personal/editorial/data/articles/texas-commercial-property-insurance-diligence.json",
+      "canonicalPath": "/research/texas/texas-commercial-property-insurance-diligence",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "1bd7784305b91665778974fb7243d8f0f925230324d11eab17fe4900698a88b2",
+      "proseWords": 1881,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/insurance-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://www.tdi.texas.gov/pubs/consumer/cb021.html"
+        ]
+      }
+    }
+  ]
+}

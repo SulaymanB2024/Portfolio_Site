@@ -10,9 +10,52 @@ export interface ReadingTopic {
   readings: { slug: string; reason: string }[]
   questions: { question: string; slug: string; section: string }[]
   questionsUpdated: string
+  relatedTopics?: string[]
+  sourceDownload?: { label: string; href: string }
 }
 
 export const readingTopics: ReadingTopic[] = [
+  {
+    slug: 'texas-business', title: 'Texas business research.',
+    seoTitle: 'Texas Business Research: Infrastructure, Taxes, Hiring & Trade',
+    questionsUpdated: '2026-10-12',
+    description: 'Deep research on Texas developments that change operating costs, investment timing, compliance, and commercial risk.',
+    introduction: [
+      'Choose the decision closest to your next commitment: a facility site, tax budget, hiring plan, supplier route, technology purchase or commercial contract. These twelve investigations connect Texas developments to operating costs, usable capacity, timing and cash at risk.',
+      'The research starts with primary legislation, agency records, official datasets, published decisions and company disclosures. Each article preserves its evidence cutoff, separates an announcement from completion and a forecast from an observation, and gives the reader a concrete comparison and decision checklist. Scenario inputs are labeled so they can be replaced with the business’s actual evidence.',
+      'This library was researched on October 12, 2026. For related Texas investigations, the financial-systems reading path also contains the original toll-road ownership and financing research, Austin home-service ownership, and West Campus housing. Those manuscripts retain their own evidence dates.',
+    ],
+    questions: [
+      { question: 'What evidence makes a Texas power commitment financeable?', slug: 'texas-power-large-load-business-diligence', section: 'investment-decision' },
+      { question: 'Which Texas AI-law duties apply to a private business?', slug: 'texas-ai-law-business-compliance', section: 'duties-by-operator' },
+      { question: 'Does a $5 million contract automatically qualify for the Texas Business Court?', slug: 'texas-business-court-contract-decisions', section: 'two-thresholds' },
+      { question: 'Can sufficient annual water supply conceal a daily constraint?', slug: 'texas-water-facility-site-diligence', section: 'peak-and-storage' },
+      { question: 'What changes a Texas commercial property-tax budget?', slug: 'texas-property-tax-business-underwriting', section: 'worked-tax-sensitivity' },
+      { question: 'Which Texas data-center tax route covers local sales tax?', slug: 'texas-data-center-sales-tax-project-economics', section: 'two-certification-routes' },
+      { question: 'Does JETI cut a project’s entire tax bill in half?', slug: 'texas-jeti-incentives-project-underwriting', section: 'tax-stack' },
+      { question: 'Does no Texas franchise tax due mean no annual filing?', slug: 'texas-franchise-tax-reporting-business-decisions', section: 'threshold-and-report' },
+      { question: 'How should a hiring plan price wages against ramp delay?', slug: 'texas-hiring-labor-cost-planning', section: 'pay-versus-delay' },
+      { question: 'When does a higher freight quote improve landed cost?', slug: 'texas-cross-border-logistics-business-planning', section: 'route-economics' },
+      { question: 'What evidence makes new Texas manufacturing capacity usable?', slug: 'texas-manufacturing-capacity-procurement', section: 'buyer-checklist' },
+      { question: 'What will a commercial policy pay during a facility shutdown?', slug: 'texas-commercial-property-insurance-diligence', section: 'business-income' },
+    ],
+    readings: [
+      { slug: 'texas-power-large-load-business-diligence', reason: 'Assess connection evidence, the October large-load rules, financial security, and interruption exposure before committing capital.' },
+      { slug: 'texas-water-facility-site-diligence', reason: 'Trace source authority, supplier obligations, peak delivery, storage recovery and drought exposure before approving the site.' },
+      { slug: 'texas-property-tax-business-underwriting', reason: 'Reconstruct the tax stack, temporary appraisal limitation, equipment exemption and lease allocation before buying or expanding.' },
+      { slug: 'texas-data-center-sales-tax-project-economics', reason: 'Separate standard and large-project tax treatment, resolve the investment clock and price qualifying purchases and repayment exposure.' },
+      { slug: 'texas-jeti-incentives-project-underwriting', reason: 'Model the school M&O benefit alongside competing-site evidence, jobs, wages and the compliance tail.' },
+      { slug: 'texas-franchise-tax-reporting-business-decisions', reason: 'Distinguish no tax due from information-report obligations, then compare computation methods and current research-credit treatment.' },
+      { slug: 'texas-hiring-labor-cost-planning', reason: 'Use dated metro and occupational evidence to test role-specific pay, recruiting and the cost of an unfilled ramp.' },
+      { slug: 'texas-cross-border-logistics-business-planning', reason: 'Qualify the customs basis, commercial schedule and receiving route; compare freight with inventory and failure cost.' },
+      { slug: 'texas-manufacturing-capacity-procurement', reason: 'Separate announced investment, production starts, qualification and the output actually allocated to a buyer.' },
+      { slug: 'texas-commercial-property-insurance-diligence', reason: 'Test perils, settlement, deductibles and business-income terms against the same facility-loss scenario.' },
+      { slug: 'texas-ai-law-business-compliance', reason: 'Separate private-business, government, healthcare, and privacy duties, then turn them into an AI procurement review.' },
+      { slug: 'texas-business-court-contract-decisions', reason: 'Use September court decisions to distinguish transaction value, pleaded claims, and the promises preserved in signed contracts.' },
+    ],
+    relatedTopics: ['financial-systems', 'industrial-capacity'],
+    sourceDownload: { label: 'Download the source and decision ledger (JSON)', href: '/research/texas-business-library-2026-10-12.json' },
+  },
   {
     slug: 'financial-systems', title: 'Who owns the cash flow?',
     seoTitle: 'Texas Toll-Road & Airline Loyalty Research',

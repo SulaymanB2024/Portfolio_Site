@@ -1,0 +1,76 @@
+{
+  "article": "texas-jeti-incentives-project-underwriting",
+  "checkedAt": "2026-10-12",
+  "claims": [
+    {
+      "claim": "Normal incentive M&O taxable value50% of market value, opportunity-zone25%; specified construction years zero; other taxes not automatically reduced",
+      "source": "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm",
+      "locator": "403.605(a)–(d)",
+      "status": "Current consolidated law",
+      "recheck": "Amendment, applicable agreement or adopted tax rate"
+    },
+    {
+      "claim": "Eligible project/activity/property definitions; post-execution building/equipment timing; investment excludesland/inventory",
+      "source": "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm",
+      "locator": "403.602(8),(9),(13)",
+      "status": "Current law; no specific applicant eligibility asserted",
+      "recheck": "Rules, activity, property or ownership changes"
+    },
+    {
+      "claim": "County thresholds75/$200M,50/$100M,35/$50M,10/$20M; smallestcounty multi-county rule; dispatchable-generation jobs exception",
+      "source": "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm",
+      "locator": "403.604(a),(b),(e)",
+      "status": "Current qualifying minimums",
+      "recheck": "County/project boundary or legal change"
+    },
+    {
+      "claim": "Current competing-site planning outsideTexas required; financial viability alone not proof",
+      "source": "https://comptroller.texas.gov/economy/development/prop-tax/jeti/faq.php",
+      "locator": "Compelling factor question",
+      "status": "Current agency guidance",
+      "recheck": "Revised guidance or site-selection evidence"
+    },
+    {
+      "claim": "$30K districtfee, recommendation/determination/execution/bond stages; up-to10year incentive plus3year MVP",
+      "source": "https://comptroller.texas.gov/economy/development/prop-tax/jeti/process.php",
+      "locator": "Process and Timeline",
+      "status": "Agency process guide; actual correspondence/current statute controls",
+      "recheck": "Updated procedure or project stage"
+    },
+    {
+      "claim": "J0013 application postedDec23,2024, agreementAug11,2025, reportSep16,2026",
+      "source": "https://comptroller.texas.gov/economy/development/prop-tax/jeti/application-details.php?id=J0013",
+      "locator": "Document-stage postingdates",
+      "status": "Observed official record; no physical production claim",
+      "recheck": "New project document"
+    },
+    {
+      "claim": "J0013 report states agreementJuly29,2025, incentive2026–2035, MVP3=2038",
+      "source": "https://assets.comptroller.texas.gov/open-data/jeti/J0013/J0013-brazosmidlandprocessing-stanton-2026biennialreport.pdf",
+      "locator": "Page1 project and agreement fields",
+      "status": "Agreement-holder reported dates, not audit conclusion",
+      "recheck": "Corrected report or agreement amendment"
+    },
+    {
+      "claim": "Wage average exceeds110% applicableindustry four-quarter TWC average; two-report penalties and termination/cure distinct",
+      "source": "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm",
+      "locator": "403.612(b),(d);403.614",
+      "status": "Current law; actual compliance unassessed",
+      "recheck": "Agreement, wagebenchmark, report or enforcement"
+    },
+    {
+      "claim": "Hypothetical300Mvalue/rates0.60+0.25+1.10per100 gives5.85Mbase,4.95Mnormal,4.50Mopportunity-zone annualtax;900K×10yrs at8%PV6.04M;150Kannual/250Kupfront netPV4.78M",
+      "source": null,
+      "locator": "worked-return",
+      "status": "Declared assumptions; simplified original arithmetic, excluded effects listed",
+      "recheck": "Input, rate, duration or formula changes"
+    },
+    {
+      "claim": "Full-time jobatleast1600hours annually, constructionexcluded, transferredTexasjob requiresbackfill underapplicablerule",
+      "source": "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm",
+      "locator": "403.602(10);403.604(c)",
+      "status": "Current law; actual project staffing not determined",
+      "recheck": "Job design, transfer, staffing or rule changes"
+    }
+  ]
+}

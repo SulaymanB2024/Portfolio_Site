@@ -52,6 +52,18 @@ const SKETCH_DETAILS = [
 ] as const satisfies readonly [SketchId, string, string][];
 
 export const ARTICLE_GENERATIVE_ART_ASSIGNMENTS = {
+  '/research/texas/texas-water-facility-site-diligence': 'yuru-22',
+  '/research/texas/texas-property-tax-business-underwriting': 'yuru-26',
+  '/research/texas/texas-data-center-sales-tax-project-economics': 'yuru-28',
+  '/research/texas/texas-jeti-incentives-project-underwriting': 'yuru-29',
+  '/research/texas/texas-franchise-tax-reporting-business-decisions': 'yuru-30',
+  '/research/texas/texas-hiring-labor-cost-planning': 'yuru-31',
+  '/research/texas/texas-cross-border-logistics-business-planning': 'yuru-18',
+  '/research/texas/texas-manufacturing-capacity-procurement': 'yuru-09',
+  '/research/texas/texas-commercial-property-insurance-diligence': 'yuru-19',
+  '/research/texas/texas-power-large-load-business-diligence': 'yuru-23',
+  '/research/texas/texas-ai-law-business-compliance': 'yuru-25',
+  '/research/texas/texas-business-court-contract-decisions': 'yuru-27',
   '/research/financial-systems/ethereum-blobspace-measurement-audit': 'yuru-15',
   '/research/financial-systems/uni-burn-supply-accounting': 'yuru-16',
   '/research/financial-systems/us-solid-rocket-motor-capacity-audit': 'yuru-09',
