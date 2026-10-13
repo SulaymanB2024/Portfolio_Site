@@ -5,12 +5,13 @@ var OUTREACH_SHEET = 'Portfolio Links';
 var OUTREACH_SYNC_URL = 'https://sulayman-bowles.dev/api/outreach-sync';
 var OUTREACH_HEADERS = ['Company', 'Slug', 'Live URL', 'Sync status', 'Last synced', 'Record ID'];
 var OUTREACH_OPENINGS_SHEET = 'Personalized Openings';
-var OUTREACH_OPENINGS_HEADERS = ['Page ID', 'Company', 'Relationship ID', 'Greeting name', 'App Key', 'Role / team', 'Job description URL', 'Job description excerpt', 'Priority 1', 'Evidence 1', 'Priority 2', 'Evidence 2', 'Why company', 'Opening line 1', 'Opening line 2', 'Opening line 3', 'Opening line 4', 'Copy status', 'Personalized URL', 'Sync status', 'Last synced', 'Local preview URL'];
+var OUTREACH_OPENINGS_HEADERS = ['Page ID', 'Company', 'Relationship ID', 'Greeting name', 'App Key', 'Role / team', 'Job description URL', 'Job description excerpt', 'Priority 1', 'Evidence 1', 'Priority 2', 'Evidence 2', 'Why company', 'Opening line 1', 'Opening line 2', 'Opening line 3', 'Opening line 4', 'Copy status', 'Personalized URL', 'Sync status', 'Last synced', 'Local preview URL', 'Contribution'];
+var OUTREACH_OPENINGS_DEFAULT_TEMPLATES = ['{{salutation}} — I could bring', '{{contribution}} to {{company}}.', '{{evidence_1}}', '{{why_company}}'];
 var OUTREACH_OPENINGS_NOTES = [
   'Generated stable UUID. Keep this ID with the row when sorting; a copied pairing gets its own new ID.',
   'Company label, using the same mapping as Portfolio Links. This stays attached to the Page ID.',
   'Optional existing Relationships ID. This private source field is never sent to the website.',
-  'Optional verified first name. Leave blank when the recipient is unknown; write the greeting into the four final lines.',
+  'Optional verified name. {{salutation}} becomes "Hi Name" or "Hi Company team" when unknown; {{greeting}} retains "Name — " or blank.',
   'Optional existing Applications App Key. No invented or inferred vacancy.',
   'Specific role or team from the workbook or a real job description. Context for writing; not automatically published.',
   'Real job-description source URL. Required together with an excerpt when a JD priority is claimed.',
@@ -20,7 +21,7 @@ var OUTREACH_OPENINGS_NOTES = [
   'Optional second priority explicitly supported by the JD URL and excerpt.',
   'Truthful personal work, article or source supporting Priority 2. Required when Priority 2 is populated.',
   'Concrete reason you like this company or team, connected to your actual interests or work.',
-  'Public row 1. Authored wording or a reviewed template. {{greeting}} becomes "Name — " or blank; {{company}} uses B and {{role}} uses F.',
+  'Public row 1. Authored wording or a reviewed template. {{salutation}} greets the name or company team; {{greeting}} retains "Name — " or blank; {{company}} uses B and {{role}} uses F. Only an entirely blank four-row block gets defaults.',
   'Public row 2. Optional {{priority_1}}, {{priority_2}}, {{evidence_1}}, {{evidence_2}} use I/K/J/L. Used fields must be nonempty when Ready.',
   'Public row 3. Optional {{why_company}} uses M. Ready copy must resolve every token; unknown or missing tokens block publication.',
   'Public row 4. Final resolved copy needs four trimmed nonempty rows, at most 112 characters each and 44 words total, without URLs, emails or control characters.',
@@ -28,8 +29,24 @@ var OUTREACH_OPENINGS_NOTES = [
   'Generated stable server URL. Filled only after a real GET verifies the company, Page ID and exact four rows; an older verified URL may remain for Draft or Paused.',
   'Generated reconciliation receipt. Only Ready copy verified through a real page GET is marked Live.',
   'Generated timestamp from a completed reconciliation; it is not a deployment receipt.',
-  'Prepared local-review link. A localhost URL is not a published or recruiter-ready URL.'
+  'Prepared local-review link. A localhost URL is not a published or recruiter-ready URL.',
+  'A specific contribution you could bring to this company or role, supported by truthful Evidence 1 or Evidence 2. {{contribution}} uses this field. Write the contribution as a phrase without a final period; no skills or experience are generated.'
 ];
+
+function outreachEnsureOpeningHeaders_(sheet, initialize) {
+  var header = sheet.getRange(1, 1, 1, OUTREACH_OPENINGS_HEADERS.length).getValues()[0];
+  if (initialize && header.every(function(value) { return value === ''; })) {
+    sheet.getRange(1, 1, 1, OUTREACH_OPENINGS_HEADERS.length).setValues([OUTREACH_OPENINGS_HEADERS]);
+    return;
+  }
+  // Upgrade only the known A–V contract. An occupied W header belongs to its owner.
+  if (JSON.stringify(header.slice(0, 22)) !== JSON.stringify(OUTREACH_OPENINGS_HEADERS.slice(0, 22)) || header[22] !== '' && header[22] !== OUTREACH_OPENINGS_HEADERS[22]) throw new Error('Personalized Openings headers do not match; no existing cells were overwritten.');
+  if (header[22] === '') {
+    sheet.getRange(1, 23).setValue(OUTREACH_OPENINGS_HEADERS[22]).setFontWeight('bold').setBackground('#e8edf2').setWrap(true).setNote(OUTREACH_OPENINGS_NOTES[22]);
+    sheet.setColumnWidth(23, 380);
+    SpreadsheetApp.flush();
+  }
+}
 
 // Safe worksheet-only setup. This never installs triggers, changes credentials,
 // or calls the public sync endpoint.
@@ -42,13 +59,11 @@ function installPersonalizedOpeningsSheet() {
 function outreachInstallOpeningsSheet_(workbook) {
   var sheet = workbook.getSheetByName(OUTREACH_OPENINGS_SHEET);
   if (!sheet) sheet = workbook.insertSheet(OUTREACH_OPENINGS_SHEET);
-  var header = sheet.getRange(1, 1, 1, 22).getValues()[0];
-  if (header.some(function(value) { return value !== ''; }) && JSON.stringify(header) !== JSON.stringify(OUTREACH_OPENINGS_HEADERS)) throw new Error('Personalized Openings headers do not match; no existing cells were overwritten.');
-  if (!header.some(function(value) { return value !== ''; })) sheet.getRange(1, 1, 1, 22).setValues([OUTREACH_OPENINGS_HEADERS]);
+  outreachEnsureOpeningHeaders_(sheet, true);
   sheet.setFrozenRows(1);
-  sheet.getRange(1, 1, 1, 22).setFontWeight('bold').setBackground('#e8edf2').setWrap(true);
+  sheet.getRange(1, 1, 1, OUTREACH_OPENINGS_HEADERS.length).setFontWeight('bold').setBackground('#e8edf2').setWrap(true);
   OUTREACH_OPENINGS_NOTES.forEach(function(note, index) { sheet.getRange(1, index + 1).setNote(note); });
-  var widths = [290, 195, 200, 165, 200, 285, 340, 380, 230, 380, 230, 380, 380, 310, 310, 310, 310, 180, 410, 340, 180, 410];
+  var widths = [290, 195, 200, 165, 200, 285, 340, 380, 230, 380, 230, 380, 380, 310, 310, 310, 310, 180, 410, 340, 180, 410, 380];
   widths.forEach(function(width, index) { sheet.setColumnWidth(index + 1, width); });
   var rows = Math.max(1, sheet.getMaxRows() - 1);
   var statusRule = SpreadsheetApp.newDataValidation().requireValueInList(['Draft', 'Ready', 'Paused'], true).setAllowInvalid(false).setHelpText('Draft, Ready or Paused. Only Ready requests publication.').build();
@@ -56,7 +71,7 @@ function outreachInstallOpeningsSheet_(workbook) {
   sheet.getRange(2, 10, rows, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireFormulaSatisfied('=OR(I2="",LEN(TRIM(J2))>0)').setAllowInvalid(false).setHelpText('Add truthful evidence when Priority 1 is populated.').build());
   sheet.getRange(2, 12, rows, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireFormulaSatisfied('=OR(K2="",LEN(TRIM(L2))>0)').setAllowInvalid(false).setHelpText('Add truthful evidence when Priority 2 is populated.').build());
   var populated = sheet.getLastRow() - 1;
-  if (populated > 0) sheet.getRange(2, 7, populated, 11).setWrap(true);
+  if (populated > 0) { sheet.getRange(2, 7, populated, 11).setWrap(true); sheet.getRange(2, 23, populated, 1).setWrap(true); }
   SpreadsheetApp.flush();
   return sheet;
 }
@@ -92,7 +107,9 @@ function installOutreachAutomation() {
 function outreachSheetEdited(event) {
   if (!event || !event.range || event.range.getLastRow() < 2) return;
   var name = event.range.getSheet().getName();
-  if (name === OUTREACH_SHEET ? event.range.getColumn() > 1 : name !== OUTREACH_OPENINGS_SHEET || event.range.getColumn() > 21) return;
+  var first = event.range.getColumn();
+  var last = event.range.getLastColumn();
+  if (name === OUTREACH_SHEET ? first > 1 : name !== OUTREACH_OPENINGS_SHEET || !(first <= 21 || first <= 23 && last >= 23)) return;
   outreachReconcile();
 }
 
@@ -237,11 +254,34 @@ function outreachOpeningRow_(row) {
   return { recordId: String(row[0] || ''), company: outreachOpeningCompany_(row[1]), status: String(row[17] || 'Draft').trim(), lines: lines };
 }
 
+function outreachOpeningSource_(row) {
+  // Generated outputs S–U and the local preview V are not editorial inputs.
+  return row.slice(0, 18).concat([row[22] === undefined ? '' : row[22]]);
+}
+
+function outreachOpeningTemplates_(row) {
+  var templates = row.slice(13, 17);
+  return outreachOpeningCompany_(row[1]) && templates.length === 4 && templates.every(function(value) { return !String(value || '').trim(); }) ? OUTREACH_OPENINGS_DEFAULT_TEMPLATES.slice() : templates;
+}
+
+function outreachSeedOpeningTemplates_(sheet, rows) {
+  var seeded = false;
+  rows.forEach(function(row, index) {
+    if (!outreachOpeningCompany_(row[1]) || row.slice(13, 17).some(function(value) { return String(value || '').trim(); })) return;
+    var current = sheet.getRange(index + 2, 1, 1, OUTREACH_OPENINGS_HEADERS.length).getValues()[0];
+    if (JSON.stringify(outreachOpeningSource_(current)) !== JSON.stringify(outreachOpeningSource_(row))) throw new Error('Rows changed during template setup; automatic retry will reconcile the current rows.');
+    sheet.getRange(index + 2, 14, 1, 4).setValues([OUTREACH_OPENINGS_DEFAULT_TEMPLATES.slice()]);
+    seeded = true;
+  });
+  if (seeded) SpreadsheetApp.flush();
+  return seeded;
+}
+
 function outreachResolveOpeningLines_(row) {
   var clean = function(value) { return String(value || '').trim().replace(/\s+/g, ' '); };
   var name = clean(row[3]);
-  var fields = { greeting: name ? name + ' — ' : '', company: clean(row[1]), role: clean(row[5]), priority_1: clean(row[8]), priority_2: clean(row[10]), evidence_1: clean(row[9]), evidence_2: clean(row[11]), why_company: clean(row[12]) };
-  return row.slice(13, 17).map(function(value) {
+  var fields = { greeting: name ? name + ' — ' : '', salutation: name ? 'Hi ' + name : clean(row[1]) ? 'Hi ' + clean(row[1]) + ' team' : '', company: clean(row[1]), role: clean(row[5]), priority_1: clean(row[8]), priority_2: clean(row[10]), evidence_1: clean(row[9]), evidence_2: clean(row[11]), why_company: clean(row[12]), contribution: clean(row[22]) };
+  return outreachOpeningTemplates_(row).map(function(value) {
     var resolved = String(value || '').replace(/\{\{\s*([a-z_0-9]+)\s*\}\}/g, function(_, token) {
       if (!Object.prototype.hasOwnProperty.call(fields, token)) throw new Error('Unknown opening token: ' + token + '.');
       if (token !== 'greeting' && !fields[token]) throw new Error('Opening token {{' + token + '}} needs a nonempty source field.');
@@ -290,9 +330,11 @@ function outreachReconcileOpenings_() {
   var lock = LockService.getScriptLock();
   if (!lock.tryLock(1000)) return;
   var submitted = {};
+  var submittedSources = {};
   try {
-    if (JSON.stringify(sheet.getRange(1, 1, 1, 22).getValues()[0]) !== JSON.stringify(OUTREACH_OPENINGS_HEADERS)) throw new Error('Personalized Openings headers do not match.');
-    var rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, 22).getValues();
+    outreachEnsureOpeningHeaders_(sheet, false);
+    var rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, OUTREACH_OPENINGS_HEADERS.length).getValues();
+    if (outreachSeedOpeningTemplates_(sheet, rows)) rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, OUTREACH_OPENINGS_HEADERS.length).getValues();
     var seen = {};
     var changedIds = false;
     var existingIds = rows.filter(function(row) { return row[1]; }).map(function(row) { return String(row[0] || ''); }).filter(function(id) { return /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(id); });
@@ -301,8 +343,8 @@ function outreachReconcileOpenings_() {
       var id = String(row[0] || '');
       if (!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(id) || seen[id]) {
         // Guard the whole editorial row: two pairings can share a company.
-        var current = sheet.getRange(index + 2, 1, 1, 22).getValues()[0];
-        if (JSON.stringify(current.slice(0, 18)) !== JSON.stringify(row.slice(0, 18))) return;
+        var current = sheet.getRange(index + 2, 1, 1, OUTREACH_OPENINGS_HEADERS.length).getValues()[0];
+        if (JSON.stringify(outreachOpeningSource_(current)) !== JSON.stringify(outreachOpeningSource_(row))) return;
         id = Utilities.getUuid().toLowerCase();
         sheet.getRange(index + 2, 1).setValue(id);
         changedIds = true;
@@ -311,7 +353,7 @@ function outreachReconcileOpenings_() {
     });
     // Identity persists before any network action, including a failed publish.
     if (changedIds) SpreadsheetApp.flush();
-    rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, 22).getValues();
+    rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, OUTREACH_OPENINGS_HEADERS.length).getValues();
     var freshIds = rows.map(function(row) { return String(row[0] || ''); });
     if (existingIds.some(function(id) { return freshIds.indexOf(id) < 0; })) throw new Error('Rows moved during ID assignment; automatic retry will reconcile the current rows.');
     seen = {};
@@ -322,8 +364,10 @@ function outreachReconcileOpenings_() {
       if (!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(opening.recordId) || seen[opening.recordId]) throw new Error('Rows changed during ID assignment; automatic retry will assign missing IDs.');
       seen[opening.recordId] = true;
       submitted[opening.recordId] = opening;
+      submittedSources[opening.recordId] = JSON.stringify(outreachOpeningSource_(row));
       if (['Draft', 'Ready', 'Paused'].indexOf(opening.status) < 0) throw new Error('Choose Draft, Ready or Paused for each populated opening.');
       if (opening.status === 'Ready') {
+        if (outreachOpeningTemplates_(row).some(function(line) { return /\{\{\s*contribution\s*\}\}/.test(String(line)); }) && !String(row[9] || '').trim() && !String(row[11] || '').trim()) throw new Error('A contribution needs truthful personal evidence in Evidence 1 or Evidence 2.');
         opening.lines = outreachResolveOpeningLines_(row);
         if (!outreachValidOpeningLines_(opening.lines)) throw new Error('Ready copy needs four trimmed nonempty lines, at most 112 characters each and 44 words total, without URLs, email addresses or control characters.');
         if ((row[8] || row[10]) && (!/^https?:\/\//i.test(String(row[6] || '').trim()) || !String(row[7] || '').trim())) throw new Error('A claimed JD priority needs the real job-description URL and supporting excerpt.');
@@ -388,19 +432,19 @@ function outreachReconcileOpenings_() {
       var status = opening.status === 'Paused' ? 'Paused' : opening.status === 'Draft' ? historical ? proof.active === false ? 'Draft — previous version paused' : 'Draft — previous published copy retained' : 'Draft — unpublished copy' : verified[opening.recordId] ? 'Live' : 'Pending verification — automatic retry';
       outputs[opening.recordId] = [opening.status === 'Ready' && verified[opening.recordId] ? link.url : historical, status];
       // Resolve each destination by stable ID again after the network requests.
-      var fresh = sheet.getRange(2, 1, sheet.getLastRow() - 1, 22).getValues();
+      var fresh = sheet.getRange(2, 1, sheet.getLastRow() - 1, OUTREACH_OPENINGS_HEADERS.length).getValues();
       var matches = [];
       fresh.forEach(function(row, index) { if (String(row[0] || '') === opening.recordId) matches.push(index); });
       if (matches.length !== 1) return;
       var index = matches[0];
-      var current = sheet.getRange(index + 2, 1, 1, 22).getValues()[0];
-      if (JSON.stringify(outreachOpeningRow_(current)) !== JSON.stringify(opening)) return;
+      var current = sheet.getRange(index + 2, 1, 1, OUTREACH_OPENINGS_HEADERS.length).getValues()[0];
+      if (JSON.stringify(outreachOpeningSource_(current)) !== submittedSources[opening.recordId] || JSON.stringify(outreachOpeningRow_(current)) !== JSON.stringify(opening)) return;
       sheet.getRange(index + 2, 19, 1, 3).setValues([[outputs[opening.recordId][0], status, new Date()]]);
       sheet.getRange(index + 2, 21).setNumberFormat('yyyy-mm-dd hh:mm');
     });
     SpreadsheetApp.flush();
     // Never cache a success after a concurrent sort, copy edit or failed write.
-    var confirmed = sheet.getRange(2, 1, sheet.getLastRow() - 1, 22).getValues();
+    var confirmed = sheet.getRange(2, 1, sheet.getLastRow() - 1, OUTREACH_OPENINGS_HEADERS.length).getValues();
     var allComplete = true;
     var confirmedIds = {};
     confirmed.forEach(function(row) {
@@ -408,7 +452,7 @@ function outreachReconcileOpenings_() {
       var id = String(row[0] || '');
       var opening = submitted[id];
       var output = outputs[id];
-      if (confirmedIds[id] || !opening || !output || JSON.stringify(outreachOpeningRow_(row)) !== JSON.stringify(opening) || row[18] !== output[0] || row[19] !== output[1]) { allComplete = false; return; }
+      if (confirmedIds[id] || !opening || !output || JSON.stringify(outreachOpeningSource_(row)) !== submittedSources[id] || JSON.stringify(outreachOpeningRow_(row)) !== JSON.stringify(opening) || row[18] !== output[0] || row[19] !== output[1]) { allComplete = false; return; }
       confirmedIds[id] = true;
       if (opening.status === 'Ready') {
         if (verified[id] !== true) { allComplete = false; return; }
@@ -425,10 +469,10 @@ function outreachReconcileOpenings_() {
     }
   } catch (error) {
     if (sheet && sheet.getLastRow() >= 2) {
-      var current = sheet.getRange(2, 1, sheet.getLastRow() - 1, 22).getValues();
+      var current = sheet.getRange(2, 1, sheet.getLastRow() - 1, OUTREACH_OPENINGS_HEADERS.length).getValues();
       current.forEach(function(row, index) {
         var opening = submitted[String(row[0] || '')];
-        if (opening && JSON.stringify(outreachOpeningRow_(row)) === JSON.stringify(opening)) sheet.getRange(index + 2, 20).setValue('Sync error — ' + String(error.message || 'Retrying').slice(0, 180));
+        if (opening && JSON.stringify(outreachOpeningSource_(row)) === submittedSources[String(row[0] || '')] && JSON.stringify(outreachOpeningRow_(row)) === JSON.stringify(opening)) sheet.getRange(index + 2, 20).setValue('Sync error — ' + String(error.message || 'Retrying').slice(0, 180));
       });
     }
     throw error;

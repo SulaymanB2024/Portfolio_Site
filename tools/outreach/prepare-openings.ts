@@ -2,7 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import { dirname } from 'node:path'
 import { validateOpenings } from '../../lib/outreach/openings.ts'
 import { personalizedOpeningPath, validOpeningLines } from '../../src/personal/recruiter/personalized-copy.ts'
-import { resolveOpeningTemplates } from './opening-templates.ts'
+import { openingTemplateRows, resolveOpeningTemplates } from './opening-templates.ts'
 
 export function csvRows(text: string) {
   const rows: string[][] = [], row: string[] = []
@@ -29,10 +29,14 @@ export function prepareOpeningInputs(rows: unknown, preview = false) {
   if (!Array.isArray(rows)) throw new Error('Expected an array of opening rows')
   const input = rows.map((row: any) => {
     const item = Array.isArray(row)
-      ? { recordId: String(row[0] || ''), company: String(row[1] || ''), status: String(row[17] || 'Draft'), lines: row.slice(13, 17).map(String), greetingName: row[3], role: row[5], jobDescriptionUrl: row[6], jobDescriptionExcerpt: row[7], priority1: row[8], evidence1: row[9], priority2: row[10], evidence2: row[11], whyCompany: row[12] }
-      : { ...row, recordId: row.recordId || row.pageId, status: row.status || 'Draft', lines: row.lineTemplates || row.lines }
+      ? { recordId: String(row[0] || ''), company: String(row[1] || ''), status: String(row[17] || 'Draft'), lines: Array.from({ length: 4 }, (_, index) => String(row[index + 13] || '')), greetingName: row[3], role: row[5], jobDescriptionUrl: row[6], jobDescriptionExcerpt: row[7], priority1: row[8], evidence1: row[9], priority2: row[10], evidence2: row[11], whyCompany: row[12], contribution: row[22] }
+      : { ...row, recordId: row.recordId || row.pageId, status: row.status || 'Draft', lines: row.lineTemplates ?? row.lines ?? ['', '', '', ''] }
     let lines: string[]
-    try { lines = resolveOpeningTemplates(item.lines, item) }
+    try {
+      const templates = openingTemplateRows(item.lines, item.company)
+      if (item.status === 'Ready' && templates.some(line => /\{\{\s*contribution\s*\}\}/.test(line)) && !String(item.evidence1 || '').trim() && !String(item.evidence2 || '').trim()) throw new Error('A contribution needs truthful personal evidence in Evidence 1 or Evidence 2')
+      lines = resolveOpeningTemplates(templates, item)
+    }
     catch (error) { if (item.status === 'Ready') throw error; lines = ['', '', '', ''] }
     if (item.status === 'Ready') {
       const present = (value: unknown) => Boolean(String(value || '').trim())
