@@ -1,0 +1,83 @@
+{
+  "verified_on": "2026-10-12",
+  "latest_financial_period_used": "2026-06-30",
+  "subsequent_event_used": "2026-09-01 debt repayment",
+  "sources": [
+    {
+      "id": "S1",
+      "label": "Chegg FY2025 Form 10-K",
+      "href": "https://www.sec.gov/Archives/edgar/data/1364954/000136495426000021/chgg-20251231.htm",
+      "publisher": "Chegg / SEC EDGAR",
+      "date": "Year ended 2025-12-31",
+      "type": "Audited annual filing",
+      "note": "FY2024/FY2025 product-line revenues; AI/search risk discussion; Note 2 capitalization policy; Note 5 content and internal-use software assets.",
+      "limitation": "Company risk attribution is not an independent estimate of AI's causal impact. Book asset values do not measure future product quality.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "S2",
+      "label": "Chegg Q2 2026 Form 10-Q",
+      "href": "https://www.sec.gov/Archives/edgar/data/1364954/000136495426000088/chgg-20260630.htm",
+      "publisher": "Chegg / SEC EDGAR",
+      "date": "2026-08-06",
+      "type": "Unaudited quarterly filing",
+      "note": "Q2 product-line revenues; H1 operating cash flows and cash capex; cash/restricted-cash reconciliation; June balance sheet; Note 6 debt principal and carrying amount.",
+      "limitation": "June 30 balances precede the September debt repayment. Product-line revenues are disclosed; the contribution margins used in the model are not.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "S3",
+      "label": "Chegg Q2 2026 earnings release",
+      "href": "https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Reports-Second-Quarter-2026-Earnings/default.aspx",
+      "publisher": "Chegg Investor Relations",
+      "date": "2026-08-06",
+      "type": "Company results and outlook",
+      "note": "Adjusted EBITDA reconciliation; H1 free-cash-flow reconciliation; severance payments; capital-spending target; Q3 revenue and EBITDA guidance.",
+      "limitation": "Adjusted EBITDA and free cash flow are company-defined non-GAAP measures. Q3 guidance is management's August outlook, not a reported result or this article's forecast.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "S4",
+      "label": "Chegg announces full repayment of convertible notes",
+      "href": "https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Announces-Full-Repayment-of-Convertible-Notes/default.aspx",
+      "publisher": "Chegg Investor Relations",
+      "date": "2026-09-01",
+      "type": "Subsequent-event disclosure",
+      "note": "Confirms repayment of remaining $33.9m principal and no outstanding debt. Approximately $38m cash and investments is explicitly June 30 pro forma for repayment.",
+      "limitation": "Does not disclose actual September 1 or September 30 cash. Debt-free status does not remove operating leases and other liabilities.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "S5",
+      "label": "Chegg FY2025 earnings release",
+      "href": "https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Reports-2025-Fourth-Quarter-and-Full-Year-Financial-Results/default.aspx",
+      "publisher": "Chegg Investor Relations",
+      "date": "2026-02-09",
+      "type": "Company results and strategy",
+      "note": "Full-year revenue and adjusted EBITDA; management's two-business strategy: grow skilling and manage legacy academic services for cash.",
+      "limitation": "Strategic targets are management expectations, not proof of future growth or independent market sizing.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "S6",
+      "label": "Chegg Q1 2026 earnings release",
+      "href": "https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Reports-First-Quarter-2026-Earnings/default.aspx",
+      "publisher": "Chegg Investor Relations",
+      "date": "2026-05-06",
+      "type": "Company results and outlook",
+      "note": "Q1 revenue, skilling growth and profitability; discussion of enterprise/channel partnerships and AI-focused offerings.",
+      "limitation": "Quarterly growth and named distribution partnerships do not establish long-run retention, unit margins or customer acquisition payback.",
+      "lastVerified": "2026-10-12"
+    }
+  ],
+  "reported_claims": {
+    "fy_revenue_and_product_mix": "S1 / MD&A Net Revenues",
+    "q2_product_revenue": "S2 / Note 2 and MD&A Net Revenues",
+    "h1_cfo_capex": "S2 / Condensed Consolidated Statements of Cash Flows",
+    "h1_adjusted_ebitda": "S3 / Reconciliation of Net Loss to EBITDA and Adjusted EBITDA",
+    "liquidity_and_debt": "S2 / Balance Sheet, Note 6; S4 / repayment and pro-forma balance disclosure",
+    "cash_flow_adjustments": "S2 / Condensed Consolidated Statements of Cash Flows",
+    "q3_guidance": "S3 / CFO prepared remarks and Business Outlook"
+  },
+  "editorial_claims": "All replacement-growth thresholds, contribution margins, reserve floors and quarterly stress paths are author calculations. inputs.json distinguishes observations, management disclosures and scenario assumptions."
+}

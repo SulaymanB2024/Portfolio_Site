@@ -29,6 +29,7 @@ export const readingTopics: ReadingTopic[] = [
       { question: 'Can different Austin contractor brands share an investment platform?', slug: 'who-owns-austin-home-service-companies', section: 'answer-different-brands-owner' },
     ],
     readings: [
+      { slug: 'chegg-cash-flow-turnaround', reason: 'Reconcile Chegg’s cash-flow improvement and test whether legacy cash generation can finance a skilling transition.' },
       { slug: 'who-owns-texas-toll-roads', reason: 'Separate public title, concession rights, shareholders, creditors and toll collection. Start here for the ownership question.' },
       { slug: 'why-texas-toll-roads-stay-tolled', reason: 'Follow the pledged system and its obligations to understand why repaying one road does not necessarily end its tolls.' },
       { slug: 'how-airlines-borrow-against-loyalty-programs', reason: 'Trace bank receipts, deferred awards and lender-controlled collections without treating miles as customer deposits.' },

@@ -1,0 +1,60 @@
+{
+  "allCitationsResolved": true,
+  "bodyOverflow": false,
+  "citations": 21,
+  "duplicateIds": 0,
+  "heading": "Can Chegg finance its own reinvention?",
+  "images": [],
+  "sections": [
+    {
+      "id": "business-reset",
+      "paragraphsMatch": true,
+      "tablesMatch": true
+    },
+    {
+      "id": "replacement-scale",
+      "paragraphsMatch": true,
+      "tablesMatch": true
+    },
+    {
+      "id": "free-cash-flow-bridge",
+      "paragraphsMatch": true,
+      "tablesMatch": true
+    },
+    {
+      "id": "earnings-to-cash",
+      "paragraphsMatch": true,
+      "tablesMatch": true
+    },
+    {
+      "id": "liquidity-after-debt",
+      "paragraphsMatch": true,
+      "tablesMatch": true
+    },
+    {
+      "id": "replacement-growth",
+      "paragraphsMatch": true,
+      "tablesMatch": true
+    },
+    {
+      "id": "stress-test-design",
+      "paragraphsMatch": true,
+      "tablesMatch": true
+    },
+    {
+      "id": "stress-test-results",
+      "paragraphsMatch": true,
+      "tablesMatch": true
+    },
+    {
+      "id": "capital-allocation",
+      "paragraphsMatch": true,
+      "tablesMatch": true
+    },
+    {
+      "id": "evidence-to-watch",
+      "paragraphsMatch": true,
+      "tablesMatch": true
+    }
+  ]
+}

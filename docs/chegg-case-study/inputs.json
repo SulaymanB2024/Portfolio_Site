@@ -1,0 +1,37 @@
+{
+  "units": "USD millions, except rates",
+  "evidence_cutoff": "2026-10-12",
+  "reported": {
+    "fy_2024": {"total_revenue": "617.574", "skilling": "73.959", "academic_services": "543.615"},
+    "fy_2025": {"total_revenue": "376.908", "skilling": "68.654", "academic_services": "308.254"},
+    "q2_2025": {"total_revenue": "105.120", "skilling": "17.217", "academic_services": "87.903", "adjusted_ebitda": "23.106"},
+    "q2_2026": {"total_revenue": "51.849", "skilling": "17.534", "academic_services": "34.315", "adjusted_ebitda": "9.051"},
+    "h1_2025": {"total_revenue": "226.507", "adjusted_ebitda": "42.375", "operating_cash_flow": "19.686", "cash_capex": "15.895"},
+    "h1_2026": {"total_revenue": "115.111", "adjusted_ebitda": "24.507", "operating_cash_flow": "14.161", "cash_capex": "4.700"},
+    "h1_2026_cfo_reconciliation": {
+      "net_loss": "-2.723", "depreciation_amortization": "26.992", "stock_compensation": "5.035", "other_adjustments": "-2.660",
+      "working_capital": {"accounts_receivable": "4.816", "prepaids_other_current_assets": "7.572", "other_assets": "0.260", "accounts_payable": "1.376", "deferred_revenue": "-2.839", "accrued_liabilities": "-22.846", "other_liabilities": "-0.822"}
+    },
+    "h1_2026_cash_bridge": {
+      "opening_cash_including_restricted": "33.411", "operating_cash_flow": "14.161", "cash_capex": "-4.700", "investment_maturities_and_sales": "25.710", "financing_cash_flow": "-21.877", "fx": "-0.451", "ending_cash_including_restricted": "46.254"
+    },
+    "june_30_2026": {"cash_excluding_restricted": "44.623", "short_term_investments": "27.691", "cash_and_investments": "72.314", "notes_principal": "33.860", "notes_net_carrying_value": "33.845", "restructuring_liability": "1.186"}
+  },
+  "management_disclosures": {
+    "q3_2026_guidance_revenue": ["43.0", "44.0"], "q3_2026_guidance_adjusted_ebitda": ["1.0", "2.0"],
+    "september_1_2026": "Remaining convertible notes repaid at maturity. Management disclosed approximately $38m June 30 cash and investments pro forma for repayment; not a September cash balance."
+  },
+  "stress_test": {
+    "boundary": "Illustrative four-quarter stress test, not a forecast of reported Chegg quarters. No seasonality. Opening liquidity is management's rounded June 30 pro-forma amount after debt repayment, not observed September/October liquidity. Debt repayment is not deducted again.",
+    "reference_opening_liquidity": "38.0", "illustrative_reserve_floor": "25.0",
+    "starting_academic_revenue": "26.0", "starting_skilling_revenue": "17.5", "starting_earnings_proxy": "1.5",
+    "academic_contribution_margin": "0.70", "skilling_contribution_margin": "0.45",
+    "quarterly_cash_capex": "3.0", "quarterly_cash_conversion_drag": "0.5", "first_quarter_severance": "1.2",
+    "calibration": "Starting revenue and earnings proxy equal midpoints of Q3 management guidance. Product split, contribution margins, cash costs, payment timing and reserve floor are author assumptions, not disclosed product margins or liquidity guidance. The earnings proxy is not reported adjusted EBITDA."
+  },
+  "scenarios": [
+    {"name": "Managed decline", "academic_sequential_decline": "0.10", "skilling_sequential_growth": "0.05", "opex_sequential_reduction": "0.03"},
+    {"name": "Faster erosion", "academic_sequential_decline": "0.20", "skilling_sequential_growth": "0.02", "opex_sequential_reduction": "0.03"},
+    {"name": "Stronger transition", "academic_sequential_decline": "0.10", "skilling_sequential_growth": "0.10", "opex_sequential_reduction": "0.05"}
+  ]
+}

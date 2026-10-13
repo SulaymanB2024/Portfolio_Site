@@ -18,18 +18,19 @@ import ResearchFigure from '../src/personal/editorial/ResearchFigure'
 const load = (slug: string): WritingArticle => JSON.parse(readFileSync(`src/personal/editorial/data/articles/${slug}.json`, 'utf8'))
 
 test('all published research figures retain their qualification and original source link', () => {
-  let count = 0
+  const initialEditions = new Set(JSON.parse(readFileSync('docs/article-publications.json', 'utf8')).records.map((record: { slug: string }) => record.slug))
+  let retainedFigureCount = 0
   for (const entry of catalog) {
     for (const section of load(entry.slug).sections || []) {
       for (const figure of section.figures || []) {
         const html = renderToStaticMarkup(<ResearchFigure figure={figure} />)
         assert(html.includes(`href="${figure.src}"`), figure.src)
         assert(html.includes(renderToStaticMarkup(<span>{inlineText(figure.caption)}</span>).slice(6, -7)), figure.src)
-        count++
+        if (!initialEditions.has(entry.slug)) retainedFigureCount++
       }
     }
   }
-  assert.equal(count, 39)
+  assert.equal(retainedFigureCount, 39, 'The historical figure collection stays intact as new initial editions are added')
 })
 
 test('an integrated opening omits its duplicate short answer and retains distinct qualifications', () => {

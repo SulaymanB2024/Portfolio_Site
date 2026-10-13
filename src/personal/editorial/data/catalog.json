@@ -1,5 +1,30 @@
 [
   {
+    "slug": "chegg-cash-flow-turnaround",
+    "path": "/research/financial-systems/chegg-cash-flow-turnaround",
+    "title": "Can Chegg Finance Its Own Reinvention?",
+    "displayTitle": "Can Chegg finance its own reinvention?",
+    "seoTitle": "Chegg Case Study: Cash Flow, Debt and the Skilling Pivot",
+    "seoDescription": "A Chegg financial case study traces its 2026 cash-flow improvement, September debt repayment and skilling replacement hurdle, with a reproducible liquidity stress test.",
+    "category": "FINANCIAL SYSTEMS",
+    "subtitle": "A financial case study of Chegg’s transition from academic subscriptions to skilling: what the cash-flow improvement buys, and what a durable recovery still requires.",
+    "searchTerms": [
+      "Chegg",
+      "CHGG",
+      "cash flow",
+      "turnaround",
+      "skilling",
+      "financial analysis",
+      "AI disruption",
+      "capital allocation"
+    ],
+    "date": "2026-10-12",
+    "dateModified": "2026-10-12",
+    "readTime": "16 MIN",
+    "image": "/images/social/chegg-cash-flow-turnaround.png",
+    "kind": "research"
+  },
+  {
     "slug": "atlas-building-an-evidence-console",
     "path": "/writing/atlas-building-an-evidence-console",
     "aliases": [],
