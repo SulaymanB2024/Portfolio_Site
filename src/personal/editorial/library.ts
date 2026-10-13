@@ -125,7 +125,7 @@ const connections: Record<string, string[]> = {
   'why-texas-toll-roads-stay-tolled': ['who-owns-texas-toll-roads', 'how-airlines-borrow-against-loyalty-programs'],
   'how-airlines-borrow-against-loyalty-programs': ['hidden-financing-hardware-startups', 'waymo-hardware-financing'],
   'hidden-financing-hardware-startups': ['waymo-hardware-financing', 'how-airlines-borrow-against-loyalty-programs'],
-  'waymo-hardware-financing': ['texas-waymo-business-travel', 'texas-zoox-market-entry-business'],
+  'waymo-hardware-financing': ['hidden-financing-hardware-startups', 'how-airlines-borrow-against-loyalty-programs'],
   'what-happens-when-an-index-decides-a-company-matters': ['software-buyout-boom-2020-2022-exit-audit', 'how-airlines-borrow-against-loyalty-programs'],
   'software-buyout-boom-2020-2022-exit-audit': ['what-happens-when-an-index-decides-a-company-matters', 'who-owns-austin-home-service-companies'],
   'where-online-returns-actually-go': ['hidden-financing-hardware-startups', 'us-rare-earth-magnet-manufacturing-capacity'],
