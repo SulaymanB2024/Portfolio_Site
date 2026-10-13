@@ -1,0 +1,127 @@
+{
+  "status": "pass",
+  "baseline": "cb70322bb8f46589005c6f655be9044b8d841d58",
+  "checked_files": [
+    {
+      "file": "src/personal/editorial/data/articles/ai-search-crawler-policy.json",
+      "sha256": "e5e110a2cf03407015053ced8a2f6b393f74d792bce81ea6b337c321bf5412bc"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/atlas-building-an-evidence-console.json",
+      "sha256": "07457aba1750fc7bd005eeb683be50c9f8fa08a63d957c99e5bf2d6a2191e697"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/audit-findings-derived-records.json",
+      "sha256": "56f78b5d85a5954f7f79911ad6bba3baeec5f9d8a725ec8194517374d997b335"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/canonical-identity-personal-seo.json",
+      "sha256": "0912ee708429f41b3e41213169a459232609ebacc8fcd4e7c7f444ec98a71bff"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/canonicalization-graph-consistency.json",
+      "sha256": "60a96ffa87f7d0e3dd1a01ca0cea41117babf9bb89bd0654c2156bea26dcb86a"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/crawl-frontier-state-machine.json",
+      "sha256": "930b8283a6af8eff9fc41e109bfc6ee7f05b748576d4e9777f4deec462081668"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/hidden-financing-hardware-startups.json",
+      "sha256": "22e6ee482efe561a585371e322ec2a490272a7c142ad0e776927ce40f31f7994"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/how-airlines-borrow-against-loyalty-programs.json",
+      "sha256": "ad5569981ea1491a1368a5a87a70e976d819a02fbc7bd1c254e1e76100ed4a33"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/internal-links-directed-retrieval-graph.json",
+      "sha256": "e33ad150634f43bf655341551ee402d12652316c0c2338e1deba1781df87ea87"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/jane-street-exact-search-solver-verification.json",
+      "sha256": "0226d91d28777302a3f0252560767d739d584584b5504deb57bc14b47b2bc268"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/raw-html-rendered-dom-evidence.json",
+      "sha256": "12a83d4b08eee6e4cd176dc43b45910bf71dbce3834f76a6bfdb2ccba1a2aa64"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/replayable-traces-ai-agent-evaluation.json",
+      "sha256": "cd30b81e7f6272c4895f322ea28b94f2da20f4891e87ff2fa672651ff86f0624"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/robots-txt-courtesy-not-access-control.json",
+      "sha256": "02c87c4ee2be8d704469c1ee9f93a843d30d8c843aedd68b03ac7187a0e713a7"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/software-buyout-boom-2020-2022-exit-audit.json",
+      "sha256": "673bb7e16695b6683e77615b4e0bff173eef0f7cec23bad29dd9352f54c2d725"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/sqlite-crawl-pipelines.json",
+      "sha256": "f1a3ed5ca66be292a52dce18890d2fed438c6535a320c7394e52bc054dc8caf7"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/structured-data-without-content-drift.json",
+      "sha256": "9185d3cc67273b3fd46e259d2216218432fd326897fbc8d3976350d5805376fd"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/technical-seo-migration-release-gates.json",
+      "sha256": "007edb6ccb64ba46f0a411bca1cf66cf669bde5ae177ee46b61f446fef0b8916"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/technical-seo-public-data-infrastructure.json",
+      "sha256": "345e22a3f642fd3e1f1bb5f6030be40069d0836f72e7ee6368a2133df84bd911"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/the-ai-megawatt.json",
+      "sha256": "613478c181edf154d04d8a4882ebf3e25e04ea09b3ef9318d7356dfc0cb8f480"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/the-first-ai-managers.json",
+      "sha256": "35e1c3ee4e2d8bd7cc56c69e51c25bb03fdc8358bf8f14f6ea42e2d5f5f9770a"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/us-rare-earth-magnet-manufacturing-capacity.json",
+      "sha256": "dd8b279fc25858c166da18f90126a5c8457b1e04e54589f782f63bf16e1c2f32"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/viralbench-codex-agent-harness.json",
+      "sha256": "78466bdb7efa1ca4685c12aba3f4892d2d1f6ab3ff1e2a94a1738633d8c29e4c"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/waymo-hardware-financing.json",
+      "sha256": "b7605d8b1e2dd26c088f681d797186321459ac93f42db9245638cfb1dfcf773f"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/west-campus-student-housing.json",
+      "sha256": "af5ca3da0d87307e00f6ff3b6fc2a268ca8da9a6c1fc7c507e2492f50a284e9e"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/what-happens-when-an-index-decides-a-company-matters.json",
+      "sha256": "802ab80c7c2460905ba5a428dc745aa6bcdea350cb08729ec7336b2d8c1965d8"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/where-online-returns-actually-go.json",
+      "sha256": "2eb44b48a74a45579b24dbb95456790185c43c0d25b7ca152469e39f26b27866"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/who-owns-austin-home-service-companies.json",
+      "sha256": "51fea94a03de9a44667557d0c5b62773337b8351f5798d637c363a9da9113ac6"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/who-owns-texas-toll-roads.json",
+      "sha256": "c3cb578d8ee0d1c58398b424275cbe5628babf8356dd6814d07fe46f9186152c"
+    },
+    {
+      "file": "src/personal/editorial/data/articles/why-texas-toll-roads-stay-tolled.json",
+      "sha256": "dab2e5849c89f33e5f5b1f994839de9682971f7879d20e4537c6320c8df06f0c"
+    },
+    {
+      "file": "src/personal/editorial/data/catalog.json",
+      "sha256": "7c0585ee82a3e8be753dbb27930abf685bf946c77381e268004618e2f7af021f"
+    }
+  ],
+  "boundary": "Existing tracked article data and catalog match the isolated main baseline; newly authored lane files are separate."
+}

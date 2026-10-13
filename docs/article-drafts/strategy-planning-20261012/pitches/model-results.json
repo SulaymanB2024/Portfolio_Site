@@ -1,0 +1,617 @@
+{
+  "status": "dated anchors plus declared scenarios; no probabilities; user changes are not independently verified",
+  "input_sha256": "8b93829fe44c607f80e3bdb495be9f2917ad5e42d887e9a0a3cd7c5f9e9f2779",
+  "toast": {
+    "quarter": "Q2 2026",
+    "sub_gp_m": 226,
+    "fintech_gp_m": 359,
+    "recurring_gp_m": 585,
+    "total_gp_m": 516,
+    "hardware_services_gp_m": -68,
+    "intangibles_cost_m": 1,
+    "q2_operating_income_m": 152,
+    "q2_operating_conversion": 0.25982905982905985,
+    "ttm_gp_anchor": 2082000000.0,
+    "fy25_recurring_gp_m": 1818,
+    "h125_recurring_gp_m": 841,
+    "h126_recurring_gp_m": 1105,
+    "ttm_operating_income_m": 431,
+    "ttm_operating_conversion": 0.2070124879923151,
+    "ttm_fcf_m": 576,
+    "payments_gp_m": 302,
+    "non_payments_fintech_gp_m": 57,
+    "payments_gp_per_gpv": 0.004975288303130148,
+    "h1_fcf_m": 245,
+    "h1_prior_fcf_m": 277,
+    "h1_sbc_m": 109,
+    "h1_inventory_cash_use_m": 103,
+    "h1_contract_acquisition_cash_m": 93,
+    "h1_contract_cost_amortization_m": 46,
+    "eligible_liquidity": 1713000000.0,
+    "initial_shares_proxy": 590000000.0,
+    "annual_share_growth": 0.01,
+    "reference_price": 31.29,
+    "reference_timestamp": "2026-10-12 19:03:30 UTC",
+    "scenario_years": 3,
+    "tax_rate": 0.25,
+    "scenarios": {
+      "downside": {
+        "gp_growth": 0.1,
+        "operating_conversion": 0.22,
+        "exit_ev_to_after_tax_operating_earnings": 22,
+        "terminal_recurring_gp": 2771142000.000001,
+        "terminal_operating_income": 609651240.0000002,
+        "terminal_after_tax_operating_earnings": 457238430.0000002,
+        "terminal_enterprise_value": 10059245460.000004,
+        "terminal_equity_value": 11772245460.000004,
+        "terminal_shares": 607877590.0000001,
+        "terminal_value_per_share": 19.36614485163041,
+        "maximum_entry_for_15_percent": 12.733554599576173,
+        "entry_return_hurdle": 0.15,
+        "returns_at_entry": {
+          "25": -0.08159468360234046,
+          "30": -0.1357475081539219,
+          "31.29": -0.14779148167382294,
+          "35": -0.17903424102065035,
+          "40": -0.2147744998300003
+        }
+      },
+      "base": {
+        "gp_growth": 0.18,
+        "operating_conversion": 0.3,
+        "exit_ev_to_after_tax_operating_earnings": 27,
+        "terminal_recurring_gp": 3420792623.9999995,
+        "terminal_operating_income": 1026237787.1999998,
+        "terminal_after_tax_operating_earnings": 769678340.3999999,
+        "terminal_enterprise_value": 20781315190.799995,
+        "terminal_equity_value": 22494315190.799995,
+        "terminal_shares": 607877590.0000001,
+        "terminal_value_per_share": 37.00467916706716,
+        "maximum_entry_for_15_percent": 24.331177228284485,
+        "entry_return_hurdle": 0.15,
+        "returns_at_entry": {
+          "25": 0.13965188064662093,
+          "30": 0.07245348007049213,
+          "31.29": 0.05750807761327237,
+          "35": 0.01873884488946609,
+          "40": -0.02561134825470801
+        }
+      },
+      "upside": {
+        "gp_growth": 0.25,
+        "operating_conversion": 0.35,
+        "exit_ev_to_after_tax_operating_earnings": 32,
+        "terminal_recurring_gp": 4066406250.0,
+        "terminal_operating_income": 1423242187.5,
+        "terminal_after_tax_operating_earnings": 1067431640.625,
+        "terminal_enterprise_value": 34157812500.0,
+        "terminal_equity_value": 35870812500.0,
+        "terminal_shares": 607877590.0000001,
+        "terminal_value_per_share": 59.00992747569456,
+        "maximum_entry_for_15_percent": 38.79998518990355,
+        "entry_return_hurdle": 0.15,
+        "returns_at_entry": {
+          "25": 0.3314607161665639,
+          "30": 0.25295250495247346,
+          "31.29": 0.23549172013123765,
+          "35": 0.19019744102349923,
+          "40": 0.13838289929487657
+        }
+      }
+    }
+  },
+  "harvey": {
+    "entry_equity_benchmark": 15500000000.0,
+    "future_dilution": 0.25,
+    "years": 5,
+    "hurdle_return": 0.2,
+    "starting_arr_status": "illustrative, not observed",
+    "scenarios": {
+      "downside": {
+        "starting_arr_assumption": 400000000.0,
+        "arr_growth": 0.25,
+        "exit_equity_to_arr": 10,
+        "terminal_arr": 1220703125.0,
+        "terminal_equity": 12207031250.0,
+        "gross_multiple": 0.5906628024193549,
+        "annualized_return": -0.09994733053035243
+      },
+      "base": {
+        "starting_arr_assumption": 400000000.0,
+        "arr_growth": 0.4,
+        "exit_equity_to_arr": 20,
+        "terminal_arr": 2151295999.999999,
+        "terminal_equity": 43025919999.999985,
+        "gross_multiple": 2.081899354838709,
+        "annualized_return": 0.1579557033301311
+      },
+      "upside": {
+        "starting_arr_assumption": 400000000.0,
+        "arr_growth": 0.55,
+        "exit_equity_to_arr": 25,
+        "terminal_arr": 3578643875.0,
+        "terminal_equity": 89466096875.0,
+        "gross_multiple": 4.3290046875,
+        "annualized_return": 0.34053331393105624
+      }
+    },
+    "hurdles": {
+      "10": {
+        "required_exit_equity": 51425279999.99999,
+        "required_exit_arr": 5142527999.999999
+      },
+      "15": {
+        "required_exit_equity": 51425279999.99999,
+        "required_exit_arr": 3428351999.9999995
+      },
+      "20": {
+        "required_exit_equity": 51425279999.99999,
+        "required_exit_arr": 2571263999.9999995
+      },
+      "25": {
+        "required_exit_equity": 51425279999.99999,
+        "required_exit_arr": 2057011199.9999998
+      }
+    },
+    "growth_required_by_starting_arr": {
+      "200000000": 0.6665691363193988,
+      "400000000": 0.45083270039478784,
+      "600000000": 0.3378243112704331
+    },
+    "customer_value": {
+      "seats": 100,
+      "adoption": 0.6,
+      "eligible_hours_saved_week": 6,
+      "weeks": 46,
+      "additional_review_fraction": 0.2,
+      "gross_hours": 16560.0,
+      "net_freed_hours": 13248.0,
+      "assumed_annual_license_per_seat": 2400,
+      "implementation_first_year": 50000,
+      "first_year_total_cost": 290000,
+      "contribution_per_monetized_hour": 200,
+      "break_even_monetization_fraction": 0.10945048309178744,
+      "cases": {
+        "0.1": {
+          "monetization_fraction": 0.1,
+          "incremental_contribution": 264960.0,
+          "net_first_year_benefit": -25040.0
+        },
+        "0.25": {
+          "monetization_fraction": 0.25,
+          "incremental_contribution": 662400.0,
+          "net_first_year_benefit": 372400.0
+        },
+        "0.4": {
+          "monetization_fraction": 0.4,
+          "incremental_contribution": 1059840.0,
+          "net_first_year_benefit": 769840.0
+        }
+      }
+    },
+    "delivery": {
+      "250": {
+        "cost_per_active_seat_year": 250,
+        "active_seats_assumed": 108333.33333333333,
+        "non_inference_delivery_cost": 60000000.0,
+        "inference_and_workflow_cost": 27083333.333333332,
+        "modeled_gross_profit": 312916666.6666667,
+        "modeled_gross_margin": 0.7822916666666667
+      },
+      "900": {
+        "cost_per_active_seat_year": 900,
+        "active_seats_assumed": 108333.33333333333,
+        "non_inference_delivery_cost": 60000000.0,
+        "inference_and_workflow_cost": 97500000.0,
+        "modeled_gross_profit": 242500000.0,
+        "modeled_gross_margin": 0.60625
+      },
+      "1800": {
+        "cost_per_active_seat_year": 1800,
+        "active_seats_assumed": 108333.33333333333,
+        "non_inference_delivery_cost": 60000000.0,
+        "inference_and_workflow_cost": 195000000.0,
+        "modeled_gross_profit": 145000000.0,
+        "modeled_gross_margin": 0.3625
+      }
+    },
+    "customer_sensitivity": [
+      {
+        "adoption": 0.3,
+        "review": 0.2,
+        "required_monetization": 0.21890096618357488
+      },
+      {
+        "adoption": 0.3,
+        "review": 0.4,
+        "required_monetization": 0.2918679549114332
+      },
+      {
+        "adoption": 0.3,
+        "review": 0.6,
+        "required_monetization": 0.43780193236714976
+      },
+      {
+        "adoption": 0.6,
+        "review": 0.2,
+        "required_monetization": 0.10945048309178744
+      },
+      {
+        "adoption": 0.6,
+        "review": 0.4,
+        "required_monetization": 0.1459339774557166
+      },
+      {
+        "adoption": 0.6,
+        "review": 0.6,
+        "required_monetization": 0.21890096618357488
+      },
+      {
+        "adoption": 0.9,
+        "review": 0.2,
+        "required_monetization": 0.0729669887278583
+      },
+      {
+        "adoption": 0.9,
+        "review": 0.4,
+        "required_monetization": 0.09728931830381106
+      },
+      {
+        "adoption": 0.9,
+        "review": 0.6,
+        "required_monetization": 0.1459339774557166
+      }
+    ]
+  },
+  "vanta": {
+    "entry_equity_benchmark": 4150000000.0000005,
+    "reported_arr_anchor": 300000000.0,
+    "reported_customers_anchor": 16000,
+    "arr_anchor_date": "2026-04-29",
+    "future_dilution": 0.2,
+    "years": 5,
+    "hurdle_return": 0.2,
+    "scenarios": {
+      "downside": {
+        "gross_arr_retention": 0.85,
+        "retained_arr_expansion": 0.05,
+        "net_arr_retention": 0.8925,
+        "rows": [
+          {
+            "year": 1,
+            "opening_arr": 300000000.0,
+            "lost_arr": 45000000.00000001,
+            "retained_expansion_arr": 12750000.0,
+            "new_arr": 50000000.0,
+            "ending_arr": 317750000.0,
+            "cohorts": [
+              267750000.0,
+              50000000.0
+            ]
+          },
+          {
+            "year": 2,
+            "opening_arr": 317750000.0,
+            "lost_arr": 47662500.00000001,
+            "retained_expansion_arr": 13504375.0,
+            "new_arr": 55000000.0,
+            "ending_arr": 338591875.0,
+            "cohorts": [
+              238966875.0,
+              44625000.0,
+              55000000.0
+            ]
+          },
+          {
+            "year": 3,
+            "opening_arr": 338591875.0,
+            "lost_arr": 50788781.25000001,
+            "retained_expansion_arr": 14390154.6875,
+            "new_arr": 60000000.0,
+            "ending_arr": 362193248.4375,
+            "cohorts": [
+              213277935.9375,
+              39827812.5,
+              49087500.0,
+              60000000.0
+            ]
+          },
+          {
+            "year": 4,
+            "opening_arr": 362193248.4375,
+            "lost_arr": 54328987.26562501,
+            "retained_expansion_arr": 15393213.05859375,
+            "new_arr": 65000000.0,
+            "ending_arr": 388257474.23046875,
+            "cohorts": [
+              190350557.82421875,
+              35546322.65625,
+              43810593.75,
+              53550000.0,
+              65000000.0
+            ]
+          },
+          {
+            "year": 5,
+            "opening_arr": 388257474.23046875,
+            "lost_arr": 58238621.13457032,
+            "retained_expansion_arr": 16500942.654794924,
+            "new_arr": 70000000.0,
+            "ending_arr": 416519795.7506933,
+            "cohorts": [
+              169887872.85811523,
+              31725092.970703125,
+              39100954.921875,
+              47793375.0,
+              58012500.0,
+              70000000.0
+            ]
+          }
+        ],
+        "exit_equity_to_arr": 6,
+        "terminal_arr": 416519795.7506933,
+        "terminal_equity": 2499118774.50416,
+        "gross_multiple": 0.48175783604899464,
+        "annualized_return": -0.13589651340932274
+      },
+      "base": {
+        "gross_arr_retention": 0.93,
+        "retained_arr_expansion": 0.15,
+        "net_arr_retention": 1.0695,
+        "rows": [
+          {
+            "year": 1,
+            "opening_arr": 300000000.0,
+            "lost_arr": 20999999.999999985,
+            "retained_expansion_arr": 41850000.0,
+            "new_arr": 100000000.0,
+            "ending_arr": 420850000.0,
+            "cohorts": [
+              320850000.0,
+              100000000.0
+            ]
+          },
+          {
+            "year": 2,
+            "opening_arr": 420850000.0,
+            "lost_arr": 29459499.999999978,
+            "retained_expansion_arr": 58708575.0,
+            "new_arr": 115000000.0,
+            "ending_arr": 565099075.0,
+            "cohorts": [
+              343149075.0,
+              106949999.99999999,
+              115000000.0
+            ]
+          },
+          {
+            "year": 3,
+            "opening_arr": 565099075.0,
+            "lost_arr": 39556935.24999997,
+            "retained_expansion_arr": 78831320.96249999,
+            "new_arr": 130000000.0,
+            "ending_arr": 734373460.7125,
+            "cohorts": [
+              366997935.7125,
+              114383024.99999997,
+              122992499.99999999,
+              130000000.0
+            ]
+          },
+          {
+            "year": 4,
+            "opening_arr": 734373460.7125,
+            "lost_arr": 51406142.249874964,
+            "retained_expansion_arr": 102445097.76939376,
+            "new_arr": 145000000.0,
+            "ending_arr": 930412416.2320186,
+            "cohorts": [
+              392504292.2445187,
+              122332645.23749997,
+              131540478.74999997,
+              139035000.0,
+              145000000.0
+            ]
+          },
+          {
+            "year": 5,
+            "opening_arr": 930412416.2320186,
+            "lost_arr": 65128869.13624126,
+            "retained_expansion_arr": 129792532.06436661,
+            "new_arr": 160000000.0,
+            "ending_arr": 1155076079.1601439,
+            "cohorts": [
+              419783340.5555127,
+              130834764.08150621,
+              140682542.02312496,
+              148697932.5,
+              155077500.0,
+              160000000.0
+            ]
+          }
+        ],
+        "exit_equity_to_arr": 10,
+        "terminal_arr": 1155076079.1601439,
+        "terminal_equity": 11550760791.601439,
+        "gross_multiple": 2.2266526827183495,
+        "annualized_return": 0.17362809148760205
+      },
+      "upside": {
+        "gross_arr_retention": 0.95,
+        "retained_arr_expansion": 0.22,
+        "net_arr_retention": 1.159,
+        "rows": [
+          {
+            "year": 1,
+            "opening_arr": 300000000.0,
+            "lost_arr": 15000000.000000013,
+            "retained_expansion_arr": 62700000.0,
+            "new_arr": 110000000.0,
+            "ending_arr": 457700000.0,
+            "cohorts": [
+              347700000.0,
+              110000000.0
+            ]
+          },
+          {
+            "year": 2,
+            "opening_arr": 457700000.0,
+            "lost_arr": 22885000.00000002,
+            "retained_expansion_arr": 95659300.0,
+            "new_arr": 135000000.0,
+            "ending_arr": 665474300.0,
+            "cohorts": [
+              402984300.0,
+              127490000.0,
+              135000000.0
+            ]
+          },
+          {
+            "year": 3,
+            "opening_arr": 665474300.0,
+            "lost_arr": 33273715.00000003,
+            "retained_expansion_arr": 139084128.7,
+            "new_arr": 160000000.0,
+            "ending_arr": 931284713.7,
+            "cohorts": [
+              467058803.7,
+              147760910.0,
+              156465000.0,
+              160000000.0
+            ]
+          },
+          {
+            "year": 4,
+            "opening_arr": 931284713.7,
+            "lost_arr": 46564235.68500005,
+            "retained_expansion_arr": 194638505.1633,
+            "new_arr": 185000000.0,
+            "ending_arr": 1264358983.1783,
+            "cohorts": [
+              541321153.4883,
+              171254894.69,
+              181342935.0,
+              185440000.0,
+              185000000.0
+            ]
+          },
+          {
+            "year": 5,
+            "opening_arr": 1264358983.1783,
+            "lost_arr": 63217949.15891505,
+            "retained_expansion_arr": 264251027.48426467,
+            "new_arr": 210000000.0,
+            "ending_arr": 1675392061.5036495,
+            "cohorts": [
+              627391216.8929396,
+              198484422.94570997,
+              210176461.665,
+              214924960.0,
+              214415000.0,
+              210000000.0
+            ]
+          }
+        ],
+        "exit_equity_to_arr": 12,
+        "terminal_arr": 1675392061.5036495,
+        "terminal_equity": 20104704738.043793,
+        "gross_multiple": 3.875605732634948,
+        "annualized_return": 0.31119691250810244
+      }
+    },
+    "hurdles": {
+      "6": {
+        "required_exit_equity": 12908159999.999996,
+        "required_exit_arr": 2151359999.9999995
+      },
+      "10": {
+        "required_exit_equity": 12908159999.999996,
+        "required_exit_arr": 1290815999.9999995
+      },
+      "12": {
+        "required_exit_equity": 12908159999.999996,
+        "required_exit_arr": 1075679999.9999998
+      }
+    },
+    "customer_value": {
+      "normalized_annual_license": 18750.0,
+      "status": "ARR/customer normalization, not disclosed price or verified paid-cohort ACV",
+      "first_year_implementation": 5000,
+      "control_hours_week": 8,
+      "weeks": 46,
+      "questionnaires_month": 10,
+      "hours_each_before": 1.5,
+      "hours_each_after": 0.5,
+      "annual_freed_hours": 488.0,
+      "avoidable_cost_per_hour": 80,
+      "cases": {
+        "0.25": {
+          "cash_capture": 0.25,
+          "cash_avoidance": 9760.0,
+          "net_first_year_cash_benefit": -13990.0,
+          "net_recurring_cash_benefit": -8990.0
+        },
+        "0.5": {
+          "cash_capture": 0.5,
+          "cash_avoidance": 19520.0,
+          "net_first_year_cash_benefit": -4230.0,
+          "net_recurring_cash_benefit": 770.0
+        },
+        "1.0": {
+          "cash_capture": 1.0,
+          "cash_avoidance": 39040.0,
+          "net_first_year_cash_benefit": 15290.0,
+          "net_recurring_cash_benefit": 20290.0
+        }
+      },
+      "break_even_first_year_capture": 0.6083504098360656
+    },
+    "customer_sensitivity": [
+      {
+        "work_weeks": 16,
+        "cash_capture": 0.25,
+        "net_first_year_benefit": -18790.0
+      },
+      {
+        "work_weeks": 16,
+        "cash_capture": 0.5,
+        "net_first_year_benefit": -13830.0
+      },
+      {
+        "work_weeks": 16,
+        "cash_capture": 1.0,
+        "net_first_year_benefit": -3910.0
+      },
+      {
+        "work_weeks": 32,
+        "cash_capture": 0.25,
+        "net_first_year_benefit": -16230.0
+      },
+      {
+        "work_weeks": 32,
+        "cash_capture": 0.5,
+        "net_first_year_benefit": -8710.0
+      },
+      {
+        "work_weeks": 32,
+        "cash_capture": 1.0,
+        "net_first_year_benefit": 6330.0
+      },
+      {
+        "work_weeks": 46,
+        "cash_capture": 0.25,
+        "net_first_year_benefit": -13990.0
+      },
+      {
+        "work_weeks": 46,
+        "cash_capture": 0.5,
+        "net_first_year_benefit": -4230.0
+      },
+      {
+        "work_weeks": 46,
+        "cash_capture": 1.0,
+        "net_first_year_benefit": 15290.0
+      }
+    ]
+  }
+}

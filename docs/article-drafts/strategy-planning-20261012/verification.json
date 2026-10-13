@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "main_manuscript_words": 2735,
+  "reading_minutes": 12,
+  "sources_resolving": 7,
+  "sections": 8,
+  "tables": 4,
+  "figures": 3,
+  "independent_math": "Decimal cohort-sum recomputation and capacity boundary pass",
+  "article_sha256": "10f57181c5cf01b5b57189c63c7043aff1b614e7d39b097df45eda7357d18097",
+  "figure_sha256": {
+    "strategy-growth-channel-cash-capacity.svg": "703ecac0050a587f1782b9934ab9511a4f75bd5190fa4900459db1bd7dc9068c",
+    "strategy-growth-price-counterfactual.svg": "3e67a0265123457bea6877e356fafd5e27768a8e5feacc2c04db0b84fcf32a53",
+    "strategy-growth-channel-cash-paths.svg": "05a5d4774c994c6a6b93677897987f1d513701895c1fa9eac88912c5d72c3610"
+  },
+  "publication": "unperformed; shared catalog and artwork/route integration owned by parent"
+}
