@@ -17,10 +17,10 @@ const row = (company = 'Google', status = 'Ready', copy = lines) => {
   return cells
 }
 
-function automation(input: any[][], companyNames: string[] = [], withSheet = true) {
+function automation(input: any[][], companyNames: string[] = [], withSheet = true, signingKey = secret) {
   const rows = [headers.slice(), ...input.map(value => value.slice())]
   const companyRows = [companyHeaders.slice(), ...companyNames.map(name => [name, '', '', '', '', ''])]
-  const properties = new Map<string, string>([['OUTREACH_SYNC_SECRET', secret]])
+  const properties = new Map<string, string>([['OUTREACH_SYNC_SECRET', signingKey]])
   const state = {
     posts: [] as any[], checks: [] as any[], sleeps: [] as number[], releases: 0,
     published: {} as Record<string, { company: string; slug: string; lines: string[]; enabled: boolean }>,
@@ -83,16 +83,20 @@ function automation(input: any[][], companyNames: string[] = [], withSheet = tru
     PropertiesService: { getScriptProperties: () => ({ getProperty: (key: string) => properties.get(key), setProperty: (key: string, value: string) => properties.set(key, value), deleteProperty: (key: string) => properties.delete(key) }) },
     LockService: { getScriptLock: () => ({ tryLock: () => !state.locked, releaseLock: () => { state.releases++ } }) },
     Utilities: {
-      getUuid: randomUUID, DigestAlgorithm: { SHA_256: 'sha256' },
+      getUuid: randomUUID, DigestAlgorithm: { SHA_256: 'sha256' }, Charset: { UTF_8: 'UTF-8' },
       computeDigest: (_: string, value: string) => [...createHash('sha256').update(value).digest()],
       base64Encode: (value: number[]) => Buffer.from(value).toString('base64'),
-      computeHmacSha256Signature: (value: string, key: string) => [...createHmac('sha256', key).update(value).digest()].map(byte => byte > 127 ? byte - 256 : byte),
+      computeHmacSha256Signature: (value: string, key: string, charset: string) => {
+        assert.equal(charset, 'UTF-8')
+        return [...createHmac('sha256', Buffer.from(key, 'utf8')).update(value, 'utf8').digest()].map(byte => byte > 127 ? byte - 256 : byte)
+      },
       sleep: (delay: number) => { state.sleeps.push(delay); if (state.propagationOnSleep) state.serveMode = 'valid' },
     },
     UrlFetchApp: {
       fetch(url: string, options: any) {
         assert.equal(url, 'https://sulayman-bowles.dev/api/outreach-sync')
-        assert(validSyncSignature(options.payload, options.headers['X-Outreach-Timestamp'], options.headers['X-Outreach-Signature'], secret))
+        assert.equal(options.contentType, 'application/json; charset=utf-8')
+        assert(validSyncSignature(options.payload, options.headers['X-Outreach-Timestamp'], options.headers['X-Outreach-Signature'], signingKey))
         const input = JSON.parse(options.payload)
         assert.equal(input.spreadsheetId, outreachSpreadsheetId)
         state.posts.push(input)
@@ -143,6 +147,15 @@ function automation(input: any[][], companyNames: string[] = [], withSheet = tru
     resolve: (cells: any[]) => [...context.outreachResolveOpeningLines_(cells)],
     edit: (name: string, column: number) => context.outreachSheetEdited({ range: { getSheet: () => ({ getName: () => name }), getColumn: () => column, getLastRow: () => 2 } }) }
 }
+
+test('Unicode opening text and signing keys use the same UTF-8 bytes as the server', () => {
+  const copy = ['Zoë — I build tools with', 'Python and SQL.', 'I like answers tied to', 'checkable sources.']
+  const app = automation([row('Google', 'Ready', copy)], [], true, 'tést-only-UTF8-signing-key-'.repeat(3))
+  app.run()
+  assert.deepEqual(app.state.posts[0].openings[0].lines, copy)
+  assert.equal(app.rows[1][19], 'Live')
+  assert.deepEqual(app.state.published[app.rows[1][0]].lines, copy)
+})
 
 test('personalized batches reuse HMAC and send only resolved public fields; same-company pairings keep distinct IDs', () => {
   const first = row(); first[2] = 'rel-private'; first[3] = 'Taylor'; first[4] = 'app-private'; first[5] = 'Data internship'

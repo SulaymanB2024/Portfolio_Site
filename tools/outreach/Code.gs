@@ -155,10 +155,10 @@ function outreachReconcileCompanies_() {
     if (inputHash === properties.getProperty('OUTREACH_LAST_VERIFIED_INPUT') && complete && outreachOutputHash_(rows) === properties.getProperty('OUTREACH_LAST_VERIFIED_OUTPUT')) return;
     var payload = JSON.stringify({ spreadsheetId: OUTREACH_WORKBOOK_ID, sheet: OUTREACH_SHEET, companies: companies });
     var timestamp = String(Date.now());
-    var signature = Utilities.computeHmacSha256Signature(timestamp + '.' + payload, secret)
+    var signature = Utilities.computeHmacSha256Signature(timestamp + '.' + payload, secret, Utilities.Charset.UTF_8)
       .map(function(byte) { return ('0' + ((byte + 256) % 256).toString(16)).slice(-2); }).join('');
     var response = UrlFetchApp.fetch(OUTREACH_SYNC_URL, {
-      method: 'post', contentType: 'application/json', payload: payload, muteHttpExceptions: true,
+      method: 'post', contentType: 'application/json; charset=utf-8', payload: payload, muteHttpExceptions: true,
       headers: { 'X-Outreach-Timestamp': timestamp, 'X-Outreach-Signature': signature },
     });
     var result;
@@ -344,8 +344,8 @@ function outreachReconcileOpenings_() {
     if (inputHash === properties.getProperty('OUTREACH_OPENINGS_LAST_VERIFIED_INPUT') && complete && outreachOpeningOutputHash_(rows) === properties.getProperty('OUTREACH_OPENINGS_LAST_VERIFIED_OUTPUT')) return;
     var payload = JSON.stringify({ spreadsheetId: OUTREACH_WORKBOOK_ID, sheet: OUTREACH_OPENINGS_SHEET, openings: openings });
     var timestamp = String(Date.now());
-    var signature = Utilities.computeHmacSha256Signature(timestamp + '.' + payload, secret).map(function(byte) { return ('0' + ((byte + 256) % 256).toString(16)).slice(-2); }).join('');
-    var response = UrlFetchApp.fetch(OUTREACH_SYNC_URL, { method: 'post', contentType: 'application/json', payload: payload, muteHttpExceptions: true, headers: { 'X-Outreach-Timestamp': timestamp, 'X-Outreach-Signature': signature } });
+    var signature = Utilities.computeHmacSha256Signature(timestamp + '.' + payload, secret, Utilities.Charset.UTF_8).map(function(byte) { return ('0' + ((byte + 256) % 256).toString(16)).slice(-2); }).join('');
+    var response = UrlFetchApp.fetch(OUTREACH_SYNC_URL, { method: 'post', contentType: 'application/json; charset=utf-8', payload: payload, muteHttpExceptions: true, headers: { 'X-Outreach-Timestamp': timestamp, 'X-Outreach-Signature': signature } });
     var result;
     try { result = JSON.parse(response.getContentText()); } catch (_) { throw new Error('Sync endpoint did not return JSON.'); }
     if (response.getResponseCode() !== 200 || !Array.isArray(result.links)) throw new Error(result.error || 'Opening synchronization failed.');
