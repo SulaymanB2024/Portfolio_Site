@@ -1,0 +1,348 @@
+{
+  "slug": "texas-driverless-freight-route-economics",
+  "path": "/research/texas/texas-driverless-freight-route-economics",
+  "title": "Texas Driverless Freight: Buy the Whole Route",
+  "displayTitle": "Price the Whole Freight Route",
+  "seoTitle": "Texas Driverless Freight Costs and Lane Procurement 2026",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "A complete-route comparison for shippers deciding between direct driverless delivery, terminal transfers and conventional backup capacity.",
+  "seoDescription": "Price a Texas driverless freight lane with declared shipment costs, load acceptance, terminal handoffs, inspections, backup capacity and exception sensitivities.",
+  "date": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "11 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Reviewed October 12, 2026. Public operator and federal-agency records establish selected capabilities and diligence questions, not a current shipper quote or an operator’s unit economics. Every price, shipment count, acceptance share, exception rate and loss amount in the worked model is a declared assumption. The model compares one hypothetical Texas lane; it does not forecast company savings, safety, profitability or guaranteed 24-hour service.",
+  "content": [
+    "A driverless freight proposal becomes useful when it can deliver a defined load to the receiving business at a known total cost. The price of automated highway miles is only one input. A shipper also needs accepted endpoints, available receiving windows, equipment compatibility, inspection and release work, recovery capacity and somebody responsible when a shipment leaves the planned operating domain.",
+    "Texas offers several operating designs. Aurora reports driverless service between customer facilities; Volvo and Waabi’s Warp operation also reaches third-party facilities but retains an observer in the driver’s seat. International and Ryder’s PlusAI trial uses existing customer locations with a safety driver. A universal two-terminal transfer model would misdescribe these cases. [Aurora endpoints](#source-aurora-q2); [Warp boundaries](#source-waabi-warp); [Ryder pilot](#source-international-ryder).",
+    "The buying decision is therefore about a complete route and a fallback arrangement. Use the public evidence to identify a candidate, then replace the declared assumptions below with a scoped quote, actual shipment history and a measured trial. A lower cost per automated mile should earn a closer look; it cannot authorize a production-critical route by itself."
+  ],
+  "sections": [
+    {
+      "id": "define-the-service",
+      "title": "Write the job before asking for the driverless price",
+      "paragraphs": [
+        "Define the delivery unit: one loaded shipment from a named origin to accepted receipt at a named destination. Include gates, yard movements, docks, intermediate stops, trailer type, cargo weight and dimensions, temperature requirements, pickup deadline and receiving window. Ask the provider to mark every unsupported segment and condition on that job description.",
+        "An endpoint capability is not permission to use every customer property. Aurora’s Midland–Monahans disclosure supports that particular released operation; its shareholder letter separately calls fueling and weigh-station work supervised testing. Waabi’s Warp announcement supports direct facilities while preserving an onboard observer. Get the released configuration for your route, rather than stretching either statement into universal access. [Aurora operation and pilots](#source-aurora-q2); [Warp configuration](#source-waabi-warp).",
+        "For a fixed distribution schedule, distinguish gate arrival from unloaded, accepted delivery. For a factory, specify how much lateness inventory can absorb before production loses contribution. The commercial objective is a usable delivery window. The truck’s ability to travel farther can help only when the receiving operation can use the arrival."
+      ]
+    },
+    {
+      "id": "who-owns-the-work",
+      "title": "Choose a responsibility model that can be priced",
+      "paragraphs": [
+        "Aurora’s July explanation describes Transportation-as-a-Service: Aurora owns and operates the trucks and customers buy dedicated capacity. Customer ownership is described as a future model. Kodiak’s October Charger release describes Driver-as-a-Service on customer-owned and operated trucks, while its current Laredo run retains a safety driver. A buyer comparing the two must reconcile what the price includes. [Aurora ownership model](#source-aurora-faq); [Kodiak ownership and current role](#source-kodiak-charger).",
+        "In a transport-service quote, ask whether tractor, trailer, fuel, tolls, maintenance, normal roadside support, remote assistance and empty repositioning are included. In a fleet-owned model, those expenses may sit with the fleet alongside financing, insurance and technology fees. Assign each cost to one party and one line. Do not add the provider’s fuel again when it is already included, or treat a return trip as free because the loaded outbound leg is automated.",
+        "Also map the work outside driving: sealing and securing cargo, inspecting the vehicle, opening a gate, loading, unloading, checking temperature, handling paperwork and releasing the truck. Specify which tasks need your staff and when. A role disappears from the cab only if the job and its cost actually disappear from the complete route."
+      ]
+    },
+    {
+      "id": "quote-comparison",
+      "title": "Compare direct delivery and handoffs explicitly",
+      "paragraphs": [
+        "If the provider accepts both facilities, price a direct option. If it accepts only transfer points, price local drayage at both ends and the custody, inspection and waiting work at those points. Transfers can be a valid design when they create a usable lane; they should be a priced option rather than an assumption applied to every operator.",
+        "The example assumes 1,000 one-way Dallas–Houston shipments over one year, each with 250 loaded road miles in the planning model. No actual operator is assigned these endpoints or prices. Current human transport costs $1,400 per load, plus $100 of shipper loading and receiving labor. The quote includes the carrier’s fuel, equipment, tolls, normal support and repositioning. All alternatives include the same $100 warehouse work.",
+        "The direct-service assumption is $1,150 inclusive of provider road-operation expenses, plus $60 of additional shipper inspection/release work. The transfer option assumes $950 linehaul, two $120 local moves, $40 transfer processing and $50 extra inspection/release work. Each autonomous option also has $40,000 of first-year integration and setup cost, accounted for annually rather than hidden inside a high-volume unit price."
+      ],
+      "table": {
+        "caption": "Declared price stack per shipment accepted by the selected service",
+        "columns": [
+          "Cost item",
+          "Current human service",
+          "Direct option",
+          "Transfer option"
+        ],
+        "rows": [
+          [
+            "Inclusive carrier service / linehaul",
+            "$1,400",
+            "$1,150",
+            "$950"
+          ],
+          [
+            "Local drayage beyond included service",
+            "$0",
+            "$0",
+            "$240: two × $120"
+          ],
+          [
+            "Additional transfer processing",
+            "$0",
+            "$0",
+            "$40"
+          ],
+          [
+            "Additional shipper inspection/release",
+            "$0",
+            "$60",
+            "$50"
+          ],
+          [
+            "Loading and receiving labor in every option",
+            "$100",
+            "$100",
+            "$100"
+          ],
+          [
+            "Comparable variable cost per completed shipment",
+            "$1,500",
+            "$1,310",
+            "$1,380"
+          ],
+          [
+            "First-year fixed setup, separate from per-load cost",
+            "$0",
+            "$40,000",
+            "$40,000"
+          ]
+        ],
+        "note": "All inputs are hypothetical. Provider service prices include its equipment, fuel, tolls, maintenance, normal roadside/remote support and repositioning; extra recovery costs are modeled separately below. Do not add these items again. Equipment fit and endpoint acceptance are assumed, not proven."
+      }
+    },
+    {
+      "id": "acceptance-and-utilization",
+      "title": "Keep rejected freight and unused capacity in the denominator",
+      "paragraphs": [
+        "The base case assumes the new service accepts and completes 800 of the 1,000 shipments, including shipments that require recovery. The remaining 200 use the current human service at $1,500 including warehouse work. Acceptance can be limited by equipment, time windows, available capacity, weather or the released route. It is not the same measure as an on-time rate among accepted loads.",
+        "Direct service then costs 800 × $1,310 + 200 × $1,500 + $40,000 = $1,388,000 before incremental exceptions. The human-only baseline is 1,000 × $1,500 = $1,500,000. The preliminary saving is $112,000. The transfer option totals $1,444,000 and saves $56,000 before exceptions. Identical linehaul interest can produce quite different results when the receiving path changes.",
+        "Load acceptance is also distinct from truck utilization. A dedicated truck can sit waiting for a dock even when all scheduled loads are accepted; a shared provider can fill its truck with other customers’ work. Ask who bears idle-capacity cost, minimum-volume commitments and empty miles. This model buys completed shipments; it does not estimate truck hours, fleet utilization or an operator’s gross margin."
+      ]
+    },
+    {
+      "id": "exception-economics",
+      "title": "Price recovery and business interruption without inventing a failure rate",
+      "paragraphs": [
+        "The base stress assumption is an incremental exception on 2% of the 800 new-service shipments, relative to the current arrangement:16 events. Each event adds $350 of recovery or substitute transport and $500 of lost contribution, for $850 total. These are invented sensitivity inputs, not observed rates or claims about any provider. Recovery is additional cargo-moving work beyond the normal roadside support already included in the quote.",
+        "The declared annual exception allowance is 16 × $850 = $13,600. It reduces direct-service savings to $98,400 and transfer-option savings to $42,400. Count service credits or insurance recoveries only when their actual terms and collectability justify doing so; this scenario assumes neither. Also avoid counting the same substitute transport in both the ordinary invoice and recovery line.",
+        "The three direct-option scenarios below change accepted volume and price explicitly. They keep total demand, current-service cost, fixed setup, assumed incremental exception rate and cost per exception unchanged. They are useful questions for a quote and trial, not a probability distribution or a market-rate survey."
+      ],
+      "table": {
+        "caption": "Declared first-year direct-service sensitivity for 1,000 total shipments",
+        "columns": [
+          "Input or result",
+          "Downside",
+          "Base",
+          "Higher acceptance"
+        ],
+        "rows": [
+          [
+            "New-service shipments accepted and completed",
+            "400",
+            "800",
+            "1,000"
+          ],
+          [
+            "Comparable new-service variable cost per shipment",
+            "$1,410",
+            "$1,310",
+            "$1,310"
+          ],
+          [
+            "Human backup shipments at $1,500",
+            "600",
+            "200",
+            "0"
+          ],
+          [
+            "Fixed setup cost",
+            "$40,000",
+            "$40,000",
+            "$40,000"
+          ],
+          [
+            "Incremental exception allowance: accepted loads × 2% × $850",
+            "$6,800",
+            "$13,600",
+            "$17,000"
+          ],
+          [
+            "Total annual comparison cost",
+            "$1,510,800",
+            "$1,401,600",
+            "$1,367,000"
+          ],
+          [
+            "Saving against $1,500,000 baseline",
+            "−$10,800",
+            "$98,400",
+            "$133,000"
+          ]
+        ],
+        "note": "Each new-service variable cost includes the $100 loading/receiving labor. All numbers are assumptions; the downside adds $100 to the direct price stack and reduces acceptance. Fractional expected exceptions are permitted in the formula, although these examples produce whole event counts."
+      }
+    },
+    {
+      "id": "decision-thresholds",
+      "title": "Convert the model into a negotiating threshold",
+      "paragraphs": [
+        "At base pricing, every completed direct shipment saves $190 before fixed setup and incremental exceptions. The modeled exception burden is $17 per new-service shipment, leaving $173 to recover the $40,000 setup. Break-even is $40,000 ÷ $173, or approximately 231.2 shipments; the first whole-load threshold is 232 under these assumptions. That is a shipment threshold, not a claim about required truck utilization.",
+        "For 800 accepted shipments, the $98,400 base saving leaves only $123 per shipment for additional unpriced costs before the comparison turns negative. At a quoted all-in variable cost above $1,433, keeping the same fixed cost and exception assumptions, the direct option exceeds the baseline. This ceiling includes warehouse work; compare quotes on the same basis.",
+        "A single additional $100,000 production-interruption loss, outside the 16 modeled recoveries, would turn the base saving into a $1,600 loss. The point is to measure the reader’s exposure and a usable fallback, not assume such an event occurs. Expedited transport, inventory or a retained human allocation can be valuable even when it reduces the nominal freight saving."
+      ]
+    },
+    {
+      "id": "inspection-weather-and-support",
+      "title": "Verify the constraints that can erase the capacity benefit",
+      "paragraphs": [
+        "International’s Ryder pilot reports inspection below 30 minutes, alongside human supervision. Use that as evidence that inspection remains operating work, not a promised allowance for your trailer or a legal standard. Time your own inspection, yard release and dock tasks in the proposed configuration. A capability demonstration cannot absorb an unmeasured operating queue. [Supervised pilot and inspection KPI](#source-international-ryder).",
+        "Aurora’s February 2026 disclosure reports expanded software validation for rain, fog and heavy wind. It does not establish unlimited operation in every weather condition. Ask each provider for dispatch thresholds, suspension rules, approved reroutes, safe-stop handling and the recovery response attached to your service. Give the backup carrier enough notice to act when a restriction prevents dispatch. [Dated operating-domain expansion](#source-aurora-weather).",
+        "An empty cab also needs reachable people for cargo coordination, roadside work and first-responder interaction. Agree on contact, escalation, cargo access and proof of delivery before the trial. Specify whether rejected loads trigger a charge, whether a stopped truck reserves another service slot and who pays when the recovery crosses the receiving window."
+      ]
+    },
+    {
+      "id": "authority-insurance-and-performance",
+      "title": "Check the contracting entity and the evidence dates",
+      "paragraphs": [
+        "Identify the motor carrier actually moving the load and the other parties handling its technology, brokerage and custody. FMCSA’s insurance chart distinguishes liability filings from cargo insurance; the nonhazardous for-hire property row lists no cargo filing requirement. A public liability filing therefore does not prove contractual cargo protection. Obtain the actual relevant policy and contract terms. [FMCSA filing chart](#source-fmcsa-insurance).",
+        "Records also need a current coverage date. A May 2026 FMCSA FAQ says legacy Licensing and Insurance records are historical-only and do not reflect Motus filings, while adjacent older FAQs still point users there. Resolve the system coverage and obtain current authoritative evidence for the exact entity, rather than treating any familiar portal result as complete. This article has not verified an individual operator’s authority or policy. [Agency record-system warning](#source-fmcsa-status).",
+        "For performance, request accepted-load counts, rejections, cancellations, late arrivals and exceptions with definitions. NHTSA’s unnormalized crash counts cannot rank providers; nor does an issuer’s on-time percentage establish your lane’s availability. Compare the specific service and exposure, preserve unresolved limitations and keep the trial’s measured results separate from company marketing. [NHTSA limitations](#source-nhtsa-method)."
+      ]
+    },
+    {
+      "id": "buyer-checklist",
+      "title": "A practical trial and purchasing file",
+      "paragraphs": [
+        "Approve a bounded lane trial with a ready human fallback and a clear delivery unit. Measure all requested shipments so unsuitable loads remain visible, and expand only after the actual operating conditions and responsibilities are resolved."
+      ],
+      "bullets": [
+        "Obtain written acceptance for the exact endpoints, equipment, goods, time windows, weather and intermediate stops.",
+        "Price direct and transfer designs separately, with all carrier, warehouse, inspection, release, setup and backup costs assigned once.",
+        "Define load rejection, dispatch cancellation, arrival and accepted-delivery events; measure their full door-to-door timestamps.",
+        "Name the carrier, truck owner, technology provider, custody party and incident contact; obtain current authority and applicable insurance evidence.",
+        "Reconcile every pilot invoice, extra staff hour, transfer, recovery and credit; replace assumed acceptance and exception inputs with measured results.",
+        "Keep a workable backup allocation and an expansion decision tied to delivery performance, cost headroom and the shipper’s interruption exposure."
+      ]
+    },
+    {
+      "id": "update-triggers",
+      "title": "Reprice when the usable route changes",
+      "paragraphs": [
+        "Recheck the model when driver-out status, accepted endpoints, vehicle platform, price inclusions, dispatch conditions or the support arrangement changes. A new direct endpoint might remove transfers; an onboard-role change might alter staffing or fees; reduced acceptance can concentrate fixed costs on fewer loads. Each change belongs in a specific input.",
+        "Review actual completion and exception evidence after the first trial cycle, and after any material operating change. Keep the assumed version so finance can see why the decision improved or weakened. The useful outcome is an affordable, accountable delivery service for a real Texas business, supported by evidence the buyer can inspect."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Do all driverless freight services require terminal handoffs?",
+      "answer": "No. Aurora reports driverless operation between specified customer facilities. Waabi/Volvo’s Warp operation also delivers directly to third-party facilities but currently retains an observer in the driver’s seat. Confirm exact endpoint acceptance and price each operating design. [Aurora endpoints](#source-aurora-q2); [Warp operation](#source-waabi-warp)."
+    },
+    {
+      "question": "What does the worked Texas driverless freight model save?",
+      "answer": "Under invented inputs for 1,000 annual loads, 800 completed direct-service loads, 200 human backup loads, $40,000 setup and $13,600 incremental exception allowance, the direct option saves $98,400. That is scenario arithmetic, not a quote or predicted operator ROI. The service-boundary evidence comes from [Aurora](#source-aurora-faq) and [International/Ryder](#source-international-ryder); neither source supplies the model’s prices."
+    },
+    {
+      "question": "Does driverless operation eliminate inspection and support costs?",
+      "answer": "The job still needs those tasks assigned and priced. International’s supervised pilot reports a pre-trip inspection KPI below 30 minutes, while Aurora describes potential rear-seat roadside-support staff on some second-generation trips. Neither source sets a universal cost or staffing model. [Inspection KPI](#source-international-ryder); [Aurora support role](#source-aurora-faq)."
+    },
+    {
+      "question": "Does a carrier’s public liability filing prove cargo coverage?",
+      "answer": "No. FMCSA’s chart separates liability and cargo filing requirements; the nonhazardous for-hire property row has no cargo filing requirement. Review actual coverage and contractual responsibility for the shipment, and check that entity records reflect the current registration system. [FMCSA insurance chart](#source-fmcsa-insurance); [Record-system FAQ](#source-fmcsa-status)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "aurora-faq",
+      "label": "Aurora second-generation driverless launch: operating and purchase model",
+      "href": "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered",
+      "publisher": "Aurora",
+      "lastVerified": "2026-10-12",
+      "note": "Issuer explanation: empty driver seat, possible rear-seat roadside-support staff, TaaS ownership and future customer-owned model. Support staff are expressly not driving or supervising driving.",
+      "date": "2026-07-22"
+    },
+    {
+      "id": "aurora-q2",
+      "label": "Aurora second-quarter 2026 shareholder letter",
+      "href": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000075/aurora26q2shareholderlet.htm",
+      "publisher": "Aurora / SEC Form 8-K exhibit",
+      "lastVerified": "2026-10-12",
+      "note": "Pages 3–8 distinguish commercial agreements, Midland–Monahans driverless operations, customer endpoints and supervised fueling/weigh-station testing; page 15 revenue includes driverless and operator-supervised loads. Issuer-reported performance is not a comparative safety study.",
+      "date": "2026-07-29"
+    },
+    {
+      "id": "waabi-warp",
+      "label": "Volvo and Waabi begin Warp customer operations in Texas",
+      "href": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp",
+      "publisher": "Waabi / Volvo Autonomous Solutions",
+      "lastVerified": "2026-10-12",
+      "note": "Direct third-party-facility freight on Dallas–Houston; release explicitly says current hauls have an observer in the driver’s seat. LTL-network participation is separate from full driver-out operation.",
+      "date": "2026-10-05"
+    },
+    {
+      "id": "international-ryder",
+      "label": "International and Ryder live-freight PlusAI trial",
+      "href": "https://news.international.com/2026-03-31-International-Launches-Level-4-Autonomous-Fleet-Trial-on-Live-Freight-Lane",
+      "publisher": "International Motors / Ryder",
+      "lastVerified": "2026-10-12",
+      "note": "Laredo–Temple daily 600-mile route with factory-integrated SuperDrive.92% autonomous route coverage is explicitly supervised by a human safety driver; sub 30-minute inspection is a pilot KPI, not an industry standard.",
+      "date": "2026-03-31"
+    },
+    {
+      "id": "kodiak-charger",
+      "label": "Kodiak and Charger Dallas–Laredo customer operation",
+      "href": "https://kodiak.ai/news/kodiak-charger-usa-autonomous-trucking-dallas-laredo",
+      "publisher": "Kodiak AI / Charger USA",
+      "lastVerified": "2026-10-12",
+      "note": "First delivery September 8; current operation explicitly has a safety driver behind the wheel. Driverless transition depends on the safety case.96% ARM describes completion of safety-case claims/evidence at September-end, not autonomous mileage.",
+      "date": "2026-10-08"
+    },
+    {
+      "id": "aurora-weather",
+      "label": "Aurora fourth-quarter 2025 letter: operating-domain expansion",
+      "href": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000014/finalaurora25q4sharehold.htm",
+      "publisher": "Aurora / SEC Form 8-K exhibit",
+      "lastVerified": "2026-10-12",
+      "note": "Page 3 reports software validation for rain, fog and heavy wind. The historical 2025 weather-constraint observation is not used to estimate current availability or model another operator.",
+      "date": "2026-02-11"
+    },
+    {
+      "id": "fmcsa-insurance",
+      "label": "FMCSA operating-authority insurance filing requirements",
+      "href": "https://www.fmcsa.dot.gov/registration/insurance-filing-requirements",
+      "publisher": "FMCSA",
+      "lastVerified": "2026-10-12",
+      "note": "Agency chart separates bodily injury/property damage from cargo. Nonhazardous for-hire property row has $0 cargo filing requirement; this does not establish contractual cargo protection. No operator-specific policy or authority is verified here.",
+      "date": "2026-03-26"
+    },
+    {
+      "id": "fmcsa-status",
+      "label": "FMCSA registration-status FAQs and legacy-record warning",
+      "href": "https://www.fmcsa.dot.gov/registration/ask-fmcsa?topic=23021",
+      "publisher": "FMCSA",
+      "lastVerified": "2026-10-12",
+      "note": "May 21, 2026 FAQ says L&I is historical-only as ofMay 14 and does not reflect Motus filings. Adjacent May 2023 FAQs still reference L&I. Verify record-system coverage and obtain current authoritative evidence before relying on a particular carrier record.",
+      "date": "2026-05-21"
+    },
+    {
+      "id": "nhtsa-method",
+      "label": "NHTSA Standing General Order crash-data limitations",
+      "href": "https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting",
+      "publisher": "NHTSA",
+      "lastVerified": "2026-10-12",
+      "note": "Current official methodology: incomplete/unverified initial reports, possible duplicates, unequal reporting visibility, no normalization for miles/fleet/domain and different ADS/Level 2 reporting thresholds. No operator crash ranking is derived."
+    }
+  ],
+  "searchTerms": [
+    "Texas driverless freight cost",
+    "autonomous trucking economics",
+    "Dallas Houston freight lane",
+    "driverless freight procurement",
+    "autonomous truck handoff cost",
+    "driverless load acceptance",
+    "Texas autonomous fleet pricing",
+    "driverless freight inspection",
+    "freight backup capacity"
+  ],
+  "image": "/images/social/texas-driverless-freight-route-economics.png",
+  "resources": [
+    {
+      "label": "Texas autonomy source and decision ledger",
+      "href": "/research/texas-autonomy-library-2026-10-13.json",
+      "description": "Dated primary evidence, operating boundaries, declared scenarios and update triggers for the Texas autonomy edition.",
+      "format": "JSON"
+    }
+  ],
+  "aliases": []
+}

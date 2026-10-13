@@ -8,6 +8,11 @@ import { publicationReceipt, verifyInitialPublication } from './article-publicat
 const manifestPath = 'docs/texas-business/library.json'
 const publicationsPath = 'docs/article-publications.json'
 export const bundlePath = 'public/research/texas-business-library-2026-10-12.json'
+export function publicationBundlePath(library) {
+  const path = library.bundlePath ?? bundlePath
+  assert(/^public\/research\/[a-z0-9-]+\.json$/.test(path), 'Keep the public edition inside research JSON downloads')
+  return path
+}
 const json = async path => JSON.parse(await readFile(path, 'utf8'))
 export function validDate(value) {
   return /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value)) && new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10) === value
@@ -99,12 +104,13 @@ async function main(args) {
     const asOf = option('--as-of') || new Date().toISOString().slice(0, 10)
     console.log(JSON.stringify({ asOf, mode: 'Manual editorial review; no source fetched, article updated or job scheduled.', queue: reviewQueue(await json(manifestPath), asOf) }, null, 2))
   } else if (command === 'bundle' || command === 'check') {
+    const selectedBundle = publicationBundlePath(await json(manifestPath))
     const data = await libraryData(), bytes = JSON.stringify(data, null, 2) + '\n'
     if (command === 'bundle' && options.includes('--write')) {
-      await writeFile(bundlePath, bytes)
-      console.log(`Prepared ${data.articles.length} reviewed library entries at ${bundlePath}; no publication performed.`)
+      await writeFile(selectedBundle, bytes)
+      console.log(`Prepared ${data.articles.length} reviewed library entries at ${selectedBundle}; no publication performed.`)
     } else {
-      assert.equal(await readFile(bundlePath, 'utf8'), bytes, 'Public library is stale; review receipts, then run texas:bundle')
+      assert.equal(await readFile(selectedBundle, 'utf8'), bytes, 'Public library is stale; review receipts, then run texas:bundle')
       console.log(`Texas library verified: ${data.articles.length} articles, ${data.articles.reduce((n, article) => n + article.sources.length, 0)} dated source references, claims-only public projection and unchanged publication identities.`)
     }
   } else if (command === 'initial' || command === 'receipt') {

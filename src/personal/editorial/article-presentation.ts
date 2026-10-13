@@ -6,6 +6,13 @@ export interface ArticlePresentation { form: ArticleForm; lines?: string[] }
 // Art direction follows the manuscript, not its publication date or array index.
 // Line breaks preserve the authored title; an edited title falls back to wrapping.
 export const articlePresentations: Record<string, ArticlePresentation> = {
+  'texas-robotaxi-business-service-map': { form: 'essay' },
+  'texas-waymo-business-travel': { form: 'essay' },
+  'texas-zoox-market-entry-business': { form: 'essay' },
+  'texas-autonomous-trucking-operators': { form: 'essay' },
+  'texas-driverless-freight-route-economics': { form: 'essay' },
+  'texas-automated-vehicle-authorization': { form: 'essay' },
+
   'texas-water-facility-site-diligence': { form: 'essay' },
   'texas-property-tax-business-underwriting': { form: 'essay' },
   'texas-data-center-sales-tax-project-economics': { form: 'essay' },

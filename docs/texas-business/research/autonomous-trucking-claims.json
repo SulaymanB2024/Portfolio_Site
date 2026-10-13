@@ -1,0 +1,250 @@
+{
+  "article": "texas-autonomous-trucking-operators",
+  "checkedAt": "2026-10-12",
+  "claims": [
+    {
+      "id": "trucking-aurora-platform",
+      "claim": "Aurora reports July 22 second-generation driverless International LT operation with no person behind the wheel; rear-seat roadside-support staff may ride on some trips.",
+      "status": "issuer-reported current operation",
+      "qualification": "Support staff are expressly not driving or supervising driving. No empty-cab assertion for every truck or trip.",
+      "sources": [
+        {
+          "url": "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered",
+          "date": "2026-07-22",
+          "pinpoint": "Is anyone in the truck?; What did we announce?"
+        }
+      ],
+      "recheck": "Platform/onboard-role update"
+    },
+    {
+      "id": "trucking-aurora-endpoints",
+      "claim": "Aurora reports deployed driverless Midland–Monahans operations; fueling and weigh-station work are separately supervised testing.",
+      "status": "issuer-reported operation and testing",
+      "qualification": "Specific endpoint/trailer configuration does not establish universal customer access.",
+      "sources": [
+        {
+          "url": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000075/aurora26q2shareholderlet.htm",
+          "date": "2026-07-29",
+          "pinpoint": "Pages 7–8"
+        }
+      ],
+      "recheck": "Released endpoint, fueling or weigh-station capability change"
+    },
+    {
+      "id": "trucking-aurora-miles",
+      "claim": "Aurora reports more than 500,000 driverless miles since commercial launch in its October 8 update.",
+      "status": "issuer-reported cumulative measure",
+      "qualification": "Not independent comparative safety evidence, present fleet count or available shipper slots.2030 fleet vision remains a forecast.",
+      "sources": [
+        {
+          "url": "https://aurora.tech/newsroom/driving-the-inflection",
+          "date": "2026-10-08",
+          "pinpoint": "Opening commercial-operation paragraph"
+        }
+      ],
+      "recheck": "Next dated operating disclosure"
+    },
+    {
+      "id": "trucking-kodiak-industry",
+      "claim": "Kodiak reports 35 Atlas-owned driverless trucks and more than 40,000 paid driverless hours at June 30; Atlas reports second Dune Express load-out operation.",
+      "status": "issuer-reported industrial operation",
+      "qualification": "The industrial program has a separate operating domain; Atlas public-road expansion is targeted early 2027 subject to milestones. Fleet 100 by mid 2027 is a plan.",
+      "sources": [
+        {
+          "url": "https://kodiak.ai/news/kodiak-names-dallas-houston-driverless-launch-lane",
+          "date": "2026-09-25",
+          "pinpoint": "Permian foundation section; Atlas expansion opening"
+        },
+        {
+          "url": "https://kodiak.ai/news/atlas-driverless-permian-expansion",
+          "date": "2026-07-31",
+          "pinpoint": "Permian foundation section; Atlas expansion opening"
+        }
+      ],
+      "recheck": "New fleet/reporting cutoff or dated public-road expansion"
+    },
+    {
+      "id": "trucking-kodiak-highway",
+      "claim": "September 25 Dallas–Houston release describes observer-supported preparation deliveries and closed-course driverless testing; highway driver-out launch remains targeted end 2026.",
+      "status": "preparation and forward-looking target",
+      "qualification": "Intervention-free supervised/observer-supported delivery does not demonstrate removal of the observer.",
+      "sources": [
+        {
+          "url": "https://kodiak.ai/news/kodiak-names-dallas-houston-driverless-launch-lane",
+          "date": "2026-09-25",
+          "pinpoint": "Launch program; Preparing for launch at the test track"
+        }
+      ],
+      "recheck": "Dated driver-out public-road customer launch"
+    },
+    {
+      "id": "trucking-kodiak-charger",
+      "claim": "October 8 Charger Dallas–Laredo customer operation has a safety driver; 96% ARM at September-end measures materially completed safety-case claims/evidence.",
+      "status": "issuer-reported current supervised service",
+      "qualification": "96% is not autonomous distance, successful delivery share, route availability or launch probability.",
+      "sources": [
+        {
+          "url": "https://kodiak.ai/news/kodiak-charger-usa-autonomous-trucking-dallas-laredo",
+          "date": "2026-10-08",
+          "pinpoint": "Current safety-driver paragraph; ARM definition"
+        }
+      ],
+      "recheck": "Onboard-role change and safety-case completion"
+    },
+    {
+      "id": "trucking-gatik-regional",
+      "claim": "Gatik reports DFW driverless regional 26-/30-foot truck operations; June 8 statement identifies existing Texas PepsiCo driverless work.",
+      "status": "issuer-reported regional service",
+      "qualification": "Regional retail configuration is not interchangeable with every Class 8 linehaul job. No buyer-specific availability inferred.",
+      "sources": [
+        {
+          "url": "https://archive.gatik.ai/news/press-releases/gatik-becomes-first-us-company-to-operate-fully-driverless-trucks-at-scale-for-commercial-deliveries/",
+          "date": "2026-01-27",
+          "pinpoint": "January regional/vehicle paragraphs; June existing operations"
+        },
+        {
+          "url": "https://archive.gatik.ai/news/coverage/pepsico-and-gatik-announce-multi-year-agreement-to-deploy-autonomous-freight-in-north-america/",
+          "date": "2026-06-08",
+          "pinpoint": "January regional/vehicle paragraphs; June existing operations"
+        }
+      ],
+      "recheck": "Accepted endpoint/equipment or current customer operation update"
+    },
+    {
+      "id": "trucking-gatik-latest",
+      "claim": "August 25 Gatik update reports 85,000 driverless orders and 99% on-time delivery across operations.",
+      "status": "issuer-reported aggregated performance",
+      "qualification": "Not Texas-only or normalized to another operator; contracted revenue does not establish recognized revenue or cash receipts.",
+      "sources": [
+        {
+          "url": "https://archive.gatik.ai/news/coverage/gatik-raises-200-million-series-d-led-by-qia-and-kdt-as-demand-for-driverless-commercial-freight-accelerates/",
+          "date": "2026-08-25",
+          "pinpoint": "Opening operating-metrics paragraph"
+        }
+      ],
+      "recheck": "Next performance disclosure with period/denominator"
+    },
+    {
+      "id": "trucking-bot-commercial",
+      "claim": "Bot Auto reports a paid 230-mile Houston–Hutchins load without onboard driver/observer or low-latency remote human feedback.",
+      "status": "issuer-reported dated commercial delivery",
+      "qualification": "Company-issued April 30 PRNewswire record; no independently verified cost/profitability or unlimited recurring capacity claim.",
+      "sources": [
+        {
+          "url": "https://www.prnewswire.com/news-releases/houston-we-dont-have-a-problem-bot-auto-delivers-americas-first-fully-humanless-commercial-truckload-302757935.html",
+          "date": "2026-04-30",
+          "pinpoint": "Opening route paragraphs and Ryan Transportation statement"
+        }
+      ],
+      "recheck": "Current lane acceptance/capacity and service evidence"
+    },
+    {
+      "id": "trucking-waabi-warp",
+      "claim": "October 5 Waabi/Volvo release reports direct third-party facility freight in Warp’s Dallas–Houston network with an observer in the driver’s seat.",
+      "status": "issuer-reported customer service with onboard role",
+      "qualification": "Does not establish driver-out operation or observer intervention frequency.",
+      "sources": [
+        {
+          "url": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp",
+          "date": "2026-10-05",
+          "pinpoint": "Current-operation paragraphs"
+        }
+      ],
+      "recheck": "Explicit onboard-role transition"
+    },
+    {
+      "id": "trucking-plus-ryder",
+      "claim": "International/Ryder report daily 600-mile Laredo–Temple live-freight pilot with 92% autonomous route coverage supervised by human safety driver and inspection below 30 minutes.",
+      "status": "issuer-reported supervised pilot",
+      "qualification": "Coverage is not driverless availability; inspection is a pilot KPI, not universal allowance or legal standard.",
+      "sources": [
+        {
+          "url": "https://news.international.com/2026-03-31-International-Launches-Level-4-Autonomous-Fleet-Trial-on-Live-Freight-Lane",
+          "date": "2026-03-31",
+          "pinpoint": "Early findings and KPIs; pilot description"
+        }
+      ],
+      "recheck": "Driver-out release or changed pilot configuration"
+    },
+    {
+      "id": "trucking-torc",
+      "claim": "Torc 2026 release describes established DFW testing; 2025 platform account separates closed-track driver-out test, Fort Worth hub and 2027 market entry.",
+      "status": "testing with forward-looking commercialization",
+      "qualification": "Production intent and controlled driver-out acceptance are not current unsupervised customer availability.",
+      "sources": [
+        {
+          "url": "https://torc.ai/michigan-public-roads-autonomous-truck-testing/",
+          "date": "2026-02-24",
+          "pinpoint": "Testing opening; October 2024/May 2025 and Onward to 2027"
+        },
+        {
+          "url": "https://torc.ai/av-3-0-scaling-physical-ai-autonomous-trucking-embedded-hardware/",
+          "date": "2025-11-17",
+          "pinpoint": "Testing opening; October 2024/May 2025 and Onward to 2027"
+        }
+      ],
+      "recheck": "Dated public-road driver-out and customer-service release"
+    },
+    {
+      "id": "trucking-einride",
+      "claim": "Einride reports SH 130 validation-testbed MoU and Austin research demonstration with company-reported NHTSA approval.",
+      "status": "research/validation and issuer approval statement",
+      "qualification": "Underlying instrument not independently verified; no bookable commercial Texas lane inferred.",
+      "sources": [
+        {
+          "url": "https://www.prnewswire.com/news-releases/einride-partners-with-texas-highway-operator-to-create-autonomous-freight-testbed-302715954.html",
+          "date": "2026-03-17",
+          "pinpoint": "March 17 testbed scope; March 24 R&D qualification"
+        },
+        {
+          "url": "https://news.cision.com/einride/r/einride-secures-fifth-nhtsa-approval-to-operate-autonomous-vehicles-on-u-s--roads,c4341234",
+          "date": "2026-03-24",
+          "pinpoint": "March 17 testbed scope; March 24 R&D qualification"
+        }
+      ],
+      "recheck": "Specified customer freight deployment and approval scope"
+    },
+    {
+      "id": "trucking-dps",
+      "claim": "DPS posts first-responder plans for named operators including Stack, Fountainhead Logistics and International Transport Engineering.",
+      "status": "official document directory",
+      "qualification": "Plan posting is not authorization, available service or exhaustive census. Displayed page date differs from individual plan versions.",
+      "sources": [
+        {
+          "url": "https://www.dps.texas.gov/section/cav/connected-autonomous-vehicles",
+          "date": "2026-02-27",
+          "pinpoint": "First Responder Interaction Plans list"
+        }
+      ],
+      "recheck": "Directory/plan changes and independently supported service development"
+    },
+    {
+      "id": "trucking-safety-comparison",
+      "claim": "NHTSA crash totals are not normalized by fleet, miles or operating domain and may include incomplete information or duplicates.",
+      "status": "official methodological limitation",
+      "qualification": "No operator safety ranking or collision probability derived from totals.",
+      "sources": [
+        {
+          "url": "https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting",
+          "date": null,
+          "pinpoint": "Data and Limitations; Summary Incident Report Data Are Not Normalized"
+        }
+      ],
+      "recheck": "Method/reporting criteria change"
+    },
+    {
+      "id": "trucking-plus-roadmap",
+      "claim": "PlusAI September 3 release identifies ongoing Texas Ryder/International autonomous fleet trials and targets factory-built commercial launch in 2027.",
+      "status": "issuer-reported trial and forward-looking launch target",
+      "qualification": "The target does not establish current driver-out service; no funding, projected revenue or capacity treated as completed.",
+      "sources": [
+        {
+          "url": "https://www.plus.ai/news-and-insights/2026-09-03-texas-ventures-business-combination",
+          "date": "2026-09-03",
+          "pinpoint": "Opening bullets and commercial-momentum paragraphs"
+        }
+      ],
+      "recheck": "Dated driver-out customer operation and completed commercial release"
+    }
+  ]
+}

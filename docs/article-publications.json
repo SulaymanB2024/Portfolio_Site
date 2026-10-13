@@ -209,6 +209,109 @@
           "https://www.tdi.texas.gov/pubs/consumer/cb021.html"
         ]
       }
+    },
+    {
+      "slug": "texas-robotaxi-business-service-map",
+      "path": "src/personal/editorial/data/articles/texas-robotaxi-business-service-map.json",
+      "canonicalPath": "/research/texas/texas-robotaxi-business-service-map",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "861c81680a0afa63f7a924e6cb8da34f996f42145f48e595cc1ed582588db77f",
+      "proseWords": 2002,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/robotaxi-map-claims.json",
+      "initialReview": {
+        "reason": "Reviewed current primary access and human-role evidence; added current Avride guidance, explicit Tesla rider constraints, and reconciled fare cash versus allocated exception time.",
+        "evidence": [
+          "https://blog.waymo.com/blog/shorts/dallas-open-to-all/",
+          "https://www.uber.com/us/en/r/autonomous/dallas-tx-us/"
+        ]
+      }
+    },
+    {
+      "slug": "texas-waymo-business-travel",
+      "path": "src/personal/editorial/data/articles/texas-waymo-business-travel.json",
+      "canonicalPath": "/research/texas/texas-waymo-business-travel",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "f29c53668d4af9dc43c30585d89ed11ed6aec257faa37ecd0861f762c8e9defc",
+      "proseWords": 1709,
+      "readTime": "9 MIN",
+      "claimsPath": "docs/texas-business/research/waymo-claims.json",
+      "initialReview": {
+        "reason": "Reviewed Texas rider and airport guidance, payment-program boundaries and the independently recalculated complete-journey and fallback scenarios.",
+        "evidence": [
+          "https://blog.waymo.com/blog/shorts/dallas-open-to-all/"
+        ]
+      }
+    },
+    {
+      "slug": "texas-zoox-market-entry-business",
+      "path": "src/personal/editorial/data/articles/texas-zoox-market-entry-business.json",
+      "canonicalPath": "/research/texas/texas-zoox-market-entry-business",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "cb7bc70059e62b9c7d558ad5df007ae273a2b321cf8ecf80c19cc9a7716e2174",
+      "proseWords": 1733,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/zoox-claims.json",
+      "initialReview": {
+        "reason": "Reviewed rendered city and testing disclosures against the federal grant; independently checked vehicle-hour throughput, utilization and conditional commercial scope.",
+        "evidence": [
+          "https://zoox.com/austin"
+        ]
+      }
+    },
+    {
+      "slug": "texas-autonomous-trucking-operators",
+      "path": "src/personal/editorial/data/articles/texas-autonomous-trucking-operators.json",
+      "canonicalPath": "/research/texas/texas-autonomous-trucking-operators",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "ac75c452c75bd6062d3f0ee0d440a60c726da4f79453a8f70ac066db3ed7bbde",
+      "proseWords": 1761,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/autonomous-trucking-claims.json",
+      "initialReview": {
+        "reason": "Read the actual operator comparison and current primary disclosures, preserving industrial versus highway domains, onboard roles, targets and noncomparable metric denominators.",
+        "evidence": [
+          "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered"
+        ]
+      }
+    },
+    {
+      "slug": "texas-driverless-freight-route-economics",
+      "path": "src/personal/editorial/data/articles/texas-driverless-freight-route-economics.json",
+      "canonicalPath": "/research/texas/texas-driverless-freight-route-economics",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "d4c925669d4daaeac1f3485420d031524de054a4f529191ddc88fbca068e0409",
+      "proseWords": 1901,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/driverless-freight-claims.json",
+      "initialReview": {
+        "reason": "Reviewed the full route-cost boundaries and federal insurance/record-system evidence; independently recalculated all acceptance, transfer, exception and break-even scenarios.",
+        "evidence": [
+          "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered"
+        ]
+      }
+    },
+    {
+      "slug": "texas-automated-vehicle-authorization",
+      "path": "src/personal/editorial/data/articles/texas-automated-vehicle-authorization.json",
+      "canonicalPath": "/research/texas/texas-automated-vehicle-authorization",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "27cc746959c3d868f684fb409dcbcabb83acee7b147a79b78f28001a6ebd1a2a",
+      "proseWords": 1867,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/av-authorization-claims.json",
+      "initialReview": {
+        "reason": "Reviewed implemented agency guidance against governing statute, added the exact human-driver distinction, preserved enforcement clocks and recalculated continuity costs.",
+        "evidence": [
+          "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm"
+        ]
+      }
     }
   ]
 }

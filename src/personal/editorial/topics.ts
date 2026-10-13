@@ -12,18 +12,98 @@ export interface ReadingTopic {
   questionsUpdated: string
   relatedTopics?: string[]
   sourceDownload?: { label: string; href: string }
+  featuredPath?: { slug: string; label: string }
 }
 
 export const readingTopics: ReadingTopic[] = [
+{
+  "slug": "texas-autonomy",
+  "title": "Autonomy in Texas.",
+  "seoTitle": "Texas Autonomous Vehicles: Robotaxis & Driverless Trucking",
+  "questionsUpdated": "2026-10-13",
+  "description": "Waymo, Zoox and the wider Texas AV market, explained through usable rides, freight capacity, operating authority and complete-route costs.",
+  "introduction": [
+    "Start with the work the business needs done: an employee arriving on time, a guest reaching the hotel, a shipment accepted at the dock or a depot ready for service. These six investigations compare the documented operating stage with the evidence needed for that commitment.",
+    "The passenger research separates rider access, booking channels, vehicle rules and paid exceptions. The freight research separates industrial driverless deliveries, public-road service, supervised customer work and future launches. Neither a city announcement nor an autonomous-mile total supplies a buyer-specific service promise.",
+    "Primary sources were checked October 12–13, 2026, with each article retaining its own cutoff and source dates. Operator performance is attributed; fleet, travel and freight calculations are declared hypotheticals. Follow the source links, replace the model inputs with actual evidence and use the update triggers when the operating conditions change."
+  ],
+  "readings": [
+    {
+      "slug": "texas-robotaxi-business-service-map",
+      "reason": "Compare admitted riders, current service guidance and booking channels before choosing a passenger AV pilot."
+    },
+    {
+      "slug": "texas-waymo-business-travel",
+      "reason": "Verify the actual Waymo itinerary, airport leg and payment workflow; price walking, waiting and fallback time."
+    },
+    {
+      "slug": "texas-zoox-market-entry-business",
+      "reason": "Separate Zoox testing and rider stages from its conditional commercial exemption and a supplier or property commitment."
+    },
+    {
+      "slug": "texas-autonomous-trucking-operators",
+      "reason": "Compare eight freight participants by documented domain, platform, onboard role and customer operation."
+    },
+    {
+      "slug": "texas-driverless-freight-route-economics",
+      "reason": "Price direct and transfer routes with load acceptance, setup, inspection, recovery and conventional backup."
+    },
+    {
+      "slug": "texas-automated-vehicle-authorization",
+      "reason": "Match the legal holder and vehicle, maintain responder and operating records, and budget continuity work."
+    }
+  ],
+  "questions": [
+    {
+      "question": "Which Texas robotaxi services can a business use?",
+      "slug": "texas-robotaxi-business-service-map",
+      "section": "operating-evidence"
+    },
+    {
+      "question": "How does Waymo access differ across Texas cities?",
+      "slug": "texas-waymo-business-travel",
+      "section": "texas-access"
+    },
+    {
+      "question": "Does Zoox’s Texas arrival mean public rides are available?",
+      "slug": "texas-zoox-market-entry-business",
+      "section": "texas-stages"
+    },
+    {
+      "question": "Which autonomous truck programs have current customer freight?",
+      "slug": "texas-autonomous-trucking-operators",
+      "section": "operating-comparison"
+    },
+    {
+      "question": "When does a driverless freight quote save money?",
+      "slug": "texas-driverless-freight-route-economics",
+      "section": "quote-comparison"
+    },
+    {
+      "question": "What does Texas require for commercial driverless operation?",
+      "slug": "texas-automated-vehicle-authorization",
+      "section": "commercial-scope"
+    }
+  ],
+  "relatedTopics": [
+    "texas-business",
+    "financial-systems",
+    "industrial-capacity"
+  ],
+  "sourceDownload": {
+    "label": "Download the eighteen-article source and decision ledger (JSON)",
+    "href": "/research/texas-autonomy-library-2026-10-13.json"
+  }
+},
   {
     slug: 'texas-business', title: 'Texas business research.',
     seoTitle: 'Texas Business Research: Infrastructure, Taxes, Hiring & Trade',
     questionsUpdated: '2026-10-12',
     description: 'Deep research on Texas developments that change operating costs, investment timing, compliance, and commercial risk.',
     introduction: [
-      'Choose the decision closest to your next commitment: a facility site, tax budget, hiring plan, supplier route, technology purchase or commercial contract. These twelve investigations connect Texas developments to operating costs, usable capacity, timing and cash at risk.',
+      'Choose the decision closest to your next commitment: a facility site, tax budget, hiring plan, supplier route, technology purchase or commercial contract. These twelve core investigations connect Texas developments to operating costs, usable capacity, timing and cash at risk. Six additional investigations in the autonomy reading path cover robotaxis, driverless freight and commercial vehicle authorization.',
       'The research starts with primary legislation, agency records, official datasets, published decisions and company disclosures. Each article preserves its evidence cutoff, separates an announcement from completion and a forecast from an observation, and gives the reader a concrete comparison and decision checklist. Scenario inputs are labeled so they can be replaced with the business’s actual evidence.',
-      'This library was researched on October 12, 2026. For related Texas investigations, the financial-systems reading path also contains the original toll-road ownership and financing research, Austin home-service ownership, and West Campus housing. Those manuscripts retain their own evidence dates.',
+      'The twelve core investigations were researched on October 12, 2026; the autonomy path retains its own October 12–13 source checks. For related Texas investigations, the financial-systems reading path also contains the original toll-road ownership and financing research, Austin home-service ownership, and West Campus housing. Those manuscripts retain their own evidence dates.',
     ],
     questions: [
       { question: 'What evidence makes a Texas power commitment financeable?', slug: 'texas-power-large-load-business-diligence', section: 'investment-decision' },
@@ -53,8 +133,9 @@ export const readingTopics: ReadingTopic[] = [
       { slug: 'texas-ai-law-business-compliance', reason: 'Separate private-business, government, healthcare, and privacy duties, then turn them into an AI procurement review.' },
       { slug: 'texas-business-court-contract-decisions', reason: 'Use September court decisions to distinguish transaction value, pleaded claims, and the promises preserved in signed contracts.' },
     ],
-    relatedTopics: ['financial-systems', 'industrial-capacity'],
-    sourceDownload: { label: 'Download the source and decision ledger (JSON)', href: '/research/texas-business-library-2026-10-12.json' },
+    relatedTopics: ['texas-autonomy', 'financial-systems', 'industrial-capacity'],
+    sourceDownload: { label: 'Download the eighteen-article source and decision ledger (JSON)', href: '/research/texas-autonomy-library-2026-10-13.json' },
+    featuredPath: { slug: 'texas-autonomy', label: 'Explore robotaxis and driverless freight in Texas' },
   },
   {
     slug: 'financial-systems', title: 'Who owns the cash flow?',

@@ -1,0 +1,88 @@
+{
+  "article": "texas-automated-vehicle-authorization",
+  "checkedAt": "2026-10-12",
+  "claims": [
+    {
+      "id": "avlaw-01",
+      "claim": "Commercial driverless authorization requirements became enforceable May 28, 2026, with implemented public complaints confirmed June 2.",
+      "status": "implemented",
+      "sources": [
+        {
+          "url": "https://www.txdmv.gov/AVprogram",
+          "pinpoint": "Authorization requirements and enforcement"
+        },
+        {
+          "url": "https://www.txdmv.gov/sites/default/files/body-files/2026-06-02_Automated_Vehicle_Enforcement_System.pdf",
+          "date": "2026-06-02",
+          "pinpoint": "Main announcement"
+        }
+      ],
+      "qualification": "September 1, 2025 statutory effectiveness differs from compliance after implementing rules.",
+      "recheck": "Governing law or agency implementation change"
+    },
+    {
+      "id": "avlaw-02",
+      "claim": "Commercial authorization concerns passenger/property transport furthering a commercial enterprise on public highways/streets without a human driver.",
+      "status": "current law",
+      "sources": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm",
+          "pinpoint": "§545.455(c)"
+        }
+      ],
+      "qualification": "Classify the actual vehicle, engaged feature, purpose and human role; do not infer from a brand label.",
+      "recheck": "Scope amendment or applicable decision"
+    },
+    {
+      "id": "avlaw-03",
+      "claim": "Authorization is nonexpiring but material information must be updated within 30 days, with separate document and safety enforcement paths.",
+      "status": "current law",
+      "sources": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm",
+          "pinpoint": "§545.456(d)–(h); §545.459"
+        }
+      ],
+      "qualification": "The 30-day information deadline is not a universal safety cure period.",
+      "recheck": "Material supplier record or controlling requirements change"
+    },
+    {
+      "id": "avlaw-04",
+      "claim": "Current public lookup is TxMCCS Truck Stop; prior /automated-vehicles/operators renders 404.",
+      "status": "observed interface",
+      "sources": [
+        {
+          "url": "https://txmccs.txdmv.gov/truckstop",
+          "pinpoint": "Rendered lookup landing page"
+        },
+        {
+          "url": "https://www.txdmv.gov/AVprogram",
+          "pinpoint": "Current enforcement/lookup links"
+        }
+      ],
+      "qualification": "No exhaustive holder/vehicle audit or census performed.",
+      "recheck": "Portal navigation or API migration"
+    },
+    {
+      "id": "avlaw-05",
+      "claim": "DPS publishes platform-specific responder plans; a catalog entry alone is not booking or current authorization evidence.",
+      "status": "posted plans and procurement interpretation",
+      "sources": [
+        {
+          "url": "https://www.dps.texas.gov/section/cav/connected-autonomous-vehicles",
+          "pinpoint": "First Responder Interaction Plans"
+        }
+      ],
+      "qualification": "Use the plan for the actual vehicle, not merely the company name.",
+      "recheck": "Relevant platform/plan changes"
+    },
+    {
+      "id": "avlaw-06",
+      "claim": "Pilot preparedness is $5,500; one 60-load replacement week adds $7,200; combined incremental stress cost $12,700 above common $324,000 freight.",
+      "status": "declared hypothetical",
+      "qualification": "All rates, hours, loads and interruption inputs invented for an editable commercial comparison; no frequency or quote inferred.",
+      "sources": [],
+      "recheck": "Actual staffing, contract, service or replacement evidence"
+    }
+  ]
+}

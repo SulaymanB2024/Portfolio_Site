@@ -1,6 +1,6 @@
 # Publishing and updating Texas business research
 
-The deliverable is a useful answer to a business decision, supported by primary evidence and readable on the actual site. Twelve dedicated investigations form the initial library. Their commissioned readers, decisions and editorial review dates live in [library.json](library.json); dates there are manual reminders, not legal deadlines or scheduled jobs.
+The deliverable is a useful answer to a business decision, supported by primary evidence and readable on the actual site. Eighteen dedicated investigations cover twelve core Texas decisions and six mobility/freight decisions. Their commissioned readers, decisions and editorial review dates live in [library.json](library.json); dates there are manual reminders, not legal deadlines or scheduled jobs.
 
 ## Choose and research the next decision
 
@@ -39,6 +39,8 @@ The original hash remains intact. Each revision points to the prior hash and car
 ## Verify the integrated edition
 
 Generate the selected public projection and check that it matches the reviewed library:
+
+The manifest's `bundlePath` selects the eighteen-article October 13 edition. The frozen twelve-article October 12 download remains available at its established URL. New edition paths must stay inside `public/research` and use JSON; choose a new edition rather than silently replacing a previously linked download. Source checks retain their actual individual dates even when the prepared release date advances.
 
 ```sh
 npm run texas:bundle

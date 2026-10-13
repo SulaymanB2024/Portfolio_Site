@@ -1,6 +1,6 @@
 # The Texas library: what to know and explain
 
-Read the twelve finished investigations through their decision examples. The core skill is to ask which document, date, and operating boundary supports a business commitment. Use the questions below to practice explaining the finding from its evidence, rather than memorize a headline.
+Read the eighteen finished investigations through their decision examples. The core skill is to ask which document, date, and operating boundary supports a business commitment. Use the questions below to practice explaining the finding from its evidence, rather than memorize a headline.
 
 ## Power before property
 
@@ -43,6 +43,18 @@ Hiring: distinguish adjusted/unadjusted data, establishment jobs/people, mean/me
 Logistics: explain why two-direction all-mode freight dollars divided by one-direction truck entries is an invalid ratio. Name the actual bridge, direction, commercial/inspection/broker/receiving windows and origin basis. Reproduce the $410K/$406K example and show how one additional incident changes the route preference. A supplier address in Mexico does not determine USMCA eligibility or all applicable tariffs.
 
 Manufacturing: distinguish planned investment, a shell, pilot completion, production, product qualification, allocated output and accepted delivery. Know what TI, Samsung and GlobalWafers actually report at the October 12 cutoff. Reproduce the 40,375/39,950 component sensitivity without treating its inputs as company yields. Material wafers, finished devices, process nodes and wafer diameters are different measures and products.
+
+## Robotaxis, fleet stages and freight economics
+
+Passenger access: explain why an open city, an admitted rider, a qualifying request, an optional AV match and a reserved vehicle are different facts. Know the reviewed Waymo channels, Zoox waitlist/testing stages, Tesla rider rules and Avride's current supervised Dallas guidance. Compare the trip actually needed, including airports, pickup walking, booking, payment and fallback. In the passenger model, twenty paid exceptions consume the combined saving while some fare cash saving remains; valued staff time is a separate account.
+
+Waymo: reproduce the $6,400/$6,200 fare-and-time comparison, and the $7,440 sensitivity. The fallback's twenty minutes cover the entire failed request and substitute journey's waiting, walking and coordination; only the hypothetical conventional fare is charged. Explain why a city opening or individual business profile does not establish an airport itinerary or an organization-wide payment program.
+
+Zoox: distinguish retrofitted test SUVs, purpose-built restricted-rider operation and verified public service. Explain the conditional commercial exemption, the 2,500 introduction ceiling per twelve months and separate simultaneous-operation limits. Reproduce the 704/512 vehicle-trip utilization case and its $17.05/$23.44 allocated cost, without presenting the inputs as company fleet size, fares or demand. A depot plan requires actual power, property and contracting evidence.
+
+Freight: identify current industrial, regional and highway work separately. An Aurora rear-seat support role differs from driving supervision; Kodiak industrial operation differs from its highway launch target; Waabi and PlusAI retain disclosed onboard roles. Know why a safety-case completion percentage, cumulative miles and an on-time percentage have different denominators. Price the completed delivery with acceptance, direct or transfer design, loading, release, setup and incremental recovery. Reproduce the $98,400 direct/$42,400 transfer case, the 232-load threshold and $123 headroom before replacing assumed inputs with trial evidence.
+
+Authorization: distinguish September 2025 statutory effectiveness, implementing rules and May 28, 2026 enforcement. Apply the actual human-driver definition rather than infer a role from somebody in the cab. Match holder and vehicle records, responder plans, domain and contract. Nonexpiry leaves material-information updates due within thirty days; that clock is not a universal enforcement cure. Reproduce the $5,500 preparedness/$12,700 interruption case while excluding the unchanged base freight spend.
 
 ## Carry this method into the next story
 
