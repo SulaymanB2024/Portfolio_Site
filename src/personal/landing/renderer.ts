@@ -224,7 +224,7 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
     const index = textSequence(targetProgress, 'threshold', true).active, chapter = chapters[index]
     const style = getComputedStyle(headline)
     const fontSize = parseFloat(style.fontSize), tracking = parseFloat(style.letterSpacing) || 0
-    const width = headingFitWidth(chapter, headline.getBoundingClientRect().width, stage.clientWidth, stage.clientHeight)
+    const width = headingFitWidth(chapter, headline.getBoundingClientRect().width, stage.clientWidth)
     const layout = layoutHeading(chapter, fontSize, width, row => {
       if (!headingMeasure) return 0
       headingMeasure.font = `${style.fontWeight} ${fontSize * row.scale}px ${style.fontFamily}`
@@ -253,7 +253,7 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
     targetProgress = railProgress(scrollY, rail.getBoundingClientRect().top + scrollY, rail.clientHeight, stage.clientHeight)
     const style = getComputedStyle(headline)
     const active = textSequence(targetProgress, 'threshold', true).active
-    const key = [active, headline.clientWidth, headingFitWidth(chapters[active], headline.clientWidth, stage.clientWidth, stage.clientHeight),
+    const key = [active, headline.clientWidth, headingFitWidth(chapters[active], headline.clientWidth, stage.clientWidth),
       style.fontSize, style.fontWeight, style.fontFamily, style.letterSpacing,
       isStackedLanding(stage.clientWidth, stage.clientHeight)].join('|')
     if (key === fallbackKey) return
