@@ -1,0 +1,52 @@
+[
+  {
+    "id": "RA1",
+    "label": "June 2026 primary financing and company statistics",
+    "href": "https://www.gic.com.sg/uploads/2026/06/Ramp-Raises-Series-F-at-44-Billion-Valuation-3.pdf",
+    "publisher": "Ramp / GIC",
+    "date": "2026-06-04",
+    "type": "Primary company release hosted by participating investor",
+    "lastVerified": "2026-10-13",
+    "note": "Announces a $750m primary financing at $44bn. June 1 company statistics: over $1bn annualized revenue, positive free cash flow and over 70,000 customers. Annualized revenue is not subscription ARR; audited statements and security terms are not supplied."
+  },
+  {
+    "id": "RA2",
+    "label": "Contribution-profit terminology in November company post",
+    "href": "https://ramp.com/blog/ramp-november-2025-valuation",
+    "publisher": "Ramp",
+    "date": "2025-11-17",
+    "type": "Primary company post",
+    "lastVerified": "2026-10-13",
+    "note": "The post identifies underlying profitability as contribution profit. It gives no complete line-by-line reconciliation. Modeled account contributions are separate from the company measure."
+  },
+  {
+    "id": "RA3",
+    "label": "Current free/Plus/Enterprise pricing",
+    "href": "https://ramp.com/pricing",
+    "publisher": "Ramp",
+    "date": "2026-10-13",
+    "type": "Current primary pricing page",
+    "lastVerified": "2026-10-13",
+    "note": "Plus is $15 per user per month plus a platform fee based on team size, with a 20% annual-billing discount advertised. The buyer model uses monthly list pricing; its platform fee is assumed, and the discount and payment-method fees are excluded."
+  },
+  {
+    "id": "RA4",
+    "label": "Rewards Terms",
+    "href": "https://ramp.com/legal/customer-terms/services-terms/rewards-terms",
+    "publisher": "Ramp",
+    "date": "2026-09-22",
+    "type": "Primary company terms",
+    "lastVerified": "2026-10-13",
+    "note": "Qualified purchases, Ramp-set rates, eligibility and redemption conditions. These terms establish no universal cashback rate. The modeled 1.2% reward expense is hypothetical."
+  },
+  {
+    "id": "RA5",
+    "label": "AI token-spend management strategy",
+    "href": "https://ramp.com/blog/ramp-at-44-billion-the-third-pillar",
+    "publisher": "Ramp",
+    "date": "2026-06-04",
+    "type": "Primary company strategy/product post",
+    "lastVerified": "2026-10-13",
+    "note": "Describes tools to view AI usage and cost, assign it to teams or use cases, and control spending. Promotional economic or model-quality claims are not treated as independent causal evidence."
+  }
+]

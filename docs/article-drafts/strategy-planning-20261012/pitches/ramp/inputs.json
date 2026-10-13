@@ -1,0 +1,11 @@
+{
+  "status": "Hypothetical account economics and incremental paid-tier buyer case; not Ramp financial estimates",
+  "verified": "2026-10-13",
+  "platform_cases": {
+    "base": {"annual_card_volume":12000000,"platform_card_proceeds_rate":0.022,"customer_reward_cost_rate":0.012,"risk_and_funding_rate":0.0035,"account_delivery_cost":8000,"annual_software_fees":12000,"software_delivery_cost_rate":0.25},
+    "card_pressure": {"annual_card_volume":9000000,"platform_card_proceeds_rate":0.020,"customer_reward_cost_rate":0.012,"risk_and_funding_rate":0.0045,"account_delivery_cost":8000,"annual_software_fees":12000,"software_delivery_cost_rate":0.25},
+    "software_expansion": {"annual_card_volume":9000000,"platform_card_proceeds_rate":0.020,"customer_reward_cost_rate":0.012,"risk_and_funding_rate":0.0045,"account_delivery_cost":8000,"annual_software_fees":24000,"software_delivery_cost_rate":0.20}
+  },
+  "buyer": {"paid_seats":60,"monthly_seat_price":15,"annual_platform_fee":4200,"weekly_hours_recovered":6,"working_weeks":46,"hour_cost":60,"cash_capture":0.5,"implementation":8000,"spend_avoided_cases":{"base":20000,"weak_incrementality":5000}},
+  "boundary":"Platform proceeds rate is hypothetical cash credited after partner/network sharing but before customer rewards and risk/funding costs; it is not an interchange schedule, merchant processing fee, audited gross revenue or GAAP margin. Annual contributions omit acquisition, corporate overhead, taxes and capital. Buyer seat price is the October13 monthly-list analogue; platform fee and all savings are assumed, with no annual discount or payment-method fees. Buyer incremental benefits compare paid workflow to the previous/free workflow; unchanged card rewards are excluded."
+}

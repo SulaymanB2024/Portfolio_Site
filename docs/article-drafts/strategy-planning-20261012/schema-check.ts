@@ -2,6 +2,9 @@ import source from '../../../src/personal/editorial/data/articles/choosing-a-gro
 import toastSource from '../../../src/personal/editorial/data/articles/toast-gross-profit-engine.json'
 import harveySource from '../../../src/personal/editorial/data/articles/harvey-who-keeps-the-value-of-legal-ai.json'
 import vantaSource from '../../../src/personal/editorial/data/articles/vanta-after-the-audit.json'
+import rampSource from '../../../src/personal/editorial/data/articles/ramp-saving-money-and-retaining-contribution.json'
+import elevenlabsSource from '../../../src/personal/editorial/data/articles/elevenlabs-cost-of-accepted-work.json'
+import flockSource from '../../../src/personal/editorial/data/articles/flock-safety-installed-cohort-cash.json'
 import type { ArticleSection, WritingArticle } from '../../../src/personal/editorial/types'
 
 // JSON imports widen string values; narrow the validated presentation enum.
@@ -19,5 +22,5 @@ function normalize(raw: ImportedArticle): WritingArticle {
   })) }
 }
 const article = normalize(source)
-export const articles: WritingArticle[] = [article, normalize(toastSource), normalize(harveySource), normalize(vantaSource)]
+export const articles: WritingArticle[] = [article, normalize(toastSource), normalize(harveySource), normalize(vantaSource), normalize(rampSource), normalize(elevenlabsSource), normalize(flockSource)]
 export default article

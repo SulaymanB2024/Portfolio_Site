@@ -1,0 +1,36 @@
+{
+  "verified": "2026-10-13",
+  "readbacks": [
+    {
+      "source": "RA1",
+      "url": "https://www.gic.com.sg/uploads/2026/06/Ramp-Raises-Series-F-at-44-Billion-Valuation-3.pdf",
+      "support": "Announces a $750m primary financing at $44bn. June 1 company statistics: over $1bn annualized revenue, positive free cash flow and over 70,000 customers. Annualized revenue is not subscription ARR; audited statements and security terms are not supplied."
+    },
+    {
+      "source": "RA2",
+      "url": "https://ramp.com/blog/ramp-november-2025-valuation",
+      "support": "The post identifies underlying profitability as contribution profit. It gives no complete line-by-line reconciliation. Modeled account contributions are separate from the company measure."
+    },
+    {
+      "source": "RA3",
+      "url": "https://ramp.com/pricing",
+      "support": "Plus is $15 per user per month plus a platform fee based on team size, with a 20% annual-billing discount advertised. The buyer model uses monthly list pricing; its platform fee is assumed, and the discount and payment-method fees are excluded."
+    },
+    {
+      "source": "RA4",
+      "url": "https://ramp.com/legal/customer-terms/services-terms/rewards-terms",
+      "support": "Qualified purchases, Ramp-set rates, eligibility and redemption conditions. These terms establish no universal cashback rate. The modeled 1.2% reward expense is hypothetical."
+    },
+    {
+      "source": "RA5",
+      "url": "https://ramp.com/blog/ramp-at-44-billion-the-third-pillar",
+      "support": "Describes tools to view AI usage and cost, assign it to teams or use cases, and control spending. Promotional economic or model-quality claims are not treated as independent causal evidence."
+    }
+  ],
+  "unresolved": [
+    "Current audited financials and revenue mix",
+    "Company contribution reconciliation",
+    "Real card proceeds, reward costs and risk/funding costs",
+    "Current security terms and buyer platformfee"
+  ]
+}

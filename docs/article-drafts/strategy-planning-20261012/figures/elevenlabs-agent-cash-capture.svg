@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="763.2pt" height="453.6pt" viewBox="0 0 763.2 453.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 453.6
+L 763.2 453.6
+L 763.2 0
+L 0 0
+z
+" style="fill: #f5f2ea"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 198.432 340.2
+L 694.512 340.2
+L 694.512 99.792
+L 198.432 99.792
+z
+" style="fill: #f5f2ea"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 275.032588 146.430866
+L 616.9995 146.430866
+L 616.9995 110.719636
+L 275.032588 110.719636
+z
+" clip-path="url(#p9dc43ef60d)" style="fill: #b0aca3; stroke: #24221e; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 275.032588 186.427444
+L 402.244279 186.427444
+L 402.244279 150.716214
+L 275.032588 150.716214
+z
+" clip-path="url(#p9dc43ef60d)" style="fill: #24221e; stroke: #24221e; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 275.032588 289.275786
+L 368.047588 289.275786
+L 368.047588 253.564556
+L 275.032588 253.564556
+z
+" clip-path="url(#p9dc43ef60d)" style="fill: #b0aca3; stroke: #24221e; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 275.032588 329.272364
+L 255.882441 329.272364
+L 255.882441 293.561134
+L 275.032588 293.561134
+z
+" clip-path="url(#p9dc43ef60d)" style="fill: #24221e; stroke: #24221e; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m9cb2d7e5bb" d="M 0 0
+L 0 3.5
+" style="stroke: #625f56; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m9cb2d7e5bb" x="275.032588" y="340.2" style="fill: #625f56; stroke: #625f56; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 14px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #625f56" x="275.032588" y="357.837812" transform="rotate(-0 275.032588 357.837812)">$0k</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m9cb2d7e5bb" x="366.223765" y="340.2" style="fill: #625f56; stroke: #625f56; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 14px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #625f56" x="366.223765" y="357.837812" transform="rotate(-0 366.223765 357.837812)">$5k</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m9cb2d7e5bb" x="457.414941" y="340.2" style="fill: #625f56; stroke: #625f56; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 14px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #625f56" x="457.414941" y="357.837812" transform="rotate(-0 457.414941 357.837812)">$10k</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m9cb2d7e5bb" x="548.606118" y="340.2" style="fill: #625f56; stroke: #625f56; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 14px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #625f56" x="548.606118" y="357.837812" transform="rotate(-0 548.606118 357.837812)">$15k</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m9cb2d7e5bb" x="639.797294" y="340.2" style="fill: #625f56; stroke: #625f56; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 14px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #625f56" x="639.797294" y="357.837812" transform="rotate(-0 639.797294 357.837812)">$20k</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 14px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #24221e" x="446.472" y="385.838906" transform="rotate(-0 446.472 385.838906)">Monthly modeled advantage</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_6"/>
+     <g id="text_7">
+      <text style="font-size: 14px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="186.432" y="153.892446" transform="rotate(-0 186.432 153.892446)">Base workflow</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7"/>
+     <g id="text_8">
+      <text style="font-size: 14px; font-family: 'DejaVu Serif'; fill: #24221e" transform="translate(109.502 289.036136)">Long calls,</text>
+      <text style="font-size: 14px; font-family: 'DejaVu Serif'; fill: #24221e" transform="translate(66.062625 305.839964)">weak completion</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_8">
+    <path d="M 275.032588 340.2
+L 275.032588 99.792
+" clip-path="url(#p9dc43ef60d)" style="fill: none; stroke: #625f56; stroke-width: 0.9; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 198.432 340.2
+L 694.512 340.2
+" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 12px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="626.118618" y="131.692908" transform="rotate(-0 626.118618 131.692908)">$18,750</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 12px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="411.363397" y="171.689485" transform="rotate(-0 411.363397 171.689485)">$6,975</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 12px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="377.166706" y="274.537827" transform="rotate(-0 377.166706 274.537827)">$5,100</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 12px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="248.587147" y="314.534405" transform="rotate(-0 248.587147 314.534405)">−$1,050</text>
+   </g>
+   <g id="legend_1">
+    <g id="patch_8">
+     <path d="M 208.332 80.037182
+L 230.332 80.037182
+L 230.332 72.337182
+L 208.332 72.337182
+z
+" style="fill: #b0aca3; stroke: #24221e; stroke-width: 0.7; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_13">
+     <text style="font-size: 11px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="239.132" y="80.037182" transform="rotate(-0 239.132 80.037182)">Loaded time value</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 363.971687 80.037182
+L 385.971687 80.037182
+L 385.971687 72.337182
+L 363.971687 72.337182
+z
+" style="fill: #24221e; stroke: #24221e; stroke-width: 0.7; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 11px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="394.771687" y="80.037182" transform="rotate(-0 394.771687 80.037182)">Cash at 50% capture</text>
+    </g>
+   </g>
+  </g>
+  <g id="text_15">
+   <text style="font-size: 22px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="26.712" y="22.68" transform="rotate(-0 26.712 22.68)">A useful conversation still has to repay the bill</text>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 12px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #625f56" x="26.712" y="49.896" transform="rotate(-0 26.712 49.896)">Hypothetical agent tasks · monthly advantage before one-time setup</text>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 11px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #625f56" x="26.712" y="408.24" transform="rotate(-0 26.712 408.24)">10,000 tasks/month; all costs, completion and cash capture are hypothetical; fallback remains.</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 11px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #625f56" x="26.712" y="426.384" transform="rotate(-0 26.712 426.384)">Stress changes both completion (70%→40%) and duration (4→6 minutes); no causal isolation.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p9dc43ef60d">
+   <rect x="198.432" y="99.792" width="496.08" height="240.408"/>
+  </clipPath>
+ </defs>
+</svg>

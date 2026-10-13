@@ -1,0 +1,202 @@
+{
+  "status": "Illustrative installed-cohort scenarios, not Flock disclosures or cost estimates",
+  "input_sha256": "271d4da96ccd58549a45e935177d2db5730023a379c5bd8a30ac7d14400252fe",
+  "timing": "Opening subscription cash and deployment/acquisition are at t=0; future renewal receipts at the start of each year; service and reserve at year-end. Removal costs occur when units fail to renew. No early refunds, price changes, expansion, tax, corporate overhead, debt, terminal value or final shutdown costs are modeled.",
+  "scenarios": {
+    "base": {
+      "initial_capital": 300000,
+      "opening_arr": 300000,
+      "first_year_cash": -90000.0,
+      "payback_year": 2,
+      "five_year_cash": 644555.2499999999,
+      "cash_present_value": 507451.09066259855,
+      "rows": [
+        {
+          "year": 1,
+          "active_units": 100.0,
+          "annual_run_rate": 300000.0,
+          "collections": 300000.0,
+          "service": 65000.0,
+          "replacement_reserve": 25000.0,
+          "removal": 0.0,
+          "cash_before_initial_capital": 210000.0,
+          "cumulative_cash": -90000.0
+        },
+        {
+          "year": 2,
+          "active_units": 95.0,
+          "annual_run_rate": 285000.0,
+          "collections": 285000.0,
+          "service": 61750.0,
+          "replacement_reserve": 23750.0,
+          "removal": 1500.0,
+          "cash_before_initial_capital": 198000.0,
+          "cumulative_cash": 108000.0
+        },
+        {
+          "year": 3,
+          "active_units": 90.25,
+          "annual_run_rate": 270750.0,
+          "collections": 270750.0,
+          "service": 58662.5,
+          "replacement_reserve": 22562.5,
+          "removal": 1425.0,
+          "cash_before_initial_capital": 188100.0,
+          "cumulative_cash": 296100.0
+        },
+        {
+          "year": 4,
+          "active_units": 85.73749999999998,
+          "annual_run_rate": 257212.49999999994,
+          "collections": 257212.49999999994,
+          "service": 55729.374999999985,
+          "replacement_reserve": 21434.374999999996,
+          "removal": 1353.750000000005,
+          "cash_before_initial_capital": 178694.99999999994,
+          "cumulative_cash": 474794.99999999994
+        },
+        {
+          "year": 5,
+          "active_units": 81.45062499999999,
+          "annual_run_rate": 244351.87499999997,
+          "collections": 244351.87499999997,
+          "service": 52942.90624999999,
+          "replacement_reserve": 20362.656249999996,
+          "removal": 1286.0624999999984,
+          "cash_before_initial_capital": 169760.24999999997,
+          "cumulative_cash": 644555.2499999999
+        }
+      ]
+    },
+    "renewal_pressure": {
+      "initial_capital": 300000,
+      "opening_arr": 300000,
+      "first_year_cash": -90000.0,
+      "payback_year": 2,
+      "five_year_cash": 388224.0000000001,
+      "cash_present_value": 311943.68417921104,
+      "rows": [
+        {
+          "year": 1,
+          "active_units": 100.0,
+          "annual_run_rate": 300000.0,
+          "collections": 300000.0,
+          "service": 65000.0,
+          "replacement_reserve": 25000.0,
+          "removal": 0.0,
+          "cash_before_initial_capital": 210000.0,
+          "cumulative_cash": -90000.0
+        },
+        {
+          "year": 2,
+          "active_units": 80.0,
+          "annual_run_rate": 240000.0,
+          "collections": 240000.0,
+          "service": 52000.0,
+          "replacement_reserve": 20000.0,
+          "removal": 6000.0,
+          "cash_before_initial_capital": 162000.0,
+          "cumulative_cash": 72000.0
+        },
+        {
+          "year": 3,
+          "active_units": 64.00000000000001,
+          "annual_run_rate": 192000.00000000003,
+          "collections": 192000.00000000003,
+          "service": 41600.00000000001,
+          "replacement_reserve": 16000.000000000004,
+          "removal": 4799.999999999995,
+          "cash_before_initial_capital": 129600.00000000003,
+          "cumulative_cash": 201600.00000000003
+        },
+        {
+          "year": 4,
+          "active_units": 51.20000000000001,
+          "annual_run_rate": 153600.00000000003,
+          "collections": 153600.00000000003,
+          "service": 33280.00000000001,
+          "replacement_reserve": 12800.000000000002,
+          "removal": 3840.0000000000014,
+          "cash_before_initial_capital": 103680.00000000003,
+          "cumulative_cash": 305280.00000000006
+        },
+        {
+          "year": 5,
+          "active_units": 40.96000000000001,
+          "annual_run_rate": 122880.00000000003,
+          "collections": 122880.00000000003,
+          "service": 26624.000000000004,
+          "replacement_reserve": 10240.000000000002,
+          "removal": 3072.0000000000005,
+          "cash_before_initial_capital": 82944.00000000003,
+          "cumulative_cash": 388224.0000000001
+        }
+      ]
+    },
+    "service_drag": {
+      "initial_capital": 420000,
+      "opening_arr": 300000,
+      "first_year_cash": -265000.0,
+      "payback_year": 4,
+      "five_year_cash": 83336.00000000006,
+      "cash_present_value": 52026.16469328262,
+      "rows": [
+        {
+          "year": 1,
+          "active_units": 100.0,
+          "annual_run_rate": 300000.0,
+          "collections": 300000.0,
+          "service": 105000.0,
+          "replacement_reserve": 40000.0,
+          "removal": 0.0,
+          "cash_before_initial_capital": 155000.0,
+          "cumulative_cash": -265000.0
+        },
+        {
+          "year": 2,
+          "active_units": 80.0,
+          "annual_run_rate": 240000.0,
+          "collections": 240000.0,
+          "service": 84000.0,
+          "replacement_reserve": 32000.0,
+          "removal": 6000.0,
+          "cash_before_initial_capital": 118000.0,
+          "cumulative_cash": -147000.0
+        },
+        {
+          "year": 3,
+          "active_units": 64.00000000000001,
+          "annual_run_rate": 192000.00000000003,
+          "collections": 192000.00000000003,
+          "service": 67200.00000000001,
+          "replacement_reserve": 25600.000000000007,
+          "removal": 4799.999999999995,
+          "cash_before_initial_capital": 94400.0,
+          "cumulative_cash": -52600.0
+        },
+        {
+          "year": 4,
+          "active_units": 51.20000000000001,
+          "annual_run_rate": 153600.00000000003,
+          "collections": 153600.00000000003,
+          "service": 53760.00000000001,
+          "replacement_reserve": 20480.000000000004,
+          "removal": 3840.0000000000014,
+          "cash_before_initial_capital": 75520.00000000003,
+          "cumulative_cash": 22920.00000000003
+        },
+        {
+          "year": 5,
+          "active_units": 40.96000000000001,
+          "annual_run_rate": 122880.00000000003,
+          "collections": 122880.00000000003,
+          "service": 43008.00000000001,
+          "replacement_reserve": 16384.000000000004,
+          "removal": 3072.0000000000005,
+          "cash_before_initial_capital": 60416.00000000003,
+          "cumulative_cash": 83336.00000000006
+        }
+      ]
+    }
+  }
+}

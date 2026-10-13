@@ -1,0 +1,29 @@
+{
+  "verified": "2026-10-13",
+  "independent_ramp_flock_arithmetic_checks": 111,
+  "edge_cases": "zero activity/retention, invalid inputs and preserved inputs passed",
+  "native_exports": [
+    {
+      "slug": "ramp-saving-money-and-retaining-contribution",
+      "tables": 2,
+      "figures": 1,
+      "sources": 5
+    },
+    {
+      "slug": "elevenlabs-cost-of-accepted-work",
+      "tables": 3,
+      "figures": 2,
+      "sources": 9
+    },
+    {
+      "slug": "flock-safety-installed-cohort-cash",
+      "tables": 2,
+      "figures": 1,
+      "sources": 6
+    }
+  ],
+  "table_model_parity": "All principal monetary outputs and payback years match regenerated results",
+  "table_total": 7,
+  "figure_total": 4,
+  "elevenlabs_verifier": "Run verify_model.py separately; this receipt does not claim its execution."
+}

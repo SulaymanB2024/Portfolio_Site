@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url'
 const lane = dirname(fileURLToPath(import.meta.url))
 const root = resolve(lane, '../../..')
 const proposed = JSON.parse(await readFile(resolve(lane, 'catalog-entry.json'), 'utf8'))
-const allowedFigures = new Set(['strategy-growth-channel-cash-capacity.svg', 'strategy-growth-channel-cash-paths.svg', 'strategy-growth-price-counterfactual.svg', 'toast-entry-price-return.svg', 'harvey-time-to-contribution.svg', 'harvey-return-hurdle.svg', 'vanta-cash-capture.svg', 'vanta-cohort-growth.svg'])
+const allowedFigures = new Set(['strategy-growth-channel-cash-capacity.svg', 'strategy-growth-channel-cash-paths.svg', 'strategy-growth-price-counterfactual.svg', 'toast-entry-price-return.svg', 'harvey-time-to-contribution.svg', 'harvey-return-hurdle.svg', 'vanta-cash-capture.svg', 'vanta-cohort-growth.svg', 'ramp-card-software-contribution.svg', 'flock-installed-cohort-cash.svg', 'elevenlabs-accepted-audio-cost.svg', 'elevenlabs-agent-cash-capture.svg'])
 const notebookResources = new Map([['/article.md', 'article.md'], ['/SOURCES.md', 'SOURCES.md'], ['/HANDOFF.md', 'HANDOFF.md'], ['/pitches/inputs.json', 'pitches/inputs.json']])
 const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${proposed.title}</title><style>html,body{margin:0;padding:0;background:#f5f2ea}*{box-sizing:border-box}</style></head><body><div id="root"></div><script type="module" src="/docs/article-drafts/strategy-planning-20261012/preview-entry.tsx"></script></body></html>`
 const server = await createServer({

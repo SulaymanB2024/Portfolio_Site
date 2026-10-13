@@ -9,6 +9,10 @@ The strategy piece is substantially rewritten. The three pitches make different 
 
 ## Reproducible models
 
+[Interactive Harvey and Vanta companion](pitches/companion/startup-models.html) · [Preview and verification instructions](pitches/companion/README.md)
+
+Change adoption, review, work weeks and cash capture to compare rollout costs with renewal economics. The companion keeps the dated company anchors fixed and labels hypothetical buyer inputs.
+
 [Investment-pitch notebook](pitches/models.ipynb) · [Fact and assumption manifest](pitches/inputs.json) · [Python calculations](pitches/models.py) · [Run alternative scenarios](pitches/SCENARIOS.md)
 
 [Strategy notebook](model.ipynb) · [Operating calculations](model.py)
@@ -20,3 +24,13 @@ The investment assumptions are editable through the JSON manifest. Harvey now te
 The $300m opening ARR is Vanta's April 2026 disclosure. All subsequent cohort rates, new ARR and investor return conditions in this figure are modeled assumptions.
 
 [Completion and editorial review](REVIEW.md) · [Exact integration handoff](HANDOFF.md)
+
+## More startup studies — October 13
+
+| Article | Judgment and model |
+| --- | --- |
+| [Ramp](pitches/ramp/article.md) | Card contribution and paid workflow value must improve the same relationship. [Inputs](pitches/ramp/inputs.json), [model](pitches/ramp/model.py), [sources](pitches/ramp/SOURCES.md). |
+| [ElevenLabs](pitches/elevenlabs/article.md) | Accepted audio and verified agent tasks provide the useful economic denominator. [Inputs](pitches/elevenlabs/inputs.json), [model](pitches/elevenlabs/model.py), [sources](pitches/elevenlabs/SOURCES.md). |
+| [Flock Safety](pitches/flock-safety/article.md) | Renewals must recover deployment and continuing service cash. [Inputs](pitches/flock-safety/inputs.json), [model](pitches/flock-safety/model.py), [sources](pitches/flock-safety/SOURCES.md). |
+
+These three articles add 7,178 words, seven tables and four original figures. Company disclosures and authored operating scenarios remain distinct. [Export manifest](pitches/startups-manifest.json) and [verification receipt](pitches/startups-verification.json) identify the native files and model inputs. Run each company model, `build_startups.py`, `startup_figures.py` and `verify_startups.py` when reviewing a new scenario. Authored prose and tables require corresponding editorial updates; the verifier rejects stale principal table outputs.
