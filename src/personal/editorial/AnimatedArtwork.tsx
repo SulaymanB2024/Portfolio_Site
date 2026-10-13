@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { GenerativeArtwork } from './generative/types';
 import { artworkPlayers, createArtworkPlayer, type ArtworkPlayer, type ArtworkPlayerStatus } from './artwork-player';
 import { createPreviewTelemetry } from './preview-scheduler';
+import { paintArtworkPoster, readArtworkInkColor, type ArtworkInkColor } from './artwork-ink-pixels';
 
 export type ArtworkState = 'poster' | 'running' | 'paused' | 'fallback';
 
@@ -22,6 +23,8 @@ export default function AnimatedArtwork({
 }: AnimatedArtworkProps) {
   const root = useRef<HTMLDivElement>(null);
   const host = useRef<HTMLDivElement>(null);
+  const posterSource = useRef<HTMLImageElement>(null);
+  const posterCanvas = useRef<HTMLCanvasElement>(null);
   const player = useRef<ArtworkPlayer | null>(null);
   const callback = useRef(onStateChange);
   const lastState = useRef<ArtworkState | undefined>(undefined);
@@ -32,14 +35,43 @@ export default function AnimatedArtwork({
   const [paintedSketch, setPaintedSketch] = useState<string | null>(null);
   const [failedSketch, setFailedSketch] = useState<string | null>(null);
   const [renderer, setRenderer] = useState<'worker' | 'main'>('main');
+  const [inkColor, setInkColor] = useState<ArtworkInkColor | null>(null);
   const physicalSize = transitionName ? 400 : Number.isFinite(size) ? Math.max(160, Math.min(400, Math.round(size))) : 240;
   const failed = failedSketch === artwork.sketchId;
   const ready = paintedSketch === artwork.sketchId;
   const allowed = visible && documentVisible && !reduced && !paused && !failed;
   // A cold paused poster needs no worker or sketch import. Once acquired, keep
   // that player through Pause/offscreen changes and accept an existing flight.
-  const canLoad = (initializedSketch === artwork.sketchId || visible && documentVisible && !paused || artworkPlayers.traveling(transitionName)) && !reduced && !failed;
+  const canLoad = (initializedSketch === artwork.sketchId || visible && documentVisible && !paused || artworkPlayers.traveling(transitionName)) && !reduced && !failed && (!embedded || inkColor !== null);
   const state: ArtworkState = failed ? 'fallback' : !ready || reduced ? 'poster' : allowed ? 'running' : 'paused';
+
+  // The same native ink reaches both the poster and the retained live surface.
+  // Mobile Safari must never composite an opaque black canvas through a CSS
+  // reference filter, including placements below the initial viewport.
+  useLayoutEffect(() => {
+    const target = root.current;
+    if (!embedded || !target) return;
+    const read = () => {
+      const next = readArtworkInkColor(target);
+      setInkColor(previous => previous?.every((value, index) => value === next[index]) ? previous : next);
+    };
+    read();
+    const appearance = target.closest('[data-appearance]');
+    const observer = new MutationObserver(read);
+    if (appearance) observer.observe(appearance, { attributes: true, attributeFilter: ['data-appearance'] });
+    const print = matchMedia('print');
+    print.addEventListener('change', read);
+    return () => { observer.disconnect(); print.removeEventListener('change', read); };
+  }, [embedded]);
+
+  function paintPoster() {
+    const source = posterSource.current, canvas = posterCanvas.current;
+    if (inkColor && source?.complete && source.naturalWidth && canvas) paintArtworkPoster(source, canvas, inkColor);
+  }
+  useLayoutEffect(() => {
+    paintPoster();
+    player.current?.setInkColor(embedded ? inkColor ?? undefined : undefined);
+  }, [inkColor, embedded, artwork]);
 
   useEffect(() => { callback.current = onStateChange; }, [onStateChange]);
   useEffect(() => {
@@ -96,9 +128,10 @@ export default function AnimatedArtwork({
   useLayoutEffect(() => {
     if (!canLoad || !host.current) return;
     const owner = {};
-    const current = artworkPlayers.acquire(transitionName, owner, host.current, () => createArtworkPlayer(artwork, physicalSize));
+    const current = artworkPlayers.acquire(transitionName, owner, host.current, () => createArtworkPlayer(artwork, physicalSize, embedded ? inkColor ?? undefined : undefined));
     setInitializedSketch(artwork.sketchId);
     player.current = current;
+    current.setInkColor(embedded ? inkColor ?? undefined : undefined);
     current.setPlayback(visible && documentVisible, paused || reduced);
     let wasPainted: boolean | undefined, wasFailed: boolean | undefined, lastActive: boolean | undefined;
     let lastRenderer: string | undefined, lastEngine: string | undefined, lastJobs: number | undefined;
@@ -141,7 +174,8 @@ export default function AnimatedArtwork({
   return <div ref={root} className="animated-artwork" data-artwork-key={transitionName} role={decorative ? undefined : 'img'} aria-label={decorative ? undefined : artwork.alt} aria-hidden={decorative ? true : undefined}
     data-art-state={state} data-sketch={artwork.sketchId} data-treatment={artwork.treatment} data-embedded={embedded} data-physical-size={physicalSize}
     data-renderer={renderer} data-engine="canvas" data-observed-fps="0" data-worker-jobs="0" data-frames="0" data-draw-ms="0" data-average-ms="0" data-target-fps="18">
-    <img className="animated-artwork-poster" src={`${import.meta.env.BASE_URL}${artwork.posterSrc.replace(/^\//, '')}`} alt="" width="400" height="400" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+    <img ref={posterSource} className={embedded ? 'animated-artwork-poster-source' : 'animated-artwork-poster'} src={`${import.meta.env.BASE_URL}${artwork.posterSrc.replace(/^\//, '')}`} alt="" width="400" height="400" loading={eager ? 'eager' : 'lazy'} decoding="async" onLoad={embedded ? paintPoster : undefined} />
+    {embedded && <canvas ref={posterCanvas} className="animated-artwork-poster" width="400" height="400" aria-hidden="true" />}
     <div ref={host} className="animated-artwork-canvas" aria-hidden="true" />
   </div>;
 }

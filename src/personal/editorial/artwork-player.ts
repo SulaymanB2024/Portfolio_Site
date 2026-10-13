@@ -4,6 +4,7 @@ import { artworkWorkerBackend } from './artwork-worker-backend.ts'
 import { previewScheduler, type PreviewFrameStats, type PreviewHandle } from './preview-scheduler.ts'
 import { readPortfolioRenderPolicy } from '../mobile-render-policy.ts'
 import { subscribeMenuMotion } from '../menu-motion.ts'
+import { createInkCanvasSketch, type ArtworkInkColor } from './artwork-ink-pixels.ts'
 export { artworkPlayers } from './artwork-players.ts'
 
 export type ArtworkPlayerStatus = {
@@ -12,7 +13,7 @@ export type ArtworkPlayerStatus = {
 let nextPlayerId = 1
 
 /** The renderer owns an imperative surface, so a route can lend it without resetting its sketch. */
-export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: number) {
+export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: number, initialInk?: ArtworkInkColor) {
   const surface = document.createElement('div')
   surface.style.width = surface.style.height = '100%'
   const listeners = new Set<(status: ArtworkPlayerStatus) => void>()
@@ -21,11 +22,12 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
   const status: ArtworkPlayerStatus = { id: nextPlayerId++, painted: false, failed: false, active: false, renderer: 'main', jobs: 0,
     stats: { frames: 0, drawMs: 0, averageMs: 0, targetFps: mobile ? 24 : 18 } }
   let job: PreviewHandle | null = null
-  let worker: PreviewHandle | null = null
+  let worker: ReturnType<typeof artworkWorkerBackend.register> = null
   let sketch: ReturnType<typeof createCanvasSketch> | null = null
   let mainFactory: Awaited<ReturnType<GenerativeArtwork['factory']>>['default'] | null = null
   let disposed = false, loadingMain = false, visible = false, paused = false, traveling = false, travelPaused = false
   let menuOpen = false
+  let inkColor = initialInk
   const motion = matchMedia('(prefers-reduced-motion: reduce)')
   const emit = () => listeners.forEach(listener => listener(status))
   const active = () => !disposed && !status.failed && !paused && !menuOpen && !(traveling && travelPaused) && !document.hidden && !motion.matches && (visible || traveling)
@@ -52,7 +54,7 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
   function startMain() {
     if (disposed || !mainFactory || sketch || !active()) return
     try {
-      sketch = createCanvasSketch(mainFactory, surface, { physicalSize })
+      sketch = inkColor ? createInkCanvasSketch(mainFactory, surface, { physicalSize }, inkColor) : createCanvasSketch(mainFactory, surface, { physicalSize })
       mainFactory = null
       job = previewScheduler.add({ active: true, ...limits, draw: () => sketch?.draw() ?? false, onFrame: frame, onError: fail })
     } catch { fail() }
@@ -68,6 +70,7 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
     }).catch(fail)
   }
   worker = artworkWorkerBackend.register({ host: surface, sketchId: artwork.sketchId, physicalSize, active: false,
+    ...(inkColor ? { inkColor } : {}),
     ...limits,
     onFrame: frame, onError: main, onJobs: count => { status.jobs = count; emit() } })
   if (worker) { job = worker; status.renderer = 'worker' } else main()
@@ -77,6 +80,7 @@ export function createArtworkPlayer(artwork: GenerativeArtwork, physicalSize: nu
   return {
     get status() { return status },
     moveTo(host: HTMLElement) { if (!disposed) host.replaceChildren(surface) },
+    setInkColor(next: ArtworkInkColor | undefined) { inkColor = next; worker?.setInkColor(next); sketch?.setInkColor?.(next) },
     setVisible(next: boolean) { visible = next; sync() },
     setPlayback(nextVisible: boolean, nextPaused: boolean) { visible = nextVisible; paused = nextPaused; sync() },
     setTravel(next: boolean) { if (next && !traveling) travelPaused = paused; traveling = next; sync() },

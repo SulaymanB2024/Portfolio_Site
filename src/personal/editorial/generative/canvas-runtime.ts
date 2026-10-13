@@ -1,4 +1,5 @@
 import type { P5SketchFactory } from './types';
+import type { ArtworkInkColor } from '../artwork-ink-pixels';
 
 export type SketchCanvas = HTMLCanvasElement | OffscreenCanvas;
 type SketchContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D;
@@ -15,9 +16,10 @@ export type CanvasSketchController = {
   readonly height: number;
   draw(): boolean;
   remove(): void;
+  setInkColor?(ink: ArtworkInkColor | undefined): void;
 };
 
-export type CanvasSketchOptions = { physicalSize?: number };
+export type CanvasSketchOptions = { physicalSize?: number; inkColor?: ArtworkInkColor };
 
 export type SketchRenderStats = { formulaMs: number; submitMs: number; presentMs: number; points: number; drawCalls: number; gpuMs?: number };
 export type OffscreenSketchController = Omit<CanvasSketchController, 'canvas'> & { readonly canvas: OffscreenCanvas; engine?: 'gpu' | 'canvas'; getRenderStats?(): SketchRenderStats };

@@ -1,6 +1,7 @@
 import { isArtworkWorkerReply, type ArtworkWorkerCommand } from './artwork-worker-protocol.ts';
 import type { SketchId } from './generative/types';
 import type { PreviewFrameStats, PreviewHandle } from './preview-scheduler';
+import type { ArtworkInkColor } from './artwork-ink-pixels';
 
 export type ArtworkWorkerTransport = {
   post(command: ArtworkWorkerCommand, transfer?: Transferable[]): void;
@@ -16,6 +17,7 @@ type WorkerArtworkOptions = {
   active: boolean;
   maxFps?: number;
   minFps?: number;
+  inkColor?: ArtworkInkColor;
   onFrame(stats: Readonly<PreviewFrameStats>): void;
   onError(error: unknown): void;
   onJobs?(count: number): void;
@@ -133,7 +135,7 @@ export function createArtworkWorkerBackend(createTransport = connect, isSupporte
   }
 
   return {
-    register(options: WorkerArtworkOptions): PreviewHandle | null {
+    register(options: WorkerArtworkOptions): (PreviewHandle & { setInkColor(inkColor: ArtworkInkColor | undefined): void }) | null {
       if (disabled || !isSupported() || !ensureTransport()) return null;
       const canvas = options.host.ownerDocument.createElement('canvas');
       canvas.width = canvas.height = options.physicalSize;
@@ -156,6 +158,7 @@ export function createArtworkWorkerBackend(createTransport = connect, isSupporte
         const limits = {
           ...(options.maxFps === undefined ? {} : { maxFps: options.maxFps }),
           ...(options.minFps === undefined ? {} : { minFps: options.minFps }),
+          ...(options.inkColor === undefined ? {} : { inkColor: options.inkColor }),
         };
         transport!.post({ type: 'register', id: entry.id, sketchId: options.sketchId, canvas: offscreen, physicalSize: options.physicalSize, active: options.active, ...limits }, [offscreen]);
       } catch (error) {
@@ -164,6 +167,11 @@ export function createArtworkWorkerBackend(createTransport = connect, isSupporte
       }
       notifyJobs();
       return {
+        setInkColor(inkColor) {
+          if (entries.get(entry.id) !== entry) return;
+          try { transport?.post({ type: 'ink', id: entry.id, inkColor }); }
+          catch (error) { failTransport(error); }
+        },
         setActive(active) {
           if (entries.get(entry.id) !== entry || active === entry.active) return;
           entry.active = active;

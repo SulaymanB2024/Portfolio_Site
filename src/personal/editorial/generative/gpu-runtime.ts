@@ -1,5 +1,6 @@
 import type { CanvasSketch, CanvasSketchImage, CanvasSketchOptions, OffscreenSketchController, SketchRenderStats } from './canvas-runtime';
 import type { P5SketchFactory } from './types';
+import type { ArtworkInkColor } from '../artwork-ink-pixels';
 
 export type GpuTarget = {
   width: number; height: number; texture: WebGLTexture; framebuffer: WebGLFramebuffer;
@@ -17,7 +18,7 @@ export type GpuSurface = {
   clear(target: GpuTarget): void;
   copy(source: GpuTarget, destination: GpuTarget): void;
   image(target: GpuTarget, source: GpuTarget, rectangle: number[], transform: number[], logical: number[]): void;
-  present(target: GpuTarget, context: OffscreenCanvasRenderingContext2D): void;
+  present(target: GpuTarget, context: OffscreenCanvasRenderingContext2D, ink?: ArtworkInkColor): void;
   retain(): void;
   release(): void;
 };
@@ -103,9 +104,18 @@ precision highp float;
 uniform sampler2D source;
 uniform vec4 paint;
 uniform bool useTexture;
+uniform bool inkOutput;
+uniform vec3 inkColor;
 in vec2 uv;
 out vec4 outputColor;
-void main(){outputColor=useTexture?texture(source,uv):paint;}`;
+void main(){
+  vec4 value=useTexture?texture(source,uv):paint;
+  if(inkOutput){
+    vec3 straight=value.a>0.0?value.rgb/value.a:vec3(0.0);
+    float coverage=clamp((1.35*dot(straight,vec3(0.2125,0.7154,0.0721))-0.175)*1.7,0.0,1.0)*value.a;
+    outputColor=vec4(inkColor*coverage,coverage);
+  }else outputColor=value;
+}`;
 
 type TimerExtension = { TIME_ELAPSED_EXT: number; GPU_DISJOINT_EXT: number };
 const IDENTITY = [1, 0, 0, 1, 0, 0];
@@ -122,7 +132,7 @@ export class GpuArtworkPool implements GpuSurface {
   private readonly quadArray: WebGLVertexArrayObject;
   private readonly solidTexture: WebGLTexture;
   private readonly discUniforms: { logicalSize: WebGLUniformLocation | null; scale: WebGLUniformLocation | null };
-  private readonly quadUniforms: Record<'rectangle' | 'transform' | 'logicalSize' | 'paint' | 'useTexture' | 'source', WebGLUniformLocation | null>;
+  private readonly quadUniforms: Record<'rectangle' | 'transform' | 'logicalSize' | 'paint' | 'useTexture' | 'source' | 'inkOutput' | 'inkColor', WebGLUniformLocation | null>;
   private readonly timer: TimerExtension | null;
   private pendingQueries: { query: WebGLQuery; target: GpuTarget }[] = [];
   private currentQuery: { query: WebGLQuery; target: GpuTarget } | null = null;
@@ -171,7 +181,7 @@ export class GpuArtworkPool implements GpuSurface {
         gl.enableVertexAttribArray(location); gl.vertexAttribPointer(location, 2, gl.FLOAT, false, 24, location * 8); gl.vertexAttribDivisor(location, 1);
       }
       this.discUniforms = { logicalSize: gl.getUniformLocation(this.discProgram, 'logicalSize'), scale: gl.getUniformLocation(this.discProgram, 'scale') };
-      this.quadUniforms = Object.fromEntries(['rectangle', 'transform', 'logicalSize', 'paint', 'useTexture', 'source'].map(name => [name, gl.getUniformLocation(this.quadProgram, name)])) as typeof this.quadUniforms;
+      this.quadUniforms = Object.fromEntries(['rectangle', 'transform', 'logicalSize', 'paint', 'useTexture', 'source', 'inkOutput', 'inkColor'].map(name => [name, gl.getUniformLocation(this.quadProgram, name)])) as typeof this.quadUniforms;
       gl.disable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE); gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
       this.timer = gl.getExtension('EXT_disjoint_timer_query_webgl2') as TimerExtension | null;
       this.canvas.addEventListener('webglcontextlost', this.onLost);
@@ -252,6 +262,7 @@ export class GpuArtworkPool implements GpuSurface {
     const [a, b, c, d, e, f] = transform;
     gl.uniformMatrix3fv(this.quadUniforms.transform, false, [a, b, 0, c, d, 0, e, f, 1]);
     gl.uniform4fv(this.quadUniforms.paint, paint); gl.uniform1i(this.quadUniforms.useTexture, texture ? 1 : 0);
+    gl.uniform1i(this.quadUniforms.inkOutput, 0);
     // Bind a complete source even for the solid branch; never sample the target.
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texture ?? this.solidTexture); gl.uniform1i(this.quadUniforms.source, 0);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -270,11 +281,26 @@ export class GpuArtworkPool implements GpuSurface {
   image(target: GpuTarget, source: GpuTarget, rectangle: number[], transform: number[], logical: number[]) {
     this.quad(target, rectangle, transform, logical, [0, 0, 0, 0], source.texture);
   }
-  present(target: GpuTarget, context: OffscreenCanvasRenderingContext2D) {
+  present(target: GpuTarget, context: OffscreenCanvasRenderingContext2D, ink?: ArtworkInkColor) {
     const gl = this.gl;
-    gl.bindFramebuffer(gl.READ_FRAMEBUFFER, target.framebuffer); gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, null);
-    // The shared display crop occupies the top left of the 400px scratch canvas.
-    gl.blitFramebuffer(0, 0, target.width, target.height, 0, 400 - target.height, target.width, 400, gl.COLOR_BUFFER_BIT, gl.NEAREST);
+    if (ink) {
+      // Convert only the display pass. Retained source textures and trails keep
+      // the artist's original black-buffer mathematics and independent alpha.
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.viewport(0, 400 - target.height, target.width, target.height);
+      gl.useProgram(this.quadProgram); gl.bindVertexArray(this.quadArray);
+      gl.uniform4fv(this.quadUniforms.rectangle, [0, 0, target.width, target.height]);
+      gl.uniform2f(this.quadUniforms.logicalSize, target.width, target.height);
+      gl.uniformMatrix3fv(this.quadUniforms.transform, false, [1, 0, 0, 0, 1, 0, 0, 0, 1]);
+      gl.uniform1i(this.quadUniforms.useTexture, 1); gl.uniform1i(this.quadUniforms.inkOutput, 1);
+      gl.uniform3f(this.quadUniforms.inkColor, ink[0] / 255, ink[1] / 255, ink[2] / 255);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, target.texture); gl.uniform1i(this.quadUniforms.source, 0);
+      gl.disable(gl.BLEND); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); gl.enable(gl.BLEND);
+    } else {
+      gl.bindFramebuffer(gl.READ_FRAMEBUFFER, target.framebuffer); gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, null);
+      // The shared display crop occupies the top left of the 400px scratch canvas.
+      gl.blitFramebuffer(0, 0, target.width, target.height, 0, 400 - target.height, target.width, 400, gl.COLOR_BUFFER_BIT, gl.NEAREST);
+    }
     context.drawImage(this.canvas, 0, 0, target.width, target.height, 0, 0, target.width, target.height);
   }
   dispose() {
@@ -302,6 +328,7 @@ export class GpuSketch implements SourceSketchApi {
   private readonly surface: GpuSurface;
   private readonly context: OffscreenCanvasRenderingContext2D;
   private readonly scale: number;
+  private inkColor: ArtworkInkColor | undefined;
   private target: GpuTarget;
   private logicalWidth = 100; private logicalHeight = 100;
   private transform = [...IDENTITY];
@@ -316,6 +343,7 @@ export class GpuSketch implements SourceSketchApi {
 
   constructor(canvas: OffscreenCanvas, surface: GpuSurface, options: CanvasSketchOptions = {}) {
     this.canvas = canvas; this.surface = surface;
+    this.inkColor = options.inkColor;
     if (options.physicalSize !== undefined && !Number.isFinite(options.physicalSize)) throw new RangeError('Physical sketch size must be finite.');
     this.scale = options.physicalSize === undefined ? 1 : Math.max(160, Math.min(400, options.physicalSize)) / 400;
     const context = canvas.getContext('2d');
@@ -326,6 +354,7 @@ export class GpuSketch implements SourceSketchApi {
   }
   get width() { return this.logicalWidth; } get height() { return this.logicalHeight; }
   getRenderStats() { return { ...this.stats, gpuMs: this.target.gpuMs }; }
+  setInkColor(ink: ArtworkInkColor | undefined) { this.inkColor = ink; if (!this.removed) this.surface.present(this.target, this.context, ink); }
 
   createCanvas(width: number, height: number): this {
     if (![width, height].every(Number.isFinite) || width <= 0 || height <= 0) throw new RangeError('Sketch dimensions must be positive and finite.');
@@ -418,7 +447,7 @@ export class GpuSketch implements SourceSketchApi {
     try {
       this.draw();
       const formulaEnd = performance.now(); this.flush(); const submitted = performance.now();
-      this.surface.present(this.target, this.context);
+      this.surface.present(this.target, this.context, this.inkColor);
       this.stats = { formulaMs: formulaEnd - start, submitMs: submitted - formulaEnd, presentMs: performance.now() - submitted, points: this.marks, drawCalls: this.calls + 1 };
     } finally { this.surface.end(this.target); }
     return true;
@@ -436,5 +465,5 @@ export function createGpuCanvasSketch(factory: P5SketchFactory, canvas: Offscree
   const instance = new GpuSketch(canvas, pool, options);
   try { factory(instance as unknown as CanvasSketch); }
   catch (error) { instance.remove(); throw error; }
-  return { canvas, engine: 'gpu', get width() { return instance.width; }, get height() { return instance.height; }, draw: () => instance.renderFrame(), remove: () => instance.remove(), getRenderStats: () => instance.getRenderStats() };
+  return { canvas, engine: 'gpu', get width() { return instance.width; }, get height() { return instance.height; }, draw: () => instance.renderFrame(), remove: () => instance.remove(), getRenderStats: () => instance.getRenderStats(), setInkColor: ink => instance.setInkColor(ink) };
 }

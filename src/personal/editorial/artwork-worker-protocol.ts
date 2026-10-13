@@ -1,9 +1,11 @@
 import type { PreviewFrameStats } from './preview-scheduler';
 import type { SketchId } from './generative/types';
+import type { ArtworkInkColor } from './artwork-ink-pixels';
 
 export type ArtworkWorkerCommand =
-  | { type: 'register'; id: number; sketchId: SketchId; canvas: OffscreenCanvas; physicalSize: number; active: boolean; maxFps?: number; minFps?: number }
+  | { type: 'register'; id: number; sketchId: SketchId; canvas: OffscreenCanvas; physicalSize: number; active: boolean; maxFps?: number; minFps?: number; inkColor?: ArtworkInkColor }
   | { type: 'active'; id: number; active: boolean }
+  | { type: 'ink'; id: number; inkColor?: ArtworkInkColor }
   | { type: 'remove'; id: number };
 
 export type ArtworkWorkerReply =

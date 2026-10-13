@@ -1,5 +1,6 @@
 import type { GenerativeArtwork } from './generative/types'
-import { artworkPlayers } from './artwork-players'
+import { artworkPlayers } from './artwork-players.ts'
+import { paintArtworkPoster, readArtworkInkColor } from './artwork-ink-pixels.ts'
 
 export const artworkTransitionName = (artwork: GenerativeArtwork) => `article-${artwork.sketchId}`
 export function galleryArticleJourney(from: string, to: string) {
@@ -11,6 +12,19 @@ const duration = 520
 const easing = 'cubic-bezier(.24,.76,.2,1)'
 const findArtwork = (name: string) => [...document.querySelectorAll<HTMLElement>('.animated-artwork')]
   .find(element => element.dataset.artworkKey === name)
+
+/** Canvas cloning copies attributes, not the native poster's pixels. */
+export function copyArtworkPoster(source: HTMLElement, drawing: HTMLElement) {
+  const poster = source.querySelector<HTMLCanvasElement>('canvas.animated-artwork-poster')
+  const copy = drawing.querySelector<HTMLCanvasElement>('canvas.animated-artwork-poster')
+  if (!poster || !copy) return
+  copy.getContext('2d')?.drawImage(poster, 0, 0)
+  const image = drawing.querySelector<HTMLImageElement>('.animated-artwork-poster-source')
+  if (image && !image.complete) {
+    const ink = readArtworkInkColor(source)
+    image.addEventListener('load', () => paintArtworkPoster(image, copy, ink), { once: true })
+  }
+}
 
 /** A live drawing leads the move; paper and navigation never disappear beneath it. */
 export function startArtworkTransition(name: string, update: () => void | Promise<void>): ArtworkTransition {
@@ -26,6 +40,7 @@ export function startArtworkTransition(name: string, update: () => void | Promis
   const player = artworkPlayers.get(name)
   const handoff = player?.status.painted && !player.status.failed ? artworkPlayers.lift(name) : undefined
   const drawing = source.cloneNode(true) as HTMLElement
+  copyArtworkPoster(source, drawing)
   drawing.style.viewTransitionName = 'none'
   drawing.style.opacity = '1'
   drawing.removeAttribute('data-artwork-key')
