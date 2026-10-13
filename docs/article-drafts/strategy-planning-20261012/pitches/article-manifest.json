@@ -1,0 +1,58 @@
+[
+  {
+    "key": "strategy",
+    "slug": "choosing-a-growth-channel-under-a-capacity-limit",
+    "path": "/research/strategy-systems/choosing-a-growth-channel-under-a-capacity-limit",
+    "title": "Sell the Review Before You Scale the App",
+    "json": "src/personal/editorial/data/articles/choosing-a-growth-channel-under-a-capacity-limit.json",
+    "manuscript": "docs/article-drafts/strategy-planning-20261012/article.md",
+    "words": 2735,
+    "readTime": "12 MIN",
+    "sections": 8,
+    "tables": 4,
+    "figures": 3,
+    "model_input_sha256": "8b93829fe44c607f80e3bdb495be9f2917ad5e42d887e9a0a3cd7c5f9e9f2779"
+  },
+  {
+    "key": "toast",
+    "slug": "toast-gross-profit-engine",
+    "path": "/research/financial-systems/toast-gross-profit-engine",
+    "title": "Toast: I Want the Gross-Profit Engine at a Better Price",
+    "json": "src/personal/editorial/data/articles/toast-gross-profit-engine.json",
+    "manuscript": "docs/article-drafts/strategy-planning-20261012/pitches/toast/article.md",
+    "words": 2363,
+    "readTime": "11 MIN",
+    "sections": 7,
+    "tables": 3,
+    "figures": 1,
+    "model_input_sha256": "8b93829fe44c607f80e3bdb495be9f2917ad5e42d887e9a0a3cd7c5f9e9f2779"
+  },
+  {
+    "key": "harvey",
+    "slug": "harvey-who-keeps-the-value-of-legal-ai",
+    "path": "/research/financial-systems/harvey-who-keeps-the-value-of-legal-ai",
+    "title": "Harvey: Who Keeps the Value of Faster Legal Work?",
+    "json": "src/personal/editorial/data/articles/harvey-who-keeps-the-value-of-legal-ai.json",
+    "manuscript": "docs/article-drafts/strategy-planning-20261012/pitches/harvey/article.md",
+    "words": 2709,
+    "readTime": "12 MIN",
+    "sections": 8,
+    "tables": 5,
+    "figures": 2,
+    "model_input_sha256": "8b93829fe44c607f80e3bdb495be9f2917ad5e42d887e9a0a3cd7c5f9e9f2779"
+  },
+  {
+    "key": "vanta",
+    "slug": "vanta-after-the-audit",
+    "path": "/research/financial-systems/vanta-after-the-audit",
+    "title": "Vanta: The Business After the Audit",
+    "json": "src/personal/editorial/data/articles/vanta-after-the-audit.json",
+    "manuscript": "docs/article-drafts/strategy-planning-20261012/pitches/vanta/article.md",
+    "words": 2945,
+    "readTime": "13 MIN",
+    "sections": 9,
+    "tables": 5,
+    "figures": 2,
+    "model_input_sha256": "8b93829fe44c607f80e3bdb495be9f2917ad5e42d887e9a0a3cd7c5f9e9f2779"
+  }
+]

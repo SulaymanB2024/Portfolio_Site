@@ -1,0 +1,65 @@
+{
+  "status": "pass",
+  "math": {
+    "status": "pass",
+    "toast_trailing_GP_m": 2082,
+    "toast_base_value_per_share": 37.004679167067174,
+    "harvey_net_eligible_hours": 13248,
+    "vanta_base_exit_ARR": 1155076079.160144,
+    "methods": "Decimal earnings bridge, inverse investor-proceeds hurdle, closed-form money-cohort sums and customer cost/value recomputations"
+  },
+  "articles": [
+    {
+      "key": "strategy",
+      "words": 2735,
+      "tables": 4,
+      "figures": 3,
+      "article_sha256": "10f57181c5cf01b5b57189c63c7043aff1b614e7d39b097df45eda7357d18097",
+      "manuscript_sha256": "15f5abbd2a8540521d236c5d1dd59c76f70811072922b05a5f45a13705f0b15a",
+      "figure_sha256": {
+        "strategy-growth-channel-cash-capacity.svg": "703ecac0050a587f1782b9934ab9511a4f75bd5190fa4900459db1bd7dc9068c",
+        "strategy-growth-price-counterfactual.svg": "3e67a0265123457bea6877e356fafd5e27768a8e5feacc2c04db0b84fcf32a53",
+        "strategy-growth-channel-cash-paths.svg": "05a5d4774c994c6a6b93677897987f1d513701895c1fa9eac88912c5d72c3610"
+      }
+    },
+    {
+      "key": "toast",
+      "words": 2363,
+      "tables": 3,
+      "figures": 1,
+      "article_sha256": "969de40d41195fadece029bc0f5fded51157faa75abc6613d4499cc204edb9e1",
+      "manuscript_sha256": "820e0f92547c7705770d048e2e530b7cfd51417c828f176649f2b5f264264bb1",
+      "figure_sha256": {
+        "toast-entry-price-return.svg": "8a30ac317fcd616858b0ec4fb5924d63c2821c00d7eacc119d6a66ba8ce49e2d"
+      }
+    },
+    {
+      "key": "harvey",
+      "words": 2709,
+      "tables": 5,
+      "figures": 2,
+      "article_sha256": "43d199ef81bf51369f9c99e4fc5d03c77e590ed4bafb5ca9095cf9757d3b9e94",
+      "manuscript_sha256": "9e25c28cfde86e9f6d2ca26fa948a55caf8bb94d91358694bd0ea457b8e91c94",
+      "figure_sha256": {
+        "harvey-time-to-contribution.svg": "2d4395a918118218e51dc436800599b60f8f42d4143e9413ddc6b8933239450b",
+        "harvey-return-hurdle.svg": "7f13d173365575389f3afc625be91a8a165675f1425333946d22f68e7ee3247f"
+      }
+    },
+    {
+      "key": "vanta",
+      "words": 2945,
+      "tables": 5,
+      "figures": 2,
+      "article_sha256": "ff6def010c5d1182d0198c15f6860d9284cf0bf7a35424a4f482c4c7a1576655",
+      "manuscript_sha256": "b3586e6834f5de22b80d5bf3a980df717d8c46761093b45b62ed9dda9753d4b1",
+      "figure_sha256": {
+        "vanta-cash-capture.svg": "42ea099de117c0251e191f96be16fd65945f76f6ff6c951de75171056bb47872",
+        "vanta-cohort-growth.svg": "8d6d7364cd6f81af2b1b4e22b205e09e156a96dd12a18a34e55d356faab7c999"
+      }
+    }
+  ],
+  "model_input_sha256": "8b93829fe44c607f80e3bdb495be9f2917ad5e42d887e9a0a3cd7c5f9e9f2779",
+  "source_readback_count": 19,
+  "source_readback_boundary": "HTTP links plus separately read web text; SEC may deny this HTTP client",
+  "scope": "Local manuscript, model, table/figure and schema preparation. Full route/catalog/artwork integration and publication excluded."
+}

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="792pt" height="468pt" viewBox="0 0 792 468" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 468
+L 792 468
+L 792 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 142.56 351
+L 728.64 351
+L 728.64 102.96
+L 142.56 102.96
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 142.56 144.213106
+L 613.487002 144.213106
+L 613.487002 114.234545
+L 142.56 114.234545
+z
+" clip-path="url(#p894a8824fe)" style="fill: #b0aca3; stroke: #24221e; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 142.56 209.383889
+L 456.511334 209.383889
+L 456.511334 179.405328
+L 142.56 179.405328
+z
+" clip-path="url(#p894a8824fe)" style="fill: #b0aca3; stroke: #24221e; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 142.56 274.554672
+L 378.023501 274.554672
+L 378.023501 244.576111
+L 142.56 244.576111
+z
+" clip-path="url(#p894a8824fe)" style="fill: #24221e; stroke: #24221e; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 142.56 339.725455
+L 330.930801 339.725455
+L 330.930801 309.746894
+L 142.56 309.746894
+z
+" clip-path="url(#p894a8824fe)" style="fill: #b0aca3; stroke: #24221e; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="mc3b9664ebf" d="M 0 0
+L 0 3.5
+" style="stroke: #625f56; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mc3b9664ebf" x="142.56" y="351" style="fill: #625f56; stroke: #625f56; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #625f56" x="142.56" y="369.397656" transform="rotate(-0 142.56 369.397656)">$0bn</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#mc3b9664ebf" x="325.71" y="351" style="fill: #625f56; stroke: #625f56; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #625f56" x="325.71" y="369.397656" transform="rotate(-0 325.71 369.397656)">$2bn</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#mc3b9664ebf" x="508.86" y="351" style="fill: #625f56; stroke: #625f56; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #625f56" x="508.86" y="369.397656" transform="rotate(-0 508.86 369.397656)">$4bn</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#mc3b9664ebf" x="692.01" y="351" style="fill: #625f56; stroke: #625f56; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #625f56" x="692.01" y="369.397656" transform="rotate(-0 692.01 369.397656)">$6bn</text>
+     </g>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #24221e" x="435.6" y="401.398828" transform="rotate(-0 435.6 401.398828)">Required exit ARR</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_5"/>
+     <g id="text_6">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="128.56" y="134.922068" transform="rotate(-0 128.56 134.922068)">10× exit ARR</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_6"/>
+     <g id="text_7">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="128.56" y="200.092851" transform="rotate(-0 128.56 200.092851)">15× exit ARR</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_7"/>
+     <g id="text_8">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="128.56" y="265.263634" transform="rotate(-0 128.56 265.263634)">20× exit ARR</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_8"/>
+     <g id="text_9">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="128.56" y="330.434417" transform="rotate(-0 128.56 330.434417)">25× exit ARR</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_7">
+    <path d="M 142.56 351
+L 728.64 351
+" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="621.728752" y="133.120896" transform="rotate(-0 621.728752 133.120896)">$5.14bn</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="464.753084" y="198.291679" transform="rotate(-0 464.753084 198.291679)">$3.43bn</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="386.265251" y="263.462462" transform="rotate(-0 386.265251 263.462462)">$2.57bn</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="339.172551" y="328.633245" transform="rotate(-0 339.172551 328.633245)">$2.06bn</text>
+   </g>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 24px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="27.72" y="23.4" transform="rotate(-0 27.72 23.4)">What $15.5 billion must become</text>
+  </g>
+  <g id="text_15">
+   <text style="font-size: 13px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #625f56" x="27.72" y="48.672" transform="rotate(-0 27.72 48.672)">20% annual return · five years · 25% future ownership dilution</text>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 14px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="27.72" y="418.86" transform="rotate(-0 27.72 418.86)">Required exit equity value: $51.43bn. Changing the multiple changes the revenue burden.</text>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 12px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #625f56" x="27.72" y="442.26" transform="rotate(-0 27.72 442.26)">Assumed equity / ARR multiples. No current ARR estimate, fees, preference waterfall or secondary premium.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p894a8824fe">
+   <rect x="142.56" y="102.96" width="586.08" height="248.04"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "product-analytics",
+    "requested_url": "https://help.shopify.com/en/manual/products/analytics",
+    "resolved_url": "https://help.shopify.com/en/manual/products/analytics",
+    "status": 200,
+    "verified": "2026-10-12",
+    "fragment_present": true
+  },
+  {
+    "id": "inventory-reports",
+    "requested_url": "https://help.shopify.com/en/manual/reports-and-analytics/shopify-reports/report-types/default-reports/inventory-reports",
+    "resolved_url": "https://help.shopify.com/en/manual/reports-and-analytics/shopify-reports/report-types/default-reports/inventory-reports",
+    "status": 200,
+    "verified": "2026-10-12",
+    "fragment_present": true
+  },
+  {
+    "id": "distribution",
+    "requested_url": "https://shopify.dev/docs/apps/launch/distribution",
+    "resolved_url": "https://shopify.dev/docs/apps/launch/distribution",
+    "status": 200,
+    "verified": "2026-10-12",
+    "fragment_present": true
+  },
+  {
+    "id": "app-requirements",
+    "requested_url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+    "resolved_url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+    "status": 200,
+    "verified": "2026-10-12",
+    "fragment_present": true
+  },
+  {
+    "id": "revenue-share",
+    "requested_url": "https://shopify.dev/docs/apps/launch/distribution/revenue-share",
+    "resolved_url": "https://shopify.dev/docs/apps/launch/distribution/revenue-share",
+    "status": 200,
+    "verified": "2026-10-12",
+    "fragment_present": true
+  },
+  {
+    "id": "billing-intervals",
+    "requested_url": "https://shopify.dev/docs/apps/launch/billing/manual-pricing/subscription-billing",
+    "resolved_url": "https://shopify.dev/docs/apps/launch/billing/manual-pricing/subscription-billing",
+    "status": 200,
+    "verified": "2026-10-12",
+    "fragment_present": true
+  },
+  {
+    "id": "payment-terms",
+    "requested_url": "https://www.shopify.com/partners/terms#part-a",
+    "resolved_url": "https://www.shopify.com/partners/terms",
+    "status": 200,
+    "verified": "2026-10-12",
+    "fragment_present": true
+  },
+  {
+    "id": "ad-measurement",
+    "requested_url": "https://shopify.dev/docs/apps/launch/marketing/advertising/check-ad-performance",
+    "resolved_url": "https://shopify.dev/docs/apps/launch/marketing/advertising/check-ad-performance",
+    "status": 200,
+    "verified": "2026-10-12",
+    "fragment_present": true
+  }
+]

@@ -1,0 +1,258 @@
+{
+  "cutoff": "2026-10-12",
+  "purpose": "Underwriting scenarios and customer value bridges, not company financial forecasts",
+  "units": "USD; source financial statements in millions are converted explicitly in models.py",
+  "toast": {
+    "reported": {
+      "Q2_subscription_revenue_cost_m": [
+        290,
+        64
+      ],
+      "Q2_fintech_revenue_cost_m": [
+        1570,
+        1211
+      ],
+      "Q2_payments_gp_m": 302,
+      "Q2_nonpayments_fintech_gp_m": 57,
+      "FY2025_GAAP_subscription_fintech_gp_m": [
+        672,
+        1146
+      ],
+      "H12025_GAAP_subscription_fintech_gp_m": [
+        306,
+        535
+      ],
+      "H12026_GAAP_subscription_fintech_gp_m": [
+        434,
+        671
+      ],
+      "FY2025_H12025_H12026_operating_income_m": [
+        292,
+        123,
+        262
+      ],
+      "FY2025_H12025_H12026_FCF_m": [
+        608,
+        277,
+        245
+      ],
+      "eligible_liquidity_m": 1713,
+      "revolver_borrowings_m": 0,
+      "diluted_weighted_average_shares_Q2_m": 590,
+      "source_ids": [
+        "TO1",
+        "TO2",
+        "TO3",
+        "TO4"
+      ]
+    },
+    "dated_quote": {
+      "price": 31.29,
+      "time_UTC": "2026-10-12 19:03:30",
+      "source_id": "TO5",
+      "use": "Reference price only; other quote-page financial fields excluded"
+    },
+    "derived": {
+      "trailing_recurring_GP_m": 2082,
+      "trailing_operating_income_m": 431,
+      "trailing_FCF_m": 576
+    },
+    "assumed": {
+      "years": 3,
+      "growth": [
+        0.1,
+        0.18,
+        0.25
+      ],
+      "operating_conversion": [
+        0.22,
+        0.3,
+        0.35
+      ],
+      "tax": 0.25,
+      "exit_EV_to_after_tax_operating_earnings": [
+        22,
+        27,
+        32
+      ],
+      "annual_share_growth": 0.01,
+      "liquidity": "held constant; no extra future cash accumulation or repurchase credit",
+      "entry_return_hurdle": 0.15,
+      "entry_prices": [
+        25,
+        30,
+        35,
+        40
+      ]
+    }
+  },
+  "harvey": {
+    "reported": {
+      "funding_date": "2026-09-09",
+      "funding_m": 550,
+      "announced_valuation_bn": 15.5,
+      "AmLaw100_using_company_report": "80%",
+      "source_id": "HV1",
+      "older_ARR_checkpoint": "> $100m, August 4 2025 (HV2)"
+    },
+    "unknown": [
+      "verified current ARR",
+      "paid-cohort retention/expansion",
+      "actual seat price",
+      "production delivery cost",
+      "cash burn and balance sheet",
+      "security rights and preference waterfall"
+    ],
+    "assumed": {
+      "starting_ARR_normalizations_m": [
+        200,
+        400,
+        600
+      ],
+      "central_normalization_is_estimate": false,
+      "five_year_growth": [
+        0.25,
+        0.4,
+        0.55
+      ],
+      "exit_equity_to_ARR": [
+        10,
+        20,
+        25
+      ],
+      "future_ownership_dilution": 0.25,
+      "return_hurdle": 0.2,
+      "customer_seats": 100,
+      "customer_adoption": 0.6,
+      "eligible_hours_saved_week": 6,
+      "weeks": 46,
+      "additional_review": 0.2,
+      "contribution_per_monetized_hour": 200,
+      "annual_license_per_seat": 2400,
+      "first_year_implementation": 50000,
+      "delivery_active_seat_fraction": 0.65,
+      "delivery_cost_active_seat_year": [
+        250,
+        900,
+        1800
+      ],
+      "other_delivery_cost_share_ARR": 0.15,
+      "years": 5,
+      "starting_ARR_m": 400,
+      "hurdle_multiples": [
+        10,
+        15,
+        20,
+        25
+      ],
+      "monetization": [
+        0.1,
+        0.25,
+        0.4
+      ],
+      "sensitivity_adoption": [
+        0.3,
+        0.6,
+        0.9
+      ],
+      "sensitivity_review": [
+        0.2,
+        0.4,
+        0.6
+      ]
+    }
+  },
+  "vanta": {
+    "reported": {
+      "ARR_checkpoint_date": "2026-04-29",
+      "ARR_m": 300,
+      "customers": 16000,
+      "ARR_source_id": "VA2",
+      "financing_date": "2025-07-23",
+      "announced_valuation_bn": 4.15,
+      "financing_m": 150,
+      "financing_source_id": "VA1"
+    },
+    "derived": {
+      "ARR_per_reported_customer": 18750,
+      "status": "Normalization only, not list price, paid-cohort ACV or the 2025 round's entry multiple"
+    },
+    "unknown": [
+      "paid-cohort retention/expansion",
+      "actual contract-size mix",
+      "gross margin and acquisition cash",
+      "cash burn and balance sheet",
+      "current private transaction price",
+      "security rights and preference waterfall"
+    ],
+    "assumed": {
+      "five_year_gross_ARR_retention": [
+        0.85,
+        0.93,
+        0.95
+      ],
+      "expansion_of_retained_ARR": [
+        0.05,
+        0.15,
+        0.22
+      ],
+      "annual_new_ARR_m": {
+        "downside": [
+          50,
+          55,
+          60,
+          65,
+          70
+        ],
+        "base": [
+          100,
+          115,
+          130,
+          145,
+          160
+        ],
+        "upside": [
+          110,
+          135,
+          160,
+          185,
+          210
+        ]
+      },
+      "exit_equity_to_ARR": [
+        6,
+        10,
+        12
+      ],
+      "future_ownership_dilution": 0.2,
+      "return_hurdle": 0.2,
+      "weekly_saved_hours_excluding_questionnaires": 8,
+      "weeks": 46,
+      "questionnaires_month": 10,
+      "hours_per_questionnaire_before_after": [
+        1.5,
+        0.5
+      ],
+      "avoidable_labor_cost_hour": 80,
+      "cash_capture": [
+        0.25,
+        0.5,
+        1.0
+      ],
+      "first_year_implementation": 5000,
+      "audit_fee": "continues; excluded from both alternatives",
+      "years": 5,
+      "hurdle_multiples": [
+        6,
+        10,
+        12
+      ],
+      "sensitivity_work_weeks": [
+        16,
+        32,
+        46
+      ]
+    }
+  },
+  "private_return_boundary": "Equivalent pro-rata equity benchmarks; no fees, distributions, preference waterfall, secondary premium or net-cash addition. Future financing, dilution and operating costs are connected risks."
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "TO1",
+    "url": "https://www.sec.gov/Archives/edgar/data/1650164/000165016426000162/tost-20260630xexhibit991.htm",
+    "checked_at": "2026-10-12T19:53:19.990904+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 403,
+    "note": "HTTP client access response; separate web evidence remains in the source register."
+  },
+  {
+    "id": "TO2",
+    "url": "https://www.sec.gov/Archives/edgar/data/1650164/000165016426000164/tost-20260630.htm",
+    "checked_at": "2026-10-12T19:53:19.991266+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 403,
+    "note": "HTTP client access response; separate web evidence remains in the source register."
+  },
+  {
+    "id": "TO3",
+    "url": "https://www.sec.gov/Archives/edgar/data/1650164/000165016426000050/tost-20251231xexhibit991.htm",
+    "checked_at": "2026-10-12T19:53:19.991340+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 403,
+    "note": "HTTP client access response; separate web evidence remains in the source register."
+  },
+  {
+    "id": "TO4",
+    "url": "https://investors.toasttab.com/financials/quarterly-results/default.aspx",
+    "checked_at": "2026-10-12T19:53:19.991404+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 403,
+    "note": "HTTP client access response; separate web evidence remains in the source register."
+  },
+  {
+    "id": "TO5",
+    "url": "https://www.google.com/finance/quote/TOST:NYSE",
+    "checked_at": "2026-10-12T19:53:19.991452+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://www.google.com/finance/quote/TOST:NYSE",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "f274ea2df981c6ae2006687e8b4e0703b7cfdd9fc4ddc2d5674f3fdd136e545a"
+  },
+  {
+    "id": "HV1",
+    "url": "https://www.harvey.ai/blog/harvey-raises-dollar550m-at-a-dollar155b-valuation-to-help-legal-teams-own-their-intelligence",
+    "checked_at": "2026-10-12T19:53:19.991491+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://www.harvey.ai/blog/harvey-raises-dollar550m-at-a-dollar155b-valuation-to-help-legal-teams-own-their-intelligence",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "7aee3aab5a26757870fc59fc2d6c78c26acf822c1f85e24e1d13a4fb6e2a9a3e"
+  },
+  {
+    "id": "HV2",
+    "url": "https://www.harvey.ai/blog/harveys-three-year-anniversary",
+    "checked_at": "2026-10-12T19:53:19.991531+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://www.harvey.ai/blog/harveys-three-year-anniversary",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "ff80230abc525ce226c6347c5b07529f46f73b710329f795b572b4a6e4ffd688"
+  },
+  {
+    "id": "HV3",
+    "url": "https://www.harvey.ai/roi-calculator/law-firm",
+    "checked_at": "2026-10-12T19:53:19.991570+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://www.harvey.ai/roi-calculator/law-firm",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "bbb9e2592c771a99abefbb5db58b033d20e30ed45c28664029f2dd633836273e"
+  },
+  {
+    "id": "HV4",
+    "url": "https://www.harvey.ai/platform",
+    "checked_at": "2026-10-12T19:53:20.277975+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://www.harvey.ai/platform",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "20b2ac585ad08b2963702694117aa805bbaef331913fefe06f2b5d3b2adc9651"
+  },
+  {
+    "id": "HV5",
+    "url": "https://www.harvey.ai/blog/post-training-update-harvey-tenet",
+    "checked_at": "2026-10-12T19:53:20.315945+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://www.harvey.ai/blog/post-training-update-harvey-tenet",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "6cfadef7ad5258ce77d97817b7326e427d6c05a9527dc79c6ea6a49a4e387e61"
+  },
+  {
+    "id": "HV6",
+    "url": "https://www.harvey.ai/blog/introducing-harveys-legal-agent-benchmark",
+    "checked_at": "2026-10-12T19:53:20.338556+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://www.harvey.ai/blog/introducing-harveys-legal-agent-benchmark",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "a7c822763b16e0cf27f8dd916d2302fb1121fa19b928470c4aac141a7889bdb5"
+  },
+  {
+    "id": "HV7",
+    "url": "https://legal.thomsonreuters.com/blog/behind-the-build-of-the-next-generation-of-cocounsel-legal/",
+    "checked_at": "2026-10-12T19:53:20.353766+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://legal.thomsonreuters.com/blog/behind-the-build-of-the-next-generation-of-cocounsel-legal/",
+    "content_type": "text/html; charset=UTF-8",
+    "first_2mb_sha256": "12eabaaa6f3e57798d179ff85485397e98c3b12d0dc6586d1fad26805cd0ed89"
+  },
+  {
+    "id": "VA1",
+    "url": "https://www.vanta.com/resources/vanta-announces-series-d",
+    "checked_at": "2026-10-12T19:53:20.357659+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://www.vanta.com/resources/vanta-announces-series-d",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "836af39dcd88b207882af68d322484990396e127ed250587cf6af8fb001f830a"
+  },
+  {
+    "id": "VA2",
+    "url": "https://www.vanta.com/resources/vanta-crosses-300m-in-arr-as-growth-accelerates",
+    "checked_at": "2026-10-12T19:53:20.432594+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://www.vanta.com/resources/vanta-crosses-300m-in-arr-as-growth-accelerates",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "0a086095ff9ca94afc7e45185306666eebb18e5ab1e036b03f4c481f619441a8"
+  },
+  {
+    "id": "VA3",
+    "url": "https://help.vanta.com/en/articles/11345529-automated-test-evidence",
+    "checked_at": "2026-10-12T19:53:20.445181+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://help.vanta.com/en/articles/11345529-automated-test-evidence",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "a2c9783d6e39cf790fab0224fd58bb54d5d4dadbfc03fe46c9fc0508c9de7696"
+  },
+  {
+    "id": "VA4",
+    "url": "https://help.vanta.com/en/articles/11345844-how-will-your-auditor-use-vanta",
+    "checked_at": "2026-10-12T19:53:20.571626+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://help.vanta.com/en/articles/11345844-how-will-your-auditor-use-vanta",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "2206ed6b2118a760d0283900ee844f380e178005308c478d7965db15ed52df1a"
+  },
+  {
+    "id": "VA5",
+    "url": "https://help.vanta.com/en/articles/14998654-exporting-your-data-from-vanta",
+    "checked_at": "2026-10-12T19:53:20.630846+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://help.vanta.com/en/articles/14998654-exporting-your-data-from-vanta",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "a67531224ccdecfaf3b83525836f1fc4f65b7bb55a25950fad3ee3a36cf89128"
+  },
+  {
+    "id": "VA6",
+    "url": "https://drata.com/products/assurance/security-questionnaire-automation",
+    "checked_at": "2026-10-12T19:53:20.646936+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 403,
+    "note": "HTTP client access response; separate web evidence remains in the source register."
+  },
+  {
+    "id": "VA7",
+    "url": "https://help.vanta.com/en/articles/11345422-product-updates",
+    "checked_at": "2026-10-12T19:53:20.665107+00:00",
+    "claim_evidence": "Matching source text read through web tools; see article SOURCES.md for exact boundaries.",
+    "status": 200,
+    "final_url": "https://help.vanta.com/en/articles/11345422-product-updates",
+    "content_type": "text/html; charset=utf-8",
+    "first_2mb_sha256": "e2b8d004390fc0615d3bbf22d42fc2d83beb78db8365b4797a9a95b6ca61a5d8"
+  }
+]

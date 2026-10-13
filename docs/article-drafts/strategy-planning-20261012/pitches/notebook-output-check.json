@@ -1,0 +1,16 @@
+[
+  {
+    "notebook": "docs/article-drafts/strategy-planning-20261012/model.ipynb",
+    "code_cells": 5,
+    "errors": 0,
+    "matching_final_pngs": 3,
+    "sha256": "d603d50c13063b5b584a81c5ba08da7cc7eba072d107760d84899c3d9f312de4"
+  },
+  {
+    "notebook": "docs/article-drafts/strategy-planning-20261012/pitches/models.ipynb",
+    "code_cells": 5,
+    "errors": 0,
+    "matching_final_pngs": 5,
+    "sha256": "57b18eadba825bd94fa5a9fda08c2d33101fce09505e011b2d1f3620eaa10f5f"
+  }
+]
