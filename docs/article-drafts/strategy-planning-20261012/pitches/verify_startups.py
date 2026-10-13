@@ -44,16 +44,26 @@ for name,c in fp['scenarios'].items():
   if payback is None and running>=0:payback=y
   previous=units
  pv=sum(amount/(1+F(str(fp['discount_rate'])))**time for time,amount in events)
- same(r['cash_present_value'],pv); same(r['five_year_cash'],running);assert r['payback_year']==payback
+ same(r['cash_present_value'],pv); same(r['ending_cumulative_cash'],running);assert r['payback_year']==payback
 
 # Zero activity must retain fixed costs rather than manufacture payback.
 rm=load_model('ramp');fm=load_model('flock-safety')
 rconf=copy.deepcopy(rp['platform_cases']['base']);rconf['annual_card_volume']=0
 assert rm.platform(rconf)['card_contribution']==-8000
-assert fm.cohort(fp['scenarios']['base'],units=0)['five_year_cash']==0
+assert fm.cohort(fp['scenarios']['base'],units=0)['ending_cumulative_cash']==0
+assert fm.cohort(fp['scenarios']['base'],units=0)['payback_year'] is None
 ret=copy.deepcopy(fp['scenarios']['base']);ret['annual_unit_retention']=0
-assert fm.cohort(ret)['five_year_cash']==-120000
+assert fm.cohort(ret)['ending_cumulative_cash']==-120000
 assert fm.cohort(ret)['payback_year'] is None
+for kwargs in [{'years':True},{'units':True},{'discount':False}]:
+ try:fm.cohort(fp['scenarios']['base'],**kwargs)
+ except ValueError:pass
+ else:raise AssertionError(f'boolean parameter accepted: {kwargs}')
+short=fm.cohort(fp['scenarios']['base'],years=3)
+assert short['horizon_years']==3 and len(short['rows'])==3
+assert short['ending_cumulative_cash']==296100 and 'five_year_cash' not in short
+one=fm.cohort(fp['scenarios']['base'],years=1)
+assert one['first_year_cash']==one['ending_cumulative_cash']==-90000
 for module,fn,config,key in [(rm,rm.platform,rp['platform_cases']['base'],'annual_card_volume'),(fm,fm.cohort,fp['scenarios']['base'],'annual_service_cost')]:
  for bad in [-1,float('nan'),True]:
   q=copy.deepcopy(config);q[key]=bad
@@ -100,7 +110,7 @@ rt=table('ramp',1)
 for label,key in [('Annual software bill','annual_fee'),('Captured labor cash','labor_cash'),('Incremental avoided purchases','avoided_spend'),('First-year net benefit','first_year_benefit'),('Recurring net benefit','recurring_benefit')]:
  assert row_values(rt,label)==[money(r[key]) for r in rr['buyer_cases'].values()]
 ft=table('flock-safety',1)
-for label,key in [('Opening annual subscription run-rate','opening_arr'),('First-year cumulative cash','first_year_cash'),('Five-year cumulative cash','five_year_cash'),('Cash present value at assumed 12% discount rate','cash_present_value')]:
+for label,key in [('Opening annual subscription run-rate','opening_arr'),('First-year cumulative cash','first_year_cash'),('Five-year cumulative cash','ending_cumulative_cash'),('Cash present value at assumed 12% discount rate','cash_present_value')]:
  assert row_values(ft,label)==[money(r[key]) for r in fr['scenarios'].values()]
 assert row_values(ft,'Cumulative payback year')==[str(r['payback_year']) for r in fr['scenarios'].values()]
 et=table('elevenlabs',1)
@@ -111,6 +121,6 @@ for row,r in zip(et,el['agents'],strict=True):
  assert row[3:]==[money(r['monthlyTimeValueAdvantage']),money(r['monthlyNetCashBenefit']),money(r['firstYearNetCashBenefit'])]
 assert '$6.18' in (P.parent/'figures/elevenlabs-accepted-audio-cost.svg').read_text()
 
-report={'verified':'2026-10-13','independent_ramp_flock_arithmetic_checks':checks,'edge_cases':'zero activity/retention, invalid inputs and preserved inputs passed','native_exports':native,'table_model_parity':'All principal monetary outputs and payback years match regenerated results','table_total':sum(x['tables'] for x in native),'figure_total':sum(x['figures'] for x in native),'elevenlabs_verifier':'Run verify_model.py separately; this receipt does not claim its execution.'}
+report={'verified':'2026-10-13','independent_ramp_flock_arithmetic_checks':checks,'edge_cases':'zero activity/retention, invalid inputs including boolean API parameters, one/three-year horizons and preserved inputs passed','native_exports':native,'table_model_parity':'All principal monetary outputs and payback years match regenerated results','table_total':sum(x['tables'] for x in native),'figure_total':sum(x['figures'] for x in native),'elevenlabs_verifier':'Run verify_model.py separately; this receipt does not claim its execution.'}
 (P/'startups-verification.json').write_text(json.dumps(report,indent=2)+'\n')
 print(f'{checks} independent Ramp/Flock arithmetic checks; edge cases; three exports; seven tables; four figures; sources and portable references passed')

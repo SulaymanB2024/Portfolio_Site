@@ -9,12 +9,12 @@ HERE = Path(__file__).resolve().parent
 
 def cohort(config, units=100, years=5, discount=0.12):
     c = copy.deepcopy(config)
-    if not isinstance(years, int) or not 1 <= years <= 30:
+    if isinstance(years, bool) or not isinstance(years, int) or not 1 <= years <= 30:
         raise ValueError("years must be an integer from 1 to 30")
-    for k, v in c.items():
+    for k, v in {**c, 'units': units, 'discount': discount}.items():
         if isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v) or v < 0:
             raise ValueError(f"invalid {k}")
-    if not 0 <= c['annual_unit_retention'] <= 1 or units < 0 or not math.isfinite(units) or discount < 0 or not math.isfinite(discount):
+    if not 0 <= c['annual_unit_retention'] <= 1:
         raise ValueError("invalid cohort, retention or discount")
     capital = units * (c['deployment_cost'] + c['acquisition_cost'])
     cumulative = -capital
@@ -38,8 +38,8 @@ def cohort(config, units=100, years=5, discount=0.12):
         previous = active
     return dict(initial_capital=capital, opening_arr=units*c['annual_price'],
                 first_year_cash=cumulative if years == 1 else rows[0]['cumulative_cash'],
-                payback_year=next((r['year'] for r in rows if r['cumulative_cash'] >= 0), None),
-                five_year_cash=cumulative, cash_present_value=pv, rows=rows)
+                payback_year=next((r['year'] for r in rows if r['cumulative_cash'] >= 0), None) if capital > 0 else None,
+                horizon_years=years, ending_cumulative_cash=cumulative, cash_present_value=pv, rows=rows)
 
 def results():
     raw = (HERE/'inputs.json').read_bytes()
@@ -51,4 +51,4 @@ if __name__ == '__main__':
     output = results()
     (HERE/'model-results.json').write_text(json.dumps(output,indent=2)+'\n')
     for name,r in output['scenarios'].items():
-        print(f"{name}: year-one cash {r['first_year_cash']:,.0f}; five-year cash {r['five_year_cash']:,.0f}; PV {r['cash_present_value']:,.0f}; payback year {r['payback_year']}")
+        print(f"{name}: year-one cash {r['first_year_cash']:,.0f}; {r['horizon_years']}-year cash {r['ending_cumulative_cash']:,.0f}; PV {r['cash_present_value']:,.0f}; payback year {r['payback_year']}")

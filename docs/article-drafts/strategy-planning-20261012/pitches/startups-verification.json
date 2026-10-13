@@ -1,7 +1,7 @@
 {
   "verified": "2026-10-13",
   "independent_ramp_flock_arithmetic_checks": 111,
-  "edge_cases": "zero activity/retention, invalid inputs and preserved inputs passed",
+  "edge_cases": "zero activity/retention, invalid inputs including boolean API parameters, one/three-year horizons and preserved inputs passed",
   "native_exports": [
     {
       "slug": "ramp-saving-money-and-retaining-contribution",

@@ -8,7 +8,8 @@
       "opening_arr": 300000,
       "first_year_cash": -90000.0,
       "payback_year": 2,
-      "five_year_cash": 644555.2499999999,
+      "horizon_years": 5,
+      "ending_cumulative_cash": 644555.2499999999,
       "cash_present_value": 507451.09066259855,
       "rows": [
         {
@@ -73,7 +74,8 @@
       "opening_arr": 300000,
       "first_year_cash": -90000.0,
       "payback_year": 2,
-      "five_year_cash": 388224.0000000001,
+      "horizon_years": 5,
+      "ending_cumulative_cash": 388224.0000000001,
       "cash_present_value": 311943.68417921104,
       "rows": [
         {
@@ -138,7 +140,8 @@
       "opening_arr": 300000,
       "first_year_cash": -265000.0,
       "payback_year": 4,
-      "five_year_cash": 83336.00000000006,
+      "horizon_years": 5,
+      "ending_cumulative_cash": 83336.00000000006,
       "cash_present_value": 52026.16469328262,
       "rows": [
         {
