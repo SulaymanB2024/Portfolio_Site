@@ -24,9 +24,19 @@ export function headingRows(chapter: LandingChapter): HeadingRow[] {
 export const HEADING_RESERVE_EM = 2 * (.49 * 1.7 + 1.01)
 
 export function layoutHeading(chapter: LandingChapter, fontSize: number, width: number, measure: (row: HeadingRow) => number): HeadingLayout {
-  const rows = headingRows(chapter)
-  const longest = Math.max(...rows.map(measure))
-  const fit = Math.min(1, Math.max(1, width - 2) / Math.max(1, longest))
+  let rows = headingRows(chapter)
+  const measured = rows.map(measure)
+  const customOpening = chapter.id === 'helmet' && chapter.lines.length === 4
+  const allowance = Math.max(1, width - 2)
+  const longest = Math.max(...measured.filter((_, index) => !customOpening || index % 2 === 1))
+  const fit = Math.min(1, allowance / Math.max(1, longest))
+  if (customOpening && fontSize > 0) {
+    // A long display row must not also make readable supporting copy tiny.
+    // Fit the quiet pair separately, keeping all four rows inside the column.
+    const quietFit = Math.min(1, allowance / Math.max(1, measured[0], measured[2]))
+    const quietFont = Math.min(fontSize * .49 * quietFit, Math.max(14, fontSize * .49 * fit), fontSize * fit * .8)
+    rows = rows.map((row, index) => index % 2 === 0 ? { ...row, scale: quietFont / (fontSize * fit) } : row)
+  }
   return { rows, fit, height: rows.reduce((height, row) => height + fontSize * fit * row.scale * row.leading, 0) }
 }
 
