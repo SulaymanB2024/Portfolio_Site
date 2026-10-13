@@ -1,0 +1,77 @@
+{
+  "status": "passed",
+  "candidate_sha256": "7a7ec95b26a74e0a0c63779525bc7cf1061899e824bc879510314603a9b580d0",
+  "baseline_sha256": "8cd8b4999f2ca631835c8c57943d6c2132721f9cfbc343bfc5373a711857fa00",
+  "checks": [
+    {
+      "id": "explicit-belief",
+      "passed": true,
+      "observed_count": 2,
+      "expected_count": "at least one"
+    },
+    {
+      "id": "remove-conditional-headline",
+      "passed": true,
+      "observed_count": 0,
+      "expected_count": 0
+    },
+    {
+      "id": "fcf-actual",
+      "passed": true,
+      "observed_count": 4,
+      "expected_count": "at least one"
+    },
+    {
+      "id": "revenue-hurdle",
+      "passed": true,
+      "observed_count": 2,
+      "expected_count": "at least one"
+    },
+    {
+      "id": "contribution-hurdle",
+      "passed": true,
+      "observed_count": 2,
+      "expected_count": "at least one"
+    },
+    {
+      "id": "source-1",
+      "passed": true,
+      "observed_count": 1,
+      "expected_count": 1
+    },
+    {
+      "id": "source-2",
+      "passed": true,
+      "observed_count": 1,
+      "expected_count": 1
+    },
+    {
+      "id": "source-3",
+      "passed": true,
+      "observed_count": 1,
+      "expected_count": 1
+    },
+    {
+      "id": "source-4",
+      "passed": true,
+      "observed_count": 1,
+      "expected_count": 1
+    },
+    {
+      "id": "source-5",
+      "passed": true,
+      "observed_count": 1,
+      "expected_count": 1
+    },
+    {
+      "id": "source-6",
+      "passed": true,
+      "observed_count": 1,
+      "expected_count": 1
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Literal matching only; semantic, visual, cloud-save and publication verification remain separate"
+  ]
+}

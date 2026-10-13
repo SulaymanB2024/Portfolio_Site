@@ -1,0 +1,20 @@
+{
+  "status": "checked preview; production approval pending",
+  "pr": "https://github.com/SulaymanB2024/Portfolio_Site/pull/89",
+  "head_sha": "889665ad2c407ab5fac63949d46f4fd485ba32c9",
+  "preview_deployment": "dpl_G8uAYRAn9yxtgdxksqhB1QZJYGnU",
+  "preview_url": "https://portfolio-site-hn0f6mg3v-sulaymanb2024s-projects.vercel.app/research/financial-systems/chegg-cash-flow-turnaround",
+  "preview_state": "READY",
+  "preview_http_status": 200,
+  "preview_checks": {
+    "canonical": true,
+    "ten_sections": true,
+    "three_figures": true,
+    "model_link": true
+  },
+  "github_ci": "SUCCESS",
+  "article_sha256": "8cd8b4999f2ca631835c8c57943d6c2132721f9cfbc343bfc5373a711857fa00",
+  "model_zip_sha256": "485b2c3d3307dfa296c48843d4fbe156afa381074481e95865a04acfbefd9cc1",
+  "production_merge": "not executed; automatic approval review rejected command",
+  "approval_reason": "approval required by policy, but AskForApproval is Never"
+}
