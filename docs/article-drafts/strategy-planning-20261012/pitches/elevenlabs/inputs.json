@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "researchCutoff": "2026-10-13",
+  "modelStatus": "Hypothetical buyer scenarios. No numeric operating parameter is an observation of ElevenLabs or one of its customers.",
+  "currency": "USD",
+  "observedCompanyFacts": [
+    {"sourceId": "EL1", "metric": "Reported ARR exceeded", "value": 500000000, "unit": "USD ARR", "asOf": "2026-04-30", "note": "May 5 announcement describes the first four months of 2026. This is a lower bound and dated checkpoint, not current ARR, recognized annual revenue or audited gross profit."},
+    {"sourceId": "EL2", "metric": "Announced employee tender size", "value": 300000000, "unit": "USD", "asOf": "2026-09-30", "note": "Company says recently closed. Exact closing date and security terms are not provided in the reviewed announcement."},
+    {"sourceId": "EL2", "metric": "Announced tender valuation", "value": 22000000000, "unit": "USD", "asOf": "2026-09-30", "note": "Tender benchmark, not a verified price or return on a particular investable security."},
+    {"sourceId": "EL2", "metric": "Reported enterprise share of revenue", "value": 0.55, "unit": "share", "asOf": "2026-09-30", "note": "Period, accounting definition and denominator detail are not disclosed in the reviewed announcement."},
+    {"sourceId": "EL2", "metric": "Reported weekly agent conversations exceeded", "value": 15000000, "unit": "conversations per week", "asOf": "2026-09-30", "note": "Lower bound on company-reported throughput, not verified unique tasks, paid usage or successful resolutions."}
+  ],
+  "audio": {
+    "assumptionLabel": "Every numeric parameter below is hypothetical. Fixed monthly accepted output; unchanged editorial coordination in both workflows; one-time setup is incremental.",
+    "acceptedMinutesPerMonth": 600,
+    "manualWorkMinutesPerAcceptedMinute": 6,
+    "hourlyLaborCost": 45,
+    "sharedCoordinationCostPerMonth": 300,
+    "effectiveInvoicePerGeneratedMinute": 0.20,
+    "cashCaptureOfPositiveLaborRelief": 0.50,
+    "firstYearSetupCost": 1200,
+    "monthsPerYear": 12,
+    "minuteUnitNote": "Generated duration is measured audio, never inferred from characters or credits. The hypothetical effective invoice rate includes all billed subscription allocation and overage for the workload; it is not ElevenLabs list pricing. Free regenerations and model-specific alternatives must be reconciled in a real invoice audit.",
+    "scenarios": [
+      {"id": "tighter-review", "label": "Tighter review", "generatedMinutesPerAcceptedMinute": 1.2, "humanWorkMinutesPerAcceptedMinute": 1},
+      {"id": "base", "label": "Base workflow", "generatedMinutesPerAcceptedMinute": 1.4, "humanWorkMinutesPerAcceptedMinute": 2},
+      {"id": "rework", "label": "Heavy rework", "generatedMinutesPerAcceptedMinute": 3, "humanWorkMinutesPerAcceptedMinute": 5},
+      {"id": "bad-fit", "label": "Poor fit", "generatedMinutesPerAcceptedMinute": 4, "humanWorkMinutesPerAcceptedMinute": 6.5}
+    ]
+  },
+  "agents": {
+    "assumptionLabel": "Every numeric parameter below is hypothetical. One agent attempt per eligible unique task; every unsuccessful task requires the same full human effort as the manual baseline.",
+    "eligibleUniqueTasksPerMonth": 10000,
+    "manualMinutesPerTask": 5,
+    "hourlyLaborCost": 45,
+    "ongoingOversightHoursPerMonth": 60,
+    "allInAgentInvoicePerCallMinute": 0.12,
+    "cashCaptureOfPositiveLaborRelief": 0.50,
+    "firstYearSetupCost": 12000,
+    "monthsPerYear": 12,
+    "verificationWindowDays": 7,
+    "completionDefinition": "Task verified in the underlying business system, with no human fallback and no repeat contact for the same issue during the hypothetical seven-day window. The rate is an assumption, not ElevenLabs transcript-evaluator accuracy or a measured customer outcome.",
+    "costBoundary": "The hypothetical all-in invoice includes agent platform usage, LLM usage, carrier charges and any allocated subscription minimum. Oversight is charged separately as labor. It excludes customer waiting cost, harmful actions, and losses from undetected errors; accepting such tasks as completed would invalidate the rate.",
+    "scenarios": [
+      {"id": "strong", "label": "Strong completion", "verifiedCompletionRate": 0.90, "averageAgentMinutesPerAttempt": 4},
+      {"id": "base", "label": "Base workflow", "verifiedCompletionRate": 0.70, "averageAgentMinutesPerAttempt": 4},
+      {"id": "stress", "label": "Long calls, weak completion", "verifiedCompletionRate": 0.40, "averageAgentMinutesPerAttempt": 6}
+    ]
+  }
+}

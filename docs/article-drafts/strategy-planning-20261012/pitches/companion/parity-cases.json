@@ -1,0 +1,722 @@
+[
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.6,
+      "review": 0.2,
+      "capture": 0.25
+    },
+    "expected": {
+      "hours": 13248.0,
+      "captured": 662400.0,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": 372400.0,
+      "recurringBenefit": 422400.0,
+      "firstCapture": 0.10945048309178744,
+      "recurringCapture": 0.09057971014492754
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.3,
+      "review": 0.2,
+      "capture": 0.25
+    },
+    "expected": {
+      "hours": 6624.0,
+      "captured": 331200.0,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": 41200.0,
+      "recurringBenefit": 91200.0,
+      "firstCapture": 0.21890096618357488,
+      "recurringCapture": 0.18115942028985507
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.6,
+      "review": 0.6,
+      "capture": 0.25
+    },
+    "expected": {
+      "hours": 6624.0,
+      "captured": 331200.0,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": 41200.0,
+      "recurringBenefit": 91200.0,
+      "firstCapture": 0.21890096618357488,
+      "recurringCapture": 0.18115942028985507
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0,
+      "review": 0.2,
+      "capture": 0.25
+    },
+    "expected": {
+      "hours": 0.0,
+      "captured": 0.0,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": -290000.0,
+      "recurringBenefit": -240000.0,
+      "firstCapture": null,
+      "recurringCapture": null
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 1,
+      "review": 1,
+      "capture": 1
+    },
+    "expected": {
+      "hours": 0,
+      "captured": 0,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": -290000,
+      "recurringBenefit": -240000,
+      "firstCapture": null,
+      "recurringCapture": null
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.52,
+      "review": 0.01,
+      "capture": 0.06
+    },
+    "expected": {
+      "hours": 14208.48,
+      "captured": 170501.75999999998,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": -119498.24000000002,
+      "recurringBenefit": -69498.24000000002,
+      "firstCapture": 0.1020517324865151,
+      "recurringCapture": 0.08445660619573664
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.0,
+      "review": 0.05,
+      "capture": 0.71
+    },
+    "expected": {
+      "hours": 0.0,
+      "captured": 0.0,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": -290000.0,
+      "recurringBenefit": -240000.0,
+      "firstCapture": null,
+      "recurringCapture": null
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.97,
+      "review": 0.67,
+      "capture": 0.85
+    },
+    "expected": {
+      "hours": 8834.759999999998,
+      "captured": 1501909.1999999997,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": 1211909.1999999997,
+      "recurringBenefit": 1261909.1999999997,
+      "firstCapture": 0.16412443575150884,
+      "recurringCapture": 0.135827119242628
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.08,
+      "review": 0.28,
+      "capture": 0.5
+    },
+    "expected": {
+      "hours": 1589.76,
+      "captured": 158976.0,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": -131024.0,
+      "recurringBenefit": -81024.0,
+      "firstCapture": 0.9120873590982287,
+      "recurringCapture": 0.7548309178743962
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.06,
+      "review": 0.21,
+      "capture": 0.29
+    },
+    "expected": {
+      "hours": 1308.24,
+      "captured": 75877.92,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": -214122.08000000002,
+      "recurringBenefit": -164122.08000000002,
+      "firstCapture": 1.1083593224484805,
+      "recurringCapture": 0.9172628875435701
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.71,
+      "review": 0.71,
+      "capture": 0.29
+    },
+    "expected": {
+      "hours": 5682.840000000001,
+      "captured": 329604.72000000003,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": 39604.72000000003,
+      "recurringBenefit": 89604.72000000003,
+      "firstCapture": 0.25515411308430286,
+      "recurringCapture": 0.211162024621492
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.09,
+      "review": 0.77,
+      "capture": 0.69
+    },
+    "expected": {
+      "hours": 571.3199999999999,
+      "captured": 78842.15999999999,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": -211157.84000000003,
+      "recurringBenefit": -161157.84000000003,
+      "firstCapture": 2.5379822166211583,
+      "recurringCapture": 2.1003990758244067
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.83,
+      "review": 0.4,
+      "capture": 0.55
+    },
+    "expected": {
+      "hours": 13744.8,
+      "captured": 1511928.0000000002,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": 1221928.0000000002,
+      "recurringBenefit": 1271928.0000000002,
+      "firstCapture": 0.10549444153425296,
+      "recurringCapture": 0.08730574471800245
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.14,
+      "review": 0.94,
+      "capture": 0.69
+    },
+    "expected": {
+      "hours": 231.84000000000023,
+      "captured": 31993.920000000027,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": -258006.07999999996,
+      "recurringBenefit": -208006.07999999996,
+      "firstCapture": 6.254313319530705,
+      "recurringCapture": 5.175983436852997
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.16,
+      "review": 0.1,
+      "capture": 0.43
+    },
+    "expected": {
+      "hours": 3974.4,
+      "captured": 341798.4,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": 51798.40000000002,
+      "recurringBenefit": 101798.40000000002,
+      "firstCapture": 0.3648349436392915,
+      "recurringCapture": 0.30193236714975846
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.35,
+      "review": 0.76,
+      "capture": 0.73
+    },
+    "expected": {
+      "hours": 2318.4,
+      "captured": 338486.39999999997,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": 48486.399999999965,
+      "recurringBenefit": 98486.39999999997,
+      "firstCapture": 0.6254313319530711,
+      "recurringCapture": 0.5175983436853002
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.9,
+      "review": 0.83,
+      "capture": 0.57
+    },
+    "expected": {
+      "hours": 4222.800000000001,
+      "captured": 481399.20000000007,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": 191399.20000000007,
+      "recurringBenefit": 241399.20000000007,
+      "firstCapture": 0.343374064601686,
+      "recurringCapture": 0.28417163967036085
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.79,
+      "review": 0.08,
+      "capture": 0.37
+    },
+    "expected": {
+      "hours": 20059.68,
+      "captured": 1484416.32,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": 1194416.32,
+      "recurringBenefit": 1244416.32,
+      "firstCapture": 0.07228430363794437,
+      "recurringCapture": 0.059821492665885
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.89,
+      "review": 0.93,
+      "capture": 0.12
+    },
+    "expected": {
+      "hours": 1719.4799999999989,
+      "captured": 41267.51999999997,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": -248732.48000000004,
+      "recurringBenefit": -198732.48000000004,
+      "firstCapture": 0.8432782003861639,
+      "recurringCapture": 0.6978854072161356
+    }
+  },
+  {
+    "company": "harvey",
+    "knobs": {
+      "adoption": 0.11,
+      "review": 0.5,
+      "capture": 0.58
+    },
+    "expected": {
+      "hours": 1518.0,
+      "captured": 176088.0,
+      "firstCost": 290000,
+      "recurringCost": 240000,
+      "firstBenefit": -113912.0,
+      "recurringBenefit": -63912.0,
+      "firstCapture": 0.9552042160737813,
+      "recurringCapture": 0.7905138339920947
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 46,
+      "questionnaires": 10,
+      "capture": 0.5
+    },
+    "expected": {
+      "hours": 488.0,
+      "captured": 19520.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -4230.0,
+      "recurringBenefit": 770.0,
+      "firstCapture": 0.6083504098360656,
+      "recurringCapture": 0.4802766393442623
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 16,
+      "questionnaires": 10,
+      "capture": 0.5
+    },
+    "expected": {
+      "hours": 248.0,
+      "captured": 9920.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -13830.0,
+      "recurringBenefit": -8830.0,
+      "firstCapture": 1.1970766129032258,
+      "recurringCapture": 0.9450604838709676
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 46,
+      "questionnaires": 10,
+      "capture": 1
+    },
+    "expected": {
+      "hours": 488.0,
+      "captured": 39040.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": 15290.0,
+      "recurringBenefit": 20290.0,
+      "firstCapture": 0.6083504098360656,
+      "recurringCapture": 0.4802766393442623
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 0,
+      "questionnaires": 0,
+      "capture": 0.5
+    },
+    "expected": {
+      "hours": 0.0,
+      "captured": 0.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -23750.0,
+      "recurringBenefit": -18750.0,
+      "firstCapture": null,
+      "recurringCapture": null
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 52,
+      "questionnaires": 20,
+      "capture": 0
+    },
+    "expected": {
+      "hours": 656.0,
+      "captured": 0.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -23750.0,
+      "recurringBenefit": -18750.0,
+      "firstCapture": 0.4525533536585366,
+      "recurringCapture": 0.35727896341463417
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 35,
+      "questionnaires": 10,
+      "capture": 0.09
+    },
+    "expected": {
+      "hours": 400.0,
+      "captured": 2880.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -20870.0,
+      "recurringBenefit": -15870.0,
+      "firstCapture": 0.7421875,
+      "recurringCapture": 0.5859375
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 18,
+      "questionnaires": 19,
+      "capture": 0.04
+    },
+    "expected": {
+      "hours": 372.0,
+      "captured": 1190.4,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -22559.6,
+      "recurringBenefit": -17559.6,
+      "firstCapture": 0.7980510752688172,
+      "recurringCapture": 0.6300403225806452
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 0,
+      "questionnaires": 9,
+      "capture": 0.94
+    },
+    "expected": {
+      "hours": 108.0,
+      "captured": 8121.599999999999,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -15628.400000000001,
+      "recurringBenefit": -10628.400000000001,
+      "firstCapture": 2.7488425925925926,
+      "recurringCapture": 2.170138888888889
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 8,
+      "questionnaires": 12,
+      "capture": 0.41
+    },
+    "expected": {
+      "hours": 208.0,
+      "captured": 6822.4,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -16927.6,
+      "recurringBenefit": -11927.6,
+      "firstCapture": 1.4272836538461537,
+      "recurringCapture": 1.1268028846153846
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 36,
+      "questionnaires": 16,
+      "capture": 0.19
+    },
+    "expected": {
+      "hours": 480.0,
+      "captured": 7296.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -16454.0,
+      "recurringBenefit": -11454.0,
+      "firstCapture": 0.6184895833333334,
+      "recurringCapture": 0.48828125
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 26,
+      "questionnaires": 14,
+      "capture": 0.9
+    },
+    "expected": {
+      "hours": 376.0,
+      "captured": 27072.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": 3322.0,
+      "recurringBenefit": 8322.0,
+      "firstCapture": 0.789561170212766,
+      "recurringCapture": 0.6233377659574468
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 4,
+      "questionnaires": 9,
+      "capture": 0.64
+    },
+    "expected": {
+      "hours": 140.0,
+      "captured": 7168.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -16582.0,
+      "recurringBenefit": -11582.0,
+      "firstCapture": 2.1205357142857144,
+      "recurringCapture": 1.674107142857143
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 2,
+      "questionnaires": 12,
+      "capture": 0.66
+    },
+    "expected": {
+      "hours": 160.0,
+      "captured": 8448.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -15302.0,
+      "recurringBenefit": -10302.0,
+      "firstCapture": 1.85546875,
+      "recurringCapture": 1.46484375
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 16,
+      "questionnaires": 2,
+      "capture": 0.28
+    },
+    "expected": {
+      "hours": 152.0,
+      "captured": 3404.8,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -20345.2,
+      "recurringBenefit": -15345.2,
+      "firstCapture": 1.953125,
+      "recurringCapture": 1.5419407894736843
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 20,
+      "questionnaires": 6,
+      "capture": 0.07
+    },
+    "expected": {
+      "hours": 232.0,
+      "captured": 1299.2,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -22450.8,
+      "recurringBenefit": -17450.8,
+      "firstCapture": 1.2796336206896552,
+      "recurringCapture": 1.0102370689655173
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 6,
+      "questionnaires": 11,
+      "capture": 0.55
+    },
+    "expected": {
+      "hours": 180.0,
+      "captured": 7920.000000000001,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -15830.0,
+      "recurringBenefit": -10830.0,
+      "firstCapture": 1.6493055555555556,
+      "recurringCapture": 1.3020833333333335
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 33,
+      "questionnaires": 1,
+      "capture": 0.9
+    },
+    "expected": {
+      "hours": 276.0,
+      "captured": 19872.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -3878.0,
+      "recurringBenefit": 1122.0,
+      "firstCapture": 1.0756340579710144,
+      "recurringCapture": 0.8491847826086956
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 30,
+      "questionnaires": 5,
+      "capture": 0.43
+    },
+    "expected": {
+      "hours": 300.0,
+      "captured": 10320.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -13430.0,
+      "recurringBenefit": -8430.0,
+      "firstCapture": 0.9895833333333334,
+      "recurringCapture": 0.78125
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 26,
+      "questionnaires": 5,
+      "capture": 0.92
+    },
+    "expected": {
+      "hours": 268.0,
+      "captured": 19724.8,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -4025.2000000000007,
+      "recurringBenefit": 974.7999999999993,
+      "firstCapture": 1.1077425373134329,
+      "recurringCapture": 0.8745335820895523
+    }
+  },
+  {
+    "company": "vanta",
+    "knobs": {
+      "weeks": 30,
+      "questionnaires": 15,
+      "capture": 0.24
+    },
+    "expected": {
+      "hours": 420.0,
+      "captured": 8064.0,
+      "firstCost": 23750.0,
+      "recurringCost": 18750.0,
+      "firstBenefit": -15686.0,
+      "recurringBenefit": -10686.0,
+      "firstCapture": 0.7068452380952381,
+      "recurringCapture": 0.5580357142857143
+    }
+  }
+]

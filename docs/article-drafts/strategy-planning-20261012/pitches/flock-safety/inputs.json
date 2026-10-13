@@ -1,0 +1,13 @@
+{
+  "status": "Illustrative installed-cohort scenarios, not Flock disclosures or cost estimates",
+  "verified": "2026-10-13",
+  "cohort_units": 100,
+  "years": 5,
+  "discount_rate": 0.12,
+  "scenarios": {
+    "base": {"annual_price": 3000, "deployment_cost": 2300, "acquisition_cost": 700, "annual_service_cost": 650, "annual_replacement_reserve": 250, "annual_unit_retention": 0.95, "removal_cost": 300},
+    "renewal_pressure": {"annual_price": 3000, "deployment_cost": 2300, "acquisition_cost": 700, "annual_service_cost": 650, "annual_replacement_reserve": 250, "annual_unit_retention": 0.80, "removal_cost": 300},
+    "service_drag": {"annual_price": 3000, "deployment_cost": 3200, "acquisition_cost": 1000, "annual_service_cost": 1050, "annual_replacement_reserve": 400, "annual_unit_retention": 0.80, "removal_cost": 300}
+  },
+  "timing": "Opening subscription cash and deployment/acquisition are at t=0; future renewal receipts at the start of each year; service and reserve at year-end. Removal costs occur when units fail to renew. No early refunds, price changes, expansion, tax, corporate overhead, debt, terminal value or final shutdown costs are modeled."
+}
