@@ -37,13 +37,17 @@ function automation(names: string[]) {
     SpreadsheetApp: { getActiveSpreadsheet: () => workbook, flush() {} },
     PropertiesService: { getScriptProperties: () => ({ getProperty: (key: string) => properties.get(key), setProperty: (key: string, value: string) => properties.set(key, value), deleteProperty: (key: string) => properties.delete(key) }) },
     LockService: { getScriptLock: () => ({ tryLock: () => !state.locked, releaseLock: () => { state.releases++ } }) },
-    Utilities: { getUuid: randomUUID, sleep: (delay: number) => { state.sleeps.push(delay); if (state.propagationOnSleep) state.verificationReady = true }, DigestAlgorithm: { SHA_256: 'sha256' },
+    Utilities: { getUuid: randomUUID, sleep: (delay: number) => { state.sleeps.push(delay); if (state.propagationOnSleep) state.verificationReady = true }, DigestAlgorithm: { SHA_256: 'sha256' }, Charset: { UTF_8: 'UTF-8' },
       computeDigest: (_: string, value: string) => [...createHash('sha256').update(value).digest()],
       base64Encode: (value: number[]) => Buffer.from(value).toString('base64'),
-      computeHmacSha256Signature: (value: string, key: string) => [...createHmac('sha256', key).update(value).digest()].map(byte => byte > 127 ? byte - 256 : byte) },
+      computeHmacSha256Signature: (value: string, key: string, charset: string) => {
+        assert.equal(charset, 'UTF-8')
+        return [...createHmac('sha256', key).update(value, 'utf8').digest()].map(byte => byte > 127 ? byte - 256 : byte)
+      } },
     UrlFetchApp: {
       fetch(url: string, options: any) {
         assert.equal(url, 'https://sulayman-bowles.dev/api/outreach-sync')
+        assert.equal(options.contentType, 'application/json; charset=utf-8')
         assert(validSyncSignature(options.payload, options.headers['X-Outreach-Timestamp'], options.headers['X-Outreach-Signature'], secret))
         state.calls++
         state.duringFetch?.(); state.duringFetch = undefined

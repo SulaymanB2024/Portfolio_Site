@@ -7,7 +7,7 @@ import { sceneSequence, textSequence, advanceScrollMotion, railProgress, require
 import { thresholdMotion, sculpturePose, cinematicShot, portalPose, cinematicPhase, portalFrameOpacity, createScaleSampler, createApertureSampler } from './motion-curves.ts'
 import { portfolioAssetUrl } from '../portfolio-assets.ts'
 import { createDitheredText, textDitherShader, type DitheredTextUniforms } from './dithered-text.ts'
-import { HEADING_RESERVE_EM, layoutHeading, renderHeading } from './heading-typography.ts'
+import { HEADING_RESERVE_EM, headingFitWidth, layoutHeading, renderHeading } from './heading-typography.ts'
 import { scrollInkShader, scrollInkStrength, advanceScrollInk, scrollDitherPassage } from './scroll-dither.ts'
 import { isStackedLanding, mobileSculptureFrame } from './mobile-layout.ts'
 import { landingRenderBudget } from './render-budget.ts'
@@ -224,7 +224,8 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
     const index = textSequence(targetProgress, 'threshold', true).active, chapter = chapters[index]
     const style = getComputedStyle(headline)
     const fontSize = parseFloat(style.fontSize), tracking = parseFloat(style.letterSpacing) || 0
-    const layout = layoutHeading(chapter, fontSize, headline.getBoundingClientRect().width, row => {
+    const width = headingFitWidth(chapter, headline.getBoundingClientRect().width, stage.clientWidth, stage.clientHeight)
+    const layout = layoutHeading(chapter, fontSize, width, row => {
       if (!headingMeasure) return 0
       headingMeasure.font = `${style.fontWeight} ${fontSize * row.scale}px ${style.fontFamily}`
       const tracked = 'letterSpacing' in headingMeasure
@@ -251,7 +252,8 @@ export function mountLandingSequence(elements: LandingElements, opening?: Landin
     if (disposed || !stage.isConnected) return
     targetProgress = railProgress(scrollY, rail.getBoundingClientRect().top + scrollY, rail.clientHeight, stage.clientHeight)
     const style = getComputedStyle(headline)
-    const key = [textSequence(targetProgress, 'threshold', true).active, headline.clientWidth,
+    const active = textSequence(targetProgress, 'threshold', true).active
+    const key = [active, headline.clientWidth, headingFitWidth(chapters[active], headline.clientWidth, stage.clientWidth, stage.clientHeight),
       style.fontSize, style.fontWeight, style.fontFamily, style.letterSpacing,
       isStackedLanding(stage.clientWidth, stage.clientHeight)].join('|')
     if (key === fallbackKey) return

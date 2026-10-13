@@ -3,6 +3,12 @@ import type { LandingChapter } from './sequence.ts'
 export interface HeadingRow { text: string; scale: number; leading: number }
 export interface HeadingLayout { rows: HeadingRow[]; fit: number; height: number }
 
+/** Leave the original sculpture band clear when a tall desktop holds longer copy. */
+export function headingFitWidth(chapter: LandingChapter, columnWidth: number, stageWidth: number, stageHeight: number) {
+  return chapter.id === 'helmet' && chapter.lines.length === 4 && stageWidth > 700 && stageHeight >= stageWidth
+    ? Math.min(columnWidth, stageWidth * .45) : columnWidth
+}
+
 export function headingRows(chapter: LandingChapter): HeadingRow[] {
   return chapter.id === 'helmet'
     ? [
