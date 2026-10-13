@@ -4,12 +4,13 @@ import { qualityHash, qualityReadingMinutes } from './article-quality-integrity.
 // New research has no historical manuscript to restore or revise. Preserve its
 // explicitly recorded initial edition without inventing revision provenance.
 export function verifyInitialPublication(bytes, record) {
-  assert.equal(qualityHash(bytes), record.articleSha256, `Unrecorded initial-edition change: ${record.slug}`)
+  const receipt = publicationReceipt(record)
+  assert.equal(qualityHash(bytes), receipt.articleSha256, `Unrecorded publication change: ${record.slug}`)
   const article = JSON.parse(bytes)
   assert.equal(article.slug, record.slug)
   assert.equal(article.path, record.canonicalPath)
   assert.equal(article.date, record.datePublished)
-  assert.equal(article.dateModified, record.dateModified)
+  assert.equal(article.dateModified, receipt.dateModified)
   assert.equal(article.readTime, `${qualityReadingMinutes(article)} MIN`)
   assert(article.author && article.seoTitle && article.seoDescription && article.evidenceBoundary)
   const sections = article.sections || []
@@ -20,4 +21,23 @@ export function verifyInitialPublication(bytes, record) {
   const sourceIds = new Set(sources.map(source => `source-${source.id.toLowerCase()}`))
   for (const match of JSON.stringify(article).matchAll(/#(source-[\w-]+)/g)) assert(sourceIds.has(match[1]), `${record.slug}: unresolved evidence ${match[1]}`)
   return article
+}
+
+// Keep the original receipt immutable. Later reviewed editions form an explicit
+// hash chain with a reason and primary evidence; the publication date stays fixed.
+export function publicationReceipt(record) {
+  let articleSha256 = record.articleSha256
+  let dateModified = record.dateModified
+  assert(/^[a-f0-9]{64}$/.test(articleSha256), `${record.slug}: invalid initial hash`)
+  for (const update of record.updates || []) {
+    assert.equal(update.previousSha256, articleSha256, `${record.slug}: broken update chain`)
+    assert(/^[a-f0-9]{64}$/.test(update.articleSha256) && update.articleSha256 !== articleSha256, `${record.slug}: invalid updated hash`)
+    assert(/^\d{4}-\d{2}-\d{2}$/.test(update.dateModified) && update.dateModified >= dateModified, `${record.slug}: invalid update date`)
+    assert(!Number.isNaN(Date.parse(update.dateModified)) && new Date(`${update.dateModified}T00:00:00Z`).toISOString().slice(0, 10) === update.dateModified, `${record.slug}: impossible update date`)
+    assert(update.reason?.trim().length >= 20, `${record.slug}: explain the material update`)
+    assert(update.evidence?.length && update.evidence.every(url => /^https:\/\//.test(url)), `${record.slug}: primary update evidence required`)
+    articleSha256 = update.articleSha256
+    dateModified = update.dateModified
+  }
+  return { articleSha256, dateModified }
 }

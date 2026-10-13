@@ -2,11 +2,20 @@
 
 The publication's promise: explain a Texas development well enough that an operator, founder, finance leader, or investor can make a better decision. Authority should come from inspectable work, a coherent body of research, and useful follow-through. Public biography and credentials remain factual.
 
-## Opening edition
+## Research library
 
 - Power availability: connection evidence, SB6 implementation, capital at risk, and interruption design.
 - AI regulation: private, governmental, healthcare, and privacy responsibilities translated into procurement decisions.
 - Commercial contracts: HB40's separate monetary tests and September 2026 decisions on counterclaims and signed promises.
+- Water: legal supply, peak delivery, recoverable storage, drought and design dependencies.
+- Property tax: the temporary appraisal limitation, personal-property exemption and cost after a deal.
+- Data-center sales tax: certification routes, investment clocks, purchaser eligibility and repayment risk.
+- JETI: the school M&O value benefit, competing locations and continuing operating obligations.
+- Franchise tax: threshold, information reports, computation choice and the current research-credit application.
+- Hiring: correctly dated metro and occupational measures connected to recruiting and ramp costs.
+- Cross-border logistics: matching denominators, customs, commercial schedules and full-route economics.
+- Manufacturing: company-reported stages translated into buyer-specific qualification and allocation questions.
+- Commercial insurance: perils, settlement, dollar retention and the business-income recovery case.
 
 Canonical collection: `/topics/texas-business`. New articles use `/research/texas/SLUG`. Existing toll-road, Austin ownership, and housing manuscripts retain their URLs, research cutoffs, and financial-systems collection.
 
@@ -26,7 +35,7 @@ Google's current [AI optimization guide](https://developers.google.com/search/do
 
 ## Next research queue
 
-These are commissioning hypotheses, not finished findings or measured keyword opportunities. Choose the next brief after reviewing developments and reader evidence. Breadth follows usefulness; the edition has no daily article quota.
+The table preserves the original commissioning questions; the twelve-article library now answers many of them at the stated cutoff. Future briefs should extend unresolved questions or reconcile material new evidence into the existing answer. They are not measured keyword opportunities. Breadth follows usefulness; there is no daily article quota.
 
 | Question to resolve | Business decision | Primary evidence to acquire |
 | --- | --- | --- |
@@ -49,4 +58,4 @@ Recheck a story when its controlling rule becomes effective, an agency issues an
 
 After an authorized release, establish a dated page/query baseline in Search Console and a landing-page baseline in analytics. Compare equivalent reporting windows, keeping publication lag and brand/nonbrand queries explicit. Look for relevant query discovery, engaged reading, returning visitors, source downloads, and attributable business inquiries. Treat AI referrals and independently observed citations as separate evidence. Do not present article counts or schema validation as proof of authority growth.
 
-No recurring automation or external outreach has been created. A future cadence or monitoring request requires its own defined scope. The current goal chat owns this edition and its [work record](../agent-messageboard/texas-business-20261012.md).
+The runnable manual workflow is in [Publishing and updates](PUBLISHING.md), with readers, decisions and review triggers in [library.json](library.json). No recurring automation or external outreach has been created. A future cadence or monitoring request requires its own defined scope. Task continuation evidence stays in the local source-owned work record.

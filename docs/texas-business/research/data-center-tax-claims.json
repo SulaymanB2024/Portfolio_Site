@@ -1,0 +1,55 @@
+{
+  "article": "texas-data-center-sales-tax-project-economics",
+  "checkedAt": "2026-10-12",
+  "claims": [
+    {
+      "claim": "Standard route state6.25% exemption/localtax remains; large route state/local qualifying purchases",
+      "source": "https://comptroller.texas.gov/forms/01-929.pdf",
+      "locator": "Front checkboxes and instructions",
+      "status": "Current linked exemption certificate",
+      "recheck": "Tax law, certificate or qualifyingroute change"
+    },
+    {
+      "claim": "Standard100Ksqft/singleoccupant/20qualjobs/$200Mfiveyearsfromcertification; wage120%countyaverage and5year permanentjob",
+      "source": "https://comptroller.texas.gov/forms/ap-233.pdf",
+      "locator": "Page1 certification requirements",
+      "status": "July2026 application",
+      "recheck": "Updated statute, form, site or job facts"
+    },
+    {
+      "claim": "Large250Ksqft/40qualjobs/$500M/commitment to contract for20MWtransmission; singleoccupant conditions",
+      "source": "https://comptroller.texas.gov/forms/ap-236.pdf",
+      "locator": "AP236 pages1–2;151.3595(d)(2)(C); contract or proposed contract accepted",
+      "status": "July2026 application; exact clock governed by current statute",
+      "recheck": "Updated statutory requirements/form"
+    },
+    {
+      "claim": "Largefiveyearinvestment starts earlierapplication/certification; replacement personalproperty excluded; exemption startscertification20years",
+      "source": "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm",
+      "locator": "151.3595(d)(2)(B),(f)",
+      "status": "Current statute; agency summary and AP236 discrepant, explicitly flagged",
+      "recheck": "Statutory/form change or project-specific written clarification"
+    },
+    {
+      "claim": "Standardduration10yearsfor200M–under250M,15foratleast250M; refundsnotforpre-certificationpurchases; certificate/records/audit/revocation obligations",
+      "source": "https://comptroller.texas.gov/taxes/data-centers/",
+      "locator": "Exemption Period, SalesTaxRefunds, Verification, Revocation and Recordkeeping",
+      "status": "Current agency guidance; no actual audited eligibility asserted",
+      "recheck": "New guidance, registration, purchaser, audit orschedule"
+    },
+    {
+      "claim": "LBB01register listsJuly10,2026 effective date anddistinctowner/occupant/operator",
+      "source": "https://comptroller.texas.gov/taxes/data-centers/data-center-lists.php",
+      "locator": "LBB01 DataCenterrow",
+      "status": "Observed certification register; not output/jobcompletion evidence",
+      "recheck": "New or corrected register entry"
+    },
+    {
+      "claim": "1500Kmonthlyelectricity×12=18M;state6.25%=1.125M;160Meligiblepurchasesstate10M/localassumed2%=3.2M;revocationexample10Mbeforepenaltyinterest",
+      "source": null,
+      "locator": "worked-tax-case",
+      "status": "Declared hypothetical inputs; eligibleinvestment280Mseparatefrompurchases160M",
+      "recheck": "Input, rate, route or formula change"
+    }
+  ]
+}

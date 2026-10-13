@@ -1,0 +1,179 @@
+{
+  "articleSlug": "texas-property-tax-business-underwriting",
+  "cutoff": "2026-10-12",
+  "sourcePolicy": "Primary operative statutes and Comptroller guidance. No site rates, appraisal outcome, legislative renewal or personal-property qualification inferred.",
+  "claims": [
+    {
+      "id": "local-tax-system",
+      "claim": "Texas has no state property tax; rates and collections are local. Parcel/account and taxing units determine actual inputs.",
+      "sources": [
+        {
+          "url": "https://comptroller.texas.gov/taxes/property-tax/index.php",
+          "date": "Undated current guidance",
+          "status": "current agency guidance"
+        },
+        {
+          "url": "https://comptroller.texas.gov/taxes/property-tax/rates/",
+          "date": "Current directory reviewed 2026-10-12",
+          "status": "current agency guidance"
+        }
+      ],
+      "status": "current agency guidance",
+      "recheckTrigger": "New local adopted rates, jurisdiction or parcel/account changes"
+    },
+    {
+      "id": "circuit-breaker-scope",
+      "claim": "§23.231 limits qualifying non-homestead real-property appraised value to lesser of market or prior value +20%+new improvements. Initial-qualification, special-appraisal and ownership conditions apply.",
+      "sources": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm",
+          "date": "Circuit breaker effective 2024-01-01; expires 2026-12-31 under reviewed text",
+          "status": "effective temporary statute"
+        }
+      ],
+      "status": "effective temporary statute",
+      "recheckTrigger": "Property qualification, ownership, new improvements, amended statute or judicial interpretation"
+    },
+    {
+      "id": "2026-threshold-and-expiration",
+      "claim": "Comptroller publishes 2026 $5,320,000 eligibility threshold. §23.231(k) expires December 31, 2026 under text reviewed October 12; later relief requires new authority.",
+      "sources": [
+        {
+          "url": "https://comptroller.texas.gov/taxes/property-tax/valuing-property.php",
+          "date": "Current guidance with 2026 eligibility table",
+          "status": "2026 amount; expiration in reviewed law; no renewal assumed"
+        },
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm",
+          "date": "Circuit breaker effective 2024-01-01; expires 2026-12-31 under reviewed text",
+          "status": "2026 amount; expiration in reviewed law; no renewal assumed"
+        }
+      ],
+      "status": "2026 amount; expiration in reviewed law; no renewal assumed",
+      "recheckTrigger": "Expiration, enacted renewal/replacement or amended eligibility table"
+    },
+    {
+      "id": "personal-property-exemption",
+      "claim": "HB9 amendment effective January 1, 2026 provides $125k of qualifying personal-property appraised value; ordinary per-location, leased-out/customer-site and related-entity aggregation treatments differ.",
+      "sources": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.11.htm",
+          "date": "HB9 amendment effective 2026-01-01",
+          "status": "effective statute, not a pending voter proposal"
+        }
+      ],
+      "status": "effective statute, not a pending voter proposal",
+      "recheckTrigger": "Changed law, location/situs, ownership, common-business aggregation or lease arrangement"
+    },
+    {
+      "id": "rendition",
+      "claim": "Current guidance gives most rendition deadline April 15 with written May 15 extension and good-cause provisions; specified regulated property differs. April 8 reminder references Jan 1 owned/managed business assets.",
+      "sources": [
+        {
+          "url": "https://comptroller.texas.gov/taxes/property-tax/valuing-property.php",
+          "date": "Current guidance with 2026 eligibility table",
+          "status": "2026 reminder and current guidance"
+        },
+        {
+          "url": "https://comptroller.texas.gov/about/media-center/news/20260408-texas-businesses-april-15-is-deadline-for-filing-property-tax-renditions-1775577720312",
+          "date": "2026-04-08",
+          "status": "2026 reminder and current guidance"
+        }
+      ],
+      "status": "2026 reminder and current guidance",
+      "recheckTrigger": "Next tax year, asset inventory changes, actual filing requirement or confirmed extension"
+    },
+    {
+      "id": "protest-and-tenant",
+      "claim": "Ordinary protest May 15 or 30 days after notice under delivery rules, later controlling. Tenant contractually paying owner taxes may protest if owner does not.",
+      "sources": [
+        {
+          "url": "https://comptroller.texas.gov/taxes/property-tax/protests/index.php",
+          "date": "Undated current guidance",
+          "status": "agency procedure guidance; individual qualification unverified"
+        }
+      ],
+      "status": "agency procedure guidance; individual qualification unverified",
+      "recheckTrigger": "Actual notice, owner protest, lease terms, appointment or changed procedure"
+    },
+    {
+      "id": "ownership-liens-payment",
+      "claim": "January 1 owner liability and lien survive transaction; private prorations do not erase liens. Ordinary Jan 31 payment timing has late-bill exceptions.",
+      "sources": [
+        {
+          "url": "https://comptroller.texas.gov/taxes/property-tax/pay/index.php",
+          "date": "Undated current guidance",
+          "status": "current agency guidance"
+        }
+      ],
+      "status": "current agency guidance",
+      "recheckTrigger": "Payment receipt, delinquency, title record or correction/supplemental bill"
+    },
+    {
+      "id": "2026-deadline-rule",
+      "claim": "§1.06 updated effective January 1, 2026 covers weekends/holidays and collector-office closures for payment; act on next regular business day. January 31, 2027 is Sunday.",
+      "sources": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.1.htm",
+          "date": "HB1392 amendment effective 2026-01-01",
+          "status": "effective statute plus calendar calculation"
+        },
+        {
+          "url": "https://comptroller.texas.gov/taxes/property-tax/pay/index.php",
+          "date": "Undated current guidance",
+          "status": "effective statute plus calendar calculation"
+        }
+      ],
+      "status": "effective statute plus calendar calculation",
+      "recheckTrigger": "Collector calendar, actual bill/delinquency rule or amendment"
+    },
+    {
+      "id": "hypothetical-real-estate",
+      "claim": "Prior $3m ×1.20=$3.6m; ×2%=$72k. $4.5m×2%=$90k; ×2.2%=$99k. $3.6m+$0.4m=$4m; ×2%=$80k. $18k/$72k=25%; $200k−$72k=$128k; $200k−$90k=$110k; $18k/7.5%=$240k. Inputs invented and eligibility assumed.",
+      "sources": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm",
+          "date": "Circuit breaker effective 2024-01-01; expires 2026-12-31 under reviewed text",
+          "status": "calculated scenarios; no actual bill, assessment or sale forecast"
+        }
+      ],
+      "status": "calculated scenarios; no actual bill, assessment or sale forecast",
+      "recheckTrigger": "Any input or legal formula change; preserve no-renewal and no-new-improvement assumptions"
+    },
+    {
+      "id": "hypothetical-equipment-and-lease",
+      "claim": "$300k−$125k=$175k; ×2%=$3,500 versus $6,000; saving $2,500. 40%×$18k=$7,200 tenant sensitivity. Inputs invented, qualification and uniform rate assumed.",
+      "sources": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.11.htm",
+          "date": "HB9 amendment effective 2026-01-01",
+          "status": "calculated scenarios; actual aggregation/lease unverified"
+        },
+        {
+          "url": "https://comptroller.texas.gov/taxes/property-tax/protests/index.php",
+          "date": "Undated current guidance",
+          "status": "calculated scenarios; actual aggregation/lease unverified"
+        }
+      ],
+      "status": "calculated scenarios; actual aggregation/lease unverified",
+      "recheckTrigger": "Different exemptions, situs, taxing units, related entities or contractual share"
+    }
+  ],
+  "checks": [
+    {
+      "check": "JSON parse, source fragments, table dimensions and four FAQs",
+      "result": "passed"
+    },
+    {
+      "check": "Tax/value/NOI/capitalization/tenant and calendar calculations",
+      "result": "passed"
+    },
+    {
+      "check": "Word count and 220-wpm estimate",
+      "mainWords": 2083,
+      "faqWords": 179,
+      "result": "passed"
+    }
+  ],
+  "remainingBoundary": "Root integrates and visually verifies. Specific accounts, local adopted rates, notices, leases, liens and appeal outcomes require transaction-level evidence."
+}

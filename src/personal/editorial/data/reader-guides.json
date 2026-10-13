@@ -1110,5 +1110,320 @@
         "href": "https://www.txcourts.gov/media/1463368/26-bc01b-0018-beard-v-perot-2026-tex-bus-65.pdf"
       }
     ]
+  },
+  "texas-water-facility-site-diligence": {
+    "question": "What makes a Texas water commitment usable?",
+    "answer": "Trace the legal source, supplier contract and delivery system to the process that consumes the water. Annual sufficiency does not establish peak-day flow, recoverable storage, quality or drought obligations. The initial 2027 State Water Plan is adopted; its enhanced amendment remained proposed at the October 12, 2026 cutoff. Use planning projects to identify dependencies, then obtain local authority and operating evidence.",
+    "paths": [
+      {
+        "label": "Trace source authority",
+        "section": "legal-source",
+        "description": "Match the water right or local well permit to the proposed use."
+      },
+      {
+        "label": "Compare peak delivery and storage",
+        "section": "peak-and-storage",
+        "description": "Work annual demand, peak limits and recovery separately."
+      },
+      {
+        "label": "Review treatment and disposal",
+        "section": "quality-reuse-disposal",
+        "description": "Complete the design through reuse and wastewater authority."
+      }
+    ],
+    "sources": [
+      {
+        "label": "2027 State Water Plan: adoption and proposed amendment",
+        "href": "https://www.twdb.texas.gov/waterplanning/swp/2027/index.asp"
+      },
+      {
+        "label": "Water supply contracts and underlying water rights",
+        "href": "https://www.tceq.texas.gov/permitting/water_rights/watersupplycontracts"
+      },
+      {
+        "label": "Groundwater regulation and private-well guidance",
+        "href": "https://www.twdb.texas.gov/groundwater/faq/faqgwm.asp"
+      }
+    ]
+  },
+  "texas-property-tax-business-underwriting": {
+    "question": "What can change a Texas business property-tax budget?",
+    "answer": "Reconstruct each asset and taxing unit, keeping market, appraised and taxable values separate. The reviewed non-homestead limitation expires after 2026, and the separate $125,000 personal-property exemption has location and aggregation conditions. Ownership, improvements, adopted rates and the lease allocation can change the cost. Compare the seller’s bill with the business’s durable operating expense.",
+    "paths": [
+      {
+        "label": "Reconstruct the tax stack",
+        "section": "reconstruct-the-bill",
+        "description": "Identify each account, value and taxing unit."
+      },
+      {
+        "label": "Model the temporary limitation",
+        "section": "worked-tax-sensitivity",
+        "description": "Price value and rate exposure using declared assumptions."
+      },
+      {
+        "label": "Review tenant exposure",
+        "section": "lease-exposure",
+        "description": "Connect the tax charge, lease allocation and conditional protest rights."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Tax Code Chapter 23: appraisal methods and §23.231 circuit breaker",
+        "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm"
+      },
+      {
+        "label": "Tax Code §11.145: income-producing tangible personal property",
+        "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.11.htm"
+      },
+      {
+        "label": "Appraisal protests and appeals, including lessees",
+        "href": "https://comptroller.texas.gov/taxes/property-tax/protests/index.php"
+      }
+    ]
+  },
+  "texas-data-center-sales-tax-project-economics": {
+    "question": "Which Texas data-center tax benefit belongs in the project model?",
+    "answer": "Identify the certification route, registered purchaser, eligible items and timeline. The standard route exempts state tax while local tax remains; the large-project route covers state and local eligible purchases. Current large-project law starts the investment clock at the earlier application or certification date, unlike the agency summary. Resolve that discrepancy, separate investment from exempt purchases and price continuing commitments and revocation exposure.",
+    "paths": [
+      {
+        "label": "Compare certification routes",
+        "section": "two-certification-routes",
+        "description": "Separate space, jobs, capital, transmission and tax treatment."
+      },
+      {
+        "label": "Resolve the investment clock",
+        "section": "investment-clock",
+        "description": "Compare the current statute with the agency form."
+      },
+      {
+        "label": "Work the purchase tax case",
+        "section": "worked-tax-case",
+        "description": "Retain local tax and contingent repayment exposure."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas Tax Code Chapter151, §§151.359 and151.3595",
+        "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm"
+      },
+      {
+        "label": "AP-236: application for a qualifying large data-center project",
+        "href": "https://comptroller.texas.gov/forms/ap-236.pdf"
+      },
+      {
+        "label": "Form01-929: data-center exemption certificate",
+        "href": "https://comptroller.texas.gov/forms/01-929.pdf"
+      }
+    ]
+  },
+  "texas-jeti-incentives-project-underwriting": {
+    "question": "How should a business underwrite a Texas JETI incentive?",
+    "answer": "Place the benefit in the school M&O tax line for eligible property, rather than discount the whole tax bill. Retain genuine competing-site evidence, the signed construction and incentive timetable, and jobs, wages and reporting obligations. Model the benefit after program costs and the compliance tail. A proposed investment, signed agreement and operating output are different stages of evidence.",
+    "paths": [
+      {
+        "label": "Locate the actual tax benefit",
+        "section": "tax-stack",
+        "description": "Separate the M&O value limitation from the rest of the bill."
+      },
+      {
+        "label": "Keep competing-site evidence",
+        "section": "competitive-evidence",
+        "description": "Retain a current location decision with tangible alternatives."
+      },
+      {
+        "label": "Calculate the return",
+        "section": "worked-return",
+        "description": "Use declared values, rates, costs and downside assumptions."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Government Code Chapter 403, Subchapter T: current JETI law",
+        "href": "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm"
+      },
+      {
+        "label": "JETI FAQ: competing locations, jobs and eligible investment",
+        "href": "https://comptroller.texas.gov/economy/development/prop-tax/jeti/faq.php"
+      },
+      {
+        "label": "JETI process and timeline",
+        "href": "https://comptroller.texas.gov/economy/development/prop-tax/jeti/process.php"
+      }
+    ]
+  },
+  "texas-franchise-tax-reporting-business-decisions": {
+    "question": "What does no Texas franchise tax due still require?",
+    "answer": "For an ordinary taxable entity, the $2.65 million annualized-revenue threshold for 2026 does not generally remove the PIR or OIR obligation. Reconcile the actual accounting period, entity and group, then compare supported EZ or long-form treatment and credit eligibility. Keep extension, filing and payment acceptance evidence. A zero tax estimate and a complete reporting record answer different questions.",
+    "paths": [
+      {
+        "label": "Separate threshold and reporting",
+        "section": "threshold-and-report",
+        "description": "Identify the actual information-report requirement."
+      },
+      {
+        "label": "Compare computation methods",
+        "section": "computation-choice",
+        "description": "Model eligible deductions, credits and preparation cost."
+      },
+      {
+        "label": "Review the 2026 research credit",
+        "section": "research-credit-change",
+        "description": "Check current eligibility, federal evidence and filing procedure."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas franchise-tax report forms for 2026",
+        "href": "https://comptroller.texas.gov/taxes/franchise/forms/2026-franchise.php"
+      },
+      {
+        "label": "Requirements for reporting and paying franchise tax",
+        "href": "https://comptroller.texas.gov/taxes/franchise/filing-requirements.php"
+      },
+      {
+        "label": "Subchapter T research-and-development franchise-tax credit guidance",
+        "href": "https://comptroller.texas.gov/taxes/franchise/research-dev-credit.php"
+      }
+    ]
+  },
+  "texas-hiring-labor-cost-planning": {
+    "question": "How should a Texas employer price a hiring plan?",
+    "answer": "Use the public data to frame a role-specific recruiting test. August 2026 employment observations and May 2025 wage estimates are different clocks; establishment jobs and unemployment do not count qualified applicants for a shift. Build the full compensation and training cost, measure actual offers and starts, and compare pay changes with the real capacity bottleneck and delay exposure.",
+    "paths": [
+      {
+        "label": "Read the local job signal",
+        "section": "local-job-signals",
+        "description": "Keep geography, industry, units and adjustment basis aligned."
+      },
+      {
+        "label": "Check the wage baseline",
+        "section": "wage-baseline",
+        "description": "Distinguish published averages from current offers and full employer cost."
+      },
+      {
+        "label": "Price pay against delay",
+        "section": "pay-versus-delay",
+        "description": "Calculate the declared staffing scenario without assuming a recruiting response."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas Labor Market Review, September 2026 edition",
+        "href": "https://texaslmi.com/api/GetHomeLinks/TLMR"
+      },
+      {
+        "label": "Occupational Employment and Wages in Dallas–Fort Worth–Arlington, May 2025",
+        "href": "https://www.bls.gov/regions/southwest/news-release/occupationalemploymentandwages_dallasfortworth.htm"
+      },
+      {
+        "label": "Technical Notes for May 2025 OEWS Estimates",
+        "href": "https://www.bls.gov/oes/current/oes_tec.htm"
+      }
+    ]
+  },
+  "texas-cross-border-logistics-business-planning": {
+    "question": "When does a Texas–Mexico route deliver better total cost?",
+    "answer": "Qualify the complete itinerary, customs basis and usable receiving window. Freight value and inbound truck counts have different populations and cannot establish shipment reliability. Verify actual commercial and inspection schedules, then compare freight, pipeline inventory, handling and failure cost using comparable shipment evidence. The route preference can reverse when a small assumed service advantage disappears.",
+    "paths": [
+      {
+        "label": "Read the correct denominator",
+        "section": "value-and-movements",
+        "description": "Separate nominal value, truck entries, direction and mode."
+      },
+      {
+        "label": "Verify the schedule",
+        "section": "schedules",
+        "description": "Distinguish commercial traffic from published office hours."
+      },
+      {
+        "label": "Work the landed-cost comparison",
+        "section": "route-economics",
+        "description": "Price freight, inventory and missed-window assumptions together."
+      }
+    ],
+    "sources": [
+      {
+        "label": "North American transborder freight, July 2026",
+        "href": "https://www.bts.gov/newsroom/north-american-transborder-freight-valued-1576-billion-july-2026-188-july-2025"
+      },
+      {
+        "label": "Laredo International Bridge System official directory",
+        "href": "https://www.cityoflaredo.com/departments/bridge-system"
+      },
+      {
+        "label": "USMCA: official certification-of-origin guidance",
+        "href": "https://www.help.cbp.gov/s/article/Article-1736"
+      }
+    ]
+  },
+  "texas-manufacturing-capacity-procurement": {
+    "question": "When is new Texas manufacturing capacity usable by a buyer?",
+    "answer": "Match the exact product and approved manufacturing route to qualification, allocation and accepted receipt. TI’s production start, Samsung’s year-end expectation and GlobalWafers’ customer qualifications establish different stages. Public award dollars and impact estimates do not supply buyer-specific output. Work gross production through yields and allocation, then obtain a dated commercial commitment and an executable alternate.",
+    "paths": [
+      {
+        "label": "Compare the project stages",
+        "section": "project-evidence",
+        "description": "Separate production, a completed shell, an outlook and customer qualification."
+      },
+      {
+        "label": "Model buyer-allocated output",
+        "section": "allocated-output-model",
+        "description": "Convert declared gross output through yields and allocation."
+      },
+      {
+        "label": "Prepare the procurement evidence",
+        "section": "buyer-checklist",
+        "description": "Identify the part, route, volume, delivery and remaining conditions."
+      }
+    ],
+    "sources": [
+      {
+        "label": "TI announces the start of production at Sherman SM1",
+        "href": "https://www.ti.com/about-ti/newsroom/news-releases/2025/texas-instruments-begins-production-at-its-newest-300mm-semiconductor-manufacturing-facility-in-sherman-texas.html"
+      },
+      {
+        "label": "Samsung October 2026 Austin and Taylor update",
+        "href": "https://semiconductor.samsung.com/sas/local-news/samsung-austin-semiconductors-two-campuses-inject-10-9b-into-central-texas-economy-in-2025/"
+      },
+      {
+        "label": "GlobalWafers second-quarter 2026 results and expansion update",
+        "href": "https://www.sas-globalwafers.com/en/gwc_news_en_20260804/"
+      }
+    ]
+  },
+  "texas-commercial-property-insurance-diligence": {
+    "question": "What must a Texas commercial policy establish for a recovery plan?",
+    "answer": "Test the same loss against the issued policy’s insured property, covered cause, settlement basis, deductible, sublimits and business-income trigger. A zero TWIA rate-change filing does not establish an individual premium. Wind and flood differ; physical repair and suspended income differ. Price retained loss and restart liquidity, preserving the actual forms and endorsements rather than relying on a certificate.",
+    "paths": [
+      {
+        "label": "Map peril and insured property",
+        "section": "hazard-and-policy",
+        "description": "Follow the event into the actual contract."
+      },
+      {
+        "label": "Compare dollar retention",
+        "section": "valuation-and-deductible",
+        "description": "Normalize deductible bases and settlement before premiums."
+      },
+      {
+        "label": "Read business-income terms",
+        "section": "business-income",
+        "description": "Check the suspension trigger, time deductible and separate limits."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Commercial property insurance guide",
+        "href": "https://www.tdi.texas.gov/pubs/consumer/cb021.html"
+      },
+      {
+        "label": "TWIA-17 Business Income and Extra Expense endorsement",
+        "href": "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf"
+      },
+      {
+        "label": "TDI TWIA submissions: commercial filing P-0826-02",
+        "href": "https://www.tdi.texas.gov/submissions/indextwia.html"
+      }
+    ]
   }
 }

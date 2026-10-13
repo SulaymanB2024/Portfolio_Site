@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "articleSlug": "texas-cross-border-logistics-business-planning",
+  "researchCutoff": "2026-10-12",
+  "status": "released to root after scoped checks",
+  "sourcePolicy": "Primary BTS, City of Laredo and CBP sources. No current tariff rate inferred; shipment-specific legal treatment remains outside the declared routing scenario.",
+  "observations": {
+    "freightJuly2026": {
+      "published": "2026-09-23",
+      "unit": "billions of current USD, imports plus exports",
+      "usMexicoAllModes": 94.8,
+      "usMexicoAnnualChangePercent": 27.5,
+      "usMexicoTruck": 74.6
+    },
+    "truckEntriesJuly2026": {
+      "published": "2026-09-14",
+      "inboundFromMexico": 650466,
+      "scope": "whole southern land border; arriving-truck crossings, not unique vehicles",
+      "annualChangeDescription": "essentially unchanged"
+    },
+    "laredo2025InboundTruckSharePercent": 38.8,
+    "colombiaPublishedCommercialSchedule": {
+      "weekdays": "08:00–22:30",
+      "Saturday": "08:00–16:00",
+      "Sunday": "no commercial traffic",
+      "qualification": "Published City directory, not day-specific CBP inspection guarantee"
+    },
+    "tollEffectiveDateFlag": "2027-01-01"
+  },
+  "claims": [
+    {
+      "id": "logistics-01",
+      "claim": "July freight values and nominal annual growth; main gateway context",
+      "sourceId": "freight",
+      "primaryUrl": "https://www.bts.gov/newsroom/north-american-transborder-freight-valued-1576-billion-july-2026-188-july-2025",
+      "sourceDate": "2026-09-23",
+      "referencePeriod": "2026-07",
+      "pinpoint": "Total freight and border/mode table; reporting notes",
+      "status": "published statistical release; revisable",
+      "qualification": "Both directions and all modes for headline; freight USD does not measure freight tonnage or service performance."
+    },
+    {
+      "id": "logistics-02",
+      "claim": "650,466 inbound truck crossings from Mexico, essentially flat annual",
+      "sourceId": "crossings",
+      "primaryUrl": "https://www.bts.gov/data-spotlight/mid-year-2026-border-crossing-data-release",
+      "sourceDate": "2026-09-14",
+      "referencePeriod": "2026-07",
+      "status": "published statistical count",
+      "qualification": "Whole border, one direction. Cannot form value-per-truck ratio with both-direction/all-mode value."
+    },
+    {
+      "id": "logistics-03",
+      "claim": "Laredo 38.8% of Mexico inbound trucks in 2025",
+      "sourceId": "annual-crossings",
+      "primaryUrl": "https://www.bts.gov/newsroom/border-crossing-data-annual-release-2025",
+      "sourceDate": "2026-02-20",
+      "referencePeriod": "2025",
+      "status": "historical annual observation"
+    },
+    {
+      "id": "logistics-04",
+      "claim": "Truck/container definitions and customs-port scope",
+      "sourceId": "crossing-method",
+      "primaryUrl": "https://www.bts.gov/browse-statistical-products-and-data/statistical-products/border-crossingentry-data-faq",
+      "sourceDate": "2017-05-25",
+      "pinpoint": "Port definitions; data element definitions",
+      "status": "official method",
+      "qualification": "No unique-vehicle interpretation; bridge-specific counts not supplied by port aggregate. Historical lag statement not used as current release schedule."
+    },
+    {
+      "id": "logistics-05",
+      "claim": "Trade state totals and port locations are distinct; mode/geography definitions",
+      "sourceId": "trade-method",
+      "primaryUrl": "https://www.bts.gov/statistical-products/transborder-freight-data/north-american-transborder-freight-data-faqs",
+      "sourceDate": "2018-11-28",
+      "pinpoint": "Questions 19, 24–26, 28, 30",
+      "status": "official method"
+    },
+    {
+      "id": "logistics-06",
+      "claim": "Published Colombia commercial schedule, World Trade office-hours distinction, future toll effective flag",
+      "sourceId": "bridges",
+      "primaryUrl": "https://www.cityoflaredo.com/departments/bridge-system",
+      "sourceDate": null,
+      "observedOn": "2026-10-12",
+      "pinpoint": "Bridge III Commercial Traffic Hours; Bridge IV Office Hours; ordinances",
+      "status": "current published directory; operational confirmation pending",
+      "qualification": "Current-day inspection availability not established. No October toll amount inferred from January 2027 effective-date listing."
+    },
+    {
+      "id": "logistics-07",
+      "claim": "USMCA nine-element certification and flexible format",
+      "sourceId": "origin",
+      "primaryUrl": "https://www.help.cbp.gov/s/article/Article-1736",
+      "sourceDate": "2026-02-27",
+      "status": "official guidance",
+      "qualification": "Primary indexed source content read; help page may fail rendering. No particular item eligibility, free-trade duty or tariff-preemption assertion."
+    },
+    {
+      "id": "logistics-08",
+      "claim": "Precise commodity descriptions for advance manifest data",
+      "sourceId": "manifest",
+      "primaryUrl": "https://www.help.cbp.gov/s/article/Article-1898",
+      "sourceDate": "2026-02-13",
+      "status": "official guidance",
+      "qualification": "Not exhaustive filing guidance."
+    },
+    {
+      "id": "logistics-09",
+      "claim": "CBP provides prospective binding ruling pathway",
+      "sourceId": "rulings",
+      "primaryUrl": "https://www.help.cbp.gov/s/article/Article-1866",
+      "sourceDate": "2026-02-27",
+      "status": "official process; no filing initiated"
+    }
+  ],
+  "calculations": [
+    {
+      "id": "two-route-model",
+      "status": "declared hypothetical, not carrier observations",
+      "inputs": {
+        "shipmentsYear": 120,
+        "dailyGoodsCostUSD": 20000,
+        "freightPerShipmentUSD": [
+          3000,
+          3200
+        ],
+        "pipelineCalendarDays": [
+          5,
+          3
+        ],
+        "annualCarryingFraction": 0.2,
+        "missedReceivingWindowsYear": [
+          6,
+          2
+        ],
+        "incidentCostUSD": 5000
+      },
+      "formulas": [
+        "annualFreight=shipmentsYear*freightPerShipment",
+        "averagePipelineInventory=dailyGoodsCost*pipelineDays",
+        "annualCarrying=averagePipelineInventory*annualCarryingFraction",
+        "annualIncidentCost=missedWindows*incidentCost",
+        "comparedCost=annualFreight+annualCarrying+annualIncidentCost"
+      ],
+      "results": {
+        "annualFreightUSD": [
+          360000,
+          384000
+        ],
+        "averagePipelineInventoryUSD": [
+          100000,
+          60000
+        ],
+        "annualCarryingUSD": [
+          20000,
+          12000
+        ],
+        "annualIncidentCostUSD": [
+          30000,
+          10000
+        ],
+        "annualComparedCostUSD": [
+          410000,
+          406000
+        ],
+        "routeBAdvantageUSD": 4000,
+        "oneExtraBIncidentResultUSD": 411000
+      },
+      "qualification": "Same goods, duty and common handling assumed; omitted common costs are not zero. No service probabilities inferred from BTS. One additional B incident reverses preference. Annual carrying expense applies to average pipeline once, not per shipment."
+    }
+  ],
+  "updateTriggers": [
+    "New BTS observation or correction for same population",
+    "Commercial bridge schedule or closure notice",
+    "2027-01-01 toll effective flag and actual fee schedule",
+    "Carrier quote or shipment receipt evidence change",
+    "Commodity, origin basis, production process or applicable customs rules change"
+  ],
+  "remainingUncertainty": [
+    "No current product-specific tariff rate or USMCA qualification established.",
+    "Complete shipment-day customs/broker/inspection schedule not verified; World Trade listing is office hours.",
+    "Carrier quotes, delays and missed-window counts are hypothetical.",
+    "CBP help pages can fail direct rendering; primary indexed content was available."
+  ]
+}

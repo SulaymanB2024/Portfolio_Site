@@ -1,0 +1,183 @@
+{
+  "articleSlug": "texas-commercial-property-insurance-diligence",
+  "cutoff": "2026-10-12",
+  "sourcePolicy": "Primary TDI/TWIA/FEMA material only. Actual commercial forms and commercial filing status; no residential price proxy, statewide premium forecast, site insurability finding or claim-payment claim.",
+  "claims": [
+    {
+      "id": "coverage-categories",
+      "claim": "TDI commercial guide distinguishes basic/broad/special forms and common exclusions; actual form and endorsements control.",
+      "sources": [
+        {
+          "url": "https://www.tdi.texas.gov/pubs/consumer/cb021.html",
+          "date": "Updated 2025-12-09",
+          "status": "current commercial guidance updated 2025-12-09"
+        }
+      ],
+      "status": "current commercial guidance updated 2025-12-09",
+      "recheckTrigger": "Changed policy/endorsement, applicable law or TDI guidance"
+    },
+    {
+      "id": "2026-twia-rate-action",
+      "claim": "TWIA board August 4, 2026 voted 0% filing for 2027; own commercial rate adequacy analysis indicates adequate by 4%, not a 4% premium reduction.",
+      "sources": [
+        {
+          "url": "https://www.twia.org/twia-board-directs-filing-for-no-rate-increase-in-2027/",
+          "date": "2026-08-04",
+          "status": "dated insurer-specific action and actuarial assessment"
+        }
+      ],
+      "status": "dated insurer-specific action and actuarial assessment",
+      "recheckTrigger": "New filing, actuarial assumptions, legislative funding or actual renewal quote"
+    },
+    {
+      "id": "commercial-rate-filing-status",
+      "claim": "TDI lists P-0826-02/S739761 submitted August 4, 2026 as File and Use. No project premium or separately dated approval order inferred.",
+      "sources": [
+        {
+          "url": "https://www.tdi.texas.gov/submissions/indextwia.html",
+          "date": "Filing submitted 2026-08-04; register reviewed 2026-10-12",
+          "status": "public register state as of 2026-10-12"
+        }
+      ],
+      "status": "public register state as of 2026-10-12",
+      "recheckTrigger": "New TDI filing/disapproval/order or register correction"
+    },
+    {
+      "id": "wind-eligibility",
+      "claim": "TWIA wind/hail only; eligibility requires designated area, private declination, certification with limited exceptions, underwriting and flood proof when required.",
+      "sources": [
+        {
+          "url": "https://www.twia.org/property-owners/get-windstorm-insurance/",
+          "date": "Undated current guidance",
+          "status": "current agency/association eligibility guidance; specific facility unverified"
+        }
+      ],
+      "status": "current agency/association eligibility guidance; specific facility unverified",
+      "recheckTrigger": "Site application, alteration, code certificate, private coverage or new eligibility rule"
+    },
+    {
+      "id": "form-exclusions",
+      "claim": "Currently linked TWCP edition August 31, 2023 excludes specified flood/surge causes and off-premises utility failure with stated on-premises equipment exception.",
+      "sources": [
+        {
+          "url": "https://www.twia.org/wp-content/uploads/TWIA-Commercial-Policy-HB-3208.pdf",
+          "date": "Edition 2023-08-31",
+          "status": "sample form evidence; no issued policy or claim result verified"
+        }
+      ],
+      "status": "sample form evidence; no issued policy or claim result verified",
+      "recheckTrigger": "Issued endorsement, replacement form or fact pattern of a real loss"
+    },
+    {
+      "id": "nfip-commercial-scope",
+      "claim": "NFIP guidance gives up to $500k non-residential building and $500k contents separately; interruption and loss of use excluded.",
+      "sources": [
+        {
+          "url": "https://agents.floodsmart.gov/topics/selling-flood-insurance/coverage",
+          "date": "Undated current program guidance",
+          "status": "current federal program guidance; not private flood terms"
+        }
+      ],
+      "status": "current federal program guidance; not private flood terms",
+      "recheckTrigger": "Revised federal limits/forms, issued policy or private/excess coverage evidence"
+    },
+    {
+      "id": "settlement-and-roof",
+      "claim": "TDI distinguishes replacement cost and actual cash value; TWIA catalogue has both commercial replacement-cost and roof-excluding replacement-cost forms.",
+      "sources": [
+        {
+          "url": "https://www.tdi.texas.gov/pubs/consumer/cb021.html",
+          "date": "Updated 2025-12-09",
+          "status": "guidance and sample catalogue; attachment unverified"
+        },
+        {
+          "url": "https://www.twia.org/forms-sample-policies-endorsements-certificates/",
+          "date": "Current catalogue reviewed 2026-10-12",
+          "status": "guidance and sample catalogue; attachment unverified"
+        }
+      ],
+      "status": "guidance and sample catalogue; attachment unverified",
+      "recheckTrigger": "Issued endorsement, insured values or settlement condition change"
+    },
+    {
+      "id": "business-income-and-form-specific-terms",
+      "claim": "TDI generally links BI to direct physical covered loss. Currently linked TWIA-17 effective Nov 27, 2011 has covered wind/hail suspension, daily/total limits, 168-hour time deductible, $10k extra-expense maximum and net-income/continuing-expense definition.",
+      "sources": [
+        {
+          "url": "https://www.tdi.texas.gov/general/business-insurance.html",
+          "date": "Updated 2026-06-25",
+          "status": "general guidance plus form-specific actual clauses; no universal 2026 rule or payment estimate"
+        },
+        {
+          "url": "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf",
+          "date": "Effective 2011-11-27; currently linked",
+          "status": "general guidance plus form-specific actual clauses; no universal 2026 rule or payment estimate"
+        },
+        {
+          "url": "https://www.twia.org/forms-sample-policies-endorsements-certificates/",
+          "date": "Current catalogue reviewed 2026-10-12",
+          "status": "general guidance plus form-specific actual clauses; no universal 2026 rule or payment estimate"
+        }
+      ],
+      "status": "general guidance plus form-specific actual clauses; no universal 2026 rule or payment estimate",
+      "recheckTrigger": "Endorsement attachment/version, financial evidence, trigger, restoration schedule or terms change"
+    },
+    {
+      "id": "carrier-and-certificate",
+      "claim": "Eligible surplus-lines insurers differ from Texas-licensed carriers; selling agents need licensing; surplus-lines insurers lack guaranty-association membership. Certificates cannot expand policy coverage; actual policy/endorsement/law determines notice rights.",
+      "sources": [
+        {
+          "url": "https://www.tdi.texas.gov/pubs/consumer/cb015.html",
+          "date": "Updated 2025-04-25",
+          "status": "current guidance with statutory scope and exceptions"
+        },
+        {
+          "url": "https://www.tdi.texas.gov/certificates/faq.html",
+          "date": "Updated 2022-10-31",
+          "status": "current guidance with statutory scope and exceptions"
+        }
+      ],
+      "status": "current guidance with statutory scope and exceptions",
+      "recheckTrigger": "Insurer eligibility/financial change, issued endorsements or new certificate law"
+    },
+    {
+      "id": "hypothetical-quote-and-liquidity",
+      "claim": "$12m×3%=$360k; $600k−$360k=$240k; $600k−$100k=$500k. Premium difference $120k−$90k=$30k; extra retention $260k; $260k/$30k≈8.7 years. 168h/24=7 days; ×assumed $8k/day=$56k. All prices/losses invented; no loss probability or claim result estimated.",
+      "sources": [
+        {
+          "url": "https://www.tdi.texas.gov/pubs/consumer/cb021.html",
+          "date": "Updated 2025-12-09",
+          "status": "calculated hypothetical comparison and cash-flow sensitivity"
+        },
+        {
+          "url": "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf",
+          "date": "Effective 2011-11-27; currently linked",
+          "status": "calculated hypothetical comparison and cash-flow sensitivity"
+        }
+      ],
+      "status": "calculated hypothetical comparison and cash-flow sensitivity",
+      "recheckTrigger": "Any input/coverage change; preserve denominator, covered-loss assumptions and omitted terms"
+    }
+  ],
+  "checks": [
+    {
+      "check": "JSON parse, source fragments, table dimensions and four FAQs",
+      "result": "passed"
+    },
+    {
+      "check": "Hypothetical deductible/payment/retention/premium and waiting-period arithmetic",
+      "result": "passed"
+    },
+    {
+      "check": "Commercial filing identity and form dates",
+      "result": "verified against TDI register and TWIA current catalogue"
+    },
+    {
+      "check": "Word count and 220-wpm estimate",
+      "mainWords": 2075,
+      "faqWords": 154,
+      "result": "passed"
+    }
+  ],
+  "remainingBoundary": "Root integrates and visually verifies. Issued policy wording, facility physical evidence, actual quotations, eligibility, private flood terms and claim facts remain transaction-specific."
+}
