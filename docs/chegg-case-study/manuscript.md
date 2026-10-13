@@ -42,6 +42,27 @@ The scale comparison gives that conviction a useful measure. I would track skill
 
 Skilling’s share doubled chiefly because Academic Services contracted. The $0.317m skilling gain offset only 0.6% of the $53.588m academic revenue loss. Q2-to-Q2 comparison; USD millions. [S2](#source-s2)
 
+## A clearer route from learning to employment
+
+Chegg’s next product direction makes my positive case more specific. Management described a new employability service that connects job search, matching and coaching with the company’s learning products. It reported more than 10,000 beta users and six new partners, including OpenSesame and Dale Carnegie, with partner launches planned for the second half of 2026. These are useful starting points for a business that needs new distribution and a reason for customers to stay. [S3](#source-s3)
+
+I see a coherent opportunity in combining those capabilities. Skills training can help a learner become ready for a role; matching and coaching can help that learner act on the training. If the combination improves useful outcomes, Chegg can sell a continuing service to institutions and employers as well as individual students. That gives the reinvention a customer problem to solve and a route to reach the customer.
+
+The strongest next evidence would connect those starting points to recurring economics. Beta users are not disclosed paying subscribers, and a signed partner is not recognized revenue. I would follow the share of learners who become paying customers, cash collected per cohort, the delivery cost and renewal after the first contract. Growth through a partner also needs to cover the partner’s share of revenue. Those measures would tell us when to increase the investment behind a channel.
+
+Chegg’s Skills survey offers an encouraging signal about usefulness: 43% of surveyed graduates reported working more efficiently, and 41% reported better work quality. These are self-reported outcomes from graduates, rather than a controlled estimate for every enrolled learner. I treat them as evidence for a proposition worth developing, then look for employer renewal and paid adoption to establish the commercial result. [S8](#source-s8)
+
+
+What the new distribution evidence can establish
+
+| Reported starting point | Next commercial test |
+| --- | --- |
+| More than 10,000 beta users | Paid conversion, useful outcomes and repeat use |
+| Six new partners signed in 2026 | Launch, incremental collections and partner economics |
+| 43% report greater work efficiency | Employer renewal and results beyond responding graduates |
+
+Company-reported beta/partner evidence and graduate survey results; not disclosed subscriber additions, contract revenue or causal estimates. [S3](#source-s3) [S8](#source-s8)
+
 ## The financial reset is producing real cash
 
 Free cash flow is operating cash flow less cash purchases of property and equipment under Chegg’s definition. The first-half comparison therefore has a simple explanation: operating cash flow fell by $5.525m, while cash capital expenditure fell by $11.195m. The second movement more than offset the first, lifting free cash flow by $5.670m. [S2](#source-s2) [S3](#source-s3)
@@ -222,6 +243,8 @@ The milestones I would most like to see are growing absolute skilling contributi
 
 Product-line contribution margins, cohort retention, partnership conversion, normalized development needs and a current post-repayment cash balance remain important areas to assess. The model keeps those gaps visible rather than replacing them with undisclosed company estimates. My belief in Chegg is compatible with looking for better evidence: each new observation can make the investment and operating case more precise.
 
+The public-company structure also needs attention during the transition. Chegg received a new NYSE minimum-price notice on July 24, after regaining compliance earlier in the year. The notice allowed a six-month cure period, and the board retained shareholder-approved flexibility for a reverse split. I want the recovery judged by customer economics and underlying value per original share; a change in the quoted share unit does not create operating cash. [S7](#source-s7) [S9](#source-s9)
+
 - Replacement: compare skilling’s incremental dollars and contribution with the legacy dollars and contribution lost.
 - Cash quality: separate operating improvement from capex reductions and temporary releases of working capital.
 - Investment quality: connect spending to retention, reliable delivery and customer payback.
@@ -260,3 +283,15 @@ Strategic targets are management expectations, not proof of future growth or ind
 **S6 · [Chegg Q1 2026 earnings release](https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Reports-First-Quarter-2026-Earnings/default.aspx)** — 2026-05-06
 Q1 revenue, skilling growth and profitability; discussion of enterprise/channel partnerships and AI-focused offerings.
 Quarterly growth and named distribution partnerships do not establish long-run retention, unit margins or customer acquisition payback.
+
+**S7 · [Chegg receives a new NYSE continued-listing notice](https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Receives-Continued-Listing-Standard-Notice-from-NYSE/default.aspx)** — 2026-07-24
+New minimum-price notice, separate from the earlier cured notice; six-month cure period and stated reverse-split option.
+The July disclosure does not establish that later compliance was restored. No delisting or implemented split is inferred.
+
+**S8 · [Chegg Q1 2026 prepared remarks and graduate survey](https://www.sec.gov/Archives/edgar/data/1364954/000136495426000045/a9901-financialresultsq120.htm)** — 2026-05-06
+Self-reported graduate outcomes: 43% greater efficiency and 41% improved work quality; source of the commercial-usefulness discussion.
+Graduate self-reports are selected observations, not a controlled causal estimate for all learners or proof of employer renewal.
+
+**S9 · [Chegg annual-meeting results and earlier NYSE compliance](https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Announces-Annual-Stockholder-Meeting-Results-and-Regains-NYSE-Compliance/default.aspx)** — 2026-06-17
+Shareholders approved reverse-split flexibility; board chose not to implement then after receiving June1 compliance confirmation.
+Superseded on minimum-price status by the July24 new notice; approval is not implementation.

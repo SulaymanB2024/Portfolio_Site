@@ -25,8 +25,8 @@ article = {'slug': 'chegg-cash-flow-turnaround',
                  'AI disruption',
                  'capital allocation'],
  'date': '2026-10-12',
- 'dateModified': '2026-10-12',
- 'readTime': '17 MIN',
+ 'dateModified': '2026-10-13',
+ 'readTime': '19 MIN',
  'kind': 'research',
  'image': '/images/social/chegg-cash-flow-turnaround.png',
  'author': 'Sulayman Bowles',
@@ -519,6 +519,29 @@ article = {'slug': 'chegg-cash-flow-turnaround',
                                'executed notebook and figure code. Edit the assumptions and rerun the stress '
                                'paths.',
                 'format': 'ZIP'}]}
+article["sections"].insert(2, {
+    "id": "commercial-evidence",
+    "title": "A clearer route from learning to employment",
+    "paragraphs": [
+        "Chegg’s next product direction makes my positive case more specific. Management described a new employability service that connects job search, matching and coaching with the company’s learning products. It reported more than 10,000 beta users and six new partners, including OpenSesame and Dale Carnegie, with partner launches planned for the second half of 2026. These are useful starting points for a business that needs new distribution and a reason for customers to stay. [S3](#source-s3)",
+        "I see a coherent opportunity in combining those capabilities. Skills training can help a learner become ready for a role; matching and coaching can help that learner act on the training. If the combination improves useful outcomes, Chegg can sell a continuing service to institutions and employers as well as individual students. That gives the reinvention a customer problem to solve and a route to reach the customer.",
+        "The strongest next evidence would connect those starting points to recurring economics. Beta users are not disclosed paying subscribers, and a signed partner is not recognized revenue. I would follow the share of learners who become paying customers, cash collected per cohort, the delivery cost and renewal after the first contract. Growth through a partner also needs to cover the partner’s share of revenue. Those measures would tell us when to increase the investment behind a channel.",
+        "Chegg’s Skills survey offers an encouraging signal about usefulness: 43% of surveyed graduates reported working more efficiently, and 41% reported better work quality. These are self-reported outcomes from graduates, rather than a controlled estimate for every enrolled learner. I treat them as evidence for a proposition worth developing, then look for employer renewal and paid adoption to establish the commercial result. [S8](#source-s8)"
+    ],
+    "table": {
+        "caption": "What the new distribution evidence can establish",
+        "columns": ["Reported starting point", "Next commercial test"],
+        "rows": [
+            ["More than 10,000 beta users", "Paid conversion, useful outcomes and repeat use"],
+            ["Six new partners signed in 2026", "Launch, incremental collections and partner economics"],
+            ["43% report greater work efficiency", "Employer renewal and results beyond responding graduates"]
+        ],
+        "note": "Company-reported beta/partner evidence and graduate survey results; not disclosed subscriber additions, contract revenue or causal estimates. [S3](#source-s3) [S8](#source-s8)"
+    }
+})
+article["sections"][-1]["paragraphs"].append(
+    "The public-company structure also needs attention during the transition. Chegg received a new NYSE minimum-price notice on July 24, after regaining compliance earlier in the year. The notice allowed a six-month cure period, and the board retained shareholder-approved flexibility for a reverse split. I want the recovery judged by customer economics and underlying value per original share; a change in the quoted share unit does not create operating cash. [S7](#source-s7) [S9](#source-s9)"
+)
 article["sources"] = json.loads((ROOT/"source-register.json").read_text())["sources"]
 
 def write_manuscript(article):

@@ -1,0 +1,43 @@
+{
+  "cutoff": "2026-10-12",
+  "entry_price_date_preserved_despite_environment_date_rollover": "2026-10-13",
+  "result": "passed",
+  "checks": [
+    "JSON parsed",
+    "four annual/interim/guidance source IDs resolve",
+    "source report dates at or before cutoff",
+    "latest disclosed share dates at or before cutoff",
+    "material cash bridges reproduced",
+    "EXPE H1 equity-credit period reversal corrected",
+    "DBX convertible principal cross-checked against debt note",
+    "Adobe historical Figma termination fee caveat retained"
+  ],
+  "artifact_manifest": [
+    {
+      "file": "inputs.json",
+      "bytes": 23590,
+      "sha256": "91fcff6509571c006bce637e61ba5047f921c6fb3ff8914a66d875fb84b135ff"
+    },
+    {
+      "file": "evidence.json",
+      "bytes": 47335,
+      "sha256": "1841a3373fd9e105a1d1aaee9eed35cd73d4b2b5c4608222327e2657114e9b9b"
+    },
+    {
+      "file": "assessment.md",
+      "bytes": 20794,
+      "sha256": "e04636c4f5561e29041a1d4b864fe5e960edc65a995770a9b671bd8ed0cf1c67"
+    },
+    {
+      "file": "build_evidence.py",
+      "bytes": 10739,
+      "sha256": "019f37296f58defbf691356d856625b7e0135014919572b03be28216891497b4"
+    },
+    {
+      "file": "acquisition.json",
+      "bytes": 9499,
+      "sha256": "44609f20e504e05baf24d460d62257cfd2b39cfb565152f25cde0144fc9ed532"
+    }
+  ],
+  "status": "Research evidence and candidate assessments complete; final forecast/integration remain root-owned"
+}

@@ -48,3 +48,9 @@ The native article is now 2,923 prose words / 17 minutes. All seven tables' colu
 Evidence: `positive-desktop-opening.jpg`, `positive-belief-opening.jpg`, `positive-phone-opening.jpg`, `positive-readback.json`, `positive-revision-guard.json` under `evidence/`. Earlier captures document the superseded framing.
 
 PR #89 was merged outside this session's tool flow and deployed at `2e865c379a8b7bc14000484bfa38c6d8bf545951`. The positive revision requires a follow-up PR. The merge command remained blocked by automatic approval review after explicit human approval; no further identical merge retries are warranted.
+
+Follow-up PR #91 at `0d4373245942913e6a297faba6ee038bb912e18e` passed GitHub CI and Vercel checks. READY preview `dpl_6FbogZ2DMMqTFggov7MDCTJGyXHW` returned HTTP 200 with the positive heading, exact “I believe in Chegg.” statement, positive conclusion, correct canonical URL and model download link. Production publication of the positive revision remains pending a direct GitHub merge and post-merge readback.
+
+## October 13 deeper analysis
+
+Native article: 3,282 words, 19 minutes, eight tables, three unchanged figures, nine sources; SHA256 `7972b6da7f79736106f07d9b2bb903fe7faad63a1116579a2c8f00b48a7e3e8e`. Added commercial evidence and listing-cure context while preserving the positive stance and exact belief statement. Independent Chegg arithmetic still passes. Desktop/phone commercial-section and opening review passed; no body overflow or browser errors. Final site quality/provenance, 28 reader tests, build and release checks passed with the four new longs. PR91 remains OPEN and production publication remains unverified.

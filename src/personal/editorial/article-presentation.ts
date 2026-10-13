@@ -6,6 +6,10 @@ export interface ArticlePresentation { form: ArticleForm; lines?: string[] }
 // Art direction follows the manuscript, not its publication date or array index.
 // Line breaks preserve the authored title; an edited title falls back to wrapping.
 export const articlePresentations: Record<string, ArticlePresentation> = {
+  'expedia-network-and-cash': { form: 'model', lines: ["Expedia: the network","beyond the booking."] },
+  'crocs-cash-and-brand-test': { form: 'model', lines: ["Crocs: a cash engine","with a brand test."] },
+  'paypal-margin-dollar-recovery': { form: 'model', lines: ["PayPal: a modest recovery","at $56."] },
+  'adobe-paid-workflows': { form: 'model', lines: ["Adobe: paid workflows","at a price I like."] },
   'chegg-cash-flow-turnaround': { form: 'case-study', lines: ['Why I believe in', 'Chegg’s reinvention.'] },
   'atlas-building-an-evidence-console': { form: 'case-study', lines: ['Building', 'Atlas'] },
   'jane-street-exact-search-solver-verification': { form: 'proof', lines: ['Verifying a 54-move', 'exact search.'] },
