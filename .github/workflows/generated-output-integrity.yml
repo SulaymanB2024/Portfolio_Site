@@ -36,5 +36,7 @@ jobs:
           node tools/test-article-opening.mjs
           node tools/verify-article-quality.mjs
           node tools/verify-restored-articles.mjs
+      - name: Check Texas research library and public evidence projection
+        run: npm run texas:check
       - run: npm run build
       - run: npm run verify:release

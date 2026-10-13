@@ -1,0 +1,154 @@
+{
+  "articleSlug": "texas-water-facility-site-diligence",
+  "cutoff": "2026-10-12",
+  "sourcePolicy": "Verified primary agency sources; claims retain observation period, geography and implementation status. Hypothetical calculations are not market estimates.",
+  "claims": [
+    {
+      "id": "plan-status",
+      "claim": "Initial 2027 plan adopted July 23, 2026; Phase II amendment still proposed after September 25 comment close; December consideration tentative. Proposed reservoir locations may be conceptual.",
+      "sources": [
+        {
+          "url": "https://www.twdb.texas.gov/waterplanning/swp/2027/index.asp",
+          "date": "Phase I adopted 2026-07-23; amendment status reviewed 2026-10-12",
+          "status": "adopted initial plan; proposed amendment"
+        }
+      ],
+      "status": "adopted initial plan; proposed amendment",
+      "recheckTrigger": "Amendment adoption, changed meeting date, revised regional data or sponsor project status"
+    },
+    {
+      "id": "plan-projections",
+      "claim": "TWDB projects 6% demand growth and 10% decline in existing drought-reliable supplies for 2030–2080; approximately 3,000 recommended projects. These are statewide planning estimates.",
+      "sources": [
+        {
+          "url": "https://texaswaternewsroom.org/pressreleases/2026-7-23_2027_swp_approved.html",
+          "date": "2026-07-23",
+          "status": "long-horizon planning projections"
+        }
+      ],
+      "status": "long-horizon planning projections",
+      "recheckTrigger": "Revised adopted plan or methodology; never turn projections into measured local shortage"
+    },
+    {
+      "id": "surface-water",
+      "claim": "State-water rights differ from groundwater; TCEQ describes priority dates and seniority during drought.",
+      "sources": [
+        {
+          "url": "https://www.tceq.texas.gov/permitting/water_rights/wr-permitting/wr_amiregulated.html",
+          "date": "Undated current guidance",
+          "status": "general agency guidance"
+        }
+      ],
+      "status": "general agency guidance",
+      "recheckTrigger": "Specific right, permit amendments, local watermaster actions or changed law"
+    },
+    {
+      "id": "supply-contract",
+      "claim": "Direct state-water purchase must fit the underlying right; TCEQ describes contract/new-right/amendment options and exceptions, plus submission fields. Not every retail customer must file.",
+      "sources": [
+        {
+          "url": "https://www.tceq.texas.gov/permitting/water_rights/watersupplycontracts",
+          "date": "Undated current guidance",
+          "status": "agency guidance; transaction applicability unverified"
+        }
+      ],
+      "status": "agency guidance; transaction applicability unverified",
+      "recheckTrigger": "Actual contract, underlying right, transfer or proposed-use change"
+    },
+    {
+      "id": "groundwater",
+      "claim": "Local GCDs can regulate non-exempt well production and spacing; each district has its own rules.",
+      "sources": [
+        {
+          "url": "https://www.twdb.texas.gov/groundwater/faq/faqgwm.asp",
+          "date": "Undated current guidance",
+          "status": "general agency guidance"
+        }
+      ],
+      "status": "general agency guidance",
+      "recheckTrigger": "District boundary/rule changes, actual permit and well-performance evidence"
+    },
+    {
+      "id": "drought",
+      "claim": "Drought contingency plans address temporary shortage; local customer-category rules and contract terms must be examined.",
+      "sources": [
+        {
+          "url": "https://www.twdb.texas.gov/drought/planning/index.asp",
+          "date": "Undated current guidance",
+          "status": "general planning guidance"
+        }
+      ],
+      "status": "general planning guidance",
+      "recheckTrigger": "Local supplier trigger, shortage restrictions or amended customer terms"
+    },
+    {
+      "id": "reuse",
+      "claim": "TCEQ Type II municipal uses include cooling-tower makeup; provision to another party needs written approval; industrial arrangements have different levels and on/off-site rules.",
+      "sources": [
+        {
+          "url": "https://www.tceq.texas.gov/assistance/water/reclaimed_water.html",
+          "date": "Undated current guidance",
+          "status": "agency guidance; no project authorization verified"
+        }
+      ],
+      "status": "agency guidance; no project authorization verified",
+      "recheckTrigger": "Changed source/use/location or actual reuse approval"
+    },
+    {
+      "id": "wastewater",
+      "claim": "Covered direct discharges and land disposal require authorization through a rule, commission order or permit. Site receiver and pretreatment conditions not verified.",
+      "sources": [
+        {
+          "url": "https://www.tceq.texas.gov/permitting/wastewater/industrial/",
+          "date": "Page modified 2026-03-02",
+          "status": "agency guidance modified 2026-03-02"
+        }
+      ],
+      "status": "agency guidance modified 2026-03-02",
+      "recheckTrigger": "Actual discharge path, permit/receiver changes or changed process residuals"
+    },
+    {
+      "id": "survey",
+      "claim": "2026 digital-infrastructure survey recipients report operational use during 2025; construction excluded; non-operating recipients contact TWDB.",
+      "sources": [
+        {
+          "url": "https://www.twdb.texas.gov/waterplanning/waterusesurvey/digitalinfrastructure.asp",
+          "date": "2026 survey; 2025 observation year",
+          "status": "current 2026 reporting guidance; 2025 observation period"
+        }
+      ],
+      "status": "current 2026 reporting guidance; 2025 observation period",
+      "recheckTrigger": "New annual survey, revised guidance or facility operating status"
+    },
+    {
+      "id": "hypothetical-math",
+      "claim": "300,000 gal/day × 365 = 109.5m gallons/year. 600,000 peak minus 400,000 supply = 200,000 daily gap; 400,000 usable storage / gap = 2 days; refill at 100,000/day = 4 days. 109.5m/1000 × $4/$4.75 = $438,000/$520,125; difference $82,125. Ten days × $60,000 = $600,000. All inputs invented.",
+      "sources": [
+        {
+          "url": "https://www.tceq.texas.gov/permitting/water_rights/watersupplycontracts",
+          "date": "Undated current guidance",
+          "status": "calculated illustration; no real contract or quoted price"
+        }
+      ],
+      "status": "calculated illustration; no real contract or quoted price",
+      "recheckTrigger": "Any input change; preserve annual/daily/instantaneous distinctions and omitted costs"
+    }
+  ],
+  "checks": [
+    {
+      "check": "JSON parse, citation fragments, table dimensions and four FAQs",
+      "result": "passed"
+    },
+    {
+      "check": "Hypothetical annual use, storage, refill, charges and delay sensitivity",
+      "result": "passed"
+    },
+    {
+      "check": "Word count and 220-wpm reading estimate",
+      "mainWords": 1988,
+      "faqWords": 179,
+      "result": "passed"
+    }
+  ],
+  "remainingBoundary": "Root owns integration and visual/publication verification. No local supplier, contract, well, engineering design or site-specific regulatory outcome verified."
+}

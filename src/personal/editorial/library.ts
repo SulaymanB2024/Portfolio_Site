@@ -99,6 +99,18 @@ export function readerSectionTitle(value: string) {
 }
 
 const connections: Record<string, string[]> = {
+  'texas-power-large-load-business-diligence': ['texas-water-facility-site-diligence', 'texas-data-center-sales-tax-project-economics'],
+  'texas-water-facility-site-diligence': ['texas-power-large-load-business-diligence', 'texas-commercial-property-insurance-diligence'],
+  'texas-property-tax-business-underwriting': ['texas-jeti-incentives-project-underwriting', 'texas-franchise-tax-reporting-business-decisions'],
+  'texas-data-center-sales-tax-project-economics': ['texas-power-large-load-business-diligence', 'texas-water-facility-site-diligence'],
+  'texas-jeti-incentives-project-underwriting': ['texas-property-tax-business-underwriting', 'texas-manufacturing-capacity-procurement'],
+  'texas-franchise-tax-reporting-business-decisions': ['texas-property-tax-business-underwriting', 'texas-business-court-contract-decisions'],
+  'texas-hiring-labor-cost-planning': ['texas-manufacturing-capacity-procurement', 'texas-cross-border-logistics-business-planning'],
+  'texas-cross-border-logistics-business-planning': ['texas-manufacturing-capacity-procurement', 'texas-hiring-labor-cost-planning'],
+  'texas-manufacturing-capacity-procurement': ['texas-hiring-labor-cost-planning', 'texas-power-large-load-business-diligence'],
+  'texas-commercial-property-insurance-diligence': ['texas-property-tax-business-underwriting', 'texas-water-facility-site-diligence'],
+  'texas-ai-law-business-compliance': ['texas-data-center-sales-tax-project-economics', 'texas-business-court-contract-decisions'],
+  'texas-business-court-contract-decisions': ['texas-ai-law-business-compliance', 'texas-franchise-tax-reporting-business-decisions'],
   'the-first-ai-managers': ['viralbench-codex-agent-harness', 'replayable-traces-ai-agent-evaluation'],
   'viralbench-codex-agent-harness': ['replayable-traces-ai-agent-evaluation', 'the-first-ai-managers'],
   'atlas-building-an-evidence-console': ['raw-html-rendered-dom-evidence', 'crawl-frontier-state-machine'],
