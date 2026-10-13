@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2160" height="1260" viewBox="0 0 864 504" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Sulayman Bowles · reproducible Chegg case study</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 504 
+L 864 504 
+L 864 0 
+L 0 0 
+L 0 504 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 90.72 393.12 
+L 829.44 393.12 
+L 829.44 110.88 
+L 90.72 110.88 
+L 90.72 393.12 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(144.689838 415.877813)">H1 2025</text>
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(122.824838 435.082188)">free cash flow</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(305.207446 415.879063)">Operating cash</text>
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(318.429946 435.083438)">flow decline</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(508.826304 415.879063)">Lower cash</text>
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(529.976304 435.082188)">capex</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(707.452662 415.877813)">H1 2026</text>
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(685.587662 435.082188)">free cash flow</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_5">
+      <path d="M 90.72 368.216471 
+L 829.44 368.216471 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_5">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="374.294596" transform="rotate(-0 81.72 374.294596)">−2.5</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7">
+      <path d="M 90.72 326.710588 
+L 829.44 326.710588 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_6">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="332.788713" transform="rotate(-0 81.72 332.788713)">0.0</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_9">
+      <path d="M 90.72 285.204706 
+L 829.44 285.204706 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_7">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="291.282831" transform="rotate(-0 81.72 291.282831)">2.5</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_11">
+      <path d="M 90.72 243.698824 
+L 829.44 243.698824 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12"/>
+     <g id="text_8">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="249.776949" transform="rotate(-0 81.72 249.776949)">5.0</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_13">
+      <path d="M 90.72 202.192941 
+L 829.44 202.192941 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14"/>
+     <g id="text_9">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="208.271066" transform="rotate(-0 81.72 208.271066)">7.5</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_15">
+      <path d="M 90.72 160.687059 
+L 829.44 160.687059 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_16"/>
+     <g id="text_10">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="166.765184" transform="rotate(-0 81.72 166.765184)">10.0</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_17">
+      <path d="M 90.72 119.181176 
+L 829.44 119.181176 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_18"/>
+     <g id="text_11">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="125.259301" transform="rotate(-0 81.72 125.259301)">12.5</text>
+     </g>
+    </g>
+    <g id="text_12">
+     <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="24.02375" y="252" transform="rotate(-90 24.02375 252)">Free cash flow · $m</text>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 124.298182 326.710588 
+L 233.098994 326.710588 
+L 233.098994 263.771068 
+L 124.298182 263.771068 
+z
+" clip-path="url(#p53b8e4c290)" style="fill: #24221e"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 687.061006 326.710588 
+L 795.861818 326.710588 
+L 795.861818 169.635727 
+L 687.061006 169.635727 
+z
+" clip-path="url(#p53b8e4c290)" style="fill: #24221e"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 311.88579 355.499068 
+L 420.686602 355.499068 
+L 420.686602 263.771068 
+L 311.88579 263.771068 
+z
+" clip-path="url(#p53b8e4c290)" style="fill: url(#hd421966028); stroke: #24221e; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 499.473398 355.499068 
+L 608.27421 355.499068 
+L 608.27421 169.635727 
+L 499.473398 169.635727 
+z
+" clip-path="url(#p53b8e4c290)" style="fill: #8f8b82; stroke: #24221e; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_19">
+    <path d="M 233.098994 263.771068 
+L 311.88579 263.771068 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #625f56; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_20">
+    <path d="M 420.686602 355.499068 
+L 499.473398 355.499068 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #625f56; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_21">
+    <path d="M 608.27421 169.635727 
+L 687.061006 169.635727 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #625f56; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_22">
+    <path d="M 90.72 326.710588 
+L 829.44 326.710588 
+" clip-path="url(#p53b8e4c290)" style="fill: none; stroke: #24221e; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 90.72 393.12 
+L 829.44 393.12 
+" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 18px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="178.698588" y="252.979539" transform="rotate(-0 178.698588 252.979539)">3.791</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 18px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="366.286196" y="375.421892" transform="rotate(-0 366.286196 375.421892)">−5.525</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 18px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="553.873804" y="158.844198" transform="rotate(-0 553.873804 158.844198)">+11.195</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 18px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="741.461412" y="158.844198" transform="rotate(-0 741.461412 158.844198)">9.461</text>
+   </g>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 23px; font-family: Georgia, serif; text-anchor: start; fill: #24221e" x="90.72" y="47.716406" transform="rotate(-0 90.72 47.716406)">Lower capex explains the cash-flow improvement</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 15px; font-family: Arial, sans-serif; text-anchor: start; fill: #625f56" x="90.72" y="79.437656" transform="rotate(-0 90.72 79.437656)">H1 2025 → H1 2026 · USD millions · historical reconciliation</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 13px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(90.72 474.859238)">FCF = operating cash flow − cash capex. Lower-capex savings exceeded the CFO decline.</text>
+   <text style="font-size: 13px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(90.72 490.462793)">Source: Chegg H1 cash-flow statements; author’s reconciliation. USD millions.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p53b8e4c290">
+   <rect x="90.72" y="110.88" width="738.72" height="282.24"/>
+  </clipPath>
+ </defs>
+ <defs>
+  <pattern id="hd421966028" patternUnits="userSpaceOnUse" x="0" y="0" width="72" height="72">
+   <rect x="0" y="0" width="73" height="73" fill="none"/>
+   <path d="M -36 36 
+L 36 -36 
+M -32 40 
+L 40 -32 
+M -28 44 
+L 44 -28 
+M -24 48 
+L 48 -24 
+M -20 52 
+L 52 -20 
+M -16 56 
+L 56 -16 
+M -12 60 
+L 60 -12 
+M -8 64 
+L 64 -8 
+M -4 68 
+L 68 -4 
+M 0 72 
+L 72 0 
+M 4 76 
+L 76 4 
+M 8 80 
+L 80 8 
+M 12 84 
+L 84 12 
+M 16 88 
+L 88 16 
+M 20 92 
+L 92 20 
+M 24 96 
+L 96 24 
+M 28 100 
+L 100 28 
+M 32 104 
+L 104 32 
+M 36 108 
+L 108 36 
+" style="fill: #24221e; stroke: #24221e; stroke-width: 1.0; stroke-linecap: butt; stroke-linejoin: miter"/>
+  </pattern>
+ </defs>
+</svg>

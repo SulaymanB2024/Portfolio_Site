@@ -1,0 +1,74 @@
+{
+  "units": "USD millions; growth rates in percent",
+  "historical": {
+    "fcf_h1_2025": "3.791",
+    "fcf_h1_2026": "9.461",
+    "cfo_change": "-5.525",
+    "capex_saving": "11.195",
+    "fcf_change": "5.670",
+    "fcf_h1_2026_at_h1_2025_capex": "-1.734",
+    "cfo_before_working_capital": "26.644",
+    "working_capital_change": "-12.483",
+    "cash_bridge_ending_including_restricted": "46.254",
+    "academic_revenue_loss_q2": "53.588",
+    "skilling_revenue_gain_q2": "0.317",
+    "skilling_offset_percent": "0.5915503470926326789579756662",
+    "skilling_mix_q2_2025_percent": "16.37842465753424657534246575",
+    "skilling_mix_q2_2026_percent": "33.81743138729772994657563309",
+    "skilling_growth_q2_percent": "1.841203461694836498809316373",
+    "academic_decline_q2_percent": "60.96265201415196295917090429",
+    "capex_reduction_percent": "70.43095312991506763133060711"
+  },
+  "replacement": [
+    {
+      "academic_decline_percent": "20.00",
+      "academic_revenue_lost": "6.86300",
+      "skilling_growth_for_flat_revenue_percent": "39.14109729668073457282993042",
+      "skilling_growth_for_flat_contribution_percent": "60.88615135039225377995766953"
+    },
+    {
+      "academic_decline_percent": "30.00",
+      "academic_revenue_lost": "10.29450",
+      "skilling_growth_for_flat_revenue_percent": "58.71164594502110185924489563",
+      "skilling_growth_for_flat_contribution_percent": "91.32922702558838066993650431"
+    },
+    {
+      "academic_decline_percent": "40.00",
+      "academic_revenue_lost": "13.72600",
+      "skilling_growth_for_flat_revenue_percent": "78.28219459336146914565986084",
+      "skilling_growth_for_flat_contribution_percent": "121.7723027007845075599153391"
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "Managed decline",
+      "four_quarter_revenue": "164.8411875",
+      "four_quarter_fcf_proxy": "-12.632272100",
+      "closing_liquidity": "25.367727900",
+      "minimum_liquidity": "25.367727900",
+      "headroom_to_reserve_floor": "0.367727900",
+      "first_reserve_breach_quarter": null,
+      "quarter_four_earnings_proxy": "-0.044842100"
+    },
+    {
+      "scenario": "Faster erosion",
+      "four_quarter_revenue": "148.8801400",
+      "four_quarter_fcf_proxy": "-22.980243475",
+      "closing_liquidity": "15.019756525",
+      "minimum_liquidity": "15.019756525",
+      "headroom_to_reserve_floor": "-9.980243475",
+      "first_reserve_breach_quarter": 3,
+      "quarter_four_earnings_proxy": "-4.753525975"
+    },
+    {
+      "scenario": "Stronger transition",
+      "four_quarter_revenue": "170.6315000",
+      "four_quarter_fcf_proxy": "-7.232503125",
+      "closing_liquidity": "30.767496875",
+      "minimum_liquidity": "30.767496875",
+      "headroom_to_reserve_floor": "5.767496875",
+      "first_reserve_breach_quarter": null,
+      "quarter_four_earnings_proxy": "2.679434375"
+    }
+  ]
+}

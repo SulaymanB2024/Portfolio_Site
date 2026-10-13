@@ -1,0 +1,56 @@
+{
+  "documentWidth": 390,
+  "figureScrollLeft": 120,
+  "figures": [
+    {
+      "loaded": true,
+      "src": "/images/research/chegg-revenue-replacement.svg"
+    },
+    {
+      "loaded": true,
+      "src": "/images/research/chegg-free-cash-flow-bridge.svg"
+    },
+    {
+      "loaded": true,
+      "src": "/images/research/chegg-liquidity-stress-test.svg"
+    }
+  ],
+  "tables": [
+    {
+      "focusable": true,
+      "scrollWidth": 390,
+      "width": 350
+    },
+    {
+      "focusable": true,
+      "scrollWidth": 390,
+      "width": 350
+    },
+    {
+      "focusable": true,
+      "scrollWidth": 350,
+      "width": 350
+    },
+    {
+      "focusable": true,
+      "scrollWidth": 390,
+      "width": 350
+    },
+    {
+      "focusable": true,
+      "scrollWidth": 520,
+      "width": 350
+    },
+    {
+      "focusable": true,
+      "scrollWidth": 350,
+      "width": 350
+    },
+    {
+      "focusable": true,
+      "scrollWidth": 650,
+      "width": 350
+    }
+  ],
+  "viewport": 390
+}

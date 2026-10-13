@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "purpose": "Bind newly researched initial editions without inventing historical restoration or revision provenance.",
+  "records": [
+    {
+      "slug": "chegg-cash-flow-turnaround",
+      "path": "src/personal/editorial/data/articles/chegg-cash-flow-turnaround.json",
+      "canonicalPath": "/research/financial-systems/chegg-cash-flow-turnaround",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "8cd8b4999f2ca631835c8c57943d6c2132721f9cfbc343bfc5373a711857fa00",
+      "proseWords": 2789,
+      "readTime": "16 MIN",
+      "claimsPath": "docs/chegg-case-study/source-register.json"
+    }
+  ]
+}

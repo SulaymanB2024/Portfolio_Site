@@ -1005,5 +1005,36 @@
         "href": "https://www.txdot.gov/business/road-bridge-maintenance/alternative-delivery/sh288-toll-lanes/executed-agreements.html"
       }
     ]
+  },
+  "chegg-cash-flow-turnaround": {
+    "question": "Can Chegg’s cash-flow improvement finance its skilling transition?",
+    "answer": "Debt retirement and lower investment buy time, but do not by themselves establish a durable recovery. H1 2026 free cash flow improved because a capex reduction exceeded the decline in operating cash flow. The case measures how much new revenue and contribution would need to replace the contracting academic business, then tests liquidity under declared assumptions. June pro forma cash after debt repayment is kept distinct from actual current cash.",
+    "paths": [
+      {
+        "label": "Explain the cash improvement",
+        "section": "free-cash-flow-bridge",
+        "description": "Reconcile operating cash flow, investment and free cash flow across matching periods."
+      },
+      {
+        "label": "Measure the replacement hurdle",
+        "section": "replacement-growth",
+        "description": "Separate growth in revenue share from the dollars of revenue and contribution required."
+      },
+      {
+        "label": "Test the transition reserve",
+        "section": "stress-test-results",
+        "description": "Inspect hypothetical cash paths and the conditions for staged investment."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Chegg Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1364954/000136495426000088/chgg-20260630.htm"
+      },
+      {
+        "label": "Chegg announces full repayment of convertible notes",
+        "href": "https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Announces-Full-Repayment-of-Convertible-Notes/default.aspx"
+      }
+    ]
   }
 }
