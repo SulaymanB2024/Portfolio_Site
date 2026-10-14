@@ -3,6 +3,17 @@
   "purpose": "Bind newly researched initial editions without inventing historical restoration or revision provenance.",
   "records": [
     {
+      "slug": "hyperliquid-valuation",
+      "path": "src/personal/editorial/data/articles/hyperliquid-valuation.json",
+      "canonicalPath": "/research/financial-systems/hyperliquid-valuation",
+      "datePublished": "2026-10-14",
+      "dateModified": "2026-10-14",
+      "articleSha256": "c6a96109a23612e6cce323255400049c2a492844a9bead5c7f5ca6a280ba0d6b",
+      "proseWords": 3485,
+      "readTime": "19 MIN",
+      "claimsPath": "public/research/hyperliquid-valuation/sources.csv"
+    },
+    {
       "slug": "texas-power-large-load-business-diligence",
       "path": "src/personal/editorial/data/articles/texas-power-large-load-business-diligence.json",
       "canonicalPath": "/research/texas/texas-power-large-load-business-diligence",
