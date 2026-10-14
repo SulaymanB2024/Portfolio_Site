@@ -12,6 +12,17 @@
       "proseWords": 2789,
       "readTime": "16 MIN",
       "claimsPath": "docs/chegg-case-study/source-register.json"
+    },
+    {
+      "slug": "hyperliquid-valuation",
+      "path": "src/personal/editorial/data/articles/hyperliquid-valuation.json",
+      "canonicalPath": "/research/financial-systems/hyperliquid-valuation",
+      "datePublished": "2026-10-14",
+      "dateModified": "2026-10-14",
+      "articleSha256": "0da88216988c753ebd183761e3e1ba2d9dd3cbf2d8993e7bbb527724e45925fd",
+      "proseWords": 3538,
+      "readTime": "19 MIN",
+      "claimsPath": "public/research/hyperliquid-valuation/sources.csv"
     }
   ]
 }
