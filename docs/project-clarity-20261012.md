@@ -25,7 +25,13 @@ Visual delivery is docs/project-sculptures-preview-20261014/sculpture-collection
 | Interaction / loading | Pass | All seven keyboard orbits/resets; native pointer drag/double-click, settled reduced motion, dark/light and sustained final rotor motion. |
 | Content readiness | Pass | Current geometry account and actual manifest comparison; factual sources/units/dates and prototype/proposal status preserved. |
 
-Next boundary: update the existing authorized PR #100 with this integrated result and reviewed overview, verify final-head remote checks, then deliver the native overview and direct project preview. Merge and production publication remain separately authorized.
+### MR delivery
+
+Published code commit **6d45a2c1eb0983d6a7e5bf37ef8865d198e32afc** to the existing authorized [PR #100](https://github.com/SulaymanB2024/Portfolio_Site/pull/100). The PR now describes the final seven-piece collection and full case-page change; it is open and mergeable. GitHub verify, Vercel and Vercel Preview Comments all report SUCCESS for that code commit. The overview in the PR body is pinned to that exact version. This follow-up records delivery without changing product code or any GLB.
+
+The hosted preview is ready but redirects this task's in-app browser to Vercel sign-in; hosted visual inspection is unverified. No protection or account settings were changed. The final local built views and overview are the visual evidence. The task's one-hour built preview lease owns PID26413, port4217, workspace above, and expires 2026-10-14T20:18:47.512846-04:00. The live Payroll core and Temporal index additionally advance 2,432 and 7,911 native frames respectively with changing quaternions. Temporary media/viewport measurement overrides were restored. Source/built-byte and remote delivery receipts remain in .cache/project-sculptures-r8/.
+
+Next boundary: human review of the new collection, then separately authorized merge/publication. Requested geometry, integration, native inspection, corrections and MR delivery are complete. The final documentation head's remote checks will be confirmed in the closeout receipt.
 
 The user requests a substantially more creative, abstract GLB for every project, specifically calling out PayrollPro, ViralBench, Experiments and Markets. This supersedes the earlier literal instrument direction. The seven project assets are the authorized surface. Continue the open PR #100 branch at a59819cbfbefa449405c7ababa31ddfb8ef5925c in this clean MR checkout. Preserve the approved helmet-level engraving, direct rotation, reduced motion, source-backed copy, ink/paper/type system and the accepted helmet itself. Atlas needs a project-only asset so the shared globe elsewhere remains intact. Original standalone work-study geometry remains available under public/work-studies/.
 

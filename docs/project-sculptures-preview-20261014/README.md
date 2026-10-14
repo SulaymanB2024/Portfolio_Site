@@ -6,15 +6,17 @@ The overview contains unchanged native captures of the final built GLBs at 390 Ã
 
 | Project | Sculpture | Construction |
 | --- | --- | --- |
-| PayrollPro | Covenant | Three open, engraved clasps join curved approval spines and fitted ferrules around an independently rotating terraced core. |
-| ViralBench | Evidence bloom | Five unequal folded membranes contain twenty real windows; capillary traces split around the cuts and return to a common spine. |
-| Experiments | Unfinished Continuum | A pierced cast path returns through three planes around a seated three-blade phase rotor. |
-| Markets | Equilibrium | A sinuous load spine and two pinched pressure membranes enclose unequal voids, joined by tension bridges and tapered counterpoises. |
-| InternshipDeadlines | Temporal aperture | Thirty-one lifted intervals grow around an interrupted spiral and a slow central index. |
-| Atlas | Palimpsest | Seven open topographic strata share a stitched archive spine and expose their layered interior. |
-| Sapien | Counterfactual choir | Three unequal split vessels reveal branching cores above a common braided root. |
+| [PayrollPro](https://portfolio-site-git-codex-project-f793a1-sulaymanb2024s-projects.vercel.app/work/payrollpro) | Covenant | Three open, engraved clasps join curved approval spines and fitted ferrules around an independently rotating terraced core. |
+| [ViralBench](https://portfolio-site-git-codex-project-f793a1-sulaymanb2024s-projects.vercel.app/work/viralbench) | Evidence bloom | Five unequal folded membranes contain twenty real windows; capillary traces split around the cuts and return to a common spine. |
+| [Experiments](https://portfolio-site-git-codex-project-f793a1-sulaymanb2024s-projects.vercel.app/work/miscellaneous) | Unfinished Continuum | A pierced cast path returns through three planes around a seated three-blade phase rotor. |
+| [Markets](https://portfolio-site-git-codex-project-f793a1-sulaymanb2024s-projects.vercel.app/work/investing-markets) | Equilibrium | A sinuous load spine and two pinched pressure membranes enclose unequal voids, joined by tension bridges and tapered counterpoises. |
+| [InternshipDeadlines](https://portfolio-site-git-codex-project-f793a1-sulaymanb2024s-projects.vercel.app/work/internshipdeadlines) | Temporal aperture | Thirty-one lifted intervals grow around an interrupted spiral and a slow central index. |
+| [Atlas](https://portfolio-site-git-codex-project-f793a1-sulaymanb2024s-projects.vercel.app/work/atlas) | Palimpsest | Seven open topographic strata share a stitched archive spine and expose their layered interior. |
+| [Sapien](https://portfolio-site-git-codex-project-f793a1-sulaymanb2024s-projects.vercel.app/work/sapien) | Counterfactual choir | Three unequal split vessels reveal branching cores above a common braided root. |
 
 These are original decorative sculptures. They do not depict measured results or a product interface. The accepted shader, helmet, physical print scale and manual interaction remain unchanged. Atlas now uses its own project GLB; the shared globe elsewhere remains intact.
+
+These links open the current PR branch preview. Vercel requires sign-in in the selected in-app browser; hosted visual inspection is unverified. The captures below and the verified local build show code commit 6d45a2c1eb0983d6a7e5bf37ef8865d198e32afc. GitHub CI and Vercel checks passed for that version. The PR remains open for review.
 
 Authoring: `node tools/build-project-sculptures.mjs`, with optional project slugs. The original case-model command delegates to this collection for PayrollPro and ViralBench. Source modules live in `tools/project-sculptures/`. Each compressed GLB carries its concept and original authorship; `public/portfolio-models/project-sculptures.json` records the exact hashes and validation. The seven assets total 2,571,536 bytes, use four to seven material batches apiece and contain 63,036â€“93,688 triangles.
 
