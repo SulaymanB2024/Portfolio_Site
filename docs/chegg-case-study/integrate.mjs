@@ -22,8 +22,8 @@ write('src/personal/editorial/data/catalog.json', catalog)
 const guidePath = 'src/personal/editorial/data/reader-guides.json'
 const guides = read(guidePath)
 guides[article.slug] = {
-  question: 'Can Chegg’s cash-flow improvement finance its skilling transition?',
-  answer: 'Debt retirement and lower investment buy time, but do not by themselves establish a durable recovery. H1 2026 free cash flow improved because a capex reduction exceeded the decline in operating cash flow. The case measures how much new revenue and contribution would need to replace the contracting academic business, then tests liquidity under declared assumptions. June pro forma cash after debt repayment is kept distinct from actual current cash.',
+  question: 'Why do I believe in Chegg’s reinvention?',
+  answer: 'I believe in Chegg because it has made tangible progress: retiring its remaining debt, generating operating cash through restructuring and building its skilling business. Those actions provide a foundation for a more focused company. The case explains that progress and the disciplined investment that can support the next stage, using reported results and clearly labeled assumptions.',
   paths: [
     {label:'Explain the cash improvement', section:'free-cash-flow-bridge', description:'Reconcile operating cash flow, investment and free cash flow across matching periods.'},
     {label:'Measure the replacement hurdle', section:'replacement-growth', description:'Separate growth in revenue share from the dollars of revenue and contribution required.'},
@@ -47,8 +47,8 @@ mkdirSync('public/images/social',{recursive:true})
 const social = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
 <rect width="1200" height="630" fill="#f5f2ea"/>
 <text x="72" y="71" font-family="Arial,sans-serif" font-size="16" letter-spacing="2" fill="#625f56">FINANCIAL CASE STUDY · CHEGG</text>
-<text x="72" y="160" font-family="Georgia,serif" font-size="59" fill="#24221e">Can Chegg finance</text>
-<text x="72" y="227" font-family="Georgia,serif" font-size="59" fill="#24221e">its own reinvention?</text>
+<text x="72" y="160" font-family="Georgia,serif" font-size="59" fill="#24221e">Why I believe in</text>
+<text x="72" y="227" font-family="Georgia,serif" font-size="59" fill="#24221e">Chegg’s reinvention.</text>
 <line x1="72" y1="276" x2="1128" y2="276" stroke="#d9d4c9"/>
 <text x="72" y="326" font-family="Arial,sans-serif" font-size="19" fill="#625f56">H1 2025 → H1 2026 FREE CASH FLOW · USD MILLIONS</text>
 <g font-family="Georgia,serif" font-size="48" fill="#24221e">
