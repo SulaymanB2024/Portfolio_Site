@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">The financing price needs upside economics.</title><desc id="desc">Scenario gross equity: downside $2.9bn, base $30.7bn, upside $70.4bn. Closed financing reference $61bn; reported talks $100bn.</desc>
+<rect x="0" y="0" width="1200" height="760" rx="0" fill="#f5f2e9" stroke="none"/>
+<text x="56" y="46" font-size="18" fill="#59615a" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">ANDURIL / CAPITAL PRODUCTIVITY</text>
+<text x="1144" y="46" font-size="18" fill="#59615a" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">14 OCT 2026</text>
+<line x1="56" y1="66" x2="1144" y2="66" stroke="#d3d5ca" stroke-width="1"/>
+<text x="56" y="122" font-size="40" fill="#202723" text-anchor="start" font-weight="400" font-family="Georgia,serif">The financing price needs upside economics.</text>
+<text x="56" y="164" font-size="23" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">Conditional gross equity value · USD billions</text>
+<line x1="260.0" y1="216" x2="260.0" y2="548" stroke="#d3d5ca" stroke-width="1"/>
+<text x="260.0" y="585" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">$0</text>
+<line x1="458.8095238095238" y1="216" x2="458.8095238095238" y2="548" stroke="#d3d5ca" stroke-width="1"/>
+<text x="458.8095238095238" y="585" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">$25</text>
+<line x1="657.6190476190476" y1="216" x2="657.6190476190476" y2="548" stroke="#d3d5ca" stroke-width="1"/>
+<text x="657.6190476190476" y="585" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">$50</text>
+<line x1="856.4285714285714" y1="216" x2="856.4285714285714" y2="548" stroke="#d3d5ca" stroke-width="1"/>
+<text x="856.4285714285714" y="585" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">$75</text>
+<line x1="1055.2380952380952" y1="216" x2="1055.2380952380952" y2="548" stroke="#d3d5ca" stroke-width="1"/>
+<text x="1055.2380952380952" y="585" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">$100</text>
+<text x="56" y="277" font-size="27" fill="#202723" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">Downside</text>
+<rect x="260.0" y="239" width="22.845134365769866" height="57" rx="0" fill="#dce2d2" stroke="none"/>
+<text x="296.84513436576987" y="277" font-size="29" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">$2.9</text>
+<text x="56" y="389" font-size="27" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">Base</text>
+<rect x="260.0" y="351" width="244.01528086942233" height="57" rx="0" fill="#58694d" stroke="none"/>
+<text x="518.0152808694223" y="389" font-size="29" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">$30.7</text>
+<text x="56" y="501" font-size="27" fill="#202723" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">Upside</text>
+<rect x="260.0" y="463" width="559.5881242974776" height="57" rx="0" fill="#dce2d2" stroke="none"/>
+<text x="833.5881242974776" y="501" font-size="29" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">$70.4</text>
+<line x1="745.0952380952381" y1="199" x2="745.0952380952381" y2="549" stroke="#95543b" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="739.0952380952381" y="620" font-size="22" fill="#95543b" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">$61bn / closed round</text>
+<line x1="1055.2380952380952" y1="199" x2="1055.2380952380952" y2="549" stroke="#95543b" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="1049.2380952380952" y="650" font-size="22" fill="#95543b" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">$100bn / talks</text>
+<line x1="56" y1="670" x2="1144" y2="670" stroke="#d3d5ca" stroke-width="1"/>
+<text x="56" y="704" font-size="18" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">Each scenario adds $3bn assumed net cash; minority and senior claims are not deducted.</text>
+<text x="56" y="732" font-size="18" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">Scenarios are not probabilities or confidence intervals. Financing references: Reuters, May / July 2026.</text>
+</svg>

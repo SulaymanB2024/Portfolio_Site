@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">Translate the price back into a business.</title><desc id="desc">Base revenue is $50.7bn. Supporting gross equity of $61bn needs $99.5bn 2036 revenue; $100bn needs $162.9bn.</desc>
+<rect x="0" y="0" width="1200" height="760" rx="0" fill="#f5f2e9" stroke="none"/>
+<text x="56" y="46" font-size="18" fill="#59615a" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">ANDURIL / CAPITAL PRODUCTIVITY</text>
+<text x="1144" y="46" font-size="18" fill="#59615a" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">14 OCT 2026</text>
+<line x1="56" y1="66" x2="1144" y2="66" stroke="#d3d5ca" stroke-width="1"/>
+<text x="56" y="122" font-size="40" fill="#202723" text-anchor="start" font-weight="400" font-family="Georgia,serif">Translate the price back into a business.</text>
+<text x="56" y="164" font-size="23" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">Required 2036 revenue at base operating economics · USD billions</text>
+<line x1="320.0" y1="215" x2="320.0" y2="562" stroke="#d3d5ca" stroke-width="1"/>
+<text x="320.0" y="603" font-size="24" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">$0</text>
+<line x1="522.8571428571429" y1="215" x2="522.8571428571429" y2="562" stroke="#d3d5ca" stroke-width="1"/>
+<text x="522.8571428571429" y="603" font-size="24" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">$50</text>
+<line x1="725.7142857142857" y1="215" x2="725.7142857142857" y2="562" stroke="#d3d5ca" stroke-width="1"/>
+<text x="725.7142857142857" y="603" font-size="24" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">$100</text>
+<line x1="928.5714285714286" y1="215" x2="928.5714285714286" y2="562" stroke="#d3d5ca" stroke-width="1"/>
+<text x="928.5714285714286" y="603" font-size="24" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">$150</text>
+<text x="56" y="268" font-size="28" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">Base case</text>
+<text x="56" y="300" font-size="21" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">28% revenue CAGR</text>
+<rect x="320.0" y="236" width="205.7133648874684" height="61" rx="0" fill="#58694d" stroke="none"/>
+<text x="539.7133648874684" y="276" font-size="29" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">$50.7</text>
+<text x="56" y="380" font-size="28" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">$61bn price</text>
+<text x="56" y="412" font-size="21" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">37% revenue CAGR</text>
+<rect x="320.0" y="348" width="403.5623957159456" height="61" rx="0" fill="#dce2d2" stroke="none"/>
+<text x="737.5623957159456" y="388" font-size="29" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">$99.5</text>
+<text x="56" y="492" font-size="28" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">$100bn price</text>
+<text x="56" y="524" font-size="21" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">44% revenue CAGR</text>
+<rect x="320.0" y="460" width="660.7670874362458" height="61" rx="0" fill="#dce2d2" stroke="none"/>
+<text x="994.7670874362458" y="500" font-size="29" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">$162.9</text>
+<line x1="56" y1="670" x2="1144" y2="670" stroke="#d3d5ca" stroke-width="1"/>
+<text x="56" y="704" font-size="18" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">12% discount rate · 22% mature EBIT margin · 15% mature return on new capital · 3% terminal growth.</text>
+<text x="56" y="732" font-size="18" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">Gross equity reference assumes $3bn net cash, before outside claims. A hurdle, not a revenue forecast.</text>
+</svg>

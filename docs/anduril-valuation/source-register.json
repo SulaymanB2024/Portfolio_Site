@@ -1,0 +1,21 @@
+{
+  "asOf": "2026-10-14",
+  "articlePath": "src/personal/editorial/data/articles/anduril-valuation-capital-productivity.json",
+  "sourceLedger": "The article's sources array contains S1-S17, exact URLs, publishers, publication dates, verification date and source-specific limitations.",
+  "claims": [
+    {"sources":["S1"],"claim":"Completed $5bn financing at $61bn; company-reported FY2025 revenue $2.2bn.","status":"Reported completed transaction and unaudited company financial disclosure"},
+    {"sources":["S2"],"claim":"Funding talks near $100bn, potentially conditional.","status":"Discussions, not a completed transaction"},
+    {"sources":["S3","S4"],"claim":"March-reported FY2026 planning anchors: $4.3bn revenue and $1.2bn operating loss.","status":"Press-reported projections; underlying investor materials not inspected; not October guidance"},
+    {"sources":["S5"],"claim":"Army enterprise ceiling $20bn; five-year base plus five-year option; consolidation of prior actions.","status":"Procurement capacity, not funded backlog"},
+    {"sources":["S6","S7"],"claim":"Arsenal-2: $3.7bn private investment announcement and up to $2.9bn Navy outcome-linked contract; announced taxpayer project stake.","status":"Investment and ownership announcements; final minority rights and financing terms unresolved"},
+    {"sources":["S8"],"claim":"First Ohio-built Fury rollout in July 2026.","status":"Production milestone, not sustained full-rate output"},
+    {"sources":["S9"],"claim":"Steelfin development with flight testing planned for 2027.","status":"Company development announcement"},
+    {"sources":["S10","S11"],"claim":"Army interoperability architecture and NGC2 fielding expansion.","status":"Public Army analysis and company-announced award; no software ARR inferred"},
+    {"sources":["S12"],"claim":"Lockheed MFC first-half 2026 segment operating margin 14.1%.","status":"Reported segment result; not equivalent to consolidated Anduril EBIT"},
+    {"sources":["S13","S14","S15","S16"],"claim":"Mission autonomy, NATO selection, international joint venture and Barracuda production framework.","status":"Company announcements; amounts and units are not automatically recognized revenue"},
+    {"sources":["S17"],"claim":"Ramp as a mechanism-first editorial reference.","status":"Not an Anduril comparable or source for Anduril financial forecasts"}
+  ],
+  "authorAssumptions": ["All forecast growth and margin paths", "Ordinary capex, working-capital and depreciation ratios", "Arsenal-2 investment timing", "Tax and discount rates", "Terminal growth and return on new capital", "$3bn net cash and separate $3bn available liquidity", "Zero minority deduction is an unadjusted bridge, not an assertion of no outside claim"],
+  "unresolved": ["Current cash and debt", "Funded backlog and segment margins", "Share-class and dilution terms", "Final Arsenal-2 project ownership and fair value of outside claims"],
+  "modelPath": "public/research/anduril-valuation/model.py"
+}

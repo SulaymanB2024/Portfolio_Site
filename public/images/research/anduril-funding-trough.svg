@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">Profitability arrives before self-financing.</title><desc id="desc">Cash flow trough is negative $10.48bn in 2031, implying $7.48bn additional finance after $3bn assumed starting liquidity. Annual FCF positive in 2032.</desc>
+<rect x="0" y="0" width="1200" height="760" rx="0" fill="#f5f2e9" stroke="none"/>
+<text x="56" y="46" font-size="18" fill="#59615a" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">ANDURIL / CAPITAL PRODUCTIVITY</text>
+<text x="1144" y="46" font-size="18" fill="#59615a" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">14 OCT 2026</text>
+<line x1="56" y1="66" x2="1144" y2="66" stroke="#d3d5ca" stroke-width="1"/>
+<text x="56" y="122" font-size="40" fill="#202723" text-anchor="start" font-weight="400" font-family="Georgia,serif">Profitability arrives before self-financing.</text>
+<text x="56" y="164" font-size="23" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">Base cumulative free cash flow since valuation date · USD billions</text>
+<rect x="150.0" y="392.30769230769226" width="925" height="36.92307692307696" rx="0" fill="#dce2d2" stroke="none"/>
+<line x1="150" y1="515.3846153846154" x2="1075" y2="515.3846153846154" stroke="#d3d5ca" stroke-width="1"/>
+<text x="128" y="522.3846153846154" font-size="21" fill="#59615a" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">$-10</text>
+<line x1="150" y1="453.84615384615387" x2="1075" y2="453.84615384615387" stroke="#d3d5ca" stroke-width="1"/>
+<text x="128" y="460.84615384615387" font-size="21" fill="#59615a" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">$-5</text>
+<line x1="150" y1="392.30769230769226" x2="1075" y2="392.30769230769226" stroke="#202723" stroke-width="2"/>
+<text x="128" y="399.30769230769226" font-size="21" fill="#59615a" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">$0</text>
+<line x1="150" y1="330.7692307692308" x2="1075" y2="330.7692307692308" stroke="#d3d5ca" stroke-width="1"/>
+<text x="128" y="337.7692307692308" font-size="21" fill="#59615a" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">$5</text>
+<line x1="150" y1="269.2307692307692" x2="1075" y2="269.2307692307692" stroke="#d3d5ca" stroke-width="1"/>
+<text x="128" y="276.2307692307692" font-size="21" fill="#59615a" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">$10</text>
+<polyline points="150.00,398.86 242.50,432.28 335.00,466.79 427.50,497.21 520.00,519.25 612.50,521.26 705.00,499.72 797.50,457.00 890.00,396.86 982.50,323.68 1075.00,234.94" fill="none" stroke="#58694d" stroke-width="4"/>
+<circle cx="150.0" cy="398.86199367755535" r="5" fill="#58694d"/>
+<circle cx="242.5" cy="432.2847629083245" r="5" fill="#58694d"/>
+<circle cx="335.0" cy="466.7945475237092" r="5" fill="#58694d"/>
+<circle cx="427.5" cy="497.20956290832453" r="5" fill="#58694d"/>
+<circle cx="520.0" cy="519.2507510437092" r="5" fill="#58694d"/>
+<circle cx="612.5" cy="521.2634718087553" r="5" fill="#58694d"/>
+<circle cx="705.0" cy="499.7164495516033" r="5" fill="#58694d"/>
+<circle cx="797.5" cy="457.0009556996123" r="5" fill="#58694d"/>
+<circle cx="890.0" cy="396.86419957248324" r="5" fill="#58694d"/>
+<circle cx="982.5" cy="323.6837703657301" r="5" fill="#58694d"/>
+<circle cx="1075.0" cy="234.94397257202002" r="5" fill="#58694d"/>
+<text x="150.0" y="586" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">2026</text>
+<text x="335.0" y="586" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">2028</text>
+<text x="520.0" y="586" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">2030</text>
+<text x="705.0" y="586" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">2032</text>
+<text x="890.0" y="586" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">2034</text>
+<text x="1075.0" y="586" font-size="23" fill="#59615a" text-anchor="middle" font-weight="400" font-family="Arial,sans-serif">2036</text>
+<text x="1144" y="203" font-size="20" fill="#59615a" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">Shaded band: $3bn assumed starting liquidity</text>
+<text x="56" y="628" font-size="25" fill="#202723" text-anchor="start" font-weight="700" font-family="Arial,sans-serif">$10.5bn trough · $7.5bn financing gap</text>
+<text x="1144" y="628" font-size="22" fill="#59615a" text-anchor="end" font-weight="400" font-family="Arial,sans-serif">Annual FCF positive in 2032</text>
+<line x1="56" y1="670" x2="1144" y2="670" stroke="#d3d5ca" stroke-width="1"/>
+<text x="56" y="704" font-size="18" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">Before financing; available cash is assumed, not observed. No financing fees or contingency reserve.</text>
+<text x="56" y="732" font-size="18" fill="#59615a" text-anchor="start" font-weight="400" font-family="Arial,sans-serif">Only the remaining 78 days of 2026 are included. The annual forecast continues through 2041.</text>
+</svg>
