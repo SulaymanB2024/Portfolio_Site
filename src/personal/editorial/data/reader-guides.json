@@ -1837,5 +1837,40 @@
         "href": "https://www.cftc.gov/PressRoom/PressReleases/9310-26"
       }
     ]
+  },
+  "anduril-valuation-capital-productivity": {
+    "question": "What operating outcome would justify Anduril’s $61 billion financing valuation?",
+    "answer": "The base cash-flow model values consolidated operations at about $28 billion despite assuming $51 billion of annual revenue and a 22% operating margin in 2036. At the same operating economics, supporting the $61 billion gross equity reference requires roughly $100 billion of 2036 sales. That comparison assumes $3 billion of net cash and precedes minority interests and senior claims. Contract ceilings are not revenue, and factory investment must be paid for before growth creates distributable cash. These are author scenarios, not audited private-company accounts.",
+    "paths": [
+      {
+        "label": "Inspect the cash-flow valuation",
+        "section": "value-not-label",
+        "description": "Compare enterprise value, the conditional equity bridge and required-return sensitivity."
+      },
+      {
+        "label": "Trace the financing need",
+        "section": "factories-and-cash",
+        "description": "Separate factory investment, customer payments and outside ownership claims."
+      },
+      {
+        "label": "Test the price in reverse",
+        "section": "reverse-price",
+        "description": "Solve for the revenue path required by the financing reference."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Completed May financing reference",
+        "href": "https://www.reuters.com/legal/transactional/us-defense-firm-anduril-raises-5-billion-doubling-its-valuation-61-billion-2026-05-13/"
+      },
+      {
+        "label": "Arsenal-2 investment and Navy contract announcement",
+        "href": "https://www.anduril.com/news/anduril-u-s-navy-invest-usd6-6-billion-to-expand-america-s-submarine-industrial-base"
+      },
+      {
+        "label": "Reproducible cash-flow model",
+        "href": "/research/anduril-valuation/model.py"
+      }
+    ]
   }
 }

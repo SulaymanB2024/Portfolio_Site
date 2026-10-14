@@ -58,6 +58,7 @@ export const ARTICLE_GENERATIVE_ART_ASSIGNMENTS = {
   '/research/financial-systems/adobe-paid-workflows': 'yuru-25',
   '/research/financial-systems/hyperliquid-valuation': 'yuru-25',
   '/research/financial-systems/kalshi-40-billion-question': 'yuru-25',
+  '/research/financial-systems/anduril-valuation-capital-productivity': 'yuru-31',
   '/research/financial-systems/chegg-cash-flow-turnaround': 'yuru-22',
   '/research/texas/texas-robotaxi-business-service-map': 'yuru-24',
   '/research/texas/texas-waymo-business-travel': 'yuru-02',

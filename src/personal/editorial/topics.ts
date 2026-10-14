@@ -165,6 +165,7 @@ export const readingTopics: ReadingTopic[] = [
       { slug: 'why-texas-toll-roads-stay-tolled', reason: 'Follow the pledged system and its obligations to understand why repaying one road does not necessarily end its tolls.' },
       { slug: 'how-airlines-borrow-against-loyalty-programs', reason: 'Trace bank receipts, deferred awards and lender-controlled collections without treating miles as customer deposits.' },
       { slug: 'hidden-financing-hardware-startups', reason: 'Identify which party funds inventory, equipment and customer deployment before revenue arrives.' },
+      { slug: 'anduril-valuation-capital-productivity', reason: 'Value Anduril by separating defense demand, software margins and the capital required before shareholder cash flow.' },
       { slug: 'waymo-hardware-financing', reason: 'Use autonomous vehicles to examine the boundary between a technology platform and the assets needed to operate it.' },
       { slug: 'where-online-returns-actually-go', reason: 'Follow returned inventory through disposition decisions and distinguish recovery value from the original sale price.' },
       { slug: 'software-buyout-boom-2020-2022-exit-audit', reason: 'Evaluate the buyout vintage using observed exits, valuation bases and the deals still unresolved.' },

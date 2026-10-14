@@ -3,6 +3,17 @@
   "purpose": "Bind newly researched initial editions without inventing historical restoration or revision provenance.",
   "records": [
     {
+      "slug": "anduril-valuation-capital-productivity",
+      "path": "src/personal/editorial/data/articles/anduril-valuation-capital-productivity.json",
+      "canonicalPath": "/research/financial-systems/anduril-valuation-capital-productivity",
+      "datePublished": "2026-10-14",
+      "dateModified": "2026-10-14",
+      "articleSha256": "d2fd1dd21881f2b0961174c63e494eb0cfb6492f2150ec20d5d361efa3ea107a",
+      "proseWords": 3218,
+      "readTime": "18 MIN",
+      "claimsPath": "docs/anduril-valuation/source-register.json"
+    },
+    {
       "slug": "kalshi-40-billion-question",
       "path": "src/personal/editorial/data/articles/kalshi-40-billion-question.json",
       "canonicalPath": "/research/financial-systems/kalshi-40-billion-question",
