@@ -1,0 +1,237 @@
+{
+  "slug": "hyperliquid-valuation",
+  "path": "/research/financial-systems/hyperliquid-valuation",
+  "title": "Hyperliquid Can Win Without HYPE Being Cheap",
+  "displayTitle": "Hyperliquid can win without HYPE being cheap.",
+  "seoTitle": "Hyperliquid Valuation: HYPE Fees, Dilution and Growth",
+  "seoDescription": "A ten-year Hyperliquid valuation separates trading fees, reserve income and dilution, with three scenarios, reverse valuation and a reproducible model.",
+  "category": "FINANCIAL SYSTEMS",
+  "subtitle": "A $30 central case can still assume an excellent business. The difference is what reaches the token, how long growth lasts, and how many claims share it.",
+  "searchTerms": ["Hyperliquid", "HYPE", "valuation", "perpetual futures", "buybacks", "tokenomics", "HIP-3", "stablecoins"],
+  "date": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "readTime": "20 MIN",
+  "kind": "research",
+  "image": "/images/social/og-research.png",
+  "author": "Sulayman Bowles",
+  "openingPresentation": "integrated",
+  "ledeMarkdown": "Hyperliquid does not need to replace the financial system to become a very valuable part of it. My central case gives it $20 trillion of annual perpetual-futures turnover in 2031, almost eight times the annualized pace of the dashboard snapshot used here. Token-directed economic flows reach $4.24 billion that year and keep growing afterward. This is a strong business outcome, not a stagnation case. [S2](#source-s2)\n\nIt supports approximately **$30 per HYPE** under an 18% required return, a ten-year forecast and a conservative full-dilution allocation. Against an illustrative $80 reference price, the central question is not whether Hyperliquid is impressive. It is whether growth, durable fee capture and limited dilution can all be purchased at a sensible price. The market snapshot retrieved on October 14 showed HYPE around $81; $80 is a rounded comparison point, not an executable quote. [S1](#source-s1)\n\nMy view is that Hyperliquid’s likely next role is infrastructure: the execution venue underneath other companies’ products. That can be a better business than a crypto trading website. It can also be a business in which distributors, market operators and collateral providers keep more of the economics. The valuation has to allow both outcomes.",
+  "thesis": "Hyperliquid can become important financial infrastructure while HYPE remains expensive relative to conservative, fully diluted token-directed cash-flow assumptions.",
+  "evidenceBoundary": "Research cutoff: October 14, 2026. Dashboard observations are retrieved rolling-window fields, not a synchronized on-chain close or audited financial statements. All future volumes, retained fee rates, balances and growth paths are author assumptions. Valuation dates are October 14 annual anniversaries, not calendar fiscal years. The $80 reference is illustrative. The model values policy-dependent token-directed economic flows, not equity in a legal entity, a guaranteed dividend or a twelve-month trading target.",
+  "assumptions": [
+    "Five annual driver-based forecasts end October 14, 2027–2031. Aggregate flow growth then fades linearly over five years to 3% in 2036; a terminal value begins in 2037.",
+    "All three operating scenarios use the same 18% required return, 3% terminal growth and 955.31 million-token allocation. Discount rate and supply are tested separately.",
+    "Trading rates are already net to HYPE. Reserve yield is modeled once, separately. Future buybacks are not counted again through a reduced valuation denominator.",
+    "955.31 million follows the retrieved provider total-supply convention. Treating all remaining allocation claims as economically outstanding is conservative and is not a prediction that every token circulates by 2031."
+  ],
+  "sections": [
+    {
+      "id": "the-bullish-case",
+      "title": "What the strongest bullish writing gets right",
+      "paragraphs": [
+        "The best Hyperliquid research treats the exchange as a business rather than treating the token chart as an argument. Artemis’s July 2025 work separated the exchange from HyperEVM and used public-company and blockchain multiples. CoinShares subsequently built a seven-stream framework, with a $147 base-case outcome in 2031 and a 707 million-token denominator. Multicoin’s June 2026 report projected roughly $8 billion of 2028 earnings and a $319 token price using about 502 million tokens. These are different frameworks and future dates, not competing measurements of today’s fair value. [S12](#source-s12) [S13](#source-s13) [S14](#source-s14)",
+        "Their strongest shared insight is the possibility that applications will be built around an existing trading and collateral base, rather than a blockchain having to invent demand after launch. I agree with that direction. Where I become less comfortable is the passage from a large addressable market to a durable stream per token. A larger market, a higher on-chain share, preserved pricing and a favorable supply definition can each be plausible. Their joint realization is a much stronger assumption.",
+        "Multicoin’s model, for example, holds trading monetization at 3.28 basis points and grows USDC balances approximately with turnover. Its report discloses a substantial HYPE investment. CoinShares explicitly avoids a separate future-buyback reduction to its supply denominator; that is a useful safeguard, not an error to criticize. The differences that matter are the operating path, the allocation denominator and the date at which a value is being quoted. [S12](#source-s12) [S13](#source-s13)",
+        "Aswath Damodaran’s work on Nvidia after DeepSeek offers a better discipline than borrowing another asset’s multiple: change the market, economics and risk assumptions when the story changes, then calculate the consequence. Admiration for a product does not settle its price. Here, the story I am testing is an increasingly useful execution network whose marginal dollar of turnover may earn less than its earlier dollar. [S15](#source-s15)"
+      ]
+    },
+    {
+      "id": "receipts-not-earnings",
+      "title": "A real fee engine, with an accounting trap",
+      "paragraphs": [
+        "The observable starting point is substantial. DeFiLlama’s perpetuals page displayed $208.687 billion of trailing-30-day turnover, $85.39 million of fees and $69.72 million of holder revenue. But the adapter behind that page adds AQAv2 stablecoin reserve yield to both fees and holder revenue. The product label says perpetuals; the economic numerator contains more than trading. [S2](#source-s2) [S3](#source-s3)",
+        "That changes the calculation. Dividing $69.72 million by $208.687 billion produces 3.34 basis points, but it is a mixed-product receipts ratio, not an identified trading take rate. Using it to forecast trading revenue and then adding stablecoin income would count a portion of the same economics twice. I do not make that inference. The forecast below rebuilds trading and collateral income independently, and labels its fee rates as assumptions.",
+        "The distinction between fees and earnings matters just as much. Builder payments, deployer economics, maker rebates and the HLP allocation intervene before the relevant receipts reach HYPE. Once a series is already net to holders, applying the headline 99% allocation again is another mistake. Nor does an on-chain dashboard establish corporate payroll, tax, maintenance investment or distributable shareholder profit. It measures protocol flows under its definitions. [S3](#source-s3)",
+        "There is also an unresolved reconciliation problem. In the retrieved parent table, Q3 gross protocol revenue of $224.23 million less costs of $45.42 million does not equal the displayed $173.97 million gross profit; the difference is $4.84 million. I retain the discrepancy in the evidence record rather than invent an expense to make the table balance. The rolling fields are used as scale checks, not as an audited income statement or a clean historical margin series. [S1](#source-s1)"
+      ],
+      "table": {
+        "caption": "Retrieved scale checks, not an audited P&L",
+        "columns": ["Measure", "Observed / calculated", "Interpretation"],
+        "rows": [
+          ["Perpetual turnover · 30 days", "$208.687bn", "Includes crypto and HIP-3 markets"],
+          ["Perps-product fees · 30 days", "$85.39m", "Adapter also includes reserve yield"],
+          ["Perps-product holder receipts · 30 days", "$69.72m", "Already net under provider methodology"],
+          ["Holder receipts / turnover", "3.34 basis points", "Mixed-product ratio; NOT a trading take rate"],
+          ["Turnover × 365 / 30", "$2.54tn", "Annualized activity, not a full-year result"]
+        ],
+        "note": "Retrieved October 14, 2026. The matching 30-day reserve-income component is not separately established here. [S2](#source-s2) [S3](#source-s3)"
+      },
+      "figures": [{
+        "src": "/images/research/hyperliquid-receipts.svg",
+        "label": "01 · Follow the recipient",
+        "alt": "Reported perps-product fees of $85.39 million and holder receipts of $69.72 million both include reserve yield. Their $15.67 million difference is not a corporate operating-cost estimate.",
+        "caption": "The displayed fee label includes AQAv2 income. The $15.67m difference is not a corporate operating-cost estimate; the complete recipient breakdown is not inferred from these two totals. [S2](#source-s2) [S3](#source-s3)",
+        "width": 1440,
+        "height": 1040
+      }]
+    },
+    {
+      "id": "distribution",
+      "title": "The next user may never visit Hyperliquid",
+      "paragraphs": [
+        "A network becomes more interesting when its customers can distribute it. Hyperliquid’s builder-code mechanism lets another interface attach its own fee to an order; HIP-3 lets a deployer operate a perpetual market with control over specifications and pricing inputs. That separates the company acquiring a customer from the system executing the customer’s trade. [S5](#source-s5) [S18](#source-s18)",
+        "My expectation is that this separation will matter more than brand loyalty to a trading homepage. A specialized broker can own the relationship, a market operator can supply the product, and Hyperliquid can provide execution. An application may succeed because its users never have to understand the underlying chain. The relevant adoption metric is then retained, economically useful order flow, not how many people consciously choose a blockchain.",
+        "Automation strengthens that opportunity and weakens one source of pricing power. A software agent can route orders without caring whose interface is most familiar. It can also compare fees, slippage and collateral demands across venues. More machine-generated trading can raise turnover while making each unit more price-sensitive. Counting automated wallets or transactions as independent new customers would overstate the demand change.",
+        "The defensible advantage is therefore not simply that matching software is hard to copy. A rival also needs competitive liquidity, market-maker capital and workflows that users trust with collateral. Yet those advantages are not a license to assume permanent monopoly pricing. Large traders can use several venues. Intermediaries with valuable customer relationships can bargain for economics. The network can win more execution while surrendering part of the take.",
+        "This is why I would rather see stable retained fees through changes in market mix than a record volume headline. The first is evidence of a business. The second may also reflect lower prices, faster capital turnover or a temporary incentive. My central case deliberately allows turnover to grow faster than monetization."
+      ]
+    },
+    {
+      "id": "market-mix",
+      "title": "More markets need not mean the same margin",
+      "paragraphs": [
+        "The expansion beyond crypto is no longer only a product sketch. S&P Dow Jones Indices has licensed the S&P 500 to Trade[XYZ] for perpetual contracts on Hyperliquid, describing access for eligible investors. That is evidence that established financial-data providers can participate in the network. It is not evidence that every user in every jurisdiction may trade the product, or that a perpetual contract conveys ownership of the underlying stocks. [S8](#source-s8)",
+        "The economic catch is explicit in the fee rules. HIP-3 growth mode reduces protocol fees by 90%. An emerging non-crypto market can therefore contribute impressive notional turnover at a fraction of the monetization of a mature crypto market. Deployer fees and builder fees are additional claims on the trading relationship, not automatically HYPE income. [S4](#source-s4) [S5](#source-s5)",
+        "In my 2031 central case, crypto perpetuals generate $12 trillion of turnover at 2.5 basis points net to the token. Non-crypto perpetuals generate another $8 trillion at 0.7 basis points. The latter account for 40% of perpetual turnover but only 16% of the modeled perpetual fee stream. The lower rate does not assume every market remains in growth mode forever. It represents a blended outcome in which subsidized access and competition remain meaningful.",
+        "This also creates an incentive to overvalue future repricing. Removing a 90% fee reduction does not automatically multiply revenue by ten: the higher fee can change demand, routing and liquidity. At exactly one-tenth the volume, a tenfold price increase produces the same fee revenue before other changes. The question is the demand that remains after repricing, not the fee schedule in isolation.",
+        "Market creation has a capital cost, too. HIP-3 currently requires 500,000 HYPE of deployer stake, a requirement the documentation says may fall as infrastructure matures. At the $80 reference, that is $40 million tied to entry. The bond can support token demand, but it is not annual revenue or a permanent burn. A high token price can make market entry harder; assuming that the price and the number of deployers both rise without friction ignores that feedback. [S5](#source-s5)"
+      ],
+      "figures": [{
+        "src": "/images/research/hyperliquid-market-mix.svg",
+        "label": "02 · Volume is not value capture",
+        "alt": "In the 2031 central scenario, crypto is 60% of perpetual turnover and 84% of perpetual net receipts; non-crypto is 40% of turnover and 16% of receipts.",
+        "caption": "Author scenario. $12tn at 2.5 bps produces $3.0bn; $8tn at 0.7 bps produces $0.56bn. The fee mix excludes spot, reserves and other streams.",
+        "width": 1440,
+        "height": 1040
+      }]
+    },
+    {
+      "id": "collateral-economics",
+      "title": "Collateral is a business. Turnover is not a balance",
+      "paragraphs": [
+        "Coinbase announced in May 2026 that it would become the official treasury deployer of USDC on Hyperliquid. Under the documented AQAv2 design, approximately 90% of cost-adjusted reserve yield associated with the eligible on-network supply goes to the protocol. This is a claim on a defined income stream, not ownership of customer USDC principal. [S6](#source-s6) [S7](#source-s7)",
+        "I model that stream as eligible average balance multiplied by cost-adjusted reserve yield, multiplied by the protocol share. In the central case, $20 billion of eligible average balance at a 2.5% cost-adjusted yield and a 90% share produces $450 million in 2031. The 2.5% assumption is before the protocol share but after reserve costs. It is not a Treasury yield applied without deductions.",
+        "I do not grow collateral mechanically with turnover. Better netting, faster settlement and more efficient margin can let the same dollar finance more activity. A venue that succeeds at reducing customers’ capital requirements could increase turnover while earning less reserve income per dollar traded. That would be good product design, not necessarily a failure of adoption.",
+        "The interest-rate exposure also cuts both ways. A one-percentage-point fall in the assumed reserve yield reduces annual receipts by $180 million at the central case’s $20 billion balance. More active trading might offset part of that loss, but the model should not assume an offset merely because it is convenient. Conversely, high rates can support reserve income while making risk-taking less attractive.",
+        "The protocol documents describe 30-day accrual intervals and payment eight days after an interval ends. A cash receipt, an accrued amount and a projected annual yield are therefore different observations. Because the dashboard already incorporates AQAv2, I do not bolt a second reserve-income estimate onto its headline run rate. [S6](#source-s6)"
+      ]
+    },
+    {
+      "id": "economic-claims",
+      "title": "The supply denominator is part of the thesis",
+      "paragraphs": [
+        "At the same $80 reference, 222.45 million circulating tokens imply approximately $17.8 billion of circulating value. The provider’s 955.31 million total-supply convention implies $76.4 billion. Neither number is equity enterprise value. But choosing between them can make the same projected fee stream look inexpensive or demanding before any operating assumption changes. [S1](#source-s1)",
+        "My central allocation uses 955.31 million claims. It treats the remaining token allocations as economically relevant even when they are not circulating. That is conservative: some reserves may be distributed late or not at all. It is not a claim that all tokens will enter the market in 2031. The 502 million and 707 million alternatives appear in the sensitivity analysis so the investment judgment cannot hide inside the denominator.",
+        "On the identical operating forecast, the base value is about $30 at 955 million tokens, $40 at 707 million and $57 at approximately 502 million. A float-only calculation reaches roughly $129. The last number is not my valuation: it assigns the whole long-run stream to a narrow current float while ignoring potential competing allocations. A higher per-token estimate needs an argument about which claims will never participate, not just a convenient market-cap convention.",
+        "Staking does not solve that problem by making tokens disappear. The protocol documents provide for unstaking, and staking rewards come from the future emissions reserve. Those rewards redistribute token claims; they are not an extra external profit stream to add on top of fee income. Locking HYPE for trading discounts or deployment can create utility and constrain float, but a reversible lock is different from an irreversible reduction in total claims. [S10](#source-s10)",
+        "The treatment of buybacks is equally deliberate. I capitalize the future token-directed economic stream and hold the allocation denominator fixed. I do not then subtract projected repurchased tokens and claim another valuation uplift from the same dollars. A fully specified per-token repurchase model is possible, but the repurchase price, issuance and remaining ownership must all be modeled consistently. Nor do I add customer collateral or HLP assets as if they were distributable treasury cash."
+      ],
+      "figures": [{
+        "src": "/images/research/hyperliquid-supply.svg",
+        "label": "03 · Same business, different claims",
+        "alt": "The identical $28.6 billion base valuation yields $29.96 at 955 million tokens, $40.49 at 707 million, $57.04 at about 502 million and $128.68 using only 222 million circulating tokens. The float-only case is not the central valuation.",
+        "caption": "Only the allocation denominator changes. The 222m comparison ignores competing noncirculating claims; 502m and 707m are alternative conventions, not author forecasts of future float.",
+        "width": 1440,
+        "height": 1040
+      }]
+    },
+    {
+      "id": "valuation-model",
+      "title": "A model that lets the business keep growing",
+      "paragraphs": [
+        "The model is a valuation of economic flows directed toward HYPE, conditional on the relevant fee and allocation policies continuing. It is not an assertion that HYPE holders have an enforceable claim on a corporate dividend. Without audited corporate accounts and a legal equity claim, calling the output conventional free cash flow would imply more certainty than the evidence supports.",
+        "The first five periods end on October 14 of 2027 through 2031. Each separates crypto perpetuals, non-crypto perpetuals, spot activity, stablecoin reserves, other net token-directed fees and hypothetical outcome-market fees. The trading rates are already after the payments and discounts that keep economics away from HYPE. There is no second 99% multiplier, no second reserve-yield addition and no generic valuation premium for every application built on HyperEVM.",
+        "The central crypto-volume endpoint can be expressed as a $200 trillion annual crypto-derivatives market, 20% on-chain penetration and a 30% Hyperliquid share of that on-chain volume. All three are author assumptions, not observed 2031 facts. They produce $12 trillion of crypto turnover. The separate $8 trillion non-crypto case is not added into that crypto market denominator. This separation avoids counting the same opportunity twice under different market labels.",
+        "The central case is already ambitious. Total perpetual activity reaches almost eight times the retrieved annualized pace. Crypto fee capture falls to 2.5 basis points, but volume expansion still drives $3 billion of crypto-perpetual receipts. Non-crypto perpetuals add $560 million, spot adds $180 million, reserves add $450 million and other token-directed fees add $50 million. Together they produce $4.24 billion in 2031.",
+        "I do not force that business into a 3% growth rate immediately after 2031. Its final explicit-year flow growth is approximately 36.7%. Growth fades over five further years to 3%, producing roughly $8.94 billion of annual flow in 2036. This extra growth matters: an immediate stable-growth terminal assumption after year five would yield only about $21 per token, rather than $30. A valuation can be too low because its maturation assumption is too abrupt, even when every spreadsheet formula is correct.",
+        "All three operating cases use the same 18% required return and 3% terminal growth. The return requirement is my judgment about a volatile, policy-dependent economic claim, not a measured public-company WACC. Holding it constant prevents the operating bear case from quietly acquiring an additional pessimistic discount-rate assumption. The central present value is $28.6 billion; approximately 41% comes from the terminal value beyond 2036.",
+        "The dominant-infrastructure case is intentionally demanding: $58 trillion of perpetual turnover and $15.03 billion of annual token-directed flows in 2031, growing to $43.30 billion after the fade period. It supports about $126 per token. The erosion case supports about $4. Neither is a probability interval, and the erosion case is not a liquidation floor. A serious protocol or market-access failure could produce a worse outcome."
+      ],
+      "table": {
+        "caption": "Operating scenarios · annual period ending October 14, 2031",
+        "columns": ["Driver / output", "Erosion", "Central", "Dominant infrastructure"],
+        "rows": [
+          ["Crypto perpetual turnover", "$2.5tn", "$12tn", "$28tn"],
+          ["Crypto retained fee", "2.2 bps", "2.5 bps", "3.2 bps"],
+          ["Non-crypto perpetual turnover", "$1.2tn", "$8tn", "$30tn"],
+          ["Non-crypto retained fee", "0.35 bps", "0.7 bps", "1.2 bps"],
+          ["Spot turnover", "$0.1tn", "$0.6tn", "$1.8tn"],
+          ["Eligible average stablecoin balance", "$4bn", "$20bn", "$50bn"],
+          ["Cost-adjusted reserve yield", "1.8%", "2.5%", "3.2%"],
+          ["Token-directed annual flow", "$0.69bn", "$4.24bn", "$15.03bn"],
+          ["Present value · all modeled claims", "$4.0bn", "$28.6bn", "$120.7bn"],
+          ["Value per HYPE", "$4.24", "$29.96", "$126.36"]
+        ],
+        "note": "Author scenarios, not company guidance. All use 18% required return, a five-year driver forecast plus five-year growth fade, 3% terminal growth and 955.31m claims. The downloadable model exposes every annual input."
+      },
+      "figures": [{
+        "src": "/images/research/hyperliquid-scenarios.svg",
+        "label": "04 · Conditional value, not a trading target",
+        "alt": "At the same 18% return and 955.31 million claims, erosion yields $4.24, the central scenario $29.96, and dominant infrastructure $126.36 per HYPE. A vertical line marks the $80 illustrative reference.",
+        "caption": "All three cases include a five-year operating forecast and a five-year growth fade. The operating paths, not the discount rate or denominator, change across these bars. No probability weights or downside floor are implied.",
+        "width": 1440,
+        "height": 1040
+      }]
+    },
+    {
+      "id": "priced-expectations",
+      "title": "What $80 asks the network to earn",
+      "paragraphs": [
+        "A reverse valuation is more useful than arguing about whether $30 sounds low. At $80 and 955.31 million claims, the reference economic value is $76.4 billion. Starting with the parent dashboard’s annualized 30-day holder-receipts benchmark of approximately $872 million, the same discounting and fade method requires about 60% annual flow growth for the first five years. That produces roughly $9.1 billion in 2031 and $27.6 billion in 2036. The starting receipt series already contains reserve income; the reverse model does not add it again. [S1](#source-s1)",
+        "This is an equivalent aggregate growth path, not an allocation of future revenue among products. For scale, $9.1 billion earned entirely at 2.5 basis points would require about $36.5 trillion of annual fee-paying turnover. Reserve income would reduce that trading requirement; a greater share of low-fee markets would increase it. The point is the economic burden implied by the price, not a forecast that every dollar must come from perpetuals.",
+        "There are other ways to explain $80. Keep the central operating case, reduce the required return to 12% and allocate value across 707 million tokens: the model produces approximately $80. A market participant can therefore disagree with me without forecasting the dominant-infrastructure operating case. The disagreement can be about the permanence of unissued allocations and how safe the economic claim eventually becomes.",
+        "I am not prepared to grant both concessions at once. A smaller effective denominator needs convincing evidence about the treatment of reserves. A lower required return needs greater confidence that fee policy, security and market access will endure. Choosing public-equity-like risk while also assuming favorable token allocation is not automatically wrong, but it is the central investment bet, not a neutral default.",
+        "HYPE can also carry utility value from collateral demand, staking and fee discounts that this flow model does not separately capitalize. I do not assume those benefits are worthless. I refuse to use an unmeasured utility premium as the automatic plug between the model and the market price. A discount to a trader is useful, but it is not an additional dollar of exchange profit. The cash-flow-supported estimate is conditional, not a hard floor under the token."
+      ],
+      "table": {
+        "caption": "Central operating case: discount-rate and terminal-growth sensitivity",
+        "columns": ["Required return", "2% terminal growth", "3% terminal growth", "4% terminal growth"],
+        "rows": [
+          ["12%", "$54.17", "$58.92", "$64.86"],
+          ["15%", "$38.22", "$40.55", "$43.31"],
+          ["18%", "$28.66", "$29.96", "$31.45"],
+          ["21%", "$22.42", "$23.20", "$24.08"],
+          ["24%", "$18.08", "$18.58", "$19.13"]
+        ],
+        "note": "Per HYPE; 955.31m claims. Terminal growth changes both the five-year fade endpoint and the terminal-value formula. These are assumption sensitivities, not probability bands."
+      }
+    },
+    {
+      "id": "where-the-thesis-breaks",
+      "title": "The failure modes that matter",
+      "paragraphs": [
+        "The most important operating risk is not that Hyperliquid runs out of assets to list. It is that retained economics weaken as more professional distributors and market makers participate. One basis point on the central case’s $12 trillion of crypto turnover is $1.2 billion of annual receipts. That sensitivity is much larger than the $180 million effect of a one-point reserve-yield change at the modeled $20 billion collateral balance. Fee durability deserves more attention than the number of product announcements.",
+        "The technology and market-design risks are related to the business model. Hyperliquid’s auto-deleveraging mechanism can close profitable counterparties’ positions against an underwater account. That mechanism protects platform solvency by changing which traders continue to hold positions; it does not make trading disruption economically costless. Likewise, HIP-3’s slashable stake is not a customer insurance policy: the documentation says slashed tokens are burned. [S11](#source-s11) [S5](#source-s5)",
+        "A damaged execution reputation can reduce both trading receipts and deposited balances. That correlation matters. Treating trading and reserve income as two wholly independent businesses would overstate diversification. The reserve stream has a different immediate driver, but it depends on users continuing to trust the same network with capital.",
+        "The competitors should not be frozen in the past. In its Q2 2026 release, CME reported $1.7 billion of quarterly revenue, $1.1 billion of operating income and record market-data revenue of $238 million. It also described 24/7 one-ounce gold contracts and other product initiatives. Those numbers are not a valuation multiple for HYPE. They are a reminder that established venues possess several revenue streams and can respond to changes in trading hours and access. [S16](#source-s16)",
+        "Nor would I pay for prediction markets as an established earnings line yet. The HIP-4 documentation retrieved for this analysis says protocol fees remain zero during initial testing, while DeFiLlama describes outcome fees beginning in August 2026. I have not reconciled that discrepancy to underlying receipts. The central and erosion cases assign HIP-4 no revenue; the bull case includes a clearly hypothetical future contribution. Optionality is worth investigating without being booked as present earnings. [S9](#source-s9) [S1](#source-s1)"
+      ]
+    },
+    {
+      "id": "the-investment-judgment",
+      "title": "A better business is not a margin of safety",
+      "paragraphs": [
+        "My central expectation is a larger Hyperliquid with more of its activity distributed through third parties, a broader set of tradable exposures and a meaningful collateral-income business. I also expect its new activity to be more sensitive to pricing than a simple extrapolation of early crypto fees suggests. Growth and compression can coexist for years.",
+        "The evidence that would improve the valuation is specific: a reconciled trading-fee series separate from reserve receipts; retained economics that survive the end of growth incentives; durable fee-paying activity outside crypto; and clearer evidence about which token allocations will participate in future value. Better collateral efficiency should be measured alongside balances, not mistaken for weak adoption. A new market is interesting; a new market with persistent net receipts changes the model.",
+        "The price case needs the same specificity. At the central allocation and return requirement, $80 calls for much more than a competent expansion of today’s network. It calls for a larger economic stream than my already strong central case. With a lower required return and a smaller denominator, that price becomes easier to justify, but the assumptions have moved. The article’s conclusion is therefore not that Hyperliquid cannot become the venue its supporters imagine. It is that an investor should name, and pay consciously for, the favorable assumptions required.",
+        "At roughly $30 of central cash-flow-supported value against an $80 reference, I would not describe HYPE as a margin-of-safety purchase on these assumptions. The product can keep improving, the network can keep winning useful activity, and the token can still have too much success in its price."
+      ]
+    }
+  ],
+  "sources": [
+    {"id":"S1","label":"Hyperliquid parent dashboard","href":"https://defillama.com/protocol/hyperliquid","publisher":"DeFiLlama","date":"Retrieved 2026-10-14","type":"Provider dashboard","note":"Rolling receipts, total/circulating supply conventions and the unreconciled Q3 table.","limitation":"Not audited; fields and FAQs are not synchronized. Price is rounded to $80 for comparison.","lastVerified":"2026-10-14"},
+    {"id":"S2","label":"Hyperliquid perpetuals dashboard","href":"https://defillama.com/protocol/hyperliquid-perps","publisher":"DeFiLlama","date":"Retrieved 2026-10-14","type":"Provider dashboard","note":"30-day turnover $208.687bn, fees $85.39m and holder receipts $69.72m.","limitation":"The adapter includes reserve income; the headline ratio is not pure trading monetization.","lastVerified":"2026-10-14"},
+    {"id":"S3","label":"Perpetuals fee adapter, pinned source","href":"https://github.com/DefiLlama/dimension-adapters/blob/e02384e92cbfb8c058e4de8440644aa8d8b0fc58/dexs/hyperliquid-perp/index.ts","publisher":"DeFiLlama","date":"Inspected 2026-10-14","type":"Primary implementation","note":"Adds dailyAqav2Yield to dailyFees, dailyRevenue and dailyHoldersRevenue; separates other recipients. Blob c36b7ab021a01454a705a44e1ba2f6cc761b3e8e.","limitation":"Code inspection establishes methodology, not an independent rerun of the underlying indexer.","lastVerified":"2026-10-14"},
+    {"id":"S4","label":"Trading fees","href":"https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees","publisher":"Hyperliquid","date":"Retrieved 2026-10-14","type":"Protocol documentation","note":"Growth mode, fee tiers, staking discounts and deployer fee scales.","limitation":"A posted schedule is not an observed weighted-average net take rate.","lastVerified":"2026-10-14"},
+    {"id":"S5","label":"HIP-3: builder-deployed perpetuals","href":"https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-3-builder-deployed-perpetuals","publisher":"Hyperliquid","date":"Retrieved 2026-10-14","type":"Protocol documentation","note":"Market control, 500,000-HYPE stake, possible future requirement reduction and burned slashed stake.","limitation":"Deployment permissions and technical features are not universal regulatory authorization.","lastVerified":"2026-10-14"},
+    {"id":"S6","label":"Aligned quote assets: AQAv2","href":"https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/aligned-quote-assets","publisher":"Hyperliquid","date":"Retrieved 2026-10-14","type":"Protocol documentation","note":"Approximately 90% of cost-adjusted reserve yield; eligible supply, accrual and payment timing.","limitation":"Does not establish the forecast balances or yield assumptions; AQAv1 benefits must not be assumed for AQAv2.","lastVerified":"2026-10-14"},
+    {"id":"S7","label":"Coinbase and Hyperliquid: USDC integration","href":"https://www.coinbase.com/en-gb/blog/coinbase-and-hyperliquid-aligning-markets-on-hyperliquid-to-usdc","publisher":"Coinbase","date":"2026-05-14","type":"Company announcement","note":"Coinbase as official USDC treasury deployer and the USDH transition.","limitation":"Announcement is not a guarantee of any modeled future reserve-income amount.","lastVerified":"2026-10-14"},
+    {"id":"S8","label":"S&P 500 licensing to Trade[XYZ]","href":"https://www.spglobal.com/spdji/en/index-announcements/article/sp-dow-jones-indices-licenses-sp-500-to-trade-xyz-for-perpetual-contracts-on-hyperliquid/","publisher":"S&P Dow Jones Indices","date":"Retrieved 2026-10-14","type":"Licensor announcement","note":"Licensed S&P 500 perpetual exposure on Hyperliquid for eligible investors.","limitation":"A data/index license is not stock ownership or permission for every jurisdiction.","lastVerified":"2026-10-14"},
+    {"id":"S9","label":"HIP-4: outcome markets","href":"https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-4-outcome-markets","publisher":"Hyperliquid","date":"Retrieved 2026-10-14","type":"Protocol documentation","note":"Fully collateralized outcome contracts; retrieved documentation says protocol fees remain zero in testing.","limitation":"Conflicts with the provider outcome-fee timeline. No base-case outcome revenue is booked.","lastVerified":"2026-10-14"},
+    {"id":"S10","label":"HYPE staking","href":"https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking","publisher":"Hyperliquid","date":"Retrieved 2026-10-14","type":"Protocol documentation","note":"Unstaking mechanics and staking rewards from the future emissions reserve.","limitation":"Staking emissions are not additional external cash revenue; locked tokens are not burned.","lastVerified":"2026-10-14"},
+    {"id":"S11","label":"Auto-deleveraging","href":"https://hyperliquid.gitbook.io/hyperliquid-docs/trading/auto-deleveraging","publisher":"Hyperliquid","date":"Retrieved 2026-10-14","type":"Protocol documentation","note":"Profitable counterparties may be closed against underwater users to maintain the solvency invariant.","limitation":"A technical solvency mechanism is not a guarantee against customer disruption or confidence loss.","lastVerified":"2026-10-14"},
+    {"id":"S12","label":"Hyperliquid primer and five-year valuation framework","href":"https://coinshares.com/us/insights/research-data/hyperliquid-primer-and-5-year-valuation-framework/","publisher":"CoinShares","date":"2026-06-02","type":"Published investment research","note":"Seven-stream framework, 2031 base outcome and 707m supply convention; no added future-buyback supply reduction.","limitation":"Research assumptions and future valuation date are not current reported results.","lastVerified":"2026-10-14"},
+    {"id":"S13","label":"Hyperliquid analysis and valuation","href":"https://assets.ctfassets.net/qtbqvna1l0yq/2Ww5QUmNhe8q0OhTlkRzjJ/7d82ee41b8c59e1e68c32813de8d757b/Hyperliquid__HYPE__Analysis_and_Valuation_English.pdf","publisher":"Multicoin Capital","date":"2026-06-25","type":"Published investment research, pages 39–41","note":"2028 forecast, constant trading monetization, collateral scaling and approximately 502m adjusted tokens.","limitation":"The authors disclose a large HYPE investment. Future price target is not a present-value estimate.","lastVerified":"2026-10-14"},
+    {"id":"S14","label":"Hyperliquid: a valuation model and bull case","href":"https://about.artemis.ai/resources/hyperliquid-a-valuation-model-and-bull-case","publisher":"Artemis","date":"2025-07-02","type":"Published investment research","note":"Exchange plus HyperEVM sum-of-parts approach.","limitation":"Historical framework; not used as current protocol documentation or a current multiple source.","lastVerified":"2026-10-14"},
+    {"id":"S15","label":"DeepSeek crashes the AI party","href":"https://aswathdamodaran.blogspot.com/2025/01/deepseek-crashes-ai-party-story-break.html","publisher":"Aswath Damodaran","date":"January 2025","type":"Valuation essay","note":"Nvidia valuation changes traced to market assumptions and risk.","limitation":"Used as a methodological reference, not a comparable-company multiple.","lastVerified":"2026-10-14"},
+    {"id":"S16","label":"CME Group Q2 2026 results","href":"https://www.cmegroup.com/media-room/press-releases/2026/7/22/cme_group_inc_reportsstrongfinancialresultsforq22026.html","publisher":"CME Group","date":"2026-07-22","type":"Company financial results","note":"Quarterly revenue, operating income, market-data receipts and product initiatives.","limitation":"Company accounting is not directly comparable to token-directed protocol receipts.","lastVerified":"2026-10-14"},
+    {"id":"S18","label":"Builder codes","href":"https://hyperliquid.gitbook.io/hyperliquid-docs/trading/builder-codes","publisher":"Hyperliquid","date":"Retrieved 2026-10-14","type":"Protocol documentation","note":"Interface-level fee added to orders; the builder is a distinct recipient.","limitation":"Builder income is not automatically protocol/token income.","lastVerified":"2026-10-14"}
+  ],
+  "resources": [
+    {"label":"Explore the valuation model","href":"/research/hyperliquid-valuation/model.html","description":"Change the operating case, required return, terminal growth and token denominator. Every annual cash flow is visible.","format":"HTML"},
+    {"label":"Reproduce the calculations","href":"/research/hyperliquid-valuation/model.py","description":"Standard-library Python model. Download inputs.json alongside it and run python model.py.","format":"PY"},
+    {"label":"Model assumptions","href":"/research/hyperliquid-valuation/inputs.json","description":"Observed fields, all annual operating assumptions, units and data limitations.","format":"JSON"},
+    {"label":"Calculated results and sensitivities","href":"/research/hyperliquid-valuation/results.json","description":"Full-precision model output, reverse valuation and sensitivity calculations.","format":"JSON"},
+    {"label":"Annual scenario cash flows","href":"/research/hyperliquid-valuation/cash-flows.csv","description":"Ten annual modeled flows and discounted values for all three scenarios.","format":"CSV"}
+  ]
+}
