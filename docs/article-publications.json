@@ -12,6 +12,17 @@
       "proseWords": 2789,
       "readTime": "16 MIN",
       "claimsPath": "docs/chegg-case-study/source-register.json"
+    },
+    {
+      "slug": "anduril-valuation-capital-productivity",
+      "path": "src/personal/editorial/data/articles/anduril-valuation-capital-productivity.json",
+      "canonicalPath": "/research/financial-systems/anduril-valuation-capital-productivity",
+      "datePublished": "2026-10-14",
+      "dateModified": "2026-10-14",
+      "articleSha256": "d2fd1dd21881f2b0961174c63e494eb0cfb6492f2150ec20d5d361efa3ea107a",
+      "proseWords": 3218,
+      "readTime": "18 MIN",
+      "claimsPath": "docs/anduril-valuation/source-register.json"
     }
   ]
 }

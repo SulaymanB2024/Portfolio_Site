@@ -6,6 +6,7 @@ export interface ArticlePresentation { form: ArticleForm; lines?: string[] }
 // Art direction follows the manuscript, not its publication date or array index.
 // Line breaks preserve the authored title; an edited title falls back to wrapping.
 export const articlePresentations: Record<string, ArticlePresentation> = {
+  'anduril-valuation-capital-productivity': { form: 'model', lines: ['Anduril is building a prime.', 'The price assumes', 'a platform.'] },
   'chegg-cash-flow-turnaround': { form: 'case-study', lines: ['Can Chegg finance', 'its own reinvention?'] },
   'atlas-building-an-evidence-console': { form: 'case-study', lines: ['Building', 'Atlas'] },
   'jane-street-exact-search-solver-verification': { form: 'proof', lines: ['Verifying a 54-move', 'exact search.'] },

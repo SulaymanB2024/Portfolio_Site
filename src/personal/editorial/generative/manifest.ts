@@ -52,6 +52,7 @@ const SKETCH_DETAILS = [
 ] as const satisfies readonly [SketchId, string, string][];
 
 export const ARTICLE_GENERATIVE_ART_ASSIGNMENTS = {
+  '/research/financial-systems/anduril-valuation-capital-productivity': 'yuru-31',
   '/research/financial-systems/chegg-cash-flow-turnaround': 'yuru-22',
   '/research/financial-systems/ethereum-blobspace-measurement-audit': 'yuru-15',
   '/research/financial-systems/uni-burn-supply-accounting': 'yuru-16',
