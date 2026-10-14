@@ -278,11 +278,11 @@ export const workNarratives: Record<string, WorkDocument> = {
         label: 'Geometry',
         title: 'Geometry made for ink',
         body: [
-          'I built the sculptures offline from relief, pierced frames, rounded shoulders, bearings, and separate parts. Bevels and recessed channels keep shape legible under a binary threshold. Geometry is centered and merged by material before export, so the browser loads the actual GLB instead of constructing a lookalike.'
+          'I built seven original sculptures from folded membranes, pierced castings, branching filaments and layered relief. Each gives its project a distinct physical abstraction. Broad surfaces, real openings and fitted edge details keep the forms legible in ink. Geometry is centered and merged by material before export, so the browser loads the actual GLB instead of constructing a lookalike.'
         ],
         links: [
           {
-            label: 'Experimental mechanism · GLB',
+            label: 'Unfinished Continuum · GLB',
             href: './portfolio-models/work-miscellaneous.glb',
             description: 'The sculpture above, including its local transforms, materials, and articulated parts.',
             download: true
@@ -303,7 +303,7 @@ export const workNarratives: Record<string, WorkDocument> = {
         label: 'Articulation',
         title: 'Parts keep their own structure',
         body: [
-          'Named parts retain local pivots, unit axes, and shaft metadata through export. The five-gear mechanism uses a shared module, twenty-degree pressure angle, and signed tooth ratios. The source model records a 36-tooth driver at 0.46 radians per second. These construction records remain inspectable in the downloadable GLB.'
+          'Named parts retain local pivots, unit axes and motion records through export. The seated three-blade rotor in Unfinished Continuum turns at 0.12 radians per second, with its carved inlays attached to the same physical parent. The renderer fits the complete swept geometry, and reduced motion settles the rotor while keeping manual rotation available. These construction records remain inspectable in the downloadable GLB.'
         ],
       },
       {
@@ -311,7 +311,7 @@ export const workNarratives: Record<string, WorkDocument> = {
         label: 'Asset pipeline',
         title: 'Retained detail, smaller delivery',
         body: [
-          'Portfolio derivatives preserve model hierarchy and animation extras. The optimizer checks byte sizes, geometry, materials, texture dimensions, and validation results. The retained comparison shows the reductions without treating equal triangle counts as bit-identical geometry.'
+          'Project sculptures are exported directly as compressed GLBs with their authored hierarchy and motion records. The optimizer checks byte sizes, geometry, materials, texture dimensions and validation results. The retained scan and globe comparison shows delivery reductions without treating equal triangle counts as bit-identical geometry.'
         ],
         table: {
           caption: 'Portfolio derivatives · decimal MB',
@@ -319,8 +319,7 @@ export const workNarratives: Record<string, WorkDocument> = {
           rows: [
             ['Helmet', '2.26 → 1.76 MB', '299,992'],
             ['Contact sculpture', '6.55 → 2.61 MB', '119,244'],
-            ['Globe', '1.64 → 0.41 MB', '78,130'],
-            ['Gear mechanism', '2.95 → 0.54 MB', '99,490']
+            ['Globe', '1.64 → 0.41 MB', '78,130']
           ],
           note: 'Sizes are from the asset manifest. Draco quantizes attributes; unchanged triangle counts do not mean bit-identical geometry.'
         }

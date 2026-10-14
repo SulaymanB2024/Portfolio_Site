@@ -12,7 +12,7 @@ import { workStudyPose } from '../src/personal/work-study-motion.ts'
 const definitions = [
   ['work-internshipdeadlines', -.32, .12, .3], ['work-sapien', -.32, -.05, 1.8],
   ['work-investing-markets', -.16, .09, 3.1], ['work-miscellaneous', .3, .08, 4.4],
-  ['globe', -.16, .04, 2.4], ['work-payrollpro', -.24, .08, 1.1], ['work-viralbench', -.23, .07, 3.6],
+  ['work-atlas', -.16, .04, 2.4], ['work-payrollpro', -.24, .08, 1.1], ['work-viralbench', -.23, .07, 3.6],
 ] as const
 const manifest = JSON.parse(readFileSync(new URL('../public/portfolio-models/manifest.json', import.meta.url), 'utf8'))
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'draco3d.decoder': await draco.createDecoderModule() })

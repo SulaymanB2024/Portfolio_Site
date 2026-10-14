@@ -1,23 +1,250 @@
 {
-  "generator": "tools/build-case-models.mjs",
+  "generator": "tools/build-project-sculptures.mjs",
   "models": [
     {
-      "id": "work-payrollpro",
-      "title": "Private payroll treasury",
-      "concept": "A fitted treasury door with two approval keyways, bound salary ledger, milled payout coins, and inspectable hardware. Decorative sculpture, not a product or transaction screenshot.",
+      "id": "work-atlas",
+      "slug": "atlas",
+      "title": "Palimpsest",
+      "concept": "Seven pierced topographic strata rise into an uneven saddle and share one stitched archive spine. Open contour membranes express the layering and retrieval of a research atlas.",
       "ownership": "Original procedural geometry; no external model or texture inputs",
       "license": "LicenseRef-Site-Owner",
+      "removedDegenerateFaces": 0,
+      "bounds": {
+        "min": [
+          -0.9006019234657288,
+          -0.6336960196495056,
+          -1
+        ],
+        "max": [
+          0.9006019234657288,
+          0.6336960196495056,
+          1
+        ]
+      },
+      "path": "public/portfolio-models/work-atlas.glb",
+      "sha256": "5f046c96671caf61ef0c20b8b8f26e27969ba34ed19b2ba0add3beaafda55397",
+      "triangles": 71520,
+      "bytes": 354548,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "work-internshipdeadlines",
+      "slug": "internshipdeadlines",
+      "title": "Temporal aperture",
+      "concept": "Thirty-one lifted intervals fan around an interrupted spiral. A slow, open index moves within the central wound: timing as an opening rather than a clock face.",
+      "ownership": "Original procedural geometry; no external model or texture inputs",
+      "license": "LicenseRef-Site-Owner",
+      "removedDegenerateFaces": 0,
+      "bounds": {
+        "min": [
+          -0.9682181477546692,
+          -1,
+          -0.6248228549957275
+        ],
+        "max": [
+          0.9682181477546692,
+          1,
+          0.6248228549957275
+        ]
+      },
+      "path": "public/portfolio-models/work-internshipdeadlines.glb",
+      "sha256": "7f238de590c2231b8aec96c81ce3c7dc00d318d7be475ceb0828460a292662d3",
+      "triangles": 72152,
+      "bytes": 370092,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "work-investing-markets",
+      "slug": "investing-markets",
+      "title": "Equilibrium",
+      "concept": "A sinuous load spine bifurcates into opposing anticlastic lamellae, enclosing two unequal flowing voids. Compound curvature, pinched return edges, integrated rear pressure ribs and incised front contours give the broad cast skins depth. Paired tension bridges connect their open extremities, while tapered fluted counterpoises are seated around the ends of the spine.",
+      "ownership": "Original procedural geometry; no external model or texture inputs",
+      "license": "LicenseRef-Site-Owner",
+      "removedDegenerateFaces": 0,
+      "bounds": {
+        "min": [
+          -0.9813514351844788,
+          -1,
+          -0.48131105303764343
+        ],
+        "max": [
+          0.9813514351844788,
+          1,
+          0.48131105303764343
+        ]
+      },
+      "path": "public/portfolio-models/work-investing-markets.glb",
+      "sha256": "a3ffeab08c804354cde142db120b776d2c553e96c1612030e493a910234450de",
+      "triangles": 93688,
+      "bytes": 421852,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "work-miscellaneous",
+      "slug": "miscellaneous",
+      "title": "Unfinished Continuum",
+      "concept": "A broad cast path folds through three planes, returning in front of its own beginning without closing the gap. Eight true through-slots and polished shoulders reveal its construction. A seated three-blade phase rotor turns slowly inside the triangular void, while the exposed end seats leave the continuum open to a further iteration.",
+      "ownership": "Original procedural geometry; no external model or texture inputs",
+      "license": "LicenseRef-Site-Owner",
+      "removedDegenerateFaces": 0,
+      "bounds": {
+        "min": [
+          -0.9999999403953552,
+          -0.9921172857284546,
+          -0.6252446174621582
+        ],
+        "max": [
+          0.9999999403953552,
+          0.9921172857284546,
+          0.6252446174621582
+        ]
+      },
+      "path": "public/portfolio-models/work-miscellaneous.glb",
+      "sha256": "831ee0ab5082f467f153611801d7c9c411cac5ecf7223dc61e19c964fb2ad0d6",
+      "triangles": 68004,
+      "bytes": 298724,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "work-payrollpro",
+      "slug": "payrollpro",
+      "title": "Covenant",
+      "concept": "Three broad spatially interwoven commitments are joined by curved front and rear approval spines with fitted ferrules around an open terraced core. Paired edge channels and repeated physical marks connect collective approval, privacy and dependable distribution without depicting a safe or transaction screen.",
+      "ownership": "Original procedural geometry; no external model or texture inputs",
+      "license": "LicenseRef-Site-Owner",
+      "removedDegenerateFaces": 0,
+      "bounds": {
+        "min": [
+          -1,
+          -0.9670419096946716,
+          -0.541645884513855
+        ],
+        "max": [
+          1,
+          0.9670419096946716,
+          0.541645884513855
+        ]
+      },
       "path": "public/portfolio-models/work-payrollpro.glb",
-      "sha256": "b0a0708f5d9533bdfab373a4bcf2b9a135f615beca028602249adaec326fef2c"
+      "sha256": "6f6e4e7504abdbd37e6fe0166ade5976c6f4397e1ac5ec49370f8f541eff8a6f",
+      "triangles": 63036,
+      "bytes": 316796,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    {
+      "id": "work-sapien",
+      "slug": "sapien",
+      "title": "Counterfactual choir",
+      "concept": "Three unequal, split seed vessels grow from a shared braided root. Internal branching filaments expose different possible responses within one common structure.",
+      "ownership": "Original procedural geometry; no external model or texture inputs",
+      "license": "LicenseRef-Site-Owner",
+      "removedDegenerateFaces": 0,
+      "bounds": {
+        "min": [
+          -0.9999999403953552,
+          -0.8299688696861267,
+          -0.37113380432128906
+        ],
+        "max": [
+          0.9999999403953552,
+          0.8299688696861267,
+          0.37113380432128906
+        ]
+      },
+      "path": "public/portfolio-models/work-sapien.glb",
+      "sha256": "dc0efe814f6979a63e6fe7fa12c7df7312a6c92dbfa3d96972b5a9eb247649e4",
+      "triangles": 76488,
+      "bytes": 363524,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
     },
     {
       "id": "work-viralbench",
-      "title": "Proof inspection instrument",
-      "concept": "Seven seated proof leaves, paired trace reels, a milled inspection lens, and a fitted indexing carriage. Decorative sculpture representing trace and review; not a deployed agent interface.",
+      "slug": "viralbench",
+      "title": "Evidence bloom",
+      "concept": "An asymmetric proof organism branches through five folded, genuinely pierced lamellae. Capillary traces split around the windows and reunite with the spine, connecting evidence, review and propagation without depicting a magnifier or interface.",
       "ownership": "Original procedural geometry; no external model or texture inputs",
       "license": "LicenseRef-Site-Owner",
+      "removedDegenerateFaces": 0,
+      "bounds": {
+        "min": [
+          -0.7944931983947754,
+          -1,
+          -0.4051596522331238
+        ],
+        "max": [
+          0.7944931983947754,
+          1,
+          0.4051596522331238
+        ]
+      },
       "path": "public/portfolio-models/work-viralbench.glb",
-      "sha256": "2641f99e61dec3fd34df4fea5bf64c5ac38bf3ff420b65a07d25d704d4425d8c"
+      "sha256": "b8be29b82f684cfd36a052065c2c8a69265086c40677f01d209f390e81207a9d",
+      "triangles": 89720,
+      "bytes": 446000,
+      "validation": {
+        "compressed": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "decoded": {
+          "errors": 0,
+          "warnings": 0
+        }
+      }
     }
   ]
 }

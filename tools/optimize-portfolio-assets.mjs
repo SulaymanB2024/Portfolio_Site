@@ -27,10 +27,9 @@ export const definitions = [
   { id: 'headrest', source: 'public/models/headrest-three-lions-balanced.glb', path: 'public/portfolio-models/headrest.glb', mode: 'texture-only', size: 1024, lossless: true, baseColorDetail, baseColorQuality: 98, textureEffort: 6 },
   { id: 'globe', source: 'public/models/wireframe-globe.glb', path: 'public/models/wireframe-globe-balanced.glb', mode: 'existing-balanced' },
   { id: 'crystal', source: 'public/models/crystal-cluster.glb', path: 'public/models/crystal-cluster.glb', mode: 'unchanged' },
-  ...['internshipdeadlines', 'sapien', 'investing-markets', 'miscellaneous'].map(id => ({
-    id: `work-${id}`, source: `public/work-studies/${id}.glb`, path: `public/portfolio-models/work-${id}.glb`, mode: 'draco-only',
-  })),
-  ...['payrollpro', 'viralbench'].map(id => ({
+  // The original instrument studies remain immutable in public/work-studies.
+  // This collection is authored directly as validated, compressed delivery GLBs.
+  ...['internshipdeadlines', 'atlas', 'sapien', 'investing-markets', 'miscellaneous', 'payrollpro', 'viralbench'].map(id => ({
     id: `work-${id}`, source: `public/portfolio-models/work-${id}.glb`, path: `public/portfolio-models/work-${id}.glb`, mode: 'unchanged',
   })),
   ...['bass', 'knight', 'score'].map(id => ({
