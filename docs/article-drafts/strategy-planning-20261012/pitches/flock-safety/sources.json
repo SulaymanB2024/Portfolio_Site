@@ -1,0 +1,62 @@
+[
+  {
+    "id": "FS1",
+    "label": "Annual service and pricing scope",
+    "href": "https://www.flocksafety.com/pricing",
+    "publisher": "Flock Safety",
+    "date": "2026-10-13",
+    "type": "Current primary product/pricing page",
+    "lastVerified": "2026-10-13",
+    "note": "Quote-based annual bundle includes equipment, software, connectivity, installation, maintenance and support. No universal unit price or reported delivery margin is supplied."
+  },
+  {
+    "id": "FS2",
+    "label": "Arden Hills proposed regional camera budget, pages 3–4",
+    "href": "https://www.cityofardenhills.org/AgendaCenter/ViewFile/Agenda/_05282025-1325?packet=true",
+    "publisher": "City of Arden Hills",
+    "date": "2025-05-28",
+    "type": "Primary municipal agenda packet",
+    "lastVerified": "2026-10-13",
+    "note": "Proposal: 19 regional readers at a $3,000 annual lease per camera at the 2025 rate. The sheriff intended to pay installation. This is budget/proposal evidence, not proof of an executed contract or current standard price."
+  },
+  {
+    "id": "FS3",
+    "label": "Ayer announces contract termination",
+    "href": "https://www.ayer.ma.us/m/newsflash/home/detail/73",
+    "publisher": "Town of Ayer",
+    "date": "2026-09-01",
+    "type": "Primary municipal announcement",
+    "lastVerified": "2026-10-13",
+    "note": "Reports the August 31 unanimous 3–0 termination vote, disable/removal instruction and resident concerns. Establishes one decision; it supplies no company churn rate or causal inference about other cities."
+  },
+  {
+    "id": "FS4",
+    "label": "Privacy, accountability and security changes",
+    "href": "https://www.flocksafety.com/blog/flock-guardrails-address-lpr-privacy-concerns-and-police-transparency",
+    "publisher": "Flock Safety",
+    "date": "2026-08-13",
+    "type": "Primary company announcement",
+    "lastVerified": "2026-10-13",
+    "note": "Seven-day recommendation; existing approved retention preserved; offense filtering and oversight changes; Audit Assistance required for law enforcement by year-end. Announced changes are not implementation verification."
+  },
+  {
+    "id": "FS5",
+    "label": "Evidence Policy",
+    "href": "https://www.flocksafety.com/legal/flock-evidence-policy",
+    "publisher": "Flock Safety",
+    "date": "2026-08-12",
+    "type": "Primary company policy",
+    "lastVerified": "2026-10-13",
+    "note": "Updated August 12: seven-day standard retention unless the customer agreement specifies otherwise. Describes policy, not proof of every deployed setting or legal advice."
+  },
+  {
+    "id": "FS6",
+    "label": "Historical financing and ARR checkpoint",
+    "href": "https://www.flocksafety.com/blog/flock-safety-secures-major-funding",
+    "publisher": "Flock Safety",
+    "date": "2025-03-13",
+    "type": "Primary company financing announcement",
+    "lastVerified": "2026-10-13",
+    "note": "Original publication date: March 13, 2025. A later July 24, 2026 template date is not the financing date. Reported $275m raise, $7.5bn valuation and over $300m ARR are historical checkpoints; newer financing reports were not verified from primary materials here."
+  }
+]

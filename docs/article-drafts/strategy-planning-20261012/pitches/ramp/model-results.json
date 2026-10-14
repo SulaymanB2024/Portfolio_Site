@@ -1,0 +1,61 @@
+{
+  "status": "Hypothetical account economics and incremental paid-tier buyer case; not Ramp financial estimates",
+  "input_sha256": "d5de09a1904c1139ac8b443b81e067824bd24bc0d8ce6f051453e9f04723aa73",
+  "boundary": "Platform proceeds rate is hypothetical cash credited after partner/network sharing but before customer rewards and risk/funding costs; it is not an interchange schedule, merchant processing fee, audited gross revenue or GAAP margin. Annual contributions omit acquisition, corporate overhead, taxes and capital. Buyer seat price is the October13 monthly-list analogue; platform fee and all savings are assumed, with no annual discount or payment-method fees. Buyer incremental benefits compare paid workflow to the previous/free workflow; unchanged card rewards are excluded.",
+  "platform_cases": {
+    "base": {
+      "card_proceeds": 264000.0,
+      "rewards": 144000.0,
+      "risk_and_funding": 42000.0,
+      "retained_before_account_delivery": 78000.0,
+      "card_contribution": 70000.0,
+      "software_contribution": 9000.0,
+      "combined_contribution": 79000.0,
+      "retained_card_rate": 0.006499999999999999
+    },
+    "card_pressure": {
+      "card_proceeds": 180000.0,
+      "rewards": 108000.0,
+      "risk_and_funding": 40500.0,
+      "retained_before_account_delivery": 31500.0,
+      "card_contribution": 23500.0,
+      "software_contribution": 9000.0,
+      "combined_contribution": 32500.0,
+      "retained_card_rate": 0.0035000000000000005
+    },
+    "software_expansion": {
+      "card_proceeds": 180000.0,
+      "rewards": 108000.0,
+      "risk_and_funding": 40500.0,
+      "retained_before_account_delivery": 31500.0,
+      "card_contribution": 23500.0,
+      "software_contribution": 19200.0,
+      "combined_contribution": 42700.0,
+      "retained_card_rate": 0.0035000000000000005
+    }
+  },
+  "buyer_cases": {
+    "base": {
+      "seat_cost": 10800,
+      "annual_fee": 15000,
+      "recovered_hours": 276,
+      "labor_cash": 8280.0,
+      "avoided_spend": 20000,
+      "recurring_benefit": 13280.0,
+      "first_year_benefit": 5280.0,
+      "first_year_spend_requirement": 14720.0,
+      "recurring_spend_requirement": 6720.0
+    },
+    "weak_incrementality": {
+      "seat_cost": 10800,
+      "annual_fee": 15000,
+      "recovered_hours": 276,
+      "labor_cash": 8280.0,
+      "avoided_spend": 5000,
+      "recurring_benefit": -1720.0,
+      "first_year_benefit": -9720.0,
+      "first_year_spend_requirement": 14720.0,
+      "recurring_spend_requirement": 6720.0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "key": "ramp",
+    "slug": "ramp-saving-money-and-retaining-contribution",
+    "title": "Ramp: Saving the Customer Money Has to Improve the Business",
+    "words": 2311,
+    "readTime": "11 MIN",
+    "tables": 2,
+    "figures": 1,
+    "json": "src/personal/editorial/data/articles/ramp-saving-money-and-retaining-contribution.json",
+    "manuscript": "docs/article-drafts/strategy-planning-20261012/pitches/ramp/article.md",
+    "input_sha256": "d5de09a1904c1139ac8b443b81e067824bd24bc0d8ce6f051453e9f04723aa73"
+  },
+  {
+    "key": "elevenlabs",
+    "slug": "elevenlabs-cost-of-accepted-work",
+    "title": "ElevenLabs: What a Finished Minute Is Worth",
+    "words": 2487,
+    "readTime": "11 MIN",
+    "tables": 3,
+    "figures": 2,
+    "json": "src/personal/editorial/data/articles/elevenlabs-cost-of-accepted-work.json",
+    "manuscript": "docs/article-drafts/strategy-planning-20261012/pitches/elevenlabs/article.md",
+    "input_sha256": "644c27d9cc4a9d5e7350f864828be3fbe223b21f4e4c454103edf8e6938204a6"
+  },
+  {
+    "key": "flock-safety",
+    "slug": "flock-safety-installed-cohort-cash",
+    "title": "Flock Safety: The Renewal Has to Pay for the Camera",
+    "words": 2380,
+    "readTime": "11 MIN",
+    "tables": 2,
+    "figures": 1,
+    "json": "src/personal/editorial/data/articles/flock-safety-installed-cohort-cash.json",
+    "manuscript": "docs/article-drafts/strategy-planning-20261012/pitches/flock-safety/article.md",
+    "input_sha256": "271d4da96ccd58549a45e935177d2db5730023a379c5bd8a30ac7d14400252fe"
+  }
+]

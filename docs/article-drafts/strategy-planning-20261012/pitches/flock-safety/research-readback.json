@@ -1,0 +1,43 @@
+{
+  "verified": "2026-10-13",
+  "primary_sources": 6,
+  "readbacks": [
+    {
+      "source": "FS1",
+      "url": "https://www.flocksafety.com/pricing",
+      "support": "Quote-based annual bundle includes equipment, software, connectivity, installation, maintenance and support. No universal unit price or reported delivery margin is supplied."
+    },
+    {
+      "source": "FS2",
+      "url": "https://www.cityofardenhills.org/AgendaCenter/ViewFile/Agenda/_05282025-1325?packet=true",
+      "support": "Proposal: 19 regional readers at a $3,000 annual lease per camera at the 2025 rate. The sheriff intended to pay installation. This is budget/proposal evidence, not proof of an executed contract or current standard price."
+    },
+    {
+      "source": "FS3",
+      "url": "https://www.ayer.ma.us/m/newsflash/home/detail/73",
+      "support": "Reports the August 31 unanimous 3–0 termination vote, disable/removal instruction and resident concerns. Establishes one decision; it supplies no company churn rate or causal inference about other cities."
+    },
+    {
+      "source": "FS4",
+      "url": "https://www.flocksafety.com/blog/flock-guardrails-address-lpr-privacy-concerns-and-police-transparency",
+      "support": "Seven-day recommendation; existing approved retention preserved; offense filtering and oversight changes; Audit Assistance required for law enforcement by year-end. Announced changes are not implementation verification."
+    },
+    {
+      "source": "FS5",
+      "url": "https://www.flocksafety.com/legal/flock-evidence-policy",
+      "support": "Updated August 12: seven-day standard retention unless the customer agreement specifies otherwise. Describes policy, not proof of every deployed setting or legal advice."
+    },
+    {
+      "source": "FS6",
+      "url": "https://www.flocksafety.com/blog/flock-safety-secures-major-funding",
+      "support": "Original publication date: March 13, 2025. A later July 24, 2026 template date is not the financing date. Reported $275m raise, $7.5bn valuation and over $300m ARR are historical checkpoints; newer financing reports were not verified from primary materials here."
+    }
+  ],
+  "unresolved": [
+    "Actual current ARR/valuation/security terms",
+    "Delivery margins and installation costs",
+    "Company cohort retention and refunds",
+    "Deployment verification of announced controls"
+  ],
+  "source_date_correction": "FS6 shows a July 24, 2026 template date but explicitly gives March 13, 2025 as its original publication date. The original date is used."
+}

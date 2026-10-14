@@ -25,6 +25,8 @@ Manuscript images, reading links and receipt paths are relative to the repositor
 
 ## Models and evidence
 
+The new [interactive buyer-economics companion](pitches/companion/startup-models.html) exposes Harvey adoption/review/contribution capture and Vanta work weeks/questionnaire volume/cash capture. It separates rollout from renewal while holding the selected annual workload fixed. [Its README](pitches/companion/README.md) lists the five external-script runtime files and reproduction checks. The bundle has no external data-service calls or package dependencies; future public integration should keep the files together, register the accepted destination and provide the site's normal metadata. It does not modify or register the four article routes.
+
 - [Strategy notebook](model.ipynb), `model.py` and `model-results.json`: operating cash, capacity, price counterfactuals and timing variants.
 - [Investment notebook](pitches/models.ipynb), `pitches/models.py` and `pitches/model-results.json`: Toast underwriting, Harvey customer/delivery/return models, Vanta customer/cohort/return models.
 - `figures/`: eight SVGs and PNG export copies. SVG names match the JSON's proposed `/images/research/` references.
@@ -63,3 +65,11 @@ The calculations require only Python's standard library. Figure/notebook reprodu
 Render HTML readbacks with `node --import tsx .../render-notebook.tsx`, first with defaults, then with `pitches/models.ipynb pitches/notebook-preview.html`. `node .../preview.mjs` starts a temporary dynamic localhost preview with four article links and lane resource aliases. Stop the owned preview after inspection. Restart it after changing its Vite plugin configuration.
 
 The submission branch is `codex/strategy-investment-articles-20261012`, isolated from other active writing lanes at main revision `cb70322bb8f46589005c6f655be9044b8d841d58`. The user authorized a pull request; merging and public-site publication remain outside this submission.
+
+## October 13 extension — Ramp, ElevenLabs and Flock Safety
+
+Three additional articles are ready as native JSON and portable Markdown, with dated primary-source registers and executable hypothetical customer/cohort models. Use `pitches/startups-manifest.json` and each company `catalog-entry.json` for the proposed slugs, metadata and file paths. They add 7,178 authored words, seven native tables and four figures. Preserve `markdownSections[].blocks` and global table references; preserve the nearby source/model qualifications and first-person judgments.
+
+The coordinating lane still owns catalog registration, artwork/cover assignment, curation and generated routes. Four additional SVGs must be copied from this lane's `figures/` to the site's public research-image destination when integrating: `ramp-card-software-contribution.svg`, `elevenlabs-accepted-audio-cost.svg`, `elevenlabs-agent-cash-capture.svg` and `flock-installed-cohort-cash.svg`. The local preview whitelist supplies them for inspection; no public copies or catalog entries have been installed by this lane. Register the earlier four articles and eight figures under their existing contract separately.
+
+Run each company model to regenerate results; then regenerate new figures/exports and run `pitches/verify_startups.py` plus `pitches/elevenlabs/verify_model.py`. Principal monetary table values and Flock payback years are checked against emitted models. Editorial prose/tables remain authored and must be revised when scenario assumptions change. All current outputs are hypothetical operating cases, not company margins, audited earnings, current private-security prices or observed customer outcomes. The Harvey/Vanta companion has its own five-file runtime contract above.
