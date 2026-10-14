@@ -1,5 +1,21 @@
 [
   {
+    "slug": "hyperliquid-valuation",
+    "path": "/research/financial-systems/hyperliquid-valuation",
+    "title": "Hyperliquid Can Win Without HYPE Being Cheap",
+    "displayTitle": "Hyperliquid can win without HYPE being cheap.",
+    "seoTitle": "Hyperliquid Valuation: HYPE Fees, Dilution and Growth",
+    "seoDescription": "A ten-year Hyperliquid valuation separates trading fees, reserve income and dilution, with three scenarios, reverse valuation and a reproducible model.",
+    "category": "FINANCIAL SYSTEMS",
+    "subtitle": "A $30 central case can still assume an excellent business. The difference is what reaches the token, how long growth lasts, and how many claims share it.",
+    "searchTerms": ["Hyperliquid", "HYPE", "valuation", "perpetual futures", "buybacks", "tokenomics", "HIP-3", "stablecoins"],
+    "date": "2026-10-14",
+    "dateModified": "2026-10-14",
+    "readTime": "19 MIN",
+    "image": "/images/generative-art/yuru-25.webp",
+    "kind": "research"
+  },
+  {
     "slug": "chegg-cash-flow-turnaround",
     "path": "/research/financial-systems/chegg-cash-flow-turnaround",
     "title": "Can Chegg Finance Its Own Reinvention?",
